@@ -1,0 +1,31 @@
+{
+  "model": "anthropic/claude-sonnet-5.5",
+  "calls": [
+    {
+      "tool": "canon_search",
+      "input": {
+        "query": "KONO Jax Caldera"
+      },
+      "resultChars": 839,
+      "resultHead": "8 file(s) matched on disk for 'KONO Jax Caldera':\n— output/cron-compare/staged/civic_c112_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5-5.staged.md: -- Jax Caldera | tipline: JAX-TIPS\n— editions/cycle_pulse_edition_102.txt: Winter makes this city honest. Every story in this edition is about a gap. The gap between a chart that hasn't moved and the clinic Temescal was promised. The gap between a drop in the crime numbers and anyone at City Ha…\n— editions/cycle_pulse_edition_95.txt: By Jax Caldera | Bay Tribune Opinion\n— editions/cycle_pulse_edition_92.txt: By Jax Caldera | Bay Tribune "
+    },
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Neighborhood_Map",
+        "match": "KONO"
+      },
+      "resultChars": 2378,
+      "resultHead": "Timestamp | Cycle | Neighborhood | NightlifeProfile | NoiseIndex | CrimeIndex | RetailVitality | EventAttractiveness | Sentiment | DemographicMarker | Holiday | HolidayPriority | FirstFriday | CreationDay | SportsSeason | MigrationFlow | NeighborhoodTrajectory | HousingPressure | TrajectoryStartCycle | MedianIncome | MedianRent | TrajectoryMomentum | District | CoreSimRank | IncomeTier | BoomExposure | BoomIndex | EmployerCharacter | WealthMin | WealthMax | ChildAreas | WeatherZone | Adjacent | AttentionWeight | Scenes | RentShare\nY3C11 | 115 | Temescal | 0.92 | 4.44 | 0.7 | 7.88 | 7.53 | 0.15"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "KONO"
+      },
+      "resultChars": 3224,
+      "resultHead": "[C95 · edition] On Stoops Without Coffee: The KONO Inflow Doesn't Move By Maria Keen | Bay Tribune Culture The stoop on 14th and Ashford is one step off the sidewalk and someone's always sitting on it. Tuesday afternoon at 4:17, it's Marcus, 36, who runs the hardware on the corner, and he's not looking at his phone. He's looking at the people who pass. The foot traffic is steady — the way it gets when nothing else is happening. Not sparse enough to feel lonely, not animated enough to feel like anything's starting. Someone in a yel\n[C96 · edition] Gone Dark: Three Cycles Without Power, and a Ci"
+    }
+  ],
+  "ranAt": "2026-11-12T00:15:28.554Z"
+}

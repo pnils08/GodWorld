@@ -1,0 +1,150 @@
+{
+  "empty": false,
+  "cycle": 113,
+  "kind": "simon-longview",
+  "desk": "sports",
+  "journalist": {
+    "name": "Simon Leary",
+    "popid": "POP-00016",
+    "persona": "simon-leary"
+  },
+  "pulse": {
+    "className": "role-change-under-continuity",
+    "score": 56,
+    "label": "The Oaks record is 2-0."
+  },
+  "prewrite": {
+    "bagModes": [
+      {
+        "id": 2,
+        "name": "Keystone Player"
+      },
+      {
+        "id": 4,
+        "name": "Load-Bearing Continuity"
+      }
+    ],
+    "anchorFacts": [
+      "The Oaks record is 2-0.",
+      "The Oaks have won 2 straight."
+    ],
+    "claim": "A role change inside a sustained team record can support a structural interpretation; it does not establish franchise history, organizational intent, or citywide meaning.",
+    "missing": [
+      "why the role change was made",
+      "historical comparison or franchise precedent",
+      "organizational intention or future plan",
+      "citywide, clubhouse, or fan interpretation"
+    ],
+    "hooks": []
+  },
+  "hooks": [],
+  "seeds": [],
+  "civicFacts": [
+    "FranchiseStability (feed): growing — sports feed",
+    "EconomicFootprint (feed): growing — sports feed",
+    "EventTrigger (feed): hot-streak — sports feed",
+    "HomeNeighborhood (feed): Uptown — sports feed",
+    "FranchiseStability (feed): growing — sports feed",
+    "EconomicFootprint (feed): growing — sports feed"
+  ],
+  "story": {
+    "angle": "The Oaks record is 2-0.",
+    "label": "The Oaks record is 2-0.",
+    "hookLine": "The Oaks record is 2-0.",
+    "kind": "long-view-signal",
+    "hood": "Uptown",
+    "popids": [
+      "POP-01023",
+      "POP-01027",
+      "POP-01022"
+    ],
+    "citizens": [
+      "Adash Stanley (POP-01023)",
+      "Austin Reaves (POP-01027)",
+      "Wilson Shepard (POP-01022)"
+    ],
+    "ref": "world_summary_c113.md ## Sports",
+    "cycle": 113
+  },
+  "approach": "Long-view approach (Simon Leary): third-person essayist. Treat supplied sports facts as present structure, not as proof of history or collective memory. A metaphor about continuity, load, or change may interpret the Packet but may not add a person, place, institution, event, season, statistic, cause, organizational intention, or citywide belief. Do not write a game recap, Hal elegy, P Slayer fan heat, or Anthony board memo.",
+  "players": [
+    {
+      "name": "Adash Stanley",
+      "popid": "POP-01023",
+      "role": "PG / The Oaks ",
+      "neighborhood": "Downtown",
+      "why": "feed-names"
+    },
+    {
+      "name": "Austin Reaves",
+      "popid": "POP-01027",
+      "role": "SG / The Oaks",
+      "neighborhood": "West Oakland",
+      "why": "feed-names"
+    },
+    {
+      "name": "Wilson Shepard",
+      "popid": "POP-01022",
+      "role": "Head Coach, Oakland Oaks",
+      "neighborhood": "West Oakland",
+      "why": "feed-names"
+    }
+  ],
+  "scene": {
+    "colorRoom": "No witnessed room or scene is supplied. Structure and continuity may appear only as clearly interpretive metaphor grounded in the approved present facts."
+  },
+  "candidates": [
+    {
+      "score": 58,
+      "cycle": 113,
+      "team": "A's",
+      "label": "The Outfield squeeze for next season. 5 Outfielders for 3 positions"
+    },
+    {
+      "score": 56,
+      "cycle": 113,
+      "team": "Oaks",
+      "label": "The Oaks win again behind a big game behind Adash Stanley. The Oaks 91 - Pistons 78 on the road in Detroit."
+    },
+    {
+      "score": 56,
+      "cycle": 113,
+      "team": "Oaks",
+      "label": "The Oaks remain sizzling hot after a winless preseason have now shot out of the gate winning 3 straight. Oaks 115 - Knicks 93 in New York"
+    },
+    {
+      "score": 56,
+      "cycle": 113,
+      "team": "Oaks",
+      "label": "The Oaks completly dismantle the Wizards in Washington. Oaks 105 - Wizards 62"
+    },
+    {
+      "score": 36,
+      "cycle": 112,
+      "team": "Oaks",
+      "label": "The Oaks open their inaugural season at home. AJ Dybantsa shines in his rookie debut as the Oaks win their first win as a franchise."
+    },
+    {
+      "score": 30,
+      "cycle": 113,
+      "team": "A's",
+      "label": "Darrin Davis works with the Oakland Police and Rafael Montez on youth outreach programs in the city."
+    },
+    {
+      "score": 30,
+      "cycle": 113,
+      "team": "A's",
+      "label": "Mark Aitken sets for Free Agency , but will always remain in Oakland."
+    },
+    {
+      "score": 28,
+      "cycle": 112,
+      "team": "A's",
+      "label": "Mark Aitken pending free agency, is it Kevin Clarks time?"
+    }
+  ],
+  "pointers": [
+    "output/world_summary_c113.md ## Sports",
+    "docs/media/SIMON_LONGVIEW_BAG.md"
+  ]
+}

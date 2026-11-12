@@ -1,0 +1,127 @@
+{
+  "status": "staged",
+  "desk": "business",
+  "cycle": "115",
+  "persona": "business-desk",
+  "byline": "Jordan Velez",
+  "bylinePopid": "POP-00153",
+  "article": "output/cron-compare/staged/business_c115_business-desk_packet-v2_anthropic-claude-opus-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Keisha Ramos",
+        "role": "subject",
+        "popid": "POP-00041"
+      },
+      {
+        "name": "Brianna Lee",
+        "role": "mentioned",
+        "popid": "POP-00134",
+        "floor": true
+      },
+      {
+        "name": "Broderick Mitchell",
+        "role": "mentioned",
+        "popid": "POP-00221",
+        "floor": true
+      },
+      {
+        "name": "Gregory Mims",
+        "role": "mentioned",
+        "popid": "POP-00023",
+        "floor": true
+      },
+      {
+        "name": "Iggy Davis",
+        "role": "mentioned",
+        "popid": "POP-00699",
+        "floor": true
+      },
+      {
+        "name": "Kelvon Ochoa",
+        "role": "mentioned",
+        "popid": "POP-00481",
+        "floor": true
+      },
+      {
+        "name": "Linda Chow",
+        "role": "mentioned",
+        "popid": "POP-00749",
+        "floor": true
+      },
+      {
+        "name": "Manfred Owens",
+        "role": "mentioned",
+        "popid": "POP-00028",
+        "floor": true
+      },
+      {
+        "name": "Mina Linas",
+        "role": "mentioned",
+        "popid": "POP-00135",
+        "floor": true
+      },
+      {
+        "name": "Philly Rodriguez",
+        "role": "mentioned",
+        "popid": "POP-00027",
+        "floor": true
+      },
+      {
+        "name": "Ron Arenson",
+        "role": "mentioned",
+        "popid": "POP-00367",
+        "floor": true
+      },
+      {
+        "name": "Talmon Lint",
+        "role": "mentioned",
+        "popid": "POP-00176",
+        "floor": true
+      },
+      {
+        "name": "Tariq Jello",
+        "role": "mentioned",
+        "popid": "POP-00174",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Baylight District"
+    ],
+    "claims": [
+      {
+        "claim": "Baylight District businesses · Baylight Construction Authority, Anthropic",
+        "sourceRef": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-5fbc53e21e10",
+    "draftSha256": "88f36d363b480442d25c35bd42f7f5c45b21df96a59f659f637dadaf5446dff1",
+    "verdict": "output/cron-compare/business_c115_business-desk_packet-v2_anthropic-claude-opus-5-5.rhea.json",
+    "ranAt": "2026-11-10T00:17:02.097Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 500",
+      "words": 874,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "88f36d363b480442d25c35bd42f7f5c45b21df96a59f659f637dadaf5446dff1",
+      "costUsd": 0.001
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-10T00:17:06.218Z"
+}

@@ -1,0 +1,32 @@
+{
+  "status": "arc-seed",
+  "cycle": "112",
+  "desk": "civic",
+  "persona": "lila-mezran",
+  "hood": "Chinatown",
+  "quotes": [
+    {
+      "pop": "POP-00763",
+      "name": "Kenji Tanaka",
+      "quote": "The numbers tell us how many are sick, but they don't tell you about the quiet ones. I see the faces of people who don't want to be a burden — the grandmother who still shows up to help fold flyers even though she's been coughing for weeks, the man who waves from his doorway but won't come to the community meal because he doesn't want to answer questions about his health. The city counts beds and cases. I count the people who are too proud, too scared, or too tired to be counted."
+    },
+    {
+      "pop": "POP-00785",
+      "name": "Matra Woven",
+      "quote": "I see the same faces every day, and lately some of them aren't there. It's not like I keep a list, but you notice when Mrs. Chen's grandson is the one walking her dog, or when the usual guy at the corner store has his daughter running the register. I don't know who's in the hospital beds, but I know who's covering for someone at home. That's just how it goes around here — family steps in, neighbors help out, and we don't always ask why."
+    },
+    {
+      "pop": "POP-00194",
+      "name": "Yu Zen",
+      "quote": "When I was in that hospital bed, I kept thinking about the numbers I deal with every day as an insurance broker — the claims, the paperwork, the names on the forms. But lying there, I realized the names on the forms aren't the same as the names on the beds. Chinatown's been hit so hard, and I know it's not because those folks matter less. It's just that nobody's writing their names down the same way. I'm lucky — I've got people who can advocate for me, who know how to work the system. Not everyone has that. That gap isn't about who's sicker. It's about who gets seen."
+    },
+    {
+      "pop": "POP-00528",
+      "name": "Deacon Seymour",
+      "quote": "I spent my own stretch in a hospital bed not long ago, and I know what it's like to have your name on the door, to have people checking on you. But I also know that bed I was in—that was one bed, and there are a lot more filled by folks nobody's naming. Chinatown's carrying more sickness than anywhere else in this city right now, and I can't help but think about all those people who are just a number on a chart, not a face anyone's asking about. That gap, it's not about who's sicker—it's about who gets seen. And that weighs on me."
+    }
+  ],
+  "claim": "The numbers tell us how many are sick, but they don't tell you about the quiet ones. I see the faces of people who don't want to be a burden — the grandmother who still shows up to help fold flyers even though she's been coughing for weeks, the man who waves from his doorway but won't come to the community meal because he doesn't want to answer questions about his health. The city counts beds and cases. I count the people who are too proud, too scared, or too tired to be counted.",
+  "src": "citizenVoice PRESS c112",
+  "ranAt": "2026-10-19T18:16:40.321Z"
+}

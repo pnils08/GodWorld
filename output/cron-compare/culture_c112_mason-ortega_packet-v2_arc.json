@@ -1,0 +1,27 @@
+{
+  "status": "arc-seed",
+  "cycle": "112",
+  "desk": "culture",
+  "persona": "mason-ortega",
+  "hood": "Downtown",
+  "quotes": [
+    {
+      "pop": "POP-00782",
+      "name": "Devon Willis",
+      "quote": "A typical Tuesday at SpeedyBurger is steady — not the weekend rush, but enough that you're always moving. The lunch crowd comes in waves, and you learn the regulars by their orders before you learn their names. The part that doesn't show up on a receipt is the rhythm of it — knowing when to step in, when to give someone a minute, when to just let the quiet settle. It's honest work, and lately I've been thinking about how much of what I do is just being there, steady, for people who need that."
+    },
+    {
+      "pop": "POP-00225",
+      "name": "Andre Turner",
+      "quote": "Two-person kitchen means when the tickets stack up, there's no hiding. You're the whole line — grill, sauté, plating, expo — and the second you fall behind, the tickets just keep coming. The pressure point is that moment when you know you're buried and there's no one to call for backup. You just have to breathe and work faster, cleaner, and hope the servers are patient. What I wish people understood is that every plate that goes out is a little piece of us. We're not just pushing buttons back there. We're tasting, timing, coordinating, and trying to make sure your meal is right even when we're three deep in tickets and the fryer's screaming. It's hot, it's loud, and it's relentless — but when someone takes that first bite and you see them smile, that's the part that keeps you coming back."
+    },
+    {
+      "pop": "POP-00670",
+      "name": "Drew Lemon",
+      "quote": "I see Devon and Andre most mornings when I grab coffee before inspections. Devon's always moving fast behind that counter, wiping down the same spots over and over, and he still finds time to nod at me. Andre, he's back in the kitchen at Miso Metro, and I can hear the sizzle from the sidewalk. Their days are long and hot, and they don't get much credit, but they keep this neighborhood fed. That's real work."
+    }
+  ],
+  "claim": "A typical Tuesday at SpeedyBurger is steady — not the weekend rush, but enough that you're always moving. The lunch crowd comes in waves, and you learn the regulars by their orders before you learn their names. The part that doesn't show up on a receipt is the rhythm of it — knowing when to step in, when to give someone a minute, when to just let the quiet settle. It's honest work, and lately I've been thinking about how much of what I do is just being there, steady, for people who need that.",
+  "src": "citizenVoice PRESS c112",
+  "ranAt": "2026-10-23T18:15:38.371Z"
+}

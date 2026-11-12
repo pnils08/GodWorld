@@ -1,0 +1,69 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "113",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "lila-mezran",
+  "byline": {
+    "name": "Dr. Lila Mezran",
+    "popid": "POP-00154",
+    "beatDomain": "HEALTH"
+  },
+  "laneEntries": 105,
+  "quotesLanded": 3,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "sheet_read",
+    "canon_search",
+    "citizen_lookup"
+  ],
+  "toolCalls": 3,
+  "wordCount": 1029,
+  "targetWords": "evidence-bounded",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [
+    {
+      "text": "Victor King nursed a sore back after overdoing it around the house (Rockridge).",
+      "run": "victor king nursed sore back overdoing around house rockridge"
+    },
+    {
+      "text": "Cee Lee dealt with a seasonal health concern (Lake Merritt).",
+      "run": "dealt with a seasonal health concern"
+    }
+  ],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 1029,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "01be33ac2f978f7f99365855cb6044da6ccbd16f5e3129ab59b91afc21e3e5f6",
+    "costUsd": 0.0018
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 4/4 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/civic_c113_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": ": ◈ secrets for agents [www.dotenvx.com]\n{\n  \"popId\": \"POP-00154\",\n  \"name\": \"Lila Mezran\",\n  \"recorded\": true,\n  \"text\": \"filed: Chinatown's 140 Sick Are Mostly at Home, and Home Is Doing the Work\"\n}"
+  },
+  "ranAt": "2026-10-31T17:01:10.077Z"
+}

@@ -1,0 +1,140 @@
+{
+  "loggedAt": "2026-11-11T15:00:18.582Z",
+  "cycle": 115,
+  "writersWithFiles": [
+    "Anthony Raines",
+    "Hal Richmond",
+    "P Slayer",
+    "Simon Leary",
+    "Tanya Cruz",
+    "Selena Grant",
+    "Talia Finch"
+  ],
+  "rows": [
+    {
+      "n": 1,
+      "team": "A's",
+      "eventType": "roster-move",
+      "eventTrigger": "retirement",
+      "snippet": "It's official: Vinnie Keane retires. U",
+      "writers": [
+        "Anthony Raines",
+        "Hal Richmond",
+        "P Slayer",
+        "Tanya Cruz"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 2,
+      "team": "A's",
+      "eventType": "community-outreach",
+      "eventTrigger": "community-outreach",
+      "snippet": "Darrin Davis and Chief Montez put the ",
+      "writers": [
+        "Tanya Cruz"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 3,
+      "team": "A's",
+      "eventType": "player-feature",
+      "eventTrigger": "community-outreach",
+      "snippet": "Fifth on points, first in credits: Tav",
+      "writers": [
+        "Anthony Raines",
+        "Hal Richmond",
+        "P Slayer",
+        "Tanya Cruz"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 4,
+      "team": "A's",
+      "eventType": "rumor",
+      "eventTrigger": "roster-decision",
+      "snippet": "The backup outhit the starter and two ",
+      "writers": [
+        "Anthony Raines",
+        "Hal Richmond",
+        "P Slayer",
+        "Tanya Cruz"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 5,
+      "team": "Oaks",
+      "eventType": "player-feature",
+      "eventTrigger": "",
+      "snippet": "Second-round rookie Harry Hayward scor",
+      "writers": [
+        "Anthony Raines",
+        "Hal Richmond",
+        "P Slayer",
+        "Tanya Cruz",
+        "Selena Grant"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 6,
+      "team": "Oaks",
+      "eventType": "game-result",
+      "eventTrigger": "big-win",
+      "snippet": "The Oaks bury Orlando early for a thir",
+      "writers": [
+        "Anthony Raines",
+        "P Slayer",
+        "Tanya Cruz",
+        "Selena Grant"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 7,
+      "team": "Oaks",
+      "eventType": "game-result",
+      "eventTrigger": "big-win",
+      "snippet": "Down two after three in Philadelphia, ",
+      "writers": [
+        "Anthony Raines",
+        "P Slayer",
+        "Tanya Cruz",
+        "Selena Grant"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    }
+  ],
+  "stranded": 0
+}

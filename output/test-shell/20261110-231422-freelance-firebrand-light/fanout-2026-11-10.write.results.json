@@ -1,0 +1,253 @@
+{
+  "date": "2026-11-10",
+  "stage": "write",
+  "results": [
+    {
+      "name": "Luis Navarro",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 2,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 667,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Sgt. Rachel Torres",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 3,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 786,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Angela Reyes",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 2,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 699,
+        "contractScore": 3
+      }
+    },
+    {
+      "name": "Selena Grant",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 465,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Tamsin Pruitt",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 6,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [
+          {
+            "text": "Mara Vance moved into a place of their own in Rockridge, renting",
+            "run": "mara vance place own rockridge renting"
+          },
+          {
+            "text": "Mara Vance — in their life, C114: started a small project with no deadline and no reason",
+            "run": "started a small project with no"
+          },
+          {
+            "text": "Mara Vance — in their life, C115: watched the finish from a packed bar and walked home in a crowd that didn't want to disperse",
+            "run": "watched the finish from a packed"
+          },
+          {
+            "text": "Mara Vance — in their life, C115: re-read an old journal page and didn't recognize the handwriting mood",
+            "run": "re read an old journal page"
+          },
+          {
+            "text": "Mara Vance — in their life, C115: spent the evening sorting a box of things that used to be someone's",
+            "run": "evening sorting a box of things"
+          },
+          {
+            "text": "Howard Yell — in their life, C115: waved at the regulars on the usual route, all present and accounted for",
+            "run": "waved at the regulars on the"
+          },
+          {
+            "text": "Howard Yell — in their life, C115: counted the register twice before closing up, just in case near College Avenue",
+            "run": "counted the register twice before closing"
+          },
+          {
+            "text": "Howard Yell — in their life, C115: saw a stranger laugh at their phone and invented the joke all the way home",
+            "run": "saw a stranger laugh at their"
+          },
+          {
+            "text": "Xavier Robinson — in their life, C114: walked a different street home just to see it",
+            "run": "walked a different street home just"
+          },
+          {
+            "text": "Xavier Robinson — in their life, C115: found a quiet minute at a taqueria patio and the hum of a bassline from a passing car",
+            "run": "the hum of a bassline from"
+          },
+          {
+            "text": "Xavier Robinson — in their life, C115: spent time at a corner store; routine stop",
+            "run": "spent time at a corner store"
+          },
+          {
+            "text": "Imani Delacroix — in their life, C114: heard a kid explain something to a parent with total authority and grinned",
+            "run": "heard a kid explain something to"
+          },
+          {
+            "text": "Imani Delacroix — in their life, C114: noticed neighbors looking out for each other",
+            "run": "noticed neighbors looking out for each"
+          },
+          {
+            "text": "Imani Delacroix — in their life, C114: found the warehouse-campus lot full on a weekday",
+            "run": "found the warehouse campus lot full"
+          },
+          {
+            "text": "Jee Lei — in their life, C114: gave a whole afternoon to a hobby without once checking the clock",
+            "run": "to a hobby without once checking"
+          },
+          {
+            "text": "Ophelia Brenner — in their life, C114: drank the free cold brew in the company kitchen and felt completely disconnected from the neighborhood outside",
+            "run": "drank the free cold brew in"
+          },
+          {
+            "text": "Ophelia Brenner — in their life, C114: disagreed with a Tribune column out loud to an empty kitchen",
+            "run": "disagreed with a tribune column out"
+          },
+          {
+            "text": "Ophelia Brenner — in their life, C115: noticed a familiar face missing from the morning routine",
+            "run": "a familiar face missing from the"
+          },
+          {
+            "text": "Ophelia Brenner — in their life, C115: counted cranes on the skyline from the bus stop and got a different number than yesterday",
+            "run": "and got a different number than"
+          },
+          {
+            "text": "Ravi O'Connell — in their life, C114: felt a lift at OakTown Social after the win",
+            "run": "felt a lift at oaktown social"
+          },
+          {
+            "text": "Ravi O'Connell — in their life, C115: looked up how something works and came away more amazed, not less",
+            "run": "looked up how something works and"
+          },
+          {
+            "text": "Mateo Allen — in their life, C114: heard practice scales drifting from Laurel Music School on the walk home with the kids near a corner shop",
+            "run": "heard practice scales drifting from laurel"
+          },
+          {
+            "text": "Mateo Allen — in their life, C115: settled into a quiet evening on the couch with their partner",
+            "run": "a quiet evening on the couch"
+          },
+          {
+            "text": "Mateo Allen — in their life, C115: checked the front door lock three times after everyone else was asleep",
+            "run": "checked the front door lock three"
+          },
+          {
+            "text": "Joesph Allen — in their life, C114: watched their teenager walk into school without looking back and remembered when they used to wave",
+            "run": "watched their teenager walk into school"
+          },
+          {
+            "text": "Joesph Allen — in their life, C114: bought a new A's jersey and the quiet satisfaction of finding a favorite song on the jukebox",
+            "run": "bought a new as jersey and"
+          },
+          {
+            "text": "Dmitri Soto — in their life, C115: caught Elena Soria Dominguez's eye across the room and didn't need to say it",
+            "run": "caught elena soria dominguezs eye across"
+          },
+          {
+            "text": "Dmitri Soto — in their life, C115: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+            "run": "read the flyer about the fruitvale"
+          },
+          {
+            "text": "Dmitri Soto — in their life, C115: started a small project with no deadline and no reason",
+            "run": "started a small project with no"
+          },
+          {
+            "text": "Briar Soto — in their life, C114: bought a new A's jersey and felt the season starting to turn",
+            "run": "bought a new as jersey and"
+          },
+          {
+            "text": "Briar Soto — in their life, C114: haggled for a flat of bruised peaches at the Saturday market just to have a reason to talk to someone",
+            "run": "haggled for a flat of bruised"
+          },
+          {
+            "text": "Briar Soto — in their life, C115: held the door and got a whole conversation for it",
+            "run": "door and got a whole conversation"
+          },
+          {
+            "text": "Coen Cartier — moved from Uptown to Chinatown — moving for a better fit between household income and housing costs, Chinatown (C115 — what happened in their lif",
+            "run": "a better fit between household income"
+          },
+          {
+            "text": "Coen Cartier — in their life, C114: re-read an old journal page and didn't recognize the handwriting mood",
+            "run": "re read an old journal page"
+          },
+          {
+            "text": "Coen Cartier — in their life, C115: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence",
+            "run": "stopped to read the architectural renderings"
+          },
+          {
+            "text": "Brielle Lewis — in their life, C114: took the long way home just to check the Baylight fence line's progress",
+            "run": "took the long way home just"
+          },
+          {
+            "text": "Brielle Lewis — in their life, C115: traded produce over a fence and came out ahead",
+            "run": "traded produce over a fence and"
+          },
+          {
+            "text": "Brielle Lewis — in their life, C115: wore the green-and-gold cap to the corner store and got three nods for it near a taqueria patio",
+            "run": "wore the green and gold cap"
+          }
+        ],
+        "words": 1514,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 2,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 420,
+        "contractScore": 4
+      }
+    }
+  ],
+  "checkTotals": {
+    "seats": 6,
+    "toolSeats": 5,
+    "capHits": 0,
+    "thin": 0,
+    "verbatim": 1,
+    "graded": 6,
+    "gradeSum": 23
+  },
+  "ranAt": "2026-11-11T00:21:30.867Z"
+}

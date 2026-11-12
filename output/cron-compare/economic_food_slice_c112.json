@@ -1,0 +1,605 @@
+{
+  "version": "ECONOMIC-SLICE-4",
+  "empty": false,
+  "cycle": 112,
+  "kind": "food-workplaces",
+  "variant": "food",
+  "hood": "Downtown",
+  "pulse": {
+    "className": "hood-kitchens",
+    "score": 23,
+    "label": "Downtown kitchens · SpeedyBurger, Miso Metro",
+    "hood": "Downtown",
+    "namedBusinesses": [
+      "SpeedyBurger",
+      "Miso Metro",
+      "Temple Lounge",
+      "Midnight Bistro"
+    ]
+  },
+  "story": {
+    "angle": "Downtown kitchens: SpeedyBurger, Miso Metro, Temple Lounge — the people who work the shift",
+    "label": "Downtown kitchens · SpeedyBurger, Miso Metro",
+    "hookLine": "Devon Willis, Server at SpeedyBurger. 2 named workers at 2 named kitchens in Downtown on the ledger this cycle.",
+    "hood": "Downtown",
+    "pulseClass": "hood-kitchens",
+    "namedBusinesses": [
+      "SpeedyBurger",
+      "Miso Metro",
+      "Temple Lounge",
+      "Midnight Bistro"
+    ],
+    "citizens": [
+      "Devon Willis (POP-00782)",
+      "Andre Turner (POP-00225)",
+      "Drew Lemon (POP-00670)",
+      "Bruce Wright (POP-01085)",
+      "Ariana Reyes (POP-00133)",
+      "Patricia Nwosu (POP-00554)"
+    ],
+    "popids": [
+      "POP-00782",
+      "POP-00225",
+      "POP-00670",
+      "POP-01085",
+      "POP-00133",
+      "POP-00554"
+    ],
+    "ref": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C112",
+    "cycle": 112
+  },
+  "approach": "Food & hospitality approach — kitchens as workplaces: this slice is one neighborhood's restaurants, cafes and bars from the ledger and the people on the roster who work in them. The people on this slice are real; the rest of the room is yours — the line on a Tuesday, the regulars, the walk-in, the tip jar. One kitchen, one shift, one true thing about the work. Not a review. Not multi-voice culture-desk average. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "businesses": [
+    {
+      "bizId": "BIZ-00051",
+      "name": "SpeedyBurger",
+      "sector": "Fast Food & Quick Service",
+      "hood": "Downtown",
+      "employeeCount": 31,
+      "avgSalary": 58000,
+      "annualRevenue": 3629639,
+      "growthRate": 9.54,
+      "keyPersonnel": null,
+      "staff": [
+        {
+          "popid": "POP-00782",
+          "name": "Devon Willis",
+          "role": "Server"
+        }
+      ],
+      "delta": {
+        "vsCycle": 111,
+        "employees": 0,
+        "revenue": 6647,
+        "growth": 3.5699999999999994
+      }
+    },
+    {
+      "bizId": "BIZ-00047",
+      "name": "Miso Metro",
+      "sector": "Restaurant & Dining",
+      "hood": "Downtown",
+      "employeeCount": 2,
+      "avgSalary": 62000,
+      "annualRevenue": 250438,
+      "growthRate": 9.84,
+      "keyPersonnel": null,
+      "staff": [
+        {
+          "popid": "POP-00225",
+          "name": "Andre Turner",
+          "role": "Line cook"
+        }
+      ],
+      "delta": {
+        "vsCycle": 111,
+        "employees": 0,
+        "revenue": 473,
+        "growth": 1.4499999999999993
+      }
+    },
+    {
+      "bizId": "BIZ-00037",
+      "name": "Temple Lounge",
+      "sector": "Nightlife & Entertainment",
+      "hood": "Downtown",
+      "employeeCount": 30,
+      "avgSalary": 66000,
+      "annualRevenue": 3999362,
+      "growthRate": 9.98,
+      "keyPersonnel": null,
+      "staff": [],
+      "delta": {
+        "vsCycle": 111,
+        "employees": 0,
+        "revenue": 7661,
+        "growth": 1.450000000000001
+      }
+    },
+    {
+      "bizId": "BIZ-00049",
+      "name": "Midnight Bistro",
+      "sector": "Restaurant & Dining",
+      "hood": "Downtown",
+      "employeeCount": 2,
+      "avgSalary": 62000,
+      "annualRevenue": 250454,
+      "growthRate": 9.91,
+      "keyPersonnel": null,
+      "staff": [],
+      "delta": {
+        "vsCycle": 111,
+        "employees": 0,
+        "revenue": 476,
+        "growth": 1.4299999999999997
+      }
+    }
+  ],
+  "seeds": [
+    {
+      "seedId": "0dd6f4eb",
+      "hood": "Downtown",
+      "domain": "ECONOMIC",
+      "citizens": [
+        {
+          "popid": "POP-00670",
+          "name": "Drew Lemon"
+        },
+        {
+          "popid": "POP-01085",
+          "name": "Bruce Wright"
+        },
+        {
+          "popid": "POP-00133",
+          "name": "Ariana Reyes"
+        },
+        {
+          "popid": "POP-00554",
+          "name": "Patricia Nwosu"
+        }
+      ],
+      "citizenEvents": [
+        "Drew Lemon — stepped over a puddle reflecting the Tribune Tower neon and thought about taking a picture",
+        "Bruce Wright — argued the bullpen order at the barbershop like it was city policy near a busy plaza",
+        "Ariana Reyes — navigated around a film crew blocking the sidewalk near the waterfront and rolled their eyes near a late-night diner",
+        "Patricia Nwosu — found a quiet minute at a bench outside the courthouse and felt the season starting to turn"
+      ],
+      "businesses": [
+        {
+          "bizId": "BIZ-00095",
+          "name": "Oakland Alternative Response Initiative"
+        },
+        {
+          "bizId": "BIZ-00018",
+          "name": "Bay Tribune"
+        }
+      ],
+      "otherEntities": "Lake Merritt Mindfulness Sangha (faith)",
+      "magnitude": 10,
+      "trend": "carrying, 5.00 strength left of 3-cycle run",
+      "suggestedJournalist": null,
+      "suggestedAngle": "general coverage"
+    }
+  ],
+  "citizens": [
+    {
+      "popid": "POP-00782",
+      "name": "Devon Willis",
+      "role": "Server",
+      "neighborhood": "Downtown",
+      "business": "SpeedyBurger",
+      "profile": "Devon Willis — Server — SpeedyBurger, Downtown",
+      "why": "works at SpeedyBurger (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00225",
+      "name": "Andre Turner",
+      "role": "Line cook",
+      "neighborhood": "Downtown",
+      "business": "Miso Metro",
+      "profile": "Andre Turner — Line cook — Miso Metro, Downtown",
+      "why": "works at Miso Metro (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00670",
+      "name": "Drew Lemon",
+      "role": null,
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Drew Lemon — Downtown",
+      "why": "city seed for Downtown this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-01085",
+      "name": "Bruce Wright",
+      "role": null,
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Bruce Wright — Downtown",
+      "why": "city seed for Downtown this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00133",
+      "name": "Ariana Reyes",
+      "role": null,
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Ariana Reyes — Downtown",
+      "why": "city seed for Downtown this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00554",
+      "name": "Patricia Nwosu",
+      "role": null,
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Patricia Nwosu — Downtown",
+      "why": "city seed for Downtown this cycle (Story_Seed_Deck)"
+    }
+  ],
+  "closures": [],
+  "contractionWatch": [],
+  "casino": null,
+  "cityMoney": null,
+  "deltas": {
+    "state": "PRIOR_CYCLE_ON_DISK",
+    "vs": 111
+  },
+  "prewrite": {
+    "pulseClass": "hood-kitchens",
+    "angle": "Downtown kitchens: SpeedyBurger, Miso Metro, Temple Lounge — the people who work the shift",
+    "hookLine": "Devon Willis, Server at SpeedyBurger. 2 named workers at 2 named kitchens in Downtown on the ledger this cycle.",
+    "namedBusinesses": [
+      "SpeedyBurger",
+      "Miso Metro",
+      "Temple Lounge",
+      "Midnight Bistro"
+    ],
+    "anchorFacts": [
+      "SpeedyBurger · Fast Food & Quick Service · 31 employees · growth 9.5% · revenue $3.6M (+$7k vs C111) · on the roster: Devon Willis (Server)",
+      "Miso Metro · Restaurant & Dining · 2 employees · growth 9.8% · revenue $250k (+$473 vs C111) · on the roster: Andre Turner (Line cook)",
+      "Temple Lounge · Nightlife & Entertainment · 30 employees · growth 10% · revenue $4M (+$8k vs C111)",
+      "Midnight Bistro · Restaurant & Dining · 2 employees · growth 9.9% · revenue $250k (+$476 vs C111)",
+      "CITY SEED (Downtown): citizens Drew Lemon; Bruce Wright; Ariana Reyes; Patricia Nwosu · businesses Oakland Alternative Response Initiative; Bay Tribune · Lake Merritt Mindfulness Sangha (faith)"
+    ],
+    "evidence": [
+      {
+        "text": "SpeedyBurger · Fast Food & Quick Service · 31 employees · growth 9.5% · revenue $3.6M (+$7k vs C111) · on the roster: Devon Willis (Server)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C112"
+      },
+      {
+        "text": "Miso Metro · Restaurant & Dining · 2 employees · growth 9.8% · revenue $250k (+$473 vs C111) · on the roster: Andre Turner (Line cook)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C112"
+      },
+      {
+        "text": "Temple Lounge · Nightlife & Entertainment · 30 employees · growth 10% · revenue $4M (+$8k vs C111)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C112"
+      },
+      {
+        "text": "Midnight Bistro · Restaurant & Dining · 2 employees · growth 9.9% · revenue $250k (+$476 vs C111)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C112"
+      },
+      {
+        "text": "CITY SEED (Downtown): citizens Drew Lemon; Bruce Wright; Ariana Reyes; Patricia Nwosu · businesses Oakland Alternative Response Initiative; Bay Tribune · Lake Merritt Mindfulness Sangha (faith)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C112"
+      }
+    ],
+    "hooks": [
+      {
+        "text": "Multiple business signals detected. Could be coincidence or early pattern.",
+        "angle": "baseline context piece",
+        "hood": null
+      },
+      {
+        "text": "Notable event: \"Port of Oakland: the berth delay is over — the berths are filling again, and the businesses that waited it out take stock\". Follow-up recommended.",
+        "angle": "baseline context piece",
+        "hood": "Jack London"
+      },
+      {
+        "text": "High concentration of ambitious, driven personalities. Career competition and economic hustle stories.",
+        "angle": "baseline context piece",
+        "hood": null
+      },
+      {
+        "text": "Jaylen Cloak has not advanced in 56 years",
+        "angle": "baseline context piece",
+        "hood": null
+      },
+      {
+        "text": "Quinn Adeyemi has not advanced in 56 years",
+        "angle": "baseline context piece",
+        "hood": null
+      },
+      {
+        "text": "the debts crossed a line this week — sleep comes harder now",
+        "angle": "observational analysis",
+        "hood": "Lake Merritt"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a business, a worker, an owner or a place — every name comes from this slice",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose",
+      "Do not contradict a role, employer or neighborhood listed here"
+    ]
+  },
+  "rotation": {
+    "pool": [
+      {
+        "hood": "Jack London",
+        "staffed": 5,
+        "workers": 14,
+        "lastCovered": 111
+      },
+      {
+        "hood": "Downtown",
+        "staffed": 2,
+        "workers": 2,
+        "lastCovered": null
+      },
+      {
+        "hood": "Temescal",
+        "staffed": 1,
+        "workers": 2,
+        "lastCovered": 108
+      },
+      {
+        "hood": "Uptown",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "Chinatown",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "Rockridge",
+        "staffed": 2,
+        "workers": 6,
+        "lastCovered": 107
+      },
+      {
+        "hood": "Fruitvale",
+        "staffed": 2,
+        "workers": 2,
+        "lastCovered": 109
+      },
+      {
+        "hood": "KONO",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "West Oakland",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "Dimond",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "Grand Lake",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "Laurel",
+        "staffed": 2,
+        "workers": 2,
+        "lastCovered": 110
+      },
+      {
+        "hood": "Baylight District",
+        "staffed": 1,
+        "workers": 3,
+        "lastCovered": null
+      },
+      {
+        "hood": "East Oakland",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "Eastlake",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "San Antonio",
+        "staffed": 1,
+        "workers": 2,
+        "lastCovered": null
+      }
+    ],
+    "picked": "Downtown"
+  },
+  "candidates": [
+    {
+      "className": "hood-kitchens",
+      "hood": "Jack London",
+      "label": "Jack London · 5 staffed / 10 listed",
+      "namedBusinesses": [
+        "Jack London Square Markets",
+        "Blue Lantern Bar",
+        "Green & Gold Tavern"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Temescal",
+      "label": "Temescal · 1 staffed / 2 listed",
+      "namedBusinesses": [
+        "OakTown Social"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Uptown",
+      "label": "Uptown · 1 staffed / 6 listed",
+      "namedBusinesses": [
+        "Art Walk Cafe"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Chinatown",
+      "label": "Chinatown · 1 staffed / 4 listed",
+      "namedBusinesses": [
+        "Heritage Bakehouse"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Rockridge",
+      "label": "Rockridge · 2 staffed / 2 listed",
+      "namedBusinesses": [
+        "OakHouse",
+        "Claremont Table"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Fruitvale",
+      "label": "Fruitvale · 2 staffed / 7 listed",
+      "namedBusinesses": [
+        "Fruitvale Diner",
+        "Marigold Cafe"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "KONO",
+      "label": "KONO · 1 staffed / 5 listed",
+      "namedBusinesses": [
+        "The Northgate Bar"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "West Oakland",
+      "label": "West Oakland · 1 staffed / 2 listed",
+      "namedBusinesses": [
+        "West Side Cafe"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Dimond",
+      "label": "Dimond · 1 staffed / 4 listed",
+      "namedBusinesses": [
+        "Romano's"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Grand Lake",
+      "label": "Grand Lake · 1 staffed / 5 listed",
+      "namedBusinesses": [
+        "Port Grind"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Laurel",
+      "label": "Laurel · 2 staffed / 3 listed",
+      "namedBusinesses": [
+        "Nino's",
+        "Schoolgate Cafe"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Baylight District",
+      "label": "Baylight District · 1 staffed / 2 listed",
+      "namedBusinesses": [
+        "Oakland Casino Town"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "East Oakland",
+      "label": "East Oakland · 1 staffed / 4 listed",
+      "namedBusinesses": [
+        "Sunrise Cafe"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Eastlake",
+      "label": "Eastlake · 1 staffed / 4 listed",
+      "namedBusinesses": [
+        "Parkedge Diner"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "San Antonio",
+      "label": "San Antonio · 1 staffed / 2 listed",
+      "namedBusinesses": [
+        "Park Boulevard Cafe"
+      ]
+    }
+  ],
+  "signals": {
+    "businessLaneCount": 45,
+    "sample": [
+      {
+        "kind": "anomaly",
+        "label": "transit ailment — economic footprint, affected businesses, workforce impact in Fruitvale",
+        "hood": "Fruitvale",
+        "ref": "output/engine_audit_c112.json patterns[2]; evidence: Neighborhood_Map row(s) 6"
+      },
+      {
+        "kind": "anomaly",
+        "label": "economic ailment — economic footprint, affected businesses, workforce impact in Downtown",
+        "hood": "Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Chinatown, Brooklyn, Eastlake, Glenview, Ivy Hill, San Antonio, KONO, Lake Merritt, Uptown, Baylight District",
+        "ref": "output/engine_audit_c112.json patterns[10]; evidence: Neighborhood_Map row(s) "
+      },
+      {
+        "kind": "anomaly",
+        "label": "Oakland Youth Apprenticeship Pipeline — economic upside, jobs and footprint in West Oakland",
+        "hood": "West Oakland, East Oakland, Fruitvale",
+        "ref": "output/engine_audit_c112.json patterns[11]; evidence: Initiative_Tracker row(s) 7"
+      },
+      {
+        "kind": "anomaly",
+        "label": "Commercial Stabilization for Grand Lake — economic upside, jobs and footprint in Grand Lake",
+        "hood": "Grand Lake",
+        "ref": "output/engine_audit_c112.json patterns[12]; evidence: Initiative_Tracker row(s) 9"
+      },
+      {
+        "kind": "anomaly",
+        "label": "West Oakland Tenant Defense Fund — economic upside, jobs and footprint in West Oakland",
+        "hood": "West Oakland",
+        "ref": "output/engine_audit_c112.json patterns[13]; evidence: Initiative_Tracker row(s) 10"
+      }
+    ]
+  },
+  "scene": {
+    "namedOnTop": [
+      "SpeedyBurger",
+      "Miso Metro",
+      "Temple Lounge",
+      "Midnight Bistro"
+    ]
+  },
+  "pointers": [
+    "output/beats/Business_Ledger.jsonl (283 rows @C112)",
+    "output/beats/Employment_Roster.jsonl (971 rows)",
+    "output/beats/Story_Seed_Deck.jsonl (business seeds this cycle: 4)",
+    "output/beats/prev/Business_Ledger.jsonl (movement vs C111)",
+    "output/beats/Story_Hook_Deck.jsonl (business hooks this cycle: 6)",
+    "output/desk_signal_c112.json lanes.business (pointers only)",
+    "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 2"
+  ]
+}

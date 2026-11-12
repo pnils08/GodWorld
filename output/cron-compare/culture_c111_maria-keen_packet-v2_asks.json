@@ -1,0 +1,381 @@
+[
+  {
+    "pop": "POP-00351",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00351\",\"name\":\"Ryan Stark\",\"role\":\"Housing Policy Analyst\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Maria Keen\",\"question\":\"Your own current-cycle line says: \\\"Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown\\\". What did you notice about Downtown? Speak only from that line and your own reaction.\"},\"signal\":{\"kind\":\"beat-neighborhood\",\"hood\":\"Downtown\",\"focus\":\"The tension between Downtown's institutional stability (NeuroCity) and its fragile human margins.\",\"src\":\"output/beats/Community_Programs.jsonl @C111\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Ryan Stark — Housing Policy Analyst\",\"evidence\":[{\"id\":\"EV-LIFE-f2af343ac9\",\"src\":\"output/simulation_ledger_snapshot.jsonl\",\"text\":\"Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown\",\"src\":\"output/simulation_ledger_snapshot.jsonl\",\"id\":\"F-71d9ad7d0d0e\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00351",
+        "name": "Ryan Stark",
+        "role": "Housing Policy Analyst",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Maria Keen",
+        "question": "Your own current-cycle line says: \"Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown\". What did you notice about Downtown? Speak only from that line and your own reaction."
+      },
+      "signal": {
+        "kind": "beat-neighborhood",
+        "hood": "Downtown",
+        "focus": "The tension between Downtown's institutional stability (NeuroCity) and its fragile human margins.",
+        "src": "output/beats/Community_Programs.jsonl @C111"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Ryan Stark — Housing Policy Analyst",
+        "evidence": [
+          {
+            "id": "EV-LIFE-f2af343ac9",
+            "src": "output/simulation_ledger_snapshot.jsonl",
+            "text": "Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown"
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown",
+          "src": "output/simulation_ledger_snapshot.jsonl",
+          "id": "F-71d9ad7d0d0e"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00148",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00148\",\"name\":\"Gordon Tate\",\"role\":\"SUPERIOR COURT LIAISON\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Maria Keen\",\"question\":\"Your own current-cycle line says: \\\"Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown\\\". What did you notice about Downtown? Speak only from that line and your own reaction.\"},\"signal\":{\"kind\":\"beat-neighborhood\",\"hood\":\"Downtown\",\"focus\":\"The tension between Downtown's institutional stability (NeuroCity) and its fragile human margins.\",\"src\":\"output/beats/Community_Programs.jsonl @C111\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Gordon Tate — SUPERIOR COURT LIAISON\",\"evidence\":[{\"id\":\"EV-LIFE-4e9e8a1e28\",\"src\":\"output/simulation_ledger_snapshot.jsonl\",\"text\":\"Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown\",\"src\":\"output/simulation_ledger_snapshot.jsonl\",\"id\":\"F-71d9ad7d0d0e\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00148",
+        "name": "Gordon Tate",
+        "role": "SUPERIOR COURT LIAISON",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Maria Keen",
+        "question": "Your own current-cycle line says: \"Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown\". What did you notice about Downtown? Speak only from that line and your own reaction."
+      },
+      "signal": {
+        "kind": "beat-neighborhood",
+        "hood": "Downtown",
+        "focus": "The tension between Downtown's institutional stability (NeuroCity) and its fragile human margins.",
+        "src": "output/beats/Community_Programs.jsonl @C111"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Gordon Tate — SUPERIOR COURT LIAISON",
+        "evidence": [
+          {
+            "id": "EV-LIFE-4e9e8a1e28",
+            "src": "output/simulation_ledger_snapshot.jsonl",
+            "text": "Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown"
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown",
+          "src": "output/simulation_ledger_snapshot.jsonl",
+          "id": "F-71d9ad7d0d0e"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00048",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00048\",\"name\":\"Carlos Presti\",\"role\":\"Corporate Accountant\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Maria Keen\",\"question\":\"Your own current-cycle line says: \\\"Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown\\\". What did you notice about Downtown? Speak only from that line and your own reaction.\"},\"signal\":{\"kind\":\"beat-neighborhood\",\"hood\":\"Downtown\",\"focus\":\"The tension between Downtown's institutional stability (NeuroCity) and its fragile human margins.\",\"src\":\"output/beats/Community_Programs.jsonl @C111\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Carlos Presti — Corporate Accountant\",\"evidence\":[{\"id\":\"EV-LIFE-1edfe53523\",\"src\":\"output/simulation_ledger_snapshot.jsonl\",\"text\":\"Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown\",\"src\":\"output/simulation_ledger_snapshot.jsonl\",\"id\":\"F-71d9ad7d0d0e\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00048",
+        "name": "Carlos Presti",
+        "role": "Corporate Accountant",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Maria Keen",
+        "question": "Your own current-cycle line says: \"Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown\". What did you notice about Downtown? Speak only from that line and your own reaction."
+      },
+      "signal": {
+        "kind": "beat-neighborhood",
+        "hood": "Downtown",
+        "focus": "The tension between Downtown's institutional stability (NeuroCity) and its fragile human margins.",
+        "src": "output/beats/Community_Programs.jsonl @C111"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Carlos Presti — Corporate Accountant",
+        "evidence": [
+          {
+            "id": "EV-LIFE-1edfe53523",
+            "src": "output/simulation_ledger_snapshot.jsonl",
+            "text": "Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown"
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown",
+          "src": "output/simulation_ledger_snapshot.jsonl",
+          "id": "F-71d9ad7d0d0e"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00004",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00004\",\"name\":\"Lucia Polito\",\"role\":\"Aura Wellness Practitioner\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Maria Keen\",\"question\":\"Your own current-cycle line says: \\\"Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music over in Downtown last night\\\". What did you notice about Downtown? Speak only from that line and your own reaction.\"},\"signal\":{\"kind\":\"beat-neighborhood\",\"hood\":\"Downtown\",\"focus\":\"The tension between Downtown's institutional stability (NeuroCity) and its fragile human margins.\",\"src\":\"output/beats/Community_Programs.jsonl @C111\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Lucia Polito — Aura Wellness Practitioner\",\"evidence\":[{\"id\":\"EV-LIFE-b1e1626a98\",\"src\":\"output/simulation_ledger_snapshot.jsonl\",\"text\":\"Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music over in Downtown last night\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music over in Downtown last night\",\"src\":\"output/simulation_ledger_snapshot.jsonl\",\"id\":\"F-f13a5027fecf\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00004",
+        "name": "Lucia Polito",
+        "role": "Aura Wellness Practitioner",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Maria Keen",
+        "question": "Your own current-cycle line says: \"Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music over in Downtown last night\". What did you notice about Downtown? Speak only from that line and your own reaction."
+      },
+      "signal": {
+        "kind": "beat-neighborhood",
+        "hood": "Downtown",
+        "focus": "The tension between Downtown's institutional stability (NeuroCity) and its fragile human margins.",
+        "src": "output/beats/Community_Programs.jsonl @C111"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Lucia Polito — Aura Wellness Practitioner",
+        "evidence": [
+          {
+            "id": "EV-LIFE-b1e1626a98",
+            "src": "output/simulation_ledger_snapshot.jsonl",
+            "text": "Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music over in Downtown last night"
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music over in Downtown last night",
+          "src": "output/simulation_ledger_snapshot.jsonl",
+          "id": "F-f13a5027fecf"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  }
+]

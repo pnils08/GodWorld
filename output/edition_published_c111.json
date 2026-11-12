@@ -1,0 +1,17 @@
+{
+  "cycle": "111",
+  "selected": [
+    "business_c111_business-desk_packet-v2_anthropic-claude-opus-5-5",
+    "civic_c111_carmen-delaine_packet-v2_anthropic-claude-haiku-5-5",
+    "sports_c111_anthony-raines_packet-v2_anthropic-claude-haiku-5-5",
+    "sports_c111_tanya-cruz_packet-v2_x-ai-grok-4-3",
+    "sports_c111_talia-finch_packet-v2_openai-gpt-5-6-luna",
+    "civic_c111_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5-5",
+    "civic_c111_trevor-shimizu_packet-v2_openai-gpt-5-6-luna",
+    "sports_c111_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5",
+    "culture_c111_kai-marston_packet-v2_anthropic-claude-haiku-5-5"
+  ],
+  "edition": "editions/cycle_pulse_c111.txt",
+  "editionSha256": "1557e5ef47ff52a3db1cb3ebacbb93419ef7bdeb713d8f2289492e276e0b6009",
+  "publishedAt": "2026-10-17T21:03:04.434Z"
+}

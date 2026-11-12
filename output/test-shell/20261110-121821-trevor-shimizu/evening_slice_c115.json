@@ -1,0 +1,864 @@
+{
+  "empty": false,
+  "cycle": 115,
+  "kind": "evening-life",
+  "journalist": {
+    "shared": true,
+    "consumers": [
+      "mason-ortega",
+      "kai-marston",
+      "sharon-okafor",
+      "maria-keen",
+      "elliot-graye"
+    ]
+  },
+  "texture": {
+    "famous": [
+      "Rowan Pierce",
+      "Vinnie Keane",
+      "Rico Valez"
+    ],
+    "restaurants": [
+      {
+        "name": "Eastlake Kitchen",
+        "hood": "Eastlake"
+      },
+      {
+        "name": "Port Grind",
+        "hood": "Grand Lake"
+      },
+      {
+        "name": "Jack London Square Markets",
+        "hood": "Jack London"
+      }
+    ],
+    "fastFood": [
+      {
+        "name": "SpeedyBurger",
+        "hood": "Downtown"
+      }
+    ],
+    "nightlife": [
+      {
+        "name": "Civic Watch Patio",
+        "hood": "Glenview"
+      }
+    ],
+    "nightlifeMeta": {
+      "volume": 3,
+      "vibe": "quiet",
+      "movement": "restricted",
+      "weatherImpact": 1
+    },
+    "cityEvents": [
+      "Lake Merritt Blossom Walk",
+      "Glenview Civic Response Meeting",
+      "Fruitvale Community Bloom Festival"
+    ],
+    "tv": [
+      "Crisis Desk",
+      "Spring Lineup",
+      "A's Prospect Report",
+      "Film Room with T. Jerome (PG)"
+    ],
+    "movies": [
+      "New Bloom",
+      "The GM"
+    ],
+    "sportsBroadcast": "Oakland Sports Tonight",
+    "streamingTrend": "political commentary surge",
+    "foodTrend": "High mobility / civic-tension food trend"
+  },
+  "signals": {
+    "fameCount": 10,
+    "sightingCount": 3,
+    "faithCount": 6,
+    "eveningPointer": {
+      "ref": "output/world_summary_c115.md \"## Evening Texture\"",
+      "label": "Named venues that moved — restaurants, fast food, nightlife spots, city events, media"
+    },
+    "sightings": [
+      {
+        "kind": "lifestyle-sighting",
+        "label": "sighting | Rowan Pierce spotted at Presti Accounting",
+        "name": "Rowan Pierce",
+        "venue": "Presti Accounting",
+        "ref": "Ripple_Ledger cycle 115 (CauseType lifestyle-sighting); rendered: world_summary_c115.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "hood": "Downtown",
+        "popids": []
+      },
+      {
+        "kind": "lifestyle-sighting",
+        "label": "sighting | Vinnie Keane spotted at Oakland Alternative Response Initiative",
+        "name": "Vinnie Keane",
+        "venue": "Oakland Alternative Response Initiative",
+        "ref": "Ripple_Ledger cycle 115 (CauseType lifestyle-sighting); rendered: world_summary_c115.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "hood": "Downtown",
+        "popids": []
+      },
+      {
+        "kind": "lifestyle-sighting",
+        "label": "sighting | Rico Valez spotted at Vernon Street Market",
+        "name": "Rico Valez",
+        "venue": "Vernon Street Market",
+        "ref": "Ripple_Ledger cycle 115 (CauseType lifestyle-sighting); rendered: world_summary_c115.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "hood": "Adams Point",
+        "popids": []
+      }
+    ],
+    "fame": [
+      {
+        "kind": "fame-event",
+        "label": "fame-permanent | Anthony Raines — assumed fame (25 on record)",
+        "name": "Anthony Raines",
+        "ref": "Ripple_Ledger cycle 115 (CauseType fame-event); rendered: world_summary_c115.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Rockridge",
+        "popids": [
+          "POP-00017"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "tier-climb | Maria Keen — the city keeps saying the name: Tier 3 -> 2",
+        "name": "Maria Keen",
+        "ref": "Ripple_Ledger cycle 115 (CauseType fame-event); rendered: world_summary_c115.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Lake Merritt",
+        "popids": [
+          "POP-00013"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "tier-climb | Kai Marston — the city keeps saying the name: Tier 4 -> 3",
+        "name": "Kai Marston",
+        "ref": "Ripple_Ledger cycle 115 (CauseType fame-event); rendered: world_summary_c115.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Rockridge",
+        "popids": [
+          "POP-00158"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "tier-climb | Celeste Tran — the city keeps saying the name: Tier 4 -> 3",
+        "name": "Celeste Tran",
+        "ref": "Ripple_Ledger cycle 115 (CauseType fame-event); rendered: world_summary_c115.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "West Oakland",
+        "popids": [
+          "POP-00164"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "tier-climb | Evan Lewis — the city keeps saying the name: Tier 4 -> 3",
+        "name": "Evan Lewis",
+        "ref": "Ripple_Ledger cycle 115 (CauseType fame-event); rendered: world_summary_c115.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Laurel",
+        "popids": [
+          "POP-00200"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "tier-climb | Enzo Walker — the city keeps saying the name: Tier 4 -> 3",
+        "name": "Enzo Walker",
+        "ref": "Ripple_Ledger cycle 115 (CauseType fame-event); rendered: world_summary_c115.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Lake Merritt",
+        "popids": [
+          "POP-00291"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "tier-climb | Vladimir Gonzalez — the city keeps saying the name: Tier 3 -> 2",
+        "name": "Vladimir Gonzalez",
+        "ref": "Ripple_Ledger cycle 115 (CauseType fame-event); rendered: world_summary_c115.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Fruitvale",
+        "popids": [
+          "POP-00598"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "tier-climb | Daniel Cloak — the city keeps saying the name: Tier 2 -> 1",
+        "name": "Daniel Cloak",
+        "ref": "Ripple_Ledger cycle 115 (CauseType fame-event); rendered: world_summary_c115.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "West Oakland",
+        "popids": [
+          "POP-00722"
+        ]
+      }
+    ]
+  },
+  "pulse": {
+    "className": "quiet-nightlife",
+    "score": 24,
+    "label": "Civic Watch Patio (Glenview) · quiet night",
+    "named": "Civic Watch Patio",
+    "hood": "Glenview",
+    "person": null,
+    "venue": null
+  },
+  "candidates": [
+    {
+      "className": "quiet-nightlife",
+      "score": 24,
+      "label": "Civic Watch Patio (Glenview) · quiet night",
+      "named": "Civic Watch Patio",
+      "hood": "Glenview"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Rowan Pierce at Presti Accounting (Downtown)",
+      "named": "Presti Accounting",
+      "hood": "Downtown"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Vinnie Keane at Oakland Alternative Response Initiative (Downtown)",
+      "named": "Oakland Alternative Response Initiative",
+      "hood": "Downtown"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Rico Valez at Vernon Street Market (Adams Point)",
+      "named": "Vernon Street Market",
+      "hood": "Adams Point"
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Eastlake Kitchen (Eastlake)",
+      "named": "Eastlake Kitchen",
+      "hood": "Eastlake"
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Port Grind (Grand Lake)",
+      "named": "Port Grind",
+      "hood": "Grand Lake"
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Jack London Square Markets (Jack London)",
+      "named": "Jack London Square Markets",
+      "hood": "Jack London"
+    },
+    {
+      "className": "city-event",
+      "score": 17,
+      "label": "Fruitvale Community Bloom Festival",
+      "named": "Fruitvale Community Bloom Festival",
+      "hood": null
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Anthony Raines — fame rise",
+      "named": "Anthony Raines",
+      "hood": "Rockridge"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Maria Keen — fame rise",
+      "named": "Maria Keen",
+      "hood": "Lake Merritt"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Kai Marston — fame rise",
+      "named": "Kai Marston",
+      "hood": "Rockridge"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Celeste Tran — fame rise",
+      "named": "Celeste Tran",
+      "hood": "West Oakland"
+    }
+  ],
+  "pulses": [
+    {
+      "className": "quiet-nightlife",
+      "score": 24,
+      "label": "Civic Watch Patio (Glenview) · quiet night",
+      "named": "Civic Watch Patio",
+      "hood": "Glenview",
+      "names": [
+        "Civic Watch Patio"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Nightlife",
+      "angle": "Civic Watch Patio is open and quiet in Glenview. What that condition means is not yet established.",
+      "hookLine": "Civic Watch Patio is open and quiet in Glenview.",
+      "sceneBits": [
+        "VENUE: Civic Watch Patio",
+        "HOOD: Glenview",
+        "EVENING RECORD: open and quiet"
+      ],
+      "nightlifeMeta": {
+        "volume": 3,
+        "vibe": "quiet",
+        "movement": "restricted",
+        "weatherImpact": 1
+      },
+      "cycle": 115
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Rowan Pierce at Presti Accounting (Downtown)",
+      "named": "Presti Accounting",
+      "hood": "Downtown",
+      "names": [
+        "Rowan Pierce",
+        "Presti Accounting"
+      ],
+      "person": "Rowan Pierce",
+      "venue": "Presti Accounting",
+      "popids": [],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 115 (CauseType lifestyle-sighting); rendered: world_summary_c115.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "angle": "Rowan Pierce spotted at Presti Accounting in Downtown — ground truth only, no invented companions",
+      "hookLine": "sighting | Rowan Pierce spotted at Presti Accounting",
+      "sceneBits": [
+        "PERSON: Rowan Pierce",
+        "VENUE: Presti Accounting",
+        "HOOD: Downtown"
+      ],
+      "cycle": 115
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Vinnie Keane at Oakland Alternative Response Initiative (Downtown)",
+      "named": "Oakland Alternative Response Initiative",
+      "hood": "Downtown",
+      "names": [
+        "Vinnie Keane",
+        "Oakland Alternative Response Initiative"
+      ],
+      "person": "Vinnie Keane",
+      "venue": "Oakland Alternative Response Initiative",
+      "popids": [],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 115 (CauseType lifestyle-sighting); rendered: world_summary_c115.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "angle": "Vinnie Keane spotted at Oakland Alternative Response Initiative in Downtown — ground truth only, no invented companions",
+      "hookLine": "sighting | Vinnie Keane spotted at Oakland Alternative Response Initiative",
+      "sceneBits": [
+        "PERSON: Vinnie Keane",
+        "VENUE: Oakland Alternative Response Initiative",
+        "HOOD: Downtown"
+      ],
+      "cycle": 115
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Rico Valez at Vernon Street Market (Adams Point)",
+      "named": "Vernon Street Market",
+      "hood": "Adams Point",
+      "names": [
+        "Rico Valez",
+        "Vernon Street Market"
+      ],
+      "person": "Rico Valez",
+      "venue": "Vernon Street Market",
+      "popids": [],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 115 (CauseType lifestyle-sighting); rendered: world_summary_c115.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "angle": "Rico Valez spotted at Vernon Street Market in Adams Point — ground truth only, no invented companions",
+      "hookLine": "sighting | Rico Valez spotted at Vernon Street Market",
+      "sceneBits": [
+        "PERSON: Rico Valez",
+        "VENUE: Vernon Street Market",
+        "HOOD: Adams Point"
+      ],
+      "cycle": 115
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Eastlake Kitchen (Eastlake)",
+      "named": "Eastlake Kitchen",
+      "hood": "Eastlake",
+      "names": [
+        "Eastlake Kitchen"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Restaurants",
+      "angle": "Eastlake Kitchen appears on the evening restaurant list in Eastlake. What was happening there is not established.",
+      "hookLine": "Eastlake Kitchen appears on the evening restaurant list in Eastlake.",
+      "sceneBits": [
+        "VENUE: Eastlake Kitchen",
+        "HOOD: Eastlake"
+      ],
+      "cycle": 115
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Port Grind (Grand Lake)",
+      "named": "Port Grind",
+      "hood": "Grand Lake",
+      "names": [
+        "Port Grind"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Restaurants",
+      "angle": "Port Grind appears on the evening restaurant list in Grand Lake. What was happening there is not established.",
+      "hookLine": "Port Grind appears on the evening restaurant list in Grand Lake.",
+      "sceneBits": [
+        "VENUE: Port Grind",
+        "HOOD: Grand Lake"
+      ],
+      "cycle": 115
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Jack London Square Markets (Jack London)",
+      "named": "Jack London Square Markets",
+      "hood": "Jack London",
+      "names": [
+        "Jack London Square Markets"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Restaurants",
+      "angle": "Jack London Square Markets appears on the evening restaurant list in Jack London. What was happening there is not established.",
+      "hookLine": "Jack London Square Markets appears on the evening restaurant list in Jack London.",
+      "sceneBits": [
+        "VENUE: Jack London Square Markets",
+        "HOOD: Jack London"
+      ],
+      "cycle": 115
+    },
+    {
+      "className": "city-event",
+      "score": 17,
+      "label": "Fruitvale Community Bloom Festival",
+      "named": "Fruitvale Community Bloom Festival",
+      "hood": null,
+      "names": [
+        "Fruitvale Community Bloom Festival"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · City events",
+      "angle": "Arts/cultural event: Fruitvale Community Bloom Festival — present-tense room, not calendar filler",
+      "hookLine": "Fruitvale Community Bloom Festival is on the evening board.",
+      "sceneBits": [
+        "EVENT: Fruitvale Community Bloom Festival",
+        "ARTS SIGNAL: yes"
+      ],
+      "cycle": 115
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Anthony Raines — fame rise",
+      "named": "Anthony Raines",
+      "hood": "Rockridge",
+      "names": [
+        "Anthony Raines"
+      ],
+      "person": "Anthony Raines",
+      "popids": [
+        "POP-00017"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 115 (CauseType fame-event); rendered: world_summary_c115.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Anthony Raines — city watching; do not invent the private life",
+      "hookLine": "fame-permanent | Anthony Raines — assumed fame (25 on record)",
+      "sceneBits": [
+        "PERSON: Anthony Raines",
+        "HOOD: Rockridge",
+        "LABEL: fame-permanent | Anthony Raines — assumed fame (25 on record)"
+      ],
+      "cycle": 115
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Maria Keen — fame rise",
+      "named": "Maria Keen",
+      "hood": "Lake Merritt",
+      "names": [
+        "Maria Keen"
+      ],
+      "person": "Maria Keen",
+      "popids": [
+        "POP-00013"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 115 (CauseType fame-event); rendered: world_summary_c115.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Maria Keen — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Maria Keen — the city keeps saying the name: Tier 3 -> 2",
+      "sceneBits": [
+        "PERSON: Maria Keen",
+        "HOOD: Lake Merritt",
+        "LABEL: tier-climb | Maria Keen — the city keeps saying the name: Tier 3 -> 2"
+      ],
+      "cycle": 115
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Kai Marston — fame rise",
+      "named": "Kai Marston",
+      "hood": "Rockridge",
+      "names": [
+        "Kai Marston"
+      ],
+      "person": "Kai Marston",
+      "popids": [
+        "POP-00158"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 115 (CauseType fame-event); rendered: world_summary_c115.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Kai Marston — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Kai Marston — the city keeps saying the name: Tier 4 -> 3",
+      "sceneBits": [
+        "PERSON: Kai Marston",
+        "HOOD: Rockridge",
+        "LABEL: tier-climb | Kai Marston — the city keeps saying the name: Tier 4 -> 3"
+      ],
+      "cycle": 115
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Celeste Tran — fame rise",
+      "named": "Celeste Tran",
+      "hood": "West Oakland",
+      "names": [
+        "Celeste Tran"
+      ],
+      "person": "Celeste Tran",
+      "popids": [
+        "POP-00164"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 115 (CauseType fame-event); rendered: world_summary_c115.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Celeste Tran — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Celeste Tran — the city keeps saying the name: Tier 4 -> 3",
+      "sceneBits": [
+        "PERSON: Celeste Tran",
+        "HOOD: West Oakland",
+        "LABEL: tier-climb | Celeste Tran — the city keeps saying the name: Tier 4 -> 3"
+      ],
+      "cycle": 115
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Evan Lewis — fame rise",
+      "named": "Evan Lewis",
+      "hood": "Laurel",
+      "names": [
+        "Evan Lewis"
+      ],
+      "person": "Evan Lewis",
+      "popids": [
+        "POP-00200"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 115 (CauseType fame-event); rendered: world_summary_c115.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Evan Lewis — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Evan Lewis — the city keeps saying the name: Tier 4 -> 3",
+      "sceneBits": [
+        "PERSON: Evan Lewis",
+        "HOOD: Laurel",
+        "LABEL: tier-climb | Evan Lewis — the city keeps saying the name: Tier 4 -> 3"
+      ],
+      "cycle": 115
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Enzo Walker — fame rise",
+      "named": "Enzo Walker",
+      "hood": "Lake Merritt",
+      "names": [
+        "Enzo Walker"
+      ],
+      "person": "Enzo Walker",
+      "popids": [
+        "POP-00291"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 115 (CauseType fame-event); rendered: world_summary_c115.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Enzo Walker — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Enzo Walker — the city keeps saying the name: Tier 4 -> 3",
+      "sceneBits": [
+        "PERSON: Enzo Walker",
+        "HOOD: Lake Merritt",
+        "LABEL: tier-climb | Enzo Walker — the city keeps saying the name: Tier 4 -> 3"
+      ],
+      "cycle": 115
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Vladimir Gonzalez — fame rise",
+      "named": "Vladimir Gonzalez",
+      "hood": "Fruitvale",
+      "names": [
+        "Vladimir Gonzalez"
+      ],
+      "person": "Vladimir Gonzalez",
+      "popids": [
+        "POP-00598"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 115 (CauseType fame-event); rendered: world_summary_c115.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Vladimir Gonzalez — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Vladimir Gonzalez — the city keeps saying the name: Tier 3 -> 2",
+      "sceneBits": [
+        "PERSON: Vladimir Gonzalez",
+        "HOOD: Fruitvale",
+        "LABEL: tier-climb | Vladimir Gonzalez — the city keeps saying the name: Tier 3 -> 2"
+      ],
+      "cycle": 115
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Daniel Cloak — fame rise",
+      "named": "Daniel Cloak",
+      "hood": "West Oakland",
+      "names": [
+        "Daniel Cloak"
+      ],
+      "person": "Daniel Cloak",
+      "popids": [
+        "POP-00722"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 115 (CauseType fame-event); rendered: world_summary_c115.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Daniel Cloak — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Daniel Cloak — the city keeps saying the name: Tier 2 -> 1",
+      "sceneBits": [
+        "PERSON: Daniel Cloak",
+        "HOOD: West Oakland",
+        "LABEL: tier-climb | Daniel Cloak — the city keeps saying the name: Tier 2 -> 1"
+      ],
+      "cycle": 115
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Nia Rook — fame rise",
+      "named": "Nia Rook",
+      "hood": "West Oakland",
+      "names": [
+        "Nia Rook"
+      ],
+      "person": "Nia Rook",
+      "popids": [
+        "POP-01076"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 115 (CauseType fame-event); rendered: world_summary_c115.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Nia Rook — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Nia Rook — the city keeps saying the name: Tier 3 -> 2",
+      "sceneBits": [
+        "PERSON: Nia Rook",
+        "HOOD: West Oakland",
+        "LABEL: tier-climb | Nia Rook — the city keeps saying the name: Tier 3 -> 2"
+      ],
+      "cycle": 115
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Tamsin Pruitt — fame rise",
+      "named": "Tamsin Pruitt",
+      "hood": "Fruitvale",
+      "names": [
+        "Tamsin Pruitt"
+      ],
+      "person": "Tamsin Pruitt",
+      "popids": [
+        "POP-01210"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 115 (CauseType fame-event); rendered: world_summary_c115.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Tamsin Pruitt — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Tamsin Pruitt — the city keeps saying the name: Tier 3 -> 2",
+      "sceneBits": [
+        "PERSON: Tamsin Pruitt",
+        "HOOD: Fruitvale",
+        "LABEL: tier-climb | Tamsin Pruitt — the city keeps saying the name: Tier 3 -> 2"
+      ],
+      "cycle": 115
+    },
+    {
+      "className": "tv-slate",
+      "score": 16,
+      "label": "TV slate: Crisis Desk; Spring Lineup; A's Prospect Report",
+      "named": "Crisis Desk",
+      "hood": null,
+      "names": [
+        "Crisis Desk",
+        "Spring Lineup",
+        "A's Prospect Report",
+        "Film Room with T. Jerome (PG)"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Evening media TV",
+      "angle": "Evening TV slate — Crisis Desk, Spring Lineup, A's Prospect Report; sports desk: Oakland Sports Tonight",
+      "hookLine": "On the box tonight: Crisis Desk, Spring Lineup.",
+      "sceneBits": [
+        "TV: Crisis Desk; Spring Lineup; A's Prospect Report; Film Room with T. Jerome (PG)",
+        "SPORTS BROADCAST: Oakland Sports Tonight"
+      ],
+      "cycle": 115
+    },
+    {
+      "className": "city-event",
+      "score": 14,
+      "label": "Lake Merritt Blossom Walk",
+      "named": "Lake Merritt Blossom Walk",
+      "hood": null,
+      "names": [
+        "Lake Merritt Blossom Walk"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · City events",
+      "angle": "City event: Lake Merritt Blossom Walk — present-tense room, not calendar filler",
+      "hookLine": "Lake Merritt Blossom Walk is on the evening board.",
+      "sceneBits": [
+        "EVENT: Lake Merritt Blossom Walk"
+      ],
+      "cycle": 115
+    }
+  ],
+  "recommend": {
+    "bag": "lifestyle",
+    "slug": "sharon-okafor",
+    "name": "Sharon Okafor",
+    "popid": "POP-00159",
+    "bagDoc": "docs/media/SHARON_LIFESTYLE_BAG.md",
+    "reason": "top pulse quiet-nightlife → lifestyle",
+    "pulseClass": "quiet-nightlife",
+    "pulseLabel": "Civic Watch Patio (Glenview) · quiet night"
+  },
+  "perSeat": {
+    "mason-ortega": {
+      "pulseClass": "named-restaurant",
+      "label": "Eastlake Kitchen (Eastlake)",
+      "score": 34,
+      "bag": "kitchen"
+    },
+    "kai-marston": {
+      "pulseClass": "quiet-nightlife",
+      "label": "Civic Watch Patio (Glenview) · quiet night",
+      "score": 32,
+      "bag": "arts"
+    },
+    "sharon-okafor": {
+      "pulseClass": "quiet-nightlife",
+      "label": "Civic Watch Patio (Glenview) · quiet night",
+      "score": 32,
+      "bag": "lifestyle"
+    },
+    "maria-keen": {
+      "pulseClass": "quiet-nightlife",
+      "label": "Civic Watch Patio (Glenview) · quiet night",
+      "score": 32,
+      "bag": "ground"
+    },
+    "elliot-graye": {
+      "pulseClass": "fame-sighting",
+      "label": "Rowan Pierce at Presti Accounting (Downtown)",
+      "score": 31,
+      "bag": "faith"
+    }
+  },
+  "approach": "Evening-life approach (shared culture pack): open from a NAMED place or sighting in this slice — restaurant, bar, festival, TV slate, or fame stop — never invent venues or employees. Use nightlife volume/vibe/movement as scene color only; translate to human language (no raw decimals as lead). Pick ONE life pulse; ride the recommended consumer bag when it matches your seat (kitchen / arts / lifestyle / ground / faith). Do not file multi-voice culture-desk average. One room, one night, one truth.",
+  "story": {
+    "angle": "Civic Watch Patio is open and quiet in Glenview. What that condition means is not yet established.",
+    "label": "Civic Watch Patio (Glenview) · quiet night",
+    "hookLine": "Civic Watch Patio is open and quiet in Glenview.",
+    "hood": "Glenview",
+    "pulseClass": "quiet-nightlife",
+    "citizens": [],
+    "popids": [],
+    "named": "Civic Watch Patio",
+    "venue": "Civic Watch Patio",
+    "ref": "world_summary ## Evening Texture · Nightlife",
+    "cycle": 115
+  },
+  "prewrite": {
+    "pulseClass": "quiet-nightlife",
+    "angle": "Civic Watch Patio is open and quiet in Glenview. What that condition means is not yet established.",
+    "hookLine": "Civic Watch Patio is open and quiet in Glenview.",
+    "anchorFacts": [
+      "NAMED: Civic Watch Patio",
+      "HOOD: Glenview",
+      "VENUE: Civic Watch Patio",
+      "HOOD: Glenview",
+      "EVENING RECORD: open and quiet"
+    ],
+    "bagRecommend": "lifestyle",
+    "bagSlug": "sharon-okafor"
+  },
+  "scene": {
+    "venues": [
+      {
+        "name": "Eastlake Kitchen",
+        "hood": "Eastlake"
+      },
+      {
+        "name": "Port Grind",
+        "hood": "Grand Lake"
+      },
+      {
+        "name": "Jack London Square Markets",
+        "hood": "Jack London"
+      },
+      {
+        "name": "SpeedyBurger",
+        "hood": "Downtown"
+      },
+      {
+        "name": "Civic Watch Patio",
+        "hood": "Glenview"
+      }
+    ],
+    "nightlifeMeta": {
+      "volume": 3,
+      "vibe": "quiet",
+      "movement": "restricted",
+      "weatherImpact": 1
+    },
+    "cityEvents": [
+      "Lake Merritt Blossom Walk",
+      "Glenview Civic Response Meeting",
+      "Fruitvale Community Bloom Festival"
+    ],
+    "tv": [
+      "Crisis Desk",
+      "Spring Lineup",
+      "A's Prospect Report",
+      "Film Room with T. Jerome (PG)"
+    ],
+    "movies": [
+      "New Bloom",
+      "The GM"
+    ],
+    "colorRoom": "Named places only from Evening Texture / desk_signal. The supplied evening record describes nightlife as quiet; raw scoring fields stay internal.  Sensory room (weather, light, sound) is free; careers and employees are not."
+  },
+  "pointers": [
+    "output/world_summary_c115.md ## Evening Texture",
+    "output/desk_signal_c115.json lanes.culture",
+    "docs/media/SHARON_LIFESTYLE_BAG.md"
+  ]
+}

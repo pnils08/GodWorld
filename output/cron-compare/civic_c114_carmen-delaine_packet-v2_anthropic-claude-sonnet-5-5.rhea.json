@@ -1,0 +1,90 @@
+{
+  "draft": "output/cron-compare/civic_c114_carmen-delaine_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "114",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "191b5513aa18a99c939944f5ed313e9515cac6b6bb746a5bab8be9a626bb4637",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All named officials, vote records, initiative figures, and Brenda Okoro's exact statement match canon and civic ground truth.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "carmen-civic-ledger-v1",
+    "packageVersion": "CARMEN-LEP2-3",
+    "manifestId": "AM-b07f00865cce",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "6.6",
+          "2.4",
+          "21.4",
+          "112",
+          "319",
+          "79",
+          "83",
+          "85"
+        ]
+      },
+      {
+        "code": "UNAPPROVED_QUOTE",
+        "values": [
+          "cumulative $5M+",
+          "where's the check?"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Avery Santana",
+      "Brenda Okoro",
+      "Elliott Crane",
+      "Leonard Tran",
+      "Ramon Vega"
+    ],
+    "unverified": [
+      "Publish Month",
+      "West Oakland Stabilization Fund"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 1,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0104,
+  "durationMs": 5764,
+  "parseError": false,
+  "ranAt": "2026-11-04T07:38:23.629Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 500",
+    "words": 821,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "191b5513aa18a99c939944f5ed313e9515cac6b6bb746a5bab8be9a626bb4637",
+    "costUsd": 0.0013
+  }
+}

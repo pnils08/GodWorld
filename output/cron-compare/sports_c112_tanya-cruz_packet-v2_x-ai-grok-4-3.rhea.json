@@ -1,0 +1,68 @@
+{
+  "draft": "output/cron-compare/sports_c112_tanya-cruz_packet-v2_x-ai-grok-4-3.md",
+  "cycle": "112",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "d5283e4fcc090ce6504433e00dd628283beec4e1e6f1d4f41d241e753f023eee",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Sideline dispatch accurately reflects the Oaks' 97-84 inaugural home victory, record, and context with authorized clubhouse texture.",
+  "review": {
+    "profileId": "tanya-sideline-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "tanya-sideline-v1",
+    "packageVersion": "TANYA-LEP2-1",
+    "manifestId": "AM-4ccbfd54b325",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "-84"
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [],
+    "unverified": [
+      "San Antonio Spurs"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0093,
+  "durationMs": 4457,
+  "parseError": false,
+  "ranAt": "2026-10-21T23:19:28.518Z",
+  "contractScore": {
+    "opened": true,
+    "closed": false,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 84,
+    "short": "The closing fails to specify the access or observation still needed.",
+    "score": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "d5283e4fcc090ce6504433e00dd628283beec4e1e6f1d4f41d241e753f023eee",
+    "costUsd": 0.0013
+  }
+}

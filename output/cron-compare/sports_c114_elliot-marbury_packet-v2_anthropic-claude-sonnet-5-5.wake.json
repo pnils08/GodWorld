@@ -1,0 +1,60 @@
+{
+  "mode": "wake-write",
+  "desk": "sports",
+  "cycle": "114",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "elliot-marbury",
+  "byline": {
+    "name": "Elliot Marbury",
+    "popid": "POP-00166",
+    "beatDomain": "GENERAL"
+  },
+  "laneEntries": 15,
+  "quotesLanded": 0,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "dossier_read",
+    "sheet_read"
+  ],
+  "toolCalls": 2,
+  "wordCount": 727,
+  "targetWords": "evidence-bounded; 350-600",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 350",
+    "words": 727,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "1d3573fa1b7a9dfa987e8e6a941ea3197da779d91c61c61ac067cb42407d1f9d",
+    "costUsd": 0.0019
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 4/4 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/sports_c114_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "d/.env // tip: ◈ encrypted .env [www.dotenvx.com]\n{\n  \"popId\": \"POP-00166\",\n  \"name\": \"Elliot Marbury\",\n  \"recorded\": true,\n  \"text\": \"filed: Vladimir Gonzalez, 506 At-Bats: One Home Run Every 36.1\"\n}"
+  },
+  "ranAt": "2026-11-05T00:17:59.780Z",
+  "dispositionReconciledAt": "2026-11-07T18:00:02.619Z"
+}

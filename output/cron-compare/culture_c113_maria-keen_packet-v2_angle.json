@@ -1,0 +1,1521 @@
+{
+  "stage": "angle",
+  "desk": "culture",
+  "cycle": "113",
+  "persona": "maria-keen",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00013",
+      "name": "Maria Keen",
+      "role": "desk reporter",
+      "desk": "culture"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Fruitvale — the programs that hold the block and the people who founded them",
+      "approach": "Neighborhood approach: this slice is one block's record — its community programs and their founders, who is moving in or out, who the block has in a hospital bed or in custody, what it paid on tax day, whose debts crossed the line, and the city's neighborhood hooks this cycle. First-person witness, one block one truth. The programs, founders, movement numbers, patients, defendants and money lines are real; the stoop conversations, the mailboxes, the dog everyone knows are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "neighborhood",
+        "hood": "Fruitvale",
+        "facts": [
+          "Fruitvale Summer Speed Series (youth-sports), Fruitvale, since C101",
+          "Fruitvale Transit Corridor Mutual Aid (mutual-aid), Fruitvale, since C101",
+          "Postpartum Oakland Network (health), Fruitvale — founded by Lucia Polito, since C101",
+          "Fruitvale this cycle: 423 students, 1,559 adults, 351 seniors — moved vs C112: +2 students, +7 adults, +1 seniors",
+          "Fruitvale: 6 charges → 1 arrest → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+          "Fruitvale: 114 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked"
+        ],
+        "priorCycle": "PRIOR_CYCLE_ON_DISK",
+        "note": null,
+        "engineHooks": [
+          "Household in Lake Merritt spending 53% of income on housing (observational analysis)",
+          "the bad week cost more than the savings could hold — borrowed to cover it (observational analysis)",
+          "the debts crossed a line this week — sleep comes harder now (observational analysis)",
+          "A family bought their home in Chinatown (observational analysis)"
+        ],
+        "roomIsYours": "the stoop, the corner store counter, who moved in last month and who is thinking about leaving, what the block argues about",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-neighborhood",
+      "hood": "Fruitvale",
+      "score": null,
+      "src": "output/beats/Community_Programs.jsonl @C113",
+      "nearby": [
+        {
+          "text": "Chinatown | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c113.md \"### Chinatown\"; events: world_summary_c113.md \"## World Events\""
+        },
+        {
+          "text": "Downtown | 2 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c113.md \"### Downtown\"; events: world_summary_c113.md \"## World Events\""
+        },
+        {
+          "text": "Fruitvale | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c113.md \"### Fruitvale\"; events: world_summary_c113.md \"## World Events\""
+        },
+        {
+          "text": "Jack London | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c113.md \"### Jack London\"; events: world_summary_c113.md \"## World Events\""
+        },
+        {
+          "text": "Lake Merritt | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c113.md \"### Lake Merritt\"; events: world_summary_c113.md \"## World Events\""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00004",
+          "name": "Lucia Polito",
+          "profile": "Lucia Polito — Aura Wellness Practitioner — Fruitvale",
+          "role": "Aura Wellness Practitioner",
+          "hood": "Fruitvale",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Community_Programs.jsonl @C113",
+            "pop": "POP-00004",
+            "rowName": "Lucia Polito",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00023",
+          "name": "Gregory Mims",
+          "profile": "Gregory Mims — Organized Crime",
+          "role": "Organized Crime",
+          "hood": "West Oakland",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "jj6rRFJJwmKMRrDVKeReaE",
+            "customId": "cp-POP-00023-c102-PRESS",
+            "cycle": 102,
+            "excerpt": "Heard some kids talking about it at the bus stop last week—one of ‘em said his cousin got placed with a plumbing crew over in Fruitvale.",
+            "highlightKind": "hood",
+            "entity": "Fruitvale",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00042",
+          "name": "Ramon Vega",
+          "profile": "Ramon Vega — City Council President - D1",
+          "role": "City Council President - D1",
+          "hood": "Lake Merritt",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "h6zEfGA8fbeknJ8gB654JE",
+            "customId": "cp-POP-00042-c111-midday",
+            "cycle": 111,
+            "excerpt": "We don't talk as much as we should, not since the last council fight where he thought I was leaning too far into the developer's corner on the Fruitvale hub.",
+            "highlightKind": "hood",
+            "entity": "Fruitvale",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00043",
+          "name": "Janae Rivers",
+          "profile": "Janae Rivers — City Council Member",
+          "role": "City Council Member",
+          "hood": "Piedmont Ave",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "pku7dukDbkyn37hyZKGizG",
+            "customId": "cp-POP-00043-c112-PRESS",
+            "cycle": 112,
+            "excerpt": "It's not just about East Oakland anymore; the cracks are spreading, and we need to act before West Oakland and Fruitvale get hit harder.",
+            "highlightKind": "hood",
+            "entity": "Fruitvale",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00137",
+          "name": "Kimberly Cho",
+          "profile": "Kimberly Cho — DEPUTY CHIEF OF OPERATIONS",
+          "role": "DEPUTY CHIEF OF OPERATIONS",
+          "hood": "Piedmont Ave",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "AUAGgsJqRCbx2SGUusyoGu",
+            "customId": "cp-POP-00137-c105-CONVO",
+            "cycle": 105,
+            "excerpt": "\" (I grin, then glance at my watch) \"Listen, I've got a meeting with the chief about the Fruitvale transit delays—the ones you love complaining about—but let's grab that terrible coffee sometime.",
+            "highlightKind": "hood",
+            "entity": "Fruitvale",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00143",
+          "name": "Clarissa Dane",
+          "profile": "Clarissa Dane — DISTRICT ATTORNEY",
+          "role": "DISTRICT ATTORNEY",
+          "hood": "West Oakland",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "nskoJPLvCQYdcNGExrx4u6",
+            "customId": "cp-POP-00143-c110-work",
+            "cycle": 110,
+            "excerpt": "I keep coming back to that Fruitvale clearance rate while the kettle heats.",
+            "highlightKind": "hood",
+            "entity": "Fruitvale",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00170",
+          "name": "Melton Neilon",
+          "profile": "Melton Neilon — Sourdough Baker",
+          "role": "Sourdough Baker",
+          "hood": "Temescal",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "bRSBjkohXzdo3SYZnGJoAo",
+            "customId": "cp-POP-00170-c109-PRESS",
+            "cycle": 109,
+            "excerpt": "I’ve heard folks at the farmers market talking about the Fruitvale Transit Hub delays, but honestly, I’m not sure who’s supposed to be steering it forward.",
+            "highlightKind": "hood",
+            "entity": "Fruitvale",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00198",
+          "name": "Rick Walker",
+          "profile": "Rick Walker — K-8 Teacher,Former Line cook",
+          "role": "K-8 Teacher,Former Line cook",
+          "hood": "Fruitvale",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "xYTyuMeC7tHPgYEBCY5WBr",
+            "customId": "cp-POP-00198-c113-PRESS",
+            "cycle": 113,
+            "excerpt": "The teachers there are working just as hard as we are in Fruitvale, but they're doing it with less.",
+            "highlightKind": "hood",
+            "entity": "Fruitvale",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00201",
+          "name": "Elio Perez",
+          "profile": "Elio Perez — Server",
+          "role": "Server",
+          "hood": "Rockridge",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "FQAB6GhDymMcad2QAGji1b",
+            "customId": "cp-POP-00201-c109-PRESS",
+            "cycle": 109,
+            "excerpt": "Honestly, I hear folks at the diner grumbling about how nothing ever moves forward with the Fruitvale plans, but nobody seems to know who's actually holding the reins or why it's stuck.",
+            "highlightKind": "hood",
+            "entity": "Fruitvale",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00210",
+          "name": "Depak Ying",
+          "profile": "Depak Ying — Server",
+          "role": "Server",
+          "hood": "Rockridge",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "nZ99mRXCQKBnEDbGjrZK5W",
+            "customId": "cp-POP-00210-c109-PRESS",
+            "cycle": 109,
+            "excerpt": "I’ve heard people talking about the Fruitvale Transit Hub delays, and it feels like no one’s stepping up to take responsibility—it’s frustrating because we need that progress.",
+            "highlightKind": "hood",
+            "entity": "Fruitvale",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00212",
+          "name": "Jessie Hess",
+          "profile": "Jessie Hess — Barista",
+          "role": "Barista",
+          "hood": "Downtown",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "NFfU45k1dwug7WJgh6AeBY",
+            "customId": "cp-POP-00212-c108-PRESS",
+            "cycle": 108,
+            "excerpt": "I've seen how some neighborhoods in Oakland, like Fruitvale, seem to be struggling.",
+            "highlightKind": "hood",
+            "entity": "Fruitvale",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00231",
+          "name": "Calvin Turner",
+          "profile": "Calvin Turner — Mechanic",
+          "role": "Mechanic",
+          "hood": "Fruitvale",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "EPV6mAKLSr3ciaCW92jy7i",
+            "customId": "cp-POP-00231-c102-PRESS",
+            "cycle": 102,
+            "excerpt": "Look, I get it, Fruitvale needs upgrades.",
+            "highlightKind": "hood",
+            "entity": "Fruitvale",
+            "predicate": "observe"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C113",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-876f95b5eb98"
+      },
+      {
+        "t": "FACT",
+        "text": "Fruitvale: 3 active programs on the record",
+        "src": "output/beats/Community_Programs.jsonl @C113",
+        "id": "F-f950233852c6"
+      },
+      {
+        "t": "FACT",
+        "text": "3 active programs in Fruitvale; Lucia Polito founded one.",
+        "src": "output/beats/Community_Programs.jsonl @C113",
+        "id": "F-97d835de6f10"
+      },
+      {
+        "t": "FACT",
+        "text": "Fruitvale Summer Speed Series (youth-sports), Fruitvale, since C101",
+        "src": "output/beats/Community_Programs.jsonl @C113 PRG-004",
+        "id": "F-7d350ad0a801"
+      },
+      {
+        "t": "FACT",
+        "text": "Fruitvale Transit Corridor Mutual Aid (mutual-aid), Fruitvale, since C101",
+        "src": "output/beats/Community_Programs.jsonl @C113 PRG-010",
+        "id": "F-0c7e8b01f6c5"
+      },
+      {
+        "t": "FACT",
+        "text": "Postpartum Oakland Network (health), Fruitvale — founded by Lucia Polito, since C101",
+        "src": "output/beats/Community_Programs.jsonl @C113 PRG-016",
+        "id": "F-26450a861611"
+      },
+      {
+        "t": "FACT",
+        "text": "Fruitvale this cycle: 423 students, 1,559 adults, 351 seniors — moved vs C112: +2 students, +7 adults, +1 seniors",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C113 vs prev/",
+        "id": "F-22e469d8fcbc"
+      },
+      {
+        "t": "FACT",
+        "text": "Fruitvale: 6 charges → 1 arrest → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl @C113 judicial Fruitvale",
+        "id": "F-48f319220662"
+      },
+      {
+        "t": "FACT",
+        "text": "Fruitvale: 114 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl @C113 hospital Fruitvale",
+        "id": "F-a344fe6b460c"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "street",
+    "candidates": [
+      {
+        "pop": "POP-00004",
+        "name": "Lucia Polito",
+        "role": "Aura Wellness Practitioner",
+        "hood": "Fruitvale",
+        "profile": "Lucia Polito — Aura Wellness Practitioner — Fruitvale",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Community_Programs.jsonl @C113",
+          "pop": "POP-00004",
+          "rowName": "Lucia Polito",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00023",
+        "name": "Gregory Mims",
+        "role": "Organized Crime",
+        "hood": "West Oakland",
+        "profile": "Gregory Mims — Organized Crime",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "jj6rRFJJwmKMRrDVKeReaE",
+          "customId": "cp-POP-00023-c102-PRESS",
+          "cycle": 102,
+          "excerpt": "Heard some kids talking about it at the bus stop last week—one of ‘em said his cousin got placed with a plumbing crew over in Fruitvale.",
+          "highlightKind": "hood",
+          "entity": "Fruitvale",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "Heard some kids talking about it at the bus stop last week—one of ‘em said his cousin got placed with a plumbing crew over in Fruitvale."
+      },
+      {
+        "pop": "POP-00042",
+        "name": "Ramon Vega",
+        "role": "City Council President - D1",
+        "hood": "Lake Merritt",
+        "profile": "Ramon Vega — City Council President - D1",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "h6zEfGA8fbeknJ8gB654JE",
+          "customId": "cp-POP-00042-c111-midday",
+          "cycle": 111,
+          "excerpt": "We don't talk as much as we should, not since the last council fight where he thought I was leaning too far into the developer's corner on the Fruitvale hub.",
+          "highlightKind": "hood",
+          "entity": "Fruitvale",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "We don't talk as much as we should, not since the last council fight where he thought I was leaning too far into the developer's corner on the Fruitvale hub."
+      },
+      {
+        "pop": "POP-00043",
+        "name": "Janae Rivers",
+        "role": "City Council Member",
+        "hood": "Piedmont Ave",
+        "profile": "Janae Rivers — City Council Member",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "pku7dukDbkyn37hyZKGizG",
+          "customId": "cp-POP-00043-c112-PRESS",
+          "cycle": 112,
+          "excerpt": "It's not just about East Oakland anymore; the cracks are spreading, and we need to act before West Oakland and Fruitvale get hit harder.",
+          "highlightKind": "hood",
+          "entity": "Fruitvale",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "It's not just about East Oakland anymore; the cracks are spreading, and we need to act before West Oakland and Fruitvale get hit harder."
+      },
+      {
+        "pop": "POP-00137",
+        "name": "Kimberly Cho",
+        "role": "DEPUTY CHIEF OF OPERATIONS",
+        "hood": "Piedmont Ave",
+        "profile": "Kimberly Cho — DEPUTY CHIEF OF OPERATIONS",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "AUAGgsJqRCbx2SGUusyoGu",
+          "customId": "cp-POP-00137-c105-CONVO",
+          "cycle": 105,
+          "excerpt": "\" (I grin, then glance at my watch) \"Listen, I've got a meeting with the chief about the Fruitvale transit delays—the ones you love complaining about—but let's grab that terrible coffee sometime.",
+          "highlightKind": "hood",
+          "entity": "Fruitvale",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "\" (I grin, then glance at my watch) \"Listen, I've got a meeting with the chief about the Fruitvale transit delays—the ones you love complaining about—but let's grab that terrible coffee sometime."
+      },
+      {
+        "pop": "POP-00143",
+        "name": "Clarissa Dane",
+        "role": "DISTRICT ATTORNEY",
+        "hood": "West Oakland",
+        "profile": "Clarissa Dane — DISTRICT ATTORNEY",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "nskoJPLvCQYdcNGExrx4u6",
+          "customId": "cp-POP-00143-c110-work",
+          "cycle": 110,
+          "excerpt": "I keep coming back to that Fruitvale clearance rate while the kettle heats.",
+          "highlightKind": "hood",
+          "entity": "Fruitvale",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I keep coming back to that Fruitvale clearance rate while the kettle heats."
+      },
+      {
+        "pop": "POP-00170",
+        "name": "Melton Neilon",
+        "role": "Sourdough Baker",
+        "hood": "Temescal",
+        "profile": "Melton Neilon — Sourdough Baker",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "bRSBjkohXzdo3SYZnGJoAo",
+          "customId": "cp-POP-00170-c109-PRESS",
+          "cycle": 109,
+          "excerpt": "I’ve heard folks at the farmers market talking about the Fruitvale Transit Hub delays, but honestly, I’m not sure who’s supposed to be steering it forward.",
+          "highlightKind": "hood",
+          "entity": "Fruitvale",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I’ve heard folks at the farmers market talking about the Fruitvale Transit Hub delays, but honestly, I’m not sure who’s supposed to be steering it forward."
+      },
+      {
+        "pop": "POP-00198",
+        "name": "Rick Walker",
+        "role": "K-8 Teacher,Former Line cook",
+        "hood": "Fruitvale",
+        "profile": "Rick Walker — K-8 Teacher,Former Line cook",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "xYTyuMeC7tHPgYEBCY5WBr",
+          "customId": "cp-POP-00198-c113-PRESS",
+          "cycle": 113,
+          "excerpt": "The teachers there are working just as hard as we are in Fruitvale, but they're doing it with less.",
+          "highlightKind": "hood",
+          "entity": "Fruitvale",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "The teachers there are working just as hard as we are in Fruitvale, but they're doing it with less."
+      },
+      {
+        "pop": "POP-00201",
+        "name": "Elio Perez",
+        "role": "Server",
+        "hood": "Rockridge",
+        "profile": "Elio Perez — Server",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "FQAB6GhDymMcad2QAGji1b",
+          "customId": "cp-POP-00201-c109-PRESS",
+          "cycle": 109,
+          "excerpt": "Honestly, I hear folks at the diner grumbling about how nothing ever moves forward with the Fruitvale plans, but nobody seems to know who's actually holding the reins or why it's stuck.",
+          "highlightKind": "hood",
+          "entity": "Fruitvale",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "Honestly, I hear folks at the diner grumbling about how nothing ever moves forward with the Fruitvale plans, but nobody seems to know who's actually holding the reins or why it's stuck."
+      },
+      {
+        "pop": "POP-00210",
+        "name": "Depak Ying",
+        "role": "Server",
+        "hood": "Rockridge",
+        "profile": "Depak Ying — Server",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "nZ99mRXCQKBnEDbGjrZK5W",
+          "customId": "cp-POP-00210-c109-PRESS",
+          "cycle": 109,
+          "excerpt": "I’ve heard people talking about the Fruitvale Transit Hub delays, and it feels like no one’s stepping up to take responsibility—it’s frustrating because we need that progress.",
+          "highlightKind": "hood",
+          "entity": "Fruitvale",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I’ve heard people talking about the Fruitvale Transit Hub delays, and it feels like no one’s stepping up to take responsibility—it’s frustrating because we need that progress."
+      },
+      {
+        "pop": "POP-00212",
+        "name": "Jessie Hess",
+        "role": "Barista",
+        "hood": "Downtown",
+        "profile": "Jessie Hess — Barista",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "NFfU45k1dwug7WJgh6AeBY",
+          "customId": "cp-POP-00212-c108-PRESS",
+          "cycle": 108,
+          "excerpt": "I've seen how some neighborhoods in Oakland, like Fruitvale, seem to be struggling.",
+          "highlightKind": "hood",
+          "entity": "Fruitvale",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I've seen how some neighborhoods in Oakland, like Fruitvale, seem to be struggling."
+      },
+      {
+        "pop": "POP-00231",
+        "name": "Calvin Turner",
+        "role": "Mechanic",
+        "hood": "Fruitvale",
+        "profile": "Calvin Turner — Mechanic",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "EPV6mAKLSr3ciaCW92jy7i",
+          "customId": "cp-POP-00231-c102-PRESS",
+          "cycle": 102,
+          "excerpt": "Look, I get it, Fruitvale needs upgrades.",
+          "highlightKind": "hood",
+          "entity": "Fruitvale",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "Look, I get it, Fruitvale needs upgrades."
+      },
+      {
+        "pop": "POP-00317",
+        "name": "Lila Bennington",
+        "role": "Oakland Unified Elementary Teacher",
+        "hood": "Fruitvale",
+        "profile": "Lila Bennington — Oakland Unified Elementary Teacher",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "Jya1LWb3BSbhcXvbSPjfnB",
+          "customId": "cp-POP-00317-c110-PRESS",
+          "cycle": 110,
+          "excerpt": "Oh, I actually teach in Fruitvale, not Rockridge.",
+          "highlightKind": "hood",
+          "entity": "Fruitvale",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "Oh, I actually teach in Fruitvale, not Rockridge."
+      },
+      {
+        "pop": "POP-00325",
+        "name": "Isabel Lopes",
+        "role": "ESL Teacher",
+        "hood": "Fruitvale",
+        "profile": "Isabel Lopes — ESL Teacher",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "e3hhwyfB5JS3aGB51ujJk8",
+          "customId": "cp-POP-00325-c108-CONVO",
+          "cycle": 108,
+          "excerpt": "I was just thinking about how much Fruitvale feels like it’s buzzing lately—have you noticed?",
+          "highlightKind": "hood",
+          "entity": "Fruitvale",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I was just thinking about how much Fruitvale feels like it’s buzzing lately—have you noticed?"
+      },
+      {
+        "pop": "POP-00488",
+        "name": "Rupert Ochoa",
+        "role": "Mutual Aid Network Organizer",
+        "hood": "Fruitvale",
+        "profile": "Rupert Ochoa — Mutual Aid Network Organizer",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "JqC7LAomL6zfkBU4kUhoEi",
+          "customId": "cp-POP-00488-c112-PRESS",
+          "cycle": 112,
+          "excerpt": "I've seen it in Fruitvale, when people take on new responsibilities, they bring a new level of respect and attention from others.",
+          "highlightKind": "hood",
+          "entity": "Fruitvale",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I've seen it in Fruitvale, when people take on new responsibilities, they bring a new level of respect and attention from others."
+      },
+      {
+        "pop": "POP-00494",
+        "name": "Weston Herrin",
+        "role": "Refugee Resettlement Case Worker",
+        "hood": "Chinatown",
+        "profile": "Weston Herrin — Refugee Resettlement Case Worker",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "EjovUZRYP6a1g4MZ67wisR",
+          "customId": "cp-POP-00494-c105-CONVO",
+          "cycle": 105,
+          "excerpt": "\"Sounds good—though I’ll warn you, I’ll probably still complain about the Fruitvale delays.",
+          "highlightKind": "hood",
+          "entity": "Fruitvale",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "\"Sounds good—though I’ll warn you, I’ll probably still complain about the Fruitvale delays."
+      },
+      {
+        "pop": "POP-00541",
+        "name": "Theo Burkes",
+        "role": "Rapper",
+        "hood": "Downtown",
+        "profile": "Theo Burkes — Rapper",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "xGGx4pYvg3h2ZizUtwVQqx",
+          "customId": "cp-POP-00541-c108-PRESS",
+          "cycle": 108,
+          "excerpt": "Honestly, I don't know much about what's going on in Fruitvale, I've been focused on my own thing in Downtown.",
+          "highlightKind": "hood",
+          "entity": "Fruitvale",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "Honestly, I don't know much about what's going on in Fruitvale, I've been focused on my own thing in Downtown."
+      },
+      {
+        "pop": "POP-00632",
+        "name": "Rico Valez",
+        "role": "Musician",
+        "hood": "Fruitvale",
+        "profile": "Rico Valez — Musician",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "PvBzncRRKeGdNDVWsZWRMW",
+          "customId": "cp-POP-00632-c112-PRESS",
+          "cycle": 112,
+          "excerpt": "I live in Fruitvale, and while I catch the vibe of the city, I don't spend a lot of time over there.",
+          "highlightKind": "hood",
+          "entity": "Fruitvale",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I live in Fruitvale, and while I catch the vibe of the city, I don't spend a lot of time over there."
+      },
+      {
+        "pop": "POP-00644",
+        "name": "Rafael Pilgrim",
+        "role": "Server",
+        "hood": "Fruitvale",
+        "profile": "Rafael Pilgrim — Server",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "5evosPNYPsGtVP7CyUnSdc",
+          "customId": "cp-POP-00644-c108-PRESS",
+          "cycle": 108,
+          "excerpt": "I've seen the community programs in Fruitvale really make a difference, and I appreciate the work of founders like Lucia Polito who are dedicated to helping our neighborhood thrive.",
+          "highlightKind": "hood",
+          "entity": "Fruitvale",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I've seen the community programs in Fruitvale really make a difference, and I appreciate the work of founders like Lucia Polito who are dedicated to helping our neighborhood thrive."
+      },
+      {
+        "pop": "POP-00746",
+        "name": "Shawn Neighbor",
+        "role": "Construction laborer",
+        "hood": "Fruitvale",
+        "profile": "Shawn Neighbor — Construction laborer",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "CEf6nyuAmw7DUk1mX53piY",
+          "customId": "cp-POP-00746-c108-CONVO",
+          "cycle": 108,
+          "excerpt": "\"It’s like Fruitvale’s got this momentum, and I don’t wanna just watch it happen—I wanna be part of it, you know?",
+          "highlightKind": "hood",
+          "entity": "Fruitvale",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "\"It’s like Fruitvale’s got this momentum, and I don’t wanna just watch it happen—I wanna be part of it, you know?"
+      },
+      {
+        "pop": "POP-00753",
+        "name": "Eunice Marston",
+        "role": "Senior Pastor / Faith Leader",
+        "hood": "Downtown",
+        "profile": "Eunice Marston — Senior Pastor / Faith Leader",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "AwZZu367tQPi7kZB3jN7Kw",
+          "customId": "cp-POP-00753-c109-PRESS",
+          "cycle": 109,
+          "excerpt": "I haven't had any direct involvement with the Gurdwara Singh Sabha Fruitvale, but as a faith leader in Downtown, I appreciate the various initiatives and organizations that bring people together and foster a sense of community.",
+          "highlightKind": "hood",
+          "entity": "Fruitvale",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I haven't had any direct involvement with the Gurdwara Singh Sabha Fruitvale, but as a faith leader in Downtown, I appreciate the various initiatives and organizations that bring people together and foster a sense of community."
+      },
+      {
+        "pop": "POP-00754",
+        "name": "Ophelia Brenner",
+        "role": "Senior Pastor / Faith Leader",
+        "hood": "Fruitvale",
+        "profile": "Ophelia Brenner — Senior Pastor / Faith Leader",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "STvwps2TmUJPk73hcgeM4y",
+          "customId": "cp-POP-00754-c113-PRESS",
+          "cycle": 113,
+          "excerpt": "Our congregation is actively involved in supporting local initiatives, and we're committed to being a positive presence in Fruitvale.",
+          "highlightKind": "hood",
+          "entity": "Fruitvale",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "Our congregation is actively involved in supporting local initiatives, and we're committed to being a positive presence in Fruitvale."
+      },
+      {
+        "pop": "POP-00759",
+        "name": "Naomi Sterling",
+        "role": "Senior Pastor / Faith Leader",
+        "hood": "Rockridge",
+        "profile": "Naomi Sterling — Senior Pastor / Faith Leader",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "2Wzny5KUqMYMJxGTrz5R4a",
+          "customId": "cp-POP-00759-c113-PRESS",
+          "cycle": 113,
+          "excerpt": "I attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard.",
+          "highlightKind": "hood",
+          "entity": "Fruitvale",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard."
+      },
+      {
+        "pop": "POP-00766",
+        "name": "Manjit Singh",
+        "role": "Senior Pastor / Faith Leader",
+        "hood": "Fruitvale",
+        "profile": "Manjit Singh — Senior Pastor / Faith Leader",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "82tCVhhbTrvVCVttjUxFAj",
+          "customId": "cp-POP-00766-c105-PRESS",
+          "cycle": 105,
+          "excerpt": "I heard about the Fruitvale Transit Hub Phase II moving back to active visioning, and it feels like we’re stuck in a loop.",
+          "highlightKind": "hood",
+          "entity": "Fruitvale",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I heard about the Fruitvale Transit Hub Phase II moving back to active visioning, and it feels like we’re stuck in a loop."
+      },
+      {
+        "pop": "POP-00791",
+        "name": "Elena Soria Dominguez",
+        "role": "Transit Hub Planning Lead",
+        "hood": "Fruitvale",
+        "profile": "Elena Soria Dominguez — Transit Hub Planning Lead",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "S5MXBW4zAoe2KqoG6afTj5",
+          "customId": "cp-POP-00791-c113-PRESS",
+          "cycle": 113,
+          "excerpt": "What I can tell you is that every cycle that passes without shovels, people like my neighbor in Fruitvale get louder about who's actually being listened to.",
+          "highlightKind": "hood",
+          "entity": "Fruitvale",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "What I can tell you is that every cycle that passes without shovels, people like my neighbor in Fruitvale get louder about who's actually being listened to."
+      },
+      {
+        "pop": "POP-00873",
+        "name": "Hazel Salazar",
+        "role": "Line Cook",
+        "hood": "Uptown",
+        "profile": "Hazel Salazar — Line Cook",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "LWzh7NxtefpMDY52EE4Lsd",
+          "customId": "cp-POP-00873-c109-PRESS",
+          "cycle": 109,
+          "excerpt": "A typical shift at Fruitvale Diner starts early for me.",
+          "highlightKind": "hood",
+          "entity": "Fruitvale",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "A typical shift at Fruitvale Diner starts early for me."
+      },
+      {
+        "pop": "POP-01021",
+        "name": "Vanessa Tran-Muñoz",
+        "role": "OARI Program Director",
+        "hood": "Rockridge",
+        "profile": "Vanessa Tran-Muñoz — OARI Program Director",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "moMTRi39Lg3fbD9wwvnfm9",
+          "customId": "cp-POP-01021-c113-work",
+          "cycle": 113,
+          "excerpt": "Fruitvale numbers are in my head, not the report.",
+          "highlightKind": "hood",
+          "entity": "Fruitvale",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "Fruitvale numbers are in my head, not the report."
+      },
+      {
+        "pop": "POP-01029",
+        "name": "Miguel Allen",
+        "role": "Plumber",
+        "hood": "Fruitvale",
+        "profile": "Miguel Allen — Plumber",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "EtNmtTPhD3pAGgyEFUgp7n",
+          "customId": "cp-POP-01029-c103-CONVO",
+          "cycle": 103,
+          "excerpt": "Feels like Fruitvale’s getting a fresh breath, but I hope it doesn’t lose its roots, you know?",
+          "highlightKind": "hood",
+          "entity": "Fruitvale",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "Feels like Fruitvale’s getting a fresh breath, but I hope it doesn’t lose its roots, you know?"
+      },
+      {
+        "pop": "POP-01053",
+        "name": "Rosario Medina",
+        "role": "CBA Compliance Monitor, Fruitvale Transit Hub",
+        "hood": "Fruitvale",
+        "profile": "Rosario Medina — CBA Compliance Monitor, Fruitvale Transit Hub",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "FaUc8j3Y5kL9Hygjkgbe49",
+          "customId": "cp-POP-01053-c113-PRESS",
+          "cycle": 113,
+          "excerpt": "But the CBA work I do at Fruitvale is about the same thing: making sure the promises made when construction starts actually hold up for the people on the platform and the folks driving the trains.",
+          "highlightKind": "hood",
+          "entity": "Fruitvale",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "But the CBA work I do at Fruitvale is about the same thing: making sure the promises made when construction starts actually hold up for the people on the platform and the folks driving the trains."
+      },
+      {
+        "pop": "POP-01057",
+        "name": "Nina Reyes",
+        "role": "actress",
+        "hood": "Fruitvale",
+        "profile": "Nina Reyes — actress",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "YxQBDYQvAWLdeAf2Yhx3yt",
+          "customId": "cp-POP-01057-c111-PRESS",
+          "cycle": 111,
+          "excerpt": "I've just been focusing on my own life and things here in Fruitvale.",
+          "highlightKind": "hood",
+          "entity": "Fruitvale",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I've just been focusing on my own life and things here in Fruitvale."
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Maria Keen",
+    "popid": "POP-00013"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-neighborhood",
+      "angle": "Fruitvale — the programs that hold the block and the people who founded them",
+      "label": "Fruitvale: 3 active programs on the record",
+      "hookLine": "3 active programs in Fruitvale; Lucia Polito founded one.",
+      "hood": "Fruitvale",
+      "citizens": [
+        "Lucia Polito (POP-00004)"
+      ],
+      "popids": [
+        "POP-00004"
+      ],
+      "ref": "output/beats/Community_Programs.jsonl @C113",
+      "cycle": 113
+    },
+    "approach": "Neighborhood approach: this slice is one block's record — its community programs and their founders, who is moving in or out, who the block has in a hospital bed or in custody, what it paid on tax day, whose debts crossed the line, and the city's neighborhood hooks this cycle. First-person witness, one block one truth. The programs, founders, movement numbers, patients, defendants and money lines are real; the stoop conversations, the mailboxes, the dog everyone knows are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": {
+    "pulse": {
+      "className": "quiet-nightlife",
+      "score": 24,
+      "label": "Temple Lounge (Downtown) · quiet night",
+      "named": "Temple Lounge",
+      "hood": "Downtown",
+      "person": null,
+      "venue": null
+    },
+    "recommend": {
+      "bag": "lifestyle",
+      "slug": "sharon-okafor",
+      "name": "Sharon Okafor",
+      "popid": "POP-00159",
+      "bagDoc": "docs/media/SHARON_LIFESTYLE_BAG.md",
+      "reason": "top pulse quiet-nightlife → lifestyle",
+      "pulseClass": "quiet-nightlife",
+      "pulseLabel": "Temple Lounge (Downtown) · quiet night"
+    },
+    "prewrite": {
+      "pulseClass": "quiet-nightlife",
+      "angle": "Temple Lounge is open and quiet in Downtown. What that condition means is not yet established.",
+      "hookLine": "Temple Lounge is open and quiet in Downtown.",
+      "anchorFacts": [
+        "NAMED: Temple Lounge",
+        "HOOD: Downtown",
+        "VENUE: Temple Lounge",
+        "HOOD: Downtown",
+        "EVENING RECORD: open and quiet"
+      ],
+      "bagRecommend": "lifestyle",
+      "bagSlug": "sharon-okafor"
+    },
+    "texture": {
+      "famous": [
+        "Marisol Rivera",
+        "Claire Ashford",
+        "Deacon Seymour"
+      ],
+      "restaurants": [
+        {
+          "name": "Jack London Square Markets",
+          "hood": "Jack London"
+        },
+        {
+          "name": "Port Grind",
+          "hood": "Grand Lake"
+        },
+        {
+          "name": "Glenview Cafe",
+          "hood": "Glenview"
+        }
+      ],
+      "fastFood": [
+        {
+          "name": "SpeedyBurger",
+          "hood": "Downtown"
+        }
+      ],
+      "nightlife": [
+        {
+          "name": "Temple Lounge",
+          "hood": "Downtown"
+        }
+      ],
+      "nightlifeMeta": {
+        "volume": 2,
+        "vibe": "quiet",
+        "movement": "restricted",
+        "weatherImpact": 1
+      },
+      "cityEvents": [
+        "Jack London Cozy Nights Film Series",
+        "The Villanueva Family Block Party",
+        "Lake Merritt Lantern Parade"
+      ],
+      "tv": [
+        "Breaking Bulletin",
+        "Slow Evenings",
+        "A's Prospect Report",
+        "AJ Dybantsa (SF): In Focus"
+      ],
+      "movies": [
+        "Snowlight",
+        "Diamond City"
+      ],
+      "sportsBroadcast": "Oakland Sports Tonight",
+      "streamingTrend": "political commentary surge",
+      "foodTrend": "High mobility / civic-tension food trend"
+    },
+    "signals": {
+      "fameCount": 5,
+      "sightingCount": 3,
+      "sightings": [
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Marisol Rivera spotted at Mercado Fruitvale",
+          "name": "Marisol Rivera",
+          "venue": "Mercado Fruitvale",
+          "ref": "Ripple_Ledger cycle 113 (CauseType lifestyle-sighting); rendered: world_summary_c113.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Fruitvale",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Claire Ashford spotted at Midnight Norae Karaoke",
+          "name": "Claire Ashford",
+          "venue": "Midnight Norae Karaoke",
+          "ref": "Ripple_Ledger cycle 113 (CauseType lifestyle-sighting); rendered: world_summary_c113.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "KONO",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Deacon Seymour spotted at Lakeshore Cigar Club",
+          "name": "Deacon Seymour",
+          "venue": "Lakeshore Cigar Club",
+          "ref": "Ripple_Ledger cycle 113 (CauseType lifestyle-sighting); rendered: world_summary_c113.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Lake Merritt",
+          "popids": []
+        }
+      ]
+    },
+    "scene": {
+      "venues": [
+        {
+          "name": "Jack London Square Markets",
+          "hood": "Jack London"
+        },
+        {
+          "name": "Port Grind",
+          "hood": "Grand Lake"
+        },
+        {
+          "name": "Glenview Cafe",
+          "hood": "Glenview"
+        },
+        {
+          "name": "SpeedyBurger",
+          "hood": "Downtown"
+        },
+        {
+          "name": "Temple Lounge",
+          "hood": "Downtown"
+        }
+      ],
+      "nightlifeMeta": {
+        "volume": 2,
+        "vibe": "quiet",
+        "movement": "restricted",
+        "weatherImpact": 1
+      },
+      "cityEvents": [
+        "Jack London Cozy Nights Film Series",
+        "The Villanueva Family Block Party",
+        "Lake Merritt Lantern Parade"
+      ],
+      "tv": [
+        "Breaking Bulletin",
+        "Slow Evenings",
+        "A's Prospect Report",
+        "AJ Dybantsa (SF): In Focus"
+      ],
+      "movies": [
+        "Snowlight",
+        "Diamond City"
+      ],
+      "colorRoom": "Named places only from Evening Texture / desk_signal. The supplied evening record describes nightlife as quiet; raw scoring fields stay internal.  Sensory room (weather, light, sound) is free; careers and employees are not."
+    },
+    "candidates": [
+      {
+        "className": "quiet-nightlife",
+        "score": 24,
+        "label": "Temple Lounge (Downtown) · quiet night",
+        "named": "Temple Lounge",
+        "hood": "Downtown"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Marisol Rivera at Mercado Fruitvale (Fruitvale)",
+        "named": "Mercado Fruitvale",
+        "hood": "Fruitvale"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Claire Ashford at Midnight Norae Karaoke (KONO)",
+        "named": "Midnight Norae Karaoke",
+        "hood": "KONO"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Deacon Seymour at Lakeshore Cigar Club (Lake Merritt)",
+        "named": "Lakeshore Cigar Club",
+        "hood": "Lake Merritt"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Jack London Square Markets (Jack London)",
+        "named": "Jack London Square Markets",
+        "hood": "Jack London"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Port Grind (Grand Lake)",
+        "named": "Port Grind",
+        "hood": "Grand Lake"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Glenview Cafe (Glenview)",
+        "named": "Glenview Cafe",
+        "hood": "Glenview"
+      },
+      {
+        "className": "city-event",
+        "score": 17,
+        "label": "Jack London Cozy Nights Film Series",
+        "named": "Jack London Cozy Nights Film Series",
+        "hood": null
+      }
+    ],
+    "perSeat": {
+      "mason-ortega": {
+        "pulseClass": "named-restaurant",
+        "label": "Jack London Square Markets (Jack London)",
+        "score": 34,
+        "bag": "kitchen"
+      },
+      "kai-marston": {
+        "pulseClass": "quiet-nightlife",
+        "label": "Temple Lounge (Downtown) · quiet night",
+        "score": 32,
+        "bag": "arts"
+      },
+      "sharon-okafor": {
+        "pulseClass": "quiet-nightlife",
+        "label": "Temple Lounge (Downtown) · quiet night",
+        "score": 32,
+        "bag": "lifestyle"
+      },
+      "maria-keen": {
+        "pulseClass": "quiet-nightlife",
+        "label": "Temple Lounge (Downtown) · quiet night",
+        "score": 32,
+        "bag": "ground"
+      },
+      "elliot-graye": {
+        "pulseClass": "quiet-nightlife",
+        "label": "Temple Lounge (Downtown) · quiet night",
+        "score": 36,
+        "bag": "faith"
+      }
+    }
+  },
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "HOOD-SLICE-3",
+    "kind": "beat-neighborhood",
+    "seat": {
+      "slug": "maria-keen",
+      "name": "Maria Keen",
+      "popid": "POP-00013",
+      "desk": "culture",
+      "domain": "neighborhood",
+      "builder": "buildNeighborhoodSlice.js"
+    },
+    "hood": "Fruitvale",
+    "pulse": {
+      "className": "beat-neighborhood",
+      "score": 100,
+      "label": "Fruitvale: 3 active programs on the record",
+      "hood": "Fruitvale",
+      "source": "output/beats/Community_Programs.jsonl @C113"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "Fruitvale — the programs that hold the block and the people who founded them",
+      "hookLine": "3 active programs in Fruitvale; Lucia Polito founded one.",
+      "anchorFacts": [
+        "Fruitvale Summer Speed Series (youth-sports), Fruitvale, since C101",
+        "Fruitvale Transit Corridor Mutual Aid (mutual-aid), Fruitvale, since C101",
+        "Postpartum Oakland Network (health), Fruitvale — founded by Lucia Polito, since C101",
+        "Fruitvale this cycle: 423 students, 1,559 adults, 351 seniors — moved vs C112: +2 students, +7 adults, +1 seniors",
+        "Fruitvale: 6 charges → 1 arrest → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+        "Fruitvale: 114 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked"
+      ],
+      "evidence": [
+        {
+          "text": "Fruitvale Summer Speed Series (youth-sports), Fruitvale, since C101",
+          "src": "output/beats/Community_Programs.jsonl @C113 PRG-004"
+        },
+        {
+          "text": "Fruitvale Transit Corridor Mutual Aid (mutual-aid), Fruitvale, since C101",
+          "src": "output/beats/Community_Programs.jsonl @C113 PRG-010"
+        },
+        {
+          "text": "Postpartum Oakland Network (health), Fruitvale — founded by Lucia Polito, since C101",
+          "src": "output/beats/Community_Programs.jsonl @C113 PRG-016"
+        },
+        {
+          "text": "Fruitvale this cycle: 423 students, 1,559 adults, 351 seniors — moved vs C112: +2 students, +7 adults, +1 seniors",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C113 vs prev/"
+        },
+        {
+          "text": "Fruitvale: 6 charges → 1 arrest → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl @C113 judicial Fruitvale"
+        },
+        {
+          "text": "Fruitvale: 114 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl @C113 hospital Fruitvale"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": {
+        "state": "PRIOR_CYCLE_ON_DISK",
+        "vs": 112
+      },
+      "hooks": [
+        {
+          "text": "Household in Lake Merritt spending 53% of income on housing",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Lake Merritt",
+          "priority": 6
+        },
+        {
+          "text": "the bad week cost more than the savings could hold — borrowed to cover it",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Temescal",
+          "priority": 3
+        },
+        {
+          "text": "the debts crossed a line this week — sleep comes harder now",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "West Oakland",
+          "priority": 3
+        },
+        {
+          "text": "A family bought their home in Chinatown",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Chinatown",
+          "priority": 3
+        },
+        {
+          "text": "The Varek line reached Prominent",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": null,
+          "priority": 4
+        },
+        {
+          "text": "Downtown boom sustained — momentum 10/10, the block everyone wants onto",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Downtown",
+          "priority": 7
+        },
+        {
+          "text": "Fruitvale boom sustained — momentum 10/10, the block everyone wants onto",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Fruitvale",
+          "priority": 7
+        },
+        {
+          "text": "Grand Lake boom sustained — momentum 10/10, the block everyone wants onto",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Grand Lake",
+          "priority": 7
+        }
+      ],
+      "note": null,
+      "pageVoices": [],
+      "roomIsYours": "the stoop, the corner store counter, who moved in last month and who is thinking about leaving, what the block argues about"
+    },
+    "citizens": [
+      {
+        "popid": "POP-00004",
+        "name": "Lucia Polito",
+        "role": "Aura Wellness Practitioner",
+        "neighborhood": "Fruitvale",
+        "business": null,
+        "profile": "Lucia Polito — Aura Wellness Practitioner — Fruitvale",
+        "why": "founded Postpartum Oakland Network (Community_Programs)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Community_Programs.jsonl @C113",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Maria Keen this cycle)",
+      "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Maria Keen",
+    "popid": "POP-00013",
+    "text": "I'm heading to Fruitvale to get a closer look at the community programs and the people behind them. I want to understand what's working and what's not, and how the neighborhood is changing. I'll start by talking to Lucia Polito, the founder of Postpartum Oakland Network, and see if I can catch up with some of the other folks mentioned in the neighborhood.",
+    "plan": {
+      "chase": "I'm heading to Fruitvale to get a closer look at the community programs and the people behind them. I want to understand what's working and what's not, and how the neighborhood is changing. I'll start by talking to Lucia Polito, the founder of Postpartum Oakland Network, and see if I can catch up with some of the other folks mentioned in the neighborhood.",
+      "focus": "Fruitvale community programs and their impact",
+      "why": "The assignment is to cover Fruitvale's community programs and their founders, and I'm drawn to the story of Lucia Polito and Postpartum Oakland Network.",
+      "checks": [
+        "Verify Lucia Polito's role in Postpartum Oakland Network",
+        "Get more information on the other community programs in Fruitvale"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00004",
+          "question": "What's the current state of Postpartum Oakland Network and how is it affecting the community?",
+          "basis": "Lucia Polito is the founder of Postpartum Oakland Network, a health program in Fruitvale"
+        },
+        {
+          "pop": "POP-00198",
+          "question": "How do the community programs in Fruitvale impact the local education system?",
+          "basis": "Rick Walker is a K-8 Teacher in Fruitvale and mentioned the efforts of teachers in the area"
+        }
+      ],
+      "interpretation": "The community programs in Fruitvale are a vital part of the neighborhood's fabric, and understanding their role and impact is crucial to telling the story of the area.",
+      "unverifiedLead": [
+        "Potential changes in the neighborhood demographics and how they might affect the community programs",
+        "The role of other community programs in Fruitvale, such as Fruitvale Summer Speed Series and Fruitvale Transit Corridor Mutual Aid"
+      ],
+      "closeQuestion": "How do the community programs in Fruitvale intersect with the neighborhood's changing demographics and economic conditions?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Chinatown | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Chinatown",
+      "ref": "output/neighborhood_texture_c113.md \"### Chinatown\"; events: world_summary_c113.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Downtown | 2 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Downtown",
+      "ref": "output/neighborhood_texture_c113.md \"### Downtown\"; events: world_summary_c113.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Fruitvale | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Fruitvale",
+      "ref": "output/neighborhood_texture_c113.md \"### Fruitvale\"; events: world_summary_c113.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Jack London | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Jack London",
+      "ref": "output/neighborhood_texture_c113.md \"### Jack London\"; events: world_summary_c113.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Lake Merritt | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Lake Merritt",
+      "ref": "output/neighborhood_texture_c113.md \"### Lake Merritt\"; events: world_summary_c113.md \"## World Events\"",
+      "popids": []
+    }
+  ],
+  "laneEntries": 23,
+  "angleCapHits": 0,
+  "ranAt": "2026-10-30T11:17:28.947Z"
+}

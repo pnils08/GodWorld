@@ -1,0 +1,1127 @@
+{
+  "stage": "report",
+  "desk": "culture",
+  "cycle": "112",
+  "persona": "elliot-graye",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Elliot Graye",
+    "popid": "POP-00012"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-faith",
+      "angle": "crisis response at Bay Pure Land Buddhist Temple (Chinatown) — the week in faith, and Telegraph Presbyterian Fellowship in focus",
+      "label": "8 faith events on the record since C106 · Telegraph Presbyterian Fellowship in Downtown | 7 named on the record",
+      "hookLine": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+      "hood": "Downtown",
+      "citizens": [
+        "Eunice Marston (POP-00753)",
+        "Amir Delia (POP-00603)",
+        "Imie Calero (POP-00335)",
+        "Kenji Tanaka (POP-00763)",
+        "Antoine Vermeer (POP-00755)",
+        "Ramon Solano (POP-00756)",
+        "Priya Nair (POP-00531)"
+      ],
+      "popids": [
+        "POP-00753",
+        "POP-00603",
+        "POP-00335",
+        "POP-00763",
+        "POP-00755",
+        "POP-00756",
+        "POP-00531"
+      ],
+      "ref": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\"",
+      "cycle": 112
+    }
+  },
+  "angle": "output/cron-compare/culture_c112_elliot-graye_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 3,
+  "quotes": [
+    {
+      "pop": "POP-00753",
+      "name": "Eunice Marston",
+      "quote": "As a faith leader, I believe our congregation's role in the community during times of crisis is to offer support and be present for those affected. We've seen this in action at Telegraph Presbyterian Fellowship, where we've opened our doors to provide a sense of community and comfort. I think it's essential for faith organizations to be available and welcoming, just as we've observed other faith communities doing in our area.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"As a faith leader, I believe our congregation's role in the community during times of crisis is to offer support and be present for those affected. We've seen this in action at Telegraph Presbyterian Fellowship, where we've opened our doors to provide a sense of community and comfort. I think it's essential for faith organizations to be available and welcoming, just as we've observed other faith communities doing in our area.\",\n  \"fact_ids\": [\"F-7d24d6975c0b\", \"F-4c266c9b8831\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-7d24d6975c0b",
+          "F-4c266c9b8831"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00753-156668b246",
+        "authoredQuote": true,
+        "publishableQuote": "As a faith leader, I believe our congregation's role in the community during times of crisis is to offer support and be present for those affected. We've seen this in action at Telegraph Presbyterian Fellowship, where we've opened our doors to provide a sense of community and comfort. I think it's essential for faith organizations to be available and welcoming, just as we've observed other faith communities doing in our area."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00753",
+          "name": "Eunice Marston",
+          "role": "Senior Pastor / Faith Leader",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Elliot Graye",
+          "question": "How does Rev. Eunice Marston see the congregation's role in the community during times of crisis? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-faith",
+          "hood": "Downtown",
+          "focus": "Telegraph Presbyterian Fellowship",
+          "src": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\""
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Eunice Marston — Senior Pastor / Faith Leader — Downtown",
+          "evidence": [
+            {
+              "id": "EV-4a820d4d1f",
+              "src": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\"",
+              "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "8 faith events on the record since C106 · Telegraph Presbyterian Fellowship in Downtown | 7 named on the record",
+            "src": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-38953bd46583"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+            "src": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-4c266c9b8831"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\"",
+            "id": "F-61024524d215"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+            "src": "output/beats/Faith_Ledger.jsonl C107 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-7d24d6975c0b"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-c6268244f8ea"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Cathedral of the Living Word\"",
+            "id": "F-2e38ae74adc2"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C108 — holy day: traditional Epiphany rituals observed (attendance 1,077)",
+            "src": "output/beats/Faith_Ledger.jsonl C108 \"Cathedral of the Living Word\"",
+            "id": "F-53d1f53fb120"
+          },
+          {
+            "t": "FACT",
+            "text": "Eunice Marston — Senior Pastor / Faith Leader — Downtown",
+            "src": "Simulation_Ledger profile for POP-00753",
+            "id": "F-29275625963c"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00603",
+      "name": "Amir Delia",
+      "quote": "I saw a choir performance at Telegraph Presbyterian Fellowship when I walked by the other day. It was nice to see people gathered like that.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I saw a choir performance at Telegraph Presbyterian Fellowship when I walked by the other day. It was nice to see people gathered like that.\",\n  \"fact_ids\": [\"F-38953bd46583\", \"F-e1b3ec10251b\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-38953bd46583",
+          "F-e1b3ec10251b"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00603-da8d620d13",
+        "authoredQuote": true,
+        "publishableQuote": "I saw a choir performance at Telegraph Presbyterian Fellowship when I walked by the other day. It was nice to see people gathered like that."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00603",
+          "name": "Amir Delia",
+          "role": "Home Health Aide",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Elliot Graye",
+          "question": "As a resident of Downtown, what have you seen, felt, or understood about \"Telegraph Presbyterian Fellowship\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-faith",
+          "hood": "Downtown",
+          "focus": "Telegraph Presbyterian Fellowship",
+          "src": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\""
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Amir Delia — Home Health Aide — Downtown",
+          "evidence": [
+            {
+              "id": "EV-c94ee86540",
+              "src": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\"",
+              "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "8 faith events on the record since C106 · Telegraph Presbyterian Fellowship in Downtown | 7 named on the record",
+            "src": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-38953bd46583"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+            "src": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-4c266c9b8831"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\"",
+            "id": "F-61024524d215"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+            "src": "output/beats/Faith_Ledger.jsonl C107 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-7d24d6975c0b"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-c6268244f8ea"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Cathedral of the Living Word\"",
+            "id": "F-2e38ae74adc2"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C108 — holy day: traditional Epiphany rituals observed (attendance 1,077)",
+            "src": "output/beats/Faith_Ledger.jsonl C108 \"Cathedral of the Living Word\"",
+            "id": "F-53d1f53fb120"
+          },
+          {
+            "t": "FACT",
+            "text": "Amir Delia — Home Health Aide — Downtown",
+            "src": "Simulation_Ledger profile for POP-00603",
+            "id": "F-e1b3ec10251b"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00335",
+      "name": "Imie Calero",
+      "quote": "I've seen Telegraph Presbyterian Fellowship hosting events in our neighborhood, like a choir performance that drew a small crowd. It's great to see community activities happening around here.",
+      "disp": "driven, hard to sit still; close to family; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen Telegraph Presbyterian Fellowship hosting events in our neighborhood, like a choir performance that drew a small crowd. It's great to see community activities happening around here.\",\n  \"fact_ids\": [\"F-38953bd46583\", \"F-7d24d6975c0b\", \"F-c6268244f8ea\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-38953bd46583",
+          "F-7d24d6975c0b",
+          "F-c6268244f8ea"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00335-091e0ad8fa",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen Telegraph Presbyterian Fellowship hosting events in our neighborhood, like a choir performance that drew a small crowd. It's great to see community activities happening around here."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00335",
+          "name": "Imie Calero",
+          "role": "Civil Rights Attorney",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Elliot Graye",
+          "question": "As a resident of Downtown, what have you seen, felt, or understood about \"Telegraph Presbyterian Fellowship\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-faith",
+          "hood": "Downtown",
+          "focus": "Telegraph Presbyterian Fellowship",
+          "src": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\""
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Imie Calero — Civil Rights Attorney — Downtown",
+          "evidence": [
+            {
+              "id": "EV-f5eb2daac1",
+              "src": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\"",
+              "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "8 faith events on the record since C106 · Telegraph Presbyterian Fellowship in Downtown | 7 named on the record",
+            "src": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-38953bd46583"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+            "src": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-4c266c9b8831"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\"",
+            "id": "F-61024524d215"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+            "src": "output/beats/Faith_Ledger.jsonl C107 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-7d24d6975c0b"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-c6268244f8ea"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Cathedral of the Living Word\"",
+            "id": "F-2e38ae74adc2"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C108 — holy day: traditional Epiphany rituals observed (attendance 1,077)",
+            "src": "output/beats/Faith_Ledger.jsonl C108 \"Cathedral of the Living Word\"",
+            "id": "F-53d1f53fb120"
+          },
+          {
+            "t": "FACT",
+            "text": "Imie Calero — Civil Rights Attorney — Downtown",
+            "src": "Simulation_Ledger profile for POP-00335",
+            "id": "F-4e72371dc84b"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-00753",
+      "name": "Eunice Marston",
+      "quote": "As a faith leader, I believe our congregation's role in the community during times of crisis is to offer support and be present for those affected. We've seen this in action at Telegraph Presbyterian Fellowship, where we've opened our doors to provide a sense of community and comfort. I think it's essential for faith organizations to be available and welcoming, just as we've observed other faith communities doing in our area.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"As a faith leader, I believe our congregation's role in the community during times of crisis is to offer support and be present for those affected. We've seen this in action at Telegraph Presbyterian Fellowship, where we've opened our doors to provide a sense of community and comfort. I think it's essential for faith organizations to be available and welcoming, just as we've observed other faith communities doing in our area.\",\n  \"fact_ids\": [\"F-7d24d6975c0b\", \"F-4c266c9b8831\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-7d24d6975c0b",
+          "F-4c266c9b8831"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00753-156668b246",
+        "authoredQuote": true,
+        "publishableQuote": "As a faith leader, I believe our congregation's role in the community during times of crisis is to offer support and be present for those affected. We've seen this in action at Telegraph Presbyterian Fellowship, where we've opened our doors to provide a sense of community and comfort. I think it's essential for faith organizations to be available and welcoming, just as we've observed other faith communities doing in our area."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00753",
+          "name": "Eunice Marston",
+          "role": "Senior Pastor / Faith Leader",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Elliot Graye",
+          "question": "How does Rev. Eunice Marston see the congregation's role in the community during times of crisis? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-faith",
+          "hood": "Downtown",
+          "focus": "Telegraph Presbyterian Fellowship",
+          "src": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\""
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Eunice Marston — Senior Pastor / Faith Leader — Downtown",
+          "evidence": [
+            {
+              "id": "EV-4a820d4d1f",
+              "src": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\"",
+              "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "8 faith events on the record since C106 · Telegraph Presbyterian Fellowship in Downtown | 7 named on the record",
+            "src": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-38953bd46583"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+            "src": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-4c266c9b8831"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\"",
+            "id": "F-61024524d215"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+            "src": "output/beats/Faith_Ledger.jsonl C107 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-7d24d6975c0b"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-c6268244f8ea"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Cathedral of the Living Word\"",
+            "id": "F-2e38ae74adc2"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C108 — holy day: traditional Epiphany rituals observed (attendance 1,077)",
+            "src": "output/beats/Faith_Ledger.jsonl C108 \"Cathedral of the Living Word\"",
+            "id": "F-53d1f53fb120"
+          },
+          {
+            "t": "FACT",
+            "text": "Eunice Marston — Senior Pastor / Faith Leader — Downtown",
+            "src": "Simulation_Ledger profile for POP-00753",
+            "id": "F-29275625963c"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00531",
+      "name": "Priya Nair",
+      "quote": null,
+      "disp": "even-keeled, unremarkable",
+      "recorded": false,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"abstain\",\n  \"quote\": null,\n  \"fact_ids\": [],\n  \"basis\": null,\n  \"unverifiedLead\": null,\n  \"abstain_reason\": \"no_lived_basis\"\n}\n```",
+      "claims": {
+        "answer": "abstain",
+        "factIds": [],
+        "basis": null,
+        "unverifiedLead": [],
+        "abstainReason": "no_lived_basis",
+        "quoteId": null,
+        "authoredQuote": false,
+        "publishableQuote": null
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00531",
+          "name": "Priya Nair",
+          "role": "Climate Adaptation Engineer",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Elliot Graye",
+          "question": "What is Priya Nair's perspective on the collaboration between NeuroCity Youth Lab and Telegraph Presbyterian Fellowship? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-faith",
+          "hood": "Downtown",
+          "focus": "Telegraph Presbyterian Fellowship",
+          "src": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\""
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Priya Nair — Climate Adaptation Engineer — Downtown",
+          "evidence": [
+            {
+              "id": "EV-e0c3a11bde",
+              "src": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\"",
+              "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "8 faith events on the record since C106 · Telegraph Presbyterian Fellowship in Downtown | 7 named on the record",
+            "src": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-38953bd46583"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+            "src": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-4c266c9b8831"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\"",
+            "id": "F-61024524d215"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+            "src": "output/beats/Faith_Ledger.jsonl C107 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-7d24d6975c0b"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-c6268244f8ea"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Cathedral of the Living Word\"",
+            "id": "F-2e38ae74adc2"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C108 — holy day: traditional Epiphany rituals observed (attendance 1,077)",
+            "src": "output/beats/Faith_Ledger.jsonl C108 \"Cathedral of the Living Word\"",
+            "id": "F-53d1f53fb120"
+          },
+          {
+            "t": "FACT",
+            "text": "Priya Nair — Climate Adaptation Engineer — Downtown",
+            "src": "Simulation_Ledger profile for POP-00531",
+            "id": "F-c3f078580ae4"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00603",
+      "name": "Amir Delia",
+      "quote": "I saw a choir performance at Telegraph Presbyterian Fellowship when I walked by the other day. It was nice to see people gathered like that.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I saw a choir performance at Telegraph Presbyterian Fellowship when I walked by the other day. It was nice to see people gathered like that.\",\n  \"fact_ids\": [\"F-38953bd46583\", \"F-e1b3ec10251b\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-38953bd46583",
+          "F-e1b3ec10251b"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00603-da8d620d13",
+        "authoredQuote": true,
+        "publishableQuote": "I saw a choir performance at Telegraph Presbyterian Fellowship when I walked by the other day. It was nice to see people gathered like that."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00603",
+          "name": "Amir Delia",
+          "role": "Home Health Aide",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Elliot Graye",
+          "question": "As a resident of Downtown, what have you seen, felt, or understood about \"Telegraph Presbyterian Fellowship\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-faith",
+          "hood": "Downtown",
+          "focus": "Telegraph Presbyterian Fellowship",
+          "src": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\""
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Amir Delia — Home Health Aide — Downtown",
+          "evidence": [
+            {
+              "id": "EV-c94ee86540",
+              "src": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\"",
+              "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "8 faith events on the record since C106 · Telegraph Presbyterian Fellowship in Downtown | 7 named on the record",
+            "src": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-38953bd46583"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+            "src": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-4c266c9b8831"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\"",
+            "id": "F-61024524d215"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+            "src": "output/beats/Faith_Ledger.jsonl C107 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-7d24d6975c0b"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-c6268244f8ea"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Cathedral of the Living Word\"",
+            "id": "F-2e38ae74adc2"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C108 — holy day: traditional Epiphany rituals observed (attendance 1,077)",
+            "src": "output/beats/Faith_Ledger.jsonl C108 \"Cathedral of the Living Word\"",
+            "id": "F-53d1f53fb120"
+          },
+          {
+            "t": "FACT",
+            "text": "Amir Delia — Home Health Aide — Downtown",
+            "src": "Simulation_Ledger profile for POP-00603",
+            "id": "F-e1b3ec10251b"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00335",
+      "name": "Imie Calero",
+      "quote": "I've seen Telegraph Presbyterian Fellowship hosting events in our neighborhood, like a choir performance that drew a small crowd. It's great to see community activities happening around here.",
+      "disp": "driven, hard to sit still; close to family; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen Telegraph Presbyterian Fellowship hosting events in our neighborhood, like a choir performance that drew a small crowd. It's great to see community activities happening around here.\",\n  \"fact_ids\": [\"F-38953bd46583\", \"F-7d24d6975c0b\", \"F-c6268244f8ea\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-38953bd46583",
+          "F-7d24d6975c0b",
+          "F-c6268244f8ea"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00335-091e0ad8fa",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen Telegraph Presbyterian Fellowship hosting events in our neighborhood, like a choir performance that drew a small crowd. It's great to see community activities happening around here."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00335",
+          "name": "Imie Calero",
+          "role": "Civil Rights Attorney",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Elliot Graye",
+          "question": "As a resident of Downtown, what have you seen, felt, or understood about \"Telegraph Presbyterian Fellowship\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-faith",
+          "hood": "Downtown",
+          "focus": "Telegraph Presbyterian Fellowship",
+          "src": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\""
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Imie Calero — Civil Rights Attorney — Downtown",
+          "evidence": [
+            {
+              "id": "EV-f5eb2daac1",
+              "src": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\"",
+              "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "8 faith events on the record since C106 · Telegraph Presbyterian Fellowship in Downtown | 7 named on the record",
+            "src": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-38953bd46583"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+            "src": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-4c266c9b8831"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\"",
+            "id": "F-61024524d215"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+            "src": "output/beats/Faith_Ledger.jsonl C107 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-7d24d6975c0b"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-c6268244f8ea"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Cathedral of the Living Word\"",
+            "id": "F-2e38ae74adc2"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C108 — holy day: traditional Epiphany rituals observed (attendance 1,077)",
+            "src": "output/beats/Faith_Ledger.jsonl C108 \"Cathedral of the Living Word\"",
+            "id": "F-53d1f53fb120"
+          },
+          {
+            "t": "FACT",
+            "text": "Imie Calero — Civil Rights Attorney — Downtown",
+            "src": "Simulation_Ledger profile for POP-00335",
+            "id": "F-4e72371dc84b"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-10-22T18:15:51.684Z"
+}

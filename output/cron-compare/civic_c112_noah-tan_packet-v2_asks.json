@@ -1,0 +1,570 @@
+[
+  {
+    "pop": "POP-00142",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00142\",\"name\":\"Jonas Patel\",\"role\":\"MEDICAL EXAMINER\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Noah Tan\",\"question\":\"What does a clear day change for someone who spent the cold weeks managing a seasonal health concern — and what does it not change? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-weather\",\"hood\":null,\"focus\":\"How the first clear stretch after a gray week changes — or fails to change — the daily patterns of four residents who each weathered the cold differently.\",\"src\":\"output/beats/Cycle_Weather.jsonl CycleID 112\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Jonas Patel — MEDICAL EXAMINER — Chinatown\",\"evidence\":[{\"id\":\"EV-c57c59b91e\",\"src\":\"output/beats/Cycle_Weather.jsonl CycleID 112\",\"text\":\"C112 clear, 48°F — 2 cycles of clear; 4 residents on the record lived it.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C112\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-7cd6ffd2aeb3\"},{\"t\":\"FACT\",\"text\":\"C112 clear, 48°F — 2 cycles of clear\",\"src\":\"output/beats/Cycle_Weather.jsonl CycleID 112\",\"id\":\"F-b34b4f2d6356\"},{\"t\":\"FACT\",\"text\":\"C112 clear, 48°F — 2 cycles of clear; 4 residents on the record lived it.\",\"src\":\"output/beats/Cycle_Weather.jsonl CycleID 112\",\"id\":\"F-404e2e2c1b89\"},{\"t\":\"FACT\",\"text\":\"This cycle: clear, 48°F, impact 1, comfort 0.65, mood content, 2 cycles of clear\",\"src\":\"output/beats/Cycle_Weather.jsonl CycleID 112\",\"id\":\"F-84fc6d6fee27\"},{\"t\":\"FACT\",\"text\":\"Last 3 cycles: C109 overcast 49°F, C110 fog 52°F, C111 mild 57°F\",\"src\":\"output/beats/Cycle_Weather.jsonl\",\"id\":\"F-f385ee178ae7\"},{\"t\":\"FACT\",\"text\":\"Jonas Patel — dealt with a seasonal health concern\",\"src\":\"output/world_summary_c112.md ## Who Lived It\",\"id\":\"F-d8444195813e\"},{\"t\":\"FACT\",\"text\":\"Xavier Ramington — relied on familiar social circles during cold period\",\"src\":\"output/world_summary_c112.md ## Who Lived It\",\"id\":\"F-b087e6d932d4\"},{\"t\":\"FACT\",\"text\":\"Derlik Green — relied on familiar social circles during cold period\",\"src\":\"output/world_summary_c112.md ## Who Lived It\",\"id\":\"F-b7f76d035d0b\"},{\"t\":\"FACT\",\"text\":\"Jonas Patel — MEDICAL EXAMINER — Chinatown\",\"src\":\"Simulation_Ledger profile for POP-00142\",\"id\":\"F-2d4a208a30df\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00142",
+        "name": "Jonas Patel",
+        "role": "MEDICAL EXAMINER",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Noah Tan",
+        "question": "What does a clear day change for someone who spent the cold weeks managing a seasonal health concern — and what does it not change? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-weather",
+        "hood": null,
+        "focus": "How the first clear stretch after a gray week changes — or fails to change — the daily patterns of four residents who each weathered the cold differently.",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 112"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Jonas Patel — MEDICAL EXAMINER — Chinatown",
+        "evidence": [
+          {
+            "id": "EV-c57c59b91e",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 112",
+            "text": "C112 clear, 48°F — 2 cycles of clear; 4 residents on the record lived it."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C112",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-7cd6ffd2aeb3"
+        },
+        {
+          "t": "FACT",
+          "text": "C112 clear, 48°F — 2 cycles of clear",
+          "src": "output/beats/Cycle_Weather.jsonl CycleID 112",
+          "id": "F-b34b4f2d6356"
+        },
+        {
+          "t": "FACT",
+          "text": "C112 clear, 48°F — 2 cycles of clear; 4 residents on the record lived it.",
+          "src": "output/beats/Cycle_Weather.jsonl CycleID 112",
+          "id": "F-404e2e2c1b89"
+        },
+        {
+          "t": "FACT",
+          "text": "This cycle: clear, 48°F, impact 1, comfort 0.65, mood content, 2 cycles of clear",
+          "src": "output/beats/Cycle_Weather.jsonl CycleID 112",
+          "id": "F-84fc6d6fee27"
+        },
+        {
+          "t": "FACT",
+          "text": "Last 3 cycles: C109 overcast 49°F, C110 fog 52°F, C111 mild 57°F",
+          "src": "output/beats/Cycle_Weather.jsonl",
+          "id": "F-f385ee178ae7"
+        },
+        {
+          "t": "FACT",
+          "text": "Jonas Patel — dealt with a seasonal health concern",
+          "src": "output/world_summary_c112.md ## Who Lived It",
+          "id": "F-d8444195813e"
+        },
+        {
+          "t": "FACT",
+          "text": "Xavier Ramington — relied on familiar social circles during cold period",
+          "src": "output/world_summary_c112.md ## Who Lived It",
+          "id": "F-b087e6d932d4"
+        },
+        {
+          "t": "FACT",
+          "text": "Derlik Green — relied on familiar social circles during cold period",
+          "src": "output/world_summary_c112.md ## Who Lived It",
+          "id": "F-b7f76d035d0b"
+        },
+        {
+          "t": "FACT",
+          "text": "Jonas Patel — MEDICAL EXAMINER — Chinatown",
+          "src": "Simulation_Ledger profile for POP-00142",
+          "id": "F-2d4a208a30df"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00181",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00181\",\"name\":\"Xavier Ramington\",\"role\":\"Herbalist\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Noah Tan\",\"question\":\"How does relying on familiar social circles during the cold period shape what this clear day means — is it a relief, or just another day in the same rhythm? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-weather\",\"hood\":null,\"focus\":\"How the first clear stretch after a gray week changes — or fails to change — the daily patterns of four residents who each weathered the cold differently.\",\"src\":\"output/beats/Cycle_Weather.jsonl CycleID 112\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Xavier Ramington — Herbalist — Temescal\",\"evidence\":[{\"id\":\"EV-083cf04b7c\",\"src\":\"output/beats/Cycle_Weather.jsonl CycleID 112\",\"text\":\"C112 clear, 48°F — 2 cycles of clear; 4 residents on the record lived it.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C112\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-7cd6ffd2aeb3\"},{\"t\":\"FACT\",\"text\":\"C112 clear, 48°F — 2 cycles of clear\",\"src\":\"output/beats/Cycle_Weather.jsonl CycleID 112\",\"id\":\"F-b34b4f2d6356\"},{\"t\":\"FACT\",\"text\":\"C112 clear, 48°F — 2 cycles of clear; 4 residents on the record lived it.\",\"src\":\"output/beats/Cycle_Weather.jsonl CycleID 112\",\"id\":\"F-404e2e2c1b89\"},{\"t\":\"FACT\",\"text\":\"This cycle: clear, 48°F, impact 1, comfort 0.65, mood content, 2 cycles of clear\",\"src\":\"output/beats/Cycle_Weather.jsonl CycleID 112\",\"id\":\"F-84fc6d6fee27\"},{\"t\":\"FACT\",\"text\":\"Last 3 cycles: C109 overcast 49°F, C110 fog 52°F, C111 mild 57°F\",\"src\":\"output/beats/Cycle_Weather.jsonl\",\"id\":\"F-f385ee178ae7\"},{\"t\":\"FACT\",\"text\":\"Jonas Patel — dealt with a seasonal health concern\",\"src\":\"output/world_summary_c112.md ## Who Lived It\",\"id\":\"F-d8444195813e\"},{\"t\":\"FACT\",\"text\":\"Xavier Ramington — relied on familiar social circles during cold period\",\"src\":\"output/world_summary_c112.md ## Who Lived It\",\"id\":\"F-b087e6d932d4\"},{\"t\":\"FACT\",\"text\":\"Derlik Green — relied on familiar social circles during cold period\",\"src\":\"output/world_summary_c112.md ## Who Lived It\",\"id\":\"F-b7f76d035d0b\"},{\"t\":\"FACT\",\"text\":\"Xavier Ramington — Herbalist — Temescal\",\"src\":\"Simulation_Ledger profile for POP-00181\",\"id\":\"F-80a7137d3953\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00181",
+        "name": "Xavier Ramington",
+        "role": "Herbalist",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Noah Tan",
+        "question": "How does relying on familiar social circles during the cold period shape what this clear day means — is it a relief, or just another day in the same rhythm? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-weather",
+        "hood": null,
+        "focus": "How the first clear stretch after a gray week changes — or fails to change — the daily patterns of four residents who each weathered the cold differently.",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 112"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Xavier Ramington — Herbalist — Temescal",
+        "evidence": [
+          {
+            "id": "EV-083cf04b7c",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 112",
+            "text": "C112 clear, 48°F — 2 cycles of clear; 4 residents on the record lived it."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C112",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-7cd6ffd2aeb3"
+        },
+        {
+          "t": "FACT",
+          "text": "C112 clear, 48°F — 2 cycles of clear",
+          "src": "output/beats/Cycle_Weather.jsonl CycleID 112",
+          "id": "F-b34b4f2d6356"
+        },
+        {
+          "t": "FACT",
+          "text": "C112 clear, 48°F — 2 cycles of clear; 4 residents on the record lived it.",
+          "src": "output/beats/Cycle_Weather.jsonl CycleID 112",
+          "id": "F-404e2e2c1b89"
+        },
+        {
+          "t": "FACT",
+          "text": "This cycle: clear, 48°F, impact 1, comfort 0.65, mood content, 2 cycles of clear",
+          "src": "output/beats/Cycle_Weather.jsonl CycleID 112",
+          "id": "F-84fc6d6fee27"
+        },
+        {
+          "t": "FACT",
+          "text": "Last 3 cycles: C109 overcast 49°F, C110 fog 52°F, C111 mild 57°F",
+          "src": "output/beats/Cycle_Weather.jsonl",
+          "id": "F-f385ee178ae7"
+        },
+        {
+          "t": "FACT",
+          "text": "Jonas Patel — dealt with a seasonal health concern",
+          "src": "output/world_summary_c112.md ## Who Lived It",
+          "id": "F-d8444195813e"
+        },
+        {
+          "t": "FACT",
+          "text": "Xavier Ramington — relied on familiar social circles during cold period",
+          "src": "output/world_summary_c112.md ## Who Lived It",
+          "id": "F-b087e6d932d4"
+        },
+        {
+          "t": "FACT",
+          "text": "Derlik Green — relied on familiar social circles during cold period",
+          "src": "output/world_summary_c112.md ## Who Lived It",
+          "id": "F-b7f76d035d0b"
+        },
+        {
+          "t": "FACT",
+          "text": "Xavier Ramington — Herbalist — Temescal",
+          "src": "Simulation_Ledger profile for POP-00181",
+          "id": "F-80a7137d3953"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00244",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00244\",\"name\":\"Derlik Green\",\"role\":\"Delivery Driver\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Noah Tan\",\"question\":\"For someone whose work keeps them moving through the city, does a clear day change the route, the pace, or the people they check in with? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-weather\",\"hood\":null,\"focus\":\"How the first clear stretch after a gray week changes — or fails to change — the daily patterns of four residents who each weathered the cold differently.\",\"src\":\"output/beats/Cycle_Weather.jsonl CycleID 112\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Derlik Green — Delivery Driver — Downtown\",\"evidence\":[{\"id\":\"EV-40a8c99689\",\"src\":\"output/beats/Cycle_Weather.jsonl CycleID 112\",\"text\":\"C112 clear, 48°F — 2 cycles of clear; 4 residents on the record lived it.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C112\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-7cd6ffd2aeb3\"},{\"t\":\"FACT\",\"text\":\"C112 clear, 48°F — 2 cycles of clear\",\"src\":\"output/beats/Cycle_Weather.jsonl CycleID 112\",\"id\":\"F-b34b4f2d6356\"},{\"t\":\"FACT\",\"text\":\"C112 clear, 48°F — 2 cycles of clear; 4 residents on the record lived it.\",\"src\":\"output/beats/Cycle_Weather.jsonl CycleID 112\",\"id\":\"F-404e2e2c1b89\"},{\"t\":\"FACT\",\"text\":\"This cycle: clear, 48°F, impact 1, comfort 0.65, mood content, 2 cycles of clear\",\"src\":\"output/beats/Cycle_Weather.jsonl CycleID 112\",\"id\":\"F-84fc6d6fee27\"},{\"t\":\"FACT\",\"text\":\"Last 3 cycles: C109 overcast 49°F, C110 fog 52°F, C111 mild 57°F\",\"src\":\"output/beats/Cycle_Weather.jsonl\",\"id\":\"F-f385ee178ae7\"},{\"t\":\"FACT\",\"text\":\"Jonas Patel — dealt with a seasonal health concern\",\"src\":\"output/world_summary_c112.md ## Who Lived It\",\"id\":\"F-d8444195813e\"},{\"t\":\"FACT\",\"text\":\"Xavier Ramington — relied on familiar social circles during cold period\",\"src\":\"output/world_summary_c112.md ## Who Lived It\",\"id\":\"F-b087e6d932d4\"},{\"t\":\"FACT\",\"text\":\"Derlik Green — relied on familiar social circles during cold period\",\"src\":\"output/world_summary_c112.md ## Who Lived It\",\"id\":\"F-b7f76d035d0b\"},{\"t\":\"FACT\",\"text\":\"Derlik Green — Delivery Driver — Downtown\",\"src\":\"Simulation_Ledger profile for POP-00244\",\"id\":\"F-9f51aa920876\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00244",
+        "name": "Derlik Green",
+        "role": "Delivery Driver",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Noah Tan",
+        "question": "For someone whose work keeps them moving through the city, does a clear day change the route, the pace, or the people they check in with? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-weather",
+        "hood": null,
+        "focus": "How the first clear stretch after a gray week changes — or fails to change — the daily patterns of four residents who each weathered the cold differently.",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 112"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Derlik Green — Delivery Driver — Downtown",
+        "evidence": [
+          {
+            "id": "EV-40a8c99689",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 112",
+            "text": "C112 clear, 48°F — 2 cycles of clear; 4 residents on the record lived it."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C112",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-7cd6ffd2aeb3"
+        },
+        {
+          "t": "FACT",
+          "text": "C112 clear, 48°F — 2 cycles of clear",
+          "src": "output/beats/Cycle_Weather.jsonl CycleID 112",
+          "id": "F-b34b4f2d6356"
+        },
+        {
+          "t": "FACT",
+          "text": "C112 clear, 48°F — 2 cycles of clear; 4 residents on the record lived it.",
+          "src": "output/beats/Cycle_Weather.jsonl CycleID 112",
+          "id": "F-404e2e2c1b89"
+        },
+        {
+          "t": "FACT",
+          "text": "This cycle: clear, 48°F, impact 1, comfort 0.65, mood content, 2 cycles of clear",
+          "src": "output/beats/Cycle_Weather.jsonl CycleID 112",
+          "id": "F-84fc6d6fee27"
+        },
+        {
+          "t": "FACT",
+          "text": "Last 3 cycles: C109 overcast 49°F, C110 fog 52°F, C111 mild 57°F",
+          "src": "output/beats/Cycle_Weather.jsonl",
+          "id": "F-f385ee178ae7"
+        },
+        {
+          "t": "FACT",
+          "text": "Jonas Patel — dealt with a seasonal health concern",
+          "src": "output/world_summary_c112.md ## Who Lived It",
+          "id": "F-d8444195813e"
+        },
+        {
+          "t": "FACT",
+          "text": "Xavier Ramington — relied on familiar social circles during cold period",
+          "src": "output/world_summary_c112.md ## Who Lived It",
+          "id": "F-b087e6d932d4"
+        },
+        {
+          "t": "FACT",
+          "text": "Derlik Green — relied on familiar social circles during cold period",
+          "src": "output/world_summary_c112.md ## Who Lived It",
+          "id": "F-b7f76d035d0b"
+        },
+        {
+          "t": "FACT",
+          "text": "Derlik Green — Delivery Driver — Downtown",
+          "src": "Simulation_Ledger profile for POP-00244",
+          "id": "F-9f51aa920876"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00258",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00258\",\"name\":\"Brian Adams\",\"role\":\"Janitor\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Noah Tan\",\"question\":\"What does a clear day look like from inside, when winter mood has already limited your social activity — does the sun reach you, or does it stay outside? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-weather\",\"hood\":null,\"focus\":\"How the first clear stretch after a gray week changes — or fails to change — the daily patterns of four residents who each weathered the cold differently.\",\"src\":\"output/beats/Cycle_Weather.jsonl CycleID 112\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Brian Adams — Janitor — Jack London\",\"evidence\":[{\"id\":\"EV-787885bcde\",\"src\":\"output/beats/Cycle_Weather.jsonl CycleID 112\",\"text\":\"C112 clear, 48°F — 2 cycles of clear; 4 residents on the record lived it.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C112\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-7cd6ffd2aeb3\"},{\"t\":\"FACT\",\"text\":\"C112 clear, 48°F — 2 cycles of clear\",\"src\":\"output/beats/Cycle_Weather.jsonl CycleID 112\",\"id\":\"F-b34b4f2d6356\"},{\"t\":\"FACT\",\"text\":\"C112 clear, 48°F — 2 cycles of clear; 4 residents on the record lived it.\",\"src\":\"output/beats/Cycle_Weather.jsonl CycleID 112\",\"id\":\"F-404e2e2c1b89\"},{\"t\":\"FACT\",\"text\":\"This cycle: clear, 48°F, impact 1, comfort 0.65, mood content, 2 cycles of clear\",\"src\":\"output/beats/Cycle_Weather.jsonl CycleID 112\",\"id\":\"F-84fc6d6fee27\"},{\"t\":\"FACT\",\"text\":\"Last 3 cycles: C109 overcast 49°F, C110 fog 52°F, C111 mild 57°F\",\"src\":\"output/beats/Cycle_Weather.jsonl\",\"id\":\"F-f385ee178ae7\"},{\"t\":\"FACT\",\"text\":\"Jonas Patel — dealt with a seasonal health concern\",\"src\":\"output/world_summary_c112.md ## Who Lived It\",\"id\":\"F-d8444195813e\"},{\"t\":\"FACT\",\"text\":\"Xavier Ramington — relied on familiar social circles during cold period\",\"src\":\"output/world_summary_c112.md ## Who Lived It\",\"id\":\"F-b087e6d932d4\"},{\"t\":\"FACT\",\"text\":\"Derlik Green — relied on familiar social circles during cold period\",\"src\":\"output/world_summary_c112.md ## Who Lived It\",\"id\":\"F-b7f76d035d0b\"},{\"t\":\"FACT\",\"text\":\"Brian Adams — Janitor — Jack London\",\"src\":\"Simulation_Ledger profile for POP-00258\",\"id\":\"F-2a3c197c1b36\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00258",
+        "name": "Brian Adams",
+        "role": "Janitor",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Noah Tan",
+        "question": "What does a clear day look like from inside, when winter mood has already limited your social activity — does the sun reach you, or does it stay outside? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-weather",
+        "hood": null,
+        "focus": "How the first clear stretch after a gray week changes — or fails to change — the daily patterns of four residents who each weathered the cold differently.",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 112"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Brian Adams — Janitor — Jack London",
+        "evidence": [
+          {
+            "id": "EV-787885bcde",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 112",
+            "text": "C112 clear, 48°F — 2 cycles of clear; 4 residents on the record lived it."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C112",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-7cd6ffd2aeb3"
+        },
+        {
+          "t": "FACT",
+          "text": "C112 clear, 48°F — 2 cycles of clear",
+          "src": "output/beats/Cycle_Weather.jsonl CycleID 112",
+          "id": "F-b34b4f2d6356"
+        },
+        {
+          "t": "FACT",
+          "text": "C112 clear, 48°F — 2 cycles of clear; 4 residents on the record lived it.",
+          "src": "output/beats/Cycle_Weather.jsonl CycleID 112",
+          "id": "F-404e2e2c1b89"
+        },
+        {
+          "t": "FACT",
+          "text": "This cycle: clear, 48°F, impact 1, comfort 0.65, mood content, 2 cycles of clear",
+          "src": "output/beats/Cycle_Weather.jsonl CycleID 112",
+          "id": "F-84fc6d6fee27"
+        },
+        {
+          "t": "FACT",
+          "text": "Last 3 cycles: C109 overcast 49°F, C110 fog 52°F, C111 mild 57°F",
+          "src": "output/beats/Cycle_Weather.jsonl",
+          "id": "F-f385ee178ae7"
+        },
+        {
+          "t": "FACT",
+          "text": "Jonas Patel — dealt with a seasonal health concern",
+          "src": "output/world_summary_c112.md ## Who Lived It",
+          "id": "F-d8444195813e"
+        },
+        {
+          "t": "FACT",
+          "text": "Xavier Ramington — relied on familiar social circles during cold period",
+          "src": "output/world_summary_c112.md ## Who Lived It",
+          "id": "F-b087e6d932d4"
+        },
+        {
+          "t": "FACT",
+          "text": "Derlik Green — relied on familiar social circles during cold period",
+          "src": "output/world_summary_c112.md ## Who Lived It",
+          "id": "F-b7f76d035d0b"
+        },
+        {
+          "t": "FACT",
+          "text": "Brian Adams — Janitor — Jack London",
+          "src": "Simulation_Ledger profile for POP-00258",
+          "id": "F-2a3c197c1b36"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  }
+]

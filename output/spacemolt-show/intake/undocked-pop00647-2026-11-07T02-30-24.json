@@ -1,0 +1,59 @@
+{
+  "v": "UNDOCKED-INTAKE/1",
+  "Timestamp": "2026-11-07T02:55:38.765Z",
+  "POPID": "POP-00647",
+  "Cycle": 114,
+  "Seq": 2,
+  "Daypart": "SHOW",
+  "Tag": "undocked-episode",
+  "EpisodeId": "undocked-pop00647-2026-11-07T02-30-24",
+  "Applied": "yes",
+  "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop00647-2026-11-07T02-30-24.json",
+  "Holder": "Ronald Silk",
+  "CreditsDelta": 0,
+  "Magnitude": 2,
+  "Flags": [
+    "credits_delta_windowed"
+  ],
+  "Excerpt": "Ronald Silk credits=0 systems=last_light,fang,errai,wezen,brightfall,birchwood,pinecross,aludra,torcular,gsc_0002,tejat,rimegate,veritate,betelgeuse,gsc_0037,dabih,gsc_0045",
+  "DecidedAt": "2026-11-07T02:55:38.768Z",
+  "DecidedBy": "auto-gate",
+  "Note": "auto-approved on contract validation (§2.5)",
+  "FeedEvent": {
+    "v": "UNDOCKED-FEED/1",
+    "Cycle": 114,
+    "EventType": "undocked-episode",
+    "POPID": "POP-00647",
+    "Holder": "Ronald Silk",
+    "EpisodeId": "undocked-pop00647-Y3C10-e2",
+    "CreditsDelta": 0,
+    "PointsDelta": 10.22,
+    "Systems": [
+      "last_light",
+      "fang",
+      "errai",
+      "wezen",
+      "brightfall",
+      "birchwood",
+      "pinecross",
+      "aludra",
+      "torcular",
+      "gsc_0002",
+      "tejat",
+      "rimegate",
+      "veritate",
+      "betelgeuse",
+      "gsc_0037",
+      "dabih",
+      "gsc_0045"
+    ],
+    "CombatEvents": 0,
+    "MishapCount": 0,
+    "Magnitude": 2,
+    "Flags": [
+      "credits_delta_windowed"
+    ],
+    "StagedPath": "output/spacemolt-show/staged/undocked-pop00647-2026-11-07T02-30-24.json"
+  },
+  "PointsDelta": 10.22
+}

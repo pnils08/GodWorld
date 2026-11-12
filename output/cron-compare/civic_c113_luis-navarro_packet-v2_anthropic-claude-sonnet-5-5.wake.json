@@ -1,0 +1,61 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "113",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "luis-navarro",
+  "byline": {
+    "name": "Luis Navarro",
+    "popid": "POP-00636",
+    "beatDomain": "CIVIC"
+  },
+  "laneEntries": 108,
+  "quotesLanded": 2,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "sheet_read",
+    "canon_search",
+    "sheet_read"
+  ],
+  "toolCalls": 3,
+  "wordCount": 655,
+  "targetWords": "400-700",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 400",
+    "words": 655,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "25f8a2295e11937eeb9c9ac9f50f5fb57b56dac79352ed283a644d4f1344b89e",
+    "costUsd": 0.0015
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 4/4 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/civic_c113_luis-navarro_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": " // tip: ⌘ suppress logs { quiet: true }\n{\n  \"popId\": \"POP-00636\",\n  \"name\": \"Luis Navarro\",\n  \"recorded\": true,\n  \"text\": \"filed: Baylight District: The Vote Is Recorded. So What Is Still Waiting?\"\n}"
+  },
+  "ranAt": "2026-10-27T23:16:03.628Z",
+  "dispositionReconciledAt": "2026-10-31T17:00:02.218Z"
+}

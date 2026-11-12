@@ -1,0 +1,201 @@
+{
+  "stage": "angle",
+  "desk": "culture",
+  "cycle": "112",
+  "persona": "tamsin-pruitt",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-01210",
+      "name": "Tamsin Pruitt",
+      "role": "desk reporter",
+      "desk": "culture"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Jack London | 1 world event(s) this cycle",
+      "approach": "Culture approach: what is the city vibing on? Find what people are actually doing — the block, the food, the music, the small rituals around this cycle's events. Ground it in the named places and people of the record, then let the street texture breathe."
+    },
+    "signal": {
+      "kind": "hood",
+      "hood": "Jack London",
+      "score": null,
+      "src": "output/neighborhood_texture_c112.md \"### Jack London\"; events: world_summary_c112.md \"## World Events\"",
+      "nearby": [
+        {
+          "text": "Grand Lake neighborhood texture — how residents experience the improvement | Residents of Grand Lake feel the change firsthand.",
+          "src": "output/engine_audit_c112.json patterns[12]; evidence: Initiative_Tracker row(s) 9"
+        },
+        {
+          "text": "Baylight District | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c112.md \"### Baylight District\"; events: world_summary_c112.md \"## World Events\""
+        },
+        {
+          "text": "Downtown | 2 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c112.md \"### Downtown\"; events: world_summary_c112.md \"## World Events\""
+        },
+        {
+          "text": "Grand Lake | 2 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c112.md \"### Grand Lake\"; events: world_summary_c112.md \"## World Events\""
+        },
+        {
+          "text": "Jack London | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c112.md \"### Jack London\"; events: world_summary_c112.md \"## World Events\""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": []
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C112",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-7cd6ffd2aeb3"
+      },
+      {
+        "t": "FACT",
+        "text": "Jack London | 1 world event(s) this cycle",
+        "src": "output/neighborhood_texture_c112.md \"### Jack London\"; events: world_summary_c112.md \"## World Events\"",
+        "id": "F-f638dab1a562"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "No target candidate was supplied. Return targets as an empty array; do not invent a person or identifier. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "street",
+    "candidates": [],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Tamsin Pruitt",
+    "popid": "POP-01210"
+  },
+  "assignment": {
+    "story": {
+      "ref": "output/neighborhood_texture_c112.md \"### Jack London\"; events: world_summary_c112.md \"## World Events\"",
+      "label": "Jack London | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Jack London"
+    },
+    "approach": "Culture approach: what is the city vibing on? Find what people are actually doing — the block, the food, the music, the small rituals around this cycle's events. Ground it in the named places and people of the record, then let the street texture breathe."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Tamsin Pruitt",
+    "popid": "POP-01210",
+    "text": "I will observe the vibe in Jack London, focusing on how people are responding to the world event this cycle. I'll talk to locals and see what's on their minds.",
+    "plan": {
+      "chase": "I will observe the vibe in Jack London, focusing on how people are responding to the world event this cycle. I'll talk to locals and see what's on their minds.",
+      "focus": "Jack London neighborhood texture",
+      "why": "The assignment is to cover Jack London with a culture approach, and there's been 1 world event this cycle.",
+      "checks": [
+        "Observe local activities",
+        "Talk to residents"
+      ],
+      "targets": [],
+      "interpretation": "The neighborhood's response to the world event will give insight into the local culture.",
+      "unverifiedLead": [
+        "Possible changes in local business or community activities"
+      ],
+      "closeQuestion": "How are Jack London residents reacting to the recent world event?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Grand Lake neighborhood texture — how residents experience the improvement | Residents of Grand Lake feel the change firsthand.",
+      "kind": "anomaly",
+      "hood": "Grand Lake",
+      "ref": "output/engine_audit_c112.json patterns[12]; evidence: Initiative_Tracker row(s) 9",
+      "popids": [
+        "POP-00002",
+        "POP-01049",
+        "POP-01080"
+      ]
+    },
+    {
+      "label": "Baylight District | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Baylight District",
+      "ref": "output/neighborhood_texture_c112.md \"### Baylight District\"; events: world_summary_c112.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Downtown | 2 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Downtown",
+      "ref": "output/neighborhood_texture_c112.md \"### Downtown\"; events: world_summary_c112.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Grand Lake | 2 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Grand Lake",
+      "ref": "output/neighborhood_texture_c112.md \"### Grand Lake\"; events: world_summary_c112.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Jack London | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Jack London",
+      "ref": "output/neighborhood_texture_c112.md \"### Jack London\"; events: world_summary_c112.md \"## World Events\"",
+      "popids": []
+    }
+  ],
+  "laneEntries": 20,
+  "angleCapHits": 0,
+  "ranAt": "2026-10-23T11:16:56.085Z"
+}

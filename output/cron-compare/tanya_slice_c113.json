@@ -1,0 +1,161 @@
+{
+  "empty": false,
+  "cycle": 113,
+  "kind": "tanya-sideline",
+  "desk": "sports",
+  "journalist": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014",
+    "persona": "tanya-cruz"
+  },
+  "pulse": {
+    "className": "record-only-sideline",
+    "score": 70,
+    "label": "The Outfield squeeze for next season. 5 Outfielders for 3 positions"
+  },
+  "prewrite": {
+    "bagModes": [
+      {
+        "id": 10,
+        "name": "Inference Close"
+      }
+    ],
+    "anchorFacts": [
+      "The Outfield squeeze for next season. 5 Outfielders for 3 positions.",
+      "Danny Horn is your starting CF. A returing MVP and the best player in baseball makes it an easy decision. Darrin Davis figures to be your DH as he remains under contract and showed his numbers did not decline, albiet he was injured. Davis has missed substantial time twice over the past three seasons. Vladimir is entering his peak and put up his best numbers of his career last season. Rates as a clutch perfomer and is essentially who you chose over Peter Busch last offseason.",
+      "If those spots are set then you have three players for one left field opening. Desmond Morton is you highest rated prospect with 5 tools and has shown success at the MLB level, Frank Reyna is a power hitter with a mass of potential that also showed success. JR Rosado performed well in his major league experience and had good contact numbers but may trend as a role player in the grand scheme. What is the choice Paulson should make here."
+    ],
+    "claim": "The supplied sports record is the weather. The clubhouse SET is allotted hallucination fitted to that line.",
+    "accessEvidence": {
+      "state": "ALLOTTED",
+      "facts": [
+        "clubhouse/sideline SET is the reporter's room"
+      ]
+    },
+    "quoteEvidence": {
+      "state": "NOT_SUPPLIED",
+      "quotes": []
+    },
+    "observationEvidence": {
+      "state": "ALLOTTED",
+      "facts": []
+    },
+    "missing": [
+      "Packet player quotes",
+      "injury or team-response facts beyond the supplied record"
+    ],
+    "hooks": []
+  },
+  "hooks": [],
+  "seeds": [],
+  "story": {
+    "angle": "The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+    "label": "The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+    "hookLine": "The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+    "kind": "sideline-signal",
+    "hood": "Downtown",
+    "popids": [
+      "POP-00051",
+      "POP-00079",
+      "POP-00022",
+      "POP-00598",
+      "POP-00021"
+    ],
+    "citizens": [
+      "Desmond Morton (POP-00051)",
+      "Frank Reyna (POP-00079)",
+      "Danny Horn (POP-00022)",
+      "Vladimir Gonzalez (POP-00598)",
+      "Darrin Davis (POP-00021)"
+    ],
+    "ref": "world_summary_c113.md ## Sports",
+    "cycle": 113
+  },
+  "approach": "Sideline approach (Tanya Cruz): you file from the clubhouse. That SET is yours — the Packet will never list a clubhouse event. Paint what the supplied sports line predicts. Packet player quotes and numbers only. New in-world spots go on INTAKE BIZ. No real-world Oakland venues. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview. The feed notes report what people said in paraphrase; none of it is a quote — never put it in quotation marks or attribute it as speech.",
+  "players": [
+    {
+      "name": "Desmond Morton",
+      "popid": "POP-00051",
+      "role": "Left Fielder, Oakland A's",
+      "neighborhood": "Chinatown",
+      "why": "feed-names"
+    },
+    {
+      "name": "Frank Reyna",
+      "popid": "POP-00079",
+      "role": "Right Fielder, Oakland A's",
+      "neighborhood": "Lake Merritt",
+      "why": "feed-names"
+    },
+    {
+      "name": "Danny Horn",
+      "popid": "POP-00022",
+      "role": "Center Fielder, Oakland A's - Best player in the MLB",
+      "neighborhood": "Temescal",
+      "why": "feed-names"
+    },
+    {
+      "name": "Vladimir Gonzalez",
+      "popid": "POP-00598",
+      "role": "Right Fielder, Oakland A's",
+      "neighborhood": "Fruitvale",
+      "why": "feed-names"
+    },
+    {
+      "name": "Darrin Davis",
+      "popid": "POP-00021",
+      "role": "Left Fielder, Oakland A's Legend",
+      "neighborhood": "Piedmont Ave",
+      "why": "feed-names"
+    }
+  ],
+  "scene": {
+    "colorRoom": "Clubhouse SET is authorized. Invented player quotes and real-world venues are not."
+  },
+  "candidates": [
+    {
+      "score": 70,
+      "label": "The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+      "cycle": 113
+    },
+    {
+      "score": 50,
+      "label": "The Oaks win again behind a big game behind Adash Stanley. The Oaks 91 - Pistons 78 on the road in Detroit.",
+      "cycle": 113
+    },
+    {
+      "score": 50,
+      "label": "The Oaks remain sizzling hot after a winless preseason have now shot out of the gate winning 3 straight. Oaks 115 - Knicks 93 in New York",
+      "cycle": 113
+    },
+    {
+      "score": 50,
+      "label": "The Oaks completly dismantle the Wizards in Washington. Oaks 105 - Wizards 62",
+      "cycle": 113
+    },
+    {
+      "score": 40,
+      "label": "The Oaks open their inaugural season at home. AJ Dybantsa shines in his rookie debut as the Oaks win their first win as a franchise.",
+      "cycle": 112
+    },
+    {
+      "score": 38,
+      "label": "Darrin Davis works with the Oakland Police and Rafael Montez on youth outreach programs in the city.",
+      "cycle": 113
+    },
+    {
+      "score": 38,
+      "label": "Mark Aitken sets for Free Agency , but will always remain in Oakland.",
+      "cycle": 113
+    },
+    {
+      "score": 28,
+      "label": "Elias Varek meets the media, happy over the win and shares updated on the Oaks.",
+      "cycle": 112
+    }
+  ],
+  "pointers": [
+    "output/world_summary_c113.md ## Sports",
+    "docs/media/TANYA_SIDELINE_BAG.md"
+  ]
+}

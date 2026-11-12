@@ -1,0 +1,65 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "112",
+  "persona": "angela-reyes",
+  "byline": "Angela Reyes",
+  "bylinePopid": "POP-00156",
+  "article": "output/cron-compare/staged/civic_c112_angela-reyes_packet-v2_anthropic-claude-haiku-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Mei Wong",
+        "role": "quoted-source",
+        "popid": "POP-01036"
+      },
+      {
+        "name": "Maya Torres-Dillon",
+        "role": "quoted-source",
+        "popid": "POP-00742"
+      },
+      {
+        "name": "Simone Adesanya",
+        "role": "quoted-source",
+        "popid": "POP-00287"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Rockridge"
+    ],
+    "claims": [
+      {
+        "claim": "Honestly, that dip is a blip on a page to most of us. Teacher quality at 9.08 — that's the number my staff feels every single day, in the hallways, in the way a kid who was struggling suddenly gets it. The index is a snapshot; the teachers are the whole album. We don't walk around quoting our own score. We walk around making sure every kid in this building knows someone's got their back. That's the real index, and it doesn't move a tenth of a point because of a cycle.",
+        "sourceRef": "citizenVoice PRESS Simone Adesanya"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-83923a469b85",
+    "draftSha256": "7863e04535cc9cca102c56fdc63599f12d0ae6de49d8c284a9a092161a24e5e1",
+    "verdict": "output/cron-compare/civic_c112_angela-reyes_packet-v2_anthropic-claude-haiku-5-5.rhea.json",
+    "ranAt": "2026-10-20T23:17:24.294Z",
+    "contractScore": {
+      "opened": false,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": false,
+      "inTargetBy": "judge",
+      "words": 781,
+      "short": "The opening paragraph opens with narrative scene-setting rather than a Packet-backed school, youth-program, apprenticeship, or continuity fact, and the piece falls short of the target word count.",
+      "score": 2,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "7863e04535cc9cca102c56fdc63599f12d0ae6de49d8c284a9a092161a24e5e1",
+      "costUsd": 0.0027
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-20T23:17:32.633Z"
+}

@@ -1,0 +1,469 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "112",
+  "persona": "elliot-marbury",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00166",
+      "name": "Elliot Marbury",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Vinnie Keane — 17 seasons on the dossier, 2041 the latest | hitter density memo, multi-year — what the line proves, on what sample, and what would disprove it",
+      "approach": "Data-desk approach: this slice is one player's season-by-season line off the dossier, the rates worked out from it, and two peers at the same job. Third person, dry, source-forward. One hard claim the numbers carry, with its sample size stated; a thin season is variance, not identity. Say which number next season would kill the claim. No quotes, no scene, no clubhouse — the memo is the proof. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "data-desk",
+        "hood": null,
+        "facts": [
+          "Vinnie Keane — DH / 3B / 2B / SS, Athletics; 17 seasons on the dossier",
+          "Vinnie Keane 2041 ATH: 37 G, 127 AB, 40 H, 13 HR, 29 RBI, 0 BB, 6 SO, 0 SB, AVG .315, OBP .308, SLG .701",
+          "Vinnie Keane 2040 ATH: 58 G, 209 AB, 60 H, 14 HR, 40 RBI, 8 BB, 35 SO, 7 SB, AVG .287, OBP .332, SLG .522",
+          "Vinnie Keane 2039 ATH: 55 G, 164 AB, 64 H, 17 HR, 47 RBI, 35 BB, 82 SO, 5 SB, AVG .315, OBP .341, SLG .680",
+          "Vinnie Keane 2038 ATH: 94 G, 328 AB, 119 H, 49 HR, 119 RBI, 49 BB, 81 SO, 4 SB, AVG .362, OBP .398, SLG .680",
+          "Vinnie Keane 2037 ATH: 150 G, 592 AB, 174 H, 34 HR, 105 RBI, 88 BB, 157 SO, 9 SB, AVG .294, OBP .376, SLG .515",
+          "Vinnie Keane 2036 ATH: 107 G, 409 AB, 111 H, 26 HR, 62 RBI, 38 BB, 69 SO, 17 SB, AVG .271, OBP .338, SLG .504",
+          "Vinnie Keane 2041 rates (127 AB): one HR every 9.8 AB, one SO every 21.2 AB (worked from the season line)",
+          "Vinnie Keane 2040 rates (209 AB): one HR every 14.9 AB, one SO every 6.0 AB (worked from the season line)",
+          "Vinnie Keane 2039 rates (164 AB): one HR every 9.6 AB, one SO every 2.0 AB (worked from the season line)",
+          "Vinnie Keane 2038 rates (328 AB): one HR every 6.7 AB, one SO every 4.0 AB (worked from the season line)",
+          "Vinnie Keane 2037 rates (592 AB): one HR every 17.4 AB, one SO every 3.8 AB (worked from the season line)"
+        ],
+        "priorCycle": "DOSSIER",
+        "note": "subject is on this cycle's feed",
+        "engineHooks": [],
+        "roomIsYours": "the order the columns are read in, which season is the hinge, what the peer band makes ordinary or strange",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-data-desk",
+      "hood": null,
+      "score": null,
+      "src": "output/player_truesource_mirror.json Vinnie Keane @C112",
+      "nearby": [
+        {
+          "text": "A's | player-feature | (off-season) | Eric Taveras, Martin Richards",
+          "src": "Oakland_Sports_Feed cycle 112; rendered: world_summary_c112.md \"## Sports\" C112 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | rumor | (off-season) | Mark Aitken, Kevin Clark",
+          "src": "Oakland_Sports_Feed cycle 112; rendered: world_summary_c112.md \"## Sports\" C112 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (off-season) | Vinnie Keane, Benji Dillon",
+          "src": "Oakland_Sports_Feed cycle 112; rendered: world_summary_c112.md \"## Sports\" C112 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | game-result | (early-season) | AJ Dybantsa, Adash Stanley, Wendell Carter Jr, Austin Reaves",
+          "src": "Oakland_Sports_Feed cycle 112; rendered: world_summary_c112.md \"## Sports\" C112 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | season-state | (early-season) | Elias Varek",
+          "src": "Oakland_Sports_Feed cycle 112; rendered: world_summary_c112.md \"## Sports\" C112 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": []
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C112",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-7cd6ffd2aeb3"
+      },
+      {
+        "t": "FACT",
+        "text": "Vinnie Keane — 17 seasons on the dossier, 2041 the latest | hitter density memo, multi-year",
+        "src": "output/player_truesource_mirror.json Vinnie Keane @C112",
+        "id": "F-8187ee0d6871"
+      },
+      {
+        "t": "FACT",
+        "text": "Vinnie Keane's 2041 line against 16 earlier seasons.",
+        "src": "output/player_truesource_mirror.json Vinnie Keane @C112",
+        "id": "F-54f9c6e009c8"
+      },
+      {
+        "t": "FACT",
+        "text": "Vinnie Keane — DH / 3B / 2B / SS, Athletics; 17 seasons on the dossier",
+        "src": "output/player_truesource_mirror.json Vinnie Keane",
+        "id": "F-0985d121d4a2"
+      },
+      {
+        "t": "FACT",
+        "text": "Vinnie Keane 2041 ATH: 37 G, 127 AB, 40 H, 13 HR, 29 RBI, 0 BB, 6 SO, 0 SB, AVG .315, OBP .308, SLG .701",
+        "src": "output/player_truesource_mirror.json Vinnie Keane",
+        "id": "F-cc6b7b3cc191"
+      },
+      {
+        "t": "FACT",
+        "text": "Vinnie Keane 2040 ATH: 58 G, 209 AB, 60 H, 14 HR, 40 RBI, 8 BB, 35 SO, 7 SB, AVG .287, OBP .332, SLG .522",
+        "src": "output/player_truesource_mirror.json Vinnie Keane",
+        "id": "F-543afe12148f"
+      },
+      {
+        "t": "FACT",
+        "text": "Vinnie Keane 2039 ATH: 55 G, 164 AB, 64 H, 17 HR, 47 RBI, 35 BB, 82 SO, 5 SB, AVG .315, OBP .341, SLG .680",
+        "src": "output/player_truesource_mirror.json Vinnie Keane",
+        "id": "F-785c40789ab9"
+      },
+      {
+        "t": "FACT",
+        "text": "Vinnie Keane 2038 ATH: 94 G, 328 AB, 119 H, 49 HR, 119 RBI, 49 BB, 81 SO, 4 SB, AVG .362, OBP .398, SLG .680",
+        "src": "output/player_truesource_mirror.json Vinnie Keane",
+        "id": "F-f94e9ff5aec9"
+      },
+      {
+        "t": "FACT",
+        "text": "Vinnie Keane 2037 ATH: 150 G, 592 AB, 174 H, 34 HR, 105 RBI, 88 BB, 157 SO, 9 SB, AVG .294, OBP .376, SLG .515",
+        "src": "output/player_truesource_mirror.json Vinnie Keane",
+        "id": "F-68678df76f3b"
+      },
+      {
+        "t": "FACT",
+        "text": "Vinnie Keane 2036 ATH: 107 G, 409 AB, 111 H, 26 HR, 62 RBI, 38 BB, 69 SO, 17 SB, AVG .271, OBP .338, SLG .504",
+        "src": "output/player_truesource_mirror.json Vinnie Keane",
+        "id": "F-efe7c85f0aa2"
+      },
+      {
+        "t": "FACT",
+        "text": "Vinnie Keane 2041 rates (127 AB): one HR every 9.8 AB, one SO every 21.2 AB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Vinnie Keane",
+        "id": "F-941d620e28e2"
+      },
+      {
+        "t": "FACT",
+        "text": "Vinnie Keane 2040 rates (209 AB): one HR every 14.9 AB, one SO every 6.0 AB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Vinnie Keane",
+        "id": "F-388504a1bff8"
+      },
+      {
+        "t": "FACT",
+        "text": "Vinnie Keane 2039 rates (164 AB): one HR every 9.6 AB, one SO every 2.0 AB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Vinnie Keane",
+        "id": "F-69882897e228"
+      },
+      {
+        "t": "FACT",
+        "text": "Vinnie Keane 2038 rates (328 AB): one HR every 6.7 AB, one SO every 4.0 AB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Vinnie Keane",
+        "id": "F-2d31ac19482f"
+      },
+      {
+        "t": "FACT",
+        "text": "Vinnie Keane 2037 rates (592 AB): one HR every 17.4 AB, one SO every 3.8 AB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Vinnie Keane",
+        "id": "F-f222c0d04c9d"
+      },
+      {
+        "t": "FACT",
+        "text": "Vinnie Keane 2036 rates (409 AB): one HR every 15.7 AB, one SO every 5.9 AB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Vinnie Keane",
+        "id": "F-54088af7d5c7"
+      },
+      {
+        "t": "FACT",
+        "text": "This cycle (feed notes, off-season): Taveras posted on Moltbook that if he was to win anything he would be donating it to the Vinnie Keane Firehouse 29 in West Oakland Baseball Academy.",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C112",
+        "id": "F-35e24b4fdd93"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "No target candidate was supplied. Return targets as an empty array; do not invent a person or identifier. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "records",
+    "candidates": [],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Elliot Marbury",
+    "popid": "POP-00166"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-data-desk",
+      "angle": "Vinnie Keane — 17 seasons on the dossier, 2041 the latest | hitter density memo, multi-year — what the line proves, on what sample, and what would disprove it",
+      "label": "Vinnie Keane — 17 seasons on the dossier, 2041 the latest | hitter density memo, multi-year",
+      "hookLine": "Vinnie Keane's 2041 line against 16 earlier seasons.",
+      "hood": null,
+      "citizens": [
+        "Vinnie Keane (POP-00001)"
+      ],
+      "popids": [
+        "POP-00001"
+      ],
+      "ref": "output/player_truesource_mirror.json Vinnie Keane @C112",
+      "cycle": 112
+    },
+    "approach": "Data-desk approach: this slice is one player's season-by-season line off the dossier, the rates worked out from it, and two peers at the same job. Third person, dry, source-forward. One hard claim the numbers carry, with its sample size stated; a thin season is variance, not identity. Say which number next season would kill the claim. No quotes, no scene, no clubhouse — the memo is the proof. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "DATA-DESK-SLICE-1",
+    "kind": "beat-data-desk",
+    "seat": {
+      "slug": "elliot-marbury",
+      "name": "Elliot Marbury",
+      "popid": "POP-00166",
+      "desk": "sports",
+      "domain": "data-desk",
+      "builder": "buildMarburySlice.js"
+    },
+    "hood": null,
+    "pulse": {
+      "className": "beat-data-desk",
+      "score": 100,
+      "label": "Vinnie Keane — 17 seasons on the dossier, 2041 the latest | hitter density memo, multi-year",
+      "hood": null,
+      "source": "output/player_truesource_mirror.json Vinnie Keane @C112"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "Vinnie Keane — 17 seasons on the dossier, 2041 the latest | hitter density memo, multi-year — what the line proves, on what sample, and what would disprove it",
+      "hookLine": "Vinnie Keane's 2041 line against 16 earlier seasons.",
+      "anchorFacts": [
+        "Vinnie Keane — DH / 3B / 2B / SS, Athletics; 17 seasons on the dossier",
+        "Vinnie Keane 2041 ATH: 37 G, 127 AB, 40 H, 13 HR, 29 RBI, 0 BB, 6 SO, 0 SB, AVG .315, OBP .308, SLG .701",
+        "Vinnie Keane 2040 ATH: 58 G, 209 AB, 60 H, 14 HR, 40 RBI, 8 BB, 35 SO, 7 SB, AVG .287, OBP .332, SLG .522",
+        "Vinnie Keane 2039 ATH: 55 G, 164 AB, 64 H, 17 HR, 47 RBI, 35 BB, 82 SO, 5 SB, AVG .315, OBP .341, SLG .680",
+        "Vinnie Keane 2038 ATH: 94 G, 328 AB, 119 H, 49 HR, 119 RBI, 49 BB, 81 SO, 4 SB, AVG .362, OBP .398, SLG .680",
+        "Vinnie Keane 2037 ATH: 150 G, 592 AB, 174 H, 34 HR, 105 RBI, 88 BB, 157 SO, 9 SB, AVG .294, OBP .376, SLG .515",
+        "Vinnie Keane 2036 ATH: 107 G, 409 AB, 111 H, 26 HR, 62 RBI, 38 BB, 69 SO, 17 SB, AVG .271, OBP .338, SLG .504",
+        "Vinnie Keane 2041 rates (127 AB): one HR every 9.8 AB, one SO every 21.2 AB (worked from the season line)",
+        "Vinnie Keane 2040 rates (209 AB): one HR every 14.9 AB, one SO every 6.0 AB (worked from the season line)",
+        "Vinnie Keane 2039 rates (164 AB): one HR every 9.6 AB, one SO every 2.0 AB (worked from the season line)",
+        "Vinnie Keane 2038 rates (328 AB): one HR every 6.7 AB, one SO every 4.0 AB (worked from the season line)",
+        "Vinnie Keane 2037 rates (592 AB): one HR every 17.4 AB, one SO every 3.8 AB (worked from the season line)",
+        "Vinnie Keane 2036 rates (409 AB): one HR every 15.7 AB, one SO every 5.9 AB (worked from the season line)",
+        "This cycle (feed notes, off-season): Taveras posted on Moltbook that if he was to win anything he would be donating it to the Vinnie Keane Firehouse 29 in West Oakland Baseball Academy."
+      ],
+      "evidence": [
+        {
+          "text": "Vinnie Keane — DH / 3B / 2B / SS, Athletics; 17 seasons on the dossier",
+          "src": "output/player_truesource_mirror.json Vinnie Keane"
+        },
+        {
+          "text": "Vinnie Keane 2041 ATH: 37 G, 127 AB, 40 H, 13 HR, 29 RBI, 0 BB, 6 SO, 0 SB, AVG .315, OBP .308, SLG .701",
+          "src": "output/player_truesource_mirror.json Vinnie Keane"
+        },
+        {
+          "text": "Vinnie Keane 2040 ATH: 58 G, 209 AB, 60 H, 14 HR, 40 RBI, 8 BB, 35 SO, 7 SB, AVG .287, OBP .332, SLG .522",
+          "src": "output/player_truesource_mirror.json Vinnie Keane"
+        },
+        {
+          "text": "Vinnie Keane 2039 ATH: 55 G, 164 AB, 64 H, 17 HR, 47 RBI, 35 BB, 82 SO, 5 SB, AVG .315, OBP .341, SLG .680",
+          "src": "output/player_truesource_mirror.json Vinnie Keane"
+        },
+        {
+          "text": "Vinnie Keane 2038 ATH: 94 G, 328 AB, 119 H, 49 HR, 119 RBI, 49 BB, 81 SO, 4 SB, AVG .362, OBP .398, SLG .680",
+          "src": "output/player_truesource_mirror.json Vinnie Keane"
+        },
+        {
+          "text": "Vinnie Keane 2037 ATH: 150 G, 592 AB, 174 H, 34 HR, 105 RBI, 88 BB, 157 SO, 9 SB, AVG .294, OBP .376, SLG .515",
+          "src": "output/player_truesource_mirror.json Vinnie Keane"
+        },
+        {
+          "text": "Vinnie Keane 2036 ATH: 107 G, 409 AB, 111 H, 26 HR, 62 RBI, 38 BB, 69 SO, 17 SB, AVG .271, OBP .338, SLG .504",
+          "src": "output/player_truesource_mirror.json Vinnie Keane"
+        },
+        {
+          "text": "Vinnie Keane 2041 rates (127 AB): one HR every 9.8 AB, one SO every 21.2 AB (worked from the season line)",
+          "src": "output/player_truesource_mirror.json Vinnie Keane"
+        },
+        {
+          "text": "Vinnie Keane 2040 rates (209 AB): one HR every 14.9 AB, one SO every 6.0 AB (worked from the season line)",
+          "src": "output/player_truesource_mirror.json Vinnie Keane"
+        },
+        {
+          "text": "Vinnie Keane 2039 rates (164 AB): one HR every 9.6 AB, one SO every 2.0 AB (worked from the season line)",
+          "src": "output/player_truesource_mirror.json Vinnie Keane"
+        },
+        {
+          "text": "Vinnie Keane 2038 rates (328 AB): one HR every 6.7 AB, one SO every 4.0 AB (worked from the season line)",
+          "src": "output/player_truesource_mirror.json Vinnie Keane"
+        },
+        {
+          "text": "Vinnie Keane 2037 rates (592 AB): one HR every 17.4 AB, one SO every 3.8 AB (worked from the season line)",
+          "src": "output/player_truesource_mirror.json Vinnie Keane"
+        },
+        {
+          "text": "Vinnie Keane 2036 rates (409 AB): one HR every 15.7 AB, one SO every 5.9 AB (worked from the season line)",
+          "src": "output/player_truesource_mirror.json Vinnie Keane"
+        },
+        {
+          "text": "This cycle (feed notes, off-season): Taveras posted on Moltbook that if he was to win anything he would be donating it to the Vinnie Keane Firehouse 29 in West Oakland Baseball Academy.",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C112"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": {
+        "state": "DOSSIER",
+        "vs": null
+      },
+      "hooks": [],
+      "note": "subject is on this cycle's feed",
+      "pageVoices": [],
+      "roomIsYours": "the order the columns are read in, which season is the hinge, what the peer band makes ordinary or strange"
+    },
+    "citizens": [
+      {
+        "popid": "POP-00001",
+        "name": "Vinnie Keane",
+        "role": "DH / 3B / 2B / SS, Athletics",
+        "neighborhood": null,
+        "business": null,
+        "profile": "Vinnie Keane — DH / 3B / 2B / SS, Athletics",
+        "why": "dossier on file (player_truesource_mirror)"
+      }
+    ],
+    "pointers": [
+      "output/player_truesource_mirror.json Vinnie Keane @C112",
+      "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Elliot Marbury",
+    "popid": "POP-00166",
+    "text": "Vinnie Keane's 2041 line is the newest entry in a 17-season dossier, and it reads like two different hitters depending on which column you look at. The slugging is absurd — one homer every 9.8 at-bats — but the walk column is empty and the strikeout rate, one every 21.2 at-bats, is the tightest of the entire run. That is the hinge: a 37-game slice where the power is real but the plate discipline looks like a ghost of the 2039 season, when he was whiffing once every 2.0 at-bats. The question is which number is the outlier. You could be looking at a hitter who found something late, or you could be looking at a small-sample illusion that flatters a fading skill. The peer band makes it weirder,",
+    "plan": {
+      "chase": "Vinnie Keane's 2041 line is the newest entry in a 17-season dossier, and it reads like two different hitters depending on which column you look at. The slugging is absurd — one homer every 9.8 at-bats — but the walk column is empty and the strikeout rate, one every 21.2 at-bats, is the tightest of the entire run. That is the hinge: a 37-game slice where the power is real but the plate discipline looks like a ghost of the 2039 season, when he was whiffing once every 2.0 at-bats. The question is which number is the outlier. You could be looking at a hitter who found something late, or you could be looking at a small-sample illusion that flatters a fading skill. The peer band makes it weirder, ",
+      "focus": "The 2041 strikeout rate (one every 21.2 at-bats) versus the 2039 rate (one every 2.0 at-bats) as the defining tension in Keane's late-career profile.",
+      "why": "Because a 127-at-bat sample is too small to call a transformation, but the gap between the 2041 and 2039 strikeout rates is too large to ignore. The 2038 season — 49 homers, one every 6.7 at-bats — is the only full-season baseline that makes the 2041 power look normal, and it is three years old. The line needs to be read against the full 2036-2041 window to see which seasons are the true signal and which are noise.",
+      "checks": [
+        "Verify the 2041 strikeout rate is one every 21.2 at-bats, not a decimal error in the source line.",
+        "Confirm 2039 is the only season with a strikeout rate above one every 3 at-bats in the dossier window.",
+        "Check whether 2041's walk count (0) is unique in the dossier or a data-entry gap.",
+        "Compare 2041's homer rate (9.8) to 2038's (6.7) to see if the power is actually declining or just small-sample noise.",
+        "Look up whether any other player on the same positional list has a season with a strikeout rate below one every 15 at-bats."
+      ],
+      "targets": [],
+      "interpretation": "The 2041 line is the latest entry in a 17-season dossier, and it is the most contradictory one. The power is elite, the contact is elite, and the discipline is nonexistent. That combination is either the signature of a hitter who simplified his approach or the artifact of a short season. The 2038 season is the only one that proves Keane can do this over a meaningful sample, and it is three years old. The 2039 season shows the downside — elite power with terrible contact — and that is the season ",
+      "unverifiedLead": [
+        "The 2041 strikeout rate may be a fluke of a short season, but it is worth asking whether Keane changed his swing or approach in the offseason.",
+        "The 2039 season's high strikeout rate may have been an injury-related anomaly, not a skill baseline.",
+        "The empty walk column in 2041 could indicate a change in how pitchers are attacking him, not a change in his discipline."
+      ],
+      "closeQuestion": "If Keane's 2041 strikeout rate holds over a full season, does it change how the dossier reads his entire late-career arc, or is it just a better version of the 2038 season?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "A's | player-feature | (off-season) | Eric Taveras, Martin Richards",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 112; rendered: world_summary_c112.md \"## Sports\" C112 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00597",
+        "POP-00031"
+      ]
+    },
+    {
+      "label": "A's | rumor | (off-season) | Mark Aitken, Kevin Clark",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 112; rendered: world_summary_c112.md \"## Sports\" C112 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00003",
+        "POP-00053"
+      ]
+    },
+    {
+      "label": "A's | player-feature | (off-season) | Vinnie Keane, Benji Dillon",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 112; rendered: world_summary_c112.md \"## Sports\" C112 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00001",
+        "POP-00018"
+      ]
+    },
+    {
+      "label": "Oaks | game-result | (early-season) | AJ Dybantsa, Adash Stanley, Wendell Carter Jr, Austin Reaves",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 112; rendered: world_summary_c112.md \"## Sports\" C112 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01024",
+        "POP-01023",
+        "POP-01028",
+        "POP-01027"
+      ]
+    },
+    {
+      "label": "Oaks | season-state | (early-season) | Elias Varek",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 112; rendered: world_summary_c112.md \"## Sports\" C112 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00789"
+      ]
+    }
+  ],
+  "laneEntries": 9,
+  "angleCapHits": 0,
+  "ranAt": "2026-10-21T11:16:39.474Z"
+}

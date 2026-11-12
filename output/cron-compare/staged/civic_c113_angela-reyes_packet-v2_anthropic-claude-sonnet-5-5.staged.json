@@ -1,0 +1,65 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "113",
+  "persona": "angela-reyes",
+  "byline": "Angela Reyes",
+  "bylinePopid": "POP-00156",
+  "article": "output/cron-compare/staged/civic_c113_angela-reyes_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Patricia Nolan",
+        "role": "mentioned",
+        "popid": "POP-00729"
+      },
+      {
+        "name": "Salma Navarro",
+        "role": "quoted-source",
+        "popid": "POP-00975"
+      },
+      {
+        "name": "Rick Walker",
+        "role": "mentioned",
+        "popid": "POP-00198"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Temescal"
+    ],
+    "claims": [
+      {
+        "claim": "I've watched that building for thirty years, and the thing that breaks my heart isn't the number on the table — it's that the kids inside feel it. When I was teaching, we had the same struggles, but there was a sense that the neighborhood was pulling for us. Now the district grows everywhere else, and Temescal just... sits. The teachers there are still good people, still trying. But you can't pour from an empty cup, and when the funding and attention go to the neighborhoods that are already climbing, the kids here notice. They're not dumb. They know when they're being left behind.",
+        "sourceRef": "citizenVoice PRESS Patricia Nolan"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-19412dd65527",
+    "draftSha256": "f2b1934d180f957415feb20b7d61bc391ebc779a2fab875a4c1038b873b5205d",
+    "verdict": "output/cron-compare/civic_c113_angela-reyes_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-10-27T23:17:36.762Z",
+    "contractScore": {
+      "opened": false,
+      "closed": true,
+      "purposeMet": false,
+      "inTarget": false,
+      "inTargetBy": "judge",
+      "words": 796,
+      "short": "The piece opens on character narrative rather than a Packet-backed fact, covers neighborhood stagnation rather than translating an initiative into program stability, and falls short of the word count.",
+      "score": 1,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "f2b1934d180f957415feb20b7d61bc391ebc779a2fab875a4c1038b873b5205d",
+      "costUsd": 0.0021
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-27T23:17:43.671Z"
+}

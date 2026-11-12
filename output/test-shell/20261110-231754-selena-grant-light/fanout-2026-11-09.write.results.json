@@ -1,0 +1,223 @@
+{
+  "date": "2026-11-09",
+  "stage": "write",
+  "results": [
+    {
+      "name": "Carmen Delaine",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 3,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 901,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Jordan Velez",
+      "desk": "business",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 2,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 874,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Dr. Lila Mezran",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 3,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [
+          {
+            "text": "Howard Travis caught up on sleep and woke up feeling like themselves again (Piedmont Ave).",
+            "run": "caught up on sleep and woke"
+          }
+        ],
+        "words": 933,
+        "contractScore": 3
+      }
+    },
+    {
+      "name": "Trevor Shimizu",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 1,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 939,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Anthony Raines",
+      "desk": "sports",
+      "ok": false,
+      "error": "writer produced no draft at output/cron-compare/sports_c115_anthony-raines_packet-v2_anthropic-claude-sonnet-5-5.md",
+      "checks": null
+    },
+    {
+      "name": "Tamsin Pruitt",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 6,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [
+          {
+            "text": "Vinnie Keane — in their life, C115: spent the night on the phone working out where the family would land",
+            "run": "night on the phone working out"
+          },
+          {
+            "text": "Vinnie Keane — in their life, C115: came home from the event with a bag of thank-you cards from kids who'd never seen a game",
+            "run": "came home from the event with"
+          },
+          {
+            "text": "Elle Lilo — in their life, C115: grabbed coffee from the cart outside the hospital before the morning rush hit",
+            "run": "grabbed coffee from the cart outside"
+          },
+          {
+            "text": "Elle Lilo — in their life, C115: stayed thirty minutes after the service just catching up in the parking lot",
+            "run": "catching up in the parking lot"
+          },
+          {
+            "text": "Marguerite Salcedo was promoted; the record lists their work as Managing Partner, Anchor Build, Piedmont Ave (C115). What came next: the record does not say yet",
+            "run": "as managing partner anchor build piedmont"
+          },
+          {
+            "text": "Marguerite Salcedo — in their life, C115: drove the church van for the senior trip and listened to three hours of unfiltered neighborhood gossip",
+            "run": "the senior trip and listened to"
+          },
+          {
+            "text": "Marguerite Salcedo — in their life, C115: realized they're becoming more like an older relative — and didn't mind",
+            "run": "becoming more like an older relative"
+          },
+          {
+            "text": "Richie Ramiro — in their life, C114: painted over graffiti on the recreation center wall alongside five neighbors they barely knew",
+            "run": "over graffiti on the recreation center"
+          },
+          {
+            "text": "Richie Ramiro — in their life, C114: spent too long in a bookstore aisle they'd never stopped at",
+            "run": "spent too long in a bookstore"
+          },
+          {
+            "text": "Richie Ramiro — in their life, C115: grabbed coffee from the cart outside the hospital before the morning rush hit near a late-night counter",
+            "run": "grabbed coffee from the cart outside"
+          },
+          {
+            "text": "Tobert Lewis — in their life, C114: badged into the Baylight office early and tried not to think about the protestors from last month",
+            "run": "badged into the baylight office early"
+          },
+          {
+            "text": "Tobert Lewis — in their life, C114: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+            "run": "flyer for the oakland youth apprenticeship"
+          },
+          {
+            "text": "Tobert Lewis — in their life, C115: finally fixed the thing that had been broken for months",
+            "run": "finally fixed the thing that had"
+          },
+          {
+            "text": "Farah Lindqvist — in their life, C114: said no to something and felt the shape of who they are in it",
+            "run": "said no to something and felt"
+          },
+          {
+            "text": "Farah Lindqvist — in their life, C115: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+            "run": "recognized the oari van idling outside"
+          },
+          {
+            "text": "Farah Lindqvist — in their life, C115: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+            "run": "flyer for the oakland youth apprenticeship"
+          },
+          {
+            "text": "Darius Scoot — in their life, C115: traded produce over a fence and came out ahead",
+            "run": "traded produce over a fence and"
+          },
+          {
+            "text": "Darius Scoot — in their life, C115: waved at the regulars on the usual route, all present and accounted for",
+            "run": "usual route all present and accounted"
+          },
+          {
+            "text": "Darrin Davis — in their life, C115: stayed an extra hour at the community center because nobody wanted to leave",
+            "run": "stayed an extra hour at the"
+          },
+          {
+            "text": "Darrin Davis — in their life, C115: stayed thirty minutes after the service just catching up in the parking lot",
+            "run": "catching up in the parking lot"
+          },
+          {
+            "text": "Rosa Foster — in their life, C114: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+            "run": "read the flyer about the fruitvale"
+          },
+          {
+            "text": "Dalton Rushing — took a call about a future partnership opportunity, Chinatown (C115 — what happened in their life, not words they said)",
+            "run": "took a call about a future"
+          },
+          {
+            "text": "Dalton Rushing — in their life, C115: loved the A's on principle and still cleared the night for UNDOCKED",
+            "run": "loved the as on principle and"
+          },
+          {
+            "text": "Illy Jile — read the whole paper front to back with coffee going cold beside it near the market street, Chinatown (C115 — what happened in their life, not words",
+            "run": "read the whole paper front to"
+          },
+          {
+            "text": "Illy Jile — in their life, C114: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+            "run": "flyer for the oakland youth apprenticeship"
+          },
+          {
+            "text": "Illy Jile — in their life, C115: the bar went silent for UNDOCKED the way it used to for a late A's lead",
+            "run": "silent for undocked the way it"
+          },
+          {
+            "text": "Laila Cortez — in their life, C115: A line at the Uptown corner store turned into a small crowd of people with the same complaint.",
+            "run": "a line at the uptown corner"
+          },
+          {
+            "text": "Cedric Nakamura — in their life, C115: bought a new A's jersey and counted what was going right for once",
+            "run": "bought a new as jersey and"
+          },
+          {
+            "text": "Cedric Nakamura — in their life, C115: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
+            "run": "attended a community feedback session for"
+          },
+          {
+            "text": "Xavier Ramington — in their life, C115: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+            "run": "saw an oakland alternative response initiative"
+          },
+          {
+            "text": "Xavier Ramington — in their life, C115: heard the block erupt through an open window when the final play landed",
+            "run": "heard block erupt through open window when final play landed"
+          }
+        ],
+        "words": 1101,
+        "contractScore": 4
+      }
+    }
+  ],
+  "checkTotals": {
+    "seats": 5,
+    "toolSeats": 5,
+    "capHits": 0,
+    "thin": 0,
+    "verbatim": 2,
+    "graded": 5,
+    "gradeSum": 19
+  },
+  "ranAt": "2026-11-10T00:21:30.671Z"
+}

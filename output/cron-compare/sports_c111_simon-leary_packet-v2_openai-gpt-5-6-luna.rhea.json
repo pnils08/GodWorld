@@ -1,0 +1,61 @@
+{
+  "draft": "output/cron-compare/sports_c111_simon-leary_packet-v2_openai-gpt-5-6-luna.md",
+  "cycle": "111",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "205184a5b32e52e2afa15b2ea1a8e75c31ec89c99c9d59df0e76a6af1fd8ed62",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Article verified cleanly with exact quote match and verified record details.",
+  "review": {
+    "profileId": "simon-longview-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "simon-longview-v1",
+    "packageVersion": "SIMON-LEP2-1",
+    "manifestId": "AM-0f360a560461",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Vinnie Keane"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 1,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0094,
+  "durationMs": 27516,
+  "parseError": false,
+  "ranAt": "2026-10-15T23:16:52.488Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 487,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "205184a5b32e52e2afa15b2ea1a8e75c31ec89c99c9d59df0e76a6af1fd8ed62",
+    "costUsd": 0.001
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "office": "council_d4",
+  "cycle": 113,
+  "speaker": "Ramon Vega",
+  "cascadeSummary": "I have decided to file the legislative ordinance for the Ivy Hill Revitalization Initiative and support the Dimond Revitalization Initiative, while also acknowledging Glenview's progress. These decisions align with my commitment to District 4's revitalization and stability.",
+  "statements": [
+    {
+      "statementId": "STMT-113-council_d4-001",
+      "type": "vote_statement",
+      "topic": "Ivy Hill Revitalization Initiative",
+      "initiative": "Ivy Hill Revitalization Initiative",
+      "decision": "File the legislative ordinance for INIT-011",
+      "quote": "Ivy Hill is hurting now — we answer with action, not studies.",
+      "fullStatement": "As Council President and representative of District 4, I am committed to filing the legislative ordinance for the Ivy Hill Revitalization Initiative (INIT-011) this cycle. The data shows a concerning trend of decay momentum and crime index in Ivy Hill, demanding immediate attention and targeted investment. I believe community support and structured revitalization efforts are crucial for our neighborhood's future.",
+      "disposition": "YES",
+      "actionAsked": "File INIT-011 legislative ordinance",
+      "tone": "deliberate-analytical",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-113-council_d4-002",
+      "type": "vote_statement",
+      "topic": "Dimond Revitalization Initiative",
+      "initiative": "Dimond Revitalization Initiative",
+      "decision": "Support the filing of INIT-012",
+      "quote": "Stability in Dimond is not a static victory; we must address the souring mood before it becomes a trend of decay.",
+      "fullStatement": "I stand with Dimond in addressing the pressing issues of commercial contraction and public safety. The recent data indicates a concerning trend that demands our immediate attention. I believe targeted investment and fiscal discipline are crucial for our city's growth, and I will work with the city to find solutions that support Dimond's revitalization.",
+      "disposition": "YES",
+      "actionAsked": "Support INIT-012 filing",
+      "tone": "bridge-building",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-113-council_d4-003",
+      "type": "statement",
+      "topic": "Glenview Progress",
+      "initiative": null,
+      "decision": "Acknowledge Glenview's progress",
+      "quote": "The progress in Glenview is a testament to the city's structured support and the people's resilience.",
+      "fullStatement": "I recognize the progress made in Glenview, where the mood remains flat but street trade is slow. This progress is a result of our city's structured support and the community's resilience. I commend the efforts that have contributed to this stability and will continue to support initiatives that foster growth in our neighborhoods.",
+      "disposition": "statement",
+      "actionAsked": "Continue supporting Glenview's growth",
+      "tone": "procedural-authoritative",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    }
+  ]
+}

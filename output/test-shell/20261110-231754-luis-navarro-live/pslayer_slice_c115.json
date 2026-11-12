@@ -1,0 +1,337 @@
+{
+  "cycle": 115,
+  "builtAt": "2026-11-10T12:15:07.404Z",
+  "empty": false,
+  "journalist": {
+    "name": "P Slayer",
+    "popid": "POP-00008",
+    "persona": "p-slayer"
+  },
+  "approach": "Fan-heat approach (P Slayer pulse): do NOT open from the FO press release or the award board. Open from gut or Oakland sensory (bar, lot, bleacher row, BART after). First-person I/we only. Pick 1–2 charge-bag modes from this slice. Friction pivot required — name the counter-argument, kill it. ONE real foil number max (from FoilNumber / AnchorFacts); never invent x-stats or roster moves. Hook PriorTake when present — eat it or double down (\"I was wrong\" is craft). End on charge that sticks: dare, confession, or update. Not Anthony. Not Hal. Not multi-voice sports-desk average.",
+  "pulse": {
+    "className": "insult-pulse",
+    "classes": [
+      "result-pulse",
+      "win-streak",
+      "insult-pulse"
+    ],
+    "score": 66,
+    "label": "The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+    "team": "Oaks",
+    "eventKind": "game-result",
+    "seasonType": "early-season",
+    "feedCycle": 115,
+    "record": "7-1",
+    "streak": "W3",
+    "mood": "locked-in",
+    "fanSentiment": "excited",
+    "neighborhood": "KONO",
+    "notes": "The Oaks put the Orlando Magic away in the first quarter and made it three straight, Oaks 125 - Magic 109, in front of a 94% crowd at home. Oakland scored 41 in the opening quarter to lead 41-27, went up 73-52 at the half and 101-76 after three, and the Magic only got it respectable by winning a garbage-time fourth 33-24. Adash Stanley led with 24 points, 8 assists and zero turnovers, hitting 6 of 12 from three. AJ Dybantsa bounced back from his 4 for 15 night against Oklahoma City by going 11 of 13 for 23 points, and Dillon Brooks followed his 22-point Cup opener with 23 on 10 of 14, giving him back-to-back 20-point games. Austin Reaves scored all 15 of his points from deep, 5 of 10 from three, with 7 assists, and Wendell Carter Jr. added 12 on 6 of 10. Off the bench T. Jerome had 9 points and 7 assists in 18 minutes and J. Valančiūnas went 4 for 5 for 8. Harry Hayward played 16 minutes after his 23 in Toronto and filled the line with 5 points, 2 steals and a block. As a team the Oaks shot 53 of 89, 18 of 33 from three, with 33 assists against only 4 turnovers, and went to the line just once all night. B. Simmons, who scored 5 in Toronto, was a DNP along with B. James Jr., J. Tate and Coen Carr. The Oaks move to 7-1.",
+    "stats": "Adash Stanley/24PTS/5REB/8ASST/0TO/9-18FG/6-12 3PT, AJ Dybantsa/23PTS/5REB/4ASST/11-13FG, Dillon Brooks/23PTS/4REB/3ASST/10-14FG/3-5 3PT, Austin Reaves/15PTS/7ASST/5-10 3PT, Wendell Carter Jr/12PTS/5REB/6-10FG, T. Jerome/9PTS/7ASST, Harry Hayward/5PTS/2STL/1BLK in 16 minutes"
+  },
+  "charge": {
+    "bagModes": [
+      {
+        "id": 3,
+        "name": "Friction Pivot"
+      },
+      {
+        "id": 7,
+        "name": "We Still Believe / We're Done"
+      },
+      {
+        "id": 10,
+        "name": "Wire Dare"
+      }
+    ],
+    "fanCharge": "fury",
+    "foilNumber": "9-18",
+    "centralFeeling": "Oakland should feel the FO heard the bleachers.",
+    "palette": [
+      "fury",
+      "euphoria",
+      "dread",
+      "defiance",
+      "confession",
+      "grief",
+      "dare"
+    ]
+  },
+  "prewrite": {
+    "reporter": "P.Slayer",
+    "bagModes": [
+      {
+        "id": 3,
+        "name": "Friction Pivot"
+      },
+      {
+        "id": 7,
+        "name": "We Still Believe / We're Done"
+      },
+      {
+        "id": 10,
+        "name": "Wire Dare"
+      }
+    ],
+    "fanCharge": "fury",
+    "priorTake": "NONE — write cold or invent no prior; wall may still inject at wake",
+    "anchorFacts": [
+      "StoryAngle (feed): The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+      "Team record (feed): 7-1 · streak W3",
+      "Stats (feed): Adash Stanley/24PTS/5REB/8ASST/0TO/9-18FG/6-12 3PT, AJ Dybantsa/23PTS/5REB/4ASST/11-13FG, Dillon Brooks/23PTS/4REB/3ASST/10-14FG/3-5 3PT, Austin Reaves/15PTS/7ASST/5-10 3PT, Wendell Carter Jr/12PTS/5REB/6-10FG, T. Jerome/9PTS/7ASST, Harry Hayward/5PTS/2STL/1BLK in 16 minutes",
+      "Event: Oaks — game-result (early-season)"
+    ],
+    "foilNumber": "9-18",
+    "centralFeeling": "Oakland should feel the FO heard the bleachers.",
+    "hooks": [
+      {
+        "text": "A's player retires. Career look-back, the farewell, what the city remembers.",
+        "angle": "conflict/tension coverage",
+        "hood": null
+      },
+      {
+        "text": "A's in the community. Who showed up, who it helped, the club off the field.",
+        "angle": "conflict/tension coverage",
+        "hood": null
+      }
+    ]
+  },
+  "hooks": [
+    {
+      "text": "A's player retires. Career look-back, the farewell, what the city remembers.",
+      "angle": "conflict/tension coverage",
+      "hood": null
+    },
+    {
+      "text": "A's in the community. Who showed up, who it helped, the club off the field.",
+      "angle": "conflict/tension coverage",
+      "hood": null
+    }
+  ],
+  "seeds": [
+    {
+      "seedId": "10ea4b7b",
+      "hood": "Citywide",
+      "citizens": [
+        "POP-00001 Vinnie Keane",
+        "POP-00021 Darrin Davis",
+        "POP-00136 Rafael Montez",
+        "POP-00597 Eric Taveras",
+        "POP-00599 Jose Colon",
+        "POP-00078 Sergio Aybar"
+      ],
+      "businesses": [],
+      "angle": "conflict/tension coverage"
+    }
+  ],
+  "friction": {
+    "a": "Public insult / podcast heat",
+    "b": "FO silence or \"stick to baseball\" smugness",
+    "frame": "Oakland hears disrespect — answer from the stands, not the boardroom."
+  },
+  "priorTakes": [],
+  "story": {
+    "ref": "Oakland_Sports_Feed cycle 115; world_summary_c115.md \"## Sports\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+    "label": "The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+    "kind": "insult-pulse",
+    "angle": "The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+    "hookLine": "Oakland hears disrespect — answer from the stands, not the boardroom.",
+    "hood": "KONO",
+    "team": "Oaks",
+    "eventKind": "game-result",
+    "popids": [
+      "POP-01023",
+      "POP-01079",
+      "POP-01027",
+      "POP-01223",
+      "POP-01026"
+    ],
+    "citizens": [
+      "Adash Stanley (POP-01023)",
+      "Dillon Brooks (POP-01079)",
+      "Austin Reaves (POP-01027)",
+      "Orlando Magic",
+      "Oklahoma City",
+      "Wendell Carter Jr",
+      "Harry Hayward (POP-01223)",
+      "James Jr",
+      "Coen Carr (POP-01026)"
+    ],
+    "pulseClass": "insult-pulse",
+    "pulseScore": 66,
+    "fanCharge": "fury",
+    "bagModeIds": [
+      3,
+      7,
+      10
+    ]
+  },
+  "players": [
+    {
+      "name": "Adash Stanley",
+      "popid": "POP-01023",
+      "role": "PG / The Oaks ",
+      "neighborhood": "Downtown",
+      "why": "feed-names"
+    },
+    {
+      "name": "Dillon Brooks",
+      "popid": "POP-01079",
+      "role": "SF / The Oaks",
+      "neighborhood": "West Oakland",
+      "why": "feed-names"
+    },
+    {
+      "name": "Austin Reaves",
+      "popid": "POP-01027",
+      "role": "SG / The Oaks",
+      "neighborhood": "West Oakland",
+      "why": "feed-names"
+    },
+    {
+      "name": "Orlando Magic",
+      "popid": null,
+      "role": null,
+      "neighborhood": null,
+      "why": "feed-names"
+    },
+    {
+      "name": "Oklahoma City",
+      "popid": null,
+      "role": null,
+      "neighborhood": null,
+      "why": "feed-names"
+    },
+    {
+      "name": "Wendell Carter Jr",
+      "popid": null,
+      "role": null,
+      "neighborhood": null,
+      "why": "feed-names"
+    },
+    {
+      "name": "Harry Hayward",
+      "popid": "POP-01223",
+      "role": "Oakland Oaks - Power Forward",
+      "neighborhood": "KONO",
+      "why": "feed-names"
+    },
+    {
+      "name": "James Jr",
+      "popid": null,
+      "role": null,
+      "neighborhood": null,
+      "why": "feed-names"
+    },
+    {
+      "name": "Coen Carr",
+      "popid": "POP-01026",
+      "role": "SG / The Oaks",
+      "neighborhood": "Uptown",
+      "why": "feed-names"
+    }
+  ],
+  "scene": {
+    "neighborhood": "KONO",
+    "record": "7-1",
+    "streak": "W3",
+    "mood": "locked-in",
+    "fanSentiment": "excited",
+    "colorRoom": "You may invent unnamed bar / lot / BART / bleacher texture that contradicts nothing on this slice. Do not invent star players, contracts, stats, or quotes. Named people stay on PLAYERS list or Tribune colleagues (Anthony, Hal, Mags) as foils."
+  },
+  "candidates": [
+    {
+      "score": 66,
+      "cycle": 115,
+      "team": "Oaks",
+      "primary": "insult-pulse",
+      "angle": "The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+      "priorHits": 0
+    },
+    {
+      "score": 48,
+      "cycle": 115,
+      "team": "A's",
+      "primary": "award-board",
+      "angle": "It's official: Vinnie Keane retires. Undrafted to undeniable, and staying in Grand Lake.",
+      "priorHits": 0
+    },
+    {
+      "score": 47,
+      "cycle": 115,
+      "team": "A's",
+      "primary": "prospect-callup",
+      "angle": "The backup outhit the starter and two kids are knocking. Who catches for the A's in 2042?",
+      "priorHits": 0
+    },
+    {
+      "score": 46,
+      "cycle": 114,
+      "team": "Oaks",
+      "primary": "loss",
+      "angle": "The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+      "priorHits": 0
+    },
+    {
+      "score": 44,
+      "cycle": 115,
+      "team": "A's",
+      "primary": "award-board",
+      "angle": "Fifth on points, first in credits: Taveras's Undocked pledge to Keane's academy is still waiting on a payout",
+      "priorHits": 0
+    },
+    {
+      "score": 44,
+      "cycle": 115,
+      "team": "Oaks",
+      "primary": "win-streak",
+      "angle": "Down two after three in Philadelphia, the Oaks drop 40 in the fourth and Hayward scores a career high. Oaks 120 - 76ers 106",
+      "priorHits": 0
+    },
+    {
+      "score": 42,
+      "cycle": 115,
+      "team": "Oaks",
+      "primary": "win-streak",
+      "angle": "Second-round rookie Harry Hayward scores a career high and makes his case for a bigger role",
+      "priorHits": 0
+    },
+    {
+      "score": 40,
+      "cycle": 113,
+      "team": "A's",
+      "primary": "injury-load",
+      "angle": "The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+      "priorHits": 0
+    }
+  ],
+  "pointers": [
+    "output/world_summary_c115.md ## Sports",
+    "output/desk_signal_c115.json lanes.sports",
+    "docs/media/P_SLAYER_CHARGE_BAG.md",
+    "docs/media/voices/p_slayer.md",
+    "docs/media/P_SLAYER_JOURNEY_INDEX.md",
+    "Oakland_Sports_Feed cycle 115; world_summary_c115.md \"## Sports\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+    "output/beats/Story_Hook_Deck.jsonl + Story_Seed_Deck.jsonl (sports, this cycle)"
+  ],
+  "gaps": {
+    "note": "What would deepen fan-heat further",
+    "missingOrThin": [
+      {
+        "source": "cp-POP-00008 live wall at build time",
+        "status": "wake-time",
+        "why": "reporterWall injects at cron angle; slice uses on-disk prior columns so build stays offline"
+      },
+      {
+        "source": "As_Roster live line for foil",
+        "status": "feed-stats-proxy",
+        "why": "FoilNumber parsed from feed Stats/Notes; live roster sheet would refine without inventing"
+      },
+      {
+        "source": "TrueSource / truesource injury windows",
+        "status": "partial",
+        "why": "Injury-load class relies on feed wording; card detail would strengthen Superman mode"
+      }
+    ]
+  }
+}

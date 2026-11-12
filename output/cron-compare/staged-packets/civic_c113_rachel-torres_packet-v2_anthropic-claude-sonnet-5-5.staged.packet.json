@@ -1,0 +1,427 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00057",
+    "name": "Sgt. Rachel Torres",
+    "role": "desk reporter",
+    "desk": "civic"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Eastlake logged the most incidents (8) | 22 neighborhoods on the table — what the table says and who answers for it",
+    "approach": "Public-safety approach: this slice is the crime table for every neighborhood — incidents, response time, clearance — the public-safety staff on the roster, the court record (who was charged, what the court did, what it cost them) and the custody trail from charges to arrests to who is held, hood by hood. Measured, third person, incident structure and classification gaps. The numbers, the officials and the defendants are real; the block, the call, the aftermath are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "public-safety",
+      "hood": "Eastlake",
+      "facts": [
+        "130 incidents across 22 neighborhoods; most in Eastlake 8, West Oakland 7, Grand Lake 7, Laurel 7, Chinatown 7; fewest in Glenview 4, Brooklyn 4, Jack London 3",
+        "Eastlake: 8 incidents (+4 vs C112), response 9.9 min, clearance 22%, property index 37, violent index 23",
+        "Slowest response: Temescal: 6 incidents (+1 vs C112), response 10.8 min, clearance 22%, property index 44, violent index 22",
+        "Moved this cycle — rising: Adams Point, Piedmont Ave; easing: none",
+        "Citywide custody this cycle: 29 arrests (0 tracked, 29 other residents); 56 in custody at the close; 30 left",
+        "West Oakland: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "Eastlake: 8 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+        "Grand Lake: 7 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+        "KONO: 7 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+        "Laurel: 7 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked"
+      ],
+      "priorCycle": "PRIOR_CYCLE_ON_DISK",
+      "note": "desk-signal incident rows attached as pointers (5)",
+      "engineHooks": [],
+      "roomIsYours": "the corner after the call, the dispatcher's pause, who was on the porch, what the neighborhood watch captain saw first",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF",
+    "runningStoriesNote": "signal.runningStories are events the city is already living through and where each one stands. Background only — write nothing about tracking them."
+  },
+  "signal": {
+    "kind": "beat-safety",
+    "hood": "Eastlake",
+    "src": "output/beats/Crime_Metrics.jsonl @C113",
+    "plan": {
+      "focus": "Eastlake's 8 incidents — the highest in the city, up 4 from last cycle — and who on the public-safety roster answers for the jump, the 9.9-minute response, and the 22% clearance.",
+      "closeQuestion": "If Eastlake is the most incident-heavy neighborhood in the city this cycle, and the clearance rate is 22%, what does the department say to the people who live there — and what changes before next cycle?"
+    },
+    "runningStories": [
+      "West Oakland Stabilization Fund — disbursement-active [West Oakland] — week 5",
+      "Oakland Alternative Response Initiative — dispatch-live [West Oakland, Fruitvale, East Oakland] — week 5",
+      "Fruitvale Transit Hub Phase II — Visioning — design-phase [Fruitvale] — week 5",
+      "Temescal Community Health Center — operational [Temescal] — week 5",
+      "Baylight District — Final Council Vote — construction-active [Jack London, Downtown] — week 5",
+      "Oakland Youth Apprenticeship Pipeline — implementation-active [West Oakland, East Oakland, Fruitvale] — week 2",
+      "Downtown Economic Revitalization — legislation-filed [Downtown] — week 3",
+      "Commercial Stabilization for Grand Lake — legislation-filed [Grand Lake] — week 2",
+      "West Oakland Tenant Defense Fund — operational [West Oakland] — under way",
+      "Ivy Hill Revitalization Initiative — announced [Ivy Hill] — week 2",
+      "Dimond Revitalization Initiative — announced [Dimond] — under way",
+      "West Oakland Tenant Defense Fund — vote-scheduled [West Oakland] — ENDED this week after 2 week(s); now operational"
+    ]
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00136",
+        "name": "Rafael Montez",
+        "profile": "Rafael Montez — Police Chief — Oakland Police Department",
+        "quotationEligible": false,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00137",
+        "name": "Kimberly Cho",
+        "profile": "Kimberly Cho — DEPUTY CHIEF OF OPERATIONS — Oakland Police Department",
+        "quotationEligible": false,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00138",
+        "name": "Leonard Briggs",
+        "profile": "Leonard Briggs — DEPUTY CHIEF OF COMMUNITY ENGAGEMENT — Oakland Police Department",
+        "quotationEligible": false,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [],
+    "excludedLeads": [
+      {
+        "from": "Sgt. Rachel Torres",
+        "text": "A neighborhood watch captain on Eastlake may have seen the first call come in and could describe what the corner looked like before officers arrived.",
+        "usable": false
+      },
+      {
+        "from": "Sgt. Rachel Torres",
+        "text": "A dispatcher's pause on one of the Eastlake calls may indicate a delay or confusion in routing that affected the 9.9-minute response.",
+        "usable": false
+      },
+      {
+        "from": "Sgt. Rachel Torres",
+        "text": "A porch on Eastlake where one of the incidents occurred may have a resident who saw the aftermath and can speak to how long it took for anyone to show up.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C113",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-876f95b5eb98"
+    },
+    {
+      "t": "FACT",
+      "text": "Eastlake logged the most incidents (8) | 22 neighborhoods on the table",
+      "src": "output/beats/Crime_Metrics.jsonl @C113",
+      "id": "F-61f45030db24"
+    },
+    {
+      "t": "FACT",
+      "text": "Eastlake leads the incident count; Temescal waits longest for a response; 56 in custody citywide; 39 public-safety staff on the roster.",
+      "src": "output/beats/Crime_Metrics.jsonl @C113",
+      "id": "F-d83e69e86203"
+    },
+    {
+      "t": "FACT",
+      "text": "130 incidents across 22 neighborhoods; most in Eastlake 8, West Oakland 7, Grand Lake 7, Laurel 7, Chinatown 7; fewest in Glenview 4, Brooklyn 4, Jack London 3",
+      "src": "output/beats/Crime_Metrics.jsonl @C113",
+      "id": "F-d39c72d12b5e"
+    },
+    {
+      "t": "FACT",
+      "text": "Eastlake: 8 incidents (+4 vs C112), response 9.9 min, clearance 22%, property index 37, violent index 23",
+      "src": "output/beats/Crime_Metrics.jsonl @C113",
+      "id": "F-131434d9dc5e"
+    },
+    {
+      "t": "FACT",
+      "text": "Slowest response: Temescal: 6 incidents (+1 vs C112), response 10.8 min, clearance 22%, property index 44, violent index 22",
+      "src": "output/beats/Crime_Metrics.jsonl @C113",
+      "id": "F-744fab41f1e7"
+    },
+    {
+      "t": "FACT",
+      "text": "Moved this cycle — rising: Adams Point, Piedmont Ave; easing: none",
+      "src": "output/beats/Crime_Metrics.jsonl @C113",
+      "id": "F-620068e0bb7d"
+    },
+    {
+      "t": "FACT",
+      "text": "Citywide custody this cycle: 29 arrests (0 tracked, 29 other residents); 56 in custody at the close; 30 left",
+      "src": "output/beats/Care_Justice_Census.jsonl judicial @C113 city",
+      "id": "F-84c8359b4eea"
+    },
+    {
+      "t": "FACT",
+      "text": "West Oakland: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl judicial @C113 West Oakland",
+      "id": "F-b813cdc73efc"
+    },
+    {
+      "t": "FACT",
+      "text": "Eastlake: 8 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl judicial @C113 Eastlake",
+      "id": "F-6fda92b7955f"
+    },
+    {
+      "t": "FACT",
+      "text": "Grand Lake: 7 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl judicial @C113 Grand Lake",
+      "id": "F-c75f5deee9d3"
+    },
+    {
+      "t": "FACT",
+      "text": "KONO: 7 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl judicial @C113 KONO",
+      "id": "F-6a28e70f19b2"
+    },
+    {
+      "t": "FACT",
+      "text": "Laurel: 7 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl judicial @C113 Laurel",
+      "id": "F-ce0f58abaf62"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C9, Winter, holiday=none",
+      "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+      "id": "F-ab9d6786094e"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. No named ledger citizen spoke for this piece (manifest.approvedQuotes is empty): put no words in a named citizen's mouth. Unnamed voices are yours. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "rachel-public-safety-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Trace one Packet-backed public-safety incident, classification gap, or OARI response question without sensationalism or invented case detail.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "measured third-person public-safety reporting",
+      "targetWords": "500-800",
+      "opening": "a Packet-backed safety signal, place, or resident consequence",
+      "closing": "an unresolved accountability or practical-safety question grounded in the record"
+    },
+    "authorizedTexture": [
+      "unnamed restrained scene texture with no incident facts",
+      "analysis of a supplied classification or response gap",
+      "a practical close limited to the supplied record"
+    ],
+    "textureConditions": [
+      "every named person, institution, incident, agency, number, and date must come from the Packet",
+      "do not claim an interview, observation, quote, fear, trend, or response metric absent from the Packet",
+      "crime or safety interpretation must remain framed as analysis when not a supplied fact"
+    ],
+    "canonBlockers": [
+      "invented incident, arrest, officer, case, quote, clearance, response time, or agency action",
+      "unsupported crime classification or collective fear claim",
+      "raw engine labels or decimals as public-facing evidence",
+      "a named person or institution not supplied by the Packet"
+    ]
+  },
+  "manifest": {
+    "id": "AM-b4f8f732ca6c",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-876f95b5eb98",
+        "t": "FACT",
+        "text": "Current cycle: C113",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-61f45030db24",
+        "t": "FACT",
+        "text": "Eastlake logged the most incidents (8) | 22 neighborhoods on the table",
+        "src": "output/beats/Crime_Metrics.jsonl @C113"
+      },
+      {
+        "id": "F-d83e69e86203",
+        "t": "FACT",
+        "text": "Eastlake leads the incident count; Temescal waits longest for a response; 56 in custody citywide; 39 public-safety staff on the roster.",
+        "src": "output/beats/Crime_Metrics.jsonl @C113"
+      },
+      {
+        "id": "F-d39c72d12b5e",
+        "t": "FACT",
+        "text": "130 incidents across 22 neighborhoods; most in Eastlake 8, West Oakland 7, Grand Lake 7, Laurel 7, Chinatown 7; fewest in Glenview 4, Brooklyn 4, Jack London 3",
+        "src": "output/beats/Crime_Metrics.jsonl @C113"
+      },
+      {
+        "id": "F-131434d9dc5e",
+        "t": "FACT",
+        "text": "Eastlake: 8 incidents (+4 vs C112), response 9.9 min, clearance 22%, property index 37, violent index 23",
+        "src": "output/beats/Crime_Metrics.jsonl @C113"
+      },
+      {
+        "id": "F-744fab41f1e7",
+        "t": "FACT",
+        "text": "Slowest response: Temescal: 6 incidents (+1 vs C112), response 10.8 min, clearance 22%, property index 44, violent index 22",
+        "src": "output/beats/Crime_Metrics.jsonl @C113"
+      },
+      {
+        "id": "F-620068e0bb7d",
+        "t": "FACT",
+        "text": "Moved this cycle — rising: Adams Point, Piedmont Ave; easing: none",
+        "src": "output/beats/Crime_Metrics.jsonl @C113"
+      },
+      {
+        "id": "F-84c8359b4eea",
+        "t": "FACT",
+        "text": "Citywide custody this cycle: 29 arrests (0 tracked, 29 other residents); 56 in custody at the close; 30 left",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C113 city"
+      },
+      {
+        "id": "F-b813cdc73efc",
+        "t": "FACT",
+        "text": "West Oakland: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C113 West Oakland"
+      },
+      {
+        "id": "F-6fda92b7955f",
+        "t": "FACT",
+        "text": "Eastlake: 8 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C113 Eastlake"
+      },
+      {
+        "id": "F-c75f5deee9d3",
+        "t": "FACT",
+        "text": "Grand Lake: 7 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C113 Grand Lake"
+      },
+      {
+        "id": "F-6a28e70f19b2",
+        "t": "FACT",
+        "text": "KONO: 7 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C113 KONO"
+      },
+      {
+        "id": "F-ce0f58abaf62",
+        "t": "FACT",
+        "text": "Laurel: 7 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C113 Laurel"
+      },
+      {
+        "id": "F-ab9d6786094e",
+        "t": "FACT",
+        "text": "Calendar: Y3C9, Winter, holiday=none",
+        "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)"
+      }
+    ],
+    "approvedQuotes": [],
+    "approvedSubjects": [
+      {
+        "id": "POP-00136",
+        "name": "Rafael Montez",
+        "profile": "Rafael Montez — Police Chief — Oakland Police Department",
+        "src": "packet.W1.exposure",
+        "quotationEligible": false
+      },
+      {
+        "id": "POP-00137",
+        "name": "Kimberly Cho",
+        "profile": "Kimberly Cho — DEPUTY CHIEF OF OPERATIONS — Oakland Police Department",
+        "src": "packet.W1.exposure",
+        "quotationEligible": false
+      },
+      {
+        "id": "POP-00138",
+        "name": "Leonard Briggs",
+        "profile": "Leonard Briggs — DEPUTY CHIEF OF COMMUNITY ENGAGEMENT — Oakland Police Department",
+        "src": "packet.W1.exposure",
+        "quotationEligible": false
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Sgt. Rachel Torres",
+        "text": "A neighborhood watch captain on Eastlake may have seen the first call come in and could describe what the corner looked like before officers arrived.",
+        "publishable": false
+      },
+      {
+        "from": "Sgt. Rachel Torres",
+        "text": "A dispatcher's pause on one of the Eastlake calls may indicate a delay or confusion in routing that affected the 9.9-minute response.",
+        "publishable": false
+      },
+      {
+        "from": "Sgt. Rachel Torres",
+        "text": "A porch on Eastlake where one of the incidents occurred may have a resident who saw the aftermath and can speak to how long it took for anyone to show up.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "unnamed restrained scene texture with no incident facts",
+      "analysis of a supplied classification or response gap",
+      "a practical close limited to the supplied record"
+    ],
+    "textureConditions": [
+      "every named person, institution, incident, agency, number, and date must come from the Packet",
+      "do not claim an interview, observation, quote, fear, trend, or response metric absent from the Packet",
+      "crime or safety interpretation must remain framed as analysis when not a supplied fact"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "draft": "output/cron-compare/sports_c113_p-slayer_packet-v2_x-ai-grok-4-3.md",
+  "cycle": "113",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "e4a49e59a7286d4c4e6c769953f4e93b57e58f6496980a4b216b925864fff948",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All citizen attributions, sports feed details, and quotes match cycle 113 canon and ledger interview records.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "p-slayer-fan-heat-v1",
+    "packageVersion": "PSLAYER-LEP2-1",
+    "manifestId": "AM-b4eaf8a8dcf8",
+    "lexicalObservations": [],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Danny Horn",
+      "Desmond Morton",
+      "Frank Reyna",
+      "Rayon Dart",
+      "Vladimir Gonzalez"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0103,
+  "durationMs": 5982,
+  "parseError": false,
+  "ranAt": "2026-10-31T17:02:41.059Z",
+  "contractScore": {
+    "opened": true,
+    "closed": false,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 400",
+    "words": 414,
+    "short": "The closing ends on a flat rhetorical question rather than a dare, confession, or live-friction update.",
+    "score": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "e4a49e59a7286d4c4e6c769953f4e93b57e58f6496980a4b216b925864fff948",
+    "costUsd": 0.0014
+  }
+}

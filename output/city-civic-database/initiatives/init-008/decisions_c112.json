@@ -1,0 +1,16 @@
+{
+  "initiative": "INIT-008",
+  "initiativeId": "INIT-008",
+  "cycle": 112,
+  "primaryVoice": "Mayor gavel (mayor_gavel-004)",
+  "consolidatedFrom": [
+    "STMT-112-mayor_gavel-004 (Mayor gavel — Downtown Economic Revitalization Emergency Committee Hearing)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-008",
+    "ImplementationPhase": "legislation-filed",
+    "MilestoneNotes": "C112: Emergency Economic Development Committee hearing convened; Ashford benchmarks attached; Uptown track committed for C114",
+    "NextScheduledAction": "Committee vote and Uptown stabilization planning",
+    "NextActionCycle": 113
+  }
+}

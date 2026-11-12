@@ -1,0 +1,70 @@
+{
+  "office": "council_d8",
+  "agentDir": "civic-office-council-d8",
+  "holder": "Nina Chen",
+  "popid": "POP-00505",
+  "title": "City Council District 8",
+  "date": "2026-11-11",
+  "cycle": 115,
+  "model": "google/gemini-3.8-flash",
+  "statement": "District 8 is focusing oversight on Eastlake to audit municipal maintenance schedules and service delivery as decay momentum reaches 1 and sentiment sits at -0.06, while confirming the failed administrative status of Grand Lake stabilization funding.",
+  "moves": [
+    {
+      "type": "canvass",
+      "payload": {
+        "hood": "Eastlake",
+        "note": "Documenting corridor conditions, sanitation schedules, and municipal service performance with Eastlake residents."
+      }
+    },
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-115-civic-office-council-d8",
+        "text": "District 8 is reviewing public works logs for Eastlake to address documented decay momentum of 1, crime index of 0.71, and sentiment of -0.06. Regarding community feedback, our office has accounted for the 3 complaints logged from Lake Merritt across Cycles 113 through 115 alongside 3 constructive civic participation entries. On Grand Lake commercial stabilization, INIT-009 is officially recorded as failed with $2,500,000 remaining, and our office will not permit renewal or reauthorization without certified audit standards.",
+        "directiveCycle": 115,
+        "confrontationSeat": "civic-office-council-d8"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": "2",
+  "ranAt": "2026-11-11T11:56:09.319Z",
+  "usage": {
+    "prompt_tokens": 6642,
+    "completion_tokens": 2150,
+    "total_tokens": 8792,
+    "cost": 0.013044,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.013044,
+      "upstream_inference_prompt_cost": 0.0049815,
+      "upstream_inference_completions_cost": 0.0080625
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 1842,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "fellBackFrom": null,
+  "evidenceGenerationHash": "8bfd87940a666380c5a9b73d2151cff4f6286856fa3673a770c7259a48d6c71b",
+  "evidenceReads": [],
+  "provider": "Google",
+  "finishReason": "stop",
+  "elapsedMs": 16786,
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00505",
+    "id": "ypp4dXZ2kLseepVVHVbSkP",
+    "customId": "cp-POP-00505-c115-CIVIC-datawake-2026-11-11"
+  }
+}

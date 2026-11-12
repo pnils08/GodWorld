@@ -1,0 +1,141 @@
+{
+  "empty": false,
+  "cycle": 114,
+  "kind": "simon-longview",
+  "desk": "sports",
+  "journalist": {
+    "name": "Simon Leary",
+    "popid": "POP-00016",
+    "persona": "simon-leary"
+  },
+  "pulse": {
+    "className": "role-change-under-continuity",
+    "score": 84,
+    "label": "The Oaks record is 5-1."
+  },
+  "prewrite": {
+    "bagModes": [
+      {
+        "id": 2,
+        "name": "Keystone Player"
+      },
+      {
+        "id": 4,
+        "name": "Load-Bearing Continuity"
+      }
+    ],
+    "anchorFacts": [
+      "The Oaks record is 5-1.",
+      "The Oaks have won 1 straight."
+    ],
+    "claim": "A role change inside a sustained team record can support a structural interpretation; it does not establish franchise history, organizational intent, or citywide meaning.",
+    "missing": [
+      "why the role change was made",
+      "historical comparison or franchise precedent",
+      "organizational intention or future plan",
+      "citywide, clubhouse, or fan interpretation"
+    ],
+    "hooks": []
+  },
+  "hooks": [],
+  "seeds": [],
+  "civicFacts": [
+    "FranchiseStability (feed): stable — sports feed",
+    "EconomicFootprint (feed): stable — sports feed",
+    "HomeNeighborhood (feed): Eastlake — sports feed",
+    "FranchiseStability (feed): stable — sports feed",
+    "EconomicFootprint (feed): stable — sports feed",
+    "HomeNeighborhood (feed): Dimond — sports feed"
+  ],
+  "story": {
+    "angle": "The Oaks record is 5-1.",
+    "label": "The Oaks record is 5-1.",
+    "hookLine": "The Oaks record is 5-1.",
+    "kind": "long-view-signal",
+    "hood": "San Antonio",
+    "popids": [
+      "POP-01027",
+      "POP-01023"
+    ],
+    "citizens": [
+      "Austin Reaves (POP-01027)",
+      "Adash Stanley (POP-01023)"
+    ],
+    "ref": "world_summary_c114.md ## Sports",
+    "cycle": 114
+  },
+  "approach": "Long-view approach (Simon Leary): third-person essayist. Treat supplied sports facts as present structure, not as proof of history or collective memory. A metaphor about continuity, load, or change may interpret the Packet but may not add a person, place, institution, event, season, statistic, cause, organizational intention, or citywide belief. Do not write a game recap, Hal elegy, P Slayer fan heat, or Anthony board memo.",
+  "players": [
+    {
+      "name": "Austin Reaves",
+      "popid": "POP-01027",
+      "role": "SG / The Oaks",
+      "neighborhood": "West Oakland",
+      "why": "feed-names"
+    },
+    {
+      "name": "Adash Stanley",
+      "popid": "POP-01023",
+      "role": "PG / The Oaks ",
+      "neighborhood": "Downtown",
+      "why": "feed-names"
+    }
+  ],
+  "scene": {
+    "colorRoom": "No witnessed room or scene is supplied. Structure and continuity may appear only as clearly interpretive metaphor grounded in the approved present facts."
+  },
+  "candidates": [
+    {
+      "score": 84,
+      "cycle": 114,
+      "team": "Oaks",
+      "label": "The Oaks bounce back with a 60-point rout in Toronto. Oaks 135 - Raptors 75"
+    },
+    {
+      "score": 84,
+      "cycle": 114,
+      "team": "Oaks",
+      "label": "Harry Hayward's minutes keep climbing, from 13 to 23"
+    },
+    {
+      "score": 84,
+      "cycle": 114,
+      "team": "Oaks",
+      "label": "Dillon Brooks' six threes carry the Oaks past OKC in the Cup opener. Oaks 101 - Thunder 95"
+    },
+    {
+      "score": 72,
+      "cycle": 114,
+      "team": "Oaks",
+      "label": "Second-round rookie Harry Hayward is shaping up as a solid rotation piece"
+    },
+    {
+      "score": 58,
+      "cycle": 114,
+      "team": "A's",
+      "label": "$22 million in veteran relief and the rookies got the October innings. Is a bullpen refresh coming?"
+    },
+    {
+      "score": 58,
+      "cycle": 114,
+      "team": "A's",
+      "label": "Keane said goodbye. Dillon still hasn't."
+    },
+    {
+      "score": 56,
+      "cycle": 114,
+      "team": "Oaks",
+      "label": "Henderson, Jerome and the depth turn a rout into a showcase"
+    },
+    {
+      "score": 44,
+      "cycle": 114,
+      "team": "Oaks",
+      "label": "The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100"
+    }
+  ],
+  "pointers": [
+    "output/world_summary_c114.md ## Sports",
+    "docs/media/SIMON_LONGVIEW_BAG.md"
+  ]
+}

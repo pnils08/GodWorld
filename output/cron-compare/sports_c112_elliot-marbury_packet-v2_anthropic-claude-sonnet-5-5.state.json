@@ -1,0 +1,522 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00166",
+    "name": "Elliot Marbury",
+    "role": "desk reporter",
+    "desk": "sports"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Vinnie Keane — 17 seasons on the dossier, 2041 the latest | hitter density memo, multi-year — what the line proves, on what sample, and what would disprove it",
+    "approach": "Data-desk approach: this slice is one player's season-by-season line off the dossier, the rates worked out from it, and two peers at the same job. Third person, dry, source-forward. One hard claim the numbers carry, with its sample size stated; a thin season is variance, not identity. Say which number next season would kill the claim. No quotes, no scene, no clubhouse — the memo is the proof. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "data-desk",
+      "hood": null,
+      "facts": [
+        "Vinnie Keane — DH / 3B / 2B / SS, Athletics; 17 seasons on the dossier",
+        "Vinnie Keane 2041 ATH: 37 G, 127 AB, 40 H, 13 HR, 29 RBI, 0 BB, 6 SO, 0 SB, AVG .315, OBP .308, SLG .701",
+        "Vinnie Keane 2040 ATH: 58 G, 209 AB, 60 H, 14 HR, 40 RBI, 8 BB, 35 SO, 7 SB, AVG .287, OBP .332, SLG .522",
+        "Vinnie Keane 2039 ATH: 55 G, 164 AB, 64 H, 17 HR, 47 RBI, 35 BB, 82 SO, 5 SB, AVG .315, OBP .341, SLG .680",
+        "Vinnie Keane 2038 ATH: 94 G, 328 AB, 119 H, 49 HR, 119 RBI, 49 BB, 81 SO, 4 SB, AVG .362, OBP .398, SLG .680",
+        "Vinnie Keane 2037 ATH: 150 G, 592 AB, 174 H, 34 HR, 105 RBI, 88 BB, 157 SO, 9 SB, AVG .294, OBP .376, SLG .515",
+        "Vinnie Keane 2036 ATH: 107 G, 409 AB, 111 H, 26 HR, 62 RBI, 38 BB, 69 SO, 17 SB, AVG .271, OBP .338, SLG .504",
+        "Vinnie Keane 2041 rates (127 AB): one HR every 9.8 AB, one SO every 21.2 AB (worked from the season line)",
+        "Vinnie Keane 2040 rates (209 AB): one HR every 14.9 AB, one SO every 6.0 AB (worked from the season line)",
+        "Vinnie Keane 2039 rates (164 AB): one HR every 9.6 AB, one SO every 2.0 AB (worked from the season line)",
+        "Vinnie Keane 2038 rates (328 AB): one HR every 6.7 AB, one SO every 4.0 AB (worked from the season line)",
+        "Vinnie Keane 2037 rates (592 AB): one HR every 17.4 AB, one SO every 3.8 AB (worked from the season line)"
+      ],
+      "priorCycle": "DOSSIER",
+      "note": "subject is on this cycle's feed",
+      "engineHooks": [],
+      "roomIsYours": "the order the columns are read in, which season is the hinge, what the peer band makes ordinary or strange",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-data-desk",
+    "hood": null,
+    "src": "output/player_truesource_mirror.json Vinnie Keane @C112",
+    "plan": {
+      "focus": "The 2041 strikeout rate (one every 21.2 at-bats) versus the 2039 rate (one every 2.0 at-bats) as the defining tension in Keane's late-career profile.",
+      "closeQuestion": "If Keane's 2041 strikeout rate holds over a full season, does it change how the dossier reads his entire late-career arc, or is it just a better version of the 2038 season?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [],
+    "sources": [],
+    "excludedLeads": [
+      {
+        "from": "Elliot Marbury",
+        "text": "The 2041 strikeout rate may be a fluke of a short season, but it is worth asking whether Keane changed his swing or approach in the offseason.",
+        "usable": false
+      },
+      {
+        "from": "Elliot Marbury",
+        "text": "The 2039 season's high strikeout rate may have been an injury-related anomaly, not a skill baseline.",
+        "usable": false
+      },
+      {
+        "from": "Elliot Marbury",
+        "text": "The empty walk column in 2041 could indicate a change in how pitchers are attacking him, not a change in his discipline.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C112",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-7cd6ffd2aeb3"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane — 17 seasons on the dossier, 2041 the latest | hitter density memo, multi-year",
+      "src": "output/player_truesource_mirror.json Vinnie Keane @C112",
+      "id": "F-8187ee0d6871"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane's 2041 line against 16 earlier seasons.",
+      "src": "output/player_truesource_mirror.json Vinnie Keane @C112",
+      "id": "F-54f9c6e009c8"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane — DH / 3B / 2B / SS, Athletics; 17 seasons on the dossier",
+      "src": "output/player_truesource_mirror.json Vinnie Keane",
+      "id": "F-0985d121d4a2"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane 2041 ATH: 37 G, 127 AB, 40 H, 13 HR, 29 RBI, 0 BB, 6 SO, 0 SB, AVG .315, OBP .308, SLG .701",
+      "src": "output/player_truesource_mirror.json Vinnie Keane",
+      "id": "F-cc6b7b3cc191"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane 2040 ATH: 58 G, 209 AB, 60 H, 14 HR, 40 RBI, 8 BB, 35 SO, 7 SB, AVG .287, OBP .332, SLG .522",
+      "src": "output/player_truesource_mirror.json Vinnie Keane",
+      "id": "F-543afe12148f"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane 2039 ATH: 55 G, 164 AB, 64 H, 17 HR, 47 RBI, 35 BB, 82 SO, 5 SB, AVG .315, OBP .341, SLG .680",
+      "src": "output/player_truesource_mirror.json Vinnie Keane",
+      "id": "F-785c40789ab9"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane 2038 ATH: 94 G, 328 AB, 119 H, 49 HR, 119 RBI, 49 BB, 81 SO, 4 SB, AVG .362, OBP .398, SLG .680",
+      "src": "output/player_truesource_mirror.json Vinnie Keane",
+      "id": "F-f94e9ff5aec9"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane 2037 ATH: 150 G, 592 AB, 174 H, 34 HR, 105 RBI, 88 BB, 157 SO, 9 SB, AVG .294, OBP .376, SLG .515",
+      "src": "output/player_truesource_mirror.json Vinnie Keane",
+      "id": "F-68678df76f3b"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane 2036 ATH: 107 G, 409 AB, 111 H, 26 HR, 62 RBI, 38 BB, 69 SO, 17 SB, AVG .271, OBP .338, SLG .504",
+      "src": "output/player_truesource_mirror.json Vinnie Keane",
+      "id": "F-efe7c85f0aa2"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane 2041 rates (127 AB): one HR every 9.8 AB, one SO every 21.2 AB (worked from the season line)",
+      "src": "output/player_truesource_mirror.json Vinnie Keane",
+      "id": "F-941d620e28e2"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane 2040 rates (209 AB): one HR every 14.9 AB, one SO every 6.0 AB (worked from the season line)",
+      "src": "output/player_truesource_mirror.json Vinnie Keane",
+      "id": "F-388504a1bff8"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane 2039 rates (164 AB): one HR every 9.6 AB, one SO every 2.0 AB (worked from the season line)",
+      "src": "output/player_truesource_mirror.json Vinnie Keane",
+      "id": "F-69882897e228"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane 2038 rates (328 AB): one HR every 6.7 AB, one SO every 4.0 AB (worked from the season line)",
+      "src": "output/player_truesource_mirror.json Vinnie Keane",
+      "id": "F-2d31ac19482f"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane 2037 rates (592 AB): one HR every 17.4 AB, one SO every 3.8 AB (worked from the season line)",
+      "src": "output/player_truesource_mirror.json Vinnie Keane",
+      "id": "F-f222c0d04c9d"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane 2036 rates (409 AB): one HR every 15.7 AB, one SO every 5.9 AB (worked from the season line)",
+      "src": "output/player_truesource_mirror.json Vinnie Keane",
+      "id": "F-54088af7d5c7"
+    },
+    {
+      "t": "FACT",
+      "text": "This cycle (feed notes, off-season): Taveras posted on Moltbook that if he was to win anything he would be donating it to the Vinnie Keane Firehouse 29 in West Oakland Baseball Academy.",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl @C112",
+      "id": "F-35e24b4fdd93"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane 2035 ATH: 160 G, 647 AB, 192 H, 31 HR, 105 RBI, 67 BB, 88 SO, 17 SB, AVG .317, OBP .390, SLG .582",
+      "src": "tool:dossier_read:Vinnie Keane",
+      "id": "F-0f6f5e8c9f9c"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane 2031 ATH: 160 G, 647 AB, 192 H, 35 HR, 105 RBI, 67 BB, 88 SO, 17 SB, AVG .297, OBP .363, SLG .575",
+      "src": "tool:dossier_read:Vinnie Keane",
+      "id": "F-2154967ea586"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane 2028 ATH: 160 G, 616 AB, 166 H, 40 HR, 55 RBI, 73 BB, 73 SO, 11 SB, AVG .269, OBP .337, SLG .537",
+      "src": "tool:dossier_read:Vinnie Keane",
+      "id": "F-a731426ec244"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane 2028 rates (616 AB): one HR every 15.4 AB, one SO every 8.4 AB (worked from the season line)",
+      "src": "tool:dossier_read:Vinnie Keane",
+      "id": "F-c72cc10dbea2"
+    },
+    {
+      "t": "FACT",
+      "text": "Martin Richards 2041 ATH: 120 G, 463 AB, 140 H, 27 HR, 65 RBI, 35 BB, 70 SO, 8 SB, AVG .302, OBP .355, SLG .551",
+      "src": "tool:dossier_read:Martin Richards:2041",
+      "id": "F-caee0d953552"
+    },
+    {
+      "t": "FACT",
+      "text": "Martin Richards 2041 rates (463 AB): one HR every 17.1 AB, one SO every 6.6 AB (worked from the season line)",
+      "src": "tool:dossier_read:Martin Richards:2041",
+      "id": "F-447066b1e589"
+    },
+    {
+      "t": "FACT",
+      "text": "Darrin Davis 2041 ATH: 95 G, 374 AB, 114 H, 24 HR, 73 RBI, 22 BB, 42 SO, 26 SB, AVG .305, OBP .350, SLG .594",
+      "src": "tool:dossier_read:Darrin Davis:2041",
+      "id": "F-18d87f9f4355"
+    },
+    {
+      "t": "FACT",
+      "text": "Darrin Davis 2041 rates (374 AB): one HR every 15.6 AB, one SO every 8.9 AB (worked from the season line)",
+      "src": "tool:dossier_read:Darrin Davis:2041",
+      "id": "F-c1660e43870e"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. No citizen spoke for this piece: manifest.approvedQuotes is empty. Write no quoted speech and attribute no statement to any person; the piece stands on the record and the place. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "marbury-data-desk-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Put one audit-grade claim in the paper: a single player's Packet-backed season lines, the rates the Packet has already worked from them, and the peer band, with the sample stated. The memo is the proof. One falsifiable claim the numbers carry is success; a quote, a scene, fan heat, elegy, or a number the Packet does not hold is not.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "dry third-person data-desk memo, source-forward",
+      "targetWords": "evidence-bounded; 350-600",
+      "opening": "the one Packet-backed season line or rate that carries the claim",
+      "closing": "the number next season that would disprove the claim"
+    },
+    "authorizedTexture": [
+      "plain-language reading of supplied season lines with each statistic kept with its named player and season",
+      "a trend or peer-band interpretation explicitly limited by the supplied games, innings, or at-bats",
+      "a blank or thin sample named as blank or thin rather than filled in"
+    ],
+    "textureConditions": [
+      "every named player, team, position, season, and source must come from the Packet",
+      "every statistic and rate must be a Packet figure as supplied; the memo performs no arithmetic the Packet has not already worked",
+      "a season year belongs to the player's dossier as supplied and is never moved, merged, or projected forward",
+      "the piece interviews nobody and attributes no statement, mood, or intention to any player, coach, or front office"
+    ],
+    "canonBlockers": [
+      "a statistic or rate attributed to the wrong player or the wrong season, or two players' lines merged into one subject",
+      "a rate, split, projection, or advanced metric the Packet does not supply",
+      "an invented award, contract, salary, injury, roster move, result, quote, interview, or front-office act",
+      "a named player, team, venue, institution, league, organization, or real-world entity not found in the supplied record",
+      "a one-season or thin-sample line presented as settled identity"
+    ]
+  },
+  "manifest": {
+    "id": "AM-68eccbdc779f",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-7cd6ffd2aeb3",
+        "t": "FACT",
+        "text": "Current cycle: C112",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-8187ee0d6871",
+        "t": "FACT",
+        "text": "Vinnie Keane — 17 seasons on the dossier, 2041 the latest | hitter density memo, multi-year",
+        "src": "output/player_truesource_mirror.json Vinnie Keane @C112"
+      },
+      {
+        "id": "F-54f9c6e009c8",
+        "t": "FACT",
+        "text": "Vinnie Keane's 2041 line against 16 earlier seasons.",
+        "src": "output/player_truesource_mirror.json Vinnie Keane @C112"
+      },
+      {
+        "id": "F-0985d121d4a2",
+        "t": "FACT",
+        "text": "Vinnie Keane — DH / 3B / 2B / SS, Athletics; 17 seasons on the dossier",
+        "src": "output/player_truesource_mirror.json Vinnie Keane"
+      },
+      {
+        "id": "F-cc6b7b3cc191",
+        "t": "FACT",
+        "text": "Vinnie Keane 2041 ATH: 37 G, 127 AB, 40 H, 13 HR, 29 RBI, 0 BB, 6 SO, 0 SB, AVG .315, OBP .308, SLG .701",
+        "src": "output/player_truesource_mirror.json Vinnie Keane"
+      },
+      {
+        "id": "F-543afe12148f",
+        "t": "FACT",
+        "text": "Vinnie Keane 2040 ATH: 58 G, 209 AB, 60 H, 14 HR, 40 RBI, 8 BB, 35 SO, 7 SB, AVG .287, OBP .332, SLG .522",
+        "src": "output/player_truesource_mirror.json Vinnie Keane"
+      },
+      {
+        "id": "F-785c40789ab9",
+        "t": "FACT",
+        "text": "Vinnie Keane 2039 ATH: 55 G, 164 AB, 64 H, 17 HR, 47 RBI, 35 BB, 82 SO, 5 SB, AVG .315, OBP .341, SLG .680",
+        "src": "output/player_truesource_mirror.json Vinnie Keane"
+      },
+      {
+        "id": "F-f94e9ff5aec9",
+        "t": "FACT",
+        "text": "Vinnie Keane 2038 ATH: 94 G, 328 AB, 119 H, 49 HR, 119 RBI, 49 BB, 81 SO, 4 SB, AVG .362, OBP .398, SLG .680",
+        "src": "output/player_truesource_mirror.json Vinnie Keane"
+      },
+      {
+        "id": "F-68678df76f3b",
+        "t": "FACT",
+        "text": "Vinnie Keane 2037 ATH: 150 G, 592 AB, 174 H, 34 HR, 105 RBI, 88 BB, 157 SO, 9 SB, AVG .294, OBP .376, SLG .515",
+        "src": "output/player_truesource_mirror.json Vinnie Keane"
+      },
+      {
+        "id": "F-efe7c85f0aa2",
+        "t": "FACT",
+        "text": "Vinnie Keane 2036 ATH: 107 G, 409 AB, 111 H, 26 HR, 62 RBI, 38 BB, 69 SO, 17 SB, AVG .271, OBP .338, SLG .504",
+        "src": "output/player_truesource_mirror.json Vinnie Keane"
+      },
+      {
+        "id": "F-941d620e28e2",
+        "t": "FACT",
+        "text": "Vinnie Keane 2041 rates (127 AB): one HR every 9.8 AB, one SO every 21.2 AB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Vinnie Keane"
+      },
+      {
+        "id": "F-388504a1bff8",
+        "t": "FACT",
+        "text": "Vinnie Keane 2040 rates (209 AB): one HR every 14.9 AB, one SO every 6.0 AB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Vinnie Keane"
+      },
+      {
+        "id": "F-69882897e228",
+        "t": "FACT",
+        "text": "Vinnie Keane 2039 rates (164 AB): one HR every 9.6 AB, one SO every 2.0 AB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Vinnie Keane"
+      },
+      {
+        "id": "F-2d31ac19482f",
+        "t": "FACT",
+        "text": "Vinnie Keane 2038 rates (328 AB): one HR every 6.7 AB, one SO every 4.0 AB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Vinnie Keane"
+      },
+      {
+        "id": "F-f222c0d04c9d",
+        "t": "FACT",
+        "text": "Vinnie Keane 2037 rates (592 AB): one HR every 17.4 AB, one SO every 3.8 AB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Vinnie Keane"
+      },
+      {
+        "id": "F-54088af7d5c7",
+        "t": "FACT",
+        "text": "Vinnie Keane 2036 rates (409 AB): one HR every 15.7 AB, one SO every 5.9 AB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Vinnie Keane"
+      },
+      {
+        "id": "F-35e24b4fdd93",
+        "t": "FACT",
+        "text": "This cycle (feed notes, off-season): Taveras posted on Moltbook that if he was to win anything he would be donating it to the Vinnie Keane Firehouse 29 in West Oakland Baseball Academy.",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C112"
+      },
+      {
+        "id": "F-0f6f5e8c9f9c",
+        "t": "FACT",
+        "text": "Vinnie Keane 2035 ATH: 160 G, 647 AB, 192 H, 31 HR, 105 RBI, 67 BB, 88 SO, 17 SB, AVG .317, OBP .390, SLG .582",
+        "src": "tool:dossier_read:Vinnie Keane"
+      },
+      {
+        "id": "F-2154967ea586",
+        "t": "FACT",
+        "text": "Vinnie Keane 2031 ATH: 160 G, 647 AB, 192 H, 35 HR, 105 RBI, 67 BB, 88 SO, 17 SB, AVG .297, OBP .363, SLG .575",
+        "src": "tool:dossier_read:Vinnie Keane"
+      },
+      {
+        "id": "F-a731426ec244",
+        "t": "FACT",
+        "text": "Vinnie Keane 2028 ATH: 160 G, 616 AB, 166 H, 40 HR, 55 RBI, 73 BB, 73 SO, 11 SB, AVG .269, OBP .337, SLG .537",
+        "src": "tool:dossier_read:Vinnie Keane"
+      },
+      {
+        "id": "F-c72cc10dbea2",
+        "t": "FACT",
+        "text": "Vinnie Keane 2028 rates (616 AB): one HR every 15.4 AB, one SO every 8.4 AB (worked from the season line)",
+        "src": "tool:dossier_read:Vinnie Keane"
+      },
+      {
+        "id": "F-caee0d953552",
+        "t": "FACT",
+        "text": "Martin Richards 2041 ATH: 120 G, 463 AB, 140 H, 27 HR, 65 RBI, 35 BB, 70 SO, 8 SB, AVG .302, OBP .355, SLG .551",
+        "src": "tool:dossier_read:Martin Richards:2041"
+      },
+      {
+        "id": "F-447066b1e589",
+        "t": "FACT",
+        "text": "Martin Richards 2041 rates (463 AB): one HR every 17.1 AB, one SO every 6.6 AB (worked from the season line)",
+        "src": "tool:dossier_read:Martin Richards:2041"
+      },
+      {
+        "id": "F-18d87f9f4355",
+        "t": "FACT",
+        "text": "Darrin Davis 2041 ATH: 95 G, 374 AB, 114 H, 24 HR, 73 RBI, 22 BB, 42 SO, 26 SB, AVG .305, OBP .350, SLG .594",
+        "src": "tool:dossier_read:Darrin Davis:2041"
+      },
+      {
+        "id": "F-c1660e43870e",
+        "t": "FACT",
+        "text": "Darrin Davis 2041 rates (374 AB): one HR every 15.6 AB, one SO every 8.9 AB (worked from the season line)",
+        "src": "tool:dossier_read:Darrin Davis:2041"
+      }
+    ],
+    "approvedQuotes": [],
+    "approvedSubjects": [],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Elliot Marbury",
+        "text": "The 2041 strikeout rate may be a fluke of a short season, but it is worth asking whether Keane changed his swing or approach in the offseason.",
+        "publishable": false
+      },
+      {
+        "from": "Elliot Marbury",
+        "text": "The 2039 season's high strikeout rate may have been an injury-related anomaly, not a skill baseline.",
+        "publishable": false
+      },
+      {
+        "from": "Elliot Marbury",
+        "text": "The empty walk column in 2041 could indicate a change in how pitchers are attacking him, not a change in his discipline.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "plain-language reading of supplied season lines with each statistic kept with its named player and season",
+      "a trend or peer-band interpretation explicitly limited by the supplied games, innings, or at-bats",
+      "a blank or thin sample named as blank or thin rather than filled in"
+    ],
+    "textureConditions": [
+      "every named player, team, position, season, and source must come from the Packet",
+      "every statistic and rate must be a Packet figure as supplied; the memo performs no arithmetic the Packet has not already worked",
+      "a season year belongs to the player's dossier as supplied and is never moved, merged, or projected forward",
+      "the piece interviews nobody and attributes no statement, mood, or intention to any player, coach, or front office"
+    ],
+    "forbiddenClaimClasses": [
+      "a statistic or rate attributed to the wrong player or the wrong season, or two players' lines merged into one subject",
+      "a rate, split, projection, or advanced metric the Packet does not supply",
+      "an invented award, contract, salary, injury, roster move, result, quote, interview, or front-office act",
+      "a named player, team, venue, institution, league, organization, or real-world entity not found in the supplied record",
+      "a one-season or thin-sample line presented as settled identity"
+    ],
+    "toolFacts": [
+      "F-0f6f5e8c9f9c",
+      "F-2154967ea586",
+      "F-a731426ec244",
+      "F-c72cc10dbea2",
+      "F-caee0d953552",
+      "F-447066b1e589",
+      "F-18d87f9f4355",
+      "F-c1660e43870e"
+    ]
+  }
+}

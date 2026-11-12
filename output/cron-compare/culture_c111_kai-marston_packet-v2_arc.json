@@ -1,0 +1,27 @@
+{
+  "status": "arc-seed",
+  "cycle": "111",
+  "desk": "culture",
+  "persona": "kai-marston",
+  "hood": "Rockridge",
+  "quotes": [
+    {
+      "pop": "POP-00546",
+      "name": "Tara Ellison",
+      "quote": "I'm not sure what you mean. I'm just here in Rockridge, and I'm not in a room with anyone right now."
+    },
+    {
+      "pop": "POP-01063",
+      "name": "Alma Vasquez",
+      "quote": "To be honest, I don't really know much about Tara Ellison or her rise in Rockridge. I live in Laurel, and while I'm aware of the general vibe around Oakland, I don't have a clear view of what's going on in Rockridge. I do see that there are a lot of cultural figures rising in fame, and that's interesting. Sometimes when I'm driving through other neighborhoods, I catch snippets of the local culture, like the bassline from a car at the stoplight here in Laurel."
+    },
+    {
+      "pop": "POP-01057",
+      "name": "Nina Reyes",
+      "quote": "To be honest, I haven't really thought about Tara Ellison's fame or what's happening over in Rockridge. I've just been focusing on my own life and things here in Fruitvale."
+    }
+  ],
+  "claim": "I'm not sure what you mean. I'm just here in Rockridge, and I'm not in a room with anyone right now.",
+  "src": "citizenVoice PRESS c111",
+  "ranAt": "2026-10-16T18:16:33.276Z"
+}

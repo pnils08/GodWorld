@@ -1,0 +1,63 @@
+{
+  "draft": "output/cron-compare/civic_c112_angela-reyes_packet-v2_anthropic-claude-haiku-5-5.md",
+  "cycle": "112",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "7863e04535cc9cca102c56fdc63599f12d0ae6de49d8c284a9a092161a24e5e1",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All citizen identities, exact interview quotes, and education metrics perfectly match canon ground truth with zero violations.",
+  "review": {
+    "profileId": "angela-education-stability-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "angela-education-stability-v1",
+    "packageVersion": "ANGELA-LEP2-1",
+    "manifestId": "AM-83923a469b85",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Maya Torres-Dillon",
+      "Mei Wong",
+      "Simone Adesanya"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0097,
+  "durationMs": 5140,
+  "parseError": false,
+  "ranAt": "2026-10-20T23:17:24.294Z",
+  "contractScore": {
+    "opened": false,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": false,
+    "inTargetBy": "judge",
+    "words": 781,
+    "short": "The opening paragraph opens with narrative scene-setting rather than a Packet-backed school, youth-program, apprenticeship, or continuity fact, and the piece falls short of the target word count.",
+    "score": 2,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "7863e04535cc9cca102c56fdc63599f12d0ae6de49d8c284a9a092161a24e5e1",
+    "costUsd": 0.0027
+  }
+}

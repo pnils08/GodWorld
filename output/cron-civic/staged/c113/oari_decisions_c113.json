@@ -1,0 +1,24 @@
+{
+  "initiative": "INIT-002",
+  "initiativeId": "INIT-002",
+  "cycle": 113,
+  "primaryVoice": "Mayor gavel (mayor_gavel-002)",
+  "consolidatedFrom": [
+    "STMT-113-mayor_gavel-002 (Mayor gavel — INIT-002 OARI Quarterly Outcome Report and D3 Conditions)",
+    "STMT-113-oari-001 (Tran-Muñoz — D3 community briefing and district-level data report)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-002",
+    "ImplementationPhase": "dispatch-live",
+    "MilestoneNotes": "C113: Quarterly report published; D3 East Oakland briefing directed with Fruitvale data and Baylight feasibility review",
+    "NextScheduledAction": "D3 community briefing execution",
+    "NextActionCycle": 114,
+    "LastWorkCycle": 113,
+    "LastWorkSeat": "proj-oari"
+  },
+  "_moveFold": {
+    "moveIds": [
+      "MV-112-proj-oari-2026-10-21"
+    ]
+  }
+}

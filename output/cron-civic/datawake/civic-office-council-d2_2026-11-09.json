@@ -1,0 +1,63 @@
+{
+  "office": "council_d2",
+  "agentDir": "civic-office-council-d2",
+  "holder": "Leonard Tran",
+  "popid": "POP-00502",
+  "title": "City Council District 2",
+  "date": "2026-11-09",
+  "cycle": 115,
+  "model": "openai/gpt-6-luna",
+  "statement": "I’m holding further work on Baylight this week. The board marks it complete, but the brief does not provide a current milestone finding that would justify another step. In D2, Jack London’s sentiment remains positive and its crime index is below the city figure; those conditions are worth recognizing, not a reason to claim an unverified project result.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-115-civic-office-council-d2",
+        "text": "My stated support for Downtown Economic Revitalization was my public position, not proof that I cast a YES vote. The current initiative record says INIT-008 is failed and vote-scheduled for C114, but this brief does not provide a roll call or identify my vote. The legislative outcome recorded here is that the initiative failed; I cannot claim a specific individual vote or a more detailed decision without that record.",
+        "directiveCycle": 115,
+        "confrontationSeat": "civic-office-council-d2"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": "1",
+  "ranAt": "2026-11-09T11:46:19.125Z",
+  "usage": {
+    "prompt_tokens": 6788,
+    "completion_tokens": 858,
+    "total_tokens": 7646,
+    "cost": 0.001277425,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 6785,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.001277425,
+      "upstream_inference_prompt_cost": 0.000848425,
+      "upstream_inference_completions_cost": 0.000429
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 650,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "fellBackFrom": null,
+  "evidenceGenerationHash": "8bfd87940a666380c5a9b73d2151cff4f6286856fa3673a770c7259a48d6c71b",
+  "evidenceReads": [],
+  "provider": "OpenAI",
+  "finishReason": "stop",
+  "elapsedMs": 12774,
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00502",
+    "id": "DwzxDg1hxWAykooZFo7CyK",
+    "customId": "cp-POP-00502-c115-CIVIC-datawake-2026-11-09"
+  }
+}

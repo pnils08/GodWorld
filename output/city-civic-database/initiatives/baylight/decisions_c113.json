@@ -1,0 +1,24 @@
+{
+  "initiative": "INIT-006",
+  "initiativeId": "INIT-006",
+  "cycle": 113,
+  "primaryVoice": "Ramos (baylight_authority-001)",
+  "consolidatedFrom": [
+    "STMT-113-baylight_authority-001 (Ramos — Baylight District Construction Milestone Review)",
+    "STMT-113-council_d2-003 (Tran D2 — Baylight District Remediation)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-006",
+    "ImplementationPhase": "construction-active",
+    "MilestoneNotes": "C113: Phase II remediation on schedule with independent oversight; 48hr construction hotline live; dust control active on haul routes; Jack London workforce coordination meeting set pre-C115 review.",
+    "NextScheduledAction": "Construction milestone review",
+    "NextActionCycle": 115,
+    "LastWorkCycle": 113,
+    "LastWorkSeat": "proj-baylight"
+  },
+  "_moveFold": {
+    "moveIds": [
+      "MV-112-proj-baylight-2026-10-23"
+    ]
+  }
+}

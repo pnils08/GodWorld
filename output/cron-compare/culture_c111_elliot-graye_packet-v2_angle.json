@@ -1,0 +1,690 @@
+{
+  "stage": "angle",
+  "desk": "culture",
+  "cycle": "111",
+  "persona": "elliot-graye",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00012",
+      "name": "Elliot Graye",
+      "role": "desk reporter",
+      "desk": "culture"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "crisis response at Bay Pure Land Buddhist Temple (Chinatown) — the week in faith, and Lakeshore Unitarian Universalist Fellowship in focus",
+      "approach": "Faith and quiet-work approach: this slice is the week's faith events on the record — services, holy days, outreach, crisis response, with the congregations and neighborhoods named — plus one congregation in focus and the community programs around it. Dignity, not doctrine wars. The events, institutions and people are real; the sanctuary on a weeknight, the basement kitchen, the Tuesday meeting are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "faith",
+        "hood": "Lake Merritt",
+        "facts": [
+          "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+          "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+          "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+          "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+          "Cathedral of the Living Word (Lake Merritt), C108 — holy day: traditional Epiphany rituals observed (attendance 1,077)",
+          "St. Esperanza Parish (Fruitvale), C108 — holy day: congregation celebrates Epiphany (attendance 374)",
+          "Cathedral of the Living Word (Lake Merritt), C107 — holy day: congregation celebrates Epiphany (attendance 1,185)",
+          "St. Esperanza Parish (Fruitvale), C107 — holy day: traditional Epiphany rituals observed (attendance 427)",
+          "In focus: Lakeshore Unitarian Universalist Fellowship — Unitarian, Lake Merritt, congregation 350, founded 153 years ago, led today by Rev. Eleanor Bishop — interfaith dialogue, humanist welcome",
+          "Also in Lake Merritt: Cathedral of the Living Word (Catholic)"
+        ],
+        "priorCycle": null,
+        "note": null,
+        "engineHooks": [
+          "Heavy faith activity this cycle. Multiple incidents creating a pattern. Deep-dive opportunity. (general coverage)",
+          "defaulted on the debts — the savings are gone and the record carries it (observational analysis)",
+          "Desmond Achebe moved from Rockridge to West Oakland — leaving Rockridge for a better fit (desk rotation)"
+        ],
+        "roomIsYours": "the sanctuary on a weeknight, the folding chairs, who sets up and who stays late, what the leader says when the room is half empty",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-faith",
+      "hood": "Lake Merritt",
+      "score": null,
+      "src": "output/beats/Faith_Organizations.jsonl \"Lakeshore Unitarian Universalist Fellowship\"",
+      "nearby": [
+        {
+          "text": "Chinatown | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c111.md \"### Chinatown\"; events: world_summary_c111.md \"## World Events\""
+        },
+        {
+          "text": "East Oakland | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c111.md \"### East Oakland\"; events: world_summary_c111.md \"## World Events\""
+        },
+        {
+          "text": "Fruitvale | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c111.md \"### Fruitvale\"; events: world_summary_c111.md \"## World Events\""
+        },
+        {
+          "text": "Grand Lake | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c111.md \"### Grand Lake\"; events: world_summary_c111.md \"## World Events\""
+        },
+        {
+          "text": "Jack London | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c111.md \"### Jack London\"; events: world_summary_c111.md \"## World Events\""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00768",
+          "name": "Eleanor Bishop",
+          "profile": "Eleanor Bishop — Senior Pastor / Faith Leader — Lake Merritt",
+          "role": "Senior Pastor / Faith Leader",
+          "hood": "Lake Merritt",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Faith_Organizations.jsonl \"Lakeshore Unitarian Universalist Fellowship\"",
+            "pop": "POP-00768",
+            "rowName": "Eleanor Bishop",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00046",
+          "name": "Manny Ellen",
+          "profile": "Manny Ellen — Elections Office — Lake Merritt",
+          "role": "Elections Office",
+          "hood": "Lake Merritt",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Faith_Organizations.jsonl \"Lakeshore Unitarian Universalist Fellowship\"",
+            "pop": "POP-00046",
+            "rowName": "Manny Ellen",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00763",
+          "name": "Kenji Tanaka",
+          "profile": "Kenji Tanaka — Senior Pastor / Faith Leader — Chinatown",
+          "role": "Senior Pastor / Faith Leader",
+          "hood": "Chinatown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Faith_Organizations.jsonl \"Lakeshore Unitarian Universalist Fellowship\"",
+            "pop": "POP-00763",
+            "rowName": "Kenji Tanaka",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00753",
+          "name": "Eunice Marston",
+          "profile": "Eunice Marston — Senior Pastor / Faith Leader — Downtown",
+          "role": "Senior Pastor / Faith Leader",
+          "hood": "Downtown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Faith_Organizations.jsonl \"Lakeshore Unitarian Universalist Fellowship\"",
+            "pop": "POP-00753",
+            "rowName": "Eunice Marston",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00755",
+          "name": "Antoine Vermeer",
+          "profile": "Antoine Vermeer — Senior Pastor / Faith Leader — Lake Merritt",
+          "role": "Senior Pastor / Faith Leader",
+          "hood": "Lake Merritt",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Faith_Organizations.jsonl \"Lakeshore Unitarian Universalist Fellowship\"",
+            "pop": "POP-00755",
+            "rowName": "Antoine Vermeer",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00756",
+          "name": "Ramon Solano",
+          "profile": "Ramon Solano — Senior Pastor / Faith Leader — Fruitvale",
+          "role": "Senior Pastor / Faith Leader",
+          "hood": "Fruitvale",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Faith_Organizations.jsonl \"Lakeshore Unitarian Universalist Fellowship\"",
+            "pop": "POP-00756",
+            "rowName": "Ramon Solano",
+            "kind": "slice-row"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C111",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-a43c5d888b36"
+      },
+      {
+        "t": "FACT",
+        "text": "8 faith events on the record since C105 · Lakeshore Unitarian Universalist Fellowship in Lake Merritt | 6 named on the record",
+        "src": "output/beats/Faith_Organizations.jsonl \"Lakeshore Unitarian Universalist Fellowship\"",
+        "id": "F-7fd5b2d200ba"
+      },
+      {
+        "t": "FACT",
+        "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+        "src": "output/beats/Faith_Organizations.jsonl \"Lakeshore Unitarian Universalist Fellowship\"",
+        "id": "F-779424aa2ee1"
+      },
+      {
+        "t": "FACT",
+        "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+        "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\"",
+        "id": "F-61024524d215"
+      },
+      {
+        "t": "FACT",
+        "text": "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+        "src": "output/beats/Faith_Ledger.jsonl C107 \"Telegraph Presbyterian Fellowship\"",
+        "id": "F-7d24d6975c0b"
+      },
+      {
+        "t": "FACT",
+        "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+        "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\"",
+        "id": "F-c6268244f8ea"
+      },
+      {
+        "t": "FACT",
+        "text": "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+        "src": "output/beats/Faith_Ledger.jsonl C109 \"Cathedral of the Living Word\"",
+        "id": "F-2e38ae74adc2"
+      },
+      {
+        "t": "FACT",
+        "text": "Cathedral of the Living Word (Lake Merritt), C108 — holy day: traditional Epiphany rituals observed (attendance 1,077)",
+        "src": "output/beats/Faith_Ledger.jsonl C108 \"Cathedral of the Living Word\"",
+        "id": "F-53d1f53fb120"
+      },
+      {
+        "t": "FACT",
+        "text": "St. Esperanza Parish (Fruitvale), C108 — holy day: congregation celebrates Epiphany (attendance 374)",
+        "src": "output/beats/Faith_Ledger.jsonl C108 \"St. Esperanza Parish\"",
+        "id": "F-3cbfd5530d60"
+      },
+      {
+        "t": "FACT",
+        "text": "Cathedral of the Living Word (Lake Merritt), C107 — holy day: congregation celebrates Epiphany (attendance 1,185)",
+        "src": "output/beats/Faith_Ledger.jsonl C107 \"Cathedral of the Living Word\"",
+        "id": "F-760718ad78bc"
+      },
+      {
+        "t": "FACT",
+        "text": "St. Esperanza Parish (Fruitvale), C107 — holy day: traditional Epiphany rituals observed (attendance 427)",
+        "src": "output/beats/Faith_Ledger.jsonl C107 \"St. Esperanza Parish\"",
+        "id": "F-c585ca789af1"
+      },
+      {
+        "t": "FACT",
+        "text": "In focus: Lakeshore Unitarian Universalist Fellowship — Unitarian, Lake Merritt, congregation 350, founded 153 years ago, led today by Rev. Eleanor Bishop — interfaith dialogue, humanist welcome",
+        "src": "output/beats/Faith_Organizations.jsonl \"Lakeshore Unitarian Universalist Fellowship\"",
+        "id": "F-d04161d8f7c1"
+      },
+      {
+        "t": "FACT",
+        "text": "Also in Lake Merritt: Cathedral of the Living Word (Catholic)",
+        "src": "output/beats/Faith_Organizations.jsonl",
+        "id": "F-5dffbe8a6f79"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "named",
+    "candidates": [
+      {
+        "pop": "POP-00768",
+        "name": "Eleanor Bishop",
+        "role": "Senior Pastor / Faith Leader",
+        "hood": "Lake Merritt",
+        "profile": "Eleanor Bishop — Senior Pastor / Faith Leader — Lake Merritt",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Faith_Organizations.jsonl \"Lakeshore Unitarian Universalist Fellowship\"",
+          "pop": "POP-00768",
+          "rowName": "Eleanor Bishop",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00046",
+        "name": "Manny Ellen",
+        "role": "Elections Office",
+        "hood": "Lake Merritt",
+        "profile": "Manny Ellen — Elections Office — Lake Merritt",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Faith_Organizations.jsonl \"Lakeshore Unitarian Universalist Fellowship\"",
+          "pop": "POP-00046",
+          "rowName": "Manny Ellen",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00763",
+        "name": "Kenji Tanaka",
+        "role": "Senior Pastor / Faith Leader",
+        "hood": "Chinatown",
+        "profile": "Kenji Tanaka — Senior Pastor / Faith Leader — Chinatown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Faith_Organizations.jsonl \"Lakeshore Unitarian Universalist Fellowship\"",
+          "pop": "POP-00763",
+          "rowName": "Kenji Tanaka",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00753",
+        "name": "Eunice Marston",
+        "role": "Senior Pastor / Faith Leader",
+        "hood": "Downtown",
+        "profile": "Eunice Marston — Senior Pastor / Faith Leader — Downtown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Faith_Organizations.jsonl \"Lakeshore Unitarian Universalist Fellowship\"",
+          "pop": "POP-00753",
+          "rowName": "Eunice Marston",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00755",
+        "name": "Antoine Vermeer",
+        "role": "Senior Pastor / Faith Leader",
+        "hood": "Lake Merritt",
+        "profile": "Antoine Vermeer — Senior Pastor / Faith Leader — Lake Merritt",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Faith_Organizations.jsonl \"Lakeshore Unitarian Universalist Fellowship\"",
+          "pop": "POP-00755",
+          "rowName": "Antoine Vermeer",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00756",
+        "name": "Ramon Solano",
+        "role": "Senior Pastor / Faith Leader",
+        "hood": "Fruitvale",
+        "profile": "Ramon Solano — Senior Pastor / Faith Leader — Fruitvale",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Faith_Organizations.jsonl \"Lakeshore Unitarian Universalist Fellowship\"",
+          "pop": "POP-00756",
+          "rowName": "Ramon Solano",
+          "kind": "slice-row"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Elliot Graye",
+    "popid": "POP-00012"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-faith",
+      "angle": "crisis response at Bay Pure Land Buddhist Temple (Chinatown) — the week in faith, and Lakeshore Unitarian Universalist Fellowship in focus",
+      "label": "8 faith events on the record since C105 · Lakeshore Unitarian Universalist Fellowship in Lake Merritt | 6 named on the record",
+      "hookLine": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+      "hood": "Lake Merritt",
+      "citizens": [
+        "Eleanor Bishop (POP-00768)",
+        "Manny Ellen (POP-00046)",
+        "Kenji Tanaka (POP-00763)",
+        "Eunice Marston (POP-00753)",
+        "Antoine Vermeer (POP-00755)",
+        "Ramon Solano (POP-00756)"
+      ],
+      "popids": [
+        "POP-00768",
+        "POP-00046",
+        "POP-00763",
+        "POP-00753",
+        "POP-00755",
+        "POP-00756"
+      ],
+      "ref": "output/beats/Faith_Organizations.jsonl \"Lakeshore Unitarian Universalist Fellowship\"",
+      "cycle": 111
+    },
+    "approach": "Faith and quiet-work approach: this slice is the week's faith events on the record — services, holy days, outreach, crisis response, with the congregations and neighborhoods named — plus one congregation in focus and the community programs around it. Dignity, not doctrine wars. The events, institutions and people are real; the sanctuary on a weeknight, the basement kitchen, the Tuesday meeting are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "FAITH-SLICE-2",
+    "kind": "beat-faith",
+    "seat": {
+      "slug": "elliot-graye",
+      "name": "Elliot Graye",
+      "popid": "POP-00012",
+      "desk": "culture",
+      "domain": "faith",
+      "builder": "buildFaithSlice.js"
+    },
+    "hood": "Lake Merritt",
+    "pulse": {
+      "className": "beat-faith",
+      "score": 100,
+      "label": "8 faith events on the record since C105 · Lakeshore Unitarian Universalist Fellowship in Lake Merritt | 6 named on the record",
+      "hood": "Lake Merritt",
+      "source": "output/beats/Faith_Organizations.jsonl \"Lakeshore Unitarian Universalist Fellowship\""
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "crisis response at Bay Pure Land Buddhist Temple (Chinatown) — the week in faith, and Lakeshore Unitarian Universalist Fellowship in focus",
+      "hookLine": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+      "anchorFacts": [
+        "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+        "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+        "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+        "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+        "Cathedral of the Living Word (Lake Merritt), C108 — holy day: traditional Epiphany rituals observed (attendance 1,077)",
+        "St. Esperanza Parish (Fruitvale), C108 — holy day: congregation celebrates Epiphany (attendance 374)",
+        "Cathedral of the Living Word (Lake Merritt), C107 — holy day: congregation celebrates Epiphany (attendance 1,185)",
+        "St. Esperanza Parish (Fruitvale), C107 — holy day: traditional Epiphany rituals observed (attendance 427)",
+        "In focus: Lakeshore Unitarian Universalist Fellowship — Unitarian, Lake Merritt, congregation 350, founded 153 years ago, led today by Rev. Eleanor Bishop — interfaith dialogue, humanist welcome",
+        "Also in Lake Merritt: Cathedral of the Living Word (Catholic)"
+      ],
+      "evidence": [
+        {
+          "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+          "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\""
+        },
+        {
+          "text": "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+          "src": "output/beats/Faith_Ledger.jsonl C107 \"Telegraph Presbyterian Fellowship\""
+        },
+        {
+          "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+          "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\""
+        },
+        {
+          "text": "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+          "src": "output/beats/Faith_Ledger.jsonl C109 \"Cathedral of the Living Word\""
+        },
+        {
+          "text": "Cathedral of the Living Word (Lake Merritt), C108 — holy day: traditional Epiphany rituals observed (attendance 1,077)",
+          "src": "output/beats/Faith_Ledger.jsonl C108 \"Cathedral of the Living Word\""
+        },
+        {
+          "text": "St. Esperanza Parish (Fruitvale), C108 — holy day: congregation celebrates Epiphany (attendance 374)",
+          "src": "output/beats/Faith_Ledger.jsonl C108 \"St. Esperanza Parish\""
+        },
+        {
+          "text": "Cathedral of the Living Word (Lake Merritt), C107 — holy day: congregation celebrates Epiphany (attendance 1,185)",
+          "src": "output/beats/Faith_Ledger.jsonl C107 \"Cathedral of the Living Word\""
+        },
+        {
+          "text": "St. Esperanza Parish (Fruitvale), C107 — holy day: traditional Epiphany rituals observed (attendance 427)",
+          "src": "output/beats/Faith_Ledger.jsonl C107 \"St. Esperanza Parish\""
+        },
+        {
+          "text": "In focus: Lakeshore Unitarian Universalist Fellowship — Unitarian, Lake Merritt, congregation 350, founded 153 years ago, led today by Rev. Eleanor Bishop — interfaith dialogue, humanist welcome",
+          "src": "output/beats/Faith_Organizations.jsonl \"Lakeshore Unitarian Universalist Fellowship\""
+        },
+        {
+          "text": "Also in Lake Merritt: Cathedral of the Living Word (Catholic)",
+          "src": "output/beats/Faith_Organizations.jsonl"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": null,
+      "hooks": [
+        {
+          "text": "Heavy faith activity this cycle. Multiple incidents creating a pattern. Deep-dive opportunity.",
+          "angle": "general coverage",
+          "domain": "FAITH",
+          "hood": null,
+          "priority": 3
+        },
+        {
+          "text": "defaulted on the debts — the savings are gone and the record carries it",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Adams Point",
+          "priority": 3
+        },
+        {
+          "text": "Desmond Achebe moved from Rockridge to West Oakland — leaving Rockridge for a better fit",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "West Oakland",
+          "priority": 5
+        }
+      ],
+      "note": null,
+      "pageVoices": [],
+      "roomIsYours": "the sanctuary on a weeknight, the folding chairs, who sets up and who stays late, what the leader says when the room is half empty"
+    },
+    "citizens": [
+      {
+        "popid": "POP-00768",
+        "name": "Eleanor Bishop",
+        "role": "Senior Pastor / Faith Leader",
+        "neighborhood": "Lake Merritt",
+        "business": null,
+        "profile": "Eleanor Bishop — Senior Pastor / Faith Leader — Lake Merritt",
+        "why": "leads Lakeshore Unitarian Universalist Fellowship (Faith_Organizations)"
+      },
+      {
+        "popid": "POP-00046",
+        "name": "Manny Ellen",
+        "role": "Elections Office",
+        "neighborhood": "Lake Merritt",
+        "business": null,
+        "profile": "Manny Ellen — Elections Office — Lake Merritt",
+        "why": "member of Lakeshore Unitarian Universalist Fellowship (Faith_Organizations.MembersList)"
+      },
+      {
+        "popid": "POP-00763",
+        "name": "Kenji Tanaka",
+        "role": "Senior Pastor / Faith Leader",
+        "neighborhood": "Chinatown",
+        "business": null,
+        "profile": "Kenji Tanaka — Senior Pastor / Faith Leader — Chinatown",
+        "why": "leads Bay Pure Land Buddhist Temple — crisis response this week (Faith_Ledger)"
+      },
+      {
+        "popid": "POP-00753",
+        "name": "Eunice Marston",
+        "role": "Senior Pastor / Faith Leader",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Eunice Marston — Senior Pastor / Faith Leader — Downtown",
+        "why": "leads Telegraph Presbyterian Fellowship — crisis response this week (Faith_Ledger)"
+      },
+      {
+        "popid": "POP-00755",
+        "name": "Antoine Vermeer",
+        "role": "Senior Pastor / Faith Leader",
+        "neighborhood": "Lake Merritt",
+        "business": null,
+        "profile": "Antoine Vermeer — Senior Pastor / Faith Leader — Lake Merritt",
+        "why": "leads Cathedral of the Living Word — holy day this week (Faith_Ledger)"
+      },
+      {
+        "popid": "POP-00756",
+        "name": "Ramon Solano",
+        "role": "Senior Pastor / Faith Leader",
+        "neighborhood": "Fruitvale",
+        "business": null,
+        "profile": "Ramon Solano — Senior Pastor / Faith Leader — Fruitvale",
+        "why": "leads St. Esperanza Parish — holy day this week (Faith_Ledger)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Faith_Organizations.jsonl \"Lakeshore Unitarian Universalist Fellowship\"",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Elliot Graye this cycle)",
+      "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Elliot Graye",
+    "popid": "POP-00012",
+    "text": "I'm looking at a week where the big cathedrals are filling up for Epiphany, but the smaller spaces are doing the heavy lifting on crisis response. I want to spend some time at Lakeshore Unitarian—I've seen the volunteers stacking chairs at the church lately and it feels like the right place to start. I'm chasing the contrast between the ritual of the holiday and the quiet, unglamorous work of keeping doors open for people in Chinatown and Downtown. I want to see who stays late to clean up after the community support sessions.",
+    "plan": {
+      "chase": "I'm looking at a week where the big cathedrals are filling up for Epiphany, but the smaller spaces are doing the heavy lifting on crisis response. I want to spend some time at Lakeshore Unitarian—I've seen the volunteers stacking chairs at the church lately and it feels like the right place to start. I'm chasing the contrast between the ritual of the holiday and the quiet, unglamorous work of keeping doors open for people in Chinatown and Downtown. I want to see who stays late to clean up after the community support sessions.",
+      "focus": "Lakeshore Unitarian Universalist Fellowship",
+      "why": "It's a 153-year-old anchor in Lake Merritt with a humanist welcome, making it a natural bridge to understand how different congregations are handling the current crisis response patterns.",
+      "checks": [
+        "Verify the specific nature of the community support provided at Bay Pure Land Buddhist Temple.",
+        "Compare the scale of Epiphany attendance at Cathedral of the Living Word against the crisis response numbers at Telegraph Presbyterian."
+      ],
+      "targets": [
+        {
+          "pop": "POP-00768",
+          "question": "How is the Fellowship balancing its traditional interfaith dialogue with the immediate, practical needs of the current crisis response?",
+          "basis": "Rev. Eleanor Bishop leads a congregation of 350 focused on humanist welcome and interfaith dialogue."
+        },
+        {
+          "pop": "POP-00763",
+          "question": "What specific needs drove 41 people to the temple for community support this week?",
+          "basis": "Bay Pure Land Buddhist Temple in Chinatown opened doors for crisis response with 41 in attendance."
+        },
+        {
+          "pop": "POP-00753",
+          "question": "With 72 people coming in for crisis support but 237 for Epiphany, how does the fellowship pivot between emergency aid and holy day celebration?",
+          "basis": "Telegraph Presbyterian Fellowship had both crisis response and Epiphany events."
+        }
+      ],
+      "interpretation": "The tension between the 'high' church experience of Epiphany and the 'low' church reality of crisis response.",
+      "unverifiedLead": [
+        "The emotional toll on volunteers managing the transition from holiday rituals to emergency community support."
+      ],
+      "closeQuestion": "Is the surge in crisis response attendance a temporary spike or a shift in how these congregations are viewed by the neighborhood?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Chinatown | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Chinatown",
+      "ref": "output/neighborhood_texture_c111.md \"### Chinatown\"; events: world_summary_c111.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "East Oakland | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "East Oakland",
+      "ref": "output/neighborhood_texture_c111.md \"### East Oakland\"; events: world_summary_c111.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Fruitvale | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Fruitvale",
+      "ref": "output/neighborhood_texture_c111.md \"### Fruitvale\"; events: world_summary_c111.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Grand Lake | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Grand Lake",
+      "ref": "output/neighborhood_texture_c111.md \"### Grand Lake\"; events: world_summary_c111.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Jack London | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Jack London",
+      "ref": "output/neighborhood_texture_c111.md \"### Jack London\"; events: world_summary_c111.md \"## World Events\"",
+      "popids": []
+    }
+  ],
+  "laneEntries": 20,
+  "angleCapHits": 0,
+  "ranAt": "2026-10-15T11:15:29.415Z"
+}

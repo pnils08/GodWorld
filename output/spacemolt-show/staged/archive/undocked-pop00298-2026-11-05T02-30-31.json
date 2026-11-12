@@ -1,0 +1,447 @@
+{
+  "v": "UNDOCKED-ADAPTER/1",
+  "show": "UNDOCKED",
+  "episode_id": "undocked-pop00298-2026-11-05T02-30-31",
+  "popid": "POP-00298",
+  "holder": "Luis Taz",
+  "session": "undocked-pop00298",
+  "window": {
+    "startedAt": "2026-11-05T02:30:31.941Z",
+    "endedAt": "2026-11-05T02:50:47.021Z"
+  },
+  "runner": {
+    "turns": 45,
+    "exitCode": null,
+    "capped": true,
+    "toolErrors": 2,
+    "estCostUsd": 0.0115,
+    "tokensIn": 83632,
+    "tokensOut": 6239,
+    "log": "output/spacemolt-show/episodes/undocked-pop00298-2026-11-05T02-30-31.log",
+    "stopReason": "window",
+    "toolCalls": 53
+  },
+  "stall": null,
+  "source": {
+    "kind": "get_action_log",
+    "categories": [
+      "mining",
+      "trading",
+      "mission",
+      "combat",
+      "navigation",
+      "session",
+      "achievement"
+    ],
+    "fetchedAt": "2026-11-05T02:55:52.429Z"
+  },
+  "facts": {
+    "credits_delta": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "hits": 0,
+      "note": "gameplay in window carries no credit event — measured zero",
+      "value": 0
+    },
+    "points_delta": {
+      "type": "FACT",
+      "source": "get_achievements",
+      "basis": "progress",
+      "items": [
+        {
+          "id": "voyager_i",
+          "name": "Voyager I",
+          "gained": 3.6
+        },
+        {
+          "id": "cartographer",
+          "name": "Cartographer",
+          "gained": 2.7
+        },
+        {
+          "id": "voyager_ii",
+          "name": "Voyager II",
+          "gained": 0.9
+        },
+        {
+          "id": "far_traveler",
+          "name": "Far Traveler",
+          "gained": 0.01
+        },
+        {
+          "id": "jump_master",
+          "name": "Jump Master",
+          "gained": 0.01
+        },
+        {
+          "id": "prospector_i",
+          "name": "Prospector I",
+          "gained": 0.01
+        },
+        {
+          "id": "prospector_ii",
+          "name": "Prospector II",
+          "gained": 0
+        },
+        {
+          "id": "prospector_iii",
+          "name": "Prospector III",
+          "gained": 0
+        }
+      ],
+      "beforeTakenAt": "2026-11-05T02:30:31.699Z",
+      "value": 7.24
+    },
+    "systems_visited": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": [
+        "nova_terra",
+        "sirius",
+        "lacaille_9352",
+        "grumium",
+        "celaeno",
+        "lanternwick",
+        "diadem",
+        "intercrus",
+        "gsc_0044",
+        "atlas",
+        "cedarhold",
+        "achernar",
+        "the_experiment"
+      ]
+    },
+    "combat_results": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "events": 0,
+        "kills": 0,
+        "deaths": 0,
+        "other": 0
+      }
+    },
+    "cargo": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mined": {
+          "copper_ore": 9,
+          "antimatter_containment_cell": 2,
+          "iron_ore": 4
+        },
+        "sold": {}
+      }
+    },
+    "mishaps": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "event_counts": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": 4,
+        "trading": 0,
+        "mission": 0,
+        "combat": 0,
+        "navigation": 12,
+        "session": 1,
+        "achievement": 0
+      }
+    },
+    "entries": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": [
+          {
+            "id": 248715579,
+            "created_at": "2026-11-05T02:40:57Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 8 Copper Ore at Lacaille 9352 Deep Vein",
+            "data": {
+              "poi_name": "Lacaille 9352 Deep Vein",
+              "quantity": 8,
+              "resource_id": "copper_ore",
+              "resource_name": "Copper Ore",
+              "system_id": "lacaille_9352",
+              "system_name": "Lacaille 9352",
+              "ticks": 8
+            }
+          },
+          {
+            "id": 248715455,
+            "created_at": "2026-11-05T02:40:57Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 2 Antimatter Containment Cell at Lacaille 9352 Deep Vein",
+            "data": {
+              "poi_name": "Lacaille 9352 Deep Vein",
+              "quantity": 2,
+              "resource_id": "antimatter_containment_cell",
+              "resource_name": "Antimatter Containment Cell",
+              "system_id": "lacaille_9352",
+              "system_name": "Lacaille 9352",
+              "ticks": 2
+            }
+          },
+          {
+            "id": 248715450,
+            "created_at": "2026-11-05T02:40:57Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 4 Iron Ore at Lacaille 9352 Deep Vein",
+            "data": {
+              "poi_name": "Lacaille 9352 Deep Vein",
+              "quantity": 4,
+              "resource_id": "iron_ore",
+              "resource_name": "Iron Ore",
+              "system_id": "lacaille_9352",
+              "system_name": "Lacaille 9352",
+              "ticks": 4
+            }
+          },
+          {
+            "id": 248703639,
+            "created_at": "2026-11-05T02:35:52Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 1 Copper Ore at Lacaille 9352 Deep Vein",
+            "data": {
+              "poi_name": "Lacaille 9352 Deep Vein",
+              "quantity": 1,
+              "resource_id": "copper_ore",
+              "resource_name": "Copper Ore",
+              "system_id": "lacaille_9352",
+              "system_name": "Lacaille 9352",
+              "ticks": 1
+            }
+          }
+        ],
+        "trading": [],
+        "mission": [],
+        "combat": [],
+        "navigation": [
+          {
+            "id": 248732586,
+            "created_at": "2026-11-05T02:49:44Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Achernar to The Experiment",
+            "data": {
+              "arrival_poi": "the_experiment_haze",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "achernar",
+              "is_pathfinder": false,
+              "to_system": "the_experiment",
+              "to_system_name": "The Experiment"
+            }
+          },
+          {
+            "id": 248730530,
+            "created_at": "2026-11-05T02:48:34Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Cedarhold to Achernar",
+            "data": {
+              "arrival_poi": "achernar_belt",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "cedarhold",
+              "is_pathfinder": false,
+              "to_system": "achernar",
+              "to_system_name": "Achernar"
+            }
+          },
+          {
+            "id": 248728635,
+            "created_at": "2026-11-05T02:47:24Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Atlas to Cedarhold",
+            "data": {
+              "arrival_poi": "cedarhold_dim_lattice",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "atlas",
+              "is_pathfinder": false,
+              "to_system": "cedarhold",
+              "to_system_name": "Cedarhold"
+            }
+          },
+          {
+            "id": 248726444,
+            "created_at": "2026-11-05T02:46:14Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from GSC-0044 to Atlas",
+            "data": {
+              "arrival_poi": "gossamer_null",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "gsc_0044",
+              "is_pathfinder": false,
+              "to_system": "atlas",
+              "to_system_name": "Atlas"
+            }
+          },
+          {
+            "id": 248723390,
+            "created_at": "2026-11-05T02:45:05Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Intercrus to GSC-0044",
+            "data": {
+              "arrival_poi": "forgotten_tailings",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "intercrus",
+              "is_pathfinder": false,
+              "to_system": "gsc_0044",
+              "to_system_name": "GSC-0044"
+            }
+          },
+          {
+            "id": 248721215,
+            "created_at": "2026-11-05T02:43:54Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Diadem to Intercrus",
+            "data": {
+              "arrival_poi": "sootfall_belt",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "diadem",
+              "is_pathfinder": false,
+              "to_system": "intercrus",
+              "to_system_name": "Intercrus"
+            }
+          },
+          {
+            "id": 248719185,
+            "created_at": "2026-11-05T02:42:44Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Lanternwick to Diadem",
+            "data": {
+              "arrival_poi": "diadem_v",
+              "cloaked": false,
+              "first_visit": false,
+              "from_system": "lanternwick",
+              "is_pathfinder": false,
+              "to_system": "diadem",
+              "to_system_name": "Diadem"
+            }
+          },
+          {
+            "id": 248717111,
+            "created_at": "2026-11-05T02:41:34Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Celaeno to Lanternwick",
+            "data": {
+              "arrival_poi": "lanternwick_frozen_drift",
+              "cloaked": false,
+              "first_visit": false,
+              "from_system": "celaeno",
+              "is_pathfinder": false,
+              "to_system": "lanternwick",
+              "to_system_name": "Lanternwick"
+            }
+          },
+          {
+            "id": 248711894,
+            "created_at": "2026-11-05T02:40:25Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Grumium to Celaeno",
+            "data": {
+              "arrival_poi": "celaeno_frozen_drift",
+              "cloaked": false,
+              "first_visit": false,
+              "from_system": "grumium",
+              "is_pathfinder": false,
+              "to_system": "celaeno",
+              "to_system_name": "Celaeno"
+            }
+          },
+          {
+            "id": 248709829,
+            "created_at": "2026-11-05T02:39:14Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Lacaille 9352 to Grumium",
+            "data": {
+              "arrival_poi": "grumium_belt",
+              "cloaked": false,
+              "first_visit": false,
+              "from_system": "lacaille_9352",
+              "is_pathfinder": false,
+              "to_system": "grumium",
+              "to_system_name": "Grumium"
+            }
+          },
+          {
+            "id": 248700011,
+            "created_at": "2026-11-05T02:34:14Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Sirius to Lacaille 9352",
+            "data": {
+              "arrival_poi": "theta_proxima_belt",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "sirius",
+              "is_pathfinder": false,
+              "to_system": "lacaille_9352",
+              "to_system_name": "Lacaille 9352"
+            }
+          },
+          {
+            "id": 248697235,
+            "created_at": "2026-11-05T02:32:34Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Nova Terra to Sirius",
+            "data": {
+              "arrival_poi": "sirius_a",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "nova_terra",
+              "is_pathfinder": false,
+              "to_system": "sirius",
+              "to_system_name": "Sirius"
+            }
+          }
+        ],
+        "session": [
+          {
+            "id": 248692711,
+            "created_at": "2026-11-05T02:30:33Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "LuisTaz logged in",
+            "data": {
+              "last_login_at": "2026-11-05T02:30:31Z",
+              "source": "password"
+            }
+          }
+        ],
+        "achievement": []
+      }
+    }
+  },
+  "captains_log": {
+    "kind": "QUOTED_SUBJECTIVE_COLOR",
+    "type": "INTERPRETATION",
+    "provenance": "captains_log_list",
+    "windowed": 0,
+    "listed": 0,
+    "entries": [],
+    "unwindowed": []
+  }
+}

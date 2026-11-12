@@ -1,0 +1,59 @@
+{
+  "mode": "wake-write",
+  "desk": "business",
+  "cycle": "115",
+  "provider": "openrouter",
+  "model": "anthropic/claude-opus-5.5",
+  "configuredWriterModel": "anthropic/claude-opus-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "business-desk",
+  "byline": {
+    "name": "Jordan Velez",
+    "popid": "POP-00153",
+    "beatDomain": "ECONOMIC"
+  },
+  "laneEntries": 41,
+  "quotesLanded": 0,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "sheet_read",
+    "citizen_lookup"
+  ],
+  "toolCalls": 2,
+  "wordCount": 874,
+  "targetWords": "500-800",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 500",
+    "words": 874,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "88f36d363b480442d25c35bd42f7f5c45b21df96a59f659f637dadaf5446dff1",
+    "costUsd": 0.001
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 4/4 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/business_c115_business-desk_packet-v2_anthropic-claude-opus-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "rom ../.config/godworld/.env // tip: ◈ encrypted .env [www.dotenvx.com]\n{\n  \"popId\": \"POP-00153\",\n  \"name\": \"Jordan Velez\",\n  \"recorded\": true,\n  \"text\": \"filed: The Sea-Level Desk Is Down to Three\"\n}"
+  },
+  "ranAt": "2026-11-10T00:17:32.511Z"
+}

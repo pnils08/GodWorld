@@ -1,0 +1,271 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-01076",
+    "name": "Nia Rook",
+    "role": "desk reporter",
+    "desk": "undocked"
+  },
+  "task": {
+    "goal": "Cover this UNDOCKED episode and its show history.",
+    "assignment": "UNDOCKED episode: Luis Taz, Wednesday night. Standings: Luis Taz leads the board — rank #1, 37.96 achievement points, 0 credits, 1 cycle(s) led, current streak 1. In the chair: Luis Taz — Janitor.",
+    "approach": "UNDOCKED show beat: current episode and standings from the approved feed; earlier episodes from the approved show history.",
+    "voice": null,
+    "writingMode": "SOURCE_BRIEF",
+    "reportingQuestion": "What did earlier approved UNDOCKED episodes record for this pilot or the current board leader?"
+  },
+  "signal": {
+    "kind": "undocked",
+    "hood": "Fruitvale",
+    "src": "undocked:undocked-pop00298-Y3C10-e2",
+    "plan": {
+      "focus": "Luis Taz's navigation and mining performance",
+      "closeQuestion": "What specific actions during the episode contributed most to Taz's achievement points?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00298",
+        "name": "Luis Taz",
+        "profile": "Luis Taz — UNDOCKED pilot",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00298-e86a4c6124",
+        "pop": "POP-00298",
+        "name": "Luis Taz",
+        "quote": "I navigated through a bunch of systems on Wednesday night, like Nova Terra and Sirius, then headed towards Lacaille 9352. I kept moving, trying to mine what I could and avoid getting caught in the fights that popped up. I went through Grumium, Celaeno, Lanternwick, Diadem, and a few others, mining copper ore and iron ore along the way. My goal was to come out even, and I managed to do that, so it was a good run.",
+        "factIds": [
+          "F-fa85afa84e1e",
+          "F-df05ac9b4afc"
+        ],
+        "src": "packet.W2[POP-00298]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Nia Rook",
+        "text": "Taz's consistent performance could be related to their role as a Janitor",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C114",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-4261fa115617"
+    },
+    {
+      "t": "FACT",
+      "text": "UNDOCKED: Luis Taz, Wednesday night",
+      "src": "undocked:undocked-pop00298-Y3C10-e2",
+      "id": "F-df05ac9b4afc"
+    },
+    {
+      "t": "FACT",
+      "text": "Luis Taz's Wednesday night on UNDOCKED: went through Nova Terra, Sirius, Lacaille 9352, Grumium, Celaeno, Lanternwick, Diadem, Intercrus, Gsc 0044, Atlas, Cedarhold, Achernar and The Experiment; mined 9 copper ore, 2 antimatter containment cell and 4 iron ore; came out even on credits; flew until the show's time ran out.",
+      "src": "undocked:undocked-pop00298-Y3C10-e2",
+      "id": "F-fa85afa84e1e"
+    },
+    {
+      "t": "FACT",
+      "text": "Luis Taz — Janitor (ledger)",
+      "src": "undocked:undocked-pop00298-Y3C10-e2",
+      "id": "F-642afce6447f"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C10, Spring, holiday=none",
+      "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+      "id": "F-9b9470803821"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to a supplied source ref.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "nia-rook-undocked-recap-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Turn a gate-approved UNDOCKED episode into the city's entertainment conversation — who's up, who's down, what Oakland argues about tomorrow. Arc-tracking recap energy; personality-forward. NOT hard news, NOT sports analytics, NOT civic process.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "third-person recap with first-person flashes — entertainment beat, having fun on purpose",
+      "targetWords": "350-600",
+      "opening": "the episode's consequence for the pilot or the board",
+      "closing": "the unresolved show question or next consequence"
+    },
+    "authorizedTexture": [
+      "an in-world bar, watch-party, break-room, bus, or sidewalk setting where the city watches or argues; a new named business goes on INTAKE BIZ",
+      "the reporter's own recap persona, approved show history, and who's-up-who's-down framing",
+      "unnamed audience argument and aspiration lines as city color, never as measured sentiment",
+      "metaphor and emotional inference grounded in a supplied typed fact from the episode feed"
+    ],
+    "textureConditions": [
+      "a named person must resolve to a ledger citizen; a new in-world place or business is scene color, not a recorded show event",
+      "current episode facts come from the supplied typed feed; prior episode facts come from the approved undocked_history result — a blank CreditsDelta is unsettled, never zero and never invented",
+      "pilot speech only from the wake-2 packet interviews — no other quote source exists for this lane",
+      "standings, ranks, and streaks come only from the supplied Standings block; earlier episodes do not establish an earlier rank",
+      "unnamed audience reaction stays rhetorical — it must not become a count, a poll, or a named person"
+    ],
+    "canonBlockers": [
+      "video game",
+      "videogame",
+      "simulation",
+      "engine",
+      "MCP",
+      "server",
+      "commander",
+      "tool",
+      "API",
+      "spacemolt-lib",
+      "openrouter",
+      "real-world calendar dates (YYYY-MM-DD)",
+      "captains_log",
+      "leaderboard math not present in the supplied facts"
+    ]
+  },
+  "manifest": {
+    "id": "AM-360433a5848a",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-4261fa115617",
+        "t": "FACT",
+        "text": "Current cycle: C114",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-df05ac9b4afc",
+        "t": "FACT",
+        "text": "UNDOCKED: Luis Taz, Wednesday night",
+        "src": "undocked:undocked-pop00298-Y3C10-e2"
+      },
+      {
+        "id": "F-fa85afa84e1e",
+        "t": "FACT",
+        "text": "Luis Taz's Wednesday night on UNDOCKED: went through Nova Terra, Sirius, Lacaille 9352, Grumium, Celaeno, Lanternwick, Diadem, Intercrus, Gsc 0044, Atlas, Cedarhold, Achernar and The Experiment; mined 9 copper ore, 2 antimatter containment cell and 4 iron ore; came out even on credits; flew until the show's time ran out.",
+        "src": "undocked:undocked-pop00298-Y3C10-e2"
+      },
+      {
+        "id": "F-642afce6447f",
+        "t": "FACT",
+        "text": "Luis Taz — Janitor (ledger)",
+        "src": "undocked:undocked-pop00298-Y3C10-e2"
+      },
+      {
+        "id": "F-9b9470803821",
+        "t": "FACT",
+        "text": "Calendar: Y3C10, Spring, holiday=none",
+        "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00298-e86a4c6124",
+        "speakerId": "POP-00298",
+        "speakerName": "Luis Taz",
+        "text": "I navigated through a bunch of systems on Wednesday night, like Nova Terra and Sirius, then headed towards Lacaille 9352. I kept moving, trying to mine what I could and avoid getting caught in the fights that popped up. I went through Grumium, Celaeno, Lanternwick, Diadem, and a few others, mining copper ore and iron ore along the way. My goal was to come out even, and I managed to do that, so it was a good run.",
+        "factIds": [
+          "F-fa85afa84e1e",
+          "F-df05ac9b4afc"
+        ],
+        "src": "packet.W2[POP-00298]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00298",
+        "name": "Luis Taz",
+        "profile": "Luis Taz — UNDOCKED pilot",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Nia Rook",
+        "text": "Taz's consistent performance could be related to their role as a Janitor",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "an in-world bar, watch-party, break-room, bus, or sidewalk setting where the city watches or argues; a new named business goes on INTAKE BIZ",
+      "the reporter's own recap persona, approved show history, and who's-up-who's-down framing",
+      "unnamed audience argument and aspiration lines as city color, never as measured sentiment",
+      "metaphor and emotional inference grounded in a supplied typed fact from the episode feed"
+    ],
+    "textureConditions": [
+      "a named person must resolve to a ledger citizen; a new in-world place or business is scene color, not a recorded show event",
+      "current episode facts come from the supplied typed feed; prior episode facts come from the approved undocked_history result — a blank CreditsDelta is unsettled, never zero and never invented",
+      "pilot speech only from the wake-2 packet interviews — no other quote source exists for this lane",
+      "standings, ranks, and streaks come only from the supplied Standings block; earlier episodes do not establish an earlier rank",
+      "unnamed audience reaction stays rhetorical — it must not become a count, a poll, or a named person"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

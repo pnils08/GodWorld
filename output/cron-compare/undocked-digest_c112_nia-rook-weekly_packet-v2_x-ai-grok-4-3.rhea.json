@@ -1,0 +1,74 @@
+{
+  "draft": "output/cron-compare/undocked-digest_c112_nia-rook-weekly_packet-v2_x-ai-grok-4-3.md",
+  "cycle": "112",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "ca57f78c2205d92d07163e70793bcbeab207f80ecc3d13d867b000d06e461070",
+  "pass": true,
+  "advisory": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All pilot claims, standings figures, exact interview quotes, and watch-party scene texture verified against ground truth.",
+  "review": {
+    "profileId": "nia-rook-undocked-weekly-digest-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "nia-rook-undocked-weekly-digest-v1",
+    "packageVersion": "NIAROOK-UNDOCKED-WEEKLY-1",
+    "manifestId": "AM-94dfca12e0ec",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "209"
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [
+      "Eric Taveras",
+      "Iris Pham",
+      "Rafael Phillips",
+      "Sammie Alvarez"
+    ],
+    "unverified": [
+      "Neighborhood Reporter"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0098,
+  "durationMs": 4686,
+  "parseError": false,
+  "ranAt": "2026-10-24T15:15:20.565Z",
+  "contractScore": {
+    "opened": true,
+    "closed": false,
+    "purposeMet": false,
+    "inTarget": false,
+    "inTargetBy": "code floor 350",
+    "words": 298,
+    "short": "The piece fell short of the 350-word minimum, derailed into out-of-world civilian dialogue rather than a full leaderboard digest, and ended on a prompt question instead of setting up who the city watches next.",
+    "score": 1,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "ca57f78c2205d92d07163e70793bcbeab207f80ecc3d13d867b000d06e461070",
+    "costUsd": 0.0012
+  }
+}

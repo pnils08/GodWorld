@@ -1,0 +1,67 @@
+{
+  "draft": "output/cron-compare/culture_c111_maria-keen_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "111",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "4556b3a91221dcdb185adac1befd3102965da0b82c48d7ca2f7ff4e125b84a31",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All citizen names, demographic figures, and quotes verify cleanly against ledger and Wake-3 packet evidence without canon or persona overreach.",
+  "review": {
+    "profileId": "maria-ground-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "maria-ground-v1",
+    "packageVersion": "MARIA-LEP2-1",
+    "manifestId": "AM-d2e17ee960c7",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Carlos Presti",
+      "Gordon Tate",
+      "Lucia Polito",
+      "Priya Nair",
+      "Ryan Stark"
+    ],
+    "unverified": [
+      "Youth Lab"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0107,
+  "durationMs": 9920,
+  "parseError": false,
+  "ranAt": "2026-10-16T23:17:50.203Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 762,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "4556b3a91221dcdb185adac1befd3102965da0b82c48d7ca2f7ff4e125b84a31",
+    "costUsd": 0.0014
+  }
+}

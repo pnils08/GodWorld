@@ -1,0 +1,1043 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "113",
+  "persona": "talia-finch",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00592",
+      "name": "Talia Finch",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Oaks ground read C113 — neutral — the people around the second club",
+      "approach": "Oaks ground approach: this slice is what the Oaks feed says about the people — the mood in the room, the fans, the neighborhood around the park — with the record as context. First-person ground report. The moods and sentiments are feed rows, real; the walk to the park, the vendor, the kid with the glove are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "oaks",
+        "hood": "Uptown",
+        "facts": [
+          "Oaks fans, C113: neutral",
+          "Room mood, C113: hungry",
+          "Notebook (feed): After getting their first win in their franchise history the Oaks followed with their second win in the very next game. The Oaks traveled to Detroit where its defense would shine in a 91-78 victory. Adash Stanley shined with 29 points while Austin Rivers facilitated the action with 10 assists while also contributing 12 points a 7 rebounds. AJ Dybansta continued his strong start and little spoken on second round pick , rookie Harry Hayward emergered with 12 points",
+          "Oaks — game-result (early-season), C113: The Oaks win again behind a big game behind Adash Stanley. The Oaks 91 - Pistons 78 on the road in Detroit.",
+          "Context: record 2-0 · streak W2",
+          "Home neighborhood (feed): Uptown",
+          "Oaks fans, C113: excited",
+          "Room mood, C113: locked-in",
+          "Notebook (feed): Watch out now but the Oaks have won three straight games to start the inauguaral season. This time the Oaks traveled to New York to face the Knicks and had another convincing win beting the Knicks 115-93. Austin Reaves and AJ Dybansta lead scoring with 23 points a piece while Adash Stanley flirted with his first triple double. Harry Hayward repeats his strong performance recording a double double.",
+          "Oaks — game-result (early-season), C113: The Oaks remain sizzling hot after a winless preseason have now shot out of the gate winning 3 straight. Oaks 115 - Knicks 93 in New York",
+          "Context: record 3-0 · streak W3",
+          "Home neighborhood (feed): San Antonio"
+        ],
+        "priorCycle": null,
+        "note": null,
+        "engineHooks": [],
+        "roomIsYours": "the walk from the bus stop, the vendor who knows the regulars, what the crowd sounds like when the club is losing, the kid waiting by the tunnel",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-oaks-ground",
+      "hood": "Uptown",
+      "score": null,
+      "src": "output/beats/Oakland_Sports_Feed.jsonl @C113",
+      "nearby": [
+        {
+          "text": "Oaks | game-result | (early-season) | Adash Stanley, Austin Reaves, AJ Dybantsa, Wilson Shepard",
+          "src": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | game-result | (early-season) | Adash Stanley, AJ Dybantsa, Austin Reaves",
+          "src": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | game-result | (early-season) | Adash Stanley, AJ Dybantsa, Austin Reaves",
+          "src": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | rumor | (off-season) | Desmond Morton, Frank Reyna, Danny Horn, Vladimir Gonzalez, JR Rosado",
+          "src": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | community-outreach | (off-season) | Darrin Davis, Rafael Montez",
+          "src": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-01023",
+          "name": "Adash Stanley",
+          "profile": "Adash Stanley — PG / The Oaks — Downtown",
+          "role": "PG / The Oaks",
+          "hood": "Downtown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Oakland_Sports_Feed.jsonl @C113",
+            "pop": "POP-01023",
+            "rowName": "Adash Stanley",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01027",
+          "name": "Austin Reaves",
+          "profile": "Austin Reaves — SG / The Oaks — West Oakland",
+          "role": "SG / The Oaks",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Oakland_Sports_Feed.jsonl @C113",
+            "pop": "POP-01027",
+            "rowName": "Austin Reaves",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01022",
+          "name": "Wilson Shepard",
+          "profile": "Wilson Shepard — Head Coach, Oakland Oaks — West Oakland",
+          "role": "Head Coach, Oakland Oaks",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Oakland_Sports_Feed.jsonl @C113",
+            "pop": "POP-01022",
+            "rowName": "Wilson Shepard",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01223",
+          "name": "Harry Hayward",
+          "profile": "Harry Hayward — Oakland Oaks - Power Forward — KONO",
+          "role": "Oakland Oaks - Power Forward",
+          "hood": "KONO",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Oakland_Sports_Feed.jsonl @C113",
+            "pop": "POP-01223",
+            "rowName": "Harry Hayward",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00170",
+          "name": "Melton Neilon",
+          "profile": "Melton Neilon — Sourdough Baker",
+          "role": "Sourdough Baker",
+          "hood": "Temescal",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "SRj1Wn1q3aRxZTY3ALNRf6",
+            "customId": "cp-POP-00170-c110-PRESS",
+            "cycle": 110,
+            "excerpt": "Honestly, I still don't really know what to make of the Oaks analysis.",
+            "highlightKind": "game",
+            "entity": "Oaks",
+            "predicate": "watch"
+          }
+        },
+        {
+          "pop": "POP-00198",
+          "name": "Rick Walker",
+          "profile": "Rick Walker — K-8 Teacher,Former Line cook",
+          "role": "K-8 Teacher,Former Line cook",
+          "hood": "Fruitvale",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "mgXsax3i7irgmarYJpd9bp",
+            "customId": "cp-POP-00198-c106-PRESS",
+            "cycle": 106,
+            "excerpt": "I've heard some folks talking about Oaks analysis around the neighborhood, seems like people are trying to make sense of what's going on with the team, I'm just trying to keep up with the news like everyone else",
+            "highlightKind": "game",
+            "entity": "Oaks",
+            "predicate": "watch"
+          }
+        },
+        {
+          "pop": "POP-00201",
+          "name": "Elio Perez",
+          "profile": "Elio Perez — Server",
+          "role": "Server",
+          "hood": "Rockridge",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "jQ1x55AXJqEnBWBaUX2JyW",
+            "customId": "cp-POP-00201-c106-PRESS",
+            "cycle": 106,
+            "excerpt": "I've heard people talking about Oaks analysis around my neighborhood, it seems like everyone's got an opinion on it, I'm just trying to stay focused on my work and taking care of my family",
+            "highlightKind": "game",
+            "entity": "Oaks",
+            "predicate": "watch"
+          }
+        },
+        {
+          "pop": "POP-00212",
+          "name": "Jessie Hess",
+          "profile": "Jessie Hess — Barista",
+          "role": "Barista",
+          "hood": "Downtown",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "HyhQejEenARxJYxp93ae85",
+            "customId": "cp-POP-00212-c110-PRESS",
+            "cycle": 110,
+            "excerpt": "I was really hyped about the Oaks' starting five and their chances this season, but losing to the Miami Heat doesn't exactly fill me with confidence.",
+            "highlightKind": "game",
+            "entity": "Oaks",
+            "predicate": "watch"
+          }
+        },
+        {
+          "pop": "POP-00224",
+          "name": "Dillon Trevor",
+          "profile": "Dillon Trevor — Server",
+          "role": "Server",
+          "hood": "Downtown",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "4N7gJRG2ySYS7rsQyKK6ay",
+            "customId": "cp-POP-00224-c107-PRESS",
+            "cycle": 107,
+            "excerpt": "I've heard The Oaks are looking strong for the upcoming season, and I'm excited to see how they do.",
+            "highlightKind": "game",
+            "entity": "Oaks",
+            "predicate": "watch"
+          }
+        },
+        {
+          "pop": "POP-00273",
+          "name": "Trenton Nawan",
+          "profile": "Trenton Nawan — Server",
+          "role": "Server",
+          "hood": "Jack London",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "wMVkZGnjB6LNceS9GxMCcN",
+            "customId": "cp-POP-00273-c112-PRESS",
+            "cycle": 112,
+            "excerpt": "To be honest, I'm still a bit worried about the Oaks.",
+            "highlightKind": "game",
+            "entity": "Oaks",
+            "predicate": "watch"
+          }
+        },
+        {
+          "pop": "POP-00540",
+          "name": "Jade Orion",
+          "profile": "Jade Orion — Musician",
+          "role": "Musician",
+          "hood": "Lake Merritt",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "vAkesst5wo8wCX9mn7Rujt",
+            "customId": "cp-POP-00540-c102-PRESS",
+            "cycle": 102,
+            "excerpt": "Look, I don’t know what kind of \"fame-rise\" you’re talking about—I’m just a person who plays guitar at The Oaks sometimes and fixes my own appliances because rent isn’t cheap.",
+            "highlightKind": "game",
+            "entity": "Oaks",
+            "predicate": "watch"
+          }
+        },
+        {
+          "pop": "POP-00642",
+          "name": "Ollie Campbell",
+          "profile": "Ollie Campbell — Bakery Worker",
+          "role": "Bakery Worker",
+          "hood": "Jack London",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "grM19cB4WtMHYGsBpxd39c",
+            "customId": "cp-POP-00642-c112-PRESS",
+            "cycle": 112,
+            "excerpt": "To be honest, I still feel the same way about the Oaks.",
+            "highlightKind": "game",
+            "entity": "Oaks",
+            "predicate": "watch"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C113",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-876f95b5eb98"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks ground read C113 — neutral",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C113",
+        "id": "F-7ce2f8574872"
+      },
+      {
+        "t": "FACT",
+        "text": "neutral",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C113",
+        "id": "F-61315da125a3"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks fans, C113: neutral",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113",
+        "id": "F-4e8cfff1e85d"
+      },
+      {
+        "t": "FACT",
+        "text": "Room mood, C113: hungry",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113",
+        "id": "F-b4e950346d5a"
+      },
+      {
+        "t": "FACT",
+        "text": "Notebook (feed): After getting their first win in their franchise history the Oaks followed with their second win in the very next game. The Oaks traveled to Detroit where its defense would shine in a 91-78 victory. Adash Stanley shined with 29 points while Austin Rivers facilitated the action with 10 assists while also contributing 12 points a 7 rebounds. AJ Dybansta continued his strong start and little spoken on second round pick , rookie Harry Hayward emergered with 12 points",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113",
+        "id": "F-c03b20272df4"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks — game-result (early-season), C113: The Oaks win again behind a big game behind Adash Stanley. The Oaks 91 - Pistons 78 on the road in Detroit.",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113",
+        "id": "F-98940fce84bb"
+      },
+      {
+        "t": "FACT",
+        "text": "Context: record 2-0 · streak W2",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113",
+        "id": "F-46338c42350d"
+      },
+      {
+        "t": "FACT",
+        "text": "Home neighborhood (feed): Uptown",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113",
+        "id": "F-c7cf7297d788"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks fans, C113: excited",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113",
+        "id": "F-cf67136d577a"
+      },
+      {
+        "t": "FACT",
+        "text": "Room mood, C113: locked-in",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113",
+        "id": "F-964bfb707ff5"
+      },
+      {
+        "t": "FACT",
+        "text": "Notebook (feed): Watch out now but the Oaks have won three straight games to start the inauguaral season. This time the Oaks traveled to New York to face the Knicks and had another convincing win beting the Knicks 115-93. Austin Reaves and AJ Dybansta lead scoring with 23 points a piece while Adash Stanley flirted with his first triple double. Harry Hayward repeats his strong performance recording a double double.",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113",
+        "id": "F-684f84b7fbeb"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks — game-result (early-season), C113: The Oaks remain sizzling hot after a winless preseason have now shot out of the gate winning 3 straight. Oaks 115 - Knicks 93 in New York",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113",
+        "id": "F-93fd571759e2"
+      },
+      {
+        "t": "FACT",
+        "text": "Context: record 3-0 · streak W3",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113",
+        "id": "F-48c58aaf0cbd"
+      },
+      {
+        "t": "FACT",
+        "text": "Home neighborhood (feed): San Antonio",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113",
+        "id": "F-72ba66cc215c"
+      },
+      {
+        "t": "FACT",
+        "text": "Notebook (feed): The Oaks now have won their first 4 games to start their first season in the NBA. This latest being the most jarring yet. The Oaks traveled to Washington and blew out the Wizards with a score of 105-62. A 43 point win in just their forth game speaks to the roster configuration and the coaching in the young season. Adash Stanley and Austin Reaves both scored 23 respectively in a game that mainly featured well orchestrated defense by the Oaks",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113",
+        "id": "F-4fd934fec315"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks — game-result (early-season), C113: The Oaks completly dismantle the Wizards in Washington. Oaks 105 - Wizards 62",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113",
+        "id": "F-e1f3cf075586"
+      },
+      {
+        "t": "FACT",
+        "text": "Context: record 4-0 · streak W4",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113",
+        "id": "F-cd2e17d120ae"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "street",
+    "candidates": [
+      {
+        "pop": "POP-01023",
+        "name": "Adash Stanley",
+        "role": "PG / The Oaks",
+        "hood": "Downtown",
+        "profile": "Adash Stanley — PG / The Oaks  — Downtown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Oakland_Sports_Feed.jsonl @C113",
+          "pop": "POP-01023",
+          "rowName": "Adash Stanley",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01027",
+        "name": "Austin Reaves",
+        "role": "SG / The Oaks",
+        "hood": "West Oakland",
+        "profile": "Austin Reaves — SG / The Oaks — West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Oakland_Sports_Feed.jsonl @C113",
+          "pop": "POP-01027",
+          "rowName": "Austin Reaves",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01022",
+        "name": "Wilson Shepard",
+        "role": "Head Coach, Oakland Oaks",
+        "hood": "West Oakland",
+        "profile": "Wilson Shepard — Head Coach, Oakland Oaks — West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Oakland_Sports_Feed.jsonl @C113",
+          "pop": "POP-01022",
+          "rowName": "Wilson Shepard",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01223",
+        "name": "Harry Hayward",
+        "role": "Oakland Oaks - Power Forward",
+        "hood": "KONO",
+        "profile": "Harry Hayward — Oakland Oaks - Power Forward — KONO",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Oakland_Sports_Feed.jsonl @C113",
+          "pop": "POP-01223",
+          "rowName": "Harry Hayward",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00170",
+        "name": "Melton Neilon",
+        "role": "Sourdough Baker",
+        "hood": "Temescal",
+        "profile": "Melton Neilon — Sourdough Baker",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "SRj1Wn1q3aRxZTY3ALNRf6",
+          "customId": "cp-POP-00170-c110-PRESS",
+          "cycle": 110,
+          "excerpt": "Honestly, I still don't really know what to make of the Oaks analysis.",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "Honestly, I still don't really know what to make of the Oaks analysis."
+      },
+      {
+        "pop": "POP-00198",
+        "name": "Rick Walker",
+        "role": "K-8 Teacher,Former Line cook",
+        "hood": "Fruitvale",
+        "profile": "Rick Walker — K-8 Teacher,Former Line cook",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "mgXsax3i7irgmarYJpd9bp",
+          "customId": "cp-POP-00198-c106-PRESS",
+          "cycle": 106,
+          "excerpt": "I've heard some folks talking about Oaks analysis around the neighborhood, seems like people are trying to make sense of what's going on with the team, I'm just trying to keep up with the news like everyone else",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "I've heard some folks talking about Oaks analysis around the neighborhood, seems like people are trying to make sense of what's going on with the team, I'm just trying to keep up with the news like everyone else"
+      },
+      {
+        "pop": "POP-00201",
+        "name": "Elio Perez",
+        "role": "Server",
+        "hood": "Rockridge",
+        "profile": "Elio Perez — Server",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "jQ1x55AXJqEnBWBaUX2JyW",
+          "customId": "cp-POP-00201-c106-PRESS",
+          "cycle": 106,
+          "excerpt": "I've heard people talking about Oaks analysis around my neighborhood, it seems like everyone's got an opinion on it, I'm just trying to stay focused on my work and taking care of my family",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "I've heard people talking about Oaks analysis around my neighborhood, it seems like everyone's got an opinion on it, I'm just trying to stay focused on my work and taking care of my family"
+      },
+      {
+        "pop": "POP-00212",
+        "name": "Jessie Hess",
+        "role": "Barista",
+        "hood": "Downtown",
+        "profile": "Jessie Hess — Barista",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "HyhQejEenARxJYxp93ae85",
+          "customId": "cp-POP-00212-c110-PRESS",
+          "cycle": 110,
+          "excerpt": "I was really hyped about the Oaks' starting five and their chances this season, but losing to the Miami Heat doesn't exactly fill me with confidence.",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "I was really hyped about the Oaks' starting five and their chances this season, but losing to the Miami Heat doesn't exactly fill me with confidence."
+      },
+      {
+        "pop": "POP-00224",
+        "name": "Dillon Trevor",
+        "role": "Server",
+        "hood": "Downtown",
+        "profile": "Dillon Trevor — Server",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "4N7gJRG2ySYS7rsQyKK6ay",
+          "customId": "cp-POP-00224-c107-PRESS",
+          "cycle": 107,
+          "excerpt": "I've heard The Oaks are looking strong for the upcoming season, and I'm excited to see how they do.",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "I've heard The Oaks are looking strong for the upcoming season, and I'm excited to see how they do."
+      },
+      {
+        "pop": "POP-00273",
+        "name": "Trenton Nawan",
+        "role": "Server",
+        "hood": "Jack London",
+        "profile": "Trenton Nawan — Server",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "wMVkZGnjB6LNceS9GxMCcN",
+          "customId": "cp-POP-00273-c112-PRESS",
+          "cycle": 112,
+          "excerpt": "To be honest, I'm still a bit worried about the Oaks.",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "To be honest, I'm still a bit worried about the Oaks."
+      },
+      {
+        "pop": "POP-00540",
+        "name": "Jade Orion",
+        "role": "Musician",
+        "hood": "Lake Merritt",
+        "profile": "Jade Orion — Musician",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "vAkesst5wo8wCX9mn7Rujt",
+          "customId": "cp-POP-00540-c102-PRESS",
+          "cycle": 102,
+          "excerpt": "Look, I don’t know what kind of \"fame-rise\" you’re talking about—I’m just a person who plays guitar at The Oaks sometimes and fixes my own appliances because rent isn’t cheap.",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "Look, I don’t know what kind of \"fame-rise\" you’re talking about—I’m just a person who plays guitar at The Oaks sometimes and fixes my own appliances because rent isn’t cheap."
+      },
+      {
+        "pop": "POP-00642",
+        "name": "Ollie Campbell",
+        "role": "Bakery Worker",
+        "hood": "Jack London",
+        "profile": "Ollie Campbell — Bakery Worker",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "grM19cB4WtMHYGsBpxd39c",
+          "customId": "cp-POP-00642-c112-PRESS",
+          "cycle": 112,
+          "excerpt": "To be honest, I still feel the same way about the Oaks.",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "To be honest, I still feel the same way about the Oaks."
+      },
+      {
+        "pop": "POP-00722",
+        "name": "Daniel Cloak",
+        "role": "Bakery Worker",
+        "hood": "West Oakland",
+        "profile": "Daniel Cloak — Bakery Worker",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "uBnTZrbAsy2cgjJY5UAbsb",
+          "customId": "cp-POP-00722-c110-PRESS",
+          "cycle": 110,
+          "excerpt": "I still feel that way about the Oaks, they're trying to reach out and be part of the community, and that's something positive.",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "I still feel that way about the Oaks, they're trying to reach out and be part of the community, and that's something positive."
+      },
+      {
+        "pop": "POP-00794",
+        "name": "Irene Fay",
+        "role": "Barista",
+        "hood": "West Oakland",
+        "profile": "Irene Fay — Barista",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "toFvMTo3wqpDxkBBseRDVW",
+          "customId": "cp-POP-00794-c106-PRESS",
+          "cycle": 106,
+          "excerpt": "I feel like community engagement with the Oaks team is something I've heard about, but I don't really know much about it.",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "I feel like community engagement with the Oaks team is something I've heard about, but I don't really know much about it."
+      },
+      {
+        "pop": "POP-00961",
+        "name": "Darius Clark",
+        "role": "Bakery Worker",
+        "hood": "West Oakland",
+        "profile": "Darius Clark — Bakery Worker",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "eMYpZ1azxUV7vjTZvhkMiT",
+          "customId": "cp-POP-00961-c106-PRESS",
+          "cycle": 106,
+          "excerpt": "I feel like the community is pretty supportive of the Oaks team, I see people around here talking about them and it seems like they're trying to engage with us more.",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "I feel like the community is pretty supportive of the Oaks team, I see people around here talking about them and it seems like they're trying to engage with us more."
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Talia Finch",
+    "popid": "POP-00592"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-oaks-ground",
+      "angle": "Oaks ground read C113 — neutral — the people around the second club",
+      "label": "Oaks ground read C113 — neutral",
+      "hookLine": "neutral",
+      "hood": "Uptown",
+      "citizens": [
+        "Adash Stanley (POP-01023)",
+        "Austin Reaves (POP-01027)",
+        "Wilson Shepard (POP-01022)",
+        "Harry Hayward (POP-01223)"
+      ],
+      "popids": [
+        "POP-01023",
+        "POP-01027",
+        "POP-01022",
+        "POP-01223"
+      ],
+      "ref": "output/beats/Oakland_Sports_Feed.jsonl @C113",
+      "cycle": 113
+    },
+    "approach": "Oaks ground approach: this slice is what the Oaks feed says about the people — the mood in the room, the fans, the neighborhood around the park — with the record as context. First-person ground report. The moods and sentiments are feed rows, real; the walk to the park, the vendor, the kid with the glove are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "OAKS-GROUND-1",
+    "kind": "beat-oaks-ground",
+    "seat": {
+      "slug": "talia-finch",
+      "name": "Talia Finch",
+      "popid": "POP-00592",
+      "desk": "sports",
+      "domain": "oaks",
+      "builder": "buildOaksGroundSlice.js"
+    },
+    "hood": "Uptown",
+    "pulse": {
+      "className": "beat-oaks-ground",
+      "score": 100,
+      "label": "Oaks ground read C113 — neutral",
+      "hood": "Uptown",
+      "source": "output/beats/Oakland_Sports_Feed.jsonl @C113"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "Oaks ground read C113 — neutral — the people around the second club",
+      "hookLine": "neutral",
+      "anchorFacts": [
+        "Oaks fans, C113: neutral",
+        "Room mood, C113: hungry",
+        "Notebook (feed): After getting their first win in their franchise history the Oaks followed with their second win in the very next game. The Oaks traveled to Detroit where its defense would shine in a 91-78 victory. Adash Stanley shined with 29 points while Austin Rivers facilitated the action with 10 assists while also contributing 12 points a 7 rebounds. AJ Dybansta continued his strong start and little spoken on second round pick , rookie Harry Hayward emergered with 12 points",
+        "Oaks — game-result (early-season), C113: The Oaks win again behind a big game behind Adash Stanley. The Oaks 91 - Pistons 78 on the road in Detroit.",
+        "Context: record 2-0 · streak W2",
+        "Home neighborhood (feed): Uptown",
+        "Oaks fans, C113: excited",
+        "Room mood, C113: locked-in",
+        "Notebook (feed): Watch out now but the Oaks have won three straight games to start the inauguaral season. This time the Oaks traveled to New York to face the Knicks and had another convincing win beting the Knicks 115-93. Austin Reaves and AJ Dybansta lead scoring with 23 points a piece while Adash Stanley flirted with his first triple double. Harry Hayward repeats his strong performance recording a double double. ",
+        "Oaks — game-result (early-season), C113: The Oaks remain sizzling hot after a winless preseason have now shot out of the gate winning 3 straight. Oaks 115 - Knicks 93 in New York",
+        "Context: record 3-0 · streak W3",
+        "Home neighborhood (feed): San Antonio",
+        "Oaks fans, C113: excited",
+        "Room mood, C113: locked-in",
+        "Notebook (feed): The Oaks now have won their first 4 games to start their first season in the NBA. This latest being the most jarring yet. The Oaks traveled to Washington and blew out the Wizards with a score of 105-62. A 43 point win in just their forth game speaks to the roster configuration and the coaching in the young season. Adash Stanley and Austin Reaves both scored 23 respectively in a game that mainly featured well orchestrated defense by the Oaks",
+        "Oaks — game-result (early-season), C113: The Oaks completly dismantle the Wizards in Washington. Oaks 105 - Wizards 62",
+        "Context: record 4-0 · streak W4",
+        "Home neighborhood (feed): San Antonio"
+      ],
+      "evidence": [
+        {
+          "text": "Oaks fans, C113: neutral",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+        },
+        {
+          "text": "Room mood, C113: hungry",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+        },
+        {
+          "text": "Notebook (feed): After getting their first win in their franchise history the Oaks followed with their second win in the very next game. The Oaks traveled to Detroit where its defense would shine in a 91-78 victory. Adash Stanley shined with 29 points while Austin Rivers facilitated the action with 10 assists while also contributing 12 points a 7 rebounds. AJ Dybansta continued his strong start and little spoken on second round pick , rookie Harry Hayward emergered with 12 points",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+        },
+        {
+          "text": "Oaks — game-result (early-season), C113: The Oaks win again behind a big game behind Adash Stanley. The Oaks 91 - Pistons 78 on the road in Detroit.",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+        },
+        {
+          "text": "Context: record 2-0 · streak W2",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+        },
+        {
+          "text": "Home neighborhood (feed): Uptown",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+        },
+        {
+          "text": "Oaks fans, C113: excited",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+        },
+        {
+          "text": "Room mood, C113: locked-in",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+        },
+        {
+          "text": "Notebook (feed): Watch out now but the Oaks have won three straight games to start the inauguaral season. This time the Oaks traveled to New York to face the Knicks and had another convincing win beting the Knicks 115-93. Austin Reaves and AJ Dybansta lead scoring with 23 points a piece while Adash Stanley flirted with his first triple double. Harry Hayward repeats his strong performance recording a double double. ",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+        },
+        {
+          "text": "Oaks — game-result (early-season), C113: The Oaks remain sizzling hot after a winless preseason have now shot out of the gate winning 3 straight. Oaks 115 - Knicks 93 in New York",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+        },
+        {
+          "text": "Context: record 3-0 · streak W3",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+        },
+        {
+          "text": "Home neighborhood (feed): San Antonio",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+        },
+        {
+          "text": "Oaks fans, C113: excited",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+        },
+        {
+          "text": "Room mood, C113: locked-in",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+        },
+        {
+          "text": "Notebook (feed): The Oaks now have won their first 4 games to start their first season in the NBA. This latest being the most jarring yet. The Oaks traveled to Washington and blew out the Wizards with a score of 105-62. A 43 point win in just their forth game speaks to the roster configuration and the coaching in the young season. Adash Stanley and Austin Reaves both scored 23 respectively in a game that mainly featured well orchestrated defense by the Oaks",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+        },
+        {
+          "text": "Oaks — game-result (early-season), C113: The Oaks completly dismantle the Wizards in Washington. Oaks 105 - Wizards 62",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+        },
+        {
+          "text": "Context: record 4-0 · streak W4",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+        },
+        {
+          "text": "Home neighborhood (feed): San Antonio",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": null,
+      "hooks": [],
+      "note": null,
+      "pageVoices": [],
+      "roomIsYours": "the walk from the bus stop, the vendor who knows the regulars, what the crowd sounds like when the club is losing, the kid waiting by the tunnel"
+    },
+    "citizens": [
+      {
+        "popid": "POP-01023",
+        "name": "Adash Stanley",
+        "role": "PG / The Oaks ",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Adash Stanley — PG / The Oaks  — Downtown",
+        "why": "named on the Oaks feed C113 (Oakland_Sports_Feed)"
+      },
+      {
+        "popid": "POP-01027",
+        "name": "Austin Reaves",
+        "role": "SG / The Oaks",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "Austin Reaves — SG / The Oaks — West Oakland",
+        "why": "named on the Oaks feed C113 (Oakland_Sports_Feed)"
+      },
+      {
+        "popid": "POP-01022",
+        "name": "Wilson Shepard",
+        "role": "Head Coach, Oakland Oaks",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "Wilson Shepard — Head Coach, Oakland Oaks — West Oakland",
+        "why": "named on the Oaks feed C113 (Oakland_Sports_Feed)"
+      },
+      {
+        "popid": "POP-01223",
+        "name": "Harry Hayward",
+        "role": "Oakland Oaks - Power Forward",
+        "neighborhood": "KONO",
+        "business": null,
+        "profile": "Harry Hayward — Oakland Oaks - Power Forward — KONO",
+        "why": "named on the Oaks feed C113 (Oakland_Sports_Feed)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Oakland_Sports_Feed.jsonl @C113",
+      "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Talia Finch",
+    "popid": "POP-00592",
+    "text": "I'm heading to the Oaks game tonight to get a feel for the crowd and the energy around the team after their impressive start. The Oaks are 4-0, and I've heard the fans are excited. I want to see how the neighborhood around the park is reacting to their success. I'll be talking to some of the regulars and vendors to get their take on the team's performance so far.",
+    "plan": {
+      "chase": "I'm heading to the Oaks game tonight to get a feel for the crowd and the energy around the team after their impressive start. The Oaks are 4-0, and I've heard the fans are excited. I want to see how the neighborhood around the park is reacting to their success. I'll be talking to some of the regulars and vendors to get their take on the team's performance so far.",
+      "focus": "Oaks fans and neighborhood reaction to the team's 4-0 start",
+      "why": "The Oaks are on a hot streak, and I want to capture the mood of the fans and the community around the park",
+      "checks": [
+        "fans' sentiment",
+        "neighborhood reaction",
+        "team's performance impact"
+      ],
+      "targets": [
+        {
+          "pop": "POP-01023",
+          "question": "What's the mood like among the fans after four straight wins?",
+          "basis": "Adash Stanley's performance"
+        },
+        {
+          "pop": "POP-00273",
+          "question": "How are people in Jack London talking about the Oaks' success?",
+          "basis": "Local sentiment"
+        },
+        {
+          "pop": "POP-00642",
+          "question": "Has the Oaks' winning streak affected business or atmosphere in Jack London?",
+          "basis": "Local business impact"
+        }
+      ],
+      "interpretation": "The Oaks' winning streak is creating a buzz among fans and in the neighborhood",
+      "unverifiedLead": [
+        "The energy around the Oaks is electric, with fans and locals alike buzzing about their chances this season"
+      ],
+      "closeQuestion": "How will the Oaks' momentum continue to affect the local community?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Oaks | game-result | (early-season) | Adash Stanley, Austin Reaves, AJ Dybantsa, Wilson Shepard",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01023",
+        "POP-01027",
+        "POP-01024",
+        "POP-01022"
+      ]
+    },
+    {
+      "label": "Oaks | game-result | (early-season) | Adash Stanley, AJ Dybantsa, Austin Reaves",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01023",
+        "POP-01024",
+        "POP-01027"
+      ]
+    },
+    {
+      "label": "Oaks | game-result | (early-season) | Adash Stanley, AJ Dybantsa, Austin Reaves",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01023",
+        "POP-01024",
+        "POP-01027"
+      ]
+    },
+    {
+      "label": "A's | rumor | (off-season) | Desmond Morton, Frank Reyna, Danny Horn, Vladimir Gonzalez, JR Rosado",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00051",
+        "POP-00079",
+        "POP-00022",
+        "POP-00598",
+        "POP-00054"
+      ]
+    },
+    {
+      "label": "A's | community-outreach | (off-season) | Darrin Davis, Rafael Montez",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00021",
+        "POP-00136"
+      ]
+    }
+  ],
+  "laneEntries": 9,
+  "angleCapHits": 0,
+  "ranAt": "2026-10-29T11:17:29.276Z"
+}

@@ -1,0 +1,533 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "113",
+  "persona": "luis-navarro",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00636",
+      "name": "Luis Navarro",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Plan one evidence-bounded records brief without inventing a reporting trail",
+      "assignment": "Baylight District — Final Council Vote stalled in construction-active",
+      "approach": "Investigation approach: distinguish what the supplied record establishes from what it does not. Follow the unresolved gap fairly; no invented response, silence, or accusation.",
+      "creativeBrief": {
+        "kind": "civic-investigation",
+        "method": "KNOWN_UNKNOWN",
+        "missing": [
+          "documented response or documented non-response",
+          "request timestamp and elapsed silence duration",
+          "responsible person, office, or duty unless named by the source"
+        ],
+        "reportingEvidence": {
+          "recordChecks": {
+            "state": "NOT_SUPPLIED",
+            "events": []
+          },
+          "requestEvents": {
+            "state": "NOT_SUPPLIED",
+            "events": []
+          },
+          "responseEvents": {
+            "state": "NOT_SUPPLIED",
+            "events": []
+          },
+          "responsibleEntities": {
+            "state": "NOT_SUPPLIED",
+            "entities": []
+          }
+        },
+        "silenceClock": {
+          "state": "UNESTABLISHED",
+          "value": null,
+          "src": null
+        },
+        "forbidden": [
+          "Do not add officials, votes, budgets, outcomes, measurements, quotes, responses, or affected people absent from the supplied entries."
+        ]
+      }
+    },
+    "signal": {
+      "kind": "anomaly",
+      "hood": "Downtown",
+      "score": null,
+      "src": "output/engine_audit_c113.json patterns[0]; evidence: Neighborhood_Map row(s) 2",
+      "nearby": [
+        {
+          "text": "Avery Santana (mayor gavel): Month-11 disbursement audit published; Month-12 disbursement approved with charter renewal language directing Fund scope to remain fixed on long-tenure West Oakland cohort per Deputy Mayor Ok",
+          "src": "output/civic-voice/mayor_gavel_c113.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): Quarterly outcome report published; district-level data report accepted; D3 community briefing directed for East Oakland with Fruitvale corridor street-level response data requirement; Baylig",
+          "src": "output/civic-voice/mayor_gavel_c113.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): First cohort placement report published; implementation accountability enforced per C111 mandate — \"Youth workforce is too critical to slip — I want answers, not excuses.\"",
+          "src": "output/civic-voice/mayor_gavel_c113.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): First quarterly utilization audit report filed to D7 office and public data portal per standing procedure adopted C112 — \"Opened early and under budget — now we keep the doors open with data.",
+          "src": "output/civic-voice/mayor_gavel_c113.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): Directed Housing and Community Development Committee to advance INIT-010 to full council with $4.2M legal defense appropriation intact per D1 directive — \"Legal defense is housing stability —",
+          "src": "output/civic-voice/mayor_gavel_c113.json"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00790",
+          "name": "Marcus Webb",
+          "profile": "Marcus Webb — OEWD Program Director — Downtown resident",
+          "role": "OEWD Program Director",
+          "hood": "Downtown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/engine_audit_c113.json patterns[0]; evidence: Neighborhood_Map row(s) 2",
+            "pop": "POP-00790",
+            "rowName": "Marcus Webb",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00502",
+          "name": "Leonard Tran",
+          "profile": "Leonard Tran — civic office holder",
+          "role": "civic office holder",
+          "hood": null,
+          "mode": "offices",
+          "sourceKind": "office-record",
+          "evidence": {
+            "source": "output/civic-voice/council_d2_c113.json",
+            "statementId": "STMT-113-council_d2-003",
+            "initiativeId": "INIT-006",
+            "topic": "Baylight District Remediation"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C113",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-876f95b5eb98"
+      },
+      {
+        "t": "FACT",
+        "text": "Baylight District — Final Council Vote stalled in construction-active",
+        "src": "output/engine_audit_c113.json patterns[0]; evidence: Neighborhood_Map row(s) 2",
+        "id": "F-580c516e986b"
+      },
+      {
+        "t": "FACT",
+        "text": "The civic initiative carrying Downtown has not advanced in 3 cycles.",
+        "src": "output/engine_audit_c113.json patterns[0]; evidence: Neighborhood_Map row(s) 2",
+        "id": "F-cad49c78c10a"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase. Missing reporting evidence is a typed state, not proof that an act or response did not occur."
+    }
+  },
+  "sourcingPool": {
+    "mode": "offices",
+    "candidates": [
+      {
+        "pop": "POP-00790",
+        "name": "Marcus Webb",
+        "role": "OEWD Program Director",
+        "hood": "Downtown",
+        "profile": "Marcus Webb — OEWD Program Director — Downtown resident",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/engine_audit_c113.json patterns[0]; evidence: Neighborhood_Map row(s) 2",
+          "pop": "POP-00790",
+          "rowName": "Marcus Webb",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00502",
+        "name": "Leonard Tran",
+        "role": "civic office holder",
+        "hood": null,
+        "profile": "Leonard Tran — civic office holder",
+        "mode": "offices",
+        "sourceKind": "office-record",
+        "evidence": {
+          "source": "output/civic-voice/council_d2_c113.json",
+          "statementId": "STMT-113-council_d2-003",
+          "initiativeId": "INIT-006",
+          "topic": "Baylight District Remediation"
+        }
+      }
+    ],
+    "officeRecords": [
+      {
+        "sourceKind": "office-record",
+        "cycle": 113,
+        "officeSlug": "council_d2",
+        "statementId": "STMT-113-council_d2-003",
+        "quote": "The progress in Baylight District remediation is a crucial step forward.",
+        "topic": "Baylight District Remediation",
+        "initiativeId": "INIT-006",
+        "filePath": "output/civic-voice/council_d2_c113.json",
+        "holderPopid": "POP-00502",
+        "speakerName": "Leonard Tran"
+      }
+    ]
+  },
+  "reporter": {
+    "name": "Luis Navarro",
+    "popid": "POP-00636"
+  },
+  "assignment": {
+    "story": {
+      "ref": "output/engine_audit_c113.json patterns[0]; evidence: Neighborhood_Map row(s) 2",
+      "label": "math-imbalance (low) | Downtown: decay [RetailVitality -2.18, HousingPressure +1.000] — RetailVitality now 11.31 (6 of 22, city median 7.165); HousingPressure now 10 (21 of 22, city median 0); Sentiment now 0.16 (5 of 22, city median 0.03) — despite 1 active mitigator(s) [INIT-006]",
+      "kind": "anomaly",
+      "angle": "Baylight District — Final Council Vote stalled in construction-active — remedy path + responsible office",
+      "hookLine": "The civic initiative carrying Downtown has not advanced in 3 cycles.",
+      "hood": "Downtown",
+      "popids": [
+        "POP-00790"
+      ],
+      "citizens": [
+        "Marcus Webb (POP-00790)"
+      ]
+    },
+    "approach": "Investigation approach: distinguish what the supplied record establishes from what it does not. Follow the unresolved gap fairly; no invented response, silence, or accusation."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": {
+    "seat": {
+      "slug": "luis-navarro",
+      "name": "Luis Navarro",
+      "popid": "POP-00636",
+      "domain": "accountability-anomaly"
+    },
+    "pulse": {
+      "className": "accountability-anomaly",
+      "score": 80,
+      "label": "math-imbalance (low) | Downtown: decay [RetailVitality -2.18, HousingPressure +1.000] — RetailVitality now 11.31 (6 of 22, city median 7.165); HousingPressure now 10 (21 of 22, city median 0); Sentiment now 0.16 (5 of 22, city median 0.03) — despite 1 active mitigator(s) [INIT-006]",
+      "hood": "Downtown",
+      "source": "output/engine_audit_c113.json patterns[0]; evidence: Neighborhood_Map row(s) 2"
+    },
+    "prewrite": {
+      "anchorFacts": [
+        "math-imbalance (low) | Downtown: decay [RetailVitality -2.18, HousingPressure +1.000] — RetailVitality now 11.31 (6 of 22, city median 7.165); HousingPressure now 10 (21 of 22, city median 0); Sentiment now 0.16 (5 of 22, city median 0.03) — despite 1 active mitigator(s) [INIT-006]"
+      ],
+      "forbidden": [
+        "Do not add officials, votes, budgets, outcomes, measurements, quotes, responses, or affected people absent from the supplied entries."
+      ],
+      "schema": "INVESTIGATION-BRIEF-1",
+      "method": "KNOWN_UNKNOWN",
+      "missing": [
+        "documented response or documented non-response",
+        "request timestamp and elapsed silence duration",
+        "responsible person, office, or duty unless named by the source"
+      ],
+      "reportingEvidence": {
+        "recordChecks": {
+          "state": "NOT_SUPPLIED",
+          "events": []
+        },
+        "requestEvents": {
+          "state": "NOT_SUPPLIED",
+          "events": []
+        },
+        "responseEvents": {
+          "state": "NOT_SUPPLIED",
+          "events": []
+        },
+        "responsibleEntities": {
+          "state": "NOT_SUPPLIED",
+          "entities": []
+        }
+      },
+      "silenceClock": {
+        "state": "UNESTABLISHED",
+        "value": null,
+        "src": null
+      },
+      "excludedCandidates": [
+        {
+          "popid": "POP-00127",
+          "reason": "NEVER_WOKEN"
+        },
+        {
+          "popid": "POP-00597",
+          "reason": "PRO_ATHLETE_CIVIC_INELIGIBLE"
+        }
+      ]
+    },
+    "candidates": [
+      {
+        "score": 80,
+        "kind": "anomaly",
+        "label": "math-imbalance (low) | Downtown: decay [RetailVitality -2.18, HousingPressure +1.000] — RetailVitality now 11.31 (6 of 22, city median 7.165); HousingPressure now 10 (21 of 22, city median 0); Sentiment now 0.16 (5 of 22, city median 0.03) — despite 1 active mitigator(s) [INIT-006]",
+        "ref": "output/engine_audit_c113.json patterns[0]; evidence: Neighborhood_Map row(s) 2",
+        "hood": "Downtown",
+        "popids": [
+          "POP-00127",
+          "POP-00597",
+          "POP-00790"
+        ],
+        "angle": "Baylight District — Final Council Vote stalled in construction-active — remedy path + responsible office",
+        "hookLine": "The civic initiative carrying Downtown has not advanced in 3 cycles.",
+        "citizens": [
+          "Marcus Webb (POP-00790)",
+          "Mason Miller (POP-00127)",
+          "Eric Taveras (POP-00597)"
+        ],
+        "source": "desk-signal",
+        "sourceIndex": 0
+      },
+      {
+        "score": 80,
+        "kind": "anomaly",
+        "label": "math-imbalance (medium) | Temescal: decay [Sentiment -0.060, RetailVitality -1.11] — Sentiment now 0.08 (6 of 22, city median 0.03); RetailVitality now 5.29 (17 of 22, city median 7.165) — with no matching active initiative",
+        "ref": "output/engine_audit_c113.json patterns[1]; evidence: Neighborhood_Map row(s) 3",
+        "hood": "Temescal",
+        "popids": [
+          "POP-00206",
+          "POP-00290",
+          "POP-00761"
+        ],
+        "angle": "civic gap in Temescal — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the Temescal signal surfaced this cycle.",
+        "citizens": [
+          "Idris Karim (POP-00761)",
+          "Omar Lingio (POP-00206)",
+          "Omar Cleo (POP-00290)"
+        ],
+        "source": "desk-signal",
+        "sourceIndex": 1
+      },
+      {
+        "score": 80,
+        "kind": "anomaly",
+        "label": "math-imbalance (low) | West Oakland: decay [RetailVitality -1.87, HousingPressure +1.000] — RetailVitality now 9.68 (8 of 22, city median 7.165); HousingPressure now 2.5 (16 of 22, city median 0); Sentiment now 0.25 (1 of 22, city median 0.03) — despite 2 active mitigator(s) [INIT-001, INIT-007]",
+        "ref": "output/engine_audit_c113.json patterns[2]; evidence: Neighborhood_Map row(s) 5",
+        "hood": "West Oakland",
+        "popids": [
+          "POP-00143",
+          "POP-01022",
+          "POP-01027"
+        ],
+        "angle": "West Oakland Stabilization Fund stalled in disbursement-active — remedy path + responsible office",
+        "hookLine": "The civic initiative carrying West Oakland has not advanced in 6 cycles.",
+        "citizens": [
+          "Wilson Shepard (POP-01022)",
+          "Austin Reaves (POP-01027)",
+          "Clarissa Dane (POP-00143)"
+        ],
+        "source": "desk-signal",
+        "sourceIndex": 2
+      },
+      {
+        "score": 80,
+        "kind": "anomaly",
+        "label": "math-imbalance (low) | Fruitvale: decay [RetailVitality -1.48, HousingPressure +1.000] — RetailVitality now 11.35 (5 of 22, city median 7.165); HousingPressure now 6.5 (18 of 22, city median 0); Sentiment now 0.24 (2 of 22, city median 0.03) — despite 1 active mitigator(s) [INIT-007]",
+        "ref": "output/engine_audit_c113.json patterns[3]; evidence: Neighborhood_Map row(s) 6",
+        "hood": "Fruitvale",
+        "popids": [
+          "POP-00636",
+          "POP-00762",
+          "POP-00766"
+        ],
+        "angle": "Oakland Youth Apprenticeship Pipeline stalled in implementation-active — remedy path + responsible office",
+        "hookLine": "The transit initiative carrying Fruitvale has not advanced in 1 cycles.",
+        "citizens": [
+          "Aziz Rahimi (POP-00762)",
+          "Manjit Singh (POP-00766)",
+          "Luis Navarro (POP-00636)"
+        ],
+        "source": "desk-signal",
+        "sourceIndex": 3
+      },
+      {
+        "score": 80,
+        "kind": "anomaly",
+        "label": "math-imbalance (low) | Jack London: decay [RetailVitality -1.79, HousingPressure +1.000] — RetailVitality now 13.4 (1 of 22, city median 7.165); HousingPressure now 8.5 (20 of 22, city median 0); Sentiment now 0.17 (4 of 22, city median 0.03) — despite 1 active mitigator(s) [INIT-006]",
+        "ref": "output/engine_audit_c113.json patterns[4]; evidence: Neighborhood_Map row(s) 7",
+        "hood": "Jack London",
+        "popids": [
+          "POP-00003",
+          "POP-00030",
+          "POP-00156"
+        ],
+        "angle": "Baylight District — Final Council Vote stalled in construction-active — remedy path + responsible office",
+        "hookLine": "The civic initiative carrying Jack London has not advanced in 3 cycles.",
+        "citizens": [
+          "Derek Simmons (POP-00030)",
+          "Mark Aitken (POP-00003)",
+          "Angela Reyes (POP-00156)"
+        ],
+        "source": "desk-signal",
+        "sourceIndex": 4
+      },
+      {
+        "score": 80,
+        "kind": "anomaly",
+        "label": "math-imbalance (medium) | Grand Lake: decay [RetailVitality -1.18, HousingPressure +1.000] — RetailVitality now 11.57 (4 of 22, city median 7.165); HousingPressure now 6.5 (19 of 22, city median 0); Sentiment now -0.03 (17 of 22, city median 0.03) — with no matching active initiative",
+        "ref": "output/engine_audit_c113.json patterns[5]; evidence: Neighborhood_Map row(s) 10",
+        "hood": "Grand Lake",
+        "popids": [
+          "POP-00628",
+          "POP-00848",
+          "POP-01080"
+        ],
+        "angle": "civic gap in Grand Lake — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the Grand Lake signal surfaced this cycle.",
+        "citizens": [
+          "Louis Cross (POP-01080)",
+          "Tina Kozlov (POP-00628)",
+          "Tanisha Freeman (POP-00848)"
+        ],
+        "source": "desk-signal",
+        "sourceIndex": 5
+      }
+    ],
+    "pointers": [
+      "output/engine_audit_c113.json patterns[0]; evidence: Neighborhood_Map row(s) 2",
+      "output/engine_audit_c113.json patterns[1]; evidence: Neighborhood_Map row(s) 3",
+      "output/engine_audit_c113.json patterns[2]; evidence: Neighborhood_Map row(s) 5",
+      "output/engine_audit_c113.json patterns[3]; evidence: Neighborhood_Map row(s) 6",
+      "output/engine_audit_c113.json patterns[4]; evidence: Neighborhood_Map row(s) 7",
+      "output/engine_audit_c113.json patterns[5]; evidence: Neighborhood_Map row(s) 10"
+    ]
+  },
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Luis Navarro",
+    "popid": "POP-00636",
+    "text": "The Baylight District final council vote has been sitting in a construction-active state for three cycles now, and I've been watching the delay like I watch a runner held at third with nobody out. Something's not lining up. The mayor's office is publishing audits and outcome reports, the council is moving other initiatives forward, and this one just sits. I've got Marcus Webb, who runs OEWD, and Leonard Tran, who holds an office touching Baylight District Remediation. Neither one has given me a public answer on what's holding the vote. I'm not going to invent a scandal where one might not exist — maybe the construction work genuinely needs to finish first, maybe there's a legitimate procedur",
+    "plan": {
+      "chase": "The Baylight District final council vote has been sitting in a construction-active state for three cycles now, and I've been watching the delay like I watch a runner held at third with nobody out. Something's not lining up. The mayor's office is publishing audits and outcome reports, the council is moving other initiatives forward, and this one just sits. I've got Marcus Webb, who runs OEWD, and Leonard Tran, who holds an office touching Baylight District Remediation. Neither one has given me a public answer on what's holding the vote. I'm not going to invent a scandal where one might not exist — maybe the construction work genuinely needs to finish first, maybe there's a legitimate procedur",
+      "focus": "Baylight District final council vote stalled in construction-active state for three identified cycles",
+      "why": "A stalled final vote on a construction-active district affects real people waiting on outcomes, and the civic record shows no documented response explaining the delay. This gap is the story.",
+      "checks": [
+        "Confirm the current cycle count and the stall duration as reported in the audit pattern.",
+        "Verify whether any public statement from OEWD or the council on Baylight District exists outside the mayor's gavel updates.",
+        "Listen for any mention of the Baylight District vote in upcoming council or committee agendas."
+      ],
+      "targets": [
+        {
+          "pop": "POP-00790",
+          "question": "Marcus Webb — has OEWD provided any public explanation for why the Baylight District final council vote has not advanced in three cycles?",
+          "basis": "Named as OEWD Program Director in the supplied pattern; the district falls under program scope."
+        },
+        {
+          "pop": "POP-00502",
+          "question": "Leonard Tran — as a civic office holder with a record on Baylight District Remediation, what is the current status of the final council vote and what remains unresolved?",
+          "basis": "Named in the council record with initiative INIT-006 on this topic."
+        }
+      ],
+      "interpretation": "The supplied record establishes the stall and the lack of advancement. It does not establish the reason. I may form the hunch that the delay is not incidental, but a hunch is not proof.",
+      "unverifiedLead": [
+        "Possible that the construction-active state creates a genuine prerequisite the public hasn't been told about.",
+        "Possible that internal disagreement exists over next steps ahead of the vote."
+      ],
+      "closeQuestion": "Who on the record will tell me what the hold is — and how long will it be before the public gets an answer that isn't silence?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Avery Santana (mayor gavel): Month-11 disbursement audit published; Month-12 disbursement approved with charter renewal language directing Fund scope to remain fixed on long-tenure West Oakland cohort per Deputy Mayor Ok",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c113.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Quarterly outcome report published; district-level data report accepted; D3 community briefing directed for East Oakland with Fruitvale corridor street-level response data requirement; Baylig",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c113.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): First cohort placement report published; implementation accountability enforced per C111 mandate — \"Youth workforce is too critical to slip — I want answers, not excuses.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c113.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): First quarterly utilization audit report filed to D7 office and public data portal per standing procedure adopted C112 — \"Opened early and under budget — now we keep the doors open with data.",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c113.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Directed Housing and Community Development Committee to advance INIT-010 to full council with $4.2M legal defense appropriation intact per D1 directive — \"Legal defense is housing stability —",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c113.json",
+      "popids": []
+    }
+  ],
+  "laneEntries": 108,
+  "angleCapHits": 0,
+  "ranAt": "2026-10-27T11:15:36.385Z"
+}

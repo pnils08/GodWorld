@@ -1,0 +1,72 @@
+{
+  "draft": "output/cron-compare/sports_c111_hal-richmond_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "111",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "eb9a0b2468e8fd3033b532af5b9263c3f976757363de1bc172c8a1192785fcb8",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Clean verification: 2041 TrueSource lines and 1970s historical baseball framing fully comply with hal-sports-history-v1 persona rules with zero canon contradictions.",
+  "review": {
+    "profileId": "hal-sports-history-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "hal-sports-history-v1",
+    "packageVersion": "HAL-LEP2-2",
+    "manifestId": "AM-4efe136906a2",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Carmen Mesa",
+      "Desmond Morton",
+      "Frank Reyna",
+      "Mark Aitken",
+      "Mike Paulson"
+    ],
+    "unverified": [
+      "American League",
+      "Catfish Hunter",
+      "Gold Glove",
+      "Gold Gloves",
+      "Reggie Jackson",
+      "Rollie Fingers"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0099,
+  "durationMs": 24540,
+  "parseError": false,
+  "ranAt": "2026-10-15T23:18:16.011Z",
+  "contractScore": {
+    "opened": true,
+    "closed": false,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 800",
+    "words": 1050,
+    "short": "The closing paragraph does not name the historical echo.",
+    "score": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "eb9a0b2468e8fd3033b532af5b9263c3f976757363de1bc172c8a1192785fcb8",
+    "costUsd": 0.0026
+  }
+}

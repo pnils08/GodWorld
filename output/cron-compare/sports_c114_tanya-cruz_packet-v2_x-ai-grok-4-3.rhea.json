@@ -1,0 +1,70 @@
+{
+  "draft": "output/cron-compare/sports_c114_tanya-cruz_packet-v2_x-ai-grok-4-3.md",
+  "cycle": "114",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "b33075b263b2bd1fe7b62721abeac3f4cce46a3a3f25557574fc2bae26274afc",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All sports roster facts, contract numbers, and player quotes perfectly match C114 ground truth.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "tanya-sideline-v1",
+    "packageVersion": "TANYA-LEP2-1",
+    "manifestId": "AM-fc730260adb4",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "28.2"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Carmen Mesa",
+      "Pablo Almanzar"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 1,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0102,
+  "durationMs": 4141,
+  "parseError": false,
+  "ranAt": "2026-11-05T00:19:14.310Z",
+  "contractScore": {
+    "opened": false,
+    "closed": false,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 255,
+    "short": "The opening sets a scene rather than leading with a sports fact, and the closing ends on a rhetorical question instead of identifying the access or observation still needed.",
+    "score": 2,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "b33075b263b2bd1fe7b62721abeac3f4cce46a3a3f25557574fc2bae26274afc",
+    "costUsd": 0.0021
+  }
+}

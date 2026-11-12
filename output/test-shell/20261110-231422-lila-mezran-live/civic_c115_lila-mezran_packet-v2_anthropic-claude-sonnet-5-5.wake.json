@@ -1,0 +1,41 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "115",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "sonnet",
+  "persona": "lila-mezran",
+  "byline": {
+    "name": "Dr. Lila Mezran",
+    "popid": "POP-00154",
+    "beatDomain": "HEALTH"
+  },
+  "laneEntries": 93,
+  "quotesLanded": 2,
+  "disposition": "ungated-sample",
+  "rheaPass": null,
+  "rheaFlagCount": null,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "sheet_read",
+    "canon_search"
+  ],
+  "toolCalls": 2,
+  "wordCount": 894,
+  "targetWords": "evidence-bounded",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": null,
+  "gradeRecord": null,
+  "article": "output/test-shell/20261110-231422-lila-mezran-live/samples/civic_c115_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5.sample.md",
+  "selfRecord": null,
+  "ranAt": "2026-11-11T05:16:46.632Z"
+}

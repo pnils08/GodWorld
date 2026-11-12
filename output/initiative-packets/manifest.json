@@ -1,57 +1,57 @@
 {
-  "cycle": 113,
-  "generatedAt": "2026-10-26T05:32:45.695Z",
+  "cycle": 115,
+  "generatedAt": "2026-11-09T08:49:28.825Z",
   "packets": {
     "stabilization_fund": {
-      "file": "stabilization_fund_c113.json",
+      "file": "stabilization_fund_c115.json",
       "initiativeId": "INIT-001",
       "status": "passed",
-      "citizenCount": 257,
+      "citizenCount": 269,
       "linkedCitizens": 1,
       "neighborhoods": 7,
       "businesses": 68,
       "hasPreviousDecisions": true,
       "hasVoiceDecisions": true,
-      "previousDocCount": 15
+      "previousDocCount": 17
     },
     "oari": {
-      "file": "oari_c113.json",
+      "file": "oari_c115.json",
       "initiativeId": "INIT-002",
       "status": "passed",
-      "citizenCount": 391,
+      "citizenCount": 397,
       "linkedCitizens": 0,
       "neighborhoods": 7,
       "businesses": 81,
       "hasPreviousDecisions": true,
-      "hasVoiceDecisions": true,
-      "previousDocCount": 15
+      "hasVoiceDecisions": false,
+      "previousDocCount": 17
     },
     "transit_hub": {
-      "file": "transit_hub_c113.json",
+      "file": "transit_hub_c115.json",
       "initiativeId": "INIT-003",
       "status": "passed",
-      "citizenCount": 112,
+      "citizenCount": 113,
       "linkedCitizens": 0,
       "neighborhoods": 2,
       "businesses": 25,
       "hasPreviousDecisions": true,
-      "hasVoiceDecisions": false,
-      "previousDocCount": 13
+      "hasVoiceDecisions": true,
+      "previousDocCount": 15
     },
     "health_center": {
-      "file": "health_center_c113.json",
+      "file": "health_center_c115.json",
       "initiativeId": "INIT-005",
       "status": "passed",
-      "citizenCount": 143,
+      "citizenCount": 142,
       "linkedCitizens": 0,
       "neighborhoods": 2,
       "businesses": 24,
       "hasPreviousDecisions": true,
       "hasVoiceDecisions": true,
-      "previousDocCount": 13
+      "previousDocCount": 15
     },
     "baylight": {
-      "file": "baylight_c113.json",
+      "file": "baylight_c115.json",
       "initiativeId": "INIT-006",
       "status": "passed",
       "citizenCount": 168,
@@ -60,7 +60,7 @@
       "businesses": 49,
       "hasPreviousDecisions": true,
       "hasVoiceDecisions": true,
-      "previousDocCount": 17
+      "previousDocCount": 19
     }
   }
 }

@@ -1,0 +1,807 @@
+{
+  "empty": false,
+  "cycle": 113,
+  "kind": "evening-life",
+  "journalist": {
+    "shared": true,
+    "consumers": [
+      "mason-ortega",
+      "kai-marston",
+      "sharon-okafor",
+      "maria-keen",
+      "elliot-graye"
+    ]
+  },
+  "texture": {
+    "famous": [
+      "Marisol Rivera",
+      "Claire Ashford",
+      "Deacon Seymour"
+    ],
+    "restaurants": [
+      {
+        "name": "Jack London Square Markets",
+        "hood": "Jack London"
+      },
+      {
+        "name": "Port Grind",
+        "hood": "Grand Lake"
+      },
+      {
+        "name": "Glenview Cafe",
+        "hood": "Glenview"
+      }
+    ],
+    "fastFood": [
+      {
+        "name": "SpeedyBurger",
+        "hood": "Downtown"
+      }
+    ],
+    "nightlife": [
+      {
+        "name": "Temple Lounge",
+        "hood": "Downtown"
+      }
+    ],
+    "nightlifeMeta": {
+      "volume": 2,
+      "vibe": "quiet",
+      "movement": "restricted",
+      "weatherImpact": 1
+    },
+    "cityEvents": [
+      "Jack London Cozy Nights Film Series",
+      "The Villanueva Family Block Party",
+      "Lake Merritt Lantern Parade"
+    ],
+    "tv": [
+      "Breaking Bulletin",
+      "Slow Evenings",
+      "A's Prospect Report",
+      "AJ Dybantsa (SF): In Focus"
+    ],
+    "movies": [
+      "Snowlight",
+      "Diamond City"
+    ],
+    "sportsBroadcast": "Oakland Sports Tonight",
+    "streamingTrend": "political commentary surge",
+    "foodTrend": "High mobility / civic-tension food trend"
+  },
+  "signals": {
+    "fameCount": 5,
+    "sightingCount": 3,
+    "faithCount": 6,
+    "eveningPointer": {
+      "ref": "output/world_summary_c113.md \"## Evening Texture\"",
+      "label": "Named venues that moved — restaurants, fast food, nightlife spots, city events, media"
+    },
+    "sightings": [
+      {
+        "kind": "lifestyle-sighting",
+        "label": "sighting | Marisol Rivera spotted at Mercado Fruitvale",
+        "name": "Marisol Rivera",
+        "venue": "Mercado Fruitvale",
+        "ref": "Ripple_Ledger cycle 113 (CauseType lifestyle-sighting); rendered: world_summary_c113.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "hood": "Fruitvale",
+        "popids": []
+      },
+      {
+        "kind": "lifestyle-sighting",
+        "label": "sighting | Claire Ashford spotted at Midnight Norae Karaoke",
+        "name": "Claire Ashford",
+        "venue": "Midnight Norae Karaoke",
+        "ref": "Ripple_Ledger cycle 113 (CauseType lifestyle-sighting); rendered: world_summary_c113.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "hood": "KONO",
+        "popids": []
+      },
+      {
+        "kind": "lifestyle-sighting",
+        "label": "sighting | Deacon Seymour spotted at Lakeshore Cigar Club",
+        "name": "Deacon Seymour",
+        "venue": "Lakeshore Cigar Club",
+        "ref": "Ripple_Ledger cycle 113 (CauseType lifestyle-sighting); rendered: world_summary_c113.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "hood": "Lake Merritt",
+        "popids": []
+      }
+    ],
+    "fame": [
+      {
+        "kind": "fame-event",
+        "label": "fame-rise | Rowan Pierce — the city is watching: wrote half a letter to family, then decided to call instead",
+        "name": "Rowan Pierce",
+        "ref": "Ripple_Ledger cycle 113 (CauseType fame-event); rendered: world_summary_c113.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Piedmont Ave",
+        "popids": [
+          "POP-00545"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "fame-rise | Dax Monroe — the city is watching: caught the recap of last night's game at the counter and stayed for the second retelling",
+        "name": "Dax Monroe",
+        "ref": "Ripple_Ledger cycle 113 (CauseType fame-event); rendered: world_summary_c113.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Rockridge",
+        "popids": [
+          "POP-00769"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "tier-climb | Elliot Marbury — the city keeps saying the name: Tier 4 -> 3",
+        "name": "Elliot Marbury",
+        "ref": "Ripple_Ledger cycle 113 (CauseType fame-event); rendered: world_summary_c113.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Piedmont Ave",
+        "popids": [
+          "POP-00166"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "tier-climb | Tara Ellison — the city keeps saying the name: Tier 4 -> 3",
+        "name": "Tara Ellison",
+        "ref": "Ripple_Ledger cycle 113 (CauseType fame-event); rendered: world_summary_c113.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Rockridge",
+        "popids": [
+          "POP-00546"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "tier-climb | Ines Sorensen — the city keeps saying the name: Tier 4 -> 3",
+        "name": "Ines Sorensen",
+        "ref": "Ripple_Ledger cycle 113 (CauseType fame-event); rendered: world_summary_c113.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Uptown",
+        "popids": [
+          "POP-01211"
+        ]
+      }
+    ]
+  },
+  "pulse": {
+    "className": "quiet-nightlife",
+    "score": 24,
+    "label": "Temple Lounge (Downtown) · quiet night",
+    "named": "Temple Lounge",
+    "hood": "Downtown",
+    "person": null,
+    "venue": null
+  },
+  "candidates": [
+    {
+      "className": "quiet-nightlife",
+      "score": 24,
+      "label": "Temple Lounge (Downtown) · quiet night",
+      "named": "Temple Lounge",
+      "hood": "Downtown"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Marisol Rivera at Mercado Fruitvale (Fruitvale)",
+      "named": "Mercado Fruitvale",
+      "hood": "Fruitvale"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Claire Ashford at Midnight Norae Karaoke (KONO)",
+      "named": "Midnight Norae Karaoke",
+      "hood": "KONO"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Deacon Seymour at Lakeshore Cigar Club (Lake Merritt)",
+      "named": "Lakeshore Cigar Club",
+      "hood": "Lake Merritt"
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Jack London Square Markets (Jack London)",
+      "named": "Jack London Square Markets",
+      "hood": "Jack London"
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Port Grind (Grand Lake)",
+      "named": "Port Grind",
+      "hood": "Grand Lake"
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Glenview Cafe (Glenview)",
+      "named": "Glenview Cafe",
+      "hood": "Glenview"
+    },
+    {
+      "className": "city-event",
+      "score": 17,
+      "label": "Jack London Cozy Nights Film Series",
+      "named": "Jack London Cozy Nights Film Series",
+      "hood": null
+    },
+    {
+      "className": "city-event",
+      "score": 17,
+      "label": "The Villanueva Family Block Party",
+      "named": "The Villanueva Family Block Party",
+      "hood": null
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Rowan Pierce — fame rise",
+      "named": "Rowan Pierce",
+      "hood": "Piedmont Ave"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Dax Monroe — fame rise",
+      "named": "Dax Monroe",
+      "hood": "Rockridge"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Elliot Marbury — fame rise",
+      "named": "Elliot Marbury",
+      "hood": "Piedmont Ave"
+    }
+  ],
+  "pulses": [
+    {
+      "className": "quiet-nightlife",
+      "score": 24,
+      "label": "Temple Lounge (Downtown) · quiet night",
+      "named": "Temple Lounge",
+      "hood": "Downtown",
+      "names": [
+        "Temple Lounge"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Nightlife",
+      "angle": "Temple Lounge is open and quiet in Downtown. What that condition means is not yet established.",
+      "hookLine": "Temple Lounge is open and quiet in Downtown.",
+      "sceneBits": [
+        "VENUE: Temple Lounge",
+        "HOOD: Downtown",
+        "EVENING RECORD: open and quiet"
+      ],
+      "nightlifeMeta": {
+        "volume": 2,
+        "vibe": "quiet",
+        "movement": "restricted",
+        "weatherImpact": 1
+      },
+      "cycle": 113
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Marisol Rivera at Mercado Fruitvale (Fruitvale)",
+      "named": "Mercado Fruitvale",
+      "hood": "Fruitvale",
+      "names": [
+        "Marisol Rivera",
+        "Mercado Fruitvale"
+      ],
+      "person": "Marisol Rivera",
+      "venue": "Mercado Fruitvale",
+      "popids": [],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 113 (CauseType lifestyle-sighting); rendered: world_summary_c113.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "angle": "Marisol Rivera spotted at Mercado Fruitvale in Fruitvale — ground truth only, no invented companions",
+      "hookLine": "sighting | Marisol Rivera spotted at Mercado Fruitvale",
+      "sceneBits": [
+        "PERSON: Marisol Rivera",
+        "VENUE: Mercado Fruitvale",
+        "HOOD: Fruitvale"
+      ],
+      "cycle": 113
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Claire Ashford at Midnight Norae Karaoke (KONO)",
+      "named": "Midnight Norae Karaoke",
+      "hood": "KONO",
+      "names": [
+        "Claire Ashford",
+        "Midnight Norae Karaoke"
+      ],
+      "person": "Claire Ashford",
+      "venue": "Midnight Norae Karaoke",
+      "popids": [],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 113 (CauseType lifestyle-sighting); rendered: world_summary_c113.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "angle": "Claire Ashford spotted at Midnight Norae Karaoke in KONO — ground truth only, no invented companions",
+      "hookLine": "sighting | Claire Ashford spotted at Midnight Norae Karaoke",
+      "sceneBits": [
+        "PERSON: Claire Ashford",
+        "VENUE: Midnight Norae Karaoke",
+        "HOOD: KONO"
+      ],
+      "cycle": 113
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Deacon Seymour at Lakeshore Cigar Club (Lake Merritt)",
+      "named": "Lakeshore Cigar Club",
+      "hood": "Lake Merritt",
+      "names": [
+        "Deacon Seymour",
+        "Lakeshore Cigar Club"
+      ],
+      "person": "Deacon Seymour",
+      "venue": "Lakeshore Cigar Club",
+      "popids": [],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 113 (CauseType lifestyle-sighting); rendered: world_summary_c113.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "angle": "Deacon Seymour spotted at Lakeshore Cigar Club in Lake Merritt — ground truth only, no invented companions",
+      "hookLine": "sighting | Deacon Seymour spotted at Lakeshore Cigar Club",
+      "sceneBits": [
+        "PERSON: Deacon Seymour",
+        "VENUE: Lakeshore Cigar Club",
+        "HOOD: Lake Merritt"
+      ],
+      "cycle": 113
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Jack London Square Markets (Jack London)",
+      "named": "Jack London Square Markets",
+      "hood": "Jack London",
+      "names": [
+        "Jack London Square Markets"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Restaurants",
+      "angle": "Jack London Square Markets appears on the evening restaurant list in Jack London. What was happening there is not established.",
+      "hookLine": "Jack London Square Markets appears on the evening restaurant list in Jack London.",
+      "sceneBits": [
+        "VENUE: Jack London Square Markets",
+        "HOOD: Jack London"
+      ],
+      "cycle": 113
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Port Grind (Grand Lake)",
+      "named": "Port Grind",
+      "hood": "Grand Lake",
+      "names": [
+        "Port Grind"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Restaurants",
+      "angle": "Port Grind appears on the evening restaurant list in Grand Lake. What was happening there is not established.",
+      "hookLine": "Port Grind appears on the evening restaurant list in Grand Lake.",
+      "sceneBits": [
+        "VENUE: Port Grind",
+        "HOOD: Grand Lake"
+      ],
+      "cycle": 113
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Glenview Cafe (Glenview)",
+      "named": "Glenview Cafe",
+      "hood": "Glenview",
+      "names": [
+        "Glenview Cafe"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Restaurants",
+      "angle": "Glenview Cafe appears on the evening restaurant list in Glenview. What was happening there is not established.",
+      "hookLine": "Glenview Cafe appears on the evening restaurant list in Glenview.",
+      "sceneBits": [
+        "VENUE: Glenview Cafe",
+        "HOOD: Glenview"
+      ],
+      "cycle": 113
+    },
+    {
+      "className": "city-event",
+      "score": 17,
+      "label": "Jack London Cozy Nights Film Series",
+      "named": "Jack London Cozy Nights Film Series",
+      "hood": null,
+      "names": [
+        "Jack London Cozy Nights Film Series"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · City events",
+      "angle": "Arts/cultural event: Jack London Cozy Nights Film Series — present-tense room, not calendar filler",
+      "hookLine": "Jack London Cozy Nights Film Series is on the evening board.",
+      "sceneBits": [
+        "EVENT: Jack London Cozy Nights Film Series",
+        "ARTS SIGNAL: yes"
+      ],
+      "cycle": 113
+    },
+    {
+      "className": "city-event",
+      "score": 17,
+      "label": "The Villanueva Family Block Party",
+      "named": "The Villanueva Family Block Party",
+      "hood": null,
+      "names": [
+        "The Villanueva Family Block Party"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · City events",
+      "angle": "Arts/cultural event: The Villanueva Family Block Party — present-tense room, not calendar filler",
+      "hookLine": "The Villanueva Family Block Party is on the evening board.",
+      "sceneBits": [
+        "EVENT: The Villanueva Family Block Party",
+        "ARTS SIGNAL: yes"
+      ],
+      "cycle": 113
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Rowan Pierce — fame rise",
+      "named": "Rowan Pierce",
+      "hood": "Piedmont Ave",
+      "names": [
+        "Rowan Pierce"
+      ],
+      "person": "Rowan Pierce",
+      "popids": [
+        "POP-00545"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 113 (CauseType fame-event); rendered: world_summary_c113.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Rowan Pierce — city watching; do not invent the private life",
+      "hookLine": "fame-rise | Rowan Pierce — the city is watching: wrote half a letter to family, then decided to call instead",
+      "sceneBits": [
+        "PERSON: Rowan Pierce",
+        "HOOD: Piedmont Ave",
+        "LABEL: fame-rise | Rowan Pierce — the city is watching: wrote half a letter to family, then decided to call instead"
+      ],
+      "cycle": 113
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Dax Monroe — fame rise",
+      "named": "Dax Monroe",
+      "hood": "Rockridge",
+      "names": [
+        "Dax Monroe"
+      ],
+      "person": "Dax Monroe",
+      "popids": [
+        "POP-00769"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 113 (CauseType fame-event); rendered: world_summary_c113.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Dax Monroe — city watching; do not invent the private life",
+      "hookLine": "fame-rise | Dax Monroe — the city is watching: caught the recap of last night's game at the counter and stayed for the second retelling",
+      "sceneBits": [
+        "PERSON: Dax Monroe",
+        "HOOD: Rockridge",
+        "LABEL: fame-rise | Dax Monroe — the city is watching: caught the recap of last night's game at the counter and stayed for the second retelling"
+      ],
+      "cycle": 113
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Elliot Marbury — fame rise",
+      "named": "Elliot Marbury",
+      "hood": "Piedmont Ave",
+      "names": [
+        "Elliot Marbury"
+      ],
+      "person": "Elliot Marbury",
+      "popids": [
+        "POP-00166"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 113 (CauseType fame-event); rendered: world_summary_c113.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Elliot Marbury — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Elliot Marbury — the city keeps saying the name: Tier 4 -> 3",
+      "sceneBits": [
+        "PERSON: Elliot Marbury",
+        "HOOD: Piedmont Ave",
+        "LABEL: tier-climb | Elliot Marbury — the city keeps saying the name: Tier 4 -> 3"
+      ],
+      "cycle": 113
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Tara Ellison — fame rise",
+      "named": "Tara Ellison",
+      "hood": "Rockridge",
+      "names": [
+        "Tara Ellison"
+      ],
+      "person": "Tara Ellison",
+      "popids": [
+        "POP-00546"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 113 (CauseType fame-event); rendered: world_summary_c113.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Tara Ellison — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Tara Ellison — the city keeps saying the name: Tier 4 -> 3",
+      "sceneBits": [
+        "PERSON: Tara Ellison",
+        "HOOD: Rockridge",
+        "LABEL: tier-climb | Tara Ellison — the city keeps saying the name: Tier 4 -> 3"
+      ],
+      "cycle": 113
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Ines Sorensen — fame rise",
+      "named": "Ines Sorensen",
+      "hood": "Uptown",
+      "names": [
+        "Ines Sorensen"
+      ],
+      "person": "Ines Sorensen",
+      "popids": [
+        "POP-01211"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 113 (CauseType fame-event); rendered: world_summary_c113.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Ines Sorensen — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Ines Sorensen — the city keeps saying the name: Tier 4 -> 3",
+      "sceneBits": [
+        "PERSON: Ines Sorensen",
+        "HOOD: Uptown",
+        "LABEL: tier-climb | Ines Sorensen — the city keeps saying the name: Tier 4 -> 3"
+      ],
+      "cycle": 113
+    },
+    {
+      "className": "tv-slate",
+      "score": 16,
+      "label": "TV slate: Breaking Bulletin; Slow Evenings; A's Prospect Report",
+      "named": "Breaking Bulletin",
+      "hood": null,
+      "names": [
+        "Breaking Bulletin",
+        "Slow Evenings",
+        "A's Prospect Report",
+        "AJ Dybantsa (SF): In Focus"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Evening media TV",
+      "angle": "Evening TV slate — Breaking Bulletin, Slow Evenings, A's Prospect Report; sports desk: Oakland Sports Tonight",
+      "hookLine": "On the box tonight: Breaking Bulletin, Slow Evenings.",
+      "sceneBits": [
+        "TV: Breaking Bulletin; Slow Evenings; A's Prospect Report; AJ Dybantsa (SF): In Focus",
+        "SPORTS BROADCAST: Oakland Sports Tonight"
+      ],
+      "cycle": 113
+    },
+    {
+      "className": "city-event",
+      "score": 14,
+      "label": "Lake Merritt Lantern Parade",
+      "named": "Lake Merritt Lantern Parade",
+      "hood": null,
+      "names": [
+        "Lake Merritt Lantern Parade"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · City events",
+      "angle": "City event: Lake Merritt Lantern Parade — present-tense room, not calendar filler",
+      "hookLine": "Lake Merritt Lantern Parade is on the evening board.",
+      "sceneBits": [
+        "EVENT: Lake Merritt Lantern Parade"
+      ],
+      "cycle": 113
+    },
+    {
+      "className": "fast-food",
+      "score": 13,
+      "label": "SpeedyBurger (Downtown)",
+      "named": "SpeedyBurger",
+      "hood": "Downtown",
+      "names": [
+        "SpeedyBurger"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Fast food",
+      "angle": "SpeedyBurger appears on the evening fast-food list in Downtown. What was happening there is not established.",
+      "hookLine": "SpeedyBurger appears on the evening fast-food list in Downtown.",
+      "sceneBits": [
+        "VENUE: SpeedyBurger",
+        "HOOD: Downtown"
+      ],
+      "cycle": 113
+    },
+    {
+      "className": "movie-slate",
+      "score": 13,
+      "label": "Movies: Snowlight; Diamond City",
+      "named": "Snowlight",
+      "hood": null,
+      "names": [
+        "Snowlight",
+        "Diamond City"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Evening media movies",
+      "angle": "Evening movie slate — Snowlight, Diamond City",
+      "hookLine": "Screens tonight: Snowlight, Diamond City.",
+      "sceneBits": [
+        "MOVIES: Snowlight; Diamond City"
+      ],
+      "cycle": 113
+    },
+    {
+      "className": "fame-sighting",
+      "score": 12,
+      "label": "Marisol Rivera spotted (Riley famous list)",
+      "named": "Marisol Rivera",
+      "hood": null,
+      "names": [
+        "Marisol Rivera"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Famous people spotted",
+      "angle": "Marisol Rivera is on the evening famous list — sighting without inventing a stop",
+      "hookLine": "Marisol Rivera is being seen around town.",
+      "sceneBits": [
+        "NAME: Marisol Rivera"
+      ],
+      "cycle": 113
+    },
+    {
+      "className": "fame-sighting",
+      "score": 12,
+      "label": "Claire Ashford spotted (Riley famous list)",
+      "named": "Claire Ashford",
+      "hood": null,
+      "names": [
+        "Claire Ashford"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Famous people spotted",
+      "angle": "Claire Ashford is on the evening famous list — sighting without inventing a stop",
+      "hookLine": "Claire Ashford is being seen around town.",
+      "sceneBits": [
+        "NAME: Claire Ashford"
+      ],
+      "cycle": 113
+    }
+  ],
+  "recommend": {
+    "bag": "lifestyle",
+    "slug": "sharon-okafor",
+    "name": "Sharon Okafor",
+    "popid": "POP-00159",
+    "bagDoc": "docs/media/SHARON_LIFESTYLE_BAG.md",
+    "reason": "top pulse quiet-nightlife → lifestyle",
+    "pulseClass": "quiet-nightlife",
+    "pulseLabel": "Temple Lounge (Downtown) · quiet night"
+  },
+  "perSeat": {
+    "mason-ortega": {
+      "pulseClass": "named-restaurant",
+      "label": "Jack London Square Markets (Jack London)",
+      "score": 34,
+      "bag": "kitchen"
+    },
+    "kai-marston": {
+      "pulseClass": "quiet-nightlife",
+      "label": "Temple Lounge (Downtown) · quiet night",
+      "score": 32,
+      "bag": "arts"
+    },
+    "sharon-okafor": {
+      "pulseClass": "quiet-nightlife",
+      "label": "Temple Lounge (Downtown) · quiet night",
+      "score": 32,
+      "bag": "lifestyle"
+    },
+    "maria-keen": {
+      "pulseClass": "quiet-nightlife",
+      "label": "Temple Lounge (Downtown) · quiet night",
+      "score": 32,
+      "bag": "ground"
+    },
+    "elliot-graye": {
+      "pulseClass": "quiet-nightlife",
+      "label": "Temple Lounge (Downtown) · quiet night",
+      "score": 36,
+      "bag": "faith"
+    }
+  },
+  "approach": "Evening-life approach (shared culture pack): open from a NAMED place or sighting in this slice — restaurant, bar, festival, TV slate, or fame stop — never invent venues or employees. Use nightlife volume/vibe/movement as scene color only; translate to human language (no raw decimals as lead). Pick ONE life pulse; ride the recommended consumer bag when it matches your seat (kitchen / arts / lifestyle / ground / faith). Do not file multi-voice culture-desk average. One room, one night, one truth.",
+  "story": {
+    "angle": "Temple Lounge is open and quiet in Downtown. What that condition means is not yet established.",
+    "label": "Temple Lounge (Downtown) · quiet night",
+    "hookLine": "Temple Lounge is open and quiet in Downtown.",
+    "hood": "Downtown",
+    "pulseClass": "quiet-nightlife",
+    "citizens": [],
+    "popids": [],
+    "named": "Temple Lounge",
+    "venue": "Temple Lounge",
+    "ref": "world_summary ## Evening Texture · Nightlife",
+    "cycle": 113
+  },
+  "prewrite": {
+    "pulseClass": "quiet-nightlife",
+    "angle": "Temple Lounge is open and quiet in Downtown. What that condition means is not yet established.",
+    "hookLine": "Temple Lounge is open and quiet in Downtown.",
+    "anchorFacts": [
+      "NAMED: Temple Lounge",
+      "HOOD: Downtown",
+      "VENUE: Temple Lounge",
+      "HOOD: Downtown",
+      "EVENING RECORD: open and quiet"
+    ],
+    "bagRecommend": "lifestyle",
+    "bagSlug": "sharon-okafor"
+  },
+  "scene": {
+    "venues": [
+      {
+        "name": "Jack London Square Markets",
+        "hood": "Jack London"
+      },
+      {
+        "name": "Port Grind",
+        "hood": "Grand Lake"
+      },
+      {
+        "name": "Glenview Cafe",
+        "hood": "Glenview"
+      },
+      {
+        "name": "SpeedyBurger",
+        "hood": "Downtown"
+      },
+      {
+        "name": "Temple Lounge",
+        "hood": "Downtown"
+      }
+    ],
+    "nightlifeMeta": {
+      "volume": 2,
+      "vibe": "quiet",
+      "movement": "restricted",
+      "weatherImpact": 1
+    },
+    "cityEvents": [
+      "Jack London Cozy Nights Film Series",
+      "The Villanueva Family Block Party",
+      "Lake Merritt Lantern Parade"
+    ],
+    "tv": [
+      "Breaking Bulletin",
+      "Slow Evenings",
+      "A's Prospect Report",
+      "AJ Dybantsa (SF): In Focus"
+    ],
+    "movies": [
+      "Snowlight",
+      "Diamond City"
+    ],
+    "colorRoom": "Named places only from Evening Texture / desk_signal. The supplied evening record describes nightlife as quiet; raw scoring fields stay internal.  Sensory room (weather, light, sound) is free; careers and employees are not."
+  },
+  "pointers": [
+    "output/world_summary_c113.md ## Evening Texture",
+    "output/desk_signal_c113.json lanes.culture",
+    "docs/media/SHARON_LIFESTYLE_BAG.md"
+  ]
+}

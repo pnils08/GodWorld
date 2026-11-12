@@ -1,0 +1,59 @@
+{
+  "v": "UNDOCKED-INTAKE/1",
+  "Timestamp": "2026-11-01T01:55:35.655Z",
+  "POPID": "POP-00816",
+  "Cycle": 113,
+  "Seq": 2,
+  "Daypart": "SHOW",
+  "Tag": "undocked-episode",
+  "EpisodeId": "undocked-pop00816-2026-11-01T01-30-25",
+  "Applied": "yes",
+  "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop00816-2026-11-01T01-30-25.json",
+  "Holder": "Daphne Stafford",
+  "CreditsDelta": 0,
+  "Magnitude": 2,
+  "Flags": [
+    "credits_delta_windowed"
+  ],
+  "Excerpt": "Daphne Stafford credits=0 systems=sol,alpha_centauri,tau_ceti,timberline,arcturus,ross_154,mimosa,electra,miaplacidus,maplevale,dubhe,alfirk,revati,zibal,keelbreak,xihe,alkaid",
+  "DecidedAt": "2026-11-01T01:55:35.658Z",
+  "DecidedBy": "auto-gate",
+  "Note": "auto-approved on contract validation (§2.5)",
+  "FeedEvent": {
+    "v": "UNDOCKED-FEED/1",
+    "Cycle": 113,
+    "EventType": "undocked-episode",
+    "POPID": "POP-00816",
+    "Holder": "Daphne Stafford",
+    "EpisodeId": "undocked-pop00816-Y3C9-e2",
+    "CreditsDelta": 0,
+    "PointsDelta": 27.93,
+    "Systems": [
+      "sol",
+      "alpha_centauri",
+      "tau_ceti",
+      "timberline",
+      "arcturus",
+      "ross_154",
+      "mimosa",
+      "electra",
+      "miaplacidus",
+      "maplevale",
+      "dubhe",
+      "alfirk",
+      "revati",
+      "zibal",
+      "keelbreak",
+      "xihe",
+      "alkaid"
+    ],
+    "CombatEvents": 0,
+    "MishapCount": 0,
+    "Magnitude": 2,
+    "Flags": [
+      "credits_delta_windowed"
+    ],
+    "StagedPath": "output/spacemolt-show/staged/undocked-pop00816-2026-11-01T01-30-25.json"
+  },
+  "PointsDelta": 27.93
+}

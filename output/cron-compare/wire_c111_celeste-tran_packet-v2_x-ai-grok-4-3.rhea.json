@@ -1,0 +1,86 @@
+{
+  "draft": "output/cron-compare/wire_c111_celeste-tran_packet-v2_x-ai-grok-4-3.md",
+  "cycle": "111",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "c41749f3849eca50db0fbd78467414c36ac11fb9e7bc30ed0ce89400a8550ef1",
+  "pass": false,
+  "flags": [
+    {
+      "claim": "Warriors Alumni Thompson landed on the culture record last cycle and still hangs in the conversation.",
+      "issue": "Named figure not found in ledger or cycle ground truth; imports real-world Warriors basketball entity/alumnus into culture record without packet provenance.",
+      "severity": "high"
+    },
+    {
+      "claim": "The migration numbers do not line up with the downtown boom the engine keeps flagging.",
+      "issue": "Meta/system vocabulary ('the engine') appears in public-facing article prose.",
+      "severity": "med"
+    }
+  ],
+  "flagCount": 2,
+  "highSeverityCount": 1,
+  "summary": "Draft blocked due to ungrounded real-world basketball alumnus import ('Warriors Alumni Thompson') and system-engine vocabulary leak in prose.",
+  "review": {
+    "profileId": "celeste-social-trends-v1",
+    "canonIntegrity": "revise",
+    "texture": "overreach"
+  },
+  "reviewProfile": {
+    "id": "celeste-social-trends-v1",
+    "packageVersion": "CELESTE-TRENDS-1",
+    "manifestId": "AM-e2b162c6a2c4",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "18",
+          "8",
+          "7",
+          "10"
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [
+      "Dax Monroe",
+      "Marin Tao",
+      "Rico Valez"
+    ],
+    "unverified": [
+      "Warriors Alumni Thompson"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0138,
+  "durationMs": 18852,
+  "parseError": false,
+  "ranAt": "2026-10-16T23:18:42.400Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": false,
+    "inTargetBy": "code floor 400",
+    "words": 256,
+    "short": "The piece falls short of the 400-word minimum target at 256 words.",
+    "score": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "c41749f3849eca50db0fbd78467414c36ac11fb9e7bc30ed0ce89400a8550ef1",
+    "costUsd": 0.0008
+  }
+}

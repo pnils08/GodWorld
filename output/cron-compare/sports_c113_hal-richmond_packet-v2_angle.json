@@ -1,0 +1,446 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "113",
+  "persona": "hal-richmond",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00007",
+      "name": "Hal Richmond",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "What the supplied C113 line card establishes, and what history remains unsupplied.",
+      "approach": "Historian approach (Hal Richmond): the Origins of the Dynasty bar — third-person biography, first person at most once; literary, not wire, not bleacher rage. Present fact first (feed-true: StoryAngle, Stats, record), then the ground the man came from. An origin, road, nickname or recorded word may enter only when canon_search or the Packet holds it; otherwise leave it out. Pick 1–2 archive-bag shapes. Numbers plain as the record prints them, not poetry and not scouting grades. End on the closing note in this slice (the line that holds, or the quiet note the class carries). FORBIDDEN: fan \"we\" charge, Anthony salary–value architecture as spine, elegy as the default register, inventing seasons/x-stats, FO bullet strategy, business-desk storefront assignment, multi-voice sports-desk average.",
+      "creativeBrief": {
+        "kind": "sports-history",
+        "pulseClass": "metrics-poetry",
+        "bagModes": [
+          "6 What He Became",
+          "10 The Record Plain"
+        ],
+        "historicalAnchor": "one feed number printed as the record prints it, then the man behind it (not a grade)",
+        "presentFacts": [
+          "Event (feed): A's — rumor (off-season)",
+          "Cycle: C113"
+        ],
+        "dossierFacts": [
+          "Desmond Morton TrueSource: 2041 REGULAR SEASON G: 80 PA: 313 AB: 285 R: 47 H: 83 2B: 22 3B: 0 HR: 7 RBI: 44 BB: 23 SO: 49 HBP: 3 SF: 2 SAC: 0 GIDP: 6 AVG: 0.291 OBP: 0.348 SLG: | WAR: 2.5",
+          "Frank Reyna TrueSource: 2041 REGULAR SEASON G: 46 PA: 171 AB: 164 R: 31 H: 52 2B: 12 3B: 3 HR: 14 RBI: 34 BB: 6 SO: 18 HBP: 0 SF: 1 SAC: 0 GIDP: 1 AVG: 0.317 OBP: 0.339 SLG: | WAR: 2.4",
+          "Danny Horn TrueSource: 2041 REGULAR SEASON G: 148 PA: 671 AB: 621 R: 152 H: 210 2B: 48 3B: 9 HR: 56 RBI: 113 BB: 35 SO: 65 HBP: 11 SF: 4 SAC: 0 GIDP: 3 AVG: 0.338 OBP: 0.382 | WAR: 13.3 | AWARDS (Career Reference) - All-Star (2038, 2039, 2040) - Silver Slugger (2039) - MVP (204",
+          "Vladimir Gonzalez TrueSource: 2041 REGULAR SEASON G: 138 PA: 567 AB: 527 R: 90 H: 161 2B: 40 3B: 4 HR: 28 RBI: 76 BB: 37 SO: 60 HBP: 0 SF: 3 SAC: 0 GIDP: 5 AVG: 0.306 OBP: 0.349 SL | WAR: 4.7 | AWARDS (Career Reference) - World Series MVP (2037)"
+        ],
+        "missing": [
+          "Historical people, places, teams, events, seasons, and statistics are unsupplied unless named in the packet",
+          "No invented seasons or franchise history beyond packet + feed",
+          "No x-stats / barrel% / invented OPS+",
+          "Not a business-desk storefront assignment",
+          "Not P Slayer charge; not Anthony board architecture as spine"
+        ],
+        "closingNote": "quiet pride",
+        "priorFiling": "NONE — wall may still inject at wake",
+        "sceneRule": "An unnamed desk or quiet archive transition; literary texture may carry no witnessed event. People, places, teams, seasons, events, and statistics only from the packet. Not a business storefront beat.",
+        "sourcePointers": [
+          "output/world_summary_c113.md ## Sports",
+          "docs/media/HAL_ARCHIVE_BAG.md",
+          "scripts/sportsSubstrate.js",
+          "docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 5"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "story-signal",
+      "hood": "Downtown",
+      "score": null,
+      "src": "world_summary_c113.md ## Sports",
+      "team": "A's",
+      "nearby": [
+        {
+          "text": "Oaks | game-result | (early-season) | Adash Stanley, Austin Reaves, AJ Dybantsa, Wilson Shepard",
+          "src": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | game-result | (early-season) | Adash Stanley, AJ Dybantsa, Austin Reaves",
+          "src": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | game-result | (early-season) | Adash Stanley, AJ Dybantsa, Austin Reaves",
+          "src": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | rumor | (off-season) | Desmond Morton, Frank Reyna, Danny Horn, Vladimir Gonzalez, JR Rosado",
+          "src": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | community-outreach | (off-season) | Darrin Davis, Rafael Montez",
+          "src": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": []
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C113",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-876f95b5eb98"
+      },
+      {
+        "t": "FACT",
+        "text": "A's — rumor — supplied C113 line card",
+        "src": "world_summary_c113.md ## Sports",
+        "id": "F-ff8c87285ab6"
+      },
+      {
+        "t": "FACT",
+        "text": "Event (feed): A's — rumor (off-season)",
+        "src": "world_summary_c113.md ## Sports",
+        "id": "F-8fd325025342"
+      },
+      {
+        "t": "FACT",
+        "text": "Cycle: C113",
+        "src": "world_summary_c113.md ## Sports",
+        "id": "F-f47d52243dec"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "No target candidate was supplied. Return targets as an empty array; do not invent a person or identifier. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "records",
+    "candidates": [],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Hal Richmond",
+    "popid": "POP-00007"
+  },
+  "assignment": {
+    "story": {
+      "angle": "What the supplied C113 line card establishes, and what history remains unsupplied.",
+      "label": "A's — rumor — supplied C113 line card",
+      "hookLine": "A's — rumor — supplied C113 line card",
+      "hood": "Downtown",
+      "pulseClass": "metrics-poetry",
+      "team": "A's",
+      "eventKind": "rumor",
+      "closingNote": "quiet pride",
+      "citizens": [
+        "Desmond Morton (POP-00051)",
+        "Frank Reyna (POP-00079)",
+        "Danny Horn (POP-00022)",
+        "Vladimir Gonzalez (POP-00598)"
+      ],
+      "popids": [
+        "POP-00051",
+        "POP-00079",
+        "POP-00022",
+        "POP-00598"
+      ],
+      "ref": "world_summary_c113.md ## Sports",
+      "cycle": 113
+    },
+    "approach": "Historian approach (Hal Richmond): the Origins of the Dynasty bar — third-person biography, first person at most once; literary, not wire, not bleacher rage. Present fact first (feed-true: StoryAngle, Stats, record), then the ground the man came from. An origin, road, nickname or recorded word may enter only when canon_search or the Packet holds it; otherwise leave it out. Pick 1–2 archive-bag shapes. Numbers plain as the record prints them, not poetry and not scouting grades. End on the closing note in this slice (the line that holds, or the quiet note the class carries). FORBIDDEN: fan \"we\" charge, Anthony salary–value architecture as spine, elegy as the default register, inventing seasons/x-stats, FO bullet strategy, business-desk storefront assignment, multi-voice sports-desk average."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": {
+    "pulse": {
+      "className": "metrics-poetry",
+      "score": 64,
+      "label": "A's — rumor — supplied C113 line card",
+      "team": "A's",
+      "eventKind": "rumor",
+      "seasonType": "off-season",
+      "storyAngle": "The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+      "hasStats": true,
+      "record": "-",
+      "streak": "-",
+      "foilNumber": ".291AVG",
+      "closingNote": "quiet pride",
+      "feedCycle": 113
+    },
+    "bag": {
+      "modes": [
+        {
+          "id": 6,
+          "name": "What He Became"
+        },
+        {
+          "id": 10,
+          "name": "The Record Plain"
+        }
+      ],
+      "historicalAnchor": "one feed number printed as the record prints it, then the man behind it (not a grade)",
+      "closingNote": "quiet pride",
+      "claim": "Present fact: .291AVG on the feed. Archive claim: the man behind the line — The Outfield squeeze for next season. 5 Outfielders for 3 positions Close toward quiet pride."
+    },
+    "prewrite": {
+      "reporter": "Hal Richmond",
+      "bagModes": [
+        {
+          "id": 6,
+          "name": "What He Became"
+        },
+        {
+          "id": 10,
+          "name": "The Record Plain"
+        }
+      ],
+      "historicalAnchor": "one feed number printed as the record prints it, then the man behind it (not a grade)",
+      "presentFacts": [
+        "Event (feed): A's — rumor (off-season)",
+        "Cycle: C113"
+      ],
+      "dossierFacts": [
+        "Desmond Morton TrueSource: 2041 REGULAR SEASON G: 80 PA: 313 AB: 285 R: 47 H: 83 2B: 22 3B: 0 HR: 7 RBI: 44 BB: 23 SO: 49 HBP: 3 SF: 2 SAC: 0 GIDP: 6 AVG: 0.291 OBP: 0.348 SLG:  | WAR: 2.5",
+        "Frank Reyna TrueSource: 2041 REGULAR SEASON G: 46 PA: 171 AB: 164 R: 31 H: 52 2B: 12 3B: 3 HR: 14 RBI: 34 BB: 6 SO: 18 HBP: 0 SF: 1 SAC: 0 GIDP: 1 AVG: 0.317 OBP: 0.339 SLG:  | WAR: 2.4",
+        "Danny Horn TrueSource: 2041 REGULAR SEASON G: 148 PA: 671 AB: 621 R: 152 H: 210 2B: 48 3B: 9 HR: 56 RBI: 113 BB: 35 SO: 65 HBP: 11 SF: 4 SAC: 0 GIDP: 3 AVG: 0.338 OBP: 0.382 | WAR: 13.3 | AWARDS (Career Reference) - All-Star (2038, 2039, 2040) - Silver Slugger (2039) - MVP (204",
+        "Vladimir Gonzalez TrueSource: 2041 REGULAR SEASON G: 138 PA: 567 AB: 527 R: 90 H: 161 2B: 40 3B: 4 HR: 28 RBI: 76 BB: 37 SO: 60 HBP: 0 SF: 3 SAC: 0 GIDP: 5 AVG: 0.306 OBP: 0.349 SL | WAR: 4.7 | AWARDS (Career Reference) - World Series MVP (2037)"
+      ],
+      "closingNote": "quiet pride",
+      "priorFiling": "NONE — wall may still inject at wake",
+      "claim": "Present fact: .291AVG on the feed. Archive claim: the man behind the line — The Outfield squeeze for next season. 5 Outfielders for 3 positions Close toward quiet pride.",
+      "foilNumber": ".291AVG",
+      "missing": [
+        "Historical people, places, teams, events, seasons, and statistics are unsupplied unless named in the packet",
+        "No invented seasons or franchise history beyond packet + feed",
+        "No x-stats / barrel% / invented OPS+",
+        "Not a business-desk storefront assignment",
+        "Not P Slayer charge; not Anthony board architecture as spine"
+      ],
+      "hooks": []
+    },
+    "friction": {
+      "a": "Present feed fact: The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+      "b": "Wire copy / FO strategy / bleacher heat that skips time",
+      "frame": "Present first, then echo — end on quiet pride."
+    },
+    "priorTakes": [],
+    "players": [
+      {
+        "name": "Desmond Morton",
+        "popid": "POP-00051",
+        "role": "Left Fielder, Oakland A's",
+        "neighborhood": "Chinatown",
+        "why": "feed-names"
+      },
+      {
+        "name": "Frank Reyna",
+        "popid": "POP-00079",
+        "role": "Right Fielder, Oakland A's",
+        "neighborhood": "Lake Merritt",
+        "why": "feed-names"
+      },
+      {
+        "name": "Danny Horn",
+        "popid": "POP-00022",
+        "role": "Center Fielder, Oakland A's - Best player in the MLB",
+        "neighborhood": "Temescal",
+        "why": "feed-names"
+      },
+      {
+        "name": "Vladimir Gonzalez",
+        "popid": "POP-00598",
+        "role": "Right Fielder, Oakland A's",
+        "neighborhood": "Fruitvale",
+        "why": "feed-names"
+      }
+    ],
+    "scene": {
+      "neighborhood": "Downtown",
+      "record": "-",
+      "streak": "-",
+      "colorRoom": "An unnamed desk or quiet archive transition; literary texture may carry no witnessed event. People, places, teams, seasons, events, and statistics only from the packet. Not a business storefront beat."
+    },
+    "candidates": [
+      {
+        "score": 66,
+        "cycle": 112,
+        "team": "A's",
+        "primary": "era-door",
+        "hasStats": true,
+        "angle": "Mark Aitken pending free agency, is it Kevin Clarks time?",
+        "priorHits": 0
+      },
+      {
+        "score": 64,
+        "cycle": 113,
+        "team": "A's",
+        "primary": "metrics-poetry",
+        "hasStats": true,
+        "angle": "The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+        "priorHits": 0
+      },
+      {
+        "score": 63,
+        "cycle": 112,
+        "team": "Oaks",
+        "primary": "threshold",
+        "hasStats": true,
+        "angle": "The Oaks open their inaugural season at home. AJ Dybantsa shines in his rookie debut as the Oaks win their first win as a franchise.",
+        "priorHits": 0
+      },
+      {
+        "score": 58,
+        "cycle": 113,
+        "team": "Oaks",
+        "primary": "season-tide",
+        "hasStats": true,
+        "angle": "The Oaks win again behind a big game behind Adash Stanley. The Oaks 91 - Pistons 78 on the road in Detroit.",
+        "priorHits": 0
+      },
+      {
+        "score": 58,
+        "cycle": 112,
+        "team": "A's",
+        "primary": "era-door",
+        "hasStats": false,
+        "angle": "A's star Eric Taveras fresh off a World Series championship and now the star of Undocked this week.",
+        "priorHits": 0
+      },
+      {
+        "score": 58,
+        "cycle": 112,
+        "team": "A's",
+        "primary": "era-door",
+        "hasStats": false,
+        "angle": "The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+        "priorHits": 0
+      }
+    ]
+  },
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Hal Richmond",
+    "popid": "POP-00007",
+    "text": "The A's are shaping their roster for the upcoming season, and the left field opening is up for grabs. Desmond Morton, Frank Reyna, and JR Rosado are in the mix. I'll be looking into their preseason performances and how they fit into Mike Paulson's plans. The key is understanding Paulson's strategy and how these players align with it.",
+    "plan": {
+      "chase": "The A's are shaping their roster for the upcoming season, and the left field opening is up for grabs. Desmond Morton, Frank Reyna, and JR Rosado are in the mix. I'll be looking into their preseason performances and how they fit into Mike Paulson's plans. The key is understanding Paulson's strategy and how these players align with it.",
+      "focus": "A's left field competition",
+      "why": "The A's have three promising players vying for one spot, and understanding how Paulson makes his decision will shed light on the team's direction.",
+      "checks": [
+        "Player stats",
+        "Preseason performance",
+        "Paulson's past decisions"
+      ],
+      "targets": [],
+      "interpretation": "The decision will likely hinge on a mix of recent performance, player potential, and team needs.",
+      "unverifiedLead": [
+        "It's rumored that Desmond Morton's versatility could give him an edge, but Frank Reyna's power hitting is also a significant factor."
+      ],
+      "closeQuestion": "What is Mike Paulson's final decision on the left field position?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Oaks | game-result | (early-season) | Adash Stanley, Austin Reaves, AJ Dybantsa, Wilson Shepard",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01023",
+        "POP-01027",
+        "POP-01024",
+        "POP-01022"
+      ]
+    },
+    {
+      "label": "Oaks | game-result | (early-season) | Adash Stanley, AJ Dybantsa, Austin Reaves",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01023",
+        "POP-01024",
+        "POP-01027"
+      ]
+    },
+    {
+      "label": "Oaks | game-result | (early-season) | Adash Stanley, AJ Dybantsa, Austin Reaves",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01023",
+        "POP-01024",
+        "POP-01027"
+      ]
+    },
+    {
+      "label": "A's | rumor | (off-season) | Desmond Morton, Frank Reyna, Danny Horn, Vladimir Gonzalez, JR Rosado",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00051",
+        "POP-00079",
+        "POP-00022",
+        "POP-00598",
+        "POP-00054"
+      ]
+    },
+    {
+      "label": "A's | community-outreach | (off-season) | Darrin Davis, Rafael Montez",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00021",
+        "POP-00136"
+      ]
+    }
+  ],
+  "laneEntries": 9,
+  "angleCapHits": 0,
+  "ranAt": "2026-10-29T11:16:50.883Z"
+}

@@ -1,0 +1,47 @@
+{
+  "mode": "wake-write",
+  "desk": "sports",
+  "cycle": "115",
+  "provider": "openrouter",
+  "model": "openai/gpt-5.6-luna",
+  "configuredWriterModel": "openai/gpt-5.6-luna",
+  "gateModel": "sonnet",
+  "persona": "selena-grant",
+  "byline": {
+    "name": "Selena Grant",
+    "popid": "POP-00591",
+    "beatDomain": "SPORTS"
+  },
+  "laneEntries": 12,
+  "quotesLanded": 0,
+  "disposition": "ungated-sample",
+  "rheaPass": null,
+  "rheaFlagCount": null,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "canon_recall",
+    "canon_recall",
+    "canon_recall",
+    "canon_recall",
+    "canon_recall",
+    "canon_recall",
+    "canon_recall",
+    "canon_recall"
+  ],
+  "toolCalls": 8,
+  "wordCount": 514,
+  "targetWords": "400-650",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": null,
+  "gradeRecord": null,
+  "article": "output/test-shell/20261111-012821-selena-grant-live/samples/sports_c115_selena-grant_packet-v2_openai-gpt-5-6-luna.sample.md",
+  "selfRecord": null,
+  "ranAt": "2026-11-11T07:28:43.879Z"
+}

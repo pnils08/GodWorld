@@ -1,0 +1,36 @@
+{
+  "cycle": 113,
+  "pass": false,
+  "deterministicPass": true,
+  "sanityStatus": "fail-scoped",
+  "failures": [
+    {
+      "check": "sanity-read",
+      "detail": "INIT-010: Status is 'passed' with VoteCycle 112 in the prior row, but the write records the initiative advancing to full council at C113 with a full council vote scheduled for C114. A passed initiative cannot still be awaiting a full council vote; the status or the milestone is wrong."
+    }
+  ],
+  "touchedInitiatives": [
+    "INIT-006",
+    "INIT-005",
+    "INIT-001",
+    "INIT-002",
+    "INIT-007",
+    "INIT-010",
+    "INIT-011",
+    "INIT-009",
+    "INIT-008",
+    "candidate:MV-112-civic-office-council-d4-2026-10-19"
+  ],
+  "maxRows": 11,
+  "sanity": {
+    "pass": false,
+    "issues": [
+      "INIT-010: Status is 'passed' with VoteCycle 112 in the prior row, but the write records the initiative advancing to full council at C113 with a full council vote scheduled for C114. A passed initiative cannot still be awaiting a full council vote; the status or the milestone is wrong."
+    ],
+    "blockedInitiatives": [
+      "INIT-010"
+    ]
+  },
+  "model": "anthropic/claude-haiku-5.5",
+  "ranAt": "2026-10-26T04:22:05.683Z"
+}

@@ -1,0 +1,57 @@
+{
+  "mode": "wake-write",
+  "desk": "culture",
+  "cycle": "112",
+  "provider": "openrouter",
+  "model": "x-ai/grok-4.3",
+  "configuredWriterModel": "x-ai/grok-4.3",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "ines-sorensen",
+  "byline": {
+    "name": "Ines Sorensen",
+    "popid": "POP-01211",
+    "beatDomain": "COMMUNITY"
+  },
+  "laneEntries": 20,
+  "quotesLanded": 4,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [],
+  "toolCalls": 0,
+  "wordCount": 508,
+  "targetWords": "300-600",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 300",
+    "words": 508,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "a4034759bce9826c4f2298a4bb33cfcdc492889d550b4768e77d41747193d8ab",
+    "costUsd": 0.0016
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 4/4 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/culture_c112_ines-sorensen_packet-v2_x-ai-grok-4-3.staged-1615.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": ".com]\n{\n  \"popId\": \"POP-01211\",\n  \"name\": \"Ines Sorensen\",\n  \"recorded\": true,\n  \"text\": \"filed: To be honest, Omar Amici's perspective on neighborhood change isn't something I've directly heard, b\"\n}"
+  },
+  "ranAt": "2026-10-24T16:16:15.101Z",
+  "dispositionReconciledAt": "2026-10-24T17:00:02.094Z"
+}

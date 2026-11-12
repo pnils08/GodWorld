@@ -1,0 +1,53 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "111",
+  "persona": "simon-leary",
+  "byline": "Simon Leary",
+  "bylinePopid": "POP-00016",
+  "article": "output/cron-compare/staged/sports_c111_simon-leary_packet-v2_openai-gpt-5-6-luna.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Vinnie Keane",
+        "role": "quoted-source",
+        "popid": "POP-00001"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "You know, people hear 'role change' and they brace for something breaking. But a 4-1 start with three straight — that's not a crack in the foundation, that's the foundation telling you it can hold more than one shape. I've seen it in this game a hundred times: a guy moves from cleanup to second, or a pitcher shifts from starter to relief, and everyone acts like the earth moved. But the load doesn't disappear — it just finds a new way to sit. The wins don't lie. When the machine keeps humming through a change, that's not disruption, that's the team telling you it knows what it's doing. It's like the crack in the sidewalk outside our store — the city patches it, but the light still finds its way through. The structure holds. It always did. The role was never the point; the trust was. And right now, that trust is carrying the load just fine.",
+        "sourceRef": "citizenVoice PRESS Vinnie Keane"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-0f360a560461",
+    "draftSha256": "205184a5b32e52e2afa15b2ea1a8e75c31ec89c99c9d59df0e76a6af1fd8ed62",
+    "verdict": "output/cron-compare/sports_c111_simon-leary_packet-v2_openai-gpt-5-6-luna.rhea.json",
+    "ranAt": "2026-10-15T23:16:52.488Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 487,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "205184a5b32e52e2afa15b2ea1a8e75c31ec89c99c9d59df0e76a6af1fd8ed62",
+      "costUsd": 0.001
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-15T23:16:56.753Z"
+}

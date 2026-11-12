@@ -1,0 +1,74 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "111",
+  "persona": "sharon-okafor",
+  "byline": "Sharon Okafor",
+  "bylinePopid": "POP-00159",
+  "article": "output/cron-compare/staged/culture_c111_sharon-okafor_packet-v2_openai-gpt-5-6-luna.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Lena Cross",
+        "role": "mentioned",
+        "popid": "POP-00539",
+        "floor": true
+      },
+      {
+        "name": "Marin Tao",
+        "role": "mentioned",
+        "popid": "POP-00537",
+        "floor": true
+      },
+      {
+        "name": "Rico Valez",
+        "role": "mentioned",
+        "popid": "POP-00632",
+        "floor": true
+      },
+      {
+        "name": "Rowan Pierce",
+        "role": "mentioned",
+        "popid": "POP-00545",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Piedmont Ave"
+    ],
+    "claims": [
+      {
+        "claim": "Marin Tao leads the fame table; 2 fading, 1 new",
+        "sourceRef": "output/beats/Cultural_Ledger.jsonl @C111"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-7d5127840f09",
+    "draftSha256": "b4a2248d9229617bd35535940e5408c949d5cc57ea25bd0492bda96e40aa4c93",
+    "verdict": "output/cron-compare/culture_c111_sharon-okafor_packet-v2_openai-gpt-5-6-luna.rhea.json",
+    "ranAt": "2026-10-16T23:16:52.349Z",
+    "contractScore": {
+      "opened": false,
+      "closed": true,
+      "purposeMet": false,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 328,
+      "short": "The piece focuses on celebrity media trajectories rather than opening with and framing a Packet-supplied venue condition.",
+      "score": 2,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "b4a2248d9229617bd35535940e5408c949d5cc57ea25bd0492bda96e40aa4c93",
+      "costUsd": 0.0013
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-16T23:16:57.426Z"
+}

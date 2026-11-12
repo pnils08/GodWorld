@@ -1,0 +1,128 @@
+{
+  "date": "2026-10-21",
+  "stage": "write",
+  "results": [
+    {
+      "name": "Jax Caldera",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 663,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Noah Tan",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 582,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Elliot Marbury",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 5,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 709,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "P Slayer",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 584,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Tanya Cruz",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": true,
+        "verbatim": [],
+        "words": 84,
+        "contractScore": 3
+      }
+    },
+    {
+      "name": "Tamsin Pruitt",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 287,
+        "contractScore": 0
+      }
+    },
+    {
+      "name": "Ines Sorensen",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 205,
+        "contractScore": 3
+      }
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 317,
+        "contractScore": 2
+      }
+    }
+  ],
+  "checkTotals": {
+    "seats": 8,
+    "toolSeats": 1,
+    "capHits": 0,
+    "thin": 1,
+    "verbatim": 0,
+    "graded": 8,
+    "gradeSum": 24
+  },
+  "ranAt": "2026-10-21T23:22:11.612Z"
+}

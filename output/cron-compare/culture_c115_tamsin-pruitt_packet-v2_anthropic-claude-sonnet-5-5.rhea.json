@@ -1,0 +1,86 @@
+{
+  "draft": "output/cron-compare/culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "115",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "02213ed743a3a566154c4fd0f15f34bb239ae963dd87a00f799963ececc6b4d7",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All 11 citizen profiles, migration events, household formations, and quotes perfectly match ledger canon and ground truth.",
+  "review": {
+    "profileId": "the-page",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "tamsin-lives-v1",
+    "packageVersion": "TAMSIN-LIVES-2",
+    "manifestId": "AM-c08188c723c1",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "111",
+          "112",
+          "1978"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Everly Rainey",
+      "Jasmine Torres",
+      "Jesus Jorden",
+      "Kelvon Ochoa",
+      "Latasha Rivera",
+      "Marisol Achebe",
+      "Maurice Franklin",
+      "Mina Kapoor",
+      "Ruth Anyanwu",
+      "Soledad Coleman",
+      "Tom Jilner",
+      "Tomas Aguilar"
+    ],
+    "unverified": [
+      "Commercial Stabilization",
+      "Mutual Aid Network",
+      "Tribune's Business"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0129,
+  "durationMs": 6861,
+  "parseError": false,
+  "ranAt": "2026-11-12T00:23:10.557Z",
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 450",
+    "words": 1305,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "02213ed743a3a566154c4fd0f15f34bb239ae963dd87a00f799963ececc6b4d7",
+    "costUsd": 0.0015
+  }
+}

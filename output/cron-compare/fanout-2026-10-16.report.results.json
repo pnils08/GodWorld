@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-16",
+  "stage": "report",
+  "results": [
+    {
+      "name": "Mason Ortega",
+      "desk": "culture",
+      "ok": true,
+      "checks": null
+    },
+    {
+      "name": "Kai Marston",
+      "desk": "culture",
+      "ok": true,
+      "checks": null
+    },
+    {
+      "name": "Sharon Okafor",
+      "desk": "culture",
+      "ok": true,
+      "checks": null
+    },
+    {
+      "name": "Maria Keen",
+      "desk": "culture",
+      "ok": true,
+      "checks": null
+    },
+    {
+      "name": "Celeste Tran",
+      "desk": "wire",
+      "ok": true,
+      "checks": null
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": true,
+      "checks": null
+    }
+  ],
+  "checkTotals": null,
+  "ranAt": "2026-10-16T18:17:40.039Z"
+}

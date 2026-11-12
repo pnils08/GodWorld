@@ -1,0 +1,53 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "114",
+  "persona": "simon-leary",
+  "byline": "Simon Leary",
+  "bylinePopid": "POP-00016",
+  "article": "output/cron-compare/staged/sports_c114_simon-leary_packet-v2_openai-gpt-5-6-luna.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Adash Stanley",
+        "role": "mentioned",
+        "popid": "POP-01023"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "The part that feels constant is the work itself. When the lineup shifts or the assignment changes, the game still asks the same thing — show up, do your job, don't make it about you. The record sits there at 5-1 and it doesn't care who's carrying it. That's what I hold onto.",
+        "sourceRef": "citizenVoice PRESS Adash Stanley"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-d5fa41f36d41",
+    "draftSha256": "3597965660de402469680c5da59bc11254a15757fe562aea41914bc604c72a77",
+    "verdict": "output/cron-compare/sports_c114_simon-leary_packet-v2_openai-gpt-5-6-luna.rhea.json",
+    "ranAt": "2026-11-06T00:16:31.135Z",
+    "contractScore": {
+      "opened": false,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": false,
+      "inTargetBy": "judge",
+      "words": 443,
+      "short": "The opening paragraph does not open with the supplied present structure, and the piece falls short of the target word count.",
+      "score": 2,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "3597965660de402469680c5da59bc11254a15757fe562aea41914bc604c72a77",
+      "costUsd": 0.0017
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-06T00:16:37.150Z"
+}

@@ -1,0 +1,77 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "111",
+  "persona": "kai-marston",
+  "byline": "Kai Marston",
+  "bylinePopid": "POP-00158",
+  "article": "output/cron-compare/staged/culture_c111_kai-marston_packet-v2_anthropic-claude-haiku-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Tara Ellison",
+        "role": "quoted-source",
+        "popid": "POP-00546"
+      },
+      {
+        "name": "Alma Vasquez",
+        "role": "quoted-source",
+        "popid": "POP-01063"
+      },
+      {
+        "name": "Nina Reyes",
+        "role": "quoted-source",
+        "popid": "POP-01057"
+      },
+      {
+        "name": "Lena Cross",
+        "role": "mentioned",
+        "popid": "POP-00539",
+        "floor": true
+      },
+      {
+        "name": "Rowan Pierce",
+        "role": "mentioned",
+        "popid": "POP-00545",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Rockridge"
+    ],
+    "claims": [
+      {
+        "claim": "I'm not sure what you mean. I'm just here in Rockridge, and I'm not in a room with anyone right now.",
+        "sourceRef": "citizenVoice PRESS Tara Ellison"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-391bf35ed324",
+    "draftSha256": "f1e4575179403c0e99b7b2d27299ad7316c6f230265b0aaed1923f5feb658de0",
+    "verdict": "output/cron-compare/culture_c111_kai-marston_packet-v2_anthropic-claude-haiku-5-5.rhea.json",
+    "ranAt": "2026-10-16T23:16:15.398Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 500",
+      "words": 584,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "f1e4575179403c0e99b7b2d27299ad7316c6f230265b0aaed1923f5feb658de0",
+      "costUsd": 0.0008
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-16T23:16:18.405Z"
+}

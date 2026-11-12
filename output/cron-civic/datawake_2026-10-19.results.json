@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-19",
+  "cycle": 112,
+  "results": [
+    {
+      "office": "civic-office-council-d4",
+      "ok": true,
+      "out": "output/cron-civic/datawake/civic-office-council-d4_2026-10-19.json"
+    },
+    {
+      "office": "civic-office-mayor",
+      "ok": false,
+      "error": "no usable JSON statement after retry (model returned empty/invalid content)"
+    },
+    {
+      "office": "civic-office-council-d2",
+      "ok": true,
+      "out": "output/cron-civic/datawake/civic-office-council-d2_2026-10-19.json"
+    }
+  ],
+  "ranAt": "2026-10-19T10:46:43.209Z"
+}

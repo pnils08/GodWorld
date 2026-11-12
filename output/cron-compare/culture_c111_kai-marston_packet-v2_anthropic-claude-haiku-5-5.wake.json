@@ -1,0 +1,58 @@
+{
+  "mode": "wake-write",
+  "desk": "culture",
+  "cycle": "111",
+  "provider": "openrouter",
+  "model": "anthropic/claude-haiku-5.5",
+  "configuredWriterModel": "anthropic/claude-haiku-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "kai-marston",
+  "byline": {
+    "name": "Kai Marston",
+    "popid": "POP-00158",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 20,
+  "quotesLanded": 3,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [],
+  "toolCalls": 0,
+  "wordCount": 584,
+  "targetWords": "500-800",
+  "capHit": 0,
+  "checkFlags": [],
+  "engineTerms": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 500",
+    "words": 584,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "f1e4575179403c0e99b7b2d27299ad7316c6f230265b0aaed1923f5feb658de0",
+    "costUsd": 0.0008
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 4/4 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/culture_c111_kai-marston_packet-v2_anthropic-claude-haiku-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "v // tip: ⌘ override existing { override: true }\n{\n  \"popId\": \"POP-00158\",\n  \"name\": \"Kai Marston\",\n  \"recorded\": true,\n  \"text\": \"filed: Tara Ellison Is Rising, and Nobody Around Her Can Say Where\"\n}"
+  },
+  "ranAt": "2026-10-16T23:16:36.257Z",
+  "dispositionReconciledAt": "2026-10-17T17:00:02.910Z"
+}

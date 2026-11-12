@@ -1,0 +1,282 @@
+{
+  "version": "ENVIRONMENT-SLICE-2",
+  "empty": false,
+  "cycle": 113,
+  "kind": "beat-weather",
+  "seat": {
+    "slug": "noah-tan",
+    "name": "Noah Tan",
+    "popid": "POP-00157",
+    "desk": "civic",
+    "domain": "environment",
+    "builder": "buildEnvironmentSlice.js"
+  },
+  "hood": null,
+  "pulse": {
+    "className": "beat-weather",
+    "score": 100,
+    "label": "C113 clear, 58°F — 3 cycles of clear",
+    "hood": null,
+    "source": "output/beats/Cycle_Weather.jsonl CycleID 113"
+  },
+  "story": {
+    "kind": "beat-weather",
+    "angle": "C113 clear, 58°F — 3 cycles of clear — what this weather does to a day in the city",
+    "label": "C113 clear, 58°F — 3 cycles of clear",
+    "hookLine": "C113 clear, 58°F — 3 cycles of clear; 6 residents on the record lived it.",
+    "hood": null,
+    "citizens": [
+      "Cee Lee (POP-00320)",
+      "Johhny Necklar (POP-00509)",
+      "Elle Lilo (POP-00177)",
+      "Rafael Brannie (POP-00223)",
+      "Kwame Fitzgerald (POP-00259)",
+      "Omar Amici (POP-00263)"
+    ],
+    "popids": [
+      "POP-00320",
+      "POP-00509",
+      "POP-00177",
+      "POP-00223",
+      "POP-00259",
+      "POP-00263"
+    ],
+    "ref": "output/beats/Cycle_Weather.jsonl CycleID 113",
+    "cycle": 113
+  },
+  "approach": "Weather and environment approach: this slice is the cycle's weather row, the streak, and the last three cycles beside it, plus whoever the record says lived it. Science-first ground translation — temperature is context, never the lede. Show what this weather moved. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-00320",
+      "name": "Cee Lee",
+      "role": "Autonomous Systems Engineer",
+      "neighborhood": "Lake Merritt",
+      "business": null,
+      "profile": "Cee Lee — Autonomous Systems Engineer — Lake Merritt",
+      "why": "lived the weather this cycle (Who Lived It)"
+    },
+    {
+      "popid": "POP-00509",
+      "name": "Johhny Necklar",
+      "role": "Hall of Famer from old basketball league MUBA",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Johhny Necklar — Hall of Famer from old basketball league MUBA — Rockridge",
+      "why": "lived the weather this cycle (Who Lived It)"
+    },
+    {
+      "popid": "POP-00177",
+      "name": "Elle Lilo",
+      "role": "Harbor Tugboat Captain",
+      "neighborhood": "Jack London",
+      "business": null,
+      "profile": "Elle Lilo — Harbor Tugboat Captain — Jack London",
+      "why": "lived the weather this cycle (Who Lived It)"
+    },
+    {
+      "popid": "POP-00223",
+      "name": "Rafael Brannie",
+      "role": "Mover",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Rafael Brannie — Mover — Piedmont Ave",
+      "why": "lived the weather this cycle (Who Lived It)"
+    },
+    {
+      "popid": "POP-00259",
+      "name": "Kwame Fitzgerald",
+      "role": "Craft Brewery Owner",
+      "neighborhood": "Uptown",
+      "business": null,
+      "profile": "Kwame Fitzgerald — Craft Brewery Owner — Uptown",
+      "why": "lived the weather this cycle (Who Lived It)"
+    },
+    {
+      "popid": "POP-00263",
+      "name": "Omar Amici",
+      "role": "Construction laborer",
+      "neighborhood": "Uptown",
+      "business": null,
+      "profile": "Omar Amici — Construction laborer — Uptown",
+      "why": "lived the weather this cycle (Who Lived It)"
+    }
+  ],
+  "facts": [
+    {
+      "text": "This cycle: clear, 58°F, impact 1, comfort 0.75, mood content, 3 cycles of clear",
+      "src": "output/beats/Cycle_Weather.jsonl CycleID 113"
+    },
+    {
+      "text": "Last 3 cycles: C110 fog 52°F, C111 mild 57°F, C112 clear 48°F",
+      "src": "output/beats/Cycle_Weather.jsonl"
+    },
+    {
+      "text": "Cee Lee — dealt with a seasonal health concern",
+      "src": "output/world_summary_c113.md ## Who Lived It"
+    },
+    {
+      "text": "Johhny Necklar — recovered from a winter illness",
+      "src": "output/world_summary_c113.md ## Who Lived It"
+    },
+    {
+      "text": "Elle Lilo — finally shook the cold that had been hanging around",
+      "src": "output/world_summary_c113.md ## Who Lived It"
+    },
+    {
+      "text": "Rafael Brannie — limited social activity due to winter mood",
+      "src": "output/world_summary_c113.md ## Who Lived It"
+    },
+    {
+      "text": "Kwame Fitzgerald — limited social activity due to winter mood",
+      "src": "output/world_summary_c113.md ## Who Lived It"
+    },
+    {
+      "text": "Omar Amici — relied on familiar social circles during cold period",
+      "src": "output/world_summary_c113.md ## Who Lived It"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "C113 clear, 58°F — 3 cycles of clear — what this weather does to a day in the city",
+    "hookLine": "C113 clear, 58°F — 3 cycles of clear; 6 residents on the record lived it.",
+    "anchorFacts": [
+      "This cycle: clear, 58°F, impact 1, comfort 0.75, mood content, 3 cycles of clear",
+      "Last 3 cycles: C110 fog 52°F, C111 mild 57°F, C112 clear 48°F",
+      "Cee Lee — dealt with a seasonal health concern",
+      "Johhny Necklar — recovered from a winter illness",
+      "Elle Lilo — finally shook the cold that had been hanging around",
+      "Rafael Brannie — limited social activity due to winter mood",
+      "Kwame Fitzgerald — limited social activity due to winter mood",
+      "Omar Amici — relied on familiar social circles during cold period"
+    ],
+    "evidence": [
+      {
+        "text": "This cycle: clear, 58°F, impact 1, comfort 0.75, mood content, 3 cycles of clear",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 113"
+      },
+      {
+        "text": "Last 3 cycles: C110 fog 52°F, C111 mild 57°F, C112 clear 48°F",
+        "src": "output/beats/Cycle_Weather.jsonl"
+      },
+      {
+        "text": "Cee Lee — dealt with a seasonal health concern",
+        "src": "output/world_summary_c113.md ## Who Lived It"
+      },
+      {
+        "text": "Johhny Necklar — recovered from a winter illness",
+        "src": "output/world_summary_c113.md ## Who Lived It"
+      },
+      {
+        "text": "Elle Lilo — finally shook the cold that had been hanging around",
+        "src": "output/world_summary_c113.md ## Who Lived It"
+      },
+      {
+        "text": "Rafael Brannie — limited social activity due to winter mood",
+        "src": "output/world_summary_c113.md ## Who Lived It"
+      },
+      {
+        "text": "Kwame Fitzgerald — limited social activity due to winter mood",
+        "src": "output/world_summary_c113.md ## Who Lived It"
+      },
+      {
+        "text": "Omar Amici — relied on familiar social circles during cold period",
+        "src": "output/world_summary_c113.md ## Who Lived It"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": {
+      "state": "PRIOR_CYCLE_IN_TABLE",
+      "vs": 112
+    },
+    "hooks": [
+      {
+        "text": "Grand Lake turning upward: retail busy, events drawing crowds, people moving in",
+        "angle": "desk rotation",
+        "domain": "COMMUNITY",
+        "hood": "Grand Lake",
+        "priority": 5
+      },
+      {
+        "text": "East Oakland cooling off: foot traffic down, storefronts quieter than the rest of the city",
+        "angle": "desk rotation",
+        "domain": "COMMUNITY",
+        "hood": "East Oakland",
+        "priority": 6
+      },
+      {
+        "text": "Amara Osei moved from Jack London to West Oakland — moving up from Jack London",
+        "angle": "desk rotation",
+        "domain": "COMMUNITY",
+        "hood": "West Oakland",
+        "priority": 5
+      }
+    ],
+    "note": null,
+    "pageVoices": [],
+    "roomIsYours": "the sidewalk, the coats, what this weather does to a plan, who is out in it and who stayed in, what the bay smells like today"
+  },
+  "weather": {
+    "CycleID": "113",
+    "Type": "clear",
+    "Temp": "58",
+    "Impact": "1",
+    "Advisory": "",
+    "Comfort": "0.75",
+    "Mood": "content",
+    "Alerts": "",
+    "Streak": "3",
+    "StreakType": "clear",
+    "Timestamp": "Y3C9"
+  },
+  "recent": [
+    {
+      "CycleID": "110",
+      "Type": "fog",
+      "Temp": "52",
+      "Impact": "1.3",
+      "Advisory": "",
+      "Comfort": "0.4",
+      "Mood": "introspective",
+      "Alerts": "",
+      "Streak": "1",
+      "StreakType": "fog",
+      "Timestamp": "Y3C6"
+    },
+    {
+      "CycleID": "111",
+      "Type": "mild",
+      "Temp": "57",
+      "Impact": "1",
+      "Advisory": "",
+      "Comfort": "0.75",
+      "Mood": "content",
+      "Alerts": "",
+      "Streak": "1",
+      "StreakType": "clear",
+      "Timestamp": "Y3C7"
+    },
+    {
+      "CycleID": "112",
+      "Type": "clear",
+      "Temp": "48",
+      "Impact": "1",
+      "Advisory": "",
+      "Comfort": "0.65",
+      "Mood": "content",
+      "Alerts": "",
+      "Streak": "2",
+      "StreakType": "clear",
+      "Timestamp": "Y3C8"
+    }
+  ],
+  "pointers": [
+    "output/beats/Cycle_Weather.jsonl CycleID 113",
+    "output/beats/Story_Hook_Deck.jsonl (hooks for Noah Tan this cycle)"
+  ]
+}

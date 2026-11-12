@@ -1,0 +1,65 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "115",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "lila-mezran",
+  "byline": {
+    "name": "Dr. Lila Mezran",
+    "popid": "POP-00154",
+    "beatDomain": "HEALTH"
+  },
+  "laneEntries": 93,
+  "quotesLanded": 2,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "sheet_read",
+    "canon_search",
+    "citizen_lookup"
+  ],
+  "toolCalls": 3,
+  "wordCount": 933,
+  "targetWords": "evidence-bounded",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [
+    {
+      "text": "Howard Travis caught up on sleep and woke up feeling like themselves again (Piedmont Ave).",
+      "run": "caught up on sleep and woke"
+    }
+  ],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": false,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 933,
+    "short": "The opening begins with an anecdotal feature hook about a plumber rather than a health-service, access, place, or implementation fact.",
+    "score": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "2b7af4f59f14919eecd3388927d47dfd2f0c2287b90c8a9e483347d8fa76182f",
+    "costUsd": 0.0017
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/4 — The opening begins with an anecdotal feature hook about a plumber rather than a health-service, access, place, or implementation fact."
+  },
+  "article": "output/cron-compare/staged/civic_c115_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "v // tip: ⌘ enable debugging { debug: true }\n{\n  \"popId\": \"POP-00154\",\n  \"name\": \"Lila Mezran\",\n  \"recorded\": true,\n  \"text\": \"filed: Chinatown's Sick Are Counted by the Hundred and Named by No One\"\n}"
+  },
+  "ranAt": "2026-11-10T00:18:54.316Z"
+}

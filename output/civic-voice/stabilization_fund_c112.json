@@ -1,0 +1,50 @@
+{
+  "office": "stabilization_fund",
+  "cycle": 112,
+  "speaker": "Marcus Webb",
+  "cascadeSummary": "Month-eleven disbursement of $400,000 approved and moving this cycle, maintaining the 23-day processing standard with Deputy Mayor Okoro's team. Commercial Stabilization for Grand Lake heads to committee with mandatory milestone reporting and audit criteria baked into the funding framework. I continue to hold the compliance line while the checks reach West Oakland households and businesses before displacement notices arrive.",
+  "statements": [
+    {
+      "statementId": "STMT-112-stabilization_fund-001",
+      "type": "operational_status",
+      "topic": "Month-eleven disbursement",
+      "initiative": "West Oakland Stabilization Fund",
+      "decision": "Approved month-eleven disbursement of $400,000 for West Oakland Stabilization Fund, maintaining the 23-day processing standard.",
+      "quote": "One hundred three households stabilized means one hundred three West Oakland families who will not face displacement this month—and every case file meets compliance standards that will survive audit.",
+      "fullStatement": "Month-eleven disbursement is approved and moving. One hundred three households stabilized means one hundred three West Oakland families who will not face displacement this month—and every case file meets compliance standards that will survive audit. The 23-day processing standard holds because Deputy Mayor Okoro's team treats every application like family, and my reviewers keep the documentation chain airtight. The checks are clearing weekly. The queue is moving. We are keeping the promise this fund made when it was chartered.",
+      "trackerUpdates": {
+        "initiative": "INIT-001",
+        "ImplementationPhase": "disbursement-active",
+        "MilestoneNotes": "C112: Month-eleven disbursement $400K approved; 23-day processing standard maintained; 103 households stabilized cumulative.",
+        "NextScheduledAction": "Month-twelve disbursement review and Q4 Fund Report to Council",
+        "NextActionCycle": 113
+      }
+    },
+    {
+      "statementId": "STMT-112-stabilization_fund-002",
+      "type": "operational_status",
+      "topic": "Commercial Stabilization for Grand Lake",
+      "initiative": "Commercial Stabilization for Grand Lake",
+      "decision": "Referred Commercial Stabilization for Grand Lake to Economic Development Committee hearing with mandatory milestone reporting and audit criteria attached to the $2.5M funding.",
+      "quote": "Grand Lake's quiet engine gets its hearing—stabilization funding with milestones and audits attached, so the money moves and the accountability holds.",
+      "fullStatement": "Commercial Stabilization for Grand Lake goes to committee this cycle with the framework I helped draft: $2.5 million committed, milestone reporting mandatory, audit criteria embedded from day one. Grand Lake's storefronts are the neighborhood's quiet engine—they do not make headlines, but they hold the block together. The funding structure ensures the money reaches the businesses that need it and that the city can account for every dollar. That is how this office operates.",
+      "trackerUpdates": {
+        "initiative": "INIT-009",
+        "ImplementationPhase": "vote-scheduled",
+        "MilestoneNotes": "C112: Committee hearing convened with mandatory milestone reporting and audit criteria attached to $2.5M funding.",
+        "NextScheduledAction": "Committee vote on Commercial Stabilization for Grand Lake",
+        "NextActionCycle": 113
+      }
+    },
+    {
+      "statementId": "STMT-112-stabilization_fund-003",
+      "type": "constituent_commitment",
+      "topic": "West Oakland stability",
+      "initiative": null,
+      "decision": "Continue weekly disbursement cadence and Saturday outreach at the Adeline Street sub-office to keep West Oakland families and businesses ahead of displacement pressure.",
+      "quote": "The storefronts may fade first, but the stabilization checks arrive before the displacement notices do—that is the promise we keep, month after month.",
+      "fullStatement": "West Oakland is telling us something with its busy streets and its slipping housing pressure. The people are living this cycle whether City Hall speaks or not. My commitment is operational: the checks keep clearing weekly, the Saturday outreach keeps happening at the Adeline Street sub-office, and every applicant who walks in gets a straight answer about where their case stands. The storefronts may fade first, but the stabilization checks arrive before the displacement notices do—that is the promise we keep, month after month.",
+      "trackerUpdates": {}
+    }
+  ]
+}

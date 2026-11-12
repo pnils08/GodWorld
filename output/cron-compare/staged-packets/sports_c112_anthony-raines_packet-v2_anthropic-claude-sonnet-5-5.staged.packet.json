@@ -1,0 +1,381 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00017",
+    "name": "Anthony Raines",
+    "role": "desk reporter",
+    "desk": "sports"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "One line anchors the board read — .283AVG — and the evaluative question is whether that production is architecture or variance: Mark Aitken pending free agency, is it Kevin Clarks time?",
+    "approach": "Analytic approach (Anthony Raines): third-person only — never fan \"we.\" One evaluative claim built on verifiable feed line numbers (Stats / record / StoryAngle). Open from the board (roster fact, contract on the feed, season line) — not the bleachers. Pick 1–2 tools from the analysis bag in this slice. Spell weighty numbers in prose. FORBIDDEN: inventing x-stats, barrel%, launch angle, contracts, or salaries not on the feed; P Slayer charge; Hal elegy as spine; multi-voice sports-desk average.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "sports-analytics",
+      "pulseClass": "line-card",
+      "bagTools": [
+        "1 Box-Card Read",
+        "7 Is-It-Real (ledger PANDAS)"
+      ],
+      "claim": "One line anchors the board read — .283AVG — and the evaluative question is whether that production is architecture or variance: Mark Aitken pending free agency, is it Kevin Clarks time?",
+      "lineFacts": [
+        "Feed line: Mark Aitken/540AB/.283AVG/33HR/87RBI",
+        "Feed line: Kevin Clark/64AB/.297AVG/3HR/12RBI",
+        "Event kind (feed): A's — rumor (off-season)",
+        "NamesUsed (feed): Mark Aitken (1B), Kevin Clark (3B)",
+        "StoryAngle (feed): Mark Aitken pending free agency, is it Kevin Clarks time?",
+        "Stats (feed): Mark Aitken/540AB/.283AVG/33HR/87RBI, Kevin Clark/64AB/.297AVG/3HR/12RBI"
+      ],
+      "missing": [
+        "x-stats / barrel% / launch angle / OAA not on feed",
+        "contracts or salaries not printed on this feed row",
+        "As_Roster sheet cells (offline pack uses feed Stats only — do not invent WAR/ERA beyond feed)"
+      ],
+      "sceneRule": "Press-box / clubhouse quiet. Numbers from feed Stats only. No invented Savant cards. RoleType from ledger when present — never invent careers.",
+      "sourcePointers": [
+        "output/world_summary_c112.md ## Sports",
+        "docs/media/ANTHONY_ANALYSIS_BAG.md",
+        "scripts/sportsSubstrate.js",
+        "docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 4"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "sports-analytics",
+    "hood": "Jack London",
+    "src": "world_summary_c112.md ## Sports",
+    "plan": {
+      "focus": "Whether Kevin Clark's .297 average over 64 at-bats is a foundation for a starting role or a mirage, set against Mark Aitken's 540-at-bat body of work as he heads to free agency.",
+      "closeQuestion": "Is the front office reading the .297 as a promise, or are they reading the 64 at-bats as a warning?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [],
+    "sources": [],
+    "excludedLeads": [
+      {
+        "from": "Anthony Raines",
+        "text": "The possibility that Clark's 64 at-bats came in a concentrated stretch against weaker pitching, which would inflate the average without proving sustained production.",
+        "usable": false
+      },
+      {
+        "from": "Anthony Raines",
+        "text": "The possibility that Aitken's camp is using the free-agency window to let the market set a price that the A's internal numbers don't support.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C112",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-7cd6ffd2aeb3"
+    },
+    {
+      "t": "FACT",
+      "text": "A's · rumor — Mark Aitken pending free agency, is it Kevin Clarks time?",
+      "src": "world_summary_c112.md ## Sports",
+      "id": "F-341f8e706866"
+    },
+    {
+      "t": "FACT",
+      "text": "Mark Aitken pending free agency, is it Kevin Clarks time?",
+      "src": "world_summary_c112.md ## Sports",
+      "id": "F-9dc4ab7a0487"
+    },
+    {
+      "t": "FACT",
+      "text": "Feed line: Mark Aitken/540AB/.283AVG/33HR/87RBI",
+      "src": "world_summary_c112.md ## Sports",
+      "id": "F-c2211f399c19"
+    },
+    {
+      "t": "FACT",
+      "text": "Feed line: Kevin Clark/64AB/.297AVG/3HR/12RBI",
+      "src": "world_summary_c112.md ## Sports",
+      "id": "F-d2d7c1bb8e85"
+    },
+    {
+      "t": "FACT",
+      "text": "Event kind (feed): A's — rumor (off-season)",
+      "src": "world_summary_c112.md ## Sports",
+      "id": "F-fe8188ebfb0c"
+    },
+    {
+      "t": "FACT",
+      "text": "NamesUsed (feed): Mark Aitken (1B), Kevin Clark (3B)",
+      "src": "world_summary_c112.md ## Sports",
+      "id": "F-163f2628e464"
+    },
+    {
+      "t": "FACT",
+      "text": "Mark Aitken 2041 ATH: 138 G, 540 AB, 153 H, 33 HR, 87 RBI, 25 BB, 65 SO, 5 SB, AVG .283, OBP .317, SLG .509",
+      "src": "tool:dossier_read:Mark Aitken",
+      "id": "F-ff4b9f1a4a63"
+    },
+    {
+      "t": "FACT",
+      "text": "Mark Aitken 2040 ATH: 144 G, 550 AB, 143 H, 30 HR, 79 RBI, 64 BB, 110 SO, 9 SB, AVG .260, OBP .342, SLG .473",
+      "src": "tool:dossier_read:Mark Aitken",
+      "id": "F-47ad83b2c02b"
+    },
+    {
+      "t": "FACT",
+      "text": "Mark Aitken 2038 ATH: 152 G, 564 AB, 160 H, 30 HR, 81 RBI, 78 BB, 102 SO, 6 SB, AVG .284, OBP .373, SLG .475",
+      "src": "tool:dossier_read:Mark Aitken",
+      "id": "F-1c00eeb3c1cc"
+    },
+    {
+      "t": "FACT",
+      "text": "Mark Aitken 2041 rates (540 AB): one HR every 16.4 AB, one SO every 8.3 AB (worked from the season line)",
+      "src": "tool:dossier_read:Mark Aitken",
+      "id": "F-556374371b9a"
+    },
+    {
+      "t": "FACT",
+      "text": "Mark Aitken 2040 rates (550 AB): one HR every 18.3 AB, one SO every 5.0 AB (worked from the season line)",
+      "src": "tool:dossier_read:Mark Aitken",
+      "id": "F-1b2378fd0de1"
+    },
+    {
+      "t": "FACT",
+      "text": "Mark Aitken 2034 rates (637 AB): one HR every 16.3 AB, one SO every 4.8 AB (worked from the season line)",
+      "src": "tool:dossier_read:Mark Aitken",
+      "id": "F-eac276209013"
+    },
+    {
+      "t": "FACT",
+      "text": "Kevin Clark 2041 ATH: 18 G, 64 AB, 19 H, 3 HR, 12 RBI, 1 BB, 3 SO, 6 SB, AVG .297, OBP .313, SLG .547",
+      "src": "tool:dossier_read:Kevin Clark",
+      "id": "F-4fbce0e2a993"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. No citizen spoke for this piece: manifest.approvedQuotes is empty. Write no quoted speech and attribute no statement to any person; the piece stands on the record and the place. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "anthony-sports-analytics-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Evaluate one Packet-backed sports line, roster fit, or feed delta with correctly attributed numbers and explicit sample limits. The board is read through the tools — the player's TrueSource card for the career line, the archive for his Statcast card, the PANDAS method and prior coverage, the feed for this cycle — never recalled. One sourced analytic claim is success; fan heat, elegy, and invented advanced metrics are not.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "precise third-person sports analysis",
+      "targetWords": "evidence-bounded",
+      "opening": "the strongest Packet-backed player line or roster fact",
+      "closing": "the sample, roster, or dossier evidence still needed to test the claim"
+    },
+    "authorizedTexture": [
+      "plain-language comparison of supplied player lines with each statistic kept with its named subject",
+      "a cautious variance or role-fit interpretation explicitly limited by the supplied sample",
+      "an unnamed quiet press-box or clubhouse transition that adds no person, venue, event, result, statistic, or team act"
+    ],
+    "textureConditions": [
+      "every named player, team, venue, institution, league, organization, and source must come from the Packet",
+      "every statistic, record, streak, result, roster move, role, award, contract, salary, injury, date, and sample claim requires Packet support",
+      "an unresolved feed subject may be named only as supplied and may not receive a POPID, biography, role beyond the supplied label, quote, or interview",
+      "single-game production may support a feed-delta observation but not an unsupported season projection or new player identity",
+      "a number from a TrueSource card, a Statcast card or the feed enters only through a tool call, printed as returned and named to its source; a method (PANDAS, Paper Cuts) shapes the reasoning and supplies no number of its own"
+    ],
+    "canonBlockers": [
+      "a statistic attributed to the wrong player or two player lines merged into one subject",
+      "alternate feed spellings presented as distinct people or silently assigned an invented identity",
+      "an invented advanced metric, projection, split, roster fact, contract, salary, award, injury, result, quote, interview, or front-office act",
+      "a named player, team, venue, institution, league, organization, or real-world entity not found in the supplied record",
+      "fan we, emotional crowd consensus, or historical elegy replacing the analytic claim"
+    ]
+  },
+  "manifest": {
+    "id": "AM-4c78c1506f62",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-7cd6ffd2aeb3",
+        "t": "FACT",
+        "text": "Current cycle: C112",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-341f8e706866",
+        "t": "FACT",
+        "text": "A's · rumor — Mark Aitken pending free agency, is it Kevin Clarks time?",
+        "src": "world_summary_c112.md ## Sports"
+      },
+      {
+        "id": "F-9dc4ab7a0487",
+        "t": "FACT",
+        "text": "Mark Aitken pending free agency, is it Kevin Clarks time?",
+        "src": "world_summary_c112.md ## Sports"
+      },
+      {
+        "id": "F-c2211f399c19",
+        "t": "FACT",
+        "text": "Feed line: Mark Aitken/540AB/.283AVG/33HR/87RBI",
+        "src": "world_summary_c112.md ## Sports"
+      },
+      {
+        "id": "F-d2d7c1bb8e85",
+        "t": "FACT",
+        "text": "Feed line: Kevin Clark/64AB/.297AVG/3HR/12RBI",
+        "src": "world_summary_c112.md ## Sports"
+      },
+      {
+        "id": "F-fe8188ebfb0c",
+        "t": "FACT",
+        "text": "Event kind (feed): A's — rumor (off-season)",
+        "src": "world_summary_c112.md ## Sports"
+      },
+      {
+        "id": "F-163f2628e464",
+        "t": "FACT",
+        "text": "NamesUsed (feed): Mark Aitken (1B), Kevin Clark (3B)",
+        "src": "world_summary_c112.md ## Sports"
+      },
+      {
+        "id": "F-ff4b9f1a4a63",
+        "t": "FACT",
+        "text": "Mark Aitken 2041 ATH: 138 G, 540 AB, 153 H, 33 HR, 87 RBI, 25 BB, 65 SO, 5 SB, AVG .283, OBP .317, SLG .509",
+        "src": "tool:dossier_read:Mark Aitken"
+      },
+      {
+        "id": "F-47ad83b2c02b",
+        "t": "FACT",
+        "text": "Mark Aitken 2040 ATH: 144 G, 550 AB, 143 H, 30 HR, 79 RBI, 64 BB, 110 SO, 9 SB, AVG .260, OBP .342, SLG .473",
+        "src": "tool:dossier_read:Mark Aitken"
+      },
+      {
+        "id": "F-1c00eeb3c1cc",
+        "t": "FACT",
+        "text": "Mark Aitken 2038 ATH: 152 G, 564 AB, 160 H, 30 HR, 81 RBI, 78 BB, 102 SO, 6 SB, AVG .284, OBP .373, SLG .475",
+        "src": "tool:dossier_read:Mark Aitken"
+      },
+      {
+        "id": "F-556374371b9a",
+        "t": "FACT",
+        "text": "Mark Aitken 2041 rates (540 AB): one HR every 16.4 AB, one SO every 8.3 AB (worked from the season line)",
+        "src": "tool:dossier_read:Mark Aitken"
+      },
+      {
+        "id": "F-1b2378fd0de1",
+        "t": "FACT",
+        "text": "Mark Aitken 2040 rates (550 AB): one HR every 18.3 AB, one SO every 5.0 AB (worked from the season line)",
+        "src": "tool:dossier_read:Mark Aitken"
+      },
+      {
+        "id": "F-eac276209013",
+        "t": "FACT",
+        "text": "Mark Aitken 2034 rates (637 AB): one HR every 16.3 AB, one SO every 4.8 AB (worked from the season line)",
+        "src": "tool:dossier_read:Mark Aitken"
+      },
+      {
+        "id": "F-4fbce0e2a993",
+        "t": "FACT",
+        "text": "Kevin Clark 2041 ATH: 18 G, 64 AB, 19 H, 3 HR, 12 RBI, 1 BB, 3 SO, 6 SB, AVG .297, OBP .313, SLG .547",
+        "src": "tool:dossier_read:Kevin Clark"
+      }
+    ],
+    "approvedQuotes": [],
+    "approvedSubjects": [],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Anthony Raines",
+        "text": "The possibility that Clark's 64 at-bats came in a concentrated stretch against weaker pitching, which would inflate the average without proving sustained production.",
+        "publishable": false
+      },
+      {
+        "from": "Anthony Raines",
+        "text": "The possibility that Aitken's camp is using the free-agency window to let the market set a price that the A's internal numbers don't support.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "plain-language comparison of supplied player lines with each statistic kept with its named subject",
+      "a cautious variance or role-fit interpretation explicitly limited by the supplied sample",
+      "an unnamed quiet press-box or clubhouse transition that adds no person, venue, event, result, statistic, or team act"
+    ],
+    "textureConditions": [
+      "every named player, team, venue, institution, league, organization, and source must come from the Packet",
+      "every statistic, record, streak, result, roster move, role, award, contract, salary, injury, date, and sample claim requires Packet support",
+      "an unresolved feed subject may be named only as supplied and may not receive a POPID, biography, role beyond the supplied label, quote, or interview",
+      "single-game production may support a feed-delta observation but not an unsupported season projection or new player identity",
+      "a number from a TrueSource card, a Statcast card or the feed enters only through a tool call, printed as returned and named to its source; a method (PANDAS, Paper Cuts) shapes the reasoning and supplies no number of its own"
+    ],
+    "forbiddenClaimClasses": [
+      "a statistic attributed to the wrong player or two player lines merged into one subject",
+      "alternate feed spellings presented as distinct people or silently assigned an invented identity",
+      "an invented advanced metric, projection, split, roster fact, contract, salary, award, injury, result, quote, interview, or front-office act",
+      "a named player, team, venue, institution, league, organization, or real-world entity not found in the supplied record",
+      "fan we, emotional crowd consensus, or historical elegy replacing the analytic claim"
+    ],
+    "toolFacts": [
+      "F-ff4b9f1a4a63",
+      "F-47ad83b2c02b",
+      "F-1c00eeb3c1cc",
+      "F-556374371b9a",
+      "F-1b2378fd0de1",
+      "F-eac276209013",
+      "F-4fbce0e2a993"
+    ]
+  }
+}

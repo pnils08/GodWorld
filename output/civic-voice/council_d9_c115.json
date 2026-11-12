@@ -1,0 +1,56 @@
+{
+  "office": "council_d9",
+  "cycle": 115,
+  "speaker": "Terrence Mobley",
+  "cascadeSummary": "I'm voting YES on the Grand Lake commercial stabilization package, because the Chen-Vega milestone and audit conditions are intact and a recorded decision is what the Mayor asked for — and what residents deserve. On my own turf, I'm keeping my eye on Laurel and Uptown: stability is work, not luck, and I won't manufacture a crisis where the brief shows low crime and flat mood. I'm supporting the Mayor's citywide agenda items that put records on the table without predetermining outcomes.",
+  "statements": [
+    {
+      "statementId": "STMT-115-council_d9-001",
+      "type": "vote_statement",
+      "topic": "Commercial Stabilization for Grand Lake",
+      "initiative": "Commercial Stabilization for Grand Lake",
+      "decision": "Vote YES on the recorded full-council decision for the $2.5M Grand Lake commercial stabilization, with all Chen-Vega milestone and audit conditions intact.",
+      "quote": "Grand Lake gets my yes because the conditions are real and the record is public — not because the money is easy.",
+      "fullStatement": "I'm voting yes on the Grand Lake commercial stabilization. This has been through committee twice, the Chen-Vega milestone and audit conditions are written in, and the Mayor has asked for a recorded full-council decision. I don't take $2.5 million lightly — my own district knows what it costs when small, unglamorous follow-through gets skipped. But the conditions here are the accountability I'd ask for if this were Laurel or Uptown, and I want every member on the record, including me. A recorded yes with audits attached is worth more than another cycle of silence.",
+      "disposition": "YES",
+      "actionAsked": "Record the YES vote and hold the milestone and audit conditions as written.",
+      "tone": "steady, accountable",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-115-council_d9-002",
+      "type": "statement",
+      "topic": "District 9 neighborhoods — Laurel and Uptown",
+      "initiative": null,
+      "decision": "Hold the line on Laurel stability and Uptown's dated track; support positive civic life without manufacturing a crisis.",
+      "quote": "Laurel's stability is no accident, and I'm not going to blink now — but I'm also not going to pretend a flat reading is a crisis.",
+      "fullStatement": "My turf is Laurel and Uptown, and I'm reading it the same way I did last cycle: Laurel's mood is soured and street trade is slow, but crime is low and the trajectory is steady. That's not a crisis — it's work that needs protecting, and a missed pickup that cost sentiment is exactly the kind of small failure I want fixed, not inflated. Uptown's busy streets are somebody's work paying off, and they keep their dated track. I'll support the Blossom Walk and the Fruitvale Community Bloom Festival as the positive civic life this city needs room for. No manufactured motion on my turf just to look busy.",
+      "disposition": "statement",
+      "actionAsked": "Keep district follow-through on Laurel's service failures and Uptown's dated commitment; leave room for civic celebration.",
+      "tone": "independent, grounded",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-115-council_d9-003",
+      "type": "statement",
+      "topic": "Mayor's citywide agenda — records over claims",
+      "initiative": "Oakland Youth Apprenticeship Pipeline",
+      "decision": "Support publication of the placement-gap analysis and the recorded tenant-defense committee decision without presuming outcomes; back the citywide agenda's record-first posture.",
+      "quote": "A published report is not the finish line, and a committee agenda item is not a vote — both need a record residents can actually find.",
+      "fullStatement": "On the Mayor's wider agenda, I'm consistent with what I said last cycle: a published report is not the finish line, and a committee agenda item is not a vote. I support publishing the youth apprenticeship placement-gap analysis with explicit district findings and requiring a real recommendation on advancement or a failed-phase finding. I support the recorded West Oakland tenant-defense committee decision — recorded, not predetermined, and not treated as authorization by referral. And I support the Grand Lake decision coming to the floor this cycle with conditions intact. Records first, claims later — that's the standard I hold my own district to.",
+      "disposition": "statement",
+      "actionAsked": "Publish the analyses and take recorded decisions; don't claim passage, delivery, or completion before the record shows it.",
+      "tone": "process-minded, consistent",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    }
+  ]
+}

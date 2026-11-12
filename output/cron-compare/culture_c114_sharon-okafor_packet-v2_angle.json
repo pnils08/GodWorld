@@ -1,0 +1,893 @@
+{
+  "stage": "angle",
+  "desk": "culture",
+  "cycle": "114",
+  "persona": "sharon-okafor",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00159",
+      "name": "Sharon Okafor",
+      "role": "desk reporter",
+      "desk": "culture"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Lena Cross is fading — how the city follows its names",
+      "approach": "Lifestyle approach: this slice is the fame record — who the city knows, who is fading, who just arrived — with their domains, tiers and neighborhoods. Behavior patterns, warm analytical. The names and trajectories are real; the morning routine, the regular order, what the neighbors think are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "lifestyle",
+        "hood": "Piedmont Ave",
+        "facts": [
+          "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 4, cooling), 17 media mentions",
+          "Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 2, cooling), 14 media mentions",
+          "Marisol Rivera (Community Advocate), Civic, Rockridge, Regional-tier — fading — the where-are-they-now file (fame 0, cooling), 7 media mentions",
+          "Vinnie Keane (A's player), Sports, Grand Lake, National-tier — the city knows them (fame 48, stable), 6 media mentions",
+          "Benji Dillon (A's player), Sports, Rockridge, Local-tier — the city knows them (fame 48, rising), 1 media mentions"
+        ],
+        "priorCycle": null,
+        "note": null,
+        "engineHooks": [
+          "First Friday nightlife surge expected. Restaurant and bar scene coverage available. (general coverage)",
+          "Downtown housing pressure at 10/10: rents climbing, households stretching to stay (observational analysis)",
+          "West Oakland boom sustained — momentum 8/10, the block everyone wants onto (observational analysis)",
+          "Fruitvale boom sustained — momentum 10/10, the block everyone wants onto (observational analysis)"
+        ],
+        "roomIsYours": "the coffee order, the dog's name, who recognizes them at the farmers market and who pretends not to",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-lifestyle",
+      "hood": "Piedmont Ave",
+      "score": null,
+      "src": "output/beats/Cultural_Ledger.jsonl @C114",
+      "nearby": [
+        {
+          "text": "Grand Lake neighborhood texture — how residents experience the improvement | Residents of Grand Lake feel the change firsthand.",
+          "src": "output/engine_audit_c114.json patterns[5]; evidence: Initiative_Tracker row(s) 9; storyline INIT-009:announced"
+        },
+        {
+          "text": "Chinatown | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c114.md \"### Chinatown\"; events: world_summary_c114.md \"## World Events\""
+        },
+        {
+          "text": "Downtown | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c114.md \"### Downtown\"; events: world_summary_c114.md \"## World Events\""
+        },
+        {
+          "text": "East Oakland | 2 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c114.md \"### East Oakland\"; events: world_summary_c114.md \"## World Events\""
+        },
+        {
+          "text": "Lake Merritt | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c114.md \"### Lake Merritt\"; events: world_summary_c114.md \"## World Events\""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00539",
+          "name": "Lena Cross",
+          "profile": "Lena Cross — Actor — Piedmont Ave",
+          "role": "Actor",
+          "hood": "Piedmont Ave",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C114",
+            "pop": "POP-00539",
+            "rowName": "Lena Cross",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00545",
+          "name": "Rowan Pierce",
+          "profile": "Rowan Pierce — Freelance Writer — Piedmont Ave",
+          "role": "Freelance Writer",
+          "hood": "Piedmont Ave",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C114",
+            "pop": "POP-00545",
+            "rowName": "Rowan Pierce",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01062",
+          "name": "Marisol Rivera",
+          "profile": "Marisol Rivera — Community Advocate — Rockridge",
+          "role": "Community Advocate",
+          "hood": "Rockridge",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C114",
+            "pop": "POP-01062",
+            "rowName": "Marisol Rivera",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00001",
+          "name": "Vinnie Keane",
+          "profile": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+          "role": "Designated Hitter, Oakland A's Legend",
+          "hood": "Grand Lake",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C114",
+            "pop": "POP-00001",
+            "rowName": "Vinnie Keane",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00018",
+          "name": "Benji Dillon",
+          "profile": "Benji Dillon — Pitcher, Oakland A's Legend — Rockridge",
+          "role": "Pitcher, Oakland A's Legend",
+          "hood": "Rockridge",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C114",
+            "pop": "POP-00018",
+            "rowName": "Benji Dillon",
+            "kind": "slice-row"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C114",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-4261fa115617"
+      },
+      {
+        "t": "FACT",
+        "text": "Vinnie Keane leads the fame table; 3 fading, 0 new",
+        "src": "output/beats/Cultural_Ledger.jsonl @C114",
+        "id": "F-32e226f93abf"
+      },
+      {
+        "t": "FACT",
+        "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 4, cooling), 17 media mentions.",
+        "src": "output/beats/Cultural_Ledger.jsonl @C114",
+        "id": "F-fddee223ff86"
+      },
+      {
+        "t": "FACT",
+        "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 4, cooling), 17 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C114",
+        "id": "F-ab2b44fe8d45"
+      },
+      {
+        "t": "FACT",
+        "text": "Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 2, cooling), 14 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C114",
+        "id": "F-7957e0f7cb91"
+      },
+      {
+        "t": "FACT",
+        "text": "Marisol Rivera (Community Advocate), Civic, Rockridge, Regional-tier — fading — the where-are-they-now file (fame 0, cooling), 7 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C114",
+        "id": "F-ec2def3b3ca2"
+      },
+      {
+        "t": "FACT",
+        "text": "Vinnie Keane (A's player), Sports, Grand Lake, National-tier — the city knows them (fame 48, stable), 6 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C114",
+        "id": "F-2c6dec8a8911"
+      },
+      {
+        "t": "FACT",
+        "text": "Benji Dillon (A's player), Sports, Rockridge, Local-tier — the city knows them (fame 48, rising), 1 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C114",
+        "id": "F-b27581cf1215"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "street",
+    "candidates": [
+      {
+        "pop": "POP-00539",
+        "name": "Lena Cross",
+        "role": "Actor",
+        "hood": "Piedmont Ave",
+        "profile": "Lena Cross — Actor — Piedmont Ave",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C114",
+          "pop": "POP-00539",
+          "rowName": "Lena Cross",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00545",
+        "name": "Rowan Pierce",
+        "role": "Freelance Writer",
+        "hood": "Piedmont Ave",
+        "profile": "Rowan Pierce — Freelance Writer — Piedmont Ave",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C114",
+          "pop": "POP-00545",
+          "rowName": "Rowan Pierce",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01062",
+        "name": "Marisol Rivera",
+        "role": "Community Advocate",
+        "hood": "Rockridge",
+        "profile": "Marisol Rivera — Community Advocate — Rockridge",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C114",
+          "pop": "POP-01062",
+          "rowName": "Marisol Rivera",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00001",
+        "name": "Vinnie Keane",
+        "role": "Designated Hitter, Oakland A's Legend",
+        "hood": "Grand Lake",
+        "profile": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C114",
+          "pop": "POP-00001",
+          "rowName": "Vinnie Keane",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00018",
+        "name": "Benji Dillon",
+        "role": "Pitcher, Oakland A's Legend",
+        "hood": "Rockridge",
+        "profile": "Benji Dillon — Pitcher, Oakland A's Legend — Rockridge",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C114",
+          "pop": "POP-00018",
+          "rowName": "Benji Dillon",
+          "kind": "slice-row"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Sharon Okafor",
+    "popid": "POP-00159"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-lifestyle",
+      "angle": "Lena Cross is fading — how the city follows its names",
+      "label": "Vinnie Keane leads the fame table; 3 fading, 0 new",
+      "hookLine": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 4, cooling), 17 media mentions.",
+      "hood": "Piedmont Ave",
+      "citizens": [
+        "Lena Cross (POP-00539)",
+        "Rowan Pierce (POP-00545)",
+        "Marisol Rivera (POP-01062)",
+        "Vinnie Keane (POP-00001)",
+        "Benji Dillon (POP-00018)"
+      ],
+      "popids": [
+        "POP-00539",
+        "POP-00545",
+        "POP-01062",
+        "POP-00001",
+        "POP-00018"
+      ],
+      "ref": "output/beats/Cultural_Ledger.jsonl @C114",
+      "cycle": 114
+    },
+    "approach": "Lifestyle approach: this slice is the fame record — who the city knows, who is fading, who just arrived — with their domains, tiers and neighborhoods. Behavior patterns, warm analytical. The names and trajectories are real; the morning routine, the regular order, what the neighbors think are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": {
+    "pulse": {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Vinnie Keane at Grand Avenue Wine Bar (Lake Merritt)",
+      "named": "Grand Avenue Wine Bar",
+      "hood": "Lake Merritt",
+      "person": "Vinnie Keane",
+      "venue": "Grand Avenue Wine Bar"
+    },
+    "recommend": {
+      "bag": "ground",
+      "slug": "maria-keen",
+      "name": "Maria Keen",
+      "popid": "POP-00013",
+      "bagDoc": "docs/media/MARIA_GROUND_BAG.md",
+      "reason": "top pulse fame-sighting → ground",
+      "pulseClass": "fame-sighting",
+      "pulseLabel": "Vinnie Keane at Grand Avenue Wine Bar (Lake Merritt)"
+    },
+    "prewrite": {
+      "pulseClass": "fame-sighting",
+      "angle": "Vinnie Keane spotted at Grand Avenue Wine Bar in Lake Merritt — ground truth only, no invented companions",
+      "hookLine": "sighting | Vinnie Keane spotted at Grand Avenue Wine Bar",
+      "anchorFacts": [
+        "NAMED: Grand Avenue Wine Bar",
+        "PERSON: Vinnie Keane",
+        "VENUE: Grand Avenue Wine Bar",
+        "HOOD: Lake Merritt",
+        "PERSON: Vinnie Keane",
+        "VENUE: Grand Avenue Wine Bar",
+        "HOOD: Lake Merritt"
+      ],
+      "bagRecommend": "ground",
+      "bagSlug": "maria-keen"
+    },
+    "texture": {
+      "famous": [
+        "Vinnie Keane",
+        "Henry Rivas",
+        "Kai Tanaka"
+      ],
+      "restaurants": [
+        {
+          "name": "Grand Avenue Wine Bar",
+          "hood": "Lake Merritt"
+        },
+        {
+          "name": "Montclair Patisserie",
+          "hood": "Piedmont Ave"
+        },
+        {
+          "name": "Green & Gold Tavern",
+          "hood": "Jack London"
+        }
+      ],
+      "fastFood": [
+        {
+          "name": "SpeedyBurger",
+          "hood": "Downtown"
+        }
+      ],
+      "nightlife": [
+        {
+          "name": "Bridge & Barrel",
+          "hood": "Jack London"
+        },
+        {
+          "name": "Temple Lounge",
+          "hood": "Downtown"
+        },
+        {
+          "name": "Canvas Club",
+          "hood": "Temescal"
+        }
+      ],
+      "nightlifeMeta": {
+        "volume": 5,
+        "vibe": "art-scene",
+        "movement": "art-walk",
+        "weatherImpact": 1
+      },
+      "cityEvents": [
+        "The Aitken Line Founding Celebration",
+        "Downtown Plaza Noon Music Session",
+        "Downtown First Friday Live Music",
+        "KONO First Friday Gallery Hop"
+      ],
+      "tv": [
+        "Gallery Hour",
+        "Crisis Desk",
+        "Spring Lineup",
+        "Jack London Ballpark Stories",
+        "Wendell Carter Jr (C) — Player Profile"
+      ],
+      "movies": [
+        "Art of the City",
+        "New Bloom",
+        "Franchise"
+      ],
+      "sportsBroadcast": "Oakland Sports Tonight",
+      "streamingTrend": "arts documentaries",
+      "foodTrend": "First Friday arts district dining - gallery crowd"
+    },
+    "signals": {
+      "fameCount": 8,
+      "sightingCount": 3,
+      "sightings": [
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Vinnie Keane spotted at Grand Avenue Wine Bar",
+          "name": "Vinnie Keane",
+          "venue": "Grand Avenue Wine Bar",
+          "ref": "Ripple_Ledger cycle 114 (CauseType lifestyle-sighting); rendered: world_summary_c114.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Lake Merritt",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Henry Rivas spotted at Calderon-Nishi",
+          "name": "Henry Rivas",
+          "venue": "Calderon-Nishi",
+          "ref": "Ripple_Ledger cycle 114 (CauseType lifestyle-sighting); rendered: world_summary_c114.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Temescal",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Kai Tanaka spotted at Temescal Urgent Care",
+          "name": "Kai Tanaka",
+          "venue": "Temescal Urgent Care",
+          "ref": "Ripple_Ledger cycle 114 (CauseType lifestyle-sighting); rendered: world_summary_c114.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Temescal",
+          "popids": []
+        }
+      ]
+    },
+    "scene": {
+      "venues": [
+        {
+          "name": "Grand Avenue Wine Bar",
+          "hood": "Lake Merritt"
+        },
+        {
+          "name": "Montclair Patisserie",
+          "hood": "Piedmont Ave"
+        },
+        {
+          "name": "Green & Gold Tavern",
+          "hood": "Jack London"
+        },
+        {
+          "name": "SpeedyBurger",
+          "hood": "Downtown"
+        },
+        {
+          "name": "Bridge & Barrel",
+          "hood": "Jack London"
+        },
+        {
+          "name": "Temple Lounge",
+          "hood": "Downtown"
+        },
+        {
+          "name": "Canvas Club",
+          "hood": "Temescal"
+        }
+      ],
+      "nightlifeMeta": {
+        "volume": 5,
+        "vibe": "art-scene",
+        "movement": "art-walk",
+        "weatherImpact": 1
+      },
+      "cityEvents": [
+        "The Aitken Line Founding Celebration",
+        "Downtown Plaza Noon Music Session",
+        "Downtown First Friday Live Music",
+        "KONO First Friday Gallery Hop"
+      ],
+      "tv": [
+        "Gallery Hour",
+        "Crisis Desk",
+        "Spring Lineup",
+        "Jack London Ballpark Stories",
+        "Wendell Carter Jr (C) — Player Profile"
+      ],
+      "movies": [
+        "Art of the City",
+        "New Bloom",
+        "Franchise"
+      ],
+      "colorRoom": "Named places only from Evening Texture / desk_signal.  Sensory room (weather, light, sound) is free; careers and employees are not."
+    },
+    "candidates": [
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Vinnie Keane at Grand Avenue Wine Bar (Lake Merritt)",
+        "named": "Grand Avenue Wine Bar",
+        "hood": "Lake Merritt"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Henry Rivas at Calderon-Nishi (Temescal)",
+        "named": "Calderon-Nishi",
+        "hood": "Temescal"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Kai Tanaka at Temescal Urgent Care (Temescal)",
+        "named": "Temescal Urgent Care",
+        "hood": "Temescal"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Grand Avenue Wine Bar (Lake Merritt)",
+        "named": "Grand Avenue Wine Bar",
+        "hood": "Lake Merritt"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Montclair Patisserie (Piedmont Ave)",
+        "named": "Montclair Patisserie",
+        "hood": "Piedmont Ave"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Green & Gold Tavern (Jack London)",
+        "named": "Green & Gold Tavern",
+        "hood": "Jack London"
+      },
+      {
+        "className": "nightlife-spot",
+        "score": 18,
+        "label": "Bridge & Barrel (Jack London)",
+        "named": "Bridge & Barrel",
+        "hood": "Jack London"
+      },
+      {
+        "className": "nightlife-spot",
+        "score": 18,
+        "label": "Temple Lounge (Downtown)",
+        "named": "Temple Lounge",
+        "hood": "Downtown"
+      }
+    ],
+    "perSeat": {
+      "mason-ortega": {
+        "pulseClass": "named-restaurant",
+        "label": "Grand Avenue Wine Bar (Lake Merritt)",
+        "score": 34,
+        "bag": "kitchen"
+      },
+      "kai-marston": {
+        "pulseClass": "city-event",
+        "label": "Downtown Plaza Noon Music Session",
+        "score": 31,
+        "bag": "arts"
+      },
+      "sharon-okafor": {
+        "pulseClass": "fame-sighting",
+        "label": "Vinnie Keane at Grand Avenue Wine Bar (Lake Merritt)",
+        "score": 31,
+        "bag": "lifestyle"
+      },
+      "maria-keen": {
+        "pulseClass": "fame-sighting",
+        "label": "Vinnie Keane at Grand Avenue Wine Bar (Lake Merritt)",
+        "score": 31,
+        "bag": "ground"
+      },
+      "elliot-graye": {
+        "pulseClass": "fame-sighting",
+        "label": "Vinnie Keane at Grand Avenue Wine Bar (Lake Merritt)",
+        "score": 31,
+        "bag": "faith"
+      }
+    }
+  },
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "LIFESTYLE-SLICE-1",
+    "kind": "beat-lifestyle",
+    "seat": {
+      "slug": "sharon-okafor",
+      "name": "Sharon Okafor",
+      "popid": "POP-00159",
+      "desk": "culture",
+      "domain": "lifestyle",
+      "builder": "buildLifestyleSlice.js"
+    },
+    "hood": "Piedmont Ave",
+    "pulse": {
+      "className": "beat-lifestyle",
+      "score": 100,
+      "label": "Vinnie Keane leads the fame table; 3 fading, 0 new",
+      "hood": "Piedmont Ave",
+      "source": "output/beats/Cultural_Ledger.jsonl @C114"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "Lena Cross is fading — how the city follows its names",
+      "hookLine": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 4, cooling), 17 media mentions.",
+      "anchorFacts": [
+        "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 4, cooling), 17 media mentions",
+        "Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 2, cooling), 14 media mentions",
+        "Marisol Rivera (Community Advocate), Civic, Rockridge, Regional-tier — fading — the where-are-they-now file (fame 0, cooling), 7 media mentions",
+        "Vinnie Keane (A's player), Sports, Grand Lake, National-tier — the city knows them (fame 48, stable), 6 media mentions",
+        "Benji Dillon (A's player), Sports, Rockridge, Local-tier — the city knows them (fame 48, rising), 1 media mentions"
+      ],
+      "evidence": [
+        {
+          "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 4, cooling), 17 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114"
+        },
+        {
+          "text": "Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 2, cooling), 14 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114"
+        },
+        {
+          "text": "Marisol Rivera (Community Advocate), Civic, Rockridge, Regional-tier — fading — the where-are-they-now file (fame 0, cooling), 7 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114"
+        },
+        {
+          "text": "Vinnie Keane (A's player), Sports, Grand Lake, National-tier — the city knows them (fame 48, stable), 6 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114"
+        },
+        {
+          "text": "Benji Dillon (A's player), Sports, Rockridge, Local-tier — the city knows them (fame 48, rising), 1 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": null,
+      "hooks": [
+        {
+          "text": "First Friday nightlife surge expected. Restaurant and bar scene coverage available.",
+          "angle": "general coverage",
+          "domain": "NIGHTLIFE",
+          "hood": "KONO",
+          "priority": 1
+        },
+        {
+          "text": "Downtown housing pressure at 10/10: rents climbing, households stretching to stay",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Downtown",
+          "priority": 7
+        },
+        {
+          "text": "West Oakland boom sustained — momentum 8/10, the block everyone wants onto",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "West Oakland",
+          "priority": 7
+        },
+        {
+          "text": "Fruitvale boom sustained — momentum 10/10, the block everyone wants onto",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Fruitvale",
+          "priority": 7
+        },
+        {
+          "text": "Jack London housing pressure at 9.5/10: rents climbing, households stretching to stay",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Jack London",
+          "priority": 7
+        },
+        {
+          "text": "Rockridge turning upward: retail busy, events drawing crowds, people moving in",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Rockridge",
+          "priority": 5
+        }
+      ],
+      "note": null,
+      "pageVoices": [],
+      "roomIsYours": "the coffee order, the dog's name, who recognizes them at the farmers market and who pretends not to"
+    },
+    "citizens": [
+      {
+        "popid": "POP-00539",
+        "name": "Lena Cross",
+        "role": "Actor",
+        "neighborhood": "Piedmont Ave",
+        "business": null,
+        "profile": "Lena Cross — Actor — Piedmont Ave",
+        "why": "fading — the where-are-they-now file (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-00545",
+        "name": "Rowan Pierce",
+        "role": "Freelance Writer",
+        "neighborhood": "Piedmont Ave",
+        "business": null,
+        "profile": "Rowan Pierce — Freelance Writer — Piedmont Ave",
+        "why": "fading — the where-are-they-now file (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-01062",
+        "name": "Marisol Rivera",
+        "role": "Community Advocate",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Marisol Rivera — Community Advocate — Rockridge",
+        "why": "fading — the where-are-they-now file (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-00001",
+        "name": "Vinnie Keane",
+        "role": "Designated Hitter, Oakland A's Legend",
+        "neighborhood": "Grand Lake",
+        "business": null,
+        "profile": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+        "why": "the city knows them (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-00018",
+        "name": "Benji Dillon",
+        "role": "Pitcher, Oakland A's Legend",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Benji Dillon — Pitcher, Oakland A's Legend — Rockridge",
+        "why": "the city knows them (Cultural_Ledger)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Cultural_Ledger.jsonl @C114",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Sharon Okafor this cycle)"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Sharon Okafor",
+    "popid": "POP-00159",
+    "text": "I will follow Lena Cross's recent activities in the neighborhood to understand how the city's perception of her has changed.",
+    "plan": {
+      "chase": "I will follow Lena Cross's recent activities in the neighborhood to understand how the city's perception of her has changed.",
+      "focus": "Lena Cross's fading fame in Rockridge and Piedmont Ave",
+      "why": "The city follows its names, and Lena Cross is a fading celebrity",
+      "checks": [
+        "Verify Lena Cross's current residence",
+        "Identify local events or venues she has been associated with"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00539",
+          "question": "What is Lena Cross's current level of involvement in local arts?",
+          "basis": "Lena Cross is a fading celebrity in Piedmont Ave"
+        },
+        {
+          "pop": "POP-00545",
+          "question": "How does Rowan Pierce, a fellow Piedmont Ave resident, perceive Lena Cross's current status?",
+          "basis": "Rowan Pierce is a journalist and a neighbor"
+        }
+      ],
+      "interpretation": "The neighborhood's perception of fading celebrities can reveal the city's cultural dynamics",
+      "unverifiedLead": [
+        "Lena Cross might be involved in a local charity event"
+      ],
+      "closeQuestion": "How does the local community respond to Lena Cross's fading fame?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Grand Lake neighborhood texture — how residents experience the improvement | Residents of Grand Lake feel the change firsthand.",
+      "kind": "anomaly",
+      "hood": "Grand Lake",
+      "ref": "output/engine_audit_c114.json patterns[5]; evidence: Initiative_Tracker row(s) 9; storyline INIT-009:announced",
+      "popids": [
+        "POP-00001",
+        "POP-01049",
+        "POP-01218"
+      ]
+    },
+    {
+      "label": "Chinatown | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Chinatown",
+      "ref": "output/neighborhood_texture_c114.md \"### Chinatown\"; events: world_summary_c114.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Downtown | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Downtown",
+      "ref": "output/neighborhood_texture_c114.md \"### Downtown\"; events: world_summary_c114.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "East Oakland | 2 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "East Oakland",
+      "ref": "output/neighborhood_texture_c114.md \"### East Oakland\"; events: world_summary_c114.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Lake Merritt | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Lake Merritt",
+      "ref": "output/neighborhood_texture_c114.md \"### Lake Merritt\"; events: world_summary_c114.md \"## World Events\"",
+      "popids": []
+    }
+  ],
+  "laneEntries": 28,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-06T12:16:14.452Z"
+}

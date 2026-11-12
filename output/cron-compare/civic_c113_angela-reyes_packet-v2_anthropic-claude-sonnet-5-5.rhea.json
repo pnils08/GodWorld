@@ -1,0 +1,77 @@
+{
+  "draft": "output/cron-compare/civic_c113_angela-reyes_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "113",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "f2b1934d180f957415feb20b7d61bc391ebc779a2fab875a4c1038b873b5205d",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes, citizen profiles, and civic/district references verify cleanly against canon and ground truth.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "angela-education-stability-v1",
+    "packageVersion": "ANGELA-LEP2-2",
+    "manifestId": "AM-19412dd65527",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "85",
+          "55",
+          "94",
+          "76",
+          "7.94"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Patricia Nolan",
+      "Rick Walker",
+      "Salma Navarro"
+    ],
+    "unverified": [
+      "Islamic Center"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0101,
+  "durationMs": 5917,
+  "parseError": false,
+  "ranAt": "2026-10-27T23:17:36.762Z",
+  "contractScore": {
+    "opened": false,
+    "closed": true,
+    "purposeMet": false,
+    "inTarget": false,
+    "inTargetBy": "judge",
+    "words": 796,
+    "short": "The piece opens on character narrative rather than a Packet-backed fact, covers neighborhood stagnation rather than translating an initiative into program stability, and falls short of the word count.",
+    "score": 1,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "f2b1934d180f957415feb20b7d61bc391ebc779a2fab875a4c1038b873b5205d",
+    "costUsd": 0.0021
+  }
+}

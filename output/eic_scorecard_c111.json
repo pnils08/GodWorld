@@ -1,0 +1,345 @@
+{
+  "cycle": "111",
+  "total": 27,
+  "counts": {
+    "accurate": 14,
+    "corrections-needed": 8,
+    "canon-violation": 5
+  },
+  "accuracyPct": 51.9,
+  "auditModel": "google/gemini-3.7-flash",
+  "trend": [
+    {
+      "cycle": 103,
+      "pct": 75
+    },
+    {
+      "cycle": 104,
+      "pct": 62.5
+    },
+    {
+      "cycle": 105,
+      "pct": 76.5
+    },
+    {
+      "cycle": 106,
+      "pct": 55.6
+    },
+    {
+      "cycle": 107,
+      "pct": 68.8
+    },
+    {
+      "cycle": 108,
+      "pct": 60
+    },
+    {
+      "cycle": 109,
+      "pct": 33.3
+    },
+    {
+      "cycle": 110,
+      "pct": 39.1
+    }
+  ],
+  "articles": [
+    {
+      "stem": "business_c111_business-desk_packet-v2_anthropic-claude-opus-5-5",
+      "byline": "Jordan Velez",
+      "desk": "business",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "civic_c111_carmen-delaine_packet-v2_anthropic-claude-haiku-5-5",
+      "byline": "Carmen Delaine",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "civic_c111_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5-5",
+      "byline": "Jax Caldera",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "civic_c111_lila-mezran_packet-v2_anthropic-claude-haiku-5-5",
+      "byline": "Dr. Lila Mezran",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "canon-violation",
+      "failures": [
+        {
+          "what": "Hospitalized citizens and hospital statistics",
+          "class": "data-misrepresentation",
+          "why": "The article states that citywide the hospital had 37 admissions, held 75 patients in care, and that Yu Zen and Maurice Franklin are currently lying in hospital beds. However, the World Summary explicitly records 'Hospital: 0 in care (0% load)'."
+        }
+      ]
+    },
+    {
+      "stem": "civic_c111_luis-navarro_packet-v2_anthropic-claude-sonnet-5-5",
+      "byline": "Luis Navarro",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "canon-violation",
+      "failures": [
+        {
+          "what": "Janae Rivers is identified as representing District 5 and speaking for East Oakland.",
+          "class": "citizen-bending",
+          "why": "Per the ledger and world summary, Janae Rivers is the City Council Member for Piedmont Ave (District 6), not District 5 or East Oakland."
+        }
+      ]
+    },
+    {
+      "stem": "civic_c111_noah-tan_packet-v2_x-ai-grok-4-3",
+      "byline": "Noah Tan",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "civic_c111_rachel-torres_packet-v2_x-ai-grok-4-3",
+      "byline": "Sgt. Rachel Torres",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "civic_c111_trevor-shimizu_packet-v2_openai-gpt-5-6-luna",
+      "byline": "Trevor Shimizu",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "corrections-needed",
+      "failures": [
+        {
+          "what": "References to 'Cycle 111' in prose",
+          "class": "engine-verbiage",
+          "why": "The article uses the internal simulation term 'Cycle 111' multiple times in reporting prose rather than natural calendar framing."
+        }
+      ]
+    },
+    {
+      "stem": "culture_c111_elliot-graye_packet-v2_anthropic-claude-haiku-5-5",
+      "byline": "Elliot Graye",
+      "desk": "culture",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "culture_c111_kai-marston_packet-v2_anthropic-claude-haiku-5-5",
+      "byline": "Kai Marston",
+      "desk": "culture",
+      "intakePresent": true,
+      "verdict": "corrections-needed",
+      "failures": [
+        {
+          "what": "Repeated explicit references to 'the ledger', 'cycle', 'surging flags', and 'where-are-they-now file' throughout the prose.",
+          "class": "engine-verbiage",
+          "why": "System architecture and engine terminology ('the ledger', 'this cycle', 'where-are-they-now file', 'flags her as surging') are treated as an in-world public registry rather than reporting on in-fiction civic and cultural events."
+        }
+      ]
+    },
+    {
+      "stem": "culture_c111_maria-keen_packet-v2_anthropic-claude-sonnet-5-5",
+      "byline": "Maria Keen",
+      "desk": "culture",
+      "intakePresent": true,
+      "verdict": "canon-violation",
+      "failures": [
+        {
+          "what": "The hospital census claims 4 people in care filling 4 beds Downtown with 2 admissions",
+          "class": "data-misrepresentation",
+          "why": "The authoritative cycle snapshot and city state explicitly record 0 in care (0% load) across the entire city."
+        },
+        {
+          "what": "Downtown First Friday Live Music event reference",
+          "class": "unsupported-claim",
+          "why": "The authoritative calendar context explicitly notes 'First Friday: false'."
+        }
+      ]
+    },
+    {
+      "stem": "culture_c111_mason-ortega_packet-v2_x-ai-grok-4-3",
+      "byline": "Mason Ortega",
+      "desk": "culture",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "culture_c111_sharon-okafor_packet-v2_openai-gpt-5-6-luna",
+      "byline": "Sharon Okafor",
+      "desk": "culture",
+      "intakePresent": true,
+      "verdict": "corrections-needed",
+      "failures": [
+        {
+          "what": "References to 'Global-tier', 'Regional-tier', 'Iconic-tier', and 'the fame table'",
+          "class": "engine-verbiage",
+          "why": "System simulation terminology and ledger mechanics (fame tiers and 'fame table') leak directly into the journalistic prose."
+        }
+      ]
+    },
+    {
+      "stem": "sports_c111_anthony-raines_packet-v2_anthropic-claude-haiku-5-5",
+      "byline": "Anthony Raines",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "sports_c111_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5",
+      "byline": "Elliot Marbury",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "sports_c111_hal-richmond_packet-v2_anthropic-claude-sonnet-5-5",
+      "byline": "Hal Richmond",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "sports_c111_p-slayer_packet-v2_x-ai-grok-4-3",
+      "byline": "P Slayer",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "sports_c111_selena-grant_packet-v2_openai-gpt-5-6-luna",
+      "byline": "Selena Grant",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "corrections-needed",
+      "failures": [
+        {
+          "what": "Engine tags, meta-commentary, and beat structure jargon in editorial text: 'in C111', 'The supplied record does not resolve which one this is', 'It is a player-feature in this cycle', 'Oaks’ season-state', and 'unstable franchise marker'.",
+          "class": "engine-verbiage",
+          "why": "The prose leaks simulation cycle numbering, data feed category labels ('player-feature', 'season-state'), and meta prompt phrasing ('The supplied record') directly into reader-facing copy."
+        }
+      ]
+    },
+    {
+      "stem": "sports_c111_simon-leary_packet-v2_openai-gpt-5-6-luna",
+      "byline": "Simon Leary",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "canon-violation",
+      "failures": [
+        {
+          "what": "Describing the A's 4-1 World Series victory as a '4-1 start' to an ongoing season with an active three-game run.",
+          "class": "data-misrepresentation",
+          "why": "The 4-1 record and W3 streak from Cycle 110 reflect the A's winning the World Series over the Phillies (4 games to 1), not a regular-season start. Cycle 111 is the off-season championship celebration and parade, following Vinnie Keane's retirement."
+        }
+      ]
+    },
+    {
+      "stem": "sports_c111_talia-finch_packet-v2_openai-gpt-5-6-luna",
+      "byline": "Talia Finch",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "sports_c111_tanya-cruz_packet-v2_x-ai-grok-4-3",
+      "byline": "Tanya Cruz",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "undocked-digest_c111_nia-rook-weekly_packet-v2_x-ai-grok-4-3",
+      "byline": "Nia Rook",
+      "desk": "undocked-digest",
+      "intakePresent": true,
+      "verdict": "corrections-needed",
+      "failures": [
+        {
+          "what": "UNDOCKED standings, flights, credits, and chair simulator framing",
+          "class": "engine-verbiage",
+          "why": "System-level minigame/engine simulation data (UNDOCKED flights, credits, combat/mishap tracking) has leaked directly into the narrative prose and dialogue framing."
+        }
+      ]
+    },
+    {
+      "stem": "undocked_c111_nia-rook_packet-v2_x-ai-grok-4-3-2316",
+      "byline": "Nia Rook",
+      "desk": "undocked",
+      "intakePresent": true,
+      "verdict": "corrections-needed",
+      "failures": [
+        {
+          "what": "References to 'sol and sirius', 'No combat, no mishaps', 'magnitude three', and 'credits'",
+          "class": "engine-verbiage",
+          "why": "Raw simulation engine terminology, undocked event mechanics, and sci-fi/test harness vocabulary leaked into the article prose."
+        }
+      ]
+    },
+    {
+      "stem": "undocked_c111_nia-rook_packet-v2_x-ai-grok-4-3-2317",
+      "byline": "Nia Rook",
+      "desk": "undocked",
+      "intakePresent": true,
+      "verdict": "canon-violation",
+      "failures": [
+        {
+          "what": "Clarissa Dane",
+          "class": "citizen-bending"
+        }
+      ]
+    },
+    {
+      "stem": "undocked_c111_nia-rook_packet-v2_x-ai-grok-4-3-2319",
+      "byline": "Nia Rook",
+      "desk": "undocked",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "undocked_c111_nia-rook_packet-v2_x-ai-grok-4-3-2320",
+      "byline": "Nia Rook",
+      "desk": "undocked",
+      "intakePresent": true,
+      "verdict": "corrections-needed",
+      "failures": [
+        {
+          "what": "epsilon_eridani, magnitude sat at 2 out of 5, combat stayed at zero, mishaps stayed at zero",
+          "class": "engine-verbiage",
+          "why": "Raw snake_case game engine identifier ('epsilon_eridani') and literal simulation metric fields ('magnitude sat at 2 out of 5, combat stayed at zero, mishaps stayed at zero') leaked directly into the narrative prose."
+        }
+      ]
+    },
+    {
+      "stem": "undocked_c111_nia-rook_packet-v2_x-ai-grok-4-3",
+      "byline": "Nia Rook",
+      "desk": "undocked",
+      "intakePresent": true,
+      "verdict": "corrections-needed",
+      "failures": [
+        {
+          "what": "magnitude holding at the middle of the scale",
+          "class": "engine-verbiage",
+          "why": "Directly references the underlying simulation metric ('magnitude') in the descriptive prose."
+        }
+      ]
+    }
+  ]
+}

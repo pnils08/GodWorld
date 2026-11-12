@@ -1,0 +1,247 @@
+{
+  "version": "OAKS-BEAT-1",
+  "empty": false,
+  "cycle": 115,
+  "kind": "beat-oaks-beat",
+  "seat": {
+    "slug": "selena-grant",
+    "name": "Selena Grant",
+    "popid": "POP-00591",
+    "desk": "sports",
+    "domain": "oaks",
+    "builder": "buildOaksBeatSlice.js"
+  },
+  "hood": "San Antonio",
+  "pulse": {
+    "className": "beat-oaks-beat",
+    "score": 100,
+    "label": "Oaks — game-result C115 · 8-1 · W4",
+    "hood": "San Antonio",
+    "source": "output/beats/Oakland_Sports_Feed.jsonl @C115"
+  },
+  "story": {
+    "kind": "beat-oaks-beat",
+    "angle": "Oaks — game-result C115 · 8-1 · W4 — the second club's board read",
+    "label": "Oaks — game-result C115 · 8-1 · W4",
+    "hookLine": "Down two after three in Philadelphia, the Oaks drop 40 in the fourth and Hayward scores a career high. Oaks 120 - 76ers 106",
+    "hood": "San Antonio",
+    "citizens": [
+      "Adash Stanley (POP-01023)",
+      "Harry Hayward (POP-01223)",
+      "Dillon Brooks (POP-01079)",
+      "Austin Reaves (POP-01027)",
+      "Wilson Shepard (POP-01022)"
+    ],
+    "popids": [
+      "POP-01023",
+      "POP-01223",
+      "POP-01079",
+      "POP-01027",
+      "POP-01022"
+    ],
+    "ref": "output/beats/Oakland_Sports_Feed.jsonl @C115",
+    "cycle": 115
+  },
+  "approach": "Oaks beat-analyst approach: this slice is the Oaks feed raw — the record, the streak, the stats lines, the trigger behind each event. Third-person board read on the second club, not fan heat. Numbers come from the feed only — never invent a stat. The named players are real; the press row, the cage, the bus are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-01023",
+      "name": "Adash Stanley",
+      "role": "PG / The Oaks ",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Adash Stanley — PG / The Oaks  — Downtown",
+      "why": "named on the Oaks feed C115 (Oakland_Sports_Feed)"
+    },
+    {
+      "popid": "POP-01223",
+      "name": "Harry Hayward",
+      "role": "Oakland Oaks - Power Forward",
+      "neighborhood": "KONO",
+      "business": null,
+      "profile": "Harry Hayward — Oakland Oaks - Power Forward — KONO",
+      "why": "named on the Oaks feed C115 (Oakland_Sports_Feed)"
+    },
+    {
+      "popid": "POP-01079",
+      "name": "Dillon Brooks",
+      "role": "SF / The Oaks",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Dillon Brooks — SF / The Oaks — West Oakland",
+      "why": "named on the Oaks feed C115 (Oakland_Sports_Feed)"
+    },
+    {
+      "popid": "POP-01027",
+      "name": "Austin Reaves",
+      "role": "SG / The Oaks",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Austin Reaves — SG / The Oaks — West Oakland",
+      "why": "named on the Oaks feed C115 (Oakland_Sports_Feed)"
+    },
+    {
+      "popid": "POP-01022",
+      "name": "Wilson Shepard",
+      "role": "Head Coach, Oakland Oaks",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Wilson Shepard — Head Coach, Oakland Oaks — West Oakland",
+      "why": "named on the Oaks feed C115 (Oakland_Sports_Feed)"
+    }
+  ],
+  "facts": [
+    {
+      "text": "Oaks — game-result (early-season), C115: Down two after three in Philadelphia, the Oaks drop 40 in the fourth and Hayward scores a career high. Oaks 120 - 76ers 106",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+    },
+    {
+      "text": "Record 8-1 · streak W4",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+    },
+    {
+      "text": "Stats (feed): AJ Dybantsa/25PTS/6REB/10-16FG/3-3 3PT, Adash Stanley/23PTS/7ASST/8-13FG/5-7 3PT, Harry Hayward/19PTS/7REB/2BLK/9-15FG in 22 minutes, Wendell Carter Jr/12PTS/15REB/3OREB, T. Jerome/6PTS/9ASST, J. Champagnie/9PTS/3-5 3PT, Austin Reaves/12PTS/4-14FG",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+    },
+    {
+      "text": "Trigger: big-win",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+    },
+    {
+      "text": "Franchise stability: growing",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+    },
+    {
+      "text": "Oaks — game-result (early-season), C115: The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+    },
+    {
+      "text": "Record 7-1 · streak W3",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+    },
+    {
+      "text": "Stats (feed): Adash Stanley/24PTS/5REB/8ASST/0TO/9-18FG/6-12 3PT, AJ Dybantsa/23PTS/5REB/4ASST/11-13FG, Dillon Brooks/23PTS/4REB/3ASST/10-14FG/3-5 3PT, Austin Reaves/15PTS/7ASST/5-10 3PT, Wendell Carter Jr/12PTS/5REB/6-10FG, T. Jerome/9PTS/7ASST, Harry Hayward/5PTS/2STL/1BLK in 16 minutes",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+    },
+    {
+      "text": "Trigger: big-win",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+    },
+    {
+      "text": "Franchise stability: growing",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+    },
+    {
+      "text": "Oaks — player-feature (early-season), C115: Second-round rookie Harry Hayward scores a career high and makes his case for a bigger role",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+    },
+    {
+      "text": "Record 8-1 · streak W4",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+    },
+    {
+      "text": "Stats (feed): Harry Hayward PHI/19PTS/7REB/2BLK/9-15FG in 22 minutes, Harry Hayward ORL/5PTS/2STL/1BLK in 16 minutes, Harry Hayward OKC/4PTS/1STL/2-3FG in 13 minutes, Harry Hayward TOR/8PTS/5REB/3ASST in 23 minutes, Harry Hayward IND/8PTS/3-4FG in 13 minutes, Harry Hayward NYK/10PTS/10REB, Harry Hayward DET/12PTS, Harry Hayward/$4.5M",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+    },
+    {
+      "text": "Franchise stability: growing",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "Oaks — game-result C115 · 8-1 · W4 — the second club's board read",
+    "hookLine": "Down two after three in Philadelphia, the Oaks drop 40 in the fourth and Hayward scores a career high. Oaks 120 - 76ers 106",
+    "anchorFacts": [
+      "Oaks — game-result (early-season), C115: Down two after three in Philadelphia, the Oaks drop 40 in the fourth and Hayward scores a career high. Oaks 120 - 76ers 106",
+      "Record 8-1 · streak W4",
+      "Stats (feed): AJ Dybantsa/25PTS/6REB/10-16FG/3-3 3PT, Adash Stanley/23PTS/7ASST/8-13FG/5-7 3PT, Harry Hayward/19PTS/7REB/2BLK/9-15FG in 22 minutes, Wendell Carter Jr/12PTS/15REB/3OREB, T. Jerome/6PTS/9ASST, J. Champagnie/9PTS/3-5 3PT, Austin Reaves/12PTS/4-14FG",
+      "Trigger: big-win",
+      "Franchise stability: growing",
+      "Oaks — game-result (early-season), C115: The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+      "Record 7-1 · streak W3",
+      "Stats (feed): Adash Stanley/24PTS/5REB/8ASST/0TO/9-18FG/6-12 3PT, AJ Dybantsa/23PTS/5REB/4ASST/11-13FG, Dillon Brooks/23PTS/4REB/3ASST/10-14FG/3-5 3PT, Austin Reaves/15PTS/7ASST/5-10 3PT, Wendell Carter Jr/12PTS/5REB/6-10FG, T. Jerome/9PTS/7ASST, Harry Hayward/5PTS/2STL/1BLK in 16 minutes",
+      "Trigger: big-win",
+      "Franchise stability: growing",
+      "Oaks — player-feature (early-season), C115: Second-round rookie Harry Hayward scores a career high and makes his case for a bigger role",
+      "Record 8-1 · streak W4",
+      "Stats (feed): Harry Hayward PHI/19PTS/7REB/2BLK/9-15FG in 22 minutes, Harry Hayward ORL/5PTS/2STL/1BLK in 16 minutes, Harry Hayward OKC/4PTS/1STL/2-3FG in 13 minutes, Harry Hayward TOR/8PTS/5REB/3ASST in 23 minutes, Harry Hayward IND/8PTS/3-4FG in 13 minutes, Harry Hayward NYK/10PTS/10REB, Harry Hayward DET/12PTS, Harry Hayward/$4.5M",
+      "Franchise stability: growing"
+    ],
+    "evidence": [
+      {
+        "text": "Oaks — game-result (early-season), C115: Down two after three in Philadelphia, the Oaks drop 40 in the fourth and Hayward scores a career high. Oaks 120 - 76ers 106",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+      },
+      {
+        "text": "Record 8-1 · streak W4",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+      },
+      {
+        "text": "Stats (feed): AJ Dybantsa/25PTS/6REB/10-16FG/3-3 3PT, Adash Stanley/23PTS/7ASST/8-13FG/5-7 3PT, Harry Hayward/19PTS/7REB/2BLK/9-15FG in 22 minutes, Wendell Carter Jr/12PTS/15REB/3OREB, T. Jerome/6PTS/9ASST, J. Champagnie/9PTS/3-5 3PT, Austin Reaves/12PTS/4-14FG",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+      },
+      {
+        "text": "Trigger: big-win",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+      },
+      {
+        "text": "Franchise stability: growing",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+      },
+      {
+        "text": "Oaks — game-result (early-season), C115: The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+      },
+      {
+        "text": "Record 7-1 · streak W3",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+      },
+      {
+        "text": "Stats (feed): Adash Stanley/24PTS/5REB/8ASST/0TO/9-18FG/6-12 3PT, AJ Dybantsa/23PTS/5REB/4ASST/11-13FG, Dillon Brooks/23PTS/4REB/3ASST/10-14FG/3-5 3PT, Austin Reaves/15PTS/7ASST/5-10 3PT, Wendell Carter Jr/12PTS/5REB/6-10FG, T. Jerome/9PTS/7ASST, Harry Hayward/5PTS/2STL/1BLK in 16 minutes",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+      },
+      {
+        "text": "Trigger: big-win",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+      },
+      {
+        "text": "Franchise stability: growing",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+      },
+      {
+        "text": "Oaks — player-feature (early-season), C115: Second-round rookie Harry Hayward scores a career high and makes his case for a bigger role",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+      },
+      {
+        "text": "Record 8-1 · streak W4",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+      },
+      {
+        "text": "Stats (feed): Harry Hayward PHI/19PTS/7REB/2BLK/9-15FG in 22 minutes, Harry Hayward ORL/5PTS/2STL/1BLK in 16 minutes, Harry Hayward OKC/4PTS/1STL/2-3FG in 13 minutes, Harry Hayward TOR/8PTS/5REB/3ASST in 23 minutes, Harry Hayward IND/8PTS/3-4FG in 13 minutes, Harry Hayward NYK/10PTS/10REB, Harry Hayward DET/12PTS, Harry Hayward/$4.5M",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+      },
+      {
+        "text": "Franchise stability: growing",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": null,
+    "hooks": [],
+    "note": null,
+    "pageVoices": [],
+    "roomIsYours": "the near-empty press row, the bullpen chatter, what the manager says when the record is ugly, the drumbeat of a losing streak"
+  },
+  "feedRows": 18,
+  "currentCycleRows": 3,
+  "pointers": [
+    "output/beats/Oakland_Sports_Feed.jsonl @C115"
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "cycle": 115,
+  "moveCycle": 114,
+  "work": {
+    "INIT-010": [
+      "MV-114-civic-office-council-d1-2026-11-02",
+      "MV-114-civic-office-council-d1-2026-11-05"
+    ],
+    "INIT-002": [
+      "MV-114-civic-office-council-d5-2026-11-03",
+      "MV-114-proj-oari-2026-11-04"
+    ],
+    "INIT-006": [
+      "MV-114-civic-office-council-d2-2026-11-03",
+      "MV-114-proj-baylight-2026-11-05"
+    ],
+    "INIT-001": [
+      "MV-114-proj-stabilization-fund-2026-11-04"
+    ],
+    "INIT-005": [
+      "MV-114-proj-health-center-2026-11-05"
+    ],
+    "INIT-003": [
+      "MV-114-proj-transit-hub-2026-11-05"
+    ]
+  },
+  "candidates": [
+    "MV-114-civic-office-council-d9-2026-11-05"
+  ],
+  "foldedAt": "2026-11-09T07:26:52.435Z",
+  "callVotes": {
+    "INIT-014": "MV-114-civic-office-mayor-2026-11-02"
+  }
+}

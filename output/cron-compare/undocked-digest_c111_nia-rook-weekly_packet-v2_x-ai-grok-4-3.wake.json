@@ -1,0 +1,58 @@
+{
+  "mode": "wake-write",
+  "desk": "undocked-digest",
+  "cycle": "111",
+  "provider": "openrouter",
+  "model": "x-ai/grok-4.3",
+  "configuredWriterModel": "x-ai/grok-4.3",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "nia-rook-weekly",
+  "byline": {
+    "name": "Nia Rook",
+    "popid": "POP-01076",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 1,
+  "quotesLanded": 3,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [],
+  "toolCalls": 0,
+  "wordCount": 353,
+  "targetWords": "350-650",
+  "capHit": 0,
+  "checkFlags": [],
+  "engineTerms": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": false,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 350",
+    "words": 353,
+    "short": "The closing fails to set up who the city watches next.",
+    "score": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "007ae9b6443b31ce5edf1b18c903a98544f56250f321d9b8001a20fe1e6b88aa",
+    "costUsd": 0.0012
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/4 — The closing fails to set up who the city watches next."
+  },
+  "article": "output/cron-compare/staged/undocked-digest_c111_nia-rook-weekly_packet-v2_x-ai-grok-4-3.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "th/.env' }\n{\n  \"popId\": \"POP-01076\",\n  \"name\": \"Nia Rook\",\n  \"recorded\": true,\n  \"text\": \"filed: A watch-party crowd gathered around a screen in an unnamed break room near the Fruitvale Transit Hub\"\n}"
+  },
+  "ranAt": "2026-10-17T15:15:55.707Z",
+  "dispositionReconciledAt": "2026-10-17T17:00:03.205Z"
+}

@@ -1,0 +1,90 @@
+{
+  "artifactClass": "NLM_DAILY_RUN",
+  "sourceVersion": "2.0",
+  "canonStatus": "NOT_CANON",
+  "cycle": 115,
+  "generatedAt": "2026-11-10T08:21:44.588Z",
+  "lastAttemptAt": "2026-11-10T08:21:44.588Z",
+  "hours": 36,
+  "packHash": "05b38932066d04545ac472e8b321283fd50501e5b46904684ba7a57bc4463937",
+  "worldSummary": "output/world_summary_c115.md",
+  "citizenDigest": "output/citizen-day-digest.md",
+  "reports": [
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/business_c115_business-desk_packet-v2_anthropic-claude-opus-5-5.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/civic_c115_carmen-delaine_packet-v2_anthropic-claude-sonnet-5-5.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/civic_c115_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/civic_c115_trevor-shimizu_packet-v2_anthropic-claude-sonnet-5-5.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/culture_c114_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5.staged-1815.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/lore_c114_lore-c114-john-ellis-deep-dive.staged.md"
+    }
+  ],
+  "flaggedReports": [],
+  "editionDay": false,
+  "firstMorning": false,
+  "routingShadow": {
+    "version": "NLM-DAILY-ROUTER/1",
+    "mode": "shadow",
+    "profile": "REPORTED_DAY",
+    "format": "deep_dive",
+    "length": "default",
+    "activationEligible": true,
+    "reportedDayThreshold": 1,
+    "sourceClasses": [
+      "WORLD_STATE",
+      "CITIZEN_DIGEST",
+      "W1_CHASE",
+      "W2_QUOTES",
+      "W3_PASSED"
+    ],
+    "reasonCodes": [
+      "RHEA_PASSED_5",
+      "REPORTED_THRESHOLD_MET_1"
+    ],
+    "dispositionCounts": {
+      "passed": 5,
+      "rheaFlagged": 0,
+      "neverGated": 0
+    },
+    "fingerprint": "7e0123ce3ab2faa1cd40d0ce96a8ed2f29153c09fd267193603f408aa222d4a9"
+  },
+  "newsroomPulse": {
+    "fingerprint": "01f2ae9c1ac5bbbed52dd8bfae743d101fa2dbb39b0537ae13a5df65714ac559",
+    "counts": {
+      "angles": 6,
+      "asks": 4,
+      "fanoutAssignments": 6,
+      "w2Ready": 3,
+      "quotes": 9,
+      "passed": 5,
+      "rheaFlagged": 0,
+      "neverGated": 0,
+      "flagged": 0,
+      "pending": 1
+    },
+    "priorCompletedCycle": null
+  },
+  "archiveNotebookId": "417e2d29-4167-420f-a9cc-76fb6b2b7de2",
+  "newsroomNotebookId": "73cd50b5-4b8f-4329-bb42-0783c8d93763",
+  "dryRun": true
+}

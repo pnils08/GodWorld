@@ -1,0 +1,66 @@
+{
+  "draft": "output/cron-compare/culture_c113_tamsin-pruitt_packet-v2_x-ai-grok-4-3.md",
+  "cycle": "113",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "d69f3ed68b033a33ec6f2af700c8c56a86bdb171eb256582661f03660945512c",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All citizen bios, lifecycle events, and quotes match ground truth records and interview logs verbatim.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "tamsin-lives-v1",
+    "packageVersion": "TAMSIN-LIVES-1",
+    "manifestId": "AM-13464f5cbb3e",
+    "lexicalObservations": [],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Alicia Hernandez",
+      "Manfred Owens",
+      "Maren Johns"
+    ],
+    "unverified": [
+      "Mandela Parkway"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0112,
+  "durationMs": 10684,
+  "parseError": false,
+  "ranAt": "2026-10-26T23:20:18.957Z",
+  "contractScore": {
+    "opened": true,
+    "closed": false,
+    "purposeMet": true,
+    "inTarget": false,
+    "inTargetBy": "code floor 450",
+    "words": 270,
+    "short": "The piece falls short of the 450-word minimum target and ends with a multi-person roundup rather than concluding on the final person's passage.",
+    "score": 2,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "d69f3ed68b033a33ec6f2af700c8c56a86bdb171eb256582661f03660945512c",
+    "costUsd": 0.0012
+  }
+}

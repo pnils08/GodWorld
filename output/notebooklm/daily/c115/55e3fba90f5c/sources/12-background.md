@@ -1,0 +1,5 @@
+# Earlier in the Tribune: undocked_c115_nia-rook_packet-v2_openai-gpt-6-luna.staged.md
+
+Six Cycles ago, in Cycle 109, Bay Tribune reporter Nia Rook documented Rockridge residents staying up after an UNDOCKED broadcast, with sidewalks and shared living-room screens illuminated by the afterglow of pilot Otis Redd’s 143-credit swing, which sparked neighborhood debates over who held the competitive edge and for how long.
+
+One Cycle ago, in Cycle 114, municipal business ledgers tracked construction activity across West Oakland, listing electrician Elijah Brown among the active trades workforce at Mariner Construction. That same cycle, Nia Rook reported on the televised UNDOCKED board, where janitor Luis Taz delivered two contrasting flights: a twelve-combat Sunday run followed by a Wednesday mining route extracting copper ore, iron ore, and antimatter containment cells, both concluding even on credits. Taz explained that the alertness demanded by his daily work helped him stay focused through unpredictable flight routes, while Rook observed that the leaderboard remained an open question heading into the next cycle of competition.

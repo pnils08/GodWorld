@@ -1,0 +1,295 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-01211",
+    "name": "Ines Sorensen",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Voices, 2026-10-23: Marcus Wright in their own words",
+    "approach": "Voices approach: this slice is what citizens wrote on their own pages — verbatim, attributed, the day it happened. The person's own line first, before their name; then who they are in one plain clause; then what in the city they were answering, from the page's own tags. Fewer, longer passages; the words are the product. Never a count, never a statistic, never an explanation of what they meant. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "voices",
+      "hood": "West Oakland",
+      "facts": [
+        "“Honest? It's the quiet that gets me. I can't switch off because I keep thinking about the folks around here who are barely holding on — and me, I'm lucky, I've got savings and a roof. But that funding moving so slow, and Nightline Station going quiet when it shouldn't be... it feels like the ground's shifting under everyone, and nobody's saying why. I'm not one to complain, but I'd be lying if I said I didn't lie awake wondering if we're all gonna be okay. Family's gone, so this neighborhood's what I've got left to look after.” — Marcus Wright, Server, West Oakland (own page, the night page, C112)"
+      ],
+      "priorCycle": null,
+      "note": null,
+      "engineHooks": [],
+      "roomIsYours": "where they were standing when they wrote it, the one plain clause that says who this is, the silence after their last line — never a word inside the quotation marks that is not on the page",
+      "pageVoices": [
+        "“Honest? It's the quiet that gets me. I can't switch off because I keep thinking about the folks around here who are barely holding on — and me, I'm lucky, I've got savings and a roof. But that funding moving so slow, and Nightline Station going quiet when it shouldn't be... it feels like the ground's shifting under ev"
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-voices",
+    "hood": "West Oakland",
+    "src": "output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-23",
+    "plan": {
+      "focus": "Marcus Wright's statement about the quiet in West Oakland and its relation to the funding and Nightline Station",
+      "closeQuestion": "How is the slow funding affecting Nightline Station and the community in West Oakland?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00288",
+        "name": "Marcus Wright",
+        "profile": "Marcus Wright — Server — West Oakland",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00288-8ec296ffc0",
+        "pop": "POP-00288",
+        "name": "Marcus Wright",
+        "quote": "It's the quiet that gets me. I'm worried about the folks around here who are barely holding on. The funding moving so slow and Nightline Station going quiet when it shouldn't be... it feels like the ground's shifting under everyone.",
+        "factIds": [
+          "F-4f0f1d2dcf24",
+          "F-ea9660849c92"
+        ],
+        "src": "packet.W2[POP-00288]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Ines Sorensen",
+        "text": "The slow funding might be affecting Nightline Station's operations",
+        "usable": false
+      },
+      {
+        "from": "Ines Sorensen",
+        "text": "Marcus Wright's concerns could be reflective of a broader community issue",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C112",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-7cd6ffd2aeb3"
+    },
+    {
+      "t": "FACT",
+      "text": "Marcus Wright in their own words",
+      "src": "output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-23",
+      "id": "F-9fc4b90fe9ce"
+    },
+    {
+      "t": "FACT",
+      "text": "Open on Marcus Wright's own line, verbatim. Their words are the piece; yours are the frame.",
+      "src": "output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-23",
+      "id": "F-2137d240968f"
+    },
+    {
+      "t": "FACT",
+      "text": "“Honest? It's the quiet that gets me. I can't switch off because I keep thinking about the folks around here who are barely holding on — and me, I'm lucky, I've got savings and a roof. But that funding moving so slow, and Nightline Station going quiet when it shouldn't be... it feels like the ground's shifting under everyone, and nobody's saying why. I'm not one to complain, but I'd be lying if I said I didn't lie awake wondering if we're all gonna be okay. Family's gone, so this neighborhood's",
+      "src": "output/citizen_pages/index.jsonl cp-POP-00288-c112-night",
+      "id": "F-4f0f1d2dcf24"
+    },
+    {
+      "t": "FACT",
+      "text": "Marcus Wright — Server — West Oakland",
+      "src": "Simulation_Ledger profile for POP-00288",
+      "id": "F-ea9660849c92"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "ines-voices-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Carry what citizens wrote on their own pages into the paper, verbatim and attributed, the day it happened — the line first, then the name, the city only as the frame. Up to four people and one conversation; nothing paraphrased, nothing added.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "a call-in host's ear — the person's own words first, the frame short and plain",
+      "targetWords": "300-600",
+      "opening": "a citizen's own line, verbatim, before their name",
+      "closing": "the last person's own words, left standing — no summary of what the voices add up to"
+    },
+    "authorizedTexture": [
+      "the frame around a quote — who the person is as the ledger line says, where they live, what the page was about",
+      "the order of the voices and the cut between them",
+      "naming that Lives carried the person's event this week, when the slice says so",
+      "the plain respect of letting a line stand without comment"
+    ],
+    "textureConditions": [
+      "every quote is verbatim from the supplied page excerpt; ellipses only for cuts, never for additions",
+      "every person, neighborhood, role and employer must come from the slice",
+      "a day with two pages is written as two passages, not stretched",
+      "no second-hand voice — no 'neighbors say', no composite"
+    ],
+    "canonBlockers": [
+      "any person, page, quote, venue or employer not on the slice",
+      "a paraphrased quote inside quotation marks, or words added to a quote",
+      "a statistic, rate or trend claim drawn from the voices",
+      "a journalist or masthead member quoted as a citizen",
+      "raw engine labels or decimals printed as public-facing evidence"
+    ]
+  },
+  "manifest": {
+    "id": "AM-ee1f3056f773",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-7cd6ffd2aeb3",
+        "t": "FACT",
+        "text": "Current cycle: C112",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-9fc4b90fe9ce",
+        "t": "FACT",
+        "text": "Marcus Wright in their own words",
+        "src": "output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-23"
+      },
+      {
+        "id": "F-2137d240968f",
+        "t": "FACT",
+        "text": "Open on Marcus Wright's own line, verbatim. Their words are the piece; yours are the frame.",
+        "src": "output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-23"
+      },
+      {
+        "id": "F-4f0f1d2dcf24",
+        "t": "FACT",
+        "text": "“Honest? It's the quiet that gets me. I can't switch off because I keep thinking about the folks around here who are barely holding on — and me, I'm lucky, I've got savings and a roof. But that funding moving so slow, and Nightline Station going quiet when it shouldn't be... it feels like the ground's shifting under everyone, and nobody's saying why. I'm not one to complain, but I'd be lying if I said I didn't lie awake wondering if we're all gonna be okay. Family's gone, so this neighborhood's",
+        "src": "output/citizen_pages/index.jsonl cp-POP-00288-c112-night"
+      },
+      {
+        "id": "F-ea9660849c92",
+        "t": "FACT",
+        "text": "Marcus Wright — Server — West Oakland",
+        "src": "Simulation_Ledger profile for POP-00288"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00288-8ec296ffc0",
+        "speakerId": "POP-00288",
+        "speakerName": "Marcus Wright",
+        "text": "It's the quiet that gets me. I'm worried about the folks around here who are barely holding on. The funding moving so slow and Nightline Station going quiet when it shouldn't be... it feels like the ground's shifting under everyone.",
+        "factIds": [
+          "F-4f0f1d2dcf24",
+          "F-ea9660849c92"
+        ],
+        "src": "packet.W2[POP-00288]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00288",
+        "name": "Marcus Wright",
+        "profile": "Marcus Wright — Server — West Oakland",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Ines Sorensen",
+        "text": "The slow funding might be affecting Nightline Station's operations",
+        "publishable": false
+      },
+      {
+        "from": "Ines Sorensen",
+        "text": "Marcus Wright's concerns could be reflective of a broader community issue",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "the frame around a quote — who the person is as the ledger line says, where they live, what the page was about",
+      "the order of the voices and the cut between them",
+      "naming that Lives carried the person's event this week, when the slice says so",
+      "the plain respect of letting a line stand without comment"
+    ],
+    "textureConditions": [
+      "every quote is verbatim from the supplied page excerpt; ellipses only for cuts, never for additions",
+      "every person, neighborhood, role and employer must come from the slice",
+      "a day with two pages is written as two passages, not stretched",
+      "no second-hand voice — no 'neighbors say', no composite"
+    ],
+    "forbiddenClaimClasses": [
+      "any person, page, quote, venue or employer not on the slice",
+      "a paraphrased quote inside quotation marks, or words added to a quote",
+      "a statistic, rate or trend claim drawn from the voices",
+      "a journalist or masthead member quoted as a citizen",
+      "raw engine labels or decimals printed as public-facing evidence"
+    ]
+  }
+}

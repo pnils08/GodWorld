@@ -1,0 +1,307 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00014",
+    "name": "Tanya Cruz",
+    "role": "desk reporter",
+    "desk": "sports"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Five starters and one Carmen Mesa. Who is the odd arm out?",
+    "approach": "Sideline approach (Tanya Cruz): you file from the clubhouse. That SET is yours — the Packet will never list a clubhouse event. Paint what the supplied sports line predicts. Packet player quotes and numbers only. New in-world spots go on INTAKE BIZ. No real-world Oakland venues. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview. The feed notes report what people said in paraphrase; none of it is a quote — never put it in quotation marks or attribute it as speech.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "sideline-dispatch",
+      "pulseClass": "record-only-sideline",
+      "bagModes": [
+        "10 Inference Close"
+      ],
+      "claim": "The supplied sports record is the weather. The clubhouse SET is allotted hallucination fitted to that line.",
+      "anchorFacts": [
+        "Five starters and one Carmen Mesa. Who is the odd arm out?",
+        "Pablo Almanzar took the rotation spot most expected Carmen Mesa to fill, then threw a no-hitter in his debut and a 1-hitter to close the ALCS. That leaves the rotation full with Coles, Ramos, Rivas, Ellis and Almanzar. Mesa sits at AAA on a $780K deal with nowhere to start in Oakland. Henry Rivas is the most expensive arm at $28. 2M and missed time this season before his complete game in World Series game 4.",
+        "Is Mesa the A's best trade chip this winter, and how long does the front office keep paying top dollar for Rivas while the cheap arms win?"
+      ],
+      "accessEvidence": {
+        "state": "ALLOTTED",
+        "facts": [
+          "clubhouse/sideline SET is the reporter's room"
+        ]
+      },
+      "quoteEvidence": {
+        "state": "NOT_SUPPLIED",
+        "quotes": []
+      },
+      "observationEvidence": {
+        "state": "ALLOTTED",
+        "facts": []
+      },
+      "missing": [
+        "Packet player quotes",
+        "injury or team-response facts beyond the supplied record"
+      ],
+      "sceneRule": "Clubhouse SET is authorized. Invented player quotes and real-world venues are not.",
+      "sourcePointers": [
+        "output/world_summary_c114.md ## Sports",
+        "docs/media/TANYA_SIDELINE_BAG.md"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "sideline-signal",
+    "hood": "Dimond",
+    "src": "world_summary_c114.md ## Sports",
+    "plan": {
+      "focus": "The gap between what the rotation costs and what it produces, and where Carmen Mesa fits in a full house.",
+      "closeQuestion": "How long does a team keep paying for a name when the kids are the ones who win?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-01078",
+        "name": "Pablo Almanzar",
+        "profile": "Pablo Almanzar — SP / Oakland A's",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-01078-43041c1b2e",
+        "pop": "POP-01078",
+        "name": "Pablo Almanzar",
+        "quote": "Look, I know the story — everyone knows the story. I got the spot people thought Carmen would get, and then I went out and threw the games of my life. But in here, nobody treats it like I stole something. The guys in the clubhouse, they just want to win. When I came back in after that no-hitter, the first thing Desmond said to me wasn't about the box score — it was about how we're going to dinner at his mom's place in the Dimond on the off day. That's how it works. Carmen's a pro, he's been around, and he knows this game is weird. The front office will figure out the roster. My job is to keep throwing strikes and not get ahead of myself. The day I start thinking I'm bigger than the name on the front of the jersey is the day I lose it.",
+        "factIds": [
+          "F-788b5caab458",
+          "F-04594a6d25c5"
+        ],
+        "src": "packet.W2[POP-01078]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Pablo Almanzar",
+        "text": "I've heard some talk around the neighborhood about whether the A's might move one of the older arms to make room for the kids, but that's front office business, not mine.",
+        "usable": false
+      },
+      {
+        "from": "Tanya Cruz",
+        "text": "The clubhouse lights stay low in the offseason and the usual chatter is thinner than in season",
+        "usable": false
+      },
+      {
+        "from": "Tanya Cruz",
+        "text": "Coaches may linger near some stalls and not others, but that's observation, not fact",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C114",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-4261fa115617"
+    },
+    {
+      "t": "FACT",
+      "text": "Five starters and one Carmen Mesa. Who is the odd arm out?",
+      "src": "world_summary_c114.md ## Sports",
+      "id": "F-04594a6d25c5"
+    },
+    {
+      "t": "FACT",
+      "text": "Pablo Almanzar took the rotation spot most expected Carmen Mesa to fill, then threw a no-hitter in his debut and a 1-hitter to close the ALCS. That leaves the rotation full with Coles, Ramos, Rivas, Ellis and Almanzar. Mesa sits at AAA on a $780K deal with nowhere to start in Oakland. Henry Rivas is the most expensive arm at $28. 2M and missed time this season before his complete game in World Series game 4.",
+      "src": "world_summary_c114.md ## Sports",
+      "id": "F-788b5caab458"
+    },
+    {
+      "t": "FACT",
+      "text": "Is Mesa the A's best trade chip this winter, and how long does the front office keep paying top dollar for Rivas while the cheap arms win?",
+      "src": "world_summary_c114.md ## Sports",
+      "id": "F-5ab076c8ddeb"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C10, Spring, holiday=none",
+      "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+      "id": "F-9b9470803821"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "tanya-sideline-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "File a short sideline dispatch from the clubhouse SET. Packet owns player quotes and numbers. The room itself is allotted hallucination.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "short first-person sideline interpretation",
+      "targetWords": "evidence-bounded",
+      "opening": "one supplied sports fact",
+      "closing": "the access or observation still needed"
+    },
+    "authorizedTexture": [
+      "first-person clubhouse/sideline SET that does not invent a player quote, statistic, or real-world venue",
+      "room mood and presence as allotted hallucination fitted to the supplied sports line"
+    ],
+    "textureConditions": [
+      "player quotes, statistics, injuries, and results require Packet support",
+      "in-world clubhouse SET and named spots that are not real Oakland are allotted hallucination and belong on INTAKE BIZ if newly named",
+      "an unresolved feed subject may not receive a POPID, role, biography, quote, or interview"
+    ],
+    "canonBlockers": [
+      "invented player quotes, invented statistics, invented injuries, or real-world Oakland venues",
+      "an invented or altered Packet person, quote, statistic, result, or roster move",
+      "an unresolved feed spelling silently assigned an identity or role"
+    ]
+  },
+  "manifest": {
+    "id": "AM-fc730260adb4",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-4261fa115617",
+        "t": "FACT",
+        "text": "Current cycle: C114",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-04594a6d25c5",
+        "t": "FACT",
+        "text": "Five starters and one Carmen Mesa. Who is the odd arm out?",
+        "src": "world_summary_c114.md ## Sports"
+      },
+      {
+        "id": "F-788b5caab458",
+        "t": "FACT",
+        "text": "Pablo Almanzar took the rotation spot most expected Carmen Mesa to fill, then threw a no-hitter in his debut and a 1-hitter to close the ALCS. That leaves the rotation full with Coles, Ramos, Rivas, Ellis and Almanzar. Mesa sits at AAA on a $780K deal with nowhere to start in Oakland. Henry Rivas is the most expensive arm at $28. 2M and missed time this season before his complete game in World Series game 4.",
+        "src": "world_summary_c114.md ## Sports"
+      },
+      {
+        "id": "F-5ab076c8ddeb",
+        "t": "FACT",
+        "text": "Is Mesa the A's best trade chip this winter, and how long does the front office keep paying top dollar for Rivas while the cheap arms win?",
+        "src": "world_summary_c114.md ## Sports"
+      },
+      {
+        "id": "F-9b9470803821",
+        "t": "FACT",
+        "text": "Calendar: Y3C10, Spring, holiday=none",
+        "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-01078-43041c1b2e",
+        "speakerId": "POP-01078",
+        "speakerName": "Pablo Almanzar",
+        "text": "Look, I know the story — everyone knows the story. I got the spot people thought Carmen would get, and then I went out and threw the games of my life. But in here, nobody treats it like I stole something. The guys in the clubhouse, they just want to win. When I came back in after that no-hitter, the first thing Desmond said to me wasn't about the box score — it was about how we're going to dinner at his mom's place in the Dimond on the off day. That's how it works. Carmen's a pro, he's been around, and he knows this game is weird. The front office will figure out the roster. My job is to keep throwing strikes and not get ahead of myself. The day I start thinking I'm bigger than the name on the front of the jersey is the day I lose it.",
+        "factIds": [
+          "F-788b5caab458",
+          "F-04594a6d25c5"
+        ],
+        "src": "packet.W2[POP-01078]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-01078",
+        "name": "Pablo Almanzar",
+        "profile": "Pablo Almanzar — SP / Oakland A's",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Pablo Almanzar",
+        "text": "I've heard some talk around the neighborhood about whether the A's might move one of the older arms to make room for the kids, but that's front office business, not mine.",
+        "publishable": false
+      },
+      {
+        "from": "Tanya Cruz",
+        "text": "The clubhouse lights stay low in the offseason and the usual chatter is thinner than in season",
+        "publishable": false
+      },
+      {
+        "from": "Tanya Cruz",
+        "text": "Coaches may linger near some stalls and not others, but that's observation, not fact",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "first-person clubhouse/sideline SET that does not invent a player quote, statistic, or real-world venue",
+      "room mood and presence as allotted hallucination fitted to the supplied sports line"
+    ],
+    "textureConditions": [
+      "player quotes, statistics, injuries, and results require Packet support",
+      "in-world clubhouse SET and named spots that are not real Oakland are allotted hallucination and belong on INTAKE BIZ if newly named",
+      "an unresolved feed subject may not receive a POPID, role, biography, quote, or interview"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

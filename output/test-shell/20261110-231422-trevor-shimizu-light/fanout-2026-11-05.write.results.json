@@ -1,0 +1,223 @@
+{
+  "date": "2026-11-05",
+  "stage": "write",
+  "results": [
+    {
+      "name": "Elliot Graye",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 3,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 953,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Simon Leary",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 443,
+        "contractScore": 2
+      }
+    },
+    {
+      "name": "Hal Richmond",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 6,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 951,
+        "contractScore": 3
+      }
+    },
+    {
+      "name": "Talia Finch",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 531,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Tamsin Pruitt",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 6,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [
+          {
+            "text": "Lena Cross moved into a place of their own in Piedmont Ave, renting",
+            "run": "lena cross place own piedmont ave renting"
+          },
+          {
+            "text": "Lena Cross — in their life, C113: disagreed with a Tribune column out loud to an empty kitchen",
+            "run": "disagreed with a tribune column out"
+          },
+          {
+            "text": "Lena Cross — in their life, C113: argued over dinner about which of the Baylight job postings were worth applying for",
+            "run": "argued over dinner about which of"
+          },
+          {
+            "text": "Lena Cross — in their life, C114: felt the creative energy of First Friday",
+            "run": "felt the creative energy of first"
+          },
+          {
+            "text": "Darius Cike — in their life, C113: the crack of a bat echoes from a nearby screen, drawing a small crowd of pedestrians to pause",
+            "run": "c113 the crack of a bat"
+          },
+          {
+            "text": "Darius Cike — in their life, C114: badged into the Baylight office early and tried not to think about the protestors from last month near a new-construction cor",
+            "run": "not to think about the protestors"
+          },
+          {
+            "text": "Tanisha Freeman — in their life, C113: a flyer for a seniors lunch program flutters on a community bulletin board",
+            "run": "c113 a flyer for a seniors"
+          },
+          {
+            "text": "Tanisha Freeman — in their life, C114: showed up to set up the chairs in the fellowship hall because if they didn't do it, no one would",
+            "run": "showed up to set up the"
+          },
+          {
+            "text": "Drago Helio — in their life, C113: heard the freight trains clanking near the Port and timed their breathing to the rhythm",
+            "run": "heard the freight trains clanking near"
+          },
+          {
+            "text": "Drago Helio — in their life, C114: watched a parish priest fly UNDOCKED and the whole block had a stake in it by the second mission near a front porch",
+            "run": "watched a parish priest fly undocked"
+          },
+          {
+            "text": "Henry Rivas — in their life, C113: argued about the best tamale cart on International Boulevard and refused to back down",
+            "run": "argued about the best tamale cart"
+          },
+          {
+            "text": "Henry Rivas — in their life, C114: found a quiet minute at a local pop-up and a sense of anticipation hangs in the air",
+            "run": "found a quiet minute at a"
+          },
+          {
+            "text": "Marco Fabregas — came home for the weekend and noticed the house felt smaller, Laurel (C114 — what happened in their life, not words they said)",
+            "run": "and noticed the house felt smaller"
+          },
+          {
+            "text": "Marco Fabregas — in their life, C113: did a radio interview",
+            "run": "c113 did radio interview"
+          },
+          {
+            "text": "Marco Fabregas — in their life, C114: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+            "run": "read the flyer for the oakland"
+          },
+          {
+            "text": "Marco Fabregas — in their life, C114: found a quiet minute at a small park and felt the season starting to turn",
+            "run": "found a quiet minute at a"
+          },
+          {
+            "text": "Elias Varek — in their life, C114: noticed the new streetlights went in before anyone had to ask",
+            "run": "the new streetlights went in before"
+          },
+          {
+            "text": "Elias Varek — in their life, C114: heard the freight trains clanking near the Port and timed their breathing to the rhythm",
+            "run": "heard the freight trains clanking near"
+          },
+          {
+            "text": "Elias Varek — in their life, C114: pulling in — the line's standing is near the bar",
+            "run": "the lines standing is near the"
+          },
+          {
+            "text": "Isley Kelley — in their life, C113: caught the recap of last night's game at the counter and stayed for the second retelling",
+            "run": "nights game at the counter and"
+          },
+          {
+            "text": "Isley Kelley — in their life, C114: fielded a round of texts from people who hadn't called in years",
+            "run": "from people who hadnt called in"
+          },
+          {
+            "text": "Isley Kelley — in their life, C114: felt quietly proud of how they handled something small",
+            "run": "felt quietly proud of how they"
+          },
+          {
+            "text": "Isley Kelley — in their life, C114: looked up how something works and came away more amazed, not less",
+            "run": "looked up how something works and"
+          },
+          {
+            "text": "Benji Dillon — in their life, C114: got recognized twice at the grocery store after the story ran",
+            "run": "recognized twice at the grocery store"
+          },
+          {
+            "text": "Benji Dillon — in their life, C114: the kids could say Father Miguel before they could say the mayor's name",
+            "run": "the kids could say father miguel"
+          },
+          {
+            "text": "Benji Dillon — in their life, C114: felt quietly proud of how they handled something small",
+            "run": "felt quietly proud of how they"
+          },
+          {
+            "text": "Benji Dillon — in their life, C114: drove the church van for the senior trip and listened to three hours of unfiltered neighborhood gossip near a cafe on the av",
+            "run": "three hours of unfiltered neighborhood gossip"
+          }
+        ],
+        "words": 1328,
+        "contractScore": 3
+      }
+    },
+    {
+      "name": "Ines Sorensen",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 348,
+        "contractScore": 3
+      }
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 5,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 379,
+        "contractScore": 4
+      }
+    }
+  ],
+  "checkTotals": {
+    "seats": 7,
+    "toolSeats": 4,
+    "capHits": 0,
+    "thin": 0,
+    "verbatim": 1,
+    "graded": 7,
+    "gradeSum": 23
+  },
+  "ranAt": "2026-11-06T00:22:33.942Z"
+}

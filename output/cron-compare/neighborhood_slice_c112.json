@@ -1,0 +1,282 @@
+{
+  "version": "HOOD-SLICE-3",
+  "empty": false,
+  "cycle": 112,
+  "kind": "beat-neighborhood",
+  "seat": {
+    "slug": "maria-keen",
+    "name": "Maria Keen",
+    "popid": "POP-00013",
+    "desk": "culture",
+    "domain": "neighborhood",
+    "builder": "buildNeighborhoodSlice.js"
+  },
+  "hood": "East Oakland",
+  "pulse": {
+    "className": "beat-neighborhood",
+    "score": 100,
+    "label": "East Oakland: 8 active programs on the record",
+    "hood": "East Oakland",
+    "source": "output/beats/Community_Programs.jsonl @C112"
+  },
+  "story": {
+    "kind": "beat-neighborhood",
+    "angle": "East Oakland — the programs that hold the block and the people who founded them",
+    "label": "East Oakland: 8 active programs on the record",
+    "hookLine": "8 active programs in East Oakland; Mark Aitken and Marcus Whitfield founded them.",
+    "hood": "East Oakland",
+    "citizens": [
+      "Mark Aitken (POP-00003)",
+      "Marcus Whitfield (POP-00532)"
+    ],
+    "popids": [
+      "POP-00003",
+      "POP-00532"
+    ],
+    "ref": "output/beats/Community_Programs.jsonl @C112",
+    "cycle": 112
+  },
+  "approach": "Neighborhood approach: this slice is one block's record — its community programs and their founders, who is moving in or out, who the block has in a hospital bed or in custody, what it paid on tax day, whose debts crossed the line, and the city's neighborhood hooks this cycle. First-person witness, one block one truth. The programs, founders, movement numbers, patients, defendants and money lines are real; the stoop conversations, the mailboxes, the dog everyone knows are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-00003",
+      "name": "Mark Aitken",
+      "role": "First Baseman, Oakland A's Legend — Player Rep, Community Liaison",
+      "neighborhood": "Jack London",
+      "business": null,
+      "profile": "Mark Aitken — First Baseman, Oakland A's Legend — Player Rep, Community Liaison — Jack London",
+      "why": "founded Mark Aitken Youth Baseball League (Community_Programs)"
+    },
+    {
+      "popid": "POP-00532",
+      "name": "Marcus Whitfield",
+      "role": "Youth Basketball Coach",
+      "neighborhood": "Fruitvale",
+      "business": null,
+      "profile": "Marcus Whitfield — Youth Basketball Coach — Fruitvale",
+      "why": "founded Eastside Hoopers Coalition (Community_Programs)"
+    }
+  ],
+  "facts": [
+    {
+      "text": "Mark Aitken Youth Baseball League (youth-sports), East Oakland — founded by Mark Aitken, since C101",
+      "src": "output/beats/Community_Programs.jsonl @C112 PRG-003"
+    },
+    {
+      "text": "Eastside Hoopers Coalition (youth-sports), East Oakland — founded by Marcus Whitfield, since C101",
+      "src": "output/beats/Community_Programs.jsonl @C112 PRG-005"
+    },
+    {
+      "text": "Coliseum District Vendor Incubator (economic), East Oakland, since C101",
+      "src": "output/beats/Community_Programs.jsonl @C112 PRG-009"
+    },
+    {
+      "text": "East Bay Harm Reduction Alliance (health), East Oakland, since C101",
+      "src": "output/beats/Community_Programs.jsonl @C112 PRG-014"
+    },
+    {
+      "text": "Foothill Baptist Tabernacle Food Pantry (mutual-aid), East Oakland, since C78",
+      "src": "output/beats/Community_Programs.jsonl @C112 PRG-022"
+    },
+    {
+      "text": "Foothill Baptist Tabernacle Seniors Lunch Program (health), East Oakland, since C78",
+      "src": "output/beats/Community_Programs.jsonl @C112 PRG-023"
+    },
+    {
+      "text": "East Oakland this cycle: 476 students, 1,535 adults, 327 seniors — moved vs C111: +2 students, +5 adults, +1 seniors",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C112 vs prev/"
+    },
+    {
+      "text": "East Oakland: 6 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl @C112 judicial East Oakland"
+    },
+    {
+      "text": "East Oakland: 123 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl @C112 hospital East Oakland"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "East Oakland — the programs that hold the block and the people who founded them",
+    "hookLine": "8 active programs in East Oakland; Mark Aitken and Marcus Whitfield founded them.",
+    "anchorFacts": [
+      "Mark Aitken Youth Baseball League (youth-sports), East Oakland — founded by Mark Aitken, since C101",
+      "Eastside Hoopers Coalition (youth-sports), East Oakland — founded by Marcus Whitfield, since C101",
+      "Coliseum District Vendor Incubator (economic), East Oakland, since C101",
+      "East Bay Harm Reduction Alliance (health), East Oakland, since C101",
+      "Foothill Baptist Tabernacle Food Pantry (mutual-aid), East Oakland, since C78",
+      "Foothill Baptist Tabernacle Seniors Lunch Program (health), East Oakland, since C78",
+      "East Oakland this cycle: 476 students, 1,535 adults, 327 seniors — moved vs C111: +2 students, +5 adults, +1 seniors",
+      "East Oakland: 6 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+      "East Oakland: 123 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked"
+    ],
+    "evidence": [
+      {
+        "text": "Mark Aitken Youth Baseball League (youth-sports), East Oakland — founded by Mark Aitken, since C101",
+        "src": "output/beats/Community_Programs.jsonl @C112 PRG-003"
+      },
+      {
+        "text": "Eastside Hoopers Coalition (youth-sports), East Oakland — founded by Marcus Whitfield, since C101",
+        "src": "output/beats/Community_Programs.jsonl @C112 PRG-005"
+      },
+      {
+        "text": "Coliseum District Vendor Incubator (economic), East Oakland, since C101",
+        "src": "output/beats/Community_Programs.jsonl @C112 PRG-009"
+      },
+      {
+        "text": "East Bay Harm Reduction Alliance (health), East Oakland, since C101",
+        "src": "output/beats/Community_Programs.jsonl @C112 PRG-014"
+      },
+      {
+        "text": "Foothill Baptist Tabernacle Food Pantry (mutual-aid), East Oakland, since C78",
+        "src": "output/beats/Community_Programs.jsonl @C112 PRG-022"
+      },
+      {
+        "text": "Foothill Baptist Tabernacle Seniors Lunch Program (health), East Oakland, since C78",
+        "src": "output/beats/Community_Programs.jsonl @C112 PRG-023"
+      },
+      {
+        "text": "East Oakland this cycle: 476 students, 1,535 adults, 327 seniors — moved vs C111: +2 students, +5 adults, +1 seniors",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C112 vs prev/"
+      },
+      {
+        "text": "East Oakland: 6 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl @C112 judicial East Oakland"
+      },
+      {
+        "text": "East Oakland: 123 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl @C112 hospital East Oakland"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": {
+      "state": "PRIOR_CYCLE_ON_DISK",
+      "vs": 111
+    },
+    "hooks": [
+      {
+        "text": "Household in Lake Merritt spending 53% of income on housing",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Lake Merritt",
+        "priority": 6
+      },
+      {
+        "text": "[Casino] the window paid — the week changed color",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Piedmont Ave",
+        "priority": 3
+      },
+      {
+        "text": "the debts crossed a line this week — sleep comes harder now",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Lake Merritt",
+        "priority": 3
+      },
+      {
+        "text": "defaulted on the debts — the savings are gone and the record carries it",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Fruitvale",
+        "priority": 3
+      },
+      {
+        "text": "defaulted on the debts — the savings are gone and the record carries it",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "West Oakland",
+        "priority": 3
+      },
+      {
+        "text": "Downtown boom sustained — momentum 10/10, the block everyone wants onto",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Downtown",
+        "priority": 7
+      },
+      {
+        "text": "Jack London boom sustained — momentum 10/10, the block everyone wants onto",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Jack London",
+        "priority": 7
+      },
+      {
+        "text": "Uptown boom sustained — momentum 10/10, the block everyone wants onto",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Uptown",
+        "priority": 7
+      }
+    ],
+    "note": null,
+    "pageVoices": [],
+    "roomIsYours": "the stoop, the corner store counter, who moved in last month and who is thinking about leaving, what the block argues about"
+  },
+  "programs": [
+    "Mark Aitken Youth Baseball League",
+    "Eastside Hoopers Coalition",
+    "Coliseum District Vendor Incubator",
+    "East Bay Harm Reduction Alliance",
+    "Foothill Baptist Tabernacle Food Pantry",
+    "Foothill Baptist Tabernacle Seniors Lunch Program",
+    "Masjid An-Nur Oakland Emergency Assistance Fund",
+    "Foothill Baptist Tabernacle Academy"
+  ],
+  "rotation": {
+    "index": 4,
+    "of": 9
+  },
+  "careJustice": {
+    "custody": {
+      "scope": "neighborhood",
+      "hood": "East Oakland",
+      "complete": true,
+      "completeness": "complete",
+      "demand": 6,
+      "intakes": 1,
+      "tracked": 0,
+      "other": 1,
+      "closing": 2,
+      "trackedOcc": 0,
+      "otherOcc": 2,
+      "beds": null,
+      "exits": 2,
+      "names": []
+    },
+    "care": {
+      "scope": "neighborhood",
+      "hood": "East Oakland",
+      "complete": true,
+      "completeness": "complete",
+      "demand": 123,
+      "intakes": 2,
+      "tracked": 0,
+      "other": 2,
+      "closing": 4,
+      "trackedOcc": 0,
+      "otherOcc": 4,
+      "beds": 4,
+      "exits": 3,
+      "names": []
+    },
+    "debt": {
+      "defaults": [],
+      "overLine": 2,
+      "crisisByHood": {}
+    }
+  },
+  "pointers": [
+    "output/beats/Community_Programs.jsonl @C112",
+    "output/beats/Story_Hook_Deck.jsonl (hooks for Maria Keen this cycle)",
+    "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+  ]
+}

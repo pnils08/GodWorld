@@ -1,0 +1,1148 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "113",
+  "persona": "angela-reyes",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Angela Reyes",
+    "popid": "POP-00156"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-schools",
+      "angle": "Enrollment moved in West Oakland — Temescal has the weakest school record on the table (index 6.43) — the students and teachers who live it",
+      "label": "Temescal has the weakest school record on the table (index 6.43)",
+      "hookLine": "3 students and educators in Temescal; the table says why their school reads the way it does.",
+      "hood": "Temescal",
+      "citizens": [
+        "Patricia Nolan (POP-00729)",
+        "Jun Leu (POP-00994)",
+        "Salma Navarro (POP-00975)"
+      ],
+      "popids": [
+        "POP-00729",
+        "POP-00994",
+        "POP-00975"
+      ],
+      "ref": "output/beats/Neighborhood_Demographics.jsonl @C113",
+      "cycle": 113
+    }
+  },
+  "angle": "output/cron-compare/civic_c113_angela-reyes_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 3,
+  "quotes": [
+    {
+      "pop": "POP-00729",
+      "name": "Patricia Nolan",
+      "quote": "I've watched that building for thirty years, and the thing that breaks my heart isn't the number on the table — it's that the kids inside feel it. When I was teaching, we had the same struggles, but there was a sense that the neighborhood was pulling for us. Now the district grows everywhere else, and Temescal just... sits. The teachers there are still good people, still trying. But you can't pour from an empty cup, and when the funding and attention go to the neighborhoods that are already climbing, the kids here notice. They're not dumb. They know when they're being left behind.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've watched that building for thirty years, and the thing that breaks my heart isn't the number on the table — it's that the kids inside feel it. When I was teaching, we had the same struggles, but there was a sense that the neighborhood was pulling for us. Now the district grows everywhere else, and Temescal just... sits. The teachers there are still good people, still trying. But you can't pour from an empty cup, and when the funding and attention go to the neighborhoods that are already climbing, the kids here notice. They're not dumb. They know when they're being left behind.\",\n  \"fact_ids\": [\"F-4b8e12f0b227\", \"F-17d7bca57096\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": [],\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-4b8e12f0b227",
+          "F-17d7bca57096"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00729-621cc733a5",
+        "authoredQuote": true,
+        "publishableQuote": "I've watched that building for thirty years, and the thing that breaks my heart isn't the number on the table — it's that the kids inside feel it. When I was teaching, we had the same struggles, but there was a sense that the neighborhood was pulling for us. Now the district grows everywhere else, and Temescal just... sits. The teachers there are still good people, still trying. But you can't pour from an empty cup, and when the funding and attention go to the neighborhoods that are already climbing, the kids here notice. They're not dumb. They know when they're being left behind."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00729",
+          "name": "Patricia Nolan",
+          "role": "Retired teacher",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Angela Reyes",
+          "question": "Patricia, you taught in Temescal for years and stayed in the neighborhood after retiring — what changed in the building between when it held steady and now, when the index sits at the bottom of the table and enrollment didn't move this cycle? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-schools",
+          "hood": "Temescal",
+          "focus": "The gap between a growing district and a flat Temescal school — what the students and teachers inside the weakest-index school on the table experience while six other neighborhoods gained students this cycle.",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C113"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Patricia Nolan — Retired teacher — Temescal",
+          "evidence": [
+            {
+              "id": "EV-3fc34c8167",
+              "src": "output/beats/Neighborhood_Demographics.jsonl @C113",
+              "text": "3 students and educators in Temescal; the table says why their school reads the way it does."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal has the weakest school record on the table (index 6.43)",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C113",
+            "id": "F-17d7bca57096"
+          },
+          {
+            "t": "FACT",
+            "text": "3 students and educators in Temescal; the table says why their school reads the way it does.",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C113",
+            "id": "F-dd6c00f20154"
+          },
+          {
+            "t": "FACT",
+            "text": "Enrollment moved: West Oakland +3 students, Fruitvale +2 students, Chinatown +2 students, Glenview +2 students, East Oakland +2 students, Piedmont Ave +1 students vs C112",
+            "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C113",
+            "id": "F-1456ca29799a"
+          },
+          {
+            "t": "FACT",
+            "text": "Ranked by school quality index: Rockridge 8.58, Baylight District 8.21, Piedmont Ave 8.19, Brooklyn 8.14, West Oakland 8.12, Laurel 7.95, Adams Point 7.95, Lake Merritt 7.91, Jack London 7.66, Fruitvale 7.6, Downtown 7.55, Grand Lake 7.48, Uptown 7.41, Eastlake 6.94, KONO 6.93, Chinatown 6.91, Glenview 6.89, Dimond 6.89, Ivy Hill 6.78, San Antonio 6.76, East Oakland 6.73, Temescal 6.43 (22 neighborhoods)",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C113",
+            "id": "F-314fa8dd2bef"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal: school quality index 6.43 (was 6.51 at C112), graduation 84.66%, college-ready 55%, teacher quality 6.88, funding 11,500, 313 students",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C113",
+            "id": "F-4b8e12f0b227"
+          },
+          {
+            "t": "FACT",
+            "text": "Rockridge: school quality index 8.58 (was 8.63 at C112), graduation 94.37%, college-ready 75.53%, teacher quality 9.09, funding 15,000, 247 students",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C113",
+            "id": "F-a06be634c00d"
+          },
+          {
+            "t": "FACT",
+            "text": "The district: Oakland City Schools — 5,201 employees citywide, growth 7.94%; per-hood funding on the table totals 286,000",
+            "src": "output/beats/Business_Ledger.jsonl BIZ-00016 @C113",
+            "id": "F-c974bb163110"
+          },
+          {
+            "t": "FACT",
+            "text": "Patricia Nolan — Retired teacher — Temescal",
+            "src": "Simulation_Ledger profile for POP-00729",
+            "id": "F-a010d29078c6"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00975",
+      "name": "Salma Navarro",
+      "quote": "I mean, we talk about it, but not in numbers like that. Mostly it's just, like, what are we actually gonna do next year? Some of my friends are looking at jobs, some are trying to get into the community college, and a few are just, you know, figuring it out. Nobody's really bragging about stats or anything. It's more like, are we gonna be okay? That's what comes up when we talk.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I mean, we talk about it, but not in numbers like that. Mostly it's just, like, what are we actually gonna do next year? Some of my friends are looking at jobs, some are trying to get into the community college, and a few are just, you know, figuring it out. Nobody's really bragging about stats or anything. It's more like, are we gonna be okay? That's what comes up when we talk.\",\n  \"fact_ids\": [\"F-4b8e12f0b227\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": [],\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-4b8e12f0b227"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00975-7b8dfe5189",
+        "authoredQuote": true,
+        "publishableQuote": "I mean, we talk about it, but not in numbers like that. Mostly it's just, like, what are we actually gonna do next year? Some of my friends are looking at jobs, some are trying to get into the community college, and a few are just, you know, figuring it out. Nobody's really bragging about stats or anything. It's more like, are we gonna be okay? That's what comes up when we talk."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00975",
+          "name": "Salma Navarro",
+          "role": "student",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Angela Reyes",
+          "question": "Salma, the graduation rate here is 84.66% and college-ready is 55% — what do you and your classmates talk about when you think about life after this school? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-schools",
+          "hood": "Temescal",
+          "focus": "The gap between a growing district and a flat Temescal school — what the students and teachers inside the weakest-index school on the table experience while six other neighborhoods gained students this cycle.",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C113"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Salma Navarro — student — Temescal",
+          "evidence": [
+            {
+              "id": "EV-43c3450946",
+              "src": "output/beats/Neighborhood_Demographics.jsonl @C113",
+              "text": "3 students and educators in Temescal; the table says why their school reads the way it does."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal has the weakest school record on the table (index 6.43)",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C113",
+            "id": "F-17d7bca57096"
+          },
+          {
+            "t": "FACT",
+            "text": "3 students and educators in Temescal; the table says why their school reads the way it does.",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C113",
+            "id": "F-dd6c00f20154"
+          },
+          {
+            "t": "FACT",
+            "text": "Enrollment moved: West Oakland +3 students, Fruitvale +2 students, Chinatown +2 students, Glenview +2 students, East Oakland +2 students, Piedmont Ave +1 students vs C112",
+            "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C113",
+            "id": "F-1456ca29799a"
+          },
+          {
+            "t": "FACT",
+            "text": "Ranked by school quality index: Rockridge 8.58, Baylight District 8.21, Piedmont Ave 8.19, Brooklyn 8.14, West Oakland 8.12, Laurel 7.95, Adams Point 7.95, Lake Merritt 7.91, Jack London 7.66, Fruitvale 7.6, Downtown 7.55, Grand Lake 7.48, Uptown 7.41, Eastlake 6.94, KONO 6.93, Chinatown 6.91, Glenview 6.89, Dimond 6.89, Ivy Hill 6.78, San Antonio 6.76, East Oakland 6.73, Temescal 6.43 (22 neighborhoods)",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C113",
+            "id": "F-314fa8dd2bef"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal: school quality index 6.43 (was 6.51 at C112), graduation 84.66%, college-ready 55%, teacher quality 6.88, funding 11,500, 313 students",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C113",
+            "id": "F-4b8e12f0b227"
+          },
+          {
+            "t": "FACT",
+            "text": "Rockridge: school quality index 8.58 (was 8.63 at C112), graduation 94.37%, college-ready 75.53%, teacher quality 9.09, funding 15,000, 247 students",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C113",
+            "id": "F-a06be634c00d"
+          },
+          {
+            "t": "FACT",
+            "text": "The district: Oakland City Schools — 5,201 employees citywide, growth 7.94%; per-hood funding on the table totals 286,000",
+            "src": "output/beats/Business_Ledger.jsonl BIZ-00016 @C113",
+            "id": "F-c974bb163110"
+          },
+          {
+            "t": "FACT",
+            "text": "Salma Navarro — student — Temescal",
+            "src": "Simulation_Ledger profile for POP-00975",
+            "id": "F-83f494f00e12"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00198",
+      "name": "Rick Walker",
+      "quote": "I see it in my own classroom every day. When the district grows, the money and the attention follow the growth. Temescal isn't growing, so it's just... flat. The teachers there are working just as hard as we are in Fruitvale, but they're doing it with less. That gap isn't just numbers on a table — it's the difference between a kid getting a new textbook or a worn-out one from three years ago. I've been in that position, and it wears you down after a while.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; curious, open to new things; steady, hard to shake; devoted, family is everything; often out in the neighborhood; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I see it in my own classroom every day. When the district grows, the money and the attention follow the growth. Temescal isn't growing, so it's just... flat. The teachers there are working just as hard as we are in Fruitvale, but they're doing it with less. That gap isn't just numbers on a table — it's the difference between a kid getting a new textbook or a worn-out one from three years ago. I've been in that position, and it wears you down after a while.\",\n  \"fact_ids\": [\"F-17d7bca57096\", \"F-4b8e12f0b227\", \"F-1456ca29799a\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-17d7bca57096",
+          "F-4b8e12f0b227",
+          "F-1456ca29799a"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00198-570b6c5b07",
+        "authoredQuote": true,
+        "publishableQuote": "I see it in my own classroom every day. When the district grows, the money and the attention follow the growth. Temescal isn't growing, so it's just... flat. The teachers there are working just as hard as we are in Fruitvale, but they're doing it with less. That gap isn't just numbers on a table — it's the difference between a kid getting a new textbook or a worn-out one from three years ago. I've been in that position, and it wears you down after a while."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00198",
+          "name": "Rick Walker",
+          "role": "K-8 Teacher,Former Line cook",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Angela Reyes",
+          "question": "What have you seen, felt, or understood about \"The gap between a growing district and a flat Temescal school — what the students and teachers inside the weakest-index school on the table experience while six other neighborhoods gained students this cycle.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-schools",
+          "hood": "Temescal",
+          "focus": "The gap between a growing district and a flat Temescal school — what the students and teachers inside the weakest-index school on the table experience while six other neighborhoods gained students this cycle.",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C113"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Rick Walker — K-8 Teacher,Former Line cook",
+          "evidence": [
+            {
+              "id": "EV-3e84bf4afa",
+              "src": "output/beats/Neighborhood_Demographics.jsonl @C113",
+              "text": "3 students and educators in Temescal; the table says why their school reads the way it does."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal has the weakest school record on the table (index 6.43)",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C113",
+            "id": "F-17d7bca57096"
+          },
+          {
+            "t": "FACT",
+            "text": "3 students and educators in Temescal; the table says why their school reads the way it does.",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C113",
+            "id": "F-dd6c00f20154"
+          },
+          {
+            "t": "FACT",
+            "text": "Enrollment moved: West Oakland +3 students, Fruitvale +2 students, Chinatown +2 students, Glenview +2 students, East Oakland +2 students, Piedmont Ave +1 students vs C112",
+            "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C113",
+            "id": "F-1456ca29799a"
+          },
+          {
+            "t": "FACT",
+            "text": "Ranked by school quality index: Rockridge 8.58, Baylight District 8.21, Piedmont Ave 8.19, Brooklyn 8.14, West Oakland 8.12, Laurel 7.95, Adams Point 7.95, Lake Merritt 7.91, Jack London 7.66, Fruitvale 7.6, Downtown 7.55, Grand Lake 7.48, Uptown 7.41, Eastlake 6.94, KONO 6.93, Chinatown 6.91, Glenview 6.89, Dimond 6.89, Ivy Hill 6.78, San Antonio 6.76, East Oakland 6.73, Temescal 6.43 (22 neighborhoods)",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C113",
+            "id": "F-314fa8dd2bef"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal: school quality index 6.43 (was 6.51 at C112), graduation 84.66%, college-ready 55%, teacher quality 6.88, funding 11,500, 313 students",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C113",
+            "id": "F-4b8e12f0b227"
+          },
+          {
+            "t": "FACT",
+            "text": "Rockridge: school quality index 8.58 (was 8.63 at C112), graduation 94.37%, college-ready 75.53%, teacher quality 9.09, funding 15,000, 247 students",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C113",
+            "id": "F-a06be634c00d"
+          },
+          {
+            "t": "FACT",
+            "text": "The district: Oakland City Schools — 5,201 employees citywide, growth 7.94%; per-hood funding on the table totals 286,000",
+            "src": "output/beats/Business_Ledger.jsonl BIZ-00016 @C113",
+            "id": "F-c974bb163110"
+          },
+          {
+            "t": "FACT",
+            "text": "Rick Walker — K-8 Teacher,Former Line cook",
+            "src": "Simulation_Ledger profile for POP-00198",
+            "id": "F-31a3ebe941e2"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-00729",
+      "name": "Patricia Nolan",
+      "quote": "I've watched that building for thirty years, and the thing that breaks my heart isn't the number on the table — it's that the kids inside feel it. When I was teaching, we had the same struggles, but there was a sense that the neighborhood was pulling for us. Now the district grows everywhere else, and Temescal just... sits. The teachers there are still good people, still trying. But you can't pour from an empty cup, and when the funding and attention go to the neighborhoods that are already climbing, the kids here notice. They're not dumb. They know when they're being left behind.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've watched that building for thirty years, and the thing that breaks my heart isn't the number on the table — it's that the kids inside feel it. When I was teaching, we had the same struggles, but there was a sense that the neighborhood was pulling for us. Now the district grows everywhere else, and Temescal just... sits. The teachers there are still good people, still trying. But you can't pour from an empty cup, and when the funding and attention go to the neighborhoods that are already climbing, the kids here notice. They're not dumb. They know when they're being left behind.\",\n  \"fact_ids\": [\"F-4b8e12f0b227\", \"F-17d7bca57096\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": [],\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-4b8e12f0b227",
+          "F-17d7bca57096"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00729-621cc733a5",
+        "authoredQuote": true,
+        "publishableQuote": "I've watched that building for thirty years, and the thing that breaks my heart isn't the number on the table — it's that the kids inside feel it. When I was teaching, we had the same struggles, but there was a sense that the neighborhood was pulling for us. Now the district grows everywhere else, and Temescal just... sits. The teachers there are still good people, still trying. But you can't pour from an empty cup, and when the funding and attention go to the neighborhoods that are already climbing, the kids here notice. They're not dumb. They know when they're being left behind."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00729",
+          "name": "Patricia Nolan",
+          "role": "Retired teacher",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Angela Reyes",
+          "question": "Patricia, you taught in Temescal for years and stayed in the neighborhood after retiring — what changed in the building between when it held steady and now, when the index sits at the bottom of the table and enrollment didn't move this cycle? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-schools",
+          "hood": "Temescal",
+          "focus": "The gap between a growing district and a flat Temescal school — what the students and teachers inside the weakest-index school on the table experience while six other neighborhoods gained students this cycle.",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C113"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Patricia Nolan — Retired teacher — Temescal",
+          "evidence": [
+            {
+              "id": "EV-3fc34c8167",
+              "src": "output/beats/Neighborhood_Demographics.jsonl @C113",
+              "text": "3 students and educators in Temescal; the table says why their school reads the way it does."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal has the weakest school record on the table (index 6.43)",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C113",
+            "id": "F-17d7bca57096"
+          },
+          {
+            "t": "FACT",
+            "text": "3 students and educators in Temescal; the table says why their school reads the way it does.",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C113",
+            "id": "F-dd6c00f20154"
+          },
+          {
+            "t": "FACT",
+            "text": "Enrollment moved: West Oakland +3 students, Fruitvale +2 students, Chinatown +2 students, Glenview +2 students, East Oakland +2 students, Piedmont Ave +1 students vs C112",
+            "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C113",
+            "id": "F-1456ca29799a"
+          },
+          {
+            "t": "FACT",
+            "text": "Ranked by school quality index: Rockridge 8.58, Baylight District 8.21, Piedmont Ave 8.19, Brooklyn 8.14, West Oakland 8.12, Laurel 7.95, Adams Point 7.95, Lake Merritt 7.91, Jack London 7.66, Fruitvale 7.6, Downtown 7.55, Grand Lake 7.48, Uptown 7.41, Eastlake 6.94, KONO 6.93, Chinatown 6.91, Glenview 6.89, Dimond 6.89, Ivy Hill 6.78, San Antonio 6.76, East Oakland 6.73, Temescal 6.43 (22 neighborhoods)",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C113",
+            "id": "F-314fa8dd2bef"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal: school quality index 6.43 (was 6.51 at C112), graduation 84.66%, college-ready 55%, teacher quality 6.88, funding 11,500, 313 students",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C113",
+            "id": "F-4b8e12f0b227"
+          },
+          {
+            "t": "FACT",
+            "text": "Rockridge: school quality index 8.58 (was 8.63 at C112), graduation 94.37%, college-ready 75.53%, teacher quality 9.09, funding 15,000, 247 students",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C113",
+            "id": "F-a06be634c00d"
+          },
+          {
+            "t": "FACT",
+            "text": "The district: Oakland City Schools — 5,201 employees citywide, growth 7.94%; per-hood funding on the table totals 286,000",
+            "src": "output/beats/Business_Ledger.jsonl BIZ-00016 @C113",
+            "id": "F-c974bb163110"
+          },
+          {
+            "t": "FACT",
+            "text": "Patricia Nolan — Retired teacher — Temescal",
+            "src": "Simulation_Ledger profile for POP-00729",
+            "id": "F-a010d29078c6"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00994",
+      "name": "Jun Leu",
+      "quote": null,
+      "disp": "driven, hard to sit still; curious, open to new things",
+      "recorded": false,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: answer must be quote|abstain",
+      "raw": "{\"answer\":\"I don't really know what those numbers mean, to be honest. My school is just my school. The hallways are normal — kids talking, lockers slamming, teachers telling us to walk. Some classes feel crowded and some teachers seem tired, but I can't tell you if it's because of money or some index. I know we don't have as much new stuff as some schools maybe, but I'm not walking around checking budgets. I just go to class, try to pay attention, and hang out with my friends at lunch.\",\"fact_ids\":[\"F-4b8e12f0b227\"],\"basis\":\"lived-context\",\"unverifiedLead\":null,\"abstain_reason\":null}",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00994",
+          "name": "Jun Leu",
+          "role": "student",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Angela Reyes",
+          "question": "Jun, you're a student at the Temescal school — what does it look like in the hallways and classrooms when the funding per student is 11,500 and the teacher quality index reads 6.88? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-schools",
+          "hood": "Temescal",
+          "focus": "The gap between a growing district and a flat Temescal school — what the students and teachers inside the weakest-index school on the table experience while six other neighborhoods gained students this cycle.",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C113"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Jun Leu — student — Temescal",
+          "evidence": [
+            {
+              "id": "EV-53ed894798",
+              "src": "output/beats/Neighborhood_Demographics.jsonl @C113",
+              "text": "3 students and educators in Temescal; the table says why their school reads the way it does."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal has the weakest school record on the table (index 6.43)",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C113",
+            "id": "F-17d7bca57096"
+          },
+          {
+            "t": "FACT",
+            "text": "3 students and educators in Temescal; the table says why their school reads the way it does.",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C113",
+            "id": "F-dd6c00f20154"
+          },
+          {
+            "t": "FACT",
+            "text": "Enrollment moved: West Oakland +3 students, Fruitvale +2 students, Chinatown +2 students, Glenview +2 students, East Oakland +2 students, Piedmont Ave +1 students vs C112",
+            "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C113",
+            "id": "F-1456ca29799a"
+          },
+          {
+            "t": "FACT",
+            "text": "Ranked by school quality index: Rockridge 8.58, Baylight District 8.21, Piedmont Ave 8.19, Brooklyn 8.14, West Oakland 8.12, Laurel 7.95, Adams Point 7.95, Lake Merritt 7.91, Jack London 7.66, Fruitvale 7.6, Downtown 7.55, Grand Lake 7.48, Uptown 7.41, Eastlake 6.94, KONO 6.93, Chinatown 6.91, Glenview 6.89, Dimond 6.89, Ivy Hill 6.78, San Antonio 6.76, East Oakland 6.73, Temescal 6.43 (22 neighborhoods)",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C113",
+            "id": "F-314fa8dd2bef"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal: school quality index 6.43 (was 6.51 at C112), graduation 84.66%, college-ready 55%, teacher quality 6.88, funding 11,500, 313 students",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C113",
+            "id": "F-4b8e12f0b227"
+          },
+          {
+            "t": "FACT",
+            "text": "Rockridge: school quality index 8.58 (was 8.63 at C112), graduation 94.37%, college-ready 75.53%, teacher quality 9.09, funding 15,000, 247 students",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C113",
+            "id": "F-a06be634c00d"
+          },
+          {
+            "t": "FACT",
+            "text": "The district: Oakland City Schools — 5,201 employees citywide, growth 7.94%; per-hood funding on the table totals 286,000",
+            "src": "output/beats/Business_Ledger.jsonl BIZ-00016 @C113",
+            "id": "F-c974bb163110"
+          },
+          {
+            "t": "FACT",
+            "text": "Jun Leu — student — Temescal",
+            "src": "Simulation_Ledger profile for POP-00994",
+            "id": "F-b793d8d83096"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00975",
+      "name": "Salma Navarro",
+      "quote": "I mean, we talk about it, but not in numbers like that. Mostly it's just, like, what are we actually gonna do next year? Some of my friends are looking at jobs, some are trying to get into the community college, and a few are just, you know, figuring it out. Nobody's really bragging about stats or anything. It's more like, are we gonna be okay? That's what comes up when we talk.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I mean, we talk about it, but not in numbers like that. Mostly it's just, like, what are we actually gonna do next year? Some of my friends are looking at jobs, some are trying to get into the community college, and a few are just, you know, figuring it out. Nobody's really bragging about stats or anything. It's more like, are we gonna be okay? That's what comes up when we talk.\",\n  \"fact_ids\": [\"F-4b8e12f0b227\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": [],\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-4b8e12f0b227"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00975-7b8dfe5189",
+        "authoredQuote": true,
+        "publishableQuote": "I mean, we talk about it, but not in numbers like that. Mostly it's just, like, what are we actually gonna do next year? Some of my friends are looking at jobs, some are trying to get into the community college, and a few are just, you know, figuring it out. Nobody's really bragging about stats or anything. It's more like, are we gonna be okay? That's what comes up when we talk."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00975",
+          "name": "Salma Navarro",
+          "role": "student",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Angela Reyes",
+          "question": "Salma, the graduation rate here is 84.66% and college-ready is 55% — what do you and your classmates talk about when you think about life after this school? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-schools",
+          "hood": "Temescal",
+          "focus": "The gap between a growing district and a flat Temescal school — what the students and teachers inside the weakest-index school on the table experience while six other neighborhoods gained students this cycle.",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C113"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Salma Navarro — student — Temescal",
+          "evidence": [
+            {
+              "id": "EV-43c3450946",
+              "src": "output/beats/Neighborhood_Demographics.jsonl @C113",
+              "text": "3 students and educators in Temescal; the table says why their school reads the way it does."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal has the weakest school record on the table (index 6.43)",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C113",
+            "id": "F-17d7bca57096"
+          },
+          {
+            "t": "FACT",
+            "text": "3 students and educators in Temescal; the table says why their school reads the way it does.",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C113",
+            "id": "F-dd6c00f20154"
+          },
+          {
+            "t": "FACT",
+            "text": "Enrollment moved: West Oakland +3 students, Fruitvale +2 students, Chinatown +2 students, Glenview +2 students, East Oakland +2 students, Piedmont Ave +1 students vs C112",
+            "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C113",
+            "id": "F-1456ca29799a"
+          },
+          {
+            "t": "FACT",
+            "text": "Ranked by school quality index: Rockridge 8.58, Baylight District 8.21, Piedmont Ave 8.19, Brooklyn 8.14, West Oakland 8.12, Laurel 7.95, Adams Point 7.95, Lake Merritt 7.91, Jack London 7.66, Fruitvale 7.6, Downtown 7.55, Grand Lake 7.48, Uptown 7.41, Eastlake 6.94, KONO 6.93, Chinatown 6.91, Glenview 6.89, Dimond 6.89, Ivy Hill 6.78, San Antonio 6.76, East Oakland 6.73, Temescal 6.43 (22 neighborhoods)",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C113",
+            "id": "F-314fa8dd2bef"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal: school quality index 6.43 (was 6.51 at C112), graduation 84.66%, college-ready 55%, teacher quality 6.88, funding 11,500, 313 students",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C113",
+            "id": "F-4b8e12f0b227"
+          },
+          {
+            "t": "FACT",
+            "text": "Rockridge: school quality index 8.58 (was 8.63 at C112), graduation 94.37%, college-ready 75.53%, teacher quality 9.09, funding 15,000, 247 students",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C113",
+            "id": "F-a06be634c00d"
+          },
+          {
+            "t": "FACT",
+            "text": "The district: Oakland City Schools — 5,201 employees citywide, growth 7.94%; per-hood funding on the table totals 286,000",
+            "src": "output/beats/Business_Ledger.jsonl BIZ-00016 @C113",
+            "id": "F-c974bb163110"
+          },
+          {
+            "t": "FACT",
+            "text": "Salma Navarro — student — Temescal",
+            "src": "Simulation_Ledger profile for POP-00975",
+            "id": "F-83f494f00e12"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00198",
+      "name": "Rick Walker",
+      "quote": "I see it in my own classroom every day. When the district grows, the money and the attention follow the growth. Temescal isn't growing, so it's just... flat. The teachers there are working just as hard as we are in Fruitvale, but they're doing it with less. That gap isn't just numbers on a table — it's the difference between a kid getting a new textbook or a worn-out one from three years ago. I've been in that position, and it wears you down after a while.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; curious, open to new things; steady, hard to shake; devoted, family is everything; often out in the neighborhood; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I see it in my own classroom every day. When the district grows, the money and the attention follow the growth. Temescal isn't growing, so it's just... flat. The teachers there are working just as hard as we are in Fruitvale, but they're doing it with less. That gap isn't just numbers on a table — it's the difference between a kid getting a new textbook or a worn-out one from three years ago. I've been in that position, and it wears you down after a while.\",\n  \"fact_ids\": [\"F-17d7bca57096\", \"F-4b8e12f0b227\", \"F-1456ca29799a\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-17d7bca57096",
+          "F-4b8e12f0b227",
+          "F-1456ca29799a"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00198-570b6c5b07",
+        "authoredQuote": true,
+        "publishableQuote": "I see it in my own classroom every day. When the district grows, the money and the attention follow the growth. Temescal isn't growing, so it's just... flat. The teachers there are working just as hard as we are in Fruitvale, but they're doing it with less. That gap isn't just numbers on a table — it's the difference between a kid getting a new textbook or a worn-out one from three years ago. I've been in that position, and it wears you down after a while."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00198",
+          "name": "Rick Walker",
+          "role": "K-8 Teacher,Former Line cook",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Angela Reyes",
+          "question": "What have you seen, felt, or understood about \"The gap between a growing district and a flat Temescal school — what the students and teachers inside the weakest-index school on the table experience while six other neighborhoods gained students this cycle.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-schools",
+          "hood": "Temescal",
+          "focus": "The gap between a growing district and a flat Temescal school — what the students and teachers inside the weakest-index school on the table experience while six other neighborhoods gained students this cycle.",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C113"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Rick Walker — K-8 Teacher,Former Line cook",
+          "evidence": [
+            {
+              "id": "EV-3e84bf4afa",
+              "src": "output/beats/Neighborhood_Demographics.jsonl @C113",
+              "text": "3 students and educators in Temescal; the table says why their school reads the way it does."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal has the weakest school record on the table (index 6.43)",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C113",
+            "id": "F-17d7bca57096"
+          },
+          {
+            "t": "FACT",
+            "text": "3 students and educators in Temescal; the table says why their school reads the way it does.",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C113",
+            "id": "F-dd6c00f20154"
+          },
+          {
+            "t": "FACT",
+            "text": "Enrollment moved: West Oakland +3 students, Fruitvale +2 students, Chinatown +2 students, Glenview +2 students, East Oakland +2 students, Piedmont Ave +1 students vs C112",
+            "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C113",
+            "id": "F-1456ca29799a"
+          },
+          {
+            "t": "FACT",
+            "text": "Ranked by school quality index: Rockridge 8.58, Baylight District 8.21, Piedmont Ave 8.19, Brooklyn 8.14, West Oakland 8.12, Laurel 7.95, Adams Point 7.95, Lake Merritt 7.91, Jack London 7.66, Fruitvale 7.6, Downtown 7.55, Grand Lake 7.48, Uptown 7.41, Eastlake 6.94, KONO 6.93, Chinatown 6.91, Glenview 6.89, Dimond 6.89, Ivy Hill 6.78, San Antonio 6.76, East Oakland 6.73, Temescal 6.43 (22 neighborhoods)",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C113",
+            "id": "F-314fa8dd2bef"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal: school quality index 6.43 (was 6.51 at C112), graduation 84.66%, college-ready 55%, teacher quality 6.88, funding 11,500, 313 students",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C113",
+            "id": "F-4b8e12f0b227"
+          },
+          {
+            "t": "FACT",
+            "text": "Rockridge: school quality index 8.58 (was 8.63 at C112), graduation 94.37%, college-ready 75.53%, teacher quality 9.09, funding 15,000, 247 students",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C113",
+            "id": "F-a06be634c00d"
+          },
+          {
+            "t": "FACT",
+            "text": "The district: Oakland City Schools — 5,201 employees citywide, growth 7.94%; per-hood funding on the table totals 286,000",
+            "src": "output/beats/Business_Ledger.jsonl BIZ-00016 @C113",
+            "id": "F-c974bb163110"
+          },
+          {
+            "t": "FACT",
+            "text": "Rick Walker — K-8 Teacher,Former Line cook",
+            "src": "Simulation_Ledger profile for POP-00198",
+            "id": "F-31a3ebe941e2"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-10-27T18:16:49.366Z"
+}

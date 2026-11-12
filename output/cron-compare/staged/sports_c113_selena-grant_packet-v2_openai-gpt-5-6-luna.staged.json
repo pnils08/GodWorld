@@ -1,0 +1,60 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "113",
+  "persona": "selena-grant",
+  "byline": "Selena Grant",
+  "bylinePopid": "POP-00591",
+  "article": "output/cron-compare/staged/sports_c113_selena-grant_packet-v2_openai-gpt-5-6-luna.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Adash Stanley",
+        "role": "mentioned",
+        "popid": "POP-01023",
+        "floor": true
+      },
+      {
+        "name": "Harry Hayward",
+        "role": "mentioned",
+        "popid": "POP-01223",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "Oaks — game-result C113 · 2-0 · W2",
+        "sourceRef": "output/beats/Oakland_Sports_Feed.jsonl @C113"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-ad9b5f21760d",
+    "draftSha256": "055fc8083218caad047a627efa7224417dd2419a756d6243ee0a0474e07337d5",
+    "verdict": "output/cron-compare/sports_c113_selena-grant_packet-v2_openai-gpt-5-6-luna.rhea.json",
+    "ranAt": "2026-10-27T23:18:27.591Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 400",
+      "words": 476,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "055fc8083218caad047a627efa7224417dd2419a756d6243ee0a0474e07337d5",
+      "costUsd": 0.001
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-27T23:18:32.232Z"
+}

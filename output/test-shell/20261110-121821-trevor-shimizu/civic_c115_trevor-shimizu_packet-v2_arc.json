@@ -1,0 +1,27 @@
+{
+  "status": "arc-seed",
+  "cycle": "115",
+  "desk": "civic",
+  "persona": "trevor-shimizu",
+  "hood": null,
+  "quotes": [
+    {
+      "pop": "POP-01039",
+      "name": "Ximena Mehta",
+      "quote": "Honestly, I can tell you what the chatter is, and it's not one big thing — it's a bunch of little things stacking up. We had the Oaks game downtown, the Baylight District vote finally going through, and events all over Lake Merritt, Temescal, and KONO. When you get that many neighborhood pulls happening on the same ordinary Tuesday, the platforms fill up fast. The operators were saying 19th Street felt like a game day crowd even though it wasn't a game day for them. It's just what happens when the whole city decides to move at once."
+    },
+    {
+      "pop": "POP-00791",
+      "name": "Elena Soria Dominguez",
+      "quote": "Honestly, I can't say the visioning is what's pulling those extra riders in — we're still in the design phase, no shovels in the ground, and most people aren't staring at renderings on their way to work. The growth we're seeing on the row tracks more with what's happening in East Oakland — the events, the crowds, the energy that's been building out here. But I'll tell you this: the workers on the construction site, the ones taking their breaks under the overpass, they see it from the platform every day. They're the ones who'll tell you the station's already becoming a place people want to be, even before Phase II is real."
+    },
+    {
+      "pop": "POP-00338",
+      "name": "Coen Cartier",
+      "quote": "Wednesday's a normal workday for me, so I can't say I noticed any big jump on my runs. But I did see more folks waiting at 19th than I'd expect on a regular afternoon — that station's been busier lately, and with the council vote and the game downtown, people were moving around more than usual. Most of them got on heading toward the Lake Merritt and downtown stops, not so much out to the edges."
+    }
+  ],
+  "claim": "Honestly, I can tell you what the chatter is, and it's not one big thing — it's a bunch of little things stacking up. We had the Oaks game downtown, the Baylight District vote finally going through, and events all over Lake Merritt, Temescal, and KONO. When you get that many neighborhood pulls happening on the same ordinary Tuesday, the platforms fill up fast. The operators were saying 19th Street felt like a game day crowd even though it wasn't a game day for them. It's just what happens when the whole city decides to move at once.",
+  "src": "citizenVoice PRESS c115",
+  "ranAt": "2026-11-09T19:19:03.482Z"
+}

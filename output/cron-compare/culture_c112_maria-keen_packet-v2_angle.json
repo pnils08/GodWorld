@@ -1,0 +1,1170 @@
+{
+  "stage": "angle",
+  "desk": "culture",
+  "cycle": "112",
+  "persona": "maria-keen",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00013",
+      "name": "Maria Keen",
+      "role": "desk reporter",
+      "desk": "culture"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "East Oakland — the programs that hold the block and the people who founded them",
+      "approach": "Neighborhood approach: this slice is one block's record — its community programs and their founders, who is moving in or out, who the block has in a hospital bed or in custody, what it paid on tax day, whose debts crossed the line, and the city's neighborhood hooks this cycle. First-person witness, one block one truth. The programs, founders, movement numbers, patients, defendants and money lines are real; the stoop conversations, the mailboxes, the dog everyone knows are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "neighborhood",
+        "hood": "East Oakland",
+        "facts": [
+          "Mark Aitken Youth Baseball League (youth-sports), East Oakland — founded by Mark Aitken, since C101",
+          "Eastside Hoopers Coalition (youth-sports), East Oakland — founded by Marcus Whitfield, since C101",
+          "Coliseum District Vendor Incubator (economic), East Oakland, since C101",
+          "East Bay Harm Reduction Alliance (health), East Oakland, since C101",
+          "Foothill Baptist Tabernacle Food Pantry (mutual-aid), East Oakland, since C78",
+          "Foothill Baptist Tabernacle Seniors Lunch Program (health), East Oakland, since C78",
+          "East Oakland this cycle: 476 students, 1,535 adults, 327 seniors — moved vs C111: +2 students, +5 adults, +1 seniors",
+          "East Oakland: 6 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+          "East Oakland: 123 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked"
+        ],
+        "priorCycle": "PRIOR_CYCLE_ON_DISK",
+        "note": null,
+        "engineHooks": [
+          "Household in Lake Merritt spending 53% of income on housing (observational analysis)",
+          "[Casino] the window paid — the week changed color (observational analysis)",
+          "the debts crossed a line this week — sleep comes harder now (observational analysis)",
+          "defaulted on the debts — the savings are gone and the record carries it (observational analysis)"
+        ],
+        "roomIsYours": "the stoop, the corner store counter, who moved in last month and who is thinking about leaving, what the block argues about",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-neighborhood",
+      "hood": "East Oakland",
+      "score": null,
+      "src": "output/beats/Community_Programs.jsonl @C112",
+      "nearby": [
+        {
+          "text": "Grand Lake neighborhood texture — how residents experience the improvement | Residents of Grand Lake feel the change firsthand.",
+          "src": "output/engine_audit_c112.json patterns[12]; evidence: Initiative_Tracker row(s) 9"
+        },
+        {
+          "text": "Baylight District | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c112.md \"### Baylight District\"; events: world_summary_c112.md \"## World Events\""
+        },
+        {
+          "text": "Downtown | 2 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c112.md \"### Downtown\"; events: world_summary_c112.md \"## World Events\""
+        },
+        {
+          "text": "Grand Lake | 2 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c112.md \"### Grand Lake\"; events: world_summary_c112.md \"## World Events\""
+        },
+        {
+          "text": "Jack London | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c112.md \"### Jack London\"; events: world_summary_c112.md \"## World Events\""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00003",
+          "name": "Mark Aitken",
+          "profile": "Mark Aitken — First Baseman, Oakland A's Legend — Player Rep, Community Liaison — Jack London",
+          "role": "First Baseman, Oakland A's Legend — Player Rep, Community Liaison",
+          "hood": "Jack London",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Community_Programs.jsonl @C112",
+            "pop": "POP-00003",
+            "rowName": "Mark Aitken",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00532",
+          "name": "Marcus Whitfield",
+          "profile": "Marcus Whitfield — Youth Basketball Coach — Fruitvale",
+          "role": "Youth Basketball Coach",
+          "hood": "Fruitvale",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Community_Programs.jsonl @C112",
+            "pop": "POP-00532",
+            "rowName": "Marcus Whitfield",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00034",
+          "name": "Avery Santana",
+          "profile": "Avery Santana — Mayor of Oakland",
+          "role": "Mayor of Oakland",
+          "hood": "Rockridge",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "ydE8bhDmg19bxERscCsfqT",
+            "customId": "cp-POP-00034-c102-PRESS",
+            "cycle": 102,
+            "excerpt": "I’ve seen construction crews breaking ground on affordable housing projects in East Oakland.",
+            "highlightKind": "hood",
+            "entity": "East Oakland",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00043",
+          "name": "Janae Rivers",
+          "profile": "Janae Rivers — City Council Member",
+          "role": "City Council Member",
+          "hood": "Piedmont Ave",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "sELFHRGuw7f6CtR25cXMPT",
+            "customId": "cp-POP-00043-c101-PRESS",
+            "cycle": 101,
+            "excerpt": "Not when we've got young folks in East Oakland, West Oakland, desperate for pathways out of the grind.",
+            "highlightKind": "hood",
+            "entity": "East Oakland",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00143",
+          "name": "Clarissa Dane",
+          "profile": "Clarissa Dane — DISTRICT ATTORNEY",
+          "role": "DISTRICT ATTORNEY",
+          "hood": "West Oakland",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "nskoJPLvCQYdcNGExrx4u6",
+            "customId": "cp-POP-00143-c110-work",
+            "cycle": 110,
+            "excerpt": "Seven incidents in East Oakland and we're clearing one in four; that's not a weather pattern, that's a structural failure wearing a statistical face.",
+            "highlightKind": "hood",
+            "entity": "East Oakland",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00170",
+          "name": "Melton Neilon",
+          "profile": "Melton Neilon — Sourdough Baker",
+          "role": "Sourdough Baker",
+          "hood": "Temescal",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "u1YKduvbPjbzuUVWhfwvrf",
+            "customId": "cp-POP-00170-c105-PRESS",
+            "cycle": 105,
+            "excerpt": "I’ve heard folks talking about the Alternative Response Initiative in the neighborhood, and it seems like people are hopeful it’ll bring more tailored support to West Oakland, Fruitvale, and East Oakland.",
+            "highlightKind": "hood",
+            "entity": "East Oakland",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00224",
+          "name": "Dillon Trevor",
+          "profile": "Dillon Trevor — Server",
+          "role": "Server",
+          "hood": "Downtown",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "4N7gJRG2ySYS7rsQyKK6ay",
+            "customId": "cp-POP-00224-c107-PRESS",
+            "cycle": 107,
+            "excerpt": "Meanwhile, my cousin in East Oakland says they're waiting forever just to get someone to show when things go wrong.",
+            "highlightKind": "hood",
+            "entity": "East Oakland",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-01021",
+          "name": "Vanessa Tran-Muñoz",
+          "profile": "Vanessa Tran-Muñoz — OARI Program Director",
+          "role": "OARI Program Director",
+          "hood": "Rockridge",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "JGYhxtsbJbrEbGDUt39TMc",
+            "customId": "cp-POP-01021-c107-PRESS",
+            "cycle": 107,
+            "excerpt": "That's the model I'm accountable to bring Downtown and East Oakland next.",
+            "highlightKind": "hood",
+            "entity": "East Oakland",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-01047",
+          "name": "Maria Conteras",
+          "profile": "Maria Conteras — High School Teacher",
+          "role": "High School Teacher",
+          "hood": "East Oakland",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "jt5PBozaKm3qGaqSAMDxjA",
+            "customId": "cp-POP-01047-c107-PRESS",
+            "cycle": 107,
+            "excerpt": "I've seen that community programs in East Oakland are really making a difference, and it's great to see people like Marcus Whitfield founding initiatives that help our neighborhood.",
+            "highlightKind": "hood",
+            "entity": "East Oakland",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-01055",
+          "name": "Jerome Pittman",
+          "profile": "Jerome Pittman — Transit Hub D5 Intake Liaison",
+          "role": "Transit Hub D5 Intake Liaison",
+          "hood": "East Oakland",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "j7YrnQjeFDLHoGkZGm59fB",
+            "customId": "cp-POP-01055-c107-PRESS",
+            "cycle": 107,
+            "excerpt": "I feel like community programs and their founders in East Oakland are really making a difference, I see the impact they have on people's lives around here.",
+            "highlightKind": "hood",
+            "entity": "East Oakland",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-01143",
+          "name": "Kendra Lyle-Nnamdi",
+          "profile": "Kendra Lyle-Nnamdi — Police Sergeant",
+          "role": "Police Sergeant",
+          "hood": "East Oakland",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "T4fPStf6kJZGJ4YTqgmfZE",
+            "customId": "cp-POP-01143-c112-PRESS",
+            "cycle": 112,
+            "excerpt": "I work East Oakland, not Dimond, so I can't speak to what those eight incidents look like on the ground there.",
+            "highlightKind": "hood",
+            "entity": "East Oakland",
+            "predicate": "observe"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C112",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-7cd6ffd2aeb3"
+      },
+      {
+        "t": "FACT",
+        "text": "East Oakland: 8 active programs on the record",
+        "src": "output/beats/Community_Programs.jsonl @C112",
+        "id": "F-642e5b26756e"
+      },
+      {
+        "t": "FACT",
+        "text": "8 active programs in East Oakland; Mark Aitken and Marcus Whitfield founded them.",
+        "src": "output/beats/Community_Programs.jsonl @C112",
+        "id": "F-4454b6f87ecf"
+      },
+      {
+        "t": "FACT",
+        "text": "Mark Aitken Youth Baseball League (youth-sports), East Oakland — founded by Mark Aitken, since C101",
+        "src": "output/beats/Community_Programs.jsonl @C112 PRG-003",
+        "id": "F-f6ff57ba5b60"
+      },
+      {
+        "t": "FACT",
+        "text": "Eastside Hoopers Coalition (youth-sports), East Oakland — founded by Marcus Whitfield, since C101",
+        "src": "output/beats/Community_Programs.jsonl @C112 PRG-005",
+        "id": "F-4554b8f1c818"
+      },
+      {
+        "t": "FACT",
+        "text": "Coliseum District Vendor Incubator (economic), East Oakland, since C101",
+        "src": "output/beats/Community_Programs.jsonl @C112 PRG-009",
+        "id": "F-4e01abf63bf7"
+      },
+      {
+        "t": "FACT",
+        "text": "East Bay Harm Reduction Alliance (health), East Oakland, since C101",
+        "src": "output/beats/Community_Programs.jsonl @C112 PRG-014",
+        "id": "F-84ac8cb40a35"
+      },
+      {
+        "t": "FACT",
+        "text": "Foothill Baptist Tabernacle Food Pantry (mutual-aid), East Oakland, since C78",
+        "src": "output/beats/Community_Programs.jsonl @C112 PRG-022",
+        "id": "F-656c8468cbd0"
+      },
+      {
+        "t": "FACT",
+        "text": "Foothill Baptist Tabernacle Seniors Lunch Program (health), East Oakland, since C78",
+        "src": "output/beats/Community_Programs.jsonl @C112 PRG-023",
+        "id": "F-f84b26ef8e24"
+      },
+      {
+        "t": "FACT",
+        "text": "East Oakland this cycle: 476 students, 1,535 adults, 327 seniors — moved vs C111: +2 students, +5 adults, +1 seniors",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C112 vs prev/",
+        "id": "F-1cefe3a44227"
+      },
+      {
+        "t": "FACT",
+        "text": "East Oakland: 6 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl @C112 judicial East Oakland",
+        "id": "F-905839cda83e"
+      },
+      {
+        "t": "FACT",
+        "text": "East Oakland: 123 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl @C112 hospital East Oakland",
+        "id": "F-a0a556470ce2"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "street",
+    "candidates": [
+      {
+        "pop": "POP-00003",
+        "name": "Mark Aitken",
+        "role": "First Baseman, Oakland A's Legend — Player Rep, Community Liaison",
+        "hood": "Jack London",
+        "profile": "Mark Aitken — First Baseman, Oakland A's Legend — Player Rep, Community Liaison — Jack London",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Community_Programs.jsonl @C112",
+          "pop": "POP-00003",
+          "rowName": "Mark Aitken",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00532",
+        "name": "Marcus Whitfield",
+        "role": "Youth Basketball Coach",
+        "hood": "Fruitvale",
+        "profile": "Marcus Whitfield — Youth Basketball Coach — Fruitvale",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Community_Programs.jsonl @C112",
+          "pop": "POP-00532",
+          "rowName": "Marcus Whitfield",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00034",
+        "name": "Avery Santana",
+        "role": "Mayor of Oakland",
+        "hood": "Rockridge",
+        "profile": "Avery Santana — Mayor of Oakland",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "ydE8bhDmg19bxERscCsfqT",
+          "customId": "cp-POP-00034-c102-PRESS",
+          "cycle": 102,
+          "excerpt": "I’ve seen construction crews breaking ground on affordable housing projects in East Oakland.",
+          "highlightKind": "hood",
+          "entity": "East Oakland",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I’ve seen construction crews breaking ground on affordable housing projects in East Oakland."
+      },
+      {
+        "pop": "POP-00043",
+        "name": "Janae Rivers",
+        "role": "City Council Member",
+        "hood": "Piedmont Ave",
+        "profile": "Janae Rivers — City Council Member",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "sELFHRGuw7f6CtR25cXMPT",
+          "customId": "cp-POP-00043-c101-PRESS",
+          "cycle": 101,
+          "excerpt": "Not when we've got young folks in East Oakland, West Oakland, desperate for pathways out of the grind.",
+          "highlightKind": "hood",
+          "entity": "East Oakland",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "Not when we've got young folks in East Oakland, West Oakland, desperate for pathways out of the grind."
+      },
+      {
+        "pop": "POP-00143",
+        "name": "Clarissa Dane",
+        "role": "DISTRICT ATTORNEY",
+        "hood": "West Oakland",
+        "profile": "Clarissa Dane — DISTRICT ATTORNEY",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "nskoJPLvCQYdcNGExrx4u6",
+          "customId": "cp-POP-00143-c110-work",
+          "cycle": 110,
+          "excerpt": "Seven incidents in East Oakland and we're clearing one in four; that's not a weather pattern, that's a structural failure wearing a statistical face.",
+          "highlightKind": "hood",
+          "entity": "East Oakland",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "Seven incidents in East Oakland and we're clearing one in four; that's not a weather pattern, that's a structural failure wearing a statistical face."
+      },
+      {
+        "pop": "POP-00170",
+        "name": "Melton Neilon",
+        "role": "Sourdough Baker",
+        "hood": "Temescal",
+        "profile": "Melton Neilon — Sourdough Baker",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "u1YKduvbPjbzuUVWhfwvrf",
+          "customId": "cp-POP-00170-c105-PRESS",
+          "cycle": 105,
+          "excerpt": "I’ve heard folks talking about the Alternative Response Initiative in the neighborhood, and it seems like people are hopeful it’ll bring more tailored support to West Oakland, Fruitvale, and East Oakland.",
+          "highlightKind": "hood",
+          "entity": "East Oakland",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I’ve heard folks talking about the Alternative Response Initiative in the neighborhood, and it seems like people are hopeful it’ll bring more tailored support to West Oakland, Fruitvale, and East Oakland."
+      },
+      {
+        "pop": "POP-00224",
+        "name": "Dillon Trevor",
+        "role": "Server",
+        "hood": "Downtown",
+        "profile": "Dillon Trevor — Server",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "4N7gJRG2ySYS7rsQyKK6ay",
+          "customId": "cp-POP-00224-c107-PRESS",
+          "cycle": 107,
+          "excerpt": "Meanwhile, my cousin in East Oakland says they're waiting forever just to get someone to show when things go wrong.",
+          "highlightKind": "hood",
+          "entity": "East Oakland",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "Meanwhile, my cousin in East Oakland says they're waiting forever just to get someone to show when things go wrong."
+      },
+      {
+        "pop": "POP-01021",
+        "name": "Vanessa Tran-Muñoz",
+        "role": "OARI Program Director",
+        "hood": "Rockridge",
+        "profile": "Vanessa Tran-Muñoz — OARI Program Director",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "JGYhxtsbJbrEbGDUt39TMc",
+          "customId": "cp-POP-01021-c107-PRESS",
+          "cycle": 107,
+          "excerpt": "That's the model I'm accountable to bring Downtown and East Oakland next.",
+          "highlightKind": "hood",
+          "entity": "East Oakland",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "That's the model I'm accountable to bring Downtown and East Oakland next."
+      },
+      {
+        "pop": "POP-01047",
+        "name": "Maria Conteras",
+        "role": "High School Teacher",
+        "hood": "East Oakland",
+        "profile": "Maria Conteras — High School Teacher",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "jt5PBozaKm3qGaqSAMDxjA",
+          "customId": "cp-POP-01047-c107-PRESS",
+          "cycle": 107,
+          "excerpt": "I've seen that community programs in East Oakland are really making a difference, and it's great to see people like Marcus Whitfield founding initiatives that help our neighborhood.",
+          "highlightKind": "hood",
+          "entity": "East Oakland",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I've seen that community programs in East Oakland are really making a difference, and it's great to see people like Marcus Whitfield founding initiatives that help our neighborhood."
+      },
+      {
+        "pop": "POP-01055",
+        "name": "Jerome Pittman",
+        "role": "Transit Hub D5 Intake Liaison",
+        "hood": "East Oakland",
+        "profile": "Jerome Pittman — Transit Hub D5 Intake Liaison",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "j7YrnQjeFDLHoGkZGm59fB",
+          "customId": "cp-POP-01055-c107-PRESS",
+          "cycle": 107,
+          "excerpt": "I feel like community programs and their founders in East Oakland are really making a difference, I see the impact they have on people's lives around here.",
+          "highlightKind": "hood",
+          "entity": "East Oakland",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I feel like community programs and their founders in East Oakland are really making a difference, I see the impact they have on people's lives around here."
+      },
+      {
+        "pop": "POP-01143",
+        "name": "Kendra Lyle-Nnamdi",
+        "role": "Police Sergeant",
+        "hood": "East Oakland",
+        "profile": "Kendra Lyle-Nnamdi — Police Sergeant",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "T4fPStf6kJZGJ4YTqgmfZE",
+          "customId": "cp-POP-01143-c112-PRESS",
+          "cycle": 112,
+          "excerpt": "I work East Oakland, not Dimond, so I can't speak to what those eight incidents look like on the ground there.",
+          "highlightKind": "hood",
+          "entity": "East Oakland",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I work East Oakland, not Dimond, so I can't speak to what those eight incidents look like on the ground there."
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Maria Keen",
+    "popid": "POP-00013"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-neighborhood",
+      "angle": "East Oakland — the programs that hold the block and the people who founded them",
+      "label": "East Oakland: 8 active programs on the record",
+      "hookLine": "8 active programs in East Oakland; Mark Aitken and Marcus Whitfield founded them.",
+      "hood": "East Oakland",
+      "citizens": [
+        "Mark Aitken (POP-00003)",
+        "Marcus Whitfield (POP-00532)"
+      ],
+      "popids": [
+        "POP-00003",
+        "POP-00532"
+      ],
+      "ref": "output/beats/Community_Programs.jsonl @C112",
+      "cycle": 112
+    },
+    "approach": "Neighborhood approach: this slice is one block's record — its community programs and their founders, who is moving in or out, who the block has in a hospital bed or in custody, what it paid on tax day, whose debts crossed the line, and the city's neighborhood hooks this cycle. First-person witness, one block one truth. The programs, founders, movement numbers, patients, defendants and money lines are real; the stoop conversations, the mailboxes, the dog everyone knows are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": {
+    "pulse": {
+      "className": "quiet-nightlife",
+      "score": 24,
+      "label": "Neighborhood Response Hub (Downtown) · quiet night",
+      "named": "Neighborhood Response Hub",
+      "hood": "Downtown",
+      "person": null,
+      "venue": null
+    },
+    "recommend": {
+      "bag": "lifestyle",
+      "slug": "sharon-okafor",
+      "name": "Sharon Okafor",
+      "popid": "POP-00159",
+      "bagDoc": "docs/media/SHARON_LIFESTYLE_BAG.md",
+      "reason": "top pulse quiet-nightlife → lifestyle",
+      "pulseClass": "quiet-nightlife",
+      "pulseLabel": "Neighborhood Response Hub (Downtown) · quiet night"
+    },
+    "prewrite": {
+      "pulseClass": "quiet-nightlife",
+      "angle": "Neighborhood Response Hub is open and quiet in Downtown. What that condition means is not yet established.",
+      "hookLine": "Neighborhood Response Hub is open and quiet in Downtown.",
+      "anchorFacts": [
+        "NAMED: Neighborhood Response Hub",
+        "HOOD: Downtown",
+        "VENUE: Neighborhood Response Hub",
+        "HOOD: Downtown",
+        "EVENING RECORD: open and quiet"
+      ],
+      "bagRecommend": "lifestyle",
+      "bagSlug": "sharon-okafor"
+    },
+    "texture": {
+      "famous": [
+        "Tara Ellison",
+        "Jade Orion",
+        "Vinnie Keane"
+      ],
+      "restaurants": [
+        {
+          "name": "Northgate Kitchen",
+          "hood": "KONO"
+        },
+        {
+          "name": "Midnight Bistro",
+          "hood": "Downtown"
+        },
+        {
+          "name": "West Side Cafe",
+          "hood": "West Oakland"
+        }
+      ],
+      "fastFood": [
+        {
+          "name": "SpeedyBurger",
+          "hood": "Downtown"
+        }
+      ],
+      "nightlife": [
+        {
+          "name": "Neighborhood Response Hub",
+          "hood": "Downtown"
+        }
+      ],
+      "nightlifeMeta": {
+        "volume": 4,
+        "vibe": "tense",
+        "movement": "restricted",
+        "weatherImpact": 1
+      },
+      "cityEvents": [
+        "Downtown Volunteer Boost Rally",
+        "Chinatown Winter Lights",
+        "Jack London Waterfront Stroll",
+        "Temescal Street Vendors Block"
+      ],
+      "tv": [
+        "Breaking Bulletin",
+        "Lake Merritt Laughs",
+        "Comfort Kitchen",
+        "A's Sports Central",
+        "One-on-One with Vinnie Keane (3B)"
+      ],
+      "movies": [
+        "Second Chance",
+        "Snowlight",
+        "Opening Day"
+      ],
+      "sportsBroadcast": "Oakland Sports Tonight",
+      "streamingTrend": "political commentary surge",
+      "foodTrend": "High mobility / civic-tension food trend"
+    },
+    "signals": {
+      "fameCount": 1,
+      "sightingCount": 3,
+      "sightings": [
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Tara Ellison spotted at Keane Mercantile",
+          "name": "Tara Ellison",
+          "venue": "Keane Mercantile",
+          "ref": "Ripple_Ledger cycle 112 (CauseType lifestyle-sighting); rendered: world_summary_c112.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Grand Lake",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Jade Orion spotted at St. Esperanza Parish",
+          "name": "Jade Orion",
+          "venue": "St. Esperanza Parish",
+          "ref": "Ripple_Ledger cycle 112 (CauseType lifestyle-sighting); rendered: world_summary_c112.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Fruitvale",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Vinnie Keane spotted at Brie Bouquets",
+          "name": "Vinnie Keane",
+          "venue": "Brie Bouquets",
+          "ref": "Ripple_Ledger cycle 112 (CauseType lifestyle-sighting); rendered: world_summary_c112.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Temescal",
+          "popids": []
+        }
+      ]
+    },
+    "scene": {
+      "venues": [
+        {
+          "name": "Northgate Kitchen",
+          "hood": "KONO"
+        },
+        {
+          "name": "Midnight Bistro",
+          "hood": "Downtown"
+        },
+        {
+          "name": "West Side Cafe",
+          "hood": "West Oakland"
+        },
+        {
+          "name": "SpeedyBurger",
+          "hood": "Downtown"
+        },
+        {
+          "name": "Neighborhood Response Hub",
+          "hood": "Downtown"
+        }
+      ],
+      "nightlifeMeta": {
+        "volume": 4,
+        "vibe": "tense",
+        "movement": "restricted",
+        "weatherImpact": 1
+      },
+      "cityEvents": [
+        "Downtown Volunteer Boost Rally",
+        "Chinatown Winter Lights",
+        "Jack London Waterfront Stroll",
+        "Temescal Street Vendors Block"
+      ],
+      "tv": [
+        "Breaking Bulletin",
+        "Lake Merritt Laughs",
+        "Comfort Kitchen",
+        "A's Sports Central",
+        "One-on-One with Vinnie Keane (3B)"
+      ],
+      "movies": [
+        "Second Chance",
+        "Snowlight",
+        "Opening Day"
+      ],
+      "colorRoom": "Named places only from Evening Texture / desk_signal. The supplied evening record describes nightlife as quiet; raw scoring fields stay internal.  Sensory room (weather, light, sound) is free; careers and employees are not."
+    },
+    "candidates": [
+      {
+        "className": "quiet-nightlife",
+        "score": 24,
+        "label": "Neighborhood Response Hub (Downtown) · quiet night",
+        "named": "Neighborhood Response Hub",
+        "hood": "Downtown"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Tara Ellison at Keane Mercantile (Grand Lake)",
+        "named": "Keane Mercantile",
+        "hood": "Grand Lake"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Jade Orion at St. Esperanza Parish (Fruitvale)",
+        "named": "St. Esperanza Parish",
+        "hood": "Fruitvale"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Vinnie Keane at Brie Bouquets (Temescal)",
+        "named": "Brie Bouquets",
+        "hood": "Temescal"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Northgate Kitchen (KONO)",
+        "named": "Northgate Kitchen",
+        "hood": "KONO"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Midnight Bistro (Downtown)",
+        "named": "Midnight Bistro",
+        "hood": "Downtown"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "West Side Cafe (West Oakland)",
+        "named": "West Side Cafe",
+        "hood": "West Oakland"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 16,
+        "label": "Jade Orion — fame rise",
+        "named": "Jade Orion",
+        "hood": "Lake Merritt"
+      }
+    ],
+    "perSeat": {
+      "mason-ortega": {
+        "pulseClass": "named-restaurant",
+        "label": "Northgate Kitchen (KONO)",
+        "score": 34,
+        "bag": "kitchen"
+      },
+      "kai-marston": {
+        "pulseClass": "quiet-nightlife",
+        "label": "Neighborhood Response Hub (Downtown) · quiet night",
+        "score": 32,
+        "bag": "arts"
+      },
+      "sharon-okafor": {
+        "pulseClass": "quiet-nightlife",
+        "label": "Neighborhood Response Hub (Downtown) · quiet night",
+        "score": 32,
+        "bag": "lifestyle"
+      },
+      "maria-keen": {
+        "pulseClass": "quiet-nightlife",
+        "label": "Neighborhood Response Hub (Downtown) · quiet night",
+        "score": 32,
+        "bag": "ground"
+      },
+      "elliot-graye": {
+        "pulseClass": "fame-sighting",
+        "label": "Tara Ellison at Keane Mercantile (Grand Lake)",
+        "score": 31,
+        "bag": "faith"
+      }
+    }
+  },
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "HOOD-SLICE-3",
+    "kind": "beat-neighborhood",
+    "seat": {
+      "slug": "maria-keen",
+      "name": "Maria Keen",
+      "popid": "POP-00013",
+      "desk": "culture",
+      "domain": "neighborhood",
+      "builder": "buildNeighborhoodSlice.js"
+    },
+    "hood": "East Oakland",
+    "pulse": {
+      "className": "beat-neighborhood",
+      "score": 100,
+      "label": "East Oakland: 8 active programs on the record",
+      "hood": "East Oakland",
+      "source": "output/beats/Community_Programs.jsonl @C112"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "East Oakland — the programs that hold the block and the people who founded them",
+      "hookLine": "8 active programs in East Oakland; Mark Aitken and Marcus Whitfield founded them.",
+      "anchorFacts": [
+        "Mark Aitken Youth Baseball League (youth-sports), East Oakland — founded by Mark Aitken, since C101",
+        "Eastside Hoopers Coalition (youth-sports), East Oakland — founded by Marcus Whitfield, since C101",
+        "Coliseum District Vendor Incubator (economic), East Oakland, since C101",
+        "East Bay Harm Reduction Alliance (health), East Oakland, since C101",
+        "Foothill Baptist Tabernacle Food Pantry (mutual-aid), East Oakland, since C78",
+        "Foothill Baptist Tabernacle Seniors Lunch Program (health), East Oakland, since C78",
+        "East Oakland this cycle: 476 students, 1,535 adults, 327 seniors — moved vs C111: +2 students, +5 adults, +1 seniors",
+        "East Oakland: 6 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "East Oakland: 123 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked"
+      ],
+      "evidence": [
+        {
+          "text": "Mark Aitken Youth Baseball League (youth-sports), East Oakland — founded by Mark Aitken, since C101",
+          "src": "output/beats/Community_Programs.jsonl @C112 PRG-003"
+        },
+        {
+          "text": "Eastside Hoopers Coalition (youth-sports), East Oakland — founded by Marcus Whitfield, since C101",
+          "src": "output/beats/Community_Programs.jsonl @C112 PRG-005"
+        },
+        {
+          "text": "Coliseum District Vendor Incubator (economic), East Oakland, since C101",
+          "src": "output/beats/Community_Programs.jsonl @C112 PRG-009"
+        },
+        {
+          "text": "East Bay Harm Reduction Alliance (health), East Oakland, since C101",
+          "src": "output/beats/Community_Programs.jsonl @C112 PRG-014"
+        },
+        {
+          "text": "Foothill Baptist Tabernacle Food Pantry (mutual-aid), East Oakland, since C78",
+          "src": "output/beats/Community_Programs.jsonl @C112 PRG-022"
+        },
+        {
+          "text": "Foothill Baptist Tabernacle Seniors Lunch Program (health), East Oakland, since C78",
+          "src": "output/beats/Community_Programs.jsonl @C112 PRG-023"
+        },
+        {
+          "text": "East Oakland this cycle: 476 students, 1,535 adults, 327 seniors — moved vs C111: +2 students, +5 adults, +1 seniors",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C112 vs prev/"
+        },
+        {
+          "text": "East Oakland: 6 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl @C112 judicial East Oakland"
+        },
+        {
+          "text": "East Oakland: 123 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl @C112 hospital East Oakland"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": {
+        "state": "PRIOR_CYCLE_ON_DISK",
+        "vs": 111
+      },
+      "hooks": [
+        {
+          "text": "Household in Lake Merritt spending 53% of income on housing",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Lake Merritt",
+          "priority": 6
+        },
+        {
+          "text": "[Casino] the window paid — the week changed color",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Piedmont Ave",
+          "priority": 3
+        },
+        {
+          "text": "the debts crossed a line this week — sleep comes harder now",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Lake Merritt",
+          "priority": 3
+        },
+        {
+          "text": "defaulted on the debts — the savings are gone and the record carries it",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Fruitvale",
+          "priority": 3
+        },
+        {
+          "text": "defaulted on the debts — the savings are gone and the record carries it",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "West Oakland",
+          "priority": 3
+        },
+        {
+          "text": "Downtown boom sustained — momentum 10/10, the block everyone wants onto",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Downtown",
+          "priority": 7
+        },
+        {
+          "text": "Jack London boom sustained — momentum 10/10, the block everyone wants onto",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Jack London",
+          "priority": 7
+        },
+        {
+          "text": "Uptown boom sustained — momentum 10/10, the block everyone wants onto",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Uptown",
+          "priority": 7
+        }
+      ],
+      "note": null,
+      "pageVoices": [],
+      "roomIsYours": "the stoop, the corner store counter, who moved in last month and who is thinking about leaving, what the block argues about"
+    },
+    "citizens": [
+      {
+        "popid": "POP-00003",
+        "name": "Mark Aitken",
+        "role": "First Baseman, Oakland A's Legend — Player Rep, Community Liaison",
+        "neighborhood": "Jack London",
+        "business": null,
+        "profile": "Mark Aitken — First Baseman, Oakland A's Legend — Player Rep, Community Liaison — Jack London",
+        "why": "founded Mark Aitken Youth Baseball League (Community_Programs)"
+      },
+      {
+        "popid": "POP-00532",
+        "name": "Marcus Whitfield",
+        "role": "Youth Basketball Coach",
+        "neighborhood": "Fruitvale",
+        "business": null,
+        "profile": "Marcus Whitfield — Youth Basketball Coach — Fruitvale",
+        "why": "founded Eastside Hoopers Coalition (Community_Programs)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Community_Programs.jsonl @C112",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Maria Keen this cycle)",
+      "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Maria Keen",
+    "popid": "POP-00013",
+    "text": "I'm heading to East Oakland to get a feel for the community programs that are making a difference. I want to talk to the people behind initiatives like the Mark Aitken Youth Baseball League and the Eastside Hoopers Coalition. My goal is to capture the essence of their work and how it's impacting the neighborhood.",
+    "plan": {
+      "chase": "I'm heading to East Oakland to get a feel for the community programs that are making a difference. I want to talk to the people behind initiatives like the Mark Aitken Youth Baseball League and the Eastside Hoopers Coalition. My goal is to capture the essence of their work and how it's impacting the neighborhood.",
+      "focus": "Community programs in East Oakland and their founders",
+      "why": "To understand the real impact of these programs on the community",
+      "checks": [
+        "Verify the existence and activity of listed community programs",
+        "Confirm the founders and their roles"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00003",
+          "question": "What's the impact of the Mark Aitken Youth Baseball League on East Oakland's youth?",
+          "basis": "Mark Aitken is a known figure in Oakland sports"
+        },
+        {
+          "pop": "POP-00532",
+          "question": "How has the Eastside Hoopers Coalition changed the landscape for youth sports in East Oakland?",
+          "basis": "Marcus Whitfield is mentioned as the founder of Eastside Hoopers Coalition"
+        }
+      ],
+      "interpretation": "The community programs in East Oakland are crucial for the neighborhood's development and the people behind them are passionate about creating positive change.",
+      "unverifiedLead": [
+        "Potential for a compelling story around the personal stories of program founders",
+        "The possibility of highlighting unsung heroes in the community"
+      ],
+      "closeQuestion": "How do the community programs in East Oakland intersect with the broader social and economic issues in the area?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Grand Lake neighborhood texture — how residents experience the improvement | Residents of Grand Lake feel the change firsthand.",
+      "kind": "anomaly",
+      "hood": "Grand Lake",
+      "ref": "output/engine_audit_c112.json patterns[12]; evidence: Initiative_Tracker row(s) 9",
+      "popids": [
+        "POP-00002",
+        "POP-01049",
+        "POP-01080"
+      ]
+    },
+    {
+      "label": "Baylight District | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Baylight District",
+      "ref": "output/neighborhood_texture_c112.md \"### Baylight District\"; events: world_summary_c112.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Downtown | 2 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Downtown",
+      "ref": "output/neighborhood_texture_c112.md \"### Downtown\"; events: world_summary_c112.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Grand Lake | 2 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Grand Lake",
+      "ref": "output/neighborhood_texture_c112.md \"### Grand Lake\"; events: world_summary_c112.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Jack London | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Jack London",
+      "ref": "output/neighborhood_texture_c112.md \"### Jack London\"; events: world_summary_c112.md \"## World Events\"",
+      "popids": []
+    }
+  ],
+  "laneEntries": 20,
+  "angleCapHits": 0,
+  "ranAt": "2026-10-23T11:16:26.887Z"
+}

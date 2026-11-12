@@ -1,0 +1,56 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "112",
+  "persona": "tamsin-pruitt",
+  "byline": "Tamsin Pruitt",
+  "bylinePopid": "POP-01210",
+  "article": "output/cron-compare/staged/culture_c112_tamsin-pruitt_packet-v2_x-ai-grok-4-3.staged-1806.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Aaliyah Brennan",
+        "role": "quoted-source",
+        "popid": "POP-00235"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Lake Merritt"
+    ],
+    "claims": [
+      {
+        "claim": "The tranquility around Lake Merritt really helps me unwind, especially after a long day at the mobile clinic. It's like a balm for my soul. Living here, I feel like I'm in a better headspace to help my patients and be there for my family.",
+        "sourceRef": "citizenVoice PRESS Aaliyah Brennan"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-0749fd816cfe",
+    "draftSha256": "66ab3164032295c5f852ed2c3a3f708a32751e890f2dbe3cbd2a5db68384cad7",
+    "verdict": "output/cron-compare/culture_c112_tamsin-pruitt_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-10-22T23:18:07.017Z",
+    "contractScore": {
+      "opened": false,
+      "closed": false,
+      "purposeMet": false,
+      "inTarget": false,
+      "inTargetBy": "code floor 450",
+      "words": 94,
+      "short": "The piece fails to report lifecycle news events, ends on a discussion question rather than a factual record, and falls far short of the target word count.",
+      "score": 0,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "66ab3164032295c5f852ed2c3a3f708a32751e890f2dbe3cbd2a5db68384cad7",
+      "costUsd": 0.0008
+    }
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-10-23T18:06:27.145Z"
+}

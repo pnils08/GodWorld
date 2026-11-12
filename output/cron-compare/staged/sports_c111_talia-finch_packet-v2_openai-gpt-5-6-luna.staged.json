@@ -1,0 +1,60 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "111",
+  "persona": "talia-finch",
+  "byline": "Talia Finch",
+  "bylinePopid": "POP-00592",
+  "article": "output/cron-compare/staged/sports_c111_talia-finch_packet-v2_openai-gpt-5-6-luna.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Melton Neilon",
+        "role": "quoted-source",
+        "popid": "POP-00170"
+      },
+      {
+        "name": "Rick Walker",
+        "role": "quoted-source",
+        "popid": "POP-00198"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Jack London"
+    ],
+    "claims": [
+      {
+        "claim": "Look, I'm a fan—I plan my whole life around the games—but the analysis side of things? That's a different beast. Between keeping my starter alive and running the bakery, I just don't have the bandwidth to get bogged down in the stats. I'd rather just watch the game and hope for the best than try to decode some column in the Tribune.",
+        "sourceRef": "citizenVoice PRESS Melton Neilon"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-50e1e7f1d509",
+    "draftSha256": "5bc3220f79b2e7703ccb307a83f96fb6e005e7c93ba84f33232fc8592fb35a98",
+    "verdict": "output/cron-compare/sports_c111_talia-finch_packet-v2_openai-gpt-5-6-luna.rhea.json",
+    "ranAt": "2026-10-15T23:19:43.877Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 400",
+      "words": 459,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "5bc3220f79b2e7703ccb307a83f96fb6e005e7c93ba84f33232fc8592fb35a98",
+      "costUsd": 0.0009
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-15T23:19:47.915Z"
+}

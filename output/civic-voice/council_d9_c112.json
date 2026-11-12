@@ -1,0 +1,40 @@
+{
+  "office": "council_d9",
+  "cycle": 112,
+  "speaker": "Terrence Mobley",
+  "cascadeSummary": "This cycle I'm holding the line on Laurel's stability while pushing for a concrete action plan to address Uptown's commercial distress before quiet streets become shuttered ones. I support the Mayor's Downtown Economic Revitalization hearing and the Grand Lake stabilization, and I'm putting the district on record that Uptown has waited long enough for its own version of the focused investment we've seen in other corridors.",
+  "statements": [
+    {
+      "statementId": "STMT-112-council_d9-001",
+      "type": "vote_statement",
+      "topic": "Uptown Commercial Distress",
+      "initiative": "INIT-008",
+      "decision": "Support the Mayor's Downtown Economic Revitalization Emergency Committee Hearing and call for Uptown to receive a dedicated stabilization track within the next two cycles",
+      "quote": "Uptown's quieting streets aren't a mystery — they're a message. We can't let downtown get the hearing while Uptown gets the silence.",
+      "fullStatement": "Uptown's vibrant streets are quieting, and quiet streets in this economy are the first step to shuttered ones. The Mayor's emergency hearing on Downtown Economic Revitalization is exactly the right move, and I'm standing behind it. But I'm not going to let downtown be the only corridor that gets a lifeline while Uptown waits its turn. I want a dedicated Uptown stabilization track on the docket within two cycles — not a study, not a task force, a concrete plan with funding attached. Laurel's stability came from staying focused on what works; Uptown deserves that same focus before its momentum fades into memory.",
+      "disposition": "YES",
+      "actionAsked": "Add a dedicated Uptown commercial stabilization track to the Economic Development Committee docket within the next two cycles",
+      "tone": "urgent but constructive",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-112-council_d9-002",
+      "type": "vote_statement",
+      "topic": "Laurel Stability",
+      "initiative": null,
+      "decision": "Acknowledge Laurel's stability as the product of consistent community investment and oppose any reallocation of its current support",
+      "quote": "Laurel's stability is no accident — it's the product of not letting good work get distracted.",
+      "fullStatement": "Laurel is steady — flat mood, steady trade, low crime. That's not luck; that's the result of staying consistent while other corridors get the attention cycles. I hear the calls to shift resources toward the neighborhoods that are struggling more loudly, and I don't dismiss them. But stability is fragile. If we pull support from neighborhoods like Laurel to fund the emergencies elsewhere, we're just creating the next emergency. I'm putting Council on notice: I'll advocate for maintaining Laurel's current level of investment while we find new money — not reshuffled money — for the districts that need a bigger lift.",
+      "disposition": "statement",
+      "actionAsked": "Maintain Laurel's current investment levels while sourcing new funding for emergency stabilization in other districts",
+      "tone": "firm and protective",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    }
+  ]
+}

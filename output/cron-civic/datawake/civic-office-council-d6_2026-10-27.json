@@ -1,0 +1,16 @@
+{
+  "office": "council_d6",
+  "agentDir": "civic-office-council-d6",
+  "holder": "Elliott Crane",
+  "popid": "POP-00044",
+  "title": "City Council District 6",
+  "date": "2026-10-27",
+  "cycle": 113,
+  "model": "google/gemini-3.7-flash",
+  "statement": "District 6 continues its steady municipal oversight across Montclair and Piedmont Avenue, closely monitoring neighborhood health indicators while maintaining fiscal discipline and advancing no new legislative measures this cycle.",
+  "moves": [],
+  "movesRejected": [],
+  "numberMoved": "0",
+  "ranAt": "2026-10-27T10:45:23.075Z",
+  "fellBackFrom": null
+}

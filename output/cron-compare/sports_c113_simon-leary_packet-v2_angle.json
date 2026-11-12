@@ -1,0 +1,471 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "113",
+  "persona": "simon-leary",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00016",
+      "name": "Simon Leary",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "The Oaks record is 2-0.",
+      "approach": "Long-view approach (Simon Leary): third-person essayist. Treat supplied sports facts as present structure, not as proof of history or collective memory. A metaphor about continuity, load, or change may interpret the Packet but may not add a person, place, institution, event, season, statistic, cause, organizational intention, or citywide belief. Do not write a game recap, Hal elegy, P Slayer fan heat, or Anthony board memo.",
+      "creativeBrief": {
+        "kind": "sports-long-view",
+        "pulseClass": "role-change-under-continuity",
+        "bagModes": [
+          "2 Keystone Player",
+          "4 Load-Bearing Continuity"
+        ],
+        "claim": "A role change inside a sustained team record can support a structural interpretation; it does not establish franchise history, organizational intent, or citywide meaning.",
+        "anchorFacts": [
+          "The Oaks record is 2-0.",
+          "The Oaks have won 2 straight."
+        ],
+        "missing": [
+          "why the role change was made",
+          "historical comparison or franchise precedent",
+          "organizational intention or future plan",
+          "citywide, clubhouse, or fan interpretation"
+        ],
+        "sceneRule": "No witnessed room or scene is supplied. Structure and continuity may appear only as clearly interpretive metaphor grounded in the approved present facts.",
+        "sourcePointers": [
+          "output/world_summary_c113.md ## Sports",
+          "scripts/sportsSubstrate.js",
+          "docs/media/SIMON_LONGVIEW_BAG.md"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "long-view-signal",
+      "hood": "Uptown",
+      "score": null,
+      "src": "world_summary_c113.md ## Sports",
+      "nearby": [
+        {
+          "text": "Oaks | game-result | (early-season) | Adash Stanley, Austin Reaves, AJ Dybantsa, Wilson Shepard",
+          "src": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | game-result | (early-season) | Adash Stanley, AJ Dybantsa, Austin Reaves",
+          "src": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | game-result | (early-season) | Adash Stanley, AJ Dybantsa, Austin Reaves",
+          "src": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | rumor | (off-season) | Desmond Morton, Frank Reyna, Danny Horn, Vladimir Gonzalez, JR Rosado",
+          "src": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | community-outreach | (off-season) | Darrin Davis, Rafael Montez",
+          "src": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-01023",
+          "name": "Adash Stanley",
+          "profile": "Adash Stanley — PG / The Oaks",
+          "role": "PG / The Oaks",
+          "hood": "Downtown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c113.md ## Sports",
+            "pop": "POP-01023",
+            "rowName": "Adash Stanley",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01027",
+          "name": "Austin Reaves",
+          "profile": "Austin Reaves — SG / The Oaks",
+          "role": "SG / The Oaks",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c113.md ## Sports",
+            "pop": "POP-01027",
+            "rowName": "Austin Reaves",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01022",
+          "name": "Wilson Shepard",
+          "profile": "Wilson Shepard — Head Coach, Oakland Oaks",
+          "role": "Head Coach, Oakland Oaks",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c113.md ## Sports",
+            "pop": "POP-01022",
+            "rowName": "Wilson Shepard",
+            "kind": "slice-row"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C113",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-876f95b5eb98"
+      },
+      {
+        "t": "FACT",
+        "text": "The Oaks record is 2-0.",
+        "src": "world_summary_c113.md ## Sports",
+        "id": "F-1b1ab64b18fd"
+      },
+      {
+        "t": "FACT",
+        "text": "The Oaks have won 2 straight.",
+        "src": "world_summary_c113.md ## Sports",
+        "id": "F-b604c81bd368"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "named",
+    "candidates": [
+      {
+        "pop": "POP-01023",
+        "name": "Adash Stanley",
+        "role": "PG / The Oaks",
+        "hood": "Downtown",
+        "profile": "Adash Stanley — PG / The Oaks ",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c113.md ## Sports",
+          "pop": "POP-01023",
+          "rowName": "Adash Stanley",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01027",
+        "name": "Austin Reaves",
+        "role": "SG / The Oaks",
+        "hood": "West Oakland",
+        "profile": "Austin Reaves — SG / The Oaks",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c113.md ## Sports",
+          "pop": "POP-01027",
+          "rowName": "Austin Reaves",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01022",
+        "name": "Wilson Shepard",
+        "role": "Head Coach, Oakland Oaks",
+        "hood": "West Oakland",
+        "profile": "Wilson Shepard — Head Coach, Oakland Oaks",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c113.md ## Sports",
+          "pop": "POP-01022",
+          "rowName": "Wilson Shepard",
+          "kind": "slice-row"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Simon Leary",
+    "popid": "POP-00016"
+  },
+  "assignment": {
+    "story": {
+      "angle": "The Oaks record is 2-0.",
+      "label": "The Oaks record is 2-0.",
+      "hookLine": "The Oaks record is 2-0.",
+      "kind": "long-view-signal",
+      "hood": "Uptown",
+      "popids": [
+        "POP-01023",
+        "POP-01027",
+        "POP-01022"
+      ],
+      "citizens": [
+        "Adash Stanley (POP-01023)",
+        "Austin Reaves (POP-01027)",
+        "Wilson Shepard (POP-01022)"
+      ],
+      "ref": "world_summary_c113.md ## Sports",
+      "cycle": 113
+    },
+    "approach": "Long-view approach (Simon Leary): third-person essayist. Treat supplied sports facts as present structure, not as proof of history or collective memory. A metaphor about continuity, load, or change may interpret the Packet but may not add a person, place, institution, event, season, statistic, cause, organizational intention, or citywide belief. Do not write a game recap, Hal elegy, P Slayer fan heat, or Anthony board memo."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": {
+    "pulse": {
+      "className": "role-change-under-continuity",
+      "score": 56,
+      "label": "The Oaks record is 2-0."
+    },
+    "prewrite": {
+      "bagModes": [
+        {
+          "id": 2,
+          "name": "Keystone Player"
+        },
+        {
+          "id": 4,
+          "name": "Load-Bearing Continuity"
+        }
+      ],
+      "anchorFacts": [
+        "The Oaks record is 2-0.",
+        "The Oaks have won 2 straight."
+      ],
+      "claim": "A role change inside a sustained team record can support a structural interpretation; it does not establish franchise history, organizational intent, or citywide meaning.",
+      "missing": [
+        "why the role change was made",
+        "historical comparison or franchise precedent",
+        "organizational intention or future plan",
+        "citywide, clubhouse, or fan interpretation"
+      ],
+      "hooks": []
+    },
+    "players": [
+      {
+        "name": "Adash Stanley",
+        "popid": "POP-01023",
+        "role": "PG / The Oaks ",
+        "neighborhood": "Downtown",
+        "why": "feed-names"
+      },
+      {
+        "name": "Austin Reaves",
+        "popid": "POP-01027",
+        "role": "SG / The Oaks",
+        "neighborhood": "West Oakland",
+        "why": "feed-names"
+      },
+      {
+        "name": "Wilson Shepard",
+        "popid": "POP-01022",
+        "role": "Head Coach, Oakland Oaks",
+        "neighborhood": "West Oakland",
+        "why": "feed-names"
+      }
+    ],
+    "scene": {
+      "colorRoom": "No witnessed room or scene is supplied. Structure and continuity may appear only as clearly interpretive metaphor grounded in the approved present facts."
+    },
+    "candidates": [
+      {
+        "score": 58,
+        "cycle": 113,
+        "team": "A's",
+        "label": "The Outfield squeeze for next season. 5 Outfielders for 3 positions"
+      },
+      {
+        "score": 56,
+        "cycle": 113,
+        "team": "Oaks",
+        "label": "The Oaks win again behind a big game behind Adash Stanley. The Oaks 91 - Pistons 78 on the road in Detroit."
+      },
+      {
+        "score": 56,
+        "cycle": 113,
+        "team": "Oaks",
+        "label": "The Oaks remain sizzling hot after a winless preseason have now shot out of the gate winning 3 straight. Oaks 115 - Knicks 93 in New York"
+      },
+      {
+        "score": 56,
+        "cycle": 113,
+        "team": "Oaks",
+        "label": "The Oaks completly dismantle the Wizards in Washington. Oaks 105 - Wizards 62"
+      },
+      {
+        "score": 36,
+        "cycle": 112,
+        "team": "Oaks",
+        "label": "The Oaks open their inaugural season at home. AJ Dybantsa shines in his rookie debut as the Oaks win their first win as a franchise."
+      },
+      {
+        "score": 30,
+        "cycle": 113,
+        "team": "A's",
+        "label": "Darrin Davis works with the Oakland Police and Rafael Montez on youth outreach programs in the city."
+      }
+    ]
+  },
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Simon Leary",
+    "popid": "POP-00016",
+    "text": "Two games in, and the record says 2-0. That's the whole fact. But the assignment is about a role change inside that record, and the packet doesn't tell me why it happened or what it means. So I'm not chasing a story about the games. I'm chasing the shape of continuity under load. I stand at my desk in Rockridge, coffee gone cold, thinking about how a team that wins two straight can still be in the middle of something unspoken. The role change is the load-bearing beam here—it's the thing that holds up the record, but nobody's saying what it's holding. I want to write about how a record can stay intact while the structure underneath shifts. That's the long view: not the score, but the weight.",
+    "plan": {
+      "chase": "Two games in, and the record says 2-0. That's the whole fact. But the assignment is about a role change inside that record, and the packet doesn't tell me why it happened or what it means. So I'm not chasing a story about the games. I'm chasing the shape of continuity under load. I stand at my desk in Rockridge, coffee gone cold, thinking about how a team that wins two straight can still be in the middle of something unspoken. The role change is the load-bearing beam here—it's the thing that holds up the record, but nobody's saying what it's holding. I want to write about how a record can stay intact while the structure underneath shifts. That's the long view: not the score, but the weight. ",
+      "focus": "The structural interpretation of a role change inside a sustained 2-0 record—what it means for continuity when the load-bearing pieces shift.",
+      "why": "Because the record is the only fact, and the role change is the only tension. A long-view essay needs a metaphor that holds both without inventing history or intent. The record is the surface; the role change is the fault line. That's where the essay lives.",
+      "checks": [
+        "No new facts beyond the 2-0 record and the role change as supplied.",
+        "No named people beyond the supplied candidates.",
+        "No invented institutions, events, dates, or citywide beliefs.",
+        "Interpretation stays abstract and grounded in the present facts.",
+        "No game recap, no elegy, no fan heat, no board memo."
+      ],
+      "targets": [
+        {
+          "pop": "POP-01023",
+          "question": "When the role changes, what does the continuity of the record ask of you personally?",
+          "basis": "Adash Stanley is a supplied candidate and a named player on the 2-0 Oaks."
+        },
+        {
+          "pop": "POP-01027",
+          "question": "How do you carry the weight of a perfect start when the structure around you is shifting?",
+          "basis": "Austin Reaves is a supplied candidate and a named player on the 2-0 Oaks."
+        },
+        {
+          "pop": "POP-01022",
+          "question": "What does it mean to keep a record intact while the load-bearing pieces underneath change?",
+          "basis": "Wilson Shepard is the supplied head coach, responsible for the team's structure."
+        }
+      ],
+      "interpretation": "A record is a kind of architecture. Two straight wins is a clean facade, but the role change is a crack in the foundation—not a failure, but a shift. The essay will treat the record as a structure that holds because something else moved to support it. The role change is the load-bearing continuity: the thing that lets the record stand, even as the people inside it change positions. The metaphor is about how we mistake stillness for stability. The record looks static, but it's actually a dynamic ",
+      "unverifiedLead": [
+        "The role change might be tied to a player's condition or a strategic adjustment, but that's not in the packet.",
+        "There may be a deeper story about how the team is handling the early-season pressure, but I have no evidence for it.",
+        "The community might be reacting to the role change, but I have no source for that."
+      ],
+      "closeQuestion": "When the record stays perfect but the structure underneath shifts, what does that say about the nature of continuity itself?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Oaks | game-result | (early-season) | Adash Stanley, Austin Reaves, AJ Dybantsa, Wilson Shepard",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01023",
+        "POP-01027",
+        "POP-01024",
+        "POP-01022"
+      ]
+    },
+    {
+      "label": "Oaks | game-result | (early-season) | Adash Stanley, AJ Dybantsa, Austin Reaves",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01023",
+        "POP-01024",
+        "POP-01027"
+      ]
+    },
+    {
+      "label": "Oaks | game-result | (early-season) | Adash Stanley, AJ Dybantsa, Austin Reaves",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01023",
+        "POP-01024",
+        "POP-01027"
+      ]
+    },
+    {
+      "label": "A's | rumor | (off-season) | Desmond Morton, Frank Reyna, Danny Horn, Vladimir Gonzalez, JR Rosado",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00051",
+        "POP-00079",
+        "POP-00022",
+        "POP-00598",
+        "POP-00054"
+      ]
+    },
+    {
+      "label": "A's | community-outreach | (off-season) | Darrin Davis, Rafael Montez",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00021",
+        "POP-00136"
+      ]
+    }
+  ],
+  "laneEntries": 9,
+  "angleCapHits": 0,
+  "ranAt": "2026-10-29T11:16:20.994Z"
+}

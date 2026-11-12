@@ -1,0 +1,31 @@
+{
+  "model": "anthropic/claude-sonnet-5.5",
+  "calls": [
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Neighborhood_Demographics",
+        "match": "Chinatown"
+      },
+      "resultChars": 248,
+      "resultHead": "Neighborhood | Students | Adults | Seniors | Unemployed | Sick | LastUpdated | SchoolQualityIndex | GraduationRate | CollegeReadinessRate | TeacherQuality | Funding\nChinatown | 314 | 1492 | 395 | 86 | 140 | 113 | 6.91 | 85.93 | 53.79 | 6.94 | 12000"
+    },
+    {
+      "tool": "canon_search",
+      "input": {
+        "query": "Chinatown sick residents illness"
+      },
+      "resultChars": 2593,
+      "resultHead": "12 file(s) matched on disk for 'Chinatown sick residents illness':\n— output/simulation_ledger_snapshot.jsonl: 1:{\"Name\":\"Vinnie Keane\",\"POPID\":\"POP-00001\",\"First\":\"Vinnie\",\"MaidenName\":\"\",\"Last\":\"Keane\",\"UNI (y/n)\":\"yes\",\"MED (y/n)\":\"no\",\"CIV (y/n)\":\"no\",\"ClockMode\":\"GAME\",\"Tier\":\"1\",\"RoleType\":\"Designated Hitter, Oakland A's Legend\",\"Status\":\"Active\",\"BirthYear\":\"2003\",\"OrginCity\":\"Boston, MA\",\"LifeHistory\":\"[Compressed: 5 entries | 2026-06-20 23:35 → 2026-06-20 23:35 | Dominant:PrevEvening,Daily,Personal | Archetype:Striver | Mods:relentless,outgoing,warm,curious,unshakable,principled,family"
+    },
+    {
+      "tool": "citizen_lookup",
+      "input": {
+        "name": "Marisio Curazo"
+      },
+      "resultChars": 180,
+      "resultHead": "Marisio Curazo — role: Elder Care Coordinator; neighborhood: Chinatown; born: 1981; wealth: 7; careerStage: senior; employerBiz: BIZ-00034; skills: The Vulnerable; popid: POP-00698"
+    }
+  ],
+  "ranAt": "2026-10-31T17:00:33.256Z"
+}

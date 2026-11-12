@@ -1,0 +1,70 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "114",
+  "persona": "elliot-graye",
+  "byline": "Elliot Graye",
+  "bylinePopid": "POP-00012",
+  "article": "output/cron-compare/staged/culture_c114_elliot-graye_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Antoine Vermeer",
+        "role": "quoted-source",
+        "popid": "POP-00755"
+      },
+      {
+        "name": "Ignacio Zavala",
+        "role": "quoted-source",
+        "popid": "POP-01094"
+      },
+      {
+        "name": "Art Scott",
+        "role": "quoted-source",
+        "popid": "POP-00665"
+      },
+      {
+        "name": "Declan Toto",
+        "role": "quoted-source",
+        "popid": "POP-00697"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Lake Merritt"
+    ],
+    "claims": [
+      {
+        "claim": "I've seen the Cathedral of the Living Word's job training workshop attract attendees from around the neighborhood, which is great. It's a valuable resource for our community.",
+        "sourceRef": "citizenVoice PRESS Antoine Vermeer"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-822b5c8c642e",
+    "draftSha256": "dd39d3f0057daf7eaf7f83c85642de90a2a202abe78b6353f0e71b02db36b3de",
+    "verdict": "output/cron-compare/culture_c114_elliot-graye_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-06T00:15:38.093Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 953,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "dd39d3f0057daf7eaf7f83c85642de90a2a202abe78b6353f0e71b02db36b3de",
+      "costUsd": 0.0011
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-06T00:15:43.540Z"
+}

@@ -1,0 +1,17 @@
+{
+  "desk": "culture",
+  "cycle": "115",
+  "model": "anthropic/claude-haiku-5.5",
+  "turns": 3,
+  "maxTurns": 15,
+  "usageInputTokens": 31303,
+  "usageOutputTokens": 4267,
+  "savedFiles": [
+    "output/test-shell/20261111-012443-kai-marston-live/culture_c115_kai-marston_packet-v2_anthropic-claude-haiku-5-5.md"
+  ],
+  "compareAgainst": "output/desk-output/culture_c115.md",
+  "durationMs": 23275,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-11-11T07:25:08.642Z"
+}

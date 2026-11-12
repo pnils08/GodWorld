@@ -1,0 +1,84 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "112",
+  "persona": "carmen-delaine",
+  "byline": "Carmen Delaine",
+  "bylinePopid": "POP-00011",
+  "article": "output/cron-compare/staged/civic_c112_carmen-delaine_packet-v2_anthropic-claude-haiku-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Avery Santana",
+        "role": "quoted-source",
+        "popid": "POP-00034"
+      },
+      {
+        "name": "Brenda Okoro",
+        "role": "mentioned",
+        "popid": "POP-00037",
+        "floor": true
+      },
+      {
+        "name": "Elliott Crane",
+        "role": "mentioned",
+        "popid": "POP-00044",
+        "floor": true
+      },
+      {
+        "name": "Leonard Tran",
+        "role": "mentioned",
+        "popid": "POP-00502",
+        "floor": true
+      },
+      {
+        "name": "Ramon Vega",
+        "role": "mentioned",
+        "popid": "POP-00042",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "INIT-001:disbursement-active",
+        "verb": "advanced"
+      }
+    ],
+    "hoods": [
+      "West Oakland"
+    ],
+    "claims": [
+      {
+        "claim": "Month-eleven, 23-day standard maintained — this fund delivers because Brenda Okoro's team treats every application like family.",
+        "sourceRef": "citizenVoice PRESS Avery Santana"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-672b6a131683",
+    "draftSha256": "e14d821647e61597b3060c41890e6814a449d774bdd762e6fc96b5034c2c8b82",
+    "verdict": "output/cron-compare/civic_c112_carmen-delaine_packet-v2_anthropic-claude-haiku-5-5.rhea.json",
+    "ranAt": "2026-10-19T23:15:29.221Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 500",
+      "words": 577,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "e14d821647e61597b3060c41890e6814a449d774bdd762e6fc96b5034c2c8b82",
+      "costUsd": 0.0008
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-19T23:15:34.381Z"
+}

@@ -1,0 +1,1130 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-01210",
+    "name": "Tamsin Pruitt",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "The lives of C115: 11 people — Maurice Franklin moved into a place of their own in Rockridge, renting",
+    "approach": "Lives approach: this slice is the people something happened to this Cycle — a birth, a death in the house, a hospital stay, a retirement, a promotion; a household set up or a place of their own; a win or a loss on the book; the people a turn of the city reached and what it did to their day; and the smaller moments the record kept. Each person gets their own passage: the event, then the thread under it — the stay or strain that led there, the other lines the record kept for them, what the Tribune or this page already said of them, and what they did next if the record says. Read the thread in order and name where two lines of it do not agree; do not restate a ledger value as the story. The fact exactly right; never a trend, never a number first; the person, not the system the event belongs to. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent p",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "lives",
+      "hood": null,
+      "facts": [
+        "Maurice Franklin moved into a place of their own in Rockridge, renting (C115)",
+        "Maurice Franklin — in their life, C114: borrowed against next month to close this one",
+        "Maurice Franklin — in their life, C115: the card statement was the first thing read and the last thing forgotten",
+        "Maurice Franklin — in their life, C115: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+        "Maurice Franklin — in their life, C115: brought home a new plant and picked its spot carefully",
+        "Maurice Franklin — the Tribune named them in a piece headlined The Board in the Trailer Says 9.5 Percent. Enzo Walker Is Counting Something Else. (Business Reporter, C114)",
+        "Maurice Franklin — the Tribune named them in a piece headlined Chinatown's 137 Sick: Six Beds Hold Part of the Count, Kitchens Hold the Rest (Civic, C114)",
+        "Maurice Franklin — the Tribune named them in a piece headlined Chinatown's 140 Sick Are Mostly at Home, and Home Is Doing the Work (Civic, C113)",
+        "Soledad Coleman moved into a place of their own in Rockridge, renting (C115)",
+        "Soledad Coleman — in their life, C114: badged into the Baylight office early and tried not to think about the protestors from last month",
+        "Soledad Coleman — in their life, C115: traded an extra ticket for a promise to bring the kid next time",
+        "Soledad Coleman — in their life, C115: attended a small local gathering and stayed later than planned",
+        "Soledad Coleman — in their life, C115: realized the same seven meals had rotated for a month, and shrugged",
+        "Tom Jilner lost on the UNDOCKED book — staked 144, the book kept it, Rockridge (C115)",
+        "Tom Jilner — in their life, C114: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+        "Tom Jilner — in their life, C114: drove the whole way home without remembering a single turn",
+        "Tom Jilner — in their life, C115: woke up at 5 AM just to have thirty minutes of total silence before the house woke up near a tidy sidewalk stretch",
+        "Tom Jilner — in their life, C115: said no to something and felt the shape of who they are in it",
+        "Tom Jilner — the Tribune named them in a piece headlined Rockridge Wine Bar Says \"Steady.\" The Map Says Decay. Who Answers? (Civic, C114)",
+        "Marisol Achebe lost on the UNDOCKED book — staked 134, the book kept it, Fruitvale (C115)",
+        "Marisol Achebe — in their life, C114: felt unexpectedly nostalgic at the smell of rain on warm pavement",
+        "Marisol Achebe — in their life, C115: caught themselves bragging a little about the neighborhood lately",
+        "Marisol Achebe — in their life, C115: took a casual walk through their area",
+        "Mina Kapoor — noticed neighbors being more watchful today, Grand Lake — one of 4 people the Cycle's city turn reached (Commercial Stabilization for Grand Lake is vote-ready — ongoing economic effects in Grand Lake; the city feels it through these…) (C115)",
+        "Mina Kapoor — in their life, C114: the for-rent signs outnumbered the welcome mats this month",
+        "Mina Kapoor — in their life, C115: realized the week had passed without a single thing worth retelling",
+        "Mina Kapoor — in their life, C115: carried three boxes of canned goods from the pantry truck and felt it in their lower back",
+        "Mina Kapoor — in their life, C115: compared rent notes with a neighbor over the fence in Grand Lake",
+        "Mina Kapoor — the Tribune named them in a piece headlined The Page of Lives, C113: A Place of Their Own (Culture, C113)",
+        "Everly Rainey — wrote half a letter to family, then decided to call instead, Downtown — one of 4 people the Cycle's city turn reached (Initiative work landed in 7 neighborhood(s): Downtown, Temescal, West Oakland, Fruitvale, Jack London, Grand Lake, East Oakland) (C115)",
+        "Everly Rainey — in their life, C114: caught their partner humming the song they'd had stuck all day near a civic plaza",
+        "Everly Rainey — in their life, C115: listened to the ninth inning on the porch radio and let the street hear it too",
+        "Everly Rainey — in their life, C115: a DJ spins records at a crowded bar near Broadway, the bassline thumping through the foggy night",
+        "Tomas Aguilar — bought a new A's jersey and let the week's noise settle, Jack London — one of 4 people the Cycle's safety turn reached (Papers served at the counter — a lawsuit, and lawyers the shop never budgeted for.) (C115)",
+        "Tomas Aguilar — in their life, C114: one of the kids asked a question at dinner that stopped the room",
+        "Tomas Aguilar — in their life, C114: a flyer for a seniors lunch program flutters on a community bulletin board",
+        "Tomas Aguilar — the Tribune named them in a piece headlined THE PAGE: Eleven Lives, Cycle 113 (Culture, C113)",
+        "Tomas Aguilar — the Tribune named them in a piece headlined Oakland on the NBA Expansion List: The Systems Guy Behind the Bid (Business, C91)",
+        "Kelvon Ochoa — moved from Rockridge to Lake Merritt — moving up from Rockridge — sold up and bought in Lake Merritt, Lake Merritt (C115 — what happened in their life, not words they said)",
+        "Kelvon Ochoa — in their life, C115: The owner at Anthropic is talking about tightening up, and everyone heard it.",
+        "Kelvon Ochoa — in their life, C115: still feeling the energy from last night's city buzz",
+        "Kelvon Ochoa — in their life, C115: cooked the full Sunday dinner out of habit and packed half of it straight into the freezer near a coffee line",
+        "Kelvon Ochoa — in their life, C115: a group of fans huddle under an awning debating last night's game, their voices rising above the sound of rain hitting the pavement",
+        "Jesus Jorden — moved from Temescal to Fruitvale — moving up from Temescal, Fruitvale (C115 — what happened in their life, not words they said)",
+        "Jesus Jorden — in their life, C114: felt a lift at Dario's Bar after the win",
+        "Jesus Jorden — in their life, C114: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots near a cafe near the clinics",
+        "Jesus Jorden — in their life, C115: grabbed coffee from the cart outside the hospital before the morning rush hit",
+        "Jesus Jorden — in their life, C115: wrote half a letter to family, then decided to call instead",
+        "Jasmine Torres — moved from Chinatown to KONO — leaving Chinatown for a better fit, KONO (C115 — what happened in their life, not words they said)",
+        "Jasmine Torres — in their life, C114: listened to a style of music they'd always skipped, twice",
+        "Jasmine Torres — in their life, C115: the bartender wipes down the counter between rounds of A's highlights",
+        "Jasmine Torres — in their life, C115: tried a new recipe that mostly worked",
+        "Jasmine Torres — in their life, C115: heard a kid explain something to a parent with total authority and grinned",
+        "Jasmine Torres — the Tribune named them in a piece headlined THE QUIET INVESTMENT (Business, C88)",
+        "Jasmine Torres — the Tribune named them in a piece headlined The Oakland Stack (Social Trends, C84)",
+        "Ruth Anyanwu — moved from East Oakland to Downtown — moving up from East Oakland, Downtown (C115 — what happened in their life, not words they said)",
+        "Ruth Anyanwu — in their life, C115: bought a new A's jersey and the quiet satisfaction of finding a favorite song on the jukebox",
+        "Ruth Anyanwu — in their life, C115: walked a different street home just to see it",
+        "Ruth Anyanwu — in their life, C115: played a relative's voicemail twice before saving it again near a lot mid-frame",
+        "Ruth Anyanwu — in their life, C115: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for"
+      ],
+      "priorCycle": null,
+      "note": "none of today's people has written their own page this Cycle — no quotes",
+      "engineHooks": [
+        "Household dissolved in Lake Merritt due to economic hardship (observational analysis)",
+        "A family bought their home in Chinatown (observational analysis)",
+        "The Cortez household (2) moved from Uptown to West Oakland — moving up from Uptown (observational analysis)",
+        "Xavier Ramington moved from Temescal to West Oakland — moving up from Temescal (desk rotation)"
+      ],
+      "roomIsYours": "the plain respect, what the event meant in that house or on that block, the detail the family would have picked — from the lines below, never invented",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-lives",
+    "hood": null,
+    "src": "output/beats/Lived_Events.jsonl @C115 batch fd0b35",
+    "plan": {
+      "focus": "Maurice Franklin"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00840",
+        "name": "Soledad Coleman",
+        "profile": "Soledad Coleman — AI Safety Researcher (Anthropic) — Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00691",
+        "name": "Tom Jilner",
+        "profile": "Tom Jilner — Wine Bar Owner — Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00526",
+        "name": "Marisol Achebe",
+        "profile": "Marisol Achebe — Mutual Aid Network Organizer — Fruitvale",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00840-13d60a19fb",
+        "pop": "POP-00840",
+        "name": "Soledad Coleman",
+        "quote": "I've seen Maurice Franklin around the neighborhood, but I don't really know them. I moved into my place in Rockridge, and so did they, I think around the same time. We haven't really talked, just nodded at each other when we see each other.",
+        "factIds": [
+          "F-55adb5642815",
+          "F-5ac5466274c2"
+        ],
+        "src": "packet.W2[POP-00840]"
+      },
+      {
+        "id": "Q-POP-00691-3bf954952a",
+        "pop": "POP-00691",
+        "name": "Tom Jilner",
+        "quote": "I've seen Maurice Franklin around Rockridge; they just moved into a place of their own. I haven't had a chance to talk to them yet, but it's good to see new faces in the neighborhood.",
+        "factIds": [
+          "F-5ac5466274c2",
+          "F-32bff524b2bd"
+        ],
+        "src": "packet.W2[POP-00691]"
+      },
+      {
+        "id": "Q-POP-00526-9b2c82f886",
+        "pop": "POP-00526",
+        "name": "Marisol Achebe",
+        "quote": "I haven't seen Maurice Franklin around Fruitvale lately, but I did hear they moved to Rockridge. I'm not sure what to make of it, to be honest. I've been busy with the Mutual Aid Network and haven't had a chance to catch up with them.",
+        "factIds": [
+          "F-5ac5466274c2",
+          "F-d87ebda98cc1",
+          "F-0a2299946e2b"
+        ],
+        "src": "packet.W2[POP-00526]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Tamsin Pruitt",
+        "text": "The condition of the new place and how it compares to their previous living situation.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C115",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-bc84fc0b7718"
+    },
+    {
+      "t": "FACT",
+      "text": "Maurice Franklin moved into a place of their own in Rockridge, renting",
+      "src": "output/beats/Lived_Events.jsonl @C115 batch fd0b35",
+      "id": "F-5ac5466274c2"
+    },
+    {
+      "t": "FACT",
+      "text": "Maurice Franklin first. The event is the lead; one true detail; what came next only if the record says.",
+      "src": "output/beats/Lived_Events.jsonl @C115 batch fd0b35",
+      "id": "F-d87ebda98cc1"
+    },
+    {
+      "t": "FACT",
+      "text": "Maurice Franklin moved into a place of their own in Rockridge, renting (C115)",
+      "src": "output/beats/Household_Ledger.jsonl @C115",
+      "id": "F-0a2299946e2b"
+    },
+    {
+      "t": "FACT",
+      "text": "Maurice Franklin — in their life, C114: borrowed against next month to close this one",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-3a90e849c4ee"
+    },
+    {
+      "t": "FACT",
+      "text": "Maurice Franklin — in their life, C115: the card statement was the first thing read and the last thing forgotten",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-0c41020373fd"
+    },
+    {
+      "t": "FACT",
+      "text": "Maurice Franklin — in their life, C115: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-2f0af74be7a0"
+    },
+    {
+      "t": "FACT",
+      "text": "Maurice Franklin — in their life, C115: brought home a new plant and picked its spot carefully",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-220d99f5f595"
+    },
+    {
+      "t": "FACT",
+      "text": "Maurice Franklin — the Tribune named them in a piece headlined The Board in the Trailer Says 9.5 Percent. Enzo Walker Is Counting Something Else. (Business Reporter, C114)",
+      "src": "archive/ARTICLE_INDEX.jsonl 384044afdbad94f5",
+      "id": "F-173b29ed6c74"
+    },
+    {
+      "t": "FACT",
+      "text": "Maurice Franklin — the Tribune named them in a piece headlined Chinatown's 137 Sick: Six Beds Hold Part of the Count, Kitchens Hold the Rest (Civic, C114)",
+      "src": "archive/ARTICLE_INDEX.jsonl f5baef8c2be8a0e4",
+      "id": "F-48bb5e53c3e5"
+    },
+    {
+      "t": "FACT",
+      "text": "Maurice Franklin — the Tribune named them in a piece headlined Chinatown's 140 Sick Are Mostly at Home, and Home Is Doing the Work (Civic, C113)",
+      "src": "archive/ARTICLE_INDEX.jsonl 415a8378a3cc8be1",
+      "id": "F-d3b57b170bc5"
+    },
+    {
+      "t": "FACT",
+      "text": "Soledad Coleman moved into a place of their own in Rockridge, renting (C115)",
+      "src": "output/beats/Household_Ledger.jsonl @C115",
+      "id": "F-55adb5642815"
+    },
+    {
+      "t": "FACT",
+      "text": "Soledad Coleman — in their life, C114: badged into the Baylight office early and tried not to think about the protestors from last month",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-f3c5ddabe56b"
+    },
+    {
+      "t": "FACT",
+      "text": "Soledad Coleman — in their life, C115: traded an extra ticket for a promise to bring the kid next time",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-55854a608e06"
+    },
+    {
+      "t": "FACT",
+      "text": "Soledad Coleman — in their life, C115: attended a small local gathering and stayed later than planned",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-4b83bd534d8c"
+    },
+    {
+      "t": "FACT",
+      "text": "Soledad Coleman — in their life, C115: realized the same seven meals had rotated for a month, and shrugged",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-8a8707362323"
+    },
+    {
+      "t": "FACT",
+      "text": "Tom Jilner lost on the UNDOCKED book — staked 144, the book kept it, Rockridge (C115)",
+      "src": "output/beats/Casino_Ledger.jsonl @C115",
+      "id": "F-b5e3e0831db1"
+    },
+    {
+      "t": "FACT",
+      "text": "Tom Jilner — in their life, C114: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-714480ccb508"
+    },
+    {
+      "t": "FACT",
+      "text": "Tom Jilner — in their life, C114: drove the whole way home without remembering a single turn",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-834fd04dcbd8"
+    },
+    {
+      "t": "FACT",
+      "text": "Tom Jilner — in their life, C115: woke up at 5 AM just to have thirty minutes of total silence before the house woke up near a tidy sidewalk stretch",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-e2b762b1f169"
+    },
+    {
+      "t": "FACT",
+      "text": "Tom Jilner — in their life, C115: said no to something and felt the shape of who they are in it",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-e63f314320ab"
+    },
+    {
+      "t": "FACT",
+      "text": "Tom Jilner — the Tribune named them in a piece headlined Rockridge Wine Bar Says \"Steady.\" The Map Says Decay. Who Answers? (Civic, C114)",
+      "src": "archive/ARTICLE_INDEX.jsonl 77223d1e2e7334d4",
+      "id": "F-216b3402c461"
+    },
+    {
+      "t": "FACT",
+      "text": "Marisol Achebe lost on the UNDOCKED book — staked 134, the book kept it, Fruitvale (C115)",
+      "src": "output/beats/Casino_Ledger.jsonl @C115",
+      "id": "F-3f28df0288e5"
+    },
+    {
+      "t": "FACT",
+      "text": "Marisol Achebe — in their life, C114: felt unexpectedly nostalgic at the smell of rain on warm pavement",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-da9cf20df0b1"
+    },
+    {
+      "t": "FACT",
+      "text": "Marisol Achebe — in their life, C115: caught themselves bragging a little about the neighborhood lately",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-46e318f248fd"
+    },
+    {
+      "t": "FACT",
+      "text": "Marisol Achebe — in their life, C115: took a casual walk through their area",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-d110f851c166"
+    },
+    {
+      "t": "FACT",
+      "text": "Mina Kapoor — noticed neighbors being more watchful today, Grand Lake — one of 4 people the Cycle's city turn reached (Commercial Stabilization for Grand Lake is vote-ready — ongoing economic effects in Grand Lake; the city feels it through these…) (C115)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C115",
+      "id": "F-0a1e5cdd3f08"
+    },
+    {
+      "t": "FACT",
+      "text": "Mina Kapoor — in their life, C114: the for-rent signs outnumbered the welcome mats this month",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-b1440ae85984"
+    },
+    {
+      "t": "FACT",
+      "text": "Mina Kapoor — in their life, C115: realized the week had passed without a single thing worth retelling",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-a35143b57942"
+    },
+    {
+      "t": "FACT",
+      "text": "Mina Kapoor — in their life, C115: carried three boxes of canned goods from the pantry truck and felt it in their lower back",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-589971c7368c"
+    },
+    {
+      "t": "FACT",
+      "text": "Mina Kapoor — in their life, C115: compared rent notes with a neighbor over the fence in Grand Lake",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-7881ff084840"
+    },
+    {
+      "t": "FACT",
+      "text": "Mina Kapoor — the Tribune named them in a piece headlined The Page of Lives, C113: A Place of Their Own (Culture, C113)",
+      "src": "archive/ARTICLE_INDEX.jsonl 753f8ac13ffa3029",
+      "id": "F-42b167190d18"
+    },
+    {
+      "t": "FACT",
+      "text": "Everly Rainey — wrote half a letter to family, then decided to call instead, Downtown — one of 4 people the Cycle's city turn reached (Initiative work landed in 7 neighborhood(s): Downtown, Temescal, West Oakland, Fruitvale, Jack London, Grand Lake, East Oakland) (C115)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C115",
+      "id": "F-d92b2137b722"
+    },
+    {
+      "t": "FACT",
+      "text": "Everly Rainey — in their life, C114: caught their partner humming the song they'd had stuck all day near a civic plaza",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-654cc8f1a45e"
+    },
+    {
+      "t": "FACT",
+      "text": "Everly Rainey — in their life, C115: listened to the ninth inning on the porch radio and let the street hear it too",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-9086b00e5495"
+    },
+    {
+      "t": "FACT",
+      "text": "Everly Rainey — in their life, C115: a DJ spins records at a crowded bar near Broadway, the bassline thumping through the foggy night",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-c26a6dd560c2"
+    },
+    {
+      "t": "FACT",
+      "text": "Tomas Aguilar — bought a new A's jersey and let the week's noise settle, Jack London — one of 4 people the Cycle's safety turn reached (Papers served at the counter — a lawsuit, and lawyers the shop never budgeted for.) (C115)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C115",
+      "id": "F-70f8dffe5e77"
+    },
+    {
+      "t": "FACT",
+      "text": "Tomas Aguilar — in their life, C114: one of the kids asked a question at dinner that stopped the room",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-083eaeee524d"
+    },
+    {
+      "t": "FACT",
+      "text": "Tomas Aguilar — in their life, C114: a flyer for a seniors lunch program flutters on a community bulletin board",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-cae149daa49c"
+    },
+    {
+      "t": "FACT",
+      "text": "Tomas Aguilar — the Tribune named them in a piece headlined THE PAGE: Eleven Lives, Cycle 113 (Culture, C113)",
+      "src": "archive/ARTICLE_INDEX.jsonl 22b32bfe211dfd63",
+      "id": "F-5dc0b77c2f22"
+    },
+    {
+      "t": "FACT",
+      "text": "Tomas Aguilar — the Tribune named them in a piece headlined Oakland on the NBA Expansion List: The Systems Guy Behind the Bid (Business, C91)",
+      "src": "archive/ARTICLE_INDEX.jsonl fd2640e7ebaa48d1",
+      "id": "F-a39a2d20e555"
+    },
+    {
+      "t": "FACT",
+      "text": "Kelvon Ochoa — moved from Rockridge to Lake Merritt — moving up from Rockridge — sold up and bought in Lake Merritt, Lake Merritt (C115 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-4d9f2e394100"
+    },
+    {
+      "t": "FACT",
+      "text": "Kelvon Ochoa — in their life, C115: The owner at Anthropic is talking about tightening up, and everyone heard it.",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-f4bb51e9738e"
+    },
+    {
+      "t": "FACT",
+      "text": "Kelvon Ochoa — in their life, C115: still feeling the energy from last night's city buzz",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-82afc04b27ee"
+    },
+    {
+      "t": "FACT",
+      "text": "Kelvon Ochoa — in their life, C115: cooked the full Sunday dinner out of habit and packed half of it straight into the freezer near a coffee line",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-f677e8531d74"
+    },
+    {
+      "t": "FACT",
+      "text": "Kelvon Ochoa — in their life, C115: a group of fans huddle under an awning debating last night's game, their voices rising above the sound of rain hitting the pavement",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-ad89750fb0ae"
+    },
+    {
+      "t": "FACT",
+      "text": "Jesus Jorden — moved from Temescal to Fruitvale — moving up from Temescal, Fruitvale (C115 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-6e967b2dce84"
+    },
+    {
+      "t": "FACT",
+      "text": "Jesus Jorden — in their life, C114: felt a lift at Dario's Bar after the win",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-0ae19e584d0e"
+    },
+    {
+      "t": "FACT",
+      "text": "Jesus Jorden — in their life, C114: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots near a cafe near the clinics",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-e3fdecac06d4"
+    },
+    {
+      "t": "FACT",
+      "text": "Jesus Jorden — in their life, C115: grabbed coffee from the cart outside the hospital before the morning rush hit",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-28bde81660c7"
+    },
+    {
+      "t": "FACT",
+      "text": "Jesus Jorden — in their life, C115: wrote half a letter to family, then decided to call instead",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-c63074ebc4e4"
+    },
+    {
+      "t": "FACT",
+      "text": "Jasmine Torres — moved from Chinatown to KONO — leaving Chinatown for a better fit, KONO (C115 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-45b401af206d"
+    },
+    {
+      "t": "FACT",
+      "text": "Jasmine Torres — in their life, C114: listened to a style of music they'd always skipped, twice",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-afcced0a2e3b"
+    },
+    {
+      "t": "FACT",
+      "text": "Jasmine Torres — in their life, C115: the bartender wipes down the counter between rounds of A's highlights",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-3b0df3dd7b47"
+    },
+    {
+      "t": "FACT",
+      "text": "Jasmine Torres — in their life, C115: tried a new recipe that mostly worked",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-f442dfd05bb5"
+    },
+    {
+      "t": "FACT",
+      "text": "Jasmine Torres — in their life, C115: heard a kid explain something to a parent with total authority and grinned",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-140ba7c61ff7"
+    },
+    {
+      "t": "FACT",
+      "text": "Jasmine Torres — the Tribune named them in a piece headlined THE QUIET INVESTMENT (Business, C88)",
+      "src": "archive/ARTICLE_INDEX.jsonl dec644376e5295d6",
+      "id": "F-14c7eb76a05e"
+    },
+    {
+      "t": "FACT",
+      "text": "Jasmine Torres — the Tribune named them in a piece headlined The Oakland Stack (Social Trends, C84)",
+      "src": "archive/ARTICLE_INDEX.jsonl 03e7888a95a8413b",
+      "id": "F-f84e06500ed8"
+    },
+    {
+      "t": "FACT",
+      "text": "Ruth Anyanwu — moved from East Oakland to Downtown — moving up from East Oakland, Downtown (C115 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-1a35b6f3afb3"
+    },
+    {
+      "t": "FACT",
+      "text": "Ruth Anyanwu — in their life, C115: bought a new A's jersey and the quiet satisfaction of finding a favorite song on the jukebox",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-1727099c2b7d"
+    },
+    {
+      "t": "FACT",
+      "text": "Ruth Anyanwu — in their life, C115: walked a different street home just to see it",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-997c27a2891d"
+    },
+    {
+      "t": "FACT",
+      "text": "Ruth Anyanwu — in their life, C115: played a relative's voicemail twice before saving it again near a lot mid-frame",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-e29e9d77bcff"
+    },
+    {
+      "t": "FACT",
+      "text": "Ruth Anyanwu — in their life, C115: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-5777dfcaeb96"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C11, Spring, holiday=none",
+      "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+      "id": "F-82d77e9a4a71"
+    },
+    {
+      "t": "FACT",
+      "text": "Tom Jilner — Wine Bar Owner — Rockridge",
+      "src": "Simulation_Ledger profile for POP-00691",
+      "id": "F-32bff524b2bd"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "tamsin-lives-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Put the cycle's person events in the paper as news, one person at a time — a birth, a death, a hospital stay, a retirement, a promotion, a household set up or a place of one's own, a win or a loss on the book, what a turn of the city did to someone's day, and the smaller moments the record kept. The event is the lead, the person is named as the slice names them, and what came next appears only when a later record holds it. A stake or a payout is the person's own fact, not a statistic. The page is the city's real calendar; every person on it is one the record holds.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "plain respect — a neighborhood weekly's births-and-obituaries hand, unhurried, exact",
+      "targetWords": "450-1200",
+      "opening": "the heaviest event on the slice, stated as it happened to the named person"
+    },
+    "authorizedTexture": [
+      "the plain respect of the form — the ordinary weight of a birth, a retirement, a discharge, stated without ornament",
+      "the frame around a supplied fact — what a promotion to the supplied role means in plain words, without inventing the workplace",
+      "the neighborhood the slice names as where the person lives, without an invented street scene",
+      "the order and pacing of the passages — heaviest first, one person at a time"
+    ],
+    "textureConditions": [
+      "every person, event, role, employer, neighborhood, hospital stay, household and family tie must come from the slice",
+      "a quote appears only verbatim from the person's own supplied page; nothing paraphrased into quotation marks",
+      "what came next appears only when a later Cycle's supplied record holds it",
+      "a thin day (few events) is written as a short page, not padded"
+    ],
+    "canonBlockers": [
+      "any person, event, quote, venue, employer or family member not on the slice",
+      "a paraphrased or invented quote",
+      "a cause, diagnosis or outcome the record does not state",
+      "a statistic, rate or trend claim — the page is people, not numbers",
+      "intake bookkeeping rows (Emerged into Tier, Added to Simulation_Ledger, Updated to Tier) written as life events",
+      "raw engine labels or decimals printed as public-facing evidence"
+    ]
+  },
+  "manifest": {
+    "id": "AM-c08188c723c1",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-bc84fc0b7718",
+        "t": "FACT",
+        "text": "Current cycle: C115",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-5ac5466274c2",
+        "t": "FACT",
+        "text": "Maurice Franklin moved into a place of their own in Rockridge, renting",
+        "src": "output/beats/Lived_Events.jsonl @C115 batch fd0b35"
+      },
+      {
+        "id": "F-d87ebda98cc1",
+        "t": "FACT",
+        "text": "Maurice Franklin first. The event is the lead; one true detail; what came next only if the record says.",
+        "src": "output/beats/Lived_Events.jsonl @C115 batch fd0b35"
+      },
+      {
+        "id": "F-0a2299946e2b",
+        "t": "FACT",
+        "text": "Maurice Franklin moved into a place of their own in Rockridge, renting (C115)",
+        "src": "output/beats/Household_Ledger.jsonl @C115"
+      },
+      {
+        "id": "F-3a90e849c4ee",
+        "t": "FACT",
+        "text": "Maurice Franklin — in their life, C114: borrowed against next month to close this one",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-0c41020373fd",
+        "t": "FACT",
+        "text": "Maurice Franklin — in their life, C115: the card statement was the first thing read and the last thing forgotten",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-2f0af74be7a0",
+        "t": "FACT",
+        "text": "Maurice Franklin — in their life, C115: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-220d99f5f595",
+        "t": "FACT",
+        "text": "Maurice Franklin — in their life, C115: brought home a new plant and picked its spot carefully",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-173b29ed6c74",
+        "t": "FACT",
+        "text": "Maurice Franklin — the Tribune named them in a piece headlined The Board in the Trailer Says 9.5 Percent. Enzo Walker Is Counting Something Else. (Business Reporter, C114)",
+        "src": "archive/ARTICLE_INDEX.jsonl 384044afdbad94f5"
+      },
+      {
+        "id": "F-48bb5e53c3e5",
+        "t": "FACT",
+        "text": "Maurice Franklin — the Tribune named them in a piece headlined Chinatown's 137 Sick: Six Beds Hold Part of the Count, Kitchens Hold the Rest (Civic, C114)",
+        "src": "archive/ARTICLE_INDEX.jsonl f5baef8c2be8a0e4"
+      },
+      {
+        "id": "F-d3b57b170bc5",
+        "t": "FACT",
+        "text": "Maurice Franklin — the Tribune named them in a piece headlined Chinatown's 140 Sick Are Mostly at Home, and Home Is Doing the Work (Civic, C113)",
+        "src": "archive/ARTICLE_INDEX.jsonl 415a8378a3cc8be1"
+      },
+      {
+        "id": "F-55adb5642815",
+        "t": "FACT",
+        "text": "Soledad Coleman moved into a place of their own in Rockridge, renting (C115)",
+        "src": "output/beats/Household_Ledger.jsonl @C115"
+      },
+      {
+        "id": "F-f3c5ddabe56b",
+        "t": "FACT",
+        "text": "Soledad Coleman — in their life, C114: badged into the Baylight office early and tried not to think about the protestors from last month",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-55854a608e06",
+        "t": "FACT",
+        "text": "Soledad Coleman — in their life, C115: traded an extra ticket for a promise to bring the kid next time",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-4b83bd534d8c",
+        "t": "FACT",
+        "text": "Soledad Coleman — in their life, C115: attended a small local gathering and stayed later than planned",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-8a8707362323",
+        "t": "FACT",
+        "text": "Soledad Coleman — in their life, C115: realized the same seven meals had rotated for a month, and shrugged",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-b5e3e0831db1",
+        "t": "FACT",
+        "text": "Tom Jilner lost on the UNDOCKED book — staked 144, the book kept it, Rockridge (C115)",
+        "src": "output/beats/Casino_Ledger.jsonl @C115"
+      },
+      {
+        "id": "F-714480ccb508",
+        "t": "FACT",
+        "text": "Tom Jilner — in their life, C114: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-834fd04dcbd8",
+        "t": "FACT",
+        "text": "Tom Jilner — in their life, C114: drove the whole way home without remembering a single turn",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-e2b762b1f169",
+        "t": "FACT",
+        "text": "Tom Jilner — in their life, C115: woke up at 5 AM just to have thirty minutes of total silence before the house woke up near a tidy sidewalk stretch",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-e63f314320ab",
+        "t": "FACT",
+        "text": "Tom Jilner — in their life, C115: said no to something and felt the shape of who they are in it",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-216b3402c461",
+        "t": "FACT",
+        "text": "Tom Jilner — the Tribune named them in a piece headlined Rockridge Wine Bar Says \"Steady.\" The Map Says Decay. Who Answers? (Civic, C114)",
+        "src": "archive/ARTICLE_INDEX.jsonl 77223d1e2e7334d4"
+      },
+      {
+        "id": "F-3f28df0288e5",
+        "t": "FACT",
+        "text": "Marisol Achebe lost on the UNDOCKED book — staked 134, the book kept it, Fruitvale (C115)",
+        "src": "output/beats/Casino_Ledger.jsonl @C115"
+      },
+      {
+        "id": "F-da9cf20df0b1",
+        "t": "FACT",
+        "text": "Marisol Achebe — in their life, C114: felt unexpectedly nostalgic at the smell of rain on warm pavement",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-46e318f248fd",
+        "t": "FACT",
+        "text": "Marisol Achebe — in their life, C115: caught themselves bragging a little about the neighborhood lately",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-d110f851c166",
+        "t": "FACT",
+        "text": "Marisol Achebe — in their life, C115: took a casual walk through their area",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-0a1e5cdd3f08",
+        "t": "FACT",
+        "text": "Mina Kapoor — noticed neighbors being more watchful today, Grand Lake — one of 4 people the Cycle's city turn reached (Commercial Stabilization for Grand Lake is vote-ready — ongoing economic effects in Grand Lake; the city feels it through these…) (C115)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C115"
+      },
+      {
+        "id": "F-b1440ae85984",
+        "t": "FACT",
+        "text": "Mina Kapoor — in their life, C114: the for-rent signs outnumbered the welcome mats this month",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-a35143b57942",
+        "t": "FACT",
+        "text": "Mina Kapoor — in their life, C115: realized the week had passed without a single thing worth retelling",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-589971c7368c",
+        "t": "FACT",
+        "text": "Mina Kapoor — in their life, C115: carried three boxes of canned goods from the pantry truck and felt it in their lower back",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-7881ff084840",
+        "t": "FACT",
+        "text": "Mina Kapoor — in their life, C115: compared rent notes with a neighbor over the fence in Grand Lake",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-42b167190d18",
+        "t": "FACT",
+        "text": "Mina Kapoor — the Tribune named them in a piece headlined The Page of Lives, C113: A Place of Their Own (Culture, C113)",
+        "src": "archive/ARTICLE_INDEX.jsonl 753f8ac13ffa3029"
+      },
+      {
+        "id": "F-d92b2137b722",
+        "t": "FACT",
+        "text": "Everly Rainey — wrote half a letter to family, then decided to call instead, Downtown — one of 4 people the Cycle's city turn reached (Initiative work landed in 7 neighborhood(s): Downtown, Temescal, West Oakland, Fruitvale, Jack London, Grand Lake, East Oakland) (C115)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C115"
+      },
+      {
+        "id": "F-654cc8f1a45e",
+        "t": "FACT",
+        "text": "Everly Rainey — in their life, C114: caught their partner humming the song they'd had stuck all day near a civic plaza",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-9086b00e5495",
+        "t": "FACT",
+        "text": "Everly Rainey — in their life, C115: listened to the ninth inning on the porch radio and let the street hear it too",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-c26a6dd560c2",
+        "t": "FACT",
+        "text": "Everly Rainey — in their life, C115: a DJ spins records at a crowded bar near Broadway, the bassline thumping through the foggy night",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-70f8dffe5e77",
+        "t": "FACT",
+        "text": "Tomas Aguilar — bought a new A's jersey and let the week's noise settle, Jack London — one of 4 people the Cycle's safety turn reached (Papers served at the counter — a lawsuit, and lawyers the shop never budgeted for.) (C115)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C115"
+      },
+      {
+        "id": "F-083eaeee524d",
+        "t": "FACT",
+        "text": "Tomas Aguilar — in their life, C114: one of the kids asked a question at dinner that stopped the room",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-cae149daa49c",
+        "t": "FACT",
+        "text": "Tomas Aguilar — in their life, C114: a flyer for a seniors lunch program flutters on a community bulletin board",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-5dc0b77c2f22",
+        "t": "FACT",
+        "text": "Tomas Aguilar — the Tribune named them in a piece headlined THE PAGE: Eleven Lives, Cycle 113 (Culture, C113)",
+        "src": "archive/ARTICLE_INDEX.jsonl 22b32bfe211dfd63"
+      },
+      {
+        "id": "F-a39a2d20e555",
+        "t": "FACT",
+        "text": "Tomas Aguilar — the Tribune named them in a piece headlined Oakland on the NBA Expansion List: The Systems Guy Behind the Bid (Business, C91)",
+        "src": "archive/ARTICLE_INDEX.jsonl fd2640e7ebaa48d1"
+      },
+      {
+        "id": "F-4d9f2e394100",
+        "t": "FACT",
+        "text": "Kelvon Ochoa — moved from Rockridge to Lake Merritt — moving up from Rockridge — sold up and bought in Lake Merritt, Lake Merritt (C115 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-f4bb51e9738e",
+        "t": "FACT",
+        "text": "Kelvon Ochoa — in their life, C115: The owner at Anthropic is talking about tightening up, and everyone heard it.",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-82afc04b27ee",
+        "t": "FACT",
+        "text": "Kelvon Ochoa — in their life, C115: still feeling the energy from last night's city buzz",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-f677e8531d74",
+        "t": "FACT",
+        "text": "Kelvon Ochoa — in their life, C115: cooked the full Sunday dinner out of habit and packed half of it straight into the freezer near a coffee line",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-ad89750fb0ae",
+        "t": "FACT",
+        "text": "Kelvon Ochoa — in their life, C115: a group of fans huddle under an awning debating last night's game, their voices rising above the sound of rain hitting the pavement",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-6e967b2dce84",
+        "t": "FACT",
+        "text": "Jesus Jorden — moved from Temescal to Fruitvale — moving up from Temescal, Fruitvale (C115 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-0ae19e584d0e",
+        "t": "FACT",
+        "text": "Jesus Jorden — in their life, C114: felt a lift at Dario's Bar after the win",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-e3fdecac06d4",
+        "t": "FACT",
+        "text": "Jesus Jorden — in their life, C114: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots near a cafe near the clinics",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-28bde81660c7",
+        "t": "FACT",
+        "text": "Jesus Jorden — in their life, C115: grabbed coffee from the cart outside the hospital before the morning rush hit",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-c63074ebc4e4",
+        "t": "FACT",
+        "text": "Jesus Jorden — in their life, C115: wrote half a letter to family, then decided to call instead",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-45b401af206d",
+        "t": "FACT",
+        "text": "Jasmine Torres — moved from Chinatown to KONO — leaving Chinatown for a better fit, KONO (C115 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-afcced0a2e3b",
+        "t": "FACT",
+        "text": "Jasmine Torres — in their life, C114: listened to a style of music they'd always skipped, twice",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-3b0df3dd7b47",
+        "t": "FACT",
+        "text": "Jasmine Torres — in their life, C115: the bartender wipes down the counter between rounds of A's highlights",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-f442dfd05bb5",
+        "t": "FACT",
+        "text": "Jasmine Torres — in their life, C115: tried a new recipe that mostly worked",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-140ba7c61ff7",
+        "t": "FACT",
+        "text": "Jasmine Torres — in their life, C115: heard a kid explain something to a parent with total authority and grinned",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-14c7eb76a05e",
+        "t": "FACT",
+        "text": "Jasmine Torres — the Tribune named them in a piece headlined THE QUIET INVESTMENT (Business, C88)",
+        "src": "archive/ARTICLE_INDEX.jsonl dec644376e5295d6"
+      },
+      {
+        "id": "F-f84e06500ed8",
+        "t": "FACT",
+        "text": "Jasmine Torres — the Tribune named them in a piece headlined The Oakland Stack (Social Trends, C84)",
+        "src": "archive/ARTICLE_INDEX.jsonl 03e7888a95a8413b"
+      },
+      {
+        "id": "F-1a35b6f3afb3",
+        "t": "FACT",
+        "text": "Ruth Anyanwu — moved from East Oakland to Downtown — moving up from East Oakland, Downtown (C115 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-1727099c2b7d",
+        "t": "FACT",
+        "text": "Ruth Anyanwu — in their life, C115: bought a new A's jersey and the quiet satisfaction of finding a favorite song on the jukebox",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-997c27a2891d",
+        "t": "FACT",
+        "text": "Ruth Anyanwu — in their life, C115: walked a different street home just to see it",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-e29e9d77bcff",
+        "t": "FACT",
+        "text": "Ruth Anyanwu — in their life, C115: played a relative's voicemail twice before saving it again near a lot mid-frame",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-5777dfcaeb96",
+        "t": "FACT",
+        "text": "Ruth Anyanwu — in their life, C115: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-82d77e9a4a71",
+        "t": "FACT",
+        "text": "Calendar: Y3C11, Spring, holiday=none",
+        "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)"
+      },
+      {
+        "id": "F-32bff524b2bd",
+        "t": "FACT",
+        "text": "Tom Jilner — Wine Bar Owner — Rockridge",
+        "src": "Simulation_Ledger profile for POP-00691"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00840-13d60a19fb",
+        "speakerId": "POP-00840",
+        "speakerName": "Soledad Coleman",
+        "text": "I've seen Maurice Franklin around the neighborhood, but I don't really know them. I moved into my place in Rockridge, and so did they, I think around the same time. We haven't really talked, just nodded at each other when we see each other.",
+        "factIds": [
+          "F-55adb5642815",
+          "F-5ac5466274c2"
+        ],
+        "src": "packet.W2[POP-00840]"
+      },
+      {
+        "id": "Q-POP-00691-3bf954952a",
+        "speakerId": "POP-00691",
+        "speakerName": "Tom Jilner",
+        "text": "I've seen Maurice Franklin around Rockridge; they just moved into a place of their own. I haven't had a chance to talk to them yet, but it's good to see new faces in the neighborhood.",
+        "factIds": [
+          "F-5ac5466274c2",
+          "F-32bff524b2bd"
+        ],
+        "src": "packet.W2[POP-00691]"
+      },
+      {
+        "id": "Q-POP-00526-9b2c82f886",
+        "speakerId": "POP-00526",
+        "speakerName": "Marisol Achebe",
+        "text": "I haven't seen Maurice Franklin around Fruitvale lately, but I did hear they moved to Rockridge. I'm not sure what to make of it, to be honest. I've been busy with the Mutual Aid Network and haven't had a chance to catch up with them.",
+        "factIds": [
+          "F-5ac5466274c2",
+          "F-d87ebda98cc1",
+          "F-0a2299946e2b"
+        ],
+        "src": "packet.W2[POP-00526]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00840",
+        "name": "Soledad Coleman",
+        "profile": "Soledad Coleman — AI Safety Researcher (Anthropic) — Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00691",
+        "name": "Tom Jilner",
+        "profile": "Tom Jilner — Wine Bar Owner — Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00526",
+        "name": "Marisol Achebe",
+        "profile": "Marisol Achebe — Mutual Aid Network Organizer — Fruitvale",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Tamsin Pruitt",
+        "text": "The condition of the new place and how it compares to their previous living situation.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "the plain respect of the form — the ordinary weight of a birth, a retirement, a discharge, stated without ornament",
+      "the frame around a supplied fact — what a promotion to the supplied role means in plain words, without inventing the workplace",
+      "the neighborhood the slice names as where the person lives, without an invented street scene",
+      "the order and pacing of the passages — heaviest first, one person at a time"
+    ],
+    "textureConditions": [
+      "every person, event, role, employer, neighborhood, hospital stay, household and family tie must come from the slice",
+      "a quote appears only verbatim from the person's own supplied page; nothing paraphrased into quotation marks",
+      "what came next appears only when a later Cycle's supplied record holds it",
+      "a thin day (few events) is written as a short page, not padded"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

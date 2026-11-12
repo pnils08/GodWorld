@@ -1,0 +1,69 @@
+{
+  "stage": "projects",
+  "cycle": 114,
+  "results": [
+    {
+      "slug": "stabilization_fund",
+      "model": "deepseek/deepseek-v4.1-flash-1017",
+      "ok": true,
+      "output": "output/civic-voice/stabilization_fund_c114.json",
+      "statements": 4,
+      "triggeredBy": [
+        "council_d1",
+        "council_d6",
+        "mayor_gavel",
+        "mayor_open",
+        "okoro"
+      ]
+    },
+    {
+      "slug": "oari",
+      "model": "deepseek/deepseek-v4.1-flash-1017",
+      "ok": true,
+      "output": "output/civic-voice/oari_c114.json",
+      "statements": 4,
+      "triggeredBy": [
+        "council_d1",
+        "council_d3",
+        "council_d5",
+        "mayor_gavel",
+        "mayor_open"
+      ]
+    },
+    {
+      "slug": "health_center",
+      "model": "deepseek/deepseek-v4.1-flash-1017",
+      "ok": true,
+      "output": "output/civic-voice/health_center_c114.json",
+      "statements": 2,
+      "triggeredBy": [
+        "council_d7"
+      ]
+    },
+    {
+      "slug": "transit_hub",
+      "model": "deepseek/deepseek-v4.1-flash-1017",
+      "ok": true,
+      "output": "output/civic-voice/transit_hub_c114.json",
+      "statements": 2,
+      "triggeredBy": [
+        "council_d3",
+        "mayor_gavel",
+        "mayor_open"
+      ]
+    },
+    {
+      "slug": "baylight_authority",
+      "model": "deepseek/deepseek-v4.1-flash-1017",
+      "ok": true,
+      "output": "output/civic-voice/baylight_authority_c114.json",
+      "statements": 2,
+      "triggeredBy": [
+        "council_d2",
+        "mayor_gavel",
+        "mayor_open"
+      ]
+    }
+  ],
+  "ranAt": "2026-11-01T23:32:06.962Z"
+}

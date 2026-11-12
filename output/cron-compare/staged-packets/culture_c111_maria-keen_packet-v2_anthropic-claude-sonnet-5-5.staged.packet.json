@@ -1,0 +1,437 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00013",
+    "name": "Maria Keen",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Downtown — the programs that hold the block and the people who founded them",
+    "approach": "Neighborhood approach: this slice is one block's record — its community programs and their founders, who is moving in or out, who the block has in a hospital bed or in custody, what it paid on tax day, whose debts crossed the line, and the engine's neighborhood hooks this cycle. First-person witness, one block one truth. The programs, founders, movement numbers, patients, defendants and money lines are real; the stoop conversations, the mailboxes, the dog everyone knows are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "neighborhood",
+      "hood": "Downtown",
+      "facts": [
+        "NeuroCity Youth Lab (tech-education), Downtown — founded by Priya Nair, since C101",
+        "Downtown this cycle: 240 students, 2,286 adults, 232 seniors — moved vs C110: +1 students, +5 adults, +1 seniors",
+        "Downtown: 4 charges → 1 arrest → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+        "Downtown: 83 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked"
+      ],
+      "priorCycle": "PRIOR_CYCLE_ON_DISK",
+      "note": null,
+      "engineHooks": [
+        "Positive energy in the city. What's driving the mood? Feature opportunity. (street-level mood piece)",
+        "the landlord's notice on the door put the whole household around the table with the numbers (observational analysis)",
+        "savings crossed six figures — years of steady weeks did that (observational analysis)",
+        "defaulted on the debts — the savings are gone and the record carries it (observational analysis)"
+      ],
+      "roomIsYours": "the stoop, the corner store counter, who moved in last month and who is thinking about leaving, what the block argues about",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-neighborhood",
+    "hood": "Downtown",
+    "src": "output/beats/Community_Programs.jsonl @C111",
+    "plan": {
+      "focus": "The tension between Downtown's institutional stability (NeuroCity) and its fragile human margins.",
+      "closeQuestion": "Is the stability of the block's programs enough to offset the individual collapses of its residents?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00004",
+        "name": "Lucia Polito",
+        "profile": "Lucia Polito — Aura Wellness Practitioner",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00048",
+        "name": "Carlos Presti",
+        "profile": "Carlos Presti — Corporate Accountant",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00148",
+        "name": "Gordon Tate",
+        "profile": "Gordon Tate — SUPERIOR COURT LIAISON",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00351",
+        "name": "Ryan Stark",
+        "profile": "Ryan Stark — Housing Policy Analyst",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00351-3d79046462",
+        "pop": "POP-00351",
+        "name": "Ryan Stark",
+        "quote": "I walked by SpeedyBurger on Broadway and saw a new lease sign go up above it. The paper was still crisp in the display case. It's another new spot opening up in Downtown, which is great to see.",
+        "factIds": [
+          "F-71d9ad7d0d0e"
+        ],
+        "src": "packet.W2[POP-00351]"
+      },
+      {
+        "id": "Q-POP-00148-d868ac6357",
+        "pop": "POP-00148",
+        "name": "Gordon Tate",
+        "quote": "I just noticed another new spot opening up around Downtown. It's always something new popping up, which is fine, but with the rent going up the way it is, you start wondering who these places are actually for.",
+        "factIds": [
+          "F-71d9ad7d0d0e"
+        ],
+        "src": "packet.W2[POP-00148]"
+      },
+      {
+        "id": "Q-POP-00048-5f469efcb6",
+        "pop": "POP-00048",
+        "name": "Carlos Presti",
+        "quote": "I saw another new spot opening up Downtown. I don't know what it is yet, but I'm always curious to see what actually sticks around here. It's just good to see something new moving in.",
+        "factIds": [
+          "F-71d9ad7d0d0e"
+        ],
+        "src": "packet.W2[POP-00048]"
+      },
+      {
+        "id": "Q-POP-00004-a81b12c686",
+        "pop": "POP-00004",
+        "name": "Lucia Polito",
+        "quote": "I heard about Downtown First Friday Live Music last night, and it made me think about how vibrant Downtown can be. It's great to see people coming together for events like that.",
+        "factIds": [
+          "F-f13a5027fecf"
+        ],
+        "src": "packet.W2[POP-00004]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Maria Keen",
+        "text": "Whether the recent 'First Friday' energy is masking a decline in actual community support for the sick and incarcerated.",
+        "usable": false
+      },
+      {
+        "from": "Maria Keen",
+        "text": "The specific nature of the debts or landlord notices affecting the current residents.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C111",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-a43c5d888b36"
+    },
+    {
+      "t": "FACT",
+      "text": "Downtown: 1 active program on the record",
+      "src": "output/beats/Community_Programs.jsonl @C111",
+      "id": "F-392c150da4b4"
+    },
+    {
+      "t": "FACT",
+      "text": "1 active programs in Downtown; Priya Nair founded one.",
+      "src": "output/beats/Community_Programs.jsonl @C111",
+      "id": "F-64b3b19edefc"
+    },
+    {
+      "t": "FACT",
+      "text": "NeuroCity Youth Lab (tech-education), Downtown — founded by Priya Nair, since C101",
+      "src": "output/beats/Community_Programs.jsonl @C111 PRG-017",
+      "id": "F-347f2b5bb179"
+    },
+    {
+      "t": "FACT",
+      "text": "Downtown this cycle: 240 students, 2,286 adults, 232 seniors — moved vs C110: +1 students, +5 adults, +1 seniors",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C111 vs prev/",
+      "id": "F-fd7e177f77b9"
+    },
+    {
+      "t": "FACT",
+      "text": "Downtown: 4 charges → 1 arrest → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl @C111 judicial Downtown",
+      "id": "F-7cee55adbd8d"
+    },
+    {
+      "t": "FACT",
+      "text": "Downtown: 83 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl @C111 hospital Downtown",
+      "id": "F-b2550859087e"
+    },
+    {
+      "t": "FACT",
+      "text": "Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown",
+      "src": "output/simulation_ledger_snapshot.jsonl",
+      "id": "F-71d9ad7d0d0e"
+    },
+    {
+      "t": "FACT",
+      "text": "Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music over in Downtown last night",
+      "src": "output/simulation_ledger_snapshot.jsonl",
+      "id": "F-f13a5027fecf"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "maria-ground-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Translate one Packet-named neighborhood or evening condition into a human-scale ground brief without inventing Maria's attendance, a neighbor, an action, a quote, or a civic outcome.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "intimate neighborhood ground brief",
+      "targetWords": "evidence-bounded",
+      "opening": "one Packet-named place and condition",
+      "closing": "the human observation still needed"
+    },
+    "authorizedTexture": [
+      "warm interpretation of a supplied place or condition without claiming attendance or observation",
+      "unnamed sensory metaphor carrying no person, action, event, institution, or factual premise"
+    ],
+    "textureConditions": [
+      "first person may express interpretation but may not assert presence, walking, seeing, hearing, meeting, speaking, or memory unless the Packet supplies it",
+      "every named person, place, business, institution, gathering, action, quote, policy effect, and civic outcome requires Packet support"
+    ],
+    "canonBlockers": [
+      "invented attendance, witnessed scene, neighbor, worker, patron, dialogue, gathering, action, policy consequence, or civic outcome",
+      "an invented or altered venue, person, neighborhood, event, institution, relationship, date, count, or quote",
+      "raw nightlife metrics, engine labels, or collective neighborhood sentiment presented as public fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-d2e17ee960c7",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-a43c5d888b36",
+        "t": "FACT",
+        "text": "Current cycle: C111",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-392c150da4b4",
+        "t": "FACT",
+        "text": "Downtown: 1 active program on the record",
+        "src": "output/beats/Community_Programs.jsonl @C111"
+      },
+      {
+        "id": "F-64b3b19edefc",
+        "t": "FACT",
+        "text": "1 active programs in Downtown; Priya Nair founded one.",
+        "src": "output/beats/Community_Programs.jsonl @C111"
+      },
+      {
+        "id": "F-347f2b5bb179",
+        "t": "FACT",
+        "text": "NeuroCity Youth Lab (tech-education), Downtown — founded by Priya Nair, since C101",
+        "src": "output/beats/Community_Programs.jsonl @C111 PRG-017"
+      },
+      {
+        "id": "F-fd7e177f77b9",
+        "t": "FACT",
+        "text": "Downtown this cycle: 240 students, 2,286 adults, 232 seniors — moved vs C110: +1 students, +5 adults, +1 seniors",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C111 vs prev/"
+      },
+      {
+        "id": "F-7cee55adbd8d",
+        "t": "FACT",
+        "text": "Downtown: 4 charges → 1 arrest → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl @C111 judicial Downtown"
+      },
+      {
+        "id": "F-b2550859087e",
+        "t": "FACT",
+        "text": "Downtown: 83 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl @C111 hospital Downtown"
+      },
+      {
+        "id": "F-71d9ad7d0d0e",
+        "t": "FACT",
+        "text": "Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown",
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      },
+      {
+        "id": "F-f13a5027fecf",
+        "t": "FACT",
+        "text": "Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music over in Downtown last night",
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00351-3d79046462",
+        "speakerId": "POP-00351",
+        "speakerName": "Ryan Stark",
+        "text": "I walked by SpeedyBurger on Broadway and saw a new lease sign go up above it. The paper was still crisp in the display case. It's another new spot opening up in Downtown, which is great to see.",
+        "factIds": [
+          "F-71d9ad7d0d0e"
+        ],
+        "src": "packet.W2[POP-00351]"
+      },
+      {
+        "id": "Q-POP-00148-d868ac6357",
+        "speakerId": "POP-00148",
+        "speakerName": "Gordon Tate",
+        "text": "I just noticed another new spot opening up around Downtown. It's always something new popping up, which is fine, but with the rent going up the way it is, you start wondering who these places are actually for.",
+        "factIds": [
+          "F-71d9ad7d0d0e"
+        ],
+        "src": "packet.W2[POP-00148]"
+      },
+      {
+        "id": "Q-POP-00048-5f469efcb6",
+        "speakerId": "POP-00048",
+        "speakerName": "Carlos Presti",
+        "text": "I saw another new spot opening up Downtown. I don't know what it is yet, but I'm always curious to see what actually sticks around here. It's just good to see something new moving in.",
+        "factIds": [
+          "F-71d9ad7d0d0e"
+        ],
+        "src": "packet.W2[POP-00048]"
+      },
+      {
+        "id": "Q-POP-00004-a81b12c686",
+        "speakerId": "POP-00004",
+        "speakerName": "Lucia Polito",
+        "text": "I heard about Downtown First Friday Live Music last night, and it made me think about how vibrant Downtown can be. It's great to see people coming together for events like that.",
+        "factIds": [
+          "F-f13a5027fecf"
+        ],
+        "src": "packet.W2[POP-00004]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00004",
+        "name": "Lucia Polito",
+        "profile": "Lucia Polito — Aura Wellness Practitioner",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00048",
+        "name": "Carlos Presti",
+        "profile": "Carlos Presti — Corporate Accountant",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00148",
+        "name": "Gordon Tate",
+        "profile": "Gordon Tate — SUPERIOR COURT LIAISON",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00351",
+        "name": "Ryan Stark",
+        "profile": "Ryan Stark — Housing Policy Analyst",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Maria Keen",
+        "text": "Whether the recent 'First Friday' energy is masking a decline in actual community support for the sick and incarcerated.",
+        "publishable": false
+      },
+      {
+        "from": "Maria Keen",
+        "text": "The specific nature of the debts or landlord notices affecting the current residents.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "warm interpretation of a supplied place or condition without claiming attendance or observation",
+      "unnamed sensory metaphor carrying no person, action, event, institution, or factual premise"
+    ],
+    "textureConditions": [
+      "first person may express interpretation but may not assert presence, walking, seeing, hearing, meeting, speaking, or memory unless the Packet supplies it",
+      "every named person, place, business, institution, gathering, action, quote, policy effect, and civic outcome requires Packet support"
+    ],
+    "forbiddenClaimClasses": [
+      "invented attendance, witnessed scene, neighbor, worker, patron, dialogue, gathering, action, policy consequence, or civic outcome",
+      "an invented or altered venue, person, neighborhood, event, institution, relationship, date, count, or quote",
+      "raw nightlife metrics, engine labels, or collective neighborhood sentiment presented as public fact"
+    ]
+  }
+}

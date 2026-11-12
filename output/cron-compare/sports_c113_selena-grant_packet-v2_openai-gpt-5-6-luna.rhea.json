@@ -1,0 +1,77 @@
+{
+  "draft": "output/cron-compare/sports_c113_selena-grant_packet-v2_openai-gpt-5-6-luna.md",
+  "cycle": "113",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "055fc8083218caad047a627efa7224417dd2419a756d6243ee0a0474e07337d5",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All game scores, box score statistics, player names, and record milestones match the Cycle 113 sports feed ground truth.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "selena-grant-oaks-v1",
+    "packageVersion": "SELENA-OAKS-2",
+    "manifestId": "AM-ad9b5f21760d",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "-78",
+          "-93",
+          "-62",
+          "43"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Adash Stanley",
+      "Harry Hayward",
+      "Selena Grant"
+    ],
+    "unverified": [
+      "Ausin Reaves",
+      "Bay Tribune Sports"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.01,
+  "durationMs": 5392,
+  "parseError": false,
+  "ranAt": "2026-10-27T23:18:27.591Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 400",
+    "words": 476,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "055fc8083218caad047a627efa7224417dd2419a756d6243ee0a0474e07337d5",
+    "costUsd": 0.001
+  }
+}

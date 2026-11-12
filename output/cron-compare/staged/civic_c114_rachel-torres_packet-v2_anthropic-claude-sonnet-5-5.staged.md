@@ -1,0 +1,23 @@
+# Uptown Led the Table at 11 Incidents. Three Arrests Followed.
+
+On the blocks around the 19th Street BART corridor in Uptown, nothing about a Tuesday-evening crowd says "most incidents in the city." People come up the stairs and check their phones. A delivery rider waits on the curb. Someone locks a bike. That is the point of reading the table before the street. The crime ledger for Cycle 114 puts Uptown at the top of 22 neighborhoods with 11 incidents, up four from Cycle 113, and the street looks the same as it did the cycle before.
+
+**What the row says.** The Crime_Metrics row for Uptown shows a property index of 39 and a violent index of 23. Average response time is 10.8 minutes and clearance is 26 percent. The row's trend field reads "steady," even though the incident count rose by four. It lists no hotspot. Downtown also logged 11. West Oakland, KONO and Rockridge each logged 10. At the other end, Fruitvale and Ivy Hill logged 6 each and Lake Merritt logged 5. Citywide, 183 incidents were logged. The ledger lists twelve neighborhoods as rising this cycle and none as easing.
+
+**What the court record says.** The Care_Justice_Census judicial rows show how Uptown's 11 incidents moved through the system. The Uptown row reads 11 charges, 3 arrests, and 5 people in custody at the close. The census attributes none of the five to a tracked resident. All five are "other residents." KONO and Rockridge show the same shape, with 10 charges, 3 arrests and 5 in custody. Downtown shows 11, 3 and 4. Eastlake shows 9, 2 and 4. Citywide, the census counts 43 arrests, 72 people in custody at the close, and 27 who left.
+
+**A gap in the table.** Uptown has more people in custody at the close (5) than arrests this cycle (3). Both figures come from the same census row. The likeliest explanation is that custody counts people held from earlier cycles, and arrests count only this cycle's. That is an inference, and the row does not say so. It does not show which charges the arrests answer, or whether the five held are the same people as the three arrested. The table shows counts at each stage. It does not link them. A reader can't tell from it whether the three arrests resolve three of the eleven incidents or sit alongside other cases entirely.
+
+The 26 percent clearance figure sits close to three of eleven, which is about 27 percent. That could be coincidence or it could be the same arithmetic. The Crime_Metrics row does not say how clearance is computed, and this reporter did not find a definition in the sheets read.
+
+**Where I looked.** I read the Uptown row of the Crime_Metrics sheet. I read the police office entry in the Civic_Office_Ledger, which lists Rafael Montez as Police Chief, a 27-year OPD veteran. I searched the paper's archive for prior Uptown clearance and response-time coverage. The search returned older editions on a citywide cluster of incidents, a four-hour internet outage near the 19th Street corridor, and a mayoral note on district crises. None of them print an Uptown clearance rate or a response-time figure. That is a finding about what the paper has printed, not about what OPD holds. Chief Montez and Deputy Chief of Operations Kimberly Cho are the department's named leadership in this record. Neither is quoted here, and the record supplies no statement from either on Uptown. The census row lists 39 public-safety staff on the roster. It does not say how many cover Uptown.
+
+**What a resident can do with this.** The table gives a resident little to act on. A 10.8-minute average is a citywide-style average over a month's calls. It does not predict a single call. The practical guidance is plain. Report an incident even if it seems minor, because a count that does not include it understates the block. Ask for an incident number when reporting, because a number is how a call can be followed to a charge, an arrest, or nothing.
+
+**The unanswered part.** The record shows 11 incidents, 3 arrests and a 26 percent clearance rate. It does not show who owns the other eight. A patrol commander owns a response time. A detective owns a case. A chief owns a clearance rate. The table assigns none of those. When the count rises four in a cycle and the trend field still says "steady," who in the chain of command is responsible for what happens to those eight incidents? And what does that responsibility amount to when clearance sits at 26 percent?
+
+## INTAKE
+NAMES: Rafael Montez | subject
+NAMES: Kimberly Cho | subject
+HOOD: Uptown
+CLAIM: Uptown logged the most incidents (11) — 22 neighborhoods on the table | output/beats/Crime_Metrics.jsonl @C114

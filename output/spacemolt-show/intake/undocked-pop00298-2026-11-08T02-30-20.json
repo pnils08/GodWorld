@@ -1,0 +1,59 @@
+{
+  "v": "UNDOCKED-INTAKE/1",
+  "Timestamp": "2026-11-08T02:55:37.118Z",
+  "POPID": "POP-00298",
+  "Cycle": 114,
+  "Seq": 3,
+  "Daypart": "SHOW",
+  "Tag": "undocked-episode",
+  "EpisodeId": "undocked-pop00298-2026-11-08T02-30-20",
+  "Applied": "yes",
+  "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop00298-2026-11-08T02-30-20.json",
+  "Holder": "Luis Taz",
+  "CreditsDelta": 0,
+  "Magnitude": 1,
+  "Flags": [
+    "credits_delta_windowed"
+  ],
+  "Excerpt": "Luis Taz credits=0 systems=synchrony,node_alpha,nexus_prime,node_beta,acubens,hamal,okab,thornhaven,stormwatch,tanglewood,gsc_0016,felis,gliese_876,gsc_0024,jasmine,gsc_0035,biham",
+  "DecidedAt": "2026-11-08T02:55:37.120Z",
+  "DecidedBy": "auto-gate",
+  "Note": "auto-approved on contract validation (§2.5)",
+  "FeedEvent": {
+    "v": "UNDOCKED-FEED/1",
+    "Cycle": 114,
+    "EventType": "undocked-episode",
+    "POPID": "POP-00298",
+    "Holder": "Luis Taz",
+    "EpisodeId": "undocked-pop00298-Y3C10-e3",
+    "CreditsDelta": 0,
+    "PointsDelta": 7.23,
+    "Systems": [
+      "synchrony",
+      "node_alpha",
+      "nexus_prime",
+      "node_beta",
+      "acubens",
+      "hamal",
+      "okab",
+      "thornhaven",
+      "stormwatch",
+      "tanglewood",
+      "gsc_0016",
+      "felis",
+      "gliese_876",
+      "gsc_0024",
+      "jasmine",
+      "gsc_0035",
+      "biham"
+    ],
+    "CombatEvents": 0,
+    "MishapCount": 0,
+    "Magnitude": 1,
+    "Flags": [
+      "credits_delta_windowed"
+    ],
+    "StagedPath": "output/spacemolt-show/staged/undocked-pop00298-2026-11-08T02-30-20.json"
+  },
+  "PointsDelta": 7.23
+}

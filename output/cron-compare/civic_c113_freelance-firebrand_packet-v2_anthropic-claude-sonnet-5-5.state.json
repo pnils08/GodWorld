@@ -1,0 +1,473 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00799",
+    "name": "Jax Caldera",
+    "role": "desk reporter",
+    "desk": "civic"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "The map says decay; the program roster does not answer it.",
+    "approach": "Firebrand approach (sim stink-audit): do NOT open from the official timeline. Find what does not line up — metric vs claim, money vs outcome, boomtown copy vs decay, crisis with no owner. Write into the contradiction. Name who must answer. End on the unanswered question. Scene color is yours (weather, street, bar), including your own route through one or many bars, so long as it contradicts nothing on this slice. Do not invent a named business or institution that the sim has not supplied. Never invent careers for named people — RoleType lines are immutable. Never invent citizen names.",
+    "voice": "Short, hot, first-person accountability column. Open on the sourced contradiction, press the supplied accountable subject, and end on the plan closeQuestion. No generic revitalization plea.",
+    "creativeBrief": {
+      "kind": "data-accountability",
+      "method": "TWO_SIDED_DATA_AUDIT",
+      "mismatch": {
+        "a": "Chinatown: decay [Sentiment -0.050, RetailVitality -2.07, HousingPressure +1.000] — Sentiment now -0.06 (20 of 22, city median 0.03); RetailVitality now 7.78 (9 of 22, city median 7.165); HousingPressure now 1.5 (14 of 22, city median 0) — with no matching active initiative",
+        "aSrc": "output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+        "b": "No active initiative (or mitigator) owns this break on the record",
+        "bSrc": "output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12"
+      },
+      "scopeHoods": [
+        "Chinatown"
+      ],
+      "missing": [
+        "the prior comparison needed to validate the flagged direction",
+        "an office response to the data mismatch"
+      ],
+      "closeQuestion": "The map says decay; the program roster does not answer it.",
+      "sceneRule": "You may invent one or many bar/street/sensory scenes and Jax's own presence or route through them, so long as the color contradicts no supplied sim fact. A generic bar is persona texture, not a new canon business. Named people must stay on the CITIZENS list or be unnamed. Do not invent a named business or institution. RoleType is immutable — do not reassign careers.",
+      "sourcePointers": [
+        "output/cron-compare/stink_c113.json",
+        "output/desk_signal_c113.json",
+        "output/world_summary_c113.md",
+        "output/neighborhood_texture_c113.md",
+        "output/engine_audit_c113.json",
+        "output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF",
+    "runningStoriesNote": "signal.runningStories are events the city is already living through and where each one stands. Background only — write nothing about tracking them."
+  },
+  "signal": {
+    "kind": "anomaly",
+    "hood": "Chinatown",
+    "src": "output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+    "plan": {
+      "focus": "Chinatown decay without an active initiative",
+      "closeQuestion": "Who is responsible for addressing the decay in Chinatown?"
+    },
+    "runningStories": [
+      "West Oakland Stabilization Fund — disbursement-active [West Oakland] — week 5",
+      "Oakland Alternative Response Initiative — dispatch-live [West Oakland, Fruitvale, East Oakland] — week 5",
+      "Fruitvale Transit Hub Phase II — Visioning — design-phase [Fruitvale] — week 5",
+      "Temescal Community Health Center — operational [Temescal] — week 5",
+      "Baylight District — Final Council Vote — construction-active [Jack London, Downtown] — week 5",
+      "Oakland Youth Apprenticeship Pipeline — implementation-active [West Oakland, East Oakland, Fruitvale] — week 2",
+      "Downtown Economic Revitalization — legislation-filed [Downtown] — week 3",
+      "Commercial Stabilization for Grand Lake — legislation-filed [Grand Lake] — week 2",
+      "West Oakland Tenant Defense Fund — operational [West Oakland] — under way",
+      "Ivy Hill Revitalization Initiative — announced [Ivy Hill] — week 2",
+      "Dimond Revitalization Initiative — announced [Dimond] — under way",
+      "West Oakland Tenant Defense Fund — vote-scheduled [West Oakland] — ENDED this week after 2 week(s); now operational"
+    ]
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00439",
+        "name": "Timmie Hall",
+        "profile": "Timmie Hall (POP-00439) — role: Refugee Resettlement Case Worker; neighborhood: Chinatown; born: 1995; careerStage: senior; wealth: 5; employerBiz: BIZ-00028; skills: Faith & Community; tier: 3",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00635",
+        "name": "Mei Chen",
+        "profile": "Mei Chen (POP-00635) — role: Gallery Owner/Curator; neighborhood: Chinatown; born: 1994; careerStage: senior; wealth: 5; employerBiz: SELF_EMPLOYED; skills: Government & Civic; tier: 3",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-01128",
+        "name": "Liliana Salazar",
+        "profile": "Liliana Salazar (POP-01128) — role: EV mechanic; neighborhood: Glenview; born: 1968; careerStage: mid-career; wealth: 5; tier: 4",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-01137",
+        "name": "Wren Choi",
+        "profile": "Wren Choi (POP-01137) — role: Youth mentor; neighborhood: Glenview; born: 1999; careerStage: mid-career; wealth: 4; tier: 4",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00439-3f527fabc0",
+        "pop": "POP-00439",
+        "name": "Timmie Hall",
+        "quote": "I've noticed some changes around here, like the lunch spot on the corner being closed suddenly. And just now, there was a medical emergency on the sidewalk. It's not usually like that here.",
+        "factIds": [
+          "F-1d30d0c91c34"
+        ],
+        "src": "packet.W2[POP-00439]"
+      },
+      {
+        "id": "Q-POP-00635-621e0efac9",
+        "pop": "POP-00635",
+        "name": "Mei Chen",
+        "quote": "To be honest, it's a bit worrying to see some of our local businesses struggling. I stopped by my usual lunch spot just now and it's closed with a notice on the door. I've been going there for years. The medical emergency on the sidewalk doesn't help the vibe either. I'm hoping the Oakland Alternative Response Initiative continues to make a positive impact, it's been great to see residents feeling safer.",
+        "factIds": [
+          "F-1d30d0c91c34",
+          "F-c8e82a5d4fb3",
+          "F-5d83dd3ebffb",
+          "F-ab9d6786094e"
+        ],
+        "src": "packet.W2[POP-00635]"
+      },
+      {
+        "id": "Q-POP-01128-a2b7314eb8",
+        "pop": "POP-01128",
+        "name": "Liliana Salazar",
+        "quote": "I've seen the news about Chinatown, and to be honest, it doesn't surprise me. I've watched the fog roll over the port cranes from my front window, and it's made me think about how some parts of Oakland are changing while others seem stuck. I don't know what's going on with Chinatown, but it feels like it's been on a downward slide for a while. I haven't been there recently, but I've heard things from friends. It's a shame, really.",
+        "factIds": [
+          "F-c8e82a5d4fb3",
+          "F-b19f8e2095d7",
+          "F-1d30d0c91c34"
+        ],
+        "src": "packet.W2[POP-01128]"
+      },
+      {
+        "id": "Q-POP-01137-cd7326c741",
+        "pop": "POP-01137",
+        "name": "Wren Choi",
+        "quote": "I've noticed some changes around my neighborhood, Glenview, lately. More people seem to be home during the day, and there's a bit of a different vibe. I haven't been to Chinatown recently, but I do hear things. It sounds like it's not doing great. I don't know what's going on there, but it makes me wonder if anyone is paying attention to it.",
+        "factIds": [
+          "F-c8e82a5d4fb3",
+          "F-ab9d6786094e",
+          "F-d2da469f01e2"
+        ],
+        "src": "packet.W2[POP-01137]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Jax Caldera",
+        "text": "The sudden closure of the usual lunch spot might be related to the decay",
+        "usable": false
+      },
+      {
+        "from": "Jax Caldera",
+        "text": "The medical emergency on the sidewalk could be a symptom of a broader issue",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C113",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-876f95b5eb98"
+    },
+    {
+      "t": "FACT",
+      "text": "Chinatown: decay [Sentiment -0.050, RetailVitality -2.07, HousingPressure +1.000] — Sentiment now -0.06 (20 of 22, city median 0.03); RetailVitality now 7.78 (9 of 22, city median 7.165); HousingPressure now 1.5 (14 of 22, city median 0) — with no matching active initiative",
+      "src": "output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+      "id": "F-c8e82a5d4fb3"
+    },
+    {
+      "t": "FACT",
+      "text": "No active initiative (or mitigator) owns this break on the record",
+      "src": "output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+      "id": "F-b19f8e2095d7"
+    },
+    {
+      "t": "FACT",
+      "text": "Season: Winter | Weather: 58°F clear, W 8 mph, clear (frontState CLEAR), humidity 56, visibility 10",
+      "src": "World_Config/weather snapshot for C113",
+      "id": "F-3bdb2a72e3d1"
+    },
+    {
+      "t": "FACT",
+      "text": "A medical team rushes to an emergency on the sidewalk, drawing a small crowd. The usual lunch spot is suddenly closed, with a notice taped to the door.",
+      "src": "output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+      "id": "F-1d30d0c91c34"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C9, Winter, holiday=none",
+      "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+      "id": "F-ab9d6786094e"
+    },
+    {
+      "t": "FACT",
+      "text": "Mei Chen (POP-00635) — role: Gallery Owner/Curator; neighborhood: Chinatown; born: 1994; careerStage: senior; wealth: 5; employerBiz: SELF_EMPLOYED; skills: Government & Civic; tier: 3",
+      "src": "Simulation_Ledger profile for POP-00635",
+      "id": "F-5d83dd3ebffb"
+    },
+    {
+      "t": "FACT",
+      "text": "Wren Choi (POP-01137) — role: Youth mentor; neighborhood: Glenview; born: 1999; careerStage: mid-career; wealth: 4; tier: 4",
+      "src": "Simulation_Ledger profile for POP-01137",
+      "id": "F-d2da469f01e2"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "jax-accountability-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "ACTIVE probationary package. Apply public accountability pressure when the simulated record and the public story do not line up; starting friction is success, while resolving the civic problem is not the columnist's job.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "adversarial first-person accountability column",
+      "targetWords": "400-650",
+      "opening": "street-level scene in a bar, laundromat, corner, or similar public room",
+      "closing": "an unanswered accountability question"
+    },
+    "authorizedTexture": [
+      "a named street or street-level time cue used only as scene location",
+      "bars, a laundromat, a corner, booth, counter, or sidewalk setting — named in-world spots welcome",
+      "the reporter's own physical presence, drink, route, observation, and count of generic bar visits",
+      "an unnamed or role-only local voice such as a bartender, patron, neighbor, rider, or shop worker",
+      "adversarial inference and unanswered questions drawn from supplied facts"
+    ],
+    "textureConditions": [
+      "a count of the reporter's generic bar visits is persona texture, not a city metric or proof that a named business exists",
+      "an anonymous voice is color, not a sourced official statement, and must not be indexed as a quoted-source",
+      "texture must not carry a vote, official act or inaction, criminal accusation, budget, date, duration, public count, or other load-bearing factual claim",
+      "attributed quotation requires citizen-authored text preserved verbatim with addressable provenance; backend-composed lattice text is not a quotation",
+      "real-world city assumptions and generic urban-problem framing are forbidden",
+      "a rhetorical question or inference must remain framed as a question or inference rather than settled fact",
+      "in-world named spots that are not real Oakland are allotted hallucination and belong on INTAKE BIZ if newly named",
+      "player, team, roster, statistic, result, and front-office facts still require Packet support"
+    ],
+    "canonBlockers": [
+      "a real-world person, place, business, institution, team, or event imported into the city",
+      "a wholly invented person given the authority of an established citizen or office-holder",
+      "a fabricated Project, Initiative, civic office, or institution carrying engine identity (a newly named bar, shop, or venue is INTAKE BIZ, not a violation)",
+      "a backend-composed or model-reconstructed statement presented as a citizen quotation",
+      "a false or unsupported vote, official act, official inaction, promise, decision, or duty presented as fact",
+      "a false criminal accusation or attributed admission",
+      "a load-bearing number, date, duration, budget, metric direction, or count that contradicts or lacks the supplied record",
+      "a current-state claim that contradicts the world summary or verified prior coverage"
+    ]
+  },
+  "manifest": {
+    "id": "AM-282c18e85462",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-876f95b5eb98",
+        "t": "FACT",
+        "text": "Current cycle: C113",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-c8e82a5d4fb3",
+        "t": "FACT",
+        "text": "Chinatown: decay [Sentiment -0.050, RetailVitality -2.07, HousingPressure +1.000] — Sentiment now -0.06 (20 of 22, city median 0.03); RetailVitality now 7.78 (9 of 22, city median 7.165); HousingPressure now 1.5 (14 of 22, city median 0) — with no matching active initiative",
+        "src": "output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12"
+      },
+      {
+        "id": "F-b19f8e2095d7",
+        "t": "FACT",
+        "text": "No active initiative (or mitigator) owns this break on the record",
+        "src": "output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12"
+      },
+      {
+        "id": "F-3bdb2a72e3d1",
+        "t": "FACT",
+        "text": "Season: Winter | Weather: 58°F clear, W 8 mph, clear (frontState CLEAR), humidity 56, visibility 10",
+        "src": "World_Config/weather snapshot for C113"
+      },
+      {
+        "id": "F-1d30d0c91c34",
+        "t": "FACT",
+        "text": "A medical team rushes to an emergency on the sidewalk, drawing a small crowd. The usual lunch spot is suddenly closed, with a notice taped to the door.",
+        "src": "output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12"
+      },
+      {
+        "id": "F-ab9d6786094e",
+        "t": "FACT",
+        "text": "Calendar: Y3C9, Winter, holiday=none",
+        "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)"
+      },
+      {
+        "id": "F-5d83dd3ebffb",
+        "t": "FACT",
+        "text": "Mei Chen (POP-00635) — role: Gallery Owner/Curator; neighborhood: Chinatown; born: 1994; careerStage: senior; wealth: 5; employerBiz: SELF_EMPLOYED; skills: Government & Civic; tier: 3",
+        "src": "Simulation_Ledger profile for POP-00635"
+      },
+      {
+        "id": "F-d2da469f01e2",
+        "t": "FACT",
+        "text": "Wren Choi (POP-01137) — role: Youth mentor; neighborhood: Glenview; born: 1999; careerStage: mid-career; wealth: 4; tier: 4",
+        "src": "Simulation_Ledger profile for POP-01137"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00439-3f527fabc0",
+        "speakerId": "POP-00439",
+        "speakerName": "Timmie Hall",
+        "text": "I've noticed some changes around here, like the lunch spot on the corner being closed suddenly. And just now, there was a medical emergency on the sidewalk. It's not usually like that here.",
+        "factIds": [
+          "F-1d30d0c91c34"
+        ],
+        "src": "packet.W2[POP-00439]"
+      },
+      {
+        "id": "Q-POP-00635-621e0efac9",
+        "speakerId": "POP-00635",
+        "speakerName": "Mei Chen",
+        "text": "To be honest, it's a bit worrying to see some of our local businesses struggling. I stopped by my usual lunch spot just now and it's closed with a notice on the door. I've been going there for years. The medical emergency on the sidewalk doesn't help the vibe either. I'm hoping the Oakland Alternative Response Initiative continues to make a positive impact, it's been great to see residents feeling safer.",
+        "factIds": [
+          "F-1d30d0c91c34",
+          "F-c8e82a5d4fb3",
+          "F-5d83dd3ebffb",
+          "F-ab9d6786094e"
+        ],
+        "src": "packet.W2[POP-00635]"
+      },
+      {
+        "id": "Q-POP-01128-a2b7314eb8",
+        "speakerId": "POP-01128",
+        "speakerName": "Liliana Salazar",
+        "text": "I've seen the news about Chinatown, and to be honest, it doesn't surprise me. I've watched the fog roll over the port cranes from my front window, and it's made me think about how some parts of Oakland are changing while others seem stuck. I don't know what's going on with Chinatown, but it feels like it's been on a downward slide for a while. I haven't been there recently, but I've heard things from friends. It's a shame, really.",
+        "factIds": [
+          "F-c8e82a5d4fb3",
+          "F-b19f8e2095d7",
+          "F-1d30d0c91c34"
+        ],
+        "src": "packet.W2[POP-01128]"
+      },
+      {
+        "id": "Q-POP-01137-cd7326c741",
+        "speakerId": "POP-01137",
+        "speakerName": "Wren Choi",
+        "text": "I've noticed some changes around my neighborhood, Glenview, lately. More people seem to be home during the day, and there's a bit of a different vibe. I haven't been to Chinatown recently, but I do hear things. It sounds like it's not doing great. I don't know what's going on there, but it makes me wonder if anyone is paying attention to it.",
+        "factIds": [
+          "F-c8e82a5d4fb3",
+          "F-ab9d6786094e",
+          "F-d2da469f01e2"
+        ],
+        "src": "packet.W2[POP-01137]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00439",
+        "name": "Timmie Hall",
+        "profile": "Timmie Hall — role: Refugee Resettlement Case Worker; neighborhood: Chinatown; born: 1995; careerStage: senior; wealth: 5; employerBiz: BIZ-00028; skills: Faith & Community; tier: 3",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00635",
+        "name": "Mei Chen",
+        "profile": "Mei Chen — role: Gallery Owner/Curator; neighborhood: Chinatown; born: 1994; careerStage: senior; wealth: 5; employerBiz: SELF_EMPLOYED; skills: Government & Civic; tier: 3",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-01128",
+        "name": "Liliana Salazar",
+        "profile": "Liliana Salazar — role: EV mechanic; neighborhood: Glenview; born: 1968; careerStage: mid-career; wealth: 5; tier: 4",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-01137",
+        "name": "Wren Choi",
+        "profile": "Wren Choi — role: Youth mentor; neighborhood: Glenview; born: 1999; careerStage: mid-career; wealth: 4; tier: 4",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Jax Caldera",
+        "text": "The sudden closure of the usual lunch spot might be related to the decay",
+        "publishable": false
+      },
+      {
+        "from": "Jax Caldera",
+        "text": "The medical emergency on the sidewalk could be a symptom of a broader issue",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "a named street or street-level time cue used only as scene location",
+      "bars, a laundromat, a corner, booth, counter, or sidewalk setting — named in-world spots welcome",
+      "the reporter's own physical presence, drink, route, observation, and count of generic bar visits",
+      "an unnamed or role-only local voice such as a bartender, patron, neighbor, rider, or shop worker",
+      "adversarial inference and unanswered questions drawn from supplied facts"
+    ],
+    "textureConditions": [
+      "a count of the reporter's generic bar visits is persona texture, not a city metric or proof that a named business exists",
+      "an anonymous voice is color, not a sourced official statement, and must not be indexed as a quoted-source",
+      "texture must not carry a vote, official act or inaction, criminal accusation, budget, date, duration, public count, or other load-bearing factual claim",
+      "attributed quotation requires citizen-authored text preserved verbatim with addressable provenance; backend-composed lattice text is not a quotation",
+      "real-world city assumptions and generic urban-problem framing are forbidden",
+      "a rhetorical question or inference must remain framed as a question or inference rather than settled fact",
+      "in-world named spots that are not real Oakland are allotted hallucination and belong on INTAKE BIZ if newly named",
+      "player, team, roster, statistic, result, and front-office facts still require Packet support"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "office": "transit_hub",
+  "cycle": 115,
+  "speaker": "Elena Soria Dominguez",
+  "cascadeSummary": "The mayor's directive is exactly what I asked for: the schematics go to Fruitvale, get tested against daily life, and every comment gets a written answer before design takes another step. This cycle I'm executing the preliminary schematics delivery and the documented community review at the Cesar Chavez branch and the senior center — English, Spanish, and Mam — and I'm building the comment-and-response record that the next design step must clear. I hold the phase at design-phase; there's no claim of final design and no advancement until that record exists.",
+  "statements": [
+    {
+      "statementId": "STMT-115-transit_hub-001",
+      "type": "operational_status",
+      "topic": "Preliminary schematics delivery and documented Fruitvale community review",
+      "initiative": "INIT-003",
+      "decision": "Deliver the preliminary schematics to Fruitvale and conduct a documented community review at the Cesar Chavez branch library and the Fruitvale senior center, with the session calendar, the display materials, and the comment-and-response process all committed in writing.",
+      "quote": "The schematics are out of the back room and onto the table at the library — every comment gets a number, and every number gets an answer before these drawings move an inch.",
+      "fullStatement": "Here's what happens on the ground this cycle. Mayer & Associates' preliminary schematics arrived, filed not as final design but as drawings to be tested. They go up at the Cesar Chavez branch library on the large poster panels, and they go up at the senior center, and they're displayed in English, Spanish, and Mam — three languages, all session long, not a one-page summary stapled to a sign-in sheet. Each session runs a station for every part of the project a neighborhood actually touches: the pedestrian crossing at 14th Avenue, the ground-floor retail frontage along International, the BART plaza, the housing massing and its affordability line. Every station has butcher paper and a numbered comment log. When someone flags that the crossing is unsafe — and they will, because a kid was nearly hit there and the community has said so before — that comment gets a number, and a staff response gets filed against it. We run the sessions at the senior center on a weekday afternoon for the people who can't do evenings, and at the library in the evening for the people who work days. The outreach coordinator moves through the room taking comments in the language people actually speak, and the engagement consultant keeps the demographic tally as we go — not 47 attended, but who was there. When the review sessions close, the comment-and-response record is drafted and published, comments and answers, in both languages at minimum. That record is what the next design step has to clear. Until it exists, these schematics are still drawings, and the project stays in design-phase. Nothing gets locked before the people who live here test these drawings against daily life.",
+      "trackerUpdates": {
+        "initiative": "INIT-003",
+        "ImplementationPhase": "design-phase",
+        "MilestoneNotes": "C115: Preliminary schematics delivered; documented Fruitvale community review opened at branch library and senior center in EN/ES/Mam; comment-and-response record under compilation — no advancement pending its publication.",
+        "NextScheduledAction": "Publish the public comment-and-response record",
+        "NextActionCycle": 116
+      }
+    },
+    {
+      "statementId": "STMT-115-transit_hub-002",
+      "type": "constituent_priority",
+      "topic": "What Fruitvale needs from me this cycle",
+      "initiative": "INIT-003",
+      "decision": "Center the schematics review on the daily-life asks Fruitvale has raised through the visioning — safer pedestrian crossing, protected small-business frontage, and housing affordability — and answer for those in writing, not by promise.",
+      "quote": "I don't answer for Fruitvale from a cubicle. I answer for it because my kids walk to the BART station past these drawings, and so do yours.",
+      "fullStatement": "My constituents this cycle are simple to name — the abuelas who use the senior center, the tamale vendors and taqueria owners on International who want to know whether the new ground floor rents them out or pushes them out, and the families whose kids walk the 14th Avenue crossing to school every morning. What I owe them this cycle is not a bolder design and not a faster timeline. I owe them the schematics on the wall where they can see them, the comment log where they can write in their own language, and a written answer to every concern before the project moves forward. That is the fight I'm making this cycle, and that fight sits inside the mayor's directive, not against it. The order stays: people first, drawings second, final design nowhere until Fruitvale says so.",
+      "trackerUpdates": {}
+    }
+  ]
+}

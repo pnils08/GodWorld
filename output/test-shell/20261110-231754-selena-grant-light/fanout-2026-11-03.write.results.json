@@ -1,0 +1,86 @@
+{
+  "date": "2026-11-03",
+  "stage": "write",
+  "results": [
+    {
+      "name": "Luis Navarro",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 3,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 645,
+        "contractScore": 3
+      }
+    },
+    {
+      "name": "Sgt. Rachel Torres",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 3,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 780,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Angela Reyes",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 2,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 969,
+        "contractScore": 2
+      }
+    },
+    {
+      "name": "Selena Grant",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 469,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Tamsin Pruitt",
+      "desk": "culture",
+      "ok": false,
+      "error": "spent angle artifact at output/cron-compare/culture_c114_tamsin-pruitt_packet-v2_angle.json (written 2026-11-03T12:17:20.941Z) — already filed as staged/culture_c114_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.staged.json at 2026-11-04T07:44:45.749Z; today's --stage=angle did not land, not filing twice on one plan",
+      "checks": null
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": false,
+      "error": "spent angle artifact at output/cron-compare/undocked_c114_nia-rook_packet-v2_angle.json (written 2026-11-03T12:17:40.334Z) — already filed as staged/undocked_c114_nia-rook_packet-v2_openai-gpt-6-luna.staged.json at 2026-11-04T07:45:39.507Z; today's --stage=angle did not land, not filing twice on one plan",
+      "checks": null
+    }
+  ],
+  "checkTotals": {
+    "seats": 4,
+    "toolSeats": 3,
+    "capHits": 0,
+    "thin": 0,
+    "verbatim": 0,
+    "graded": 4,
+    "gradeSum": 13
+  },
+  "ranAt": "2026-11-04T07:50:20.936Z"
+}

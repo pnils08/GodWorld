@@ -1,0 +1,70 @@
+{
+  "office": "council_d7",
+  "agentDir": "civic-office-council-d7",
+  "holder": "Warren Ashford",
+  "popid": "POP-00504",
+  "title": "City Council District 7",
+  "date": "2026-11-11",
+  "cycle": 115,
+  "model": "google/gemini-3.8-flash",
+  "statement": "Rockridge's commercial indicators show retail vitality at 11.89, but sentiment at -0.06 signals persistent friction that cannot be solved by throwing unmonitored municipal funds at the corridor. With Temescal Community Health Center holding $15,923,076.9 in operational funds and delivering care, my focus remains locked on verifiable fiscal oversight, auditing municipal service delivery, and demanding hard data before entertaining any new spending requests.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-115-civic-office-council-d7",
+        "text": "Our canvass and corridor metrics confirm that while Rockridge retail vitality rose to 11.89, neighborhood sentiment dropped to -0.06 against the city benchmark of 0.020, with trajectory momentum slipping to 6 and 98 residents reported sick. Property crime sits at 39 and violent crime at 24. These figures reflect community friction rather than commercial collapse. I will not support unbudgeted corridor adjustments or open-ended funding without clear municipal performance audits and verified service baselines.",
+        "directiveCycle": 115,
+        "confrontationSeat": "civic-office-council-d7"
+      }
+    },
+    {
+      "type": "canvass",
+      "payload": {
+        "hood": "KONO",
+        "note": "Assessing commercial sentiment and service delivery following the recent dip in neighborhood sentiment."
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": "2",
+  "ranAt": "2026-11-11T11:50:41.578Z",
+  "usage": {
+    "prompt_tokens": 6295,
+    "completion_tokens": 3408,
+    "total_tokens": 9703,
+    "cost": 0.01750125,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.01750125,
+      "upstream_inference_prompt_cost": 0.00472125,
+      "upstream_inference_completions_cost": 0.01278
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 3123,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "fellBackFrom": null,
+  "evidenceGenerationHash": "8bfd87940a666380c5a9b73d2151cff4f6286856fa3673a770c7259a48d6c71b",
+  "evidenceReads": [],
+  "provider": "Google",
+  "finishReason": "stop",
+  "elapsedMs": 26911,
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00504",
+    "id": "Qvi8LyeiAUHyfVRVTQghCK",
+    "customId": "cp-POP-00504-c115-CIVIC-datawake-2026-11-11"
+  }
+}

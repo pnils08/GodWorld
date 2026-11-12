@@ -1,0 +1,26 @@
+{
+  "office": "council_d3",
+  "agentDir": "civic-office-council-d3",
+  "holder": "Rose Delgado",
+  "popid": "POP-00503",
+  "title": "City Council District 3",
+  "date": "2026-10-29",
+  "cycle": 113,
+  "model": "deepseek/deepseek-v4-flash-0731",
+  "statement": "San Antonio is not a corridor I walk away from when the sentiment turns south. The pulse shows that neighborhood trailing the city's mood — sentiment at -0.04 versus a citywide 0.045 — and the crime index right at the city line. That gap is small right now, but it's exactly where neglect starts. I stand with San Antonio the same way I stood with the complaint response last cycle: this community filed a grievance, and this community gets an answer, not a shoulder shrug. The working city sees the plan on paper; I need to see it walking down East 14th. I'm scheduling the OARI briefing now so Fruitvale and San Antonio residents hear directly what response times look like on their streets, and I'm moving the Transit Hub review date forward so this district knows the visioning phase has an end point. We stay in this together — that's the only way I work.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-113-civic-office-council-d3",
+        "text": "Scheduling the D3 OARI community briefing for this cycle — San Antonio and Fruitvale residents deserve to hear response metrics for their own streets. Publishing the preliminary design review date for Fruitvale Transit Hub Phase II so this district knows when visioning turns into a real timeline.",
+        "directiveCycle": 113,
+        "confrontationSeat": "civic-office-council-d3"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-10-29T10:45:26.337Z",
+  "fellBackFrom": null
+}

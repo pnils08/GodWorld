@@ -1,0 +1,263 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-01076",
+    "name": "Nia Rook",
+    "role": "desk reporter",
+    "desk": "undocked"
+  },
+  "task": {
+    "goal": "Cover this UNDOCKED episode and its show history.",
+    "assignment": "UNDOCKED episode: Brooklyn Nguyen, Tuesday night. Standings: Luis Taz leads the board — rank #1, 45.19 achievement points, 0 credits, 2 cycle(s) led, current streak 2. In the chair: Brooklyn Nguyen — Community Programs Coordinator.",
+    "approach": "UNDOCKED show beat: current episode and standings from the approved feed; earlier episodes from the approved show history.",
+    "voice": null,
+    "writingMode": "SOURCE_BRIEF",
+    "reportingQuestion": "What did earlier approved UNDOCKED episodes record for this pilot or the current board leader?"
+  },
+  "signal": {
+    "kind": "undocked",
+    "hood": "Fruitvale",
+    "src": "undocked:undocked-pop00184-Y3C11",
+    "plan": {
+      "focus": "Brooklyn Nguyen's UNDOCKED episode on Tuesday night"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00184",
+        "name": "Brooklyn Nguyen",
+        "profile": "Brooklyn Nguyen — UNDOCKED pilot",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00184-e1a9192380",
+        "pop": "POP-00184",
+        "name": "Brooklyn Nguyen",
+        "quote": "I came out even on credits after Tuesday's UNDOCKED flight. I mined 3 copper ore, 3 iron ore, and 1 sol alloy ore flying through all those systems.",
+        "factIds": [
+          "F-d543fd847684"
+        ],
+        "src": "packet.W2[POP-00184]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Nia Rook",
+        "text": "The performance might have implications for Luis Taz's lead in the standings.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C115",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-bc84fc0b7718"
+    },
+    {
+      "t": "FACT",
+      "text": "UNDOCKED: Brooklyn Nguyen, Tuesday night",
+      "src": "undocked:undocked-pop00184-Y3C11",
+      "id": "F-cf9ec8f302df"
+    },
+    {
+      "t": "FACT",
+      "text": "Brooklyn Nguyen's Tuesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes, Ridgecrest and Nembus; mined 3 copper ore, 3 iron ore and 1 sol alloy ore; came out even on credits; flew until the show's time ran out.",
+      "src": "undocked:undocked-pop00184-Y3C11",
+      "id": "F-d543fd847684"
+    },
+    {
+      "t": "FACT",
+      "text": "Brooklyn Nguyen — Community Programs Coordinator (ledger)",
+      "src": "undocked:undocked-pop00184-Y3C11",
+      "id": "F-3989ab410ca4"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C11, Spring, holiday=none",
+      "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+      "id": "F-82d77e9a4a71"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to a supplied source ref.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "nia-rook-undocked-recap-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Turn a gate-approved UNDOCKED episode into the city's entertainment conversation — who's up, who's down, what Oakland argues about tomorrow. Arc-tracking recap energy; personality-forward. NOT hard news, NOT sports analytics, NOT civic process.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "third-person recap with first-person flashes — entertainment beat, having fun on purpose",
+      "targetWords": "350-600",
+      "opening": "the episode's consequence for the pilot or the board"
+    },
+    "authorizedTexture": [
+      "an in-world bar, watch-party, break-room, bus, or sidewalk setting where the city watches or argues; a new named business goes on INTAKE BIZ",
+      "the reporter's own recap persona, approved show history, and who's-up-who's-down framing",
+      "unnamed audience argument and aspiration lines as city color, never as measured sentiment",
+      "metaphor and emotional inference grounded in a supplied typed fact from the episode feed"
+    ],
+    "textureConditions": [
+      "a named person must resolve to a ledger citizen; a new in-world place or business is scene color, not a recorded show event",
+      "current episode facts come from the supplied typed feed; prior episode facts come from the approved undocked_history result — a blank CreditsDelta is unsettled, never zero and never invented",
+      "pilot speech only from the wake-2 packet interviews — no other quote source exists for this lane",
+      "standings, ranks, and streaks come only from the supplied Standings block; earlier episodes do not establish an earlier rank",
+      "unnamed audience reaction stays rhetorical — it must not become a count, a poll, or a named person"
+    ],
+    "canonBlockers": [
+      "video game",
+      "videogame",
+      "simulation",
+      "engine",
+      "MCP",
+      "server",
+      "commander",
+      "tool",
+      "API",
+      "spacemolt-lib",
+      "openrouter",
+      "real-world calendar dates (YYYY-MM-DD)",
+      "captains_log",
+      "leaderboard math not present in the supplied facts"
+    ]
+  },
+  "manifest": {
+    "id": "AM-4d0bf68fdbcc",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-bc84fc0b7718",
+        "t": "FACT",
+        "text": "Current cycle: C115",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-cf9ec8f302df",
+        "t": "FACT",
+        "text": "UNDOCKED: Brooklyn Nguyen, Tuesday night",
+        "src": "undocked:undocked-pop00184-Y3C11"
+      },
+      {
+        "id": "F-d543fd847684",
+        "t": "FACT",
+        "text": "Brooklyn Nguyen's Tuesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes, Ridgecrest and Nembus; mined 3 copper ore, 3 iron ore and 1 sol alloy ore; came out even on credits; flew until the show's time ran out.",
+        "src": "undocked:undocked-pop00184-Y3C11"
+      },
+      {
+        "id": "F-3989ab410ca4",
+        "t": "FACT",
+        "text": "Brooklyn Nguyen — Community Programs Coordinator (ledger)",
+        "src": "undocked:undocked-pop00184-Y3C11"
+      },
+      {
+        "id": "F-82d77e9a4a71",
+        "t": "FACT",
+        "text": "Calendar: Y3C11, Spring, holiday=none",
+        "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00184-e1a9192380",
+        "speakerId": "POP-00184",
+        "speakerName": "Brooklyn Nguyen",
+        "text": "I came out even on credits after Tuesday's UNDOCKED flight. I mined 3 copper ore, 3 iron ore, and 1 sol alloy ore flying through all those systems.",
+        "factIds": [
+          "F-d543fd847684"
+        ],
+        "src": "packet.W2[POP-00184]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00184",
+        "name": "Brooklyn Nguyen",
+        "profile": "Brooklyn Nguyen — UNDOCKED pilot",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Nia Rook",
+        "text": "The performance might have implications for Luis Taz's lead in the standings.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "an in-world bar, watch-party, break-room, bus, or sidewalk setting where the city watches or argues; a new named business goes on INTAKE BIZ",
+      "the reporter's own recap persona, approved show history, and who's-up-who's-down framing",
+      "unnamed audience argument and aspiration lines as city color, never as measured sentiment",
+      "metaphor and emotional inference grounded in a supplied typed fact from the episode feed"
+    ],
+    "textureConditions": [
+      "a named person must resolve to a ledger citizen; a new in-world place or business is scene color, not a recorded show event",
+      "current episode facts come from the supplied typed feed; prior episode facts come from the approved undocked_history result — a blank CreditsDelta is unsettled, never zero and never invented",
+      "pilot speech only from the wake-2 packet interviews — no other quote source exists for this lane",
+      "standings, ranks, and streaks come only from the supplied Standings block; earlier episodes do not establish an earlier rank",
+      "unnamed audience reaction stays rhetorical — it must not become a count, a poll, or a named person"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

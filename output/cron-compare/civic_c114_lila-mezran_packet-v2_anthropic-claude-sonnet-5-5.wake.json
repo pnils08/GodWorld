@@ -1,0 +1,61 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "114",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "lila-mezran",
+  "byline": {
+    "name": "Dr. Lila Mezran",
+    "popid": "POP-00154",
+    "beatDomain": "HEALTH"
+  },
+  "laneEntries": 111,
+  "quotesLanded": 3,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "sheet_read",
+    "sheet_read",
+    "canon_search"
+  ],
+  "toolCalls": 3,
+  "wordCount": 1000,
+  "targetWords": "evidence-bounded",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": false,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": false,
+    "inTargetBy": "judge",
+    "words": 1000,
+    "short": "The opening paragraph begins with a resident profile rather than a Packet-backed fact, and the text falls short of the 1000-word target.",
+    "score": 2,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "7c6fc88078526eb2506cb892d7a632bad5de80a0035cd2f0c7cfcaa2a1f29fd2",
+    "costUsd": 0.0026
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 2/4 — The opening paragraph begins with a resident profile rather than a Packet-backed fact, and the text falls short of the 1000-word target."
+  },
+  "article": "output/cron-compare/staged/civic_c114_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "able debugging { debug: true }\n{\n  \"popId\": \"POP-00154\",\n  \"name\": \"Lila Mezran\",\n  \"recorded\": true,\n  \"text\": \"filed: Chinatown's 137 Sick: Six Beds Hold Part of the Count, Kitchens Hold the Rest\"\n}"
+  },
+  "ranAt": "2026-11-04T07:41:22.837Z",
+  "dispositionReconciledAt": "2026-11-07T18:00:02.163Z"
+}

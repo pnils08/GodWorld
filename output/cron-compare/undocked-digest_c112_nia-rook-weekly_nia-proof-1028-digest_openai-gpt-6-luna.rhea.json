@@ -1,0 +1,75 @@
+{
+  "draft": "output/cron-compare/undocked-digest_c112_nia-rook-weekly_nia-proof-1028-digest_openai-gpt-6-luna.md",
+  "cycle": "112",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "e9dd5b4be59a13a879d5407af409fb5517a37c6f1f951748f486fa07e5a05390",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All named citizens, quotes, and UNDOCKED show data match ground truth and verified interview records.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "nia-rook-undocked-weekly-digest-v1",
+    "packageVersion": "NIAROOK-UNDOCKED-WEEKLY-2",
+    "manifestId": "AM-c2e4f5bda56d",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "111",
+          "170"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Eric Taveras",
+      "Iris Pham",
+      "Rafael Phillips",
+      "Sammie Alvarez"
+    ],
+    "unverified": [
+      "Neighborhood Reporter"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0093,
+  "durationMs": 4312,
+  "parseError": false,
+  "ranAt": "2026-10-28T17:06:27.963Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 350",
+    "words": 368,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "e9dd5b4be59a13a879d5407af409fb5517a37c6f1f951748f486fa07e5a05390",
+    "costUsd": 0.001
+  }
+}

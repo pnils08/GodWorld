@@ -1,0 +1,89 @@
+{
+  "draft": "output/cron-compare/civic_c113_lila-mezran_packet-v2_anthropic-claude-haiku-5-5.md",
+  "cycle": "113",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "6fe95285272677f7c37bc754e0e6e969c48223eaa91498567bfbe0f806a9d37c",
+  "pass": false,
+  "flags": [
+    {
+      "claim": "\"The hospital counts the ones it has to take,\" she says. \"We're counting the rest, and nobody's paying us to do it.\"",
+      "issue": "Fabricated speech: additional quote attributed to named ledger citizen Marisio Curazo (POP-00698) that does not exist in the provided interview record.",
+      "severity": "high"
+    }
+  ],
+  "flagCount": 1,
+  "highSeverityCount": 1,
+  "summary": "Failed due to fabricated speech attributed to named ledger citizen Marisio Curazo.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "fail",
+    "texture": "overreach"
+  },
+  "reviewProfile": {
+    "id": "lila-health-service-v1",
+    "packageVersion": "LILA-LEP2-1",
+    "manifestId": "AM-30c52ff3bb84",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "6.4"
+        ]
+      },
+      {
+        "code": "UNAPPROVED_QUOTE",
+        "values": [
+          "The hospital counts the ones it has to take,",
+          "We're counting the rest, and nobody's paying us to do it."
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Lila Mezran",
+      "Marisio Curazo",
+      "Omarion Farah",
+      "Yu Zen"
+    ],
+    "unverified": [
+      "Bay Tribune Health",
+      "By Dr",
+      "Elder Care Coordinator"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0116,
+  "durationMs": 10548,
+  "parseError": false,
+  "ranAt": "2026-10-27T04:13:56.111Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 1057,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "6fe95285272677f7c37bc754e0e6e969c48223eaa91498567bfbe0f806a9d37c",
+    "costUsd": 0.0017
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "draft": "output/cron-compare/culture_c114_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 300",
+    "words": 637,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "scoredWithoutRhea": true,
+    "draftSha256": "ef2b645cf0fc6be792fec3f49f278d3c7ff2885551893252c2e1948d6095f139"
+  },
+  "ranAt": "2026-11-08T18:15:24.923Z"
+}

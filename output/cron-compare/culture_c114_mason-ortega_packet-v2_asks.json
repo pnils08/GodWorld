@@ -1,0 +1,300 @@
+[
+  {
+    "pop": "POP-00991",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00991\",\"name\":\"Tariq Mitchell\",\"role\":\"Line Cook\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Mason Ortega\",\"question\":\"What does a full shift at Marigold Cafe actually demand from you — physically, mentally — and what's the part of the job nobody sees from the dining room? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"Fruitvale\",\"focus\":\"The working conditions and daily reality of line cooks at two Fruitvale kitchens of vastly different scale — Marigold Cafe's Tariq Mitchell and Fruitvale Diner's Hazel Salazar — and what the work actually demands of them.\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Tariq Mitchell — Line Cook — Marigold Cafe, Fruitvale\",\"evidence\":[{\"id\":\"EV-4f733a5d37\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"text\":\"Tariq Mitchell, Line Cook at Marigold Cafe. 2 named workers at 2 named kitchens in Fruitvale on the ledger this cycle.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Tariq Mitchell, Line Cook at Marigold Cafe. 2 named workers at 2 named kitchens in Fruitvale on the ledger this cycle.\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"id\":\"F-78d4c9912cc7\"},{\"t\":\"FACT\",\"text\":\"Marigold Cafe · Cafe / dining · 30 employees · growth 10.7% · revenue $3.1M (+$6k vs C113) · on the roster: Tariq Mitchell (Line Cook)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"id\":\"F-f5b99ee4b698\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C114\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4261fa115617\"},{\"t\":\"FACT\",\"text\":\"Fruitvale kitchens · Marigold Cafe, Fruitvale Diner\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"id\":\"F-8f652b0ac965\"},{\"t\":\"FACT\",\"text\":\"Fruitvale Diner · Restaurant & Dining · 2 employees · growth 10.9% · revenue $207k (+$432 vs C113) · on the roster: Hazel Salazar (Line Cook)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"id\":\"F-30fcdbb2184e\"},{\"t\":\"FACT\",\"text\":\"Hub Ramen · Ramen Bar · 11 employees · growth 4.1% · revenue $721k (+$572 vs C113)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"id\":\"F-9973e1fc652f\"},{\"t\":\"FACT\",\"text\":\"Masa & Vine · Small Plates & Natural Wine Bar · 11 employees · growth 4.3% · revenue $721k (+$593 vs C113)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"id\":\"F-f89a3d2faa98\"},{\"t\":\"FACT\",\"text\":\"Platform Brunch · Brunch Restaurant · 11 employees · growth 4.3% · revenue $721k (+$597 vs C113)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"id\":\"F-ae8e7e99e7d9\"},{\"t\":\"FACT\",\"text\":\"Tariq Mitchell — Line Cook — Marigold Cafe, Fruitvale\",\"src\":\"Simulation_Ledger profile for POP-00991\",\"id\":\"F-4729d56a18a7\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C10, Spring, holiday=none\",\"src\":\"output/world_summary_c114.md Calendar context (Simulation_Calendar)\",\"id\":\"F-9b9470803821\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00991",
+        "name": "Tariq Mitchell",
+        "role": "Line Cook",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Mason Ortega",
+        "question": "What does a full shift at Marigold Cafe actually demand from you — physically, mentally — and what's the part of the job nobody sees from the dining room? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "Fruitvale",
+        "focus": "The working conditions and daily reality of line cooks at two Fruitvale kitchens of vastly different scale — Marigold Cafe's Tariq Mitchell and Fruitvale Diner's Hazel Salazar — and what the work actually demands of them.",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Tariq Mitchell — Line Cook — Marigold Cafe, Fruitvale",
+        "evidence": [
+          {
+            "id": "EV-4f733a5d37",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+            "text": "Tariq Mitchell, Line Cook at Marigold Cafe. 2 named workers at 2 named kitchens in Fruitvale on the ledger this cycle."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Tariq Mitchell, Line Cook at Marigold Cafe. 2 named workers at 2 named kitchens in Fruitvale on the ledger this cycle.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "id": "F-78d4c9912cc7"
+        },
+        {
+          "t": "FACT",
+          "text": "Marigold Cafe · Cafe / dining · 30 employees · growth 10.7% · revenue $3.1M (+$6k vs C113) · on the roster: Tariq Mitchell (Line Cook)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "id": "F-f5b99ee4b698"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C114",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4261fa115617"
+        },
+        {
+          "t": "FACT",
+          "text": "Fruitvale kitchens · Marigold Cafe, Fruitvale Diner",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "id": "F-8f652b0ac965"
+        },
+        {
+          "t": "FACT",
+          "text": "Fruitvale Diner · Restaurant & Dining · 2 employees · growth 10.9% · revenue $207k (+$432 vs C113) · on the roster: Hazel Salazar (Line Cook)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "id": "F-30fcdbb2184e"
+        },
+        {
+          "t": "FACT",
+          "text": "Hub Ramen · Ramen Bar · 11 employees · growth 4.1% · revenue $721k (+$572 vs C113)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "id": "F-9973e1fc652f"
+        },
+        {
+          "t": "FACT",
+          "text": "Masa & Vine · Small Plates & Natural Wine Bar · 11 employees · growth 4.3% · revenue $721k (+$593 vs C113)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "id": "F-f89a3d2faa98"
+        },
+        {
+          "t": "FACT",
+          "text": "Platform Brunch · Brunch Restaurant · 11 employees · growth 4.3% · revenue $721k (+$597 vs C113)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "id": "F-ae8e7e99e7d9"
+        },
+        {
+          "t": "FACT",
+          "text": "Tariq Mitchell — Line Cook — Marigold Cafe, Fruitvale",
+          "src": "Simulation_Ledger profile for POP-00991",
+          "id": "F-4729d56a18a7"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C10, Spring, holiday=none",
+          "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+          "id": "F-9b9470803821"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00873",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00873\",\"name\":\"Hazel Salazar\",\"role\":\"Line Cook\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Mason Ortega\",\"question\":\"How do you run a full service with two people on the roster, and what does that mean for what you carry home at the end of the night? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"Fruitvale\",\"focus\":\"The working conditions and daily reality of line cooks at two Fruitvale kitchens of vastly different scale — Marigold Cafe's Tariq Mitchell and Fruitvale Diner's Hazel Salazar — and what the work actually demands of them.\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Hazel Salazar — Line Cook — Fruitvale Diner, Fruitvale\",\"evidence\":[{\"id\":\"EV-c8e40c73b0\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"text\":\"Tariq Mitchell, Line Cook at Marigold Cafe. 2 named workers at 2 named kitchens in Fruitvale on the ledger this cycle.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Fruitvale Diner · Restaurant & Dining · 2 employees · growth 10.9% · revenue $207k (+$432 vs C113) · on the roster: Hazel Salazar (Line Cook)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"id\":\"F-30fcdbb2184e\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C114\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4261fa115617\"},{\"t\":\"FACT\",\"text\":\"Fruitvale kitchens · Marigold Cafe, Fruitvale Diner\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"id\":\"F-8f652b0ac965\"},{\"t\":\"FACT\",\"text\":\"Tariq Mitchell, Line Cook at Marigold Cafe. 2 named workers at 2 named kitchens in Fruitvale on the ledger this cycle.\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"id\":\"F-78d4c9912cc7\"},{\"t\":\"FACT\",\"text\":\"Marigold Cafe · Cafe / dining · 30 employees · growth 10.7% · revenue $3.1M (+$6k vs C113) · on the roster: Tariq Mitchell (Line Cook)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"id\":\"F-f5b99ee4b698\"},{\"t\":\"FACT\",\"text\":\"Hub Ramen · Ramen Bar · 11 employees · growth 4.1% · revenue $721k (+$572 vs C113)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"id\":\"F-9973e1fc652f\"},{\"t\":\"FACT\",\"text\":\"Masa & Vine · Small Plates & Natural Wine Bar · 11 employees · growth 4.3% · revenue $721k (+$593 vs C113)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"id\":\"F-f89a3d2faa98\"},{\"t\":\"FACT\",\"text\":\"Platform Brunch · Brunch Restaurant · 11 employees · growth 4.3% · revenue $721k (+$597 vs C113)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"id\":\"F-ae8e7e99e7d9\"},{\"t\":\"FACT\",\"text\":\"Hazel Salazar — Line Cook — Fruitvale Diner, Fruitvale\",\"src\":\"Simulation_Ledger profile for POP-00873\",\"id\":\"F-2f9dceac3d0b\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C10, Spring, holiday=none\",\"src\":\"output/world_summary_c114.md Calendar context (Simulation_Calendar)\",\"id\":\"F-9b9470803821\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00873",
+        "name": "Hazel Salazar",
+        "role": "Line Cook",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Mason Ortega",
+        "question": "How do you run a full service with two people on the roster, and what does that mean for what you carry home at the end of the night? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "Fruitvale",
+        "focus": "The working conditions and daily reality of line cooks at two Fruitvale kitchens of vastly different scale — Marigold Cafe's Tariq Mitchell and Fruitvale Diner's Hazel Salazar — and what the work actually demands of them.",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Hazel Salazar — Line Cook — Fruitvale Diner, Fruitvale",
+        "evidence": [
+          {
+            "id": "EV-c8e40c73b0",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+            "text": "Tariq Mitchell, Line Cook at Marigold Cafe. 2 named workers at 2 named kitchens in Fruitvale on the ledger this cycle."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Fruitvale Diner · Restaurant & Dining · 2 employees · growth 10.9% · revenue $207k (+$432 vs C113) · on the roster: Hazel Salazar (Line Cook)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "id": "F-30fcdbb2184e"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C114",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4261fa115617"
+        },
+        {
+          "t": "FACT",
+          "text": "Fruitvale kitchens · Marigold Cafe, Fruitvale Diner",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "id": "F-8f652b0ac965"
+        },
+        {
+          "t": "FACT",
+          "text": "Tariq Mitchell, Line Cook at Marigold Cafe. 2 named workers at 2 named kitchens in Fruitvale on the ledger this cycle.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "id": "F-78d4c9912cc7"
+        },
+        {
+          "t": "FACT",
+          "text": "Marigold Cafe · Cafe / dining · 30 employees · growth 10.7% · revenue $3.1M (+$6k vs C113) · on the roster: Tariq Mitchell (Line Cook)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "id": "F-f5b99ee4b698"
+        },
+        {
+          "t": "FACT",
+          "text": "Hub Ramen · Ramen Bar · 11 employees · growth 4.1% · revenue $721k (+$572 vs C113)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "id": "F-9973e1fc652f"
+        },
+        {
+          "t": "FACT",
+          "text": "Masa & Vine · Small Plates & Natural Wine Bar · 11 employees · growth 4.3% · revenue $721k (+$593 vs C113)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "id": "F-f89a3d2faa98"
+        },
+        {
+          "t": "FACT",
+          "text": "Platform Brunch · Brunch Restaurant · 11 employees · growth 4.3% · revenue $721k (+$597 vs C113)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "id": "F-ae8e7e99e7d9"
+        },
+        {
+          "t": "FACT",
+          "text": "Hazel Salazar — Line Cook — Fruitvale Diner, Fruitvale",
+          "src": "Simulation_Ledger profile for POP-00873",
+          "id": "F-2f9dceac3d0b"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C10, Spring, holiday=none",
+          "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+          "id": "F-9b9470803821"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  }
+]

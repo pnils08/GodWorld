@@ -1,0 +1,58 @@
+{
+  "model": "anthropic/claude-sonnet-5.5",
+  "calls": [
+    {
+      "tool": "citizen_lookup",
+      "input": {
+        "name": "Maurice Franklin",
+        "thread": true
+      },
+      "resultChars": 1721,
+      "resultHead": "Maurice Franklin — role: Drone Fleet Coordinator; neighborhood: Rockridge; born: 1978; wealth: 8; careerStage: mid-career; employerBiz: BIZ-00052; skills: 2041-Specific; popid: POP-00801\nMaurice Franklin (POP-00801) — 28 life-history entries on the record; last 15, oldest first:\nY3C6 — [Civic Perception] read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots\nY3C7 — [Daily] spent the evening sorting a box of things that used to be someone's\nY3C7 — [Neighborhood] grabbed something from College Avenue\nY3C7 — [Friction] borrowed against "
+    },
+    {
+      "tool": "citizen_lookup",
+      "input": {
+        "name": "Soledad Coleman",
+        "thread": true
+      },
+      "resultChars": 1813,
+      "resultHead": "Soledad Coleman — role: AI Safety Researcher (Anthropic); neighborhood: Rockridge; born: 1990; wealth: 8; careerStage: senior; employerBiz: BIZ-00001; skills: Tech & Innovation; popid: POP-00840\nSoledad Coleman (POP-00840) — 27 life-history entries on the record; last 15, oldest first:\nY3C2 — [Neighborhood] navigated the stroller traffic on College Avenue and silently judged the parking jobs near a coffee line\nY3C6 — [PrevEvening] heard about Lake Merritt Open-Air Book Market over in Lake Merritt last night\nY3C6 — [Daily] got roped into helping Elijah Brown haul something heavy up a flight of "
+    },
+    {
+      "tool": "citizen_lookup",
+      "input": {
+        "name": "Tom Jilner",
+        "thread": true
+      },
+      "resultChars": 1840,
+      "resultHead": "Tom Jilner — role: Wine Bar Owner; neighborhood: Rockridge; born: 2003; wealth: 6; careerStage: mid-career; employerBiz: SELF_EMPLOYED; skills: Food & Culture; popid: POP-00691\nTom Jilner (POP-00691) — 26 life-history entries on the record; last 15, oldest first:\nY3C4 — [Daily] negotiated bedtime like a seasoned diplomat, and lost gracefully\nY3C4 — [Daily] put on their good suit for the Sunday service because some traditions still matter\nY3C5 — [Neighborhood] noticed another renovated Victorian on the block and calculated what the property taxes must be\nY3C5 — [Civic Perception] counted cranes"
+    },
+    {
+      "tool": "citizen_lookup",
+      "input": {
+        "name": "Marisol Achebe",
+        "thread": true
+      },
+      "resultChars": 1723,
+      "resultHead": "Marisol Achebe — role: Mutual Aid Network Organizer; neighborhood: Fruitvale; born: 2003; wealth: 5; careerStage: mid-career; employerBiz: BIZ-00028; skills: Faith & Community; popid: POP-00526\nMarisol Achebe (POP-00526) — 32 life-history entries on the record; last 15, oldest first:\nY3C6 — [Personal] wondered if a decision from years back had been the right one\nY3C7 — [Neighborhood] heard the steady thump of a bassline from three cars down at the stoplight and nodded along\nY3C7 — [Daily] slipped into the back pew at Foothill Baptist Tabernacle just to sit somewhere air-conditioned and quiet\nY"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Maurice Franklin"
+      },
+      "resultChars": 2177,
+      "resultHead": "[C91 · piece] | Maurice Franklin | — | Rockridge | Retired transit supervisor | Letters | NEW — needs ledger entry | New citizens introduced: 7 (Varek, Aguilar, Peterson, Turner, Brown, Harris, Franklin) Arcs closed: 1 (Darius Clark — Stabilization Fund) STORYLINES UPDATED That's what you hear, that's what you see on the news. But right now, with this team this hot, I feel like — I don't know. Like maybe there's something here to believe in. Like maybe Oakland gets to be a place where good things happen too. I know it's just spo\n[C91 · edition] But this team, this fall, something's different. "
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "The Page of Lives A Place of Their Own"
+      },
+      "resultChars": 3297,
+      "resultHead": "[C113 · daily · Tamsin Pruitt] # The Page of Lives, C113: A Place of Their Own Orion Kerkering moved into a rented place of his own in Lake Merritt this cycle. The ledger carries him as a retired former A's, and the Tribune once named him in \"Unsung Architects of a Dynasty.\" Christopher Johnson, a Lake Merritt janitor, has seen the new place. \"I've seen Orion Kerkering's new place, they're renting in Lake Merritt,\" he said. \"I noticed it because I've been keeping an eye on the neighborhood. It's nice to see young folks setting up on their own. I\n[C113 · daily · Tamsin Pruitt] # The Page: Lives"
+    }
+  ],
+  "ranAt": "2026-11-12T00:23:03.144Z"
+}

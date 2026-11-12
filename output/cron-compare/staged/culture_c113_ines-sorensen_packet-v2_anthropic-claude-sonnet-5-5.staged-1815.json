@@ -1,0 +1,70 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "113",
+  "persona": "ines-sorensen",
+  "byline": "Ines Sorensen",
+  "bylinePopid": "POP-01211",
+  "article": "output/cron-compare/staged/culture_c113_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5.staged-1815.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Ximena Mehta",
+        "role": "quoted-source",
+        "popid": "POP-01039"
+      },
+      {
+        "name": "Dax Monroe",
+        "role": "quoted-source",
+        "popid": "POP-00769"
+      },
+      {
+        "name": "Priya Narang",
+        "role": "quoted-source",
+        "popid": "POP-00141"
+      },
+      {
+        "name": "Omar Amici",
+        "role": "quoted-source",
+        "popid": "POP-00263"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "The A's success is all anyone can talk about around here. I mean, I'm a huge fan, and my husband Deacon is too. We plan our whole schedule around the games.",
+        "sourceRef": "citizenVoice PRESS Ximena Mehta"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "gate": "off",
+    "model": null,
+    "manifestId": null,
+    "draftSha256": "6bc085776c2ffdf58a2fa4711edc86b0adfe0b51325538a13de685fb1f05744e",
+    "verdict": null,
+    "ranAt": "2026-11-01T18:15:25.826Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": false,
+      "inTarget": true,
+      "inTargetBy": "code floor 300",
+      "words": 425,
+      "short": "The names and framing precede the quotes for Omar Amici and Dax Monroe instead of putting the line first, and the quotes were gathered by reporter questions rather than drawn from what citizens wrote on their own pages.",
+      "score": 3,
+      "model": "google/gemini-3.7-flash",
+      "scoredWithoutRhea": true,
+      "draftSha256": "6bc085776c2ffdf58a2fa4711edc86b0adfe0b51325538a13de685fb1f05744e"
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-01T18:15:25.826Z"
+}

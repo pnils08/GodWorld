@@ -1,0 +1,72 @@
+{
+  "draft": "output/cron-compare/sports_c115_p-slayer_packet-v2_x-ai-grok-4-3.md",
+  "cycle": "115",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "f1d6f8ddaf0876188b8f02f462fe0d8d126e6d8da0a3963dcd5a0fba1ec0b957",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All player quotes, game statistics, and win records accurately reflect Cycle 115 canon ground truth.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "p-slayer-fan-heat-v1",
+    "packageVersion": "PSLAYER-LEP2-1",
+    "manifestId": "AM-fa9118137a0f",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "-109"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Adash Stanley",
+      "Austin Reaves",
+      "Dillon Brooks",
+      "Harry Hayward"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0122,
+  "durationMs": 14566,
+  "parseError": false,
+  "ranAt": "2026-11-12T00:19:39.077Z",
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 400",
+    "words": 501,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "f1d6f8ddaf0876188b8f02f462fe0d8d126e6d8da0a3963dcd5a0fba1ec0b957",
+    "costUsd": 0.001
+  }
+}

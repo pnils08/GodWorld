@@ -1,0 +1,53 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "115",
+  "persona": "noah-tan",
+  "byline": "Noah Tan",
+  "bylinePopid": "POP-00157",
+  "article": "output/cron-compare/staged/civic_c115_noah-tan_packet-v2_x-ai-grok-4-3.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Ramon Vega",
+        "role": "quoted-source",
+        "popid": "POP-00042"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "Mild doesn't have to mean weak — I still believe that. Five days of this clear, easy weather and you see it everywhere: people sitting longer on the benches, kids staying out after the tutoring program lets go, neighbors actually talking to each other instead of rushing past. That's not weakness. That's the city catching its breath. And the work still gets done — the council business, the follow-through, the fights worth having. I've just learned that you don't have to shout to be heard. Sometimes you show up steady, you listen, and you move the bench. That's still how I see it.",
+        "sourceRef": "citizenVoice PRESS Ramon Vega"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-15a009a2ecac",
+    "draftSha256": "566503a4d39fbde1b663aa6240425b796388fd2df56dd66c27a7619a20824024",
+    "verdict": "output/cron-compare/civic_c115_noah-tan_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-11-12T00:16:54.888Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": false,
+      "inTargetBy": "code floor 400",
+      "words": 336,
+      "short": "The piece falls short of the 400-word minimum target.",
+      "score": 2,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "566503a4d39fbde1b663aa6240425b796388fd2df56dd66c27a7619a20824024",
+      "costUsd": 0.0006
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-12T00:16:58.170Z"
+}

@@ -1,0 +1,15 @@
+{
+  "model": "anthropic/claude-sonnet-5.5",
+  "calls": [
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Transit_Metrics",
+        "match": "19th St"
+      },
+      "resultChars": 2469,
+      "resultHead": "Timestamp | Cycle | Station | RidershipVolume | OnTimePerformance | TrafficIndex | Corridor | Notes | Factors\nY2C52 | 104 | 19th St Oakland | 3351 | 0.83 | 50 |  | light ridership\nY3C1 | 105 | 19th St Oakland | 5035 | 0.75 | 50 |  | service delays; light ridership\nY3C2 | 106 | 19th St Oakland | 12666 | 0.78 | 50 |  | above-average ridership\nY3C3 | 107 | 19th St Oakland | 5491 | 0.79 | 50 |  | game day crowds | fog; holiday; game day (Downtown); events in Downtown ×2, Lake Merritt ×2; Baylight District — Final Council Vote: construction-planning\nY3C4 | 108 | 19th St Oakland | 12304 | 0.76 | 50 "
+    }
+  ],
+  "ranAt": "2026-11-11T05:16:47.393Z"
+}

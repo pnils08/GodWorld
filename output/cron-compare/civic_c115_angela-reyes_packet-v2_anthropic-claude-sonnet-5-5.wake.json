@@ -1,0 +1,59 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "115",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "angela-reyes",
+  "byline": {
+    "name": "Angela Reyes",
+    "popid": "POP-00156",
+    "beatDomain": "EDUCATION"
+  },
+  "laneEntries": 93,
+  "quotesLanded": 3,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "sheet_read",
+    "sheet_read"
+  ],
+  "toolCalls": 2,
+  "wordCount": 699,
+  "targetWords": "evidence-bounded",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": false,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 699,
+    "short": "The opening paragraph opens with a narrative scene rather than a packet-backed school, youth-program, apprenticeship, or continuity fact.",
+    "score": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "db77e49b97e91795c52cfc031c8d4b0007c13bd2101b0e92d63ce4f2b58a1e00",
+    "costUsd": 0.0018
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/4 — The opening paragraph opens with a narrative scene rather than a packet-backed school, youth-program, apprenticeship, or continuity fact."
+  },
+  "article": "output/cron-compare/staged/civic_c115_angela-reyes_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "/ tip: ⌘ enable debugging { debug: true }\n{\n  \"popId\": \"POP-00156\",\n  \"name\": \"Angela Reyes\",\n  \"recorded\": true,\n  \"text\": \"filed: Temescal's 314 Students Stayed Put, and the Table Ranks Them Last\"\n}"
+  },
+  "ranAt": "2026-11-11T00:18:11.934Z"
+}

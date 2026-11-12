@@ -1,0 +1,263 @@
+{
+  "v": "UNDOCKED-FEED/1",
+  "cycle": 114,
+  "events": [
+    {
+      "v": "UNDOCKED-FEED/1",
+      "Cycle": 114,
+      "EventType": "undocked-episode",
+      "POPID": "POP-00298",
+      "Holder": "Luis Taz",
+      "EpisodeId": "undocked-pop00298-Y3C10",
+      "CreditsDelta": 0,
+      "PointsDelta": 30.72,
+      "Systems": [
+        "sol",
+        "alpha_centauri",
+        "tau_ceti",
+        "timberline",
+        "arcturus",
+        "ross_154",
+        "maplevale",
+        "miaplacidus",
+        "cervantes",
+        "ridgecrest",
+        "grumium",
+        "celaeno",
+        "lanternwick",
+        "diadem"
+      ],
+      "CombatEvents": 12,
+      "MishapCount": 0,
+      "Magnitude": 2,
+      "Flags": [
+        "credits_delta_windowed"
+      ],
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00298-2026-11-02T02-30-23.json"
+    },
+    {
+      "v": "UNDOCKED-FEED/1",
+      "Cycle": 114,
+      "EventType": "undocked-episode",
+      "POPID": "POP-00530",
+      "Holder": "Lena Okafor",
+      "EpisodeId": "undocked-pop00530-Y3C10",
+      "CreditsDelta": 0,
+      "PointsDelta": 26.84,
+      "Systems": [
+        "sol",
+        "alpha_centauri",
+        "tau_ceti",
+        "electra",
+        "mimosa",
+        "ross_154",
+        "arcturus",
+        "timberline",
+        "maplevale",
+        "miaplacidus"
+      ],
+      "CombatEvents": 1,
+      "MishapCount": 0,
+      "Magnitude": 3,
+      "Flags": [
+        "credits_delta_windowed"
+      ],
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00530-2026-11-03T02-30-27.json"
+    },
+    {
+      "v": "UNDOCKED-FEED/1",
+      "Cycle": 114,
+      "EventType": "undocked-episode",
+      "POPID": "POP-00647",
+      "Holder": "Ronald Silk",
+      "EpisodeId": "undocked-pop00647-Y3C10",
+      "CreditsDelta": 0,
+      "PointsDelta": 27.93,
+      "Systems": [
+        "sol",
+        "alpha_centauri",
+        "tau_ceti",
+        "timberline",
+        "arcturus",
+        "ross_154",
+        "maplevale",
+        "miaplacidus",
+        "cervantes",
+        "ridgecrest",
+        "hatysa",
+        "nembus",
+        "gienah",
+        "oakridge",
+        "aldhibah",
+        "izar",
+        "tidewater"
+      ],
+      "CombatEvents": 0,
+      "MishapCount": 0,
+      "Magnitude": 2,
+      "Flags": [
+        "credits_delta_windowed"
+      ],
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00647-2026-11-04T02-30-29.json"
+    },
+    {
+      "v": "UNDOCKED-FEED/1",
+      "Cycle": 114,
+      "EventType": "undocked-episode",
+      "POPID": "POP-00298",
+      "Holder": "Luis Taz",
+      "EpisodeId": "undocked-pop00298-Y3C10-e2",
+      "CreditsDelta": 0,
+      "PointsDelta": 7.24,
+      "Systems": [
+        "nova_terra",
+        "sirius",
+        "lacaille_9352",
+        "grumium",
+        "celaeno",
+        "lanternwick",
+        "diadem",
+        "intercrus",
+        "gsc_0044",
+        "atlas",
+        "cedarhold",
+        "achernar",
+        "the_experiment"
+      ],
+      "CombatEvents": 0,
+      "MishapCount": 0,
+      "Magnitude": 2,
+      "Flags": [
+        "credits_delta_windowed"
+      ],
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00298-2026-11-05T02-30-31.json"
+    },
+    {
+      "v": "UNDOCKED-FEED/1",
+      "Cycle": 114,
+      "EventType": "undocked-episode",
+      "POPID": "POP-00530",
+      "Holder": "Lena Okafor",
+      "EpisodeId": "undocked-pop00530-Y3C10-e2",
+      "CreditsDelta": 18,
+      "PointsDelta": 5.99,
+      "Systems": [
+        "alpha_centauri",
+        "sol",
+        "sirius",
+        "nova_terra",
+        "epsilon_eridani",
+        "procyon",
+        "proxima_centauri",
+        "barnards_star"
+      ],
+      "CombatEvents": 1,
+      "MishapCount": 0,
+      "Magnitude": 3,
+      "Flags": [
+        "credits_delta_windowed"
+      ],
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00530-2026-11-06T02-30-29.json"
+    },
+    {
+      "v": "UNDOCKED-FEED/1",
+      "Cycle": 114,
+      "EventType": "undocked-episode",
+      "POPID": "POP-00647",
+      "Holder": "Ronald Silk",
+      "EpisodeId": "undocked-pop00647-Y3C10-e2",
+      "CreditsDelta": 0,
+      "PointsDelta": 10.22,
+      "Systems": [
+        "last_light",
+        "fang",
+        "errai",
+        "wezen",
+        "brightfall",
+        "birchwood",
+        "pinecross",
+        "aludra",
+        "torcular",
+        "gsc_0002",
+        "tejat",
+        "rimegate",
+        "veritate",
+        "betelgeuse",
+        "gsc_0037",
+        "dabih",
+        "gsc_0045"
+      ],
+      "CombatEvents": 0,
+      "MishapCount": 0,
+      "Magnitude": 2,
+      "Flags": [
+        "credits_delta_windowed"
+      ],
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00647-2026-11-07T02-30-24.json"
+    },
+    {
+      "v": "UNDOCKED-FEED/1",
+      "Cycle": 114,
+      "EventType": "undocked-episode",
+      "POPID": "POP-00298",
+      "Holder": "Luis Taz",
+      "EpisodeId": "undocked-pop00298-Y3C10-e3",
+      "CreditsDelta": 0,
+      "PointsDelta": 7.23,
+      "Systems": [
+        "synchrony",
+        "node_alpha",
+        "nexus_prime",
+        "node_beta",
+        "acubens",
+        "hamal",
+        "okab",
+        "thornhaven",
+        "stormwatch",
+        "tanglewood",
+        "gsc_0016",
+        "felis",
+        "gliese_876",
+        "gsc_0024",
+        "jasmine",
+        "gsc_0035",
+        "biham"
+      ],
+      "CombatEvents": 0,
+      "MishapCount": 0,
+      "Magnitude": 1,
+      "Flags": [
+        "credits_delta_windowed"
+      ],
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00298-2026-11-08T02-30-20.json"
+    },
+    {
+      "v": "UNDOCKED-FEED/1",
+      "Cycle": 114,
+      "EventType": "undocked-episode",
+      "POPID": "POP-00530",
+      "Holder": "Lena Okafor",
+      "EpisodeId": "undocked-pop00530-Y3C10-e3",
+      "CreditsDelta": 0,
+      "PointsDelta": 7.74,
+      "Systems": [
+        "dheneb",
+        "mira",
+        "barnards_star",
+        "aspidiske",
+        "thabit",
+        "canopus",
+        "spica",
+        "propus",
+        "syrma"
+      ],
+      "CombatEvents": 0,
+      "MishapCount": 0,
+      "Magnitude": 1,
+      "Flags": [
+        "credits_delta_windowed"
+      ],
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00530-2026-11-09T02-30-20.json"
+    }
+  ]
+}

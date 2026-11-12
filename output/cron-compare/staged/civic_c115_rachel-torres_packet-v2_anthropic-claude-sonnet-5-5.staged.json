@@ -1,0 +1,60 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "115",
+  "persona": "rachel-torres",
+  "byline": "Sgt. Rachel Torres",
+  "bylinePopid": "POP-00057",
+  "article": "output/cron-compare/staged/civic_c115_rachel-torres_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Rafael Montez",
+        "role": "subject",
+        "popid": "POP-00136"
+      },
+      {
+        "name": "Kimberly Cho",
+        "role": "subject",
+        "popid": "POP-00137"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Grand Lake"
+    ],
+    "claims": [
+      {
+        "claim": "Grand Lake logged the most incidents (8) — 22 neighborhoods on the table",
+        "sourceRef": "output/beats/Crime_Metrics.jsonl @C115"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-dcc6fbfc443f",
+    "draftSha256": "a0a817316cf9170c93dd9f712a5b146d12622f9c7d43411faaccf96c8a58cd01",
+    "verdict": "output/cron-compare/civic_c115_rachel-torres_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-11T00:16:37.073Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 500",
+      "words": 786,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "a0a817316cf9170c93dd9f712a5b146d12622f9c7d43411faaccf96c8a58cd01",
+      "costUsd": 0.0013
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-11T00:16:41.220Z"
+}

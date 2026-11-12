@@ -1,0 +1,95 @@
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ override existing { override: true }
+Wake 3 WRITE — civic c115 (lila-mezran)
+===================================
+[run] 2026-11-10T23:23:26.325Z byline: Dr. Lila Mezran (POP-00154, persona)
+[run] 2026-11-10T23:23:26.335Z writing on typed Packet (27797 B injected state + stance anchor)...
+[run] 2026-11-10T23:23:26.336Z writer tools ON (package): max 6 calls
+[run] 2026-11-10T23:23:26.336Z reward loop ON (package): rubric shown, contract scored, grade carried
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ custom filepath { path: '/custom/path/.env' }
+Headless Desk Writer — civic desk
+===================================
+model=anthropic/claude-sonnet-5.5 maxTurns=15
+[INFO] 2026-11-10T23:23:26.478Z lane state-file injected: output/test-shell/20261110-172325-lila-mezran/civic_c115_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5.state.json (27557 chars) — full-summary blob bypassed
+[INFO] 2026-11-10T23:23:26.591Z packet-only compose via OpenRouter (anthropic/claude-sonnet-5.5, 0 live tools)...
+[INFO] 2026-11-10T23:23:51.785Z tool trace: 2 call(s) → civic_c115_packet-v2_lila-mezran.tooltrace.json
+[INFO] 2026-11-10T23:23:51.795Z tool facts → manifest: none used (2 call(s))
+
+--- run summary ---
+{
+  "desk": "civic",
+  "cycle": "115",
+  "model": "anthropic/claude-sonnet-5.5",
+  "turns": 3,
+  "maxTurns": 15,
+  "usageInputTokens": 35321,
+  "usageOutputTokens": 3352,
+  "savedFiles": [
+    "output/test-shell/20261110-172325-lila-mezran/civic_c115_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5.md"
+  ],
+  "compareAgainst": "output/desk-output/civic_c115.md",
+  "durationMs": 25336,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-11-10T23:23:51.805Z"
+}
+
+tokens: 35321 in / 3352 out · 3 turn(s) · 25336ms
+compare: diff output/desk-output/civic_c115.md  ↔  output/test-shell/20261110-172325-lila-mezran/civic_c115_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5.md
+[run] 2026-11-10T23:23:51.859Z deterministic contamination blocker: repair-chrome=packet-narration
+[run] 2026-11-10T23:23:51.860Z s344 slot findings (non-blocking): repair-chrome=packet-narration
+[run] 2026-11-10T23:23:51.864Z WARN verbatim slice text: "caught up on sleep and woke"
+[run] 2026-11-10T23:23:51.865Z gate SKIPPED (--no-gate sample) — output is ungated, NOT canon
+[run] 2026-11-10T23:23:51.886Z gaps logged: 4 line(s) → production log
+
+=== write disposition: UNGATED-SAMPLE ===
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "115",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "sonnet",
+  "persona": "lila-mezran",
+  "byline": {
+    "name": "Dr. Lila Mezran",
+    "popid": "POP-00154",
+    "beatDomain": "HEALTH"
+  },
+  "laneEntries": 93,
+  "quotesLanded": 2,
+  "disposition": "ungated-sample",
+  "rheaPass": null,
+  "rheaFlagCount": null,
+  "contamination": {
+    "fail": true,
+    "findings": [
+      {
+        "check": "repair-chrome",
+        "issue": "packet-narration"
+      }
+    ]
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "sheet_read",
+    "canon_search"
+  ],
+  "toolCalls": 2,
+  "wordCount": 918,
+  "targetWords": "evidence-bounded",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [
+    {
+      "text": "Howard Travis caught up on sleep and woke up feeling like themselves again (Piedmont Ave).",
+      "run": "caught up on sleep and woke"
+    }
+  ],
+  "rewardLoop": true,
+  "contractScore": null,
+  "gradeRecord": null,
+  "article": "output/test-shell/20261110-172325-lila-mezran/samples/civic_c115_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5.sample.md",
+  "selfRecord": null,
+  "ranAt": "2026-11-10T23:23:51.866Z"
+}

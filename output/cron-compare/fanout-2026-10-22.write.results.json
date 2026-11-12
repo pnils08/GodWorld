@@ -1,0 +1,112 @@
+{
+  "date": "2026-10-22",
+  "stage": "write",
+  "results": [
+    {
+      "name": "Elliot Graye",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 708,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Simon Leary",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 439,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Hal Richmond",
+      "desk": "sports",
+      "ok": false,
+      "error": "writer produced no draft at output/cron-compare/sports_c112_hal-richmond_packet-v2_anthropic-claude-sonnet-5-5.md",
+      "checks": null
+    },
+    {
+      "name": "Talia Finch",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 600,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Tamsin Pruitt",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": true,
+        "verbatim": [
+          {
+            "text": "Aaliyah Brennan — enjoyed the lakeside neighborhood tranquility",
+            "run": "enjoyed lakeside neighborhood tranquility"
+          }
+        ],
+        "words": 94,
+        "contractScore": 0
+      }
+    },
+    {
+      "name": "Ines Sorensen",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 428,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 257,
+        "contractScore": 3
+      }
+    }
+  ],
+  "checkTotals": {
+    "seats": 6,
+    "toolSeats": 0,
+    "capHits": 0,
+    "thin": 1,
+    "verbatim": 1,
+    "graded": 6,
+    "gradeSum": 19
+  },
+  "ranAt": "2026-10-22T23:19:51.167Z"
+}

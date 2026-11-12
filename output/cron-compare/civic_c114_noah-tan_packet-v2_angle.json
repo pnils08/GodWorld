@@ -1,0 +1,367 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "114",
+  "persona": "noah-tan",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00157",
+      "name": "Noah Tan",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "C114 mild, 55°F — 4 cycles of clear — what this weather does to a day in the city",
+      "approach": "Weather and environment approach: this slice is the cycle's weather row, the streak, and the last three cycles beside it, plus whoever the record says lived it. Science-first ground translation — temperature is context, never the lede. Show what this weather moved. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "environment",
+        "hood": null,
+        "facts": [
+          "This cycle: mild, 55°F, impact 1, comfort 0.75, mood content, 4 cycles of clear",
+          "Last 3 cycles: C111 mild 57°F, C112 clear 48°F, C113 clear 58°F"
+        ],
+        "priorCycle": "PRIOR_CYCLE_IN_TABLE",
+        "note": "no resident on the record lived the weather this cycle — the people out in it are yours, unnamed",
+        "engineHooks": [
+          "The Thompson household (2) moved from Chinatown to West Oakland — moving up from Chinatown (desk rotation)",
+          "6 residents in Uptown planning to leave for a better household-income fit (desk rotation)"
+        ],
+        "roomIsYours": "the sidewalk, the coats, what this weather does to a plan, who is out in it and who stayed in, what the bay smells like today",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-weather",
+      "hood": null,
+      "score": null,
+      "src": "output/beats/Cycle_Weather.jsonl CycleID 114",
+      "nearby": [
+        {
+          "text": "Avery Santana (mayor gavel): Record the executed Month-12 $400,000 disbursement, publish closeout documentation, and complete a charter renewal draft preserving service to West Oakland businesses and residents. — \"West O",
+          "src": "output/civic-voice/mayor_gavel_c114.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): Docket and execute the D3 East Oakland briefing this cycle with Fruitvale district-level data and the Baylight feasibility review, direct the D5 dispatch audit, and hold expansion until after",
+          "src": "output/civic-voice/mayor_gavel_c114.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): Require C114 schematic delivery and a documented Fruitvale community review, with a public comment-and-response record before further design advancement. — \"Fruitvale will see the schematics,",
+          "src": "output/civic-voice/mayor_gavel_c114.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): Keep the C115 milestone review contingent on independent remediation verification, neighborhood protections, hotline records, and workforce results; make no early milestone declaration. — \"Ba",
+          "src": "output/civic-voice/mayor_gavel_c114.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): Publish the C114 placement-gap analysis and a program adjustment plan, explicitly examining West Oakland and Fruitvale without inventing unreported placement results. — \"Enrollment is a begin",
+          "src": "output/civic-voice/mayor_gavel_c114.json"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00042",
+          "name": "Ramon Vega",
+          "profile": "Ramon Vega — City Council President - D1",
+          "role": "City Council President - D1",
+          "hood": "Lake Merritt",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "FagE829bMRkot3yvJjwtwV",
+            "customId": "cp-POP-00042-c111-PRESS",
+            "cycle": 111,
+            "excerpt": "Mild positivity is how we end up with a new bench when we needed a health center.",
+            "highlightKind": "weather",
+            "entity": "mild",
+            "predicate": "observe"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C114",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-4261fa115617"
+      },
+      {
+        "t": "FACT",
+        "text": "C114 mild, 55°F — 4 cycles of clear",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 114",
+        "id": "F-4c53483a2889"
+      },
+      {
+        "t": "FACT",
+        "text": "C114 mild, 55°F — 4 cycles of clear.",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 114",
+        "id": "F-55856d477d2e"
+      },
+      {
+        "t": "FACT",
+        "text": "This cycle: mild, 55°F, impact 1, comfort 0.75, mood content, 4 cycles of clear",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 114",
+        "id": "F-96106d196a1c"
+      },
+      {
+        "t": "FACT",
+        "text": "Last 3 cycles: C111 mild 57°F, C112 clear 48°F, C113 clear 58°F",
+        "src": "output/beats/Cycle_Weather.jsonl",
+        "id": "F-56e01f39afb4"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "street",
+    "candidates": [
+      {
+        "pop": "POP-00042",
+        "name": "Ramon Vega",
+        "role": "City Council President - D1",
+        "hood": "Lake Merritt",
+        "profile": "Ramon Vega — City Council President - D1",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "FagE829bMRkot3yvJjwtwV",
+          "customId": "cp-POP-00042-c111-PRESS",
+          "cycle": 111,
+          "excerpt": "Mild positivity is how we end up with a new bench when we needed a health center.",
+          "highlightKind": "weather",
+          "entity": "mild",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "Mild positivity is how we end up with a new bench when we needed a health center."
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Noah Tan",
+    "popid": "POP-00157"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-weather",
+      "angle": "C114 mild, 55°F — 4 cycles of clear — what this weather does to a day in the city",
+      "label": "C114 mild, 55°F — 4 cycles of clear",
+      "hookLine": "C114 mild, 55°F — 4 cycles of clear.",
+      "hood": null,
+      "citizens": [],
+      "popids": [],
+      "ref": "output/beats/Cycle_Weather.jsonl CycleID 114",
+      "cycle": 114
+    },
+    "approach": "Weather and environment approach: this slice is the cycle's weather row, the streak, and the last three cycles beside it, plus whoever the record says lived it. Science-first ground translation — temperature is context, never the lede. Show what this weather moved. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "ENVIRONMENT-SLICE-2",
+    "kind": "beat-weather",
+    "seat": {
+      "slug": "noah-tan",
+      "name": "Noah Tan",
+      "popid": "POP-00157",
+      "desk": "civic",
+      "domain": "environment",
+      "builder": "buildEnvironmentSlice.js"
+    },
+    "hood": null,
+    "pulse": {
+      "className": "beat-weather",
+      "score": 100,
+      "label": "C114 mild, 55°F — 4 cycles of clear",
+      "hood": null,
+      "source": "output/beats/Cycle_Weather.jsonl CycleID 114"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "C114 mild, 55°F — 4 cycles of clear — what this weather does to a day in the city",
+      "hookLine": "C114 mild, 55°F — 4 cycles of clear.",
+      "anchorFacts": [
+        "This cycle: mild, 55°F, impact 1, comfort 0.75, mood content, 4 cycles of clear",
+        "Last 3 cycles: C111 mild 57°F, C112 clear 48°F, C113 clear 58°F"
+      ],
+      "evidence": [
+        {
+          "text": "This cycle: mild, 55°F, impact 1, comfort 0.75, mood content, 4 cycles of clear",
+          "src": "output/beats/Cycle_Weather.jsonl CycleID 114"
+        },
+        {
+          "text": "Last 3 cycles: C111 mild 57°F, C112 clear 48°F, C113 clear 58°F",
+          "src": "output/beats/Cycle_Weather.jsonl"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": {
+        "state": "PRIOR_CYCLE_IN_TABLE",
+        "vs": 113
+      },
+      "hooks": [
+        {
+          "text": "The Thompson household (2) moved from Chinatown to West Oakland — moving up from Chinatown",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "West Oakland",
+          "priority": 5
+        },
+        {
+          "text": "6 residents in Uptown planning to leave for a better household-income fit",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "Uptown",
+          "priority": 8
+        }
+      ],
+      "note": "no resident on the record lived the weather this cycle — the people out in it are yours, unnamed",
+      "pageVoices": [],
+      "roomIsYours": "the sidewalk, the coats, what this weather does to a plan, who is out in it and who stayed in, what the bay smells like today"
+    },
+    "citizens": [],
+    "pointers": [
+      "output/beats/Cycle_Weather.jsonl CycleID 114",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Noah Tan this cycle)"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Noah Tan",
+    "popid": "POP-00157",
+    "text": "I'm standing on College Avenue with my hands in my jacket pockets — no coat needed, which feels like a small gift after the 48°F clear night two cycles back. The air has that soft bay smell, salt and eucalyptus, and people are moving slower than usual, like the weather gave them permission. I'm not chasing a story about temperature. I'm chasing what this mild streak does to a day — who comes out of their house because the sky is clear for the fourth cycle running, who changes a plan because the evening won't be cold. The Thompson household moved up from Chinatown to West Oakland — I keep thinking about what a string of mild clear days does to someone still learning a new block, whether the w",
+    "plan": {
+      "chase": "I'm standing on College Avenue with my hands in my jacket pockets — no coat needed, which feels like a small gift after the 48°F clear night two cycles back. The air has that soft bay smell, salt and eucalyptus, and people are moving slower than usual, like the weather gave them permission. I'm not chasing a story about temperature. I'm chasing what this mild streak does to a day — who comes out of their house because the sky is clear for the fourth cycle running, who changes a plan because the evening won't be cold. The Thompson household moved up from Chinatown to West Oakland — I keep thinking about what a string of mild clear days does to someone still learning a new block, whether the w",
+      "focus": "What four cycles of clear, mild weather move in a city where people are already in motion — new households, planned exits, official business in West Oakland and Fruitvale.",
+      "why": "The weather is the frame, not the story. The story is the gap between what the sky offers and what the city is doing underneath it. A 55°F clear day is context for human decisions, and this cycle has people deciding things.",
+      "checks": [
+        "No named person, place, institution, or number beyond the supplied facts.",
+        "Temperature stays context, never the lede.",
+        "No invented residents, quotes, or street conditions presented as fact.",
+        "The Thompson household and the six Uptown residents appear only as supplied context, not as interviewed sources."
+      ],
+      "targets": [
+        {
+          "pop": "POP-00042",
+          "question": "When the weather is this mild and clear for days straight, does the work of the city feel lighter or heavier to you — and does anyone in your district get to enjoy it?",
+          "basis": "Ramon Vega is the City Council President for D1, and his recorded observation ties mild weather to civic priorities — a bench versus a health center. He is a street-mode presence in Lake Merritt, and his perspective bridges the weather and the city's official mood."
+        }
+      ],
+      "interpretation": "The weather is a shared condition, but it is not shared equally. A mild clear day is a backdrop for some and a reprieve for others. The city's official work continues regardless — disbursements, reviews, briefings — and the weather does not pause any of it. The human story is in the contrast: the sky is generous, the calendar is not.",
+      "unverifiedLead": [
+        "A family that recently moved from Chinatown to West Oakland might be experiencing this clear streak as a first impression of their new neighborhood.",
+        "Residents in Uptown considering a move for income reasons might find a mild evening makes staying feel more tolerable — or less, if the weather highlights what they cannot afford.",
+        "The mayor's West Oakland and Fruitvale agenda items suggest official attention is on those neighborhoods, but whether residents feel that attention on a pleasant day is unconfirmed."
+      ],
+      "closeQuestion": "On a day the city does not have to be endured, what do people choose to do with it — and does that choice tell us more about them than the weather ever could?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Avery Santana (mayor gavel): Record the executed Month-12 $400,000 disbursement, publish closeout documentation, and complete a charter renewal draft preserving service to West Oakland businesses and residents. — \"West O",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c114.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Docket and execute the D3 East Oakland briefing this cycle with Fruitvale district-level data and the Baylight feasibility review, direct the D5 dispatch audit, and hold expansion until after",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c114.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Require C114 schematic delivery and a documented Fruitvale community review, with a public comment-and-response record before further design advancement. — \"Fruitvale will see the schematics,",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c114.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Keep the C115 milestone review contingent on independent remediation verification, neighborhood protections, hotline records, and workforce results; make no early milestone declaration. — \"Ba",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c114.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Publish the C114 placement-gap analysis and a program adjustment plan, explicitly examining West Oakland and Fruitvale without inventing unreported placement results. — \"Enrollment is a begin",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c114.json",
+      "popids": []
+    }
+  ],
+  "laneEntries": 114,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-04T12:15:53.626Z"
+}

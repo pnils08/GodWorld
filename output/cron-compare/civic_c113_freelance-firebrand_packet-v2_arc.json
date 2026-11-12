@@ -1,0 +1,32 @@
+{
+  "status": "arc-seed",
+  "cycle": "113",
+  "desk": "civic",
+  "persona": "freelance-firebrand",
+  "hood": "Chinatown",
+  "quotes": [
+    {
+      "pop": "POP-00439",
+      "name": "Timmie Hall",
+      "quote": "I've noticed some changes around here, like the lunch spot on the corner being closed suddenly. And just now, there was a medical emergency on the sidewalk. It's not usually like that here."
+    },
+    {
+      "pop": "POP-00635",
+      "name": "Mei Chen",
+      "quote": "To be honest, it's a bit worrying to see some of our local businesses struggling. I stopped by my usual lunch spot just now and it's closed with a notice on the door. I've been going there for years. The medical emergency on the sidewalk doesn't help the vibe either. I'm hoping the Oakland Alternative Response Initiative continues to make a positive impact, it's been great to see residents feeling safer."
+    },
+    {
+      "pop": "POP-01128",
+      "name": "Liliana Salazar",
+      "quote": "I've seen the news about Chinatown, and to be honest, it doesn't surprise me. I've watched the fog roll over the port cranes from my front window, and it's made me think about how some parts of Oakland are changing while others seem stuck. I don't know what's going on with Chinatown, but it feels like it's been on a downward slide for a while. I haven't been there recently, but I've heard things from friends. It's a shame, really."
+    },
+    {
+      "pop": "POP-01137",
+      "name": "Wren Choi",
+      "quote": "I've noticed some changes around my neighborhood, Glenview, lately. More people seem to be home during the day, and there's a bit of a different vibe. I haven't been to Chinatown recently, but I do hear things. It sounds like it's not doing great. I don't know what's going on there, but it makes me wonder if anyone is paying attention to it."
+    }
+  ],
+  "claim": "I've noticed some changes around here, like the lunch spot on the corner being closed suddenly. And just now, there was a medical emergency on the sidewalk. It's not usually like that here.",
+  "src": "citizenVoice PRESS c113",
+  "ranAt": "2026-10-28T18:16:56.564Z"
+}

@@ -1,0 +1,58 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "113",
+  "persona": "simon-leary",
+  "byline": "Simon Leary",
+  "bylinePopid": "POP-00016",
+  "article": "output/cron-compare/staged/sports_c113_simon-leary_packet-v2_openai-gpt-5-6-luna.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Adash Stanley",
+        "role": "quoted-source",
+        "popid": "POP-01023"
+      },
+      {
+        "name": "Austin Reaves",
+        "role": "quoted-source",
+        "popid": "POP-01027"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "When the role changes, the record doesn't care who's carrying it. It just sits there at 2-0 and asks the next guy to keep it honest. For me, that means showing up the same way I always have — steady, ready, not making it about me. The continuity is in the work, not the title.",
+        "sourceRef": "citizenVoice PRESS Adash Stanley"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-6e80c8000ee1",
+    "draftSha256": "d23e6829ce5b5b437bf61b7c89a97a9bc8ce9e3f297d7e95527f5ea17b181df6",
+    "verdict": "output/cron-compare/sports_c113_simon-leary_packet-v2_openai-gpt-5-6-luna.rhea.json",
+    "ranAt": "2026-10-29T23:16:28.941Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": false,
+      "inTargetBy": "judge",
+      "words": 450,
+      "short": "The piece falls short of the 450-word target.",
+      "score": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "d23e6829ce5b5b437bf61b7c89a97a9bc8ce9e3f297d7e95527f5ea17b181df6",
+      "costUsd": 0.003
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-29T23:16:40.351Z"
+}

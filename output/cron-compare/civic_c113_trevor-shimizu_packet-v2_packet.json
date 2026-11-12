@@ -1,0 +1,1192 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "113",
+  "persona": "trevor-shimizu",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Trevor Shimizu",
+    "popid": "POP-00155"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-transit",
+      "angle": "12th St Oakland City Center ridership down 4,821 vs C112 | 8 stations + 10 corridors on the record — the platforms and the people who run them",
+      "label": "12th St Oakland City Center ridership down 4,821 vs C112 | 8 stations + 10 corridors on the record",
+      "hookLine": "12th St Oakland City Center moved down the most this cycle — weekend; base: ledger; game day (Downtown, Jack London); events in Downtown ×2, Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; 14 transit workers on the roster, 9 citizens who lived a transit line, a chaos car on the line.",
+      "hood": null,
+      "citizens": [
+        "Evan Lewis (POP-00200)",
+        "Joel Wren (POP-00218)",
+        "Jerald Jensen (POP-00280)",
+        "Coen Cartier (POP-00338)",
+        "Daire Green (POP-00442)",
+        "Ray Neal (POP-00448)",
+        "Calvin Mwangi (POP-00573)",
+        "Eleanor Rivera (POP-00617)",
+        "Elena Soria Dominguez (POP-00791)",
+        "Ivy Tran (POP-01037)",
+        "Ximena Mehta (POP-01039)",
+        "Rosario Medina (POP-01053)",
+        "Delia Vargas-Ruiz (POP-01054)",
+        "Jerome Pittman (POP-01055)",
+        "Lucia Polito (POP-00004)",
+        "Gregory Mims (POP-00023)",
+        "Martin Richards (POP-00031)",
+        "Simone Ellis (POP-00039)",
+        "Chad Tipre (POP-00083)",
+        "Fernando Lima (POP-00116)",
+        "Lou Hollis (POP-00120)",
+        "Yolanda Beckford (POP-01160)",
+        "Chase West (POP-00518)"
+      ],
+      "popids": [
+        "POP-00200",
+        "POP-00218",
+        "POP-00280",
+        "POP-00338",
+        "POP-00442",
+        "POP-00448",
+        "POP-00573",
+        "POP-00617",
+        "POP-00791",
+        "POP-01037",
+        "POP-01039",
+        "POP-01053",
+        "POP-01054",
+        "POP-01055",
+        "POP-00004",
+        "POP-00023",
+        "POP-00031",
+        "POP-00039",
+        "POP-00083",
+        "POP-00116",
+        "POP-00120",
+        "POP-01160",
+        "POP-00518"
+      ],
+      "ref": "output/beats/Transit_Metrics.jsonl Cycle 113",
+      "cycle": 113
+    }
+  },
+  "angle": "output/cron-compare/civic_c113_trevor-shimizu_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 3,
+  "quotes": [
+    {
+      "pop": "POP-00617",
+      "name": "Eleanor Rivera",
+      "quote": "Honestly, the first thing I notice on a light weekend morning is the sound. The platform echoes more. You hear the announcements bounce off the tile instead of getting swallowed up by the crowd. And you see the regulars more clearly — the folks who are always there, not the game-day rush. It's a different rhythm. We just adapt, keep things moving, make sure the trains run on time. That's the job, whether it's five thousand people or fifty.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Honestly, the first thing I notice on a light weekend morning is the sound. The platform echoes more. You hear the announcements bounce off the tile instead of getting swallowed up by the crowd. And you see the regulars more clearly — the folks who are always there, not the game-day rush. It's a different rhythm. We just adapt, keep things moving, make sure the trains run on time. That's the job, whether it's five thousand people or fifty.\",\n  \"fact_ids\": [\"F-d381349c6f09\", \"F-6cb9927854c3\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-d381349c6f09",
+          "F-6cb9927854c3"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00617-19e44794ac",
+        "authoredQuote": true,
+        "publishableQuote": "Honestly, the first thing I notice on a light weekend morning is the sound. The platform echoes more. You hear the announcements bounce off the tile instead of getting swallowed up by the crowd. And you see the regulars more clearly — the folks who are always there, not the game-day rush. It's a different rhythm. We just adapt, keep things moving, make sure the trains run on time. That's the job, whether it's five thousand people or fifty."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00617",
+          "name": "Eleanor Rivera",
+          "role": "BART Station Manager",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Trevor Shimizu",
+          "question": "What does a weekend morning at 12th Street look like when ridership drops by nearly five thousand? What do you notice first? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-transit",
+          "hood": null,
+          "focus": "The weekend ridership drop across all eight stations, with 12th Street leading the decline, and what transit workers observe when the system runs light.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 113"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Eleanor Rivera — BART Station Manager — BART Oakland Division",
+          "evidence": [
+            {
+              "id": "EV-057af6f0a4",
+              "src": "output/beats/Transit_Metrics.jsonl Cycle 113",
+              "text": "12th St Oakland City Center moved down the most this cycle — weekend; base: ledger; game day (Downtown, Jack London); events in Downtown ×2, Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; 14 transit workers on the roster, 9 citizens who lived a transit line, a chaos car on the line."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "12th St Oakland City Center ridership down 4,821 vs C112 | 8 stations + 10 corridors on the record",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 113",
+            "id": "F-d381349c6f09"
+          },
+          {
+            "t": "FACT",
+            "text": "12th St Oakland City Center moved down the most this cycle — weekend; base: ledger; game day (Downtown, Jack London); events in Downtown ×2, Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; 14 transit workers on the roster, 9 citizens who lived a transit line, a chaos car on the line.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 113",
+            "id": "F-6cb9927854c3"
+          },
+          {
+            "t": "FACT",
+            "text": "Day type this cycle: weekend — riders cut citywide by the weekend rule. A station that moved more than the citywide rule names its own reason on its row.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 113 Factors (frame)",
+            "id": "F-bd80b17656ec"
+          },
+          {
+            "t": "FACT",
+            "text": "The week on the line — every cause on the record this cycle, once: weekend; game day (Downtown, Jack London); events in Downtown ×2, Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; game day (Downtown); events in Downtown ×2, Lake Merritt, Uptown; events in Lake Merritt; events in Fruitvale; Fruitvale Transit Hub Phase II — Visioning: design-phase; events in Baylight District ×2; game day (Jack London); events in Jack London; events in Montclair; game day (",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 113 Factors",
+            "id": "F-244c5ae3bf55"
+          },
+          {
+            "t": "FACT",
+            "text": "Weather this cycle: clear, 58°F (3 cycles of clear)",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+            "id": "F-da0baf37e21b"
+          },
+          {
+            "t": "FACT",
+            "text": "Game on the sports feed this cycle: Oaks at Uptown — After getting their first win in their franchise history the Oaks followed with their second win in the very next game. The Oaks traveled to Detroit where its defense would shine in a 91-78 victory. Adash Stanley shined with 29 points while Austin Rivers facilitated the action with 10 assists while also contributing 12 points a 7 rebounds. AJ Dybansta continued his strong start and little spoken on second round pick , rookie Harry Hayward emer",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 113",
+            "id": "F-4863eb137e60"
+          },
+          {
+            "t": "FACT",
+            "text": "Game on the sports feed this cycle: Oaks at San Antonio — Watch out now but the Oaks have won three straight games to start the inauguaral season. This time the Oaks traveled to New York to face the Knicks and had another convincing win beting the Knicks 115-93. Austin Reaves and AJ Dybansta lead scoring with 23 points a piece while Adash Stanley flirted with his first triple double. Harry Hayward repeats his strong performance recording a double double. (the rider lift is real only where a stat",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 113",
+            "id": "F-6fef869a9a3f"
+          },
+          {
+            "t": "FACT",
+            "text": "Eleanor Rivera — BART Station Manager — BART Oakland Division",
+            "src": "Simulation_Ledger profile for POP-00617",
+            "id": "F-6412715ef9fb"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00338",
+      "name": "Coen Cartier",
+      "quote": "When the system runs light on a weekend, the bus feels different — you notice the regulars more. The folks who ride every day, they're still there, but there's no rush. You get a chance to actually say hello, maybe ask how someone's day is going. Riders don't see that part. They just see the bus showing up. But for us, it's the difference between moving a crowd and moving people. And on a quiet day, you see the city itself more — the light on the buildings, the empty sidewalks. It's a slower rhythm, but it's still a rhythm.",
+      "disp": "close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"When the system runs light on a weekend, the bus feels different — you notice the regulars more. The folks who ride every day, they're still there, but there's no rush. You get a chance to actually say hello, maybe ask how someone's day is going. Riders don't see that part. They just see the bus showing up. But for us, it's the difference between moving a crowd and moving people. And on a quiet day, you see the city itself more — the light on the buildings, the empty sidewalks. It's a slower rhythm, but it's still a rhythm.\",\n  \"fact_ids\": [\"F-d381349c6f09\", \"F-6cb9927854c3\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-d381349c6f09",
+          "F-6cb9927854c3"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00338-fbccbfd0ca",
+        "authoredQuote": true,
+        "publishableQuote": "When the system runs light on a weekend, the bus feels different — you notice the regulars more. The folks who ride every day, they're still there, but there's no rush. You get a chance to actually say hello, maybe ask how someone's day is going. Riders don't see that part. They just see the bus showing up. But for us, it's the difference between moving a crowd and moving people. And on a quiet day, you see the city itself more — the light on the buildings, the empty sidewalks. It's a slower rhythm, but it's still a rhythm."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00338",
+          "name": "Coen Cartier",
+          "role": "Transit Operator (AC Transit)",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Trevor Shimizu",
+          "question": "When the system runs light on a weekend, how does that change the feel of a shift? What do operators see that riders don't? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-transit",
+          "hood": null,
+          "focus": "The weekend ridership drop across all eight stations, with 12th Street leading the decline, and what transit workers observe when the system runs light.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 113"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Coen Cartier — Transit Operator (AC Transit) — AC Transit",
+          "evidence": [
+            {
+              "id": "EV-0fdc92bbd0",
+              "src": "output/beats/Transit_Metrics.jsonl Cycle 113",
+              "text": "12th St Oakland City Center moved down the most this cycle — weekend; base: ledger; game day (Downtown, Jack London); events in Downtown ×2, Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; 14 transit workers on the roster, 9 citizens who lived a transit line, a chaos car on the line."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "12th St Oakland City Center ridership down 4,821 vs C112 | 8 stations + 10 corridors on the record",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 113",
+            "id": "F-d381349c6f09"
+          },
+          {
+            "t": "FACT",
+            "text": "12th St Oakland City Center moved down the most this cycle — weekend; base: ledger; game day (Downtown, Jack London); events in Downtown ×2, Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; 14 transit workers on the roster, 9 citizens who lived a transit line, a chaos car on the line.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 113",
+            "id": "F-6cb9927854c3"
+          },
+          {
+            "t": "FACT",
+            "text": "Day type this cycle: weekend — riders cut citywide by the weekend rule. A station that moved more than the citywide rule names its own reason on its row.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 113 Factors (frame)",
+            "id": "F-bd80b17656ec"
+          },
+          {
+            "t": "FACT",
+            "text": "The week on the line — every cause on the record this cycle, once: weekend; game day (Downtown, Jack London); events in Downtown ×2, Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; game day (Downtown); events in Downtown ×2, Lake Merritt, Uptown; events in Lake Merritt; events in Fruitvale; Fruitvale Transit Hub Phase II — Visioning: design-phase; events in Baylight District ×2; game day (Jack London); events in Jack London; events in Montclair; game day (",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 113 Factors",
+            "id": "F-244c5ae3bf55"
+          },
+          {
+            "t": "FACT",
+            "text": "Weather this cycle: clear, 58°F (3 cycles of clear)",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+            "id": "F-da0baf37e21b"
+          },
+          {
+            "t": "FACT",
+            "text": "Game on the sports feed this cycle: Oaks at Uptown — After getting their first win in their franchise history the Oaks followed with their second win in the very next game. The Oaks traveled to Detroit where its defense would shine in a 91-78 victory. Adash Stanley shined with 29 points while Austin Rivers facilitated the action with 10 assists while also contributing 12 points a 7 rebounds. AJ Dybansta continued his strong start and little spoken on second round pick , rookie Harry Hayward emer",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 113",
+            "id": "F-4863eb137e60"
+          },
+          {
+            "t": "FACT",
+            "text": "Game on the sports feed this cycle: Oaks at San Antonio — Watch out now but the Oaks have won three straight games to start the inauguaral season. This time the Oaks traveled to New York to face the Knicks and had another convincing win beting the Knicks 115-93. Austin Reaves and AJ Dybansta lead scoring with 23 points a piece while Adash Stanley flirted with his first triple double. Harry Hayward repeats his strong performance recording a double double. (the rider lift is real only where a stat",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 113",
+            "id": "F-6fef869a9a3f"
+          },
+          {
+            "t": "FACT",
+            "text": "Coen Cartier — Transit Operator (AC Transit) — AC Transit",
+            "src": "Simulation_Ledger profile for POP-00338",
+            "id": "F-46d5971db351"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00200",
+      "name": "Evan Lewis",
+      "quote": "When the system runs light on a weekend, you feel it in your bones before you ever see the numbers. 12th Street is the heart of downtown — that's where people transfer, where they catch the game or head to an event. When it's quiet there, it's not just empty platforms. It's the whole city catching its breath. I see it on my route too — fewer folks waiting, more empty seats, and a kind of stillness that tells you everyone's home or somewhere else entirely. The construction around the Baylight District doesn't help either; when streets get torn up, people just find another way, even if the bus still runs on time.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; curious, open to new things; steady, hard to shake; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"When the system runs light on a weekend, you feel it in your bones before you ever see the numbers. 12th Street is the heart of downtown — that's where people transfer, where they catch the game or head to an event. When it's quiet there, it's not just empty platforms. It's the whole city catching its breath. I see it on my route too — fewer folks waiting, more empty seats, and a kind of stillness that tells you everyone's home or somewhere else entirely. The construction around the Baylight District doesn't help either; when streets get torn up, people just find another way, even if the bus still runs on time.\",\n  \"fact_ids\": [\n    \"F-d381349c6f09\",\n    \"F-6cb9927854c3\",\n    \"F-bd80b17656ec\"\n  ],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-d381349c6f09",
+          "F-6cb9927854c3",
+          "F-bd80b17656ec"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00200-bd9b2a5e51",
+        "authoredQuote": true,
+        "publishableQuote": "When the system runs light on a weekend, you feel it in your bones before you ever see the numbers. 12th Street is the heart of downtown — that's where people transfer, where they catch the game or head to an event. When it's quiet there, it's not just empty platforms. It's the whole city catching its breath. I see it on my route too — fewer folks waiting, more empty seats, and a kind of stillness that tells you everyone's home or somewhere else entirely. The construction around the Baylight District doesn't help either; when streets get torn up, people just find another way, even if the bus still runs on time."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00200",
+          "name": "Evan Lewis",
+          "role": "Bus driver",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Trevor Shimizu",
+          "question": "What have you seen, felt, or understood about \"The weekend ridership drop across all eight stations, with 12th Street leading the decline, and what transit workers observe when the system runs light.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-transit",
+          "hood": null,
+          "focus": "The weekend ridership drop across all eight stations, with 12th Street leading the decline, and what transit workers observe when the system runs light.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 113"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Evan Lewis — Bus driver — AC Transit",
+          "evidence": [
+            {
+              "id": "EV-3310c83181",
+              "src": "output/beats/Transit_Metrics.jsonl Cycle 113",
+              "text": "12th St Oakland City Center moved down the most this cycle — weekend; base: ledger; game day (Downtown, Jack London); events in Downtown ×2, Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; 14 transit workers on the roster, 9 citizens who lived a transit line, a chaos car on the line."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "12th St Oakland City Center ridership down 4,821 vs C112 | 8 stations + 10 corridors on the record",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 113",
+            "id": "F-d381349c6f09"
+          },
+          {
+            "t": "FACT",
+            "text": "12th St Oakland City Center moved down the most this cycle — weekend; base: ledger; game day (Downtown, Jack London); events in Downtown ×2, Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; 14 transit workers on the roster, 9 citizens who lived a transit line, a chaos car on the line.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 113",
+            "id": "F-6cb9927854c3"
+          },
+          {
+            "t": "FACT",
+            "text": "Day type this cycle: weekend — riders cut citywide by the weekend rule. A station that moved more than the citywide rule names its own reason on its row.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 113 Factors (frame)",
+            "id": "F-bd80b17656ec"
+          },
+          {
+            "t": "FACT",
+            "text": "The week on the line — every cause on the record this cycle, once: weekend; game day (Downtown, Jack London); events in Downtown ×2, Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; game day (Downtown); events in Downtown ×2, Lake Merritt, Uptown; events in Lake Merritt; events in Fruitvale; Fruitvale Transit Hub Phase II — Visioning: design-phase; events in Baylight District ×2; game day (Jack London); events in Jack London; events in Montclair; game day (",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 113 Factors",
+            "id": "F-244c5ae3bf55"
+          },
+          {
+            "t": "FACT",
+            "text": "Weather this cycle: clear, 58°F (3 cycles of clear)",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+            "id": "F-da0baf37e21b"
+          },
+          {
+            "t": "FACT",
+            "text": "Game on the sports feed this cycle: Oaks at Uptown — After getting their first win in their franchise history the Oaks followed with their second win in the very next game. The Oaks traveled to Detroit where its defense would shine in a 91-78 victory. Adash Stanley shined with 29 points while Austin Rivers facilitated the action with 10 assists while also contributing 12 points a 7 rebounds. AJ Dybansta continued his strong start and little spoken on second round pick , rookie Harry Hayward emer",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 113",
+            "id": "F-4863eb137e60"
+          },
+          {
+            "t": "FACT",
+            "text": "Game on the sports feed this cycle: Oaks at San Antonio — Watch out now but the Oaks have won three straight games to start the inauguaral season. This time the Oaks traveled to New York to face the Knicks and had another convincing win beting the Knicks 115-93. Austin Reaves and AJ Dybansta lead scoring with 23 points a piece while Adash Stanley flirted with his first triple double. Harry Hayward repeats his strong performance recording a double double. (the rider lift is real only where a stat",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 113",
+            "id": "F-6fef869a9a3f"
+          },
+          {
+            "t": "FACT",
+            "text": "Evan Lewis — Bus driver — AC Transit",
+            "src": "Simulation_Ledger profile for POP-00200",
+            "id": "F-43ae64c832ec"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-00617",
+      "name": "Eleanor Rivera",
+      "quote": "Honestly, the first thing I notice on a light weekend morning is the sound. The platform echoes more. You hear the announcements bounce off the tile instead of getting swallowed up by the crowd. And you see the regulars more clearly — the folks who are always there, not the game-day rush. It's a different rhythm. We just adapt, keep things moving, make sure the trains run on time. That's the job, whether it's five thousand people or fifty.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Honestly, the first thing I notice on a light weekend morning is the sound. The platform echoes more. You hear the announcements bounce off the tile instead of getting swallowed up by the crowd. And you see the regulars more clearly — the folks who are always there, not the game-day rush. It's a different rhythm. We just adapt, keep things moving, make sure the trains run on time. That's the job, whether it's five thousand people or fifty.\",\n  \"fact_ids\": [\"F-d381349c6f09\", \"F-6cb9927854c3\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-d381349c6f09",
+          "F-6cb9927854c3"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00617-19e44794ac",
+        "authoredQuote": true,
+        "publishableQuote": "Honestly, the first thing I notice on a light weekend morning is the sound. The platform echoes more. You hear the announcements bounce off the tile instead of getting swallowed up by the crowd. And you see the regulars more clearly — the folks who are always there, not the game-day rush. It's a different rhythm. We just adapt, keep things moving, make sure the trains run on time. That's the job, whether it's five thousand people or fifty."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00617",
+          "name": "Eleanor Rivera",
+          "role": "BART Station Manager",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Trevor Shimizu",
+          "question": "What does a weekend morning at 12th Street look like when ridership drops by nearly five thousand? What do you notice first? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-transit",
+          "hood": null,
+          "focus": "The weekend ridership drop across all eight stations, with 12th Street leading the decline, and what transit workers observe when the system runs light.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 113"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Eleanor Rivera — BART Station Manager — BART Oakland Division",
+          "evidence": [
+            {
+              "id": "EV-057af6f0a4",
+              "src": "output/beats/Transit_Metrics.jsonl Cycle 113",
+              "text": "12th St Oakland City Center moved down the most this cycle — weekend; base: ledger; game day (Downtown, Jack London); events in Downtown ×2, Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; 14 transit workers on the roster, 9 citizens who lived a transit line, a chaos car on the line."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "12th St Oakland City Center ridership down 4,821 vs C112 | 8 stations + 10 corridors on the record",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 113",
+            "id": "F-d381349c6f09"
+          },
+          {
+            "t": "FACT",
+            "text": "12th St Oakland City Center moved down the most this cycle — weekend; base: ledger; game day (Downtown, Jack London); events in Downtown ×2, Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; 14 transit workers on the roster, 9 citizens who lived a transit line, a chaos car on the line.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 113",
+            "id": "F-6cb9927854c3"
+          },
+          {
+            "t": "FACT",
+            "text": "Day type this cycle: weekend — riders cut citywide by the weekend rule. A station that moved more than the citywide rule names its own reason on its row.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 113 Factors (frame)",
+            "id": "F-bd80b17656ec"
+          },
+          {
+            "t": "FACT",
+            "text": "The week on the line — every cause on the record this cycle, once: weekend; game day (Downtown, Jack London); events in Downtown ×2, Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; game day (Downtown); events in Downtown ×2, Lake Merritt, Uptown; events in Lake Merritt; events in Fruitvale; Fruitvale Transit Hub Phase II — Visioning: design-phase; events in Baylight District ×2; game day (Jack London); events in Jack London; events in Montclair; game day (",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 113 Factors",
+            "id": "F-244c5ae3bf55"
+          },
+          {
+            "t": "FACT",
+            "text": "Weather this cycle: clear, 58°F (3 cycles of clear)",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+            "id": "F-da0baf37e21b"
+          },
+          {
+            "t": "FACT",
+            "text": "Game on the sports feed this cycle: Oaks at Uptown — After getting their first win in their franchise history the Oaks followed with their second win in the very next game. The Oaks traveled to Detroit where its defense would shine in a 91-78 victory. Adash Stanley shined with 29 points while Austin Rivers facilitated the action with 10 assists while also contributing 12 points a 7 rebounds. AJ Dybansta continued his strong start and little spoken on second round pick , rookie Harry Hayward emer",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 113",
+            "id": "F-4863eb137e60"
+          },
+          {
+            "t": "FACT",
+            "text": "Game on the sports feed this cycle: Oaks at San Antonio — Watch out now but the Oaks have won three straight games to start the inauguaral season. This time the Oaks traveled to New York to face the Knicks and had another convincing win beting the Knicks 115-93. Austin Reaves and AJ Dybansta lead scoring with 23 points a piece while Adash Stanley flirted with his first triple double. Harry Hayward repeats his strong performance recording a double double. (the rider lift is real only where a stat",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 113",
+            "id": "F-6fef869a9a3f"
+          },
+          {
+            "t": "FACT",
+            "text": "Eleanor Rivera — BART Station Manager — BART Oakland Division",
+            "src": "Simulation_Ledger profile for POP-00617",
+            "id": "F-6412715ef9fb"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00338",
+      "name": "Coen Cartier",
+      "quote": "When the system runs light on a weekend, the bus feels different — you notice the regulars more. The folks who ride every day, they're still there, but there's no rush. You get a chance to actually say hello, maybe ask how someone's day is going. Riders don't see that part. They just see the bus showing up. But for us, it's the difference between moving a crowd and moving people. And on a quiet day, you see the city itself more — the light on the buildings, the empty sidewalks. It's a slower rhythm, but it's still a rhythm.",
+      "disp": "close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"When the system runs light on a weekend, the bus feels different — you notice the regulars more. The folks who ride every day, they're still there, but there's no rush. You get a chance to actually say hello, maybe ask how someone's day is going. Riders don't see that part. They just see the bus showing up. But for us, it's the difference between moving a crowd and moving people. And on a quiet day, you see the city itself more — the light on the buildings, the empty sidewalks. It's a slower rhythm, but it's still a rhythm.\",\n  \"fact_ids\": [\"F-d381349c6f09\", \"F-6cb9927854c3\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-d381349c6f09",
+          "F-6cb9927854c3"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00338-fbccbfd0ca",
+        "authoredQuote": true,
+        "publishableQuote": "When the system runs light on a weekend, the bus feels different — you notice the regulars more. The folks who ride every day, they're still there, but there's no rush. You get a chance to actually say hello, maybe ask how someone's day is going. Riders don't see that part. They just see the bus showing up. But for us, it's the difference between moving a crowd and moving people. And on a quiet day, you see the city itself more — the light on the buildings, the empty sidewalks. It's a slower rhythm, but it's still a rhythm."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00338",
+          "name": "Coen Cartier",
+          "role": "Transit Operator (AC Transit)",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Trevor Shimizu",
+          "question": "When the system runs light on a weekend, how does that change the feel of a shift? What do operators see that riders don't? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-transit",
+          "hood": null,
+          "focus": "The weekend ridership drop across all eight stations, with 12th Street leading the decline, and what transit workers observe when the system runs light.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 113"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Coen Cartier — Transit Operator (AC Transit) — AC Transit",
+          "evidence": [
+            {
+              "id": "EV-0fdc92bbd0",
+              "src": "output/beats/Transit_Metrics.jsonl Cycle 113",
+              "text": "12th St Oakland City Center moved down the most this cycle — weekend; base: ledger; game day (Downtown, Jack London); events in Downtown ×2, Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; 14 transit workers on the roster, 9 citizens who lived a transit line, a chaos car on the line."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "12th St Oakland City Center ridership down 4,821 vs C112 | 8 stations + 10 corridors on the record",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 113",
+            "id": "F-d381349c6f09"
+          },
+          {
+            "t": "FACT",
+            "text": "12th St Oakland City Center moved down the most this cycle — weekend; base: ledger; game day (Downtown, Jack London); events in Downtown ×2, Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; 14 transit workers on the roster, 9 citizens who lived a transit line, a chaos car on the line.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 113",
+            "id": "F-6cb9927854c3"
+          },
+          {
+            "t": "FACT",
+            "text": "Day type this cycle: weekend — riders cut citywide by the weekend rule. A station that moved more than the citywide rule names its own reason on its row.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 113 Factors (frame)",
+            "id": "F-bd80b17656ec"
+          },
+          {
+            "t": "FACT",
+            "text": "The week on the line — every cause on the record this cycle, once: weekend; game day (Downtown, Jack London); events in Downtown ×2, Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; game day (Downtown); events in Downtown ×2, Lake Merritt, Uptown; events in Lake Merritt; events in Fruitvale; Fruitvale Transit Hub Phase II — Visioning: design-phase; events in Baylight District ×2; game day (Jack London); events in Jack London; events in Montclair; game day (",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 113 Factors",
+            "id": "F-244c5ae3bf55"
+          },
+          {
+            "t": "FACT",
+            "text": "Weather this cycle: clear, 58°F (3 cycles of clear)",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+            "id": "F-da0baf37e21b"
+          },
+          {
+            "t": "FACT",
+            "text": "Game on the sports feed this cycle: Oaks at Uptown — After getting their first win in their franchise history the Oaks followed with their second win in the very next game. The Oaks traveled to Detroit where its defense would shine in a 91-78 victory. Adash Stanley shined with 29 points while Austin Rivers facilitated the action with 10 assists while also contributing 12 points a 7 rebounds. AJ Dybansta continued his strong start and little spoken on second round pick , rookie Harry Hayward emer",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 113",
+            "id": "F-4863eb137e60"
+          },
+          {
+            "t": "FACT",
+            "text": "Game on the sports feed this cycle: Oaks at San Antonio — Watch out now but the Oaks have won three straight games to start the inauguaral season. This time the Oaks traveled to New York to face the Knicks and had another convincing win beting the Knicks 115-93. Austin Reaves and AJ Dybansta lead scoring with 23 points a piece while Adash Stanley flirted with his first triple double. Harry Hayward repeats his strong performance recording a double double. (the rider lift is real only where a stat",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 113",
+            "id": "F-6fef869a9a3f"
+          },
+          {
+            "t": "FACT",
+            "text": "Coen Cartier — Transit Operator (AC Transit) — AC Transit",
+            "src": "Simulation_Ledger profile for POP-00338",
+            "id": "F-46d5971db351"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01039",
+      "name": "Ximena Mehta",
+      "quote": null,
+      "disp": "a real fan, plans around games",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: direct reaction exceeds 80 words; direct reaction must be one to four sentences",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Honestly, weekends are always a different animal for us. People aren't commuting, so the whole rhythm shifts. Seeing 12th Street drop the most doesn't surprise me — that station is so tied to the workday crowd and downtown events. When the weekend hits and there's no game or big thing pulling people in, it just goes quiet. We watch these patterns closely because they tell us when to run more trains or when we can give our crews a breather. It's not an anomaly; it's just what a city that lives on weekdays looks like on a Saturday.\",\n  \"fact_ids\": [\"F-d381349c6f09\", \"F-6cb9927854c3\", \"F-bd80b17656ec\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01039",
+          "name": "Ximena Mehta",
+          "role": "Bart Transit PR",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Trevor Shimizu",
+          "question": "How does BART read a weekend like this one — is it a pattern, an anomaly, or something the agency tracks closely? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-transit",
+          "hood": null,
+          "focus": "The weekend ridership drop across all eight stations, with 12th Street leading the decline, and what transit workers observe when the system runs light.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 113"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Ximena Mehta — Bart Transit PR — BART Oakland Division",
+          "evidence": [
+            {
+              "id": "EV-5a2a355475",
+              "src": "output/beats/Transit_Metrics.jsonl Cycle 113",
+              "text": "12th St Oakland City Center moved down the most this cycle — weekend; base: ledger; game day (Downtown, Jack London); events in Downtown ×2, Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; 14 transit workers on the roster, 9 citizens who lived a transit line, a chaos car on the line."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "12th St Oakland City Center ridership down 4,821 vs C112 | 8 stations + 10 corridors on the record",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 113",
+            "id": "F-d381349c6f09"
+          },
+          {
+            "t": "FACT",
+            "text": "12th St Oakland City Center moved down the most this cycle — weekend; base: ledger; game day (Downtown, Jack London); events in Downtown ×2, Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; 14 transit workers on the roster, 9 citizens who lived a transit line, a chaos car on the line.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 113",
+            "id": "F-6cb9927854c3"
+          },
+          {
+            "t": "FACT",
+            "text": "Day type this cycle: weekend — riders cut citywide by the weekend rule. A station that moved more than the citywide rule names its own reason on its row.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 113 Factors (frame)",
+            "id": "F-bd80b17656ec"
+          },
+          {
+            "t": "FACT",
+            "text": "The week on the line — every cause on the record this cycle, once: weekend; game day (Downtown, Jack London); events in Downtown ×2, Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; game day (Downtown); events in Downtown ×2, Lake Merritt, Uptown; events in Lake Merritt; events in Fruitvale; Fruitvale Transit Hub Phase II — Visioning: design-phase; events in Baylight District ×2; game day (Jack London); events in Jack London; events in Montclair; game day (",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 113 Factors",
+            "id": "F-244c5ae3bf55"
+          },
+          {
+            "t": "FACT",
+            "text": "Weather this cycle: clear, 58°F (3 cycles of clear)",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+            "id": "F-da0baf37e21b"
+          },
+          {
+            "t": "FACT",
+            "text": "Game on the sports feed this cycle: Oaks at Uptown — After getting their first win in their franchise history the Oaks followed with their second win in the very next game. The Oaks traveled to Detroit where its defense would shine in a 91-78 victory. Adash Stanley shined with 29 points while Austin Rivers facilitated the action with 10 assists while also contributing 12 points a 7 rebounds. AJ Dybansta continued his strong start and little spoken on second round pick , rookie Harry Hayward emer",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 113",
+            "id": "F-4863eb137e60"
+          },
+          {
+            "t": "FACT",
+            "text": "Game on the sports feed this cycle: Oaks at San Antonio — Watch out now but the Oaks have won three straight games to start the inauguaral season. This time the Oaks traveled to New York to face the Knicks and had another convincing win beting the Knicks 115-93. Austin Reaves and AJ Dybansta lead scoring with 23 points a piece while Adash Stanley flirted with his first triple double. Harry Hayward repeats his strong performance recording a double double. (the rider lift is real only where a stat",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 113",
+            "id": "F-6fef869a9a3f"
+          },
+          {
+            "t": "FACT",
+            "text": "Ximena Mehta — Bart Transit PR — BART Oakland Division",
+            "src": "Simulation_Ledger profile for POP-01039",
+            "id": "F-68d81ed0c396"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00200",
+      "name": "Evan Lewis",
+      "quote": "When the system runs light on a weekend, you feel it in your bones before you ever see the numbers. 12th Street is the heart of downtown — that's where people transfer, where they catch the game or head to an event. When it's quiet there, it's not just empty platforms. It's the whole city catching its breath. I see it on my route too — fewer folks waiting, more empty seats, and a kind of stillness that tells you everyone's home or somewhere else entirely. The construction around the Baylight District doesn't help either; when streets get torn up, people just find another way, even if the bus still runs on time.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; curious, open to new things; steady, hard to shake; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"When the system runs light on a weekend, you feel it in your bones before you ever see the numbers. 12th Street is the heart of downtown — that's where people transfer, where they catch the game or head to an event. When it's quiet there, it's not just empty platforms. It's the whole city catching its breath. I see it on my route too — fewer folks waiting, more empty seats, and a kind of stillness that tells you everyone's home or somewhere else entirely. The construction around the Baylight District doesn't help either; when streets get torn up, people just find another way, even if the bus still runs on time.\",\n  \"fact_ids\": [\n    \"F-d381349c6f09\",\n    \"F-6cb9927854c3\",\n    \"F-bd80b17656ec\"\n  ],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-d381349c6f09",
+          "F-6cb9927854c3",
+          "F-bd80b17656ec"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00200-bd9b2a5e51",
+        "authoredQuote": true,
+        "publishableQuote": "When the system runs light on a weekend, you feel it in your bones before you ever see the numbers. 12th Street is the heart of downtown — that's where people transfer, where they catch the game or head to an event. When it's quiet there, it's not just empty platforms. It's the whole city catching its breath. I see it on my route too — fewer folks waiting, more empty seats, and a kind of stillness that tells you everyone's home or somewhere else entirely. The construction around the Baylight District doesn't help either; when streets get torn up, people just find another way, even if the bus still runs on time."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00200",
+          "name": "Evan Lewis",
+          "role": "Bus driver",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Trevor Shimizu",
+          "question": "What have you seen, felt, or understood about \"The weekend ridership drop across all eight stations, with 12th Street leading the decline, and what transit workers observe when the system runs light.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-transit",
+          "hood": null,
+          "focus": "The weekend ridership drop across all eight stations, with 12th Street leading the decline, and what transit workers observe when the system runs light.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 113"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Evan Lewis — Bus driver — AC Transit",
+          "evidence": [
+            {
+              "id": "EV-3310c83181",
+              "src": "output/beats/Transit_Metrics.jsonl Cycle 113",
+              "text": "12th St Oakland City Center moved down the most this cycle — weekend; base: ledger; game day (Downtown, Jack London); events in Downtown ×2, Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; 14 transit workers on the roster, 9 citizens who lived a transit line, a chaos car on the line."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "12th St Oakland City Center ridership down 4,821 vs C112 | 8 stations + 10 corridors on the record",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 113",
+            "id": "F-d381349c6f09"
+          },
+          {
+            "t": "FACT",
+            "text": "12th St Oakland City Center moved down the most this cycle — weekend; base: ledger; game day (Downtown, Jack London); events in Downtown ×2, Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; 14 transit workers on the roster, 9 citizens who lived a transit line, a chaos car on the line.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 113",
+            "id": "F-6cb9927854c3"
+          },
+          {
+            "t": "FACT",
+            "text": "Day type this cycle: weekend — riders cut citywide by the weekend rule. A station that moved more than the citywide rule names its own reason on its row.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 113 Factors (frame)",
+            "id": "F-bd80b17656ec"
+          },
+          {
+            "t": "FACT",
+            "text": "The week on the line — every cause on the record this cycle, once: weekend; game day (Downtown, Jack London); events in Downtown ×2, Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; game day (Downtown); events in Downtown ×2, Lake Merritt, Uptown; events in Lake Merritt; events in Fruitvale; Fruitvale Transit Hub Phase II — Visioning: design-phase; events in Baylight District ×2; game day (Jack London); events in Jack London; events in Montclair; game day (",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 113 Factors",
+            "id": "F-244c5ae3bf55"
+          },
+          {
+            "t": "FACT",
+            "text": "Weather this cycle: clear, 58°F (3 cycles of clear)",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+            "id": "F-da0baf37e21b"
+          },
+          {
+            "t": "FACT",
+            "text": "Game on the sports feed this cycle: Oaks at Uptown — After getting their first win in their franchise history the Oaks followed with their second win in the very next game. The Oaks traveled to Detroit where its defense would shine in a 91-78 victory. Adash Stanley shined with 29 points while Austin Rivers facilitated the action with 10 assists while also contributing 12 points a 7 rebounds. AJ Dybansta continued his strong start and little spoken on second round pick , rookie Harry Hayward emer",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 113",
+            "id": "F-4863eb137e60"
+          },
+          {
+            "t": "FACT",
+            "text": "Game on the sports feed this cycle: Oaks at San Antonio — Watch out now but the Oaks have won three straight games to start the inauguaral season. This time the Oaks traveled to New York to face the Knicks and had another convincing win beting the Knicks 115-93. Austin Reaves and AJ Dybansta lead scoring with 23 points a piece while Adash Stanley flirted with his first triple double. Harry Hayward repeats his strong performance recording a double double. (the rider lift is real only where a stat",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 113",
+            "id": "F-6fef869a9a3f"
+          },
+          {
+            "t": "FACT",
+            "text": "Evan Lewis — Bus driver — AC Transit",
+            "src": "Simulation_Ledger profile for POP-00200",
+            "id": "F-43ae64c832ec"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-10-26T18:40:30.595Z"
+}

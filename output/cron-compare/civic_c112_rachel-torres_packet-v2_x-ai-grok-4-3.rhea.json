@@ -1,0 +1,68 @@
+{
+  "draft": "output/cron-compare/civic_c112_rachel-torres_packet-v2_x-ai-grok-4-3.md",
+  "cycle": "112",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "7514bd7e46098ef50302e1f151256f80883018106ca96d515a83ed10d5bec960",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All public safety metrics, neighborhood incident counts, custody figures, and official attribution to Kimberly Cho align with canon records.",
+  "review": {
+    "profileId": "rachel-public-safety-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "rachel-public-safety-v1",
+    "packageVersion": "RACHEL-LEP2-1",
+    "manifestId": "AM-c51af5ddc8df",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "19"
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [
+      "Kimberly Cho"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 1,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0091,
+  "durationMs": 8302,
+  "parseError": false,
+  "ranAt": "2026-10-20T23:16:32.720Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": false,
+    "inTargetBy": "code floor 500",
+    "words": 283,
+    "short": "The piece falls well short of the 500-word minimum target length.",
+    "score": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "7514bd7e46098ef50302e1f151256f80883018106ca96d515a83ed10d5bec960",
+    "costUsd": 0.0008
+  }
+}

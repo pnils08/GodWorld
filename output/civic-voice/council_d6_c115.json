@@ -1,0 +1,38 @@
+{
+  "office": "council_d6",
+  "cycle": 115,
+  "speaker": "Elliott Crane",
+  "cascadeSummary": "I voted YES on Commercial Stabilization for Grand Lake (INIT-009) after verifying that the Chen-Vega audit protocols and mandatory milestone reporting requirements remain fully intact. For District 6, I am prioritizing municipal baseline maintenance along Piedmont Avenue, where local commerce is steady and crime remains low. On citywide matters, I will inspect the published Month-12 closeout ledger before taking any vote on the West Oakland Stabilization Fund charter renewal.",
+  "statements": [
+    {
+      "statementId": "STMT-115-council_d6-001",
+      "type": "vote_statement",
+      "topic": "Commercial Stabilization for Grand Lake Vote",
+      "initiative": "Commercial Stabilization for Grand Lake",
+      "decision": "Vote YES on INIT-009 with Chen-Vega audit and milestone reporting conditions intact",
+      "quote": "When public funds are bound by enforceable audits and transparent milestones, investment delivers real results rather than empty promises.",
+      "fullStatement": "I vote YES on Commercial Stabilization for Grand Lake (INIT-009). My position on public expenditures has always been consistent: fiscal accountability must precede legislative approval. Because the Chen-Vega audit protocols and mandatory milestone reporting mechanisms have been preserved in full, this $2.5 million allocation meets the rigorous standard of fiscal discipline required by this council. We are establishing an accountable framework for Grand Lake that ties commercial revitalization directly to measurable progress and public oversight, ensuring taxpayers receive full transparency for every dollar spent.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-115-council_d6-002",
+      "type": "legislative_statement",
+      "topic": "Stabilization Fund Closeout and Charter Renewal",
+      "initiative": "West Oakland Stabilization Fund",
+      "decision": "Demand strict verification of published Month-12 closeout before voting on charter renewal",
+      "quote": "Charter renewals cannot outpace the ledger; we must verify audited closeout documentation before committing city resources.",
+      "fullStatement": "Regarding the West Oakland Stabilization Fund (INIT-001), I welcome the Mayor placing the Cycle 114 closeout report on the docket, but I reiterate that renewal cannot be taken for granted. In District 6, fiscal stewardship demands that we inspect the audited Month-12 reconciliation records and evaluate the 23-day processing standard before advancing any charter renewal ordinance. Public programs must prove their operational integrity and ledger accuracy before they earn multi-year extensions from this dais.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-115-council_d6-003",
+      "type": "district_statement",
+      "topic": "District 6 Baseline Municipal Services",
+      "initiative": null,
+      "decision": "Prioritize baseline municipal services and commercial stability across Piedmont Avenue and Montclair",
+      "quote": "City Hall's primary responsibility to thriving commercial corridors like Piedmont Avenue is reliable, unobtrusive municipal stewardship.",
+      "fullStatement": "Across District 6, Piedmont Avenue continues to demonstrate the strength of neighborhood baselines, with busy street commerce, low crime, and a positive community atmosphere. Our focus must remain steadfast on delivering essential city services, maintaining public infrastructure, and supporting community anchors like B'nai Tikvah Synagogue. Oakland does not require manufactured crises or unnecessary administrative interference when local neighborhoods are functioning soundly; it requires reliable baseline execution and fiscal prudence from municipal government.",
+      "trackerUpdates": {}
+    }
+  ]
+}

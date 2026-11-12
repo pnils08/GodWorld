@@ -1,0 +1,363 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "112",
+  "persona": "tanya-cruz",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00014",
+      "name": "Tanya Cruz",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Oaks early-season update: 1-0",
+      "approach": "Sideline approach (Tanya Cruz): you file from the clubhouse. That SET is yours — the Packet will never list a clubhouse event. Paint what the supplied sports line predicts. Packet player quotes and numbers only. New in-world spots go on INTAKE BIZ. No real-world Oakland venues. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview. The feed notes report what people said in paraphrase; none of it is a quote — never put it in quotation marks or attribute it as speech.",
+      "creativeBrief": {
+        "kind": "sideline-dispatch",
+        "pulseClass": "record-only-sideline",
+        "bagModes": [
+          "10 Inference Close"
+        ],
+        "claim": "The supplied sports record is the weather. The clubhouse SET is allotted hallucination fitted to that line.",
+        "anchorFacts": [
+          "The Oaks record is 1-0.",
+          "The Oaks open their inaugural season at home. AJ Dybantsa shines in his rookie debut as the Oaks win their first win as a franchise.",
+          "The Oaks open their inaugural season at home vs the San Antonio Spurs and instantly get their first win in franchise history, After 0-9 through rookie camp and preseason the team had grown anxious. Coach Shepard was asked after the game how the locker room responded to the win and he laughed and said his ears were still ringing.",
+          "Coach Shepard, who is also celebrating his first win as a rookie head coach, emphasized that it was important to honor the moment for its context but to not get too caught up and the next loss could be a game away. Saying that its important to build on the things that were good and eliminate the bad. The Oaks scored 97 while holding San Antonio to 84. The Oaks next game will be at home while Charolette comes to town."
+        ],
+        "accessEvidence": {
+          "state": "ALLOTTED",
+          "facts": [
+            "clubhouse/sideline SET is the reporter's room"
+          ]
+        },
+        "quoteEvidence": {
+          "state": "NOT_SUPPLIED",
+          "quotes": []
+        },
+        "observationEvidence": {
+          "state": "ALLOTTED",
+          "facts": []
+        },
+        "missing": [
+          "Packet player quotes",
+          "injury or team-response facts beyond the supplied record"
+        ],
+        "sceneRule": "Clubhouse SET is authorized. Invented player quotes and real-world venues are not.",
+        "sourcePointers": [
+          "output/world_summary_c112.md ## Sports",
+          "scripts/sportsSubstrate.js",
+          "docs/media/TANYA_SIDELINE_BAG.md"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "sideline-signal",
+      "hood": "KONO",
+      "score": null,
+      "src": "world_summary_c112.md ## Sports",
+      "nearby": [
+        {
+          "text": "A's | player-feature | (off-season) | Eric Taveras, Martin Richards",
+          "src": "Oakland_Sports_Feed cycle 112; rendered: world_summary_c112.md \"## Sports\" C112 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | rumor | (off-season) | Mark Aitken, Kevin Clark",
+          "src": "Oakland_Sports_Feed cycle 112; rendered: world_summary_c112.md \"## Sports\" C112 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (off-season) | Vinnie Keane, Benji Dillon",
+          "src": "Oakland_Sports_Feed cycle 112; rendered: world_summary_c112.md \"## Sports\" C112 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | game-result | (early-season) | AJ Dybantsa, Adash Stanley, Wendell Carter Jr, Austin Reaves",
+          "src": "Oakland_Sports_Feed cycle 112; rendered: world_summary_c112.md \"## Sports\" C112 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | season-state | (early-season) | Elias Varek",
+          "src": "Oakland_Sports_Feed cycle 112; rendered: world_summary_c112.md \"## Sports\" C112 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-01023",
+          "name": "Adash Stanley",
+          "profile": "Adash Stanley — PG / The Oaks",
+          "role": "PG / The Oaks",
+          "hood": "Downtown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c112.md ## Sports",
+            "pop": "POP-01023",
+            "rowName": "Adash Stanley",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01027",
+          "name": "Austin Reaves",
+          "profile": "Austin Reaves — SG / The Oaks",
+          "role": "SG / The Oaks",
+          "hood": "Downtown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c112.md ## Sports",
+            "pop": "POP-01027",
+            "rowName": "Austin Reaves",
+            "kind": "slice-row"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C112",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-7cd6ffd2aeb3"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks early-season update: 1-0",
+        "src": "world_summary_c112.md ## Sports",
+        "id": "F-b4d3d0f493c7"
+      },
+      {
+        "t": "FACT",
+        "text": "The Oaks record is 1-0.",
+        "src": "world_summary_c112.md ## Sports",
+        "id": "F-69a60b207537"
+      },
+      {
+        "t": "FACT",
+        "text": "The Oaks open their inaugural season at home. AJ Dybantsa shines in his rookie debut as the Oaks win their first win as a franchise.",
+        "src": "world_summary_c112.md ## Sports",
+        "id": "F-840758f351e1"
+      },
+      {
+        "t": "FACT",
+        "text": "The Oaks open their inaugural season at home vs the San Antonio Spurs and instantly get their first win in franchise history, After 0-9 through rookie camp and preseason the team had grown anxious. Coach Shepard was asked after the game how the locker room responded to the win and he laughed and said his ears were still ringing.",
+        "src": "world_summary_c112.md ## Sports",
+        "id": "F-90b86ae8d257"
+      },
+      {
+        "t": "FACT",
+        "text": "Coach Shepard, who is also celebrating his first win as a rookie head coach, emphasized that it was important to honor the moment for its context but to not get too caught up and the next loss could be a game away. Saying that its important to build on the things that were good and eliminate the bad. The Oaks scored 97 while holding San Antonio to 84. The Oaks next game will be at home while Charolette comes to town.",
+        "src": "world_summary_c112.md ## Sports",
+        "id": "F-86df95d8b1a9"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "named",
+    "candidates": [
+      {
+        "pop": "POP-01023",
+        "name": "Adash Stanley",
+        "role": "PG / The Oaks",
+        "hood": "Downtown",
+        "profile": "Adash Stanley — PG / The Oaks ",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c112.md ## Sports",
+          "pop": "POP-01023",
+          "rowName": "Adash Stanley",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01027",
+        "name": "Austin Reaves",
+        "role": "SG / The Oaks",
+        "hood": "Downtown",
+        "profile": "Austin Reaves — SG / The Oaks",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c112.md ## Sports",
+          "pop": "POP-01027",
+          "rowName": "Austin Reaves",
+          "kind": "slice-row"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014"
+  },
+  "assignment": {
+    "story": {
+      "angle": "Oaks early-season update: 1-0",
+      "label": "Oaks early-season update: 1-0",
+      "hookLine": "Oaks early-season update: 1-0",
+      "kind": "sideline-signal",
+      "hood": "KONO",
+      "popids": [
+        "POP-01023",
+        "POP-01027"
+      ],
+      "citizens": [
+        "Adash Stanley (POP-01023)",
+        "Austin Reaves (POP-01027)"
+      ],
+      "ref": "world_summary_c112.md ## Sports",
+      "cycle": 112
+    },
+    "approach": "Sideline approach (Tanya Cruz): you file from the clubhouse. That SET is yours — the Packet will never list a clubhouse event. Paint what the supplied sports line predicts. Packet player quotes and numbers only. New in-world spots go on INTAKE BIZ. No real-world Oakland venues. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview. The feed notes report what people said in paraphrase; none of it is a quote — never put it in quotation marks or attribute it as speech."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014",
+    "text": "I'm standing in the hallway outside the Oaks' locker room, notebook in hand, trying to catch my breath. The noise is still spilling out through the closed door — laughing, hollering, somebody yelling something about the fourth quarter. Coach Shepard said his ears were still ringing, and I believe him. I can hear it from here. This is the first win in franchise history, and it feels like the whole building knows it. I want to get inside, but I'm also just letting myself stand here for a second and take it in. After 0-9 through camp and preseason, you could feel the tension in this arena all night — every missed shot, every close call. And then it broke. AJ Dybantsa was everywhere in his debut",
+    "plan": {
+      "chase": "I'm standing in the hallway outside the Oaks' locker room, notebook in hand, trying to catch my breath. The noise is still spilling out through the closed door — laughing, hollering, somebody yelling something about the fourth quarter. Coach Shepard said his ears were still ringing, and I believe him. I can hear it from here. This is the first win in franchise history, and it feels like the whole building knows it. I want to get inside, but I'm also just letting myself stand here for a second and take it in. After 0-9 through camp and preseason, you could feel the tension in this arena all night — every missed shot, every close call. And then it broke. AJ Dybantsa was everywhere in his debut",
+      "focus": "The emotional release and cautious reset inside the Oaks' locker room after their first franchise win.",
+      "why": "The record is the weather — 1-0, first win ever, at home, after an anxious 0-9 stretch. The human story is in how a group that had been holding its breath finally exhales, and how a rookie head coach tries to keep them level.",
+      "checks": [
+        "No invented player quotes — only paraphrase what the feed notes report.",
+        "No real-world venues beyond the clubhouse SET.",
+        "No new named people, institutions, events, dates, or numbers beyond the supplied facts.",
+        "Keep the first-person sideline voice present throughout."
+      ],
+      "targets": [
+        {
+          "pop": "POP-01023",
+          "question": "After the 0-9 preseason, what changed in the locker room's mindset once the lead felt secure tonight?",
+          "basis": "Adash Stanley is a named Oaks player in the supplied signal, and the team's anxious preseason is part of the anchor facts."
+        },
+        {
+          "pop": "POP-01027",
+          "question": "What does it mean to be part of a franchise's first win, knowing there's no past to lean on — only this moment?",
+          "basis": "Austin Reaves is a named Oaks player in the supplied signal, and the inaugural-season context is central to the assignment."
+        }
+      ],
+      "interpretation": "The win is real and the record is clean, but the deeper beat is how a team that had been tightening up all preseason finally let go — and how quickly the coach tried to pull them back to earth. The celebration is loud, but the message underneath is: this is one game, and the next one is already coming.",
+      "unverifiedLead": [
+        "The locker room was loud enough that Coach Shepard laughed about his ears ringing — that's from the feed notes, not a direct quote.",
+        "There may be a quieter moment after the celebration dies down, where the coach's warning about the next loss starts to settle in."
+      ],
+      "closeQuestion": "How do you honor a first win without letting it become the whole story?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "A's | player-feature | (off-season) | Eric Taveras, Martin Richards",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 112; rendered: world_summary_c112.md \"## Sports\" C112 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00597",
+        "POP-00031"
+      ]
+    },
+    {
+      "label": "A's | rumor | (off-season) | Mark Aitken, Kevin Clark",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 112; rendered: world_summary_c112.md \"## Sports\" C112 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00003",
+        "POP-00053"
+      ]
+    },
+    {
+      "label": "A's | player-feature | (off-season) | Vinnie Keane, Benji Dillon",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 112; rendered: world_summary_c112.md \"## Sports\" C112 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00001",
+        "POP-00018"
+      ]
+    },
+    {
+      "label": "Oaks | game-result | (early-season) | AJ Dybantsa, Adash Stanley, Wendell Carter Jr, Austin Reaves",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 112; rendered: world_summary_c112.md \"## Sports\" C112 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01024",
+        "POP-01023",
+        "POP-01028",
+        "POP-01027"
+      ]
+    },
+    {
+      "label": "Oaks | season-state | (early-season) | Elias Varek",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 112; rendered: world_summary_c112.md \"## Sports\" C112 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00789"
+      ]
+    }
+  ],
+  "laneEntries": 9,
+  "angleCapHits": 0,
+  "ranAt": "2026-10-21T11:17:24.049Z"
+}

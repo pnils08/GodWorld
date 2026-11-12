@@ -1,0 +1,82 @@
+{
+  "draft": "output/cron-compare/sports_c114_anthony-raines_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "114",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "46d6a4acebd5fef8f5a7d29c790533e45195b901f8a7e23d9619fb88180585f0",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All sports stats, player lines, salaries, and front-office details perfectly match canon ground truth with no high-severity issues.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "anthony-sports-analytics-v1",
+    "packageVersion": "ANTHONY-LEP2-3",
+    "manifestId": "AM-7520b56c5dea",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "185.0",
+          "3.89",
+          "6.0",
+          "1.97",
+          "145",
+          "554",
+          "12.0",
+          "587",
+          "27",
+          "318"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Ernesto Quintero",
+      "John Ellis",
+      "Mike Paulson",
+      "Travis Coles",
+      "Vladimir Gonzalez"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0104,
+  "durationMs": 5676,
+  "parseError": false,
+  "ranAt": "2026-11-04T07:42:59.302Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 892,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "46d6a4acebd5fef8f5a7d29c790533e45195b901f8a7e23d9619fb88180585f0",
+    "costUsd": 0.0018
+  }
+}

@@ -1,0 +1,1250 @@
+{
+  "stage": "angle",
+  "desk": "culture",
+  "cycle": "114",
+  "persona": "kai-marston",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00158",
+      "name": "Kai Marston",
+      "role": "desk reporter",
+      "desk": "culture"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Benji Dillon is rising — the acts and the rooms they play",
+      "approach": "Arts & entertainment approach: this slice is the culture ledger — who is rising, who just appeared, who is fading, with their domains and neighborhoods — plus the city's culture seeds this cycle. Present-tense, neighborhood act not gallery PR. The names and trajectories are real; the garage rehearsal, the opening-night crowd, the set list are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "arts",
+        "hood": "Rockridge",
+        "facts": [
+          "Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 48, rising), last seen C105",
+          "Darrin Davis (A's player), Sports, Piedmont Ave — fame rising (fame 37, rising), last seen C108",
+          "Danny Horn (A's player), Sports, Temescal — fame rising (fame 37, rising), last seen C99",
+          "Travis Coles (A's player), Sports, Downtown — fame rising (fame 29, rising), last seen C96",
+          "CITY SEED (Citywide): Shawn Neighbor; Eric Taveras; Jada Rayes",
+          "CITY SEED (Chinatown): Niani Oakley; Victor Han; Ronald Silk · at Oakland Asian Cultural Center; Heritage Bakehouse",
+          "CITY SEED (Lake Merritt): Ximena Mehta; Mina Linas; Malot Bielo · at Merritt Club; Adams & Daughters Antiques"
+        ],
+        "priorCycle": null,
+        "note": null,
+        "engineHooks": [
+          "Multiple culture signals detected. Could be coincidence or early pattern. (arts/culture feature)",
+          "Multiple arts signals detected. Could be coincidence or early pattern. (general coverage)",
+          "First Friday: Monthly art walk tonight. Gallery openings, street vendors, neighborhood energy. Photo walk opportunity. (desk rotation)",
+          "First Friday nightlife surge expected. Restaurant and bar scene coverage available. (general coverage)"
+        ],
+        "roomIsYours": "the rehearsal space, the flyer on the pole, who showed up, what the room felt like when the second act started",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-arts",
+      "hood": "Rockridge",
+      "score": null,
+      "src": "output/beats/Cultural_Ledger.jsonl @C114",
+      "nearby": [
+        {
+          "text": "Grand Lake neighborhood texture — how residents experience the improvement | Residents of Grand Lake feel the change firsthand.",
+          "src": "output/engine_audit_c114.json patterns[5]; evidence: Initiative_Tracker row(s) 9; storyline INIT-009:announced"
+        },
+        {
+          "text": "Chinatown | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c114.md \"### Chinatown\"; events: world_summary_c114.md \"## World Events\""
+        },
+        {
+          "text": "Downtown | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c114.md \"### Downtown\"; events: world_summary_c114.md \"## World Events\""
+        },
+        {
+          "text": "East Oakland | 2 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c114.md \"### East Oakland\"; events: world_summary_c114.md \"## World Events\""
+        },
+        {
+          "text": "Lake Merritt | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c114.md \"### Lake Merritt\"; events: world_summary_c114.md \"## World Events\""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00018",
+          "name": "Benji Dillon",
+          "profile": "Benji Dillon — Pitcher, Oakland A's Legend — Rockridge",
+          "role": "Pitcher, Oakland A's Legend",
+          "hood": "Rockridge",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C114",
+            "pop": "POP-00018",
+            "rowName": "Benji Dillon",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00021",
+          "name": "Darrin Davis",
+          "profile": "Darrin Davis — Left Fielder, Oakland A's Legend — Piedmont Ave",
+          "role": "Left Fielder, Oakland A's Legend",
+          "hood": "Piedmont Ave",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C114",
+            "pop": "POP-00021",
+            "rowName": "Darrin Davis",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00022",
+          "name": "Danny Horn",
+          "profile": "Danny Horn — Center Fielder, Oakland A's - Best player in the MLB — Temescal",
+          "role": "Center Fielder, Oakland A's - Best player in the MLB",
+          "hood": "Temescal",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C114",
+            "pop": "POP-00022",
+            "rowName": "Danny Horn",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00533",
+          "name": "Travis Coles",
+          "profile": "Travis Coles — Starting Pitcher, Oakland A's — Downtown",
+          "role": "Starting Pitcher, Oakland A's",
+          "hood": "Downtown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C114",
+            "pop": "POP-00533",
+            "rowName": "Travis Coles",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00746",
+          "name": "Shawn Neighbor",
+          "profile": "Shawn Neighbor — Construction laborer — Fruitvale",
+          "role": "Construction laborer",
+          "hood": "Fruitvale",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C114",
+            "pop": "POP-00746",
+            "rowName": "Shawn Neighbor",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00597",
+          "name": "Eric Taveras",
+          "profile": "Eric Taveras — Second Baseman, Oakland A's — Downtown",
+          "role": "Second Baseman, Oakland A's",
+          "hood": "Downtown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C114",
+            "pop": "POP-00597",
+            "rowName": "Eric Taveras",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00773",
+          "name": "Jada Rayes",
+          "profile": "Jada Rayes — Editor-in-Chief, OakTown Echo — West Oakland",
+          "role": "Editor-in-Chief, OakTown Echo",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C114",
+            "pop": "POP-00773",
+            "rowName": "Jada Rayes",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00126",
+          "name": "Orion Kerkering",
+          "profile": "Orion Kerkering — Retired former As — Lake Merritt",
+          "role": "Retired former As",
+          "hood": "Lake Merritt",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C114",
+            "pop": "POP-00126",
+            "rowName": "Orion Kerkering",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00951",
+          "name": "Niani Oakley",
+          "profile": "Niani Oakley — Plumber — Chinatown",
+          "role": "Plumber",
+          "hood": "Chinatown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C114",
+            "pop": "POP-00951",
+            "rowName": "Niani Oakley",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00151",
+          "name": "Victor Han",
+          "profile": "Victor Han — PROBATION & REENTRY DIRECTOR — Chinatown",
+          "role": "PROBATION & REENTRY DIRECTOR",
+          "hood": "Chinatown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C114",
+            "pop": "POP-00151",
+            "rowName": "Victor Han",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00647",
+          "name": "Ronald Silk",
+          "profile": "Ronald Silk — Electrician — Chinatown",
+          "role": "Electrician",
+          "hood": "Chinatown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C114",
+            "pop": "POP-00647",
+            "rowName": "Ronald Silk",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00117",
+          "name": "Babe Bradford",
+          "profile": "Babe Bradford — First Base Coach, Oakland A's — Chinatown",
+          "role": "First Base Coach, Oakland A's",
+          "hood": "Chinatown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C114",
+            "pop": "POP-00117",
+            "rowName": "Babe Bradford",
+            "kind": "slice-row"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C114",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-4261fa115617"
+      },
+      {
+        "t": "FACT",
+        "text": "31 culture figures rising; 0 new on the record",
+        "src": "output/beats/Cultural_Ledger.jsonl @C114",
+        "id": "F-590786b3f248"
+      },
+      {
+        "t": "FACT",
+        "text": "Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 48, rising), last seen C105.",
+        "src": "output/beats/Cultural_Ledger.jsonl @C114",
+        "id": "F-78a73baebc9b"
+      },
+      {
+        "t": "FACT",
+        "text": "Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 48, rising), last seen C105",
+        "src": "output/beats/Cultural_Ledger.jsonl @C114",
+        "id": "F-a45f74fce772"
+      },
+      {
+        "t": "FACT",
+        "text": "Darrin Davis (A's player), Sports, Piedmont Ave — fame rising (fame 37, rising), last seen C108",
+        "src": "output/beats/Cultural_Ledger.jsonl @C114",
+        "id": "F-46a55c0910d1"
+      },
+      {
+        "t": "FACT",
+        "text": "Danny Horn (A's player), Sports, Temescal — fame rising (fame 37, rising), last seen C99",
+        "src": "output/beats/Cultural_Ledger.jsonl @C114",
+        "id": "F-5a6a9eeb0dcc"
+      },
+      {
+        "t": "FACT",
+        "text": "Travis Coles (A's player), Sports, Downtown — fame rising (fame 29, rising), last seen C96",
+        "src": "output/beats/Cultural_Ledger.jsonl @C114",
+        "id": "F-17642c41860e"
+      },
+      {
+        "t": "FACT",
+        "text": "CITY SEED (Citywide): Shawn Neighbor; Eric Taveras; Jada Rayes",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C114",
+        "id": "F-2096623fa04e"
+      },
+      {
+        "t": "FACT",
+        "text": "CITY SEED (Chinatown): Niani Oakley; Victor Han; Ronald Silk · at Oakland Asian Cultural Center; Heritage Bakehouse",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C114",
+        "id": "F-cac5828c3ccf"
+      },
+      {
+        "t": "FACT",
+        "text": "CITY SEED (Lake Merritt): Ximena Mehta; Mina Linas; Malot Bielo · at Merritt Club; Adams & Daughters Antiques",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C114",
+        "id": "F-4978108ce9d0"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "named",
+    "candidates": [
+      {
+        "pop": "POP-00018",
+        "name": "Benji Dillon",
+        "role": "Pitcher, Oakland A's Legend",
+        "hood": "Rockridge",
+        "profile": "Benji Dillon — Pitcher, Oakland A's Legend — Rockridge",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C114",
+          "pop": "POP-00018",
+          "rowName": "Benji Dillon",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00021",
+        "name": "Darrin Davis",
+        "role": "Left Fielder, Oakland A's Legend",
+        "hood": "Piedmont Ave",
+        "profile": "Darrin Davis — Left Fielder, Oakland A's Legend — Piedmont Ave",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C114",
+          "pop": "POP-00021",
+          "rowName": "Darrin Davis",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00022",
+        "name": "Danny Horn",
+        "role": "Center Fielder, Oakland A's - Best player in the MLB",
+        "hood": "Temescal",
+        "profile": "Danny Horn — Center Fielder, Oakland A's - Best player in the MLB — Temescal",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C114",
+          "pop": "POP-00022",
+          "rowName": "Danny Horn",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00533",
+        "name": "Travis Coles",
+        "role": "Starting Pitcher, Oakland A's",
+        "hood": "Downtown",
+        "profile": "Travis Coles — Starting Pitcher, Oakland A's — Downtown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C114",
+          "pop": "POP-00533",
+          "rowName": "Travis Coles",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00746",
+        "name": "Shawn Neighbor",
+        "role": "Construction laborer",
+        "hood": "Fruitvale",
+        "profile": "Shawn Neighbor — Construction laborer — Fruitvale",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C114",
+          "pop": "POP-00746",
+          "rowName": "Shawn Neighbor",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00597",
+        "name": "Eric Taveras",
+        "role": "Second Baseman, Oakland A's",
+        "hood": "Downtown",
+        "profile": "Eric Taveras — Second Baseman, Oakland A's — Downtown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C114",
+          "pop": "POP-00597",
+          "rowName": "Eric Taveras",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00773",
+        "name": "Jada Rayes",
+        "role": "Editor-in-Chief, OakTown Echo",
+        "hood": "West Oakland",
+        "profile": "Jada Rayes — Editor-in-Chief, OakTown Echo — West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C114",
+          "pop": "POP-00773",
+          "rowName": "Jada Rayes",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00126",
+        "name": "Orion Kerkering",
+        "role": "Retired former As",
+        "hood": "Lake Merritt",
+        "profile": "Orion Kerkering — Retired former As — Lake Merritt",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C114",
+          "pop": "POP-00126",
+          "rowName": "Orion Kerkering",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00951",
+        "name": "Niani Oakley",
+        "role": "Plumber",
+        "hood": "Chinatown",
+        "profile": "Niani Oakley — Plumber — Chinatown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C114",
+          "pop": "POP-00951",
+          "rowName": "Niani Oakley",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00151",
+        "name": "Victor Han",
+        "role": "PROBATION & REENTRY DIRECTOR",
+        "hood": "Chinatown",
+        "profile": "Victor Han — PROBATION & REENTRY DIRECTOR — Chinatown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C114",
+          "pop": "POP-00151",
+          "rowName": "Victor Han",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00647",
+        "name": "Ronald Silk",
+        "role": "Electrician",
+        "hood": "Chinatown",
+        "profile": "Ronald Silk — Electrician — Chinatown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C114",
+          "pop": "POP-00647",
+          "rowName": "Ronald Silk",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00117",
+        "name": "Babe Bradford",
+        "role": "First Base Coach, Oakland A's",
+        "hood": "Chinatown",
+        "profile": "Babe Bradford — First Base Coach, Oakland A's — Chinatown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C114",
+          "pop": "POP-00117",
+          "rowName": "Babe Bradford",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01039",
+        "name": "Ximena Mehta",
+        "role": "Bart Transit PR",
+        "hood": "Lake Merritt",
+        "profile": "Ximena Mehta — Bart Transit PR — Lake Merritt",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C114",
+          "pop": "POP-01039",
+          "rowName": "Ximena Mehta",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00135",
+        "name": "Mina Linas",
+        "role": "Sea Level Monitoring Technician",
+        "hood": "Lake Merritt",
+        "profile": "Mina Linas — Sea Level Monitoring Technician — Lake Merritt",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C114",
+          "pop": "POP-00135",
+          "rowName": "Mina Linas",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00293",
+        "name": "Malot Bielo",
+        "role": "Warehouse worker",
+        "hood": "Lake Merritt",
+        "profile": "Malot Bielo — Warehouse worker — Lake Merritt",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C114",
+          "pop": "POP-00293",
+          "rowName": "Malot Bielo",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00012",
+        "name": "Elliot Graye",
+        "role": "Journalist, Ethics & Faith Journalist",
+        "hood": "Lake Merritt",
+        "profile": "Elliot Graye — Journalist, Ethics & Faith Journalist — Lake Merritt",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C114",
+          "pop": "POP-00012",
+          "rowName": "Elliot Graye",
+          "kind": "slice-row"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Kai Marston",
+    "popid": "POP-00158"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-arts",
+      "angle": "Benji Dillon is rising — the acts and the rooms they play",
+      "label": "31 culture figures rising; 0 new on the record",
+      "hookLine": "Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 48, rising), last seen C105.",
+      "hood": "Rockridge",
+      "citizens": [
+        "Benji Dillon (POP-00018)",
+        "Darrin Davis (POP-00021)",
+        "Danny Horn (POP-00022)",
+        "Travis Coles (POP-00533)",
+        "Shawn Neighbor (POP-00746)",
+        "Eric Taveras (POP-00597)",
+        "Jada Rayes (POP-00773)",
+        "Orion Kerkering (POP-00126)",
+        "Niani Oakley (POP-00951)",
+        "Victor Han (POP-00151)",
+        "Ronald Silk (POP-00647)",
+        "Babe Bradford (POP-00117)",
+        "Ximena Mehta (POP-01039)",
+        "Mina Linas (POP-00135)",
+        "Malot Bielo (POP-00293)",
+        "Elliot Graye (POP-00012)"
+      ],
+      "popids": [
+        "POP-00018",
+        "POP-00021",
+        "POP-00022",
+        "POP-00533",
+        "POP-00746",
+        "POP-00597",
+        "POP-00773",
+        "POP-00126",
+        "POP-00951",
+        "POP-00151",
+        "POP-00647",
+        "POP-00117",
+        "POP-01039",
+        "POP-00135",
+        "POP-00293",
+        "POP-00012"
+      ],
+      "ref": "output/beats/Cultural_Ledger.jsonl @C114",
+      "cycle": 114
+    },
+    "approach": "Arts & entertainment approach: this slice is the culture ledger — who is rising, who just appeared, who is fading, with their domains and neighborhoods — plus the city's culture seeds this cycle. Present-tense, neighborhood act not gallery PR. The names and trajectories are real; the garage rehearsal, the opening-night crowd, the set list are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": {
+    "pulse": {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Vinnie Keane at Grand Avenue Wine Bar (Lake Merritt)",
+      "named": "Grand Avenue Wine Bar",
+      "hood": "Lake Merritt",
+      "person": "Vinnie Keane",
+      "venue": "Grand Avenue Wine Bar"
+    },
+    "recommend": {
+      "bag": "ground",
+      "slug": "maria-keen",
+      "name": "Maria Keen",
+      "popid": "POP-00013",
+      "bagDoc": "docs/media/MARIA_GROUND_BAG.md",
+      "reason": "top pulse fame-sighting → ground",
+      "pulseClass": "fame-sighting",
+      "pulseLabel": "Vinnie Keane at Grand Avenue Wine Bar (Lake Merritt)"
+    },
+    "prewrite": {
+      "pulseClass": "city-event",
+      "angle": "Arts/cultural event: Downtown Plaza Noon Music Session — present-tense room, not calendar filler",
+      "hookLine": "Downtown Plaza Noon Music Session is on the evening board.",
+      "anchorFacts": [
+        "NAMED: Downtown Plaza Noon Music Session",
+        "EVENT: Downtown Plaza Noon Music Session",
+        "ARTS SIGNAL: yes"
+      ],
+      "bagRecommend": "ground",
+      "bagSlug": "maria-keen"
+    },
+    "texture": {
+      "famous": [
+        "Vinnie Keane",
+        "Henry Rivas",
+        "Kai Tanaka"
+      ],
+      "restaurants": [
+        {
+          "name": "Grand Avenue Wine Bar",
+          "hood": "Lake Merritt"
+        },
+        {
+          "name": "Montclair Patisserie",
+          "hood": "Piedmont Ave"
+        },
+        {
+          "name": "Green & Gold Tavern",
+          "hood": "Jack London"
+        }
+      ],
+      "fastFood": [
+        {
+          "name": "SpeedyBurger",
+          "hood": "Downtown"
+        }
+      ],
+      "nightlife": [
+        {
+          "name": "Bridge & Barrel",
+          "hood": "Jack London"
+        },
+        {
+          "name": "Temple Lounge",
+          "hood": "Downtown"
+        },
+        {
+          "name": "Canvas Club",
+          "hood": "Temescal"
+        }
+      ],
+      "nightlifeMeta": {
+        "volume": 5,
+        "vibe": "art-scene",
+        "movement": "art-walk",
+        "weatherImpact": 1
+      },
+      "cityEvents": [
+        "The Aitken Line Founding Celebration",
+        "Downtown Plaza Noon Music Session",
+        "Downtown First Friday Live Music",
+        "KONO First Friday Gallery Hop"
+      ],
+      "tv": [
+        "Gallery Hour",
+        "Crisis Desk",
+        "Spring Lineup",
+        "Jack London Ballpark Stories",
+        "Wendell Carter Jr (C) — Player Profile"
+      ],
+      "movies": [
+        "Art of the City",
+        "New Bloom",
+        "Franchise"
+      ],
+      "sportsBroadcast": "Oakland Sports Tonight",
+      "streamingTrend": "arts documentaries",
+      "foodTrend": "First Friday arts district dining - gallery crowd"
+    },
+    "signals": {
+      "fameCount": 8,
+      "sightingCount": 3,
+      "sightings": [
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Vinnie Keane spotted at Grand Avenue Wine Bar",
+          "name": "Vinnie Keane",
+          "venue": "Grand Avenue Wine Bar",
+          "ref": "Ripple_Ledger cycle 114 (CauseType lifestyle-sighting); rendered: world_summary_c114.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Lake Merritt",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Henry Rivas spotted at Calderon-Nishi",
+          "name": "Henry Rivas",
+          "venue": "Calderon-Nishi",
+          "ref": "Ripple_Ledger cycle 114 (CauseType lifestyle-sighting); rendered: world_summary_c114.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Temescal",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Kai Tanaka spotted at Temescal Urgent Care",
+          "name": "Kai Tanaka",
+          "venue": "Temescal Urgent Care",
+          "ref": "Ripple_Ledger cycle 114 (CauseType lifestyle-sighting); rendered: world_summary_c114.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Temescal",
+          "popids": []
+        }
+      ]
+    },
+    "scene": {
+      "venues": [
+        {
+          "name": "Grand Avenue Wine Bar",
+          "hood": "Lake Merritt"
+        },
+        {
+          "name": "Montclair Patisserie",
+          "hood": "Piedmont Ave"
+        },
+        {
+          "name": "Green & Gold Tavern",
+          "hood": "Jack London"
+        },
+        {
+          "name": "SpeedyBurger",
+          "hood": "Downtown"
+        },
+        {
+          "name": "Bridge & Barrel",
+          "hood": "Jack London"
+        },
+        {
+          "name": "Temple Lounge",
+          "hood": "Downtown"
+        },
+        {
+          "name": "Canvas Club",
+          "hood": "Temescal"
+        }
+      ],
+      "nightlifeMeta": {
+        "volume": 5,
+        "vibe": "art-scene",
+        "movement": "art-walk",
+        "weatherImpact": 1
+      },
+      "cityEvents": [
+        "The Aitken Line Founding Celebration",
+        "Downtown Plaza Noon Music Session",
+        "Downtown First Friday Live Music",
+        "KONO First Friday Gallery Hop"
+      ],
+      "tv": [
+        "Gallery Hour",
+        "Crisis Desk",
+        "Spring Lineup",
+        "Jack London Ballpark Stories",
+        "Wendell Carter Jr (C) — Player Profile"
+      ],
+      "movies": [
+        "Art of the City",
+        "New Bloom",
+        "Franchise"
+      ],
+      "colorRoom": "Named places only from Evening Texture / desk_signal.  Sensory room (weather, light, sound) is free; careers and employees are not."
+    },
+    "candidates": [
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Vinnie Keane at Grand Avenue Wine Bar (Lake Merritt)",
+        "named": "Grand Avenue Wine Bar",
+        "hood": "Lake Merritt"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Henry Rivas at Calderon-Nishi (Temescal)",
+        "named": "Calderon-Nishi",
+        "hood": "Temescal"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Kai Tanaka at Temescal Urgent Care (Temescal)",
+        "named": "Temescal Urgent Care",
+        "hood": "Temescal"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Grand Avenue Wine Bar (Lake Merritt)",
+        "named": "Grand Avenue Wine Bar",
+        "hood": "Lake Merritt"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Montclair Patisserie (Piedmont Ave)",
+        "named": "Montclair Patisserie",
+        "hood": "Piedmont Ave"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Green & Gold Tavern (Jack London)",
+        "named": "Green & Gold Tavern",
+        "hood": "Jack London"
+      },
+      {
+        "className": "nightlife-spot",
+        "score": 18,
+        "label": "Bridge & Barrel (Jack London)",
+        "named": "Bridge & Barrel",
+        "hood": "Jack London"
+      },
+      {
+        "className": "nightlife-spot",
+        "score": 18,
+        "label": "Temple Lounge (Downtown)",
+        "named": "Temple Lounge",
+        "hood": "Downtown"
+      }
+    ],
+    "perSeat": {
+      "mason-ortega": {
+        "pulseClass": "named-restaurant",
+        "label": "Grand Avenue Wine Bar (Lake Merritt)",
+        "score": 34,
+        "bag": "kitchen"
+      },
+      "kai-marston": {
+        "pulseClass": "city-event",
+        "label": "Downtown Plaza Noon Music Session",
+        "score": 31,
+        "bag": "arts"
+      },
+      "sharon-okafor": {
+        "pulseClass": "fame-sighting",
+        "label": "Vinnie Keane at Grand Avenue Wine Bar (Lake Merritt)",
+        "score": 31,
+        "bag": "lifestyle"
+      },
+      "maria-keen": {
+        "pulseClass": "fame-sighting",
+        "label": "Vinnie Keane at Grand Avenue Wine Bar (Lake Merritt)",
+        "score": 31,
+        "bag": "ground"
+      },
+      "elliot-graye": {
+        "pulseClass": "fame-sighting",
+        "label": "Vinnie Keane at Grand Avenue Wine Bar (Lake Merritt)",
+        "score": 31,
+        "bag": "faith"
+      }
+    }
+  },
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "ARTS-SLICE-1",
+    "kind": "beat-arts",
+    "seat": {
+      "slug": "kai-marston",
+      "name": "Kai Marston",
+      "popid": "POP-00158",
+      "desk": "culture",
+      "domain": "arts",
+      "builder": "buildArtsSlice.js"
+    },
+    "hood": "Rockridge",
+    "pulse": {
+      "className": "beat-arts",
+      "score": 100,
+      "label": "31 culture figures rising; 0 new on the record",
+      "hood": "Rockridge",
+      "source": "output/beats/Cultural_Ledger.jsonl @C114"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "Benji Dillon is rising — the acts and the rooms they play",
+      "hookLine": "Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 48, rising), last seen C105.",
+      "anchorFacts": [
+        "Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 48, rising), last seen C105",
+        "Darrin Davis (A's player), Sports, Piedmont Ave — fame rising (fame 37, rising), last seen C108",
+        "Danny Horn (A's player), Sports, Temescal — fame rising (fame 37, rising), last seen C99",
+        "Travis Coles (A's player), Sports, Downtown — fame rising (fame 29, rising), last seen C96",
+        "CITY SEED (Citywide): Shawn Neighbor; Eric Taveras; Jada Rayes",
+        "CITY SEED (Chinatown): Niani Oakley; Victor Han; Ronald Silk · at Oakland Asian Cultural Center; Heritage Bakehouse",
+        "CITY SEED (Lake Merritt): Ximena Mehta; Mina Linas; Malot Bielo · at Merritt Club; Adams & Daughters Antiques"
+      ],
+      "evidence": [
+        {
+          "text": "Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 48, rising), last seen C105",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114"
+        },
+        {
+          "text": "Darrin Davis (A's player), Sports, Piedmont Ave — fame rising (fame 37, rising), last seen C108",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114"
+        },
+        {
+          "text": "Danny Horn (A's player), Sports, Temescal — fame rising (fame 37, rising), last seen C99",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114"
+        },
+        {
+          "text": "Travis Coles (A's player), Sports, Downtown — fame rising (fame 29, rising), last seen C96",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114"
+        },
+        {
+          "text": "CITY SEED (Citywide): Shawn Neighbor; Eric Taveras; Jada Rayes",
+          "src": "output/beats/Story_Seed_Deck.jsonl @C114"
+        },
+        {
+          "text": "CITY SEED (Chinatown): Niani Oakley; Victor Han; Ronald Silk · at Oakland Asian Cultural Center; Heritage Bakehouse",
+          "src": "output/beats/Story_Seed_Deck.jsonl @C114"
+        },
+        {
+          "text": "CITY SEED (Lake Merritt): Ximena Mehta; Mina Linas; Malot Bielo · at Merritt Club; Adams & Daughters Antiques",
+          "src": "output/beats/Story_Seed_Deck.jsonl @C114"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": null,
+      "hooks": [
+        {
+          "text": "Multiple culture signals detected. Could be coincidence or early pattern.",
+          "angle": "arts/culture feature",
+          "domain": "CULTURE",
+          "hood": null,
+          "priority": 2
+        },
+        {
+          "text": "Multiple arts signals detected. Could be coincidence or early pattern.",
+          "angle": "general coverage",
+          "domain": "ARTS",
+          "hood": null,
+          "priority": 2
+        },
+        {
+          "text": "First Friday: Monthly art walk tonight. Gallery openings, street vendors, neighborhood energy. Photo walk opportunity.",
+          "angle": "desk rotation",
+          "domain": "CULTURE",
+          "hood": "Uptown",
+          "priority": 2
+        },
+        {
+          "text": "First Friday nightlife surge expected. Restaurant and bar scene coverage available.",
+          "angle": "general coverage",
+          "domain": "NIGHTLIFE",
+          "hood": "KONO",
+          "priority": 1
+        }
+      ],
+      "note": null,
+      "pageVoices": [],
+      "roomIsYours": "the rehearsal space, the flyer on the pole, who showed up, what the room felt like when the second act started"
+    },
+    "citizens": [
+      {
+        "popid": "POP-00018",
+        "name": "Benji Dillon",
+        "role": "Pitcher, Oakland A's Legend",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Benji Dillon — Pitcher, Oakland A's Legend — Rockridge",
+        "why": "fame rising (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-00021",
+        "name": "Darrin Davis",
+        "role": "Left Fielder, Oakland A's Legend",
+        "neighborhood": "Piedmont Ave",
+        "business": null,
+        "profile": "Darrin Davis — Left Fielder, Oakland A's Legend — Piedmont Ave",
+        "why": "fame rising (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-00022",
+        "name": "Danny Horn",
+        "role": "Center Fielder, Oakland A's - Best player in the MLB",
+        "neighborhood": "Temescal",
+        "business": null,
+        "profile": "Danny Horn — Center Fielder, Oakland A's - Best player in the MLB — Temescal",
+        "why": "fame rising (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-00533",
+        "name": "Travis Coles",
+        "role": "Starting Pitcher, Oakland A's",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Travis Coles — Starting Pitcher, Oakland A's — Downtown",
+        "why": "fame rising (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-00746",
+        "name": "Shawn Neighbor",
+        "role": "Construction laborer",
+        "neighborhood": "Fruitvale",
+        "business": null,
+        "profile": "Shawn Neighbor — Construction laborer — Fruitvale",
+        "why": "culture seed this cycle (Story_Seed_Deck)"
+      },
+      {
+        "popid": "POP-00597",
+        "name": "Eric Taveras",
+        "role": "Second Baseman, Oakland A's",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Eric Taveras — Second Baseman, Oakland A's — Downtown",
+        "why": "culture seed this cycle (Story_Seed_Deck)"
+      },
+      {
+        "popid": "POP-00773",
+        "name": "Jada Rayes",
+        "role": "Editor-in-Chief, OakTown Echo",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "Jada Rayes — Editor-in-Chief, OakTown Echo — West Oakland",
+        "why": "culture seed this cycle (Story_Seed_Deck)"
+      },
+      {
+        "popid": "POP-00126",
+        "name": "Orion Kerkering",
+        "role": "Retired former As",
+        "neighborhood": "Lake Merritt",
+        "business": null,
+        "profile": "Orion Kerkering — Retired former As — Lake Merritt",
+        "why": "culture seed this cycle (Story_Seed_Deck)"
+      },
+      {
+        "popid": "POP-00951",
+        "name": "Niani Oakley",
+        "role": "Plumber",
+        "neighborhood": "Chinatown",
+        "business": null,
+        "profile": "Niani Oakley — Plumber — Chinatown",
+        "why": "culture seed this cycle (Story_Seed_Deck)"
+      },
+      {
+        "popid": "POP-00151",
+        "name": "Victor Han",
+        "role": "PROBATION & REENTRY DIRECTOR",
+        "neighborhood": "Chinatown",
+        "business": null,
+        "profile": "Victor Han — PROBATION & REENTRY DIRECTOR — Chinatown",
+        "why": "culture seed this cycle (Story_Seed_Deck)"
+      },
+      {
+        "popid": "POP-00647",
+        "name": "Ronald Silk",
+        "role": "Electrician",
+        "neighborhood": "Chinatown",
+        "business": null,
+        "profile": "Ronald Silk — Electrician — Chinatown",
+        "why": "culture seed this cycle (Story_Seed_Deck)"
+      },
+      {
+        "popid": "POP-00117",
+        "name": "Babe Bradford",
+        "role": "First Base Coach, Oakland A's",
+        "neighborhood": "Chinatown",
+        "business": null,
+        "profile": "Babe Bradford — First Base Coach, Oakland A's — Chinatown",
+        "why": "culture seed this cycle (Story_Seed_Deck)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Cultural_Ledger.jsonl @C114",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Kai Marston this cycle)"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Kai Marston",
+    "popid": "POP-00158",
+    "text": "I'm going to follow up on Benji Dillon, who's rising in fame in Rockridge. I'll check in with him and see what's behind his growing presence in the neighborhood.",
+    "plan": {
+      "chase": "I'm going to follow up on Benji Dillon, who's rising in fame in Rockridge. I'll check in with him and see what's behind his growing presence in the neighborhood.",
+      "focus": "Benji Dillon's rising fame",
+      "why": "Benji Dillon is a notable figure in Rockridge, and his increasing fame could be an interesting story for the community.",
+      "checks": [
+        "Verify Benji Dillon's current activities",
+        "Assess the impact of his rising fame on the Rockridge community"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00018",
+          "question": "What's behind Benji Dillon's growing presence in Rockridge?",
+          "basis": "Benji Dillon is a rising figure in Rockridge"
+        }
+      ],
+      "interpretation": "Benji Dillon's rising fame could be a story worth exploring, potentially highlighting the intersection of sports and community in Rockridge.",
+      "unverifiedLead": [
+        "Benji Dillon might be involved in local events or charities",
+        "His rising fame could be influencing local businesses or cultural activities"
+      ],
+      "closeQuestion": "How is Benji Dillon's rising fame affecting the Rockridge community?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Grand Lake neighborhood texture — how residents experience the improvement | Residents of Grand Lake feel the change firsthand.",
+      "kind": "anomaly",
+      "hood": "Grand Lake",
+      "ref": "output/engine_audit_c114.json patterns[5]; evidence: Initiative_Tracker row(s) 9; storyline INIT-009:announced",
+      "popids": [
+        "POP-00001",
+        "POP-01049",
+        "POP-01218"
+      ]
+    },
+    {
+      "label": "Chinatown | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Chinatown",
+      "ref": "output/neighborhood_texture_c114.md \"### Chinatown\"; events: world_summary_c114.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Downtown | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Downtown",
+      "ref": "output/neighborhood_texture_c114.md \"### Downtown\"; events: world_summary_c114.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "East Oakland | 2 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "East Oakland",
+      "ref": "output/neighborhood_texture_c114.md \"### East Oakland\"; events: world_summary_c114.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Lake Merritt | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Lake Merritt",
+      "ref": "output/neighborhood_texture_c114.md \"### Lake Merritt\"; events: world_summary_c114.md \"## World Events\"",
+      "popids": []
+    }
+  ],
+  "laneEntries": 28,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-06T12:15:59.573Z"
+}

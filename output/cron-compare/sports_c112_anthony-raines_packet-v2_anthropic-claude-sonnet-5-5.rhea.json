@@ -1,0 +1,76 @@
+{
+  "draft": "output/cron-compare/sports_c112_anthony-raines_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "112",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "4926594fa9f6538b597b7ba12570b15402570068209c2fc14f559c3bc5f5e68d",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Clean analytics piece rigorously grounded in supplied feed lines and TrueSource player cards with no unverified claims or fabricated quotes.",
+  "review": {
+    "profileId": "anthony-sports-analytics-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "anthony-sports-analytics-v1",
+    "packageVersion": "ANTHONY-LEP2-3",
+    "manifestId": "AM-4c78c1506f62",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "11",
+          "579",
+          "2039",
+          "21.3",
+          "500"
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [
+      "Kevin Clark",
+      "Mark Aitken"
+    ],
+    "unverified": [
+      "For Aitken",
+      "Kevin Clarks"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0098,
+  "durationMs": 7580,
+  "parseError": false,
+  "ranAt": "2026-10-19T23:19:58.354Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 934,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "4926594fa9f6538b597b7ba12570b15402570068209c2fc14f559c3bc5f5e68d",
+    "costUsd": 0.0063
+  }
+}

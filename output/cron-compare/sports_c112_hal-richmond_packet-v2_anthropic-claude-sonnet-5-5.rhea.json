@@ -1,0 +1,79 @@
+{
+  "draft": "output/cron-compare/sports_c112_hal-richmond_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "112",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "9db88d6f462a20e2b0a157b294e7eebdd12d95d6c5a98d541a3a7b63358ea2af",
+  "pass": true,
+  "advisory": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All roster facts, biographical data, and statistical claims match canon and ground truth with authorized archive texture.",
+  "review": {
+    "profileId": "hal-richmond-archive-v2",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "hal-richmond-archive-v2",
+    "packageVersion": "HAL-LEP2-3",
+    "manifestId": "AM-04d826843934",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "2009",
+          "2021",
+          "2038",
+          "3.2",
+          "0.9",
+          "500"
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [
+      "Kevin Clark",
+      "Mark Aitken"
+    ],
+    "unverified": [
+      "Community Liaison",
+      "Gold Glove",
+      "Player Rep"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0106,
+  "durationMs": 6073,
+  "parseError": false,
+  "ranAt": "2026-10-24T17:00:50.317Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 800",
+    "words": 982,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "9db88d6f462a20e2b0a157b294e7eebdd12d95d6c5a98d541a3a7b63358ea2af",
+    "costUsd": 0.002
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "status": "ungated-sample",
+  "desk": "culture",
+  "cycle": "114",
+  "persona": "kai-marston",
+  "byline": "Kai Marston",
+  "bylinePopid": "POP-00158",
+  "article": "output/test-shell/20261111-012443-kai-marston-live/samples/culture_c114_kai-marston_packet-v2_anthropic-claude-haiku-5-5.sample.md",
+  "quotesLanded": 4,
+  "note": "UNGATED sample (--no-gate, S332): writer+quotes ran on raw API; the Rhea gate was skipped (needs subscription). NOT canon, review-only.",
+  "builtAt": "2026-11-11T07:25:08.672Z"
+}

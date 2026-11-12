@@ -1,0 +1,571 @@
+[
+  {
+    "pop": "POP-00001",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00001\",\"name\":\"Vinnie Keane\",\"role\":\"Designated Hitter, Oakland A's Legend\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Celeste Tran\",\"question\":\"How does Vinnie Keane feel about the A's' influence on the community? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-trends\",\"hood\":\"Grand Lake\",\"focus\":\"The A's and community engagement in West Oakland\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake\",\"evidence\":[{\"id\":\"EV-a74e3611c4\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\",\"text\":\"Vinnie Keane — gained 1 mention this cycle (6 total), stable. The trend is the story; the mood is yours.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Vinnie Keane gained 1 mention this cycle (6 total); West Oakland moves the most\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\",\"id\":\"F-c3f5b6e254d9\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane — gained 1 mention this cycle (6 total), stable. The trend is the story; the mood is yours.\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\",\"id\":\"F-72f244cb2861\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane (A's player), Sports — gained 1 mention this cycle (6 total), stable, fame 48\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114 vs output/beats/prev/Cultural_Ledger.jsonl @C113\",\"id\":\"F-6b2e8c08f776\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C114\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4261fa115617\"},{\"t\":\"FACT\",\"text\":\"Henry Rivas (A's player), Sports — gained 1 mention this cycle (3 total), stable, fame 23\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114 vs output/beats/prev/Cultural_Ledger.jsonl @C113\",\"id\":\"F-ac93343c8ada\"},{\"t\":\"FACT\",\"text\":\"Kai Tanaka (artist), Arts — gained 1 mention this cycle (2 total), stable, fame 1\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114 vs output/beats/prev/Cultural_Ledger.jsonl @C113\",\"id\":\"F-eef7400adb8d\"},{\"t\":\"FACT\",\"text\":\"Movement vs C113: West Oakland +19 people, Grand Lake +10 people, Chinatown +10 people, Adams Point +7 people, Temescal +6 people\",\"src\":\"output/beats/prev/Neighborhood_Demographics.jsonl vs current @C114\",\"id\":\"F-a7781c96a850\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake\",\"src\":\"Simulation_Ledger profile for POP-00001\",\"id\":\"F-2b3e2e3d075f\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C10, Spring, holiday=none\",\"src\":\"output/world_summary_c114.md Calendar context (Simulation_Calendar)\",\"id\":\"F-9b9470803821\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00001",
+        "name": "Vinnie Keane",
+        "role": "Designated Hitter, Oakland A's Legend",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Celeste Tran",
+        "question": "How does Vinnie Keane feel about the A's' influence on the community? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-trends",
+        "hood": "Grand Lake",
+        "focus": "The A's and community engagement in West Oakland",
+        "src": "output/beats/Cultural_Ledger.jsonl @C114"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+        "evidence": [
+          {
+            "id": "EV-a74e3611c4",
+            "src": "output/beats/Cultural_Ledger.jsonl @C114",
+            "text": "Vinnie Keane — gained 1 mention this cycle (6 total), stable. The trend is the story; the mood is yours."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane gained 1 mention this cycle (6 total); West Oakland moves the most",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114",
+          "id": "F-c3f5b6e254d9"
+        },
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane — gained 1 mention this cycle (6 total), stable. The trend is the story; the mood is yours.",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114",
+          "id": "F-72f244cb2861"
+        },
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane (A's player), Sports — gained 1 mention this cycle (6 total), stable, fame 48",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114 vs output/beats/prev/Cultural_Ledger.jsonl @C113",
+          "id": "F-6b2e8c08f776"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C114",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4261fa115617"
+        },
+        {
+          "t": "FACT",
+          "text": "Henry Rivas (A's player), Sports — gained 1 mention this cycle (3 total), stable, fame 23",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114 vs output/beats/prev/Cultural_Ledger.jsonl @C113",
+          "id": "F-ac93343c8ada"
+        },
+        {
+          "t": "FACT",
+          "text": "Kai Tanaka (artist), Arts — gained 1 mention this cycle (2 total), stable, fame 1",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114 vs output/beats/prev/Cultural_Ledger.jsonl @C113",
+          "id": "F-eef7400adb8d"
+        },
+        {
+          "t": "FACT",
+          "text": "Movement vs C113: West Oakland +19 people, Grand Lake +10 people, Chinatown +10 people, Adams Point +7 people, Temescal +6 people",
+          "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C114",
+          "id": "F-a7781c96a850"
+        },
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+          "src": "Simulation_Ledger profile for POP-00001",
+          "id": "F-2b3e2e3d075f"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C10, Spring, holiday=none",
+          "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+          "id": "F-9b9470803821"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00024",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00024\",\"name\":\"Henry Rivas\",\"role\":\"Starting Pitcher, Oakland A's\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Celeste Tran\",\"question\":\"What's Henry Rivas' perspective on the A's' role in West Oakland? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-trends\",\"hood\":\"Grand Lake\",\"focus\":\"The A's and community engagement in West Oakland\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Henry Rivas — Starting Pitcher, Oakland A's — West Oakland\",\"evidence\":[{\"id\":\"EV-4f9be648b2\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\",\"text\":\"Vinnie Keane — gained 1 mention this cycle (6 total), stable. The trend is the story; the mood is yours.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Henry Rivas (A's player), Sports — gained 1 mention this cycle (3 total), stable, fame 23\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114 vs output/beats/prev/Cultural_Ledger.jsonl @C113\",\"id\":\"F-ac93343c8ada\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C114\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4261fa115617\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane gained 1 mention this cycle (6 total); West Oakland moves the most\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\",\"id\":\"F-c3f5b6e254d9\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane — gained 1 mention this cycle (6 total), stable. The trend is the story; the mood is yours.\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\",\"id\":\"F-72f244cb2861\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane (A's player), Sports — gained 1 mention this cycle (6 total), stable, fame 48\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114 vs output/beats/prev/Cultural_Ledger.jsonl @C113\",\"id\":\"F-6b2e8c08f776\"},{\"t\":\"FACT\",\"text\":\"Kai Tanaka (artist), Arts — gained 1 mention this cycle (2 total), stable, fame 1\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114 vs output/beats/prev/Cultural_Ledger.jsonl @C113\",\"id\":\"F-eef7400adb8d\"},{\"t\":\"FACT\",\"text\":\"Movement vs C113: West Oakland +19 people, Grand Lake +10 people, Chinatown +10 people, Adams Point +7 people, Temescal +6 people\",\"src\":\"output/beats/prev/Neighborhood_Demographics.jsonl vs current @C114\",\"id\":\"F-a7781c96a850\"},{\"t\":\"FACT\",\"text\":\"Henry Rivas — Starting Pitcher, Oakland A's — West Oakland\",\"src\":\"Simulation_Ledger profile for POP-00024\",\"id\":\"F-192cce51beb8\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C10, Spring, holiday=none\",\"src\":\"output/world_summary_c114.md Calendar context (Simulation_Calendar)\",\"id\":\"F-9b9470803821\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00024",
+        "name": "Henry Rivas",
+        "role": "Starting Pitcher, Oakland A's",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Celeste Tran",
+        "question": "What's Henry Rivas' perspective on the A's' role in West Oakland? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-trends",
+        "hood": "Grand Lake",
+        "focus": "The A's and community engagement in West Oakland",
+        "src": "output/beats/Cultural_Ledger.jsonl @C114"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Henry Rivas — Starting Pitcher, Oakland A's — West Oakland",
+        "evidence": [
+          {
+            "id": "EV-4f9be648b2",
+            "src": "output/beats/Cultural_Ledger.jsonl @C114",
+            "text": "Vinnie Keane — gained 1 mention this cycle (6 total), stable. The trend is the story; the mood is yours."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Henry Rivas (A's player), Sports — gained 1 mention this cycle (3 total), stable, fame 23",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114 vs output/beats/prev/Cultural_Ledger.jsonl @C113",
+          "id": "F-ac93343c8ada"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C114",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4261fa115617"
+        },
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane gained 1 mention this cycle (6 total); West Oakland moves the most",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114",
+          "id": "F-c3f5b6e254d9"
+        },
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane — gained 1 mention this cycle (6 total), stable. The trend is the story; the mood is yours.",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114",
+          "id": "F-72f244cb2861"
+        },
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane (A's player), Sports — gained 1 mention this cycle (6 total), stable, fame 48",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114 vs output/beats/prev/Cultural_Ledger.jsonl @C113",
+          "id": "F-6b2e8c08f776"
+        },
+        {
+          "t": "FACT",
+          "text": "Kai Tanaka (artist), Arts — gained 1 mention this cycle (2 total), stable, fame 1",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114 vs output/beats/prev/Cultural_Ledger.jsonl @C113",
+          "id": "F-eef7400adb8d"
+        },
+        {
+          "t": "FACT",
+          "text": "Movement vs C113: West Oakland +19 people, Grand Lake +10 people, Chinatown +10 people, Adams Point +7 people, Temescal +6 people",
+          "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C114",
+          "id": "F-a7781c96a850"
+        },
+        {
+          "t": "FACT",
+          "text": "Henry Rivas — Starting Pitcher, Oakland A's — West Oakland",
+          "src": "Simulation_Ledger profile for POP-00024",
+          "id": "F-192cce51beb8"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C10, Spring, holiday=none",
+          "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+          "id": "F-9b9470803821"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01068",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01068\",\"name\":\"Kai Tanaka\",\"role\":\"artist\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Celeste Tran\",\"question\":\"What have you seen, felt, or understood about \\\"The A's and community engagement in West Oakland\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-trends\",\"hood\":\"Grand Lake\",\"focus\":\"The A's and community engagement in West Oakland\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Kai Tanaka — artist — Fruitvale\",\"evidence\":[{\"id\":\"EV-622bb324ab\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\",\"text\":\"Vinnie Keane — gained 1 mention this cycle (6 total), stable. The trend is the story; the mood is yours.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Kai Tanaka (artist), Arts — gained 1 mention this cycle (2 total), stable, fame 1\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114 vs output/beats/prev/Cultural_Ledger.jsonl @C113\",\"id\":\"F-eef7400adb8d\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C114\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4261fa115617\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane gained 1 mention this cycle (6 total); West Oakland moves the most\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\",\"id\":\"F-c3f5b6e254d9\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane — gained 1 mention this cycle (6 total), stable. The trend is the story; the mood is yours.\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\",\"id\":\"F-72f244cb2861\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane (A's player), Sports — gained 1 mention this cycle (6 total), stable, fame 48\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114 vs output/beats/prev/Cultural_Ledger.jsonl @C113\",\"id\":\"F-6b2e8c08f776\"},{\"t\":\"FACT\",\"text\":\"Henry Rivas (A's player), Sports — gained 1 mention this cycle (3 total), stable, fame 23\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114 vs output/beats/prev/Cultural_Ledger.jsonl @C113\",\"id\":\"F-ac93343c8ada\"},{\"t\":\"FACT\",\"text\":\"Movement vs C113: West Oakland +19 people, Grand Lake +10 people, Chinatown +10 people, Adams Point +7 people, Temescal +6 people\",\"src\":\"output/beats/prev/Neighborhood_Demographics.jsonl vs current @C114\",\"id\":\"F-a7781c96a850\"},{\"t\":\"FACT\",\"text\":\"Kai Tanaka — artist — Fruitvale\",\"src\":\"Simulation_Ledger profile for POP-01068\",\"id\":\"F-dbc51dbabde7\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C10, Spring, holiday=none\",\"src\":\"output/world_summary_c114.md Calendar context (Simulation_Calendar)\",\"id\":\"F-9b9470803821\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01068",
+        "name": "Kai Tanaka",
+        "role": "artist",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Celeste Tran",
+        "question": "What have you seen, felt, or understood about \"The A's and community engagement in West Oakland\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-trends",
+        "hood": "Grand Lake",
+        "focus": "The A's and community engagement in West Oakland",
+        "src": "output/beats/Cultural_Ledger.jsonl @C114"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Kai Tanaka — artist — Fruitvale",
+        "evidence": [
+          {
+            "id": "EV-622bb324ab",
+            "src": "output/beats/Cultural_Ledger.jsonl @C114",
+            "text": "Vinnie Keane — gained 1 mention this cycle (6 total), stable. The trend is the story; the mood is yours."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Kai Tanaka (artist), Arts — gained 1 mention this cycle (2 total), stable, fame 1",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114 vs output/beats/prev/Cultural_Ledger.jsonl @C113",
+          "id": "F-eef7400adb8d"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C114",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4261fa115617"
+        },
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane gained 1 mention this cycle (6 total); West Oakland moves the most",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114",
+          "id": "F-c3f5b6e254d9"
+        },
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane — gained 1 mention this cycle (6 total), stable. The trend is the story; the mood is yours.",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114",
+          "id": "F-72f244cb2861"
+        },
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane (A's player), Sports — gained 1 mention this cycle (6 total), stable, fame 48",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114 vs output/beats/prev/Cultural_Ledger.jsonl @C113",
+          "id": "F-6b2e8c08f776"
+        },
+        {
+          "t": "FACT",
+          "text": "Henry Rivas (A's player), Sports — gained 1 mention this cycle (3 total), stable, fame 23",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114 vs output/beats/prev/Cultural_Ledger.jsonl @C113",
+          "id": "F-ac93343c8ada"
+        },
+        {
+          "t": "FACT",
+          "text": "Movement vs C113: West Oakland +19 people, Grand Lake +10 people, Chinatown +10 people, Adams Point +7 people, Temescal +6 people",
+          "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C114",
+          "id": "F-a7781c96a850"
+        },
+        {
+          "t": "FACT",
+          "text": "Kai Tanaka — artist — Fruitvale",
+          "src": "Simulation_Ledger profile for POP-01068",
+          "id": "F-dbc51dbabde7"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C10, Spring, holiday=none",
+          "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+          "id": "F-9b9470803821"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00200",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00200\",\"name\":\"Evan Lewis\",\"role\":\"Bus driver\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Celeste Tran\",\"question\":\"What have you seen, felt, or understood about \\\"The A's and community engagement in West Oakland\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-trends\",\"hood\":\"Grand Lake\",\"focus\":\"The A's and community engagement in West Oakland\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Evan Lewis — Bus driver — Laurel\",\"evidence\":[{\"id\":\"EV-8cde071da4\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\",\"text\":\"Vinnie Keane — gained 1 mention this cycle (6 total), stable. The trend is the story; the mood is yours.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C114\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4261fa115617\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane gained 1 mention this cycle (6 total); West Oakland moves the most\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\",\"id\":\"F-c3f5b6e254d9\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane — gained 1 mention this cycle (6 total), stable. The trend is the story; the mood is yours.\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\",\"id\":\"F-72f244cb2861\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane (A's player), Sports — gained 1 mention this cycle (6 total), stable, fame 48\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114 vs output/beats/prev/Cultural_Ledger.jsonl @C113\",\"id\":\"F-6b2e8c08f776\"},{\"t\":\"FACT\",\"text\":\"Henry Rivas (A's player), Sports — gained 1 mention this cycle (3 total), stable, fame 23\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114 vs output/beats/prev/Cultural_Ledger.jsonl @C113\",\"id\":\"F-ac93343c8ada\"},{\"t\":\"FACT\",\"text\":\"Kai Tanaka (artist), Arts — gained 1 mention this cycle (2 total), stable, fame 1\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114 vs output/beats/prev/Cultural_Ledger.jsonl @C113\",\"id\":\"F-eef7400adb8d\"},{\"t\":\"FACT\",\"text\":\"Movement vs C113: West Oakland +19 people, Grand Lake +10 people, Chinatown +10 people, Adams Point +7 people, Temescal +6 people\",\"src\":\"output/beats/prev/Neighborhood_Demographics.jsonl vs current @C114\",\"id\":\"F-a7781c96a850\"},{\"t\":\"FACT\",\"text\":\"Evan Lewis — Bus driver — Laurel\",\"src\":\"Simulation_Ledger profile for POP-00200\",\"id\":\"F-de1611829a4e\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C10, Spring, holiday=none\",\"src\":\"output/world_summary_c114.md Calendar context (Simulation_Calendar)\",\"id\":\"F-9b9470803821\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00200",
+        "name": "Evan Lewis",
+        "role": "Bus driver",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Celeste Tran",
+        "question": "What have you seen, felt, or understood about \"The A's and community engagement in West Oakland\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-trends",
+        "hood": "Grand Lake",
+        "focus": "The A's and community engagement in West Oakland",
+        "src": "output/beats/Cultural_Ledger.jsonl @C114"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Evan Lewis — Bus driver — Laurel",
+        "evidence": [
+          {
+            "id": "EV-8cde071da4",
+            "src": "output/beats/Cultural_Ledger.jsonl @C114",
+            "text": "Vinnie Keane — gained 1 mention this cycle (6 total), stable. The trend is the story; the mood is yours."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C114",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4261fa115617"
+        },
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane gained 1 mention this cycle (6 total); West Oakland moves the most",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114",
+          "id": "F-c3f5b6e254d9"
+        },
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane — gained 1 mention this cycle (6 total), stable. The trend is the story; the mood is yours.",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114",
+          "id": "F-72f244cb2861"
+        },
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane (A's player), Sports — gained 1 mention this cycle (6 total), stable, fame 48",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114 vs output/beats/prev/Cultural_Ledger.jsonl @C113",
+          "id": "F-6b2e8c08f776"
+        },
+        {
+          "t": "FACT",
+          "text": "Henry Rivas (A's player), Sports — gained 1 mention this cycle (3 total), stable, fame 23",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114 vs output/beats/prev/Cultural_Ledger.jsonl @C113",
+          "id": "F-ac93343c8ada"
+        },
+        {
+          "t": "FACT",
+          "text": "Kai Tanaka (artist), Arts — gained 1 mention this cycle (2 total), stable, fame 1",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114 vs output/beats/prev/Cultural_Ledger.jsonl @C113",
+          "id": "F-eef7400adb8d"
+        },
+        {
+          "t": "FACT",
+          "text": "Movement vs C113: West Oakland +19 people, Grand Lake +10 people, Chinatown +10 people, Adams Point +7 people, Temescal +6 people",
+          "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C114",
+          "id": "F-a7781c96a850"
+        },
+        {
+          "t": "FACT",
+          "text": "Evan Lewis — Bus driver — Laurel",
+          "src": "Simulation_Ledger profile for POP-00200",
+          "id": "F-de1611829a4e"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C10, Spring, holiday=none",
+          "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+          "id": "F-9b9470803821"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  }
+]

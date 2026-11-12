@@ -1,0 +1,571 @@
+[
+  {
+    "pop": "POP-01079",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01079\",\"name\":\"Dillon Brooks\",\"role\":\"SF / The Oaks\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"P Slayer\",\"question\":\"How does it feel to be contributing to the team's winning streak? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"insult-pulse\",\"hood\":\"KONO\",\"focus\":\"The Oaks' winning streak and its impact on the fans\",\"src\":\"Oakland_Sports_Feed cycle 115; world_summary_c115.md \\\"## Sports\\\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Dillon Brooks — SF / The Oaks\",\"evidence\":[{\"id\":\"EV-bd5d1f6647\",\"src\":\"Oakland_Sports_Feed cycle 115; world_summary_c115.md \\\"## Sports\\\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109\",\"text\":\"Oakland hears disrespect — answer from the stands, not the boardroom.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Stats (feed): Adash Stanley/24PTS/5REB/8ASST/0TO/9-18FG/6-12 3PT, AJ Dybantsa/23PTS/5REB/4ASST/11-13FG, Dillon Brooks/23PTS/4REB/3ASST/10-14FG/3-5 3PT, Austin Reaves/15PTS/7ASST/5-10 3PT, Wendell Carter Jr/12PTS/5REB/6-10FG, T. Jerome/9PTS/7ASST, Harry Hayward/5PTS/2STL/1BLK in 16 minutes\",\"src\":\"Oakland_Sports_Feed cycle 115; world_summary_c115.md \\\"## Sports\\\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109\",\"id\":\"F-6c0502a3995a\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C115\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-bc84fc0b7718\"},{\"t\":\"FACT\",\"text\":\"The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109\",\"src\":\"Oakland_Sports_Feed cycle 115; world_summary_c115.md \\\"## Sports\\\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109\",\"id\":\"F-f09fe933457f\"},{\"t\":\"FACT\",\"text\":\"Oakland hears disrespect — answer from the stands, not the boardroom.\",\"src\":\"Oakland_Sports_Feed cycle 115; world_summary_c115.md \\\"## Sports\\\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109\",\"id\":\"F-449e48c1c2b5\"},{\"t\":\"FACT\",\"text\":\"StoryAngle (feed): The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109\",\"src\":\"Oakland_Sports_Feed cycle 115; world_summary_c115.md \\\"## Sports\\\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109\",\"id\":\"F-0ecbf495f5a0\"},{\"t\":\"FACT\",\"text\":\"Team record (feed): 7-1 · streak W3\",\"src\":\"Oakland_Sports_Feed cycle 115; world_summary_c115.md \\\"## Sports\\\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109\",\"id\":\"F-1935a7d1cef1\"},{\"t\":\"FACT\",\"text\":\"Event: Oaks — game-result (early-season)\",\"src\":\"Oakland_Sports_Feed cycle 115; world_summary_c115.md \\\"## Sports\\\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109\",\"id\":\"F-cd63e8a32dbb\"},{\"t\":\"FACT\",\"text\":\"Dillon Brooks — SF / The Oaks\",\"src\":\"Simulation_Ledger profile for POP-01079\",\"id\":\"F-c6e49a5a1598\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01079",
+        "name": "Dillon Brooks",
+        "role": "SF / The Oaks",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "P Slayer",
+        "question": "How does it feel to be contributing to the team's winning streak? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "insult-pulse",
+        "hood": "KONO",
+        "focus": "The Oaks' winning streak and its impact on the fans",
+        "src": "Oakland_Sports_Feed cycle 115; world_summary_c115.md \"## Sports\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Dillon Brooks — SF / The Oaks",
+        "evidence": [
+          {
+            "id": "EV-bd5d1f6647",
+            "src": "Oakland_Sports_Feed cycle 115; world_summary_c115.md \"## Sports\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+            "text": "Oakland hears disrespect — answer from the stands, not the boardroom."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Stats (feed): Adash Stanley/24PTS/5REB/8ASST/0TO/9-18FG/6-12 3PT, AJ Dybantsa/23PTS/5REB/4ASST/11-13FG, Dillon Brooks/23PTS/4REB/3ASST/10-14FG/3-5 3PT, Austin Reaves/15PTS/7ASST/5-10 3PT, Wendell Carter Jr/12PTS/5REB/6-10FG, T. Jerome/9PTS/7ASST, Harry Hayward/5PTS/2STL/1BLK in 16 minutes",
+          "src": "Oakland_Sports_Feed cycle 115; world_summary_c115.md \"## Sports\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+          "id": "F-6c0502a3995a"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C115",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-bc84fc0b7718"
+        },
+        {
+          "t": "FACT",
+          "text": "The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+          "src": "Oakland_Sports_Feed cycle 115; world_summary_c115.md \"## Sports\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+          "id": "F-f09fe933457f"
+        },
+        {
+          "t": "FACT",
+          "text": "Oakland hears disrespect — answer from the stands, not the boardroom.",
+          "src": "Oakland_Sports_Feed cycle 115; world_summary_c115.md \"## Sports\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+          "id": "F-449e48c1c2b5"
+        },
+        {
+          "t": "FACT",
+          "text": "StoryAngle (feed): The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+          "src": "Oakland_Sports_Feed cycle 115; world_summary_c115.md \"## Sports\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+          "id": "F-0ecbf495f5a0"
+        },
+        {
+          "t": "FACT",
+          "text": "Team record (feed): 7-1 · streak W3",
+          "src": "Oakland_Sports_Feed cycle 115; world_summary_c115.md \"## Sports\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+          "id": "F-1935a7d1cef1"
+        },
+        {
+          "t": "FACT",
+          "text": "Event: Oaks — game-result (early-season)",
+          "src": "Oakland_Sports_Feed cycle 115; world_summary_c115.md \"## Sports\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+          "id": "F-cd63e8a32dbb"
+        },
+        {
+          "t": "FACT",
+          "text": "Dillon Brooks — SF / The Oaks",
+          "src": "Simulation_Ledger profile for POP-01079",
+          "id": "F-c6e49a5a1598"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C11, Spring, holiday=none",
+          "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+          "id": "F-82d77e9a4a71"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01027",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01027\",\"name\":\"Austin Reaves\",\"role\":\"SG / The Oaks\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"P Slayer\",\"question\":\"What's the team's vibe like heading into tonight's game? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"insult-pulse\",\"hood\":\"KONO\",\"focus\":\"The Oaks' winning streak and its impact on the fans\",\"src\":\"Oakland_Sports_Feed cycle 115; world_summary_c115.md \\\"## Sports\\\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Austin Reaves — SG / The Oaks\",\"evidence\":[{\"id\":\"EV-6604047cfc\",\"src\":\"Oakland_Sports_Feed cycle 115; world_summary_c115.md \\\"## Sports\\\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109\",\"text\":\"Oakland hears disrespect — answer from the stands, not the boardroom.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Stats (feed): Adash Stanley/24PTS/5REB/8ASST/0TO/9-18FG/6-12 3PT, AJ Dybantsa/23PTS/5REB/4ASST/11-13FG, Dillon Brooks/23PTS/4REB/3ASST/10-14FG/3-5 3PT, Austin Reaves/15PTS/7ASST/5-10 3PT, Wendell Carter Jr/12PTS/5REB/6-10FG, T. Jerome/9PTS/7ASST, Harry Hayward/5PTS/2STL/1BLK in 16 minutes\",\"src\":\"Oakland_Sports_Feed cycle 115; world_summary_c115.md \\\"## Sports\\\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109\",\"id\":\"F-6c0502a3995a\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C115\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-bc84fc0b7718\"},{\"t\":\"FACT\",\"text\":\"The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109\",\"src\":\"Oakland_Sports_Feed cycle 115; world_summary_c115.md \\\"## Sports\\\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109\",\"id\":\"F-f09fe933457f\"},{\"t\":\"FACT\",\"text\":\"Oakland hears disrespect — answer from the stands, not the boardroom.\",\"src\":\"Oakland_Sports_Feed cycle 115; world_summary_c115.md \\\"## Sports\\\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109\",\"id\":\"F-449e48c1c2b5\"},{\"t\":\"FACT\",\"text\":\"StoryAngle (feed): The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109\",\"src\":\"Oakland_Sports_Feed cycle 115; world_summary_c115.md \\\"## Sports\\\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109\",\"id\":\"F-0ecbf495f5a0\"},{\"t\":\"FACT\",\"text\":\"Team record (feed): 7-1 · streak W3\",\"src\":\"Oakland_Sports_Feed cycle 115; world_summary_c115.md \\\"## Sports\\\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109\",\"id\":\"F-1935a7d1cef1\"},{\"t\":\"FACT\",\"text\":\"Event: Oaks — game-result (early-season)\",\"src\":\"Oakland_Sports_Feed cycle 115; world_summary_c115.md \\\"## Sports\\\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109\",\"id\":\"F-cd63e8a32dbb\"},{\"t\":\"FACT\",\"text\":\"Austin Reaves — SG / The Oaks\",\"src\":\"Simulation_Ledger profile for POP-01027\",\"id\":\"F-d653907c94cf\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01027",
+        "name": "Austin Reaves",
+        "role": "SG / The Oaks",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "P Slayer",
+        "question": "What's the team's vibe like heading into tonight's game? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "insult-pulse",
+        "hood": "KONO",
+        "focus": "The Oaks' winning streak and its impact on the fans",
+        "src": "Oakland_Sports_Feed cycle 115; world_summary_c115.md \"## Sports\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Austin Reaves — SG / The Oaks",
+        "evidence": [
+          {
+            "id": "EV-6604047cfc",
+            "src": "Oakland_Sports_Feed cycle 115; world_summary_c115.md \"## Sports\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+            "text": "Oakland hears disrespect — answer from the stands, not the boardroom."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Stats (feed): Adash Stanley/24PTS/5REB/8ASST/0TO/9-18FG/6-12 3PT, AJ Dybantsa/23PTS/5REB/4ASST/11-13FG, Dillon Brooks/23PTS/4REB/3ASST/10-14FG/3-5 3PT, Austin Reaves/15PTS/7ASST/5-10 3PT, Wendell Carter Jr/12PTS/5REB/6-10FG, T. Jerome/9PTS/7ASST, Harry Hayward/5PTS/2STL/1BLK in 16 minutes",
+          "src": "Oakland_Sports_Feed cycle 115; world_summary_c115.md \"## Sports\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+          "id": "F-6c0502a3995a"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C115",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-bc84fc0b7718"
+        },
+        {
+          "t": "FACT",
+          "text": "The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+          "src": "Oakland_Sports_Feed cycle 115; world_summary_c115.md \"## Sports\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+          "id": "F-f09fe933457f"
+        },
+        {
+          "t": "FACT",
+          "text": "Oakland hears disrespect — answer from the stands, not the boardroom.",
+          "src": "Oakland_Sports_Feed cycle 115; world_summary_c115.md \"## Sports\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+          "id": "F-449e48c1c2b5"
+        },
+        {
+          "t": "FACT",
+          "text": "StoryAngle (feed): The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+          "src": "Oakland_Sports_Feed cycle 115; world_summary_c115.md \"## Sports\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+          "id": "F-0ecbf495f5a0"
+        },
+        {
+          "t": "FACT",
+          "text": "Team record (feed): 7-1 · streak W3",
+          "src": "Oakland_Sports_Feed cycle 115; world_summary_c115.md \"## Sports\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+          "id": "F-1935a7d1cef1"
+        },
+        {
+          "t": "FACT",
+          "text": "Event: Oaks — game-result (early-season)",
+          "src": "Oakland_Sports_Feed cycle 115; world_summary_c115.md \"## Sports\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+          "id": "F-cd63e8a32dbb"
+        },
+        {
+          "t": "FACT",
+          "text": "Austin Reaves — SG / The Oaks",
+          "src": "Simulation_Ledger profile for POP-01027",
+          "id": "F-d653907c94cf"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C11, Spring, holiday=none",
+          "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+          "id": "F-82d77e9a4a71"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01023",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01023\",\"name\":\"Adash Stanley\",\"role\":\"PG / The Oaks\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"P Slayer\",\"question\":\"What have you seen, felt, or understood about \\\"The Oaks' winning streak and its impact on the fans\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"insult-pulse\",\"hood\":\"KONO\",\"focus\":\"The Oaks' winning streak and its impact on the fans\",\"src\":\"Oakland_Sports_Feed cycle 115; world_summary_c115.md \\\"## Sports\\\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Adash Stanley — PG / The Oaks\",\"evidence\":[{\"id\":\"EV-1266e0bc88\",\"src\":\"Oakland_Sports_Feed cycle 115; world_summary_c115.md \\\"## Sports\\\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109\",\"text\":\"Oakland hears disrespect — answer from the stands, not the boardroom.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Stats (feed): Adash Stanley/24PTS/5REB/8ASST/0TO/9-18FG/6-12 3PT, AJ Dybantsa/23PTS/5REB/4ASST/11-13FG, Dillon Brooks/23PTS/4REB/3ASST/10-14FG/3-5 3PT, Austin Reaves/15PTS/7ASST/5-10 3PT, Wendell Carter Jr/12PTS/5REB/6-10FG, T. Jerome/9PTS/7ASST, Harry Hayward/5PTS/2STL/1BLK in 16 minutes\",\"src\":\"Oakland_Sports_Feed cycle 115; world_summary_c115.md \\\"## Sports\\\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109\",\"id\":\"F-6c0502a3995a\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C115\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-bc84fc0b7718\"},{\"t\":\"FACT\",\"text\":\"The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109\",\"src\":\"Oakland_Sports_Feed cycle 115; world_summary_c115.md \\\"## Sports\\\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109\",\"id\":\"F-f09fe933457f\"},{\"t\":\"FACT\",\"text\":\"Oakland hears disrespect — answer from the stands, not the boardroom.\",\"src\":\"Oakland_Sports_Feed cycle 115; world_summary_c115.md \\\"## Sports\\\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109\",\"id\":\"F-449e48c1c2b5\"},{\"t\":\"FACT\",\"text\":\"StoryAngle (feed): The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109\",\"src\":\"Oakland_Sports_Feed cycle 115; world_summary_c115.md \\\"## Sports\\\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109\",\"id\":\"F-0ecbf495f5a0\"},{\"t\":\"FACT\",\"text\":\"Team record (feed): 7-1 · streak W3\",\"src\":\"Oakland_Sports_Feed cycle 115; world_summary_c115.md \\\"## Sports\\\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109\",\"id\":\"F-1935a7d1cef1\"},{\"t\":\"FACT\",\"text\":\"Event: Oaks — game-result (early-season)\",\"src\":\"Oakland_Sports_Feed cycle 115; world_summary_c115.md \\\"## Sports\\\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109\",\"id\":\"F-cd63e8a32dbb\"},{\"t\":\"FACT\",\"text\":\"Adash Stanley — PG / The Oaks\",\"src\":\"Simulation_Ledger profile for POP-01023\",\"id\":\"F-1164a6e4fd0d\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01023",
+        "name": "Adash Stanley",
+        "role": "PG / The Oaks",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "P Slayer",
+        "question": "What have you seen, felt, or understood about \"The Oaks' winning streak and its impact on the fans\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "insult-pulse",
+        "hood": "KONO",
+        "focus": "The Oaks' winning streak and its impact on the fans",
+        "src": "Oakland_Sports_Feed cycle 115; world_summary_c115.md \"## Sports\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Adash Stanley — PG / The Oaks",
+        "evidence": [
+          {
+            "id": "EV-1266e0bc88",
+            "src": "Oakland_Sports_Feed cycle 115; world_summary_c115.md \"## Sports\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+            "text": "Oakland hears disrespect — answer from the stands, not the boardroom."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Stats (feed): Adash Stanley/24PTS/5REB/8ASST/0TO/9-18FG/6-12 3PT, AJ Dybantsa/23PTS/5REB/4ASST/11-13FG, Dillon Brooks/23PTS/4REB/3ASST/10-14FG/3-5 3PT, Austin Reaves/15PTS/7ASST/5-10 3PT, Wendell Carter Jr/12PTS/5REB/6-10FG, T. Jerome/9PTS/7ASST, Harry Hayward/5PTS/2STL/1BLK in 16 minutes",
+          "src": "Oakland_Sports_Feed cycle 115; world_summary_c115.md \"## Sports\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+          "id": "F-6c0502a3995a"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C115",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-bc84fc0b7718"
+        },
+        {
+          "t": "FACT",
+          "text": "The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+          "src": "Oakland_Sports_Feed cycle 115; world_summary_c115.md \"## Sports\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+          "id": "F-f09fe933457f"
+        },
+        {
+          "t": "FACT",
+          "text": "Oakland hears disrespect — answer from the stands, not the boardroom.",
+          "src": "Oakland_Sports_Feed cycle 115; world_summary_c115.md \"## Sports\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+          "id": "F-449e48c1c2b5"
+        },
+        {
+          "t": "FACT",
+          "text": "StoryAngle (feed): The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+          "src": "Oakland_Sports_Feed cycle 115; world_summary_c115.md \"## Sports\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+          "id": "F-0ecbf495f5a0"
+        },
+        {
+          "t": "FACT",
+          "text": "Team record (feed): 7-1 · streak W3",
+          "src": "Oakland_Sports_Feed cycle 115; world_summary_c115.md \"## Sports\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+          "id": "F-1935a7d1cef1"
+        },
+        {
+          "t": "FACT",
+          "text": "Event: Oaks — game-result (early-season)",
+          "src": "Oakland_Sports_Feed cycle 115; world_summary_c115.md \"## Sports\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+          "id": "F-cd63e8a32dbb"
+        },
+        {
+          "t": "FACT",
+          "text": "Adash Stanley — PG / The Oaks",
+          "src": "Simulation_Ledger profile for POP-01023",
+          "id": "F-1164a6e4fd0d"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C11, Spring, holiday=none",
+          "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+          "id": "F-82d77e9a4a71"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01223",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01223\",\"name\":\"Harry Hayward\",\"role\":\"Oakland Oaks - Power Forward\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"P Slayer\",\"question\":\"As a resident of KONO, what have you seen, felt, or understood about \\\"The Oaks' winning streak and its impact on the fans\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"insult-pulse\",\"hood\":\"KONO\",\"focus\":\"The Oaks' winning streak and its impact on the fans\",\"src\":\"Oakland_Sports_Feed cycle 115; world_summary_c115.md \\\"## Sports\\\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Harry Hayward — Oakland Oaks - Power Forward\",\"evidence\":[{\"id\":\"EV-6d2847645c\",\"src\":\"Oakland_Sports_Feed cycle 115; world_summary_c115.md \\\"## Sports\\\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109\",\"text\":\"Oakland hears disrespect — answer from the stands, not the boardroom.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Stats (feed): Adash Stanley/24PTS/5REB/8ASST/0TO/9-18FG/6-12 3PT, AJ Dybantsa/23PTS/5REB/4ASST/11-13FG, Dillon Brooks/23PTS/4REB/3ASST/10-14FG/3-5 3PT, Austin Reaves/15PTS/7ASST/5-10 3PT, Wendell Carter Jr/12PTS/5REB/6-10FG, T. Jerome/9PTS/7ASST, Harry Hayward/5PTS/2STL/1BLK in 16 minutes\",\"src\":\"Oakland_Sports_Feed cycle 115; world_summary_c115.md \\\"## Sports\\\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109\",\"id\":\"F-6c0502a3995a\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C115\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-bc84fc0b7718\"},{\"t\":\"FACT\",\"text\":\"The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109\",\"src\":\"Oakland_Sports_Feed cycle 115; world_summary_c115.md \\\"## Sports\\\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109\",\"id\":\"F-f09fe933457f\"},{\"t\":\"FACT\",\"text\":\"Oakland hears disrespect — answer from the stands, not the boardroom.\",\"src\":\"Oakland_Sports_Feed cycle 115; world_summary_c115.md \\\"## Sports\\\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109\",\"id\":\"F-449e48c1c2b5\"},{\"t\":\"FACT\",\"text\":\"StoryAngle (feed): The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109\",\"src\":\"Oakland_Sports_Feed cycle 115; world_summary_c115.md \\\"## Sports\\\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109\",\"id\":\"F-0ecbf495f5a0\"},{\"t\":\"FACT\",\"text\":\"Team record (feed): 7-1 · streak W3\",\"src\":\"Oakland_Sports_Feed cycle 115; world_summary_c115.md \\\"## Sports\\\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109\",\"id\":\"F-1935a7d1cef1\"},{\"t\":\"FACT\",\"text\":\"Event: Oaks — game-result (early-season)\",\"src\":\"Oakland_Sports_Feed cycle 115; world_summary_c115.md \\\"## Sports\\\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109\",\"id\":\"F-cd63e8a32dbb\"},{\"t\":\"FACT\",\"text\":\"Harry Hayward — Oakland Oaks - Power Forward\",\"src\":\"Simulation_Ledger profile for POP-01223\",\"id\":\"F-a38d42a8c011\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01223",
+        "name": "Harry Hayward",
+        "role": "Oakland Oaks - Power Forward",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "P Slayer",
+        "question": "As a resident of KONO, what have you seen, felt, or understood about \"The Oaks' winning streak and its impact on the fans\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "insult-pulse",
+        "hood": "KONO",
+        "focus": "The Oaks' winning streak and its impact on the fans",
+        "src": "Oakland_Sports_Feed cycle 115; world_summary_c115.md \"## Sports\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Harry Hayward — Oakland Oaks - Power Forward",
+        "evidence": [
+          {
+            "id": "EV-6d2847645c",
+            "src": "Oakland_Sports_Feed cycle 115; world_summary_c115.md \"## Sports\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+            "text": "Oakland hears disrespect — answer from the stands, not the boardroom."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Stats (feed): Adash Stanley/24PTS/5REB/8ASST/0TO/9-18FG/6-12 3PT, AJ Dybantsa/23PTS/5REB/4ASST/11-13FG, Dillon Brooks/23PTS/4REB/3ASST/10-14FG/3-5 3PT, Austin Reaves/15PTS/7ASST/5-10 3PT, Wendell Carter Jr/12PTS/5REB/6-10FG, T. Jerome/9PTS/7ASST, Harry Hayward/5PTS/2STL/1BLK in 16 minutes",
+          "src": "Oakland_Sports_Feed cycle 115; world_summary_c115.md \"## Sports\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+          "id": "F-6c0502a3995a"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C115",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-bc84fc0b7718"
+        },
+        {
+          "t": "FACT",
+          "text": "The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+          "src": "Oakland_Sports_Feed cycle 115; world_summary_c115.md \"## Sports\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+          "id": "F-f09fe933457f"
+        },
+        {
+          "t": "FACT",
+          "text": "Oakland hears disrespect — answer from the stands, not the boardroom.",
+          "src": "Oakland_Sports_Feed cycle 115; world_summary_c115.md \"## Sports\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+          "id": "F-449e48c1c2b5"
+        },
+        {
+          "t": "FACT",
+          "text": "StoryAngle (feed): The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+          "src": "Oakland_Sports_Feed cycle 115; world_summary_c115.md \"## Sports\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+          "id": "F-0ecbf495f5a0"
+        },
+        {
+          "t": "FACT",
+          "text": "Team record (feed): 7-1 · streak W3",
+          "src": "Oakland_Sports_Feed cycle 115; world_summary_c115.md \"## Sports\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+          "id": "F-1935a7d1cef1"
+        },
+        {
+          "t": "FACT",
+          "text": "Event: Oaks — game-result (early-season)",
+          "src": "Oakland_Sports_Feed cycle 115; world_summary_c115.md \"## Sports\" · The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+          "id": "F-cd63e8a32dbb"
+        },
+        {
+          "t": "FACT",
+          "text": "Harry Hayward — Oakland Oaks - Power Forward",
+          "src": "Simulation_Ledger profile for POP-01223",
+          "id": "F-a38d42a8c011"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C11, Spring, holiday=none",
+          "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+          "id": "F-82d77e9a4a71"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  }
+]

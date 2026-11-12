@@ -1,0 +1,54 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "113",
+  "provider": "openrouter",
+  "model": "anthropic/claude-haiku-5.5",
+  "configuredWriterModel": "anthropic/claude-haiku-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "lila-mezran",
+  "byline": {
+    "name": "Dr. Lila Mezran",
+    "popid": "POP-00154",
+    "beatDomain": "HEALTH"
+  },
+  "laneEntries": 105,
+  "quotesLanded": 3,
+  "disposition": "flagged",
+  "rheaPass": false,
+  "rheaFlagCount": 1,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [],
+  "toolCalls": 0,
+  "wordCount": 1057,
+  "targetWords": "evidence-bounded",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 1057,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "6fe95285272677f7c37bc754e0e6e969c48223eaa91498567bfbe0f806a9d37c",
+    "costUsd": 0.0017
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 4/4 — nothing fell short"
+  },
+  "article": "output/cron-compare/flagged/civic_c113_lila-mezran_packet-v2_anthropic-claude-haiku-5-5.md",
+  "selfRecord": null,
+  "ranAt": "2026-10-27T04:14:10.284Z",
+  "dispositionReconciledAt": "2026-10-31T17:00:02.174Z"
+}

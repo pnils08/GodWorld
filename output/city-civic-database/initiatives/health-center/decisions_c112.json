@@ -1,0 +1,24 @@
+{
+  "initiative": "INIT-005",
+  "initiativeId": "INIT-005",
+  "cycle": 112,
+  "primaryVoice": "Chen-Ramirez (health_center-001)",
+  "consolidatedFrom": [
+    "STMT-112-health_center-001 (Chen-Ramirez — post-occupancy audit readiness — quarterly utilization benchmarks)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-005",
+    "ImplementationPhase": "implementation-active",
+    "MilestoneNotes": "C112: Adopted D7 quarterly utilization audit benchmarks as standing procedure; first reporting cycle scheduled with public-data commitment.",
+    "NextScheduledAction": "First quarterly utilization audit report filed to D7 office and public data portal",
+    "NextActionCycle": 113,
+    "LastWorkCycle": 112,
+    "LastWorkSeat": "civic-office-council-d7, proj-health-center"
+  },
+  "_moveFold": {
+    "moveIds": [
+      "MV-111-civic-office-council-d7-2026-10-14",
+      "MV-111-proj-health-center-2026-10-16"
+    ]
+  }
+}

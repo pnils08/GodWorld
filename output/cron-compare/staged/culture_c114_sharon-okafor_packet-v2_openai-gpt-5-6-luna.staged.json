@@ -1,0 +1,82 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "114",
+  "persona": "sharon-okafor",
+  "byline": "Sharon Okafor",
+  "bylinePopid": "POP-00159",
+  "article": "output/cron-compare/staged/culture_c114_sharon-okafor_packet-v2_openai-gpt-5-6-luna.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Lena Cross",
+        "role": "mentioned",
+        "popid": "POP-00539"
+      },
+      {
+        "name": "Rowan Pierce",
+        "role": "quoted-source",
+        "popid": "POP-00545"
+      },
+      {
+        "name": "Marisol Rivera",
+        "role": "quoted-source",
+        "popid": "POP-01062"
+      },
+      {
+        "name": "Vinnie Keane",
+        "role": "quoted-source",
+        "popid": "POP-00001"
+      },
+      {
+        "name": "Ian Devine",
+        "role": "mentioned",
+        "popid": "POP-01082",
+        "floor": true
+      },
+      {
+        "name": "Louis Cross",
+        "role": "mentioned",
+        "popid": "POP-01080",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Piedmont Ave"
+    ],
+    "claims": [
+      {
+        "claim": "To be honest, I'm still pretty active in the local arts scene. I just attended a community feedback session for the Fruitvale Transit Hub Phase II, and I felt really heard, which was great. I've also been enjoying events like First Friday, it feels like the creative energy is still there. I'm not sure what you mean by 'fading fame,' but around here on Piedmont Ave, people still know me and we chat about the A's or other local happenings.",
+        "sourceRef": "citizenVoice PRESS Lena Cross"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-5fb7dd828534",
+    "draftSha256": "d8967dc87b30a5880898ae484e374726348d0d8064c3ef14bf3751d11456e5ae",
+    "verdict": "output/cron-compare/culture_c114_sharon-okafor_packet-v2_openai-gpt-5-6-luna.rhea.json",
+    "ranAt": "2026-11-07T00:16:56.008Z",
+    "contractScore": {
+      "opened": false,
+      "closed": true,
+      "purposeMet": false,
+      "inTarget": false,
+      "inTargetBy": "judge",
+      "words": 663,
+      "short": "The piece addresses a person's fading fame rather than opening with and framing a Packet-supplied venue condition.",
+      "score": 1,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "d8967dc87b30a5880898ae484e374726348d0d8064c3ef14bf3751d11456e5ae",
+      "costUsd": 0.0023
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-07T00:17:04.899Z"
+}

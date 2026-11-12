@@ -1,0 +1,406 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "115",
+  "persona": "tanya-cruz",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00014",
+      "name": "Tanya Cruz",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "It's official: Vinnie Keane retires. Undrafted to undeniable, and staying in Grand Lake — Vinnie Keane recorded 2041 and 127AB and .315AVG and 40H and 13HR and 29RBI and 1.1WAR, Vinnie Keane career and 8229AB and 2363H and 436HR and 1321RBI and .287AVG and .523SLG and 71.4WAR and 1x MVP and 7x All-Star and 3x Gold Glove and 5x Silver Slugger and 3x HR Derby and 7x World Series.",
+      "approach": "Sideline approach (Tanya Cruz): you file from the clubhouse. That SET is yours — the Packet will never list a clubhouse event. Paint what the supplied sports line predicts. Packet player quotes and numbers only. New in-world spots go on INTAKE BIZ. No real-world Oakland venues. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview. The feed notes report what people said in paraphrase; none of it is a quote — never put it in quotation marks or attribute it as speech.",
+      "creativeBrief": {
+        "kind": "sideline-dispatch",
+        "pulseClass": "record-only-sideline",
+        "bagModes": [
+          "10 Inference Close"
+        ],
+        "claim": "The supplied sports record is the weather. The clubhouse SET is allotted hallucination fitted to that line.",
+        "anchorFacts": [
+          "Vinnie Keane recorded 2041 and 127AB and .315AVG and 40H and 13HR and 29RBI and 1.1WAR, Vinnie Keane career and 8229AB and 2363H and 436HR and 1321RBI and .287AVG and .523SLG and 71.4WAR and 1x MVP and 7x All-Star and 3x Gold Glove and 5x Silver Slugger and 3x HR Derby and 7x World Series.",
+          "It's official: Vinnie Keane retires. Undrafted to undeniable, and staying in Grand Lake.",
+          "Vinnie Keane made it official this cycle: he is retiring from baseball. The announcement closes a career that went from undrafted to undeniable, with 7 World Series titles in Oakland, an MVP, 7 All-Star selections, 3 Gold Gloves, 5 Silver Sluggers and 436 career homeruns. Keane said goodbye in pieces all season.",
+          "He hit a 3-run homer in his final visit to New York, went 4-5 with a 3-run homer in his last regular season at bat to close the record 127-35 season, went 3-4 in a playoff game in Minnesota, and started at third base in the World Series clincher in Philadelphia, driving in a run. The parade in C111 and the Blue Lattern Bar night in C112 felt like the end, but this is the formal announcement. Keane is not leaving Oakland.",
+          "He and his wife Amara live in Grand Lake, where the family opened Keane Mercantile, and the Keane Foundation runs the Firehouse 29 West Oakland Baseball Academy and the annual Keane for Kids Gala. His contract ran through 2041, so nothing is left on the books, only a DH/third base spot and a clubhouse voice to replace as Taveras and Quintero take over."
+        ],
+        "accessEvidence": {
+          "state": "ALLOTTED",
+          "facts": [
+            "clubhouse/sideline SET is the reporter's room"
+          ]
+        },
+        "quoteEvidence": {
+          "state": "NOT_SUPPLIED",
+          "quotes": []
+        },
+        "observationEvidence": {
+          "state": "ALLOTTED",
+          "facts": []
+        },
+        "missing": [
+          "Packet player quotes",
+          "injury or team-response facts beyond the supplied record",
+          "the rest of the feed notes (2 more sentences not carried)"
+        ],
+        "sceneRule": "Clubhouse SET is authorized. Invented player quotes and real-world venues are not.",
+        "sourcePointers": [
+          "output/world_summary_c115.md ## Sports",
+          "docs/media/TANYA_SIDELINE_BAG.md"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "sideline-signal",
+      "hood": "Grand Lake",
+      "score": null,
+      "src": "world_summary_c115.md ## Sports",
+      "nearby": [
+        {
+          "text": "A's | roster-move | (off-season) | Vinnie Keane",
+          "src": "Oakland_Sports_Feed cycle 115; rendered: world_summary_c115.md \"## Sports\" C115 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | community-outreach | (off-season) | Darrin Davis, Rafael Montez",
+          "src": "Oakland_Sports_Feed cycle 115; rendered: world_summary_c115.md \"## Sports\" C115 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (off-season) | Eric Taveras, Vinnie Keane",
+          "src": "Oakland_Sports_Feed cycle 115; rendered: world_summary_c115.md \"## Sports\" C115 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | rumor | (off-season) | Jose Colon, Sergio Aybar, Marco Fabregas, Mike Paulson",
+          "src": "Oakland_Sports_Feed cycle 115; rendered: world_summary_c115.md \"## Sports\" C115 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | player-feature | (early-season) | Harry Hayward, Wilson Shepard",
+          "src": "Oakland_Sports_Feed cycle 115; rendered: world_summary_c115.md \"## Sports\" C115 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00001",
+          "name": "Vinnie Keane",
+          "profile": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend",
+          "role": "Former Designated Hitter, Oakland A's Legend",
+          "hood": "Grand Lake",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c115.md ## Sports",
+            "pop": "POP-00001",
+            "rowName": "Vinnie Keane",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00018",
+          "name": "Benji Dillon",
+          "profile": "Benji Dillon — Pitcher, Oakland A's Legend",
+          "role": "Pitcher, Oakland A's Legend",
+          "hood": "Rockridge",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c115.md ## Sports",
+            "pop": "POP-00018",
+            "rowName": "Benji Dillon",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00527",
+          "name": "Mike Paulson",
+          "profile": "Mike Paulson — General Manager, Oakland A's & The Oaks",
+          "role": "General Manager, Oakland A's & The Oaks",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c115.md ## Sports",
+            "pop": "POP-00527",
+            "rowName": "Mike Paulson",
+            "kind": "slice-row"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C115",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-bc84fc0b7718"
+      },
+      {
+        "t": "FACT",
+        "text": "It's official: Vinnie Keane retires. Undrafted to undeniable, and staying in Grand Lake — Vinnie Keane recorded 2041 and 127AB and .315AVG and 40H and 13HR and 29RBI and 1.1WAR, Vinnie Keane career and 8229AB and 2363H and 436HR and 1321RBI and .287AVG and .523SLG and 71.4WAR and 1x MVP and 7x All-Star and 3x Gold Glove and 5x Silver Slugger and 3x HR Derby and 7x World Series.",
+        "src": "world_summary_c115.md ## Sports",
+        "id": "F-e242039dba5f"
+      },
+      {
+        "t": "FACT",
+        "text": "Vinnie Keane recorded 2041 and 127AB and .315AVG and 40H and 13HR and 29RBI and 1.1WAR, Vinnie Keane career and 8229AB and 2363H and 436HR and 1321RBI and .287AVG and .523SLG and 71.4WAR and 1x MVP and 7x All-Star and 3x Gold Glove and 5x Silver Slugger and 3x HR Derby and 7x World Series.",
+        "src": "world_summary_c115.md ## Sports",
+        "id": "F-568a61d97578"
+      },
+      {
+        "t": "FACT",
+        "text": "It's official: Vinnie Keane retires. Undrafted to undeniable, and staying in Grand Lake.",
+        "src": "world_summary_c115.md ## Sports",
+        "id": "F-dd68222d82d7"
+      },
+      {
+        "t": "FACT",
+        "text": "Vinnie Keane made it official this cycle: he is retiring from baseball. The announcement closes a career that went from undrafted to undeniable, with 7 World Series titles in Oakland, an MVP, 7 All-Star selections, 3 Gold Gloves, 5 Silver Sluggers and 436 career homeruns. Keane said goodbye in pieces all season.",
+        "src": "world_summary_c115.md ## Sports",
+        "id": "F-a0349ade5231"
+      },
+      {
+        "t": "FACT",
+        "text": "He hit a 3-run homer in his final visit to New York, went 4-5 with a 3-run homer in his last regular season at bat to close the record 127-35 season, went 3-4 in a playoff game in Minnesota, and started at third base in the World Series clincher in Philadelphia, driving in a run. The parade in C111 and the Blue Lattern Bar night in C112 felt like the end, but this is the formal announcement. Keane is not leaving Oakland.",
+        "src": "world_summary_c115.md ## Sports",
+        "id": "F-91be44318062"
+      },
+      {
+        "t": "FACT",
+        "text": "He and his wife Amara live in Grand Lake, where the family opened Keane Mercantile, and the Keane Foundation runs the Firehouse 29 West Oakland Baseball Academy and the annual Keane for Kids Gala. His contract ran through 2041, so nothing is left on the books, only a DH/third base spot and a clubhouse voice to replace as Taveras and Quintero take over.",
+        "src": "world_summary_c115.md ## Sports",
+        "id": "F-947c1a612258"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ]
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "named",
+    "candidates": [
+      {
+        "pop": "POP-00001",
+        "name": "Vinnie Keane",
+        "role": "Former Designated Hitter, Oakland A's Legend",
+        "hood": "Grand Lake",
+        "profile": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c115.md ## Sports",
+          "pop": "POP-00001",
+          "rowName": "Vinnie Keane",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00018",
+        "name": "Benji Dillon",
+        "role": "Pitcher, Oakland A's Legend",
+        "hood": "Rockridge",
+        "profile": "Benji Dillon — Pitcher, Oakland A's Legend",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c115.md ## Sports",
+          "pop": "POP-00018",
+          "rowName": "Benji Dillon",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00527",
+        "name": "Mike Paulson",
+        "role": "General Manager, Oakland A's & The Oaks",
+        "hood": "West Oakland",
+        "profile": "Mike Paulson — General Manager, Oakland A's & The Oaks",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c115.md ## Sports",
+          "pop": "POP-00527",
+          "rowName": "Mike Paulson",
+          "kind": "slice-row"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014"
+  },
+  "assignment": {
+    "story": {
+      "angle": "It's official: Vinnie Keane retires. Undrafted to undeniable, and staying in Grand Lake — Vinnie Keane recorded 2041 and 127AB and .315AVG and 40H and 13HR and 29RBI and 1.1WAR, Vinnie Keane career and 8229AB and 2363H and 436HR and 1321RBI and .287AVG and .523SLG and 71.4WAR and 1x MVP and 7x All-Star and 3x Gold Glove and 5x Silver Slugger and 3x HR Derby and 7x World Series.",
+      "label": "It's official: Vinnie Keane retires. Undrafted to undeniable, and staying in Grand Lake — Vinnie Keane recorded 2041 and 127AB and .315AVG and 40H and 13HR and 29RBI and 1.1WAR, Vinnie Keane career and 8229AB and 2363H and 436HR and 1321RBI and .287AVG and .523SLG and 71.4WAR and 1x MVP and 7x All-Star and 3x Gold Glove and 5x Silver Slugger and 3x HR Derby and 7x World Series.",
+      "hookLine": "It's official: Vinnie Keane retires. Undrafted to undeniable, and staying in Grand Lake — Vinnie Keane recorded 2041 and 127AB and .315AVG and 40H and 13HR and 29RBI and 1.1WAR, Vinnie Keane career and 8229AB and 2363H and 436HR and 1321RBI and .287AVG and .523SLG and 71.4WAR and 1x MVP and 7x All-Star and 3x Gold Glove and 5x Silver Slugger and 3x HR Derby and 7x World Series.",
+      "kind": "sideline-signal",
+      "hood": "Grand Lake",
+      "popids": [
+        "POP-00001",
+        "POP-00018",
+        "POP-00527"
+      ],
+      "citizens": [
+        "Vinnie Keane (POP-00001)",
+        "Benji Dillon (POP-00018)",
+        "Mike Paulson (POP-00527)"
+      ],
+      "ref": "world_summary_c115.md ## Sports",
+      "cycle": 115
+    },
+    "approach": "Sideline approach (Tanya Cruz): you file from the clubhouse. That SET is yours — the Packet will never list a clubhouse event. Paint what the supplied sports line predicts. Packet player quotes and numbers only. New in-world spots go on INTAKE BIZ. No real-world Oakland venues. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview. The feed notes report what people said in paraphrase; none of it is a quote — never put it in quotation marks or attribute it as speech."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014",
+    "text": "The formal announcement lands and the clubhouse is already half-empty, lockers cleared, the season's gear boxed. I'm standing where I always stand, by the wall near the dugout tunnel, watching the light come in low. Vinnie's locker is stripped down to the metal frame and a single chair. Nobody's said the words in here yet, but the quiet does the talking. I'm not chasing the stat line — that's already written. I'm chasing what a room sounds like when a voice that held it for two decades just stops. Taveras and Quintero are the ones who have to fill it now, and I want to see how they stand in that space, whether they know they're being measured against a ghost who's still alive and still in Gr",
+    "plan": {
+      "chase": "The formal announcement lands and the clubhouse is already half-empty, lockers cleared, the season's gear boxed. I'm standing where I always stand, by the wall near the dugout tunnel, watching the light come in low. Vinnie's locker is stripped down to the metal frame and a single chair. Nobody's said the words in here yet, but the quiet does the talking. I'm not chasing the stat line — that's already written. I'm chasing what a room sounds like when a voice that held it for two decades just stops. Taveras and Quintero are the ones who have to fill it now, and I want to see how they stand in that space, whether they know they're being measured against a ghost who's still alive and still in Gr",
+      "focus": "The clubhouse after Vinnie Keane's formal retirement — not the career retrospective, but the silence and the handoff to Taveras and Quintero.",
+      "why": "The record is the weather, but the room is the story. Every farewell tour ends with a formal announcement, and the real moment is what happens after the last round of questions fades — who's left standing, what they say when they think no one's listening, and how a clubhouse learns to sound different.",
+      "checks": [
+        "No invented player quotes — only what the feed supplies in paraphrase, never in quotation marks.",
+        "No real-world Oakland venues — the clubhouse SET is the room.",
+        "No new named people, institutions, events, dates, or numbers beyond the supplied record.",
+        "No attribution of speech to unresolved feed names."
+      ],
+      "targets": [
+        {
+          "pop": "POP-00001",
+          "question": "What does the formal retirement change about how the clubhouse sees itself, now that the voice is officially gone?",
+          "basis": "Vinnie Keane is the subject of the retirement announcement and the clubhouse presence being replaced."
+        },
+        {
+          "pop": "POP-00018",
+          "question": "How does a fellow legend read the room when the last of the old guard steps away?",
+          "basis": "Benji Dillon is a named A's legend whose perspective on the handoff carries weight."
+        },
+        {
+          "pop": "POP-00527",
+          "question": "What does the front office see as the next chapter, now that the contract is fully off the books?",
+          "basis": "Mike Paulson is the GM who manages the roster and the clubhouse transition."
+        }
+      ],
+      "interpretation": "The formal announcement closes a loop that's been closing all season. The parade, the bar night, the final at-bat — those were the public goodbyes. This is the private one. The clubhouse is where the real transition happens, and it's my job to stand in that room and describe what the record can't.",
+      "unverifiedLead": [
+        "The clubhouse felt emptier than the roster sheet suggested, with Vinnie's locker already cleared.",
+        "There was a sense among the younger players that the standard had shifted, though no one said it outright.",
+        "The chair by the dugout tunnel sat unoccupied longer than usual before anyone moved into it."
+      ]
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "A's | roster-move | (off-season) | Vinnie Keane",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 115; rendered: world_summary_c115.md \"## Sports\" C115 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00001"
+      ]
+    },
+    {
+      "label": "A's | community-outreach | (off-season) | Darrin Davis, Rafael Montez",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 115; rendered: world_summary_c115.md \"## Sports\" C115 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00021",
+        "POP-00136"
+      ]
+    },
+    {
+      "label": "A's | player-feature | (off-season) | Eric Taveras, Vinnie Keane",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 115; rendered: world_summary_c115.md \"## Sports\" C115 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00597",
+        "POP-00001"
+      ]
+    },
+    {
+      "label": "A's | rumor | (off-season) | Jose Colon, Sergio Aybar, Marco Fabregas, Mike Paulson",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 115; rendered: world_summary_c115.md \"## Sports\" C115 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00599",
+        "POP-00078",
+        "POP-00060",
+        "POP-00527"
+      ]
+    },
+    {
+      "label": "Oaks | player-feature | (early-season) | Harry Hayward, Wilson Shepard",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 115; rendered: world_summary_c115.md \"## Sports\" C115 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01223",
+        "POP-01022"
+      ]
+    }
+  ],
+  "laneEntries": 12,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-11T13:39:26.348Z"
+}

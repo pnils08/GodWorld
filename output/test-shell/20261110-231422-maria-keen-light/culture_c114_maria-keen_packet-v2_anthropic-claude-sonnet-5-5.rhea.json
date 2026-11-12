@@ -1,0 +1,69 @@
+{
+  "draft": "output/test-shell/20261110-231422-maria-keen-light/culture_c114_maria-keen_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "114",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "cdb6d76a25aac057a0ef675b920c8a4ccee171b42975e1af4d1dbb3d7cfd8873",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes match exact interview records; citizens, roles, and institutional references align with cycle 114 canon.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "maria-ground-v1",
+    "packageVersion": "MARIA-LEP2-1",
+    "manifestId": "AM-3792d8937913",
+    "lexicalObservations": [],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Austin Reaves",
+      "Brie Harris",
+      "Danny Horn",
+      "Helena Voss-Adeyemi",
+      "Theo Park"
+    ],
+    "unverified": [
+      "Food Pantry",
+      "Islamic Center"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0104,
+  "durationMs": 5492,
+  "parseError": false,
+  "ranAt": "2026-11-07T00:17:59.071Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 850,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "cdb6d76a25aac057a0ef675b920c8a4ccee171b42975e1af4d1dbb3d7cfd8873",
+    "costUsd": 0.0012
+  }
+}

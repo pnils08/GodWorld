@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "cycle": 112,
+  "engineFiredAt": "2026-10-19T03:31:10.553Z",
+  "stages": {
+    "prep": {
+      "stage": "prep",
+      "status": "done",
+      "inputs": {},
+      "attempts": 0,
+      "updated": "2026-10-19T04:21:56.390Z"
+    },
+    "directive": {
+      "stage": "directive",
+      "status": "done",
+      "inputs": {},
+      "attempts": 0,
+      "updated": "2026-10-19T05:17:03.072Z"
+    },
+    "mayor-open": {
+      "stage": "mayor-open",
+      "status": "done",
+      "inputs": {},
+      "attempts": 0,
+      "updated": "2026-10-19T04:21:56.390Z"
+    },
+    "hearing": {
+      "stage": "hearing",
+      "status": "done",
+      "inputs": {
+        "pending": [
+          "council_d1"
+        ]
+      },
+      "attempts": 0,
+      "updated": "2026-10-19T04:21:56.390Z"
+    },
+    "mayor-gavel": {
+      "stage": "mayor-gavel",
+      "status": "done",
+      "inputs": {},
+      "attempts": 0,
+      "updated": "2026-10-19T04:21:56.390Z"
+    },
+    "projects": {
+      "stage": "projects",
+      "status": "done",
+      "inputs": {
+        "pending": []
+      },
+      "attempts": 0,
+      "updated": "2026-10-19T04:21:56.390Z"
+    },
+    "close-det": {
+      "stage": "close-det",
+      "status": "done",
+      "inputs": {
+        "deterministicPass": true
+      },
+      "attempts": 0,
+      "updated": "2026-10-19T04:22:21.036Z"
+    },
+    "verdict-clerk": {
+      "stage": "verdict-clerk",
+      "status": "done",
+      "inputs": {
+        "verdict": "pass"
+      },
+      "attempts": 0,
+      "updated": "2026-10-19T04:22:21.036Z"
+    },
+    "verdict-sanity": {
+      "stage": "verdict-sanity",
+      "status": "done",
+      "inputs": {
+        "verdict": "pass",
+        "blockedInitiatives": []
+      },
+      "attempts": 0,
+      "updated": "2026-10-19T04:22:21.036Z"
+    },
+    "apply": {
+      "stage": "apply",
+      "status": "done",
+      "inputs": {
+        "decision": {
+          "apply": true,
+          "blocked": false,
+          "via": "verdicts",
+          "reason": null,
+          "missingVerdicts": [],
+          "excluded": []
+        }
+      },
+      "attempts": 0,
+      "updated": "2026-10-19T04:22:21.036Z"
+    }
+  },
+  "chainLaunches": 1,
+  "updated": "2026-10-19T05:17:03.076Z"
+}

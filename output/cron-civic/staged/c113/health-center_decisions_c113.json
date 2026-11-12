@@ -1,0 +1,25 @@
+{
+  "initiative": "INIT-005",
+  "initiativeId": "INIT-005",
+  "cycle": 113,
+  "primaryVoice": "Mayor gavel (mayor_gavel-004)",
+  "consolidatedFrom": [
+    "STMT-113-health_center-001 (Chen-Ramirez — First quarterly utilization audit filed — post-occupancy accountability)",
+    "STMT-113-health_center-002 (Chen-Ramirez — Temescal street trade and community responsiveness)",
+    "STMT-113-mayor_gavel-004 (Mayor gavel — INIT-005 First Quarterly Utilization Audit)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-005",
+    "ImplementationPhase": "operational",
+    "MilestoneNotes": "C113: First quarterly utilization audit filed to D7 and public portal",
+    "NextScheduledAction": "Second quarterly audit cycle",
+    "NextActionCycle": 116,
+    "LastWorkCycle": 113,
+    "LastWorkSeat": "proj-health-center"
+  },
+  "_moveFold": {
+    "moveIds": [
+      "MV-112-proj-health-center-2026-10-23"
+    ]
+  }
+}

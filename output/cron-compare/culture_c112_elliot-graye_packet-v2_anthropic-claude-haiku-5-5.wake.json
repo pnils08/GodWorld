@@ -1,0 +1,57 @@
+{
+  "mode": "wake-write",
+  "desk": "culture",
+  "cycle": "112",
+  "provider": "openrouter",
+  "model": "anthropic/claude-haiku-5.5",
+  "configuredWriterModel": "anthropic/claude-haiku-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "elliot-graye",
+  "byline": {
+    "name": "Elliot Graye",
+    "popid": "POP-00012",
+    "beatDomain": "COMMUNITY"
+  },
+  "laneEntries": 20,
+  "quotesLanded": 3,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [],
+  "toolCalls": 0,
+  "wordCount": 708,
+  "targetWords": "evidence-bounded",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 708,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "979a2e55773350a1791cc162869038e7ac7baebed81de246f56c2a3d17ddb1e2",
+    "costUsd": 0.0013
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 4/4 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/culture_c112_elliot-graye_packet-v2_anthropic-claude-haiku-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "tip: ◈ secrets for agents [www.dotenvx.com]\n{\n  \"popId\": \"POP-00012\",\n  \"name\": \"Elliot Graye\",\n  \"recorded\": true,\n  \"text\": \"filed: Telegraph Presbyterian Fellowship Keeps Its Doors Open Downtown\"\n}"
+  },
+  "ranAt": "2026-10-22T23:15:57.259Z",
+  "dispositionReconciledAt": "2026-10-24T17:00:02.083Z"
+}

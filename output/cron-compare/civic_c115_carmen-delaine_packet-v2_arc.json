@@ -1,0 +1,27 @@
+{
+  "status": "arc-seed",
+  "cycle": "115",
+  "desk": "civic",
+  "persona": "carmen-delaine",
+  "hood": "West Oakland",
+  "quotes": [
+    {
+      "pop": "POP-00037",
+      "name": "Brenda Okoro",
+      "quote": "The closeout is published, the renewal ordinance is transmitted, and the standard holds at 23 days. Renewal is council's call — I won't call it before they do."
+    },
+    {
+      "pop": "POP-00790",
+      "name": "Marcus Webb",
+      "quote": "The closeout is on the record, the renewal draft is in the clerk's hands, and the 23-day standard holds — but renewal belongs to the council, and I will not call their vote before they do."
+    },
+    {
+      "pop": "POP-00790",
+      "name": "Marcus Webb",
+      "quote": "The mood in West Oakland is slipping and the housing pressure is building — which is exactly why the queue does not stop while the paperwork goes to the record."
+    }
+  ],
+  "claim": "The closeout is published, the renewal ordinance is transmitted, and the standard holds at 23 days. Renewal is council's call — I won't call it before they do.",
+  "src": "citizenVoice PRESS c115",
+  "ranAt": "2026-11-09T19:15:02.382Z"
+}

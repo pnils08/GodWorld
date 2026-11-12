@@ -1,0 +1,440 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00008",
+    "name": "P Slayer",
+    "role": "desk reporter",
+    "desk": "sports"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+    "approach": "Fan-heat approach (P Slayer pulse): do NOT open from the FO press release or the award board. Open from gut or Oakland sensory (bar, lot, bleacher row, BART after). First-person I/we only. Pick 1–2 charge-bag modes from this slice. Friction pivot required — name the counter-argument, kill it. ONE real foil number max (from FoilNumber / AnchorFacts); never invent x-stats or roster moves. Hook PriorTake when present — eat it or double down (\"I was wrong\" is craft). End on charge that sticks: dare, confession, or update. Not Anthony. Not Hal. Not multi-voice sports-desk average.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "fan-heat",
+      "fanCharge": "defiance",
+      "bagModes": [
+        "3 Friction Pivot",
+        "5 Paper Cuts vs the Nerds",
+        "9 Breakout Feeling"
+      ],
+      "friction": "Euphoria with friction: name the doubter, kill soft contentment.",
+      "centralFeeling": "Oakland should refuse the soft rewrite of what just happened.",
+      "priorTake": "NONE — write cold or invent no prior; wall may still inject at wake",
+      "sceneRule": "You may invent unnamed bar / lot / BART / bleacher texture that contradicts nothing on this slice. Do not invent star players, contracts, stats, or quotes. Named people stay on PLAYERS list or Tribune colleagues (Anthony, Hal, Mags) as foils."
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "award-board",
+    "hood": "Jack London",
+    "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+    "plan": {
+      "focus": "The atmosphere at the Blue Lattern Bar during the Keane and Dillon farewell event",
+      "closeQuestion": "How will the farewell event shape the narrative around the A's moving into the off-season?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00001",
+        "name": "Vinnie Keane",
+        "profile": "Vinnie Keane — Designated Hitter, Oakland A's Legend",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00018",
+        "name": "Benji Dillon",
+        "profile": "Benji Dillon — Pitcher, Oakland A's Legend",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00185",
+        "name": "Lila Patty",
+        "profile": "Lila Patty — Solar Panel Installation Lead",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00649",
+        "name": "Jire Hilt",
+        "profile": "Jire Hilt — Line Cook",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00649-07c0124610",
+        "pop": "POP-00649",
+        "name": "Jire Hilt",
+        "quote": "I bought a new A's jersey and I have to say, it's got me pretty excited. The anticipation is building up, I can feel it. I've been looking forward to the season, and now that I've got my new gear, I feel like I'm ready to go.",
+        "factIds": [
+          "F-783ae1ebe8a0"
+        ],
+        "src": "packet.W2[POP-00649]"
+      },
+      {
+        "id": "Q-POP-00001-99fc3b5d84",
+        "pop": "POP-00001",
+        "name": "Vinnie Keane",
+        "quote": "To be honest, I haven't been honored in the way you're suggesting. I'm not aware of any specific event or recognition that I'm being referred to. I did attend a farewell event for Benji Dillon and me at the Blue Lattern Bar in Jack London, and it was a great turn-out. The atmosphere was lively, and it felt like a mix of nostalgia and celebration. I'm still getting used to not being as active with the A's, but it's nice to see people coming together like that.",
+        "factIds": [
+          "F-c751088c732a",
+          "F-7a41dfc993a5"
+        ],
+        "src": "packet.W2[POP-00001]"
+      },
+      {
+        "id": "Q-POP-00018-fd967d6fe9",
+        "pop": "POP-00018",
+        "name": "Benji Dillon",
+        "quote": "The atmosphere at the Blue Lattern Bar during the Keane and Dillon farewell event was electric, but also a little tense. I've been around long enough to know that when legends are honored, there's always a mix of celebration and scrutiny. People were clearly euphoric, but I could sense some underlying friction, like there were those who weren't entirely on board with the farewell. It's a feeling I've experienced before in the clubhouse, where not everyone's always on the same page. Vinnie and I, we've been through a lot together, and it's weird to think about not being out there on the field as part of the same team anymore.",
+        "factIds": [
+          "F-c751088c732a",
+          "F-01d7731f718f",
+          "F-7a41dfc993a5"
+        ],
+        "src": "packet.W2[POP-00018]"
+      },
+      {
+        "id": "Q-POP-00185-08297745f1",
+        "pop": "POP-00185",
+        "name": "Lila Patty",
+        "quote": "I bought a new A's jersey and took a walk near a new construction site to clear my head after a long week. The noise of the city was still there, but standing by that new construction corner, I felt a bit more at peace.",
+        "factIds": [
+          "F-526cb8143980"
+        ],
+        "src": "packet.W2[POP-00185]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "P Slayer",
+        "text": "The bar might be packed, with fans sharing stories about Keane and Dillon's careers",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C112",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-7cd6ffd2aeb3"
+    },
+    {
+      "t": "FACT",
+      "text": "The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+      "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+      "id": "F-c751088c732a"
+    },
+    {
+      "t": "FACT",
+      "text": "Euphoria with friction: name the doubter, kill soft contentment.",
+      "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+      "id": "F-01d7731f718f"
+    },
+    {
+      "t": "FACT",
+      "text": "StoryAngle (feed): The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+      "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+      "id": "F-b955af6df0a7"
+    },
+    {
+      "t": "FACT",
+      "text": "Event: A's — player-feature (off-season)",
+      "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+      "id": "F-120e4da63805"
+    },
+    {
+      "t": "FACT",
+      "text": "NamesUsed: Vinnie Keane (3B), Benji Dillon (SP)",
+      "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+      "id": "F-093ab16a80f9"
+    },
+    {
+      "t": "FACT",
+      "text": "FanSentiment: euphoric · Mood: reflective",
+      "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+      "id": "F-7a41dfc993a5"
+    },
+    {
+      "t": "FACT",
+      "text": "Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and a sense of anticipation hangs in the air",
+      "src": "output/simulation_ledger_snapshot.jsonl",
+      "id": "F-783ae1ebe8a0"
+    },
+    {
+      "t": "FACT",
+      "text": "Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and let the week's noise settle near a new-construction corner",
+      "src": "output/simulation_ledger_snapshot.jsonl",
+      "id": "F-526cb8143980"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "p-slayer-fan-heat-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Turn a Packet-backed sports result or roster move into fan consequence. Owning or doubling down on a prior take and applying fan or front-office pressure are success; press-box analysis and tidy resolution are not.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "first-person I/we fan-heat column",
+      "targetWords": "400-700",
+      "opening": "a bar, lot, bleacher, sidewalk, or sports-viewing sensory moment",
+      "closing": "a dare, confession, or update with the central friction still live"
+    },
+    "authorizedTexture": [
+      "a bar, lot, bleacher, sidewalk, or sports-viewing setting; a named in-world venue is allotted texture",
+      "the reporter's own presence, gut reaction, or sensory observation",
+      "collective I or we used as columnist rhetoric and emotional stance, not as measured public sentiment or a poll",
+      "a rhetorical counterargument from unnamed fans used as an argument foil, not as an attributed quote",
+      "metaphor and emotional inference grounded in a supplied fact"
+    ],
+    "textureConditions": [
+      "I or we must not claim a verified collective sentiment, count, gathering, or event",
+      "an unnamed counterargument must remain rhetorical rather than becoming a quote or sourced statement",
+      "scene texture must carry no roster move, result, stat, contract, injury, player act, or front-office act",
+      "a prior-take confession or paraphrase requires a Packet-backed prior article or wall entry, and an exact quote requires supplied text",
+      "in-world named spots that are not real Oakland are allotted hallucination and belong on INTAKE BIZ if newly named",
+      "player, team, roster, statistic, result, and front-office facts still require Packet support"
+    ],
+    "canonBlockers": [
+      "a real-world player, team, venue, business, institution, or organization imported into the city; or an invented person given the authority of an established citizen",
+      "an unsupported roster move, signing, trade, non-move, result, record, streak, award, contract, or front-office act",
+      "an unsupported stat, metric, number, date, duration, or salary",
+      "an unsupported injury, medical, private-life, or mindset claim",
+      "a fabricated player, coach, or front-office quote or interview",
+      "collective fan sentiment presented as measured fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-2a0ac8a7b434",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-7cd6ffd2aeb3",
+        "t": "FACT",
+        "text": "Current cycle: C112",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-c751088c732a",
+        "t": "FACT",
+        "text": "The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+        "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell"
+      },
+      {
+        "id": "F-01d7731f718f",
+        "t": "FACT",
+        "text": "Euphoria with friction: name the doubter, kill soft contentment.",
+        "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell"
+      },
+      {
+        "id": "F-b955af6df0a7",
+        "t": "FACT",
+        "text": "StoryAngle (feed): The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+        "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell"
+      },
+      {
+        "id": "F-120e4da63805",
+        "t": "FACT",
+        "text": "Event: A's — player-feature (off-season)",
+        "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell"
+      },
+      {
+        "id": "F-093ab16a80f9",
+        "t": "FACT",
+        "text": "NamesUsed: Vinnie Keane (3B), Benji Dillon (SP)",
+        "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell"
+      },
+      {
+        "id": "F-7a41dfc993a5",
+        "t": "FACT",
+        "text": "FanSentiment: euphoric · Mood: reflective",
+        "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell"
+      },
+      {
+        "id": "F-783ae1ebe8a0",
+        "t": "FACT",
+        "text": "Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and a sense of anticipation hangs in the air",
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      },
+      {
+        "id": "F-526cb8143980",
+        "t": "FACT",
+        "text": "Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and let the week's noise settle near a new-construction corner",
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00649-07c0124610",
+        "speakerId": "POP-00649",
+        "speakerName": "Jire Hilt",
+        "text": "I bought a new A's jersey and I have to say, it's got me pretty excited. The anticipation is building up, I can feel it. I've been looking forward to the season, and now that I've got my new gear, I feel like I'm ready to go.",
+        "factIds": [
+          "F-783ae1ebe8a0"
+        ],
+        "src": "packet.W2[POP-00649]"
+      },
+      {
+        "id": "Q-POP-00001-99fc3b5d84",
+        "speakerId": "POP-00001",
+        "speakerName": "Vinnie Keane",
+        "text": "To be honest, I haven't been honored in the way you're suggesting. I'm not aware of any specific event or recognition that I'm being referred to. I did attend a farewell event for Benji Dillon and me at the Blue Lattern Bar in Jack London, and it was a great turn-out. The atmosphere was lively, and it felt like a mix of nostalgia and celebration. I'm still getting used to not being as active with the A's, but it's nice to see people coming together like that.",
+        "factIds": [
+          "F-c751088c732a",
+          "F-7a41dfc993a5"
+        ],
+        "src": "packet.W2[POP-00001]"
+      },
+      {
+        "id": "Q-POP-00018-fd967d6fe9",
+        "speakerId": "POP-00018",
+        "speakerName": "Benji Dillon",
+        "text": "The atmosphere at the Blue Lattern Bar during the Keane and Dillon farewell event was electric, but also a little tense. I've been around long enough to know that when legends are honored, there's always a mix of celebration and scrutiny. People were clearly euphoric, but I could sense some underlying friction, like there were those who weren't entirely on board with the farewell. It's a feeling I've experienced before in the clubhouse, where not everyone's always on the same page. Vinnie and I, we've been through a lot together, and it's weird to think about not being out there on the field as part of the same team anymore.",
+        "factIds": [
+          "F-c751088c732a",
+          "F-01d7731f718f",
+          "F-7a41dfc993a5"
+        ],
+        "src": "packet.W2[POP-00018]"
+      },
+      {
+        "id": "Q-POP-00185-08297745f1",
+        "speakerId": "POP-00185",
+        "speakerName": "Lila Patty",
+        "text": "I bought a new A's jersey and took a walk near a new construction site to clear my head after a long week. The noise of the city was still there, but standing by that new construction corner, I felt a bit more at peace.",
+        "factIds": [
+          "F-526cb8143980"
+        ],
+        "src": "packet.W2[POP-00185]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00001",
+        "name": "Vinnie Keane",
+        "profile": "Vinnie Keane — Designated Hitter, Oakland A's Legend",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00018",
+        "name": "Benji Dillon",
+        "profile": "Benji Dillon — Pitcher, Oakland A's Legend",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00185",
+        "name": "Lila Patty",
+        "profile": "Lila Patty — Solar Panel Installation Lead",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00649",
+        "name": "Jire Hilt",
+        "profile": "Jire Hilt — Line Cook",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "P Slayer",
+        "text": "The bar might be packed, with fans sharing stories about Keane and Dillon's careers",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "a bar, lot, bleacher, sidewalk, or sports-viewing setting; a named in-world venue is allotted texture",
+      "the reporter's own presence, gut reaction, or sensory observation",
+      "collective I or we used as columnist rhetoric and emotional stance, not as measured public sentiment or a poll",
+      "a rhetorical counterargument from unnamed fans used as an argument foil, not as an attributed quote",
+      "metaphor and emotional inference grounded in a supplied fact"
+    ],
+    "textureConditions": [
+      "I or we must not claim a verified collective sentiment, count, gathering, or event",
+      "an unnamed counterargument must remain rhetorical rather than becoming a quote or sourced statement",
+      "scene texture must carry no roster move, result, stat, contract, injury, player act, or front-office act",
+      "a prior-take confession or paraphrase requires a Packet-backed prior article or wall entry, and an exact quote requires supplied text",
+      "in-world named spots that are not real Oakland are allotted hallucination and belong on INTAKE BIZ if newly named",
+      "player, team, roster, statistic, result, and front-office facts still require Packet support"
+    ],
+    "forbiddenClaimClasses": [
+      "a real-world player, team, venue, business, institution, or organization imported into the city; or an invented person given the authority of an established citizen",
+      "an unsupported roster move, signing, trade, non-move, result, record, streak, award, contract, or front-office act",
+      "an unsupported stat, metric, number, date, duration, or salary",
+      "an unsupported injury, medical, private-life, or mindset claim",
+      "a fabricated player, coach, or front-office quote or interview",
+      "collective fan sentiment presented as measured fact"
+    ]
+  }
+}

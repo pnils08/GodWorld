@@ -1,0 +1,1071 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-01210",
+    "name": "Tamsin Pruitt",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "The lives of C114: 9 people — Lena Cross moved into a place of their own in Piedmont Ave, renting",
+    "approach": "Lives approach: this slice is the people something happened to this Cycle — a birth, a death in the house, a hospital stay, a retirement, a promotion; a household set up or a place of their own; a win or a loss on the book; the people a turn of the city reached and what it did to their day; and the smaller moments the record kept. Each person gets their own passage: the event, then the thread under it — the stay or strain that led there, the other lines the record kept for them, what the Tribune or this page already said of them, and what they did next if the record says. Read the thread in order and name where two lines of it do not agree; do not restate a ledger value as the story. The fact exactly right; never a trend, never a number first; the person, not the system the event belongs to. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent p",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "lives",
+      "hood": null,
+      "facts": [
+        "Lena Cross moved into a place of their own in Piedmont Ave, renting (C114)",
+        "Lena Cross — in their life, C113: disagreed with a Tribune column out loud to an empty kitchen",
+        "Lena Cross — in their life, C113: argued over dinner about which of the Baylight job postings were worth applying for",
+        "Lena Cross — in their life, C114: felt the creative energy of First Friday",
+        "Lena Cross — in their life, C114: adjusted today's plans after last night's gridlock",
+        "Lena Cross — the Tribune named them in a piece headlined The Names That Stay on the Wall (Culture, C113)",
+        "Lena Cross — the Tribune named them in a piece headlined Rockridge Keeps a Name Moving (Culture, C112)",
+        "Lena Cross — the Tribune named them in a piece headlined Tara Ellison Is Rising, and Nobody Around Her Can Say Where (Culture, C111)",
+        "Darius Cike moved into a place of their own in West Oakland, renting (C114)",
+        "Darius Cike — in their life, C113: the crack of a bat echoes from a nearby screen, drawing a small crowd of pedestrians to pause",
+        "Darius Cike — in their life, C114: badged into the Baylight office early and tried not to think about the protestors from last month near a new-construction corner",
+        "Darius Cike — in their life, C114: checked out First Friday galleries",
+        "Darius Cike — in their life, C114: noticed West Oakland's industrial character",
+        "Tanisha Freeman — watched the morning shuttles roll along the waterfront into the Baylight District and timed their own walk to beat them, Grand Lake — one of 4 people the Cycle's safety turn reached (Papers served at the counter — a lawsuit, and lawyers the shop never budgeted for.) (C114)",
+        "Tanisha Freeman — in their life, C113: a flyer for a seniors lunch program flutters on a community bulletin board",
+        "Tanisha Freeman — in their life, C114: showed up to set up the chairs in the fellowship hall because if they didn't do it, no one would",
+        "Drago Helio — realized the week had passed without a single thing worth retelling near a small park, Brooklyn — one of 4 people the Cycle's safety turn reached (A transformer blows — a block goes dark, freezers thaw, registers go cold.) (C114)",
+        "Drago Helio — in their life, C113: heard the freight trains clanking near the Port and timed their breathing to the rhythm",
+        "Drago Helio — in their life, C114: watched a parish priest fly UNDOCKED and the whole block had a stake in it by the second mission near a front porch",
+        "Henry Rivas — got asked about the club at a family dinner, West Oakland — one of 4 people the Cycle's safety turn reached (OARI talks it down — a crisis ended without cuffs, and the data point everyone cites.) (C114)",
+        "Henry Rivas — in their life, C113: argued about the best tamale cart on International Boulevard and refused to back down",
+        "Henry Rivas — in their life, C114: found a quiet minute at a local pop-up and a sense of anticipation hangs in the air",
+        "Henry Rivas — in their life, C114: heard someone at the cafe complain about the Baylight District noise and bit their tongue near a student cafe",
+        "Henry Rivas — in their life, C114: saw a stranger laugh at their phone and invented the joke all the way home",
+        "Henry Rivas — the Tribune named them in a piece headlined The Home-Run Race: Quintero and Taveras Light Up SF (Sports, C98)",
+        "Henry Rivas — the Tribune named them in a piece headlined THE WEIGHT OF TWO EMPIRES (Legacy & Dynasty, C98)",
+        "Henry Rivas — the Tribune named them in a piece headlined Thirty-Two And Six: The Cy Young Race In Oakland Tightens (Sports, C95)",
+        "Marco Fabregas — came home for the weekend and noticed the house felt smaller, Laurel (C114 — what happened in their life, not words they said)",
+        "Marco Fabregas — in their life, C113: did a radio interview",
+        "Marco Fabregas — in their life, C114: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+        "Marco Fabregas — in their life, C114: found a quiet minute at a small park and felt the season starting to turn",
+        "Elias Varek — Civis Systems returned $487928 to the line this week, West Oakland (C114 — what happened in their life, not words they said)",
+        "Elias Varek — in their life, C114: noticed the new streetlights went in before anyone had to ask",
+        "Elias Varek — in their life, C114: heard the freight trains clanking near the Port and timed their breathing to the rhythm",
+        "Elias Varek — in their life, C114: pulling in — the line's standing is near the bar",
+        "Elias Varek — in their life, C114: Varek Systems returned $34765 to the line this week",
+        "Elias Varek — the Tribune named them in a piece headlined Oaks' First Win Offers a Useful Opening Read (Sports, C112)",
+        "Elias Varek — the Tribune named them in a piece headlined West Oakland’s new business money is moving faster than the block can absorb (Business, C109)",
+        "Elias Varek — the Tribune named them in a piece headlined Before a Game Is Played, the Oaks Take a Hit — and the Man in Charge Finally Answers (Sports, C102)",
+        "Isley Kelley — Kelley Mercantile returned $2058 to the line this week, Rockridge (C114 — what happened in their life, not words they said)",
+        "Isley Kelley — in their life, C113: caught the recap of last night's game at the counter and stayed for the second retelling",
+        "Isley Kelley — in their life, C114: fielded a round of texts from people who hadn't called in years",
+        "Isley Kelley — in their life, C114: felt quietly proud of how they handled something small",
+        "Isley Kelley — in their life, C114: looked up how something works and came away more amazed, not less",
+        "Isley Kelley — the Tribune named them in a piece headlined Trade Deadline Earthquake: A's Send Richards to Mets, Reshape the Infield (Sports, Edition 101, C101)",
+        "Isley Kelley — the Tribune named them in a piece headlined Vinnie and Amara's Third Annual Gala Packs the House for Oakland's Kids (Sports, C101)",
+        "Isley Kelley — the Tribune named them in a piece headlined End of an Anchor: A's Deal Martin Richards to Mets at the Deadline (Sports, C100)",
+        "Benji Dillon — Dillon Clinic returned $7514 to the line this week, Rockridge (C114 — what happened in their life, not words they said)",
+        "Benji Dillon — in their life, C114: got recognized twice at the grocery store after the story ran",
+        "Benji Dillon — in their life, C114: the kids could say Father Miguel before they could say the mayor's name",
+        "Benji Dillon — in their life, C114: felt quietly proud of how they handled something small",
+        "Benji Dillon — in their life, C114: drove the church van for the senior trip and listened to three hours of unfiltered neighborhood gossip near a cafe on the avenue",
+        "Benji Dillon — the Tribune named them in a piece headlined Ellis's Game Five Line Carries the Title (Sports, C111)",
+        "Benji Dillon — the Tribune named them in a piece headlined The Weight of a Banner (Sports, C110)",
+        "Benji Dillon — the Tribune named them in a piece headlined Sports (Sports, C110)"
+      ],
+      "priorCycle": null,
+      "note": "none of today's people has written their own page this Cycle — no quotes",
+      "engineHooks": [
+        "A family bought their home in Rockridge (observational analysis)",
+        "The Thompson household (2) moved from Chinatown to West Oakland — moving up from Chinatown (desk rotation)",
+        "Derek Obi moved from Downtown to Rockridge — moving up from Downtown — sold the house in Downtown to rent up (desk rotation)",
+        "Patrice Rao moved from Chinatown to West Oakland — moving up from Chinatown (observational analysis)"
+      ],
+      "roomIsYours": "the plain respect, what the event meant in that house or on that block, the detail the family would have picked — from the lines below, never invented",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-lives",
+    "hood": null,
+    "src": "output/beats/Lived_Events.jsonl @C114 batch 8483ed",
+    "plan": {
+      "focus": "Lena Cross's new home in Piedmont Ave",
+      "closeQuestion": "What do the stories of these individuals reveal about the current state of Oakland's neighborhoods and the people living there?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00658",
+        "name": "Darius Cike",
+        "profile": "Darius Cike — Quantum Computing Researcher — West Oakland",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00848",
+        "name": "Tanisha Freeman",
+        "profile": "Tanisha Freeman — Electrician — Grand Lake",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00024",
+        "name": "Henry Rivas",
+        "profile": "Henry Rivas — Starting Pitcher, Oakland A's — West Oakland",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00658-3f674c004b",
+        "pop": "POP-00658",
+        "name": "Darius Cike",
+        "quote": "To be honest, my work in Quantum Computing doesn't directly relate to my decision to move to West Oakland. I've been drawn to the area's industrial character and the energy of the community. As a researcher, I'm often consumed by my work, but living here gives me a different kind of stimulation. I've enjoyed checking out local events like First Friday galleries, and it's nice to be around people who aren't all in the tech space. My work is pretty isolating, so it's good to have a change of pace.",
+        "factIds": [
+          "F-eab6ca4c4c99",
+          "F-dba5290c6679",
+          "F-c154905d29fe"
+        ],
+        "src": "packet.W2[POP-00658]"
+      },
+      {
+        "id": "Q-POP-00024-9730087db6",
+        "pop": "POP-00024",
+        "name": "Henry Rivas",
+        "quote": "As a Starting Pitcher for the Oakland A's, my daily life in West Oakland is pretty hectic. I'm always on the go, whether it's heading to the stadium or getting back to my family. The A's are a big part of my life, and I plan my days around the games. When I'm not pitching, I'm thinking about the next start or recovering from the last one. It's not easy, but it's worth it when I see the kids looking up to me like I'm some kinda hero.",
+        "factIds": [
+          "F-192cce51beb8",
+          "F-5e30278f2ee2"
+        ],
+        "src": "packet.W2[POP-00024]"
+      },
+      {
+        "id": "Q-POP-00848-e938eaac0f",
+        "pop": "POP-00848",
+        "name": "Tanisha Freeman",
+        "quote": "I haven't seen Lena Cross's new home, but I did hear they moved into a place on Piedmont Ave. I don't know much about it, though.",
+        "factIds": [
+          "F-161c3377fedd",
+          "F-50d40ee650a2"
+        ],
+        "src": "packet.W2[POP-00848]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Lena Cross's move might be related to their recent appearances in the Tribune, possibly indicating a change in their career or personal life. Darius Cike's move to West Oakland could be tied to their work in quantum computing research. Henry Rivas's experience as a Starting Pitcher might be affecting their family life or interactions in West Oakland.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C114",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-4261fa115617"
+    },
+    {
+      "t": "FACT",
+      "text": "Lena Cross moved into a place of their own in Piedmont Ave, renting",
+      "src": "output/beats/Lived_Events.jsonl @C114 batch 8483ed",
+      "id": "F-161c3377fedd"
+    },
+    {
+      "t": "FACT",
+      "text": "Lena Cross first. The event is the lead; one true detail; what came next only if the record says.",
+      "src": "output/beats/Lived_Events.jsonl @C114 batch 8483ed",
+      "id": "F-e5040450dbc8"
+    },
+    {
+      "t": "FACT",
+      "text": "Lena Cross moved into a place of their own in Piedmont Ave, renting (C114)",
+      "src": "output/beats/Household_Ledger.jsonl @C114",
+      "id": "F-50d40ee650a2"
+    },
+    {
+      "t": "FACT",
+      "text": "Lena Cross — in their life, C113: disagreed with a Tribune column out loud to an empty kitchen",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-7c5ffceabdea"
+    },
+    {
+      "t": "FACT",
+      "text": "Lena Cross — in their life, C113: argued over dinner about which of the Baylight job postings were worth applying for",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-99b9498b910c"
+    },
+    {
+      "t": "FACT",
+      "text": "Lena Cross — in their life, C114: felt the creative energy of First Friday",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-22e64d798e74"
+    },
+    {
+      "t": "FACT",
+      "text": "Lena Cross — in their life, C114: adjusted today's plans after last night's gridlock",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-01cc45151d9a"
+    },
+    {
+      "t": "FACT",
+      "text": "Lena Cross — the Tribune named them in a piece headlined The Names That Stay on the Wall (Culture, C113)",
+      "src": "archive/ARTICLE_INDEX.jsonl 68d855568af070ff",
+      "id": "F-91f8ca45f8b0"
+    },
+    {
+      "t": "FACT",
+      "text": "Lena Cross — the Tribune named them in a piece headlined Rockridge Keeps a Name Moving (Culture, C112)",
+      "src": "archive/ARTICLE_INDEX.jsonl a7fbed71068700a1",
+      "id": "F-894714e62f07"
+    },
+    {
+      "t": "FACT",
+      "text": "Lena Cross — the Tribune named them in a piece headlined Tara Ellison Is Rising, and Nobody Around Her Can Say Where (Culture, C111)",
+      "src": "archive/ARTICLE_INDEX.jsonl 016942d31b17d439",
+      "id": "F-246b7df6be49"
+    },
+    {
+      "t": "FACT",
+      "text": "Darius Cike moved into a place of their own in West Oakland, renting (C114)",
+      "src": "output/beats/Household_Ledger.jsonl @C114",
+      "id": "F-eab6ca4c4c99"
+    },
+    {
+      "t": "FACT",
+      "text": "Darius Cike — in their life, C113: the crack of a bat echoes from a nearby screen, drawing a small crowd of pedestrians to pause",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-2032c01f4150"
+    },
+    {
+      "t": "FACT",
+      "text": "Darius Cike — in their life, C114: badged into the Baylight office early and tried not to think about the protestors from last month near a new-construction corner",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-1d4f3ad3e89d"
+    },
+    {
+      "t": "FACT",
+      "text": "Darius Cike — in their life, C114: checked out First Friday galleries",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-c154905d29fe"
+    },
+    {
+      "t": "FACT",
+      "text": "Darius Cike — in their life, C114: noticed West Oakland's industrial character",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-dba5290c6679"
+    },
+    {
+      "t": "FACT",
+      "text": "Tanisha Freeman — watched the morning shuttles roll along the waterfront into the Baylight District and timed their own walk to beat them, Grand Lake — one of 4 people the Cycle's safety turn reached (Papers served at the counter — a lawsuit, and lawyers the shop never budgeted for.) (C114)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C114",
+      "id": "F-4afa564602aa"
+    },
+    {
+      "t": "FACT",
+      "text": "Tanisha Freeman — in their life, C113: a flyer for a seniors lunch program flutters on a community bulletin board",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-0eb16297fab4"
+    },
+    {
+      "t": "FACT",
+      "text": "Tanisha Freeman — in their life, C114: showed up to set up the chairs in the fellowship hall because if they didn't do it, no one would",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-535855dc6283"
+    },
+    {
+      "t": "FACT",
+      "text": "Drago Helio — realized the week had passed without a single thing worth retelling near a small park, Brooklyn — one of 4 people the Cycle's safety turn reached (A transformer blows — a block goes dark, freezers thaw, registers go cold.) (C114)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C114",
+      "id": "F-c4ebafaa056d"
+    },
+    {
+      "t": "FACT",
+      "text": "Drago Helio — in their life, C113: heard the freight trains clanking near the Port and timed their breathing to the rhythm",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-6cdd5c77f838"
+    },
+    {
+      "t": "FACT",
+      "text": "Drago Helio — in their life, C114: watched a parish priest fly UNDOCKED and the whole block had a stake in it by the second mission near a front porch",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-71abdb0bfe2a"
+    },
+    {
+      "t": "FACT",
+      "text": "Henry Rivas — got asked about the club at a family dinner, West Oakland — one of 4 people the Cycle's safety turn reached (OARI talks it down — a crisis ended without cuffs, and the data point everyone cites.) (C114)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C114",
+      "id": "F-128061ab20fb"
+    },
+    {
+      "t": "FACT",
+      "text": "Henry Rivas — in their life, C113: argued about the best tamale cart on International Boulevard and refused to back down",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-ba976f70f62e"
+    },
+    {
+      "t": "FACT",
+      "text": "Henry Rivas — in their life, C114: found a quiet minute at a local pop-up and a sense of anticipation hangs in the air",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-5e30278f2ee2"
+    },
+    {
+      "t": "FACT",
+      "text": "Henry Rivas — in their life, C114: heard someone at the cafe complain about the Baylight District noise and bit their tongue near a student cafe",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-8b4204e88a62"
+    },
+    {
+      "t": "FACT",
+      "text": "Henry Rivas — in their life, C114: saw a stranger laugh at their phone and invented the joke all the way home",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-b1b27238c2ab"
+    },
+    {
+      "t": "FACT",
+      "text": "Henry Rivas — the Tribune named them in a piece headlined The Home-Run Race: Quintero and Taveras Light Up SF (Sports, C98)",
+      "src": "archive/ARTICLE_INDEX.jsonl 4aeac6a01bda75c6",
+      "id": "F-369a3f697781"
+    },
+    {
+      "t": "FACT",
+      "text": "Henry Rivas — the Tribune named them in a piece headlined THE WEIGHT OF TWO EMPIRES (Legacy & Dynasty, C98)",
+      "src": "archive/ARTICLE_INDEX.jsonl b8f6c2087dbf7e84",
+      "id": "F-eea76ae16f21"
+    },
+    {
+      "t": "FACT",
+      "text": "Henry Rivas — the Tribune named them in a piece headlined Thirty-Two And Six: The Cy Young Race In Oakland Tightens (Sports, C95)",
+      "src": "archive/ARTICLE_INDEX.jsonl 53050c1238007e80",
+      "id": "F-f3d8852639f5"
+    },
+    {
+      "t": "FACT",
+      "text": "Marco Fabregas — came home for the weekend and noticed the house felt smaller, Laurel (C114 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-ed4f85a889b4"
+    },
+    {
+      "t": "FACT",
+      "text": "Marco Fabregas — in their life, C113: did a radio interview",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-73a6ce46585c"
+    },
+    {
+      "t": "FACT",
+      "text": "Marco Fabregas — in their life, C114: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-2b00202c1ada"
+    },
+    {
+      "t": "FACT",
+      "text": "Marco Fabregas — in their life, C114: found a quiet minute at a small park and felt the season starting to turn",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-741e85dcc033"
+    },
+    {
+      "t": "FACT",
+      "text": "Elias Varek — Civis Systems returned $487928 to the line this week, West Oakland (C114 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-a5ef9e7de697"
+    },
+    {
+      "t": "FACT",
+      "text": "Elias Varek — in their life, C114: noticed the new streetlights went in before anyone had to ask",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-c9ed1a09b9b0"
+    },
+    {
+      "t": "FACT",
+      "text": "Elias Varek — in their life, C114: heard the freight trains clanking near the Port and timed their breathing to the rhythm",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-0a18f4548891"
+    },
+    {
+      "t": "FACT",
+      "text": "Elias Varek — in their life, C114: pulling in — the line's standing is near the bar",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-8077a4a4679d"
+    },
+    {
+      "t": "FACT",
+      "text": "Elias Varek — in their life, C114: Varek Systems returned $34765 to the line this week",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-04b85277336a"
+    },
+    {
+      "t": "FACT",
+      "text": "Elias Varek — the Tribune named them in a piece headlined Oaks' First Win Offers a Useful Opening Read (Sports, C112)",
+      "src": "archive/ARTICLE_INDEX.jsonl 5df1d92b058d51c6",
+      "id": "F-fae86de6a8ad"
+    },
+    {
+      "t": "FACT",
+      "text": "Elias Varek — the Tribune named them in a piece headlined West Oakland’s new business money is moving faster than the block can absorb (Business, C109)",
+      "src": "archive/ARTICLE_INDEX.jsonl a103ffd5a1f6a103",
+      "id": "F-0b48d1f06f15"
+    },
+    {
+      "t": "FACT",
+      "text": "Elias Varek — the Tribune named them in a piece headlined Before a Game Is Played, the Oaks Take a Hit — and the Man in Charge Finally Answers (Sports, C102)",
+      "src": "archive/ARTICLE_INDEX.jsonl 434feac168b3623f",
+      "id": "F-e5df12092b09"
+    },
+    {
+      "t": "FACT",
+      "text": "Isley Kelley — Kelley Mercantile returned $2058 to the line this week, Rockridge (C114 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-d57ba07ea442"
+    },
+    {
+      "t": "FACT",
+      "text": "Isley Kelley — in their life, C113: caught the recap of last night's game at the counter and stayed for the second retelling",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-2ea669b4771b"
+    },
+    {
+      "t": "FACT",
+      "text": "Isley Kelley — in their life, C114: fielded a round of texts from people who hadn't called in years",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-e9ab2e3d2435"
+    },
+    {
+      "t": "FACT",
+      "text": "Isley Kelley — in their life, C114: felt quietly proud of how they handled something small",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-a51350e59c96"
+    },
+    {
+      "t": "FACT",
+      "text": "Isley Kelley — in their life, C114: looked up how something works and came away more amazed, not less",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-2efc9772bd33"
+    },
+    {
+      "t": "FACT",
+      "text": "Isley Kelley — the Tribune named them in a piece headlined Trade Deadline Earthquake: A's Send Richards to Mets, Reshape the Infield (Sports, Edition 101, C101)",
+      "src": "archive/ARTICLE_INDEX.jsonl 894ea90d682cb645",
+      "id": "F-592e2c4f0cfc"
+    },
+    {
+      "t": "FACT",
+      "text": "Isley Kelley — the Tribune named them in a piece headlined Vinnie and Amara's Third Annual Gala Packs the House for Oakland's Kids (Sports, C101)",
+      "src": "archive/ARTICLE_INDEX.jsonl 66585130e5296658",
+      "id": "F-cb96d8394fb6"
+    },
+    {
+      "t": "FACT",
+      "text": "Isley Kelley — the Tribune named them in a piece headlined End of an Anchor: A's Deal Martin Richards to Mets at the Deadline (Sports, C100)",
+      "src": "archive/ARTICLE_INDEX.jsonl 4857f607505aab8f",
+      "id": "F-7c953229e190"
+    },
+    {
+      "t": "FACT",
+      "text": "Benji Dillon — Dillon Clinic returned $7514 to the line this week, Rockridge (C114 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-a1431d526ab1"
+    },
+    {
+      "t": "FACT",
+      "text": "Benji Dillon — in their life, C114: got recognized twice at the grocery store after the story ran",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-16e6938668cc"
+    },
+    {
+      "t": "FACT",
+      "text": "Benji Dillon — in their life, C114: the kids could say Father Miguel before they could say the mayor's name",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-823a79e38fba"
+    },
+    {
+      "t": "FACT",
+      "text": "Benji Dillon — in their life, C114: felt quietly proud of how they handled something small",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-cbc40e84053c"
+    },
+    {
+      "t": "FACT",
+      "text": "Benji Dillon — in their life, C114: drove the church van for the senior trip and listened to three hours of unfiltered neighborhood gossip near a cafe on the avenue",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-aff1f46327e0"
+    },
+    {
+      "t": "FACT",
+      "text": "Benji Dillon — the Tribune named them in a piece headlined Ellis's Game Five Line Carries the Title (Sports, C111)",
+      "src": "archive/ARTICLE_INDEX.jsonl 932d071f77813236",
+      "id": "F-559c2922388b"
+    },
+    {
+      "t": "FACT",
+      "text": "Benji Dillon — the Tribune named them in a piece headlined The Weight of a Banner (Sports, C110)",
+      "src": "archive/ARTICLE_INDEX.jsonl 1929a6944b1d15a1",
+      "id": "F-1c9d501a2375"
+    },
+    {
+      "t": "FACT",
+      "text": "Benji Dillon — the Tribune named them in a piece headlined Sports (Sports, C110)",
+      "src": "archive/ARTICLE_INDEX.jsonl ccc754a892307106",
+      "id": "F-a3c7fc13c54e"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C10, Spring, holiday=none",
+      "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+      "id": "F-9b9470803821"
+    },
+    {
+      "t": "FACT",
+      "text": "Henry Rivas — Starting Pitcher, Oakland A's — West Oakland",
+      "src": "Simulation_Ledger profile for POP-00024",
+      "id": "F-192cce51beb8"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "tamsin-lives-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Put the cycle's person events in the paper as news, one person at a time — a birth, a death, a hospital stay, a retirement, a promotion, a household set up or a place of one's own, a win or a loss on the book, what a turn of the city did to someone's day, and the smaller moments the record kept. The event is the lead, the person is named as the slice names them, and what came next appears only when a later record holds it. A stake or a payout is the person's own fact, not a statistic. The page is the city's real calendar; every person on it is one the record holds.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "plain respect — a neighborhood weekly's births-and-obituaries hand, unhurried, exact",
+      "targetWords": "450-1200",
+      "opening": "the heaviest event on the slice, stated as it happened to the named person",
+      "closing": "the last person's passage ends on what the record holds next for them, or on the fact itself — no moral, no roundup"
+    },
+    "authorizedTexture": [
+      "the plain respect of the form — the ordinary weight of a birth, a retirement, a discharge, stated without ornament",
+      "the frame around a supplied fact — what a promotion to the supplied role means in plain words, without inventing the workplace",
+      "the neighborhood the slice names as where the person lives, without an invented street scene",
+      "the order and pacing of the passages — heaviest first, one person at a time"
+    ],
+    "textureConditions": [
+      "every person, event, role, employer, neighborhood, hospital stay, household and family tie must come from the slice",
+      "a quote appears only verbatim from the person's own supplied page; nothing paraphrased into quotation marks",
+      "what came next appears only when a later Cycle's supplied record holds it",
+      "a thin day (few events) is written as a short page, not padded"
+    ],
+    "canonBlockers": [
+      "any person, event, quote, venue, employer or family member not on the slice",
+      "a paraphrased or invented quote",
+      "a cause, diagnosis or outcome the record does not state",
+      "a statistic, rate or trend claim — the page is people, not numbers",
+      "intake bookkeeping rows (Emerged into Tier, Added to Simulation_Ledger, Updated to Tier) written as life events",
+      "raw engine labels or decimals printed as public-facing evidence"
+    ]
+  },
+  "manifest": {
+    "id": "AM-0c4f136c8490",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-4261fa115617",
+        "t": "FACT",
+        "text": "Current cycle: C114",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-161c3377fedd",
+        "t": "FACT",
+        "text": "Lena Cross moved into a place of their own in Piedmont Ave, renting",
+        "src": "output/beats/Lived_Events.jsonl @C114 batch 8483ed"
+      },
+      {
+        "id": "F-e5040450dbc8",
+        "t": "FACT",
+        "text": "Lena Cross first. The event is the lead; one true detail; what came next only if the record says.",
+        "src": "output/beats/Lived_Events.jsonl @C114 batch 8483ed"
+      },
+      {
+        "id": "F-50d40ee650a2",
+        "t": "FACT",
+        "text": "Lena Cross moved into a place of their own in Piedmont Ave, renting (C114)",
+        "src": "output/beats/Household_Ledger.jsonl @C114"
+      },
+      {
+        "id": "F-7c5ffceabdea",
+        "t": "FACT",
+        "text": "Lena Cross — in their life, C113: disagreed with a Tribune column out loud to an empty kitchen",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-99b9498b910c",
+        "t": "FACT",
+        "text": "Lena Cross — in their life, C113: argued over dinner about which of the Baylight job postings were worth applying for",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-22e64d798e74",
+        "t": "FACT",
+        "text": "Lena Cross — in their life, C114: felt the creative energy of First Friday",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-01cc45151d9a",
+        "t": "FACT",
+        "text": "Lena Cross — in their life, C114: adjusted today's plans after last night's gridlock",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-91f8ca45f8b0",
+        "t": "FACT",
+        "text": "Lena Cross — the Tribune named them in a piece headlined The Names That Stay on the Wall (Culture, C113)",
+        "src": "archive/ARTICLE_INDEX.jsonl 68d855568af070ff"
+      },
+      {
+        "id": "F-894714e62f07",
+        "t": "FACT",
+        "text": "Lena Cross — the Tribune named them in a piece headlined Rockridge Keeps a Name Moving (Culture, C112)",
+        "src": "archive/ARTICLE_INDEX.jsonl a7fbed71068700a1"
+      },
+      {
+        "id": "F-246b7df6be49",
+        "t": "FACT",
+        "text": "Lena Cross — the Tribune named them in a piece headlined Tara Ellison Is Rising, and Nobody Around Her Can Say Where (Culture, C111)",
+        "src": "archive/ARTICLE_INDEX.jsonl 016942d31b17d439"
+      },
+      {
+        "id": "F-eab6ca4c4c99",
+        "t": "FACT",
+        "text": "Darius Cike moved into a place of their own in West Oakland, renting (C114)",
+        "src": "output/beats/Household_Ledger.jsonl @C114"
+      },
+      {
+        "id": "F-2032c01f4150",
+        "t": "FACT",
+        "text": "Darius Cike — in their life, C113: the crack of a bat echoes from a nearby screen, drawing a small crowd of pedestrians to pause",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-1d4f3ad3e89d",
+        "t": "FACT",
+        "text": "Darius Cike — in their life, C114: badged into the Baylight office early and tried not to think about the protestors from last month near a new-construction corner",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-c154905d29fe",
+        "t": "FACT",
+        "text": "Darius Cike — in their life, C114: checked out First Friday galleries",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-dba5290c6679",
+        "t": "FACT",
+        "text": "Darius Cike — in their life, C114: noticed West Oakland's industrial character",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-4afa564602aa",
+        "t": "FACT",
+        "text": "Tanisha Freeman — watched the morning shuttles roll along the waterfront into the Baylight District and timed their own walk to beat them, Grand Lake — one of 4 people the Cycle's safety turn reached (Papers served at the counter — a lawsuit, and lawyers the shop never budgeted for.) (C114)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C114"
+      },
+      {
+        "id": "F-0eb16297fab4",
+        "t": "FACT",
+        "text": "Tanisha Freeman — in their life, C113: a flyer for a seniors lunch program flutters on a community bulletin board",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-535855dc6283",
+        "t": "FACT",
+        "text": "Tanisha Freeman — in their life, C114: showed up to set up the chairs in the fellowship hall because if they didn't do it, no one would",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-c4ebafaa056d",
+        "t": "FACT",
+        "text": "Drago Helio — realized the week had passed without a single thing worth retelling near a small park, Brooklyn — one of 4 people the Cycle's safety turn reached (A transformer blows — a block goes dark, freezers thaw, registers go cold.) (C114)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C114"
+      },
+      {
+        "id": "F-6cdd5c77f838",
+        "t": "FACT",
+        "text": "Drago Helio — in their life, C113: heard the freight trains clanking near the Port and timed their breathing to the rhythm",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-71abdb0bfe2a",
+        "t": "FACT",
+        "text": "Drago Helio — in their life, C114: watched a parish priest fly UNDOCKED and the whole block had a stake in it by the second mission near a front porch",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-128061ab20fb",
+        "t": "FACT",
+        "text": "Henry Rivas — got asked about the club at a family dinner, West Oakland — one of 4 people the Cycle's safety turn reached (OARI talks it down — a crisis ended without cuffs, and the data point everyone cites.) (C114)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C114"
+      },
+      {
+        "id": "F-ba976f70f62e",
+        "t": "FACT",
+        "text": "Henry Rivas — in their life, C113: argued about the best tamale cart on International Boulevard and refused to back down",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-5e30278f2ee2",
+        "t": "FACT",
+        "text": "Henry Rivas — in their life, C114: found a quiet minute at a local pop-up and a sense of anticipation hangs in the air",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-8b4204e88a62",
+        "t": "FACT",
+        "text": "Henry Rivas — in their life, C114: heard someone at the cafe complain about the Baylight District noise and bit their tongue near a student cafe",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-b1b27238c2ab",
+        "t": "FACT",
+        "text": "Henry Rivas — in their life, C114: saw a stranger laugh at their phone and invented the joke all the way home",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-369a3f697781",
+        "t": "FACT",
+        "text": "Henry Rivas — the Tribune named them in a piece headlined The Home-Run Race: Quintero and Taveras Light Up SF (Sports, C98)",
+        "src": "archive/ARTICLE_INDEX.jsonl 4aeac6a01bda75c6"
+      },
+      {
+        "id": "F-eea76ae16f21",
+        "t": "FACT",
+        "text": "Henry Rivas — the Tribune named them in a piece headlined THE WEIGHT OF TWO EMPIRES (Legacy & Dynasty, C98)",
+        "src": "archive/ARTICLE_INDEX.jsonl b8f6c2087dbf7e84"
+      },
+      {
+        "id": "F-f3d8852639f5",
+        "t": "FACT",
+        "text": "Henry Rivas — the Tribune named them in a piece headlined Thirty-Two And Six: The Cy Young Race In Oakland Tightens (Sports, C95)",
+        "src": "archive/ARTICLE_INDEX.jsonl 53050c1238007e80"
+      },
+      {
+        "id": "F-ed4f85a889b4",
+        "t": "FACT",
+        "text": "Marco Fabregas — came home for the weekend and noticed the house felt smaller, Laurel (C114 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-73a6ce46585c",
+        "t": "FACT",
+        "text": "Marco Fabregas — in their life, C113: did a radio interview",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-2b00202c1ada",
+        "t": "FACT",
+        "text": "Marco Fabregas — in their life, C114: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-741e85dcc033",
+        "t": "FACT",
+        "text": "Marco Fabregas — in their life, C114: found a quiet minute at a small park and felt the season starting to turn",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-a5ef9e7de697",
+        "t": "FACT",
+        "text": "Elias Varek — Civis Systems returned $487928 to the line this week, West Oakland (C114 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-c9ed1a09b9b0",
+        "t": "FACT",
+        "text": "Elias Varek — in their life, C114: noticed the new streetlights went in before anyone had to ask",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-0a18f4548891",
+        "t": "FACT",
+        "text": "Elias Varek — in their life, C114: heard the freight trains clanking near the Port and timed their breathing to the rhythm",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-8077a4a4679d",
+        "t": "FACT",
+        "text": "Elias Varek — in their life, C114: pulling in — the line's standing is near the bar",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-04b85277336a",
+        "t": "FACT",
+        "text": "Elias Varek — in their life, C114: Varek Systems returned $34765 to the line this week",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-fae86de6a8ad",
+        "t": "FACT",
+        "text": "Elias Varek — the Tribune named them in a piece headlined Oaks' First Win Offers a Useful Opening Read (Sports, C112)",
+        "src": "archive/ARTICLE_INDEX.jsonl 5df1d92b058d51c6"
+      },
+      {
+        "id": "F-0b48d1f06f15",
+        "t": "FACT",
+        "text": "Elias Varek — the Tribune named them in a piece headlined West Oakland’s new business money is moving faster than the block can absorb (Business, C109)",
+        "src": "archive/ARTICLE_INDEX.jsonl a103ffd5a1f6a103"
+      },
+      {
+        "id": "F-e5df12092b09",
+        "t": "FACT",
+        "text": "Elias Varek — the Tribune named them in a piece headlined Before a Game Is Played, the Oaks Take a Hit — and the Man in Charge Finally Answers (Sports, C102)",
+        "src": "archive/ARTICLE_INDEX.jsonl 434feac168b3623f"
+      },
+      {
+        "id": "F-d57ba07ea442",
+        "t": "FACT",
+        "text": "Isley Kelley — Kelley Mercantile returned $2058 to the line this week, Rockridge (C114 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-2ea669b4771b",
+        "t": "FACT",
+        "text": "Isley Kelley — in their life, C113: caught the recap of last night's game at the counter and stayed for the second retelling",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-e9ab2e3d2435",
+        "t": "FACT",
+        "text": "Isley Kelley — in their life, C114: fielded a round of texts from people who hadn't called in years",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-a51350e59c96",
+        "t": "FACT",
+        "text": "Isley Kelley — in their life, C114: felt quietly proud of how they handled something small",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-2efc9772bd33",
+        "t": "FACT",
+        "text": "Isley Kelley — in their life, C114: looked up how something works and came away more amazed, not less",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-592e2c4f0cfc",
+        "t": "FACT",
+        "text": "Isley Kelley — the Tribune named them in a piece headlined Trade Deadline Earthquake: A's Send Richards to Mets, Reshape the Infield (Sports, Edition 101, C101)",
+        "src": "archive/ARTICLE_INDEX.jsonl 894ea90d682cb645"
+      },
+      {
+        "id": "F-cb96d8394fb6",
+        "t": "FACT",
+        "text": "Isley Kelley — the Tribune named them in a piece headlined Vinnie and Amara's Third Annual Gala Packs the House for Oakland's Kids (Sports, C101)",
+        "src": "archive/ARTICLE_INDEX.jsonl 66585130e5296658"
+      },
+      {
+        "id": "F-7c953229e190",
+        "t": "FACT",
+        "text": "Isley Kelley — the Tribune named them in a piece headlined End of an Anchor: A's Deal Martin Richards to Mets at the Deadline (Sports, C100)",
+        "src": "archive/ARTICLE_INDEX.jsonl 4857f607505aab8f"
+      },
+      {
+        "id": "F-a1431d526ab1",
+        "t": "FACT",
+        "text": "Benji Dillon — Dillon Clinic returned $7514 to the line this week, Rockridge (C114 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-16e6938668cc",
+        "t": "FACT",
+        "text": "Benji Dillon — in their life, C114: got recognized twice at the grocery store after the story ran",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-823a79e38fba",
+        "t": "FACT",
+        "text": "Benji Dillon — in their life, C114: the kids could say Father Miguel before they could say the mayor's name",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-cbc40e84053c",
+        "t": "FACT",
+        "text": "Benji Dillon — in their life, C114: felt quietly proud of how they handled something small",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-aff1f46327e0",
+        "t": "FACT",
+        "text": "Benji Dillon — in their life, C114: drove the church van for the senior trip and listened to three hours of unfiltered neighborhood gossip near a cafe on the avenue",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-559c2922388b",
+        "t": "FACT",
+        "text": "Benji Dillon — the Tribune named them in a piece headlined Ellis's Game Five Line Carries the Title (Sports, C111)",
+        "src": "archive/ARTICLE_INDEX.jsonl 932d071f77813236"
+      },
+      {
+        "id": "F-1c9d501a2375",
+        "t": "FACT",
+        "text": "Benji Dillon — the Tribune named them in a piece headlined The Weight of a Banner (Sports, C110)",
+        "src": "archive/ARTICLE_INDEX.jsonl 1929a6944b1d15a1"
+      },
+      {
+        "id": "F-a3c7fc13c54e",
+        "t": "FACT",
+        "text": "Benji Dillon — the Tribune named them in a piece headlined Sports (Sports, C110)",
+        "src": "archive/ARTICLE_INDEX.jsonl ccc754a892307106"
+      },
+      {
+        "id": "F-9b9470803821",
+        "t": "FACT",
+        "text": "Calendar: Y3C10, Spring, holiday=none",
+        "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)"
+      },
+      {
+        "id": "F-192cce51beb8",
+        "t": "FACT",
+        "text": "Henry Rivas — Starting Pitcher, Oakland A's — West Oakland",
+        "src": "Simulation_Ledger profile for POP-00024"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00658-3f674c004b",
+        "speakerId": "POP-00658",
+        "speakerName": "Darius Cike",
+        "text": "To be honest, my work in Quantum Computing doesn't directly relate to my decision to move to West Oakland. I've been drawn to the area's industrial character and the energy of the community. As a researcher, I'm often consumed by my work, but living here gives me a different kind of stimulation. I've enjoyed checking out local events like First Friday galleries, and it's nice to be around people who aren't all in the tech space. My work is pretty isolating, so it's good to have a change of pace.",
+        "factIds": [
+          "F-eab6ca4c4c99",
+          "F-dba5290c6679",
+          "F-c154905d29fe"
+        ],
+        "src": "packet.W2[POP-00658]"
+      },
+      {
+        "id": "Q-POP-00024-9730087db6",
+        "speakerId": "POP-00024",
+        "speakerName": "Henry Rivas",
+        "text": "As a Starting Pitcher for the Oakland A's, my daily life in West Oakland is pretty hectic. I'm always on the go, whether it's heading to the stadium or getting back to my family. The A's are a big part of my life, and I plan my days around the games. When I'm not pitching, I'm thinking about the next start or recovering from the last one. It's not easy, but it's worth it when I see the kids looking up to me like I'm some kinda hero.",
+        "factIds": [
+          "F-192cce51beb8",
+          "F-5e30278f2ee2"
+        ],
+        "src": "packet.W2[POP-00024]"
+      },
+      {
+        "id": "Q-POP-00848-e938eaac0f",
+        "speakerId": "POP-00848",
+        "speakerName": "Tanisha Freeman",
+        "text": "I haven't seen Lena Cross's new home, but I did hear they moved into a place on Piedmont Ave. I don't know much about it, though.",
+        "factIds": [
+          "F-161c3377fedd",
+          "F-50d40ee650a2"
+        ],
+        "src": "packet.W2[POP-00848]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00658",
+        "name": "Darius Cike",
+        "profile": "Darius Cike — Quantum Computing Researcher — West Oakland",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00848",
+        "name": "Tanisha Freeman",
+        "profile": "Tanisha Freeman — Electrician — Grand Lake",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00024",
+        "name": "Henry Rivas",
+        "profile": "Henry Rivas — Starting Pitcher, Oakland A's — West Oakland",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Lena Cross's move might be related to their recent appearances in the Tribune, possibly indicating a change in their career or personal life. Darius Cike's move to West Oakland could be tied to their work in quantum computing research. Henry Rivas's experience as a Starting Pitcher might be affecting their family life or interactions in West Oakland.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "the plain respect of the form — the ordinary weight of a birth, a retirement, a discharge, stated without ornament",
+      "the frame around a supplied fact — what a promotion to the supplied role means in plain words, without inventing the workplace",
+      "the neighborhood the slice names as where the person lives, without an invented street scene",
+      "the order and pacing of the passages — heaviest first, one person at a time"
+    ],
+    "textureConditions": [
+      "every person, event, role, employer, neighborhood, hospital stay, household and family tie must come from the slice",
+      "a quote appears only verbatim from the person's own supplied page; nothing paraphrased into quotation marks",
+      "what came next appears only when a later Cycle's supplied record holds it",
+      "a thin day (few events) is written as a short page, not padded"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

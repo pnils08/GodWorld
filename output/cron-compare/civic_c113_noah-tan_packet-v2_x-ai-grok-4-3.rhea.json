@@ -1,0 +1,67 @@
+{
+  "draft": "output/cron-compare/civic_c113_noah-tan_packet-v2_x-ai-grok-4-3.md",
+  "cycle": "113",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "622b057f447e0cff49ac1f968a3a335185ef22d7a58b553e232fc45bc14158bb",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All citizen profiles, quotes, and neighborhood states verified against Cycle 113 ground truth.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "noah-weather-ground-v1",
+    "packageVersion": "NOAH-LEP2-1",
+    "manifestId": "AM-391efd71ade0",
+    "lexicalObservations": [],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Cee Lee",
+      "Elle Lilo",
+      "Johhny Necklar",
+      "Kwame Fitzgerald",
+      "Omar Amici",
+      "Rafael Brannie"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0096,
+  "durationMs": 4712,
+  "parseError": false,
+  "ranAt": "2026-10-28T23:16:35.913Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 400",
+    "words": 602,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "622b057f447e0cff49ac1f968a3a335185ef22d7a58b553e232fc45bc14158bb",
+    "costUsd": 0.0011
+  }
+}

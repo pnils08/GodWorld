@@ -1,0 +1,44 @@
+{
+  "stage": "report",
+  "desk": "sports",
+  "cycle": "115",
+  "persona": "selena-grant",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Selena Grant",
+    "popid": "POP-00591"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-oaks-beat",
+      "angle": "Oaks — game-result C115 · 8-1 · W4 — the second club's board read",
+      "label": "Oaks — game-result C115 · 8-1 · W4",
+      "hookLine": "Down two after three in Philadelphia, the Oaks drop 40 in the fourth and Hayward scores a career high. Oaks 120 - 76ers 106",
+      "hood": "San Antonio",
+      "citizens": [
+        "Adash Stanley (POP-01023)",
+        "Harry Hayward (POP-01223)",
+        "Dillon Brooks (POP-01079)",
+        "Austin Reaves (POP-01027)",
+        "Wilson Shepard (POP-01022)"
+      ],
+      "popids": [
+        "POP-01023",
+        "POP-01223",
+        "POP-01079",
+        "POP-01027",
+        "POP-01022"
+      ],
+      "ref": "output/beats/Oakland_Sports_Feed.jsonl @C115",
+      "cycle": 115
+    }
+  },
+  "angle": "output/test-shell/20261110-231754-selena-grant-light/sports_c115_selena-grant_packet-v2_angle.json",
+  "quotesRequested": 0,
+  "quotesLanded": 0,
+  "quotes": [],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [],
+  "ranAt": "2026-11-10T19:17:02.080Z"
+}

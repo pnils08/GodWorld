@@ -1,0 +1,39 @@
+{
+  "model": "anthropic/claude-sonnet-5.5",
+  "calls": [
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Neighborhood_Demographics",
+        "match": "Chinatown"
+      },
+      "resultChars": 248,
+      "resultHead": "Neighborhood | Students | Adults | Seniors | Unemployed | Sick | LastUpdated | SchoolQualityIndex | GraduationRate | CollegeReadinessRate | TeacherQuality | Funding\nChinatown | 314 | 1496 | 395 | 83 | 135 | 115 | 6.84 | 85.61 | 53.11 | 6.92 | 12000"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Chinatown illness sick residents"
+      },
+      "resultChars": 1661,
+      "resultHead": "[C114 · daily · Dr. Lila Mezran] # Chinatown's 137 Sick: Six Beds Hold Part of the Count, Kitchens Hold the Rest Akua Adeyemi's work takes her into other people's kitchens and bathrooms. A plumber in Chinatown sees the inside of a household, and she says the signs of a sick person in the house are rarely spoken. \"I see it in the little things, honestly,\" Adeyemi said. \"A bottle of cough syrup moved from the bathroom to the kitchen counter, so it's right there where someone'll remember it. Or a chair pulled up by the window, where someone's been si\n[C112 · daily · Dr. Lila Mezran] That's just h"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Akua Adeyemi"
+      },
+      "resultChars": 553,
+      "resultHead": "[C114 · daily · Dr. Lila Mezran] # Chinatown's 137 Sick: Six Beds Hold Part of the Count, Kitchens Hold the Rest Akua Adeyemi's work takes her into other people's kitchens and bathrooms. A plumber in Chinatown sees the inside of a household, and she says the signs of a sick person in the house are rarely spoken. \"I see it in the little things, honestly,\" Adeyemi said. \"A bottle of cough syrup moved from the bathroom to the kitchen counter, so it's right there where someone'll remember it. Or a chair pulled up by the window, where someone's been si"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Deacon Seymour hospital"
+      },
+      "resultChars": 553,
+      "resultHead": "[C112 · daily · Dr. Lila Mezran] But lying there, I realized the names on the forms aren't the same as the names on the beds. Chinatown's been hit so hard, and I know it's not because those folks matter less. It's just that nobody's writing their names down the same way. I'm lucky — I've got people who can advocate for me, who know how to work the system. Not everyone has that. That gap isn't about who's sicker. It's about who gets seen.\" Deacon Seymour, the Lake Merritt manager of the Oakland A's, has been in the same position. He was admitted in"
+    }
+  ],
+  "ranAt": "2026-11-11T07:25:11.094Z"
+}

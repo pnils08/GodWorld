@@ -1,0 +1,57 @@
+{
+  "mode": "wake-write",
+  "desk": "wire",
+  "cycle": "112",
+  "provider": "openrouter",
+  "model": "x-ai/grok-4.3",
+  "configuredWriterModel": "x-ai/grok-4.3",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "celeste-tran",
+  "byline": {
+    "name": "Celeste Tran",
+    "popid": "POP-00164",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 20,
+  "quotesLanded": 4,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [],
+  "toolCalls": 0,
+  "wordCount": 529,
+  "targetWords": "400-700",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 400",
+    "words": 529,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "1ec66e83731c92fc115224204fa27a446b07604cabbe0c09f8a23b530b60ae64",
+    "costUsd": 0.001
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 4/4 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/wire_c112_celeste-tran_packet-v2_x-ai-grok-4-3.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "true }\n{\n  \"popId\": \"POP-00164\",\n  \"name\": \"Celeste Tran\",\n  \"recorded\": true,\n  \"text\": \"filed: West Oakland drew the largest share of new arrivals this cycle, eighteen residents shifting in while\"\n}"
+  },
+  "ranAt": "2026-10-23T23:19:44.971Z",
+  "dispositionReconciledAt": "2026-10-24T17:00:04.698Z"
+}

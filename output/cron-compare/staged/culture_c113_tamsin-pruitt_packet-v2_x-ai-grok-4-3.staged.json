@@ -1,0 +1,65 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "113",
+  "persona": "tamsin-pruitt",
+  "byline": "Tamsin Pruitt",
+  "bylinePopid": "POP-01210",
+  "article": "output/cron-compare/staged/culture_c113_tamsin-pruitt_packet-v2_x-ai-grok-4-3.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Alicia Hernandez",
+        "role": "quoted-source",
+        "popid": "POP-00366"
+      },
+      {
+        "name": "Maren Johns",
+        "role": "quoted-source",
+        "popid": "POP-00470"
+      },
+      {
+        "name": "Manfred Owens",
+        "role": "quoted-source",
+        "popid": "POP-00028"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Uptown"
+    ],
+    "claims": [
+      {
+        "claim": "I was promoted at Oakland Hospital after 49 years as a Psychotherapist. It was a surprise, but a nice one.",
+        "sourceRef": "citizenVoice PRESS Maren Johns"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-13464f5cbb3e",
+    "draftSha256": "d69f3ed68b033a33ec6f2af700c8c56a86bdb171eb256582661f03660945512c",
+    "verdict": "output/cron-compare/culture_c113_tamsin-pruitt_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-10-26T23:20:18.957Z",
+    "contractScore": {
+      "opened": true,
+      "closed": false,
+      "purposeMet": true,
+      "inTarget": false,
+      "inTargetBy": "code floor 450",
+      "words": 270,
+      "short": "The piece falls short of the 450-word minimum target and ends with a multi-person roundup rather than concluding on the final person's passage.",
+      "score": 2,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "d69f3ed68b033a33ec6f2af700c8c56a86bdb171eb256582661f03660945512c",
+      "costUsd": 0.0012
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-26T23:20:24.802Z"
+}

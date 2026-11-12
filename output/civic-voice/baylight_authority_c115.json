@@ -1,0 +1,28 @@
+{
+  "office": "baylight_authority",
+  "cycle": 115,
+  "speaker": "Keisha Ramos",
+  "cascadeSummary": "The Mayor's gavel set the C115 construction milestone as an evidence-gated event, and the evidence file is assembled. This cycle I conduct the review and publish the findings — the milestone is not declared passed before the findings say so. I hold the ImplementationPhase; the review determines whether it advances, not the calendar.",
+  "statements": [
+    {
+      "statementId": "STMT-115-baylight_authority-001",
+      "type": "milestone_update",
+      "topic": "Baylight District Construction Milestone Review — C115 Findings",
+      "initiative": "INIT-006",
+      "decision": "Conduct the C115 construction milestone review against the assembled evidence file and publish the findings; do not declare the milestone passed before the review publishes.",
+      "quote": "The file is the review this cycle — independent soil verification, 48-hour hotline logs, dust-control records, and Jack London workforce results, all open to inspection.",
+      "fullStatement": "The Authority conducted the Cycle 115 construction milestone review against the assembled evidence file this cycle, and published its findings. The review drew on three records: the independent remediation verification covering Phase II soil handling, the 48-hour construction hotline logs and active dust-control readings on the haul routes, and the Jack London workforce-coordination results from the pre-review meeting. The construction fence still carries the Authority hotline and still answers within two cycles. I do not declare the C115 milestone passed on this statement — the findings carry that determination, and the evidence file is the record that backs it. The project clock moves at the speed the remediation and workforce records justify, not the speed of the political calendar.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-115-baylight_authority-002",
+      "type": "community_engagement",
+      "topic": "Baylight District Community Impact Mitigation — Jack London Findings Carry Forward",
+      "initiative": "INIT-006",
+      "decision": "Carry the Jack London workforce-coordination results and hotline/dust-control records into the C115 findings record as the operational baseline for the next phase of mitigation.",
+      "quote": "The 48-hour hotline and active dust control on the haul routes are now records, not promises — they are what the next review measures against.",
+      "fullStatement": "The Jack London workforce-coordination meeting and the 48-hour hotline are now inside the C115 findings record, which is where mitigation commitments belong — recorded, inspectable, and measured next cycle against themselves. The Authority hears two things from the neighborhood side of the plywood: housing pressure building and mood slipping, and both are workforce-and-traffic questions we can answer with records. On the ground this cycle: the hotline continues to log and answer within the two-cycle window, the haul routes continue under active dust control, and the site walks proceed on the same three-days-a-week cadence the Authority has run since mobilization. Next milestone: the findings record and the workforce-coordination results go into the next scheduled construction milestone review.",
+      "trackerUpdates": {}
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "office": "council_d1",
+  "cycle": 114,
+  "speaker": "Denise Carter",
+  "cascadeSummary": "This cycle I move on two fronts: I execute the Month-12 disbursement of the West Oakland Stabilization Fund and open the charter renewal with its scope preserved, and I publish the D1 municipal mitigation response for the two unaddressed district complaints alongside the OARI evaluation metrics Mara Vance demanded. I also push the Tenant Defense Fund to a recorded committee decision while refusing to let West Oakland's success go uncredited, naming Okoro's grant administration and the residents who earned it.",
+  "statements": [
+    {
+      "statementId": "STMT-114-council_d1-001",
+      "type": "vote_statement",
+      "topic": "West Oakland Stabilization Fund — Month-12 disbursement and charter renewal",
+      "initiative": "West Oakland Stabilization Fund",
+      "decision": "Vote YES to execute the $400,000 Month-12 disbursement under the 23-day processing standard and to open charter renewal drafting with the Fund's scope intact for West Oakland businesses and residents.",
+      "quote": "Month twelve is not a closing — it's a renewal, and I won't sign a charter that writes our people out.",
+      "fullStatement": "I cast my vote to execute the Month-12 four hundred thousand dollar disbursement and to put the charter renewal on the floor this cycle. Twenty-three days is the standard — it stays. The scope is West Oakland businesses and residents — it stays. Fifty-plus checks and five million dollars have gone into boots on our streets, and I'm not letting a renewal draft quietly rewrite who this fund is for. Long-tenure West Oaklanders built this neighborhood. The Stabilization Fund is Oakland keeping its word to them, and month twelve is a promise renewed, not a book closed.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-114-council_d1-002",
+      "type": "vote_statement",
+      "topic": "Oakland Alternative Response Initiative — D1 mitigation response and evaluation metrics",
+      "initiative": "Oakland Alternative Response Initiative",
+      "decision": "Publish the municipal mitigation response for the 2 active District 1 citizen complaints and execute the D1 OARI evaluation review, reporting dispatch evaluation metrics for INIT-002 in Cycle 114.",
+      "quote": "Two petitions on the record is not a backlog — it's two neighbors asking City Hall to answer the door.",
+      "fullStatement": "Director Vance asked me to answer and silence is a choice I won't make. Two active District 1 citizen complaints get a published municipal mitigation response this cycle — a real disposition, not a filing. And I'm completing the D1 OARI evaluation review with the dispatch metrics written out where residents can read them. Alternative response only earns trust when it's visible in the neighborhood it's serving, and Brooklyn in particular has been asking for that visibility for cycles. The metrics go public this cycle, and the two complaints get answers in writing.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-114-council_d1-003",
+      "type": "vote_statement",
+      "topic": "West Oakland Tenant Defense Fund — recorded committee decision",
+      "initiative": "West Oakland Tenant Defense Fund",
+      "decision": "Vote YES to place the $4.2 million Tenant Defense Fund on the Housing and Community Development Committee's decision agenda with the legal-support analysis made public and a recorded outcome requested.",
+      "quote": "I've moved this twice and I'll move it again — procedural silence is not a decision on tenant defense.",
+      "fullStatement": "I'm casting my vote to put the four point two million dollar Tenant Defense Fund on the committee's decision agenda and to make the legal-support analysis public the same day. I said last cycle that legal defense is housing stability, and I meant it. West Oakland families facing displacement do not live in procedural limbo — they live with keys in hand and a clock running. The committee owes this district a recorded outcome this cycle, and it owes the analysis in the open. Implementation stays contingent on authorization; that's the rule and I'll hold it. But delay is a choice, and I'm not making it quietly anymore.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-114-council_d1-004",
+      "type": "statement",
+      "topic": "Oakland Youth Apprenticeship Pipeline — placement gap analysis",
+      "initiative": "Oakland Youth Apprenticeship Pipeline",
+      "decision": "Support publication of the C114 placement-gap analysis with specific attention to West Oakland, and request program adjustments tied to its findings before the next cohort intake.",
+      "quote": "Enrollment without placement is a schedule; placement with a career is a path — I want the path.",
+      "fullStatement": "The first cohort report landed last cycle and accountability means reading it. I'm calling for the C114 placement-gap analysis to be published with West Oakland called out by name, and for program adjustments tied to what it actually shows — no invented gap count, no polished press release. West Oakland young people entered this pipeline with their time and hope. If placement is lagging behind enrollment, I want to know why, on the record, before another cohort is called up. A published report is not the finish line.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-114-council_d1-005",
+      "type": "statement",
+      "topic": "Brooklyn crisis accountability and West Oakland credit",
+      "initiative": null,
+      "decision": "Hold the Mayor's office to owning Brooklyn's C114 evidence review and options response while protecting low-crime conditions, and credit West Oakland's success to its residents, workers, businesses, and Deputy Mayor Okoro's documented grant administration.",
+      "quote": "West Oakland built its own good mood — City Hall should say so out loud, even as we own what Brooklyn is telling us.",
+      "fullStatement": "I represent both of these neighborhoods and I won't let one be praised as a slogan and the other absorbed as someone else's problem. Brooklyn's mood is soured and its street trade slow. The Mayor's office owns the C114 evidence review and options response, and I'll be checking that it protects low-crime conditions rather than trading them away. West Oakland is clearly upbeat, and I'm naming the credit where it belongs: the residents, workers, and businesses who kept the block alive, and Deputy Mayor Okoro's documented grant administration that turned chartered dollars into forty-seven checks and more. That's not cause I invent — that's a record I can point to.",
+      "trackerUpdates": {}
+    }
+  ]
+}

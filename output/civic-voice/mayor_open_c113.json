@@ -1,0 +1,98 @@
+{
+  "office": "mayor_open",
+  "cycle": 113,
+  "speaker": "Avery Santana",
+  "cascadeSummary": "I approved month-twelve disbursement for INIT-001, releasing the final $400K tranche to complete the West Oakland Stabilization Fund's first year. I also directed Deputy Mayor Okoro to prepare a charter renewal proposal for Council consideration by Cycle 115, given the Fund's proven track record and the remaining $23.4M in authorized capital. For INIT-002, I accepted the district-level data report and directed OARI leadership to schedule the D3 community briefing for Cycle 114, maintaining our transparency commitment while keeping expansion on track. I filed the quarterly utilization audit for INIT-005, confirming Temescal Health Center's strong early performance and cementing the D7 accountability framework as standing practice. For INIT-007, I directed an expedited first cohort placement report to my desk by Cycle 114, with pipeline leadership to brief me personally on any blockers — youth workforce is too critical to slip. On the legislative agenda, I announced my support for INIT-009 and INIT-010 advancing through committee this cycle, with my full backing for floor votes. I also announced my intention to file INIT-011 and INIT-012 as paired neighborhood revitalization bills, with Ivy Hill receiving priority sequencing given its current stress indicators. Finally, I named Deputy Mayor Okoro's team for the visible improvement in West Oakland's daily life — 47 households stabilized, $5M deployed, and a neighborhood that feels the difference.",
+  "statements": [
+    {
+      "statementId": "STMT-113-mayor_open-001",
+      "type": "authorization_response",
+      "topic": "West Oakland Stabilization Fund Month-Twelve Disbursement and Charter Renewal",
+      "initiative": "INIT-001",
+      "decision": "approved final disbursement and directed charter renewal proposal",
+      "quote": "Five million dollars kept 47 families in their homes — that's Oakland keeping its word.",
+      "fullStatement": "This morning I authorized the month-twelve disbursement of $400,000 for the West Oakland Stabilization Fund, completing the first full year of operation. Deputy Mayor Okoro's team has maintained 23-day average processing time across twelve consecutive months, and the cumulative $5 million deployed has stabilized 47 long-tenure households who were priced out of the market-rate boom. The Fund has $23.4 million remaining in authorized capital, and I am directing Okoro to prepare a charter renewal proposal for Council consideration by Cycle 115. West Oakland's mood is shifting — storefronts are steadier, block-level investment is visible — and that's because this program puts money in people's hands fast. We built something that works. Now we scale it.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-113-mayor_open-002",
+      "type": "authorization_response",
+      "topic": "Oakland Alternative Response Initiative District Data and D3 Briefing",
+      "initiative": "INIT-002",
+      "decision": "accepted district-level report and directed D3 community briefing for Cycle 114",
+      "quote": "Transparency builds trust — and trust lets us expand what works.",
+      "fullStatement": "I have reviewed the district-level data report for OARI's District 1 deployment, and the metrics confirm what we suspected: alternative response is reducing unnecessary police contact while maintaining public safety outcomes. The D3 community briefing — a condition I accepted last cycle — is now scheduled for Cycle 114, with full district-level breakdowns and community Q&A. Councilmember Chen asked for this transparency, and she was right to. I will not expand OARI to new districts until Oaklanders in the next expansion zone see the same data D3 will see. That's the deal. OARI works — $12.5 million invested, lives changed, communities safer — but it works because we build trust while we build capacity.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-113-mayor_open-003",
+      "type": "authorization_response",
+      "topic": "Temescal Community Health Center Quarterly Utilization Audit",
+      "initiative": "INIT-005",
+      "decision": "filed quarterly audit and confirmed D7 benchmarks as standing procedure",
+      "quote": "$1.2 million under budget and two weeks early — accountability delivered.",
+      "fullStatement": "The first quarterly utilization audit for the Temescal Community Health Center is now filed with the City Clerk and posted to the public data portal. The center opened two weeks ahead of schedule and $1.2 million under budget, and early utilization data shows strong community uptake across all projected service categories. I have adopted Councilmember Ashford's quarterly audit benchmarks as standing procedure for this facility — transparency is not a one-time event. The $45 million investment is performing, and Oaklanders can verify that performance themselves. This is how we build health infrastructure: on time, on budget, and accountable to the people it serves.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-113-mayor_open-004",
+      "type": "executive_order",
+      "topic": "Oakland Youth Apprenticeship Pipeline Cohort Placement Accountability",
+      "initiative": "INIT-007",
+      "decision": "directed expedited placement report and personal briefing on blockers",
+      "quote": "Youth workforce is too critical to slip — I want answers, not excuses.",
+      "fullStatement": "I have directed the Oakland Youth Apprenticeship Pipeline leadership to deliver the first cohort placement report to my desk by Cycle 114, with a personal briefing on any implementation blockers. The $12.5 million pipeline is central to my economic development agenda — connecting young Oaklanders to building trades, technology, and healthcare careers. I am not interested in delays. If there are capacity issues, funding gaps, or partnership frictions, I want them named with solutions attached. This pipeline must perform. The youth of West Oakland and Fruitvale are counting on it, and I am counting on my team to deliver.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-113-mayor_open-005",
+      "type": "policy_position",
+      "topic": "Downtown Economic Revitalization Committee Vote and Uptown Track",
+      "initiative": "INIT-008",
+      "decision": "announced full support for committee advancement and Uptown planning commitment",
+      "quote": "Downtown waited long enough — and Uptown's next in line.",
+      "fullStatement": "I am announcing my full support for the Downtown Economic Revitalization ordinance advancing through the Economic Development Committee this cycle. The $15 million authorization — with Councilmember Ashford's benchmarks attached — is ready for floor consideration. I have also committed to Uptown stabilization planning for Cycle 114, as I promised Councilmember Mobley. Downtown's daily life is under pressure — storefront vacancies, quieter streets, housing stress — and this intervention is overdue. But investment without accountability is just spending. The milestone reporting and audit criteria I attached ensure we can prove impact, not just promise it.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-113-mayor_open-006",
+      "type": "policy_position",
+      "topic": "Commercial Stabilization for Grand Lake Committee Advancement",
+      "initiative": "INIT-009",
+      "decision": "announced full support for committee passage with milestone and audit conditions",
+      "quote": "Grand Lake's quiet engine gets fuel with strings attached.",
+      "fullStatement": "I am backing the Commercial Stabilization for Grand Lake ordinance through committee this cycle, with the mandatory milestone reporting and audit protocols that Councilmembers Chen and Vega rightly demanded. The $2.5 million investment recognizes what Grand Lake has built — steady commercial corridors, family-owned businesses, a neighborhood that anchors Oakland's east side. But accountability and investment walk together. The conditions attached ensure that every dollar can be traced to outcomes: storefronts occupied, jobs retained, commercial vacancy reduced. I expect this to reach the floor with bipartisan support.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-113-mayor_open-007",
+      "type": "policy_position",
+      "topic": "West Oakland Tenant Defense Fund Committee Advancement",
+      "initiative": "INIT-010",
+      "decision": "announced full support for committee passage",
+      "quote": "Legal defense is housing stability — and Oakland funds both.",
+      "fullStatement": "I am supporting the West Oakland Tenant Defense Fund through the Housing and Community Development Committee this cycle. The $4.2 million authorization complements the Stabilization Fund's direct assistance with legal infrastructure — tenant counseling, eviction defense, know-your-rights outreach. West Oakland's improvement is real but fragile; 47 households stabilized means nothing if the next 47 face displacement without representation. This is the second pillar of anti-displacement policy: money to stay, and lawyers to fight. Both advance this cycle.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-113-mayor_open-008",
+      "type": "executive_order",
+      "topic": "Ivy Hill and Dimond Revitalization Initiative Filing",
+      "initiative": "INIT-011",
+      "decision": "directed filing of paired revitalization bills with Ivy Hill priority sequencing",
+      "quote": "Ivy Hill is hurting now — we answer with action, not studies.",
+      "fullStatement": "I am directing my legislative team to file the Ivy Hill Revitalization Initiative and Dimond Revitalization Initiative as paired neighborhood investment bills this cycle, with Ivy Hill receiving priority sequencing. The engine flags are clear: Ivy Hill's mood has soured, street trade is struggling, and the compounding stress demands response. Dimond's stability — which I acknowledged last cycle — deserves reinforcement before stress arrives, not after. Each initiative carries $2.5 million in proposed authorization, with program design modeled on the Grand Lake and Downtown frameworks: commercial stabilization, small business technical assistance, and public space activation. Ivy Hill first. Oakland doesn't wait for neighborhoods to decline before we invest.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-113-mayor_open-009",
+      "type": "public_remark",
+      "topic": "West Oakland Improvement Recognition and Credit",
+      "initiative": null,
+      "decision": "named Deputy Mayor Okoro's housing unit for visible neighborhood improvement",
+      "quote": "Somebody's work is paying off in West Oakland — I'm naming whose.",
+      "fullStatement": "I want to name what Oaklanders can see in West Oakland this cycle: the mood is shifting, storefronts are steadier, block-level investment is visible. That is not accidental. That is Deputy Mayor Brenda Okoro's housing unit — 47 households stabilized, $5 million deployed in twelve months, 23-day processing that puts money in people's hands before the crisis deepens. The Stabilization Fund was my promise. The delivery is her team's work. West Oakland feels the difference because City Hall kept its word, and because the people charged with delivery treated every application like a family they knew. That's Oakland winning. That's who gets the credit.",
+      "trackerUpdates": {}
+    }
+  ]
+}

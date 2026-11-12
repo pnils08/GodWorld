@@ -1,0 +1,27 @@
+{
+  "initiative": "INIT-002",
+  "initiativeId": "INIT-002",
+  "cycle": 115,
+  "primaryVoice": "Mayor gavel (mayor_gavel-002)",
+  "consolidatedFrom": [
+    "STMT-115-mayor_gavel-002 (Mayor gavel — D3 East Oakland briefing and OARI expansion hold)",
+    "STMT-115-mayor_open-003 (Mayor agenda — D3 East Oakland briefing before any OARI expansion)",
+    "STMT-115-oari-001 (Tran-Muñoz — D3 East Oakland community briefing — executed and documented with Fruitvale data)",
+    "STMT-115-oari-003 (Tran-Muñoz — Fruitvale and West Oakland residents — what the data and the calm actually mean)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-002",
+    "ImplementationPhase": "dispatch-live",
+    "MilestoneNotes": "C115: D3 East Oakland briefing execution and documentation required; expansion held, with D5 audit and Baylight feasibility review still incomplete.",
+    "NextScheduledAction": "Execute and publish the D3 briefing record with district-level and Fruitvale data",
+    "NextActionCycle": 115,
+    "LastWorkCycle": 115,
+    "LastWorkSeat": "civic-office-council-d5, proj-oari"
+  },
+  "_moveFold": {
+    "moveIds": [
+      "MV-114-civic-office-council-d5-2026-11-03",
+      "MV-114-proj-oari-2026-11-04"
+    ]
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "office": "council_d9",
+  "cycle": 114,
+  "speaker": "Terrence Mobley",
+  "cascadeSummary": "I'm supporting the Mayor's agenda, particularly the INIT-008 Uptown track with a concrete C114 timeline and the recorded decision path for the $15 million authorization — Uptown's busy streets are finally getting a dated commitment, not just a nod. For Laurel, I'm holding my line: stability is the work, and I won't manufacture a crisis where the brief shows flat mood, struggling street trade, and low crime. I'm also supporting the public C114 placement-gap analysis in INIT-007 and the recorded committee decision on INIT-010 without presuming the outcome.",
+  "statements": [
+    {
+      "statementId": "STMT-114-council_d9-001",
+      "type": "vote_statement",
+      "topic": "Uptown Commercial Distress and Credit",
+      "initiative": "Downtown Economic Revitalization",
+      "decision": "Support the Mayor's INIT-008 ask: put the $15 million authorization on a recorded council decision path with Ashford's benchmarks attached, require a concrete C114 Uptown timeline, and include Downtown transit access in implementation planning.",
+      "quote": "Uptown's busy streets are somebody's work paying off — now they get a dated track, not just a speaking order.",
+      "fullStatement": "I've said for two cycles that Uptown's quieting streets are a message, and downtown can't keep getting the hearing while Uptown gets the silence. The Mayor's ask this cycle finally puts a date on it: a concrete C114 Uptown timeline, and a recorded council decision on the $15 million authorization with Ashford's benchmarks attached. I'm supporting that. What I'm watching is that the next phase doesn't stop at downtown's edge. Uptown's street trade is busy because residents and workers there kept showing up — credit belongs to them, and the implementation planning needs to reach them.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-114-council_d9-002",
+      "type": "vote_statement",
+      "topic": "Laurel Stability",
+      "initiative": null,
+      "decision": "Hold the Laurel line: no manufactured motion where the brief shows flat mood, struggling street trade, and low crime; keep focused attention on the fundamentals and report back on any change in conditions.",
+      "quote": "Laurel's stability is no accident — it's the product of not letting good work get distracted, and I'm not going to blink now.",
+      "fullStatement": "Laurel is flat — street trade struggling, crime low, mood holding steady. That is not a crisis, and I'm not going to turn a held line into a manufactured one. The people of Laurel are living this cycle whether City Hall speaks or not, and what they've had from me is consistent, focused attention on the fundamentals rather than motion for its own sake. I'll keep that. If the conditions shift — if street trade slips further or the mood breaks — I'll be the first to say so and the first to act. Until then, protecting what's working is the work.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-114-council_d9-003",
+      "type": "vote_statement",
+      "topic": "Placement Gap Analysis and Tenant Defense Committee Decision",
+      "initiative": "Oakland Youth Apprenticeship Pipeline",
+      "decision": "Support publication of the C114 placement-gap analysis with attention to West Oakland and Fruitvale, and support placing the $4.2 million tenant defense proposal on the Housing and Community Development Committee's decision agenda with the legal-support analysis public and a recorded outcome — without presuming passage.",
+      "quote": "A published report is not the finish line, and a committee agenda item is not a vote — both need a record residents can actually find.",
+      "fullStatement": "Two of the Mayor's asks deserve a yes from me on the same principle: visibility in a document has to lead to something residents can find. The C114 placement-gap analysis should be published with real attention to West Oakland and Fruitvale — no invented count, just the findings and the adjustments tied to them. And the $4.2 million tenant defense proposal belongs on the Housing and Community Development Committee's decision agenda with the legal-support analysis public and a recorded outcome. I'm not presuming passage on either. I'm insisting on a record.",
+      "trackerUpdates": {}
+    }
+  ]
+}

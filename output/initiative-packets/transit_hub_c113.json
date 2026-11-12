@@ -1,0 +1,493 @@
+{
+  "meta": {
+    "type": "initiative-packet",
+    "initiative": "transit-hub",
+    "initiativeId": "INIT-003",
+    "cycle": 113,
+    "generatedAt": "2026-10-26T05:32:45.720Z",
+    "description": "Fruitvale Transit Hub Modernization — $230M for transit-oriented development and community hub"
+  },
+  "initiative": {
+    "id": "INIT-003",
+    "name": "Fruitvale Transit Hub Phase II — Visioning",
+    "type": "visioning",
+    "status": "passed",
+    "budget": "$230M",
+    "voteRequirement": "",
+    "voteCycle": "86",
+    "projection": "uncertain",
+    "outcome": "COMPLETED",
+    "leadFaction": "OPP",
+    "oppositionFaction": "",
+    "swingVoter": "",
+    "affectedNeighborhoods": "Fruitvale",
+    "policyDomain": "transit",
+    "consequences": "Community input gathered. Next phase: formal proposal.",
+    "mayoralAction": "none",
+    "mayoralActionCycle": "",
+    "notes": "Cycle 86: Visioning phase concluded. Input documented.\nCycle 94: Vote scheduled C94 (visioning-complete + vote-ready phase transition; was VoteCycle=86).\nCycle 94: Visioning phase concluded. Input documented.",
+    "lastUpdated": "10/25/2026",
+    "implementationPhase": "design-phase",
+    "milestoneNotes": "C107: Merchant covenants executed, design RFP published with community-informed requirements\nC108 conversion: no council passage on record (VoteCycle 94, Outcome COMPLETED, Status visioning-complete) — enters petition-pending; history above kept, VoteCycle cleared.\nC108 conversion: Stage Proposed — Fruitvale transit hub never had a council vote (builder ruling 2026-09-21): petition-pending, history kept, vote via petition band or a call-vote move.\nC109: Mayer & Associates contracted with community oversight provisions\nC110: Preliminary schematics review authorized; Mayer & Associates contracted with community oversight\nC111: Advanced from visioning to design-phase; schematics delivery mandated Cycle 114.\nC111 correction: the council authorized Phase II at C86 ($230M budget, visioning framework binding, design consultant RFP to follow; projected 6-3). The C108 \"no council passage on record\" line was wrong. Vote restored at C86; no stage.",
+    "nextScheduledAction": "Preliminary schematics community review",
+    "nextActionCycle": "114"
+  },
+  "office": {
+    "name": "Fruitvale Transit Hub Planning Office",
+    "policyDomains": [
+      "infrastructure",
+      "transit",
+      "economic"
+    ],
+    "officials": [
+      {
+        "officeId": "MAYOR-01",
+        "title": "Mayor",
+        "name": "Avery Santana",
+        "popId": "POP-00034",
+        "status": "active",
+        "faction": "OPP"
+      },
+      {
+        "officeId": "STAFF-COS",
+        "title": "Chief of Staff",
+        "name": "Laila Cortez",
+        "popId": "POP-00035",
+        "status": "active",
+        "faction": "STAFF"
+      },
+      {
+        "officeId": "PLANNING-DIR",
+        "title": "City Planning Director",
+        "name": "Mara Vance",
+        "popId": "POP-00507",
+        "status": "active",
+        "faction": "STAFF"
+      }
+    ]
+  },
+  "previousCycle": {
+    "decisions": {
+      "initiative": "INIT-003",
+      "initiativeId": "INIT-003",
+      "cycle": 112,
+      "primaryVoice": "move-fold",
+      "consolidatedFrom": [],
+      "trackerUpdates": {
+        "LastWorkCycle": 112,
+        "LastWorkSeat": "proj-transit-hub"
+      },
+      "_moveFold": {
+        "moveIds": [
+          "MV-111-proj-transit-hub-2026-10-16"
+        ]
+      }
+    },
+    "voiceDecisions": null,
+    "documentsProduced": [
+      "TRAN-C000-ProjectCharter-20400101.md",
+      "TRAN-C083-ScopeRelease-20410801.md",
+      "decisions_c103.json",
+      "decisions_c104.json",
+      "decisions_c105.json",
+      "decisions_c106.json",
+      "decisions_c107.json",
+      "decisions_c108.json",
+      "decisions_c109.json",
+      "decisions_c110.json",
+      "decisions_c111.json",
+      "decisions_c112.json",
+      "decisions_c113.json"
+    ]
+  },
+  "maraDirective": "# C112 Voice Directives — Mara Vance (AUTO)\n\n**Cycle:** 112\n**Issued:** C112 (auto-derived, cron-civic-run.js --stage=directive, post-close)\n**Source:** close_c112 + world_summary_c112 + engine review HIGHs + tracker + C111 voice record\n\n---\n## Denise Carter — City Council District 1\n\n- **Agent:** `.claude/agents/civic-office-council-d1/`\n- **Address:** Cast the committee vote to advance the West Oakland Tenant Defense Fund (INIT-010) and publish a targeted municipal service response for the Brooklyn corridor.\n- **Why:** District 1 logged zero voice in the C112 close while INIT-010 reached its scheduled committee vote milestone and Brooklyn deteriorated to a sentiment of -0.12, crime index of 0.62, and decay momentum of 3 with one active citizen complaint on the record.\n- **Acceptance:** A recorded committee vote on INIT-010 and a published Brooklyn service audit observable in C113.\n- **Silence consequence:** INIT-010 stalls at the committee gate before reaching the full council, leaving D1 tenants without defense appropriations as Brooklyn commercial decay deepens.\n\n## Ramon Vega — City Council District 4\n\n- **Agent:** `.claude/agents/civic-office-council-d4/`\n- **Address:** File the legislative ordinance for the Ivy Hill Revitalization Initiative (INIT-011) and docket an emergency infrastructure response for District 4 corridors.\n- **Why:** INIT-011 has remained at announced status past its C111 legislation-filed milestone with its stall clock expiring at C113, while Dimond drops to city-low sentiment of -0.18, Ivy Hill records sentiment of -0.16 with decay momentum of 2 and crime index of 0.63, and Glenview sits at -0.09.\n- **Acceptance:** Formally filed ordinance text for INIT-011 with the City Clerk observable in C113.\n- **Silence consequence:** INIT-011 lapses into an administrative stall under charter rules, leaving Ivy Hill and Dimond without capital revitalization authority.\n\n## Avery Santana — Mayor\n\n- **Agent:** `.claude/agents/civic-office-mayor/`\n- **Address:** Publish the Month-11 disbursement audit for INIT-001, the OARI quarterly outcome report for INIT-002, and the first cohort placement data for INIT-007, while resolving the two standing citizen complaints on the executive ledger.\n- **Why:** Eight initiatives on the mayoral board (INIT-001, INIT-002, INIT-005, INIT-007, INIT-008, INIT-009, INIT-010, INIT-011) carry stall clocks expiring at or before C113, with three core operational reviews (INIT-001, INIT-002, INIT-007) overdue as of C112.\n- **Acceptance:** Published executive deliverable reports for INIT-001, INIT-002, and INIT-007, plus recorded disposition of the two citizen complaints in C113.\n- **Silence consequence:** Administrative tracking records multiple executive milestone defaults across stabilization, safety dispatch, and youth workforce pipelines.\n\n## Leonard Tran — City Council District 2\n\n- **Agent:** `.claude/agents/civic-office-council-d2/`\n- **Address:** Convene the Economic Development Committee hearing for the $15M Downtown Economic Revitalization ordinance (INIT-008) and report committee findings.\n- **Why:** INIT-008 was filed in C110 and scheduled for committee hearing in C112 with its C113 stall threshold closing, while Baylight District commercial vitality remains depressed at 6.43 and sentiment sits at -0.04.\n- **Acceptance:** A recorded committee hearing transcript and vote or referral action on INIT-008 in C113.\n- **Silence consequence:** The $15M downtown revitalization authorization freezes at the committee threshold, blocking capital deployment to downtown commercial corridors.\n\n## Nina Chen — City Council District 8\n\n- **Agent:** `.claude/agents/civic-office-council-d8/`\n- **Address:** Execute the committee vote on the $2.5M Commercial Stabilization for Grand Lake ordinance (INIT-009) and file an administrative service audit for Eastlake and Adams Point.\n- **Why:** INIT-009 reached its C112 committee hearing and vote milestone under a C113 stall clock, while Eastlake exhibits severe decay momentum of 4 (sentiment -0.09, retail vitality 6.54) and Adams Point records sentiment of -0.14 with decay momentum of 2.\n- **Acceptance:** A recorded committee vote advancing INIT-009 to the full council floor and filed service audit criteria for Eastlake in C113.\n- **Silence consequence:** Grand Lake commercial stabilization funds fail to appropriate, and Eastlake's commercial corridor continues uncontrolled deterioration.\n\n## Rose Delgado — City Council District 3\n\n- **Agent:** `.claude/agents/civic-office-council-d3/`\n- **Address:** Submit the District 3 dispatch breakdown for INIT-002, confirm D3 placements for INIT-007, and file an operational response to the active San Antonio citizen complaint.\n- **Why:** Both INIT-002 and INIT-007 reached their C112 reporting milestones, while San Antonio shows crime at 0.65, retail vitality down at 5.22, sentiment at -0.06, and decay momentum at 2 with an unaddressed citizen complaint on file.\n- **Acceptance:** Filed District 3 outcome metrics for INIT-002 and INIT-007, alongside an official response to the San Antonio petition in C113.\n- **Silence consequence:** Citywide emergency dispatch and youth pipeline reports proceed with District 3 data missing, leaving San Antonio without municipal recovery commitments.\n\n## Janae Rivers — City Council District 5\n\n- **Agent:** `.claude/agents/civic-office-council-d5/`\n- **Address:** Deliver verified East Oakland youth intake figures for the INIT-007 placement report and submit the District 5 dispatch performance assessment for INIT-002.\n- **Why:** INIT-002 and INIT-007 both reached their C112 reporting deadlines with stall clocks closing in C113, and District 5 claims of youth prioritization remain unsupported by published cohort data.\n- **Acceptance:** Published cohort placement totals for District 5 in INIT-007 and filed dispatch response metrics for INIT-002 in C113.\n- **Silence consequence:** East Oakland's share of workforce appropriations and alternative emergency dispatch resources cannot be certified in the city record.\n\n## Warren Ashford — City Council District 7\n\n- **Agent:** `.claude/agents/civic-office-council-d7/`\n- **Address:** File the pre-audit operational benchmark framework and intake criteria for the Temescal Community Health Center (INIT-005) ahead of its C113 utilization review.\n- **Why:** INIT-005 is fully operational and faces its first-quarter utilization review milestone in C113, while Temescal records depressed retail vitality of 6.40 and an elevated crime index of 0.65.\n- **Acceptance:** Published post-occupancy audit benchmarks and patient intake metrics for INIT-005 in C113.\n- **Silence consequence:** The health center operates without baseline fiscal oversight metrics on the public record as its quarterly utilization deadline passes.\n",
+  "citizens": {
+    "total": 112,
+    "tierBreakdown": {
+      "1": 2,
+      "2": 8,
+      "3": 21,
+      "4": 81
+    },
+    "avgIncome": 315028,
+    "medianIncome": 95048,
+    "atDisplacementRisk": 108,
+    "linkedProfiles": [],
+    "notableCitizens": [
+      {
+        "popId": "POP-00031",
+        "name": "Martin Richards",
+        "tier": 1,
+        "neighborhood": "Fruitvale",
+        "occupation": "",
+        "displacementRisk": 2
+      },
+      {
+        "popId": "POP-00198",
+        "name": "Rick Walker",
+        "tier": 1,
+        "neighborhood": "Fruitvale",
+        "occupation": "",
+        "displacementRisk": 4
+      },
+      {
+        "popId": "POP-00231",
+        "name": "Calvin Turner",
+        "tier": 2,
+        "neighborhood": "Fruitvale",
+        "occupation": "",
+        "displacementRisk": 2
+      },
+      {
+        "popId": "POP-00744",
+        "name": "Tomas Renteria",
+        "tier": 2,
+        "neighborhood": "Fruitvale",
+        "occupation": "",
+        "displacementRisk": 2
+      },
+      {
+        "popId": "POP-00754",
+        "name": "Ophelia Brenner",
+        "tier": 2,
+        "neighborhood": "Fruitvale",
+        "occupation": "",
+        "displacementRisk": 4
+      },
+      {
+        "popId": "POP-00756",
+        "name": "Ramon Solano",
+        "tier": 2,
+        "neighborhood": "Fruitvale",
+        "occupation": "",
+        "displacementRisk": 5
+      },
+      {
+        "popId": "POP-00762",
+        "name": "Aziz Rahimi",
+        "tier": 2,
+        "neighborhood": "Fruitvale",
+        "occupation": "",
+        "displacementRisk": 4
+      },
+      {
+        "popId": "POP-00766",
+        "name": "Manjit Singh",
+        "tier": 2,
+        "neighborhood": "Fruitvale",
+        "occupation": "",
+        "displacementRisk": 4
+      },
+      {
+        "popId": "POP-00953",
+        "name": "Carmen Solis",
+        "tier": 2,
+        "neighborhood": "Fruitvale",
+        "occupation": "",
+        "displacementRisk": 2
+      },
+      {
+        "popId": "POP-01057",
+        "name": "Nina Reyes",
+        "tier": 2,
+        "neighborhood": "Fruitvale",
+        "occupation": "",
+        "displacementRisk": 4
+      }
+    ]
+  },
+  "neighborhoods": [
+    {
+      "neighborhood": "Fruitvale",
+      "sentiment": 0.24,
+      "medianIncome": "99380",
+      "medianRent": "2485",
+      "trajectory": "growth",
+      "housingPressure": "6.5",
+      "crimeIndex": 0.62,
+      "retailVitality": 11.35,
+      "students": 423,
+      "adults": 1559,
+      "seniors": 351,
+      "unemployed": 63,
+      "sick": 114,
+      "schoolQuality": 7.6,
+      "propertyCrime": 34,
+      "violentCrime": 28,
+      "responseTime": 10.3,
+      "incidents": 6
+    },
+    {
+      "neighborhood": "San Antonio",
+      "sentiment": -0.04,
+      "medianIncome": "69650",
+      "medianRent": "1625",
+      "trajectory": "decay",
+      "housingPressure": "0",
+      "crimeIndex": 0.61,
+      "retailVitality": 5.03,
+      "students": 388,
+      "adults": 1523,
+      "seniors": 301,
+      "unemployed": 109,
+      "sick": 110,
+      "schoolQuality": 6.76,
+      "propertyCrime": 35,
+      "violentCrime": 28,
+      "responseTime": 9.5,
+      "incidents": 6
+    }
+  ],
+  "businesses": [
+    {
+      "bizId": "BIZ-00059",
+      "name": "Foothill Builders",
+      "sector": "Construction",
+      "neighborhood": "Fruitvale",
+      "employeeCount": 110,
+      "avgSalary": 78000,
+      "growthRate": "10.75",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00184",
+      "name": "Oakland 12",
+      "sector": "Media & Journalism",
+      "neighborhood": "Fruitvale",
+      "employeeCount": 42,
+      "avgSalary": 58000,
+      "growthRate": "5.64",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00026",
+      "name": "Fruitvale Community Clinic",
+      "sector": "Healthcare",
+      "neighborhood": "Fruitvale",
+      "employeeCount": 38,
+      "avgSalary": 85000,
+      "growthRate": "12.18",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00068",
+      "name": "Marigold Cafe",
+      "sector": "Cafe / dining",
+      "neighborhood": "Fruitvale",
+      "employeeCount": 30,
+      "avgSalary": 51000,
+      "growthRate": "9.97",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00260",
+      "name": "International Boulevard Staffing",
+      "sector": "Staffing Agency / Professional Services",
+      "neighborhood": "San Antonio",
+      "employeeCount": 26,
+      "avgSalary": 95000,
+      "growthRate": "3.63",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00096",
+      "name": "Fruitvale Transit Hub Authority",
+      "sector": "Transit & Infrastructure",
+      "neighborhood": "Fruitvale",
+      "employeeCount": 18,
+      "avgSalary": 92000,
+      "growthRate": "5.21",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00261",
+      "name": "Early Shift Childcare",
+      "sector": "Preschool & Early Education",
+      "neighborhood": "San Antonio",
+      "employeeCount": 15,
+      "avgSalary": 62000,
+      "growthRate": "1.85",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00172",
+      "name": "Shift Change Kitchen",
+      "sector": "Restaurant & Dining",
+      "neighborhood": "San Antonio",
+      "employeeCount": 12,
+      "avgSalary": 36000,
+      "growthRate": "0.14",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00081",
+      "name": "St. Esperanza Parish",
+      "sector": "Faith Organization",
+      "neighborhood": "Fruitvale",
+      "employeeCount": 11,
+      "avgSalary": 54000,
+      "growthRate": "3.83",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00173",
+      "name": "Twelfth Avenue Market",
+      "sector": "Retail",
+      "neighborhood": "San Antonio",
+      "employeeCount": 11,
+      "avgSalary": 39000,
+      "growthRate": "1.82",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00262",
+      "name": "Panadería La Doce",
+      "sector": "Bakery",
+      "neighborhood": "San Antonio",
+      "employeeCount": 11,
+      "avgSalary": 48000,
+      "growthRate": "2.47",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00265",
+      "name": "Taquería El Andén",
+      "sector": "Taquería / Restaurant",
+      "neighborhood": "Fruitvale",
+      "employeeCount": 11,
+      "avgSalary": 48000,
+      "growthRate": "3.54",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00267",
+      "name": "Platform Brunch",
+      "sector": "Brunch Restaurant",
+      "neighborhood": "Fruitvale",
+      "employeeCount": 11,
+      "avgSalary": 48000,
+      "growthRate": "3.96",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00269",
+      "name": "Taco Fusion",
+      "sector": "Fusion Restaurant",
+      "neighborhood": "Fruitvale",
+      "employeeCount": 11,
+      "avgSalary": 48000,
+      "growthRate": "3.53",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00270",
+      "name": "Hub Ramen",
+      "sector": "Ramen Bar",
+      "neighborhood": "Fruitvale",
+      "employeeCount": 11,
+      "avgSalary": 48000,
+      "growthRate": "3.85",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00271",
+      "name": "Masa & Vine",
+      "sector": "Small Plates & Natural Wine Bar",
+      "neighborhood": "Fruitvale",
+      "employeeCount": 11,
+      "avgSalary": 48000,
+      "growthRate": "3.77",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00176",
+      "name": "Park Boulevard Cafe",
+      "sector": "Cafe / dining",
+      "neighborhood": "San Antonio",
+      "employeeCount": 8,
+      "avgSalary": 35000,
+      "growthRate": "4.04",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00175",
+      "name": "San Antonio Pharmacy",
+      "sector": "Retail",
+      "neighborhood": "San Antonio",
+      "employeeCount": 7,
+      "avgSalary": 39000,
+      "growthRate": "2.08",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00263",
+      "name": "San Antonio Transmission & Tire",
+      "sector": "Auto Repair / Services",
+      "neighborhood": "San Antonio",
+      "employeeCount": 6,
+      "avgSalary": 45000,
+      "growthRate": "1.63",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00174",
+      "name": "Sunny Day Laundry",
+      "sector": "Services",
+      "neighborhood": "San Antonio",
+      "employeeCount": 5,
+      "avgSalary": 39000,
+      "growthRate": "0.96",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00177",
+      "name": "Crew Cut Barbers",
+      "sector": "Services",
+      "neighborhood": "San Antonio",
+      "employeeCount": 5,
+      "avgSalary": 39000,
+      "growthRate": "2.19",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00264",
+      "name": "Mercado Fruitvale",
+      "sector": "Mexican Grocery",
+      "neighborhood": "Fruitvale",
+      "employeeCount": 4,
+      "avgSalary": 42000,
+      "growthRate": "2.5",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00266",
+      "name": "Boutique Reina",
+      "sector": "Quinceañera & Formalwear Boutique",
+      "neighborhood": "Fruitvale",
+      "employeeCount": 4,
+      "avgSalary": 42000,
+      "growthRate": "2.66",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00268",
+      "name": "International Cycle Works",
+      "sector": "Bike Shop",
+      "neighborhood": "Fruitvale",
+      "employeeCount": 4,
+      "avgSalary": 42000,
+      "growthRate": "2.66",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00045",
+      "name": "Fruitvale Diner",
+      "sector": "Restaurant & Dining",
+      "neighborhood": "Fruitvale",
+      "employeeCount": 2,
+      "avgSalary": 51000,
+      "growthRate": "10.53",
+      "status": ""
+    }
+  ]
+}

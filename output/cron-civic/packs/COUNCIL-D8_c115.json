@@ -1,0 +1,1191 @@
+{
+  "v": "OFFICE/1",
+  "team": "civic-office",
+  "empty": false,
+  "actor": {
+    "id": "POP-00505",
+    "name": "Nina Chen",
+    "role": "City Council District 8",
+    "officeId": "COUNCIL-D8",
+    "district": "D8",
+    "faction": "CRC",
+    "agentDir": "civic-office-council-d8",
+    "initiative": null,
+    "dials": {
+      "approval": 62
+    }
+  },
+  "task": {
+    "a": "district-week",
+    "goal": "what is happening in Eastlake"
+  },
+  "pulse": {
+    "className": "district-heat",
+    "score": 225.3,
+    "label": "Eastlake — sentiment -0.06 vs city 0.020",
+    "lever": "what is happening in Eastlake",
+    "hood": "Eastlake",
+    "initiative": null,
+    "vsCity": {
+      "sentiment": -0.06,
+      "citySentiment": 0.020454545454545444,
+      "crime": 0.71,
+      "cityCrime": 0.6472727272727273,
+      "heat": 25.299999999999997,
+      "outlier": true
+    }
+  },
+  "prewrite": {
+    "claim": "what is happening in Eastlake",
+    "lineFacts": [
+      "approval 62",
+      "Eastlake: sentiment -0.06 vs city 0.020; crime index 0.71 vs city 0.647; decay momentum 1; decay momentum 1",
+      "Eastlake crime: property 43, violent 28, incidents 5 (cycle 115) — city property 39.5, violent 25.9, incidents 5.9",
+      "Eastlake: sentiment -0.06 vs city 0.020; crime index 0.71 vs city 0.647; decay momentum 1; retail 7.82; housing pressure 0; decay; momentum 1"
+    ],
+    "missing": [
+      "no invented vote, POPID, or complete"
+    ]
+  },
+  "game": {
+    "geographyIssue": null,
+    "lastMove": {
+      "text": "Latest moves:\nC114 - answer CONF-114-civic-office-council-d8: awaiting the Sunday fold\nNo applied or failed outcome in the available ledgers.",
+      "moves": [
+        {
+          "moveId": "MV-114-civic-office-council-d8-2026-11-04:answer:CONF-114-civic-office-council-d8",
+          "cycle": 114,
+          "date": "2026-11-04",
+          "agentDir": "civic-office-council-d8",
+          "popid": "POP-00505",
+          "type": "answer",
+          "payload": {
+            "confrontationId": "CONF-114-civic-office-council-d8",
+            "text": "District 8 is docketing the $2.5M Commercial Stabilization for Grand Lake ordinance (INIT-009) for a full recorded council roll-call vote under rigorous audit protocols, while requiring documented baseline municipal service allocations and oversight reporting for the Eastlake commercial corridor.",
+            "directiveCycle": 114,
+            "confrontationSeat": "civic-office-council-d8"
+          },
+          "status": "pending",
+          "at": "2026-11-04T11:45:48.106Z"
+        }
+      ]
+    },
+    "board": [
+      {
+        "id": "INIT-009",
+        "name": "Commercial Stabilization for Grand Lake",
+        "domain": "economic",
+        "phase": "vote-scheduled",
+        "status": "failed",
+        "nextActionCycle": null,
+        "voteCycle": 116,
+        "stage": "FAILED",
+        "cyclesSinceStageChange": null,
+        "lastStageChangeCycle": null,
+        "sponsored": false,
+        "hoods": [
+          "Grand Lake"
+        ],
+        "needsNext": "FAILED — not a stage this model knows",
+        "budget": "budget $2,500,000 left",
+        "requirement": {
+          "stage": "FAILED",
+          "next": null,
+          "clears": false,
+          "moveThatClears": null,
+          "blocked": "unknown-stage",
+          "text": "FAILED — not a stage this model knows"
+        },
+        "metricEvidence": null
+      }
+    ],
+    "boardAvailable": true,
+    "boardIds": [
+      "INIT-009"
+    ],
+    "boardText": "Your board:\n- INIT-009 Commercial Stabilization for Grand Lake [vote-scheduled] — FAILED — not a stage this model knows — budget $2,500,000 left",
+    "categories": {
+      "available": true,
+      "list": [
+        {
+          "key": "health",
+          "label": "clinics, care",
+          "band": "$5M-$100M",
+          "canDeliver": true
+        },
+        {
+          "key": "transit",
+          "label": "stations, lines",
+          "band": "$20M-$500M",
+          "canDeliver": true
+        },
+        {
+          "key": "education",
+          "label": "schools, youth learning",
+          "band": "$1M-$50M",
+          "canDeliver": true
+        },
+        {
+          "key": "economic",
+          "label": "business, local economy",
+          "band": "$2M-$50M",
+          "canDeliver": false
+        },
+        {
+          "key": "workforce",
+          "label": "jobs, training",
+          "band": "$1M-$30M",
+          "canDeliver": false
+        },
+        {
+          "key": "safety",
+          "label": "public safety, response",
+          "band": "$2M-$30M",
+          "canDeliver": false
+        },
+        {
+          "key": "sports",
+          "label": "stadiums, recreation",
+          "band": "$10M-$500M",
+          "canDeliver": false
+        },
+        {
+          "key": "environment",
+          "label": "parks, air, water",
+          "band": "$1M-$30M",
+          "canDeliver": false
+        }
+      ],
+      "text": "Propose in your own words under one category; reach is hood, district, or all (citywide seats only). Budget must sit in the band. * = runs, but cannot reach Delivering yet.\n- health: clinics, care $5M-$100M\n- transit: stations, lines $20M-$500M\n- education: schools, youth learning $1M-$50M\n- economic*: business, local economy $2M-$50M\n- workforce*: jobs, training $1M-$30M\n- safety*: public safety, response $2M-$30M\n- sports*: stadiums, recreation $10M-$500M\n- environment*: parks, air, water $1M-$30M"
+    },
+    "petitionPool": {
+      "available": true,
+      "complaints": [
+        {
+          "cycle": "114",
+          "hood": "Lake Merritt",
+          "snippet": "Hey Vin. Good to see you too. It's a nice day for a walk, even if the sky's got that gray…",
+          "affect": "Frustrated"
+        },
+        {
+          "cycle": "114",
+          "hood": "Lake Merritt",
+          "snippet": "Somewhere down the hill a radio is still carrying the game, and the whole block seems to…",
+          "affect": "Frustrated"
+        },
+        {
+          "cycle": "113",
+          "hood": "Lake Merritt",
+          "snippet": "I spent my own stretch in a hospital bed not long ago, and I know what it's like to have…",
+          "affect": "Anxious"
+        }
+      ],
+      "participation": [
+        {
+          "cycle": "114",
+          "hood": "Lake Merritt",
+          "snippet": "Robert was already out when I got to the terrace, two glasses on the rail, and he'd…",
+          "affect": "Content"
+        },
+        {
+          "cycle": "114",
+          "hood": "Lake Merritt",
+          "snippet": "Robert's got his feet up on the rail tonight, and the lake is flat enough to hold the…",
+          "affect": "Calm"
+        },
+        {
+          "cycle": "114",
+          "hood": "Lake Merritt",
+          "snippet": "Two glasses on the rail, and the lake has gone the color of a slate roof. Robert says the…",
+          "affect": "Calm"
+        }
+      ],
+      "unlocatedRows": 0,
+      "invalidCycleRows": 0,
+      "sinceCycle": 113,
+      "throughCycle": 115,
+      "window": "Complaint display C113–C115; condition counter C115 only.",
+      "text": "Complaint display C113–C115; condition counter C115 only.\nPeople are talking (3 complaints):\n- Hey Vin. Good to see you too. It's a nice day for a walk, even if the sky's got that gray… (Lake Merritt, C114)\n- Somewhere down the hill a radio is still carrying the game, and the whole block seems to… (Lake Merritt, C114)\n- I spent my own stretch in a hospital bed not long ago, and I know what it's like to have… (Lake Merritt, C113)\nConstructive civic participation (not complaints): 3."
+    },
+    "workingCity": {
+      "available": true,
+      "totalStaff": 4,
+      "shownStaff": 4,
+      "text": "The working city:\n- Elena Soria Dominguez: The schematics are done, and they're good. But they're just paper until the community review is documented… (C114)\n- Bobby Chen-Ramirez: The quarterly numbers posted today, and they hold. Sixty-two percent of the visits are from the two zip codes… (C114)\n- Vanessa Tran-Muñoz: Dispatch closed out quiet tonight. East Oakland got the numbers they were owed, and the crews got home before… (C114)\n- Marcus Webb: The queue is clean tonight. One hundred fifteen households paid out, every file flagged for audit compliance… (C114)"
+    },
+    "patrol": {
+      "available": true,
+      "strategy": "balanced",
+      "text": "City patrol strategy: balanced (patrols spread evenly — the default posture). The Police Chief has not set one."
+    },
+    "confrontations": {
+      "available": true,
+      "all": [
+        {
+          "id": "CONF-108-civic-office-council-d8",
+          "cycle": 108,
+          "agentDir": "civic-office-council-d8",
+          "demand": "Nina Chen — City Council District 8 — Review the verified applicant intake audit for INIT-007 and address Eastlake corridor decay signals.",
+          "sourceText": "## Nina Chen — City Council District 8\n\n- **Agent:** `.claude/agents/civic-office-council-d8/`\n- **Address:** Review the verified applicant intake audit for INIT-007 and address Eastlake corridor decay signals.\n- **Why:** In C107 Chen demanded verifiable intake audits before endorsing full rollout; C108 marks the first cohort placement review while Eastlake logs decay momentum 4 with CrimeIndex at 0.61.\n- **Acceptance:** A formal district audit finding on INIT-007 placement transparency and a documented municipal response to Eastlake crime metrics.\n- **Silence consequence:** Operational rollout of apprenticeship cohorts proceeds without legislative audit approval, leaving D8 intake unverified.\n",
+          "src": "output/mara-directives/mara_directive_c108_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-111-civic-office-council-d8",
+          "cycle": 111,
+          "agentDir": "civic-office-council-d8",
+          "demand": "Nina Chen — City Council District 8 — Introduce the legislative ordinance for INIT-009 and file an immediate commercial corridor relief request for Grand Lake and Adams Point.",
+          "sourceText": "## Nina Chen — City Council District 8\n\n- **Agent:** `.claude/agents/civic-office-council-d8/`\n- **Address:** Introduce the legislative ordinance for INIT-009 and file an immediate commercial corridor relief request for Grand Lake and Adams Point.\n- **Why:** INIT-009 remains stalled at announced status past its C110 milestone with the C112 clock expiring, while Grand Lake registers severe decay signals (sentiment 0.25, retail vitality drop of 1.91) and Adams Point carries a decay momentum of 3 with sentiment at 0.20.\n- **Acceptance:** Introduction of the INIT-009 ordinance text or a docketed committee referral for District 8 merchant stabilization observable in C112.\n- **Silence consequence:** INIT-009 expires on the clock, leaving Grand Lake and Adams Point retail corridors without municipal stabilization funding.\n",
+          "src": "output/mara-directives/mara_directive_c111_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-112-civic-office-council-d8",
+          "cycle": 112,
+          "agentDir": "civic-office-council-d8",
+          "demand": "Nina Chen — City Council District 8 — Execute the committee vote on the $2.5M Commercial Stabilization for Grand Lake ordinance (INIT-009) and file an administrative service audit for Eastlake and Adams Point.",
+          "sourceText": "## Nina Chen — City Council District 8\n\n- **Agent:** `.claude/agents/civic-office-council-d8/`\n- **Address:** Execute the committee vote on the $2.5M Commercial Stabilization for Grand Lake ordinance (INIT-009) and file an administrative service audit for Eastlake and Adams Point.\n- **Why:** INIT-009 reached its C112 committee hearing and vote milestone under a C113 stall clock, while Eastlake exhibits severe decay momentum of 4 (sentiment -0.09, retail vitality 6.54) and Adams Point records sentiment of -0.14 with decay momentum of 2.\n- **Acceptance:** A recorded committee vote advancing INIT-009 to the full council floor and filed service audit criteria for Eastlake in C113.\n- **Silence consequence:** Grand Lake commercial stabilization funds fail to appropriate, and Eastlake's commercial corridor continues uncontrolled deterioration.\n",
+          "src": "output/mara-directives/mara_directive_c112_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-113-civic-office-council-d8",
+          "cycle": 113,
+          "agentDir": "civic-office-council-d8",
+          "demand": "Nina Chen — City Council District 8 — Cast the decisive floor vote on the $2.5M Commercial Stabilization for Grand Lake ordinance (INIT-009) and file the Eastlake corridor commercial stabilization review.",
+          "sourceText": "## Nina Chen — City Council District 8\n\n- **Agent:** `.claude/agents/civic-office-council-d8/`\n- **Address:** Cast the decisive floor vote on the $2.5M Commercial Stabilization for Grand Lake ordinance (INIT-009) and file the Eastlake corridor commercial stabilization review.\n- **Why:** INIT-009 advanced to full council with audit conditions in C113 and sits at vote-ready status with its stall clock expiring at C114, while Eastlake continues to log decay momentum of 3, sentiment of -0.06, and Adams Point sentiment sits at -0.04.\n- **Acceptance:** A recorded roll-call vote on INIT-009 and a published commercial review for Eastlake observable in C114.\n- **Silence consequence:** INIT-009 defaults at the council floor threshold, leaving Grand Lake and Eastlake merchants without appropriated stabilization funds.\n",
+          "src": "output/mara-directives/mara_directive_c113_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-114-civic-office-council-d8",
+          "cycle": 114,
+          "agentDir": "civic-office-council-d8",
+          "demand": "Nina Chen — City Council District 8 — Docket and record the full council roll-call vote on the $2.5M Commercial Stabilization for Grand Lake ordinance (INIT-009) and file baseline service allocations for Eastlake.",
+          "sourceText": "## Nina Chen — City Council District 8\n\n- **Agent:** `.claude/agents/civic-office-council-d8/`\n- **Address:** Docket and record the full council roll-call vote on the $2.5M Commercial Stabilization for Grand Lake ordinance (INIT-009) and file baseline service allocations for Eastlake.\n- **Why:** INIT-009 advanced to full council in C113 with audit conditions but remains unvoted with its stall clock expiring at C115, while Eastlake carries a decay momentum of 2, a crime index of 0.70, and 1 unresolved citizen petition.\n- **Acceptance:** A published council floor vote on INIT-009 and docketed municipal maintenance allocations for Eastlake observable in C115.\n- **Silence consequence:** INIT-009 expires without appropriation on the council floor, leaving Grand Lake storefronts and Eastlake's compounding corridor decay without authorized stabilization funds.\n",
+          "src": "output/mara-directives/mara_directive_c114_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-115-civic-office-council-d8",
+          "cycle": 115,
+          "agentDir": "civic-office-council-d8",
+          "demand": "Nina Chen — City Council District 8 — Provide the Eastlake allocation and service-schedule records, account for the district’s three recorded complaints, and clarify the official disposition of Grand Lake stabilization.",
+          "sourceText": "## Nina Chen — City Council District 8\n\n- **Agent:** `.claude/agents/civic-office-council-d8/`\n- **Address:** Provide the Eastlake allocation and service-schedule records, account for the district’s three recorded complaints, and clarify the official disposition of Grand Lake stabilization.\n- **Why:** Your Cycle 115 Sunday statement says Eastlake maintenance allocations are being docketed and records your YES on INIT-009; the Cycle 115 office evidence lists three complaints, while the live tracker marks INIT-009 failed rather than passed.\n- **Acceptance:** Docket references and authorization status for Eastlake allocations, actual service schedules, a complaint-to-response crosswalk using the underlying cases, and the official INIT-009 decision record or an explicit statement that no final decision record is available; distinguish an individual YES position from council passage.\n- **Promise:** P-6903e362468303b6",
+          "src": "output/mara-directives/mara_directive_c115_AUTO.txt",
+          "expectsMove": "answer"
+        }
+      ],
+      "latestCycle": 115,
+      "open": [
+        {
+          "id": "CONF-115-civic-office-council-d8",
+          "cycle": 115,
+          "agentDir": "civic-office-council-d8",
+          "demand": "Nina Chen — City Council District 8 — Provide the Eastlake allocation and service-schedule records, account for the district’s three recorded complaints, and clarify the official disposition of Grand Lake stabilization.",
+          "sourceText": "## Nina Chen — City Council District 8\n\n- **Agent:** `.claude/agents/civic-office-council-d8/`\n- **Address:** Provide the Eastlake allocation and service-schedule records, account for the district’s three recorded complaints, and clarify the official disposition of Grand Lake stabilization.\n- **Why:** Your Cycle 115 Sunday statement says Eastlake maintenance allocations are being docketed and records your YES on INIT-009; the Cycle 115 office evidence lists three complaints, while the live tracker marks INIT-009 failed rather than passed.\n- **Acceptance:** Docket references and authorization status for Eastlake allocations, actual service schedules, a complaint-to-response crosswalk using the underlying cases, and the official INIT-009 decision record or an explicit statement that no final decision record is available; distinguish an individual YES position from council passage.\n- **Promise:** P-6903e362468303b6",
+          "src": "output/mara-directives/mara_directive_c115_AUTO.txt",
+          "expectsMove": "answer"
+        }
+      ],
+      "answeredIds": [
+        "CONF-111-civic-office-council-d8",
+        "CONF-112-civic-office-council-d8",
+        "CONF-113-civic-office-council-d8",
+        "CONF-114-civic-office-council-d8"
+      ]
+    },
+    "confrontation": {
+      "id": "CONF-115-civic-office-council-d8",
+      "cycle": 115,
+      "agentDir": "civic-office-council-d8",
+      "demand": "Nina Chen — City Council District 8 — Provide the Eastlake allocation and service-schedule records, account for the district’s three recorded complaints, and clarify the official disposition of Grand Lake stabilization.",
+      "sourceText": "## Nina Chen — City Council District 8\n\n- **Agent:** `.claude/agents/civic-office-council-d8/`\n- **Address:** Provide the Eastlake allocation and service-schedule records, account for the district’s three recorded complaints, and clarify the official disposition of Grand Lake stabilization.\n- **Why:** Your Cycle 115 Sunday statement says Eastlake maintenance allocations are being docketed and records your YES on INIT-009; the Cycle 115 office evidence lists three complaints, while the live tracker marks INIT-009 failed rather than passed.\n- **Acceptance:** Docket references and authorization status for Eastlake allocations, actual service schedules, a complaint-to-response crosswalk using the underlying cases, and the official INIT-009 decision record or an explicit statement that no final decision record is available; distinguish an individual YES position from council passage.\n- **Promise:** P-6903e362468303b6",
+      "src": "output/mara-directives/mara_directive_c115_AUTO.txt",
+      "expectsMove": "answer"
+    },
+    "conditions": {
+      "available": true,
+      "proposals": [],
+      "text": "No proposals in the available board/move evidence need condition counts."
+    },
+    "problemContinuity": {
+      "available": true,
+      "cycle": 115,
+      "problems": [
+        {
+          "id": "[\"Adams Point\",\"health.sickResidents\"]",
+          "hood": "Adams Point",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 82,
+          "cycle": 115
+        },
+        {
+          "id": "[\"Eastlake\",\"health.sickResidents\"]",
+          "hood": "Eastlake",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 86,
+          "cycle": 115
+        },
+        {
+          "id": "[\"Eastlake\",\"safety.aboveMedianHoods\"]",
+          "hood": "Eastlake",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 115
+        },
+        {
+          "id": "[\"Grand Lake\",\"health.sickResidents\"]",
+          "hood": "Grand Lake",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 99,
+          "cycle": 115
+        },
+        {
+          "id": "[\"Lake Merritt\",\"health.sickResidents\"]",
+          "hood": "Lake Merritt",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 17,
+          "cycle": 115
+        }
+      ],
+      "visibleProblems": [
+        {
+          "id": "[\"Adams Point\",\"health.sickResidents\"]",
+          "hood": "Adams Point",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 82,
+          "cycle": 115
+        },
+        {
+          "id": "[\"Eastlake\",\"health.sickResidents\"]",
+          "hood": "Eastlake",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 86,
+          "cycle": 115
+        },
+        {
+          "id": "[\"Eastlake\",\"safety.aboveMedianHoods\"]",
+          "hood": "Eastlake",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 115
+        },
+        {
+          "id": "[\"Grand Lake\",\"health.sickResidents\"]",
+          "hood": "Grand Lake",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 99,
+          "cycle": 115
+        },
+        {
+          "id": "[\"Lake Merritt\",\"health.sickResidents\"]",
+          "hood": "Lake Merritt",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 17,
+          "cycle": 115
+        }
+      ],
+      "passedOver": [
+        {
+          "id": "[\"Lake Merritt\",\"health.sickResidents\"]",
+          "hood": "Lake Merritt",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 17,
+          "cycle": 115,
+          "passedOverCycle": 110
+        },
+        {
+          "id": "[\"Adams Point\",\"health.sickResidents\"]",
+          "hood": "Adams Point",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 82,
+          "cycle": 115,
+          "passedOverCycle": 114
+        }
+      ],
+      "issues": [],
+      "missingFoldCycles": [],
+      "text": "Health and safety readings this week (C115).\n- Adams Point: 82 residents sick\n- Eastlake: 86 residents sick; violence above the city middle\n- Grand Lake: 99 residents sick\n- Lake Merritt: 17 residents sick"
+    }
+  },
+  "signal": {
+    "kind": "district-heat",
+    "hoods": [
+      "Lake Merritt",
+      "Adams Point",
+      "Grand Lake",
+      "Eastlake"
+    ],
+    "src": "lib/districtMap.js + civic-office-map.json"
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-01088",
+        "name": "Joel Clark",
+        "neighborhood": "Eastlake",
+        "role": "Barista",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Eastlake — Eastlake — sentiment -0.06 vs city 0.020"
+      },
+      {
+        "pop": "POP-01105",
+        "name": "Rashida Foster",
+        "neighborhood": "Eastlake",
+        "role": "QA tester",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Eastlake — Eastlake — sentiment -0.06 vs city 0.020"
+      },
+      {
+        "pop": "POP-01118",
+        "name": "Hyejin Ward",
+        "neighborhood": "Eastlake",
+        "role": "After-school program aide",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Eastlake — Eastlake — sentiment -0.06 vs city 0.020"
+      },
+      {
+        "pop": "POP-01124",
+        "name": "Omar Nelson",
+        "neighborhood": "Eastlake",
+        "role": "Nurse aide",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Eastlake — Eastlake — sentiment -0.06 vs city 0.020"
+      }
+    ],
+    "businesses": [],
+    "churches": [],
+    "sources": []
+  },
+  "known": [
+    {
+      "id": "F-office-COUNCIL-D8",
+      "t": "FACT",
+      "text": "Nina Chen holds COUNCIL-D8 at approval 62",
+      "src": "engine_audit snapshots.Civic_Office_Ledger"
+    },
+    {
+      "id": "F-heat-Eastlake",
+      "t": "FACT",
+      "text": "Eastlake: sentiment -0.06 vs city 0.020; crime index 0.71 vs city 0.647; decay momentum 1; decay momentum 1",
+      "src": "engine_audit snapshots.Neighborhood_Map ranked vs city"
+    },
+    {
+      "id": "F-crime-Eastlake",
+      "t": "FACT",
+      "text": "Eastlake crime: property 43, violent 28, incidents 5 (cycle 115) — city property 39.5, violent 25.9, incidents 5.9",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-hood-Eastlake",
+      "t": "FACT",
+      "text": "Eastlake: sentiment -0.06 vs city 0.020; crime index 0.71 vs city 0.647; decay momentum 1; retail 7.82; housing pressure 0; decay; momentum 1",
+      "src": "engine_audit snapshots.Neighborhood_Map"
+    }
+  ],
+  "role": {
+    "officeRows": [
+      {
+        "OfficeId": "COUNCIL-D8",
+        "PopId": "POP-00505",
+        "Holder": "Nina Chen",
+        "District": "D8",
+        "Approval": "62"
+      }
+    ],
+    "civicPeers": [
+      {
+        "OfficeId": "COUNCIL-D6",
+        "PopId": "POP-00044",
+        "Holder": "Elliott Crane",
+        "District": "D6",
+        "Faction": "CRC",
+        "Approval": 55
+      },
+      {
+        "OfficeId": "COUNCIL-D7",
+        "PopId": "POP-00504",
+        "Holder": "Warren Ashford",
+        "District": "D7",
+        "Faction": "CRC",
+        "Approval": 51
+      }
+    ]
+  },
+  "limits": {
+    "assert": [
+      "only named subjects in exposure.subjects",
+      "only named shops in exposure.businesses",
+      "only named churches in exposure.churches",
+      "only project facts in known",
+      "no invented POPID, vote, or complete"
+    ],
+    "invent": [
+      "no new citizens",
+      "no new businesses",
+      "no sheet numbers"
+    ]
+  },
+  "output": {
+    "contract": "statement + moves + numberMoved",
+    "dest": "office wiki (civic.16) then next Sunday city-hall packet"
+  },
+  "brief": {
+    "version": "CIVIC-BRIEF/2",
+    "cycle": 115,
+    "generation": {
+      "cycle": 115,
+      "observedAt": "2026-11-09T07:08:41.803Z",
+      "sources": {
+        "sports": {
+          "available": true,
+          "hash": "fc2b9a841ed2cbef9f0415d9274bc481dc97eaba7a3be6042be30c3a0e914f41"
+        },
+        "summary": {
+          "available": true,
+          "hash": "1677b675ee6dd2b2f592220f3085ec7b2b88500ffc42202c9aabcf0addc058ac"
+        }
+      },
+      "hash": "8bfd87940a666380c5a9b73d2151cff4f6286856fa3673a770c7259a48d6c71b",
+      "completeThrough": "2026-11-09T07:08:41.803Z",
+      "issues": [],
+      "statement": "Events reflect the saved export as of its refresh watermark; later same-Cycle events require a new export."
+    },
+    "sections": {
+      "events": {
+        "available": true,
+        "items": [
+          {
+            "eventId": "EV-summary-bd0be7fc492350f4",
+            "status": "occurred",
+            "occurredCycle": 115,
+            "ageCycles": 0,
+            "category": "city-event",
+            "significance": "local",
+            "hoods": [
+              "Lake Merritt"
+            ],
+            "citywideRelevance": false,
+            "sourceRef": "output/world_summary_c115.md:131",
+            "fact": "Lake Merritt Blossom Walk (Lake Merritt)",
+            "retrievalKey": "event/EV-summary-bd0be7fc492350f4"
+          },
+          {
+            "eventId": "EV-world-c6ef58197a78ca17",
+            "status": "occurred",
+            "occurredCycle": 115,
+            "ageCycles": 0,
+            "category": "world-faith",
+            "significance": "local",
+            "hoods": [
+              "Adams Point"
+            ],
+            "citywideRelevance": false,
+            "sourceRef": "output/world_summary_c115.md:372",
+            "fact": "interfaith prayer breakfast brings leaders together at Adams Point",
+            "retrievalKey": "event/EV-world-c6ef58197a78ca17"
+          },
+          {
+            "eventId": "EV-world-d41737b873cb2bbc",
+            "status": "occurred",
+            "occurredCycle": 115,
+            "ageCycles": 0,
+            "category": "world-faith",
+            "significance": "local",
+            "hoods": [
+              "Lake Merritt"
+            ],
+            "citywideRelevance": false,
+            "sourceRef": "output/world_summary_c115.md:373",
+            "fact": "Cathedral of the Living Word: after-school tutoring program expands",
+            "retrievalKey": "event/EV-world-d41737b873cb2bbc"
+          }
+        ],
+        "omittedCount": 0,
+        "retrievalKeys": [
+          "event/EV-summary-bd0be7fc492350f4",
+          "event/EV-world-c6ef58197a78ca17",
+          "event/EV-world-d41737b873cb2bbc"
+        ]
+      },
+      "measuredState": {
+        "districts": [
+          {
+            "district": "D8",
+            "available": true,
+            "retrievalKey": "district/D8",
+            "neighborhoods": [
+              {
+                "hood": "Lake Merritt",
+                "available": true,
+                "measured": {
+                  "Sentiment": {
+                    "value": "0.03",
+                    "previous": "0.11",
+                    "change": -0.08
+                  },
+                  "CrimeIndex": {
+                    "value": "0.59",
+                    "previous": "0.58",
+                    "change": 0.010000000000000009
+                  },
+                  "RetailVitality": {
+                    "value": "9.48",
+                    "previous": "8.88",
+                    "change": 0.5999999999999996
+                  },
+                  "HousingPressure": {
+                    "value": "0",
+                    "previous": "0.5",
+                    "change": -0.5
+                  },
+                  "NeighborhoodTrajectory": {
+                    "value": "steady",
+                    "previous": "steady",
+                    "change": null
+                  },
+                  "TrajectoryMomentum": {
+                    "value": "5",
+                    "previous": "5",
+                    "change": 0
+                  }
+                }
+              },
+              {
+                "hood": "Adams Point",
+                "available": true,
+                "measured": {
+                  "Sentiment": {
+                    "value": "-0.04",
+                    "previous": "-0.02",
+                    "change": -0.02
+                  },
+                  "CrimeIndex": {
+                    "value": "0.68",
+                    "previous": "0.63",
+                    "change": 0.050000000000000044
+                  },
+                  "RetailVitality": {
+                    "value": "6.71",
+                    "previous": "7.01",
+                    "change": -0.2999999999999998
+                  },
+                  "HousingPressure": {
+                    "value": "0",
+                    "previous": "0",
+                    "change": 0
+                  },
+                  "NeighborhoodTrajectory": {
+                    "value": "decay",
+                    "previous": "decay",
+                    "change": null
+                  },
+                  "TrajectoryMomentum": {
+                    "value": "0",
+                    "previous": "0",
+                    "change": 0
+                  }
+                }
+              },
+              {
+                "hood": "Grand Lake",
+                "available": true,
+                "measured": {
+                  "Sentiment": {
+                    "value": "-0.05",
+                    "previous": "0.07",
+                    "change": -0.12000000000000001
+                  },
+                  "CrimeIndex": {
+                    "value": "0.65",
+                    "previous": "0.67",
+                    "change": -0.020000000000000018
+                  },
+                  "RetailVitality": {
+                    "value": "14.59",
+                    "previous": "12.55",
+                    "change": 2.039999999999999
+                  },
+                  "HousingPressure": {
+                    "value": "5.5",
+                    "previous": "6",
+                    "change": -0.5
+                  },
+                  "NeighborhoodTrajectory": {
+                    "value": "steady",
+                    "previous": "steady",
+                    "change": null
+                  },
+                  "TrajectoryMomentum": {
+                    "value": "8",
+                    "previous": "9",
+                    "change": -1
+                  }
+                }
+              },
+              {
+                "hood": "Eastlake",
+                "available": true,
+                "measured": {
+                  "Sentiment": {
+                    "value": "-0.06",
+                    "previous": "0.05",
+                    "change": -0.11
+                  },
+                  "CrimeIndex": {
+                    "value": "0.71",
+                    "previous": "0.7",
+                    "change": 0.010000000000000009
+                  },
+                  "RetailVitality": {
+                    "value": "7.82",
+                    "previous": "7.68",
+                    "change": 0.14000000000000057
+                  },
+                  "HousingPressure": {
+                    "value": "0",
+                    "previous": "0",
+                    "change": 0
+                  },
+                  "NeighborhoodTrajectory": {
+                    "value": "decay",
+                    "previous": "decay",
+                    "change": null
+                  },
+                  "TrajectoryMomentum": {
+                    "value": "1",
+                    "previous": "2",
+                    "change": -1
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "previousCycleAvailable": true
+      },
+      "commitments": {
+        "priorMoves": [
+          {
+            "moveId": "MV-114-civic-office-council-d8-2026-11-04:answer:CONF-114-civic-office-council-d8",
+            "type": "answer",
+            "status": "pending",
+            "cycle": 114,
+            "retrievalKey": "prior/MV-114-civic-office-council-d8-2026-11-04:answer:CONF-114-civic-office-council-d8"
+          }
+        ],
+        "evidenceAvailable": true,
+        "outcomeFeedAvailable": false,
+        "actionOutcomes": [],
+        "actionReconciliationAvailable": false,
+        "actionReconciliationReason": "ENOENT: no such file or directory, open '/root/GodWorld/output/beats/Civic_Action_Ledger.jsonl'",
+        "reconciledActions": []
+      },
+      "opportunities": {
+        "board": [
+          {
+            "id": "INIT-009",
+            "name": "Commercial Stabilization for Grand Lake",
+            "domain": "economic",
+            "phase": "vote-scheduled",
+            "status": "failed",
+            "nextActionCycle": null,
+            "voteCycle": 116,
+            "stage": "FAILED",
+            "cyclesSinceStageChange": null,
+            "lastStageChangeCycle": null,
+            "sponsored": false,
+            "hoods": [
+              "Grand Lake"
+            ],
+            "needsNext": "FAILED — not a stage this model knows",
+            "budget": "budget $2,500,000 left",
+            "requirement": {
+              "stage": "FAILED",
+              "next": null,
+              "clears": false,
+              "moveThatClears": null,
+              "blocked": "unknown-stage",
+              "text": "FAILED — not a stage this model knows"
+            },
+            "metricEvidence": null,
+            "retrievalKey": "project/INIT-009"
+          }
+        ],
+        "omittedCount": 0,
+        "boardRetrievalKeys": [
+          "project/INIT-009"
+        ],
+        "selectedInitiative": null,
+        "resourceBalanceAvailable": false,
+        "budgetAuthorityKey": "budget/authority",
+        "openChoice": "No selected initiative; a reasoned no-op or a grounded opportunity is available."
+      },
+      "response": {
+        "petitionWindow": "Complaint display C113–C115; condition counter C115 only.",
+        "complaints": 3,
+        "participation": 3,
+        "mediaOutcomeAvailable": false,
+        "committedResponseAvailable": false,
+        "committedResponse": [],
+        "note": "Response counts require saved experience and reaction receipts, and are not a representative poll. Only published receipts appear as coverage."
+      },
+      "authorizedActions": {
+        "categoriesAvailable": true,
+        "categoryKeys": [
+          "health",
+          "transit",
+          "education",
+          "economic",
+          "workforce",
+          "safety",
+          "sports",
+          "environment"
+        ],
+        "detailKey": "budget/authority",
+        "note": "Move validation and later execution decide authority. An accepted request is not an applied outcome."
+      }
+    }
+  },
+  "_briefEvidence": {
+    "event": {
+      "EV-summary-bd0be7fc492350f4": {
+        "eventId": "EV-summary-bd0be7fc492350f4",
+        "sourceRef": "output/world_summary_c115.md:131",
+        "sourceRevision": "713aa263267766fcbb846b916872d66f8e531fcf9595e8ade4c22121f4c4175a",
+        "occurredCycle": 115,
+        "status": "occurred",
+        "observedAt": "2026-11-09T07:08:41.803Z",
+        "category": "city-event",
+        "significance": "local",
+        "hoods": [
+          "Lake Merritt"
+        ],
+        "citywideRelevance": false,
+        "entityIds": [],
+        "facts": [
+          "Lake Merritt Blossom Walk (Lake Merritt)"
+        ],
+        "aliases": []
+      },
+      "EV-world-c6ef58197a78ca17": {
+        "eventId": "EV-world-c6ef58197a78ca17",
+        "sourceRef": "output/world_summary_c115.md:372",
+        "sourceRevision": "68116935eeb0e6f602783a283daa42b3aa808446ab837878763b6256c746802b",
+        "occurredCycle": 115,
+        "status": "occurred",
+        "observedAt": "2026-11-09T07:08:41.803Z",
+        "category": "world-faith",
+        "significance": "local",
+        "hoods": [
+          "Adams Point"
+        ],
+        "citywideRelevance": false,
+        "entityIds": [],
+        "facts": [
+          "interfaith prayer breakfast brings leaders together at Adams Point"
+        ],
+        "aliases": []
+      },
+      "EV-world-d41737b873cb2bbc": {
+        "eventId": "EV-world-d41737b873cb2bbc",
+        "sourceRef": "output/world_summary_c115.md:373",
+        "sourceRevision": "b563cc78d26ea3b821ee3a98b1cf219d1f54b1cdf3b1b97c9eefc69eda91db55",
+        "occurredCycle": 115,
+        "status": "occurred",
+        "observedAt": "2026-11-09T07:08:41.803Z",
+        "category": "world-faith",
+        "significance": "local",
+        "hoods": [
+          "Lake Merritt"
+        ],
+        "citywideRelevance": false,
+        "entityIds": [],
+        "facts": [
+          "Cathedral of the Living Word: after-school tutoring program expands"
+        ],
+        "aliases": []
+      }
+    },
+    "district": {
+      "D8": {
+        "available": true,
+        "district": "D8",
+        "neighborhoods": [
+          {
+            "hood": "Lake Merritt",
+            "available": true,
+            "measured": {
+              "Sentiment": {
+                "value": "0.03",
+                "previous": "0.11",
+                "change": -0.08
+              },
+              "CrimeIndex": {
+                "value": "0.59",
+                "previous": "0.58",
+                "change": 0.010000000000000009
+              },
+              "RetailVitality": {
+                "value": "9.48",
+                "previous": "8.88",
+                "change": 0.5999999999999996
+              },
+              "HousingPressure": {
+                "value": "0",
+                "previous": "0.5",
+                "change": -0.5
+              },
+              "NeighborhoodTrajectory": {
+                "value": "steady",
+                "previous": "steady",
+                "change": null
+              },
+              "TrajectoryMomentum": {
+                "value": "5",
+                "previous": "5",
+                "change": 0
+              }
+            },
+            "sourceRef": "engine_audit snapshots.Neighborhood_Map"
+          },
+          {
+            "hood": "Adams Point",
+            "available": true,
+            "measured": {
+              "Sentiment": {
+                "value": "-0.04",
+                "previous": "-0.02",
+                "change": -0.02
+              },
+              "CrimeIndex": {
+                "value": "0.68",
+                "previous": "0.63",
+                "change": 0.050000000000000044
+              },
+              "RetailVitality": {
+                "value": "6.71",
+                "previous": "7.01",
+                "change": -0.2999999999999998
+              },
+              "HousingPressure": {
+                "value": "0",
+                "previous": "0",
+                "change": 0
+              },
+              "NeighborhoodTrajectory": {
+                "value": "decay",
+                "previous": "decay",
+                "change": null
+              },
+              "TrajectoryMomentum": {
+                "value": "0",
+                "previous": "0",
+                "change": 0
+              }
+            },
+            "sourceRef": "engine_audit snapshots.Neighborhood_Map"
+          },
+          {
+            "hood": "Grand Lake",
+            "available": true,
+            "measured": {
+              "Sentiment": {
+                "value": "-0.05",
+                "previous": "0.07",
+                "change": -0.12000000000000001
+              },
+              "CrimeIndex": {
+                "value": "0.65",
+                "previous": "0.67",
+                "change": -0.020000000000000018
+              },
+              "RetailVitality": {
+                "value": "14.59",
+                "previous": "12.55",
+                "change": 2.039999999999999
+              },
+              "HousingPressure": {
+                "value": "5.5",
+                "previous": "6",
+                "change": -0.5
+              },
+              "NeighborhoodTrajectory": {
+                "value": "steady",
+                "previous": "steady",
+                "change": null
+              },
+              "TrajectoryMomentum": {
+                "value": "8",
+                "previous": "9",
+                "change": -1
+              }
+            },
+            "sourceRef": "engine_audit snapshots.Neighborhood_Map"
+          },
+          {
+            "hood": "Eastlake",
+            "available": true,
+            "measured": {
+              "Sentiment": {
+                "value": "-0.06",
+                "previous": "0.05",
+                "change": -0.11
+              },
+              "CrimeIndex": {
+                "value": "0.71",
+                "previous": "0.7",
+                "change": 0.010000000000000009
+              },
+              "RetailVitality": {
+                "value": "7.82",
+                "previous": "7.68",
+                "change": 0.14000000000000057
+              },
+              "HousingPressure": {
+                "value": "0",
+                "previous": "0",
+                "change": 0
+              },
+              "NeighborhoodTrajectory": {
+                "value": "decay",
+                "previous": "decay",
+                "change": null
+              },
+              "TrajectoryMomentum": {
+                "value": "1",
+                "previous": "2",
+                "change": -1
+              }
+            },
+            "sourceRef": "engine_audit snapshots.Neighborhood_Map"
+          }
+        ],
+        "previousCycleAvailable": true
+      }
+    },
+    "project": {
+      "INIT-009": {
+        "id": "INIT-009",
+        "name": "Commercial Stabilization for Grand Lake",
+        "domain": "economic",
+        "phase": "vote-scheduled",
+        "status": "failed",
+        "nextActionCycle": null,
+        "voteCycle": 116,
+        "stage": "FAILED",
+        "cyclesSinceStageChange": null,
+        "lastStageChangeCycle": null,
+        "sponsored": false,
+        "hoods": [
+          "Grand Lake"
+        ],
+        "needsNext": "FAILED — not a stage this model knows",
+        "budget": "budget $2,500,000 left",
+        "requirement": {
+          "stage": "FAILED",
+          "next": null,
+          "clears": false,
+          "moveThatClears": null,
+          "blocked": "unknown-stage",
+          "text": "FAILED — not a stage this model knows"
+        },
+        "metricEvidence": null
+      }
+    },
+    "budget": {
+      "authority": {
+        "officeId": "COUNCIL-D8",
+        "district": "D8",
+        "categories": [
+          {
+            "key": "health",
+            "label": "clinics, care",
+            "band": "$5M-$100M",
+            "canDeliver": true
+          },
+          {
+            "key": "transit",
+            "label": "stations, lines",
+            "band": "$20M-$500M",
+            "canDeliver": true
+          },
+          {
+            "key": "education",
+            "label": "schools, youth learning",
+            "band": "$1M-$50M",
+            "canDeliver": true
+          },
+          {
+            "key": "economic",
+            "label": "business, local economy",
+            "band": "$2M-$50M",
+            "canDeliver": false
+          },
+          {
+            "key": "workforce",
+            "label": "jobs, training",
+            "band": "$1M-$30M",
+            "canDeliver": false
+          },
+          {
+            "key": "safety",
+            "label": "public safety, response",
+            "band": "$2M-$30M",
+            "canDeliver": false
+          },
+          {
+            "key": "sports",
+            "label": "stadiums, recreation",
+            "band": "$10M-$500M",
+            "canDeliver": false
+          },
+          {
+            "key": "environment",
+            "label": "parks, air, water",
+            "band": "$1M-$30M",
+            "canDeliver": false
+          }
+        ],
+        "resourceBalance": null,
+        "resourceBalanceAvailable": false,
+        "note": "Category bands are filing constraints. Spendable treasury balance requires typed current allocation evidence."
+      }
+    },
+    "prior": {
+      "MV-114-civic-office-council-d8-2026-11-04:answer:CONF-114-civic-office-council-d8": {
+        "moveId": "MV-114-civic-office-council-d8-2026-11-04:answer:CONF-114-civic-office-council-d8",
+        "cycle": 114,
+        "date": "2026-11-04",
+        "agentDir": "civic-office-council-d8",
+        "popid": "POP-00505",
+        "type": "answer",
+        "payload": {
+          "confrontationId": "CONF-114-civic-office-council-d8",
+          "text": "District 8 is docketing the $2.5M Commercial Stabilization for Grand Lake ordinance (INIT-009) for a full recorded council roll-call vote under rigorous audit protocols, while requiring documented baseline municipal service allocations and oversight reporting for the Eastlake commercial corridor.",
+          "directiveCycle": 114,
+          "confrontationSeat": "civic-office-council-d8"
+        },
+        "status": "pending",
+        "at": "2026-11-04T11:45:48.106Z"
+      }
+    }
+  }
+}

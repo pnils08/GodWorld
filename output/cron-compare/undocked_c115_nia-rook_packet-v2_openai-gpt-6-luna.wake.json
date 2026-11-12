@@ -1,0 +1,64 @@
+{
+  "mode": "wake-write",
+  "desk": "undocked",
+  "cycle": "115",
+  "provider": "openrouter",
+  "model": "openai/gpt-6-luna",
+  "configuredWriterModel": "openai/gpt-6-luna",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "nia-rook",
+  "byline": {
+    "name": "Nia Rook",
+    "popid": "POP-01076",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 1,
+  "quotesLanded": 1,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "undocked_history",
+    "undocked_history",
+    "citizen_lookup",
+    "canon_recall",
+    "canon_recall",
+    "undocked_history",
+    "canon_recall"
+  ],
+  "toolCalls": 7,
+  "wordCount": 383,
+  "targetWords": "350-600",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 350",
+    "words": 383,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "62c903ad9c1eee900c3b4610f20c95f0660e21506e511cc42049ee88aae918f4",
+    "costUsd": 0.0009
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/3 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/undocked_c115_nia-rook_packet-v2_openai-gpt-6-luna.staged-0025.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "th/.env' }\n{\n  \"popId\": \"POP-01076\",\n  \"name\": \"Nia Rook\",\n  \"recorded\": true,\n  \"text\": \"filed: Brooklyn Nguyen’s UNDOCKED night ended even on credits, which gives the episode its tidy little comp\"\n}"
+  },
+  "ranAt": "2026-11-12T00:26:08.832Z"
+}

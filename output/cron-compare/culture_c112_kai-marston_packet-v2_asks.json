@@ -1,0 +1,571 @@
+[
+  {
+    "pop": "POP-00546",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00546\",\"name\":\"Tara Ellison\",\"role\":\"Journalist\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Kai Marston\",\"question\":\"What recent work has Tara Ellison been involved in that contributes to her rising fame? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-arts\",\"hood\":\"Rockridge\",\"focus\":\"Tara Ellison's growing influence as a journalist in Rockridge\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Tara Ellison — Journalist — Rockridge\",\"evidence\":[{\"id\":\"EV-e304bce091\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\",\"text\":\"Tara Ellison (journalist), Media, Rockridge — fame rising (fame 68, surging), last seen C112.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C112\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-7cd6ffd2aeb3\"},{\"t\":\"FACT\",\"text\":\"36 culture figures rising; 0 new on the record\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\",\"id\":\"F-742a70f40617\"},{\"t\":\"FACT\",\"text\":\"Tara Ellison (journalist), Media, Rockridge — fame rising (fame 68, surging), last seen C112.\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\",\"id\":\"F-30f5549c4378\"},{\"t\":\"FACT\",\"text\":\"Tara Ellison (journalist), Media, Rockridge — fame rising (fame 68, surging), last seen C112\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\",\"id\":\"F-5f6fbf9d9ec3\"},{\"t\":\"FACT\",\"text\":\"Alma Vasquez (sculptor), Arts, Laurel — fame rising (fame 53, ascending), last seen C86\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\",\"id\":\"F-d71cd57d2e13\"},{\"t\":\"FACT\",\"text\":\"Nina Reyes (actress), Arts, Fruitvale — fame rising (fame 51, surging), last seen C101\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\",\"id\":\"F-1556488ae363\"},{\"t\":\"FACT\",\"text\":\"Theo Banks (rapper), Arts, Uptown — fame rising (fame 47, surging), last seen C99\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\",\"id\":\"F-ec4135d3ea2b\"},{\"t\":\"FACT\",\"text\":\"Lena Cross (Celebrity), Arts, Piedmont Ave — fading — the where-are-they-now file (fame 93, cooling), last seen C94\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\",\"id\":\"F-f76516e5a97e\"},{\"t\":\"FACT\",\"text\":\"Tara Ellison — Journalist — Rockridge\",\"src\":\"Simulation_Ledger profile for POP-00546\",\"id\":\"F-2b5f06ca9054\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00546",
+        "name": "Tara Ellison",
+        "role": "Journalist",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Kai Marston",
+        "question": "What recent work has Tara Ellison been involved in that contributes to her rising fame? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-arts",
+        "hood": "Rockridge",
+        "focus": "Tara Ellison's growing influence as a journalist in Rockridge",
+        "src": "output/beats/Cultural_Ledger.jsonl @C112"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Tara Ellison — Journalist — Rockridge",
+        "evidence": [
+          {
+            "id": "EV-e304bce091",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "text": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 68, surging), last seen C112."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C112",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-7cd6ffd2aeb3"
+        },
+        {
+          "t": "FACT",
+          "text": "36 culture figures rising; 0 new on the record",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112",
+          "id": "F-742a70f40617"
+        },
+        {
+          "t": "FACT",
+          "text": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 68, surging), last seen C112.",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112",
+          "id": "F-30f5549c4378"
+        },
+        {
+          "t": "FACT",
+          "text": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 68, surging), last seen C112",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112",
+          "id": "F-5f6fbf9d9ec3"
+        },
+        {
+          "t": "FACT",
+          "text": "Alma Vasquez (sculptor), Arts, Laurel — fame rising (fame 53, ascending), last seen C86",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112",
+          "id": "F-d71cd57d2e13"
+        },
+        {
+          "t": "FACT",
+          "text": "Nina Reyes (actress), Arts, Fruitvale — fame rising (fame 51, surging), last seen C101",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112",
+          "id": "F-1556488ae363"
+        },
+        {
+          "t": "FACT",
+          "text": "Theo Banks (rapper), Arts, Uptown — fame rising (fame 47, surging), last seen C99",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112",
+          "id": "F-ec4135d3ea2b"
+        },
+        {
+          "t": "FACT",
+          "text": "Lena Cross (Celebrity), Arts, Piedmont Ave — fading — the where-are-they-now file (fame 93, cooling), last seen C94",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112",
+          "id": "F-f76516e5a97e"
+        },
+        {
+          "t": "FACT",
+          "text": "Tara Ellison — Journalist — Rockridge",
+          "src": "Simulation_Ledger profile for POP-00546",
+          "id": "F-2b5f06ca9054"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01063",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01063\",\"name\":\"Alma Vasquez\",\"role\":\"sculptor\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Kai Marston\",\"question\":\"What have you seen, felt, or understood about \\\"Tara Ellison's growing influence as a journalist in Rockridge\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-arts\",\"hood\":\"Rockridge\",\"focus\":\"Tara Ellison's growing influence as a journalist in Rockridge\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Alma Vasquez — sculptor — Laurel\",\"evidence\":[{\"id\":\"EV-86ea48984f\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\",\"text\":\"Tara Ellison (journalist), Media, Rockridge — fame rising (fame 68, surging), last seen C112.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C112\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-7cd6ffd2aeb3\"},{\"t\":\"FACT\",\"text\":\"36 culture figures rising; 0 new on the record\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\",\"id\":\"F-742a70f40617\"},{\"t\":\"FACT\",\"text\":\"Tara Ellison (journalist), Media, Rockridge — fame rising (fame 68, surging), last seen C112.\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\",\"id\":\"F-30f5549c4378\"},{\"t\":\"FACT\",\"text\":\"Tara Ellison (journalist), Media, Rockridge — fame rising (fame 68, surging), last seen C112\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\",\"id\":\"F-5f6fbf9d9ec3\"},{\"t\":\"FACT\",\"text\":\"Alma Vasquez (sculptor), Arts, Laurel — fame rising (fame 53, ascending), last seen C86\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\",\"id\":\"F-d71cd57d2e13\"},{\"t\":\"FACT\",\"text\":\"Nina Reyes (actress), Arts, Fruitvale — fame rising (fame 51, surging), last seen C101\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\",\"id\":\"F-1556488ae363\"},{\"t\":\"FACT\",\"text\":\"Theo Banks (rapper), Arts, Uptown — fame rising (fame 47, surging), last seen C99\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\",\"id\":\"F-ec4135d3ea2b\"},{\"t\":\"FACT\",\"text\":\"Lena Cross (Celebrity), Arts, Piedmont Ave — fading — the where-are-they-now file (fame 93, cooling), last seen C94\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\",\"id\":\"F-f76516e5a97e\"},{\"t\":\"FACT\",\"text\":\"Alma Vasquez — sculptor — Laurel\",\"src\":\"Simulation_Ledger profile for POP-01063\",\"id\":\"F-707fd0eafe2e\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01063",
+        "name": "Alma Vasquez",
+        "role": "sculptor",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Kai Marston",
+        "question": "What have you seen, felt, or understood about \"Tara Ellison's growing influence as a journalist in Rockridge\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-arts",
+        "hood": "Rockridge",
+        "focus": "Tara Ellison's growing influence as a journalist in Rockridge",
+        "src": "output/beats/Cultural_Ledger.jsonl @C112"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Alma Vasquez — sculptor — Laurel",
+        "evidence": [
+          {
+            "id": "EV-86ea48984f",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "text": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 68, surging), last seen C112."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C112",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-7cd6ffd2aeb3"
+        },
+        {
+          "t": "FACT",
+          "text": "36 culture figures rising; 0 new on the record",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112",
+          "id": "F-742a70f40617"
+        },
+        {
+          "t": "FACT",
+          "text": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 68, surging), last seen C112.",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112",
+          "id": "F-30f5549c4378"
+        },
+        {
+          "t": "FACT",
+          "text": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 68, surging), last seen C112",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112",
+          "id": "F-5f6fbf9d9ec3"
+        },
+        {
+          "t": "FACT",
+          "text": "Alma Vasquez (sculptor), Arts, Laurel — fame rising (fame 53, ascending), last seen C86",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112",
+          "id": "F-d71cd57d2e13"
+        },
+        {
+          "t": "FACT",
+          "text": "Nina Reyes (actress), Arts, Fruitvale — fame rising (fame 51, surging), last seen C101",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112",
+          "id": "F-1556488ae363"
+        },
+        {
+          "t": "FACT",
+          "text": "Theo Banks (rapper), Arts, Uptown — fame rising (fame 47, surging), last seen C99",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112",
+          "id": "F-ec4135d3ea2b"
+        },
+        {
+          "t": "FACT",
+          "text": "Lena Cross (Celebrity), Arts, Piedmont Ave — fading — the where-are-they-now file (fame 93, cooling), last seen C94",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112",
+          "id": "F-f76516e5a97e"
+        },
+        {
+          "t": "FACT",
+          "text": "Alma Vasquez — sculptor — Laurel",
+          "src": "Simulation_Ledger profile for POP-01063",
+          "id": "F-707fd0eafe2e"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01057",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01057\",\"name\":\"Nina Reyes\",\"role\":\"actress\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Kai Marston\",\"question\":\"What have you seen, felt, or understood about \\\"Tara Ellison's growing influence as a journalist in Rockridge\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-arts\",\"hood\":\"Rockridge\",\"focus\":\"Tara Ellison's growing influence as a journalist in Rockridge\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Nina Reyes — actress — Fruitvale\",\"evidence\":[{\"id\":\"EV-8a5b2e5eb9\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\",\"text\":\"Tara Ellison (journalist), Media, Rockridge — fame rising (fame 68, surging), last seen C112.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C112\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-7cd6ffd2aeb3\"},{\"t\":\"FACT\",\"text\":\"36 culture figures rising; 0 new on the record\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\",\"id\":\"F-742a70f40617\"},{\"t\":\"FACT\",\"text\":\"Tara Ellison (journalist), Media, Rockridge — fame rising (fame 68, surging), last seen C112.\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\",\"id\":\"F-30f5549c4378\"},{\"t\":\"FACT\",\"text\":\"Tara Ellison (journalist), Media, Rockridge — fame rising (fame 68, surging), last seen C112\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\",\"id\":\"F-5f6fbf9d9ec3\"},{\"t\":\"FACT\",\"text\":\"Alma Vasquez (sculptor), Arts, Laurel — fame rising (fame 53, ascending), last seen C86\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\",\"id\":\"F-d71cd57d2e13\"},{\"t\":\"FACT\",\"text\":\"Nina Reyes (actress), Arts, Fruitvale — fame rising (fame 51, surging), last seen C101\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\",\"id\":\"F-1556488ae363\"},{\"t\":\"FACT\",\"text\":\"Theo Banks (rapper), Arts, Uptown — fame rising (fame 47, surging), last seen C99\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\",\"id\":\"F-ec4135d3ea2b\"},{\"t\":\"FACT\",\"text\":\"Lena Cross (Celebrity), Arts, Piedmont Ave — fading — the where-are-they-now file (fame 93, cooling), last seen C94\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\",\"id\":\"F-f76516e5a97e\"},{\"t\":\"FACT\",\"text\":\"Nina Reyes — actress — Fruitvale\",\"src\":\"Simulation_Ledger profile for POP-01057\",\"id\":\"F-e0d07f436fad\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01057",
+        "name": "Nina Reyes",
+        "role": "actress",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Kai Marston",
+        "question": "What have you seen, felt, or understood about \"Tara Ellison's growing influence as a journalist in Rockridge\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-arts",
+        "hood": "Rockridge",
+        "focus": "Tara Ellison's growing influence as a journalist in Rockridge",
+        "src": "output/beats/Cultural_Ledger.jsonl @C112"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Nina Reyes — actress — Fruitvale",
+        "evidence": [
+          {
+            "id": "EV-8a5b2e5eb9",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "text": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 68, surging), last seen C112."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C112",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-7cd6ffd2aeb3"
+        },
+        {
+          "t": "FACT",
+          "text": "36 culture figures rising; 0 new on the record",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112",
+          "id": "F-742a70f40617"
+        },
+        {
+          "t": "FACT",
+          "text": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 68, surging), last seen C112.",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112",
+          "id": "F-30f5549c4378"
+        },
+        {
+          "t": "FACT",
+          "text": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 68, surging), last seen C112",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112",
+          "id": "F-5f6fbf9d9ec3"
+        },
+        {
+          "t": "FACT",
+          "text": "Alma Vasquez (sculptor), Arts, Laurel — fame rising (fame 53, ascending), last seen C86",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112",
+          "id": "F-d71cd57d2e13"
+        },
+        {
+          "t": "FACT",
+          "text": "Nina Reyes (actress), Arts, Fruitvale — fame rising (fame 51, surging), last seen C101",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112",
+          "id": "F-1556488ae363"
+        },
+        {
+          "t": "FACT",
+          "text": "Theo Banks (rapper), Arts, Uptown — fame rising (fame 47, surging), last seen C99",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112",
+          "id": "F-ec4135d3ea2b"
+        },
+        {
+          "t": "FACT",
+          "text": "Lena Cross (Celebrity), Arts, Piedmont Ave — fading — the where-are-they-now file (fame 93, cooling), last seen C94",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112",
+          "id": "F-f76516e5a97e"
+        },
+        {
+          "t": "FACT",
+          "text": "Nina Reyes — actress — Fruitvale",
+          "src": "Simulation_Ledger profile for POP-01057",
+          "id": "F-e0d07f436fad"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01056",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01056\",\"name\":\"Theo Banks\",\"role\":\"rapper\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Kai Marston\",\"question\":\"What have you seen, felt, or understood about \\\"Tara Ellison's growing influence as a journalist in Rockridge\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-arts\",\"hood\":\"Rockridge\",\"focus\":\"Tara Ellison's growing influence as a journalist in Rockridge\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Theo Banks — rapper — Uptown\",\"evidence\":[{\"id\":\"EV-b1e0f3a806\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\",\"text\":\"Tara Ellison (journalist), Media, Rockridge — fame rising (fame 68, surging), last seen C112.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C112\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-7cd6ffd2aeb3\"},{\"t\":\"FACT\",\"text\":\"36 culture figures rising; 0 new on the record\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\",\"id\":\"F-742a70f40617\"},{\"t\":\"FACT\",\"text\":\"Tara Ellison (journalist), Media, Rockridge — fame rising (fame 68, surging), last seen C112.\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\",\"id\":\"F-30f5549c4378\"},{\"t\":\"FACT\",\"text\":\"Tara Ellison (journalist), Media, Rockridge — fame rising (fame 68, surging), last seen C112\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\",\"id\":\"F-5f6fbf9d9ec3\"},{\"t\":\"FACT\",\"text\":\"Alma Vasquez (sculptor), Arts, Laurel — fame rising (fame 53, ascending), last seen C86\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\",\"id\":\"F-d71cd57d2e13\"},{\"t\":\"FACT\",\"text\":\"Nina Reyes (actress), Arts, Fruitvale — fame rising (fame 51, surging), last seen C101\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\",\"id\":\"F-1556488ae363\"},{\"t\":\"FACT\",\"text\":\"Theo Banks (rapper), Arts, Uptown — fame rising (fame 47, surging), last seen C99\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\",\"id\":\"F-ec4135d3ea2b\"},{\"t\":\"FACT\",\"text\":\"Lena Cross (Celebrity), Arts, Piedmont Ave — fading — the where-are-they-now file (fame 93, cooling), last seen C94\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\",\"id\":\"F-f76516e5a97e\"},{\"t\":\"FACT\",\"text\":\"Theo Banks — rapper — Uptown\",\"src\":\"Simulation_Ledger profile for POP-01056\",\"id\":\"F-092f0b554bf6\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01056",
+        "name": "Theo Banks",
+        "role": "rapper",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Kai Marston",
+        "question": "What have you seen, felt, or understood about \"Tara Ellison's growing influence as a journalist in Rockridge\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-arts",
+        "hood": "Rockridge",
+        "focus": "Tara Ellison's growing influence as a journalist in Rockridge",
+        "src": "output/beats/Cultural_Ledger.jsonl @C112"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Theo Banks — rapper — Uptown",
+        "evidence": [
+          {
+            "id": "EV-b1e0f3a806",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "text": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 68, surging), last seen C112."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C112",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-7cd6ffd2aeb3"
+        },
+        {
+          "t": "FACT",
+          "text": "36 culture figures rising; 0 new on the record",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112",
+          "id": "F-742a70f40617"
+        },
+        {
+          "t": "FACT",
+          "text": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 68, surging), last seen C112.",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112",
+          "id": "F-30f5549c4378"
+        },
+        {
+          "t": "FACT",
+          "text": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 68, surging), last seen C112",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112",
+          "id": "F-5f6fbf9d9ec3"
+        },
+        {
+          "t": "FACT",
+          "text": "Alma Vasquez (sculptor), Arts, Laurel — fame rising (fame 53, ascending), last seen C86",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112",
+          "id": "F-d71cd57d2e13"
+        },
+        {
+          "t": "FACT",
+          "text": "Nina Reyes (actress), Arts, Fruitvale — fame rising (fame 51, surging), last seen C101",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112",
+          "id": "F-1556488ae363"
+        },
+        {
+          "t": "FACT",
+          "text": "Theo Banks (rapper), Arts, Uptown — fame rising (fame 47, surging), last seen C99",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112",
+          "id": "F-ec4135d3ea2b"
+        },
+        {
+          "t": "FACT",
+          "text": "Lena Cross (Celebrity), Arts, Piedmont Ave — fading — the where-are-they-now file (fame 93, cooling), last seen C94",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112",
+          "id": "F-f76516e5a97e"
+        },
+        {
+          "t": "FACT",
+          "text": "Theo Banks — rapper — Uptown",
+          "src": "Simulation_Ledger profile for POP-01056",
+          "id": "F-092f0b554bf6"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  }
+]

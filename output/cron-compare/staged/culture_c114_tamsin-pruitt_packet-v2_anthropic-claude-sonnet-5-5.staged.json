@@ -1,0 +1,83 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "114",
+  "persona": "tamsin-pruitt",
+  "byline": "Tamsin Pruitt",
+  "bylinePopid": "POP-01210",
+  "article": "output/cron-compare/staged/culture_c114_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Cee Lee",
+        "role": "quoted-source",
+        "popid": "POP-00320"
+      },
+      {
+        "name": "Aanya Rivera",
+        "role": "mentioned",
+        "popid": "POP-00861",
+        "floor": true
+      },
+      {
+        "name": "Amear Thompson",
+        "role": "mentioned",
+        "popid": "POP-00679",
+        "floor": true
+      },
+      {
+        "name": "Elle Lilo",
+        "role": "mentioned",
+        "popid": "POP-00177",
+        "floor": true
+      },
+      {
+        "name": "Pamela Amelia",
+        "role": "mentioned",
+        "popid": "POP-00049",
+        "floor": true
+      },
+      {
+        "name": "Shawn Neighbor",
+        "role": "mentioned",
+        "popid": "POP-00746",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "I've seen Elle Lilo move into a place of their own in Jack London. It made me think about when I finally got my own place in Lake Merritt. It's a big step, you know? I was dealing with some health stuff around that time too, so I feel for them. I'm just glad I could get back on track and enjoy the lake path again.",
+        "sourceRef": "citizenVoice PRESS Cee Lee"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-69c84be26787",
+    "draftSha256": "a50b213bbd9712a852ea034b82e1c10836234c6042fb84d5778ae4b4da8f24c5",
+    "verdict": "output/cron-compare/culture_c114_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-04T07:44:39.141Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 450",
+      "words": 1387,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "a50b213bbd9712a852ea034b82e1c10836234c6042fb84d5778ae4b4da8f24c5",
+      "costUsd": 0.0019
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-04T07:44:45.749Z"
+}

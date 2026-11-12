@@ -1,0 +1,23 @@
+{
+  "initiative": "INIT-005",
+  "initiativeId": "INIT-005",
+  "cycle": 115,
+  "primaryVoice": "Chen-Ramirez (health_center-001)",
+  "consolidatedFrom": [
+    "STMT-115-health_center-001 (Chen-Ramirez — Standing intake audit and merchant verification walkthrough — institutionalized)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-005",
+    "ImplementationPhase": "operational",
+    "MilestoneNotes": "C115: Q2 intake audit filed as standing schedule to HCAI + Council Clerk; merchant-clinic verification walkthrough at Telegraph & 47th institutionalized.",
+    "NextScheduledAction": "Q3 intake audit filing + recurring merchant verification walkthrough",
+    "NextActionCycle": 116,
+    "LastWorkCycle": 115,
+    "LastWorkSeat": "proj-health-center"
+  },
+  "_moveFold": {
+    "moveIds": [
+      "MV-114-proj-health-center-2026-11-05"
+    ]
+  }
+}

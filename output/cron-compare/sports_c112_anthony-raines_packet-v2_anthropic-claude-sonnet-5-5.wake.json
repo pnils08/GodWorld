@@ -1,0 +1,63 @@
+{
+  "mode": "wake-write",
+  "desk": "sports",
+  "cycle": "112",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "anthony-raines",
+  "byline": {
+    "name": "Anthony Raines",
+    "popid": "POP-00017",
+    "beatDomain": "SPORTS"
+  },
+  "laneEntries": 9,
+  "quotesLanded": 0,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "dossier_read",
+    "dossier_read",
+    "sheet_read",
+    "citizen_lookup",
+    "citizen_lookup"
+  ],
+  "toolCalls": 5,
+  "wordCount": 934,
+  "targetWords": "evidence-bounded",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 934,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "4926594fa9f6538b597b7ba12570b15402570068209c2fc14f559c3bc5f5e68d",
+    "costUsd": 0.0063
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 4/4 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/sports_c112_anthony-raines_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "dworld/.env // tip: ◈ encrypted .env [www.dotenvx.com]\n{\n  \"popId\": \"POP-00017\",\n  \"name\": \"Anthony Raines\",\n  \"recorded\": true,\n  \"text\": \"filed: Aitken's Line Is Earned, Clark's Is Not Yet Tested\"\n}"
+  },
+  "ranAt": "2026-10-19T23:20:44.960Z",
+  "dispositionReconciledAt": "2026-10-24T17:00:04.634Z"
+}

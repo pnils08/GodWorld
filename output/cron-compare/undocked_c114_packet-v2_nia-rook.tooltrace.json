@@ -1,0 +1,30 @@
+{
+  "model": "openai/gpt-6-luna",
+  "calls": [
+    {
+      "tool": "undocked_history",
+      "input": {
+        "pilot": "Lena Okafor"
+      },
+      "resultChars": 169,
+      "resultHead": "Available gate-approved UNDOCKED feed history for Lena Okafor before C114:\nNo earlier episode found in the available approved packs; this does not prove none ever aired."
+    },
+    {
+      "tool": "undocked_history",
+      "input": {
+        "pilot": "Luis Taz"
+      },
+      "resultChars": 166,
+      "resultHead": "Available gate-approved UNDOCKED feed history for Luis Taz before C114:\nNo earlier episode found in the available approved packs; this does not prove none ever aired."
+    },
+    {
+      "tool": "citizen_lookup",
+      "input": {
+        "name": "Lena Okafor"
+      },
+      "resultChars": 179,
+      "resultHead": "Lena Okafor — role: Daycare Director; neighborhood: Fruitvale; born: 2002; wealth: 5; careerStage: mid-career; employerBiz: SELF_EMPLOYED; skills: Small Business; popid: POP-00530"
+    }
+  ],
+  "ranAt": "2026-11-07T00:21:25.946Z"
+}

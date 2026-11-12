@@ -1,0 +1,76 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "113",
+  "persona": "freelance-firebrand",
+  "byline": "Jax Caldera",
+  "bylinePopid": "POP-00799",
+  "article": "output/cron-compare/staged/civic_c113_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Timmie Hall",
+        "role": "quoted-source",
+        "popid": "POP-00439"
+      },
+      {
+        "name": "Mei Chen",
+        "role": "quoted-source",
+        "popid": "POP-00635"
+      },
+      {
+        "name": "Liliana Salazar",
+        "role": "quoted-source",
+        "popid": "POP-01128"
+      },
+      {
+        "name": "Wren Choi",
+        "role": "mentioned",
+        "popid": "POP-01137"
+      },
+      {
+        "name": "Leonard Tran",
+        "role": "mentioned",
+        "popid": "POP-00502",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Chinatown"
+    ],
+    "claims": [
+      {
+        "claim": "I've noticed some changes around here, like the lunch spot on the corner being closed suddenly. And just now, there was a medical emergency on the sidewalk. It's not usually like that here.",
+        "sourceRef": "citizenVoice PRESS Timmie Hall"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-282c18e85462",
+    "draftSha256": "cd4f86cc8dc1572fd70281b003a9bbd14126fbdff59407e96331e5d472498185",
+    "verdict": "output/cron-compare/civic_c113_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-10-28T23:15:47.712Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 400",
+      "words": 673,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "cd4f86cc8dc1572fd70281b003a9bbd14126fbdff59407e96331e5d472498185",
+      "costUsd": 0.001
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-28T23:15:53.969Z"
+}

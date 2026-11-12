@@ -1,0 +1,58 @@
+{
+  "mode": "wake-write",
+  "desk": "culture",
+  "cycle": "111",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "maria-keen",
+  "byline": {
+    "name": "Maria Keen",
+    "popid": "POP-00013",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 20,
+  "quotesLanded": 4,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [],
+  "toolCalls": 0,
+  "wordCount": 762,
+  "targetWords": "evidence-bounded",
+  "capHit": 0,
+  "checkFlags": [],
+  "engineTerms": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 762,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "4556b3a91221dcdb185adac1befd3102965da0b82c48d7ca2f7ff4e125b84a31",
+    "costUsd": 0.0014
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 4/4 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/culture_c111_maria-keen_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "onfig/godworld/.env // tip: ⌘ enable debugging { debug: true }\n{\n  \"popId\": \"POP-00013\",\n  \"name\": \"Maria Keen\",\n  \"recorded\": true,\n  \"text\": \"filed: The Lab, the Lease Sign, and the Beds Downtown\"\n}"
+  },
+  "ranAt": "2026-10-16T23:18:17.686Z",
+  "dispositionReconciledAt": "2026-10-17T17:00:02.941Z"
+}

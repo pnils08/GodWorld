@@ -1,0 +1,72 @@
+{
+  "draft": "output/cron-compare/sports_c114_p-slayer_packet-v2_x-ai-grok-4-3.md",
+  "cycle": "114",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "d29af01fa102729dcc0fef15d8a831f0bd697ec8c3b4a0ffad875ae4c8e8dbfc",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All citizen identities, verbatim interview records, and Oaks-Pacers game details fully verified against canon.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "p-slayer-fan-heat-v1",
+    "packageVersion": "PSLAYER-LEP2-1",
+    "manifestId": "AM-0828a603e186",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "-100"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Adash Stanley",
+      "Austin Reaves",
+      "Daniel Cloak",
+      "Melton Neilon"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.011,
+  "durationMs": 6187,
+  "parseError": false,
+  "ranAt": "2026-11-05T00:18:30.874Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 400",
+    "words": 465,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "d29af01fa102729dcc0fef15d8a831f0bd697ec8c3b4a0ffad875ae4c8e8dbfc",
+    "costUsd": 0.001
+  }
+}

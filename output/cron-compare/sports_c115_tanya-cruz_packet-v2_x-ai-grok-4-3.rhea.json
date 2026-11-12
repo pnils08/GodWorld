@@ -1,0 +1,64 @@
+{
+  "draft": "output/cron-compare/sports_c115_tanya-cruz_packet-v2_x-ai-grok-4-3.md",
+  "cycle": "115",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "c8e9005d3bab38a95116e32add9acd95e9fc7cf398940a8b5f36b9214ede06e2",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All stats, quotes, and citizen references match Cycle 115 canon exactly.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "tanya-sideline-v1",
+    "packageVersion": "TANYA-LEP2-1",
+    "manifestId": "AM-e8dab9b96a2b",
+    "lexicalObservations": [],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Benji Dillon",
+      "Mike Paulson",
+      "Vinnie Keane"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0118,
+  "durationMs": 9922,
+  "parseError": false,
+  "ranAt": "2026-11-12T00:20:53.557Z",
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 447,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "c8e9005d3bab38a95116e32add9acd95e9fc7cf398940a8b5f36b9214ede06e2",
+    "costUsd": 0.0011
+  }
+}

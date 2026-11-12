@@ -1,0 +1,370 @@
+{
+  "version": "ARTS-SLICE-1",
+  "empty": false,
+  "cycle": 113,
+  "kind": "beat-arts",
+  "seat": {
+    "slug": "kai-marston",
+    "name": "Kai Marston",
+    "popid": "POP-00158",
+    "desk": "culture",
+    "domain": "arts",
+    "builder": "buildArtsSlice.js"
+  },
+  "hood": "Rockridge",
+  "pulse": {
+    "className": "beat-arts",
+    "score": 100,
+    "label": "34 culture figures rising; 0 new on the record",
+    "hood": "Rockridge",
+    "source": "output/beats/Cultural_Ledger.jsonl @C113"
+  },
+  "story": {
+    "kind": "beat-arts",
+    "angle": "Tara Ellison is rising — the acts and the rooms they play",
+    "label": "34 culture figures rising; 0 new on the record",
+    "hookLine": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 69, surging), last seen C112.",
+    "hood": "Rockridge",
+    "citizens": [
+      "Tara Ellison (POP-00546)",
+      "Alma Vasquez (POP-01063)",
+      "Nina Reyes (POP-01057)",
+      "Theo Banks (POP-01056)",
+      "Lena Cross (POP-00539)",
+      "Rowan Pierce (POP-00545)",
+      "Tariq Jello (POP-00174)",
+      "Idris Karim (POP-00761)",
+      "Lillie Regis (POP-00322)",
+      "Jeremy Wong (POP-00712)",
+      "Rasha Brown (POP-00922)",
+      "Marrin Benry (POP-00249)",
+      "Priscilla Chang (POP-01158)",
+      "Elena Soria Dominguez (POP-00791)",
+      "Diego Remo (POP-00332)",
+      "Brie Harris (POP-00169)",
+      "Patricia Nolan (POP-00729)",
+      "Maya Santos (POP-00475)"
+    ],
+    "popids": [
+      "POP-00546",
+      "POP-01063",
+      "POP-01057",
+      "POP-01056",
+      "POP-00539",
+      "POP-00545",
+      "POP-00174",
+      "POP-00761",
+      "POP-00322",
+      "POP-00712",
+      "POP-00922",
+      "POP-00249",
+      "POP-01158",
+      "POP-00791",
+      "POP-00332",
+      "POP-00169",
+      "POP-00729",
+      "POP-00475"
+    ],
+    "ref": "output/beats/Cultural_Ledger.jsonl @C113",
+    "cycle": 113
+  },
+  "approach": "Arts & entertainment approach: this slice is the culture ledger — who is rising, who just appeared, who is fading, with their domains and neighborhoods — plus the city's culture seeds this cycle. Present-tense, neighborhood act not gallery PR. The names and trajectories are real; the garage rehearsal, the opening-night crowd, the set list are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-00546",
+      "name": "Tara Ellison",
+      "role": "Journalist",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Tara Ellison — Journalist — Rockridge",
+      "why": "fame rising (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-01063",
+      "name": "Alma Vasquez",
+      "role": "sculptor",
+      "neighborhood": "Laurel",
+      "business": null,
+      "profile": "Alma Vasquez — sculptor — Laurel",
+      "why": "fame rising (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-01057",
+      "name": "Nina Reyes",
+      "role": "actress",
+      "neighborhood": "Fruitvale",
+      "business": null,
+      "profile": "Nina Reyes — actress — Fruitvale",
+      "why": "fame rising (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-01056",
+      "name": "Theo Banks",
+      "role": "rapper",
+      "neighborhood": "Uptown",
+      "business": null,
+      "profile": "Theo Banks — rapper — Uptown",
+      "why": "fame rising (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-00539",
+      "name": "Lena Cross",
+      "role": "Actor",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Lena Cross — Actor — Piedmont Ave",
+      "why": "fading — the where-are-they-now file (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-00545",
+      "name": "Rowan Pierce",
+      "role": "Freelance Writer",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Rowan Pierce — Freelance Writer — Piedmont Ave",
+      "why": "fading — the where-are-they-now file (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-00174",
+      "name": "Tariq Jello",
+      "role": "Appliance Repair Technician",
+      "neighborhood": "Laurel",
+      "business": null,
+      "profile": "Tariq Jello — Appliance Repair Technician — Laurel",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00761",
+      "name": "Idris Karim",
+      "role": "Senior Pastor / Faith Leader",
+      "neighborhood": "Temescal",
+      "business": null,
+      "profile": "Idris Karim — Senior Pastor / Faith Leader — Temescal",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00322",
+      "name": "Lillie Regis",
+      "role": "Addiction Recovery Specialist",
+      "neighborhood": "Lake Merritt",
+      "business": null,
+      "profile": "Lillie Regis — Addiction Recovery Specialist — Lake Merritt",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00712",
+      "name": "Jeremy Wong",
+      "role": "Civic Data Engineer (Oakmesh Systems)",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Jeremy Wong — Civic Data Engineer (Oakmesh Systems) — West Oakland",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00922",
+      "name": "Rasha Brown",
+      "role": "Disability Rights Advocate",
+      "neighborhood": "Fruitvale",
+      "business": null,
+      "profile": "Rasha Brown — Disability Rights Advocate — Fruitvale",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00249",
+      "name": "Marrin Benry",
+      "role": "Mechanic",
+      "neighborhood": "Fruitvale",
+      "business": null,
+      "profile": "Marrin Benry — Mechanic — Fruitvale",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-01158",
+      "name": "Priscilla Chang",
+      "role": "Firefighter",
+      "neighborhood": "Fruitvale",
+      "business": null,
+      "profile": "Priscilla Chang — Firefighter — Fruitvale",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00791",
+      "name": "Elena Soria Dominguez",
+      "role": "Transit Hub Planning Lead",
+      "neighborhood": "Fruitvale",
+      "business": null,
+      "profile": "Elena Soria Dominguez — Transit Hub Planning Lead — Fruitvale",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00332",
+      "name": "Diego Remo",
+      "role": "Independent Bookstore Owner",
+      "neighborhood": "Temescal",
+      "business": null,
+      "profile": "Diego Remo — Independent Bookstore Owner — Temescal",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00169",
+      "name": "Brie Harris",
+      "role": "Flower Shop Owner",
+      "neighborhood": "Temescal",
+      "business": null,
+      "profile": "Brie Harris — Flower Shop Owner — Temescal",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00729",
+      "name": "Patricia Nolan",
+      "role": "Retired teacher",
+      "neighborhood": "Temescal",
+      "business": null,
+      "profile": "Patricia Nolan — Retired teacher — Temescal",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00475",
+      "name": "Maya Santos",
+      "role": "Ceramicist",
+      "neighborhood": "Temescal",
+      "business": null,
+      "profile": "Maya Santos — Ceramicist — Temescal",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    }
+  ],
+  "facts": [
+    {
+      "text": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 69, surging), last seen C112",
+      "src": "output/beats/Cultural_Ledger.jsonl @C113"
+    },
+    {
+      "text": "Alma Vasquez (sculptor), Arts, Laurel — fame rising (fame 52, ascending), last seen C86",
+      "src": "output/beats/Cultural_Ledger.jsonl @C113"
+    },
+    {
+      "text": "Nina Reyes (actress), Arts, Fruitvale — fame rising (fame 50, surging), last seen C101",
+      "src": "output/beats/Cultural_Ledger.jsonl @C113"
+    },
+    {
+      "text": "Theo Banks (rapper), Arts, Uptown — fame rising (fame 46, surging), last seen C99",
+      "src": "output/beats/Cultural_Ledger.jsonl @C113"
+    },
+    {
+      "text": "Lena Cross (Celebrity), Arts, Piedmont Ave — fading — the where-are-they-now file (fame 92, cooling), last seen C94",
+      "src": "output/beats/Cultural_Ledger.jsonl @C113"
+    },
+    {
+      "text": "Rowan Pierce (journalist), Media, Piedmont Ave — fading — the where-are-they-now file (fame 66, cooling), last seen C88",
+      "src": "output/beats/Cultural_Ledger.jsonl @C113"
+    },
+    {
+      "text": "CITY SEED (Citywide): Tariq Jello; Idris Karim; Lillie Regis",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C113"
+    },
+    {
+      "text": "CITY SEED (Fruitvale): Rasha Brown; Marrin Benry; Priscilla Chang · at International Cycle Works; Fruitvale Diner",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C113"
+    },
+    {
+      "text": "CITY SEED (Temescal): Diego Remo; Brie Harris; Patricia Nolan · at Calderon-Nishi; North Oakland Home Health",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C113"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "Tara Ellison is rising — the acts and the rooms they play",
+    "hookLine": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 69, surging), last seen C112.",
+    "anchorFacts": [
+      "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 69, surging), last seen C112",
+      "Alma Vasquez (sculptor), Arts, Laurel — fame rising (fame 52, ascending), last seen C86",
+      "Nina Reyes (actress), Arts, Fruitvale — fame rising (fame 50, surging), last seen C101",
+      "Theo Banks (rapper), Arts, Uptown — fame rising (fame 46, surging), last seen C99",
+      "Lena Cross (Celebrity), Arts, Piedmont Ave — fading — the where-are-they-now file (fame 92, cooling), last seen C94",
+      "Rowan Pierce (journalist), Media, Piedmont Ave — fading — the where-are-they-now file (fame 66, cooling), last seen C88",
+      "CITY SEED (Citywide): Tariq Jello; Idris Karim; Lillie Regis",
+      "CITY SEED (Fruitvale): Rasha Brown; Marrin Benry; Priscilla Chang · at International Cycle Works; Fruitvale Diner",
+      "CITY SEED (Temescal): Diego Remo; Brie Harris; Patricia Nolan · at Calderon-Nishi; North Oakland Home Health"
+    ],
+    "evidence": [
+      {
+        "text": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 69, surging), last seen C112",
+        "src": "output/beats/Cultural_Ledger.jsonl @C113"
+      },
+      {
+        "text": "Alma Vasquez (sculptor), Arts, Laurel — fame rising (fame 52, ascending), last seen C86",
+        "src": "output/beats/Cultural_Ledger.jsonl @C113"
+      },
+      {
+        "text": "Nina Reyes (actress), Arts, Fruitvale — fame rising (fame 50, surging), last seen C101",
+        "src": "output/beats/Cultural_Ledger.jsonl @C113"
+      },
+      {
+        "text": "Theo Banks (rapper), Arts, Uptown — fame rising (fame 46, surging), last seen C99",
+        "src": "output/beats/Cultural_Ledger.jsonl @C113"
+      },
+      {
+        "text": "Lena Cross (Celebrity), Arts, Piedmont Ave — fading — the where-are-they-now file (fame 92, cooling), last seen C94",
+        "src": "output/beats/Cultural_Ledger.jsonl @C113"
+      },
+      {
+        "text": "Rowan Pierce (journalist), Media, Piedmont Ave — fading — the where-are-they-now file (fame 66, cooling), last seen C88",
+        "src": "output/beats/Cultural_Ledger.jsonl @C113"
+      },
+      {
+        "text": "CITY SEED (Citywide): Tariq Jello; Idris Karim; Lillie Regis",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C113"
+      },
+      {
+        "text": "CITY SEED (Fruitvale): Rasha Brown; Marrin Benry; Priscilla Chang · at International Cycle Works; Fruitvale Diner",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C113"
+      },
+      {
+        "text": "CITY SEED (Temescal): Diego Remo; Brie Harris; Patricia Nolan · at Calderon-Nishi; North Oakland Home Health",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C113"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": null,
+    "hooks": [
+      {
+        "text": "wrote half a letter to family, then decided to call instead",
+        "angle": "arts/culture feature",
+        "domain": "CULTURE",
+        "hood": "Piedmont Ave",
+        "priority": 3
+      },
+      {
+        "text": "caught the recap of last night's game at the counter and stayed for the second retelling",
+        "angle": "arts/culture feature",
+        "domain": "CULTURE",
+        "hood": "Rockridge",
+        "priority": 3
+      },
+      {
+        "text": "Ariana Reyes moved from Downtown to West Oakland — moving up from Downtown — sold the house in Downtown to rent up",
+        "angle": "desk rotation",
+        "domain": "COMMUNITY",
+        "hood": "West Oakland",
+        "priority": 5
+      }
+    ],
+    "note": null,
+    "pageVoices": [],
+    "roomIsYours": "the rehearsal space, the flyer on the pole, who showed up, what the room felt like when the second act started"
+  },
+  "rising": 34,
+  "appeared": 0,
+  "fading": 3,
+  "seeds": 18,
+  "pointers": [
+    "output/beats/Cultural_Ledger.jsonl @C113",
+    "output/beats/Story_Hook_Deck.jsonl (hooks for Kai Marston this cycle)"
+  ]
+}

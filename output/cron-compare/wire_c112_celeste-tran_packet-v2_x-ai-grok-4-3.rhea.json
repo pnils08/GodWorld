@@ -1,0 +1,67 @@
+{
+  "draft": "output/cron-compare/wire_c112_celeste-tran_packet-v2_x-ai-grok-4-3.md",
+  "cycle": "112",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "1ec66e83731c92fc115224204fa27a446b07604cabbe0c09f8a23b530b60ae64",
+  "pass": true,
+  "advisory": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Clean social trend synthesis with fully verified packet quote provenance and canon-consistent citizen locations.",
+  "review": {
+    "profileId": "celeste-social-trends-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "celeste-social-trends-v1",
+    "packageVersion": "CELESTE-TRENDS-1",
+    "manifestId": "AM-08756b01136f",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Jade Orion",
+      "Tara Ellison",
+      "Vinnie Keane",
+      "Yu Zen"
+    ],
+    "unverified": [
+      "Living Word"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0103,
+  "durationMs": 5619,
+  "parseError": false,
+  "ranAt": "2026-10-23T23:19:25.097Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 400",
+    "words": 529,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "1ec66e83731c92fc115224204fa27a446b07604cabbe0c09f8a23b530b60ae64",
+    "costUsd": 0.001
+  }
+}

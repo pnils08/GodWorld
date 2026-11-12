@@ -1,0 +1,60 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "112",
+  "persona": "luis-navarro",
+  "byline": "Luis Navarro",
+  "bylinePopid": "POP-00636",
+  "article": "output/cron-compare/staged/civic_c112_luis-navarro_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Keisha Ramos",
+        "role": "quoted-source",
+        "popid": "POP-00041"
+      },
+      {
+        "name": "Avery Santana",
+        "role": "quoted-source",
+        "popid": "POP-00034"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Downtown"
+    ],
+    "claims": [
+      {
+        "claim": "The soil is clean, the oversight is independent, and the Cycle 115 review holds. But a build only succeeds if the neighborhoods beside it hold too.",
+        "sourceRef": "citizenVoice PRESS Keisha Ramos"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-92ca74e4ecd7",
+    "draftSha256": "d66d5f8b491d8a585c97ba8751817742e0175a1170339e2c08f7fb73b5889e05",
+    "verdict": "output/cron-compare/civic_c112_luis-navarro_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-10-20T23:15:41.194Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 400",
+      "words": 605,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "d66d5f8b491d8a585c97ba8751817742e0175a1170339e2c08f7fb73b5889e05",
+      "costUsd": 0.0011
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-20T23:15:46.769Z"
+}

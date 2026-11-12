@@ -1,0 +1,58 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "112",
+  "persona": "trevor-shimizu",
+  "byline": "Trevor Shimizu",
+  "bylinePopid": "POP-00155",
+  "article": "output/cron-compare/staged/civic_c112_trevor-shimizu_packet-v2_openai-gpt-5-6-luna.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Evan Lewis",
+        "role": "quoted-source",
+        "popid": "POP-00200"
+      },
+      {
+        "name": "Eleanor Rivera",
+        "role": "quoted-source",
+        "popid": "POP-00617"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "From the booth at 19th, on a game day it's not one thing — it's the whole rhythm stacking up. You see the platform fill, and you know the trains are coming, but they're coming full from the last stop. So it's dwell time, sure — people squeezing on, people stepping back, doors cycling. But it's also crowd control, because when the platform's that packed, you're watching for people too close to the edge, and you're holding the train an extra few seconds just to be safe. And honestly, sometimes it's just the sheer number of bodies moving at once — everyone's got somewhere to be, and they all want to be first. That's what explains the gap between how many people we move and how on-time we look. We're moving a lot of people, but moving a lot of people takes time.",
+        "sourceRef": "citizenVoice PRESS Eleanor Rivera"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-3f48cf72526a",
+    "draftSha256": "30b69a664839007d4301b5c750de46136c76fe9953df0538c9ea5dfc24eb7835",
+    "verdict": "output/cron-compare/civic_c112_trevor-shimizu_packet-v2_openai-gpt-5-6-luna.rhea.json",
+    "ranAt": "2026-10-19T23:18:42.265Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 500",
+      "words": 692,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "30b69a664839007d4301b5c750de46136c76fe9953df0538c9ea5dfc24eb7835",
+      "costUsd": 0.0011
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-19T23:18:45.725Z"
+}

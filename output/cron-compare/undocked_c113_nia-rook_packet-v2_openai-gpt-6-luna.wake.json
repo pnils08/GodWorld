@@ -1,0 +1,61 @@
+{
+  "mode": "wake-write",
+  "desk": "undocked",
+  "cycle": "113",
+  "provider": "openrouter",
+  "model": "openai/gpt-6-luna",
+  "configuredWriterModel": "openai/gpt-6-luna",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "nia-rook",
+  "byline": {
+    "name": "Nia Rook",
+    "popid": "POP-01076",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 1,
+  "quotesLanded": 0,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "undocked_history",
+    "undocked_history",
+    "undocked_history"
+  ],
+  "toolCalls": 3,
+  "wordCount": 418,
+  "targetWords": "350-600",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 350",
+    "words": 418,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "cffda9e99941796b69f5185e0ffe9a2c35d09a135ede4585656e70366bb15eb7",
+    "costUsd": 0.0009
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 4/4 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/undocked_c113_nia-rook_packet-v2_openai-gpt-6-luna.staged-2322.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "rld/.env // tip: ⌘ enable debugging { debug: true }\n{\n  \"popId\": \"POP-01076\",\n  \"name\": \"Nia Rook\",\n  \"recorded\": true,\n  \"text\": \"filed: UNDOCKED: Cristina Booker’s night leaves the ledger hanging\"\n}"
+  },
+  "ranAt": "2026-10-30T23:21:46.000Z",
+  "dispositionReconciledAt": "2026-10-31T17:00:03.000Z"
+}

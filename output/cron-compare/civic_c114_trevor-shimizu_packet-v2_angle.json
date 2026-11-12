@@ -1,0 +1,1289 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "114",
+  "persona": "trevor-shimizu",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00155",
+      "name": "Trevor Shimizu",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Coliseum ridership down 799 vs C113 | 8 stations + 10 corridors on the record — the platforms and the people who run them",
+      "approach": "Transit approach: this slice is every station on the record this cycle, what moved against last cycle, and the transit workers on the roster. The week header (weather, home games, the union of causes), the chaos car on the line and the citizens who lived a transit line are record; the Factors on each station row are the city's own causes — the frame at their head (weather; weekend; holiday: <name> (major) or (no cut)) is the citywide day-type cut, and the rest are the row's own reasons (holiday lift in its hood, First Friday, game day, events, a stalled train, a short crew, crowded platforms). Riders rise and fall for the reasons written there, never for a reason you add. A BART-train chaos hit this cycle reaches the platforms NEXT cycle. Dry, technical, timestamp and pattern — but it is a place with people in it. One system, one claim about what changed. Facts on this slice: the names, ",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "transit",
+        "hood": null,
+        "facts": [
+          "Day type this cycle: weekend — riders cut citywide by the weekend rule. A station that moved more than the citywide rule names its own reason on its row.",
+          "The week on the line — every cause on the record this cycle, once: mild; weekend; First Friday; game day (Downtown, Jack London); events in Downtown ×3, Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.30); game day (Downtown); events in Downtown ×3, Lake Merritt, Temescal; events in Lake Merritt, Chinatown ×2; events in Fruitvale ×3; Fruitvale Transit Hub Phase II — Visioning: design-phase; BART train: medical hold on board in Fruitvale (last week); game day (Jack London); events in Jack London; BART train: signal failure in West Oakland (last week); events in Temescal; BART train: stalled train in Rockridge (last week); game day (Jack London, Downtown)",
+          "Weather this cycle: mild, 55°F (4 cycles of clear)",
+          "Game on the sports feed this cycle: Oaks at San Antonio — The Oaks' perfect start ends at four. In Indiana, in front of a building at 90% capacity, the Pacers built a 61-42 halftime lead behind a 34-point second quarter and led 82-62 after three. The Oaks answered with 38 points in the fourth and won the quarter 38-22, but the comeback came up four short, Pacers 104 - Oaks 100. Adash Stanley and Austin Reaves led the way with 19 apiece. Stanley hit 5 of 11 from three, and Reaves had 7 assists and 6 rebounds without a turnover. AJ Dybantsa added 15, Wendell Carter Jr. went 5 for 6 for 10 points and 7 rebounds, and T. Jerome chipped in 10 points and 5 assists. The Oaks fall to 4-1. (the rider lift is real only where a station row says \"game day\")",
+          "Game on the sports feed this cycle: Oaks at San Antonio — After the perfect start ended in Indiana, the Oaks went to Toronto and answered with the most lopsided win in franchise history, Oaks 135 - Raptors 75, in front of a 95% crowd. The Oaks led 39-19 after one, 73-40 at the half and 101-62 after three, and nobody played more than 28 minutes. Austin Reaves led with 20 on 4 of 6 from three, T. Jerome had 19 points, 7 rebounds and 7 assists, and Adash Stanley went 4 for 4 from three for 16 with 7 rebounds and 6 assists. Wendell Carter Jr. owned the glass with 14 points and 15 rebounds, 5 of them offensive. The Oaks shot 57 of 91, 19 of 28 from three, handed out 34 assists and turned it over only twice. The Oaks move to 5-1. (the rider lift is real only where a station row says \"game day\")",
+          "Game on the sports feed this cycle: Oaks at KONO — The Oaks opened their first NBA Cup run at home in front of a sold-out crowd and held off the Oklahoma City Thunder, 101-95, behind Dillon Brooks' biggest scoring night as an Oak. The Oaks led after every quarter but never by much: 35-30 after one, 63-60 at the half and 78-74 after a 15-14 third. Brooks played 39 minutes and scored 22 on 8 of 15, hitting 6 of 9 from three, with 4 rebounds, 5 assists, 2 steals, a block and one turnover. In a game this close, his threes kept Oklahoma City at arm's length. Adash Stanley added 21 and 6 assists and went 6 for 6 at the line, though he turned it over 6 times. Wendell Carter Jr. was nearly perfect, 8 of 9 for 19 points and 13 rebounds, and AJ Dybantsa ground out a 13-point, 10-rebound double-double on a 4 for 15 night. As a team the Oaks went 13 of 13 from the line. The Oaks move to 6-1 and 1-0 in Cup play. (the rider lift is real only where a station row says \"game day\")",
+          "No chaos car touched the trains or the transit agencies this cycle (Chaos_Cars rows read; none on bart_train, BART or AC Transit)",
+          "8 stations + 10 corridors on the record this cycle; total ridership 46,839 (C113: 46,520)",
+          "Coliseum: ridership 4,796 (-799 vs C113), on-time 81% (-1 pts) — mild; weekend; base: ledger; crowded platforms (city transit congestion 0.30)",
+          "19th St Oakland: ridership 10,752 (+740 vs C113), on-time 80% (-10 pts) — mild; weekend; base: ledger; First Friday; game day (Downtown); events in Downtown ×3, Lake Merritt, Temescal; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.30)",
+          "Lake Merritt: ridership 4,096 (-729 vs C113), on-time 76% (-11 pts) — mild; weekend; base: ledger; events in Lake Merritt, Chinatown ×2; crowded platforms (city transit congestion 0.30)",
+          "12th St Oakland City Center: ridership 10,011 (+670 vs C113), on-time 77% (-7 pts) — mild; weekend; base: ledger; First Friday; game day (Downtown, Jack London); events in Downtown ×3, Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.30)"
+        ],
+        "priorCycle": "PRIOR_CYCLE_IN_TABLE",
+        "note": null,
+        "engineHooks": [
+          "Early signals in Downtown: The Downtown Transit Snarl — Downtown under strain: transit disruption; housing pressure 10.00 (city 2.41) (historical reflection)",
+          "Story seed 1149f5fb (West Oakland): Sage Vienta, Beverly Hayes, Jada Rayes, Brenda Gonzalez — Sage Vienta — watched an old man feed pigeons like a ritual and wondered what theirs was; Beverly Hayes — attended a community feedback session fo",
+          "Story seed a1efa0e8 (Fruitvale): Esperanza Ruiz, Lena Okafor, Kaila Nguyen, Miguel Santos — Esperanza Ruiz — framed an old ticket stub that had finally earned its frame; Lena Okafor — the Oakland Alternative Response Initiative is making wa",
+          "Story seed 1b3c6537 (Rockridge): Jett Walker, Howard Perez, Tara Ellison, Latasha Rivera — Jett Walker — rewound the belt haul on the walk home and smiled at nothing in particular; Howard Perez — caught a stranger humming their song and fel"
+        ],
+        "roomIsYours": "the platform at 7:40, the operator's cab, who is late and why, what the fare gate sounds like, what a regular rider notices first",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-transit",
+      "hood": null,
+      "score": null,
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+      "nearby": [
+        {
+          "text": "Avery Santana (mayor gavel): Record the executed Month-12 $400,000 disbursement, publish closeout documentation, and complete a charter renewal draft preserving service to West Oakland businesses and residents. — \"West O",
+          "src": "output/civic-voice/mayor_gavel_c114.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): Docket and execute the D3 East Oakland briefing this cycle with Fruitvale district-level data and the Baylight feasibility review, direct the D5 dispatch audit, and hold expansion until after",
+          "src": "output/civic-voice/mayor_gavel_c114.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): Require C114 schematic delivery and a documented Fruitvale community review, with a public comment-and-response record before further design advancement. — \"Fruitvale will see the schematics,",
+          "src": "output/civic-voice/mayor_gavel_c114.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): Keep the C115 milestone review contingent on independent remediation verification, neighborhood protections, hotline records, and workforce results; make no early milestone declaration. — \"Ba",
+          "src": "output/civic-voice/mayor_gavel_c114.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): Publish the C114 placement-gap analysis and a program adjustment plan, explicitly examining West Oakland and Fruitvale without inventing unreported placement results. — \"Enrollment is a begin",
+          "src": "output/civic-voice/mayor_gavel_c114.json"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00200",
+          "name": "Evan Lewis",
+          "profile": "Evan Lewis — Bus driver — AC Transit",
+          "role": "Bus driver",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Transit_Metrics.jsonl Cycle 114",
+            "pop": "POP-00200",
+            "rowName": "Evan Lewis",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00218",
+          "name": "Joel Wren",
+          "profile": "Joel Wren — Mechanic — AC Transit",
+          "role": "Mechanic",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Transit_Metrics.jsonl Cycle 114",
+            "pop": "POP-00218",
+            "rowName": "Joel Wren",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00280",
+          "name": "Jerald Jensen",
+          "profile": "Jerald Jensen — Janitor — AC Transit",
+          "role": "Janitor",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Transit_Metrics.jsonl Cycle 114",
+            "pop": "POP-00280",
+            "rowName": "Jerald Jensen",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00338",
+          "name": "Coen Cartier",
+          "profile": "Coen Cartier — Transit Operator (AC Transit) — AC Transit",
+          "role": "Transit Operator (AC Transit)",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Transit_Metrics.jsonl Cycle 114",
+            "pop": "POP-00338",
+            "rowName": "Coen Cartier",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00442",
+          "name": "Daire Green",
+          "profile": "Daire Green — Transit Operator (AC Transit) — AC Transit",
+          "role": "Transit Operator (AC Transit)",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Transit_Metrics.jsonl Cycle 114",
+            "pop": "POP-00442",
+            "rowName": "Daire Green",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00448",
+          "name": "Ray Neal",
+          "profile": "Ray Neal — AC Transit Bus Operator — AC Transit",
+          "role": "AC Transit Bus Operator",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Transit_Metrics.jsonl Cycle 114",
+            "pop": "POP-00448",
+            "rowName": "Ray Neal",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00573",
+          "name": "Calvin Mwangi",
+          "profile": "Calvin Mwangi — AC Transit Bus Driver — AC Transit",
+          "role": "AC Transit Bus Driver",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Transit_Metrics.jsonl Cycle 114",
+            "pop": "POP-00573",
+            "rowName": "Calvin Mwangi",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00617",
+          "name": "Eleanor Rivera",
+          "profile": "Eleanor Rivera — BART Station Manager — BART Oakland Division",
+          "role": "BART Station Manager",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Transit_Metrics.jsonl Cycle 114",
+            "pop": "POP-00617",
+            "rowName": "Eleanor Rivera",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00791",
+          "name": "Elena Soria Dominguez",
+          "profile": "Elena Soria Dominguez — Transit Hub Planning Lead — Fruitvale Transit Hub Authority",
+          "role": "Transit Hub Planning Lead",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Transit_Metrics.jsonl Cycle 114",
+            "pop": "POP-00791",
+            "rowName": "Elena Soria Dominguez",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01037",
+          "name": "Ivy Tran",
+          "profile": "Ivy Tran — Driver — AC Transit",
+          "role": "Driver",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Transit_Metrics.jsonl Cycle 114",
+            "pop": "POP-01037",
+            "rowName": "Ivy Tran",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01039",
+          "name": "Ximena Mehta",
+          "profile": "Ximena Mehta — Bart Transit PR — BART Oakland Division",
+          "role": "Bart Transit PR",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Transit_Metrics.jsonl Cycle 114",
+            "pop": "POP-01039",
+            "rowName": "Ximena Mehta",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01053",
+          "name": "Rosario Medina",
+          "profile": "Rosario Medina — CBA Compliance Monitor, Fruitvale Transit Hub — Fruitvale Transit Hub Authority",
+          "role": "CBA Compliance Monitor, Fruitvale Transit Hub",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Transit_Metrics.jsonl Cycle 114",
+            "pop": "POP-01053",
+            "rowName": "Rosario Medina",
+            "kind": "slice-row"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C114",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-4261fa115617"
+      },
+      {
+        "t": "FACT",
+        "text": "Coliseum ridership down 799 vs C113 | 8 stations + 10 corridors on the record",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+        "id": "F-c3a558a5eebc"
+      },
+      {
+        "t": "FACT",
+        "text": "Coliseum moved down the most this cycle — mild; weekend; base: ledger; crowded platforms (city transit congestion 0.30); 14 transit workers on the roster, 8 citizens who lived a transit line.",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+        "id": "F-fe6ab4e258ae"
+      },
+      {
+        "t": "FACT",
+        "text": "Day type this cycle: weekend — riders cut citywide by the weekend rule. A station that moved more than the citywide rule names its own reason on its row.",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114 Factors (frame)",
+        "id": "F-b5a2467ec472"
+      },
+      {
+        "t": "FACT",
+        "text": "The week on the line — every cause on the record this cycle, once: mild; weekend; First Friday; game day (Downtown, Jack London); events in Downtown ×3, Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.30); game day (Downtown); events in Downtown ×3, Lake Merritt, Temescal; events in Lake Merritt, Chinatown ×2; events in Fruitvale ×3; Fruitvale Transit Hub Phase II — Visioning: design-phase; BART train: medical h",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114 Factors",
+        "id": "F-864fb941c11c"
+      },
+      {
+        "t": "FACT",
+        "text": "Weather this cycle: mild, 55°F (4 cycles of clear)",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 114",
+        "id": "F-bf932e517031"
+      },
+      {
+        "t": "FACT",
+        "text": "Game on the sports feed this cycle: Oaks at San Antonio — The Oaks' perfect start ends at four. In Indiana, in front of a building at 90% capacity, the Pacers built a 61-42 halftime lead behind a 34-point second quarter and led 82-62 after three. The Oaks answered with 38 points in the fourth and won the quarter 38-22, but the comeback came up four short, Pacers 104 - Oaks 100. Adash Stanley and Austin Reaves led the way with 19 apiece. Stanley hit 5 of 11 from three, and Reaves had 7 assists an",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 114",
+        "id": "F-12f06b61a7ed"
+      },
+      {
+        "t": "FACT",
+        "text": "Game on the sports feed this cycle: Oaks at San Antonio — After the perfect start ended in Indiana, the Oaks went to Toronto and answered with the most lopsided win in franchise history, Oaks 135 - Raptors 75, in front of a 95% crowd. The Oaks led 39-19 after one, 73-40 at the half and 101-62 after three, and nobody played more than 28 minutes. Austin Reaves led with 20 on 4 of 6 from three, T. Jerome had 19 points, 7 rebounds and 7 assists, and Adash Stanley went 4 for 4 from three for 16 with",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 114",
+        "id": "F-d9f893d15444"
+      },
+      {
+        "t": "FACT",
+        "text": "Game on the sports feed this cycle: Oaks at KONO — The Oaks opened their first NBA Cup run at home in front of a sold-out crowd and held off the Oklahoma City Thunder, 101-95, behind Dillon Brooks' biggest scoring night as an Oak. The Oaks led after every quarter but never by much: 35-30 after one, 63-60 at the half and 78-74 after a 15-14 third. Brooks played 39 minutes and scored 22 on 8 of 15, hitting 6 of 9 from three, with 4 rebounds, 5 assists, 2 steals, a block and one turnover. In a game",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 114",
+        "id": "F-4df90eead524"
+      },
+      {
+        "t": "FACT",
+        "text": "No chaos car touched the trains or the transit agencies this cycle (Chaos_Cars rows read; none on bart_train, BART or AC Transit)",
+        "src": "output/world_summary_c114.md ## Chaos Events",
+        "id": "F-d4fe2f4a1b06"
+      },
+      {
+        "t": "FACT",
+        "text": "8 stations + 10 corridors on the record this cycle; total ridership 46,839 (C113: 46,520)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+        "id": "F-e916d4094266"
+      },
+      {
+        "t": "FACT",
+        "text": "Coliseum: ridership 4,796 (-799 vs C113), on-time 81% (-1 pts) — mild; weekend; base: ledger; crowded platforms (city transit congestion 0.30)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+        "id": "F-8f6803b499c8"
+      },
+      {
+        "t": "FACT",
+        "text": "19th St Oakland: ridership 10,752 (+740 vs C113), on-time 80% (-10 pts) — mild; weekend; base: ledger; First Friday; game day (Downtown); events in Downtown ×3, Lake Merritt, Temescal; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.30)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+        "id": "F-fb0b3335068f"
+      },
+      {
+        "t": "FACT",
+        "text": "Lake Merritt: ridership 4,096 (-729 vs C113), on-time 76% (-11 pts) — mild; weekend; base: ledger; events in Lake Merritt, Chinatown ×2; crowded platforms (city transit congestion 0.30)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+        "id": "F-552dd60d4a11"
+      },
+      {
+        "t": "FACT",
+        "text": "12th St Oakland City Center: ridership 10,011 (+670 vs C113), on-time 77% (-7 pts) — mild; weekend; base: ledger; First Friday; game day (Downtown, Jack London); events in Downtown ×3, Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.30)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+        "id": "F-e92bd0f3de15"
+      },
+      {
+        "t": "FACT",
+        "text": "Fruitvale: ridership 5,063 (+510 vs C113), on-time 72% (-9 pts) — mild; weekend; base: ledger; events in Fruitvale ×3; Fruitvale Transit Hub Phase II — Visioning: design-phase; BART train: medical hold on board in Fruitvale (last week); crowded platforms (city transit congestion 0.30)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+        "id": "F-31f2a90d3e07"
+      },
+      {
+        "t": "FACT",
+        "text": "Rockridge: ridership 3,287 (-219 vs C113), on-time 72% (-10 pts) — mild; weekend; base: ledger; BART train: stalled train in Rockridge (last week); crowded platforms (city transit congestion 0.30)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+        "id": "F-6630145db16c"
+      },
+      {
+        "t": "FACT",
+        "text": "MacArthur: ridership 2,806 (+156 vs C113), on-time 79% (-9 pts) — mild; weekend; base: ledger; events in Temescal; crowded platforms (city transit congestion 0.30)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+        "id": "F-239e0035be1f"
+      },
+      {
+        "t": "FACT",
+        "text": "West Oakland: ridership 6,028 (-10 vs C113), on-time 74% (-13 pts) — mild; weekend; base: ledger; game day (Jack London); events in Jack London; Baylight District — Final Council Vote: construction-active; BART train: signal failure in West Oakland (last week); crowded platforms (city transit congestion 0.30)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+        "id": "F-8fd12599e794"
+      },
+      {
+        "t": "FACT",
+        "text": "I-880 North: traffic index 63 (-5 vs C113) — mild; weekend; base: ledger; game day (Jack London, Downtown); Baylight District — Final Council Vote: construction-active",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+        "id": "F-5075ea39f561"
+      },
+      {
+        "t": "FACT",
+        "text": "I-880 South: traffic index 54 (-15 vs C113) — mild; weekend; base: ledger",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+        "id": "F-0bf6d34125b4"
+      },
+      {
+        "t": "FACT",
+        "text": "I-580 East: traffic index 38 (-19 vs C113) — mild; weekend; base: ledger",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+        "id": "F-0eaa0095c846"
+      },
+      {
+        "t": "FACT",
+        "text": "I-580 West: traffic index 47 (-14 vs C113) — mild; weekend; base: ledger",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+        "id": "F-0a0d3f12ee39"
+      },
+      {
+        "t": "FACT",
+        "text": "I-980: traffic index 62 (-13 vs C113) — mild; weekend; base: ledger; game day (Downtown); Baylight District — Final Council Vote: construction-active",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+        "id": "F-088dfc56837b"
+      },
+      {
+        "t": "FACT",
+        "text": "Broadway: traffic index 65 (+18 vs C113) — mild; weekend; base: ledger; First Friday; game day (Downtown)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+        "id": "F-ee3f76aac6b2"
+      },
+      {
+        "t": "FACT",
+        "text": "International Blvd: traffic index 47 (+0 vs C113) — mild; weekend; base: ledger",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+        "id": "F-b7a2a69cd59f"
+      },
+      {
+        "t": "FACT",
+        "text": "MacArthur Blvd: traffic index 43 (+0 vs C113) — mild; weekend; base: ledger",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+        "id": "F-24ba94137810"
+      },
+      {
+        "t": "FACT",
+        "text": "Telegraph Ave: traffic index 60 (+3 vs C113) — mild; weekend; base: ledger; First Friday; game day (Downtown)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+        "id": "F-43e6ff021606"
+      },
+      {
+        "t": "FACT",
+        "text": "Grand Ave: traffic index 35 (-14 vs C113) — mild; weekend; base: ledger",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+        "id": "F-da3ec2cbc7de"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "workplace",
+    "candidates": [
+      {
+        "pop": "POP-00200",
+        "name": "Evan Lewis",
+        "role": "Bus driver",
+        "hood": null,
+        "profile": "Evan Lewis — Bus driver — AC Transit",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Transit_Metrics.jsonl Cycle 114",
+          "pop": "POP-00200",
+          "rowName": "Evan Lewis",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00218",
+        "name": "Joel Wren",
+        "role": "Mechanic",
+        "hood": null,
+        "profile": "Joel Wren — Mechanic — AC Transit",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Transit_Metrics.jsonl Cycle 114",
+          "pop": "POP-00218",
+          "rowName": "Joel Wren",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00280",
+        "name": "Jerald Jensen",
+        "role": "Janitor",
+        "hood": null,
+        "profile": "Jerald Jensen — Janitor — AC Transit",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Transit_Metrics.jsonl Cycle 114",
+          "pop": "POP-00280",
+          "rowName": "Jerald Jensen",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00338",
+        "name": "Coen Cartier",
+        "role": "Transit Operator (AC Transit)",
+        "hood": null,
+        "profile": "Coen Cartier — Transit Operator (AC Transit) — AC Transit",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Transit_Metrics.jsonl Cycle 114",
+          "pop": "POP-00338",
+          "rowName": "Coen Cartier",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00442",
+        "name": "Daire Green",
+        "role": "Transit Operator (AC Transit)",
+        "hood": null,
+        "profile": "Daire Green — Transit Operator (AC Transit) — AC Transit",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Transit_Metrics.jsonl Cycle 114",
+          "pop": "POP-00442",
+          "rowName": "Daire Green",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00448",
+        "name": "Ray Neal",
+        "role": "AC Transit Bus Operator",
+        "hood": null,
+        "profile": "Ray Neal — AC Transit Bus Operator — AC Transit",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Transit_Metrics.jsonl Cycle 114",
+          "pop": "POP-00448",
+          "rowName": "Ray Neal",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00573",
+        "name": "Calvin Mwangi",
+        "role": "AC Transit Bus Driver",
+        "hood": null,
+        "profile": "Calvin Mwangi — AC Transit Bus Driver — AC Transit",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Transit_Metrics.jsonl Cycle 114",
+          "pop": "POP-00573",
+          "rowName": "Calvin Mwangi",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00617",
+        "name": "Eleanor Rivera",
+        "role": "BART Station Manager",
+        "hood": null,
+        "profile": "Eleanor Rivera — BART Station Manager — BART Oakland Division",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Transit_Metrics.jsonl Cycle 114",
+          "pop": "POP-00617",
+          "rowName": "Eleanor Rivera",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00791",
+        "name": "Elena Soria Dominguez",
+        "role": "Transit Hub Planning Lead",
+        "hood": null,
+        "profile": "Elena Soria Dominguez — Transit Hub Planning Lead — Fruitvale Transit Hub Authority",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Transit_Metrics.jsonl Cycle 114",
+          "pop": "POP-00791",
+          "rowName": "Elena Soria Dominguez",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01037",
+        "name": "Ivy Tran",
+        "role": "Driver",
+        "hood": null,
+        "profile": "Ivy Tran — Driver — AC Transit",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Transit_Metrics.jsonl Cycle 114",
+          "pop": "POP-01037",
+          "rowName": "Ivy Tran",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01039",
+        "name": "Ximena Mehta",
+        "role": "Bart Transit PR",
+        "hood": null,
+        "profile": "Ximena Mehta — Bart Transit PR — BART Oakland Division",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Transit_Metrics.jsonl Cycle 114",
+          "pop": "POP-01039",
+          "rowName": "Ximena Mehta",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01053",
+        "name": "Rosario Medina",
+        "role": "CBA Compliance Monitor, Fruitvale Transit Hub",
+        "hood": null,
+        "profile": "Rosario Medina — CBA Compliance Monitor, Fruitvale Transit Hub — Fruitvale Transit Hub Authority",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Transit_Metrics.jsonl Cycle 114",
+          "pop": "POP-01053",
+          "rowName": "Rosario Medina",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01054",
+        "name": "Delia Vargas-Ruiz",
+        "role": "Transit Hub D3 Intake Liaison",
+        "hood": null,
+        "profile": "Delia Vargas-Ruiz — Transit Hub D3 Intake Liaison — Fruitvale Transit Hub Authority",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Transit_Metrics.jsonl Cycle 114",
+          "pop": "POP-01054",
+          "rowName": "Delia Vargas-Ruiz",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01055",
+        "name": "Jerome Pittman",
+        "role": "Transit Hub D5 Intake Liaison",
+        "hood": null,
+        "profile": "Jerome Pittman — Transit Hub D5 Intake Liaison — Fruitvale Transit Hub Authority",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Transit_Metrics.jsonl Cycle 114",
+          "pop": "POP-01055",
+          "rowName": "Jerome Pittman",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00029",
+        "name": "Alisha Peña",
+        "role": "Female Model",
+        "hood": "Lake Merritt",
+        "profile": "Alisha Peña — Female Model — Lake Merritt",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Transit_Metrics.jsonl Cycle 114",
+          "pop": "POP-00029",
+          "rowName": "Alisha Peña",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00172",
+        "name": "Marlon Hingsley",
+        "role": "Housing Authority Inspector",
+        "hood": "Downtown",
+        "profile": "Marlon Hingsley — Housing Authority Inspector — Downtown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Transit_Metrics.jsonl Cycle 114",
+          "pop": "POP-00172",
+          "rowName": "Marlon Hingsley",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00275",
+        "name": "Elijah Roberts",
+        "role": "Construction laborer",
+        "hood": "West Oakland",
+        "profile": "Elijah Roberts — Construction laborer — West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Transit_Metrics.jsonl Cycle 114",
+          "pop": "POP-00275",
+          "rowName": "Elijah Roberts",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00922",
+        "name": "Rasha Brown",
+        "role": "Disability Rights Advocate",
+        "hood": "Fruitvale",
+        "profile": "Rasha Brown — Disability Rights Advocate — Fruitvale",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Transit_Metrics.jsonl Cycle 114",
+          "pop": "POP-00922",
+          "rowName": "Rasha Brown",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00004",
+        "name": "Lucia Polito",
+        "role": "Aura Wellness Practitioner",
+        "hood": "Fruitvale",
+        "profile": "Lucia Polito — Aura Wellness Practitioner — Fruitvale",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Transit_Metrics.jsonl Cycle 114",
+          "pop": "POP-00004",
+          "rowName": "Lucia Polito",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00014",
+        "name": "Tanya Cruz",
+        "role": "Sideline Reporter",
+        "hood": "Laurel",
+        "profile": "Tanya Cruz — Sideline Reporter — Laurel",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Transit_Metrics.jsonl Cycle 114",
+          "pop": "POP-00014",
+          "rowName": "Tanya Cruz",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00034",
+        "name": "Avery Santana",
+        "role": "Mayor of Oakland",
+        "hood": "Rockridge",
+        "profile": "Avery Santana — Mayor of Oakland — Rockridge",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Transit_Metrics.jsonl Cycle 114",
+          "pop": "POP-00034",
+          "rowName": "Avery Santana",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00050",
+        "name": "Ernesto Quintero",
+        "role": "3B/1B , Oakland A's",
+        "hood": "Baylight District",
+        "profile": "Ernesto Quintero — 3B/1B , Oakland A's — Baylight District",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Transit_Metrics.jsonl Cycle 114",
+          "pop": "POP-00050",
+          "rowName": "Ernesto Quintero",
+          "kind": "slice-row"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Trevor Shimizu",
+    "popid": "POP-00155"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-transit",
+      "angle": "Coliseum ridership down 799 vs C113 | 8 stations + 10 corridors on the record — the platforms and the people who run them",
+      "label": "Coliseum ridership down 799 vs C113 | 8 stations + 10 corridors on the record",
+      "hookLine": "Coliseum moved down the most this cycle — mild; weekend; base: ledger; crowded platforms (city transit congestion 0.30); 14 transit workers on the roster, 8 citizens who lived a transit line.",
+      "hood": null,
+      "citizens": [
+        "Evan Lewis (POP-00200)",
+        "Joel Wren (POP-00218)",
+        "Jerald Jensen (POP-00280)",
+        "Coen Cartier (POP-00338)",
+        "Daire Green (POP-00442)",
+        "Ray Neal (POP-00448)",
+        "Calvin Mwangi (POP-00573)",
+        "Eleanor Rivera (POP-00617)",
+        "Elena Soria Dominguez (POP-00791)",
+        "Ivy Tran (POP-01037)",
+        "Ximena Mehta (POP-01039)",
+        "Rosario Medina (POP-01053)",
+        "Delia Vargas-Ruiz (POP-01054)",
+        "Jerome Pittman (POP-01055)",
+        "Alisha Peña (POP-00029)",
+        "Marlon Hingsley (POP-00172)",
+        "Elijah Roberts (POP-00275)",
+        "Rasha Brown (POP-00922)",
+        "Lucia Polito (POP-00004)",
+        "Tanya Cruz (POP-00014)",
+        "Avery Santana (POP-00034)",
+        "Ernesto Quintero (POP-00050)"
+      ],
+      "popids": [
+        "POP-00200",
+        "POP-00218",
+        "POP-00280",
+        "POP-00338",
+        "POP-00442",
+        "POP-00448",
+        "POP-00573",
+        "POP-00617",
+        "POP-00791",
+        "POP-01037",
+        "POP-01039",
+        "POP-01053",
+        "POP-01054",
+        "POP-01055",
+        "POP-00029",
+        "POP-00172",
+        "POP-00275",
+        "POP-00922",
+        "POP-00004",
+        "POP-00014",
+        "POP-00034",
+        "POP-00050"
+      ],
+      "ref": "output/beats/Transit_Metrics.jsonl Cycle 114",
+      "cycle": 114
+    },
+    "approach": "Transit approach: this slice is every station on the record this cycle, what moved against last cycle, and the transit workers on the roster. The week header (weather, home games, the union of causes), the chaos car on the line and the citizens who lived a transit line are record; the Factors on each station row are the city's own causes — the frame at their head (weather; weekend; holiday: <name> (major) or (no cut)) is the citywide day-type cut, and the rest are the row's own reasons (holiday lift in its hood, First Friday, game day, events, a stalled train, a short crew, crowded platforms). Riders rise and fall for the reasons written there, never for a reason you add. A BART-train chaos hit this cycle reaches the platforms NEXT cycle. Dry, technical, timestamp and pattern — but it is a place with people in it. One system, one claim about what changed. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "TRANSIT-SLICE-2",
+    "kind": "beat-transit",
+    "seat": {
+      "slug": "trevor-shimizu",
+      "name": "Trevor Shimizu",
+      "popid": "POP-00155",
+      "desk": "civic",
+      "domain": "transit",
+      "builder": "buildTransitSlice.js"
+    },
+    "hood": null,
+    "pulse": {
+      "className": "beat-transit",
+      "score": 100,
+      "label": "Coliseum ridership down 799 vs C113 | 8 stations + 10 corridors on the record",
+      "hood": null,
+      "source": "output/beats/Transit_Metrics.jsonl Cycle 114"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "Coliseum ridership down 799 vs C113 | 8 stations + 10 corridors on the record — the platforms and the people who run them",
+      "hookLine": "Coliseum moved down the most this cycle — mild; weekend; base: ledger; crowded platforms (city transit congestion 0.30); 14 transit workers on the roster, 8 citizens who lived a transit line.",
+      "anchorFacts": [
+        "Day type this cycle: weekend — riders cut citywide by the weekend rule. A station that moved more than the citywide rule names its own reason on its row.",
+        "The week on the line — every cause on the record this cycle, once: mild; weekend; First Friday; game day (Downtown, Jack London); events in Downtown ×3, Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.30); game day (Downtown); events in Downtown ×3, Lake Merritt, Temescal; events in Lake Merritt, Chinatown ×2; events in Fruitvale ×3; Fruitvale Transit Hub Phase II — Visioning: design-phase; BART train: medical hold on board in Fruitvale (last week); game day (Jack London); events in Jack London; BART train: signal failure in West Oakland (last week); events in Temescal; BART train: stalled train in Rockridge (last week); game day (Jack London, Downtown)",
+        "Weather this cycle: mild, 55°F (4 cycles of clear)",
+        "Game on the sports feed this cycle: Oaks at San Antonio — The Oaks' perfect start ends at four. In Indiana, in front of a building at 90% capacity, the Pacers built a 61-42 halftime lead behind a 34-point second quarter and led 82-62 after three. The Oaks answered with 38 points in the fourth and won the quarter 38-22, but the comeback came up four short, Pacers 104 - Oaks 100. Adash Stanley and Austin Reaves led the way with 19 apiece. Stanley hit 5 of 11 from three, and Reaves had 7 assists and 6 rebounds without a turnover. AJ Dybantsa added 15, Wendell Carter Jr. went 5 for 6 for 10 points and 7 rebounds, and T. Jerome chipped in 10 points and 5 assists. The Oaks fall to 4-1. (the rider lift is real only where a station row says \"game day\")",
+        "Game on the sports feed this cycle: Oaks at San Antonio — After the perfect start ended in Indiana, the Oaks went to Toronto and answered with the most lopsided win in franchise history, Oaks 135 - Raptors 75, in front of a 95% crowd. The Oaks led 39-19 after one, 73-40 at the half and 101-62 after three, and nobody played more than 28 minutes. Austin Reaves led with 20 on 4 of 6 from three, T. Jerome had 19 points, 7 rebounds and 7 assists, and Adash Stanley went 4 for 4 from three for 16 with 7 rebounds and 6 assists. Wendell Carter Jr. owned the glass with 14 points and 15 rebounds, 5 of them offensive. The Oaks shot 57 of 91, 19 of 28 from three, handed out 34 assists and turned it over only twice. The Oaks move to 5-1. (the rider lift is real only where a station row says \"game day\")",
+        "Game on the sports feed this cycle: Oaks at KONO — The Oaks opened their first NBA Cup run at home in front of a sold-out crowd and held off the Oklahoma City Thunder, 101-95, behind Dillon Brooks' biggest scoring night as an Oak. The Oaks led after every quarter but never by much: 35-30 after one, 63-60 at the half and 78-74 after a 15-14 third. Brooks played 39 minutes and scored 22 on 8 of 15, hitting 6 of 9 from three, with 4 rebounds, 5 assists, 2 steals, a block and one turnover. In a game this close, his threes kept Oklahoma City at arm's length. Adash Stanley added 21 and 6 assists and went 6 for 6 at the line, though he turned it over 6 times. Wendell Carter Jr. was nearly perfect, 8 of 9 for 19 points and 13 rebounds, and AJ Dybantsa ground out a 13-point, 10-rebound double-double on a 4 for 15 night. As a team the Oaks went 13 of 13 from the line. The Oaks move to 6-1 and 1-0 in Cup play. (the rider lift is real only where a station row says \"game day\")",
+        "No chaos car touched the trains or the transit agencies this cycle (Chaos_Cars rows read; none on bart_train, BART or AC Transit)",
+        "8 stations + 10 corridors on the record this cycle; total ridership 46,839 (C113: 46,520)",
+        "Coliseum: ridership 4,796 (-799 vs C113), on-time 81% (-1 pts) — mild; weekend; base: ledger; crowded platforms (city transit congestion 0.30)",
+        "19th St Oakland: ridership 10,752 (+740 vs C113), on-time 80% (-10 pts) — mild; weekend; base: ledger; First Friday; game day (Downtown); events in Downtown ×3, Lake Merritt, Temescal; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.30)",
+        "Lake Merritt: ridership 4,096 (-729 vs C113), on-time 76% (-11 pts) — mild; weekend; base: ledger; events in Lake Merritt, Chinatown ×2; crowded platforms (city transit congestion 0.30)",
+        "12th St Oakland City Center: ridership 10,011 (+670 vs C113), on-time 77% (-7 pts) — mild; weekend; base: ledger; First Friday; game day (Downtown, Jack London); events in Downtown ×3, Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.30)",
+        "Fruitvale: ridership 5,063 (+510 vs C113), on-time 72% (-9 pts) — mild; weekend; base: ledger; events in Fruitvale ×3; Fruitvale Transit Hub Phase II — Visioning: design-phase; BART train: medical hold on board in Fruitvale (last week); crowded platforms (city transit congestion 0.30)",
+        "Rockridge: ridership 3,287 (-219 vs C113), on-time 72% (-10 pts) — mild; weekend; base: ledger; BART train: stalled train in Rockridge (last week); crowded platforms (city transit congestion 0.30)",
+        "MacArthur: ridership 2,806 (+156 vs C113), on-time 79% (-9 pts) — mild; weekend; base: ledger; events in Temescal; crowded platforms (city transit congestion 0.30)",
+        "West Oakland: ridership 6,028 (-10 vs C113), on-time 74% (-13 pts) — mild; weekend; base: ledger; game day (Jack London); events in Jack London; Baylight District — Final Council Vote: construction-active; BART train: signal failure in West Oakland (last week); crowded platforms (city transit congestion 0.30)",
+        "I-880 North: traffic index 63 (-5 vs C113) — mild; weekend; base: ledger; game day (Jack London, Downtown); Baylight District — Final Council Vote: construction-active",
+        "I-880 South: traffic index 54 (-15 vs C113) — mild; weekend; base: ledger",
+        "I-580 East: traffic index 38 (-19 vs C113) — mild; weekend; base: ledger",
+        "I-580 West: traffic index 47 (-14 vs C113) — mild; weekend; base: ledger",
+        "I-980: traffic index 62 (-13 vs C113) — mild; weekend; base: ledger; game day (Downtown); Baylight District — Final Council Vote: construction-active",
+        "Broadway: traffic index 65 (+18 vs C113) — mild; weekend; base: ledger; First Friday; game day (Downtown)",
+        "International Blvd: traffic index 47 (+0 vs C113) — mild; weekend; base: ledger",
+        "MacArthur Blvd: traffic index 43 (+0 vs C113) — mild; weekend; base: ledger",
+        "Telegraph Ave: traffic index 60 (+3 vs C113) — mild; weekend; base: ledger; First Friday; game day (Downtown)",
+        "Grand Ave: traffic index 35 (-14 vs C113) — mild; weekend; base: ledger"
+      ],
+      "evidence": [
+        {
+          "text": "Day type this cycle: weekend — riders cut citywide by the weekend rule. A station that moved more than the citywide rule names its own reason on its row.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 114 Factors (frame)"
+        },
+        {
+          "text": "The week on the line — every cause on the record this cycle, once: mild; weekend; First Friday; game day (Downtown, Jack London); events in Downtown ×3, Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.30); game day (Downtown); events in Downtown ×3, Lake Merritt, Temescal; events in Lake Merritt, Chinatown ×2; events in Fruitvale ×3; Fruitvale Transit Hub Phase II — Visioning: design-phase; BART train: medical hold on board in Fruitvale (last week); game day (Jack London); events in Jack London; BART train: signal failure in West Oakland (last week); events in Temescal; BART train: stalled train in Rockridge (last week); game day (Jack London, Downtown)",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 114 Factors"
+        },
+        {
+          "text": "Weather this cycle: mild, 55°F (4 cycles of clear)",
+          "src": "output/beats/Cycle_Weather.jsonl CycleID 114"
+        },
+        {
+          "text": "Game on the sports feed this cycle: Oaks at San Antonio — The Oaks' perfect start ends at four. In Indiana, in front of a building at 90% capacity, the Pacers built a 61-42 halftime lead behind a 34-point second quarter and led 82-62 after three. The Oaks answered with 38 points in the fourth and won the quarter 38-22, but the comeback came up four short, Pacers 104 - Oaks 100. Adash Stanley and Austin Reaves led the way with 19 apiece. Stanley hit 5 of 11 from three, and Reaves had 7 assists and 6 rebounds without a turnover. AJ Dybantsa added 15, Wendell Carter Jr. went 5 for 6 for 10 points and 7 rebounds, and T. Jerome chipped in 10 points and 5 assists. The Oaks fall to 4-1. (the rider lift is real only where a station row says \"game day\")",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 114"
+        },
+        {
+          "text": "Game on the sports feed this cycle: Oaks at San Antonio — After the perfect start ended in Indiana, the Oaks went to Toronto and answered with the most lopsided win in franchise history, Oaks 135 - Raptors 75, in front of a 95% crowd. The Oaks led 39-19 after one, 73-40 at the half and 101-62 after three, and nobody played more than 28 minutes. Austin Reaves led with 20 on 4 of 6 from three, T. Jerome had 19 points, 7 rebounds and 7 assists, and Adash Stanley went 4 for 4 from three for 16 with 7 rebounds and 6 assists. Wendell Carter Jr. owned the glass with 14 points and 15 rebounds, 5 of them offensive. The Oaks shot 57 of 91, 19 of 28 from three, handed out 34 assists and turned it over only twice. The Oaks move to 5-1. (the rider lift is real only where a station row says \"game day\")",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 114"
+        },
+        {
+          "text": "Game on the sports feed this cycle: Oaks at KONO — The Oaks opened their first NBA Cup run at home in front of a sold-out crowd and held off the Oklahoma City Thunder, 101-95, behind Dillon Brooks' biggest scoring night as an Oak. The Oaks led after every quarter but never by much: 35-30 after one, 63-60 at the half and 78-74 after a 15-14 third. Brooks played 39 minutes and scored 22 on 8 of 15, hitting 6 of 9 from three, with 4 rebounds, 5 assists, 2 steals, a block and one turnover. In a game this close, his threes kept Oklahoma City at arm's length. Adash Stanley added 21 and 6 assists and went 6 for 6 at the line, though he turned it over 6 times. Wendell Carter Jr. was nearly perfect, 8 of 9 for 19 points and 13 rebounds, and AJ Dybantsa ground out a 13-point, 10-rebound double-double on a 4 for 15 night. As a team the Oaks went 13 of 13 from the line. The Oaks move to 6-1 and 1-0 in Cup play. (the rider lift is real only where a station row says \"game day\")",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 114"
+        },
+        {
+          "text": "No chaos car touched the trains or the transit agencies this cycle (Chaos_Cars rows read; none on bart_train, BART or AC Transit)",
+          "src": "output/world_summary_c114.md ## Chaos Events"
+        },
+        {
+          "text": "8 stations + 10 corridors on the record this cycle; total ridership 46,839 (C113: 46,520)",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+        },
+        {
+          "text": "Coliseum: ridership 4,796 (-799 vs C113), on-time 81% (-1 pts) — mild; weekend; base: ledger; crowded platforms (city transit congestion 0.30)",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+        },
+        {
+          "text": "19th St Oakland: ridership 10,752 (+740 vs C113), on-time 80% (-10 pts) — mild; weekend; base: ledger; First Friday; game day (Downtown); events in Downtown ×3, Lake Merritt, Temescal; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.30)",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+        },
+        {
+          "text": "Lake Merritt: ridership 4,096 (-729 vs C113), on-time 76% (-11 pts) — mild; weekend; base: ledger; events in Lake Merritt, Chinatown ×2; crowded platforms (city transit congestion 0.30)",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+        },
+        {
+          "text": "12th St Oakland City Center: ridership 10,011 (+670 vs C113), on-time 77% (-7 pts) — mild; weekend; base: ledger; First Friday; game day (Downtown, Jack London); events in Downtown ×3, Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.30)",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+        },
+        {
+          "text": "Fruitvale: ridership 5,063 (+510 vs C113), on-time 72% (-9 pts) — mild; weekend; base: ledger; events in Fruitvale ×3; Fruitvale Transit Hub Phase II — Visioning: design-phase; BART train: medical hold on board in Fruitvale (last week); crowded platforms (city transit congestion 0.30)",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+        },
+        {
+          "text": "Rockridge: ridership 3,287 (-219 vs C113), on-time 72% (-10 pts) — mild; weekend; base: ledger; BART train: stalled train in Rockridge (last week); crowded platforms (city transit congestion 0.30)",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+        },
+        {
+          "text": "MacArthur: ridership 2,806 (+156 vs C113), on-time 79% (-9 pts) — mild; weekend; base: ledger; events in Temescal; crowded platforms (city transit congestion 0.30)",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+        },
+        {
+          "text": "West Oakland: ridership 6,028 (-10 vs C113), on-time 74% (-13 pts) — mild; weekend; base: ledger; game day (Jack London); events in Jack London; Baylight District — Final Council Vote: construction-active; BART train: signal failure in West Oakland (last week); crowded platforms (city transit congestion 0.30)",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+        },
+        {
+          "text": "I-880 North: traffic index 63 (-5 vs C113) — mild; weekend; base: ledger; game day (Jack London, Downtown); Baylight District — Final Council Vote: construction-active",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+        },
+        {
+          "text": "I-880 South: traffic index 54 (-15 vs C113) — mild; weekend; base: ledger",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+        },
+        {
+          "text": "I-580 East: traffic index 38 (-19 vs C113) — mild; weekend; base: ledger",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+        },
+        {
+          "text": "I-580 West: traffic index 47 (-14 vs C113) — mild; weekend; base: ledger",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+        },
+        {
+          "text": "I-980: traffic index 62 (-13 vs C113) — mild; weekend; base: ledger; game day (Downtown); Baylight District — Final Council Vote: construction-active",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+        },
+        {
+          "text": "Broadway: traffic index 65 (+18 vs C113) — mild; weekend; base: ledger; First Friday; game day (Downtown)",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+        },
+        {
+          "text": "International Blvd: traffic index 47 (+0 vs C113) — mild; weekend; base: ledger",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+        },
+        {
+          "text": "MacArthur Blvd: traffic index 43 (+0 vs C113) — mild; weekend; base: ledger",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+        },
+        {
+          "text": "Telegraph Ave: traffic index 60 (+3 vs C113) — mild; weekend; base: ledger; First Friday; game day (Downtown)",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+        },
+        {
+          "text": "Grand Ave: traffic index 35 (-14 vs C113) — mild; weekend; base: ledger",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": {
+        "state": "PRIOR_CYCLE_IN_TABLE",
+        "vs": 113
+      },
+      "hooks": [
+        {
+          "text": "Early signals in Downtown: The Downtown Transit Snarl — Downtown under strain: transit disruption; housing pressure 10.00 (city 2.41)",
+          "angle": "historical reflection",
+          "domain": "INFRASTRUCTURE",
+          "hood": "Downtown",
+          "priority": 1
+        },
+        {
+          "text": "Story seed 1149f5fb (West Oakland): Sage Vienta, Beverly Hayes, Jada Rayes, Brenda Gonzalez — Sage Vienta — watched an old man feed pigeons like a ritual and wondered what theirs was; Beverly Hayes — attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard; Jada Rayes — couldn't sleep for the wind rattling the window frame; Brenda Gonzalez — read about something unfamiliar and kept pulling the thread",
+          "angle": "GENERAL"
+        },
+        {
+          "text": "Story seed a1efa0e8 (Fruitvale): Esperanza Ruiz, Lena Okafor, Kaila Nguyen, Miguel Santos — Esperanza Ruiz — framed an old ticket stub that had finally earned its frame; Lena Okafor — the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.; Kaila Nguyen — woke up at 5 AM just to have thirty minutes of total silence before the house woke up; Miguel Santos — a group gathers around a transit hub map, pointing and discussing the proposed changes",
+          "angle": "GENERAL"
+        },
+        {
+          "text": "Story seed 1b3c6537 (Rockridge): Jett Walker, Howard Perez, Tara Ellison, Latasha Rivera — Jett Walker — rewound the belt haul on the walk home and smiled at nothing in particular; Howard Perez — caught a stranger humming their song and felt briefly, wrongly, known; Tara Ellison — carried three boxes of canned goods from the pantry truck and felt it in their lower back; Latasha Rivera — read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+          "angle": "CIVIC"
+        },
+        {
+          "text": "Story seed 4bae00f8 (Jack London): Lima Fila, Lamine Sissoko, Padma Hong, Christine Nakamura — Lima Fila — watched an old man feed pigeons like a ritual and wondered what theirs was; Lamine Sissoko — noticed neighbors being more watchful today; Padma Hong — argued with a stranger about the Oaks bullpen depth and ended up buying them a beer; Christine Nakamura — saved the Tribune clipping with their neighborhood in it — the good one",
+          "angle": "CIVIC"
+        }
+      ],
+      "note": null,
+      "pageVoices": [],
+      "roomIsYours": "the platform at 7:40, the operator's cab, who is late and why, what the fare gate sounds like, what a regular rider notices first"
+    },
+    "citizens": [
+      {
+        "popid": "POP-00200",
+        "name": "Evan Lewis",
+        "role": "Bus driver",
+        "neighborhood": null,
+        "business": "AC Transit",
+        "profile": "Evan Lewis — Bus driver — AC Transit",
+        "why": "works at AC Transit (Employment_Roster)"
+      },
+      {
+        "popid": "POP-00218",
+        "name": "Joel Wren",
+        "role": "Mechanic",
+        "neighborhood": null,
+        "business": "AC Transit",
+        "profile": "Joel Wren — Mechanic — AC Transit",
+        "why": "works at AC Transit (Employment_Roster)"
+      },
+      {
+        "popid": "POP-00280",
+        "name": "Jerald Jensen",
+        "role": "Janitor",
+        "neighborhood": null,
+        "business": "AC Transit",
+        "profile": "Jerald Jensen — Janitor — AC Transit",
+        "why": "works at AC Transit (Employment_Roster)"
+      },
+      {
+        "popid": "POP-00338",
+        "name": "Coen Cartier",
+        "role": "Transit Operator (AC Transit)",
+        "neighborhood": null,
+        "business": "AC Transit",
+        "profile": "Coen Cartier — Transit Operator (AC Transit) — AC Transit",
+        "why": "works at AC Transit (Employment_Roster)"
+      },
+      {
+        "popid": "POP-00442",
+        "name": "Daire Green",
+        "role": "Transit Operator (AC Transit)",
+        "neighborhood": null,
+        "business": "AC Transit",
+        "profile": "Daire Green — Transit Operator (AC Transit) — AC Transit",
+        "why": "works at AC Transit (Employment_Roster)"
+      },
+      {
+        "popid": "POP-00448",
+        "name": "Ray Neal",
+        "role": "AC Transit Bus Operator",
+        "neighborhood": null,
+        "business": "AC Transit",
+        "profile": "Ray Neal — AC Transit Bus Operator — AC Transit",
+        "why": "works at AC Transit (Employment_Roster)"
+      },
+      {
+        "popid": "POP-00573",
+        "name": "Calvin Mwangi",
+        "role": "AC Transit Bus Driver",
+        "neighborhood": null,
+        "business": "AC Transit",
+        "profile": "Calvin Mwangi — AC Transit Bus Driver — AC Transit",
+        "why": "works at AC Transit (Employment_Roster)"
+      },
+      {
+        "popid": "POP-00617",
+        "name": "Eleanor Rivera",
+        "role": "BART Station Manager",
+        "neighborhood": null,
+        "business": "BART Oakland Division",
+        "profile": "Eleanor Rivera — BART Station Manager — BART Oakland Division",
+        "why": "works at BART Oakland Division (Employment_Roster)"
+      },
+      {
+        "popid": "POP-00791",
+        "name": "Elena Soria Dominguez",
+        "role": "Transit Hub Planning Lead",
+        "neighborhood": null,
+        "business": "Fruitvale Transit Hub Authority",
+        "profile": "Elena Soria Dominguez — Transit Hub Planning Lead — Fruitvale Transit Hub Authority",
+        "why": "works at Fruitvale Transit Hub Authority (Employment_Roster)"
+      },
+      {
+        "popid": "POP-01037",
+        "name": "Ivy Tran",
+        "role": "Driver",
+        "neighborhood": null,
+        "business": "AC Transit",
+        "profile": "Ivy Tran — Driver — AC Transit",
+        "why": "works at AC Transit (Employment_Roster)"
+      },
+      {
+        "popid": "POP-01039",
+        "name": "Ximena Mehta",
+        "role": "Bart Transit PR",
+        "neighborhood": null,
+        "business": "BART Oakland Division",
+        "profile": "Ximena Mehta — Bart Transit PR — BART Oakland Division",
+        "why": "works at BART Oakland Division (Employment_Roster)"
+      },
+      {
+        "popid": "POP-01053",
+        "name": "Rosario Medina",
+        "role": "CBA Compliance Monitor, Fruitvale Transit Hub",
+        "neighborhood": null,
+        "business": "Fruitvale Transit Hub Authority",
+        "profile": "Rosario Medina — CBA Compliance Monitor, Fruitvale Transit Hub — Fruitvale Transit Hub Authority",
+        "why": "works at Fruitvale Transit Hub Authority (Employment_Roster)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Transit_Metrics.jsonl Cycle 114",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Trevor Shimizu this cycle)",
+      "output/beats/LifeHistory_Log.jsonl Cycle 114 (transit lines)",
+      "output/world_summary_c114.md ## Chaos Events"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Trevor Shimizu",
+    "popid": "POP-00155",
+    "text": "Sunday morning I'm standing on the Fruitvale platform, the one where a medical hold stalled the train last week. Elena Soria Dominguez is down the platform with a clipboard, and I keep thinking about what she sees from here — the Phase II visioning is still design-phase, and ridership is up 510 this cycle despite that. Three events in Fruitvale this week, plus the hub work, and yet Coliseum — four stops away, with nothing on its row but a weekend and crowded platforms — dropped 799. The city's congestion number is 0.30, which reads as crowded everywhere, but it doesn't explain why one station loses nearly a thousand riders while another gains nearly a thousand. Downtown's got First Friday an",
+    "plan": {
+      "chase": "Sunday morning I'm standing on the Fruitvale platform, the one where a medical hold stalled the train last week. Elena Soria Dominguez is down the platform with a clipboard, and I keep thinking about what she sees from here — the Phase II visioning is still design-phase, and ridership is up 510 this cycle despite that. Three events in Fruitvale this week, plus the hub work, and yet Coliseum — four stops away, with nothing on its row but a weekend and crowded platforms — dropped 799. The city's congestion number is 0.30, which reads as crowded everywhere, but it doesn't explain why one station loses nearly a thousand riders while another gains nearly a thousand. Downtown's got First Friday an",
+      "focus": "Coliseum's 799-rider drop against a citywide pattern that doesn't account for it — what the platform records don't say.",
+      "why": "The numbers are the ledger, but the reasons written on each row are the city's own causes. Coliseum has none of its own. That absence is the story: what happens to a station when nothing happens to it.",
+      "checks": [
+        "Do not add a cause to any station row — the reasons there are the only reasons.",
+        "Do not invent named riders, crew, or platform details beyond the roster provided.",
+        "Do not serialize the plan object into chase."
+      ],
+      "targets": [
+        {
+          "pop": "POP-00791",
+          "question": "With Phase II still in visioning and ridership up 510 this cycle, what are you seeing on the platform that the design documents don't capture?",
+          "basis": "Elena Soria Dominguez is the Transit Hub Planning Lead for Fruitvale; her station shows the only design-phase factor on the slice."
+        },
+        {
+          "pop": "POP-00617",
+          "question": "At 7:40 a.m. on 12th Street, what did the shift look like — and what tells you the riders who didn't come, where did they go?",
+          "basis": "Eleanor Rivera is the BART Station Manager; her station gained 670 riders this cycle, and she's on the record for noticing early-morning shifts."
+        },
+        {
+          "pop": "POP-00280",
+          "question": "On a weekend when the trains had no breakdowns this week but Coliseum emptied out, what do you see in the station that the schedule doesn't?",
+          "basis": "Jerald Jensen is an AC Transit janitor; his role covers platform conditions and the difference between a full and empty station."
+        }
+      ],
+      "interpretation": "The pattern is clear: stations with named reasons — events, game days, construction, First Friday — rise. Coliseum has none, but it fell more than the citywide weekend rule would predict. The system says the reasons are on the rows, and Coliseum's row is bare. That emptiness is the claim.",
+      "unverifiedLead": [
+        "Coliseum's drop might tie to a pre-cycle event not on this cycle's row — a previous event or construction that has since been cleared from the ledger.",
+        "Crowded platforms at 0.30 could push riders to skip non-essential trips on weekends, and Coliseum, with no event pull, feels it first.",
+        "The medical hold at Fruitvale last week may still be in riders' memories, even though it reached the platforms this cycle — Coliseum riders could be avoiding the line altogether."
+      ],
+      "closeQuestion": "What does a station with no event pull and no construction say about the city's transit health — and what will it take for Coliseum to get a reason of its own?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Avery Santana (mayor gavel): Record the executed Month-12 $400,000 disbursement, publish closeout documentation, and complete a charter renewal draft preserving service to West Oakland businesses and residents. — \"West O",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c114.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Docket and execute the D3 East Oakland briefing this cycle with Fruitvale district-level data and the Baylight feasibility review, direct the D5 dispatch audit, and hold expansion until after",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c114.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Require C114 schematic delivery and a documented Fruitvale community review, with a public comment-and-response record before further design advancement. — \"Fruitvale will see the schematics,",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c114.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Keep the C115 milestone review contingent on independent remediation verification, neighborhood protections, hotline records, and workforce results; make no early milestone declaration. — \"Ba",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c114.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Publish the C114 placement-gap analysis and a program adjustment plan, explicitly examining West Oakland and Fruitvale without inventing unreported placement results. — \"Enrollment is a begin",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c114.json",
+      "popids": []
+    }
+  ],
+  "laneEntries": 114,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-02T12:16:36.487Z"
+}

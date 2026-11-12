@@ -1,0 +1,1017 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "113",
+  "persona": "noah-tan",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00157",
+      "name": "Noah Tan",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "C113 clear, 58°F — 3 cycles of clear — what this weather does to a day in the city",
+      "approach": "Weather and environment approach: this slice is the cycle's weather row, the streak, and the last three cycles beside it, plus whoever the record says lived it. Science-first ground translation — temperature is context, never the lede. Show what this weather moved. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "environment",
+        "hood": null,
+        "facts": [
+          "This cycle: clear, 58°F, impact 1, comfort 0.75, mood content, 3 cycles of clear",
+          "Last 3 cycles: C110 fog 52°F, C111 mild 57°F, C112 clear 48°F",
+          "Cee Lee — dealt with a seasonal health concern",
+          "Johhny Necklar — recovered from a winter illness",
+          "Elle Lilo — finally shook the cold that had been hanging around",
+          "Rafael Brannie — limited social activity due to winter mood",
+          "Kwame Fitzgerald — limited social activity due to winter mood",
+          "Omar Amici — relied on familiar social circles during cold period"
+        ],
+        "priorCycle": "PRIOR_CYCLE_IN_TABLE",
+        "note": null,
+        "engineHooks": [
+          "Grand Lake turning upward: retail busy, events drawing crowds, people moving in (desk rotation)",
+          "East Oakland cooling off: foot traffic down, storefronts quieter than the rest of the city (desk rotation)",
+          "Amara Osei moved from Jack London to West Oakland — moving up from Jack London (desk rotation)"
+        ],
+        "roomIsYours": "the sidewalk, the coats, what this weather does to a plan, who is out in it and who stayed in, what the bay smells like today",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-weather",
+      "hood": null,
+      "score": null,
+      "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+      "nearby": [
+        {
+          "text": "Avery Santana (mayor gavel): Month-11 disbursement audit published; Month-12 disbursement approved with charter renewal language directing Fund scope to remain fixed on long-tenure West Oakland cohort per Deputy Mayor Ok",
+          "src": "output/civic-voice/mayor_gavel_c113.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): Quarterly outcome report published; district-level data report accepted; D3 community briefing directed for East Oakland with Fruitvale corridor street-level response data requirement; Baylig",
+          "src": "output/civic-voice/mayor_gavel_c113.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): First cohort placement report published; implementation accountability enforced per C111 mandate — \"Youth workforce is too critical to slip — I want answers, not excuses.\"",
+          "src": "output/civic-voice/mayor_gavel_c113.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): First quarterly utilization audit report filed to D7 office and public data portal per standing procedure adopted C112 — \"Opened early and under budget — now we keep the doors open with data.",
+          "src": "output/civic-voice/mayor_gavel_c113.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): Directed Housing and Community Development Committee to advance INIT-010 to full council with $4.2M legal defense appropriation intact per D1 directive — \"Legal defense is housing stability —",
+          "src": "output/civic-voice/mayor_gavel_c113.json"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00320",
+          "name": "Cee Lee",
+          "profile": "Cee Lee — Autonomous Systems Engineer — Lake Merritt",
+          "role": "Autonomous Systems Engineer",
+          "hood": "Lake Merritt",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cycle_Weather.jsonl CycleID 113",
+            "pop": "POP-00320",
+            "rowName": "Cee Lee",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00509",
+          "name": "Johhny Necklar",
+          "profile": "Johhny Necklar — Hall of Famer from old basketball league MUBA — Rockridge",
+          "role": "Hall of Famer from old basketball league MUBA",
+          "hood": "Rockridge",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cycle_Weather.jsonl CycleID 113",
+            "pop": "POP-00509",
+            "rowName": "Johhny Necklar",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00177",
+          "name": "Elle Lilo",
+          "profile": "Elle Lilo — Harbor Tugboat Captain — Jack London",
+          "role": "Harbor Tugboat Captain",
+          "hood": "Jack London",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cycle_Weather.jsonl CycleID 113",
+            "pop": "POP-00177",
+            "rowName": "Elle Lilo",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00223",
+          "name": "Rafael Brannie",
+          "profile": "Rafael Brannie — Mover — Piedmont Ave",
+          "role": "Mover",
+          "hood": "Piedmont Ave",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cycle_Weather.jsonl CycleID 113",
+            "pop": "POP-00223",
+            "rowName": "Rafael Brannie",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00259",
+          "name": "Kwame Fitzgerald",
+          "profile": "Kwame Fitzgerald — Craft Brewery Owner — Uptown",
+          "role": "Craft Brewery Owner",
+          "hood": "Uptown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cycle_Weather.jsonl CycleID 113",
+            "pop": "POP-00259",
+            "rowName": "Kwame Fitzgerald",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00263",
+          "name": "Omar Amici",
+          "profile": "Omar Amici — Construction laborer — Uptown",
+          "role": "Construction laborer",
+          "hood": "Uptown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cycle_Weather.jsonl CycleID 113",
+            "pop": "POP-00263",
+            "rowName": "Omar Amici",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00004",
+          "name": "Lucia Polito",
+          "profile": "Lucia Polito — Aura Wellness Practitioner",
+          "role": "Aura Wellness Practitioner",
+          "hood": "Fruitvale",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "YLwQtb9NjkQY1U6pLxkHsa",
+            "customId": "cp-POP-00004-c102-PRESS",
+            "cycle": 102,
+            "excerpt": "Just yesterday, I was at the Fruitvale BART area, and it’s clear something’s shifting.",
+            "highlightKind": "weather",
+            "entity": "clear",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00185",
+          "name": "Lila Patty",
+          "profile": "Lila Patty — Solar Panel Installation Lead",
+          "role": "Solar Panel Installation Lead",
+          "hood": "West Oakland",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "scqTCnQLg2npHCFytTwL2J",
+            "customId": "cp-POP-00185-c112-PRESS",
+            "cycle": 112,
+            "excerpt": "I bought a new A's jersey and took a walk near a new construction site to clear my head after a long week.",
+            "highlightKind": "weather",
+            "entity": "clear",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00245",
+          "name": "Jaren Lanning",
+          "profile": "Jaren Lanning — Mechanic",
+          "role": "Mechanic",
+          "hood": "Uptown",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "uRJjmyeq7MYASsLCVxsAGF",
+            "customId": "cp-POP-00245-c98-evening",
+            "cycle": 98,
+            "excerpt": "Maybe I should take a walk later, clear my head.",
+            "highlightKind": "weather",
+            "entity": "clear",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00258",
+          "name": "Brian Adams",
+          "profile": "Brian Adams — Janitor",
+          "role": "Janitor",
+          "hood": "Jack London",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "bcpRKKjX2dtLSLa9Kvur7C",
+            "customId": "cp-POP-00258-c112-PRESS",
+            "cycle": 112,
+            "excerpt": "I keep the blinds cracked in the living room, and when it's clear like today, that strip of light lands on the floor by the radiator.",
+            "highlightKind": "weather",
+            "entity": "clear",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00297",
+          "name": "Jorge Wusther",
+          "profile": "Jorge Wusther — Nurse aide",
+          "role": "Nurse aide",
+          "hood": "Uptown",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "HciYeFSPSCVSjHbALFKZxK",
+            "customId": "cp-POP-00297-c101-CONVO",
+            "cycle": 101,
+            "excerpt": "Saw him launch one clear into the bleachers last week.",
+            "highlightKind": "weather",
+            "entity": "clear",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00325",
+          "name": "Isabel Lopes",
+          "profile": "Isabel Lopes — ESL Teacher",
+          "role": "ESL Teacher",
+          "hood": "Fruitvale",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "Xd5uAr71HwtiB73RB3wTUP",
+            "customId": "cp-POP-00325-c102-CONVO",
+            "cycle": 102,
+            "excerpt": "\" I shrug, trying to laugh it off, but it’s clear the dream’s still got me tangled.",
+            "highlightKind": "weather",
+            "entity": "clear",
+            "predicate": "observe"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C113",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-876f95b5eb98"
+      },
+      {
+        "t": "FACT",
+        "text": "C113 clear, 58°F — 3 cycles of clear",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+        "id": "F-57d6daa8ede3"
+      },
+      {
+        "t": "FACT",
+        "text": "C113 clear, 58°F — 3 cycles of clear; 6 residents on the record lived it.",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+        "id": "F-a2728469c406"
+      },
+      {
+        "t": "FACT",
+        "text": "This cycle: clear, 58°F, impact 1, comfort 0.75, mood content, 3 cycles of clear",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+        "id": "F-1599fe05d071"
+      },
+      {
+        "t": "FACT",
+        "text": "Last 3 cycles: C110 fog 52°F, C111 mild 57°F, C112 clear 48°F",
+        "src": "output/beats/Cycle_Weather.jsonl",
+        "id": "F-e3dfe5c06f79"
+      },
+      {
+        "t": "FACT",
+        "text": "Cee Lee — dealt with a seasonal health concern",
+        "src": "output/world_summary_c113.md ## Who Lived It",
+        "id": "F-ee905a8dbc78"
+      },
+      {
+        "t": "FACT",
+        "text": "Johhny Necklar — recovered from a winter illness",
+        "src": "output/world_summary_c113.md ## Who Lived It",
+        "id": "F-3d79726b745c"
+      },
+      {
+        "t": "FACT",
+        "text": "Elle Lilo — finally shook the cold that had been hanging around",
+        "src": "output/world_summary_c113.md ## Who Lived It",
+        "id": "F-0da6d1c7bff3"
+      },
+      {
+        "t": "FACT",
+        "text": "Rafael Brannie — limited social activity due to winter mood",
+        "src": "output/world_summary_c113.md ## Who Lived It",
+        "id": "F-5505588c0659"
+      },
+      {
+        "t": "FACT",
+        "text": "Kwame Fitzgerald — limited social activity due to winter mood",
+        "src": "output/world_summary_c113.md ## Who Lived It",
+        "id": "F-15324f0d894f"
+      },
+      {
+        "t": "FACT",
+        "text": "Omar Amici — relied on familiar social circles during cold period",
+        "src": "output/world_summary_c113.md ## Who Lived It",
+        "id": "F-5f983014f469"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "street",
+    "candidates": [
+      {
+        "pop": "POP-00320",
+        "name": "Cee Lee",
+        "role": "Autonomous Systems Engineer",
+        "hood": "Lake Merritt",
+        "profile": "Cee Lee — Autonomous Systems Engineer — Lake Merritt",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cycle_Weather.jsonl CycleID 113",
+          "pop": "POP-00320",
+          "rowName": "Cee Lee",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00509",
+        "name": "Johhny Necklar",
+        "role": "Hall of Famer from old basketball league MUBA",
+        "hood": "Rockridge",
+        "profile": "Johhny Necklar — Hall of Famer from old basketball league MUBA — Rockridge",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cycle_Weather.jsonl CycleID 113",
+          "pop": "POP-00509",
+          "rowName": "Johhny Necklar",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00177",
+        "name": "Elle Lilo",
+        "role": "Harbor Tugboat Captain",
+        "hood": "Jack London",
+        "profile": "Elle Lilo — Harbor Tugboat Captain — Jack London",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cycle_Weather.jsonl CycleID 113",
+          "pop": "POP-00177",
+          "rowName": "Elle Lilo",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00223",
+        "name": "Rafael Brannie",
+        "role": "Mover",
+        "hood": "Piedmont Ave",
+        "profile": "Rafael Brannie — Mover — Piedmont Ave",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cycle_Weather.jsonl CycleID 113",
+          "pop": "POP-00223",
+          "rowName": "Rafael Brannie",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00259",
+        "name": "Kwame Fitzgerald",
+        "role": "Craft Brewery Owner",
+        "hood": "Uptown",
+        "profile": "Kwame Fitzgerald — Craft Brewery Owner — Uptown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cycle_Weather.jsonl CycleID 113",
+          "pop": "POP-00259",
+          "rowName": "Kwame Fitzgerald",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00263",
+        "name": "Omar Amici",
+        "role": "Construction laborer",
+        "hood": "Uptown",
+        "profile": "Omar Amici — Construction laborer — Uptown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cycle_Weather.jsonl CycleID 113",
+          "pop": "POP-00263",
+          "rowName": "Omar Amici",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00004",
+        "name": "Lucia Polito",
+        "role": "Aura Wellness Practitioner",
+        "hood": "Fruitvale",
+        "profile": "Lucia Polito — Aura Wellness Practitioner",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "YLwQtb9NjkQY1U6pLxkHsa",
+          "customId": "cp-POP-00004-c102-PRESS",
+          "cycle": 102,
+          "excerpt": "Just yesterday, I was at the Fruitvale BART area, and it’s clear something’s shifting.",
+          "highlightKind": "weather",
+          "entity": "clear",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "Just yesterday, I was at the Fruitvale BART area, and it’s clear something’s shifting."
+      },
+      {
+        "pop": "POP-00185",
+        "name": "Lila Patty",
+        "role": "Solar Panel Installation Lead",
+        "hood": "West Oakland",
+        "profile": "Lila Patty — Solar Panel Installation Lead",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "scqTCnQLg2npHCFytTwL2J",
+          "customId": "cp-POP-00185-c112-PRESS",
+          "cycle": 112,
+          "excerpt": "I bought a new A's jersey and took a walk near a new construction site to clear my head after a long week.",
+          "highlightKind": "weather",
+          "entity": "clear",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I bought a new A's jersey and took a walk near a new construction site to clear my head after a long week."
+      },
+      {
+        "pop": "POP-00245",
+        "name": "Jaren Lanning",
+        "role": "Mechanic",
+        "hood": "Uptown",
+        "profile": "Jaren Lanning — Mechanic",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "uRJjmyeq7MYASsLCVxsAGF",
+          "customId": "cp-POP-00245-c98-evening",
+          "cycle": 98,
+          "excerpt": "Maybe I should take a walk later, clear my head.",
+          "highlightKind": "weather",
+          "entity": "clear",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "Maybe I should take a walk later, clear my head."
+      },
+      {
+        "pop": "POP-00258",
+        "name": "Brian Adams",
+        "role": "Janitor",
+        "hood": "Jack London",
+        "profile": "Brian Adams — Janitor",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "bcpRKKjX2dtLSLa9Kvur7C",
+          "customId": "cp-POP-00258-c112-PRESS",
+          "cycle": 112,
+          "excerpt": "I keep the blinds cracked in the living room, and when it's clear like today, that strip of light lands on the floor by the radiator.",
+          "highlightKind": "weather",
+          "entity": "clear",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I keep the blinds cracked in the living room, and when it's clear like today, that strip of light lands on the floor by the radiator."
+      },
+      {
+        "pop": "POP-00297",
+        "name": "Jorge Wusther",
+        "role": "Nurse aide",
+        "hood": "Uptown",
+        "profile": "Jorge Wusther — Nurse aide",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "HciYeFSPSCVSjHbALFKZxK",
+          "customId": "cp-POP-00297-c101-CONVO",
+          "cycle": 101,
+          "excerpt": "Saw him launch one clear into the bleachers last week.",
+          "highlightKind": "weather",
+          "entity": "clear",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "Saw him launch one clear into the bleachers last week."
+      },
+      {
+        "pop": "POP-00325",
+        "name": "Isabel Lopes",
+        "role": "ESL Teacher",
+        "hood": "Fruitvale",
+        "profile": "Isabel Lopes — ESL Teacher",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "Xd5uAr71HwtiB73RB3wTUP",
+          "customId": "cp-POP-00325-c102-CONVO",
+          "cycle": 102,
+          "excerpt": "\" I shrug, trying to laugh it off, but it’s clear the dream’s still got me tangled.",
+          "highlightKind": "weather",
+          "entity": "clear",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "\" I shrug, trying to laugh it off, but it’s clear the dream’s still got me tangled."
+      },
+      {
+        "pop": "POP-00722",
+        "name": "Daniel Cloak",
+        "role": "Bakery Worker",
+        "hood": "West Oakland",
+        "profile": "Daniel Cloak — Bakery Worker",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "3szZQxu4JPqx6kSNGkibVm",
+          "customId": "cp-POP-00722-c107-PRESS",
+          "cycle": 107,
+          "excerpt": "I’ve heard folks talking about the funds coming in, but it’s hard to tell who’s really getting helped—it feels like whispers more than clear answers.",
+          "highlightKind": "weather",
+          "entity": "clear",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I’ve heard folks talking about the funds coming in, but it’s hard to tell who’s really getting helped—it feels like whispers more than clear answers."
+      },
+      {
+        "pop": "POP-00756",
+        "name": "Ramon Solano",
+        "role": "Senior Pastor / Faith Leader",
+        "hood": "Fruitvale",
+        "profile": "Ramon Solano — Senior Pastor / Faith Leader",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "54UndHt6Z6f18KrPFwXNp3",
+          "customId": "cp-POP-00756-c105-PRESS",
+          "cycle": 105,
+          "excerpt": "I've heard that the Oakland Alternative Response Initiative is supposed to be making our community safer, but from what I see in my neighborhood, it's not entirely clear that's happening.",
+          "highlightKind": "weather",
+          "entity": "clear",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I've heard that the Oakland Alternative Response Initiative is supposed to be making our community safer, but from what I see in my neighborhood, it's not entirely clear that's happening."
+      },
+      {
+        "pop": "POP-00789",
+        "name": "Elias Varek",
+        "role": "Founder of Civis Systems",
+        "hood": "West Oakland",
+        "profile": "Elias Varek — Founder of Civis Systems",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "sCctzCSoMB9TBDyp44SKY6",
+          "customId": "cp-POP-00789-c103-afternoon",
+          "cycle": 103,
+          "excerpt": "There’s an understanding between us, unspoken but clear: we don’t step on each other’s work.",
+          "highlightKind": "weather",
+          "entity": "clear",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "There’s an understanding between us, unspoken but clear: we don’t step on each other’s work."
+      },
+      {
+        "pop": "POP-01063",
+        "name": "Alma Vasquez",
+        "role": "sculptor",
+        "hood": "Laurel",
+        "profile": "Alma Vasquez — sculptor",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "8SSogcHPbgqDhP5QJ3E6aM",
+          "customId": "cp-POP-01063-c111-PRESS",
+          "cycle": 111,
+          "excerpt": "I live in Laurel, and while I'm aware of the general vibe around Oakland, I don't have a clear view of what's going on in Rockridge.",
+          "highlightKind": "weather",
+          "entity": "clear",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I live in Laurel, and while I'm aware of the general vibe around Oakland, I don't have a clear view of what's going on in Rockridge."
+      },
+      {
+        "pop": "POP-01096",
+        "name": "Priyanka Raman",
+        "role": "Principal, Oakland Tech Collective",
+        "hood": "West Oakland",
+        "profile": "Priyanka Raman — Principal, Oakland Tech Collective",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "kz85AnvtbbBz5VyyDDxNtc",
+          "customId": "cp-POP-01096-c107-midday",
+          "cycle": 107,
+          "excerpt": "I keep noticing how the light hits the sidewalk around 2 PM—sharp and clear, like it’s pointing things out to me.",
+          "highlightKind": "weather",
+          "entity": "clear",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I keep noticing how the light hits the sidewalk around 2 PM—sharp and clear, like it’s pointing things out to me."
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Noah Tan",
+    "popid": "POP-00157"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-weather",
+      "angle": "C113 clear, 58°F — 3 cycles of clear — what this weather does to a day in the city",
+      "label": "C113 clear, 58°F — 3 cycles of clear",
+      "hookLine": "C113 clear, 58°F — 3 cycles of clear; 6 residents on the record lived it.",
+      "hood": null,
+      "citizens": [
+        "Cee Lee (POP-00320)",
+        "Johhny Necklar (POP-00509)",
+        "Elle Lilo (POP-00177)",
+        "Rafael Brannie (POP-00223)",
+        "Kwame Fitzgerald (POP-00259)",
+        "Omar Amici (POP-00263)"
+      ],
+      "popids": [
+        "POP-00320",
+        "POP-00509",
+        "POP-00177",
+        "POP-00223",
+        "POP-00259",
+        "POP-00263"
+      ],
+      "ref": "output/beats/Cycle_Weather.jsonl CycleID 113",
+      "cycle": 113
+    },
+    "approach": "Weather and environment approach: this slice is the cycle's weather row, the streak, and the last three cycles beside it, plus whoever the record says lived it. Science-first ground translation — temperature is context, never the lede. Show what this weather moved. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "ENVIRONMENT-SLICE-2",
+    "kind": "beat-weather",
+    "seat": {
+      "slug": "noah-tan",
+      "name": "Noah Tan",
+      "popid": "POP-00157",
+      "desk": "civic",
+      "domain": "environment",
+      "builder": "buildEnvironmentSlice.js"
+    },
+    "hood": null,
+    "pulse": {
+      "className": "beat-weather",
+      "score": 100,
+      "label": "C113 clear, 58°F — 3 cycles of clear",
+      "hood": null,
+      "source": "output/beats/Cycle_Weather.jsonl CycleID 113"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "C113 clear, 58°F — 3 cycles of clear — what this weather does to a day in the city",
+      "hookLine": "C113 clear, 58°F — 3 cycles of clear; 6 residents on the record lived it.",
+      "anchorFacts": [
+        "This cycle: clear, 58°F, impact 1, comfort 0.75, mood content, 3 cycles of clear",
+        "Last 3 cycles: C110 fog 52°F, C111 mild 57°F, C112 clear 48°F",
+        "Cee Lee — dealt with a seasonal health concern",
+        "Johhny Necklar — recovered from a winter illness",
+        "Elle Lilo — finally shook the cold that had been hanging around",
+        "Rafael Brannie — limited social activity due to winter mood",
+        "Kwame Fitzgerald — limited social activity due to winter mood",
+        "Omar Amici — relied on familiar social circles during cold period"
+      ],
+      "evidence": [
+        {
+          "text": "This cycle: clear, 58°F, impact 1, comfort 0.75, mood content, 3 cycles of clear",
+          "src": "output/beats/Cycle_Weather.jsonl CycleID 113"
+        },
+        {
+          "text": "Last 3 cycles: C110 fog 52°F, C111 mild 57°F, C112 clear 48°F",
+          "src": "output/beats/Cycle_Weather.jsonl"
+        },
+        {
+          "text": "Cee Lee — dealt with a seasonal health concern",
+          "src": "output/world_summary_c113.md ## Who Lived It"
+        },
+        {
+          "text": "Johhny Necklar — recovered from a winter illness",
+          "src": "output/world_summary_c113.md ## Who Lived It"
+        },
+        {
+          "text": "Elle Lilo — finally shook the cold that had been hanging around",
+          "src": "output/world_summary_c113.md ## Who Lived It"
+        },
+        {
+          "text": "Rafael Brannie — limited social activity due to winter mood",
+          "src": "output/world_summary_c113.md ## Who Lived It"
+        },
+        {
+          "text": "Kwame Fitzgerald — limited social activity due to winter mood",
+          "src": "output/world_summary_c113.md ## Who Lived It"
+        },
+        {
+          "text": "Omar Amici — relied on familiar social circles during cold period",
+          "src": "output/world_summary_c113.md ## Who Lived It"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": {
+        "state": "PRIOR_CYCLE_IN_TABLE",
+        "vs": 112
+      },
+      "hooks": [
+        {
+          "text": "Grand Lake turning upward: retail busy, events drawing crowds, people moving in",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "Grand Lake",
+          "priority": 5
+        },
+        {
+          "text": "East Oakland cooling off: foot traffic down, storefronts quieter than the rest of the city",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "East Oakland",
+          "priority": 6
+        },
+        {
+          "text": "Amara Osei moved from Jack London to West Oakland — moving up from Jack London",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "West Oakland",
+          "priority": 5
+        }
+      ],
+      "note": null,
+      "pageVoices": [],
+      "roomIsYours": "the sidewalk, the coats, what this weather does to a plan, who is out in it and who stayed in, what the bay smells like today"
+    },
+    "citizens": [
+      {
+        "popid": "POP-00320",
+        "name": "Cee Lee",
+        "role": "Autonomous Systems Engineer",
+        "neighborhood": "Lake Merritt",
+        "business": null,
+        "profile": "Cee Lee — Autonomous Systems Engineer — Lake Merritt",
+        "why": "lived the weather this cycle (Who Lived It)"
+      },
+      {
+        "popid": "POP-00509",
+        "name": "Johhny Necklar",
+        "role": "Hall of Famer from old basketball league MUBA",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Johhny Necklar — Hall of Famer from old basketball league MUBA — Rockridge",
+        "why": "lived the weather this cycle (Who Lived It)"
+      },
+      {
+        "popid": "POP-00177",
+        "name": "Elle Lilo",
+        "role": "Harbor Tugboat Captain",
+        "neighborhood": "Jack London",
+        "business": null,
+        "profile": "Elle Lilo — Harbor Tugboat Captain — Jack London",
+        "why": "lived the weather this cycle (Who Lived It)"
+      },
+      {
+        "popid": "POP-00223",
+        "name": "Rafael Brannie",
+        "role": "Mover",
+        "neighborhood": "Piedmont Ave",
+        "business": null,
+        "profile": "Rafael Brannie — Mover — Piedmont Ave",
+        "why": "lived the weather this cycle (Who Lived It)"
+      },
+      {
+        "popid": "POP-00259",
+        "name": "Kwame Fitzgerald",
+        "role": "Craft Brewery Owner",
+        "neighborhood": "Uptown",
+        "business": null,
+        "profile": "Kwame Fitzgerald — Craft Brewery Owner — Uptown",
+        "why": "lived the weather this cycle (Who Lived It)"
+      },
+      {
+        "popid": "POP-00263",
+        "name": "Omar Amici",
+        "role": "Construction laborer",
+        "neighborhood": "Uptown",
+        "business": null,
+        "profile": "Omar Amici — Construction laborer — Uptown",
+        "why": "lived the weather this cycle (Who Lived It)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Cycle_Weather.jsonl CycleID 113",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Noah Tan this cycle)",
+      "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Noah Tan",
+    "popid": "POP-00157",
+    "text": "Three clear days in a row, and the city is finally acting like it. I'm standing at the corner of Grand and Lake Park, coffee going cold, watching people actually sit on the benches instead of hurrying past them. The last stretch was fog, then mild, then a cold clear snap — and now this, a clear day at 58 that feels like the city exhaling. But the record says six people lived through that cold stretch in very different ways. Cee Lee dealt with a seasonal health concern. Johhny Necklar recovered from a winter illness. Elle Lilo finally shook the cold that had been hanging around. Rafael Brannie and Kwame Fitzgerald both pulled back from social life because of winter mood. Omar Amici held tight",
+    "plan": {
+      "chase": "Three clear days in a row, and the city is finally acting like it. I'm standing at the corner of Grand and Lake Park, coffee going cold, watching people actually sit on the benches instead of hurrying past them. The last stretch was fog, then mild, then a cold clear snap — and now this, a clear day at 58 that feels like the city exhaling. But the record says six people lived through that cold stretch in very different ways. Cee Lee dealt with a seasonal health concern. Johhny Necklar recovered from a winter illness. Elle Lilo finally shook the cold that had been hanging around. Rafael Brannie and Kwame Fitzgerald both pulled back from social life because of winter mood. Omar Amici held tight",
+      "focus": "What the third consecutive clear day does for the six residents who lived through the cold stretch — who is actually back out and who isn't.",
+      "why": "The weather turned, but the record shows the cold period left specific marks on specific people. The easy story is 'sunshine lifts spirits.' The real story is whether it actually does for the people the record names — and what the clear streak means for the ones who stayed in.",
+      "checks": [
+        "Follow the six named residents from the cold stretch, not the general crowd at Grand Lake",
+        "Let temperature stay context — the lede is what the clear sky moved, not the number",
+        "Do not invent anyone not on the slice; the street level is for observation, not fabrication",
+        "Keep the piece long enough to actually land — no rhetorical-question endings this time"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00320",
+          "question": "Cee Lee dealt with a seasonal health concern through the cold stretch — with three clear days now, is that concern actually lifted, or just paused?",
+          "basis": "Recorded as dealing with a seasonal health concern during the cold period; the clear streak is the change to check against"
+        },
+        {
+          "pop": "POP-00509",
+          "question": "Johhny Necklar recovered from a winter illness — does a clear, mild day change how he moves through Rockridge, or does the recovery have its own timeline?",
+          "basis": "Recorded as recovered from a winter illness; the clear day is the moment to see if recovery means returning"
+        },
+        {
+          "pop": "POP-00177",
+          "question": "Elle Lilo finally shook a lingering cold — what does that feel like on a clear day at the harbor, and does the work change when the sky is open?",
+          "basis": "Recorded as finally shaking a cold; the clear day is the first full day of that clarity"
+        },
+        {
+          "pop": "POP-00223",
+          "question": "Rafael Brannie limited social activity due to winter mood — is the third clear day enough to pull him back toward people, or does the mood outlast the weather?",
+          "basis": "Recorded as limiting social activity; the clear streak is the test of whether weather actually shifts it"
+        },
+        {
+          "pop": "POP-00259",
+          "question": "Kwame Fitzgerald limited social activity due to winter mood — with the brewery as his space, does a clear day bring him back to the taproom or does he stay behind the scenes?",
+          "basis": "Recorded as limiting social activity; the clear day is the potential turning point"
+        },
+        {
+          "pop": "POP-00263",
+          "question": "Omar Amici relied on familiar social circles during the cold period — now that it's clear, does he expand beyond them, or is the habit of circling up hard to break?",
+          "basis": "Recorded as relying on familiar circles; the clear day is the chance to see if that reliance shifts"
+        }
+      ],
+      "interpretation": "The weather record shows a clear streak forming — three cycles of clear after a foggy and mild stretch. But the people the record names were not all simply waiting for the sun. Some were dealing with health, some with mood, some just holding on. The clear day is not an ending for them; it's a question of whether the internal weather matches the external.",
+      "unverifiedLead": [
+        "The clear streak may not reach everyone the same way — some of the six may still be indoors despite the sun",
+        "Grand Lake's busy sidewalks may be full of people who were never hunkered down, not the ones the cold actually touched",
+        "The third clear day might be when the city looks recovered, but the people the record names could still be catching up"
+      ],
+      "closeQuestion": "What does a clear day actually repair — and what does it only cover up?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Avery Santana (mayor gavel): Month-11 disbursement audit published; Month-12 disbursement approved with charter renewal language directing Fund scope to remain fixed on long-tenure West Oakland cohort per Deputy Mayor Ok",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c113.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Quarterly outcome report published; district-level data report accepted; D3 community briefing directed for East Oakland with Fruitvale corridor street-level response data requirement; Baylig",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c113.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): First cohort placement report published; implementation accountability enforced per C111 mandate — \"Youth workforce is too critical to slip — I want answers, not excuses.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c113.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): First quarterly utilization audit report filed to D7 office and public data portal per standing procedure adopted C112 — \"Opened early and under budget — now we keep the doors open with data.",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c113.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Directed Housing and Community Development Committee to advance INIT-010 to full council with $4.2M legal defense appropriation intact per D1 directive — \"Legal defense is housing stability —",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c113.json",
+      "popids": []
+    }
+  ],
+  "laneEntries": 108,
+  "angleCapHits": 0,
+  "ranAt": "2026-10-28T11:16:08.118Z"
+}

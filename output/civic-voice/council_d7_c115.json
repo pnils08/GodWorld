@@ -1,0 +1,40 @@
+{
+  "office": "council_d7",
+  "cycle": 115,
+  "speaker": "Warren Ashford",
+  "cascadeSummary": "I voted YES on INIT-009 for Grand Lake commercial stabilization because the mandatory Chen-Vega audit protocols and milestone reporting remain strictly intact. Locally, District 7 continues to enforce quarterly clinical intake verification on the Temescal Community Health Center's operational funds. We are also demanding focused commercial corridor support for Rockridge, where merchant sentiment has soured despite steady foot traffic.",
+  "statements": [
+    {
+      "statementId": "STMT-115-council_d7-001",
+      "type": "vote_statement",
+      "topic": "Commercial Stabilization for Grand Lake",
+      "initiative": "Commercial Stabilization for Grand Lake",
+      "decision": "Vote YES on INIT-009 with binding Chen-Vega audit and milestone reporting conditions intact.",
+      "quote": "Accountability triggers make the difference between an investment and an open checkbook; because those audit milestones are intact, I vote yes.",
+      "fullStatement": "Grand Lake is slated for two point five million dollars in commercial stabilization funds. I have stated repeatedly on this dais that District Seven does not approve blank checks. This measure arrives on the floor carrying mandatory milestone reporting and binding audit protocols secured by Councilmembers Chen and Vega. Because those accountability triggers remain fully intact and enforceable, I vote YES. However, let the administration be entirely clear: fiscal oversight does not end at authorization. If the Economic Development Committee does not receive timely performance data and verifiable business retention metrics, I will move to freeze subsequent disbursements immediately. Every municipal dollar must prove its return to Oakland taxpayers.",
+      "disposition": "YES",
+      "actionAsked": "Enforce all Chen-Vega audit protocols and require milestone compliance before releasing commercial stabilization disbursements.",
+      "tone": "concerned-fiscal",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-115-council_d7-002",
+      "type": "statement",
+      "topic": "District 7 Health Center Audit and Rockridge Corridor Oversight",
+      "initiative": "Temescal Community Health Center",
+      "decision": "Enforce intake audits on the Temescal Community Health Center balance and demand commercial support for Rockridge.",
+      "quote": "Clinical dollars require clinical proof, and Rockridge's commercial vitality cannot be taken for granted while merchant sentiment sours.",
+      "fullStatement": "In District Seven, Temescal's mood holds mildly positive because of resilient local merchants and healthcare staff, not City Hall proclamations. We are continuing rigorous oversight on the Temescal Community Health Center's remaining operational balance of over sixteen million dollars. Public investment must be matched by verified intake numbers serving Temescal, Rockridge, and KONO. Meanwhile, Rockridge's mood has soured despite busy street trade, with retail vitality dropping from 13.14 to 10.98 alongside elevated illness reports. The administration must provide targeted corridor support and transparent data rather than treating District Seven solely as a revenue base.",
+      "disposition": "statement",
+      "actionAsked": "Submit quarterly intake audit data for the health center and conduct a commercial assessment of Rockridge retail pressure.",
+      "tone": "data-sharp",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "date": "2026-11-02",
+  "cycle": 114,
+  "results": [
+    {
+      "office": "civic-office-council-d4",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/civic-office-council-d4_2026-11-02.json"
+    },
+    {
+      "office": "civic-office-mayor",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/civic-office-mayor_2026-11-02.json"
+    },
+    {
+      "office": "civic-office-council-d1",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/civic-office-council-d1_2026-11-02.json"
+    }
+  ],
+  "owed": null,
+  "ranAt": "2026-11-02T11:47:55.376Z"
+}

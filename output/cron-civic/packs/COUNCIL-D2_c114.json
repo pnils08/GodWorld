@@ -1,0 +1,1558 @@
+{
+  "v": "OFFICE/1",
+  "team": "civic-office",
+  "empty": false,
+  "actor": {
+    "id": "POP-00502",
+    "name": "Leonard Tran",
+    "role": "City Council District 2",
+    "officeId": "COUNCIL-D2",
+    "district": "D2",
+    "faction": "IND",
+    "agentDir": "civic-office-council-d2",
+    "initiative": null,
+    "dials": {
+      "approval": 69
+    }
+  },
+  "task": {
+    "a": "district-week",
+    "goal": "C115 construction milestone review against the assembled evidence file"
+  },
+  "pulse": {
+    "className": "initiative",
+    "score": 40,
+    "label": "Baylight District — Final Council Vote — C115 construction milestone review against the assembled evidence file",
+    "lever": "C115 construction milestone review against the assembled evidence file",
+    "hood": "Jack London",
+    "initiative": "INIT-006",
+    "vsCity": {
+      "sentiment": 0.27,
+      "citySentiment": 0.115,
+      "crime": 0.59,
+      "cityCrime": 0.6554545454545454,
+      "heat": -15.500000000000004,
+      "outlier": false
+    }
+  },
+  "prewrite": {
+    "claim": "C115 construction milestone review against the assembled evidence file",
+    "lineFacts": [
+      "approval 69",
+      "Baylight District — Final Council Vote is in construction-active; budget $2.1B — C107: Construction contracts executed; site preparation mobilization begins\nC109: Phase II remediation commenced with independent oversight\nC110: Soil test verification complete; Phase II remediation proceeds with independent…",
+      "due: C115 construction milestone review against the assembled evidence file",
+      "Jack London crime: property 39, violent 20, incidents 8 (cycle 114) — city property 40.7, violent 26.1, incidents 8.3",
+      "Jack London: sentiment 0.27 vs city 0.115; crime index 0.59 vs city 0.655; retail 16.09; housing pressure 9.5; growth; momentum 10"
+    ],
+    "missing": [
+      "no shop names on disk for this turf",
+      "no invented vote, POPID, or complete"
+    ]
+  },
+  "game": {
+    "geographyIssue": null,
+    "lastMove": {
+      "text": "Latest moves:\nC113 - answer CONF-111-civic-office-council-d2: awaiting the Sunday fold\nLatest terminal outcome (C110):\n- work INIT-006: applied to the tracker",
+      "moves": [
+        {
+          "moveId": "MV-113-civic-office-council-d2-2026-10-28",
+          "cycle": 113,
+          "date": "2026-10-28",
+          "agentDir": "civic-office-council-d2",
+          "popid": "POP-00502",
+          "type": "answer",
+          "payload": {
+            "confrontationId": "CONF-111-civic-office-council-d2",
+            "text": "The committee hearing schedule for INIT-008 Downtown Economic Revitalization is set for next cycle. Independent oversight verification for INIT-006 Phase II remediation has been submitted.",
+            "directiveCycle": 111,
+            "confrontationSeat": "civic-office-council-d2"
+          },
+          "status": "pending",
+          "at": "2026-10-28T10:45:42.429Z"
+        },
+        {
+          "moveId": "MV-110-civic-office-council-d2-2026-10-07",
+          "cycle": 110,
+          "date": "2026-10-07",
+          "agentDir": "civic-office-council-d2",
+          "popid": "POP-00502",
+          "type": "work",
+          "payload": {
+            "initiativeId": "INIT-006"
+          },
+          "status": "applied",
+          "at": "2026-10-11T22:21:55.549Z",
+          "closeCycle": 111,
+          "detail": "LastWorkCycle/LastWorkSeat written for INIT-006"
+        }
+      ]
+    },
+    "board": [
+      {
+        "id": "INIT-006",
+        "name": "Baylight District — Final Council Vote",
+        "domain": "sports",
+        "phase": "construction-active",
+        "status": "passed",
+        "voteCycle": 83,
+        "stage": null,
+        "cyclesSinceStageChange": null,
+        "lastStageChangeCycle": null,
+        "sponsored": false,
+        "hoods": [
+          "Jack London",
+          "Downtown"
+        ],
+        "needsNext": "C115 construction milestone review against the assembled evidence file",
+        "budget": "budget $2,100,000,000 left",
+        "requirement": null,
+        "metricEvidence": null
+      },
+      {
+        "id": "INIT-008",
+        "name": "Downtown Economic Revitalization",
+        "domain": "economic",
+        "phase": "vote-scheduled",
+        "status": "failed",
+        "voteCycle": 114,
+        "stage": "Proposed",
+        "cyclesSinceStageChange": null,
+        "lastStageChangeCycle": null,
+        "sponsored": true,
+        "hoods": [
+          "Downtown"
+        ],
+        "needsNext": "Proposed — a passed council vote funds it",
+        "budget": "budget $15,000,000 left",
+        "requirement": {
+          "stage": "Proposed",
+          "next": "Funded",
+          "clears": false,
+          "moveThatClears": null,
+          "blocked": null,
+          "text": "Proposed — a passed council vote funds it"
+        },
+        "metricEvidence": null
+      },
+      {
+        "id": "INIT-009",
+        "name": "Commercial Stabilization for Grand Lake",
+        "domain": "economic",
+        "phase": "vote-ready",
+        "status": "failed",
+        "voteCycle": null,
+        "stage": "Proposed",
+        "cyclesSinceStageChange": null,
+        "lastStageChangeCycle": null,
+        "sponsored": true,
+        "hoods": [
+          "Grand Lake"
+        ],
+        "needsNext": "Proposed — a passed council vote funds it",
+        "budget": "budget $2,500,000 left",
+        "requirement": {
+          "stage": "Proposed",
+          "next": "Funded",
+          "clears": false,
+          "moveThatClears": null,
+          "blocked": null,
+          "text": "Proposed — a passed council vote funds it"
+        },
+        "metricEvidence": null
+      }
+    ],
+    "boardAvailable": true,
+    "boardIds": [
+      "INIT-006",
+      "INIT-008",
+      "INIT-009"
+    ],
+    "boardText": "Your board:\n- INIT-006 Baylight District — Final Council Vote [construction-active] — C115 construction milestone review against the assembled evidence file — budget $2,100,000,000 left\n- INIT-008 Downtown Economic Revitalization [vote-scheduled] — Proposed — a passed council vote funds it — budget $15,000,000 left\n- INIT-009 Commercial Stabilization for Grand Lake [vote-ready] — Proposed — a passed council vote funds it — budget $2,500,000 left",
+    "categories": {
+      "available": true,
+      "list": [
+        {
+          "key": "health",
+          "label": "clinics, care",
+          "band": "$5M-$100M",
+          "canDeliver": true
+        },
+        {
+          "key": "transit",
+          "label": "stations, lines",
+          "band": "$20M-$500M",
+          "canDeliver": true
+        },
+        {
+          "key": "education",
+          "label": "schools, youth learning",
+          "band": "$1M-$50M",
+          "canDeliver": true
+        },
+        {
+          "key": "economic",
+          "label": "business, local economy",
+          "band": "$2M-$50M",
+          "canDeliver": false
+        },
+        {
+          "key": "workforce",
+          "label": "jobs, training",
+          "band": "$1M-$30M",
+          "canDeliver": false
+        },
+        {
+          "key": "safety",
+          "label": "public safety, response",
+          "band": "$2M-$30M",
+          "canDeliver": false
+        },
+        {
+          "key": "sports",
+          "label": "stadiums, recreation",
+          "band": "$10M-$500M",
+          "canDeliver": false
+        },
+        {
+          "key": "environment",
+          "label": "parks, air, water",
+          "band": "$1M-$30M",
+          "canDeliver": false
+        }
+      ],
+      "text": "Propose in your own words under one category; reach is hood, district, or all (citywide seats only). Budget must sit in the band. * = runs, but cannot reach Delivering yet.\n- health: clinics, care $5M-$100M\n- transit: stations, lines $20M-$500M\n- education: schools, youth learning $1M-$50M\n- economic*: business, local economy $2M-$50M\n- workforce*: jobs, training $1M-$30M\n- safety*: public safety, response $2M-$30M\n- sports*: stadiums, recreation $10M-$500M\n- environment*: parks, air, water $1M-$30M"
+    },
+    "petitionPool": {
+      "available": true,
+      "complaints": [
+        {
+          "cycle": "113",
+          "hood": "Jack London",
+          "snippet": "filed: In Temescal, a school the district's growth passed by",
+          "affect": "Resentful"
+        }
+      ],
+      "participation": [
+        {
+          "cycle": "112",
+          "hood": "Downtown",
+          "snippet": "Honestly, I can't say I've heard anyone in my circle—neighbors, folks at the clinic, even…",
+          "affect": "Calm"
+        },
+        {
+          "cycle": "113",
+          "hood": "Downtown",
+          "snippet": "I hear you, Clarissa, and I don't think anyone's arguing against the goal of safety. But…",
+          "affect": "Calm"
+        }
+      ],
+      "unlocatedRows": 0,
+      "invalidCycleRows": 0,
+      "sinceCycle": 112,
+      "throughCycle": 114,
+      "window": "Complaint display C112–C114; condition counter C114 only.",
+      "text": "Complaint display C112–C114; condition counter C114 only.\nPeople are talking (1 complaint):\n- filed: In Temescal, a school the district's growth passed by (Jack London, C113)\nConstructive civic participation (not complaints): 2."
+    },
+    "workingCity": {
+      "available": true,
+      "totalStaff": 4,
+      "shownStaff": 4,
+      "text": "The working city:\n- Elena Soria Dominguez: The schematics are close—we're maybe three weeks out from the community review, and I keep second-guessing… (C113)\n- Bobby Chen-Ramirez: The audit went out clean, and I should feel done, but there's a knot in my chest I can't shake. Numbers don't… (C113)\n- Vanessa Tran-Muñoz: Fruitvale numbers are in my head, not the report. The response time was good today — 6 minutes on the 42nd… (C113)\n- Marcus Webb: Month eleven closed clean. Audit published, no findings flagged, and that four hundred K for next month is… (C113)"
+    },
+    "patrol": {
+      "available": true,
+      "strategy": "balanced",
+      "text": "City patrol strategy: balanced (patrols spread evenly — the default posture). The Police Chief has not set one."
+    },
+    "confrontations": {
+      "available": true,
+      "all": [
+        {
+          "id": "CONF-104-civic-office-council-d2",
+          "cycle": 104,
+          "agentDir": "civic-office-council-d2",
+          "demand": "Leonard Tran — City Council District 2 — Introduce a targeted commercial stabilization measure for Grand Lake to counter the neighborhood math-imbalance flag identified in C104.",
+          "sourceText": "## Leonard Tran — City Council District 2\n\n- **Agent:** `.claude/agents/civic-office-council-d2/`\n- **Address:** Introduce a targeted commercial stabilization measure for Grand Lake to counter the neighborhood math-imbalance flag identified in C104.\n- **Why:** Engine audit data in C104 flagged Grand Lake with an active math-imbalance decay signal (RetailVitality drop of -5.03, HousingPressure increase of +0.500, sentiment -0.070) with zero active municipal initiatives deployed to mitigate commercial loss.\n- **Acceptance:** A filed council resolution or formal OEWD referral proposing commercial relief and tenant protections for the Grand Lake corridor.\n- **Silence consequence:** Continued commercial erosion and unchecked housing pressure in Grand Lake without an active civic mitigator.\n",
+          "src": "output/mara-directives/mara_directive_c104_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-106-civic-office-council-d2",
+          "cycle": 106,
+          "agentDir": "civic-office-council-d2",
+          "demand": "Leonard Tran — City Council District 2 — Formulate a legislative response to documented economic decay in Downtown (RetailVitality down 2.76, Sentiment down 0.400) and Grand Lake (RetailVitality down 2.17, Sentiment down 0.670).",
+          "sourceText": "## Leonard Tran — City Council District 2\n\n- **Agent:** `.claude/agents/civic-office-council-d2/`\n- **Address:** Formulate a legislative response to documented economic decay in Downtown (RetailVitality down 2.76, Sentiment down 0.400) and Grand Lake (RetailVitality down 2.17, Sentiment down 0.670).\n- **Why:** After formally declining stabilization action in C105 citing lack of economic data, C106 engine audit flags high-severity math imbalances and severe retail vitality drops in both Downtown and Grand Lake.\n- **Acceptance:** A recorded council referral or committee hearing request addressing commercial decay and housing pressure in D2 corridors.\n- **Silence consequence:** Commercial deterioration in Grand Lake and Downtown continues unaddressed by the district office.\n",
+          "src": "output/mara-directives/mara_directive_c106_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-108-civic-office-council-d2",
+          "cycle": 108,
+          "agentDir": "civic-office-council-d2",
+          "demand": "Leonard Tran — City Council District 2 — Certify the Phase II site remediation schedule for the Baylight District (INIT-006) and address commercial decay in Jack London and Downtown.",
+          "sourceText": "## Leonard Tran — City Council District 2\n\n- **Agent:** `.claude/agents/civic-office-council-d2/`\n- **Address:** Certify the Phase II site remediation schedule for the Baylight District (INIT-006) and address commercial decay in Jack London and Downtown.\n- **Why:** C108 tracker sequencing advances INIT-006 to Phase II remediation, while Jack London registers an engine review math-imbalance (Sentiment -0.110, RetailVitality -1.07 to 12.06) and Downtown sentiment sits at 0.33.\n- **Acceptance:** A filed Phase II ground remediation timeline for Baylight and an economic support directive addressing corridor storefront decay.\n- **Silence consequence:** Environmental site preparation stalls before ground-breaking, delaying redevelopment deliverables.\n",
+          "src": "output/mara-directives/mara_directive_c108_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-109-civic-office-council-d2",
+          "cycle": 109,
+          "agentDir": "civic-office-council-d2",
+          "demand": "Leonard Tran — City Council District 2 — Co-sponsor and docket the INIT-008 Downtown Economic Revitalization legislation and certify the Phase II site remediation schedule for the Baylight District (INIT-006).",
+          "sourceText": "## Leonard Tran — City Council District 2\n\n- **Agent:** `.claude/agents/civic-office-council-d2/`\n- **Address:** Co-sponsor and docket the INIT-008 Downtown Economic Revitalization legislation and certify the Phase II site remediation schedule for the Baylight District (INIT-006).\n- **Why:** INIT-008 missed its C108 legislative filing target while Downtown retail vitality remains constrained (10.96) and INIT-006 requires C109 Phase II remediation sign-off before site mobilization expires.\n- **Acceptance:** Co-filing of the INIT-008 legislative instrument and formal council confirmation of the INIT-006 remediation timeline.\n- **Silence consequence:** Baylight Phase II ground preparation stalls on environmental permitting, and Downtown commercial recovery enters another cycle without legislative backing.\n",
+          "src": "output/mara-directives/mara_directive_c109_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-111-civic-office-council-d2",
+          "cycle": 111,
+          "agentDir": "civic-office-council-d2",
+          "demand": "Leonard Tran — City Council District 2 — Set the committee hearing schedule for INIT-008 and submit the independent oversight verification for INIT-006 Phase II remediation.",
+          "sourceText": "## Leonard Tran — City Council District 2\n\n- **Agent:** `.claude/agents/civic-office-council-d2/`\n- **Address:** Set the committee hearing schedule for INIT-008 and submit the independent oversight verification for INIT-006 Phase II remediation.\n- **Why:** The $15M Downtown Economic Revitalization ordinance (INIT-008) was filed in C110 and requires committee action by C112, while INIT-006 faces its C112 milestone review and Baylight District sentiment sits at 0.30 with retail vitality at 5.72.\n- **Acceptance:** A confirmed committee hearing date for INIT-008 and the filed soil remediation verification report for INIT-006 in C112.\n- **Silence consequence:** The $15M downtown economic authorization bottlenecks in committee, and Baylight site mobilization misses its certified milestone.\n",
+          "src": "output/mara-directives/mara_directive_c111_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-112-civic-office-council-d2",
+          "cycle": 112,
+          "agentDir": "civic-office-council-d2",
+          "demand": "Leonard Tran — City Council District 2 — Convene the Economic Development Committee hearing for the $15M Downtown Economic Revitalization ordinance (INIT-008) and report committee findings.",
+          "sourceText": "## Leonard Tran — City Council District 2\n\n- **Agent:** `.claude/agents/civic-office-council-d2/`\n- **Address:** Convene the Economic Development Committee hearing for the $15M Downtown Economic Revitalization ordinance (INIT-008) and report committee findings.\n- **Why:** INIT-008 was filed in C110 and scheduled for committee hearing in C112 with its C113 stall threshold closing, while Baylight District commercial vitality remains depressed at 6.43 and sentiment sits at -0.04.\n- **Acceptance:** A recorded committee hearing transcript and vote or referral action on INIT-008 in C113.\n- **Silence consequence:** The $15M downtown revitalization authorization freezes at the committee threshold, blocking capital deployment to downtown commercial corridors.\n",
+          "src": "output/mara-directives/mara_directive_c112_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-113-civic-office-council-d2",
+          "cycle": 113,
+          "agentDir": "civic-office-council-d2",
+          "demand": "Leonard Tran — City Council District 2 — Execute the Uptown stabilization planning track for the $15M Downtown Economic Revitalization ordinance (INIT-008) and publish an emergency response to the Chinatown math-imbalance decay flag.",
+          "sourceText": "## Leonard Tran — City Council District 2\n\n- **Agent:** `.claude/agents/civic-office-council-d2/`\n- **Address:** Execute the Uptown stabilization planning track for the $15M Downtown Economic Revitalization ordinance (INIT-008) and publish an emergency response to the Chinatown math-imbalance decay flag.\n- **Why:** INIT-008 sits at vote-scheduled with its C114 Uptown planning milestone pending, while engine diagnostics in C113 flagged a high-severity decay pattern in Chinatown with sentiment at -0.06, retail vitality down to 7.78, and crime at 0.62.\n- **Acceptance:** Filed Uptown stabilization plan for INIT-008 and a recorded municipal response to Chinatown's decay signals in C114.\n- **Silence consequence:** INIT-008 stalls prior to full appropriation, leaving Chinatown and Downtown commercial corridors without structured intervention.\n",
+          "src": "output/mara-directives/mara_directive_c113_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-114-civic-office-council-d2",
+          "cycle": 114,
+          "agentDir": "civic-office-council-d2",
+          "demand": "Leonard Tran — City Council District 2 — Bring the $15M Downtown Economic Revitalization ordinance (INIT-008) to a binding full council floor vote with formalized appropriation tracks for Chinatown and Uptown.",
+          "sourceText": "## Leonard Tran — City Council District 2\n\n- **Agent:** `.claude/agents/civic-office-council-d2/`\n- **Address:** Bring the $15M Downtown Economic Revitalization ordinance (INIT-008) to a binding full council floor vote with formalized appropriation tracks for Chinatown and Uptown.\n- **Why:** INIT-008 has sat at vote-scheduled since emergency committee hearings in C112 and C113, facing a C115 stall-clock expiration while commercial corridors wait on capital release and District 2 carries an unaddressed citizen complaint.\n- **Acceptance:** A recorded full council roll-call vote on INIT-008 and published appropriation allocations for Chinatown and Uptown observable in C115.\n- **Silence consequence:** The $15M revitalization package stalls past its legislative window, freezing municipal capital across Downtown, Uptown, and Chinatown commercial corridors.\n",
+          "src": "output/mara-directives/mara_directive_c114_AUTO.txt",
+          "expectsMove": "answer"
+        }
+      ],
+      "open": [
+        {
+          "id": "CONF-104-civic-office-council-d2",
+          "cycle": 104,
+          "agentDir": "civic-office-council-d2",
+          "demand": "Leonard Tran — City Council District 2 — Introduce a targeted commercial stabilization measure for Grand Lake to counter the neighborhood math-imbalance flag identified in C104.",
+          "sourceText": "## Leonard Tran — City Council District 2\n\n- **Agent:** `.claude/agents/civic-office-council-d2/`\n- **Address:** Introduce a targeted commercial stabilization measure for Grand Lake to counter the neighborhood math-imbalance flag identified in C104.\n- **Why:** Engine audit data in C104 flagged Grand Lake with an active math-imbalance decay signal (RetailVitality drop of -5.03, HousingPressure increase of +0.500, sentiment -0.070) with zero active municipal initiatives deployed to mitigate commercial loss.\n- **Acceptance:** A filed council resolution or formal OEWD referral proposing commercial relief and tenant protections for the Grand Lake corridor.\n- **Silence consequence:** Continued commercial erosion and unchecked housing pressure in Grand Lake without an active civic mitigator.\n",
+          "src": "output/mara-directives/mara_directive_c104_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-112-civic-office-council-d2",
+          "cycle": 112,
+          "agentDir": "civic-office-council-d2",
+          "demand": "Leonard Tran — City Council District 2 — Convene the Economic Development Committee hearing for the $15M Downtown Economic Revitalization ordinance (INIT-008) and report committee findings.",
+          "sourceText": "## Leonard Tran — City Council District 2\n\n- **Agent:** `.claude/agents/civic-office-council-d2/`\n- **Address:** Convene the Economic Development Committee hearing for the $15M Downtown Economic Revitalization ordinance (INIT-008) and report committee findings.\n- **Why:** INIT-008 was filed in C110 and scheduled for committee hearing in C112 with its C113 stall threshold closing, while Baylight District commercial vitality remains depressed at 6.43 and sentiment sits at -0.04.\n- **Acceptance:** A recorded committee hearing transcript and vote or referral action on INIT-008 in C113.\n- **Silence consequence:** The $15M downtown revitalization authorization freezes at the committee threshold, blocking capital deployment to downtown commercial corridors.\n",
+          "src": "output/mara-directives/mara_directive_c112_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-113-civic-office-council-d2",
+          "cycle": 113,
+          "agentDir": "civic-office-council-d2",
+          "demand": "Leonard Tran — City Council District 2 — Execute the Uptown stabilization planning track for the $15M Downtown Economic Revitalization ordinance (INIT-008) and publish an emergency response to the Chinatown math-imbalance decay flag.",
+          "sourceText": "## Leonard Tran — City Council District 2\n\n- **Agent:** `.claude/agents/civic-office-council-d2/`\n- **Address:** Execute the Uptown stabilization planning track for the $15M Downtown Economic Revitalization ordinance (INIT-008) and publish an emergency response to the Chinatown math-imbalance decay flag.\n- **Why:** INIT-008 sits at vote-scheduled with its C114 Uptown planning milestone pending, while engine diagnostics in C113 flagged a high-severity decay pattern in Chinatown with sentiment at -0.06, retail vitality down to 7.78, and crime at 0.62.\n- **Acceptance:** Filed Uptown stabilization plan for INIT-008 and a recorded municipal response to Chinatown's decay signals in C114.\n- **Silence consequence:** INIT-008 stalls prior to full appropriation, leaving Chinatown and Downtown commercial corridors without structured intervention.\n",
+          "src": "output/mara-directives/mara_directive_c113_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-114-civic-office-council-d2",
+          "cycle": 114,
+          "agentDir": "civic-office-council-d2",
+          "demand": "Leonard Tran — City Council District 2 — Bring the $15M Downtown Economic Revitalization ordinance (INIT-008) to a binding full council floor vote with formalized appropriation tracks for Chinatown and Uptown.",
+          "sourceText": "## Leonard Tran — City Council District 2\n\n- **Agent:** `.claude/agents/civic-office-council-d2/`\n- **Address:** Bring the $15M Downtown Economic Revitalization ordinance (INIT-008) to a binding full council floor vote with formalized appropriation tracks for Chinatown and Uptown.\n- **Why:** INIT-008 has sat at vote-scheduled since emergency committee hearings in C112 and C113, facing a C115 stall-clock expiration while commercial corridors wait on capital release and District 2 carries an unaddressed citizen complaint.\n- **Acceptance:** A recorded full council roll-call vote on INIT-008 and published appropriation allocations for Chinatown and Uptown observable in C115.\n- **Silence consequence:** The $15M revitalization package stalls past its legislative window, freezing municipal capital across Downtown, Uptown, and Chinatown commercial corridors.\n",
+          "src": "output/mara-directives/mara_directive_c114_AUTO.txt",
+          "expectsMove": "answer"
+        }
+      ],
+      "answeredIds": [
+        "CONF-106-civic-office-council-d2",
+        "CONF-108-civic-office-council-d2",
+        "CONF-109-civic-office-council-d2",
+        "CONF-111-civic-office-council-d2"
+      ]
+    },
+    "confrontation": {
+      "id": "CONF-104-civic-office-council-d2",
+      "cycle": 104,
+      "agentDir": "civic-office-council-d2",
+      "demand": "Leonard Tran — City Council District 2 — Introduce a targeted commercial stabilization measure for Grand Lake to counter the neighborhood math-imbalance flag identified in C104.",
+      "sourceText": "## Leonard Tran — City Council District 2\n\n- **Agent:** `.claude/agents/civic-office-council-d2/`\n- **Address:** Introduce a targeted commercial stabilization measure for Grand Lake to counter the neighborhood math-imbalance flag identified in C104.\n- **Why:** Engine audit data in C104 flagged Grand Lake with an active math-imbalance decay signal (RetailVitality drop of -5.03, HousingPressure increase of +0.500, sentiment -0.070) with zero active municipal initiatives deployed to mitigate commercial loss.\n- **Acceptance:** A filed council resolution or formal OEWD referral proposing commercial relief and tenant protections for the Grand Lake corridor.\n- **Silence consequence:** Continued commercial erosion and unchecked housing pressure in Grand Lake without an active civic mitigator.\n",
+      "src": "output/mara-directives/mara_directive_c104_AUTO.txt",
+      "expectsMove": "answer"
+    },
+    "conditions": {
+      "available": true,
+      "proposals": [],
+      "text": "No proposals in the available board/move evidence need condition counts."
+    },
+    "problemContinuity": {
+      "available": true,
+      "cycle": 114,
+      "problems": [
+        {
+          "id": "[\"Baylight District\",\"health.sickResidents\"]",
+          "hood": "Baylight District",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 13,
+          "cycle": 114
+        },
+        {
+          "id": "[\"Chinatown\",\"health.sickResidents\"]",
+          "hood": "Chinatown",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 137,
+          "cycle": 114
+        },
+        {
+          "id": "[\"Chinatown\",\"safety.aboveMedianHoods\"]",
+          "hood": "Chinatown",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 114
+        },
+        {
+          "id": "[\"Downtown\",\"health.sickResidents\"]",
+          "hood": "Downtown",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 75,
+          "cycle": 114
+        },
+        {
+          "id": "[\"Jack London\",\"health.sickResidents\"]",
+          "hood": "Jack London",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 71,
+          "cycle": 114
+        }
+      ],
+      "visibleProblems": [
+        {
+          "id": "[\"Baylight District\",\"health.sickResidents\"]",
+          "hood": "Baylight District",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 13,
+          "cycle": 114
+        },
+        {
+          "id": "[\"Chinatown\",\"health.sickResidents\"]",
+          "hood": "Chinatown",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 137,
+          "cycle": 114
+        },
+        {
+          "id": "[\"Chinatown\",\"safety.aboveMedianHoods\"]",
+          "hood": "Chinatown",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 114
+        },
+        {
+          "id": "[\"Downtown\",\"health.sickResidents\"]",
+          "hood": "Downtown",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 75,
+          "cycle": 114
+        },
+        {
+          "id": "[\"Jack London\",\"health.sickResidents\"]",
+          "hood": "Jack London",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 71,
+          "cycle": 114
+        }
+      ],
+      "passedOver": [
+        {
+          "id": "[\"Chinatown\",\"health.sickResidents\"]",
+          "hood": "Chinatown",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 137,
+          "cycle": 114,
+          "passedOverCycle": 110
+        },
+        {
+          "id": "[\"Chinatown\",\"safety.aboveMedianHoods\"]",
+          "hood": "Chinatown",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 114,
+          "passedOverCycle": 110
+        },
+        {
+          "id": "[\"Jack London\",\"health.sickResidents\"]",
+          "hood": "Jack London",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 71,
+          "cycle": 114,
+          "passedOverCycle": 113
+        }
+      ],
+      "issues": [],
+      "missingFoldCycles": [],
+      "text": "Health and safety readings this week (C114).\n- Baylight District: 13 residents sick\n- Chinatown: 137 residents sick; violence above the city middle\n- Downtown: 75 residents sick\n- Jack London: 71 residents sick"
+    }
+  },
+  "signal": {
+    "kind": "district-heat",
+    "hoods": [
+      "Downtown",
+      "Chinatown",
+      "Jack London",
+      "Baylight District"
+    ],
+    "src": "lib/districtMap.js + civic-office-map.json"
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00028",
+        "name": "Manfred Owens",
+        "neighborhood": "Jack London",
+        "role": "Booky",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Jack London — Baylight District — Final Council Vote — C115 construction milestone review against the assembled evidence file"
+      },
+      {
+        "pop": "POP-00078",
+        "name": "Sergio Aybar",
+        "neighborhood": "Jack London",
+        "role": "Catcher, Midland RockHounds (AA)",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Jack London — Baylight District — Final Council Vote — C115 construction milestone review against the assembled evidence file"
+      },
+      {
+        "pop": "POP-00149",
+        "name": "Lamine Sissoko",
+        "neighborhood": "Jack London",
+        "role": "CIVILIAN POLICE REVIEW BOARD CHAIR",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Jack London — Baylight District — Final Council Vote — C115 construction milestone review against the assembled evidence file"
+      },
+      {
+        "pop": "POP-00150",
+        "name": "Helena Morr",
+        "neighborhood": "Jack London",
+        "role": "City Ombudsman",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Jack London — Baylight District — Final Council Vote — C115 construction milestone review against the assembled evidence file"
+      }
+    ],
+    "businesses": [],
+    "churches": [],
+    "sources": []
+  },
+  "known": [
+    {
+      "id": "F-office-COUNCIL-D2",
+      "t": "FACT",
+      "text": "Leonard Tran holds COUNCIL-D2 at approval 69",
+      "src": "engine_audit snapshots.Civic_Office_Ledger"
+    },
+    {
+      "id": "F-INIT-006",
+      "t": "FACT",
+      "text": "Baylight District — Final Council Vote is in construction-active; budget $2.1B — C107: Construction contracts executed; site preparation mobilization begins\nC109: Phase II remediation commenced with independent oversight\nC110: Soil test verification complete; Phase II remediation proceeds with independent…",
+      "src": "output/initiative_tracker.json"
+    },
+    {
+      "id": "F-crime-JackLondon",
+      "t": "FACT",
+      "text": "Jack London crime: property 39, violent 20, incidents 8 (cycle 114) — city property 40.7, violent 26.1, incidents 8.3",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-hood-JackLondon",
+      "t": "FACT",
+      "text": "Jack London: sentiment 0.27 vs city 0.115; crime index 0.59 vs city 0.655; retail 16.09; housing pressure 9.5; growth; momentum 10",
+      "src": "engine_audit snapshots.Neighborhood_Map"
+    },
+    {
+      "id": "F-event-0",
+      "t": "FACT",
+      "text": "The Aitken Line Founding Celebration (Jack London) — Jack London",
+      "src": "world_summary city-event"
+    },
+    {
+      "id": "F-traj-5",
+      "t": "FACT",
+      "text": "Jack London boom sustained — momentum 10/10, the block everyone wants onto",
+      "src": "world_summary trajectory"
+    },
+    {
+      "id": "F-traj-6",
+      "t": "FACT",
+      "text": "Jack London housing pressure at 9.5/10: rents climbing, households stretching to stay",
+      "src": "world_summary trajectory"
+    }
+  ],
+  "role": {
+    "officeRows": [
+      {
+        "OfficeId": "COUNCIL-D2",
+        "PopId": "POP-00502",
+        "Holder": "Leonard Tran",
+        "District": "D2",
+        "Approval": "69"
+      }
+    ],
+    "civicPeers": [
+      {
+        "OfficeId": "COUNCIL-D4",
+        "PopId": "POP-00042",
+        "Holder": "Ramon Vega",
+        "District": "D4",
+        "Faction": "IND",
+        "Approval": 55
+      }
+    ]
+  },
+  "limits": {
+    "assert": [
+      "only named subjects in exposure.subjects",
+      "only named shops in exposure.businesses",
+      "only named churches in exposure.churches",
+      "only project facts in known",
+      "no invented POPID, vote, or complete"
+    ],
+    "invent": [
+      "no new citizens",
+      "no new businesses",
+      "no sheet numbers"
+    ]
+  },
+  "output": {
+    "contract": "statement + moves + numberMoved",
+    "dest": "office wiki (civic.16) then next Sunday city-hall packet"
+  },
+  "brief": {
+    "version": "CIVIC-BRIEF/2",
+    "cycle": 114,
+    "generation": {
+      "cycle": 114,
+      "observedAt": "2026-11-01T22:24:29.105Z",
+      "sources": {
+        "sports": {
+          "available": true,
+          "hash": "b78aaae66ac12aca66d5fa395108cfe2aa74c4de5f10df5c08eec00d10a966f7"
+        },
+        "summary": {
+          "available": true,
+          "hash": "99535f5182e66eb922782c14f98daace067903c034240604a5ece898c8f011e4"
+        }
+      },
+      "hash": "625fc65e258fd2fe3d38d613ddc8fe6e9ae4ae4487a8350ea1d8882ac488130d",
+      "completeThrough": "2026-11-01T22:24:29.105Z",
+      "issues": [],
+      "statement": "Events reflect the saved export as of its refresh watermark; later same-Cycle events require a new export."
+    },
+    "sections": {
+      "events": {
+        "available": true,
+        "items": [
+          {
+            "eventId": "EV-summary-759b8ed0e60aed0b",
+            "status": "occurred",
+            "occurredCycle": 114,
+            "ageCycles": 0,
+            "category": "city-event",
+            "significance": "local",
+            "hoods": [
+              "Downtown"
+            ],
+            "citywideRelevance": false,
+            "sourceRef": "output/world_summary_c114.md:127",
+            "fact": "Downtown Plaza Noon Music Session (Downtown)",
+            "retrievalKey": "event/EV-summary-759b8ed0e60aed0b"
+          },
+          {
+            "eventId": "EV-summary-c83b109228f88136",
+            "status": "occurred",
+            "occurredCycle": 114,
+            "ageCycles": 0,
+            "category": "city-event",
+            "significance": "local",
+            "hoods": [
+              "Jack London"
+            ],
+            "citywideRelevance": false,
+            "sourceRef": "output/world_summary_c114.md:126",
+            "fact": "The Aitken Line Founding Celebration (Jack London)",
+            "retrievalKey": "event/EV-summary-c83b109228f88136"
+          },
+          {
+            "eventId": "EV-summary-cf43f07b31915457",
+            "status": "occurred",
+            "occurredCycle": 114,
+            "ageCycles": 0,
+            "category": "city-event",
+            "significance": "local",
+            "hoods": [
+              "Downtown"
+            ],
+            "citywideRelevance": false,
+            "sourceRef": "output/world_summary_c114.md:128",
+            "fact": "Downtown First Friday Live Music (Downtown)",
+            "retrievalKey": "event/EV-summary-cf43f07b31915457"
+          },
+          {
+            "eventId": "EV-world-4ef1f6db6e10364a",
+            "status": "occurred",
+            "occurredCycle": 114,
+            "ageCycles": 0,
+            "category": "world-faith",
+            "significance": "local",
+            "hoods": [
+              "Chinatown"
+            ],
+            "citywideRelevance": false,
+            "sourceRef": "output/world_summary_c114.md:365",
+            "fact": "dialogue series addresses shared concerns at Chinatown",
+            "retrievalKey": "event/EV-world-4ef1f6db6e10364a"
+          },
+          {
+            "eventId": "EV-world-d7caa604ae82b0a8",
+            "status": "occurred",
+            "occurredCycle": 114,
+            "ageCycles": 0,
+            "category": "world-infrastructure",
+            "significance": "local",
+            "hoods": [
+              "Downtown"
+            ],
+            "citywideRelevance": false,
+            "sourceRef": "output/world_summary_c114.md:360",
+            "fact": "The Downtown Transit Snarl — Downtown under strain: transit disruption; housing pressure 10.00 (city 2.41) (impactScore 15)",
+            "retrievalKey": "event/EV-world-d7caa604ae82b0a8"
+          },
+          {
+            "eventId": "EV-sports-4931275ff33a8f24",
+            "status": "occurred",
+            "occurredCycle": 111,
+            "ageCycles": 3,
+            "category": "sports-parade",
+            "significance": "major",
+            "hoods": [
+              "Downtown"
+            ],
+            "citywideRelevance": true,
+            "sourceRef": "output/beats/Oakland_Sports_Feed.jsonl:238",
+            "fact": "The A's parade roll through Downtown.",
+            "retrievalKey": "event/EV-sports-4931275ff33a8f24"
+          },
+          {
+            "eventId": "EV-sports-1526e0510c60f93a",
+            "status": "occurred",
+            "occurredCycle": 110,
+            "ageCycles": 4,
+            "category": "sports-championship",
+            "significance": "major",
+            "hoods": [
+              "Downtown"
+            ],
+            "citywideRelevance": true,
+            "sourceRef": "output/beats/Oakland_Sports_Feed.jsonl:237",
+            "fact": "A's win their 7th championship in the \"Paulson\" era. A storybook ending to a farewell season for both Vinnie Keane and Benji Dillon",
+            "retrievalKey": "event/EV-sports-1526e0510c60f93a"
+          }
+        ],
+        "omittedCount": 0,
+        "retrievalKeys": [
+          "event/EV-summary-759b8ed0e60aed0b",
+          "event/EV-summary-c83b109228f88136",
+          "event/EV-summary-cf43f07b31915457",
+          "event/EV-world-4ef1f6db6e10364a",
+          "event/EV-world-d7caa604ae82b0a8",
+          "event/EV-sports-4931275ff33a8f24",
+          "event/EV-sports-1526e0510c60f93a"
+        ]
+      },
+      "measuredState": {
+        "districts": [
+          {
+            "district": "D2",
+            "available": true,
+            "retrievalKey": "district/D2",
+            "neighborhoods": [
+              {
+                "hood": "Downtown",
+                "available": true,
+                "measured": {
+                  "Sentiment": {
+                    "value": "0.27",
+                    "previous": "0.16",
+                    "change": 0.11000000000000001
+                  },
+                  "CrimeIndex": {
+                    "value": "0.62",
+                    "previous": "0.51",
+                    "change": 0.10999999999999999
+                  },
+                  "RetailVitality": {
+                    "value": "13.58",
+                    "previous": "11.31",
+                    "change": 2.2699999999999996
+                  },
+                  "HousingPressure": {
+                    "value": "10",
+                    "previous": "10",
+                    "change": 0
+                  },
+                  "NeighborhoodTrajectory": {
+                    "value": "growth",
+                    "previous": "growth",
+                    "change": null
+                  },
+                  "TrajectoryMomentum": {
+                    "value": "10",
+                    "previous": "10",
+                    "change": 0
+                  }
+                }
+              },
+              {
+                "hood": "Chinatown",
+                "available": true,
+                "measured": {
+                  "Sentiment": {
+                    "value": "0.04",
+                    "previous": "-0.06",
+                    "change": 0.1
+                  },
+                  "CrimeIndex": {
+                    "value": "0.68",
+                    "previous": "0.62",
+                    "change": 0.06000000000000005
+                  },
+                  "RetailVitality": {
+                    "value": "8.9",
+                    "previous": "7.78",
+                    "change": 1.12
+                  },
+                  "HousingPressure": {
+                    "value": "1",
+                    "previous": "1.5",
+                    "change": -0.5
+                  },
+                  "NeighborhoodTrajectory": {
+                    "value": "steady",
+                    "previous": "growth",
+                    "change": null
+                  },
+                  "TrajectoryMomentum": {
+                    "value": "6",
+                    "previous": "7",
+                    "change": -1
+                  }
+                }
+              },
+              {
+                "hood": "Jack London",
+                "available": true,
+                "measured": {
+                  "Sentiment": {
+                    "value": "0.27",
+                    "previous": "0.17",
+                    "change": 0.1
+                  },
+                  "CrimeIndex": {
+                    "value": "0.59",
+                    "previous": "0.54",
+                    "change": 0.04999999999999993
+                  },
+                  "RetailVitality": {
+                    "value": "16.09",
+                    "previous": "13.4",
+                    "change": 2.6899999999999995
+                  },
+                  "HousingPressure": {
+                    "value": "9.5",
+                    "previous": "8.5",
+                    "change": 1
+                  },
+                  "NeighborhoodTrajectory": {
+                    "value": "growth",
+                    "previous": "growth",
+                    "change": null
+                  },
+                  "TrajectoryMomentum": {
+                    "value": "10",
+                    "previous": "10",
+                    "change": 0
+                  }
+                }
+              },
+              {
+                "hood": "Baylight District",
+                "available": true,
+                "measured": {
+                  "Sentiment": {
+                    "value": "0.1",
+                    "previous": "0.04",
+                    "change": 0.060000000000000005
+                  },
+                  "CrimeIndex": {
+                    "value": "0.64",
+                    "previous": "0.52",
+                    "change": 0.12
+                  },
+                  "RetailVitality": {
+                    "value": "5.54",
+                    "previous": "5.13",
+                    "change": 0.41000000000000014
+                  },
+                  "HousingPressure": {
+                    "value": "0",
+                    "previous": "0",
+                    "change": 0
+                  },
+                  "NeighborhoodTrajectory": {
+                    "value": "decay",
+                    "previous": "decay",
+                    "change": null
+                  },
+                  "TrajectoryMomentum": {
+                    "value": "0",
+                    "previous": "0",
+                    "change": 0
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "previousCycleAvailable": true
+      },
+      "commitments": {
+        "priorMoves": [
+          {
+            "moveId": "MV-113-civic-office-council-d2-2026-10-28",
+            "type": "answer",
+            "status": "pending",
+            "cycle": 113,
+            "retrievalKey": "prior/MV-113-civic-office-council-d2-2026-10-28"
+          },
+          {
+            "moveId": "MV-110-civic-office-council-d2-2026-10-07",
+            "type": "work",
+            "status": "applied",
+            "cycle": 110,
+            "retrievalKey": "prior/MV-110-civic-office-council-d2-2026-10-07"
+          }
+        ],
+        "evidenceAvailable": true,
+        "outcomeFeedAvailable": false,
+        "actionOutcomes": [],
+        "actionReconciliationAvailable": false,
+        "actionReconciliationReason": "ENOENT: no such file or directory, open '/root/GodWorld/output/beats/Civic_Action_Ledger.jsonl'",
+        "reconciledActions": []
+      },
+      "opportunities": {
+        "board": [
+          {
+            "id": "INIT-006",
+            "name": "Baylight District — Final Council Vote",
+            "domain": "sports",
+            "phase": "construction-active",
+            "status": "passed",
+            "voteCycle": 83,
+            "stage": null,
+            "cyclesSinceStageChange": null,
+            "lastStageChangeCycle": null,
+            "sponsored": false,
+            "hoods": [
+              "Jack London",
+              "Downtown"
+            ],
+            "needsNext": "C115 construction milestone review against the assembled evidence file",
+            "budget": "budget $2,100,000,000 left",
+            "requirement": null,
+            "metricEvidence": null,
+            "retrievalKey": "project/INIT-006"
+          },
+          {
+            "id": "INIT-008",
+            "name": "Downtown Economic Revitalization",
+            "domain": "economic",
+            "phase": "vote-scheduled",
+            "status": "failed",
+            "voteCycle": 114,
+            "stage": "Proposed",
+            "cyclesSinceStageChange": null,
+            "lastStageChangeCycle": null,
+            "sponsored": true,
+            "hoods": [
+              "Downtown"
+            ],
+            "needsNext": "Proposed — a passed council vote funds it",
+            "budget": "budget $15,000,000 left",
+            "requirement": {
+              "stage": "Proposed",
+              "next": "Funded",
+              "clears": false,
+              "moveThatClears": null,
+              "blocked": null,
+              "text": "Proposed — a passed council vote funds it"
+            },
+            "metricEvidence": null,
+            "retrievalKey": "project/INIT-008"
+          },
+          {
+            "id": "INIT-009",
+            "name": "Commercial Stabilization for Grand Lake",
+            "domain": "economic",
+            "phase": "vote-ready",
+            "status": "failed",
+            "voteCycle": null,
+            "stage": "Proposed",
+            "cyclesSinceStageChange": null,
+            "lastStageChangeCycle": null,
+            "sponsored": true,
+            "hoods": [
+              "Grand Lake"
+            ],
+            "needsNext": "Proposed — a passed council vote funds it",
+            "budget": "budget $2,500,000 left",
+            "requirement": {
+              "stage": "Proposed",
+              "next": "Funded",
+              "clears": false,
+              "moveThatClears": null,
+              "blocked": null,
+              "text": "Proposed — a passed council vote funds it"
+            },
+            "metricEvidence": null,
+            "retrievalKey": "project/INIT-009"
+          }
+        ],
+        "omittedCount": 0,
+        "boardRetrievalKeys": [
+          "project/INIT-006",
+          "project/INIT-008",
+          "project/INIT-009"
+        ],
+        "selectedInitiative": "INIT-006",
+        "resourceBalanceAvailable": false,
+        "budgetAuthorityKey": "budget/authority",
+        "openChoice": null
+      },
+      "response": {
+        "petitionWindow": "Complaint display C112–C114; condition counter C114 only.",
+        "complaints": 1,
+        "participation": 2,
+        "mediaOutcomeAvailable": false,
+        "committedResponseAvailable": false,
+        "committedResponse": [],
+        "note": "Response counts require saved experience and reaction receipts, and are not a representative poll. Only published receipts appear as coverage."
+      },
+      "authorizedActions": {
+        "categoriesAvailable": true,
+        "categoryKeys": [
+          "health",
+          "transit",
+          "education",
+          "economic",
+          "workforce",
+          "safety",
+          "sports",
+          "environment"
+        ],
+        "detailKey": "budget/authority",
+        "note": "Move validation and later execution decide authority. An accepted request is not an applied outcome."
+      }
+    }
+  },
+  "_briefEvidence": {
+    "event": {
+      "EV-summary-759b8ed0e60aed0b": {
+        "eventId": "EV-summary-759b8ed0e60aed0b",
+        "sourceRef": "output/world_summary_c114.md:127",
+        "sourceRevision": "b0b6f8afdcf2877ea8f5f070a972efdaa289a70094837011b4ca4608d17fc4db",
+        "occurredCycle": 114,
+        "status": "occurred",
+        "observedAt": "2026-11-01T22:24:29.105Z",
+        "category": "city-event",
+        "significance": "local",
+        "hoods": [
+          "Downtown"
+        ],
+        "citywideRelevance": false,
+        "entityIds": [],
+        "facts": [
+          "Downtown Plaza Noon Music Session (Downtown)"
+        ],
+        "aliases": []
+      },
+      "EV-summary-c83b109228f88136": {
+        "eventId": "EV-summary-c83b109228f88136",
+        "sourceRef": "output/world_summary_c114.md:126",
+        "sourceRevision": "9d2629166c152e6bbabf4d0b6d3cabc836710a6dfea7d675044d7d4325818774",
+        "occurredCycle": 114,
+        "status": "occurred",
+        "observedAt": "2026-11-01T22:24:29.105Z",
+        "category": "city-event",
+        "significance": "local",
+        "hoods": [
+          "Jack London"
+        ],
+        "citywideRelevance": false,
+        "entityIds": [],
+        "facts": [
+          "The Aitken Line Founding Celebration (Jack London)"
+        ],
+        "aliases": []
+      },
+      "EV-summary-cf43f07b31915457": {
+        "eventId": "EV-summary-cf43f07b31915457",
+        "sourceRef": "output/world_summary_c114.md:128",
+        "sourceRevision": "5d6e84742bf58cc95c44a2809f575ccb19e9ff1cc6255a2c395efff95ecd3f95",
+        "occurredCycle": 114,
+        "status": "occurred",
+        "observedAt": "2026-11-01T22:24:29.105Z",
+        "category": "city-event",
+        "significance": "local",
+        "hoods": [
+          "Downtown"
+        ],
+        "citywideRelevance": false,
+        "entityIds": [],
+        "facts": [
+          "Downtown First Friday Live Music (Downtown)"
+        ],
+        "aliases": []
+      },
+      "EV-world-4ef1f6db6e10364a": {
+        "eventId": "EV-world-4ef1f6db6e10364a",
+        "sourceRef": "output/world_summary_c114.md:365",
+        "sourceRevision": "953917466f4e32ccbc704b4cc4dcf59d72921a336792553c8d4f05195416a89f",
+        "occurredCycle": 114,
+        "status": "occurred",
+        "observedAt": "2026-11-01T22:24:29.105Z",
+        "category": "world-faith",
+        "significance": "local",
+        "hoods": [
+          "Chinatown"
+        ],
+        "citywideRelevance": false,
+        "entityIds": [],
+        "facts": [
+          "dialogue series addresses shared concerns at Chinatown"
+        ],
+        "aliases": []
+      },
+      "EV-world-d7caa604ae82b0a8": {
+        "eventId": "EV-world-d7caa604ae82b0a8",
+        "sourceRef": "output/world_summary_c114.md:360",
+        "sourceRevision": "90e27fdf45a4841a70f3fbccd8e2aba839dc2f790dc3be1fc267459fea302abf",
+        "occurredCycle": 114,
+        "status": "occurred",
+        "observedAt": "2026-11-01T22:24:29.105Z",
+        "category": "world-infrastructure",
+        "significance": "local",
+        "hoods": [
+          "Downtown"
+        ],
+        "citywideRelevance": false,
+        "entityIds": [],
+        "facts": [
+          "The Downtown Transit Snarl — Downtown under strain: transit disruption; housing pressure 10.00 (city 2.41) (impactScore 15)"
+        ],
+        "aliases": []
+      },
+      "EV-sports-4931275ff33a8f24": {
+        "eventId": "EV-sports-4931275ff33a8f24",
+        "sourceRef": "output/beats/Oakland_Sports_Feed.jsonl:238",
+        "sourceRevision": "b9e776d15352f216b34a63efa504aeb679de1e8baff780b15ebc11993d430906",
+        "occurredCycle": 111,
+        "status": "occurred",
+        "observedAt": "2026-11-01T22:24:29.105Z",
+        "category": "sports-parade",
+        "significance": "major",
+        "hoods": [
+          "Downtown"
+        ],
+        "citywideRelevance": true,
+        "entityIds": [],
+        "facts": [
+          "The A's parade roll through Downtown.",
+          "The Oakland A's celebrated their 7th World Series championship in the Paulson era with a parade and rally in Downtown. Despite the colder temps the Oakland citizens were out in masses to honor their beloved A's. Mike Paulson , Vinnie Keane, Benji Dillon all stood a front the double decker bus cheering and waving to their fans. Darrin Davis, Isley Kelley, and Mark Aitken all laughing and celebrating together to what may likely have a much different feel with Keane and Dillon retiring and Aitken pending free agency unknown. Manager Deacon Seymour and rookie phenon Ernestor Quintero were seen throwing A's beads into the crowd. Playoff MVP Eric Taveras and A's ace Arturo Ramos taking selfie snapshots with fans and dancing with the crowds. The parade ran through Downtown and Jake London Square. After a season of near perfection, the city of Oakland celebrates together, the choices for the direction for next season remain unclear in a few areas but what can be expected is yet another run and the pursuit if championship number 8."
+        ],
+        "aliases": []
+      },
+      "EV-sports-1526e0510c60f93a": {
+        "eventId": "EV-sports-1526e0510c60f93a",
+        "sourceRef": "output/beats/Oakland_Sports_Feed.jsonl:237",
+        "sourceRevision": "b798aff47ab02ac6e4dcb4f906fa53e6e0514b0e86706d9c1969951944db3e74",
+        "occurredCycle": 110,
+        "status": "occurred",
+        "observedAt": "2026-11-01T22:24:29.105Z",
+        "category": "sports-championship",
+        "significance": "major",
+        "hoods": [
+          "Downtown"
+        ],
+        "citywideRelevance": true,
+        "entityIds": [],
+        "facts": [
+          "A's win their 7th championship in the \"Paulson\" era. A storybook ending to a farewell season for both Vinnie Keane and Benji Dillon",
+          "The Oakland A's won their 7th championship in the Paulson era lead by stars like Vinnie Keane, Benji Dillon, Mark Aitken, Isley Kelley, Darrin Davis. In a farewell season that will see 2 retire Vinnie Keane and Benji Dillon, 1 potentially leave in free agency Mark Aitken, and 2 remaining to further carry the franchise to the next era Isely Kelley and Darrin Davis. In a seaon where the A's absolutely dominated breaking the single season win records and then only losing 3 games in its playoff run, the A's don't appear as a team on the decline, However with a franchise that AAA team also won its championship, the A's are eager to see the young prospects emerge. But for now the fans of the A's can just rejoice in the perfection the season played out to be. Eric Taveras win World Series MVP to go along with his post-season MVP for the earlier rounds, Taveras showing tremendous value in signing him this past off-season. Pablo Alamanzar continued to show tremendous potential with a no hitter in his MLB debut and then a 1-hitter in his playoff debut and following that up with a game 3 win in the World Series. Arturo Ramos stayed consistent throughout the playoff as well. Championship parade is set for Downtown in c111."
+        ],
+        "aliases": []
+      }
+    },
+    "district": {
+      "D2": {
+        "available": true,
+        "district": "D2",
+        "neighborhoods": [
+          {
+            "hood": "Downtown",
+            "available": true,
+            "measured": {
+              "Sentiment": {
+                "value": "0.27",
+                "previous": "0.16",
+                "change": 0.11000000000000001
+              },
+              "CrimeIndex": {
+                "value": "0.62",
+                "previous": "0.51",
+                "change": 0.10999999999999999
+              },
+              "RetailVitality": {
+                "value": "13.58",
+                "previous": "11.31",
+                "change": 2.2699999999999996
+              },
+              "HousingPressure": {
+                "value": "10",
+                "previous": "10",
+                "change": 0
+              },
+              "NeighborhoodTrajectory": {
+                "value": "growth",
+                "previous": "growth",
+                "change": null
+              },
+              "TrajectoryMomentum": {
+                "value": "10",
+                "previous": "10",
+                "change": 0
+              }
+            },
+            "sourceRef": "engine_audit snapshots.Neighborhood_Map"
+          },
+          {
+            "hood": "Chinatown",
+            "available": true,
+            "measured": {
+              "Sentiment": {
+                "value": "0.04",
+                "previous": "-0.06",
+                "change": 0.1
+              },
+              "CrimeIndex": {
+                "value": "0.68",
+                "previous": "0.62",
+                "change": 0.06000000000000005
+              },
+              "RetailVitality": {
+                "value": "8.9",
+                "previous": "7.78",
+                "change": 1.12
+              },
+              "HousingPressure": {
+                "value": "1",
+                "previous": "1.5",
+                "change": -0.5
+              },
+              "NeighborhoodTrajectory": {
+                "value": "steady",
+                "previous": "growth",
+                "change": null
+              },
+              "TrajectoryMomentum": {
+                "value": "6",
+                "previous": "7",
+                "change": -1
+              }
+            },
+            "sourceRef": "engine_audit snapshots.Neighborhood_Map"
+          },
+          {
+            "hood": "Jack London",
+            "available": true,
+            "measured": {
+              "Sentiment": {
+                "value": "0.27",
+                "previous": "0.17",
+                "change": 0.1
+              },
+              "CrimeIndex": {
+                "value": "0.59",
+                "previous": "0.54",
+                "change": 0.04999999999999993
+              },
+              "RetailVitality": {
+                "value": "16.09",
+                "previous": "13.4",
+                "change": 2.6899999999999995
+              },
+              "HousingPressure": {
+                "value": "9.5",
+                "previous": "8.5",
+                "change": 1
+              },
+              "NeighborhoodTrajectory": {
+                "value": "growth",
+                "previous": "growth",
+                "change": null
+              },
+              "TrajectoryMomentum": {
+                "value": "10",
+                "previous": "10",
+                "change": 0
+              }
+            },
+            "sourceRef": "engine_audit snapshots.Neighborhood_Map"
+          },
+          {
+            "hood": "Baylight District",
+            "available": true,
+            "measured": {
+              "Sentiment": {
+                "value": "0.1",
+                "previous": "0.04",
+                "change": 0.060000000000000005
+              },
+              "CrimeIndex": {
+                "value": "0.64",
+                "previous": "0.52",
+                "change": 0.12
+              },
+              "RetailVitality": {
+                "value": "5.54",
+                "previous": "5.13",
+                "change": 0.41000000000000014
+              },
+              "HousingPressure": {
+                "value": "0",
+                "previous": "0",
+                "change": 0
+              },
+              "NeighborhoodTrajectory": {
+                "value": "decay",
+                "previous": "decay",
+                "change": null
+              },
+              "TrajectoryMomentum": {
+                "value": "0",
+                "previous": "0",
+                "change": 0
+              }
+            },
+            "sourceRef": "engine_audit snapshots.Neighborhood_Map"
+          }
+        ],
+        "previousCycleAvailable": true
+      }
+    },
+    "project": {
+      "INIT-006": {
+        "id": "INIT-006",
+        "name": "Baylight District — Final Council Vote",
+        "domain": "sports",
+        "phase": "construction-active",
+        "status": "passed",
+        "voteCycle": 83,
+        "stage": null,
+        "cyclesSinceStageChange": null,
+        "lastStageChangeCycle": null,
+        "sponsored": false,
+        "hoods": [
+          "Jack London",
+          "Downtown"
+        ],
+        "needsNext": "C115 construction milestone review against the assembled evidence file",
+        "budget": "budget $2,100,000,000 left",
+        "requirement": null,
+        "metricEvidence": null
+      },
+      "INIT-008": {
+        "id": "INIT-008",
+        "name": "Downtown Economic Revitalization",
+        "domain": "economic",
+        "phase": "vote-scheduled",
+        "status": "failed",
+        "voteCycle": 114,
+        "stage": "Proposed",
+        "cyclesSinceStageChange": null,
+        "lastStageChangeCycle": null,
+        "sponsored": true,
+        "hoods": [
+          "Downtown"
+        ],
+        "needsNext": "Proposed — a passed council vote funds it",
+        "budget": "budget $15,000,000 left",
+        "requirement": {
+          "stage": "Proposed",
+          "next": "Funded",
+          "clears": false,
+          "moveThatClears": null,
+          "blocked": null,
+          "text": "Proposed — a passed council vote funds it"
+        },
+        "metricEvidence": null
+      },
+      "INIT-009": {
+        "id": "INIT-009",
+        "name": "Commercial Stabilization for Grand Lake",
+        "domain": "economic",
+        "phase": "vote-ready",
+        "status": "failed",
+        "voteCycle": null,
+        "stage": "Proposed",
+        "cyclesSinceStageChange": null,
+        "lastStageChangeCycle": null,
+        "sponsored": true,
+        "hoods": [
+          "Grand Lake"
+        ],
+        "needsNext": "Proposed — a passed council vote funds it",
+        "budget": "budget $2,500,000 left",
+        "requirement": {
+          "stage": "Proposed",
+          "next": "Funded",
+          "clears": false,
+          "moveThatClears": null,
+          "blocked": null,
+          "text": "Proposed — a passed council vote funds it"
+        },
+        "metricEvidence": null
+      }
+    },
+    "budget": {
+      "authority": {
+        "officeId": "COUNCIL-D2",
+        "district": "D2",
+        "categories": [
+          {
+            "key": "health",
+            "label": "clinics, care",
+            "band": "$5M-$100M",
+            "canDeliver": true
+          },
+          {
+            "key": "transit",
+            "label": "stations, lines",
+            "band": "$20M-$500M",
+            "canDeliver": true
+          },
+          {
+            "key": "education",
+            "label": "schools, youth learning",
+            "band": "$1M-$50M",
+            "canDeliver": true
+          },
+          {
+            "key": "economic",
+            "label": "business, local economy",
+            "band": "$2M-$50M",
+            "canDeliver": false
+          },
+          {
+            "key": "workforce",
+            "label": "jobs, training",
+            "band": "$1M-$30M",
+            "canDeliver": false
+          },
+          {
+            "key": "safety",
+            "label": "public safety, response",
+            "band": "$2M-$30M",
+            "canDeliver": false
+          },
+          {
+            "key": "sports",
+            "label": "stadiums, recreation",
+            "band": "$10M-$500M",
+            "canDeliver": false
+          },
+          {
+            "key": "environment",
+            "label": "parks, air, water",
+            "band": "$1M-$30M",
+            "canDeliver": false
+          }
+        ],
+        "resourceBalance": null,
+        "resourceBalanceAvailable": false,
+        "note": "Category bands are filing constraints. Spendable treasury balance requires typed current allocation evidence."
+      }
+    },
+    "prior": {
+      "MV-113-civic-office-council-d2-2026-10-28": {
+        "moveId": "MV-113-civic-office-council-d2-2026-10-28",
+        "cycle": 113,
+        "date": "2026-10-28",
+        "agentDir": "civic-office-council-d2",
+        "popid": "POP-00502",
+        "type": "answer",
+        "payload": {
+          "confrontationId": "CONF-111-civic-office-council-d2",
+          "text": "The committee hearing schedule for INIT-008 Downtown Economic Revitalization is set for next cycle. Independent oversight verification for INIT-006 Phase II remediation has been submitted.",
+          "directiveCycle": 111,
+          "confrontationSeat": "civic-office-council-d2"
+        },
+        "status": "pending",
+        "at": "2026-10-28T10:45:42.429Z"
+      },
+      "MV-110-civic-office-council-d2-2026-10-07": {
+        "moveId": "MV-110-civic-office-council-d2-2026-10-07",
+        "cycle": 110,
+        "date": "2026-10-07",
+        "agentDir": "civic-office-council-d2",
+        "popid": "POP-00502",
+        "type": "work",
+        "payload": {
+          "initiativeId": "INIT-006"
+        },
+        "status": "applied",
+        "at": "2026-10-11T22:21:55.549Z",
+        "closeCycle": 111,
+        "detail": "LastWorkCycle/LastWorkSeat written for INIT-006"
+      }
+    }
+  }
+}

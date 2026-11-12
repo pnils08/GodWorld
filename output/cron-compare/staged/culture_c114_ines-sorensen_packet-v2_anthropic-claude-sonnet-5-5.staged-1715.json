@@ -1,0 +1,72 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "114",
+  "persona": "ines-sorensen",
+  "byline": "Ines Sorensen",
+  "bylinePopid": "POP-01211",
+  "article": "output/cron-compare/staged/culture_c114_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5.staged-1715.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Omar Amici",
+        "role": "quoted-source",
+        "popid": "POP-00263"
+      },
+      {
+        "name": "Ximena Mehta",
+        "role": "quoted-source",
+        "popid": "POP-01039"
+      },
+      {
+        "name": "Belle Lopez",
+        "role": "mentioned",
+        "popid": "POP-00300",
+        "floor": true
+      },
+      {
+        "name": "Tio Rio",
+        "role": "mentioned",
+        "popid": "POP-00677",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "To be honest, the changes in Uptown have me feeling a bit uneasy. The streets are busier than ever, and it seems like every other place is a for-rent sign these days. I've lived here long enough to see the neighborhood transform, but this feels different. It's like the neighborhood is shifting away from the people who've been here all along.",
+        "sourceRef": "citizenVoice PRESS Omar Amici"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "gate": "off",
+    "model": null,
+    "manifestId": null,
+    "draftSha256": "ba8cbf740b7ed26f37eb8f5670d89174dfc51d9c85eac7e81be8983afbc07e9f",
+    "verdict": null,
+    "ranAt": "2026-11-07T17:15:29.684Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": false,
+      "inTarget": true,
+      "inTargetBy": "code floor 300",
+      "words": 331,
+      "short": "The fourth entry places Omar Amici's name and frame before his words and includes an editorial summary paragraph between entries.",
+      "score": 3,
+      "model": "google/gemini-3.7-flash",
+      "scoredWithoutRhea": true,
+      "draftSha256": "ba8cbf740b7ed26f37eb8f5670d89174dfc51d9c85eac7e81be8983afbc07e9f"
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-07T17:15:29.684Z"
+}

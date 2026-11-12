@@ -1,0 +1,37 @@
+{
+  "stage": "close",
+  "cycle": 112,
+  "expected": [
+    "mayor_gavel",
+    "okoro",
+    "council_d6",
+    "council_d8",
+    "council_d4",
+    "council_d9",
+    "council_d7",
+    "council_d5",
+    "council_d2",
+    "council_d3",
+    "stabilization_fund",
+    "oari",
+    "health_center",
+    "baylight_authority"
+  ],
+  "pendingVoices": [
+    "council_d1"
+  ],
+  "clerk": "pass",
+  "clerkModel": "deepseek/deepseek-v4-flash-0731",
+  "gatePass": true,
+  "deterministicPass": true,
+  "sanityStatus": "pass",
+  "applyDecision": {
+    "apply": true,
+    "via": "verdicts",
+    "reason": null,
+    "missingVerdicts": []
+  },
+  "applied": true,
+  "laneEntries": 41,
+  "ranAt": "2026-10-19T04:22:21.035Z"
+}

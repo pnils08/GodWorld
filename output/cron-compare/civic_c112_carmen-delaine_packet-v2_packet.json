@@ -1,0 +1,93 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "112",
+  "persona": "carmen-delaine",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Carmen Delaine",
+    "popid": "POP-00011"
+  },
+  "assignment": {
+    "story": {
+      "ref": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c112.json snapshots.Initiative_Tracker; storyline INIT-001:disbursement-active",
+      "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+      "kind": "initiative",
+      "angle": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+      "hookLine": "The civic record identifies a decision, initiative, or clock that needs a clear accounting.",
+      "hood": "West Oakland",
+      "popids": [],
+      "citizens": []
+    }
+  },
+  "angle": "output/cron-compare/civic_c112_carmen-delaine_packet-v2_angle.json",
+  "quotesRequested": 2,
+  "quotesLanded": 2,
+  "quotes": [
+    {
+      "pop": "POP-00034",
+      "name": "Avery Santana",
+      "quote": "Month-eleven, 23-day standard maintained — this fund delivers because Brenda Okoro's team treats every application like family.",
+      "sourceKind": "office-record",
+      "officeRecord": {
+        "sourceKind": "office-record",
+        "cycle": 112,
+        "officeSlug": "mayor_gavel",
+        "statementId": "STMT-112-mayor_gavel-001",
+        "quote": "Month-eleven, 23-day standard maintained — this fund delivers because Brenda Okoro's team treats every application like family.",
+        "topic": "West Oakland Stabilization Fund Month-Eleven Disbursement",
+        "initiativeId": "INIT-001",
+        "filePath": "output/civic-voice/mayor_gavel_c112.json",
+        "holderPopid": "POP-00034",
+        "speakerName": "Avery Santana"
+      }
+    },
+    {
+      "pop": "POP-00034",
+      "name": "Avery Santana",
+      "quote": "West Oakland families don't need promises—they need checks that clear. Month-eleven disbursement approved.",
+      "sourceKind": "office-record",
+      "officeRecord": {
+        "sourceKind": "office-record",
+        "cycle": 112,
+        "officeSlug": "mayor_open",
+        "statementId": "STMT-112-mayor_open-001",
+        "quote": "West Oakland families don't need promises—they need checks that clear. Month-eleven disbursement approved.",
+        "topic": "West Oakland Stabilization Fund Month-Eleven Disbursement",
+        "initiativeId": "INIT-001",
+        "filePath": "output/civic-voice/mayor_open_c112.json",
+        "holderPopid": "POP-00034",
+        "speakerName": "Avery Santana"
+      }
+    }
+  ],
+  "officeRecords": [
+    {
+      "sourceKind": "office-record",
+      "cycle": 112,
+      "officeSlug": "mayor_gavel",
+      "statementId": "STMT-112-mayor_gavel-001",
+      "quote": "Month-eleven, 23-day standard maintained — this fund delivers because Brenda Okoro's team treats every application like family.",
+      "topic": "West Oakland Stabilization Fund Month-Eleven Disbursement",
+      "initiativeId": "INIT-001",
+      "filePath": "output/civic-voice/mayor_gavel_c112.json",
+      "holderPopid": "POP-00034",
+      "speakerName": "Avery Santana"
+    },
+    {
+      "sourceKind": "office-record",
+      "cycle": 112,
+      "officeSlug": "mayor_open",
+      "statementId": "STMT-112-mayor_open-001",
+      "quote": "West Oakland families don't need promises—they need checks that clear. Month-eleven disbursement approved.",
+      "topic": "West Oakland Stabilization Fund Month-Eleven Disbursement",
+      "initiativeId": "INIT-001",
+      "filePath": "output/civic-voice/mayor_open_c112.json",
+      "holderPopid": "POP-00034",
+      "speakerName": "Avery Santana"
+    }
+  ],
+  "officeSilence": null,
+  "interviews": [],
+  "ranAt": "2026-10-19T18:15:01.279Z"
+}

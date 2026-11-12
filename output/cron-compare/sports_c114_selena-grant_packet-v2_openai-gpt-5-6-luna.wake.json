@@ -1,0 +1,56 @@
+{
+  "mode": "wake-write",
+  "desk": "sports",
+  "cycle": "114",
+  "provider": "openrouter",
+  "model": "openai/gpt-5.6-luna",
+  "configuredWriterModel": "openai/gpt-5.6-luna",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "selena-grant",
+  "byline": {
+    "name": "Selena Grant",
+    "popid": "POP-00591",
+    "beatDomain": "SPORTS"
+  },
+  "laneEntries": 15,
+  "quotesLanded": 0,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [],
+  "toolCalls": 0,
+  "wordCount": 485,
+  "targetWords": "400-650",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 400",
+    "words": 485,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "e6758aee0914152a286059216f3df657720543390eb467e56979fc3bbf471f18",
+    "costUsd": 0.0012
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 4/4 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/sports_c114_selena-grant_packet-v2_openai-gpt-5-6-luna.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ suppress logs { quiet: true }\n{\n  \"popId\": \"POP-00591\",\n  \"name\": \"Selena Grant\",\n  \"recorded\": true,\n  \"text\": \"filed: Sports\"\n}"
+  },
+  "ranAt": "2026-11-07T18:02:45.391Z"
+}

@@ -1,0 +1,32 @@
+{
+  "status": "arc-seed",
+  "cycle": "112",
+  "desk": "civic",
+  "persona": "luis-navarro",
+  "hood": "Downtown",
+  "quotes": [
+    {
+      "pop": "POP-00041",
+      "name": "Keisha Ramos",
+      "quote": "The soil is clean, the oversight is independent, and the Cycle 115 review holds. But a build only succeeds if the neighborhoods beside it hold too."
+    },
+    {
+      "pop": "POP-00041",
+      "name": "Keisha Ramos",
+      "quote": "The construction fence has our number — and starting this cycle, it answers within 48 hours."
+    },
+    {
+      "pop": "POP-00034",
+      "name": "Avery Santana",
+      "quote": "Independent oversight verified, remediation proceeds — Cycle 115 milestone stands. This city builds what it promises."
+    },
+    {
+      "pop": "POP-00034",
+      "name": "Avery Santana",
+      "quote": "Soil tests verified, remediation proceeds—Baylight's construction milestone review holds for Cycle 115."
+    }
+  ],
+  "claim": "The soil is clean, the oversight is independent, and the Cycle 115 review holds. But a build only succeeds if the neighborhoods beside it hold too.",
+  "src": "citizenVoice PRESS c112",
+  "ranAt": "2026-10-20T18:15:17.822Z"
+}

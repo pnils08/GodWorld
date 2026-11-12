@@ -1,0 +1,1710 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "113",
+  "persona": "p-slayer",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00008",
+      "name": "P Slayer",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+      "approach": "Fan-heat approach (P Slayer pulse): do NOT open from the FO press release or the award board. Open from gut or Oakland sensory (bar, lot, bleacher row, BART after). First-person I/we only. Pick 1–2 charge-bag modes from this slice. Friction pivot required — name the counter-argument, kill it. ONE real foil number max (from FoilNumber / AnchorFacts); never invent x-stats or roster moves. Hook PriorTake when present — eat it or double down (\"I was wrong\" is craft). End on charge that sticks: dare, confession, or update. Not Anthony. Not Hal. Not multi-voice sports-desk average.",
+      "creativeBrief": {
+        "kind": "fan-heat",
+        "fanCharge": "grief",
+        "bagModes": [
+          "3 Friction Pivot",
+          "6 Superman We Asked Him to Be",
+          "7 We Still Believe / We're Done"
+        ],
+        "friction": "Grief without inventing medical private life — we demanded too much.",
+        "centralFeeling": "Oakland should feel the cost of what we asked a man to carry.",
+        "priorTake": "NONE — write cold or invent no prior; wall may still inject at wake",
+        "sceneRule": "You may invent unnamed bar / lot / BART / bleacher texture that contradicts nothing on this slice. Do not invent star players, contracts, stats, or quotes. Named people stay on PLAYERS list or Tribune colleagues (Anthony, Hal, Mags) as foils."
+      }
+    },
+    "signal": {
+      "kind": "injury-load",
+      "hood": "Downtown",
+      "score": null,
+      "src": "Oakland_Sports_Feed cycle 113; world_summary_c113.md \"## Sports\" · The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+      "team": "A's",
+      "nearby": [
+        {
+          "text": "Oaks | game-result | (early-season) | Adash Stanley, Austin Reaves, AJ Dybantsa, Wilson Shepard",
+          "src": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | game-result | (early-season) | Adash Stanley, AJ Dybantsa, Austin Reaves",
+          "src": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | game-result | (early-season) | Adash Stanley, AJ Dybantsa, Austin Reaves",
+          "src": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | rumor | (off-season) | Desmond Morton, Frank Reyna, Danny Horn, Vladimir Gonzalez, JR Rosado",
+          "src": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | community-outreach | (off-season) | Darrin Davis, Rafael Montez",
+          "src": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00051",
+          "name": "Desmond Morton",
+          "profile": "Desmond Morton — Left Fielder, Oakland A's",
+          "role": "Left Fielder, Oakland A's",
+          "hood": "Chinatown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "Oakland_Sports_Feed cycle 113; world_summary_c113.md \"## Sports\" · The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+            "pop": "POP-00051",
+            "rowName": "Desmond Morton",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00079",
+          "name": "Frank Reyna",
+          "profile": "Frank Reyna — Right Fielder, Oakland A's",
+          "role": "Right Fielder, Oakland A's",
+          "hood": "Lake Merritt",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "Oakland_Sports_Feed cycle 113; world_summary_c113.md \"## Sports\" · The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+            "pop": "POP-00079",
+            "rowName": "Frank Reyna",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00022",
+          "name": "Danny Horn",
+          "profile": "Danny Horn — Center Fielder, Oakland A's - Best player in the MLB",
+          "role": "Center Fielder, Oakland A's - Best player in the MLB",
+          "hood": "Temescal",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "Oakland_Sports_Feed cycle 113; world_summary_c113.md \"## Sports\" · The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+            "pop": "POP-00022",
+            "rowName": "Danny Horn",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00598",
+          "name": "Vladimir Gonzalez",
+          "profile": "Vladimir Gonzalez — Right Fielder, Oakland A's",
+          "role": "Right Fielder, Oakland A's",
+          "hood": "Fruitvale",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "Oakland_Sports_Feed cycle 113; world_summary_c113.md \"## Sports\" · The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+            "pop": "POP-00598",
+            "rowName": "Vladimir Gonzalez",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00021",
+          "name": "Darrin Davis",
+          "profile": "Darrin Davis — Left Fielder, Oakland A's Legend",
+          "role": "Left Fielder, Oakland A's Legend",
+          "hood": "Piedmont Ave",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "Oakland_Sports_Feed cycle 113; world_summary_c113.md \"## Sports\" · The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+            "pop": "POP-00021",
+            "rowName": "Darrin Davis",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00030",
+          "name": "Derek Simmons",
+          "profile": "Derek Simmons — A's Marketing Director",
+          "role": "A's Marketing Director",
+          "hood": "Jack London",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 113,
+            "tag": "Sports-Fandom-Up-S",
+            "line": "Y3C9 — [Sports-Fandom-Up-S] bought a new A's jersey and the quiet satisfaction of finding a favorite song on the jukebox near a ferry-adjacent corner",
+            "highlightKind": "team",
+            "entity": "A's",
+            "predicate": "fan"
+          }
+        },
+        {
+          "pop": "POP-00195",
+          "name": "Lonzo Jailon",
+          "profile": "Lonzo Jailon — Sea Level Monitoring Technician",
+          "role": "Sea Level Monitoring Technician",
+          "hood": "Lake Merritt",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 113,
+            "tag": "Sports-Fandom-Up-S",
+            "line": "Y3C9 — [Sports-Fandom-Up-S] bought a new A's jersey and the muffled thump of a car stereo playing last summer's hit",
+            "highlightKind": "team",
+            "entity": "A's",
+            "predicate": "fan"
+          }
+        },
+        {
+          "pop": "POP-00200",
+          "name": "Evan Lewis",
+          "profile": "Evan Lewis — Bus driver",
+          "role": "Bus driver",
+          "hood": "Laurel",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 113,
+            "tag": "Sports-Fandom-Up-S",
+            "line": "Y3C9 — [Sports-Fandom-Up-S] bought a new A's jersey and let the week's noise settle",
+            "highlightKind": "team",
+            "entity": "A's",
+            "predicate": "fan"
+          }
+        },
+        {
+          "pop": "POP-00210",
+          "name": "Depak Ying",
+          "profile": "Depak Ying — Server",
+          "role": "Server",
+          "hood": "Rockridge",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 113,
+            "tag": "Sports-Fandom-Up-S",
+            "line": "Y3C9 — [Sports-Fandom-Up-S] bought a new A's jersey and a sense of anticipation hangs in the air",
+            "highlightKind": "team",
+            "entity": "A's",
+            "predicate": "fan"
+          }
+        },
+        {
+          "pop": "POP-00332",
+          "name": "Diego Remo",
+          "profile": "Diego Remo — Independent Bookstore Owner",
+          "role": "Independent Bookstore Owner",
+          "hood": "Temescal",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 113,
+            "tag": "Sports-Fandom-Up-S",
+            "line": "Y3C9 — [Sports-Fandom-Up-S] bought a new A's jersey and the hum of a bassline from a passing car",
+            "highlightKind": "team",
+            "entity": "A's",
+            "predicate": "fan"
+          }
+        },
+        {
+          "pop": "POP-00468",
+          "name": "Collete Allen",
+          "profile": "Collete Allen — Elevator Mechanic",
+          "role": "Elevator Mechanic",
+          "hood": "Laurel",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 113,
+            "tag": "Sports-Fandom-Up-S",
+            "line": "Y3C9 — [Sports-Fandom-Up-S] bought a new A's jersey and the quiet satisfaction of finding a favorite song on the jukebox near a quiet main street",
+            "highlightKind": "team",
+            "entity": "A's",
+            "predicate": "fan"
+          }
+        },
+        {
+          "pop": "POP-00717",
+          "name": "Nikolai Fuentes",
+          "profile": "Nikolai Fuentes — Street Photographer",
+          "role": "Street Photographer",
+          "hood": "Uptown",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 113,
+            "tag": "Sports-Fandom-Up-S",
+            "line": "Y3C9 — [Sports-Fandom-Up-S] bought a new A's jersey and a sense of anticipation hangs in the air",
+            "highlightKind": "team",
+            "entity": "A's",
+            "predicate": "fan"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C113",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-876f95b5eb98"
+      },
+      {
+        "t": "FACT",
+        "text": "The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+        "src": "Oakland_Sports_Feed cycle 113; world_summary_c113.md \"## Sports\" · The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+        "id": "F-89ee9a459546"
+      },
+      {
+        "t": "FACT",
+        "text": "Grief without inventing medical private life — we demanded too much.",
+        "src": "Oakland_Sports_Feed cycle 113; world_summary_c113.md \"## Sports\" · The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+        "id": "F-e1c853446011"
+      },
+      {
+        "t": "FACT",
+        "text": "StoryAngle (feed): The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+        "src": "Oakland_Sports_Feed cycle 113; world_summary_c113.md \"## Sports\" · The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+        "id": "F-9b7cfdc06b31"
+      },
+      {
+        "t": "FACT",
+        "text": "Stats (feed): Desmond Morton/285AB/.291AVG/7HR/44RBI, Frank Reyna/164/.317AVG/14HR/34RBI,JR Rosado/184AB/.298AVG/7HR/27RBI",
+        "src": "Oakland_Sports_Feed cycle 113; world_summary_c113.md \"## Sports\" · The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+        "id": "F-dcf29d0d5e3b"
+      },
+      {
+        "t": "FACT",
+        "text": "Event: A's — rumor (off-season)",
+        "src": "Oakland_Sports_Feed cycle 113; world_summary_c113.md \"## Sports\" · The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+        "id": "F-8de0c1410dea"
+      },
+      {
+        "t": "FACT",
+        "text": "NamesUsed: Desmond Morton (LF), Frank Reyna (RF), Danny Horn (CF), Vladimir Gonzalez (RF), JR Rosado (LF)",
+        "src": "Oakland_Sports_Feed cycle 113; world_summary_c113.md \"## Sports\" · The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+        "id": "F-e9774345218c"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "street",
+    "candidates": [
+      {
+        "pop": "POP-00051",
+        "name": "Desmond Morton",
+        "role": "Left Fielder, Oakland A's",
+        "hood": "Chinatown",
+        "profile": "Desmond Morton — Left Fielder, Oakland A's",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "Oakland_Sports_Feed cycle 113; world_summary_c113.md \"## Sports\" · The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+          "pop": "POP-00051",
+          "rowName": "Desmond Morton",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00079",
+        "name": "Frank Reyna",
+        "role": "Right Fielder, Oakland A's",
+        "hood": "Lake Merritt",
+        "profile": "Frank Reyna — Right Fielder, Oakland A's",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "Oakland_Sports_Feed cycle 113; world_summary_c113.md \"## Sports\" · The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+          "pop": "POP-00079",
+          "rowName": "Frank Reyna",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00022",
+        "name": "Danny Horn",
+        "role": "Center Fielder, Oakland A's - Best player in the MLB",
+        "hood": "Temescal",
+        "profile": "Danny Horn — Center Fielder, Oakland A's - Best player in the MLB",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "Oakland_Sports_Feed cycle 113; world_summary_c113.md \"## Sports\" · The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+          "pop": "POP-00022",
+          "rowName": "Danny Horn",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00598",
+        "name": "Vladimir Gonzalez",
+        "role": "Right Fielder, Oakland A's",
+        "hood": "Fruitvale",
+        "profile": "Vladimir Gonzalez — Right Fielder, Oakland A's",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "Oakland_Sports_Feed cycle 113; world_summary_c113.md \"## Sports\" · The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+          "pop": "POP-00598",
+          "rowName": "Vladimir Gonzalez",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00021",
+        "name": "Darrin Davis",
+        "role": "Left Fielder, Oakland A's Legend",
+        "hood": "Piedmont Ave",
+        "profile": "Darrin Davis — Left Fielder, Oakland A's Legend",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "Oakland_Sports_Feed cycle 113; world_summary_c113.md \"## Sports\" · The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+          "pop": "POP-00021",
+          "rowName": "Darrin Davis",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00030",
+        "name": "Derek Simmons",
+        "role": "A's Marketing Director",
+        "hood": "Jack London",
+        "profile": "Derek Simmons — A's Marketing Director",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 113,
+          "tag": "Sports-Fandom-Up-S",
+          "line": "Y3C9 — [Sports-Fandom-Up-S] bought a new A's jersey and the quiet satisfaction of finding a favorite song on the jukebox near a ferry-adjacent corner",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedLifeLine": "Y3C9 — [Sports-Fandom-Up-S] bought a new A's jersey and the quiet satisfaction of finding a favorite song on the jukebox near a ferry-adjacent corner"
+      },
+      {
+        "pop": "POP-00195",
+        "name": "Lonzo Jailon",
+        "role": "Sea Level Monitoring Technician",
+        "hood": "Lake Merritt",
+        "profile": "Lonzo Jailon — Sea Level Monitoring Technician",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 113,
+          "tag": "Sports-Fandom-Up-S",
+          "line": "Y3C9 — [Sports-Fandom-Up-S] bought a new A's jersey and the muffled thump of a car stereo playing last summer's hit",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedLifeLine": "Y3C9 — [Sports-Fandom-Up-S] bought a new A's jersey and the muffled thump of a car stereo playing last summer's hit"
+      },
+      {
+        "pop": "POP-00200",
+        "name": "Evan Lewis",
+        "role": "Bus driver",
+        "hood": "Laurel",
+        "profile": "Evan Lewis — Bus driver",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 113,
+          "tag": "Sports-Fandom-Up-S",
+          "line": "Y3C9 — [Sports-Fandom-Up-S] bought a new A's jersey and let the week's noise settle",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedLifeLine": "Y3C9 — [Sports-Fandom-Up-S] bought a new A's jersey and let the week's noise settle"
+      },
+      {
+        "pop": "POP-00210",
+        "name": "Depak Ying",
+        "role": "Server",
+        "hood": "Rockridge",
+        "profile": "Depak Ying — Server",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 113,
+          "tag": "Sports-Fandom-Up-S",
+          "line": "Y3C9 — [Sports-Fandom-Up-S] bought a new A's jersey and a sense of anticipation hangs in the air",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedLifeLine": "Y3C9 — [Sports-Fandom-Up-S] bought a new A's jersey and a sense of anticipation hangs in the air"
+      },
+      {
+        "pop": "POP-00332",
+        "name": "Diego Remo",
+        "role": "Independent Bookstore Owner",
+        "hood": "Temescal",
+        "profile": "Diego Remo — Independent Bookstore Owner",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 113,
+          "tag": "Sports-Fandom-Up-S",
+          "line": "Y3C9 — [Sports-Fandom-Up-S] bought a new A's jersey and the hum of a bassline from a passing car",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedLifeLine": "Y3C9 — [Sports-Fandom-Up-S] bought a new A's jersey and the hum of a bassline from a passing car"
+      },
+      {
+        "pop": "POP-00468",
+        "name": "Collete Allen",
+        "role": "Elevator Mechanic",
+        "hood": "Laurel",
+        "profile": "Collete Allen — Elevator Mechanic",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 113,
+          "tag": "Sports-Fandom-Up-S",
+          "line": "Y3C9 — [Sports-Fandom-Up-S] bought a new A's jersey and the quiet satisfaction of finding a favorite song on the jukebox near a quiet main street",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedLifeLine": "Y3C9 — [Sports-Fandom-Up-S] bought a new A's jersey and the quiet satisfaction of finding a favorite song on the jukebox near a quiet main street"
+      },
+      {
+        "pop": "POP-00717",
+        "name": "Nikolai Fuentes",
+        "role": "Street Photographer",
+        "hood": "Uptown",
+        "profile": "Nikolai Fuentes — Street Photographer",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 113,
+          "tag": "Sports-Fandom-Up-S",
+          "line": "Y3C9 — [Sports-Fandom-Up-S] bought a new A's jersey and a sense of anticipation hangs in the air",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedLifeLine": "Y3C9 — [Sports-Fandom-Up-S] bought a new A's jersey and a sense of anticipation hangs in the air"
+      },
+      {
+        "pop": "POP-00745",
+        "name": "Sonia Parikh",
+        "role": "Podcast Host / Software Engineer",
+        "hood": "Fruitvale",
+        "profile": "Sonia Parikh — Podcast Host / Software Engineer",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 113,
+          "tag": "Sports-Fandom-Up-S",
+          "line": "Y3C9 — [Sports-Fandom-Up-S] bought a new A's jersey and let the week's noise settle",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedLifeLine": "Y3C9 — [Sports-Fandom-Up-S] bought a new A's jersey and let the week's noise settle"
+      },
+      {
+        "pop": "POP-00860",
+        "name": "Saniya Williams",
+        "role": "Quantum Computing Researcher",
+        "hood": "Rockridge",
+        "profile": "Saniya Williams — Quantum Computing Researcher",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 113,
+          "tag": "Sports-Fandom-Up-S",
+          "line": "Y3C9 — [Sports-Fandom-Up-S] bought a new A's jersey and the muffled thump of a car stereo playing last summer's hit",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedLifeLine": "Y3C9 — [Sports-Fandom-Up-S] bought a new A's jersey and the muffled thump of a car stereo playing last summer's hit"
+      },
+      {
+        "pop": "POP-01033",
+        "name": "Cedric Nakamura",
+        "role": "Retail clerk",
+        "hood": "Uptown",
+        "profile": "Cedric Nakamura — Retail clerk",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 113,
+          "tag": "Sports-Fandom-Up-S",
+          "line": "Y3C9 — [Sports-Fandom-Up-S] bought a new A's jersey and the muffled thump of a car stereo playing last summer's hit",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedLifeLine": "Y3C9 — [Sports-Fandom-Up-S] bought a new A's jersey and the muffled thump of a car stereo playing last summer's hit"
+      },
+      {
+        "pop": "POP-01117",
+        "name": "Graciela Foster",
+        "role": "IT support technician",
+        "hood": "Uptown",
+        "profile": "Graciela Foster — IT support technician",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 113,
+          "tag": "Sports-Fandom-Up-S",
+          "line": "Y3C9 — [Sports-Fandom-Up-S] bought a new A's jersey and a sense of anticipation hangs in the air",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedLifeLine": "Y3C9 — [Sports-Fandom-Up-S] bought a new A's jersey and a sense of anticipation hangs in the air"
+      },
+      {
+        "pop": "POP-01141",
+        "name": "Dolores Nwachukwu",
+        "role": "Police Captain",
+        "hood": "West Oakland",
+        "profile": "Dolores Nwachukwu — Police Captain",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 113,
+          "tag": "Sports-Fandom-Up-S",
+          "line": "Y3C9 — [Sports-Fandom-Up-S] bought a new A's jersey and felt the season starting to turn",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedLifeLine": "Y3C9 — [Sports-Fandom-Up-S] bought a new A's jersey and felt the season starting to turn"
+      },
+      {
+        "pop": "POP-00038",
+        "name": "Theo Park",
+        "role": "Communications Director",
+        "hood": "Rockridge",
+        "profile": "Theo Park — Communications Director",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "LSTk8ML7HriPSR5kvsqmF3",
+          "customId": "cp-POP-00038-c102-PRESS",
+          "cycle": 102,
+          "excerpt": "It's those little things - like how the guy ahead of me (pretty sure he's a janitor at the Islamic Center) was chatting with Danny Horn from the A's like they were old buddies.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "It's those little things - like how the guy ahead of me (pretty sure he's a janitor at the Islamic Center) was chatting with Danny Horn from the A's like they were old buddies."
+      },
+      {
+        "pop": "POP-00145",
+        "name": "Janelle Rourke",
+        "role": "ASSISTANT DISTRICT ATTORNEY (Community Safety)",
+        "hood": "Uptown",
+        "profile": "Janelle Rourke — ASSISTANT DISTRICT ATTORNEY (Community Safety)",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "FMHtKZEuaGKmy6wgvbJ5Xc",
+          "customId": "cp-POP-00145-c111-PRESS",
+          "cycle": 111,
+          "excerpt": "I bought a new A's jersey and, honestly, it's been really exciting to put it on.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I bought a new A's jersey and, honestly, it's been really exciting to put it on."
+      },
+      {
+        "pop": "POP-00174",
+        "name": "Tariq Jello",
+        "role": "Appliance Repair Technician",
+        "hood": "Laurel",
+        "profile": "Tariq Jello — Appliance Repair Technician",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "wiqSuFFt24WesXBeG2vACS",
+          "customId": "cp-POP-00174-c106-midday",
+          "cycle": 106,
+          "excerpt": "I see his face on those A's billboards downtown and I still nod like we're good.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I see his face on those A's billboards downtown and I still nod like we're good."
+      },
+      {
+        "pop": "POP-00181",
+        "name": "Xavier Ramington",
+        "role": "Herbalist",
+        "hood": "Temescal",
+        "profile": "Xavier Ramington — Herbalist",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "aP5YeMEryXvzMre4oJ44Jv",
+          "customId": "cp-POP-00181-c101-night",
+          "cycle": 101,
+          "excerpt": "The A's news should excite me, but all I keep turning over is whether Vinnie really was downtown—if he's back, if he's okay.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "The A's news should excite me, but all I keep turning over is whether Vinnie really was downtown—if he's back, if he's okay."
+      },
+      {
+        "pop": "POP-00185",
+        "name": "Lila Patty",
+        "role": "Solar Panel Installation Lead",
+        "hood": "West Oakland",
+        "profile": "Lila Patty — Solar Panel Installation Lead",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "scqTCnQLg2npHCFytTwL2J",
+          "customId": "cp-POP-00185-c112-PRESS",
+          "cycle": 112,
+          "excerpt": "I bought a new A's jersey and took a walk near a new construction site to clear my head after a long week.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I bought a new A's jersey and took a walk near a new construction site to clear my head after a long week."
+      },
+      {
+        "pop": "POP-00190",
+        "name": "Jackson Sift",
+        "role": "Ex-Offender Reentry Counselor",
+        "hood": "West Oakland",
+        "profile": "Jackson Sift — Ex-Offender Reentry Counselor",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "ajbg29ybL8z4b7gciL9T1K",
+          "customId": "cp-POP-00190-c109-PRESS",
+          "cycle": 109,
+          "excerpt": "I've been feeling the energy in the city, especially with the A's doing well.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I've been feeling the energy in the city, especially with the A's doing well."
+      },
+      {
+        "pop": "POP-00192",
+        "name": "Bea Cartier",
+        "role": "Roofing Contractor",
+        "hood": "Laurel",
+        "profile": "Bea Cartier — Roofing Contractor",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "yG1Q5da9amEzFgZj45MsaR",
+          "customId": "cp-POP-00192-c102-morning",
+          "cycle": 102,
+          "excerpt": "Maybe it's seeing those A's players around town, all that energy and purpose, that makes me wonder if I settled too soon.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "Maybe it's seeing those A's players around town, all that energy and purpose, that makes me wonder if I settled too soon."
+      },
+      {
+        "pop": "POP-00196",
+        "name": "Inga Creator",
+        "role": "Boutique Owner",
+        "hood": "Uptown",
+        "profile": "Inga Creator — Boutique Owner",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "pEcgqPCmN99gx3otHor9d9",
+          "customId": "cp-POP-00196-c111-PRESS",
+          "cycle": 111,
+          "excerpt": "I celebrated by buying a new A's jersey - it's my way of showing team spirit.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I celebrated by buying a new A's jersey - it's my way of showing team spirit."
+      },
+      {
+        "pop": "POP-00231",
+        "name": "Calvin Turner",
+        "role": "Mechanic",
+        "hood": "Fruitvale",
+        "profile": "Calvin Turner — Mechanic",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "wQKk6AU7tLKP7gFxpuuQot",
+          "customId": "cp-POP-00231-c103-evening",
+          "cycle": 103,
+          "excerpt": "Maybe it's that stupid argument about the A's trades—she took it personal when I said Richards was better off in New York.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "Maybe it's that stupid argument about the A's trades—she took it personal when I said Richards was better off in New York."
+      },
+      {
+        "pop": "POP-00233",
+        "name": "Mason Walt",
+        "role": "Electrician",
+        "hood": "Rockridge",
+        "profile": "Mason Walt — Electrician",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "Xj4mNMUajCorMiQVuYLCTD",
+          "customId": "cp-POP-00233-c100-evening",
+          "cycle": 100,
+          "excerpt": "Sometimes I count how many A's caps walk past and wonder if any of them know Vinnie like I do.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "Sometimes I count how many A's caps walk past and wonder if any of them know Vinnie like I do."
+      },
+      {
+        "pop": "POP-00235",
+        "name": "Aaliyah Brennan",
+        "role": "Mobile Clinic Nurse",
+        "hood": "Lake Merritt",
+        "profile": "Aaliyah Brennan — Mobile Clinic Nurse",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "RUdR2ceiAZA9G21uYJYUEc",
+          "customId": "cp-POP-00235-c110-PRESS",
+          "cycle": 110,
+          "excerpt": "To be honest, I'm not sure what my performance means for my standing in the city - I've just been trying to keep up with my work at the mobile clinic and enjoy the little moments, like the A's winning streak.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "To be honest, I'm not sure what my performance means for my standing in the city - I've just been trying to keep up with my work at the mobile clinic and enjoy the little moments, like the A's winning streak."
+      },
+      {
+        "pop": "POP-00247",
+        "name": "Baxter Thompson",
+        "role": "Construction laborer",
+        "hood": "Rockridge",
+        "profile": "Baxter Thompson — Construction laborer",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "gKea4HdpZv4WUfF7uvUJWZ",
+          "customId": "cp-POP-00247-c102-evening",
+          "cycle": 102,
+          "excerpt": "That A's team firing on all cylinders reminds me of being 30 and feeling unstoppable—now I gotta find that fire in different ways.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "That A's team firing on all cylinders reminds me of being 30 and feeling unstoppable—now I gotta find that fire in different ways."
+      },
+      {
+        "pop": "POP-00272",
+        "name": "Joseph Cramp",
+        "role": "Janitor",
+        "hood": "Downtown",
+        "profile": "Joseph Cramp — Janitor",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "v3hKf6zGX6CMmTGJ1vPyD7",
+          "customId": "cp-POP-00272-c111-midday",
+          "cycle": 111,
+          "excerpt": "I got a soft spot for the A's, always have, but the real win for me is that this town finally feels like it’s got a pulse again after all those years of near-misses.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I got a soft spot for the A's, always have, but the real win for me is that this town finally feels like it’s got a pulse again after all those years of near-misses."
+      },
+      {
+        "pop": "POP-00273",
+        "name": "Trenton Nawan",
+        "role": "Server",
+        "hood": "Jack London",
+        "profile": "Trenton Nawan — Server",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "Tz12aZoyTPT4H31as9vi8v",
+          "customId": "cp-POP-00273-c106-PRESS",
+          "cycle": 106,
+          "excerpt": "Honestly, I don't follow the A's trades too closely—too busy keeping up with my own hustle—but when you hear folks at the diner talking about Cy Newel's ERA and Busch's batting average, even I can tell they're building something different t",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "Honestly, I don't follow the A's trades too closely—too busy keeping up with my own hustle—but when you hear folks at the diner talking about Cy Newel's ERA and Busch's batting average, even I can tell they're building something different t"
+      },
+      {
+        "pop": "POP-00495",
+        "name": "Rosalind Young",
+        "role": "Smoke Shop Owner",
+        "hood": "Laurel",
+        "profile": "Rosalind Young — Smoke Shop Owner",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "LBmmX2jC9YWEk1eGfyFFKP",
+          "customId": "cp-POP-00495-c107-PRESS",
+          "cycle": 107,
+          "excerpt": "I've seen the A's do well lately, and it feels like the whole neighborhood is buzzing about it.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I've seen the A's do well lately, and it feels like the whole neighborhood is buzzing about it."
+      },
+      {
+        "pop": "POP-00539",
+        "name": "Lena Cross",
+        "role": "Actor",
+        "hood": "Piedmont Ave",
+        "profile": "Lena Cross — Actor",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "MJUGEcP6ezUAsRxaKn3CxW",
+          "customId": "cp-POP-00539-c112-PRESS",
+          "cycle": 112,
+          "excerpt": "I still run into familiar faces, like Darrin Davis, and we chat about the A's.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I still run into familiar faces, like Darrin Davis, and we chat about the A's."
+      },
+      {
+        "pop": "POP-00632",
+        "name": "Rico Valez",
+        "role": "Musician",
+        "hood": "Fruitvale",
+        "profile": "Rico Valez — Musician",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "QWzx4f3xaaWrF5qbP8mR5T",
+          "customId": "cp-POP-00632-c102-PRESS",
+          "cycle": 102,
+          "excerpt": "Look, I'm just a guy who plays guitar at La Estrella on weekends and watches the A's when Allen Lopez is pitching.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "Look, I'm just a guy who plays guitar at La Estrella on weekends and watches the A's when Allen Lopez is pitching."
+      },
+      {
+        "pop": "POP-00642",
+        "name": "Ollie Campbell",
+        "role": "Bakery Worker",
+        "hood": "Jack London",
+        "profile": "Ollie Campbell — Bakery Worker",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "3WppGYjrRteh5xZoEcho9R",
+          "customId": "cp-POP-00642-c106-PRESS",
+          "cycle": 106,
+          "excerpt": "Honestly, I don't follow baseball too closely, but folks at the bakery were saying the A's traded some good players this season.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "Honestly, I don't follow baseball too closely, but folks at the bakery were saying the A's traded some good players this season."
+      },
+      {
+        "pop": "POP-00643",
+        "name": "Guadalupe Lupe",
+        "role": "Bartender",
+        "hood": "Jack London",
+        "profile": "Guadalupe Lupe — Bartender",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "4Bwk7Qcyz5Lue5nZieVKEV",
+          "customId": "cp-POP-00643-c106-PRESS",
+          "cycle": 106,
+          "excerpt": "Honestly, I don't follow the A's too closely, but from what I hear at the bar, people seem pretty bummed about losing some of their favorite players this season.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "Honestly, I don't follow the A's too closely, but from what I hear at the bar, people seem pretty bummed about losing some of their favorite players this season."
+      },
+      {
+        "pop": "POP-00644",
+        "name": "Rafael Pilgrim",
+        "role": "Server",
+        "hood": "Fruitvale",
+        "profile": "Rafael Pilgrim — Server",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "7tktJtoajh2xuSmRoXZQjP",
+          "customId": "cp-POP-00644-c107-PRESS",
+          "cycle": 107,
+          "excerpt": "Makes me think the A's might actually have a shot if they keep pitching like that when it counts.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "Makes me think the A's might actually have a shot if they keep pitching like that when it counts."
+      },
+      {
+        "pop": "POP-00649",
+        "name": "Jire Hilt",
+        "role": "Line Cook",
+        "hood": "Jack London",
+        "profile": "Jire Hilt — Line Cook",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "x6djA1dD5CosF7DmDC85AU",
+          "customId": "cp-POP-00649-c112-PRESS",
+          "cycle": 112,
+          "excerpt": "I bought a new A's jersey and I have to say, it's got me pretty excited.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I bought a new A's jersey and I have to say, it's got me pretty excited."
+      },
+      {
+        "pop": "POP-00663",
+        "name": "Soo Loo",
+        "role": "Corporate Accountant",
+        "hood": "Downtown",
+        "profile": "Soo Loo — Corporate Accountant",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "jF1rXiEudWaBXWChpbzKLh",
+          "customId": "cp-POP-00663-c108-PRESS",
+          "cycle": 108,
+          "excerpt": "I've been noticing how the city's energy shifts when the A's are doing well.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I've been noticing how the city's energy shifts when the A's are doing well."
+      },
+      {
+        "pop": "POP-00691",
+        "name": "Tom Jilner",
+        "role": "Wine Bar Owner",
+        "hood": "Rockridge",
+        "profile": "Tom Jilner — Wine Bar Owner",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "6A8zq7d3sNoEthsEFG6hqi",
+          "customId": "cp-POP-00691-c110-CONVO",
+          "cycle": 110,
+          "excerpt": "*Tugs at my suit sleeve absentmindedly* \"Kid's tougher than I was at his age—tells the A's stats like scripture since they won the Series.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "*Tugs at my suit sleeve absentmindedly* \"Kid's tougher than I was at his age—tells the A's stats like scripture since they won the Series."
+      },
+      {
+        "pop": "POP-00770",
+        "name": "Kato Rivers",
+        "role": "Fitness Trainer",
+        "hood": "Laurel",
+        "profile": "Kato Rivers — Fitness Trainer",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "6ovGYPVimo9YaRptX3MkQ9",
+          "customId": "cp-POP-00770-c110-PRESS",
+          "cycle": 110,
+          "excerpt": "I've been too busy with my daily routine and watching the A's games to think about anything like that.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I've been too busy with my daily routine and watching the A's games to think about anything like that."
+      },
+      {
+        "pop": "POP-00789",
+        "name": "Elias Varek",
+        "role": "Founder of Civis Systems",
+        "hood": "West Oakland",
+        "profile": "Elias Varek — Founder of Civis Systems",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "4cWDkTDYMmfYrx5cHgvkzk",
+          "customId": "cp-POP-00789-c101-CONVO",
+          "cycle": 101,
+          "excerpt": "Between the port expansion and the A's new stadium plans, seems like we're the afterthought again.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "Between the port expansion and the A's new stadium plans, seems like we're the afterthought again."
+      },
+      {
+        "pop": "POP-00790",
+        "name": "Marcus Webb",
+        "role": "OEWD Program Director",
+        "hood": "Downtown",
+        "profile": "Marcus Webb — OEWD Program Director",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "aE2GrhuHFLEmNNBoWEFTDF",
+          "customId": "cp-POP-00790-c101-morning",
+          "cycle": 101,
+          "excerpt": "I love the A's, but how many affordable housing units could that build in West Oakland?",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I love the A's, but how many affordable housing units could that build in West Oakland?"
+      },
+      {
+        "pop": "POP-00801",
+        "name": "Maurice Franklin",
+        "role": "Drone Fleet Coordinator",
+        "hood": "Rockridge",
+        "profile": "Maurice Franklin — Drone Fleet Coordinator",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "jG6kqTGzeCkmyoZPgxkxmq",
+          "customId": "cp-POP-00801-c111-midday",
+          "cycle": 111,
+          "excerpt": "I remember writing that letter to the Tribune about believing in Oakland again, and now the kids in Rockridge are wearing A's caps to school like it's the most natural thing in the world.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I remember writing that letter to the Tribune about believing in Oakland again, and now the kids in Rockridge are wearing A's caps to school like it's the most natural thing in the world."
+      },
+      {
+        "pop": "POP-00842",
+        "name": "Wanjiru Liu",
+        "role": "Electrician",
+        "hood": "Rockridge",
+        "profile": "Wanjiru Liu — Electrician",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "tYDNcge1pv4zdG2AEe9cTx",
+          "customId": "cp-POP-00842-c108-PRESS",
+          "cycle": 108,
+          "excerpt": "I've been keeping up with the A's, they're doing great this season, and that's been exciting for the city.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I've been keeping up with the A's, they're doing great this season, and that's been exciting for the city."
+      },
+      {
+        "pop": "POP-01001",
+        "name": "Mateo Jilner",
+        "role": "student",
+        "hood": "Rockridge",
+        "profile": "Mateo Jilner — student",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "p6Wgrmpfy7Tw1N22Q28Yhj",
+          "customId": "cp-POP-01001-c102-CONVO",
+          "cycle": 102,
+          "excerpt": "Actually just taped up the A's schedule in our closet—can you believe they're 107-31?",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "Actually just taped up the A's schedule in our closet—can you believe they're 107-31?"
+      },
+      {
+        "pop": "POP-01011",
+        "name": "Layla Scott",
+        "role": "student",
+        "hood": "Lake Merritt",
+        "profile": "Layla Scott — student",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "pmgzyjAu1DbyMaowaS3san",
+          "customId": "cp-POP-01011-c105-CONVO",
+          "cycle": 105,
+          "excerpt": "(Lowering voice) I swear the ones by the lake have gotten bolder since the A's started winning.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "(Lowering voice) I swear the ones by the lake have gotten bolder since the A's started winning."
+      },
+      {
+        "pop": "POP-01012",
+        "name": "Mateo Wally",
+        "role": "student",
+        "hood": "Rockridge",
+        "profile": "Mateo Wally — student",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "fM4K3hvmT9PEkGTjQ9uxyW",
+          "customId": "cp-POP-01012-c102-CONVO",
+          "cycle": 102,
+          "excerpt": "\" I grin and shift my backpack, the A's cap almost falling out.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "\" I grin and shift my backpack, the A's cap almost falling out."
+      },
+      {
+        "pop": "POP-01045",
+        "name": "Vanessa Ramas",
+        "role": "Barista",
+        "hood": "Lake Merritt",
+        "profile": "Vanessa Ramas — Barista",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "RpFbimVFAm1f8ocXmzMwaY",
+          "customId": "cp-POP-01045-c103-PRESS",
+          "cycle": 103,
+          "excerpt": "I don't follow baseball too closely, but even I know the A's are having an amazing season.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I don't follow baseball too closely, but even I know the A's are having an amazing season."
+      },
+      {
+        "pop": "POP-01053",
+        "name": "Rosario Medina",
+        "role": "CBA Compliance Monitor, Fruitvale Transit Hub",
+        "hood": "Fruitvale",
+        "profile": "Rosario Medina — CBA Compliance Monitor, Fruitvale Transit Hub",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "EkdKp1vxipX3RDL9HHxGrH",
+          "customId": "cp-POP-01053-c111-PRESS",
+          "cycle": 111,
+          "excerpt": "I've been too busy enjoying the A's championship win and spending time with my family to think about anything else.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I've been too busy enjoying the A's championship win and spending time with my family to think about anything else."
+      },
+      {
+        "pop": "POP-01089",
+        "name": "Jacob Perez",
+        "role": "Delivery driver",
+        "hood": "Glenview",
+        "profile": "Jacob Perez — Delivery driver",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "d4aEDMMw4uhyzz4KmTC1me",
+          "customId": "cp-POP-01089-c107-PRESS",
+          "cycle": 107,
+          "excerpt": "Honestly, I don't follow sports much, but I did hear some guys at the gas station talking about the A's record.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "Honestly, I don't follow sports much, but I did hear some guys at the gas station talking about the A's record."
+      },
+      {
+        "pop": "POP-01107",
+        "name": "Daniel Yoon",
+        "role": "Co-Founder, Gridiron Analytics",
+        "hood": "West Oakland",
+        "profile": "Daniel Yoon — Co-Founder, Gridiron Analytics",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "E2pwAR3FuoZAAD2UngbPiU",
+          "customId": "cp-POP-01107-c111-PRESS",
+          "cycle": 111,
+          "excerpt": "I just picked up a new A's jersey.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I just picked up a new A's jersey."
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "P Slayer",
+    "popid": "POP-00008"
+  },
+  "assignment": {
+    "story": {
+      "ref": "Oakland_Sports_Feed cycle 113; world_summary_c113.md \"## Sports\" · The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+      "label": "The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+      "kind": "injury-load",
+      "angle": "The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+      "hookLine": "Grief without inventing medical private life — we demanded too much.",
+      "hood": "Downtown",
+      "team": "A's",
+      "eventKind": "rumor",
+      "popids": [
+        "POP-00051",
+        "POP-00079",
+        "POP-00022",
+        "POP-00598",
+        "POP-00021"
+      ],
+      "citizens": [
+        "Desmond Morton (POP-00051)",
+        "Frank Reyna (POP-00079)",
+        "Danny Horn (POP-00022)",
+        "Vladimir Gonzalez (POP-00598)",
+        "Darrin Davis (POP-00021)",
+        "Peter Busch"
+      ],
+      "pulseClass": "injury-load",
+      "pulseScore": 57,
+      "fanCharge": "grief",
+      "bagModeIds": [
+        3,
+        6,
+        7
+      ]
+    },
+    "approach": "Fan-heat approach (P Slayer pulse): do NOT open from the FO press release or the award board. Open from gut or Oakland sensory (bar, lot, bleacher row, BART after). First-person I/we only. Pick 1–2 charge-bag modes from this slice. Friction pivot required — name the counter-argument, kill it. ONE real foil number max (from FoilNumber / AnchorFacts); never invent x-stats or roster moves. Hook PriorTake when present — eat it or double down (\"I was wrong\" is craft). End on charge that sticks: dare, confession, or update. Not Anthony. Not Hal. Not multi-voice sports-desk average."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": {
+    "pulse": {
+      "className": "injury-load",
+      "classes": [
+        "injury-load",
+        "award-board"
+      ],
+      "score": 57,
+      "label": "The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+      "team": "A's",
+      "eventKind": "rumor",
+      "seasonType": "off-season",
+      "feedCycle": 113,
+      "record": "-",
+      "streak": "-",
+      "mood": "reflective",
+      "fanSentiment": "euphoric",
+      "neighborhood": "Downtown",
+      "notes": "Danny Horn is your starting CF. A returing MVP and the best player in baseball makes it an easy decision. Darrin Davis figures to be your DH as he remains under contract and showed his numbers did not decline, albiet he was injured. Davis has missed substantial time twice over the past three seasons. Vladimir is entering his peak and put up his best numbers of his career last season. Rates as a clutch perfomer and is essentially who you chose over Peter Busch last offseason. If those spots are set then you have three players for one left field opening. Desmond Morton is you highest rated prospect with 5 tools and has shown success at the MLB level, Frank Reyna is a power hitter with a mass of potential that also showed success. JR Rosado performed well in his major league experience and had good contact numbers but may trend as a role player in the grand scheme. What is the choice Paulson should make here.",
+      "stats": "Desmond Morton/285AB/.291AVG/7HR/44RBI, Frank Reyna/164/.317AVG/14HR/34RBI,JR Rosado/184AB/.298AVG/7HR/27RBI"
+    },
+    "charge": {
+      "bagModes": [
+        {
+          "id": 3,
+          "name": "Friction Pivot"
+        },
+        {
+          "id": 6,
+          "name": "Superman We Asked Him to Be"
+        },
+        {
+          "id": 7,
+          "name": "We Still Believe / We're Done"
+        }
+      ],
+      "fanCharge": "grief",
+      "foilNumber": ".291AVG",
+      "centralFeeling": "Oakland should feel the cost of what we asked a man to carry.",
+      "palette": [
+        "fury",
+        "euphoria",
+        "dread",
+        "defiance",
+        "confession",
+        "grief",
+        "dare"
+      ]
+    },
+    "prewrite": {
+      "reporter": "P.Slayer",
+      "bagModes": [
+        {
+          "id": 3,
+          "name": "Friction Pivot"
+        },
+        {
+          "id": 6,
+          "name": "Superman We Asked Him to Be"
+        },
+        {
+          "id": 7,
+          "name": "We Still Believe / We're Done"
+        }
+      ],
+      "fanCharge": "grief",
+      "priorTake": "NONE — write cold or invent no prior; wall may still inject at wake",
+      "anchorFacts": [
+        "StoryAngle (feed): The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+        "Stats (feed): Desmond Morton/285AB/.291AVG/7HR/44RBI, Frank Reyna/164/.317AVG/14HR/34RBI,JR Rosado/184AB/.298AVG/7HR/27RBI",
+        "Event: A's — rumor (off-season)",
+        "NamesUsed: Desmond Morton (LF), Frank Reyna (RF), Danny Horn (CF), Vladimir Gonzalez (RF), JR Rosado (LF)"
+      ],
+      "foilNumber": ".291AVG",
+      "centralFeeling": "Oakland should feel the cost of what we asked a man to carry.",
+      "hooks": [
+        {
+          "text": "A's on a W3. Fan energy rising. Momentum story.",
+          "angle": "conflict/tension coverage",
+          "hood": null
+        },
+        {
+          "text": "Oaks on a W4. Fan energy rising in Jack London. Momentum story.",
+          "angle": "conflict/tension coverage",
+          "hood": "Jack London"
+        }
+      ]
+    },
+    "friction": {
+      "a": "Human cost / load on the feed",
+      "b": "We still ask him to be Superman",
+      "frame": "Grief without inventing medical private life — we demanded too much."
+    },
+    "priorTakes": [],
+    "players": [
+      {
+        "name": "Desmond Morton",
+        "popid": "POP-00051",
+        "role": "Left Fielder, Oakland A's",
+        "neighborhood": "Chinatown",
+        "why": "feed-names"
+      },
+      {
+        "name": "Frank Reyna",
+        "popid": "POP-00079",
+        "role": "Right Fielder, Oakland A's",
+        "neighborhood": "Lake Merritt",
+        "why": "feed-names"
+      },
+      {
+        "name": "Danny Horn",
+        "popid": "POP-00022",
+        "role": "Center Fielder, Oakland A's - Best player in the MLB",
+        "neighborhood": "Temescal",
+        "why": "feed-names"
+      },
+      {
+        "name": "Vladimir Gonzalez",
+        "popid": "POP-00598",
+        "role": "Right Fielder, Oakland A's",
+        "neighborhood": "Fruitvale",
+        "why": "feed-names"
+      },
+      {
+        "name": "Darrin Davis",
+        "popid": "POP-00021",
+        "role": "Left Fielder, Oakland A's Legend",
+        "neighborhood": "Piedmont Ave",
+        "why": "feed-names"
+      },
+      {
+        "name": "Peter Busch",
+        "popid": null,
+        "role": null,
+        "neighborhood": null,
+        "why": "feed-names"
+      }
+    ],
+    "scene": {
+      "neighborhood": "Downtown",
+      "record": "-",
+      "streak": "-",
+      "mood": "reflective",
+      "fanSentiment": "euphoric",
+      "colorRoom": "You may invent unnamed bar / lot / BART / bleacher texture that contradicts nothing on this slice. Do not invent star players, contracts, stats, or quotes. Named people stay on PLAYERS list or Tribune colleagues (Anthony, Hal, Mags) as foils."
+    },
+    "candidates": [
+      {
+        "score": 57,
+        "cycle": 113,
+        "team": "A's",
+        "primary": "injury-load",
+        "angle": "The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+        "priorHits": 0
+      },
+      {
+        "score": 44,
+        "cycle": 113,
+        "team": "Oaks",
+        "primary": "win-streak",
+        "angle": "The Oaks remain sizzling hot after a winless preseason have now shot out of the gate winning 3 straight. Oaks 115 - Knicks 93 in New York",
+        "priorHits": 0
+      },
+      {
+        "score": 44,
+        "cycle": 113,
+        "team": "Oaks",
+        "primary": "win-streak",
+        "angle": "The Oaks completly dismantle the Wizards in Washington. Oaks 105 - Wizards 62",
+        "priorHits": 0
+      },
+      {
+        "score": 40,
+        "cycle": 113,
+        "team": "Oaks",
+        "primary": "win-streak",
+        "angle": "The Oaks win again behind a big game behind Adash Stanley. The Oaks 91 - Pistons 78 on the road in Detroit.",
+        "priorHits": 0
+      },
+      {
+        "score": 35,
+        "cycle": 112,
+        "team": "A's",
+        "primary": "award-board",
+        "angle": "The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+        "priorHits": 0
+      },
+      {
+        "score": 35,
+        "cycle": 112,
+        "team": "Oaks",
+        "primary": "prospect-callup",
+        "angle": "The Oaks open their inaugural season at home. AJ Dybantsa shines in his rookie debut as the Oaks win their first win as a franchise.",
+        "priorHits": 0
+      }
+    ]
+  },
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "P Slayer",
+    "popid": "POP-00008",
+    "text": "I'm going to dig into the A's outfield squeeze for next season, focusing on the five outfielders vying for three positions. I want to understand Mike Paulson's decision-making process and how he'll manage the talent surplus.",
+    "plan": {
+      "chase": "I'm going to dig into the A's outfield squeeze for next season, focusing on the five outfielders vying for three positions. I want to understand Mike Paulson's decision-making process and how he'll manage the talent surplus.",
+      "focus": "The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+      "why": "The A's have a tough decision ahead with Desmond Morton, Frank Reyna, JR Rosado, Vladimir Gonzalez, and Danny Horn all factoring into the outfield mix. I need to get to the bottom of who'll get the nod and why.",
+      "checks": [
+        "Friction Pivot: Is the A's management asking too much from their outfielders?",
+        "Superman We Asked Him to Be: Can Paulson really make this work with the talent they have?"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00022",
+          "question": "How will Danny Horn's status as the best player in baseball influence the outfield decisions?",
+          "basis": "Danny Horn is already set as the starting CF"
+        },
+        {
+          "pop": "POP-00051",
+          "question": "Will Desmond Morton's 5-tool potential make him a lock for one of the outfield spots?",
+          "basis": "Desmond Morton is the highest-rated prospect"
+        },
+        {
+          "pop": "POP-00598",
+          "question": "How will Vladimir Gonzalez's clutch performance impact his chances in the outfield?",
+          "basis": "Vladimir Gonzalez is a clutch performer"
+        }
+      ],
+      "interpretation": "The A's are facing a difficult decision with their outfield talent surplus. Paulson needs to make a tough call that balances current performance with future potential.",
+      "unverifiedLead": [
+        "The decision may come down to a trade-off between experience and potential",
+        "Paulson's past decisions may influence the current outfield shuffle"
+      ],
+      "closeQuestion": "Who will Paulson choose to start in left field?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Oaks | game-result | (early-season) | Adash Stanley, Austin Reaves, AJ Dybantsa, Wilson Shepard",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01023",
+        "POP-01027",
+        "POP-01024",
+        "POP-01022"
+      ]
+    },
+    {
+      "label": "Oaks | game-result | (early-season) | Adash Stanley, AJ Dybantsa, Austin Reaves",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01023",
+        "POP-01024",
+        "POP-01027"
+      ]
+    },
+    {
+      "label": "Oaks | game-result | (early-season) | Adash Stanley, AJ Dybantsa, Austin Reaves",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01023",
+        "POP-01024",
+        "POP-01027"
+      ]
+    },
+    {
+      "label": "A's | rumor | (off-season) | Desmond Morton, Frank Reyna, Danny Horn, Vladimir Gonzalez, JR Rosado",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00051",
+        "POP-00079",
+        "POP-00022",
+        "POP-00598",
+        "POP-00054"
+      ]
+    },
+    {
+      "label": "A's | community-outreach | (off-season) | Darrin Davis, Rafael Montez",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00021",
+        "POP-00136"
+      ]
+    }
+  ],
+  "laneEntries": 9,
+  "angleCapHits": 0,
+  "ranAt": "2026-10-28T11:17:04.892Z"
+}

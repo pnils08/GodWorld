@@ -1,0 +1,449 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00164",
+    "name": "Celeste Tran",
+    "role": "desk reporter",
+    "desk": "wire"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Marisol Rivera gained 1 mention this cycle (7 total); West Oakland moves the most — what Oakland is doing together this week",
+    "approach": "Social-trends approach: this slice is what the city is doing together — the names climbing the culture record, where people are moving, what the city's hooks say is shifting. Fast, reactive, grounded: a trend claim needs a window and a number from this slice. The names and moves are real; the group chat, the binge-night, the collective mood swing are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "trends",
+      "hood": "Rockridge",
+      "facts": [
+        "Marisol Rivera (Community Advocate), Civic — gained 1 mention this cycle (7 total), cooling, fame 39",
+        "Claire Ashford (author), Literature — gained 1 mention this cycle (3 total), stable, fame 16",
+        "Deacon Seymour (A's player), Sports — gained 1 mention this cycle (2 total), stable, fame 2",
+        "Movement vs C112: West Oakland +20 people, Fruitvale +9 people, Jack London +8 people, Chinatown +8 people, East Oakland +8 people"
+      ],
+      "priorCycle": "PRIOR_CYCLE_ON_DISK",
+      "note": null,
+      "engineHooks": [
+        "Household in Lake Merritt spending 53% of income on housing (observational analysis)",
+        "Downtown boom sustained — momentum 10/10, the block everyone wants onto (observational analysis)",
+        "Laurel cooling off: foot traffic down, storefronts quieter than the rest of the city (observational analysis)",
+        "Fruitvale boom sustained — momentum 10/10, the block everyone wants onto (observational analysis)"
+      ],
+      "roomIsYours": "the group chat, the third rewatch, who suddenly has an opinion about something nobody mentioned last month, what the city collectively decided to care about",
+      "pageVoices": [
+        "the A's — steady; most of the city over the last two months, still talking this week. Loudest: Vinnie Keane (Grand Lake), on their own page at C112 (not an interview — colour only, never a quote): “I'm still getting used to not being as active with the A's, but it's nice to see people coming together like that.”",
+        "the clinic — steady; dozens of citizens over the last two months, still talking this week. Loudest: Yu Zen (Rockridge), on their own page at C113 (not an interview — colour only, never a quote): “I've been on the other side of that ledger — lying in a hospital bed myself after my accident.”",
+        "transit — rising; dozens of citizens over the last two months, still talking this week. Loudest: Evan Lewis (Laurel), on their own page at C113 (not an interview — colour only, never a quote): “The construction around the Baylight District doesn't help either; when streets get torn up, people just find another way, eve",
+        "faith — rising; a dozen or so citizens over the last two months, still talking this week. Loudest: Eunice Marston (Downtown), on their own page at C112 (not an interview — colour only, never a quote): “As a faith leader, I believe our congregation's role in the community during times of crisis is to offer support and b",
+        "the Oaks — rising; dozens of citizens over the last two months, still talking this week. Loudest: Trenton Nawan (Jack London), on their own page at C113 (not an interview — colour only, never a quote): “I'm still a bit worried about the Oaks, but their 4-0 start is really giving me hope.”"
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-trends",
+    "hood": "Rockridge",
+    "src": "output/beats/Cultural_Ledger.jsonl @C113",
+    "plan": {
+      "focus": "West Oakland's population surge",
+      "closeQuestion": "What are the long-term implications of West Oakland's population surge for the community?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-01071",
+        "name": "Claire Ashford",
+        "profile": "Claire Ashford — author — Piedmont Ave",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00528",
+        "name": "Deacon Seymour",
+        "profile": "Deacon Seymour — Manager, Oakland A's — Lake Merritt",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00194",
+        "name": "Yu Zen",
+        "profile": "Yu Zen — Commercial Insurance Broker — Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00194-371e17f380",
+        "pop": "POP-00194",
+        "name": "Yu Zen",
+        "quote": "To be honest, I don't know much about the changing demographics in West Oakland. I've been focused on my own neighborhood, Rockridge, and my family. I've been dealing with my own recovery and getting back to my routine after my accident. I haven't had a chance to pay much attention to what's going on in West Oakland. I can tell you that I've noticed the commotion at the train station when the delayed train leaves, and I've seen the regulars debating the A's game at the diner, but that's about it.",
+        "factIds": [
+          "F-0cea0a3d84d3",
+          "F-ab9d6786094e"
+        ],
+        "src": "packet.W2[POP-00194]"
+      },
+      {
+        "id": "Q-POP-01071-985a41e7e5",
+        "pop": "POP-01071",
+        "name": "Claire Ashford",
+        "quote": "To be honest, I haven't really noticed much of a change around here on Piedmont Ave, but I've heard that West Oakland is getting more crowded. I mean, I checked the Civis Systems Field livestream the other day and it looked like they were making some progress, but that's about it. I don't really know what's going on over there.",
+        "factIds": [
+          "F-26aca55438c0",
+          "F-ab9d6786094e",
+          "F-27fdbddf8160"
+        ],
+        "src": "packet.W2[POP-01071]"
+      },
+      {
+        "id": "Q-POP-00528-5278125dd8",
+        "pop": "POP-00528",
+        "name": "Deacon Seymour",
+        "quote": "I've seen a lot of new faces around West Oakland lately. As a manager for the A's and living near Lake Merritt, I notice the changes in the neighborhood. It's not just the numbers that are moving in; it's the vibe. People are excited, and there's a buzz. I've had to wait longer for tables at brunch spots because out-of-town friends want to try them out. It's a different feel, but I'm not sure if it's entirely comfortable yet.",
+        "factIds": [
+          "F-27fdbddf8160",
+          "F-3375023542ff",
+          "F-ab9d6786094e"
+        ],
+        "src": "packet.W2[POP-00528]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Celeste Tran",
+        "text": "The new residents may be drawn to West Oakland's cultural attractions or amenities",
+        "usable": false
+      },
+      {
+        "from": "Celeste Tran",
+        "text": "The influx of new residents could lead to changes in the local housing market or business landscape",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C113",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-876f95b5eb98"
+    },
+    {
+      "t": "FACT",
+      "text": "Marisol Rivera gained 1 mention this cycle (7 total); West Oakland moves the most",
+      "src": "output/beats/Cultural_Ledger.jsonl @C113",
+      "id": "F-0dd875a18091"
+    },
+    {
+      "t": "FACT",
+      "text": "Marisol Rivera — gained 1 mention this cycle (7 total), cooling. The trend is the story; the mood is yours.",
+      "src": "output/beats/Cultural_Ledger.jsonl @C113",
+      "id": "F-be6998b65ca2"
+    },
+    {
+      "t": "FACT",
+      "text": "Marisol Rivera (Community Advocate), Civic — gained 1 mention this cycle (7 total), cooling, fame 39",
+      "src": "output/beats/Cultural_Ledger.jsonl @C113 vs output/beats/prev/Cultural_Ledger.jsonl @C112",
+      "id": "F-6c76f836f87f"
+    },
+    {
+      "t": "FACT",
+      "text": "Claire Ashford (author), Literature — gained 1 mention this cycle (3 total), stable, fame 16",
+      "src": "output/beats/Cultural_Ledger.jsonl @C113 vs output/beats/prev/Cultural_Ledger.jsonl @C112",
+      "id": "F-ee9079becfd2"
+    },
+    {
+      "t": "FACT",
+      "text": "Deacon Seymour (A's player), Sports — gained 1 mention this cycle (2 total), stable, fame 2",
+      "src": "output/beats/Cultural_Ledger.jsonl @C113 vs output/beats/prev/Cultural_Ledger.jsonl @C112",
+      "id": "F-3008e4e2b3d8"
+    },
+    {
+      "t": "FACT",
+      "text": "Movement vs C112: West Oakland +20 people, Fruitvale +9 people, Jack London +8 people, Chinatown +8 people, East Oakland +8 people",
+      "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C113",
+      "id": "F-27fdbddf8160"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C9, Winter, holiday=none",
+      "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+      "id": "F-ab9d6786094e"
+    },
+    {
+      "t": "FACT",
+      "text": "Yu Zen — Commercial Insurance Broker — Rockridge",
+      "src": "Simulation_Ledger profile for POP-00194",
+      "id": "F-0cea0a3d84d3"
+    },
+    {
+      "t": "FACT",
+      "text": "Claire Ashford — author — Piedmont Ave",
+      "src": "Simulation_Ledger profile for POP-01071",
+      "id": "F-26aca55438c0"
+    },
+    {
+      "t": "FACT",
+      "text": "Deacon Seymour — Manager, Oakland A's — Lake Merritt",
+      "src": "Simulation_Ledger profile for POP-00528",
+      "id": "F-3375023542ff"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "celeste-social-trends-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Turn the culture record's most-talked-about names, new arrivals, and neighborhood movement into a fast, reactive trend read — the count is Celeste's, the mood underneath it is hers to name.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "fast, reactive, semi-chaotic but grounded trend analyst",
+      "targetWords": "400-700",
+      "opening": "a Packet-named figure's media-mention count, a new arrival on the culture record, or a neighborhood movement delta",
+      "closing": "the implication, not the proof — what the pattern says about the city's mood, stated once and left there"
+    },
+    "authorizedTexture": [
+      "a declarative thesis about what the counted pattern means for the city's collective mood, grounded in the supplied numbers",
+      "unnamed color about the conversation itself — the group chat, the rewatch, who suddenly has an opinion — that adds no new named fact",
+      "connecting a Packet-supplied mention spike or movement delta to other Packet-supplied civic conditions already in the packet",
+      "treating the aggregate as a single intentional act ('Oakland decided') without claiming a specific poll, survey, or interview"
+    ],
+    "textureConditions": [
+      "every named figure, trend tag, media-mention count, and neighborhood movement number must come from the packet",
+      "no named show, movie, or streaming title unless the packet itself supplies one — the evening-media slate is not wired to this slice; unnamed viewing/mood color is fine, a specific invented title is not",
+      "a flat week (no mentions, no movement) is written as a real flat week, not papered over with an invented spike",
+      "the thesis follows the data window, never precedes it"
+    ],
+    "canonBlockers": [
+      "a named figure, show, movie, streaming title, venue, or neighborhood event not found in the supplied packet",
+      "an invented survey, poll, interview, direct quote, or social-media reaction",
+      "raw engine scores, labels, or decimals printed as public-facing evidence",
+      "a citywide mood or trend claim with no supplied count or movement delta behind it",
+      "a generic culture-desk roundup that abandons the assigned data window"
+    ]
+  },
+  "manifest": {
+    "id": "AM-420323195b25",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-876f95b5eb98",
+        "t": "FACT",
+        "text": "Current cycle: C113",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-0dd875a18091",
+        "t": "FACT",
+        "text": "Marisol Rivera gained 1 mention this cycle (7 total); West Oakland moves the most",
+        "src": "output/beats/Cultural_Ledger.jsonl @C113"
+      },
+      {
+        "id": "F-be6998b65ca2",
+        "t": "FACT",
+        "text": "Marisol Rivera — gained 1 mention this cycle (7 total), cooling. The trend is the story; the mood is yours.",
+        "src": "output/beats/Cultural_Ledger.jsonl @C113"
+      },
+      {
+        "id": "F-6c76f836f87f",
+        "t": "FACT",
+        "text": "Marisol Rivera (Community Advocate), Civic — gained 1 mention this cycle (7 total), cooling, fame 39",
+        "src": "output/beats/Cultural_Ledger.jsonl @C113 vs output/beats/prev/Cultural_Ledger.jsonl @C112"
+      },
+      {
+        "id": "F-ee9079becfd2",
+        "t": "FACT",
+        "text": "Claire Ashford (author), Literature — gained 1 mention this cycle (3 total), stable, fame 16",
+        "src": "output/beats/Cultural_Ledger.jsonl @C113 vs output/beats/prev/Cultural_Ledger.jsonl @C112"
+      },
+      {
+        "id": "F-3008e4e2b3d8",
+        "t": "FACT",
+        "text": "Deacon Seymour (A's player), Sports — gained 1 mention this cycle (2 total), stable, fame 2",
+        "src": "output/beats/Cultural_Ledger.jsonl @C113 vs output/beats/prev/Cultural_Ledger.jsonl @C112"
+      },
+      {
+        "id": "F-27fdbddf8160",
+        "t": "FACT",
+        "text": "Movement vs C112: West Oakland +20 people, Fruitvale +9 people, Jack London +8 people, Chinatown +8 people, East Oakland +8 people",
+        "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C113"
+      },
+      {
+        "id": "F-ab9d6786094e",
+        "t": "FACT",
+        "text": "Calendar: Y3C9, Winter, holiday=none",
+        "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)"
+      },
+      {
+        "id": "F-0cea0a3d84d3",
+        "t": "FACT",
+        "text": "Yu Zen — Commercial Insurance Broker — Rockridge",
+        "src": "Simulation_Ledger profile for POP-00194"
+      },
+      {
+        "id": "F-26aca55438c0",
+        "t": "FACT",
+        "text": "Claire Ashford — author — Piedmont Ave",
+        "src": "Simulation_Ledger profile for POP-01071"
+      },
+      {
+        "id": "F-3375023542ff",
+        "t": "FACT",
+        "text": "Deacon Seymour — Manager, Oakland A's — Lake Merritt",
+        "src": "Simulation_Ledger profile for POP-00528"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00194-371e17f380",
+        "speakerId": "POP-00194",
+        "speakerName": "Yu Zen",
+        "text": "To be honest, I don't know much about the changing demographics in West Oakland. I've been focused on my own neighborhood, Rockridge, and my family. I've been dealing with my own recovery and getting back to my routine after my accident. I haven't had a chance to pay much attention to what's going on in West Oakland. I can tell you that I've noticed the commotion at the train station when the delayed train leaves, and I've seen the regulars debating the A's game at the diner, but that's about it.",
+        "factIds": [
+          "F-0cea0a3d84d3",
+          "F-ab9d6786094e"
+        ],
+        "src": "packet.W2[POP-00194]"
+      },
+      {
+        "id": "Q-POP-01071-985a41e7e5",
+        "speakerId": "POP-01071",
+        "speakerName": "Claire Ashford",
+        "text": "To be honest, I haven't really noticed much of a change around here on Piedmont Ave, but I've heard that West Oakland is getting more crowded. I mean, I checked the Civis Systems Field livestream the other day and it looked like they were making some progress, but that's about it. I don't really know what's going on over there.",
+        "factIds": [
+          "F-26aca55438c0",
+          "F-ab9d6786094e",
+          "F-27fdbddf8160"
+        ],
+        "src": "packet.W2[POP-01071]"
+      },
+      {
+        "id": "Q-POP-00528-5278125dd8",
+        "speakerId": "POP-00528",
+        "speakerName": "Deacon Seymour",
+        "text": "I've seen a lot of new faces around West Oakland lately. As a manager for the A's and living near Lake Merritt, I notice the changes in the neighborhood. It's not just the numbers that are moving in; it's the vibe. People are excited, and there's a buzz. I've had to wait longer for tables at brunch spots because out-of-town friends want to try them out. It's a different feel, but I'm not sure if it's entirely comfortable yet.",
+        "factIds": [
+          "F-27fdbddf8160",
+          "F-3375023542ff",
+          "F-ab9d6786094e"
+        ],
+        "src": "packet.W2[POP-00528]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-01071",
+        "name": "Claire Ashford",
+        "profile": "Claire Ashford — author — Piedmont Ave",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00528",
+        "name": "Deacon Seymour",
+        "profile": "Deacon Seymour — Manager, Oakland A's — Lake Merritt",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00194",
+        "name": "Yu Zen",
+        "profile": "Yu Zen — Commercial Insurance Broker — Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Celeste Tran",
+        "text": "The new residents may be drawn to West Oakland's cultural attractions or amenities",
+        "publishable": false
+      },
+      {
+        "from": "Celeste Tran",
+        "text": "The influx of new residents could lead to changes in the local housing market or business landscape",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "a declarative thesis about what the counted pattern means for the city's collective mood, grounded in the supplied numbers",
+      "unnamed color about the conversation itself — the group chat, the rewatch, who suddenly has an opinion — that adds no new named fact",
+      "connecting a Packet-supplied mention spike or movement delta to other Packet-supplied civic conditions already in the packet",
+      "treating the aggregate as a single intentional act ('Oakland decided') without claiming a specific poll, survey, or interview"
+    ],
+    "textureConditions": [
+      "every named figure, trend tag, media-mention count, and neighborhood movement number must come from the packet",
+      "no named show, movie, or streaming title unless the packet itself supplies one — the evening-media slate is not wired to this slice; unnamed viewing/mood color is fine, a specific invented title is not",
+      "a flat week (no mentions, no movement) is written as a real flat week, not papered over with an invented spike",
+      "the thesis follows the data window, never precedes it"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

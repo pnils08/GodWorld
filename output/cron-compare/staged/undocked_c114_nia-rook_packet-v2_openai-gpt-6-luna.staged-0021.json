@@ -1,0 +1,60 @@
+{
+  "status": "staged",
+  "desk": "undocked",
+  "cycle": "114",
+  "persona": "nia-rook",
+  "byline": "Nia Rook",
+  "bylinePopid": "POP-01076",
+  "article": "output/cron-compare/staged/undocked_c114_nia-rook_packet-v2_openai-gpt-6-luna.staged-0021.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Lena Okafor",
+        "role": "quoted-source",
+        "popid": "POP-00530"
+      },
+      {
+        "name": "Luis Taz",
+        "role": "mentioned",
+        "popid": "POP-00298",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "To be honest, I don't really see a connection between my performance in UNDOCKED and my role as a Daycare Director. I mean, they're just two different things I do. One is a hobby, really, and the other is my job. I enjoy flying on UNDOCKED, it's a way for me to unwind and challenge myself, but it doesn't directly relate to how I manage the daycare.",
+        "sourceRef": "citizenVoice PRESS Lena Okafor"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-5f3251f3c6d1",
+    "draftSha256": "01c8295dd43d693d1434ba991ac7b42bbce928e103d94e96e6c1e904b0f228d6",
+    "verdict": "output/cron-compare/undocked_c114_nia-rook_packet-v2_openai-gpt-6-luna.rhea.json",
+    "ranAt": "2026-11-07T00:21:31.709Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 350",
+      "words": 405,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "01c8295dd43d693d1434ba991ac7b42bbce928e103d94e96e6c1e904b0f228d6",
+      "costUsd": 0.0014
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-07T00:21:36.506Z"
+}

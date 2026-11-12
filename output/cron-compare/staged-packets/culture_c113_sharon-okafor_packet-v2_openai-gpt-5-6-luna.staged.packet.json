@@ -1,0 +1,334 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00159",
+    "name": "Sharon Okafor",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Lena Cross is fading — how the city follows its names",
+    "approach": "Lifestyle approach: this slice is the fame record — who the city knows, who is fading, who just arrived — with their domains, tiers and neighborhoods. Behavior patterns, warm analytical. The names and trajectories are real; the morning routine, the regular order, what the neighbors think are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "lifestyle",
+      "hood": "Piedmont Ave",
+      "facts": [
+        "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 92, cooling), 17 media mentions",
+        "Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 66, cooling), 14 media mentions",
+        "Marisol Rivera (Community Advocate), Civic, Rockridge, Regional-tier — fading — the where-are-they-now file (fame 39, cooling), 7 media mentions",
+        "Marin Tao (Celebrity), Arts, Chinatown, Iconic-tier — the city knows them (fame 153, viral), 25 media mentions",
+        "Rico Valez (Celebrity), Arts, Fruitvale, Iconic-tier — the city knows them (fame 116, viral), 19 media mentions"
+      ],
+      "priorCycle": null,
+      "note": null,
+      "engineHooks": [
+        "A family bought their home in Uptown (observational analysis)",
+        "A family bought their home in Rockridge (observational analysis)",
+        "The Aitken line is founded (observational analysis)",
+        "The Rushing line is founded (observational analysis)"
+      ],
+      "roomIsYours": "the coffee order, the dog's name, who recognizes them at the farmers market and who pretends not to",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-lifestyle",
+    "hood": "Piedmont Ave",
+    "src": "output/beats/Cultural_Ledger.jsonl @C113",
+    "plan": {
+      "focus": "Marisol Rivera's community work and local perception",
+      "closeQuestion": "How can the story effectively capture the nuances of Marisol Rivera's fading fame and its impact on her community advocacy?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00539",
+        "name": "Lena Cross",
+        "profile": "Lena Cross — Actor — Piedmont Ave",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00539-0457331f25",
+        "pop": "POP-00539",
+        "name": "Lena Cross",
+        "quote": "To be honest, I've noticed Marisol Rivera's name popping up less often in conversations around Piedmont Ave, and when it does, it's usually in the context of looking back at her past work. I've seen her flyers and posters around, but they seem a bit outdated. People still speak highly of her community work, though. I think she's done some great things, but it feels like she's not as actively involved as she used to be.",
+        "factIds": [
+          "F-524a4a1b5365",
+          "F-3a5ab5e07038"
+        ],
+        "src": "packet.W2[POP-00539]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Sharon Okafor",
+        "text": "Marisol Rivera's involvement in local initiatives",
+        "usable": false
+      },
+      {
+        "from": "Sharon Okafor",
+        "text": "Neighborhood perception of Marisol Rivera's work",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C113",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-876f95b5eb98"
+    },
+    {
+      "t": "FACT",
+      "text": "Marin Tao leads the fame table; 3 fading, 0 new",
+      "src": "output/beats/Cultural_Ledger.jsonl @C113",
+      "id": "F-1553ca218152"
+    },
+    {
+      "t": "FACT",
+      "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 92, cooling), 17 media mentions.",
+      "src": "output/beats/Cultural_Ledger.jsonl @C113",
+      "id": "F-3a5ab5e07038"
+    },
+    {
+      "t": "FACT",
+      "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 92, cooling), 17 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C113",
+      "id": "F-0d74d9afe5bd"
+    },
+    {
+      "t": "FACT",
+      "text": "Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 66, cooling), 14 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C113",
+      "id": "F-76b7649d7309"
+    },
+    {
+      "t": "FACT",
+      "text": "Marisol Rivera (Community Advocate), Civic, Rockridge, Regional-tier — fading — the where-are-they-now file (fame 39, cooling), 7 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C113",
+      "id": "F-524a4a1b5365"
+    },
+    {
+      "t": "FACT",
+      "text": "Marin Tao (Celebrity), Arts, Chinatown, Iconic-tier — the city knows them (fame 153, viral), 25 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C113",
+      "id": "F-0b28b6be3772"
+    },
+    {
+      "t": "FACT",
+      "text": "Rico Valez (Celebrity), Arts, Fruitvale, Iconic-tier — the city knows them (fame 116, viral), 19 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C113",
+      "id": "F-3d0680d33bd3"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C9, Winter, holiday=none",
+      "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+      "id": "F-ab9d6786094e"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "sharon-behavior-ground-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Frame one Packet-supplied venue condition as a behavior question without inventing Sharon's presence, patrons, habits, activity, cause, trend, diagnosis, or social meaning.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "warm evidence-bounded lifestyle brief",
+      "targetWords": "evidence-bounded",
+      "opening": "one Packet-named venue, location, and condition",
+      "closing": "the human behavior account still needed"
+    },
+    "authorizedTexture": [
+      "warm interpretation of a supplied venue condition without claiming observation, attendance, or a behavior pattern",
+      "lifestyle vocabulary used only to pose a question and never as proof of a habit, preference, mood, trend, or diagnosis"
+    ],
+    "textureConditions": [
+      "a quiet venue record proves only the supplied venue condition and location, not patron count, decline, closure, mood, cause, habit, preference, or citywide trend",
+      "first-person visits, every patron, manager, regular, worker, expert, psychologist, quote, action, date, count, behavior change, and social meaning require Packet support"
+    ],
+    "canonBlockers": [
+      "invented attendance, observation, patron, manager, regular, worker, expert, psychologist, interview, dialogue, quote, line, gathering, habit, preference, behavior change, diagnosis, or social meaning",
+      "an invented or altered venue, person, neighborhood, event, relationship, date, count, or cause",
+      "closure or decline claims, citywide lifestyle trend, collective sentiment, raw engine labels, or economic conclusion presented as fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-c6291a86d0dc",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-876f95b5eb98",
+        "t": "FACT",
+        "text": "Current cycle: C113",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-1553ca218152",
+        "t": "FACT",
+        "text": "Marin Tao leads the fame table; 3 fading, 0 new",
+        "src": "output/beats/Cultural_Ledger.jsonl @C113"
+      },
+      {
+        "id": "F-3a5ab5e07038",
+        "t": "FACT",
+        "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 92, cooling), 17 media mentions.",
+        "src": "output/beats/Cultural_Ledger.jsonl @C113"
+      },
+      {
+        "id": "F-0d74d9afe5bd",
+        "t": "FACT",
+        "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 92, cooling), 17 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C113"
+      },
+      {
+        "id": "F-76b7649d7309",
+        "t": "FACT",
+        "text": "Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 66, cooling), 14 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C113"
+      },
+      {
+        "id": "F-524a4a1b5365",
+        "t": "FACT",
+        "text": "Marisol Rivera (Community Advocate), Civic, Rockridge, Regional-tier — fading — the where-are-they-now file (fame 39, cooling), 7 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C113"
+      },
+      {
+        "id": "F-0b28b6be3772",
+        "t": "FACT",
+        "text": "Marin Tao (Celebrity), Arts, Chinatown, Iconic-tier — the city knows them (fame 153, viral), 25 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C113"
+      },
+      {
+        "id": "F-3d0680d33bd3",
+        "t": "FACT",
+        "text": "Rico Valez (Celebrity), Arts, Fruitvale, Iconic-tier — the city knows them (fame 116, viral), 19 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C113"
+      },
+      {
+        "id": "F-ab9d6786094e",
+        "t": "FACT",
+        "text": "Calendar: Y3C9, Winter, holiday=none",
+        "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00539-0457331f25",
+        "speakerId": "POP-00539",
+        "speakerName": "Lena Cross",
+        "text": "To be honest, I've noticed Marisol Rivera's name popping up less often in conversations around Piedmont Ave, and when it does, it's usually in the context of looking back at her past work. I've seen her flyers and posters around, but they seem a bit outdated. People still speak highly of her community work, though. I think she's done some great things, but it feels like she's not as actively involved as she used to be.",
+        "factIds": [
+          "F-524a4a1b5365",
+          "F-3a5ab5e07038"
+        ],
+        "src": "packet.W2[POP-00539]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00539",
+        "name": "Lena Cross",
+        "profile": "Lena Cross — Actor — Piedmont Ave",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Sharon Okafor",
+        "text": "Marisol Rivera's involvement in local initiatives",
+        "publishable": false
+      },
+      {
+        "from": "Sharon Okafor",
+        "text": "Neighborhood perception of Marisol Rivera's work",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "warm interpretation of a supplied venue condition without claiming observation, attendance, or a behavior pattern",
+      "lifestyle vocabulary used only to pose a question and never as proof of a habit, preference, mood, trend, or diagnosis"
+    ],
+    "textureConditions": [
+      "a quiet venue record proves only the supplied venue condition and location, not patron count, decline, closure, mood, cause, habit, preference, or citywide trend",
+      "first-person visits, every patron, manager, regular, worker, expert, psychologist, quote, action, date, count, behavior change, and social meaning require Packet support"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

@@ -1,0 +1,443 @@
+{
+  "v": "UNDOCKED-ADAPTER/1",
+  "show": "UNDOCKED",
+  "episode_id": "undocked-pop00298-2026-11-08T02-30-20",
+  "popid": "POP-00298",
+  "holder": "Luis Taz",
+  "session": "undocked-pop00298",
+  "window": {
+    "startedAt": "2026-11-08T02:30:20.831Z",
+    "endedAt": "2026-11-08T02:50:35.906Z"
+  },
+  "runner": {
+    "turns": 38,
+    "exitCode": null,
+    "capped": true,
+    "toolErrors": 0,
+    "estCostUsd": 0.0185,
+    "tokensIn": 153424,
+    "tokensOut": 6397,
+    "log": "output/spacemolt-show/episodes/undocked-pop00298-2026-11-08T02-30-20.log",
+    "stopReason": "window",
+    "toolCalls": 44
+  },
+  "stall": null,
+  "source": {
+    "kind": "get_action_log",
+    "categories": [
+      "mining",
+      "trading",
+      "mission",
+      "combat",
+      "navigation",
+      "session",
+      "achievement"
+    ],
+    "fetchedAt": "2026-11-08T02:55:37.066Z"
+  },
+  "facts": {
+    "credits_delta": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "hits": 0,
+      "note": "gameplay in window carries no credit event — measured zero",
+      "value": 0
+    },
+    "points_delta": {
+      "type": "FACT",
+      "source": "get_achievements",
+      "basis": "progress",
+      "items": [
+        {
+          "id": "cartographer",
+          "name": "Cartographer",
+          "gained": 5.1
+        },
+        {
+          "id": "voyager_ii",
+          "name": "Voyager II",
+          "gained": 1.7
+        },
+        {
+          "id": "voyager_i",
+          "name": "Voyager I",
+          "gained": 0.4
+        },
+        {
+          "id": "far_traveler",
+          "name": "Far Traveler",
+          "gained": 0.01
+        },
+        {
+          "id": "jump_master",
+          "name": "Jump Master",
+          "gained": 0.01
+        }
+      ],
+      "beforeTakenAt": "2026-11-08T02:30:20.538Z",
+      "value": 7.23
+    },
+    "systems_visited": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": [
+        "synchrony",
+        "node_alpha",
+        "nexus_prime",
+        "node_beta",
+        "acubens",
+        "hamal",
+        "okab",
+        "thornhaven",
+        "stormwatch",
+        "tanglewood",
+        "gsc_0016",
+        "felis",
+        "gliese_876",
+        "gsc_0024",
+        "jasmine",
+        "gsc_0035",
+        "biham"
+      ]
+    },
+    "combat_results": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "events": 0,
+        "kills": 0,
+        "deaths": 0,
+        "other": 0
+      }
+    },
+    "cargo": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mined": {},
+        "sold": {}
+      }
+    },
+    "mishaps": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "event_counts": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": 0,
+        "trading": 0,
+        "mission": 0,
+        "combat": 0,
+        "navigation": 16,
+        "session": 1,
+        "achievement": 1
+      }
+    },
+    "entries": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": [],
+        "trading": [],
+        "mission": [],
+        "combat": [],
+        "navigation": [
+          {
+            "id": 257073507,
+            "created_at": "2026-11-08T02:49:36Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from GSC-0035 to Biham",
+            "data": {
+              "arrival_poi": "biham_ice_shelf",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "gsc_0035",
+              "is_pathfinder": false,
+              "to_system": "biham",
+              "to_system_name": "Biham"
+            }
+          },
+          {
+            "id": 257070377,
+            "created_at": "2026-11-08T02:48:26Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Jasmine to GSC-0035",
+            "data": {
+              "arrival_poi": "gsc_0035_belt_a",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "jasmine",
+              "is_pathfinder": false,
+              "to_system": "gsc_0035",
+              "to_system_name": "GSC-0035"
+            }
+          },
+          {
+            "id": 257068376,
+            "created_at": "2026-11-08T02:47:16Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from GSC-0024 to Jasmine",
+            "data": {
+              "arrival_poi": "jasmine_silent_reef",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "gsc_0024",
+              "is_pathfinder": false,
+              "to_system": "jasmine",
+              "to_system_name": "Jasmine"
+            }
+          },
+          {
+            "id": 257066373,
+            "created_at": "2026-11-08T02:46:06Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Gliese 876 to GSC-0024",
+            "data": {
+              "arrival_poi": "gsc_0024_star",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "gliese_876",
+              "is_pathfinder": false,
+              "to_system": "gsc_0024",
+              "to_system_name": "GSC-0024"
+            }
+          },
+          {
+            "id": 257064532,
+            "created_at": "2026-11-08T02:44:56Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Felis to Gliese 876",
+            "data": {
+              "arrival_poi": "gliese_876_star",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "felis",
+              "is_pathfinder": false,
+              "to_system": "gliese_876",
+              "to_system_name": "Gliese 876"
+            }
+          },
+          {
+            "id": 257062627,
+            "created_at": "2026-11-08T02:43:45Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from GSC-0016 to Felis",
+            "data": {
+              "arrival_poi": "felis_star",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "gsc_0016",
+              "is_pathfinder": false,
+              "to_system": "felis",
+              "to_system_name": "Felis"
+            }
+          },
+          {
+            "id": 257059793,
+            "created_at": "2026-11-08T02:42:36Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Tanglewood to GSC-0016",
+            "data": {
+              "arrival_poi": "gsc_0016_star",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "tanglewood",
+              "is_pathfinder": false,
+              "to_system": "gsc_0016",
+              "to_system_name": "GSC-0016"
+            }
+          },
+          {
+            "id": 257055799,
+            "created_at": "2026-11-08T02:41:26Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Stormwatch to Tanglewood",
+            "data": {
+              "arrival_poi": "tanglewood_star",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "stormwatch",
+              "is_pathfinder": false,
+              "to_system": "tanglewood",
+              "to_system_name": "Tanglewood"
+            }
+          },
+          {
+            "id": 257053972,
+            "created_at": "2026-11-08T02:40:16Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Thornhaven to Stormwatch",
+            "data": {
+              "arrival_poi": "stormwatch_star",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "thornhaven",
+              "is_pathfinder": false,
+              "to_system": "stormwatch",
+              "to_system_name": "Stormwatch"
+            }
+          },
+          {
+            "id": 257052119,
+            "created_at": "2026-11-08T02:39:06Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Okab to Thornhaven",
+            "data": {
+              "arrival_poi": "dimming_pocket",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "okab",
+              "is_pathfinder": false,
+              "to_system": "thornhaven",
+              "to_system_name": "Thornhaven"
+            }
+          },
+          {
+            "id": 257049098,
+            "created_at": "2026-11-08T02:37:55Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Hamal to Okab",
+            "data": {
+              "arrival_poi": "okab_star",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "hamal",
+              "is_pathfinder": false,
+              "to_system": "okab",
+              "to_system_name": "Okab"
+            }
+          },
+          {
+            "id": 257047319,
+            "created_at": "2026-11-08T02:36:46Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Acubens to Hamal",
+            "data": {
+              "arrival_poi": "hamal_crystal_bloom",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "acubens",
+              "is_pathfinder": false,
+              "to_system": "hamal",
+              "to_system_name": "Hamal"
+            }
+          },
+          {
+            "id": 257045281,
+            "created_at": "2026-11-08T02:35:36Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Node Beta to Acubens",
+            "data": {
+              "arrival_poi": "acubens_belt",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "node_beta",
+              "is_pathfinder": false,
+              "to_system": "acubens",
+              "to_system_name": "Acubens"
+            }
+          },
+          {
+            "id": 257043356,
+            "created_at": "2026-11-08T02:34:26Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Nexus Prime to Node Beta",
+            "data": {
+              "arrival_poi": "eltanin_prime_belt",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "nexus_prime",
+              "is_pathfinder": false,
+              "to_system": "node_beta",
+              "to_system_name": "Node Beta"
+            }
+          },
+          {
+            "id": 257040282,
+            "created_at": "2026-11-08T02:33:16Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Node Alpha to Nexus Prime",
+            "data": {
+              "arrival_poi": "null_matter_anomaly",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "node_alpha",
+              "is_pathfinder": false,
+              "to_system": "nexus_prime",
+              "to_system_name": "Nexus Prime"
+            }
+          },
+          {
+            "id": 257038434,
+            "created_at": "2026-11-08T02:32:07Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Synchrony to Node Alpha",
+            "data": {
+              "arrival_poi": "alpha_extraction_zone",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "synchrony",
+              "is_pathfinder": false,
+              "to_system": "node_alpha",
+              "to_system_name": "Node Alpha"
+            }
+          }
+        ],
+        "session": [
+          {
+            "id": 257035413,
+            "created_at": "2026-11-08T02:30:22Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "LuisTaz logged in",
+            "data": {
+              "last_login_at": "2026-11-08T02:30:20Z",
+              "source": "password"
+            }
+          }
+        ],
+        "achievement": [
+          {
+            "id": 257038755,
+            "created_at": "2026-11-08T02:32:18Z",
+            "category": "achievement",
+            "event_type": "achievement.unlocked",
+            "summary": "Unlocked achievement: Voyager I",
+            "data": {
+              "achievement_id": "voyager_i",
+              "points": 10
+            }
+          }
+        ]
+      }
+    }
+  },
+  "captains_log": {
+    "kind": "QUOTED_SUBJECTIVE_COLOR",
+    "type": "INTERPRETATION",
+    "provenance": "captains_log_list",
+    "windowed": 0,
+    "listed": 0,
+    "entries": [],
+    "unwindowed": []
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "114",
+  "persona": "angela-reyes",
+  "byline": "Angela Reyes",
+  "bylinePopid": "POP-00156",
+  "article": "output/cron-compare/staged/civic_c114_angela-reyes_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Mei Wong",
+        "role": "mentioned",
+        "popid": "POP-01036"
+      },
+      {
+        "name": "Maya Torres-Dillon",
+        "role": "mentioned",
+        "popid": "POP-00742"
+      },
+      {
+        "name": "Rick Dillon",
+        "role": "quoted-source",
+        "popid": "POP-00743"
+      },
+      {
+        "name": "Gloria Liu",
+        "role": "quoted-source",
+        "popid": "POP-00827"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Rockridge"
+    ],
+    "claims": [
+      {
+        "claim": "A one-point drop on a scale like that — I'll be honest, it doesn't change what happens in the building on Monday morning. The kids still come in, the teachers still teach, and I still walk the halls. The district watches that number, sure, but I watch the kids. If anything, a dip like that makes me look closer at where we might be slipping — maybe it's a cohort thing, maybe it's a resource thing — but it doesn't mean I'm suddenly going to pull books off shelves or cut a program. We're still the strongest school in the city, and that's not because of a number. It's because of the people here.",
+        "sourceRef": "citizenVoice PRESS Gloria Liu"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-8ab206061533",
+    "draftSha256": "8b0da70478231c088561e0ab07359fe96df573585fe81a58fc7bc19144bff8fe",
+    "verdict": "output/cron-compare/civic_c114_angela-reyes_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-04T07:48:07.313Z",
+    "contractScore": {
+      "opened": false,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": false,
+      "inTargetBy": "judge",
+      "words": 969,
+      "short": "The opening paragraph begins with narrative scene-setting rather than a Packet-backed school, youth-program, apprenticeship, or continuity fact, and the piece falls short of the target word count.",
+      "score": 2,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "8b0da70478231c088561e0ab07359fe96df573585fe81a58fc7bc19144bff8fe",
+      "costUsd": 0.0021
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-04T07:48:14.631Z"
+}

@@ -1,0 +1,78 @@
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
+Wake 3 WRITE — sports c115 (selena-grant)
+===================================
+[run] 2026-11-11T05:17:57.026Z byline: Selena Grant (POP-00591, persona)
+[run] 2026-11-11T05:17:57.050Z W3: no citizen on the record — filing without a quote
+[run] 2026-11-11T05:17:57.159Z writing on typed Packet (18234 B injected state + stance anchor)...
+[run] 2026-11-11T05:17:57.191Z reward loop ON (package): rubric shown, contract scored, grade carried
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌁ auth for agents [www.vestauth.com]
+Headless Desk Writer — sports desk
+===================================
+model=openai/gpt-5.6-luna maxTurns=15
+[INFO] 2026-11-11T05:17:58.152Z lane state-file injected: output/test-shell/20261110-231754-selena-grant-light/sports_c115_selena-grant_packet-v2_openai-gpt-5-6-luna.state.json (18170 chars) — full-summary blob bypassed
+[INFO] 2026-11-11T05:17:58.769Z packet-only compose via OpenRouter (openai/gpt-5.6-luna, 0 live tools)...
+[INFO] 2026-11-11T05:18:11.703Z tool trace: 0 call(s) → sports_c115_packet-v2_selena-grant.tooltrace.json
+[INFO] 2026-11-11T05:18:11.730Z LEP/2 lexical observations deferred to Rhea (AM-ce09e99c8d35): UNAPPROVED_NUMBER=-106,14,-109
+
+--- run summary ---
+{
+  "desk": "sports",
+  "cycle": "115",
+  "model": "openai/gpt-5.6-luna",
+  "turns": 1,
+  "maxTurns": 15,
+  "usageInputTokens": 8029,
+  "usageOutputTokens": 1356,
+  "savedFiles": [
+    "output/test-shell/20261110-231754-selena-grant-light/sports_c115_selena-grant_packet-v2_openai-gpt-5-6-luna.md"
+  ],
+  "compareAgainst": "output/desk-output/sports_c115.md",
+  "durationMs": 13630,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-11-11T05:18:11.734Z"
+}
+
+tokens: 8029 in / 1356 out · 1 turn(s) · 13630ms
+compare: diff output/desk-output/sports_c115.md  ↔  output/test-shell/20261110-231754-selena-grant-light/sports_c115_selena-grant_packet-v2_openai-gpt-5-6-luna.md
+[run] 2026-11-11T05:18:11.803Z gate SKIPPED (--no-gate sample) — output is ungated, NOT canon
+
+=== write disposition: UNGATED-SAMPLE ===
+{
+  "mode": "wake-write",
+  "desk": "sports",
+  "cycle": "115",
+  "provider": "openrouter",
+  "model": "openai/gpt-5.6-luna",
+  "configuredWriterModel": "openai/gpt-5.6-luna",
+  "gateModel": "sonnet",
+  "persona": "selena-grant",
+  "byline": {
+    "name": "Selena Grant",
+    "popid": "POP-00591",
+    "beatDomain": "SPORTS"
+  },
+  "laneEntries": 12,
+  "quotesLanded": 0,
+  "disposition": "ungated-sample",
+  "rheaPass": null,
+  "rheaFlagCount": null,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [],
+  "toolCalls": 0,
+  "wordCount": 478,
+  "targetWords": "400-650",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": null,
+  "gradeRecord": null,
+  "article": "output/test-shell/20261110-231754-selena-grant-light/samples/sports_c115_selena-grant_packet-v2_openai-gpt-5-6-luna.sample.md",
+  "selfRecord": null,
+  "ranAt": "2026-11-11T05:18:11.809Z"
+}

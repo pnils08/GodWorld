@@ -1,0 +1,63 @@
+{
+  "office": "council_d3",
+  "agentDir": "civic-office-council-d3",
+  "holder": "Rose Delgado",
+  "popid": "POP-00503",
+  "title": "City Council District 3",
+  "date": "2026-11-04",
+  "cycle": 114,
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "statement": "Two things land in D3 this week and both of them belong to the people who live here, not to City Hall. The Oakland Alternative Response Initiative is dispatch-live, and East Oakland still hasn't had the briefing it was promised — so I'm answering Director Vance and putting the D3 community briefing on the calendar in Fruitvale, in daylight, with the Fruitvale data and the response times on the table where residents and merchants can see them. Fruitvale has earned the right to review the Transit Hub Phase II schematics before anyone calls the vision done; the community review schedule goes out alongside the briefing so the same people who shaped the vision see what it's turning into. Fruitvale's sentiment is running ahead of the city's and the block is booming, but San Antonio is still in decay and Fruitvale's violent crime reading sits above the city's. I'm not going to let a hot neighborhood get skipped just because it looks fine on a dashboard, and I'm not going to let a struggling one get quiet. This district gets the briefing, the review calendar, and the numbers in the open.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-114-civic-office-council-d3",
+        "text": "Director Vance — the D3 briefing on the Oakland Alternative Response Initiative will be executed and documented in Fruitvale, open to all of District 3 including East Oakland residents, with the current Fruitvale safety data and the Baylight review presented in plain daylight before anyone asks this district to accept more expansion. In the same notice I'm publishing the Fruitvale Transit Hub Phase II preliminary schematics review schedule, so residents and merchants can see the designs and say what they think before the vision is called finished. The documentation from both will be filed with the Clerk so there's a record you can point to, not a promise.",
+        "directiveCycle": 114,
+        "confrontationSeat": "civic-office-council-d3"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-11-04T11:45:53.738Z",
+  "usage": {
+    "prompt_tokens": 6401,
+    "completion_tokens": 402,
+    "total_tokens": 6803,
+    "cost": 0.000444238,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.000444238,
+      "upstream_inference_prompt_cost": 0.000243238,
+      "upstream_inference_completions_cost": 0.000201
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "fellBackFrom": null,
+  "evidenceGenerationHash": "625fc65e258fd2fe3d38d613ddc8fe6e9ae4ae4487a8350ea1d8882ac488130d",
+  "evidenceReads": [],
+  "provider": "Wafer",
+  "finishReason": "stop",
+  "elapsedMs": 2012,
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00503",
+    "id": "4PYqyzQAmrfKFNJnYFbnkV",
+    "customId": "cp-POP-00503-c114-CIVIC-datawake-2026-11-04"
+  }
+}

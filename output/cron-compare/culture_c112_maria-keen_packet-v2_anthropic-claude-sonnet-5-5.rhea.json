@@ -1,0 +1,72 @@
+{
+  "draft": "output/cron-compare/culture_c112_maria-keen_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "112",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "a4ae0c4ddfa2e087be0a96d2495954763d7e87012efaa7af3183558f5a74ba04",
+  "pass": true,
+  "advisory": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes match exact packet provenance, citizen roles match ledger profiles, and profile boundaries are strictly observed.",
+  "review": {
+    "profileId": "maria-ground-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "maria-ground-v1",
+    "packageVersion": "MARIA-LEP2-1",
+    "manifestId": "AM-902b69672aae",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Janae Rivers",
+      "Marcus Whitfield",
+      "Mark Aitken"
+    ],
+    "unverified": [
+      "Baseball League",
+      "Community Liaison",
+      "East Bay Harm Reduction",
+      "Eastside Hoopers Coalition",
+      "Player Rep",
+      "Vendor Incubator",
+      "Youth Apprenticeship Pipeline"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0099,
+  "durationMs": 5669,
+  "parseError": false,
+  "ranAt": "2026-10-23T23:18:39.223Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 878,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "a4ae0c4ddfa2e087be0a96d2495954763d7e87012efaa7af3183558f5a74ba04",
+    "costUsd": 0.0014
+  }
+}

@@ -1,0 +1,204 @@
+{
+  "cycle": 113,
+  "v": "CITYHALL/1",
+  "hearing": [
+    {
+      "officeId": "COUNCIL-D5",
+      "popid": "POP-00043",
+      "holder": "Janae Rivers",
+      "district": "D5",
+      "faction": "OPP",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "The data is in — now let's make sure the folks who called 911 actually get to see it.",
+      "actionAsked": "Move D3 briefing to East Oakland; add Baylight District expansion feasibility review to the C114 agenda.",
+      "voiceFile": "output/civic-voice/council_d5_c113.json"
+    },
+    {
+      "officeId": "COUNCIL-D1",
+      "popid": "POP-00501",
+      "holder": "Denise Carter",
+      "district": "D1",
+      "faction": "OPP",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Legal defense is housing stability — and Oakland funds both.",
+      "actionAsked": "Advance INIT-010 to the full council for a final vote next cycle.",
+      "voiceFile": "output/civic-voice/council_d1_c113.json"
+    },
+    {
+      "officeId": "COUNCIL-D7",
+      "popid": "POP-00504",
+      "holder": "Warren Ashford",
+      "district": "D7",
+      "faction": "CRC",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Opening under budget was step one; step two is proving that every public dollar translates into verified clinical intake and measurable health outcomes.",
+      "actionAsked": "Published post-occupancy audit benchmarks and patient intake metrics for INIT-005's standing quarterly review.",
+      "voiceFile": "output/civic-voice/council_d7_c113.json"
+    },
+    {
+      "officeId": "COUNCIL-D9",
+      "popid": "POP-00506",
+      "holder": "Terrence Mobley",
+      "district": "D9",
+      "faction": "OPP",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Uptown's busy streets are somebody's work paying off—I'm naming whose, and I'm making sure the next phase doesn't stop at downtown.",
+      "actionAsked": "Publicly credit Deputy Mayor Okoro's housing unit for Uptown's visible improvement and call for the Downtown Economic Revitalization committee's Uptown planning track to move with urgency and a concrete timeline.",
+      "voiceFile": "output/civic-voice/council_d9_c113.json"
+    },
+    {
+      "officeId": "COUNCIL-D6",
+      "popid": "POP-00044",
+      "holder": "Elliott Crane",
+      "district": "D6",
+      "faction": "CRC",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "When a commercial corridor maintains low crime and steady street trade, City Hall's job is not to overcomplicate things—it is to deliver reliable municipal fundamentals.",
+      "actionAsked": "Prioritize baseline municipal service delivery and infrastructure maintenance across Piedmont Avenue and Montclair.",
+      "voiceFile": "output/civic-voice/council_d6_c113.json"
+    },
+    {
+      "officeId": "STAFF-DM-COMM",
+      "popid": "POP-00037",
+      "holder": "Brenda Okoro",
+      "district": "citywide",
+      "faction": "STAFF",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Twelve months, twelve checks, $5.6 million — and West Oakland's oldest residents are still in their homes. That's the race against displacement, and we're still ahead.",
+      "actionAsked": "Approved the month-twelve disbursement, maintaining the 23-day processing standard and directing charter renewal language that keeps the Fund's scope fixed on the long-tenure West Oakland cohort.",
+      "voiceFile": "output/civic-voice/okoro_c113.json"
+    },
+    {
+      "officeId": "COUNCIL-D8",
+      "popid": "POP-00505",
+      "holder": "Nina Chen",
+      "district": "D8",
+      "faction": "CRC",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Relief is only as effective as the oversight attached to it—Grand Lake merchants need immediate capital, and taxpayers deserve verified disbursement milestones and auditable metrics.",
+      "actionAsked": "Vote YES in the Economic Development Committee to advance the $2.5M Commercial Stabilization for Grand Lake ordinance to the full City Council.",
+      "voiceFile": "output/civic-voice/council_d8_c113.json"
+    },
+    {
+      "officeId": "COUNCIL-D3",
+      "popid": "POP-00503",
+      "holder": "Rose Delgado",
+      "district": "D3",
+      "faction": "OPP",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "The right responder showing up on time on Fruitvale's streets — that's the report I'll hold OARI to.",
+      "actionAsked": "Accept the district-level report but require the D3 community briefing before any further expansion, and direct OARI coordinators to produce street-level response data for the Fruitvale corridor specifically.",
+      "voiceFile": "output/civic-voice/council_d3_c113.json"
+    },
+    {
+      "officeId": "COUNCIL-D2",
+      "popid": "POP-00502",
+      "holder": "Leonard Tran",
+      "district": "D2",
+      "faction": "IND",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Downtown's revitalization is crucial, but we must not forget Chinatown's struggles.",
+      "actionAsked": "Include Chinatown in revitalization planning",
+      "voiceFile": "output/civic-voice/council_d2_c113.json"
+    },
+    {
+      "officeId": "COUNCIL-D4",
+      "popid": "POP-00042",
+      "holder": "Ramon Vega",
+      "district": "D4",
+      "faction": "IND",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Ivy Hill is hurting now — we answer with action, not studies.",
+      "actionAsked": "File INIT-011 legislative ordinance",
+      "voiceFile": "output/civic-voice/council_d4_c113.json"
+    }
+  ],
+  "votes": [],
+  "gavel": {
+    "officeId": "MAYOR-01",
+    "popid": "POP-00034",
+    "holder": "Avery Santana",
+    "dispositions": [
+      {
+        "initiativeId": "INIT-001",
+        "mayoralAction": "none",
+        "implementationPhase": "disbursement-active",
+        "note": "C113: Month-11 audit published; Month-12 $400K approved with charter scope preservation directive"
+      },
+      {
+        "initiativeId": "INIT-002",
+        "mayoralAction": "none",
+        "implementationPhase": "dispatch-live",
+        "note": "C113: Quarterly report published; D3 East Oakland briefing directed with Fruitvale data and Baylight feasibility review"
+      },
+      {
+        "initiativeId": "INIT-007",
+        "mayoralAction": "none",
+        "implementationPhase": "implementation-active",
+        "note": "C113: First cohort placement report published; accountability review directed"
+      },
+      {
+        "initiativeId": "INIT-005",
+        "mayoralAction": "none",
+        "implementationPhase": "operational",
+        "note": "C113: First quarterly utilization audit filed to D7 and public portal"
+      },
+      {
+        "initiativeId": "INIT-010",
+        "mayoralAction": "none",
+        "implementationPhase": "vote-ready",
+        "note": "C113: Advanced to full council with $4.2M appropriation intact per mayoral directive"
+      },
+      {
+        "initiativeId": "INIT-011",
+        "mayoralAction": "none",
+        "implementationPhase": "legislation-filed",
+        "note": "C113: Legislative ordinance filed; INIT-012 paired filing"
+      },
+      {
+        "initiativeId": "INIT-009",
+        "mayoralAction": "none",
+        "implementationPhase": "vote-ready",
+        "note": "C113: Advanced to full council with Chen/Vega milestone and audit conditions"
+      },
+      {
+        "initiativeId": "INIT-008",
+        "mayoralAction": "none",
+        "implementationPhase": "vote-scheduled",
+        "note": "C113: Emergency committee convened; Uptown track committed for C114 with concrete timeline"
+      }
+    ],
+    "quote": "Five million dollars in households' hands — and the books are open for anyone to read.",
+    "voiceFile": "output/civic-voice/mayor_gavel_c113.json"
+  }
+}

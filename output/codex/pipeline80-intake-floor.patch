@@ -1,0 +1,144 @@
+diff --git a/scripts/cron-desk-run.js b/scripts/cron-desk-run.js
+--- a/scripts/cron-desk-run.js
++++ b/scripts/cron-desk-run.js
+@@ -1184,6 +1184,7 @@
+   L.push('One NAMES line per named citizen, one BIZ line per named business/org, one HOOD line');
+   L.push('per neighborhood, one CLAIM line per load-bearing fact. Index ONLY what your article');
+   L.push('actually prints — never add a person or claim to INTAKE that is not in the piece.');
++  L.push('Every person you print is a citizen — athletes, pilots, officials, anyone from your feeds — one NAMES line each, quoted or not.');
+   L.push('');
+   // Task 2.5.3 — self-scoring footer (pressure-test #6): declared, machine-
+   // checkable, stripped before publication by the Saturday compile.
+@@ -2739,6 +2740,39 @@
+ // (ROLE_TO_USAGE maps that to 'featured' at the Saturday canon door, no
+ // Saturday-side change needed). "Index only what the article prints" is
+ // honored by the name-in-text guard.
++function injectPrintedCitizens(intake, draftText, byline) {
++  if (!intake || !Array.isArray(intake.names)) return intake;
++  const cnc = require('./canon-name-check');
++  const body = checkBody(draftText);
++  const author = String((byline && byline.name) || byline || '');
++  const excluded = new Set([author, ...cnc.checkText(author).verified].map(n => n.toLowerCase()));
++  const existing = new Set(intake.names.map(n => String(n.name).toLowerCase()));
++  const activeNames = new Set(), activeIds = new Set();
++  // Resolve against the same local ledger; archive-only / non-Active rows earn no floor credit.
++  const rows = fs.readFileSync(path.join(ROOT, 'output', 'simulation_ledger_snapshot.jsonl'), 'utf8');
++  for (const line of rows.split('\n').filter(Boolean)) {
++    const row = JSON.parse(line);
++    if (row.Status !== 'Active') continue;
++    activeIds.add(String(row.POPID || '').trim());
++    for (const name of [row.Name, [row.First, row.Last].filter(Boolean).join(' ')]) {
++      const key = String(name || '').replace(/\s+/g, ' ').trim().toLowerCase();
++      if (key) { activeNames.add(key); activeNames.add(key.replace(/\.+$/, '')); }
++    }
++  }
++  const added = [];
++  for (const r of cnc.resolveCitizens(cnc.checkText(body).verified)) {
++    const key = r.name.toLowerCase();
++    if (!body.includes(r.name) || excluded.has(key) || existing.has(key) || !activeNames.has(key)) continue;
++    if (!r.ambiguous && (!r.popid || !activeIds.has(r.popid))) continue;
++    intake.names.push({ name: r.name, role: 'mentioned', popid: r.popid,
++      ...(r.ambiguous ? { ambiguous: true } : {}), floor: true });
++    existing.add(key);
++    added.push(r.name);
++  }
++  log('intake floor: +' + added.length + ' printed citizens — ' + added.join(', '));
++  return intake;
++}
++
+ function injectWeeklyPilotCredit(intake, draftText, pilots) {
+   if (!intake || !Array.isArray(intake.names) || !Array.isArray(pilots)) return intake;
+   const body = String(draftText || '');
+@@ -3094,6 +3128,7 @@
+     const draftBody = fs.readFileSync(draftPath, 'utf8');
+     let intake = buildIntakeSidecar(draftBody, quotes,
+       storylineTagFor(assignment && assignment.story, cycle));
++    intake = injectPrintedCitizens(intake, draftBody, byline);
+     if (desk === 'undocked-digest') {
+       try {
+         const { loadNiaWeeklySlice } = require(path.join(__dirname, 'buildNiaSlice'));
+@@ -3627,6 +3662,7 @@
+   loadLane,
+   yesterdaysFilings,
+   buildIntakeSidecar,
++  injectPrintedCitizens,
+   injectWeeklyPilotCredit,
+   writeCitizenArc,
+   storylineLines,
+diff --git a/scripts/cronDeskFilings.test.js b/scripts/cronDeskFilings.test.js
+--- a/scripts/cronDeskFilings.test.js
++++ b/scripts/cronDeskFilings.test.js
+@@ -12,7 +12,7 @@
+ 
+ const fs = require('fs');
+ const path = require('path');
+-const { yesterdaysFilings, buildIntakeSidecar } = require('./cron-desk-run');
++const { yesterdaysFilings, buildIntakeSidecar, injectPrintedCitizens, injectWeeklyPilotCredit } = require('./cron-desk-run');
+ 
+ const ROOT = path.resolve(__dirname, '..');
+ const STAGED = path.join(ROOT, 'output', 'cron-compare', 'staged');
+@@ -89,6 +89,64 @@
+   for (const f of fixtures) { try { fs.unlinkSync(f); } catch (_) { /* already gone */ } }
+ }
+ 
++// Synthetic, non-canon snapshot in memory only; exercise the real checker/resolver.
++const cncPath = require.resolve('./canon-name-check');
++const originalCnc = require.cache[cncPath];
++const originalRead = fs.readFileSync;
++const snapshot = path.join(ROOT, 'output', 'simulation_ledger_snapshot.jsonl');
++const archive = path.join(ROOT, 'output', 'citizen_archive_snapshot.jsonl');
++const synthetic = [
++  ['Testa Alpha', 'SYNTHETIC-A', 'Active'], ['Testb Beta', 'SYNTHETIC-B', 'Active'],
++  ['Testc Author', 'SYNTHETIC-C', 'Active'], ['Testd Shared', 'SYNTHETIC-D', 'Active'],
++  ['Testd Shared', 'SYNTHETIC-E', 'Active'], ['Teste Retired', 'SYNTHETIC-F', 'Retired'],
++  ['Testf Missing', 'SYNTHETIC-G', null], ['Testg Absent', 'SYNTHETIC-H', 'Active'],
++  ['Testh Window', 'SYNTHETIC-I', 'Active'], ['Testi Case', 'SYNTHETIC-J', 'Active']
++].map(([Name, POPID, Status]) => ({ Name, POPID, Status }));
++try {
++  fs.readFileSync = function(file, ...args) {
++    if (String(file) === snapshot) return synthetic.map(r => JSON.stringify(r)).join('\n');
++    if (String(file) === archive) return JSON.stringify({ Name: 'Testj Archived', POPID: 'SYNTHETIC-K', Status: 'Deceased' });
++    return originalRead.call(this, file, ...args);
++  };
++  delete require.cache[cncPath];
++  console.log('Test 4: printed citizen floor (synthetic snapshot)');
++  const body = 'Testa Alpha spoke. Testb Beta listened. Testc Author filed.\n## INTAKE\n';
++  const side = injectPrintedCitizens(buildIntakeSidecar(body, []), body, { name: 'Sgt. Testc Author' });
++  assert('empty NAMES gains exactly two mentioned citizens with ids',
++    side.names.length === 2 && side.names.every(n => n.role === 'mentioned' && n.floor === true) &&
++    side.names.map(n => n.popid).join(',') === 'SYNTHETIC-A,SYNTHETIC-B');
++  assert('title-stripped byline excluded', !side.names.some(n => n.name === 'Testc Author'));
++  const existing = { name: 'testa alpha', role: 'quoted-source', popid: 'SYNTHETIC-KEEP' };
++  const kept = { names: [existing] };
++  injectPrintedCitizens(kept, body, 'Sgt. Testc Author');
++  assert('case-insensitive existing role and id untouched', kept.names.length === 2 &&
++    kept.names[0] === existing && existing.role === 'quoted-source' && existing.popid === 'SYNTHETIC-KEEP' && !existing.floor);
++  assert('no INTAKE remains null', injectPrintedCitizens(buildIntakeSidecar('Testa Alpha spoke.', []), body, null) === null);
++  const malformed = {};
++  assert('missing names array unchanged', injectPrintedCitizens(malformed, body, null) === malformed);
++  injectWeeklyPilotCredit(side, body, [{ name: 'Testa Alpha', POPID: 'SYNTHETIC-A' }]);
++  assert('floor then pilot credit becomes subject', side.names[0].role === 'subject' && side.names[0].floor === true);
++  const ambiguous = injectPrintedCitizens({ names: [] }, 'Testd Shared spoke.', null).names[0];
++  assert('ambiguous name retains null id and marker', ambiguous && ambiguous.popid === null && ambiguous.ambiguous === true);
++  const filtered = injectPrintedCitizens({ names: [] },
++    'Teste Retired spoke. Testf Missing spoke. Testj Archived spoke.\n' +
++    '<!-- Testa Alpha -->\n```\nTestb Beta\n```\n## INTAKE\nNAMES: Testg Absent | mentioned', null);
++  assert('non-Active, archived, comments, code and INTAKE-only names excluded', filtered.names.length === 0);
++  const cnc = require('./canon-name-check');
++  assert('checker really verifies non-Active and archive names', cnc.checkText('Teste Retired spoke. Testj Archived spoke.').verified.length === 2);
++  // A line break inside the two-word window verifies, but is not the whole printed name.
++  assert('checker window can normalize non-contiguous whitespace', cnc.checkText('Testh  Window Extra spoke.').verified.includes('Testh Window'));
++  assert('whole-name includes recheck rejects normalized window', injectPrintedCitizens({ names: [] }, 'Testh  Window Extra spoke.', null).names.length === 0);
++  assert('contiguous name inside three-word candidate survives', injectPrintedCitizens({ names: [] }, 'Testh Window Extra spoke.', null).names.length === 1);
++  assert('exact casing recheck rejects case-only checker match', injectPrintedCitizens({ names: [] }, 'Testi CASE spoke.', null).names.length === 0);
++  injectPrintedCitizens(kept, body, 'Sgt. Testc Author');
++  assert('repeat injection adds no duplicate', kept.names.length === 2);
++} finally {
++  fs.readFileSync = originalRead;
++  if (originalCnc) require.cache[cncPath] = originalCnc;
++  else delete require.cache[cncPath];
++}
++
+ const leftovers = fs.existsSync(STAGED) ? fs.readdirSync(STAGED).filter(f => f.startsWith('zztest_')) : [];
+ assert('fixture cleanup complete', leftovers.length === 0, leftovers.join(', '));
+ 

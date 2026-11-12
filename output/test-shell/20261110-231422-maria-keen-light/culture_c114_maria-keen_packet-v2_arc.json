@@ -1,0 +1,32 @@
+{
+  "status": "arc-seed",
+  "cycle": "114",
+  "desk": "culture",
+  "persona": "maria-keen",
+  "hood": "Temescal",
+  "quotes": [
+    {
+      "pop": "POP-01027",
+      "name": "Austin Reaves",
+      "quote": "To be honest, I'm not really sure about The Reaves Line Transit Fund's impact on Temescal. I founded it, but I've been focused on the A's and family stuff lately. I know it's been around since C109, and it's still active, but I haven't been keeping up with its day-to-day. I live in West Oakland, so I don't really see its effects firsthand."
+    },
+    {
+      "pop": "POP-00169",
+      "name": "Brie Harris",
+      "quote": "Having my own place in Temescal is still a game-changer for me. It's been nice to have a spot to unwind after being on my feet all day at the flower shop. I feel like I'm still getting used to it, but it's made me appreciate the neighborhood even more."
+    },
+    {
+      "pop": "POP-01095",
+      "name": "Helena Voss-Adeyemi",
+      "quote": "I walked north across the Temescal line and watched the storefronts change. It's always interesting to see the different vibes on either side. Temescal's got a unique energy, lots of new businesses popping up."
+    },
+    {
+      "pop": "POP-00038",
+      "name": "Theo Park",
+      "quote": "To be honest, that moment at Temescal Brewing really stuck with me. Seeing the janitor from the Islamic Center chatting with Danny Horn like they were old friends... it felt like a small but real sign of how the neighborhood is evolving. It's not just about new faces moving in; it's about how we all connect. I still see Temescal as a place where you can bump into anyone, and that's something I appreciate."
+    }
+  ],
+  "claim": "To be honest, I'm not really sure about The Reaves Line Transit Fund's impact on Temescal. I founded it, but I've been focused on the A's and family stuff lately. I know it's been around since C109, and it's still active, but I haven't been keeping up with its day-to-day. I live in West Oakland, so I don't really see its effects firsthand.",
+  "src": "citizenVoice PRESS c114",
+  "ranAt": "2026-11-06T19:19:00.284Z"
+}

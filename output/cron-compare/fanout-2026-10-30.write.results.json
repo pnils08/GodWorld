@@ -1,0 +1,273 @@
+{
+  "date": "2026-10-30",
+  "stage": "write",
+  "results": [
+    {
+      "name": "Mason Ortega",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 528,
+        "contractScore": 2
+      }
+    },
+    {
+      "name": "Kai Marston",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 585,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Sharon Okafor",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 441,
+        "contractScore": 2
+      }
+    },
+    {
+      "name": "Maria Keen",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 908,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Celeste Tran",
+      "desk": "wire",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 418,
+        "contractScore": 3
+      }
+    },
+    {
+      "name": "Tamsin Pruitt",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 6,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [
+          {
+            "text": "Ily Gonzalez moved into a place of their own in Uptown, renting",
+            "run": "moved into a place of their"
+          },
+          {
+            "text": "Ily Gonzalez — in their life, C112: loved the A's on principle and still cleared the night for UNDOCKED",
+            "run": "still cleared the night for undocked"
+          },
+          {
+            "text": "Tomas Aguilar — in their life, C112: overheard their own name in a conversation outside the cafe near a late-night counter",
+            "run": "own name in a conversation outside"
+          },
+          {
+            "text": "Tomas Aguilar — in their life, C112: ran the numbers on staying put another year",
+            "run": "ran the numbers on staying put"
+          },
+          {
+            "text": "Tomas Aguilar — in their life, C113: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+            "run": "recognized the oari van idling outside"
+          },
+          {
+            "text": "Mei-Lin Zhou — in their life, C113: argued the bullpen order at the barbershop like it was city policy",
+            "run": "argued the bullpen order at the"
+          },
+          {
+            "text": "Mei-Lin Zhou — in their life, C113: heard someone at the cafe complain about the Baylight District noise and bit their tongue",
+            "run": "complain about the baylight district noise"
+          },
+          {
+            "text": "Mei-Lin Zhou — in their life, C113: a group of fans huddle under an awning debating last night's game, their voices rising above the sound of rain hitting the p",
+            "run": "under an awning debating last nights"
+          },
+          {
+            "text": "Mei-Lin Zhou — in their life, C113: took the long way home just to check the Baylight fence line's progress",
+            "run": "to check the baylight fence lines"
+          },
+          {
+            "text": "Dax Monroe — in their life, C113: caught the recap of last night's game at the counter and stayed for the second retelling",
+            "run": "caught the recap of last nights"
+          },
+          {
+            "text": "Dax Monroe — in their life, C113: navigated around a film crew blocking the sidewalk near the waterfront and rolled their eyes near a bookstore corner",
+            "run": "navigated around a film crew blocking"
+          },
+          {
+            "text": "Dax Monroe — in their life, C113: dodged the running groups circling the lake and found a quiet bench near the pergola near a cafe on the avenue",
+            "run": "dodged the running groups circling the"
+          },
+          {
+            "text": "Dax Monroe — in their life, C113: spent the evening sorting a box of things that used to be someone's",
+            "run": "a box of things that used"
+          },
+          {
+            "text": "Genevieve Martinez — in their life, C112: Sat through a meeting at Anthropic where every idea was theirs and none had their name on it.",
+            "run": "where every idea was theirs and"
+          },
+          {
+            "text": "Genevieve Martinez — in their life, C112: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence",
+            "run": "stopped to read the architectural renderings"
+          },
+          {
+            "text": "Genevieve Martinez — in their life, C112: grabbed coffee from the cart outside the hospital before the morning rush hit",
+            "run": "grabbed coffee from the cart outside"
+          },
+          {
+            "text": "Genevieve Martinez — in their life, C113: caught their reflection in a shop window and stood a little straighter",
+            "run": "reflection in a shop window and"
+          },
+          {
+            "text": "Imogen Soto — in their life, C112: a flyer for a seniors lunch program flutters on a community bulletin board",
+            "run": "a flyer for a seniors lunch"
+          },
+          {
+            "text": "Imogen Soto — in their life, C112: checked out a new shop that just opened nearby",
+            "run": "checked out a new shop that"
+          },
+          {
+            "text": "Imogen Soto — in their life, C112: caught the coffee order coming out of their mouth before deciding to order it",
+            "run": "caught the coffee order coming out"
+          },
+          {
+            "text": "Drew Lemon — in their life, C112: caught their partner humming the song they'd had stuck all day",
+            "run": "c112 caught partner humming song stuck all day"
+          },
+          {
+            "text": "Drew Lemon — in their life, C113: noticed the corner had a different crowd after dark",
+            "run": "noticed the corner had a different"
+          },
+          {
+            "text": "Weston Herrin — in their life, C112: unpacked a box that had stayed sealed since the last move",
+            "run": "unpacked a box that had stayed"
+          },
+          {
+            "text": "Weston Herrin — in their life, C113: wondered if a decision from years back had been the right one",
+            "run": "a decision from years back had"
+          },
+          {
+            "text": "Weston Herrin — in their life, C113: the bartender wipes down the counter between rounds of A's highlights",
+            "run": "down the counter between rounds of"
+          },
+          {
+            "text": "Weston Herrin — in their life, C113: overheard a stranger asking the way to a new shop on the block and pointed them right to it",
+            "run": "overheard a stranger asking the way"
+          },
+          {
+            "text": "Juliet Choi — in their life, C112: rent took the biggest bite of the month again",
+            "run": "c112 rent took the biggest bite"
+          },
+          {
+            "text": "Juliet Choi — in their life, C112: The owner at Oakland Public Library System said a bigger job is opening and asked if they wanted to be considered.",
+            "run": "c112 the owner at oakland public"
+          },
+          {
+            "text": "Juliet Choi — in their life, C112: ran the numbers on staying put another year",
+            "run": "ran the numbers on staying put"
+          },
+          {
+            "text": "Juliet Choi — in their life, C113: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence near a l",
+            "run": "stopped to read the architectural renderings"
+          },
+          {
+            "text": "Mateo Jilner — stayed up past everyone talking about what comes after this, Rockridge (C113 — what happened in their life, not words they said)",
+            "run": "stayed up past everyone talking about"
+          },
+          {
+            "text": "Mateo Jilner — in their life, C112: studied for the chemistry test on the bus and again at the kitchen table",
+            "run": "studied for the chemistry test on"
+          },
+          {
+            "text": "Mateo Jilner — in their life, C113: got the acceptance email at lunch and let the table read it first",
+            "run": "got the acceptance email at lunch"
+          },
+          {
+            "text": "Mateo Jilner — in their life, C113: moved quietly through a cold evening",
+            "run": "moved quietly through a cold evening"
+          },
+          {
+            "text": "Mei Patel — stayed up past everyone talking about what comes after this, Jack London (C113 — what happened in their life, not words they said)",
+            "run": "stayed up past everyone talking about"
+          },
+          {
+            "text": "Mei Patel — in their life, C113: sat for the senior portrait and did not recognize the adult in it",
+            "run": "and did not recognize the adult"
+          }
+        ],
+        "words": 1316,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Ines Sorensen",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 211,
+        "contractScore": 2
+      }
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 3,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 418,
+        "contractScore": 4
+      }
+    }
+  ],
+  "checkTotals": {
+    "seats": 8,
+    "toolSeats": 2,
+    "capHits": 0,
+    "thin": 0,
+    "verbatim": 1,
+    "graded": 8,
+    "gradeSum": 25
+  },
+  "ranAt": "2026-10-30T23:21:46.003Z"
+}

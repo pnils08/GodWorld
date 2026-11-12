@@ -1,0 +1,876 @@
+{
+  "stage": "report",
+  "desk": "culture",
+  "cycle": "111",
+  "persona": "maria-keen",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Maria Keen",
+    "popid": "POP-00013"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-neighborhood",
+      "angle": "Downtown — the programs that hold the block and the people who founded them",
+      "label": "Downtown: 1 active program on the record",
+      "hookLine": "1 active programs in Downtown; Priya Nair founded one.",
+      "hood": "Downtown",
+      "citizens": [
+        "Priya Nair (POP-00531)"
+      ],
+      "popids": [
+        "POP-00531"
+      ],
+      "ref": "output/beats/Community_Programs.jsonl @C111",
+      "cycle": 111
+    }
+  },
+  "angle": "output/cron-compare/culture_c111_maria-keen_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 4,
+  "quotes": [
+    {
+      "pop": "POP-00351",
+      "name": "Ryan Stark",
+      "quote": "I walked by SpeedyBurger on Broadway and saw a new lease sign go up above it. The paper was still crisp in the display case. It's another new spot opening up in Downtown, which is great to see.",
+      "disp": "close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I walked by SpeedyBurger on Broadway and saw a new lease sign go up above it. The paper was still crisp in the display case. It's another new spot opening up in Downtown, which is great to see.\",\n  \"fact_ids\": [\"F-71d9ad7d0d0e\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-71d9ad7d0d0e"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00351-3d79046462",
+        "authoredQuote": true,
+        "publishableQuote": "I walked by SpeedyBurger on Broadway and saw a new lease sign go up above it. The paper was still crisp in the display case. It's another new spot opening up in Downtown, which is great to see."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00351",
+          "name": "Ryan Stark",
+          "role": "Housing Policy Analyst",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "Your own current-cycle line says: \"Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown\". What did you notice about Downtown? Speak only from that line and your own reaction."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "Downtown",
+          "focus": "The tension between Downtown's institutional stability (NeuroCity) and its fragile human margins.",
+          "src": "output/beats/Community_Programs.jsonl @C111"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Ryan Stark — Housing Policy Analyst",
+          "evidence": [
+            {
+              "id": "EV-LIFE-f2af343ac9",
+              "src": "output/simulation_ledger_snapshot.jsonl",
+              "text": "Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown",
+            "src": "output/simulation_ledger_snapshot.jsonl",
+            "id": "F-71d9ad7d0d0e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00148",
+      "name": "Gordon Tate",
+      "quote": "I just noticed another new spot opening up around Downtown. It's always something new popping up, which is fine, but with the rent going up the way it is, you start wondering who these places are actually for.",
+      "disp": "close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I just noticed another new spot opening up around Downtown. It's always something new popping up, which is fine, but with the rent going up the way it is, you start wondering who these places are actually for.\",\n  \"fact_ids\": [\n    \"F-71d9ad7d0d0e\"\n  ],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-71d9ad7d0d0e"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00148-d868ac6357",
+        "authoredQuote": true,
+        "publishableQuote": "I just noticed another new spot opening up around Downtown. It's always something new popping up, which is fine, but with the rent going up the way it is, you start wondering who these places are actually for."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00148",
+          "name": "Gordon Tate",
+          "role": "SUPERIOR COURT LIAISON",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "Your own current-cycle line says: \"Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown\". What did you notice about Downtown? Speak only from that line and your own reaction."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "Downtown",
+          "focus": "The tension between Downtown's institutional stability (NeuroCity) and its fragile human margins.",
+          "src": "output/beats/Community_Programs.jsonl @C111"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Gordon Tate — SUPERIOR COURT LIAISON",
+          "evidence": [
+            {
+              "id": "EV-LIFE-4e9e8a1e28",
+              "src": "output/simulation_ledger_snapshot.jsonl",
+              "text": "Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown",
+            "src": "output/simulation_ledger_snapshot.jsonl",
+            "id": "F-71d9ad7d0d0e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00048",
+      "name": "Carlos Presti",
+      "quote": "I saw another new spot opening up Downtown. I don't know what it is yet, but I'm always curious to see what actually sticks around here. It's just good to see something new moving in.",
+      "disp": "driven, hard to sit still; curious, open to new things",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n \"answer\": \"quote\",\n \"quote\": \"I saw another new spot opening up Downtown. I don't know what it is yet, but I'm always curious to see what actually sticks around here. It's just good to see something new moving in.\",\n \"fact_ids\": [\n  \"F-71d9ad7d0d0e\"\n ],\n \"basis\": \"direct-reaction\",\n \"unverifiedLead\": null,\n \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-71d9ad7d0d0e"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00048-5f469efcb6",
+        "authoredQuote": true,
+        "publishableQuote": "I saw another new spot opening up Downtown. I don't know what it is yet, but I'm always curious to see what actually sticks around here. It's just good to see something new moving in."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00048",
+          "name": "Carlos Presti",
+          "role": "Corporate Accountant",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "Your own current-cycle line says: \"Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown\". What did you notice about Downtown? Speak only from that line and your own reaction."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "Downtown",
+          "focus": "The tension between Downtown's institutional stability (NeuroCity) and its fragile human margins.",
+          "src": "output/beats/Community_Programs.jsonl @C111"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Carlos Presti — Corporate Accountant",
+          "evidence": [
+            {
+              "id": "EV-LIFE-1edfe53523",
+              "src": "output/simulation_ledger_snapshot.jsonl",
+              "text": "Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown",
+            "src": "output/simulation_ledger_snapshot.jsonl",
+            "id": "F-71d9ad7d0d0e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00004",
+      "name": "Lucia Polito",
+      "quote": "I heard about Downtown First Friday Live Music last night, and it made me think about how vibrant Downtown can be. It's great to see people coming together for events like that.",
+      "disp": "driven, hard to sit still; draws people in, deep with them; warm, tender with people; curious, open to new things; steady, hard to shake",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I heard about Downtown First Friday Live Music last night, and it made me think about how vibrant Downtown can be. It's great to see people coming together for events like that.\",\n  \"fact_ids\": [\"F-f13a5027fecf\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-f13a5027fecf"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00004-a81b12c686",
+        "authoredQuote": true,
+        "publishableQuote": "I heard about Downtown First Friday Live Music last night, and it made me think about how vibrant Downtown can be. It's great to see people coming together for events like that."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00004",
+          "name": "Lucia Polito",
+          "role": "Aura Wellness Practitioner",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "Your own current-cycle line says: \"Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music over in Downtown last night\". What did you notice about Downtown? Speak only from that line and your own reaction."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "Downtown",
+          "focus": "The tension between Downtown's institutional stability (NeuroCity) and its fragile human margins.",
+          "src": "output/beats/Community_Programs.jsonl @C111"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Lucia Polito — Aura Wellness Practitioner",
+          "evidence": [
+            {
+              "id": "EV-LIFE-b1e1626a98",
+              "src": "output/simulation_ledger_snapshot.jsonl",
+              "text": "Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music over in Downtown last night"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music over in Downtown last night",
+            "src": "output/simulation_ledger_snapshot.jsonl",
+            "id": "F-f13a5027fecf"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-00351",
+      "name": "Ryan Stark",
+      "quote": "I walked by SpeedyBurger on Broadway and saw a new lease sign go up above it. The paper was still crisp in the display case. It's another new spot opening up in Downtown, which is great to see.",
+      "disp": "close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I walked by SpeedyBurger on Broadway and saw a new lease sign go up above it. The paper was still crisp in the display case. It's another new spot opening up in Downtown, which is great to see.\",\n  \"fact_ids\": [\"F-71d9ad7d0d0e\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-71d9ad7d0d0e"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00351-3d79046462",
+        "authoredQuote": true,
+        "publishableQuote": "I walked by SpeedyBurger on Broadway and saw a new lease sign go up above it. The paper was still crisp in the display case. It's another new spot opening up in Downtown, which is great to see."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00351",
+          "name": "Ryan Stark",
+          "role": "Housing Policy Analyst",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "Your own current-cycle line says: \"Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown\". What did you notice about Downtown? Speak only from that line and your own reaction."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "Downtown",
+          "focus": "The tension between Downtown's institutional stability (NeuroCity) and its fragile human margins.",
+          "src": "output/beats/Community_Programs.jsonl @C111"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Ryan Stark — Housing Policy Analyst",
+          "evidence": [
+            {
+              "id": "EV-LIFE-f2af343ac9",
+              "src": "output/simulation_ledger_snapshot.jsonl",
+              "text": "Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown",
+            "src": "output/simulation_ledger_snapshot.jsonl",
+            "id": "F-71d9ad7d0d0e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00148",
+      "name": "Gordon Tate",
+      "quote": "I just noticed another new spot opening up around Downtown. It's always something new popping up, which is fine, but with the rent going up the way it is, you start wondering who these places are actually for.",
+      "disp": "close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I just noticed another new spot opening up around Downtown. It's always something new popping up, which is fine, but with the rent going up the way it is, you start wondering who these places are actually for.\",\n  \"fact_ids\": [\n    \"F-71d9ad7d0d0e\"\n  ],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-71d9ad7d0d0e"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00148-d868ac6357",
+        "authoredQuote": true,
+        "publishableQuote": "I just noticed another new spot opening up around Downtown. It's always something new popping up, which is fine, but with the rent going up the way it is, you start wondering who these places are actually for."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00148",
+          "name": "Gordon Tate",
+          "role": "SUPERIOR COURT LIAISON",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "Your own current-cycle line says: \"Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown\". What did you notice about Downtown? Speak only from that line and your own reaction."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "Downtown",
+          "focus": "The tension between Downtown's institutional stability (NeuroCity) and its fragile human margins.",
+          "src": "output/beats/Community_Programs.jsonl @C111"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Gordon Tate — SUPERIOR COURT LIAISON",
+          "evidence": [
+            {
+              "id": "EV-LIFE-4e9e8a1e28",
+              "src": "output/simulation_ledger_snapshot.jsonl",
+              "text": "Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown",
+            "src": "output/simulation_ledger_snapshot.jsonl",
+            "id": "F-71d9ad7d0d0e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00048",
+      "name": "Carlos Presti",
+      "quote": "I saw another new spot opening up Downtown. I don't know what it is yet, but I'm always curious to see what actually sticks around here. It's just good to see something new moving in.",
+      "disp": "driven, hard to sit still; curious, open to new things",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n \"answer\": \"quote\",\n \"quote\": \"I saw another new spot opening up Downtown. I don't know what it is yet, but I'm always curious to see what actually sticks around here. It's just good to see something new moving in.\",\n \"fact_ids\": [\n  \"F-71d9ad7d0d0e\"\n ],\n \"basis\": \"direct-reaction\",\n \"unverifiedLead\": null,\n \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-71d9ad7d0d0e"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00048-5f469efcb6",
+        "authoredQuote": true,
+        "publishableQuote": "I saw another new spot opening up Downtown. I don't know what it is yet, but I'm always curious to see what actually sticks around here. It's just good to see something new moving in."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00048",
+          "name": "Carlos Presti",
+          "role": "Corporate Accountant",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "Your own current-cycle line says: \"Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown\". What did you notice about Downtown? Speak only from that line and your own reaction."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "Downtown",
+          "focus": "The tension between Downtown's institutional stability (NeuroCity) and its fragile human margins.",
+          "src": "output/beats/Community_Programs.jsonl @C111"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Carlos Presti — Corporate Accountant",
+          "evidence": [
+            {
+              "id": "EV-LIFE-1edfe53523",
+              "src": "output/simulation_ledger_snapshot.jsonl",
+              "text": "Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown",
+            "src": "output/simulation_ledger_snapshot.jsonl",
+            "id": "F-71d9ad7d0d0e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00004",
+      "name": "Lucia Polito",
+      "quote": "I heard about Downtown First Friday Live Music last night, and it made me think about how vibrant Downtown can be. It's great to see people coming together for events like that.",
+      "disp": "driven, hard to sit still; draws people in, deep with them; warm, tender with people; curious, open to new things; steady, hard to shake",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I heard about Downtown First Friday Live Music last night, and it made me think about how vibrant Downtown can be. It's great to see people coming together for events like that.\",\n  \"fact_ids\": [\"F-f13a5027fecf\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-f13a5027fecf"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00004-a81b12c686",
+        "authoredQuote": true,
+        "publishableQuote": "I heard about Downtown First Friday Live Music last night, and it made me think about how vibrant Downtown can be. It's great to see people coming together for events like that."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00004",
+          "name": "Lucia Polito",
+          "role": "Aura Wellness Practitioner",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "Your own current-cycle line says: \"Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music over in Downtown last night\". What did you notice about Downtown? Speak only from that line and your own reaction."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "Downtown",
+          "focus": "The tension between Downtown's institutional stability (NeuroCity) and its fragile human margins.",
+          "src": "output/beats/Community_Programs.jsonl @C111"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Lucia Polito — Aura Wellness Practitioner",
+          "evidence": [
+            {
+              "id": "EV-LIFE-b1e1626a98",
+              "src": "output/simulation_ledger_snapshot.jsonl",
+              "text": "Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music over in Downtown last night"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music over in Downtown last night",
+            "src": "output/simulation_ledger_snapshot.jsonl",
+            "id": "F-f13a5027fecf"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-10-16T18:17:28.308Z"
+}

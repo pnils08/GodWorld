@@ -1,0 +1,1250 @@
+{
+  "version": "SAFETY-SLICE-4",
+  "empty": false,
+  "cycle": 113,
+  "kind": "beat-safety",
+  "seat": {
+    "slug": "rachel-torres",
+    "name": "Sgt. Rachel Torres",
+    "popid": "POP-00057",
+    "desk": "civic",
+    "domain": "public-safety",
+    "builder": "buildSafetySlice.js"
+  },
+  "hood": "Eastlake",
+  "pulse": {
+    "className": "beat-safety",
+    "score": 100,
+    "label": "Eastlake logged the most incidents (8) | 22 neighborhoods on the table",
+    "hood": "Eastlake",
+    "source": "output/beats/Crime_Metrics.jsonl @C113"
+  },
+  "story": {
+    "kind": "beat-safety",
+    "angle": "Eastlake logged the most incidents (8) | 22 neighborhoods on the table — what the table says and who answers for it",
+    "label": "Eastlake logged the most incidents (8) | 22 neighborhoods on the table",
+    "hookLine": "Eastlake leads the incident count; Temescal waits longest for a response; 56 in custody citywide; 39 public-safety staff on the roster.",
+    "hood": "Eastlake",
+    "citizens": [
+      "Rafael Montez (POP-00136)",
+      "Kimberly Cho (POP-00137)",
+      "Leonard Briggs (POP-00138)",
+      "Samantha Viteri (POP-00139)",
+      "Marcus Hollowell (POP-00140)",
+      "Priya Narang (POP-00141)",
+      "Marc Allie (POP-00241)",
+      "Vincent Ramirez (POP-00514)",
+      "Vanessa Tran-Muñoz (POP-01021)",
+      "Dolores Nwachukwu (POP-01141)",
+      "Tomas Reinholt (POP-01142)",
+      "Kendra Lyle-Nnamdi (POP-01143)",
+      "Benjamin Tsai (POP-01144)",
+      "Marisol Ibarra (POP-01145)",
+      "Devin Castellanos (POP-01146)",
+      "Ruth Anyanwu (POP-01147)",
+      "Jerome Lindqvist (POP-01148)",
+      "Hana Petrosyan (POP-01149)",
+      "Calvin Mokoena (POP-01150)",
+      "Luis Ferreira-Nash (POP-01151)",
+      "Ingrid Solberg (POP-01152)",
+      "Omar Haddad (POP-01153)",
+      "Felicia Grandberry (POP-01154)",
+      "Teodoro Villalpando (POP-01155)",
+      "Nadia Rasmussen (POP-01156)",
+      "Wesley Oduya (POP-01157)",
+      "Priscilla Chang (POP-01158)",
+      "Dmitri Volkov (POP-01159)",
+      "Yolanda Beckford (POP-01160)",
+      "Samuel Adeyemi (POP-01161)",
+      "Grace Oyelaran (POP-01162)",
+      "Rashida Coleman-Ortiz (POP-01163)",
+      "Hector Quintanilla (POP-01164)",
+      "Imani Delacroix (POP-01165)",
+      "Patrick Asante (POP-01166)",
+      "Lena Marchetti (POP-01167)",
+      "Tobias Nkemelu (POP-01168)",
+      "Esperanza Ruiz (POP-01169)",
+      "Caleb Thornbury (POP-01170)"
+    ],
+    "popids": [
+      "POP-00136",
+      "POP-00137",
+      "POP-00138",
+      "POP-00139",
+      "POP-00140",
+      "POP-00141",
+      "POP-00241",
+      "POP-00514",
+      "POP-01021",
+      "POP-01141",
+      "POP-01142",
+      "POP-01143",
+      "POP-01144",
+      "POP-01145",
+      "POP-01146",
+      "POP-01147",
+      "POP-01148",
+      "POP-01149",
+      "POP-01150",
+      "POP-01151",
+      "POP-01152",
+      "POP-01153",
+      "POP-01154",
+      "POP-01155",
+      "POP-01156",
+      "POP-01157",
+      "POP-01158",
+      "POP-01159",
+      "POP-01160",
+      "POP-01161",
+      "POP-01162",
+      "POP-01163",
+      "POP-01164",
+      "POP-01165",
+      "POP-01166",
+      "POP-01167",
+      "POP-01168",
+      "POP-01169",
+      "POP-01170"
+    ],
+    "ref": "output/beats/Crime_Metrics.jsonl @C113",
+    "cycle": 113
+  },
+  "approach": "Public-safety approach: this slice is the crime table for every neighborhood — incidents, response time, clearance — the public-safety staff on the roster, the court record (who was charged, what the court did, what it cost them) and the custody trail from charges to arrests to who is held, hood by hood. Measured, third person, incident structure and classification gaps. The numbers, the officials and the defendants are real; the block, the call, the aftermath are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-00136",
+      "name": "Rafael Montez",
+      "role": "Police Chief",
+      "neighborhood": null,
+      "business": "Oakland Police Department",
+      "profile": "Rafael Montez — Police Chief — Oakland Police Department",
+      "why": "works at Oakland Police Department (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00137",
+      "name": "Kimberly Cho",
+      "role": "DEPUTY CHIEF OF OPERATIONS",
+      "neighborhood": null,
+      "business": "Oakland Police Department",
+      "profile": "Kimberly Cho — DEPUTY CHIEF OF OPERATIONS — Oakland Police Department",
+      "why": "works at Oakland Police Department (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00138",
+      "name": "Leonard Briggs",
+      "role": "DEPUTY CHIEF OF COMMUNITY ENGAGEMENT",
+      "neighborhood": null,
+      "business": "Oakland Police Department",
+      "profile": "Leonard Briggs — DEPUTY CHIEF OF COMMUNITY ENGAGEMENT — Oakland Police Department",
+      "why": "works at Oakland Police Department (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00139",
+      "name": "Samantha Viteri",
+      "role": "INTERNAL AFFAIRS DIVISION LEAD",
+      "neighborhood": null,
+      "business": "Oakland Police Department",
+      "profile": "Samantha Viteri — INTERNAL AFFAIRS DIVISION LEAD — Oakland Police Department",
+      "why": "works at Oakland Police Department (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00140",
+      "name": "Marcus Hollowell",
+      "role": "FIRE CHIEF",
+      "neighborhood": null,
+      "business": "Oakland Fire Department",
+      "profile": "Marcus Hollowell — FIRE CHIEF — Oakland Fire Department",
+      "why": "works at Oakland Fire Department (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00141",
+      "name": "Priya Narang",
+      "role": "EMS DIRECTOR",
+      "neighborhood": null,
+      "business": "Oakland Fire Department",
+      "profile": "Priya Narang — EMS DIRECTOR — Oakland Fire Department",
+      "why": "works at Oakland Fire Department (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00241",
+      "name": "Marc Allie",
+      "role": "Security guard",
+      "neighborhood": null,
+      "business": "Oakland Alternative Response Initiative",
+      "profile": "Marc Allie — Security guard — Oakland Alternative Response Initiative",
+      "why": "works at Oakland Alternative Response Initiative (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00514",
+      "name": "Vincent Ramirez",
+      "role": "OPOA President",
+      "neighborhood": null,
+      "business": "Oakland Police Department",
+      "profile": "Vincent Ramirez — OPOA President — Oakland Police Department",
+      "why": "works at Oakland Police Department (Employment_Roster)"
+    },
+    {
+      "popid": "POP-01021",
+      "name": "Vanessa Tran-Muñoz",
+      "role": "OARI Program Director",
+      "neighborhood": null,
+      "business": "Oakland Alternative Response Initiative",
+      "profile": "Vanessa Tran-Muñoz — OARI Program Director — Oakland Alternative Response Initiative",
+      "why": "works at Oakland Alternative Response Initiative (Employment_Roster)"
+    },
+    {
+      "popid": "POP-01141",
+      "name": "Dolores Nwachukwu",
+      "role": "Police Captain",
+      "neighborhood": null,
+      "business": "Oakland Police Department",
+      "profile": "Dolores Nwachukwu — Police Captain — Oakland Police Department",
+      "why": "works at Oakland Police Department (Employment_Roster)"
+    },
+    {
+      "popid": "POP-01142",
+      "name": "Tomas Reinholt",
+      "role": "Police Lieutenant",
+      "neighborhood": null,
+      "business": "Oakland Police Department",
+      "profile": "Tomas Reinholt — Police Lieutenant — Oakland Police Department",
+      "why": "works at Oakland Police Department (Employment_Roster)"
+    },
+    {
+      "popid": "POP-01143",
+      "name": "Kendra Lyle-Nnamdi",
+      "role": "Police Sergeant",
+      "neighborhood": null,
+      "business": "Oakland Police Department",
+      "profile": "Kendra Lyle-Nnamdi — Police Sergeant — Oakland Police Department",
+      "why": "works at Oakland Police Department (Employment_Roster)"
+    },
+    {
+      "popid": "POP-01144",
+      "name": "Benjamin Tsai",
+      "role": "Police Sergeant",
+      "neighborhood": null,
+      "business": "Oakland Police Department",
+      "profile": "Benjamin Tsai — Police Sergeant — Oakland Police Department",
+      "why": "works at Oakland Police Department (Employment_Roster)"
+    },
+    {
+      "popid": "POP-01145",
+      "name": "Marisol Ibarra",
+      "role": "Detective",
+      "neighborhood": null,
+      "business": "Oakland Police Department",
+      "profile": "Marisol Ibarra — Detective — Oakland Police Department",
+      "why": "works at Oakland Police Department (Employment_Roster)"
+    },
+    {
+      "popid": "POP-01146",
+      "name": "Devin Castellanos",
+      "role": "Detective",
+      "neighborhood": null,
+      "business": "Oakland Police Department",
+      "profile": "Devin Castellanos — Detective — Oakland Police Department",
+      "why": "works at Oakland Police Department (Employment_Roster)"
+    },
+    {
+      "popid": "POP-01147",
+      "name": "Ruth Anyanwu",
+      "role": "Police Officer",
+      "neighborhood": null,
+      "business": "Oakland Police Department",
+      "profile": "Ruth Anyanwu — Police Officer — Oakland Police Department",
+      "why": "works at Oakland Police Department (Employment_Roster)"
+    },
+    {
+      "popid": "POP-01148",
+      "name": "Jerome Lindqvist",
+      "role": "Police Officer",
+      "neighborhood": null,
+      "business": "Oakland Police Department",
+      "profile": "Jerome Lindqvist — Police Officer — Oakland Police Department",
+      "why": "works at Oakland Police Department (Employment_Roster)"
+    },
+    {
+      "popid": "POP-01149",
+      "name": "Hana Petrosyan",
+      "role": "Police Officer",
+      "neighborhood": null,
+      "business": "Oakland Police Department",
+      "profile": "Hana Petrosyan — Police Officer — Oakland Police Department",
+      "why": "works at Oakland Police Department (Employment_Roster)"
+    },
+    {
+      "popid": "POP-01150",
+      "name": "Calvin Mokoena",
+      "role": "911 Dispatcher",
+      "neighborhood": null,
+      "business": "Oakland Police Department",
+      "profile": "Calvin Mokoena — 911 Dispatcher — Oakland Police Department",
+      "why": "works at Oakland Police Department (Employment_Roster)"
+    },
+    {
+      "popid": "POP-01151",
+      "name": "Luis Ferreira-Nash",
+      "role": "Deputy Fire Chief",
+      "neighborhood": null,
+      "business": "Oakland Fire Department",
+      "profile": "Luis Ferreira-Nash — Deputy Fire Chief — Oakland Fire Department",
+      "why": "works at Oakland Fire Department (Employment_Roster)"
+    },
+    {
+      "popid": "POP-01152",
+      "name": "Ingrid Solberg",
+      "role": "Battalion Chief",
+      "neighborhood": null,
+      "business": "Oakland Fire Department",
+      "profile": "Ingrid Solberg — Battalion Chief — Oakland Fire Department",
+      "why": "works at Oakland Fire Department (Employment_Roster)"
+    },
+    {
+      "popid": "POP-01153",
+      "name": "Omar Haddad",
+      "role": "Fire Captain",
+      "neighborhood": null,
+      "business": "Oakland Fire Department",
+      "profile": "Omar Haddad — Fire Captain — Oakland Fire Department",
+      "why": "works at Oakland Fire Department (Employment_Roster)"
+    },
+    {
+      "popid": "POP-01154",
+      "name": "Felicia Grandberry",
+      "role": "Fire Lieutenant",
+      "neighborhood": null,
+      "business": "Oakland Fire Department",
+      "profile": "Felicia Grandberry — Fire Lieutenant — Oakland Fire Department",
+      "why": "works at Oakland Fire Department (Employment_Roster)"
+    },
+    {
+      "popid": "POP-01155",
+      "name": "Teodoro Villalpando",
+      "role": "Fire Engineer",
+      "neighborhood": null,
+      "business": "Oakland Fire Department",
+      "profile": "Teodoro Villalpando — Fire Engineer — Oakland Fire Department",
+      "why": "works at Oakland Fire Department (Employment_Roster)"
+    },
+    {
+      "popid": "POP-01156",
+      "name": "Nadia Rasmussen",
+      "role": "Firefighter",
+      "neighborhood": null,
+      "business": "Oakland Fire Department",
+      "profile": "Nadia Rasmussen — Firefighter — Oakland Fire Department",
+      "why": "works at Oakland Fire Department (Employment_Roster)"
+    },
+    {
+      "popid": "POP-01157",
+      "name": "Wesley Oduya",
+      "role": "Firefighter",
+      "neighborhood": null,
+      "business": "Oakland Fire Department",
+      "profile": "Wesley Oduya — Firefighter — Oakland Fire Department",
+      "why": "works at Oakland Fire Department (Employment_Roster)"
+    },
+    {
+      "popid": "POP-01158",
+      "name": "Priscilla Chang",
+      "role": "Firefighter",
+      "neighborhood": null,
+      "business": "Oakland Fire Department",
+      "profile": "Priscilla Chang — Firefighter — Oakland Fire Department",
+      "why": "works at Oakland Fire Department (Employment_Roster)"
+    },
+    {
+      "popid": "POP-01159",
+      "name": "Dmitri Volkov",
+      "role": "Firefighter",
+      "neighborhood": null,
+      "business": "Oakland Fire Department",
+      "profile": "Dmitri Volkov — Firefighter — Oakland Fire Department",
+      "why": "works at Oakland Fire Department (Employment_Roster)"
+    },
+    {
+      "popid": "POP-01160",
+      "name": "Yolanda Beckford",
+      "role": "Firefighter-Paramedic",
+      "neighborhood": null,
+      "business": "Oakland Fire Department",
+      "profile": "Yolanda Beckford — Firefighter-Paramedic — Oakland Fire Department",
+      "why": "works at Oakland Fire Department (Employment_Roster)"
+    },
+    {
+      "popid": "POP-01161",
+      "name": "Samuel Adeyemi",
+      "role": "Fire Inspector",
+      "neighborhood": null,
+      "business": "Oakland Fire Department",
+      "profile": "Samuel Adeyemi — Fire Inspector — Oakland Fire Department",
+      "why": "works at Oakland Fire Department (Employment_Roster)"
+    },
+    {
+      "popid": "POP-01162",
+      "name": "Grace Oyelaran",
+      "role": "OARI Team Lead",
+      "neighborhood": null,
+      "business": "Oakland Alternative Response Initiative",
+      "profile": "Grace Oyelaran — OARI Team Lead — Oakland Alternative Response Initiative",
+      "why": "works at Oakland Alternative Response Initiative (Employment_Roster)"
+    },
+    {
+      "popid": "POP-01163",
+      "name": "Rashida Coleman-Ortiz",
+      "role": "OARI Team Lead",
+      "neighborhood": null,
+      "business": "Oakland Alternative Response Initiative",
+      "profile": "Rashida Coleman-Ortiz — OARI Team Lead — Oakland Alternative Response Initiative",
+      "why": "works at Oakland Alternative Response Initiative (Employment_Roster)"
+    },
+    {
+      "popid": "POP-01164",
+      "name": "Hector Quintanilla",
+      "role": "OARI Team Lead",
+      "neighborhood": null,
+      "business": "Oakland Alternative Response Initiative",
+      "profile": "Hector Quintanilla — OARI Team Lead — Oakland Alternative Response Initiative",
+      "why": "works at Oakland Alternative Response Initiative (Employment_Roster)"
+    },
+    {
+      "popid": "POP-01165",
+      "name": "Imani Delacroix",
+      "role": "Crisis Clinician",
+      "neighborhood": null,
+      "business": "Oakland Alternative Response Initiative",
+      "profile": "Imani Delacroix — Crisis Clinician — Oakland Alternative Response Initiative",
+      "why": "works at Oakland Alternative Response Initiative (Employment_Roster)"
+    },
+    {
+      "popid": "POP-01166",
+      "name": "Patrick Asante",
+      "role": "Crisis Clinician",
+      "neighborhood": null,
+      "business": "Oakland Alternative Response Initiative",
+      "profile": "Patrick Asante — Crisis Clinician — Oakland Alternative Response Initiative",
+      "why": "works at Oakland Alternative Response Initiative (Employment_Roster)"
+    },
+    {
+      "popid": "POP-01167",
+      "name": "Lena Marchetti",
+      "role": "Crisis Clinician",
+      "neighborhood": null,
+      "business": "Oakland Alternative Response Initiative",
+      "profile": "Lena Marchetti — Crisis Clinician — Oakland Alternative Response Initiative",
+      "why": "works at Oakland Alternative Response Initiative (Employment_Roster)"
+    },
+    {
+      "popid": "POP-01168",
+      "name": "Tobias Nkemelu",
+      "role": "Peer Responder",
+      "neighborhood": null,
+      "business": "Oakland Alternative Response Initiative",
+      "profile": "Tobias Nkemelu — Peer Responder — Oakland Alternative Response Initiative",
+      "why": "works at Oakland Alternative Response Initiative (Employment_Roster)"
+    },
+    {
+      "popid": "POP-01169",
+      "name": "Esperanza Ruiz",
+      "role": "Peer Responder",
+      "neighborhood": null,
+      "business": "Oakland Alternative Response Initiative",
+      "profile": "Esperanza Ruiz — Peer Responder — Oakland Alternative Response Initiative",
+      "why": "works at Oakland Alternative Response Initiative (Employment_Roster)"
+    },
+    {
+      "popid": "POP-01170",
+      "name": "Caleb Thornbury",
+      "role": "Peer Responder",
+      "neighborhood": null,
+      "business": "Oakland Alternative Response Initiative",
+      "profile": "Caleb Thornbury — Peer Responder — Oakland Alternative Response Initiative",
+      "why": "works at Oakland Alternative Response Initiative (Employment_Roster)"
+    }
+  ],
+  "facts": [
+    {
+      "text": "130 incidents across 22 neighborhoods; most in Eastlake 8, West Oakland 7, Grand Lake 7, Laurel 7, Chinatown 7; fewest in Glenview 4, Brooklyn 4, Jack London 3",
+      "src": "output/beats/Crime_Metrics.jsonl @C113"
+    },
+    {
+      "text": "Eastlake: 8 incidents (+4 vs C112), response 9.9 min, clearance 22%, property index 37, violent index 23",
+      "src": "output/beats/Crime_Metrics.jsonl @C113"
+    },
+    {
+      "text": "Slowest response: Temescal: 6 incidents (+1 vs C112), response 10.8 min, clearance 22%, property index 44, violent index 22",
+      "src": "output/beats/Crime_Metrics.jsonl @C113"
+    },
+    {
+      "text": "Moved this cycle — rising: Adams Point, Piedmont Ave; easing: none",
+      "src": "output/beats/Crime_Metrics.jsonl @C113"
+    },
+    {
+      "text": "Citywide custody this cycle: 29 arrests (0 tracked, 29 other residents); 56 in custody at the close; 30 left",
+      "src": "output/beats/Care_Justice_Census.jsonl judicial @C113 city"
+    },
+    {
+      "text": "West Oakland: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl judicial @C113 West Oakland"
+    },
+    {
+      "text": "Eastlake: 8 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl judicial @C113 Eastlake"
+    },
+    {
+      "text": "Grand Lake: 7 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl judicial @C113 Grand Lake"
+    },
+    {
+      "text": "KONO: 7 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl judicial @C113 KONO"
+    },
+    {
+      "text": "Laurel: 7 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl judicial @C113 Laurel"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "Eastlake logged the most incidents (8) | 22 neighborhoods on the table — what the table says and who answers for it",
+    "hookLine": "Eastlake leads the incident count; Temescal waits longest for a response; 56 in custody citywide; 39 public-safety staff on the roster.",
+    "anchorFacts": [
+      "130 incidents across 22 neighborhoods; most in Eastlake 8, West Oakland 7, Grand Lake 7, Laurel 7, Chinatown 7; fewest in Glenview 4, Brooklyn 4, Jack London 3",
+      "Eastlake: 8 incidents (+4 vs C112), response 9.9 min, clearance 22%, property index 37, violent index 23",
+      "Slowest response: Temescal: 6 incidents (+1 vs C112), response 10.8 min, clearance 22%, property index 44, violent index 22",
+      "Moved this cycle — rising: Adams Point, Piedmont Ave; easing: none",
+      "Citywide custody this cycle: 29 arrests (0 tracked, 29 other residents); 56 in custody at the close; 30 left",
+      "West Oakland: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+      "Eastlake: 8 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+      "Grand Lake: 7 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+      "KONO: 7 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+      "Laurel: 7 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked"
+    ],
+    "evidence": [
+      {
+        "text": "130 incidents across 22 neighborhoods; most in Eastlake 8, West Oakland 7, Grand Lake 7, Laurel 7, Chinatown 7; fewest in Glenview 4, Brooklyn 4, Jack London 3",
+        "src": "output/beats/Crime_Metrics.jsonl @C113"
+      },
+      {
+        "text": "Eastlake: 8 incidents (+4 vs C112), response 9.9 min, clearance 22%, property index 37, violent index 23",
+        "src": "output/beats/Crime_Metrics.jsonl @C113"
+      },
+      {
+        "text": "Slowest response: Temescal: 6 incidents (+1 vs C112), response 10.8 min, clearance 22%, property index 44, violent index 22",
+        "src": "output/beats/Crime_Metrics.jsonl @C113"
+      },
+      {
+        "text": "Moved this cycle — rising: Adams Point, Piedmont Ave; easing: none",
+        "src": "output/beats/Crime_Metrics.jsonl @C113"
+      },
+      {
+        "text": "Citywide custody this cycle: 29 arrests (0 tracked, 29 other residents); 56 in custody at the close; 30 left",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C113 city"
+      },
+      {
+        "text": "West Oakland: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C113 West Oakland"
+      },
+      {
+        "text": "Eastlake: 8 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C113 Eastlake"
+      },
+      {
+        "text": "Grand Lake: 7 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C113 Grand Lake"
+      },
+      {
+        "text": "KONO: 7 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C113 KONO"
+      },
+      {
+        "text": "Laurel: 7 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C113 Laurel"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": {
+      "state": "PRIOR_CYCLE_ON_DISK",
+      "vs": 112
+    },
+    "hooks": [],
+    "note": "desk-signal incident rows attached as pointers (5)",
+    "pageVoices": [],
+    "roomIsYours": "the corner after the call, the dispatcher's pause, who was on the porch, what the neighborhood watch captain saw first"
+  },
+  "table": [
+    {
+      "hood": "Eastlake",
+      "property": 37,
+      "violent": 23,
+      "response": 9.9,
+      "clearance": 0.22,
+      "incidents": 8,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 0.99
+    },
+    {
+      "hood": "West Oakland",
+      "property": 34,
+      "violent": 25,
+      "response": 9.9,
+      "clearance": 0.22,
+      "incidents": 7,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 0.98
+    },
+    {
+      "hood": "Grand Lake",
+      "property": 39,
+      "violent": 24,
+      "response": 10.5,
+      "clearance": 0.24,
+      "incidents": 7,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 1.04
+    },
+    {
+      "hood": "Laurel",
+      "property": 37,
+      "violent": 24,
+      "response": 10.7,
+      "clearance": 0.22,
+      "incidents": 7,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 1.01
+    },
+    {
+      "hood": "Chinatown",
+      "property": 39,
+      "violent": 23,
+      "response": 10.2,
+      "clearance": 0.2,
+      "incidents": 7,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 1.02
+    },
+    {
+      "hood": "KONO",
+      "property": 38,
+      "violent": 21,
+      "response": 9.6,
+      "clearance": 0.25,
+      "incidents": 7,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 0.98
+    },
+    {
+      "hood": "Rockridge",
+      "property": 32,
+      "violent": 20,
+      "response": 9.5,
+      "clearance": 0.25,
+      "incidents": 7,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 0.86
+    },
+    {
+      "hood": "Uptown",
+      "property": 35,
+      "violent": 20,
+      "response": 10.3,
+      "clearance": 0.25,
+      "incidents": 7,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 0.91
+    },
+    {
+      "hood": "East Oakland",
+      "property": 35,
+      "violent": 28,
+      "response": 9.5,
+      "clearance": 0.21,
+      "incidents": 6,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 1.04
+    },
+    {
+      "hood": "Fruitvale",
+      "property": 34,
+      "violent": 28,
+      "response": 10.3,
+      "clearance": 0.21,
+      "incidents": 6,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 1.02
+    },
+    {
+      "hood": "San Antonio",
+      "property": 35,
+      "violent": 28,
+      "response": 9.5,
+      "clearance": 0.24,
+      "incidents": 6,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 1.04
+    },
+    {
+      "hood": "Ivy Hill",
+      "property": 38,
+      "violent": 24,
+      "response": 9.8,
+      "clearance": 0.2,
+      "incidents": 6,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 1.02
+    },
+    {
+      "hood": "Adams Point",
+      "property": 38,
+      "violent": 23,
+      "response": 10,
+      "clearance": 0.22,
+      "incidents": 6,
+      "trend": "rising",
+      "hotspot": null,
+      "pressure": 1.01
+    },
+    {
+      "hood": "Piedmont Ave",
+      "property": 35,
+      "violent": 22,
+      "response": 10.5,
+      "clearance": 0.24,
+      "incidents": 6,
+      "trend": "rising",
+      "hotspot": null,
+      "pressure": 0.94
+    },
+    {
+      "hood": "Temescal",
+      "property": 44,
+      "violent": 22,
+      "response": 10.8,
+      "clearance": 0.22,
+      "incidents": 6,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 1.09
+    },
+    {
+      "hood": "Baylight District",
+      "property": 28,
+      "violent": 24,
+      "response": 9.5,
+      "clearance": 0.22,
+      "incidents": 5,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 0.86
+    },
+    {
+      "hood": "Dimond",
+      "property": 40,
+      "violent": 24,
+      "response": 9.6,
+      "clearance": 0.23,
+      "incidents": 5,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 1.06
+    },
+    {
+      "hood": "Lake Merritt",
+      "property": 32,
+      "violent": 19,
+      "response": 9.6,
+      "clearance": 0.22,
+      "incidents": 5,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 0.84
+    },
+    {
+      "hood": "Downtown",
+      "property": 33,
+      "violent": 18,
+      "response": 10.8,
+      "clearance": 0.26,
+      "incidents": 5,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 0.84
+    },
+    {
+      "hood": "Glenview",
+      "property": 38,
+      "violent": 27,
+      "response": 10.6,
+      "clearance": 0.22,
+      "incidents": 4,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 1.07
+    },
+    {
+      "hood": "Brooklyn",
+      "property": 33,
+      "violent": 24,
+      "response": 10.3,
+      "clearance": 0.23,
+      "incidents": 4,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 0.94
+    },
+    {
+      "hood": "Jack London",
+      "property": 36,
+      "violent": 18,
+      "response": 9.8,
+      "clearance": 0.25,
+      "incidents": 3,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 0.89
+    }
+  ],
+  "signalPointers": [
+    {
+      "label": "Oakland Alternative Response Initiative | Status passed | phase dispatch-live",
+      "ref": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c113.json snapshots.Initiative_Tracker; storyline INIT-002:dispatch-live",
+      "hood": "West Oakland, Fruitvale, East Oakland"
+    },
+    {
+      "label": "Oakland Alternative Response Initiative | District-level data report and D3 community briefing C113",
+      "ref": "Initiative_Tracker (InitiativeID INIT-002); storyline INIT-002:dispatch-live",
+      "hood": null
+    },
+    {
+      "label": "sentiment/communityEngagement/nightlife | Oakland Alternative Response Initiative is dispatch-live — ongoing safety effects in West Oakland, Fruitvale, East Oak",
+      "ref": "Ripple_Ledger cycle 113 (CauseType initiative-implementation); rendered: world_summary_c113.md \"## What Moved\" > \"### initiative-implementation\"; storyline INIT-002:dispatch-live",
+      "hood": null
+    },
+    {
+      "label": "approval/district-sentiment | West Oakland Stabilization Fund sitting (0, capped); Oakland Alternative Response Initiative sitting (0, capped); Fruitvale Transi",
+      "ref": "Ripple_Ledger cycle 113 (CauseType approval-shift); rendered: world_summary_c113.md \"## What Moved\" > \"### approval-shift\"",
+      "hood": "CITYWIDE"
+    },
+    {
+      "label": "approval/district-sentiment | West Oakland Stabilization Fund sitting (0, capped); Oakland Alternative Response Initiative sitting (0, capped); Oakland Youth Ap",
+      "ref": "Ripple_Ledger cycle 113 (CauseType approval-shift); rendered: world_summary_c113.md \"## What Moved\" > \"### approval-shift\"",
+      "hood": "D1"
+    }
+  ],
+  "court": {
+    "state": "NO_CASES",
+    "cases": []
+  },
+  "custodyTrail": {
+    "state": "ON_RECORD",
+    "city": {
+      "scope": "city",
+      "hood": null,
+      "complete": true,
+      "completeness": "complete",
+      "demand": null,
+      "intakes": 29,
+      "tracked": 0,
+      "other": 29,
+      "closing": 56,
+      "trackedOcc": 0,
+      "otherOcc": 56,
+      "beds": null,
+      "exits": 30,
+      "names": []
+    },
+    "unallocated": {
+      "scope": "unallocated",
+      "hood": null,
+      "complete": true,
+      "completeness": "complete",
+      "demand": null,
+      "intakes": 0,
+      "tracked": 0,
+      "other": 0,
+      "closing": 0,
+      "trackedOcc": 0,
+      "otherOcc": 0,
+      "beds": null,
+      "exits": 0,
+      "names": []
+    },
+    "hoods": [
+      {
+        "scope": "neighborhood",
+        "hood": "West Oakland",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 7,
+        "intakes": 2,
+        "tracked": 0,
+        "other": 2,
+        "closing": 4,
+        "trackedOcc": 0,
+        "otherOcc": 4,
+        "beds": null,
+        "exits": 2,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Eastlake",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 8,
+        "intakes": 2,
+        "tracked": 0,
+        "other": 2,
+        "closing": 3,
+        "trackedOcc": 0,
+        "otherOcc": 3,
+        "beds": null,
+        "exits": 1,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Grand Lake",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 7,
+        "intakes": 2,
+        "tracked": 0,
+        "other": 2,
+        "closing": 3,
+        "trackedOcc": 0,
+        "otherOcc": 3,
+        "beds": null,
+        "exits": 2,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "KONO",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 7,
+        "intakes": 2,
+        "tracked": 0,
+        "other": 2,
+        "closing": 3,
+        "trackedOcc": 0,
+        "otherOcc": 3,
+        "beds": null,
+        "exits": 1,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Laurel",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 7,
+        "intakes": 2,
+        "tracked": 0,
+        "other": 2,
+        "closing": 3,
+        "trackedOcc": 0,
+        "otherOcc": 3,
+        "beds": null,
+        "exits": 1,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Rockridge",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 7,
+        "intakes": 2,
+        "tracked": 0,
+        "other": 2,
+        "closing": 3,
+        "trackedOcc": 0,
+        "otherOcc": 3,
+        "beds": null,
+        "exits": 2,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Uptown",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 7,
+        "intakes": 2,
+        "tracked": 0,
+        "other": 2,
+        "closing": 3,
+        "trackedOcc": 0,
+        "otherOcc": 3,
+        "beds": null,
+        "exits": 1,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Baylight District",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 5,
+        "intakes": 1,
+        "tracked": 0,
+        "other": 1,
+        "closing": 3,
+        "trackedOcc": 0,
+        "otherOcc": 3,
+        "beds": null,
+        "exits": 2,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Chinatown",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 7,
+        "intakes": 1,
+        "tracked": 0,
+        "other": 1,
+        "closing": 3,
+        "trackedOcc": 0,
+        "otherOcc": 3,
+        "beds": null,
+        "exits": 2,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Dimond",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 5,
+        "intakes": 1,
+        "tracked": 0,
+        "other": 1,
+        "closing": 3,
+        "trackedOcc": 0,
+        "otherOcc": 3,
+        "beds": null,
+        "exits": 1,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Fruitvale",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 6,
+        "intakes": 1,
+        "tracked": 0,
+        "other": 1,
+        "closing": 3,
+        "trackedOcc": 0,
+        "otherOcc": 3,
+        "beds": null,
+        "exits": 1,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Adams Point",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 6,
+        "intakes": 1,
+        "tracked": 0,
+        "other": 1,
+        "closing": 2,
+        "trackedOcc": 0,
+        "otherOcc": 2,
+        "beds": null,
+        "exits": 2,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Brooklyn",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 4,
+        "intakes": 1,
+        "tracked": 0,
+        "other": 1,
+        "closing": 2,
+        "trackedOcc": 0,
+        "otherOcc": 2,
+        "beds": null,
+        "exits": 1,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Downtown",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 5,
+        "intakes": 1,
+        "tracked": 0,
+        "other": 1,
+        "closing": 2,
+        "trackedOcc": 0,
+        "otherOcc": 2,
+        "beds": null,
+        "exits": 1,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "East Oakland",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 6,
+        "intakes": 1,
+        "tracked": 0,
+        "other": 1,
+        "closing": 2,
+        "trackedOcc": 0,
+        "otherOcc": 2,
+        "beds": null,
+        "exits": 1,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Glenview",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 4,
+        "intakes": 1,
+        "tracked": 0,
+        "other": 1,
+        "closing": 2,
+        "trackedOcc": 0,
+        "otherOcc": 2,
+        "beds": null,
+        "exits": 1,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Ivy Hill",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 6,
+        "intakes": 1,
+        "tracked": 0,
+        "other": 1,
+        "closing": 2,
+        "trackedOcc": 0,
+        "otherOcc": 2,
+        "beds": null,
+        "exits": 2,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Jack London",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 3,
+        "intakes": 1,
+        "tracked": 0,
+        "other": 1,
+        "closing": 2,
+        "trackedOcc": 0,
+        "otherOcc": 2,
+        "beds": null,
+        "exits": 1,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Lake Merritt",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 5,
+        "intakes": 1,
+        "tracked": 0,
+        "other": 1,
+        "closing": 2,
+        "trackedOcc": 0,
+        "otherOcc": 2,
+        "beds": null,
+        "exits": 1,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Piedmont Ave",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 6,
+        "intakes": 1,
+        "tracked": 0,
+        "other": 1,
+        "closing": 2,
+        "trackedOcc": 0,
+        "otherOcc": 2,
+        "beds": null,
+        "exits": 1,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "San Antonio",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 6,
+        "intakes": 1,
+        "tracked": 0,
+        "other": 1,
+        "closing": 2,
+        "trackedOcc": 0,
+        "otherOcc": 2,
+        "beds": null,
+        "exits": 2,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Temescal",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 6,
+        "intakes": 1,
+        "tracked": 0,
+        "other": 1,
+        "closing": 2,
+        "trackedOcc": 0,
+        "otherOcc": 2,
+        "beds": null,
+        "exits": 1,
+        "names": []
+      }
+    ]
+  },
+  "pointers": [
+    "output/beats/Crime_Metrics.jsonl @C113"
+  ]
+}

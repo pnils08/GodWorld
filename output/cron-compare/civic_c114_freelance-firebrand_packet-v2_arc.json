@@ -1,0 +1,32 @@
+{
+  "status": "arc-seed",
+  "cycle": "114",
+  "desk": "civic",
+  "persona": "freelance-firebrand",
+  "hood": "Rockridge",
+  "quotes": [
+    {
+      "pop": "POP-00742",
+      "name": "Maya Torres-Dillon",
+      "quote": "To be honest, I'm a bit torn about the changes in Rockridge. On one hand, it's great to see the retail strip bustling and new residents exploring the neighborhood. It's a sign of life and energy. On the other hand, I've heard from friends who bought homes here last year that the first year was really tough, and that's concerning. As someone who's been here a while and is involved with the Bay Conservation Alliance, I hope we can keep the community spirit strong while navigating these changes."
+    },
+    {
+      "pop": "POP-00759",
+      "name": "Naomi Sterling",
+      "quote": "From what I see, Rockridge is still vibrant. The retail strip is bustling, and while BART delays can be frustrating, it doesn't seem to be dampening the atmosphere much. We've also had new residents moving in from Downtown, which is nice to see. As a faith leader, I've been focused on our community's response to challenges, and it's heartening to see different faith organizations coming together to support each other."
+    },
+    {
+      "pop": "POP-00691",
+      "name": "Tom Jilner",
+      "quote": "I've noticed new faces around my wine bar, people from Downtown exploring Rockridge. The retail strip is still lively, although BART delays can be a bit of a hassle for some customers. Overall, business feels steady."
+    },
+    {
+      "pop": "POP-00194",
+      "name": "Yu Zen",
+      "quote": "To be honest, I've seen some mixed things in Rockridge lately. On one hand, our retail strip is doing well, and it's nice to see new folks from Downtown checking out our neighborhood. But at the same time, I've noticed that with BART delays, commuters are getting a bit frustrated. As someone who's been around for a while and has a family to think about, it's made me wonder if we're doing enough to keep our neighborhood livable for everyone. I've been thinking a lot about community and what's important since my accident, and Rockridge feels like home, but I want to make sure it stays that way for everyone."
+    }
+  ],
+  "claim": "To be honest, I'm a bit torn about the changes in Rockridge. On one hand, it's great to see the retail strip bustling and new residents exploring the neighborhood. It's a sign of life and energy. On the other hand, I've heard from friends who bought homes here last year that the first year was really tough, and that's concerning. As someone who's been here a while and is involved with the Bay Conservation Alliance, I hope we can keep the community spirit strong while navigating these changes.",
+  "src": "citizenVoice PRESS c114",
+  "ranAt": "2026-11-04T19:16:08.406Z"
+}

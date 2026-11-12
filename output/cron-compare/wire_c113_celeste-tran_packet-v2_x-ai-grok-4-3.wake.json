@@ -1,0 +1,57 @@
+{
+  "mode": "wake-write",
+  "desk": "wire",
+  "cycle": "113",
+  "provider": "openrouter",
+  "model": "x-ai/grok-4.3",
+  "configuredWriterModel": "x-ai/grok-4.3",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "celeste-tran",
+  "byline": {
+    "name": "Celeste Tran",
+    "popid": "POP-00164",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 23,
+  "quotesLanded": 3,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [],
+  "toolCalls": 0,
+  "wordCount": 418,
+  "targetWords": "400-700",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": false,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 400",
+    "words": 418,
+    "short": "The closing trails off into a rhetorical question rather than stating the pattern's implication about the city's mood.",
+    "score": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "fca1fd333173868c32a6cc1b4a13fe6a8c48fedcee5c65d9856c2de64b37a1c7",
+    "costUsd": 0.0013
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/4 — The closing trails off into a rhetorical question rather than stating the pattern's implication about the city's mood."
+  },
+  "article": "output/cron-compare/staged/wire_c113_celeste-tran_packet-v2_x-ai-grok-4-3.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "h.com]\n{\n  \"popId\": \"POP-00164\",\n  \"name\": \"Celeste Tran\",\n  \"recorded\": true,\n  \"text\": \"filed: Marisol Rivera’s name ticked up one more slot on the culture record this cycle, reaching seven total\"\n}"
+  },
+  "ranAt": "2026-10-30T23:19:14.675Z",
+  "dispositionReconciledAt": "2026-10-31T17:00:03.026Z"
+}

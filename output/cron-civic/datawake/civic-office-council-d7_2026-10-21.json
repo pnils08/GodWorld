@@ -1,0 +1,26 @@
+{
+  "office": "council_d7",
+  "agentDir": "civic-office-council-d7",
+  "holder": "Warren Ashford",
+  "popid": "POP-00504",
+  "title": "City Council District 7",
+  "date": "2026-10-21",
+  "cycle": 112,
+  "model": "google/gemini-3.7-flash",
+  "statement": "District 7 has received and published the first quarterly utilization audit report for the Temescal Community Health Center to our office and the public data portal. With $16,961,538.45 remaining from the $45M allocation, public accountability demands that every dollar spent directly correlates with verified clinical intake and measurable health outcomes across Temescal, Rockridge, and KONO. Placing this data in the public record ensures full oversight before any further expenditures are authorized.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-112-civic-office-council-d7",
+        "text": "The pre-audit operational benchmark framework and intake criteria for INIT-005 are formally submitted to guide the upcoming review and safeguard the remaining $16,961,538.45 balance.",
+        "directiveCycle": 112,
+        "confrontationSeat": "civic-office-council-d7"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": "$16,961,538.45 remaining balance audited",
+  "ranAt": "2026-10-21T10:45:16.826Z",
+  "fellBackFrom": null
+}

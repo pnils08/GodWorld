@@ -1,0 +1,34 @@
+{
+  "office": "oari",
+  "cycle": 112,
+  "speaker": "Dr. Vanessa Tran-Munoz",
+  "cascadeSummary": "I accepted the Quarterly Outcome Report conditions — district-level response time and diversion rate breakouts plus a public D3 briefing — and committed to publishing the disaggregated data before any further expansion. I also reaffirmed the East Oakland and District 1 expansion as operational reality, with dispatch data now driving the program's next steps.",
+  "statements": [
+    {
+      "statementId": "STMT-112-oari-001",
+      "type": "operational_status",
+      "topic": "Quarterly Outcome Report — district-level accountability",
+      "initiative": "Oakland Alternative Response Initiative",
+      "decision": "Accept the D3 community-comment condition: disaggregate response time and diversion rate data by district, and schedule a public briefing in District 3 before any expansion decision.",
+      "quote": "The right number isn't the citywide average — it's how fast care reaches Fruitvale's streets, and that's the number we'll publish.",
+      "fullStatement": "The Quarterly Outcome Report is approved with conditions we welcome. Our next report breaks down response times and diversion rates by district — D1, D3, D5, and now East Oakland — not just as a citywide rollup. We will hold the public briefing in District 3 before any further expansion is considered, because the community that carries the program's promise deserves to see the proof on its own streets. Transparency isn't a concession; it's the operating standard.",
+      "trackerUpdates": {
+        "initiative": "INIT-002",
+        "ImplementationPhase": "dispatch-live",
+        "MilestoneNotes": "C112: Quarterly outcome report accepted with district-level data condition; D3 public briefing scheduled before further expansion.",
+        "NextScheduledAction": "Publish district-disaggregated outcome data and hold D3 public briefing",
+        "NextActionCycle": 113
+      }
+    },
+    {
+      "statementId": "STMT-112-oari-002",
+      "type": "operational_status",
+      "topic": "East Oakland and District 1 expansion confirmation",
+      "initiative": "Oakland Alternative Response Initiative",
+      "decision": "Confirm East Oakland and District 1 are live under OARI dispatch, with D5's performance audit verifying response metrics on the ground.",
+      "quote": "East Oakland isn't next — it's now. Trained responders are answering those calls today, not armed officers.",
+      "fullStatement": "The expansion is not a plan on a whiteboard — it's the dispatch routing that's live in East Oakland and District 1 today. Mental health calls in those districts are answered by trained civilian responders, not law enforcement. The District 5 performance audit is the right check at the right time: it verifies our response metrics against real dispatch data and tells us — and the public — who gets help and who gets ignored. We welcome the scrutiny because the data is how we earn the next expansion.",
+      "trackerUpdates": {}
+    }
+  ]
+}

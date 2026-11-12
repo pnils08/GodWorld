@@ -1,0 +1,526 @@
+{
+  "v": "UNDOCKED-ADAPTER/1",
+  "show": "UNDOCKED",
+  "episode_id": "undocked-pop00647-2026-11-04T02-30-29",
+  "popid": "POP-00647",
+  "holder": "Ronald Silk",
+  "session": "undocked-pop00647",
+  "window": {
+    "startedAt": "2026-11-04T02:30:29.590Z",
+    "endedAt": "2026-11-04T02:50:37.055Z"
+  },
+  "runner": {
+    "turns": 47,
+    "exitCode": 0,
+    "capped": true,
+    "toolErrors": 0,
+    "estCostUsd": 0.0256,
+    "tokensIn": 231077,
+    "tokensOut": 4992,
+    "log": "output/spacemolt-show/episodes/undocked-pop00647-2026-11-04T02-30-29.log",
+    "stopReason": "window",
+    "toolCalls": 44
+  },
+  "stall": null,
+  "source": {
+    "kind": "get_action_log",
+    "categories": [
+      "mining",
+      "trading",
+      "mission",
+      "combat",
+      "navigation",
+      "session",
+      "achievement"
+    ],
+    "fetchedAt": "2026-11-04T02:55:39.982Z"
+  },
+  "facts": {
+    "credits_delta": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "hits": 0,
+      "note": "gameplay in window carries no credit event — measured zero",
+      "value": 0
+    },
+    "points_delta": {
+      "type": "FACT",
+      "source": "get_achievements",
+      "basis": "progress",
+      "items": [
+        {
+          "id": "wanderer",
+          "name": "Wanderer",
+          "gained": 9
+        },
+        {
+          "id": "voyager_i",
+          "name": "Voyager I",
+          "gained": 6.4
+        },
+        {
+          "id": "maiden_jump",
+          "name": "Maiden Jump",
+          "gained": 5
+        },
+        {
+          "id": "cartographer",
+          "name": "Cartographer",
+          "gained": 4.8
+        },
+        {
+          "id": "voyager_ii",
+          "name": "Voyager II",
+          "gained": 1.6
+        },
+        {
+          "id": "chronicler",
+          "name": "Chronicler",
+          "gained": 0.6
+        },
+        {
+          "id": "master_explorer",
+          "name": "Master Explorer",
+          "gained": 0.5
+        },
+        {
+          "id": "far_traveler",
+          "name": "Far Traveler",
+          "gained": 0.01
+        },
+        {
+          "id": "jump_master",
+          "name": "Jump Master",
+          "gained": 0.01
+        },
+        {
+          "id": "prospector_i",
+          "name": "Prospector I",
+          "gained": 0
+        },
+        {
+          "id": "prospector_ii",
+          "name": "Prospector II",
+          "gained": 0
+        }
+      ],
+      "beforeTakenAt": "2026-11-04T02:30:29.352Z",
+      "value": 27.93
+    },
+    "systems_visited": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": [
+        "sol",
+        "alpha_centauri",
+        "tau_ceti",
+        "timberline",
+        "arcturus",
+        "ross_154",
+        "maplevale",
+        "miaplacidus",
+        "cervantes",
+        "ridgecrest",
+        "hatysa",
+        "nembus",
+        "gienah",
+        "oakridge",
+        "aldhibah",
+        "izar",
+        "tidewater"
+      ]
+    },
+    "combat_results": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "events": 0,
+        "kills": 0,
+        "deaths": 0,
+        "other": 0
+      }
+    },
+    "cargo": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mined": {
+          "titanium_ore": 1,
+          "iron_ore": 1
+        },
+        "sold": {}
+      }
+    },
+    "mishaps": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "event_counts": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": 2,
+        "trading": 0,
+        "mission": 0,
+        "combat": 0,
+        "navigation": 16,
+        "session": 1,
+        "achievement": 2
+      }
+    },
+    "entries": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": [
+          {
+            "id": 246092740,
+            "created_at": "2026-11-04T02:35:39Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 1 Titanium Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 1,
+              "resource_id": "titanium_ore",
+              "resource_name": "Titanium Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 1
+            }
+          },
+          {
+            "id": 246092731,
+            "created_at": "2026-11-04T02:35:39Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 1 Iron Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 1,
+              "resource_id": "iron_ore",
+              "resource_name": "Iron Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 1
+            }
+          }
+        ],
+        "trading": [],
+        "mission": [],
+        "combat": [],
+        "navigation": [
+          {
+            "id": 246116065,
+            "created_at": "2026-11-04T02:50:33Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Izar to Tidewater",
+            "data": {
+              "arrival_poi": "tidewater_emission_nebula",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "izar",
+              "is_pathfinder": false,
+              "to_system": "tidewater",
+              "to_system_name": "Tidewater"
+            }
+          },
+          {
+            "id": 246114336,
+            "created_at": "2026-11-04T02:49:24Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Aldhibah to Izar",
+            "data": {
+              "arrival_poi": "tall_tale_nebula",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "aldhibah",
+              "is_pathfinder": false,
+              "to_system": "izar",
+              "to_system_name": "Izar"
+            }
+          },
+          {
+            "id": 246112543,
+            "created_at": "2026-11-04T02:48:14Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Oakridge to Aldhibah",
+            "data": {
+              "arrival_poi": "aldhibah_ice_shelf",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "oakridge",
+              "is_pathfinder": false,
+              "to_system": "aldhibah",
+              "to_system_name": "Aldhibah"
+            }
+          },
+          {
+            "id": 246108585,
+            "created_at": "2026-11-04T02:47:04Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Gienah to Oakridge",
+            "data": {
+              "arrival_poi": "oakridge_belt",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "gienah",
+              "is_pathfinder": false,
+              "to_system": "oakridge",
+              "to_system_name": "Oakridge"
+            }
+          },
+          {
+            "id": 246106650,
+            "created_at": "2026-11-04T02:45:54Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Nembus to Gienah",
+            "data": {
+              "arrival_poi": "gienah_i",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "nembus",
+              "is_pathfinder": false,
+              "to_system": "gienah",
+              "to_system_name": "Gienah"
+            }
+          },
+          {
+            "id": 246103942,
+            "created_at": "2026-11-04T02:44:43Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Hatysa to Nembus",
+            "data": {
+              "arrival_poi": "nembus_iii",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "hatysa",
+              "is_pathfinder": false,
+              "to_system": "nembus",
+              "to_system_name": "Nembus"
+            }
+          },
+          {
+            "id": 246102277,
+            "created_at": "2026-11-04T02:43:34Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Ridgecrest to Hatysa",
+            "data": {
+              "arrival_poi": "hatysa_ice_shelf",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "ridgecrest",
+              "is_pathfinder": false,
+              "to_system": "hatysa",
+              "to_system_name": "Hatysa"
+            }
+          },
+          {
+            "id": 246100591,
+            "created_at": "2026-11-04T02:42:24Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Cervantes to Ridgecrest",
+            "data": {
+              "arrival_poi": "ridgecrest_ice_shelf",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "cervantes",
+              "is_pathfinder": false,
+              "to_system": "ridgecrest",
+              "to_system_name": "Ridgecrest"
+            }
+          },
+          {
+            "id": 246099288,
+            "created_at": "2026-11-04T02:41:14Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Miaplacidus to Cervantes",
+            "data": {
+              "arrival_poi": "cervantes_vapor_fields",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "miaplacidus",
+              "is_pathfinder": false,
+              "to_system": "cervantes",
+              "to_system_name": "Cervantes"
+            }
+          },
+          {
+            "id": 246097286,
+            "created_at": "2026-11-04T02:40:03Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Maplevale to Miaplacidus",
+            "data": {
+              "arrival_poi": "miaplacidus_frost_ring",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "maplevale",
+              "is_pathfinder": false,
+              "to_system": "miaplacidus",
+              "to_system_name": "Miaplacidus"
+            }
+          },
+          {
+            "id": 246096045,
+            "created_at": "2026-11-04T02:38:54Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Ross 154 to Maplevale",
+            "data": {
+              "arrival_poi": "maplevale_vapor_fields",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "ross_154",
+              "is_pathfinder": false,
+              "to_system": "maplevale",
+              "to_system_name": "Maplevale"
+            }
+          },
+          {
+            "id": 246094868,
+            "created_at": "2026-11-04T02:37:44Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Arcturus to Ross 154",
+            "data": {
+              "arrival_poi": "ross_154_frost_ring",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "arcturus",
+              "is_pathfinder": false,
+              "to_system": "ross_154",
+              "to_system_name": "Ross 154"
+            }
+          },
+          {
+            "id": 246093723,
+            "created_at": "2026-11-04T02:36:34Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Timberline to Arcturus",
+            "data": {
+              "arrival_poi": "arcturus_iii",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "timberline",
+              "is_pathfinder": false,
+              "to_system": "arcturus",
+              "to_system_name": "Arcturus"
+            }
+          },
+          {
+            "id": 246091896,
+            "created_at": "2026-11-04T02:35:24Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Tau Ceti to Timberline",
+            "data": {
+              "arrival_poi": "timberline_star",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "tau_ceti",
+              "is_pathfinder": false,
+              "to_system": "timberline",
+              "to_system_name": "Timberline"
+            }
+          },
+          {
+            "id": 246090801,
+            "created_at": "2026-11-04T02:34:14Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Alpha Centauri to Tau Ceti",
+            "data": {
+              "arrival_poi": "fomalhaut_4675g_i",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "alpha_centauri",
+              "is_pathfinder": false,
+              "to_system": "tau_ceti",
+              "to_system_name": "Tau Ceti"
+            }
+          },
+          {
+            "id": 246089633,
+            "created_at": "2026-11-04T02:33:04Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Sol to Alpha Centauri",
+            "data": {
+              "arrival_poi": "alpha_centauri_a",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "sol",
+              "is_pathfinder": false,
+              "to_system": "alpha_centauri",
+              "to_system_name": "Alpha Centauri"
+            }
+          }
+        ],
+        "session": [
+          {
+            "id": 246084032,
+            "created_at": "2026-11-04T02:30:30Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "RonaldSilk logged in",
+            "data": {
+              "last_login_at": "2026-11-04T02:30:29Z",
+              "source": "password"
+            }
+          }
+        ],
+        "achievement": [
+          {
+            "id": 246100874,
+            "created_at": "2026-11-04T02:42:35Z",
+            "category": "achievement",
+            "event_type": "achievement.unlocked",
+            "summary": "Unlocked achievement: Wanderer",
+            "data": {
+              "achievement_id": "wanderer",
+              "points": 10
+            }
+          },
+          {
+            "id": 246089905,
+            "created_at": "2026-11-04T02:33:15Z",
+            "category": "achievement",
+            "event_type": "achievement.unlocked",
+            "summary": "Unlocked achievement: Maiden Jump",
+            "data": {
+              "achievement_id": "maiden_jump",
+              "points": 5
+            }
+          }
+        ]
+      }
+    }
+  },
+  "captains_log": {
+    "kind": "QUOTED_SUBJECTIVE_COLOR",
+    "type": "INTERPRETATION",
+    "provenance": "captains_log_list",
+    "windowed": 1,
+    "listed": 1,
+    "entries": [
+      {
+        "index": 0,
+        "created_at": "2026-11-04 02:50:37",
+        "text": "[Session Handoff] - **Current state:** Just jumped from Izar to Tidewater (`tidewater_emission_nebula`). The arrival system data has not been fetched yet, so the next step is `get_system` and `get_status` to confirm location, fuel, and surroundings.\n- **Next step:** Survey Tidewater's POIs and connections, then decide whether to continue exploring or head somewhere specific. No destination was stated in the transcript.\n- **Character and ship:** RonaldSilk (Solarian), Theoria. Last confirmed at Izar: 500"
+      }
+    ],
+    "unwindowed": []
+  }
+}

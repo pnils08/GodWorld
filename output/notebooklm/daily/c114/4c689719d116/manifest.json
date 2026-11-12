@@ -1,0 +1,125 @@
+{
+  "artifactClass": "NLM_DAILY_RUN",
+  "sourceVersion": "1.9",
+  "canonStatus": "NOT_CANON",
+  "cycle": 114,
+  "generatedAt": "2026-11-07T14:00:06.876Z",
+  "lastAttemptAt": "2026-11-07T14:00:06.876Z",
+  "hours": 36,
+  "packHash": "4c689719d116f2a93a131a4869fe2e9d9f679bb28f14320a4cc85de6ebbcb945",
+  "worldSummary": "output/world_summary_c114.md",
+  "citizenDigest": "output/citizen-day-digest.md",
+  "reports": [
+    {
+      "classification": "FLAGGED",
+      "path": "output/cron-compare/flagged/culture_c114_mason-ortega_packet-v2_x-ai-grok-4-3.md"
+    },
+    {
+      "classification": "FLAGGED",
+      "path": "output/cron-compare/flagged/culture_c114_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/culture_c114_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5.staged-0020.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/culture_c114_kai-marston_packet-v2_anthropic-claude-haiku-5-5.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/culture_c114_maria-keen_packet-v2_anthropic-claude-sonnet-5-5.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/culture_c114_sharon-okafor_packet-v2_openai-gpt-5-6-luna.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/undocked_c114_nia-rook_packet-v2_openai-gpt-6-luna.staged-0021.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/wire_c114_celeste-tran_packet-v2_x-ai-grok-4-3.staged.md"
+    }
+  ],
+  "flaggedReports": [
+    "output/cron-compare/flagged/culture_c114_mason-ortega_packet-v2_x-ai-grok-4-3.flags.json",
+    "output/cron-compare/flagged/culture_c114_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.flags.json"
+  ],
+  "editionDay": false,
+  "firstMorning": false,
+  "routingShadow": {
+    "version": "NLM-DAILY-ROUTER/1",
+    "mode": "shadow",
+    "profile": "REPORTED_DAY",
+    "format": "deep_dive",
+    "length": "default",
+    "activationEligible": true,
+    "reportedDayThreshold": 1,
+    "sourceClasses": [
+      "WORLD_STATE",
+      "CITIZEN_DIGEST",
+      "W1_CHASE",
+      "W2_QUOTES",
+      "W3_PASSED",
+      "FLAGGED_DISPOSITION",
+      "ENGINE_CIVIC_SIGNAL"
+    ],
+    "reasonCodes": [
+      "RHEA_PASSED_5",
+      "REPORTED_THRESHOLD_MET_1"
+    ],
+    "dispositionCounts": {
+      "passed": 5,
+      "rheaFlagged": 1,
+      "neverGated": 0
+    },
+    "fingerprint": "35c1cb0c3998dfcf1f8e1cc9801fadbd1bc4ce5454394f36c9bb130363297657"
+  },
+  "newsroomPulse": {
+    "fingerprint": "8d42a73f15d5c10b7fc1a566d28bc5f12798a4c42b6c0704d16a9e4e2c4dac26",
+    "counts": {
+      "angles": 8,
+      "asks": 8,
+      "fanoutAssignments": 8,
+      "w2Ready": 7,
+      "quotes": 23,
+      "passed": 5,
+      "rheaFlagged": 1,
+      "neverGated": 0,
+      "flagged": 1,
+      "pending": 0
+    },
+    "priorCompletedCycle": null
+  },
+  "archiveNotebookId": "417e2d29-4167-420f-a9cc-76fb6b2b7de2",
+  "newsroomNotebookId": "73cd50b5-4b8f-4329-bb42-0783c8d93763",
+  "dryRun": false,
+  "archiveScope": {
+    "cycles": [
+      113,
+      112
+    ],
+    "sourceIds": [
+      "972bb82e-70f8-48a2-9bf2-9a9061d11f46",
+      "06e1843d-5c67-4052-8ddd-de2fc22413d1"
+    ]
+  },
+  "boundedSourceHash": "a6f2486a52f51d7a276f1dcc8e5a54505edb9124a6794cc91ab4e2950040a62e",
+  "boundedSource": "output/notebooklm/daily/c114/4c689719d116/bounded-newsroom-source.md",
+  "sourceIds": [
+    "5a66c422-a538-4246-b8d3-b81688de031e"
+  ],
+  "audioDirectionSourceId": "4c721eae-6e1a-4e01-b845-285b6d0ceb81",
+  "audioPresentation": {
+    "format": "deep_dive",
+    "length": "default",
+    "source": "router",
+    "profile": "REPORTED_DAY"
+  },
+  "audioArtifactId": "8ab561a0-10dd-41b9-bf4c-cff111aa9f3b",
+  "audioPath": "output/notebooklm/daily/c114/4c689719d116/godworld_daily_c114.m4a",
+  "driveLink": "https://drive.google.com/file/d/1sesXrPE-0s_qkQAoouPR5WwCXwYI9J32/view?usp=drivesdk",
+  "opsReportArtifactId": "1464c8aa-b3e3-4ba0-a2b8-c64d79bc4a10"
+}

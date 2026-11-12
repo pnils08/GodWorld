@@ -1,0 +1,598 @@
+[
+  {
+    "pop": "POP-00291",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00291\",\"name\":\"Enzo Walker\",\"role\":\"Plumber\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Jordan Velez\",\"question\":\"When you look at the growth on Coastline's books, does it match what you see on the ground — or is the work changing in a way the numbers don't capture? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"West Oakland\",\"focus\":\"The split in West Oakland between the construction and civic-tech growth on the ledger and the quieter contractions on the same blocks — told through the workers on the five named businesses and what the owners are actually worried about.\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Enzo Walker — Plumber — Coastline Construction, West Oakland\",\"evidence\":[{\"id\":\"EV-a563c93aa7\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"text\":\"Enzo Walker, Plumber at Coastline Construction. 19 named workers at 5 named businesses in West Oakland on the ledger this cycle.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Enzo Walker, Plumber at Coastline Construction. 19 named workers at 5 named businesses in West Oakland on the ledger this cycle.\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"id\":\"F-630940811df1\"},{\"t\":\"FACT\",\"text\":\"Coastline Construction · Construction · 221 employees · growth 9.5% · revenue $187.1M (+$341k vs C113) · key personnel: Desmond Achebe (managing partner) · on the roster: Enzo Walker (Plumber); Hazel Reed (Plumber); Desmond Achebe (Managing Partner, Coastline Construction); Elijah Brown (Electrician)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"id\":\"F-bfece8fe56af\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C114\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4261fa115617\"},{\"t\":\"FACT\",\"text\":\"West Oakland businesses · Coastline Construction, Northgate Construction\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"id\":\"F-01529d14397e\"},{\"t\":\"FACT\",\"text\":\"Northgate Construction · Construction · 95 employees · growth 8.8% · revenue $78.8M (+$133k vs C113) · key personnel: Helena Voss-Adeyemi (managing partner) · on the roster: Kenton Pearl (Plumber); Elijah Roberts (Construction laborer); Jude Hess (Electrician); Helena Voss-Adeyemi (Managing Partner, Northgate Construction)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"id\":\"F-b51b08c19a0c\"},{\"t\":\"FACT\",\"text\":\"Oakmesh Systems · Civic Tech · 46 employees · growth 34.1% · revenue $9.5M (+$62k vs C113) · key personnel: Marcus Tan (Founder) · on the roster: Dom Will (Machine Learning Engineer (Oakmesh Systems)); Jace Robinson (Machine Learning Engineer (Oakmesh Systems)); Jeremy Wong (Civic Data Engineer (Oakmesh Systems)); Marcus Tan (Founder, Oakmesh Systems)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"id\":\"F-b99fdf91d50b\"},{\"t\":\"FACT\",\"text\":\"Civis Systems · Urban Systems Intelligence Firm · 41 employees · revenue $60.2M (+$53k vs C113) · key personnel: Elias Varek (founder) · on the roster: Sam Fazio (Digital Twin Architect); Catherine Santos (Digital Twin Architect); Elias Varek (Founder of Civis Systems); Maurice Franklin (Drone Fleet Coordinator)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"id\":\"F-b7ae91fca488\"},{\"t\":\"FACT\",\"text\":\"Mariner Construction · Construction · 165 employees · growth 7.2% · on the roster: Maeve Pillai (Plumber); Yadira Rao (Plumber); Minh Raimon (Carpenter Apprentice)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"id\":\"F-ed3f0f008b5d\"},{\"t\":\"FACT\",\"text\":\"Enzo Walker — Plumber — Coastline Construction, West Oakland\",\"src\":\"Simulation_Ledger profile for POP-00291\",\"id\":\"F-7e416711c5ee\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C10, Spring, holiday=none\",\"src\":\"output/world_summary_c114.md Calendar context (Simulation_Calendar)\",\"id\":\"F-9b9470803821\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00291",
+        "name": "Enzo Walker",
+        "role": "Plumber",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Jordan Velez",
+        "question": "When you look at the growth on Coastline's books, does it match what you see on the ground — or is the work changing in a way the numbers don't capture? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "West Oakland",
+        "focus": "The split in West Oakland between the construction and civic-tech growth on the ledger and the quieter contractions on the same blocks — told through the workers on the five named businesses and what the owners are actually worried about.",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Enzo Walker — Plumber — Coastline Construction, West Oakland",
+        "evidence": [
+          {
+            "id": "EV-a563c93aa7",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+            "text": "Enzo Walker, Plumber at Coastline Construction. 19 named workers at 5 named businesses in West Oakland on the ledger this cycle."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Enzo Walker, Plumber at Coastline Construction. 19 named workers at 5 named businesses in West Oakland on the ledger this cycle.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "id": "F-630940811df1"
+        },
+        {
+          "t": "FACT",
+          "text": "Coastline Construction · Construction · 221 employees · growth 9.5% · revenue $187.1M (+$341k vs C113) · key personnel: Desmond Achebe (managing partner) · on the roster: Enzo Walker (Plumber); Hazel Reed (Plumber); Desmond Achebe (Managing Partner, Coastline Construction); Elijah Brown (Electrician)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "id": "F-bfece8fe56af"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C114",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4261fa115617"
+        },
+        {
+          "t": "FACT",
+          "text": "West Oakland businesses · Coastline Construction, Northgate Construction",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "id": "F-01529d14397e"
+        },
+        {
+          "t": "FACT",
+          "text": "Northgate Construction · Construction · 95 employees · growth 8.8% · revenue $78.8M (+$133k vs C113) · key personnel: Helena Voss-Adeyemi (managing partner) · on the roster: Kenton Pearl (Plumber); Elijah Roberts (Construction laborer); Jude Hess (Electrician); Helena Voss-Adeyemi (Managing Partner, Northgate Construction)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "id": "F-b51b08c19a0c"
+        },
+        {
+          "t": "FACT",
+          "text": "Oakmesh Systems · Civic Tech · 46 employees · growth 34.1% · revenue $9.5M (+$62k vs C113) · key personnel: Marcus Tan (Founder) · on the roster: Dom Will (Machine Learning Engineer (Oakmesh Systems)); Jace Robinson (Machine Learning Engineer (Oakmesh Systems)); Jeremy Wong (Civic Data Engineer (Oakmesh Systems)); Marcus Tan (Founder, Oakmesh Systems)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "id": "F-b99fdf91d50b"
+        },
+        {
+          "t": "FACT",
+          "text": "Civis Systems · Urban Systems Intelligence Firm · 41 employees · revenue $60.2M (+$53k vs C113) · key personnel: Elias Varek (founder) · on the roster: Sam Fazio (Digital Twin Architect); Catherine Santos (Digital Twin Architect); Elias Varek (Founder of Civis Systems); Maurice Franklin (Drone Fleet Coordinator)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "id": "F-b7ae91fca488"
+        },
+        {
+          "t": "FACT",
+          "text": "Mariner Construction · Construction · 165 employees · growth 7.2% · on the roster: Maeve Pillai (Plumber); Yadira Rao (Plumber); Minh Raimon (Carpenter Apprentice)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "id": "F-ed3f0f008b5d"
+        },
+        {
+          "t": "FACT",
+          "text": "Enzo Walker — Plumber — Coastline Construction, West Oakland",
+          "src": "Simulation_Ledger profile for POP-00291",
+          "id": "F-7e416711c5ee"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C10, Spring, holiday=none",
+          "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+          "id": "F-9b9470803821"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01092",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01092\",\"name\":\"Desmond Achebe\",\"role\":\"Managing Partner, Coastline Construction\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Jordan Velez\",\"question\":\"What keeps you up at night about the next twelve months — the growth or something the growth is hiding? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"West Oakland\",\"focus\":\"The split in West Oakland between the construction and civic-tech growth on the ledger and the quieter contractions on the same blocks — told through the workers on the five named businesses and what the owners are actually worried about.\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Desmond Achebe — Managing Partner, Coastline Construction — Coastline Construction, West Oakland\",\"evidence\":[{\"id\":\"EV-bb5f795e6c\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"text\":\"Enzo Walker, Plumber at Coastline Construction. 19 named workers at 5 named businesses in West Oakland on the ledger this cycle.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Coastline Construction · Construction · 221 employees · growth 9.5% · revenue $187.1M (+$341k vs C113) · key personnel: Desmond Achebe (managing partner) · on the roster: Enzo Walker (Plumber); Hazel Reed (Plumber); Desmond Achebe (Managing Partner, Coastline Construction); Elijah Brown (Electrician)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"id\":\"F-bfece8fe56af\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C114\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4261fa115617\"},{\"t\":\"FACT\",\"text\":\"West Oakland businesses · Coastline Construction, Northgate Construction\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"id\":\"F-01529d14397e\"},{\"t\":\"FACT\",\"text\":\"Enzo Walker, Plumber at Coastline Construction. 19 named workers at 5 named businesses in West Oakland on the ledger this cycle.\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"id\":\"F-630940811df1\"},{\"t\":\"FACT\",\"text\":\"Northgate Construction · Construction · 95 employees · growth 8.8% · revenue $78.8M (+$133k vs C113) · key personnel: Helena Voss-Adeyemi (managing partner) · on the roster: Kenton Pearl (Plumber); Elijah Roberts (Construction laborer); Jude Hess (Electrician); Helena Voss-Adeyemi (Managing Partner, Northgate Construction)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"id\":\"F-b51b08c19a0c\"},{\"t\":\"FACT\",\"text\":\"Oakmesh Systems · Civic Tech · 46 employees · growth 34.1% · revenue $9.5M (+$62k vs C113) · key personnel: Marcus Tan (Founder) · on the roster: Dom Will (Machine Learning Engineer (Oakmesh Systems)); Jace Robinson (Machine Learning Engineer (Oakmesh Systems)); Jeremy Wong (Civic Data Engineer (Oakmesh Systems)); Marcus Tan (Founder, Oakmesh Systems)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"id\":\"F-b99fdf91d50b\"},{\"t\":\"FACT\",\"text\":\"Civis Systems · Urban Systems Intelligence Firm · 41 employees · revenue $60.2M (+$53k vs C113) · key personnel: Elias Varek (founder) · on the roster: Sam Fazio (Digital Twin Architect); Catherine Santos (Digital Twin Architect); Elias Varek (Founder of Civis Systems); Maurice Franklin (Drone Fleet Coordinator)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"id\":\"F-b7ae91fca488\"},{\"t\":\"FACT\",\"text\":\"Mariner Construction · Construction · 165 employees · growth 7.2% · on the roster: Maeve Pillai (Plumber); Yadira Rao (Plumber); Minh Raimon (Carpenter Apprentice)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"id\":\"F-ed3f0f008b5d\"},{\"t\":\"FACT\",\"text\":\"Desmond Achebe — Managing Partner, Coastline Construction — Coastline Construction, West Oakland\",\"src\":\"Simulation_Ledger profile for POP-01092\",\"id\":\"F-07ebb79f5ce4\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C10, Spring, holiday=none\",\"src\":\"output/world_summary_c114.md Calendar context (Simulation_Calendar)\",\"id\":\"F-9b9470803821\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01092",
+        "name": "Desmond Achebe",
+        "role": "Managing Partner, Coastline Construction",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Jordan Velez",
+        "question": "What keeps you up at night about the next twelve months — the growth or something the growth is hiding? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "West Oakland",
+        "focus": "The split in West Oakland between the construction and civic-tech growth on the ledger and the quieter contractions on the same blocks — told through the workers on the five named businesses and what the owners are actually worried about.",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Desmond Achebe — Managing Partner, Coastline Construction — Coastline Construction, West Oakland",
+        "evidence": [
+          {
+            "id": "EV-bb5f795e6c",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+            "text": "Enzo Walker, Plumber at Coastline Construction. 19 named workers at 5 named businesses in West Oakland on the ledger this cycle."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Coastline Construction · Construction · 221 employees · growth 9.5% · revenue $187.1M (+$341k vs C113) · key personnel: Desmond Achebe (managing partner) · on the roster: Enzo Walker (Plumber); Hazel Reed (Plumber); Desmond Achebe (Managing Partner, Coastline Construction); Elijah Brown (Electrician)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "id": "F-bfece8fe56af"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C114",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4261fa115617"
+        },
+        {
+          "t": "FACT",
+          "text": "West Oakland businesses · Coastline Construction, Northgate Construction",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "id": "F-01529d14397e"
+        },
+        {
+          "t": "FACT",
+          "text": "Enzo Walker, Plumber at Coastline Construction. 19 named workers at 5 named businesses in West Oakland on the ledger this cycle.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "id": "F-630940811df1"
+        },
+        {
+          "t": "FACT",
+          "text": "Northgate Construction · Construction · 95 employees · growth 8.8% · revenue $78.8M (+$133k vs C113) · key personnel: Helena Voss-Adeyemi (managing partner) · on the roster: Kenton Pearl (Plumber); Elijah Roberts (Construction laborer); Jude Hess (Electrician); Helena Voss-Adeyemi (Managing Partner, Northgate Construction)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "id": "F-b51b08c19a0c"
+        },
+        {
+          "t": "FACT",
+          "text": "Oakmesh Systems · Civic Tech · 46 employees · growth 34.1% · revenue $9.5M (+$62k vs C113) · key personnel: Marcus Tan (Founder) · on the roster: Dom Will (Machine Learning Engineer (Oakmesh Systems)); Jace Robinson (Machine Learning Engineer (Oakmesh Systems)); Jeremy Wong (Civic Data Engineer (Oakmesh Systems)); Marcus Tan (Founder, Oakmesh Systems)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "id": "F-b99fdf91d50b"
+        },
+        {
+          "t": "FACT",
+          "text": "Civis Systems · Urban Systems Intelligence Firm · 41 employees · revenue $60.2M (+$53k vs C113) · key personnel: Elias Varek (founder) · on the roster: Sam Fazio (Digital Twin Architect); Catherine Santos (Digital Twin Architect); Elias Varek (Founder of Civis Systems); Maurice Franklin (Drone Fleet Coordinator)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "id": "F-b7ae91fca488"
+        },
+        {
+          "t": "FACT",
+          "text": "Mariner Construction · Construction · 165 employees · growth 7.2% · on the roster: Maeve Pillai (Plumber); Yadira Rao (Plumber); Minh Raimon (Carpenter Apprentice)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "id": "F-ed3f0f008b5d"
+        },
+        {
+          "t": "FACT",
+          "text": "Desmond Achebe — Managing Partner, Coastline Construction — Coastline Construction, West Oakland",
+          "src": "Simulation_Ledger profile for POP-01092",
+          "id": "F-07ebb79f5ce4"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C10, Spring, holiday=none",
+          "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+          "id": "F-9b9470803821"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01095",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01095\",\"name\":\"Helena Voss-Adeyemi\",\"role\":\"Managing Partner, Northgate Construction\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Jordan Velez\",\"question\":\"Northgate is growing slower than Coastline. Is that a choice or a constraint — and what does it mean for the crews in the field? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"West Oakland\",\"focus\":\"The split in West Oakland between the construction and civic-tech growth on the ledger and the quieter contractions on the same blocks — told through the workers on the five named businesses and what the owners are actually worried about.\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Helena Voss-Adeyemi — Managing Partner, Northgate Construction — Northgate Construction, West Oakland\",\"evidence\":[{\"id\":\"EV-272126f9f6\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"text\":\"Enzo Walker, Plumber at Coastline Construction. 19 named workers at 5 named businesses in West Oakland on the ledger this cycle.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Northgate Construction · Construction · 95 employees · growth 8.8% · revenue $78.8M (+$133k vs C113) · key personnel: Helena Voss-Adeyemi (managing partner) · on the roster: Kenton Pearl (Plumber); Elijah Roberts (Construction laborer); Jude Hess (Electrician); Helena Voss-Adeyemi (Managing Partner, Northgate Construction)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"id\":\"F-b51b08c19a0c\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C114\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4261fa115617\"},{\"t\":\"FACT\",\"text\":\"West Oakland businesses · Coastline Construction, Northgate Construction\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"id\":\"F-01529d14397e\"},{\"t\":\"FACT\",\"text\":\"Enzo Walker, Plumber at Coastline Construction. 19 named workers at 5 named businesses in West Oakland on the ledger this cycle.\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"id\":\"F-630940811df1\"},{\"t\":\"FACT\",\"text\":\"Coastline Construction · Construction · 221 employees · growth 9.5% · revenue $187.1M (+$341k vs C113) · key personnel: Desmond Achebe (managing partner) · on the roster: Enzo Walker (Plumber); Hazel Reed (Plumber); Desmond Achebe (Managing Partner, Coastline Construction); Elijah Brown (Electrician)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"id\":\"F-bfece8fe56af\"},{\"t\":\"FACT\",\"text\":\"Oakmesh Systems · Civic Tech · 46 employees · growth 34.1% · revenue $9.5M (+$62k vs C113) · key personnel: Marcus Tan (Founder) · on the roster: Dom Will (Machine Learning Engineer (Oakmesh Systems)); Jace Robinson (Machine Learning Engineer (Oakmesh Systems)); Jeremy Wong (Civic Data Engineer (Oakmesh Systems)); Marcus Tan (Founder, Oakmesh Systems)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"id\":\"F-b99fdf91d50b\"},{\"t\":\"FACT\",\"text\":\"Civis Systems · Urban Systems Intelligence Firm · 41 employees · revenue $60.2M (+$53k vs C113) · key personnel: Elias Varek (founder) · on the roster: Sam Fazio (Digital Twin Architect); Catherine Santos (Digital Twin Architect); Elias Varek (Founder of Civis Systems); Maurice Franklin (Drone Fleet Coordinator)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"id\":\"F-b7ae91fca488\"},{\"t\":\"FACT\",\"text\":\"Mariner Construction · Construction · 165 employees · growth 7.2% · on the roster: Maeve Pillai (Plumber); Yadira Rao (Plumber); Minh Raimon (Carpenter Apprentice)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"id\":\"F-ed3f0f008b5d\"},{\"t\":\"FACT\",\"text\":\"Helena Voss-Adeyemi — Managing Partner, Northgate Construction — Northgate Construction, West Oakland\",\"src\":\"Simulation_Ledger profile for POP-01095\",\"id\":\"F-38d97d9acc31\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C10, Spring, holiday=none\",\"src\":\"output/world_summary_c114.md Calendar context (Simulation_Calendar)\",\"id\":\"F-9b9470803821\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01095",
+        "name": "Helena Voss-Adeyemi",
+        "role": "Managing Partner, Northgate Construction",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Jordan Velez",
+        "question": "Northgate is growing slower than Coastline. Is that a choice or a constraint — and what does it mean for the crews in the field? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "West Oakland",
+        "focus": "The split in West Oakland between the construction and civic-tech growth on the ledger and the quieter contractions on the same blocks — told through the workers on the five named businesses and what the owners are actually worried about.",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Helena Voss-Adeyemi — Managing Partner, Northgate Construction — Northgate Construction, West Oakland",
+        "evidence": [
+          {
+            "id": "EV-272126f9f6",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+            "text": "Enzo Walker, Plumber at Coastline Construction. 19 named workers at 5 named businesses in West Oakland on the ledger this cycle."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Northgate Construction · Construction · 95 employees · growth 8.8% · revenue $78.8M (+$133k vs C113) · key personnel: Helena Voss-Adeyemi (managing partner) · on the roster: Kenton Pearl (Plumber); Elijah Roberts (Construction laborer); Jude Hess (Electrician); Helena Voss-Adeyemi (Managing Partner, Northgate Construction)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "id": "F-b51b08c19a0c"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C114",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4261fa115617"
+        },
+        {
+          "t": "FACT",
+          "text": "West Oakland businesses · Coastline Construction, Northgate Construction",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "id": "F-01529d14397e"
+        },
+        {
+          "t": "FACT",
+          "text": "Enzo Walker, Plumber at Coastline Construction. 19 named workers at 5 named businesses in West Oakland on the ledger this cycle.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "id": "F-630940811df1"
+        },
+        {
+          "t": "FACT",
+          "text": "Coastline Construction · Construction · 221 employees · growth 9.5% · revenue $187.1M (+$341k vs C113) · key personnel: Desmond Achebe (managing partner) · on the roster: Enzo Walker (Plumber); Hazel Reed (Plumber); Desmond Achebe (Managing Partner, Coastline Construction); Elijah Brown (Electrician)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "id": "F-bfece8fe56af"
+        },
+        {
+          "t": "FACT",
+          "text": "Oakmesh Systems · Civic Tech · 46 employees · growth 34.1% · revenue $9.5M (+$62k vs C113) · key personnel: Marcus Tan (Founder) · on the roster: Dom Will (Machine Learning Engineer (Oakmesh Systems)); Jace Robinson (Machine Learning Engineer (Oakmesh Systems)); Jeremy Wong (Civic Data Engineer (Oakmesh Systems)); Marcus Tan (Founder, Oakmesh Systems)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "id": "F-b99fdf91d50b"
+        },
+        {
+          "t": "FACT",
+          "text": "Civis Systems · Urban Systems Intelligence Firm · 41 employees · revenue $60.2M (+$53k vs C113) · key personnel: Elias Varek (founder) · on the roster: Sam Fazio (Digital Twin Architect); Catherine Santos (Digital Twin Architect); Elias Varek (Founder of Civis Systems); Maurice Franklin (Drone Fleet Coordinator)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "id": "F-b7ae91fca488"
+        },
+        {
+          "t": "FACT",
+          "text": "Mariner Construction · Construction · 165 employees · growth 7.2% · on the roster: Maeve Pillai (Plumber); Yadira Rao (Plumber); Minh Raimon (Carpenter Apprentice)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "id": "F-ed3f0f008b5d"
+        },
+        {
+          "t": "FACT",
+          "text": "Helena Voss-Adeyemi — Managing Partner, Northgate Construction — Northgate Construction, West Oakland",
+          "src": "Simulation_Ledger profile for POP-01095",
+          "id": "F-38d97d9acc31"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C10, Spring, holiday=none",
+          "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+          "id": "F-9b9470803821"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01109",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01109\",\"name\":\"Marcus Tan\",\"role\":\"Founder, Oakmesh Systems\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Jordan Velez\",\"question\":\"At 34 percent growth, what does Oakmesh owe the neighborhood that houses it — and what does the neighborhood owe you back? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"West Oakland\",\"focus\":\"The split in West Oakland between the construction and civic-tech growth on the ledger and the quieter contractions on the same blocks — told through the workers on the five named businesses and what the owners are actually worried about.\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Marcus Tan — Founder, Oakmesh Systems — Oakmesh Systems, West Oakland\",\"evidence\":[{\"id\":\"EV-783116bc5a\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"text\":\"Enzo Walker, Plumber at Coastline Construction. 19 named workers at 5 named businesses in West Oakland on the ledger this cycle.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Oakmesh Systems · Civic Tech · 46 employees · growth 34.1% · revenue $9.5M (+$62k vs C113) · key personnel: Marcus Tan (Founder) · on the roster: Dom Will (Machine Learning Engineer (Oakmesh Systems)); Jace Robinson (Machine Learning Engineer (Oakmesh Systems)); Jeremy Wong (Civic Data Engineer (Oakmesh Systems)); Marcus Tan (Founder, Oakmesh Systems)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"id\":\"F-b99fdf91d50b\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C114\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4261fa115617\"},{\"t\":\"FACT\",\"text\":\"West Oakland businesses · Coastline Construction, Northgate Construction\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"id\":\"F-01529d14397e\"},{\"t\":\"FACT\",\"text\":\"Enzo Walker, Plumber at Coastline Construction. 19 named workers at 5 named businesses in West Oakland on the ledger this cycle.\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"id\":\"F-630940811df1\"},{\"t\":\"FACT\",\"text\":\"Coastline Construction · Construction · 221 employees · growth 9.5% · revenue $187.1M (+$341k vs C113) · key personnel: Desmond Achebe (managing partner) · on the roster: Enzo Walker (Plumber); Hazel Reed (Plumber); Desmond Achebe (Managing Partner, Coastline Construction); Elijah Brown (Electrician)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"id\":\"F-bfece8fe56af\"},{\"t\":\"FACT\",\"text\":\"Northgate Construction · Construction · 95 employees · growth 8.8% · revenue $78.8M (+$133k vs C113) · key personnel: Helena Voss-Adeyemi (managing partner) · on the roster: Kenton Pearl (Plumber); Elijah Roberts (Construction laborer); Jude Hess (Electrician); Helena Voss-Adeyemi (Managing Partner, Northgate Construction)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"id\":\"F-b51b08c19a0c\"},{\"t\":\"FACT\",\"text\":\"Civis Systems · Urban Systems Intelligence Firm · 41 employees · revenue $60.2M (+$53k vs C113) · key personnel: Elias Varek (founder) · on the roster: Sam Fazio (Digital Twin Architect); Catherine Santos (Digital Twin Architect); Elias Varek (Founder of Civis Systems); Maurice Franklin (Drone Fleet Coordinator)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"id\":\"F-b7ae91fca488\"},{\"t\":\"FACT\",\"text\":\"Mariner Construction · Construction · 165 employees · growth 7.2% · on the roster: Maeve Pillai (Plumber); Yadira Rao (Plumber); Minh Raimon (Carpenter Apprentice)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114\",\"id\":\"F-ed3f0f008b5d\"},{\"t\":\"FACT\",\"text\":\"Marcus Tan — Founder, Oakmesh Systems — Oakmesh Systems, West Oakland\",\"src\":\"Simulation_Ledger profile for POP-01109\",\"id\":\"F-046ed0a62972\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C10, Spring, holiday=none\",\"src\":\"output/world_summary_c114.md Calendar context (Simulation_Calendar)\",\"id\":\"F-9b9470803821\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01109",
+        "name": "Marcus Tan",
+        "role": "Founder, Oakmesh Systems",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Jordan Velez",
+        "question": "At 34 percent growth, what does Oakmesh owe the neighborhood that houses it — and what does the neighborhood owe you back? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "West Oakland",
+        "focus": "The split in West Oakland between the construction and civic-tech growth on the ledger and the quieter contractions on the same blocks — told through the workers on the five named businesses and what the owners are actually worried about.",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Marcus Tan — Founder, Oakmesh Systems — Oakmesh Systems, West Oakland",
+        "evidence": [
+          {
+            "id": "EV-783116bc5a",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+            "text": "Enzo Walker, Plumber at Coastline Construction. 19 named workers at 5 named businesses in West Oakland on the ledger this cycle."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Oakmesh Systems · Civic Tech · 46 employees · growth 34.1% · revenue $9.5M (+$62k vs C113) · key personnel: Marcus Tan (Founder) · on the roster: Dom Will (Machine Learning Engineer (Oakmesh Systems)); Jace Robinson (Machine Learning Engineer (Oakmesh Systems)); Jeremy Wong (Civic Data Engineer (Oakmesh Systems)); Marcus Tan (Founder, Oakmesh Systems)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "id": "F-b99fdf91d50b"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C114",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4261fa115617"
+        },
+        {
+          "t": "FACT",
+          "text": "West Oakland businesses · Coastline Construction, Northgate Construction",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "id": "F-01529d14397e"
+        },
+        {
+          "t": "FACT",
+          "text": "Enzo Walker, Plumber at Coastline Construction. 19 named workers at 5 named businesses in West Oakland on the ledger this cycle.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "id": "F-630940811df1"
+        },
+        {
+          "t": "FACT",
+          "text": "Coastline Construction · Construction · 221 employees · growth 9.5% · revenue $187.1M (+$341k vs C113) · key personnel: Desmond Achebe (managing partner) · on the roster: Enzo Walker (Plumber); Hazel Reed (Plumber); Desmond Achebe (Managing Partner, Coastline Construction); Elijah Brown (Electrician)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "id": "F-bfece8fe56af"
+        },
+        {
+          "t": "FACT",
+          "text": "Northgate Construction · Construction · 95 employees · growth 8.8% · revenue $78.8M (+$133k vs C113) · key personnel: Helena Voss-Adeyemi (managing partner) · on the roster: Kenton Pearl (Plumber); Elijah Roberts (Construction laborer); Jude Hess (Electrician); Helena Voss-Adeyemi (Managing Partner, Northgate Construction)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "id": "F-b51b08c19a0c"
+        },
+        {
+          "t": "FACT",
+          "text": "Civis Systems · Urban Systems Intelligence Firm · 41 employees · revenue $60.2M (+$53k vs C113) · key personnel: Elias Varek (founder) · on the roster: Sam Fazio (Digital Twin Architect); Catherine Santos (Digital Twin Architect); Elias Varek (Founder of Civis Systems); Maurice Franklin (Drone Fleet Coordinator)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "id": "F-b7ae91fca488"
+        },
+        {
+          "t": "FACT",
+          "text": "Mariner Construction · Construction · 165 employees · growth 7.2% · on the roster: Maeve Pillai (Plumber); Yadira Rao (Plumber); Minh Raimon (Carpenter Apprentice)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "id": "F-ed3f0f008b5d"
+        },
+        {
+          "t": "FACT",
+          "text": "Marcus Tan — Founder, Oakmesh Systems — Oakmesh Systems, West Oakland",
+          "src": "Simulation_Ledger profile for POP-01109",
+          "id": "F-046ed0a62972"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C10, Spring, holiday=none",
+          "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+          "id": "F-9b9470803821"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  }
+]

@@ -1,0 +1,123 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "115",
+  "persona": "carmen-delaine",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Carmen Delaine",
+    "popid": "POP-00011"
+  },
+  "assignment": {
+    "story": {
+      "ref": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c115.json snapshots.Initiative_Tracker; storyline INIT-001:disbursement-active",
+      "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+      "kind": "initiative",
+      "angle": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+      "hookLine": "The civic record identifies a decision, initiative, or clock that needs a clear accounting.",
+      "hood": "West Oakland",
+      "popids": [],
+      "citizens": []
+    }
+  },
+  "angle": "output/cron-compare/civic_c115_carmen-delaine_packet-v2_angle.json",
+  "quotesRequested": 3,
+  "quotesLanded": 3,
+  "quotes": [
+    {
+      "pop": "POP-00037",
+      "name": "Brenda Okoro",
+      "quote": "The closeout is published, the renewal ordinance is transmitted, and the standard holds at 23 days. Renewal is council's call — I won't call it before they do.",
+      "sourceKind": "office-record",
+      "officeRecord": {
+        "sourceKind": "office-record",
+        "cycle": 115,
+        "officeSlug": "okoro",
+        "statementId": "STMT-115-okoro-001",
+        "quote": "The closeout is published, the renewal ordinance is transmitted, and the standard holds at 23 days. Renewal is council's call — I won't call it before they do.",
+        "topic": "West Oakland Stabilization Fund — C114 closeout publication and charter renewal transmittal",
+        "initiativeId": "INIT-001",
+        "filePath": "output/civic-voice/okoro_c115.json",
+        "holderPopid": "POP-00037",
+        "speakerName": "Brenda Okoro"
+      }
+    },
+    {
+      "pop": "POP-00790",
+      "name": "Marcus Webb",
+      "quote": "The closeout is on the record, the renewal draft is in the clerk's hands, and the 23-day standard holds — but renewal belongs to the council, and I will not call their vote before they do.",
+      "sourceKind": "office-record",
+      "officeRecord": {
+        "sourceKind": "office-record",
+        "cycle": 115,
+        "officeSlug": "stabilization_fund",
+        "statementId": "STMT-115-stabilization_fund-001",
+        "quote": "The closeout is on the record, the renewal draft is in the clerk's hands, and the 23-day standard holds — but renewal belongs to the council, and I will not call their vote before they do.",
+        "topic": "C114 closeout published; charter renewal ordinance transmitted to C115 agenda",
+        "initiativeId": "INIT-001",
+        "filePath": "output/civic-voice/stabilization_fund_c115.json",
+        "holderPopid": "POP-00790",
+        "speakerName": "Marcus Webb"
+      }
+    },
+    {
+      "pop": "POP-00790",
+      "name": "Marcus Webb",
+      "quote": "The mood in West Oakland is slipping and the housing pressure is building — which is exactly why the queue does not stop while the paperwork goes to the record.",
+      "sourceKind": "office-record",
+      "officeRecord": {
+        "sourceKind": "office-record",
+        "cycle": 115,
+        "officeSlug": "stabilization_fund",
+        "statementId": "STMT-115-stabilization_fund-003",
+        "quote": "The mood in West Oakland is slipping and the housing pressure is building — which is exactly why the queue does not stop while the paperwork goes to the record.",
+        "topic": "West Oakland queue, 23-day standard, and housing pressure",
+        "initiativeId": "INIT-001",
+        "filePath": "output/civic-voice/stabilization_fund_c115.json",
+        "holderPopid": "POP-00790",
+        "speakerName": "Marcus Webb"
+      }
+    }
+  ],
+  "officeRecords": [
+    {
+      "sourceKind": "office-record",
+      "cycle": 115,
+      "officeSlug": "okoro",
+      "statementId": "STMT-115-okoro-001",
+      "quote": "The closeout is published, the renewal ordinance is transmitted, and the standard holds at 23 days. Renewal is council's call — I won't call it before they do.",
+      "topic": "West Oakland Stabilization Fund — C114 closeout publication and charter renewal transmittal",
+      "initiativeId": "INIT-001",
+      "filePath": "output/civic-voice/okoro_c115.json",
+      "holderPopid": "POP-00037",
+      "speakerName": "Brenda Okoro"
+    },
+    {
+      "sourceKind": "office-record",
+      "cycle": 115,
+      "officeSlug": "stabilization_fund",
+      "statementId": "STMT-115-stabilization_fund-001",
+      "quote": "The closeout is on the record, the renewal draft is in the clerk's hands, and the 23-day standard holds — but renewal belongs to the council, and I will not call their vote before they do.",
+      "topic": "C114 closeout published; charter renewal ordinance transmitted to C115 agenda",
+      "initiativeId": "INIT-001",
+      "filePath": "output/civic-voice/stabilization_fund_c115.json",
+      "holderPopid": "POP-00790",
+      "speakerName": "Marcus Webb"
+    },
+    {
+      "sourceKind": "office-record",
+      "cycle": 115,
+      "officeSlug": "stabilization_fund",
+      "statementId": "STMT-115-stabilization_fund-003",
+      "quote": "The mood in West Oakland is slipping and the housing pressure is building — which is exactly why the queue does not stop while the paperwork goes to the record.",
+      "topic": "West Oakland queue, 23-day standard, and housing pressure",
+      "initiativeId": "INIT-001",
+      "filePath": "output/civic-voice/stabilization_fund_c115.json",
+      "holderPopid": "POP-00790",
+      "speakerName": "Marcus Webb"
+    }
+  ],
+  "officeSilence": null,
+  "interviews": [],
+  "ranAt": "2026-11-09T19:15:02.379Z"
+}

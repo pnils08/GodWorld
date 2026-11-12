@@ -1,0 +1,1166 @@
+{
+  "date": "2026-11-03",
+  "cycle": 114,
+  "quotas": {
+    "grid": [
+      "luis-navarro",
+      "rachel-torres",
+      "angela-reyes",
+      "selena-grant",
+      "tamsin-pruitt"
+    ],
+    "weekday": 2
+  },
+  "assignments": [
+    {
+      "desk": "civic",
+      "name": "Luis Navarro",
+      "popid": "POP-00636",
+      "beatDomain": "CIVIC",
+      "persona": "luis-navarro",
+      "approach": "Civic approach: start from the official action — who in city hall did what, this cycle, on the record. Then find the resident living its consequence; an official's report is not a story until a second, non-official citizen is shown carrying it. Name who must answer, and what question they haven't answered.",
+      "gridDay": 2,
+      "story": {
+        "ref": "output/engine_audit_c114.json patterns[0]; evidence: Neighborhood_Map row(s) 4",
+        "label": "math-imbalance (medium) | Laurel: decay [Sentiment -0.030, RetailVitality -3.00] — Sentiment now -0.03 (20 of 22, city median 0.085); RetailVitality now 4.34 (22 of 22, city median 8.265) — with no matching active initiative",
+        "kind": "anomaly",
+        "angle": "civic gap in Laurel — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the Laurel signal surfaced this cycle.",
+        "hood": "Laurel",
+        "popids": [
+          "POP-00495"
+        ],
+        "citizens": [
+          "Rosalind Young (POP-00495)"
+        ]
+      },
+      "civicDomainSlice": true,
+      "civicDomainSeat": "luis-navarro",
+      "pulse": {
+        "className": "accountability-anomaly",
+        "score": 80,
+        "label": "math-imbalance (medium) | Laurel: decay [Sentiment -0.030, RetailVitality -3.00] — Sentiment now -0.03 (20 of 22, city median 0.085); RetailVitality now 4.34 (22 of 22, city median 8.265) — with no matching active initiative",
+        "hood": "Laurel",
+        "source": "output/engine_audit_c114.json patterns[0]; evidence: Neighborhood_Map row(s) 4"
+      },
+      "prewrite": {
+        "anchorFacts": [
+          "math-imbalance (medium) | Laurel: decay [Sentiment -0.030, RetailVitality -3.00] — Sentiment now -0.03 (20 of 22, city median 0.085); RetailVitality now 4.34 (22 of 22, city median 8.265) — with no matching active initiative"
+        ],
+        "forbidden": [
+          "Do not add officials, votes, budgets, outcomes, measurements, quotes, responses, or affected people absent from the supplied entries."
+        ],
+        "schema": "INVESTIGATION-BRIEF-1",
+        "method": "KNOWN_UNKNOWN",
+        "missing": [
+          "documented response or documented non-response",
+          "request timestamp and elapsed silence duration",
+          "responsible person, office, or duty unless named by the source"
+        ],
+        "reportingEvidence": {
+          "recordChecks": {
+            "state": "NOT_SUPPLIED",
+            "events": []
+          },
+          "requestEvents": {
+            "state": "NOT_SUPPLIED",
+            "events": []
+          },
+          "responseEvents": {
+            "state": "NOT_SUPPLIED",
+            "events": []
+          },
+          "responsibleEntities": {
+            "state": "NOT_SUPPLIED",
+            "entities": []
+          }
+        },
+        "silenceClock": {
+          "state": "UNESTABLISHED",
+          "value": null,
+          "src": null
+        },
+        "excludedCandidates": [
+          {
+            "popid": "POP-00478",
+            "reason": "NEVER_WOKEN"
+          },
+          {
+            "popid": "POP-00496",
+            "reason": "NEVER_WOKEN"
+          }
+        ]
+      },
+      "wakePackage": "LUIS-LEP2-2",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "civic",
+      "name": "Sgt. Rachel Torres",
+      "popid": "POP-00057",
+      "beatDomain": "SAFETY",
+      "persona": "rachel-torres",
+      "approach": "Civic approach: start from the official action — who in city hall did what, this cycle, on the record. Then find the resident living its consequence; an official's report is not a story until a second, non-official citizen is shown carrying it. Name who must answer, and what question they haven't answered.",
+      "gridDay": 2,
+      "story": {
+        "kind": "beat-safety",
+        "angle": "Uptown logged the most incidents (11) | 22 neighborhoods on the table — what the table says and who answers for it",
+        "label": "Uptown logged the most incidents (11) | 22 neighborhoods on the table",
+        "hookLine": "Uptown leads the incident count; 72 in custody citywide; 39 public-safety staff on the roster.",
+        "hood": "Uptown",
+        "citizens": [
+          "Rafael Montez (POP-00136)",
+          "Kimberly Cho (POP-00137)",
+          "Leonard Briggs (POP-00138)",
+          "Samantha Viteri (POP-00139)",
+          "Marcus Hollowell (POP-00140)",
+          "Priya Narang (POP-00141)",
+          "Marc Allie (POP-00241)",
+          "Vincent Ramirez (POP-00514)",
+          "Vanessa Tran-Muñoz (POP-01021)",
+          "Dolores Nwachukwu (POP-01141)",
+          "Tomas Reinholt (POP-01142)",
+          "Kendra Lyle-Nnamdi (POP-01143)",
+          "Benjamin Tsai (POP-01144)",
+          "Marisol Ibarra (POP-01145)",
+          "Devin Castellanos (POP-01146)",
+          "Ruth Anyanwu (POP-01147)",
+          "Jerome Lindqvist (POP-01148)",
+          "Hana Petrosyan (POP-01149)",
+          "Calvin Mokoena (POP-01150)",
+          "Luis Ferreira-Nash (POP-01151)",
+          "Ingrid Solberg (POP-01152)",
+          "Omar Haddad (POP-01153)",
+          "Felicia Grandberry (POP-01154)",
+          "Teodoro Villalpando (POP-01155)",
+          "Nadia Rasmussen (POP-01156)",
+          "Wesley Oduya (POP-01157)",
+          "Priscilla Chang (POP-01158)",
+          "Dmitri Volkov (POP-01159)",
+          "Yolanda Beckford (POP-01160)",
+          "Samuel Adeyemi (POP-01161)",
+          "Grace Oyelaran (POP-01162)",
+          "Rashida Coleman-Ortiz (POP-01163)",
+          "Hector Quintanilla (POP-01164)",
+          "Imani Delacroix (POP-01165)",
+          "Patrick Asante (POP-01166)",
+          "Lena Marchetti (POP-01167)",
+          "Tobias Nkemelu (POP-01168)",
+          "Esperanza Ruiz (POP-01169)",
+          "Caleb Thornbury (POP-01170)"
+        ],
+        "popids": [
+          "POP-00136",
+          "POP-00137",
+          "POP-00138",
+          "POP-00139",
+          "POP-00140",
+          "POP-00141",
+          "POP-00241",
+          "POP-00514",
+          "POP-01021",
+          "POP-01141",
+          "POP-01142",
+          "POP-01143",
+          "POP-01144",
+          "POP-01145",
+          "POP-01146",
+          "POP-01147",
+          "POP-01148",
+          "POP-01149",
+          "POP-01150",
+          "POP-01151",
+          "POP-01152",
+          "POP-01153",
+          "POP-01154",
+          "POP-01155",
+          "POP-01156",
+          "POP-01157",
+          "POP-01158",
+          "POP-01159",
+          "POP-01160",
+          "POP-01161",
+          "POP-01162",
+          "POP-01163",
+          "POP-01164",
+          "POP-01165",
+          "POP-01166",
+          "POP-01167",
+          "POP-01168",
+          "POP-01169",
+          "POP-01170"
+        ],
+        "ref": "output/beats/Crime_Metrics.jsonl @C114",
+        "cycle": 114
+      },
+      "beatSlice": true,
+      "beatSeat": "rachel-torres",
+      "pulse": {
+        "className": "beat-safety",
+        "score": 100,
+        "label": "Uptown logged the most incidents (11) | 22 neighborhoods on the table",
+        "hood": "Uptown",
+        "source": "output/beats/Crime_Metrics.jsonl @C114"
+      },
+      "prewrite": {
+        "schema": "BEAT-SLICE-1",
+        "method": "BEAT_TAB_FACTS",
+        "missing": [],
+        "angle": "Uptown logged the most incidents (11) | 22 neighborhoods on the table — what the table says and who answers for it",
+        "hookLine": "Uptown leads the incident count; 72 in custody citywide; 39 public-safety staff on the roster.",
+        "anchorFacts": [
+          "183 incidents across 22 neighborhoods; most in Uptown 11, Downtown 11, West Oakland 10, KONO 10, Rockridge 10; fewest in Fruitvale 6, Ivy Hill 6, Lake Merritt 5",
+          "Uptown: 11 incidents (+4 vs C113), response 10.8 min, clearance 26%, property index 39, violent index 23",
+          "Moved this cycle — rising: Downtown, West Oakland, KONO, Rockridge, San Antonio, Eastlake, East Oakland, Laurel, Glenview, Baylight District, Ivy Hill, Lake Merritt; easing: none",
+          "Citywide custody this cycle: 43 arrests (0 tracked, 43 other residents); 72 in custody at the close; 27 left",
+          "KONO: 10 charges → 3 arrests → 5 in custody at the close (0 tracked, 5 other residents); tracked: none tracked",
+          "Rockridge: 10 charges → 3 arrests → 5 in custody at the close (0 tracked, 5 other residents); tracked: none tracked",
+          "Uptown: 11 charges → 3 arrests → 5 in custody at the close (0 tracked, 5 other residents); tracked: none tracked",
+          "Downtown: 11 charges → 3 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+          "Eastlake: 9 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked"
+        ],
+        "evidence": [
+          {
+            "text": "183 incidents across 22 neighborhoods; most in Uptown 11, Downtown 11, West Oakland 10, KONO 10, Rockridge 10; fewest in Fruitvale 6, Ivy Hill 6, Lake Merritt 5",
+            "src": "output/beats/Crime_Metrics.jsonl @C114"
+          },
+          {
+            "text": "Uptown: 11 incidents (+4 vs C113), response 10.8 min, clearance 26%, property index 39, violent index 23",
+            "src": "output/beats/Crime_Metrics.jsonl @C114"
+          },
+          {
+            "text": "Moved this cycle — rising: Downtown, West Oakland, KONO, Rockridge, San Antonio, Eastlake, East Oakland, Laurel, Glenview, Baylight District, Ivy Hill, Lake Merritt; easing: none",
+            "src": "output/beats/Crime_Metrics.jsonl @C114"
+          },
+          {
+            "text": "Citywide custody this cycle: 43 arrests (0 tracked, 43 other residents); 72 in custody at the close; 27 left",
+            "src": "output/beats/Care_Justice_Census.jsonl judicial @C114 city"
+          },
+          {
+            "text": "KONO: 10 charges → 3 arrests → 5 in custody at the close (0 tracked, 5 other residents); tracked: none tracked",
+            "src": "output/beats/Care_Justice_Census.jsonl judicial @C114 KONO"
+          },
+          {
+            "text": "Rockridge: 10 charges → 3 arrests → 5 in custody at the close (0 tracked, 5 other residents); tracked: none tracked",
+            "src": "output/beats/Care_Justice_Census.jsonl judicial @C114 Rockridge"
+          },
+          {
+            "text": "Uptown: 11 charges → 3 arrests → 5 in custody at the close (0 tracked, 5 other residents); tracked: none tracked",
+            "src": "output/beats/Care_Justice_Census.jsonl judicial @C114 Uptown"
+          },
+          {
+            "text": "Downtown: 11 charges → 3 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+            "src": "output/beats/Care_Justice_Census.jsonl judicial @C114 Downtown"
+          },
+          {
+            "text": "Eastlake: 9 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+            "src": "output/beats/Care_Justice_Census.jsonl judicial @C114 Eastlake"
+          }
+        ],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ],
+        "deltas": {
+          "state": "PRIOR_CYCLE_ON_DISK",
+          "vs": 113
+        },
+        "hooks": [
+          {
+            "text": "Notable event: \"Medium-severity safety spike in Temescal\". Follow-up recommended.",
+            "angle": "general coverage",
+            "domain": "SAFETY",
+            "hood": "Temescal",
+            "priority": 2
+          }
+        ],
+        "note": "desk-signal incident rows attached as pointers (5)",
+        "pageVoices": [],
+        "roomIsYours": "the corner after the call, the dispatcher's pause, who was on the porch, what the neighborhood watch captain saw first"
+      },
+      "wakePackage": "RACHEL-LEP2-2",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "civic",
+      "name": "Angela Reyes",
+      "popid": "POP-00156",
+      "beatDomain": "EDUCATION",
+      "persona": "angela-reyes",
+      "approach": "Civic approach: start from the official action — who in city hall did what, this cycle, on the record. Then find the resident living its consequence; an official's report is not a story until a second, non-official citizen is shown carrying it. Name who must answer, and what question they haven't answered.",
+      "gridDay": 2,
+      "story": {
+        "kind": "beat-schools",
+        "angle": "Enrollment moved in West Oakland — Rockridge has the strongest school record on the table (index 8.53) — the students and teachers who live it",
+        "label": "Rockridge has the strongest school record on the table (index 8.53)",
+        "hookLine": "10 students and educators in Rockridge; the table says why their school reads the way it does.",
+        "hood": "Rockridge",
+        "citizens": [
+          "Mei Wong (POP-01036)",
+          "Maya Torres-Dillon (POP-00742)",
+          "Rick Dillon (POP-00743)",
+          "Rico Fister (POP-00305)",
+          "Wiu Wiu (POP-00312)",
+          "Gloria Liu (POP-00827)",
+          "Simone Adesanya (POP-00287)",
+          "Mateo Jilner (POP-01001)",
+          "Mateo Wally (POP-01012)",
+          "Salma Campbell (POP-01018)"
+        ],
+        "popids": [
+          "POP-01036",
+          "POP-00742",
+          "POP-00743",
+          "POP-00305",
+          "POP-00312",
+          "POP-00827",
+          "POP-00287",
+          "POP-01001",
+          "POP-01012",
+          "POP-01018"
+        ],
+        "ref": "output/beats/Neighborhood_Demographics.jsonl @C114",
+        "cycle": 114
+      },
+      "beatSlice": true,
+      "beatSeat": "angela-reyes",
+      "pulse": {
+        "className": "beat-schools",
+        "score": 100,
+        "label": "Rockridge has the strongest school record on the table (index 8.53)",
+        "hood": "Rockridge",
+        "source": "output/beats/Neighborhood_Demographics.jsonl @C114"
+      },
+      "prewrite": {
+        "schema": "BEAT-SLICE-1",
+        "method": "BEAT_TAB_FACTS",
+        "missing": [],
+        "angle": "Enrollment moved in West Oakland — Rockridge has the strongest school record on the table (index 8.53) — the students and teachers who live it",
+        "hookLine": "10 students and educators in Rockridge; the table says why their school reads the way it does.",
+        "anchorFacts": [
+          "Enrollment moved: West Oakland +3 students, Grand Lake +2 students, Chinatown +2 students, Rockridge +1 students, Piedmont Ave +1 students, Brooklyn +1 students vs C113",
+          "Ranked by school quality index: Rockridge 8.53, Baylight District 8.24, Piedmont Ave 8.22, Brooklyn 8.16, West Oakland 8.1, Laurel 7.94, Adams Point 7.94, Lake Merritt 7.93, Jack London 7.57, Fruitvale 7.5, Downtown 7.46, Grand Lake 7.38, Uptown 7.31, Eastlake 6.93, KONO 6.92, Glenview 6.87, Dimond 6.87, Chinatown 6.87, Ivy Hill 6.75, San Antonio 6.72, East Oakland 6.69, Temescal 6.36 (22 neighborhoods)",
+          "Rockridge: school quality index 8.53 (was 8.58 at C113), graduation 94.2%, college-ready 75.03%, teacher quality 9.1, funding 15,000, 248 students",
+          "Temescal: school quality index 6.36 (was 6.43 at C113), graduation 84.37%, college-ready 54.5%, teacher quality 6.86, funding 11,500, 313 students",
+          "The district: Oakland City Schools — 5,201 employees citywide, growth 7.67%; per-hood funding on the table totals 286,000"
+        ],
+        "evidence": [
+          {
+            "text": "Enrollment moved: West Oakland +3 students, Grand Lake +2 students, Chinatown +2 students, Rockridge +1 students, Piedmont Ave +1 students, Brooklyn +1 students vs C113",
+            "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C114"
+          },
+          {
+            "text": "Ranked by school quality index: Rockridge 8.53, Baylight District 8.24, Piedmont Ave 8.22, Brooklyn 8.16, West Oakland 8.1, Laurel 7.94, Adams Point 7.94, Lake Merritt 7.93, Jack London 7.57, Fruitvale 7.5, Downtown 7.46, Grand Lake 7.38, Uptown 7.31, Eastlake 6.93, KONO 6.92, Glenview 6.87, Dimond 6.87, Chinatown 6.87, Ivy Hill 6.75, San Antonio 6.72, East Oakland 6.69, Temescal 6.36 (22 neighborhoods)",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C114"
+          },
+          {
+            "text": "Rockridge: school quality index 8.53 (was 8.58 at C113), graduation 94.2%, college-ready 75.03%, teacher quality 9.1, funding 15,000, 248 students",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C114"
+          },
+          {
+            "text": "Temescal: school quality index 6.36 (was 6.43 at C113), graduation 84.37%, college-ready 54.5%, teacher quality 6.86, funding 11,500, 313 students",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C114"
+          },
+          {
+            "text": "The district: Oakland City Schools — 5,201 employees citywide, growth 7.67%; per-hood funding on the table totals 286,000",
+            "src": "output/beats/Business_Ledger.jsonl BIZ-00016 @C114"
+          }
+        ],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ],
+        "deltas": {
+          "state": "PRIOR_CYCLE_ON_DISK",
+          "vs": 113
+        },
+        "hooks": [
+          {
+            "text": "Uptown housing pressure at 10/10: rents climbing, households stretching to stay",
+            "angle": "desk rotation",
+            "domain": "COMMUNITY",
+            "hood": "Uptown",
+            "priority": 7
+          },
+          {
+            "text": "Graciela Foster moved from Uptown to East Oakland — moving for a better fit between household income and housing costs",
+            "angle": "desk rotation",
+            "domain": "COMMUNITY",
+            "hood": "East Oakland",
+            "priority": 5
+          }
+        ],
+        "note": null,
+        "pageVoices": [],
+        "roomIsYours": "the classroom, the pickup line, what a parent asks at the door, what the teacher is worried about, what the hallway sounds like at 3:05"
+      },
+      "wakePackage": "ANGELA-LEP2-2",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "Selena Grant",
+      "popid": "POP-00591",
+      "beatDomain": "SPORTS",
+      "persona": "selena-grant",
+      "approach": "Oaks analysis approach (solo seat): open on a supplied number or roster observation, never a scene. The Oaks rows of the sports feed are the skeleton; the story is what a first-year franchise's decision means — the rotation, the sit, the signing, the silence. Real NBA names are the roster, not citizens. Belief is earned with numbers. End on what the front office still owes.",
+      "gridDay": 2,
+      "story": {
+        "kind": "beat-oaks-beat",
+        "angle": "Oaks — game-result C114 · 4-1 · L1 — the second club's board read",
+        "label": "Oaks — game-result C114 · 4-1 · L1",
+        "hookLine": "The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+        "hood": "San Antonio",
+        "citizens": [
+          "Adash Stanley (POP-01023)",
+          "Austin Reaves (POP-01027)",
+          "Harry Hayward (POP-01223)"
+        ],
+        "popids": [
+          "POP-01023",
+          "POP-01027",
+          "POP-01223"
+        ],
+        "ref": "output/beats/Oakland_Sports_Feed.jsonl @C114",
+        "cycle": 114
+      },
+      "beatSlice": true,
+      "beatSeat": "selena-grant",
+      "pulse": {
+        "className": "beat-oaks-beat",
+        "score": 100,
+        "label": "Oaks — game-result C114 · 4-1 · L1",
+        "hood": "San Antonio",
+        "source": "output/beats/Oakland_Sports_Feed.jsonl @C114"
+      },
+      "prewrite": {
+        "schema": "BEAT-SLICE-1",
+        "method": "BEAT_TAB_FACTS",
+        "missing": [],
+        "angle": "Oaks — game-result C114 · 4-1 · L1 — the second club's board read",
+        "hookLine": "The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+        "anchorFacts": [
+          "Oaks — game-result (early-season), C114: The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+          "Record 4-1 · streak L1",
+          "Stats (feed): Adash Stanley/19PTS/5REB/4ASST/5-11 3PT, Austin Reaves/19PTS/6REB/7ASST/0TO, AJ Dybantsa/15PTS/5REB, Wendell Carter Jr/10PTS/7REB/5-6FG, T. Jerome/10PTS/5ASST",
+          "Franchise stability: growing",
+          "Oaks — player-feature (early-season), C114: Second-round rookie Harry Hayward is shaping up as a solid rotation piece",
+          "Record 4-1 · streak L1",
+          "Stats (feed): Harry Hayward/8PTS/4REB/3-4FG/2-2 3PT in 13 minutes",
+          "Franchise stability: growing",
+          "Oaks — game-result (early-season), C114: The Oaks bounce back with a 60-point rout in Toronto. Oaks 135 - Raptors 75",
+          "Record 5-1 · streak W1",
+          "Stats (feed): Austin Reaves/20PTS/8-16FG/4-6 3PT, T. Jerome/19PTS/7REB/7ASST, Adash Stanley/16PTS/7REB/6ASST/4-4 3PT, Wendell Carter Jr/14PTS/15REB/5OREB, AJ Dybantsa/12PTS/5-8FG",
+          "Franchise stability: growing"
+        ],
+        "evidence": [
+          {
+            "text": "Oaks — game-result (early-season), C114: The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+          },
+          {
+            "text": "Record 4-1 · streak L1",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+          },
+          {
+            "text": "Stats (feed): Adash Stanley/19PTS/5REB/4ASST/5-11 3PT, Austin Reaves/19PTS/6REB/7ASST/0TO, AJ Dybantsa/15PTS/5REB, Wendell Carter Jr/10PTS/7REB/5-6FG, T. Jerome/10PTS/5ASST",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+          },
+          {
+            "text": "Franchise stability: growing",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+          },
+          {
+            "text": "Oaks — player-feature (early-season), C114: Second-round rookie Harry Hayward is shaping up as a solid rotation piece",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+          },
+          {
+            "text": "Record 4-1 · streak L1",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+          },
+          {
+            "text": "Stats (feed): Harry Hayward/8PTS/4REB/3-4FG/2-2 3PT in 13 minutes",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+          },
+          {
+            "text": "Franchise stability: growing",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+          },
+          {
+            "text": "Oaks — game-result (early-season), C114: The Oaks bounce back with a 60-point rout in Toronto. Oaks 135 - Raptors 75",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+          },
+          {
+            "text": "Record 5-1 · streak W1",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+          },
+          {
+            "text": "Stats (feed): Austin Reaves/20PTS/8-16FG/4-6 3PT, T. Jerome/19PTS/7REB/7ASST, Adash Stanley/16PTS/7REB/6ASST/4-4 3PT, Wendell Carter Jr/14PTS/15REB/5OREB, AJ Dybantsa/12PTS/5-8FG",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+          },
+          {
+            "text": "Franchise stability: growing",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+          }
+        ],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ],
+        "deltas": null,
+        "hooks": [],
+        "note": null,
+        "pageVoices": [],
+        "roomIsYours": "the near-empty press row, the bullpen chatter, what the manager says when the record is ugly, the drumbeat of a losing streak"
+      },
+      "wakePackage": "SELENA-OAKS-2",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "culture",
+      "name": "Tamsin Pruitt",
+      "popid": "POP-01210",
+      "beatDomain": "COMMUNITY",
+      "persona": "tamsin-pruitt",
+      "approach": "Culture approach: what is the city vibing on? Find what people are actually doing — the block, the food, the music, the small rituals around this cycle's events. Ground it in the named places and people of the record, then let the street texture breathe.",
+      "gridDay": 2,
+      "story": {
+        "kind": "beat-lives",
+        "angle": "The lives of C114: 10 people — Elle Lilo moved into a place of their own in Jack London, renting",
+        "label": "Elle Lilo moved into a place of their own in Jack London, renting",
+        "hookLine": "Elle Lilo first. The event is the lead; one true detail; what came next only if the record says.",
+        "hood": null,
+        "citizens": [
+          "Elle Lilo (POP-00177)",
+          "Cee Lee (POP-00320)",
+          "Aanya Rivera (POP-00861)",
+          "Jose Johnson (POP-00968)",
+          "Pamela Amelia (POP-00049)",
+          "Shawn Neighbor (POP-00746)",
+          "Billy Storip (POP-00510)",
+          "Clarence Moody (POP-00730)",
+          "Gloria Liu (POP-00827)",
+          "Amear Thompson (POP-00679)"
+        ],
+        "popids": [
+          "POP-00177",
+          "POP-00320",
+          "POP-00861",
+          "POP-00968",
+          "POP-00049",
+          "POP-00746",
+          "POP-00510",
+          "POP-00730",
+          "POP-00827",
+          "POP-00679"
+        ],
+        "ref": "output/beats/Lived_Events.jsonl @C114 batch 236736",
+        "cycle": 114
+      },
+      "beatSlice": true,
+      "beatSeat": "tamsin-pruitt",
+      "pulse": {
+        "className": "beat-lives",
+        "score": 100,
+        "label": "Elle Lilo moved into a place of their own in Jack London, renting",
+        "hood": null,
+        "source": "output/beats/Lived_Events.jsonl @C114 batch 236736"
+      },
+      "prewrite": {
+        "schema": "BEAT-SLICE-1",
+        "method": "BEAT_TAB_FACTS",
+        "missing": [],
+        "angle": "The lives of C114: 10 people — Elle Lilo moved into a place of their own in Jack London, renting",
+        "hookLine": "Elle Lilo first. The event is the lead; one true detail; what came next only if the record says.",
+        "anchorFacts": [
+          "Elle Lilo moved into a place of their own in Jack London, renting (C114)",
+          "Elle Lilo — in their life, C114: experienced renewed social energy",
+          "Elle Lilo — in their life, C114: closed their eyes during the choir solo and actually felt the tension leave their shoulders",
+          "Elle Lilo — in their life, C114: lent a neighbor a tool and got a story back with it",
+          "Elle Lilo — in their life, C114: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+          "Elle Lilo — the Tribune named them in a piece headlined Chinatown's 140 Sick Are Mostly at Home, and Home Is Doing the Work (Civic, C113)",
+          "Elle Lilo — the Tribune named them in a piece headlined Last, UNDOCKED. Nia Rook has Eric Taveras holding the top spot and Cristina Booker's ten-point Mon (Civic, C113)",
+          "Elle Lilo — the Tribune named them in a piece headlined Six Names for 142 Sick Residents (Civic, C112)",
+          "Cee Lee moved into a place of their own in Lake Merritt, renting (C114)",
+          "Cee Lee — in their life, C113: tried a new recipe that mostly worked",
+          "Cee Lee — in their life, C113: dealt with a seasonal health concern",
+          "Cee Lee — in their life, C114: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+          "Cee Lee — the Tribune named them in a piece headlined Chinatown's 140 Sick Are Mostly at Home, and Home Is Doing the Work (Civic, C113)",
+          "Cee Lee — the Tribune named them in a piece headlined Last, UNDOCKED. Nia Rook has Eric Taveras holding the top spot and Cristina Booker's ten-point Mon (Civic, C113)",
+          "Aanya Rivera won on the UNDOCKED book — staked 200, paid 366, Lake Merritt (C114)",
+          "Aanya Rivera — in their life, C113: counted cranes on the skyline from the bus stop and got a different number than yesterday",
+          "Aanya Rivera — in their life, C113: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+          "Aanya Rivera — in their life, C114: checked the Civis Systems Field livestream just to see if the grass had been laid down yet",
+          "Aanya Rivera — in their life, C114: caught their reflection in a shop window and stood a little straighter",
+          "Jose Johnson — a group of fans huddle under an awning debating last night's game, their voices rising above the sound of rain hitting the pavement, Temescal — one of 4 people the Cycle's city turn reached (Temescal Community Health Center is operational — ongoing health effects in Temescal; the city feels it through these neighborhoods) (C114)",
+          "Jose Johnson — in their life, C113: caught a stranger humming their song and felt briefly, wrongly, known",
+          "Jose Johnson — in their life, C114: the crack of a bat echoes from a nearby screen, drawing a small crowd of pedestrians to pause near a small gallery",
+          "Jose Johnson — in their life, C114: observed art enthusiasts wandering the streets",
+          "Pamela Amelia — read the Tribune's front page twice — once for the news, once to see who was in it, Piedmont Ave — one of 4 people the Cycle's city turn reached (Initiative work landed in 6 neighborhood(s): Downtown, Temescal, West Oakland, Fruitvale, Jack London, East Oakland) (C114)",
+          "Pamela Amelia — in their life, C113: carried three boxes of canned goods from the pantry truck and felt it in their lower back",
+          "Pamela Amelia — in their life, C113: walked a different street home just to see it",
+          "Shawn Neighbor — felt quietly lucky to call Fruitvale home, Fruitvale — one of 4 people the Cycle's community turn reached (Edition coverage lifted the city: traffic +0.03, retail +0.028, nightlife +0.06, publicSpaces +0.044, communityEngagement +0.026,…) (C114)",
+          "Shawn Neighbor — in their life, C113: walked the Mandela Parkway median under the trees and took the long way home",
+          "Shawn Neighbor — in their life, C113: haggled for a flat of bruised peaches at the Saturday market just to have a reason to talk to someone",
+          "Shawn Neighbor — in their life, C113: lent a neighbor a tool and got a story back with it",
+          "Shawn Neighbor — in their life, C114: knew the rules cold — two nights in the chair, the galaxy keeps the score, the board adds it up — and had never been drawn",
+          "Shawn Neighbor — the Tribune named them in a piece headlined Four Years to the Floor: Apprenticeship Pipeline Passes 9-0 — and What It Binds (Civic Affairs, C98)",
+          "Billy Storip — called an old coworker just to catch up and talked for an hour, Rockridge (C114 — what happened in their life, not words they said)",
+          "Billy Storip — in their life, C113: fixed a squeaky hinge that had been squeaking since the kids left home near a bookstore corner",
+          "Billy Storip — in their life, C113: overheard coworkers talking about last night's scene",
+          "Billy Storip — in their life, C114: found a quiet minute at a bookstore corner and the quiet satisfaction of finding a favorite song on the jukebox",
+          "Billy Storip — in their life, C114: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
+          "Billy Storip — Lives already wrote this person: a moment the record kept (C113)",
+          "Clarence Moody — swapped seed packets with a neighbor over the fence, Dimond (C114 — what happened in their life, not words they said)",
+          "Clarence Moody — in their life, C113: shared a small piece of history with someone who needed it",
+          "Clarence Moody — in their life, C113: heard Jack London was packed last night",
+          "Clarence Moody — in their life, C114: showed up to set up the chairs in the fellowship hall because if they didn't do it, no one would",
+          "Clarence Moody — in their life, C114: closed their eyes during the choir solo and actually felt the tension leave their shoulders",
+          "Clarence Moody — Lives already wrote this person: a moment the record kept (C113)",
+          "Clarence Moody — the Tribune named them in a piece headlined The Page of Lives, C113: A Place of Their Own (Culture, C113)",
+          "Clarence Moody — the Tribune named them in a piece headlined In Montclair, the Night of Krishna's Birth (Arts & Entertainment, C87)",
+          "Gloria Liu — reorganized the garage into a system only he understood near College Avenue, Rockridge (C114 — what happened in their life, not words they said)",
+          "Gloria Liu — in their life, C113: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+          "Gloria Liu — in their life, C113: dodged the running groups circling the lake and found a quiet bench near the pergola",
+          "Gloria Liu — in their life, C113: still feeling the energy from last night's city buzz",
+          "Gloria Liu — in their life, C114: wrote a letter by hand because email felt like cheating",
+          "Gloria Liu — the Tribune named them in a piece headlined Rockridge Schools Maintain Excellence Amid Citywide Shifts (Civic, C108)",
+          "Amear Thompson — moved from Chinatown to West Oakland — moving up from Chinatown, West Oakland (C114 — what happened in their life, not words they said)",
+          "Amear Thompson — in their life, C113: took the long way home just to check the Baylight fence line's progress",
+          "Amear Thompson — in their life, C114: smelled the incense from the steps of Bay Pure Land Buddhist Temple",
+          "Amear Thompson — in their life, C114: saw someone running for the bus make it, and felt weirdly invested",
+          "Amear Thompson — in their life, C114: still feeling the energy from last night's city buzz"
+        ],
+        "evidence": [
+          {
+            "text": "Elle Lilo moved into a place of their own in Jack London, renting (C114)",
+            "src": "output/beats/Household_Ledger.jsonl @C114",
+            "id": "household:HH-0114-F003:114",
+            "kind": "household",
+            "popid": "POP-00177"
+          },
+          {
+            "text": "Elle Lilo — in their life, C114: experienced renewed social energy",
+            "src": "output/beats/LifeHistory_Log.jsonl @C114",
+            "kind": "thread",
+            "popid": "POP-00177"
+          },
+          {
+            "text": "Elle Lilo — in their life, C114: closed their eyes during the choir solo and actually felt the tension leave their shoulders",
+            "src": "output/beats/LifeHistory_Log.jsonl @C114",
+            "kind": "thread",
+            "popid": "POP-00177"
+          },
+          {
+            "text": "Elle Lilo — in their life, C114: lent a neighbor a tool and got a story back with it",
+            "src": "output/beats/LifeHistory_Log.jsonl @C114",
+            "kind": "thread",
+            "popid": "POP-00177"
+          },
+          {
+            "text": "Elle Lilo — in their life, C114: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+            "src": "output/beats/LifeHistory_Log.jsonl @C114",
+            "kind": "thread",
+            "popid": "POP-00177"
+          },
+          {
+            "text": "Elle Lilo — the Tribune named them in a piece headlined Chinatown's 140 Sick Are Mostly at Home, and Home Is Doing the Work (Civic, C113)",
+            "src": "archive/ARTICLE_INDEX.jsonl 415a8378a3cc8be1",
+            "kind": "thread",
+            "popid": "POP-00177"
+          },
+          {
+            "text": "Elle Lilo — the Tribune named them in a piece headlined Last, UNDOCKED. Nia Rook has Eric Taveras holding the top spot and Cristina Booker's ten-point Mon (Civic, C113)",
+            "src": "archive/ARTICLE_INDEX.jsonl 7b568104deca2649",
+            "kind": "thread",
+            "popid": "POP-00177"
+          },
+          {
+            "text": "Elle Lilo — the Tribune named them in a piece headlined Six Names for 142 Sick Residents (Civic, C112)",
+            "src": "archive/ARTICLE_INDEX.jsonl bad852382ed2ab09",
+            "kind": "thread",
+            "popid": "POP-00177"
+          },
+          {
+            "text": "Cee Lee moved into a place of their own in Lake Merritt, renting (C114)",
+            "src": "output/beats/Household_Ledger.jsonl @C114",
+            "id": "household:HH-0114-F004:114",
+            "kind": "household",
+            "popid": "POP-00320"
+          },
+          {
+            "text": "Cee Lee — in their life, C113: tried a new recipe that mostly worked",
+            "src": "output/beats/LifeHistory_Log.jsonl @C113",
+            "kind": "thread",
+            "popid": "POP-00320"
+          },
+          {
+            "text": "Cee Lee — in their life, C113: dealt with a seasonal health concern",
+            "src": "output/beats/LifeHistory_Log.jsonl @C113",
+            "kind": "thread",
+            "popid": "POP-00320"
+          },
+          {
+            "text": "Cee Lee — in their life, C114: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+            "src": "output/beats/LifeHistory_Log.jsonl @C114",
+            "kind": "thread",
+            "popid": "POP-00320"
+          },
+          {
+            "text": "Cee Lee — the Tribune named them in a piece headlined Chinatown's 140 Sick Are Mostly at Home, and Home Is Doing the Work (Civic, C113)",
+            "src": "archive/ARTICLE_INDEX.jsonl 415a8378a3cc8be1",
+            "kind": "thread",
+            "popid": "POP-00320"
+          },
+          {
+            "text": "Cee Lee — the Tribune named them in a piece headlined Last, UNDOCKED. Nia Rook has Eric Taveras holding the top spot and Cristina Booker's ten-point Mon (Civic, C113)",
+            "src": "archive/ARTICLE_INDEX.jsonl 7b568104deca2649",
+            "kind": "thread",
+            "popid": "POP-00320"
+          },
+          {
+            "text": "Aanya Rivera won on the UNDOCKED book — staked 200, paid 366, Lake Merritt (C114)",
+            "src": "output/beats/Casino_Ledger.jsonl @C114",
+            "id": "casino:4e36b9d8448c3513:114",
+            "kind": "casino",
+            "popid": "POP-00861"
+          },
+          {
+            "text": "Aanya Rivera — in their life, C113: counted cranes on the skyline from the bus stop and got a different number than yesterday",
+            "src": "output/beats/LifeHistory_Log.jsonl @C113",
+            "kind": "thread",
+            "popid": "POP-00861"
+          },
+          {
+            "text": "Aanya Rivera — in their life, C113: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+            "src": "output/beats/LifeHistory_Log.jsonl @C113",
+            "kind": "thread",
+            "popid": "POP-00861"
+          },
+          {
+            "text": "Aanya Rivera — in their life, C114: checked the Civis Systems Field livestream just to see if the grass had been laid down yet",
+            "src": "output/beats/LifeHistory_Log.jsonl @C114",
+            "kind": "thread",
+            "popid": "POP-00861"
+          },
+          {
+            "text": "Aanya Rivera — in their life, C114: caught their reflection in a shop window and stood a little straighter",
+            "src": "output/beats/LifeHistory_Log.jsonl @C114",
+            "kind": "thread",
+            "popid": "POP-00861"
+          },
+          {
+            "text": "Jose Johnson — a group of fans huddle under an awning debating last night's game, their voices rising above the sound of rain hitting the pavement, Temescal — one of 4 people the Cycle's city turn reached (Temescal Community Health Center is operational — ongoing health effects in Temescal; the city feels it through these neighborhoods) (C114)",
+            "src": "output/beats/Story_Seed_Deck.jsonl @C114",
+            "id": "seed:8491626d:114:POP-00968",
+            "kind": "seed",
+            "popid": "POP-00968"
+          },
+          {
+            "text": "Jose Johnson — in their life, C113: caught a stranger humming their song and felt briefly, wrongly, known",
+            "src": "output/beats/LifeHistory_Log.jsonl @C113",
+            "kind": "thread",
+            "popid": "POP-00968"
+          },
+          {
+            "text": "Jose Johnson — in their life, C114: the crack of a bat echoes from a nearby screen, drawing a small crowd of pedestrians to pause near a small gallery",
+            "src": "output/beats/LifeHistory_Log.jsonl @C114",
+            "kind": "thread",
+            "popid": "POP-00968"
+          },
+          {
+            "text": "Jose Johnson — in their life, C114: observed art enthusiasts wandering the streets",
+            "src": "output/beats/LifeHistory_Log.jsonl @C114",
+            "kind": "thread",
+            "popid": "POP-00968"
+          },
+          {
+            "text": "Pamela Amelia — read the Tribune's front page twice — once for the news, once to see who was in it, Piedmont Ave — one of 4 people the Cycle's city turn reached (Initiative work landed in 6 neighborhood(s): Downtown, Temescal, West Oakland, Fruitvale, Jack London, East Oakland) (C114)",
+            "src": "output/beats/Story_Seed_Deck.jsonl @C114",
+            "id": "seed:b61124ae:114:POP-00049",
+            "kind": "seed",
+            "popid": "POP-00049"
+          },
+          {
+            "text": "Pamela Amelia — in their life, C113: carried three boxes of canned goods from the pantry truck and felt it in their lower back",
+            "src": "output/beats/LifeHistory_Log.jsonl @C113",
+            "kind": "thread",
+            "popid": "POP-00049"
+          },
+          {
+            "text": "Pamela Amelia — in their life, C113: walked a different street home just to see it",
+            "src": "output/beats/LifeHistory_Log.jsonl @C113",
+            "kind": "thread",
+            "popid": "POP-00049"
+          },
+          {
+            "text": "Shawn Neighbor — felt quietly lucky to call Fruitvale home, Fruitvale — one of 4 people the Cycle's community turn reached (Edition coverage lifted the city: traffic +0.03, retail +0.028, nightlife +0.06, publicSpaces +0.044, communityEngagement +0.026,…) (C114)",
+            "src": "output/beats/Story_Seed_Deck.jsonl @C114",
+            "id": "seed:2068a502:114:POP-00746",
+            "kind": "seed",
+            "popid": "POP-00746"
+          },
+          {
+            "text": "Shawn Neighbor — in their life, C113: walked the Mandela Parkway median under the trees and took the long way home",
+            "src": "output/beats/LifeHistory_Log.jsonl @C113",
+            "kind": "thread",
+            "popid": "POP-00746"
+          },
+          {
+            "text": "Shawn Neighbor — in their life, C113: haggled for a flat of bruised peaches at the Saturday market just to have a reason to talk to someone",
+            "src": "output/beats/LifeHistory_Log.jsonl @C113",
+            "kind": "thread",
+            "popid": "POP-00746"
+          },
+          {
+            "text": "Shawn Neighbor — in their life, C113: lent a neighbor a tool and got a story back with it",
+            "src": "output/beats/LifeHistory_Log.jsonl @C113",
+            "kind": "thread",
+            "popid": "POP-00746"
+          },
+          {
+            "text": "Shawn Neighbor — in their life, C114: knew the rules cold — two nights in the chair, the galaxy keeps the score, the board adds it up — and had never been drawn",
+            "src": "output/beats/LifeHistory_Log.jsonl @C114",
+            "kind": "thread",
+            "popid": "POP-00746"
+          },
+          {
+            "text": "Shawn Neighbor — the Tribune named them in a piece headlined Four Years to the Floor: Apprenticeship Pipeline Passes 9-0 — and What It Binds (Civic Affairs, C98)",
+            "src": "archive/ARTICLE_INDEX.jsonl fd901c480f0ab61b",
+            "kind": "thread",
+            "popid": "POP-00746"
+          },
+          {
+            "text": "Billy Storip — called an old coworker just to catch up and talked for an hour, Rockridge (C114 — what happened in their life, not words they said)",
+            "src": "output/beats/LifeHistory_Log.jsonl @C114",
+            "id": "moment:POP-00510:114:PostCareer",
+            "kind": "moment",
+            "popid": "POP-00510"
+          },
+          {
+            "text": "Billy Storip — in their life, C113: fixed a squeaky hinge that had been squeaking since the kids left home near a bookstore corner",
+            "src": "output/beats/LifeHistory_Log.jsonl @C113",
+            "kind": "thread",
+            "popid": "POP-00510"
+          },
+          {
+            "text": "Billy Storip — in their life, C113: overheard coworkers talking about last night's scene",
+            "src": "output/beats/LifeHistory_Log.jsonl @C113",
+            "kind": "thread",
+            "popid": "POP-00510"
+          },
+          {
+            "text": "Billy Storip — in their life, C114: found a quiet minute at a bookstore corner and the quiet satisfaction of finding a favorite song on the jukebox",
+            "src": "output/beats/LifeHistory_Log.jsonl @C114",
+            "kind": "thread",
+            "popid": "POP-00510"
+          },
+          {
+            "text": "Billy Storip — in their life, C114: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
+            "src": "output/beats/LifeHistory_Log.jsonl @C114",
+            "kind": "thread",
+            "popid": "POP-00510"
+          },
+          {
+            "text": "Billy Storip — Lives already wrote this person: a moment the record kept (C113)",
+            "src": "output/cron-compare/lives_covered.json",
+            "kind": "thread",
+            "popid": "POP-00510"
+          },
+          {
+            "text": "Clarence Moody — swapped seed packets with a neighbor over the fence, Dimond (C114 — what happened in their life, not words they said)",
+            "src": "output/beats/LifeHistory_Log.jsonl @C114",
+            "id": "moment:POP-00730:114:PostCareer",
+            "kind": "moment",
+            "popid": "POP-00730"
+          },
+          {
+            "text": "Clarence Moody — in their life, C113: shared a small piece of history with someone who needed it",
+            "src": "output/beats/LifeHistory_Log.jsonl @C113",
+            "kind": "thread",
+            "popid": "POP-00730"
+          },
+          {
+            "text": "Clarence Moody — in their life, C113: heard Jack London was packed last night",
+            "src": "output/beats/LifeHistory_Log.jsonl @C113",
+            "kind": "thread",
+            "popid": "POP-00730"
+          },
+          {
+            "text": "Clarence Moody — in their life, C114: showed up to set up the chairs in the fellowship hall because if they didn't do it, no one would",
+            "src": "output/beats/LifeHistory_Log.jsonl @C114",
+            "kind": "thread",
+            "popid": "POP-00730"
+          },
+          {
+            "text": "Clarence Moody — in their life, C114: closed their eyes during the choir solo and actually felt the tension leave their shoulders",
+            "src": "output/beats/LifeHistory_Log.jsonl @C114",
+            "kind": "thread",
+            "popid": "POP-00730"
+          },
+          {
+            "text": "Clarence Moody — Lives already wrote this person: a moment the record kept (C113)",
+            "src": "output/cron-compare/lives_covered.json",
+            "kind": "thread",
+            "popid": "POP-00730"
+          },
+          {
+            "text": "Clarence Moody — the Tribune named them in a piece headlined The Page of Lives, C113: A Place of Their Own (Culture, C113)",
+            "src": "archive/ARTICLE_INDEX.jsonl 753f8ac13ffa3029",
+            "kind": "thread",
+            "popid": "POP-00730"
+          },
+          {
+            "text": "Clarence Moody — the Tribune named them in a piece headlined In Montclair, the Night of Krishna's Birth (Arts & Entertainment, C87)",
+            "src": "archive/ARTICLE_INDEX.jsonl d20fa0177f32d20f",
+            "kind": "thread",
+            "popid": "POP-00730"
+          },
+          {
+            "text": "Gloria Liu — reorganized the garage into a system only he understood near College Avenue, Rockridge (C114 — what happened in their life, not words they said)",
+            "src": "output/beats/LifeHistory_Log.jsonl @C114",
+            "id": "moment:POP-00827:114:PostCareer",
+            "kind": "moment",
+            "popid": "POP-00827"
+          },
+          {
+            "text": "Gloria Liu — in their life, C113: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+            "src": "output/beats/LifeHistory_Log.jsonl @C113",
+            "kind": "thread",
+            "popid": "POP-00827"
+          },
+          {
+            "text": "Gloria Liu — in their life, C113: dodged the running groups circling the lake and found a quiet bench near the pergola",
+            "src": "output/beats/LifeHistory_Log.jsonl @C113",
+            "kind": "thread",
+            "popid": "POP-00827"
+          },
+          {
+            "text": "Gloria Liu — in their life, C113: still feeling the energy from last night's city buzz",
+            "src": "output/beats/LifeHistory_Log.jsonl @C113",
+            "kind": "thread",
+            "popid": "POP-00827"
+          },
+          {
+            "text": "Gloria Liu — in their life, C114: wrote a letter by hand because email felt like cheating",
+            "src": "output/beats/LifeHistory_Log.jsonl @C114",
+            "kind": "thread",
+            "popid": "POP-00827"
+          },
+          {
+            "text": "Gloria Liu — the Tribune named them in a piece headlined Rockridge Schools Maintain Excellence Amid Citywide Shifts (Civic, C108)",
+            "src": "archive/ARTICLE_INDEX.jsonl 33f8a33c75e1838d",
+            "kind": "thread",
+            "popid": "POP-00827"
+          },
+          {
+            "text": "Amear Thompson — moved from Chinatown to West Oakland — moving up from Chinatown, West Oakland (C114 — what happened in their life, not words they said)",
+            "src": "output/beats/LifeHistory_Log.jsonl @C114",
+            "id": "moment:POP-00679:114:Relocation-Drive-Up-M",
+            "kind": "moment",
+            "popid": "POP-00679"
+          },
+          {
+            "text": "Amear Thompson — in their life, C113: took the long way home just to check the Baylight fence line's progress",
+            "src": "output/beats/LifeHistory_Log.jsonl @C113",
+            "kind": "thread",
+            "popid": "POP-00679"
+          },
+          {
+            "text": "Amear Thompson — in their life, C114: smelled the incense from the steps of Bay Pure Land Buddhist Temple",
+            "src": "output/beats/LifeHistory_Log.jsonl @C114",
+            "kind": "thread",
+            "popid": "POP-00679"
+          },
+          {
+            "text": "Amear Thompson — in their life, C114: saw someone running for the bus make it, and felt weirdly invested",
+            "src": "output/beats/LifeHistory_Log.jsonl @C114",
+            "kind": "thread",
+            "popid": "POP-00679"
+          },
+          {
+            "text": "Amear Thompson — in their life, C114: still feeling the energy from last night's city buzz",
+            "src": "output/beats/LifeHistory_Log.jsonl @C114",
+            "kind": "thread",
+            "popid": "POP-00679"
+          }
+        ],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ],
+        "deltas": null,
+        "hooks": [
+          {
+            "text": "A family bought their home in Rockridge",
+            "angle": "observational analysis",
+            "domain": "COMMUNITY",
+            "hood": "Rockridge",
+            "priority": 3
+          },
+          {
+            "text": "The Thompson household (2) moved from Chinatown to West Oakland — moving up from Chinatown",
+            "angle": "desk rotation",
+            "domain": "COMMUNITY",
+            "hood": "West Oakland",
+            "priority": 5
+          },
+          {
+            "text": "Derek Obi moved from Downtown to Rockridge — moving up from Downtown — sold the house in Downtown to rent up",
+            "angle": "desk rotation",
+            "domain": "COMMUNITY",
+            "hood": "Rockridge",
+            "priority": 5
+          },
+          {
+            "text": "Patrice Rao moved from Chinatown to West Oakland — moving up from Chinatown",
+            "angle": "observational analysis",
+            "domain": "COMMUNITY",
+            "hood": "West Oakland",
+            "priority": 5
+          },
+          {
+            "text": "Graciela Foster moved from Uptown to East Oakland — moving for a better fit between household income and housing costs",
+            "angle": "desk rotation",
+            "domain": "COMMUNITY",
+            "hood": "East Oakland",
+            "priority": 5
+          }
+        ],
+        "note": "none of today's people has written their own page this Cycle — no quotes",
+        "pageVoices": [],
+        "factCap": 120,
+        "peopleCap": 16,
+        "roomIsYours": "the plain respect, what the event meant in that house or on that block, the detail the family would have picked — from the lines below, never invented"
+      },
+      "wakePackage": "TAMSIN-LIVES-2",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "undocked",
+      "name": "Nia Rook",
+      "popid": "POP-01076",
+      "beatDomain": "CULTURE",
+      "persona": "nia-rook",
+      "approach": "UNDOCKED show beat: current episode and standings from the approved feed; earlier episodes from the approved show history.",
+      "gridDay": 2,
+      "story": {
+        "ref": "undocked:undocked-pop00530-Y3C10",
+        "label": "UNDOCKED: Lena Okafor, Monday night",
+        "kind": "undocked",
+        "angle": "UNDOCKED episode: Lena Okafor, Monday night. Standings: Daphne Stafford leads the board — rank #1, 32.93 achievement points, 0 credits, 2 cycle(s) led, current streak 2. In the chair: Lena Okafor — Daycare Director.",
+        "facts": [
+          "Lena Okafor's Monday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale and Miaplacidus; mined 11 iron ore and 6 copper ore; got into 1 fight; came out even on credits; flew until the show's time ran out.",
+          "Lena Okafor — Daycare Director (ledger)"
+        ],
+        "citizens": [
+          "Lena Okafor — Daycare Director, UNDOCKED cast pilot"
+        ],
+        "popids": [
+          "POP-00530"
+        ],
+        "hood": "Fruitvale"
+      },
+      "wakePackage": "NIAROOK-UNDOCKED-2",
+      "packetContract": "v2"
+    }
+  ],
+  "shortfalls": [],
+  "rotationShortfalls": [],
+  "rosterAbsent": [],
+  "seedless": 0,
+  "signalMissing": false,
+  "packageGate": {
+    "policy": "package-only",
+    "pinned": [],
+    "skipped": [],
+    "activeAssignments": [
+      {
+        "name": "Luis Navarro",
+        "persona": "luis-navarro",
+        "wakePackage": "LUIS-LEP2-2"
+      },
+      {
+        "name": "Sgt. Rachel Torres",
+        "persona": "rachel-torres",
+        "wakePackage": "RACHEL-LEP2-2"
+      },
+      {
+        "name": "Angela Reyes",
+        "persona": "angela-reyes",
+        "wakePackage": "ANGELA-LEP2-2"
+      },
+      {
+        "name": "Selena Grant",
+        "persona": "selena-grant",
+        "wakePackage": "SELENA-OAKS-2"
+      },
+      {
+        "name": "Tamsin Pruitt",
+        "persona": "tamsin-pruitt",
+        "wakePackage": "TAMSIN-LIVES-2"
+      },
+      {
+        "name": "Nia Rook",
+        "persona": "nia-rook",
+        "wakePackage": "NIAROOK-UNDOCKED-2"
+      }
+    ]
+  },
+  "stinkForce": {
+    "attempted": false,
+    "forced": false,
+    "reason": "themed-week grid — Jax seated on his day only",
+    "top": null,
+    "reportPath": null
+  },
+  "pslayerEnrich": {
+    "enriched": false,
+    "reason": "no p-slayer assignment in rota (before=luis-navarro,rachel-torres,angela-reyes,selena-grant,tamsin-pruitt,nia-rook)"
+  },
+  "anthonyEnrich": {
+    "enriched": false,
+    "reason": "no anthony-raines assignment in rota"
+  },
+  "halEnrich": {
+    "enriched": false,
+    "reason": "no hal-richmond assignment in rota"
+  },
+  "economicEnrich": {
+    "enriched": false,
+    "reason": "no business desk or Mason assignment in rota",
+    "dropped": []
+  },
+  "beatEnrich": {
+    "enriched": true,
+    "reason": "seats=4 tamsin-pruitt/beat-lives:—, selena-grant/beat-oaks-beat:San Antonio, angela-reyes/beat-schools:Rockridge, rachel-torres/beat-safety:Uptown",
+    "seats": [
+      "tamsin-pruitt/beat-lives:—",
+      "selena-grant/beat-oaks-beat:San Antonio",
+      "angela-reyes/beat-schools:Rockridge",
+      "rachel-torres/beat-safety:Uptown"
+    ],
+    "dropped": []
+  },
+  "eveningEnrich": {
+    "enriched": false,
+    "reason": "no evening-consumer assignment in rota",
+    "seats": []
+  },
+  "civicDomainEnrich": {
+    "enriched": true,
+    "reason": "seats=1",
+    "seats": [
+      {
+        "persona": "luis-navarro",
+        "domain": "accountability-anomaly",
+        "label": "math-imbalance (medium) | Laurel: decay [Sentiment -0.030, RetailVitality -3.00] — Sentiment now -0.03 (20 of 22, city median 0.085); RetailVitality now 4.34 (22 of 22, city median 8.265) — with no matching active initiative"
+      }
+    ]
+  },
+  "builtAt": "2026-11-03T12:15:06.311Z"
+}

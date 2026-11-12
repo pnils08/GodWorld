@@ -1,0 +1,446 @@
+[
+  {
+    "pop": "POP-00836",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00836\",\"name\":\"Cristina Booker\",\"role\":\"UNDOCKED pilot\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Nia Rook\",\"question\":\"What factors contributed to Cristina Booker's inconsistent performance on UNDOCKED this cycle? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"undocked-digest\",\"hood\":null,\"focus\":\"Cristina Booker's UNDOCKED performance\",\"src\":\"undocked-week:weekly-c113\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Cristina Booker — UNDOCKED pilot\",\"evidence\":[{\"id\":\"EV-eae8cc2ceb\",\"src\":\"undocked-week:weekly-c113\",\"text\":\"UNDOCKED week-in-review c113\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Cristina Booker's Monday night on UNDOCKED: went through Alpha Centauri; took the Copper Requisition and Welcome to Sol Central contracts; earned First Steps (5 points) and Maiden Jump (5 points); came out even on credits; flew until the show's time ran out.\",\"src\":\"undocked-week:weekly-c113\",\"id\":\"F-e5905c8a4bf4\"},{\"t\":\"FACT\",\"text\":\"Cristina Booker's Thursday night on UNDOCKED: never got the ship moving.\",\"src\":\"undocked-week:weekly-c113\",\"id\":\"F-a9af913d0dcb\"},{\"t\":\"FACT\",\"text\":\"Cristina Booker — Immigration Attorney (ledger)\",\"src\":\"undocked-week:weekly-c113\",\"id\":\"F-a7f8a3920841\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C113\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-876f95b5eb98\"},{\"t\":\"FACT\",\"text\":\"UNDOCKED week-in-review c113\",\"src\":\"undocked-week:weekly-c113\",\"id\":\"F-73d67346d148\"},{\"t\":\"FACT\",\"text\":\"Father Miguel's Tuesday night on UNDOCKED: went through Lacaille 9352, Sirius, Sol and Alpha Centauri; took the Copper Requisition contract; earned Maiden Jump (5 points); came out even on credits; flew until the show's time ran out.\",\"src\":\"undocked-week:weekly-c113\",\"id\":\"F-5720f376a3b3\"},{\"t\":\"FACT\",\"text\":\"Father Miguel's Friday night on UNDOCKED: went through Sirius, Lacaille 9352, Grumium and Sol; mined 2 aluminum ore and 1 platinum ore; earned no new points; came out even on credits; flew until the show's time ran out.\",\"src\":\"undocked-week:weekly-c113\",\"id\":\"F-e1589dfe130d\"},{\"t\":\"FACT\",\"text\":\"Daphne Stafford's Wednesday night on UNDOCKED: earned First Steps (5 points); never got the ship moving.\",\"src\":\"undocked-week:weekly-c113\",\"id\":\"F-5037b3e1ecc5\"},{\"t\":\"FACT\",\"text\":\"Cristina Booker — UNDOCKED pilot\",\"src\":\"Simulation_Ledger profile for POP-00836\",\"id\":\"F-d12a54aa3bfd\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C9, Winter, holiday=none\",\"src\":\"output/world_summary_c113.md Calendar context (Simulation_Calendar)\",\"id\":\"F-ab9d6786094e\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00836",
+        "name": "Cristina Booker",
+        "role": "UNDOCKED pilot",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Nia Rook",
+        "question": "What factors contributed to Cristina Booker's inconsistent performance on UNDOCKED this cycle? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "undocked-digest",
+        "hood": null,
+        "focus": "Cristina Booker's UNDOCKED performance",
+        "src": "undocked-week:weekly-c113"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Cristina Booker — UNDOCKED pilot",
+        "evidence": [
+          {
+            "id": "EV-eae8cc2ceb",
+            "src": "undocked-week:weekly-c113",
+            "text": "UNDOCKED week-in-review c113"
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Cristina Booker's Monday night on UNDOCKED: went through Alpha Centauri; took the Copper Requisition and Welcome to Sol Central contracts; earned First Steps (5 points) and Maiden Jump (5 points); came out even on credits; flew until the show's time ran out.",
+          "src": "undocked-week:weekly-c113",
+          "id": "F-e5905c8a4bf4"
+        },
+        {
+          "t": "FACT",
+          "text": "Cristina Booker's Thursday night on UNDOCKED: never got the ship moving.",
+          "src": "undocked-week:weekly-c113",
+          "id": "F-a9af913d0dcb"
+        },
+        {
+          "t": "FACT",
+          "text": "Cristina Booker — Immigration Attorney (ledger)",
+          "src": "undocked-week:weekly-c113",
+          "id": "F-a7f8a3920841"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C113",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-876f95b5eb98"
+        },
+        {
+          "t": "FACT",
+          "text": "UNDOCKED week-in-review c113",
+          "src": "undocked-week:weekly-c113",
+          "id": "F-73d67346d148"
+        },
+        {
+          "t": "FACT",
+          "text": "Father Miguel's Tuesday night on UNDOCKED: went through Lacaille 9352, Sirius, Sol and Alpha Centauri; took the Copper Requisition contract; earned Maiden Jump (5 points); came out even on credits; flew until the show's time ran out.",
+          "src": "undocked-week:weekly-c113",
+          "id": "F-5720f376a3b3"
+        },
+        {
+          "t": "FACT",
+          "text": "Father Miguel's Friday night on UNDOCKED: went through Sirius, Lacaille 9352, Grumium and Sol; mined 2 aluminum ore and 1 platinum ore; earned no new points; came out even on credits; flew until the show's time ran out.",
+          "src": "undocked-week:weekly-c113",
+          "id": "F-e1589dfe130d"
+        },
+        {
+          "t": "FACT",
+          "text": "Daphne Stafford's Wednesday night on UNDOCKED: earned First Steps (5 points); never got the ship moving.",
+          "src": "undocked-week:weekly-c113",
+          "id": "F-5037b3e1ecc5"
+        },
+        {
+          "t": "FACT",
+          "text": "Cristina Booker — UNDOCKED pilot",
+          "src": "Simulation_Ledger profile for POP-00836",
+          "id": "F-d12a54aa3bfd"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C9, Winter, holiday=none",
+          "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+          "id": "F-ab9d6786094e"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00734",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00734\",\"name\":\"Father Miguel\",\"role\":\"UNDOCKED pilot\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Nia Rook\",\"question\":\"How does Father Miguel's consistent performance on UNDOCKED compare to Cristina Booker's? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"undocked-digest\",\"hood\":null,\"focus\":\"Cristina Booker's UNDOCKED performance\",\"src\":\"undocked-week:weekly-c113\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Father Miguel — UNDOCKED pilot\",\"evidence\":[{\"id\":\"EV-4503708c1d\",\"src\":\"undocked-week:weekly-c113\",\"text\":\"UNDOCKED week-in-review c113\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Father Miguel's Tuesday night on UNDOCKED: went through Lacaille 9352, Sirius, Sol and Alpha Centauri; took the Copper Requisition contract; earned Maiden Jump (5 points); came out even on credits; flew until the show's time ran out.\",\"src\":\"undocked-week:weekly-c113\",\"id\":\"F-5720f376a3b3\"},{\"t\":\"FACT\",\"text\":\"Father Miguel's Friday night on UNDOCKED: went through Sirius, Lacaille 9352, Grumium and Sol; mined 2 aluminum ore and 1 platinum ore; earned no new points; came out even on credits; flew until the show's time ran out.\",\"src\":\"undocked-week:weekly-c113\",\"id\":\"F-e1589dfe130d\"},{\"t\":\"FACT\",\"text\":\"Father Miguel — Parish priest (ledger)\",\"src\":\"undocked-week:weekly-c113\",\"id\":\"F-aa9b9e515b1f\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C113\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-876f95b5eb98\"},{\"t\":\"FACT\",\"text\":\"UNDOCKED week-in-review c113\",\"src\":\"undocked-week:weekly-c113\",\"id\":\"F-73d67346d148\"},{\"t\":\"FACT\",\"text\":\"Cristina Booker's Monday night on UNDOCKED: went through Alpha Centauri; took the Copper Requisition and Welcome to Sol Central contracts; earned First Steps (5 points) and Maiden Jump (5 points); came out even on credits; flew until the show's time ran out.\",\"src\":\"undocked-week:weekly-c113\",\"id\":\"F-e5905c8a4bf4\"},{\"t\":\"FACT\",\"text\":\"Cristina Booker's Thursday night on UNDOCKED: never got the ship moving.\",\"src\":\"undocked-week:weekly-c113\",\"id\":\"F-a9af913d0dcb\"},{\"t\":\"FACT\",\"text\":\"Daphne Stafford's Wednesday night on UNDOCKED: earned First Steps (5 points); never got the ship moving.\",\"src\":\"undocked-week:weekly-c113\",\"id\":\"F-5037b3e1ecc5\"},{\"t\":\"FACT\",\"text\":\"Father Miguel — UNDOCKED pilot\",\"src\":\"Simulation_Ledger profile for POP-00734\",\"id\":\"F-db6ae298334e\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C9, Winter, holiday=none\",\"src\":\"output/world_summary_c113.md Calendar context (Simulation_Calendar)\",\"id\":\"F-ab9d6786094e\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00734",
+        "name": "Father Miguel",
+        "role": "UNDOCKED pilot",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Nia Rook",
+        "question": "How does Father Miguel's consistent performance on UNDOCKED compare to Cristina Booker's? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "undocked-digest",
+        "hood": null,
+        "focus": "Cristina Booker's UNDOCKED performance",
+        "src": "undocked-week:weekly-c113"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Father Miguel — UNDOCKED pilot",
+        "evidence": [
+          {
+            "id": "EV-4503708c1d",
+            "src": "undocked-week:weekly-c113",
+            "text": "UNDOCKED week-in-review c113"
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Father Miguel's Tuesday night on UNDOCKED: went through Lacaille 9352, Sirius, Sol and Alpha Centauri; took the Copper Requisition contract; earned Maiden Jump (5 points); came out even on credits; flew until the show's time ran out.",
+          "src": "undocked-week:weekly-c113",
+          "id": "F-5720f376a3b3"
+        },
+        {
+          "t": "FACT",
+          "text": "Father Miguel's Friday night on UNDOCKED: went through Sirius, Lacaille 9352, Grumium and Sol; mined 2 aluminum ore and 1 platinum ore; earned no new points; came out even on credits; flew until the show's time ran out.",
+          "src": "undocked-week:weekly-c113",
+          "id": "F-e1589dfe130d"
+        },
+        {
+          "t": "FACT",
+          "text": "Father Miguel — Parish priest (ledger)",
+          "src": "undocked-week:weekly-c113",
+          "id": "F-aa9b9e515b1f"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C113",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-876f95b5eb98"
+        },
+        {
+          "t": "FACT",
+          "text": "UNDOCKED week-in-review c113",
+          "src": "undocked-week:weekly-c113",
+          "id": "F-73d67346d148"
+        },
+        {
+          "t": "FACT",
+          "text": "Cristina Booker's Monday night on UNDOCKED: went through Alpha Centauri; took the Copper Requisition and Welcome to Sol Central contracts; earned First Steps (5 points) and Maiden Jump (5 points); came out even on credits; flew until the show's time ran out.",
+          "src": "undocked-week:weekly-c113",
+          "id": "F-e5905c8a4bf4"
+        },
+        {
+          "t": "FACT",
+          "text": "Cristina Booker's Thursday night on UNDOCKED: never got the ship moving.",
+          "src": "undocked-week:weekly-c113",
+          "id": "F-a9af913d0dcb"
+        },
+        {
+          "t": "FACT",
+          "text": "Daphne Stafford's Wednesday night on UNDOCKED: earned First Steps (5 points); never got the ship moving.",
+          "src": "undocked-week:weekly-c113",
+          "id": "F-5037b3e1ecc5"
+        },
+        {
+          "t": "FACT",
+          "text": "Father Miguel — UNDOCKED pilot",
+          "src": "Simulation_Ledger profile for POP-00734",
+          "id": "F-db6ae298334e"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C9, Winter, holiday=none",
+          "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+          "id": "F-ab9d6786094e"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00816",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00816\",\"name\":\"Daphne Stafford\",\"role\":\"UNDOCKED pilot\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Nia Rook\",\"question\":\"Did Daphne Stafford's struggles on UNDOCKED impact the overall leaderboard standings? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"undocked-digest\",\"hood\":null,\"focus\":\"Cristina Booker's UNDOCKED performance\",\"src\":\"undocked-week:weekly-c113\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Daphne Stafford — UNDOCKED pilot\",\"evidence\":[{\"id\":\"EV-d2d692627e\",\"src\":\"undocked-week:weekly-c113\",\"text\":\"UNDOCKED week-in-review c113\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Daphne Stafford's Wednesday night on UNDOCKED: earned First Steps (5 points); never got the ship moving.\",\"src\":\"undocked-week:weekly-c113\",\"id\":\"F-5037b3e1ecc5\"},{\"t\":\"FACT\",\"text\":\"Daphne Stafford — Home Health Aide (ledger)\",\"src\":\"undocked-week:weekly-c113\",\"id\":\"F-262fe69148ac\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C113\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-876f95b5eb98\"},{\"t\":\"FACT\",\"text\":\"UNDOCKED week-in-review c113\",\"src\":\"undocked-week:weekly-c113\",\"id\":\"F-73d67346d148\"},{\"t\":\"FACT\",\"text\":\"Cristina Booker's Monday night on UNDOCKED: went through Alpha Centauri; took the Copper Requisition and Welcome to Sol Central contracts; earned First Steps (5 points) and Maiden Jump (5 points); came out even on credits; flew until the show's time ran out.\",\"src\":\"undocked-week:weekly-c113\",\"id\":\"F-e5905c8a4bf4\"},{\"t\":\"FACT\",\"text\":\"Cristina Booker's Thursday night on UNDOCKED: never got the ship moving.\",\"src\":\"undocked-week:weekly-c113\",\"id\":\"F-a9af913d0dcb\"},{\"t\":\"FACT\",\"text\":\"Father Miguel's Tuesday night on UNDOCKED: went through Lacaille 9352, Sirius, Sol and Alpha Centauri; took the Copper Requisition contract; earned Maiden Jump (5 points); came out even on credits; flew until the show's time ran out.\",\"src\":\"undocked-week:weekly-c113\",\"id\":\"F-5720f376a3b3\"},{\"t\":\"FACT\",\"text\":\"Father Miguel's Friday night on UNDOCKED: went through Sirius, Lacaille 9352, Grumium and Sol; mined 2 aluminum ore and 1 platinum ore; earned no new points; came out even on credits; flew until the show's time ran out.\",\"src\":\"undocked-week:weekly-c113\",\"id\":\"F-e1589dfe130d\"},{\"t\":\"FACT\",\"text\":\"Daphne Stafford — UNDOCKED pilot\",\"src\":\"Simulation_Ledger profile for POP-00816\",\"id\":\"F-f4c448b18126\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C9, Winter, holiday=none\",\"src\":\"output/world_summary_c113.md Calendar context (Simulation_Calendar)\",\"id\":\"F-ab9d6786094e\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00816",
+        "name": "Daphne Stafford",
+        "role": "UNDOCKED pilot",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Nia Rook",
+        "question": "Did Daphne Stafford's struggles on UNDOCKED impact the overall leaderboard standings? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "undocked-digest",
+        "hood": null,
+        "focus": "Cristina Booker's UNDOCKED performance",
+        "src": "undocked-week:weekly-c113"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Daphne Stafford — UNDOCKED pilot",
+        "evidence": [
+          {
+            "id": "EV-d2d692627e",
+            "src": "undocked-week:weekly-c113",
+            "text": "UNDOCKED week-in-review c113"
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Daphne Stafford's Wednesday night on UNDOCKED: earned First Steps (5 points); never got the ship moving.",
+          "src": "undocked-week:weekly-c113",
+          "id": "F-5037b3e1ecc5"
+        },
+        {
+          "t": "FACT",
+          "text": "Daphne Stafford — Home Health Aide (ledger)",
+          "src": "undocked-week:weekly-c113",
+          "id": "F-262fe69148ac"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C113",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-876f95b5eb98"
+        },
+        {
+          "t": "FACT",
+          "text": "UNDOCKED week-in-review c113",
+          "src": "undocked-week:weekly-c113",
+          "id": "F-73d67346d148"
+        },
+        {
+          "t": "FACT",
+          "text": "Cristina Booker's Monday night on UNDOCKED: went through Alpha Centauri; took the Copper Requisition and Welcome to Sol Central contracts; earned First Steps (5 points) and Maiden Jump (5 points); came out even on credits; flew until the show's time ran out.",
+          "src": "undocked-week:weekly-c113",
+          "id": "F-e5905c8a4bf4"
+        },
+        {
+          "t": "FACT",
+          "text": "Cristina Booker's Thursday night on UNDOCKED: never got the ship moving.",
+          "src": "undocked-week:weekly-c113",
+          "id": "F-a9af913d0dcb"
+        },
+        {
+          "t": "FACT",
+          "text": "Father Miguel's Tuesday night on UNDOCKED: went through Lacaille 9352, Sirius, Sol and Alpha Centauri; took the Copper Requisition contract; earned Maiden Jump (5 points); came out even on credits; flew until the show's time ran out.",
+          "src": "undocked-week:weekly-c113",
+          "id": "F-5720f376a3b3"
+        },
+        {
+          "t": "FACT",
+          "text": "Father Miguel's Friday night on UNDOCKED: went through Sirius, Lacaille 9352, Grumium and Sol; mined 2 aluminum ore and 1 platinum ore; earned no new points; came out even on credits; flew until the show's time ran out.",
+          "src": "undocked-week:weekly-c113",
+          "id": "F-e1589dfe130d"
+        },
+        {
+          "t": "FACT",
+          "text": "Daphne Stafford — UNDOCKED pilot",
+          "src": "Simulation_Ledger profile for POP-00816",
+          "id": "F-f4c448b18126"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C9, Winter, holiday=none",
+          "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+          "id": "F-ab9d6786094e"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  }
+]

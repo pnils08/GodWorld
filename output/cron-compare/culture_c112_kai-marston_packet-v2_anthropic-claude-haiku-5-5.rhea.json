@@ -1,0 +1,69 @@
+{
+  "draft": "output/cron-compare/culture_c112_kai-marston_packet-v2_anthropic-claude-haiku-5-5.md",
+  "cycle": "112",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "c7ad35fa2dc9495493c69f9db18cf2f2263db16e6ba611996e370499fa9192c7",
+  "pass": true,
+  "advisory": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Verified all citizen identities, roles, and neighborhoods against ledger; scene texture adheres to profile authority with zero canon violations.",
+  "review": {
+    "profileId": "kai-arts-entertainment-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "kai-arts-entertainment-v1",
+    "packageVersion": "KAI-LEP2-1",
+    "manifestId": "AM-bba8e7d8a9a2",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Alma Vasquez",
+      "Lena Cross",
+      "Nina Reyes",
+      "Rowan Pierce",
+      "Tara Ellison",
+      "Theo Banks"
+    ],
+    "unverified": [
+      "Piedmont Avenue"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0104,
+  "durationMs": 7516,
+  "parseError": false,
+  "ranAt": "2026-10-23T23:16:23.367Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 500",
+    "words": 698,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "c7ad35fa2dc9495493c69f9db18cf2f2263db16e6ba611996e370499fa9192c7",
+    "costUsd": 0.0012
+  }
+}

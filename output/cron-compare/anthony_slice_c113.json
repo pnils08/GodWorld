@@ -1,0 +1,239 @@
+{
+  "empty": false,
+  "cycle": 113,
+  "kind": "anthony-analytic",
+  "journalist": {
+    "name": "Anthony Raines",
+    "popid": "POP-00017",
+    "persona": "anthony-raines",
+    "bagDoc": "docs/media/ANTHONY_ANALYSIS_BAG.md"
+  },
+  "pulse": {
+    "className": "award-board",
+    "score": 73,
+    "label": "A's · rumor — The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+    "team": "A's",
+    "eventKind": "rumor",
+    "seasonType": "off-season",
+    "storyAngle": "The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+    "hasStats": true,
+    "record": "-",
+    "streak": "-",
+    "foilNumber": ".291AVG",
+    "feedCycle": 113
+  },
+  "charge": null,
+  "bag": {
+    "tools": [
+      {
+        "id": 1,
+        "name": "Box-Card Read"
+      },
+      {
+        "id": 7,
+        "name": "Is-It-Real (ledger PANDAS)"
+      }
+    ],
+    "claim": "The season line (.291AVG) has to carry the claim before the narrative does: The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+    "foilNumber": ".291AVG"
+  },
+  "friction": {
+    "a": "Feed present fact: The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+    "b": "Soft FO language or bleacher heat that skips the line",
+    "frame": "Evaluate fit and process with numbers — one claim, third person."
+  },
+  "prewrite": {
+    "reporter": "Anthony Raines",
+    "bagTools": [
+      {
+        "id": 1,
+        "name": "Box-Card Read"
+      },
+      {
+        "id": 7,
+        "name": "Is-It-Real (ledger PANDAS)"
+      }
+    ],
+    "lineFacts": [
+      "Feed line: Desmond Morton/285AB/.291AVG/7HR/44RBI",
+      "Feed line: Frank Reyna/164/.317AVG/14HR/34RBI",
+      "Feed line: JR Rosado/184AB/.298AVG/7HR/27RBI",
+      "Event kind (feed): A's — rumor (off-season)",
+      "NamesUsed (feed): Desmond Morton (LF), Frank Reyna (RF), Danny Horn (CF), Vladimir Gonzalez (RF), JR Rosado (LF)",
+      "StoryAngle (feed): The Outfield squeeze for next season. 5 Outfielders for 3 positions"
+    ],
+    "dossierFacts": [
+      "Desmond Morton TrueSource: 2041 REGULAR SEASON G: 80 PA: 313 AB: 285 R: 47 H: 83 2B: 22 3B: 0 HR: 7 RBI: 44 BB: 23 SO: 49 HBP: 3 SF: 2 SAC: 0 GIDP: 6 AVG: 0.291 OBP: 0.348 SLG:  | WAR: 2.5",
+      "Frank Reyna TrueSource: 2041 REGULAR SEASON G: 46 PA: 171 AB: 164 R: 31 H: 52 2B: 12 3B: 3 HR: 14 RBI: 34 BB: 6 SO: 18 HBP: 0 SF: 1 SAC: 0 GIDP: 1 AVG: 0.317 OBP: 0.339 SLG:  | WAR: 2.4",
+      "Danny Horn TrueSource: 2041 REGULAR SEASON G: 148 PA: 671 AB: 621 R: 152 H: 210 2B: 48 3B: 9 HR: 56 RBI: 113 BB: 35 SO: 65 HBP: 11 SF: 4 SAC: 0 GIDP: 3 AVG: 0.338 OBP: 0.382 | WAR: 13.3 | AWARDS (Career Reference) - All-Star (2038, 2039, 2040) - Silver Slugger (2039) - MVP (204",
+      "Vladimir Gonzalez TrueSource: 2041 REGULAR SEASON G: 138 PA: 567 AB: 527 R: 90 H: 161 2B: 40 3B: 4 HR: 28 RBI: 76 BB: 37 SO: 60 HBP: 0 SF: 3 SAC: 0 GIDP: 5 AVG: 0.306 OBP: 0.349 SL | WAR: 4.7 | AWARDS (Career Reference) - World Series MVP (2037)"
+    ],
+    "feedFacts": [
+      "StoryAngle: The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+      "Notes: Danny Horn is your starting CF. A returing MVP and the best player in baseball makes it an easy decision. Darrin Davis figures to be your DH as he remains under contract and showed his numbers did not decline, albiet he was injured. Davis has missed substantial time twice over the past three seasons. Vladimir is entering his peak and put up his best numbers of his career last season. Rates as a clutch perfomer and is essentially who you chose over Peter Busch last offseason. If those spots are set then you have three players for one left field opening. Desmond Morton is you highest rated prospect with 5 tools and has shown success at the MLB level, Frank Reyna is a power hitter with a mass of potential that also showed success. JR Rosado performed well in his major league experience and had good contact numbers but may trend as a role player in the grand scheme. What is the choice Paulson should make here."
+    ],
+    "claim": "The season line (.291AVG) has to carry the claim before the narrative does: The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+    "missing": [
+      "x-stats / barrel% / launch angle / OAA not on feed",
+      "contracts or salaries not printed on this feed row",
+      "As_Roster sheet cells (offline pack uses feed Stats only — do not invent WAR/ERA beyond feed)"
+    ],
+    "foilNumber": ".291AVG",
+    "anchorFacts": [
+      "Feed line: Desmond Morton/285AB/.291AVG/7HR/44RBI",
+      "Feed line: Frank Reyna/164/.317AVG/14HR/34RBI",
+      "Feed line: JR Rosado/184AB/.298AVG/7HR/27RBI",
+      "Event kind (feed): A's — rumor (off-season)"
+    ],
+    "hooks": []
+  },
+  "hooks": [],
+  "seeds": [],
+  "story": {
+    "kind": "sports-analytics",
+    "angle": "The season line (.291AVG) has to carry the claim before the narrative does: The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+    "label": "A's · rumor — The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+    "hookLine": "The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+    "hood": "Downtown",
+    "pulseClass": "award-board",
+    "team": "A's",
+    "eventKind": "rumor",
+    "citizens": [
+      "Desmond Morton (POP-00051)",
+      "Frank Reyna (POP-00079)",
+      "Danny Horn (POP-00022)",
+      "Vladimir Gonzalez (POP-00598)"
+    ],
+    "popids": [
+      "POP-00051",
+      "POP-00079",
+      "POP-00022",
+      "POP-00598"
+    ],
+    "ref": "world_summary_c113.md ## Sports",
+    "cycle": 113
+  },
+  "approach": "Analytic approach (Anthony Raines): third-person only — never fan \"we.\" One evaluative claim built on verifiable feed line numbers (Stats / record / StoryAngle). Open from the board (roster fact, contract on the feed, season line) — not the bleachers. Pick 1–2 tools from the analysis bag in this slice. Numbers as the card or feed prints them, named to their source. FORBIDDEN: inventing x-stats, barrel%, launch angle, contracts, or salaries not on the feed; P Slayer charge; Hal elegy as spine; multi-voice sports-desk average.",
+  "players": [
+    {
+      "name": "Desmond Morton",
+      "popid": "POP-00051",
+      "role": "Left Fielder, Oakland A's",
+      "neighborhood": "Chinatown",
+      "why": "feed-names"
+    },
+    {
+      "name": "Frank Reyna",
+      "popid": "POP-00079",
+      "role": "Right Fielder, Oakland A's",
+      "neighborhood": "Lake Merritt",
+      "why": "feed-names"
+    },
+    {
+      "name": "Danny Horn",
+      "popid": "POP-00022",
+      "role": "Center Fielder, Oakland A's - Best player in the MLB",
+      "neighborhood": "Temescal",
+      "why": "feed-names"
+    },
+    {
+      "name": "Vladimir Gonzalez",
+      "popid": "POP-00598",
+      "role": "Right Fielder, Oakland A's",
+      "neighborhood": "Fruitvale",
+      "why": "feed-names"
+    }
+  ],
+  "scene": {
+    "neighborhood": "Downtown",
+    "record": "-",
+    "streak": "-",
+    "colorRoom": "Press-box / clubhouse quiet. Numbers from feed Stats only. No invented Savant cards. RoleType from ledger when present — never invent careers."
+  },
+  "candidates": [
+    {
+      "score": 73,
+      "cycle": 113,
+      "team": "A's",
+      "primary": "award-board",
+      "hasStats": true,
+      "angle": "The Outfield squeeze for next season. 5 Outfielders for 3 positions"
+    },
+    {
+      "score": 67,
+      "cycle": 113,
+      "team": "Oaks",
+      "primary": "line-card",
+      "hasStats": true,
+      "angle": "The Oaks win again behind a big game behind Adash Stanley. The Oaks 91 - Pistons 78 on the road in Detroit."
+    },
+    {
+      "score": 67,
+      "cycle": 113,
+      "team": "Oaks",
+      "primary": "line-card",
+      "hasStats": true,
+      "angle": "The Oaks remain sizzling hot after a winless preseason have now shot out of the gate winning 3 straight. Oaks 115 - Knicks 93 in New York"
+    },
+    {
+      "score": 63,
+      "cycle": 113,
+      "team": "Oaks",
+      "primary": "line-card",
+      "hasStats": true,
+      "angle": "The Oaks completly dismantle the Wizards in Washington. Oaks 105 - Wizards 62"
+    },
+    {
+      "score": 56,
+      "cycle": 112,
+      "team": "A's",
+      "primary": "line-card",
+      "hasStats": true,
+      "angle": "Mark Aitken pending free agency, is it Kevin Clarks time?"
+    },
+    {
+      "score": 56,
+      "cycle": 112,
+      "team": "Oaks",
+      "primary": "line-card",
+      "hasStats": true,
+      "angle": "The Oaks open their inaugural season at home. AJ Dybantsa shines in his rookie debut as the Oaks win their first win as a franchise."
+    },
+    {
+      "score": 36,
+      "cycle": 112,
+      "team": "Oaks",
+      "primary": "award-board",
+      "hasStats": false,
+      "angle": "Elias Varek meets the media, happy over the win and shares updated on the Oaks."
+    },
+    {
+      "score": 33,
+      "cycle": 112,
+      "team": "A's",
+      "primary": "award-board",
+      "hasStats": false,
+      "angle": "The Blue Lattern Bar is Jack London host the Keane and Dillon farewell"
+    },
+    {
+      "score": 32,
+      "cycle": 111,
+      "team": "A's",
+      "primary": "award-board",
+      "hasStats": false,
+      "angle": "The A's parade roll through Downtown."
+    },
+    {
+      "score": 20,
+      "cycle": 113,
+      "team": "A's",
+      "primary": "quiet-board",
+      "hasStats": false,
+      "angle": "Darrin Davis works with the Oakland Police and Rafael Montez on youth outreach programs in the city."
+    }
+  ],
+  "pointers": [
+    "output/world_summary_c113.md ## Sports",
+    "docs/media/ANTHONY_ANALYSIS_BAG.md"
+  ]
+}

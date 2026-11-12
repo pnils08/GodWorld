@@ -1,0 +1,1013 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-01210",
+    "name": "Tamsin Pruitt",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "The lives of C114: 10 people — Elle Lilo moved into a place of their own in Jack London, renting",
+    "approach": "Lives approach: this slice is the people something happened to this Cycle — a birth, a death in the house, a hospital stay, a retirement, a promotion; a household set up or a place of their own; a win or a loss on the book; the people a turn of the city reached and what it did to their day; and the smaller moments the record kept. Each person gets their own passage: the event, then the thread under it — the stay or strain that led there, the other lines the record kept for them, what the Tribune or this page already said of them, and what they did next if the record says. Read the thread in order and name where two lines of it do not agree; do not restate a ledger value as the story. The fact exactly right; never a trend, never a number first; the person, not the system the event belongs to. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent p",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "lives",
+      "hood": null,
+      "facts": [
+        "Elle Lilo moved into a place of their own in Jack London, renting (C114)",
+        "Elle Lilo — in their life, C114: experienced renewed social energy",
+        "Elle Lilo — in their life, C114: closed their eyes during the choir solo and actually felt the tension leave their shoulders",
+        "Elle Lilo — in their life, C114: lent a neighbor a tool and got a story back with it",
+        "Elle Lilo — in their life, C114: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+        "Elle Lilo — the Tribune named them in a piece headlined Chinatown's 140 Sick Are Mostly at Home, and Home Is Doing the Work (Civic, C113)",
+        "Elle Lilo — the Tribune named them in a piece headlined Last, UNDOCKED. Nia Rook has Eric Taveras holding the top spot and Cristina Booker's ten-point Mon (Civic, C113)",
+        "Elle Lilo — the Tribune named them in a piece headlined Six Names for 142 Sick Residents (Civic, C112)",
+        "Cee Lee moved into a place of their own in Lake Merritt, renting (C114)",
+        "Cee Lee — in their life, C113: tried a new recipe that mostly worked",
+        "Cee Lee — in their life, C113: dealt with a seasonal health concern",
+        "Cee Lee — in their life, C114: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+        "Cee Lee — the Tribune named them in a piece headlined Chinatown's 140 Sick Are Mostly at Home, and Home Is Doing the Work (Civic, C113)",
+        "Cee Lee — the Tribune named them in a piece headlined Last, UNDOCKED. Nia Rook has Eric Taveras holding the top spot and Cristina Booker's ten-point Mon (Civic, C113)",
+        "Aanya Rivera won on the UNDOCKED book — staked 200, paid 366, Lake Merritt (C114)",
+        "Aanya Rivera — in their life, C113: counted cranes on the skyline from the bus stop and got a different number than yesterday",
+        "Aanya Rivera — in their life, C113: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+        "Aanya Rivera — in their life, C114: checked the Civis Systems Field livestream just to see if the grass had been laid down yet",
+        "Aanya Rivera — in their life, C114: caught their reflection in a shop window and stood a little straighter",
+        "Jose Johnson — a group of fans huddle under an awning debating last night's game, their voices rising above the sound of rain hitting the pavement, Temescal — one of 4 people the Cycle's city turn reached (Temescal Community Health Center is operational — ongoing health effects in Temescal; the city feels it through these neighborhoods) (C114)",
+        "Jose Johnson — in their life, C113: caught a stranger humming their song and felt briefly, wrongly, known",
+        "Jose Johnson — in their life, C114: the crack of a bat echoes from a nearby screen, drawing a small crowd of pedestrians to pause near a small gallery",
+        "Jose Johnson — in their life, C114: observed art enthusiasts wandering the streets",
+        "Pamela Amelia — read the Tribune's front page twice — once for the news, once to see who was in it, Piedmont Ave — one of 4 people the Cycle's city turn reached (Initiative work landed in 6 neighborhood(s): Downtown, Temescal, West Oakland, Fruitvale, Jack London, East Oakland) (C114)",
+        "Pamela Amelia — in their life, C113: carried three boxes of canned goods from the pantry truck and felt it in their lower back",
+        "Pamela Amelia — in their life, C113: walked a different street home just to see it",
+        "Shawn Neighbor — felt quietly lucky to call Fruitvale home, Fruitvale — one of 4 people the Cycle's community turn reached (Edition coverage lifted the city: traffic +0.03, retail +0.028, nightlife +0.06, publicSpaces +0.044, communityEngagement +0.026,…) (C114)",
+        "Shawn Neighbor — in their life, C113: walked the Mandela Parkway median under the trees and took the long way home",
+        "Shawn Neighbor — in their life, C113: haggled for a flat of bruised peaches at the Saturday market just to have a reason to talk to someone",
+        "Shawn Neighbor — in their life, C113: lent a neighbor a tool and got a story back with it",
+        "Shawn Neighbor — in their life, C114: knew the rules cold — two nights in the chair, the galaxy keeps the score, the board adds it up — and had never been drawn",
+        "Shawn Neighbor — the Tribune named them in a piece headlined Four Years to the Floor: Apprenticeship Pipeline Passes 9-0 — and What It Binds (Civic Affairs, C98)",
+        "Billy Storip — called an old coworker just to catch up and talked for an hour, Rockridge (C114 — what happened in their life, not words they said)",
+        "Billy Storip — in their life, C113: fixed a squeaky hinge that had been squeaking since the kids left home near a bookstore corner",
+        "Billy Storip — in their life, C113: overheard coworkers talking about last night's scene",
+        "Billy Storip — in their life, C114: found a quiet minute at a bookstore corner and the quiet satisfaction of finding a favorite song on the jukebox",
+        "Billy Storip — in their life, C114: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
+        "Billy Storip — Lives already wrote this person: a moment the record kept (C113)",
+        "Clarence Moody — swapped seed packets with a neighbor over the fence, Dimond (C114 — what happened in their life, not words they said)",
+        "Clarence Moody — in their life, C113: shared a small piece of history with someone who needed it",
+        "Clarence Moody — in their life, C113: heard Jack London was packed last night",
+        "Clarence Moody — in their life, C114: showed up to set up the chairs in the fellowship hall because if they didn't do it, no one would",
+        "Clarence Moody — in their life, C114: closed their eyes during the choir solo and actually felt the tension leave their shoulders",
+        "Clarence Moody — Lives already wrote this person: a moment the record kept (C113)",
+        "Clarence Moody — the Tribune named them in a piece headlined The Page of Lives, C113: A Place of Their Own (Culture, C113)",
+        "Clarence Moody — the Tribune named them in a piece headlined In Montclair, the Night of Krishna's Birth (Arts & Entertainment, C87)",
+        "Gloria Liu — reorganized the garage into a system only he understood near College Avenue, Rockridge (C114 — what happened in their life, not words they said)",
+        "Gloria Liu — in their life, C113: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+        "Gloria Liu — in their life, C113: dodged the running groups circling the lake and found a quiet bench near the pergola",
+        "Gloria Liu — in their life, C113: still feeling the energy from last night's city buzz",
+        "Gloria Liu — in their life, C114: wrote a letter by hand because email felt like cheating",
+        "Gloria Liu — the Tribune named them in a piece headlined Rockridge Schools Maintain Excellence Amid Citywide Shifts (Civic, C108)",
+        "Amear Thompson — moved from Chinatown to West Oakland — moving up from Chinatown, West Oakland (C114 — what happened in their life, not words they said)",
+        "Amear Thompson — in their life, C113: took the long way home just to check the Baylight fence line's progress",
+        "Amear Thompson — in their life, C114: smelled the incense from the steps of Bay Pure Land Buddhist Temple",
+        "Amear Thompson — in their life, C114: saw someone running for the bus make it, and felt weirdly invested",
+        "Amear Thompson — in their life, C114: still feeling the energy from last night's city buzz"
+      ],
+      "priorCycle": null,
+      "note": "none of today's people has written their own page this Cycle — no quotes",
+      "engineHooks": [
+        "A family bought their home in Rockridge (observational analysis)",
+        "The Thompson household (2) moved from Chinatown to West Oakland — moving up from Chinatown (desk rotation)",
+        "Derek Obi moved from Downtown to Rockridge — moving up from Downtown — sold the house in Downtown to rent up (desk rotation)",
+        "Patrice Rao moved from Chinatown to West Oakland — moving up from Chinatown (observational analysis)"
+      ],
+      "roomIsYours": "the plain respect, what the event meant in that house or on that block, the detail the family would have picked — from the lines below, never invented",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-lives",
+    "hood": null,
+    "src": "output/beats/Lived_Events.jsonl @C114 batch 236736",
+    "plan": {
+      "focus": "Elle Lilo",
+      "closeQuestion": "What are the broader implications of Elle Lilo's experience for understanding the effects of housing changes on social life in Jack London?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00320",
+        "name": "Cee Lee",
+        "profile": "Cee Lee — Autonomous Systems Engineer — Lake Merritt",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00320-862ae6ce20",
+        "pop": "POP-00320",
+        "name": "Cee Lee",
+        "quote": "I've seen Elle Lilo move into a place of their own in Jack London. It made me think about when I finally got my own place in Lake Merritt. It's a big step, you know? I was dealing with some health stuff around that time too, so I feel for them. I'm just glad I could get back on track and enjoy the lake path again.",
+        "factIds": [
+          "F-5f9b5f2a483a",
+          "F-6fa0898daf8b",
+          "F-486e95532935"
+        ],
+        "src": "packet.W2[POP-00320]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Tamsin Pruitt",
+        "text": "The potential impact of their new living situation on their social connections and community engagement.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C114",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-4261fa115617"
+    },
+    {
+      "t": "FACT",
+      "text": "Elle Lilo moved into a place of their own in Jack London, renting",
+      "src": "output/beats/Lived_Events.jsonl @C114 batch 236736",
+      "id": "F-6fa0898daf8b"
+    },
+    {
+      "t": "FACT",
+      "text": "Elle Lilo first. The event is the lead; one true detail; what came next only if the record says.",
+      "src": "output/beats/Lived_Events.jsonl @C114 batch 236736",
+      "id": "F-007999917d11"
+    },
+    {
+      "t": "FACT",
+      "text": "Elle Lilo moved into a place of their own in Jack London, renting (C114)",
+      "src": "output/beats/Household_Ledger.jsonl @C114",
+      "id": "F-4bff5d2f33ca"
+    },
+    {
+      "t": "FACT",
+      "text": "Elle Lilo — in their life, C114: experienced renewed social energy",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-65cd60e2a933"
+    },
+    {
+      "t": "FACT",
+      "text": "Elle Lilo — in their life, C114: closed their eyes during the choir solo and actually felt the tension leave their shoulders",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-d81cea557976"
+    },
+    {
+      "t": "FACT",
+      "text": "Elle Lilo — in their life, C114: lent a neighbor a tool and got a story back with it",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-59496b43fb8c"
+    },
+    {
+      "t": "FACT",
+      "text": "Elle Lilo — in their life, C114: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-d12ee29d4046"
+    },
+    {
+      "t": "FACT",
+      "text": "Elle Lilo — the Tribune named them in a piece headlined Chinatown's 140 Sick Are Mostly at Home, and Home Is Doing the Work (Civic, C113)",
+      "src": "archive/ARTICLE_INDEX.jsonl 415a8378a3cc8be1",
+      "id": "F-949eab6a11ff"
+    },
+    {
+      "t": "FACT",
+      "text": "Elle Lilo — the Tribune named them in a piece headlined Last, UNDOCKED. Nia Rook has Eric Taveras holding the top spot and Cristina Booker's ten-point Mon (Civic, C113)",
+      "src": "archive/ARTICLE_INDEX.jsonl 7b568104deca2649",
+      "id": "F-01db0778278f"
+    },
+    {
+      "t": "FACT",
+      "text": "Elle Lilo — the Tribune named them in a piece headlined Six Names for 142 Sick Residents (Civic, C112)",
+      "src": "archive/ARTICLE_INDEX.jsonl bad852382ed2ab09",
+      "id": "F-ca6b2975e581"
+    },
+    {
+      "t": "FACT",
+      "text": "Cee Lee moved into a place of their own in Lake Merritt, renting (C114)",
+      "src": "output/beats/Household_Ledger.jsonl @C114",
+      "id": "F-5f9b5f2a483a"
+    },
+    {
+      "t": "FACT",
+      "text": "Cee Lee — in their life, C113: tried a new recipe that mostly worked",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-5753b225fe26"
+    },
+    {
+      "t": "FACT",
+      "text": "Cee Lee — in their life, C113: dealt with a seasonal health concern",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-486e95532935"
+    },
+    {
+      "t": "FACT",
+      "text": "Cee Lee — in their life, C114: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-42223afbaca6"
+    },
+    {
+      "t": "FACT",
+      "text": "Cee Lee — the Tribune named them in a piece headlined Chinatown's 140 Sick Are Mostly at Home, and Home Is Doing the Work (Civic, C113)",
+      "src": "archive/ARTICLE_INDEX.jsonl 415a8378a3cc8be1",
+      "id": "F-3d3ded7ce243"
+    },
+    {
+      "t": "FACT",
+      "text": "Cee Lee — the Tribune named them in a piece headlined Last, UNDOCKED. Nia Rook has Eric Taveras holding the top spot and Cristina Booker's ten-point Mon (Civic, C113)",
+      "src": "archive/ARTICLE_INDEX.jsonl 7b568104deca2649",
+      "id": "F-79ac2fd8a6c1"
+    },
+    {
+      "t": "FACT",
+      "text": "Aanya Rivera won on the UNDOCKED book — staked 200, paid 366, Lake Merritt (C114)",
+      "src": "output/beats/Casino_Ledger.jsonl @C114",
+      "id": "F-e328f40499fd"
+    },
+    {
+      "t": "FACT",
+      "text": "Aanya Rivera — in their life, C113: counted cranes on the skyline from the bus stop and got a different number than yesterday",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-e5ac8d034808"
+    },
+    {
+      "t": "FACT",
+      "text": "Aanya Rivera — in their life, C113: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-9a8079f9b543"
+    },
+    {
+      "t": "FACT",
+      "text": "Aanya Rivera — in their life, C114: checked the Civis Systems Field livestream just to see if the grass had been laid down yet",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-4c922c39a591"
+    },
+    {
+      "t": "FACT",
+      "text": "Aanya Rivera — in their life, C114: caught their reflection in a shop window and stood a little straighter",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-8a2ca5e48834"
+    },
+    {
+      "t": "FACT",
+      "text": "Jose Johnson — a group of fans huddle under an awning debating last night's game, their voices rising above the sound of rain hitting the pavement, Temescal — one of 4 people the Cycle's city turn reached (Temescal Community Health Center is operational — ongoing health effects in Temescal; the city feels it through these neighborhoods) (C114)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C114",
+      "id": "F-1de7431242f9"
+    },
+    {
+      "t": "FACT",
+      "text": "Jose Johnson — in their life, C113: caught a stranger humming their song and felt briefly, wrongly, known",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-5f5519505f1d"
+    },
+    {
+      "t": "FACT",
+      "text": "Jose Johnson — in their life, C114: the crack of a bat echoes from a nearby screen, drawing a small crowd of pedestrians to pause near a small gallery",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-6ccd6e858aa4"
+    },
+    {
+      "t": "FACT",
+      "text": "Jose Johnson — in their life, C114: observed art enthusiasts wandering the streets",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-3ecb4b6d0dbe"
+    },
+    {
+      "t": "FACT",
+      "text": "Pamela Amelia — read the Tribune's front page twice — once for the news, once to see who was in it, Piedmont Ave — one of 4 people the Cycle's city turn reached (Initiative work landed in 6 neighborhood(s): Downtown, Temescal, West Oakland, Fruitvale, Jack London, East Oakland) (C114)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C114",
+      "id": "F-5c75f1d50c6e"
+    },
+    {
+      "t": "FACT",
+      "text": "Pamela Amelia — in their life, C113: carried three boxes of canned goods from the pantry truck and felt it in their lower back",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-3332cf888fe4"
+    },
+    {
+      "t": "FACT",
+      "text": "Pamela Amelia — in their life, C113: walked a different street home just to see it",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-e27a06c54438"
+    },
+    {
+      "t": "FACT",
+      "text": "Shawn Neighbor — felt quietly lucky to call Fruitvale home, Fruitvale — one of 4 people the Cycle's community turn reached (Edition coverage lifted the city: traffic +0.03, retail +0.028, nightlife +0.06, publicSpaces +0.044, communityEngagement +0.026,…) (C114)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C114",
+      "id": "F-7d6684fb30d5"
+    },
+    {
+      "t": "FACT",
+      "text": "Shawn Neighbor — in their life, C113: walked the Mandela Parkway median under the trees and took the long way home",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-0babd33328cf"
+    },
+    {
+      "t": "FACT",
+      "text": "Shawn Neighbor — in their life, C113: haggled for a flat of bruised peaches at the Saturday market just to have a reason to talk to someone",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-f95f99091382"
+    },
+    {
+      "t": "FACT",
+      "text": "Shawn Neighbor — in their life, C113: lent a neighbor a tool and got a story back with it",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-e65be8e7427c"
+    },
+    {
+      "t": "FACT",
+      "text": "Shawn Neighbor — in their life, C114: knew the rules cold — two nights in the chair, the galaxy keeps the score, the board adds it up — and had never been drawn",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-02301c5352e2"
+    },
+    {
+      "t": "FACT",
+      "text": "Shawn Neighbor — the Tribune named them in a piece headlined Four Years to the Floor: Apprenticeship Pipeline Passes 9-0 — and What It Binds (Civic Affairs, C98)",
+      "src": "archive/ARTICLE_INDEX.jsonl fd901c480f0ab61b",
+      "id": "F-c4d967ec7769"
+    },
+    {
+      "t": "FACT",
+      "text": "Billy Storip — called an old coworker just to catch up and talked for an hour, Rockridge (C114 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-e6e26824d81a"
+    },
+    {
+      "t": "FACT",
+      "text": "Billy Storip — in their life, C113: fixed a squeaky hinge that had been squeaking since the kids left home near a bookstore corner",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-96d6b41de994"
+    },
+    {
+      "t": "FACT",
+      "text": "Billy Storip — in their life, C113: overheard coworkers talking about last night's scene",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-c7903bf222af"
+    },
+    {
+      "t": "FACT",
+      "text": "Billy Storip — in their life, C114: found a quiet minute at a bookstore corner and the quiet satisfaction of finding a favorite song on the jukebox",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-9c1428d105a3"
+    },
+    {
+      "t": "FACT",
+      "text": "Billy Storip — in their life, C114: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-e682b902c319"
+    },
+    {
+      "t": "FACT",
+      "text": "Billy Storip — Lives already wrote this person: a moment the record kept (C113)",
+      "src": "output/cron-compare/lives_covered.json",
+      "id": "F-bcd419ec6a4a"
+    },
+    {
+      "t": "FACT",
+      "text": "Clarence Moody — swapped seed packets with a neighbor over the fence, Dimond (C114 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-7d7c69e2a202"
+    },
+    {
+      "t": "FACT",
+      "text": "Clarence Moody — in their life, C113: shared a small piece of history with someone who needed it",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-87282eaccb75"
+    },
+    {
+      "t": "FACT",
+      "text": "Clarence Moody — in their life, C113: heard Jack London was packed last night",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-d81168103b48"
+    },
+    {
+      "t": "FACT",
+      "text": "Clarence Moody — in their life, C114: showed up to set up the chairs in the fellowship hall because if they didn't do it, no one would",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-bd89ce047ca5"
+    },
+    {
+      "t": "FACT",
+      "text": "Clarence Moody — in their life, C114: closed their eyes during the choir solo and actually felt the tension leave their shoulders",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-a89e931f522c"
+    },
+    {
+      "t": "FACT",
+      "text": "Clarence Moody — Lives already wrote this person: a moment the record kept (C113)",
+      "src": "output/cron-compare/lives_covered.json",
+      "id": "F-1d7178e72266"
+    },
+    {
+      "t": "FACT",
+      "text": "Clarence Moody — the Tribune named them in a piece headlined The Page of Lives, C113: A Place of Their Own (Culture, C113)",
+      "src": "archive/ARTICLE_INDEX.jsonl 753f8ac13ffa3029",
+      "id": "F-befd3d6d7451"
+    },
+    {
+      "t": "FACT",
+      "text": "Clarence Moody — the Tribune named them in a piece headlined In Montclair, the Night of Krishna's Birth (Arts & Entertainment, C87)",
+      "src": "archive/ARTICLE_INDEX.jsonl d20fa0177f32d20f",
+      "id": "F-cf8132c4f908"
+    },
+    {
+      "t": "FACT",
+      "text": "Gloria Liu — reorganized the garage into a system only he understood near College Avenue, Rockridge (C114 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-f49687e54e61"
+    },
+    {
+      "t": "FACT",
+      "text": "Gloria Liu — in their life, C113: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-2938a5a6cdb2"
+    },
+    {
+      "t": "FACT",
+      "text": "Gloria Liu — in their life, C113: dodged the running groups circling the lake and found a quiet bench near the pergola",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-8138f8e2cc21"
+    },
+    {
+      "t": "FACT",
+      "text": "Gloria Liu — in their life, C113: still feeling the energy from last night's city buzz",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-247d5e0804dc"
+    },
+    {
+      "t": "FACT",
+      "text": "Gloria Liu — in their life, C114: wrote a letter by hand because email felt like cheating",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-42e2d0f5a075"
+    },
+    {
+      "t": "FACT",
+      "text": "Gloria Liu — the Tribune named them in a piece headlined Rockridge Schools Maintain Excellence Amid Citywide Shifts (Civic, C108)",
+      "src": "archive/ARTICLE_INDEX.jsonl 33f8a33c75e1838d",
+      "id": "F-a3624c16d445"
+    },
+    {
+      "t": "FACT",
+      "text": "Amear Thompson — moved from Chinatown to West Oakland — moving up from Chinatown, West Oakland (C114 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-36efe329716b"
+    },
+    {
+      "t": "FACT",
+      "text": "Amear Thompson — in their life, C113: took the long way home just to check the Baylight fence line's progress",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-e499a1a457ab"
+    },
+    {
+      "t": "FACT",
+      "text": "Amear Thompson — in their life, C114: smelled the incense from the steps of Bay Pure Land Buddhist Temple",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-a9674a8c83b4"
+    },
+    {
+      "t": "FACT",
+      "text": "Amear Thompson — in their life, C114: saw someone running for the bus make it, and felt weirdly invested",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-b82957707d89"
+    },
+    {
+      "t": "FACT",
+      "text": "Amear Thompson — in their life, C114: still feeling the energy from last night's city buzz",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-ebd3df2ed080"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C10, Spring, holiday=none",
+      "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+      "id": "F-9b9470803821"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "tamsin-lives-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Put the cycle's person events in the paper as news, one person at a time — a birth, a death, a hospital stay, a retirement, a promotion, a household set up or a place of one's own, a win or a loss on the book, what a turn of the city did to someone's day, and the smaller moments the record kept. The event is the lead, the person is named as the slice names them, and what came next appears only when a later record holds it. A stake or a payout is the person's own fact, not a statistic. The page is the city's real calendar; every person on it is one the record holds.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "plain respect — a neighborhood weekly's births-and-obituaries hand, unhurried, exact",
+      "targetWords": "450-1200",
+      "opening": "the heaviest event on the slice, stated as it happened to the named person",
+      "closing": "the last person's passage ends on what the record holds next for them, or on the fact itself — no moral, no roundup"
+    },
+    "authorizedTexture": [
+      "the plain respect of the form — the ordinary weight of a birth, a retirement, a discharge, stated without ornament",
+      "the frame around a supplied fact — what a promotion to the supplied role means in plain words, without inventing the workplace",
+      "the neighborhood the slice names as where the person lives, without an invented street scene",
+      "the order and pacing of the passages — heaviest first, one person at a time"
+    ],
+    "textureConditions": [
+      "every person, event, role, employer, neighborhood, hospital stay, household and family tie must come from the slice",
+      "a quote appears only verbatim from the person's own supplied page; nothing paraphrased into quotation marks",
+      "what came next appears only when a later Cycle's supplied record holds it",
+      "a thin day (few events) is written as a short page, not padded"
+    ],
+    "canonBlockers": [
+      "any person, event, quote, venue, employer or family member not on the slice",
+      "a paraphrased or invented quote",
+      "a cause, diagnosis or outcome the record does not state",
+      "a statistic, rate or trend claim — the page is people, not numbers",
+      "intake bookkeeping rows (Emerged into Tier, Added to Simulation_Ledger, Updated to Tier) written as life events",
+      "raw engine labels or decimals printed as public-facing evidence"
+    ]
+  },
+  "manifest": {
+    "id": "AM-69c84be26787",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-4261fa115617",
+        "t": "FACT",
+        "text": "Current cycle: C114",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-6fa0898daf8b",
+        "t": "FACT",
+        "text": "Elle Lilo moved into a place of their own in Jack London, renting",
+        "src": "output/beats/Lived_Events.jsonl @C114 batch 236736"
+      },
+      {
+        "id": "F-007999917d11",
+        "t": "FACT",
+        "text": "Elle Lilo first. The event is the lead; one true detail; what came next only if the record says.",
+        "src": "output/beats/Lived_Events.jsonl @C114 batch 236736"
+      },
+      {
+        "id": "F-4bff5d2f33ca",
+        "t": "FACT",
+        "text": "Elle Lilo moved into a place of their own in Jack London, renting (C114)",
+        "src": "output/beats/Household_Ledger.jsonl @C114"
+      },
+      {
+        "id": "F-65cd60e2a933",
+        "t": "FACT",
+        "text": "Elle Lilo — in their life, C114: experienced renewed social energy",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-d81cea557976",
+        "t": "FACT",
+        "text": "Elle Lilo — in their life, C114: closed their eyes during the choir solo and actually felt the tension leave their shoulders",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-59496b43fb8c",
+        "t": "FACT",
+        "text": "Elle Lilo — in their life, C114: lent a neighbor a tool and got a story back with it",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-d12ee29d4046",
+        "t": "FACT",
+        "text": "Elle Lilo — in their life, C114: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-949eab6a11ff",
+        "t": "FACT",
+        "text": "Elle Lilo — the Tribune named them in a piece headlined Chinatown's 140 Sick Are Mostly at Home, and Home Is Doing the Work (Civic, C113)",
+        "src": "archive/ARTICLE_INDEX.jsonl 415a8378a3cc8be1"
+      },
+      {
+        "id": "F-01db0778278f",
+        "t": "FACT",
+        "text": "Elle Lilo — the Tribune named them in a piece headlined Last, UNDOCKED. Nia Rook has Eric Taveras holding the top spot and Cristina Booker's ten-point Mon (Civic, C113)",
+        "src": "archive/ARTICLE_INDEX.jsonl 7b568104deca2649"
+      },
+      {
+        "id": "F-ca6b2975e581",
+        "t": "FACT",
+        "text": "Elle Lilo — the Tribune named them in a piece headlined Six Names for 142 Sick Residents (Civic, C112)",
+        "src": "archive/ARTICLE_INDEX.jsonl bad852382ed2ab09"
+      },
+      {
+        "id": "F-5f9b5f2a483a",
+        "t": "FACT",
+        "text": "Cee Lee moved into a place of their own in Lake Merritt, renting (C114)",
+        "src": "output/beats/Household_Ledger.jsonl @C114"
+      },
+      {
+        "id": "F-5753b225fe26",
+        "t": "FACT",
+        "text": "Cee Lee — in their life, C113: tried a new recipe that mostly worked",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-486e95532935",
+        "t": "FACT",
+        "text": "Cee Lee — in their life, C113: dealt with a seasonal health concern",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-42223afbaca6",
+        "t": "FACT",
+        "text": "Cee Lee — in their life, C114: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-3d3ded7ce243",
+        "t": "FACT",
+        "text": "Cee Lee — the Tribune named them in a piece headlined Chinatown's 140 Sick Are Mostly at Home, and Home Is Doing the Work (Civic, C113)",
+        "src": "archive/ARTICLE_INDEX.jsonl 415a8378a3cc8be1"
+      },
+      {
+        "id": "F-79ac2fd8a6c1",
+        "t": "FACT",
+        "text": "Cee Lee — the Tribune named them in a piece headlined Last, UNDOCKED. Nia Rook has Eric Taveras holding the top spot and Cristina Booker's ten-point Mon (Civic, C113)",
+        "src": "archive/ARTICLE_INDEX.jsonl 7b568104deca2649"
+      },
+      {
+        "id": "F-e328f40499fd",
+        "t": "FACT",
+        "text": "Aanya Rivera won on the UNDOCKED book — staked 200, paid 366, Lake Merritt (C114)",
+        "src": "output/beats/Casino_Ledger.jsonl @C114"
+      },
+      {
+        "id": "F-e5ac8d034808",
+        "t": "FACT",
+        "text": "Aanya Rivera — in their life, C113: counted cranes on the skyline from the bus stop and got a different number than yesterday",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-9a8079f9b543",
+        "t": "FACT",
+        "text": "Aanya Rivera — in their life, C113: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-4c922c39a591",
+        "t": "FACT",
+        "text": "Aanya Rivera — in their life, C114: checked the Civis Systems Field livestream just to see if the grass had been laid down yet",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-8a2ca5e48834",
+        "t": "FACT",
+        "text": "Aanya Rivera — in their life, C114: caught their reflection in a shop window and stood a little straighter",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-1de7431242f9",
+        "t": "FACT",
+        "text": "Jose Johnson — a group of fans huddle under an awning debating last night's game, their voices rising above the sound of rain hitting the pavement, Temescal — one of 4 people the Cycle's city turn reached (Temescal Community Health Center is operational — ongoing health effects in Temescal; the city feels it through these neighborhoods) (C114)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C114"
+      },
+      {
+        "id": "F-5f5519505f1d",
+        "t": "FACT",
+        "text": "Jose Johnson — in their life, C113: caught a stranger humming their song and felt briefly, wrongly, known",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-6ccd6e858aa4",
+        "t": "FACT",
+        "text": "Jose Johnson — in their life, C114: the crack of a bat echoes from a nearby screen, drawing a small crowd of pedestrians to pause near a small gallery",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-3ecb4b6d0dbe",
+        "t": "FACT",
+        "text": "Jose Johnson — in their life, C114: observed art enthusiasts wandering the streets",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-5c75f1d50c6e",
+        "t": "FACT",
+        "text": "Pamela Amelia — read the Tribune's front page twice — once for the news, once to see who was in it, Piedmont Ave — one of 4 people the Cycle's city turn reached (Initiative work landed in 6 neighborhood(s): Downtown, Temescal, West Oakland, Fruitvale, Jack London, East Oakland) (C114)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C114"
+      },
+      {
+        "id": "F-3332cf888fe4",
+        "t": "FACT",
+        "text": "Pamela Amelia — in their life, C113: carried three boxes of canned goods from the pantry truck and felt it in their lower back",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-e27a06c54438",
+        "t": "FACT",
+        "text": "Pamela Amelia — in their life, C113: walked a different street home just to see it",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-7d6684fb30d5",
+        "t": "FACT",
+        "text": "Shawn Neighbor — felt quietly lucky to call Fruitvale home, Fruitvale — one of 4 people the Cycle's community turn reached (Edition coverage lifted the city: traffic +0.03, retail +0.028, nightlife +0.06, publicSpaces +0.044, communityEngagement +0.026,…) (C114)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C114"
+      },
+      {
+        "id": "F-0babd33328cf",
+        "t": "FACT",
+        "text": "Shawn Neighbor — in their life, C113: walked the Mandela Parkway median under the trees and took the long way home",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-f95f99091382",
+        "t": "FACT",
+        "text": "Shawn Neighbor — in their life, C113: haggled for a flat of bruised peaches at the Saturday market just to have a reason to talk to someone",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-e65be8e7427c",
+        "t": "FACT",
+        "text": "Shawn Neighbor — in their life, C113: lent a neighbor a tool and got a story back with it",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-02301c5352e2",
+        "t": "FACT",
+        "text": "Shawn Neighbor — in their life, C114: knew the rules cold — two nights in the chair, the galaxy keeps the score, the board adds it up — and had never been drawn",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-c4d967ec7769",
+        "t": "FACT",
+        "text": "Shawn Neighbor — the Tribune named them in a piece headlined Four Years to the Floor: Apprenticeship Pipeline Passes 9-0 — and What It Binds (Civic Affairs, C98)",
+        "src": "archive/ARTICLE_INDEX.jsonl fd901c480f0ab61b"
+      },
+      {
+        "id": "F-e6e26824d81a",
+        "t": "FACT",
+        "text": "Billy Storip — called an old coworker just to catch up and talked for an hour, Rockridge (C114 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-96d6b41de994",
+        "t": "FACT",
+        "text": "Billy Storip — in their life, C113: fixed a squeaky hinge that had been squeaking since the kids left home near a bookstore corner",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-c7903bf222af",
+        "t": "FACT",
+        "text": "Billy Storip — in their life, C113: overheard coworkers talking about last night's scene",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-9c1428d105a3",
+        "t": "FACT",
+        "text": "Billy Storip — in their life, C114: found a quiet minute at a bookstore corner and the quiet satisfaction of finding a favorite song on the jukebox",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-e682b902c319",
+        "t": "FACT",
+        "text": "Billy Storip — in their life, C114: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-bcd419ec6a4a",
+        "t": "FACT",
+        "text": "Billy Storip — Lives already wrote this person: a moment the record kept (C113)",
+        "src": "output/cron-compare/lives_covered.json"
+      },
+      {
+        "id": "F-7d7c69e2a202",
+        "t": "FACT",
+        "text": "Clarence Moody — swapped seed packets with a neighbor over the fence, Dimond (C114 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-87282eaccb75",
+        "t": "FACT",
+        "text": "Clarence Moody — in their life, C113: shared a small piece of history with someone who needed it",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-d81168103b48",
+        "t": "FACT",
+        "text": "Clarence Moody — in their life, C113: heard Jack London was packed last night",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-bd89ce047ca5",
+        "t": "FACT",
+        "text": "Clarence Moody — in their life, C114: showed up to set up the chairs in the fellowship hall because if they didn't do it, no one would",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-a89e931f522c",
+        "t": "FACT",
+        "text": "Clarence Moody — in their life, C114: closed their eyes during the choir solo and actually felt the tension leave their shoulders",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-1d7178e72266",
+        "t": "FACT",
+        "text": "Clarence Moody — Lives already wrote this person: a moment the record kept (C113)",
+        "src": "output/cron-compare/lives_covered.json"
+      },
+      {
+        "id": "F-befd3d6d7451",
+        "t": "FACT",
+        "text": "Clarence Moody — the Tribune named them in a piece headlined The Page of Lives, C113: A Place of Their Own (Culture, C113)",
+        "src": "archive/ARTICLE_INDEX.jsonl 753f8ac13ffa3029"
+      },
+      {
+        "id": "F-cf8132c4f908",
+        "t": "FACT",
+        "text": "Clarence Moody — the Tribune named them in a piece headlined In Montclair, the Night of Krishna's Birth (Arts & Entertainment, C87)",
+        "src": "archive/ARTICLE_INDEX.jsonl d20fa0177f32d20f"
+      },
+      {
+        "id": "F-f49687e54e61",
+        "t": "FACT",
+        "text": "Gloria Liu — reorganized the garage into a system only he understood near College Avenue, Rockridge (C114 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-2938a5a6cdb2",
+        "t": "FACT",
+        "text": "Gloria Liu — in their life, C113: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-8138f8e2cc21",
+        "t": "FACT",
+        "text": "Gloria Liu — in their life, C113: dodged the running groups circling the lake and found a quiet bench near the pergola",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-247d5e0804dc",
+        "t": "FACT",
+        "text": "Gloria Liu — in their life, C113: still feeling the energy from last night's city buzz",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-42e2d0f5a075",
+        "t": "FACT",
+        "text": "Gloria Liu — in their life, C114: wrote a letter by hand because email felt like cheating",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-a3624c16d445",
+        "t": "FACT",
+        "text": "Gloria Liu — the Tribune named them in a piece headlined Rockridge Schools Maintain Excellence Amid Citywide Shifts (Civic, C108)",
+        "src": "archive/ARTICLE_INDEX.jsonl 33f8a33c75e1838d"
+      },
+      {
+        "id": "F-36efe329716b",
+        "t": "FACT",
+        "text": "Amear Thompson — moved from Chinatown to West Oakland — moving up from Chinatown, West Oakland (C114 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-e499a1a457ab",
+        "t": "FACT",
+        "text": "Amear Thompson — in their life, C113: took the long way home just to check the Baylight fence line's progress",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-a9674a8c83b4",
+        "t": "FACT",
+        "text": "Amear Thompson — in their life, C114: smelled the incense from the steps of Bay Pure Land Buddhist Temple",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-b82957707d89",
+        "t": "FACT",
+        "text": "Amear Thompson — in their life, C114: saw someone running for the bus make it, and felt weirdly invested",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-ebd3df2ed080",
+        "t": "FACT",
+        "text": "Amear Thompson — in their life, C114: still feeling the energy from last night's city buzz",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-9b9470803821",
+        "t": "FACT",
+        "text": "Calendar: Y3C10, Spring, holiday=none",
+        "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00320-862ae6ce20",
+        "speakerId": "POP-00320",
+        "speakerName": "Cee Lee",
+        "text": "I've seen Elle Lilo move into a place of their own in Jack London. It made me think about when I finally got my own place in Lake Merritt. It's a big step, you know? I was dealing with some health stuff around that time too, so I feel for them. I'm just glad I could get back on track and enjoy the lake path again.",
+        "factIds": [
+          "F-5f9b5f2a483a",
+          "F-6fa0898daf8b",
+          "F-486e95532935"
+        ],
+        "src": "packet.W2[POP-00320]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00320",
+        "name": "Cee Lee",
+        "profile": "Cee Lee — Autonomous Systems Engineer — Lake Merritt",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Tamsin Pruitt",
+        "text": "The potential impact of their new living situation on their social connections and community engagement.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "the plain respect of the form — the ordinary weight of a birth, a retirement, a discharge, stated without ornament",
+      "the frame around a supplied fact — what a promotion to the supplied role means in plain words, without inventing the workplace",
+      "the neighborhood the slice names as where the person lives, without an invented street scene",
+      "the order and pacing of the passages — heaviest first, one person at a time"
+    ],
+    "textureConditions": [
+      "every person, event, role, employer, neighborhood, hospital stay, household and family tie must come from the slice",
+      "a quote appears only verbatim from the person's own supplied page; nothing paraphrased into quotation marks",
+      "what came next appears only when a later Cycle's supplied record holds it",
+      "a thin day (few events) is written as a short page, not padded"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

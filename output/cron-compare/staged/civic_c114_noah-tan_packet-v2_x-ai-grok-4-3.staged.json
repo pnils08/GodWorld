@@ -1,0 +1,53 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "114",
+  "persona": "noah-tan",
+  "byline": "Noah Tan",
+  "bylinePopid": "POP-00157",
+  "article": "output/cron-compare/staged/civic_c114_noah-tan_packet-v2_x-ai-grok-4-3.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Ramon Vega",
+        "role": "quoted-source",
+        "popid": "POP-00042"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "That line came from a real frustration — watching us celebrate small wins while the big needs sat waiting. I still believe that. A bench is nice. A health center changes lives. But I've also learned that mild doesn't have to mean weak. Sometimes you move the bench, you build trust, and then you fight like hell for the health center. The trick is knowing which one you're doing and being honest about it.",
+        "sourceRef": "citizenVoice PRESS Ramon Vega"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-86743dade3dc",
+    "draftSha256": "1e76a4c816dcad2cfc3051fb7b4e3f7c2677830a9b6a877927eedc893745d338",
+    "verdict": "output/cron-compare/civic_c114_noah-tan_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-11-05T00:16:39.245Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 400",
+      "words": 418,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "1e76a4c816dcad2cfc3051fb7b4e3f7c2677830a9b6a877927eedc893745d338",
+      "costUsd": 0.0008
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-05T00:16:42.327Z"
+}

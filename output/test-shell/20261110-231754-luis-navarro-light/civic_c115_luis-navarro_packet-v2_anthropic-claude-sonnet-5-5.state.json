@@ -1,0 +1,248 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00636",
+    "name": "Luis Navarro",
+    "role": "desk reporter",
+    "desk": "civic"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The tracker line is the weather, never the lede.",
+    "assignment": "Oakland Youth Apprenticeship Pipeline stalled in implementation-active",
+    "approach": "Investigation approach: distinguish what the supplied record establishes from what it does not. Follow the unresolved gap fairly; no invented response, silence, or accusation.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "civic-investigation",
+      "method": "KNOWN_UNKNOWN",
+      "missing": [
+        "documented response or documented non-response",
+        "request timestamp and elapsed silence duration",
+        "responsible person, office, or duty unless named by the source"
+      ],
+      "reportingEvidence": {
+        "recordChecks": {
+          "state": "NOT_SUPPLIED",
+          "events": []
+        },
+        "requestEvents": {
+          "state": "NOT_SUPPLIED",
+          "events": []
+        },
+        "responseEvents": {
+          "state": "NOT_SUPPLIED",
+          "events": []
+        },
+        "responsibleEntities": {
+          "state": "NOT_SUPPLIED",
+          "entities": []
+        }
+      },
+      "silenceClock": {
+        "state": "UNESTABLISHED",
+        "value": null,
+        "src": null
+      },
+      "forbidden": [
+        "Do not add officials, votes, budgets, outcomes, measurements, quotes, responses, or affected people absent from the supplied entries."
+      ]
+    },
+    "writingMode": "RECORDS_BRIEF",
+    "runningStoriesNote": "signal.runningStories are events the city is already living through and where each one stands. Background only — write nothing about tracking them."
+  },
+  "signal": {
+    "kind": "anomaly",
+    "hood": "West Oakland, East Oakland, Fruitvale",
+    "src": "output/engine_audit_c115.json patterns[0]; evidence: Initiative_Tracker row(s) 7; storyline INIT-007:implementation-active",
+    "plan": {
+      "focus": "Oakland Youth Apprenticeship Pipeline stalled in implementation-active",
+      "closeQuestion": "What is still unfinished for the people living this?"
+    },
+    "runningStories": [
+      "The Downtown Transit Snarl [Downtown] — decline, week 2",
+      "West Oakland Stabilization Fund — disbursement-active [West Oakland] — under way",
+      "Oakland Alternative Response Initiative — dispatch-live [West Oakland, Fruitvale, East Oakland] — under way",
+      "Fruitvale Transit Hub Phase II — Visioning — design-phase [Fruitvale] — under way",
+      "Temescal Community Health Center — operational [Temescal] — under way",
+      "Baylight District — Final Council Vote — construction-active [Jack London, Downtown] — under way",
+      "Oakland Youth Apprenticeship Pipeline — implementation-active [West Oakland, East Oakland, Fruitvale] — under way",
+      "Downtown Economic Revitalization — vote-scheduled [Downtown] — under way",
+      "Commercial Stabilization for Grand Lake — vote-ready [Grand Lake] — under way",
+      "West Oakland Tenant Defense Fund — announced [West Oakland] — under way",
+      "Ivy Hill Revitalization Initiative — announced [Ivy Hill] — under way",
+      "Dimond Revitalization Initiative — announced [Dimond] — under way",
+      "Ivy Hill Community Revitalization — announced [Ivy Hill] — under way",
+      "Ivy Hill Community Support Initiative — announced [Ivy Hill] — under way",
+      "Commercial Stabilization for Grand Lake — announced [Grand Lake] — ENDED this week; now vote-ready"
+    ]
+  },
+  "exposure": {
+    "subjects": [],
+    "sources": [],
+    "excludedLeads": []
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C115",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-bc84fc0b7718"
+    },
+    {
+      "t": "FACT",
+      "text": "Oakland Youth Apprenticeship Pipeline stalled in implementation-active",
+      "src": "output/engine_audit_c115.json patterns[0]; evidence: Initiative_Tracker row(s) 7; storyline INIT-007:implementation-active",
+      "id": "F-2e699469253e"
+    },
+    {
+      "t": "FACT",
+      "text": "The economic initiative carrying West Oakland has not advanced in 3 cycles.",
+      "src": "output/engine_audit_c115.json patterns[0]; evidence: Initiative_Tracker row(s) 7; storyline INIT-007:implementation-active",
+      "id": "F-6d3d5d153479"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C11, Spring, holiday=none",
+      "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+      "id": "F-82d77e9a4a71"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. For this investigation: do not invent official acts, requests, responses, files, duties, or offices for a named office or named citizen, and claim no reporting act (asked, requested, obtained, tracked) the record does not show. Attribute each approved quote exactly. Missing evidence stays unknown — never rewritten as \"X did not happen,\" \"no one did X,\" or \"the absence proves X.\" Write 400-700 words as this reporter living the known condition. Do not print engine classifier names, severity labels, source row numbers, or a silence-clock section. No named ledger citizen spoke for this piece (manifest.approvedQuotes is empty): put no words in a named citizen's mouth. Unnamed voices are yours."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "luis-investigation-record-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Separate what the Packet establishes from what remains open, pursue the accountable record fairly, and make a documented contradiction or documented silence visible without inventing either.",
+    "articleContract": {
+      "voice": "evidence-first; concise records brief without reporting events, full investigation only with a Packet-backed reporting trail",
+      "targetWords": "400-700",
+      "opening": "a named person or Packet-named place living the condition",
+      "closing": "one unfinished human question, not a request for more record"
+    },
+    "authorizedTexture": [
+      "a concise known-versus-unknown structure over Packet-backed facts and declared missing fields",
+      "fair pressure framed as a question, interpretation, or explicit request for a record",
+      "short transitions between supplied facts that add no event, response, duration, source, or accusation"
+    ],
+    "textureConditions": [
+      "every named person, office, institution, Project, Initiative, business, organization, quote, response, request, and document must come from the Packet",
+      "a silence clock requires a Packet-backed request or response event and a supplied duration or Cycle span; otherwise its state is unestablished",
+      "decline-to-comment, no-response, refusal, contradiction, and responsible-office claims must each have a supplied source",
+      "an open question must remain a question and must not imply criminality, misconduct, duty, motive, or official knowledge absent from the Packet"
+    ],
+    "canonBlockers": [
+      "an invented records request, interview attempt, response, refusal, decline-to-comment, document, source, or silence duration",
+      "an unsupported contradiction, official duty, responsible office, act, inaction, promise, decision, motive, accusation, or finding",
+      "a named person, office, institution, Project, Initiative, business, or organization not found in the supplied record",
+      "a number, date, duration, budget, metric, count, vote, or timeline that contradicts or lacks the supplied record",
+      "Jax-style theatrical heat that turns an unestablished lead into a settled factual claim"
+    ]
+  },
+  "manifest": {
+    "id": "AM-e6c2103144ea",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-bc84fc0b7718",
+        "t": "FACT",
+        "text": "Current cycle: C115",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-2e699469253e",
+        "t": "FACT",
+        "text": "Oakland Youth Apprenticeship Pipeline stalled in implementation-active",
+        "src": "output/engine_audit_c115.json patterns[0]; evidence: Initiative_Tracker row(s) 7; storyline INIT-007:implementation-active"
+      },
+      {
+        "id": "F-6d3d5d153479",
+        "t": "FACT",
+        "text": "The economic initiative carrying West Oakland has not advanced in 3 cycles.",
+        "src": "output/engine_audit_c115.json patterns[0]; evidence: Initiative_Tracker row(s) 7; storyline INIT-007:implementation-active"
+      },
+      {
+        "id": "F-82d77e9a4a71",
+        "t": "FACT",
+        "text": "Calendar: Y3C11, Spring, holiday=none",
+        "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)"
+      }
+    ],
+    "approvedQuotes": [],
+    "approvedSubjects": [],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      },
+      {
+        "id": "P_KNOWN_UNKNOWN",
+        "rule": "Contrast approved facts with creativeBrief.missing only; do not narrate a missing item as an event that occurred."
+      }
+    ],
+    "unverifiedLeads": [],
+    "authorizedTexture": [
+      "a concise known-versus-unknown structure over Packet-backed facts and declared missing fields",
+      "fair pressure framed as a question, interpretation, or explicit request for a record",
+      "short transitions between supplied facts that add no event, response, duration, source, or accusation"
+    ],
+    "textureConditions": [
+      "every named person, office, institution, Project, Initiative, business, organization, quote, response, request, and document must come from the Packet",
+      "a silence clock requires a Packet-backed request or response event and a supplied duration or Cycle span; otherwise its state is unestablished",
+      "decline-to-comment, no-response, refusal, contradiction, and responsible-office claims must each have a supplied source",
+      "an open question must remain a question and must not imply criminality, misconduct, duty, motive, or official knowledge absent from the Packet"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "112",
+  "persona": "p-slayer",
+  "byline": "P Slayer",
+  "bylinePopid": "POP-00008",
+  "article": "output/cron-compare/staged/sports_c112_p-slayer_packet-v2_x-ai-grok-4-3.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Vinnie Keane",
+        "role": "mentioned",
+        "popid": "POP-00001"
+      },
+      {
+        "name": "Benji Dillon",
+        "role": "quoted-source",
+        "popid": "POP-00018"
+      },
+      {
+        "name": "Lila Patty",
+        "role": "mentioned",
+        "popid": "POP-00185"
+      },
+      {
+        "name": "Jire Hilt",
+        "role": "mentioned",
+        "popid": "POP-00649"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Jack London"
+    ],
+    "claims": [
+      {
+        "claim": "I bought a new A's jersey and I have to say, it's got me pretty excited. The anticipation is building up, I can feel it. I've been looking forward to the season, and now that I've got my new gear, I feel like I'm ready to go.",
+        "sourceRef": "citizenVoice PRESS Jire Hilt"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-2a0ac8a7b434",
+    "draftSha256": "1de6654c095f88fe03fde785a8a312e62728abd02dbca0bf74e1f1275f72f8bf",
+    "verdict": "output/cron-compare/sports_c112_p-slayer_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-10-21T23:18:43.090Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 400",
+      "words": 584,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "1de6654c095f88fe03fde785a8a312e62728abd02dbca0bf74e1f1275f72f8bf",
+      "costUsd": 0.0011
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-21T23:18:46.625Z"
+}

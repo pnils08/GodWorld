@@ -1,0 +1,78 @@
+{
+  "draft": "output/cron-compare/undocked_c114_nia-rook_packet-v2_openai-gpt-6-luna.md",
+  "cycle": "114",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "01c8295dd43d693d1434ba991ac7b42bbce928e103d94e96e6c1e904b0f228d6",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Lena Okafor UNDOCKED feature verified: exact interview quote match, ledger profiles intact, and clean in-world game texture.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "nia-rook-undocked-recap-v1",
+    "packageVersion": "NIAROOK-UNDOCKED-2",
+    "manifestId": "AM-5f3251f3c6d1",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "37.96"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Lena Okafor",
+      "Luis Taz"
+    ],
+    "unverified": [
+      "Alpha Centauri",
+      "Barnards Star",
+      "Copper Requisition",
+      "Daycare Director",
+      "Epsilon Eridani",
+      "Nova Terra",
+      "Proxima Centauri"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 1,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0101,
+  "durationMs": 5414,
+  "parseError": false,
+  "ranAt": "2026-11-07T00:21:31.709Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 350",
+    "words": 405,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "01c8295dd43d693d1434ba991ac7b42bbce928e103d94e96e6c1e904b0f228d6",
+    "costUsd": 0.0014
+  }
+}

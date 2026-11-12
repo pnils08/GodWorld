@@ -1,0 +1,27 @@
+{
+  "initiative": "INIT-006",
+  "initiativeId": "INIT-006",
+  "cycle": 112,
+  "primaryVoice": "Mayor gavel (mayor_gavel-005)",
+  "consolidatedFrom": [
+    "STMT-112-baylight_authority-001 (Ramos — Baylight District Construction Milestone Review)",
+    "STMT-112-baylight_authority-002 (Ramos — Baylight District Community Impact Mitigation)",
+    "STMT-112-council_d2-001 (Tran D2 — Baylight District Remediation Milestone)",
+    "STMT-112-mayor_gavel-005 (Mayor gavel — Baylight District Remediation Continuation)",
+    "STMT-112-mayor_open-003 (Mayor agenda — Baylight District Remediation and Construction Timeline)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-006",
+    "ImplementationPhase": "construction-active",
+    "MilestoneNotes": "C112: Independent oversight verified; remediation continues; construction milestone review held for C115",
+    "NextScheduledAction": "Construction milestone review",
+    "NextActionCycle": 115,
+    "LastWorkCycle": 112,
+    "LastWorkSeat": "proj-baylight"
+  },
+  "_moveFold": {
+    "moveIds": [
+      "MV-111-proj-baylight-2026-10-16"
+    ]
+  }
+}

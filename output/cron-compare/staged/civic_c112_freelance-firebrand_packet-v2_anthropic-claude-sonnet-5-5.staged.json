@@ -1,0 +1,70 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "112",
+  "persona": "freelance-firebrand",
+  "byline": "Jax Caldera",
+  "bylinePopid": "POP-00799",
+  "article": "output/cron-compare/staged/civic_c112_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Tatiana Flores",
+        "role": "mentioned",
+        "popid": "POP-00859"
+      },
+      {
+        "name": "Makayla Wu",
+        "role": "mentioned",
+        "popid": "POP-00867"
+      },
+      {
+        "name": "Iris Pham",
+        "role": "mentioned",
+        "popid": "POP-01203"
+      },
+      {
+        "name": "Florencia Shah",
+        "role": "mentioned",
+        "popid": "POP-00934"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "KONO"
+    ],
+    "claims": [
+      {
+        "claim": "To be honest, I've been feeling pretty positive about KONO since I moved here ten weeks ago. The energy around the Fox Theater is great, and Northgate Kitchen is always bustling. I've seen new faces around, which is nice. I haven't really noticed any lack of initiative, but I'm not sure I'd be aware of everything going on behind the scenes. My focus is on getting settled and enjoying the neighborhood.",
+        "sourceRef": "citizenVoice PRESS Tatiana Flores"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-42ec31b6976b",
+    "draftSha256": "1c17fee994d241dddede948203f4e045eadf4291b3f41d7fd18467317344f390",
+    "verdict": "output/cron-compare/civic_c112_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-10-21T23:15:35.967Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 400",
+      "words": 663,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "1c17fee994d241dddede948203f4e045eadf4291b3f41d7fd18467317344f390",
+      "costUsd": 0.0014
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-21T23:15:43.252Z"
+}

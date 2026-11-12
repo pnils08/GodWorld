@@ -1,0 +1,677 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "112",
+  "persona": "rachel-torres",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Sgt. Rachel Torres",
+    "popid": "POP-00057"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-safety",
+      "angle": "Dimond logged the most incidents (8) | 22 neighborhoods on the table — what the table says and who answers for it",
+      "label": "Dimond logged the most incidents (8) | 22 neighborhoods on the table",
+      "hookLine": "Dimond leads the incident count; Temescal waits longest for a response; 57 in custody citywide; 39 public-safety staff on the roster.",
+      "hood": "Dimond",
+      "citizens": [
+        "Rafael Montez (POP-00136)",
+        "Kimberly Cho (POP-00137)",
+        "Leonard Briggs (POP-00138)",
+        "Samantha Viteri (POP-00139)",
+        "Marcus Hollowell (POP-00140)",
+        "Priya Narang (POP-00141)",
+        "Marc Allie (POP-00241)",
+        "Vincent Ramirez (POP-00514)",
+        "Vanessa Tran-Muñoz (POP-01021)",
+        "Dolores Nwachukwu (POP-01141)",
+        "Tomas Reinholt (POP-01142)",
+        "Kendra Lyle-Nnamdi (POP-01143)",
+        "Benjamin Tsai (POP-01144)",
+        "Marisol Ibarra (POP-01145)",
+        "Devin Castellanos (POP-01146)",
+        "Ruth Anyanwu (POP-01147)",
+        "Jerome Lindqvist (POP-01148)",
+        "Hana Petrosyan (POP-01149)",
+        "Calvin Mokoena (POP-01150)",
+        "Luis Ferreira-Nash (POP-01151)",
+        "Ingrid Solberg (POP-01152)",
+        "Omar Haddad (POP-01153)",
+        "Felicia Grandberry (POP-01154)",
+        "Teodoro Villalpando (POP-01155)",
+        "Nadia Rasmussen (POP-01156)",
+        "Wesley Oduya (POP-01157)",
+        "Priscilla Chang (POP-01158)",
+        "Dmitri Volkov (POP-01159)",
+        "Yolanda Beckford (POP-01160)",
+        "Samuel Adeyemi (POP-01161)",
+        "Grace Oyelaran (POP-01162)",
+        "Rashida Coleman-Ortiz (POP-01163)",
+        "Hector Quintanilla (POP-01164)",
+        "Imani Delacroix (POP-01165)",
+        "Patrick Asante (POP-01166)",
+        "Lena Marchetti (POP-01167)",
+        "Tobias Nkemelu (POP-01168)",
+        "Esperanza Ruiz (POP-01169)",
+        "Caleb Thornbury (POP-01170)"
+      ],
+      "popids": [
+        "POP-00136",
+        "POP-00137",
+        "POP-00138",
+        "POP-00139",
+        "POP-00140",
+        "POP-00141",
+        "POP-00241",
+        "POP-00514",
+        "POP-01021",
+        "POP-01141",
+        "POP-01142",
+        "POP-01143",
+        "POP-01144",
+        "POP-01145",
+        "POP-01146",
+        "POP-01147",
+        "POP-01148",
+        "POP-01149",
+        "POP-01150",
+        "POP-01151",
+        "POP-01152",
+        "POP-01153",
+        "POP-01154",
+        "POP-01155",
+        "POP-01156",
+        "POP-01157",
+        "POP-01158",
+        "POP-01159",
+        "POP-01160",
+        "POP-01161",
+        "POP-01162",
+        "POP-01163",
+        "POP-01164",
+        "POP-01165",
+        "POP-01166",
+        "POP-01167",
+        "POP-01168",
+        "POP-01169",
+        "POP-01170"
+      ],
+      "ref": "output/beats/Crime_Metrics.jsonl @C112",
+      "cycle": 112
+    }
+  },
+  "angle": "output/cron-compare/civic_c112_rachel-torres_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 0,
+  "quotes": [],
+  "officeRecords": [],
+  "officeSilence": "no matching current-cycle office statement; tier-2 adapter unavailable",
+  "interviews": [
+    {
+      "pop": "POP-01141",
+      "name": "Dolores Nwachukwu",
+      "quote": null,
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: direct reaction exceeds 80 words; direct reaction must be one to four sentences",
+      "raw": "{\n  \"answer\": \"quote\",\n  \"quote\": \"Dimond's number being the highest doesn't surprise me — it's a busy corridor with a lot of foot traffic and storefronts, and that's where a lot of the petty stuff gets reported. The clearance rate is a different problem. We're stretched thin, and a lot of those cases are property crimes where there's no witness and no DNA. I'm not going to make excuses, but I'll tell you this: we're prioritizing the ones we can actually solve, and we're asking the community to help us with the rest. If people see something, they need to call it in. That's how we close cases.\",\n  \"fact_ids\": [\"F-072f79edf47b\", \"F-1a8962939090\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01141",
+          "name": "Dolores Nwachukwu",
+          "role": "Police Captain",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sgt. Rachel Torres",
+          "question": "Captain Nwachukwu, Dimond logged the most incidents in the city this cycle — what's your read on what's driving that number, and what are you doing about the 22% clearance rate? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-safety",
+          "hood": "Dimond",
+          "focus": "Dimond's incident count is the highest in the city this cycle, but clearance sits at 22% — who answers for the gap between reported incidents and resolved cases?",
+          "src": "output/beats/Crime_Metrics.jsonl @C112"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Dolores Nwachukwu — Police Captain — Oakland Police Department",
+          "evidence": [
+            {
+              "id": "EV-c9804cae20",
+              "src": "output/beats/Crime_Metrics.jsonl @C112",
+              "text": "Dimond leads the incident count; Temescal waits longest for a response; 57 in custody citywide; 39 public-safety staff on the roster."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "Dimond logged the most incidents (8) | 22 neighborhoods on the table",
+            "src": "output/beats/Crime_Metrics.jsonl @C112",
+            "id": "F-072f79edf47b"
+          },
+          {
+            "t": "FACT",
+            "text": "Dimond leads the incident count; Temescal waits longest for a response; 57 in custody citywide; 39 public-safety staff on the roster.",
+            "src": "output/beats/Crime_Metrics.jsonl @C112",
+            "id": "F-fc6f2c6a192a"
+          },
+          {
+            "t": "FACT",
+            "text": "129 incidents across 22 neighborhoods; most in Dimond 8, Fruitvale 8, West Oakland 8, San Antonio 7, Chinatown 7; fewest in Glenview 4, Eastlake 4, Lake Merritt 4",
+            "src": "output/beats/Crime_Metrics.jsonl @C112",
+            "id": "F-b8e8c5651d4e"
+          },
+          {
+            "t": "FACT",
+            "text": "Dimond: 8 incidents (+3 vs C111), response 10.6 min, clearance 22%, property index 38, violent index 26",
+            "src": "output/beats/Crime_Metrics.jsonl @C112",
+            "id": "F-1a8962939090"
+          },
+          {
+            "t": "FACT",
+            "text": "Slowest response: Temescal: 5 incidents (-2 vs C111), response 11.1 min, clearance 19%, property index 44, violent index 21",
+            "src": "output/beats/Crime_Metrics.jsonl @C112",
+            "id": "F-4423cc9954c7"
+          },
+          {
+            "t": "FACT",
+            "text": "Moved this cycle — rising: Baylight District; easing: Piedmont Ave",
+            "src": "output/beats/Crime_Metrics.jsonl @C112",
+            "id": "F-f0d4197a4ccf"
+          },
+          {
+            "t": "FACT",
+            "text": "Citywide custody this cycle: 27 arrests (0 tracked, 27 other residents); 57 in custody at the close; 34 left",
+            "src": "output/beats/Care_Justice_Census.jsonl judicial @C112 city",
+            "id": "F-97f2639a1db8"
+          },
+          {
+            "t": "FACT",
+            "text": "Dolores Nwachukwu — Police Captain — Oakland Police Department",
+            "src": "Simulation_Ledger profile for POP-01141",
+            "id": "F-7118a8770ecf"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00137",
+      "name": "Kimberly Cho",
+      "quote": null,
+      "disp": "draws people in, deep with them; close to family",
+      "recorded": false,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: answer must be quote|abstain",
+      "raw": "```json\n{\n  \"answer\": \"Look, I live in this city too. I see the numbers — Dimond's got the most incidents and we're clearing barely one in five. That gap sits on my desk as much as anyone's. I'm the one who has to look at where we deploy people and ask if we're putting them where they matter most. Twenty-two percent isn't a number I'm proud of. It's a measure of how many families in Dimond are still waiting for answers. I want the people there to know I'm not going to stand here and make excuses. I'm going to take that gap personally, and I'm going to push on what we can actually do differently — because the folks in Dimond deserve better than a stat line.\",\n  \"fact_ids\": [\"F-1a8962939090\", \"F-fc6f2c6a192a\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": [\"I'd want to know which specific incident types in Dimond are driving the clearance rate down — property versus violent — so we can target the bottleneck.\"],\n  \"abstain_reason\": null\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00137",
+          "name": "Kimberly Cho",
+          "role": "DEPUTY CHIEF OF OPERATIONS",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sgt. Rachel Torres",
+          "question": "Using only the supplied facts, what about \"Dimond's incident count is the highest in the city this cycle, but clearance sits at 22% — who answers for the gap between reported incidents and resolved cases?\" creates accountability for you, and what answer do you want? Do not claim any past or future official action that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-safety",
+          "hood": "Dimond",
+          "focus": "Dimond's incident count is the highest in the city this cycle, but clearance sits at 22% — who answers for the gap between reported incidents and resolved cases?",
+          "src": "output/beats/Crime_Metrics.jsonl @C112"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Kimberly Cho — DEPUTY CHIEF OF OPERATIONS — Oakland Police Department",
+          "evidence": [
+            {
+              "id": "EV-5f8bc170d2",
+              "src": "output/beats/Crime_Metrics.jsonl @C112",
+              "text": "Dimond leads the incident count; Temescal waits longest for a response; 57 in custody citywide; 39 public-safety staff on the roster."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "Dimond logged the most incidents (8) | 22 neighborhoods on the table",
+            "src": "output/beats/Crime_Metrics.jsonl @C112",
+            "id": "F-072f79edf47b"
+          },
+          {
+            "t": "FACT",
+            "text": "Dimond leads the incident count; Temescal waits longest for a response; 57 in custody citywide; 39 public-safety staff on the roster.",
+            "src": "output/beats/Crime_Metrics.jsonl @C112",
+            "id": "F-fc6f2c6a192a"
+          },
+          {
+            "t": "FACT",
+            "text": "129 incidents across 22 neighborhoods; most in Dimond 8, Fruitvale 8, West Oakland 8, San Antonio 7, Chinatown 7; fewest in Glenview 4, Eastlake 4, Lake Merritt 4",
+            "src": "output/beats/Crime_Metrics.jsonl @C112",
+            "id": "F-b8e8c5651d4e"
+          },
+          {
+            "t": "FACT",
+            "text": "Dimond: 8 incidents (+3 vs C111), response 10.6 min, clearance 22%, property index 38, violent index 26",
+            "src": "output/beats/Crime_Metrics.jsonl @C112",
+            "id": "F-1a8962939090"
+          },
+          {
+            "t": "FACT",
+            "text": "Slowest response: Temescal: 5 incidents (-2 vs C111), response 11.1 min, clearance 19%, property index 44, violent index 21",
+            "src": "output/beats/Crime_Metrics.jsonl @C112",
+            "id": "F-4423cc9954c7"
+          },
+          {
+            "t": "FACT",
+            "text": "Moved this cycle — rising: Baylight District; easing: Piedmont Ave",
+            "src": "output/beats/Crime_Metrics.jsonl @C112",
+            "id": "F-f0d4197a4ccf"
+          },
+          {
+            "t": "FACT",
+            "text": "Citywide custody this cycle: 27 arrests (0 tracked, 27 other residents); 57 in custody at the close; 34 left",
+            "src": "output/beats/Care_Justice_Census.jsonl judicial @C112 city",
+            "id": "F-97f2639a1db8"
+          },
+          {
+            "t": "FACT",
+            "text": "Kimberly Cho — DEPUTY CHIEF OF OPERATIONS — Oakland Police Department",
+            "src": "Simulation_Ledger profile for POP-00137",
+            "id": "F-824d30ff6008"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01143",
+      "name": "Kendra Lyle-Nnamdi",
+      "quote": null,
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: direct reaction exceeds 80 words; direct reaction must be one to four sentences",
+      "raw": "{\"answer\":\"quote\",\"quote\":\"I work East Oakland, not Dimond, so I can't speak to what those eight incidents look like on the ground there. What I can tell you is that clearance numbers never tell the whole story. A case gets cleared one way or another — sometimes it's an arrest, sometimes it's the victim deciding not to pursue, sometimes it's just not enough to go on. The gap between what gets reported and what gets cleared is usually about resources and follow-through. We've got 39 public-safety staff citywide and 129 incidents across 22 neighborhoods. You do the math. That's not an excuse, it's just the reality of what we're working with.\",\"fact_ids\":[\"F-072f79edf47b\",\"F-fc6f2c6a192a\",\"F-b8e8c5651d4e\",\"F-1a8962939090\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":null,\"abstain_reason\":null}",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01143",
+          "name": "Kendra Lyle-Nnamdi",
+          "role": "Police Sergeant",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sgt. Rachel Torres",
+          "question": "Sergeant Lyle-Nnamdi, from where you stand, what do the 8 incidents in Dimond this cycle actually look like on the street — and what's the gap between what gets reported and what gets cleared? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-safety",
+          "hood": "Dimond",
+          "focus": "Dimond's incident count is the highest in the city this cycle, but clearance sits at 22% — who answers for the gap between reported incidents and resolved cases?",
+          "src": "output/beats/Crime_Metrics.jsonl @C112"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Kendra Lyle-Nnamdi — Police Sergeant — Oakland Police Department",
+          "evidence": [
+            {
+              "id": "EV-012141c325",
+              "src": "output/beats/Crime_Metrics.jsonl @C112",
+              "text": "Dimond leads the incident count; Temescal waits longest for a response; 57 in custody citywide; 39 public-safety staff on the roster."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "Dimond logged the most incidents (8) | 22 neighborhoods on the table",
+            "src": "output/beats/Crime_Metrics.jsonl @C112",
+            "id": "F-072f79edf47b"
+          },
+          {
+            "t": "FACT",
+            "text": "Dimond leads the incident count; Temescal waits longest for a response; 57 in custody citywide; 39 public-safety staff on the roster.",
+            "src": "output/beats/Crime_Metrics.jsonl @C112",
+            "id": "F-fc6f2c6a192a"
+          },
+          {
+            "t": "FACT",
+            "text": "129 incidents across 22 neighborhoods; most in Dimond 8, Fruitvale 8, West Oakland 8, San Antonio 7, Chinatown 7; fewest in Glenview 4, Eastlake 4, Lake Merritt 4",
+            "src": "output/beats/Crime_Metrics.jsonl @C112",
+            "id": "F-b8e8c5651d4e"
+          },
+          {
+            "t": "FACT",
+            "text": "Dimond: 8 incidents (+3 vs C111), response 10.6 min, clearance 22%, property index 38, violent index 26",
+            "src": "output/beats/Crime_Metrics.jsonl @C112",
+            "id": "F-1a8962939090"
+          },
+          {
+            "t": "FACT",
+            "text": "Slowest response: Temescal: 5 incidents (-2 vs C111), response 11.1 min, clearance 19%, property index 44, violent index 21",
+            "src": "output/beats/Crime_Metrics.jsonl @C112",
+            "id": "F-4423cc9954c7"
+          },
+          {
+            "t": "FACT",
+            "text": "Moved this cycle — rising: Baylight District; easing: Piedmont Ave",
+            "src": "output/beats/Crime_Metrics.jsonl @C112",
+            "id": "F-f0d4197a4ccf"
+          },
+          {
+            "t": "FACT",
+            "text": "Citywide custody this cycle: 27 arrests (0 tracked, 27 other residents); 57 in custody at the close; 34 left",
+            "src": "output/beats/Care_Justice_Census.jsonl judicial @C112 city",
+            "id": "F-97f2639a1db8"
+          },
+          {
+            "t": "FACT",
+            "text": "Kendra Lyle-Nnamdi — Police Sergeant — Oakland Police Department",
+            "src": "Simulation_Ledger profile for POP-01143",
+            "id": "F-50e8ed683f59"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00136",
+      "name": "Rafael Montez",
+      "quote": null,
+      "disp": "driven, hard to sit still; draws people in, deep with them; curious, open to new things; steady, hard to shake; principled, plays it straight; close to family",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: direct reaction exceeds 80 words; direct reaction must be one to four sentences",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Look, I don't hide from the numbers. Dimond had the most incidents this cycle, and a 22% clearance rate means we're not closing enough of them. That gap is on me and my department. I answer for it. But clearance isn't just about arrests — it's about follow-through, evidence, witnesses, and the community trusting us enough to talk. We're stretched, but that's not an excuse. I want the people in Dimond to know I see it, I own it, and I'm not satisfied with it.\",\n  \"fact_ids\": [\"F-1a8962939090\", \"F-072f79edf47b\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": [\"Ask the Dimond beat officers what specific cases are stalled and what they need to move them.\"],\n  \"abstain_reason\": null\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00136",
+          "name": "Rafael Montez",
+          "role": "Police Chief",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sgt. Rachel Torres",
+          "question": "Using only the supplied facts, what about \"Dimond's incident count is the highest in the city this cycle, but clearance sits at 22% — who answers for the gap between reported incidents and resolved cases?\" creates accountability for you, and what answer do you want? Do not claim any past or future official action that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-safety",
+          "hood": "Dimond",
+          "focus": "Dimond's incident count is the highest in the city this cycle, but clearance sits at 22% — who answers for the gap between reported incidents and resolved cases?",
+          "src": "output/beats/Crime_Metrics.jsonl @C112"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Rafael Montez — Police Chief — Oakland Police Department",
+          "evidence": [
+            {
+              "id": "EV-73ac5cc5c7",
+              "src": "output/beats/Crime_Metrics.jsonl @C112",
+              "text": "Dimond leads the incident count; Temescal waits longest for a response; 57 in custody citywide; 39 public-safety staff on the roster."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "Dimond logged the most incidents (8) | 22 neighborhoods on the table",
+            "src": "output/beats/Crime_Metrics.jsonl @C112",
+            "id": "F-072f79edf47b"
+          },
+          {
+            "t": "FACT",
+            "text": "Dimond leads the incident count; Temescal waits longest for a response; 57 in custody citywide; 39 public-safety staff on the roster.",
+            "src": "output/beats/Crime_Metrics.jsonl @C112",
+            "id": "F-fc6f2c6a192a"
+          },
+          {
+            "t": "FACT",
+            "text": "129 incidents across 22 neighborhoods; most in Dimond 8, Fruitvale 8, West Oakland 8, San Antonio 7, Chinatown 7; fewest in Glenview 4, Eastlake 4, Lake Merritt 4",
+            "src": "output/beats/Crime_Metrics.jsonl @C112",
+            "id": "F-b8e8c5651d4e"
+          },
+          {
+            "t": "FACT",
+            "text": "Dimond: 8 incidents (+3 vs C111), response 10.6 min, clearance 22%, property index 38, violent index 26",
+            "src": "output/beats/Crime_Metrics.jsonl @C112",
+            "id": "F-1a8962939090"
+          },
+          {
+            "t": "FACT",
+            "text": "Slowest response: Temescal: 5 incidents (-2 vs C111), response 11.1 min, clearance 19%, property index 44, violent index 21",
+            "src": "output/beats/Crime_Metrics.jsonl @C112",
+            "id": "F-4423cc9954c7"
+          },
+          {
+            "t": "FACT",
+            "text": "Moved this cycle — rising: Baylight District; easing: Piedmont Ave",
+            "src": "output/beats/Crime_Metrics.jsonl @C112",
+            "id": "F-f0d4197a4ccf"
+          },
+          {
+            "t": "FACT",
+            "text": "Citywide custody this cycle: 27 arrests (0 tracked, 27 other residents); 57 in custody at the close; 34 left",
+            "src": "output/beats/Care_Justice_Census.jsonl judicial @C112 city",
+            "id": "F-97f2639a1db8"
+          },
+          {
+            "t": "FACT",
+            "text": "Rafael Montez — Police Chief — Oakland Police Department",
+            "src": "Simulation_Ledger profile for POP-00136",
+            "id": "F-50c22c9cdd5a"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-10-20T18:16:06.791Z"
+}

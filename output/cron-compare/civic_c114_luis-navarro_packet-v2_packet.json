@@ -1,0 +1,297 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "114",
+  "persona": "luis-navarro",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Luis Navarro",
+    "popid": "POP-00636"
+  },
+  "assignment": {
+    "story": {
+      "ref": "output/engine_audit_c114.json patterns[0]; evidence: Neighborhood_Map row(s) 4",
+      "label": "math-imbalance (medium) | Laurel: decay [Sentiment -0.030, RetailVitality -3.00] — Sentiment now -0.03 (20 of 22, city median 0.085); RetailVitality now 4.34 (22 of 22, city median 8.265) — with no matching active initiative",
+      "kind": "anomaly",
+      "angle": "civic gap in Laurel — who is accountable, what council has or hasn't done",
+      "hookLine": "No civic initiative addresses the Laurel signal surfaced this cycle.",
+      "hood": "Laurel",
+      "popids": [
+        "POP-00495"
+      ],
+      "citizens": [
+        "Rosalind Young (POP-00495)"
+      ]
+    }
+  },
+  "angle": "output/cron-compare/civic_c114_luis-navarro_packet-v2_angle.json",
+  "quotesRequested": 1,
+  "quotesLanded": 1,
+  "quotes": [
+    {
+      "pop": "POP-00495",
+      "name": "Rosalind Young",
+      "quote": "Honestly, I can't say any city council person has ever reached out to me directly about anything. I run a small shop, I keep my head down, I pay my taxes. But I do notice things around the neighborhood — the little things that don't get fixed, the street maintenance that seems to lag, the way the sidewalks get cluttered. It's not one big thing, it's just a feeling that nobody's really asking the small business owners or the regular folks what we need. I haven't heard of any specific initiative for Laurel lately, and that silence kind of speaks for itself.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Honestly, I can't say any city council person has ever reached out to me directly about anything. I run a small shop, I keep my head down, I pay my taxes. But I do notice things around the neighborhood — the little things that don't get fixed, the street maintenance that seems to lag, the way the sidewalks get cluttered. It's not one big thing, it's just a feeling that nobody's really asking the small business owners or the regular folks what we need. I haven't heard of any specific initiative for Laurel lately, and that silence kind of speaks for itself.\",\n  \"fact_ids\": [\"F-a87a3435eede\", \"F-6b5358102755\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": [],\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-a87a3435eede",
+          "F-6b5358102755"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00495-d405b16926",
+        "authoredQuote": true,
+        "publishableQuote": "Honestly, I can't say any city council person has ever reached out to me directly about anything. I run a small shop, I keep my head down, I pay my taxes. But I do notice things around the neighborhood — the little things that don't get fixed, the street maintenance that seems to lag, the way the sidewalks get cluttered. It's not one big thing, it's just a feeling that nobody's really asking the small business owners or the regular folks what we need. I haven't heard of any specific initiative for Laurel lately, and that silence kind of speaks for itself."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00495",
+          "name": "Rosalind Young",
+          "role": "Smoke Shop Owner",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Luis Navarro",
+          "question": "What civic issue in Laurel has been on your mind, and has anyone from the city or council ever reached out to you about it? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "Laurel",
+          "focus": "Civic gap in Laurel — who is accountable, what council has or hasn't done",
+          "src": "output/engine_audit_c114.json patterns[0]; evidence: Neighborhood_Map row(s) 4"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Rosalind Young — Smoke Shop Owner — Laurel resident",
+          "evidence": [
+            {
+              "id": "EV-d156c96361",
+              "src": "output/engine_audit_c114.json patterns[0]; evidence: Neighborhood_Map row(s) 4",
+              "text": "No civic initiative addresses the Laurel signal surfaced this cycle."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "civic gap in Laurel — who is accountable, what council has or hasn't done",
+            "src": "output/engine_audit_c114.json patterns[0]; evidence: Neighborhood_Map row(s) 4",
+            "id": "F-a87a3435eede"
+          },
+          {
+            "t": "FACT",
+            "text": "No civic initiative addresses the Laurel signal surfaced this cycle.",
+            "src": "output/engine_audit_c114.json patterns[0]; evidence: Neighborhood_Map row(s) 4",
+            "id": "F-6b5358102755"
+          },
+          {
+            "t": "FACT",
+            "text": "Rosalind Young — Smoke Shop Owner — Laurel resident",
+            "src": "Simulation_Ledger profile for POP-00495",
+            "id": "F-a51487df4df0"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": "no matching current-cycle office statement; tier-2 adapter unavailable",
+  "interviews": [
+    {
+      "pop": "POP-00495",
+      "name": "Rosalind Young",
+      "quote": "Honestly, I can't say any city council person has ever reached out to me directly about anything. I run a small shop, I keep my head down, I pay my taxes. But I do notice things around the neighborhood — the little things that don't get fixed, the street maintenance that seems to lag, the way the sidewalks get cluttered. It's not one big thing, it's just a feeling that nobody's really asking the small business owners or the regular folks what we need. I haven't heard of any specific initiative for Laurel lately, and that silence kind of speaks for itself.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Honestly, I can't say any city council person has ever reached out to me directly about anything. I run a small shop, I keep my head down, I pay my taxes. But I do notice things around the neighborhood — the little things that don't get fixed, the street maintenance that seems to lag, the way the sidewalks get cluttered. It's not one big thing, it's just a feeling that nobody's really asking the small business owners or the regular folks what we need. I haven't heard of any specific initiative for Laurel lately, and that silence kind of speaks for itself.\",\n  \"fact_ids\": [\"F-a87a3435eede\", \"F-6b5358102755\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": [],\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-a87a3435eede",
+          "F-6b5358102755"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00495-d405b16926",
+        "authoredQuote": true,
+        "publishableQuote": "Honestly, I can't say any city council person has ever reached out to me directly about anything. I run a small shop, I keep my head down, I pay my taxes. But I do notice things around the neighborhood — the little things that don't get fixed, the street maintenance that seems to lag, the way the sidewalks get cluttered. It's not one big thing, it's just a feeling that nobody's really asking the small business owners or the regular folks what we need. I haven't heard of any specific initiative for Laurel lately, and that silence kind of speaks for itself."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00495",
+          "name": "Rosalind Young",
+          "role": "Smoke Shop Owner",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Luis Navarro",
+          "question": "What civic issue in Laurel has been on your mind, and has anyone from the city or council ever reached out to you about it? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "Laurel",
+          "focus": "Civic gap in Laurel — who is accountable, what council has or hasn't done",
+          "src": "output/engine_audit_c114.json patterns[0]; evidence: Neighborhood_Map row(s) 4"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Rosalind Young — Smoke Shop Owner — Laurel resident",
+          "evidence": [
+            {
+              "id": "EV-d156c96361",
+              "src": "output/engine_audit_c114.json patterns[0]; evidence: Neighborhood_Map row(s) 4",
+              "text": "No civic initiative addresses the Laurel signal surfaced this cycle."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "civic gap in Laurel — who is accountable, what council has or hasn't done",
+            "src": "output/engine_audit_c114.json patterns[0]; evidence: Neighborhood_Map row(s) 4",
+            "id": "F-a87a3435eede"
+          },
+          {
+            "t": "FACT",
+            "text": "No civic initiative addresses the Laurel signal surfaced this cycle.",
+            "src": "output/engine_audit_c114.json patterns[0]; evidence: Neighborhood_Map row(s) 4",
+            "id": "F-6b5358102755"
+          },
+          {
+            "t": "FACT",
+            "text": "Rosalind Young — Smoke Shop Owner — Laurel resident",
+            "src": "Simulation_Ledger profile for POP-00495",
+            "id": "F-a51487df4df0"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-11-03T19:15:16.434Z"
+}

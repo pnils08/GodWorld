@@ -1,0 +1,17 @@
+{
+  "desk": "civic",
+  "cycle": "115",
+  "model": "anthropic/claude-sonnet-5.5",
+  "turns": 2,
+  "maxTurns": 15,
+  "usageInputTokens": 50561,
+  "usageOutputTokens": 3060,
+  "savedFiles": [
+    "output/test-shell/20261110-231422-trevor-shimizu-live/civic_c115_trevor-shimizu_packet-v2_anthropic-claude-sonnet-5-5.md"
+  ],
+  "compareAgainst": "output/desk-output/civic_c115.md",
+  "durationMs": 140756,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-11-11T05:16:47.445Z"
+}

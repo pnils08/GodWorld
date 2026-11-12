@@ -1,0 +1,66 @@
+{
+  "draft": "output/cron-compare/sports_c112_p-slayer_packet-v2_x-ai-grok-4-3.md",
+  "cycle": "112",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "1de6654c095f88fe03fde785a8a312e62728abd02dbca0bf74e1f1275f72f8bf",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes match exact packet provenance and sports columnist texture is fully authorized under canon rules.",
+  "review": {
+    "profileId": "p-slayer-fan-heat-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "p-slayer-fan-heat-v1",
+    "packageVersion": "PSLAYER-LEP2-1",
+    "manifestId": "AM-2a0ac8a7b434",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Benji Dillon",
+      "Jire Hilt",
+      "Lila Patty",
+      "Vinnie Keane"
+    ],
+    "unverified": [
+      "Blue Lattern Bar"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0105,
+  "durationMs": 6815,
+  "parseError": false,
+  "ranAt": "2026-10-21T23:18:43.090Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 400",
+    "words": 584,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "1de6654c095f88fe03fde785a8a312e62728abd02dbca0bf74e1f1275f72f8bf",
+    "costUsd": 0.0011
+  }
+}

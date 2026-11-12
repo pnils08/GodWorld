@@ -1,0 +1,27 @@
+{
+  "status": "arc-seed",
+  "cycle": "114",
+  "desk": "sports",
+  "persona": "talia-finch",
+  "hood": "KONO",
+  "quotes": [
+    {
+      "pop": "POP-01023",
+      "name": "Adash Stanley",
+      "quote": "The mood among fans is electric. I've felt the excitement building around the Oaks, it's like the whole city is waking up with the team. There's a buzz in the air, and I think people are really looking forward to seeing what they can do this season."
+    },
+    {
+      "pop": "POP-00273",
+      "name": "Trenton Nawan",
+      "quote": "I'm still feeling pretty good about the Oaks. That 4-0 start has really got me hopeful. I checked the scores twice a day all week and was happy every time they won. Maybe they're finally getting their act together."
+    },
+    {
+      "pop": "POP-01224",
+      "name": "Trevor Henderson",
+      "quote": "I've seen the energy around the Oaks lately, and it's electric. The crowd was locked-in during the NBA Cup opener against OKC, and you could feel the excitement. As a player, it's motivating to see the fans so engaged. We're on a two-game win streak, and the vibe is great."
+    }
+  ],
+  "claim": "The mood among fans is electric. I've felt the excitement building around the Oaks, it's like the whole city is waking up with the team. There's a buzz in the air, and I think people are really looking forward to seeing what they can do this season.",
+  "src": "citizenVoice PRESS c114",
+  "ranAt": "2026-11-05T19:17:00.407Z"
+}

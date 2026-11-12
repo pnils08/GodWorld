@@ -1,0 +1,465 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00164",
+    "name": "Celeste Tran",
+    "role": "desk reporter",
+    "desk": "wire"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Jade Orion gained 1 mention this cycle (18 total); West Oakland moves the most — what Oakland is doing together this week",
+    "approach": "Social-trends approach: this slice is what the city is doing together — the names climbing the culture record, where people are moving, what the city's hooks say is shifting. Fast, reactive, grounded: a trend claim needs a window and a number from this slice. The names and moves are real; the group chat, the binge-night, the collective mood swing are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "trends",
+      "hood": "Lake Merritt",
+      "facts": [
+        "Jade Orion (musician), Arts — gained 1 mention this cycle (18 total), viral, fame 104",
+        "Tara Ellison (journalist), Media — gained 1 mention this cycle (12 total), surging, fame 68",
+        "Vinnie Keane (A's player), Sports — gained 1 mention this cycle (5 total), surging, fame 31",
+        "Movement vs C111: West Oakland +18 people, Jack London +12 people, Fruitvale +7 people, Adams Point +7 people, Grand Lake +7 people"
+      ],
+      "priorCycle": "PRIOR_CYCLE_ON_DISK",
+      "note": null,
+      "engineHooks": [
+        "Household in Lake Merritt spending 53% of income on housing (observational analysis)",
+        "Downtown boom sustained — momentum 10/10, the block everyone wants onto (observational analysis)",
+        "Fruitvale boom sustained — momentum 10/10, the block everyone wants onto (observational analysis)",
+        "Jack London boom sustained — momentum 10/10, the block everyone wants onto (observational analysis)"
+      ],
+      "roomIsYours": "the group chat, the third rewatch, who suddenly has an opinion about something nobody mentioned last month, what the city collectively decided to care about",
+      "pageVoices": [
+        "the A's — steady; most of the city over the last two months, still talking this week. Loudest: Vinnie Keane (Grand Lake), on their own page at C112 (not an interview — colour only, never a quote): “I'm still getting used to not being as active with the A's, but it's nice to see people coming together like that.”",
+        "the clinic — rising; dozens of citizens over the last two months, still talking this week. Loudest: Yu Zen (Rockridge), on their own page at C112 (not an interview — colour only, never a quote): “When I was in that hospital bed, I kept thinking about the numbers I deal with every day as an insurance broker — the claims",
+        "transit — steady; dozens of citizens over the last two months, still talking this week. Loudest: Melton Neilon (Temescal), on their own page at C109 (not an interview — colour only, never a quote): “I’ve heard folks at the farmers market talking about the Fruitvale Transit Hub delays, but honestly, I’m not sure who’s s",
+        "faith — fading; a dozen or so citizens over the last two months, still talking this week. Loudest: Eunice Marston (Downtown), on their own page at C112 (not an interview — colour only, never a quote): “As a faith leader, I believe our congregation's role in the community during times of crisis is to offer support and b",
+        "the Oaks — new this week; dozens of citizens over the last two months, still talking this week. Loudest: Trenton Nawan (Jack London), on their own page at C112 (not an interview — colour only, never a quote): “To be honest, I'm still a bit worried about the Oaks.”"
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-trends",
+    "hood": "Lake Merritt",
+    "src": "output/beats/Cultural_Ledger.jsonl @C112",
+    "plan": {
+      "focus": "The movement of people into West Oakland and other neighborhoods, and the rising fame of cultural figures like Jade Orion, Tara Ellison, and Vinnie Keane.",
+      "closeQuestion": "How do the trends in Oakland's cultural scene and neighborhood demographics reflect the city's overall direction and community spirit?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00540",
+        "name": "Jade Orion",
+        "profile": "Jade Orion — Musician — Lake Merritt",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00546",
+        "name": "Tara Ellison",
+        "profile": "Tara Ellison — Journalist — Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00001",
+        "name": "Vinnie Keane",
+        "profile": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00194",
+        "name": "Yu Zen",
+        "profile": "Yu Zen — Commercial Insurance Broker — Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00540-415649fdb3",
+        "pop": "POP-00540",
+        "name": "Jade Orion",
+        "quote": "I'm not sure what you mean by 'rising fame.' I've been doing my music here in Lake Merritt for a while now, and it's nice to see people appreciating it. I haven't really noticed anything out of the ordinary happening around here because of it, though. The neighborhood feels the same to me - people are still out for their evening jogs and walks around the lake, and the volunteers from the Cathedral of the Living Word are still cleaning up the streets. I've just been focusing on my craft and enjoying the community.",
+        "factIds": [
+          "F-82f725f37ad8",
+          "F-505fb99a62ae"
+        ],
+        "src": "packet.W2[POP-00540]"
+      },
+      {
+        "id": "Q-POP-00546-f7c2f150db",
+        "pop": "POP-00546",
+        "name": "Tara Ellison",
+        "quote": "To be honest, I'm not sure my work is reflecting or influencing any trends in Oakland. I've just been doing my job as a journalist, covering local news and events. I did notice that a manager at Bay Tribune asked me to redo some work recently, which was a bit frustrating. I've also seen a lot of activity in Rockridge, like the film crew near the waterfront and people moving around the neighborhood. I'm not sure if that's related to any larger trends, though.",
+        "factIds": [
+          "F-153faa10f220",
+          "F-2b5f06ca9054"
+        ],
+        "src": "packet.W2[POP-00546]"
+      },
+      {
+        "id": "Q-POP-00001-f2872183ed",
+        "pop": "POP-00001",
+        "name": "Vinnie Keane",
+        "quote": "I've seen a lot of love for the A's around here, and it's great to see the community rallying around the team. I was at a community health fair at Or Hashalom Renewal Community recently, and it felt like the whole neighborhood was coming together. People were talking about the A's, and it was clear that the team is still a big part of our identity. I'm proud to be a part of that, even if it's just as a legend now. The energy around the team is still electric, and it's something that brings us all together.",
+        "factIds": [
+          "F-2b3e2e3d075f",
+          "F-167b13f87df5"
+        ],
+        "src": "packet.W2[POP-00001]"
+      },
+      {
+        "id": "Q-POP-00194-880dff976c",
+        "pop": "POP-00194",
+        "name": "Yu Zen",
+        "quote": "I've seen more people moving into West Oakland and other neighborhoods around here. It's changing the vibe. With folks like Jade Orion making waves, it's like the whole city's buzzing. I mean, I've been out for morning walks and seen new faces, heard different music drifting from apartments. It's all pretty exciting, to be honest. My family loves it; the kids are always talking about the latest artists and what's trending.",
+        "factIds": [
+          "F-6c5b8442e00f",
+          "F-505fb99a62ae",
+          "F-5228544f2479"
+        ],
+        "src": "packet.W2[POP-00194]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Celeste Tran",
+        "text": "The sense of community is palpable in West Oakland, where new faces are appearing alongside long-time residents.",
+        "usable": false
+      },
+      {
+        "from": "Celeste Tran",
+        "text": "The West Side Cafe is filling up with regulars, indicating a growing sense of neighborhood identity.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C112",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-7cd6ffd2aeb3"
+    },
+    {
+      "t": "FACT",
+      "text": "Jade Orion gained 1 mention this cycle (18 total); West Oakland moves the most",
+      "src": "output/beats/Cultural_Ledger.jsonl @C112",
+      "id": "F-6c5b8442e00f"
+    },
+    {
+      "t": "FACT",
+      "text": "Jade Orion — gained 1 mention this cycle (18 total), viral. The trend is the story; the mood is yours.",
+      "src": "output/beats/Cultural_Ledger.jsonl @C112",
+      "id": "F-82f725f37ad8"
+    },
+    {
+      "t": "FACT",
+      "text": "Jade Orion (musician), Arts — gained 1 mention this cycle (18 total), viral, fame 104",
+      "src": "output/beats/Cultural_Ledger.jsonl @C112 vs output/beats/prev/Cultural_Ledger.jsonl @C111",
+      "id": "F-505fb99a62ae"
+    },
+    {
+      "t": "FACT",
+      "text": "Tara Ellison (journalist), Media — gained 1 mention this cycle (12 total), surging, fame 68",
+      "src": "output/beats/Cultural_Ledger.jsonl @C112 vs output/beats/prev/Cultural_Ledger.jsonl @C111",
+      "id": "F-153faa10f220"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane (A's player), Sports — gained 1 mention this cycle (5 total), surging, fame 31",
+      "src": "output/beats/Cultural_Ledger.jsonl @C112 vs output/beats/prev/Cultural_Ledger.jsonl @C111",
+      "id": "F-167b13f87df5"
+    },
+    {
+      "t": "FACT",
+      "text": "Movement vs C111: West Oakland +18 people, Jack London +12 people, Fruitvale +7 people, Adams Point +7 people, Grand Lake +7 people",
+      "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C112",
+      "id": "F-5228544f2479"
+    },
+    {
+      "t": "FACT",
+      "text": "Tara Ellison — Journalist — Rockridge",
+      "src": "Simulation_Ledger profile for POP-00546",
+      "id": "F-2b5f06ca9054"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+      "src": "Simulation_Ledger profile for POP-00001",
+      "id": "F-2b3e2e3d075f"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "celeste-social-trends-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Turn the culture record's most-talked-about names, new arrivals, and neighborhood movement into a fast, reactive trend read — the count is Celeste's, the mood underneath it is hers to name.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "fast, reactive, semi-chaotic but grounded trend analyst",
+      "targetWords": "400-700",
+      "opening": "a Packet-named figure's media-mention count, a new arrival on the culture record, or a neighborhood movement delta",
+      "closing": "the implication, not the proof — what the pattern says about the city's mood, stated once and left there"
+    },
+    "authorizedTexture": [
+      "a declarative thesis about what the counted pattern means for the city's collective mood, grounded in the supplied numbers",
+      "unnamed color about the conversation itself — the group chat, the rewatch, who suddenly has an opinion — that adds no new named fact",
+      "connecting a Packet-supplied mention spike or movement delta to other Packet-supplied civic conditions already in the packet",
+      "treating the aggregate as a single intentional act ('Oakland decided') without claiming a specific poll, survey, or interview"
+    ],
+    "textureConditions": [
+      "every named figure, trend tag, media-mention count, and neighborhood movement number must come from the packet",
+      "no named show, movie, or streaming title unless the packet itself supplies one — the evening-media slate is not wired to this slice; unnamed viewing/mood color is fine, a specific invented title is not",
+      "a flat week (no mentions, no movement) is written as a real flat week, not papered over with an invented spike",
+      "the thesis follows the data window, never precedes it"
+    ],
+    "canonBlockers": [
+      "a named figure, show, movie, streaming title, venue, or neighborhood event not found in the supplied packet",
+      "an invented survey, poll, interview, direct quote, or social-media reaction",
+      "raw engine scores, labels, or decimals printed as public-facing evidence",
+      "a citywide mood or trend claim with no supplied count or movement delta behind it",
+      "a generic culture-desk roundup that abandons the assigned data window"
+    ]
+  },
+  "manifest": {
+    "id": "AM-08756b01136f",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-7cd6ffd2aeb3",
+        "t": "FACT",
+        "text": "Current cycle: C112",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-6c5b8442e00f",
+        "t": "FACT",
+        "text": "Jade Orion gained 1 mention this cycle (18 total); West Oakland moves the most",
+        "src": "output/beats/Cultural_Ledger.jsonl @C112"
+      },
+      {
+        "id": "F-82f725f37ad8",
+        "t": "FACT",
+        "text": "Jade Orion — gained 1 mention this cycle (18 total), viral. The trend is the story; the mood is yours.",
+        "src": "output/beats/Cultural_Ledger.jsonl @C112"
+      },
+      {
+        "id": "F-505fb99a62ae",
+        "t": "FACT",
+        "text": "Jade Orion (musician), Arts — gained 1 mention this cycle (18 total), viral, fame 104",
+        "src": "output/beats/Cultural_Ledger.jsonl @C112 vs output/beats/prev/Cultural_Ledger.jsonl @C111"
+      },
+      {
+        "id": "F-153faa10f220",
+        "t": "FACT",
+        "text": "Tara Ellison (journalist), Media — gained 1 mention this cycle (12 total), surging, fame 68",
+        "src": "output/beats/Cultural_Ledger.jsonl @C112 vs output/beats/prev/Cultural_Ledger.jsonl @C111"
+      },
+      {
+        "id": "F-167b13f87df5",
+        "t": "FACT",
+        "text": "Vinnie Keane (A's player), Sports — gained 1 mention this cycle (5 total), surging, fame 31",
+        "src": "output/beats/Cultural_Ledger.jsonl @C112 vs output/beats/prev/Cultural_Ledger.jsonl @C111"
+      },
+      {
+        "id": "F-5228544f2479",
+        "t": "FACT",
+        "text": "Movement vs C111: West Oakland +18 people, Jack London +12 people, Fruitvale +7 people, Adams Point +7 people, Grand Lake +7 people",
+        "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C112"
+      },
+      {
+        "id": "F-2b5f06ca9054",
+        "t": "FACT",
+        "text": "Tara Ellison — Journalist — Rockridge",
+        "src": "Simulation_Ledger profile for POP-00546"
+      },
+      {
+        "id": "F-2b3e2e3d075f",
+        "t": "FACT",
+        "text": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+        "src": "Simulation_Ledger profile for POP-00001"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00540-415649fdb3",
+        "speakerId": "POP-00540",
+        "speakerName": "Jade Orion",
+        "text": "I'm not sure what you mean by 'rising fame.' I've been doing my music here in Lake Merritt for a while now, and it's nice to see people appreciating it. I haven't really noticed anything out of the ordinary happening around here because of it, though. The neighborhood feels the same to me - people are still out for their evening jogs and walks around the lake, and the volunteers from the Cathedral of the Living Word are still cleaning up the streets. I've just been focusing on my craft and enjoying the community.",
+        "factIds": [
+          "F-82f725f37ad8",
+          "F-505fb99a62ae"
+        ],
+        "src": "packet.W2[POP-00540]"
+      },
+      {
+        "id": "Q-POP-00546-f7c2f150db",
+        "speakerId": "POP-00546",
+        "speakerName": "Tara Ellison",
+        "text": "To be honest, I'm not sure my work is reflecting or influencing any trends in Oakland. I've just been doing my job as a journalist, covering local news and events. I did notice that a manager at Bay Tribune asked me to redo some work recently, which was a bit frustrating. I've also seen a lot of activity in Rockridge, like the film crew near the waterfront and people moving around the neighborhood. I'm not sure if that's related to any larger trends, though.",
+        "factIds": [
+          "F-153faa10f220",
+          "F-2b5f06ca9054"
+        ],
+        "src": "packet.W2[POP-00546]"
+      },
+      {
+        "id": "Q-POP-00001-f2872183ed",
+        "speakerId": "POP-00001",
+        "speakerName": "Vinnie Keane",
+        "text": "I've seen a lot of love for the A's around here, and it's great to see the community rallying around the team. I was at a community health fair at Or Hashalom Renewal Community recently, and it felt like the whole neighborhood was coming together. People were talking about the A's, and it was clear that the team is still a big part of our identity. I'm proud to be a part of that, even if it's just as a legend now. The energy around the team is still electric, and it's something that brings us all together.",
+        "factIds": [
+          "F-2b3e2e3d075f",
+          "F-167b13f87df5"
+        ],
+        "src": "packet.W2[POP-00001]"
+      },
+      {
+        "id": "Q-POP-00194-880dff976c",
+        "speakerId": "POP-00194",
+        "speakerName": "Yu Zen",
+        "text": "I've seen more people moving into West Oakland and other neighborhoods around here. It's changing the vibe. With folks like Jade Orion making waves, it's like the whole city's buzzing. I mean, I've been out for morning walks and seen new faces, heard different music drifting from apartments. It's all pretty exciting, to be honest. My family loves it; the kids are always talking about the latest artists and what's trending.",
+        "factIds": [
+          "F-6c5b8442e00f",
+          "F-505fb99a62ae",
+          "F-5228544f2479"
+        ],
+        "src": "packet.W2[POP-00194]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00540",
+        "name": "Jade Orion",
+        "profile": "Jade Orion — Musician — Lake Merritt",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00546",
+        "name": "Tara Ellison",
+        "profile": "Tara Ellison — Journalist — Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00001",
+        "name": "Vinnie Keane",
+        "profile": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00194",
+        "name": "Yu Zen",
+        "profile": "Yu Zen — Commercial Insurance Broker — Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Celeste Tran",
+        "text": "The sense of community is palpable in West Oakland, where new faces are appearing alongside long-time residents.",
+        "publishable": false
+      },
+      {
+        "from": "Celeste Tran",
+        "text": "The West Side Cafe is filling up with regulars, indicating a growing sense of neighborhood identity.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "a declarative thesis about what the counted pattern means for the city's collective mood, grounded in the supplied numbers",
+      "unnamed color about the conversation itself — the group chat, the rewatch, who suddenly has an opinion — that adds no new named fact",
+      "connecting a Packet-supplied mention spike or movement delta to other Packet-supplied civic conditions already in the packet",
+      "treating the aggregate as a single intentional act ('Oakland decided') without claiming a specific poll, survey, or interview"
+    ],
+    "textureConditions": [
+      "every named figure, trend tag, media-mention count, and neighborhood movement number must come from the packet",
+      "no named show, movie, or streaming title unless the packet itself supplies one — the evening-media slate is not wired to this slice; unnamed viewing/mood color is fine, a specific invented title is not",
+      "a flat week (no mentions, no movement) is written as a real flat week, not papered over with an invented spike",
+      "the thesis follows the data window, never precedes it"
+    ],
+    "forbiddenClaimClasses": [
+      "a named figure, show, movie, streaming title, venue, or neighborhood event not found in the supplied packet",
+      "an invented survey, poll, interview, direct quote, or social-media reaction",
+      "raw engine scores, labels, or decimals printed as public-facing evidence",
+      "a citywide mood or trend claim with no supplied count or movement delta behind it",
+      "a generic culture-desk roundup that abandons the assigned data window"
+    ]
+  }
+}

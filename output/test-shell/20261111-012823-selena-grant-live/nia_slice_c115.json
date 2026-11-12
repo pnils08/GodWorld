@@ -1,0 +1,127 @@
+{
+  "v": "NIA-SLICE/1",
+  "cycle": 115,
+  "empty": false,
+  "events": [
+    {
+      "v": "UNDOCKED-FEED/1",
+      "Cycle": 115,
+      "EventType": "undocked-episode",
+      "POPID": "POP-01195",
+      "Holder": "Elijah Brown",
+      "EpisodeId": "undocked-pop01195-Y3C11",
+      "CreditsDelta": 0,
+      "PointsDelta": 28.13,
+      "Systems": [
+        "sol",
+        "alpha_centauri",
+        "tau_ceti",
+        "timberline",
+        "arcturus",
+        "ross_154",
+        "maplevale",
+        "miaplacidus",
+        "cervantes",
+        "ridgecrest",
+        "hatysa",
+        "nembus",
+        "kitalpha",
+        "lacaille_8760",
+        "kepler_442",
+        "theemin",
+        "hollowcrest"
+      ],
+      "CombatEvents": 0,
+      "MishapCount": 0,
+      "Magnitude": 1,
+      "Flags": [
+        "credits_delta_windowed"
+      ],
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop01195-2026-11-10T02-30-22.json"
+    }
+  ],
+  "laneEntries": [
+    {
+      "ref": "undocked:undocked-pop01195-Y3C11",
+      "label": "UNDOCKED: Elijah Brown, Monday night",
+      "kind": "undocked",
+      "popids": [
+        "POP-01195"
+      ],
+      "nightSource": "record",
+      "handle": {
+        "angle": "UNDOCKED episode: Elijah Brown, Monday night. Standings: Luis Taz leads the board — rank #1, 45.19 achievement points, 0 credits, 2 cycle(s) led, current streak 2. In the chair: Elijah Brown — Electrician.",
+        "citizens": [
+          "Elijah Brown — Electrician, UNDOCKED cast pilot"
+        ],
+        "facts": [
+          "Elijah Brown's Monday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Timberline, Arcturus, Ross 154, Maplevale, Miaplacidus, Cervantes, Ridgecrest, Hatysa, Nembus, Kitalpha, Lacaille 8760, Kepler 442, Theemin and Hollowcrest; came out even on credits; flew until the show's time ran out.",
+          "Elijah Brown — Electrician (ledger)"
+        ]
+      },
+      "who": {
+        "name": "Elijah Brown",
+        "roleType": "Electrician",
+        "employerBizId": "BIZ-00056",
+        "tier": "4",
+        "career": []
+      },
+      "undockedEvent": {
+        "v": "UNDOCKED-FEED/1",
+        "Cycle": 115,
+        "EventType": "undocked-episode",
+        "POPID": "POP-01195",
+        "Holder": "Elijah Brown",
+        "EpisodeId": "undocked-pop01195-Y3C11",
+        "CreditsDelta": 0,
+        "PointsDelta": 28.13,
+        "Systems": [
+          "sol",
+          "alpha_centauri",
+          "tau_ceti",
+          "timberline",
+          "arcturus",
+          "ross_154",
+          "maplevale",
+          "miaplacidus",
+          "cervantes",
+          "ridgecrest",
+          "hatysa",
+          "nembus",
+          "kitalpha",
+          "lacaille_8760",
+          "kepler_442",
+          "theemin",
+          "hollowcrest"
+        ],
+        "CombatEvents": 0,
+        "MishapCount": 0,
+        "Magnitude": 1,
+        "Flags": [
+          "credits_delta_windowed"
+        ],
+        "StagedPath": "output/spacemolt-show/staged/undocked-pop01195-2026-11-10T02-30-22.json"
+      },
+      "hood": "Rockridge"
+    }
+  ],
+  "standings": {
+    "asOf": "2026-11-10T02:55:43.138Z",
+    "leader": {
+      "Rank": 1,
+      "POPID": "POP-00298",
+      "Holder": "Luis Taz",
+      "Episodes": 3,
+      "PointsTotal": 45.19,
+      "CreditsTotal": 0,
+      "CombatTotal": 12,
+      "MishapTotal": 0,
+      "BestMagnitude": 2,
+      "LastAiredCycle": 115,
+      "CyclesLed": 2,
+      "CurrentStreak": 2,
+      "PointsPending": 0
+    }
+  },
+  "generatedAt": "2026-11-10T12:15:07.224Z"
+}

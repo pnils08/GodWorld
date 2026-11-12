@@ -1,0 +1,352 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00591",
+    "name": "Selena Grant",
+    "role": "desk reporter",
+    "desk": "sports"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Oaks — game-result C115 · 8-1 · W4 — the second club's board read",
+    "approach": "Oaks beat-analyst approach: this slice is the Oaks feed raw — the record, the streak, the stats lines, the trigger behind each event. Third-person board read on the second club, not fan heat. Numbers come from the feed only — never invent a stat. The named players are real; the press row, the cage, the bus are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "oaks",
+      "hood": "San Antonio",
+      "facts": [
+        "Oaks — game-result (early-season), C115: Down two after three in Philadelphia, the Oaks drop 40 in the fourth and Hayward scores a career high. Oaks 120 - 76ers 106",
+        "Record 8-1 · streak W4",
+        "Stats (feed): AJ Dybantsa/25PTS/6REB/10-16FG/3-3 3PT, Adash Stanley/23PTS/7ASST/8-13FG/5-7 3PT, Harry Hayward/19PTS/7REB/2BLK/9-15FG in 22 minutes, Wendell Carter Jr/12PTS/15REB/3OREB, T. Jerome/6PTS/9ASST, J. Champagnie/9PTS/3-5 3PT, Austin Reaves/12PTS/4-14FG",
+        "Trigger: big-win",
+        "Franchise stability: growing",
+        "Oaks — game-result (early-season), C115: The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+        "Record 7-1 · streak W3",
+        "Stats (feed): Adash Stanley/24PTS/5REB/8ASST/0TO/9-18FG/6-12 3PT, AJ Dybantsa/23PTS/5REB/4ASST/11-13FG, Dillon Brooks/23PTS/4REB/3ASST/10-14FG/3-5 3PT, Austin Reaves/15PTS/7ASST/5-10 3PT, Wendell Carter Jr/12PTS/5REB/6-10FG, T. Jerome/9PTS/7ASST, Harry Hayward/5PTS/2STL/1BLK in 16 minutes",
+        "Oaks — player-feature (early-season), C115: Second-round rookie Harry Hayward scores a career high and makes his case for a bigger role",
+        "Stats (feed): Harry Hayward PHI/19PTS/7REB/2BLK/9-15FG in 22 minutes, Harry Hayward ORL/5PTS/2STL/1BLK in 16 minutes, Harry Hayward OKC/4PTS/1STL/2-3FG in 13 minutes, Harry Hayward TOR/8PTS/5REB/3ASST in 23 minutes, Harry Hayward IND/8PTS/3-4FG in 13 minutes, Harry Hayward NYK/10PTS/10REB, Harry Hayward DET/12PTS, Harry Hayward/$4.5M"
+      ],
+      "priorCycle": null,
+      "note": null,
+      "engineHooks": [],
+      "roomIsYours": "the near-empty press row, the bullpen chatter, what the manager says when the record is ugly, the drumbeat of a losing streak",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-oaks-beat",
+    "hood": "San Antonio",
+    "src": "output/beats/Oakland_Sports_Feed.jsonl @C115",
+    "plan": {
+      "focus": "Harry Hayward's growing role"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [],
+    "sources": [],
+    "excludedLeads": [
+      {
+        "from": "Selena Grant",
+        "text": "If Hayward continues to perform well, he may become a regular starter, potentially changing the team's dynamics.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C115",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-bc84fc0b7718"
+    },
+    {
+      "t": "FACT",
+      "text": "Oaks — game-result C115 · 8-1 · W4",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl @C115",
+      "id": "F-f6d7083127b6"
+    },
+    {
+      "t": "FACT",
+      "text": "Down two after three in Philadelphia, the Oaks drop 40 in the fourth and Hayward scores a career high. Oaks 120 - 76ers 106",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl @C115",
+      "id": "F-5dad288325f0"
+    },
+    {
+      "t": "FACT",
+      "text": "Oaks — game-result (early-season), C115: Down two after three in Philadelphia, the Oaks drop 40 in the fourth and Hayward scores a career high. Oaks 120 - 76ers 106",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C115",
+      "id": "F-3a5f97110a9a"
+    },
+    {
+      "t": "FACT",
+      "text": "Record 8-1 · streak W4",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C115",
+      "id": "F-bfb5c87ae9f6"
+    },
+    {
+      "t": "FACT",
+      "text": "Stats (feed): AJ Dybantsa/25PTS/6REB/10-16FG/3-3 3PT, Adash Stanley/23PTS/7ASST/8-13FG/5-7 3PT, Harry Hayward/19PTS/7REB/2BLK/9-15FG in 22 minutes, Wendell Carter Jr/12PTS/15REB/3OREB, T. Jerome/6PTS/9ASST, J. Champagnie/9PTS/3-5 3PT, Austin Reaves/12PTS/4-14FG",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C115",
+      "id": "F-a8d20ea64c9e"
+    },
+    {
+      "t": "FACT",
+      "text": "Trigger: big-win",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C115",
+      "id": "F-4b2d60da7720"
+    },
+    {
+      "t": "FACT",
+      "text": "Franchise stability: growing",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C115",
+      "id": "F-375347469173"
+    },
+    {
+      "t": "FACT",
+      "text": "Oaks — game-result (early-season), C115: The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C115",
+      "id": "F-834748048c35"
+    },
+    {
+      "t": "FACT",
+      "text": "Record 7-1 · streak W3",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C115",
+      "id": "F-d858eaf16a9c"
+    },
+    {
+      "t": "FACT",
+      "text": "Stats (feed): Adash Stanley/24PTS/5REB/8ASST/0TO/9-18FG/6-12 3PT, AJ Dybantsa/23PTS/5REB/4ASST/11-13FG, Dillon Brooks/23PTS/4REB/3ASST/10-14FG/3-5 3PT, Austin Reaves/15PTS/7ASST/5-10 3PT, Wendell Carter Jr/12PTS/5REB/6-10FG, T. Jerome/9PTS/7ASST, Harry Hayward/5PTS/2STL/1BLK in 16 minutes",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C115",
+      "id": "F-585cdd97b117"
+    },
+    {
+      "t": "FACT",
+      "text": "Oaks — player-feature (early-season), C115: Second-round rookie Harry Hayward scores a career high and makes his case for a bigger role",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C115",
+      "id": "F-f50a3e6cb962"
+    },
+    {
+      "t": "FACT",
+      "text": "Stats (feed): Harry Hayward PHI/19PTS/7REB/2BLK/9-15FG in 22 minutes, Harry Hayward ORL/5PTS/2STL/1BLK in 16 minutes, Harry Hayward OKC/4PTS/1STL/2-3FG in 13 minutes, Harry Hayward TOR/8PTS/5REB/3ASST in 23 minutes, Harry Hayward IND/8PTS/3-4FG in 13 minutes, Harry Hayward NYK/10PTS/10REB, Harry Hayward DET/12PTS, Harry Hayward/$4.5M",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C115",
+      "id": "F-530d63b62c83"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C11, Spring, holiday=none",
+      "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+      "id": "F-82d77e9a4a71"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. No named ledger citizen spoke for this piece (manifest.approvedQuotes is empty): put no words in a named citizen's mouth. Unnamed voices are yours. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "selena-grant-oaks-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Turn the Oaks feed rows into an analyst's read of an expansion franchise being built in real time — the rotation, the development, the front office and its silences. Evidence first; belief earned with numbers. NOT fan heat, NOT the street, NOT the A's.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "third-person analyst, clean professional sentences",
+      "targetWords": "400-650",
+      "opening": "a supplied Oaks stat, result, or roster observation — never a scene",
+      "closing": "the decision or number the front office still owes an answer on"
+    },
+    "authorizedTexture": [
+      "press row, the practice facility, or a press conference as the reporter's vantage — no invented named venue",
+      "the expansion frame: measuring a supplied fact against what a first-year franchise is expected to look like",
+      "reading a front-office silence or non-answer as a signal, grounded in a supplied fact",
+      "a sourced-beyond-the-release attribution ('a person with knowledge of the front office's thinking') only when the Packet carries the underlying act"
+    ],
+    "textureConditions": [
+      "every result, name, minute, injury, and quote comes from the Packet's Oaks feed rows (TeamsUsed: Oaks)",
+      "real NBA players and teams are sports-layer canon: name them as the feed does and give them nothing the feed didn't",
+      "Oakland citizens on the feed (Varek, Paulson, Abraham, Shepard, any player the feed made a citizen) get a UsageType",
+      "no piece when the cycle has no Oaks row — never written from A's rows"
+    ],
+    "canonBlockers": [
+      "a real-world venue, business, institution, or organization imported into the city; or an invented person given the authority of an established citizen",
+      "an unsupported roster move, signing, trade, result, record, streak, minute, injury, or front-office act",
+      "an unsupported stat, metric, number, date, duration, or salary",
+      "a fabricated player, coach, owner, or front-office quote",
+      "a personal life, hometown, family, or citizen record given to a real NBA player the feed only names",
+      "the A's as the subject (five other seats own them)",
+      "Chicago, the Bulls, or any prior bureau",
+      "engine or simulation vocabulary; real-world calendar dates (YYYY-MM-DD)"
+    ]
+  },
+  "manifest": {
+    "id": "AM-ce09e99c8d35",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-bc84fc0b7718",
+        "t": "FACT",
+        "text": "Current cycle: C115",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-f6d7083127b6",
+        "t": "FACT",
+        "text": "Oaks — game-result C115 · 8-1 · W4",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C115"
+      },
+      {
+        "id": "F-5dad288325f0",
+        "t": "FACT",
+        "text": "Down two after three in Philadelphia, the Oaks drop 40 in the fourth and Hayward scores a career high. Oaks 120 - 76ers 106",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C115"
+      },
+      {
+        "id": "F-3a5f97110a9a",
+        "t": "FACT",
+        "text": "Oaks — game-result (early-season), C115: Down two after three in Philadelphia, the Oaks drop 40 in the fourth and Hayward scores a career high. Oaks 120 - 76ers 106",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+      },
+      {
+        "id": "F-bfb5c87ae9f6",
+        "t": "FACT",
+        "text": "Record 8-1 · streak W4",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+      },
+      {
+        "id": "F-a8d20ea64c9e",
+        "t": "FACT",
+        "text": "Stats (feed): AJ Dybantsa/25PTS/6REB/10-16FG/3-3 3PT, Adash Stanley/23PTS/7ASST/8-13FG/5-7 3PT, Harry Hayward/19PTS/7REB/2BLK/9-15FG in 22 minutes, Wendell Carter Jr/12PTS/15REB/3OREB, T. Jerome/6PTS/9ASST, J. Champagnie/9PTS/3-5 3PT, Austin Reaves/12PTS/4-14FG",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+      },
+      {
+        "id": "F-4b2d60da7720",
+        "t": "FACT",
+        "text": "Trigger: big-win",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+      },
+      {
+        "id": "F-375347469173",
+        "t": "FACT",
+        "text": "Franchise stability: growing",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+      },
+      {
+        "id": "F-834748048c35",
+        "t": "FACT",
+        "text": "Oaks — game-result (early-season), C115: The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+      },
+      {
+        "id": "F-d858eaf16a9c",
+        "t": "FACT",
+        "text": "Record 7-1 · streak W3",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+      },
+      {
+        "id": "F-585cdd97b117",
+        "t": "FACT",
+        "text": "Stats (feed): Adash Stanley/24PTS/5REB/8ASST/0TO/9-18FG/6-12 3PT, AJ Dybantsa/23PTS/5REB/4ASST/11-13FG, Dillon Brooks/23PTS/4REB/3ASST/10-14FG/3-5 3PT, Austin Reaves/15PTS/7ASST/5-10 3PT, Wendell Carter Jr/12PTS/5REB/6-10FG, T. Jerome/9PTS/7ASST, Harry Hayward/5PTS/2STL/1BLK in 16 minutes",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+      },
+      {
+        "id": "F-f50a3e6cb962",
+        "t": "FACT",
+        "text": "Oaks — player-feature (early-season), C115: Second-round rookie Harry Hayward scores a career high and makes his case for a bigger role",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+      },
+      {
+        "id": "F-530d63b62c83",
+        "t": "FACT",
+        "text": "Stats (feed): Harry Hayward PHI/19PTS/7REB/2BLK/9-15FG in 22 minutes, Harry Hayward ORL/5PTS/2STL/1BLK in 16 minutes, Harry Hayward OKC/4PTS/1STL/2-3FG in 13 minutes, Harry Hayward TOR/8PTS/5REB/3ASST in 23 minutes, Harry Hayward IND/8PTS/3-4FG in 13 minutes, Harry Hayward NYK/10PTS/10REB, Harry Hayward DET/12PTS, Harry Hayward/$4.5M",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+      },
+      {
+        "id": "F-82d77e9a4a71",
+        "t": "FACT",
+        "text": "Calendar: Y3C11, Spring, holiday=none",
+        "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)"
+      }
+    ],
+    "approvedQuotes": [],
+    "approvedSubjects": [],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Selena Grant",
+        "text": "If Hayward continues to perform well, he may become a regular starter, potentially changing the team's dynamics.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "press row, the practice facility, or a press conference as the reporter's vantage — no invented named venue",
+      "the expansion frame: measuring a supplied fact against what a first-year franchise is expected to look like",
+      "reading a front-office silence or non-answer as a signal, grounded in a supplied fact",
+      "a sourced-beyond-the-release attribution ('a person with knowledge of the front office's thinking') only when the Packet carries the underlying act"
+    ],
+    "textureConditions": [
+      "every result, name, minute, injury, and quote comes from the Packet's Oaks feed rows (TeamsUsed: Oaks)",
+      "real NBA players and teams are sports-layer canon: name them as the feed does and give them nothing the feed didn't",
+      "Oakland citizens on the feed (Varek, Paulson, Abraham, Shepard, any player the feed made a citizen) get a UsageType",
+      "no piece when the cycle has no Oaks row — never written from A's rows"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

@@ -1,0 +1,344 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00591",
+    "name": "Selena Grant",
+    "role": "desk reporter",
+    "desk": "sports"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Oaks — game-result C114 · 4-1 · L1 — the second club's board read",
+    "approach": "Oaks beat-analyst approach: this slice is the Oaks feed raw — the record, the streak, the stats lines, the trigger behind each event. Third-person board read on the second club, not fan heat. Numbers come from the feed only — never invent a stat. The named players are real; the press row, the cage, the bus are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "oaks",
+      "hood": "San Antonio",
+      "facts": [
+        "Oaks — game-result (early-season), C114: The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+        "Record 4-1 · streak L1",
+        "Stats (feed): Adash Stanley/19PTS/5REB/4ASST/5-11 3PT, Austin Reaves/19PTS/6REB/7ASST/0TO, AJ Dybantsa/15PTS/5REB, Wendell Carter Jr/10PTS/7REB/5-6FG, T. Jerome/10PTS/5ASST",
+        "Franchise stability: growing",
+        "Oaks — player-feature (early-season), C114: Second-round rookie Harry Hayward is shaping up as a solid rotation piece",
+        "Stats (feed): Harry Hayward/8PTS/4REB/3-4FG/2-2 3PT in 13 minutes",
+        "Oaks — game-result (early-season), C114: The Oaks bounce back with a 60-point rout in Toronto. Oaks 135 - Raptors 75",
+        "Record 5-1 · streak W1",
+        "Stats (feed): Austin Reaves/20PTS/8-16FG/4-6 3PT, T. Jerome/19PTS/7REB/7ASST, Adash Stanley/16PTS/7REB/6ASST/4-4 3PT, Wendell Carter Jr/14PTS/15REB/5OREB, AJ Dybantsa/12PTS/5-8FG"
+      ],
+      "priorCycle": null,
+      "note": null,
+      "engineHooks": [],
+      "roomIsYours": "the near-empty press row, the bullpen chatter, what the manager says when the record is ugly, the drumbeat of a losing streak",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-oaks-beat",
+    "hood": "San Antonio",
+    "src": "output/beats/Oakland_Sports_Feed.jsonl @C114",
+    "plan": {
+      "focus": "Oaks' inconsistent performance",
+      "closeQuestion": "What factors contributed to the Oaks' inconsistent performance in their back-to-back games?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [],
+    "sources": [],
+    "excludedLeads": [
+      {
+        "from": "Selena Grant",
+        "text": "The Oaks' coaching staff may be making adjustments to address the team's inconsistency.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C114",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-4261fa115617"
+    },
+    {
+      "t": "FACT",
+      "text": "Oaks — game-result C114 · 4-1 · L1",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl @C114",
+      "id": "F-81dfe69160dd"
+    },
+    {
+      "t": "FACT",
+      "text": "The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl @C114",
+      "id": "F-0c9c2b293e61"
+    },
+    {
+      "t": "FACT",
+      "text": "Oaks — game-result (early-season), C114: The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+      "id": "F-1199dd5a6a90"
+    },
+    {
+      "t": "FACT",
+      "text": "Record 4-1 · streak L1",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+      "id": "F-6c7e1644925a"
+    },
+    {
+      "t": "FACT",
+      "text": "Stats (feed): Adash Stanley/19PTS/5REB/4ASST/5-11 3PT, Austin Reaves/19PTS/6REB/7ASST/0TO, AJ Dybantsa/15PTS/5REB, Wendell Carter Jr/10PTS/7REB/5-6FG, T. Jerome/10PTS/5ASST",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+      "id": "F-2378b303bbee"
+    },
+    {
+      "t": "FACT",
+      "text": "Franchise stability: growing",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+      "id": "F-91f556ac477a"
+    },
+    {
+      "t": "FACT",
+      "text": "Oaks — player-feature (early-season), C114: Second-round rookie Harry Hayward is shaping up as a solid rotation piece",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+      "id": "F-8d8756e17396"
+    },
+    {
+      "t": "FACT",
+      "text": "Stats (feed): Harry Hayward/8PTS/4REB/3-4FG/2-2 3PT in 13 minutes",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+      "id": "F-7916710a5bb8"
+    },
+    {
+      "t": "FACT",
+      "text": "Oaks — game-result (early-season), C114: The Oaks bounce back with a 60-point rout in Toronto. Oaks 135 - Raptors 75",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+      "id": "F-4a561911637a"
+    },
+    {
+      "t": "FACT",
+      "text": "Record 5-1 · streak W1",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+      "id": "F-94beb202ef0c"
+    },
+    {
+      "t": "FACT",
+      "text": "Stats (feed): Austin Reaves/20PTS/8-16FG/4-6 3PT, T. Jerome/19PTS/7REB/7ASST, Adash Stanley/16PTS/7REB/6ASST/4-4 3PT, Wendell Carter Jr/14PTS/15REB/5OREB, AJ Dybantsa/12PTS/5-8FG",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+      "id": "F-7765ea01de30"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C10, Spring, holiday=none",
+      "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+      "id": "F-9b9470803821"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. No named ledger citizen spoke for this piece (manifest.approvedQuotes is empty): put no words in a named citizen's mouth. Unnamed voices are yours. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "selena-grant-oaks-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Turn the Oaks feed rows into an analyst's read of an expansion franchise being built in real time — the rotation, the development, the front office and its silences. Evidence first; belief earned with numbers. NOT fan heat, NOT the street, NOT the A's.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "third-person analyst, clean professional sentences",
+      "targetWords": "400-650",
+      "opening": "a supplied Oaks stat, result, or roster observation — never a scene",
+      "closing": "the decision or number the front office still owes an answer on"
+    },
+    "authorizedTexture": [
+      "press row, the practice facility, or a press conference as the reporter's vantage — no invented named venue",
+      "the expansion frame: measuring a supplied fact against what a first-year franchise is expected to look like",
+      "reading a front-office silence or non-answer as a signal, grounded in a supplied fact",
+      "a sourced-beyond-the-release attribution ('a person with knowledge of the front office's thinking') only when the Packet carries the underlying act"
+    ],
+    "textureConditions": [
+      "every result, name, minute, injury, and quote comes from the Packet's Oaks feed rows (TeamsUsed: Oaks)",
+      "real NBA players and teams are sports-layer canon: name them as the feed does and give them nothing the feed didn't",
+      "Oakland citizens on the feed (Varek, Paulson, Abraham, Shepard, any player the feed made a citizen) get a UsageType",
+      "no piece when the cycle has no Oaks row — never written from A's rows"
+    ],
+    "canonBlockers": [
+      "a real-world venue, business, institution, or organization imported into the city; or an invented person given the authority of an established citizen",
+      "an unsupported roster move, signing, trade, result, record, streak, minute, injury, or front-office act",
+      "an unsupported stat, metric, number, date, duration, or salary",
+      "a fabricated player, coach, owner, or front-office quote",
+      "a personal life, hometown, family, or citizen record given to a real NBA player the feed only names",
+      "the A's as the subject (five other seats own them)",
+      "Chicago, the Bulls, or any prior bureau",
+      "engine or simulation vocabulary; real-world calendar dates (YYYY-MM-DD)"
+    ]
+  },
+  "manifest": {
+    "id": "AM-efa1f639e9db",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-4261fa115617",
+        "t": "FACT",
+        "text": "Current cycle: C114",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-81dfe69160dd",
+        "t": "FACT",
+        "text": "Oaks — game-result C114 · 4-1 · L1",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C114"
+      },
+      {
+        "id": "F-0c9c2b293e61",
+        "t": "FACT",
+        "text": "The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C114"
+      },
+      {
+        "id": "F-1199dd5a6a90",
+        "t": "FACT",
+        "text": "Oaks — game-result (early-season), C114: The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+      },
+      {
+        "id": "F-6c7e1644925a",
+        "t": "FACT",
+        "text": "Record 4-1 · streak L1",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+      },
+      {
+        "id": "F-2378b303bbee",
+        "t": "FACT",
+        "text": "Stats (feed): Adash Stanley/19PTS/5REB/4ASST/5-11 3PT, Austin Reaves/19PTS/6REB/7ASST/0TO, AJ Dybantsa/15PTS/5REB, Wendell Carter Jr/10PTS/7REB/5-6FG, T. Jerome/10PTS/5ASST",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+      },
+      {
+        "id": "F-91f556ac477a",
+        "t": "FACT",
+        "text": "Franchise stability: growing",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+      },
+      {
+        "id": "F-8d8756e17396",
+        "t": "FACT",
+        "text": "Oaks — player-feature (early-season), C114: Second-round rookie Harry Hayward is shaping up as a solid rotation piece",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+      },
+      {
+        "id": "F-7916710a5bb8",
+        "t": "FACT",
+        "text": "Stats (feed): Harry Hayward/8PTS/4REB/3-4FG/2-2 3PT in 13 minutes",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+      },
+      {
+        "id": "F-4a561911637a",
+        "t": "FACT",
+        "text": "Oaks — game-result (early-season), C114: The Oaks bounce back with a 60-point rout in Toronto. Oaks 135 - Raptors 75",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+      },
+      {
+        "id": "F-94beb202ef0c",
+        "t": "FACT",
+        "text": "Record 5-1 · streak W1",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+      },
+      {
+        "id": "F-7765ea01de30",
+        "t": "FACT",
+        "text": "Stats (feed): Austin Reaves/20PTS/8-16FG/4-6 3PT, T. Jerome/19PTS/7REB/7ASST, Adash Stanley/16PTS/7REB/6ASST/4-4 3PT, Wendell Carter Jr/14PTS/15REB/5OREB, AJ Dybantsa/12PTS/5-8FG",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+      },
+      {
+        "id": "F-9b9470803821",
+        "t": "FACT",
+        "text": "Calendar: Y3C10, Spring, holiday=none",
+        "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)"
+      }
+    ],
+    "approvedQuotes": [],
+    "approvedSubjects": [],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Selena Grant",
+        "text": "The Oaks' coaching staff may be making adjustments to address the team's inconsistency.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "press row, the practice facility, or a press conference as the reporter's vantage — no invented named venue",
+      "the expansion frame: measuring a supplied fact against what a first-year franchise is expected to look like",
+      "reading a front-office silence or non-answer as a signal, grounded in a supplied fact",
+      "a sourced-beyond-the-release attribution ('a person with knowledge of the front office's thinking') only when the Packet carries the underlying act"
+    ],
+    "textureConditions": [
+      "every result, name, minute, injury, and quote comes from the Packet's Oaks feed rows (TeamsUsed: Oaks)",
+      "real NBA players and teams are sports-layer canon: name them as the feed does and give them nothing the feed didn't",
+      "Oakland citizens on the feed (Varek, Paulson, Abraham, Shepard, any player the feed made a citizen) get a UsageType",
+      "no piece when the cycle has no Oaks row — never written from A's rows"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

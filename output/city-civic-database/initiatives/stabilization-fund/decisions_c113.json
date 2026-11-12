@@ -1,0 +1,25 @@
+{
+  "initiative": "INIT-001",
+  "initiativeId": "INIT-001",
+  "cycle": 113,
+  "primaryVoice": "Mayor gavel (mayor_gavel-001)",
+  "consolidatedFrom": [
+    "STMT-113-mayor_gavel-001 (Mayor gavel — INIT-001 Month-11 Disbursement Audit Publication)",
+    "STMT-113-stabilization_fund-001 (Webb — Month-twelve disbursement)",
+    "STMT-113-stabilization_fund-003 (Webb — West Oakland stability)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-001",
+    "ImplementationPhase": "disbursement-active",
+    "MilestoneNotes": "C113: Month-11 audit published; Month-12 $400K approved with charter scope preservation directive",
+    "NextScheduledAction": "Month-12 disbursement execution and charter renewal drafting",
+    "NextActionCycle": 114,
+    "LastWorkCycle": 113,
+    "LastWorkSeat": "proj-stabilization-fund"
+  },
+  "_moveFold": {
+    "moveIds": [
+      "MV-112-proj-stabilization-fund-2026-10-21"
+    ]
+  }
+}

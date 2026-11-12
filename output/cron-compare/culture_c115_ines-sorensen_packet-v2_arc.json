@@ -1,0 +1,27 @@
+{
+  "status": "arc-seed",
+  "cycle": "115",
+  "desk": "culture",
+  "persona": "ines-sorensen",
+  "hood": null,
+  "quotes": [
+    {
+      "pop": "POP-00263",
+      "name": "Omar Amici",
+      "quote": "To be honest, the changes in Uptown have me feeling a bit uneasy. The streets are busier than ever, and it seems like every other place is a for-rent sign these days. I've lived here long enough to see the neighborhood transform, but this feels different. It's like the neighborhood is shifting away from the people who've been here for a while."
+    },
+    {
+      "pop": "POP-00141",
+      "name": "Priya Narang",
+      "quote": "The A's winning season really brings Uptown together. When they're doing well, the whole neighborhood feels it. The bars and galleries stay packed, and you can feel the energy."
+    },
+    {
+      "pop": "POP-00346",
+      "name": "Ingmar Jordan",
+      "quote": "To be honest, I've lost on the UNDOCKED book, but it's not really on my mind when I'm thinking about the neighborhood changes."
+    }
+  ],
+  "claim": "To be honest, the changes in Uptown have me feeling a bit uneasy. The streets are busier than ever, and it seems like every other place is a for-rent sign these days. I've lived here long enough to see the neighborhood transform, but this feels different. It's like the neighborhood is shifting away from the people who've been here for a while.",
+  "src": "citizenVoice PRESS c115",
+  "ranAt": "2026-11-11T19:24:46.684Z"
+}

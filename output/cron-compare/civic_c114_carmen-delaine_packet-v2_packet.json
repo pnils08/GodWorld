@@ -1,0 +1,63 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "114",
+  "persona": "carmen-delaine",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Carmen Delaine",
+    "popid": "POP-00011"
+  },
+  "assignment": {
+    "story": {
+      "ref": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c114.json snapshots.Initiative_Tracker; storyline INIT-001:disbursement-active",
+      "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+      "kind": "initiative",
+      "angle": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+      "hookLine": "The civic record identifies a decision, initiative, or clock that needs a clear accounting.",
+      "hood": "West Oakland",
+      "popids": [],
+      "citizens": []
+    }
+  },
+  "angle": "output/cron-compare/civic_c114_carmen-delaine_packet-v2_angle.json",
+  "quotesRequested": 1,
+  "quotesLanded": 1,
+  "quotes": [
+    {
+      "pop": "POP-00037",
+      "name": "Brenda Okoro",
+      "quote": "The Fund renew's with its scope intact and its Month-12 records public, because trust requires both delivered support and documentation.",
+      "sourceKind": "office-record",
+      "officeRecord": {
+        "sourceKind": "office-record",
+        "cycle": 114,
+        "officeSlug": "okoro",
+        "statementId": "STMT-114-okoro-001",
+        "quote": "The Fund renew's with its scope intact and its Month-12 records public, because trust requires both delivered support and documentation.",
+        "topic": "West Oakland Stabilization Fund Charter Renewal and Month-12 Disbursement",
+        "initiativeId": "INIT-001",
+        "filePath": "output/civic-voice/okoro_c114.json",
+        "holderPopid": "POP-00037",
+        "speakerName": "Brenda Okoro"
+      }
+    }
+  ],
+  "officeRecords": [
+    {
+      "sourceKind": "office-record",
+      "cycle": 114,
+      "officeSlug": "okoro",
+      "statementId": "STMT-114-okoro-001",
+      "quote": "The Fund renew's with its scope intact and its Month-12 records public, because trust requires both delivered support and documentation.",
+      "topic": "West Oakland Stabilization Fund Charter Renewal and Month-12 Disbursement",
+      "initiativeId": "INIT-001",
+      "filePath": "output/civic-voice/okoro_c114.json",
+      "holderPopid": "POP-00037",
+      "speakerName": "Brenda Okoro"
+    }
+  ],
+  "officeSilence": null,
+  "interviews": [],
+  "ranAt": "2026-11-02T19:15:01.443Z"
+}

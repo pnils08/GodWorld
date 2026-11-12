@@ -1,0 +1,42 @@
+{
+  "stage": "report",
+  "desk": "sports",
+  "cycle": "113",
+  "persona": "selena-grant",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Selena Grant",
+    "popid": "POP-00591"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-oaks-beat",
+      "angle": "Oaks — game-result C113 · 2-0 · W2 — the second club's board read",
+      "label": "Oaks — game-result C113 · 2-0 · W2",
+      "hookLine": "The Oaks win again behind a big game behind Adash Stanley. The Oaks 91 - Pistons 78 on the road in Detroit.",
+      "hood": "Uptown",
+      "citizens": [
+        "Adash Stanley (POP-01023)",
+        "Austin Reaves (POP-01027)",
+        "Wilson Shepard (POP-01022)",
+        "Harry Hayward (POP-01223)"
+      ],
+      "popids": [
+        "POP-01023",
+        "POP-01027",
+        "POP-01022",
+        "POP-01223"
+      ],
+      "ref": "output/beats/Oakland_Sports_Feed.jsonl @C113",
+      "cycle": 113
+    }
+  },
+  "angle": "output/cron-compare/sports_c113_selena-grant_packet-v2_angle.json",
+  "quotesRequested": 0,
+  "quotesLanded": 0,
+  "quotes": [],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [],
+  "ranAt": "2026-10-27T18:16:49.381Z"
+}

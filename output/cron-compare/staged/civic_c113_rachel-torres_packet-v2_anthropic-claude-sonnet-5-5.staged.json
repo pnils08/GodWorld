@@ -1,0 +1,65 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "113",
+  "persona": "rachel-torres",
+  "byline": "Sgt. Rachel Torres",
+  "bylinePopid": "POP-00057",
+  "article": "output/cron-compare/staged/civic_c113_rachel-torres_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Rafael Montez",
+        "role": "subject",
+        "popid": "POP-00136"
+      },
+      {
+        "name": "Kimberly Cho",
+        "role": "subject",
+        "popid": "POP-00137"
+      },
+      {
+        "name": "Leonard Briggs",
+        "role": "subject",
+        "popid": "POP-00138"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Eastlake"
+    ],
+    "claims": [
+      {
+        "claim": "Eastlake logged the most incidents (8) — 22 neighborhoods on the table",
+        "sourceRef": "output/beats/Crime_Metrics.jsonl @C113"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-b4f8f732ca6c",
+    "draftSha256": "18f3b3c46c4d86e84c23dd02d0568933761ca8507f6249c1f84211ef2b5dbb50",
+    "verdict": "output/cron-compare/civic_c113_rachel-torres_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-10-27T23:16:38.138Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 500",
+      "words": 777,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "18f3b3c46c4d86e84c23dd02d0568933761ca8507f6249c1f84211ef2b5dbb50",
+      "costUsd": 0.0013
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-27T23:16:43.241Z"
+}

@@ -1,0 +1,121 @@
+[
+  {
+    "pop": "POP-00790",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00790\",\"name\":\"Marcus Webb\",\"role\":\"OEWD Program Director\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Luis Navarro\",\"question\":\"Using only the supplied facts, what about \\\"Baylight District final council vote stalled in construction-active state for three identified cycles\\\" creates accountability for you, and what answer do you want? Do not claim any past or future official action that is not in the Packet.\"},\"signal\":{\"kind\":\"anomaly\",\"hood\":\"Downtown\",\"focus\":\"Baylight District final council vote stalled in construction-active state for three identified cycles\",\"src\":\"output/engine_audit_c113.json patterns[0]; evidence: Neighborhood_Map row(s) 2\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Marcus Webb — OEWD Program Director — Downtown resident\",\"evidence\":[{\"id\":\"EV-037dd99c26\",\"src\":\"output/engine_audit_c113.json patterns[0]; evidence: Neighborhood_Map row(s) 2\",\"text\":\"The civic initiative carrying Downtown has not advanced in 3 cycles.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C113\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-876f95b5eb98\"},{\"t\":\"FACT\",\"text\":\"Baylight District — Final Council Vote stalled in construction-active\",\"src\":\"output/engine_audit_c113.json patterns[0]; evidence: Neighborhood_Map row(s) 2\",\"id\":\"F-580c516e986b\"},{\"t\":\"FACT\",\"text\":\"The civic initiative carrying Downtown has not advanced in 3 cycles.\",\"src\":\"output/engine_audit_c113.json patterns[0]; evidence: Neighborhood_Map row(s) 2\",\"id\":\"F-cad49c78c10a\"},{\"t\":\"FACT\",\"text\":\"Marcus Webb — OEWD Program Director — Downtown resident\",\"src\":\"Simulation_Ledger profile for POP-00790\",\"id\":\"F-a21facfc416f\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C9, Winter, holiday=none\",\"src\":\"output/world_summary_c113.md Calendar context (Simulation_Calendar)\",\"id\":\"F-ab9d6786094e\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00790",
+        "name": "Marcus Webb",
+        "role": "OEWD Program Director",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Luis Navarro",
+        "question": "Using only the supplied facts, what about \"Baylight District final council vote stalled in construction-active state for three identified cycles\" creates accountability for you, and what answer do you want? Do not claim any past or future official action that is not in the Packet."
+      },
+      "signal": {
+        "kind": "anomaly",
+        "hood": "Downtown",
+        "focus": "Baylight District final council vote stalled in construction-active state for three identified cycles",
+        "src": "output/engine_audit_c113.json patterns[0]; evidence: Neighborhood_Map row(s) 2"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Marcus Webb — OEWD Program Director — Downtown resident",
+        "evidence": [
+          {
+            "id": "EV-037dd99c26",
+            "src": "output/engine_audit_c113.json patterns[0]; evidence: Neighborhood_Map row(s) 2",
+            "text": "The civic initiative carrying Downtown has not advanced in 3 cycles."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C113",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-876f95b5eb98"
+        },
+        {
+          "t": "FACT",
+          "text": "Baylight District — Final Council Vote stalled in construction-active",
+          "src": "output/engine_audit_c113.json patterns[0]; evidence: Neighborhood_Map row(s) 2",
+          "id": "F-580c516e986b"
+        },
+        {
+          "t": "FACT",
+          "text": "The civic initiative carrying Downtown has not advanced in 3 cycles.",
+          "src": "output/engine_audit_c113.json patterns[0]; evidence: Neighborhood_Map row(s) 2",
+          "id": "F-cad49c78c10a"
+        },
+        {
+          "t": "FACT",
+          "text": "Marcus Webb — OEWD Program Director — Downtown resident",
+          "src": "Simulation_Ledger profile for POP-00790",
+          "id": "F-a21facfc416f"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C9, Winter, holiday=none",
+          "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+          "id": "F-ab9d6786094e"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  }
+]

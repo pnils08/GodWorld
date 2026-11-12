@@ -1,0 +1,40 @@
+{
+  "stage": "report",
+  "desk": "sports",
+  "cycle": "114",
+  "persona": "selena-grant",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Selena Grant",
+    "popid": "POP-00591"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-oaks-beat",
+      "angle": "Oaks — game-result C114 · 4-1 · L1 — the second club's board read",
+      "label": "Oaks — game-result C114 · 4-1 · L1",
+      "hookLine": "The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+      "hood": "San Antonio",
+      "citizens": [
+        "Adash Stanley (POP-01023)",
+        "Austin Reaves (POP-01027)",
+        "Harry Hayward (POP-01223)"
+      ],
+      "popids": [
+        "POP-01023",
+        "POP-01027",
+        "POP-01223"
+      ],
+      "ref": "output/beats/Oakland_Sports_Feed.jsonl @C114",
+      "cycle": 114
+    }
+  },
+  "angle": "output/cron-compare/sports_c114_selena-grant_packet-v2_angle.json",
+  "quotesRequested": 0,
+  "quotesLanded": 0,
+  "quotes": [],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [],
+  "ranAt": "2026-11-03T19:16:45.699Z"
+}

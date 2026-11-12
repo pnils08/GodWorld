@@ -1,0 +1,461 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00153",
+    "name": "Jordan Velez",
+    "role": "desk reporter",
+    "desk": "business"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Uptown businesses: Oakland Tech Collective, Ridgeline Studio, Art Walk Cafe — the people who work there",
+    "approach": "Business desk approach: this slice is one neighborhood's businesses from the ledger and the people on the roster who work there — plus what moved since last cycle: revenue and headcount deltas, contractions, closures on the archive, and the week's casino action. When the record shows a business closing or shedding workers, that is the story. Open from a named business or a named worker on it — the block, the counter, the hiring board, what the owner is worried about. One claim about how the block is moving. Not civic process roundup. Not multi-voice business-desk average. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "economic-storefront",
+      "hood": "Uptown",
+      "pulseClass": "hood-businesses",
+      "economicFrame": "Uptown businesses: Oakland Tech Collective, Ridgeline Studio, Art Walk Cafe — the people who work there",
+      "hook": "Dexter Patel, Cybersecurity Analyst at Oakland Tech Collective. 7 named workers at 4 named businesses in Uptown on the ledger this cycle.",
+      "namedBusinesses": [
+        "Oakland Tech Collective",
+        "Ridgeline Studio",
+        "Art Walk Cafe",
+        "Night Walk Records",
+        "Gallery Night Lounge"
+      ],
+      "workplaces": [
+        "Oakland Tech Collective — Coworking / Tech Hub — Dexter Patel (Cybersecurity Analyst); Derek Obi (IT Support Specialist); Michael Creighton (Writer); Sarah Corliss (Capacity Analyst, DigitalOcean)",
+        "Ridgeline Studio — Architecture — Naomi Castellanos (Principal, Ridgeline Studio)",
+        "Art Walk Cafe — Cafe / gallery — Brady Lopez (Dishwasher)",
+        "Night Walk Records — Retail — Cedric Nakamura (Retail clerk)",
+        "Gallery Night Lounge — Bar / lounge — no roster names"
+      ],
+      "engineColour": [
+        "Eloise Jackson — planned the whole weekend around a day game",
+        "Padma Hong — navigated the stroller traffic on College Avenue and silently judged the parking jobs",
+        "Erica Le — compared rent notes with a neighbor over the fence in Jack London",
+        "Andre Lee — put on their good suit for the Sunday service because some traditions still matter",
+        "Winifred Chen — the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+        "Sammie Soft — overheard a stranger asking the way to a new shop on the block and pointed them right to it"
+      ],
+      "roomIsYours": "the counter, the hiring board, the back office, what the owner is worried about",
+      "forbidden": [
+        "Do not invent a business, a worker, an owner or a place — every name comes from this slice",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose",
+        "Do not contradict a role, employer or neighborhood listed here"
+      ],
+      "sceneRule": null
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "story-signal",
+    "hood": "Uptown",
+    "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C112",
+    "plan": {
+      "focus": "The uneven growth between Uptown's tech-anchored businesses and its small retail/cafe operations — who feels the block moving and who just watches it.",
+      "closeQuestion": "Does a rising block lift the small shops, or just make the rent go up?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00543",
+        "name": "Derek Obi",
+        "profile": "Derek Obi — IT Support Specialist — Oakland Tech Collective, Uptown",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00256",
+        "name": "Brady Lopez",
+        "profile": "Brady Lopez — Dishwasher — Art Walk Cafe, Uptown",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-01033",
+        "name": "Cedric Nakamura",
+        "profile": "Cedric Nakamura — Retail clerk — Night Walk Records, Uptown",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-01033-ee128b9c3c",
+        "pop": "POP-01033",
+        "name": "Cedric Nakamura",
+        "quote": "From behind the counter, you see two different crowds. The folks walking past on Telegraph are mostly new — younger, on their phones, heading to the tech offices or the pop-ups. The ones who actually come in are the regulars, the ones who've been here since before the rent signs went up. We get a few curious walk-ins, sure, but the people who buy records are the same faces I've seen for years. The block's moving faster than the store is, if that makes sense.",
+        "factIds": [
+          "F-7f1873a8aa46",
+          "F-ffab89ec698b"
+        ],
+        "src": "packet.W2[POP-01033]"
+      },
+      {
+        "id": "Q-POP-00256-d6640c3f7f",
+        "pop": "POP-00256",
+        "name": "Brady Lopez",
+        "quote": "Things have picked up some, sure. The lunch rush gets longer, and the coffee machine doesn't stop. But I'm in the back, elbow-deep in suds. I see the plates coming in, not the balance sheets. The bigger places, they've got their own rhythm, their own crowds. I just keep up with the dishes. It's a good job, steady. It pays the bills, and that's what matters.",
+        "factIds": [
+          "F-10987420d53f",
+          "F-ffab89ec698b"
+        ],
+        "src": "packet.W2[POP-00256]"
+      },
+      {
+        "id": "Q-POP-00543-822e3e1f22",
+        "pop": "POP-00543",
+        "name": "Derek Obi",
+        "quote": "I work at Oakland Tech Collective, so I'm on the side that feels the block moving. The building's got new people coming in all the time, and there's a hum to it. But when I walk past Art Walk Cafe or Night Walk Records, I see the same folks, the same pace. They're not standing still, but it's a different rhythm. I think the tech places bring a certain energy, but the small spots—they're the ones that make the block feel like a neighborhood. You watch them, and you wonder if they feel the same push we do, or if they're just holding on.",
+        "factIds": [
+          "F-ffab89ec698b",
+          "F-10987420d53f",
+          "F-7f1873a8aa46"
+        ],
+        "src": "packet.W2[POP-00543]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Jordan Velez",
+        "text": "Possible tension between the tech coworking crowd and the older small-business retail strip — worth checking if anyone on the block has voiced frustration about rent or foot-traffic patterns.",
+        "usable": false
+      },
+      {
+        "from": "Jordan Velez",
+        "text": "Gallery Night Lounge has no named workers on the roster — worth asking whether that's a staffing gap or just a reporting gap.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C112",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-7cd6ffd2aeb3"
+    },
+    {
+      "t": "FACT",
+      "text": "Uptown businesses · Oakland Tech Collective, Ridgeline Studio",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C112",
+      "id": "F-37d07f82e377"
+    },
+    {
+      "t": "FACT",
+      "text": "Dexter Patel, Cybersecurity Analyst at Oakland Tech Collective. 7 named workers at 4 named businesses in Uptown on the ledger this cycle.",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C112",
+      "id": "F-19bdec610e92"
+    },
+    {
+      "t": "FACT",
+      "text": "Oakland Tech Collective · Coworking / Tech Hub · 62 employees · growth 13.2% · revenue $60.7M (+$154k vs C111) · key personnel: Priyanka Raman (principal) · on the roster: Dexter Patel (Cybersecurity Analyst); Derek Obi (IT Support Specialist); Michael Creighton (Writer); Sarah Corliss (Capacity Analyst, DigitalOcean) +6 more",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C112",
+      "id": "F-ffab89ec698b"
+    },
+    {
+      "t": "FACT",
+      "text": "Ridgeline Studio · Architecture · 61 employees · growth 14.7% · revenue $32.6M (+$92k vs C111) · key personnel: Naomi Castellanos (principal) · on the roster: Naomi Castellanos (Principal, Ridgeline Studio)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C112",
+      "id": "F-13967b735186"
+    },
+    {
+      "t": "FACT",
+      "text": "Art Walk Cafe · Cafe / gallery · 30 employees · growth 8% · revenue $2.9M (+$4k vs C111) · on the roster: Brady Lopez (Dishwasher)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C112",
+      "id": "F-10987420d53f"
+    },
+    {
+      "t": "FACT",
+      "text": "Night Walk Records · Retail · 6 employees · growth 7.6% · revenue $641k (+$933 vs C111) · on the roster: Cedric Nakamura (Retail clerk)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C112",
+      "id": "F-7f1873a8aa46"
+    },
+    {
+      "t": "FACT",
+      "text": "Gallery Night Lounge · Bar / lounge · 30 employees · growth 8% · revenue $3.2M (+$5k vs C111)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C112",
+      "id": "F-8613b1939050"
+    },
+    {
+      "t": "FACT",
+      "text": "CITY SEED (Jack London): citizens Eloise Jackson; Padma Hong; Erica Le; Andre Lee · businesses Bayline 6; Anchor Build",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C112",
+      "id": "F-a10afbdc3f97"
+    },
+    {
+      "t": "FACT",
+      "text": "CITY SEED (West Oakland): citizens Winifred Chen; Sammie Soft; Robert Hayes; Antone Bautista · businesses Mariner Construction; New Covenant Pentecostal Assembly · West Oakland Freight & Logistics Pipeline (program)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C112",
+      "id": "F-6b7132016b37"
+    },
+    {
+      "t": "FACT",
+      "text": "CONTRACTING: Ivy Hill Market (Ivy Hill) shed 1 worker vs C111 and growth is -3.7%",
+      "src": "output/beats/prev/Business_Ledger.jsonl vs Business_Ledger.jsonl @C112",
+      "id": "F-9486a15b949e"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "jordan-economic-labor-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Follow Packet-backed money, labor, development, and storefront conditions to the people carrying the consequence. Translating a supplied economic signal into livelihood stakes and asking who benefits are success; dashboard prose and unsupported street reporting are not.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "grounded third-person economics and labor reporting",
+      "targetWords": "500-800",
+      "opening": "a Packet-backed economic fact, person, business, corridor, or storefront consequence",
+      "closing": "an unresolved beneficiary, contract, labor, or livelihood question grounded in the supplied record"
+    },
+    "authorizedTexture": [
+      "unnamed storefront light, shutters, counter, sidewalk, or foot-traffic texture that makes no measured trend or event claim",
+      "transitions translating a Packet-backed economic condition into rent, hiring, commute, payroll, or customer stakes without inventing a concrete outcome",
+      "skeptical analysis of who may benefit or carry risk when it remains framed as analysis or a question",
+      "the reporter's own presence in a supplied or generic economic setting without claiming an interview or observation that did not occur"
+    ],
+    "textureConditions": [
+      "every named person, business, venue, corridor, neighborhood, institution, office, union, Project, Initiative, and organization must come from the Packet",
+      "money, wages, rent, lease terms, employee or job counts, dates, durations, contracts, disbursements, and measured trends must come from the Packet",
+      "raw engine labels and decimal scores may inform reasoning but must not appear as published economic facts or dashboard prose",
+      "hiring, layoffs, closures, openings, extended hours, foot-traffic changes, and other observable actions require Packet support",
+      "I spoke with or another reporting claim requires a supplied interview or quote; generic scene texture is not a sourced perspective"
+    ],
+    "canonBlockers": [
+      "a named person, business, venue, corridor, neighborhood, institution, office, union, Project, Initiative, or organization not found in the supplied record",
+      "an unsupported hiring, layoff, closure, opening, relocation, lease, rent change, wage change, contract, payment, disbursement, or beneficiary claim",
+      "an unsupported amount, percentage, employee count, job count, date, duration, address, metric direction, or economic trend",
+      "a raw engine label, load, volume, index, score, or decimal printed as public-facing evidence",
+      "a fabricated owner, worker, customer, official, interview, quote, observation, or collective business sentiment",
+      "an unsupported causal chain, corruption implication, winner, loser, or current-state claim presented as settled fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-730a6453931a",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-7cd6ffd2aeb3",
+        "t": "FACT",
+        "text": "Current cycle: C112",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-37d07f82e377",
+        "t": "FACT",
+        "text": "Uptown businesses · Oakland Tech Collective, Ridgeline Studio",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C112"
+      },
+      {
+        "id": "F-19bdec610e92",
+        "t": "FACT",
+        "text": "Dexter Patel, Cybersecurity Analyst at Oakland Tech Collective. 7 named workers at 4 named businesses in Uptown on the ledger this cycle.",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C112"
+      },
+      {
+        "id": "F-ffab89ec698b",
+        "t": "FACT",
+        "text": "Oakland Tech Collective · Coworking / Tech Hub · 62 employees · growth 13.2% · revenue $60.7M (+$154k vs C111) · key personnel: Priyanka Raman (principal) · on the roster: Dexter Patel (Cybersecurity Analyst); Derek Obi (IT Support Specialist); Michael Creighton (Writer); Sarah Corliss (Capacity Analyst, DigitalOcean) +6 more",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C112"
+      },
+      {
+        "id": "F-13967b735186",
+        "t": "FACT",
+        "text": "Ridgeline Studio · Architecture · 61 employees · growth 14.7% · revenue $32.6M (+$92k vs C111) · key personnel: Naomi Castellanos (principal) · on the roster: Naomi Castellanos (Principal, Ridgeline Studio)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C112"
+      },
+      {
+        "id": "F-10987420d53f",
+        "t": "FACT",
+        "text": "Art Walk Cafe · Cafe / gallery · 30 employees · growth 8% · revenue $2.9M (+$4k vs C111) · on the roster: Brady Lopez (Dishwasher)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C112"
+      },
+      {
+        "id": "F-7f1873a8aa46",
+        "t": "FACT",
+        "text": "Night Walk Records · Retail · 6 employees · growth 7.6% · revenue $641k (+$933 vs C111) · on the roster: Cedric Nakamura (Retail clerk)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C112"
+      },
+      {
+        "id": "F-8613b1939050",
+        "t": "FACT",
+        "text": "Gallery Night Lounge · Bar / lounge · 30 employees · growth 8% · revenue $3.2M (+$5k vs C111)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C112"
+      },
+      {
+        "id": "F-a10afbdc3f97",
+        "t": "FACT",
+        "text": "CITY SEED (Jack London): citizens Eloise Jackson; Padma Hong; Erica Le; Andre Lee · businesses Bayline 6; Anchor Build",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C112"
+      },
+      {
+        "id": "F-6b7132016b37",
+        "t": "FACT",
+        "text": "CITY SEED (West Oakland): citizens Winifred Chen; Sammie Soft; Robert Hayes; Antone Bautista · businesses Mariner Construction; New Covenant Pentecostal Assembly · West Oakland Freight & Logistics Pipeline (program)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C112"
+      },
+      {
+        "id": "F-9486a15b949e",
+        "t": "FACT",
+        "text": "CONTRACTING: Ivy Hill Market (Ivy Hill) shed 1 worker vs C111 and growth is -3.7%",
+        "src": "output/beats/prev/Business_Ledger.jsonl vs Business_Ledger.jsonl @C112"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-01033-ee128b9c3c",
+        "speakerId": "POP-01033",
+        "speakerName": "Cedric Nakamura",
+        "text": "From behind the counter, you see two different crowds. The folks walking past on Telegraph are mostly new — younger, on their phones, heading to the tech offices or the pop-ups. The ones who actually come in are the regulars, the ones who've been here since before the rent signs went up. We get a few curious walk-ins, sure, but the people who buy records are the same faces I've seen for years. The block's moving faster than the store is, if that makes sense.",
+        "factIds": [
+          "F-7f1873a8aa46",
+          "F-ffab89ec698b"
+        ],
+        "src": "packet.W2[POP-01033]"
+      },
+      {
+        "id": "Q-POP-00256-d6640c3f7f",
+        "speakerId": "POP-00256",
+        "speakerName": "Brady Lopez",
+        "text": "Things have picked up some, sure. The lunch rush gets longer, and the coffee machine doesn't stop. But I'm in the back, elbow-deep in suds. I see the plates coming in, not the balance sheets. The bigger places, they've got their own rhythm, their own crowds. I just keep up with the dishes. It's a good job, steady. It pays the bills, and that's what matters.",
+        "factIds": [
+          "F-10987420d53f",
+          "F-ffab89ec698b"
+        ],
+        "src": "packet.W2[POP-00256]"
+      },
+      {
+        "id": "Q-POP-00543-822e3e1f22",
+        "speakerId": "POP-00543",
+        "speakerName": "Derek Obi",
+        "text": "I work at Oakland Tech Collective, so I'm on the side that feels the block moving. The building's got new people coming in all the time, and there's a hum to it. But when I walk past Art Walk Cafe or Night Walk Records, I see the same folks, the same pace. They're not standing still, but it's a different rhythm. I think the tech places bring a certain energy, but the small spots—they're the ones that make the block feel like a neighborhood. You watch them, and you wonder if they feel the same push we do, or if they're just holding on.",
+        "factIds": [
+          "F-ffab89ec698b",
+          "F-10987420d53f",
+          "F-7f1873a8aa46"
+        ],
+        "src": "packet.W2[POP-00543]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00543",
+        "name": "Derek Obi",
+        "profile": "Derek Obi — IT Support Specialist — Oakland Tech Collective, Uptown",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00256",
+        "name": "Brady Lopez",
+        "profile": "Brady Lopez — Dishwasher — Art Walk Cafe, Uptown",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-01033",
+        "name": "Cedric Nakamura",
+        "profile": "Cedric Nakamura — Retail clerk — Night Walk Records, Uptown",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Jordan Velez",
+        "text": "Possible tension between the tech coworking crowd and the older small-business retail strip — worth checking if anyone on the block has voiced frustration about rent or foot-traffic patterns.",
+        "publishable": false
+      },
+      {
+        "from": "Jordan Velez",
+        "text": "Gallery Night Lounge has no named workers on the roster — worth asking whether that's a staffing gap or just a reporting gap.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "unnamed storefront light, shutters, counter, sidewalk, or foot-traffic texture that makes no measured trend or event claim",
+      "transitions translating a Packet-backed economic condition into rent, hiring, commute, payroll, or customer stakes without inventing a concrete outcome",
+      "skeptical analysis of who may benefit or carry risk when it remains framed as analysis or a question",
+      "the reporter's own presence in a supplied or generic economic setting without claiming an interview or observation that did not occur"
+    ],
+    "textureConditions": [
+      "every named person, business, venue, corridor, neighborhood, institution, office, union, Project, Initiative, and organization must come from the Packet",
+      "money, wages, rent, lease terms, employee or job counts, dates, durations, contracts, disbursements, and measured trends must come from the Packet",
+      "raw engine labels and decimal scores may inform reasoning but must not appear as published economic facts or dashboard prose",
+      "hiring, layoffs, closures, openings, extended hours, foot-traffic changes, and other observable actions require Packet support",
+      "I spoke with or another reporting claim requires a supplied interview or quote; generic scene texture is not a sourced perspective"
+    ],
+    "forbiddenClaimClasses": [
+      "a named person, business, venue, corridor, neighborhood, institution, office, union, Project, Initiative, or organization not found in the supplied record",
+      "an unsupported hiring, layoff, closure, opening, relocation, lease, rent change, wage change, contract, payment, disbursement, or beneficiary claim",
+      "an unsupported amount, percentage, employee count, job count, date, duration, address, metric direction, or economic trend",
+      "a raw engine label, load, volume, index, score, or decimal printed as public-facing evidence",
+      "a fabricated owner, worker, customer, official, interview, quote, observation, or collective business sentiment",
+      "an unsupported causal chain, corruption implication, winner, loser, or current-state claim presented as settled fact"
+    ]
+  }
+}

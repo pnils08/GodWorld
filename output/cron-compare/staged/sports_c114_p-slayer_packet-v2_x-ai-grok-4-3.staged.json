@@ -1,0 +1,68 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "114",
+  "persona": "p-slayer",
+  "byline": "P Slayer",
+  "bylinePopid": "POP-00008",
+  "article": "output/cron-compare/staged/sports_c114_p-slayer_packet-v2_x-ai-grok-4-3.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Adash Stanley",
+        "role": "quoted-source",
+        "popid": "POP-01023"
+      },
+      {
+        "name": "Austin Reaves",
+        "role": "quoted-source",
+        "popid": "POP-01027"
+      },
+      {
+        "name": "Melton Neilon",
+        "role": "quoted-source",
+        "popid": "POP-00170"
+      },
+      {
+        "name": "Daniel Cloak",
+        "role": "quoted-source",
+        "popid": "POP-00722"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "To be honest, I'm still feeling the sting of that loss. We were down 20 and fought our way back, but it feels like we left it on the road. I'm proud of how we responded, though. We can't let one loss get us down.",
+        "sourceRef": "citizenVoice PRESS Austin Reaves"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-0828a603e186",
+    "draftSha256": "d29af01fa102729dcc0fef15d8a831f0bd697ec8c3b4a0ffad875ae4c8e8dbfc",
+    "verdict": "output/cron-compare/sports_c114_p-slayer_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-11-05T00:18:30.874Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 400",
+      "words": 465,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "d29af01fa102729dcc0fef15d8a831f0bd697ec8c3b4a0ffad875ae4c8e8dbfc",
+      "costUsd": 0.001
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-05T00:18:34.295Z"
+}

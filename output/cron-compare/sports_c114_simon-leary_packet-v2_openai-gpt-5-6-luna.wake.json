@@ -1,0 +1,57 @@
+{
+  "mode": "wake-write",
+  "desk": "sports",
+  "cycle": "114",
+  "provider": "openrouter",
+  "model": "openai/gpt-5.6-luna",
+  "configuredWriterModel": "openai/gpt-5.6-luna",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "simon-leary",
+  "byline": {
+    "name": "Simon Leary",
+    "popid": "POP-00016",
+    "beatDomain": "SPORTS"
+  },
+  "laneEntries": 15,
+  "quotesLanded": 1,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [],
+  "toolCalls": 0,
+  "wordCount": 443,
+  "targetWords": "evidence-bounded",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": false,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": false,
+    "inTargetBy": "judge",
+    "words": 443,
+    "short": "The opening paragraph does not open with the supplied present structure, and the piece falls short of the target word count.",
+    "score": 2,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "3597965660de402469680c5da59bc11254a15757fe562aea41914bc604c72a77",
+    "costUsd": 0.0017
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 2/4 — The opening paragraph does not open with the supplied present structure, and the piece falls short of the target word count."
+  },
+  "article": "output/cron-compare/staged/sports_c114_simon-leary_packet-v2_openai-gpt-5-6-luna.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "rom ../.config/godworld/.env // tip: ◈ secrets for agents [www.dotenvx.com]\n{\n  \"popId\": \"POP-00016\",\n  \"name\": \"Simon Leary\",\n  \"recorded\": true,\n  \"text\": \"filed: The Work That Carries the Record\"\n}"
+  },
+  "ranAt": "2026-11-06T00:17:02.734Z",
+  "dispositionReconciledAt": "2026-11-07T18:00:02.707Z"
+}

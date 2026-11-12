@@ -1,0 +1,181 @@
+{
+  "office": "mayor",
+  "agentDir": "civic-office-mayor",
+  "holder": "Avery Santana",
+  "popid": "POP-00034",
+  "title": "Mayor",
+  "date": "2026-11-02",
+  "cycle": 114,
+  "model": "moonshotai/kimi-k3.1-pro",
+  "statement": "Oakland does not get safer by leaving a proposal in the announced column. I am asking the council to take a recorded vote on INIT-014, the Ivy Hill Community Support Initiative. Ivy Hill’s crime index is 0.7, above the citywide 0.655, even as neighborhood sentiment and retail activity have improved. That calls for a focused public-safety response and an honest public decision—not a claim that funding has already been approved. I hear the demands for benchmarks and accountability; the council should debate the proposal openly, put its expectations on the record, and vote. Ivy Hill deserves to know where every member stands.",
+  "moves": [
+    {
+      "type": "call-vote",
+      "payload": {
+        "initiativeId": "INIT-014",
+        "requiresEvidence": [
+          "project/INIT-014"
+        ]
+      }
+    },
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-103-civic-office-mayor",
+        "text": "I am directing the Office of Economic and Workforce Development to clear the recruitment and intake bottlenecks identified in the C102 executive review of INIT-007. The corrective steps belong in the program’s placement-gap analysis and adjustment plan, with any remaining obstacles stated plainly. This response records my direction; it does not claim that the bottlenecks have already been cleared.",
+        "directiveCycle": 103,
+        "confrontationSeat": "civic-office-mayor"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": "2",
+  "ranAt": "2026-11-02T11:47:45.808Z",
+  "usage": {
+    "prompt_tokens": 14595,
+    "completion_tokens": 1880,
+    "total_tokens": 16475,
+    "cost": 0.0231068,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 13824,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0231068,
+      "upstream_inference_prompt_cost": 0.0043068,
+      "upstream_inference_completions_cost": 0.0188
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 1593,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "fellBackFrom": null,
+  "evidenceGenerationHash": "625fc65e258fd2fe3d38d613ddc8fe6e9ae4ae4487a8350ea1d8882ac488130d",
+  "evidenceReads": [
+    {
+      "round": 1,
+      "requests": [
+        {
+          "type": "project",
+          "id": "INIT-014"
+        },
+        {
+          "type": "budget",
+          "id": "authority"
+        }
+      ],
+      "replies": [
+        {
+          "key": "project/INIT-014",
+          "available": true,
+          "generationHash": "625fc65e258fd2fe3d38d613ddc8fe6e9ae4ae4487a8350ea1d8882ac488130d",
+          "data": {
+            "id": "INIT-014",
+            "name": "Ivy Hill Community Support Initiative",
+            "domain": "safety",
+            "phase": "announced",
+            "status": "proposed",
+            "voteCycle": null,
+            "stage": "Proposed",
+            "cyclesSinceStageChange": null,
+            "lastStageChangeCycle": null,
+            "sponsored": false,
+            "hoods": [
+              "Ivy Hill"
+            ],
+            "needsNext": "Proposed — a passed council vote funds it",
+            "budget": "budget: no parsed budget",
+            "requirement": {
+              "stage": "Proposed",
+              "next": "Funded",
+              "clears": false,
+              "moveThatClears": null,
+              "blocked": null,
+              "text": "Proposed — a passed council vote funds it"
+            },
+            "metricEvidence": null
+          }
+        },
+        {
+          "key": "budget/authority",
+          "available": true,
+          "generationHash": "625fc65e258fd2fe3d38d613ddc8fe6e9ae4ae4487a8350ea1d8882ac488130d",
+          "data": {
+            "officeId": "MAYOR-01",
+            "district": "citywide",
+            "categories": [
+              {
+                "key": "health",
+                "label": "clinics, care",
+                "band": "$5M-$100M",
+                "canDeliver": true
+              },
+              {
+                "key": "transit",
+                "label": "stations, lines",
+                "band": "$20M-$500M",
+                "canDeliver": true
+              },
+              {
+                "key": "education",
+                "label": "schools, youth learning",
+                "band": "$1M-$50M",
+                "canDeliver": true
+              },
+              {
+                "key": "economic",
+                "label": "business, local economy",
+                "band": "$2M-$50M",
+                "canDeliver": false
+              },
+              {
+                "key": "workforce",
+                "label": "jobs, training",
+                "band": "$1M-$30M",
+                "canDeliver": false
+              },
+              {
+                "key": "safety",
+                "label": "public safety, response",
+                "band": "$2M-$30M",
+                "canDeliver": false
+              },
+              {
+                "key": "sports",
+                "label": "stadiums, recreation",
+                "band": "$10M-$500M",
+                "canDeliver": false
+              },
+              {
+                "key": "environment",
+                "label": "parks, air, water",
+                "band": "$1M-$30M",
+                "canDeliver": false
+              }
+            ],
+            "resourceBalance": null,
+            "resourceBalanceAvailable": false,
+            "note": "Category bands are filing constraints. Spendable treasury balance requires typed current allocation evidence."
+          }
+        }
+      ]
+    }
+  ],
+  "provider": "Moonshot AI",
+  "finishReason": "stop",
+  "elapsedMs": 63347,
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00034",
+    "id": "pumidFu9QaumVqJzk6NhS7",
+    "customId": "cp-POP-00034-c114-CIVIC-datawake-2026-11-02"
+  }
+}

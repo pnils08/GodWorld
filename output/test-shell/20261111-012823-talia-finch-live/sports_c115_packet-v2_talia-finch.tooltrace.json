@@ -1,0 +1,38 @@
+{
+  "model": "openai/gpt-5.6-luna",
+  "calls": [
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Adash Stanley"
+      },
+      "resultChars": 3235,
+      "resultHead": "[C100 · edition] thing that jumps out when you watch the tape of Adash Stanley dropping twenty-six points against the Detroit Pistons last season isn't the scoring itself. It is the geometry of how he arrives there. He is nineteen years old, an undrafted six-foot-two guard out of Kraków, Poland, and he plays like a man perpetually out of time. In the third quarter of that Detroit game, Stanley drove hard to his left, missed a contested floater, fought through his own rebound against two seven-footers, tipped the ball to the perimet\n[earlier · archive] END SUPPLEMENTAL EDITION — ADASH STANLEY O"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Trenton Nawan"
+      },
+      "resultChars": 189,
+      "resultHead": "No published piece from before C115 came back for \"Trenton Nawan\". That is not proof the paper never covered it (an empty answer can also be a failed lookup) — do not write that it did not."
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Trevor Henderson"
+      },
+      "resultChars": 549,
+      "resultHead": "[C114 · daily · Talia Finch] The margins stayed narrow enough that every cheer sounded like a warning. Stanley has his own description for what is happening around the team. “The mood among fans is electric. I've felt the excitement building around the Oaks, it's like the whole city is waking up with the team. There's a buzz in the air, and I think people are really looking forward to seeing what they can do this season.” At the far end of the room, somebody says the next win will settle it. Somebody else says there is no settling anything yet"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "KONO"
+      },
+      "resultChars": 3224,
+      "resultHead": "[C95 · edition] On Stoops Without Coffee: The KONO Inflow Doesn't Move By Maria Keen | Bay Tribune Culture The stoop on 14th and Ashford is one step off the sidewalk and someone's always sitting on it. Tuesday afternoon at 4:17, it's Marcus, 36, who runs the hardware on the corner, and he's not looking at his phone. He's looking at the people who pass. The foot traffic is steady — the way it gets when nothing else is happening. Not sparse enough to feel lonely, not animated enough to feel like anything's starting. Someone in a yel\n[C96 · edition] Gone Dark: Three Cycles Without Power, and a Ci"
+    }
+  ],
+  "ranAt": "2026-11-11T07:29:00.518Z"
+}

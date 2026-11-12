@@ -1,0 +1,27 @@
+{
+  "status": "arc-seed",
+  "cycle": "112",
+  "desk": "business",
+  "persona": "business-desk",
+  "hood": "Uptown",
+  "quotes": [
+    {
+      "pop": "POP-01033",
+      "name": "Cedric Nakamura",
+      "quote": "From behind the counter, you see two different crowds. The folks walking past on Telegraph are mostly new — younger, on their phones, heading to the tech offices or the pop-ups. The ones who actually come in are the regulars, the ones who've been here since before the rent signs went up. We get a few curious walk-ins, sure, but the people who buy records are the same faces I've seen for years. The block's moving faster than the store is, if that makes sense."
+    },
+    {
+      "pop": "POP-00256",
+      "name": "Brady Lopez",
+      "quote": "Things have picked up some, sure. The lunch rush gets longer, and the coffee machine doesn't stop. But I'm in the back, elbow-deep in suds. I see the plates coming in, not the balance sheets. The bigger places, they've got their own rhythm, their own crowds. I just keep up with the dishes. It's a good job, steady. It pays the bills, and that's what matters."
+    },
+    {
+      "pop": "POP-00543",
+      "name": "Derek Obi",
+      "quote": "I work at Oakland Tech Collective, so I'm on the side that feels the block moving. The building's got new people coming in all the time, and there's a hum to it. But when I walk past Art Walk Cafe or Night Walk Records, I see the same folks, the same pace. They're not standing still, but it's a different rhythm. I think the tech places bring a certain energy, but the small spots—they're the ones that make the block feel like a neighborhood. You watch them, and you wonder if they feel the same push we do, or if they're just holding on."
+    }
+  ],
+  "claim": "From behind the counter, you see two different crowds. The folks walking past on Telegraph are mostly new — younger, on their phones, heading to the tech offices or the pop-ups. The ones who actually come in are the regulars, the ones who've been here since before the rent signs went up. We get a few curious walk-ins, sure, but the people who buy records are the same faces I've seen for years. The block's moving faster than the store is, if that makes sense.",
+  "src": "citizenVoice PRESS c112",
+  "ranAt": "2026-10-19T18:15:44.573Z"
+}

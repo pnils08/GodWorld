@@ -1,0 +1,929 @@
+# Ines Sorensen — voices slice
+
+Cycle **C115** · kind `beat-voices`
+
+## THE SLICE
+- Angle: Voices, C115: you pick whose own words carry the day
+- Hook: Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.
+
+## FACTS (each line is a row on the record)
+- Elijah Brown, Electrician, Rockridge (POP-01195) — 2 pages; latest the night page, a question they carry, C115; new since your last piece: “Does that porch light always flicker, or have I just never looked up long enough to see it?”  _[output/citizen_pages/index.jsonl roster]_
+- Amara Keane, Pianist, Philanthropist, Grand Lake (POP-00002) — 9 pages; latest in conversation, C115: “Hey, you. That's a sweet memory—those early mornings were something else. My day's shaping up nicely, actually; I've got a quiet afternoon with some…”  _[output/citizen_pages/index.jsonl roster]_
+- Vinnie Keane, Former Designated Hitter, Oakland A's Legend, Grand Lake (POP-00001) — 33 pages; latest in conversation, C115; Lives carried a moment the record kept this Cycle: “Amara, hey. I was just thinking about you—walking the lake this morning and remembering how we used to grab coffee before my early workouts. How's…”  _[output/citizen_pages/index.jsonl roster]_
+- Richie Ramiro, First Baseman, Midland RockHounds (AA), Uptown (POP-00085) — 1 page; latest to a reporter, C115; Lives carried the new household this Cycle: “I've seen Vinnie Keane around Grand Lake a few times since he retired. He seems to be enjoying life, taking it easy. I don't know him personally, but…”  _[output/citizen_pages/index.jsonl roster]_
+- Marguerite Salcedo, Managing Partner, Anchor Build, Piedmont Ave (POP-01093) — 2 pages; latest to a reporter, C115; Lives carried the promotion this Cycle: “I've seen Vinnie Keane around Grand Lake a few times since he retired. He seems to be enjoying his post-baseball life, taking it easy, and spending…”  _[output/citizen_pages/index.jsonl roster]_
+- Elle Lilo, Harbor Tugboat Captain, Jack London (POP-00177) — 6 pages; latest to a reporter, C115; Lives carried the new household this Cycle: “I've seen Vinnie Keane around, and to be honest, it's been nice to see him taking it easy after stepping back from work. I know how hard it is to…”  _[output/citizen_pages/index.jsonl roster]_
+- Coen Cartier, Transit Operator (AC Transit), Chinatown (POP-00338) — 6 pages; latest to a reporter, C115; Lives carried a moment the record kept this Cycle: “Wednesday's a normal workday for me, so I can't say I noticed any big jump on my runs. But I did see more folks waiting at 19th than I'd expect on a…”  _[output/citizen_pages/index.jsonl roster]_
+- Elena Soria Dominguez, Transit Hub Planning Lead, Fruitvale (POP-00791) — 17 pages; latest to a reporter, a question they carry, C115: “Whose sense of this station counts before Phase II is real, and who decides that it's theirs?”  _[output/citizen_pages/index.jsonl roster]_
+- Ximena Mehta, Bart Transit PR, Lake Merritt (POP-01039) — 12 pages; latest to a reporter, C115; you ran them C114: “Honestly, I can tell you what the chatter is, and it's not one big thing — it's a bunch of little things stacking up. We had the Oaks game downtown,…”  _[output/citizen_pages/index.jsonl roster]_
+- Deacon Seymour, Manager, Oakland A's, Lake Merritt (POP-00528) — 27 pages; latest to a reporter, a question they carry, C115; you ran them C114: “Who's counting the sick people in Chinatown nobody's naming, and how do I make sure they don't get missed?”  _[output/citizen_pages/index.jsonl roster]_
+- Akua Adeyemi, Plumber, Chinatown (POP-00803) — 2 pages; latest to a reporter, C115: “I go into a lot of homes, and you can tell pretty quick when someone's down. It's not the mess or the dishes — it's the quiet. The TV off in the…”  _[output/citizen_pages/index.jsonl roster]_
+- Brianna Lee, Historic Preservation Carpenter, Laurel (POP-00134) — 5 pages; latest to a reporter, a question they carry, C115: “If the boom isn't landing on everyone the same way, what do we owe the people still standing next to us?”  _[output/citizen_pages/index.jsonl roster]_
+- Keisha Ramos, Director, Baylight Redevelopment Authority, Lake Merritt (POP-00041) — 21 pages; latest to a reporter, a question they carry, C115: “Who will hold Marine Systems accountable for the people they let go, and will they get severance or a way back in?”  _[output/citizen_pages/index.jsonl roster]_
+- Mina Linas, Sea Level Monitoring Technician, Lake Merritt (POP-00135) — 4 pages; latest to a reporter, C115: “Honestly, I don't know the full story of why the other two left—one day they were here, the next they weren't. I'm not going to pretend I have…”  _[output/citizen_pages/index.jsonl roster]_
+- Priya Chandrasekaran, Founder, Ridgeline Ventures, Lake Merritt (POP-01106) — 2 pages; latest the night page, a question they carry, C114: “Does that fence guy ever feel done, or does he just keep going because stopping is worse?”  _[output/citizen_pages/index.jsonl roster]_
+- Emiliano Fiester, student, Lake Merritt (POP-01009) — 1 page; latest the midday page, C114: “Dad and I don't talk as much as we used to. Not because anything's wrong, exactly — we just live different hours now, and when I do see him, it's…”  _[output/citizen_pages/index.jsonl roster]_
+- Pilar Ramirez, Paramedic, Lake Merritt (POP-00943) — 4 pages; latest to a reporter, a question they carry, C114; you ran them C114: “How does the A's winning actually help my community? I've never really thought about it that way.”  _[output/citizen_pages/index.jsonl roster]_
+- Mariana Kapoor, student, Chinatown (POP-00998) — 4 pages; latest to a reporter, a question they carry, C114; you ran them C114: “I don't know how the A's are doing or how their success affects our neighborhood, and I want to understand it.”  _[output/citizen_pages/index.jsonl roster]_
+- Alicia Hernandez, Coffee Roaster, Uptown (POP-00366) — 4 pages; latest to a reporter, a question they carry, C114; you ran them C114: “I'm not really connected to the team anymore. So what do I actually stay connected to now?”  _[output/citizen_pages/index.jsonl roster]_
+- Kenji Tanaka, Senior Pastor / Faith Leader, Chinatown (POP-00763) — 7 pages; latest the morning page, C114: “The corner near the bakery has been quieter lately. I saw Mrs. Chen sweeping her stoop at six in the morning like she always does, and she waved—but…”  _[output/citizen_pages/index.jsonl roster]_
+- Cathy Skeet, Elder Tech Liaison, Chinatown (POP-00308) — 1 page; latest the night page, C114; Lives carried a moment the record kept this Cycle: “Late nights I end up on the balcony off the back, even though there's not much to look at but the alley and the lit sign over the laundry. The…”  _[output/citizen_pages/index.jsonl roster]_
+- Soriya Rodriguez, Ex-Offender Reentry Counselor, West Oakland (POP-00441) — 2 pages; latest in conversation, a question they carry, C114: “Is Yolanda really okay with the rent math? I said I'd help, but I'm not sure what she needs yet.”  _[output/citizen_pages/index.jsonl roster]_
+- Yolanda Beckford, Firefighter-Paramedic, West Oakland (POP-01160) — 3 pages; latest in conversation, C114: “Hey, Soriya. Good to see you. How’ve you been? Family's good. Mom's still got that garden going, and my brother finally got that promotion he was…”  _[output/citizen_pages/index.jsonl roster]_
+- Rasha Brown, Disability Rights Advocate, Fruitvale (POP-00922) — 1 page; latest the midday page, C114: “I walk down to the little pocket park off Fruitvale Avenue, the one with the bench that faces the tracks. There's something about the hum of the BART…”  _[output/citizen_pages/index.jsonl roster]_
+- Luis Taz, Janitor, Fruitvale (POP-00298) — 5 pages; latest to a reporter, C114: “As a janitor, I'm used to being on my feet and moving around all day. It wears me out, but it also keeps me sharp. When I'm flying on UNDOCKED, that…”  _[output/citizen_pages/index.jsonl roster]_
+- Ronald Silk, Electrician, Chinatown (POP-00647) — 4 pages; latest to a reporter, C114: “As an Electrician, I've developed a knack for problem-solving and staying calm under pressure. I think that's helped me on UNDOCKED, navigating…”  _[output/citizen_pages/index.jsonl roster]_
+- Omar Amici, Construction laborer, Uptown (POP-00263) — 16 pages; latest to a reporter, C114; you ran them C114: “To be honest, the changes in Uptown have me feeling a bit uneasy. The streets are busier than ever, and it seems like every other place is a for-rent…”  _[output/citizen_pages/index.jsonl roster]_
+- Vincent Ramirez, OPOA President, Lake Merritt (POP-00514) — 3 pages; latest in conversation, C114: “Hey, Pilar. Good to see you. Was just out walking the block, trying to clear my head a bit. Ah, you know. The usual neighborhood stuff. That job…”  _[output/citizen_pages/index.jsonl roster]_
+- Lena Okafor, Daycare Director, Fruitvale (POP-00530) — 3 pages; latest to a reporter, C114: “To be honest, I don't really see a connection between my performance in UNDOCKED and my role as a Daycare Director. I mean, they're just two…”  _[output/citizen_pages/index.jsonl roster]_
+- Priya Narang, EMS DIRECTOR, Uptown (POP-00141) — 16 pages; latest to a reporter, C114; you ran them C114: “The A's winning season really brings Uptown together. When they're doing well, the whole neighborhood feels it. The bars and galleries stay packed,…”  _[output/citizen_pages/index.jsonl roster]_
+- Ingmar Jordan, Spoken Word Poet, Uptown (POP-00346) — 6 pages; latest to a reporter, C114; you ran them C114: “To be honest, I've lost on the UNDOCKED book, but it's not really on my mind when I'm thinking about the neighborhood changes.”  _[output/citizen_pages/index.jsonl roster]_
+- Bruce Turner, Server, Dimond (POP-01086) — 1 page; latest to a reporter, C114; Lives carried what the Cycle's turn reached them with this Cycle: “I heard another neighbor was between jobs and it didn't really surprise me, to be honest. The neighborhood's been a bit subdued lately, with some…”  _[output/citizen_pages/index.jsonl roster]_
+- Sidney Tumolo, Second Baseman, Oakland A's, West Oakland (POP-00058) — 1 page; latest to a reporter, C114; Lives carried what the Cycle's turn reached them with this Cycle: “The gathering was really nice, I ended up staying longer than I planned. It was great catching up with folks from around the neighborhood.”  _[output/citizen_pages/index.jsonl roster]_
+- Alexa Ward, Licensed Plumber, West Oakland (POP-00687) — 1 page; latest to a reporter, C114; Lives carried the new household this Cycle: “I haven't moved into a new place recently. I've been living in West Oakland for a while now.”  _[output/citizen_pages/index.jsonl roster]_
+- Evan Lewis, Bus driver, Laurel (POP-00200) — 10 pages; latest to a reporter, a question they carry, C114: “Are The A's actually engaging with West Oakland, or just driving past it to the Coliseum?”  _[output/citizen_pages/index.jsonl roster]_
+- Kai Tanaka, artist, Fruitvale (POP-01068) — 1 page; latest to a reporter, C114: “To be honest, I haven't really thought much about The A's and their community engagement in West Oakland. I live in Fruitvale, and while I'm aware of…”  _[output/citizen_pages/index.jsonl roster]_
+- Henry Rivas, Starting Pitcher, Oakland A's, West Oakland (POP-00024) — 5 pages; latest to a reporter, C114; Lives carried what the Cycle's turn reached them with this Cycle: “The A's are a big part of my life, and I plan my days around the games. When I'm not pitching, I'm thinking about the next start or recovering from…”  _[output/citizen_pages/index.jsonl roster]_
+- Theo Park, Communications Director, Rockridge (POP-00038) — 3 pages; latest to a reporter, C114: “To be honest, that moment at Temescal Brewing really stuck with me. Seeing the janitor from the Islamic Center chatting with Danny Horn like they…”  _[output/citizen_pages/index.jsonl roster]_
+- Helena Voss-Adeyemi, Managing Partner, Northgate Construction, Rockridge (POP-01095) — 4 pages; latest to a reporter, C114: “I walked north across the Temescal line and watched the storefronts change. It's always interesting to see the different vibes on either side.…”  _[output/citizen_pages/index.jsonl roster]_
+- Brie Harris, Flower Shop Owner, Temescal (POP-00169) — 7 pages; latest to a reporter, C114; Lives carried the new household this Cycle: “Having my own place in Temescal is still a game-changer for me. It's been nice to have a spot to unwind after being on my feet all day at the flower…”  _[output/citizen_pages/index.jsonl roster]_
+- Austin Reaves, SG / The Oaks, West Oakland (POP-01027) — 9 pages; latest to a reporter, a question they carry, C114: “Is the Reaves Line Transit Fund still doing what I set it up to do for Temescal?”  _[output/citizen_pages/index.jsonl roster]_
+- Marisol Rivera, Community Advocate, Rockridge (POP-01062) — 1 page; latest to a reporter, C114: “To be honest, I haven't seen much of Lena Cross around Rockridge or Piedmont Ave lately. I used to see her at some events, but now it seems like…”  _[output/citizen_pages/index.jsonl roster]_
+- Rowan Pierce, Freelance Writer, Piedmont Ave (POP-00545) — 3 pages; latest to a reporter, C114: “To be honest, I don't really know Lena Cross or follow her work closely. I'm not sure how I feel about her fading fame.”  _[output/citizen_pages/index.jsonl roster]_
+- Lena Cross, Actor, Piedmont Ave (POP-00539) — 9 pages; latest to a reporter, a question they settled, C114; Lives carried the new household this Cycle: “Is that coverage just part of life, or is it starting to change how people see me?”  _[output/citizen_pages/index.jsonl roster]_
+- Travis Coles, Starting Pitcher, Oakland A's, Downtown (POP-00533) — 11 pages; latest to a reporter, C114: “To be honest, I haven't really thought much about Benji Dillon's rising fame. I'm focused on my own game and the A's season. I know he's a teammate,…”  _[output/citizen_pages/index.jsonl roster]_
+- Danny Horn, Center Fielder, Oakland A's - Best player in the MLB, Temescal (POP-00022) — 6 pages; latest to a reporter, C114: “To be honest, I've not really thought much about Benji Dillon's rising fame. I'm focused on my own game and helping the A's make a deep run. I've…”  _[output/citizen_pages/index.jsonl roster]_
+- Darrin Davis, Left Fielder, Oakland A's Legend, Piedmont Ave (POP-00021) — 4 pages; latest to a reporter, C114; Lives carried what the Cycle's turn reached them with this Cycle: “I've seen Benji Dillon's name popping up more often around the A's, and it's clear he's gaining traction. To be honest, I'm not super close to him,…”  _[output/citizen_pages/index.jsonl roster]_
+- Benji Dillon, Pitcher, Oakland A's Legend, Rockridge (POP-00018) — 26 pages; latest to a reporter, C114; Lives carried a moment the record kept this Cycle: “I'm not sure what's behind my growing presence in Rockridge. I live here, I've been part of the community for a while, and I'm just doing my thing.…”  _[output/citizen_pages/index.jsonl roster]_
+- Trevor Henderson, Oakland Oaks - Center, Lake Merritt (POP-01224) — 3 pages; latest the midday page, a question they carry, C114: “Will Paulson move one of those big contracts before Saryan's rookie deal, or keep paying for past production?”  _[output/citizen_pages/index.jsonl roster]_
+- Abraham Wright, Tea House Owner, Chinatown (POP-00497) — 2 pages; latest the morning page, a question they carry, C114: “How do I answer my youngest about why I live so far from their mom's place? I still don't have a good answer.”  _[output/citizen_pages/index.jsonl roster]_
+- Belle Lopez, Home Health Aide, Jack London (POP-00300) — 5 pages; latest the night page, a question they carry, C114: “Will the A's trust their farm system and build something lasting, or chase flashy names with the money?”  _[output/citizen_pages/index.jsonl roster]_
+- Jonas Patel, MEDICAL EXAMINER, Chinatown (POP-00142) — 13 pages; latest after work, C114: “The ledger's closed. Two names on the books today, both quiet, both expected — the cardiac in the Tenderloin, the overdose in the Mission. Routine.…”  _[output/citizen_pages/index.jsonl roster]_
+- Mark Aitken, First Baseman, Oakland A's Legend — Player Rep, Community Liaison, Jack London (POP-00003) — 14 pages; latest after work, C114: “The lights are off in the bathroom, but the steam's still curling off the sink. That's the part nobody talks about—the quiet after the last swing,…”  _[output/citizen_pages/index.jsonl roster]_
+- Clarissa Dane, DISTRICT ATTORNEY, West Oakland (POP-00143) — 21 pages; latest after work, C114: “Twenty-one percent on ten incidents. That's my number. That's where I sleep at night. I keep comparing East Oakland's eight incidents to our ten,…”  _[output/citizen_pages/index.jsonl roster]_
+- Bobby Chen-Ramirez, Health Center Project Director, Jack London (POP-00792) — 17 pages; latest after work, C114: “The quarterly numbers posted today, and they hold. Sixty-two percent of the visits are from the two zip codes we circled on the map back in the…”  _[output/citizen_pages/index.jsonl roster]_
+- Chandni Kessler, Elevator Mechanic, Laurel (POP-00912) — 1 page; latest in conversation, C114: “Still got the old girl, yeah. She's got her quirks, but so do I. Besides, new cars just give you headaches with all that computer stuff in 'em. Just…”  _[output/citizen_pages/index.jsonl roster]_
+- Hector Navarro, HVAC Technician, Temescal (POP-00741) — 4 pages; latest in conversation, C114: “Hey Chandni. Good to see you. You still keeping that old van of yours running, or did you finally give in and get something new? Ha, that's the…”  _[output/citizen_pages/index.jsonl roster]_
+- Tanisha Freeman, Electrician, Grand Lake (POP-00848) — 1 page; latest to a reporter, C114; Lives carried what the Cycle's turn reached them with this Cycle: “I haven't seen Lena Cross's new home, but I did hear they moved into a place on Piedmont Ave. I don't know much about it, though.”  _[output/citizen_pages/index.jsonl roster]_
+- Darius Cike, Quantum Computing Researcher, West Oakland (POP-00658) — 3 pages; latest to a reporter, C114; Lives carried the new household this Cycle: “To be honest, my work in Quantum Computing doesn't directly relate to my decision to move to West Oakland. I've been drawn to the area's industrial…”  _[output/citizen_pages/index.jsonl roster]_
+- Trenton Nawan, Server, Jack London (POP-00273) — 11 pages; latest to a reporter, C114: “I'm still feeling pretty good about the Oaks. That 4-0 start has really got me hopeful. I checked the scores twice a day all week and was happy every…”  _[output/citizen_pages/index.jsonl roster]_
+- Adash Stanley, PG / The Oaks, Downtown (POP-01023) — 10 pages; latest to a reporter, C114: “The mood among fans is electric. I've felt the excitement building around the Oaks, it's like the whole city is waking up with the team. There's a…”  _[output/citizen_pages/index.jsonl roster]_
+- Declan Toto, Gene Therapy Counselor, Lake Merritt (POP-00697) — 1 page; latest to a reporter, C114: “I've joined the congregation at Cathedral of the Living Word, and I have to say, it's been a really uplifting experience. The scent of incense…”  _[output/citizen_pages/index.jsonl roster]_
+- Art Scott, Sustainable Materials Scientist, Lake Merritt (POP-00665) — 3 pages; latest to a reporter, C114: “I've seen Cathedral of the Living Word hosting a job training workshop recently, it's been drawing people from around the neighborhood. That's…”  _[output/citizen_pages/index.jsonl roster]_
+- Ignacio Zavala, Managing Partner, Foothill Builders, West Oakland (POP-01094) — 1 page; latest to a reporter, C114: “I've driven by the Cathedral of the Living Word a few times, it's a big presence around Lake Merritt. I haven't been inside, but I've noticed it's…”  _[output/citizen_pages/index.jsonl roster]_
+- Antoine Vermeer, Senior Pastor / Faith Leader, Lake Merritt (POP-00755) — 4 pages; latest to a reporter, C114; Lives carried the new household this Cycle: “I've seen the Cathedral of the Living Word's job training workshop attract attendees from around the neighborhood, which is great. It's a valuable…”  _[output/citizen_pages/index.jsonl roster]_
+- Benjamin Tsai, Police Sergeant, Chinatown (POP-01144) — 1 page; latest the midday page, C114: “Honestly, I’m still sore about Devine being left off the playoff roster. I get that Saryan was hot, but you don’t bench a guy you’re paying eight…”  _[output/citizen_pages/index.jsonl roster]_
+- Rafael Phillips, Nurse aide, Rockridge (POP-01077) — 3 pages; latest the night page, a question they carry, C114: “What's my plan if one bad month hits? I still don't have one, and that scares me.”  _[output/citizen_pages/index.jsonl roster]_
+- Colt Biker, Painter, West Oakland (POP-00278) — 1 page; latest in conversation, C114: “Hey, Robert. Good to see you too, man. Life's been busy—paint on my hands most days and a ladder in my life. But it's good out here, the…”  _[output/citizen_pages/index.jsonl roster]_
+- Robert Hayes, Community Director, West Oakland (POP-00787) — 6 pages; latest in conversation, C114: “Colt. Good to see you out here. I was just thinking about you the other day—been a minute since we crossed paths like this. Yeah, the block does feel…”  _[output/citizen_pages/index.jsonl roster]_
+- Tobert Lewis, Civil Rights Attorney, Downtown (POP-00344) — 2 pages; latest to a reporter, a question they carry, C114; Lives carried what the Cycle's turn reached them with this Cycle: “Will these spots actually reach the kids who need them most, or just the ones already ahead?”  _[output/citizen_pages/index.jsonl roster]_
+- Jett Walker, Plumber, Rockridge (POP-00230) — 4 pages; latest to a reporter, C114; Lives carried what the Cycle's turn reached them with this Cycle: “To be honest, the BART train disruption was just a minor frustration for me. I've gotten used to it around here. I rewound the belt haul on my walk…”  _[output/citizen_pages/index.jsonl roster]_
+- Kenji Okafor, Patent Attorney, Rockridge (POP-00460) — 1 page; latest to a reporter, C114; Lives carried the new household this Cycle: “I've been feeling pretty settled in Rockridge. I attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt…”  _[output/citizen_pages/index.jsonl roster]_
+- Tyler Filet, Biotech Lab Director (Portside Bio), Lake Merritt (POP-00447) — 1 page; latest to a reporter, C114; Lives carried the new household this Cycle: “I moved into my place in Lake Merritt and it's been a real adjustment. The other night, the wind was rattling the window frame near the front porch…”  _[output/citizen_pages/index.jsonl roster]_
+- Pablo Almanzar, SP / Oakland A's, Chinatown (POP-01078) — 4 pages; latest to a reporter, a question they carry, C114: “Will the front office sort out the roster, and what happens to Carmen's spot and mine?”  _[output/citizen_pages/index.jsonl roster]_
+- Melton Neilon, Sourdough Baker, Temescal (POP-00170) — 17 pages; latest to a reporter, C114: “To be honest, the Oaks' loss still has me a bit down, but I'm trying not to overthink it. I mean, I'm a baker, not a stats expert. I just enjoy…”  _[output/citizen_pages/index.jsonl roster]_
+- Daniel Cloak, Bakery Worker, West Oakland (POP-00722) — 10 pages; latest to a reporter, C114: “Yeah, that's still how I feel. The Oaks trying to be part of the community is a positive step. I was at the community feedback session for the…”  _[output/citizen_pages/index.jsonl roster]_
+- Ramon Vega, City Council President - D1, Lake Merritt (POP-00042) — 16 pages; latest to a reporter, a question they carry, C114: “Am I being honest enough with myself about which of the two I'm actually doing right now?”  _[output/citizen_pages/index.jsonl roster]_
+- Yu Zen, Commercial Insurance Broker, Rockridge (POP-00194) — 15 pages; latest to a reporter, a question they carry, C114: “Are we doing enough to keep Rockridge livable for everyone as commuters get frustrated and new folks arrive?”  _[output/citizen_pages/index.jsonl roster]_
+- Tom Jilner, Wine Bar Owner, Rockridge (POP-00691) — 2 pages; latest to a reporter, C114: “I've noticed new faces around my wine bar, people from Downtown exploring Rockridge. The retail strip is still lively, although BART delays can be a…”  _[output/citizen_pages/index.jsonl roster]_
+- Naomi Sterling, Senior Pastor / Faith Leader, Rockridge (POP-00759) — 6 pages; latest to a reporter, C114: “From what I see, Rockridge is still vibrant. The retail strip is bustling, and while BART delays can be frustrating, it doesn't seem to be dampening…”  _[output/citizen_pages/index.jsonl roster]_
+- Maya Torres-Dillon, Bay Conservation Alliance Advisory board, High School Science Teacher, Rockridge (POP-00742) — 8 pages; latest to a reporter, C114: “To be honest, I'm a bit torn about the changes in Rockridge. On one hand, it's great to see the retail strip bustling and new residents exploring the…”  _[output/citizen_pages/index.jsonl roster]_
+- Tio Rio, Jade Jewelry Artisan, Chinatown (POP-00677) — 1 page; latest the midday page, C114: “Baseball talk always gets loud around here, but I see it like I see my jade—you don't rush a good piece just because folks are impatient. That $22…”  _[output/citizen_pages/index.jsonl roster]_
+- Ximena Salcedo, Anesthesiologist, San Antonio (POP-01179) — 1 page; latest the morning page, C114: “The baby finally fell asleep at 4 a.m., and I just lay there listening to him breathe. I keep thinking about how my whole life before Mateo feels…”  _[output/citizen_pages/index.jsonl roster]_
+- Vanessa Tran-Muñoz, OARI Program Director, Rockridge (POP-01021) — 19 pages; latest after work, C114: “Dispatch closed out quiet tonight. East Oakland got the numbers they were owed, and the crews got home before the fog rolled in — that's a good day…”  _[output/citizen_pages/index.jsonl roster]_
+- Marcus Webb, OEWD Program Director, Downtown (POP-00790) — 14 pages; latest after work, C114: “The queue is clean tonight. One hundred fifteen households paid out, every file flagged for audit compliance, and the renewal draft still names the…”  _[output/citizen_pages/index.jsonl roster]_
+- Ilandra Tain, Muralist, West Oakland (POP-00675) — 1 page; latest in conversation, C114: “Hey, Robert! Yeah, it's been too long. I've been buried in a mural commission down by the docks, plus trying to keep the kids' schedules straight.…”  _[output/citizen_pages/index.jsonl roster]_
+- Cee Lee, Autonomous Systems Engineer, Lake Merritt (POP-00320) — 5 pages; latest to a reporter, C114; Lives carried the new household this Cycle: “I've seen Elle Lilo move into a place of their own in Jack London. It made me think about when I finally got my own place in Lake Merritt. It's a big…”  _[output/citizen_pages/index.jsonl roster]_
+- Rick Dillon, Grade Schooler, Rockridge (POP-00743) — 4 pages; latest to a reporter, a question they carry, C114: “I still don't get the number stuff, so how am I supposed to keep up with everyone?”  _[output/citizen_pages/index.jsonl roster]_
+- Mei Wong, After-school program aide, Rockridge (POP-01036) — 6 pages; latest to a reporter, a question they carry, C114: “Did the index slip because we're stretched too thin, or is something else behind it?”  _[output/citizen_pages/index.jsonl roster]_
+- Gloria Liu, School Principal, Rockridge (POP-00827) — 2 pages; latest to a reporter, C114; Lives carried a moment the record kept this Cycle: “A one-point drop on a scale like that — I'll be honest, it doesn't change what happens in the building on Monday morning. The kids still come in, the…”  _[output/citizen_pages/index.jsonl roster]_
+- Rafael Montez, Police Chief, Piedmont Ave (POP-00136) — 10 pages; latest to a reporter, a question they carry, C114: “Where is the chain breaking, and how do I ask my people without them hearing blame?”  _[output/citizen_pages/index.jsonl roster]_
+- Tomas Reinholt, Police Lieutenant, Laurel (POP-01142) — 2 pages; latest to a reporter, a question they carry, C114: “How do we close the gap between what the stats show and what actually happens on the street?”  _[output/citizen_pages/index.jsonl roster]_
+- Dolores Nwachukwu, Police Captain, West Oakland (POP-01141) — 4 pages; latest to a reporter, C114: “I can tell you that Uptown's number being the highest doesn't surprise me — it's a busy corridor with a lot of foot traffic and storefronts, and…”  _[output/citizen_pages/index.jsonl roster]_
+- Rosalind Young, Smoke Shop Owner, Laurel (POP-00495) — 3 pages; latest to a reporter, a question they carry, C114: “Will anyone at city hall ever actually ask us small business owners what Laurel needs?”  _[output/citizen_pages/index.jsonl roster]_
+- Andrew Cook, Neighborhood Watch Captain, West Oakland (POP-00357) — 1 page; latest in conversation, C114: “Good to see you too, Robert. Yeah, it has been too long. With the neighborhood getting busier and all that's been happening, I feel like I've barely…”  _[output/citizen_pages/index.jsonl roster]_
+- Dmitri Soto, Container Yard Supervisor, KONO (POP-00276) — 3 pages; latest to a reporter, C114; Lives carried the wager this Cycle: “The slip came back empty, that's all I know about the UNDOCKED book. I staked 559, but it didn't pay out.”  _[output/citizen_pages/index.jsonl roster]_
+- Helena Morr, City Ombudsman, Jack London (POP-00150) — 4 pages; latest to a reporter, a question they carry, C114; Lives carried the new household this Cycle: “Will my kids and I find our footing here as the neighborhood keeps changing around us?”  _[output/citizen_pages/index.jsonl roster]_
+- Jerald Jensen, Janitor, West Oakland (POP-00280) — 9 pages; latest to a reporter, C114: “The schedule tells you how many people came through. It doesn't tell you why they left. When the Coliseum empties out like that on a weekend, I see…”  _[output/citizen_pages/index.jsonl roster]_
+- Eleanor Rivera, BART Station Manager, West Oakland (POP-00617) — 8 pages; latest to a reporter, a question they carry, C114: “Where did the Coliseum riders actually go, and what's stacking up behind the drop I can't see?”  _[output/citizen_pages/index.jsonl roster]_
+- Marcus Tan, Founder, Oakmesh Systems, Fruitvale (POP-01109) — 2 pages; latest to a reporter, a question they carry, C114: “How do we keep growing without pushing anyone out, and what does the neighborhood owe us back?”  _[output/citizen_pages/index.jsonl roster]_
+- Desmond Achebe, Managing Partner, Coastline Construction, West Oakland (POP-01092) — 3 pages; latest to a reporter, a question they carry, C114: “Can the people doing the work actually afford to stay in the neighborhood they're rebuilding?”  _[output/citizen_pages/index.jsonl roster]_
+- Enzo Walker, Plumber, Lake Merritt (POP-00291) — 9 pages; latest to a reporter, C114: “Look, I see the numbers on the board in the trailer — 9.5% growth, revenue up, all that. And sure, we're busy. I'm not complaining about work. But…”  _[output/citizen_pages/index.jsonl roster]_
+- Eshe Norwood, Home Health Aide, West Oakland (POP-00923) — 1 page; latest in conversation, C114: “Hey Daphne, it's good to see you too. The family's doing alright—Cristina's been busy with work, and the kid's keeping us on our toes. The garden's…”  _[output/citizen_pages/index.jsonl roster]_
+- Daphne Stafford, Home Health Aide, West Oakland (POP-00816) — 6 pages; latest in conversation, a question they carry, C114: “How do I stop getting caught up in the little stuff and actually show up when it counts?”  _[output/citizen_pages/index.jsonl roster]_
+- Chase West, Mechanic, Fruitvale (POP-00518) — 2 pages; latest the midday page, a question they carry, C113: “Will we stay ahead of the house costs, or is one bad month going to tip everything over?”  _[output/citizen_pages/index.jsonl roster]_
+- Dax Monroe, Artist, Rockridge (POP-00769) — 4 pages; latest to a reporter, a question they carry, C113; you ran them C113: “How is my own life being reshaped as my kids grow up and this community changes around us?”  _[output/citizen_pages/index.jsonl roster]_
+- Weston Herrin, Refugee Resettlement Case Worker, Chinatown (POP-00494) — 3 pages; latest the night page, a question they carry, C113: “Am I just as naive, thinking something can be saved if I just keep talking about it enough?”  _[output/citizen_pages/index.jsonl roster]_
+- Miguel Joson, Plumber, Chinatown (POP-00294) — 4 pages; latest in conversation, C113: “Daphne, good to see you too. The family’s doing alright—kids keep busy, and the wife’s got her hands full with her own projects. Me, I’m just trying…”  _[output/citizen_pages/index.jsonl roster]_
+- Cristina Booker, Immigration Attorney, Downtown (POP-00836) — 4 pages; latest the midday page, a question they carry, C113: “Why did that cracked sidewalk stick with me when everyone else just walked past it?”  _[output/citizen_pages/index.jsonl roster]_
+- Dame Reed, Artist/Muralist, Jack London (POP-00634) — 3 pages; latest to a reporter, C113; you ran them C113: “Having Ravi has really made me appreciate the neighborhood in a new way. I'm more aware of the people and the vibe around here, especially when I'm…”  _[output/citizen_pages/index.jsonl roster]_
+- Father Miguel, Parish priest, Fruitvale (POP-00734) — 4 pages; latest to a reporter, a question they carry, C113: “Is steady enough to beat explosive players like Cristina, or do I need bigger swings?”  _[output/citizen_pages/index.jsonl roster]_
+- Omar Lingio, Vintage Clothing Store Owner, Temescal (POP-00206) — 5 pages; latest to a reporter, C113; you ran them C113: “When the A's are good, this whole town walks a little taller, even in Temescal. I mean, Danny Horn is the real deal.”  _[output/citizen_pages/index.jsonl roster]_
+- Claire Ashford, author, Piedmont Ave (POP-01071) — 1 page; latest to a reporter, C113: “To be honest, I haven't really noticed much of a change around here on Piedmont Ave, but I've heard that West Oakland is getting more crowded. I…”  _[output/citizen_pages/index.jsonl roster]_
+- Gregory Mims, Organized Crime, West Oakland (POP-00023) — 5 pages; latest to a reporter, a question they carry, C113: “Will this program actually stick, or is it just another one that fades away like the rest?”  _[output/citizen_pages/index.jsonl roster]_
+- Rick Walker, K-8 Teacher,Former Line cook, Fruitvale (POP-00198) — 21 pages; latest to a reporter, a question they carry, C113: “I don't know if the tutoring program and small wins are enough when the rent keeps going up.”  _[output/citizen_pages/index.jsonl roster]_
+- Lucia Polito, Aura Wellness Practitioner, Fruitvale (POP-00004) — 11 pages; latest to a reporter, C113: “I've seen the impact that community programs like the Postpartum Oakland Network, which I founded, can have on people's lives. It's amazing to see…”  _[output/citizen_pages/index.jsonl roster]_
+- Tara Ellison, Journalist, Rockridge (POP-00546) — 6 pages; latest to a reporter, a question they carry, C113: “Am I doing anything remarkable or influential at all, or just the ordinary work of covering local news?”  _[output/citizen_pages/index.jsonl roster]_
+- Mimmie Carlisle, Pastry Chef, Temescal (POP-00682) — 2 pages; latest to a reporter, C113: “Pastry at OakHouse isn't a one-person show, that's for sure. With Jesus and Kalyani on the roster with me, we split the day into the early bake-off…”  _[output/citizen_pages/index.jsonl roster]_
+- Camila Osman, Owner, Claremont Table, Chinatown (POP-01134) — 1 page; latest to a reporter, C113; Lives carried what the Cycle's turn reached them with this Cycle: “People think owning a restaurant means I'm just in the office looking at numbers. But I'm on the floor most days, and I see the parts that don't show…”  _[output/citizen_pages/index.jsonl roster]_
+- Elio Perez, Server, Rockridge (POP-00201) — 23 pages; latest to a reporter, C113: “Between services, the floor at Claremont Table gets real quiet — the kind of quiet where you can hear the ice machine hum from the back. I don't mind…”  _[output/citizen_pages/index.jsonl roster]_
+- Matty Lipo, Dishwasher, Lake Merritt (POP-00265) — 3 pages; latest to a reporter, C113: “A full shift at OakHouse starts before the doors open — you come in, you set up your station, you get the water hot. Then it's just a river. Plates,…”  _[output/citizen_pages/index.jsonl roster]_
+- Tiro Worso, Mover, Piedmont Ave (POP-00646) — 1 page; latest the midday page, C113: “Honestly, I don’t think about the A’s lineup except when I’m stuck behind the stroller traffic on College Avenue and someone’s wearing a Horn jersey.…”  _[output/citizen_pages/index.jsonl roster]_
+- Otis Redd, Scout, Oakland A's, Rockridge (POP-00121) — 1 page; latest the morning page, C113: “The little thing today was the coffee. Same machine, same beans, same mug I've had for years — but this morning I actually stopped and looked at the…”  _[output/citizen_pages/index.jsonl roster]_
+- Sergio Aybar, Catcher, Las Vegas Aviators (AAA), Jack London (POP-00078) — 1 page; latest the night page, C113: “Honestly? It's the kid. Graduation's done, lease is signed, I got the room set up with a nightlight and a bookshelf I built myself. But I still wake…”  _[output/citizen_pages/index.jsonl roster]_
+- Fang Crawford, Elevator Mechanic, Laurel (POP-00837) — 1 page; latest to a reporter, C113: “I haven't really seen or heard much about Elijah Roberts, but I did hear about someone having a significant life event recently. It's been on my mind…”  _[output/citizen_pages/index.jsonl roster]_
+- Mac Hillie, Bakery worker, Uptown (POP-00279) — 2 pages; latest to a reporter, C113: “To be honest, reconnecting with my old friend hasn't had much to do with my new living situation in Uptown. I mean, I've been living here for a bit…”  _[output/citizen_pages/index.jsonl roster]_
+- Marcus Whitfield, Youth Basketball Coach, Fruitvale (POP-00532) — 4 pages; latest to a reporter, a question they carry, C113: “How does the Coalition actually connect with the faith groups here in East Oakland, if it does at all?”  _[output/citizen_pages/index.jsonl roster]_
+- Ophelia Brenner, Senior Pastor / Faith Leader, Fruitvale (POP-00754) — 3 pages; latest to a reporter, C113; Lives carried what the Cycle's turn reached them with this Cycle: “As the Senior Pastor at Foothill Baptist Tabernacle, I've seen our community engagement grow significantly. We have various programs that cater to…”  _[output/citizen_pages/index.jsonl roster]_
+- Geneva Zhou, Elevator Mechanic, West Oakland (POP-00892) — 5 pages; latest the midday page, a question they carry, C113: “Is it normal that I keep checking on the baby, just to make sure she's still there?”  _[output/citizen_pages/index.jsonl roster]_
+- Nakia Pena, Independent Bookstore Owner, Temescal (POP-00806) — 2 pages; latest the morning page, a question they carry, C113: “What's this rent notice gonna say once I finally open it, and how am I gonna cover it?”  _[output/citizen_pages/index.jsonl roster]_
+- Jose Johnson, Warehouse Worker, Temescal (POP-00968) — 2 pages; latest the night page, a question they carry, C113; Lives carried what the Cycle's turn reached them with this Cycle: “Do I bet on the kid who makes me hold my breath, or stick with the solid one this town forgets?”  _[output/citizen_pages/index.jsonl roster]_
+- Dimas Wong, Stone Mason, Piedmont Ave (POP-00446) — 2 pages; latest in conversation, C113: “Victor! Good to see you too, man. Yeah, it’s been a minute—we keep saying we’ll grab a coffee and then life gets in the way, as usual. How’s the…”  _[output/citizen_pages/index.jsonl roster]_
+- Victor Alize, Warehouse worker, Piedmont Ave (POP-00216) — 7 pages; latest in conversation, C113: “Dimas! Good to see you, man. Was just thinking about you the other day—how long’s it been since we actually caught up, not just waved from across the…”  _[output/citizen_pages/index.jsonl roster]_
+- Reggie Soto, Auto Body Shop Owner, Fruitvale (POP-00590) — 1 page; latest to a reporter, C113: “I wasn't too surprised when the slip came back empty. I'd been thinking about it, and it just didn't feel right. Losing 247 isn't great, but it's not…”  _[output/citizen_pages/index.jsonl roster]_
+- Solis Walmart, Housing Authority Inspector, Downtown (POP-00334) — 1 page; latest to a reporter, C113: “The window paid, that's all I can say. The week changed color. I was on cloud nine for a bit.”  _[output/citizen_pages/index.jsonl roster]_
+- Brady Lopez, Dishwasher, Piedmont Ave (POP-00256) — 2 pages; latest to a reporter, C113: “I've been playing to climb — a place of my own first. The last stretch threw a money week that mattered. Now I'm renting a place on Piedmont Ave.”  _[output/citizen_pages/index.jsonl roster]_
+- Frank Reyna, Right Fielder, Oakland A's, Lake Merritt (POP-00079) — 2 pages; latest to a reporter, a question they carry, C113: “Will my power hitting be enough to earn one of the three spots? --- Will the lineup really need a power bat more than it needs Desmond or JR?”  _[output/citizen_pages/index.jsonl roster]_
+- Vladimir Gonzalez, Right Fielder, Oakland A's, Fruitvale (POP-00598) — 5 pages; latest to a reporter, a question they carry, C113: “Will Paulson pick me for the outfield, or will Morton and Reyna get the spots? --- Will the decision get made fast, and will whoever gets moved land…”  _[output/citizen_pages/index.jsonl roster]_
+- Desmond Morton, Left Fielder, Oakland A's, Chinatown (POP-00051) — 3 pages; latest to a reporter, a question they carry, C113: “Will my 5-tool potential be enough to win an outfield spot over Danny and Vladimir? --- When will the coaches finally give me a clear answer about…”  _[output/citizen_pages/index.jsonl roster]_
+- Rafael Brannie, Mover, Piedmont Ave (POP-00223) — 4 pages; latest to a reporter, C113: “Three clear days helps, sure. I noticed the light today walking to the job—it's different, makes you want to linger on the corner a moment longer.…”  _[output/citizen_pages/index.jsonl roster]_
+- Johhny Necklar, Former MUBA player, Hall of Famer, Rockridge (POP-00509) — 1 page; latest to a reporter, C113: “The clear days help, I won't lie. I was laid up a good while this winter, and there's something about stepping out and not having to bundle up just…”  _[output/citizen_pages/index.jsonl roster]_
+- Wren Choi, Youth mentor, Glenview (POP-01137) — 2 pages; latest to a reporter, a question they carry, C113: “Is anyone paying attention to what's going on in Chinatown? I don't know what's happening there.”  _[output/citizen_pages/index.jsonl roster]_
+- Liliana Salazar, EV mechanic, Glenview (POP-01128) — 2 pages; latest to a reporter, a question they carry, C113: “What's actually going on with Chinatown? I only know what I've heard from friends.”  _[output/citizen_pages/index.jsonl roster]_
+- Mei Chen, Gallery Owner/Curator, Chinatown (POP-00635) — 2 pages; latest to a reporter, a question they carry, C113: “Are our local businesses going to make it, and will the safer feeling on our streets last?”  _[output/citizen_pages/index.jsonl roster]_
+- Timmie Hall, Refugee Resettlement Case Worker, Chinatown (POP-00439) — 2 pages; latest to a reporter, a question they carry, C113: “Is this neighborhood changing for the worse, and is it going to keep getting like this?”  _[output/citizen_pages/index.jsonl roster]_
+- Xing Patel, Ship Repair Foreman, Jack London (POP-00440) — 1 page; latest the midday page, C113: “The water main break Tuesday was something else. They had the street tore up right near the produce market, and the whole block smelled like wet…”  _[output/citizen_pages/index.jsonl roster]_
+- Jun Fisher, student, Downtown (POP-01005) — 1 page; latest the morning page, C113: “Mason's a grown-up, and I'm just a kid, so I don't really know him except that he's the A's guy who sometimes waves when I'm out with my dad. I think…”  _[output/citizen_pages/index.jsonl roster]_
+- Lo Thoop, Creative Writing Teacher, Jack London (POP-00667) — 3 pages; latest the night page, a question they carry, C113: “Do my kid and I still really know each other, or are we just drifting past in each other's weeks?”  _[output/citizen_pages/index.jsonl roster]_
+- Augusta Davis, Community Health Worker, Fruitvale (POP-00436) — 1 page; latest in conversation, C113: “Just picking up a few things for my mom. She's been having trouble with her blood pressure again, so I'm grabbing her meds before I head home. What…”  _[output/citizen_pages/index.jsonl roster]_
+- Tomas Beckett, student, Piedmont Ave (POP-00987) — 4 pages; latest in conversation, a question they carry, C113: “Am I being nicer to Augusta because I actually want to, or just because my mom keeps saying so?”  _[output/citizen_pages/index.jsonl roster]_
+- Christopher Johnson, Janitor, Lake Merritt (POP-00211) — 3 pages; latest to a reporter, C113: “I've seen Orion Kerkering's new place, they're renting in Lake Merritt. I noticed it because I've been keeping an eye on the neighborhood. It's nice…”  _[output/citizen_pages/index.jsonl roster]_
+- Isla Sike, Domestic Violence Shelter Director, West Oakland (POP-00187) — 5 pages; latest to a reporter, C113: “Moving into a place of my own feels like a big step, especially after being widowed. It's not just about having a new space, it's about starting a…”  _[output/citizen_pages/index.jsonl roster]_
+- Salma Navarro, student, Temescal (POP-00975) — 2 pages; latest to a reporter, C113: “I mean, we talk about it, but not in numbers like that. Mostly it's just, like, what are we actually gonna do next year? Some of my friends are…”  _[output/citizen_pages/index.jsonl roster]_
+- Patricia Nolan, Retired teacher, Temescal (POP-00729) — 5 pages; latest to a reporter, a question they carry, C113: “Why does the district grow everywhere else while Temescal just sits, and what happens to the kids left behind?”  _[output/citizen_pages/index.jsonl roster]_
+- Leonard Briggs, DEPUTY CHIEF OF COMMUNITY ENGAGEMENT, Lake Merritt (POP-00138) — 2 pages; latest to a reporter, a question they carry, C113: “What's actually driving Eastlake's jump in incidents, and can we close the loop on more cases?”  _[output/citizen_pages/index.jsonl roster]_
+- Ollie Campbell, Bakery Worker, Jack London (POP-00642) — 9 pages; latest in conversation, C113: “Dame! Good to see you. It's been a while—how've you been keeping yourself? A new baby—congrats, man, that's huge. I bet you're running on fumes, but…”  _[output/citizen_pages/index.jsonl roster]_
+- Manfred Owens, Booky, Jack London (POP-00028) — 2 pages; latest to a reporter, a question they carry, C113: “What's really behind the sharp talk about rent on our block, and should I be worried about it?”  _[output/citizen_pages/index.jsonl roster]_
+- Maren Johns, Psychotherapist, Rockridge (POP-00470) — 5 pages; latest to a reporter, a question they carry, C113: “Still getting used to my days without patients. What do I do with all that listening now?”  _[output/citizen_pages/index.jsonl roster]_
+- Rosario Medina, CBA Compliance Monitor, Fruitvale Transit Hub, Fruitvale (POP-01053) — 3 pages; latest to a reporter, a question they carry, C113: “Are the protections actually being enforced on the ground? I need to hear from workers and riders first.”  _[output/citizen_pages/index.jsonl roster]_
+- Omarion Farah, Cab Driver, Chinatown (POP-00716) — 2 pages; latest to a reporter, a question they carry, C113: “How do we keep the care trail from ending at the curb when someone gets sick and disappears into a hospital?”  _[output/citizen_pages/index.jsonl roster]_
+- Marisio Curazo, Elder Care Coordinator, Chinatown (POP-00698) — 1 page; latest to a reporter, C113: “I can tell you what I see every day. When folks in Chinatown get sick, it's the family that steps up — the daughter who takes the bus from Fruitvale…”  _[output/citizen_pages/index.jsonl roster]_
+- Dawson Nguyen, Sports Analytics Lead (Gridiron Analytics), Baylight District (POP-00347) — 2 pages; latest to a reporter, C113: “Honestly, I see it in the timing of my own day. I walk out of Gridiron Analytics and the sidewalk has more people on it than it did a year ago — some…”  _[output/citizen_pages/index.jsonl roster]_
+- Estrella Mehta, Electrician, Chinatown (POP-00855) — 2 pages; latest the morning page, a question they carry, C113: “Which neighborhood place is going to be the next one to close, and will I be the one taping up the notice?”  _[output/citizen_pages/index.jsonl roster]_
+- Valentina Campbell, Server, Jack London (POP-01017) — 1 page; latest in conversation, C112: “Hey, Ollie. Good to see you too. Week's been... busy, honestly. Work's kept me on my toes, and I've been trying to sort out some stuff with the…”  _[output/citizen_pages/index.jsonl roster]_
+- Ramon Solano, Senior Pastor / Faith Leader, Fruitvale (POP-00756) — 4 pages; latest the morning page, C112: “I head to the bench by the community garden, the one under the old pepper tree. It's quiet there before the morning traffic picks up, and I can hear…”  _[output/citizen_pages/index.jsonl roster]_
+- Delvon Pratt, Warehouse Supervisor, West Oakland (POP-00621) — 1 page; latest the night page, C112: “It's the parking. Every night it's the same damn thing—cars half in the bike lane, bumpers kissing the crosswalk, and tonight some asshole left their…”  _[output/citizen_pages/index.jsonl roster]_
+- Marmol Lemon, Graffiti Restoration Artist, Uptown (POP-00336) — 2 pages; latest in conversation, a question they carry, C112: “I'm not sure how I feel about them painting over the old murals by the bar patio.”  _[output/citizen_pages/index.jsonl roster]_
+- Dahlia Cruz, QA tester, Baylight District (POP-01202) — 2 pages; latest the midday page, a question they carry, C112: “Did I actually do something wrong, or is it just a bag of chips the machine dropped on me?”  _[output/citizen_pages/index.jsonl roster]_
+- Eleanor Fong, student, Chinatown (POP-00981) — 1 page; latest the morning page, C112: “The little thing is the way the coffee shop guy—Marcus, I think?—remembered my order without me saying it. It’s dumb, but it felt like being seen. I…”  _[output/citizen_pages/index.jsonl roster]_
+- Marco Fabregas, Catcher, Las Vegas Aviators (AAA), Laurel (POP-00060) — 1 page; latest the night page, C112; Lives carried a moment the record kept this Cycle: “Man, Arturo. I don't even know where we stand half the time. We're teammates, sure, and we've got that bond from grinding through the minors…”  _[output/citizen_pages/index.jsonl roster]_
+- Marcus Wright, Server, West Oakland (POP-00288) — 7 pages; latest to a reporter, a question they carry, C112: “Who is actually going to look out for the folks around here who are barely holding on?”  _[output/citizen_pages/index.jsonl roster]_
+- Jade Orion, Musician, Lake Merritt (POP-00540) — 4 pages; latest to a reporter, C112: “I'm not sure what you mean by 'rising fame.' I've been doing my music here in Lake Merritt for a while now, and it's nice to see people appreciating…”  _[output/citizen_pages/index.jsonl roster]_
+- Janae Rivers, City Council Member, Piedmont Ave (POP-00043) — 7 pages; latest to a reporter, a question they carry, C112: “Can we act before West Oakland and Fruitvale get hit harder, like East Oakland already has?”  _[output/citizen_pages/index.jsonl roster]_
+- Avery Santana, Mayor of Oakland, Rockridge (POP-00034) — 9 pages; latest to a reporter, C112: “I've seen a lot more than just construction crews in East Oakland. I've seen community programs taking root, people coming together to make a…”  _[output/citizen_pages/index.jsonl roster]_
+- Rico Valez, Musician, Fruitvale (POP-00632) — 5 pages; latest to a reporter, C112: “To be honest, I haven't really noticed much about Lena Cross's fading fame around Piedmont Ave. I live in Fruitvale, and while I catch the vibe of…”  _[output/citizen_pages/index.jsonl roster]_
+- Marin Tao, Musician, Chinatown (POP-00537) — 2 pages; latest to a reporter, C112: “To be honest, I haven't really thought about Lena Cross or Piedmont Ave that much. I'm pretty focused on my own music scene here in Chinatown. I've…”  _[output/citizen_pages/index.jsonl roster]_
+- Drew Lemon, Housing Authority Inspector, Downtown (POP-00670) — 2 pages; latest to a reporter, C112: “I see Devon and Andre most mornings when I grab coffee before inspections. Devon's always moving fast behind that counter, wiping down the same spots…”  _[output/citizen_pages/index.jsonl roster]_
+- Andre Turner, Line cook, Downtown (POP-00225) — 12 pages; latest to a reporter, C112: “Two-person kitchen means when the tickets stack up, there's no hiding. You're the whole line — grill, sauté, plating, expo — and the second you fall…”  _[output/citizen_pages/index.jsonl roster]_
+- Devon Willis, Server, Adams Point (POP-00782) — 3 pages; latest to a reporter, C112: “A typical Tuesday at SpeedyBurger is steady — not the weekend rush, but enough that you're always moving. The lunch crowd comes in waves, and you…”  _[output/citizen_pages/index.jsonl roster]_
+- Mojisola Cook, Community Organizer, West Oakland (POP-00950) — 2 pages; latest the midday page, a question they carry, C112: “Can I ever really trust her, or is this just a civil truce that happens to be holding for now?”  _[output/citizen_pages/index.jsonl roster]_
+- Ross Cabral, Catcher, Las Vegas Aviators (AAA), Temescal (POP-00055) — 2 pages; latest the morning page, a question they carry, C112: “Was I really the one who got sent packing, or was it always going to be Rosales in my spot?”  _[output/citizen_pages/index.jsonl roster]_
+- Aaliyah Brennan, Mobile Clinic Nurse, Lake Merritt (POP-00235) — 6 pages; latest to a reporter, C112: “The tranquility around Lake Merritt really helps me unwind, especially after a long day at the mobile clinic. It's like a balm for my soul. Living…”  _[output/citizen_pages/index.jsonl roster]_
+- Imie Calero, Civil Rights Attorney, Downtown (POP-00335) — 2 pages; latest to a reporter, C112: “I've seen Telegraph Presbyterian Fellowship hosting events in our neighborhood, like a choir performance that drew a small crowd. It's great to see…”  _[output/citizen_pages/index.jsonl roster]_
+- Amir Delia, Home Health Aide, Downtown (POP-00603) — 1 page; latest to a reporter, C112: “I saw a choir performance at Telegraph Presbyterian Fellowship when I walked by the other day. It was nice to see people gathered like that.”  _[output/citizen_pages/index.jsonl roster]_
+- Eunice Marston, Senior Pastor / Faith Leader, Downtown (POP-00753) — 7 pages; latest to a reporter, C112: “As a faith leader, I believe our congregation's role in the community during times of crisis is to offer support and be present for those affected.…”  _[output/citizen_pages/index.jsonl roster]_
+- Brooklyn Nguyen, Community Programs Coordinator, Fruitvale (POP-00184) — 3 pages; latest the midday page, a question they carry, C112: “Is this just life getting louder, or are Martin and I really drifting apart? I have to believe it's the first.”  _[output/citizen_pages/index.jsonl roster]_
+- Jaden Phillips, Barista, Uptown (POP-00242) — 4 pages; latest the morning page, a question they carry, C112: “Is the machine really what's wearing me down, or is it something bigger I'm not naming?”  _[output/citizen_pages/index.jsonl roster]_
+- Bianca Crook, Autonomous Systems Engineer, Lake Merritt (POP-00661) — 4 pages; latest to a reporter, C112: “I think what I meant was that, despite being surrounded by strangers, there's this shared experience of daily routines that makes me feel a bit more…”  _[output/citizen_pages/index.jsonl roster]_
+- Jorry Cula, Record Shop Owner, Uptown (POP-00182) — 3 pages; latest to a reporter, a question they carry, C112: “How long can I keep running on fumes before it costs more than these moments are worth?”  _[output/citizen_pages/index.jsonl roster]_
+- Joseph Cramp, Janitor, Downtown (POP-00272) — 3 pages; latest to a reporter, C112: “I felt the social atmosphere shift today, it's like the whole town is buzzing now. I've been around Downtown a lot, and it's been dead for years, but…”  _[output/citizen_pages/index.jsonl roster]_
+- Lila Patty, Solar Panel Installation Lead, West Oakland (POP-00185) — 4 pages; latest to a reporter, C112: “I bought a new A's jersey and took a walk near a new construction site to clear my head after a long week. The noise of the city was still there, but…”  _[output/citizen_pages/index.jsonl roster]_
+- Jire Hilt, Line Cook, Jack London (POP-00649) — 1 page; latest to a reporter, C112: “I bought a new A's jersey and I have to say, it's got me pretty excited. The anticipation is building up, I can feel it. I've been looking forward to…”  _[output/citizen_pages/index.jsonl roster]_
+- Brian Adams, Janitor, Jack London (POP-00258) — 2 pages; latest to a reporter, a question they carry, C112: “Will I ever be ready to walk out into the light, or stay in this fog? --- Should I let my family keep giving me space in this fog, or reach out while…”  _[output/citizen_pages/index.jsonl roster]_
+- Xavier Ramington, Herbalist, West Oakland (POP-00181) — 4 pages; latest to a reporter, C112; Lives carried a moment the record kept this Cycle: “The clear sky today — it's not a relief so much as a reminder. The cold weeks, I leaned on the same faces, the same counters, the same conversations.…”  _[output/citizen_pages/index.jsonl roster]_
+- Iris Pham, Barista, Baylight District (POP-01203) — 1 page; latest to a reporter, C112: “I've noticed that the waterfront in Baylight District feels unusually quiet lately. There's a tension in the air that I've never seen before. I think…”  _[output/citizen_pages/index.jsonl roster]_
+- Makayla Wu, Electrician, KONO (POP-00867) — 2 pages; latest to a reporter, a question they carry, C112; Lives carried the death in the house this Cycle: “Is this renewal or neglect, or just my perspective as someone who's been around a while?”  _[output/citizen_pages/index.jsonl roster]_
+- Tatiana Flores, HVAC Technician, KONO (POP-00859) — 3 pages; latest to a reporter, C112: “To be honest, I've been feeling pretty positive about KONO since I moved here ten weeks ago. The energy around the Fox Theater is great, and…”  _[output/citizen_pages/index.jsonl roster]_
+- Omar Cleo, Line Cook, Temescal (POP-00290) — 5 pages; latest the midday page, a question they carry, C112: “Do the health center folks ever notice the small stuff, like that crooked grate?”  _[output/citizen_pages/index.jsonl roster]_
+- Elijah Roberts, Construction laborer, West Oakland (POP-00275) — 2 pages; latest the morning page, C112: “That little dent in my thermos lid, the one I’ve been meaning to fix for a month — it whistled when I poured my coffee this morning. Just a tiny,…”  _[output/citizen_pages/index.jsonl roster]_
+- Derlik Green, Delivery Driver, Downtown (POP-00244) — 4 pages; latest to a reporter, C112: “I've seen Jerald Jensen around, they were promoted as a Janitor in West Oakland. I haven't met them personally, but I've noticed people younger than…”  _[output/citizen_pages/index.jsonl roster]_
+- Marc Allie, Security guard, Laurel (POP-00241) — 4 pages; latest to a reporter, C112: “To be honest, I've never really heard of Jerald Jensen. I know they're a janitor in West Oakland and got promoted recently. I've seen some younger…”  _[output/citizen_pages/index.jsonl roster]_
+- Rupert Ochoa, Mutual Aid Network Organizer, Fruitvale (POP-00488) — 2 pages; latest to a reporter, C112: “I've been doing this work for 40 years, and now people are coming to me for advice. I see Jerald Jensen was promoted and now they're getting asked…”  _[output/citizen_pages/index.jsonl roster]_
+- Simone Adesanya, School Principal, Rockridge (POP-00287) — 6 pages; latest to a reporter, C112: “Honestly, that dip is a blip on a page to most of us. Teacher quality at 9.08 — that's the number my staff feels every single day, in the hallways,…”  _[output/citizen_pages/index.jsonl roster]_
+- Kendra Lyle-Nnamdi, Police Sergeant, East Oakland (POP-01143) — 1 page; latest to a reporter, C112: “I work East Oakland, not Dimond, so I can't speak to what those eight incidents look like on the ground there. What I can tell you is that clearance…”  _[output/citizen_pages/index.jsonl roster]_
+- Merkin Jumper, Social Services Caseworker, Downtown (POP-00688) — 5 pages; latest to a reporter, a question they carry, C112: “If there's a gap between the building and the approval, who's going to address it, and will anyone?”  _[output/citizen_pages/index.jsonl roster]_
+- Shawn Weller, Janitor, Chinatown (POP-00251) — 2 pages; latest the midday page, C112: “That damn grate outside the laundry on Webster—the one with the missing slat. I caught it this morning, the way the sunlight hits the steam coming…”  _[output/citizen_pages/index.jsonl roster]_
+- Clearence Leighton, Physical Therapist, Piedmont Ave (POP-00238) — 3 pages; latest the morning page, a question they carry, C112: “I don't know where Darrin and I stand, or if he sees me as more than the guy who fixes his shoulder.”  _[output/citizen_pages/index.jsonl roster]_
+- Maurice Franklin, Drone Fleet Coordinator, Rockridge (POP-00801) — 8 pages; latest to a reporter, C112: “After coming home from the hospital, I had to get my feet back on the ground, and the first thing I did was check my finances. The card statement was…”  _[output/citizen_pages/index.jsonl roster]_
+- Daire Green, Transit Operator (AC Transit), Fruitvale (POP-00442) — 2 pages; latest to a reporter, a question they carry, C112; Lives carried a moment the record kept this Cycle: “Did I make the right call holding those doors, when the on-time number can't tell me either way?”  _[output/citizen_pages/index.jsonl roster]_
+- Matra Woven, Janitor, Chinatown (POP-00785) — 2 pages; latest to a reporter, a question they carry, C112: “I don't know who's in those hospital beds, and we don't always ask why some of them aren't here.”  _[output/citizen_pages/index.jsonl roster]_
+- Derek Obi, IT Support Specialist, Rockridge (POP-00543) — 1 page; latest to a reporter, C112; Lives carried a moment the record kept this Cycle: “I work at Oakland Tech Collective, so I'm on the side that feels the block moving. The building's got new people coming in all the time, and there's…”  _[output/citizen_pages/index.jsonl roster]_
+- Cedric Nakamura, Retail clerk, West Oakland (POP-01033) — 3 pages; latest to a reporter, a question they carry, C112; Lives carried a moment the record kept this Cycle: “Can the store keep up with a block that's moving faster than it is, and who will still come through the door?”  _[output/citizen_pages/index.jsonl roster]_
+- Dillon Trevor, Server, Downtown (POP-00224) — 15 pages; latest the midday page, C112: “You know what I noticed? That old stoop on 14th, the one outside the shuttered tailor shop — the paint’s worn down in this perfect little groove,…”  _[output/citizen_pages/index.jsonl roster]_
+- Amy Cook, Radiologic Technician, Lake Merritt (POP-00309) — 5 pages; latest the night page, a question they carry, C111: “Will I let Mags see how thin I'm stretched, or keep the silence going a while longer?”  _[output/citizen_pages/index.jsonl roster]_
+- Elias Varek, Founder of Civis Systems, West Oakland (POP-00789) — 25 pages; latest the morning page, a question they settled, C111; Lives carried a moment the record kept this Cycle: “Am I fighting for the block itself, or just the version of it that still fits inside those chalk lines?”  _[output/citizen_pages/index.jsonl roster]_
+- Lila Leap, Muralist, West Oakland (POP-00301) — 3 pages; latest the night page, a question they carry, C111: “Have I forgotten how to sit with my own empty hands without filling them with work?”  _[output/citizen_pages/index.jsonl roster]_
+- Tomas Ochoa, student, Laurel (POP-00993) — 1 page; latest in conversation, C111: “Oh man, don't remind me! My dad still brings that up every time he sees a toolbox. But at least we figured out which end of the hammer to use by the…”  _[output/citizen_pages/index.jsonl roster]_
+- Carlos Presti, Corporate Accountant, Downtown (POP-00048) — 1 page; latest to a reporter, C111: “I saw another new spot opening up Downtown. I don't know what it is yet, but I'm always curious to see what actually sticks around here. It's just…”  _[output/citizen_pages/index.jsonl roster]_
+- Gordon Tate, SUPERIOR COURT LIAISON, Downtown (POP-00148) — 1 page; latest to a reporter, C111: “I just noticed another new spot opening up around Downtown. It's always something new popping up, which is fine, but with the rent going up the way…”  _[output/citizen_pages/index.jsonl roster]_
+- Ryan Stark, Housing Policy Analyst, Downtown (POP-00351) — 1 page; latest to a reporter, C111: “I walked by SpeedyBurger on Broadway and saw a new lease sign go up above it. The paper was still crisp in the display case. It's another new spot…”  _[output/citizen_pages/index.jsonl roster]_
+- Nina Reyes, actress, Fruitvale (POP-01057) — 4 pages; latest to a reporter, C111: “To be honest, I haven't really thought about Tara Ellison's fame or what's happening over in Rockridge. I've just been focusing on my own life and…”  _[output/citizen_pages/index.jsonl roster]_
+- Alma Vasquez, sculptor, Laurel (POP-01063) — 2 pages; latest to a reporter, a question they carry, C111: “I still don't have a clear view of what's going on in Rockridge or who Tara Ellison is.”  _[output/citizen_pages/index.jsonl roster]_
+- Guadalupe Lupe, Bartender, Jack London (POP-00643) — 6 pages; latest to a reporter, C111: “From behind the stick, you see the whole shift of the place. The regulars come in at the same time, order the same thing, and you know their stories…”  _[output/citizen_pages/index.jsonl roster]_
+- Hector Leech, Dishwasher, Jack London (POP-00252) — 3 pages; latest to a reporter, C111: “A full shift in the pit is a marathon, not a sprint. You're in the steam before the first ticket even prints, and the heat just sits on you like a…”  _[output/citizen_pages/index.jsonl roster]_
+- Jessie Hess, Barista, Downtown (POP-00212) — 12 pages; latest to a reporter, C111: “Look, I'm a fan—I'm always gonna want to believe. But that loss to Miami? It stung. I was all in on that starting five, really hyped, but you can't…”  _[output/citizen_pages/index.jsonl roster]_
+- Manny Ellen, Elections Office, Lake Merritt (POP-00046) — 1 page; latest to a reporter, C111: “I've joined the congregation there. I was just over at the church recently when the lunch program was wrapping up; I saw the volunteers stacking…”  _[output/citizen_pages/index.jsonl roster]_
+- Mike Paulson, General Manager, Oakland A's & The Oaks, West Oakland (POP-00527) — 9 pages; latest to a reporter, a question they carry, C111: “Are we building something that lasts, or just something that wins? That's the decision I can't shake.”  _[output/citizen_pages/index.jsonl roster]_
+- Hazel Lanning, student, Laurel (POP-00982) — 2 pages; latest in conversation, C111: “Oh hey, Tariq! Yeah, the old Kenmore's still chugging along—guess you worked your magic on it after all. And sorry, I still haven't let anyone near…”  _[output/citizen_pages/index.jsonl roster]_
+- Tariq Jello, Appliance Repair Technician, Laurel (POP-00174) — 6 pages; latest in conversation, a question they carry, C111: “Will you finally let me come fix that squeak, or keep running it into the ground?”  _[output/citizen_pages/index.jsonl roster]_
+- Briar Soto, Electrician, KONO (POP-00926) — 2 pages; latest to a reporter, a question they carry, C111; Lives carried a moment the record kept this Cycle: “Everything went smoothly, so why won't the books balance? I don't know how to reconcile that.”  _[output/citizen_pages/index.jsonl roster]_
+- Inga Creator, Boutique Owner, Uptown (POP-00196) — 5 pages; latest to a reporter, C111: “I'm still on cloud nine after last night's win! I celebrated by buying a new A's jersey - it's my way of showing team spirit. The energy around here…”  _[output/citizen_pages/index.jsonl roster]_
+- Janelle Rourke, ASSISTANT DISTRICT ATTORNEY (Community Safety), Uptown (POP-00145) — 1 page; latest to a reporter, C111: “I bought a new A's jersey and, honestly, it's been really exciting to put it on. There's this sense of anticipation hanging in the air that I just…”  _[output/citizen_pages/index.jsonl roster]_
+- Daniel Yoon, Co-Founder, Gridiron Analytics, West Oakland (POP-01107) — 1 page; latest to a reporter, C111: “I just picked up a new A's jersey. Honestly, I'm still riding the high from that win last night.”  _[output/citizen_pages/index.jsonl roster]_
+- Ben Clark, Mover, Piedmont Ave (POP-00285) — 2 pages; latest the night page, C111: “The street’s dead quiet, just the hum of the refrigerator kicking on and the occasional car passing too fast up Piedmont. I can hear my own breathing…”  _[output/citizen_pages/index.jsonl roster]_
+- Eric Taveras, Second Baseman, Oakland A's, Downtown (POP-00597) — 6 pages; latest to a reporter, a question they carry, C111: “What are these unsettled credits everyone keeps referring to, and why haven't I heard about them?”  _[output/citizen_pages/index.jsonl roster]_
+- Lonzo Jailon, Sea Level Monitoring Technician, Lake Merritt (POP-00195) — 4 pages; latest the night page, a question they carry, C111: “If I don't notice the cracks, who the hell will? Am I the only one still watching?”  _[output/citizen_pages/index.jsonl roster]_
+- Joel Wren, Mechanic, West Oakland (POP-00218) — 8 pages; latest to a reporter, a question they carry, C111; Lives carried the wager this Cycle: “Why are fewer people at 12th Street station when the buses run better, and is Baylight behind it?”  _[output/citizen_pages/index.jsonl roster]_
+- Calvin Mwangi, AC Transit Bus Driver, West Oakland (POP-00573) — 1 page; latest to a reporter, C111: “Nah, can't say I've heard my regulars talk much about avoiding 12th Street specifically. Most folks just grumble about the usual—delays,…”  _[output/citizen_pages/index.jsonl roster]_
+- Ray Neal, AC Transit Bus Operator, West Oakland (POP-00448) — 2 pages; latest to a reporter, a question they carry, C111: “Where has the energy gone? It's quieter here, but I can't tell where it shifted.”  _[output/citizen_pages/index.jsonl roster]_
+- Mai Tse, student, Chinatown (POP-00977) — 1 page; latest to a reporter, C111: “I see the clinic lines every morning when I walk to school. Mostly, it's older people who go in, and sometimes parents with little kids. I don't see…”  _[output/citizen_pages/index.jsonl roster]_
+- Niani Oakley, Plumber, Chinatown (POP-00951) — 1 page; latest to a reporter, C111: “Most folks around here, if it's not an emergency but they need more than home remedies, they'll head over to the community clinic on 8th Street. It's…”  _[output/citizen_pages/index.jsonl roster]_
+- Elena Leon, Longshoreman (Port of Oakland), Jack London (POP-00193) — 5 pages; latest to a reporter, a question they carry, C111: “Who will benefit from all these glass towers, and who in Jack London is going to get left behind?”  _[output/citizen_pages/index.jsonl roster]_
+- Blair Patel, Ship Repair Foreman, Lake Merritt (POP-00189) — 5 pages; latest to a reporter, a question they carry, C111: “Can the port's infrastructure really keep up with this growth without serious upgrades?”  _[output/citizen_pages/index.jsonl roster]_
+- Ray Samson, Appliance Repair Technician, Laurel (POP-00186) — 3 pages; latest the night page, C111: “That damn belt on the Maytag today. Not the repair itself—that was standard—but how the homeowner watched me like I was performing brain surgery.…”  _[output/citizen_pages/index.jsonl roster]_
+- Melony Foster, Fashion Designer, Uptown (POP-00348) — 1 page; latest in conversation, C111: “"Oh, Chris, of course I remember," I say, my voice softening as I recall those quiet moments. "We’d sit on the couch, sometimes not even talking,…”  _[output/citizen_pages/index.jsonl roster]_
+- Chris Foster, Grade Schooler, Uptown (POP-00316) — 4 pages; latest in conversation, a question they carry, C111: “Does Melony ever feel like we could get back to how it was, just sitting together with no weight?”  _[output/citizen_pages/index.jsonl roster]_
+- Diego Remo, Independent Bookstore Owner, Temescal (POP-00332) — 2 pages; latest in conversation, C110: “"Tom, long time no see. Funny how Temescal keeps us crossing paths, huh? Still running that gallery over in Rockridge?" *I fold my arms, leaning…”  _[output/citizen_pages/index.jsonl roster]_
+- Orlando Phillips, Retail worker, Laurel (POP-00204) — 4 pages; latest the midday page, a question they carry, C110: “How do I build something solid for my kid when the ground keeps shifting and I'm just holding the pieces together?”  _[output/citizen_pages/index.jsonl roster]_
+- Mason Walt, Electrician, Rockridge (POP-00233) — 5 pages; latest the morning page, a question they carry, C110: “What's next after this win? And how do we stop pushing Benji to the brink before something gives?”  _[output/citizen_pages/index.jsonl roster]_
+- Martin Richards, Third Baseman, New York Mets, Fruitvale (POP-00031) — 6 pages; latest the night page, C110: “Man, even with the windows closed, I can still hear the BART trains rattling in the distance—that metallic groan that’s been the soundtrack to my…”  _[output/citizen_pages/index.jsonl roster]_
+- Jia Carmichael, Physical Therapist, Fruitvale (POP-00876) — 2 pages; latest in conversation, a question they carry, C110: “Did Mrs. Chen find another place yet? I still don't know if she'll be able to stay around here.”  _[output/citizen_pages/index.jsonl roster]_
+- Patrick When, Janitor, Downtown (POP-00208) — 3 pages; latest in conversation, a question they carry, C110: “Nobody's answering at the church or union hall, so who's gonna help Mrs. Chen before she's out?”  _[output/citizen_pages/index.jsonl roster]_
+- Theo Banks, rapper, Uptown (POP-01056) — 1 page; latest to a reporter, C110: “Honestly, I don't really know much about Tara Ellison or how her rising fame is affecting the Baylight District's arts and culture scene. I'm over in…”  _[output/citizen_pages/index.jsonl roster]_
+- Colin Phillips, Bakery Worker, Laurel (POP-00786) — 2 pages; latest to a reporter, C110: “Most days at Nino's start before sunrise - mixing dough, shaping loaves, that kind of thing. It's steady work, not glamorous, but there's something…”  _[output/citizen_pages/index.jsonl roster]_
+- Victor King, Retail worker, Rockridge (POP-00262) — 3 pages; latest the midday page, C110: “Walking past the bookstore this morning, I noticed one of those little free libraries had a battered copy of "Goodnight Moon" tucked between…”  _[output/citizen_pages/index.jsonl roster]_
+- Jack Phillips, Bus driver, Temescal (POP-00292) — 3 pages; latest the morning page, C110: “That goddamn squeak in the bathroom door again. Been meaning to fix it for weeks, but every time I think about it, something else pops up—bus…”  _[output/citizen_pages/index.jsonl roster]_
+- Tyrone Bennington, Nurse aide, Temescal (POP-00219) — 4 pages; latest the morning page, a question they carry, C110: “Am I failing my kids by not making that leap, or am I just tired of being tired?”  _[output/citizen_pages/index.jsonl roster]_
+- Alma Lewis, International Trade Consultant, Rockridge (POP-00304) — 4 pages; latest the night page, C110: “Honestly? I’m still processing it. The A’s winning the World Series feels like a shockwave—something so big it’s almost hard to believe it happened…”  _[output/citizen_pages/index.jsonl roster]_
+- John Ellis, Starting Pitcher, Oakland A's, Laurel (POP-00033) — 4 pages; latest to a reporter, C110: “Honestly, Tanya, it's all about staying locked in. The vibe in here? Electric. We're feeding off each other's energy—every guy in this clubhouse…”  _[output/citizen_pages/index.jsonl roster]_
+- Priya Nair, Climate Adaptation Engineer, Downtown (POP-00531) — 1 page; latest to a reporter, C110: “My work at EBMUD focuses on ensuring our water systems can handle the pressures of climate change, especially as the city grows. It’s about balancing…”  _[output/citizen_pages/index.jsonl roster]_
+- Evan Bing, Retail worker, Rockridge (POP-00274) — 2 pages; latest the night page, C110: “The park bench by the creek—that’s where I end up when I need to breathe. The water’s low this time of year, just a trickle, but it’s steady, you…”  _[output/citizen_pages/index.jsonl roster]_
+- Yael Bauer, Senior Pastor / Faith Leader, Piedmont Ave (POP-00760) — 2 pages; latest in conversation, C110: “*smiles warmly, returning the hug* Xiu, it's so good to see you! Sacramento has its charms, but Piedmont Ave will always feel like home. And I’m…”  _[output/citizen_pages/index.jsonl roster]_
+- Xiu Cello, Mover, Piedmont Ave (POP-00239) — 2 pages; latest in conversation, C110: “*looks up, surprised, then breaks into a warm smile* Yael! Wow, it's been—*hesitates, then pulls you into a quick hug*—too long. How's Sacramento…”  _[output/citizen_pages/index.jsonl roster]_
+- Aaron Whitfield, City Manager, Rockridge (POP-00040) — 1 page; latest to a reporter, C110: “Rockridge schools have always been a point of pride for the neighborhood. The quality index speaks for itself, and it’s clear that families here…”  _[output/citizen_pages/index.jsonl roster]_
+- Jee Lei, After-School Program Director, Uptown (POP-00321) — 4 pages; latest to a reporter, a question they carry, C110; Lives carried a moment the record kept this Cycle: “How can we bridge the funding gap and share resources more equitably across neighborhoods?”  _[output/citizen_pages/index.jsonl roster]_
+- Lila Bennington, Oakland City Schools Elementary Teacher, Fruitvale (POP-00317) — 3 pages; latest to a reporter, C110: “Oh, I actually teach in Fruitvale, not Rockridge. But I can tell you that teaching anywhere in Oakland means constantly balancing the needs of so…”  _[output/citizen_pages/index.jsonl roster]_
+- Toby Lamont, Mutual Aid Network Organizer, Fruitvale (POP-00183) — 4 pages; latest the morning page, C110: “That damn drip from the kitchen faucet—been meaning to fix it for weeks now. Every morning it’s there, ticking like a clock counting down how long…”  _[output/citizen_pages/index.jsonl roster]_
+- Kato Rivers, Fitness Trainer, Laurel (POP-00770) — 1 page; latest to a reporter, C110: “I'm not really sure what you're talking about with standings, I'm a fitness trainer, not a pilot. I've been too busy with my daily routine and…”  _[output/citizen_pages/index.jsonl roster]_
+- Millicent Kumar, Plumber, Chinatown (POP-00812) — 1 page; latest to a reporter, C110: “Honestly, I haven't noticed much change in my daily routine. I keep my head down, do my work. But I did hear from Selena that some of the older folks…”  _[output/citizen_pages/index.jsonl roster]_
+- Brianna Scott, Food Truck Operator, Jack London (POP-00656) — 2 pages; latest the midday page, C110: “The A's winning feels like a shot of adrenaline straight to the heart of this city, you know? Like, we’ve been carrying this weight for so long—rents…”  _[output/citizen_pages/index.jsonl roster]_
+- Iris Baron, Emergency Management Coordinator, Downtown (POP-00337) — 3 pages; latest in conversation, C109: “"Hey Ricky! Yeah, still dealing with that radiator—it’s like having a percussionist living in my walls. Honestly, I’ve been too busy chasing the kids…”  _[output/citizen_pages/index.jsonl roster]_
+- Ricky Wilton, Janitor, Downtown (POP-00215) — 2 pages; latest in conversation, C109: “"Hey Iris, long time no see. How've you been? Still keeping up with that radiator advice?" *I grin, shaking my head.* "I swear it’s got a mind of its…”  _[output/citizen_pages/index.jsonl roster]_
+- Broderick Mitchell, Security guard, Rockridge (POP-00221) — 6 pages; latest the night page, C109: “The hum of those new security lights buzzes like a mosquito in my ear, louder now that the streets are empty. I can hear the occasional rustle of…”  _[output/citizen_pages/index.jsonl roster]_
+- Yammie Perez, Delivery driver, Temescal (POP-00286) — 7 pages; latest to a reporter, C109: “I love how Temescal always has this energy, you know? Like, I was stopped at a light near Temescal Alley and I could hear the bass thumping from a…”  _[output/citizen_pages/index.jsonl roster]_
+- Hazel Salazar, Line Cook, Uptown (POP-00873) — 1 page; latest to a reporter, C109: “A typical shift at Fruitvale Diner starts early for me. I come in, get the kitchen prepped, and start cooking breakfast orders. It’s busy, but I like…”  _[output/citizen_pages/index.jsonl roster]_
+- Milan Warmon, Ceramicist, Temescal (POP-00324) — 2 pages; latest the morning page, C109: “Danny’s got that easy charm, the kind that makes you forget he’s younger, sharper, moving in a world I don’t. But there’s a respect there, beneath…”  _[output/citizen_pages/index.jsonl roster]_
+- Marisol Trujillo, Drug Dealer, Fruitvale (POP-00795) — 1 page; latest in conversation, C109: “"I’ve been managing, Tevan. You know how it is—kids keep me busy, bills keep me stressed. But we’re getting by, one day at a time. How about you?…”  _[output/citizen_pages/index.jsonl roster]_
+- Tevan Walker, Bus driver, Laurel (POP-00270) — 5 pages; latest in conversation, C109: “"I was just thinking about you the other day, Mari—how’ve you been holding up? You looked like you were carrying a lot when I saw you out with Rex."…”  _[output/citizen_pages/index.jsonl roster]_
+- Arturo Ramos, Starting Pitcher, Oakland A's, Laurel (POP-00025) — 3 pages; latest to a reporter, C109: “Look, I'm just here to compete every time I get the ball. Team's 1-0, we're riding a couple wins—that's all that matters. My role? Same as always:…”  _[output/citizen_pages/index.jsonl roster]_
+- Jackson Sift, Ex-Offender Reentry Counselor, West Oakland (POP-00190) — 4 pages; latest to a reporter, C109: “I've been feeling the energy in the city, especially with the A's doing well. It's like the whole town is coming together, you know? But when it…”  _[output/citizen_pages/index.jsonl roster]_
+- Theo Burkes, Rapper, Downtown (POP-00541) — 2 pages; latest to a reporter, C109: “Honestly, I don't really feel like Downtown is decaying or lacking initiatives. I mean, I've seen new faces around and events that bring people…”  _[output/citizen_pages/index.jsonl roster]_
+- Tao Lee, Community Organizer, Downtown (POP-00764) — 2 pages; latest to a reporter, C109: “I haven't really noticed any decay in our neighborhood, to be honest. It feels like there's always something new happening, and people seem to be…”  _[output/citizen_pages/index.jsonl roster]_
+- Dillon Brooks, SF / The Oaks, West Oakland (POP-01079) — 1 page; latest to a reporter, C109: “Honestly, I've noticed the team's morale has been a bit down lately, but I think we're all just trying to stay focused and work through this tough…”  _[output/citizen_pages/index.jsonl roster]_
+- Wilson Shepard, Head Coach, Oakland Oaks, West Oakland (POP-01022) — 6 pages; latest to a reporter, C109: “I've been feeling like we're still finding our rhythm, you know? The guys are putting in the work, and I'm confident we'll tighten up and be ready…”  _[output/citizen_pages/index.jsonl roster]_
+- Jun Leu, student, Temescal (POP-00994) — 1 page; latest to a reporter, C109: “I don't really think about graduation rates or college stuff yet. At school, we just do our work and go home. Some kids talk about college, but most…”  _[output/citizen_pages/index.jsonl roster]_
+- Jacquez Tearn, Dishwasher, Chinatown (POP-00214) — 3 pages; latest to a reporter, C109: “Man, I hear Chinatown's got the most trouble right now, but I keep my head down, work my shift. Folks say the cops take their time clearing things…”  _[output/citizen_pages/index.jsonl roster]_
+- Depak Ying, Server, Rockridge (POP-00210) — 13 pages; latest to a reporter, C109: “I’ve heard people talking about the Fruitvale Transit Hub delays, and it feels like no one’s stepping up to take responsibility—it’s frustrating…”  _[output/citizen_pages/index.jsonl roster]_
+- Owen Low, Mechanic, Uptown (POP-00283) — 3 pages; latest the morning page, C109: “Man, Pablo stepping up like that—seven innings, only two runs? Kid’s got nerves of steel. I remember when he first came up, shaky as hell, but now…”  _[output/citizen_pages/index.jsonl roster]_
+- Jango Lango, Hardware Store Owner, Piedmont Ave (POP-00253) — 2 pages; latest the night page, C109: “You know where I always end up? That little stretch of sidewalk outside The Parlor, even when it's closed. Just leaning against one of those old iron…”  _[output/citizen_pages/index.jsonl roster]_
+- Ronald Williams, Line cook, West Oakland (POP-01041) — 2 pages; latest to a reporter, C109: “I heard folks talking about Pablo Almanzar's game at the diner—sounds like he’s been solid on the mound. --- I hear Chinatown's got more incidents…”  _[output/citizen_pages/index.jsonl roster]_
+- Jose Colon, Catcher, Oakland A's, Chinatown (POP-00599) — 1 page; latest to a reporter, C109: “Man, Pablo was locked in. Seven strong innings, just two runs? That's the kind of performance that wins you games in October. I caught him a few…”  _[output/citizen_pages/index.jsonl roster]_
+- Ernesto Quintero, 3B/1B , Oakland A's, Baylight District (POP-00050) — 6 pages; latest to a reporter, a question they settled, C109: “What specific adjustments did Pablo Almanzar make between his debut and second start?”  _[output/citizen_pages/index.jsonl roster]_
+- Colin Soria, Security guard, Temescal (POP-00227) — 5 pages; latest to a reporter, C109: “You know, I don't live in Chinatown, but I've walked through enough to see how tight-knit that community is. When illness hits, you can feel it in…”  _[output/citizen_pages/index.jsonl roster]_
+- Tiu Xiong, Kombucha Brewer, Uptown (POP-00209) — 2 pages; latest to a reporter, C109: “Illness hits Chinatown hard, like it does anywhere, but there’s a resilience there that’s hard to miss. People look out for each other, share…”  _[output/citizen_pages/index.jsonl roster]_
+- Dom Will, Machine Learning Engineer (Oakmesh Systems), West Oakland (POP-00368) — 1 page; latest to a reporter, C109: “Oakmesh feels like we're building something real here - not just another tech bubble. Marcus keeps us focused on civic impact, not just profit. Civis…”  _[output/citizen_pages/index.jsonl roster]_
+- Sam Fazio, Digital Twin Architect, Lake Merritt (POP-00445) — 1 page; latest to a reporter, C109: “Working at Civis Systems, I’ve seen how West Oakland businesses like ours, Oakmesh Systems, and Coastline Construction are really shaping the…”  _[output/citizen_pages/index.jsonl roster]_
+- Elena Patel, Cook, West Oakland (POP-01030) — 1 page; latest to a reporter, C109: “I heard about the Stabilization Fund at the community center last month, but honestly, I haven't noticed any changes on my block yet.”  _[output/citizen_pages/index.jsonl roster]_
+- Darius Clark, Bakery Worker, West Oakland (POP-00961) — 8 pages; latest to a reporter, C109: “I heard about that fund at the bakery - couple regulars were talking how it's supposed to help keep folks in their homes. Haven't seen much change on…”  _[output/citizen_pages/index.jsonl roster]_
+- Irene Fay, Barista, West Oakland (POP-00794) — 9 pages; latest to a reporter, C109: “I've heard folks at the coffee shop talking about the Stabilization Fund, but honestly, it's hard to tell where that money's actually going. People…”  _[output/citizen_pages/index.jsonl roster]_
+- Toto Foto, Theater Director, Uptown (POP-00302) — 2 pages; latest the night page, a question they carry, C108: “Am I truly listening or just performing the role of listener for my own need to feel needed?”  _[output/citizen_pages/index.jsonl roster]_
+- Tyrie Groin, Retail worker, Laurel (POP-00254) — 2 pages; latest the morning page, C108: “I guess I’m quietly hoping today feels like it’s mine, you know? Not just the routine—getting up, work, the kids, the same old grind. I want to feel…”  _[output/citizen_pages/index.jsonl roster]_
+- Steve Conrad, Ex-As Star - RF, Rockridge (POP-00124) — 4 pages; latest the night page, C108: “Man, it's funny—we used to be so close, practically brothers in the dugout. But now? Things just... drifted. Not on purpose, just life moving in…”  _[output/citizen_pages/index.jsonl roster]_
+- Rafael Pilgrim, Server, Fruitvale (POP-00644) — 7 pages; latest to a reporter, C108: “I've seen the community programs in Fruitvale really make a difference, and I appreciate the work of founders like Lucia Polito who are dedicated to…”  _[output/citizen_pages/index.jsonl roster]_
+- Akua Ortiz, HVAC Technician, Temescal (POP-00948) — 1 page; latest to a reporter, C108: “You know, it's the rhythm of it all. The familiar faces, the routine—it’s comforting in a way. It’s not about the glamour; it’s about being part of…”  _[output/citizen_pages/index.jsonl roster]_
+- Jia Pena, Dental Hygienist, Temescal (POP-00916) — 1 page; latest to a reporter, C108: “It's the rhythm of it, I think. The way the neighborhood moves and breathes, and you’re part of that. It’s not glamorous, but it’s steady. You know…”  _[output/citizen_pages/index.jsonl roster]_
+- Vanessa Ramas, Barista, Lake Merritt (POP-01045) — 4 pages; latest to a reporter, C108: “You know, it's not about glamour—it's about the rhythm of it. The regulars who come in and don't even have to say their order because you already…”  _[output/citizen_pages/index.jsonl roster]_
+- Vanessa Treary, Barista, Lake Merritt (POP-00781) — 5 pages; latest to a reporter, C108: “It’s not glamorous, but there’s something steady about it. You get to know people, their routines, their stories. It’s not just about the coffee—it’s…”  _[output/citizen_pages/index.jsonl roster]_
+- Ravi O'Connell, Independent Bookstore Owner, Temescal (POP-00236) — 2 pages; latest the night page, C108; Lives carried what the Cycle's turn reached them with this Cycle: “This week, the block's had a strange hum to it—not bad, just... different. The scaffolding by the health center creaks in the wind like it's…”  _[output/citizen_pages/index.jsonl roster]_
+- Anand Krishnamurthy, Senior Pastor / Faith Leader, Rockridge (POP-00765) — 1 page; latest to a reporter, C108: “I've seen the impact of faith organizations in our community, and I believe places like Bharat Mandir of the East Bay play a vital role in bringing…”  _[output/citizen_pages/index.jsonl roster]_
+- Christopher Clerk, Mover, Chinatown (POP-00295) — 3 pages; latest the morning page, a question they carry, C108: “What will give out first – these buildings or the people still hustling inside them?”  _[output/citizen_pages/index.jsonl roster]_
+- Owen Tower, Taxi driver, Fruitvale (POP-00207) — 5 pages; latest the night page, C108: “Been feeling like I’m running on fumes lately, but I can’t stop moving. It’s like if I slow down, everything’ll catch up to me—the bills, the squeak…”  _[output/citizen_pages/index.jsonl roster]_
+- Jacob King, Line cook, Rockridge (POP-00267) — 6 pages; latest to a reporter, C108: “I've seen the city react with a mix of shock and curiosity to Wanjiru Liu's episode, and as someone who lives and works in Rockridge, I feel like…”  _[output/citizen_pages/index.jsonl roster]_
+- Wanjiru Liu, Electrician, Rockridge (POP-00842) — 1 page; latest to a reporter, C108: “Honestly, I haven't really noticed any reaction to me specifically, I just go about my day, do my job as an electrician, and enjoy the neighborhood.…”  _[output/citizen_pages/index.jsonl roster]_
+- Carmen Solis, Community Advocate, Fruitvale (POP-00953) — 1 page; latest to a reporter, C108: “I've noticed that there are new faces on the block, and that's a good thing, but at the same time, I feel like we're not really doing much to address…”  _[output/citizen_pages/index.jsonl roster]_
+- Luca Petrov, Dance Choreographer, Uptown (POP-00271) — 2 pages; latest the morning page, C108: “The block feels... charged, somehow. Like everyone’s holding their breath, waiting for something. The A’s are on everyone’s lips—Henry’s been quieter…”  _[output/citizen_pages/index.jsonl roster]_
+- Wendell Price, Principal, Coliseum District Development, West Oakland (POP-01099) — 2 pages; latest the night page, a question they carry, C108: “How much of this run is about Oakland, and how much is about the franchise chasing history?”  _[output/citizen_pages/index.jsonl roster]_
+- Salma Campbell, student, Rockridge (POP-01018) — 1 page; latest to a reporter, C108: “I’ve always felt like Rockridge schools just have this steady vibe, you know? Like, they’re consistent, and it shows in how people talk about them.…”  _[output/citizen_pages/index.jsonl roster]_
+- Delia Vargas-Ruiz, Transit Hub D3 Intake Liaison, San Antonio (POP-01054) — 1 page; latest to a reporter, C108: “Working at the transit hub, I hear people talk about the response times, but honestly, most folks around here just keep their heads down and go about…”  _[output/citizen_pages/index.jsonl roster]_
+- Dank Abara, Waiter, San Antonio (POP-00796) — 1 page; latest to a reporter, C108: “I’ve heard San Antonio has more incidents than other neighborhoods, and Lake Merritt’s response times are slow, but I don’t know the specifics. It’s…”  _[output/citizen_pages/index.jsonl roster]_
+- Naomi Castellanos, Principal, Ridgeline Studio, Piedmont Ave (POP-01098) — 1 page; latest the morning page, C108: “I slip into Fenton’s before the crowd hits—just me, the counter, and that first bite of over-easy eggs with toast crisp enough to hold up against the…”  _[output/citizen_pages/index.jsonl roster]_
+- Wiu Wiu, High School Science Teacher, Rockridge (POP-00312) — 3 pages; latest the night page, C108: “I walk the stretch of College Avenue between Alcatraz and Broadway, even if just in my head tonight. Streetlights pooling on pavement, that one bench…”  _[output/citizen_pages/index.jsonl roster]_
+- Soo Loo, Corporate Accountant, Downtown (POP-00663) — 2 pages; latest to a reporter, C108: “I've been noticing how the city's energy shifts when the A's are doing well. It's like the whole neighborhood comes together, and even the usual…”  _[output/citizen_pages/index.jsonl roster]_
+- Javier Robertson, Delivery driver, Temescal (POP-00228) — 3 pages; latest to a reporter, C108: “It’s hard not to notice how much Chinatown’s been hit lately. You see it in the way people are moving—slower, more cautious. Families are sticking…”  _[output/citizen_pages/index.jsonl roster]_
+- Kelvon Ochoa, AI Safety Researcher (Anthropic), Lake Merritt (POP-00481) — 1 page; latest to a reporter, C108: “Working at Anthropic, I've seen the company grow steadily, but what stands out is how it's become part of the neighborhood's rhythm. You see more…”  _[output/citizen_pages/index.jsonl roster]_
+- Talmon Lint, Solar Panel Installation Lead, West Oakland (POP-00176) — 6 pages; latest to a reporter, C108: “I’ve heard folks talking about the Stabilization Fund at the community center, but honestly, I’ve been so tied up with installations that I haven’t…”  _[output/citizen_pages/index.jsonl roster]_
+- Bodhi Davis, Mover, Fruitvale (POP-00264) — 3 pages; latest the night page, C108: “That choir solo at lunch today... didn't realize how much I needed that. Like someone pressed pause on everything for three damn minutes. Been…”  _[output/citizen_pages/index.jsonl roster]_
+- Shawn Neighbor, Construction laborer, Fruitvale (POP-00746) — 1 page; latest in conversation, C108; Lives carried what the Cycle's turn reached them with this Cycle: “"Hey Isabel, yeah, I’ve been noticing it too. The neighborhood’s got this energy lately, you know? Been catching myself talking it up to coworkers…”  _[output/citizen_pages/index.jsonl roster]_
+- Isabel Lopes, ESL Teacher, Fruitvale (POP-00325) — 5 pages; latest in conversation, C108: “"Shawn! Hey, it’s good to see you. I was just thinking about how much Fruitvale feels like it’s buzzing lately—have you noticed? It’s like everyone’s…”  _[output/citizen_pages/index.jsonl roster]_
+- Priyanka Raman, Principal, Oakland Tech Collective, West Oakland (POP-01096) — 1 page; latest the midday page, C107: “I keep noticing how the light hits the sidewalk around 2 PM—sharp and clear, like it’s pointing things out to me. The orderly hum of people darting…”  _[output/citizen_pages/index.jsonl roster]_
+- Beverly Peterson, Scout, Oakland A's, East Oakland (POP-00119) — 1 page; latest to a reporter, C107: “I've seen that community programs in East Oakland are really making a difference, and it's great to see people like Marcus Whitfield founding…”  _[output/citizen_pages/index.jsonl roster]_
+- Jerome Pittman, Transit Hub D5 Intake Liaison, East Oakland (POP-01055) — 2 pages; latest to a reporter, C107: “I feel like community programs and their founders in East Oakland are really making a difference, I see the impact they have on people's lives around…”  _[output/citizen_pages/index.jsonl roster]_
+- Maria Conteras, High School Teacher, East Oakland (POP-01047) — 3 pages; latest to a reporter, C107: “I've seen that community programs in East Oakland are really making a difference, and it's great to see people like Marcus Whitfield founding…”  _[output/citizen_pages/index.jsonl roster]_
+- Kalyani Alvarez, Pastry Chef, Temescal (POP-00905) — 1 page; latest to a reporter, C107: “Working with Mimmie and Jesus at OakHouse has been a real pleasure. We each bring something unique to the table, and it’s been rewarding to see how…”  _[output/citizen_pages/index.jsonl roster]_
+- Jesus Jorden, Pastry Chef, OakHouse, Fruitvale (POP-00721) — 1 page; latest to a reporter, C107: “Working with Mimmie and Kalyani at OakHouse has been a steady rhythm—like the kind of teamwork that doesn’t need much talking. We just know what…”  _[output/citizen_pages/index.jsonl roster]_
+- Clark Saryan, Closing Pitcher, Las Vegas Aviators (AAA), Downtown (POP-00052) — 1 page; latest to a reporter, C107: “Starting the playoffs with a win like that, you can feel the energy shift in the clubhouse. Everyone’s locked in, but there’s also this quiet…”  _[output/citizen_pages/index.jsonl roster]_
+- Patrick Hill, Line cook, Laurel (POP-01019) — 1 page; latest to a reporter, C107: “I feel like the impact on the standings is something I hear about but don't really see affecting my daily life as a line cook in Laurel, I'm more…”  _[output/citizen_pages/index.jsonl roster]_
+- Jori Clame, Server, Laurel (POP-00232) — 2 pages; latest to a reporter, C107: “I feel like the impact on the standings is something everyone in Laurel is talking about, and as a server, I hear a lot of conversations about it…”  _[output/citizen_pages/index.jsonl roster]_
+- Jacob Perez, Delivery driver, Glenview (POP-01089) — 1 page; latest to a reporter, C107: “Honestly, I don't follow sports much, but I did hear some guys at the gas station talking about the A's record. Seems like they're doing okay this…”  _[output/citizen_pages/index.jsonl roster]_
+- Marcus King, Warehouse worker, Glenview (POP-01087) — 1 page; latest to a reporter, C107: “I don’t really follow sports much, but I’ve heard people talking about the A’s record lately. It seems like they’re doing alright this season.”  _[output/citizen_pages/index.jsonl roster]_
+- Cameron Wallen, Corporate Accountant, Downtown (POP-00180) — 1 page; latest to a reporter, C107: “I've recently joined the congregation at Lake Merritt Mindfulness Sangha and I have to say, it's been a really positive experience for me. I feel…”  _[output/citizen_pages/index.jsonl roster]_
+- Daley Hill, Painter, Downtown (POP-00240) — 2 pages; latest the night page, C107: “The new streetlights cut deep shadows between the buildings—better, I guess, but still feels like something’s lurking in those sharp lines. Heard…”  _[output/citizen_pages/index.jsonl roster]_
+- Howard Yell, Barista, Rockridge (POP-00651) — 5 pages; latest to a reporter, C107; Lives carried the new household this Cycle: “I've noticed people talking about the UNDOCKED episode a lot lately, it seems like it's on everyone's mind in Rockridge, I'm not really sure what to…”  _[output/citizen_pages/index.jsonl roster]_
+- Leanne Wu, Director of Sustainability, Rockridge (POP-00731) — 1 page; latest to a reporter, C107: “I haven't really noticed any significant changes in the city's conversation due to the UNDOCKED episode. As someone who focuses on sustainability,…”  _[output/citizen_pages/index.jsonl roster]_
+- Tariq Harris, Dental assistant, Chinatown (POP-01112) — 1 page; latest to a reporter, C107: “Honestly, I've noticed that Chinatown doesn't seem to be getting the attention it needs. As someone who lives and works here, it's frustrating to see…”  _[output/citizen_pages/index.jsonl roster]_
+- Derwin Train, Grocery Store Owner, Chinatown (POP-00520) — 1 page; latest to a reporter, C107: “I've lived and worked in Chinatown my whole life, and I gotta say, it's changing. I see new faces around, people moving in from West Oakland, and…”  _[output/citizen_pages/index.jsonl roster]_
+- Travis Paiz, Mover, Lake Merritt (POP-00222) — 2 pages; latest the midday page, C107: “Mags… hell, Mags is solid. Always has been. But ever since she took that Editor-in-Chief spot, there’s this… distance. Not like she’s changed, but…”  _[output/citizen_pages/index.jsonl roster]_
+- Caroline Cabrera, After-School Program Director, Uptown (POP-00847) — 1 page; latest to a reporter, C107: “Look, I work with kids every day in Uptown, and what I see is that numbers don't always tell the whole story. Those 46 students in KONO? They're…”  _[output/citizen_pages/index.jsonl roster]_
+- Teri Mitchell, Graphic Designer, Uptown (POP-00449) — 1 page; latest to a reporter, C107: “I don't spend much time in Chinatown myself, but I did just get over being sick this winter. It makes you think about how illness can ripple through…”  _[output/citizen_pages/index.jsonl roster]_
+- Darius Scoot, Patent Attorney, Rockridge (POP-00191) — 4 pages; latest the midday page, C107; Lives carried the wager this Cycle: “That damn zoning notice for the new apartment complex on Telegraph—another one squeezing in without enough parking or tree canopy. I keep tallying…”  _[output/citizen_pages/index.jsonl roster]_
+- Sara Copper, Theater Director, Temescal (POP-00175) — 2 pages; latest the morning page, C106: “Honestly? Watching Ellis pitch like that—it felt like the whole neighborhood exhaled. Like after all the noise about the team leaving, after all the…”  _[output/citizen_pages/index.jsonl roster]_
+- Charlene Gutierrez, Dental Hygienist, Temescal (POP-00863) — 2 pages; latest in conversation, C106: “"Oh Brie, you always know how to make an old woman blush," I chuckle, squeezing her hand as we walk. "Ranunculus, really? Those fussy little things -…”  _[output/citizen_pages/index.jsonl roster]_
+- Marlon Hingsley, Housing Authority Inspector, Downtown (POP-00172) — 2 pages; latest the morning page, C106: “Man, I love the chaos of my house, the noise, the energy—but sometimes I wonder if I’m running just to keep up. The kids are growing so fast, and I…”  _[output/citizen_pages/index.jsonl roster]_
+- Yuki Ji, Bartender, Lake Merritt (POP-00783) — 4 pages; latest to a reporter, C106: “I've worked at Lakeside Whisper Bar on quiet nights, and to me, the atmosphere feels pretty chill, you know, just a few regulars coming in for a…”  _[output/citizen_pages/index.jsonl roster]_
+- Jalen Hill, Line Cook, Jack London (POP-00960) — 1 page; latest to a reporter, C106: “Tomas? Man keeps his head down on the line, does his job. I hear the podcast chatter sometimes when we're breaking down stations, but Harborline's…”  _[output/citizen_pages/index.jsonl roster]_
+- Quynh Le, Line Cook, Jack London (POP-00878) — 1 page; latest to a reporter, C106: “Tomas? Yeah, he's got this energy about him—like he's always working on something bigger, even when he's just plating up orders. The podcast thing…”  _[output/citizen_pages/index.jsonl roster]_
+- Ariana Lee, Biotech Lab Assistant, Piedmont Ave (POP-00168) — 4 pages; latest the morning page, C106: “Honestly, it’s bittersweet. The A’s had an incredible season, and it’s hard not to feel proud despite how it ended. But looking back at the trades,…”  _[output/citizen_pages/index.jsonl roster]_
+- Robert Jaston, Senior Pastor / Faith Leader, West Oakland (POP-00758) — 4 pages; latest to a reporter, C106: “To be honest, I haven't had much direct interaction with the Bay Pure Land Buddhist Temple, but I've always been heartened to see the different faith…”  _[output/citizen_pages/index.jsonl roster]_
+- Marcus Walker, Dishwasher, Jack London (POP-00962) — 3 pages; latest to a reporter, C106: “I've just been trying to keep my head down and focus on my own things, you know? There's a lot of uncertainty in the air, and it's making people…”  _[output/citizen_pages/index.jsonl roster]_
+- Tobi Sobi, Climate Modeling Scientist, Lake Merritt (POP-00178) — 3 pages; latest to a reporter, C106: “The overcast weather—it’s been weeks of it now—it’s like it’s settled into the bones of the neighborhood. People move slower, quieter. You see fewer…”  _[output/citizen_pages/index.jsonl roster]_
+- Celeste Moon, singer, KONO (POP-01061) — 1 page; latest to a reporter, C106: “I haven't really thought about it, but I did hear Downtown was packed last night. That's all I know.”  _[output/citizen_pages/index.jsonl roster]_
+- Emilia Wurford, Tea House Owner, Chinatown (POP-00341) — 3 pages; latest in conversation, C106: “(laughing while pouring him a cup of oolong) "You're one to talk about sleep, Hal Richmond. Look at those dark circles - still chasing deadlines like…”  _[output/citizen_pages/index.jsonl roster]_
+- AJ Dybantsa, SF / The Oaks, KONO (POP-01024) — 2 pages; latest to a reporter, C106: “Honestly, I don't think about Oaks analysis that much, it's just not something that's on my mind day to day. I mean, I live in KONO, I've got my own…”  _[output/citizen_pages/index.jsonl roster]_
+- Marcus Osei, City Council Member, Chinatown (POP-00036) — 1 page; latest to a reporter, C106: “Look, I got banged up in that accident, sure, but walking these streets now—seeing how many folks are struggling worse than me—that's what rattles…”  _[output/citizen_pages/index.jsonl roster]_
+- Leo Ling, Nonprofit Executive Director, Lake Merritt (POP-00342) — 1 page; latest to a reporter, C106: “Toby's work at the community center keeps us honest about who we're really serving. When I see the mutual aid numbers come in each month, it's a gut…”  _[output/citizen_pages/index.jsonl roster]_
+- Simone Cleng, Community Organizer, West Oakland (POP-00188) — 3 pages; latest to a reporter, C106: “Toby? Oh, he's got that quiet fire about him—the kind that keeps things running without needing credit. We've crossed paths at the Community Center a…”  _[output/citizen_pages/index.jsonl roster]_
+- Jahill West, Hair Stylist, Temescal (POP-00315) — 2 pages; latest the morning page, C106: “I’m hoping today isn’t another day where I feel stuck in place. The shop’s been steady, but steady ain’t enough—not with the way rent’s climbing and…”  _[output/citizen_pages/index.jsonl roster]_
+- Layla Scott, student, Lake Merritt (POP-01011) — 1 page; latest in conversation, C105: “(Adjusting stride to match) Oh man, you remember that? I think I got it from some old storybook. (Laughs) Those tamales though - you're not wrong.…”  _[output/citizen_pages/index.jsonl roster]_
+- Soria Herrin, Stone Mason, Piedmont Ave (POP-00313) — 2 pages; latest the midday page, C105: “Noticed how the new concrete they poured at the corner of 41st has that same too-smooth look—not like real stone. Makes me want to run my fingers…”  _[output/citizen_pages/index.jsonl roster]_
+- Grace Yamamoto, Independent Bookstore Owner, Adams Point (POP-00798) — 3 pages; latest to a reporter, C105: “I think it's interesting to consider how someone like Benji Dillon being in the neighborhood might change things for people like me, who own small…”  _[output/citizen_pages/index.jsonl roster]_
+- Mart Johns, Nurse Aide, KONO (POP-00648) — 2 pages; latest to a reporter, C105: “I've noticed that having someone like Benji Dillon around can bring a lot of attention to our neighborhood, and as a Nurse Aide, I'm used to seeing…”  _[output/citizen_pages/index.jsonl roster]_
+- Ezekiel Campbell, Taxi driver, Adams Point (POP-00645) — 2 pages; latest to a reporter, C105: “I've noticed that having someone like Benji Dillon around can bring a lot of attention to our neighborhood, and as a taxi driver, I see how it…”  _[output/citizen_pages/index.jsonl roster]_
+- Howard Travis, Construction laborer, Piedmont Ave (POP-00255) — 1 page; latest the midday page, C105: “Honestly, it’s the damn noise from that construction site on Grand. It’s been weeks now, and every morning it’s the same jackhammer drill right into…”  _[output/citizen_pages/index.jsonl roster]_
+- Marky Beal, Retail worker, West Oakland (POP-00202) — 3 pages; latest the morning page, C105: “Man, 127-35… that’s wild. I’ve been following the A’s my whole life, through thick and thin, but this season? It’s bittersweet. Watching Vinnie Keane…”  _[output/citizen_pages/index.jsonl roster]_
+- Kimberly Cho, DEPUTY CHIEF OF OPERATIONS, Piedmont Ave (POP-00137) — 5 pages; latest in conversation, a question they settled, C105: “Are we both clinging to an old grudge because it’s easier than admitting we’re not so different?”  _[output/citizen_pages/index.jsonl roster]_
+- Kevin Nelson, Line cook, Temescal (POP-00269) — 6 pages; latest to a reporter, a question they carry, C105: “Will the health center construction disrupt daily life more than it benefits the neighborhood in the long run?”  _[output/citizen_pages/index.jsonl roster]_
+- Melo Arnez, Plumber, Laurel (POP-00234) — 2 pages; latest the midday page, C105: “Was fixing a leaky faucet this morning, same old routine, when I noticed the sunlight hitting the copper pipes just right—shimmered like liquid gold.…”  _[output/citizen_pages/index.jsonl roster]_
+- Manjit Singh, Senior Pastor / Faith Leader, Fruitvale (POP-00766) — 1 page; latest to a reporter, C105: “I heard about the Fruitvale Transit Hub Phase II moving back to active visioning, and it feels like we’re stuck in a loop. I just hope they figure it…”  _[output/citizen_pages/index.jsonl roster]_
+- Darren Briggs, City Building Inspector, Fruitvale (POP-00588) — 1 page; latest to a reporter, C105: “I’ve heard about the Oakland Youth Apprenticeship Pipeline starting up, and it feels like a step in the right direction for keeping kids connected to…”  _[output/citizen_pages/index.jsonl roster]_
+- Coen Carr, SG / The Oaks, Uptown (POP-01026) — 1 page; latest to a reporter, C105: “I’ve heard Dame Sarr’s been putting in work, but the Oaks’ preseason record isn’t where we want it to be. We’ve got to step it up. --- Coach Shepard…”  _[output/citizen_pages/index.jsonl roster]_
+- Isley Kelley, Shortstop, Oakland A's Legend, Rockridge (POP-00019) — 2 pages; latest to a reporter, C105; Lives carried a moment the record kept this Cycle: “This season’s been electric—it’s like the weight of farewells lifted, and now it’s all about celebrating what these guys have built. You can feel it…”  _[output/citizen_pages/index.jsonl roster]_
+- Ripley Court, STEM Program Coordinator, Rockridge (POP-00659) — 2 pages; latest the night page, C104: “I can't stop thinking about that STEM grant deadline coming up. It shouldn't be this stressful—it's just paperwork—but it feels like the whole…”  _[output/citizen_pages/index.jsonl roster]_
+- Manju Crenshaw, Midwife, Piedmont Ave (POP-00937) — 1 page; latest in conversation, C104: “*smiles warmly* Bambi, it's good to see you. Glad to hear you got that faucet—and your attitude—sorted out. Life's smoother when both are running…”  _[output/citizen_pages/index.jsonl roster]_
+- Bambi Wart, Ex-Offender Reentry Counselor, West Oakland (POP-00327) — 3 pages; latest in conversation, C104: “*adjusting my glasses, the streetlight catching the lenses* Manju—ain't seen you since you told me to fix my attitude faster than that leaky faucet.…”  _[output/citizen_pages/index.jsonl roster]_
+- Chandni Aguilar, Midwife, Piedmont Ave (POP-00880) — 1 page; latest in conversation, C104: “*adjusting the strap of my midwife bag* "Kenton! Max is good - actually at the A's game right now with his dad. That kid still talks about how you…”  _[output/citizen_pages/index.jsonl roster]_
+- Kenton Pearl, Plumber, Piedmont Ave (POP-00217) — 5 pages; latest in conversation, C104: “*holding coffee, walking down Piedmont Ave when Chandni comes into view* "Hey Chandni—damn, it's been too long. How's that boy of yours doing? Still…”  _[output/citizen_pages/index.jsonl roster]_
+- Kaila Raimon, Sourdough Baker, Brooklyn (POP-00666) — 4 pages; latest in conversation, C104: “"Jack! I’ve been good—busy with the bakery, as always, and trying to keep up with Minh’s endless energy. Those BBQs were the best, though. Remember…”  _[output/citizen_pages/index.jsonl roster]_
+- Carlo Jist, Medical Social Worker, Lake Merritt (POP-00167) — 2 pages; latest the morning page, C104: “That patch of grass near the pergola where the sun hits just right in the late afternoon. I sit there with my shoes off sometimes, toes in the dirt,…”  _[output/citizen_pages/index.jsonl roster]_
+- Sofia Jordan, Environmental Consultant, Downtown (POP-00171) — 2 pages; latest the midday page, C104: “The barista at Roast & Toast remembered my usual order without me saying a word—that extra splash of almond milk, no sweetener. It’s stupid how…”  _[output/citizen_pages/index.jsonl roster]_
+- Brenda Okoro, Deputy Mayor (Community Affairs), Rockridge (POP-00037) — 5 pages; latest the night page, C104: “P and I... we move in the same circles but never quite align. They see the city through stats and angles, and I see the faces behind those numbers. I…”  _[output/citizen_pages/index.jsonl roster]_
+- Minka Slayton, Jazz Musician, Uptown (POP-00307) — 3 pages; latest in conversation, C104: “*Minka looks up, startled, then a slow smile spreads across her face* "Cedric. Been a while. You still got that old trumpet you used to play?" *Her…”  _[output/citizen_pages/index.jsonl roster]_
+- Kwame Fitzgerald, Craft Brewery Owner, Uptown (POP-00259) — 3 pages; latest the midday page, a question they carry, C104: “How much longer can we hold onto the Oakland we remember before it's gone for good?”  _[output/citizen_pages/index.jsonl roster]_
+- Latasha Owusu, Paramedic, Lake Merritt (POP-00871) — 1 page; latest in conversation, C104: “"Oh, Maria, it’s so good to see you. I’ve been holding steady—just trying to keep up with everything. Bought that place near the lake finally, so…”  _[output/citizen_pages/index.jsonl roster]_
+- Nour Santos, student, West Oakland (POP-00989) — 3 pages; latest in an interview, C104: ““Oh, definitely the bakery on Eighth Street. My aunt Julie and I go there every Sunday morning. The smell of fresh bread fills the whole block, and…”  _[output/citizen_pages/index.jsonl roster]_
+- Idris Karim, Senior Pastor / Faith Leader, Temescal (POP-00761) — 2 pages; latest to a reporter, a question they carry, C104: “What’s holding up the progress and who’s responsible for moving it forward? --- Why isn't the energy from church meetings translating into visible…”  _[output/citizen_pages/index.jsonl roster]_
+- Jemeal Brim, Bakery worker, Piedmont Ave (POP-00226) — 5 pages; latest to a reporter, C104: “Something about Sandra's seasonal health concern don't sit right with me—folks on Piedmont Ave know how to handle the seasons. The Tribune should ask…”  _[output/citizen_pages/index.jsonl roster]_
+- Sandra Velazquez, Midwife, Piedmont Ave (POP-00830) — 1 page; latest to a reporter, C104: “I don't usually have seasonal health concerns—I'm pretty careful about staying active and eating right year-round. Maybe the Tribune should ask if…”  _[output/citizen_pages/index.jsonl roster]_
+- Emmet Gorn, Nurse aide, Uptown (POP-00277) — 2 pages; latest the morning page, C104: “Honestly? I’m quietly hoping today isn’t one of those days where I’m pulled in fifty directions at once. You know, the kind where I don’t even have a…”  _[output/citizen_pages/index.jsonl roster]_
+- Jay Adams, Bakery worker, Uptown (POP-00281) — 2 pages; latest the morning page, C103: “That damn creak in the bakery’s back door—been meaning to fix it for weeks now. Every time it whines open, it sets my teeth on edge. But truth is, it…”  _[output/citizen_pages/index.jsonl roster]_
+- Calvin Turner, Mechanic, Fruitvale (POP-00231) — 11 pages; latest to a reporter, a question they settled, C103: “How can we get more community involvement to address the civic gap? --- Why ain't nobody working on the transit hub if they serious about it?”  _[output/citizen_pages/index.jsonl roster]_
+- Javier Trenton, Affordable Childcare Advocate, Fruitvale (POP-00328) — 1 page; latest the morning page, C103: “I usually find myself drifting towards Peralta Park after work. There’s something about the way the light filters through the trees in the late…”  _[output/citizen_pages/index.jsonl roster]_
+- Warren Ashford, City Council Member - D7, Rockridge (POP-00504) — 7 pages; latest in an interview, C103: “"Well, every Saturday morning without fail, you’ll see Mr. Keane—Vinnie Keane, the A’s legend—walking his old Labrador down College Avenue. Rain or…”  _[output/citizen_pages/index.jsonl roster]_
+- Den Blue, Nurse aide, Piedmont Ave (POP-00296) — 2 pages; latest the morning page, C103: “The thing that’s been grating on me is how I keep checking the front door lock at night, over and over, like some ritual I can’t break. It’s not even…”  _[output/citizen_pages/index.jsonl roster]_
+- Miguel Allen, Plumber, Fruitvale (POP-01029) — 1 page; latest in conversation, C103: “"Yeah, it’s really something, isn’t it? I was just thinking about that the other day when I passed the clinic—they’re starting to fix up the…”  _[output/citizen_pages/index.jsonl roster]_
+- Clarence Moody, Retired Machinist, Dimond (POP-00730) — 2 pages; latest to a reporter, a question they carry, C103; Lives carried a moment the record kept this Cycle: “Are smaller, family-run businesses being overlooked in the retail vitality metrics? --- Why do we keep comparing neighborhoods instead of…”  _[output/citizen_pages/index.jsonl roster]_
+- Mateo Wally, student, Rockridge (POP-01012) — 2 pages; latest in conversation, C102: “"Willy!" I grin and shift my backpack, the A's cap almost falling out. "Yeah, that Camaro... feels like forever ago. Been okay, just school and stuff…”  _[output/citizen_pages/index.jsonl roster]_
+- Willy Wally, International Trade Consultant, Rockridge (POP-00654) — 4 pages; latest in conversation, C102: “"Mateo? Hey, man, it’s been too long. Was just thinking about you the other day when I heard that old Springsteen song come on the radio—remember how…”  _[output/citizen_pages/index.jsonl roster]_
+- Rico Fister, High School Science Teacher, Rockridge (POP-00305) — 2 pages; latest the midday page, C102: “We've been neighbors for what, twenty years? And yet most days it feels like we're just nodding across the fence, two old engines idling in separate…”  _[output/citizen_pages/index.jsonl roster]_
+- Jenna Comer, Real Estate Developer, Rockridge (POP-00476) — 1 page; latest in conversation, C102: “"Jett! Yeah, that was quite the day—I still laugh thinking about how that guy kept insisting we were overcharging him for the ‘easy fix.’ Honestly, I…”  _[output/citizen_pages/index.jsonl roster]_
+- Andre Lee, Electrician, Jack London (POP-00311) — 2 pages; latest to a reporter, C102: “Honest take? I’ll tell you—I double-checked my locks twice this week after hearing about break-ins two streets over. That’s not me being paranoid;…”  _[output/citizen_pages/index.jsonl roster]_
+- Jerry Nelson, Janitor, Uptown (POP-00237) — 4 pages; latest the morning page, a question they carry, C102: “Will the city ever fix that damn streetlight, or am I stuck with this endless buzzing?”  _[output/citizen_pages/index.jsonl roster]_
+- Bea Cartier, Roofing Contractor, Laurel (POP-00192) — 2 pages; latest the morning page, a question they carry, C102: “Maybe I need to take on a bigger project, shake things up before I get too comfortable.”  _[output/citizen_pages/index.jsonl roster]_
+- Ronnie Lar, Painter, Fruitvale (POP-00261) — 1 page; latest the midday page, C102: “This damn squeak in my stepladder - third rung from the top. Been meaning to fix it for weeks now. Every time I climb up to work on a higher section,…”  _[output/citizen_pages/index.jsonl roster]_
+- Joesph Allen, Taxi driver, West Oakland (POP-00289) — 1 page; latest the night page, C102; Lives carried a moment the record kept this Cycle: “Man, Darrin... I see him at the gas station sometimes, him nodding at me like we're old friends when we ain't. Truth? I used to ride him hard about…”  _[output/citizen_pages/index.jsonl roster]_
+- Maya Santos, Ceramicist, Temescal (POP-00475) — 1 page; latest in conversation, C102: “*laughing softly* "Oh, that old diner—those sticky vinyl booths and endless cups of coffee. I still drive by sometimes and think about those nights."…”  _[output/citizen_pages/index.jsonl roster]_
+- Priscilla Odom, Independent Bookstore Owner, Temescal (POP-00593) — 1 page; latest in conversation, C102: “"Yammie! God, it really has been too long." *adjusts glasses, smiling* "The store's kept me busy, but honestly? I've missed our coffee talks. Saw the…”  _[output/citizen_pages/index.jsonl roster]_
+- Theodora Donovan, Immigration Attorney, West Oakland (POP-00829) — 1 page; latest in conversation, C102: “Oh, Kaila! No, actually I left the bistro a few weeks back - the hours were killing me. Right now I'm just doing some catering gigs while I figure…”  _[output/citizen_pages/index.jsonl roster]_
+- Kaila Nguyen, Pupuseria Owner, Fruitvale (POP-00339) — 2 pages; latest in conversation, C102: “Theodora! Haven't seen you since that big catering order last month. How's business treating you these days? You still working over at that new…”  _[output/citizen_pages/index.jsonl roster]_
+- Bennet Green, Painter, Laurel (POP-00229) — 1 page; latest the afternoon page, C102: “That damn squeak in the garage door again. Every time I pull in or out, it’s like nails on a chalkboard. I keep telling myself I’ll fix it, but then…”  _[output/citizen_pages/index.jsonl roster]_
+- Funmi Shah, Glazier, KONO (POP-00802) — 3 pages; latest to a reporter, a question they settled, C102: “Will I ever stop comparing KONO to Laurel and just embrace it? --- Will I ever fully feel at home in KONO, or will it always feel like a compromise?…”  _[output/citizen_pages/index.jsonl roster]_
+- Xanny Allen, Warehouse worker, Jack London (POP-00243) — 1 page; latest the evening page, C102: “Honestly? I think I'm afraid to stop. The warehouse keeps my hands busy, but my mind... it circles back to empty chairs at the table. That box of her…”  _[output/citizen_pages/index.jsonl roster]_
+- Mateo Jilner, student, Rockridge (POP-01001) — 1 page; latest in conversation, C102: “Hey Darius! Yeah, I'm doing alright. Actually just taped up the A's schedule in our closet—can you believe they're 107-31? Wild season. How've you…”  _[output/citizen_pages/index.jsonl roster]_
+- Malot Bielo, Warehouse worker, Lake Merritt (POP-00293) — 2 pages; latest the morning page, a question they carry, C102: “How long will I keep putting up with this coffee maker before I finally replace it?”  _[output/citizen_pages/index.jsonl roster]_
+- Inez Mendoza, Nonprofit Executive Director, Lake Merritt (POP-00811) — 1 page; latest in conversation, C102: “"Keisha! Thanks, you’re too kind. Life’s been… steady, you know? Work’s keeping me busy, but I’ve been stealing little moments here and there—like…”  _[output/citizen_pages/index.jsonl roster]_
+- Joaquín Nakamura, Kombucha Brewer, Uptown (POP-00248) — 2 pages; latest the evening page, C103: “That moment at the corner store with Sofia—the way her laugh cut through the frustration of the long line. It’s those small connections that keep…”  _[output/citizen_pages/index.jsonl roster]_
+- Shane Phelps, Janitor, Lake Merritt (POP-00268) — 1 page; latest the evening page, C103: “I walk down to the water's edge near the pergola after my shift. The way the lights bounce off the lake at night - that's what settles me. Doesn't…”  _[output/citizen_pages/index.jsonl roster]_
+- Dearie Beacon, Security guard, Chinatown (POP-00246) — 1 page; latest the evening page, C103: “You know, at first I thought Paulson was crazy trading away Richards like that—kid was solid. But damn, 107 wins don’t lie. Still, walking past the…”  _[output/citizen_pages/index.jsonl roster]_
+- Rigo Ryno, Vintage Clothing Store Owner, Temescal (POP-00197) — 1 page; latest the evening page, C103: “The hum of AC units and distant BART trains never really stops, does it? I can hear Danny's kids laughing in their backyard two houses down - that…”  _[output/citizen_pages/index.jsonl roster]_
+- Travis Golin, Construction laborer, Jack London (POP-00205) — 4 pages; latest the evening page, C103: “That damn squeak in my work boots—been there for weeks now, every step like a mouse chirping. I keep telling myself I'll get new ones, but then I…”  _[output/citizen_pages/index.jsonl roster]_
+- Ty Yule, Taxi driver, Jack London (POP-00250) — 1 page; latest the evening page, C103: “The hum of the ferry terminal still lingers in my ears, even though I parked the cab an hour ago. Can hear some kids laughing down by the water –…”  _[output/citizen_pages/index.jsonl roster]_
+- Leonard Tran, City Council Member - D2, Downtown (POP-00502) — 1 page; latest the evening page, C103: “I was walking back from City Hall late afternoon, the sun just starting to dip behind the buildings, when I passed by that little parklet on…”  _[output/citizen_pages/index.jsonl roster]_
+- Kevel Phoul, Warehouse worker, Lake Merritt (POP-00260) — 2 pages; latest the evening page, a question they carry, C103: “How do we get back to the easy camaraderie without unraveling whatever this tension is?”  _[output/citizen_pages/index.jsonl roster]_
+- Arnie Carter, Immigrant Legal Aid Worker, Fruitvale (POP-00310) — 4 pages; latest the evening page, a question they settled, C103: “am I truly resting, or just redirecting that relentless energy into something new?”  _[output/citizen_pages/index.jsonl roster]_
+- Davey Martinez, Maintenance tech, Temescal (POP-00213) — 1 page; latest the evening page, C103: “I head over to that little bench near Temescal Alley, the one tucked just out of the main flow of foot traffic. It’s not much, but it’s mine. I sit…”  _[output/citizen_pages/index.jsonl roster]_
+- Mara Vance, City Planning Director, Rockridge (POP-00507) — 1 page; latest the evening page, C103; Lives carried the new household this Cycle: “The hum of College Avenue never really stops, does it? Even now I can hear the distant clatter of dishes from the Italian place down the block, that…”  _[output/citizen_pages/index.jsonl roster]_
+- Tyrone Lulu, Maintenance tech, Temescal (POP-00284) — 1 page; latest the evening page, C103: “Honestly? I’m tired. Not the kind sleep fixes—the kind that sits in your bones. Every time I fix something, two more break. Money’s tight, and it’s…”  _[output/citizen_pages/index.jsonl roster]_
+- Cooper Erazmo, Upholstery Shop Owner, Laurel (POP-00323) — 1 page; latest the morning page, C103: “I'm hoping the fabric shipment comes in today like they promised. Got that mid-century modern sofa job waiting on that teal tweed, and the client's…”  _[output/citizen_pages/index.jsonl roster]_
+- Baxter Thompson, Construction laborer, Rockridge (POP-00247) — 1 page; latest the evening page, C102: “Honestly? I think I'm restless because I can feel time moving faster these days. Fifty-seven ain't old, but it's not young either, and there's still…”  _[output/citizen_pages/index.jsonl roster]_
+- Lee Coo, School Psychologist, Piedmont Ave (POP-00303) — 1 page; latest the morning page, C102: “As I walked past the old oak tree on Piedmont Ave, I noticed a single leaf spinning in the air, caught in a tiny whirlwind that seemed to exist just…”  _[output/citizen_pages/index.jsonl roster]_
+- Jorge Wusther, Nurse aide, Uptown (POP-00297) — 1 page; latest in conversation, C101: “(Leaning against the counter, shaking my head) "Ay, Jee, you know me - always running between shifts at the clinic and checking scores on my breaks.…”  _[output/citizen_pages/index.jsonl roster]_
+- Kevin Clark, Third Baseman, Oakland A's, Jack London (POP-00053) — 1 page; latest to a reporter, C101: “Honestly? It’s wild. One minute I’m taking grounders in Vegas, thinking about how to get through the summer heat, and the next I’m getting a call…”  _[output/citizen_pages/index.jsonl roster]_
+- Rose Delgado, City Council District - D3, Fruitvale (POP-00503) — 2 pages; latest to a reporter, a question they carry, C101: “Will the A's ever invest in Fruitvale instead of treating it like a parking lot?”  _[output/citizen_pages/index.jsonl roster]_
+- Mika Loop, Real Estate Developer, Rockridge (POP-00306) — 1 page; latest the midday page, C101: “I noticed the way the sunlight hit the new mixed-use building on College Avenue—just finished last month—and how the glass reflected onto the…”  _[output/citizen_pages/index.jsonl roster]_
+- Laila Cortez, Chief of Staff, West Oakland (POP-00035) — 1 page; latest in an interview, C101; Lives carried a moment the record kept this Cycle: “"You know, what really stands out to me is how many more murals and public art pieces have popped up over the years—especially around the Telegraph…”  _[output/citizen_pages/index.jsonl roster]_
+- Shawn Gown, Taxi driver, Uptown (POP-00220) — 1 page; latest the midday page, C101: “You know what's been bugging me? The damn pothole on 20th Street by the old bakery. Every time I hit it, I swear it's gotten deeper. And I keep…”  _[output/citizen_pages/index.jsonl roster]_
+- Jacob Perez, Mover, Uptown (POP-00203) — 1 page; latest the night page, C101: “That damn coffee this morning—split the last of it with Maria like always, but my hands were shaking when I poured. Not from the caffeine. From the…”  _[output/citizen_pages/index.jsonl roster]_
+- Kaila Braun, Immigrant Legal Aid Worker, Fruitvale (POP-00173) — 1 page; latest the midday page, C101: “Lucia’s got that way about her—like she’s listening *into* you, not just at you. Makes me feel seen in a way I didn’t realize I needed. But I’ve been…”  _[output/citizen_pages/index.jsonl roster]_
+- Leo Leonard, Juvenile Probation Officer, Downtown (POP-00179) — 1 page; latest the afternoon page, C100: “Honestly? Underneath all that warmth and steadiness, I’m tired. Not the kind sleep fixes—the kind that comes from holding too much for too long. The…”  _[output/citizen_pages/index.jsonl roster]_
+- Joel Henry, Plumber, Uptown (POP-00299) — 1 page; latest the night page, C100: “Man, I still can't believe they traded Richards. That kid was Oakland—homegrown, loyal, gave everything. Paulson talks "future prospects," but what…”  _[output/citizen_pages/index.jsonl roster]_
+- Farah Lindqvist, City Building Inspector, Downtown (POP-00257) — 2 pages; latest the afternoon page, C100; Lives carried the wager this Cycle: “I love this city buzzing back to life, but damn, I miss sitting still without guilt. Every time I pause, I hear my mom’s voice: "Rest is for people…”  _[output/citizen_pages/index.jsonl roster]_
+- Jaren Lanning, Mechanic, Uptown (POP-00245) — 1 page; latest the evening page, C98: “Man, the news has been a lot lately—hard to turn away from, but also hard to sit with. I keep thinking about how much of it sticks with me versus how…”  _[output/citizen_pages/index.jsonl roster]_
+- Mateo Allen, Nurse aide, West Oakland (POP-00199) — 1 page; latest the midday page, C97; Lives carried a moment the record kept this Cycle: “The heat’s finally breaking a little—thank god. Been thinking about that artist talk last week, how she described color as a kind of noise. Makes…”  _[output/citizen_pages/index.jsonl roster]_
+
+## PEOPLE ON THE RECORD (your sources — real; never invent another)
+- Elijah Brown — Electrician — Rockridge — has 2 pages on the record
+- Amara Keane — Pianist, Philanthropist — Grand Lake — has 9 pages on the record
+- Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Grand Lake — has 33 pages on the record
+- Richie Ramiro — First Baseman, Midland RockHounds (AA) — Uptown — has 1 page on the record
+- Marguerite Salcedo — Managing Partner, Anchor Build — Piedmont Ave — has 2 pages on the record
+- Elle Lilo — Harbor Tugboat Captain — Jack London — has 6 pages on the record
+- Coen Cartier — Transit Operator (AC Transit) — Chinatown — has 6 pages on the record
+- Elena Soria Dominguez — Transit Hub Planning Lead — Fruitvale — has 17 pages on the record
+- Ximena Mehta — Bart Transit PR — Lake Merritt — has 12 pages on the record
+- Deacon Seymour — Manager, Oakland A's — Lake Merritt — has 27 pages on the record
+- Akua Adeyemi — Plumber — Chinatown — has 2 pages on the record
+- Brianna Lee — Historic Preservation Carpenter — Laurel — has 5 pages on the record
+- Keisha Ramos — Director, Baylight Redevelopment Authority — Lake Merritt — has 21 pages on the record
+- Mina Linas — Sea Level Monitoring Technician — Lake Merritt — has 4 pages on the record
+- Priya Chandrasekaran — Founder, Ridgeline Ventures — Lake Merritt — has 2 pages on the record
+- Emiliano Fiester — student — Lake Merritt — has 1 page on the record
+- Pilar Ramirez — Paramedic — Lake Merritt — has 4 pages on the record
+- Mariana Kapoor — student — Chinatown — has 4 pages on the record
+- Alicia Hernandez — Coffee Roaster — Uptown — has 4 pages on the record
+- Kenji Tanaka — Senior Pastor / Faith Leader — Chinatown — has 7 pages on the record
+- Cathy Skeet — Elder Tech Liaison — Chinatown — has 1 page on the record
+- Soriya Rodriguez — Ex-Offender Reentry Counselor — West Oakland — has 2 pages on the record
+- Yolanda Beckford — Firefighter-Paramedic — West Oakland — has 3 pages on the record
+- Rasha Brown — Disability Rights Advocate — Fruitvale — has 1 page on the record
+- Luis Taz — Janitor — Fruitvale — has 5 pages on the record
+- Ronald Silk — Electrician — Chinatown — has 4 pages on the record
+- Omar Amici — Construction laborer — Uptown — has 16 pages on the record
+- Vincent Ramirez — OPOA President — Lake Merritt — has 3 pages on the record
+- Lena Okafor — Daycare Director — Fruitvale — has 3 pages on the record
+- Priya Narang — EMS DIRECTOR — Uptown — has 16 pages on the record
+- Ingmar Jordan — Spoken Word Poet — Uptown — has 6 pages on the record
+- Bruce Turner — Server — Dimond — has 1 page on the record
+- Sidney Tumolo — Second Baseman, Oakland A's — West Oakland — has 1 page on the record
+- Alexa Ward — Licensed Plumber — West Oakland — has 1 page on the record
+- Evan Lewis — Bus driver — Laurel — has 10 pages on the record
+- Kai Tanaka — artist — Fruitvale — has 1 page on the record
+- Henry Rivas — Starting Pitcher, Oakland A's — West Oakland — has 5 pages on the record
+- Theo Park — Communications Director — Rockridge — has 3 pages on the record
+- Helena Voss-Adeyemi — Managing Partner, Northgate Construction — Rockridge — has 4 pages on the record
+- Brie Harris — Flower Shop Owner — Temescal — has 7 pages on the record
+- Austin Reaves — SG / The Oaks — West Oakland — has 9 pages on the record
+- Marisol Rivera — Community Advocate — Rockridge — has 1 page on the record
+- Rowan Pierce — Freelance Writer — Piedmont Ave — has 3 pages on the record
+- Lena Cross — Actor — Piedmont Ave — has 9 pages on the record
+- Travis Coles — Starting Pitcher, Oakland A's — Downtown — has 11 pages on the record
+- Danny Horn — Center Fielder, Oakland A's - Best player in the MLB — Temescal — has 6 pages on the record
+- Darrin Davis — Left Fielder, Oakland A's Legend — Piedmont Ave — has 4 pages on the record
+- Benji Dillon — Pitcher, Oakland A's Legend — Rockridge — has 26 pages on the record
+- Trevor Henderson — Oakland Oaks - Center — Lake Merritt — has 3 pages on the record
+- Abraham Wright — Tea House Owner — Chinatown — has 2 pages on the record
+- Belle Lopez — Home Health Aide — Jack London — has 5 pages on the record
+- Jonas Patel — MEDICAL EXAMINER — Chinatown — has 13 pages on the record
+- Mark Aitken — First Baseman, Oakland A's Legend — Player Rep, Community Liaison — Jack London — has 14 pages on the record
+- Clarissa Dane — DISTRICT ATTORNEY — West Oakland — has 21 pages on the record
+- Bobby Chen-Ramirez — Health Center Project Director — Jack London — has 17 pages on the record
+- Chandni Kessler — Elevator Mechanic — Laurel — has 1 page on the record
+- Hector Navarro — HVAC Technician — Temescal — has 4 pages on the record
+- Tanisha Freeman — Electrician — Grand Lake — has 1 page on the record
+- Darius Cike — Quantum Computing Researcher — West Oakland — has 3 pages on the record
+- Trenton Nawan — Server — Jack London — has 11 pages on the record
+- Adash Stanley — PG / The Oaks — Downtown — has 10 pages on the record
+- Declan Toto — Gene Therapy Counselor — Lake Merritt — has 1 page on the record
+- Art Scott — Sustainable Materials Scientist — Lake Merritt — has 3 pages on the record
+- Ignacio Zavala — Managing Partner, Foothill Builders — West Oakland — has 1 page on the record
+- Antoine Vermeer — Senior Pastor / Faith Leader — Lake Merritt — has 4 pages on the record
+- Benjamin Tsai — Police Sergeant — Chinatown — has 1 page on the record
+- Rafael Phillips — Nurse aide — Rockridge — has 3 pages on the record
+- Colt Biker — Painter — West Oakland — has 1 page on the record
+- Robert Hayes — Community Director — West Oakland — has 6 pages on the record
+- Tobert Lewis — Civil Rights Attorney — Downtown — has 2 pages on the record
+- Jett Walker — Plumber — Rockridge — has 4 pages on the record
+- Kenji Okafor — Patent Attorney — Rockridge — has 1 page on the record
+- Tyler Filet — Biotech Lab Director (Portside Bio) — Lake Merritt — has 1 page on the record
+- Pablo Almanzar — SP / Oakland A's — Chinatown — has 4 pages on the record
+- Melton Neilon — Sourdough Baker — Temescal — has 17 pages on the record
+- Daniel Cloak — Bakery Worker — West Oakland — has 10 pages on the record
+- Ramon Vega — City Council President - D1 — Lake Merritt — has 16 pages on the record
+- Yu Zen — Commercial Insurance Broker — Rockridge — has 15 pages on the record
+- Tom Jilner — Wine Bar Owner — Rockridge — has 2 pages on the record
+- Naomi Sterling — Senior Pastor / Faith Leader — Rockridge — has 6 pages on the record
+- Maya Torres-Dillon — Bay Conservation Alliance Advisory board, High School Science Teacher — Rockridge — has 8 pages on the record
+- Tio Rio — Jade Jewelry Artisan — Chinatown — has 1 page on the record
+- Ximena Salcedo — Anesthesiologist — San Antonio — has 1 page on the record
+- Vanessa Tran-Muñoz — OARI Program Director — Rockridge — has 19 pages on the record
+- Marcus Webb — OEWD Program Director — Downtown — has 14 pages on the record
+- Ilandra Tain — Muralist — West Oakland — has 1 page on the record
+- Cee Lee — Autonomous Systems Engineer — Lake Merritt — has 5 pages on the record
+- Rick Dillon — Grade Schooler — Rockridge — has 4 pages on the record
+- Mei Wong — After-school program aide — Rockridge — has 6 pages on the record
+- Gloria Liu — School Principal — Rockridge — has 2 pages on the record
+- Rafael Montez — Police Chief — Piedmont Ave — has 10 pages on the record
+- Tomas Reinholt — Police Lieutenant — Laurel — has 2 pages on the record
+- Dolores Nwachukwu — Police Captain — West Oakland — has 4 pages on the record
+- Rosalind Young — Smoke Shop Owner — Laurel — has 3 pages on the record
+- Andrew Cook — Neighborhood Watch Captain — West Oakland — has 1 page on the record
+- Dmitri Soto — Container Yard Supervisor — KONO — has 3 pages on the record
+- Helena Morr — City Ombudsman — Jack London — has 4 pages on the record
+- Jerald Jensen — Janitor — West Oakland — has 9 pages on the record
+- Eleanor Rivera — BART Station Manager — West Oakland — has 8 pages on the record
+- Marcus Tan — Founder, Oakmesh Systems — Fruitvale — has 2 pages on the record
+- Desmond Achebe — Managing Partner, Coastline Construction — West Oakland — has 3 pages on the record
+- Enzo Walker — Plumber — Lake Merritt — has 9 pages on the record
+- Eshe Norwood — Home Health Aide — West Oakland — has 1 page on the record
+- Daphne Stafford — Home Health Aide — West Oakland — has 6 pages on the record
+- Chase West — Mechanic — Fruitvale — has 2 pages on the record
+- Dax Monroe — Artist — Rockridge — has 4 pages on the record
+- Weston Herrin — Refugee Resettlement Case Worker — Chinatown — has 3 pages on the record
+- Miguel Joson — Plumber — Chinatown — has 4 pages on the record
+- Cristina Booker — Immigration Attorney — Downtown — has 4 pages on the record
+- Dame Reed — Artist/Muralist — Jack London — has 3 pages on the record
+- Father Miguel — Parish priest — Fruitvale — has 4 pages on the record
+- Omar Lingio — Vintage Clothing Store Owner — Temescal — has 5 pages on the record
+- Claire Ashford — author — Piedmont Ave — has 1 page on the record
+- Gregory Mims — Organized Crime — West Oakland — has 5 pages on the record
+- Rick Walker — K-8 Teacher,Former Line cook — Fruitvale — has 21 pages on the record
+- Lucia Polito — Aura Wellness Practitioner — Fruitvale — has 11 pages on the record
+- Tara Ellison — Journalist — Rockridge — has 6 pages on the record
+- Mimmie Carlisle — Pastry Chef — Temescal — has 2 pages on the record
+- Camila Osman — Owner, Claremont Table — Chinatown — has 1 page on the record
+- Elio Perez — Server — Rockridge — has 23 pages on the record
+- Matty Lipo — Dishwasher — Lake Merritt — has 3 pages on the record
+- Tiro Worso — Mover — Piedmont Ave — has 1 page on the record
+- Otis Redd — Scout, Oakland A's — Rockridge — has 1 page on the record
+- Sergio Aybar — Catcher, Las Vegas Aviators (AAA) — Jack London — has 1 page on the record
+- Fang Crawford — Elevator Mechanic — Laurel — has 1 page on the record
+- Mac Hillie — Bakery worker — Uptown — has 2 pages on the record
+- Marcus Whitfield — Youth Basketball Coach — Fruitvale — has 4 pages on the record
+- Ophelia Brenner — Senior Pastor / Faith Leader — Fruitvale — has 3 pages on the record
+- Geneva Zhou — Elevator Mechanic — West Oakland — has 5 pages on the record
+- Nakia Pena — Independent Bookstore Owner — Temescal — has 2 pages on the record
+- Jose Johnson — Warehouse Worker — Temescal — has 2 pages on the record
+- Dimas Wong — Stone Mason — Piedmont Ave — has 2 pages on the record
+- Victor Alize — Warehouse worker — Piedmont Ave — has 7 pages on the record
+- Reggie Soto — Auto Body Shop Owner — Fruitvale — has 1 page on the record
+- Solis Walmart — Housing Authority Inspector — Downtown — has 1 page on the record
+- Brady Lopez — Dishwasher — Piedmont Ave — has 2 pages on the record
+- Frank Reyna — Right Fielder, Oakland A's — Lake Merritt — has 2 pages on the record
+- Vladimir Gonzalez — Right Fielder, Oakland A's — Fruitvale — has 5 pages on the record
+- Desmond Morton — Left Fielder, Oakland A's — Chinatown — has 3 pages on the record
+- Rafael Brannie — Mover — Piedmont Ave — has 4 pages on the record
+- Johhny Necklar — Former MUBA player, Hall of Famer — Rockridge — has 1 page on the record
+- Wren Choi — Youth mentor — Glenview — has 2 pages on the record
+- Liliana Salazar — EV mechanic — Glenview — has 2 pages on the record
+- Mei Chen — Gallery Owner/Curator — Chinatown — has 2 pages on the record
+- Timmie Hall — Refugee Resettlement Case Worker — Chinatown — has 2 pages on the record
+- Xing Patel — Ship Repair Foreman — Jack London — has 1 page on the record
+- Jun Fisher — student — Downtown — has 1 page on the record
+- Lo Thoop — Creative Writing Teacher — Jack London — has 3 pages on the record
+- Augusta Davis — Community Health Worker — Fruitvale — has 1 page on the record
+- Tomas Beckett — student — Piedmont Ave — has 4 pages on the record
+- Christopher Johnson — Janitor — Lake Merritt — has 3 pages on the record
+- Isla Sike — Domestic Violence Shelter Director — West Oakland — has 5 pages on the record
+- Salma Navarro — student — Temescal — has 2 pages on the record
+- Patricia Nolan — Retired teacher — Temescal — has 5 pages on the record
+- Leonard Briggs — DEPUTY CHIEF OF COMMUNITY ENGAGEMENT — Lake Merritt — has 2 pages on the record
+- Ollie Campbell — Bakery Worker — Jack London — has 9 pages on the record
+- Manfred Owens — Booky — Jack London — has 2 pages on the record
+- Maren Johns — Psychotherapist — Rockridge — has 5 pages on the record
+- Rosario Medina — CBA Compliance Monitor, Fruitvale Transit Hub — Fruitvale — has 3 pages on the record
+- Omarion Farah — Cab Driver — Chinatown — has 2 pages on the record
+- Marisio Curazo — Elder Care Coordinator — Chinatown — has 1 page on the record
+- Dawson Nguyen — Sports Analytics Lead (Gridiron Analytics) — Baylight District — has 2 pages on the record
+- Estrella Mehta — Electrician — Chinatown — has 2 pages on the record
+- Valentina Campbell — Server — Jack London — has 1 page on the record
+- Ramon Solano — Senior Pastor / Faith Leader — Fruitvale — has 4 pages on the record
+- Delvon Pratt — Warehouse Supervisor — West Oakland — has 1 page on the record
+- Marmol Lemon — Graffiti Restoration Artist — Uptown — has 2 pages on the record
+- Dahlia Cruz — QA tester — Baylight District — has 2 pages on the record
+- Eleanor Fong — student — Chinatown — has 1 page on the record
+- Marco Fabregas — Catcher, Las Vegas Aviators (AAA) — Laurel — has 1 page on the record
+- Marcus Wright — Server — West Oakland — has 7 pages on the record
+- Jade Orion — Musician — Lake Merritt — has 4 pages on the record
+- Janae Rivers — City Council Member — Piedmont Ave — has 7 pages on the record
+- Avery Santana — Mayor of Oakland — Rockridge — has 9 pages on the record
+- Rico Valez — Musician — Fruitvale — has 5 pages on the record
+- Marin Tao — Musician — Chinatown — has 2 pages on the record
+- Drew Lemon — Housing Authority Inspector — Downtown — has 2 pages on the record
+- Andre Turner — Line cook — Downtown — has 12 pages on the record
+- Devon Willis — Server — Adams Point — has 3 pages on the record
+- Mojisola Cook — Community Organizer — West Oakland — has 2 pages on the record
+- Ross Cabral — Catcher, Las Vegas Aviators (AAA) — Temescal — has 2 pages on the record
+- Aaliyah Brennan — Mobile Clinic Nurse — Lake Merritt — has 6 pages on the record
+- Imie Calero — Civil Rights Attorney — Downtown — has 2 pages on the record
+- Amir Delia — Home Health Aide — Downtown — has 1 page on the record
+- Eunice Marston — Senior Pastor / Faith Leader — Downtown — has 7 pages on the record
+- Brooklyn Nguyen — Community Programs Coordinator — Fruitvale — has 3 pages on the record
+- Jaden Phillips — Barista — Uptown — has 4 pages on the record
+- Bianca Crook — Autonomous Systems Engineer — Lake Merritt — has 4 pages on the record
+- Jorry Cula — Record Shop Owner — Uptown — has 3 pages on the record
+- Joseph Cramp — Janitor — Downtown — has 3 pages on the record
+- Lila Patty — Solar Panel Installation Lead — West Oakland — has 4 pages on the record
+- Jire Hilt — Line Cook — Jack London — has 1 page on the record
+- Brian Adams — Janitor — Jack London — has 2 pages on the record
+- Xavier Ramington — Herbalist — West Oakland — has 4 pages on the record
+- Iris Pham — Barista — Baylight District — has 1 page on the record
+- Makayla Wu — Electrician — KONO — has 2 pages on the record
+- Tatiana Flores — HVAC Technician — KONO — has 3 pages on the record
+- Omar Cleo — Line Cook — Temescal — has 5 pages on the record
+- Elijah Roberts — Construction laborer — West Oakland — has 2 pages on the record
+- Derlik Green — Delivery Driver — Downtown — has 4 pages on the record
+- Marc Allie — Security guard — Laurel — has 4 pages on the record
+- Rupert Ochoa — Mutual Aid Network Organizer — Fruitvale — has 2 pages on the record
+- Simone Adesanya — School Principal — Rockridge — has 6 pages on the record
+- Kendra Lyle-Nnamdi — Police Sergeant — East Oakland — has 1 page on the record
+- Merkin Jumper — Social Services Caseworker — Downtown — has 5 pages on the record
+- Shawn Weller — Janitor — Chinatown — has 2 pages on the record
+- Clearence Leighton — Physical Therapist — Piedmont Ave — has 3 pages on the record
+- Maurice Franklin — Drone Fleet Coordinator — Rockridge — has 8 pages on the record
+- Daire Green — Transit Operator (AC Transit) — Fruitvale — has 2 pages on the record
+- Matra Woven — Janitor — Chinatown — has 2 pages on the record
+- Derek Obi — IT Support Specialist — Rockridge — has 1 page on the record
+- Cedric Nakamura — Retail clerk — West Oakland — has 3 pages on the record
+- Dillon Trevor — Server — Downtown — has 15 pages on the record
+- Amy Cook — Radiologic Technician — Lake Merritt — has 5 pages on the record
+- Elias Varek — Founder of Civis Systems — West Oakland — has 25 pages on the record
+- Lila Leap — Muralist — West Oakland — has 3 pages on the record
+- Tomas Ochoa — student — Laurel — has 1 page on the record
+- Carlos Presti — Corporate Accountant — Downtown — has 1 page on the record
+- Gordon Tate — SUPERIOR COURT LIAISON — Downtown — has 1 page on the record
+- Ryan Stark — Housing Policy Analyst — Downtown — has 1 page on the record
+- Nina Reyes — actress — Fruitvale — has 4 pages on the record
+- Alma Vasquez — sculptor — Laurel — has 2 pages on the record
+- Guadalupe Lupe — Bartender — Jack London — has 6 pages on the record
+- Hector Leech — Dishwasher — Jack London — has 3 pages on the record
+- Jessie Hess — Barista — Downtown — has 12 pages on the record
+- Manny Ellen — Elections Office — Lake Merritt — has 1 page on the record
+- Mike Paulson — General Manager, Oakland A's & The Oaks — West Oakland — has 9 pages on the record
+- Hazel Lanning — student — Laurel — has 2 pages on the record
+- Tariq Jello — Appliance Repair Technician — Laurel — has 6 pages on the record
+- Briar Soto — Electrician — KONO — has 2 pages on the record
+- Inga Creator — Boutique Owner — Uptown — has 5 pages on the record
+- Janelle Rourke — ASSISTANT DISTRICT ATTORNEY (Community Safety) — Uptown — has 1 page on the record
+- Daniel Yoon — Co-Founder, Gridiron Analytics — West Oakland — has 1 page on the record
+- Ben Clark — Mover — Piedmont Ave — has 2 pages on the record
+- Eric Taveras — Second Baseman, Oakland A's — Downtown — has 6 pages on the record
+- Lonzo Jailon — Sea Level Monitoring Technician — Lake Merritt — has 4 pages on the record
+- Joel Wren — Mechanic — West Oakland — has 8 pages on the record
+- Calvin Mwangi — AC Transit Bus Driver — West Oakland — has 1 page on the record
+- Ray Neal — AC Transit Bus Operator — West Oakland — has 2 pages on the record
+- Mai Tse — student — Chinatown — has 1 page on the record
+- Niani Oakley — Plumber — Chinatown — has 1 page on the record
+- Elena Leon — Longshoreman (Port of Oakland) — Jack London — has 5 pages on the record
+- Blair Patel — Ship Repair Foreman — Lake Merritt — has 5 pages on the record
+- Ray Samson — Appliance Repair Technician — Laurel — has 3 pages on the record
+- Melony Foster — Fashion Designer — Uptown — has 1 page on the record
+- Chris Foster — Grade Schooler — Uptown — has 4 pages on the record
+- Diego Remo — Independent Bookstore Owner — Temescal — has 2 pages on the record
+- Orlando Phillips — Retail worker — Laurel — has 4 pages on the record
+- Mason Walt — Electrician — Rockridge — has 5 pages on the record
+- Martin Richards — Third Baseman, New York Mets — Fruitvale — has 6 pages on the record
+- Jia Carmichael — Physical Therapist — Fruitvale — has 2 pages on the record
+- Patrick When — Janitor — Downtown — has 3 pages on the record
+- Theo Banks — rapper — Uptown — has 1 page on the record
+- Colin Phillips — Bakery Worker — Laurel — has 2 pages on the record
+- Victor King — Retail worker — Rockridge — has 3 pages on the record
+- Jack Phillips — Bus driver — Temescal — has 3 pages on the record
+- Tyrone Bennington — Nurse aide — Temescal — has 4 pages on the record
+- Alma Lewis — International Trade Consultant — Rockridge — has 4 pages on the record
+- John Ellis — Starting Pitcher, Oakland A's — Laurel — has 4 pages on the record
+- Priya Nair — Climate Adaptation Engineer — Downtown — has 1 page on the record
+- Evan Bing — Retail worker — Rockridge — has 2 pages on the record
+- Yael Bauer — Senior Pastor / Faith Leader — Piedmont Ave — has 2 pages on the record
+- Xiu Cello — Mover — Piedmont Ave — has 2 pages on the record
+- Aaron Whitfield — City Manager — Rockridge — has 1 page on the record
+- Jee Lei — After-School Program Director — Uptown — has 4 pages on the record
+- Lila Bennington — Oakland City Schools Elementary Teacher — Fruitvale — has 3 pages on the record
+- Toby Lamont — Mutual Aid Network Organizer — Fruitvale — has 4 pages on the record
+- Kato Rivers — Fitness Trainer — Laurel — has 1 page on the record
+- Millicent Kumar — Plumber — Chinatown — has 1 page on the record
+- Brianna Scott — Food Truck Operator — Jack London — has 2 pages on the record
+- Iris Baron — Emergency Management Coordinator — Downtown — has 3 pages on the record
+- Ricky Wilton — Janitor — Downtown — has 2 pages on the record
+- Broderick Mitchell — Security guard — Rockridge — has 6 pages on the record
+- Yammie Perez — Delivery driver — Temescal — has 7 pages on the record
+- Hazel Salazar — Line Cook — Uptown — has 1 page on the record
+- Milan Warmon — Ceramicist — Temescal — has 2 pages on the record
+- Marisol Trujillo — Drug Dealer — Fruitvale — has 1 page on the record
+- Tevan Walker — Bus driver — Laurel — has 5 pages on the record
+- Arturo Ramos — Starting Pitcher, Oakland A's — Laurel — has 3 pages on the record
+- Jackson Sift — Ex-Offender Reentry Counselor — West Oakland — has 4 pages on the record
+- Theo Burkes — Rapper — Downtown — has 2 pages on the record
+- Tao Lee — Community Organizer — Downtown — has 2 pages on the record
+- Dillon Brooks — SF / The Oaks — West Oakland — has 1 page on the record
+- Wilson Shepard — Head Coach, Oakland Oaks — West Oakland — has 6 pages on the record
+- Jun Leu — student — Temescal — has 1 page on the record
+- Jacquez Tearn — Dishwasher — Chinatown — has 3 pages on the record
+- Depak Ying — Server — Rockridge — has 13 pages on the record
+- Owen Low — Mechanic — Uptown — has 3 pages on the record
+- Jango Lango — Hardware Store Owner — Piedmont Ave — has 2 pages on the record
+- Ronald Williams — Line cook — West Oakland — has 2 pages on the record
+- Jose Colon — Catcher, Oakland A's — Chinatown — has 1 page on the record
+- Ernesto Quintero — 3B/1B , Oakland A's — Baylight District — has 6 pages on the record
+- Colin Soria — Security guard — Temescal — has 5 pages on the record
+- Tiu Xiong — Kombucha Brewer — Uptown — has 2 pages on the record
+- Dom Will — Machine Learning Engineer (Oakmesh Systems) — West Oakland — has 1 page on the record
+- Sam Fazio — Digital Twin Architect — Lake Merritt — has 1 page on the record
+- Elena Patel — Cook — West Oakland — has 1 page on the record
+- Darius Clark — Bakery Worker — West Oakland — has 8 pages on the record
+- Irene Fay — Barista — West Oakland — has 9 pages on the record
+- Toto Foto — Theater Director — Uptown — has 2 pages on the record
+- Tyrie Groin — Retail worker — Laurel — has 2 pages on the record
+- Steve Conrad — Ex-As Star - RF — Rockridge — has 4 pages on the record
+- Rafael Pilgrim — Server — Fruitvale — has 7 pages on the record
+- Akua Ortiz — HVAC Technician — Temescal — has 1 page on the record
+- Jia Pena — Dental Hygienist — Temescal — has 1 page on the record
+- Vanessa Ramas — Barista — Lake Merritt — has 4 pages on the record
+- Vanessa Treary — Barista — Lake Merritt — has 5 pages on the record
+- Ravi O'Connell — Independent Bookstore Owner — Temescal — has 2 pages on the record
+- Anand Krishnamurthy — Senior Pastor / Faith Leader — Rockridge — has 1 page on the record
+- Christopher Clerk — Mover — Chinatown — has 3 pages on the record
+- Owen Tower — Taxi driver — Fruitvale — has 5 pages on the record
+- Jacob King — Line cook — Rockridge — has 6 pages on the record
+- Wanjiru Liu — Electrician — Rockridge — has 1 page on the record
+- Carmen Solis — Community Advocate — Fruitvale — has 1 page on the record
+- Luca Petrov — Dance Choreographer — Uptown — has 2 pages on the record
+- Wendell Price — Principal, Coliseum District Development — West Oakland — has 2 pages on the record
+- Salma Campbell — student — Rockridge — has 1 page on the record
+- Delia Vargas-Ruiz — Transit Hub D3 Intake Liaison — San Antonio — has 1 page on the record
+- Dank Abara — Waiter — San Antonio — has 1 page on the record
+- Naomi Castellanos — Principal, Ridgeline Studio — Piedmont Ave — has 1 page on the record
+- Wiu Wiu — High School Science Teacher — Rockridge — has 3 pages on the record
+- Soo Loo — Corporate Accountant — Downtown — has 2 pages on the record
+- Javier Robertson — Delivery driver — Temescal — has 3 pages on the record
+- Kelvon Ochoa — AI Safety Researcher (Anthropic) — Lake Merritt — has 1 page on the record
+- Talmon Lint — Solar Panel Installation Lead — West Oakland — has 6 pages on the record
+- Bodhi Davis — Mover — Fruitvale — has 3 pages on the record
+- Shawn Neighbor — Construction laborer — Fruitvale — has 1 page on the record
+- Isabel Lopes — ESL Teacher — Fruitvale — has 5 pages on the record
+- Priyanka Raman — Principal, Oakland Tech Collective — West Oakland — has 1 page on the record
+- Beverly Peterson — Scout, Oakland A's — East Oakland — has 1 page on the record
+- Jerome Pittman — Transit Hub D5 Intake Liaison — East Oakland — has 2 pages on the record
+- Maria Conteras — High School Teacher — East Oakland — has 3 pages on the record
+- Kalyani Alvarez — Pastry Chef — Temescal — has 1 page on the record
+- Jesus Jorden — Pastry Chef, OakHouse — Fruitvale — has 1 page on the record
+- Clark Saryan — Closing Pitcher, Las Vegas Aviators (AAA) — Downtown — has 1 page on the record
+- Patrick Hill — Line cook — Laurel — has 1 page on the record
+- Jori Clame — Server — Laurel — has 2 pages on the record
+- Jacob Perez — Delivery driver — Glenview — has 1 page on the record
+- Marcus King — Warehouse worker — Glenview — has 1 page on the record
+- Cameron Wallen — Corporate Accountant — Downtown — has 1 page on the record
+- Daley Hill — Painter — Downtown — has 2 pages on the record
+- Howard Yell — Barista — Rockridge — has 5 pages on the record
+- Leanne Wu — Director of Sustainability — Rockridge — has 1 page on the record
+- Tariq Harris — Dental assistant — Chinatown — has 1 page on the record
+- Derwin Train — Grocery Store Owner — Chinatown — has 1 page on the record
+- Travis Paiz — Mover — Lake Merritt — has 2 pages on the record
+- Caroline Cabrera — After-School Program Director — Uptown — has 1 page on the record
+- Teri Mitchell — Graphic Designer — Uptown — has 1 page on the record
+- Darius Scoot — Patent Attorney — Rockridge — has 4 pages on the record
+- Sara Copper — Theater Director — Temescal — has 2 pages on the record
+- Charlene Gutierrez — Dental Hygienist — Temescal — has 2 pages on the record
+- Marlon Hingsley — Housing Authority Inspector — Downtown — has 2 pages on the record
+- Yuki Ji — Bartender — Lake Merritt — has 4 pages on the record
+- Jalen Hill — Line Cook — Jack London — has 1 page on the record
+- Quynh Le — Line Cook — Jack London — has 1 page on the record
+- Ariana Lee — Biotech Lab Assistant — Piedmont Ave — has 4 pages on the record
+- Robert Jaston — Senior Pastor / Faith Leader — West Oakland — has 4 pages on the record
+- Marcus Walker — Dishwasher — Jack London — has 3 pages on the record
+- Tobi Sobi — Climate Modeling Scientist — Lake Merritt — has 3 pages on the record
+- Celeste Moon — singer — KONO — has 1 page on the record
+- Emilia Wurford — Tea House Owner — Chinatown — has 3 pages on the record
+- AJ Dybantsa — SF / The Oaks — KONO — has 2 pages on the record
+- Marcus Osei — City Council Member — Chinatown — has 1 page on the record
+- Leo Ling — Nonprofit Executive Director — Lake Merritt — has 1 page on the record
+- Simone Cleng — Community Organizer — West Oakland — has 3 pages on the record
+- Jahill West — Hair Stylist — Temescal — has 2 pages on the record
+- Layla Scott — student — Lake Merritt — has 1 page on the record
+- Soria Herrin — Stone Mason — Piedmont Ave — has 2 pages on the record
+- Grace Yamamoto — Independent Bookstore Owner — Adams Point — has 3 pages on the record
+- Mart Johns — Nurse Aide — KONO — has 2 pages on the record
+- Ezekiel Campbell — Taxi driver — Adams Point — has 2 pages on the record
+- Howard Travis — Construction laborer — Piedmont Ave — has 1 page on the record
+- Marky Beal — Retail worker — West Oakland — has 3 pages on the record
+- Kimberly Cho — DEPUTY CHIEF OF OPERATIONS — Piedmont Ave — has 5 pages on the record
+- Kevin Nelson — Line cook — Temescal — has 6 pages on the record
+- Melo Arnez — Plumber — Laurel — has 2 pages on the record
+- Manjit Singh — Senior Pastor / Faith Leader — Fruitvale — has 1 page on the record
+- Darren Briggs — City Building Inspector — Fruitvale — has 1 page on the record
+- Coen Carr — SG / The Oaks — Uptown — has 1 page on the record
+- Isley Kelley — Shortstop, Oakland A's Legend — Rockridge — has 2 pages on the record
+- Ripley Court — STEM Program Coordinator — Rockridge — has 2 pages on the record
+- Manju Crenshaw — Midwife — Piedmont Ave — has 1 page on the record
+- Bambi Wart — Ex-Offender Reentry Counselor — West Oakland — has 3 pages on the record
+- Chandni Aguilar — Midwife — Piedmont Ave — has 1 page on the record
+- Kenton Pearl — Plumber — Piedmont Ave — has 5 pages on the record
+- Kaila Raimon — Sourdough Baker — Brooklyn — has 4 pages on the record
+- Carlo Jist — Medical Social Worker — Lake Merritt — has 2 pages on the record
+- Sofia Jordan — Environmental Consultant — Downtown — has 2 pages on the record
+- Brenda Okoro — Deputy Mayor (Community Affairs) — Rockridge — has 5 pages on the record
+- Minka Slayton — Jazz Musician — Uptown — has 3 pages on the record
+- Kwame Fitzgerald — Craft Brewery Owner — Uptown — has 3 pages on the record
+- Latasha Owusu — Paramedic — Lake Merritt — has 1 page on the record
+- Nour Santos — student — West Oakland — has 3 pages on the record
+- Idris Karim — Senior Pastor / Faith Leader — Temescal — has 2 pages on the record
+- Jemeal Brim — Bakery worker — Piedmont Ave — has 5 pages on the record
+- Sandra Velazquez — Midwife — Piedmont Ave — has 1 page on the record
+- Emmet Gorn — Nurse aide — Uptown — has 2 pages on the record
+- Jay Adams — Bakery worker — Uptown — has 2 pages on the record
+- Calvin Turner — Mechanic — Fruitvale — has 11 pages on the record
+- Javier Trenton — Affordable Childcare Advocate — Fruitvale — has 1 page on the record
+- Warren Ashford — City Council Member - D7 — Rockridge — has 7 pages on the record
+- Den Blue — Nurse aide — Piedmont Ave — has 2 pages on the record
+- Miguel Allen — Plumber — Fruitvale — has 1 page on the record
+- Clarence Moody — Retired Machinist — Dimond — has 2 pages on the record
+- Mateo Wally — student — Rockridge — has 2 pages on the record
+- Willy Wally — International Trade Consultant — Rockridge — has 4 pages on the record
+- Rico Fister — High School Science Teacher — Rockridge — has 2 pages on the record
+- Jenna Comer — Real Estate Developer — Rockridge — has 1 page on the record
+- Andre Lee — Electrician — Jack London — has 2 pages on the record
+- Jerry Nelson — Janitor — Uptown — has 4 pages on the record
+- Bea Cartier — Roofing Contractor — Laurel — has 2 pages on the record
+- Ronnie Lar — Painter — Fruitvale — has 1 page on the record
+- Joesph Allen — Taxi driver — West Oakland — has 1 page on the record
+- Maya Santos — Ceramicist — Temescal — has 1 page on the record
+- Priscilla Odom — Independent Bookstore Owner — Temescal — has 1 page on the record
+- Theodora Donovan — Immigration Attorney — West Oakland — has 1 page on the record
+- Kaila Nguyen — Pupuseria Owner — Fruitvale — has 2 pages on the record
+- Bennet Green — Painter — Laurel — has 1 page on the record
+- Funmi Shah — Glazier — KONO — has 3 pages on the record
+- Xanny Allen — Warehouse worker — Jack London — has 1 page on the record
+- Mateo Jilner — student — Rockridge — has 1 page on the record
+- Malot Bielo — Warehouse worker — Lake Merritt — has 2 pages on the record
+- Inez Mendoza — Nonprofit Executive Director — Lake Merritt — has 1 page on the record
+- Joaquín Nakamura — Kombucha Brewer — Uptown — has 2 pages on the record
+- Shane Phelps — Janitor — Lake Merritt — has 1 page on the record
+- Dearie Beacon — Security guard — Chinatown — has 1 page on the record
+- Rigo Ryno — Vintage Clothing Store Owner — Temescal — has 1 page on the record
+- Travis Golin — Construction laborer — Jack London — has 4 pages on the record
+- Ty Yule — Taxi driver — Jack London — has 1 page on the record
+- Leonard Tran — City Council Member - D2 — Downtown — has 1 page on the record
+- Kevel Phoul — Warehouse worker — Lake Merritt — has 2 pages on the record
+- Arnie Carter — Immigrant Legal Aid Worker — Fruitvale — has 4 pages on the record
+- Davey Martinez — Maintenance tech — Temescal — has 1 page on the record
+- Mara Vance — City Planning Director — Rockridge — has 1 page on the record
+- Tyrone Lulu — Maintenance tech — Temescal — has 1 page on the record
+- Cooper Erazmo — Upholstery Shop Owner — Laurel — has 1 page on the record
+- Baxter Thompson — Construction laborer — Rockridge — has 1 page on the record
+- Lee Coo — School Psychologist — Piedmont Ave — has 1 page on the record
+- Jorge Wusther — Nurse aide — Uptown — has 1 page on the record
+- Kevin Clark — Third Baseman, Oakland A's — Jack London — has 1 page on the record
+- Rose Delgado — City Council District - D3 — Fruitvale — has 2 pages on the record
+- Mika Loop — Real Estate Developer — Rockridge — has 1 page on the record
+- Laila Cortez — Chief of Staff — West Oakland — has 1 page on the record
+- Shawn Gown — Taxi driver — Uptown — has 1 page on the record
+- Jacob Perez — Mover — Uptown — has 1 page on the record
+- Kaila Braun — Immigrant Legal Aid Worker — Fruitvale — has 1 page on the record
+- Leo Leonard — Juvenile Probation Officer — Downtown — has 1 page on the record
+- Joel Henry — Plumber — Uptown — has 1 page on the record
+- Farah Lindqvist — City Building Inspector — Downtown — has 2 pages on the record
+- Jaren Lanning — Mechanic — Uptown — has 1 page on the record
+- Mateo Allen — Nurse aide — West Oakland — has 1 page on the record
+
+## THE ROOM IS YOURS
+where they were standing when they wrote it, the one plain clause that says who this is, the silence after their last line — never a word inside the quotation marks that is not on the page
+
+## APPROACH
+Voices approach: this slice is a roster, a tip sheet, not your assignment — every citizen with a page on the record, one line each. You pick whose own words carry the day, and why. The person's own line first, before their name; then who they are in one plain clause; then what in the city they were answering, from the page's own tags. Fewer, longer passages; the words are the product. Never a count, never a statistic, never an explanation of what they meant. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.
+
+## FORBIDDEN
+- Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice
+- Do not contradict a role, employer or neighborhood listed here
+- Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose
+
+## POINTERS
+- output/citizen_pages/index.jsonl (pages, whole store) batch fd0b35
+
+_Facts are the rows; the room is the reporter's._

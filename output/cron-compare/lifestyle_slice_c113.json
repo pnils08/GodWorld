@@ -1,0 +1,225 @@
+{
+  "version": "LIFESTYLE-SLICE-1",
+  "empty": false,
+  "cycle": 113,
+  "kind": "beat-lifestyle",
+  "seat": {
+    "slug": "sharon-okafor",
+    "name": "Sharon Okafor",
+    "popid": "POP-00159",
+    "desk": "culture",
+    "domain": "lifestyle",
+    "builder": "buildLifestyleSlice.js"
+  },
+  "hood": "Piedmont Ave",
+  "pulse": {
+    "className": "beat-lifestyle",
+    "score": 100,
+    "label": "Marin Tao leads the fame table; 3 fading, 0 new",
+    "hood": "Piedmont Ave",
+    "source": "output/beats/Cultural_Ledger.jsonl @C113"
+  },
+  "story": {
+    "kind": "beat-lifestyle",
+    "angle": "Lena Cross is fading — how the city follows its names",
+    "label": "Marin Tao leads the fame table; 3 fading, 0 new",
+    "hookLine": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 92, cooling), 17 media mentions.",
+    "hood": "Piedmont Ave",
+    "citizens": [
+      "Lena Cross (POP-00539)",
+      "Rowan Pierce (POP-00545)",
+      "Marisol Rivera (POP-01062)",
+      "Marin Tao (POP-00537)",
+      "Rico Valez (POP-00632)"
+    ],
+    "popids": [
+      "POP-00539",
+      "POP-00545",
+      "POP-01062",
+      "POP-00537",
+      "POP-00632"
+    ],
+    "ref": "output/beats/Cultural_Ledger.jsonl @C113",
+    "cycle": 113
+  },
+  "approach": "Lifestyle approach: this slice is the fame record — who the city knows, who is fading, who just arrived — with their domains, tiers and neighborhoods. Behavior patterns, warm analytical. The names and trajectories are real; the morning routine, the regular order, what the neighbors think are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-00539",
+      "name": "Lena Cross",
+      "role": "Actor",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Lena Cross — Actor — Piedmont Ave",
+      "why": "fading — the where-are-they-now file (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-00545",
+      "name": "Rowan Pierce",
+      "role": "Freelance Writer",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Rowan Pierce — Freelance Writer — Piedmont Ave",
+      "why": "fading — the where-are-they-now file (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-01062",
+      "name": "Marisol Rivera",
+      "role": "Community Advocate",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Marisol Rivera — Community Advocate — Rockridge",
+      "why": "fading — the where-are-they-now file (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-00537",
+      "name": "Marin Tao",
+      "role": "Musician",
+      "neighborhood": "Chinatown",
+      "business": null,
+      "profile": "Marin Tao — Musician — Chinatown",
+      "why": "the city knows them (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-00632",
+      "name": "Rico Valez",
+      "role": "Musician",
+      "neighborhood": "Fruitvale",
+      "business": null,
+      "profile": "Rico Valez — Musician — Fruitvale",
+      "why": "the city knows them (Cultural_Ledger)"
+    }
+  ],
+  "facts": [
+    {
+      "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 92, cooling), 17 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C113"
+    },
+    {
+      "text": "Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 66, cooling), 14 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C113"
+    },
+    {
+      "text": "Marisol Rivera (Community Advocate), Civic, Rockridge, Regional-tier — fading — the where-are-they-now file (fame 39, cooling), 7 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C113"
+    },
+    {
+      "text": "Marin Tao (Celebrity), Arts, Chinatown, Iconic-tier — the city knows them (fame 153, viral), 25 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C113"
+    },
+    {
+      "text": "Rico Valez (Celebrity), Arts, Fruitvale, Iconic-tier — the city knows them (fame 116, viral), 19 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C113"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "Lena Cross is fading — how the city follows its names",
+    "hookLine": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 92, cooling), 17 media mentions.",
+    "anchorFacts": [
+      "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 92, cooling), 17 media mentions",
+      "Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 66, cooling), 14 media mentions",
+      "Marisol Rivera (Community Advocate), Civic, Rockridge, Regional-tier — fading — the where-are-they-now file (fame 39, cooling), 7 media mentions",
+      "Marin Tao (Celebrity), Arts, Chinatown, Iconic-tier — the city knows them (fame 153, viral), 25 media mentions",
+      "Rico Valez (Celebrity), Arts, Fruitvale, Iconic-tier — the city knows them (fame 116, viral), 19 media mentions"
+    ],
+    "evidence": [
+      {
+        "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 92, cooling), 17 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C113"
+      },
+      {
+        "text": "Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 66, cooling), 14 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C113"
+      },
+      {
+        "text": "Marisol Rivera (Community Advocate), Civic, Rockridge, Regional-tier — fading — the where-are-they-now file (fame 39, cooling), 7 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C113"
+      },
+      {
+        "text": "Marin Tao (Celebrity), Arts, Chinatown, Iconic-tier — the city knows them (fame 153, viral), 25 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C113"
+      },
+      {
+        "text": "Rico Valez (Celebrity), Arts, Fruitvale, Iconic-tier — the city knows them (fame 116, viral), 19 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C113"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": null,
+    "hooks": [
+      {
+        "text": "A family bought their home in Uptown",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Uptown",
+        "priority": 3
+      },
+      {
+        "text": "A family bought their home in Rockridge",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Rockridge",
+        "priority": 3
+      },
+      {
+        "text": "The Aitken line is founded",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Jack London",
+        "priority": 4
+      },
+      {
+        "text": "The Rushing line is founded",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Chinatown",
+        "priority": 4
+      },
+      {
+        "text": "Downtown housing pressure at 10/10: rents climbing, households stretching to stay",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Downtown",
+        "priority": 7
+      },
+      {
+        "text": "Laurel cooling off: foot traffic down, storefronts quieter than the rest of the city",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Laurel",
+        "priority": 6
+      },
+      {
+        "text": "wrote half a letter to family, then decided to call instead",
+        "angle": "arts/culture feature",
+        "domain": "CULTURE",
+        "hood": "Piedmont Ave",
+        "priority": 3
+      },
+      {
+        "text": "caught the recap of last night's game at the counter and stayed for the second retelling",
+        "angle": "arts/culture feature",
+        "domain": "CULTURE",
+        "hood": "Rockridge",
+        "priority": 3
+      }
+    ],
+    "note": null,
+    "pageVoices": [],
+    "roomIsYours": "the coffee order, the dog's name, who recognizes them at the farmers market and who pretends not to"
+  },
+  "known": 50,
+  "fading": 3,
+  "appeared": 0,
+  "pointers": [
+    "output/beats/Cultural_Ledger.jsonl @C113",
+    "output/beats/Story_Hook_Deck.jsonl (hooks for Sharon Okafor this cycle)"
+  ]
+}

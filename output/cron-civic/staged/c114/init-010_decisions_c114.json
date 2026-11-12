@@ -1,0 +1,15 @@
+{
+  "initiative": "INIT-010",
+  "initiativeId": "INIT-010",
+  "cycle": 114,
+  "primaryVoice": "Mayor gavel (mayor_gavel-008)",
+  "consolidatedFrom": [
+    "STMT-114-mayor_gavel-008 (Mayor gavel — INIT-010 recorded committee decision on tenant defense)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-010",
+    "MilestoneNotes": "C114: Committee directed to publish its legal-support analysis and record a decision on the $4.2M tenant-defense proposal.",
+    "NextScheduledAction": "Published analysis and recorded committee decision",
+    "NextActionCycle": 114
+  }
+}

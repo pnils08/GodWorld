@@ -1,0 +1,60 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "113",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "freelance-firebrand",
+  "byline": {
+    "name": "Jax Caldera",
+    "popid": "POP-00799",
+    "beatDomain": "ACCOUNTABILITY"
+  },
+  "laneEntries": 108,
+  "quotesLanded": 4,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "canon_search",
+    "sheet_read"
+  ],
+  "toolCalls": 2,
+  "wordCount": 673,
+  "targetWords": "400-650",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 400",
+    "words": 673,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "cd4f86cc8dc1572fd70281b003a9bbd14126fbdff59407e96331e5d472498185",
+    "costUsd": 0.001
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 4/4 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/civic_c113_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": " true }\n{\n  \"popId\": \"POP-00799\",\n  \"name\": \"Jax Caldera\",\n  \"recorded\": true,\n  \"text\": \"filed: Chinatown's Lunch Spot Is Shut, a Medical Team Is on the Sidewalk, and the Roster Has Nothing to Say\"\n}"
+  },
+  "ranAt": "2026-10-28T23:16:18.443Z",
+  "dispositionReconciledAt": "2026-10-31T17:00:02.129Z"
+}

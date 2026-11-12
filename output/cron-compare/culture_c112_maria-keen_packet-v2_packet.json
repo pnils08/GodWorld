@@ -1,0 +1,977 @@
+{
+  "stage": "report",
+  "desk": "culture",
+  "cycle": "112",
+  "persona": "maria-keen",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Maria Keen",
+    "popid": "POP-00013"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-neighborhood",
+      "angle": "East Oakland — the programs that hold the block and the people who founded them",
+      "label": "East Oakland: 8 active programs on the record",
+      "hookLine": "8 active programs in East Oakland; Mark Aitken and Marcus Whitfield founded them.",
+      "hood": "East Oakland",
+      "citizens": [
+        "Mark Aitken (POP-00003)",
+        "Marcus Whitfield (POP-00532)"
+      ],
+      "popids": [
+        "POP-00003",
+        "POP-00532"
+      ],
+      "ref": "output/beats/Community_Programs.jsonl @C112",
+      "cycle": 112
+    }
+  },
+  "angle": "output/cron-compare/culture_c112_maria-keen_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 3,
+  "quotes": [
+    {
+      "pop": "POP-00003",
+      "name": "Mark Aitken",
+      "quote": "I've been involved with the Mark Aitken Youth Baseball League since it started, and I've seen firsthand the positive impact it's had on East Oakland's youth. It's not just about teaching them baseball; it's about giving them a sense of community and discipline. As a player rep and community liaison, I've worked closely with the kids and their families, and it's rewarding to see the difference it's making in their lives.",
+      "disp": "can't switch off, working themselves thin; draws people in, deep with them; curious, open to new things; steady, hard to shake; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've been involved with the Mark Aitken Youth Baseball League since it started, and I've seen firsthand the positive impact it's had on East Oakland's youth. It's not just about teaching them baseball; it's about giving them a sense of community and discipline. As a player rep and community liaison, I've worked closely with the kids and their families, and it's rewarding to see the difference it's making in their lives.\",\n  \"fact_ids\": [\"F-f6ff57ba5b60\", \"F-a2cdfdf33ef7\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-f6ff57ba5b60",
+          "F-a2cdfdf33ef7"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00003-a714c8713a",
+        "authoredQuote": true,
+        "publishableQuote": "I've been involved with the Mark Aitken Youth Baseball League since it started, and I've seen firsthand the positive impact it's had on East Oakland's youth. It's not just about teaching them baseball; it's about giving them a sense of community and discipline. As a player rep and community liaison, I've worked closely with the kids and their families, and it's rewarding to see the difference it's making in their lives."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00003",
+          "name": "Mark Aitken",
+          "role": "First Baseman, Oakland A's Legend — Player Rep, Community Liaison",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "What's the impact of the Mark Aitken Youth Baseball League on East Oakland's youth? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "East Oakland",
+          "focus": "Community programs in East Oakland and their founders",
+          "src": "output/beats/Community_Programs.jsonl @C112"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Mark Aitken — First Baseman, Oakland A's Legend — Player Rep, Community Liaison — Jack London",
+          "evidence": [
+            {
+              "id": "EV-0cb5bd989c",
+              "src": "output/beats/Community_Programs.jsonl @C112",
+              "text": "8 active programs in East Oakland; Mark Aitken and Marcus Whitfield founded them."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "East Oakland: 8 active programs on the record",
+            "src": "output/beats/Community_Programs.jsonl @C112",
+            "id": "F-642e5b26756e"
+          },
+          {
+            "t": "FACT",
+            "text": "8 active programs in East Oakland; Mark Aitken and Marcus Whitfield founded them.",
+            "src": "output/beats/Community_Programs.jsonl @C112",
+            "id": "F-4454b6f87ecf"
+          },
+          {
+            "t": "FACT",
+            "text": "Mark Aitken Youth Baseball League (youth-sports), East Oakland — founded by Mark Aitken, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C112 PRG-003",
+            "id": "F-f6ff57ba5b60"
+          },
+          {
+            "t": "FACT",
+            "text": "Eastside Hoopers Coalition (youth-sports), East Oakland — founded by Marcus Whitfield, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C112 PRG-005",
+            "id": "F-4554b8f1c818"
+          },
+          {
+            "t": "FACT",
+            "text": "Coliseum District Vendor Incubator (economic), East Oakland, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C112 PRG-009",
+            "id": "F-4e01abf63bf7"
+          },
+          {
+            "t": "FACT",
+            "text": "East Bay Harm Reduction Alliance (health), East Oakland, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C112 PRG-014",
+            "id": "F-84ac8cb40a35"
+          },
+          {
+            "t": "FACT",
+            "text": "Foothill Baptist Tabernacle Food Pantry (mutual-aid), East Oakland, since C78",
+            "src": "output/beats/Community_Programs.jsonl @C112 PRG-022",
+            "id": "F-656c8468cbd0"
+          },
+          {
+            "t": "FACT",
+            "text": "Mark Aitken — First Baseman, Oakland A's Legend — Player Rep, Community Liaison — Jack London",
+            "src": "Simulation_Ledger profile for POP-00003",
+            "id": "F-a2cdfdf33ef7"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00532",
+      "name": "Marcus Whitfield",
+      "quote": "I've seen firsthand how community programs like the Eastside Hoopers Coalition can bring people together and make a real difference in their lives. As the founder of the Coalition, I know how much work and dedication goes into making it happen. It's not just about the program itself, but about the people behind it and the impact it has on the community. The Eastside Hoopers Coalition has definitely changed the landscape for youth sports in East Oakland, providing a safe and supportive environment for kids to develop their skills and build relationships.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen firsthand how community programs like the Eastside Hoopers Coalition can bring people together and make a real difference in their lives. As the founder of the Coalition, I know how much work and dedication goes into making it happen. It's not just about the program itself, but about the people behind it and the impact it has on the community. The Eastside Hoopers Coalition has definitely changed the landscape for youth sports in East Oakland, providing a safe and supportive environment for kids to develop their skills and build relationships.\",\n  \"fact_ids\": [\"F-4554b8f1c818\", \"F-1e057b4205ad\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-4554b8f1c818",
+          "F-1e057b4205ad"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00532-6867da506a",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen firsthand how community programs like the Eastside Hoopers Coalition can bring people together and make a real difference in their lives. As the founder of the Coalition, I know how much work and dedication goes into making it happen. It's not just about the program itself, but about the people behind it and the impact it has on the community. The Eastside Hoopers Coalition has definitely changed the landscape for youth sports in East Oakland, providing a safe and supportive environment for kids to develop their skills and build relationships."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00532",
+          "name": "Marcus Whitfield",
+          "role": "Youth Basketball Coach",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "How has the Eastside Hoopers Coalition changed the landscape for youth sports in East Oakland? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "East Oakland",
+          "focus": "Community programs in East Oakland and their founders",
+          "src": "output/beats/Community_Programs.jsonl @C112"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Marcus Whitfield — Youth Basketball Coach — Fruitvale",
+          "evidence": [
+            {
+              "id": "EV-8edaa4d5a3",
+              "src": "output/beats/Community_Programs.jsonl @C112",
+              "text": "8 active programs in East Oakland; Mark Aitken and Marcus Whitfield founded them."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "East Oakland: 8 active programs on the record",
+            "src": "output/beats/Community_Programs.jsonl @C112",
+            "id": "F-642e5b26756e"
+          },
+          {
+            "t": "FACT",
+            "text": "8 active programs in East Oakland; Mark Aitken and Marcus Whitfield founded them.",
+            "src": "output/beats/Community_Programs.jsonl @C112",
+            "id": "F-4454b6f87ecf"
+          },
+          {
+            "t": "FACT",
+            "text": "Mark Aitken Youth Baseball League (youth-sports), East Oakland — founded by Mark Aitken, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C112 PRG-003",
+            "id": "F-f6ff57ba5b60"
+          },
+          {
+            "t": "FACT",
+            "text": "Eastside Hoopers Coalition (youth-sports), East Oakland — founded by Marcus Whitfield, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C112 PRG-005",
+            "id": "F-4554b8f1c818"
+          },
+          {
+            "t": "FACT",
+            "text": "Coliseum District Vendor Incubator (economic), East Oakland, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C112 PRG-009",
+            "id": "F-4e01abf63bf7"
+          },
+          {
+            "t": "FACT",
+            "text": "East Bay Harm Reduction Alliance (health), East Oakland, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C112 PRG-014",
+            "id": "F-84ac8cb40a35"
+          },
+          {
+            "t": "FACT",
+            "text": "Foothill Baptist Tabernacle Food Pantry (mutual-aid), East Oakland, since C78",
+            "src": "output/beats/Community_Programs.jsonl @C112 PRG-022",
+            "id": "F-656c8468cbd0"
+          },
+          {
+            "t": "FACT",
+            "text": "Marcus Whitfield — Youth Basketball Coach — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00532",
+            "id": "F-1e057b4205ad"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00043",
+      "name": "Janae Rivers",
+      "quote": "I'm still seeing the same desperation, same grind. But I'm also seeing some real change on the horizon. We've got the Youth Apprenticeship Pipeline launching in East Oakland, and that's a start. It's not just talk this time; we're putting the first rung of the ladder in their hands. The Alternative Response Initiative is changing how we answer calls, too. It's not just about East Oakland anymore; the cracks are spreading, and we need to act before West Oakland and Fruitvale get hit harder.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; warm, tender with people; curious, open to new things; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I'm still seeing the same desperation, same grind. But I'm also seeing some real change on the horizon. We've got the Youth Apprenticeship Pipeline launching in East Oakland, and that's a start. It's not just talk this time; we're putting the first rung of the ladder in their hands. The Alternative Response Initiative is changing how we answer calls, too. It's not just about East Oakland anymore; the cracks are spreading, and we need to act before West Oakland and Fruitvale get hit harder.\",\n  \"fact_ids\": [\"F-748490e05bf2\", \"F-e99dbe81d491\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": [\"Follow up on the Youth Apprenticeship Pipeline's first cohort\"],\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-748490e05bf2",
+          "F-e99dbe81d491"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [
+          "Follow up on the Youth Apprenticeship Pipeline's first cohort"
+        ],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00043-7c08647a0d",
+        "authoredQuote": true,
+        "publishableQuote": "I'm still seeing the same desperation, same grind. But I'm also seeing some real change on the horizon. We've got the Youth Apprenticeship Pipeline launching in East Oakland, and that's a start. It's not just talk this time; we're putting the first rung of the ladder in their hands. The Alternative Response Initiative is changing how we answer calls, too. It's not just about East Oakland anymore; the cracks are spreading, and we need to act before West Oakland and Fruitvale get hit harder."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00043",
+          "name": "Janae Rivers",
+          "role": "City Council Member",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "Your own page at C101 says: \"Not when we've got young folks in East Oakland, West Oakland, desperate for pathways out of the grind\". Is that still how you see East Oakland? Speak only from that and your own reaction."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "East Oakland",
+          "focus": "Community programs in East Oakland and their founders",
+          "src": "output/beats/Community_Programs.jsonl @C112"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Janae Rivers — City Council Member",
+          "evidence": [
+            {
+              "id": "EV-PAGE-71d6659c0e",
+              "src": "cp-POP-00043-c101-PRESS",
+              "text": "Not when we've got young folks in East Oakland, West Oakland, desperate for pathways out of the grind."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "INTERPRETATION",
+            "text": "Not when we've got young folks in East Oakland, West Oakland, desperate for pathways out of the grind.",
+            "src": "cp-POP-00043-c101-PRESS",
+            "id": "F-748490e05bf2"
+          },
+          {
+            "t": "FACT",
+            "text": "Janae Rivers — City Council Member",
+            "src": "Simulation_Ledger profile for POP-00043",
+            "id": "F-e99dbe81d491"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-00003",
+      "name": "Mark Aitken",
+      "quote": "I've been involved with the Mark Aitken Youth Baseball League since it started, and I've seen firsthand the positive impact it's had on East Oakland's youth. It's not just about teaching them baseball; it's about giving them a sense of community and discipline. As a player rep and community liaison, I've worked closely with the kids and their families, and it's rewarding to see the difference it's making in their lives.",
+      "disp": "can't switch off, working themselves thin; draws people in, deep with them; curious, open to new things; steady, hard to shake; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've been involved with the Mark Aitken Youth Baseball League since it started, and I've seen firsthand the positive impact it's had on East Oakland's youth. It's not just about teaching them baseball; it's about giving them a sense of community and discipline. As a player rep and community liaison, I've worked closely with the kids and their families, and it's rewarding to see the difference it's making in their lives.\",\n  \"fact_ids\": [\"F-f6ff57ba5b60\", \"F-a2cdfdf33ef7\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-f6ff57ba5b60",
+          "F-a2cdfdf33ef7"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00003-a714c8713a",
+        "authoredQuote": true,
+        "publishableQuote": "I've been involved with the Mark Aitken Youth Baseball League since it started, and I've seen firsthand the positive impact it's had on East Oakland's youth. It's not just about teaching them baseball; it's about giving them a sense of community and discipline. As a player rep and community liaison, I've worked closely with the kids and their families, and it's rewarding to see the difference it's making in their lives."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00003",
+          "name": "Mark Aitken",
+          "role": "First Baseman, Oakland A's Legend — Player Rep, Community Liaison",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "What's the impact of the Mark Aitken Youth Baseball League on East Oakland's youth? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "East Oakland",
+          "focus": "Community programs in East Oakland and their founders",
+          "src": "output/beats/Community_Programs.jsonl @C112"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Mark Aitken — First Baseman, Oakland A's Legend — Player Rep, Community Liaison — Jack London",
+          "evidence": [
+            {
+              "id": "EV-0cb5bd989c",
+              "src": "output/beats/Community_Programs.jsonl @C112",
+              "text": "8 active programs in East Oakland; Mark Aitken and Marcus Whitfield founded them."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "East Oakland: 8 active programs on the record",
+            "src": "output/beats/Community_Programs.jsonl @C112",
+            "id": "F-642e5b26756e"
+          },
+          {
+            "t": "FACT",
+            "text": "8 active programs in East Oakland; Mark Aitken and Marcus Whitfield founded them.",
+            "src": "output/beats/Community_Programs.jsonl @C112",
+            "id": "F-4454b6f87ecf"
+          },
+          {
+            "t": "FACT",
+            "text": "Mark Aitken Youth Baseball League (youth-sports), East Oakland — founded by Mark Aitken, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C112 PRG-003",
+            "id": "F-f6ff57ba5b60"
+          },
+          {
+            "t": "FACT",
+            "text": "Eastside Hoopers Coalition (youth-sports), East Oakland — founded by Marcus Whitfield, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C112 PRG-005",
+            "id": "F-4554b8f1c818"
+          },
+          {
+            "t": "FACT",
+            "text": "Coliseum District Vendor Incubator (economic), East Oakland, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C112 PRG-009",
+            "id": "F-4e01abf63bf7"
+          },
+          {
+            "t": "FACT",
+            "text": "East Bay Harm Reduction Alliance (health), East Oakland, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C112 PRG-014",
+            "id": "F-84ac8cb40a35"
+          },
+          {
+            "t": "FACT",
+            "text": "Foothill Baptist Tabernacle Food Pantry (mutual-aid), East Oakland, since C78",
+            "src": "output/beats/Community_Programs.jsonl @C112 PRG-022",
+            "id": "F-656c8468cbd0"
+          },
+          {
+            "t": "FACT",
+            "text": "Mark Aitken — First Baseman, Oakland A's Legend — Player Rep, Community Liaison — Jack London",
+            "src": "Simulation_Ledger profile for POP-00003",
+            "id": "F-a2cdfdf33ef7"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00532",
+      "name": "Marcus Whitfield",
+      "quote": "I've seen firsthand how community programs like the Eastside Hoopers Coalition can bring people together and make a real difference in their lives. As the founder of the Coalition, I know how much work and dedication goes into making it happen. It's not just about the program itself, but about the people behind it and the impact it has on the community. The Eastside Hoopers Coalition has definitely changed the landscape for youth sports in East Oakland, providing a safe and supportive environment for kids to develop their skills and build relationships.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen firsthand how community programs like the Eastside Hoopers Coalition can bring people together and make a real difference in their lives. As the founder of the Coalition, I know how much work and dedication goes into making it happen. It's not just about the program itself, but about the people behind it and the impact it has on the community. The Eastside Hoopers Coalition has definitely changed the landscape for youth sports in East Oakland, providing a safe and supportive environment for kids to develop their skills and build relationships.\",\n  \"fact_ids\": [\"F-4554b8f1c818\", \"F-1e057b4205ad\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-4554b8f1c818",
+          "F-1e057b4205ad"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00532-6867da506a",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen firsthand how community programs like the Eastside Hoopers Coalition can bring people together and make a real difference in their lives. As the founder of the Coalition, I know how much work and dedication goes into making it happen. It's not just about the program itself, but about the people behind it and the impact it has on the community. The Eastside Hoopers Coalition has definitely changed the landscape for youth sports in East Oakland, providing a safe and supportive environment for kids to develop their skills and build relationships."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00532",
+          "name": "Marcus Whitfield",
+          "role": "Youth Basketball Coach",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "How has the Eastside Hoopers Coalition changed the landscape for youth sports in East Oakland? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "East Oakland",
+          "focus": "Community programs in East Oakland and their founders",
+          "src": "output/beats/Community_Programs.jsonl @C112"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Marcus Whitfield — Youth Basketball Coach — Fruitvale",
+          "evidence": [
+            {
+              "id": "EV-8edaa4d5a3",
+              "src": "output/beats/Community_Programs.jsonl @C112",
+              "text": "8 active programs in East Oakland; Mark Aitken and Marcus Whitfield founded them."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "East Oakland: 8 active programs on the record",
+            "src": "output/beats/Community_Programs.jsonl @C112",
+            "id": "F-642e5b26756e"
+          },
+          {
+            "t": "FACT",
+            "text": "8 active programs in East Oakland; Mark Aitken and Marcus Whitfield founded them.",
+            "src": "output/beats/Community_Programs.jsonl @C112",
+            "id": "F-4454b6f87ecf"
+          },
+          {
+            "t": "FACT",
+            "text": "Mark Aitken Youth Baseball League (youth-sports), East Oakland — founded by Mark Aitken, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C112 PRG-003",
+            "id": "F-f6ff57ba5b60"
+          },
+          {
+            "t": "FACT",
+            "text": "Eastside Hoopers Coalition (youth-sports), East Oakland — founded by Marcus Whitfield, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C112 PRG-005",
+            "id": "F-4554b8f1c818"
+          },
+          {
+            "t": "FACT",
+            "text": "Coliseum District Vendor Incubator (economic), East Oakland, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C112 PRG-009",
+            "id": "F-4e01abf63bf7"
+          },
+          {
+            "t": "FACT",
+            "text": "East Bay Harm Reduction Alliance (health), East Oakland, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C112 PRG-014",
+            "id": "F-84ac8cb40a35"
+          },
+          {
+            "t": "FACT",
+            "text": "Foothill Baptist Tabernacle Food Pantry (mutual-aid), East Oakland, since C78",
+            "src": "output/beats/Community_Programs.jsonl @C112 PRG-022",
+            "id": "F-656c8468cbd0"
+          },
+          {
+            "t": "FACT",
+            "text": "Marcus Whitfield — Youth Basketball Coach — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00532",
+            "id": "F-1e057b4205ad"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00034",
+      "name": "Avery Santana",
+      "quote": null,
+      "disp": "driven, hard to sit still; magnetic, center of every room; steady, hard to shake",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: unverifiedLead must be an array or null",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen a lot more than just construction crews in East Oakland. I've seen community programs taking root, people coming together to make a difference. That's the Oakland I'm working to support.\",\n  \"fact_ids\": [\"F-079f21af2fbb\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": \"The founders of those community programs are the real unsung heroes of East Oakland's revitalization.\",\n  \"abstain_reason\": null\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00034",
+          "name": "Avery Santana",
+          "role": "Mayor of Oakland",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "Your own page at C102 says: \"I’ve seen construction crews breaking ground on affordable housing projects in East Oakland\". Is that still how you see East Oakland? Speak only from that and your own reaction."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "East Oakland",
+          "focus": "Community programs in East Oakland and their founders",
+          "src": "output/beats/Community_Programs.jsonl @C112"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Avery Santana — Mayor of Oakland",
+          "evidence": [
+            {
+              "id": "EV-PAGE-ed5a0821ef",
+              "src": "cp-POP-00034-c102-PRESS",
+              "text": "I’ve seen construction crews breaking ground on affordable housing projects in East Oakland."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "INTERPRETATION",
+            "text": "I’ve seen construction crews breaking ground on affordable housing projects in East Oakland.",
+            "src": "cp-POP-00034-c102-PRESS",
+            "id": "F-079f21af2fbb"
+          },
+          {
+            "t": "FACT",
+            "text": "Avery Santana — Mayor of Oakland",
+            "src": "Simulation_Ledger profile for POP-00034",
+            "id": "F-b5ae4680e5be"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00043",
+      "name": "Janae Rivers",
+      "quote": "I'm still seeing the same desperation, same grind. But I'm also seeing some real change on the horizon. We've got the Youth Apprenticeship Pipeline launching in East Oakland, and that's a start. It's not just talk this time; we're putting the first rung of the ladder in their hands. The Alternative Response Initiative is changing how we answer calls, too. It's not just about East Oakland anymore; the cracks are spreading, and we need to act before West Oakland and Fruitvale get hit harder.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; warm, tender with people; curious, open to new things; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I'm still seeing the same desperation, same grind. But I'm also seeing some real change on the horizon. We've got the Youth Apprenticeship Pipeline launching in East Oakland, and that's a start. It's not just talk this time; we're putting the first rung of the ladder in their hands. The Alternative Response Initiative is changing how we answer calls, too. It's not just about East Oakland anymore; the cracks are spreading, and we need to act before West Oakland and Fruitvale get hit harder.\",\n  \"fact_ids\": [\"F-748490e05bf2\", \"F-e99dbe81d491\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": [\"Follow up on the Youth Apprenticeship Pipeline's first cohort\"],\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-748490e05bf2",
+          "F-e99dbe81d491"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [
+          "Follow up on the Youth Apprenticeship Pipeline's first cohort"
+        ],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00043-7c08647a0d",
+        "authoredQuote": true,
+        "publishableQuote": "I'm still seeing the same desperation, same grind. But I'm also seeing some real change on the horizon. We've got the Youth Apprenticeship Pipeline launching in East Oakland, and that's a start. It's not just talk this time; we're putting the first rung of the ladder in their hands. The Alternative Response Initiative is changing how we answer calls, too. It's not just about East Oakland anymore; the cracks are spreading, and we need to act before West Oakland and Fruitvale get hit harder."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00043",
+          "name": "Janae Rivers",
+          "role": "City Council Member",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "Your own page at C101 says: \"Not when we've got young folks in East Oakland, West Oakland, desperate for pathways out of the grind\". Is that still how you see East Oakland? Speak only from that and your own reaction."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "East Oakland",
+          "focus": "Community programs in East Oakland and their founders",
+          "src": "output/beats/Community_Programs.jsonl @C112"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Janae Rivers — City Council Member",
+          "evidence": [
+            {
+              "id": "EV-PAGE-71d6659c0e",
+              "src": "cp-POP-00043-c101-PRESS",
+              "text": "Not when we've got young folks in East Oakland, West Oakland, desperate for pathways out of the grind."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "INTERPRETATION",
+            "text": "Not when we've got young folks in East Oakland, West Oakland, desperate for pathways out of the grind.",
+            "src": "cp-POP-00043-c101-PRESS",
+            "id": "F-748490e05bf2"
+          },
+          {
+            "t": "FACT",
+            "text": "Janae Rivers — City Council Member",
+            "src": "Simulation_Ledger profile for POP-00043",
+            "id": "F-e99dbe81d491"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-10-23T18:19:18.661Z"
+}

@@ -1,0 +1,22 @@
+{
+  "cycle": 115,
+  "candidates": {
+    "MV-114-civic-office-council-d9-2026-11-05": {
+      "moveId": "MV-114-civic-office-council-d9-2026-11-05",
+      "cycle": 115,
+      "date": "2026-11-05",
+      "agentDir": "civic-office-council-d9",
+      "popid": "POP-00506",
+      "proposingOffice": "COUNCIL-D9",
+      "title": "Laurel Neighborhood Patch and Clean-Up",
+      "category": "environment",
+      "reach": "hood",
+      "hoods": [
+        "Laurel"
+      ],
+      "problem": "Targeted street-level repair and cleanup work in Laurel — fixing the visible conditions that erode confidence and sending the message that this district is not being left behind. Covers patching, missed-pickup recovery, and the small physical stuff that residents read as care.",
+      "budget": "$6M",
+      "status": "pending"
+    }
+  }
+}

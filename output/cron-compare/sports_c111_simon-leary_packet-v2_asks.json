@@ -1,0 +1,451 @@
+[
+  {
+    "pop": "POP-00033",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00033\",\"name\":\"John Ellis\",\"role\":\"Starting Pitcher, Oakland A's\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Simon Leary\",\"question\":\"John Ellis is a starting pitcher on a team that's 4-1. If the load shifts around him, what does he notice about his own rhythm — not the results, but the feel of the work? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"long-view-signal\",\"hood\":\"Downtown\",\"focus\":\"The structural continuity of a 4-1 start and three straight wins as a frame for understanding a role change — not as disruption, but as the load finding a new way to distribute itself.\",\"src\":\"world_summary_c111.md ## Sports\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"John Ellis — Starting Pitcher, Oakland A's\",\"evidence\":[{\"id\":\"EV-3485922c37\",\"src\":\"world_summary_c111.md ## Sports\",\"text\":\"The A's record is 4-1.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C111\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-a43c5d888b36\"},{\"t\":\"FACT\",\"text\":\"The A's record is 4-1.\",\"src\":\"world_summary_c111.md ## Sports\",\"id\":\"F-198811406e03\"},{\"t\":\"FACT\",\"text\":\"The A's have won 3 straight.\",\"src\":\"world_summary_c111.md ## Sports\",\"id\":\"F-297a24edbcbc\"},{\"t\":\"FACT\",\"text\":\"John Ellis — Starting Pitcher, Oakland A's\",\"src\":\"Simulation_Ledger profile for POP-00033\",\"id\":\"F-bc7918c1624e\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00033",
+        "name": "John Ellis",
+        "role": "Starting Pitcher, Oakland A's",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Simon Leary",
+        "question": "John Ellis is a starting pitcher on a team that's 4-1. If the load shifts around him, what does he notice about his own rhythm — not the results, but the feel of the work? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "long-view-signal",
+        "hood": "Downtown",
+        "focus": "The structural continuity of a 4-1 start and three straight wins as a frame for understanding a role change — not as disruption, but as the load finding a new way to distribute itself.",
+        "src": "world_summary_c111.md ## Sports"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "John Ellis — Starting Pitcher, Oakland A's",
+        "evidence": [
+          {
+            "id": "EV-3485922c37",
+            "src": "world_summary_c111.md ## Sports",
+            "text": "The A's record is 4-1."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C111",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-a43c5d888b36"
+        },
+        {
+          "t": "FACT",
+          "text": "The A's record is 4-1.",
+          "src": "world_summary_c111.md ## Sports",
+          "id": "F-198811406e03"
+        },
+        {
+          "t": "FACT",
+          "text": "The A's have won 3 straight.",
+          "src": "world_summary_c111.md ## Sports",
+          "id": "F-297a24edbcbc"
+        },
+        {
+          "t": "FACT",
+          "text": "John Ellis — Starting Pitcher, Oakland A's",
+          "src": "Simulation_Ledger profile for POP-00033",
+          "id": "F-bc7918c1624e"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00597",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00597\",\"name\":\"Eric Taveras\",\"role\":\"Second Baseman, Oakland A's\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Simon Leary\",\"question\":\"Eric Taveras plays second base, a position that depends on repetition. In a stretch of three straight wins, what does consistency feel like from the middle of the field? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"long-view-signal\",\"hood\":\"Downtown\",\"focus\":\"The structural continuity of a 4-1 start and three straight wins as a frame for understanding a role change — not as disruption, but as the load finding a new way to distribute itself.\",\"src\":\"world_summary_c111.md ## Sports\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Eric Taveras — Second Baseman, Oakland A's\",\"evidence\":[{\"id\":\"EV-c116ced4a5\",\"src\":\"world_summary_c111.md ## Sports\",\"text\":\"The A's record is 4-1.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C111\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-a43c5d888b36\"},{\"t\":\"FACT\",\"text\":\"The A's record is 4-1.\",\"src\":\"world_summary_c111.md ## Sports\",\"id\":\"F-198811406e03\"},{\"t\":\"FACT\",\"text\":\"The A's have won 3 straight.\",\"src\":\"world_summary_c111.md ## Sports\",\"id\":\"F-297a24edbcbc\"},{\"t\":\"FACT\",\"text\":\"Eric Taveras — Second Baseman, Oakland A's\",\"src\":\"Simulation_Ledger profile for POP-00597\",\"id\":\"F-1e092a13984c\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00597",
+        "name": "Eric Taveras",
+        "role": "Second Baseman, Oakland A's",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Simon Leary",
+        "question": "Eric Taveras plays second base, a position that depends on repetition. In a stretch of three straight wins, what does consistency feel like from the middle of the field? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "long-view-signal",
+        "hood": "Downtown",
+        "focus": "The structural continuity of a 4-1 start and three straight wins as a frame for understanding a role change — not as disruption, but as the load finding a new way to distribute itself.",
+        "src": "world_summary_c111.md ## Sports"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Eric Taveras — Second Baseman, Oakland A's",
+        "evidence": [
+          {
+            "id": "EV-c116ced4a5",
+            "src": "world_summary_c111.md ## Sports",
+            "text": "The A's record is 4-1."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C111",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-a43c5d888b36"
+        },
+        {
+          "t": "FACT",
+          "text": "The A's record is 4-1.",
+          "src": "world_summary_c111.md ## Sports",
+          "id": "F-198811406e03"
+        },
+        {
+          "t": "FACT",
+          "text": "The A's have won 3 straight.",
+          "src": "world_summary_c111.md ## Sports",
+          "id": "F-297a24edbcbc"
+        },
+        {
+          "t": "FACT",
+          "text": "Eric Taveras — Second Baseman, Oakland A's",
+          "src": "Simulation_Ledger profile for POP-00597",
+          "id": "F-1e092a13984c"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00018",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00018\",\"name\":\"Benji Dillon\",\"role\":\"Pitcher, Oakland A's Legend\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Simon Leary\",\"question\":\"Benji Dillon has lived through a role change himself. From where he sits now, what does it look like when a team keeps its footing mid-shift? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"long-view-signal\",\"hood\":\"Downtown\",\"focus\":\"The structural continuity of a 4-1 start and three straight wins as a frame for understanding a role change — not as disruption, but as the load finding a new way to distribute itself.\",\"src\":\"world_summary_c111.md ## Sports\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Benji Dillon — Pitcher, Oakland A's Legend\",\"evidence\":[{\"id\":\"EV-c998e5f214\",\"src\":\"world_summary_c111.md ## Sports\",\"text\":\"The A's record is 4-1.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C111\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-a43c5d888b36\"},{\"t\":\"FACT\",\"text\":\"The A's record is 4-1.\",\"src\":\"world_summary_c111.md ## Sports\",\"id\":\"F-198811406e03\"},{\"t\":\"FACT\",\"text\":\"The A's have won 3 straight.\",\"src\":\"world_summary_c111.md ## Sports\",\"id\":\"F-297a24edbcbc\"},{\"t\":\"FACT\",\"text\":\"Benji Dillon — Pitcher, Oakland A's Legend\",\"src\":\"Simulation_Ledger profile for POP-00018\",\"id\":\"F-2b937e94a839\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00018",
+        "name": "Benji Dillon",
+        "role": "Pitcher, Oakland A's Legend",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Simon Leary",
+        "question": "Benji Dillon has lived through a role change himself. From where he sits now, what does it look like when a team keeps its footing mid-shift? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "long-view-signal",
+        "hood": "Downtown",
+        "focus": "The structural continuity of a 4-1 start and three straight wins as a frame for understanding a role change — not as disruption, but as the load finding a new way to distribute itself.",
+        "src": "world_summary_c111.md ## Sports"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Benji Dillon — Pitcher, Oakland A's Legend",
+        "evidence": [
+          {
+            "id": "EV-c998e5f214",
+            "src": "world_summary_c111.md ## Sports",
+            "text": "The A's record is 4-1."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C111",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-a43c5d888b36"
+        },
+        {
+          "t": "FACT",
+          "text": "The A's record is 4-1.",
+          "src": "world_summary_c111.md ## Sports",
+          "id": "F-198811406e03"
+        },
+        {
+          "t": "FACT",
+          "text": "The A's have won 3 straight.",
+          "src": "world_summary_c111.md ## Sports",
+          "id": "F-297a24edbcbc"
+        },
+        {
+          "t": "FACT",
+          "text": "Benji Dillon — Pitcher, Oakland A's Legend",
+          "src": "Simulation_Ledger profile for POP-00018",
+          "id": "F-2b937e94a839"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00001",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00001\",\"name\":\"Vinnie Keane\",\"role\":\"Designated Hitter, Oakland A's Legend\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Simon Leary\",\"question\":\"What have you seen, felt, or understood about \\\"The structural continuity of a 4-1 start and three straight wins as a frame for understanding a role change — not as disruption, but as the load finding a new way to distribute itself.\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"long-view-signal\",\"hood\":\"Downtown\",\"focus\":\"The structural continuity of a 4-1 start and three straight wins as a frame for understanding a role change — not as disruption, but as the load finding a new way to distribute itself.\",\"src\":\"world_summary_c111.md ## Sports\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Vinnie Keane — Designated Hitter, Oakland A's Legend\",\"evidence\":[{\"id\":\"EV-58d932ba7b\",\"src\":\"world_summary_c111.md ## Sports\",\"text\":\"The A's record is 4-1.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C111\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-a43c5d888b36\"},{\"t\":\"FACT\",\"text\":\"The A's record is 4-1.\",\"src\":\"world_summary_c111.md ## Sports\",\"id\":\"F-198811406e03\"},{\"t\":\"FACT\",\"text\":\"The A's have won 3 straight.\",\"src\":\"world_summary_c111.md ## Sports\",\"id\":\"F-297a24edbcbc\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane — Designated Hitter, Oakland A's Legend\",\"src\":\"Simulation_Ledger profile for POP-00001\",\"id\":\"F-6c412eff96ee\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00001",
+        "name": "Vinnie Keane",
+        "role": "Designated Hitter, Oakland A's Legend",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Simon Leary",
+        "question": "What have you seen, felt, or understood about \"The structural continuity of a 4-1 start and three straight wins as a frame for understanding a role change — not as disruption, but as the load finding a new way to distribute itself.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "long-view-signal",
+        "hood": "Downtown",
+        "focus": "The structural continuity of a 4-1 start and three straight wins as a frame for understanding a role change — not as disruption, but as the load finding a new way to distribute itself.",
+        "src": "world_summary_c111.md ## Sports"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Vinnie Keane — Designated Hitter, Oakland A's Legend",
+        "evidence": [
+          {
+            "id": "EV-58d932ba7b",
+            "src": "world_summary_c111.md ## Sports",
+            "text": "The A's record is 4-1."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C111",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-a43c5d888b36"
+        },
+        {
+          "t": "FACT",
+          "text": "The A's record is 4-1.",
+          "src": "world_summary_c111.md ## Sports",
+          "id": "F-198811406e03"
+        },
+        {
+          "t": "FACT",
+          "text": "The A's have won 3 straight.",
+          "src": "world_summary_c111.md ## Sports",
+          "id": "F-297a24edbcbc"
+        },
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane — Designated Hitter, Oakland A's Legend",
+          "src": "Simulation_Ledger profile for POP-00001",
+          "id": "F-6c412eff96ee"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  }
+]

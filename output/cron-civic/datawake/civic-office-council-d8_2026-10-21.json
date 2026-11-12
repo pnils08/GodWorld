@@ -1,0 +1,26 @@
+{
+  "office": "council_d8",
+  "agentDir": "civic-office-council-d8",
+  "holder": "Nina Chen",
+  "popid": "POP-00505",
+  "title": "City Council District 8",
+  "date": "2026-10-21",
+  "cycle": 112,
+  "model": "google/gemini-3.7-flash",
+  "statement": "District 8 stands firmly with Adams Point by enforcing procedural parity and structured municipal maintenance, refusing to abandon the corridor while local sentiment sits at -0.14 against the city baseline of -0.008 with a decay momentum of 2. We will advance the $2.5M Commercial Stabilization for Grand Lake ordinance alongside formal administrative service audits across Adams Point and Eastlake to guarantee transparent execution and measurable corridor relief.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-112-civic-office-council-d8",
+        "text": "Executing the committee vote on the $2.5M Commercial Stabilization for Grand Lake ordinance (INIT-009) and ordering administrative service audits for Adams Point and Eastlake.",
+        "directiveCycle": 112,
+        "confrontationSeat": "civic-office-council-d8"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": "Adams Point sentiment -0.14 vs city -0.008; decay momentum 2",
+  "ranAt": "2026-10-21T10:45:29.261Z",
+  "fellBackFrom": null
+}

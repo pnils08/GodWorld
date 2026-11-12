@@ -1,0 +1,27 @@
+{
+  "status": "arc-seed",
+  "cycle": "114",
+  "desk": "civic",
+  "persona": "lila-mezran",
+  "hood": "Chinatown",
+  "quotes": [
+    {
+      "pop": "POP-00799",
+      "name": "Jax Caldera",
+      "quote": "Honestly, I see people push through more than they go in. It's not stubbornness — it's that the hospital's not close, and a lot of folks here work jobs where taking a day off means losing pay or losing a shift. I've watched neighbors ride out fevers with herbal tea and a heating pad because the alternative was a bill they couldn't explain. The ones who do go in are usually past the point of choice. That's the part that gets me — by the time someone here decides to see a doctor, it's not a precaution anymore, it's an emergency."
+    },
+    {
+      "pop": "POP-00803",
+      "name": "Akua Adeyemi",
+      "quote": "I see it in the little things, honestly. A bottle of cough syrup moved from the bathroom to the kitchen counter, so it's right there where someone'll remember it. Or a chair pulled up by the window, where someone's been sitting a long time, just watching the street. Sometimes the whole house gets rearranged — the bed moved downstairs, or the living room turned into a bedroom, because stairs got too hard. You don't have to ask. You just see it."
+    },
+    {
+      "pop": "POP-00194",
+      "name": "Yu Zen",
+      "quote": "When I was in that hospital bed after my accident, I learned something about who shows up for you. It's not the building with the big sign — it's the people. Chinatown's got the most sick right now, and I know that neighborhood doesn't have the hospital footprint the rest of us take for granted. But I've seen how those communities work — the families, the shopkeepers, the elders checking on each other. That's where the caring happens when the beds are full. I think about that every morning now when I walk past the hospital cart for coffee. The city's at 70 beds, all full — that's not a number to me anymore. That's 70 people hoping someone shows up for them the way my family showed up for me."
+    }
+  ],
+  "claim": "Honestly, I see people push through more than they go in. It's not stubbornness — it's that the hospital's not close, and a lot of folks here work jobs where taking a day off means losing pay or losing a shift. I've watched neighbors ride out fevers with herbal tea and a heating pad because the alternative was a bill they couldn't explain. The ones who do go in are usually past the point of choice. That's the part that gets me — by the time someone here decides to see a doctor, it's not a precaution anymore, it's an emergency.",
+  "src": "citizenVoice PRESS c114",
+  "ranAt": "2026-11-02T19:16:40.002Z"
+}

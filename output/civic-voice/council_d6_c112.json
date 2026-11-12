@@ -1,0 +1,48 @@
+{
+  "office": "council_d6",
+  "cycle": 112,
+  "speaker": "Elliott Crane",
+  "cascadeSummary": "District 6 continues to champion foundational municipal reliability, ensuring corridors like Piedmont Avenue receive essential baseline city services while commercial activity remains active and crime low. As new multi-million dollar appropriations and emergency hearings come before Council, I am insisting on strict fiscal oversight, formal committee vetting, and measurable economic metrics before any general fund commitments are approved.",
+  "statements": [
+    {
+      "statementId": "STMT-112-council_d6-001",
+      "type": "constituent_response",
+      "topic": "Piedmont Avenue Commercial Vitality and Municipal Services",
+      "initiative": null,
+      "decision": "Prioritize seamless baseline infrastructure and municipal service delivery along Piedmont Avenue",
+      "quote": "When local commercial corridors maintain low crime and steady street trade, City Hall's primary responsibility is delivering reliable municipal fundamentals.",
+      "fullStatement": "Piedmont Avenue continues to demonstrate the strength of neighborhood commerce with low crime and active street trade. City Hall does not need to over-engineer solutions where local business anchors are working; our obligation is to guarantee consistent baseline municipal services, clean streets, and dependable infrastructure that allow Montclair and Piedmont Avenue merchants to thrive.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-112-council_d6-002",
+      "type": "committee_statement",
+      "topic": "Fiscal Review and Committee Scrutiny of New Spending Measures",
+      "initiative": "Commercial Stabilization for Grand Lake",
+      "decision": "Enforce strict auditing, milestone verification, and committee review for INIT-009, INIT-010, and INIT-011",
+      "quote": "Multi-million dollar legislative filings require rigorous committee examination and clear audit controls before a single dollar moves on the ledger.",
+      "fullStatement": "With the formal filing and committee scheduling of the Commercial Stabilization for Grand Lake fund, the West Oakland Tenant Defense Fund, and the Ivy Hill Revitalization Initiative, Council must maintain disciplined fiduciary oversight. These proposals involve substantial public capital, and District 6 will scrutinize each funding formula to ensure explicit performance benchmarks and independent auditing are embedded in the text.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-112-council_d6-003",
+      "type": "hearing_statement",
+      "topic": "Downtown Economic Revitalization Hearing",
+      "initiative": "Downtown Economic Revitalization",
+      "decision": "Focus emergency committee hearing on measurable economic recovery and regulatory relief",
+      "quote": "Economic revitalization must deliver tangible commercial recovery and fiscal discipline rather than open-ended allocations.",
+      "fullStatement": "The convening of the Economic Development Committee on downtown revitalization is an essential step, provided the discussion centers on structural recovery and concrete commercial metrics. Revitalizing Oakland's urban core requires smart regulatory adjustments, robust merchant support, and clear accountability for city expenditures.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-112-council_d6-004",
+      "type": "oversight_statement",
+      "topic": "Workforce Placement Auditing and Relief Disbursements",
+      "initiative": "Oakland Youth Apprenticeship Pipeline",
+      "decision": "Demand verified placement reporting for INIT-007 alongside ongoing month-eleven stabilization disbursement oversight",
+      "quote": "Public investments prove their value through verified placement outcomes and transparent accounting records.",
+      "fullStatement": "As the first cohort placement report for the Oakland Youth Apprenticeship Pipeline arrives and month-eleven disbursements proceed for the West Oakland Stabilization Fund, our focus remains on transparent tracking. District 6 supports workforce readiness and targeted relief, but success must always be demonstrated through verified job placements and transparent ledger accounting.",
+      "trackerUpdates": {}
+    }
+  ]
+}

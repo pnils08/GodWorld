@@ -1,0 +1,287 @@
+{
+  "cycle": 113,
+  "builtAt": "2026-10-28T11:15:18.577Z",
+  "empty": false,
+  "kind": "jax-accountability",
+  "journalist": {
+    "name": "Jax Caldera",
+    "popid": "POP-00799",
+    "persona": "freelance-firebrand"
+  },
+  "approach": "Firebrand approach (sim stink-audit): do NOT open from the official timeline. Find what does not line up — metric vs claim, money vs outcome, boomtown copy vs decay, crisis with no owner. Write into the contradiction. Name who must answer. End on the unanswered question. Scene color is yours (weather, street, bar), including your own route through one or many bars, so long as it contradicts nothing on this slice. Do not invent a named business or institution that the sim has not supplied. Never invent careers for named people — RoleType lines are immutable. Never invent citizen names.",
+  "scandalRows": [],
+  "hooks": [],
+  "stink": {
+    "className": "metric-contradiction",
+    "score": 61,
+    "label": "math-imbalance (high) | Chinatown: decay [Sentiment -0.050, RetailVitality -2.07, HousingPressure +1.000] — Sentiment now -0.06 (20 of 22, city median 0.03); RetailVitality now 7.78 (9 of 22, city median 7.165); HousingPressure now 1.5 (14 of 22, city median 0) — with no matching active initiative",
+    "ref": "output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+    "kind": "anomaly",
+    "desk": "civic"
+  },
+  "contradiction": {
+    "a": "Chinatown: decay [Sentiment -0.050, RetailVitality -2.07, HousingPressure +1.000] — Sentiment now -0.06 (20 of 22, city median 0.03); RetailVitality now 7.78 (9 of 22, city median 7.165); HousingPressure now 1.5 (14 of 22, city median 0) — with no matching active initiative",
+    "b": "No active initiative (or mitigator) owns this break on the record",
+    "frame": "The map says decay; the program roster does not answer it.",
+    "aSrc": "output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+    "bSrc": "output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12"
+  },
+  "story": {
+    "ref": "output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+    "label": "Chinatown: decay [Sentiment -0.050, RetailVitality -2.07, HousingPressure +1.000] — Sentiment now -0.06 (20 of 22, city median 0.03); RetailVitality now 7.78 (9 of 22, city median 7.165); HousingPressure now 1.5 (14 of 22, city median 0) — with no matching active initiative",
+    "kind": "anomaly",
+    "angle": "The map says decay; the program roster does not answer it.",
+    "hookLine": null,
+    "hood": "Chinatown",
+    "popids": [
+      "POP-00439",
+      "POP-00635",
+      "POP-01128",
+      "POP-01137",
+      "POP-01194",
+      "POP-01203",
+      "POP-01208",
+      "POP-00212",
+      "POP-00257"
+    ],
+    "citizens": [
+      "Timmie Hall — Refugee Resettlement Case Worker, Chinatown",
+      "Mei Chen — Gallery Owner/Curator, Chinatown",
+      "Liliana Salazar — EV mechanic, Glenview",
+      "Wren Choi — Youth mentor, Glenview",
+      "Solveig Anand — School Nurse, Glenview",
+      "Iris Pham — Barista, Baylight District",
+      "Pooja Coleman — Warehouse worker, Baylight District",
+      "Jessie Hess — Barista, Downtown",
+      "Farah Lindqvist — City Building Inspector, Downtown"
+    ],
+    "stinkClass": "metric-contradiction",
+    "stinkScore": 61
+  },
+  "prewrite": {
+    "method": "TWO_SIDED_DATA_AUDIT",
+    "anchorFacts": [
+      "Chinatown: decay [Sentiment -0.050, RetailVitality -2.07, HousingPressure +1.000] — Sentiment now -0.06 (20 of 22, city median 0.03); RetailVitality now 7.78 (9 of 22, city median 7.165); HousingPressure now 1.5 (14 of 22, city median 0) — with no matching active initiative",
+      "No active initiative (or mitigator) owns this break on the record"
+    ],
+    "evidence": [
+      {
+        "side": "A",
+        "text": "Chinatown: decay [Sentiment -0.050, RetailVitality -2.07, HousingPressure +1.000] — Sentiment now -0.06 (20 of 22, city median 0.03); RetailVitality now 7.78 (9 of 22, city median 7.165); HousingPressure now 1.5 (14 of 22, city median 0) — with no matching active initiative",
+        "src": "output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12"
+      },
+      {
+        "side": "B",
+        "text": "No active initiative (or mitigator) owns this break on the record",
+        "src": "output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12"
+      }
+    ],
+    "scopeHoods": [
+      "Chinatown"
+    ],
+    "missing": [
+      "the prior comparison needed to validate the flagged direction",
+      "an office response to the data mismatch"
+    ],
+    "closeQuestion": "The map says decay; the program roster does not answer it."
+  },
+  "citizens": [
+    {
+      "popid": "POP-00439",
+      "name": "Timmie Hall",
+      "role": "Refugee Resettlement Case Worker",
+      "neighborhood": "Chinatown",
+      "careerStage": "senior",
+      "employerBizId": "BIZ-00028",
+      "profile": "Timmie Hall (POP-00439) — role: Refugee Resettlement Case Worker; neighborhood: Chinatown; born: 1995; careerStage: senior; wealth: 5; employerBiz: BIZ-00028; skills: Faith & Community; tier: 3",
+      "why": "stink-handle"
+    },
+    {
+      "popid": "POP-00635",
+      "name": "Mei Chen",
+      "role": "Gallery Owner/Curator",
+      "neighborhood": "Chinatown",
+      "careerStage": "senior",
+      "employerBizId": "SELF_EMPLOYED",
+      "profile": "Mei Chen (POP-00635) — role: Gallery Owner/Curator; neighborhood: Chinatown; born: 1994; careerStage: senior; wealth: 5; employerBiz: SELF_EMPLOYED; skills: Government & Civic; tier: 3",
+      "why": "stink-handle"
+    },
+    {
+      "popid": "POP-01128",
+      "name": "Liliana Salazar",
+      "role": "EV mechanic",
+      "neighborhood": "Glenview",
+      "careerStage": "mid-career",
+      "employerBizId": null,
+      "profile": "Liliana Salazar (POP-01128) — role: EV mechanic; neighborhood: Glenview; born: 1968; careerStage: mid-career; wealth: 5; tier: 4",
+      "why": "same-hood-signal"
+    },
+    {
+      "popid": "POP-01137",
+      "name": "Wren Choi",
+      "role": "Youth mentor",
+      "neighborhood": "Glenview",
+      "careerStage": "mid-career",
+      "employerBizId": null,
+      "profile": "Wren Choi (POP-01137) — role: Youth mentor; neighborhood: Glenview; born: 1999; careerStage: mid-career; wealth: 4; tier: 4",
+      "why": "same-hood-signal"
+    },
+    {
+      "popid": "POP-01194",
+      "name": "Solveig Anand",
+      "role": "School Nurse",
+      "neighborhood": "Glenview",
+      "careerStage": "mid-career",
+      "employerBizId": "BIZ-00016",
+      "profile": "Solveig Anand (POP-01194) — role: School Nurse; neighborhood: Glenview; born: 2006; careerStage: mid-career; wealth: 6; employerBiz: BIZ-00016; skills: Healthcare; tier: 4",
+      "why": "same-hood-signal"
+    },
+    {
+      "popid": "POP-01203",
+      "name": "Iris Pham",
+      "role": "Barista",
+      "neighborhood": "Baylight District",
+      "careerStage": "entry-level",
+      "employerBizId": null,
+      "profile": "Iris Pham (POP-01203) — role: Barista; neighborhood: Baylight District; born: 2018; careerStage: entry-level; wealth: 5; tier: 4",
+      "why": "same-hood-signal"
+    },
+    {
+      "popid": "POP-01208",
+      "name": "Pooja Coleman",
+      "role": "Warehouse worker",
+      "neighborhood": "Baylight District",
+      "careerStage": "mid-career",
+      "employerBizId": null,
+      "profile": "Pooja Coleman (POP-01208) — role: Warehouse worker; neighborhood: Baylight District; born: 1975; careerStage: mid-career; wealth: 5; tier: 4",
+      "why": "same-hood-signal"
+    },
+    {
+      "popid": "POP-00212",
+      "name": "Jessie Hess",
+      "role": "Barista",
+      "neighborhood": "Downtown",
+      "careerStage": "retired",
+      "employerBizId": "BIZ-00176",
+      "profile": "Jessie Hess (POP-00212) — role: Barista; neighborhood: Downtown; born: 1977; careerStage: retired; wealth: 8; employerBiz: BIZ-00176; skills: Tech & Innovation; tier: 3",
+      "why": "bond-hop from interview pool"
+    },
+    {
+      "popid": "POP-00257",
+      "name": "Farah Lindqvist",
+      "role": "City Building Inspector",
+      "neighborhood": "Downtown",
+      "careerStage": "senior",
+      "employerBizId": "BIZ-00017",
+      "profile": "Farah Lindqvist (POP-00257) — role: City Building Inspector; neighborhood: Downtown; born: 1994; careerStage: senior; wealth: 6; employerBiz: BIZ-00017; skills: Government & Civic; tier: 4",
+      "why": "bond-hop from interview pool"
+    }
+  ],
+  "priorCoverage": [],
+  "priorCoverageError": null,
+  "bonds": [
+    {
+      "bondId": "BOND-D4B0B704",
+      "a": "POP-00212",
+      "b": "POP-00439",
+      "type": "rivalry",
+      "intensity": "8",
+      "origin": "random",
+      "neighborhood": "cross-neighborhood",
+      "aName": "Jessie Hess",
+      "bName": "Timmie Hall",
+      "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+    },
+    {
+      "bondId": "sisxzwep",
+      "a": "POP-01137",
+      "b": "POP-00257",
+      "type": "neighbor",
+      "intensity": "3",
+      "origin": "random_encounter",
+      "neighborhood": null,
+      "aName": "Wren Choi",
+      "bName": "Farah Lindqvist",
+      "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+    }
+  ],
+  "scene": {
+    "weather": "Season: Winter | Weather: 58°F clear, W 8 mph, clear (frontState CLEAR), humidity 56, visibility 10",
+    "hood": "Chinatown",
+    "neighborhoodTexture": "A medical team rushes to an emergency on the sidewalk, drawing a small crowd. The usual lunch spot is suddenly closed, with a notice taped to the door.",
+    "whoLivedIt": [],
+    "chaos": [
+      "| ambulance | medical_emergency | neighborhood Chinatown | Sentiment | -0.07 | FALSE |",
+      "- ambulance → Chinatown: Lights and sirens at the curb — a medical emergency the neighbors will retell."
+    ],
+    "colorRoom": "You may invent one or many bar/street/sensory scenes and Jax's own presence or route through them, so long as the color contradicts no supplied sim fact. A generic bar is persona texture, not a new canon business. Named people must stay on the CITIZENS list or be unnamed. Do not invent a named business or institution. RoleType is immutable — do not reassign careers."
+  },
+  "gaps": {
+    "note": "Ledgers/surfaces that would deepen Jax further if wired or fixed",
+    "missingOrThin": [
+      {
+        "source": "EmployerBizId → Business_Ledger name/address",
+        "status": "gap",
+        "why": "RoleType alone; no shop name/street for employer scene color without inventing"
+      },
+      {
+        "source": "Cultural_Ledger venues by neighborhood",
+        "status": "gap-on-disk",
+        "why": "Bar/venue canon list not auto-attached to slice — Jax opens in bars; needs hood venue pointer"
+      },
+      {
+        "source": "Faith_Ledger / Faith_Organizations by hood",
+        "status": "partial",
+        "why": "Texture file sometimes names congregations; not joined to stink hood systematically"
+      },
+      {
+        "source": "LifeHistory_Log raw (beyond Who Lived It digest)",
+        "status": "partial",
+        "why": "Digest is tag-summary; full event prose would deepen street color without inventing people"
+      },
+      {
+        "source": "Relationship_Bonds live refresh",
+        "status": "stale-risk",
+        "why": "bond-ledger-live.tsv may lag; bond-hop quality depends on export freshness"
+      },
+      {
+        "source": "Neighborhood_Map row metrics on slice",
+        "status": "partial",
+        "why": "Stink label carries some decay numbers; full hood board not embedded as color (avoid jargon in prose)"
+      },
+      {
+        "source": "Map hoods with zero Simulation_Ledger residents (e.g. Brooklyn on C102)",
+        "status": "sim-gap",
+        "why": "Audit can flag decay for a hood nobody lives in on the ledger — stink is real, interview pool empty; slice walks to next candidate with residents"
+      },
+      {
+        "source": "Citizen pages / DialState",
+        "status": "via-citizenVoice",
+        "why": "Quote stage loads dials; slice does not pre-print dial prose (correct — voice owns it)"
+      }
+    ],
+    "colorAllowed": [
+      "Weather line from Riley/world_summary",
+      "neighborhood_texture paragraph (perception-only, often nameless)",
+      "Who Lived It lines for this hood",
+      "Chaos_Cars rows touching hood/citizen",
+      "Bond edges among pool (professional/friend/family)"
+    ]
+  },
+  "pointers": [
+    "output/cron-compare/stink_c113.json",
+    "output/desk_signal_c113.json",
+    "output/world_summary_c113.md",
+    "output/neighborhood_texture_c113.md",
+    "output/engine_audit_c113.json",
+    "output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+    "output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+    "output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12"
+  ],
+  "reportMeta": {
+    "illnessRate": 4.2,
+    "maxScore": 61,
+    "shouldForce": true,
+    "candidateCount": 20
+  }
+}

@@ -1,0 +1,963 @@
+{
+  "stage": "report",
+  "desk": "undocked-digest",
+  "cycle": "111",
+  "persona": "nia-rook-weekly",
+  "packetContract": "LEP/2",
+  "reporter": null,
+  "assignment": {
+    "story": {
+      "ref": "undocked-week:weekly-c111",
+      "label": "UNDOCKED week-in-review c111",
+      "kind": "undocked-digest",
+      "angle": "Week-in-UNDOCKED leaderboard digest — every pilot who flew this cycle (Rosario Medina, Eric Taveras, Briar Soto), who is climbing and who is fading. Standings: Eric Taveras leads the board — rank #1, 1 cycle(s) led, current streak 1. In the chair: Rosario Medina — CBA Compliance Monitor, Fruitvale Transit Hub; Eric Taveras — Second Baseman, Oakland A's; Briar Soto — Electrician. The career is who they are, not the story; the story is the flight.",
+      "facts": [
+        "Rosario Medina — 2 episode(s) this cycle, credits 110, combat 0, mishaps 0 (UNDOCKED feed)",
+        "Eric Taveras — 2 episode(s) this cycle, credits 1170, combat 0, mishaps 0 (UNDOCKED feed)",
+        "Briar Soto — 2 episode(s) this cycle, credits 0, combat 0, mishaps 0 (UNDOCKED feed)",
+        "Rosario Medina — CBA Compliance Monitor, Fruitvale Transit Hub (ledger)",
+        "Eric Taveras — Second Baseman, Oakland A's (ledger)",
+        "Eric Taveras, Playoffs: The A's offense continues to be carried by playoff MVP Eric Taveras with his 7th Homerun in this playoff and run. Mike Paulson celebrated his veteran stars on their season and warned the league of Eric Taveras and Ern...",
+        "Eric Taveras, Championship: Eric Taveras win World Series MVP to go along with his post-season MVP for the earlier rounds, Taveras showing tremendous value in signing him this past off-season.",
+        "Eric Taveras, Playoffs: Eric Taveras continues his amazing playoff campaign with 2 homeruns.",
+        "Briar Soto — Electrician (ledger)"
+      ],
+      "citizens": [
+        "Rosario Medina — CBA Compliance Monitor, Fruitvale Transit Hub, UNDOCKED cast pilot",
+        "Eric Taveras — Second Baseman, Oakland A's, UNDOCKED cast pilot",
+        "Briar Soto — Electrician, UNDOCKED cast pilot"
+      ],
+      "popids": [
+        "POP-01053",
+        "POP-00597",
+        "POP-00926"
+      ]
+    }
+  },
+  "angle": "output/cron-compare/undocked-digest_c111_nia-rook-weekly_packet-v2_angle.json",
+  "quotesRequested": 3,
+  "quotesLanded": 3,
+  "quotes": [
+    {
+      "pop": "POP-00597",
+      "name": "Eric Taveras",
+      "quote": "To be honest, I haven't been thinking about being MVP that much. The pressure's always there, but when we're winning, it feels more like a team thing. The flight isn't really a part of my life right now; I'm focused on the game. I don't know if it's a sanctuary or another competition for me.",
+      "disp": "driven, hard to sit still; curious, open to new things; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, I haven't been thinking about being MVP that much. The pressure's always there, but when we're winning, it feels more like a team thing. The flight isn't really a part of my life right now; I'm focused on the game. I don't know if it's a sanctuary or another competition for me.\",\n  \"fact_ids\": [\"F-378fd239204e\", \"F-e1375b591374\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-378fd239204e",
+          "F-e1375b591374"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00597-603822d3a3",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, I haven't been thinking about being MVP that much. The pressure's always there, but when we're winning, it feels more like a team thing. The flight isn't really a part of my life right now; I'm focused on the game. I don't know if it's a sanctuary or another competition for me."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00597",
+          "name": "Eric Taveras",
+          "role": "UNDOCKED pilot",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "Does the pressure of the World Series MVP run make the flight a sanctuary or just another competition to win? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked-digest",
+          "hood": null,
+          "focus": "The contrast between Eric Taveras's total dominance and Briar Soto's lack of credits this cycle.",
+          "src": "undocked-week:weekly-c111"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Eric Taveras — UNDOCKED pilot",
+          "evidence": [
+            {
+              "id": "EV-04e69dd73a",
+              "src": "undocked-week:weekly-c111",
+              "text": "UNDOCKED week-in-review c111"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C111",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-a43c5d888b36"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED week-in-review c111",
+            "src": "undocked-week:weekly-c111",
+            "id": "F-83d8abaec9ba"
+          },
+          {
+            "t": "FACT",
+            "text": "Rosario Medina — 2 episode(s) this cycle, credits 110, combat 0, mishaps 0 (UNDOCKED feed)",
+            "src": "undocked-week:weekly-c111",
+            "id": "F-05bb46c4c41c"
+          },
+          {
+            "t": "FACT",
+            "text": "Eric Taveras — 2 episode(s) this cycle, credits 1170, combat 0, mishaps 0 (UNDOCKED feed)",
+            "src": "undocked-week:weekly-c111",
+            "id": "F-574fbb509601"
+          },
+          {
+            "t": "FACT",
+            "text": "Briar Soto — 2 episode(s) this cycle, credits 0, combat 0, mishaps 0 (UNDOCKED feed)",
+            "src": "undocked-week:weekly-c111",
+            "id": "F-37b49f2bb908"
+          },
+          {
+            "t": "FACT",
+            "text": "Rosario Medina — CBA Compliance Monitor, Fruitvale Transit Hub (ledger)",
+            "src": "undocked-week:weekly-c111",
+            "id": "F-c3efc932b3ab"
+          },
+          {
+            "t": "FACT",
+            "text": "Eric Taveras — Second Baseman, Oakland A's (ledger)",
+            "src": "undocked-week:weekly-c111",
+            "id": "F-378fd239204e"
+          },
+          {
+            "t": "FACT",
+            "text": "Eric Taveras, Playoffs: The A's offense continues to be carried by playoff MVP Eric Taveras with his 7th Homerun in this playoff and run. Mike Paulson celebrated his veteran stars on their season and warned the league of Eric Taveras and Ern...",
+            "src": "undocked-week:weekly-c111",
+            "id": "F-e1375b591374"
+          },
+          {
+            "t": "FACT",
+            "text": "Eric Taveras — UNDOCKED pilot",
+            "src": "Simulation_Ledger profile for POP-00597",
+            "id": "F-e250c63b74bb"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00926",
+      "name": "Briar Soto",
+      "quote": "I don't really know how to reconcile it. I've had things go smoothly before, but when the books don't balance out and you're sitting at zero while everyone else is climbing, it's just a weird feeling.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n \"answer\": \"quote\",\n \"quote\": \"I don't really know how to reconcile it. I've had things go smoothly before, but when the books don't balance out and you're sitting at zero while everyone else is climbing, it's just a weird feeling.\",\n \"fact_ids\": [\n  \"F-37b49f2bb908\",\n  \"F-574fbb509601\"\n ],\n \"basis\": \"lived-context\",\n \"unverifiedLead\": null,\n \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-37b49f2bb908",
+          "F-574fbb509601"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00926-f9a9095c2f",
+        "authoredQuote": true,
+        "publishableQuote": "I don't really know how to reconcile it. I've had things go smoothly before, but when the books don't balance out and you're sitting at zero while everyone else is climbing, it's just a weird feeling."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00926",
+          "name": "Briar Soto",
+          "role": "UNDOCKED pilot",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "What does a cycle with zero credits feel like when the other pilots are climbing? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked-digest",
+          "hood": null,
+          "focus": "The contrast between Eric Taveras's total dominance and Briar Soto's lack of credits this cycle.",
+          "src": "undocked-week:weekly-c111"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Briar Soto — UNDOCKED pilot",
+          "evidence": [
+            {
+              "id": "EV-da42600d65",
+              "src": "undocked-week:weekly-c111",
+              "text": "UNDOCKED week-in-review c111"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C111",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-a43c5d888b36"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED week-in-review c111",
+            "src": "undocked-week:weekly-c111",
+            "id": "F-83d8abaec9ba"
+          },
+          {
+            "t": "FACT",
+            "text": "Rosario Medina — 2 episode(s) this cycle, credits 110, combat 0, mishaps 0 (UNDOCKED feed)",
+            "src": "undocked-week:weekly-c111",
+            "id": "F-05bb46c4c41c"
+          },
+          {
+            "t": "FACT",
+            "text": "Eric Taveras — 2 episode(s) this cycle, credits 1170, combat 0, mishaps 0 (UNDOCKED feed)",
+            "src": "undocked-week:weekly-c111",
+            "id": "F-574fbb509601"
+          },
+          {
+            "t": "FACT",
+            "text": "Briar Soto — 2 episode(s) this cycle, credits 0, combat 0, mishaps 0 (UNDOCKED feed)",
+            "src": "undocked-week:weekly-c111",
+            "id": "F-37b49f2bb908"
+          },
+          {
+            "t": "FACT",
+            "text": "Rosario Medina — CBA Compliance Monitor, Fruitvale Transit Hub (ledger)",
+            "src": "undocked-week:weekly-c111",
+            "id": "F-c3efc932b3ab"
+          },
+          {
+            "t": "FACT",
+            "text": "Eric Taveras — Second Baseman, Oakland A's (ledger)",
+            "src": "undocked-week:weekly-c111",
+            "id": "F-378fd239204e"
+          },
+          {
+            "t": "FACT",
+            "text": "Eric Taveras, Playoffs: The A's offense continues to be carried by playoff MVP Eric Taveras with his 7th Homerun in this playoff and run. Mike Paulson celebrated his veteran stars on their season and warned the league of Eric Taveras and Ern...",
+            "src": "undocked-week:weekly-c111",
+            "id": "F-e1375b591374"
+          },
+          {
+            "t": "FACT",
+            "text": "Briar Soto — UNDOCKED pilot",
+            "src": "Simulation_Ledger profile for POP-00926",
+            "id": "F-4e45e2ea8cc7"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01053",
+      "name": "Rosario Medina",
+      "quote": "I'm not really sure what you're talking about. I'm a CBA Compliance Monitor, not a pilot.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n \"answer\": \"quote\",\n \"quote\": \"I'm not really sure what you're talking about. I'm a CBA Compliance Monitor, not a pilot.\",\n \"fact_ids\": [\n  \"F-c3efc932b3ab\"\n ],\n \"basis\": \"lived-context\",\n \"unverifiedLead\": null,\n \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c3efc932b3ab"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01053-4dbdf11154",
+        "authoredQuote": true,
+        "publishableQuote": "I'm not really sure what you're talking about. I'm a CBA Compliance Monitor, not a pilot."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01053",
+          "name": "Rosario Medina",
+          "role": "UNDOCKED pilot",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "How does the steady work of a compliance monitor compare to the high-visibility streak of the current leader? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked-digest",
+          "hood": null,
+          "focus": "The contrast between Eric Taveras's total dominance and Briar Soto's lack of credits this cycle.",
+          "src": "undocked-week:weekly-c111"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Rosario Medina — UNDOCKED pilot",
+          "evidence": [
+            {
+              "id": "EV-6f56babef4",
+              "src": "undocked-week:weekly-c111",
+              "text": "UNDOCKED week-in-review c111"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C111",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-a43c5d888b36"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED week-in-review c111",
+            "src": "undocked-week:weekly-c111",
+            "id": "F-83d8abaec9ba"
+          },
+          {
+            "t": "FACT",
+            "text": "Rosario Medina — 2 episode(s) this cycle, credits 110, combat 0, mishaps 0 (UNDOCKED feed)",
+            "src": "undocked-week:weekly-c111",
+            "id": "F-05bb46c4c41c"
+          },
+          {
+            "t": "FACT",
+            "text": "Eric Taveras — 2 episode(s) this cycle, credits 1170, combat 0, mishaps 0 (UNDOCKED feed)",
+            "src": "undocked-week:weekly-c111",
+            "id": "F-574fbb509601"
+          },
+          {
+            "t": "FACT",
+            "text": "Briar Soto — 2 episode(s) this cycle, credits 0, combat 0, mishaps 0 (UNDOCKED feed)",
+            "src": "undocked-week:weekly-c111",
+            "id": "F-37b49f2bb908"
+          },
+          {
+            "t": "FACT",
+            "text": "Rosario Medina — CBA Compliance Monitor, Fruitvale Transit Hub (ledger)",
+            "src": "undocked-week:weekly-c111",
+            "id": "F-c3efc932b3ab"
+          },
+          {
+            "t": "FACT",
+            "text": "Eric Taveras — Second Baseman, Oakland A's (ledger)",
+            "src": "undocked-week:weekly-c111",
+            "id": "F-378fd239204e"
+          },
+          {
+            "t": "FACT",
+            "text": "Eric Taveras, Playoffs: The A's offense continues to be carried by playoff MVP Eric Taveras with his 7th Homerun in this playoff and run. Mike Paulson celebrated his veteran stars on their season and warned the league of Eric Taveras and Ern...",
+            "src": "undocked-week:weekly-c111",
+            "id": "F-e1375b591374"
+          },
+          {
+            "t": "FACT",
+            "text": "Rosario Medina — UNDOCKED pilot",
+            "src": "Simulation_Ledger profile for POP-01053",
+            "id": "F-a2e58dddf9e1"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-00597",
+      "name": "Eric Taveras",
+      "quote": "To be honest, I haven't been thinking about being MVP that much. The pressure's always there, but when we're winning, it feels more like a team thing. The flight isn't really a part of my life right now; I'm focused on the game. I don't know if it's a sanctuary or another competition for me.",
+      "disp": "driven, hard to sit still; curious, open to new things; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, I haven't been thinking about being MVP that much. The pressure's always there, but when we're winning, it feels more like a team thing. The flight isn't really a part of my life right now; I'm focused on the game. I don't know if it's a sanctuary or another competition for me.\",\n  \"fact_ids\": [\"F-378fd239204e\", \"F-e1375b591374\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-378fd239204e",
+          "F-e1375b591374"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00597-603822d3a3",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, I haven't been thinking about being MVP that much. The pressure's always there, but when we're winning, it feels more like a team thing. The flight isn't really a part of my life right now; I'm focused on the game. I don't know if it's a sanctuary or another competition for me."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00597",
+          "name": "Eric Taveras",
+          "role": "UNDOCKED pilot",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "Does the pressure of the World Series MVP run make the flight a sanctuary or just another competition to win? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked-digest",
+          "hood": null,
+          "focus": "The contrast between Eric Taveras's total dominance and Briar Soto's lack of credits this cycle.",
+          "src": "undocked-week:weekly-c111"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Eric Taveras — UNDOCKED pilot",
+          "evidence": [
+            {
+              "id": "EV-04e69dd73a",
+              "src": "undocked-week:weekly-c111",
+              "text": "UNDOCKED week-in-review c111"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C111",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-a43c5d888b36"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED week-in-review c111",
+            "src": "undocked-week:weekly-c111",
+            "id": "F-83d8abaec9ba"
+          },
+          {
+            "t": "FACT",
+            "text": "Rosario Medina — 2 episode(s) this cycle, credits 110, combat 0, mishaps 0 (UNDOCKED feed)",
+            "src": "undocked-week:weekly-c111",
+            "id": "F-05bb46c4c41c"
+          },
+          {
+            "t": "FACT",
+            "text": "Eric Taveras — 2 episode(s) this cycle, credits 1170, combat 0, mishaps 0 (UNDOCKED feed)",
+            "src": "undocked-week:weekly-c111",
+            "id": "F-574fbb509601"
+          },
+          {
+            "t": "FACT",
+            "text": "Briar Soto — 2 episode(s) this cycle, credits 0, combat 0, mishaps 0 (UNDOCKED feed)",
+            "src": "undocked-week:weekly-c111",
+            "id": "F-37b49f2bb908"
+          },
+          {
+            "t": "FACT",
+            "text": "Rosario Medina — CBA Compliance Monitor, Fruitvale Transit Hub (ledger)",
+            "src": "undocked-week:weekly-c111",
+            "id": "F-c3efc932b3ab"
+          },
+          {
+            "t": "FACT",
+            "text": "Eric Taveras — Second Baseman, Oakland A's (ledger)",
+            "src": "undocked-week:weekly-c111",
+            "id": "F-378fd239204e"
+          },
+          {
+            "t": "FACT",
+            "text": "Eric Taveras, Playoffs: The A's offense continues to be carried by playoff MVP Eric Taveras with his 7th Homerun in this playoff and run. Mike Paulson celebrated his veteran stars on their season and warned the league of Eric Taveras and Ern...",
+            "src": "undocked-week:weekly-c111",
+            "id": "F-e1375b591374"
+          },
+          {
+            "t": "FACT",
+            "text": "Eric Taveras — UNDOCKED pilot",
+            "src": "Simulation_Ledger profile for POP-00597",
+            "id": "F-e250c63b74bb"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00926",
+      "name": "Briar Soto",
+      "quote": "I don't really know how to reconcile it. I've had things go smoothly before, but when the books don't balance out and you're sitting at zero while everyone else is climbing, it's just a weird feeling.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n \"answer\": \"quote\",\n \"quote\": \"I don't really know how to reconcile it. I've had things go smoothly before, but when the books don't balance out and you're sitting at zero while everyone else is climbing, it's just a weird feeling.\",\n \"fact_ids\": [\n  \"F-37b49f2bb908\",\n  \"F-574fbb509601\"\n ],\n \"basis\": \"lived-context\",\n \"unverifiedLead\": null,\n \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-37b49f2bb908",
+          "F-574fbb509601"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00926-f9a9095c2f",
+        "authoredQuote": true,
+        "publishableQuote": "I don't really know how to reconcile it. I've had things go smoothly before, but when the books don't balance out and you're sitting at zero while everyone else is climbing, it's just a weird feeling."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00926",
+          "name": "Briar Soto",
+          "role": "UNDOCKED pilot",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "What does a cycle with zero credits feel like when the other pilots are climbing? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked-digest",
+          "hood": null,
+          "focus": "The contrast between Eric Taveras's total dominance and Briar Soto's lack of credits this cycle.",
+          "src": "undocked-week:weekly-c111"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Briar Soto — UNDOCKED pilot",
+          "evidence": [
+            {
+              "id": "EV-da42600d65",
+              "src": "undocked-week:weekly-c111",
+              "text": "UNDOCKED week-in-review c111"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C111",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-a43c5d888b36"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED week-in-review c111",
+            "src": "undocked-week:weekly-c111",
+            "id": "F-83d8abaec9ba"
+          },
+          {
+            "t": "FACT",
+            "text": "Rosario Medina — 2 episode(s) this cycle, credits 110, combat 0, mishaps 0 (UNDOCKED feed)",
+            "src": "undocked-week:weekly-c111",
+            "id": "F-05bb46c4c41c"
+          },
+          {
+            "t": "FACT",
+            "text": "Eric Taveras — 2 episode(s) this cycle, credits 1170, combat 0, mishaps 0 (UNDOCKED feed)",
+            "src": "undocked-week:weekly-c111",
+            "id": "F-574fbb509601"
+          },
+          {
+            "t": "FACT",
+            "text": "Briar Soto — 2 episode(s) this cycle, credits 0, combat 0, mishaps 0 (UNDOCKED feed)",
+            "src": "undocked-week:weekly-c111",
+            "id": "F-37b49f2bb908"
+          },
+          {
+            "t": "FACT",
+            "text": "Rosario Medina — CBA Compliance Monitor, Fruitvale Transit Hub (ledger)",
+            "src": "undocked-week:weekly-c111",
+            "id": "F-c3efc932b3ab"
+          },
+          {
+            "t": "FACT",
+            "text": "Eric Taveras — Second Baseman, Oakland A's (ledger)",
+            "src": "undocked-week:weekly-c111",
+            "id": "F-378fd239204e"
+          },
+          {
+            "t": "FACT",
+            "text": "Eric Taveras, Playoffs: The A's offense continues to be carried by playoff MVP Eric Taveras with his 7th Homerun in this playoff and run. Mike Paulson celebrated his veteran stars on their season and warned the league of Eric Taveras and Ern...",
+            "src": "undocked-week:weekly-c111",
+            "id": "F-e1375b591374"
+          },
+          {
+            "t": "FACT",
+            "text": "Briar Soto — UNDOCKED pilot",
+            "src": "Simulation_Ledger profile for POP-00926",
+            "id": "F-4e45e2ea8cc7"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01053",
+      "name": "Rosario Medina",
+      "quote": "I'm not really sure what you're talking about. I'm a CBA Compliance Monitor, not a pilot.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n \"answer\": \"quote\",\n \"quote\": \"I'm not really sure what you're talking about. I'm a CBA Compliance Monitor, not a pilot.\",\n \"fact_ids\": [\n  \"F-c3efc932b3ab\"\n ],\n \"basis\": \"lived-context\",\n \"unverifiedLead\": null,\n \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c3efc932b3ab"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01053-4dbdf11154",
+        "authoredQuote": true,
+        "publishableQuote": "I'm not really sure what you're talking about. I'm a CBA Compliance Monitor, not a pilot."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01053",
+          "name": "Rosario Medina",
+          "role": "UNDOCKED pilot",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "How does the steady work of a compliance monitor compare to the high-visibility streak of the current leader? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked-digest",
+          "hood": null,
+          "focus": "The contrast between Eric Taveras's total dominance and Briar Soto's lack of credits this cycle.",
+          "src": "undocked-week:weekly-c111"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Rosario Medina — UNDOCKED pilot",
+          "evidence": [
+            {
+              "id": "EV-6f56babef4",
+              "src": "undocked-week:weekly-c111",
+              "text": "UNDOCKED week-in-review c111"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C111",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-a43c5d888b36"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED week-in-review c111",
+            "src": "undocked-week:weekly-c111",
+            "id": "F-83d8abaec9ba"
+          },
+          {
+            "t": "FACT",
+            "text": "Rosario Medina — 2 episode(s) this cycle, credits 110, combat 0, mishaps 0 (UNDOCKED feed)",
+            "src": "undocked-week:weekly-c111",
+            "id": "F-05bb46c4c41c"
+          },
+          {
+            "t": "FACT",
+            "text": "Eric Taveras — 2 episode(s) this cycle, credits 1170, combat 0, mishaps 0 (UNDOCKED feed)",
+            "src": "undocked-week:weekly-c111",
+            "id": "F-574fbb509601"
+          },
+          {
+            "t": "FACT",
+            "text": "Briar Soto — 2 episode(s) this cycle, credits 0, combat 0, mishaps 0 (UNDOCKED feed)",
+            "src": "undocked-week:weekly-c111",
+            "id": "F-37b49f2bb908"
+          },
+          {
+            "t": "FACT",
+            "text": "Rosario Medina — CBA Compliance Monitor, Fruitvale Transit Hub (ledger)",
+            "src": "undocked-week:weekly-c111",
+            "id": "F-c3efc932b3ab"
+          },
+          {
+            "t": "FACT",
+            "text": "Eric Taveras — Second Baseman, Oakland A's (ledger)",
+            "src": "undocked-week:weekly-c111",
+            "id": "F-378fd239204e"
+          },
+          {
+            "t": "FACT",
+            "text": "Eric Taveras, Playoffs: The A's offense continues to be carried by playoff MVP Eric Taveras with his 7th Homerun in this playoff and run. Mike Paulson celebrated his veteran stars on their season and warned the league of Eric Taveras and Ern...",
+            "src": "undocked-week:weekly-c111",
+            "id": "F-e1375b591374"
+          },
+          {
+            "t": "FACT",
+            "text": "Rosario Medina — UNDOCKED pilot",
+            "src": "Simulation_Ledger profile for POP-01053",
+            "id": "F-a2e58dddf9e1"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-10-17T14:15:41.432Z"
+}

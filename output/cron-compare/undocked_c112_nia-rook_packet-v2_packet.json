@@ -1,0 +1,285 @@
+{
+  "stage": "report",
+  "desk": "undocked",
+  "cycle": "112",
+  "persona": "nia-rook",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Nia Rook",
+    "popid": "POP-01076"
+  },
+  "assignment": {
+    "story": {
+      "ref": "undocked:undocked-pop00775-Y3C8-e2",
+      "label": "UNDOCKED: Sammie Alvarez — dead even on the night",
+      "kind": "undocked",
+      "angle": "Recap Sammie Alvarez's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits 0, systems sol, sirius, combat 0, mishaps 0, magnitude 2/5. Standings: Eric Taveras leads the board — rank #1, 2 cycle(s) led, current streak 2. In the chair: Sammie Alvarez — Civic & Neighborhood Reporter, OakTown Echo. The career is who they are, not the story; the story is the flight.",
+      "facts": [
+        "Sammie Alvarez — Civic & Neighborhood Reporter, OakTown Echo (ledger)"
+      ],
+      "citizens": [
+        "Sammie Alvarez — Civic & Neighborhood Reporter, OakTown Echo, UNDOCKED cast pilot"
+      ],
+      "popids": [
+        "POP-00775"
+      ],
+      "hood": "Temescal"
+    }
+  },
+  "angle": "output/cron-compare/undocked_c112_nia-rook_packet-v2_angle.json",
+  "quotesRequested": 1,
+  "quotesLanded": 1,
+  "quotes": [
+    {
+      "pop": "POP-00775",
+      "name": "Sammie Alvarez",
+      "quote": "To be honest, I've been wondering if my work still matters the way it used to. I've seen a lot of energy in Temescal, people caring about improving the neighborhood, but it doesn't seem to be translating into action. I'm not sure how people perceive me or my reporting, but I feel like I'm just trying to capture the essence of what's going on around here.",
+      "disp": "draws people in, deep with them",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, I've been wondering if my work still matters the way it used to. I've seen a lot of energy in Temescal, people caring about improving the neighborhood, but it doesn't seem to be translating into action. I'm not sure how people perceive me or my reporting, but I feel like I'm just trying to capture the essence of what's going on around here.\",\n  \"fact_ids\": [\"F-e3a692caf134\", \"F-c0fd0faa3f60\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-e3a692caf134",
+          "F-c0fd0faa3f60"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00775-1c15bf9f6b",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, I've been wondering if my work still matters the way it used to. I've seen a lot of energy in Temescal, people caring about improving the neighborhood, but it doesn't seem to be translating into action. I'm not sure how people perceive me or my reporting, but I feel like I'm just trying to capture the essence of what's going on around here."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00775",
+          "name": "Sammie Alvarez",
+          "role": "UNDOCKED pilot",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "How does Sammie Alvarez's performance affect the city's perception of them? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked",
+          "hood": "Temescal",
+          "focus": "The city's reaction to Sammie Alvarez's UNDOCKED episode",
+          "src": "undocked:undocked-pop00775-Y3C8-e2"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Sammie Alvarez — UNDOCKED pilot",
+          "evidence": [
+            {
+              "id": "EV-504e2cd4e0",
+              "src": "undocked:undocked-pop00775-Y3C8-e2",
+              "text": "UNDOCKED: Sammie Alvarez — dead even on the night"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED: Sammie Alvarez — dead even on the night",
+            "src": "undocked:undocked-pop00775-Y3C8-e2",
+            "id": "F-e3a692caf134"
+          },
+          {
+            "t": "FACT",
+            "text": "Sammie Alvarez — Civic & Neighborhood Reporter, OakTown Echo (ledger)",
+            "src": "undocked:undocked-pop00775-Y3C8-e2",
+            "id": "F-c0fd0faa3f60"
+          },
+          {
+            "t": "FACT",
+            "text": "Sammie Alvarez — UNDOCKED pilot",
+            "src": "Simulation_Ledger profile for POP-00775",
+            "id": "F-3fc910e1b191"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-00775",
+      "name": "Sammie Alvarez",
+      "quote": "To be honest, I've been wondering if my work still matters the way it used to. I've seen a lot of energy in Temescal, people caring about improving the neighborhood, but it doesn't seem to be translating into action. I'm not sure how people perceive me or my reporting, but I feel like I'm just trying to capture the essence of what's going on around here.",
+      "disp": "draws people in, deep with them",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, I've been wondering if my work still matters the way it used to. I've seen a lot of energy in Temescal, people caring about improving the neighborhood, but it doesn't seem to be translating into action. I'm not sure how people perceive me or my reporting, but I feel like I'm just trying to capture the essence of what's going on around here.\",\n  \"fact_ids\": [\"F-e3a692caf134\", \"F-c0fd0faa3f60\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-e3a692caf134",
+          "F-c0fd0faa3f60"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00775-1c15bf9f6b",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, I've been wondering if my work still matters the way it used to. I've seen a lot of energy in Temescal, people caring about improving the neighborhood, but it doesn't seem to be translating into action. I'm not sure how people perceive me or my reporting, but I feel like I'm just trying to capture the essence of what's going on around here."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00775",
+          "name": "Sammie Alvarez",
+          "role": "UNDOCKED pilot",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "How does Sammie Alvarez's performance affect the city's perception of them? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked",
+          "hood": "Temescal",
+          "focus": "The city's reaction to Sammie Alvarez's UNDOCKED episode",
+          "src": "undocked:undocked-pop00775-Y3C8-e2"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Sammie Alvarez — UNDOCKED pilot",
+          "evidence": [
+            {
+              "id": "EV-504e2cd4e0",
+              "src": "undocked:undocked-pop00775-Y3C8-e2",
+              "text": "UNDOCKED: Sammie Alvarez — dead even on the night"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED: Sammie Alvarez — dead even on the night",
+            "src": "undocked:undocked-pop00775-Y3C8-e2",
+            "id": "F-e3a692caf134"
+          },
+          {
+            "t": "FACT",
+            "text": "Sammie Alvarez — Civic & Neighborhood Reporter, OakTown Echo (ledger)",
+            "src": "undocked:undocked-pop00775-Y3C8-e2",
+            "id": "F-c0fd0faa3f60"
+          },
+          {
+            "t": "FACT",
+            "text": "Sammie Alvarez — UNDOCKED pilot",
+            "src": "Simulation_Ledger profile for POP-00775",
+            "id": "F-3fc910e1b191"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-10-23T18:21:11.871Z"
+}

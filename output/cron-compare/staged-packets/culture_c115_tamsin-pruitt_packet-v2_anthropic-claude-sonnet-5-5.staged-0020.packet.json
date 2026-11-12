@@ -1,0 +1,1284 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-01210",
+    "name": "Tamsin Pruitt",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "The lives of C115: 11 people — Mara Vance moved into a place of their own in Rockridge, renting",
+    "approach": "Lives approach: this slice is the people something happened to this Cycle — a birth, a death in the house, a hospital stay, a retirement, a promotion; a household set up or a place of their own; a win or a loss on the book; the people a turn of the city reached and what it did to their day; and the smaller moments the record kept. Each person gets their own passage: the event, then the thread under it — the stay or strain that led there, the other lines the record kept for them, what the Tribune or this page already said of them, and what they did next if the record says. Read the thread in order and name where two lines of it do not agree; do not restate a ledger value as the story. The fact exactly right; never a trend, never a number first; the person, not the system the event belongs to. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent p",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "lives",
+      "hood": null,
+      "facts": [
+        "Mara Vance moved into a place of their own in Rockridge, renting (C115)",
+        "Mara Vance — in their life, C114: started a small project with no deadline and no reason",
+        "Mara Vance — in their life, C115: watched the finish from a packed bar and walked home in a crowd that didn't want to disperse",
+        "Mara Vance — in their life, C115: re-read an old journal page and didn't recognize the handwriting mood",
+        "Mara Vance — in their life, C115: spent the evening sorting a box of things that used to be someone's",
+        "Mara Vance — the Tribune named them in a piece headlined SEPTEMBER 15 (Infrastructure, C85)",
+        "Mara Vance — the Tribune named them in a piece headlined THE FILING CABINET THAT ISN'T MOVING (Civic Ledger, C85)",
+        "Mara Vance — the Tribune named them in a piece headlined Shovels Cleared: Baylight Legal Instruments Filed, Construction Legally Authorized (Civic Ledger, C84)",
+        "Howard Yell moved into a place of their own in Rockridge, renting (C115)",
+        "Howard Yell — in their life, C114: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+        "Howard Yell — in their life, C115: waved at the regulars on the usual route, all present and accounted for",
+        "Howard Yell — in their life, C115: counted the register twice before closing up, just in case near College Avenue",
+        "Howard Yell — in their life, C115: saw a stranger laugh at their phone and invented the joke all the way home",
+        "Howard Yell — the Tribune named them in a piece headlined The Page: Lives of Cycle 113 (Culture, C113)",
+        "Xavier Robinson won on the UNDOCKED book — staked 365, paid 668, Fruitvale (C115)",
+        "Xavier Robinson — in their life, C114: walked a different street home just to see it",
+        "Xavier Robinson — in their life, C115: found a quiet minute at a taqueria patio and the hum of a bassline from a passing car",
+        "Xavier Robinson — in their life, C115: spent time at a corner store; routine stop",
+        "Imani Delacroix lost on the UNDOCKED book — staked 160, the book kept it, West Oakland (C115)",
+        "Imani Delacroix — in their life, C114: heard a kid explain something to a parent with total authority and grinned",
+        "Imani Delacroix — in their life, C114: noticed neighbors looking out for each other",
+        "Imani Delacroix — in their life, C114: found the warehouse-campus lot full on a weekday",
+        "Jee Lei — sat on the front porch with a mug of coffee and cataloged everyone walking to the BART near a late-night counter, Uptown — one of 4 people the Cycle's city turn reached (Oakland Alternative Response Initiative is dispatch-live — ongoing safety effects in West Oakland, Fruitvale, East Oakland; the city feels…) (C115)",
+        "Jee Lei — in their life, C114: gave a whole afternoon to a hobby without once checking the clock",
+        "Jee Lei — in their life, C114: discovered a new local artist",
+        "Jee Lei — Lives already wrote this person: a moment the record kept (C114)",
+        "Ophelia Brenner — the Fruitvale Transit Hub Phase II is sparking excitement, with plans for a brighter future taking shape., Fruitvale — one of 4 people the Cycle's city turn reached (Fruitvale Transit Hub Phase II — Visioning is design-phase — ongoing transit effects in Fruitvale; the city feels it through these…) (C115)",
+        "Ophelia Brenner — in their life, C114: drank the free cold brew in the company kitchen and felt completely disconnected from the neighborhood outside",
+        "Ophelia Brenner — in their life, C114: disagreed with a Tribune column out loud to an empty kitchen",
+        "Ophelia Brenner — in their life, C115: noticed a familiar face missing from the morning routine",
+        "Ophelia Brenner — in their life, C115: counted cranes on the skyline from the bus stop and got a different number than yesterday",
+        "Ophelia Brenner — the Tribune named them in a piece headlined Forty-One in the Room at Bay Pure Land, and a Pantry That Predates the Count (Culture, C113)",
+        "Ophelia Brenner — the Tribune named them in a piece headlined A Week of Many Altars: Oakland's Thanksgiving Convergence (Culture, C99)",
+        "Ophelia Brenner — the Tribune named them in a piece headlined The Season the Congregations Carried — and the Shortstop in a Deacon's Robes (Culture, C97)",
+        "Ravi O'Connell — grabbed coffee from the cart outside the hospital before the morning rush hit, Temescal — one of 4 people the Cycle's city turn reached (Temescal Community Health Center is operational — ongoing health effects in Temescal; the city feels it through these neighborhoods) (C115)",
+        "Ravi O'Connell — in their life, C114: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+        "Ravi O'Connell — in their life, C114: felt a lift at OakTown Social after the win",
+        "Ravi O'Connell — in their life, C115: kept a small promise to themselves nobody else knew about near a Temescal cafe",
+        "Ravi O'Connell — in their life, C115: looked up how something works and came away more amazed, not less",
+        "Mateo Allen and Joesph Allen — moved from Laurel to West Oakland — moving up from Laurel — sold the house in Laurel to rent up, West Oakland (C115 — what happened in their life, not words they said)",
+        "Mateo Allen — in their life, C114: discussed recent city events with someone they knew",
+        "Mateo Allen — in their life, C114: heard practice scales drifting from Laurel Music School on the walk home with the kids near a corner shop",
+        "Mateo Allen — in their life, C115: settled into a quiet evening on the couch with their partner",
+        "Mateo Allen — in their life, C115: checked the front door lock three times after everyone else was asleep",
+        "Joesph Allen — in their life, C114: watched their teenager walk into school without looking back and remembered when they used to wave",
+        "Joesph Allen — in their life, C114: bought a new A's jersey and the quiet satisfaction of finding a favorite song on the jukebox",
+        "Dmitri Soto and Briar Soto — moved from Jack London to KONO — leaving Jack London for a better fit — sold up and bought in KONO, KONO (C115 — what happened in their life, not words they said)",
+        "Dmitri Soto — in their life, C115: caught Elena Soria Dominguez's eye across the room and didn't need to say it",
+        "Dmitri Soto — in their life, C115: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+        "Dmitri Soto — in their life, C115: started a small project with no deadline and no reason",
+        "Dmitri Soto — in their life, C115: navigated around a film crew blocking the sidewalk near the waterfront and rolled their eyes",
+        "Dmitri Soto — Lives already wrote this person: the wager (C114)",
+        "Dmitri Soto — the Tribune named them in a piece headlined The Port Got Louder. Down the Block, the Ledger Barely Moved. (Business Reporter, C111)",
+        "Briar Soto — in their life, C114: bought a new A's jersey and felt the season starting to turn",
+        "Briar Soto — in their life, C114: haggled for a flat of bruised peaches at the Saturday market just to have a reason to talk to someone",
+        "Briar Soto — in their life, C115: held the door and got a whole conversation for it",
+        "Briar Soto — the Tribune named them in a piece headlined The Port Got Louder. Down the Block, the Ledger Barely Moved. (Business Reporter, C111)",
+        "Coen Cartier — moved from Uptown to Chinatown — moving for a better fit between household income and housing costs, Chinatown (C115 — what happened in their life, not words they said)",
+        "Coen Cartier — in their life, C114: re-read an old journal page and didn't recognize the handwriting mood",
+        "Coen Cartier — in their life, C115: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence",
+        "Coen Cartier — the Tribune named them in a piece headlined The Quiet Platform Still Has a Job (Civic, C113)",
+        "Coen Cartier — the Tribune named them in a piece headlined Ridership Surge at 12th St Oakland City Center Tests Transit Systems (Civic, C109)",
+        "Coen Cartier — the Tribune named them in a piece headlined 12th Street Station Feels the Rhythm of Downtown (Civic, C107)",
+        "Brielle Lewis — moved from Fruitvale to West Oakland — moving up from Fruitvale — sold the house in Fruitvale to rent up, West Oakland (C115 — what happened in their life, not words they said)",
+        "Brielle Lewis — in their life, C114: took the long way home just to check the Baylight fence line's progress",
+        "Brielle Lewis — in their life, C115: traded produce over a fence and came out ahead",
+        "Brielle Lewis — in their life, C115: wore the green-and-gold cap to the corner store and got three nods for it near a taqueria patio",
+        "Brielle Lewis — in their life, C115: remembered a teacher who'd said one thing that stuck"
+      ],
+      "priorCycle": null,
+      "note": "none of today's people has written their own page this Cycle — no quotes",
+      "engineHooks": [
+        "Household dissolved in Lake Merritt due to economic hardship (observational analysis)",
+        "A family bought their home in Chinatown (observational analysis)",
+        "The Cortez household (2) moved from Uptown to West Oakland — moving up from Uptown (observational analysis)",
+        "Xavier Ramington moved from Temescal to West Oakland — moving up from Temescal (desk rotation)"
+      ],
+      "roomIsYours": "the plain respect, what the event meant in that house or on that block, the detail the family would have picked — from the lines below, never invented",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-lives",
+    "hood": null,
+    "src": "output/beats/Lived_Events.jsonl @C115 batch 368dcb",
+    "plan": {
+      "focus": "The lives of C115: significant events and personal stories",
+      "closeQuestion": "How do these personal stories collectively paint a picture of Oakland's current state?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00507",
+        "name": "Mara Vance",
+        "profile": "Mara Vance — City Planning Director — Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00651",
+        "name": "Howard Yell",
+        "profile": "Howard Yell — Barista — Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00711",
+        "name": "Xavier Robinson",
+        "profile": "Xavier Robinson — Sea Level Monitoring Technician — Fruitvale",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-01165",
+        "name": "Imani Delacroix",
+        "profile": "Imani Delacroix — Crisis Clinician — West Oakland",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00321",
+        "name": "Jee Lei",
+        "profile": "Jee Lei — After-School Program Director — Uptown",
+        "quotationEligible": false,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00507-e7a7e0225b",
+        "pop": "POP-00507",
+        "name": "Mara Vance",
+        "quote": "For me, accountability in 'The lives of C115: significant events and personal stories' comes down to being transparent about my own life and actions during that time. I've recently moved into a place of my own in Rockridge, which is a significant personal step. Professionally, I've been focused on my role as City Planning Director, and the directive I issued in C115 is part of that. I directed Avery Santana and Denise Carter to provide specific information and reconciliations related to petition responses and filings. I want to be clear that my actions are guided by a commitment to the principles of my office and the needs of the community.",
+        "factIds": [
+          "F-7bc775c671eb",
+          "F-378956a3912b",
+          "F-001e2d64a3c2"
+        ],
+        "src": "packet.W2[POP-00507]"
+      },
+      {
+        "id": "Q-POP-00651-e0b184f8fc",
+        "pop": "POP-00651",
+        "name": "Howard Yell",
+        "quote": "I'm not sure what you're referring to about my living situation. I haven't moved recently, I've been living in Rockridge for a while now. It's a nice neighborhood, I've gotten used to the routine here.",
+        "factIds": [
+          "F-7088d162429b"
+        ],
+        "src": "packet.W2[POP-00651]"
+      },
+      {
+        "id": "Q-POP-00711-0d48ed219b",
+        "pop": "POP-00711",
+        "name": "Xavier Robinson",
+        "quote": "The win at the window changed the week. I staked 365 and it paid 668. It's a nice boost, you know? I was just glad to have some good fortune. My kids are always on my mind, and it's nice to be able to treat them a little something extra.",
+        "factIds": [
+          "F-120bc45d07e0",
+          "F-2daaf513079a"
+        ],
+        "src": "packet.W2[POP-00711]"
+      },
+      {
+        "id": "Q-POP-01165-2d42430f1f",
+        "pop": "POP-01165",
+        "name": "Imani Delacroix",
+        "quote": "I lost on the UNDOCKED book. It was a bad beat, but I've been down this road before. My slip came back empty, that's all. I'm not too shaken up about it.",
+        "factIds": [
+          "F-1343a92882a2"
+        ],
+        "src": "packet.W2[POP-01165]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Tamsin Pruitt",
+        "text": "The impact of the Fruitvale Transit Hub Phase II on local residents",
+        "usable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "The role of community initiatives in shaping neighborhood experiences",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C115",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-bc84fc0b7718"
+    },
+    {
+      "t": "FACT",
+      "text": "Mara Vance moved into a place of their own in Rockridge, renting",
+      "src": "output/beats/Lived_Events.jsonl @C115 batch 368dcb",
+      "id": "F-7bc775c671eb"
+    },
+    {
+      "t": "FACT",
+      "text": "Mara Vance first. The event is the lead; one true detail; what came next only if the record says.",
+      "src": "output/beats/Lived_Events.jsonl @C115 batch 368dcb",
+      "id": "F-001e2d64a3c2"
+    },
+    {
+      "t": "FACT",
+      "text": "Mara Vance moved into a place of their own in Rockridge, renting (C115)",
+      "src": "output/beats/Household_Ledger.jsonl @C115",
+      "id": "F-378956a3912b"
+    },
+    {
+      "t": "FACT",
+      "text": "Mara Vance — in their life, C114: started a small project with no deadline and no reason",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-cc595679540f"
+    },
+    {
+      "t": "FACT",
+      "text": "Mara Vance — in their life, C115: watched the finish from a packed bar and walked home in a crowd that didn't want to disperse",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-01a24cef5ded"
+    },
+    {
+      "t": "FACT",
+      "text": "Mara Vance — in their life, C115: re-read an old journal page and didn't recognize the handwriting mood",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-3da937e11d27"
+    },
+    {
+      "t": "FACT",
+      "text": "Mara Vance — in their life, C115: spent the evening sorting a box of things that used to be someone's",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-4ae2824fa1c6"
+    },
+    {
+      "t": "FACT",
+      "text": "Mara Vance — the Tribune named them in a piece headlined SEPTEMBER 15 (Infrastructure, C85)",
+      "src": "archive/ARTICLE_INDEX.jsonl 1b8b4197e88c1f10",
+      "id": "F-6f79ea0e1675"
+    },
+    {
+      "t": "FACT",
+      "text": "Mara Vance — the Tribune named them in a piece headlined THE FILING CABINET THAT ISN'T MOVING (Civic Ledger, C85)",
+      "src": "archive/ARTICLE_INDEX.jsonl fbfb426bac99c826",
+      "id": "F-2b0346bbf4ec"
+    },
+    {
+      "t": "FACT",
+      "text": "Mara Vance — the Tribune named them in a piece headlined Shovels Cleared: Baylight Legal Instruments Filed, Construction Legally Authorized (Civic Ledger, C84)",
+      "src": "archive/ARTICLE_INDEX.jsonl c86afc38194faba9",
+      "id": "F-b97c517855f0"
+    },
+    {
+      "t": "FACT",
+      "text": "Howard Yell moved into a place of their own in Rockridge, renting (C115)",
+      "src": "output/beats/Household_Ledger.jsonl @C115",
+      "id": "F-7088d162429b"
+    },
+    {
+      "t": "FACT",
+      "text": "Howard Yell — in their life, C114: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-704daa886f5e"
+    },
+    {
+      "t": "FACT",
+      "text": "Howard Yell — in their life, C115: waved at the regulars on the usual route, all present and accounted for",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-53ca1bacce35"
+    },
+    {
+      "t": "FACT",
+      "text": "Howard Yell — in their life, C115: counted the register twice before closing up, just in case near College Avenue",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-87668da9698b"
+    },
+    {
+      "t": "FACT",
+      "text": "Howard Yell — in their life, C115: saw a stranger laugh at their phone and invented the joke all the way home",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-b0b75910ee45"
+    },
+    {
+      "t": "FACT",
+      "text": "Howard Yell — the Tribune named them in a piece headlined The Page: Lives of Cycle 113 (Culture, C113)",
+      "src": "archive/ARTICLE_INDEX.jsonl 147bf0b94e0c90f7",
+      "id": "F-2976e2c9a82a"
+    },
+    {
+      "t": "FACT",
+      "text": "Xavier Robinson won on the UNDOCKED book — staked 365, paid 668, Fruitvale (C115)",
+      "src": "output/beats/Casino_Ledger.jsonl @C115",
+      "id": "F-120bc45d07e0"
+    },
+    {
+      "t": "FACT",
+      "text": "Xavier Robinson — in their life, C114: walked a different street home just to see it",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-4afecf863483"
+    },
+    {
+      "t": "FACT",
+      "text": "Xavier Robinson — in their life, C115: found a quiet minute at a taqueria patio and the hum of a bassline from a passing car",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-2daaf513079a"
+    },
+    {
+      "t": "FACT",
+      "text": "Xavier Robinson — in their life, C115: spent time at a corner store; routine stop",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-8eda615cf357"
+    },
+    {
+      "t": "FACT",
+      "text": "Imani Delacroix lost on the UNDOCKED book — staked 160, the book kept it, West Oakland (C115)",
+      "src": "output/beats/Casino_Ledger.jsonl @C115",
+      "id": "F-1343a92882a2"
+    },
+    {
+      "t": "FACT",
+      "text": "Imani Delacroix — in their life, C114: heard a kid explain something to a parent with total authority and grinned",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-f3d3d8cd43c4"
+    },
+    {
+      "t": "FACT",
+      "text": "Imani Delacroix — in their life, C114: noticed neighbors looking out for each other",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-b5fa0a89bd78"
+    },
+    {
+      "t": "FACT",
+      "text": "Imani Delacroix — in their life, C114: found the warehouse-campus lot full on a weekday",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-1c7c0baf7d44"
+    },
+    {
+      "t": "FACT",
+      "text": "Jee Lei — sat on the front porch with a mug of coffee and cataloged everyone walking to the BART near a late-night counter, Uptown — one of 4 people the Cycle's city turn reached (Oakland Alternative Response Initiative is dispatch-live — ongoing safety effects in West Oakland, Fruitvale, East Oakland; the city feels…) (C115)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C115",
+      "id": "F-c2107528faca"
+    },
+    {
+      "t": "FACT",
+      "text": "Jee Lei — in their life, C114: gave a whole afternoon to a hobby without once checking the clock",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-42ab4b40579c"
+    },
+    {
+      "t": "FACT",
+      "text": "Jee Lei — in their life, C114: discovered a new local artist",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-c411d71901a9"
+    },
+    {
+      "t": "FACT",
+      "text": "Jee Lei — Lives already wrote this person: a moment the record kept (C114)",
+      "src": "output/cron-compare/lives_covered.json",
+      "id": "F-aeabb9181823"
+    },
+    {
+      "t": "FACT",
+      "text": "Ophelia Brenner — the Fruitvale Transit Hub Phase II is sparking excitement, with plans for a brighter future taking shape., Fruitvale — one of 4 people the Cycle's city turn reached (Fruitvale Transit Hub Phase II — Visioning is design-phase — ongoing transit effects in Fruitvale; the city feels it through these…) (C115)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C115",
+      "id": "F-12add3663c39"
+    },
+    {
+      "t": "FACT",
+      "text": "Ophelia Brenner — in their life, C114: drank the free cold brew in the company kitchen and felt completely disconnected from the neighborhood outside",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-72fcccb29730"
+    },
+    {
+      "t": "FACT",
+      "text": "Ophelia Brenner — in their life, C114: disagreed with a Tribune column out loud to an empty kitchen",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-c54e1242ec0f"
+    },
+    {
+      "t": "FACT",
+      "text": "Ophelia Brenner — in their life, C115: noticed a familiar face missing from the morning routine",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-f5cb0526c7c7"
+    },
+    {
+      "t": "FACT",
+      "text": "Ophelia Brenner — in their life, C115: counted cranes on the skyline from the bus stop and got a different number than yesterday",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-af25f0eb8b75"
+    },
+    {
+      "t": "FACT",
+      "text": "Ophelia Brenner — the Tribune named them in a piece headlined Forty-One in the Room at Bay Pure Land, and a Pantry That Predates the Count (Culture, C113)",
+      "src": "archive/ARTICLE_INDEX.jsonl 4a84e359d49712a3",
+      "id": "F-4de87b25aa4e"
+    },
+    {
+      "t": "FACT",
+      "text": "Ophelia Brenner — the Tribune named them in a piece headlined A Week of Many Altars: Oakland's Thanksgiving Convergence (Culture, C99)",
+      "src": "archive/ARTICLE_INDEX.jsonl 57235fd2f5166f60",
+      "id": "F-90a3134f5e39"
+    },
+    {
+      "t": "FACT",
+      "text": "Ophelia Brenner — the Tribune named them in a piece headlined The Season the Congregations Carried — and the Shortstop in a Deacon's Robes (Culture, C97)",
+      "src": "archive/ARTICLE_INDEX.jsonl 8351dd42bdadab26",
+      "id": "F-1da27e0d7188"
+    },
+    {
+      "t": "FACT",
+      "text": "Ravi O'Connell — grabbed coffee from the cart outside the hospital before the morning rush hit, Temescal — one of 4 people the Cycle's city turn reached (Temescal Community Health Center is operational — ongoing health effects in Temescal; the city feels it through these neighborhoods) (C115)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C115",
+      "id": "F-d9a046fdf86e"
+    },
+    {
+      "t": "FACT",
+      "text": "Ravi O'Connell — in their life, C114: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-222ad90a208a"
+    },
+    {
+      "t": "FACT",
+      "text": "Ravi O'Connell — in their life, C114: felt a lift at OakTown Social after the win",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-c27eead41731"
+    },
+    {
+      "t": "FACT",
+      "text": "Ravi O'Connell — in their life, C115: kept a small promise to themselves nobody else knew about near a Temescal cafe",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-8cdd195a6453"
+    },
+    {
+      "t": "FACT",
+      "text": "Ravi O'Connell — in their life, C115: looked up how something works and came away more amazed, not less",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-80fd9e27772a"
+    },
+    {
+      "t": "FACT",
+      "text": "Mateo Allen and Joesph Allen — moved from Laurel to West Oakland — moving up from Laurel — sold the house in Laurel to rent up, West Oakland (C115 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-ef816da6fb65"
+    },
+    {
+      "t": "FACT",
+      "text": "Mateo Allen — in their life, C114: discussed recent city events with someone they knew",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-2f8e11b8f9b5"
+    },
+    {
+      "t": "FACT",
+      "text": "Mateo Allen — in their life, C114: heard practice scales drifting from Laurel Music School on the walk home with the kids near a corner shop",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-61af4b18ff70"
+    },
+    {
+      "t": "FACT",
+      "text": "Mateo Allen — in their life, C115: settled into a quiet evening on the couch with their partner",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-1f959c5572c1"
+    },
+    {
+      "t": "FACT",
+      "text": "Mateo Allen — in their life, C115: checked the front door lock three times after everyone else was asleep",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-25aae67da3e6"
+    },
+    {
+      "t": "FACT",
+      "text": "Joesph Allen — in their life, C114: watched their teenager walk into school without looking back and remembered when they used to wave",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-44c220f8cd19"
+    },
+    {
+      "t": "FACT",
+      "text": "Joesph Allen — in their life, C114: bought a new A's jersey and the quiet satisfaction of finding a favorite song on the jukebox",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-868abaf3b094"
+    },
+    {
+      "t": "FACT",
+      "text": "Dmitri Soto and Briar Soto — moved from Jack London to KONO — leaving Jack London for a better fit — sold up and bought in KONO, KONO (C115 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-5190bad469dd"
+    },
+    {
+      "t": "FACT",
+      "text": "Dmitri Soto — in their life, C115: caught Elena Soria Dominguez's eye across the room and didn't need to say it",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-32ddcf086dda"
+    },
+    {
+      "t": "FACT",
+      "text": "Dmitri Soto — in their life, C115: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-d815e871c321"
+    },
+    {
+      "t": "FACT",
+      "text": "Dmitri Soto — in their life, C115: started a small project with no deadline and no reason",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-38651ef61f7f"
+    },
+    {
+      "t": "FACT",
+      "text": "Dmitri Soto — in their life, C115: navigated around a film crew blocking the sidewalk near the waterfront and rolled their eyes",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-f84bb2ac965d"
+    },
+    {
+      "t": "FACT",
+      "text": "Dmitri Soto — Lives already wrote this person: the wager (C114)",
+      "src": "output/cron-compare/lives_covered.json",
+      "id": "F-b979d76ad8c2"
+    },
+    {
+      "t": "FACT",
+      "text": "Dmitri Soto — the Tribune named them in a piece headlined The Port Got Louder. Down the Block, the Ledger Barely Moved. (Business Reporter, C111)",
+      "src": "archive/ARTICLE_INDEX.jsonl 0ddf91444ec2bfd5",
+      "id": "F-587208c10875"
+    },
+    {
+      "t": "FACT",
+      "text": "Briar Soto — in their life, C114: bought a new A's jersey and felt the season starting to turn",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-5e56d70eaa49"
+    },
+    {
+      "t": "FACT",
+      "text": "Briar Soto — in their life, C114: haggled for a flat of bruised peaches at the Saturday market just to have a reason to talk to someone",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-ac8a22339bb5"
+    },
+    {
+      "t": "FACT",
+      "text": "Briar Soto — in their life, C115: held the door and got a whole conversation for it",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-1756f18f54bf"
+    },
+    {
+      "t": "FACT",
+      "text": "Briar Soto — the Tribune named them in a piece headlined The Port Got Louder. Down the Block, the Ledger Barely Moved. (Business Reporter, C111)",
+      "src": "archive/ARTICLE_INDEX.jsonl 0ddf91444ec2bfd5",
+      "id": "F-e74e546a8f10"
+    },
+    {
+      "t": "FACT",
+      "text": "Coen Cartier — moved from Uptown to Chinatown — moving for a better fit between household income and housing costs, Chinatown (C115 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-accfd5bedcdc"
+    },
+    {
+      "t": "FACT",
+      "text": "Coen Cartier — in their life, C114: re-read an old journal page and didn't recognize the handwriting mood",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-10271a2c10b8"
+    },
+    {
+      "t": "FACT",
+      "text": "Coen Cartier — in their life, C115: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-2a146f322a63"
+    },
+    {
+      "t": "FACT",
+      "text": "Coen Cartier — the Tribune named them in a piece headlined The Quiet Platform Still Has a Job (Civic, C113)",
+      "src": "archive/ARTICLE_INDEX.jsonl da84550ec95e1ed6",
+      "id": "F-08b08733d32f"
+    },
+    {
+      "t": "FACT",
+      "text": "Coen Cartier — the Tribune named them in a piece headlined Ridership Surge at 12th St Oakland City Center Tests Transit Systems (Civic, C109)",
+      "src": "archive/ARTICLE_INDEX.jsonl 17eadc9da88617ea",
+      "id": "F-83968f20b85c"
+    },
+    {
+      "t": "FACT",
+      "text": "Coen Cartier — the Tribune named them in a piece headlined 12th Street Station Feels the Rhythm of Downtown (Civic, C107)",
+      "src": "archive/ARTICLE_INDEX.jsonl 5c00af7cb5f75c00",
+      "id": "F-ca2d28ed5902"
+    },
+    {
+      "t": "FACT",
+      "text": "Brielle Lewis — moved from Fruitvale to West Oakland — moving up from Fruitvale — sold the house in Fruitvale to rent up, West Oakland (C115 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-03a518f2c1ee"
+    },
+    {
+      "t": "FACT",
+      "text": "Brielle Lewis — in their life, C114: took the long way home just to check the Baylight fence line's progress",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-22bf677e3913"
+    },
+    {
+      "t": "FACT",
+      "text": "Brielle Lewis — in their life, C115: traded produce over a fence and came out ahead",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-f8794c0e1c40"
+    },
+    {
+      "t": "FACT",
+      "text": "Brielle Lewis — in their life, C115: wore the green-and-gold cap to the corner store and got three nods for it near a taqueria patio",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-83a16c9b79e2"
+    },
+    {
+      "t": "FACT",
+      "text": "Brielle Lewis — in their life, C115: remembered a teacher who'd said one thing that stuck",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-474d43e5c604"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C11, Spring, holiday=none",
+      "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+      "id": "F-82d77e9a4a71"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "tamsin-lives-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Put the cycle's person events in the paper as news, one person at a time — a birth, a death, a hospital stay, a retirement, a promotion, a household set up or a place of one's own, a win or a loss on the book, what a turn of the city did to someone's day, and the smaller moments the record kept. The event is the lead, the person is named as the slice names them, and what came next appears only when a later record holds it. A stake or a payout is the person's own fact, not a statistic. The page is the city's real calendar; every person on it is one the record holds.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "plain respect — a neighborhood weekly's births-and-obituaries hand, unhurried, exact",
+      "targetWords": "450-1200",
+      "opening": "the heaviest event on the slice, stated as it happened to the named person",
+      "closing": "the last person's passage ends on what the record holds next for them, or on the fact itself — no moral, no roundup"
+    },
+    "authorizedTexture": [
+      "the plain respect of the form — the ordinary weight of a birth, a retirement, a discharge, stated without ornament",
+      "the frame around a supplied fact — what a promotion to the supplied role means in plain words, without inventing the workplace",
+      "the neighborhood the slice names as where the person lives, without an invented street scene",
+      "the order and pacing of the passages — heaviest first, one person at a time"
+    ],
+    "textureConditions": [
+      "every person, event, role, employer, neighborhood, hospital stay, household and family tie must come from the slice",
+      "a quote appears only verbatim from the person's own supplied page; nothing paraphrased into quotation marks",
+      "what came next appears only when a later Cycle's supplied record holds it",
+      "a thin day (few events) is written as a short page, not padded"
+    ],
+    "canonBlockers": [
+      "any person, event, quote, venue, employer or family member not on the slice",
+      "a paraphrased or invented quote",
+      "a cause, diagnosis or outcome the record does not state",
+      "a statistic, rate or trend claim — the page is people, not numbers",
+      "intake bookkeeping rows (Emerged into Tier, Added to Simulation_Ledger, Updated to Tier) written as life events",
+      "raw engine labels or decimals printed as public-facing evidence"
+    ]
+  },
+  "manifest": {
+    "id": "AM-c40e545559a6",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-bc84fc0b7718",
+        "t": "FACT",
+        "text": "Current cycle: C115",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-7bc775c671eb",
+        "t": "FACT",
+        "text": "Mara Vance moved into a place of their own in Rockridge, renting",
+        "src": "output/beats/Lived_Events.jsonl @C115 batch 368dcb"
+      },
+      {
+        "id": "F-001e2d64a3c2",
+        "t": "FACT",
+        "text": "Mara Vance first. The event is the lead; one true detail; what came next only if the record says.",
+        "src": "output/beats/Lived_Events.jsonl @C115 batch 368dcb"
+      },
+      {
+        "id": "F-378956a3912b",
+        "t": "FACT",
+        "text": "Mara Vance moved into a place of their own in Rockridge, renting (C115)",
+        "src": "output/beats/Household_Ledger.jsonl @C115"
+      },
+      {
+        "id": "F-cc595679540f",
+        "t": "FACT",
+        "text": "Mara Vance — in their life, C114: started a small project with no deadline and no reason",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-01a24cef5ded",
+        "t": "FACT",
+        "text": "Mara Vance — in their life, C115: watched the finish from a packed bar and walked home in a crowd that didn't want to disperse",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-3da937e11d27",
+        "t": "FACT",
+        "text": "Mara Vance — in their life, C115: re-read an old journal page and didn't recognize the handwriting mood",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-4ae2824fa1c6",
+        "t": "FACT",
+        "text": "Mara Vance — in their life, C115: spent the evening sorting a box of things that used to be someone's",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-6f79ea0e1675",
+        "t": "FACT",
+        "text": "Mara Vance — the Tribune named them in a piece headlined SEPTEMBER 15 (Infrastructure, C85)",
+        "src": "archive/ARTICLE_INDEX.jsonl 1b8b4197e88c1f10"
+      },
+      {
+        "id": "F-2b0346bbf4ec",
+        "t": "FACT",
+        "text": "Mara Vance — the Tribune named them in a piece headlined THE FILING CABINET THAT ISN'T MOVING (Civic Ledger, C85)",
+        "src": "archive/ARTICLE_INDEX.jsonl fbfb426bac99c826"
+      },
+      {
+        "id": "F-b97c517855f0",
+        "t": "FACT",
+        "text": "Mara Vance — the Tribune named them in a piece headlined Shovels Cleared: Baylight Legal Instruments Filed, Construction Legally Authorized (Civic Ledger, C84)",
+        "src": "archive/ARTICLE_INDEX.jsonl c86afc38194faba9"
+      },
+      {
+        "id": "F-7088d162429b",
+        "t": "FACT",
+        "text": "Howard Yell moved into a place of their own in Rockridge, renting (C115)",
+        "src": "output/beats/Household_Ledger.jsonl @C115"
+      },
+      {
+        "id": "F-704daa886f5e",
+        "t": "FACT",
+        "text": "Howard Yell — in their life, C114: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-53ca1bacce35",
+        "t": "FACT",
+        "text": "Howard Yell — in their life, C115: waved at the regulars on the usual route, all present and accounted for",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-87668da9698b",
+        "t": "FACT",
+        "text": "Howard Yell — in their life, C115: counted the register twice before closing up, just in case near College Avenue",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-b0b75910ee45",
+        "t": "FACT",
+        "text": "Howard Yell — in their life, C115: saw a stranger laugh at their phone and invented the joke all the way home",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-2976e2c9a82a",
+        "t": "FACT",
+        "text": "Howard Yell — the Tribune named them in a piece headlined The Page: Lives of Cycle 113 (Culture, C113)",
+        "src": "archive/ARTICLE_INDEX.jsonl 147bf0b94e0c90f7"
+      },
+      {
+        "id": "F-120bc45d07e0",
+        "t": "FACT",
+        "text": "Xavier Robinson won on the UNDOCKED book — staked 365, paid 668, Fruitvale (C115)",
+        "src": "output/beats/Casino_Ledger.jsonl @C115"
+      },
+      {
+        "id": "F-4afecf863483",
+        "t": "FACT",
+        "text": "Xavier Robinson — in their life, C114: walked a different street home just to see it",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-2daaf513079a",
+        "t": "FACT",
+        "text": "Xavier Robinson — in their life, C115: found a quiet minute at a taqueria patio and the hum of a bassline from a passing car",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-8eda615cf357",
+        "t": "FACT",
+        "text": "Xavier Robinson — in their life, C115: spent time at a corner store; routine stop",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-1343a92882a2",
+        "t": "FACT",
+        "text": "Imani Delacroix lost on the UNDOCKED book — staked 160, the book kept it, West Oakland (C115)",
+        "src": "output/beats/Casino_Ledger.jsonl @C115"
+      },
+      {
+        "id": "F-f3d3d8cd43c4",
+        "t": "FACT",
+        "text": "Imani Delacroix — in their life, C114: heard a kid explain something to a parent with total authority and grinned",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-b5fa0a89bd78",
+        "t": "FACT",
+        "text": "Imani Delacroix — in their life, C114: noticed neighbors looking out for each other",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-1c7c0baf7d44",
+        "t": "FACT",
+        "text": "Imani Delacroix — in their life, C114: found the warehouse-campus lot full on a weekday",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-c2107528faca",
+        "t": "FACT",
+        "text": "Jee Lei — sat on the front porch with a mug of coffee and cataloged everyone walking to the BART near a late-night counter, Uptown — one of 4 people the Cycle's city turn reached (Oakland Alternative Response Initiative is dispatch-live — ongoing safety effects in West Oakland, Fruitvale, East Oakland; the city feels…) (C115)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C115"
+      },
+      {
+        "id": "F-42ab4b40579c",
+        "t": "FACT",
+        "text": "Jee Lei — in their life, C114: gave a whole afternoon to a hobby without once checking the clock",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-c411d71901a9",
+        "t": "FACT",
+        "text": "Jee Lei — in their life, C114: discovered a new local artist",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-aeabb9181823",
+        "t": "FACT",
+        "text": "Jee Lei — Lives already wrote this person: a moment the record kept (C114)",
+        "src": "output/cron-compare/lives_covered.json"
+      },
+      {
+        "id": "F-12add3663c39",
+        "t": "FACT",
+        "text": "Ophelia Brenner — the Fruitvale Transit Hub Phase II is sparking excitement, with plans for a brighter future taking shape., Fruitvale — one of 4 people the Cycle's city turn reached (Fruitvale Transit Hub Phase II — Visioning is design-phase — ongoing transit effects in Fruitvale; the city feels it through these…) (C115)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C115"
+      },
+      {
+        "id": "F-72fcccb29730",
+        "t": "FACT",
+        "text": "Ophelia Brenner — in their life, C114: drank the free cold brew in the company kitchen and felt completely disconnected from the neighborhood outside",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-c54e1242ec0f",
+        "t": "FACT",
+        "text": "Ophelia Brenner — in their life, C114: disagreed with a Tribune column out loud to an empty kitchen",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-f5cb0526c7c7",
+        "t": "FACT",
+        "text": "Ophelia Brenner — in their life, C115: noticed a familiar face missing from the morning routine",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-af25f0eb8b75",
+        "t": "FACT",
+        "text": "Ophelia Brenner — in their life, C115: counted cranes on the skyline from the bus stop and got a different number than yesterday",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-4de87b25aa4e",
+        "t": "FACT",
+        "text": "Ophelia Brenner — the Tribune named them in a piece headlined Forty-One in the Room at Bay Pure Land, and a Pantry That Predates the Count (Culture, C113)",
+        "src": "archive/ARTICLE_INDEX.jsonl 4a84e359d49712a3"
+      },
+      {
+        "id": "F-90a3134f5e39",
+        "t": "FACT",
+        "text": "Ophelia Brenner — the Tribune named them in a piece headlined A Week of Many Altars: Oakland's Thanksgiving Convergence (Culture, C99)",
+        "src": "archive/ARTICLE_INDEX.jsonl 57235fd2f5166f60"
+      },
+      {
+        "id": "F-1da27e0d7188",
+        "t": "FACT",
+        "text": "Ophelia Brenner — the Tribune named them in a piece headlined The Season the Congregations Carried — and the Shortstop in a Deacon's Robes (Culture, C97)",
+        "src": "archive/ARTICLE_INDEX.jsonl 8351dd42bdadab26"
+      },
+      {
+        "id": "F-d9a046fdf86e",
+        "t": "FACT",
+        "text": "Ravi O'Connell — grabbed coffee from the cart outside the hospital before the morning rush hit, Temescal — one of 4 people the Cycle's city turn reached (Temescal Community Health Center is operational — ongoing health effects in Temescal; the city feels it through these neighborhoods) (C115)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C115"
+      },
+      {
+        "id": "F-222ad90a208a",
+        "t": "FACT",
+        "text": "Ravi O'Connell — in their life, C114: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-c27eead41731",
+        "t": "FACT",
+        "text": "Ravi O'Connell — in their life, C114: felt a lift at OakTown Social after the win",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-8cdd195a6453",
+        "t": "FACT",
+        "text": "Ravi O'Connell — in their life, C115: kept a small promise to themselves nobody else knew about near a Temescal cafe",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-80fd9e27772a",
+        "t": "FACT",
+        "text": "Ravi O'Connell — in their life, C115: looked up how something works and came away more amazed, not less",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-ef816da6fb65",
+        "t": "FACT",
+        "text": "Mateo Allen and Joesph Allen — moved from Laurel to West Oakland — moving up from Laurel — sold the house in Laurel to rent up, West Oakland (C115 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-2f8e11b8f9b5",
+        "t": "FACT",
+        "text": "Mateo Allen — in their life, C114: discussed recent city events with someone they knew",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-61af4b18ff70",
+        "t": "FACT",
+        "text": "Mateo Allen — in their life, C114: heard practice scales drifting from Laurel Music School on the walk home with the kids near a corner shop",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-1f959c5572c1",
+        "t": "FACT",
+        "text": "Mateo Allen — in their life, C115: settled into a quiet evening on the couch with their partner",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-25aae67da3e6",
+        "t": "FACT",
+        "text": "Mateo Allen — in their life, C115: checked the front door lock three times after everyone else was asleep",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-44c220f8cd19",
+        "t": "FACT",
+        "text": "Joesph Allen — in their life, C114: watched their teenager walk into school without looking back and remembered when they used to wave",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-868abaf3b094",
+        "t": "FACT",
+        "text": "Joesph Allen — in their life, C114: bought a new A's jersey and the quiet satisfaction of finding a favorite song on the jukebox",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-5190bad469dd",
+        "t": "FACT",
+        "text": "Dmitri Soto and Briar Soto — moved from Jack London to KONO — leaving Jack London for a better fit — sold up and bought in KONO, KONO (C115 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-32ddcf086dda",
+        "t": "FACT",
+        "text": "Dmitri Soto — in their life, C115: caught Elena Soria Dominguez's eye across the room and didn't need to say it",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-d815e871c321",
+        "t": "FACT",
+        "text": "Dmitri Soto — in their life, C115: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-38651ef61f7f",
+        "t": "FACT",
+        "text": "Dmitri Soto — in their life, C115: started a small project with no deadline and no reason",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-f84bb2ac965d",
+        "t": "FACT",
+        "text": "Dmitri Soto — in their life, C115: navigated around a film crew blocking the sidewalk near the waterfront and rolled their eyes",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-b979d76ad8c2",
+        "t": "FACT",
+        "text": "Dmitri Soto — Lives already wrote this person: the wager (C114)",
+        "src": "output/cron-compare/lives_covered.json"
+      },
+      {
+        "id": "F-587208c10875",
+        "t": "FACT",
+        "text": "Dmitri Soto — the Tribune named them in a piece headlined The Port Got Louder. Down the Block, the Ledger Barely Moved. (Business Reporter, C111)",
+        "src": "archive/ARTICLE_INDEX.jsonl 0ddf91444ec2bfd5"
+      },
+      {
+        "id": "F-5e56d70eaa49",
+        "t": "FACT",
+        "text": "Briar Soto — in their life, C114: bought a new A's jersey and felt the season starting to turn",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-ac8a22339bb5",
+        "t": "FACT",
+        "text": "Briar Soto — in their life, C114: haggled for a flat of bruised peaches at the Saturday market just to have a reason to talk to someone",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-1756f18f54bf",
+        "t": "FACT",
+        "text": "Briar Soto — in their life, C115: held the door and got a whole conversation for it",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-e74e546a8f10",
+        "t": "FACT",
+        "text": "Briar Soto — the Tribune named them in a piece headlined The Port Got Louder. Down the Block, the Ledger Barely Moved. (Business Reporter, C111)",
+        "src": "archive/ARTICLE_INDEX.jsonl 0ddf91444ec2bfd5"
+      },
+      {
+        "id": "F-accfd5bedcdc",
+        "t": "FACT",
+        "text": "Coen Cartier — moved from Uptown to Chinatown — moving for a better fit between household income and housing costs, Chinatown (C115 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-10271a2c10b8",
+        "t": "FACT",
+        "text": "Coen Cartier — in their life, C114: re-read an old journal page and didn't recognize the handwriting mood",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-2a146f322a63",
+        "t": "FACT",
+        "text": "Coen Cartier — in their life, C115: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-08b08733d32f",
+        "t": "FACT",
+        "text": "Coen Cartier — the Tribune named them in a piece headlined The Quiet Platform Still Has a Job (Civic, C113)",
+        "src": "archive/ARTICLE_INDEX.jsonl da84550ec95e1ed6"
+      },
+      {
+        "id": "F-83968f20b85c",
+        "t": "FACT",
+        "text": "Coen Cartier — the Tribune named them in a piece headlined Ridership Surge at 12th St Oakland City Center Tests Transit Systems (Civic, C109)",
+        "src": "archive/ARTICLE_INDEX.jsonl 17eadc9da88617ea"
+      },
+      {
+        "id": "F-ca2d28ed5902",
+        "t": "FACT",
+        "text": "Coen Cartier — the Tribune named them in a piece headlined 12th Street Station Feels the Rhythm of Downtown (Civic, C107)",
+        "src": "archive/ARTICLE_INDEX.jsonl 5c00af7cb5f75c00"
+      },
+      {
+        "id": "F-03a518f2c1ee",
+        "t": "FACT",
+        "text": "Brielle Lewis — moved from Fruitvale to West Oakland — moving up from Fruitvale — sold the house in Fruitvale to rent up, West Oakland (C115 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-22bf677e3913",
+        "t": "FACT",
+        "text": "Brielle Lewis — in their life, C114: took the long way home just to check the Baylight fence line's progress",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-f8794c0e1c40",
+        "t": "FACT",
+        "text": "Brielle Lewis — in their life, C115: traded produce over a fence and came out ahead",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-83a16c9b79e2",
+        "t": "FACT",
+        "text": "Brielle Lewis — in their life, C115: wore the green-and-gold cap to the corner store and got three nods for it near a taqueria patio",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-474d43e5c604",
+        "t": "FACT",
+        "text": "Brielle Lewis — in their life, C115: remembered a teacher who'd said one thing that stuck",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-82d77e9a4a71",
+        "t": "FACT",
+        "text": "Calendar: Y3C11, Spring, holiday=none",
+        "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00507-e7a7e0225b",
+        "speakerId": "POP-00507",
+        "speakerName": "Mara Vance",
+        "text": "For me, accountability in 'The lives of C115: significant events and personal stories' comes down to being transparent about my own life and actions during that time. I've recently moved into a place of my own in Rockridge, which is a significant personal step. Professionally, I've been focused on my role as City Planning Director, and the directive I issued in C115 is part of that. I directed Avery Santana and Denise Carter to provide specific information and reconciliations related to petition responses and filings. I want to be clear that my actions are guided by a commitment to the principles of my office and the needs of the community.",
+        "factIds": [
+          "F-7bc775c671eb",
+          "F-378956a3912b",
+          "F-001e2d64a3c2"
+        ],
+        "src": "packet.W2[POP-00507]"
+      },
+      {
+        "id": "Q-POP-00651-e0b184f8fc",
+        "speakerId": "POP-00651",
+        "speakerName": "Howard Yell",
+        "text": "I'm not sure what you're referring to about my living situation. I haven't moved recently, I've been living in Rockridge for a while now. It's a nice neighborhood, I've gotten used to the routine here.",
+        "factIds": [
+          "F-7088d162429b"
+        ],
+        "src": "packet.W2[POP-00651]"
+      },
+      {
+        "id": "Q-POP-00711-0d48ed219b",
+        "speakerId": "POP-00711",
+        "speakerName": "Xavier Robinson",
+        "text": "The win at the window changed the week. I staked 365 and it paid 668. It's a nice boost, you know? I was just glad to have some good fortune. My kids are always on my mind, and it's nice to be able to treat them a little something extra.",
+        "factIds": [
+          "F-120bc45d07e0",
+          "F-2daaf513079a"
+        ],
+        "src": "packet.W2[POP-00711]"
+      },
+      {
+        "id": "Q-POP-01165-2d42430f1f",
+        "speakerId": "POP-01165",
+        "speakerName": "Imani Delacroix",
+        "text": "I lost on the UNDOCKED book. It was a bad beat, but I've been down this road before. My slip came back empty, that's all. I'm not too shaken up about it.",
+        "factIds": [
+          "F-1343a92882a2"
+        ],
+        "src": "packet.W2[POP-01165]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00507",
+        "name": "Mara Vance",
+        "profile": "Mara Vance — City Planning Director — Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00651",
+        "name": "Howard Yell",
+        "profile": "Howard Yell — Barista — Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00711",
+        "name": "Xavier Robinson",
+        "profile": "Xavier Robinson — Sea Level Monitoring Technician — Fruitvale",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-01165",
+        "name": "Imani Delacroix",
+        "profile": "Imani Delacroix — Crisis Clinician — West Oakland",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00321",
+        "name": "Jee Lei",
+        "profile": "Jee Lei — After-School Program Director — Uptown",
+        "src": "packet.W1.exposure",
+        "quotationEligible": false
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Tamsin Pruitt",
+        "text": "The impact of the Fruitvale Transit Hub Phase II on local residents",
+        "publishable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "The role of community initiatives in shaping neighborhood experiences",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "the plain respect of the form — the ordinary weight of a birth, a retirement, a discharge, stated without ornament",
+      "the frame around a supplied fact — what a promotion to the supplied role means in plain words, without inventing the workplace",
+      "the neighborhood the slice names as where the person lives, without an invented street scene",
+      "the order and pacing of the passages — heaviest first, one person at a time"
+    ],
+    "textureConditions": [
+      "every person, event, role, employer, neighborhood, hospital stay, household and family tie must come from the slice",
+      "a quote appears only verbatim from the person's own supplied page; nothing paraphrased into quotation marks",
+      "what came next appears only when a later Cycle's supplied record holds it",
+      "a thin day (few events) is written as a short page, not padded"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

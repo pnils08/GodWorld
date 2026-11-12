@@ -1,0 +1,1539 @@
+{
+  "stage": "angle",
+  "desk": "culture",
+  "cycle": "113",
+  "persona": "tamsin-pruitt",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-01210",
+      "name": "Tamsin Pruitt",
+      "role": "desk reporter",
+      "desk": "culture"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "The lives of C113: 11 people — Ily Gonzalez moved into a place of their own in Uptown, renting",
+      "approach": "Lives approach: this slice is the people something happened to this Cycle — a birth, a death in the house, a hospital stay, a retirement, a promotion; a household set up or a place of their own; a win or a loss on the book; the people a turn of the city reached and what it did to their day; and the smaller moments the record kept. Each person gets their own passage: the event, then the thread under it — the stay or strain that led there, the other lines the record kept for them, what the Tribune or this page already said of them, and what they did next if the record says. Read the thread in order and name where two lines of it do not agree; do not restate a ledger value as the story. The fact exactly right; never a trend, never a number first; the person, not the system the event belongs to. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent p",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "lives",
+        "hood": null,
+        "facts": [
+          "Ily Gonzalez moved into a place of their own in Uptown, renting (C113)",
+          "Ily Gonzalez — in their life, C112: read or studied indoors during winter pace",
+          "Ily Gonzalez — in their life, C112: loved the A's on principle and still cleared the night for UNDOCKED",
+          "Tomas Aguilar moved into a place of their own in Jack London, renting (C113)",
+          "Tomas Aguilar — in their life, C112: overheard their own name in a conversation outside the cafe near a late-night counter",
+          "Tomas Aguilar — in their life, C112: heard Jack London was packed last night",
+          "Tomas Aguilar — in their life, C112: ran the numbers on staying put another year",
+          "Tomas Aguilar — in their life, C113: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+          "Tomas Aguilar — the Tribune named them in a piece headlined Oakland on the NBA Expansion List: The Systems Guy Behind the Bid (Business, C91)",
+          "Mei-Lin Zhou lost on the UNDOCKED book — staked 186, the book kept it, Chinatown (C113)",
+          "Mei-Lin Zhou — in their life, C113: argued the bullpen order at the barbershop like it was city policy",
+          "Mei-Lin Zhou — in their life, C113: heard someone at the cafe complain about the Baylight District noise and bit their tongue",
+          "Mei-Lin Zhou — in their life, C113: a group of fans huddle under an awning debating last night's game, their voices rising above the sound of rain hitting the pavement",
+          "Mei-Lin Zhou — in their life, C113: took the long way home just to check the Baylight fence line's progress",
+          "Dax Monroe lost on the UNDOCKED book — staked 130, the book kept it, Rockridge (C113)",
+          "Dax Monroe — in their life, C113: caught the recap of last night's game at the counter and stayed for the second retelling",
+          "Dax Monroe — in their life, C113: navigated around a film crew blocking the sidewalk near the waterfront and rolled their eyes near a bookstore corner",
+          "Dax Monroe — in their life, C113: dodged the running groups circling the lake and found a quiet bench near the pergola near a cafe on the avenue",
+          "Dax Monroe — in their life, C113: spent the evening sorting a box of things that used to be someone's",
+          "Dax Monroe — the Tribune named them in a piece headlined OAKLAND TRIBUNE (General, C69)",
+          "Dax Monroe — the Tribune named them in a piece headlined CYCLES 23–33 (General, C23)",
+          "Dax Monroe — the Tribune named them in a piece headlined UPTOWN STREET FAIR AND PIER LIGHTS CONCERT TURN OAKLAND EVENINGS INTO A CANVAS (cycle 12-18) (Arts, C12)",
+          "Genevieve Martinez — slipped into the back pew at Foothill Baptist Tabernacle just to sit somewhere air-conditioned and quiet, Rockridge — one of 4 people the Cycle's community turn reached (C113)",
+          "Genevieve Martinez — in their life, C112: Sat through a meeting at Anthropic where every idea was theirs and none had their name on it.",
+          "Genevieve Martinez — in their life, C112: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence",
+          "Genevieve Martinez — in their life, C112: grabbed coffee from the cart outside the hospital before the morning rush hit",
+          "Genevieve Martinez — in their life, C113: caught their reflection in a shop window and stood a little straighter",
+          "Imogen Soto — watched a Baylight shuttle and a city bus pull up side by side at the light and waved at both drivers, Uptown — one of 4 people the Cycle's community turn reached (Ines Sorensen — the city keeps saying the name: Tier 4 -> 3) (C113)",
+          "Imogen Soto — in their life, C112: a flyer for a seniors lunch program flutters on a community bulletin board",
+          "Imogen Soto — in their life, C112: checked out a new shop that just opened nearby",
+          "Imogen Soto — in their life, C112: caught the coffee order coming out of their mouth before deciding to order it",
+          "Drew Lemon — stepped over a puddle reflecting the Tribune Tower neon and thought about taking a picture, Downtown — one of 4 people the Cycle's city turn reached (Downtown boom sustained — momentum 10/10, the block everyone wants onto) (C113)",
+          "Drew Lemon — in their life, C112: caught their partner humming the song they'd had stuck all day",
+          "Drew Lemon — in their life, C112: a DJ spins records at a crowded bar near Broadway, the bassline thumping through the foggy night",
+          "Drew Lemon — in their life, C112: enjoyed a calm, uneventful day",
+          "Drew Lemon — in their life, C113: noticed the corner had a different crowd after dark",
+          "Weston Herrin — Street sweeper: parking ticket., Chinatown (C113 — what happened in their life, not words they said)",
+          "Weston Herrin — in their life, C112: unpacked a box that had stayed sealed since the last move",
+          "Weston Herrin — in their life, C113: wondered if a decision from years back had been the right one",
+          "Weston Herrin — in their life, C113: the bartender wipes down the counter between rounds of A's highlights",
+          "Weston Herrin — in their life, C113: overheard a stranger asking the way to a new shop on the block and pointed them right to it",
+          "Juliet Choi — earned their advanced degree, East Oakland (C113 — what happened in their life, not words they said)",
+          "Juliet Choi — in their life, C112: rent took the biggest bite of the month again",
+          "Juliet Choi — in their life, C112: The owner at Oakland Public Library System said a bigger job is opening and asked if they wanted to be considered.",
+          "Juliet Choi — in their life, C112: ran the numbers on staying put another year",
+          "Juliet Choi — in their life, C113: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence near a lot mid-frame",
+          "Mateo Jilner — stayed up past everyone talking about what comes after this, Rockridge (C113 — what happened in their life, not words they said)",
+          "Mateo Jilner — in their life, C112: studied for the chemistry test on the bus and again at the kitchen table",
+          "Mateo Jilner — in their life, C113: got the acceptance email at lunch and let the table read it first",
+          "Mateo Jilner — in their life, C113: moved quietly through a cold evening",
+          "Mei Patel — stayed up past everyone talking about what comes after this, Jack London (C113 — what happened in their life, not words they said)",
+          "Mei Patel — in their life, C113: sat for the senior portrait and did not recognize the adult in it"
+        ],
+        "priorCycle": null,
+        "note": "none of today's people has written their own page this Cycle — no quotes",
+        "engineHooks": [
+          "A family bought their home in Jack London (observational analysis)",
+          "A family bought their home in Uptown (observational analysis)",
+          "A family bought their home in Chinatown (observational analysis)",
+          "A family bought their home in Rockridge (observational analysis)"
+        ],
+        "roomIsYours": "the plain respect, what the event meant in that house or on that block, the detail the family would have picked — from the lines below, never invented",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-lives",
+      "hood": null,
+      "score": null,
+      "src": "output/beats/Lived_Events.jsonl @C113 batch 63d367",
+      "nearby": [
+        {
+          "text": "Chinatown | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c113.md \"### Chinatown\"; events: world_summary_c113.md \"## World Events\""
+        },
+        {
+          "text": "Downtown | 2 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c113.md \"### Downtown\"; events: world_summary_c113.md \"## World Events\""
+        },
+        {
+          "text": "Fruitvale | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c113.md \"### Fruitvale\"; events: world_summary_c113.md \"## World Events\""
+        },
+        {
+          "text": "Jack London | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c113.md \"### Jack London\"; events: world_summary_c113.md \"## World Events\""
+        },
+        {
+          "text": "Lake Merritt | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c113.md \"### Lake Merritt\"; events: world_summary_c113.md \"## World Events\""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00455",
+          "name": "Ily Gonzalez",
+          "profile": "Ily Gonzalez — Fashion Designer — Uptown",
+          "role": "Fashion Designer",
+          "hood": "Uptown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Lived_Events.jsonl @C113 batch 63d367",
+            "pop": "POP-00455",
+            "rowName": "Ily Gonzalez",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00529",
+          "name": "Tomas Aguilar",
+          "profile": "Tomas Aguilar — Freight Logistics Coordinator (Port of Oakland) — Jack London",
+          "role": "Freight Logistics Coordinator (Port of Oakland)",
+          "hood": "Jack London",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Lived_Events.jsonl @C113 batch 63d367",
+            "pop": "POP-00529",
+            "rowName": "Tomas Aguilar",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01177",
+          "name": "Mei-Lin Zhou",
+          "profile": "Mei-Lin Zhou — Obstetrician — Chinatown",
+          "role": "Obstetrician",
+          "hood": "Chinatown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Lived_Events.jsonl @C113 batch 63d367",
+            "pop": "POP-01177",
+            "rowName": "Mei-Lin Zhou",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00769",
+          "name": "Dax Monroe",
+          "profile": "Dax Monroe — Artist — Rockridge",
+          "role": "Artist",
+          "hood": "Rockridge",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Lived_Events.jsonl @C113 batch 63d367",
+            "pop": "POP-00769",
+            "rowName": "Dax Monroe",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00864",
+          "name": "Genevieve Martinez",
+          "profile": "Genevieve Martinez — AI Safety Researcher (Anthropic) — Rockridge",
+          "role": "AI Safety Researcher (Anthropic)",
+          "hood": "Rockridge",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Lived_Events.jsonl @C113 batch 63d367",
+            "pop": "POP-00864",
+            "rowName": "Genevieve Martinez",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00825",
+          "name": "Imogen Soto",
+          "profile": "Imogen Soto — After-School Program Director — Uptown",
+          "role": "After-School Program Director",
+          "hood": "Uptown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Lived_Events.jsonl @C113 batch 63d367",
+            "pop": "POP-00825",
+            "rowName": "Imogen Soto",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00670",
+          "name": "Drew Lemon",
+          "profile": "Drew Lemon — Housing Authority Inspector — Downtown",
+          "role": "Housing Authority Inspector",
+          "hood": "Downtown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Lived_Events.jsonl @C113 batch 63d367",
+            "pop": "POP-00670",
+            "rowName": "Drew Lemon",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00494",
+          "name": "Weston Herrin",
+          "profile": "Weston Herrin — Refugee Resettlement Case Worker — Chinatown",
+          "role": "Refugee Resettlement Case Worker",
+          "hood": "Chinatown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Lived_Events.jsonl @C113 batch 63d367",
+            "pop": "POP-00494",
+            "rowName": "Weston Herrin",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00857",
+          "name": "Juliet Choi",
+          "profile": "Juliet Choi — Security Guard — East Oakland",
+          "role": "Security Guard",
+          "hood": "East Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Lived_Events.jsonl @C113 batch 63d367",
+            "pop": "POP-00857",
+            "rowName": "Juliet Choi",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01001",
+          "name": "Mateo Jilner",
+          "profile": "Mateo Jilner — student — Rockridge",
+          "role": "student",
+          "hood": "Rockridge",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Lived_Events.jsonl @C113 batch 63d367",
+            "pop": "POP-01001",
+            "rowName": "Mateo Jilner",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01007",
+          "name": "Mei Patel",
+          "profile": "Mei Patel — student — Jack London",
+          "role": "student",
+          "hood": "Jack London",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Lived_Events.jsonl @C113 batch 63d367",
+            "pop": "POP-01007",
+            "rowName": "Mei Patel",
+            "kind": "slice-row"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C113",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-876f95b5eb98"
+      },
+      {
+        "t": "FACT",
+        "text": "Ily Gonzalez moved into a place of their own in Uptown, renting",
+        "src": "output/beats/Lived_Events.jsonl @C113 batch 63d367",
+        "id": "F-dcba563ff0a0"
+      },
+      {
+        "t": "FACT",
+        "text": "Ily Gonzalez first. The event is the lead; one true detail; what came next only if the record says.",
+        "src": "output/beats/Lived_Events.jsonl @C113 batch 63d367",
+        "id": "F-419740f9e0ea"
+      },
+      {
+        "t": "FACT",
+        "text": "Ily Gonzalez moved into a place of their own in Uptown, renting (C113)",
+        "src": "output/beats/Household_Ledger.jsonl @C113",
+        "id": "F-4fdf4e673413"
+      },
+      {
+        "t": "FACT",
+        "text": "Ily Gonzalez — in their life, C112: read or studied indoors during winter pace",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112",
+        "id": "F-8813671b9238"
+      },
+      {
+        "t": "FACT",
+        "text": "Ily Gonzalez — in their life, C112: loved the A's on principle and still cleared the night for UNDOCKED",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112",
+        "id": "F-2446d11a0bde"
+      },
+      {
+        "t": "FACT",
+        "text": "Tomas Aguilar moved into a place of their own in Jack London, renting (C113)",
+        "src": "output/beats/Household_Ledger.jsonl @C113",
+        "id": "F-1b0bb0040fff"
+      },
+      {
+        "t": "FACT",
+        "text": "Tomas Aguilar — in their life, C112: overheard their own name in a conversation outside the cafe near a late-night counter",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112",
+        "id": "F-93f735ccc8da"
+      },
+      {
+        "t": "FACT",
+        "text": "Tomas Aguilar — in their life, C112: heard Jack London was packed last night",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112",
+        "id": "F-466d152ef52a"
+      },
+      {
+        "t": "FACT",
+        "text": "Tomas Aguilar — in their life, C112: ran the numbers on staying put another year",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112",
+        "id": "F-dbf50e4cd88d"
+      },
+      {
+        "t": "FACT",
+        "text": "Tomas Aguilar — in their life, C113: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113",
+        "id": "F-c04bd4593f31"
+      },
+      {
+        "t": "FACT",
+        "text": "Tomas Aguilar — the Tribune named them in a piece headlined Oakland on the NBA Expansion List: The Systems Guy Behind the Bid (Business, C91)",
+        "src": "archive/ARTICLE_INDEX.jsonl fd2640e7ebaa48d1",
+        "id": "F-a39a2d20e555"
+      },
+      {
+        "t": "FACT",
+        "text": "Mei-Lin Zhou lost on the UNDOCKED book — staked 186, the book kept it, Chinatown (C113)",
+        "src": "output/beats/Casino_Ledger.jsonl @C113",
+        "id": "F-5b5a1ac205cd"
+      },
+      {
+        "t": "FACT",
+        "text": "Mei-Lin Zhou — in their life, C113: argued the bullpen order at the barbershop like it was city policy",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113",
+        "id": "F-152d7fb110ce"
+      },
+      {
+        "t": "FACT",
+        "text": "Mei-Lin Zhou — in their life, C113: heard someone at the cafe complain about the Baylight District noise and bit their tongue",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113",
+        "id": "F-797548ba93e8"
+      },
+      {
+        "t": "FACT",
+        "text": "Mei-Lin Zhou — in their life, C113: a group of fans huddle under an awning debating last night's game, their voices rising above the sound of rain hitting the pavement",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113",
+        "id": "F-4282017a325c"
+      },
+      {
+        "t": "FACT",
+        "text": "Mei-Lin Zhou — in their life, C113: took the long way home just to check the Baylight fence line's progress",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113",
+        "id": "F-3115b969ec45"
+      },
+      {
+        "t": "FACT",
+        "text": "Dax Monroe lost on the UNDOCKED book — staked 130, the book kept it, Rockridge (C113)",
+        "src": "output/beats/Casino_Ledger.jsonl @C113",
+        "id": "F-2792272224c2"
+      },
+      {
+        "t": "FACT",
+        "text": "Dax Monroe — in their life, C113: caught the recap of last night's game at the counter and stayed for the second retelling",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113",
+        "id": "F-1ea8110bf408"
+      },
+      {
+        "t": "FACT",
+        "text": "Dax Monroe — in their life, C113: navigated around a film crew blocking the sidewalk near the waterfront and rolled their eyes near a bookstore corner",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113",
+        "id": "F-e19a7524b395"
+      },
+      {
+        "t": "FACT",
+        "text": "Dax Monroe — in their life, C113: dodged the running groups circling the lake and found a quiet bench near the pergola near a cafe on the avenue",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113",
+        "id": "F-984ea5522097"
+      },
+      {
+        "t": "FACT",
+        "text": "Dax Monroe — in their life, C113: spent the evening sorting a box of things that used to be someone's",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113",
+        "id": "F-a67ff8afd037"
+      },
+      {
+        "t": "FACT",
+        "text": "Dax Monroe — the Tribune named them in a piece headlined OAKLAND TRIBUNE (General, C69)",
+        "src": "archive/ARTICLE_INDEX.jsonl 457aef4e0c520006",
+        "id": "F-e7c2324b932b"
+      },
+      {
+        "t": "FACT",
+        "text": "Dax Monroe — the Tribune named them in a piece headlined CYCLES 23–33 (General, C23)",
+        "src": "archive/ARTICLE_INDEX.jsonl d2a5b7dd0e49efb4",
+        "id": "F-21bbb34d9935"
+      },
+      {
+        "t": "FACT",
+        "text": "Dax Monroe — the Tribune named them in a piece headlined UPTOWN STREET FAIR AND PIER LIGHTS CONCERT TURN OAKLAND EVENINGS INTO A CANVAS (cycle 12-18) (Arts, C12)",
+        "src": "archive/ARTICLE_INDEX.jsonl 825dce54af59dbe3",
+        "id": "F-d5c90bde020a"
+      },
+      {
+        "t": "FACT",
+        "text": "Genevieve Martinez — slipped into the back pew at Foothill Baptist Tabernacle just to sit somewhere air-conditioned and quiet, Rockridge — one of 4 people the Cycle's community turn reached (C113)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C113",
+        "id": "F-0196aca1f6d5"
+      },
+      {
+        "t": "FACT",
+        "text": "Genevieve Martinez — in their life, C112: Sat through a meeting at Anthropic where every idea was theirs and none had their name on it.",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112",
+        "id": "F-c2d0869cbf7c"
+      },
+      {
+        "t": "FACT",
+        "text": "Genevieve Martinez — in their life, C112: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112",
+        "id": "F-f883c3157b9d"
+      },
+      {
+        "t": "FACT",
+        "text": "Genevieve Martinez — in their life, C112: grabbed coffee from the cart outside the hospital before the morning rush hit",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112",
+        "id": "F-68aee49d593f"
+      },
+      {
+        "t": "FACT",
+        "text": "Genevieve Martinez — in their life, C113: caught their reflection in a shop window and stood a little straighter",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113",
+        "id": "F-5e698a3f22d9"
+      },
+      {
+        "t": "FACT",
+        "text": "Imogen Soto — watched a Baylight shuttle and a city bus pull up side by side at the light and waved at both drivers, Uptown — one of 4 people the Cycle's community turn reached (Ines Sorensen — the city keeps saying the name: Tier 4 -> 3) (C113)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C113",
+        "id": "F-cd9480b824eb"
+      },
+      {
+        "t": "FACT",
+        "text": "Imogen Soto — in their life, C112: a flyer for a seniors lunch program flutters on a community bulletin board",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112",
+        "id": "F-d1d1f2fcd25c"
+      },
+      {
+        "t": "FACT",
+        "text": "Imogen Soto — in their life, C112: checked out a new shop that just opened nearby",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112",
+        "id": "F-e007c5d3cdc2"
+      },
+      {
+        "t": "FACT",
+        "text": "Imogen Soto — in their life, C112: caught the coffee order coming out of their mouth before deciding to order it",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112",
+        "id": "F-d4e8dc2b446a"
+      },
+      {
+        "t": "FACT",
+        "text": "Drew Lemon — stepped over a puddle reflecting the Tribune Tower neon and thought about taking a picture, Downtown — one of 4 people the Cycle's city turn reached (Downtown boom sustained — momentum 10/10, the block everyone wants onto) (C113)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C113",
+        "id": "F-1d72a2f13c57"
+      },
+      {
+        "t": "FACT",
+        "text": "Drew Lemon — in their life, C112: caught their partner humming the song they'd had stuck all day",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112",
+        "id": "F-ceba1fa96bbd"
+      },
+      {
+        "t": "FACT",
+        "text": "Drew Lemon — in their life, C112: a DJ spins records at a crowded bar near Broadway, the bassline thumping through the foggy night",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112",
+        "id": "F-2aefa47bc953"
+      },
+      {
+        "t": "FACT",
+        "text": "Drew Lemon — in their life, C112: enjoyed a calm, uneventful day",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112",
+        "id": "F-47a3bc3bb994"
+      },
+      {
+        "t": "FACT",
+        "text": "Drew Lemon — in their life, C113: noticed the corner had a different crowd after dark",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113",
+        "id": "F-b4d05efdfdd8"
+      },
+      {
+        "t": "FACT",
+        "text": "Weston Herrin — Street sweeper: parking ticket., Chinatown (C113 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113",
+        "id": "F-2adbcb248978"
+      },
+      {
+        "t": "FACT",
+        "text": "Weston Herrin — in their life, C112: unpacked a box that had stayed sealed since the last move",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112",
+        "id": "F-c24c87aa4bc6"
+      },
+      {
+        "t": "FACT",
+        "text": "Weston Herrin — in their life, C113: wondered if a decision from years back had been the right one",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113",
+        "id": "F-c672d6362729"
+      },
+      {
+        "t": "FACT",
+        "text": "Weston Herrin — in their life, C113: the bartender wipes down the counter between rounds of A's highlights",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113",
+        "id": "F-b670ccc41762"
+      },
+      {
+        "t": "FACT",
+        "text": "Weston Herrin — in their life, C113: overheard a stranger asking the way to a new shop on the block and pointed them right to it",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113",
+        "id": "F-27e04b3f10ed"
+      },
+      {
+        "t": "FACT",
+        "text": "Juliet Choi — earned their advanced degree, East Oakland (C113 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113",
+        "id": "F-9b9bcafc73ce"
+      },
+      {
+        "t": "FACT",
+        "text": "Juliet Choi — in their life, C112: rent took the biggest bite of the month again",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112",
+        "id": "F-0a73e0acaff4"
+      },
+      {
+        "t": "FACT",
+        "text": "Juliet Choi — in their life, C112: The owner at Oakland Public Library System said a bigger job is opening and asked if they wanted to be considered.",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112",
+        "id": "F-c578b64009ee"
+      },
+      {
+        "t": "FACT",
+        "text": "Juliet Choi — in their life, C112: ran the numbers on staying put another year",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112",
+        "id": "F-593366a3ceda"
+      },
+      {
+        "t": "FACT",
+        "text": "Juliet Choi — in their life, C113: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence near a lot mid-frame",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113",
+        "id": "F-688e47c7164e"
+      },
+      {
+        "t": "FACT",
+        "text": "Mateo Jilner — stayed up past everyone talking about what comes after this, Rockridge (C113 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113",
+        "id": "F-f607d846b067"
+      },
+      {
+        "t": "FACT",
+        "text": "Mateo Jilner — in their life, C112: studied for the chemistry test on the bus and again at the kitchen table",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112",
+        "id": "F-ed2f4f6f91f7"
+      },
+      {
+        "t": "FACT",
+        "text": "Mateo Jilner — in their life, C113: got the acceptance email at lunch and let the table read it first",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113",
+        "id": "F-e121a8e27995"
+      },
+      {
+        "t": "FACT",
+        "text": "Mateo Jilner — in their life, C113: moved quietly through a cold evening",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113",
+        "id": "F-c1504c79d47c"
+      },
+      {
+        "t": "FACT",
+        "text": "Mei Patel — stayed up past everyone talking about what comes after this, Jack London (C113 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113",
+        "id": "F-f7b309a2d52f"
+      },
+      {
+        "t": "FACT",
+        "text": "Mei Patel — in their life, C113: sat for the senior portrait and did not recognize the adult in it",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113",
+        "id": "F-9afb6c848453"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "street",
+    "candidates": [
+      {
+        "pop": "POP-00455",
+        "name": "Ily Gonzalez",
+        "role": "Fashion Designer",
+        "hood": "Uptown",
+        "profile": "Ily Gonzalez — Fashion Designer — Uptown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Lived_Events.jsonl @C113 batch 63d367",
+          "pop": "POP-00455",
+          "rowName": "Ily Gonzalez",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00529",
+        "name": "Tomas Aguilar",
+        "role": "Freight Logistics Coordinator (Port of Oakland)",
+        "hood": "Jack London",
+        "profile": "Tomas Aguilar — Freight Logistics Coordinator (Port of Oakland) — Jack London",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Lived_Events.jsonl @C113 batch 63d367",
+          "pop": "POP-00529",
+          "rowName": "Tomas Aguilar",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01177",
+        "name": "Mei-Lin Zhou",
+        "role": "Obstetrician",
+        "hood": "Chinatown",
+        "profile": "Mei-Lin Zhou — Obstetrician — Chinatown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Lived_Events.jsonl @C113 batch 63d367",
+          "pop": "POP-01177",
+          "rowName": "Mei-Lin Zhou",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00769",
+        "name": "Dax Monroe",
+        "role": "Artist",
+        "hood": "Rockridge",
+        "profile": "Dax Monroe — Artist — Rockridge",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Lived_Events.jsonl @C113 batch 63d367",
+          "pop": "POP-00769",
+          "rowName": "Dax Monroe",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00864",
+        "name": "Genevieve Martinez",
+        "role": "AI Safety Researcher (Anthropic)",
+        "hood": "Rockridge",
+        "profile": "Genevieve Martinez — AI Safety Researcher (Anthropic) — Rockridge",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Lived_Events.jsonl @C113 batch 63d367",
+          "pop": "POP-00864",
+          "rowName": "Genevieve Martinez",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00825",
+        "name": "Imogen Soto",
+        "role": "After-School Program Director",
+        "hood": "Uptown",
+        "profile": "Imogen Soto — After-School Program Director — Uptown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Lived_Events.jsonl @C113 batch 63d367",
+          "pop": "POP-00825",
+          "rowName": "Imogen Soto",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00670",
+        "name": "Drew Lemon",
+        "role": "Housing Authority Inspector",
+        "hood": "Downtown",
+        "profile": "Drew Lemon — Housing Authority Inspector — Downtown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Lived_Events.jsonl @C113 batch 63d367",
+          "pop": "POP-00670",
+          "rowName": "Drew Lemon",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00494",
+        "name": "Weston Herrin",
+        "role": "Refugee Resettlement Case Worker",
+        "hood": "Chinatown",
+        "profile": "Weston Herrin — Refugee Resettlement Case Worker — Chinatown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Lived_Events.jsonl @C113 batch 63d367",
+          "pop": "POP-00494",
+          "rowName": "Weston Herrin",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00857",
+        "name": "Juliet Choi",
+        "role": "Security Guard",
+        "hood": "East Oakland",
+        "profile": "Juliet Choi — Security Guard — East Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Lived_Events.jsonl @C113 batch 63d367",
+          "pop": "POP-00857",
+          "rowName": "Juliet Choi",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01001",
+        "name": "Mateo Jilner",
+        "role": "student",
+        "hood": "Rockridge",
+        "profile": "Mateo Jilner — student — Rockridge",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Lived_Events.jsonl @C113 batch 63d367",
+          "pop": "POP-01001",
+          "rowName": "Mateo Jilner",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01007",
+        "name": "Mei Patel",
+        "role": "student",
+        "hood": "Jack London",
+        "profile": "Mei Patel — student — Jack London",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Lived_Events.jsonl @C113 batch 63d367",
+          "pop": "POP-01007",
+          "rowName": "Mei Patel",
+          "kind": "slice-row"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Tamsin Pruitt",
+    "popid": "POP-01210"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-lives",
+      "angle": "The lives of C113: 11 people — Ily Gonzalez moved into a place of their own in Uptown, renting",
+      "label": "Ily Gonzalez moved into a place of their own in Uptown, renting",
+      "hookLine": "Ily Gonzalez first. The event is the lead; one true detail; what came next only if the record says.",
+      "hood": null,
+      "citizens": [
+        "Ily Gonzalez (POP-00455)",
+        "Tomas Aguilar (POP-00529)",
+        "Mei-Lin Zhou (POP-01177)",
+        "Dax Monroe (POP-00769)",
+        "Genevieve Martinez (POP-00864)",
+        "Imogen Soto (POP-00825)",
+        "Drew Lemon (POP-00670)",
+        "Weston Herrin (POP-00494)",
+        "Juliet Choi (POP-00857)",
+        "Mateo Jilner (POP-01001)",
+        "Mei Patel (POP-01007)"
+      ],
+      "popids": [
+        "POP-00455",
+        "POP-00529",
+        "POP-01177",
+        "POP-00769",
+        "POP-00864",
+        "POP-00825",
+        "POP-00670",
+        "POP-00494",
+        "POP-00857",
+        "POP-01001",
+        "POP-01007"
+      ],
+      "ref": "output/beats/Lived_Events.jsonl @C113 batch 63d367",
+      "cycle": 113
+    },
+    "approach": "Lives approach: this slice is the people something happened to this Cycle — a birth, a death in the house, a hospital stay, a retirement, a promotion; a household set up or a place of their own; a win or a loss on the book; the people a turn of the city reached and what it did to their day; and the smaller moments the record kept. Each person gets their own passage: the event, then the thread under it — the stay or strain that led there, the other lines the record kept for them, what the Tribune or this page already said of them, and what they did next if the record says. Read the thread in order and name where two lines of it do not agree; do not restate a ledger value as the story. The fact exactly right; never a trend, never a number first; the person, not the system the event belongs to. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "LIVES-SLICE-2",
+    "kind": "beat-lives",
+    "seat": {
+      "slug": "tamsin-pruitt",
+      "name": "Tamsin Pruitt",
+      "popid": "POP-01210",
+      "desk": "culture",
+      "domain": "lives",
+      "builder": "buildLivesSlice.js"
+    },
+    "hood": null,
+    "pulse": {
+      "className": "beat-lives",
+      "score": 100,
+      "label": "Ily Gonzalez moved into a place of their own in Uptown, renting",
+      "hood": null,
+      "source": "output/beats/Lived_Events.jsonl @C113 batch 63d367"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "The lives of C113: 11 people — Ily Gonzalez moved into a place of their own in Uptown, renting",
+      "hookLine": "Ily Gonzalez first. The event is the lead; one true detail; what came next only if the record says.",
+      "anchorFacts": [
+        "Ily Gonzalez moved into a place of their own in Uptown, renting (C113)",
+        "Ily Gonzalez — in their life, C112: read or studied indoors during winter pace",
+        "Ily Gonzalez — in their life, C112: loved the A's on principle and still cleared the night for UNDOCKED",
+        "Tomas Aguilar moved into a place of their own in Jack London, renting (C113)",
+        "Tomas Aguilar — in their life, C112: overheard their own name in a conversation outside the cafe near a late-night counter",
+        "Tomas Aguilar — in their life, C112: heard Jack London was packed last night",
+        "Tomas Aguilar — in their life, C112: ran the numbers on staying put another year",
+        "Tomas Aguilar — in their life, C113: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+        "Tomas Aguilar — the Tribune named them in a piece headlined Oakland on the NBA Expansion List: The Systems Guy Behind the Bid (Business, C91)",
+        "Mei-Lin Zhou lost on the UNDOCKED book — staked 186, the book kept it, Chinatown (C113)",
+        "Mei-Lin Zhou — in their life, C113: argued the bullpen order at the barbershop like it was city policy",
+        "Mei-Lin Zhou — in their life, C113: heard someone at the cafe complain about the Baylight District noise and bit their tongue",
+        "Mei-Lin Zhou — in their life, C113: a group of fans huddle under an awning debating last night's game, their voices rising above the sound of rain hitting the pavement",
+        "Mei-Lin Zhou — in their life, C113: took the long way home just to check the Baylight fence line's progress",
+        "Dax Monroe lost on the UNDOCKED book — staked 130, the book kept it, Rockridge (C113)",
+        "Dax Monroe — in their life, C113: caught the recap of last night's game at the counter and stayed for the second retelling",
+        "Dax Monroe — in their life, C113: navigated around a film crew blocking the sidewalk near the waterfront and rolled their eyes near a bookstore corner",
+        "Dax Monroe — in their life, C113: dodged the running groups circling the lake and found a quiet bench near the pergola near a cafe on the avenue",
+        "Dax Monroe — in their life, C113: spent the evening sorting a box of things that used to be someone's",
+        "Dax Monroe — the Tribune named them in a piece headlined OAKLAND TRIBUNE (General, C69)",
+        "Dax Monroe — the Tribune named them in a piece headlined CYCLES 23–33 (General, C23)",
+        "Dax Monroe — the Tribune named them in a piece headlined UPTOWN STREET FAIR AND PIER LIGHTS CONCERT TURN OAKLAND EVENINGS INTO A CANVAS (cycle 12-18) (Arts, C12)",
+        "Genevieve Martinez — slipped into the back pew at Foothill Baptist Tabernacle just to sit somewhere air-conditioned and quiet, Rockridge — one of 4 people the Cycle's community turn reached (C113)",
+        "Genevieve Martinez — in their life, C112: Sat through a meeting at Anthropic where every idea was theirs and none had their name on it.",
+        "Genevieve Martinez — in their life, C112: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence",
+        "Genevieve Martinez — in their life, C112: grabbed coffee from the cart outside the hospital before the morning rush hit",
+        "Genevieve Martinez — in their life, C113: caught their reflection in a shop window and stood a little straighter",
+        "Imogen Soto — watched a Baylight shuttle and a city bus pull up side by side at the light and waved at both drivers, Uptown — one of 4 people the Cycle's community turn reached (Ines Sorensen — the city keeps saying the name: Tier 4 -> 3) (C113)",
+        "Imogen Soto — in their life, C112: a flyer for a seniors lunch program flutters on a community bulletin board",
+        "Imogen Soto — in their life, C112: checked out a new shop that just opened nearby",
+        "Imogen Soto — in their life, C112: caught the coffee order coming out of their mouth before deciding to order it",
+        "Drew Lemon — stepped over a puddle reflecting the Tribune Tower neon and thought about taking a picture, Downtown — one of 4 people the Cycle's city turn reached (Downtown boom sustained — momentum 10/10, the block everyone wants onto) (C113)",
+        "Drew Lemon — in their life, C112: caught their partner humming the song they'd had stuck all day",
+        "Drew Lemon — in their life, C112: a DJ spins records at a crowded bar near Broadway, the bassline thumping through the foggy night",
+        "Drew Lemon — in their life, C112: enjoyed a calm, uneventful day",
+        "Drew Lemon — in their life, C113: noticed the corner had a different crowd after dark",
+        "Weston Herrin — Street sweeper: parking ticket., Chinatown (C113 — what happened in their life, not words they said)",
+        "Weston Herrin — in their life, C112: unpacked a box that had stayed sealed since the last move",
+        "Weston Herrin — in their life, C113: wondered if a decision from years back had been the right one",
+        "Weston Herrin — in their life, C113: the bartender wipes down the counter between rounds of A's highlights",
+        "Weston Herrin — in their life, C113: overheard a stranger asking the way to a new shop on the block and pointed them right to it",
+        "Juliet Choi — earned their advanced degree, East Oakland (C113 — what happened in their life, not words they said)",
+        "Juliet Choi — in their life, C112: rent took the biggest bite of the month again",
+        "Juliet Choi — in their life, C112: The owner at Oakland Public Library System said a bigger job is opening and asked if they wanted to be considered.",
+        "Juliet Choi — in their life, C112: ran the numbers on staying put another year",
+        "Juliet Choi — in their life, C113: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence near a lot mid-frame",
+        "Mateo Jilner — stayed up past everyone talking about what comes after this, Rockridge (C113 — what happened in their life, not words they said)",
+        "Mateo Jilner — in their life, C112: studied for the chemistry test on the bus and again at the kitchen table",
+        "Mateo Jilner — in their life, C113: got the acceptance email at lunch and let the table read it first",
+        "Mateo Jilner — in their life, C113: moved quietly through a cold evening",
+        "Mei Patel — stayed up past everyone talking about what comes after this, Jack London (C113 — what happened in their life, not words they said)",
+        "Mei Patel — in their life, C113: sat for the senior portrait and did not recognize the adult in it"
+      ],
+      "evidence": [
+        {
+          "text": "Ily Gonzalez moved into a place of their own in Uptown, renting (C113)",
+          "src": "output/beats/Household_Ledger.jsonl @C113",
+          "id": "household:HH-0113-F009:113",
+          "kind": "household",
+          "popid": "POP-00455"
+        },
+        {
+          "text": "Ily Gonzalez — in their life, C112: read or studied indoors during winter pace",
+          "src": "output/beats/LifeHistory_Log.jsonl @C112",
+          "kind": "thread",
+          "popid": "POP-00455"
+        },
+        {
+          "text": "Ily Gonzalez — in their life, C112: loved the A's on principle and still cleared the night for UNDOCKED",
+          "src": "output/beats/LifeHistory_Log.jsonl @C112",
+          "kind": "thread",
+          "popid": "POP-00455"
+        },
+        {
+          "text": "Tomas Aguilar moved into a place of their own in Jack London, renting (C113)",
+          "src": "output/beats/Household_Ledger.jsonl @C113",
+          "id": "household:HH-0113-F010:113",
+          "kind": "household",
+          "popid": "POP-00529"
+        },
+        {
+          "text": "Tomas Aguilar — in their life, C112: overheard their own name in a conversation outside the cafe near a late-night counter",
+          "src": "output/beats/LifeHistory_Log.jsonl @C112",
+          "kind": "thread",
+          "popid": "POP-00529"
+        },
+        {
+          "text": "Tomas Aguilar — in their life, C112: heard Jack London was packed last night",
+          "src": "output/beats/LifeHistory_Log.jsonl @C112",
+          "kind": "thread",
+          "popid": "POP-00529"
+        },
+        {
+          "text": "Tomas Aguilar — in their life, C112: ran the numbers on staying put another year",
+          "src": "output/beats/LifeHistory_Log.jsonl @C112",
+          "kind": "thread",
+          "popid": "POP-00529"
+        },
+        {
+          "text": "Tomas Aguilar — in their life, C113: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+          "src": "output/beats/LifeHistory_Log.jsonl @C113",
+          "kind": "thread",
+          "popid": "POP-00529"
+        },
+        {
+          "text": "Tomas Aguilar — the Tribune named them in a piece headlined Oakland on the NBA Expansion List: The Systems Guy Behind the Bid (Business, C91)",
+          "src": "archive/ARTICLE_INDEX.jsonl fd2640e7ebaa48d1",
+          "kind": "thread",
+          "popid": "POP-00529"
+        },
+        {
+          "text": "Mei-Lin Zhou lost on the UNDOCKED book — staked 186, the book kept it, Chinatown (C113)",
+          "src": "output/beats/Casino_Ledger.jsonl @C113",
+          "id": "casino:e40fc4d4d4d0599f:113",
+          "kind": "casino",
+          "popid": "POP-01177"
+        },
+        {
+          "text": "Mei-Lin Zhou — in their life, C113: argued the bullpen order at the barbershop like it was city policy",
+          "src": "output/beats/LifeHistory_Log.jsonl @C113",
+          "kind": "thread",
+          "popid": "POP-01177"
+        },
+        {
+          "text": "Mei-Lin Zhou — in their life, C113: heard someone at the cafe complain about the Baylight District noise and bit their tongue",
+          "src": "output/beats/LifeHistory_Log.jsonl @C113",
+          "kind": "thread",
+          "popid": "POP-01177"
+        },
+        {
+          "text": "Mei-Lin Zhou — in their life, C113: a group of fans huddle under an awning debating last night's game, their voices rising above the sound of rain hitting the pavement",
+          "src": "output/beats/LifeHistory_Log.jsonl @C113",
+          "kind": "thread",
+          "popid": "POP-01177"
+        },
+        {
+          "text": "Mei-Lin Zhou — in their life, C113: took the long way home just to check the Baylight fence line's progress",
+          "src": "output/beats/LifeHistory_Log.jsonl @C113",
+          "kind": "thread",
+          "popid": "POP-01177"
+        },
+        {
+          "text": "Dax Monroe lost on the UNDOCKED book — staked 130, the book kept it, Rockridge (C113)",
+          "src": "output/beats/Casino_Ledger.jsonl @C113",
+          "id": "casino:bc90205fcf89adef:113",
+          "kind": "casino",
+          "popid": "POP-00769"
+        },
+        {
+          "text": "Dax Monroe — in their life, C113: caught the recap of last night's game at the counter and stayed for the second retelling",
+          "src": "output/beats/LifeHistory_Log.jsonl @C113",
+          "kind": "thread",
+          "popid": "POP-00769"
+        },
+        {
+          "text": "Dax Monroe — in their life, C113: navigated around a film crew blocking the sidewalk near the waterfront and rolled their eyes near a bookstore corner",
+          "src": "output/beats/LifeHistory_Log.jsonl @C113",
+          "kind": "thread",
+          "popid": "POP-00769"
+        },
+        {
+          "text": "Dax Monroe — in their life, C113: dodged the running groups circling the lake and found a quiet bench near the pergola near a cafe on the avenue",
+          "src": "output/beats/LifeHistory_Log.jsonl @C113",
+          "kind": "thread",
+          "popid": "POP-00769"
+        },
+        {
+          "text": "Dax Monroe — in their life, C113: spent the evening sorting a box of things that used to be someone's",
+          "src": "output/beats/LifeHistory_Log.jsonl @C113",
+          "kind": "thread",
+          "popid": "POP-00769"
+        },
+        {
+          "text": "Dax Monroe — the Tribune named them in a piece headlined OAKLAND TRIBUNE (General, C69)",
+          "src": "archive/ARTICLE_INDEX.jsonl 457aef4e0c520006",
+          "kind": "thread",
+          "popid": "POP-00769"
+        },
+        {
+          "text": "Dax Monroe — the Tribune named them in a piece headlined CYCLES 23–33 (General, C23)",
+          "src": "archive/ARTICLE_INDEX.jsonl d2a5b7dd0e49efb4",
+          "kind": "thread",
+          "popid": "POP-00769"
+        },
+        {
+          "text": "Dax Monroe — the Tribune named them in a piece headlined UPTOWN STREET FAIR AND PIER LIGHTS CONCERT TURN OAKLAND EVENINGS INTO A CANVAS (cycle 12-18) (Arts, C12)",
+          "src": "archive/ARTICLE_INDEX.jsonl 825dce54af59dbe3",
+          "kind": "thread",
+          "popid": "POP-00769"
+        },
+        {
+          "text": "Genevieve Martinez — slipped into the back pew at Foothill Baptist Tabernacle just to sit somewhere air-conditioned and quiet, Rockridge — one of 4 people the Cycle's community turn reached (C113)",
+          "src": "output/beats/Story_Seed_Deck.jsonl @C113",
+          "id": "seed:3ec24b75:113:POP-00864",
+          "kind": "seed",
+          "popid": "POP-00864"
+        },
+        {
+          "text": "Genevieve Martinez — in their life, C112: Sat through a meeting at Anthropic where every idea was theirs and none had their name on it.",
+          "src": "output/beats/LifeHistory_Log.jsonl @C112",
+          "kind": "thread",
+          "popid": "POP-00864"
+        },
+        {
+          "text": "Genevieve Martinez — in their life, C112: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence",
+          "src": "output/beats/LifeHistory_Log.jsonl @C112",
+          "kind": "thread",
+          "popid": "POP-00864"
+        },
+        {
+          "text": "Genevieve Martinez — in their life, C112: grabbed coffee from the cart outside the hospital before the morning rush hit",
+          "src": "output/beats/LifeHistory_Log.jsonl @C112",
+          "kind": "thread",
+          "popid": "POP-00864"
+        },
+        {
+          "text": "Genevieve Martinez — in their life, C113: caught their reflection in a shop window and stood a little straighter",
+          "src": "output/beats/LifeHistory_Log.jsonl @C113",
+          "kind": "thread",
+          "popid": "POP-00864"
+        },
+        {
+          "text": "Imogen Soto — watched a Baylight shuttle and a city bus pull up side by side at the light and waved at both drivers, Uptown — one of 4 people the Cycle's community turn reached (Ines Sorensen — the city keeps saying the name: Tier 4 -> 3) (C113)",
+          "src": "output/beats/Story_Seed_Deck.jsonl @C113",
+          "id": "seed:5ac10239:113:POP-00825",
+          "kind": "seed",
+          "popid": "POP-00825"
+        },
+        {
+          "text": "Imogen Soto — in their life, C112: a flyer for a seniors lunch program flutters on a community bulletin board",
+          "src": "output/beats/LifeHistory_Log.jsonl @C112",
+          "kind": "thread",
+          "popid": "POP-00825"
+        },
+        {
+          "text": "Imogen Soto — in their life, C112: checked out a new shop that just opened nearby",
+          "src": "output/beats/LifeHistory_Log.jsonl @C112",
+          "kind": "thread",
+          "popid": "POP-00825"
+        },
+        {
+          "text": "Imogen Soto — in their life, C112: caught the coffee order coming out of their mouth before deciding to order it",
+          "src": "output/beats/LifeHistory_Log.jsonl @C112",
+          "kind": "thread",
+          "popid": "POP-00825"
+        },
+        {
+          "text": "Drew Lemon — stepped over a puddle reflecting the Tribune Tower neon and thought about taking a picture, Downtown — one of 4 people the Cycle's city turn reached (Downtown boom sustained — momentum 10/10, the block everyone wants onto) (C113)",
+          "src": "output/beats/Story_Seed_Deck.jsonl @C113",
+          "id": "seed:4a4d5530:113:POP-00670",
+          "kind": "seed",
+          "popid": "POP-00670"
+        },
+        {
+          "text": "Drew Lemon — in their life, C112: caught their partner humming the song they'd had stuck all day",
+          "src": "output/beats/LifeHistory_Log.jsonl @C112",
+          "kind": "thread",
+          "popid": "POP-00670"
+        },
+        {
+          "text": "Drew Lemon — in their life, C112: a DJ spins records at a crowded bar near Broadway, the bassline thumping through the foggy night",
+          "src": "output/beats/LifeHistory_Log.jsonl @C112",
+          "kind": "thread",
+          "popid": "POP-00670"
+        },
+        {
+          "text": "Drew Lemon — in their life, C112: enjoyed a calm, uneventful day",
+          "src": "output/beats/LifeHistory_Log.jsonl @C112",
+          "kind": "thread",
+          "popid": "POP-00670"
+        },
+        {
+          "text": "Drew Lemon — in their life, C113: noticed the corner had a different crowd after dark",
+          "src": "output/beats/LifeHistory_Log.jsonl @C113",
+          "kind": "thread",
+          "popid": "POP-00670"
+        },
+        {
+          "text": "Weston Herrin — Street sweeper: parking ticket., Chinatown (C113 — what happened in their life, not words they said)",
+          "src": "output/beats/LifeHistory_Log.jsonl @C113",
+          "id": "moment:POP-00494:113:Setback",
+          "kind": "moment",
+          "popid": "POP-00494"
+        },
+        {
+          "text": "Weston Herrin — in their life, C112: unpacked a box that had stayed sealed since the last move",
+          "src": "output/beats/LifeHistory_Log.jsonl @C112",
+          "kind": "thread",
+          "popid": "POP-00494"
+        },
+        {
+          "text": "Weston Herrin — in their life, C113: wondered if a decision from years back had been the right one",
+          "src": "output/beats/LifeHistory_Log.jsonl @C113",
+          "kind": "thread",
+          "popid": "POP-00494"
+        },
+        {
+          "text": "Weston Herrin — in their life, C113: the bartender wipes down the counter between rounds of A's highlights",
+          "src": "output/beats/LifeHistory_Log.jsonl @C113",
+          "kind": "thread",
+          "popid": "POP-00494"
+        },
+        {
+          "text": "Weston Herrin — in their life, C113: overheard a stranger asking the way to a new shop on the block and pointed them right to it",
+          "src": "output/beats/LifeHistory_Log.jsonl @C113",
+          "kind": "thread",
+          "popid": "POP-00494"
+        },
+        {
+          "text": "Juliet Choi — earned their advanced degree, East Oakland (C113 — what happened in their life, not words they said)",
+          "src": "output/beats/LifeHistory_Log.jsonl @C113",
+          "id": "moment:POP-00857:113:Graduation",
+          "kind": "moment",
+          "popid": "POP-00857"
+        },
+        {
+          "text": "Juliet Choi — in their life, C112: rent took the biggest bite of the month again",
+          "src": "output/beats/LifeHistory_Log.jsonl @C112",
+          "kind": "thread",
+          "popid": "POP-00857"
+        },
+        {
+          "text": "Juliet Choi — in their life, C112: The owner at Oakland Public Library System said a bigger job is opening and asked if they wanted to be considered.",
+          "src": "output/beats/LifeHistory_Log.jsonl @C112",
+          "kind": "thread",
+          "popid": "POP-00857"
+        },
+        {
+          "text": "Juliet Choi — in their life, C112: ran the numbers on staying put another year",
+          "src": "output/beats/LifeHistory_Log.jsonl @C112",
+          "kind": "thread",
+          "popid": "POP-00857"
+        },
+        {
+          "text": "Juliet Choi — in their life, C113: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence near a lot mid-frame",
+          "src": "output/beats/LifeHistory_Log.jsonl @C113",
+          "kind": "thread",
+          "popid": "POP-00857"
+        },
+        {
+          "text": "Mateo Jilner — stayed up past everyone talking about what comes after this, Rockridge (C113 — what happened in their life, not words they said)",
+          "src": "output/beats/LifeHistory_Log.jsonl @C113",
+          "id": "moment:POP-01001:113:Graduation",
+          "kind": "moment",
+          "popid": "POP-01001"
+        },
+        {
+          "text": "Mateo Jilner — in their life, C112: studied for the chemistry test on the bus and again at the kitchen table",
+          "src": "output/beats/LifeHistory_Log.jsonl @C112",
+          "kind": "thread",
+          "popid": "POP-01001"
+        },
+        {
+          "text": "Mateo Jilner — in their life, C113: got the acceptance email at lunch and let the table read it first",
+          "src": "output/beats/LifeHistory_Log.jsonl @C113",
+          "kind": "thread",
+          "popid": "POP-01001"
+        },
+        {
+          "text": "Mateo Jilner — in their life, C113: moved quietly through a cold evening",
+          "src": "output/beats/LifeHistory_Log.jsonl @C113",
+          "kind": "thread",
+          "popid": "POP-01001"
+        },
+        {
+          "text": "Mei Patel — stayed up past everyone talking about what comes after this, Jack London (C113 — what happened in their life, not words they said)",
+          "src": "output/beats/LifeHistory_Log.jsonl @C113",
+          "id": "moment:POP-01007:113:Graduation",
+          "kind": "moment",
+          "popid": "POP-01007"
+        },
+        {
+          "text": "Mei Patel — in their life, C113: sat for the senior portrait and did not recognize the adult in it",
+          "src": "output/beats/LifeHistory_Log.jsonl @C113",
+          "kind": "thread",
+          "popid": "POP-01007"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": null,
+      "hooks": [
+        {
+          "text": "A family bought their home in Jack London",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Jack London",
+          "priority": 3
+        },
+        {
+          "text": "A family bought their home in Uptown",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Uptown",
+          "priority": 3
+        },
+        {
+          "text": "A family bought their home in Chinatown",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Chinatown",
+          "priority": 3
+        },
+        {
+          "text": "A family bought their home in Rockridge",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Rockridge",
+          "priority": 3
+        },
+        {
+          "text": "Desmond Morton moved from Jack London to Chinatown — leaving Jack London for a better fit",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Chinatown",
+          "priority": 5
+        },
+        {
+          "text": "Ariana Reyes moved from Downtown to West Oakland — moving up from Downtown — sold the house in Downtown to rent up",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "West Oakland",
+          "priority": 5
+        }
+      ],
+      "note": "none of today's people has written their own page this Cycle — no quotes",
+      "pageVoices": [],
+      "factCap": 120,
+      "peopleCap": 16,
+      "roomIsYours": "the plain respect, what the event meant in that house or on that block, the detail the family would have picked — from the lines below, never invented"
+    },
+    "citizens": [
+      {
+        "popid": "POP-00455",
+        "name": "Ily Gonzalez",
+        "role": "Fashion Designer",
+        "neighborhood": "Uptown",
+        "business": null,
+        "profile": "Ily Gonzalez — Fashion Designer — Uptown",
+        "why": "moved into a place of their own this Cycle"
+      },
+      {
+        "popid": "POP-00529",
+        "name": "Tomas Aguilar",
+        "role": "Freight Logistics Coordinator (Port of Oakland)",
+        "neighborhood": "Jack London",
+        "business": null,
+        "profile": "Tomas Aguilar — Freight Logistics Coordinator (Port of Oakland) — Jack London",
+        "why": "moved into a place of their own this Cycle"
+      },
+      {
+        "popid": "POP-01177",
+        "name": "Mei-Lin Zhou",
+        "role": "Obstetrician",
+        "neighborhood": "Chinatown",
+        "business": null,
+        "profile": "Mei-Lin Zhou — Obstetrician — Chinatown",
+        "why": "lost on the UNDOCKED book this Cycle"
+      },
+      {
+        "popid": "POP-00769",
+        "name": "Dax Monroe",
+        "role": "Artist",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Dax Monroe — Artist — Rockridge",
+        "why": "lost on the UNDOCKED book this Cycle"
+      },
+      {
+        "popid": "POP-00864",
+        "name": "Genevieve Martinez",
+        "role": "AI Safety Researcher (Anthropic)",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Genevieve Martinez — AI Safety Researcher (Anthropic) — Rockridge",
+        "why": "reached by the Cycle's community turn: slipped into the back pew at Foothill Baptist Tabernacle just to sit somewhere air-conditioned and quiet"
+      },
+      {
+        "popid": "POP-00825",
+        "name": "Imogen Soto",
+        "role": "After-School Program Director",
+        "neighborhood": "Uptown",
+        "business": null,
+        "profile": "Imogen Soto — After-School Program Director — Uptown",
+        "why": "reached by the Cycle's community turn: watched a Baylight shuttle and a city bus pull up side by side at the light and waved at both drivers"
+      },
+      {
+        "popid": "POP-00670",
+        "name": "Drew Lemon",
+        "role": "Housing Authority Inspector",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Drew Lemon — Housing Authority Inspector — Downtown",
+        "why": "reached by the Cycle's city turn: stepped over a puddle reflecting the Tribune Tower neon and thought about taking a picture"
+      },
+      {
+        "popid": "POP-00494",
+        "name": "Weston Herrin",
+        "role": "Refugee Resettlement Case Worker",
+        "neighborhood": "Chinatown",
+        "business": null,
+        "profile": "Weston Herrin — Refugee Resettlement Case Worker — Chinatown",
+        "why": "setback this Cycle: Street sweeper: parking ticket."
+      },
+      {
+        "popid": "POP-00857",
+        "name": "Juliet Choi",
+        "role": "Security Guard",
+        "neighborhood": "East Oakland",
+        "business": null,
+        "profile": "Juliet Choi — Security Guard — East Oakland",
+        "why": "graduation this Cycle: earned their advanced degree"
+      },
+      {
+        "popid": "POP-01001",
+        "name": "Mateo Jilner",
+        "role": "student",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Mateo Jilner — student — Rockridge",
+        "why": "graduation this Cycle: stayed up past everyone talking about what comes after this"
+      },
+      {
+        "popid": "POP-01007",
+        "name": "Mei Patel",
+        "role": "student",
+        "neighborhood": "Jack London",
+        "business": null,
+        "profile": "Mei Patel — student — Jack London",
+        "why": "graduation this Cycle: stayed up past everyone talking about what comes after this"
+      }
+    ],
+    "pointers": [
+      "output/beats/Lived_Events.jsonl @C113 batch 63d367",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Tamsin Pruitt this cycle)",
+      "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Tamsin Pruitt",
+    "popid": "POP-01210",
+    "text": "I plan to write about the lives of 11 people in C113, focusing on the significant events that happened to them. I'll start with Ily Gonzalez, who moved into a place of their own in Uptown, renting. I'll explore the lead-up to this event and what it means for them. I'll also look into other individuals like Tomas Aguilar, Mei-Lin Zhou, and Dax Monroe, examining their experiences and how they fit into the larger narrative of the community.",
+    "plan": {
+      "chase": "I plan to write about the lives of 11 people in C113, focusing on the significant events that happened to them. I'll start with Ily Gonzalez, who moved into a place of their own in Uptown, renting. I'll explore the lead-up to this event and what it means for them. I'll also look into other individuals like Tomas Aguilar, Mei-Lin Zhou, and Dax Monroe, examining their experiences and how they fit into the larger narrative of the community.",
+      "focus": "The lives of C113: 11 people and the events that shaped their cycle",
+      "why": "The Lives page aims to capture the essence of people's lives and the milestones they achieve or face challenges with. This cycle's events range from new living arrangements to losses on the UNDOCKED book, and personal achievements.",
+      "checks": [
+        "Verify the facts provided for each individual to ensure accuracy",
+        "Ensure that the narrative flows logically and is engaging",
+        "Check for any inconsistencies in the information provided"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00455",
+          "question": "What led Ily Gonzalez to move into a place of their own in Uptown?",
+          "basis": "Ily Gonzalez moved into a place of their own in Uptown, renting (C113)"
+        },
+        {
+          "pop": "POP-00529",
+          "question": "How does Tomas Aguilar's experience of moving into a new place relate to their work and personal life?",
+          "basis": "Tomas Aguilar moved into a place of their own in Jack London, renting (C113); The Tribune named them in a piece headlined Oakland on the NBA Expansion List: The Systems Guy Behind the Bid (Business, C91)"
+        },
+        {
+          "pop": "POP-01177",
+          "question": "How did Mei-Lin Zhou react to losing on the UNDOCKED book, and what does this say about their engagement with the community?",
+          "basis": "Mei-Lin Zhou lost on the UNDOCKED book — staked 186, the book kept it, Chinatown (C113); Mei-Lin Zhou argued the bullpen order at the barbershop like it was city policy"
+        }
+      ],
+      "interpretation": "The events of C113 reveal a diverse range of experiences among the individuals highlighted. From changes in living situations to personal achievements and losses, these stories offer a glimpse into the complexities of life in Oakland.",
+      "unverifiedLead": [
+        "The decision-making process behind Ily Gonzalez's move and how it reflects broader trends in Uptown's housing market"
+      ],
+      "closeQuestion": "What do the varied experiences of these 11 individuals reveal about the community's dynamics and resilience in C113?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Chinatown | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Chinatown",
+      "ref": "output/neighborhood_texture_c113.md \"### Chinatown\"; events: world_summary_c113.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Downtown | 2 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Downtown",
+      "ref": "output/neighborhood_texture_c113.md \"### Downtown\"; events: world_summary_c113.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Fruitvale | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Fruitvale",
+      "ref": "output/neighborhood_texture_c113.md \"### Fruitvale\"; events: world_summary_c113.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Jack London | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Jack London",
+      "ref": "output/neighborhood_texture_c113.md \"### Jack London\"; events: world_summary_c113.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Lake Merritt | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Lake Merritt",
+      "ref": "output/neighborhood_texture_c113.md \"### Lake Merritt\"; events: world_summary_c113.md \"## World Events\"",
+      "popids": []
+    }
+  ],
+  "laneEntries": 23,
+  "angleCapHits": 0,
+  "ranAt": "2026-10-30T11:18:58.929Z"
+}

@@ -1,0 +1,594 @@
+[
+  {
+    "pop": "POP-01141",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01141\",\"name\":\"Dolores Nwachukwu\",\"role\":\"Police Captain\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Sgt. Rachel Torres\",\"question\":\"What explains the gap between Uptown's 11 incidents and the 26% clearance rate, and what would bring that number up? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-safety\",\"hood\":\"Uptown\",\"focus\":\"Uptown's 11 incidents, 26% clearance rate, and the narrowing path from charges to arrests to custody — who answers for the gap.\",\"src\":\"output/beats/Crime_Metrics.jsonl @C114\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Dolores Nwachukwu — Police Captain — Oakland Police Department\",\"evidence\":[{\"id\":\"EV-eaa7d58c4e\",\"src\":\"output/beats/Crime_Metrics.jsonl @C114\",\"text\":\"Uptown leads the incident count; 72 in custody citywide; 39 public-safety staff on the roster.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C114\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4261fa115617\"},{\"t\":\"FACT\",\"text\":\"Uptown logged the most incidents (11) | 22 neighborhoods on the table\",\"src\":\"output/beats/Crime_Metrics.jsonl @C114\",\"id\":\"F-54bef08b92db\"},{\"t\":\"FACT\",\"text\":\"Uptown leads the incident count; 72 in custody citywide; 39 public-safety staff on the roster.\",\"src\":\"output/beats/Crime_Metrics.jsonl @C114\",\"id\":\"F-23f187847240\"},{\"t\":\"FACT\",\"text\":\"183 incidents across 22 neighborhoods; most in Uptown 11, Downtown 11, West Oakland 10, KONO 10, Rockridge 10; fewest in Fruitvale 6, Ivy Hill 6, Lake Merritt 5\",\"src\":\"output/beats/Crime_Metrics.jsonl @C114\",\"id\":\"F-2bd96d583fbe\"},{\"t\":\"FACT\",\"text\":\"Uptown: 11 incidents (+4 vs C113), response 10.8 min, clearance 26%, property index 39, violent index 23\",\"src\":\"output/beats/Crime_Metrics.jsonl @C114\",\"id\":\"F-237938aa2a90\"},{\"t\":\"FACT\",\"text\":\"Moved this cycle — rising: Downtown, West Oakland, KONO, Rockridge, San Antonio, Eastlake, East Oakland, Laurel, Glenview, Baylight District, Ivy Hill, Lake Merritt; easing: none\",\"src\":\"output/beats/Crime_Metrics.jsonl @C114\",\"id\":\"F-88059daff6d3\"},{\"t\":\"FACT\",\"text\":\"Citywide custody this cycle: 43 arrests (0 tracked, 43 other residents); 72 in custody at the close; 27 left\",\"src\":\"output/beats/Care_Justice_Census.jsonl judicial @C114 city\",\"id\":\"F-b8130754d639\"},{\"t\":\"FACT\",\"text\":\"KONO: 10 charges → 3 arrests → 5 in custody at the close (0 tracked, 5 other residents); tracked: none tracked\",\"src\":\"output/beats/Care_Justice_Census.jsonl judicial @C114 KONO\",\"id\":\"F-646dfe4c5210\"},{\"t\":\"FACT\",\"text\":\"Dolores Nwachukwu — Police Captain — Oakland Police Department\",\"src\":\"Simulation_Ledger profile for POP-01141\",\"id\":\"F-7118a8770ecf\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C10, Spring, holiday=none\",\"src\":\"output/world_summary_c114.md Calendar context (Simulation_Calendar)\",\"id\":\"F-9b9470803821\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01141",
+        "name": "Dolores Nwachukwu",
+        "role": "Police Captain",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Sgt. Rachel Torres",
+        "question": "What explains the gap between Uptown's 11 incidents and the 26% clearance rate, and what would bring that number up? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-safety",
+        "hood": "Uptown",
+        "focus": "Uptown's 11 incidents, 26% clearance rate, and the narrowing path from charges to arrests to custody — who answers for the gap.",
+        "src": "output/beats/Crime_Metrics.jsonl @C114"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Dolores Nwachukwu — Police Captain — Oakland Police Department",
+        "evidence": [
+          {
+            "id": "EV-eaa7d58c4e",
+            "src": "output/beats/Crime_Metrics.jsonl @C114",
+            "text": "Uptown leads the incident count; 72 in custody citywide; 39 public-safety staff on the roster."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C114",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4261fa115617"
+        },
+        {
+          "t": "FACT",
+          "text": "Uptown logged the most incidents (11) | 22 neighborhoods on the table",
+          "src": "output/beats/Crime_Metrics.jsonl @C114",
+          "id": "F-54bef08b92db"
+        },
+        {
+          "t": "FACT",
+          "text": "Uptown leads the incident count; 72 in custody citywide; 39 public-safety staff on the roster.",
+          "src": "output/beats/Crime_Metrics.jsonl @C114",
+          "id": "F-23f187847240"
+        },
+        {
+          "t": "FACT",
+          "text": "183 incidents across 22 neighborhoods; most in Uptown 11, Downtown 11, West Oakland 10, KONO 10, Rockridge 10; fewest in Fruitvale 6, Ivy Hill 6, Lake Merritt 5",
+          "src": "output/beats/Crime_Metrics.jsonl @C114",
+          "id": "F-2bd96d583fbe"
+        },
+        {
+          "t": "FACT",
+          "text": "Uptown: 11 incidents (+4 vs C113), response 10.8 min, clearance 26%, property index 39, violent index 23",
+          "src": "output/beats/Crime_Metrics.jsonl @C114",
+          "id": "F-237938aa2a90"
+        },
+        {
+          "t": "FACT",
+          "text": "Moved this cycle — rising: Downtown, West Oakland, KONO, Rockridge, San Antonio, Eastlake, East Oakland, Laurel, Glenview, Baylight District, Ivy Hill, Lake Merritt; easing: none",
+          "src": "output/beats/Crime_Metrics.jsonl @C114",
+          "id": "F-88059daff6d3"
+        },
+        {
+          "t": "FACT",
+          "text": "Citywide custody this cycle: 43 arrests (0 tracked, 43 other residents); 72 in custody at the close; 27 left",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C114 city",
+          "id": "F-b8130754d639"
+        },
+        {
+          "t": "FACT",
+          "text": "KONO: 10 charges → 3 arrests → 5 in custody at the close (0 tracked, 5 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C114 KONO",
+          "id": "F-646dfe4c5210"
+        },
+        {
+          "t": "FACT",
+          "text": "Dolores Nwachukwu — Police Captain — Oakland Police Department",
+          "src": "Simulation_Ledger profile for POP-01141",
+          "id": "F-7118a8770ecf"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C10, Spring, holiday=none",
+          "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+          "id": "F-9b9470803821"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01142",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01142\",\"name\":\"Tomas Reinholt\",\"role\":\"Police Lieutenant\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Sgt. Rachel Torres\",\"question\":\"How do response times and clearance rates in Uptown compare to what you're seeing on the ground, and where does the process break down? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-safety\",\"hood\":\"Uptown\",\"focus\":\"Uptown's 11 incidents, 26% clearance rate, and the narrowing path from charges to arrests to custody — who answers for the gap.\",\"src\":\"output/beats/Crime_Metrics.jsonl @C114\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Tomas Reinholt — Police Lieutenant — Oakland Police Department\",\"evidence\":[{\"id\":\"EV-6e246b9779\",\"src\":\"output/beats/Crime_Metrics.jsonl @C114\",\"text\":\"Uptown leads the incident count; 72 in custody citywide; 39 public-safety staff on the roster.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C114\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4261fa115617\"},{\"t\":\"FACT\",\"text\":\"Uptown logged the most incidents (11) | 22 neighborhoods on the table\",\"src\":\"output/beats/Crime_Metrics.jsonl @C114\",\"id\":\"F-54bef08b92db\"},{\"t\":\"FACT\",\"text\":\"Uptown leads the incident count; 72 in custody citywide; 39 public-safety staff on the roster.\",\"src\":\"output/beats/Crime_Metrics.jsonl @C114\",\"id\":\"F-23f187847240\"},{\"t\":\"FACT\",\"text\":\"183 incidents across 22 neighborhoods; most in Uptown 11, Downtown 11, West Oakland 10, KONO 10, Rockridge 10; fewest in Fruitvale 6, Ivy Hill 6, Lake Merritt 5\",\"src\":\"output/beats/Crime_Metrics.jsonl @C114\",\"id\":\"F-2bd96d583fbe\"},{\"t\":\"FACT\",\"text\":\"Uptown: 11 incidents (+4 vs C113), response 10.8 min, clearance 26%, property index 39, violent index 23\",\"src\":\"output/beats/Crime_Metrics.jsonl @C114\",\"id\":\"F-237938aa2a90\"},{\"t\":\"FACT\",\"text\":\"Moved this cycle — rising: Downtown, West Oakland, KONO, Rockridge, San Antonio, Eastlake, East Oakland, Laurel, Glenview, Baylight District, Ivy Hill, Lake Merritt; easing: none\",\"src\":\"output/beats/Crime_Metrics.jsonl @C114\",\"id\":\"F-88059daff6d3\"},{\"t\":\"FACT\",\"text\":\"Citywide custody this cycle: 43 arrests (0 tracked, 43 other residents); 72 in custody at the close; 27 left\",\"src\":\"output/beats/Care_Justice_Census.jsonl judicial @C114 city\",\"id\":\"F-b8130754d639\"},{\"t\":\"FACT\",\"text\":\"KONO: 10 charges → 3 arrests → 5 in custody at the close (0 tracked, 5 other residents); tracked: none tracked\",\"src\":\"output/beats/Care_Justice_Census.jsonl judicial @C114 KONO\",\"id\":\"F-646dfe4c5210\"},{\"t\":\"FACT\",\"text\":\"Tomas Reinholt — Police Lieutenant — Oakland Police Department\",\"src\":\"Simulation_Ledger profile for POP-01142\",\"id\":\"F-3b7ef1017f13\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C10, Spring, holiday=none\",\"src\":\"output/world_summary_c114.md Calendar context (Simulation_Calendar)\",\"id\":\"F-9b9470803821\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01142",
+        "name": "Tomas Reinholt",
+        "role": "Police Lieutenant",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Sgt. Rachel Torres",
+        "question": "How do response times and clearance rates in Uptown compare to what you're seeing on the ground, and where does the process break down? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-safety",
+        "hood": "Uptown",
+        "focus": "Uptown's 11 incidents, 26% clearance rate, and the narrowing path from charges to arrests to custody — who answers for the gap.",
+        "src": "output/beats/Crime_Metrics.jsonl @C114"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Tomas Reinholt — Police Lieutenant — Oakland Police Department",
+        "evidence": [
+          {
+            "id": "EV-6e246b9779",
+            "src": "output/beats/Crime_Metrics.jsonl @C114",
+            "text": "Uptown leads the incident count; 72 in custody citywide; 39 public-safety staff on the roster."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C114",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4261fa115617"
+        },
+        {
+          "t": "FACT",
+          "text": "Uptown logged the most incidents (11) | 22 neighborhoods on the table",
+          "src": "output/beats/Crime_Metrics.jsonl @C114",
+          "id": "F-54bef08b92db"
+        },
+        {
+          "t": "FACT",
+          "text": "Uptown leads the incident count; 72 in custody citywide; 39 public-safety staff on the roster.",
+          "src": "output/beats/Crime_Metrics.jsonl @C114",
+          "id": "F-23f187847240"
+        },
+        {
+          "t": "FACT",
+          "text": "183 incidents across 22 neighborhoods; most in Uptown 11, Downtown 11, West Oakland 10, KONO 10, Rockridge 10; fewest in Fruitvale 6, Ivy Hill 6, Lake Merritt 5",
+          "src": "output/beats/Crime_Metrics.jsonl @C114",
+          "id": "F-2bd96d583fbe"
+        },
+        {
+          "t": "FACT",
+          "text": "Uptown: 11 incidents (+4 vs C113), response 10.8 min, clearance 26%, property index 39, violent index 23",
+          "src": "output/beats/Crime_Metrics.jsonl @C114",
+          "id": "F-237938aa2a90"
+        },
+        {
+          "t": "FACT",
+          "text": "Moved this cycle — rising: Downtown, West Oakland, KONO, Rockridge, San Antonio, Eastlake, East Oakland, Laurel, Glenview, Baylight District, Ivy Hill, Lake Merritt; easing: none",
+          "src": "output/beats/Crime_Metrics.jsonl @C114",
+          "id": "F-88059daff6d3"
+        },
+        {
+          "t": "FACT",
+          "text": "Citywide custody this cycle: 43 arrests (0 tracked, 43 other residents); 72 in custody at the close; 27 left",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C114 city",
+          "id": "F-b8130754d639"
+        },
+        {
+          "t": "FACT",
+          "text": "KONO: 10 charges → 3 arrests → 5 in custody at the close (0 tracked, 5 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C114 KONO",
+          "id": "F-646dfe4c5210"
+        },
+        {
+          "t": "FACT",
+          "text": "Tomas Reinholt — Police Lieutenant — Oakland Police Department",
+          "src": "Simulation_Ledger profile for POP-01142",
+          "id": "F-3b7ef1017f13"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C10, Spring, holiday=none",
+          "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+          "id": "F-9b9470803821"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01143",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01143\",\"name\":\"Kendra Lyle-Nnamdi\",\"role\":\"Police Sergeant\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Sgt. Rachel Torres\",\"question\":\"What do the 11 incidents in Uptown look like from the sergeant's level, and which ones are slipping through without clearance? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-safety\",\"hood\":\"Uptown\",\"focus\":\"Uptown's 11 incidents, 26% clearance rate, and the narrowing path from charges to arrests to custody — who answers for the gap.\",\"src\":\"output/beats/Crime_Metrics.jsonl @C114\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Kendra Lyle-Nnamdi — Police Sergeant — Oakland Police Department\",\"evidence\":[{\"id\":\"EV-2c7231a011\",\"src\":\"output/beats/Crime_Metrics.jsonl @C114\",\"text\":\"Uptown leads the incident count; 72 in custody citywide; 39 public-safety staff on the roster.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C114\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4261fa115617\"},{\"t\":\"FACT\",\"text\":\"Uptown logged the most incidents (11) | 22 neighborhoods on the table\",\"src\":\"output/beats/Crime_Metrics.jsonl @C114\",\"id\":\"F-54bef08b92db\"},{\"t\":\"FACT\",\"text\":\"Uptown leads the incident count; 72 in custody citywide; 39 public-safety staff on the roster.\",\"src\":\"output/beats/Crime_Metrics.jsonl @C114\",\"id\":\"F-23f187847240\"},{\"t\":\"FACT\",\"text\":\"183 incidents across 22 neighborhoods; most in Uptown 11, Downtown 11, West Oakland 10, KONO 10, Rockridge 10; fewest in Fruitvale 6, Ivy Hill 6, Lake Merritt 5\",\"src\":\"output/beats/Crime_Metrics.jsonl @C114\",\"id\":\"F-2bd96d583fbe\"},{\"t\":\"FACT\",\"text\":\"Uptown: 11 incidents (+4 vs C113), response 10.8 min, clearance 26%, property index 39, violent index 23\",\"src\":\"output/beats/Crime_Metrics.jsonl @C114\",\"id\":\"F-237938aa2a90\"},{\"t\":\"FACT\",\"text\":\"Moved this cycle — rising: Downtown, West Oakland, KONO, Rockridge, San Antonio, Eastlake, East Oakland, Laurel, Glenview, Baylight District, Ivy Hill, Lake Merritt; easing: none\",\"src\":\"output/beats/Crime_Metrics.jsonl @C114\",\"id\":\"F-88059daff6d3\"},{\"t\":\"FACT\",\"text\":\"Citywide custody this cycle: 43 arrests (0 tracked, 43 other residents); 72 in custody at the close; 27 left\",\"src\":\"output/beats/Care_Justice_Census.jsonl judicial @C114 city\",\"id\":\"F-b8130754d639\"},{\"t\":\"FACT\",\"text\":\"KONO: 10 charges → 3 arrests → 5 in custody at the close (0 tracked, 5 other residents); tracked: none tracked\",\"src\":\"output/beats/Care_Justice_Census.jsonl judicial @C114 KONO\",\"id\":\"F-646dfe4c5210\"},{\"t\":\"FACT\",\"text\":\"Kendra Lyle-Nnamdi — Police Sergeant — Oakland Police Department\",\"src\":\"Simulation_Ledger profile for POP-01143\",\"id\":\"F-50e8ed683f59\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C10, Spring, holiday=none\",\"src\":\"output/world_summary_c114.md Calendar context (Simulation_Calendar)\",\"id\":\"F-9b9470803821\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01143",
+        "name": "Kendra Lyle-Nnamdi",
+        "role": "Police Sergeant",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Sgt. Rachel Torres",
+        "question": "What do the 11 incidents in Uptown look like from the sergeant's level, and which ones are slipping through without clearance? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-safety",
+        "hood": "Uptown",
+        "focus": "Uptown's 11 incidents, 26% clearance rate, and the narrowing path from charges to arrests to custody — who answers for the gap.",
+        "src": "output/beats/Crime_Metrics.jsonl @C114"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Kendra Lyle-Nnamdi — Police Sergeant — Oakland Police Department",
+        "evidence": [
+          {
+            "id": "EV-2c7231a011",
+            "src": "output/beats/Crime_Metrics.jsonl @C114",
+            "text": "Uptown leads the incident count; 72 in custody citywide; 39 public-safety staff on the roster."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C114",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4261fa115617"
+        },
+        {
+          "t": "FACT",
+          "text": "Uptown logged the most incidents (11) | 22 neighborhoods on the table",
+          "src": "output/beats/Crime_Metrics.jsonl @C114",
+          "id": "F-54bef08b92db"
+        },
+        {
+          "t": "FACT",
+          "text": "Uptown leads the incident count; 72 in custody citywide; 39 public-safety staff on the roster.",
+          "src": "output/beats/Crime_Metrics.jsonl @C114",
+          "id": "F-23f187847240"
+        },
+        {
+          "t": "FACT",
+          "text": "183 incidents across 22 neighborhoods; most in Uptown 11, Downtown 11, West Oakland 10, KONO 10, Rockridge 10; fewest in Fruitvale 6, Ivy Hill 6, Lake Merritt 5",
+          "src": "output/beats/Crime_Metrics.jsonl @C114",
+          "id": "F-2bd96d583fbe"
+        },
+        {
+          "t": "FACT",
+          "text": "Uptown: 11 incidents (+4 vs C113), response 10.8 min, clearance 26%, property index 39, violent index 23",
+          "src": "output/beats/Crime_Metrics.jsonl @C114",
+          "id": "F-237938aa2a90"
+        },
+        {
+          "t": "FACT",
+          "text": "Moved this cycle — rising: Downtown, West Oakland, KONO, Rockridge, San Antonio, Eastlake, East Oakland, Laurel, Glenview, Baylight District, Ivy Hill, Lake Merritt; easing: none",
+          "src": "output/beats/Crime_Metrics.jsonl @C114",
+          "id": "F-88059daff6d3"
+        },
+        {
+          "t": "FACT",
+          "text": "Citywide custody this cycle: 43 arrests (0 tracked, 43 other residents); 72 in custody at the close; 27 left",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C114 city",
+          "id": "F-b8130754d639"
+        },
+        {
+          "t": "FACT",
+          "text": "KONO: 10 charges → 3 arrests → 5 in custody at the close (0 tracked, 5 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C114 KONO",
+          "id": "F-646dfe4c5210"
+        },
+        {
+          "t": "FACT",
+          "text": "Kendra Lyle-Nnamdi — Police Sergeant — Oakland Police Department",
+          "src": "Simulation_Ledger profile for POP-01143",
+          "id": "F-50e8ed683f59"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C10, Spring, holiday=none",
+          "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+          "id": "F-9b9470803821"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00136",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00136\",\"name\":\"Rafael Montez\",\"role\":\"Police Chief\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Sgt. Rachel Torres\",\"question\":\"Using only the supplied facts, what about \\\"Uptown's 11 incidents, 26% clearance rate, and the narrowing path from charges to arrests to custody — who answers for the gap.\\\" creates accountability for you, and what answer do you want? Do not claim any past or future official action that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-safety\",\"hood\":\"Uptown\",\"focus\":\"Uptown's 11 incidents, 26% clearance rate, and the narrowing path from charges to arrests to custody — who answers for the gap.\",\"src\":\"output/beats/Crime_Metrics.jsonl @C114\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Rafael Montez — Police Chief — Oakland Police Department\",\"evidence\":[{\"id\":\"EV-a79004321b\",\"src\":\"output/beats/Crime_Metrics.jsonl @C114\",\"text\":\"Uptown leads the incident count; 72 in custody citywide; 39 public-safety staff on the roster.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C114\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4261fa115617\"},{\"t\":\"FACT\",\"text\":\"Uptown logged the most incidents (11) | 22 neighborhoods on the table\",\"src\":\"output/beats/Crime_Metrics.jsonl @C114\",\"id\":\"F-54bef08b92db\"},{\"t\":\"FACT\",\"text\":\"Uptown leads the incident count; 72 in custody citywide; 39 public-safety staff on the roster.\",\"src\":\"output/beats/Crime_Metrics.jsonl @C114\",\"id\":\"F-23f187847240\"},{\"t\":\"FACT\",\"text\":\"183 incidents across 22 neighborhoods; most in Uptown 11, Downtown 11, West Oakland 10, KONO 10, Rockridge 10; fewest in Fruitvale 6, Ivy Hill 6, Lake Merritt 5\",\"src\":\"output/beats/Crime_Metrics.jsonl @C114\",\"id\":\"F-2bd96d583fbe\"},{\"t\":\"FACT\",\"text\":\"Uptown: 11 incidents (+4 vs C113), response 10.8 min, clearance 26%, property index 39, violent index 23\",\"src\":\"output/beats/Crime_Metrics.jsonl @C114\",\"id\":\"F-237938aa2a90\"},{\"t\":\"FACT\",\"text\":\"Moved this cycle — rising: Downtown, West Oakland, KONO, Rockridge, San Antonio, Eastlake, East Oakland, Laurel, Glenview, Baylight District, Ivy Hill, Lake Merritt; easing: none\",\"src\":\"output/beats/Crime_Metrics.jsonl @C114\",\"id\":\"F-88059daff6d3\"},{\"t\":\"FACT\",\"text\":\"Citywide custody this cycle: 43 arrests (0 tracked, 43 other residents); 72 in custody at the close; 27 left\",\"src\":\"output/beats/Care_Justice_Census.jsonl judicial @C114 city\",\"id\":\"F-b8130754d639\"},{\"t\":\"FACT\",\"text\":\"KONO: 10 charges → 3 arrests → 5 in custody at the close (0 tracked, 5 other residents); tracked: none tracked\",\"src\":\"output/beats/Care_Justice_Census.jsonl judicial @C114 KONO\",\"id\":\"F-646dfe4c5210\"},{\"t\":\"FACT\",\"text\":\"Rafael Montez — Police Chief — Oakland Police Department\",\"src\":\"Simulation_Ledger profile for POP-00136\",\"id\":\"F-50c22c9cdd5a\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C10, Spring, holiday=none\",\"src\":\"output/world_summary_c114.md Calendar context (Simulation_Calendar)\",\"id\":\"F-9b9470803821\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00136",
+        "name": "Rafael Montez",
+        "role": "Police Chief",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Sgt. Rachel Torres",
+        "question": "Using only the supplied facts, what about \"Uptown's 11 incidents, 26% clearance rate, and the narrowing path from charges to arrests to custody — who answers for the gap.\" creates accountability for you, and what answer do you want? Do not claim any past or future official action that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-safety",
+        "hood": "Uptown",
+        "focus": "Uptown's 11 incidents, 26% clearance rate, and the narrowing path from charges to arrests to custody — who answers for the gap.",
+        "src": "output/beats/Crime_Metrics.jsonl @C114"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Rafael Montez — Police Chief — Oakland Police Department",
+        "evidence": [
+          {
+            "id": "EV-a79004321b",
+            "src": "output/beats/Crime_Metrics.jsonl @C114",
+            "text": "Uptown leads the incident count; 72 in custody citywide; 39 public-safety staff on the roster."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C114",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4261fa115617"
+        },
+        {
+          "t": "FACT",
+          "text": "Uptown logged the most incidents (11) | 22 neighborhoods on the table",
+          "src": "output/beats/Crime_Metrics.jsonl @C114",
+          "id": "F-54bef08b92db"
+        },
+        {
+          "t": "FACT",
+          "text": "Uptown leads the incident count; 72 in custody citywide; 39 public-safety staff on the roster.",
+          "src": "output/beats/Crime_Metrics.jsonl @C114",
+          "id": "F-23f187847240"
+        },
+        {
+          "t": "FACT",
+          "text": "183 incidents across 22 neighborhoods; most in Uptown 11, Downtown 11, West Oakland 10, KONO 10, Rockridge 10; fewest in Fruitvale 6, Ivy Hill 6, Lake Merritt 5",
+          "src": "output/beats/Crime_Metrics.jsonl @C114",
+          "id": "F-2bd96d583fbe"
+        },
+        {
+          "t": "FACT",
+          "text": "Uptown: 11 incidents (+4 vs C113), response 10.8 min, clearance 26%, property index 39, violent index 23",
+          "src": "output/beats/Crime_Metrics.jsonl @C114",
+          "id": "F-237938aa2a90"
+        },
+        {
+          "t": "FACT",
+          "text": "Moved this cycle — rising: Downtown, West Oakland, KONO, Rockridge, San Antonio, Eastlake, East Oakland, Laurel, Glenview, Baylight District, Ivy Hill, Lake Merritt; easing: none",
+          "src": "output/beats/Crime_Metrics.jsonl @C114",
+          "id": "F-88059daff6d3"
+        },
+        {
+          "t": "FACT",
+          "text": "Citywide custody this cycle: 43 arrests (0 tracked, 43 other residents); 72 in custody at the close; 27 left",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C114 city",
+          "id": "F-b8130754d639"
+        },
+        {
+          "t": "FACT",
+          "text": "KONO: 10 charges → 3 arrests → 5 in custody at the close (0 tracked, 5 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C114 KONO",
+          "id": "F-646dfe4c5210"
+        },
+        {
+          "t": "FACT",
+          "text": "Rafael Montez — Police Chief — Oakland Police Department",
+          "src": "Simulation_Ledger profile for POP-00136",
+          "id": "F-50c22c9cdd5a"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C10, Spring, holiday=none",
+          "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+          "id": "F-9b9470803821"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  }
+]

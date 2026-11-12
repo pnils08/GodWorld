@@ -1,0 +1,56 @@
+{
+  "office": "council_d2",
+  "cycle": 113,
+  "speaker": "Leonard Tran",
+  "cascadeSummary": "I voted YES on Downtown Economic Revitalization (INIT-008) and directed the committee to include Chinatown in the revitalization planning. I also expressed concern over the declining mood in Chinatown and called for targeted support.",
+  "statements": [
+    {
+      "statementId": "STMT-113-council_d2-001",
+      "type": "vote_statement",
+      "topic": "Downtown Economic Revitalization",
+      "initiative": "INIT-008",
+      "decision": "YES",
+      "quote": "Downtown's revitalization is crucial, but we must not forget Chinatown's struggles.",
+      "fullStatement": "I support the Downtown Economic Revitalization ordinance (INIT-008) and will vote YES on its advancement. However, I remain concerned about the declining mood in Chinatown and the lack of targeted support for this neighborhood. I direct the Economic Development Committee to include Chinatown in the revitalization planning and to report back on specific actions to address the commercial decay and housing pressure building there.",
+      "disposition": "YES",
+      "actionAsked": "Include Chinatown in revitalization planning",
+      "tone": "district-focused",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-113-council_d2-002",
+      "type": "statement",
+      "topic": "Chinatown Support",
+      "initiative": null,
+      "decision": "Call for targeted support",
+      "quote": "Chinatown's struggles cannot be ignored while we revitalize other areas.",
+      "fullStatement": "I am concerned about the soured mood in Chinatown, where street trade remains steady but housing pressure is building. I call for targeted support for Chinatown, including specific programs to address commercial decay and housing stability. The city cannot ignore the struggles in one neighborhood while celebrating successes in others.",
+      "disposition": "statement",
+      "actionAsked": "Develop targeted support for Chinatown",
+      "tone": "district-focused",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-113-council_d2-003",
+      "type": "statement",
+      "topic": "Baylight District Remediation",
+      "initiative": "INIT-006",
+      "decision": "Continue support",
+      "quote": "The progress in Baylight District remediation is a crucial step forward.",
+      "fullStatement": "I continue to support the Baylight District remediation efforts. The completion of soil test verification and the commencement of Phase II remediation with independent oversight are crucial steps. I will continue to push for targeted support to ensure that the growth in areas like Jack London does not overshadow the struggles in other parts of District 2.",
+      "disposition": "statement",
+      "actionAsked": "Continue remediation efforts",
+      "tone": "evidence-driven",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    }
+  ]
+}

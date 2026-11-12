@@ -1,0 +1,1516 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "112",
+  "persona": "p-slayer",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00008",
+      "name": "P Slayer",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+      "approach": "Fan-heat approach (P Slayer pulse): do NOT open from the FO press release or the award board. Open from gut or Oakland sensory (bar, lot, bleacher row, BART after). First-person I/we only. Pick 1–2 charge-bag modes from this slice. Friction pivot required — name the counter-argument, kill it. ONE real foil number max (from FoilNumber / AnchorFacts); never invent x-stats or roster moves. Hook PriorTake when present — eat it or double down (\"I was wrong\" is craft). End on charge that sticks: dare, confession, or update. Not Anthony. Not Hal. Not multi-voice sports-desk average.",
+      "creativeBrief": {
+        "kind": "fan-heat",
+        "fanCharge": "defiance",
+        "bagModes": [
+          "3 Friction Pivot",
+          "5 Paper Cuts vs the Nerds",
+          "9 Breakout Feeling"
+        ],
+        "friction": "Euphoria with friction: name the doubter, kill soft contentment.",
+        "centralFeeling": "Oakland should refuse the soft rewrite of what just happened.",
+        "priorTake": "NONE — write cold or invent no prior; wall may still inject at wake",
+        "sceneRule": "You may invent unnamed bar / lot / BART / bleacher texture that contradicts nothing on this slice. Do not invent star players, contracts, stats, or quotes. Named people stay on PLAYERS list or Tribune colleagues (Anthony, Hal, Mags) as foils."
+      }
+    },
+    "signal": {
+      "kind": "award-board",
+      "hood": "Jack London",
+      "score": null,
+      "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+      "team": "A's",
+      "nearby": [
+        {
+          "text": "A's | player-feature | (off-season) | Eric Taveras, Martin Richards",
+          "src": "Oakland_Sports_Feed cycle 112; rendered: world_summary_c112.md \"## Sports\" C112 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | rumor | (off-season) | Mark Aitken, Kevin Clark",
+          "src": "Oakland_Sports_Feed cycle 112; rendered: world_summary_c112.md \"## Sports\" C112 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (off-season) | Vinnie Keane, Benji Dillon",
+          "src": "Oakland_Sports_Feed cycle 112; rendered: world_summary_c112.md \"## Sports\" C112 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | game-result | (early-season) | AJ Dybantsa, Adash Stanley, Wendell Carter Jr, Austin Reaves",
+          "src": "Oakland_Sports_Feed cycle 112; rendered: world_summary_c112.md \"## Sports\" C112 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | season-state | (early-season) | Elias Varek",
+          "src": "Oakland_Sports_Feed cycle 112; rendered: world_summary_c112.md \"## Sports\" C112 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00001",
+          "name": "Vinnie Keane",
+          "profile": "Vinnie Keane — Designated Hitter, Oakland A's Legend",
+          "role": "Designated Hitter, Oakland A's Legend",
+          "hood": "Grand Lake",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+            "pop": "POP-00001",
+            "rowName": "Vinnie Keane",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00018",
+          "name": "Benji Dillon",
+          "profile": "Benji Dillon — Pitcher, Oakland A's Legend",
+          "role": "Pitcher, Oakland A's Legend",
+          "hood": "Rockridge",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+            "pop": "POP-00018",
+            "rowName": "Benji Dillon",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00185",
+          "name": "Lila Patty",
+          "profile": "Lila Patty — Solar Panel Installation Lead",
+          "role": "Solar Panel Installation Lead",
+          "hood": "West Oakland",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 112,
+            "tag": "Sports-Fandom-Up-S",
+            "line": "Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and let the week's noise settle near a new-construction corner",
+            "highlightKind": "team",
+            "entity": "A's",
+            "predicate": "fan"
+          }
+        },
+        {
+          "pop": "POP-00255",
+          "name": "Howard Travis",
+          "profile": "Howard Travis — Construction laborer",
+          "role": "Construction laborer",
+          "hood": "Piedmont Ave",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 112,
+            "tag": "Sports-Fandom-Up-S",
+            "line": "Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and felt the season starting to turn",
+            "highlightKind": "team",
+            "entity": "A's",
+            "predicate": "fan"
+          }
+        },
+        {
+          "pop": "POP-00339",
+          "name": "Kaila Nguyen",
+          "profile": "Kaila Nguyen — Pupuseria Owner",
+          "role": "Pupuseria Owner",
+          "hood": "Fruitvale",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 112,
+            "tag": "Sports-Fandom-Up-S",
+            "line": "Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and still riding the high from last night's win",
+            "highlightKind": "team",
+            "entity": "A's",
+            "predicate": "fan"
+          }
+        },
+        {
+          "pop": "POP-00649",
+          "name": "Jire Hilt",
+          "profile": "Jire Hilt — Line Cook",
+          "role": "Line Cook",
+          "hood": "Jack London",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 112,
+            "tag": "Sports-Fandom-Up-S",
+            "line": "Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and a sense of anticipation hangs in the air",
+            "highlightKind": "team",
+            "entity": "A's",
+            "predicate": "fan"
+          }
+        },
+        {
+          "pop": "POP-00663",
+          "name": "Soo Loo",
+          "profile": "Soo Loo — Corporate Accountant",
+          "role": "Corporate Accountant",
+          "hood": "Downtown",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 112,
+            "tag": "Sports-Fandom-Up-S",
+            "line": "Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and the muffled thump of a car stereo playing last summer's hit",
+            "highlightKind": "team",
+            "entity": "A's",
+            "predicate": "fan"
+          }
+        },
+        {
+          "pop": "POP-00695",
+          "name": "Annika Delgado",
+          "profile": "Annika Delgado — Auto Body Shop Owner",
+          "role": "Auto Body Shop Owner",
+          "hood": "Laurel",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 112,
+            "tag": "Sports-Fandom-Up-S",
+            "line": "Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and the hum of a bassline from a passing car",
+            "highlightKind": "team",
+            "entity": "A's",
+            "predicate": "fan"
+          }
+        },
+        {
+          "pop": "POP-00818",
+          "name": "Latasha Rivera",
+          "profile": "Latasha Rivera — Quantum Computing Researcher",
+          "role": "Quantum Computing Researcher",
+          "hood": "Rockridge",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 112,
+            "tag": "Sports-Fandom-Up-S",
+            "line": "Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and still riding the high from last night's win",
+            "highlightKind": "team",
+            "entity": "A's",
+            "predicate": "fan"
+          }
+        },
+        {
+          "pop": "POP-00862",
+          "name": "Magdalena Ortiz",
+          "profile": "Magdalena Ortiz — Theater Director",
+          "role": "Theater Director",
+          "hood": "Uptown",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 112,
+            "tag": "Sports-Fandom-Up-S",
+            "line": "Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and the hum of a bassline from a passing car near a street mural",
+            "highlightKind": "team",
+            "entity": "A's",
+            "predicate": "fan"
+          }
+        },
+        {
+          "pop": "POP-00996",
+          "name": "Kai Davis",
+          "profile": "Kai Davis — Junior Accountant",
+          "role": "Junior Accountant",
+          "hood": "West Oakland",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 112,
+            "tag": "Sports-Fandom-Up-S",
+            "line": "Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and counted what was going right for once",
+            "highlightKind": "team",
+            "entity": "A's",
+            "predicate": "fan"
+          }
+        },
+        {
+          "pop": "POP-01045",
+          "name": "Vanessa Ramas",
+          "profile": "Vanessa Ramas — Barista",
+          "role": "Barista",
+          "hood": "Lake Merritt",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 112,
+            "tag": "Sports-Fandom-Up-S",
+            "line": "Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and counted what was going right for once",
+            "highlightKind": "team",
+            "entity": "A's",
+            "predicate": "fan"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C112",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-7cd6ffd2aeb3"
+      },
+      {
+        "t": "FACT",
+        "text": "The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+        "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+        "id": "F-c751088c732a"
+      },
+      {
+        "t": "FACT",
+        "text": "Euphoria with friction: name the doubter, kill soft contentment.",
+        "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+        "id": "F-01d7731f718f"
+      },
+      {
+        "t": "FACT",
+        "text": "StoryAngle (feed): The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+        "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+        "id": "F-b955af6df0a7"
+      },
+      {
+        "t": "FACT",
+        "text": "Event: A's — player-feature (off-season)",
+        "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+        "id": "F-120e4da63805"
+      },
+      {
+        "t": "FACT",
+        "text": "NamesUsed: Vinnie Keane (3B), Benji Dillon (SP)",
+        "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+        "id": "F-093ab16a80f9"
+      },
+      {
+        "t": "FACT",
+        "text": "FanSentiment: euphoric · Mood: reflective",
+        "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+        "id": "F-7a41dfc993a5"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "street",
+    "candidates": [
+      {
+        "pop": "POP-00001",
+        "name": "Vinnie Keane",
+        "role": "Designated Hitter, Oakland A's Legend",
+        "hood": "Grand Lake",
+        "profile": "Vinnie Keane — Designated Hitter, Oakland A's Legend",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+          "pop": "POP-00001",
+          "rowName": "Vinnie Keane",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00018",
+        "name": "Benji Dillon",
+        "role": "Pitcher, Oakland A's Legend",
+        "hood": "Rockridge",
+        "profile": "Benji Dillon — Pitcher, Oakland A's Legend",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+          "pop": "POP-00018",
+          "rowName": "Benji Dillon",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00185",
+        "name": "Lila Patty",
+        "role": "Solar Panel Installation Lead",
+        "hood": "West Oakland",
+        "profile": "Lila Patty — Solar Panel Installation Lead",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 112,
+          "tag": "Sports-Fandom-Up-S",
+          "line": "Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and let the week's noise settle near a new-construction corner",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedLifeLine": "Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and let the week's noise settle near a new-construction corner"
+      },
+      {
+        "pop": "POP-00255",
+        "name": "Howard Travis",
+        "role": "Construction laborer",
+        "hood": "Piedmont Ave",
+        "profile": "Howard Travis — Construction laborer",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 112,
+          "tag": "Sports-Fandom-Up-S",
+          "line": "Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and felt the season starting to turn",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedLifeLine": "Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and felt the season starting to turn"
+      },
+      {
+        "pop": "POP-00339",
+        "name": "Kaila Nguyen",
+        "role": "Pupuseria Owner",
+        "hood": "Fruitvale",
+        "profile": "Kaila Nguyen — Pupuseria Owner",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 112,
+          "tag": "Sports-Fandom-Up-S",
+          "line": "Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and still riding the high from last night's win",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedLifeLine": "Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and still riding the high from last night's win"
+      },
+      {
+        "pop": "POP-00649",
+        "name": "Jire Hilt",
+        "role": "Line Cook",
+        "hood": "Jack London",
+        "profile": "Jire Hilt — Line Cook",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 112,
+          "tag": "Sports-Fandom-Up-S",
+          "line": "Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and a sense of anticipation hangs in the air",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedLifeLine": "Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and a sense of anticipation hangs in the air"
+      },
+      {
+        "pop": "POP-00663",
+        "name": "Soo Loo",
+        "role": "Corporate Accountant",
+        "hood": "Downtown",
+        "profile": "Soo Loo — Corporate Accountant",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 112,
+          "tag": "Sports-Fandom-Up-S",
+          "line": "Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and the muffled thump of a car stereo playing last summer's hit",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedLifeLine": "Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and the muffled thump of a car stereo playing last summer's hit"
+      },
+      {
+        "pop": "POP-00695",
+        "name": "Annika Delgado",
+        "role": "Auto Body Shop Owner",
+        "hood": "Laurel",
+        "profile": "Annika Delgado — Auto Body Shop Owner",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 112,
+          "tag": "Sports-Fandom-Up-S",
+          "line": "Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and the hum of a bassline from a passing car",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedLifeLine": "Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and the hum of a bassline from a passing car"
+      },
+      {
+        "pop": "POP-00818",
+        "name": "Latasha Rivera",
+        "role": "Quantum Computing Researcher",
+        "hood": "Rockridge",
+        "profile": "Latasha Rivera — Quantum Computing Researcher",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 112,
+          "tag": "Sports-Fandom-Up-S",
+          "line": "Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and still riding the high from last night's win",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedLifeLine": "Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and still riding the high from last night's win"
+      },
+      {
+        "pop": "POP-00862",
+        "name": "Magdalena Ortiz",
+        "role": "Theater Director",
+        "hood": "Uptown",
+        "profile": "Magdalena Ortiz — Theater Director",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 112,
+          "tag": "Sports-Fandom-Up-S",
+          "line": "Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and the hum of a bassline from a passing car near a street mural",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedLifeLine": "Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and the hum of a bassline from a passing car near a street mural"
+      },
+      {
+        "pop": "POP-00996",
+        "name": "Kai Davis",
+        "role": "Junior Accountant",
+        "hood": "West Oakland",
+        "profile": "Kai Davis — Junior Accountant",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 112,
+          "tag": "Sports-Fandom-Up-S",
+          "line": "Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and counted what was going right for once",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedLifeLine": "Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and counted what was going right for once"
+      },
+      {
+        "pop": "POP-01045",
+        "name": "Vanessa Ramas",
+        "role": "Barista",
+        "hood": "Lake Merritt",
+        "profile": "Vanessa Ramas — Barista",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 112,
+          "tag": "Sports-Fandom-Up-S",
+          "line": "Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and counted what was going right for once",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedLifeLine": "Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and counted what was going right for once"
+      },
+      {
+        "pop": "POP-01145",
+        "name": "Marisol Ibarra",
+        "role": "Detective",
+        "hood": "Fruitvale",
+        "profile": "Marisol Ibarra — Detective",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 112,
+          "tag": "Sports-Fandom-Up-S",
+          "line": "Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and the hum of a bassline from a passing car",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedLifeLine": "Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and the hum of a bassline from a passing car"
+      },
+      {
+        "pop": "POP-00038",
+        "name": "Theo Park",
+        "role": "Communications Director",
+        "hood": "Rockridge",
+        "profile": "Theo Park — Communications Director",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "LSTk8ML7HriPSR5kvsqmF3",
+          "customId": "cp-POP-00038-c102-PRESS",
+          "cycle": 102,
+          "excerpt": "It's those little things - like how the guy ahead of me (pretty sure he's a janitor at the Islamic Center) was chatting with Danny Horn from the A's like they were old buddies.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "It's those little things - like how the guy ahead of me (pretty sure he's a janitor at the Islamic Center) was chatting with Danny Horn from the A's like they were old buddies."
+      },
+      {
+        "pop": "POP-00145",
+        "name": "Janelle Rourke",
+        "role": "ASSISTANT DISTRICT ATTORNEY (Community Safety)",
+        "hood": "Uptown",
+        "profile": "Janelle Rourke — ASSISTANT DISTRICT ATTORNEY (Community Safety)",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "FMHtKZEuaGKmy6wgvbJ5Xc",
+          "customId": "cp-POP-00145-c111-PRESS",
+          "cycle": 111,
+          "excerpt": "I bought a new A's jersey and, honestly, it's been really exciting to put it on.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I bought a new A's jersey and, honestly, it's been really exciting to put it on."
+      },
+      {
+        "pop": "POP-00174",
+        "name": "Tariq Jello",
+        "role": "Appliance Repair Technician",
+        "hood": "Laurel",
+        "profile": "Tariq Jello — Appliance Repair Technician",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "wiqSuFFt24WesXBeG2vACS",
+          "customId": "cp-POP-00174-c106-midday",
+          "cycle": 106,
+          "excerpt": "I see his face on those A's billboards downtown and I still nod like we're good.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I see his face on those A's billboards downtown and I still nod like we're good."
+      },
+      {
+        "pop": "POP-00181",
+        "name": "Xavier Ramington",
+        "role": "Herbalist",
+        "hood": "Temescal",
+        "profile": "Xavier Ramington — Herbalist",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "aP5YeMEryXvzMre4oJ44Jv",
+          "customId": "cp-POP-00181-c101-night",
+          "cycle": 101,
+          "excerpt": "The A's news should excite me, but all I keep turning over is whether Vinnie really was downtown—if he's back, if he's okay.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "The A's news should excite me, but all I keep turning over is whether Vinnie really was downtown—if he's back, if he's okay."
+      },
+      {
+        "pop": "POP-00190",
+        "name": "Jackson Sift",
+        "role": "Ex-Offender Reentry Counselor",
+        "hood": "West Oakland",
+        "profile": "Jackson Sift — Ex-Offender Reentry Counselor",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "ajbg29ybL8z4b7gciL9T1K",
+          "customId": "cp-POP-00190-c109-PRESS",
+          "cycle": 109,
+          "excerpt": "I've been feeling the energy in the city, especially with the A's doing well.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I've been feeling the energy in the city, especially with the A's doing well."
+      },
+      {
+        "pop": "POP-00192",
+        "name": "Bea Cartier",
+        "role": "Roofing Contractor",
+        "hood": "Laurel",
+        "profile": "Bea Cartier — Roofing Contractor",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "yG1Q5da9amEzFgZj45MsaR",
+          "customId": "cp-POP-00192-c102-morning",
+          "cycle": 102,
+          "excerpt": "Maybe it's seeing those A's players around town, all that energy and purpose, that makes me wonder if I settled too soon.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "Maybe it's seeing those A's players around town, all that energy and purpose, that makes me wonder if I settled too soon."
+      },
+      {
+        "pop": "POP-00196",
+        "name": "Inga Creator",
+        "role": "Boutique Owner",
+        "hood": "Uptown",
+        "profile": "Inga Creator — Boutique Owner",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "pEcgqPCmN99gx3otHor9d9",
+          "customId": "cp-POP-00196-c111-PRESS",
+          "cycle": 111,
+          "excerpt": "I celebrated by buying a new A's jersey - it's my way of showing team spirit.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I celebrated by buying a new A's jersey - it's my way of showing team spirit."
+      },
+      {
+        "pop": "POP-00231",
+        "name": "Calvin Turner",
+        "role": "Mechanic",
+        "hood": "Fruitvale",
+        "profile": "Calvin Turner — Mechanic",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "wQKk6AU7tLKP7gFxpuuQot",
+          "customId": "cp-POP-00231-c103-evening",
+          "cycle": 103,
+          "excerpt": "Maybe it's that stupid argument about the A's trades—she took it personal when I said Richards was better off in New York.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "Maybe it's that stupid argument about the A's trades—she took it personal when I said Richards was better off in New York."
+      },
+      {
+        "pop": "POP-00233",
+        "name": "Mason Walt",
+        "role": "Electrician",
+        "hood": "Rockridge",
+        "profile": "Mason Walt — Electrician",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "Xj4mNMUajCorMiQVuYLCTD",
+          "customId": "cp-POP-00233-c100-evening",
+          "cycle": 100,
+          "excerpt": "Sometimes I count how many A's caps walk past and wonder if any of them know Vinnie like I do.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "Sometimes I count how many A's caps walk past and wonder if any of them know Vinnie like I do."
+      },
+      {
+        "pop": "POP-00235",
+        "name": "Aaliyah Brennan",
+        "role": "Mobile Clinic Nurse",
+        "hood": "Lake Merritt",
+        "profile": "Aaliyah Brennan — Mobile Clinic Nurse",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "RUdR2ceiAZA9G21uYJYUEc",
+          "customId": "cp-POP-00235-c110-PRESS",
+          "cycle": 110,
+          "excerpt": "To be honest, I'm not sure what my performance means for my standing in the city - I've just been trying to keep up with my work at the mobile clinic and enjoy the little moments, like the A's winning streak.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "To be honest, I'm not sure what my performance means for my standing in the city - I've just been trying to keep up with my work at the mobile clinic and enjoy the little moments, like the A's winning streak."
+      },
+      {
+        "pop": "POP-00247",
+        "name": "Baxter Thompson",
+        "role": "Construction laborer",
+        "hood": "Rockridge",
+        "profile": "Baxter Thompson — Construction laborer",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "gKea4HdpZv4WUfF7uvUJWZ",
+          "customId": "cp-POP-00247-c102-evening",
+          "cycle": 102,
+          "excerpt": "That A's team firing on all cylinders reminds me of being 30 and feeling unstoppable—now I gotta find that fire in different ways.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "That A's team firing on all cylinders reminds me of being 30 and feeling unstoppable—now I gotta find that fire in different ways."
+      },
+      {
+        "pop": "POP-00272",
+        "name": "Joseph Cramp",
+        "role": "Janitor",
+        "hood": "Downtown",
+        "profile": "Joseph Cramp — Janitor",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "v3hKf6zGX6CMmTGJ1vPyD7",
+          "customId": "cp-POP-00272-c111-midday",
+          "cycle": 111,
+          "excerpt": "I got a soft spot for the A's, always have, but the real win for me is that this town finally feels like it’s got a pulse again after all those years of near-misses.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I got a soft spot for the A's, always have, but the real win for me is that this town finally feels like it’s got a pulse again after all those years of near-misses."
+      },
+      {
+        "pop": "POP-00273",
+        "name": "Trenton Nawan",
+        "role": "Server",
+        "hood": "Jack London",
+        "profile": "Trenton Nawan — Server",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "Tz12aZoyTPT4H31as9vi8v",
+          "customId": "cp-POP-00273-c106-PRESS",
+          "cycle": 106,
+          "excerpt": "Honestly, I don't follow the A's trades too closely—too busy keeping up with my own hustle—but when you hear folks at the diner talking about Cy Newel's ERA and Busch's batting average, even I can tell they're building something different t",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "Honestly, I don't follow the A's trades too closely—too busy keeping up with my own hustle—but when you hear folks at the diner talking about Cy Newel's ERA and Busch's batting average, even I can tell they're building something different t"
+      },
+      {
+        "pop": "POP-00495",
+        "name": "Rosalind Young",
+        "role": "Smoke Shop Owner",
+        "hood": "Laurel",
+        "profile": "Rosalind Young — Smoke Shop Owner",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "LBmmX2jC9YWEk1eGfyFFKP",
+          "customId": "cp-POP-00495-c107-PRESS",
+          "cycle": 107,
+          "excerpt": "I've seen the A's do well lately, and it feels like the whole neighborhood is buzzing about it.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I've seen the A's do well lately, and it feels like the whole neighborhood is buzzing about it."
+      },
+      {
+        "pop": "POP-00632",
+        "name": "Rico Valez",
+        "role": "Musician",
+        "hood": "Fruitvale",
+        "profile": "Rico Valez — Musician",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "QWzx4f3xaaWrF5qbP8mR5T",
+          "customId": "cp-POP-00632-c102-PRESS",
+          "cycle": 102,
+          "excerpt": "Look, I'm just a guy who plays guitar at La Estrella on weekends and watches the A's when Allen Lopez is pitching.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "Look, I'm just a guy who plays guitar at La Estrella on weekends and watches the A's when Allen Lopez is pitching."
+      },
+      {
+        "pop": "POP-00642",
+        "name": "Ollie Campbell",
+        "role": "Bakery Worker",
+        "hood": "Jack London",
+        "profile": "Ollie Campbell — Bakery Worker",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "3WppGYjrRteh5xZoEcho9R",
+          "customId": "cp-POP-00642-c106-PRESS",
+          "cycle": 106,
+          "excerpt": "Honestly, I don't follow baseball too closely, but folks at the bakery were saying the A's traded some good players this season.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "Honestly, I don't follow baseball too closely, but folks at the bakery were saying the A's traded some good players this season."
+      },
+      {
+        "pop": "POP-00643",
+        "name": "Guadalupe Lupe",
+        "role": "Bartender",
+        "hood": "Jack London",
+        "profile": "Guadalupe Lupe — Bartender",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "4Bwk7Qcyz5Lue5nZieVKEV",
+          "customId": "cp-POP-00643-c106-PRESS",
+          "cycle": 106,
+          "excerpt": "Honestly, I don't follow the A's too closely, but from what I hear at the bar, people seem pretty bummed about losing some of their favorite players this season.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "Honestly, I don't follow the A's too closely, but from what I hear at the bar, people seem pretty bummed about losing some of their favorite players this season."
+      },
+      {
+        "pop": "POP-00644",
+        "name": "Rafael Pilgrim",
+        "role": "Server",
+        "hood": "Fruitvale",
+        "profile": "Rafael Pilgrim — Server",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "7tktJtoajh2xuSmRoXZQjP",
+          "customId": "cp-POP-00644-c107-PRESS",
+          "cycle": 107,
+          "excerpt": "Makes me think the A's might actually have a shot if they keep pitching like that when it counts.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "Makes me think the A's might actually have a shot if they keep pitching like that when it counts."
+      },
+      {
+        "pop": "POP-00691",
+        "name": "Tom Jilner",
+        "role": "Wine Bar Owner",
+        "hood": "Rockridge",
+        "profile": "Tom Jilner — Wine Bar Owner",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "6A8zq7d3sNoEthsEFG6hqi",
+          "customId": "cp-POP-00691-c110-CONVO",
+          "cycle": 110,
+          "excerpt": "*Tugs at my suit sleeve absentmindedly* \"Kid's tougher than I was at his age—tells the A's stats like scripture since they won the Series.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "*Tugs at my suit sleeve absentmindedly* \"Kid's tougher than I was at his age—tells the A's stats like scripture since they won the Series."
+      },
+      {
+        "pop": "POP-00770",
+        "name": "Kato Rivers",
+        "role": "Fitness Trainer",
+        "hood": "Laurel",
+        "profile": "Kato Rivers — Fitness Trainer",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "6ovGYPVimo9YaRptX3MkQ9",
+          "customId": "cp-POP-00770-c110-PRESS",
+          "cycle": 110,
+          "excerpt": "I've been too busy with my daily routine and watching the A's games to think about anything like that.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I've been too busy with my daily routine and watching the A's games to think about anything like that."
+      },
+      {
+        "pop": "POP-00789",
+        "name": "Elias Varek",
+        "role": "Founder of Civis Systems",
+        "hood": "West Oakland",
+        "profile": "Elias Varek — Founder of Civis Systems",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "4cWDkTDYMmfYrx5cHgvkzk",
+          "customId": "cp-POP-00789-c101-CONVO",
+          "cycle": 101,
+          "excerpt": "Between the port expansion and the A's new stadium plans, seems like we're the afterthought again.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "Between the port expansion and the A's new stadium plans, seems like we're the afterthought again."
+      },
+      {
+        "pop": "POP-00790",
+        "name": "Marcus Webb",
+        "role": "OEWD Program Director",
+        "hood": "Downtown",
+        "profile": "Marcus Webb — OEWD Program Director",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "aE2GrhuHFLEmNNBoWEFTDF",
+          "customId": "cp-POP-00790-c101-morning",
+          "cycle": 101,
+          "excerpt": "I love the A's, but how many affordable housing units could that build in West Oakland?",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I love the A's, but how many affordable housing units could that build in West Oakland?"
+      },
+      {
+        "pop": "POP-00801",
+        "name": "Maurice Franklin",
+        "role": "Drone Fleet Coordinator",
+        "hood": "Rockridge",
+        "profile": "Maurice Franklin — Drone Fleet Coordinator",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "jG6kqTGzeCkmyoZPgxkxmq",
+          "customId": "cp-POP-00801-c111-midday",
+          "cycle": 111,
+          "excerpt": "I remember writing that letter to the Tribune about believing in Oakland again, and now the kids in Rockridge are wearing A's caps to school like it's the most natural thing in the world.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I remember writing that letter to the Tribune about believing in Oakland again, and now the kids in Rockridge are wearing A's caps to school like it's the most natural thing in the world."
+      },
+      {
+        "pop": "POP-00842",
+        "name": "Wanjiru Liu",
+        "role": "Electrician",
+        "hood": "Rockridge",
+        "profile": "Wanjiru Liu — Electrician",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "tYDNcge1pv4zdG2AEe9cTx",
+          "customId": "cp-POP-00842-c108-PRESS",
+          "cycle": 108,
+          "excerpt": "I've been keeping up with the A's, they're doing great this season, and that's been exciting for the city.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I've been keeping up with the A's, they're doing great this season, and that's been exciting for the city."
+      },
+      {
+        "pop": "POP-01001",
+        "name": "Mateo Jilner",
+        "role": "student",
+        "hood": "Rockridge",
+        "profile": "Mateo Jilner — student",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "p6Wgrmpfy7Tw1N22Q28Yhj",
+          "customId": "cp-POP-01001-c102-CONVO",
+          "cycle": 102,
+          "excerpt": "Actually just taped up the A's schedule in our closet—can you believe they're 107-31?",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "Actually just taped up the A's schedule in our closet—can you believe they're 107-31?"
+      },
+      {
+        "pop": "POP-01011",
+        "name": "Layla Scott",
+        "role": "student",
+        "hood": "Lake Merritt",
+        "profile": "Layla Scott — student",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "pmgzyjAu1DbyMaowaS3san",
+          "customId": "cp-POP-01011-c105-CONVO",
+          "cycle": 105,
+          "excerpt": "(Lowering voice) I swear the ones by the lake have gotten bolder since the A's started winning.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "(Lowering voice) I swear the ones by the lake have gotten bolder since the A's started winning."
+      },
+      {
+        "pop": "POP-01012",
+        "name": "Mateo Wally",
+        "role": "student",
+        "hood": "Rockridge",
+        "profile": "Mateo Wally — student",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "fM4K3hvmT9PEkGTjQ9uxyW",
+          "customId": "cp-POP-01012-c102-CONVO",
+          "cycle": 102,
+          "excerpt": "\" I grin and shift my backpack, the A's cap almost falling out.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "\" I grin and shift my backpack, the A's cap almost falling out."
+      },
+      {
+        "pop": "POP-01053",
+        "name": "Rosario Medina",
+        "role": "CBA Compliance Monitor, Fruitvale Transit Hub",
+        "hood": "Fruitvale",
+        "profile": "Rosario Medina — CBA Compliance Monitor, Fruitvale Transit Hub",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "EkdKp1vxipX3RDL9HHxGrH",
+          "customId": "cp-POP-01053-c111-PRESS",
+          "cycle": 111,
+          "excerpt": "I've been too busy enjoying the A's championship win and spending time with my family to think about anything else.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I've been too busy enjoying the A's championship win and spending time with my family to think about anything else."
+      },
+      {
+        "pop": "POP-01089",
+        "name": "Jacob Perez",
+        "role": "Delivery driver",
+        "hood": "Glenview",
+        "profile": "Jacob Perez — Delivery driver",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "d4aEDMMw4uhyzz4KmTC1me",
+          "customId": "cp-POP-01089-c107-PRESS",
+          "cycle": 107,
+          "excerpt": "Honestly, I don't follow sports much, but I did hear some guys at the gas station talking about the A's record.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "Honestly, I don't follow sports much, but I did hear some guys at the gas station talking about the A's record."
+      },
+      {
+        "pop": "POP-01107",
+        "name": "Daniel Yoon",
+        "role": "Co-Founder, Gridiron Analytics",
+        "hood": "West Oakland",
+        "profile": "Daniel Yoon — Co-Founder, Gridiron Analytics",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "E2pwAR3FuoZAAD2UngbPiU",
+          "customId": "cp-POP-01107-c111-PRESS",
+          "cycle": 111,
+          "excerpt": "I just picked up a new A's jersey.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I just picked up a new A's jersey."
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "P Slayer",
+    "popid": "POP-00008"
+  },
+  "assignment": {
+    "story": {
+      "ref": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+      "label": "The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+      "kind": "award-board",
+      "angle": "The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+      "hookLine": "Euphoria with friction: name the doubter, kill soft contentment.",
+      "hood": "Jack London",
+      "team": "A's",
+      "eventKind": "player-feature",
+      "popids": [
+        "POP-00001",
+        "POP-00018"
+      ],
+      "citizens": [
+        "Vinnie Keane (POP-00001)",
+        "Benji Dillon (POP-00018)",
+        "Jack London"
+      ],
+      "pulseClass": "award-board",
+      "pulseScore": 47,
+      "fanCharge": "defiance",
+      "bagModeIds": [
+        3,
+        5,
+        9
+      ]
+    },
+    "approach": "Fan-heat approach (P Slayer pulse): do NOT open from the FO press release or the award board. Open from gut or Oakland sensory (bar, lot, bleacher row, BART after). First-person I/we only. Pick 1–2 charge-bag modes from this slice. Friction pivot required — name the counter-argument, kill it. ONE real foil number max (from FoilNumber / AnchorFacts); never invent x-stats or roster moves. Hook PriorTake when present — eat it or double down (\"I was wrong\" is craft). End on charge that sticks: dare, confession, or update. Not Anthony. Not Hal. Not multi-voice sports-desk average."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": {
+    "pulse": {
+      "className": "award-board",
+      "classes": [
+        "award-board"
+      ],
+      "score": 47,
+      "label": "The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+      "team": "A's",
+      "eventKind": "player-feature",
+      "seasonType": "off-season",
+      "feedCycle": 112,
+      "record": "-",
+      "streak": "-",
+      "mood": "reflective",
+      "fanSentiment": "euphoric",
+      "neighborhood": "Jack London",
+      "notes": "The Blue Lattern Bar hosted the Vinne Keane and Benji Dillon night this cycle in Jack London to celebrate the two icons careers along with the latest championship. Both Keane and Dillon brought Oakland 7 World Series championships over their collective time on Oakland. Keane who has be forthcoming about his retirement, Dillon on the other hand has not officially announced that he will retire. Dill",
+      "stats": "-"
+    },
+    "charge": {
+      "bagModes": [
+        {
+          "id": 3,
+          "name": "Friction Pivot"
+        },
+        {
+          "id": 5,
+          "name": "Paper Cuts vs the Nerds"
+        },
+        {
+          "id": 9,
+          "name": "Breakout Feeling"
+        }
+      ],
+      "fanCharge": "defiance",
+      "foilNumber": "p. Both Keane and Dillon brought Oakland 7",
+      "centralFeeling": "Oakland should refuse the soft rewrite of what just happened.",
+      "palette": [
+        "fury",
+        "euphoria",
+        "dread",
+        "defiance",
+        "confession",
+        "grief",
+        "dare"
+      ]
+    },
+    "prewrite": {
+      "reporter": "P.Slayer",
+      "bagModes": [
+        {
+          "id": 3,
+          "name": "Friction Pivot"
+        },
+        {
+          "id": 5,
+          "name": "Paper Cuts vs the Nerds"
+        },
+        {
+          "id": 9,
+          "name": "Breakout Feeling"
+        }
+      ],
+      "fanCharge": "defiance",
+      "priorTake": "NONE — write cold or invent no prior; wall may still inject at wake",
+      "anchorFacts": [
+        "StoryAngle (feed): The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+        "Event: A's — player-feature (off-season)",
+        "NamesUsed: Vinnie Keane (3B), Benji Dillon (SP)",
+        "FanSentiment: euphoric · Mood: reflective"
+      ],
+      "foilNumber": "p. Both Keane and Dillon brought Oakland 7",
+      "centralFeeling": "Oakland should refuse the soft rewrite of what just happened.",
+      "hooks": [
+        {
+          "text": "A's on a W3. Fan energy rising. Momentum story.",
+          "angle": "conflict/tension coverage",
+          "hood": null
+        },
+        {
+          "text": "Oaks on a W1. Fan energy rising in Jack London. Momentum story.",
+          "angle": "conflict/tension coverage",
+          "hood": "Jack London"
+        }
+      ]
+    },
+    "friction": {
+      "a": "The numbers / streak say dynasty heat",
+      "b": "The quiet fear that it cannot last — or the nerds reducing it to WAR",
+      "frame": "Euphoria with friction: name the doubter, kill soft contentment."
+    },
+    "priorTakes": [],
+    "players": [
+      {
+        "name": "Vinnie Keane",
+        "popid": "POP-00001",
+        "role": "Designated Hitter, Oakland A's Legend",
+        "neighborhood": "Grand Lake",
+        "why": "feed-names"
+      },
+      {
+        "name": "Benji Dillon",
+        "popid": "POP-00018",
+        "role": "Pitcher, Oakland A's Legend",
+        "neighborhood": "Rockridge",
+        "why": "feed-names"
+      },
+      {
+        "name": "Jack London",
+        "popid": null,
+        "role": null,
+        "neighborhood": null,
+        "why": "feed-names"
+      }
+    ],
+    "scene": {
+      "neighborhood": "Jack London",
+      "record": "-",
+      "streak": "-",
+      "mood": "reflective",
+      "fanSentiment": "euphoric",
+      "colorRoom": "You may invent unnamed bar / lot / BART / bleacher texture that contradicts nothing on this slice. Do not invent star players, contracts, stats, or quotes. Named people stay on PLAYERS list or Tribune colleagues (Anthony, Hal, Mags) as foils."
+    },
+    "candidates": [
+      {
+        "score": 47,
+        "cycle": 112,
+        "team": "A's",
+        "primary": "award-board",
+        "angle": "The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+        "priorHits": 0
+      },
+      {
+        "score": 47,
+        "cycle": 112,
+        "team": "Oaks",
+        "primary": "prospect-callup",
+        "angle": "The Oaks open their inaugural season at home. AJ Dybantsa shines in his rookie debut as the Oaks win their first win as ",
+        "priorHits": 0
+      },
+      {
+        "score": 41,
+        "cycle": 110,
+        "team": "Oaks",
+        "primary": "loss",
+        "angle": "The Oaks welcome the Miami Heat to Oakland to lose their final preseason game. The Oaks are winless as a franchise betwe",
+        "priorHits": 0
+      },
+      {
+        "score": 40,
+        "cycle": 110,
+        "team": "Oaks",
+        "primary": "loss",
+        "angle": "The Oaks visit the Chicago Bulls, The Oaks lose their 4th straight pre-season game. The Chicago Bulls, where Paulson ran",
+        "priorHits": 0
+      },
+      {
+        "score": 39,
+        "cycle": 110,
+        "team": "A's",
+        "primary": "win-streak",
+        "angle": "A's win their 7th championship in the \"Paulson\" era. A storybook ending to a farewell season for both Vinnie Keane and B",
+        "priorHits": 0
+      },
+      {
+        "score": 36,
+        "cycle": 112,
+        "team": "Oaks",
+        "primary": "win-streak",
+        "angle": "Elias Varek meets the media, happy over the win and shares updated on the Oaks.",
+        "priorHits": 0
+      }
+    ]
+  },
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "P Slayer",
+    "popid": "POP-00008",
+    "text": "I'm heading to the Blue Lattern Bar in Jack London to catch the farewell for Vinnie Keane and Benji Dillon. I want to feel the vibe and see how the fans are reacting to the sendoff. I've heard it's going to be a big night, and I'm curious about the mix of nostalgia and current fan energy.",
+    "plan": {
+      "chase": "I'm heading to the Blue Lattern Bar in Jack London to catch the farewell for Vinnie Keane and Benji Dillon. I want to feel the vibe and see how the fans are reacting to the sendoff. I've heard it's going to be a big night, and I'm curious about the mix of nostalgia and current fan energy.",
+      "focus": "The atmosphere at the Blue Lattern Bar during the Keane and Dillon farewell event",
+      "why": "To capture the fan sentiment and the emotional tone of the event, and understand how it's reflecting the current state of A's fandom",
+      "checks": [
+        "Fan reactions and comments",
+        "Event organization and attendance",
+        "Tributes or rituals honoring Keane and Dillon"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00649",
+          "question": "What's the mood like among the fans here?",
+          "basis": "Line Cook at a Jack London establishment, likely familiar with the local sports scene"
+        },
+        {
+          "pop": "POP-00001",
+          "question": "How does it feel to be honored in this way?",
+          "basis": "The event is his farewell"
+        }
+      ],
+      "interpretation": "The event is a moment to gauge the emotional state of A's fans and their connection to the team's history",
+      "unverifiedLead": [
+        "The bar might be packed, with fans sharing stories about Keane and Dillon's careers"
+      ],
+      "closeQuestion": "How will the farewell event shape the narrative around the A's moving into the off-season?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "A's | player-feature | (off-season) | Eric Taveras, Martin Richards",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 112; rendered: world_summary_c112.md \"## Sports\" C112 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00597",
+        "POP-00031"
+      ]
+    },
+    {
+      "label": "A's | rumor | (off-season) | Mark Aitken, Kevin Clark",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 112; rendered: world_summary_c112.md \"## Sports\" C112 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00003",
+        "POP-00053"
+      ]
+    },
+    {
+      "label": "A's | player-feature | (off-season) | Vinnie Keane, Benji Dillon",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 112; rendered: world_summary_c112.md \"## Sports\" C112 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00001",
+        "POP-00018"
+      ]
+    },
+    {
+      "label": "Oaks | game-result | (early-season) | AJ Dybantsa, Adash Stanley, Wendell Carter Jr, Austin Reaves",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 112; rendered: world_summary_c112.md \"## Sports\" C112 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01024",
+        "POP-01023",
+        "POP-01028",
+        "POP-01027"
+      ]
+    },
+    {
+      "label": "Oaks | season-state | (early-season) | Elias Varek",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 112; rendered: world_summary_c112.md \"## Sports\" C112 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00789"
+      ]
+    }
+  ],
+  "laneEntries": 9,
+  "angleCapHits": 0,
+  "ranAt": "2026-10-21T11:17:11.546Z"
+}

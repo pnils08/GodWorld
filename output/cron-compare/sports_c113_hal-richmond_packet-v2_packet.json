@@ -1,0 +1,45 @@
+{
+  "stage": "report",
+  "desk": "sports",
+  "cycle": "113",
+  "persona": "hal-richmond",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Hal Richmond",
+    "popid": "POP-00007"
+  },
+  "assignment": {
+    "story": {
+      "angle": "What the supplied C113 line card establishes, and what history remains unsupplied.",
+      "label": "A's — rumor — supplied C113 line card",
+      "hookLine": "A's — rumor — supplied C113 line card",
+      "hood": "Downtown",
+      "pulseClass": "metrics-poetry",
+      "team": "A's",
+      "eventKind": "rumor",
+      "closingNote": "quiet pride",
+      "citizens": [
+        "Desmond Morton (POP-00051)",
+        "Frank Reyna (POP-00079)",
+        "Danny Horn (POP-00022)",
+        "Vladimir Gonzalez (POP-00598)"
+      ],
+      "popids": [
+        "POP-00051",
+        "POP-00079",
+        "POP-00022",
+        "POP-00598"
+      ],
+      "ref": "world_summary_c113.md ## Sports",
+      "cycle": 113
+    }
+  },
+  "angle": "output/cron-compare/sports_c113_hal-richmond_packet-v2_angle.json",
+  "quotesRequested": 0,
+  "quotesLanded": 0,
+  "quotes": [],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [],
+  "ranAt": "2026-10-29T18:16:58.702Z"
+}

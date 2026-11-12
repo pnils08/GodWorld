@@ -1,0 +1,38 @@
+{
+  "office": "council_d7",
+  "cycle": 112,
+  "speaker": "Warren Ashford",
+  "cascadeSummary": "District 7 demands that any municipal fund moving through committee include strict line-item benchmarks, verifiable return on investment, and post-allocation audit triggers before a single check clears. While Temescal's positive sentiment reflects local merchant discipline rather than mayoral victory laps, KONO cannot be sidelined while millions in commercial stabilization are prioritized elsewhere. I am holding the line on fiscal accountability across Downtown revitalization and demanding verifiable metrics for our northern corridors.",
+  "statements": [
+    {
+      "statementId": "STMT-112-council_d7-001",
+      "type": "committee_statement",
+      "topic": "Downtown Economic Revitalization Oversight",
+      "initiative": "INIT-008",
+      "decision": "Demand line-item benchmarks and verified ROI metrics at the Economic Development Committee hearing before authorizing downtown disbursements.",
+      "quote": "A multi-million-dollar downtown revitalization fund cannot be an open checkbook without verifiable benchmarks and audit triggers attached.",
+      "fullStatement": "As the Economic Development Committee convenes for the Downtown Economic Revitalization hearing, District 7's position remains unchanged: we do not authorize public capital without hard data and strict oversight. Downtown recovery requires clear return-on-investment metrics, transparent disbursement schedules, and immediate clawback provisions if milestones are missed. I will not support emergency allocations that bypass standard fiscal controls while other commercial corridors across Oakland manage their own survival through sheer discipline.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-112-council_d7-002",
+      "type": "district_statement",
+      "topic": "KONO Commercial Corridor Support",
+      "initiative": null,
+      "decision": "Demand that economic development frameworks address KONO's quiet commercial strain with audited baseline support instead of selective district spending.",
+      "quote": "KONO's merchants hold their ground with steady trade and low crime, but City Hall cannot ignore mounting corridor pressure while directing millions elsewhere.",
+      "fullStatement": "KONO is maintaining steady street trade and low crime through the perseverance of its small business owners, but daily pressure is building without a single dedicated city initiative pointed at the corridor. It is fiscally irresponsible to rush multi-million-dollar packages for select neighborhoods while leaving KONO completely off the balance sheet. I am demanding that our economic development planning account for KONO's baseline corridor needs through targeted, audited support rather than selective political appropriations.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-112-council_d7-003",
+      "type": "oversight_statement",
+      "topic": "Temescal Merchant Resilience and Health Center Utilization",
+      "initiative": "INIT-005",
+      "decision": "Credit Temescal's positive mood to local merchant resilience while enforcing quarterly utilization audit benchmarks for the Temescal Community Health Center.",
+      "quote": "Temescal's positive sentiment belongs to the merchants and residents doing the daily work, and District 7 will ensure every dollar at the health center delivers measurable clinical care.",
+      "fullStatement": "Temescal's mildly positive mood is the direct result of neighborhood resilience, even as street trade remains slow. Nobody at City Hall gets to claim credit for community endurance. On the municipal side, District 7 continues to enforce strict quarterly oversight over the Temescal Community Health Center allocation. Operational status is simply the starting line; our office will audit every intake metric and balance sheet to ensure public funds translate directly into reduced illness for District 7 residents.",
+      "trackerUpdates": {}
+    }
+  ]
+}

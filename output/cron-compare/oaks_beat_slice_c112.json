@@ -1,0 +1,181 @@
+{
+  "version": "OAKS-BEAT-1",
+  "empty": false,
+  "cycle": 112,
+  "kind": "beat-oaks-beat",
+  "seat": {
+    "slug": "selena-grant",
+    "name": "Selena Grant",
+    "popid": "POP-00591",
+    "desk": "sports",
+    "domain": "oaks",
+    "builder": "buildOaksBeatSlice.js"
+  },
+  "hood": "KONO",
+  "pulse": {
+    "className": "beat-oaks-beat",
+    "score": 100,
+    "label": "Oaks — game-result C112 · 1-0 · W1",
+    "hood": "KONO",
+    "source": "output/beats/Oakland_Sports_Feed.jsonl @C112"
+  },
+  "story": {
+    "kind": "beat-oaks-beat",
+    "angle": "Oaks — game-result C112 · 1-0 · W1 — the second club's board read",
+    "label": "Oaks — game-result C112 · 1-0 · W1",
+    "hookLine": "The Oaks open their inaugural season at home. AJ Dybantsa shines in his rookie debut as the Oaks win their first win as a franchise.",
+    "hood": "KONO",
+    "citizens": [
+      "Adash Stanley (POP-01023)",
+      "Austin Reaves (POP-01027)",
+      "Elias Varek (POP-00789)"
+    ],
+    "popids": [
+      "POP-01023",
+      "POP-01027",
+      "POP-00789"
+    ],
+    "ref": "output/beats/Oakland_Sports_Feed.jsonl @C112",
+    "cycle": 112
+  },
+  "approach": "Oaks beat-analyst approach: this slice is the Oaks feed raw — the record, the streak, the stats lines, the trigger behind each event. Third-person board read on the second club, not fan heat. Numbers come from the feed only — never invent a stat. The named players are real; the press row, the cage, the bus are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-01023",
+      "name": "Adash Stanley",
+      "role": "PG / The Oaks ",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Adash Stanley — PG / The Oaks  — Downtown",
+      "why": "named on the Oaks feed C112 (Oakland_Sports_Feed)"
+    },
+    {
+      "popid": "POP-01027",
+      "name": "Austin Reaves",
+      "role": "SG / The Oaks",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Austin Reaves — SG / The Oaks — Downtown",
+      "why": "named on the Oaks feed C112 (Oakland_Sports_Feed)"
+    },
+    {
+      "popid": "POP-00789",
+      "name": "Elias Varek",
+      "role": "Founder of Civis Systems",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Elias Varek — Founder of Civis Systems — West Oakland",
+      "why": "named on the Oaks feed C112 (Oakland_Sports_Feed)"
+    }
+  ],
+  "facts": [
+    {
+      "text": "Oaks — game-result (early-season), C112: The Oaks open their inaugural season at home. AJ Dybantsa shines in his rookie debut as the Oaks win their first win as a franchise.",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+    },
+    {
+      "text": "Record 1-0 · streak W1",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+    },
+    {
+      "text": "Stats (feed): AJ Dybantsa/25PTS/4REB, Adash Stanley/17PTS/9ASST, Austin Reaves/14PTS/8REB/8ASST, Wendell Carter Jr/15PTS/12REB",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+    },
+    {
+      "text": "Trigger: home-opener",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+    },
+    {
+      "text": "Franchise stability: growing",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+    },
+    {
+      "text": "Oaks — season-state (early-season), C112: Elias Varek meets the media, happy over the win and shares updated on the Oaks.",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+    },
+    {
+      "text": "Record 1-0 · streak W1",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+    },
+    {
+      "text": "Trigger: hot-streak",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+    },
+    {
+      "text": "Franchise stability: growing",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "Oaks — game-result C112 · 1-0 · W1 — the second club's board read",
+    "hookLine": "The Oaks open their inaugural season at home. AJ Dybantsa shines in his rookie debut as the Oaks win their first win as a franchise.",
+    "anchorFacts": [
+      "Oaks — game-result (early-season), C112: The Oaks open their inaugural season at home. AJ Dybantsa shines in his rookie debut as the Oaks win their first win as a franchise.",
+      "Record 1-0 · streak W1",
+      "Stats (feed): AJ Dybantsa/25PTS/4REB, Adash Stanley/17PTS/9ASST, Austin Reaves/14PTS/8REB/8ASST, Wendell Carter Jr/15PTS/12REB",
+      "Trigger: home-opener",
+      "Franchise stability: growing",
+      "Oaks — season-state (early-season), C112: Elias Varek meets the media, happy over the win and shares updated on the Oaks.",
+      "Record 1-0 · streak W1",
+      "Trigger: hot-streak",
+      "Franchise stability: growing"
+    ],
+    "evidence": [
+      {
+        "text": "Oaks — game-result (early-season), C112: The Oaks open their inaugural season at home. AJ Dybantsa shines in his rookie debut as the Oaks win their first win as a franchise.",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+      },
+      {
+        "text": "Record 1-0 · streak W1",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+      },
+      {
+        "text": "Stats (feed): AJ Dybantsa/25PTS/4REB, Adash Stanley/17PTS/9ASST, Austin Reaves/14PTS/8REB/8ASST, Wendell Carter Jr/15PTS/12REB",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+      },
+      {
+        "text": "Trigger: home-opener",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+      },
+      {
+        "text": "Franchise stability: growing",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+      },
+      {
+        "text": "Oaks — season-state (early-season), C112: Elias Varek meets the media, happy over the win and shares updated on the Oaks.",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+      },
+      {
+        "text": "Record 1-0 · streak W1",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+      },
+      {
+        "text": "Trigger: hot-streak",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+      },
+      {
+        "text": "Franchise stability: growing",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": null,
+    "hooks": [],
+    "note": null,
+    "pageVoices": [],
+    "roomIsYours": "the near-empty press row, the bullpen chatter, what the manager says when the record is ugly, the drumbeat of a losing streak"
+  },
+  "feedRows": 11,
+  "currentCycleRows": 2,
+  "pointers": [
+    "output/beats/Oakland_Sports_Feed.jsonl @C112",
+    "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+  ]
+}

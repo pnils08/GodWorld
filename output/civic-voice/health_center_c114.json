@@ -1,0 +1,34 @@
+{
+  "office": "health_center",
+  "cycle": 114,
+  "speaker": "Roberta \"Bobby\" Chen-Ramirez",
+  "cascadeSummary": "The clinic has been operational since C112 and already survived its first quarterly utilization audit last cycle. This cycle I'm answering the D7 benchmark demand not with a speech but with the next audit cycle: the C114 quarterly clinical verification packet goes to HCAI and the council clerk with intake counts by service line, and I'm re-verifying the operator's staffing ratios against the numbers we committed to at license. The building works; now the paper has to keep proving it.",
+  "statements": [
+    {
+      "statementId": "STMT-114-health_center-001",
+      "type": "operational_status",
+      "topic": "Second quarterly clinical verification audit — filed to HCAI and council clerk",
+      "initiative": "INIT-005",
+      "decision": "File the C114 quarterly clinical verification packet covering C112–C114 intake by service line (primary care, behavioral health, dental, pharmacy), staffing ratios against license commitments, and no-show and walk-in data, submitted to HCAI and the council clerk.",
+      "quote": "Benchmarks aren't an insult — they're a filing requirement. I file them quarterly because I'd rather hand over the numbers than have somebody come ask for them.",
+      "fullStatement": "The front desk knows the rhythm now: Monday intake packets, Wednesday dental slate, pharmacy fills reconciled Friday. What I did this cycle is take that rhythm and file it — the second quarterly clinical verification packet goes to HCAI and the council clerk, covering intake by service line, staffing ratios against what we committed to at licensure, and the walk-in and no-show data that tells you whether the doors are actually serving the neighborhood or just standing open. The 51st Street bench crowd asks me how many people got seen. I can answer that now with a number. That's the whole point of the audit: not a defense, a record.",
+      "trackerUpdates": {
+        "initiative": "INIT-005",
+        "ImplementationPhase": "operational",
+        "MilestoneNotes": "C114: Filed second quarterly clinical verification packet (intake by service line, staffing ratios vs. license commitments) to HCAI and council clerk.",
+        "NextScheduledAction": "Operator staffing reconciliation review + third quarterly verification packet prep",
+        "NextActionCycle": 115
+      }
+    },
+    {
+      "statementId": "STMT-114-health_center-002",
+      "type": "stakeholder_engagement",
+      "topic": "Frontline verification — merchant and clinic-staff walkthrough at Telegraph & 47th",
+      "initiative": "INIT-005",
+      "decision": "Conduct a walkthrough of the operating clinic with the Telegraph corridor merchants and the clinical staff who actually run intake, and fold their observations into the next operational adjustment memo.",
+      "quote": "The shopkeepers across the street see more of this clinic's real traffic than any dashboard I get. They get a walkthrough and a say.",
+      "fullStatement": "The pharmacist across Telegraph has watched our patient flow for two cycles now — he knows when the pharmacy line forms, he knows when the dental van schedule sends people walking. So this cycle the merchants on the corridor and the intake staff get a walkthrough together, and I take their notes into the operational adjustment memo rather than sorting them from a distance. If the bench crowd says the pharmacy hours don't line up with the bus schedule, that's a real finding and it goes in the memo. Community responsiveness isn't a meeting we held in C86 — it's the standing habit of asking the people at the counter what's broken and fixing it before the next audit.",
+      "trackerUpdates": {}
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "111",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "freelance-firebrand",
+  "byline": {
+    "name": "Jax Caldera",
+    "popid": "POP-00799",
+    "beatDomain": "ACCOUNTABILITY"
+  },
+  "laneEntries": 96,
+  "quotesLanded": 0,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/staged/civic_c111_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "th { path: '/custom/path/.env' }\n{\n  \"popId\": \"POP-00799\",\n  \"name\": \"Jax Caldera\",\n  \"recorded\": true,\n  \"text\": \"filed: Fruitvale Is Packed at Lunch and the Map Says It's Decaying. Who Owns That?\"\n}"
+  },
+  "ranAt": "2026-10-14T23:15:48.956Z",
+  "dispositionReconciledAt": "2026-10-17T17:00:02.624Z"
+}

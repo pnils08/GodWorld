@@ -1,0 +1,76 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "113",
+  "persona": "ines-sorensen",
+  "byline": "Ines Sorensen",
+  "bylinePopid": "POP-01211",
+  "article": "output/cron-compare/staged/culture_c113_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Dame Reed",
+        "role": "quoted-source",
+        "popid": "POP-00634"
+      },
+      {
+        "name": "Priya Narang",
+        "role": "quoted-source",
+        "popid": "POP-00141"
+      },
+      {
+        "name": "Omar Amici",
+        "role": "quoted-source",
+        "popid": "POP-00263"
+      },
+      {
+        "name": "Danny Horn",
+        "role": "mentioned",
+        "popid": "POP-00022",
+        "floor": true
+      },
+      {
+        "name": "Ollie Campbell",
+        "role": "mentioned",
+        "popid": "POP-00642",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "The A's winning season really brings Uptown together. I started a jar on my counter to save up for season tickets next year. It's not just about the games, though - when they're doing well, the whole neighborhood feels it. The bars and galleries stay packed, and you can feel the energy. It's like we're all connected through the team.",
+        "sourceRef": "citizenVoice PRESS Priya Narang"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "gate": "off",
+    "model": null,
+    "manifestId": null,
+    "draftSha256": "8697e5a3f7736a724b066487397fe41cff4f5e2cc2dab8e478b981ae0a40206c",
+    "verdict": null,
+    "ranAt": "2026-10-31T16:15:43.568Z",
+    "contractScore": {
+      "opened": true,
+      "closed": false,
+      "purposeMet": false,
+      "inTarget": true,
+      "inTargetBy": "code floor 300",
+      "words": 399,
+      "short": "The piece includes editorializing and a summary of what the voices add up to, rather than leaving the citizen's verbatim words standing alone with nothing added or paraphrased.",
+      "score": 2,
+      "model": "google/gemini-3.7-flash",
+      "scoredWithoutRhea": true,
+      "draftSha256": "8697e5a3f7736a724b066487397fe41cff4f5e2cc2dab8e478b981ae0a40206c"
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-31T16:15:43.568Z"
+}

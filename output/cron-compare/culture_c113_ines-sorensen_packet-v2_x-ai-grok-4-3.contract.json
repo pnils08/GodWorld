@@ -1,0 +1,17 @@
+{
+  "draft": "output/cron-compare/culture_c113_ines-sorensen_packet-v2_x-ai-grok-4-3.md",
+  "contractScore": {
+    "opened": true,
+    "closed": false,
+    "purposeMet": true,
+    "inTarget": false,
+    "inTargetBy": "code floor 300",
+    "words": 211,
+    "short": "The piece fell short of the 300-word minimum and ended on an attribution frame rather than leaving the last person's words standing.",
+    "score": 2,
+    "model": "google/gemini-3.7-flash",
+    "scoredWithoutRhea": true,
+    "draftSha256": "554dc40732fb21a950636f40ad2cb6b27d9182256b818e68228d8749a9925417"
+  },
+  "ranAt": "2026-10-30T23:20:43.785Z"
+}

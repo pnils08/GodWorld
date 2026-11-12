@@ -1,0 +1,72 @@
+{
+  "office": "council_d3",
+  "cycle": 114,
+  "speaker": "Rose Delgado",
+  "cascadeSummary": "I'm answering the Planning Director's directive by scheduling the D3 OARI community briefing for this cycle and publishing the Fruitvale Transit Hub Phase II schematic review schedule, both with the district-level data and Mayer & Associates scrutiny residents are owed. I'm requiring a published placement-gap analysis for the youth pipeline with Fruitvale named directly, and I'm standing with San Antonio on the corridor package while giving Fruitvale's residents and merchants the credit for their own busy streets. No expansion, no final design, no invented numbers — just the hearings and records on the calendar this cycle.",
+  "statements": [
+    {
+      "statementId": "STMT-114-council_d3-001",
+      "type": "vote_statement",
+      "topic": "Oakland Alternative Response Initiative — D3 East Oakland community briefing",
+      "initiative": "Oakland Alternative Response Initiative",
+      "decision": "Confirm and schedule the D3 East Oakland OARI community briefing for this cycle, with Fruitvale district-level data and the Baylight feasibility review docketed for public presentation, holding any expansion decision until the briefing occurs.",
+      "quote": "East Oakland gets the briefing, the Fruitvale data, and the Baylight review in the daylight — before anyone asks this district to accept expansion.",
+      "fullStatement": "The Director asked for a date, and I'm giving one: the D3 East Oakland community briefing on OARI happens this cycle. It will carry Fruitvale district-level data — not citywide averages that hide this district — and the Baylight feasibility review will be on the table for public scrutiny. My condition from C112 stands and it will not be waived: no expansion decision before this community has heard the numbers and asked its questions. The right responder showing up on time on Fruitvale's streets is the report I hold OARI to, and residents get to hold it with me.",
+      "disposition": "YES",
+      "actionAsked": "Schedule and publish the D3 OARI community briefing date this cycle with Fruitvale district-level data and the Baylight feasibility review.",
+      "tone": "firm, district-first",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-114-council_d3-002",
+      "type": "vote_statement",
+      "topic": "Fruitvale Transit Hub Phase II — preliminary schematics community review",
+      "initiative": "Fruitvale Transit Hub Phase II — Visioning",
+      "decision": "Publish the preliminary schematics community review date for this cycle, with merchant-covenant compliance and Mayer & Associates' community-oversight record available for public scrutiny, without claiming final design or construction approval.",
+      "quote": "Fruitvale authorized this vision together; the preliminary schematics now face the residents and merchants who will live with the results.",
+      "fullStatement": "The schematics are due this cycle, and they will be reviewed in public in Fruitvale, by Fruitvale. I'm publishing the preliminary schematics community review date now, with merchant-covenant compliance and Mayer & Associates' community-oversight record available for anyone to read and question. This is not final design and it is not construction approval — it is the moment the neighborhood gets to look at what $230 million is actually buying and say so out loud. The merchants who signed the covenants and the riders who use this hub get first word, not last.",
+      "disposition": "YES",
+      "actionAsked": "Publish the Fruitvale preliminary schematics community review date this cycle with merchant-covenant compliance and Mayer & Associates' oversight record available.",
+      "tone": "transparent, neighborhood-accountable",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-114-council_d3-003",
+      "type": "vote_statement",
+      "topic": "Oakland Youth Apprenticeship Pipeline — placement gap analysis and program adjustment",
+      "initiative": "Oakland Youth Apprenticeship Pipeline",
+      "decision": "Require publication of the placement-gap analysis this cycle with Fruitvale and West Oakland named specifically, and bring forward program adjustments tied to its findings — with no invented gap count.",
+      "quote": "A seat in the classroom is not a paycheck. Show me Fruitvale's young people holding those roles — and show me the gap analysis that gets them there.",
+      "fullStatement": "The first cohort report is published, and my question from last cycle stands: a seat in the classroom is not a paycheck. This cycle I'm requiring the placement-gap analysis to be public, with Fruitvale and West Oakland named specifically, and program adjustments brought forward tied to what it actually finds. I will not accept an invented gap count and I will not accept another report that leaves this district's young people as an aggregate line. The engine's own review shows a chain of problems compounding in Fruitvale and West Oakland — the adjustment has to break that chain, not describe it.",
+      "disposition": "YES",
+      "actionAsked": "Publish the C114 placement-gap analysis with Fruitvale and West Oakland named and bring forward program adjustments tied to its findings.",
+      "tone": "accountability, outcome-focused",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-114-council_d3-004",
+      "type": "statement",
+      "topic": "San Antonio crisis and Fruitvale credit — D3 constituents",
+      "initiative": null,
+      "decision": "Stand with San Antonio on the corridor package and citizen-complaint response while crediting Fruitvale's residents, workers, and merchants for their own busy streets, with no unproven causation.",
+      "quote": "San Antonio gets the fight it deserves, and Fruitvale keeps the credit it earned — City Hall doesn't get to claim either one for itself.",
+      "fullStatement": "San Antonio is not a corridor I walk away from when the mood turns flat. Street trade is slow there this cycle, the complaint still needs its corridor plan, and I'm keeping the corridor package and the citizen-complaint response moving — the people there are living this cycle whether City Hall speaks or not, and I'm speaking. In Fruitvale, the street trade is busy and the mood is upbeat, and that credit belongs to the residents, workers, and merchants who show up daily — not to a program that happens to share a zip code. City Hall keeps the resources coming and keeps out of the way. That's the whole job.",
+      "disposition": "statement",
+      "actionAsked": "Advance the San Antonio corridor package and complaint response; direct Fruitvale credit to residents, workers, and merchants.",
+      "tone": "steady, district-rooted",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    }
+  ]
+}

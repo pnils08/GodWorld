@@ -1,0 +1,58 @@
+{
+  "mode": "wake-write",
+  "desk": "culture",
+  "cycle": "111",
+  "provider": "openrouter",
+  "model": "x-ai/grok-4.3",
+  "configuredWriterModel": "x-ai/grok-4.3",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "mason-ortega",
+  "byline": {
+    "name": "Mason Ortega",
+    "popid": "POP-00160",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 20,
+  "quotesLanded": 3,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [],
+  "toolCalls": 0,
+  "wordCount": 561,
+  "targetWords": "evidence-bounded",
+  "capHit": 0,
+  "checkFlags": [],
+  "engineTerms": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": false,
+    "purposeMet": false,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 561,
+    "short": "The piece invents workers, shifts, and dialogue rather than treating the signal as an evidence-bounded question, and fails to close on the worker or operating account still needed.",
+    "score": 2,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "eba8281e466b6cac4b8ac97ced86b1e06a819db0fa71dd8e4018139b194dc0ab",
+    "costUsd": 0.0013
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 2/4 — The piece invents workers, shifts, and dialogue rather than treating the signal as an evidence-bounded question, and fails to close on the worker or operating account still needed."
+  },
+  "article": "output/cron-compare/staged/culture_c111_mason-ortega_packet-v2_x-ai-grok-4-3.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "true }\n{\n  \"popId\": \"POP-00160\",\n  \"name\": \"Mason Ortega\",\n  \"recorded\": true,\n  \"text\": \"filed: Green & Gold Tavern in Jack London keeps its kitchen running on the rhythm of the pit. Dishwasher He\"\n}"
+  },
+  "ranAt": "2026-10-16T23:15:52.541Z",
+  "dispositionReconciledAt": "2026-10-17T17:00:02.953Z"
+}

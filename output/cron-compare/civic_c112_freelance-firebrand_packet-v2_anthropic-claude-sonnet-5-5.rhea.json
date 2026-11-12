@@ -1,0 +1,78 @@
+{
+  "draft": "output/cron-compare/civic_c112_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "112",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "1c17fee994d241dddede948203f4e045eadf4291b3f41d7fd18467317344f390",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes, engine audit statistics, citizen profiles, and civic references match Cycle 112 ground truth exactly.",
+  "review": {
+    "profileId": "jax-accountability-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "jax-accountability-v1",
+    "packageVersion": "JAX-LEP2-1",
+    "manifestId": "AM-42ec31b6976b",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "0.310",
+          "0.60",
+          "0.500",
+          "8.88"
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [
+      "Florencia Shah",
+      "Iris Pham",
+      "Jax Caldera",
+      "Makayla Wu",
+      "Tatiana Flores"
+    ],
+    "unverified": [
+      "Fox Theater",
+      "Telegraph Avenue"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0112,
+  "durationMs": 8310,
+  "parseError": false,
+  "ranAt": "2026-10-21T23:15:35.967Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 400",
+    "words": 663,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "1c17fee994d241dddede948203f4e045eadf4291b3f41d7fd18467317344f390",
+    "costUsd": 0.0014
+  }
+}

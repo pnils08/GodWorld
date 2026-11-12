@@ -1,0 +1,17 @@
+{
+  "initiative": "INIT-009",
+  "initiativeId": "INIT-009",
+  "cycle": 113,
+  "primaryVoice": "Mayor gavel (mayor_gavel-007)",
+  "consolidatedFrom": [
+    "STMT-113-mayor_gavel-007 (Mayor gavel — INIT-009 Commercial Stabilization for Grand Lake Committee Vote)",
+    "STMT-113-stabilization_fund-002 (Webb — Commercial Stabilization for Grand Lake)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-009",
+    "ImplementationPhase": "vote-ready",
+    "MilestoneNotes": "C113: Advanced to full council with Chen/Vega milestone and audit conditions",
+    "NextScheduledAction": "Full council vote",
+    "NextActionCycle": 114
+  }
+}

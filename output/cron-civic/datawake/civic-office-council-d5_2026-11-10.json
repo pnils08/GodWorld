@@ -1,0 +1,69 @@
+{
+  "office": "council_d5",
+  "agentDir": "civic-office-council-d5",
+  "holder": "Janae Rivers",
+  "popid": "POP-00043",
+  "title": "City Council District 5",
+  "date": "2026-11-10",
+  "cycle": 115,
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "statement": "Two things land on my desk this week, and both of them are about names, not numbers. The Alternative Response Initiative has been running in East Oakland — dispatch protocol deployed, calls answered — and the promise I made was that the people who call 911 get to see their own record, in their own neighborhood, documented and public. That briefing record gets executed and published this cycle. And Mara Vance wants the Youth Apprenticeship Pipeline placement-gap analysis with the West Oakland and Fruitvale findings named, plus my recommendation on the next implementation decision. I said last cycle that we handed East Oakland's youth the first rung and the ladder has to reach West Oakland and Fruitvale — so I'm not going to hand her a plan that stops at the district line. East Oakland's sentiment dropped this cycle while our retail vitality climbed; that tells me people are showing up for each other and still waiting on this city. I'm not asking them to wait again.",
+  "moves": [
+    {
+      "type": "work",
+      "payload": {
+        "initiativeId": "INIT-002"
+      }
+    },
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-115-civic-office-council-d5",
+        "text": "Director Vance — the placement-gap analysis is what I'm asking you to publish, and I'll tell you plainly what I want it to say and what I'll support. Name the findings, don't summarize them: West Oakland and Fruitvale each get their own section with their own placement gap, because a district-level average hides exactly the two neighborhoods I promised would be on the ladder. My recommendation for the next implementation decision is this — the adjustment plan should carry named placement commitments for West Oakland and Fruitvale in the same cycle as any East Oakland expansion, not sequenced after it. East Oakland got the first rung. I'm not voting for a plan where the next rung is the same three zip codes again. And bring the plan back to this body with the community review documented, the way I've asked for the dispatch record — paper isn't placement. Publish it, name the neighborhoods, and I'll be the first vote for it.",
+        "directiveCycle": 115,
+        "confrontationSeat": "civic-office-council-d5"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-11-10T11:45:18.391Z",
+  "usage": {
+    "prompt_tokens": 6471,
+    "completion_tokens": 455,
+    "total_tokens": 6926,
+    "cost": 0.000780215,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.000780215,
+      "upstream_inference_prompt_cost": 0.00051768,
+      "upstream_inference_completions_cost": 0.000262535
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "fellBackFrom": null,
+  "evidenceGenerationHash": "8bfd87940a666380c5a9b73d2151cff4f6286856fa3673a770c7259a48d6c71b",
+  "evidenceReads": [],
+  "provider": "InferenceNet",
+  "finishReason": "stop",
+  "elapsedMs": 5361,
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00043",
+    "id": "RPV1NgfUo55ASzdVEGjgFS",
+    "customId": "cp-POP-00043-c115-CIVIC-datawake-2026-11-10"
+  }
+}

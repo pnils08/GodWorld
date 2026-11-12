@@ -1,0 +1,41 @@
+{
+  "stage": "report",
+  "desk": "sports",
+  "cycle": "115",
+  "persona": "anthony-raines",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Anthony Raines",
+    "popid": "POP-00017"
+  },
+  "assignment": {
+    "story": {
+      "kind": "sports-analytics",
+      "angle": "The season line (Eric Taveras/3) has to carry the claim before the narrative does: Fifth on points, first in credits: Taveras's Undocked pledge to Keane's academy is still waiting on a payout",
+      "label": "A's · player-feature — Fifth on points, first in credits: Taveras's Undocked pledge to Keane's academy is still waiting on a payout",
+      "hookLine": "Fifth on points, first in credits: Taveras's Undocked pledge to Keane's academy is still waiting on a payout",
+      "hood": "West Oakland",
+      "pulseClass": "award-board",
+      "team": "A's",
+      "eventKind": "player-feature",
+      "citizens": [
+        "Eric Taveras (POP-00597)",
+        "Vinnie Keane (POP-00001)"
+      ],
+      "popids": [
+        "POP-00597",
+        "POP-00001"
+      ],
+      "ref": "world_summary_c115.md ## Sports",
+      "cycle": 115
+    }
+  },
+  "angle": "output/cron-compare/sports_c115_anthony-raines_packet-v2_angle.json",
+  "quotesRequested": 0,
+  "quotesLanded": 0,
+  "quotes": [],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [],
+  "ranAt": "2026-11-09T19:19:03.492Z"
+}

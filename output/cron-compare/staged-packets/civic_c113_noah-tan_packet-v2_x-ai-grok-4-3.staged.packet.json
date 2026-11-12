@@ -1,0 +1,511 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00157",
+    "name": "Noah Tan",
+    "role": "desk reporter",
+    "desk": "civic"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "C113 clear, 58°F — 3 cycles of clear — what this weather does to a day in the city",
+    "approach": "Weather and environment approach: this slice is the cycle's weather row, the streak, and the last three cycles beside it, plus whoever the record says lived it. Science-first ground translation — temperature is context, never the lede. Show what this weather moved. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "environment",
+      "hood": null,
+      "facts": [
+        "This cycle: clear, 58°F, impact 1, comfort 0.75, mood content, 3 cycles of clear",
+        "Last 3 cycles: C110 fog 52°F, C111 mild 57°F, C112 clear 48°F",
+        "Cee Lee — dealt with a seasonal health concern",
+        "Johhny Necklar — recovered from a winter illness",
+        "Elle Lilo — finally shook the cold that had been hanging around",
+        "Rafael Brannie — limited social activity due to winter mood",
+        "Kwame Fitzgerald — limited social activity due to winter mood",
+        "Omar Amici — relied on familiar social circles during cold period"
+      ],
+      "priorCycle": "PRIOR_CYCLE_IN_TABLE",
+      "note": null,
+      "engineHooks": [
+        "Grand Lake turning upward: retail busy, events drawing crowds, people moving in (desk rotation)",
+        "East Oakland cooling off: foot traffic down, storefronts quieter than the rest of the city (desk rotation)",
+        "Amara Osei moved from Jack London to West Oakland — moving up from Jack London (desk rotation)"
+      ],
+      "roomIsYours": "the sidewalk, the coats, what this weather does to a plan, who is out in it and who stayed in, what the bay smells like today",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF",
+    "runningStoriesNote": "signal.runningStories are events the city is already living through and where each one stands. Background only — write nothing about tracking them."
+  },
+  "signal": {
+    "kind": "beat-weather",
+    "hood": null,
+    "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+    "plan": {
+      "focus": "What the third consecutive clear day does for the six residents who lived through the cold stretch — who is actually back out and who isn't.",
+      "closeQuestion": "What does a clear day actually repair — and what does it only cover up?"
+    },
+    "runningStories": [
+      "West Oakland Stabilization Fund — disbursement-active [West Oakland] — week 5",
+      "Oakland Alternative Response Initiative — dispatch-live [West Oakland, Fruitvale, East Oakland] — week 5",
+      "Fruitvale Transit Hub Phase II — Visioning — design-phase [Fruitvale] — week 5",
+      "Temescal Community Health Center — operational [Temescal] — week 5",
+      "Baylight District — Final Council Vote — construction-active [Jack London, Downtown] — week 5",
+      "Oakland Youth Apprenticeship Pipeline — implementation-active [West Oakland, East Oakland, Fruitvale] — week 2",
+      "Downtown Economic Revitalization — legislation-filed [Downtown] — week 3",
+      "Commercial Stabilization for Grand Lake — legislation-filed [Grand Lake] — week 2",
+      "West Oakland Tenant Defense Fund — operational [West Oakland] — under way",
+      "Ivy Hill Revitalization Initiative — announced [Ivy Hill] — week 2",
+      "Dimond Revitalization Initiative — announced [Dimond] — under way",
+      "West Oakland Tenant Defense Fund — vote-scheduled [West Oakland] — ENDED this week after 2 week(s); now operational"
+    ]
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00320",
+        "name": "Cee Lee",
+        "profile": "Cee Lee — Autonomous Systems Engineer — Lake Merritt",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00509",
+        "name": "Johhny Necklar",
+        "profile": "Johhny Necklar — Hall of Famer from old basketball league MUBA — Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00177",
+        "name": "Elle Lilo",
+        "profile": "Elle Lilo — Harbor Tugboat Captain — Jack London",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00223",
+        "name": "Rafael Brannie",
+        "profile": "Rafael Brannie — Mover — Piedmont Ave",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00320-7725923e41",
+        "pop": "POP-00320",
+        "name": "Cee Lee",
+        "quote": "Three clear days helps, I won't lie. The cold stretch had me moving slower than I like—that kind of tired that sits in your bones. But 'lifted'? I'd say paused. Seasonal stuff like this, it lingers in the background. I'm out walking the lake path again, getting back to normal, but I'm not foolish enough to think it's gone for good. You learn to live with the ebb and flow of it.",
+        "factIds": [
+          "F-ee905a8dbc78",
+          "F-57d6daa8ede3"
+        ],
+        "src": "packet.W2[POP-00320]"
+      },
+      {
+        "id": "Q-POP-00509-c2490a8517",
+        "pop": "POP-00509",
+        "name": "Johhny Necklar",
+        "quote": "The clear days help, I won't lie. I was laid up a good while this winter, and there's something about stepping out and not having to bundle up just to get the mail. But recovery isn't on a weather schedule. I take the walk to the diner now because the sun feels good on my back, but I still stop twice on the way. My body tells me when it's ready, not the sky.",
+        "factIds": [
+          "F-3d79726b745c",
+          "F-57d6daa8ede3"
+        ],
+        "src": "packet.W2[POP-00509]"
+      },
+      {
+        "id": "Q-POP-00177-87c6f8e14a",
+        "pop": "POP-00177",
+        "name": "Elle Lilo",
+        "quote": "Three clear days in a row — that's a gift around here. When I finally shook that cold, the first morning I stepped back on the bridge, the sky was wide open, and I swear I could feel it in my chest. The work doesn't change, not really — the tugs still pull, the horns still sound — but the day feels lighter. You can see the whole bay, the cranes, the gulls, all of it. It's like the harbor is breathing again, and so am I.",
+        "factIds": [
+          "F-0da6d1c7bff3",
+          "F-57d6daa8ede3"
+        ],
+        "src": "packet.W2[POP-00177]"
+      },
+      {
+        "id": "Q-POP-00223-f24724e589",
+        "pop": "POP-00223",
+        "name": "Rafael Brannie",
+        "quote": "Three clear days helps, sure. I noticed the light today walking to the job—it's different, makes you want to linger on the corner a moment longer. But the winter mood, that's a heavier coat than the weather. It kind of stays draped on you even when the sun's out. I haven't gone out of my way to see people yet. I'm still moving, working, that part doesn't stop. But sitting with someone, sharing a beer, that takes a little more than blue sky. The mood outlasts the weather, I think. The sun gets you halfway there, the rest is on you.",
+        "factIds": [
+          "F-5505588c0659",
+          "F-1599fe05d071"
+        ],
+        "src": "packet.W2[POP-00223]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Noah Tan",
+        "text": "The clear streak may not reach everyone the same way — some of the six may still be indoors despite the sun",
+        "usable": false
+      },
+      {
+        "from": "Noah Tan",
+        "text": "Grand Lake's busy sidewalks may be full of people who were never hunkered down, not the ones the cold actually touched",
+        "usable": false
+      },
+      {
+        "from": "Noah Tan",
+        "text": "The third clear day might be when the city looks recovered, but the people the record names could still be catching up",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C113",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-876f95b5eb98"
+    },
+    {
+      "t": "FACT",
+      "text": "C113 clear, 58°F — 3 cycles of clear",
+      "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+      "id": "F-57d6daa8ede3"
+    },
+    {
+      "t": "FACT",
+      "text": "C113 clear, 58°F — 3 cycles of clear; 6 residents on the record lived it.",
+      "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+      "id": "F-a2728469c406"
+    },
+    {
+      "t": "FACT",
+      "text": "This cycle: clear, 58°F, impact 1, comfort 0.75, mood content, 3 cycles of clear",
+      "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+      "id": "F-1599fe05d071"
+    },
+    {
+      "t": "FACT",
+      "text": "Last 3 cycles: C110 fog 52°F, C111 mild 57°F, C112 clear 48°F",
+      "src": "output/beats/Cycle_Weather.jsonl",
+      "id": "F-e3dfe5c06f79"
+    },
+    {
+      "t": "FACT",
+      "text": "Cee Lee — dealt with a seasonal health concern",
+      "src": "output/world_summary_c113.md ## Who Lived It",
+      "id": "F-ee905a8dbc78"
+    },
+    {
+      "t": "FACT",
+      "text": "Johhny Necklar — recovered from a winter illness",
+      "src": "output/world_summary_c113.md ## Who Lived It",
+      "id": "F-3d79726b745c"
+    },
+    {
+      "t": "FACT",
+      "text": "Elle Lilo — finally shook the cold that had been hanging around",
+      "src": "output/world_summary_c113.md ## Who Lived It",
+      "id": "F-0da6d1c7bff3"
+    },
+    {
+      "t": "FACT",
+      "text": "Rafael Brannie — limited social activity due to winter mood",
+      "src": "output/world_summary_c113.md ## Who Lived It",
+      "id": "F-5505588c0659"
+    },
+    {
+      "t": "FACT",
+      "text": "Kwame Fitzgerald — limited social activity due to winter mood",
+      "src": "output/world_summary_c113.md ## Who Lived It",
+      "id": "F-15324f0d894f"
+    },
+    {
+      "t": "FACT",
+      "text": "Omar Amici — relied on familiar social circles during cold period",
+      "src": "output/world_summary_c113.md ## Who Lived It",
+      "id": "F-5f983014f469"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C9, Winter, holiday=none",
+      "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+      "id": "F-ab9d6786094e"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "noah-weather-ground-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Show what this season moved in GodWorld. The weather snapshot is context, never the Article. Live a Packet-backed person or place on a day like this.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "third-person civic environment reporting from the street",
+      "targetWords": "400-700",
+      "opening": "a named person or Packet-named place living this cycle's season",
+      "closing": "what is still unfinished for them"
+    },
+    "authorizedTexture": [
+      "sensory dress of a Packet-named place already in the season-feel facts",
+      "the reporter's presence at that place",
+      "transitions that add no forecast or unsupplied measurement"
+    ],
+    "textureConditions": [
+      "every named person, place, illness, holiday, venue, and movement change must come from the Packet",
+      "do not announce season or temperature as the lede",
+      "do not import real-world Oakland winter tropes absent from the Packet",
+      "raw engine fields and source paths may not appear as public prose"
+    ],
+    "canonBlockers": [
+      "an invented forecast, record, alert, hazard, cause, authority, meteorologist, resident, quote, impact, comparison, or measurement",
+      "a named institution, agency, person, neighborhood, or organization not found in the supplied record",
+      "unsupported danger, rarity, trend, health, travel, infrastructure, or causal language",
+      "raw engine fields, scores, source paths, or row metadata printed as public-facing evidence"
+    ]
+  },
+  "manifest": {
+    "id": "AM-391efd71ade0",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-876f95b5eb98",
+        "t": "FACT",
+        "text": "Current cycle: C113",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-57d6daa8ede3",
+        "t": "FACT",
+        "text": "C113 clear, 58°F — 3 cycles of clear",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 113"
+      },
+      {
+        "id": "F-a2728469c406",
+        "t": "FACT",
+        "text": "C113 clear, 58°F — 3 cycles of clear; 6 residents on the record lived it.",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 113"
+      },
+      {
+        "id": "F-1599fe05d071",
+        "t": "FACT",
+        "text": "This cycle: clear, 58°F, impact 1, comfort 0.75, mood content, 3 cycles of clear",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 113"
+      },
+      {
+        "id": "F-e3dfe5c06f79",
+        "t": "FACT",
+        "text": "Last 3 cycles: C110 fog 52°F, C111 mild 57°F, C112 clear 48°F",
+        "src": "output/beats/Cycle_Weather.jsonl"
+      },
+      {
+        "id": "F-ee905a8dbc78",
+        "t": "FACT",
+        "text": "Cee Lee — dealt with a seasonal health concern",
+        "src": "output/world_summary_c113.md ## Who Lived It"
+      },
+      {
+        "id": "F-3d79726b745c",
+        "t": "FACT",
+        "text": "Johhny Necklar — recovered from a winter illness",
+        "src": "output/world_summary_c113.md ## Who Lived It"
+      },
+      {
+        "id": "F-0da6d1c7bff3",
+        "t": "FACT",
+        "text": "Elle Lilo — finally shook the cold that had been hanging around",
+        "src": "output/world_summary_c113.md ## Who Lived It"
+      },
+      {
+        "id": "F-5505588c0659",
+        "t": "FACT",
+        "text": "Rafael Brannie — limited social activity due to winter mood",
+        "src": "output/world_summary_c113.md ## Who Lived It"
+      },
+      {
+        "id": "F-15324f0d894f",
+        "t": "FACT",
+        "text": "Kwame Fitzgerald — limited social activity due to winter mood",
+        "src": "output/world_summary_c113.md ## Who Lived It"
+      },
+      {
+        "id": "F-5f983014f469",
+        "t": "FACT",
+        "text": "Omar Amici — relied on familiar social circles during cold period",
+        "src": "output/world_summary_c113.md ## Who Lived It"
+      },
+      {
+        "id": "F-ab9d6786094e",
+        "t": "FACT",
+        "text": "Calendar: Y3C9, Winter, holiday=none",
+        "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00320-7725923e41",
+        "speakerId": "POP-00320",
+        "speakerName": "Cee Lee",
+        "text": "Three clear days helps, I won't lie. The cold stretch had me moving slower than I like—that kind of tired that sits in your bones. But 'lifted'? I'd say paused. Seasonal stuff like this, it lingers in the background. I'm out walking the lake path again, getting back to normal, but I'm not foolish enough to think it's gone for good. You learn to live with the ebb and flow of it.",
+        "factIds": [
+          "F-ee905a8dbc78",
+          "F-57d6daa8ede3"
+        ],
+        "src": "packet.W2[POP-00320]"
+      },
+      {
+        "id": "Q-POP-00509-c2490a8517",
+        "speakerId": "POP-00509",
+        "speakerName": "Johhny Necklar",
+        "text": "The clear days help, I won't lie. I was laid up a good while this winter, and there's something about stepping out and not having to bundle up just to get the mail. But recovery isn't on a weather schedule. I take the walk to the diner now because the sun feels good on my back, but I still stop twice on the way. My body tells me when it's ready, not the sky.",
+        "factIds": [
+          "F-3d79726b745c",
+          "F-57d6daa8ede3"
+        ],
+        "src": "packet.W2[POP-00509]"
+      },
+      {
+        "id": "Q-POP-00177-87c6f8e14a",
+        "speakerId": "POP-00177",
+        "speakerName": "Elle Lilo",
+        "text": "Three clear days in a row — that's a gift around here. When I finally shook that cold, the first morning I stepped back on the bridge, the sky was wide open, and I swear I could feel it in my chest. The work doesn't change, not really — the tugs still pull, the horns still sound — but the day feels lighter. You can see the whole bay, the cranes, the gulls, all of it. It's like the harbor is breathing again, and so am I.",
+        "factIds": [
+          "F-0da6d1c7bff3",
+          "F-57d6daa8ede3"
+        ],
+        "src": "packet.W2[POP-00177]"
+      },
+      {
+        "id": "Q-POP-00223-f24724e589",
+        "speakerId": "POP-00223",
+        "speakerName": "Rafael Brannie",
+        "text": "Three clear days helps, sure. I noticed the light today walking to the job—it's different, makes you want to linger on the corner a moment longer. But the winter mood, that's a heavier coat than the weather. It kind of stays draped on you even when the sun's out. I haven't gone out of my way to see people yet. I'm still moving, working, that part doesn't stop. But sitting with someone, sharing a beer, that takes a little more than blue sky. The mood outlasts the weather, I think. The sun gets you halfway there, the rest is on you.",
+        "factIds": [
+          "F-5505588c0659",
+          "F-1599fe05d071"
+        ],
+        "src": "packet.W2[POP-00223]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00320",
+        "name": "Cee Lee",
+        "profile": "Cee Lee — Autonomous Systems Engineer — Lake Merritt",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00509",
+        "name": "Johhny Necklar",
+        "profile": "Johhny Necklar — Hall of Famer from old basketball league MUBA — Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00177",
+        "name": "Elle Lilo",
+        "profile": "Elle Lilo — Harbor Tugboat Captain — Jack London",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00223",
+        "name": "Rafael Brannie",
+        "profile": "Rafael Brannie — Mover — Piedmont Ave",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Noah Tan",
+        "text": "The clear streak may not reach everyone the same way — some of the six may still be indoors despite the sun",
+        "publishable": false
+      },
+      {
+        "from": "Noah Tan",
+        "text": "Grand Lake's busy sidewalks may be full of people who were never hunkered down, not the ones the cold actually touched",
+        "publishable": false
+      },
+      {
+        "from": "Noah Tan",
+        "text": "The third clear day might be when the city looks recovered, but the people the record names could still be catching up",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "sensory dress of a Packet-named place already in the season-feel facts",
+      "the reporter's presence at that place",
+      "transitions that add no forecast or unsupplied measurement"
+    ],
+    "textureConditions": [
+      "every named person, place, illness, holiday, venue, and movement change must come from the Packet",
+      "do not announce season or temperature as the lede",
+      "do not import real-world Oakland winter tropes absent from the Packet",
+      "raw engine fields and source paths may not appear as public prose"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "office": "council_d1",
+  "cycle": 113,
+  "speaker": "Denise Carter",
+  "cascadeSummary": "I cast the yes vote to advance the West Oakland Tenant Defense Fund, knowing displacement doesn't pause for process. I'm also directing a targeted municipal service audit for the Brooklyn corridor — the numbers there have been flashing for cycles and I'm done watching from the dais. And I'm holding the line on the Stabilization Fund: month twelve means renewing the charter, not closing the book.",
+  "statements": [
+    {
+      "statementId": "STMT-113-council_d1-001",
+      "type": "vote_statement",
+      "topic": "West Oakland Tenant Defense Fund — committee vote",
+      "initiative": "INIT-010",
+      "decision": "Vote YES to advance INIT-010 out of committee to the full council with the $4.2M legal defense appropriation intact.",
+      "quote": "Legal defense is housing stability — and Oakland funds both.",
+      "fullStatement": "This fund is the difference between a family that fights and a family that folds. I've watched the flats build out while the people who held this neighborhood together get priced out. The Tenant Defense Fund puts a lawyer in their corner. I'm voting yes to move it to the full council — not because the process is perfect, but because every cycle we wait, more families get displaced. Displacement doesn't pause for process, and neither should we.",
+      "disposition": "YES",
+      "actionAsked": "Advance INIT-010 to the full council for a final vote next cycle.",
+      "tone": "resolute",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-113-council_d1-002",
+      "type": "vote_statement",
+      "topic": "West Oakland Stabilization Fund — month-twelve disbursement and charter renewal",
+      "initiative": "INIT-001",
+      "decision": "Approve the final $400K disbursement and direct the administration to draft a charter renewal proposal that keeps the Stabilization Fund serving long-tenure West Oakland residents and businesses.",
+      "quote": "Five million dollars kept 47 families in their homes — that's Oakland keeping its word.",
+      "fullStatement": "Twelve months. 47 families. $5 million. That's what keeping our word looks like. The Stabilization Fund has proven that when we target resources at the people who've been pushed to the edge, they stay — and our neighborhoods stay whole. I'm approving this month's disbursement and directing the administration to bring back a charter renewal. The work can't stop at month twelve. West Oakland is still my district, and these families are still my neighbors.",
+      "disposition": "YES",
+      "actionAsked": "Approve the month-twelve disbursement and return with a charter renewal proposal next cycle.",
+      "tone": "firm",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-113-council_d1-003",
+      "type": "statement",
+      "topic": "Brooklyn corridor municipal service audit",
+      "initiative": null,
+      "decision": "Publish a targeted municipal service audit for the Brooklyn corridor covering street lighting, sanitation, and small business support, with findings due within two cycles.",
+      "quote": "Brooklyn's vitality comes from its people — not City Hall's policies.",
+      "fullStatement": "I've been saying it for cycles and I'll say it again: Brooklyn's vitality comes from its people, not City Hall's policies. But people can only hold a neighborhood together if the lights work, the trash gets picked up, and the storefronts feel safe to stay open late. The sentiment is flat, the trade is slow, and I'm not going to keep reading the same numbers while the people on the ground keep living them. I'm directing a targeted municipal service audit for the corridor — lighting, sanitation, and small business support — so we know exactly where the gaps are and what we need to fix first.",
+      "disposition": "statement",
+      "actionAsked": "Direct the city administrator to complete and publish a Brooklyn corridor municipal service audit within two cycles.",
+      "tone": "determined",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    }
+  ]
+}

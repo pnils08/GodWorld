@@ -1,0 +1,17 @@
+{
+  "draft": "output/cron-compare/civic_c114_luis-navarro_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "contractScore": {
+    "opened": false,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 645,
+    "short": "The opening leads with narrative framing rather than the strongest Packet-backed fact followed by the unresolved question.",
+    "score": 3,
+    "model": "google/gemini-3.7-flash",
+    "scoredWithoutRhea": true,
+    "draftSha256": "ac4b0497d45b32721e36b877de9ebb6313e7cfcb522cfc7ace07758d7a0f1a0c"
+  },
+  "ranAt": "2026-11-04T07:46:28.822Z"
+}

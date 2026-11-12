@@ -1,21 +1,21 @@
 {
   "source": "citizen-pages",
-  "generatedAt": "2026-11-01T12:15:12.416Z",
+  "generatedAt": "2026-11-11T14:50:08.945Z",
   "generatedBy": "scripts/scanCitizenPages.js --dump",
-  "liveCycle": 113,
-  "listed": 3222,
-  "admitted": 2275,
+  "liveCycle": 115,
+  "listed": 3785,
+  "admitted": 2626,
   "excluded": {
-    "id": 0,
-    "type": 757,
-    "slot": 166,
-    "cycle": 24,
+    "id": 3,
+    "type": 918,
+    "slot": 212,
+    "cycle": 26,
     "empty": 0
   },
-  "fetchedThisRun": 23,
-  "failedThisRun": 0,
-  "rows": 2275,
-  "citizens": 450,
+  "fetchedThisRun": 7,
+  "failedThisRun": 2,
+  "rows": 2624,
+  "citizens": 496,
   "byCycle": {
     "97": 12,
     "98": 6,
@@ -33,7 +33,9 @@
     "110": 119,
     "111": 158,
     "112": 200,
-    "113": 228
+    "113": 239,
+    "114": 249,
+    "115": 89
   },
   "rule": "customId cp-POP-xxxxx-c<N>-<slot>, an optional -<weekday>[-<ref a-p x6>] after the daypart split off as day/ref; metadata.type in {reflection,tension}; slot matches ^(?:morning|midday|afternoon|evening|night|work|PRESS|CONVO|INTERVIEW|DISCORD|DEBATE)(?:-tension(?:-resolved)?)?$; cycle <= live cycle; non-empty content"
 }

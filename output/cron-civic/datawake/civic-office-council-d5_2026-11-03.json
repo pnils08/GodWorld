@@ -1,0 +1,69 @@
+{
+  "office": "council_d5",
+  "agentDir": "civic-office-council-d5",
+  "holder": "Janae Rivers",
+  "popid": "POP-00043",
+  "title": "City Council District 5",
+  "date": "2026-11-03",
+  "cycle": 114,
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "statement": "East Oakland has been steady this cycle — sentiment up, retail vitality up, and that did not happen by accident. It happened because people kept showing up for each other while the city was still arguing about paperwork. This week I'm finishing what I promised: the D3 East Oakland community briefing on the Alternative Response Initiative, documented and in the record so every family who called 911 can see their own numbers. And I'm answering the oversight directive on the record — intake parameters and town hall allocations named, not deferred. We do not get to ask East Oakland for patience and then hand back silence.",
+  "moves": [
+    {
+      "type": "work",
+      "payload": {
+        "initiativeId": "INIT-002"
+      }
+    },
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-107-civic-office-council-d5",
+        "text": "Janae Rivers, D5, answering on the record. On INIT-002 East Oakland emergency deployment: the community briefing is my deliverable and it will be held and documented in East Oakland, with the dispatch data presented in plain language to the residents who called — response times, who answered, and how referrals to care were handled. District oversight means the briefing record comes back to this body, not just a press release. On INIT-007 enrollment town hall: intake is by neighborhood, and East Oakland's slots are held for East Oakland applicants — I want the placement-gap analysis published so families can see where the first cohort landed before the next enrollment window asks them to trust it. I am confirming both parameters now; if the administration's intake design differs, I want that divergence in writing.",
+        "directiveCycle": 107,
+        "confrontationSeat": "civic-office-council-d5"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-11-03T11:45:10.643Z",
+  "usage": {
+    "prompt_tokens": 6507,
+    "completion_tokens": 350,
+    "total_tokens": 6857,
+    "cost": 0.00121612,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.00121612,
+      "upstream_inference_prompt_cost": 0.00104112,
+      "upstream_inference_completions_cost": 0.000175
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "fellBackFrom": null,
+  "evidenceGenerationHash": "625fc65e258fd2fe3d38d613ddc8fe6e9ae4ae4487a8350ea1d8882ac488130d",
+  "evidenceReads": [],
+  "provider": "Wafer",
+  "finishReason": "stop",
+  "elapsedMs": 2663,
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00043",
+    "id": "pUMUBqomVhvJcMqynRFCu2",
+    "customId": "cp-POP-00043-c114-CIVIC-datawake-2026-11-03"
+  }
+}

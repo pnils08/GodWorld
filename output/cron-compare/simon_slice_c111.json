@@ -1,0 +1,160 @@
+{
+  "empty": false,
+  "cycle": 111,
+  "kind": "simon-longview",
+  "desk": "sports",
+  "journalist": {
+    "name": "Simon Leary",
+    "popid": "POP-00016",
+    "persona": "simon-leary"
+  },
+  "pulse": {
+    "className": "role-change-under-continuity",
+    "score": 54,
+    "label": "The A's record is 4-1."
+  },
+  "prewrite": {
+    "bagModes": [
+      {
+        "id": 2,
+        "name": "Keystone Player"
+      },
+      {
+        "id": 4,
+        "name": "Load-Bearing Continuity"
+      }
+    ],
+    "anchorFacts": [
+      "The A's record is 4-1.",
+      "The A's have won 3 straight."
+    ],
+    "claim": "A role change inside a sustained team record can support a structural interpretation; it does not establish franchise history, organizational intent, or citywide meaning.",
+    "missing": [
+      "why the role change was made",
+      "historical comparison or franchise precedent",
+      "organizational intention or future plan",
+      "citywide, clubhouse, or fan interpretation"
+    ],
+    "hooks": []
+  },
+  "hooks": [],
+  "seeds": [],
+  "civicFacts": [
+    "FranchiseStability (feed): growing — sports feed",
+    "EconomicFootprint (feed): booming — sports feed",
+    "EventTrigger (feed): championship — sports feed",
+    "HomeNeighborhood (feed): Downtown — sports feed",
+    "FranchiseStability (feed): growing — sports feed",
+    "EconomicFootprint (feed): booming — sports feed"
+  ],
+  "story": {
+    "angle": "The A's record is 4-1.",
+    "label": "The A's record is 4-1.",
+    "hookLine": "The A's record is 4-1.",
+    "kind": "long-view-signal",
+    "hood": "Downtown",
+    "popids": [
+      "POP-00033",
+      "POP-00597",
+      "POP-00001",
+      "POP-00018"
+    ],
+    "citizens": [
+      "John Ellis (POP-00033)",
+      "Eric Taveras (POP-00597)",
+      "Vinnie Keane (POP-00001)",
+      "Benji Dillon (POP-00018)"
+    ],
+    "ref": "world_summary_c111.md ## Sports",
+    "cycle": 111
+  },
+  "approach": "Long-view approach (Simon Leary): third-person essayist. Treat supplied sports facts as present structure, not as proof of history or collective memory. A metaphor about continuity, load, or change may interpret the Packet but may not add a person, place, institution, event, season, statistic, cause, organizational intention, or citywide belief. Do not write a game recap, Hal elegy, P Slayer fan heat, or Anthony board memo.",
+  "players": [
+    {
+      "name": "John Ellis",
+      "popid": "POP-00033",
+      "role": "Starting Pitcher, Oakland A's",
+      "neighborhood": "Laurel",
+      "why": "feed-names"
+    },
+    {
+      "name": "Eric Taveras",
+      "popid": "POP-00597",
+      "role": "Second Baseman, Oakland A's",
+      "neighborhood": "Downtown",
+      "why": "feed-names"
+    },
+    {
+      "name": "Vinnie Keane",
+      "popid": "POP-00001",
+      "role": "Designated Hitter, Oakland A's Legend",
+      "neighborhood": "Grand Lake",
+      "why": "feed-names"
+    },
+    {
+      "name": "Benji Dillon",
+      "popid": "POP-00018",
+      "role": "Pitcher, Oakland A's Legend",
+      "neighborhood": "Rockridge",
+      "why": "feed-names"
+    }
+  ],
+  "scene": {
+    "colorRoom": "No witnessed room or scene is supplied. Structure and continuity may appear only as clearly interpretive metaphor grounded in the approved present facts."
+  },
+  "candidates": [
+    {
+      "score": 58,
+      "cycle": 111,
+      "team": "A's",
+      "label": "The Oakland A's and Vladimir Gonzales support wellness at the Fruitvale Community Clinic."
+    },
+    {
+      "score": 58,
+      "cycle": 111,
+      "team": "A's",
+      "label": "The city celebrates its championship, we look at the looming decisions heading into the offseason"
+    },
+    {
+      "score": 54,
+      "cycle": 110,
+      "team": "A's",
+      "label": "John Ellis bounces back in game 5 to win the A's their 7th World Series title under Mike Paulson. Eric Taveras fittingly provides the power along with veterans Darrin Davis , and Mark Aitken. Vinnie Keane , Benji Dillon appear in their final games."
+    },
+    {
+      "score": 42,
+      "cycle": 109,
+      "team": "A's",
+      "label": "Travis Coles and the bullpen struggle, Eric Taveras shows up big again but not enough."
+    },
+    {
+      "score": 30,
+      "cycle": 111,
+      "team": "A's",
+      "label": "The A's parade roll through Downtown."
+    },
+    {
+      "score": 30,
+      "cycle": 111,
+      "team": "A's",
+      "label": "Open space to cover A's players/team"
+    },
+    {
+      "score": 30,
+      "cycle": 111,
+      "team": "Oaks",
+      "label": "Elliot Abraham faces the media, is Draymond coming back to the Oaks?"
+    },
+    {
+      "score": 30,
+      "cycle": 111,
+      "team": "Oaks",
+      "label": "Adash Stanley in attendance at the A's rally to show support."
+    }
+  ],
+  "pointers": [
+    "output/world_summary_c111.md ## Sports",
+    "scripts/sportsSubstrate.js",
+    "docs/media/SIMON_LONGVIEW_BAG.md"
+  ]
+}

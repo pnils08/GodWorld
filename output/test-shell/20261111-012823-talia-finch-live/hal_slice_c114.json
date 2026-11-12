@@ -1,0 +1,233 @@
+{
+  "empty": false,
+  "cycle": 114,
+  "kind": "hal-archive",
+  "desk": "sports",
+  "journalist": {
+    "name": "Hal Richmond",
+    "popid": "POP-00007",
+    "persona": "hal-richmond",
+    "bagDoc": "docs/media/HAL_ARCHIVE_BAG.md"
+  },
+  "pulse": {
+    "className": "era-door",
+    "score": 81,
+    "label": "A's — player-feature — supplied C114 line card",
+    "team": "A's",
+    "eventKind": "player-feature",
+    "seasonType": "off-season",
+    "storyAngle": "The last of the dynasty core: how long do Kelley and Davis have?",
+    "hasStats": true,
+    "record": "-",
+    "streak": "-",
+    "foilNumber": "7.4WAR",
+    "closingNote": "the line that holds",
+    "feedCycle": 114
+  },
+  "bag": {
+    "modes": [
+      {
+        "id": 6,
+        "name": "What He Became"
+      },
+      {
+        "id": 8,
+        "name": "The Archive Entry"
+      }
+    ],
+    "historicalAnchor": "era door — living chapter vs the age it closes or extends",
+    "closingNote": "the line that holds",
+    "claim": "Present fact: 7.4WAR on the feed. Archive claim: the man behind the line — The last of the dynasty core: how long do Kelley and Davis have? Close toward the line that holds."
+  },
+  "friction": {
+    "a": "Present feed fact: The last of the dynasty core: how long do Kelley and Davis have?",
+    "b": "Wire copy / FO strategy / bleacher heat that skips time",
+    "frame": "Present first, then echo — end on the line that holds."
+  },
+  "prewrite": {
+    "reporter": "Hal Richmond",
+    "bagModes": [
+      {
+        "id": 6,
+        "name": "What He Became"
+      },
+      {
+        "id": 8,
+        "name": "The Archive Entry"
+      }
+    ],
+    "historicalAnchor": "era door — living chapter vs the age it closes or extends",
+    "presentFacts": [
+      "Event (feed): A's — player-feature (off-season)",
+      "Cycle: C114"
+    ],
+    "dossierFacts": [
+      "Isley Kelley TrueSource: 2041 REGULAR SEASON G: 136 PA: 605 AB: 563 R: 94 H: 181 2B: 41 3B: 3 HR: 31 RBI: 103 BB: 28 SO: 54 HBP: 6 SF: 8 SAC: 0 GIDP: 6 AVG: 0.321 OBP: 0.355 S | WAR: 7.4 | AWARDS (Career Reference) - MVP (2032, 2034, 2035) - Rookie of the Year (2026) - All-Star ",
+      "Darrin Davis TrueSource: 2041 REGULAR SEASON G: 95 PA: 406 AB: 374 R: 62 H: 114 2B: 28 3B: 4 HR: 24 RBI: 73 BB: 22 SO: 42 HBP: 6 SF: 4 SAC: 0 GIDP: 3 AVG: 0.305 OBP: 0.350 SLG | WAR: 3.6 | AWARDS (Career Reference) - MVP (2037, 2040) - Hank Aaron Award (2033, 2037) - Silver Slug",
+      "Danny Horn TrueSource: 2041 REGULAR SEASON G: 148 PA: 671 AB: 621 R: 152 H: 210 2B: 48 3B: 9 HR: 56 RBI: 113 BB: 35 SO: 65 HBP: 11 SF: 4 SAC: 0 GIDP: 3 AVG: 0.338 OBP: 0.382 | WAR: 13.3 | AWARDS (Career Reference) - All-Star (2038, 2039, 2040) - Silver Slugger (2039) - MVP (204"
+    ],
+    "closingNote": "the line that holds",
+    "priorFiling": "NONE — wall may still inject at wake",
+    "claim": "Present fact: 7.4WAR on the feed. Archive claim: the man behind the line — The last of the dynasty core: how long do Kelley and Davis have? Close toward the line that holds.",
+    "foilNumber": "7.4WAR",
+    "missing": [
+      "Historical people, places, teams, events, seasons, and statistics are unsupplied unless named in the packet",
+      "No invented seasons or franchise history beyond packet + feed",
+      "No x-stats / barrel% / invented OPS+",
+      "Not a business-desk storefront assignment",
+      "Not P Slayer charge; not Anthony board architecture as spine"
+    ],
+    "hooks": []
+  },
+  "hooks": [],
+  "seeds": [],
+  "priorTakes": [],
+  "story": {
+    "angle": "What the supplied C114 line card establishes, and what history remains unsupplied.",
+    "label": "A's — player-feature — supplied C114 line card",
+    "hookLine": "A's — player-feature — supplied C114 line card",
+    "hood": "Glenview",
+    "pulseClass": "era-door",
+    "team": "A's",
+    "eventKind": "player-feature",
+    "closingNote": "the line that holds",
+    "citizens": [
+      "Isley Kelley (POP-00019)",
+      "Darrin Davis (POP-00021)",
+      "Danny Horn (POP-00022)"
+    ],
+    "popids": [
+      "POP-00019",
+      "POP-00021",
+      "POP-00022"
+    ],
+    "ref": "world_summary_c114.md ## Sports",
+    "cycle": 114
+  },
+  "approach": "Historian approach (Hal Richmond): the Origins of the Dynasty bar — third-person biography, first person at most once; literary, not wire, not bleacher rage. Present fact first (feed-true: StoryAngle, Stats, record), then the ground the man came from. An origin, road, nickname or recorded word may enter only when canon_search or the Packet holds it; otherwise leave it out. Pick 1–2 archive-bag shapes. Numbers plain as the record prints them, not poetry and not scouting grades. End on the closing note in this slice (the line that holds, or the quiet note the class carries). FORBIDDEN: fan \"we\" charge, Anthony salary–value architecture as spine, elegy as the default register, inventing seasons/x-stats, FO bullet strategy, business-desk storefront assignment, multi-voice sports-desk average.",
+  "players": [
+    {
+      "name": "Isley Kelley",
+      "popid": "POP-00019",
+      "role": "Shortstop, Oakland A's Legend",
+      "neighborhood": "Rockridge",
+      "why": "feed-names"
+    },
+    {
+      "name": "Darrin Davis",
+      "popid": "POP-00021",
+      "role": "Left Fielder, Oakland A's Legend",
+      "neighborhood": "Piedmont Ave",
+      "why": "feed-names"
+    },
+    {
+      "name": "Danny Horn",
+      "popid": "POP-00022",
+      "role": "Center Fielder, Oakland A's - Best player in the MLB",
+      "neighborhood": "Temescal",
+      "why": "feed-names"
+    }
+  ],
+  "scene": {
+    "neighborhood": "Glenview",
+    "record": "-",
+    "streak": "-",
+    "colorRoom": "An unnamed desk or quiet archive transition; literary texture may carry no witnessed event. People, places, teams, seasons, events, and statistics only from the packet. Not a business storefront beat."
+  },
+  "candidates": [
+    {
+      "score": 81,
+      "cycle": 114,
+      "team": "A's",
+      "primary": "era-door",
+      "hasStats": true,
+      "angle": "The last of the dynasty core: how long do Kelley and Davis have?",
+      "priorHits": 0
+    },
+    {
+      "score": 78,
+      "cycle": 114,
+      "team": "A's",
+      "primary": "era-door",
+      "hasStats": true,
+      "angle": "Keane said goodbye. Dillon still hasn't.",
+      "priorHits": 0
+    },
+    {
+      "score": 74,
+      "cycle": 114,
+      "team": "A's",
+      "primary": "era-door",
+      "hasStats": true,
+      "angle": "$22 million in veteran relief and the rookies got the October innings. Is a bullpen refresh coming?",
+      "priorHits": 0
+    },
+    {
+      "score": 62,
+      "cycle": 114,
+      "team": "Oaks",
+      "primary": "metrics-poetry",
+      "hasStats": true,
+      "angle": "The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+      "priorHits": 0
+    },
+    {
+      "score": 62,
+      "cycle": 112,
+      "team": "A's",
+      "primary": "era-door",
+      "hasStats": true,
+      "angle": "Mark Aitken pending free agency, is it Kevin Clarks time?",
+      "priorHits": 0
+    },
+    {
+      "score": 61,
+      "cycle": 114,
+      "team": "A's",
+      "primary": "metrics-poetry",
+      "hasStats": true,
+      "angle": "The bargain core: is it time to extend Coles, Ellis, Quintero and Gonzalez?",
+      "priorHits": 0
+    },
+    {
+      "score": 59,
+      "cycle": 114,
+      "team": "A's",
+      "primary": "break-continuity",
+      "hasStats": true,
+      "angle": "Five starters and one Carmen Mesa. Who is the odd arm out?",
+      "priorHits": 0
+    },
+    {
+      "score": 59,
+      "cycle": 112,
+      "team": "Oaks",
+      "primary": "threshold",
+      "hasStats": true,
+      "angle": "The Oaks open their inaugural season at home. AJ Dybantsa shines in his rookie debut as the Oaks win their first win as a franchise.",
+      "priorHits": 0
+    },
+    {
+      "score": 58,
+      "cycle": 114,
+      "team": "Oaks",
+      "primary": "season-tide",
+      "hasStats": true,
+      "angle": "The Oaks bounce back with a 60-point rout in Toronto. Oaks 135 - Raptors 75",
+      "priorHits": 0
+    },
+    {
+      "score": 56,
+      "cycle": 113,
+      "team": "A's",
+      "primary": "metrics-poetry",
+      "hasStats": true,
+      "angle": "The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+      "priorHits": 0
+    }
+  ],
+  "pointers": [
+    "output/world_summary_c114.md ## Sports",
+    "docs/media/HAL_ARCHIVE_BAG.md"
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "draft": "output/cron-compare/civic_c114_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "114",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "7c6fc88078526eb2506cb892d7a632bad5de80a0035cd2f0c7cfcaa2a1f29fd2",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Chinatown health census analysis and resident quotes verify cleanly against ground truth and interview records with zero discrepancies.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "lila-health-service-v1",
+    "packageVersion": "LILA-LEP2-2",
+    "manifestId": "AM-565616bef8b2",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "134"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Akua Adeyemi",
+      "Deacon Seymour",
+      "Jax Caldera",
+      "Maurice Franklin",
+      "Yu Zen"
+    ],
+    "unverified": [
+      "Health Department"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0109,
+  "durationMs": 6161,
+  "parseError": false,
+  "ranAt": "2026-11-04T07:40:49.217Z",
+  "contractScore": {
+    "opened": false,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": false,
+    "inTargetBy": "judge",
+    "words": 1000,
+    "short": "The opening paragraph begins with a resident profile rather than a Packet-backed fact, and the text falls short of the 1000-word target.",
+    "score": 2,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "7c6fc88078526eb2506cb892d7a632bad5de80a0035cd2f0c7cfcaa2a1f29fd2",
+    "costUsd": 0.0026
+  }
+}

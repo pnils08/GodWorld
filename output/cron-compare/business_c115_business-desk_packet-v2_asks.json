@@ -1,0 +1,598 @@
+[
+  {
+    "pop": "POP-00135",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00135\",\"name\":\"Mina Linas\",\"role\":\"Sea Level Monitoring Technician\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Jordan Velez\",\"question\":\"Mina, the operation is down to you — what happened to the other two technicians, and how much of the monitoring can you actually still do alone? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"Baylight District\",\"focus\":\"Marine Systems shedding half its staff in a booming district — what the contraction means for the work and for the block\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Mina Linas — Sea Level Monitoring Technician — Marine Systems, Baylight District\",\"evidence\":[{\"id\":\"EV-20363aad2a\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115\",\"text\":\"Keisha Ramos, Director, Baylight Redevelopment Authority at Baylight Construction Authority. 12 named workers at 4 named businesses in Baylight District on the ledger this cycle.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Marine Systems · Science · 3 employees (-2 vs C114) · growth -2.9% · on the roster: Mina Linas (Sea Level Monitoring Technician)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115\",\"id\":\"F-d575692a7908\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C115\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-bc84fc0b7718\"},{\"t\":\"FACT\",\"text\":\"Baylight District businesses · Baylight Construction Authority, Anthropic\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115\",\"id\":\"F-5b93d3d637ee\"},{\"t\":\"FACT\",\"text\":\"Keisha Ramos, Director, Baylight Redevelopment Authority at Baylight Construction Authority. 12 named workers at 4 named businesses in Baylight District on the ledger this cycle.\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115\",\"id\":\"F-614e8835a5e5\"},{\"t\":\"FACT\",\"text\":\"Baylight Construction Authority · Construction · 451 employees · growth 1.7% · revenue $31.3M (+$10k vs C114) · on the roster: Keisha Ramos (Director, Baylight Redevelopment Authority); Brianna Lee (Historic Preservation Carpenter); Tariq Jello (Appliance Repair Technician); Talmon Lint (Solar Panel Installation Lead) +36 more\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115\",\"id\":\"F-7f84a70d4cf5\"},{\"t\":\"FACT\",\"text\":\"Anthropic · AI Research · 86 employees · growth 2.7% · revenue $649.8M (+$335k vs C114) · on the roster: Broderick Mitchell (Security guard); Kelvon Ochoa (AI Safety Researcher (Anthropic)); Iggy Davis (AI Safety Researcher (Anthropic)); Linda Chow (AI Safety Researcher (Anthropic)) +7 more\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115\",\"id\":\"F-4576ba249243\"},{\"t\":\"FACT\",\"text\":\"Oakland Casino Town · Nightlife & Entertainment · 99 employees (-1 vs C114) · growth -2.3% · on the roster: Gregory Mims (Organized Crime); Philly Rodriguez (Casino Manager); Manfred Owens (Booky)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115\",\"id\":\"F-ca743cc2f158\"},{\"t\":\"FACT\",\"text\":\"DigitalOcean · Cloud Infrastructure · 800 employees · growth 5.2% · revenue $521.4M (+$525k vs C114)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115\",\"id\":\"F-6240d90683dc\"},{\"t\":\"FACT\",\"text\":\"Mina Linas — Sea Level Monitoring Technician — Marine Systems, Baylight District\",\"src\":\"Simulation_Ledger profile for POP-00135\",\"id\":\"F-17505e7b0d85\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00135",
+        "name": "Mina Linas",
+        "role": "Sea Level Monitoring Technician",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Jordan Velez",
+        "question": "Mina, the operation is down to you — what happened to the other two technicians, and how much of the monitoring can you actually still do alone? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "Baylight District",
+        "focus": "Marine Systems shedding half its staff in a booming district — what the contraction means for the work and for the block",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Mina Linas — Sea Level Monitoring Technician — Marine Systems, Baylight District",
+        "evidence": [
+          {
+            "id": "EV-20363aad2a",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+            "text": "Keisha Ramos, Director, Baylight Redevelopment Authority at Baylight Construction Authority. 12 named workers at 4 named businesses in Baylight District on the ledger this cycle."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Marine Systems · Science · 3 employees (-2 vs C114) · growth -2.9% · on the roster: Mina Linas (Sea Level Monitoring Technician)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+          "id": "F-d575692a7908"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C115",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-bc84fc0b7718"
+        },
+        {
+          "t": "FACT",
+          "text": "Baylight District businesses · Baylight Construction Authority, Anthropic",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+          "id": "F-5b93d3d637ee"
+        },
+        {
+          "t": "FACT",
+          "text": "Keisha Ramos, Director, Baylight Redevelopment Authority at Baylight Construction Authority. 12 named workers at 4 named businesses in Baylight District on the ledger this cycle.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+          "id": "F-614e8835a5e5"
+        },
+        {
+          "t": "FACT",
+          "text": "Baylight Construction Authority · Construction · 451 employees · growth 1.7% · revenue $31.3M (+$10k vs C114) · on the roster: Keisha Ramos (Director, Baylight Redevelopment Authority); Brianna Lee (Historic Preservation Carpenter); Tariq Jello (Appliance Repair Technician); Talmon Lint (Solar Panel Installation Lead) +36 more",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+          "id": "F-7f84a70d4cf5"
+        },
+        {
+          "t": "FACT",
+          "text": "Anthropic · AI Research · 86 employees · growth 2.7% · revenue $649.8M (+$335k vs C114) · on the roster: Broderick Mitchell (Security guard); Kelvon Ochoa (AI Safety Researcher (Anthropic)); Iggy Davis (AI Safety Researcher (Anthropic)); Linda Chow (AI Safety Researcher (Anthropic)) +7 more",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+          "id": "F-4576ba249243"
+        },
+        {
+          "t": "FACT",
+          "text": "Oakland Casino Town · Nightlife & Entertainment · 99 employees (-1 vs C114) · growth -2.3% · on the roster: Gregory Mims (Organized Crime); Philly Rodriguez (Casino Manager); Manfred Owens (Booky)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+          "id": "F-ca743cc2f158"
+        },
+        {
+          "t": "FACT",
+          "text": "DigitalOcean · Cloud Infrastructure · 800 employees · growth 5.2% · revenue $521.4M (+$525k vs C114)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+          "id": "F-6240d90683dc"
+        },
+        {
+          "t": "FACT",
+          "text": "Mina Linas — Sea Level Monitoring Technician — Marine Systems, Baylight District",
+          "src": "Simulation_Ledger profile for POP-00135",
+          "id": "F-17505e7b0d85"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C11, Spring, holiday=none",
+          "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+          "id": "F-82d77e9a4a71"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00027",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00027\",\"name\":\"Philly Rodriguez\",\"role\":\"Casino Manager\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Jordan Velez\",\"question\":\"Philly, the casino is down a head count and the district is changing around you — how does the business hold up when the neighborhood shifts this fast? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"Baylight District\",\"focus\":\"Marine Systems shedding half its staff in a booming district — what the contraction means for the work and for the block\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Philly Rodriguez — Casino Manager — Oakland Casino Town, Baylight District\",\"evidence\":[{\"id\":\"EV-bfee7a52a4\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115\",\"text\":\"Keisha Ramos, Director, Baylight Redevelopment Authority at Baylight Construction Authority. 12 named workers at 4 named businesses in Baylight District on the ledger this cycle.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Oakland Casino Town · Nightlife & Entertainment · 99 employees (-1 vs C114) · growth -2.3% · on the roster: Gregory Mims (Organized Crime); Philly Rodriguez (Casino Manager); Manfred Owens (Booky)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115\",\"id\":\"F-ca743cc2f158\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C115\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-bc84fc0b7718\"},{\"t\":\"FACT\",\"text\":\"Baylight District businesses · Baylight Construction Authority, Anthropic\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115\",\"id\":\"F-5b93d3d637ee\"},{\"t\":\"FACT\",\"text\":\"Keisha Ramos, Director, Baylight Redevelopment Authority at Baylight Construction Authority. 12 named workers at 4 named businesses in Baylight District on the ledger this cycle.\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115\",\"id\":\"F-614e8835a5e5\"},{\"t\":\"FACT\",\"text\":\"Baylight Construction Authority · Construction · 451 employees · growth 1.7% · revenue $31.3M (+$10k vs C114) · on the roster: Keisha Ramos (Director, Baylight Redevelopment Authority); Brianna Lee (Historic Preservation Carpenter); Tariq Jello (Appliance Repair Technician); Talmon Lint (Solar Panel Installation Lead) +36 more\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115\",\"id\":\"F-7f84a70d4cf5\"},{\"t\":\"FACT\",\"text\":\"Anthropic · AI Research · 86 employees · growth 2.7% · revenue $649.8M (+$335k vs C114) · on the roster: Broderick Mitchell (Security guard); Kelvon Ochoa (AI Safety Researcher (Anthropic)); Iggy Davis (AI Safety Researcher (Anthropic)); Linda Chow (AI Safety Researcher (Anthropic)) +7 more\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115\",\"id\":\"F-4576ba249243\"},{\"t\":\"FACT\",\"text\":\"Marine Systems · Science · 3 employees (-2 vs C114) · growth -2.9% · on the roster: Mina Linas (Sea Level Monitoring Technician)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115\",\"id\":\"F-d575692a7908\"},{\"t\":\"FACT\",\"text\":\"DigitalOcean · Cloud Infrastructure · 800 employees · growth 5.2% · revenue $521.4M (+$525k vs C114)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115\",\"id\":\"F-6240d90683dc\"},{\"t\":\"FACT\",\"text\":\"Philly Rodriguez — Casino Manager — Oakland Casino Town, Baylight District\",\"src\":\"Simulation_Ledger profile for POP-00027\",\"id\":\"F-1dd91e8250aa\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00027",
+        "name": "Philly Rodriguez",
+        "role": "Casino Manager",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Jordan Velez",
+        "question": "Philly, the casino is down a head count and the district is changing around you — how does the business hold up when the neighborhood shifts this fast? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "Baylight District",
+        "focus": "Marine Systems shedding half its staff in a booming district — what the contraction means for the work and for the block",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Philly Rodriguez — Casino Manager — Oakland Casino Town, Baylight District",
+        "evidence": [
+          {
+            "id": "EV-bfee7a52a4",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+            "text": "Keisha Ramos, Director, Baylight Redevelopment Authority at Baylight Construction Authority. 12 named workers at 4 named businesses in Baylight District on the ledger this cycle."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Oakland Casino Town · Nightlife & Entertainment · 99 employees (-1 vs C114) · growth -2.3% · on the roster: Gregory Mims (Organized Crime); Philly Rodriguez (Casino Manager); Manfred Owens (Booky)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+          "id": "F-ca743cc2f158"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C115",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-bc84fc0b7718"
+        },
+        {
+          "t": "FACT",
+          "text": "Baylight District businesses · Baylight Construction Authority, Anthropic",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+          "id": "F-5b93d3d637ee"
+        },
+        {
+          "t": "FACT",
+          "text": "Keisha Ramos, Director, Baylight Redevelopment Authority at Baylight Construction Authority. 12 named workers at 4 named businesses in Baylight District on the ledger this cycle.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+          "id": "F-614e8835a5e5"
+        },
+        {
+          "t": "FACT",
+          "text": "Baylight Construction Authority · Construction · 451 employees · growth 1.7% · revenue $31.3M (+$10k vs C114) · on the roster: Keisha Ramos (Director, Baylight Redevelopment Authority); Brianna Lee (Historic Preservation Carpenter); Tariq Jello (Appliance Repair Technician); Talmon Lint (Solar Panel Installation Lead) +36 more",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+          "id": "F-7f84a70d4cf5"
+        },
+        {
+          "t": "FACT",
+          "text": "Anthropic · AI Research · 86 employees · growth 2.7% · revenue $649.8M (+$335k vs C114) · on the roster: Broderick Mitchell (Security guard); Kelvon Ochoa (AI Safety Researcher (Anthropic)); Iggy Davis (AI Safety Researcher (Anthropic)); Linda Chow (AI Safety Researcher (Anthropic)) +7 more",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+          "id": "F-4576ba249243"
+        },
+        {
+          "t": "FACT",
+          "text": "Marine Systems · Science · 3 employees (-2 vs C114) · growth -2.9% · on the roster: Mina Linas (Sea Level Monitoring Technician)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+          "id": "F-d575692a7908"
+        },
+        {
+          "t": "FACT",
+          "text": "DigitalOcean · Cloud Infrastructure · 800 employees · growth 5.2% · revenue $521.4M (+$525k vs C114)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+          "id": "F-6240d90683dc"
+        },
+        {
+          "t": "FACT",
+          "text": "Philly Rodriguez — Casino Manager — Oakland Casino Town, Baylight District",
+          "src": "Simulation_Ledger profile for POP-00027",
+          "id": "F-1dd91e8250aa"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C11, Spring, holiday=none",
+          "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+          "id": "F-82d77e9a4a71"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00041",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00041\",\"name\":\"Keisha Ramos\",\"role\":\"Director, Baylight Redevelopment Authority\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Jordan Velez\",\"question\":\"Using only the supplied facts, what about \\\"Marine Systems shedding half its staff in a booming district — what the contraction means for the work and for the block\\\" creates accountability for you, and what answer do you want? Do not claim any past or future official action that is not in the Packet.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"Baylight District\",\"focus\":\"Marine Systems shedding half its staff in a booming district — what the contraction means for the work and for the block\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Keisha Ramos — Director, Baylight Redevelopment Authority — Baylight Construction Authority, Baylight District\",\"evidence\":[{\"id\":\"EV-0e3dadf456\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115\",\"text\":\"Keisha Ramos, Director, Baylight Redevelopment Authority at Baylight Construction Authority. 12 named workers at 4 named businesses in Baylight District on the ledger this cycle.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Keisha Ramos, Director, Baylight Redevelopment Authority at Baylight Construction Authority. 12 named workers at 4 named businesses in Baylight District on the ledger this cycle.\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115\",\"id\":\"F-614e8835a5e5\"},{\"t\":\"FACT\",\"text\":\"Baylight Construction Authority · Construction · 451 employees · growth 1.7% · revenue $31.3M (+$10k vs C114) · on the roster: Keisha Ramos (Director, Baylight Redevelopment Authority); Brianna Lee (Historic Preservation Carpenter); Tariq Jello (Appliance Repair Technician); Talmon Lint (Solar Panel Installation Lead) +36 more\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115\",\"id\":\"F-7f84a70d4cf5\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C115\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-bc84fc0b7718\"},{\"t\":\"FACT\",\"text\":\"Baylight District businesses · Baylight Construction Authority, Anthropic\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115\",\"id\":\"F-5b93d3d637ee\"},{\"t\":\"FACT\",\"text\":\"Anthropic · AI Research · 86 employees · growth 2.7% · revenue $649.8M (+$335k vs C114) · on the roster: Broderick Mitchell (Security guard); Kelvon Ochoa (AI Safety Researcher (Anthropic)); Iggy Davis (AI Safety Researcher (Anthropic)); Linda Chow (AI Safety Researcher (Anthropic)) +7 more\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115\",\"id\":\"F-4576ba249243\"},{\"t\":\"FACT\",\"text\":\"Oakland Casino Town · Nightlife & Entertainment · 99 employees (-1 vs C114) · growth -2.3% · on the roster: Gregory Mims (Organized Crime); Philly Rodriguez (Casino Manager); Manfred Owens (Booky)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115\",\"id\":\"F-ca743cc2f158\"},{\"t\":\"FACT\",\"text\":\"Marine Systems · Science · 3 employees (-2 vs C114) · growth -2.9% · on the roster: Mina Linas (Sea Level Monitoring Technician)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115\",\"id\":\"F-d575692a7908\"},{\"t\":\"FACT\",\"text\":\"DigitalOcean · Cloud Infrastructure · 800 employees · growth 5.2% · revenue $521.4M (+$525k vs C114)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115\",\"id\":\"F-6240d90683dc\"},{\"t\":\"FACT\",\"text\":\"Keisha Ramos — Director, Baylight Redevelopment Authority — Baylight Construction Authority, Baylight District\",\"src\":\"Simulation_Ledger profile for POP-00041\",\"id\":\"F-a6e01b9f7f95\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00041",
+        "name": "Keisha Ramos",
+        "role": "Director, Baylight Redevelopment Authority",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Jordan Velez",
+        "question": "Using only the supplied facts, what about \"Marine Systems shedding half its staff in a booming district — what the contraction means for the work and for the block\" creates accountability for you, and what answer do you want? Do not claim any past or future official action that is not in the Packet."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "Baylight District",
+        "focus": "Marine Systems shedding half its staff in a booming district — what the contraction means for the work and for the block",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Keisha Ramos — Director, Baylight Redevelopment Authority — Baylight Construction Authority, Baylight District",
+        "evidence": [
+          {
+            "id": "EV-0e3dadf456",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+            "text": "Keisha Ramos, Director, Baylight Redevelopment Authority at Baylight Construction Authority. 12 named workers at 4 named businesses in Baylight District on the ledger this cycle."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Keisha Ramos, Director, Baylight Redevelopment Authority at Baylight Construction Authority. 12 named workers at 4 named businesses in Baylight District on the ledger this cycle.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+          "id": "F-614e8835a5e5"
+        },
+        {
+          "t": "FACT",
+          "text": "Baylight Construction Authority · Construction · 451 employees · growth 1.7% · revenue $31.3M (+$10k vs C114) · on the roster: Keisha Ramos (Director, Baylight Redevelopment Authority); Brianna Lee (Historic Preservation Carpenter); Tariq Jello (Appliance Repair Technician); Talmon Lint (Solar Panel Installation Lead) +36 more",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+          "id": "F-7f84a70d4cf5"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C115",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-bc84fc0b7718"
+        },
+        {
+          "t": "FACT",
+          "text": "Baylight District businesses · Baylight Construction Authority, Anthropic",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+          "id": "F-5b93d3d637ee"
+        },
+        {
+          "t": "FACT",
+          "text": "Anthropic · AI Research · 86 employees · growth 2.7% · revenue $649.8M (+$335k vs C114) · on the roster: Broderick Mitchell (Security guard); Kelvon Ochoa (AI Safety Researcher (Anthropic)); Iggy Davis (AI Safety Researcher (Anthropic)); Linda Chow (AI Safety Researcher (Anthropic)) +7 more",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+          "id": "F-4576ba249243"
+        },
+        {
+          "t": "FACT",
+          "text": "Oakland Casino Town · Nightlife & Entertainment · 99 employees (-1 vs C114) · growth -2.3% · on the roster: Gregory Mims (Organized Crime); Philly Rodriguez (Casino Manager); Manfred Owens (Booky)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+          "id": "F-ca743cc2f158"
+        },
+        {
+          "t": "FACT",
+          "text": "Marine Systems · Science · 3 employees (-2 vs C114) · growth -2.9% · on the roster: Mina Linas (Sea Level Monitoring Technician)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+          "id": "F-d575692a7908"
+        },
+        {
+          "t": "FACT",
+          "text": "DigitalOcean · Cloud Infrastructure · 800 employees · growth 5.2% · revenue $521.4M (+$525k vs C114)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+          "id": "F-6240d90683dc"
+        },
+        {
+          "t": "FACT",
+          "text": "Keisha Ramos — Director, Baylight Redevelopment Authority — Baylight Construction Authority, Baylight District",
+          "src": "Simulation_Ledger profile for POP-00041",
+          "id": "F-a6e01b9f7f95"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C11, Spring, holiday=none",
+          "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+          "id": "F-82d77e9a4a71"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00134",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00134\",\"name\":\"Brianna Lee\",\"role\":\"Historic Preservation Carpenter\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Jordan Velez\",\"question\":\"As a resident of Baylight District, what have you seen, felt, or understood about \\\"Marine Systems shedding half its staff in a booming district — what the contraction means for the work and for the block\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"Baylight District\",\"focus\":\"Marine Systems shedding half its staff in a booming district — what the contraction means for the work and for the block\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Brianna Lee — Historic Preservation Carpenter — Baylight Construction Authority, Baylight District\",\"evidence\":[{\"id\":\"EV-f41156805a\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115\",\"text\":\"Keisha Ramos, Director, Baylight Redevelopment Authority at Baylight Construction Authority. 12 named workers at 4 named businesses in Baylight District on the ledger this cycle.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Baylight Construction Authority · Construction · 451 employees · growth 1.7% · revenue $31.3M (+$10k vs C114) · on the roster: Keisha Ramos (Director, Baylight Redevelopment Authority); Brianna Lee (Historic Preservation Carpenter); Tariq Jello (Appliance Repair Technician); Talmon Lint (Solar Panel Installation Lead) +36 more\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115\",\"id\":\"F-7f84a70d4cf5\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C115\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-bc84fc0b7718\"},{\"t\":\"FACT\",\"text\":\"Baylight District businesses · Baylight Construction Authority, Anthropic\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115\",\"id\":\"F-5b93d3d637ee\"},{\"t\":\"FACT\",\"text\":\"Keisha Ramos, Director, Baylight Redevelopment Authority at Baylight Construction Authority. 12 named workers at 4 named businesses in Baylight District on the ledger this cycle.\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115\",\"id\":\"F-614e8835a5e5\"},{\"t\":\"FACT\",\"text\":\"Anthropic · AI Research · 86 employees · growth 2.7% · revenue $649.8M (+$335k vs C114) · on the roster: Broderick Mitchell (Security guard); Kelvon Ochoa (AI Safety Researcher (Anthropic)); Iggy Davis (AI Safety Researcher (Anthropic)); Linda Chow (AI Safety Researcher (Anthropic)) +7 more\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115\",\"id\":\"F-4576ba249243\"},{\"t\":\"FACT\",\"text\":\"Oakland Casino Town · Nightlife & Entertainment · 99 employees (-1 vs C114) · growth -2.3% · on the roster: Gregory Mims (Organized Crime); Philly Rodriguez (Casino Manager); Manfred Owens (Booky)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115\",\"id\":\"F-ca743cc2f158\"},{\"t\":\"FACT\",\"text\":\"Marine Systems · Science · 3 employees (-2 vs C114) · growth -2.9% · on the roster: Mina Linas (Sea Level Monitoring Technician)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115\",\"id\":\"F-d575692a7908\"},{\"t\":\"FACT\",\"text\":\"DigitalOcean · Cloud Infrastructure · 800 employees · growth 5.2% · revenue $521.4M (+$525k vs C114)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115\",\"id\":\"F-6240d90683dc\"},{\"t\":\"FACT\",\"text\":\"Brianna Lee — Historic Preservation Carpenter — Baylight Construction Authority, Baylight District\",\"src\":\"Simulation_Ledger profile for POP-00134\",\"id\":\"F-b5b44d17901b\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00134",
+        "name": "Brianna Lee",
+        "role": "Historic Preservation Carpenter",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Jordan Velez",
+        "question": "As a resident of Baylight District, what have you seen, felt, or understood about \"Marine Systems shedding half its staff in a booming district — what the contraction means for the work and for the block\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "Baylight District",
+        "focus": "Marine Systems shedding half its staff in a booming district — what the contraction means for the work and for the block",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Brianna Lee — Historic Preservation Carpenter — Baylight Construction Authority, Baylight District",
+        "evidence": [
+          {
+            "id": "EV-f41156805a",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+            "text": "Keisha Ramos, Director, Baylight Redevelopment Authority at Baylight Construction Authority. 12 named workers at 4 named businesses in Baylight District on the ledger this cycle."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Baylight Construction Authority · Construction · 451 employees · growth 1.7% · revenue $31.3M (+$10k vs C114) · on the roster: Keisha Ramos (Director, Baylight Redevelopment Authority); Brianna Lee (Historic Preservation Carpenter); Tariq Jello (Appliance Repair Technician); Talmon Lint (Solar Panel Installation Lead) +36 more",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+          "id": "F-7f84a70d4cf5"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C115",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-bc84fc0b7718"
+        },
+        {
+          "t": "FACT",
+          "text": "Baylight District businesses · Baylight Construction Authority, Anthropic",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+          "id": "F-5b93d3d637ee"
+        },
+        {
+          "t": "FACT",
+          "text": "Keisha Ramos, Director, Baylight Redevelopment Authority at Baylight Construction Authority. 12 named workers at 4 named businesses in Baylight District on the ledger this cycle.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+          "id": "F-614e8835a5e5"
+        },
+        {
+          "t": "FACT",
+          "text": "Anthropic · AI Research · 86 employees · growth 2.7% · revenue $649.8M (+$335k vs C114) · on the roster: Broderick Mitchell (Security guard); Kelvon Ochoa (AI Safety Researcher (Anthropic)); Iggy Davis (AI Safety Researcher (Anthropic)); Linda Chow (AI Safety Researcher (Anthropic)) +7 more",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+          "id": "F-4576ba249243"
+        },
+        {
+          "t": "FACT",
+          "text": "Oakland Casino Town · Nightlife & Entertainment · 99 employees (-1 vs C114) · growth -2.3% · on the roster: Gregory Mims (Organized Crime); Philly Rodriguez (Casino Manager); Manfred Owens (Booky)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+          "id": "F-ca743cc2f158"
+        },
+        {
+          "t": "FACT",
+          "text": "Marine Systems · Science · 3 employees (-2 vs C114) · growth -2.9% · on the roster: Mina Linas (Sea Level Monitoring Technician)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+          "id": "F-d575692a7908"
+        },
+        {
+          "t": "FACT",
+          "text": "DigitalOcean · Cloud Infrastructure · 800 employees · growth 5.2% · revenue $521.4M (+$525k vs C114)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+          "id": "F-6240d90683dc"
+        },
+        {
+          "t": "FACT",
+          "text": "Brianna Lee — Historic Preservation Carpenter — Baylight Construction Authority, Baylight District",
+          "src": "Simulation_Ledger profile for POP-00134",
+          "id": "F-b5b44d17901b"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C11, Spring, holiday=none",
+          "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+          "id": "F-82d77e9a4a71"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  }
+]

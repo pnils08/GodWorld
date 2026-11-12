@@ -1,0 +1,106 @@
+{
+  "date": "2026-10-20",
+  "stage": "write",
+  "results": [
+    {
+      "name": "Luis Navarro",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 605,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Sgt. Rachel Torres",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 283,
+        "contractScore": 3
+      }
+    },
+    {
+      "name": "Angela Reyes",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 781,
+        "contractScore": 2
+      }
+    },
+    {
+      "name": "Selena Grant",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 462,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Tamsin Pruitt",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [
+          {
+            "text": "Rupert Ochoa was promoted; the record lists their work as Mutual Aid Network Organizer, Fruitvale (C111). Since then, on the record: caught the coffee order com",
+            "run": "caught the coffee order coming out"
+          },
+          {
+            "text": "Marc Allie — felt distant from people around them, Laurel (C112, Relationship)",
+            "run": "felt distant from people around them"
+          },
+          {
+            "text": "Derlik Green — relied on familiar social circles during cold period, Downtown (C112, Relationship)",
+            "run": "relied on familiar social circles during"
+          }
+        ],
+        "words": 241,
+        "contractScore": 3
+      }
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": false,
+      "error": "no angle artifact at output/cron-compare/undocked_c112_nia-rook_packet-v2_angle.json — run --stage=angle first",
+      "checks": null
+    }
+  ],
+  "checkTotals": {
+    "seats": 5,
+    "toolSeats": 0,
+    "capHits": 0,
+    "thin": 0,
+    "verbatim": 1,
+    "graded": 5,
+    "gradeSum": 16
+  },
+  "ranAt": "2026-10-20T23:20:48.190Z"
+}

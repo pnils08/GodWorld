@@ -1,0 +1,56 @@
+{
+  "office": "council_d5",
+  "cycle": 114,
+  "speaker": "Janae Rivers",
+  "cascadeSummary": "I am filing the two overdue D5 deliverables — the East Oakland placement gap analysis for INIT-007 and the dispatch performance record responding to Mara Vance's directive for INIT-002 — and I am docketing the D3 East Oakland community briefing with Fruitvale data and the Baylight feasibility review. I am moving the OARI protocol extension into the Baylight corridor and answering the East Oakland constituent complaint in the open, because the people who called for help deserve the numbers named in public. For the youth pipeline I am requiring program adjustments tied to the published gap analysis with specific attention to West Oakland and Fruitvale, and no invented gap count. East Oakland's crime being low is not a reason to reduce its services — it is the result we are supposed to protect and build on.",
+  "statements": [
+    {
+      "statementId": "STMT-114-council_d5-001",
+      "type": "vote_statement",
+      "topic": "Oakland Alternative Response Initiative — D3 community briefing, dispatch performance audit, and Baylight corridor extension",
+      "initiative": "Oakland Alternative Response Initiative",
+      "decision": "File the D5 dispatch performance audit responding to Planning Director Vance's directive, docket and execute the D3 East Oakland community briefing with Fruitvale district-level data and the Baylight feasibility review this cycle, extend the OARI D5 protocol into the Baylight District corridor for feasibility review, and answer the East Oakland citizen complaint in the public record.",
+      "quote": "The data is in — now let's make sure the folks who called 911 actually get to see it, in their own neighborhood, with their own numbers.",
+      "fullStatement": "East Oakland's 911 callers have been patient through this rollout. We promised them the data belongs to the people who called for help, not just the people who answer. So I'm filing the dispatch performance audit Planning Director Vance asked for, and I'm docketing the D3 community briefing — in East Oakland, not just downtown — with Fruitvale district-level data and the Baylight feasibility review. We asked for the same transparency in our corridor, and we're getting it. I'm also moving the OARI protocol into the Baylight District corridor because the same family that called 911 in East Oakland is the family in Baylight. And to the East Oakland resident who filed a complaint this cycle: you're getting an answer on the record, not a hold line. That's the structure rebuilding trust — public data, public process, public answer.",
+      "disposition": "YES",
+      "actionAsked": "File the D5 dispatch performance audit, execute the East Oakland D3 briefing with Fruitvale and Baylight data this cycle, and file a written response to the East Oakland citizen complaint.",
+      "tone": "passionate-substantive",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-114-council_d5-002",
+      "type": "vote_statement",
+      "topic": "Oakland Youth Apprenticeship Pipeline — placement gap analysis and program adjustment",
+      "initiative": "Oakland Youth Apprenticeship Pipeline",
+      "decision": "File the D5 East Oakland cohort adjustment data for INIT-007, publish the C114 placement gap analysis without an invented gap count, and bring forward program adjustments tied to its findings with specific attention to West Oakland and Fruitvale.",
+      "quote": "We handed the first rung to East Oakland's youth — now let's see who's holding the ladder for West Oakland and Fruitvale.",
+      "fullStatement": "At the town hall in Cycle 107 we set placement targets. We verified the first cohort in Cycle 112 and published the report in Cycle 113. But a published report is not the finish line — it's the starting gun for the work I said I would do. So today I'm filing the East Oakland cohort placement data for INIT-007, and I'm joining the call for the C114 placement gap analysis to be published with adjustments tied to what it actually finds — not a number somebody made up to make a chart look tidy. West Oakland and Fruitvale youth are next in line, and I'm not going to let the ladder end in East Oakland just because we climbed it first. Fix the gaps between enrollment, placement, and lasting opportunity — across the whole pipeline, not just the part I represent.",
+      "disposition": "YES",
+      "actionAsked": "Publish the C114 placement gap analysis with program adjustments and file the East Oakland cohort adjustment data for INIT-007 this cycle.",
+      "tone": "righteous-direct",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-114-council_d5-003",
+      "type": "vote_statement",
+      "topic": "East Oakland constituents — accountability and credit",
+      "initiative": null,
+      "decision": "Answer the East Oakland citizen complaint on the record this cycle, credit East Oakland's low-crime, upbeat condition as the result of neighborhood persistence, and commit D5 to continued investment in street trade and youth programs rather than treating low crime as a reason to reduce services.",
+      "quote": "Crime is down and morale is up — that's not a reason to cut us loose, it's a reason to double down.",
+      "fullStatement": "East Oakland walks into this hearing with low crime, a lifted mood, and a tutoring program at Masjid An-Nur that just expanded. That did not happen by accident, and it did not happen because City Hall sent a press release. It happened because neighbors kept showing up, kept tutoring, kept calling, kept building — even with a medium-severity economic spike pressing on street trade. So my answer to 'who answers for East Oakland' is: I do, and so does every office that has been collecting our data and spending our dollars. The complaint filed this cycle gets a response on the record. The economic spike gets tracked, not ignored. And low crime is not the finish line — it is the platform we build the next ladder on.",
+      "disposition": "statement",
+      "actionAsked": "File the East Oakland citizen complaint response and keep street-trade economic support and youth programming on D5's active worklist.",
+      "tone": "community-celebratory",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    }
+  ]
+}

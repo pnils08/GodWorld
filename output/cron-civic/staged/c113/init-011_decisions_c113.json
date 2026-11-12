@@ -1,0 +1,16 @@
+{
+  "initiative": "INIT-011",
+  "initiativeId": "INIT-011",
+  "cycle": 113,
+  "primaryVoice": "Mayor gavel (mayor_gavel-006)",
+  "consolidatedFrom": [
+    "STMT-113-mayor_gavel-006 (Mayor gavel — INIT-011 and INIT-012 Legislation Filed)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-011",
+    "ImplementationPhase": "legislation-filed",
+    "MilestoneNotes": "C113: Legislative ordinance filed; INIT-012 paired filing",
+    "NextScheduledAction": "Committee referral and hearing",
+    "NextActionCycle": 114
+  }
+}

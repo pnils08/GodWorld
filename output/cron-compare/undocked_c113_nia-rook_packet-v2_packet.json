@@ -1,0 +1,164 @@
+{
+  "stage": "report",
+  "desk": "undocked",
+  "cycle": "113",
+  "persona": "nia-rook",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Nia Rook",
+    "popid": "POP-01076"
+  },
+  "assignment": {
+    "story": {
+      "ref": "undocked:undocked-pop00836-Y3C9-e2",
+      "label": "UNDOCKED: Cristina Booker — a night the books can't settle yet",
+      "kind": "undocked",
+      "angle": "UNDOCKED episode: Cristina Booker. Credits unsettled, systems unlisted, combat 0, mishaps 0, magnitude 2/5. Standings: Eric Taveras leads the board — rank #1, 3 cycle(s) led, current streak 3. In the chair: Cristina Booker — Immigration Attorney.",
+      "facts": [
+        "Cristina Booker — Immigration Attorney (ledger)"
+      ],
+      "citizens": [
+        "Cristina Booker — Immigration Attorney, UNDOCKED cast pilot"
+      ],
+      "popids": [
+        "POP-00836"
+      ],
+      "hood": "Downtown"
+    }
+  },
+  "angle": "output/cron-compare/undocked_c113_nia-rook_packet-v2_angle.json",
+  "quotesRequested": 1,
+  "quotesLanded": 0,
+  "quotes": [],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-00836",
+      "name": "Cristina Booker",
+      "quote": null,
+      "disp": "even-keeled, unremarkable",
+      "recorded": false,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"abstain\",\n  \"quote\": null,\n  \"fact_ids\": [],\n  \"basis\": null,\n  \"unverifiedLead\": null,\n  \"abstain_reason\": \"no_lived_basis\"\n}\n```",
+      "claims": {
+        "answer": "abstain",
+        "factIds": [],
+        "basis": null,
+        "unverifiedLead": [],
+        "abstainReason": "no_lived_basis",
+        "quoteId": null,
+        "authoredQuote": false,
+        "publishableQuote": null
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00836",
+          "name": "Cristina Booker",
+          "role": "UNDOCKED pilot",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "What are the implications of Cristina Booker's unsettled credits and unlisted systems for her clients? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked",
+          "hood": "Downtown",
+          "focus": "Cristina Booker",
+          "src": "undocked:undocked-pop00836-Y3C9-e2"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Cristina Booker — UNDOCKED pilot",
+          "evidence": [
+            {
+              "id": "EV-7d303d1e21",
+              "src": "undocked:undocked-pop00836-Y3C9-e2",
+              "text": "UNDOCKED: Cristina Booker — a night the books can't settle yet"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "UNDOCKED: Cristina Booker — a night the books can't settle yet",
+            "src": "undocked:undocked-pop00836-Y3C9-e2",
+            "id": "F-2b6971298391"
+          },
+          {
+            "t": "FACT",
+            "text": "Cristina Booker — Immigration Attorney (ledger)",
+            "src": "undocked:undocked-pop00836-Y3C9-e2",
+            "id": "F-b349caa64d5c"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "Cristina Booker — UNDOCKED pilot",
+            "src": "Simulation_Ledger profile for POP-00836",
+            "id": "F-d12a54aa3bfd"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-10-30T18:21:00.192Z"
+}

@@ -1,0 +1,57 @@
+{
+  "mode": "wake-write",
+  "desk": "culture",
+  "cycle": "114",
+  "provider": "openrouter",
+  "model": "anthropic/claude-haiku-5.5",
+  "configuredWriterModel": "anthropic/claude-haiku-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "kai-marston",
+  "byline": {
+    "name": "Kai Marston",
+    "popid": "POP-00158",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 28,
+  "quotesLanded": 4,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [],
+  "toolCalls": 0,
+  "wordCount": 772,
+  "targetWords": "500-800",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 500",
+    "words": 772,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "a75277853cc86550115a48f54b5f1cbcb7a51426d8ecb64e10dc876a0144ccbf",
+    "costUsd": 0.0015
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 4/4 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/culture_c114_kai-marston_packet-v2_anthropic-claude-haiku-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": ".env // tip: ⌘ override existing { override: true }\n{\n  \"popId\": \"POP-00158\",\n  \"name\": \"Kai Marston\",\n  \"recorded\": true,\n  \"text\": \"filed: The Pole on Rockridge Corner Is Starting to Say His Name\"\n}"
+  },
+  "ranAt": "2026-11-07T00:16:31.939Z",
+  "dispositionReconciledAt": "2026-11-07T18:00:02.378Z"
+}

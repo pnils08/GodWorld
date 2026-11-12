@@ -1,0 +1,59 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "115",
+  "persona": "luis-navarro",
+  "byline": "Luis Navarro",
+  "bylinePopid": "POP-00636",
+  "article": "output/cron-compare/staged/civic_c115_luis-navarro_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Avery Santana",
+        "role": "mentioned",
+        "popid": "POP-00034",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "INIT-007:implementation-active",
+        "verb": "advanced"
+      }
+    ],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "Oakland Youth Apprenticeship Pipeline stalled in implementation-active",
+        "sourceRef": "output/engine_audit_c115.json patterns[0]; evidence: Initiative_Tracker row(s) 7; storyline INIT-007:implementation-active"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-e6c2103144ea",
+    "draftSha256": "454173be98a100db7b22513e92df63234105bb364aacb096803c0bbaa4e3d052",
+    "verdict": "output/cron-compare/civic_c115_luis-navarro_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-11T00:15:31.531Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 400",
+      "words": 667,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "454173be98a100db7b22513e92df63234105bb364aacb096803c0bbaa4e3d052",
+      "costUsd": 0.0012
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-11T00:15:37.696Z"
+}

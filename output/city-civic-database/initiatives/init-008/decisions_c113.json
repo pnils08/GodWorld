@@ -1,0 +1,16 @@
+{
+  "initiative": "INIT-008",
+  "initiativeId": "INIT-008",
+  "cycle": 113,
+  "primaryVoice": "Mayor gavel (mayor_gavel-008)",
+  "consolidatedFrom": [
+    "STMT-113-mayor_gavel-008 (Mayor gavel — INIT-008 Downtown Economic Revitalization Committee Vote and Uptown Track)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-008",
+    "ImplementationPhase": "vote-scheduled",
+    "MilestoneNotes": "C113: Emergency committee convened; Uptown track committed for C114 with concrete timeline",
+    "NextScheduledAction": "Uptown stabilization planning execution",
+    "NextActionCycle": 114
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "114",
+  "persona": "maria-keen",
+  "byline": "Maria Keen",
+  "bylinePopid": "POP-00013",
+  "article": "output/cron-compare/staged/culture_c114_maria-keen_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Austin Reaves",
+        "role": "quoted-source",
+        "popid": "POP-01027"
+      },
+      {
+        "name": "Helena Voss-Adeyemi",
+        "role": "quoted-source",
+        "popid": "POP-01095"
+      },
+      {
+        "name": "Theo Park",
+        "role": "quoted-source",
+        "popid": "POP-00038"
+      },
+      {
+        "name": "Brie Harris",
+        "role": "quoted-source",
+        "popid": "POP-00169"
+      },
+      {
+        "name": "Danny Horn",
+        "role": "mentioned",
+        "popid": "POP-00022",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Temescal"
+    ],
+    "claims": [
+      {
+        "claim": "To be honest, I'm not really sure about The Reaves Line Transit Fund's impact on Temescal. I founded it, but I've been focused on the A's and family stuff lately. I know it's been around since C109, and it's still active, but I haven't been keeping up with its day-to-day. I live in West Oakland, so I don't really see its effects firsthand.",
+        "sourceRef": "citizenVoice PRESS Austin Reaves"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-3792d8937913",
+    "draftSha256": "cdb6d76a25aac057a0ef675b920c8a4ccee171b42975e1af4d1dbb3d7cfd8873",
+    "verdict": "output/cron-compare/culture_c114_maria-keen_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-07T00:17:59.071Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 850,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "cdb6d76a25aac057a0ef675b920c8a4ccee171b42975e1af4d1dbb3d7cfd8873",
+      "costUsd": 0.0012
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-07T00:18:04.503Z"
+}

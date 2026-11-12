@@ -1,0 +1,66 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "113",
+  "persona": "hal-richmond",
+  "byline": "Hal Richmond",
+  "bylinePopid": "POP-00007",
+  "article": "output/cron-compare/staged/sports_c113_hal-richmond_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Desmond Morton",
+        "role": "mentioned",
+        "popid": "POP-00051",
+        "floor": true
+      },
+      {
+        "name": "Frank Reyna",
+        "role": "mentioned",
+        "popid": "POP-00079",
+        "floor": true
+      },
+      {
+        "name": "Mike Paulson",
+        "role": "mentioned",
+        "popid": "POP-00527",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "A's — rumor — supplied C113 line card",
+        "sourceRef": "world_summary_c113.md ## Sports"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-cbafbfe1569a",
+    "draftSha256": "2c730ed7b85577de6dec6cef5d15f2162d74483cc736189b0a90a2d5bb020656",
+    "verdict": "output/cron-compare/sports_c113_hal-richmond_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-10-29T23:17:57.950Z",
+    "contractScore": {
+      "opened": false,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 800",
+      "words": 897,
+      "short": "The opening paragraph presents the present fact but omits the ground the man came from.",
+      "score": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "2c730ed7b85577de6dec6cef5d15f2162d74483cc736189b0a90a2d5bb020656",
+      "costUsd": 0.0018
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-29T23:18:04.161Z"
+}

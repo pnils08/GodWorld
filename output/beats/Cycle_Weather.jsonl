@@ -36,3 +36,5 @@
 {"CycleID":"111","Type":"mild","Temp":"57","Impact":"1","Advisory":"","Comfort":"0.75","Mood":"content","Alerts":"","Streak":"1","StreakType":"clear","Timestamp":"Y3C7"}
 {"CycleID":"112","Type":"clear","Temp":"48","Impact":"1","Advisory":"","Comfort":"0.65","Mood":"content","Alerts":"","Streak":"2","StreakType":"clear","Timestamp":"Y3C8"}
 {"CycleID":"113","Type":"clear","Temp":"58","Impact":"1","Advisory":"","Comfort":"0.75","Mood":"content","Alerts":"","Streak":"3","StreakType":"clear","Timestamp":"Y3C9"}
+{"CycleID":"114","Type":"mild","Temp":"55","Impact":"1","Advisory":"","Comfort":"0.75","Mood":"content","Alerts":"","Streak":"4","StreakType":"clear","Timestamp":"Y3C10"}
+{"CycleID":"115","Type":"mild","Temp":"55","Impact":"1","Advisory":"","Comfort":"0.65","Mood":"content","Alerts":"","Streak":"5","StreakType":"clear","Timestamp":"Y3C11"}

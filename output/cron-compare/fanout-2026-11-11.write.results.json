@@ -1,0 +1,272 @@
+{
+  "date": "2026-11-11",
+  "stage": "write",
+  "results": [
+    {
+      "name": "Jax Caldera",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 3,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 693,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Noah Tan",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 1,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 336,
+        "contractScore": 2,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Elliot Marbury",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 4,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 755,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "P Slayer",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 4,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 501,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Tanya Cruz",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 3,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 447,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Tamsin Pruitt",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 6,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [
+          {
+            "text": "Maurice Franklin moved into a place of their own in Rockridge, renting",
+            "run": "moved into a place of their"
+          },
+          {
+            "text": "Maurice Franklin — in their life, C114: borrowed against next month to close this one",
+            "run": "borrowed against next month to close"
+          },
+          {
+            "text": "Maurice Franklin — in their life, C115: the card statement was the first thing read and the last thing forgotten",
+            "run": "the card statement was the first"
+          },
+          {
+            "text": "Maurice Franklin — in their life, C115: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+            "run": "recognized the oari van idling outside"
+          },
+          {
+            "text": "Maurice Franklin — in their life, C115: brought home a new plant and picked its spot carefully",
+            "run": "brought home a new plant and"
+          },
+          {
+            "text": "Soledad Coleman — in their life, C114: badged into the Baylight office early and tried not to think about the protestors from last month",
+            "run": "badged into the baylight office early"
+          },
+          {
+            "text": "Soledad Coleman — in their life, C115: traded an extra ticket for a promise to bring the kid next time",
+            "run": "traded an extra ticket for a"
+          },
+          {
+            "text": "Soledad Coleman — in their life, C115: attended a small local gathering and stayed later than planned",
+            "run": "attended a small local gathering and"
+          },
+          {
+            "text": "Soledad Coleman — in their life, C115: realized the same seven meals had rotated for a month, and shrugged",
+            "run": "realized the same seven meals had"
+          },
+          {
+            "text": "Tom Jilner — in their life, C115: woke up at 5 AM just to have thirty minutes of total silence before the house woke up near a tidy sidewalk stretch",
+            "run": "thirty minutes of total silence before"
+          },
+          {
+            "text": "Tom Jilner — in their life, C115: said no to something and felt the shape of who they are in it",
+            "run": "said no to something and felt"
+          },
+          {
+            "text": "Marisol Achebe — in their life, C114: felt unexpectedly nostalgic at the smell of rain on warm pavement",
+            "run": "felt unexpectedly nostalgic at the smell"
+          },
+          {
+            "text": "Marisol Achebe — in their life, C115: caught themselves bragging a little about the neighborhood lately",
+            "run": "bragging a little about the neighborhood"
+          },
+          {
+            "text": "Mina Kapoor — in their life, C114: the for-rent signs outnumbered the welcome mats this month",
+            "run": "c114 the for rent signs outnumbered"
+          },
+          {
+            "text": "Mina Kapoor — in their life, C115: realized the week had passed without a single thing worth retelling",
+            "run": "passed without a single thing worth"
+          },
+          {
+            "text": "Mina Kapoor — in their life, C115: carried three boxes of canned goods from the pantry truck and felt it in their lower back",
+            "run": "carried three boxes of canned goods"
+          },
+          {
+            "text": "Mina Kapoor — in their life, C115: compared rent notes with a neighbor over the fence in Grand Lake",
+            "run": "compared rent notes with a neighbor"
+          },
+          {
+            "text": "Everly Rainey — in their life, C114: caught their partner humming the song they'd had stuck all day near a civic plaza",
+            "run": "caught their partner humming the song"
+          },
+          {
+            "text": "Everly Rainey — in their life, C115: listened to the ninth inning on the porch radio and let the street hear it too",
+            "run": "listened to the ninth inning on"
+          },
+          {
+            "text": "Tomas Aguilar — in their life, C114: one of the kids asked a question at dinner that stopped the room",
+            "run": "one of the kids asked a"
+          },
+          {
+            "text": "Kelvon Ochoa — moved from Rockridge to Lake Merritt — moving up from Rockridge — sold up and bought in Lake Merritt, Lake Merritt (C115 — what happened in their",
+            "run": "moved from rockridge to lake merritt"
+          },
+          {
+            "text": "Kelvon Ochoa — in their life, C115: The owner at Anthropic is talking about tightening up, and everyone heard it.",
+            "run": "talking about tightening up and everyone"
+          },
+          {
+            "text": "Kelvon Ochoa — in their life, C115: cooked the full Sunday dinner out of habit and packed half of it straight into the freezer near a coffee line",
+            "run": "cooked the full sunday dinner out"
+          },
+          {
+            "text": "Jesus Jorden — in their life, C115: grabbed coffee from the cart outside the hospital before the morning rush hit",
+            "run": "grabbed coffee from the cart outside"
+          },
+          {
+            "text": "Jesus Jorden — in their life, C115: wrote half a letter to family, then decided to call instead",
+            "run": "wrote half a letter to family"
+          },
+          {
+            "text": "Jasmine Torres — in their life, C114: listened to a style of music they'd always skipped, twice",
+            "run": "listened to a style of music"
+          },
+          {
+            "text": "Jasmine Torres — in their life, C115: tried a new recipe that mostly worked",
+            "run": "tried a new recipe that mostly"
+          },
+          {
+            "text": "Jasmine Torres — in their life, C115: heard a kid explain something to a parent with total authority and grinned",
+            "run": "heard a kid explain something to"
+          },
+          {
+            "text": "Ruth Anyanwu — moved from East Oakland to Downtown — moving up from East Oakland, Downtown (C115 — what happened in their life, not words they said)",
+            "run": "moved from east oakland to downtown"
+          },
+          {
+            "text": "Ruth Anyanwu — in their life, C115: bought a new A's jersey and the quiet satisfaction of finding a favorite song on the jukebox",
+            "run": "bought a new as jersey and"
+          },
+          {
+            "text": "Ruth Anyanwu — in their life, C115: walked a different street home just to see it",
+            "run": "walked a different street home just"
+          },
+          {
+            "text": "Ruth Anyanwu — in their life, C115: played a relative's voicemail twice before saving it again near a lot mid-frame",
+            "run": "played a relatives voicemail twice before"
+          },
+          {
+            "text": "Ruth Anyanwu — in their life, C115: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+            "run": "recognized the oari van idling outside"
+          }
+        ],
+        "words": 1305,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Ines Sorensen",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 5,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 475,
+        "contractScore": 2,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 7,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 383,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    }
+  ],
+  "checkTotals": {
+    "seats": 8,
+    "toolSeats": 8,
+    "capHits": 0,
+    "thin": 0,
+    "verbatim": 1,
+    "graded": 8,
+    "gradeSum": 22,
+    "gradeMax": [
+      3
+    ]
+  },
+  "ranAt": "2026-11-12T00:26:08.838Z"
+}

@@ -1,0 +1,57 @@
+{
+  "mode": "wake-write",
+  "desk": "sports",
+  "cycle": "114",
+  "provider": "openrouter",
+  "model": "x-ai/grok-4.3",
+  "configuredWriterModel": "x-ai/grok-4.3",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "tanya-cruz",
+  "byline": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014",
+    "beatDomain": "SPORTS"
+  },
+  "laneEntries": 15,
+  "quotesLanded": 1,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [],
+  "toolCalls": 0,
+  "wordCount": 255,
+  "targetWords": "evidence-bounded",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": false,
+    "closed": false,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 255,
+    "short": "The opening sets a scene rather than leading with a sports fact, and the closing ends on a rhetorical question instead of identifying the access or observation still needed.",
+    "score": 2,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "b33075b263b2bd1fe7b62721abeac3f4cce46a3a3f25557574fc2bae26274afc",
+    "costUsd": 0.0021
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 2/4 — The opening sets a scene rather than leading with a sports fact, and the closing ends on a rhetorical question instead of identifying the access or observation still needed."
+  },
+  "article": "output/cron-compare/staged/sports_c114_tanya-cruz_packet-v2_x-ai-grok-4-3.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "nvx.com]\n{\n  \"popId\": \"POP-00014\",\n  \"name\": \"Tanya Cruz\",\n  \"recorded\": true,\n  \"text\": \"filed: Pablo Almanzar leaned against the stall after the last round of questions faded, the weight of the f\"\n}"
+  },
+  "ranAt": "2026-11-05T00:19:45.235Z",
+  "dispositionReconciledAt": "2026-11-07T18:00:02.716Z"
+}

@@ -1,0 +1,35 @@
+{
+  "office": "council_d3",
+  "agentDir": "civic-office-council-d3",
+  "holder": "Rose Delgado",
+  "popid": "POP-00503",
+  "title": "City Council District 3",
+  "date": "2026-10-20",
+  "cycle": 112,
+  "model": "deepseek/deepseek-v4-flash-0731",
+  "statement": "Fruitvale isn't a placement report line item — it's the neighborhood where this promise either lands or dies. The count needs to move in the neighborhoods where our kids actually live, matching the applicant pool this program was built to serve. I want to see the actual breakdown of who placed into what role, and I'll fight for the resources to close the gap if Fruitvale's numbers lag.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-111-civic-office-council-d3",
+        "text": "The schematics honor the merchant covenant we executed at C107 — the staging lot access, the panadería sightlines, the curb cuts Elena Soria Dominguez counted are all in the drawings. I move we accept them as the working baseline for Phase II. On San Antonio, I'm packaging a targeted recovery response with the corridor-specific supports we know work: small business stabilization grants, a storefront vacancy fund, and a dedicated corridor liaison to shepherd permits and the public realm improvements our merchants have asked for.",
+        "directiveCycle": 111,
+        "confrontationSeat": "civic-office-council-d3"
+      }
+    }
+  ],
+  "movesRejected": [
+    {
+      "type": "work",
+      "reason": "second-consequential-move(one per wake — the first valid one stands)"
+    },
+    {
+      "type": "propose",
+      "reason": "second-consequential-move(one per wake — the first valid one stands)"
+    }
+  ],
+  "numberMoved": null,
+  "ranAt": "2026-10-20T10:51:17.391Z",
+  "fellBackFrom": null
+}

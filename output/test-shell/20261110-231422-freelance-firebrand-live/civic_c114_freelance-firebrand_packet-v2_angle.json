@@ -1,0 +1,872 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "114",
+  "persona": "freelance-firebrand",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00799",
+      "name": "Jax Caldera",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "The map says decay; the program roster does not answer it.",
+      "approach": "Firebrand approach (sim stink-audit): do NOT open from the official timeline. Find what does not line up — metric vs claim, money vs outcome, boomtown copy vs decay, crisis with no owner. Write into the contradiction. Name who must answer. End on the unanswered question. Scene color is yours (weather, street, bar), including your own route through one or many bars, so long as it contradicts nothing on this slice. Do not invent a named business or institution that the sim has not supplied. Never invent careers for named people — RoleType lines are immutable. Never invent citizen names.",
+      "creativeBrief": {
+        "kind": "data-accountability",
+        "method": "TWO_SIDED_DATA_AUDIT",
+        "mismatch": {
+          "a": "Rockridge: decay [Sentiment -0.030, RetailVitality -2.16, HousingPressure +1.000] — Sentiment now 0.03 (17 of 22, city median 0.085); RetailVitality now 10.98 (8 of 22, city median 8.265); HousingPressure now 5 (17 of 22, city median 0) — with no matching active initiative",
+          "aSrc": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+          "b": "No active initiative (or mitigator) owns this break on the record",
+          "bSrc": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8"
+        },
+        "scopeHoods": [
+          "Rockridge"
+        ],
+        "missing": [
+          "the prior comparison needed to validate the flagged direction",
+          "an office response to the data mismatch"
+        ],
+        "closeQuestion": "The map says decay; the program roster does not answer it.",
+        "sceneRule": "You may invent one or many bar/street/sensory scenes and Jax's own presence or route through them, so long as the color contradicts no supplied sim fact. A generic bar is persona texture, not a new canon business. Named people must stay on the CITIZENS list or be unnamed. Do not invent a named business or institution. RoleType is immutable — do not reassign careers.",
+        "sourcePointers": [
+          "output/test-shell/20261110-231422-freelance-firebrand-live/stink_c114.json",
+          "output/desk_signal_c114.json",
+          "output/world_summary_c114.md",
+          "output/neighborhood_texture_c114.md",
+          "output/engine_audit_c114.json",
+          "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "anomaly",
+      "hood": "Rockridge",
+      "score": 61,
+      "src": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+      "nearby": [
+        {
+          "text": "Avery Santana (mayor gavel): Record the executed Month-12 $400,000 disbursement, publish closeout documentation, and complete a charter renewal draft preserving service to West Oakland businesses and residents. — \"West O",
+          "src": "output/civic-voice/mayor_gavel_c114.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): Docket and execute the D3 East Oakland briefing this cycle with Fruitvale district-level data and the Baylight feasibility review, direct the D5 dispatch audit, and hold expansion until after",
+          "src": "output/civic-voice/mayor_gavel_c114.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): Require C114 schematic delivery and a documented Fruitvale community review, with a public comment-and-response record before further design advancement. — \"Fruitvale will see the schematics,",
+          "src": "output/civic-voice/mayor_gavel_c114.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): Keep the C115 milestone review contingent on independent remediation verification, neighborhood protections, hotline records, and workforce results; make no early milestone declaration. — \"Ba",
+          "src": "output/civic-voice/mayor_gavel_c114.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): Publish the C114 placement-gap analysis and a program adjustment plan, explicitly examining West Oakland and Fruitvale without inventing unreported placement results. — \"Enrollment is a begin",
+          "src": "output/civic-voice/mayor_gavel_c114.json"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00742",
+          "name": "Maya Torres-Dillon",
+          "profile": "Maya Torres-Dillon (POP-00742) — role: Bay Conservation Alliance Advisory board, High School Science Teacher; neighborhood: Rockridge; born: 2010; careerStage: mid-career; wealth: 6; employerBiz: BIZ-00016; skills: Education; tier: 2",
+          "role": "Bay Conservation Alliance Advisory board, High School Science Teacher",
+          "hood": "Rockridge",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+            "pop": "POP-00742",
+            "rowName": "Maya Torres-Dillon",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00759",
+          "name": "Naomi Sterling",
+          "profile": "Naomi Sterling (POP-00759) — role: Senior Pastor / Faith Leader; neighborhood: Rockridge; born: 1975; careerStage: retired; wealth: 8; employerBiz: BIZ-00028; skills: Faith & Community; tier: 2",
+          "role": "Senior Pastor / Faith Leader",
+          "hood": "Rockridge",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+            "pop": "POP-00759",
+            "rowName": "Naomi Sterling",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00194",
+          "name": "Yu Zen",
+          "profile": "Yu Zen (POP-00194) — role: Commercial Insurance Broker; neighborhood: Rockridge; born: 1990; careerStage: senior; wealth: 8; employerBiz: SELF_EMPLOYED; skills: Professional; tier: 3",
+          "role": "Commercial Insurance Broker",
+          "hood": "Rockridge",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+            "pop": "POP-00194",
+            "rowName": "Yu Zen",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00543",
+          "name": "Derek Obi",
+          "profile": "Derek Obi (POP-00543) — role: IT Support Specialist; neighborhood: Rockridge; born: 2003; careerStage: mid-career; wealth: 7; employerBiz: BIZ-00030; skills: Tech & Innovation; tier: 4",
+          "role": "IT Support Specialist",
+          "hood": "Rockridge",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+            "pop": "POP-00543",
+            "rowName": "Derek Obi",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00743",
+          "name": "Rick Dillon",
+          "profile": "Rick Dillon (POP-00743) — role: Grade Schooler; neighborhood: Rockridge; born: 2030; careerStage: student; wealth: 2; skills: student; tier: 3",
+          "role": "Grade Schooler",
+          "hood": "Rockridge",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+            "pop": "POP-00743",
+            "rowName": "Rick Dillon",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00927",
+          "name": "Farah Vasquez",
+          "profile": "Farah Vasquez (POP-00927) — role: AI Safety Researcher (Anthropic); neighborhood: Rockridge; born: 1988; careerStage: senior; wealth: 8; employerBiz: BIZ-00001; skills: Tech & Innovation; tier: 4",
+          "role": "AI Safety Researcher (Anthropic)",
+          "hood": "Rockridge",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+            "pop": "POP-00927",
+            "rowName": "Farah Vasquez",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00769",
+          "name": "Dax Monroe",
+          "profile": "Dax Monroe (POP-00769) — role: Artist; neighborhood: Rockridge; born: 2001; careerStage: mid-career; wealth: 6; employerBiz: SELF_EMPLOYED; skills: Small Business; tier: 2",
+          "role": "Artist",
+          "hood": "Rockridge",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+            "pop": "POP-00769",
+            "rowName": "Dax Monroe",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00257",
+          "name": "Farah Lindqvist",
+          "profile": "Farah Lindqvist (POP-00257) — role: City Building Inspector; neighborhood: Downtown; born: 1994; careerStage: senior; wealth: 6; employerBiz: BIZ-00017; skills: Government & Civic; tier: 4",
+          "role": "City Building Inspector",
+          "hood": "Downtown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+            "pop": "POP-00257",
+            "rowName": "Farah Lindqvist",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00658",
+          "name": "Darius Cike",
+          "profile": "Darius Cike (POP-00658) — role: Quantum Computing Researcher; neighborhood: West Oakland; born: 1977; careerStage: retired; wealth: 8; employerBiz: BIZ-00030; skills: Tech & Innovation; tier: 4",
+          "role": "Quantum Computing Researcher",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+            "pop": "POP-00658",
+            "rowName": "Darius Cike",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00691",
+          "name": "Tom Jilner",
+          "profile": "Tom Jilner (POP-00691) — role: Wine Bar Owner; neighborhood: Rockridge; born: 2003; careerStage: mid-career; wealth: 6; employerBiz: SELF_EMPLOYED; skills: Food & Culture; tier: 4",
+          "role": "Wine Bar Owner",
+          "hood": "Rockridge",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+            "pop": "POP-00691",
+            "rowName": "Tom Jilner",
+            "kind": "slice-row"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C114",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-4261fa115617"
+      },
+      {
+        "t": "FACT",
+        "text": "Rockridge: decay [Sentiment -0.030, RetailVitality -2.16, HousingPressure +1.000] — Sentiment now 0.03 (17 of 22, city median 0.085); RetailVitality now 10.98 (8 of 22, city median 8.265); HousingPressure now 5 (17 of 22, city median 0) — with no matching active initiative",
+        "src": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+        "id": "F-b0ddf69076ef"
+      },
+      {
+        "t": "FACT",
+        "text": "No active initiative (or mitigator) owns this break on the record",
+        "src": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+        "id": "F-e477fa1a1e03"
+      },
+      {
+        "t": "FACT",
+        "text": "Season: Spring | Weather: 55°F mild, NW 8 mph, clear (frontState CLEAR), humidity 54, visibility 10",
+        "src": "World_Config/weather snapshot for C114",
+        "id": "F-8ede5a4ea7df"
+      },
+      {
+        "t": "FACT",
+        "text": "Rockridge’s retail strip is bustling, with BART delays causing minor frustrations for commuters. New residents from Downtown are spotted exploring the neighborhood.",
+        "src": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+        "id": "F-f9fabac3ed61"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "street",
+    "candidates": [
+      {
+        "pop": "POP-00742",
+        "name": "Maya Torres-Dillon",
+        "role": "Bay Conservation Alliance Advisory board, High School Science Teacher",
+        "hood": "Rockridge",
+        "profile": "Maya Torres-Dillon (POP-00742) — role: Bay Conservation Alliance Advisory board, High School Science Teacher; neighborhood: Rockridge; born: 2010; careerStage: mid-career; wealth: 6; employerBiz: BIZ-00016; skills: Education; tier: 2",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+          "pop": "POP-00742",
+          "rowName": "Maya Torres-Dillon",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00759",
+        "name": "Naomi Sterling",
+        "role": "Senior Pastor / Faith Leader",
+        "hood": "Rockridge",
+        "profile": "Naomi Sterling (POP-00759) — role: Senior Pastor / Faith Leader; neighborhood: Rockridge; born: 1975; careerStage: retired; wealth: 8; employerBiz: BIZ-00028; skills: Faith & Community; tier: 2",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+          "pop": "POP-00759",
+          "rowName": "Naomi Sterling",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00194",
+        "name": "Yu Zen",
+        "role": "Commercial Insurance Broker",
+        "hood": "Rockridge",
+        "profile": "Yu Zen (POP-00194) — role: Commercial Insurance Broker; neighborhood: Rockridge; born: 1990; careerStage: senior; wealth: 8; employerBiz: SELF_EMPLOYED; skills: Professional; tier: 3",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+          "pop": "POP-00194",
+          "rowName": "Yu Zen",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00543",
+        "name": "Derek Obi",
+        "role": "IT Support Specialist",
+        "hood": "Rockridge",
+        "profile": "Derek Obi (POP-00543) — role: IT Support Specialist; neighborhood: Rockridge; born: 2003; careerStage: mid-career; wealth: 7; employerBiz: BIZ-00030; skills: Tech & Innovation; tier: 4",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+          "pop": "POP-00543",
+          "rowName": "Derek Obi",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00743",
+        "name": "Rick Dillon",
+        "role": "Grade Schooler",
+        "hood": "Rockridge",
+        "profile": "Rick Dillon (POP-00743) — role: Grade Schooler; neighborhood: Rockridge; born: 2030; careerStage: student; wealth: 2; skills: student; tier: 3",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+          "pop": "POP-00743",
+          "rowName": "Rick Dillon",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00927",
+        "name": "Farah Vasquez",
+        "role": "AI Safety Researcher (Anthropic)",
+        "hood": "Rockridge",
+        "profile": "Farah Vasquez (POP-00927) — role: AI Safety Researcher (Anthropic); neighborhood: Rockridge; born: 1988; careerStage: senior; wealth: 8; employerBiz: BIZ-00001; skills: Tech & Innovation; tier: 4",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+          "pop": "POP-00927",
+          "rowName": "Farah Vasquez",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00769",
+        "name": "Dax Monroe",
+        "role": "Artist",
+        "hood": "Rockridge",
+        "profile": "Dax Monroe (POP-00769) — role: Artist; neighborhood: Rockridge; born: 2001; careerStage: mid-career; wealth: 6; employerBiz: SELF_EMPLOYED; skills: Small Business; tier: 2",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+          "pop": "POP-00769",
+          "rowName": "Dax Monroe",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00257",
+        "name": "Farah Lindqvist",
+        "role": "City Building Inspector",
+        "hood": "Downtown",
+        "profile": "Farah Lindqvist (POP-00257) — role: City Building Inspector; neighborhood: Downtown; born: 1994; careerStage: senior; wealth: 6; employerBiz: BIZ-00017; skills: Government & Civic; tier: 4",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+          "pop": "POP-00257",
+          "rowName": "Farah Lindqvist",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00658",
+        "name": "Darius Cike",
+        "role": "Quantum Computing Researcher",
+        "hood": "West Oakland",
+        "profile": "Darius Cike (POP-00658) — role: Quantum Computing Researcher; neighborhood: West Oakland; born: 1977; careerStage: retired; wealth: 8; employerBiz: BIZ-00030; skills: Tech & Innovation; tier: 4",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+          "pop": "POP-00658",
+          "rowName": "Darius Cike",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00691",
+        "name": "Tom Jilner",
+        "role": "Wine Bar Owner",
+        "hood": "Rockridge",
+        "profile": "Tom Jilner (POP-00691) — role: Wine Bar Owner; neighborhood: Rockridge; born: 2003; careerStage: mid-career; wealth: 6; employerBiz: SELF_EMPLOYED; skills: Food & Culture; tier: 4",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+          "pop": "POP-00691",
+          "rowName": "Tom Jilner",
+          "kind": "slice-row"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Jax Caldera",
+    "popid": "POP-00799"
+  },
+  "assignment": {
+    "story": {
+      "ref": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+      "label": "Rockridge: decay [Sentiment -0.030, RetailVitality -2.16, HousingPressure +1.000] — Sentiment now 0.03 (17 of 22, city median 0.085); RetailVitality now 10.98 (8 of 22, city median 8.265); HousingPressure now 5 (17 of 22, city median 0) — with no matching active initiative",
+      "kind": "anomaly",
+      "angle": "The map says decay; the program roster does not answer it.",
+      "hookLine": null,
+      "hood": "Rockridge",
+      "popids": [
+        "POP-00742",
+        "POP-00759",
+        "POP-00194",
+        "POP-00543",
+        "POP-00743",
+        "POP-00927",
+        "POP-00769",
+        "POP-00257",
+        "POP-00658",
+        "POP-00691"
+      ],
+      "citizens": [
+        "Maya Torres-Dillon — Bay Conservation Alliance Advisory board, High School Science Teacher, Rockridge",
+        "Naomi Sterling — Senior Pastor / Faith Leader, Rockridge",
+        "Yu Zen — Commercial Insurance Broker, Rockridge",
+        "Derek Obi — IT Support Specialist, Rockridge",
+        "Rick Dillon — Grade Schooler, Rockridge",
+        "Farah Vasquez — AI Safety Researcher (Anthropic), Rockridge",
+        "Dax Monroe — Artist, Rockridge",
+        "Farah Lindqvist — City Building Inspector, Downtown",
+        "Darius Cike — Quantum Computing Researcher, West Oakland",
+        "Tom Jilner — Wine Bar Owner, Rockridge"
+      ],
+      "stinkClass": "metric-contradiction",
+      "stinkScore": 61
+    },
+    "approach": "Firebrand approach (sim stink-audit): do NOT open from the official timeline. Find what does not line up — metric vs claim, money vs outcome, boomtown copy vs decay, crisis with no owner. Write into the contradiction. Name who must answer. End on the unanswered question. Scene color is yours (weather, street, bar), including your own route through one or many bars, so long as it contradicts nothing on this slice. Do not invent a named business or institution that the sim has not supplied. Never invent careers for named people — RoleType lines are immutable. Never invent citizen names."
+  },
+  "jaxSlice": {
+    "stink": {
+      "className": "metric-contradiction",
+      "score": 61,
+      "label": "math-imbalance (high) | Rockridge: decay [Sentiment -0.030, RetailVitality -2.16, HousingPressure +1.000] — Sentiment now 0.03 (17 of 22, city median 0.085); RetailVitality now 10.98 (8 of 22, city median 8.265); HousingPressure now 5 (17 of 22, city median 0) — with no matching active initiative",
+      "ref": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+      "kind": "anomaly",
+      "desk": "civic"
+    },
+    "contradiction": {
+      "a": "Rockridge: decay [Sentiment -0.030, RetailVitality -2.16, HousingPressure +1.000] — Sentiment now 0.03 (17 of 22, city median 0.085); RetailVitality now 10.98 (8 of 22, city median 8.265); HousingPressure now 5 (17 of 22, city median 0) — with no matching active initiative",
+      "b": "No active initiative (or mitigator) owns this break on the record",
+      "frame": "The map says decay; the program roster does not answer it.",
+      "aSrc": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+      "bSrc": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8"
+    },
+    "scene": {
+      "weather": "Season: Spring | Weather: 55°F mild, NW 8 mph, clear (frontState CLEAR), humidity 54, visibility 10",
+      "hood": "Rockridge",
+      "neighborhoodTexture": "Rockridge’s retail strip is bustling, with BART delays causing minor frustrations for commuters. New residents from Downtown are spotted exploring the neighborhood.",
+      "whoLivedIt": [
+        "POP-00267 Jacob King — nursed a sore back after overdoing it around the house (Rockridge)",
+        "HH-0114-F006 | solo | head POP-00460 | Rockridge",
+        "HH-0114-F011 | solo | head POP-00759 | Rockridge",
+        "HH-0114-F013 | solo | head POP-00864 | Rockridge"
+      ],
+      "chaos": [
+        "| garbage_truck | dumping_cleared | neighborhood Rockridge | Sentiment | -0.11 | FALSE |"
+      ],
+      "colorRoom": "You may invent one or many bar/street/sensory scenes and Jax's own presence or route through them, so long as the color contradicts no supplied sim fact. A generic bar is persona texture, not a new canon business. Named people must stay on the CITIZENS list or be unnamed. Do not invent a named business or institution. RoleType is immutable — do not reassign careers."
+    },
+    "citizens": [
+      {
+        "popid": "POP-00742",
+        "name": "Maya Torres-Dillon",
+        "role": "Bay Conservation Alliance Advisory board, High School Science Teacher",
+        "neighborhood": "Rockridge",
+        "careerStage": "mid-career",
+        "employerBizId": "BIZ-00016",
+        "profile": "Maya Torres-Dillon (POP-00742) — role: Bay Conservation Alliance Advisory board, High School Science Teacher; neighborhood: Rockridge; born: 2010; careerStage: mid-career; wealth: 6; employerBiz: BIZ-00016; skills: Education; tier: 2",
+        "why": "stink-handle"
+      },
+      {
+        "popid": "POP-00759",
+        "name": "Naomi Sterling",
+        "role": "Senior Pastor / Faith Leader",
+        "neighborhood": "Rockridge",
+        "careerStage": "retired",
+        "employerBizId": "BIZ-00028",
+        "profile": "Naomi Sterling (POP-00759) — role: Senior Pastor / Faith Leader; neighborhood: Rockridge; born: 1975; careerStage: retired; wealth: 8; employerBiz: BIZ-00028; skills: Faith & Community; tier: 2",
+        "why": "stink-handle"
+      },
+      {
+        "popid": "POP-00194",
+        "name": "Yu Zen",
+        "role": "Commercial Insurance Broker",
+        "neighborhood": "Rockridge",
+        "careerStage": "senior",
+        "employerBizId": "SELF_EMPLOYED",
+        "profile": "Yu Zen (POP-00194) — role: Commercial Insurance Broker; neighborhood: Rockridge; born: 1990; careerStage: senior; wealth: 8; employerBiz: SELF_EMPLOYED; skills: Professional; tier: 3",
+        "why": "same-hood-signal"
+      },
+      {
+        "popid": "POP-00543",
+        "name": "Derek Obi",
+        "role": "IT Support Specialist",
+        "neighborhood": "Rockridge",
+        "careerStage": "mid-career",
+        "employerBizId": "BIZ-00030",
+        "profile": "Derek Obi (POP-00543) — role: IT Support Specialist; neighborhood: Rockridge; born: 2003; careerStage: mid-career; wealth: 7; employerBiz: BIZ-00030; skills: Tech & Innovation; tier: 4",
+        "why": "same-hood-signal"
+      },
+      {
+        "popid": "POP-00743",
+        "name": "Rick Dillon",
+        "role": "Grade Schooler",
+        "neighborhood": "Rockridge",
+        "careerStage": "student",
+        "employerBizId": null,
+        "profile": "Rick Dillon (POP-00743) — role: Grade Schooler; neighborhood: Rockridge; born: 2030; careerStage: student; wealth: 2; skills: student; tier: 3",
+        "why": "bond-hop from interview pool"
+      },
+      {
+        "popid": "POP-00927",
+        "name": "Farah Vasquez",
+        "role": "AI Safety Researcher (Anthropic)",
+        "neighborhood": "Rockridge",
+        "careerStage": "senior",
+        "employerBizId": "BIZ-00001",
+        "profile": "Farah Vasquez (POP-00927) — role: AI Safety Researcher (Anthropic); neighborhood: Rockridge; born: 1988; careerStage: senior; wealth: 8; employerBiz: BIZ-00001; skills: Tech & Innovation; tier: 4",
+        "why": "bond-hop from interview pool"
+      },
+      {
+        "popid": "POP-00769",
+        "name": "Dax Monroe",
+        "role": "Artist",
+        "neighborhood": "Rockridge",
+        "careerStage": "mid-career",
+        "employerBizId": "SELF_EMPLOYED",
+        "profile": "Dax Monroe (POP-00769) — role: Artist; neighborhood: Rockridge; born: 2001; careerStage: mid-career; wealth: 6; employerBiz: SELF_EMPLOYED; skills: Small Business; tier: 2",
+        "why": "bond-hop from interview pool"
+      },
+      {
+        "popid": "POP-00257",
+        "name": "Farah Lindqvist",
+        "role": "City Building Inspector",
+        "neighborhood": "Downtown",
+        "careerStage": "senior",
+        "employerBizId": "BIZ-00017",
+        "profile": "Farah Lindqvist (POP-00257) — role: City Building Inspector; neighborhood: Downtown; born: 1994; careerStage: senior; wealth: 6; employerBiz: BIZ-00017; skills: Government & Civic; tier: 4",
+        "why": "bond-hop from interview pool"
+      },
+      {
+        "popid": "POP-00658",
+        "name": "Darius Cike",
+        "role": "Quantum Computing Researcher",
+        "neighborhood": "West Oakland",
+        "careerStage": "retired",
+        "employerBizId": "BIZ-00030",
+        "profile": "Darius Cike (POP-00658) — role: Quantum Computing Researcher; neighborhood: West Oakland; born: 1977; careerStage: retired; wealth: 8; employerBiz: BIZ-00030; skills: Tech & Innovation; tier: 4",
+        "why": "bond-hop from interview pool"
+      },
+      {
+        "popid": "POP-00691",
+        "name": "Tom Jilner",
+        "role": "Wine Bar Owner",
+        "neighborhood": "Rockridge",
+        "careerStage": "mid-career",
+        "employerBizId": "SELF_EMPLOYED",
+        "profile": "Tom Jilner (POP-00691) — role: Wine Bar Owner; neighborhood: Rockridge; born: 2003; careerStage: mid-career; wealth: 6; employerBiz: SELF_EMPLOYED; skills: Food & Culture; tier: 4",
+        "why": "bond-hop from interview pool"
+      }
+    ],
+    "bonds": [
+      {
+        "bondId": "BOND-A4D01D21",
+        "a": "POP-00018",
+        "b": "POP-00742",
+        "type": "family",
+        "intensity": "9.95",
+        "origin": "household",
+        "neighborhood": "Rockridge",
+        "aName": "Benji Dillon",
+        "bName": "Maya Torres-Dillon",
+        "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+      },
+      {
+        "bondId": "BOND-EDA1607F",
+        "a": "POP-00742",
+        "b": "POP-00743",
+        "type": "family",
+        "intensity": "4.8",
+        "origin": "household",
+        "neighborhood": "Rockridge",
+        "aName": "Maya Torres-Dillon",
+        "bName": "Rick Dillon",
+        "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+      },
+      {
+        "bondId": "BOND-09109185",
+        "a": "POP-00759",
+        "b": "POP-00927",
+        "type": "friendship",
+        "intensity": "6.3",
+        "origin": "neighbor",
+        "neighborhood": "Rockridge",
+        "aName": "Naomi Sterling",
+        "bName": "Farah Vasquez",
+        "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+      },
+      {
+        "bondId": "BOND-3FC42EBF",
+        "a": "POP-00769",
+        "b": "POP-00194",
+        "type": "friendship",
+        "intensity": "10",
+        "origin": "neighbor",
+        "neighborhood": "Rockridge",
+        "aName": "Dax Monroe",
+        "bName": "Yu Zen",
+        "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+      },
+      {
+        "bondId": "BOND-9C8E8572",
+        "a": "POP-00257",
+        "b": "POP-00543",
+        "type": "friendship",
+        "intensity": "5.63",
+        "origin": "neighbor",
+        "neighborhood": "Downtown",
+        "aName": "Farah Lindqvist",
+        "bName": "Derek Obi",
+        "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+      },
+      {
+        "bondId": "BOND-51664124",
+        "a": "POP-00658",
+        "b": "POP-00742",
+        "type": "friendship",
+        "intensity": "9.36",
+        "origin": "neighbor",
+        "neighborhood": "Rockridge",
+        "aName": "Darius Cike",
+        "bName": "Maya Torres-Dillon",
+        "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+      },
+      {
+        "bondId": "wgow7xef",
+        "a": "POP-00759",
+        "b": "POP-00034",
+        "type": "tension",
+        "intensity": "5.5",
+        "origin": "neighborhood",
+        "neighborhood": "Rockridge",
+        "aName": "Naomi Sterling",
+        "bName": "Avery Santana",
+        "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+      },
+      {
+        "bondId": "eo2nelan",
+        "a": "POP-00691",
+        "b": "POP-00194",
+        "type": "neighbor",
+        "intensity": "3",
+        "origin": "neighborhood",
+        "neighborhood": "Rockridge",
+        "aName": "Tom Jilner",
+        "bName": "Yu Zen",
+        "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+      }
+    ],
+    "gaps": {
+      "note": "Ledgers/surfaces that would deepen Jax further if wired or fixed",
+      "missingOrThin": [
+        {
+          "source": "EmployerBizId → Business_Ledger name/address",
+          "status": "gap",
+          "why": "RoleType alone; no shop name/street for employer scene color without inventing"
+        },
+        {
+          "source": "Cultural_Ledger venues by neighborhood",
+          "status": "gap-on-disk",
+          "why": "Bar/venue canon list not auto-attached to slice — Jax opens in bars; needs hood venue pointer"
+        },
+        {
+          "source": "Faith_Ledger / Faith_Organizations by hood",
+          "status": "partial",
+          "why": "Texture file sometimes names congregations; not joined to stink hood systematically"
+        },
+        {
+          "source": "LifeHistory_Log raw (beyond Who Lived It digest)",
+          "status": "partial",
+          "why": "Digest is tag-summary; full event prose would deepen street color without inventing people"
+        },
+        {
+          "source": "Relationship_Bonds live refresh",
+          "status": "stale-risk",
+          "why": "bond-ledger-live.tsv may lag; bond-hop quality depends on export freshness"
+        },
+        {
+          "source": "Neighborhood_Map row metrics on slice",
+          "status": "partial",
+          "why": "Stink label carries some decay numbers; full hood board not embedded as color (avoid jargon in prose)"
+        },
+        {
+          "source": "Map hoods with zero Simulation_Ledger residents (e.g. Brooklyn on C102)",
+          "status": "sim-gap",
+          "why": "Audit can flag decay for a hood nobody lives in on the ledger — stink is real, interview pool empty; slice walks to next candidate with residents"
+        },
+        {
+          "source": "Citizen pages / DialState",
+          "status": "via-citizenVoice",
+          "why": "Quote stage loads dials; slice does not pre-print dial prose (correct — voice owns it)"
+        }
+      ],
+      "colorAllowed": [
+        "Weather line from Riley/world_summary",
+        "neighborhood_texture paragraph (perception-only, often nameless)",
+        "Who Lived It lines for this hood",
+        "Chaos_Cars rows touching hood/citizen",
+        "Bond edges among pool (professional/friend/family)"
+      ]
+    }
+  },
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Jax Caldera",
+    "popid": "POP-00799",
+    "text": "I'm heading to Rockridge to see if the neighborhood's revitalization efforts are truly making a dent in the decay that's been flagged. The contrast between the data and the reality on the ground is what I'm after. I want to talk to some of the residents and business owners to get a sense of what's really going on.",
+    "plan": {
+      "chase": "I'm heading to Rockridge to see if the neighborhood's revitalization efforts are truly making a dent in the decay that's been flagged. The contrast between the data and the reality on the ground is what I'm after. I want to talk to some of the residents and business owners to get a sense of what's really going on.",
+      "focus": "Rockridge's decay despite positive metrics",
+      "why": "The numbers say one thing, but the map indicates another; I need to understand the discrepancy.",
+      "checks": [
+        "Observe the retail strip and overall neighborhood vibe",
+        "Talk to residents and business owners about their experiences"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00742",
+          "question": "What's your take on the neighborhood's changes?",
+          "basis": "Maya Torres-Dillon is a Rockridge resident and has a role in the community"
+        },
+        {
+          "pop": "POP-00759",
+          "question": "How do you see the community responding to the current state of Rockridge?",
+          "basis": "Naomi Sterling is a respected figure in Rockridge"
+        },
+        {
+          "pop": "POP-00691",
+          "question": "Has your business noticed any shifts in customer behavior or foot traffic?",
+          "basis": "Tom Jilner owns a business in Rockridge"
+        }
+      ],
+      "interpretation": "There's a disconnect between the metrics and the perceived decay in Rockridge; understanding this gap is key.",
+      "unverifiedLead": [
+        "The new residents from Downtown might be bringing different expectations and perspectives to the neighborhood"
+      ],
+      "closeQuestion": "Is Rockridge's revitalization truly underway, or is it just a numbers game?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Avery Santana (mayor gavel): Record the executed Month-12 $400,000 disbursement, publish closeout documentation, and complete a charter renewal draft preserving service to West Oakland businesses and residents. — \"West O",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c114.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Docket and execute the D3 East Oakland briefing this cycle with Fruitvale district-level data and the Baylight feasibility review, direct the D5 dispatch audit, and hold expansion until after",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c114.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Require C114 schematic delivery and a documented Fruitvale community review, with a public comment-and-response record before further design advancement. — \"Fruitvale will see the schematics,",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c114.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Keep the C115 milestone review contingent on independent remediation verification, neighborhood protections, hotline records, and workforce results; make no early milestone declaration. — \"Ba",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c114.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Publish the C114 placement-gap analysis and a program adjustment plan, explicitly examining West Oakland and Fruitvale without inventing unreported placement results. — \"Enrollment is a begin",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c114.json",
+      "popids": []
+    }
+  ],
+  "laneEntries": 114,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-04T12:15:35.813Z"
+}

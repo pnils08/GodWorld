@@ -1,0 +1,48 @@
+{
+  "office": "council_d3",
+  "cycle": 112,
+  "speaker": "Rose Delgado",
+  "cascadeSummary": "This cycle, I'm holding the line on San Antonio's economic recovery with a concrete package for the corridor, pushing OARI to show real outcomes for District 1 before we expand further, and demanding the apprenticeship report name names. Fruitvale's success is the community's — I won't let City Hall take that credit, but I will make sure we keep investing in what works.",
+  "statements": [
+    {
+      "statementId": "STMT-112-council_d3-001",
+      "type": "vote_statement",
+      "topic": "Oakland Alternative Response Initiative Quarterly Outcome Report",
+      "initiative": "INIT-002",
+      "decision": "I am voting to accept the OARI quarterly outcome report but adding a community-comment condition: numbers must break down response times and diversion rates by district, not just citywide, and I want a public briefing in D3 before any further expansion.",
+      "quote": "OARI's promise is that the right responder shows up — the report has to prove that promise works on Fruitvale's streets, not just in the city's spreadsheets.",
+      "fullStatement": "The quarterly outcome report is due, and it had better show more than a citywide bubble. I moved to accept the report, but with a condition: disaggregate the response data by district. I need to know what the response latency is on International Boulevard at 2 a.m., not just an average across Oakland. My constituents in D3 call 911 when they're in crisis, and they deserve to know that the trained responder, not the armed officer, is arriving. If the numbers hold up, we expand. But I won't sign off on that expansion until this data is public and credible.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-112-council_d3-002",
+      "type": "vote_statement",
+      "topic": "Oakland Youth Apprenticeship Pipeline First Cohort Placement Report",
+      "initiative": "INIT-007",
+      "decision": "I'm calling for the first cohort placement report to include a detailed breakdown by district, with an emphasis on ensuring D3's youth are actually placed — not just enrolled — and I'm committing to a follow-up hearing in the next two cycles if the number of D3 placements falls short of 25% of the cohort.",
+      "quote": "This cohort is our promise in action — but a promise only counts when a young person from Fruitvale is holding a paycheck, not just a seat in a classroom.",
+      "fullStatement": "The report due this cycle is the first true test of the Oakland Youth Apprenticeship Pipeline. I've been a champion for this program because it's the direct path to keeping our young people in Oakland, contributing to our economy. But I'm not interested in a citywide success story that leaves San Antonio behind. I'm demanding the report include a breakdown by district, and I'm putting a marker down: at least one in four placed apprentices must come from D3. If that's not the case, we'll hold a hearing within the next two cycles to fix the pipeline before it becomes a pipeline of paper promises.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-112-council_d3-003",
+      "type": "statement",
+      "topic": "San Antonio Corridor Recovery",
+      "initiative": null,
+      "decision": "I am filing a targeted commercial and safety recovery package for San Antonio with the City Clerk this cycle, including a small business stabilization fund, enhanced lighting and public safety investments, and a merchant covenant to keep storefronts affordable for the community that built them.",
+      "quote": "San Antonio isn't just another neighborhood — it's the heart of D3's resilience, and I will not let it be anyone's forgotten corridor.",
+      "fullStatement": "San Antonio's mood is souring and its street trade is slowing while the rest of the city sees progress. That's a failing of policy, not a failure of this community. Today I'm filing a recovery package that puts money into the hands of our small business owners — with protections so rents don't spike and push them out — and directs city resources toward corridor safety and lighting improvements. This is not a handout; it's a covenant with the merchants and residents who have kept this neighborhood strong. City Hall owes them action, and I'm here to deliver it.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-112-council_d3-004",
+      "type": "statement",
+      "topic": "Fruitvale Success and Credit",
+      "initiative": null,
+      "decision": "I am publicly crediting the Fruitvale community organizations and merchant associations for the district's positive momentum, and I'm committing to a quarterly community assembly in Fruitvale to ensure that the city's investment aligns with what residents and merchants actually need.",
+      "quote": "Fruitvale's busy streets are not city hall's doing — they are the result of this community organizing, so the credit goes exactly where it belongs: to the people who show up every day.",
+      "fullStatement": "Fruitvale is doing well — mood is up, street trade is busy — and I am going to make sure the right people get the credit. That's the Fruitvale Merchants Association, the neighborhood groups, the residents who fought for safer streets and better transit. I'm going to keep pushing for the city's investment to follow this community's lead, not the other way around. To that end, I'm committing to a quarterly assembly in Fruitvale, where residents and business owners can tell us what's working and what isn't, directly to my office. That's how we keep momentum in the hands of the people.",
+      "trackerUpdates": {}
+    }
+  ]
+}

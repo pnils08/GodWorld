@@ -1,0 +1,16 @@
+{
+  "draft": "culture_c114_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "draftSha256": "32e7a351d879ea5af9bb4292475cef6a663a7ecaaca36f3c11b8f388477a0f57",
+  "verdict": "output/cron-compare/culture_c114_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+  "flags": [
+    {
+      "claim": "On his own page this cycle he put the question plainly: \"Do I come back for one more run, or step away for good? I haven't decided yet.\"",
+      "issue": "Fabricated speech attributed to named ledger citizen Vinnie Keane (POP-00001) not present in Section 4 interview record, and directly contradicts C114 sports canon where Keane has already made his retirement clear ('Keane said goodbye. Dillon still hasn't').",
+      "severity": "high"
+    }
+  ],
+  "checkFlags": [],
+  "contamination": [],
+  "summary": "Failed due to fabricated quote attributed to Vinnie Keane contradicting canon retirement status.",
+  "reviewedAt": "2026-11-07T00:20:02.982Z"
+}

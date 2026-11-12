@@ -1,0 +1,17 @@
+{
+  "desk": "undocked",
+  "cycle": "113",
+  "model": "openai/gpt-6-luna",
+  "turns": 4,
+  "maxTurns": 15,
+  "usageInputTokens": 10455,
+  "usageOutputTokens": 1300,
+  "savedFiles": [
+    "output/cron-compare/undocked_c113_nia-rook_packet-v2_openai-gpt-6-luna.md"
+  ],
+  "compareAgainst": "output/desk-output/undocked_c113.md",
+  "durationMs": 14892,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-10-30T23:21:15.875Z"
+}

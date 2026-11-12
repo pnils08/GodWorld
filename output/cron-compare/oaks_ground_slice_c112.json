@@ -1,0 +1,208 @@
+{
+  "version": "OAKS-GROUND-1",
+  "empty": false,
+  "cycle": 112,
+  "kind": "beat-oaks-ground",
+  "seat": {
+    "slug": "talia-finch",
+    "name": "Talia Finch",
+    "popid": "POP-00592",
+    "desk": "sports",
+    "domain": "oaks",
+    "builder": "buildOaksGroundSlice.js"
+  },
+  "hood": "KONO",
+  "pulse": {
+    "className": "beat-oaks-ground",
+    "score": 100,
+    "label": "Oaks ground read C112 — moderate",
+    "hood": "KONO",
+    "source": "output/beats/Oakland_Sports_Feed.jsonl @C112"
+  },
+  "story": {
+    "kind": "beat-oaks-ground",
+    "angle": "Oaks ground read C112 — moderate — the people around the second club",
+    "label": "Oaks ground read C112 — moderate",
+    "hookLine": "moderate",
+    "hood": "KONO",
+    "citizens": [
+      "Adash Stanley (POP-01023)",
+      "Austin Reaves (POP-01027)",
+      "Elias Varek (POP-00789)"
+    ],
+    "popids": [
+      "POP-01023",
+      "POP-01027",
+      "POP-00789"
+    ],
+    "ref": "output/beats/Oakland_Sports_Feed.jsonl @C112",
+    "cycle": 112
+  },
+  "approach": "Oaks ground approach: this slice is what the Oaks feed says about the people — the mood in the room, the fans, the neighborhood around the park — with the record as context. First-person ground report. The moods and sentiments are feed rows, real; the walk to the park, the vendor, the kid with the glove are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-01023",
+      "name": "Adash Stanley",
+      "role": "PG / The Oaks ",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Adash Stanley — PG / The Oaks  — Downtown",
+      "why": "named on the Oaks feed C112 (Oakland_Sports_Feed)"
+    },
+    {
+      "popid": "POP-01027",
+      "name": "Austin Reaves",
+      "role": "SG / The Oaks",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Austin Reaves — SG / The Oaks — Downtown",
+      "why": "named on the Oaks feed C112 (Oakland_Sports_Feed)"
+    },
+    {
+      "popid": "POP-00789",
+      "name": "Elias Varek",
+      "role": "Founder of Civis Systems",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Elias Varek — Founder of Civis Systems — West Oakland",
+      "why": "named on the Oaks feed C112 (Oakland_Sports_Feed)"
+    }
+  ],
+  "facts": [
+    {
+      "text": "Oaks fans, C112: moderate",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+    },
+    {
+      "text": "Room mood, C112: electric",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+    },
+    {
+      "text": "Notebook (feed): The Oaks open their inaugural season at home vs the San Antonio Spurs and instantly get their first win in franchise history, After 0-9 through rookie camp and preseason the team had grown anxious. Co",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+    },
+    {
+      "text": "Oaks — game-result (early-season), C112: The Oaks open their inaugural season at home. AJ Dybantsa shines in his rookie debut as the Oaks win their first win as a franchise.",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+    },
+    {
+      "text": "Context: record 1-0 · streak W1",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+    },
+    {
+      "text": "Home neighborhood (feed): KONO",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+    },
+    {
+      "text": "Oaks fans, C112: moderate",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+    },
+    {
+      "text": "Room mood, C112: confident",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+    },
+    {
+      "text": "Notebook (feed): Elias Varek met the media to congratulate his Oaks on their first win and sharing his excitement for what the season has in store. Elias complimented Mike Paulson and Elliot Abraham ability to put tog",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+    },
+    {
+      "text": "Oaks — season-state (early-season), C112: Elias Varek meets the media, happy over the win and shares updated on the Oaks.",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+    },
+    {
+      "text": "Context: record 1-0 · streak W1",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+    },
+    {
+      "text": "Home neighborhood (feed): Jack London",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "Oaks ground read C112 — moderate — the people around the second club",
+    "hookLine": "moderate",
+    "anchorFacts": [
+      "Oaks fans, C112: moderate",
+      "Room mood, C112: electric",
+      "Notebook (feed): The Oaks open their inaugural season at home vs the San Antonio Spurs and instantly get their first win in franchise history, After 0-9 through rookie camp and preseason the team had grown anxious. Co",
+      "Oaks — game-result (early-season), C112: The Oaks open their inaugural season at home. AJ Dybantsa shines in his rookie debut as the Oaks win their first win as a franchise.",
+      "Context: record 1-0 · streak W1",
+      "Home neighborhood (feed): KONO",
+      "Oaks fans, C112: moderate",
+      "Room mood, C112: confident",
+      "Notebook (feed): Elias Varek met the media to congratulate his Oaks on their first win and sharing his excitement for what the season has in store. Elias complimented Mike Paulson and Elliot Abraham ability to put tog",
+      "Oaks — season-state (early-season), C112: Elias Varek meets the media, happy over the win and shares updated on the Oaks.",
+      "Context: record 1-0 · streak W1",
+      "Home neighborhood (feed): Jack London"
+    ],
+    "evidence": [
+      {
+        "text": "Oaks fans, C112: moderate",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+      },
+      {
+        "text": "Room mood, C112: electric",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+      },
+      {
+        "text": "Notebook (feed): The Oaks open their inaugural season at home vs the San Antonio Spurs and instantly get their first win in franchise history, After 0-9 through rookie camp and preseason the team had grown anxious. Co",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+      },
+      {
+        "text": "Oaks — game-result (early-season), C112: The Oaks open their inaugural season at home. AJ Dybantsa shines in his rookie debut as the Oaks win their first win as a franchise.",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+      },
+      {
+        "text": "Context: record 1-0 · streak W1",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+      },
+      {
+        "text": "Home neighborhood (feed): KONO",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+      },
+      {
+        "text": "Oaks fans, C112: moderate",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+      },
+      {
+        "text": "Room mood, C112: confident",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+      },
+      {
+        "text": "Notebook (feed): Elias Varek met the media to congratulate his Oaks on their first win and sharing his excitement for what the season has in store. Elias complimented Mike Paulson and Elliot Abraham ability to put tog",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+      },
+      {
+        "text": "Oaks — season-state (early-season), C112: Elias Varek meets the media, happy over the win and shares updated on the Oaks.",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+      },
+      {
+        "text": "Context: record 1-0 · streak W1",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+      },
+      {
+        "text": "Home neighborhood (feed): Jack London",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": null,
+    "hooks": [],
+    "note": null,
+    "pageVoices": [],
+    "roomIsYours": "the walk from the bus stop, the vendor who knows the regulars, what the crowd sounds like when the club is losing, the kid waiting by the tunnel"
+  },
+  "feedRows": 11,
+  "currentCycleRows": 2,
+  "pointers": [
+    "output/beats/Oakland_Sports_Feed.jsonl @C112",
+    "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+  ]
+}

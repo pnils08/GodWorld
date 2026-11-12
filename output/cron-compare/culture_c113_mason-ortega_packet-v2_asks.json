@@ -1,0 +1,574 @@
+[
+  {
+    "pop": "POP-00265",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00265\",\"name\":\"Matty Lipo\",\"role\":\"Dishwasher\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Mason Ortega\",\"question\":\"What does a full dish shift at OakHouse actually look like — what arrives, what leaves, who does this work? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"Rockridge\",\"focus\":\"The people who work the shift in Rockridge kitchens — OakHouse and Claremont Table — and the rhythm of the work itself.\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Matty Lipo — Dishwasher — OakHouse, Rockridge\",\"evidence\":[{\"id\":\"EV-139a49a363\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113\",\"text\":\"Matty Lipo, Dishwasher at OakHouse. 6 named workers at 2 named kitchens in Rockridge on the ledger this cycle.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Matty Lipo, Dishwasher at OakHouse. 6 named workers at 2 named kitchens in Rockridge on the ledger this cycle.\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113\",\"id\":\"F-5e1b39217c36\"},{\"t\":\"FACT\",\"text\":\"OakHouse · Restaurant & Dining · 22 employees · growth 9.1% · revenue $3.7M (+$6k vs C112) · on the roster: Matty Lipo (Dishwasher); Mimmie Carlisle (Pastry Chef); Jesus Jorden (Pastry Chef, OakHouse); Kalyani Alvarez (Pastry Chef)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113\",\"id\":\"F-5e7b3dffb8cc\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C113\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-876f95b5eb98\"},{\"t\":\"FACT\",\"text\":\"Rockridge kitchens · OakHouse, Claremont Table\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113\",\"id\":\"F-701d22f3d9de\"},{\"t\":\"FACT\",\"text\":\"Claremont Table · Restaurant & Dining · 15 employees · growth 7.8% · revenue $2.5M (+$4k vs C112) · key personnel: Camila Osman (owner) · on the roster: Elio Perez (Server); Camila Osman (Owner, Claremont Table)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113\",\"id\":\"F-56fe224ed98d\"},{\"t\":\"FACT\",\"text\":\"CITY SEED (Downtown): citizens Tao Lee; Solis Walmart; Cameron Wallen; Donna Xu · businesses Bay Tribune; Alameda County Courts · Lake Merritt Mindfulness Sangha (faith)\",\"src\":\"output/beats/Story_Seed_Deck.jsonl @C113\",\"id\":\"F-0320aae0f253\"},{\"t\":\"FACT\",\"text\":\"CITY SEED (Citywide): citizens Briar Crawford; Matilda Okonkwo; Marrin Benry; Funmi Shah\",\"src\":\"output/beats/Story_Seed_Deck.jsonl @C113\",\"id\":\"F-43f83c54a586\"},{\"t\":\"FACT\",\"text\":\"Matty Lipo — Dishwasher — OakHouse, Rockridge\",\"src\":\"Simulation_Ledger profile for POP-00265\",\"id\":\"F-e43cad718166\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C9, Winter, holiday=none\",\"src\":\"output/world_summary_c113.md Calendar context (Simulation_Calendar)\",\"id\":\"F-ab9d6786094e\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00265",
+        "name": "Matty Lipo",
+        "role": "Dishwasher",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Mason Ortega",
+        "question": "What does a full dish shift at OakHouse actually look like — what arrives, what leaves, who does this work? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "Rockridge",
+        "focus": "The people who work the shift in Rockridge kitchens — OakHouse and Claremont Table — and the rhythm of the work itself.",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Matty Lipo — Dishwasher — OakHouse, Rockridge",
+        "evidence": [
+          {
+            "id": "EV-139a49a363",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+            "text": "Matty Lipo, Dishwasher at OakHouse. 6 named workers at 2 named kitchens in Rockridge on the ledger this cycle."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Matty Lipo, Dishwasher at OakHouse. 6 named workers at 2 named kitchens in Rockridge on the ledger this cycle.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+          "id": "F-5e1b39217c36"
+        },
+        {
+          "t": "FACT",
+          "text": "OakHouse · Restaurant & Dining · 22 employees · growth 9.1% · revenue $3.7M (+$6k vs C112) · on the roster: Matty Lipo (Dishwasher); Mimmie Carlisle (Pastry Chef); Jesus Jorden (Pastry Chef, OakHouse); Kalyani Alvarez (Pastry Chef)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+          "id": "F-5e7b3dffb8cc"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C113",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-876f95b5eb98"
+        },
+        {
+          "t": "FACT",
+          "text": "Rockridge kitchens · OakHouse, Claremont Table",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+          "id": "F-701d22f3d9de"
+        },
+        {
+          "t": "FACT",
+          "text": "Claremont Table · Restaurant & Dining · 15 employees · growth 7.8% · revenue $2.5M (+$4k vs C112) · key personnel: Camila Osman (owner) · on the roster: Elio Perez (Server); Camila Osman (Owner, Claremont Table)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+          "id": "F-56fe224ed98d"
+        },
+        {
+          "t": "FACT",
+          "text": "CITY SEED (Downtown): citizens Tao Lee; Solis Walmart; Cameron Wallen; Donna Xu · businesses Bay Tribune; Alameda County Courts · Lake Merritt Mindfulness Sangha (faith)",
+          "src": "output/beats/Story_Seed_Deck.jsonl @C113",
+          "id": "F-0320aae0f253"
+        },
+        {
+          "t": "FACT",
+          "text": "CITY SEED (Citywide): citizens Briar Crawford; Matilda Okonkwo; Marrin Benry; Funmi Shah",
+          "src": "output/beats/Story_Seed_Deck.jsonl @C113",
+          "id": "F-43f83c54a586"
+        },
+        {
+          "t": "FACT",
+          "text": "Matty Lipo — Dishwasher — OakHouse, Rockridge",
+          "src": "Simulation_Ledger profile for POP-00265",
+          "id": "F-e43cad718166"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C9, Winter, holiday=none",
+          "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+          "id": "F-ab9d6786094e"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00201",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00201\",\"name\":\"Elio Perez\",\"role\":\"Server\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Mason Ortega\",\"question\":\"What is the floor like at Claremont Table between services, and how does Elio Perez navigate the quiet hours? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"Rockridge\",\"focus\":\"The people who work the shift in Rockridge kitchens — OakHouse and Claremont Table — and the rhythm of the work itself.\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Elio Perez — Server — Claremont Table, Rockridge\",\"evidence\":[{\"id\":\"EV-3a4e0f47a6\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113\",\"text\":\"Matty Lipo, Dishwasher at OakHouse. 6 named workers at 2 named kitchens in Rockridge on the ledger this cycle.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Claremont Table · Restaurant & Dining · 15 employees · growth 7.8% · revenue $2.5M (+$4k vs C112) · key personnel: Camila Osman (owner) · on the roster: Elio Perez (Server); Camila Osman (Owner, Claremont Table)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113\",\"id\":\"F-56fe224ed98d\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C113\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-876f95b5eb98\"},{\"t\":\"FACT\",\"text\":\"Rockridge kitchens · OakHouse, Claremont Table\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113\",\"id\":\"F-701d22f3d9de\"},{\"t\":\"FACT\",\"text\":\"Matty Lipo, Dishwasher at OakHouse. 6 named workers at 2 named kitchens in Rockridge on the ledger this cycle.\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113\",\"id\":\"F-5e1b39217c36\"},{\"t\":\"FACT\",\"text\":\"OakHouse · Restaurant & Dining · 22 employees · growth 9.1% · revenue $3.7M (+$6k vs C112) · on the roster: Matty Lipo (Dishwasher); Mimmie Carlisle (Pastry Chef); Jesus Jorden (Pastry Chef, OakHouse); Kalyani Alvarez (Pastry Chef)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113\",\"id\":\"F-5e7b3dffb8cc\"},{\"t\":\"FACT\",\"text\":\"CITY SEED (Downtown): citizens Tao Lee; Solis Walmart; Cameron Wallen; Donna Xu · businesses Bay Tribune; Alameda County Courts · Lake Merritt Mindfulness Sangha (faith)\",\"src\":\"output/beats/Story_Seed_Deck.jsonl @C113\",\"id\":\"F-0320aae0f253\"},{\"t\":\"FACT\",\"text\":\"CITY SEED (Citywide): citizens Briar Crawford; Matilda Okonkwo; Marrin Benry; Funmi Shah\",\"src\":\"output/beats/Story_Seed_Deck.jsonl @C113\",\"id\":\"F-43f83c54a586\"},{\"t\":\"FACT\",\"text\":\"Elio Perez — Server — Claremont Table, Rockridge\",\"src\":\"Simulation_Ledger profile for POP-00201\",\"id\":\"F-d83ea270e95e\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C9, Winter, holiday=none\",\"src\":\"output/world_summary_c113.md Calendar context (Simulation_Calendar)\",\"id\":\"F-ab9d6786094e\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00201",
+        "name": "Elio Perez",
+        "role": "Server",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Mason Ortega",
+        "question": "What is the floor like at Claremont Table between services, and how does Elio Perez navigate the quiet hours? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "Rockridge",
+        "focus": "The people who work the shift in Rockridge kitchens — OakHouse and Claremont Table — and the rhythm of the work itself.",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Elio Perez — Server — Claremont Table, Rockridge",
+        "evidence": [
+          {
+            "id": "EV-3a4e0f47a6",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+            "text": "Matty Lipo, Dishwasher at OakHouse. 6 named workers at 2 named kitchens in Rockridge on the ledger this cycle."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Claremont Table · Restaurant & Dining · 15 employees · growth 7.8% · revenue $2.5M (+$4k vs C112) · key personnel: Camila Osman (owner) · on the roster: Elio Perez (Server); Camila Osman (Owner, Claremont Table)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+          "id": "F-56fe224ed98d"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C113",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-876f95b5eb98"
+        },
+        {
+          "t": "FACT",
+          "text": "Rockridge kitchens · OakHouse, Claremont Table",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+          "id": "F-701d22f3d9de"
+        },
+        {
+          "t": "FACT",
+          "text": "Matty Lipo, Dishwasher at OakHouse. 6 named workers at 2 named kitchens in Rockridge on the ledger this cycle.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+          "id": "F-5e1b39217c36"
+        },
+        {
+          "t": "FACT",
+          "text": "OakHouse · Restaurant & Dining · 22 employees · growth 9.1% · revenue $3.7M (+$6k vs C112) · on the roster: Matty Lipo (Dishwasher); Mimmie Carlisle (Pastry Chef); Jesus Jorden (Pastry Chef, OakHouse); Kalyani Alvarez (Pastry Chef)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+          "id": "F-5e7b3dffb8cc"
+        },
+        {
+          "t": "FACT",
+          "text": "CITY SEED (Downtown): citizens Tao Lee; Solis Walmart; Cameron Wallen; Donna Xu · businesses Bay Tribune; Alameda County Courts · Lake Merritt Mindfulness Sangha (faith)",
+          "src": "output/beats/Story_Seed_Deck.jsonl @C113",
+          "id": "F-0320aae0f253"
+        },
+        {
+          "t": "FACT",
+          "text": "CITY SEED (Citywide): citizens Briar Crawford; Matilda Okonkwo; Marrin Benry; Funmi Shah",
+          "src": "output/beats/Story_Seed_Deck.jsonl @C113",
+          "id": "F-43f83c54a586"
+        },
+        {
+          "t": "FACT",
+          "text": "Elio Perez — Server — Claremont Table, Rockridge",
+          "src": "Simulation_Ledger profile for POP-00201",
+          "id": "F-d83ea270e95e"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C9, Winter, holiday=none",
+          "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+          "id": "F-ab9d6786094e"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01134",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01134\",\"name\":\"Camila Osman\",\"role\":\"Owner, Claremont Table\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Mason Ortega\",\"question\":\"How does an owner who is also on the roster see this kitchen's daily operation, especially the parts that don't show up on receipts? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"Rockridge\",\"focus\":\"The people who work the shift in Rockridge kitchens — OakHouse and Claremont Table — and the rhythm of the work itself.\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Camila Osman — Owner, Claremont Table — Claremont Table, Rockridge\",\"evidence\":[{\"id\":\"EV-ce293ebbac\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113\",\"text\":\"Matty Lipo, Dishwasher at OakHouse. 6 named workers at 2 named kitchens in Rockridge on the ledger this cycle.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Claremont Table · Restaurant & Dining · 15 employees · growth 7.8% · revenue $2.5M (+$4k vs C112) · key personnel: Camila Osman (owner) · on the roster: Elio Perez (Server); Camila Osman (Owner, Claremont Table)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113\",\"id\":\"F-56fe224ed98d\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C113\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-876f95b5eb98\"},{\"t\":\"FACT\",\"text\":\"Rockridge kitchens · OakHouse, Claremont Table\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113\",\"id\":\"F-701d22f3d9de\"},{\"t\":\"FACT\",\"text\":\"Matty Lipo, Dishwasher at OakHouse. 6 named workers at 2 named kitchens in Rockridge on the ledger this cycle.\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113\",\"id\":\"F-5e1b39217c36\"},{\"t\":\"FACT\",\"text\":\"OakHouse · Restaurant & Dining · 22 employees · growth 9.1% · revenue $3.7M (+$6k vs C112) · on the roster: Matty Lipo (Dishwasher); Mimmie Carlisle (Pastry Chef); Jesus Jorden (Pastry Chef, OakHouse); Kalyani Alvarez (Pastry Chef)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113\",\"id\":\"F-5e7b3dffb8cc\"},{\"t\":\"FACT\",\"text\":\"CITY SEED (Downtown): citizens Tao Lee; Solis Walmart; Cameron Wallen; Donna Xu · businesses Bay Tribune; Alameda County Courts · Lake Merritt Mindfulness Sangha (faith)\",\"src\":\"output/beats/Story_Seed_Deck.jsonl @C113\",\"id\":\"F-0320aae0f253\"},{\"t\":\"FACT\",\"text\":\"CITY SEED (Citywide): citizens Briar Crawford; Matilda Okonkwo; Marrin Benry; Funmi Shah\",\"src\":\"output/beats/Story_Seed_Deck.jsonl @C113\",\"id\":\"F-43f83c54a586\"},{\"t\":\"FACT\",\"text\":\"Camila Osman — Owner, Claremont Table — Claremont Table, Rockridge\",\"src\":\"Simulation_Ledger profile for POP-01134\",\"id\":\"F-e33de54acce8\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C9, Winter, holiday=none\",\"src\":\"output/world_summary_c113.md Calendar context (Simulation_Calendar)\",\"id\":\"F-ab9d6786094e\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01134",
+        "name": "Camila Osman",
+        "role": "Owner, Claremont Table",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Mason Ortega",
+        "question": "How does an owner who is also on the roster see this kitchen's daily operation, especially the parts that don't show up on receipts? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "Rockridge",
+        "focus": "The people who work the shift in Rockridge kitchens — OakHouse and Claremont Table — and the rhythm of the work itself.",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Camila Osman — Owner, Claremont Table — Claremont Table, Rockridge",
+        "evidence": [
+          {
+            "id": "EV-ce293ebbac",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+            "text": "Matty Lipo, Dishwasher at OakHouse. 6 named workers at 2 named kitchens in Rockridge on the ledger this cycle."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Claremont Table · Restaurant & Dining · 15 employees · growth 7.8% · revenue $2.5M (+$4k vs C112) · key personnel: Camila Osman (owner) · on the roster: Elio Perez (Server); Camila Osman (Owner, Claremont Table)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+          "id": "F-56fe224ed98d"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C113",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-876f95b5eb98"
+        },
+        {
+          "t": "FACT",
+          "text": "Rockridge kitchens · OakHouse, Claremont Table",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+          "id": "F-701d22f3d9de"
+        },
+        {
+          "t": "FACT",
+          "text": "Matty Lipo, Dishwasher at OakHouse. 6 named workers at 2 named kitchens in Rockridge on the ledger this cycle.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+          "id": "F-5e1b39217c36"
+        },
+        {
+          "t": "FACT",
+          "text": "OakHouse · Restaurant & Dining · 22 employees · growth 9.1% · revenue $3.7M (+$6k vs C112) · on the roster: Matty Lipo (Dishwasher); Mimmie Carlisle (Pastry Chef); Jesus Jorden (Pastry Chef, OakHouse); Kalyani Alvarez (Pastry Chef)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+          "id": "F-5e7b3dffb8cc"
+        },
+        {
+          "t": "FACT",
+          "text": "CITY SEED (Downtown): citizens Tao Lee; Solis Walmart; Cameron Wallen; Donna Xu · businesses Bay Tribune; Alameda County Courts · Lake Merritt Mindfulness Sangha (faith)",
+          "src": "output/beats/Story_Seed_Deck.jsonl @C113",
+          "id": "F-0320aae0f253"
+        },
+        {
+          "t": "FACT",
+          "text": "CITY SEED (Citywide): citizens Briar Crawford; Matilda Okonkwo; Marrin Benry; Funmi Shah",
+          "src": "output/beats/Story_Seed_Deck.jsonl @C113",
+          "id": "F-43f83c54a586"
+        },
+        {
+          "t": "FACT",
+          "text": "Camila Osman — Owner, Claremont Table — Claremont Table, Rockridge",
+          "src": "Simulation_Ledger profile for POP-01134",
+          "id": "F-e33de54acce8"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C9, Winter, holiday=none",
+          "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+          "id": "F-ab9d6786094e"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00682",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00682\",\"name\":\"Mimmie Carlisle\",\"role\":\"Pastry Chef\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Mason Ortega\",\"question\":\"What does the pastry side of OakHouse actually require across a shift, given the number of people rostered to it? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"Rockridge\",\"focus\":\"The people who work the shift in Rockridge kitchens — OakHouse and Claremont Table — and the rhythm of the work itself.\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Mimmie Carlisle — Pastry Chef — OakHouse, Rockridge\",\"evidence\":[{\"id\":\"EV-1fade25ad5\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113\",\"text\":\"Matty Lipo, Dishwasher at OakHouse. 6 named workers at 2 named kitchens in Rockridge on the ledger this cycle.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"OakHouse · Restaurant & Dining · 22 employees · growth 9.1% · revenue $3.7M (+$6k vs C112) · on the roster: Matty Lipo (Dishwasher); Mimmie Carlisle (Pastry Chef); Jesus Jorden (Pastry Chef, OakHouse); Kalyani Alvarez (Pastry Chef)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113\",\"id\":\"F-5e7b3dffb8cc\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C113\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-876f95b5eb98\"},{\"t\":\"FACT\",\"text\":\"Rockridge kitchens · OakHouse, Claremont Table\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113\",\"id\":\"F-701d22f3d9de\"},{\"t\":\"FACT\",\"text\":\"Matty Lipo, Dishwasher at OakHouse. 6 named workers at 2 named kitchens in Rockridge on the ledger this cycle.\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113\",\"id\":\"F-5e1b39217c36\"},{\"t\":\"FACT\",\"text\":\"Claremont Table · Restaurant & Dining · 15 employees · growth 7.8% · revenue $2.5M (+$4k vs C112) · key personnel: Camila Osman (owner) · on the roster: Elio Perez (Server); Camila Osman (Owner, Claremont Table)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113\",\"id\":\"F-56fe224ed98d\"},{\"t\":\"FACT\",\"text\":\"CITY SEED (Downtown): citizens Tao Lee; Solis Walmart; Cameron Wallen; Donna Xu · businesses Bay Tribune; Alameda County Courts · Lake Merritt Mindfulness Sangha (faith)\",\"src\":\"output/beats/Story_Seed_Deck.jsonl @C113\",\"id\":\"F-0320aae0f253\"},{\"t\":\"FACT\",\"text\":\"CITY SEED (Citywide): citizens Briar Crawford; Matilda Okonkwo; Marrin Benry; Funmi Shah\",\"src\":\"output/beats/Story_Seed_Deck.jsonl @C113\",\"id\":\"F-43f83c54a586\"},{\"t\":\"FACT\",\"text\":\"Mimmie Carlisle — Pastry Chef — OakHouse, Rockridge\",\"src\":\"Simulation_Ledger profile for POP-00682\",\"id\":\"F-5dfbb7417cc9\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C9, Winter, holiday=none\",\"src\":\"output/world_summary_c113.md Calendar context (Simulation_Calendar)\",\"id\":\"F-ab9d6786094e\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00682",
+        "name": "Mimmie Carlisle",
+        "role": "Pastry Chef",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Mason Ortega",
+        "question": "What does the pastry side of OakHouse actually require across a shift, given the number of people rostered to it? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "Rockridge",
+        "focus": "The people who work the shift in Rockridge kitchens — OakHouse and Claremont Table — and the rhythm of the work itself.",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Mimmie Carlisle — Pastry Chef — OakHouse, Rockridge",
+        "evidence": [
+          {
+            "id": "EV-1fade25ad5",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+            "text": "Matty Lipo, Dishwasher at OakHouse. 6 named workers at 2 named kitchens in Rockridge on the ledger this cycle."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "OakHouse · Restaurant & Dining · 22 employees · growth 9.1% · revenue $3.7M (+$6k vs C112) · on the roster: Matty Lipo (Dishwasher); Mimmie Carlisle (Pastry Chef); Jesus Jorden (Pastry Chef, OakHouse); Kalyani Alvarez (Pastry Chef)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+          "id": "F-5e7b3dffb8cc"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C113",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-876f95b5eb98"
+        },
+        {
+          "t": "FACT",
+          "text": "Rockridge kitchens · OakHouse, Claremont Table",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+          "id": "F-701d22f3d9de"
+        },
+        {
+          "t": "FACT",
+          "text": "Matty Lipo, Dishwasher at OakHouse. 6 named workers at 2 named kitchens in Rockridge on the ledger this cycle.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+          "id": "F-5e1b39217c36"
+        },
+        {
+          "t": "FACT",
+          "text": "Claremont Table · Restaurant & Dining · 15 employees · growth 7.8% · revenue $2.5M (+$4k vs C112) · key personnel: Camila Osman (owner) · on the roster: Elio Perez (Server); Camila Osman (Owner, Claremont Table)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+          "id": "F-56fe224ed98d"
+        },
+        {
+          "t": "FACT",
+          "text": "CITY SEED (Downtown): citizens Tao Lee; Solis Walmart; Cameron Wallen; Donna Xu · businesses Bay Tribune; Alameda County Courts · Lake Merritt Mindfulness Sangha (faith)",
+          "src": "output/beats/Story_Seed_Deck.jsonl @C113",
+          "id": "F-0320aae0f253"
+        },
+        {
+          "t": "FACT",
+          "text": "CITY SEED (Citywide): citizens Briar Crawford; Matilda Okonkwo; Marrin Benry; Funmi Shah",
+          "src": "output/beats/Story_Seed_Deck.jsonl @C113",
+          "id": "F-43f83c54a586"
+        },
+        {
+          "t": "FACT",
+          "text": "Mimmie Carlisle — Pastry Chef — OakHouse, Rockridge",
+          "src": "Simulation_Ledger profile for POP-00682",
+          "id": "F-5dfbb7417cc9"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C9, Winter, holiday=none",
+          "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+          "id": "F-ab9d6786094e"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  }
+]

@@ -1,0 +1,28 @@
+{
+  "office": "council_d9",
+  "cycle": 113,
+  "speaker": "Terrence Mobley",
+  "cascadeSummary": "This cycle I'm keeping my focus on Laurel and Uptown—no manufactured motion when the fundamentals are holding. I'm putting the district on record that Uptown's quieting streets have waited long enough for the same focused investment downtown is finally getting, and I'm naming Deputy Mayor Okoro's housing unit for the work showing up in Uptown's busy street trade. Laurel steady means we protect what's working; Uptown's message says we act before quiet becomes shuttered.",
+  "statements": [
+    {
+      "statementId": "STMT-113-council_d9-001",
+      "type": "vote_statement",
+      "topic": "Uptown Commercial Distress and Credit",
+      "initiative": "INIT-008",
+      "decision": "Publicly credit Deputy Mayor Okoro's housing unit for Uptown's visible improvement and call for the Downtown Economic Revitalization committee's Uptown planning track to move with urgency and a concrete timeline.",
+      "quote": "Uptown's busy streets are somebody's work paying off—I'm naming whose, and I'm making sure the next phase doesn't stop at downtown.",
+      "fullStatement": "Laurel's flat and steady is the result of not letting good work get distracted. Uptown's mild positive and busy street trade is somebody's work paying off, and I'm not letting that go unnamed—Deputy Mayor Okoro's housing unit has been putting in the focused attention that shows. But I've said it before and I'll say it again: Uptown's quieting streets are a message, not a mystery. Downtown is getting its hearing and its committee advancement, and that's right—but Uptown's track can't be a footnote. I want the Uptown planning commitment to come back with a timeline and named milestones, not a study. We've waited long enough; the busy streets today shouldn't be the peak we look back on.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-113-council_d9-002",
+      "type": "position_statement",
+      "topic": "Laurel Stability",
+      "initiative": null,
+      "decision": "Publicly defend Laurel's stability as the product of consistent focus and signal continued vigilance on the sick-resident count.",
+      "quote": "Laurel's stability is no accident—it's what happens when you don't let good work get distracted.",
+      "fullStatement": "Laurel is flat and steady, and that's not luck—that's the result of not letting good work get distracted. The people in Laurel are living their lives this cycle whether City Hall speaks or not, and my job is to make sure the quiet stability they've got isn't taken for granted. I'm watching the sick-resident count, and I'm not going to manufacture motion just to look busy. Sometimes the right call is to hold the line, protect what's working, and stay ready to act if the numbers trend the wrong way. That's the discipline Laurel deserves.",
+      "trackerUpdates": {}
+    }
+  ]
+}

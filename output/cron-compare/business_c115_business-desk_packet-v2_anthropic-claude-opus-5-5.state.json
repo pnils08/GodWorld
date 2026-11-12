@@ -1,0 +1,422 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00153",
+    "name": "Jordan Velez",
+    "role": "desk reporter",
+    "desk": "business"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Baylight District businesses: Baylight Construction Authority, Anthropic, Oakland Casino Town — the people who work there",
+    "approach": "Business desk approach: this slice is one neighborhood's businesses from the ledger and the people on the roster who work there — plus what moved since last cycle: revenue and headcount deltas, contractions, closures on the archive, and the week's casino action. When the record shows a business closing or shedding workers, that is the story. Open from a named business or a named worker on it — the block, the counter, the hiring board, what the owner is worried about. One claim about how the block is moving. Not civic process roundup. Not multi-voice business-desk average. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "economic-storefront",
+      "hood": "Baylight District",
+      "pulseClass": "hood-businesses",
+      "economicFrame": "Baylight District businesses: Baylight Construction Authority, Anthropic, Oakland Casino Town — the people who work there",
+      "hook": "Keisha Ramos, Director, Baylight Redevelopment Authority at Baylight Construction Authority. 12 named workers at 4 named businesses in Baylight District on the ledger this cycle.",
+      "namedBusinesses": [
+        "Baylight Construction Authority",
+        "Anthropic",
+        "Oakland Casino Town",
+        "Marine Systems",
+        "DigitalOcean"
+      ],
+      "workplaces": [
+        "Baylight Construction Authority — Construction — Keisha Ramos (Director, Baylight Redevelopment Authority); Brianna Lee (Historic Preservation Carpenter); Tariq Jello (Appliance Repair Technician); Talmon Lint (Solar Panel Installation Lead)",
+        "Anthropic — AI Research — Broderick Mitchell (Security guard); Kelvon Ochoa (AI Safety Researcher (Anthropic)); Iggy Davis (AI Safety Researcher (Anthropic)); Linda Chow (AI Safety Researcher (Anthropic))",
+        "Oakland Casino Town — Nightlife & Entertainment — Gregory Mims (Organized Crime); Philly Rodriguez (Casino Manager); Manfred Owens (Booky)",
+        "Marine Systems — Science — Mina Linas (Sea Level Monitoring Technician)",
+        "DigitalOcean — Cloud Infrastructure — no roster names"
+      ],
+      "engineColour": [
+        "Iris Pham — traded produce over a fence and came out ahead",
+        "Dawson Nguyen — caught the recap of last night's game at the counter and stayed for the second retelling",
+        "Ron Arenson — drank the free cold brew in the company kitchen and felt completely disconnected from the neighborhood outside",
+        "Freya Rao — recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for near a pregame tailgate"
+      ],
+      "roomIsYours": "the counter, the hiring board, the back office, what the owner is worried about",
+      "forbidden": [
+        "Do not invent a business, a worker, an owner or a place — every name comes from this slice",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose",
+        "Do not contradict a role, employer or neighborhood listed here"
+      ],
+      "sceneRule": null
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "story-signal",
+    "hood": "Baylight District",
+    "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+    "plan": {
+      "focus": "Marine Systems shedding half its staff in a booming district — what the contraction means for the work and for the block",
+      "closeQuestion": "If the boom builds the district for the future but the sea level monitor is the one getting cut, what exactly is the future being built for?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00041",
+        "name": "Keisha Ramos",
+        "profile": "Keisha Ramos — Director, Baylight Redevelopment Authority — Baylight Construction Authority, Baylight District",
+        "quotationEligible": false,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [],
+    "excludedLeads": [
+      {
+        "from": "Jordan Velez",
+        "text": "Marine Systems' two departing workers may have been let go as part of a funding shortfall, or they may have left because the work was being consolidated elsewhere",
+        "usable": false
+      },
+      {
+        "from": "Jordan Velez",
+        "text": "Casino headcount at Oakland Casino Town may be down because of increased regulatory pressure or because the business is automating functions",
+        "usable": false
+      },
+      {
+        "from": "Jordan Velez",
+        "text": "The redevelopment authority's plans for the Baylight District may include parcels that directly affect Marine Systems' current footprint",
+        "usable": false
+      },
+      {
+        "from": "Jordan Velez",
+        "text": "Anthropic's security presence — including a named security guard on the roster — suggests the AI lab operates with visible and heavy protection in the district",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C115",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-bc84fc0b7718"
+    },
+    {
+      "t": "FACT",
+      "text": "Baylight District businesses · Baylight Construction Authority, Anthropic",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+      "id": "F-5b93d3d637ee"
+    },
+    {
+      "t": "FACT",
+      "text": "Keisha Ramos, Director, Baylight Redevelopment Authority at Baylight Construction Authority. 12 named workers at 4 named businesses in Baylight District on the ledger this cycle.",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+      "id": "F-614e8835a5e5"
+    },
+    {
+      "t": "FACT",
+      "text": "Baylight Construction Authority · Construction · 451 employees · growth 1.7% · revenue $31.3M (+$10k vs C114) · on the roster: Keisha Ramos (Director, Baylight Redevelopment Authority); Brianna Lee (Historic Preservation Carpenter); Tariq Jello (Appliance Repair Technician); Talmon Lint (Solar Panel Installation Lead) +36 more",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+      "id": "F-7f84a70d4cf5"
+    },
+    {
+      "t": "FACT",
+      "text": "Anthropic · AI Research · 86 employees · growth 2.7% · revenue $649.8M (+$335k vs C114) · on the roster: Broderick Mitchell (Security guard); Kelvon Ochoa (AI Safety Researcher (Anthropic)); Iggy Davis (AI Safety Researcher (Anthropic)); Linda Chow (AI Safety Researcher (Anthropic)) +7 more",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+      "id": "F-4576ba249243"
+    },
+    {
+      "t": "FACT",
+      "text": "Oakland Casino Town · Nightlife & Entertainment · 99 employees (-1 vs C114) · growth -2.3% · on the roster: Gregory Mims (Organized Crime); Philly Rodriguez (Casino Manager); Manfred Owens (Booky)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+      "id": "F-ca743cc2f158"
+    },
+    {
+      "t": "FACT",
+      "text": "Marine Systems · Science · 3 employees (-2 vs C114) · growth -2.9% · on the roster: Mina Linas (Sea Level Monitoring Technician)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+      "id": "F-d575692a7908"
+    },
+    {
+      "t": "FACT",
+      "text": "DigitalOcean · Cloud Infrastructure · 800 employees · growth 5.2% · revenue $521.4M (+$525k vs C114)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+      "id": "F-6240d90683dc"
+    },
+    {
+      "t": "FACT",
+      "text": "CITY SEED (Baylight District): citizens Iris Pham; Dawson Nguyen; Ron Arenson; Freya Rao · businesses Marine Systems; Oakland Casino Town · Vinnie Keane Gala (program)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C115",
+      "id": "F-3dd3539a09d0"
+    },
+    {
+      "t": "FACT",
+      "text": "CONTRACTING: Marine Systems (Baylight District) shed 2 workers vs C114 and growth is -2.9%",
+      "src": "output/beats/prev/Business_Ledger.jsonl vs Business_Ledger.jsonl @C115",
+      "id": "F-cd9fca51486a"
+    },
+    {
+      "t": "FACT",
+      "text": "CONTRACTING: Ivy Hill Cafe (Ivy Hill) shed 2 workers vs C114 and growth is -3.3%",
+      "src": "output/beats/prev/Business_Ledger.jsonl vs Business_Ledger.jsonl @C115",
+      "id": "F-a9b676088d5a"
+    },
+    {
+      "t": "FACT",
+      "text": "CONTRACTING: Ivy Cleaners (Ivy Hill) shed 2 workers vs C114 and growth is -2.5%",
+      "src": "output/beats/prev/Business_Ledger.jsonl vs Business_Ledger.jsonl @C115",
+      "id": "F-bfc65de83acc"
+    },
+    {
+      "t": "FACT",
+      "text": "CONTRACTING: Ivy Hill Family Dental (Ivy Hill) shed 2 workers vs C114 and growth is -2%",
+      "src": "output/beats/prev/Business_Ledger.jsonl vs Business_Ledger.jsonl @C115",
+      "id": "F-124b80cea5b5"
+    },
+    {
+      "t": "FACT",
+      "text": "CONTRACTING: Hillcrest Kitchen (Ivy Hill) shed 2 workers vs C114 and growth is -4.1%",
+      "src": "output/beats/prev/Business_Ledger.jsonl vs Business_Ledger.jsonl @C115",
+      "id": "F-0e262a643b13"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C11, Spring, holiday=none",
+      "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+      "id": "F-82d77e9a4a71"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. No named ledger citizen spoke for this piece (manifest.approvedQuotes is empty): put no words in a named citizen's mouth. Unnamed voices are yours. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "jordan-economic-labor-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Follow Packet-backed money, labor, development, and storefront conditions to the people carrying the consequence. Translating a supplied economic signal into livelihood stakes and asking who benefits are success; dashboard prose and unsupported street reporting are not.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "grounded third-person economics and labor reporting",
+      "targetWords": "500-800",
+      "opening": "a Packet-backed economic fact, person, business, corridor, or storefront consequence",
+      "closing": "an unresolved beneficiary, contract, labor, or livelihood question grounded in the supplied record"
+    },
+    "authorizedTexture": [
+      "unnamed storefront light, shutters, counter, sidewalk, or foot-traffic texture that makes no measured trend or event claim",
+      "transitions translating a Packet-backed economic condition into rent, hiring, commute, payroll, or customer stakes without inventing a concrete outcome",
+      "skeptical analysis of who may benefit or carry risk when it remains framed as analysis or a question",
+      "the reporter's own presence in a supplied or generic economic setting without claiming an interview or observation that did not occur"
+    ],
+    "textureConditions": [
+      "every named person, business, venue, corridor, neighborhood, institution, office, union, Project, Initiative, and organization must come from the Packet",
+      "money, wages, rent, lease terms, employee or job counts, dates, durations, contracts, disbursements, and measured trends must come from the Packet",
+      "raw engine labels and decimal scores may inform reasoning but must not appear as published economic facts or dashboard prose",
+      "hiring, layoffs, closures, openings, extended hours, foot-traffic changes, and other observable actions require Packet support",
+      "I spoke with or another reporting claim requires a supplied interview or quote; generic scene texture is not a sourced perspective"
+    ],
+    "canonBlockers": [
+      "a named person, business, venue, corridor, neighborhood, institution, office, union, Project, Initiative, or organization not found in the supplied record",
+      "an unsupported hiring, layoff, closure, opening, relocation, lease, rent change, wage change, contract, payment, disbursement, or beneficiary claim",
+      "an unsupported amount, percentage, employee count, job count, date, duration, address, metric direction, or economic trend",
+      "a raw engine label, load, volume, index, score, or decimal printed as public-facing evidence",
+      "a fabricated owner, worker, customer, official, interview, quote, observation, or collective business sentiment",
+      "an unsupported causal chain, corruption implication, winner, loser, or current-state claim presented as settled fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-5fbc53e21e10",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-bc84fc0b7718",
+        "t": "FACT",
+        "text": "Current cycle: C115",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-5b93d3d637ee",
+        "t": "FACT",
+        "text": "Baylight District businesses · Baylight Construction Authority, Anthropic",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115"
+      },
+      {
+        "id": "F-614e8835a5e5",
+        "t": "FACT",
+        "text": "Keisha Ramos, Director, Baylight Redevelopment Authority at Baylight Construction Authority. 12 named workers at 4 named businesses in Baylight District on the ledger this cycle.",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115"
+      },
+      {
+        "id": "F-7f84a70d4cf5",
+        "t": "FACT",
+        "text": "Baylight Construction Authority · Construction · 451 employees · growth 1.7% · revenue $31.3M (+$10k vs C114) · on the roster: Keisha Ramos (Director, Baylight Redevelopment Authority); Brianna Lee (Historic Preservation Carpenter); Tariq Jello (Appliance Repair Technician); Talmon Lint (Solar Panel Installation Lead) +36 more",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115"
+      },
+      {
+        "id": "F-4576ba249243",
+        "t": "FACT",
+        "text": "Anthropic · AI Research · 86 employees · growth 2.7% · revenue $649.8M (+$335k vs C114) · on the roster: Broderick Mitchell (Security guard); Kelvon Ochoa (AI Safety Researcher (Anthropic)); Iggy Davis (AI Safety Researcher (Anthropic)); Linda Chow (AI Safety Researcher (Anthropic)) +7 more",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115"
+      },
+      {
+        "id": "F-ca743cc2f158",
+        "t": "FACT",
+        "text": "Oakland Casino Town · Nightlife & Entertainment · 99 employees (-1 vs C114) · growth -2.3% · on the roster: Gregory Mims (Organized Crime); Philly Rodriguez (Casino Manager); Manfred Owens (Booky)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115"
+      },
+      {
+        "id": "F-d575692a7908",
+        "t": "FACT",
+        "text": "Marine Systems · Science · 3 employees (-2 vs C114) · growth -2.9% · on the roster: Mina Linas (Sea Level Monitoring Technician)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115"
+      },
+      {
+        "id": "F-6240d90683dc",
+        "t": "FACT",
+        "text": "DigitalOcean · Cloud Infrastructure · 800 employees · growth 5.2% · revenue $521.4M (+$525k vs C114)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115"
+      },
+      {
+        "id": "F-3dd3539a09d0",
+        "t": "FACT",
+        "text": "CITY SEED (Baylight District): citizens Iris Pham; Dawson Nguyen; Ron Arenson; Freya Rao · businesses Marine Systems; Oakland Casino Town · Vinnie Keane Gala (program)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C115"
+      },
+      {
+        "id": "F-cd9fca51486a",
+        "t": "FACT",
+        "text": "CONTRACTING: Marine Systems (Baylight District) shed 2 workers vs C114 and growth is -2.9%",
+        "src": "output/beats/prev/Business_Ledger.jsonl vs Business_Ledger.jsonl @C115"
+      },
+      {
+        "id": "F-a9b676088d5a",
+        "t": "FACT",
+        "text": "CONTRACTING: Ivy Hill Cafe (Ivy Hill) shed 2 workers vs C114 and growth is -3.3%",
+        "src": "output/beats/prev/Business_Ledger.jsonl vs Business_Ledger.jsonl @C115"
+      },
+      {
+        "id": "F-bfc65de83acc",
+        "t": "FACT",
+        "text": "CONTRACTING: Ivy Cleaners (Ivy Hill) shed 2 workers vs C114 and growth is -2.5%",
+        "src": "output/beats/prev/Business_Ledger.jsonl vs Business_Ledger.jsonl @C115"
+      },
+      {
+        "id": "F-124b80cea5b5",
+        "t": "FACT",
+        "text": "CONTRACTING: Ivy Hill Family Dental (Ivy Hill) shed 2 workers vs C114 and growth is -2%",
+        "src": "output/beats/prev/Business_Ledger.jsonl vs Business_Ledger.jsonl @C115"
+      },
+      {
+        "id": "F-0e262a643b13",
+        "t": "FACT",
+        "text": "CONTRACTING: Hillcrest Kitchen (Ivy Hill) shed 2 workers vs C114 and growth is -4.1%",
+        "src": "output/beats/prev/Business_Ledger.jsonl vs Business_Ledger.jsonl @C115"
+      },
+      {
+        "id": "F-82d77e9a4a71",
+        "t": "FACT",
+        "text": "Calendar: Y3C11, Spring, holiday=none",
+        "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)"
+      }
+    ],
+    "approvedQuotes": [],
+    "approvedSubjects": [
+      {
+        "id": "POP-00041",
+        "name": "Keisha Ramos",
+        "profile": "Keisha Ramos — Director, Baylight Redevelopment Authority — Baylight Construction Authority, Baylight District",
+        "src": "packet.W1.exposure",
+        "quotationEligible": false
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Jordan Velez",
+        "text": "Marine Systems' two departing workers may have been let go as part of a funding shortfall, or they may have left because the work was being consolidated elsewhere",
+        "publishable": false
+      },
+      {
+        "from": "Jordan Velez",
+        "text": "Casino headcount at Oakland Casino Town may be down because of increased regulatory pressure or because the business is automating functions",
+        "publishable": false
+      },
+      {
+        "from": "Jordan Velez",
+        "text": "The redevelopment authority's plans for the Baylight District may include parcels that directly affect Marine Systems' current footprint",
+        "publishable": false
+      },
+      {
+        "from": "Jordan Velez",
+        "text": "Anthropic's security presence — including a named security guard on the roster — suggests the AI lab operates with visible and heavy protection in the district",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "unnamed storefront light, shutters, counter, sidewalk, or foot-traffic texture that makes no measured trend or event claim",
+      "transitions translating a Packet-backed economic condition into rent, hiring, commute, payroll, or customer stakes without inventing a concrete outcome",
+      "skeptical analysis of who may benefit or carry risk when it remains framed as analysis or a question",
+      "the reporter's own presence in a supplied or generic economic setting without claiming an interview or observation that did not occur"
+    ],
+    "textureConditions": [
+      "every named person, business, venue, corridor, neighborhood, institution, office, union, Project, Initiative, and organization must come from the Packet",
+      "money, wages, rent, lease terms, employee or job counts, dates, durations, contracts, disbursements, and measured trends must come from the Packet",
+      "raw engine labels and decimal scores may inform reasoning but must not appear as published economic facts or dashboard prose",
+      "hiring, layoffs, closures, openings, extended hours, foot-traffic changes, and other observable actions require Packet support",
+      "I spoke with or another reporting claim requires a supplied interview or quote; generic scene texture is not a sourced perspective"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

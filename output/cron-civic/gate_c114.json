@@ -1,0 +1,42 @@
+{
+  "cycle": 114,
+  "pass": false,
+  "deterministicPass": true,
+  "sanityStatus": "fail-scoped",
+  "failures": [
+    {
+      "check": "sanity-read",
+      "detail": "INIT-005: The write records the second quarterly verification packet as filed at C114, one cycle after the first at C113, but the prior row scheduled the \"Second quarterly audit cycle\" for C116 and the quarterly cadence does not support back-to-back filings."
+    },
+    {
+      "check": "sanity-read",
+      "detail": "INIT-008: The phase moves backward from vote-scheduled to vote-ready, and the C114 note says a \"recorded council decision\" was made while Status stays failed and NextScheduledAction is still the recorded council decision on the $15M authorization at C115."
+    }
+  ],
+  "touchedInitiatives": [
+    "INIT-006",
+    "INIT-005",
+    "INIT-001",
+    "INIT-002",
+    "INIT-003",
+    "INIT-007",
+    "INIT-008",
+    "INIT-009",
+    "INIT-010",
+    "candidate:MV-113-civic-office-council-d4-2026-10-26"
+  ],
+  "maxRows": 12,
+  "sanity": {
+    "pass": false,
+    "issues": [
+      "INIT-005: The write records the second quarterly verification packet as filed at C114, one cycle after the first at C113, but the prior row scheduled the \"Second quarterly audit cycle\" for C116 and the quarterly cadence does not support back-to-back filings.",
+      "INIT-008: The phase moves backward from vote-scheduled to vote-ready, and the C114 note says a \"recorded council decision\" was made while Status stays failed and NextScheduledAction is still the recorded council decision on the $15M authorization at C115."
+    ],
+    "blockedInitiatives": [
+      "INIT-005",
+      "INIT-008"
+    ]
+  },
+  "model": "anthropic/claude-haiku-5.5",
+  "ranAt": "2026-11-01T23:32:24.046Z"
+}

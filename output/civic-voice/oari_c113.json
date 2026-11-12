@@ -1,0 +1,24 @@
+{
+  "office": "oari",
+  "cycle": 113,
+  "speaker": "Dr. Vanessa Tran-Munoz",
+  "cascadeSummary": "I accepted the district-level data report and committed to holding the D3 community briefing in East Oakland this cycle, with Fruitvale corridor street-level response data front and center, and a Baylight District expansion feasibility review folded in. This is the transparency step that earns the next expansion — and I made sure the people who called 911 in Fruitvale and East Oakland are the ones who see the numbers first.",
+  "statements": [
+    {
+      "statementId": "STMT-113-oari-001",
+      "type": "operational_status",
+      "topic": "D3 community briefing and district-level data report",
+      "initiative": "Oakland Alternative Response Initiative",
+      "decision": "Accepted the district-level data report and directed OARI coordinators to prepare street-level response data for the Fruitvale corridor; committed to holding the D3 community briefing in East Oakland, per the Mayor's directive and council D3/D5 guidance.",
+      "quote": "The right number isn't the citywide average — it's how fast care reaches Fruitvale's streets, and that's the number we'll publish.",
+      "fullStatement": "The district-level data report is accepted, and we're taking it straight to the people it describes — in East Oakland, in the Fruitvale corridor, with street-level response times and diversion rates broken out block by block. That's the standard Mayor Santana set, and it's the right one: transparency builds trust, and specific data builds better response. We're also folding in the Baylight District feasibility review so that when we talk about expansion, we're talking about real numbers, not promises. The folks who called 911 in Fruitvale and East Oakland are going to see exactly what happened when they called — and that's how we earn the next step.",
+      "trackerUpdates": {
+        "initiative": "INIT-002",
+        "ImplementationPhase": "pilot_evaluation",
+        "MilestoneNotes": "C113: District-level data report accepted; D3 briefing directed for East Oakland w/ Fruitvale corridor street-level data; Baylight feasibility review added",
+        "NextScheduledAction": "D3 community briefing in East Oakland",
+        "NextActionCycle": 114
+      }
+    }
+  ]
+}

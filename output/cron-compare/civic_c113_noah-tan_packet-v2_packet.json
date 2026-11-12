@@ -1,0 +1,1320 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "113",
+  "persona": "noah-tan",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Noah Tan",
+    "popid": "POP-00157"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-weather",
+      "angle": "C113 clear, 58°F — 3 cycles of clear — what this weather does to a day in the city",
+      "label": "C113 clear, 58°F — 3 cycles of clear",
+      "hookLine": "C113 clear, 58°F — 3 cycles of clear; 6 residents on the record lived it.",
+      "hood": null,
+      "citizens": [
+        "Cee Lee (POP-00320)",
+        "Johhny Necklar (POP-00509)",
+        "Elle Lilo (POP-00177)",
+        "Rafael Brannie (POP-00223)",
+        "Kwame Fitzgerald (POP-00259)",
+        "Omar Amici (POP-00263)"
+      ],
+      "popids": [
+        "POP-00320",
+        "POP-00509",
+        "POP-00177",
+        "POP-00223",
+        "POP-00259",
+        "POP-00263"
+      ],
+      "ref": "output/beats/Cycle_Weather.jsonl CycleID 113",
+      "cycle": 113
+    }
+  },
+  "angle": "output/cron-compare/civic_c113_noah-tan_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 4,
+  "quotes": [
+    {
+      "pop": "POP-00320",
+      "name": "Cee Lee",
+      "quote": "Three clear days helps, I won't lie. The cold stretch had me moving slower than I like—that kind of tired that sits in your bones. But 'lifted'? I'd say paused. Seasonal stuff like this, it lingers in the background. I'm out walking the lake path again, getting back to normal, but I'm not foolish enough to think it's gone for good. You learn to live with the ebb and flow of it.",
+      "disp": "driven, hard to sit still; warm, tender with people; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Three clear days helps, I won't lie. The cold stretch had me moving slower than I like—that kind of tired that sits in your bones. But 'lifted'? I'd say paused. Seasonal stuff like this, it lingers in the background. I'm out walking the lake path again, getting back to normal, but I'm not foolish enough to think it's gone for good. You learn to live with the ebb and flow of it.\",\n  \"fact_ids\": [\"F-ee905a8dbc78\", \"F-57d6daa8ede3\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-ee905a8dbc78",
+          "F-57d6daa8ede3"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00320-7725923e41",
+        "authoredQuote": true,
+        "publishableQuote": "Three clear days helps, I won't lie. The cold stretch had me moving slower than I like—that kind of tired that sits in your bones. But 'lifted'? I'd say paused. Seasonal stuff like this, it lingers in the background. I'm out walking the lake path again, getting back to normal, but I'm not foolish enough to think it's gone for good. You learn to live with the ebb and flow of it."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00320",
+          "name": "Cee Lee",
+          "role": "Autonomous Systems Engineer",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Noah Tan",
+          "question": "Cee Lee dealt with a seasonal health concern through the cold stretch — with three clear days now, is that concern actually lifted, or just paused? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-weather",
+          "hood": null,
+          "focus": "What the third consecutive clear day does for the six residents who lived through the cold stretch — who is actually back out and who isn't.",
+          "src": "output/beats/Cycle_Weather.jsonl CycleID 113"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Cee Lee — Autonomous Systems Engineer — Lake Merritt",
+          "evidence": [
+            {
+              "id": "EV-d946bed135",
+              "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+              "text": "C113 clear, 58°F — 3 cycles of clear; 6 residents on the record lived it."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Cee Lee — dealt with a seasonal health concern",
+            "src": "output/world_summary_c113.md ## Who Lived It",
+            "id": "F-ee905a8dbc78"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "C113 clear, 58°F — 3 cycles of clear",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+            "id": "F-57d6daa8ede3"
+          },
+          {
+            "t": "FACT",
+            "text": "C113 clear, 58°F — 3 cycles of clear; 6 residents on the record lived it.",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+            "id": "F-a2728469c406"
+          },
+          {
+            "t": "FACT",
+            "text": "This cycle: clear, 58°F, impact 1, comfort 0.75, mood content, 3 cycles of clear",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+            "id": "F-1599fe05d071"
+          },
+          {
+            "t": "FACT",
+            "text": "Last 3 cycles: C110 fog 52°F, C111 mild 57°F, C112 clear 48°F",
+            "src": "output/beats/Cycle_Weather.jsonl",
+            "id": "F-e3dfe5c06f79"
+          },
+          {
+            "t": "FACT",
+            "text": "Johhny Necklar — recovered from a winter illness",
+            "src": "output/world_summary_c113.md ## Who Lived It",
+            "id": "F-3d79726b745c"
+          },
+          {
+            "t": "FACT",
+            "text": "Elle Lilo — finally shook the cold that had been hanging around",
+            "src": "output/world_summary_c113.md ## Who Lived It",
+            "id": "F-0da6d1c7bff3"
+          },
+          {
+            "t": "FACT",
+            "text": "Cee Lee — Autonomous Systems Engineer — Lake Merritt",
+            "src": "Simulation_Ledger profile for POP-00320",
+            "id": "F-80bd9bf123fb"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00509",
+      "name": "Johhny Necklar",
+      "quote": "The clear days help, I won't lie. I was laid up a good while this winter, and there's something about stepping out and not having to bundle up just to get the mail. But recovery isn't on a weather schedule. I take the walk to the diner now because the sun feels good on my back, but I still stop twice on the way. My body tells me when it's ready, not the sky.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"The clear days help, I won't lie. I was laid up a good while this winter, and there's something about stepping out and not having to bundle up just to get the mail. But recovery isn't on a weather schedule. I take the walk to the diner now because the sun feels good on my back, but I still stop twice on the way. My body tells me when it's ready, not the sky.\",\n  \"fact_ids\": [\"F-3d79726b745c\", \"F-57d6daa8ede3\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-3d79726b745c",
+          "F-57d6daa8ede3"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00509-c2490a8517",
+        "authoredQuote": true,
+        "publishableQuote": "The clear days help, I won't lie. I was laid up a good while this winter, and there's something about stepping out and not having to bundle up just to get the mail. But recovery isn't on a weather schedule. I take the walk to the diner now because the sun feels good on my back, but I still stop twice on the way. My body tells me when it's ready, not the sky."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00509",
+          "name": "Johhny Necklar",
+          "role": "Hall of Famer from old basketball league MUBA",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Noah Tan",
+          "question": "Johhny Necklar recovered from a winter illness — does a clear, mild day change how he moves through Rockridge, or does the recovery have its own timeline? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-weather",
+          "hood": null,
+          "focus": "What the third consecutive clear day does for the six residents who lived through the cold stretch — who is actually back out and who isn't.",
+          "src": "output/beats/Cycle_Weather.jsonl CycleID 113"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Johhny Necklar — Hall of Famer from old basketball league MUBA — Rockridge",
+          "evidence": [
+            {
+              "id": "EV-487a965c06",
+              "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+              "text": "C113 clear, 58°F — 3 cycles of clear; 6 residents on the record lived it."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Johhny Necklar — recovered from a winter illness",
+            "src": "output/world_summary_c113.md ## Who Lived It",
+            "id": "F-3d79726b745c"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "C113 clear, 58°F — 3 cycles of clear",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+            "id": "F-57d6daa8ede3"
+          },
+          {
+            "t": "FACT",
+            "text": "C113 clear, 58°F — 3 cycles of clear; 6 residents on the record lived it.",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+            "id": "F-a2728469c406"
+          },
+          {
+            "t": "FACT",
+            "text": "This cycle: clear, 58°F, impact 1, comfort 0.75, mood content, 3 cycles of clear",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+            "id": "F-1599fe05d071"
+          },
+          {
+            "t": "FACT",
+            "text": "Last 3 cycles: C110 fog 52°F, C111 mild 57°F, C112 clear 48°F",
+            "src": "output/beats/Cycle_Weather.jsonl",
+            "id": "F-e3dfe5c06f79"
+          },
+          {
+            "t": "FACT",
+            "text": "Cee Lee — dealt with a seasonal health concern",
+            "src": "output/world_summary_c113.md ## Who Lived It",
+            "id": "F-ee905a8dbc78"
+          },
+          {
+            "t": "FACT",
+            "text": "Elle Lilo — finally shook the cold that had been hanging around",
+            "src": "output/world_summary_c113.md ## Who Lived It",
+            "id": "F-0da6d1c7bff3"
+          },
+          {
+            "t": "FACT",
+            "text": "Johhny Necklar — Hall of Famer from old basketball league MUBA — Rockridge",
+            "src": "Simulation_Ledger profile for POP-00509",
+            "id": "F-8716d6d17ed4"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00177",
+      "name": "Elle Lilo",
+      "quote": "Three clear days in a row — that's a gift around here. When I finally shook that cold, the first morning I stepped back on the bridge, the sky was wide open, and I swear I could feel it in my chest. The work doesn't change, not really — the tugs still pull, the horns still sound — but the day feels lighter. You can see the whole bay, the cranes, the gulls, all of it. It's like the harbor is breathing again, and so am I.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; warm, tender with people; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Three clear days in a row — that's a gift around here. When I finally shook that cold, the first morning I stepped back on the bridge, the sky was wide open, and I swear I could feel it in my chest. The work doesn't change, not really — the tugs still pull, the horns still sound — but the day feels lighter. You can see the whole bay, the cranes, the gulls, all of it. It's like the harbor is breathing again, and so am I.\",\n  \"fact_ids\": [\"F-0da6d1c7bff3\", \"F-57d6daa8ede3\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": [],\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-0da6d1c7bff3",
+          "F-57d6daa8ede3"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00177-87c6f8e14a",
+        "authoredQuote": true,
+        "publishableQuote": "Three clear days in a row — that's a gift around here. When I finally shook that cold, the first morning I stepped back on the bridge, the sky was wide open, and I swear I could feel it in my chest. The work doesn't change, not really — the tugs still pull, the horns still sound — but the day feels lighter. You can see the whole bay, the cranes, the gulls, all of it. It's like the harbor is breathing again, and so am I."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00177",
+          "name": "Elle Lilo",
+          "role": "Harbor Tugboat Captain",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Noah Tan",
+          "question": "Elle Lilo finally shook a lingering cold — what does that feel like on a clear day at the harbor, and does the work change when the sky is open? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-weather",
+          "hood": null,
+          "focus": "What the third consecutive clear day does for the six residents who lived through the cold stretch — who is actually back out and who isn't.",
+          "src": "output/beats/Cycle_Weather.jsonl CycleID 113"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Elle Lilo — Harbor Tugboat Captain — Jack London",
+          "evidence": [
+            {
+              "id": "EV-130f556093",
+              "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+              "text": "C113 clear, 58°F — 3 cycles of clear; 6 residents on the record lived it."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Elle Lilo — finally shook the cold that had been hanging around",
+            "src": "output/world_summary_c113.md ## Who Lived It",
+            "id": "F-0da6d1c7bff3"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "C113 clear, 58°F — 3 cycles of clear",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+            "id": "F-57d6daa8ede3"
+          },
+          {
+            "t": "FACT",
+            "text": "C113 clear, 58°F — 3 cycles of clear; 6 residents on the record lived it.",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+            "id": "F-a2728469c406"
+          },
+          {
+            "t": "FACT",
+            "text": "This cycle: clear, 58°F, impact 1, comfort 0.75, mood content, 3 cycles of clear",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+            "id": "F-1599fe05d071"
+          },
+          {
+            "t": "FACT",
+            "text": "Last 3 cycles: C110 fog 52°F, C111 mild 57°F, C112 clear 48°F",
+            "src": "output/beats/Cycle_Weather.jsonl",
+            "id": "F-e3dfe5c06f79"
+          },
+          {
+            "t": "FACT",
+            "text": "Cee Lee — dealt with a seasonal health concern",
+            "src": "output/world_summary_c113.md ## Who Lived It",
+            "id": "F-ee905a8dbc78"
+          },
+          {
+            "t": "FACT",
+            "text": "Johhny Necklar — recovered from a winter illness",
+            "src": "output/world_summary_c113.md ## Who Lived It",
+            "id": "F-3d79726b745c"
+          },
+          {
+            "t": "FACT",
+            "text": "Elle Lilo — Harbor Tugboat Captain — Jack London",
+            "src": "Simulation_Ledger profile for POP-00177",
+            "id": "F-7e451b4011f5"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00223",
+      "name": "Rafael Brannie",
+      "quote": "Three clear days helps, sure. I noticed the light today walking to the job—it's different, makes you want to linger on the corner a moment longer. But the winter mood, that's a heavier coat than the weather. It kind of stays draped on you even when the sun's out. I haven't gone out of my way to see people yet. I'm still moving, working, that part doesn't stop. But sitting with someone, sharing a beer, that takes a little more than blue sky. The mood outlasts the weather, I think. The sun gets you halfway there, the rest is on you.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; warm, tender with people; curious, open to new things; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "{\"answer\":\"quote\",\"quote\":\"Three clear days helps, sure. I noticed the light today walking to the job—it's different, makes you want to linger on the corner a moment longer. But the winter mood, that's a heavier coat than the weather. It kind of stays draped on you even when the sun's out. I haven't gone out of my way to see people yet. I'm still moving, working, that part doesn't stop. But sitting with someone, sharing a beer, that takes a little more than blue sky. The mood outlasts the weather, I think. The sun gets you halfway there, the rest is on you.\",\"fact_ids\":[\"F-5505588c0659\",\"F-1599fe05d071\"],\"basis\":\"lived-context\",\"unverifiedLead\":null,\"abstain_reason\":null}",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-5505588c0659",
+          "F-1599fe05d071"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00223-f24724e589",
+        "authoredQuote": true,
+        "publishableQuote": "Three clear days helps, sure. I noticed the light today walking to the job—it's different, makes you want to linger on the corner a moment longer. But the winter mood, that's a heavier coat than the weather. It kind of stays draped on you even when the sun's out. I haven't gone out of my way to see people yet. I'm still moving, working, that part doesn't stop. But sitting with someone, sharing a beer, that takes a little more than blue sky. The mood outlasts the weather, I think. The sun gets you halfway there, the rest is on you."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00223",
+          "name": "Rafael Brannie",
+          "role": "Mover",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Noah Tan",
+          "question": "Rafael Brannie limited social activity due to winter mood — is the third clear day enough to pull him back toward people, or does the mood outlast the weather? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-weather",
+          "hood": null,
+          "focus": "What the third consecutive clear day does for the six residents who lived through the cold stretch — who is actually back out and who isn't.",
+          "src": "output/beats/Cycle_Weather.jsonl CycleID 113"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Rafael Brannie — Mover — Piedmont Ave",
+          "evidence": [
+            {
+              "id": "EV-58af4f4d4c",
+              "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+              "text": "C113 clear, 58°F — 3 cycles of clear; 6 residents on the record lived it."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Rafael Brannie — limited social activity due to winter mood",
+            "src": "output/world_summary_c113.md ## Who Lived It",
+            "id": "F-5505588c0659"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "C113 clear, 58°F — 3 cycles of clear",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+            "id": "F-57d6daa8ede3"
+          },
+          {
+            "t": "FACT",
+            "text": "C113 clear, 58°F — 3 cycles of clear; 6 residents on the record lived it.",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+            "id": "F-a2728469c406"
+          },
+          {
+            "t": "FACT",
+            "text": "This cycle: clear, 58°F, impact 1, comfort 0.75, mood content, 3 cycles of clear",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+            "id": "F-1599fe05d071"
+          },
+          {
+            "t": "FACT",
+            "text": "Last 3 cycles: C110 fog 52°F, C111 mild 57°F, C112 clear 48°F",
+            "src": "output/beats/Cycle_Weather.jsonl",
+            "id": "F-e3dfe5c06f79"
+          },
+          {
+            "t": "FACT",
+            "text": "Cee Lee — dealt with a seasonal health concern",
+            "src": "output/world_summary_c113.md ## Who Lived It",
+            "id": "F-ee905a8dbc78"
+          },
+          {
+            "t": "FACT",
+            "text": "Johhny Necklar — recovered from a winter illness",
+            "src": "output/world_summary_c113.md ## Who Lived It",
+            "id": "F-3d79726b745c"
+          },
+          {
+            "t": "FACT",
+            "text": "Rafael Brannie — Mover — Piedmont Ave",
+            "src": "Simulation_Ledger profile for POP-00223",
+            "id": "F-9cdfb7a93d44"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-00320",
+      "name": "Cee Lee",
+      "quote": "Three clear days helps, I won't lie. The cold stretch had me moving slower than I like—that kind of tired that sits in your bones. But 'lifted'? I'd say paused. Seasonal stuff like this, it lingers in the background. I'm out walking the lake path again, getting back to normal, but I'm not foolish enough to think it's gone for good. You learn to live with the ebb and flow of it.",
+      "disp": "driven, hard to sit still; warm, tender with people; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Three clear days helps, I won't lie. The cold stretch had me moving slower than I like—that kind of tired that sits in your bones. But 'lifted'? I'd say paused. Seasonal stuff like this, it lingers in the background. I'm out walking the lake path again, getting back to normal, but I'm not foolish enough to think it's gone for good. You learn to live with the ebb and flow of it.\",\n  \"fact_ids\": [\"F-ee905a8dbc78\", \"F-57d6daa8ede3\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-ee905a8dbc78",
+          "F-57d6daa8ede3"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00320-7725923e41",
+        "authoredQuote": true,
+        "publishableQuote": "Three clear days helps, I won't lie. The cold stretch had me moving slower than I like—that kind of tired that sits in your bones. But 'lifted'? I'd say paused. Seasonal stuff like this, it lingers in the background. I'm out walking the lake path again, getting back to normal, but I'm not foolish enough to think it's gone for good. You learn to live with the ebb and flow of it."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00320",
+          "name": "Cee Lee",
+          "role": "Autonomous Systems Engineer",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Noah Tan",
+          "question": "Cee Lee dealt with a seasonal health concern through the cold stretch — with three clear days now, is that concern actually lifted, or just paused? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-weather",
+          "hood": null,
+          "focus": "What the third consecutive clear day does for the six residents who lived through the cold stretch — who is actually back out and who isn't.",
+          "src": "output/beats/Cycle_Weather.jsonl CycleID 113"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Cee Lee — Autonomous Systems Engineer — Lake Merritt",
+          "evidence": [
+            {
+              "id": "EV-d946bed135",
+              "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+              "text": "C113 clear, 58°F — 3 cycles of clear; 6 residents on the record lived it."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Cee Lee — dealt with a seasonal health concern",
+            "src": "output/world_summary_c113.md ## Who Lived It",
+            "id": "F-ee905a8dbc78"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "C113 clear, 58°F — 3 cycles of clear",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+            "id": "F-57d6daa8ede3"
+          },
+          {
+            "t": "FACT",
+            "text": "C113 clear, 58°F — 3 cycles of clear; 6 residents on the record lived it.",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+            "id": "F-a2728469c406"
+          },
+          {
+            "t": "FACT",
+            "text": "This cycle: clear, 58°F, impact 1, comfort 0.75, mood content, 3 cycles of clear",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+            "id": "F-1599fe05d071"
+          },
+          {
+            "t": "FACT",
+            "text": "Last 3 cycles: C110 fog 52°F, C111 mild 57°F, C112 clear 48°F",
+            "src": "output/beats/Cycle_Weather.jsonl",
+            "id": "F-e3dfe5c06f79"
+          },
+          {
+            "t": "FACT",
+            "text": "Johhny Necklar — recovered from a winter illness",
+            "src": "output/world_summary_c113.md ## Who Lived It",
+            "id": "F-3d79726b745c"
+          },
+          {
+            "t": "FACT",
+            "text": "Elle Lilo — finally shook the cold that had been hanging around",
+            "src": "output/world_summary_c113.md ## Who Lived It",
+            "id": "F-0da6d1c7bff3"
+          },
+          {
+            "t": "FACT",
+            "text": "Cee Lee — Autonomous Systems Engineer — Lake Merritt",
+            "src": "Simulation_Ledger profile for POP-00320",
+            "id": "F-80bd9bf123fb"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00509",
+      "name": "Johhny Necklar",
+      "quote": "The clear days help, I won't lie. I was laid up a good while this winter, and there's something about stepping out and not having to bundle up just to get the mail. But recovery isn't on a weather schedule. I take the walk to the diner now because the sun feels good on my back, but I still stop twice on the way. My body tells me when it's ready, not the sky.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"The clear days help, I won't lie. I was laid up a good while this winter, and there's something about stepping out and not having to bundle up just to get the mail. But recovery isn't on a weather schedule. I take the walk to the diner now because the sun feels good on my back, but I still stop twice on the way. My body tells me when it's ready, not the sky.\",\n  \"fact_ids\": [\"F-3d79726b745c\", \"F-57d6daa8ede3\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-3d79726b745c",
+          "F-57d6daa8ede3"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00509-c2490a8517",
+        "authoredQuote": true,
+        "publishableQuote": "The clear days help, I won't lie. I was laid up a good while this winter, and there's something about stepping out and not having to bundle up just to get the mail. But recovery isn't on a weather schedule. I take the walk to the diner now because the sun feels good on my back, but I still stop twice on the way. My body tells me when it's ready, not the sky."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00509",
+          "name": "Johhny Necklar",
+          "role": "Hall of Famer from old basketball league MUBA",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Noah Tan",
+          "question": "Johhny Necklar recovered from a winter illness — does a clear, mild day change how he moves through Rockridge, or does the recovery have its own timeline? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-weather",
+          "hood": null,
+          "focus": "What the third consecutive clear day does for the six residents who lived through the cold stretch — who is actually back out and who isn't.",
+          "src": "output/beats/Cycle_Weather.jsonl CycleID 113"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Johhny Necklar — Hall of Famer from old basketball league MUBA — Rockridge",
+          "evidence": [
+            {
+              "id": "EV-487a965c06",
+              "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+              "text": "C113 clear, 58°F — 3 cycles of clear; 6 residents on the record lived it."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Johhny Necklar — recovered from a winter illness",
+            "src": "output/world_summary_c113.md ## Who Lived It",
+            "id": "F-3d79726b745c"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "C113 clear, 58°F — 3 cycles of clear",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+            "id": "F-57d6daa8ede3"
+          },
+          {
+            "t": "FACT",
+            "text": "C113 clear, 58°F — 3 cycles of clear; 6 residents on the record lived it.",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+            "id": "F-a2728469c406"
+          },
+          {
+            "t": "FACT",
+            "text": "This cycle: clear, 58°F, impact 1, comfort 0.75, mood content, 3 cycles of clear",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+            "id": "F-1599fe05d071"
+          },
+          {
+            "t": "FACT",
+            "text": "Last 3 cycles: C110 fog 52°F, C111 mild 57°F, C112 clear 48°F",
+            "src": "output/beats/Cycle_Weather.jsonl",
+            "id": "F-e3dfe5c06f79"
+          },
+          {
+            "t": "FACT",
+            "text": "Cee Lee — dealt with a seasonal health concern",
+            "src": "output/world_summary_c113.md ## Who Lived It",
+            "id": "F-ee905a8dbc78"
+          },
+          {
+            "t": "FACT",
+            "text": "Elle Lilo — finally shook the cold that had been hanging around",
+            "src": "output/world_summary_c113.md ## Who Lived It",
+            "id": "F-0da6d1c7bff3"
+          },
+          {
+            "t": "FACT",
+            "text": "Johhny Necklar — Hall of Famer from old basketball league MUBA — Rockridge",
+            "src": "Simulation_Ledger profile for POP-00509",
+            "id": "F-8716d6d17ed4"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00177",
+      "name": "Elle Lilo",
+      "quote": "Three clear days in a row — that's a gift around here. When I finally shook that cold, the first morning I stepped back on the bridge, the sky was wide open, and I swear I could feel it in my chest. The work doesn't change, not really — the tugs still pull, the horns still sound — but the day feels lighter. You can see the whole bay, the cranes, the gulls, all of it. It's like the harbor is breathing again, and so am I.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; warm, tender with people; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Three clear days in a row — that's a gift around here. When I finally shook that cold, the first morning I stepped back on the bridge, the sky was wide open, and I swear I could feel it in my chest. The work doesn't change, not really — the tugs still pull, the horns still sound — but the day feels lighter. You can see the whole bay, the cranes, the gulls, all of it. It's like the harbor is breathing again, and so am I.\",\n  \"fact_ids\": [\"F-0da6d1c7bff3\", \"F-57d6daa8ede3\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": [],\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-0da6d1c7bff3",
+          "F-57d6daa8ede3"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00177-87c6f8e14a",
+        "authoredQuote": true,
+        "publishableQuote": "Three clear days in a row — that's a gift around here. When I finally shook that cold, the first morning I stepped back on the bridge, the sky was wide open, and I swear I could feel it in my chest. The work doesn't change, not really — the tugs still pull, the horns still sound — but the day feels lighter. You can see the whole bay, the cranes, the gulls, all of it. It's like the harbor is breathing again, and so am I."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00177",
+          "name": "Elle Lilo",
+          "role": "Harbor Tugboat Captain",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Noah Tan",
+          "question": "Elle Lilo finally shook a lingering cold — what does that feel like on a clear day at the harbor, and does the work change when the sky is open? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-weather",
+          "hood": null,
+          "focus": "What the third consecutive clear day does for the six residents who lived through the cold stretch — who is actually back out and who isn't.",
+          "src": "output/beats/Cycle_Weather.jsonl CycleID 113"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Elle Lilo — Harbor Tugboat Captain — Jack London",
+          "evidence": [
+            {
+              "id": "EV-130f556093",
+              "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+              "text": "C113 clear, 58°F — 3 cycles of clear; 6 residents on the record lived it."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Elle Lilo — finally shook the cold that had been hanging around",
+            "src": "output/world_summary_c113.md ## Who Lived It",
+            "id": "F-0da6d1c7bff3"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "C113 clear, 58°F — 3 cycles of clear",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+            "id": "F-57d6daa8ede3"
+          },
+          {
+            "t": "FACT",
+            "text": "C113 clear, 58°F — 3 cycles of clear; 6 residents on the record lived it.",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+            "id": "F-a2728469c406"
+          },
+          {
+            "t": "FACT",
+            "text": "This cycle: clear, 58°F, impact 1, comfort 0.75, mood content, 3 cycles of clear",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+            "id": "F-1599fe05d071"
+          },
+          {
+            "t": "FACT",
+            "text": "Last 3 cycles: C110 fog 52°F, C111 mild 57°F, C112 clear 48°F",
+            "src": "output/beats/Cycle_Weather.jsonl",
+            "id": "F-e3dfe5c06f79"
+          },
+          {
+            "t": "FACT",
+            "text": "Cee Lee — dealt with a seasonal health concern",
+            "src": "output/world_summary_c113.md ## Who Lived It",
+            "id": "F-ee905a8dbc78"
+          },
+          {
+            "t": "FACT",
+            "text": "Johhny Necklar — recovered from a winter illness",
+            "src": "output/world_summary_c113.md ## Who Lived It",
+            "id": "F-3d79726b745c"
+          },
+          {
+            "t": "FACT",
+            "text": "Elle Lilo — Harbor Tugboat Captain — Jack London",
+            "src": "Simulation_Ledger profile for POP-00177",
+            "id": "F-7e451b4011f5"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00223",
+      "name": "Rafael Brannie",
+      "quote": "Three clear days helps, sure. I noticed the light today walking to the job—it's different, makes you want to linger on the corner a moment longer. But the winter mood, that's a heavier coat than the weather. It kind of stays draped on you even when the sun's out. I haven't gone out of my way to see people yet. I'm still moving, working, that part doesn't stop. But sitting with someone, sharing a beer, that takes a little more than blue sky. The mood outlasts the weather, I think. The sun gets you halfway there, the rest is on you.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; warm, tender with people; curious, open to new things; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "{\"answer\":\"quote\",\"quote\":\"Three clear days helps, sure. I noticed the light today walking to the job—it's different, makes you want to linger on the corner a moment longer. But the winter mood, that's a heavier coat than the weather. It kind of stays draped on you even when the sun's out. I haven't gone out of my way to see people yet. I'm still moving, working, that part doesn't stop. But sitting with someone, sharing a beer, that takes a little more than blue sky. The mood outlasts the weather, I think. The sun gets you halfway there, the rest is on you.\",\"fact_ids\":[\"F-5505588c0659\",\"F-1599fe05d071\"],\"basis\":\"lived-context\",\"unverifiedLead\":null,\"abstain_reason\":null}",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-5505588c0659",
+          "F-1599fe05d071"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00223-f24724e589",
+        "authoredQuote": true,
+        "publishableQuote": "Three clear days helps, sure. I noticed the light today walking to the job—it's different, makes you want to linger on the corner a moment longer. But the winter mood, that's a heavier coat than the weather. It kind of stays draped on you even when the sun's out. I haven't gone out of my way to see people yet. I'm still moving, working, that part doesn't stop. But sitting with someone, sharing a beer, that takes a little more than blue sky. The mood outlasts the weather, I think. The sun gets you halfway there, the rest is on you."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00223",
+          "name": "Rafael Brannie",
+          "role": "Mover",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Noah Tan",
+          "question": "Rafael Brannie limited social activity due to winter mood — is the third clear day enough to pull him back toward people, or does the mood outlast the weather? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-weather",
+          "hood": null,
+          "focus": "What the third consecutive clear day does for the six residents who lived through the cold stretch — who is actually back out and who isn't.",
+          "src": "output/beats/Cycle_Weather.jsonl CycleID 113"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Rafael Brannie — Mover — Piedmont Ave",
+          "evidence": [
+            {
+              "id": "EV-58af4f4d4c",
+              "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+              "text": "C113 clear, 58°F — 3 cycles of clear; 6 residents on the record lived it."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Rafael Brannie — limited social activity due to winter mood",
+            "src": "output/world_summary_c113.md ## Who Lived It",
+            "id": "F-5505588c0659"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "C113 clear, 58°F — 3 cycles of clear",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+            "id": "F-57d6daa8ede3"
+          },
+          {
+            "t": "FACT",
+            "text": "C113 clear, 58°F — 3 cycles of clear; 6 residents on the record lived it.",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+            "id": "F-a2728469c406"
+          },
+          {
+            "t": "FACT",
+            "text": "This cycle: clear, 58°F, impact 1, comfort 0.75, mood content, 3 cycles of clear",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 113",
+            "id": "F-1599fe05d071"
+          },
+          {
+            "t": "FACT",
+            "text": "Last 3 cycles: C110 fog 52°F, C111 mild 57°F, C112 clear 48°F",
+            "src": "output/beats/Cycle_Weather.jsonl",
+            "id": "F-e3dfe5c06f79"
+          },
+          {
+            "t": "FACT",
+            "text": "Cee Lee — dealt with a seasonal health concern",
+            "src": "output/world_summary_c113.md ## Who Lived It",
+            "id": "F-ee905a8dbc78"
+          },
+          {
+            "t": "FACT",
+            "text": "Johhny Necklar — recovered from a winter illness",
+            "src": "output/world_summary_c113.md ## Who Lived It",
+            "id": "F-3d79726b745c"
+          },
+          {
+            "t": "FACT",
+            "text": "Rafael Brannie — Mover — Piedmont Ave",
+            "src": "Simulation_Ledger profile for POP-00223",
+            "id": "F-9cdfb7a93d44"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-10-28T18:17:35.651Z"
+}

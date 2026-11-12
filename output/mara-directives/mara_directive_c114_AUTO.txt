@@ -1,0 +1,62 @@
+# C114 Voice Directives — Mara Vance (AUTO)
+
+**Cycle:** 114
+**Issued:** C114 (auto-derived, cron-civic-run.js --stage=directive, post-close)
+**Source:** close_c114 + world_summary_c114 + engine review HIGHs + tracker + C113 voice record
+
+---
+## Leonard Tran — City Council District 2
+
+- **Agent:** `.claude/agents/civic-office-council-d2/`
+- **Address:** Bring the $15M Downtown Economic Revitalization ordinance (INIT-008) to a binding full council floor vote with formalized appropriation tracks for Chinatown and Uptown.
+- **Why:** INIT-008 has sat at vote-scheduled since emergency committee hearings in C112 and C113, facing a C115 stall-clock expiration while commercial corridors wait on capital release and District 2 carries an unaddressed citizen complaint.
+- **Acceptance:** A recorded full council roll-call vote on INIT-008 and published appropriation allocations for Chinatown and Uptown observable in C115.
+- **Silence consequence:** The $15M revitalization package stalls past its legislative window, freezing municipal capital across Downtown, Uptown, and Chinatown commercial corridors.
+
+## Nina Chen — City Council District 8
+
+- **Agent:** `.claude/agents/civic-office-council-d8/`
+- **Address:** Docket and record the full council roll-call vote on the $2.5M Commercial Stabilization for Grand Lake ordinance (INIT-009) and file baseline service allocations for Eastlake.
+- **Why:** INIT-009 advanced to full council in C113 with audit conditions but remains unvoted with its stall clock expiring at C115, while Eastlake carries a decay momentum of 2, a crime index of 0.70, and 1 unresolved citizen petition.
+- **Acceptance:** A published council floor vote on INIT-009 and docketed municipal maintenance allocations for Eastlake observable in C115.
+- **Silence consequence:** INIT-009 expires without appropriation on the council floor, leaving Grand Lake storefronts and Eastlake's compounding corridor decay without authorized stabilization funds.
+
+## Ramon Vega — City Council District 4
+
+- **Agent:** `.claude/agents/civic-office-council-d4/`
+- **Address:** Docket formal committee referral schedules for the Ivy Hill Revitalization Initiative (INIT-011) and reconcile the duplicate announced filings for INIT-012 and INIT-013 with targeted municipal interventions for Dimond.
+- **Why:** Following ordinance filings in C113, INIT-011, INIT-012, and INIT-013 face C115 stall clocks without committee assignment, while Dimond's decay momentum surged to 3 with sentiment at 0.00, Ivy Hill carries sentiment of -0.04 and crime at 0.70, and Glenview sits at a 0.72 crime index.
+- **Acceptance:** Transmitted committee referral schedules for INIT-011 and consolidated filings for INIT-012/INIT-013 with an attached municipal service plan for Dimond in C115.
+- **Silence consequence:** District 4 revitalization initiatives freeze at announcement status, leaving Dimond's accelerating decay momentum unaddressed.
+
+## Avery Santana — Mayor
+
+- **Agent:** `.claude/agents/civic-office-mayor/`
+- **Address:** Transmit responsive legislative proposals for the 7 citizen complaints on the executive ledger and file the charter renewal ordinance for the West Oakland Stabilization Fund (INIT-001).
+- **Why:** The mayoral petition pool has grown to 7 unresolved complaints—more than double the charter visibility line of 3—with no proposals filed, while INIT-001 completed Month-12 disbursement in C114 and requires charter renewal legislation before its C115 stall clock lapses.
+- **Acceptance:** Formal legislative filings responding to the 7 citizen petitions and a transmitted INIT-001 charter renewal proposal on the council docket in C115.
+- **Silence consequence:** Executive default under municipal petition rules and programmatic expiration of West Oakland's primary stabilization vehicle at the close of its twelve-month disbursement cycle.
+
+## Denise Carter — City Council District 1
+
+- **Agent:** `.claude/agents/civic-office-council-d1/`
+- **Address:** Publish the baseline findings of the Brooklyn municipal service audit and file District 1 dispatch evaluation metrics for the Oakland Alternative Response Initiative (INIT-002).
+- **Why:** Brooklyn logged the city's lowest sentiment at -0.09 with decay momentum of 1 in C114, while District 1 carries 1 unresolved citizen petition and faces C115 stall clocks across INIT-001, INIT-002, INIT-007, and INIT-010.
+- **Acceptance:** A published administrative service audit report for Brooklyn and filed D1 evaluation data for INIT-002 in C115.
+- **Silence consequence:** Brooklyn corridor sentiment declines further without municipal intervention, and District 1 alternative response data remains missing from citywide safety reporting.
+
+## Rose Delgado — City Council District 3
+
+- **Agent:** `.claude/agents/civic-office-council-d3/`
+- **Address:** Execute the District 3 community briefing for the Oakland Alternative Response Initiative (INIT-002) and publish the preliminary schematics review schedule for Fruitvale Transit Hub Phase II (INIT-003).
+- **Why:** INIT-002 and INIT-003 carry C114 milestones approaching C115 stall thresholds, while San Antonio registers a city-high crime index of 0.73, retail vitality of 6.43, and 2 unresolved citizen complaints on the district board.
+- **Acceptance:** Documented execution of the D3 OARI community briefing and a published schematic review date for INIT-003 in C115.
+- **Silence consequence:** Community oversight on alternative dispatch lapses in San Antonio, and capital planning for Fruitvale Phase II freezes at preliminary design.
+
+## Janae Rivers — City Council District 5
+
+- **Agent:** `.claude/agents/civic-office-council-d5/`
+- **Address:** Publish the placement gap analysis and cohort adjustments for the Oakland Youth Apprenticeship Pipeline (INIT-007) and file a formal disposition for the active District 5 citizen complaint.
+- **Why:** INIT-007 reached its C114 placement gap milestone and faces a C115 stall clock following initial cohort reporting in C113, while District 5 carries 1 unaddressed complaint and co-manages dispatch expansion milestones under INIT-002.
+- **Acceptance:** A filed placement gap analysis with programmatic adjustments for INIT-007 and a recorded resolution to the D5 citizen petition in C115.
+- **Silence consequence:** Apprenticeship cohort allocations miss the adjustment window, stalling intake expansion for East Oakland applicants.

@@ -1,0 +1,736 @@
+{
+  "version": "ECONOMIC-SLICE-4",
+  "empty": false,
+  "cycle": 111,
+  "kind": "food-workplaces",
+  "variant": "food",
+  "hood": "Jack London",
+  "pulse": {
+    "className": "hood-kitchens",
+    "score": 41,
+    "label": "Jack London kitchens · Green & Gold Tavern, Harborline Grill",
+    "hood": "Jack London",
+    "namedBusinesses": [
+      "Green & Gold Tavern",
+      "Harborline Grill",
+      "Blue Lantern Bar",
+      "Jack London Square Markets",
+      "Dockhouse BBQ"
+    ]
+  },
+  "story": {
+    "angle": "Jack London kitchens: Green & Gold Tavern, Harborline Grill, Blue Lantern Bar — the people who work the shift",
+    "label": "Jack London kitchens · Green & Gold Tavern, Harborline Grill",
+    "hookLine": "Hector Leech, Dishwasher at Green & Gold Tavern. 12 named workers at 5 named kitchens in Jack London on the ledger this cycle.",
+    "hood": "Jack London",
+    "pulseClass": "hood-kitchens",
+    "namedBusinesses": [
+      "Green & Gold Tavern",
+      "Harborline Grill",
+      "Blue Lantern Bar",
+      "Jack London Square Markets",
+      "Dockhouse BBQ"
+    ],
+    "citizens": [
+      "Hector Leech (POP-00252)",
+      "Trenton Nawan (POP-00273)",
+      "Guadalupe Lupe (POP-00643)",
+      "Valentina Campbell (POP-01017)",
+      "Tomas Renteria (POP-00744)",
+      "Quynh Le (POP-00878)",
+      "Jalen Hill (POP-00960)",
+      "Bruce Wright (POP-00965)",
+      "Yuki Ji (POP-00783)",
+      "Guadalupe Lee (POP-00970)",
+      "Gauri Han (POP-00900)",
+      "Mesi Westin (POP-00650)",
+      "Ty Yule (POP-00250)",
+      "Lamine Sissoko (POP-00149)",
+      "Derek Simmons (POP-00030)",
+      "Vincent Cho (POP-00736)"
+    ],
+    "popids": [
+      "POP-00252",
+      "POP-00273",
+      "POP-00643",
+      "POP-01017",
+      "POP-00744",
+      "POP-00878",
+      "POP-00960",
+      "POP-00965",
+      "POP-00783",
+      "POP-00970",
+      "POP-00900",
+      "POP-00650",
+      "POP-00250",
+      "POP-00149",
+      "POP-00030",
+      "POP-00736"
+    ],
+    "ref": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111",
+    "cycle": 111
+  },
+  "approach": "Food & hospitality approach — kitchens as workplaces: this slice is one neighborhood's restaurants, cafes and bars from the ledger and the people on the roster who work in them. The people on this slice are real; the rest of the room is yours — the line on a Tuesday, the regulars, the walk-in, the tip jar. One kitchen, one shift, one true thing about the work. Not a review. Not multi-voice culture-desk average. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "businesses": [
+    {
+      "bizId": "BIZ-00041",
+      "name": "Green & Gold Tavern",
+      "sector": "Sports Bar & Dining",
+      "hood": "Jack London",
+      "employeeCount": 30,
+      "avgSalary": 61000,
+      "annualRevenue": 3688187,
+      "growthRate": 7.92,
+      "keyPersonnel": null,
+      "staff": [
+        {
+          "popid": "POP-00252",
+          "name": "Hector Leech",
+          "role": "Dishwasher"
+        },
+        {
+          "popid": "POP-00273",
+          "name": "Trenton Nawan",
+          "role": "Server"
+        },
+        {
+          "popid": "POP-00643",
+          "name": "Guadalupe Lupe",
+          "role": "Bartender"
+        },
+        {
+          "popid": "POP-01017",
+          "name": "Valentina Campbell",
+          "role": "Server"
+        }
+      ],
+      "delta": {
+        "vsCycle": 110,
+        "employees": 0,
+        "revenue": 5609,
+        "growth": -0.33000000000000007
+      }
+    },
+    {
+      "bizId": "BIZ-00044",
+      "name": "Harborline Grill",
+      "sector": "Restaurant & Dining",
+      "hood": "Jack London",
+      "employeeCount": 7,
+      "avgSalary": 61000,
+      "annualRevenue": 860207,
+      "growthRate": 7.56,
+      "keyPersonnel": null,
+      "staff": [
+        {
+          "popid": "POP-00744",
+          "name": "Tomas Renteria",
+          "role": "Podcast Host / Line Cook"
+        },
+        {
+          "popid": "POP-00878",
+          "name": "Quynh Le",
+          "role": "Line Cook"
+        },
+        {
+          "popid": "POP-00960",
+          "name": "Jalen Hill",
+          "role": "Line Cook"
+        },
+        {
+          "popid": "POP-00965",
+          "name": "Bruce Wright",
+          "role": "Line Cook"
+        }
+      ],
+      "delta": {
+        "vsCycle": 110,
+        "employees": 0,
+        "revenue": 1249,
+        "growth": -0.22000000000000064
+      }
+    },
+    {
+      "bizId": "BIZ-00036",
+      "name": "Blue Lantern Bar",
+      "sector": "Nightlife & Entertainment",
+      "hood": "Jack London",
+      "employeeCount": 30,
+      "avgSalary": 65000,
+      "annualRevenue": 3932949,
+      "growthRate": 8.78,
+      "keyPersonnel": null,
+      "staff": [
+        {
+          "popid": "POP-00783",
+          "name": "Yuki Ji",
+          "role": "Bartender"
+        },
+        {
+          "popid": "POP-00970",
+          "name": "Guadalupe Lee",
+          "role": "Bartender"
+        }
+      ],
+      "delta": {
+        "vsCycle": 110,
+        "employees": 0,
+        "revenue": 6629,
+        "growth": -0.22000000000000064
+      }
+    },
+    {
+      "bizId": "BIZ-00033",
+      "name": "Jack London Square Markets",
+      "sector": "Retail & Food",
+      "hood": "Jack London",
+      "employeeCount": 30,
+      "avgSalary": 65000,
+      "annualRevenue": 3930579,
+      "growthRate": 5.92,
+      "keyPersonnel": null,
+      "staff": [
+        {
+          "popid": "POP-00900",
+          "name": "Gauri Han",
+          "role": "Security Guard"
+        }
+      ],
+      "delta": {
+        "vsCycle": 110,
+        "employees": 0,
+        "revenue": 4470,
+        "growth": -3.0199999999999996
+      }
+    },
+    {
+      "bizId": "BIZ-00050",
+      "name": "Dockhouse BBQ",
+      "sector": "Restaurant & Dining",
+      "hood": "Jack London",
+      "employeeCount": 2,
+      "avgSalary": 61000,
+      "annualRevenue": 246056,
+      "growthRate": 8.66,
+      "keyPersonnel": null,
+      "staff": [
+        {
+          "popid": "POP-00650",
+          "name": "Mesi Westin",
+          "role": "Dishwasher"
+        }
+      ],
+      "delta": {
+        "vsCycle": 110,
+        "employees": 0,
+        "revenue": 409,
+        "growth": -0.33999999999999986
+      }
+    }
+  ],
+  "seeds": [
+    {
+      "seedId": "3bcb3a20",
+      "hood": "Jack London",
+      "domain": "ECONOMIC",
+      "citizens": [
+        {
+          "popid": "POP-00250",
+          "name": "Ty Yule"
+        },
+        {
+          "popid": "POP-00149",
+          "name": "Lamine Sissoko"
+        },
+        {
+          "popid": "POP-00030",
+          "name": "Derek Simmons"
+        },
+        {
+          "popid": "POP-00736",
+          "name": "Vincent Cho"
+        }
+      ],
+      "citizenEvents": [
+        "Ty Yule — felt quietly proud of how they handled something small",
+        "Lamine Sissoko — noticed the new streetlights went in before anyone had to ask",
+        "Derek Simmons — read about something unfamiliar and kept pulling the thread",
+        "Vincent Cho — noticed another new spot opening up in Jack London"
+      ],
+      "businesses": [
+        {
+          "bizId": "BIZ-00183",
+          "name": "Bayline 6"
+        },
+        {
+          "bizId": "BIZ-00036",
+          "name": "Blue Lantern Bar"
+        }
+      ],
+      "otherEntities": null,
+      "magnitude": 23,
+      "trend": "carrying, 10.00 strength left of 3-cycle run",
+      "suggestedJournalist": "Jordan Velez",
+      "suggestedAngle": "baseline context piece"
+    }
+  ],
+  "citizens": [
+    {
+      "popid": "POP-00252",
+      "name": "Hector Leech",
+      "role": "Dishwasher",
+      "neighborhood": "Jack London",
+      "business": "Green & Gold Tavern",
+      "profile": "Hector Leech — Dishwasher — Green & Gold Tavern, Jack London",
+      "why": "works at Green & Gold Tavern (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00273",
+      "name": "Trenton Nawan",
+      "role": "Server",
+      "neighborhood": "Jack London",
+      "business": "Green & Gold Tavern",
+      "profile": "Trenton Nawan — Server — Green & Gold Tavern, Jack London",
+      "why": "works at Green & Gold Tavern (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00643",
+      "name": "Guadalupe Lupe",
+      "role": "Bartender",
+      "neighborhood": "Jack London",
+      "business": "Green & Gold Tavern",
+      "profile": "Guadalupe Lupe — Bartender — Green & Gold Tavern, Jack London",
+      "why": "works at Green & Gold Tavern (Employment_Roster)"
+    },
+    {
+      "popid": "POP-01017",
+      "name": "Valentina Campbell",
+      "role": "Server",
+      "neighborhood": "Jack London",
+      "business": "Green & Gold Tavern",
+      "profile": "Valentina Campbell — Server — Green & Gold Tavern, Jack London",
+      "why": "works at Green & Gold Tavern (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00744",
+      "name": "Tomas Renteria",
+      "role": "Podcast Host / Line Cook",
+      "neighborhood": "Jack London",
+      "business": "Harborline Grill",
+      "profile": "Tomas Renteria — Podcast Host / Line Cook — Harborline Grill, Jack London",
+      "why": "works at Harborline Grill (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00878",
+      "name": "Quynh Le",
+      "role": "Line Cook",
+      "neighborhood": "Jack London",
+      "business": "Harborline Grill",
+      "profile": "Quynh Le — Line Cook — Harborline Grill, Jack London",
+      "why": "works at Harborline Grill (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00960",
+      "name": "Jalen Hill",
+      "role": "Line Cook",
+      "neighborhood": "Jack London",
+      "business": "Harborline Grill",
+      "profile": "Jalen Hill — Line Cook — Harborline Grill, Jack London",
+      "why": "works at Harborline Grill (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00965",
+      "name": "Bruce Wright",
+      "role": "Line Cook",
+      "neighborhood": "Jack London",
+      "business": "Harborline Grill",
+      "profile": "Bruce Wright — Line Cook — Harborline Grill, Jack London",
+      "why": "works at Harborline Grill (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00783",
+      "name": "Yuki Ji",
+      "role": "Bartender",
+      "neighborhood": "Jack London",
+      "business": "Blue Lantern Bar",
+      "profile": "Yuki Ji — Bartender — Blue Lantern Bar, Jack London",
+      "why": "works at Blue Lantern Bar (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00970",
+      "name": "Guadalupe Lee",
+      "role": "Bartender",
+      "neighborhood": "Jack London",
+      "business": "Blue Lantern Bar",
+      "profile": "Guadalupe Lee — Bartender — Blue Lantern Bar, Jack London",
+      "why": "works at Blue Lantern Bar (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00900",
+      "name": "Gauri Han",
+      "role": "Security Guard",
+      "neighborhood": "Jack London",
+      "business": "Jack London Square Markets",
+      "profile": "Gauri Han — Security Guard — Jack London Square Markets, Jack London",
+      "why": "works at Jack London Square Markets (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00650",
+      "name": "Mesi Westin",
+      "role": "Dishwasher",
+      "neighborhood": "Jack London",
+      "business": "Dockhouse BBQ",
+      "profile": "Mesi Westin — Dishwasher — Dockhouse BBQ, Jack London",
+      "why": "works at Dockhouse BBQ (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00250",
+      "name": "Ty Yule",
+      "role": null,
+      "neighborhood": "Jack London",
+      "business": null,
+      "profile": "Ty Yule — Jack London",
+      "why": "engine seed for Jack London this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00149",
+      "name": "Lamine Sissoko",
+      "role": null,
+      "neighborhood": "Jack London",
+      "business": null,
+      "profile": "Lamine Sissoko — Jack London",
+      "why": "engine seed for Jack London this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00030",
+      "name": "Derek Simmons",
+      "role": null,
+      "neighborhood": "Jack London",
+      "business": null,
+      "profile": "Derek Simmons — Jack London",
+      "why": "engine seed for Jack London this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00736",
+      "name": "Vincent Cho",
+      "role": null,
+      "neighborhood": "Jack London",
+      "business": null,
+      "profile": "Vincent Cho — Jack London",
+      "why": "engine seed for Jack London this cycle (Story_Seed_Deck)"
+    }
+  ],
+  "closures": [],
+  "contractionWatch": [],
+  "casino": null,
+  "cityMoney": null,
+  "deltas": {
+    "state": "PRIOR_CYCLE_ON_DISK",
+    "vs": 110
+  },
+  "prewrite": {
+    "pulseClass": "hood-kitchens",
+    "angle": "Jack London kitchens: Green & Gold Tavern, Harborline Grill, Blue Lantern Bar — the people who work the shift",
+    "hookLine": "Hector Leech, Dishwasher at Green & Gold Tavern. 12 named workers at 5 named kitchens in Jack London on the ledger this cycle.",
+    "namedBusinesses": [
+      "Green & Gold Tavern",
+      "Harborline Grill",
+      "Blue Lantern Bar",
+      "Jack London Square Markets",
+      "Dockhouse BBQ"
+    ],
+    "anchorFacts": [
+      "Green & Gold Tavern · Sports Bar & Dining · 30 employees · growth 7.9% · revenue $3.7M (+$6k vs C110) · on the roster: Hector Leech (Dishwasher); Trenton Nawan (Server); Guadalupe Lupe (Bartender); Valentina Campbell (Server)",
+      "Harborline Grill · Restaurant & Dining · 7 employees · growth 7.6% · revenue $860k (+$1k vs C110) · on the roster: Tomas Renteria (Podcast Host / Line Cook); Quynh Le (Line Cook); Jalen Hill (Line Cook); Bruce Wright (Line Cook)",
+      "Blue Lantern Bar · Nightlife & Entertainment · 30 employees · growth 8.8% · revenue $3.9M (+$7k vs C110) · on the roster: Yuki Ji (Bartender); Guadalupe Lee (Bartender)",
+      "Jack London Square Markets · Retail & Food · 30 employees · growth 5.9% · revenue $3.9M (+$4k vs C110) · on the roster: Gauri Han (Security Guard)",
+      "Dockhouse BBQ · Restaurant & Dining · 2 employees · growth 8.7% · revenue $246k (+$409 vs C110) · on the roster: Mesi Westin (Dishwasher)",
+      "ENGINE SEED (Jack London): citizens Ty Yule; Lamine Sissoko; Derek Simmons; Vincent Cho · businesses Bayline 6; Blue Lantern Bar"
+    ],
+    "evidence": [
+      {
+        "text": "Green & Gold Tavern · Sports Bar & Dining · 30 employees · growth 7.9% · revenue $3.7M (+$6k vs C110) · on the roster: Hector Leech (Dishwasher); Trenton Nawan (Server); Guadalupe Lupe (Bartender); Valentina Campbell (Server)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111"
+      },
+      {
+        "text": "Harborline Grill · Restaurant & Dining · 7 employees · growth 7.6% · revenue $860k (+$1k vs C110) · on the roster: Tomas Renteria (Podcast Host / Line Cook); Quynh Le (Line Cook); Jalen Hill (Line Cook); Bruce Wright (Line Cook)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111"
+      },
+      {
+        "text": "Blue Lantern Bar · Nightlife & Entertainment · 30 employees · growth 8.8% · revenue $3.9M (+$7k vs C110) · on the roster: Yuki Ji (Bartender); Guadalupe Lee (Bartender)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111"
+      },
+      {
+        "text": "Jack London Square Markets · Retail & Food · 30 employees · growth 5.9% · revenue $3.9M (+$4k vs C110) · on the roster: Gauri Han (Security Guard)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111"
+      },
+      {
+        "text": "Dockhouse BBQ · Restaurant & Dining · 2 employees · growth 8.7% · revenue $246k (+$409 vs C110) · on the roster: Mesi Westin (Dishwasher)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111"
+      },
+      {
+        "text": "ENGINE SEED (Jack London): citizens Ty Yule; Lamine Sissoko; Derek Simmons; Vincent Cho · businesses Bayline 6; Blue Lantern Bar",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C111"
+      }
+    ],
+    "hooks": [
+      {
+        "text": "Notable event: \"Port of Oakland: berth delay — the waterfront, the shops and the builders who run on its cargo take the hit\". Follow-up recommended.",
+        "angle": "baseline context piece",
+        "hood": "Jack London"
+      },
+      {
+        "text": "Baylight District unemployment down 10%. Recovery story. What's driving job growth?",
+        "angle": "baseline context piece",
+        "hood": "Baylight District"
+      },
+      {
+        "text": "High concentration of ambitious, driven personalities. Career competition and economic hustle stories.",
+        "angle": "general coverage",
+        "hood": null
+      },
+      {
+        "text": "Iman Horton has not advanced in 55 years",
+        "angle": "baseline context piece",
+        "hood": null
+      },
+      {
+        "text": "defaulted on the debts — the savings are gone and the record carries it",
+        "angle": "observational analysis",
+        "hood": "Adams Point"
+      },
+      {
+        "text": "the debts crossed a line this week — sleep comes harder now",
+        "angle": "observational analysis",
+        "hood": "Rockridge"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a business, a worker, an owner or a place — every name comes from this slice",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose",
+      "Do not contradict a role, employer or neighborhood listed here"
+    ]
+  },
+  "rotation": {
+    "pool": [
+      {
+        "hood": "Jack London",
+        "staffed": 5,
+        "workers": 12,
+        "lastCovered": null
+      },
+      {
+        "hood": "Downtown",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "Temescal",
+        "staffed": 1,
+        "workers": 2,
+        "lastCovered": 108
+      },
+      {
+        "hood": "Chinatown",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "Rockridge",
+        "staffed": 2,
+        "workers": 5,
+        "lastCovered": 107
+      },
+      {
+        "hood": "Fruitvale",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": 109
+      },
+      {
+        "hood": "West Oakland",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "Uptown",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "Grand Lake",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "Laurel",
+        "staffed": 2,
+        "workers": 2,
+        "lastCovered": 110
+      },
+      {
+        "hood": "East Oakland",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "San Antonio",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      }
+    ],
+    "picked": "Jack London"
+  },
+  "candidates": [
+    {
+      "className": "hood-kitchens",
+      "hood": "Downtown",
+      "label": "Downtown · 1 staffed / 5 listed",
+      "namedBusinesses": [
+        "Miso Metro"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Temescal",
+      "label": "Temescal · 1 staffed / 1 listed",
+      "namedBusinesses": [
+        "OakTown Social"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Chinatown",
+      "label": "Chinatown · 1 staffed / 3 listed",
+      "namedBusinesses": [
+        "Heritage Bakehouse"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Rockridge",
+      "label": "Rockridge · 2 staffed / 2 listed",
+      "namedBusinesses": [
+        "OakHouse",
+        "Claremont Table"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Fruitvale",
+      "label": "Fruitvale · 1 staffed / 2 listed",
+      "namedBusinesses": [
+        "Fruitvale Diner"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "West Oakland",
+      "label": "West Oakland · 1 staffed / 2 listed",
+      "namedBusinesses": [
+        "West Side Cafe"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Uptown",
+      "label": "Uptown · 1 staffed / 3 listed",
+      "namedBusinesses": [
+        "Art Walk Cafe"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Grand Lake",
+      "label": "Grand Lake · 1 staffed / 3 listed",
+      "namedBusinesses": [
+        "Port Grind"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Laurel",
+      "label": "Laurel · 2 staffed / 3 listed",
+      "namedBusinesses": [
+        "Nino's",
+        "Schoolgate Cafe"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "East Oakland",
+      "label": "East Oakland · 1 staffed / 2 listed",
+      "namedBusinesses": [
+        "Sunrise Cafe"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "San Antonio",
+      "label": "San Antonio · 1 staffed / 2 listed",
+      "namedBusinesses": [
+        "Park Boulevard Cafe"
+      ]
+    }
+  ],
+  "signals": {
+    "businessLaneCount": 46,
+    "sample": [
+      {
+        "kind": "anomaly",
+        "label": "transit ailment — economic footprint, affected businesses, workforce impact in Fruitvale",
+        "hood": "Fruitvale",
+        "ref": "output/engine_audit_c111.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
+      },
+      {
+        "kind": "anomaly",
+        "label": "economic ailment — economic footprint, affected businesses, workforce impact in West Oakland",
+        "hood": "West Oakland, East Oakland, Fruitvale",
+        "ref": "output/engine_audit_c111.json patterns[1]; evidence: Initiative_Tracker row(s) 7"
+      },
+      {
+        "kind": "anomaly",
+        "label": "transit ailment — economic footprint, affected businesses, workforce impact in Fruitvale",
+        "hood": "Fruitvale",
+        "ref": "output/engine_audit_c111.json patterns[6]; evidence: Neighborhood_Map row(s) 6"
+      },
+      {
+        "kind": "anomaly",
+        "label": "economic ailment — economic footprint, affected businesses, workforce impact in Downtown",
+        "hood": "Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Piedmont Ave, Chinatown, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, KONO, Lake Merritt, Uptown, Baylight District, East Oakland",
+        "ref": "output/engine_audit_c111.json patterns[22]; evidence: Neighborhood_Map row(s) "
+      },
+      {
+        "kind": "anomaly",
+        "label": "Downtown Economic Revitalization — economic upside, jobs and footprint in Downtown",
+        "hood": "Downtown",
+        "ref": "output/engine_audit_c111.json patterns[23]; evidence: Initiative_Tracker row(s) 8"
+      }
+    ]
+  },
+  "scene": {
+    "namedOnTop": [
+      "Green & Gold Tavern",
+      "Harborline Grill",
+      "Blue Lantern Bar",
+      "Jack London Square Markets",
+      "Dockhouse BBQ"
+    ]
+  },
+  "pointers": [
+    "output/beats/Business_Ledger.jsonl (179 rows @C111)",
+    "output/beats/Employment_Roster.jsonl (869 rows)",
+    "output/beats/Story_Seed_Deck.jsonl (business seeds this cycle: 4)",
+    "output/beats/prev/Business_Ledger.jsonl (movement vs C110)",
+    "output/beats/Story_Hook_Deck.jsonl (business hooks this cycle: 6)",
+    "output/desk_signal_c111.json lanes.business (pointers only)",
+    "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 2"
+  ]
+}

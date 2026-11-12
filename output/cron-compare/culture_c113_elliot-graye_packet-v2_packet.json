@@ -1,0 +1,1160 @@
+{
+  "stage": "report",
+  "desk": "culture",
+  "cycle": "113",
+  "persona": "elliot-graye",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Elliot Graye",
+    "popid": "POP-00012"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-faith",
+      "angle": "crisis response at Bay Pure Land Buddhist Temple (Chinatown) — the week in faith, and Foothill Baptist Tabernacle in focus",
+      "label": "8 faith events on the record since C107 · Foothill Baptist Tabernacle in East Oakland | 7 named on the record",
+      "hookLine": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+      "hood": "East Oakland",
+      "citizens": [
+        "Ophelia Brenner (POP-00754)",
+        "Kenji Tanaka (POP-00763)",
+        "Eunice Marston (POP-00753)",
+        "Antoine Vermeer (POP-00755)",
+        "Ramon Solano (POP-00756)",
+        "Mark Aitken (POP-00003)",
+        "Marcus Whitfield (POP-00532)"
+      ],
+      "popids": [
+        "POP-00754",
+        "POP-00763",
+        "POP-00753",
+        "POP-00755",
+        "POP-00756",
+        "POP-00003",
+        "POP-00532"
+      ],
+      "ref": "output/beats/Faith_Organizations.jsonl \"Foothill Baptist Tabernacle\"",
+      "cycle": 113
+    }
+  },
+  "angle": "output/cron-compare/culture_c113_elliot-graye_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 3,
+  "quotes": [
+    {
+      "pop": "POP-00754",
+      "name": "Ophelia Brenner",
+      "quote": "As the Senior Pastor at Foothill Baptist Tabernacle, I've seen our community engagement grow significantly. We have various programs that cater to different age groups and needs. For instance, our expanded tutoring program, which is now visible with posters outside St. Esperanza Parish, has been a huge success. It's wonderful to see the mercado buzzing with activity as people grab lunch between train transfers. Our congregation is actively involved in supporting local initiatives, and we're committed to being a positive presence in Fruitvale.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"As the Senior Pastor at Foothill Baptist Tabernacle, I've seen our community engagement grow significantly. We have various programs that cater to different age groups and needs. For instance, our expanded tutoring program, which is now visible with posters outside St. Esperanza Parish, has been a huge success. It's wonderful to see the mercado buzzing with activity as people grab lunch between train transfers. Our congregation is actively involved in supporting local initiatives, and we're committed to being a positive presence in Fruitvale.\",\n  \"fact_ids\": [\"F-4bae5fcf1581\", \"F-a026f7cbb321\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-4bae5fcf1581",
+          "F-a026f7cbb321"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00754-a4ee77a60f",
+        "authoredQuote": true,
+        "publishableQuote": "As the Senior Pastor at Foothill Baptist Tabernacle, I've seen our community engagement grow significantly. We have various programs that cater to different age groups and needs. For instance, our expanded tutoring program, which is now visible with posters outside St. Esperanza Parish, has been a huge success. It's wonderful to see the mercado buzzing with activity as people grab lunch between train transfers. Our congregation is actively involved in supporting local initiatives, and we're committed to being a positive presence in Fruitvale."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00754",
+          "name": "Ophelia Brenner",
+          "role": "Senior Pastor / Faith Leader",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Elliot Graye",
+          "question": "How does Foothill Baptist Tabernacle engage with the local community through its programs? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-faith",
+          "hood": "East Oakland",
+          "focus": "Foothill Baptist Tabernacle",
+          "src": "output/beats/Faith_Organizations.jsonl \"Foothill Baptist Tabernacle\""
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Ophelia Brenner — Senior Pastor / Faith Leader — Fruitvale",
+          "evidence": [
+            {
+              "id": "EV-8abe20ccd6",
+              "src": "output/beats/Faith_Organizations.jsonl \"Foothill Baptist Tabernacle\"",
+              "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "In focus: Foothill Baptist Tabernacle — Baptist, East Oakland, congregation 5,000, founded 123 years ago, led today by Dr. Ophelia Brenner — anchor institution, community programs",
+            "src": "output/beats/Faith_Organizations.jsonl \"Foothill Baptist Tabernacle\"",
+            "id": "F-4bae5fcf1581"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "8 faith events on the record since C107 · Foothill Baptist Tabernacle in East Oakland | 7 named on the record",
+            "src": "output/beats/Faith_Organizations.jsonl \"Foothill Baptist Tabernacle\"",
+            "id": "F-775d362fc56e"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+            "src": "output/beats/Faith_Organizations.jsonl \"Foothill Baptist Tabernacle\"",
+            "id": "F-5bb41426cc18"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\"",
+            "id": "F-61024524d215"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+            "src": "output/beats/Faith_Ledger.jsonl C107 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-7d24d6975c0b"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-c6268244f8ea"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Cathedral of the Living Word\"",
+            "id": "F-2e38ae74adc2"
+          },
+          {
+            "t": "FACT",
+            "text": "Ophelia Brenner — Senior Pastor / Faith Leader — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00754",
+            "id": "F-a026f7cbb321"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00532",
+      "name": "Marcus Whitfield",
+      "quote": "To be honest, I'm not really sure how Eastside Hoopers Coalition interacts with faith organizations in East Oakland. I founded the Coalition, but I haven't really been involved with any faith organizations directly. I've seen some posters for tutoring programs outside St. Esperanza Parish, but that's about it.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, I'm not really sure how Eastside Hoopers Coalition interacts with faith organizations in East Oakland. I founded the Coalition, but I haven't really been involved with any faith organizations directly. I've seen some posters for tutoring programs outside St. Esperanza Parish, but that's about it.\",\n  \"fact_ids\": [\"F-efc2ed645172\", \"F-1e057b4205ad\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-efc2ed645172",
+          "F-1e057b4205ad"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00532-d5524670b2",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, I'm not really sure how Eastside Hoopers Coalition interacts with faith organizations in East Oakland. I founded the Coalition, but I haven't really been involved with any faith organizations directly. I've seen some posters for tutoring programs outside St. Esperanza Parish, but that's about it."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00532",
+          "name": "Marcus Whitfield",
+          "role": "Youth Basketball Coach",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Elliot Graye",
+          "question": "How does Eastside Hoopers Coalition interact with faith organizations in East Oakland? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-faith",
+          "hood": "East Oakland",
+          "focus": "Foothill Baptist Tabernacle",
+          "src": "output/beats/Faith_Organizations.jsonl \"Foothill Baptist Tabernacle\""
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Marcus Whitfield — Youth Basketball Coach — Fruitvale",
+          "evidence": [
+            {
+              "id": "EV-f40e229bb7",
+              "src": "output/beats/Faith_Organizations.jsonl \"Foothill Baptist Tabernacle\"",
+              "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Eastside Hoopers Coalition (youth-sports), East Oakland, founded by Marcus Whitfield, since C101",
+            "src": "output/beats/Community_Programs.jsonl PRG-005",
+            "id": "F-efc2ed645172"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "8 faith events on the record since C107 · Foothill Baptist Tabernacle in East Oakland | 7 named on the record",
+            "src": "output/beats/Faith_Organizations.jsonl \"Foothill Baptist Tabernacle\"",
+            "id": "F-775d362fc56e"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+            "src": "output/beats/Faith_Organizations.jsonl \"Foothill Baptist Tabernacle\"",
+            "id": "F-5bb41426cc18"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\"",
+            "id": "F-61024524d215"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+            "src": "output/beats/Faith_Ledger.jsonl C107 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-7d24d6975c0b"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-c6268244f8ea"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Cathedral of the Living Word\"",
+            "id": "F-2e38ae74adc2"
+          },
+          {
+            "t": "FACT",
+            "text": "Marcus Whitfield — Youth Basketball Coach — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00532",
+            "id": "F-1e057b4205ad"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00763",
+      "name": "Kenji Tanaka",
+      "quote": "To be honest, I don't know much about Foothill Baptist Tabernacle. I've seen that faith communities in Oakland, like the Bay Pure Land Buddhist Temple in my own neighborhood, can be a source of comfort and support for people. I appreciate the role they play, even if I'm not directly familiar with their specific activities or events.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, I don't know much about Foothill Baptist Tabernacle. I've seen that faith communities in Oakland, like the Bay Pure Land Buddhist Temple in my own neighborhood, can be a source of comfort and support for people. I appreciate the role they play, even if I'm not directly familiar with their specific activities or events.\",\n  \"fact_ids\": [\"F-5bb41426cc18\", \"F-d98f55e040fe\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-5bb41426cc18",
+          "F-d98f55e040fe"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00763-86c2dcc34a",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, I don't know much about Foothill Baptist Tabernacle. I've seen that faith communities in Oakland, like the Bay Pure Land Buddhist Temple in my own neighborhood, can be a source of comfort and support for people. I appreciate the role they play, even if I'm not directly familiar with their specific activities or events."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00763",
+          "name": "Kenji Tanaka",
+          "role": "Senior Pastor / Faith Leader",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Elliot Graye",
+          "question": "What have you seen, felt, or understood about \"Foothill Baptist Tabernacle\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-faith",
+          "hood": "East Oakland",
+          "focus": "Foothill Baptist Tabernacle",
+          "src": "output/beats/Faith_Organizations.jsonl \"Foothill Baptist Tabernacle\""
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Kenji Tanaka — Senior Pastor / Faith Leader — Chinatown",
+          "evidence": [
+            {
+              "id": "EV-033f141ba9",
+              "src": "output/beats/Faith_Organizations.jsonl \"Foothill Baptist Tabernacle\"",
+              "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "8 faith events on the record since C107 · Foothill Baptist Tabernacle in East Oakland | 7 named on the record",
+            "src": "output/beats/Faith_Organizations.jsonl \"Foothill Baptist Tabernacle\"",
+            "id": "F-775d362fc56e"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+            "src": "output/beats/Faith_Organizations.jsonl \"Foothill Baptist Tabernacle\"",
+            "id": "F-5bb41426cc18"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\"",
+            "id": "F-61024524d215"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+            "src": "output/beats/Faith_Ledger.jsonl C107 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-7d24d6975c0b"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-c6268244f8ea"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Cathedral of the Living Word\"",
+            "id": "F-2e38ae74adc2"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C108 — holy day: traditional Epiphany rituals observed (attendance 1,077)",
+            "src": "output/beats/Faith_Ledger.jsonl C108 \"Cathedral of the Living Word\"",
+            "id": "F-53d1f53fb120"
+          },
+          {
+            "t": "FACT",
+            "text": "Kenji Tanaka — Senior Pastor / Faith Leader — Chinatown",
+            "src": "Simulation_Ledger profile for POP-00763",
+            "id": "F-d98f55e040fe"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-00754",
+      "name": "Ophelia Brenner",
+      "quote": "As the Senior Pastor at Foothill Baptist Tabernacle, I've seen our community engagement grow significantly. We have various programs that cater to different age groups and needs. For instance, our expanded tutoring program, which is now visible with posters outside St. Esperanza Parish, has been a huge success. It's wonderful to see the mercado buzzing with activity as people grab lunch between train transfers. Our congregation is actively involved in supporting local initiatives, and we're committed to being a positive presence in Fruitvale.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"As the Senior Pastor at Foothill Baptist Tabernacle, I've seen our community engagement grow significantly. We have various programs that cater to different age groups and needs. For instance, our expanded tutoring program, which is now visible with posters outside St. Esperanza Parish, has been a huge success. It's wonderful to see the mercado buzzing with activity as people grab lunch between train transfers. Our congregation is actively involved in supporting local initiatives, and we're committed to being a positive presence in Fruitvale.\",\n  \"fact_ids\": [\"F-4bae5fcf1581\", \"F-a026f7cbb321\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-4bae5fcf1581",
+          "F-a026f7cbb321"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00754-a4ee77a60f",
+        "authoredQuote": true,
+        "publishableQuote": "As the Senior Pastor at Foothill Baptist Tabernacle, I've seen our community engagement grow significantly. We have various programs that cater to different age groups and needs. For instance, our expanded tutoring program, which is now visible with posters outside St. Esperanza Parish, has been a huge success. It's wonderful to see the mercado buzzing with activity as people grab lunch between train transfers. Our congregation is actively involved in supporting local initiatives, and we're committed to being a positive presence in Fruitvale."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00754",
+          "name": "Ophelia Brenner",
+          "role": "Senior Pastor / Faith Leader",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Elliot Graye",
+          "question": "How does Foothill Baptist Tabernacle engage with the local community through its programs? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-faith",
+          "hood": "East Oakland",
+          "focus": "Foothill Baptist Tabernacle",
+          "src": "output/beats/Faith_Organizations.jsonl \"Foothill Baptist Tabernacle\""
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Ophelia Brenner — Senior Pastor / Faith Leader — Fruitvale",
+          "evidence": [
+            {
+              "id": "EV-8abe20ccd6",
+              "src": "output/beats/Faith_Organizations.jsonl \"Foothill Baptist Tabernacle\"",
+              "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "In focus: Foothill Baptist Tabernacle — Baptist, East Oakland, congregation 5,000, founded 123 years ago, led today by Dr. Ophelia Brenner — anchor institution, community programs",
+            "src": "output/beats/Faith_Organizations.jsonl \"Foothill Baptist Tabernacle\"",
+            "id": "F-4bae5fcf1581"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "8 faith events on the record since C107 · Foothill Baptist Tabernacle in East Oakland | 7 named on the record",
+            "src": "output/beats/Faith_Organizations.jsonl \"Foothill Baptist Tabernacle\"",
+            "id": "F-775d362fc56e"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+            "src": "output/beats/Faith_Organizations.jsonl \"Foothill Baptist Tabernacle\"",
+            "id": "F-5bb41426cc18"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\"",
+            "id": "F-61024524d215"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+            "src": "output/beats/Faith_Ledger.jsonl C107 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-7d24d6975c0b"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-c6268244f8ea"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Cathedral of the Living Word\"",
+            "id": "F-2e38ae74adc2"
+          },
+          {
+            "t": "FACT",
+            "text": "Ophelia Brenner — Senior Pastor / Faith Leader — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00754",
+            "id": "F-a026f7cbb321"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00003",
+      "name": "Mark Aitken",
+      "quote": null,
+      "disp": "can't switch off, working themselves thin; draws people in, deep with them; curious, open to new things; steady, hard to shake; principled, plays it straight; a real fan, plans around games",
+      "recorded": false,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"abstain\",\n  \"quote\": null,\n  \"fact_ids\": [],\n  \"basis\": null,\n  \"unverifiedLead\": null,\n  \"abstain_reason\": \"no_lived_basis\"\n}\n```",
+      "claims": {
+        "answer": "abstain",
+        "factIds": [],
+        "basis": null,
+        "unverifiedLead": [],
+        "abstainReason": "no_lived_basis",
+        "quoteId": null,
+        "authoredQuote": false,
+        "publishableQuote": null
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00003",
+          "name": "Mark Aitken",
+          "role": "First Baseman, Oakland A's Legend — Player Rep, Community Liaison",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Elliot Graye",
+          "question": "Are there any connections between Mark Aitken Youth Baseball League and Foothill Baptist Tabernacle? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-faith",
+          "hood": "East Oakland",
+          "focus": "Foothill Baptist Tabernacle",
+          "src": "output/beats/Faith_Organizations.jsonl \"Foothill Baptist Tabernacle\""
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Mark Aitken — First Baseman, Oakland A's Legend — Player Rep, Community Liaison — Jack London",
+          "evidence": [
+            {
+              "id": "EV-2acfeb162e",
+              "src": "output/beats/Faith_Organizations.jsonl \"Foothill Baptist Tabernacle\"",
+              "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Mark Aitken Youth Baseball League (youth-sports), East Oakland, founded by Mark Aitken, since C101",
+            "src": "output/beats/Community_Programs.jsonl PRG-003",
+            "id": "F-c3f5c94304c6"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "8 faith events on the record since C107 · Foothill Baptist Tabernacle in East Oakland | 7 named on the record",
+            "src": "output/beats/Faith_Organizations.jsonl \"Foothill Baptist Tabernacle\"",
+            "id": "F-775d362fc56e"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+            "src": "output/beats/Faith_Organizations.jsonl \"Foothill Baptist Tabernacle\"",
+            "id": "F-5bb41426cc18"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\"",
+            "id": "F-61024524d215"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+            "src": "output/beats/Faith_Ledger.jsonl C107 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-7d24d6975c0b"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-c6268244f8ea"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Cathedral of the Living Word\"",
+            "id": "F-2e38ae74adc2"
+          },
+          {
+            "t": "FACT",
+            "text": "Mark Aitken — First Baseman, Oakland A's Legend — Player Rep, Community Liaison — Jack London",
+            "src": "Simulation_Ledger profile for POP-00003",
+            "id": "F-a2cdfdf33ef7"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00532",
+      "name": "Marcus Whitfield",
+      "quote": "To be honest, I'm not really sure how Eastside Hoopers Coalition interacts with faith organizations in East Oakland. I founded the Coalition, but I haven't really been involved with any faith organizations directly. I've seen some posters for tutoring programs outside St. Esperanza Parish, but that's about it.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, I'm not really sure how Eastside Hoopers Coalition interacts with faith organizations in East Oakland. I founded the Coalition, but I haven't really been involved with any faith organizations directly. I've seen some posters for tutoring programs outside St. Esperanza Parish, but that's about it.\",\n  \"fact_ids\": [\"F-efc2ed645172\", \"F-1e057b4205ad\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-efc2ed645172",
+          "F-1e057b4205ad"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00532-d5524670b2",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, I'm not really sure how Eastside Hoopers Coalition interacts with faith organizations in East Oakland. I founded the Coalition, but I haven't really been involved with any faith organizations directly. I've seen some posters for tutoring programs outside St. Esperanza Parish, but that's about it."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00532",
+          "name": "Marcus Whitfield",
+          "role": "Youth Basketball Coach",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Elliot Graye",
+          "question": "How does Eastside Hoopers Coalition interact with faith organizations in East Oakland? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-faith",
+          "hood": "East Oakland",
+          "focus": "Foothill Baptist Tabernacle",
+          "src": "output/beats/Faith_Organizations.jsonl \"Foothill Baptist Tabernacle\""
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Marcus Whitfield — Youth Basketball Coach — Fruitvale",
+          "evidence": [
+            {
+              "id": "EV-f40e229bb7",
+              "src": "output/beats/Faith_Organizations.jsonl \"Foothill Baptist Tabernacle\"",
+              "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Eastside Hoopers Coalition (youth-sports), East Oakland, founded by Marcus Whitfield, since C101",
+            "src": "output/beats/Community_Programs.jsonl PRG-005",
+            "id": "F-efc2ed645172"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "8 faith events on the record since C107 · Foothill Baptist Tabernacle in East Oakland | 7 named on the record",
+            "src": "output/beats/Faith_Organizations.jsonl \"Foothill Baptist Tabernacle\"",
+            "id": "F-775d362fc56e"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+            "src": "output/beats/Faith_Organizations.jsonl \"Foothill Baptist Tabernacle\"",
+            "id": "F-5bb41426cc18"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\"",
+            "id": "F-61024524d215"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+            "src": "output/beats/Faith_Ledger.jsonl C107 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-7d24d6975c0b"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-c6268244f8ea"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Cathedral of the Living Word\"",
+            "id": "F-2e38ae74adc2"
+          },
+          {
+            "t": "FACT",
+            "text": "Marcus Whitfield — Youth Basketball Coach — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00532",
+            "id": "F-1e057b4205ad"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00763",
+      "name": "Kenji Tanaka",
+      "quote": "To be honest, I don't know much about Foothill Baptist Tabernacle. I've seen that faith communities in Oakland, like the Bay Pure Land Buddhist Temple in my own neighborhood, can be a source of comfort and support for people. I appreciate the role they play, even if I'm not directly familiar with their specific activities or events.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, I don't know much about Foothill Baptist Tabernacle. I've seen that faith communities in Oakland, like the Bay Pure Land Buddhist Temple in my own neighborhood, can be a source of comfort and support for people. I appreciate the role they play, even if I'm not directly familiar with their specific activities or events.\",\n  \"fact_ids\": [\"F-5bb41426cc18\", \"F-d98f55e040fe\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-5bb41426cc18",
+          "F-d98f55e040fe"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00763-86c2dcc34a",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, I don't know much about Foothill Baptist Tabernacle. I've seen that faith communities in Oakland, like the Bay Pure Land Buddhist Temple in my own neighborhood, can be a source of comfort and support for people. I appreciate the role they play, even if I'm not directly familiar with their specific activities or events."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00763",
+          "name": "Kenji Tanaka",
+          "role": "Senior Pastor / Faith Leader",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Elliot Graye",
+          "question": "What have you seen, felt, or understood about \"Foothill Baptist Tabernacle\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-faith",
+          "hood": "East Oakland",
+          "focus": "Foothill Baptist Tabernacle",
+          "src": "output/beats/Faith_Organizations.jsonl \"Foothill Baptist Tabernacle\""
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Kenji Tanaka — Senior Pastor / Faith Leader — Chinatown",
+          "evidence": [
+            {
+              "id": "EV-033f141ba9",
+              "src": "output/beats/Faith_Organizations.jsonl \"Foothill Baptist Tabernacle\"",
+              "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "8 faith events on the record since C107 · Foothill Baptist Tabernacle in East Oakland | 7 named on the record",
+            "src": "output/beats/Faith_Organizations.jsonl \"Foothill Baptist Tabernacle\"",
+            "id": "F-775d362fc56e"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+            "src": "output/beats/Faith_Organizations.jsonl \"Foothill Baptist Tabernacle\"",
+            "id": "F-5bb41426cc18"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\"",
+            "id": "F-61024524d215"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+            "src": "output/beats/Faith_Ledger.jsonl C107 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-7d24d6975c0b"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-c6268244f8ea"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Cathedral of the Living Word\"",
+            "id": "F-2e38ae74adc2"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C108 — holy day: traditional Epiphany rituals observed (attendance 1,077)",
+            "src": "output/beats/Faith_Ledger.jsonl C108 \"Cathedral of the Living Word\"",
+            "id": "F-53d1f53fb120"
+          },
+          {
+            "t": "FACT",
+            "text": "Kenji Tanaka — Senior Pastor / Faith Leader — Chinatown",
+            "src": "Simulation_Ledger profile for POP-00763",
+            "id": "F-d98f55e040fe"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-10-29T18:16:31.625Z"
+}

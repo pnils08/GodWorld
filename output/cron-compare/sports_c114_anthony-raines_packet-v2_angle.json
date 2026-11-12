@@ -1,0 +1,472 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "114",
+  "persona": "anthony-raines",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00017",
+      "name": "Anthony Raines",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "The season line (6.2WAR) has to carry the claim before the narrative does: The bargain core: is it time to extend Coles, Ellis, Quintero and Gonzalez?",
+      "approach": "Analytic approach (Anthony Raines): third-person only — never fan \"we.\" One evaluative claim built on verifiable feed line numbers (Stats / record / StoryAngle). Open from the board (roster fact, contract on the feed, season line) — not the bleachers. Pick 1–2 tools from the analysis bag in this slice. Numbers as the card or feed prints them, named to their source. FORBIDDEN: inventing x-stats, barrel%, launch angle, contracts, or salaries not on the feed; P Slayer charge; Hal elegy as spine; multi-voice sports-desk average.",
+      "creativeBrief": {
+        "kind": "sports-analytics",
+        "pulseClass": "award-board",
+        "bagTools": [
+          "1 Box-Card Read",
+          "7 Is-It-Real (ledger PANDAS)"
+        ],
+        "claim": "The season line (6.2WAR) has to carry the claim before the narrative does: The bargain core: is it time to extend Coles, Ellis, Quintero and Gonzalez?",
+        "lineFacts": [
+          "Feed line: Travis Coles/22-4/2.72ERA/254SO/6.2WAR/$780K",
+          "Feed line: John Ellis/20-3/3.42ERA/$780K",
+          "Feed line: Ernesto Quintero/.282AVG/46HR/92RBI/5.8WAR/$980K",
+          "Feed line: Vladimir Gonzalez/.306AVG/28HR/4.7WAR/$2.7M",
+          "Event kind (feed): A's — front-office (off-season)",
+          "NamesUsed (feed): Travis Coles (SP), John Ellis (SP), Ernesto Quintero (3B), Vladimir Gonzalez (RF), Mike Paulson (GM)"
+        ],
+        "missing": [
+          "x-stats / barrel% / launch angle / OAA not on feed",
+          "contracts or salaries not printed on this feed row",
+          "As_Roster sheet cells (offline pack uses feed Stats only — do not invent WAR/ERA beyond feed)"
+        ],
+        "sceneRule": "Press-box / clubhouse quiet. Numbers from feed Stats only. No invented Savant cards. RoleType from ledger when present — never invent careers.",
+        "sourcePointers": [
+          "output/world_summary_c114.md ## Sports",
+          "docs/media/ANTHONY_ANALYSIS_BAG.md"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "sports-analytics",
+      "hood": "Jack London",
+      "score": null,
+      "src": "world_summary_c114.md ## Sports",
+      "team": "A's",
+      "nearby": [
+        {
+          "text": "A's | rumor | (off-season) | Ian Devine, Louis Cross, Hitoki Ka, Mariano Rosales, Clark Saryan, Julio Valencia",
+          "src": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | rumor | (off-season) | Carmen Mesa, Pablo Almanzar, Henry Rivas, Arturo Ramos",
+          "src": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | front-office | (off-season) | Travis Coles, John Ellis, Ernesto Quintero, Vladimir Gonzalez, Mike Paulson",
+          "src": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (off-season) | Benji Dillon, Vinnie Keane",
+          "src": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (off-season) | Isley Kelley, Darrin Davis, Danny Horn",
+          "src": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": []
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C114",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-4261fa115617"
+      },
+      {
+        "t": "FACT",
+        "text": "A's · front-office — The bargain core: is it time to extend Coles, Ellis, Quintero and Gonzalez?",
+        "src": "world_summary_c114.md ## Sports",
+        "id": "F-3ac48aaebc7f"
+      },
+      {
+        "t": "FACT",
+        "text": "The bargain core: is it time to extend Coles, Ellis, Quintero and Gonzalez?",
+        "src": "world_summary_c114.md ## Sports",
+        "id": "F-d5e0c82094cc"
+      },
+      {
+        "t": "FACT",
+        "text": "Feed line: Travis Coles/22-4/2.72ERA/254SO/6.2WAR/$780K",
+        "src": "world_summary_c114.md ## Sports",
+        "id": "F-6e00e7c169ed"
+      },
+      {
+        "t": "FACT",
+        "text": "Feed line: John Ellis/20-3/3.42ERA/$780K",
+        "src": "world_summary_c114.md ## Sports",
+        "id": "F-3e3062ed39a1"
+      },
+      {
+        "t": "FACT",
+        "text": "Feed line: Ernesto Quintero/.282AVG/46HR/92RBI/5.8WAR/$980K",
+        "src": "world_summary_c114.md ## Sports",
+        "id": "F-7716fb8cb0ac"
+      },
+      {
+        "t": "FACT",
+        "text": "Feed line: Vladimir Gonzalez/.306AVG/28HR/4.7WAR/$2.7M",
+        "src": "world_summary_c114.md ## Sports",
+        "id": "F-dd933b189f5f"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "No target candidate was supplied. Return targets as an empty array; do not invent a person or identifier. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "records",
+    "candidates": [],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Anthony Raines",
+    "popid": "POP-00017"
+  },
+  "assignment": {
+    "story": {
+      "kind": "sports-analytics",
+      "angle": "The season line (6.2WAR) has to carry the claim before the narrative does: The bargain core: is it time to extend Coles, Ellis, Quintero and Gonzalez?",
+      "label": "A's · front-office — The bargain core: is it time to extend Coles, Ellis, Quintero and Gonzalez?",
+      "hookLine": "The bargain core: is it time to extend Coles, Ellis, Quintero and Gonzalez?",
+      "hood": "Jack London",
+      "pulseClass": "award-board",
+      "team": "A's",
+      "eventKind": "front-office",
+      "citizens": [
+        "Travis Coles (POP-00533)",
+        "John Ellis (POP-00033)",
+        "Ernesto Quintero (POP-00050)",
+        "Vladimir Gonzalez (POP-00598)",
+        "Mike Paulson (POP-00527)"
+      ],
+      "popids": [
+        "POP-00533",
+        "POP-00033",
+        "POP-00050",
+        "POP-00598",
+        "POP-00527"
+      ],
+      "ref": "world_summary_c114.md ## Sports",
+      "cycle": 114
+    },
+    "approach": "Analytic approach (Anthony Raines): third-person only — never fan \"we.\" One evaluative claim built on verifiable feed line numbers (Stats / record / StoryAngle). Open from the board (roster fact, contract on the feed, season line) — not the bleachers. Pick 1–2 tools from the analysis bag in this slice. Numbers as the card or feed prints them, named to their source. FORBIDDEN: inventing x-stats, barrel%, launch angle, contracts, or salaries not on the feed; P Slayer charge; Hal elegy as spine; multi-voice sports-desk average."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": {
+    "pulse": {
+      "className": "award-board",
+      "score": 86,
+      "label": "A's · front-office — The bargain core: is it time to extend Coles, Ellis, Quintero and Gonzalez?",
+      "team": "A's",
+      "eventKind": "front-office",
+      "seasonType": "off-season",
+      "storyAngle": "The bargain core: is it time to extend Coles, Ellis, Quintero and Gonzalez?",
+      "hasStats": true,
+      "record": "-",
+      "streak": "-",
+      "foilNumber": "6.2WAR",
+      "feedCycle": 114
+    },
+    "bag": {
+      "tools": [
+        {
+          "id": 1,
+          "name": "Box-Card Read"
+        },
+        {
+          "id": 7,
+          "name": "Is-It-Real (ledger PANDAS)"
+        }
+      ],
+      "claim": "The season line (6.2WAR) has to carry the claim before the narrative does: The bargain core: is it time to extend Coles, Ellis, Quintero and Gonzalez?",
+      "foilNumber": "6.2WAR"
+    },
+    "prewrite": {
+      "reporter": "Anthony Raines",
+      "bagTools": [
+        {
+          "id": 1,
+          "name": "Box-Card Read"
+        },
+        {
+          "id": 7,
+          "name": "Is-It-Real (ledger PANDAS)"
+        }
+      ],
+      "lineFacts": [
+        "Feed line: Travis Coles/22-4/2.72ERA/254SO/6.2WAR/$780K",
+        "Feed line: John Ellis/20-3/3.42ERA/$780K",
+        "Feed line: Ernesto Quintero/.282AVG/46HR/92RBI/5.8WAR/$980K",
+        "Feed line: Vladimir Gonzalez/.306AVG/28HR/4.7WAR/$2.7M",
+        "Event kind (feed): A's — front-office (off-season)",
+        "NamesUsed (feed): Travis Coles (SP), John Ellis (SP), Ernesto Quintero (3B), Vladimir Gonzalez (RF), Mike Paulson (GM)"
+      ],
+      "dossierFacts": [
+        "Travis Coles TrueSource: 2041 REGULAR SEASON — Games: 32 Games Started: 32 Wins: 22 Losses: 4 Saves: 0 Blown Saves: 0 Holds: 0 Innings Pitched: 215 Hits Allowed: 166 Runs Allo | WAR: 6.2 | AWARDS (Career Reference) - All-Star (2040) - Cy Young (2041) - All-Star (2041) - Strikeou",
+        "John Ellis TrueSource: 2041 REGULAR SEASON — Games: 32 Games Started: 32 Wins: 20 Losses: 3 Saves: 0 Blown Saves: 0 Holds: 0 Innings Pitched: 189.2 Hits Allowed: 184 Runs Al | WAR: 3.7 | AWARDS (Career Reference)",
+        "Ernesto Quintero TrueSource: 2041 REGULAR SEASON G: 145 PA: 589 AB: 554 R: 80 H: 156 2B: 25 3B: 3 HR: 46 RBI: 92 BB: 27 SO: 89 HBP: 4 SF: 3 SAC: 1 GIDP: 6 AVG: 0.282 OBP: 0.318 SL | WAR: 5.8 | AWARDS (Career Reference) - Top Prospect Tier 1 (2040) - Rookie of the Year (2041) - All-S",
+        "Vladimir Gonzalez TrueSource: 2041 REGULAR SEASON G: 138 PA: 567 AB: 527 R: 90 H: 161 2B: 40 3B: 4 HR: 28 RBI: 76 BB: 37 SO: 60 HBP: 0 SF: 3 SAC: 0 GIDP: 5 AVG: 0.306 OBP: 0.349 SL | WAR: 4.7 | AWARDS (Career Reference) - World Series MVP (2037)"
+      ],
+      "feedFacts": [
+        "StoryAngle: The bargain core: is it time to extend Coles, Ellis, Quintero and Gonzalez?",
+        "Notes: With Keane and Dillon stepping away and Aitken testing the market, the bigger long term question for Mike Paulson may be the players who cost almost nothing. Travis Coles won the Cy Young at 21 on a $780K salary. John Ellis went 20-3 on the same number. Ernesto Quintero won Rookie of the Year with 46 homeruns at $980K, and Vladimir Gonzalez put up 4.7 WAR at $2.7M entering his peak. None of them are going anywhere yet, but every season they outplay their salary the price goes up. Does Paulson lock in the core now, or ride the bargains and pay later?"
+      ],
+      "claim": "The season line (6.2WAR) has to carry the claim before the narrative does: The bargain core: is it time to extend Coles, Ellis, Quintero and Gonzalez?",
+      "missing": [
+        "x-stats / barrel% / launch angle / OAA not on feed",
+        "contracts or salaries not printed on this feed row",
+        "As_Roster sheet cells (offline pack uses feed Stats only — do not invent WAR/ERA beyond feed)"
+      ],
+      "foilNumber": "6.2WAR",
+      "anchorFacts": [
+        "Feed line: Travis Coles/22-4/2.72ERA/254SO/6.2WAR/$780K",
+        "Feed line: John Ellis/20-3/3.42ERA/$780K",
+        "Feed line: Ernesto Quintero/.282AVG/46HR/92RBI/5.8WAR/$980K",
+        "Feed line: Vladimir Gonzalez/.306AVG/28HR/4.7WAR/$2.7M"
+      ],
+      "hooks": []
+    },
+    "friction": {
+      "a": "Feed present fact: The bargain core: is it time to extend Coles, Ellis, Quintero and Gonzalez?",
+      "b": "Soft FO language or bleacher heat that skips the line",
+      "frame": "Evaluate fit and process with numbers — one claim, third person."
+    },
+    "players": [
+      {
+        "name": "Travis Coles",
+        "popid": "POP-00533",
+        "role": "Starting Pitcher, Oakland A's",
+        "neighborhood": "Downtown",
+        "why": "feed-names"
+      },
+      {
+        "name": "John Ellis",
+        "popid": "POP-00033",
+        "role": "Starting Pitcher, Oakland A's",
+        "neighborhood": "Laurel",
+        "why": "feed-names"
+      },
+      {
+        "name": "Ernesto Quintero",
+        "popid": "POP-00050",
+        "role": "3B/1B , Oakland A's",
+        "neighborhood": "Baylight District",
+        "why": "feed-names"
+      },
+      {
+        "name": "Vladimir Gonzalez",
+        "popid": "POP-00598",
+        "role": "Right Fielder, Oakland A's",
+        "neighborhood": "Fruitvale",
+        "why": "feed-names"
+      },
+      {
+        "name": "Mike Paulson",
+        "popid": "POP-00527",
+        "role": "General Manager, Oakland A's & The Oaks",
+        "neighborhood": "West Oakland",
+        "why": "feed-names"
+      }
+    ],
+    "scene": {
+      "neighborhood": "Jack London",
+      "record": "-",
+      "streak": "-",
+      "colorRoom": "Press-box / clubhouse quiet. Numbers from feed Stats only. No invented Savant cards. RoleType from ledger when present — never invent careers."
+    },
+    "candidates": [
+      {
+        "score": 86,
+        "cycle": 114,
+        "team": "A's",
+        "primary": "award-board",
+        "hasStats": true,
+        "angle": "The bargain core: is it time to extend Coles, Ellis, Quintero and Gonzalez?"
+      },
+      {
+        "score": 83,
+        "cycle": 114,
+        "team": "A's",
+        "primary": "award-board",
+        "hasStats": true,
+        "angle": "The last of the dynasty core: how long do Kelley and Davis have?"
+      },
+      {
+        "score": 75,
+        "cycle": 114,
+        "team": "A's",
+        "primary": "line-card",
+        "hasStats": true,
+        "angle": "$22 million in veteran relief and the rookies got the October innings. Is a bullpen refresh coming?"
+      },
+      {
+        "score": 71,
+        "cycle": 114,
+        "team": "A's",
+        "primary": "line-card",
+        "hasStats": true,
+        "angle": "Five starters and one Carmen Mesa. Who is the odd arm out?"
+      },
+      {
+        "score": 70,
+        "cycle": 114,
+        "team": "A's",
+        "primary": "award-board",
+        "hasStats": true,
+        "angle": "Keane said goodbye. Dillon still hasn't."
+      },
+      {
+        "score": 69,
+        "cycle": 114,
+        "team": "Oaks",
+        "primary": "award-board",
+        "hasStats": true,
+        "angle": "The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100"
+      }
+    ]
+  },
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Anthony Raines",
+    "popid": "POP-00017",
+    "text": "The front office is sitting on a math problem that doesn't need a calculator. Four players, all under 30, all producing at a level that would cost triple on the open market. Coles threw 254 strikeouts at $780K. Ellis won 20 games at the same number. Quintero hit 46 homers at under a million. Gonzalez hit .306 for $2.7M. The combined WAR on those four contracts is somewhere north of 17. The question isn't whether they're good — the feed answers that. The question is whether Paulson moves before the market moves for him. I want to sit down with the GM's public comments, the roster math the feed prints, and the cold arithmetic of what happens if even one of those four hits free agency. The stor",
+    "plan": {
+      "chase": "The front office is sitting on a math problem that doesn't need a calculator. Four players, all under 30, all producing at a level that would cost triple on the open market. Coles threw 254 strikeouts at $780K. Ellis won 20 games at the same number. Quintero hit 46 homers at under a million. Gonzalez hit .306 for $2.7M. The combined WAR on those four contracts is somewhere north of 17. The question isn't whether they're good — the feed answers that. The question is whether Paulson moves before the market moves for him. I want to sit down with the GM's public comments, the roster math the feed prints, and the cold arithmetic of what happens if even one of those four hits free agency. The stor",
+      "focus": "Whether the A's front office extends the bargain core — Coles, Ellis, Quintero, Gonzalez — before the market re-prices them, using the feed's season lines as the evidentiary floor.",
+      "why": "The numbers on the feed make the case without embellishment: four players, sub-$3M combined salaries, 17+ combined WAR. The Devine/Cross contract on the same feed shows what the market charges for production that doesn't show up in October. That contrast is the story. It's not a narrative — it's a ledger.",
+      "checks": [
+        "Pull the exact feed lines for Coles, Ellis, Quintero, Gonzalez — no rounding, no invented stats.",
+        "Confirm the Devine/Cross combined $22M figure and the 0.9 WAR for Cross as printed on the feed.",
+        "Verify the playoff roster decision — Devine left off, Saryan took his spot — from the feed's rumor line.",
+        "Check the bullpen numbers — Hitoki Ka's 0.90 ERA, Rosales' 42 saves — to frame the cost of the cracks in Game 2.",
+        "Keep the piece third-person. No 'we.' No fan voice. The numbers speak; I just arrange them."
+      ],
+      "targets": [],
+      "interpretation": "The feed is telling me the A's have a rare window: elite production at poverty wages. The front office either recognizes the arbitrage and locks it in, or it lets the market correct the imbalance. The Devine/Cross line is the cautionary tale — paying for past performance that didn't show up when it mattered. The extension question is really a question about whether Paulson trusts the numbers or the narrative.",
+      "unverifiedLead": [
+        "Possible that the front office is already in talks with one or more of the four — no confirmation on the feed.",
+        "Possible that the A's are planning to move a veteran contract to make room for Saryan and Valencia — rumor only, not fact.",
+        "Possible that the bargain core's agents are waiting for the market to set the price before engaging — speculative."
+      ],
+      "closeQuestion": "If the A's let Coles hit the open market after a 6.2 WAR season at $780K, what does that say about what the front office actually values — the production or the payroll?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "A's | rumor | (off-season) | Ian Devine, Louis Cross, Hitoki Ka, Mariano Rosales, Clark Saryan, Julio Valencia",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01082",
+        "POP-01080",
+        "POP-01081",
+        "POP-00555",
+        "POP-00052",
+        "POP-00077"
+      ]
+    },
+    {
+      "label": "A's | rumor | (off-season) | Carmen Mesa, Pablo Almanzar, Henry Rivas, Arturo Ramos",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00081",
+        "POP-01078",
+        "POP-00024",
+        "POP-00025"
+      ]
+    },
+    {
+      "label": "A's | front-office | (off-season) | Travis Coles, John Ellis, Ernesto Quintero, Vladimir Gonzalez, Mike Paulson",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00533",
+        "POP-00033",
+        "POP-00050",
+        "POP-00598",
+        "POP-00527"
+      ]
+    },
+    {
+      "label": "A's | player-feature | (off-season) | Benji Dillon, Vinnie Keane",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00018",
+        "POP-00001"
+      ]
+    },
+    {
+      "label": "A's | player-feature | (off-season) | Isley Kelley, Darrin Davis, Danny Horn",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00019",
+        "POP-00021",
+        "POP-00022"
+      ]
+    }
+  ],
+  "laneEntries": 15,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-02T12:16:52.427Z"
+}

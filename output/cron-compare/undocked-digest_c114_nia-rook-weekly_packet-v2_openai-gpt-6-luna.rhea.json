@@ -1,0 +1,73 @@
+{
+  "draft": "output/cron-compare/undocked-digest_c114_nia-rook-weekly_packet-v2_openai-gpt-6-luna.md",
+  "cycle": "114",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "1bd068192ead2ca6fd98238e7d3c0c9bf5f0e97f6764a782a629a70b03b35603",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All citizen roles, quotes, and gameplay details align precisely with verified ledger profiles and interview records with zero canon violations.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "nia-rook-undocked-weekly-digest-v1",
+    "packageVersion": "NIAROOK-UNDOCKED-WEEKLY-2",
+    "manifestId": "AM-52ab0cb6a876",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "38.15"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Lena Okafor",
+      "Luis Taz",
+      "Ronald Silk"
+    ],
+    "unverified": [
+      "Daycare Director"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 2,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0101,
+  "durationMs": 20119,
+  "parseError": false,
+  "ranAt": "2026-11-07T16:15:49.354Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 350",
+    "words": 419,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "1bd068192ead2ca6fd98238e7d3c0c9bf5f0e97f6764a782a629a70b03b35603",
+    "costUsd": 0.0009
+  }
+}

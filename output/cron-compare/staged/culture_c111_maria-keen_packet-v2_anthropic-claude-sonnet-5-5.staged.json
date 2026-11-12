@@ -1,0 +1,76 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "111",
+  "persona": "maria-keen",
+  "byline": "Maria Keen",
+  "bylinePopid": "POP-00013",
+  "article": "output/cron-compare/staged/culture_c111_maria-keen_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Lucia Polito",
+        "role": "mentioned",
+        "popid": "POP-00004"
+      },
+      {
+        "name": "Carlos Presti",
+        "role": "quoted-source",
+        "popid": "POP-00048"
+      },
+      {
+        "name": "Gordon Tate",
+        "role": "quoted-source",
+        "popid": "POP-00148"
+      },
+      {
+        "name": "Ryan Stark",
+        "role": "quoted-source",
+        "popid": "POP-00351"
+      },
+      {
+        "name": "Priya Nair",
+        "role": "mentioned",
+        "popid": "POP-00531",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Downtown"
+    ],
+    "claims": [
+      {
+        "claim": "I walked by SpeedyBurger on Broadway and saw a new lease sign go up above it. The paper was still crisp in the display case. It's another new spot opening up in Downtown, which is great to see.",
+        "sourceRef": "citizenVoice PRESS Ryan Stark"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-d2e17ee960c7",
+    "draftSha256": "4556b3a91221dcdb185adac1befd3102965da0b82c48d7ca2f7ff4e125b84a31",
+    "verdict": "output/cron-compare/culture_c111_maria-keen_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-10-16T23:17:50.203Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 762,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "4556b3a91221dcdb185adac1befd3102965da0b82c48d7ca2f7ff4e125b84a31",
+      "costUsd": 0.0014
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-16T23:17:55.032Z"
+}

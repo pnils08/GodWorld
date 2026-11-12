@@ -1,0 +1,1866 @@
+{
+  "stage": "angle",
+  "desk": "culture",
+  "cycle": "111",
+  "persona": "maria-keen",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00013",
+      "name": "Maria Keen",
+      "role": "desk reporter",
+      "desk": "culture"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Downtown — the programs that hold the block and the people who founded them",
+      "approach": "Neighborhood approach: this slice is one block's record — its community programs and their founders, who is moving in or out, who the block has in a hospital bed or in custody, what it paid on tax day, whose debts crossed the line, and the engine's neighborhood hooks this cycle. First-person witness, one block one truth. The programs, founders, movement numbers, patients, defendants and money lines are real; the stoop conversations, the mailboxes, the dog everyone knows are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "neighborhood",
+        "hood": "Downtown",
+        "facts": [
+          "NeuroCity Youth Lab (tech-education), Downtown — founded by Priya Nair, since C101",
+          "Downtown this cycle: 240 students, 2,286 adults, 232 seniors — moved vs C110: +1 students, +5 adults, +1 seniors",
+          "Downtown: 4 charges → 1 arrest → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+          "Downtown: 83 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked"
+        ],
+        "priorCycle": "PRIOR_CYCLE_ON_DISK",
+        "note": null,
+        "engineHooks": [
+          "Positive energy in the city. What's driving the mood? Feature opportunity. (street-level mood piece)",
+          "the landlord's notice on the door put the whole household around the table with the numbers (observational analysis)",
+          "savings crossed six figures — years of steady weeks did that (observational analysis)",
+          "defaulted on the debts — the savings are gone and the record carries it (observational analysis)"
+        ],
+        "roomIsYours": "the stoop, the corner store counter, who moved in last month and who is thinking about leaving, what the block argues about",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-neighborhood",
+      "hood": "Downtown",
+      "score": null,
+      "src": "output/beats/Community_Programs.jsonl @C111",
+      "nearby": [
+        {
+          "text": "Chinatown | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c111.md \"### Chinatown\"; events: world_summary_c111.md \"## World Events\""
+        },
+        {
+          "text": "East Oakland | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c111.md \"### East Oakland\"; events: world_summary_c111.md \"## World Events\""
+        },
+        {
+          "text": "Fruitvale | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c111.md \"### Fruitvale\"; events: world_summary_c111.md \"## World Events\""
+        },
+        {
+          "text": "Grand Lake | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c111.md \"### Grand Lake\"; events: world_summary_c111.md \"## World Events\""
+        },
+        {
+          "text": "Jack London | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c111.md \"### Jack London\"; events: world_summary_c111.md \"## World Events\""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00004",
+          "name": "Lucia Polito",
+          "profile": "Lucia Polito — Aura Wellness Practitioner",
+          "role": "Aura Wellness Practitioner",
+          "hood": "Fruitvale",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 111,
+            "tag": "PrevEvening",
+            "line": "Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music over in Downtown last night",
+            "highlightKind": "hood",
+            "entity": "Downtown",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00030",
+          "name": "Derek Simmons",
+          "profile": "Derek Simmons — A's Marketing Director",
+          "role": "A's Marketing Director",
+          "hood": "Jack London",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 111,
+            "tag": "PrevEvening",
+            "line": "Y3C7 — [PrevEvening] heard Downtown was packed last night",
+            "highlightKind": "hood",
+            "entity": "Downtown",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00048",
+          "name": "Carlos Presti",
+          "profile": "Carlos Presti — Corporate Accountant",
+          "role": "Corporate Accountant",
+          "hood": "Downtown",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 111,
+            "tag": "Neighborhood",
+            "line": "Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown",
+            "highlightKind": "hood",
+            "entity": "Downtown",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00135",
+          "name": "Mina Linas",
+          "profile": "Mina Linas — Sea Level Monitoring Technician",
+          "role": "Sea Level Monitoring Technician",
+          "hood": "Lake Merritt",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 111,
+            "tag": "PrevEvening",
+            "line": "Y3C7 — [PrevEvening] heard Downtown was packed last night",
+            "highlightKind": "hood",
+            "entity": "Downtown",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00146",
+          "name": "Caleb Reyes",
+          "profile": "Caleb Reyes — PUBLIC DEFENDER",
+          "role": "PUBLIC DEFENDER",
+          "hood": "West Oakland",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 111,
+            "tag": "PrevEvening",
+            "line": "Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music over in Downtown last night",
+            "highlightKind": "hood",
+            "entity": "Downtown",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00148",
+          "name": "Gordon Tate",
+          "profile": "Gordon Tate — SUPERIOR COURT LIAISON",
+          "role": "SUPERIOR COURT LIAISON",
+          "hood": "Downtown",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 111,
+            "tag": "Neighborhood",
+            "line": "Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown",
+            "highlightKind": "hood",
+            "entity": "Downtown",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00184",
+          "name": "Brooklyn Nguyen",
+          "profile": "Brooklyn Nguyen — Teacher",
+          "role": "Teacher",
+          "hood": "Fruitvale",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 111,
+            "tag": "PrevEvening",
+            "line": "Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music over in Downtown last night",
+            "highlightKind": "hood",
+            "entity": "Downtown",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00213",
+          "name": "Davey Martinez",
+          "profile": "Davey Martinez — Maintenance tech",
+          "role": "Maintenance tech",
+          "hood": "Temescal",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 111,
+            "tag": "PrevEvening",
+            "line": "Y3C7 — [PrevEvening] heard Downtown was lively last night",
+            "highlightKind": "hood",
+            "entity": "Downtown",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00298",
+          "name": "Luis Taz",
+          "profile": "Luis Taz — Janitor",
+          "role": "Janitor",
+          "hood": "Fruitvale",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 111,
+            "tag": "PrevEvening",
+            "line": "Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music from last night",
+            "highlightKind": "hood",
+            "entity": "Downtown",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00313",
+          "name": "Soria Herrin",
+          "profile": "Soria Herrin — Stone Mason",
+          "role": "Stone Mason",
+          "hood": "Piedmont Ave",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 111,
+            "tag": "PrevEvening",
+            "line": "Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music over in Downtown last night",
+            "highlightKind": "hood",
+            "entity": "Downtown",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00338",
+          "name": "Coen Cartier",
+          "profile": "Coen Cartier — Transit Operator (AC Transit)",
+          "role": "Transit Operator (AC Transit)",
+          "hood": "Uptown",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 111,
+            "tag": "PrevEvening",
+            "line": "Y3C7 — [PrevEvening] heard Downtown was packed last night",
+            "highlightKind": "hood",
+            "entity": "Downtown",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00351",
+          "name": "Ryan Stark",
+          "profile": "Ryan Stark — Housing Policy Analyst",
+          "role": "Housing Policy Analyst",
+          "hood": "Downtown",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 111,
+            "tag": "Neighborhood",
+            "line": "Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown",
+            "highlightKind": "hood",
+            "entity": "Downtown",
+            "predicate": "observe"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C111",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-a43c5d888b36"
+      },
+      {
+        "t": "FACT",
+        "text": "Downtown: 1 active program on the record",
+        "src": "output/beats/Community_Programs.jsonl @C111",
+        "id": "F-392c150da4b4"
+      },
+      {
+        "t": "FACT",
+        "text": "1 active programs in Downtown; Priya Nair founded one.",
+        "src": "output/beats/Community_Programs.jsonl @C111",
+        "id": "F-64b3b19edefc"
+      },
+      {
+        "t": "FACT",
+        "text": "NeuroCity Youth Lab (tech-education), Downtown — founded by Priya Nair, since C101",
+        "src": "output/beats/Community_Programs.jsonl @C111 PRG-017",
+        "id": "F-347f2b5bb179"
+      },
+      {
+        "t": "FACT",
+        "text": "Downtown this cycle: 240 students, 2,286 adults, 232 seniors — moved vs C110: +1 students, +5 adults, +1 seniors",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C111 vs prev/",
+        "id": "F-fd7e177f77b9"
+      },
+      {
+        "t": "FACT",
+        "text": "Downtown: 4 charges → 1 arrest → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl @C111 judicial Downtown",
+        "id": "F-7cee55adbd8d"
+      },
+      {
+        "t": "FACT",
+        "text": "Downtown: 83 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl @C111 hospital Downtown",
+        "id": "F-b2550859087e"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "street",
+    "candidates": [
+      {
+        "pop": "POP-00004",
+        "name": "Lucia Polito",
+        "role": "Aura Wellness Practitioner",
+        "hood": "Fruitvale",
+        "profile": "Lucia Polito — Aura Wellness Practitioner",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 111,
+          "tag": "PrevEvening",
+          "line": "Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music over in Downtown last night",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music over in Downtown last night"
+      },
+      {
+        "pop": "POP-00030",
+        "name": "Derek Simmons",
+        "role": "A's Marketing Director",
+        "hood": "Jack London",
+        "profile": "Derek Simmons — A's Marketing Director",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 111,
+          "tag": "PrevEvening",
+          "line": "Y3C7 — [PrevEvening] heard Downtown was packed last night",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C7 — [PrevEvening] heard Downtown was packed last night"
+      },
+      {
+        "pop": "POP-00048",
+        "name": "Carlos Presti",
+        "role": "Corporate Accountant",
+        "hood": "Downtown",
+        "profile": "Carlos Presti — Corporate Accountant",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 111,
+          "tag": "Neighborhood",
+          "line": "Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown"
+      },
+      {
+        "pop": "POP-00135",
+        "name": "Mina Linas",
+        "role": "Sea Level Monitoring Technician",
+        "hood": "Lake Merritt",
+        "profile": "Mina Linas — Sea Level Monitoring Technician",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 111,
+          "tag": "PrevEvening",
+          "line": "Y3C7 — [PrevEvening] heard Downtown was packed last night",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C7 — [PrevEvening] heard Downtown was packed last night"
+      },
+      {
+        "pop": "POP-00146",
+        "name": "Caleb Reyes",
+        "role": "PUBLIC DEFENDER",
+        "hood": "West Oakland",
+        "profile": "Caleb Reyes — PUBLIC DEFENDER",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 111,
+          "tag": "PrevEvening",
+          "line": "Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music over in Downtown last night",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music over in Downtown last night"
+      },
+      {
+        "pop": "POP-00148",
+        "name": "Gordon Tate",
+        "role": "SUPERIOR COURT LIAISON",
+        "hood": "Downtown",
+        "profile": "Gordon Tate — SUPERIOR COURT LIAISON",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 111,
+          "tag": "Neighborhood",
+          "line": "Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown"
+      },
+      {
+        "pop": "POP-00184",
+        "name": "Brooklyn Nguyen",
+        "role": "Teacher",
+        "hood": "Fruitvale",
+        "profile": "Brooklyn Nguyen — Teacher",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 111,
+          "tag": "PrevEvening",
+          "line": "Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music over in Downtown last night",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music over in Downtown last night"
+      },
+      {
+        "pop": "POP-00213",
+        "name": "Davey Martinez",
+        "role": "Maintenance tech",
+        "hood": "Temescal",
+        "profile": "Davey Martinez — Maintenance tech",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 111,
+          "tag": "PrevEvening",
+          "line": "Y3C7 — [PrevEvening] heard Downtown was lively last night",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C7 — [PrevEvening] heard Downtown was lively last night"
+      },
+      {
+        "pop": "POP-00298",
+        "name": "Luis Taz",
+        "role": "Janitor",
+        "hood": "Fruitvale",
+        "profile": "Luis Taz — Janitor",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 111,
+          "tag": "PrevEvening",
+          "line": "Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music from last night",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music from last night"
+      },
+      {
+        "pop": "POP-00313",
+        "name": "Soria Herrin",
+        "role": "Stone Mason",
+        "hood": "Piedmont Ave",
+        "profile": "Soria Herrin — Stone Mason",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 111,
+          "tag": "PrevEvening",
+          "line": "Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music over in Downtown last night",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music over in Downtown last night"
+      },
+      {
+        "pop": "POP-00338",
+        "name": "Coen Cartier",
+        "role": "Transit Operator (AC Transit)",
+        "hood": "Uptown",
+        "profile": "Coen Cartier — Transit Operator (AC Transit)",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 111,
+          "tag": "PrevEvening",
+          "line": "Y3C7 — [PrevEvening] heard Downtown was packed last night",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C7 — [PrevEvening] heard Downtown was packed last night"
+      },
+      {
+        "pop": "POP-00351",
+        "name": "Ryan Stark",
+        "role": "Housing Policy Analyst",
+        "hood": "Downtown",
+        "profile": "Ryan Stark — Housing Policy Analyst",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 111,
+          "tag": "Neighborhood",
+          "line": "Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown"
+      },
+      {
+        "pop": "POP-00474",
+        "name": "Ally Scott",
+        "role": "City Building Inspector",
+        "hood": "Downtown",
+        "profile": "Ally Scott — City Building Inspector",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 111,
+          "tag": "Lifestyle",
+          "line": "Y3C7 — [Lifestyle] browsed a busy weekend market in Downtown",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C7 — [Lifestyle] browsed a busy weekend market in Downtown"
+      },
+      {
+        "pop": "POP-00521",
+        "name": "Jude Hess",
+        "role": "Electrician",
+        "hood": "West Oakland",
+        "profile": "Jude Hess — Electrician",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 111,
+          "tag": "PrevEvening",
+          "line": "Y3C7 — [PrevEvening] heard Downtown was packed last night",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C7 — [PrevEvening] heard Downtown was packed last night"
+      },
+      {
+        "pop": "POP-00524",
+        "name": "Maston Burke",
+        "role": "Nurse Aide",
+        "hood": "West Oakland",
+        "profile": "Maston Burke — Nurse Aide",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 111,
+          "tag": "PrevEvening",
+          "line": "Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music over in Downtown last night",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music over in Downtown last night"
+      },
+      {
+        "pop": "POP-00546",
+        "name": "Tara Ellison",
+        "role": "Journalist",
+        "hood": "Rockridge",
+        "profile": "Tara Ellison — Journalist",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 111,
+          "tag": "PrevEvening",
+          "line": "Y3C7 — [PrevEvening] heard Downtown was packed last night",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C7 — [PrevEvening] heard Downtown was packed last night"
+      },
+      {
+        "pop": "POP-00591",
+        "name": "Selena Grant",
+        "role": "Journalist - The Oakland Oaks Beat Reporter",
+        "hood": "West Oakland",
+        "profile": "Selena Grant — Journalist - The Oakland Oaks Beat Reporter",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 111,
+          "tag": "PrevEvening",
+          "line": "Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music over in Downtown last night",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music over in Downtown last night"
+      },
+      {
+        "pop": "POP-00636",
+        "name": "Luis Navarro",
+        "role": "Journalist, Investigations",
+        "hood": "Fruitvale",
+        "profile": "Luis Navarro — Journalist, Investigations",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 111,
+          "tag": "PrevEvening",
+          "line": "Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music over in Downtown last night",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music over in Downtown last night"
+      },
+      {
+        "pop": "POP-00637",
+        "name": "Brooks Wright",
+        "role": "Line cook",
+        "hood": "Downtown",
+        "profile": "Brooks Wright — Line cook",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 111,
+          "tag": "Neighborhood",
+          "line": "Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown"
+      },
+      {
+        "pop": "POP-00722",
+        "name": "Daniel Cloak",
+        "role": "Bakery Worker",
+        "hood": "West Oakland",
+        "profile": "Daniel Cloak — Bakery Worker",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 111,
+          "tag": "PrevEvening",
+          "line": "Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music over in Downtown last night",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music over in Downtown last night"
+      },
+      {
+        "pop": "POP-00731",
+        "name": "Leanne Wu",
+        "role": "Director of Sustainability",
+        "hood": "Rockridge",
+        "profile": "Leanne Wu — Director of Sustainability",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 111,
+          "tag": "PrevEvening",
+          "line": "Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music over in Downtown last night",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music over in Downtown last night"
+      },
+      {
+        "pop": "POP-00769",
+        "name": "Dax Monroe",
+        "role": "Artist",
+        "hood": "Rockridge",
+        "profile": "Dax Monroe — Artist",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 111,
+          "tag": "PrevEvening",
+          "line": "Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music over in Downtown last night",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music over in Downtown last night"
+      },
+      {
+        "pop": "POP-00787",
+        "name": "Robert Hayes",
+        "role": "Community Director",
+        "hood": "West Oakland",
+        "profile": "Robert Hayes — Community Director",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 111,
+          "tag": "PrevEvening",
+          "line": "Y3C7 — [PrevEvening] heard Downtown was packed last night",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C7 — [PrevEvening] heard Downtown was packed last night"
+      },
+      {
+        "pop": "POP-00790",
+        "name": "Marcus Webb",
+        "role": "OEWD Program Director",
+        "hood": "Downtown",
+        "profile": "Marcus Webb — OEWD Program Director",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 111,
+          "tag": "Neighborhood",
+          "line": "Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown"
+      },
+      {
+        "pop": "POP-00807",
+        "name": "Daphne Choi",
+        "role": "Coffee Roaster",
+        "hood": "Uptown",
+        "profile": "Daphne Choi — Coffee Roaster",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 111,
+          "tag": "PrevEvening",
+          "line": "Y3C7 — [PrevEvening] heard Downtown was packed last night",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C7 — [PrevEvening] heard Downtown was packed last night"
+      },
+      {
+        "pop": "POP-00862",
+        "name": "Magdalena Ortiz",
+        "role": "Theater Director",
+        "hood": "Uptown",
+        "profile": "Magdalena Ortiz — Theater Director",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 111,
+          "tag": "PrevEvening",
+          "line": "Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music over in Downtown last night",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music over in Downtown last night"
+      },
+      {
+        "pop": "POP-00882",
+        "name": "Basma Inoue",
+        "role": "BBQ Pitmaster",
+        "hood": "Jack London",
+        "profile": "Basma Inoue — BBQ Pitmaster",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 111,
+          "tag": "PrevEvening",
+          "line": "Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music over in Downtown last night",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music over in Downtown last night"
+      },
+      {
+        "pop": "POP-00890",
+        "name": "Mireya Pinckney",
+        "role": "Community Organizer",
+        "hood": "Downtown",
+        "profile": "Mireya Pinckney — Community Organizer",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 111,
+          "tag": "Neighborhood",
+          "line": "Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown"
+      },
+      {
+        "pop": "POP-00972",
+        "name": "Elena Reyes",
+        "role": "Waterfront Resident",
+        "hood": "Downtown",
+        "profile": "Elena Reyes — Waterfront Resident",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 111,
+          "tag": "Neighborhood",
+          "line": "Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C7 — [Neighborhood] noticed another new spot opening up in Downtown"
+      },
+      {
+        "pop": "POP-01055",
+        "name": "Jerome Pittman",
+        "role": "Transit Hub D5 Intake Liaison",
+        "hood": "East Oakland",
+        "profile": "Jerome Pittman — Transit Hub D5 Intake Liaison",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 111,
+          "tag": "PrevEvening",
+          "line": "Y3C7 — [PrevEvening] heard Downtown was packed last night",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C7 — [PrevEvening] heard Downtown was packed last night"
+      },
+      {
+        "pop": "POP-01080",
+        "name": "Louis Cross",
+        "role": "Relief Pitcher / Oakland A's",
+        "hood": "Grand Lake",
+        "profile": "Louis Cross — Relief Pitcher / Oakland A's",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 111,
+          "tag": "PrevEvening",
+          "line": "Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music over in Downtown last night",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C7 — [PrevEvening] heard about Downtown First Friday Live Music over in Downtown last night"
+      },
+      {
+        "pop": "POP-01183",
+        "name": "Rosalind Achterberg",
+        "role": "Superintendent of Schools",
+        "hood": "Rockridge",
+        "profile": "Rosalind Achterberg — Superintendent of Schools",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 111,
+          "tag": "PrevEvening",
+          "line": "Y3C7 — [PrevEvening] heard Downtown was packed last night",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C7 — [PrevEvening] heard Downtown was packed last night"
+      },
+      {
+        "pop": "POP-00023",
+        "name": "Gregory Mims",
+        "role": "Organized Crime",
+        "hood": "West Oakland",
+        "profile": "Gregory Mims — Organized Crime",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "jj6rRFJJwmKMRrDVKeReaE",
+          "customId": "cp-POP-00023-c102-PRESS",
+          "cycle": 102,
+          "excerpt": "Heard some noise about how it's supposed to connect kids with union apprenticeships downtown.",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "Heard some noise about how it's supposed to connect kids with union apprenticeships downtown."
+      },
+      {
+        "pop": "POP-00170",
+        "name": "Melton Neilon",
+        "role": "Sourdough Baker",
+        "hood": "Temescal",
+        "profile": "Melton Neilon — Sourdough Baker",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "1E2GX7pr1vY8Uw1c81czYa",
+          "customId": "cp-POP-00170-c106-PRESS",
+          "cycle": 106,
+          "excerpt": "I hear folks at the farmers market talking about how nobody's minding the store downtown, but honestly?",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I hear folks at the farmers market talking about how nobody's minding the store downtown, but honestly?"
+      },
+      {
+        "pop": "POP-00174",
+        "name": "Tariq Jello",
+        "role": "Appliance Repair Technician",
+        "hood": "Laurel",
+        "profile": "Tariq Jello — Appliance Repair Technician",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "wiqSuFFt24WesXBeG2vACS",
+          "customId": "cp-POP-00174-c106-midday",
+          "cycle": 106,
+          "excerpt": "I see his face on those A's billboards downtown and I still nod like we're good.",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I see his face on those A's billboards downtown and I still nod like we're good."
+      },
+      {
+        "pop": "POP-00181",
+        "name": "Xavier Ramington",
+        "role": "Herbalist",
+        "hood": "Temescal",
+        "profile": "Xavier Ramington — Herbalist",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "aP5YeMEryXvzMre4oJ44Jv",
+          "customId": "cp-POP-00181-c101-night",
+          "cycle": 101,
+          "excerpt": "The A's news should excite me, but all I keep turning over is whether Vinnie really was downtown—if he's back, if he's okay.",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "The A's news should excite me, but all I keep turning over is whether Vinnie really was downtown—if he's back, if he's okay."
+      },
+      {
+        "pop": "POP-00198",
+        "name": "Rick Walker",
+        "role": "K-8 Teacher,Former Line cook",
+        "hood": "Fruitvale",
+        "profile": "Rick Walker — K-8 Teacher,Former Line cook",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "mgXsax3i7irgmarYJpd9bp",
+          "customId": "cp-POP-00198-c106-PRESS",
+          "cycle": 106,
+          "excerpt": "Honestly, I don't have much time to follow council meetings between shifts, but when I hear neighbors talking about how nothing changes no matter who's in charge, it makes me wonder if anyone downtown really sees what's happening out here.",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "Honestly, I don't have much time to follow council meetings between shifts, but when I hear neighbors talking about how nothing changes no matter who's in charge, it makes me wonder if anyone downtown really sees what's happening out here."
+      },
+      {
+        "pop": "POP-00212",
+        "name": "Jessie Hess",
+        "role": "Barista",
+        "hood": "Downtown",
+        "profile": "Jessie Hess — Barista",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "51fGn9eK5aZPHxrvs82Wrz",
+          "customId": "cp-POP-00212-c107-PRESS",
+          "cycle": 107,
+          "excerpt": "I hear sirens all day Downtown, but it feels like nothing changes—same problems, same slow fixes.",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I hear sirens all day Downtown, but it feels like nothing changes—same problems, same slow fixes."
+      },
+      {
+        "pop": "POP-00224",
+        "name": "Dillon Trevor",
+        "role": "Server",
+        "hood": "Downtown",
+        "profile": "Dillon Trevor — Server",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "TAct1zgGBx4Hkc7yQ1krxw",
+          "customId": "cp-POP-00224-c108-PRESS",
+          "cycle": 108,
+          "excerpt": "I think that's just part of living in Downtown, you know, it's a vibrant area and there's always something going on.",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I think that's just part of living in Downtown, you know, it's a vibrant area and there's always something going on."
+      },
+      {
+        "pop": "POP-00225",
+        "name": "Andre Turner",
+        "role": "Line cook",
+        "hood": "Downtown",
+        "profile": "Andre Turner — Line cook",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "GM8ZwVsj88aHXVhjMY8s4y",
+          "customId": "cp-POP-00225-c108-PRESS",
+          "cycle": 108,
+          "excerpt": "I feel like the city's dynamics are always shifting, you know, and as a line cook in Downtown, I see a lot of different people coming and going, it's like the city's always alive and moving, even when things get tough.",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I feel like the city's dynamics are always shifting, you know, and as a line cook in Downtown, I see a lot of different people coming and going, it's like the city's always alive and moving, even when things get tough."
+      },
+      {
+        "pop": "POP-00280",
+        "name": "Jerald Jensen",
+        "role": "Janitor",
+        "hood": "West Oakland",
+        "profile": "Jerald Jensen — Janitor",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "j4P6E5S2JWuLTPdp5aLNoj",
+          "customId": "cp-POP-00280-c107-PRESS",
+          "cycle": 107,
+          "excerpt": "I'll tell you—when the fog rolls in thick like it did last week, or when there's some big game downtown, I see it in the trash cans.",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I'll tell you—when the fog rolls in thick like it did last week, or when there's some big game downtown, I see it in the trash cans."
+      },
+      {
+        "pop": "POP-00309",
+        "name": "Amy Cook",
+        "role": "Radiologic Technician",
+        "hood": "Lake Merritt",
+        "profile": "Amy Cook — Radiologic Technician",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "eD6eVZSgg4F2KyyJzhzcNG",
+          "customId": "cp-POP-00309-c100-morning",
+          "cycle": 100,
+          "excerpt": "Deacon’s kid made the Little League finals, and I should really go, but I’ve got that festival downtown this weekend.",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "Deacon’s kid made the Little League finals, and I should really go, but I’ve got that festival downtown this weekend."
+      },
+      {
+        "pop": "POP-00335",
+        "name": "Imie Calero",
+        "role": "Civil Rights Attorney",
+        "hood": "Downtown",
+        "profile": "Imie Calero — Civil Rights Attorney",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "ujTvKkmZz5hjhz78VdPJQe",
+          "customId": "cp-POP-00335-c109-PRESS",
+          "cycle": 109,
+          "excerpt": "I've lived in Downtown for a while now, and I have to say, I've felt a sense of disinvestment in our community.",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I've lived in Downtown for a while now, and I have to say, I've felt a sense of disinvestment in our community."
+      },
+      {
+        "pop": "POP-00541",
+        "name": "Theo Burkes",
+        "role": "Rapper",
+        "hood": "Downtown",
+        "profile": "Theo Burkes — Rapper",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "NdmX5NeUgWePg9HsZ2wQc9",
+          "customId": "cp-POP-00541-c109-PRESS",
+          "cycle": 109,
+          "excerpt": "Honestly, I don't really feel like Downtown is decaying or lacking initiatives.",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "Honestly, I don't really feel like Downtown is decaying or lacking initiatives."
+      },
+      {
+        "pop": "POP-00632",
+        "name": "Rico Valez",
+        "role": "Musician",
+        "hood": "Fruitvale",
+        "profile": "Rico Valez — Musician",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "QWzx4f3xaaWrF5qbP8mR5T",
+          "customId": "cp-POP-00632-c102-PRESS",
+          "cycle": 102,
+          "excerpt": "But I did overhear someone saying they saw Vinnie Keane downtown the other night.",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "But I did overhear someone saying they saw Vinnie Keane downtown the other night."
+      },
+      {
+        "pop": "POP-00670",
+        "name": "Drew Lemon",
+        "role": "Housing Authority Inspector",
+        "hood": "Downtown",
+        "profile": "Drew Lemon — Housing Authority Inspector",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "9kEd3eqh1Ww1BsaKU6oP4J",
+          "customId": "cp-POP-00670-c105-PRESS",
+          "cycle": 105,
+          "excerpt": "Downtown's got its challenges, but we find ways.",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "Downtown's got its challenges, but we find ways."
+      },
+      {
+        "pop": "POP-00688",
+        "name": "Merkin Jumper",
+        "role": "Social Services Caseworker",
+        "hood": "Downtown",
+        "profile": "Merkin Jumper — Social Services Caseworker",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "yGJ31iuH7pKGS3jymQwP9e",
+          "customId": "cp-POP-00688-c106-PRESS",
+          "cycle": 106,
+          "excerpt": "It feels like there's a lot of activity, but at the same time, I've heard people talking about how Downtown is decaying.",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "It feels like there's a lot of activity, but at the same time, I've heard people talking about how Downtown is decaying."
+      },
+      {
+        "pop": "POP-00753",
+        "name": "Eunice Marston",
+        "role": "Senior Pastor / Faith Leader",
+        "hood": "Downtown",
+        "profile": "Eunice Marston — Senior Pastor / Faith Leader",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "1JpKXeYTr1ni1p29Xpvqk6",
+          "customId": "cp-POP-00753-c110-PRESS",
+          "cycle": 110,
+          "excerpt": "I haven't had any direct involvement with the Or Hashalom Renewal Community, but as a faith leader in Downtown, I appreciate the various initiatives and organizations that bring people together and foster a sense of community.",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I haven't had any direct involvement with the Or Hashalom Renewal Community, but as a faith leader in Downtown, I appreciate the various initiatives and organizations that bring people together and foster a sense of community."
+      },
+      {
+        "pop": "POP-01021",
+        "name": "Vanessa Tran-Muñoz",
+        "role": "OARI Program Director",
+        "hood": "Rockridge",
+        "profile": "Vanessa Tran-Muñoz — OARI Program Director",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "JGYhxtsbJbrEbGDUt39TMc",
+          "customId": "cp-POP-01021-c107-PRESS",
+          "cycle": 107,
+          "excerpt": "Look, I see those Downtown numbers too—highest incident volume, stagnant clearance rates.",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "Look, I see those Downtown numbers too—highest incident volume, stagnant clearance rates."
+      },
+      {
+        "pop": "POP-01061",
+        "name": "Celeste Moon",
+        "role": "singer",
+        "hood": "KONO",
+        "profile": "Celeste Moon — singer",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "z3XvtiG91Ag8hejjWAsaLV",
+          "customId": "cp-POP-01061-c106-PRESS",
+          "cycle": 106,
+          "excerpt": "I haven't really thought about it, but I did hear Downtown was packed last night.",
+          "highlightKind": "hood",
+          "entity": "Downtown",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I haven't really thought about it, but I did hear Downtown was packed last night."
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Maria Keen",
+    "popid": "POP-00013"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-neighborhood",
+      "angle": "Downtown — the programs that hold the block and the people who founded them",
+      "label": "Downtown: 1 active program on the record",
+      "hookLine": "1 active programs in Downtown; Priya Nair founded one.",
+      "hood": "Downtown",
+      "citizens": [
+        "Priya Nair (POP-00531)"
+      ],
+      "popids": [
+        "POP-00531"
+      ],
+      "ref": "output/beats/Community_Programs.jsonl @C111",
+      "cycle": 111
+    },
+    "approach": "Neighborhood approach: this slice is one block's record — its community programs and their founders, who is moving in or out, who the block has in a hospital bed or in custody, what it paid on tax day, whose debts crossed the line, and the engine's neighborhood hooks this cycle. First-person witness, one block one truth. The programs, founders, movement numbers, patients, defendants and money lines are real; the stoop conversations, the mailboxes, the dog everyone knows are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": {
+    "pulse": {
+      "className": "quiet-nightlife",
+      "score": 24,
+      "label": "Neighborhood Response Hub (East Oakland) · quiet night",
+      "named": "Neighborhood Response Hub",
+      "hood": "East Oakland",
+      "person": null,
+      "venue": null
+    },
+    "recommend": {
+      "bag": "lifestyle",
+      "slug": "sharon-okafor",
+      "name": "Sharon Okafor",
+      "popid": "POP-00159",
+      "bagDoc": "docs/media/SHARON_LIFESTYLE_BAG.md",
+      "reason": "top pulse quiet-nightlife → lifestyle",
+      "pulseClass": "quiet-nightlife",
+      "pulseLabel": "Neighborhood Response Hub (East Oakland) · quiet night"
+    },
+    "prewrite": {
+      "pulseClass": "quiet-nightlife",
+      "angle": "Neighborhood Response Hub is open and quiet in East Oakland. What that condition means is not yet established.",
+      "hookLine": "Neighborhood Response Hub is open and quiet in East Oakland.",
+      "anchorFacts": [
+        "NAMED: Neighborhood Response Hub",
+        "HOOD: East Oakland",
+        "VENUE: Neighborhood Response Hub",
+        "HOOD: East Oakland",
+        "EVENING RECORD: open and quiet"
+      ],
+      "bagRecommend": "lifestyle",
+      "bagSlug": "sharon-okafor"
+    },
+    "texture": {
+      "famous": [
+        "Pixel Pete",
+        "Sienna Vale",
+        "Lumi Crest"
+      ],
+      "restaurants": [
+        {
+          "name": "Romano's",
+          "hood": "Dimond"
+        },
+        {
+          "name": "West Side Cafe",
+          "hood": "West Oakland"
+        }
+      ],
+      "fastFood": [
+        {
+          "name": "SpeedyBurger",
+          "hood": "Downtown"
+        }
+      ],
+      "nightlife": [
+        {
+          "name": "Neighborhood Response Hub",
+          "hood": "East Oakland"
+        }
+      ],
+      "nightlifeMeta": {
+        "volume": 4,
+        "vibe": "tense",
+        "movement": "restricted",
+        "weatherImpact": 1
+      },
+      "cityEvents": [
+        "Chinatown Neighborhood Stabilization Panel",
+        "Downtown Neon Terrace DJ Night",
+        "The Dillon Family Block Party",
+        "West Oakland Club Crawl"
+      ],
+      "tv": [
+        "Valentine Special",
+        "Breaking Bulletin",
+        "Warm House",
+        "A's Sports Central",
+        "One-on-One with Vladimir Gonzalez (RF)"
+      ],
+      "movies": [
+        "Love in Oakland",
+        "Rising Star",
+        "Diamond City"
+      ],
+      "sportsBroadcast": "Oakland Sports Tonight",
+      "streamingTrend": "romantic comedies",
+      "foodTrend": "High mobility / civic-tension food trend"
+    },
+    "signals": {
+      "fameCount": 1,
+      "sightingCount": 3,
+      "sightings": [
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Pixel Pete spotted at Blue Lantern Bar",
+          "name": "Pixel Pete",
+          "venue": "Blue Lantern Bar",
+          "ref": "Ripple_Ledger cycle 111 (CauseType lifestyle-sighting); rendered: world_summary_c111.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Jack London",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Sienna Vale spotted at The Northgate Bar",
+          "name": "Sienna Vale",
+          "venue": "The Northgate Bar",
+          "ref": "Ripple_Ledger cycle 111 (CauseType lifestyle-sighting); rendered: world_summary_c111.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "KONO",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Lumi Crest spotted at Sunrise Cafe",
+          "name": "Lumi Crest",
+          "venue": "Sunrise Cafe",
+          "ref": "Ripple_Ledger cycle 111 (CauseType lifestyle-sighting); rendered: world_summary_c111.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "East Oakland",
+          "popids": []
+        }
+      ]
+    },
+    "scene": {
+      "venues": [
+        {
+          "name": "Romano's",
+          "hood": "Dimond"
+        },
+        {
+          "name": "West Side Cafe",
+          "hood": "West Oakland"
+        },
+        {
+          "name": "SpeedyBurger",
+          "hood": "Downtown"
+        },
+        {
+          "name": "Neighborhood Response Hub",
+          "hood": "East Oakland"
+        }
+      ],
+      "nightlifeMeta": {
+        "volume": 4,
+        "vibe": "tense",
+        "movement": "restricted",
+        "weatherImpact": 1
+      },
+      "cityEvents": [
+        "Chinatown Neighborhood Stabilization Panel",
+        "Downtown Neon Terrace DJ Night",
+        "The Dillon Family Block Party",
+        "West Oakland Club Crawl"
+      ],
+      "tv": [
+        "Valentine Special",
+        "Breaking Bulletin",
+        "Warm House",
+        "A's Sports Central",
+        "One-on-One with Vladimir Gonzalez (RF)"
+      ],
+      "movies": [
+        "Love in Oakland",
+        "Rising Star",
+        "Diamond City"
+      ],
+      "colorRoom": "Named places only from Evening Texture / desk_signal. The supplied evening record describes nightlife as quiet; raw scoring fields stay internal.  Sensory room (weather, light, sound) is free; careers and employees are not."
+    },
+    "candidates": [
+      {
+        "className": "quiet-nightlife",
+        "score": 24,
+        "label": "Neighborhood Response Hub (East Oakland) · quiet night",
+        "named": "Neighborhood Response Hub",
+        "hood": "East Oakland"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Pixel Pete at Blue Lantern Bar (Jack London)",
+        "named": "Blue Lantern Bar",
+        "hood": "Jack London"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Sienna Vale at The Northgate Bar (KONO)",
+        "named": "The Northgate Bar",
+        "hood": "KONO"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Lumi Crest at Sunrise Cafe (East Oakland)",
+        "named": "Sunrise Cafe",
+        "hood": "East Oakland"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Romano's (Dimond)",
+        "named": "Romano's",
+        "hood": "Dimond"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "West Side Cafe (West Oakland)",
+        "named": "West Side Cafe",
+        "hood": "West Oakland"
+      },
+      {
+        "className": "city-event",
+        "score": 17,
+        "label": "The Dillon Family Block Party",
+        "named": "The Dillon Family Block Party",
+        "hood": null
+      },
+      {
+        "className": "fame-sighting",
+        "score": 16,
+        "label": "Vinnie Keane — fame rise",
+        "named": "Vinnie Keane",
+        "hood": "Grand Lake"
+      }
+    ],
+    "perSeat": {
+      "mason-ortega": {
+        "pulseClass": "named-restaurant",
+        "label": "Romano's (Dimond)",
+        "score": 34,
+        "bag": "kitchen"
+      },
+      "kai-marston": {
+        "pulseClass": "quiet-nightlife",
+        "label": "Neighborhood Response Hub (East Oakland) · quiet night",
+        "score": 32,
+        "bag": "arts"
+      },
+      "sharon-okafor": {
+        "pulseClass": "quiet-nightlife",
+        "label": "Neighborhood Response Hub (East Oakland) · quiet night",
+        "score": 32,
+        "bag": "lifestyle"
+      },
+      "maria-keen": {
+        "pulseClass": "quiet-nightlife",
+        "label": "Neighborhood Response Hub (East Oakland) · quiet night",
+        "score": 32,
+        "bag": "ground"
+      },
+      "elliot-graye": {
+        "pulseClass": "fame-sighting",
+        "label": "Pixel Pete at Blue Lantern Bar (Jack London)",
+        "score": 31,
+        "bag": "faith"
+      }
+    }
+  },
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "HOOD-SLICE-3",
+    "kind": "beat-neighborhood",
+    "seat": {
+      "slug": "maria-keen",
+      "name": "Maria Keen",
+      "popid": "POP-00013",
+      "desk": "culture",
+      "domain": "neighborhood",
+      "builder": "buildNeighborhoodSlice.js"
+    },
+    "hood": "Downtown",
+    "pulse": {
+      "className": "beat-neighborhood",
+      "score": 100,
+      "label": "Downtown: 1 active program on the record",
+      "hood": "Downtown",
+      "source": "output/beats/Community_Programs.jsonl @C111"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "Downtown — the programs that hold the block and the people who founded them",
+      "hookLine": "1 active programs in Downtown; Priya Nair founded one.",
+      "anchorFacts": [
+        "NeuroCity Youth Lab (tech-education), Downtown — founded by Priya Nair, since C101",
+        "Downtown this cycle: 240 students, 2,286 adults, 232 seniors — moved vs C110: +1 students, +5 adults, +1 seniors",
+        "Downtown: 4 charges → 1 arrest → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+        "Downtown: 83 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked"
+      ],
+      "evidence": [
+        {
+          "text": "NeuroCity Youth Lab (tech-education), Downtown — founded by Priya Nair, since C101",
+          "src": "output/beats/Community_Programs.jsonl @C111 PRG-017"
+        },
+        {
+          "text": "Downtown this cycle: 240 students, 2,286 adults, 232 seniors — moved vs C110: +1 students, +5 adults, +1 seniors",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C111 vs prev/"
+        },
+        {
+          "text": "Downtown: 4 charges → 1 arrest → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl @C111 judicial Downtown"
+        },
+        {
+          "text": "Downtown: 83 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl @C111 hospital Downtown"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": {
+        "state": "PRIOR_CYCLE_ON_DISK",
+        "vs": 110
+      },
+      "hooks": [
+        {
+          "text": "Positive energy in the city. What's driving the mood? Feature opportunity.",
+          "angle": "street-level mood piece",
+          "domain": "COMMUNITY",
+          "hood": "Lake Merritt",
+          "priority": 2
+        },
+        {
+          "text": "the landlord's notice on the door put the whole household around the table with the numbers",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Fruitvale",
+          "priority": 4
+        },
+        {
+          "text": "savings crossed six figures — years of steady weeks did that",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Lake Merritt",
+          "priority": 3
+        },
+        {
+          "text": "defaulted on the debts — the savings are gone and the record carries it",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Uptown",
+          "priority": 3
+        },
+        {
+          "text": "Downtown boom sustained — momentum 10/10, the block everyone wants onto",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Downtown",
+          "priority": 7
+        },
+        {
+          "text": "Jack London boom sustained — momentum 10/10, the block everyone wants onto",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Jack London",
+          "priority": 7
+        },
+        {
+          "text": "Uptown housing pressure at 8/10: rents climbing, households stretching to stay",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Uptown",
+          "priority": 7
+        },
+        {
+          "text": "Simone Limone moved from Chinatown to West Oakland — moving up from Chinatown",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "West Oakland",
+          "priority": 5
+        }
+      ],
+      "note": null,
+      "pageVoices": [],
+      "roomIsYours": "the stoop, the corner store counter, who moved in last month and who is thinking about leaving, what the block argues about"
+    },
+    "citizens": [
+      {
+        "popid": "POP-00531",
+        "name": "Priya Nair",
+        "role": "Climate Adaptation Engineer",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Priya Nair — Climate Adaptation Engineer — Downtown",
+        "why": "founded NeuroCity Youth Lab (Community_Programs)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Community_Programs.jsonl @C111",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Maria Keen this cycle)",
+      "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Maria Keen",
+    "popid": "POP-00013",
+    "text": "I'm heading Downtown to find the pulse of the block. I want to see how Priya Nair is holding things down at NeuroCity Youth Lab—ten cycles in, and that place is the anchor. But I'm not just looking for the success story. I want to see the friction: the four people in care, the three in custody, and the quiet tension of a neighborhood that's growing just a few people at a time. I'll be hanging on the stoops and leaning over the counters, trying to figure out if the 'positive energy' everyone's talking about is actually reaching the people who are slipping through the cracks.",
+    "plan": {
+      "chase": "I'm heading Downtown to find the pulse of the block. I want to see how Priya Nair is holding things down at NeuroCity Youth Lab—ten cycles in, and that place is the anchor. But I'm not just looking for the success story. I want to see the friction: the four people in care, the three in custody, and the quiet tension of a neighborhood that's growing just a few people at a time. I'll be hanging on the stoops and leaning over the counters, trying to figure out if the 'positive energy' everyone's talking about is actually reaching the people who are slipping through the cracks.",
+      "focus": "The tension between Downtown's institutional stability (NeuroCity) and its fragile human margins.",
+      "why": "The city is buzzing, but the numbers show a slow, grinding reality—small growth, a handful of people in beds or cells. I want to see if the 'messy truth' of this block matches the public mood.",
+      "checks": [
+        "Verify the current atmosphere at NeuroCity Youth Lab.",
+        "Cross-reference the recent uptick in residents with the actual street-level feel.",
+        "Identify the gap between the 'lively' reputation and the residents currently in custody or care."
+      ],
+      "targets": [
+        {
+          "pop": "POP-00351",
+          "question": "You're analyzing housing policy—does the growth of a few new residents reflect a real shift, or is the block just swapping one set of problems for another?",
+          "basis": "Housing Policy Analyst in Downtown; neighborhood demographics showing slight growth."
+        },
+        {
+          "pop": "POP-00148",
+          "question": "As a court liaison, are you seeing the same patterns in the three people currently in custody that we're seeing on the street?",
+          "basis": "Superior Court Liaison in Downtown; 3 residents in custody."
+        },
+        {
+          "pop": "POP-00048",
+          "question": "You've noticed new spots opening up—is that energy actually feeding into programs like NeuroCity, or is it just window dressing?",
+          "basis": "Corporate Accountant in Downtown; observation of new businesses."
+        }
+      ],
+      "interpretation": "The block is in a state of precarious equilibrium. While the youth lab provides a foundation, the presence of residents in care and custody suggests a hidden instability that contradicts the general city-wide optimism.",
+      "unverifiedLead": [
+        "Whether the recent 'First Friday' energy is masking a decline in actual community support for the sick and incarcerated.",
+        "The specific nature of the debts or landlord notices affecting the current residents."
+      ],
+      "closeQuestion": "Is the stability of the block's programs enough to offset the individual collapses of its residents?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Chinatown | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Chinatown",
+      "ref": "output/neighborhood_texture_c111.md \"### Chinatown\"; events: world_summary_c111.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "East Oakland | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "East Oakland",
+      "ref": "output/neighborhood_texture_c111.md \"### East Oakland\"; events: world_summary_c111.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Fruitvale | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Fruitvale",
+      "ref": "output/neighborhood_texture_c111.md \"### Fruitvale\"; events: world_summary_c111.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Grand Lake | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Grand Lake",
+      "ref": "output/neighborhood_texture_c111.md \"### Grand Lake\"; events: world_summary_c111.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Jack London | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Jack London",
+      "ref": "output/neighborhood_texture_c111.md \"### Jack London\"; events: world_summary_c111.md \"## World Events\"",
+      "popids": []
+    }
+  ],
+  "laneEntries": 20,
+  "angleCapHits": 0,
+  "ranAt": "2026-10-16T11:16:33.590Z"
+}

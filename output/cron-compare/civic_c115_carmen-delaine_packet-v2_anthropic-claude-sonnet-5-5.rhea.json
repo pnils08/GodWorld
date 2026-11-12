@@ -1,0 +1,102 @@
+{
+  "draft": "output/cron-compare/civic_c115_carmen-delaine_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "115",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "c07907a9ef871088a702ee35382859166e16fe199757e8fb2bdbb589e4fd6ea1",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All civic statements, ledger profiles, initiative data, and vote records verify cleanly against ground truth with zero flags.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "carmen-civic-ledger-v1",
+    "packageVersion": "CARMEN-LEP2-3",
+    "manifestId": "AM-5bab38c806ec",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "7",
+          "84",
+          "90",
+          "47",
+          "109",
+          "2",
+          "81",
+          "188",
+          "110",
+          "40",
+          "318",
+          "812",
+          "104",
+          "12",
+          "108"
+        ]
+      },
+      {
+        "code": "UNAPPROVED_QUOTE",
+        "values": [
+          "2 household grants, $81,188.",
+          "cumulative $5M+ disbursed.",
+          "West Oakland businesses and residents.",
+          "eviction filings outpacing Stabilization Fund relief."
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Avery Santana",
+      "Brenda Okoro",
+      "Elliott Crane",
+      "Leonard Tran",
+      "Marcus Webb",
+      "Ramon Vega"
+    ],
+    "unverified": [
+      "Commercial Stabilization",
+      "Stabilization Fund",
+      "West Oakland Stabilization Fund",
+      "West Oakland Tenant Defense"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 2,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0116,
+  "durationMs": 4967,
+  "parseError": false,
+  "ranAt": "2026-11-10T00:15:38.658Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 500",
+    "words": 901,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "c07907a9ef871088a702ee35382859166e16fe199757e8fb2bdbb589e4fd6ea1",
+    "costUsd": 0.0011
+  }
+}

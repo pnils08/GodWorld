@@ -1,0 +1,101 @@
+{
+  "draft": "output/cron-compare/culture_c114_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "114",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "32e7a351d879ea5af9bb4292475cef6a663a7ecaaca36f3c11b8f388477a0f57",
+  "pass": false,
+  "flags": [
+    {
+      "claim": "On his own page this cycle he put the question plainly: \"Do I come back for one more run, or step away for good? I haven't decided yet.\"",
+      "issue": "Fabricated speech attributed to named ledger citizen Vinnie Keane (POP-00001) not present in Section 4 interview record, and directly contradicts C114 sports canon where Keane has already made his retirement clear ('Keane said goodbye. Dillon still hasn't').",
+      "severity": "high"
+    }
+  ],
+  "flagCount": 1,
+  "highSeverityCount": 1,
+  "summary": "Failed due to fabricated quote attributed to Vinnie Keane contradicting canon retirement status.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "fail",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "tamsin-lives-v1",
+    "packageVersion": "TAMSIN-LIVES-2",
+    "manifestId": "AM-37dc3a799a68",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "3",
+          "6",
+          "7",
+          "8"
+        ]
+      },
+      {
+        "code": "UNAPPROVED_QUOTE",
+        "values": [
+          "Do I come back for one more run, or step away for good? I haven't decided yet."
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Alexa Ward",
+      "Antoine Vermeer",
+      "Bethany Foster",
+      "Bruce Turner",
+      "Debbie Kaplan",
+      "Ivy Tran",
+      "Sidney Tumolo",
+      "Tobias Ramas",
+      "Vinnie Keane"
+    ],
+    "unverified": [
+      "College Avenue",
+      "Congregations Carried",
+      "Deacon's Robes",
+      "Keane Mercantile",
+      "Many Altars",
+      "Oakland's Thanksgiving Convergence",
+      "Seymour's A's Emerge From",
+      "Spring With"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0131,
+  "durationMs": 13603,
+  "parseError": false,
+  "ranAt": "2026-11-07T00:20:02.982Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 450",
+    "words": 1303,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "32e7a351d879ea5af9bb4292475cef6a663a7ecaaca36f3c11b8f388477a0f57",
+    "costUsd": 0.0014
+  }
+}

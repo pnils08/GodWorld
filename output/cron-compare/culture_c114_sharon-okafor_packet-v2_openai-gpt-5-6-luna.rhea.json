@@ -1,0 +1,67 @@
+{
+  "draft": "output/cron-compare/culture_c114_sharon-okafor_packet-v2_openai-gpt-5-6-luna.md",
+  "cycle": "114",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "d8967dc87b30a5880898ae484e374726348d0d8064c3ef14bf3751d11456e5ae",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All citizen identities, direct quotes, bios, and civic references match canon ground truth perfectly.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "sharon-behavior-ground-v1",
+    "packageVersion": "SHARON-LEP2-1",
+    "manifestId": "AM-5fb7dd828534",
+    "lexicalObservations": [],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Ian Devine",
+      "Lena Cross",
+      "Louis Cross",
+      "Marisol Rivera",
+      "Rowan Pierce",
+      "Vinnie Keane"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0113,
+  "durationMs": 8746,
+  "parseError": false,
+  "ranAt": "2026-11-07T00:16:56.008Z",
+  "contractScore": {
+    "opened": false,
+    "closed": true,
+    "purposeMet": false,
+    "inTarget": false,
+    "inTargetBy": "judge",
+    "words": 663,
+    "short": "The piece addresses a person's fading fame rather than opening with and framing a Packet-supplied venue condition.",
+    "score": 1,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "d8967dc87b30a5880898ae484e374726348d0d8064c3ef14bf3751d11456e5ae",
+    "costUsd": 0.0023
+  }
+}

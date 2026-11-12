@@ -1,0 +1,95 @@
+{
+  "draft": "output/cron-compare/sports_c113_anthony-raines_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "113",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "1857f14477e78deabb8bde8e1c9ed3c17a8f6b570a372bc3abb59f3f3853f578",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Clean verification: all sports statistics, roster positions, and offseason outfield squeeze details precisely match C113 Oakland Sports Feed canon.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "anthony-sports-analytics-v1",
+    "packageVersion": "ANTHONY-LEP2-3",
+    "manifestId": "AM-77e7b3224ebd",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "80",
+          "83",
+          "23",
+          "49",
+          "28",
+          "348",
+          "498",
+          "40.7",
+          "5.8",
+          "11.7",
+          "683",
+          "46",
+          "6",
+          "18",
+          "339",
+          "9.1",
+          "2",
+          "57",
+          "12",
+          "26.3",
+          "8.0",
+          "54",
+          "290"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Danny Horn",
+      "Desmond Morton",
+      "Frank Reyna",
+      "Mike Paulson",
+      "Vladimir Gonzalez"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0098,
+  "durationMs": 6405,
+  "parseError": false,
+  "ranAt": "2026-10-26T23:19:14.734Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 827,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "1857f14477e78deabb8bde8e1c9ed3c17a8f6b570a372bc3abb59f3f3853f578",
+    "costUsd": 0.0015
+  }
+}

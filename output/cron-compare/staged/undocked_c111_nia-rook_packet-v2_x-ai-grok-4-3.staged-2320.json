@@ -1,0 +1,50 @@
+{
+  "status": "staged",
+  "desk": "undocked",
+  "cycle": "111",
+  "persona": "nia-rook",
+  "byline": "Nia Rook",
+  "bylinePopid": "POP-01076",
+  "article": "output/cron-compare/staged/undocked_c111_nia-rook_packet-v2_x-ai-grok-4-3.staged-2320.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Fruitvale"
+    ],
+    "claims": [
+      {
+        "claim": "UNDOCKED: Rosario Medina — a night the books can't settle yet",
+        "sourceRef": "undocked:undocked-pop01053-Y3C7-e2"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-eed0e2fc216c",
+    "draftSha256": "69dbe9c53f162959206b6518972dfb9327296486c32769e8808239e8661d1e37",
+    "verdict": "output/cron-compare/undocked_c111_nia-rook_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-10-15T23:20:35.652Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": false,
+      "inTargetBy": "code floor 350",
+      "words": 309,
+      "short": "The piece falls short of the 350-word minimum.",
+      "score": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "69dbe9c53f162959206b6518972dfb9327296486c32769e8808239e8661d1e37",
+      "costUsd": 0.0018
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-15T23:20:53.097Z"
+}

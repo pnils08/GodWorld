@@ -1,0 +1,527 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00013",
+    "name": "Maria Keen",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Fruitvale — the programs that hold the block and the people who founded them",
+    "approach": "Neighborhood approach: this slice is one block's record — its community programs and their founders, who is moving in or out, who the block has in a hospital bed or in custody, what it paid on tax day, whose debts crossed the line, and the city's neighborhood hooks this cycle. First-person witness, one block one truth. The programs, founders, movement numbers, patients, defendants and money lines are real; the stoop conversations, the mailboxes, the dog everyone knows are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "neighborhood",
+      "hood": "Fruitvale",
+      "facts": [
+        "Fruitvale Summer Speed Series (youth-sports), Fruitvale, since C101",
+        "Fruitvale Transit Corridor Mutual Aid (mutual-aid), Fruitvale, since C101",
+        "Postpartum Oakland Network (health), Fruitvale — founded by Lucia Polito, since C101",
+        "Fruitvale this cycle: 423 students, 1,559 adults, 351 seniors — moved vs C112: +2 students, +7 adults, +1 seniors",
+        "Fruitvale: 6 charges → 1 arrest → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+        "Fruitvale: 114 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked"
+      ],
+      "priorCycle": "PRIOR_CYCLE_ON_DISK",
+      "note": null,
+      "engineHooks": [
+        "Household in Lake Merritt spending 53% of income on housing (observational analysis)",
+        "the bad week cost more than the savings could hold — borrowed to cover it (observational analysis)",
+        "the debts crossed a line this week — sleep comes harder now (observational analysis)",
+        "A family bought their home in Chinatown (observational analysis)"
+      ],
+      "roomIsYours": "the stoop, the corner store counter, who moved in last month and who is thinking about leaving, what the block argues about",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-neighborhood",
+    "hood": "Fruitvale",
+    "src": "output/beats/Community_Programs.jsonl @C113",
+    "plan": {
+      "focus": "Fruitvale community programs and their impact",
+      "closeQuestion": "How do the community programs in Fruitvale intersect with the neighborhood's changing demographics and economic conditions?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00004",
+        "name": "Lucia Polito",
+        "profile": "Lucia Polito — Aura Wellness Practitioner — Fruitvale",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00023",
+        "name": "Gregory Mims",
+        "profile": "Gregory Mims — Organized Crime",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00042",
+        "name": "Ramon Vega",
+        "profile": "Ramon Vega — City Council President - D1",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00198",
+        "name": "Rick Walker",
+        "profile": "Rick Walker — K-8 Teacher,Former Line cook",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00004-9776d58ad3",
+        "pop": "POP-00004",
+        "name": "Lucia Polito",
+        "quote": "I've seen the impact that community programs like the Postpartum Oakland Network, which I founded, can have on people's lives. It's amazing to see the difference these programs make in Fruitvale. As someone who's dedicated to wellness and has been a part of this community for a while, I feel grateful to see the positive changes happening around us.",
+        "factIds": [
+          "F-26450a861611",
+          "F-97d835de6f10"
+        ],
+        "src": "packet.W2[POP-00004]"
+      },
+      {
+        "id": "Q-POP-00198-76660a2223",
+        "pop": "POP-00198",
+        "name": "Rick Walker",
+        "quote": "To be honest, it's getting harder to feel that way. Fruitvale's still got its issues, but I've seen some new posters around, like the expanded tutoring program at St. Esperanza Parish. It's something, you know? The mercado's still buzzing, people are still grabbing lunch between train transfers. It's not like nothing's happening. But, yeah, the rent went up again, so it's still a struggle. I don't know if it's enough, though.",
+        "factIds": [
+          "F-b2dd7119b5a4",
+          "F-31a3ebe941e2"
+        ],
+        "src": "packet.W2[POP-00198]"
+      },
+      {
+        "id": "Q-POP-00023-3be3084862",
+        "pop": "POP-00023",
+        "name": "Gregory Mims",
+        "quote": "Fruitvale's still a ways off for a lot of folks around here, you know? I mean, that kid's cousin getting placed with a plumbing crew is great and all, but it's not like that's the norm. I've seen too many programs come and go. You hear about success stories, but they're not always the ones that stick. I'm still a little skeptical.",
+        "factIds": [
+          "F-fcb704adfe14",
+          "F-060c523815a9"
+        ],
+        "src": "packet.W2[POP-00023]"
+      },
+      {
+        "id": "Q-POP-00042-6c231d7f04",
+        "pop": "POP-00042",
+        "name": "Ramon Vega",
+        "quote": "To be honest, that council fight still lingers in my mind. I understand why Christopher felt I was leaning too far into the developer's corner on the Fruitvale hub. At the time, I believed it was a necessary compromise to move the project forward, but looking back, I can see how it might have appeared otherwise. The Fruitvale community programs are crucial, and I still stand by the importance of supporting them. However, I acknowledge that the approach we took was contentious, and it's something I've reflected on since then.",
+        "factIds": [
+          "F-521b556d49a1",
+          "F-54dcea97959e"
+        ],
+        "src": "packet.W2[POP-00042]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Maria Keen",
+        "text": "Potential changes in the neighborhood demographics and how they might affect the community programs",
+        "usable": false
+      },
+      {
+        "from": "Maria Keen",
+        "text": "The role of other community programs in Fruitvale, such as Fruitvale Summer Speed Series and Fruitvale Transit Corridor Mutual Aid",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C113",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-876f95b5eb98"
+    },
+    {
+      "t": "FACT",
+      "text": "Fruitvale: 3 active programs on the record",
+      "src": "output/beats/Community_Programs.jsonl @C113",
+      "id": "F-f950233852c6"
+    },
+    {
+      "t": "FACT",
+      "text": "3 active programs in Fruitvale; Lucia Polito founded one.",
+      "src": "output/beats/Community_Programs.jsonl @C113",
+      "id": "F-97d835de6f10"
+    },
+    {
+      "t": "FACT",
+      "text": "Fruitvale Summer Speed Series (youth-sports), Fruitvale, since C101",
+      "src": "output/beats/Community_Programs.jsonl @C113 PRG-004",
+      "id": "F-7d350ad0a801"
+    },
+    {
+      "t": "FACT",
+      "text": "Fruitvale Transit Corridor Mutual Aid (mutual-aid), Fruitvale, since C101",
+      "src": "output/beats/Community_Programs.jsonl @C113 PRG-010",
+      "id": "F-0c7e8b01f6c5"
+    },
+    {
+      "t": "FACT",
+      "text": "Postpartum Oakland Network (health), Fruitvale — founded by Lucia Polito, since C101",
+      "src": "output/beats/Community_Programs.jsonl @C113 PRG-016",
+      "id": "F-26450a861611"
+    },
+    {
+      "t": "FACT",
+      "text": "Fruitvale this cycle: 423 students, 1,559 adults, 351 seniors — moved vs C112: +2 students, +7 adults, +1 seniors",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C113 vs prev/",
+      "id": "F-22e469d8fcbc"
+    },
+    {
+      "t": "FACT",
+      "text": "Fruitvale: 6 charges → 1 arrest → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl @C113 judicial Fruitvale",
+      "id": "F-48f319220662"
+    },
+    {
+      "t": "FACT",
+      "text": "Fruitvale: 114 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl @C113 hospital Fruitvale",
+      "id": "F-a344fe6b460c"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C9, Winter, holiday=none",
+      "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+      "id": "F-ab9d6786094e"
+    },
+    {
+      "t": "INTERPRETATION",
+      "text": "The teachers there are working just as hard as we are in Fruitvale, but they're doing it with less.",
+      "src": "cp-POP-00198-c113-PRESS",
+      "id": "F-b2dd7119b5a4"
+    },
+    {
+      "t": "FACT",
+      "text": "Rick Walker — K-8 Teacher,Former Line cook",
+      "src": "Simulation_Ledger profile for POP-00198",
+      "id": "F-31a3ebe941e2"
+    },
+    {
+      "t": "INTERPRETATION",
+      "text": "Heard some kids talking about it at the bus stop last week—one of ‘em said his cousin got placed with a plumbing crew over in Fruitvale.",
+      "src": "cp-POP-00023-c102-PRESS",
+      "id": "F-fcb704adfe14"
+    },
+    {
+      "t": "FACT",
+      "text": "Gregory Mims — Organized Crime",
+      "src": "Simulation_Ledger profile for POP-00023",
+      "id": "F-060c523815a9"
+    },
+    {
+      "t": "INTERPRETATION",
+      "text": "We don't talk as much as we should, not since the last council fight where he thought I was leaning too far into the developer's corner on the Fruitvale hub.",
+      "src": "cp-POP-00042-c111-midday",
+      "id": "F-521b556d49a1"
+    },
+    {
+      "t": "FACT",
+      "text": "Ramon Vega — City Council President - D1",
+      "src": "Simulation_Ledger profile for POP-00042",
+      "id": "F-54dcea97959e"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "maria-ground-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Translate one Packet-named neighborhood or evening condition into a human-scale ground brief without inventing Maria's attendance, a neighbor, an action, a quote, or a civic outcome.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "intimate neighborhood ground brief",
+      "targetWords": "evidence-bounded",
+      "opening": "one Packet-named place and condition",
+      "closing": "the human observation still needed"
+    },
+    "authorizedTexture": [
+      "warm interpretation of a supplied place or condition without claiming attendance or observation",
+      "unnamed sensory metaphor carrying no person, action, event, institution, or factual premise"
+    ],
+    "textureConditions": [
+      "first person may express interpretation but may not assert presence, walking, seeing, hearing, meeting, speaking, or memory unless the Packet supplies it",
+      "every named person, place, business, institution, gathering, action, quote, policy effect, and civic outcome requires Packet support"
+    ],
+    "canonBlockers": [
+      "invented attendance, witnessed scene, neighbor, worker, patron, dialogue, gathering, action, policy consequence, or civic outcome",
+      "an invented or altered venue, person, neighborhood, event, institution, relationship, date, count, or quote",
+      "raw nightlife metrics, engine labels, or collective neighborhood sentiment presented as public fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-f906fd0940e1",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-876f95b5eb98",
+        "t": "FACT",
+        "text": "Current cycle: C113",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-f950233852c6",
+        "t": "FACT",
+        "text": "Fruitvale: 3 active programs on the record",
+        "src": "output/beats/Community_Programs.jsonl @C113"
+      },
+      {
+        "id": "F-97d835de6f10",
+        "t": "FACT",
+        "text": "3 active programs in Fruitvale; Lucia Polito founded one.",
+        "src": "output/beats/Community_Programs.jsonl @C113"
+      },
+      {
+        "id": "F-7d350ad0a801",
+        "t": "FACT",
+        "text": "Fruitvale Summer Speed Series (youth-sports), Fruitvale, since C101",
+        "src": "output/beats/Community_Programs.jsonl @C113 PRG-004"
+      },
+      {
+        "id": "F-0c7e8b01f6c5",
+        "t": "FACT",
+        "text": "Fruitvale Transit Corridor Mutual Aid (mutual-aid), Fruitvale, since C101",
+        "src": "output/beats/Community_Programs.jsonl @C113 PRG-010"
+      },
+      {
+        "id": "F-26450a861611",
+        "t": "FACT",
+        "text": "Postpartum Oakland Network (health), Fruitvale — founded by Lucia Polito, since C101",
+        "src": "output/beats/Community_Programs.jsonl @C113 PRG-016"
+      },
+      {
+        "id": "F-22e469d8fcbc",
+        "t": "FACT",
+        "text": "Fruitvale this cycle: 423 students, 1,559 adults, 351 seniors — moved vs C112: +2 students, +7 adults, +1 seniors",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C113 vs prev/"
+      },
+      {
+        "id": "F-48f319220662",
+        "t": "FACT",
+        "text": "Fruitvale: 6 charges → 1 arrest → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl @C113 judicial Fruitvale"
+      },
+      {
+        "id": "F-a344fe6b460c",
+        "t": "FACT",
+        "text": "Fruitvale: 114 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl @C113 hospital Fruitvale"
+      },
+      {
+        "id": "F-ab9d6786094e",
+        "t": "FACT",
+        "text": "Calendar: Y3C9, Winter, holiday=none",
+        "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)"
+      },
+      {
+        "id": "F-b2dd7119b5a4",
+        "t": "INTERPRETATION",
+        "text": "The teachers there are working just as hard as we are in Fruitvale, but they're doing it with less.",
+        "src": "cp-POP-00198-c113-PRESS"
+      },
+      {
+        "id": "F-31a3ebe941e2",
+        "t": "FACT",
+        "text": "Rick Walker — K-8 Teacher,Former Line cook",
+        "src": "Simulation_Ledger profile for POP-00198"
+      },
+      {
+        "id": "F-fcb704adfe14",
+        "t": "INTERPRETATION",
+        "text": "Heard some kids talking about it at the bus stop last week—one of ‘em said his cousin got placed with a plumbing crew over in Fruitvale.",
+        "src": "cp-POP-00023-c102-PRESS"
+      },
+      {
+        "id": "F-060c523815a9",
+        "t": "FACT",
+        "text": "Gregory Mims — Organized Crime",
+        "src": "Simulation_Ledger profile for POP-00023"
+      },
+      {
+        "id": "F-521b556d49a1",
+        "t": "INTERPRETATION",
+        "text": "We don't talk as much as we should, not since the last council fight where he thought I was leaning too far into the developer's corner on the Fruitvale hub.",
+        "src": "cp-POP-00042-c111-midday"
+      },
+      {
+        "id": "F-54dcea97959e",
+        "t": "FACT",
+        "text": "Ramon Vega — City Council President - D1",
+        "src": "Simulation_Ledger profile for POP-00042"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00004-9776d58ad3",
+        "speakerId": "POP-00004",
+        "speakerName": "Lucia Polito",
+        "text": "I've seen the impact that community programs like the Postpartum Oakland Network, which I founded, can have on people's lives. It's amazing to see the difference these programs make in Fruitvale. As someone who's dedicated to wellness and has been a part of this community for a while, I feel grateful to see the positive changes happening around us.",
+        "factIds": [
+          "F-26450a861611",
+          "F-97d835de6f10"
+        ],
+        "src": "packet.W2[POP-00004]"
+      },
+      {
+        "id": "Q-POP-00198-76660a2223",
+        "speakerId": "POP-00198",
+        "speakerName": "Rick Walker",
+        "text": "To be honest, it's getting harder to feel that way. Fruitvale's still got its issues, but I've seen some new posters around, like the expanded tutoring program at St. Esperanza Parish. It's something, you know? The mercado's still buzzing, people are still grabbing lunch between train transfers. It's not like nothing's happening. But, yeah, the rent went up again, so it's still a struggle. I don't know if it's enough, though.",
+        "factIds": [
+          "F-b2dd7119b5a4",
+          "F-31a3ebe941e2"
+        ],
+        "src": "packet.W2[POP-00198]"
+      },
+      {
+        "id": "Q-POP-00023-3be3084862",
+        "speakerId": "POP-00023",
+        "speakerName": "Gregory Mims",
+        "text": "Fruitvale's still a ways off for a lot of folks around here, you know? I mean, that kid's cousin getting placed with a plumbing crew is great and all, but it's not like that's the norm. I've seen too many programs come and go. You hear about success stories, but they're not always the ones that stick. I'm still a little skeptical.",
+        "factIds": [
+          "F-fcb704adfe14",
+          "F-060c523815a9"
+        ],
+        "src": "packet.W2[POP-00023]"
+      },
+      {
+        "id": "Q-POP-00042-6c231d7f04",
+        "speakerId": "POP-00042",
+        "speakerName": "Ramon Vega",
+        "text": "To be honest, that council fight still lingers in my mind. I understand why Christopher felt I was leaning too far into the developer's corner on the Fruitvale hub. At the time, I believed it was a necessary compromise to move the project forward, but looking back, I can see how it might have appeared otherwise. The Fruitvale community programs are crucial, and I still stand by the importance of supporting them. However, I acknowledge that the approach we took was contentious, and it's something I've reflected on since then.",
+        "factIds": [
+          "F-521b556d49a1",
+          "F-54dcea97959e"
+        ],
+        "src": "packet.W2[POP-00042]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00004",
+        "name": "Lucia Polito",
+        "profile": "Lucia Polito — Aura Wellness Practitioner — Fruitvale",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00023",
+        "name": "Gregory Mims",
+        "profile": "Gregory Mims — Organized Crime",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00042",
+        "name": "Ramon Vega",
+        "profile": "Ramon Vega — City Council President - D1",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00198",
+        "name": "Rick Walker",
+        "profile": "Rick Walker — K-8 Teacher,Former Line cook",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Maria Keen",
+        "text": "Potential changes in the neighborhood demographics and how they might affect the community programs",
+        "publishable": false
+      },
+      {
+        "from": "Maria Keen",
+        "text": "The role of other community programs in Fruitvale, such as Fruitvale Summer Speed Series and Fruitvale Transit Corridor Mutual Aid",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "warm interpretation of a supplied place or condition without claiming attendance or observation",
+      "unnamed sensory metaphor carrying no person, action, event, institution, or factual premise"
+    ],
+    "textureConditions": [
+      "first person may express interpretation but may not assert presence, walking, seeing, hearing, meeting, speaking, or memory unless the Packet supplies it",
+      "every named person, place, business, institution, gathering, action, quote, policy effect, and civic outcome requires Packet support"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

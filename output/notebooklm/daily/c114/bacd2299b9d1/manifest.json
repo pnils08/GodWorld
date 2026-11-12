@@ -1,0 +1,137 @@
+{
+  "artifactClass": "NLM_DAILY_RUN",
+  "sourceVersion": "1.9",
+  "canonStatus": "NOT_CANON",
+  "cycle": 114,
+  "generatedAt": "2026-11-04T14:00:06.849Z",
+  "lastAttemptAt": "2026-11-04T14:00:06.849Z",
+  "hours": 36,
+  "packHash": "bacd2299b9d15ecce18f4165ed1e0f0dddf2ba7a9367b14e06e62d28198ba66e",
+  "worldSummary": "output/world_summary_c114.md",
+  "citizenDigest": "output/citizen-day-digest.md",
+  "reports": [
+    {
+      "classification": "FLAGGED",
+      "path": "output/cron-compare/flagged/civic_c114_luis-navarro_packet-v2_anthropic-claude-sonnet-5-5.md"
+    },
+    {
+      "classification": "FLAGGED",
+      "path": "output/cron-compare/flagged/sports_c114_selena-grant_packet-v2_openai-gpt-5-6-luna.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/business_c114_business-desk_packet-v2_anthropic-claude-opus-5-5.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/civic_c114_angela-reyes_packet-v2_anthropic-claude-sonnet-5-5.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/civic_c114_carmen-delaine_packet-v2_anthropic-claude-sonnet-5-5.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/civic_c114_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/civic_c114_rachel-torres_packet-v2_anthropic-claude-sonnet-5-5.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/civic_c114_trevor-shimizu_packet-v2_anthropic-claude-sonnet-5-5.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/culture_c114_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/sports_c114_anthony-raines_packet-v2_anthropic-claude-sonnet-5-5.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/undocked_c114_nia-rook_packet-v2_openai-gpt-6-luna.staged.md"
+    }
+  ],
+  "flaggedReports": [
+    "output/cron-compare/flagged/civic_c114_luis-navarro_packet-v2_anthropic-claude-sonnet-5-5.flags.json",
+    "output/cron-compare/flagged/sports_c114_selena-grant_packet-v2_openai-gpt-5-6-luna.flags.json"
+  ],
+  "editionDay": false,
+  "firstMorning": false,
+  "routingShadow": {
+    "version": "NLM-DAILY-ROUTER/1",
+    "mode": "shadow",
+    "profile": "REPORTED_DAY",
+    "format": "deep_dive",
+    "length": "default",
+    "activationEligible": true,
+    "reportedDayThreshold": 1,
+    "sourceClasses": [
+      "WORLD_STATE",
+      "CITIZEN_DIGEST",
+      "W1_CHASE",
+      "W2_QUOTES",
+      "W3_PASSED",
+      "FLAGGED_DISPOSITION",
+      "ENGINE_CIVIC_SIGNAL"
+    ],
+    "reasonCodes": [
+      "RHEA_PASSED_9",
+      "REPORTED_THRESHOLD_MET_1"
+    ],
+    "dispositionCounts": {
+      "passed": 9,
+      "rheaFlagged": 1,
+      "neverGated": 1
+    },
+    "fingerprint": "205cce069dbf2c6c68c5b0f7fd12a72372b368ed8dbd1e42a10d9af6ffbc4c2d"
+  },
+  "newsroomPulse": {
+    "fingerprint": "6ae32201418adc16e8e1effb73610b7395416c8423bd0bbe2646483a6cf8e198",
+    "counts": {
+      "angles": 12,
+      "asks": 5,
+      "fanoutAssignments": 8,
+      "w2Ready": 4,
+      "quotes": 7,
+      "passed": 9,
+      "rheaFlagged": 1,
+      "neverGated": 1,
+      "flagged": 2,
+      "pending": 6
+    },
+    "priorCompletedCycle": null
+  },
+  "archiveNotebookId": "417e2d29-4167-420f-a9cc-76fb6b2b7de2",
+  "newsroomNotebookId": "73cd50b5-4b8f-4329-bb42-0783c8d93763",
+  "dryRun": false,
+  "archiveScope": {
+    "cycles": [
+      113,
+      112
+    ],
+    "sourceIds": [
+      "972bb82e-70f8-48a2-9bf2-9a9061d11f46",
+      "06e1843d-5c67-4052-8ddd-de2fc22413d1"
+    ]
+  },
+  "boundedSourceHash": "4f0add37896c9336c556c9a860c30d08b3ab37ef0383808fedeca85279a8b3c8",
+  "boundedSource": "output/notebooklm/daily/c114/bacd2299b9d1/bounded-newsroom-source.md",
+  "sourceIds": [
+    "2c4f3a51-6563-4c92-87ec-854d52e059ee"
+  ],
+  "audioDirectionSourceId": "4c721eae-6e1a-4e01-b845-285b6d0ceb81",
+  "audioPresentation": {
+    "format": "deep_dive",
+    "length": "default",
+    "source": "router",
+    "profile": "REPORTED_DAY"
+  },
+  "audioArtifactId": "0d343c9d-c29e-40e6-8ec5-69df37a2348f",
+  "audioPath": "output/notebooklm/daily/c114/bacd2299b9d1/godworld_daily_c114.m4a",
+  "driveLink": "https://drive.google.com/file/d/1KgLoOxEZ3HmInXcSylWnmmeg47kLkz_J/view?usp=drivesdk",
+  "opsReportArtifactId": "108cff9e-ab3a-499d-8090-bdf45802ab6a"
+}

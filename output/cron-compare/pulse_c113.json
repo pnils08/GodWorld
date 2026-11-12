@@ -1,0 +1,725 @@
+{
+  "version": "PULSE-2",
+  "cycle": 113,
+  "window": {
+    "from": 106,
+    "to": 113,
+    "cycles": 8
+  },
+  "generatedAt": "2026-11-01T12:15:12.594Z",
+  "index": {
+    "generatedAt": "2026-11-01T12:15:12.416Z",
+    "rows": 2275,
+    "liveCycle": 113
+  },
+  "counted": {
+    "docs": 914,
+    "citizens": 302,
+    "thisCycleDocs": 161,
+    "excluded": {
+      "media": 250,
+      "officials": 118,
+      "noLedger": 0,
+      "outOfWindow": 993,
+      "leak": 0
+    }
+  },
+  "themes": [
+    {
+      "key": "as",
+      "label": "the A's",
+      "adHoc": false,
+      "pattern": "\\b(?:A['’]s|Athletics|Coliseum|ballpark|the dugout|box score)\\b",
+      "docs": 67,
+      "citizens": 56,
+      "thisCycle": 13,
+      "prevCycle": 6,
+      "score": 43.2,
+      "trend": "rising",
+      "voices": [
+        {
+          "popid": "POP-00001",
+          "name": "Vinnie Keane",
+          "hood": "Grand Lake",
+          "role": "Designated Hitter, Oakland A's Legend",
+          "docs": 7,
+          "cycle": 112,
+          "customId": "cp-POP-00001-c112-PRESS",
+          "docId": "Ahw37iHUtmN1mfg3riqRXf",
+          "excerpt": "I'm still getting used to not being as active with the A's, but it's nice to see people coming together like that."
+        },
+        {
+          "popid": "POP-00206",
+          "name": "Omar Lingio",
+          "hood": "Temescal",
+          "role": "Vintage Clothing Store Owner",
+          "docs": 2,
+          "cycle": 113,
+          "customId": "cp-POP-00206-c113-PRESS-fri-epnccf",
+          "docId": "mGGEHk7aMnxaMWKATq6XQY",
+          "excerpt": "When the A's are good, this whole town walks a little taller, even in Temescal."
+        },
+        {
+          "popid": "POP-00528",
+          "name": "Deacon Seymour",
+          "hood": "Lake Merritt",
+          "role": "Manager, Oakland A's",
+          "docs": 3,
+          "cycle": 113,
+          "customId": "cp-POP-00528-c113-PRESS-fri-kpfnla",
+          "docId": "wHkay8iz11WxP8hUoS5Sig",
+          "excerpt": "As a manager for the A's and living near Lake Merritt, I notice the changes in the neighborhood."
+        }
+      ]
+    },
+    {
+      "key": "clinic",
+      "label": "the clinic",
+      "adHoc": false,
+      "pattern": "\\b(?:clinic|hospital|the ER|urgent care|the nurse|my doctor|health center|waiting room)\\b",
+      "docs": 38,
+      "citizens": 18,
+      "thisCycle": 9,
+      "prevCycle": 10,
+      "score": 29.6,
+      "trend": "steady",
+      "voices": [
+        {
+          "popid": "POP-00194",
+          "name": "Yu Zen",
+          "hood": "Rockridge",
+          "role": "Commercial Insurance Broker",
+          "docs": 9,
+          "cycle": 113,
+          "customId": "cp-POP-00194-c113-PRESS",
+          "docId": "AyhQRJc7pwXaKge8zhSM87",
+          "excerpt": "I've been on the other side of that ledger — lying in a hospital bed myself after my accident."
+        },
+        {
+          "popid": "POP-00801",
+          "name": "Maurice Franklin",
+          "hood": "Rockridge",
+          "role": "Drone Fleet Coordinator",
+          "docs": 6,
+          "cycle": 112,
+          "customId": "cp-POP-00801-c112-PRESS",
+          "docId": "sVBakNeHdaifN2V5TkPJY6",
+          "excerpt": "After coming home from the hospital, I had to get my feet back on the ground, and the first thing I did was check my finances."
+        },
+        {
+          "popid": "POP-00716",
+          "name": "Omarion Farah",
+          "hood": "Chinatown",
+          "role": "Cab Driver",
+          "docs": 2,
+          "cycle": 113,
+          "customId": "cp-POP-00716-c113-PRESS",
+          "docId": "tm7CVkmNjgSPLQcJhBf1Kd",
+          "excerpt": "They disappear into a hospital somewhere, and the block just carries on."
+        }
+      ]
+    },
+    {
+      "key": "transit",
+      "label": "transit",
+      "adHoc": false,
+      "pattern": "\\b(?:BART|the bus|AC Transit|commute|the train|transit|the platform|the station)\\b",
+      "docs": 39,
+      "citizens": 23,
+      "thisCycle": 8,
+      "prevCycle": 5,
+      "score": 27.9,
+      "trend": "rising",
+      "voices": [
+        {
+          "popid": "POP-00200",
+          "name": "Evan Lewis",
+          "hood": "Laurel",
+          "role": "Bus driver",
+          "docs": 3,
+          "cycle": 113,
+          "customId": "cp-POP-00200-c113-PRESS",
+          "docId": "HtgGbzRwDdiLRht3jPug5x",
+          "excerpt": "The construction around the Baylight District doesn't help either; when streets get torn up, people just find another way, even if the bus still runs on time."
+        },
+        {
+          "popid": "POP-00617",
+          "name": "Eleanor Rivera",
+          "hood": "West Oakland",
+          "role": "BART Station Manager",
+          "docs": 4,
+          "cycle": 113,
+          "customId": "cp-POP-00617-c113-PRESS",
+          "docId": "HP7BK65GtMgPtWtnncYwHD",
+          "excerpt": "The platform echoes more."
+        },
+        {
+          "popid": "POP-00170",
+          "name": "Melton Neilon",
+          "hood": "Temescal",
+          "role": "Sourdough Baker",
+          "docs": 4,
+          "cycle": 109,
+          "customId": "cp-POP-00170-c109-PRESS",
+          "docId": "bRSBjkohXzdo3SYZnGJoAo",
+          "excerpt": "I’ve heard folks at the farmers market talking about the Fruitvale Transit Hub delays, but honestly, I’m not sure who’s supposed to be steering it forward."
+        }
+      ]
+    },
+    {
+      "key": "faith",
+      "label": "faith",
+      "adHoc": false,
+      "pattern": "\\b(?:church|mosque|temple|synagogue|pastor|imam|rabbi|prayer|congregation|the service|scripture|faith)\\b",
+      "docs": 32,
+      "citizens": 16,
+      "thisCycle": 6,
+      "prevCycle": 3,
+      "score": 22,
+      "trend": "rising",
+      "voices": [
+        {
+          "popid": "POP-00753",
+          "name": "Eunice Marston",
+          "hood": "Downtown",
+          "role": "Senior Pastor / Faith Leader",
+          "docs": 7,
+          "cycle": 112,
+          "customId": "cp-POP-00753-c112-PRESS",
+          "docId": "nAQHq2dAh5qNUKHygqD8PD",
+          "excerpt": "As a faith leader, I believe our congregation's role in the community during times of crisis is to offer support and be present for those affected."
+        },
+        {
+          "popid": "POP-00763",
+          "name": "Kenji Tanaka",
+          "hood": "Chinatown",
+          "role": "Senior Pastor / Faith Leader",
+          "docs": 5,
+          "cycle": 113,
+          "customId": "cp-POP-00763-c113-PRESS",
+          "docId": "uvXF6MMdBDyHdv9oSUmCar",
+          "excerpt": "I've seen that faith communities in Oakland, like the Bay Pure Land Buddhist Temple in my own neighborhood, can be a source of comfort and support for people."
+        },
+        {
+          "popid": "POP-00759",
+          "name": "Naomi Sterling",
+          "hood": "Rockridge",
+          "role": "Senior Pastor / Faith Leader",
+          "docs": 4,
+          "cycle": 110,
+          "customId": "cp-POP-00759-c110-PRESS",
+          "docId": "6h7VSwJQ9NW8CX6ktHWb8y",
+          "excerpt": "To be honest, I don't have much personal connection to the Or Hashalom Renewal Community, but as a faith leader, I appreciate the role that different faith organizations play in supporting their communities."
+        }
+      ]
+    },
+    {
+      "key": "rent",
+      "label": "rent",
+      "adHoc": false,
+      "pattern": "\\b(?:rent|landlord|lease|evict\\w*|the deposit|move out|priced out)\\b",
+      "docs": 26,
+      "citizens": 16,
+      "thisCycle": 11,
+      "prevCycle": 4,
+      "score": 21.7,
+      "trend": "rising",
+      "voices": [
+        {
+          "popid": "POP-00263",
+          "name": "Omar Amici",
+          "hood": "Uptown",
+          "role": "Construction laborer",
+          "docs": 5,
+          "cycle": 113,
+          "customId": "cp-POP-00263-c113-PRESS-sat-mgfhnh",
+          "docId": "MFfembxRKMMd3rUPjAmCdZ",
+          "excerpt": "The streets are busier than ever, and it seems like every other place is a for-rent sign these days."
+        },
+        {
+          "popid": "POP-00208",
+          "name": "Patrick When",
+          "hood": "Downtown",
+          "role": "Janitor",
+          "docs": 3,
+          "cycle": 110,
+          "customId": "cp-POP-00208-c110-CONVO",
+          "docId": "3ybUhRcPYXmrtRVgJG69cg",
+          "excerpt": "That eviction notice on old Mrs."
+        },
+        {
+          "popid": "POP-00198",
+          "name": "Rick Walker",
+          "hood": "Fruitvale",
+          "role": "K-8 Teacher,Former Line cook",
+          "docs": 2,
+          "cycle": 113,
+          "customId": "cp-POP-00198-c113-PRESS-fri-npiikg",
+          "docId": "9PriBdHAAsfnpmdcsWqsMh",
+          "excerpt": "But, yeah, the rent went up again, so it's still a struggle."
+        }
+      ]
+    },
+    {
+      "key": "oaks",
+      "label": "the Oaks",
+      "adHoc": false,
+      "pattern": "\\b(?:Oaks|Varek|expansion (?:team|franchise|club)|the arena|tip-?off)\\b",
+      "docs": 32,
+      "citizens": 17,
+      "thisCycle": 5,
+      "prevCycle": 4,
+      "score": 19.3,
+      "trend": "rising",
+      "voices": [
+        {
+          "popid": "POP-00273",
+          "name": "Trenton Nawan",
+          "hood": "Jack London",
+          "role": "Server",
+          "docs": 5,
+          "cycle": 113,
+          "customId": "cp-POP-00273-c113-PRESS",
+          "docId": "DxgQWWo7xsn1jhWWGHqTHD",
+          "excerpt": "I'm still a bit worried about the Oaks, but their 4-0 start is really giving me hope."
+        },
+        {
+          "popid": "POP-01023",
+          "name": "Adash Stanley",
+          "hood": "Downtown",
+          "role": "PG / The Oaks",
+          "docs": 4,
+          "cycle": 113,
+          "customId": "cp-POP-01023-c113-PRESS",
+          "docId": "Yj8MHr2z7ksB3jNeo4Y9x2",
+          "excerpt": "I've felt the excitement building around the Oaks, it's like the whole city is waking up with the team."
+        },
+        {
+          "popid": "POP-00642",
+          "name": "Ollie Campbell",
+          "hood": "Jack London",
+          "role": "Bakery Worker",
+          "docs": 2,
+          "cycle": 113,
+          "customId": "cp-POP-00642-c113-PRESS",
+          "docId": "z6pDb5oTFZ317jUrVDT6oD",
+          "excerpt": "To be honest, I still feel the same way about the Oaks."
+        }
+      ]
+    },
+    {
+      "key": "work",
+      "label": "work",
+      "adHoc": false,
+      "pattern": "\\b(?:my (?:boss|shift|manager|job|hours)|overtime|laid off|layoffs?|promotion|double shift|the shop floor|clock(?:ed|ing) (?:in|out)|at work)\\b",
+      "docs": 18,
+      "citizens": 15,
+      "thisCycle": 2,
+      "prevCycle": 2,
+      "score": 11.4,
+      "trend": "steady",
+      "voices": [
+        {
+          "popid": "POP-00546",
+          "name": "Tara Ellison",
+          "hood": "Rockridge",
+          "role": "Journalist",
+          "docs": 2,
+          "cycle": 113,
+          "customId": "cp-POP-00546-c113-PRESS-fri-ajabkg",
+          "docId": "XYDJLp6L7xBWJca9X4xihL",
+          "excerpt": "To be honest, I've just been doing my job as a journalist, covering local news and events."
+        },
+        {
+          "popid": "POP-00280",
+          "name": "Jerald Jensen",
+          "hood": "West Oakland",
+          "role": "Janitor",
+          "docs": 2,
+          "cycle": 112,
+          "customId": "cp-POP-00280-c112-PRESS",
+          "docId": "btDTjjGUXDMWPhrqBrtpCA",
+          "excerpt": "To be honest, the promotion's been a game-changer."
+        },
+        {
+          "popid": "POP-00533",
+          "name": "Travis Coles",
+          "hood": "Downtown",
+          "role": "Starting Pitcher, Oakland A's",
+          "docs": 2,
+          "cycle": 111,
+          "customId": "cp-POP-00533-c111-work",
+          "docId": "WJdXHkwPHpvPQNwFDYFdkt",
+          "excerpt": "The boys battled back, but my job is to keep us ahead, not tied."
+        }
+      ]
+    },
+    {
+      "key": "council",
+      "label": "the council",
+      "adHoc": false,
+      "pattern": "\\b(?:council|the mayor|Santana|city hall|district \\d|the vote|ordinance|Okoro|the hearing|the budget)\\b",
+      "docs": 22,
+      "citizens": 11,
+      "thisCycle": 0,
+      "prevCycle": 4,
+      "score": 11.2,
+      "trend": "fading",
+      "voices": [
+        {
+          "popid": "POP-00201",
+          "name": "Elio Perez",
+          "hood": "Rockridge",
+          "role": "Server",
+          "docs": 5,
+          "cycle": 108,
+          "customId": "cp-POP-00201-c108-PRESS",
+          "docId": "SBXoc5AU6seCH6naqhokHc",
+          "excerpt": "I’ve heard people talking about the Fruitvale Transit Hub Phase II, but it feels like the council’s been dragging their feet."
+        },
+        {
+          "popid": "POP-00210",
+          "name": "Depak Ying",
+          "hood": "Rockridge",
+          "role": "Server",
+          "docs": 3,
+          "cycle": 107,
+          "customId": "cp-POP-00210-c107-PRESS",
+          "docId": "ji6TfpJnUaG9WuuwgRAVNx",
+          "excerpt": "Honestly, I hear people at the diner talking about how nobody's taking responsibility for the gaps in services, but I'm too busy keeping up with orders to follow council meetings."
+        },
+        {
+          "popid": "POP-01017",
+          "name": "Valentina Campbell",
+          "hood": "Jack London",
+          "role": "Server",
+          "docs": 1,
+          "cycle": 112,
+          "customId": "cp-POP-01017-c112-CONVO",
+          "docId": "GJEjKrfTjacj5pu5cidkW4",
+          "excerpt": "It's mostly just paperwork and figuring out the budget—nothing too exciting, but it's gotta get done."
+        }
+      ]
+    },
+    {
+      "key": "safety",
+      "label": "safety",
+      "adHoc": false,
+      "pattern": "\\b(?:police|OPD|cops?|cruiser|sirens?|break-in|robbed|stolen|OARI|crime|the shooting|patrol)\\b",
+      "docs": 12,
+      "citizens": 8,
+      "thisCycle": 0,
+      "prevCycle": 1,
+      "score": 5.6,
+      "trend": "fading",
+      "voices": [
+        {
+          "popid": "POP-00225",
+          "name": "Andre Turner",
+          "hood": "Downtown",
+          "role": "Line cook",
+          "docs": 3,
+          "cycle": 107,
+          "customId": "cp-POP-00225-c107-PRESS",
+          "docId": "nAfamcsRf3UMZ2GoQazX8F",
+          "excerpt": "Man, I see the cops downtown all the time, lights flashing, but it feels like they're just spinning their wheels."
+        },
+        {
+          "popid": "POP-01202",
+          "name": "Dahlia Cruz",
+          "hood": "Baylight District",
+          "role": "QA tester",
+          "docs": 1,
+          "cycle": 112,
+          "customId": "cp-POP-01202-c112-midday",
+          "docId": "oM2B8S7j55H14yD5StcBhi",
+          "excerpt": "I stood there holding both for a solid minute, feeling weirdly guilty, like I'd stolen something."
+        },
+        {
+          "popid": "POP-00224",
+          "name": "Dillon Trevor",
+          "hood": "Downtown",
+          "role": "Server",
+          "docs": 2,
+          "cycle": 107,
+          "customId": "cp-POP-00224-c107-PRESS",
+          "docId": "4N7gJRG2ySYS7rsQyKK6ay",
+          "excerpt": "Downtown's always buzzing, always something happening—cops show up quick but don't seem to solve much."
+        }
+      ]
+    },
+    {
+      "key": "adhoc:Lena Cross",
+      "label": "Lena Cross",
+      "adHoc": true,
+      "pattern": "\\bLena Cross\\b",
+      "docs": 3,
+      "citizens": 3,
+      "thisCycle": 0,
+      "prevCycle": 3,
+      "score": 2.7,
+      "trend": "fading",
+      "voices": [
+        {
+          "popid": "POP-00632",
+          "name": "Rico Valez",
+          "hood": "Fruitvale",
+          "role": "Musician",
+          "docs": 1,
+          "cycle": 112,
+          "customId": "cp-POP-00632-c112-PRESS",
+          "docId": "PvBzncRRKeGdNDVWsZWRMW",
+          "excerpt": "To be honest, I haven't really noticed much about Lena Cross's fading fame around Piedmont Ave."
+        },
+        {
+          "popid": "POP-00537",
+          "name": "Marin Tao",
+          "hood": "Chinatown",
+          "role": "Musician",
+          "docs": 1,
+          "cycle": 112,
+          "customId": "cp-POP-00537-c112-PRESS",
+          "docId": "mDpdUHDPTXdyCDjSMF7Qsa",
+          "excerpt": "To be honest, I haven't really thought about Lena Cross or Piedmont Ave that much."
+        },
+        {
+          "popid": "POP-00545",
+          "name": "Rowan Pierce",
+          "hood": "Piedmont Ave",
+          "role": "Freelance Writer",
+          "docs": 1,
+          "cycle": 112,
+          "customId": "cp-POP-00545-c112-PRESS",
+          "docId": "EeNpoVzXn9V4eyuhr37SpC",
+          "excerpt": "To be honest, I don't really know Lena Cross or follow her work closely."
+        }
+      ]
+    },
+    {
+      "key": "adhoc:Marin Tao",
+      "label": "Marin Tao",
+      "adHoc": true,
+      "pattern": "\\bMarin Tao\\b",
+      "docs": 4,
+      "citizens": 3,
+      "thisCycle": 0,
+      "prevCycle": 1,
+      "score": 2.4,
+      "trend": "fading",
+      "voices": [
+        {
+          "popid": "POP-00769",
+          "name": "Dax Monroe",
+          "hood": "Rockridge",
+          "role": "Artist",
+          "docs": 1,
+          "cycle": 108,
+          "customId": "cp-POP-00769-c108-PRESS",
+          "docId": "6meTnqR9NZY9LxRyguFxH2",
+          "excerpt": "Honestly, I haven't really thought about Marin Tao's rising fame and how it affects Oakland's cultural scene."
+        },
+        {
+          "popid": "POP-00796",
+          "name": "Dank Abara",
+          "hood": "San Antonio",
+          "role": "Waiter",
+          "docs": 1,
+          "cycle": 108,
+          "customId": "cp-POP-00796-c108-PRESS",
+          "docId": "Qpihm6zjub2twnfbrskAnY",
+          "excerpt": "--- I've noticed that Marin Tao's rising fame seems to be getting a lot of attention in Oakland, and as a waiter, I've heard people talking about it around San Antonio."
+        }
+      ]
+    },
+    {
+      "key": "debt",
+      "label": "debt and money",
+      "adHoc": false,
+      "pattern": "\\b(?:debt|loans?|owe|in the red|collections|overdrawn|savings|paycheck to paycheck|can['’]t afford)\\b",
+      "docs": 2,
+      "citizens": 2,
+      "thisCycle": 0,
+      "prevCycle": 1,
+      "score": 1.2,
+      "trend": "fading",
+      "voices": [
+        {
+          "popid": "POP-00288",
+          "name": "Marcus Wright",
+          "hood": "West Oakland",
+          "role": "Server",
+          "docs": 1,
+          "cycle": 112,
+          "customId": "cp-POP-00288-c112-night",
+          "docId": "zxNXpeDC4GJv4DtUpfdgDR",
+          "excerpt": "I can't switch off because I keep thinking about the folks around here who are barely holding on — and me, I'm lucky, I've got savings and a roof."
+        },
+        {
+          "popid": "POP-00315",
+          "name": "Jahill West",
+          "hood": "Temescal",
+          "role": "Hair Stylist",
+          "docs": 1,
+          "cycle": 106,
+          "customId": "cp-POP-00315-c106-morning",
+          "docId": "q8KNfPbzf1MCfVeQNfmRW4",
+          "excerpt": "The shop’s been steady, but steady ain’t enough—not with the way rent’s climbing and my savings just took that hit."
+        }
+      ]
+    },
+    {
+      "key": "adhoc:Rico Valez",
+      "label": "Rico Valez",
+      "adHoc": true,
+      "pattern": "\\bRico Valez\\b",
+      "docs": 2,
+      "citizens": 2,
+      "thisCycle": 0,
+      "prevCycle": 0,
+      "score": 0.8,
+      "trend": "standing",
+      "voices": [
+        {
+          "popid": "POP-01096",
+          "name": "Priyanka Raman",
+          "hood": "West Oakland",
+          "role": "Principal, Oakland Tech Collective",
+          "docs": 1,
+          "cycle": 107,
+          "customId": "cp-POP-01096-c107-midday",
+          "docId": "kz85AnvtbbBz5VyyDDxNtc",
+          "excerpt": "Saw Rico Valez laughing with someone by the coffee cart, and it struck me how little I actually stop to talk to anyone here, even though I recognize half the faces."
+        },
+        {
+          "popid": "POP-00018",
+          "name": "Benji Dillon",
+          "hood": "Rockridge",
+          "role": "Pitcher, Oakland A's Legend",
+          "docs": 1,
+          "cycle": 107,
+          "customId": "cp-POP-00018-c107-morning",
+          "docId": "28ZoJHw78fu9cA4c4wHC9U",
+          "excerpt": "I’ve noticed Rico Valez walking past Canopy Market most mornings, his pace steady, always nodding to someone."
+        }
+      ]
+    },
+    {
+      "key": "adhoc:Dax Monroe",
+      "label": "Dax Monroe",
+      "adHoc": true,
+      "pattern": "\\bDax Monroe\\b",
+      "docs": 0,
+      "citizens": 0,
+      "thisCycle": 0,
+      "prevCycle": 0,
+      "score": 0,
+      "trend": "quiet",
+      "voices": []
+    },
+    {
+      "key": "adhoc:Jade Orion",
+      "label": "Jade Orion",
+      "adHoc": true,
+      "pattern": "\\bJade Orion\\b",
+      "docs": 0,
+      "citizens": 0,
+      "thisCycle": 0,
+      "prevCycle": 0,
+      "score": 0,
+      "trend": "quiet",
+      "voices": []
+    }
+  ],
+  "hoods": [
+    {
+      "hood": "West Oakland",
+      "docs": 137,
+      "citizens": 35
+    },
+    {
+      "hood": "Rockridge",
+      "docs": 131,
+      "citizens": 35
+    },
+    {
+      "hood": "Downtown",
+      "docs": 96,
+      "citizens": 31
+    },
+    {
+      "hood": "Fruitvale",
+      "docs": 86,
+      "citizens": 26
+    },
+    {
+      "hood": "Lake Merritt",
+      "docs": 80,
+      "citizens": 22
+    },
+    {
+      "hood": "Jack London",
+      "docs": 75,
+      "citizens": 23
+    },
+    {
+      "hood": "Temescal",
+      "docs": 66,
+      "citizens": 27
+    },
+    {
+      "hood": "Chinatown",
+      "docs": 65,
+      "citizens": 25
+    },
+    {
+      "hood": "Laurel",
+      "docs": 46,
+      "citizens": 20
+    },
+    {
+      "hood": "Uptown",
+      "docs": 43,
+      "citizens": 18
+    },
+    {
+      "hood": "Piedmont Ave",
+      "docs": 36,
+      "citizens": 18
+    },
+    {
+      "hood": "Grand Lake",
+      "docs": 23,
+      "citizens": 2
+    },
+    {
+      "hood": "Baylight District",
+      "docs": 9,
+      "citizens": 4
+    },
+    {
+      "hood": "KONO",
+      "docs": 7,
+      "citizens": 5
+    },
+    {
+      "hood": "Glenview",
+      "docs": 6,
+      "citizens": 4
+    },
+    {
+      "hood": "East Oakland",
+      "docs": 4,
+      "citizens": 4
+    },
+    {
+      "hood": "San Antonio",
+      "docs": 3,
+      "citizens": 2
+    },
+    {
+      "hood": "Adams Point",
+      "docs": 1,
+      "citizens": 1
+    }
+  ]
+}

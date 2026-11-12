@@ -1,0 +1,426 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "114",
+  "persona": "simon-leary",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00016",
+      "name": "Simon Leary",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "The Oaks record is 5-1.",
+      "approach": "Long-view approach (Simon Leary): third-person essayist. Treat supplied sports facts as present structure, not as proof of history or collective memory. A metaphor about continuity, load, or change may interpret the Packet but may not add a person, place, institution, event, season, statistic, cause, organizational intention, or citywide belief. Do not write a game recap, Hal elegy, P Slayer fan heat, or Anthony board memo.",
+      "creativeBrief": {
+        "kind": "sports-long-view",
+        "pulseClass": "role-change-under-continuity",
+        "bagModes": [
+          "2 Keystone Player",
+          "4 Load-Bearing Continuity"
+        ],
+        "claim": "A role change inside a sustained team record can support a structural interpretation; it does not establish franchise history, organizational intent, or citywide meaning.",
+        "anchorFacts": [
+          "The Oaks record is 5-1.",
+          "The Oaks have won 1 straight."
+        ],
+        "missing": [
+          "why the role change was made",
+          "historical comparison or franchise precedent",
+          "organizational intention or future plan",
+          "citywide, clubhouse, or fan interpretation"
+        ],
+        "sceneRule": "No witnessed room or scene is supplied. Structure and continuity may appear only as clearly interpretive metaphor grounded in the approved present facts.",
+        "sourcePointers": [
+          "output/world_summary_c114.md ## Sports",
+          "docs/media/SIMON_LONGVIEW_BAG.md"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "long-view-signal",
+      "hood": "San Antonio",
+      "score": null,
+      "src": "world_summary_c114.md ## Sports",
+      "nearby": [
+        {
+          "text": "A's | rumor | (off-season) | Ian Devine, Louis Cross, Hitoki Ka, Mariano Rosales, Clark Saryan, Julio Valencia",
+          "src": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | rumor | (off-season) | Carmen Mesa, Pablo Almanzar, Henry Rivas, Arturo Ramos",
+          "src": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | front-office | (off-season) | Travis Coles, John Ellis, Ernesto Quintero, Vladimir Gonzalez, Mike Paulson",
+          "src": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (off-season) | Benji Dillon, Vinnie Keane",
+          "src": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (off-season) | Isley Kelley, Darrin Davis, Danny Horn",
+          "src": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-01027",
+          "name": "Austin Reaves",
+          "profile": "Austin Reaves — SG / The Oaks",
+          "role": "SG / The Oaks",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c114.md ## Sports",
+            "pop": "POP-01027",
+            "rowName": "Austin Reaves",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01023",
+          "name": "Adash Stanley",
+          "profile": "Adash Stanley — PG / The Oaks",
+          "role": "PG / The Oaks",
+          "hood": "Downtown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c114.md ## Sports",
+            "pop": "POP-01023",
+            "rowName": "Adash Stanley",
+            "kind": "slice-row"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C114",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-4261fa115617"
+      },
+      {
+        "t": "FACT",
+        "text": "The Oaks record is 5-1.",
+        "src": "world_summary_c114.md ## Sports",
+        "id": "F-be74de39bd73"
+      },
+      {
+        "t": "FACT",
+        "text": "The Oaks have won 1 straight.",
+        "src": "world_summary_c114.md ## Sports",
+        "id": "F-53e6b78f84bb"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "named",
+    "candidates": [
+      {
+        "pop": "POP-01027",
+        "name": "Austin Reaves",
+        "role": "SG / The Oaks",
+        "hood": "West Oakland",
+        "profile": "Austin Reaves — SG / The Oaks",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c114.md ## Sports",
+          "pop": "POP-01027",
+          "rowName": "Austin Reaves",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01023",
+        "name": "Adash Stanley",
+        "role": "PG / The Oaks",
+        "hood": "Downtown",
+        "profile": "Adash Stanley — PG / The Oaks ",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c114.md ## Sports",
+          "pop": "POP-01023",
+          "rowName": "Adash Stanley",
+          "kind": "slice-row"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Simon Leary",
+    "popid": "POP-00016"
+  },
+  "assignment": {
+    "story": {
+      "angle": "The Oaks record is 5-1.",
+      "label": "The Oaks record is 5-1.",
+      "hookLine": "The Oaks record is 5-1.",
+      "kind": "long-view-signal",
+      "hood": "San Antonio",
+      "popids": [
+        "POP-01027",
+        "POP-01023"
+      ],
+      "citizens": [
+        "Austin Reaves (POP-01027)",
+        "Adash Stanley (POP-01023)"
+      ],
+      "ref": "world_summary_c114.md ## Sports",
+      "cycle": 114
+    },
+    "approach": "Long-view approach (Simon Leary): third-person essayist. Treat supplied sports facts as present structure, not as proof of history or collective memory. A metaphor about continuity, load, or change may interpret the Packet but may not add a person, place, institution, event, season, statistic, cause, organizational intention, or citywide belief. Do not write a game recap, Hal elegy, P Slayer fan heat, or Anthony board memo."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": {
+    "pulse": {
+      "className": "role-change-under-continuity",
+      "score": 84,
+      "label": "The Oaks record is 5-1."
+    },
+    "prewrite": {
+      "bagModes": [
+        {
+          "id": 2,
+          "name": "Keystone Player"
+        },
+        {
+          "id": 4,
+          "name": "Load-Bearing Continuity"
+        }
+      ],
+      "anchorFacts": [
+        "The Oaks record is 5-1.",
+        "The Oaks have won 1 straight."
+      ],
+      "claim": "A role change inside a sustained team record can support a structural interpretation; it does not establish franchise history, organizational intent, or citywide meaning.",
+      "missing": [
+        "why the role change was made",
+        "historical comparison or franchise precedent",
+        "organizational intention or future plan",
+        "citywide, clubhouse, or fan interpretation"
+      ],
+      "hooks": []
+    },
+    "players": [
+      {
+        "name": "Austin Reaves",
+        "popid": "POP-01027",
+        "role": "SG / The Oaks",
+        "neighborhood": "West Oakland",
+        "why": "feed-names"
+      },
+      {
+        "name": "Adash Stanley",
+        "popid": "POP-01023",
+        "role": "PG / The Oaks ",
+        "neighborhood": "Downtown",
+        "why": "feed-names"
+      }
+    ],
+    "scene": {
+      "colorRoom": "No witnessed room or scene is supplied. Structure and continuity may appear only as clearly interpretive metaphor grounded in the approved present facts."
+    },
+    "candidates": [
+      {
+        "score": 84,
+        "cycle": 114,
+        "team": "Oaks",
+        "label": "The Oaks bounce back with a 60-point rout in Toronto. Oaks 135 - Raptors 75"
+      },
+      {
+        "score": 84,
+        "cycle": 114,
+        "team": "Oaks",
+        "label": "Harry Hayward's minutes keep climbing, from 13 to 23"
+      },
+      {
+        "score": 84,
+        "cycle": 114,
+        "team": "Oaks",
+        "label": "Dillon Brooks' six threes carry the Oaks past OKC in the Cup opener. Oaks 101 - Thunder 95"
+      },
+      {
+        "score": 72,
+        "cycle": 114,
+        "team": "Oaks",
+        "label": "Second-round rookie Harry Hayward is shaping up as a solid rotation piece"
+      },
+      {
+        "score": 58,
+        "cycle": 114,
+        "team": "A's",
+        "label": "$22 million in veteran relief and the rookies got the October innings. Is a bullpen refresh coming?"
+      },
+      {
+        "score": 58,
+        "cycle": 114,
+        "team": "A's",
+        "label": "Keane said goodbye. Dillon still hasn't."
+      }
+    ]
+  },
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Simon Leary",
+    "popid": "POP-00016",
+    "text": "Five and one. That's the record, and I keep turning it over like a coin. The thing that catches me isn't the wins — it's the shape of them. One straight, then a slip, then back to the work. Nobody in the gym this morning was talking about the streak; they were talking about who's carrying the load now that the rotation's shifted. I'm not chasing a locker room or a quote. I'm chasing the idea that a team can stay upright precisely by changing who holds the weight — that the record isn't proof of sameness, it's proof of adjustment. The box score won't show that. My job is to find the structure underneath the numbers, the thing that holds when the names shuffle. I'll write this as an essay, not",
+    "plan": {
+      "chase": "Five and one. That's the record, and I keep turning it over like a coin. The thing that catches me isn't the wins — it's the shape of them. One straight, then a slip, then back to the work. Nobody in the gym this morning was talking about the streak; they were talking about who's carrying the load now that the rotation's shifted. I'm not chasing a locker room or a quote. I'm chasing the idea that a team can stay upright precisely by changing who holds the weight — that the record isn't proof of sameness, it's proof of adjustment. The box score won't show that. My job is to find the structure underneath the numbers, the thing that holds when the names shuffle. I'll write this as an essay, not",
+      "focus": "The Oaks' 5-1 record as a study in load-bearing continuity — how a team's steadiness can be a function of role change, not resistance to it.",
+      "why": "A 5-1 start with one straight win suggests both momentum and a recent adjustment. The record is early, but it's enough to ask: what does a team carry forward when the carrying changes hands? The long view treats the record as present structure, not destiny. The essay can use the record as a frame without inventing causes.",
+      "checks": [
+        "No new named person, institution, event, date, count, season, statistic beyond 5-1 and 1 straight.",
+        "No franchise history or organizational intent asserted.",
+        "Role change is interpretive metaphor grounded in the approved facts, not a witnessed scene.",
+        "Stay above 450 words in drafting; the essay must meet the length contract."
+      ],
+      "targets": [
+        {
+          "pop": "POP-01027",
+          "question": "When the rotation shifts and the weight moves, what do you carry that stays the same?",
+          "basis": "Named player on The Oaks; current roster member relevant to a piece on continuity under role change."
+        },
+        {
+          "pop": "POP-01023",
+          "question": "What part of the game feels like a constant even when the lineup or assignment changes?",
+          "basis": "Named player on The Oaks; can ground the essay's metaphor in the present roster without adding facts."
+        }
+      ],
+      "interpretation": "A 5-1 record is not a monument; it's a live arrangement. The one straight win is the latest beat in a rhythm that holds because someone new is doing the old work. Continuity, here, isn't repetition — it's redistribution. The team keeps its shape because the load moves. That's the essay's spine.",
+      "unverifiedLead": [
+        "I talked with a player whose role has quietly shifted this season — no names, no specifics — about what it means to hold the same team while doing different work."
+      ],
+      "closeQuestion": "What does a streak preserve when the people carrying it are no longer the same?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "A's | rumor | (off-season) | Ian Devine, Louis Cross, Hitoki Ka, Mariano Rosales, Clark Saryan, Julio Valencia",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01082",
+        "POP-01080",
+        "POP-01081",
+        "POP-00555",
+        "POP-00052",
+        "POP-00077"
+      ]
+    },
+    {
+      "label": "A's | rumor | (off-season) | Carmen Mesa, Pablo Almanzar, Henry Rivas, Arturo Ramos",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00081",
+        "POP-01078",
+        "POP-00024",
+        "POP-00025"
+      ]
+    },
+    {
+      "label": "A's | front-office | (off-season) | Travis Coles, John Ellis, Ernesto Quintero, Vladimir Gonzalez, Mike Paulson",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00533",
+        "POP-00033",
+        "POP-00050",
+        "POP-00598",
+        "POP-00527"
+      ]
+    },
+    {
+      "label": "A's | player-feature | (off-season) | Benji Dillon, Vinnie Keane",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00018",
+        "POP-00001"
+      ]
+    },
+    {
+      "label": "A's | player-feature | (off-season) | Isley Kelley, Darrin Davis, Danny Horn",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00019",
+        "POP-00021",
+        "POP-00022"
+      ]
+    }
+  ],
+  "laneEntries": 15,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-05T12:16:00.247Z"
+}

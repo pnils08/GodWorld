@@ -1,0 +1,17 @@
+{
+  "desk": "sports",
+  "cycle": "115",
+  "model": "openai/gpt-5.6-luna",
+  "turns": 11,
+  "maxTurns": 15,
+  "usageInputTokens": 19942,
+  "usageOutputTokens": 1517,
+  "savedFiles": [
+    "output/test-shell/20261111-012823-selena-grant-live/sports_c115_selena-grant_packet-v2_openai-gpt-5-6-luna.md"
+  ],
+  "compareAgainst": "output/desk-output/sports_c115.md",
+  "durationMs": 18535,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-11-11T07:28:42.905Z"
+}

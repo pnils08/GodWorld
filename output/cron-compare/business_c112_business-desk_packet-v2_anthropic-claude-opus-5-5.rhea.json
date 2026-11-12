@@ -1,0 +1,90 @@
+{
+  "draft": "output/cron-compare/business_c112_business-desk_packet-v2_anthropic-claude-opus-5-5.md",
+  "cycle": "112",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "9774a104dde6965bcbd3b6773a48935daa4decdae0b9c64faf7ea4af69e9e1ca",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes, citizen identities, and business ledger details match canon and packet provenance with zero sourcing defects.",
+  "review": {
+    "profileId": "jordan-economic-labor-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "jordan-economic-labor-v1",
+    "packageVersion": "JORDAN-LEP2-1",
+    "manifestId": "AM-730a6453931a",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "000",
+          "13.2",
+          "14.7",
+          "8",
+          "7.6",
+          "3.7",
+          "7th"
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [
+      "Brady Lopez",
+      "Cedric Nakamura",
+      "Derek Obi",
+      "Dexter Patel",
+      "Jordan Velez",
+      "Michael Creighton",
+      "Naomi Castellanos",
+      "Priyanka Raman",
+      "Sarah Corliss"
+    ],
+    "unverified": [
+      "Art Walk Cafe",
+      "Business Desk",
+      "Gallery Night Lounge",
+      "Ivy Hill Market",
+      "Night Walk Records",
+      "Other Side",
+      "Ridgeline Studio"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0109,
+  "durationMs": 9270,
+  "parseError": false,
+  "ranAt": "2026-10-19T23:16:43.859Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 500",
+    "words": 923,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "9774a104dde6965bcbd3b6773a48935daa4decdae0b9c64faf7ea4af69e9e1ca",
+    "costUsd": 0.0012
+  }
+}

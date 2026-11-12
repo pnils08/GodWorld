@@ -1,0 +1,76 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "114",
+  "persona": "freelance-firebrand",
+  "byline": "Jax Caldera",
+  "bylinePopid": "POP-00799",
+  "article": "output/cron-compare/staged/civic_c114_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Maya Torres-Dillon",
+        "role": "quoted-source",
+        "popid": "POP-00742"
+      },
+      {
+        "name": "Naomi Sterling",
+        "role": "quoted-source",
+        "popid": "POP-00759"
+      },
+      {
+        "name": "Yu Zen",
+        "role": "quoted-source",
+        "popid": "POP-00194"
+      },
+      {
+        "name": "Tom Jilner",
+        "role": "quoted-source",
+        "popid": "POP-00691"
+      },
+      {
+        "name": "Warren Ashford",
+        "role": "mentioned",
+        "popid": "POP-00504",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Rockridge"
+    ],
+    "claims": [
+      {
+        "claim": "To be honest, I'm a bit torn about the changes in Rockridge. On one hand, it's great to see the retail strip bustling and new residents exploring the neighborhood. It's a sign of life and energy. On the other hand, I've heard from friends who bought homes here last year that the first year was really tough, and that's concerning. As someone who's been here a while and is involved with the Bay Conservation Alliance, I hope we can keep the community spirit strong while navigating these changes.",
+        "sourceRef": "citizenVoice PRESS Maya Torres-Dillon"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-b1b5b1e87dee",
+    "draftSha256": "2adbc6f98016d0ffbaa5d2034f96d6b68a45a2397426b5cbb21534f349ec9f1b",
+    "verdict": "output/cron-compare/civic_c114_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-05T00:15:34.376Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 400",
+      "words": 766,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "2adbc6f98016d0ffbaa5d2034f96d6b68a45a2397426b5cbb21534f349ec9f1b",
+      "costUsd": 0.0013
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-05T00:15:39.988Z"
+}

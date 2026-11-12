@@ -1,0 +1,70 @@
+{
+  "status": "staged",
+  "desk": "wire",
+  "cycle": "112",
+  "persona": "celeste-tran",
+  "byline": "Celeste Tran",
+  "bylinePopid": "POP-00164",
+  "article": "output/cron-compare/staged/wire_c112_celeste-tran_packet-v2_x-ai-grok-4-3.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Jade Orion",
+        "role": "mentioned",
+        "popid": "POP-00540"
+      },
+      {
+        "name": "Tara Ellison",
+        "role": "mentioned",
+        "popid": "POP-00546"
+      },
+      {
+        "name": "Vinnie Keane",
+        "role": "mentioned",
+        "popid": "POP-00001"
+      },
+      {
+        "name": "Yu Zen",
+        "role": "mentioned",
+        "popid": "POP-00194"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Lake Merritt"
+    ],
+    "claims": [
+      {
+        "claim": "I'm not sure what you mean by 'rising fame.' I've been doing my music here in Lake Merritt for a while now, and it's nice to see people appreciating it. I haven't really noticed anything out of the ordinary happening around here because of it, though. The neighborhood feels the same to me - people are still out for their evening jogs and walks around the lake, and the volunteers from the Cathedral of the Living Word are still cleaning up the streets. I've just been focusing on my craft and enjoying the community.",
+        "sourceRef": "citizenVoice PRESS Jade Orion"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-08756b01136f",
+    "draftSha256": "1ec66e83731c92fc115224204fa27a446b07604cabbe0c09f8a23b530b60ae64",
+    "verdict": "output/cron-compare/wire_c112_celeste-tran_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-10-23T23:19:25.097Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 400",
+      "words": 529,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "1ec66e83731c92fc115224204fa27a446b07604cabbe0c09f8a23b530b60ae64",
+      "costUsd": 0.001
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-23T23:19:29.254Z"
+}

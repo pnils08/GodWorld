@@ -1,0 +1,980 @@
+{
+  "v": "OFFICE/1",
+  "team": "civic-office",
+  "empty": false,
+  "actor": {
+    "id": "POP-00504",
+    "name": "Warren Ashford",
+    "role": "City Council District 7",
+    "officeId": "COUNCIL-D7",
+    "district": "D7",
+    "faction": "CRC",
+    "agentDir": "civic-office-council-d7",
+    "initiative": null,
+    "dials": {
+      "approval": 63
+    }
+  },
+  "task": {
+    "a": "district-week",
+    "goal": "what is happening in Rockridge"
+  },
+  "pulse": {
+    "className": "district-heat",
+    "score": 208.5,
+    "label": "Rockridge — sentiment 0.03 vs city 0.115",
+    "lever": "what is happening in Rockridge",
+    "hood": "Rockridge",
+    "initiative": null,
+    "vsCity": {
+      "sentiment": 0.03,
+      "citySentiment": 0.115,
+      "crime": 0.64,
+      "cityCrime": 0.6554545454545454,
+      "heat": 8.5,
+      "outlier": true
+    }
+  },
+  "prewrite": {
+    "claim": "what is happening in Rockridge",
+    "lineFacts": [
+      "approval 63",
+      "Rockridge: sentiment 0.03 vs city 0.115; crime index 0.64 vs city 0.655; growth momentum 7",
+      "Rockridge crime: property 40, violent 24, incidents 10 (cycle 114) — city property 40.7, violent 26.1, incidents 8.3",
+      "Rockridge: sentiment 0.03 vs city 0.115; crime index 0.64 vs city 0.655; retail 10.98; housing pressure 5; growth; momentum 7"
+    ],
+    "missing": [
+      "no invented vote, POPID, or complete"
+    ]
+  },
+  "game": {
+    "geographyIssue": null,
+    "lastMove": {
+      "text": "Latest moves:\nC113 - work INIT-005: FAILED at the gate — write failed: row not processed\nLatest terminal outcome (C113):\n- work INIT-005: FAILED at the gate — write failed: row not processed",
+      "moves": [
+        {
+          "moveId": "MV-113-civic-office-council-d7-2026-10-28",
+          "cycle": 113,
+          "date": "2026-10-28",
+          "agentDir": "civic-office-council-d7",
+          "popid": "POP-00504",
+          "type": "work",
+          "payload": {
+            "initiativeId": "INIT-005"
+          },
+          "status": "failed",
+          "at": "2026-11-01T23:32:30.885Z",
+          "closeCycle": 114,
+          "detail": "write failed: row not processed"
+        }
+      ]
+    },
+    "board": [
+      {
+        "id": "INIT-005",
+        "name": "Temescal Community Health Center",
+        "domain": "health",
+        "phase": "operational",
+        "status": "passed",
+        "nextActionCycle": 116,
+        "voteCycle": 80,
+        "stage": "Delivering",
+        "cyclesSinceStageChange": 0,
+        "lastStageChangeCycle": 114,
+        "sponsored": false,
+        "hoods": [
+          "Temescal"
+        ],
+        "needsNext": "Delivering — the service is reaching people; it slips back to Standing if the metric stops holding",
+        "budget": "budget $16,269,230.75 left, renewable",
+        "requirement": {
+          "stage": "Delivering",
+          "next": null,
+          "clears": false,
+          "moveThatClears": null,
+          "blocked": null,
+          "text": "Delivering — the service is reaching people; it slips back to Standing if the metric stops holding"
+        },
+        "metricEvidence": null
+      }
+    ],
+    "boardAvailable": true,
+    "boardIds": [
+      "INIT-005"
+    ],
+    "boardText": "Your board:\n- INIT-005 Temescal Community Health Center [operational] — Delivering — the service is reaching people; it slips back to Standing if the metric stops holding — budget $16,269,230.75 left, renewable — next step due C116",
+    "categories": {
+      "available": true,
+      "list": [
+        {
+          "key": "health",
+          "label": "clinics, care",
+          "band": "$5M-$100M",
+          "canDeliver": true
+        },
+        {
+          "key": "transit",
+          "label": "stations, lines",
+          "band": "$20M-$500M",
+          "canDeliver": true
+        },
+        {
+          "key": "education",
+          "label": "schools, youth learning",
+          "band": "$1M-$50M",
+          "canDeliver": true
+        },
+        {
+          "key": "economic",
+          "label": "business, local economy",
+          "band": "$2M-$50M",
+          "canDeliver": false
+        },
+        {
+          "key": "workforce",
+          "label": "jobs, training",
+          "band": "$1M-$30M",
+          "canDeliver": false
+        },
+        {
+          "key": "safety",
+          "label": "public safety, response",
+          "band": "$2M-$30M",
+          "canDeliver": false
+        },
+        {
+          "key": "sports",
+          "label": "stadiums, recreation",
+          "band": "$10M-$500M",
+          "canDeliver": false
+        },
+        {
+          "key": "environment",
+          "label": "parks, air, water",
+          "band": "$1M-$30M",
+          "canDeliver": false
+        }
+      ],
+      "text": "Propose in your own words under one category; reach is hood, district, or all (citywide seats only). Budget must sit in the band. * = runs, but cannot reach Delivering yet.\n- health: clinics, care $5M-$100M\n- transit: stations, lines $20M-$500M\n- education: schools, youth learning $1M-$50M\n- economic*: business, local economy $2M-$50M\n- workforce*: jobs, training $1M-$30M\n- safety*: public safety, response $2M-$30M\n- sports*: stadiums, recreation $10M-$500M\n- environment*: parks, air, water $1M-$30M"
+    },
+    "petitionPool": {
+      "available": true,
+      "complaints": [],
+      "participation": [
+        {
+          "cycle": "113",
+          "hood": "Rockridge",
+          "snippet": "I attended a community feedback session for the Fruitvale Transit Hub Phase II and…",
+          "affect": "Content"
+        }
+      ],
+      "unlocatedRows": 0,
+      "invalidCycleRows": 0,
+      "sinceCycle": 112,
+      "throughCycle": 114,
+      "window": "Complaint display C112–C114; condition counter C114 only.",
+      "text": "Complaint display C112–C114; condition counter C114 only.\nNo Civic complaints from your turf in this window.\nConstructive civic participation (not complaints): 1."
+    },
+    "workingCity": {
+      "available": true,
+      "totalStaff": 4,
+      "shownStaff": 4,
+      "text": "The working city:\n- Elena Soria Dominguez: The schematics are close—we're maybe three weeks out from the community review, and I keep second-guessing… (C113)\n- Bobby Chen-Ramirez: The audit went out clean, and I should feel done, but there's a knot in my chest I can't shake. Numbers don't… (C113)\n- Vanessa Tran-Muñoz: Fruitvale numbers are in my head, not the report. The response time was good today — 6 minutes on the 42nd… (C113)\n- Marcus Webb: Month eleven closed clean. Audit published, no findings flagged, and that four hundred K for next month is… (C113)"
+    },
+    "patrol": {
+      "available": true,
+      "strategy": "balanced",
+      "text": "City patrol strategy: balanced (patrols spread evenly — the default posture). The Police Chief has not set one."
+    },
+    "confrontations": {
+      "available": true,
+      "all": [
+        {
+          "id": "CONF-108-civic-office-council-d7",
+          "cycle": 108,
+          "agentDir": "civic-office-council-d7",
+          "demand": "Warren Ashford — City Council District 7 — Sign off on the fire-rated wall inspections and drywall milestone for the Temescal Community Health Center (INIT-005) while addressing KONO district sentiment distress.",
+          "sourceText": "## Warren Ashford — City Council District 7\n\n- **Agent:** `.claude/agents/civic-office-council-d7/`\n- **Address:** Sign off on the fire-rated wall inspections and drywall milestone for the Temescal Community Health Center (INIT-005) while addressing KONO district sentiment distress.\n- **Why:** Following C107 MEP rough-in completion, INIT-005 requires C108 drywall inspection approvals; simultaneously, KONO records the lowest sentiment in Oakland (0.17 vs city 0.330, CrimeIndex 0.61).\n- **Acceptance:** Transmittal of the certified fire-rated wall inspection sign-off and a municipal service request targeting KONO corridor safety.\n- **Silence consequence:** Construction crews stall prior to interior enclosure, delaying the operational handover of the Temescal facility.\n",
+          "src": "output/mara-directives/mara_directive_c108_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-109-civic-office-council-d7",
+          "cycle": 109,
+          "agentDir": "civic-office-council-d7",
+          "demand": "Warren Ashford — City Council District 7 — Submit the certified fire-rated wall and drywall inspection sign-off for the Temescal Community Health Center (INIT-005).",
+          "sourceText": "## Warren Ashford — City Council District 7\n\n- **Agent:** `.claude/agents/civic-office-council-d7/`\n- **Address:** Submit the certified fire-rated wall and drywall inspection sign-off for the Temescal Community Health Center (INIT-005).\n- **Why:** Following C108 MEP verification, INIT-005 is scheduled for drywall installation and certified wall inspection sign-offs in C109, with the project board facing a C110 stall clock.\n- **Acceptance:** Transmittal of the certified building inspection sign-off and drywall authorization for the Temescal facility to the Planning and Building Department.\n- **Silence consequence:** Interior enclosure work on the Temescal facility stops, causing construction delays that compromise the facility's operational delivery schedule.\n",
+          "src": "output/mara-directives/mara_directive_c109_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-112-civic-office-council-d7",
+          "cycle": 112,
+          "agentDir": "civic-office-council-d7",
+          "demand": "Warren Ashford — City Council District 7 — File the pre-audit operational benchmark framework and intake criteria for the Temescal Community Health Center (INIT-005) ahead of its C113 utilization review.",
+          "sourceText": "## Warren Ashford — City Council District 7\n\n- **Agent:** `.claude/agents/civic-office-council-d7/`\n- **Address:** File the pre-audit operational benchmark framework and intake criteria for the Temescal Community Health Center (INIT-005) ahead of its C113 utilization review.\n- **Why:** INIT-005 is fully operational and faces its first-quarter utilization review milestone in C113, while Temescal records depressed retail vitality of 6.40 and an elevated crime index of 0.65.\n- **Acceptance:** Published post-occupancy audit benchmarks and patient intake metrics for INIT-005 in C113.\n- **Silence consequence:** The health center operates without baseline fiscal oversight metrics on the public record as its quarterly utilization deadline passes.\n",
+          "src": "output/mara-directives/mara_directive_c112_AUTO.txt",
+          "expectsMove": "answer"
+        }
+      ],
+      "latestCycle": 114,
+      "open": [],
+      "answeredIds": [
+        "CONF-112-civic-office-council-d7"
+      ]
+    },
+    "conditions": {
+      "available": true,
+      "proposals": [],
+      "text": "No proposals in the available board/move evidence need condition counts."
+    },
+    "problemContinuity": {
+      "available": true,
+      "cycle": 114,
+      "problems": [
+        {
+          "id": "[\"KONO\",\"health.sickResidents\"]",
+          "hood": "KONO",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 17,
+          "cycle": 114
+        },
+        {
+          "id": "[\"Rockridge\",\"health.sickResidents\"]",
+          "hood": "Rockridge",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 101,
+          "cycle": 114
+        },
+        {
+          "id": "[\"Temescal\",\"health.sickResidents\"]",
+          "hood": "Temescal",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 86,
+          "cycle": 114
+        }
+      ],
+      "visibleProblems": [
+        {
+          "id": "[\"KONO\",\"health.sickResidents\"]",
+          "hood": "KONO",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 17,
+          "cycle": 114
+        },
+        {
+          "id": "[\"Rockridge\",\"health.sickResidents\"]",
+          "hood": "Rockridge",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 101,
+          "cycle": 114
+        },
+        {
+          "id": "[\"Temescal\",\"health.sickResidents\"]",
+          "hood": "Temescal",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 86,
+          "cycle": 114
+        }
+      ],
+      "passedOver": [
+        {
+          "id": "[\"Rockridge\",\"health.sickResidents\"]",
+          "hood": "Rockridge",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 101,
+          "cycle": 114,
+          "passedOverCycle": 110
+        },
+        {
+          "id": "[\"KONO\",\"health.sickResidents\"]",
+          "hood": "KONO",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 17,
+          "cycle": 114,
+          "passedOverCycle": 110
+        }
+      ],
+      "issues": [],
+      "missingFoldCycles": [],
+      "text": "Health and safety readings this week (C114).\n- KONO: 17 residents sick\n- Rockridge: 101 residents sick\n- Temescal: 86 residents sick"
+    }
+  },
+  "signal": {
+    "kind": "district-heat",
+    "hoods": [
+      "Temescal",
+      "Rockridge",
+      "KONO"
+    ],
+    "src": "lib/districtMap.js + civic-office-map.json"
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00038",
+        "name": "Theo Park",
+        "neighborhood": "Rockridge",
+        "role": "Communications Director",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Rockridge — Rockridge — sentiment 0.03 vs city 0.115"
+      },
+      {
+        "pop": "POP-00040",
+        "name": "Aaron Whitfield",
+        "neighborhood": "Rockridge",
+        "role": "City Manager",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Rockridge — Rockridge — sentiment 0.03 vs city 0.115"
+      },
+      {
+        "pop": "POP-00045",
+        "name": "Eric Clove",
+        "neighborhood": "Rockridge",
+        "role": "Ethics Commission",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Rockridge — Rockridge — sentiment 0.03 vs city 0.115"
+      },
+      {
+        "pop": "POP-00120",
+        "name": "Lou Hollis",
+        "neighborhood": "Rockridge",
+        "role": "Scout, Oakland A's",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Rockridge — Rockridge — sentiment 0.03 vs city 0.115"
+      }
+    ],
+    "businesses": [],
+    "churches": [],
+    "sources": []
+  },
+  "known": [
+    {
+      "id": "F-office-COUNCIL-D7",
+      "t": "FACT",
+      "text": "Warren Ashford holds COUNCIL-D7 at approval 63",
+      "src": "engine_audit snapshots.Civic_Office_Ledger"
+    },
+    {
+      "id": "F-heat-Rockridge",
+      "t": "FACT",
+      "text": "Rockridge: sentiment 0.03 vs city 0.115; crime index 0.64 vs city 0.655; growth momentum 7",
+      "src": "engine_audit snapshots.Neighborhood_Map ranked vs city"
+    },
+    {
+      "id": "F-crime-Rockridge",
+      "t": "FACT",
+      "text": "Rockridge crime: property 40, violent 24, incidents 10 (cycle 114) — city property 40.7, violent 26.1, incidents 8.3",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-hood-Rockridge",
+      "t": "FACT",
+      "text": "Rockridge: sentiment 0.03 vs city 0.115; crime index 0.64 vs city 0.655; retail 10.98; housing pressure 5; growth; momentum 7",
+      "src": "engine_audit snapshots.Neighborhood_Map"
+    },
+    {
+      "id": "F-traj-1",
+      "t": "FACT",
+      "text": "Rockridge turning upward: retail busy, events drawing crowds, people moving in",
+      "src": "world_summary trajectory"
+    },
+    {
+      "id": "F-chaos-garbage_truck-neighborhood Rockridge",
+      "t": "FACT",
+      "text": "garbage_truck dumping_cleared → neighborhood Rockridge Sentiment -0.11",
+      "src": "world_summary Chaos_Cars"
+    }
+  ],
+  "role": {
+    "officeRows": [
+      {
+        "OfficeId": "COUNCIL-D7",
+        "PopId": "POP-00504",
+        "Holder": "Warren Ashford",
+        "District": "D7",
+        "Approval": "63"
+      }
+    ],
+    "civicPeers": [
+      {
+        "OfficeId": "COUNCIL-D6",
+        "PopId": "POP-00044",
+        "Holder": "Elliott Crane",
+        "District": "D6",
+        "Faction": "CRC",
+        "Approval": 55
+      },
+      {
+        "OfficeId": "COUNCIL-D8",
+        "PopId": "POP-00505",
+        "Holder": "Nina Chen",
+        "District": "D8",
+        "Faction": "CRC",
+        "Approval": 55
+      }
+    ]
+  },
+  "limits": {
+    "assert": [
+      "only named subjects in exposure.subjects",
+      "only named shops in exposure.businesses",
+      "only named churches in exposure.churches",
+      "only project facts in known",
+      "no invented POPID, vote, or complete"
+    ],
+    "invent": [
+      "no new citizens",
+      "no new businesses",
+      "no sheet numbers"
+    ]
+  },
+  "output": {
+    "contract": "statement + moves + numberMoved",
+    "dest": "office wiki (civic.16) then next Sunday city-hall packet"
+  },
+  "brief": {
+    "version": "CIVIC-BRIEF/2",
+    "cycle": 114,
+    "generation": {
+      "cycle": 114,
+      "observedAt": "2026-11-01T22:24:29.105Z",
+      "sources": {
+        "sports": {
+          "available": true,
+          "hash": "b78aaae66ac12aca66d5fa395108cfe2aa74c4de5f10df5c08eec00d10a966f7"
+        },
+        "summary": {
+          "available": true,
+          "hash": "99535f5182e66eb922782c14f98daace067903c034240604a5ece898c8f011e4"
+        }
+      },
+      "hash": "625fc65e258fd2fe3d38d613ddc8fe6e9ae4ae4487a8350ea1d8882ac488130d",
+      "completeThrough": "2026-11-01T22:24:29.105Z",
+      "issues": [],
+      "statement": "Events reflect the saved export as of its refresh watermark; later same-Cycle events require a new export."
+    },
+    "sections": {
+      "events": {
+        "available": true,
+        "items": [
+          {
+            "eventId": "EV-summary-f010bcd5c5e13070",
+            "status": "occurred",
+            "occurredCycle": 114,
+            "ageCycles": 0,
+            "category": "city-event",
+            "significance": "local",
+            "hoods": [
+              "KONO"
+            ],
+            "citywideRelevance": false,
+            "sourceRef": "output/world_summary_c114.md:129",
+            "fact": "KONO First Friday Gallery Hop (KONO)",
+            "retrievalKey": "event/EV-summary-f010bcd5c5e13070"
+          },
+          {
+            "eventId": "EV-world-f2d2c54b4e51eb01",
+            "status": "occurred",
+            "occurredCycle": 114,
+            "ageCycles": 0,
+            "category": "world-safety",
+            "significance": "noted",
+            "hoods": [
+              "Temescal"
+            ],
+            "citywideRelevance": false,
+            "sourceRef": "output/world_summary_c114.md:357",
+            "fact": "Medium-severity safety spike in Temescal (impactScore 34)",
+            "retrievalKey": "event/EV-world-f2d2c54b4e51eb01"
+          }
+        ],
+        "omittedCount": 0,
+        "retrievalKeys": [
+          "event/EV-summary-f010bcd5c5e13070",
+          "event/EV-world-f2d2c54b4e51eb01"
+        ]
+      },
+      "measuredState": {
+        "districts": [
+          {
+            "district": "D7",
+            "available": true,
+            "retrievalKey": "district/D7",
+            "neighborhoods": [
+              {
+                "hood": "Temescal",
+                "available": true,
+                "measured": {
+                  "Sentiment": {
+                    "value": "0.17",
+                    "previous": "0.08",
+                    "change": 0.09000000000000001
+                  },
+                  "CrimeIndex": {
+                    "value": "0.73",
+                    "previous": "0.66",
+                    "change": 0.06999999999999995
+                  },
+                  "RetailVitality": {
+                    "value": "6.23",
+                    "previous": "5.29",
+                    "change": 0.9400000000000004
+                  },
+                  "HousingPressure": {
+                    "value": "2",
+                    "previous": "2.5",
+                    "change": -0.5
+                  },
+                  "NeighborhoodTrajectory": {
+                    "value": "steady",
+                    "previous": "steady",
+                    "change": null
+                  },
+                  "TrajectoryMomentum": {
+                    "value": "5",
+                    "previous": "5",
+                    "change": 0
+                  }
+                }
+              },
+              {
+                "hood": "Rockridge",
+                "available": true,
+                "measured": {
+                  "Sentiment": {
+                    "value": "0.03",
+                    "previous": "0.06",
+                    "change": -0.03
+                  },
+                  "CrimeIndex": {
+                    "value": "0.64",
+                    "previous": "0.52",
+                    "change": 0.12
+                  },
+                  "RetailVitality": {
+                    "value": "10.98",
+                    "previous": "13.14",
+                    "change": -2.16
+                  },
+                  "HousingPressure": {
+                    "value": "5",
+                    "previous": "4",
+                    "change": 1
+                  },
+                  "NeighborhoodTrajectory": {
+                    "value": "growth",
+                    "previous": "steady",
+                    "change": null
+                  },
+                  "TrajectoryMomentum": {
+                    "value": "7",
+                    "previous": "6",
+                    "change": 1
+                  }
+                }
+              },
+              {
+                "hood": "KONO",
+                "available": true,
+                "measured": {
+                  "Sentiment": {
+                    "value": "0.16",
+                    "previous": "-0.01",
+                    "change": 0.17
+                  },
+                  "CrimeIndex": {
+                    "value": "0.67",
+                    "previous": "0.59",
+                    "change": 0.08000000000000007
+                  },
+                  "RetailVitality": {
+                    "value": "8.6",
+                    "previous": "7.44",
+                    "change": 1.1599999999999993
+                  },
+                  "HousingPressure": {
+                    "value": "0",
+                    "previous": "0",
+                    "change": 0
+                  },
+                  "NeighborhoodTrajectory": {
+                    "value": "steady",
+                    "previous": "steady",
+                    "change": null
+                  },
+                  "TrajectoryMomentum": {
+                    "value": "5",
+                    "previous": "5",
+                    "change": 0
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "previousCycleAvailable": true
+      },
+      "commitments": {
+        "priorMoves": [
+          {
+            "moveId": "MV-113-civic-office-council-d7-2026-10-28",
+            "type": "work",
+            "status": "failed",
+            "cycle": 113,
+            "retrievalKey": "prior/MV-113-civic-office-council-d7-2026-10-28"
+          }
+        ],
+        "evidenceAvailable": true,
+        "outcomeFeedAvailable": false,
+        "actionOutcomes": [],
+        "actionReconciliationAvailable": false,
+        "actionReconciliationReason": "ENOENT: no such file or directory, open '/root/GodWorld/output/beats/Civic_Action_Ledger.jsonl'",
+        "reconciledActions": []
+      },
+      "opportunities": {
+        "board": [
+          {
+            "id": "INIT-005",
+            "name": "Temescal Community Health Center",
+            "domain": "health",
+            "phase": "operational",
+            "status": "passed",
+            "nextActionCycle": 116,
+            "voteCycle": 80,
+            "stage": "Delivering",
+            "cyclesSinceStageChange": 0,
+            "lastStageChangeCycle": 114,
+            "sponsored": false,
+            "hoods": [
+              "Temescal"
+            ],
+            "needsNext": "Delivering — the service is reaching people; it slips back to Standing if the metric stops holding",
+            "budget": "budget $16,269,230.75 left, renewable",
+            "requirement": {
+              "stage": "Delivering",
+              "next": null,
+              "clears": false,
+              "moveThatClears": null,
+              "blocked": null,
+              "text": "Delivering — the service is reaching people; it slips back to Standing if the metric stops holding"
+            },
+            "metricEvidence": null,
+            "retrievalKey": "project/INIT-005"
+          }
+        ],
+        "omittedCount": 0,
+        "boardRetrievalKeys": [
+          "project/INIT-005"
+        ],
+        "selectedInitiative": null,
+        "resourceBalanceAvailable": false,
+        "budgetAuthorityKey": "budget/authority",
+        "openChoice": "No selected initiative; a reasoned no-op or a grounded opportunity is available."
+      },
+      "response": {
+        "petitionWindow": "Complaint display C112–C114; condition counter C114 only.",
+        "complaints": 0,
+        "participation": 1,
+        "mediaOutcomeAvailable": false,
+        "committedResponseAvailable": false,
+        "committedResponse": [],
+        "note": "Response counts require saved experience and reaction receipts, and are not a representative poll. Only published receipts appear as coverage."
+      },
+      "authorizedActions": {
+        "categoriesAvailable": true,
+        "categoryKeys": [
+          "health",
+          "transit",
+          "education",
+          "economic",
+          "workforce",
+          "safety",
+          "sports",
+          "environment"
+        ],
+        "detailKey": "budget/authority",
+        "note": "Move validation and later execution decide authority. An accepted request is not an applied outcome."
+      }
+    }
+  },
+  "_briefEvidence": {
+    "event": {
+      "EV-summary-f010bcd5c5e13070": {
+        "eventId": "EV-summary-f010bcd5c5e13070",
+        "sourceRef": "output/world_summary_c114.md:129",
+        "sourceRevision": "9181e140613bf5b6d58e17d9a61ec3bf55171fac4cec066cfba685d5e2621c7e",
+        "occurredCycle": 114,
+        "status": "occurred",
+        "observedAt": "2026-11-01T22:24:29.105Z",
+        "category": "city-event",
+        "significance": "local",
+        "hoods": [
+          "KONO"
+        ],
+        "citywideRelevance": false,
+        "entityIds": [],
+        "facts": [
+          "KONO First Friday Gallery Hop (KONO)"
+        ],
+        "aliases": []
+      },
+      "EV-world-f2d2c54b4e51eb01": {
+        "eventId": "EV-world-f2d2c54b4e51eb01",
+        "sourceRef": "output/world_summary_c114.md:357",
+        "sourceRevision": "df67c94a8cd31f355aaa7d3ecb90b674b218651f8a833d994695e07ec3c2cdc1",
+        "occurredCycle": 114,
+        "status": "occurred",
+        "observedAt": "2026-11-01T22:24:29.105Z",
+        "category": "world-safety",
+        "significance": "noted",
+        "hoods": [
+          "Temescal"
+        ],
+        "citywideRelevance": false,
+        "entityIds": [],
+        "facts": [
+          "Medium-severity safety spike in Temescal (impactScore 34)"
+        ],
+        "aliases": []
+      }
+    },
+    "district": {
+      "D7": {
+        "available": true,
+        "district": "D7",
+        "neighborhoods": [
+          {
+            "hood": "Temescal",
+            "available": true,
+            "measured": {
+              "Sentiment": {
+                "value": "0.17",
+                "previous": "0.08",
+                "change": 0.09000000000000001
+              },
+              "CrimeIndex": {
+                "value": "0.73",
+                "previous": "0.66",
+                "change": 0.06999999999999995
+              },
+              "RetailVitality": {
+                "value": "6.23",
+                "previous": "5.29",
+                "change": 0.9400000000000004
+              },
+              "HousingPressure": {
+                "value": "2",
+                "previous": "2.5",
+                "change": -0.5
+              },
+              "NeighborhoodTrajectory": {
+                "value": "steady",
+                "previous": "steady",
+                "change": null
+              },
+              "TrajectoryMomentum": {
+                "value": "5",
+                "previous": "5",
+                "change": 0
+              }
+            },
+            "sourceRef": "engine_audit snapshots.Neighborhood_Map"
+          },
+          {
+            "hood": "Rockridge",
+            "available": true,
+            "measured": {
+              "Sentiment": {
+                "value": "0.03",
+                "previous": "0.06",
+                "change": -0.03
+              },
+              "CrimeIndex": {
+                "value": "0.64",
+                "previous": "0.52",
+                "change": 0.12
+              },
+              "RetailVitality": {
+                "value": "10.98",
+                "previous": "13.14",
+                "change": -2.16
+              },
+              "HousingPressure": {
+                "value": "5",
+                "previous": "4",
+                "change": 1
+              },
+              "NeighborhoodTrajectory": {
+                "value": "growth",
+                "previous": "steady",
+                "change": null
+              },
+              "TrajectoryMomentum": {
+                "value": "7",
+                "previous": "6",
+                "change": 1
+              }
+            },
+            "sourceRef": "engine_audit snapshots.Neighborhood_Map"
+          },
+          {
+            "hood": "KONO",
+            "available": true,
+            "measured": {
+              "Sentiment": {
+                "value": "0.16",
+                "previous": "-0.01",
+                "change": 0.17
+              },
+              "CrimeIndex": {
+                "value": "0.67",
+                "previous": "0.59",
+                "change": 0.08000000000000007
+              },
+              "RetailVitality": {
+                "value": "8.6",
+                "previous": "7.44",
+                "change": 1.1599999999999993
+              },
+              "HousingPressure": {
+                "value": "0",
+                "previous": "0",
+                "change": 0
+              },
+              "NeighborhoodTrajectory": {
+                "value": "steady",
+                "previous": "steady",
+                "change": null
+              },
+              "TrajectoryMomentum": {
+                "value": "5",
+                "previous": "5",
+                "change": 0
+              }
+            },
+            "sourceRef": "engine_audit snapshots.Neighborhood_Map"
+          }
+        ],
+        "previousCycleAvailable": true
+      }
+    },
+    "project": {
+      "INIT-005": {
+        "id": "INIT-005",
+        "name": "Temescal Community Health Center",
+        "domain": "health",
+        "phase": "operational",
+        "status": "passed",
+        "nextActionCycle": 116,
+        "voteCycle": 80,
+        "stage": "Delivering",
+        "cyclesSinceStageChange": 0,
+        "lastStageChangeCycle": 114,
+        "sponsored": false,
+        "hoods": [
+          "Temescal"
+        ],
+        "needsNext": "Delivering — the service is reaching people; it slips back to Standing if the metric stops holding",
+        "budget": "budget $16,269,230.75 left, renewable",
+        "requirement": {
+          "stage": "Delivering",
+          "next": null,
+          "clears": false,
+          "moveThatClears": null,
+          "blocked": null,
+          "text": "Delivering — the service is reaching people; it slips back to Standing if the metric stops holding"
+        },
+        "metricEvidence": null
+      }
+    },
+    "budget": {
+      "authority": {
+        "officeId": "COUNCIL-D7",
+        "district": "D7",
+        "categories": [
+          {
+            "key": "health",
+            "label": "clinics, care",
+            "band": "$5M-$100M",
+            "canDeliver": true
+          },
+          {
+            "key": "transit",
+            "label": "stations, lines",
+            "band": "$20M-$500M",
+            "canDeliver": true
+          },
+          {
+            "key": "education",
+            "label": "schools, youth learning",
+            "band": "$1M-$50M",
+            "canDeliver": true
+          },
+          {
+            "key": "economic",
+            "label": "business, local economy",
+            "band": "$2M-$50M",
+            "canDeliver": false
+          },
+          {
+            "key": "workforce",
+            "label": "jobs, training",
+            "band": "$1M-$30M",
+            "canDeliver": false
+          },
+          {
+            "key": "safety",
+            "label": "public safety, response",
+            "band": "$2M-$30M",
+            "canDeliver": false
+          },
+          {
+            "key": "sports",
+            "label": "stadiums, recreation",
+            "band": "$10M-$500M",
+            "canDeliver": false
+          },
+          {
+            "key": "environment",
+            "label": "parks, air, water",
+            "band": "$1M-$30M",
+            "canDeliver": false
+          }
+        ],
+        "resourceBalance": null,
+        "resourceBalanceAvailable": false,
+        "note": "Category bands are filing constraints. Spendable treasury balance requires typed current allocation evidence."
+      }
+    },
+    "prior": {
+      "MV-113-civic-office-council-d7-2026-10-28": {
+        "moveId": "MV-113-civic-office-council-d7-2026-10-28",
+        "cycle": 113,
+        "date": "2026-10-28",
+        "agentDir": "civic-office-council-d7",
+        "popid": "POP-00504",
+        "type": "work",
+        "payload": {
+          "initiativeId": "INIT-005"
+        },
+        "status": "failed",
+        "at": "2026-11-01T23:32:30.885Z",
+        "closeCycle": 114,
+        "detail": "write failed: row not processed"
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "status": "arc-seed",
+  "cycle": "113",
+  "desk": "civic",
+  "persona": "angela-reyes",
+  "hood": "Temescal",
+  "quotes": [
+    {
+      "pop": "POP-00729",
+      "name": "Patricia Nolan",
+      "quote": "I've watched that building for thirty years, and the thing that breaks my heart isn't the number on the table — it's that the kids inside feel it. When I was teaching, we had the same struggles, but there was a sense that the neighborhood was pulling for us. Now the district grows everywhere else, and Temescal just... sits. The teachers there are still good people, still trying. But you can't pour from an empty cup, and when the funding and attention go to the neighborhoods that are already climbing, the kids here notice. They're not dumb. They know when they're being left behind."
+    },
+    {
+      "pop": "POP-00975",
+      "name": "Salma Navarro",
+      "quote": "I mean, we talk about it, but not in numbers like that. Mostly it's just, like, what are we actually gonna do next year? Some of my friends are looking at jobs, some are trying to get into the community college, and a few are just, you know, figuring it out. Nobody's really bragging about stats or anything. It's more like, are we gonna be okay? That's what comes up when we talk."
+    },
+    {
+      "pop": "POP-00198",
+      "name": "Rick Walker",
+      "quote": "I see it in my own classroom every day. When the district grows, the money and the attention follow the growth. Temescal isn't growing, so it's just... flat. The teachers there are working just as hard as we are in Fruitvale, but they're doing it with less. That gap isn't just numbers on a table — it's the difference between a kid getting a new textbook or a worn-out one from three years ago. I've been in that position, and it wears you down after a while."
+    }
+  ],
+  "claim": "I've watched that building for thirty years, and the thing that breaks my heart isn't the number on the table — it's that the kids inside feel it. When I was teaching, we had the same struggles, but there was a sense that the neighborhood was pulling for us. Now the district grows everywhere else, and Temescal just... sits. The teachers there are still good people, still trying. But you can't pour from an empty cup, and when the funding and attention go to the neighborhoods that are already climbing, the kids here notice. They're not dumb. They know when they're being left behind.",
+  "src": "citizenVoice PRESS c113",
+  "ranAt": "2026-10-27T18:16:49.367Z"
+}

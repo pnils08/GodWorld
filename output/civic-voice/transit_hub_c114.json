@@ -1,0 +1,34 @@
+{
+  "office": "transit_hub",
+  "cycle": 114,
+  "speaker": "Elena Soria Dominguez",
+  "cascadeSummary": "The council landed on the one thing I've been asking for since the visioning began: the preliminary schematics go to Fruitvale before anything else happens — real community review, merchant-covenant compliance on the table, Mayer & Associates' oversight record open for scrutiny, and no claim of final design. I'm executing that this cycle at the Cesar Chavez branch library and the senior center, in English, Spanish, and Mam, with a public comment-and-response record that binds the next design step. Nothing gets locked before the people who live here test these drawings against daily life.",
+  "statements": [
+    {
+      "statementId": "STMT-114-transit_hub-001",
+      "type": "operational_status",
+      "topic": "Preliminary schematics community review — C114 Fruitvale",
+      "initiative": "INIT-003",
+      "decision": "Convene the C114 preliminary schematics community review as set by the council: two bilingual sessions (senior center and library), merchant-covenant compliance dossier and Mayer & Associates' community-oversight record published for scrutiny, a written public comment-and-response record, and no assertion of final design or construction approval.",
+      "quote": "These schematics go before the abuelas and the tamale vendors before they go anywhere else — that's the order, and that's the point.",
+      "fullStatement": "Metro: the Fruitvale Transit Hub Phase II schematic review opens this cycle, and it opens here, in the neighborhood, before any further design advancement. Two sessions — the Fruitvale-San Antonio Senior Center and the Cesar Chavez branch library — run in English, Spanish, and Mam. The preliminary drawings will be on the wall in large format, with station access, the 14th Avenue pedestrian crossing, ground-floor commercial bays, and the affordable-housing program laid out side by side so people can test them against their actual mornings instead of a rendering. Alongside the drawings, two documents sit open for scrutiny: the merchant-covenant compliance record, tracking each covenant term and where it stands, and Mayer & Associates' community-oversight record, every session they attended and every comment they logged. Every comment gets a written response — dated, attributed, in the language it came in — and that response record is a precondition, not an addendum, to any further design step. No claim of final design crosses my desk this cycle, and no claim of construction approval does either. What the people of Fruitvale will see is what they've earned after four cycles of visioning: the drawings of their own transit hub put in front of them, in their own languages, with a record that commits the city to answering. Doña Esperanza's tamale cart and the panadería on E. 12th are the test, and we intend to pass it.",
+      "trackerUpdates": {
+        "initiative": "INIT-003",
+        "ImplementationPhase": "design-phase",
+        "MilestoneNotes": "C114: Preliminary schematics community review convened (senior center + library, EN/ES/Mam) with merchant-covenant compliance and Mayer & Associates oversight records published; written public comment-and-response record produced; no final-design or construction approval claimed.",
+        "NextScheduledAction": "Complete the C114 public comment-and-response record and confirm merchant-covenant compliance terms against resident and merchant feedback before any further design advancement.",
+        "NextActionCycle": 115
+      }
+    },
+    {
+      "statementId": "STMT-114-transit_hub-002",
+      "type": "constituent_support",
+      "topic": "Who answers for Fruitvale this cycle",
+      "initiative": "INIT-003",
+      "decision": "Hold the C114 schematic review's record open to Fruitvale's residents and merchants — with a public response log, an open merchant-covenant status tracker, and a standing comment line at the library and senior center — so every household and storefront affected by Phase II has a named channel and a documented answer.",
+      "quote": "I don't answer for Fruitvale from a cubicle — I answer for it because my kids walk to the BART station past these drawings, and so do yours.",
+      "fullStatement": "The tamales still steam on International and the abuelas still cross to the panadería — that's the baseline our work protects, and it's the baseline I'm accountable for this cycle. What I put on the table for Fruitvale is a public record, not a promise: the comment-and-response log from the schematic review stays open through the cycle at the Cesar Chavez branch and the senior center, in print and in English, Spanish, and Mam, with every merchant-covenant compliance status visible so a shopkeeper on 35th or E. 12th can look and see exactly where their tenancy term stands. The 14th Avenue crossing a car nearly took a kid last spring — that stays on the record as a design constraint until it's resolved in the drawings. I'm not opening a phone line that rings into a voicemail void; I'm putting a signature on each response and the name of whoever gives it. The people living through Phase II answer for nothing — the city answers to them, this cycle and every cycle until the vote.",
+      "trackerUpdates": {}
+    }
+  ]
+}

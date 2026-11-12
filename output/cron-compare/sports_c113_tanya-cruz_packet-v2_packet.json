@@ -1,0 +1,1023 @@
+{
+  "stage": "report",
+  "desk": "sports",
+  "cycle": "113",
+  "persona": "tanya-cruz",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014"
+  },
+  "assignment": {
+    "story": {
+      "angle": "The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+      "label": "The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+      "hookLine": "The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+      "kind": "sideline-signal",
+      "hood": "Downtown",
+      "popids": [
+        "POP-00051",
+        "POP-00079",
+        "POP-00022",
+        "POP-00598",
+        "POP-00021"
+      ],
+      "citizens": [
+        "Desmond Morton (POP-00051)",
+        "Frank Reyna (POP-00079)",
+        "Danny Horn (POP-00022)",
+        "Vladimir Gonzalez (POP-00598)",
+        "Darrin Davis (POP-00021)"
+      ],
+      "ref": "world_summary_c113.md ## Sports",
+      "cycle": 113
+    }
+  },
+  "angle": "output/cron-compare/sports_c113_tanya-cruz_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 3,
+  "quotes": [
+    {
+      "pop": "POP-00051",
+      "name": "Desmond Morton",
+      "quote": "Honestly, the coaches haven't given me a clear answer yet. They know I've shown I can play at this level, but with Danny locked in center and Vladimir coming off the year he had, it's a real squeeze for left. I'm just trying to control what I can—show up, work, and let my play make the case. I know Frank and J.R. are pushing too, so it's not something I lose sleep over. The team's got a good problem, and whoever gets the spot, we're all pulling the same direction.",
+      "disp": "a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "{\n  \"answer\": \"quote\",\n  \"quote\": \"Honestly, the coaches haven't given me a clear answer yet. They know I've shown I can play at this level, but with Danny locked in center and Vladimir coming off the year he had, it's a real squeeze for left. I'm just trying to control what I can—show up, work, and let my play make the case. I know Frank and J.R. are pushing too, so it's not something I lose sleep over. The team's got a good problem, and whoever gets the spot, we're all pulling the same direction.\",\n  \"fact_ids\": [\n    \"F-67f3cfbf6b42\",\n    \"F-582d1a631369\"\n  ],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": [],\n  \"abstain_reason\": null\n}",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-67f3cfbf6b42",
+          "F-582d1a631369"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00051-2f9ba5a204",
+        "authoredQuote": true,
+        "publishableQuote": "Honestly, the coaches haven't given me a clear answer yet. They know I've shown I can play at this level, but with Danny locked in center and Vladimir coming off the year he had, it's a real squeeze for left. I'm just trying to control what I can—show up, work, and let my play make the case. I know Frank and J.R. are pushing too, so it's not something I lose sleep over. The team's got a good problem, and whoever gets the spot, we're all pulling the same direction."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00051",
+          "name": "Desmond Morton",
+          "role": "Left Fielder, Oakland A's",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Tanya Cruz",
+          "question": "Desmond, what have the coaches told you about where you fit this spring? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "sideline-signal",
+          "hood": "Downtown",
+          "focus": "The unresolved competition for the final outfield spot and what it signals about the A's direction this off-season.",
+          "src": "world_summary_c113.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Desmond Morton — Left Fielder, Oakland A's",
+          "evidence": [
+            {
+              "id": "EV-02dadbee95",
+              "src": "world_summary_c113.md ## Sports",
+              "text": "The Outfield squeeze for next season. 5 Outfielders for 3 positions"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "If those spots are set then you have three players for one left field opening. Desmond Morton is you highest rated prospect with 5 tools and has shown success at the MLB level, Frank Reyna is a power hitter with a mass of potential that also showed success. JR Rosado performed well in his major league experience and had good contact numbers but may trend as a role player in the grand scheme. What is the choice Paulson should make here.",
+            "src": "world_summary_c113.md ## Sports",
+            "id": "F-67f3cfbf6b42"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+            "src": "world_summary_c113.md ## Sports",
+            "id": "F-36b4b175ea0e"
+          },
+          {
+            "t": "FACT",
+            "text": "The Outfield squeeze for next season. 5 Outfielders for 3 positions.",
+            "src": "world_summary_c113.md ## Sports",
+            "id": "F-2a3f8cb11e5a"
+          },
+          {
+            "t": "FACT",
+            "text": "Danny Horn is your starting CF. A returing MVP and the best player in baseball makes it an easy decision. Darrin Davis figures to be your DH as he remains under contract and showed his numbers did not decline, albiet he was injured. Davis has missed substantial time twice over the past three seasons. Vladimir is entering his peak and put up his best numbers of his career last season. Rates as a clutch perfomer and is essentially who you chose over Peter Busch last offseason.",
+            "src": "world_summary_c113.md ## Sports",
+            "id": "F-582d1a631369"
+          },
+          {
+            "t": "FACT",
+            "text": "Desmond Morton — Left Fielder, Oakland A's",
+            "src": "Simulation_Ledger profile for POP-00051",
+            "id": "F-e3f1bcead212"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00079",
+      "name": "Frank Reyna",
+      "quote": "Honestly, I don't think about separating myself from Desmond or JR. I think about what I bring that they don't. They've both proven they belong, no question. But I'm a power bat, and in this ballpark, that plays. I've shown I can do it at this level. The way I see it, the decision isn't about who's better — it's about what the lineup needs. And I'm going to make sure that answer is me.",
+      "disp": "driven, hard to sit still; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Honestly, I don't think about separating myself from Desmond or JR. I think about what I bring that they don't. They've both proven they belong, no question. But I'm a power bat, and in this ballpark, that plays. I've shown I can do it at this level. The way I see it, the decision isn't about who's better — it's about what the lineup needs. And I'm going to make sure that answer is me.\",\n  \"fact_ids\": [\"F-67f3cfbf6b42\", \"F-582d1a631369\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-67f3cfbf6b42",
+          "F-582d1a631369"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00079-d7d96018c1",
+        "authoredQuote": true,
+        "publishableQuote": "Honestly, I don't think about separating myself from Desmond or JR. I think about what I bring that they don't. They've both proven they belong, no question. But I'm a power bat, and in this ballpark, that plays. I've shown I can do it at this level. The way I see it, the decision isn't about who's better — it's about what the lineup needs. And I'm going to make sure that answer is me."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00079",
+          "name": "Frank Reyna",
+          "role": "Right Fielder, Oakland A's",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Tanya Cruz",
+          "question": "Frank, how do you separate yourself in a competition where everyone's already proven something? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "sideline-signal",
+          "hood": "Downtown",
+          "focus": "The unresolved competition for the final outfield spot and what it signals about the A's direction this off-season.",
+          "src": "world_summary_c113.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Frank Reyna — Right Fielder, Oakland A's",
+          "evidence": [
+            {
+              "id": "EV-7ccac55708",
+              "src": "world_summary_c113.md ## Sports",
+              "text": "The Outfield squeeze for next season. 5 Outfielders for 3 positions"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "If those spots are set then you have three players for one left field opening. Desmond Morton is you highest rated prospect with 5 tools and has shown success at the MLB level, Frank Reyna is a power hitter with a mass of potential that also showed success. JR Rosado performed well in his major league experience and had good contact numbers but may trend as a role player in the grand scheme. What is the choice Paulson should make here.",
+            "src": "world_summary_c113.md ## Sports",
+            "id": "F-67f3cfbf6b42"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+            "src": "world_summary_c113.md ## Sports",
+            "id": "F-36b4b175ea0e"
+          },
+          {
+            "t": "FACT",
+            "text": "The Outfield squeeze for next season. 5 Outfielders for 3 positions.",
+            "src": "world_summary_c113.md ## Sports",
+            "id": "F-2a3f8cb11e5a"
+          },
+          {
+            "t": "FACT",
+            "text": "Danny Horn is your starting CF. A returing MVP and the best player in baseball makes it an easy decision. Darrin Davis figures to be your DH as he remains under contract and showed his numbers did not decline, albiet he was injured. Davis has missed substantial time twice over the past three seasons. Vladimir is entering his peak and put up his best numbers of his career last season. Rates as a clutch perfomer and is essentially who you chose over Peter Busch last offseason.",
+            "src": "world_summary_c113.md ## Sports",
+            "id": "F-582d1a631369"
+          },
+          {
+            "t": "FACT",
+            "text": "Frank Reyna — Right Fielder, Oakland A's",
+            "src": "Simulation_Ledger profile for POP-00079",
+            "id": "F-c9d53c60fe58"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00598",
+      "name": "Vladimir Gonzalez",
+      "quote": "Honestly, the vibe is a lot less tense than you'd think. We all know the business side of it — somebody's gonna get moved or sent down, that's just how it goes. What I tell the young guys is you can't control what Paulson decides. You just control how you show up. And truth be told, it's a good problem for the A's to have. Means we got depth, and that's how you win. I earned my spot, sure, but I remember what it was like trying to crack a crowded room. You just hope the decision gets made quick so whoever it is lands somewhere they can play.",
+      "disp": "a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Honestly, the vibe is a lot less tense than you'd think. We all know the business side of it — somebody's gonna get moved or sent down, that's just how it goes. What I tell the young guys is you can't control what Paulson decides. You just control how you show up. And truth be told, it's a good problem for the A's to have. Means we got depth, and that's how you win. I earned my spot, sure, but I remember what it was like trying to crack a crowded room. You just hope the decision gets made quick so whoever it is lands somewhere they can play.\",\n  \"fact_ids\": [\"F-582d1a631369\", \"F-67f3cfbf6b42\", \"F-2a3f8cb11e5a\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": [],\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-582d1a631369",
+          "F-67f3cfbf6b42",
+          "F-2a3f8cb11e5a"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00598-f3d96574e8",
+        "authoredQuote": true,
+        "publishableQuote": "Honestly, the vibe is a lot less tense than you'd think. We all know the business side of it — somebody's gonna get moved or sent down, that's just how it goes. What I tell the young guys is you can't control what Paulson decides. You just control how you show up. And truth be told, it's a good problem for the A's to have. Means we got depth, and that's how you win. I earned my spot, sure, but I remember what it was like trying to crack a crowded room. You just hope the decision gets made quick so whoever it is lands somewhere they can play."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00598",
+          "name": "Vladimir Gonzalez",
+          "role": "Right Fielder, Oakland A's",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Tanya Cruz",
+          "question": "Vladimir, you've earned your spot — what's the vibe in the room about the odd man out? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "sideline-signal",
+          "hood": "Downtown",
+          "focus": "The unresolved competition for the final outfield spot and what it signals about the A's direction this off-season.",
+          "src": "world_summary_c113.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Vladimir Gonzalez — Right Fielder, Oakland A's",
+          "evidence": [
+            {
+              "id": "EV-2b3ca16398",
+              "src": "world_summary_c113.md ## Sports",
+              "text": "The Outfield squeeze for next season. 5 Outfielders for 3 positions"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+            "src": "world_summary_c113.md ## Sports",
+            "id": "F-36b4b175ea0e"
+          },
+          {
+            "t": "FACT",
+            "text": "The Outfield squeeze for next season. 5 Outfielders for 3 positions.",
+            "src": "world_summary_c113.md ## Sports",
+            "id": "F-2a3f8cb11e5a"
+          },
+          {
+            "t": "FACT",
+            "text": "Danny Horn is your starting CF. A returing MVP and the best player in baseball makes it an easy decision. Darrin Davis figures to be your DH as he remains under contract and showed his numbers did not decline, albiet he was injured. Davis has missed substantial time twice over the past three seasons. Vladimir is entering his peak and put up his best numbers of his career last season. Rates as a clutch perfomer and is essentially who you chose over Peter Busch last offseason.",
+            "src": "world_summary_c113.md ## Sports",
+            "id": "F-582d1a631369"
+          },
+          {
+            "t": "FACT",
+            "text": "If those spots are set then you have three players for one left field opening. Desmond Morton is you highest rated prospect with 5 tools and has shown success at the MLB level, Frank Reyna is a power hitter with a mass of potential that also showed success. JR Rosado performed well in his major league experience and had good contact numbers but may trend as a role player in the grand scheme. What is the choice Paulson should make here.",
+            "src": "world_summary_c113.md ## Sports",
+            "id": "F-67f3cfbf6b42"
+          },
+          {
+            "t": "FACT",
+            "text": "Vladimir Gonzalez — Right Fielder, Oakland A's",
+            "src": "Simulation_Ledger profile for POP-00598",
+            "id": "F-02ab66f6dc49"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-00051",
+      "name": "Desmond Morton",
+      "quote": "Honestly, the coaches haven't given me a clear answer yet. They know I've shown I can play at this level, but with Danny locked in center and Vladimir coming off the year he had, it's a real squeeze for left. I'm just trying to control what I can—show up, work, and let my play make the case. I know Frank and J.R. are pushing too, so it's not something I lose sleep over. The team's got a good problem, and whoever gets the spot, we're all pulling the same direction.",
+      "disp": "a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "{\n  \"answer\": \"quote\",\n  \"quote\": \"Honestly, the coaches haven't given me a clear answer yet. They know I've shown I can play at this level, but with Danny locked in center and Vladimir coming off the year he had, it's a real squeeze for left. I'm just trying to control what I can—show up, work, and let my play make the case. I know Frank and J.R. are pushing too, so it's not something I lose sleep over. The team's got a good problem, and whoever gets the spot, we're all pulling the same direction.\",\n  \"fact_ids\": [\n    \"F-67f3cfbf6b42\",\n    \"F-582d1a631369\"\n  ],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": [],\n  \"abstain_reason\": null\n}",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-67f3cfbf6b42",
+          "F-582d1a631369"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00051-2f9ba5a204",
+        "authoredQuote": true,
+        "publishableQuote": "Honestly, the coaches haven't given me a clear answer yet. They know I've shown I can play at this level, but with Danny locked in center and Vladimir coming off the year he had, it's a real squeeze for left. I'm just trying to control what I can—show up, work, and let my play make the case. I know Frank and J.R. are pushing too, so it's not something I lose sleep over. The team's got a good problem, and whoever gets the spot, we're all pulling the same direction."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00051",
+          "name": "Desmond Morton",
+          "role": "Left Fielder, Oakland A's",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Tanya Cruz",
+          "question": "Desmond, what have the coaches told you about where you fit this spring? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "sideline-signal",
+          "hood": "Downtown",
+          "focus": "The unresolved competition for the final outfield spot and what it signals about the A's direction this off-season.",
+          "src": "world_summary_c113.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Desmond Morton — Left Fielder, Oakland A's",
+          "evidence": [
+            {
+              "id": "EV-02dadbee95",
+              "src": "world_summary_c113.md ## Sports",
+              "text": "The Outfield squeeze for next season. 5 Outfielders for 3 positions"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "If those spots are set then you have three players for one left field opening. Desmond Morton is you highest rated prospect with 5 tools and has shown success at the MLB level, Frank Reyna is a power hitter with a mass of potential that also showed success. JR Rosado performed well in his major league experience and had good contact numbers but may trend as a role player in the grand scheme. What is the choice Paulson should make here.",
+            "src": "world_summary_c113.md ## Sports",
+            "id": "F-67f3cfbf6b42"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+            "src": "world_summary_c113.md ## Sports",
+            "id": "F-36b4b175ea0e"
+          },
+          {
+            "t": "FACT",
+            "text": "The Outfield squeeze for next season. 5 Outfielders for 3 positions.",
+            "src": "world_summary_c113.md ## Sports",
+            "id": "F-2a3f8cb11e5a"
+          },
+          {
+            "t": "FACT",
+            "text": "Danny Horn is your starting CF. A returing MVP and the best player in baseball makes it an easy decision. Darrin Davis figures to be your DH as he remains under contract and showed his numbers did not decline, albiet he was injured. Davis has missed substantial time twice over the past three seasons. Vladimir is entering his peak and put up his best numbers of his career last season. Rates as a clutch perfomer and is essentially who you chose over Peter Busch last offseason.",
+            "src": "world_summary_c113.md ## Sports",
+            "id": "F-582d1a631369"
+          },
+          {
+            "t": "FACT",
+            "text": "Desmond Morton — Left Fielder, Oakland A's",
+            "src": "Simulation_Ledger profile for POP-00051",
+            "id": "F-e3f1bcead212"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00079",
+      "name": "Frank Reyna",
+      "quote": "Honestly, I don't think about separating myself from Desmond or JR. I think about what I bring that they don't. They've both proven they belong, no question. But I'm a power bat, and in this ballpark, that plays. I've shown I can do it at this level. The way I see it, the decision isn't about who's better — it's about what the lineup needs. And I'm going to make sure that answer is me.",
+      "disp": "driven, hard to sit still; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Honestly, I don't think about separating myself from Desmond or JR. I think about what I bring that they don't. They've both proven they belong, no question. But I'm a power bat, and in this ballpark, that plays. I've shown I can do it at this level. The way I see it, the decision isn't about who's better — it's about what the lineup needs. And I'm going to make sure that answer is me.\",\n  \"fact_ids\": [\"F-67f3cfbf6b42\", \"F-582d1a631369\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-67f3cfbf6b42",
+          "F-582d1a631369"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00079-d7d96018c1",
+        "authoredQuote": true,
+        "publishableQuote": "Honestly, I don't think about separating myself from Desmond or JR. I think about what I bring that they don't. They've both proven they belong, no question. But I'm a power bat, and in this ballpark, that plays. I've shown I can do it at this level. The way I see it, the decision isn't about who's better — it's about what the lineup needs. And I'm going to make sure that answer is me."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00079",
+          "name": "Frank Reyna",
+          "role": "Right Fielder, Oakland A's",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Tanya Cruz",
+          "question": "Frank, how do you separate yourself in a competition where everyone's already proven something? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "sideline-signal",
+          "hood": "Downtown",
+          "focus": "The unresolved competition for the final outfield spot and what it signals about the A's direction this off-season.",
+          "src": "world_summary_c113.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Frank Reyna — Right Fielder, Oakland A's",
+          "evidence": [
+            {
+              "id": "EV-7ccac55708",
+              "src": "world_summary_c113.md ## Sports",
+              "text": "The Outfield squeeze for next season. 5 Outfielders for 3 positions"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "If those spots are set then you have three players for one left field opening. Desmond Morton is you highest rated prospect with 5 tools and has shown success at the MLB level, Frank Reyna is a power hitter with a mass of potential that also showed success. JR Rosado performed well in his major league experience and had good contact numbers but may trend as a role player in the grand scheme. What is the choice Paulson should make here.",
+            "src": "world_summary_c113.md ## Sports",
+            "id": "F-67f3cfbf6b42"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+            "src": "world_summary_c113.md ## Sports",
+            "id": "F-36b4b175ea0e"
+          },
+          {
+            "t": "FACT",
+            "text": "The Outfield squeeze for next season. 5 Outfielders for 3 positions.",
+            "src": "world_summary_c113.md ## Sports",
+            "id": "F-2a3f8cb11e5a"
+          },
+          {
+            "t": "FACT",
+            "text": "Danny Horn is your starting CF. A returing MVP and the best player in baseball makes it an easy decision. Darrin Davis figures to be your DH as he remains under contract and showed his numbers did not decline, albiet he was injured. Davis has missed substantial time twice over the past three seasons. Vladimir is entering his peak and put up his best numbers of his career last season. Rates as a clutch perfomer and is essentially who you chose over Peter Busch last offseason.",
+            "src": "world_summary_c113.md ## Sports",
+            "id": "F-582d1a631369"
+          },
+          {
+            "t": "FACT",
+            "text": "Frank Reyna — Right Fielder, Oakland A's",
+            "src": "Simulation_Ledger profile for POP-00079",
+            "id": "F-c9d53c60fe58"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00022",
+      "name": "Danny Horn",
+      "quote": null,
+      "disp": "can't switch off, working themselves thin; draws people in, deep with them; steady, hard to shake; a real fan, plans around games",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: direct reaction exceeds 80 words; direct reaction must be one to four sentences",
+      "raw": "{\"answer\":\"quote\",\"quote\":\"From center, I see three guys who all deserve a shot, and that's a good problem to have even if it keeps Paulson up at night. Desmond's got the tools — you can see it in how he reads the ball off the bat, like he's already two steps ahead. Frank's the kind of bat that changes a game with one swing, and you can't teach that power. JR, he's just steady — good contact, does the little things right, the kind of player who makes a lineup deeper even if he doesn't jump out at you. I've been in that spot where you're waiting on a decision, and it's not easy. But whoever gets that left field spot, they're gonna have my back, and I'm gonna have theirs. That's just how this club works.\",\"fact_ids\":[\"F-67f3cfbf6b42\",\"F-36b4b175ea0e\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":null,\"abstain_reason\":null}",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00022",
+          "name": "Danny Horn",
+          "role": "Center Fielder, Oakland A's - Best player in the MLB",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Tanya Cruz",
+          "question": "Danny, from your vantage in center, what do you see in the three guys fighting for left? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "sideline-signal",
+          "hood": "Downtown",
+          "focus": "The unresolved competition for the final outfield spot and what it signals about the A's direction this off-season.",
+          "src": "world_summary_c113.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Danny Horn — Center Fielder, Oakland A's - Best player in the MLB",
+          "evidence": [
+            {
+              "id": "EV-a45be2644d",
+              "src": "world_summary_c113.md ## Sports",
+              "text": "The Outfield squeeze for next season. 5 Outfielders for 3 positions"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Danny Horn is your starting CF. A returing MVP and the best player in baseball makes it an easy decision. Darrin Davis figures to be your DH as he remains under contract and showed his numbers did not decline, albiet he was injured. Davis has missed substantial time twice over the past three seasons. Vladimir is entering his peak and put up his best numbers of his career last season. Rates as a clutch perfomer and is essentially who you chose over Peter Busch last offseason.",
+            "src": "world_summary_c113.md ## Sports",
+            "id": "F-582d1a631369"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+            "src": "world_summary_c113.md ## Sports",
+            "id": "F-36b4b175ea0e"
+          },
+          {
+            "t": "FACT",
+            "text": "The Outfield squeeze for next season. 5 Outfielders for 3 positions.",
+            "src": "world_summary_c113.md ## Sports",
+            "id": "F-2a3f8cb11e5a"
+          },
+          {
+            "t": "FACT",
+            "text": "If those spots are set then you have three players for one left field opening. Desmond Morton is you highest rated prospect with 5 tools and has shown success at the MLB level, Frank Reyna is a power hitter with a mass of potential that also showed success. JR Rosado performed well in his major league experience and had good contact numbers but may trend as a role player in the grand scheme. What is the choice Paulson should make here.",
+            "src": "world_summary_c113.md ## Sports",
+            "id": "F-67f3cfbf6b42"
+          },
+          {
+            "t": "FACT",
+            "text": "Danny Horn — Center Fielder, Oakland A's - Best player in the MLB",
+            "src": "Simulation_Ledger profile for POP-00022",
+            "id": "F-ef4aff038e21"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00598",
+      "name": "Vladimir Gonzalez",
+      "quote": "Honestly, the vibe is a lot less tense than you'd think. We all know the business side of it — somebody's gonna get moved or sent down, that's just how it goes. What I tell the young guys is you can't control what Paulson decides. You just control how you show up. And truth be told, it's a good problem for the A's to have. Means we got depth, and that's how you win. I earned my spot, sure, but I remember what it was like trying to crack a crowded room. You just hope the decision gets made quick so whoever it is lands somewhere they can play.",
+      "disp": "a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Honestly, the vibe is a lot less tense than you'd think. We all know the business side of it — somebody's gonna get moved or sent down, that's just how it goes. What I tell the young guys is you can't control what Paulson decides. You just control how you show up. And truth be told, it's a good problem for the A's to have. Means we got depth, and that's how you win. I earned my spot, sure, but I remember what it was like trying to crack a crowded room. You just hope the decision gets made quick so whoever it is lands somewhere they can play.\",\n  \"fact_ids\": [\"F-582d1a631369\", \"F-67f3cfbf6b42\", \"F-2a3f8cb11e5a\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": [],\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-582d1a631369",
+          "F-67f3cfbf6b42",
+          "F-2a3f8cb11e5a"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00598-f3d96574e8",
+        "authoredQuote": true,
+        "publishableQuote": "Honestly, the vibe is a lot less tense than you'd think. We all know the business side of it — somebody's gonna get moved or sent down, that's just how it goes. What I tell the young guys is you can't control what Paulson decides. You just control how you show up. And truth be told, it's a good problem for the A's to have. Means we got depth, and that's how you win. I earned my spot, sure, but I remember what it was like trying to crack a crowded room. You just hope the decision gets made quick so whoever it is lands somewhere they can play."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00598",
+          "name": "Vladimir Gonzalez",
+          "role": "Right Fielder, Oakland A's",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Tanya Cruz",
+          "question": "Vladimir, you've earned your spot — what's the vibe in the room about the odd man out? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "sideline-signal",
+          "hood": "Downtown",
+          "focus": "The unresolved competition for the final outfield spot and what it signals about the A's direction this off-season.",
+          "src": "world_summary_c113.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Vladimir Gonzalez — Right Fielder, Oakland A's",
+          "evidence": [
+            {
+              "id": "EV-2b3ca16398",
+              "src": "world_summary_c113.md ## Sports",
+              "text": "The Outfield squeeze for next season. 5 Outfielders for 3 positions"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+            "src": "world_summary_c113.md ## Sports",
+            "id": "F-36b4b175ea0e"
+          },
+          {
+            "t": "FACT",
+            "text": "The Outfield squeeze for next season. 5 Outfielders for 3 positions.",
+            "src": "world_summary_c113.md ## Sports",
+            "id": "F-2a3f8cb11e5a"
+          },
+          {
+            "t": "FACT",
+            "text": "Danny Horn is your starting CF. A returing MVP and the best player in baseball makes it an easy decision. Darrin Davis figures to be your DH as he remains under contract and showed his numbers did not decline, albiet he was injured. Davis has missed substantial time twice over the past three seasons. Vladimir is entering his peak and put up his best numbers of his career last season. Rates as a clutch perfomer and is essentially who you chose over Peter Busch last offseason.",
+            "src": "world_summary_c113.md ## Sports",
+            "id": "F-582d1a631369"
+          },
+          {
+            "t": "FACT",
+            "text": "If those spots are set then you have three players for one left field opening. Desmond Morton is you highest rated prospect with 5 tools and has shown success at the MLB level, Frank Reyna is a power hitter with a mass of potential that also showed success. JR Rosado performed well in his major league experience and had good contact numbers but may trend as a role player in the grand scheme. What is the choice Paulson should make here.",
+            "src": "world_summary_c113.md ## Sports",
+            "id": "F-67f3cfbf6b42"
+          },
+          {
+            "t": "FACT",
+            "text": "Vladimir Gonzalez — Right Fielder, Oakland A's",
+            "src": "Simulation_Ledger profile for POP-00598",
+            "id": "F-02ab66f6dc49"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-10-28T18:20:04.381Z"
+}

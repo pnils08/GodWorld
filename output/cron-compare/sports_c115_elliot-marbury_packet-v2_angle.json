@@ -1,0 +1,488 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "115",
+  "persona": "elliot-marbury",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00166",
+      "name": "Elliot Marbury",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Eric Taveras — 7 seasons on the dossier, 2041 the latest | hitter density memo, multi-year — what the line proves, on what sample, and what would disprove it",
+      "approach": "Data-desk approach: this slice is one player's season-by-season line off the dossier, the rates worked out from it, and two peers at the same job. Third person, dry, source-forward. One hard claim the numbers carry, with its sample size stated; a thin season is variance, not identity. Say which number next season would kill the claim. No quotes, no scene, no clubhouse — the memo is the proof. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "data-desk",
+        "hood": null,
+        "facts": [
+          "Eric Taveras — 2B, Athletics; 7 seasons on the dossier",
+          "Eric Taveras 2041 ATH: 138 G, 555 AB, 164 H, 54 HR, 124 RBI, 36 BB, 81 SO, 2 SB, AVG .295, OBP .339, SLG .638",
+          "Eric Taveras 2040 TB: 146 G, 582 AB, 138 H, 31 HR, 92 RBI, 48 BB, 132 SO, 5 SB, AVG .237, OBP .300, SLG .459",
+          "Eric Taveras 2039 TOT: 152 G, 606 AB, 150 H, 30 HR, 84 RBI, 49 BB, 122 SO, 7 SB, AVG .248, OBP .307, SLG .447",
+          "Eric Taveras 2038 CLE: 109 G, 424 AB, 102 H, 26 HR, 64 RBI, 35 BB, 87 SO, 6 SB, AVG .241, OBP .301, SLG .495",
+          "Eric Taveras 2037 TOT: 158 G, 627 AB, 154 H, 26 HR, 87 RBI, 49 BB, 141 SO, 7 SB, AVG .246, OBP .303, SLG .421",
+          "Eric Taveras 2036 BAL: 151 G, 596 AB, 134 H, 19 HR, 68 RBI, 47 BB, 144 SO, 10 SB, AVG .225, OBP .286, SLG .374",
+          "Eric Taveras 2041 rates (555 AB): one HR every 10.3 AB, one SO every 6.9 AB (worked from the season line)",
+          "Eric Taveras 2040 rates (582 AB): one HR every 18.8 AB, one SO every 4.4 AB (worked from the season line)",
+          "Eric Taveras 2039 rates (606 AB): one HR every 20.2 AB, one SO every 5.0 AB (worked from the season line)",
+          "Eric Taveras 2038 rates (424 AB): one HR every 16.3 AB, one SO every 4.9 AB (worked from the season line)",
+          "Eric Taveras 2037 rates (627 AB): one HR every 24.1 AB, one SO every 4.4 AB (worked from the season line)"
+        ],
+        "priorCycle": "DOSSIER",
+        "note": "subject is on this cycle's feed",
+        "engineHooks": [],
+        "roomIsYours": "the order the columns are read in, which season is the hinge, what the peer band makes ordinary or strange",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-data-desk",
+      "hood": null,
+      "score": null,
+      "src": "output/player_truesource_mirror.json Eric Taveras @C115",
+      "nearby": [
+        {
+          "text": "A's | roster-move | (off-season) | Vinnie Keane",
+          "src": "Oakland_Sports_Feed cycle 115; rendered: world_summary_c115.md \"## Sports\" C115 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | community-outreach | (off-season) | Darrin Davis, Rafael Montez",
+          "src": "Oakland_Sports_Feed cycle 115; rendered: world_summary_c115.md \"## Sports\" C115 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (off-season) | Eric Taveras, Vinnie Keane",
+          "src": "Oakland_Sports_Feed cycle 115; rendered: world_summary_c115.md \"## Sports\" C115 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | rumor | (off-season) | Jose Colon, Sergio Aybar, Marco Fabregas, Mike Paulson",
+          "src": "Oakland_Sports_Feed cycle 115; rendered: world_summary_c115.md \"## Sports\" C115 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | player-feature | (early-season) | Harry Hayward, Wilson Shepard",
+          "src": "Oakland_Sports_Feed cycle 115; rendered: world_summary_c115.md \"## Sports\" C115 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": []
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C115",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-bc84fc0b7718"
+      },
+      {
+        "t": "FACT",
+        "text": "Eric Taveras — 7 seasons on the dossier, 2041 the latest | hitter density memo, multi-year",
+        "src": "output/player_truesource_mirror.json Eric Taveras @C115",
+        "id": "F-15e501ce9831"
+      },
+      {
+        "t": "FACT",
+        "text": "Eric Taveras's 2041 line against 6 earlier seasons and 1 peer.",
+        "src": "output/player_truesource_mirror.json Eric Taveras @C115",
+        "id": "F-39ac3551319c"
+      },
+      {
+        "t": "FACT",
+        "text": "Eric Taveras — 2B, Athletics; 7 seasons on the dossier",
+        "src": "output/player_truesource_mirror.json Eric Taveras",
+        "id": "F-d6074e190f63"
+      },
+      {
+        "t": "FACT",
+        "text": "Eric Taveras 2041 ATH: 138 G, 555 AB, 164 H, 54 HR, 124 RBI, 36 BB, 81 SO, 2 SB, AVG .295, OBP .339, SLG .638",
+        "src": "output/player_truesource_mirror.json Eric Taveras",
+        "id": "F-83f281412bca"
+      },
+      {
+        "t": "FACT",
+        "text": "Eric Taveras 2040 TB: 146 G, 582 AB, 138 H, 31 HR, 92 RBI, 48 BB, 132 SO, 5 SB, AVG .237, OBP .300, SLG .459",
+        "src": "output/player_truesource_mirror.json Eric Taveras",
+        "id": "F-56c44cc2e5b9"
+      },
+      {
+        "t": "FACT",
+        "text": "Eric Taveras 2039 TOT: 152 G, 606 AB, 150 H, 30 HR, 84 RBI, 49 BB, 122 SO, 7 SB, AVG .248, OBP .307, SLG .447",
+        "src": "output/player_truesource_mirror.json Eric Taveras",
+        "id": "F-611d2d48793f"
+      },
+      {
+        "t": "FACT",
+        "text": "Eric Taveras 2038 CLE: 109 G, 424 AB, 102 H, 26 HR, 64 RBI, 35 BB, 87 SO, 6 SB, AVG .241, OBP .301, SLG .495",
+        "src": "output/player_truesource_mirror.json Eric Taveras",
+        "id": "F-4c0b751ebeae"
+      },
+      {
+        "t": "FACT",
+        "text": "Eric Taveras 2037 TOT: 158 G, 627 AB, 154 H, 26 HR, 87 RBI, 49 BB, 141 SO, 7 SB, AVG .246, OBP .303, SLG .421",
+        "src": "output/player_truesource_mirror.json Eric Taveras",
+        "id": "F-b53cb870e949"
+      },
+      {
+        "t": "FACT",
+        "text": "Eric Taveras 2036 BAL: 151 G, 596 AB, 134 H, 19 HR, 68 RBI, 47 BB, 144 SO, 10 SB, AVG .225, OBP .286, SLG .374",
+        "src": "output/player_truesource_mirror.json Eric Taveras",
+        "id": "F-8d4cc9b898df"
+      },
+      {
+        "t": "FACT",
+        "text": "Eric Taveras 2041 rates (555 AB): one HR every 10.3 AB, one SO every 6.9 AB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Eric Taveras",
+        "id": "F-43e0c8597f23"
+      },
+      {
+        "t": "FACT",
+        "text": "Eric Taveras 2040 rates (582 AB): one HR every 18.8 AB, one SO every 4.4 AB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Eric Taveras",
+        "id": "F-e12f97b9e3fb"
+      },
+      {
+        "t": "FACT",
+        "text": "Eric Taveras 2039 rates (606 AB): one HR every 20.2 AB, one SO every 5.0 AB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Eric Taveras",
+        "id": "F-99ec54879aa9"
+      },
+      {
+        "t": "FACT",
+        "text": "Eric Taveras 2038 rates (424 AB): one HR every 16.3 AB, one SO every 4.9 AB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Eric Taveras",
+        "id": "F-ac303a25e905"
+      },
+      {
+        "t": "FACT",
+        "text": "Eric Taveras 2037 rates (627 AB): one HR every 24.1 AB, one SO every 4.4 AB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Eric Taveras",
+        "id": "F-bf816f6f85d3"
+      },
+      {
+        "t": "FACT",
+        "text": "Eric Taveras 2036 rates (596 AB): one HR every 31.4 AB, one SO every 4.1 AB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Eric Taveras",
+        "id": "F-91aaf83356c6"
+      },
+      {
+        "t": "FACT",
+        "text": "Peer — Sidney Tumolo (2B, Athletics) 2041 ATH: 23 G, 88 AB, 28 H, 3 HR, 12 RBI, 2 BB, 6 SO, 2 SB, AVG .318, OBP .344, SLG .511",
+        "src": "output/player_truesource_mirror.json Sidney Tumolo",
+        "id": "F-8eafeadbdcd8"
+      },
+      {
+        "t": "FACT",
+        "text": "Peer — Sidney Tumolo 2041 rates (88 AB): one HR every 29.3 AB, one SO every 14.7 AB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Sidney Tumolo",
+        "id": "F-ad537ca28ed4"
+      },
+      {
+        "t": "FACT",
+        "text": "This cycle (feed, off-season): Eric Taveras/3 EP/20 PTS/1170 CR/5th",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C115",
+        "id": "F-91af9f24c489"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ]
+      },
+      "rule": "No target candidate was supplied. Return targets as an empty array; do not invent a person or identifier. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "records",
+    "candidates": [],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Elliot Marbury",
+    "popid": "POP-00166"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-data-desk",
+      "angle": "Eric Taveras — 7 seasons on the dossier, 2041 the latest | hitter density memo, multi-year — what the line proves, on what sample, and what would disprove it",
+      "label": "Eric Taveras — 7 seasons on the dossier, 2041 the latest | hitter density memo, multi-year",
+      "hookLine": "Eric Taveras's 2041 line against 6 earlier seasons and 1 peer.",
+      "hood": null,
+      "citizens": [
+        "Eric Taveras (POP-00597)"
+      ],
+      "popids": [
+        "POP-00597"
+      ],
+      "ref": "output/player_truesource_mirror.json Eric Taveras @C115",
+      "cycle": 115
+    },
+    "approach": "Data-desk approach: this slice is one player's season-by-season line off the dossier, the rates worked out from it, and two peers at the same job. Third person, dry, source-forward. One hard claim the numbers carry, with its sample size stated; a thin season is variance, not identity. Say which number next season would kill the claim. No quotes, no scene, no clubhouse — the memo is the proof. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "DATA-DESK-SLICE-1",
+    "kind": "beat-data-desk",
+    "seat": {
+      "slug": "elliot-marbury",
+      "name": "Elliot Marbury",
+      "popid": "POP-00166",
+      "desk": "sports",
+      "domain": "data-desk",
+      "builder": "buildMarburySlice.js"
+    },
+    "hood": null,
+    "pulse": {
+      "className": "beat-data-desk",
+      "score": 100,
+      "label": "Eric Taveras — 7 seasons on the dossier, 2041 the latest | hitter density memo, multi-year",
+      "hood": null,
+      "source": "output/player_truesource_mirror.json Eric Taveras @C115"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "Eric Taveras — 7 seasons on the dossier, 2041 the latest | hitter density memo, multi-year — what the line proves, on what sample, and what would disprove it",
+      "hookLine": "Eric Taveras's 2041 line against 6 earlier seasons and 1 peer.",
+      "anchorFacts": [
+        "Eric Taveras — 2B, Athletics; 7 seasons on the dossier",
+        "Eric Taveras 2041 ATH: 138 G, 555 AB, 164 H, 54 HR, 124 RBI, 36 BB, 81 SO, 2 SB, AVG .295, OBP .339, SLG .638",
+        "Eric Taveras 2040 TB: 146 G, 582 AB, 138 H, 31 HR, 92 RBI, 48 BB, 132 SO, 5 SB, AVG .237, OBP .300, SLG .459",
+        "Eric Taveras 2039 TOT: 152 G, 606 AB, 150 H, 30 HR, 84 RBI, 49 BB, 122 SO, 7 SB, AVG .248, OBP .307, SLG .447",
+        "Eric Taveras 2038 CLE: 109 G, 424 AB, 102 H, 26 HR, 64 RBI, 35 BB, 87 SO, 6 SB, AVG .241, OBP .301, SLG .495",
+        "Eric Taveras 2037 TOT: 158 G, 627 AB, 154 H, 26 HR, 87 RBI, 49 BB, 141 SO, 7 SB, AVG .246, OBP .303, SLG .421",
+        "Eric Taveras 2036 BAL: 151 G, 596 AB, 134 H, 19 HR, 68 RBI, 47 BB, 144 SO, 10 SB, AVG .225, OBP .286, SLG .374",
+        "Eric Taveras 2041 rates (555 AB): one HR every 10.3 AB, one SO every 6.9 AB (worked from the season line)",
+        "Eric Taveras 2040 rates (582 AB): one HR every 18.8 AB, one SO every 4.4 AB (worked from the season line)",
+        "Eric Taveras 2039 rates (606 AB): one HR every 20.2 AB, one SO every 5.0 AB (worked from the season line)",
+        "Eric Taveras 2038 rates (424 AB): one HR every 16.3 AB, one SO every 4.9 AB (worked from the season line)",
+        "Eric Taveras 2037 rates (627 AB): one HR every 24.1 AB, one SO every 4.4 AB (worked from the season line)",
+        "Eric Taveras 2036 rates (596 AB): one HR every 31.4 AB, one SO every 4.1 AB (worked from the season line)",
+        "Peer — Sidney Tumolo (2B, Athletics) 2041 ATH: 23 G, 88 AB, 28 H, 3 HR, 12 RBI, 2 BB, 6 SO, 2 SB, AVG .318, OBP .344, SLG .511",
+        "Peer — Sidney Tumolo 2041 rates (88 AB): one HR every 29.3 AB, one SO every 14.7 AB (worked from the season line)",
+        "This cycle (feed, off-season): Eric Taveras/3 EP/20 PTS/1170 CR/5th"
+      ],
+      "evidence": [
+        {
+          "text": "Eric Taveras — 2B, Athletics; 7 seasons on the dossier",
+          "src": "output/player_truesource_mirror.json Eric Taveras"
+        },
+        {
+          "text": "Eric Taveras 2041 ATH: 138 G, 555 AB, 164 H, 54 HR, 124 RBI, 36 BB, 81 SO, 2 SB, AVG .295, OBP .339, SLG .638",
+          "src": "output/player_truesource_mirror.json Eric Taveras"
+        },
+        {
+          "text": "Eric Taveras 2040 TB: 146 G, 582 AB, 138 H, 31 HR, 92 RBI, 48 BB, 132 SO, 5 SB, AVG .237, OBP .300, SLG .459",
+          "src": "output/player_truesource_mirror.json Eric Taveras"
+        },
+        {
+          "text": "Eric Taveras 2039 TOT: 152 G, 606 AB, 150 H, 30 HR, 84 RBI, 49 BB, 122 SO, 7 SB, AVG .248, OBP .307, SLG .447",
+          "src": "output/player_truesource_mirror.json Eric Taveras"
+        },
+        {
+          "text": "Eric Taveras 2038 CLE: 109 G, 424 AB, 102 H, 26 HR, 64 RBI, 35 BB, 87 SO, 6 SB, AVG .241, OBP .301, SLG .495",
+          "src": "output/player_truesource_mirror.json Eric Taveras"
+        },
+        {
+          "text": "Eric Taveras 2037 TOT: 158 G, 627 AB, 154 H, 26 HR, 87 RBI, 49 BB, 141 SO, 7 SB, AVG .246, OBP .303, SLG .421",
+          "src": "output/player_truesource_mirror.json Eric Taveras"
+        },
+        {
+          "text": "Eric Taveras 2036 BAL: 151 G, 596 AB, 134 H, 19 HR, 68 RBI, 47 BB, 144 SO, 10 SB, AVG .225, OBP .286, SLG .374",
+          "src": "output/player_truesource_mirror.json Eric Taveras"
+        },
+        {
+          "text": "Eric Taveras 2041 rates (555 AB): one HR every 10.3 AB, one SO every 6.9 AB (worked from the season line)",
+          "src": "output/player_truesource_mirror.json Eric Taveras"
+        },
+        {
+          "text": "Eric Taveras 2040 rates (582 AB): one HR every 18.8 AB, one SO every 4.4 AB (worked from the season line)",
+          "src": "output/player_truesource_mirror.json Eric Taveras"
+        },
+        {
+          "text": "Eric Taveras 2039 rates (606 AB): one HR every 20.2 AB, one SO every 5.0 AB (worked from the season line)",
+          "src": "output/player_truesource_mirror.json Eric Taveras"
+        },
+        {
+          "text": "Eric Taveras 2038 rates (424 AB): one HR every 16.3 AB, one SO every 4.9 AB (worked from the season line)",
+          "src": "output/player_truesource_mirror.json Eric Taveras"
+        },
+        {
+          "text": "Eric Taveras 2037 rates (627 AB): one HR every 24.1 AB, one SO every 4.4 AB (worked from the season line)",
+          "src": "output/player_truesource_mirror.json Eric Taveras"
+        },
+        {
+          "text": "Eric Taveras 2036 rates (596 AB): one HR every 31.4 AB, one SO every 4.1 AB (worked from the season line)",
+          "src": "output/player_truesource_mirror.json Eric Taveras"
+        },
+        {
+          "text": "Peer — Sidney Tumolo (2B, Athletics) 2041 ATH: 23 G, 88 AB, 28 H, 3 HR, 12 RBI, 2 BB, 6 SO, 2 SB, AVG .318, OBP .344, SLG .511",
+          "src": "output/player_truesource_mirror.json Sidney Tumolo"
+        },
+        {
+          "text": "Peer — Sidney Tumolo 2041 rates (88 AB): one HR every 29.3 AB, one SO every 14.7 AB (worked from the season line)",
+          "src": "output/player_truesource_mirror.json Sidney Tumolo"
+        },
+        {
+          "text": "This cycle (feed, off-season): Eric Taveras/3 EP/20 PTS/1170 CR/5th",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C115"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": {
+        "state": "DOSSIER",
+        "vs": null
+      },
+      "hooks": [],
+      "note": "subject is on this cycle's feed",
+      "pageVoices": [],
+      "roomIsYours": "the order the columns are read in, which season is the hinge, what the peer band makes ordinary or strange"
+    },
+    "citizens": [
+      {
+        "popid": "POP-00597",
+        "name": "Eric Taveras",
+        "role": "2B, Athletics",
+        "neighborhood": null,
+        "business": null,
+        "profile": "Eric Taveras — 2B, Athletics",
+        "why": "dossier on file (player_truesource_mirror)"
+      }
+    ],
+    "pointers": [
+      "output/player_truesource_mirror.json Eric Taveras @C115"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Elliot Marbury",
+    "popid": "POP-00166",
+    "text": "The memo sits on my desk with seven seasons of Eric Taveras and one name next to his at second base. The 2041 line is the hinge — 54 homers in 555 at-bats, a rate of one every 10.3. The six seasons before it never got below 16.3, and 2036 was 31.4. The strikeout rate moved the other way: 81 in 2041, one every 6.9 at-bats, against a career band of 4.1 to 5.0. The peer, Sidney Tumolo, had 23 games and 88 at-bats, a tiny sample that makes the comparison almost useless for proving anything about Taveras. What the numbers carry is one hard claim: the 2041 power spike came with a strikeout drop, and that combination has no precedent in his own history. The sample is 555 at-bats, one season. That i",
+    "plan": {
+      "chase": "The memo sits on my desk with seven seasons of Eric Taveras and one name next to his at second base. The 2041 line is the hinge — 54 homers in 555 at-bats, a rate of one every 10.3. The six seasons before it never got below 16.3, and 2036 was 31.4. The strikeout rate moved the other way: 81 in 2041, one every 6.9 at-bats, against a career band of 4.1 to 5.0. The peer, Sidney Tumolo, had 23 games and 88 at-bats, a tiny sample that makes the comparison almost useless for proving anything about Taveras. What the numbers carry is one hard claim: the 2041 power spike came with a strikeout drop, and that combination has no precedent in his own history. The sample is 555 at-bats, one season. That i",
+      "focus": "Whether Eric Taveras's 2041 power and strikeout rates represent a sustainable change or a single-season outlier, measured against his own six prior seasons and the thin peer sample.",
+      "why": "The memo's value is in the contrast: one season of 54 homers and 81 strikeouts against six seasons of 19-31 homers and 132-144 strikeouts. The strikeout rate dropping from 4.4 per at-bat to 6.9 is the more telling number, because power can fluctuate but contact skill is usually stable. If the A's are building around Taveras, they need to know which line is real.",
+      "checks": [
+        "Confirm the 2041 season is complete and not a partial-year artifact.",
+        "Verify the strikeout rate calculation: 555 at-bats divided by 81 strikeouts equals 6.85, rounded to 6.9.",
+        "Check whether the 2041 ballpark or league context changed in a way that could explain the power spike.",
+        "Compare Taveras's 2041 batted-ball data, if available, to prior seasons for exit velocity or launch angle shifts.",
+        "Review the A's internal depth chart at second base to see if Tumolo's 23-game sample is being treated as a real alternative."
+      ],
+      "targets": [],
+      "interpretation": "The numbers suggest two possible Taverases: the one who struck out every 4.1-5.0 at-bats and hit 19-31 homers, and the one who struck out every 6.9 at-bats and hit 54. The second version is better in every way that matters for a second baseman, but it exists in one season. The peer comparison is too small to anchor anything. The honest read is that 2041 is either a breakout or a career year, and the memo cannot tell which. The next season's strikeout rate is the tell.",
+      "unverifiedLead": [
+        "The A's front office may have internal batted-ball data on Taveras that explains the 2041 power jump.",
+        "Taveras's 2041 season may have coincided with a change in his approach or swing that is not captured in the box-score line.",
+        "The organization's decision to feature Taveras in the off-season feed could signal they are planning to extend or build around him."
+      ]
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "A's | roster-move | (off-season) | Vinnie Keane",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 115; rendered: world_summary_c115.md \"## Sports\" C115 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00001"
+      ]
+    },
+    {
+      "label": "A's | community-outreach | (off-season) | Darrin Davis, Rafael Montez",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 115; rendered: world_summary_c115.md \"## Sports\" C115 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00021",
+        "POP-00136"
+      ]
+    },
+    {
+      "label": "A's | player-feature | (off-season) | Eric Taveras, Vinnie Keane",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 115; rendered: world_summary_c115.md \"## Sports\" C115 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00597",
+        "POP-00001"
+      ]
+    },
+    {
+      "label": "A's | rumor | (off-season) | Jose Colon, Sergio Aybar, Marco Fabregas, Mike Paulson",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 115; rendered: world_summary_c115.md \"## Sports\" C115 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00599",
+        "POP-00078",
+        "POP-00060",
+        "POP-00527"
+      ]
+    },
+    {
+      "label": "Oaks | player-feature | (early-season) | Harry Hayward, Wilson Shepard",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 115; rendered: world_summary_c115.md \"## Sports\" C115 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01223",
+        "POP-01022"
+      ]
+    }
+  ],
+  "laneEntries": 12,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-11T14:51:19.887Z"
+}

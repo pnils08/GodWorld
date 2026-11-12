@@ -1,0 +1,23 @@
+{
+  "model": "anthropic/claude-sonnet-5.5",
+  "calls": [
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Initiative_Tracker",
+        "match": "Apprenticeship"
+      },
+      "resultChars": 2115,
+      "resultHead": "InitiativeID | Name | Type | Status | Budget | VoteRequirement | VoteCycle | Projection | LeadFaction | OppositionFaction | SwingVoter | Outcome | SwingVoter2 | SwingVoter2Lean | Consequences | Notes | LastUpdated | AffectedNeighborhoods | PolicyDomain | MayoralAction | MayoralActionCycle | VetoReason | OverrideVoteCycle | OverrideOutcome | ImplementationPhase | MilestoneNotes | NextScheduledAction | NextActionCycle | Proposer | ProposingOffice | ProposedCycle | Stage | StageBaseline | LastStageChangeCycle | LastWorkCycle | LastWorkSeat | PriorPhase | StageHold | BudgetTotal | BudgetRemaining "
+    },
+    {
+      "tool": "canon_search",
+      "input": {
+        "query": "Youth Apprenticeship Pipeline"
+      },
+      "resultChars": 1747,
+      "resultHead": "145 file(s) matched on disk for 'Youth Apprenticeship Pipeline':\n— output/cron-compare/staged/culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.staged.md: Tobert Lewis, a Civil Rights Attorney, moved into a place of his own Downtown in C115, renting. In C113 the ledger recorded that his last debt had cleared and that it finally read clean. In C114 he badged into the Baylig…\n— output/cron-compare/staged/civic_c115_luis-navarro_packet-v2_anthropic-claude-sonnet-5-5.staged.md: # Three Cycles Without a Move: The Youth Apprenticeship Pipeline\n— output/beats/Story_Seed_Deck.jsonl (new"
+    }
+  ],
+  "ranAt": "2026-11-11T05:18:35.396Z"
+}

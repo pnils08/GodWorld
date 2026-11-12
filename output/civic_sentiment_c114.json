@@ -1,0 +1,9 @@
+{
+  "cycle": 114,
+  "civicVoiceSentiment": 0.554,
+  "statementsScored": 26,
+  "initiativesScored": 9,
+  "decisionsScored": 9,
+  "derivation": "statement-weighted across cascade (G-R3 S246)",
+  "timestamp": "2026-11-01T23:32:30.891Z"
+}

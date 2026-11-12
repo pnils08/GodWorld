@@ -1,0 +1,70 @@
+{
+  "date": "2026-11-03",
+  "stage": "angle",
+  "results": [
+    {
+      "name": "Luis Navarro",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "angle",
+        "capHits": 0
+      }
+    },
+    {
+      "name": "Sgt. Rachel Torres",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "angle",
+        "capHits": 0
+      }
+    },
+    {
+      "name": "Angela Reyes",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "angle",
+        "capHits": 0
+      }
+    },
+    {
+      "name": "Selena Grant",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "angle",
+        "capHits": 0
+      }
+    },
+    {
+      "name": "Tamsin Pruitt",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "angle",
+        "capHits": 0
+      }
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": true,
+      "checks": {
+        "stage": "angle",
+        "capHits": 0
+      }
+    }
+  ],
+  "checkTotals": {
+    "seats": 6,
+    "toolSeats": 0,
+    "capHits": 0,
+    "thin": 0,
+    "verbatim": 0,
+    "graded": 0,
+    "gradeSum": 0
+  },
+  "ranAt": "2026-11-03T12:17:40.337Z"
+}

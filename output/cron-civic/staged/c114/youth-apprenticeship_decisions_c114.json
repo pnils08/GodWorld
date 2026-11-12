@@ -1,0 +1,18 @@
+{
+  "initiative": "INIT-007",
+  "initiativeId": "INIT-007",
+  "cycle": 114,
+  "primaryVoice": "Mayor gavel (mayor_gavel-005)",
+  "consolidatedFrom": [
+    "STMT-114-council_d1-004 (Carter D1 — Oakland Youth Apprenticeship Pipeline — placement gap analysis)",
+    "STMT-114-council_d3-003 (Delgado D3 — Oakland Youth Apprenticeship Pipeline — placement gap analysis and program ad...)",
+    "STMT-114-council_d5-002 (Rivers D5 — Oakland Youth Apprenticeship Pipeline — placement gap analysis and program ad...)",
+    "STMT-114-mayor_gavel-005 (Mayor gavel — INIT-007 placement-gap analysis and program adjustment)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-007",
+    "MilestoneNotes": "C114: Placement-gap analysis and adjustment plan directed for publication, with explicit West Oakland and Fruitvale review.",
+    "NextScheduledAction": "Publish placement-gap analysis and program adjustment plan",
+    "NextActionCycle": 114
+  }
+}

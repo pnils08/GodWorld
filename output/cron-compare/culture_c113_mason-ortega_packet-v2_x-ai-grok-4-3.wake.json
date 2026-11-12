@@ -1,0 +1,57 @@
+{
+  "mode": "wake-write",
+  "desk": "culture",
+  "cycle": "113",
+  "provider": "openrouter",
+  "model": "x-ai/grok-4.3",
+  "configuredWriterModel": "x-ai/grok-4.3",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "mason-ortega",
+  "byline": {
+    "name": "Mason Ortega",
+    "popid": "POP-00160",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 23,
+  "quotesLanded": 4,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [],
+  "toolCalls": 0,
+  "wordCount": 528,
+  "targetWords": "evidence-bounded",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": false,
+    "purposeMet": true,
+    "inTarget": false,
+    "inTargetBy": "judge",
+    "words": 528,
+    "short": "The closing does not name the worker or operating account still needed, and the piece falls short of the target word count.",
+    "score": 2,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "35bd257fa1c6f440f62ee7368526df571ffca97a58c6ab49478b8599fc7ed23f",
+    "costUsd": 0.0015
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 2/4 — The closing does not name the worker or operating account still needed, and the piece falls short of the target word count."
+  },
+  "article": "output/cron-compare/staged/culture_c113_mason-ortega_packet-v2_x-ai-grok-4-3.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "nv'] }\n{\n  \"popId\": \"POP-00160\",\n  \"name\": \"Mason Ortega\",\n  \"recorded\": true,\n  \"text\": \"filed: At OakHouse in Rockridge, dishwasher Matty Lipo arrives before the doors open and sets up the statio\"\n}"
+  },
+  "ranAt": "2026-10-30T23:15:52.713Z",
+  "dispositionReconciledAt": "2026-10-31T17:00:02.568Z"
+}

@@ -1,0 +1,38 @@
+{
+  "model": "x-ai/grok-4.3",
+  "calls": [
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Adash Stanley"
+      },
+      "resultChars": 3235,
+      "resultHead": "[C100 · edition] thing that jumps out when you watch the tape of Adash Stanley dropping twenty-six points against the Detroit Pistons last season isn't the scoring itself. It is the geometry of how he arrives there. He is nineteen years old, an undrafted six-foot-two guard out of Kraków, Poland, and he plays like a man perpetually out of time. In the third quarter of that Detroit game, Stanley drove hard to his left, missed a contested floater, fought through his own rebound against two seven-footers, tipped the ball to the perimet\n[earlier · archive] END SUPPLEMENTAL EDITION — ADASH STANLEY O"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Dillon Brooks"
+      },
+      "resultChars": 3260,
+      "resultHead": "[C99 · edition] OAKLAND OAKS INAUGURAL OFFSEASON: THE VILLAIN BLUEPRINT - Dillon Brooks — Forward, Oakland Oaks CITIZEN USAGE LOG [SECTION] OAKLAND OAKS INAUGURAL OFFSEASON: THE VILLAIN BLUEPRINT - Mike Paulson (POP-00527) - mentioned as architect of the defense and trades - Wilson Shepard (POP-01022) - mentioned as head coach implementing the 99-hustle system - Adash Stanley (POP-01023) - mentioned as the $75M free agency signing - AJ Dybantsa - introduced as the #1 overall pick and franchise engine - Dame Sarr - introduced as th\n[C114 · daily · Talia Finch] # The Room Is Starting to Believe "
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Austin Reaves"
+      },
+      "resultChars": 3302,
+      "resultHead": "[C110 · daily · Selena Grant] # The Oaks’ First Board Read Is a Blank One Selena Grant | Bay Tribune Sports Austin Reaves finished with 17 points and five assists, while AJ Dybantsa had 22 points and six rebounds. The Oaks still lost their fourth straight preseason game, leaving the expansion franchise at 0-4. That result established the first problem with reading this roster through individual production alone. The scoring lines are present. The record is not. Reaves supplied a creation line, and Dybantsa supplied the larger scoring total, but\n[C112 · daily · Simon Leary] # The Weight of One "
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Harry Hayward"
+      },
+      "resultChars": 550,
+      "resultHead": "[C114 · daily · Selena Grant] Harry Hayward, a second-round rookie, scored eight points, collected four rebounds and went three for four from the field, including two for two from three-point range, in 13 minutes. That is a compact line, but it gives the franchise something an expansion team needs: a young player whose usefulness can be measured without requiring the entire roster to be remade around him. Hayward is shaping up as a solid rotation piece, and the 13-minute sample is enough to identify the possibility, not enough to settle it. The"
+    }
+  ],
+  "ranAt": "2026-11-12T00:19:24.057Z"
+}

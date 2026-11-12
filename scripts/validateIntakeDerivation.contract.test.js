@@ -75,17 +75,20 @@ console.log('\nTest 4: snapshot built via buildLedgerFreqSnapshot');
     /getRawSheetData\(['"]Simulation_Ledger['"]\)/.test(source));
 }
 
-console.log('\nTest 5: plan fixture present + 8-field derivation contract');
+console.log('\nTest 5: plan fixture present + 6-field derivation contract (engine.339: no family fields)');
 {
   // Fixture rows from plan §Validation fixture
   for (const popid of ['POP-99001', 'POP-99002', 'POP-99003']) {
     assert(`fixture includes ${popid}`, source.includes(popid));
   }
-  // 8 required derived fields
+  // 6 required derived fields; marital status and child counts are never derived (engine.339)
   for (const field of ['RoleType', 'EducationLevel', 'Gender', 'YearsInCareer',
-                       'DebtLevel', 'NetWorth', 'MaritalStatus', 'NumChildren']) {
+                       'DebtLevel', 'NetWorth']) {
     assert(`required field '${field}'`, source.includes(`'${field}'`));
   }
+  assert("'MaritalStatus' is not a required derived field", !/required = \[[^\]]*'MaritalStatus'/.test(source));
+  assert("'NumChildren' is not a required derived field", !/required = \[[^\]]*'NumChildren'/.test(source));
+  assert('the sweep prints no marital or child distribution', !/\bms\b|\bnc\b/.test(source.replace(/\/\/.*$/gm, '')));
 }
 
 console.log('\nTest 6: all 5 acceptance gates referenced');
@@ -113,10 +116,7 @@ console.log('\nTest 8: Gate 3 — determinism (same seed → same values)');
 
 console.log('\nTest 9: Gate 4 — distribution non-uniformity');
 {
-  // Expects ≥4 distinct MaritalStatus + NumChildren + ≥15 distinct RoleTypes
-  assert("MaritalStatus distinct ≥ 4 expectation",
-    /MaritalStatus only.*\$\{Object\.keys\(ms\)\.length\}/.test(source) ||
-    /\.keys\(ms\)\.length\s*<\s*4/.test(source));
+  // Expects ≥15 distinct RoleTypes (engine.339: no marital-status or child-count diversity gate)
   assert("RoleType distinct ≥ 15 expectation",
     /distinctRoles\s*<\s*15/.test(source));
 }

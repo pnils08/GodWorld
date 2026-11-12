@@ -1,0 +1,17 @@
+{
+  "initiative": "INIT-009",
+  "initiativeId": "INIT-009",
+  "cycle": 114,
+  "primaryVoice": "Mayor gavel (mayor_gavel-007)",
+  "consolidatedFrom": [
+    "STMT-114-mayor_gavel-007 (Mayor gavel — INIT-009 full-council decision with Chen-Vega conditions)",
+    "STMT-114-stabilization_fund-003 (Webb — Commercial Stabilization for Grand Lake — recorded council decision with cond...)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-009",
+    "ImplementationPhase": "vote-ready",
+    "MilestoneNotes": "C114: Mayor backed YES and requested a recorded full-council decision with all Chen-Vega milestone and audit conditions intact.",
+    "NextScheduledAction": "Recorded full-council decision",
+    "NextActionCycle": 114
+  }
+}

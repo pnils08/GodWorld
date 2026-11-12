@@ -1,0 +1,62 @@
+{
+  "mode": "wake-write",
+  "desk": "culture",
+  "cycle": "115",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "ines-sorensen",
+  "byline": {
+    "name": "Ines Sorensen",
+    "popid": "POP-01211",
+    "beatDomain": "COMMUNITY"
+  },
+  "laneEntries": 30,
+  "quotesLanded": 3,
+  "disposition": "staged",
+  "rheaPass": null,
+  "rheaFlagCount": null,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "canon_recall",
+    "canon_recall",
+    "canon_recall",
+    "canon_recall",
+    "canon_recall"
+  ],
+  "toolCalls": 5,
+  "wordCount": 475,
+  "targetWords": "300-600",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "purposeMet": false,
+    "inTarget": true,
+    "inTargetBy": "code floor 300",
+    "words": 475,
+    "short": "The piece puts names and reporter commentary before citizen quotes rather than leading with their lines and keeping the frame minimal.",
+    "score": 2,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "scoredWithoutRhea": true,
+    "draftSha256": "0ee80226948da090e77b4a4dc296f95d9788848a092c78c102512691e65c2bc4"
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 2/3 — The piece puts names and reporter commentary before citizen quotes rather than leading with their lines and keeping the frame minimal."
+  },
+  "article": "output/cron-compare/staged/culture_c115_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": " (33) from ../.config/godworld/.env // tip: ⌘ suppress logs { quiet: true }\n{\n  \"popId\": \"POP-01211\",\n  \"name\": \"Ines Sorensen\",\n  \"recorded\": true,\n  \"text\": \"filed: The Name Nobody Said in Uptown\"\n}"
+  },
+  "ranAt": "2026-11-12T00:24:56.549Z"
+}

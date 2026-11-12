@@ -1,0 +1,1131 @@
+{
+  "stage": "report",
+  "desk": "sports",
+  "cycle": "114",
+  "persona": "p-slayer",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "P Slayer",
+    "popid": "POP-00008"
+  },
+  "assignment": {
+    "story": {
+      "ref": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+      "label": "The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+      "kind": "loss",
+      "angle": "The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+      "hookLine": "Something the stands feel that the release will not say.",
+      "hood": "San Antonio",
+      "team": "Oaks",
+      "eventKind": "game-result",
+      "popids": [
+        "POP-01023",
+        "POP-01027"
+      ],
+      "citizens": [
+        "Adash Stanley (POP-01023)",
+        "Austin Reaves (POP-01027)",
+        "Wendell Carter Jr",
+        "In Indiana"
+      ],
+      "pulseClass": "loss",
+      "pulseScore": 58,
+      "fanCharge": "dread",
+      "bagModeIds": [
+        3,
+        4,
+        7
+      ]
+    }
+  },
+  "angle": "output/cron-compare/sports_c114_p-slayer_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 4,
+  "quotes": [
+    {
+      "pop": "POP-01027",
+      "name": "Austin Reaves",
+      "quote": "To be honest, I'm still feeling the sting of that loss. We were down 20 and fought our way back, but it feels like we left it on the road. I'm proud of how we responded, though. We can't let one loss get us down.",
+      "disp": "steady, hard to shake; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, I'm still feeling the sting of that loss. We were down 20 and fought our way back, but it feels like we left it on the road. I'm proud of how we responded, though. We can't let one loss get us down.\",\n  \"fact_ids\": [\"F-40f28e28bf10\", \"F-136db956bbb3\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-40f28e28bf10",
+          "F-136db956bbb3"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01027-dc38e42541",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, I'm still feeling the sting of that loss. We were down 20 and fought our way back, but it feels like we left it on the road. I'm proud of how we responded, though. We can't let one loss get us down."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01027",
+          "name": "Austin Reaves",
+          "role": "SG / The Oaks",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "P Slayer",
+          "question": "What was your reaction to the Oaks' loss to the Pacers? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "loss",
+          "hood": "San Antonio",
+          "focus": "The Oaks' loss to the Pacers and fan reaction",
+          "src": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Austin Reaves — SG / The Oaks",
+          "evidence": [
+            {
+              "id": "EV-8388774943",
+              "src": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+              "text": "Something the stands feel that the release will not say."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Stats (feed): Adash Stanley/19PTS/5REB/4ASST/5-11 3PT, Austin Reaves/19PTS/6REB/7ASST/0TO, AJ Dybantsa/15PTS/5REB, Wendell Carter Jr/10PTS/7REB/5-6FG, T. Jerome/10PTS/5ASST",
+            "src": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+            "id": "F-43e1316526a0"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+            "src": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+            "id": "F-40f28e28bf10"
+          },
+          {
+            "t": "FACT",
+            "text": "Something the stands feel that the release will not say.",
+            "src": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+            "id": "F-705223201a30"
+          },
+          {
+            "t": "FACT",
+            "text": "StoryAngle (feed): The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+            "src": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+            "id": "F-c486b12d2137"
+          },
+          {
+            "t": "FACT",
+            "text": "Team record (feed): 4-1 · streak L1",
+            "src": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+            "id": "F-136db956bbb3"
+          },
+          {
+            "t": "FACT",
+            "text": "Event: Oaks — game-result (early-season)",
+            "src": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+            "id": "F-6ac4417e7b49"
+          },
+          {
+            "t": "FACT",
+            "text": "Austin Reaves — SG / The Oaks",
+            "src": "Simulation_Ledger profile for POP-01027",
+            "id": "F-d653907c94cf"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00722",
+      "name": "Daniel Cloak",
+      "quote": "Yeah, that's still how I feel. The Oaks trying to be part of the community is a positive step. I was at the community feedback session for the Fruitvale Transit Hub, and it felt like they were really listening. Maybe the Oaks can be like that too, you know, more involved locally.",
+      "disp": "draws people in, deep with them; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Yeah, that's still how I feel. The Oaks trying to be part of the community is a positive step. I was at the community feedback session for the Fruitvale Transit Hub, and it felt like they were really listening. Maybe the Oaks can be like that too, you know, more involved locally.\",\n  \"fact_ids\": [\"F-d76c043730bc\", \"F-3465a8f0a83f\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-d76c043730bc",
+          "F-3465a8f0a83f"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00722-e47b51200b",
+        "authoredQuote": true,
+        "publishableQuote": "Yeah, that's still how I feel. The Oaks trying to be part of the community is a positive step. I was at the community feedback session for the Fruitvale Transit Hub, and it felt like they were really listening. Maybe the Oaks can be like that too, you know, more involved locally."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00722",
+          "name": "Daniel Cloak",
+          "role": "Bakery Worker",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "P Slayer",
+          "question": "Your own page at C110 says: \"I still feel that way about the Oaks, they're trying to reach out and be part of the community, and that's something positive\". Is that still how you see Oaks? Speak only from that and your own reaction."
+        },
+        "signal": {
+          "kind": "loss",
+          "hood": "San Antonio",
+          "focus": "The Oaks' loss to the Pacers and fan reaction",
+          "src": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Daniel Cloak — Bakery Worker",
+          "evidence": [
+            {
+              "id": "EV-PAGE-f13b0eb464",
+              "src": "cp-POP-00722-c110-PRESS",
+              "text": "I still feel that way about the Oaks, they're trying to reach out and be part of the community, and that's something positive."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "INTERPRETATION",
+            "text": "I still feel that way about the Oaks, they're trying to reach out and be part of the community, and that's something positive.",
+            "src": "cp-POP-00722-c110-PRESS",
+            "id": "F-d76c043730bc"
+          },
+          {
+            "t": "FACT",
+            "text": "Daniel Cloak — Bakery Worker",
+            "src": "Simulation_Ledger profile for POP-00722",
+            "id": "F-3465a8f0a83f"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01023",
+      "name": "Adash Stanley",
+      "quote": "The loss stings, but you could feel the energy in the stands still. We came back from 20 down, so there's a lot to build on. The guys fought hard, and that's what matters.",
+      "disp": "steady, hard to shake; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"The loss stings, but you could feel the energy in the stands still. We came back from 20 down, so there's a lot to build on. The guys fought hard, and that's what matters.\",\n  \"fact_ids\": [\"F-40f28e28bf10\", \"F-705223201a30\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-40f28e28bf10",
+          "F-705223201a30"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01023-8a6f420af0",
+        "authoredQuote": true,
+        "publishableQuote": "The loss stings, but you could feel the energy in the stands still. We came back from 20 down, so there's a lot to build on. The guys fought hard, and that's what matters."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01023",
+          "name": "Adash Stanley",
+          "role": "PG / The Oaks",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "P Slayer",
+          "question": "What have you seen, felt, or understood about \"The Oaks' loss to the Pacers and fan reaction\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "loss",
+          "hood": "San Antonio",
+          "focus": "The Oaks' loss to the Pacers and fan reaction",
+          "src": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Adash Stanley — PG / The Oaks",
+          "evidence": [
+            {
+              "id": "EV-030fb17cb1",
+              "src": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+              "text": "Something the stands feel that the release will not say."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Stats (feed): Adash Stanley/19PTS/5REB/4ASST/5-11 3PT, Austin Reaves/19PTS/6REB/7ASST/0TO, AJ Dybantsa/15PTS/5REB, Wendell Carter Jr/10PTS/7REB/5-6FG, T. Jerome/10PTS/5ASST",
+            "src": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+            "id": "F-43e1316526a0"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+            "src": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+            "id": "F-40f28e28bf10"
+          },
+          {
+            "t": "FACT",
+            "text": "Something the stands feel that the release will not say.",
+            "src": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+            "id": "F-705223201a30"
+          },
+          {
+            "t": "FACT",
+            "text": "StoryAngle (feed): The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+            "src": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+            "id": "F-c486b12d2137"
+          },
+          {
+            "t": "FACT",
+            "text": "Team record (feed): 4-1 · streak L1",
+            "src": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+            "id": "F-136db956bbb3"
+          },
+          {
+            "t": "FACT",
+            "text": "Event: Oaks — game-result (early-season)",
+            "src": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+            "id": "F-6ac4417e7b49"
+          },
+          {
+            "t": "FACT",
+            "text": "Adash Stanley — PG / The Oaks",
+            "src": "Simulation_Ledger profile for POP-01023",
+            "id": "F-1164a6e4fd0d"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": "To be honest, the Oaks' loss still has me a bit down, but I'm trying not to overthink it. I mean, I'm a baker, not a stats expert. I just enjoy watching the games and cheering them on. The A's storming back from 20 down was thrilling, but that final score... it's tough. I guess that's just how it goes sometimes.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; warm, tender with people; curious, open to new things; unshakable, calm under anything; devoted, family is everything; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, the Oaks' loss still has me a bit down, but I'm trying not to overthink it. I mean, I'm a baker, not a stats expert. I just enjoy watching the games and cheering them on. The A's storming back from 20 down was thrilling, but that final score... it's tough. I guess that's just how it goes sometimes.\",\n  \"fact_ids\": [\"F-ac917bf77b5f\", \"F-1c49e2ddc864\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-ac917bf77b5f",
+          "F-1c49e2ddc864"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00170-d8dba6cf5a",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, the Oaks' loss still has me a bit down, but I'm trying not to overthink it. I mean, I'm a baker, not a stats expert. I just enjoy watching the games and cheering them on. The A's storming back from 20 down was thrilling, but that final score... it's tough. I guess that's just how it goes sometimes."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00170",
+          "name": "Melton Neilon",
+          "role": "Sourdough Baker",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "P Slayer",
+          "question": "Your own page at C110 says: \"Honestly, I still don't really know what to make of the Oaks analysis\". Is that still how you see Oaks? Speak only from that and your own reaction."
+        },
+        "signal": {
+          "kind": "loss",
+          "hood": "San Antonio",
+          "focus": "The Oaks' loss to the Pacers and fan reaction",
+          "src": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Melton Neilon — Sourdough Baker",
+          "evidence": [
+            {
+              "id": "EV-PAGE-784f0f6bad",
+              "src": "cp-POP-00170-c110-PRESS",
+              "text": "Honestly, I still don't really know what to make of the Oaks analysis."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "INTERPRETATION",
+            "text": "Honestly, I still don't really know what to make of the Oaks analysis.",
+            "src": "cp-POP-00170-c110-PRESS",
+            "id": "F-ac917bf77b5f"
+          },
+          {
+            "t": "FACT",
+            "text": "Melton Neilon — Sourdough Baker",
+            "src": "Simulation_Ledger profile for POP-00170",
+            "id": "F-1c49e2ddc864"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-01027",
+      "name": "Austin Reaves",
+      "quote": "To be honest, I'm still feeling the sting of that loss. We were down 20 and fought our way back, but it feels like we left it on the road. I'm proud of how we responded, though. We can't let one loss get us down.",
+      "disp": "steady, hard to shake; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, I'm still feeling the sting of that loss. We were down 20 and fought our way back, but it feels like we left it on the road. I'm proud of how we responded, though. We can't let one loss get us down.\",\n  \"fact_ids\": [\"F-40f28e28bf10\", \"F-136db956bbb3\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-40f28e28bf10",
+          "F-136db956bbb3"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01027-dc38e42541",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, I'm still feeling the sting of that loss. We were down 20 and fought our way back, but it feels like we left it on the road. I'm proud of how we responded, though. We can't let one loss get us down."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01027",
+          "name": "Austin Reaves",
+          "role": "SG / The Oaks",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "P Slayer",
+          "question": "What was your reaction to the Oaks' loss to the Pacers? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "loss",
+          "hood": "San Antonio",
+          "focus": "The Oaks' loss to the Pacers and fan reaction",
+          "src": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Austin Reaves — SG / The Oaks",
+          "evidence": [
+            {
+              "id": "EV-8388774943",
+              "src": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+              "text": "Something the stands feel that the release will not say."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Stats (feed): Adash Stanley/19PTS/5REB/4ASST/5-11 3PT, Austin Reaves/19PTS/6REB/7ASST/0TO, AJ Dybantsa/15PTS/5REB, Wendell Carter Jr/10PTS/7REB/5-6FG, T. Jerome/10PTS/5ASST",
+            "src": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+            "id": "F-43e1316526a0"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+            "src": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+            "id": "F-40f28e28bf10"
+          },
+          {
+            "t": "FACT",
+            "text": "Something the stands feel that the release will not say.",
+            "src": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+            "id": "F-705223201a30"
+          },
+          {
+            "t": "FACT",
+            "text": "StoryAngle (feed): The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+            "src": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+            "id": "F-c486b12d2137"
+          },
+          {
+            "t": "FACT",
+            "text": "Team record (feed): 4-1 · streak L1",
+            "src": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+            "id": "F-136db956bbb3"
+          },
+          {
+            "t": "FACT",
+            "text": "Event: Oaks — game-result (early-season)",
+            "src": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+            "id": "F-6ac4417e7b49"
+          },
+          {
+            "t": "FACT",
+            "text": "Austin Reaves — SG / The Oaks",
+            "src": "Simulation_Ledger profile for POP-01027",
+            "id": "F-d653907c94cf"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00722",
+      "name": "Daniel Cloak",
+      "quote": "Yeah, that's still how I feel. The Oaks trying to be part of the community is a positive step. I was at the community feedback session for the Fruitvale Transit Hub, and it felt like they were really listening. Maybe the Oaks can be like that too, you know, more involved locally.",
+      "disp": "draws people in, deep with them; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Yeah, that's still how I feel. The Oaks trying to be part of the community is a positive step. I was at the community feedback session for the Fruitvale Transit Hub, and it felt like they were really listening. Maybe the Oaks can be like that too, you know, more involved locally.\",\n  \"fact_ids\": [\"F-d76c043730bc\", \"F-3465a8f0a83f\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-d76c043730bc",
+          "F-3465a8f0a83f"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00722-e47b51200b",
+        "authoredQuote": true,
+        "publishableQuote": "Yeah, that's still how I feel. The Oaks trying to be part of the community is a positive step. I was at the community feedback session for the Fruitvale Transit Hub, and it felt like they were really listening. Maybe the Oaks can be like that too, you know, more involved locally."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00722",
+          "name": "Daniel Cloak",
+          "role": "Bakery Worker",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "P Slayer",
+          "question": "Your own page at C110 says: \"I still feel that way about the Oaks, they're trying to reach out and be part of the community, and that's something positive\". Is that still how you see Oaks? Speak only from that and your own reaction."
+        },
+        "signal": {
+          "kind": "loss",
+          "hood": "San Antonio",
+          "focus": "The Oaks' loss to the Pacers and fan reaction",
+          "src": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Daniel Cloak — Bakery Worker",
+          "evidence": [
+            {
+              "id": "EV-PAGE-f13b0eb464",
+              "src": "cp-POP-00722-c110-PRESS",
+              "text": "I still feel that way about the Oaks, they're trying to reach out and be part of the community, and that's something positive."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "INTERPRETATION",
+            "text": "I still feel that way about the Oaks, they're trying to reach out and be part of the community, and that's something positive.",
+            "src": "cp-POP-00722-c110-PRESS",
+            "id": "F-d76c043730bc"
+          },
+          {
+            "t": "FACT",
+            "text": "Daniel Cloak — Bakery Worker",
+            "src": "Simulation_Ledger profile for POP-00722",
+            "id": "F-3465a8f0a83f"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01023",
+      "name": "Adash Stanley",
+      "quote": "The loss stings, but you could feel the energy in the stands still. We came back from 20 down, so there's a lot to build on. The guys fought hard, and that's what matters.",
+      "disp": "steady, hard to shake; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"The loss stings, but you could feel the energy in the stands still. We came back from 20 down, so there's a lot to build on. The guys fought hard, and that's what matters.\",\n  \"fact_ids\": [\"F-40f28e28bf10\", \"F-705223201a30\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-40f28e28bf10",
+          "F-705223201a30"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01023-8a6f420af0",
+        "authoredQuote": true,
+        "publishableQuote": "The loss stings, but you could feel the energy in the stands still. We came back from 20 down, so there's a lot to build on. The guys fought hard, and that's what matters."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01023",
+          "name": "Adash Stanley",
+          "role": "PG / The Oaks",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "P Slayer",
+          "question": "What have you seen, felt, or understood about \"The Oaks' loss to the Pacers and fan reaction\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "loss",
+          "hood": "San Antonio",
+          "focus": "The Oaks' loss to the Pacers and fan reaction",
+          "src": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Adash Stanley — PG / The Oaks",
+          "evidence": [
+            {
+              "id": "EV-030fb17cb1",
+              "src": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+              "text": "Something the stands feel that the release will not say."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Stats (feed): Adash Stanley/19PTS/5REB/4ASST/5-11 3PT, Austin Reaves/19PTS/6REB/7ASST/0TO, AJ Dybantsa/15PTS/5REB, Wendell Carter Jr/10PTS/7REB/5-6FG, T. Jerome/10PTS/5ASST",
+            "src": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+            "id": "F-43e1316526a0"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+            "src": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+            "id": "F-40f28e28bf10"
+          },
+          {
+            "t": "FACT",
+            "text": "Something the stands feel that the release will not say.",
+            "src": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+            "id": "F-705223201a30"
+          },
+          {
+            "t": "FACT",
+            "text": "StoryAngle (feed): The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+            "src": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+            "id": "F-c486b12d2137"
+          },
+          {
+            "t": "FACT",
+            "text": "Team record (feed): 4-1 · streak L1",
+            "src": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+            "id": "F-136db956bbb3"
+          },
+          {
+            "t": "FACT",
+            "text": "Event: Oaks — game-result (early-season)",
+            "src": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+            "id": "F-6ac4417e7b49"
+          },
+          {
+            "t": "FACT",
+            "text": "Adash Stanley — PG / The Oaks",
+            "src": "Simulation_Ledger profile for POP-01023",
+            "id": "F-1164a6e4fd0d"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": "To be honest, the Oaks' loss still has me a bit down, but I'm trying not to overthink it. I mean, I'm a baker, not a stats expert. I just enjoy watching the games and cheering them on. The A's storming back from 20 down was thrilling, but that final score... it's tough. I guess that's just how it goes sometimes.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; warm, tender with people; curious, open to new things; unshakable, calm under anything; devoted, family is everything; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, the Oaks' loss still has me a bit down, but I'm trying not to overthink it. I mean, I'm a baker, not a stats expert. I just enjoy watching the games and cheering them on. The A's storming back from 20 down was thrilling, but that final score... it's tough. I guess that's just how it goes sometimes.\",\n  \"fact_ids\": [\"F-ac917bf77b5f\", \"F-1c49e2ddc864\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-ac917bf77b5f",
+          "F-1c49e2ddc864"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00170-d8dba6cf5a",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, the Oaks' loss still has me a bit down, but I'm trying not to overthink it. I mean, I'm a baker, not a stats expert. I just enjoy watching the games and cheering them on. The A's storming back from 20 down was thrilling, but that final score... it's tough. I guess that's just how it goes sometimes."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00170",
+          "name": "Melton Neilon",
+          "role": "Sourdough Baker",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "P Slayer",
+          "question": "Your own page at C110 says: \"Honestly, I still don't really know what to make of the Oaks analysis\". Is that still how you see Oaks? Speak only from that and your own reaction."
+        },
+        "signal": {
+          "kind": "loss",
+          "hood": "San Antonio",
+          "focus": "The Oaks' loss to the Pacers and fan reaction",
+          "src": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Melton Neilon — Sourdough Baker",
+          "evidence": [
+            {
+              "id": "EV-PAGE-784f0f6bad",
+              "src": "cp-POP-00170-c110-PRESS",
+              "text": "Honestly, I still don't really know what to make of the Oaks analysis."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "INTERPRETATION",
+            "text": "Honestly, I still don't really know what to make of the Oaks analysis.",
+            "src": "cp-POP-00170-c110-PRESS",
+            "id": "F-ac917bf77b5f"
+          },
+          {
+            "t": "FACT",
+            "text": "Melton Neilon — Sourdough Baker",
+            "src": "Simulation_Ledger profile for POP-00170",
+            "id": "F-1c49e2ddc864"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-11-04T19:17:25.339Z"
+}

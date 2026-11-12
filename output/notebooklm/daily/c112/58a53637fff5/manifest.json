@@ -1,0 +1,60 @@
+{
+  "artifactClass": "NLM_DAILY_RUN",
+  "sourceVersion": "1.9",
+  "canonStatus": "NOT_CANON",
+  "cycle": 112,
+  "generatedAt": "2026-10-19T06:03:58.959Z",
+  "lastAttemptAt": "2026-10-19T06:03:58.959Z",
+  "hours": 36,
+  "packHash": "58a53637fff5a6bc3f5132da0c59a894a3f78c29a4ea445edf03a62471d40ca2",
+  "worldSummary": "output/world_summary_c112.md",
+  "citizenDigest": "output/citizen-day-digest.md",
+  "reports": [],
+  "flaggedReports": [],
+  "editionDay": false,
+  "firstMorning": true,
+  "routingShadow": {
+    "version": "NLM-DAILY-ROUTER/1",
+    "mode": "shadow",
+    "profile": "REPORTED_DAY",
+    "format": "deep_dive",
+    "length": "default",
+    "activationEligible": true,
+    "reportedDayThreshold": 1,
+    "sourceClasses": [
+      "WORLD_STATE",
+      "CITIZEN_DIGEST",
+      "ENGINE_CIVIC_SIGNAL"
+    ],
+    "reasonCodes": [
+      "RHEA_PASSED_0",
+      "FIRST_MORNING_OF_CYCLE",
+      "REPORTED_THRESHOLD_MET_1"
+    ],
+    "dispositionCounts": {
+      "passed": 0,
+      "rheaFlagged": 0,
+      "neverGated": 0
+    },
+    "fingerprint": "b0ddc8e2b54e739c62e7c123ac3b3ed08735e0d7f646b0d78e2ce36dda7130d4"
+  },
+  "newsroomPulse": {
+    "fingerprint": "d6db169c701c41d5b91bbbc6bda8c47787e797694eb60c538b8cc346b21f116f",
+    "counts": {
+      "angles": 0,
+      "asks": 0,
+      "fanoutAssignments": 0,
+      "w2Ready": 0,
+      "quotes": 0,
+      "passed": 0,
+      "rheaFlagged": 0,
+      "neverGated": 0,
+      "flagged": 0,
+      "pending": 0
+    },
+    "priorCompletedCycle": null
+  },
+  "archiveNotebookId": "417e2d29-4167-420f-a9cc-76fb6b2b7de2",
+  "newsroomNotebookId": "73cd50b5-4b8f-4329-bb42-0783c8d93763",
+  "dryRun": true
+}

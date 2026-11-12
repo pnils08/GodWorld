@@ -1,0 +1,133 @@
+{
+  "loggedAt": "2026-10-30T11:20:19.971Z",
+  "cycle": 113,
+  "writersWithFiles": [
+    "Anthony Raines",
+    "Hal Richmond",
+    "P Slayer",
+    "Simon Leary",
+    "Tanya Cruz",
+    "Selena Grant",
+    "Talia Finch"
+  ],
+  "rows": [
+    {
+      "n": 1,
+      "team": "Oaks",
+      "eventType": "game-result",
+      "eventTrigger": "hot-streak",
+      "snippet": "The Oaks win again behind a big game b",
+      "writers": [
+        "Anthony Raines",
+        "Hal Richmond",
+        "P Slayer",
+        "Simon Leary",
+        "Tanya Cruz",
+        "Selena Grant",
+        "Talia Finch"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 2,
+      "team": "Oaks",
+      "eventType": "game-result",
+      "eventTrigger": "hot-streak",
+      "snippet": "The Oaks remain sizzling hot after a w",
+      "writers": [
+        "Anthony Raines",
+        "Hal Richmond",
+        "P Slayer",
+        "Simon Leary",
+        "Tanya Cruz",
+        "Selena Grant",
+        "Talia Finch"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 3,
+      "team": "Oaks",
+      "eventType": "game-result",
+      "eventTrigger": "hot-streak",
+      "snippet": "The Oaks completly dismantle the Wizar",
+      "writers": [
+        "Anthony Raines",
+        "Hal Richmond",
+        "P Slayer",
+        "Simon Leary",
+        "Tanya Cruz",
+        "Selena Grant",
+        "Talia Finch"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 4,
+      "team": "A's",
+      "eventType": "rumor",
+      "eventTrigger": "hot-streak",
+      "snippet": "The Outfield squeeze for next season. ",
+      "writers": [
+        "Anthony Raines",
+        "Hal Richmond",
+        "P Slayer",
+        "Simon Leary",
+        "Tanya Cruz"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 5,
+      "team": "A's",
+      "eventType": "community-outreach",
+      "eventTrigger": "hot-streak",
+      "snippet": "Darrin Davis works with the Oakland Po",
+      "writers": [
+        "Anthony Raines",
+        "P Slayer",
+        "Simon Leary",
+        "Tanya Cruz"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 6,
+      "team": "A's",
+      "eventType": "rumor",
+      "eventTrigger": "hot-streak",
+      "snippet": "Mark Aitken sets for Free Agency , but",
+      "writers": [
+        "P Slayer",
+        "Simon Leary",
+        "Tanya Cruz"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    }
+  ],
+  "stranded": 0
+}

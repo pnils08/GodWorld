@@ -1,0 +1,120 @@
+[
+  {
+    "pop": "POP-01055",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01055\",\"name\":\"Jerome Pittman\",\"role\":\"Transit Hub D5 Intake Liaison\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Luis Navarro\",\"question\":\"What has Jerome Pittman seen regarding the Youth Apprenticeship Pipeline's stalled status, and does he have any knowledge of why it has not advanced in three cycles? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"anomaly\",\"hood\":\"West Oakland, East Oakland, Fruitvale\",\"focus\":\"The Oakland Youth Apprenticeship Pipeline has not advanced in three cycles, and no documented response or non-response exists to explain the stall.\",\"src\":\"output/engine_audit_c115.json patterns[0]; evidence: Initiative_Tracker row(s) 7; storyline INIT-007:implementation-active\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Jerome Pittman — Transit Hub D5 Intake Liaison — East Oakland resident\",\"evidence\":[{\"id\":\"EV-f96fc48879\",\"src\":\"output/engine_audit_c115.json patterns[0]; evidence: Initiative_Tracker row(s) 7; storyline INIT-007:implementation-active\",\"text\":\"The economic initiative carrying West Oakland has not advanced in 3 cycles.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C115\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-bc84fc0b7718\"},{\"t\":\"FACT\",\"text\":\"Oakland Youth Apprenticeship Pipeline stalled in implementation-active\",\"src\":\"output/engine_audit_c115.json patterns[0]; evidence: Initiative_Tracker row(s) 7; storyline INIT-007:implementation-active\",\"id\":\"F-2e699469253e\"},{\"t\":\"FACT\",\"text\":\"The economic initiative carrying West Oakland has not advanced in 3 cycles.\",\"src\":\"output/engine_audit_c115.json patterns[0]; evidence: Initiative_Tracker row(s) 7; storyline INIT-007:implementation-active\",\"id\":\"F-6d3d5d153479\"},{\"t\":\"FACT\",\"text\":\"Jerome Pittman — Transit Hub D5 Intake Liaison — East Oakland resident\",\"src\":\"Simulation_Ledger profile for POP-01055\",\"id\":\"F-5695e417a8ad\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01055",
+        "name": "Jerome Pittman",
+        "role": "Transit Hub D5 Intake Liaison",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Luis Navarro",
+        "question": "What has Jerome Pittman seen regarding the Youth Apprenticeship Pipeline's stalled status, and does he have any knowledge of why it has not advanced in three cycles? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "anomaly",
+        "hood": "West Oakland, East Oakland, Fruitvale",
+        "focus": "The Oakland Youth Apprenticeship Pipeline has not advanced in three cycles, and no documented response or non-response exists to explain the stall.",
+        "src": "output/engine_audit_c115.json patterns[0]; evidence: Initiative_Tracker row(s) 7; storyline INIT-007:implementation-active"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Jerome Pittman — Transit Hub D5 Intake Liaison — East Oakland resident",
+        "evidence": [
+          {
+            "id": "EV-f96fc48879",
+            "src": "output/engine_audit_c115.json patterns[0]; evidence: Initiative_Tracker row(s) 7; storyline INIT-007:implementation-active",
+            "text": "The economic initiative carrying West Oakland has not advanced in 3 cycles."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C115",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-bc84fc0b7718"
+        },
+        {
+          "t": "FACT",
+          "text": "Oakland Youth Apprenticeship Pipeline stalled in implementation-active",
+          "src": "output/engine_audit_c115.json patterns[0]; evidence: Initiative_Tracker row(s) 7; storyline INIT-007:implementation-active",
+          "id": "F-2e699469253e"
+        },
+        {
+          "t": "FACT",
+          "text": "The economic initiative carrying West Oakland has not advanced in 3 cycles.",
+          "src": "output/engine_audit_c115.json patterns[0]; evidence: Initiative_Tracker row(s) 7; storyline INIT-007:implementation-active",
+          "id": "F-6d3d5d153479"
+        },
+        {
+          "t": "FACT",
+          "text": "Jerome Pittman — Transit Hub D5 Intake Liaison — East Oakland resident",
+          "src": "Simulation_Ledger profile for POP-01055",
+          "id": "F-5695e417a8ad"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C11, Spring, holiday=none",
+          "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+          "id": "F-82d77e9a4a71"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  }
+]

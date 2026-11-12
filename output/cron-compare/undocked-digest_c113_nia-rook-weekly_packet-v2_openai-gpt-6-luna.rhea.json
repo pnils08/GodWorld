@@ -1,0 +1,78 @@
+{
+  "draft": "output/cron-compare/undocked-digest_c113_nia-rook-weekly_packet-v2_openai-gpt-6-luna.md",
+  "cycle": "113",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "6f0ee9462d6094377eff199c297d9e24292ec11c7da6953d1426bb1db31f2c9f",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes match interview records verbatim, citizen profiles and Undocked records align with cycle 113 ground truth.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "nia-rook-undocked-weekly-digest-v1",
+    "packageVersion": "NIAROOK-UNDOCKED-WEEKLY-2",
+    "manifestId": "AM-39bef0e65331",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "20",
+          "170"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Cristina Booker",
+      "Daphne Stafford",
+      "Eric Taveras",
+      "Father Miguel"
+    ],
+    "unverified": [
+      "Alpha Centauri",
+      "Copper Requisition",
+      "Maiden Jump",
+      "Sol Central"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 2,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0094,
+  "durationMs": 6580,
+  "parseError": false,
+  "ranAt": "2026-10-31T15:15:34.712Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 350",
+    "words": 440,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "6f0ee9462d6094377eff199c297d9e24292ec11c7da6953d1426bb1db31f2c9f",
+    "costUsd": 0.0014
+  }
+}

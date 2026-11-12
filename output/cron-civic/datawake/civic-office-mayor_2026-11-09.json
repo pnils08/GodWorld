@@ -1,0 +1,69 @@
+{
+  "office": "mayor",
+  "agentDir": "civic-office-mayor",
+  "holder": "Avery Santana",
+  "popid": "POP-00034",
+  "title": "Mayor",
+  "date": "2026-11-09",
+  "cycle": 115,
+  "model": "moonshotai/kimi-k3.1-pro",
+  "statement": "Oakland should not declare a neighborhood recovered because one indicator improves. Laurel’s retail reading rose while sentiment fell, and residents are still asking for direct outreach and visible follow-through. I am taking up INIT-015, the Laurel Neighborhood Patch and Clean-Up, as a $6 million proposal focused on practical work neighbors can see and judge. This week’s step is to develop the legislation, not to pretend it has already passed or been funded. The proposal should pair cleaner, better-kept public spaces with a clear public record of what the city does and where residents can raise concerns. We can respect Laurel’s concerns without reducing the neighborhood to them, and we can build on its local activity with work that is visible, bounded, and accountable.",
+  "moves": [
+    {
+      "type": "work",
+      "payload": {
+        "initiativeId": "INIT-015"
+      }
+    },
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-115-civic-office-mayor",
+        "text": "The packet supplies no docket references for seven petition responses, so I cannot truthfully provide them or claim those responses were completed. Its current response display covers C113–C115 and lists 10 complaints plus 14 constructive-participation entries; that is not a receipt for seven executive replies. On INIT-014, the tracker—not my prior wording—controls: Ivy Hill Community Support Initiative is vote-scheduled for C116 and pending-vote. The only supplied action reference is MV-114-civic-office-mayor-2026-11-02, an applied C114 call-vote, not a filing docket. My earlier statements described those commitments more conclusively than the supplied evidence supports. The Clerk still needs to supply response dockets if they exist; until then, the seven responses remain unverified and the claimed INIT-014 filing is not established.",
+        "directiveCycle": 115,
+        "confrontationSeat": "civic-office-mayor"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": "2",
+  "ranAt": "2026-11-09T11:46:01.007Z",
+  "usage": {
+    "prompt_tokens": 14037,
+    "completion_tokens": 2865,
+    "total_tokens": 16902,
+    "cost": 0.0510516,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0510516,
+      "upstream_inference_prompt_cost": 0.0252666,
+      "upstream_inference_completions_cost": 0.025785
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 2471,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "fellBackFrom": null,
+  "evidenceGenerationHash": "8bfd87940a666380c5a9b73d2151cff4f6286856fa3673a770c7259a48d6c71b",
+  "evidenceReads": [],
+  "provider": "InferenceNet",
+  "finishReason": "stop",
+  "elapsedMs": 30198,
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00034",
+    "id": "6YPfMDx2ydEBojnpbf4RJ8",
+    "customId": "cp-POP-00034-c115-CIVIC-datawake-2026-11-09"
+  }
+}

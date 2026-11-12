@@ -1,0 +1,92 @@
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌁ auth for agents [www.vestauth.com]
+Wake 3 WRITE — civic c115 (lila-mezran)
+===================================
+[run] 2026-11-11T07:28:24.260Z byline: Dr. Lila Mezran (POP-00154, persona)
+[run] 2026-11-11T07:28:24.271Z writing on typed Packet (27680 B injected state + stance anchor)...
+[run] 2026-11-11T07:28:24.272Z writer tools ON: max 6 calls (package) + canon_recall
+[run] 2026-11-11T07:28:24.272Z reward loop ON (package): rubric shown, contract scored, grade carried
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ suppress logs { quiet: true }
+Headless Desk Writer — civic desk
+===================================
+model=anthropic/claude-sonnet-5.5 maxTurns=15
+[INFO] 2026-11-11T07:28:24.435Z lane state-file injected: output/test-shell/20261111-012823-lila-mezran-live/civic_c115_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5.state.json (27442 chars) — full-summary blob bypassed
+[INFO] 2026-11-11T07:28:24.576Z packet-only compose via OpenRouter (anthropic/claude-sonnet-5.5, 0 live tools)...
+[INFO] 2026-11-11T07:28:58.985Z tool trace: 4 call(s) → civic_c115_packet-v2_lila-mezran.tooltrace.json
+[INFO] 2026-11-11T07:28:59.002Z tool facts → manifest: 1 line(s) from 4 call(s) (AM-8380872cbaf1)
+[INFO] 2026-11-11T07:28:59.010Z LEP/2 lexical observations deferred to Rhea (AM-8380872cbaf1): UNAPPROVED_NUMBER=6.1,140,142,113,112
+
+--- run summary ---
+{
+  "desk": "civic",
+  "cycle": "115",
+  "model": "anthropic/claude-sonnet-5.5",
+  "turns": 5,
+  "maxTurns": 15,
+  "usageInputTokens": 37581,
+  "usageOutputTokens": 3443,
+  "savedFiles": [
+    "output/test-shell/20261111-012823-lila-mezran-live/civic_c115_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5.md"
+  ],
+  "compareAgainst": "output/desk-output/civic_c115.md",
+  "durationMs": 34587,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-11-11T07:28:59.013Z"
+}
+
+tokens: 37581 in / 3443 out · 5 turn(s) · 34587ms
+compare: diff output/desk-output/civic_c115.md  ↔  output/test-shell/20261111-012823-lila-mezran-live/civic_c115_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5.md
+[run] 2026-11-11T07:28:59.057Z s344 slot observations: s344-slot=missing-unanswered-question
+[run] 2026-11-11T07:28:59.061Z WARN verbatim slice text: "caught up on sleep and woke"
+[run] 2026-11-11T07:28:59.062Z gate SKIPPED (--no-gate sample) — output is ungated, NOT canon
+[run] 2026-11-11T07:28:59.083Z gaps logged: 4 line(s) → production log
+
+=== write disposition: UNGATED-SAMPLE ===
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "115",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "sonnet",
+  "persona": "lila-mezran",
+  "byline": {
+    "name": "Dr. Lila Mezran",
+    "popid": "POP-00154",
+    "beatDomain": "HEALTH"
+  },
+  "laneEntries": 90,
+  "quotesLanded": 2,
+  "disposition": "ungated-sample",
+  "rheaPass": null,
+  "rheaFlagCount": null,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "sheet_read",
+    "canon_recall",
+    "canon_recall",
+    "canon_recall"
+  ],
+  "toolCalls": 4,
+  "wordCount": 906,
+  "targetWords": "evidence-bounded",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [
+    {
+      "text": "Howard Travis caught up on sleep and woke up feeling like themselves again (Piedmont Ave).",
+      "run": "caught up on sleep and woke"
+    }
+  ],
+  "rewardLoop": true,
+  "contractScore": null,
+  "gradeRecord": null,
+  "article": "output/test-shell/20261111-012823-lila-mezran-live/samples/civic_c115_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5.sample.md",
+  "selfRecord": null,
+  "ranAt": "2026-11-11T07:28:59.063Z"
+}

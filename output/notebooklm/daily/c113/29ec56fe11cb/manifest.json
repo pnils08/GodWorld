@@ -1,0 +1,86 @@
+{
+  "artifactClass": "NLM_DAILY_RUN",
+  "sourceVersion": "1.9",
+  "canonStatus": "NOT_CANON",
+  "cycle": 113,
+  "generatedAt": "2026-10-26T13:00:06.913Z",
+  "lastAttemptAt": "2026-10-26T13:00:06.913Z",
+  "hours": 36,
+  "packHash": "29ec56fe11cb9a8999a7f1ad29a88818033ef34f7af244e664ce8164e98ca753",
+  "worldSummary": "output/world_summary_c113.md",
+  "citizenDigest": "output/citizen-day-digest.md",
+  "reports": [],
+  "flaggedReports": [],
+  "editionDay": false,
+  "firstMorning": true,
+  "routingShadow": {
+    "version": "NLM-DAILY-ROUTER/1",
+    "mode": "shadow",
+    "profile": "REPORTED_DAY",
+    "format": "deep_dive",
+    "length": "default",
+    "activationEligible": true,
+    "reportedDayThreshold": 1,
+    "sourceClasses": [
+      "WORLD_STATE",
+      "CITIZEN_DIGEST",
+      "ENGINE_CIVIC_SIGNAL"
+    ],
+    "reasonCodes": [
+      "RHEA_PASSED_0",
+      "FIRST_MORNING_OF_CYCLE",
+      "REPORTED_THRESHOLD_MET_1"
+    ],
+    "dispositionCounts": {
+      "passed": 0,
+      "rheaFlagged": 0,
+      "neverGated": 0
+    },
+    "fingerprint": "b0ddc8e2b54e739c62e7c123ac3b3ed08735e0d7f646b0d78e2ce36dda7130d4"
+  },
+  "newsroomPulse": {
+    "fingerprint": "29979661f9a4a97bfe1b980989b7e8b6a2dd1a8ae5112e932001602043851a08",
+    "counts": {
+      "angles": 0,
+      "asks": 0,
+      "fanoutAssignments": 6,
+      "w2Ready": 0,
+      "quotes": 0,
+      "passed": 0,
+      "rheaFlagged": 0,
+      "neverGated": 0,
+      "flagged": 0,
+      "pending": 0
+    },
+    "priorCompletedCycle": null
+  },
+  "archiveNotebookId": "417e2d29-4167-420f-a9cc-76fb6b2b7de2",
+  "newsroomNotebookId": "73cd50b5-4b8f-4329-bb42-0783c8d93763",
+  "dryRun": false,
+  "archiveScope": {
+    "cycles": [
+      112,
+      111
+    ],
+    "sourceIds": [
+      "06e1843d-5c67-4052-8ddd-de2fc22413d1",
+      "45e84e2f-87a7-4e37-a3ff-2d1f828239ef"
+    ]
+  },
+  "boundedSourceHash": "ef9ae108ee41dd209b5cd36d08185502633705d6448abe7aa0d71e0b0d4d406e",
+  "boundedSource": "output/notebooklm/daily/c113/29ec56fe11cb/bounded-newsroom-source.md",
+  "sourceIds": [
+    "a897ee62-e5f9-40c1-b2a3-5672a74dd93d"
+  ],
+  "audioDirectionSourceId": "4c721eae-6e1a-4e01-b845-285b6d0ceb81",
+  "audioPresentation": {
+    "format": "deep_dive",
+    "length": "default",
+    "source": "router",
+    "profile": "REPORTED_DAY"
+  },
+  "audioArtifactId": "19b3500d-8dbb-4209-a517-dced66eca1a8",
+  "audioPath": "output/notebooklm/daily/c113/29ec56fe11cb/godworld_daily_c113.m4a",
+  "driveLink": "https://drive.google.com/file/d/13zSi-8p0ofMsjvANxLMzumGFwKQCpviF/view?usp=drivesdk",
+  "opsReportArtifactId": "c1fe0243-46ab-432e-b84e-27717cfdf6db"
+}

@@ -1,0 +1,330 @@
+{
+  "stage": "angle",
+  "desk": "undocked-digest",
+  "cycle": "111",
+  "persona": "nia-rook-weekly",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-01076",
+      "name": "Nia Rook",
+      "role": "desk reporter",
+      "desk": "undocked-digest"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Week-in-UNDOCKED leaderboard digest — every pilot who flew this cycle (Rosario Medina, Eric Taveras, Briar Soto), who is climbing and who is fading. Standings: Eric Taveras leads the board — rank #1, 1 cycle(s) led, current streak 1. In the chair: Rosario Medina — CBA Compliance Monitor, Fruitvale Transit Hub; Eric Taveras — Second Baseman, Oakland A's; Briar Soto — Electrician. The career is who they are, not the story; the story is the flight.",
+      "approach": null
+    },
+    "signal": {
+      "kind": "undocked-digest",
+      "hood": null,
+      "score": null,
+      "src": "undocked-week:weekly-c111",
+      "nearby": [
+        {
+          "text": "",
+          "src": ""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-01053",
+          "name": "Rosario Medina",
+          "profile": "Rosario Medina — UNDOCKED pilot",
+          "role": "UNDOCKED pilot",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "undocked-feed-row",
+          "evidence": {
+            "source": "output/spacemolt-show/feed/c111.json",
+            "episodeId": "undocked-pop01053-Y3C7",
+            "pop": "POP-01053"
+          }
+        },
+        {
+          "pop": "POP-00597",
+          "name": "Eric Taveras",
+          "profile": "Eric Taveras — UNDOCKED pilot",
+          "role": "UNDOCKED pilot",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "undocked-feed-row",
+          "evidence": {
+            "source": "output/spacemolt-show/feed/c111.json",
+            "episodeId": "undocked-pop00597-Y3C7",
+            "pop": "POP-00597"
+          }
+        },
+        {
+          "pop": "POP-00926",
+          "name": "Briar Soto",
+          "profile": "Briar Soto — UNDOCKED pilot",
+          "role": "UNDOCKED pilot",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "undocked-feed-row",
+          "evidence": {
+            "source": "output/spacemolt-show/feed/c111.json",
+            "episodeId": "undocked-pop00926-Y3C7",
+            "pop": "POP-00926"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C111",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-a43c5d888b36"
+      },
+      {
+        "t": "FACT",
+        "text": "UNDOCKED week-in-review c111",
+        "src": "undocked-week:weekly-c111",
+        "id": "F-83d8abaec9ba"
+      },
+      {
+        "t": "FACT",
+        "text": "Rosario Medina — 2 episode(s) this cycle, credits 110, combat 0, mishaps 0 (UNDOCKED feed)",
+        "src": "undocked-week:weekly-c111",
+        "id": "F-05bb46c4c41c"
+      },
+      {
+        "t": "FACT",
+        "text": "Eric Taveras — 2 episode(s) this cycle, credits 1170, combat 0, mishaps 0 (UNDOCKED feed)",
+        "src": "undocked-week:weekly-c111",
+        "id": "F-574fbb509601"
+      },
+      {
+        "t": "FACT",
+        "text": "Briar Soto — 2 episode(s) this cycle, credits 0, combat 0, mishaps 0 (UNDOCKED feed)",
+        "src": "undocked-week:weekly-c111",
+        "id": "F-37b49f2bb908"
+      },
+      {
+        "t": "FACT",
+        "text": "Rosario Medina — CBA Compliance Monitor, Fruitvale Transit Hub (ledger)",
+        "src": "undocked-week:weekly-c111",
+        "id": "F-c3efc932b3ab"
+      },
+      {
+        "t": "FACT",
+        "text": "Eric Taveras — Second Baseman, Oakland A's (ledger)",
+        "src": "undocked-week:weekly-c111",
+        "id": "F-378fd239204e"
+      },
+      {
+        "t": "FACT",
+        "text": "Eric Taveras, Playoffs: The A's offense continues to be carried by playoff MVP Eric Taveras with his 7th Homerun in this playoff and run. Mike Paulson celebrated his veteran stars on their season and warned the league of Eric Taveras and Ern...",
+        "src": "undocked-week:weekly-c111",
+        "id": "F-e1375b591374"
+      },
+      {
+        "t": "FACT",
+        "text": "Eric Taveras, Championship: Eric Taveras win World Series MVP to go along with his post-season MVP for the earlier rounds, Taveras showing tremendous value in signing him this past off-season.",
+        "src": "undocked-week:weekly-c111",
+        "id": "F-5720f8640038"
+      },
+      {
+        "t": "FACT",
+        "text": "Eric Taveras, Playoffs: Eric Taveras continues his amazing playoff campaign with 2 homeruns.",
+        "src": "undocked-week:weekly-c111",
+        "id": "F-5be5ba35e00e"
+      },
+      {
+        "t": "FACT",
+        "text": "Briar Soto — Electrician (ledger)",
+        "src": "undocked-week:weekly-c111",
+        "id": "F-50338764a93c"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "named",
+    "candidates": [
+      {
+        "pop": "POP-01053",
+        "name": "Rosario Medina",
+        "role": "UNDOCKED pilot",
+        "hood": null,
+        "profile": "Rosario Medina — UNDOCKED pilot",
+        "mode": "named",
+        "sourceKind": "undocked-feed-row",
+        "evidence": {
+          "source": "output/spacemolt-show/feed/c111.json",
+          "episodeId": "undocked-pop01053-Y3C7",
+          "pop": "POP-01053"
+        }
+      },
+      {
+        "pop": "POP-00597",
+        "name": "Eric Taveras",
+        "role": "UNDOCKED pilot",
+        "hood": null,
+        "profile": "Eric Taveras — UNDOCKED pilot",
+        "mode": "named",
+        "sourceKind": "undocked-feed-row",
+        "evidence": {
+          "source": "output/spacemolt-show/feed/c111.json",
+          "episodeId": "undocked-pop00597-Y3C7",
+          "pop": "POP-00597"
+        }
+      },
+      {
+        "pop": "POP-00926",
+        "name": "Briar Soto",
+        "role": "UNDOCKED pilot",
+        "hood": null,
+        "profile": "Briar Soto — UNDOCKED pilot",
+        "mode": "named",
+        "sourceKind": "undocked-feed-row",
+        "evidence": {
+          "source": "output/spacemolt-show/feed/c111.json",
+          "episodeId": "undocked-pop00926-Y3C7",
+          "pop": "POP-00926"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Nia Rook",
+    "popid": "POP-01076"
+  },
+  "assignment": {
+    "story": {
+      "ref": "undocked-week:weekly-c111",
+      "label": "UNDOCKED week-in-review c111",
+      "kind": "undocked-digest",
+      "angle": "Week-in-UNDOCKED leaderboard digest — every pilot who flew this cycle (Rosario Medina, Eric Taveras, Briar Soto), who is climbing and who is fading. Standings: Eric Taveras leads the board — rank #1, 1 cycle(s) led, current streak 1. In the chair: Rosario Medina — CBA Compliance Monitor, Fruitvale Transit Hub; Eric Taveras — Second Baseman, Oakland A's; Briar Soto — Electrician. The career is who they are, not the story; the story is the flight.",
+      "facts": [
+        "Rosario Medina — 2 episode(s) this cycle, credits 110, combat 0, mishaps 0 (UNDOCKED feed)",
+        "Eric Taveras — 2 episode(s) this cycle, credits 1170, combat 0, mishaps 0 (UNDOCKED feed)",
+        "Briar Soto — 2 episode(s) this cycle, credits 0, combat 0, mishaps 0 (UNDOCKED feed)",
+        "Rosario Medina — CBA Compliance Monitor, Fruitvale Transit Hub (ledger)",
+        "Eric Taveras — Second Baseman, Oakland A's (ledger)",
+        "Eric Taveras, Playoffs: The A's offense continues to be carried by playoff MVP Eric Taveras with his 7th Homerun in this playoff and run. Mike Paulson celebrated his veteran stars on their season and warned the league of Eric Taveras and Ern...",
+        "Eric Taveras, Championship: Eric Taveras win World Series MVP to go along with his post-season MVP for the earlier rounds, Taveras showing tremendous value in signing him this past off-season.",
+        "Eric Taveras, Playoffs: Eric Taveras continues his amazing playoff campaign with 2 homeruns.",
+        "Briar Soto — Electrician (ledger)"
+      ],
+      "citizens": [
+        "Rosario Medina — CBA Compliance Monitor, Fruitvale Transit Hub, UNDOCKED cast pilot",
+        "Eric Taveras — Second Baseman, Oakland A's, UNDOCKED cast pilot",
+        "Briar Soto — Electrician, UNDOCKED cast pilot"
+      ],
+      "popids": [
+        "POP-01053",
+        "POP-00597",
+        "POP-00926"
+      ]
+    }
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Nia Rook",
+    "popid": "POP-01076",
+    "text": "I'm looking at the gap between the leaderboard and the ground. Eric Taveras is dominating everything right now—the World Series, the MVP trophies, and the UNDOCKED board. Then you have Briar Soto at zero credits. I want to see if the momentum from the baseball field is bleeding into the cockpit, or if the flight is the only place where the scale actually levels out.",
+    "plan": {
+      "chase": "I'm looking at the gap between the leaderboard and the ground. Eric Taveras is dominating everything right now—the World Series, the MVP trophies, and the UNDOCKED board. Then you have Briar Soto at zero credits. I want to see if the momentum from the baseball field is bleeding into the cockpit, or if the flight is the only place where the scale actually levels out.",
+      "focus": "The contrast between Eric Taveras's total dominance and Briar Soto's lack of credits this cycle.",
+      "why": "Taveras is the city's golden boy at the moment, but the leaderboard is a different kind of game than the A's playoffs.",
+      "checks": [
+        "Verify if Briar Soto's zero-credit status is a technicality or a struggle."
+      ],
+      "targets": [
+        {
+          "pop": "POP-00597",
+          "question": "Does the pressure of the World Series MVP run make the flight a sanctuary or just another competition to win?",
+          "basis": "Eric Taveras leads the board and recently won World Series MVP."
+        },
+        {
+          "pop": "POP-00926",
+          "question": "What does a cycle with zero credits feel like when the other pilots are climbing?",
+          "basis": "Briar Soto has 0 credits this cycle."
+        },
+        {
+          "pop": "POP-01053",
+          "question": "How does the steady work of a compliance monitor compare to the high-visibility streak of the current leader?",
+          "basis": "Rosario Medina is a CBA Compliance Monitor with 110 credits."
+        }
+      ],
+      "interpretation": "The cycle shows a stark divide between a high-profile peak and a quiet baseline.",
+      "unverifiedLead": [
+        "Whether the city's sports fever is inflating the perception of the leaderboard standings."
+      ],
+      "closeQuestion": "Is the flight a way to escape the professional identity, or does that identity follow you into the air?"
+    }
+  },
+  "lanePicks": [
+    {
+      "popids": []
+    }
+  ],
+  "laneEntries": 1,
+  "angleCapHits": 0,
+  "ranAt": "2026-10-17T13:15:53.684Z"
+}

@@ -1,0 +1,50 @@
+{
+  "draft": "output/cron-compare/sports_c111_p-slayer_packet-v2_x-ai-grok-4-3.md",
+  "cycle": "111",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "715b250076a8ca3d057db9b5e8a2123b29ac1370adecc3ee84d3ac1bf45bb18d",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes match exact packet provenance, citizen identities verified on ledger, and parade scene aligns with C111 sports feed.",
+  "review": {
+    "profileId": "p-slayer-fan-heat-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "p-slayer-fan-heat-v1",
+    "packageVersion": "PSLAYER-LEP2-1",
+    "manifestId": "AM-70ae5bc40507",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Daniel Yoon",
+      "Inga Creator",
+      "Janelle Rourke"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0097,
+  "durationMs": 6520,
+  "parseError": false,
+  "ranAt": "2026-10-14T23:16:46.780Z"
+}

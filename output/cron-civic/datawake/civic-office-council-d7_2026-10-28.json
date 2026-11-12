@@ -1,0 +1,23 @@
+{
+  "office": "council_d7",
+  "agentDir": "civic-office-council-d7",
+  "holder": "Warren Ashford",
+  "popid": "POP-00504",
+  "title": "City Council District 7",
+  "date": "2026-10-28",
+  "cycle": 113,
+  "model": "google/gemini-3.7-flash",
+  "statement": "With the second quarterly audit cycle underway for the Temescal Community Health Center, District 7 is maintaining rigorous oversight on clinical verification and expenditure tracking. With $16,615,384.6 remaining in the operational budget, our priority remains ensuring every dollar directly addresses patient care across Temescal, Rockridge, and KONO with verified intake data and complete fiscal transparency.",
+  "moves": [
+    {
+      "type": "work",
+      "payload": {
+        "initiativeId": "INIT-005"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": "Advanced the second quarterly audit review and operational tracking for the Temescal Community Health Center.",
+  "ranAt": "2026-10-28T10:45:14.538Z",
+  "fellBackFrom": null
+}

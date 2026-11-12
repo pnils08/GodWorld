@@ -1,0 +1,108 @@
+{
+  "office": "mayor_open",
+  "cycle": 112,
+  "speaker": "Avery Santana",
+  "cascadeSummary": "I'm advancing eight initiatives through committee hearings this cycle, responding to Mara Vance's directive by formally filing INIT-009 and INIT-010 with the City Clerk, and docketing administrative responses to three standing citizen petitions. The West Oakland Stabilization Fund releases its month-eleven tranche, OARI delivers its quarterly outcome report, and I'm holding the line on Baylight's construction milestone review for Cycle 115 as remediation proceeds. Downtown's emergency hearing convenes as promised.",
+  "statements": [
+    {
+      "statementId": "STMT-112-mayor_open-001",
+      "type": "authorization_response",
+      "topic": "West Oakland Stabilization Fund Month-Eleven Disbursement",
+      "initiative": "INIT-001",
+      "decision": "approved",
+      "quote": "West Oakland families don't need promises—they need checks that clear. Month-eleven disbursement approved.",
+      "fullStatement": "The West Oakland Stabilization Fund releases its month-eleven tranche of $400,000 this cycle, maintaining our 23-day processing standard. Deputy Mayor Okoro's team has 47 more households in the pipeline, and we're keeping that pipeline moving. This fund has $23.8 million remaining of its $28 million authorization, and every dollar goes to families who were priced out of the flats they held for decades. The engine flags what I already know—daily life is declining in West Oakland, housing pressure is building. This fund is pointed there. It stays pointed there.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-112-mayor_open-002",
+      "type": "authorization_response",
+      "topic": "Oakland Alternative Response Initiative Quarterly Outcome Report",
+      "initiative": "INIT-002",
+      "decision": "approved",
+      "quote": "OARI now covers East Oakland and District 1—mental health calls answered by trained responders, not armed officers.",
+      "fullStatement": "The Oakland Alternative Response Initiative delivers its quarterly outcome report this cycle. East Oakland dispatch protocol is operational. District 1 expansion is live with evaluation metrics tracking response time, call resolution, and civilian safety. We're measuring what matters—whether someone in crisis gets help instead of handcuffs. The $12.5 million investment is performing. I'll have Brenda Okoro's full report ready for council review, and we're prepared to scale further when the data supports it.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-112-mayor_open-003",
+      "type": "policy_position",
+      "topic": "Baylight District Remediation and Construction Timeline",
+      "initiative": "INIT-006",
+      "decision": "confirmed",
+      "quote": "Soil tests verified, remediation proceeds—Baylight's construction milestone review holds for Cycle 115.",
+      "fullStatement": "Baylight District Phase II remediation continues with independent oversight. Soil verification is complete. Construction contracts are executed, site preparation is mobilized. I'm holding the construction milestone review for Cycle 115 as scheduled—this is a $2.1 billion investment in Oakland's future, and we don't rush the foundation. The engine notes Downtown and Jack London declining. I note that Baylight, when built, connects both. This stadium district is how we answer that decline—with jobs, with housing, with a harborfront people want to walk.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-112-mayor_open-004",
+      "type": "authorization_response",
+      "topic": "Oakland Youth Apprenticeship Pipeline First Cohort Placement",
+      "initiative": "INIT-007",
+      "decision": "approved",
+      "quote": "First cohort placement report due—youth apprenticeships are how we build an Oakland that works for Oaklanders.",
+      "fullStatement": "The Oakland Youth Apprenticeship Pipeline delivers its first cohort placement report this cycle. Twelve and a half million dollars buys more than training—it buys pathways into trades that pay family-sustaining wages. The engine flags West Oakland, East Oakland, and Fruitvale with compounding problems. This initiative is pointed at all three. Apprenticeship is intervention. I'm demanding accountability on placement targets, and I'll report those numbers when they're verified.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-112-mayor_open-005",
+      "type": "executive_order",
+      "topic": "Downtown Economic Revitalization Emergency Committee Hearing",
+      "initiative": "INIT-008",
+      "decision": "convened",
+      "quote": "Downtown businesses waited long enough—emergency Economic Development Committee hearing convenes Cycle 112.",
+      "fullStatement": "The Downtown Economic Revitalization emergency Economic Development Committee hearing convenes this cycle as promised. $15 million in authorization is before the council. Downtown's daily life is visibly declining—mood slipping, storefronts quieter, housing pressure building. This hearing puts that on the agenda. I want committee members to hear directly from business owners, from workers, from residents. The ordinance is filed. The conversation starts now.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-112-mayor_open-006",
+      "type": "executive_order",
+      "topic": "Commercial Stabilization for Grand Lake Committee Hearing",
+      "initiative": "INIT-009",
+      "decision": "convened",
+      "quote": "Grand Lake's quiet engine gets its hearing—$2.5 million stabilization funding with milestones and audits attached.",
+      "fullStatement": "Commercial Stabilization for Grand Lake comes before the Economic Development Committee this cycle with mandatory milestone reporting and audit criteria attached. Grand Lake shows low-severity improvement in the engine, but I don't trust quiet signals—I trust verified outcomes. The $2.5 million authorization will have strings: monthly reporting, quarterly audit, proof of impact. This is how we stabilize without subsidizing failure.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-112-mayor_open-007",
+      "type": "executive_order",
+      "topic": "West Oakland Tenant Defense Fund Committee Hearing",
+      "initiative": "INIT-010",
+      "decision": "convened",
+      "quote": "Displacement doesn't wait for process—$4.2 million for legal defense hits committee this cycle.",
+      "fullStatement": "The West Oakland Tenant Defense Fund comes before the Housing and Community Development Committee this cycle with legal support analysis complete. West Oakland shows low-severity improvement in the engine, but tenant defense isn't about trend lines—it's about individual families fighting eviction with nothing but a notice and a deadline. The $4.2 million authorization pairs with the Stabilization Fund. One keeps people housed. The other keeps them housed legally. Both move now.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-112-mayor_open-008",
+      "type": "executive_order",
+      "topic": "Ivy Hill Revitalization Initiative Legislation Filed",
+      "initiative": "INIT-011",
+      "decision": "filed",
+      "quote": "Ivy Hill's $2.5 million is before Council—momentum into movement for a neighborhood that's been waiting.",
+      "fullStatement": "The Ivy Hill Revitalization Initiative is formally filed with the City Clerk and docketed for council consideration this cycle. I announced this last cycle—$2.5 million to turn momentum into movement. Property crime sits above city average in Ivy Hill. Families feel the pressure. I've walked those blocks. This legislation is now live, and I'm counting on Janae Rivers to move it through the Progressive Caucus.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-112-mayor_open-009",
+      "type": "executive_order",
+      "topic": "Mara Vance Directive Response — INIT-009 and INIT-010 Filing, Citizen Petition Response",
+      "initiative": null,
+      "decision": "filed",
+      "quote": "INIT-009 and INIT-010 filed with the City Clerk—administrative stall is not how this office operates.",
+      "fullStatement": "Responding to City Planning Director Mara Vance's directive: INIT-009 Commercial Stabilization for Grand Lake and INIT-010 West Oakland Tenant Defense Fund are formally filed with the City Clerk this cycle, meeting the C110 legislation-filed milestones before the C112 stall threshold. Additionally, I am docketing formal administrative responses to three verified citizen petitions that have crossed visibility without executive proposal. Silence is not my choice. These petitions get answers—some with action, some with explanation, all with respect for the process.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-112-mayor_open-010",
+      "type": "public_remark",
+      "topic": "Fruitvale Success and Dimond Stability",
+      "initiative": null,
+      "decision": "acknowledged",
+      "quote": "Fruitvale's busy streets happened because this community organizes—Dimond's steady strength is Oakland working.",
+      "fullStatement": "Fruitvale's mildly positive mood and busy street trade didn't happen by accident. This community organizes—merchants, residents, the whole ecosystem. I see it, I name it, I credit it. Dimond's steady strength is Oakland working too—mood soured this cycle, but crime stays low and street trade holds. That stability is fragile. It needs attention before it becomes decline. I'm watching both neighborhoods. Success gets credit. Struggle gets response.",
+      "trackerUpdates": {}
+    }
+  ]
+}

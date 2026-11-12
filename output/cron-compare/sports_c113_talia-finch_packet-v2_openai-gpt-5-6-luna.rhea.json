@@ -1,0 +1,82 @@
+{
+  "draft": "output/cron-compare/sports_c113_talia-finch_packet-v2_openai-gpt-5-6-luna.md",
+  "cycle": "113",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "9ac05d0d1f28c7d196f3c270333d2437fc2b5201bf7568107c6ba5d30a4ec853",
+  "pass": true,
+  "flags": [
+    {
+      "severity": "medium",
+      "check": "page-contradiction",
+      "issue": "Adash Stanley is quoted for the Oaks, but their own page at C108 (cp-POP-01023-c108-PRESS) runs the other way: “I've felt a bit anxious about the Oaks' preseason, it's like there's a lot of uncertainty in the air.”"
+    }
+  ],
+  "flagCount": 1,
+  "highSeverityCount": 0,
+  "summary": "All citizen names, roles, quotes, and Oaks game records align cleanly with Cycle 113 ground truth.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "talia-finch-oaks-v1",
+    "packageVersion": "TALIA-OAKS-1",
+    "manifestId": "AM-55eaab2e4ca0",
+    "lexicalObservations": [],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Adash Stanley",
+      "Austin Reaves",
+      "Harry Hayward",
+      "Trenton Nawan"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [
+      {
+        "name": "Adash Stanley",
+        "pop": "POP-01023",
+        "entity": "the Oaks",
+        "customId": "cp-POP-01023-c108-PRESS",
+        "cycle": 108,
+        "excerpt": "I've felt a bit anxious about the Oaks' preseason, it's like there's a lot of uncertainty in the air.",
+        "quotePolarity": 1,
+        "pagePolarity": -1
+      }
+    ],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0107,
+  "durationMs": 9926,
+  "parseError": false,
+  "ranAt": "2026-10-29T23:18:54.669Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 400",
+    "words": 489,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "9ac05d0d1f28c7d196f3c270333d2437fc2b5201bf7568107c6ba5d30a4ec853",
+    "costUsd": 0.0023
+  }
+}

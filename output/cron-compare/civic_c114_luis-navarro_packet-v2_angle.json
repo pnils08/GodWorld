@@ -1,0 +1,490 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "114",
+  "persona": "luis-navarro",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00636",
+      "name": "Luis Navarro",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Plan one evidence-bounded records brief without inventing a reporting trail",
+      "assignment": "civic gap in Laurel — who is accountable, what council has or hasn't done",
+      "approach": "Investigation approach: distinguish what the supplied record establishes from what it does not. Follow the unresolved gap fairly; no invented response, silence, or accusation.",
+      "creativeBrief": {
+        "kind": "civic-investigation",
+        "method": "KNOWN_UNKNOWN",
+        "missing": [
+          "documented response or documented non-response",
+          "request timestamp and elapsed silence duration",
+          "responsible person, office, or duty unless named by the source"
+        ],
+        "reportingEvidence": {
+          "recordChecks": {
+            "state": "NOT_SUPPLIED",
+            "events": []
+          },
+          "requestEvents": {
+            "state": "NOT_SUPPLIED",
+            "events": []
+          },
+          "responseEvents": {
+            "state": "NOT_SUPPLIED",
+            "events": []
+          },
+          "responsibleEntities": {
+            "state": "NOT_SUPPLIED",
+            "entities": []
+          }
+        },
+        "silenceClock": {
+          "state": "UNESTABLISHED",
+          "value": null,
+          "src": null
+        },
+        "forbidden": [
+          "Do not add officials, votes, budgets, outcomes, measurements, quotes, responses, or affected people absent from the supplied entries."
+        ]
+      }
+    },
+    "signal": {
+      "kind": "anomaly",
+      "hood": "Laurel",
+      "score": null,
+      "src": "output/engine_audit_c114.json patterns[0]; evidence: Neighborhood_Map row(s) 4",
+      "nearby": [
+        {
+          "text": "Avery Santana (mayor gavel): Record the executed Month-12 $400,000 disbursement, publish closeout documentation, and complete a charter renewal draft preserving service to West Oakland businesses and residents. — \"West O",
+          "src": "output/civic-voice/mayor_gavel_c114.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): Docket and execute the D3 East Oakland briefing this cycle with Fruitvale district-level data and the Baylight feasibility review, direct the D5 dispatch audit, and hold expansion until after",
+          "src": "output/civic-voice/mayor_gavel_c114.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): Require C114 schematic delivery and a documented Fruitvale community review, with a public comment-and-response record before further design advancement. — \"Fruitvale will see the schematics,",
+          "src": "output/civic-voice/mayor_gavel_c114.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): Keep the C115 milestone review contingent on independent remediation verification, neighborhood protections, hotline records, and workforce results; make no early milestone declaration. — \"Ba",
+          "src": "output/civic-voice/mayor_gavel_c114.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): Publish the C114 placement-gap analysis and a program adjustment plan, explicitly examining West Oakland and Fruitvale without inventing unreported placement results. — \"Enrollment is a begin",
+          "src": "output/civic-voice/mayor_gavel_c114.json"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00495",
+          "name": "Rosalind Young",
+          "profile": "Rosalind Young — Smoke Shop Owner — Laurel resident",
+          "role": "Smoke Shop Owner",
+          "hood": "Laurel",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/engine_audit_c114.json patterns[0]; evidence: Neighborhood_Map row(s) 4",
+            "pop": "POP-00495",
+            "rowName": "Rosalind Young",
+            "kind": "slice-row"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C114",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-4261fa115617"
+      },
+      {
+        "t": "FACT",
+        "text": "civic gap in Laurel — who is accountable, what council has or hasn't done",
+        "src": "output/engine_audit_c114.json patterns[0]; evidence: Neighborhood_Map row(s) 4",
+        "id": "F-a87a3435eede"
+      },
+      {
+        "t": "FACT",
+        "text": "No civic initiative addresses the Laurel signal surfaced this cycle.",
+        "src": "output/engine_audit_c114.json patterns[0]; evidence: Neighborhood_Map row(s) 4",
+        "id": "F-6b5358102755"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase. Missing reporting evidence is a typed state, not proof that an act or response did not occur."
+    }
+  },
+  "sourcingPool": {
+    "mode": "offices",
+    "candidates": [
+      {
+        "pop": "POP-00495",
+        "name": "Rosalind Young",
+        "role": "Smoke Shop Owner",
+        "hood": "Laurel",
+        "profile": "Rosalind Young — Smoke Shop Owner — Laurel resident",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/engine_audit_c114.json patterns[0]; evidence: Neighborhood_Map row(s) 4",
+          "pop": "POP-00495",
+          "rowName": "Rosalind Young",
+          "kind": "slice-row"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Luis Navarro",
+    "popid": "POP-00636"
+  },
+  "assignment": {
+    "story": {
+      "ref": "output/engine_audit_c114.json patterns[0]; evidence: Neighborhood_Map row(s) 4",
+      "label": "math-imbalance (medium) | Laurel: decay [Sentiment -0.030, RetailVitality -3.00] — Sentiment now -0.03 (20 of 22, city median 0.085); RetailVitality now 4.34 (22 of 22, city median 8.265) — with no matching active initiative",
+      "kind": "anomaly",
+      "angle": "civic gap in Laurel — who is accountable, what council has or hasn't done",
+      "hookLine": "No civic initiative addresses the Laurel signal surfaced this cycle.",
+      "hood": "Laurel",
+      "popids": [
+        "POP-00495"
+      ],
+      "citizens": [
+        "Rosalind Young (POP-00495)"
+      ]
+    },
+    "approach": "Investigation approach: distinguish what the supplied record establishes from what it does not. Follow the unresolved gap fairly; no invented response, silence, or accusation."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": {
+    "seat": {
+      "slug": "luis-navarro",
+      "name": "Luis Navarro",
+      "popid": "POP-00636",
+      "domain": "accountability-anomaly"
+    },
+    "pulse": {
+      "className": "accountability-anomaly",
+      "score": 80,
+      "label": "math-imbalance (medium) | Laurel: decay [Sentiment -0.030, RetailVitality -3.00] — Sentiment now -0.03 (20 of 22, city median 0.085); RetailVitality now 4.34 (22 of 22, city median 8.265) — with no matching active initiative",
+      "hood": "Laurel",
+      "source": "output/engine_audit_c114.json patterns[0]; evidence: Neighborhood_Map row(s) 4"
+    },
+    "prewrite": {
+      "anchorFacts": [
+        "math-imbalance (medium) | Laurel: decay [Sentiment -0.030, RetailVitality -3.00] — Sentiment now -0.03 (20 of 22, city median 0.085); RetailVitality now 4.34 (22 of 22, city median 8.265) — with no matching active initiative"
+      ],
+      "forbidden": [
+        "Do not add officials, votes, budgets, outcomes, measurements, quotes, responses, or affected people absent from the supplied entries."
+      ],
+      "schema": "INVESTIGATION-BRIEF-1",
+      "method": "KNOWN_UNKNOWN",
+      "missing": [
+        "documented response or documented non-response",
+        "request timestamp and elapsed silence duration",
+        "responsible person, office, or duty unless named by the source"
+      ],
+      "reportingEvidence": {
+        "recordChecks": {
+          "state": "NOT_SUPPLIED",
+          "events": []
+        },
+        "requestEvents": {
+          "state": "NOT_SUPPLIED",
+          "events": []
+        },
+        "responseEvents": {
+          "state": "NOT_SUPPLIED",
+          "events": []
+        },
+        "responsibleEntities": {
+          "state": "NOT_SUPPLIED",
+          "entities": []
+        }
+      },
+      "silenceClock": {
+        "state": "UNESTABLISHED",
+        "value": null,
+        "src": null
+      },
+      "excludedCandidates": [
+        {
+          "popid": "POP-00478",
+          "reason": "NEVER_WOKEN"
+        },
+        {
+          "popid": "POP-00496",
+          "reason": "NEVER_WOKEN"
+        }
+      ]
+    },
+    "candidates": [
+      {
+        "actionId": null,
+        "effectReceiptIds": [],
+        "score": 80,
+        "kind": "anomaly",
+        "label": "math-imbalance (medium) | Laurel: decay [Sentiment -0.030, RetailVitality -3.00] — Sentiment now -0.03 (20 of 22, city median 0.085); RetailVitality now 4.34 (22 of 22, city median 8.265) — with no matching active initiative",
+        "ref": "output/engine_audit_c114.json patterns[0]; evidence: Neighborhood_Map row(s) 4",
+        "hood": "Laurel",
+        "popids": [
+          "POP-00478",
+          "POP-00495",
+          "POP-00496"
+        ],
+        "angle": "civic gap in Laurel — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the Laurel signal surfaced this cycle.",
+        "citizens": [
+          "Maya Brooks (POP-00478)",
+          "Rosalind Young (POP-00495)",
+          "Rosa Simon (POP-00496)"
+        ],
+        "source": "desk-signal",
+        "sourceIndex": 0
+      },
+      {
+        "actionId": null,
+        "effectReceiptIds": [],
+        "score": 80,
+        "kind": "anomaly",
+        "label": "math-imbalance (high) | Rockridge: decay [Sentiment -0.030, RetailVitality -2.16, HousingPressure +1.000] — Sentiment now 0.03 (17 of 22, city median 0.085); RetailVitality now 10.98 (8 of 22, city median 8.265); HousingPressure now 5 (17 of 22, city median 0) — with no matching active initiative",
+        "ref": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+        "hood": "Rockridge",
+        "popids": [
+          "POP-00037",
+          "POP-00742",
+          "POP-00759"
+        ],
+        "angle": "civic gap in Rockridge — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the Rockridge signal surfaced this cycle.",
+        "citizens": [
+          "Brenda Okoro (POP-00037)",
+          "Maya Torres-Dillon (POP-00742)",
+          "Naomi Sterling (POP-00759)"
+        ],
+        "source": "desk-signal",
+        "sourceIndex": 1
+      },
+      {
+        "actionId": null,
+        "effectReceiptIds": [],
+        "score": 80,
+        "kind": "anomaly",
+        "label": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+        "ref": "output/engine_audit_c114.json patterns[2]; evidence: WorldEvents_V3_Ledger row(s)",
+        "hood": null,
+        "popids": [],
+        "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the city signal surfaced this cycle.",
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 2
+      },
+      {
+        "actionId": null,
+        "effectReceiptIds": [],
+        "score": 80,
+        "kind": "anomaly",
+        "label": "cascade-failure (medium) | Initiative \"Oakland Youth Apprenticeship Pipeline\" active but 2/3 affected neighborhoods show no signal",
+        "ref": "output/engine_audit_c114.json patterns[3]; evidence: Initiative_Tracker row(s) 7; storyline INIT-007:implementation-active",
+        "hood": "West Oakland, Fruitvale",
+        "popids": [
+          "POP-00744",
+          "POP-00756",
+          "POP-01057"
+        ],
+        "angle": "Oakland Youth Apprenticeship Pipeline stalled in implementation-active — remedy path + responsible office",
+        "hookLine": "The civic initiative carrying West Oakland has not advanced in 2 cycles.",
+        "citizens": [
+          "Tomas Renteria (POP-00744)",
+          "Ramon Solano (POP-00756)",
+          "Nina Reyes (POP-01057)"
+        ],
+        "source": "desk-signal",
+        "sourceIndex": 3
+      },
+      {
+        "actionId": null,
+        "effectReceiptIds": [],
+        "score": 80,
+        "kind": "anomaly",
+        "label": "improvement (low) | Initiative \"Downtown Economic Revitalization\" advanced: legislation-filed → vote-scheduled",
+        "ref": "output/engine_audit_c114.json patterns[4]; evidence: Initiative_Tracker row(s) 8; storyline INIT-008:vote-scheduled",
+        "hood": "Downtown",
+        "popids": [
+          "POP-00212",
+          "POP-00753",
+          "POP-00764"
+        ],
+        "angle": "Downtown Economic Revitalization advanced from legislation-filed to vote-scheduled — what the milestone delivers and who carried it",
+        "hookLine": "Downtown Economic Revitalization advanced from legislation-filed to vote-scheduled; a milestone worth covering, not burying.",
+        "citizens": [
+          "Eunice Marston (POP-00753)",
+          "Tao Lee (POP-00764)",
+          "Jessie Hess (POP-00212)"
+        ],
+        "source": "desk-signal",
+        "sourceIndex": 4
+      },
+      {
+        "actionId": null,
+        "effectReceiptIds": [],
+        "score": 80,
+        "kind": "anomaly",
+        "label": "improvement (low) | Initiative \"Commercial Stabilization for Grand Lake\" advanced: legislation-filed → announced",
+        "ref": "output/engine_audit_c114.json patterns[5]; evidence: Initiative_Tracker row(s) 9; storyline INIT-009:announced",
+        "hood": "Grand Lake",
+        "popids": [
+          "POP-00001",
+          "POP-01049",
+          "POP-01218"
+        ],
+        "angle": "Commercial Stabilization for Grand Lake advanced from legislation-filed to announced — what the milestone delivers and who carried it",
+        "hookLine": "Commercial Stabilization for Grand Lake advanced from legislation-filed to announced; a milestone worth covering, not burying.",
+        "citizens": [
+          "Jerri Brown (POP-01218)",
+          "Vinnie Keane (POP-00001)",
+          "Sarah Huang (POP-01049)"
+        ],
+        "source": "desk-signal",
+        "sourceIndex": 5
+      }
+    ],
+    "pointers": [
+      "output/engine_audit_c114.json patterns[0]; evidence: Neighborhood_Map row(s) 4",
+      "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+      "output/engine_audit_c114.json patterns[2]; evidence: WorldEvents_V3_Ledger row(s)",
+      "output/engine_audit_c114.json patterns[3]; evidence: Initiative_Tracker row(s) 7; storyline INIT-007:implementation-active",
+      "output/engine_audit_c114.json patterns[4]; evidence: Initiative_Tracker row(s) 8; storyline INIT-008:vote-scheduled",
+      "output/engine_audit_c114.json patterns[5]; evidence: Initiative_Tracker row(s) 9; storyline INIT-009:announced"
+    ]
+  },
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Luis Navarro",
+    "popid": "POP-00636",
+    "text": "I'm standing in Laurel with a gap I can see but can't yet name. The signal this cycle points at a civic hole — someone should be accountable for something in this neighborhood, and the council either has or hasn't done something about it. But I don't have the specifics yet. What I have is a name: Rosalind Young, a smoke shop owner who lives here. She's the one person the record ties to Laurel. So I start with her. I walk into her shop, buy a pack of gum I don't need, and ask what's been bothering her about the neighborhood lately. I don't lead with council or accountability — I let her talk. The gap is real, but I won't pretend I know its shape until someone who lives here tells me. My job i",
+    "plan": {
+      "chase": "I'm standing in Laurel with a gap I can see but can't yet name. The signal this cycle points at a civic hole — someone should be accountable for something in this neighborhood, and the council either has or hasn't done something about it. But I don't have the specifics yet. What I have is a name: Rosalind Young, a smoke shop owner who lives here. She's the one person the record ties to Laurel. So I start with her. I walk into her shop, buy a pack of gum I don't need, and ask what's been bothering her about the neighborhood lately. I don't lead with council or accountability — I let her talk. The gap is real, but I won't pretend I know its shape until someone who lives here tells me. My job i",
+      "focus": "Civic gap in Laurel — who is accountable, what council has or hasn't done",
+      "why": "The record shows a civic gap in Laurel with no civic initiative addressing it this cycle. That's a hole worth filling, but only with evidence from people actually in Laurel.",
+      "checks": [
+        "Confirm the civic gap signal is still live before filing",
+        "Ask Rosalind Young what civic issue in Laurel she's noticed or been affected by",
+        "Check whether any council action or inaction on that issue is publicly documented",
+        "Verify any named responsible party before publishing their name"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00495",
+          "question": "What civic issue in Laurel has been on your mind, and has anyone from the city or council ever reached out to you about it?",
+          "basis": "Rosalind Young is the only Laurel resident named in the supplied record, and the civic gap is assigned to Laurel."
+        }
+      ],
+      "interpretation": "The supplied record establishes that a civic gap exists in Laurel and that no civic initiative currently addresses it. It does not establish what the gap is, who is responsible, or whether the council has responded. The absence of a documented response is not proof that no response occurred.",
+      "unverifiedLead": [
+        "Rosalind Young may know of a specific civic issue in Laurel that has gone unaddressed",
+        "There may be a council record or public document addressing the Laurel gap that has not been surfaced yet"
+      ],
+      "closeQuestion": "What has the council actually done about Laurel — and who do I ask to prove it?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Avery Santana (mayor gavel): Record the executed Month-12 $400,000 disbursement, publish closeout documentation, and complete a charter renewal draft preserving service to West Oakland businesses and residents. — \"West O",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c114.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Docket and execute the D3 East Oakland briefing this cycle with Fruitvale district-level data and the Baylight feasibility review, direct the D5 dispatch audit, and hold expansion until after",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c114.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Require C114 schematic delivery and a documented Fruitvale community review, with a public comment-and-response record before further design advancement. — \"Fruitvale will see the schematics,",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c114.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Keep the C115 milestone review contingent on independent remediation verification, neighborhood protections, hotline records, and workforce results; make no early milestone declaration. — \"Ba",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c114.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Publish the C114 placement-gap analysis and a program adjustment plan, explicitly examining West Oakland and Fruitvale without inventing unreported placement results. — \"Enrollment is a begin",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c114.json",
+      "popids": []
+    }
+  ],
+  "laneEntries": 114,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-03T12:15:35.362Z"
+}

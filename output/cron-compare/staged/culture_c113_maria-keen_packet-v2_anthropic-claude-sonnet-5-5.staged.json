@@ -1,0 +1,70 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "113",
+  "persona": "maria-keen",
+  "byline": "Maria Keen",
+  "bylinePopid": "POP-00013",
+  "article": "output/cron-compare/staged/culture_c113_maria-keen_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Lucia Polito",
+        "role": "quoted-source",
+        "popid": "POP-00004"
+      },
+      {
+        "name": "Gregory Mims",
+        "role": "quoted-source",
+        "popid": "POP-00023"
+      },
+      {
+        "name": "Ramon Vega",
+        "role": "quoted-source",
+        "popid": "POP-00042"
+      },
+      {
+        "name": "Rick Walker",
+        "role": "quoted-source",
+        "popid": "POP-00198"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Fruitvale"
+    ],
+    "claims": [
+      {
+        "claim": "I've seen the impact that community programs like the Postpartum Oakland Network, which I founded, can have on people's lives. It's amazing to see the difference these programs make in Fruitvale. As someone who's dedicated to wellness and has been a part of this community for a while, I feel grateful to see the positive changes happening around us.",
+        "sourceRef": "citizenVoice PRESS Lucia Polito"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-f906fd0940e1",
+    "draftSha256": "eef998b1fb65cb2c1a499b83b154b097c9c405e1d2df70536791287567717b66",
+    "verdict": "output/cron-compare/culture_c113_maria-keen_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-10-31T17:01:40.279Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 848,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "eef998b1fb65cb2c1a499b83b154b097c9c405e1d2df70536791287567717b66",
+      "costUsd": 0.0012
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-31T17:01:45.985Z"
+}

@@ -1,0 +1,83 @@
+{
+  "artifactClass": "NLM_DAILY_RUN",
+  "sourceVersion": "1.8",
+  "canonStatus": "NOT_CANON",
+  "cycle": 111,
+  "generatedAt": "2026-10-19T04:11:39.852Z",
+  "lastAttemptAt": "2026-10-19T04:11:39.852Z",
+  "hours": 36,
+  "packHash": "92c02f367a3225ffca569a8d27870e7e19f83821978df34c50c6a181c7bf0f61",
+  "worldSummary": "output/world_summary_c111.md",
+  "citizenDigest": "output/citizen-day-digest.md",
+  "reports": [
+    {
+      "classification": "PUBLISHED_EDITION",
+      "path": "output/cycle_pulse_c111.md"
+    },
+    {
+      "classification": "CIVIS_JOURNAL",
+      "path": "output/civis-journal/civis_journal_c111.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/undocked-digest_c111_nia-rook-weekly_packet-v2_x-ai-grok-4-3.staged.md"
+    },
+    {
+      "classification": "FLAGGED",
+      "path": "output/cron-compare/flagged/wire_c111_celeste-tran_packet-v2_x-ai-grok-4-3.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/lore_c111_danny-horn-deep-dive.staged.md"
+    }
+  ],
+  "flaggedReports": [
+    "output/cron-compare/flagged/wire_c111_celeste-tran_packet-v2_x-ai-grok-4-3.flags.json"
+  ],
+  "editionDay": true,
+  "routingShadow": {
+    "version": "NLM-DAILY-ROUTER/1",
+    "mode": "shadow",
+    "profile": "REPORTED_DAY",
+    "format": "deep_dive",
+    "length": "default",
+    "activationEligible": true,
+    "reportedDayThreshold": 2,
+    "sourceClasses": [
+      "WORLD_STATE",
+      "CITIZEN_DIGEST",
+      "FLAGGED_DISPOSITION",
+      "ENGINE_CIVIC_SIGNAL"
+    ],
+    "reasonCodes": [
+      "RHEA_PASSED_0",
+      "PUBLISHED_EXTRAS_2",
+      "REPORTED_THRESHOLD_MET_2"
+    ],
+    "dispositionCounts": {
+      "passed": 0,
+      "rheaFlagged": 1,
+      "neverGated": 0
+    },
+    "fingerprint": "3d79ef3735169262880a8b9eee9dff11cf70abe4a5e556819dbe2f029c8fb03c"
+  },
+  "newsroomPulse": {
+    "fingerprint": "44e147b543ed0cdb61749190db421c045aff419e2871de66539f936d9ade573a",
+    "counts": {
+      "angles": 0,
+      "asks": 0,
+      "fanoutAssignments": 0,
+      "w2Ready": 0,
+      "quotes": 0,
+      "passed": 0,
+      "rheaFlagged": 1,
+      "neverGated": 0,
+      "flagged": 1,
+      "pending": 0
+    },
+    "priorCompletedCycle": null
+  },
+  "archiveNotebookId": "417e2d29-4167-420f-a9cc-76fb6b2b7de2",
+  "newsroomNotebookId": "73cd50b5-4b8f-4329-bb42-0783c8d93763",
+  "dryRun": true
+}

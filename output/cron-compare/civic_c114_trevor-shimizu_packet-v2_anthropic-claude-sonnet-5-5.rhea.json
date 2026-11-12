@@ -1,0 +1,92 @@
+{
+  "draft": "output/cron-compare/civic_c114_trevor-shimizu_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "114",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "b9291be79ec70384a90f1e564d9e5f57756f6e1da81ae7a087f2f9c5e8af3215",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All named citizen profiles, interview quotes, sports scores, and transit context verified against Cycle 114 canon with zero discrepancies.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "trevor-infrastructure-systems-v1",
+    "packageVersion": "TREVOR-LEP2-2",
+    "manifestId": "AM-9ac86b7e0ee0",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "595",
+          "112",
+          "062",
+          "740",
+          "670",
+          "510",
+          "156",
+          "729",
+          "219",
+          "319",
+          "13"
+        ]
+      },
+      {
+        "code": "UNAPPROVED_QUOTE",
+        "values": [
+          "events in East Oakland ×3"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Eleanor Rivera",
+      "Elena Soria Dominguez",
+      "Evan Lewis",
+      "Jerald Jensen"
+    ],
+    "unverified": [
+      "Oklahoma City Thunder",
+      "St Oakland",
+      "St Oakland City Center"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0115,
+  "durationMs": 6841,
+  "parseError": false,
+  "ranAt": "2026-11-04T07:42:01.025Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 500",
+    "words": 999,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "b9291be79ec70384a90f1e564d9e5f57756f6e1da81ae7a087f2f9c5e8af3215",
+    "costUsd": 0.0018
+  }
+}

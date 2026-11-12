@@ -1,0 +1,124 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "115",
+  "persona": "tamsin-pruitt",
+  "byline": "Tamsin Pruitt",
+  "bylinePopid": "POP-01210",
+  "article": "output/cron-compare/staged/culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Vinnie Keane",
+        "role": "quoted-source",
+        "popid": "POP-00001"
+      },
+      {
+        "name": "Elle Lilo",
+        "role": "mentioned",
+        "popid": "POP-00177"
+      },
+      {
+        "name": "Marguerite Salcedo",
+        "role": "quoted-source",
+        "popid": "POP-01093"
+      },
+      {
+        "name": "Richie Ramiro",
+        "role": "quoted-source",
+        "popid": "POP-00085"
+      },
+      {
+        "name": "Camila Osman",
+        "role": "mentioned",
+        "popid": "POP-01134",
+        "floor": true
+      },
+      {
+        "name": "Cedric Nakamura",
+        "role": "mentioned",
+        "popid": "POP-01033",
+        "floor": true
+      },
+      {
+        "name": "Darius Scoot",
+        "role": "mentioned",
+        "popid": "POP-00191",
+        "floor": true
+      },
+      {
+        "name": "Darrin Davis",
+        "role": "mentioned",
+        "popid": "POP-00021",
+        "floor": true
+      },
+      {
+        "name": "Farah Lindqvist",
+        "role": "mentioned",
+        "popid": "POP-00257",
+        "floor": true
+      },
+      {
+        "name": "Laila Cortez",
+        "role": "mentioned",
+        "popid": "POP-00035",
+        "floor": true
+      },
+      {
+        "name": "Rosa Foster",
+        "role": "mentioned",
+        "popid": "POP-00849",
+        "floor": true
+      },
+      {
+        "name": "Tobert Lewis",
+        "role": "mentioned",
+        "popid": "POP-00344",
+        "floor": true
+      },
+      {
+        "name": "Xavier Ramington",
+        "role": "mentioned",
+        "popid": "POP-00181",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Grand Lake"
+    ],
+    "claims": [
+      {
+        "claim": "After retiring from the A's, I've been keeping busy with appearances and staying involved with the community. I still get recognized around Grand Lake, which is nice. My wife Amara and I are enjoying our time together, and I'm looking forward to seeing what's next for the A's, especially with the catcher situation being a topic of discussion.",
+        "sourceRef": "citizenVoice PRESS Vinnie Keane"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-660320b35c0d",
+    "draftSha256": "7f3ce07a49bca08cdbf2d6f7b1ce9d8902ca9c0690a9b2e2bf7e653c95cd4996",
+    "verdict": "output/cron-compare/culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-10T00:21:03.789Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 450",
+      "words": 1101,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "7f3ce07a49bca08cdbf2d6f7b1ce9d8902ca9c0690a9b2e2bf7e653c95cd4996",
+      "costUsd": 0.0013
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-10T00:21:07.703Z"
+}

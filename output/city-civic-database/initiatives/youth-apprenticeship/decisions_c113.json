@@ -1,0 +1,19 @@
+{
+  "initiative": "INIT-007",
+  "initiativeId": "INIT-007",
+  "cycle": 113,
+  "primaryVoice": "Mayor gavel (mayor_gavel-003)",
+  "consolidatedFrom": [
+    "STMT-113-council_d3-002 (Delgado D3 — Oakland Youth Apprenticeship Pipeline Cohort Placement Accountability)",
+    "STMT-113-council_d5-002 (Rivers D5 — Youth Apprenticeship Pipeline — cohort placement accountability)",
+    "STMT-113-mayor_gavel-003 (Mayor gavel — INIT-007 First Cohort Placement Data Publication)",
+    "STMT-113-mayor_open-004 (Mayor agenda — Oakland Youth Apprenticeship Pipeline Cohort Placement Accountability)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-007",
+    "ImplementationPhase": "implementation-active",
+    "MilestoneNotes": "C113: First cohort placement report published; accountability review directed",
+    "NextScheduledAction": "Placement gap analysis and program adjustment",
+    "NextActionCycle": 114
+  }
+}

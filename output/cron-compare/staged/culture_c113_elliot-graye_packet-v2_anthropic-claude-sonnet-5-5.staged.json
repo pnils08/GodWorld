@@ -1,0 +1,71 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "113",
+  "persona": "elliot-graye",
+  "byline": "Elliot Graye",
+  "bylinePopid": "POP-00012",
+  "article": "output/cron-compare/staged/culture_c113_elliot-graye_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Ophelia Brenner",
+        "role": "mentioned",
+        "popid": "POP-00754"
+      },
+      {
+        "name": "Kenji Tanaka",
+        "role": "quoted-source",
+        "popid": "POP-00763"
+      },
+      {
+        "name": "Marcus Whitfield",
+        "role": "mentioned",
+        "popid": "POP-00532"
+      },
+      {
+        "name": "Mark Aitken",
+        "role": "mentioned",
+        "popid": "POP-00003",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "East Oakland"
+    ],
+    "claims": [
+      {
+        "claim": "As the Senior Pastor at Foothill Baptist Tabernacle, I've seen our community engagement grow significantly. We have various programs that cater to different age groups and needs. For instance, our expanded tutoring program, which is now visible with posters outside St. Esperanza Parish, has been a huge success. It's wonderful to see the mercado buzzing with activity as people grab lunch between train transfers. Our congregation is actively involved in supporting local initiatives, and we're committed to being a positive presence in Fruitvale.",
+        "sourceRef": "citizenVoice PRESS Ophelia Brenner"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-c7b0c7dd639e",
+    "draftSha256": "41839f23c7e774fb7f7a95bce5f0ee5874aa56f234c8bc989c82b46baccb75be",
+    "verdict": "output/cron-compare/culture_c113_elliot-graye_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-10-29T23:15:36.164Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 928,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "41839f23c7e774fb7f7a95bce5f0ee5874aa56f234c8bc989c82b46baccb75be",
+      "costUsd": 0.0017
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-29T23:15:42.465Z"
+}

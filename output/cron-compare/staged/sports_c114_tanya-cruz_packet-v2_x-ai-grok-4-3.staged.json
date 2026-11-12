@@ -1,0 +1,61 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "114",
+  "persona": "tanya-cruz",
+  "byline": "Tanya Cruz",
+  "bylinePopid": "POP-00014",
+  "article": "output/cron-compare/staged/sports_c114_tanya-cruz_packet-v2_x-ai-grok-4-3.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Pablo Almanzar",
+        "role": "quoted-source",
+        "popid": "POP-01078"
+      },
+      {
+        "name": "Carmen Mesa",
+        "role": "mentioned",
+        "popid": "POP-00081",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Dimond"
+    ],
+    "claims": [
+      {
+        "claim": "Look, I know the story — everyone knows the story. I got the spot people thought Carmen would get, and then I went out and threw the games of my life. But in here, nobody treats it like I stole something. The guys in the clubhouse, they just want to win. When I came back in after that no-hitter, the first thing Desmond said to me wasn't about the box score — it was about how we're going to dinner at his mom's place in the Dimond on the off day. That's how it works. Carmen's a pro, he's been around, and he knows this game is weird. The front office will figure out the roster. My job is to keep throwing strikes and not get ahead of myself. The day I start thinking I'm bigger than the name on the front of the jersey is the day I lose it.",
+        "sourceRef": "citizenVoice PRESS Pablo Almanzar"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-fc730260adb4",
+    "draftSha256": "b33075b263b2bd1fe7b62721abeac3f4cce46a3a3f25557574fc2bae26274afc",
+    "verdict": "output/cron-compare/sports_c114_tanya-cruz_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-11-05T00:19:14.310Z",
+    "contractScore": {
+      "opened": false,
+      "closed": false,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 255,
+      "short": "The opening sets a scene rather than leading with a sports fact, and the closing ends on a rhetorical question instead of identifying the access or observation still needed.",
+      "score": 2,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "b33075b263b2bd1fe7b62721abeac3f4cce46a3a3f25557574fc2bae26274afc",
+      "costUsd": 0.0021
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-05T00:19:20.363Z"
+}

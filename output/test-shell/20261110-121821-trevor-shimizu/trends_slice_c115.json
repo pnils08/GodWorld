@@ -1,0 +1,232 @@
+{
+  "version": "TRENDS-SLICE-4",
+  "empty": false,
+  "cycle": 115,
+  "kind": "beat-trends",
+  "seat": {
+    "slug": "celeste-tran",
+    "name": "Celeste Tran",
+    "popid": "POP-00164",
+    "desk": "wire",
+    "domain": "trends",
+    "builder": "buildTrendsSlice.js"
+  },
+  "hood": "Fruitvale",
+  "pulse": {
+    "generatedAt": "2026-11-10T12:15:24.838Z",
+    "docs": 927,
+    "citizens": 308
+  },
+  "story": {
+    "kind": "beat-trends",
+    "angle": "Rico Valez gained 1 mention this cycle (20 total); West Oakland moves the most — what Oakland is doing together this week",
+    "label": "Rico Valez gained 1 mention this cycle (20 total); West Oakland moves the most",
+    "hookLine": "Rico Valez — gained 1 mention this cycle (20 total), stable. The trend is the story; the mood is yours.",
+    "hood": "Fruitvale",
+    "citizens": [
+      "Rico Valez (POP-00632)",
+      "Rowan Pierce (POP-00545)",
+      "Vinnie Keane (POP-00001)",
+      "Evan Lewis (POP-00200)",
+      "Omar Amici (POP-00263)"
+    ],
+    "popids": [
+      "POP-00632",
+      "POP-00545",
+      "POP-00001",
+      "POP-00200",
+      "POP-00263"
+    ],
+    "ref": "output/beats/Cultural_Ledger.jsonl @C115",
+    "cycle": 115
+  },
+  "approach": "Social-trends approach: this slice is what the city is doing together — the names climbing the culture record, where people are moving, what the city's hooks say is shifting. Fast, reactive, grounded: a trend claim needs a window and a number from this slice. The names and moves are real; the group chat, the binge-night, the collective mood swing are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-00632",
+      "name": "Rico Valez",
+      "role": "Musician",
+      "neighborhood": "Fruitvale",
+      "business": null,
+      "profile": "Rico Valez — Musician — Fruitvale",
+      "why": "the city is talking about them (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-00545",
+      "name": "Rowan Pierce",
+      "role": "Freelance Writer",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Rowan Pierce — Freelance Writer — Piedmont Ave",
+      "why": "the city is talking about them (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-00001",
+      "name": "Vinnie Keane",
+      "role": "Former Designated Hitter, Oakland A's Legend",
+      "neighborhood": "Grand Lake",
+      "business": null,
+      "profile": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Grand Lake",
+      "why": "the city is talking about them (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-00200",
+      "name": "Evan Lewis",
+      "role": "Bus driver",
+      "neighborhood": "Laurel",
+      "business": null,
+      "profile": "Evan Lewis — Bus driver — Laurel",
+      "why": "has been saying it on their own page — transit, C114: “The platform records don't tell you about them.”"
+    },
+    {
+      "popid": "POP-00263",
+      "name": "Omar Amici",
+      "role": "Construction laborer",
+      "neighborhood": "Uptown",
+      "business": null,
+      "profile": "Omar Amici — Construction laborer — Uptown",
+      "why": "has been saying it on their own page — rent, C114: “The streets are busier than ever, and it seems like every other place is a for-rent sign these days.”"
+    }
+  ],
+  "facts": [
+    {
+      "text": "Rico Valez (Celebrity), Arts — gained 1 mention this cycle (20 total), stable, fame 4",
+      "src": "output/beats/Cultural_Ledger.jsonl @C115 vs output/beats/prev/Cultural_Ledger.jsonl @C114"
+    },
+    {
+      "text": "Rowan Pierce (journalist), Media — gained 1 mention this cycle (15 total), cooling, fame 2",
+      "src": "output/beats/Cultural_Ledger.jsonl @C115 vs output/beats/prev/Cultural_Ledger.jsonl @C114"
+    },
+    {
+      "text": "Vinnie Keane (A's player), Sports — gained 1 mention this cycle (7 total), cooling, fame 48",
+      "src": "output/beats/Cultural_Ledger.jsonl @C115 vs output/beats/prev/Cultural_Ledger.jsonl @C114"
+    },
+    {
+      "text": "Anthony Raines (Media) — new on the culture record C115",
+      "src": "output/beats/Cultural_Ledger.jsonl @C115"
+    },
+    {
+      "text": "Movement vs C114: West Oakland +19 people, East Oakland +11 people, Jack London +9 people, Rockridge +9 people, Temescal +8 people",
+      "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C115"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "Rico Valez gained 1 mention this cycle (20 total); West Oakland moves the most — what Oakland is doing together this week",
+    "hookLine": "Rico Valez — gained 1 mention this cycle (20 total), stable. The trend is the story; the mood is yours.",
+    "anchorFacts": [
+      "Rico Valez (Celebrity), Arts — gained 1 mention this cycle (20 total), stable, fame 4",
+      "Rowan Pierce (journalist), Media — gained 1 mention this cycle (15 total), cooling, fame 2",
+      "Vinnie Keane (A's player), Sports — gained 1 mention this cycle (7 total), cooling, fame 48",
+      "Anthony Raines (Media) — new on the culture record C115",
+      "Movement vs C114: West Oakland +19 people, East Oakland +11 people, Jack London +9 people, Rockridge +9 people, Temescal +8 people"
+    ],
+    "evidence": [
+      {
+        "text": "Rico Valez (Celebrity), Arts — gained 1 mention this cycle (20 total), stable, fame 4",
+        "src": "output/beats/Cultural_Ledger.jsonl @C115 vs output/beats/prev/Cultural_Ledger.jsonl @C114"
+      },
+      {
+        "text": "Rowan Pierce (journalist), Media — gained 1 mention this cycle (15 total), cooling, fame 2",
+        "src": "output/beats/Cultural_Ledger.jsonl @C115 vs output/beats/prev/Cultural_Ledger.jsonl @C114"
+      },
+      {
+        "text": "Vinnie Keane (A's player), Sports — gained 1 mention this cycle (7 total), cooling, fame 48",
+        "src": "output/beats/Cultural_Ledger.jsonl @C115 vs output/beats/prev/Cultural_Ledger.jsonl @C114"
+      },
+      {
+        "text": "Anthony Raines (Media) — new on the culture record C115",
+        "src": "output/beats/Cultural_Ledger.jsonl @C115"
+      },
+      {
+        "text": "Movement vs C114: West Oakland +19 people, East Oakland +11 people, Jack London +9 people, Rockridge +9 people, Temescal +8 people",
+        "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C115"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": {
+      "state": "PRIOR_CYCLE_ON_DISK",
+      "vs": 114
+    },
+    "hooks": [
+      {
+        "text": "Household in Lake Merritt spending 53% of income on housing",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Lake Merritt",
+        "priority": 6
+      },
+      {
+        "text": "Downtown boom sustained — momentum 10/10, the block everyone wants onto",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Downtown",
+        "priority": 7
+      },
+      {
+        "text": "Laurel cooling off: foot traffic down, storefronts quieter than the rest of the city",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Laurel",
+        "priority": 6
+      },
+      {
+        "text": "West Oakland boom sustained — momentum 9/10, the block everyone wants onto",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "West Oakland",
+        "priority": 7
+      },
+      {
+        "text": "Fruitvale boom sustained — momentum 10/10, the block everyone wants onto",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Fruitvale",
+        "priority": 7
+      },
+      {
+        "text": "Jack London boom sustained — momentum 10/10, the block everyone wants onto",
+        "angle": "desk rotation",
+        "domain": "COMMUNITY",
+        "hood": "Jack London",
+        "priority": 7
+      },
+      {
+        "text": "KONO turning upward: retail busy, events drawing crowds, people moving in",
+        "angle": "desk rotation",
+        "domain": "COMMUNITY",
+        "hood": "KONO",
+        "priority": 5
+      },
+      {
+        "text": "Uptown boom sustained — momentum 10/10, the block everyone wants onto",
+        "angle": "desk rotation",
+        "domain": "COMMUNITY",
+        "hood": "Uptown",
+        "priority": 7
+      }
+    ],
+    "note": null,
+    "pageVoices": [
+      "the A's — fading; most of the city over the last two months, still talking this week. Loudest: Vinnie Keane (Grand Lake), on their own page at C115 (not an interview — colour only, never a quote): “After retiring from the A's, I've been keeping busy with appearances and staying involved with the community.”",
+      "transit — fading; dozens of citizens over the last two months, quiet this week. Loudest: Evan Lewis (Laurel), on their own page at C114 (not an interview — colour only, never a quote): “The platform records don't tell you about them.”",
+      "rent — fading; dozens of citizens over the last two months, quiet this week. Loudest: Omar Amici (Uptown), on their own page at C114 (not an interview — colour only, never a quote): “The streets are busier than ever, and it seems like every other place is a for-rent sign these days.”",
+      "the clinic — rising; dozens of citizens over the last two months, still talking this week. Loudest: Yu Zen (Rockridge), on their own page at C114 (not an interview — colour only, never a quote): “When I was in that hospital bed after my accident, I learned something about who shows up for you.”",
+      "the Oaks — fading; a dozen or so citizens over the last two months, still talking this week. Loudest: Trenton Nawan (Jack London), on their own page at C114 (not an interview — colour only, never a quote): “I'm still feeling pretty good about the Oaks.”"
+    ],
+    "roomIsYours": "the group chat, the third rewatch, who suddenly has an opinion about something nobody mentioned last month, what the city collectively decided to care about"
+  },
+  "talkedAbout": 3,
+  "appeared": 1,
+  "moves": 22,
+  "pointers": [
+    "output/beats/Cultural_Ledger.jsonl @C115",
+    "output/beats/Story_Hook_Deck.jsonl (hooks for Celeste Tran this cycle)"
+  ]
+}

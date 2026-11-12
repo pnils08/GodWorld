@@ -1,0 +1,57 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "113",
+  "provider": "openrouter",
+  "model": "anthropic/claude-haiku-5.5",
+  "configuredWriterModel": "anthropic/claude-haiku-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "carmen-delaine",
+  "byline": {
+    "name": "Carmen Delaine",
+    "popid": "POP-00011",
+    "beatDomain": "CIVIC"
+  },
+  "laneEntries": 108,
+  "quotesLanded": 6,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [],
+  "toolCalls": 0,
+  "wordCount": 778,
+  "targetWords": "500-900",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 500",
+    "words": 778,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "13d58d7d4c578283a860a2c5e03de519a0063c77f88dfa9b1c45b710ce328a3d",
+    "costUsd": 0.0013
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 4/4 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/civic_c113_carmen-delaine_packet-v2_anthropic-claude-haiku-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "31) from ../.config/godworld/.env // tip: ⌘ enable debugging { debug: true }\n{\n  \"popId\": \"POP-00011\",\n  \"name\": \"Carmen Delaine\",\n  \"recorded\": true,\n  \"text\": \"filed: West Oakland's Twelve Checks\"\n}"
+  },
+  "ranAt": "2026-10-26T23:16:05.753Z",
+  "dispositionReconciledAt": "2026-10-31T17:00:02.111Z"
+}

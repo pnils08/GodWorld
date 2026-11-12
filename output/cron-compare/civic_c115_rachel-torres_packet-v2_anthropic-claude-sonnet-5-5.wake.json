@@ -1,0 +1,60 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "115",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "rachel-torres",
+  "byline": {
+    "name": "Sgt. Rachel Torres",
+    "popid": "POP-00057",
+    "beatDomain": "SAFETY"
+  },
+  "laneEntries": 93,
+  "quotesLanded": 0,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "sheet_read",
+    "canon_search",
+    "sheet_read"
+  ],
+  "toolCalls": 3,
+  "wordCount": 786,
+  "targetWords": "500-800",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 500",
+    "words": 786,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "a0a817316cf9170c93dd9f712a5b146d12622f9c7d43411faaccf96c8a58cd01",
+    "costUsd": 0.0013
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 4/4 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/civic_c115_rachel-torres_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "dotenvx.com]\n{\n  \"popId\": \"POP-00057\",\n  \"name\": \"Rachel Torres\",\n  \"recorded\": true,\n  \"text\": \"filed: Grand Lake Leads the Incident Table at 21% Clearance. Who Answers for the Other Four in Five?\"\n}"
+  },
+  "ranAt": "2026-11-11T00:17:09.020Z"
+}

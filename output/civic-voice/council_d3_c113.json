@@ -1,0 +1,48 @@
+{
+  "office": "council_d3",
+  "cycle": 113,
+  "speaker": "Rose Delgado",
+  "cascadeSummary": "I'm holding OARI and the Youth Apprenticeship Pipeline to their promises with D3's actual outcomes demanded in both reports. I'm filing an official response to the San Antonio citizen complaint and pushing for a corridor package — not just a line item, but a real commitment. Fruitvale gets the credit it earned; San Antonio gets the fight it deserves.",
+  "statements": [
+    {
+      "statementId": "STMT-113-council_d3-001",
+      "type": "vote_statement",
+      "topic": "Oakland Alternative Response Initiative District Data and D3 Briefing",
+      "initiative": "INIT-002",
+      "decision": "Accept the district-level report but require the D3 community briefing before any further expansion, and direct OARI coordinators to produce street-level response data for the Fruitvale corridor specifically.",
+      "quote": "The right responder showing up on time on Fruitvale's streets — that's the report I'll hold OARI to.",
+      "fullStatement": "I accept the district-level report, but my vote comes with a condition that's been on the table since Cycle 112: the D3 community briefing happens before anyone talks about expanding this program further. Fruitvale families deserve to see the numbers from their own blocks — response times, call types, outcomes — not a summary row in a city spreadsheet. And I want to see the breakdown of who's being served in the corridor around the Transit Hub, because if OARI works in Fruitvale, I'll lead the fight to fund more of it. If it doesn't, I need to know that today, in public, with my neighbors in the room.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-113-council_d3-002",
+      "type": "vote_statement",
+      "topic": "Oakland Youth Apprenticeship Pipeline Cohort Placement Accountability",
+      "initiative": "INIT-007",
+      "decision": "Approve the expedited placement report with a requirement that it includes a neighborhood-level breakdown for D3, and push for a public commitment to close any Fruitvale placement gap within two cycles.",
+      "quote": "A seat in the classroom is not a paycheck. Show me Fruitvale's young people holding those roles.",
+      "fullStatement": "Yes, expedite the placement report — but it comes with a demand from this district: break the numbers down by neighborhood, not just by program. I need to see how many young people from 94601 and 94610 actually landed roles, not just the citywide total. Fruitvale has the applicants; this program was built to serve that pool. If the numbers lag, I'm not here for excuses — I'm here for a correction plan with a timeline. The Mayor wants answers, not excuses. I want placements, not promises.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-113-council_d3-003",
+      "type": "statement",
+      "topic": "San Antonio Corridor Recovery and Citizen Complaint Response",
+      "initiative": null,
+      "decision": "File an official response to the San Antonio citizen complaint and direct the City Administrator to produce a targeted corridor recovery package for San Antonio within two cycles, with retail vitality and sidewalk activity metrics as the measure of success.",
+      "quote": "San Antonio is not a forgotten corridor on my watch — the complaint gets an answer, and the corridor gets a plan.",
+      "fullStatement": "The people of San Antonio filed a complaint because they feel unheard. Their crime is low but their streets are quiet, and quiet streets in a working neighborhood mean families are struggling. I'm filing a formal response to that petition today, and I'm directing the City Administrator to bring me a targeted recovery package for the San Antonio corridor within two cycles — not a study, not a task force, a package with retail vitality and foot traffic targets we can actually track. If Fruitvale is the proof that investment works, San Antonio is the proof that we won't pick favorites.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-113-council_d3-004",
+      "type": "statement",
+      "topic": "Fruitvale Success and Credit",
+      "initiative": null,
+      "decision": "Publicly name Fruitvale's merchants and community organizations as the authors of the corridor's success, and commit to continuing the investment that supports their work — not to claim their credit, but to protect their wins.",
+      "quote": "Fruitvale's busy streets belong to the people who show up daily — City Hall just needs to keep out of the way and keep the resources coming.",
+      "fullStatement": "The mood in Fruitvale is up, the streets are busy, and I said it last cycle and I'll say it again: that's not a City Hall achievement. That's the fruit of organizers and merchants and families who have been doing the work long before any program had a name. My job is not to take credit for that energy — it's to make sure the investment follows it, that the Transit Hub Phase II actually honors the protections we promised, and that this district never gets treated like a data point. Fruitvale, you earned this. And I'll keep bringing the resources you need to hold it.",
+      "trackerUpdates": {}
+    }
+  ]
+}

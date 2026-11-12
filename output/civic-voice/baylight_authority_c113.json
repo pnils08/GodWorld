@@ -1,0 +1,24 @@
+{
+  "office": "baylight_authority",
+  "cycle": 113,
+  "speaker": "Keisha Ramos",
+  "cascadeSummary": "Phase II remediation stays on schedule with independent oversight confirmed, and the Cycle 115 construction milestone review holds. I'm doubling down on the community mitigation commitments I made last cycle — the 48-hour construction hotline is now live, dust control is active on the haul routes, and I've moved the workforce coordination meeting with Jack London businesses into this cycle ahead of the C115 review. The build holds to the project clock, and the neighborhoods beside it hold too.",
+  "statements": [
+    {
+      "statementId": "STMT-113-baylight_authority-001",
+      "type": "milestone_update",
+      "topic": "Baylight District Construction Milestone Review",
+      "initiative": "Baylight District — Final Council Vote",
+      "decision": "Confirmed Phase II remediation continues on schedule with independent oversight, and the Cycle 115 construction milestone review remains locked. Activated the 48-hour construction hotline and dust-control on haul routes this cycle, ahead of the C115 review.",
+      "quote": "The soil is clean, the oversight is independent, and the Cycle 115 review holds — the fence answers within 48 hours, and the trucks run quiet.",
+      "fullStatement": "Baylight Authority Director Keisha Ramos confirmed Phase II remediation continues on schedule with independent oversight verified, and the Cycle 115 construction milestone review stands. Effective this cycle, the construction hotline is live — the number on the fence now routes directly to our community response desk with a 48-hour guaranteed answer. Dust control is active on all haul routes serving the 65-acre site, and I've moved the workforce coordination meeting with Jack London businesses up into this cycle so the neighborhoods beside the build hear our labor plan before the C115 review, not after. This is a $2.1 billion project on a project clock — and a project only succeeds if the people living next to it hold too.",
+      "trackerUpdates": {
+        "initiative": "INIT-006",
+        "ImplementationPhase": "construction-active",
+        "MilestoneNotes": "C113: Phase II remediation on schedule with independent oversight; 48hr construction hotline live; dust control active on haul routes; Jack London workforce coordination meeting set pre-C115 review.",
+        "NextScheduledAction": "Construction milestone review",
+        "NextActionCycle": 115
+      }
+    }
+  ]
+}

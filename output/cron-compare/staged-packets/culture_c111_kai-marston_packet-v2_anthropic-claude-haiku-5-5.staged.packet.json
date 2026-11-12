@@ -1,0 +1,479 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00158",
+    "name": "Kai Marston",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Tara Ellison is rising — the acts and the rooms they play",
+    "approach": "Arts & entertainment approach: this slice is the culture ledger — who is rising, who just appeared, who is fading, with their domains and neighborhoods — plus the engine's culture seeds this cycle. Present-tense, neighborhood act not gallery PR. The names and trajectories are real; the garage rehearsal, the opening-night crowd, the set list are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "arts",
+      "hood": "Rockridge",
+      "facts": [
+        "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 63, surging), last seen C110",
+        "Sculptor Alma Vasquez (sculptor), Arts, Laurel — fame rising (fame 54, ascending), last seen C86",
+        "Nina Reyes (actress), Arts, Fruitvale — fame rising (fame 52, surging), last seen C101",
+        "Theo Banks (rapper), Arts, Uptown — fame rising (fame 48, surging), last seen C99",
+        "Warriors Alumni Thompson (basketball legend), Sports, Temescal — new on the culture record last cycle (fame 18, rising), last seen C110",
+        "Lena Cross (Celebrity), Arts, Piedmont Ave — fading — the where-are-they-now file (fame 94, cooling), last seen C94",
+        "Rowan Pierce (journalist), Media, Piedmont Ave — fading — the where-are-they-now file (fame 68, cooling), last seen C88",
+        "ENGINE SEED (Citywide): Iman Horton; Malik Hayes; Victor Baker",
+        "ENGINE SEED (East Oakland): Ruth Anyanwu; Lena Marchetti; Adaeze Onwuka · at Sunrise Cafe; Masjid An-Nur Oakland",
+        "ENGINE SEED (Chinatown): Matra Woven; Dana Reeve; Jose Colon · at Heritage Bakehouse; Ninth Street Kitchen"
+      ],
+      "priorCycle": null,
+      "note": null,
+      "engineHooks": [
+        "realized the week had passed without a single thing worth retelling near a storefront window (arts/culture feature)",
+        "Uptown boom sustained — momentum 10/10, the block everyone wants onto (desk rotation)",
+        "The Santos household (2) moved from Chinatown to West Oakland — moving up from Chinatown (desk rotation)",
+        "Ignacio Zavala moved from Lake Merritt to West Oakland — leaving Lake Merritt for a better fit (desk rotation)"
+      ],
+      "roomIsYours": "the rehearsal space, the flyer on the pole, who showed up, what the room felt like when the second act started",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-arts",
+    "hood": "Rockridge",
+    "src": "output/beats/Cultural_Ledger.jsonl @C111",
+    "plan": {
+      "focus": "The actual environment surrounding Tara Ellison's rise in Rockridge.",
+      "closeQuestion": "Is this a sustainable surge or just a momentary neighborhood trend?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00546",
+        "name": "Tara Ellison",
+        "profile": "Tara Ellison — Journalist — Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-01063",
+        "name": "Alma Vasquez",
+        "profile": "Alma Vasquez — sculptor — Laurel",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-01057",
+        "name": "Nina Reyes",
+        "profile": "Nina Reyes — actress — Fruitvale",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00546-8b529cdd32",
+        "pop": "POP-00546",
+        "name": "Tara Ellison",
+        "quote": "I'm not sure what you mean. I'm just here in Rockridge, and I'm not in a room with anyone right now.",
+        "factIds": [
+          "F-2b5f06ca9054"
+        ],
+        "src": "packet.W2[POP-00546]"
+      },
+      {
+        "id": "Q-POP-01063-b5d18fb88b",
+        "pop": "POP-01063",
+        "name": "Alma Vasquez",
+        "quote": "To be honest, I don't really know much about Tara Ellison or her rise in Rockridge. I live in Laurel, and while I'm aware of the general vibe around Oakland, I don't have a clear view of what's going on in Rockridge. I do see that there are a lot of cultural figures rising in fame, and that's interesting. Sometimes when I'm driving through other neighborhoods, I catch snippets of the local culture, like the bassline from a car at the stoplight here in Laurel.",
+        "factIds": [
+          "F-6986132f6bd0",
+          "F-e6a3f8136c40",
+          "F-820358b00bbf"
+        ],
+        "src": "packet.W2[POP-01063]"
+      },
+      {
+        "id": "Q-POP-01057-791196fbda",
+        "pop": "POP-01057",
+        "name": "Nina Reyes",
+        "quote": "To be honest, I haven't really thought about Tara Ellison's fame or what's happening over in Rockridge. I've just been focusing on my own life and things here in Fruitvale.",
+        "factIds": [
+          "F-6986132f6bd0"
+        ],
+        "src": "packet.W2[POP-01057]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Kai Marston",
+        "text": "The specific rehearsal spaces or informal gathering spots in Rockridge where Ellison's influence is manifesting.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C111",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-a43c5d888b36"
+    },
+    {
+      "t": "FACT",
+      "text": "39 culture figures rising; 1 new on the record",
+      "src": "output/beats/Cultural_Ledger.jsonl @C111",
+      "id": "F-820358b00bbf"
+    },
+    {
+      "t": "FACT",
+      "text": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 63, surging), last seen C110.",
+      "src": "output/beats/Cultural_Ledger.jsonl @C111",
+      "id": "F-6986132f6bd0"
+    },
+    {
+      "t": "FACT",
+      "text": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 63, surging), last seen C110",
+      "src": "output/beats/Cultural_Ledger.jsonl @C111",
+      "id": "F-9181e9ec18e8"
+    },
+    {
+      "t": "FACT",
+      "text": "Sculptor Alma Vasquez (sculptor), Arts, Laurel — fame rising (fame 54, ascending), last seen C86",
+      "src": "output/beats/Cultural_Ledger.jsonl @C111",
+      "id": "F-e6a3f8136c40"
+    },
+    {
+      "t": "FACT",
+      "text": "Nina Reyes (actress), Arts, Fruitvale — fame rising (fame 52, surging), last seen C101",
+      "src": "output/beats/Cultural_Ledger.jsonl @C111",
+      "id": "F-fdb1c8bf6212"
+    },
+    {
+      "t": "FACT",
+      "text": "Theo Banks (rapper), Arts, Uptown — fame rising (fame 48, surging), last seen C99",
+      "src": "output/beats/Cultural_Ledger.jsonl @C111",
+      "id": "F-b10bef6c77d4"
+    },
+    {
+      "t": "FACT",
+      "text": "Warriors Alumni Thompson (basketball legend), Sports, Temescal — new on the culture record last cycle (fame 18, rising), last seen C110",
+      "src": "output/beats/Cultural_Ledger.jsonl @C111",
+      "id": "F-7f33736dbf1b"
+    },
+    {
+      "t": "FACT",
+      "text": "Lena Cross (Celebrity), Arts, Piedmont Ave — fading — the where-are-they-now file (fame 94, cooling), last seen C94",
+      "src": "output/beats/Cultural_Ledger.jsonl @C111",
+      "id": "F-104386f41960"
+    },
+    {
+      "t": "FACT",
+      "text": "Rowan Pierce (journalist), Media, Piedmont Ave — fading — the where-are-they-now file (fame 68, cooling), last seen C88",
+      "src": "output/beats/Cultural_Ledger.jsonl @C111",
+      "id": "F-e836f4bd7b8d"
+    },
+    {
+      "t": "FACT",
+      "text": "ENGINE SEED (Citywide): Iman Horton; Malik Hayes; Victor Baker",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C111",
+      "id": "F-8945c0eefb74"
+    },
+    {
+      "t": "FACT",
+      "text": "ENGINE SEED (East Oakland): Ruth Anyanwu; Lena Marchetti; Adaeze Onwuka · at Sunrise Cafe; Masjid An-Nur Oakland",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C111",
+      "id": "F-08d4229258cc"
+    },
+    {
+      "t": "FACT",
+      "text": "ENGINE SEED (Chinatown): Matra Woven; Dana Reeve; Jose Colon · at Heritage Bakehouse; Ninth Street Kitchen",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C111",
+      "id": "F-26dca536ec81"
+    },
+    {
+      "t": "FACT",
+      "text": "Tara Ellison — Journalist — Rockridge",
+      "src": "Simulation_Ledger profile for POP-00546",
+      "id": "F-2b5f06ca9054"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "kai-arts-entertainment-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Turn a sourced evening pulse into present-tense arts and entertainment reporting where art, media, and a named place become a neighborhood act. A vivid room grounded in the Packet is success; generic culture roundup and invented nightlife are not.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "present-tense arts and entertainment scene with grounded neighborhood analysis",
+      "targetWords": "500-800",
+      "opening": "a Packet-backed named event, media slate, sighting, venue, or neighborhood arts consequence",
+      "closing": "an image or open question about what the room, screen, or block is becoming"
+    },
+    "authorizedTexture": [
+      "unnamed sensory room color—light, sound, weather, crowd movement, or the reporter's presence—that adds no new named fact",
+      "present-tense interpretation of how a Packet-backed arts, TV, movie, streaming, event, or sighting pulse lands on a neighborhood",
+      "metaphor, contrast, and scene transition grounded in the supplied pulse",
+      "a skeptical or curious question about what the supplied cultural signal means, framed as analysis rather than settled fact"
+    ],
+    "textureConditions": [
+      "every named person, artist, show, movie, event, venue, business, institution, neighborhood, and organization must come from the Packet",
+      "TV, movie, streaming, fame-sighting, event, and venue details must remain tied to the supplied evening source or pulse",
+      "unnamed sensory color may not create a new event, attendance count, quote, review, business action, or public reaction",
+      "the reporter may not claim an interview, attendance, observation, trend, or social-media response that the Packet does not supply",
+      "do not turn a shared evening substrate into a multi-voice culture average; one pulse, one room, one truth"
+    ],
+    "canonBlockers": [
+      "a named artist, celebrity, show, movie, event, venue, business, institution, neighborhood, or organization not found in the supplied record",
+      "an invented opening, screening, performance, appearance, sighting, crowd, attendance figure, review, or social-media reaction",
+      "an unsupported quote, interview, direct observation, career claim, release date, rating, or cultural trend",
+      "raw engine scores, labels, or decimals printed as public-facing cultural evidence",
+      "a causal claim about what a neighborhood or audience feels presented as measured fact",
+      "a generic culture-desk roundup that abandons the assigned evening pulse"
+    ]
+  },
+  "manifest": {
+    "id": "AM-391bf35ed324",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-a43c5d888b36",
+        "t": "FACT",
+        "text": "Current cycle: C111",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-820358b00bbf",
+        "t": "FACT",
+        "text": "39 culture figures rising; 1 new on the record",
+        "src": "output/beats/Cultural_Ledger.jsonl @C111"
+      },
+      {
+        "id": "F-6986132f6bd0",
+        "t": "FACT",
+        "text": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 63, surging), last seen C110.",
+        "src": "output/beats/Cultural_Ledger.jsonl @C111"
+      },
+      {
+        "id": "F-9181e9ec18e8",
+        "t": "FACT",
+        "text": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 63, surging), last seen C110",
+        "src": "output/beats/Cultural_Ledger.jsonl @C111"
+      },
+      {
+        "id": "F-e6a3f8136c40",
+        "t": "FACT",
+        "text": "Sculptor Alma Vasquez (sculptor), Arts, Laurel — fame rising (fame 54, ascending), last seen C86",
+        "src": "output/beats/Cultural_Ledger.jsonl @C111"
+      },
+      {
+        "id": "F-fdb1c8bf6212",
+        "t": "FACT",
+        "text": "Nina Reyes (actress), Arts, Fruitvale — fame rising (fame 52, surging), last seen C101",
+        "src": "output/beats/Cultural_Ledger.jsonl @C111"
+      },
+      {
+        "id": "F-b10bef6c77d4",
+        "t": "FACT",
+        "text": "Theo Banks (rapper), Arts, Uptown — fame rising (fame 48, surging), last seen C99",
+        "src": "output/beats/Cultural_Ledger.jsonl @C111"
+      },
+      {
+        "id": "F-7f33736dbf1b",
+        "t": "FACT",
+        "text": "Warriors Alumni Thompson (basketball legend), Sports, Temescal — new on the culture record last cycle (fame 18, rising), last seen C110",
+        "src": "output/beats/Cultural_Ledger.jsonl @C111"
+      },
+      {
+        "id": "F-104386f41960",
+        "t": "FACT",
+        "text": "Lena Cross (Celebrity), Arts, Piedmont Ave — fading — the where-are-they-now file (fame 94, cooling), last seen C94",
+        "src": "output/beats/Cultural_Ledger.jsonl @C111"
+      },
+      {
+        "id": "F-e836f4bd7b8d",
+        "t": "FACT",
+        "text": "Rowan Pierce (journalist), Media, Piedmont Ave — fading — the where-are-they-now file (fame 68, cooling), last seen C88",
+        "src": "output/beats/Cultural_Ledger.jsonl @C111"
+      },
+      {
+        "id": "F-8945c0eefb74",
+        "t": "FACT",
+        "text": "ENGINE SEED (Citywide): Iman Horton; Malik Hayes; Victor Baker",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C111"
+      },
+      {
+        "id": "F-08d4229258cc",
+        "t": "FACT",
+        "text": "ENGINE SEED (East Oakland): Ruth Anyanwu; Lena Marchetti; Adaeze Onwuka · at Sunrise Cafe; Masjid An-Nur Oakland",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C111"
+      },
+      {
+        "id": "F-26dca536ec81",
+        "t": "FACT",
+        "text": "ENGINE SEED (Chinatown): Matra Woven; Dana Reeve; Jose Colon · at Heritage Bakehouse; Ninth Street Kitchen",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C111"
+      },
+      {
+        "id": "F-2b5f06ca9054",
+        "t": "FACT",
+        "text": "Tara Ellison — Journalist — Rockridge",
+        "src": "Simulation_Ledger profile for POP-00546"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00546-8b529cdd32",
+        "speakerId": "POP-00546",
+        "speakerName": "Tara Ellison",
+        "text": "I'm not sure what you mean. I'm just here in Rockridge, and I'm not in a room with anyone right now.",
+        "factIds": [
+          "F-2b5f06ca9054"
+        ],
+        "src": "packet.W2[POP-00546]"
+      },
+      {
+        "id": "Q-POP-01063-b5d18fb88b",
+        "speakerId": "POP-01063",
+        "speakerName": "Alma Vasquez",
+        "text": "To be honest, I don't really know much about Tara Ellison or her rise in Rockridge. I live in Laurel, and while I'm aware of the general vibe around Oakland, I don't have a clear view of what's going on in Rockridge. I do see that there are a lot of cultural figures rising in fame, and that's interesting. Sometimes when I'm driving through other neighborhoods, I catch snippets of the local culture, like the bassline from a car at the stoplight here in Laurel.",
+        "factIds": [
+          "F-6986132f6bd0",
+          "F-e6a3f8136c40",
+          "F-820358b00bbf"
+        ],
+        "src": "packet.W2[POP-01063]"
+      },
+      {
+        "id": "Q-POP-01057-791196fbda",
+        "speakerId": "POP-01057",
+        "speakerName": "Nina Reyes",
+        "text": "To be honest, I haven't really thought about Tara Ellison's fame or what's happening over in Rockridge. I've just been focusing on my own life and things here in Fruitvale.",
+        "factIds": [
+          "F-6986132f6bd0"
+        ],
+        "src": "packet.W2[POP-01057]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00546",
+        "name": "Tara Ellison",
+        "profile": "Tara Ellison — Journalist — Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-01063",
+        "name": "Alma Vasquez",
+        "profile": "Alma Vasquez — sculptor — Laurel",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-01057",
+        "name": "Nina Reyes",
+        "profile": "Nina Reyes — actress — Fruitvale",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Kai Marston",
+        "text": "The specific rehearsal spaces or informal gathering spots in Rockridge where Ellison's influence is manifesting.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "unnamed sensory room color—light, sound, weather, crowd movement, or the reporter's presence—that adds no new named fact",
+      "present-tense interpretation of how a Packet-backed arts, TV, movie, streaming, event, or sighting pulse lands on a neighborhood",
+      "metaphor, contrast, and scene transition grounded in the supplied pulse",
+      "a skeptical or curious question about what the supplied cultural signal means, framed as analysis rather than settled fact"
+    ],
+    "textureConditions": [
+      "every named person, artist, show, movie, event, venue, business, institution, neighborhood, and organization must come from the Packet",
+      "TV, movie, streaming, fame-sighting, event, and venue details must remain tied to the supplied evening source or pulse",
+      "unnamed sensory color may not create a new event, attendance count, quote, review, business action, or public reaction",
+      "the reporter may not claim an interview, attendance, observation, trend, or social-media response that the Packet does not supply",
+      "do not turn a shared evening substrate into a multi-voice culture average; one pulse, one room, one truth"
+    ],
+    "forbiddenClaimClasses": [
+      "a named artist, celebrity, show, movie, event, venue, business, institution, neighborhood, or organization not found in the supplied record",
+      "an invented opening, screening, performance, appearance, sighting, crowd, attendance figure, review, or social-media reaction",
+      "an unsupported quote, interview, direct observation, career claim, release date, rating, or cultural trend",
+      "raw engine scores, labels, or decimals printed as public-facing cultural evidence",
+      "a causal claim about what a neighborhood or audience feels presented as measured fact",
+      "a generic culture-desk roundup that abandons the assigned evening pulse"
+    ]
+  }
+}

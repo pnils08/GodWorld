@@ -1,0 +1,78 @@
+{
+  "draft": "output/cron-compare/undocked_c113_nia-rook_nia-proof-1028-daily_openai-gpt-6-luna.md",
+  "cycle": "113",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "ce41650769db915c03f3a3f4f7933db3863a064d6035fa297b7fe4125982b592",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Draft verified clean with zero canon contradictions, exact interview quote fidelity, and compliant world-state texture.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "nia-rook-undocked-recap-v1",
+    "packageVersion": "NIAROOK-UNDOCKED-2",
+    "manifestId": "AM-c5cd92934a2c",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "9352",
+          "2",
+          "5",
+          "1",
+          "111",
+          "170"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Cristina Booker",
+      "Eric Taveras",
+      "Father Miguel"
+    ],
+    "unverified": [
+      "Because Eric"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 1,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0094,
+  "durationMs": 7323,
+  "parseError": false,
+  "ranAt": "2026-10-28T17:06:01.980Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 350",
+    "words": 417,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "ce41650769db915c03f3a3f4f7933db3863a064d6035fa297b7fe4125982b592",
+    "costUsd": 0.0012
+  }
+}

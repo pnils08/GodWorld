@@ -1,0 +1,27 @@
+{
+  "status": "arc-seed",
+  "cycle": "111",
+  "desk": "culture",
+  "persona": "elliot-graye",
+  "hood": "Lake Merritt",
+  "quotes": [
+    {
+      "pop": "POP-00763",
+      "name": "Kenji Tanaka",
+      "quote": "I'm not sure. I know the Bay Pure Land Buddhist Temple is a place of peace for our community, but I haven't seen their crisis response efforts in action myself, so I can't say what specifically brought those people in."
+    },
+    {
+      "pop": "POP-00753",
+      "name": "Eunice Marston",
+      "quote": "It is a balance we have to maintain. We had those 72 people come to us for crisis support, and then we had 237 for Epiphany. As a faith leader, you just keep your focus on the people and their needs, whether that means providing emergency aid or coming together for a holy day. It's all part of the same work."
+    },
+    {
+      "pop": "POP-00046",
+      "name": "Manny Ellen",
+      "quote": "I've joined the congregation there. I was just over at the church recently when the lunch program was wrapping up; I saw the volunteers stacking chairs while some of the seniors stayed behind to finish their coffee."
+    }
+  ],
+  "claim": "I'm not sure. I know the Bay Pure Land Buddhist Temple is a place of peace for our community, but I haven't seen their crisis response efforts in action myself, so I can't say what specifically brought those people in.",
+  "src": "citizenVoice PRESS c111",
+  "ranAt": "2026-10-15T18:15:54.812Z"
+}

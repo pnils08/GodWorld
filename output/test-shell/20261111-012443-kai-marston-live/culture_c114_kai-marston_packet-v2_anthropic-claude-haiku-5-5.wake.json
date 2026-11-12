@@ -1,0 +1,38 @@
+{
+  "mode": "wake-write",
+  "desk": "culture",
+  "cycle": "114",
+  "provider": "openrouter",
+  "model": "anthropic/claude-haiku-5.5",
+  "configuredWriterModel": "anthropic/claude-haiku-5.5",
+  "gateModel": "sonnet",
+  "persona": "kai-marston",
+  "byline": {
+    "name": "Kai Marston",
+    "popid": "POP-00158",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 28,
+  "quotesLanded": 4,
+  "disposition": "ungated-sample",
+  "rheaPass": null,
+  "rheaFlagCount": null,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [],
+  "toolCalls": 0,
+  "wordCount": 772,
+  "targetWords": "500-800",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": null,
+  "gradeRecord": null,
+  "article": "output/test-shell/20261111-012443-kai-marston-live/samples/culture_c114_kai-marston_packet-v2_anthropic-claude-haiku-5-5.sample.md",
+  "selfRecord": null,
+  "ranAt": "2026-11-11T07:25:08.672Z"
+}

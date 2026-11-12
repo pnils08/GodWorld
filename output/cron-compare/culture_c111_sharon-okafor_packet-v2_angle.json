@@ -1,0 +1,691 @@
+{
+  "stage": "angle",
+  "desk": "culture",
+  "cycle": "111",
+  "persona": "sharon-okafor",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00159",
+      "name": "Sharon Okafor",
+      "role": "desk reporter",
+      "desk": "culture"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Lena Cross is fading — how the city follows its names",
+      "approach": "Lifestyle approach: this slice is the fame record — who the city knows, who is fading, who just arrived — with their domains, tiers and neighborhoods. Behavior patterns, warm analytical. The names and trajectories are real; the morning routine, the regular order, what the neighbors think are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "lifestyle",
+        "hood": "Piedmont Ave",
+        "facts": [
+          "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 94, cooling), 17 media mentions",
+          "Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 68, cooling), 14 media mentions",
+          "Marin Tao (Celebrity), Arts, Chinatown, Iconic-tier — the city knows them (fame 153, viral), 25 media mentions",
+          "Rico Valez (Celebrity), Arts, Fruitvale, Iconic-tier — the city knows them (fame 116, viral), 19 media mentions",
+          "Warriors Alumni Thompson (basketball legend), Sports, Temescal, Local-tier — new on the culture record last cycle (fame 18, rising), 1 media mentions"
+        ],
+        "priorCycle": null,
+        "note": null,
+        "engineHooks": [
+          "defaulted on the debts — the savings are gone and the record carries it (observational analysis)",
+          "defaulted on the debts — the savings are gone and the record carries it (observational analysis)",
+          "the debts crossed a line this week — sleep comes harder now (observational analysis)",
+          "The Keane family opened Keane Mercantile (observational analysis)"
+        ],
+        "roomIsYours": "the coffee order, the dog's name, who recognizes them at the farmers market and who pretends not to",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-lifestyle",
+      "hood": "Piedmont Ave",
+      "score": null,
+      "src": "output/beats/Cultural_Ledger.jsonl @C111",
+      "nearby": [
+        {
+          "text": "Chinatown | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c111.md \"### Chinatown\"; events: world_summary_c111.md \"## World Events\""
+        },
+        {
+          "text": "East Oakland | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c111.md \"### East Oakland\"; events: world_summary_c111.md \"## World Events\""
+        },
+        {
+          "text": "Fruitvale | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c111.md \"### Fruitvale\"; events: world_summary_c111.md \"## World Events\""
+        },
+        {
+          "text": "Grand Lake | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c111.md \"### Grand Lake\"; events: world_summary_c111.md \"## World Events\""
+        },
+        {
+          "text": "Jack London | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c111.md \"### Jack London\"; events: world_summary_c111.md \"## World Events\""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": []
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C111",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-a43c5d888b36"
+      },
+      {
+        "t": "FACT",
+        "text": "Marin Tao leads the fame table; 2 fading, 1 new",
+        "src": "output/beats/Cultural_Ledger.jsonl @C111",
+        "id": "F-9ac6754e1aad"
+      },
+      {
+        "t": "FACT",
+        "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 94, cooling), 17 media mentions.",
+        "src": "output/beats/Cultural_Ledger.jsonl @C111",
+        "id": "F-c436c79ef289"
+      },
+      {
+        "t": "FACT",
+        "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 94, cooling), 17 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C111",
+        "id": "F-0be90eebddec"
+      },
+      {
+        "t": "FACT",
+        "text": "Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 68, cooling), 14 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C111",
+        "id": "F-b4186ae55e12"
+      },
+      {
+        "t": "FACT",
+        "text": "Marin Tao (Celebrity), Arts, Chinatown, Iconic-tier — the city knows them (fame 153, viral), 25 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C111",
+        "id": "F-11a3d518c4c3"
+      },
+      {
+        "t": "FACT",
+        "text": "Rico Valez (Celebrity), Arts, Fruitvale, Iconic-tier — the city knows them (fame 116, viral), 19 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C111",
+        "id": "F-57447ba77225"
+      },
+      {
+        "t": "FACT",
+        "text": "Warriors Alumni Thompson (basketball legend), Sports, Temescal, Local-tier — new on the culture record last cycle (fame 18, rising), 1 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C111",
+        "id": "F-6af3ab1ed224"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "No target candidate was supplied. Return targets as an empty array; do not invent a person or identifier. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "street",
+    "candidates": [],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Sharon Okafor",
+    "popid": "POP-00159"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-lifestyle",
+      "angle": "Lena Cross is fading — how the city follows its names",
+      "label": "Marin Tao leads the fame table; 2 fading, 1 new",
+      "hookLine": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 94, cooling), 17 media mentions.",
+      "hood": "Piedmont Ave",
+      "citizens": [
+        "Lena Cross (POP-00539)",
+        "Rowan Pierce (POP-00545)",
+        "Marin Tao (POP-00537)",
+        "Rico Valez (POP-00632)"
+      ],
+      "popids": [
+        "POP-00539",
+        "POP-00545",
+        "POP-00537",
+        "POP-00632"
+      ],
+      "ref": "output/beats/Cultural_Ledger.jsonl @C111",
+      "cycle": 111
+    },
+    "approach": "Lifestyle approach: this slice is the fame record — who the city knows, who is fading, who just arrived — with their domains, tiers and neighborhoods. Behavior patterns, warm analytical. The names and trajectories are real; the morning routine, the regular order, what the neighbors think are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": {
+    "pulse": {
+      "className": "quiet-nightlife",
+      "score": 24,
+      "label": "Neighborhood Response Hub (East Oakland) · quiet night",
+      "named": "Neighborhood Response Hub",
+      "hood": "East Oakland",
+      "person": null,
+      "venue": null
+    },
+    "recommend": {
+      "bag": "lifestyle",
+      "slug": "sharon-okafor",
+      "name": "Sharon Okafor",
+      "popid": "POP-00159",
+      "bagDoc": "docs/media/SHARON_LIFESTYLE_BAG.md",
+      "reason": "top pulse quiet-nightlife → lifestyle",
+      "pulseClass": "quiet-nightlife",
+      "pulseLabel": "Neighborhood Response Hub (East Oakland) · quiet night"
+    },
+    "prewrite": {
+      "pulseClass": "quiet-nightlife",
+      "angle": "Neighborhood Response Hub is open and quiet in East Oakland. What that condition means is not yet established.",
+      "hookLine": "Neighborhood Response Hub is open and quiet in East Oakland.",
+      "anchorFacts": [
+        "NAMED: Neighborhood Response Hub",
+        "HOOD: East Oakland",
+        "VENUE: Neighborhood Response Hub",
+        "HOOD: East Oakland",
+        "EVENING RECORD: open and quiet"
+      ],
+      "bagRecommend": "lifestyle",
+      "bagSlug": "sharon-okafor"
+    },
+    "texture": {
+      "famous": [
+        "Pixel Pete",
+        "Sienna Vale",
+        "Lumi Crest"
+      ],
+      "restaurants": [
+        {
+          "name": "Romano's",
+          "hood": "Dimond"
+        },
+        {
+          "name": "West Side Cafe",
+          "hood": "West Oakland"
+        }
+      ],
+      "fastFood": [
+        {
+          "name": "SpeedyBurger",
+          "hood": "Downtown"
+        }
+      ],
+      "nightlife": [
+        {
+          "name": "Neighborhood Response Hub",
+          "hood": "East Oakland"
+        }
+      ],
+      "nightlifeMeta": {
+        "volume": 4,
+        "vibe": "tense",
+        "movement": "restricted",
+        "weatherImpact": 1
+      },
+      "cityEvents": [
+        "Chinatown Neighborhood Stabilization Panel",
+        "Downtown Neon Terrace DJ Night",
+        "The Dillon Family Block Party",
+        "West Oakland Club Crawl"
+      ],
+      "tv": [
+        "Valentine Special",
+        "Breaking Bulletin",
+        "Warm House",
+        "A's Sports Central",
+        "One-on-One with Vladimir Gonzalez (RF)"
+      ],
+      "movies": [
+        "Love in Oakland",
+        "Rising Star",
+        "Diamond City"
+      ],
+      "sportsBroadcast": "Oakland Sports Tonight",
+      "streamingTrend": "romantic comedies",
+      "foodTrend": "High mobility / civic-tension food trend"
+    },
+    "signals": {
+      "fameCount": 1,
+      "sightingCount": 3,
+      "sightings": [
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Pixel Pete spotted at Blue Lantern Bar",
+          "name": "Pixel Pete",
+          "venue": "Blue Lantern Bar",
+          "ref": "Ripple_Ledger cycle 111 (CauseType lifestyle-sighting); rendered: world_summary_c111.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Jack London",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Sienna Vale spotted at The Northgate Bar",
+          "name": "Sienna Vale",
+          "venue": "The Northgate Bar",
+          "ref": "Ripple_Ledger cycle 111 (CauseType lifestyle-sighting); rendered: world_summary_c111.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "KONO",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Lumi Crest spotted at Sunrise Cafe",
+          "name": "Lumi Crest",
+          "venue": "Sunrise Cafe",
+          "ref": "Ripple_Ledger cycle 111 (CauseType lifestyle-sighting); rendered: world_summary_c111.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "East Oakland",
+          "popids": []
+        }
+      ]
+    },
+    "scene": {
+      "venues": [
+        {
+          "name": "Romano's",
+          "hood": "Dimond"
+        },
+        {
+          "name": "West Side Cafe",
+          "hood": "West Oakland"
+        },
+        {
+          "name": "SpeedyBurger",
+          "hood": "Downtown"
+        },
+        {
+          "name": "Neighborhood Response Hub",
+          "hood": "East Oakland"
+        }
+      ],
+      "nightlifeMeta": {
+        "volume": 4,
+        "vibe": "tense",
+        "movement": "restricted",
+        "weatherImpact": 1
+      },
+      "cityEvents": [
+        "Chinatown Neighborhood Stabilization Panel",
+        "Downtown Neon Terrace DJ Night",
+        "The Dillon Family Block Party",
+        "West Oakland Club Crawl"
+      ],
+      "tv": [
+        "Valentine Special",
+        "Breaking Bulletin",
+        "Warm House",
+        "A's Sports Central",
+        "One-on-One with Vladimir Gonzalez (RF)"
+      ],
+      "movies": [
+        "Love in Oakland",
+        "Rising Star",
+        "Diamond City"
+      ],
+      "colorRoom": "Named places only from Evening Texture / desk_signal. The supplied evening record describes nightlife as quiet; raw scoring fields stay internal.  Sensory room (weather, light, sound) is free; careers and employees are not."
+    },
+    "candidates": [
+      {
+        "className": "quiet-nightlife",
+        "score": 24,
+        "label": "Neighborhood Response Hub (East Oakland) · quiet night",
+        "named": "Neighborhood Response Hub",
+        "hood": "East Oakland"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Pixel Pete at Blue Lantern Bar (Jack London)",
+        "named": "Blue Lantern Bar",
+        "hood": "Jack London"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Sienna Vale at The Northgate Bar (KONO)",
+        "named": "The Northgate Bar",
+        "hood": "KONO"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Lumi Crest at Sunrise Cafe (East Oakland)",
+        "named": "Sunrise Cafe",
+        "hood": "East Oakland"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Romano's (Dimond)",
+        "named": "Romano's",
+        "hood": "Dimond"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "West Side Cafe (West Oakland)",
+        "named": "West Side Cafe",
+        "hood": "West Oakland"
+      },
+      {
+        "className": "city-event",
+        "score": 17,
+        "label": "The Dillon Family Block Party",
+        "named": "The Dillon Family Block Party",
+        "hood": null
+      },
+      {
+        "className": "fame-sighting",
+        "score": 16,
+        "label": "Vinnie Keane — fame rise",
+        "named": "Vinnie Keane",
+        "hood": "Grand Lake"
+      }
+    ],
+    "perSeat": {
+      "mason-ortega": {
+        "pulseClass": "named-restaurant",
+        "label": "Romano's (Dimond)",
+        "score": 34,
+        "bag": "kitchen"
+      },
+      "kai-marston": {
+        "pulseClass": "quiet-nightlife",
+        "label": "Neighborhood Response Hub (East Oakland) · quiet night",
+        "score": 32,
+        "bag": "arts"
+      },
+      "sharon-okafor": {
+        "pulseClass": "quiet-nightlife",
+        "label": "Neighborhood Response Hub (East Oakland) · quiet night",
+        "score": 32,
+        "bag": "lifestyle"
+      },
+      "maria-keen": {
+        "pulseClass": "quiet-nightlife",
+        "label": "Neighborhood Response Hub (East Oakland) · quiet night",
+        "score": 32,
+        "bag": "ground"
+      },
+      "elliot-graye": {
+        "pulseClass": "fame-sighting",
+        "label": "Pixel Pete at Blue Lantern Bar (Jack London)",
+        "score": 31,
+        "bag": "faith"
+      }
+    }
+  },
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "LIFESTYLE-SLICE-1",
+    "kind": "beat-lifestyle",
+    "seat": {
+      "slug": "sharon-okafor",
+      "name": "Sharon Okafor",
+      "popid": "POP-00159",
+      "desk": "culture",
+      "domain": "lifestyle",
+      "builder": "buildLifestyleSlice.js"
+    },
+    "hood": "Piedmont Ave",
+    "pulse": {
+      "className": "beat-lifestyle",
+      "score": 100,
+      "label": "Marin Tao leads the fame table; 2 fading, 1 new",
+      "hood": "Piedmont Ave",
+      "source": "output/beats/Cultural_Ledger.jsonl @C111"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "Lena Cross is fading — how the city follows its names",
+      "hookLine": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 94, cooling), 17 media mentions.",
+      "anchorFacts": [
+        "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 94, cooling), 17 media mentions",
+        "Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 68, cooling), 14 media mentions",
+        "Marin Tao (Celebrity), Arts, Chinatown, Iconic-tier — the city knows them (fame 153, viral), 25 media mentions",
+        "Rico Valez (Celebrity), Arts, Fruitvale, Iconic-tier — the city knows them (fame 116, viral), 19 media mentions",
+        "Warriors Alumni Thompson (basketball legend), Sports, Temescal, Local-tier — new on the culture record last cycle (fame 18, rising), 1 media mentions"
+      ],
+      "evidence": [
+        {
+          "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 94, cooling), 17 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C111"
+        },
+        {
+          "text": "Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 68, cooling), 14 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C111"
+        },
+        {
+          "text": "Marin Tao (Celebrity), Arts, Chinatown, Iconic-tier — the city knows them (fame 153, viral), 25 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C111"
+        },
+        {
+          "text": "Rico Valez (Celebrity), Arts, Fruitvale, Iconic-tier — the city knows them (fame 116, viral), 19 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C111"
+        },
+        {
+          "text": "Warriors Alumni Thompson (basketball legend), Sports, Temescal, Local-tier — new on the culture record last cycle (fame 18, rising), 1 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C111"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": null,
+      "hooks": [
+        {
+          "text": "defaulted on the debts — the savings are gone and the record carries it",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "West Oakland",
+          "priority": 3
+        },
+        {
+          "text": "defaulted on the debts — the savings are gone and the record carries it",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Laurel",
+          "priority": 3
+        },
+        {
+          "text": "the debts crossed a line this week — sleep comes harder now",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Rockridge",
+          "priority": 3
+        },
+        {
+          "text": "The Keane family opened Keane Mercantile",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Grand Lake",
+          "priority": 4
+        },
+        {
+          "text": "Downtown housing pressure at 8/10: rents climbing, households stretching to stay",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Downtown",
+          "priority": 7
+        },
+        {
+          "text": "Grand Lake boom sustained — momentum 10/10, the block everyone wants onto",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Grand Lake",
+          "priority": 7
+        },
+        {
+          "text": "realized the week had passed without a single thing worth retelling near a storefront window",
+          "angle": "arts/culture feature",
+          "domain": "CULTURE",
+          "hood": "Grand Lake",
+          "priority": 3
+        }
+      ],
+      "note": null,
+      "pageVoices": [],
+      "roomIsYours": "the coffee order, the dog's name, who recognizes them at the farmers market and who pretends not to"
+    },
+    "citizens": [
+      {
+        "popid": "POP-00539",
+        "name": "Lena Cross",
+        "role": "Actor",
+        "neighborhood": "Piedmont Ave",
+        "business": null,
+        "profile": "Lena Cross — Actor — Piedmont Ave",
+        "why": "fading — the where-are-they-now file (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-00545",
+        "name": "Rowan Pierce",
+        "role": "Freelance Writer",
+        "neighborhood": "Piedmont Ave",
+        "business": null,
+        "profile": "Rowan Pierce — Freelance Writer — Piedmont Ave",
+        "why": "fading — the where-are-they-now file (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-00537",
+        "name": "Marin Tao",
+        "role": "Musician",
+        "neighborhood": "Chinatown",
+        "business": null,
+        "profile": "Marin Tao — Musician — Chinatown",
+        "why": "the city knows them (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-00632",
+        "name": "Rico Valez",
+        "role": "Musician",
+        "neighborhood": "Fruitvale",
+        "business": null,
+        "profile": "Rico Valez — Musician — Fruitvale",
+        "why": "the city knows them (Cultural_Ledger)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Cultural_Ledger.jsonl @C111",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Sharon Okafor this cycle)",
+      "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Sharon Okafor",
+    "popid": "POP-00159",
+    "text": "I'm heading over to Piedmont Ave to see what's actually left of the Lena Cross era. She was global, but now she's just another name in the 'where-are-they-now' pile. I want to see if she's still ordering the same thing at the cafe or if she's pretending not to see the people who remember her peak. While I'm there, I'll keep an eye out for Rowan Pierce; two fading lights on the same stretch of road usually have a story about how the slide happens. I'm looking for the gap between the fame they used to have and the quiet they've got now.",
+    "plan": {
+      "chase": "I'm heading over to Piedmont Ave to see what's actually left of the Lena Cross era. She was global, but now she's just another name in the 'where-are-they-now' pile. I want to see if she's still ordering the same thing at the cafe or if she's pretending not to see the people who remember her peak. While I'm there, I'll keep an eye out for Rowan Pierce; two fading lights on the same stretch of road usually have a story about how the slide happens. I'm looking for the gap between the fame they used to have and the quiet they've got now.",
+      "focus": "The trajectory of fading fame on Piedmont Ave.",
+      "why": "To capture the specific atmospheric shift when a global-tier name becomes a local ghost.",
+      "checks": [
+        "Verify the current visibility of Lena Cross on Piedmont Ave",
+        "Cross-reference the cooling media presence of Rowan Pierce"
+      ],
+      "targets": [],
+      "interpretation": "The transition from iconic status to regional obscurity is a physical process that happens in the neighborhoods they still inhabit.",
+      "unverifiedLead": [
+        "Whether the financial decline of these figures is visible in their daily routines on Piedmont Ave."
+      ],
+      "closeQuestion": "Does the city forget the person, or just the version of them that was famous?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Chinatown | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Chinatown",
+      "ref": "output/neighborhood_texture_c111.md \"### Chinatown\"; events: world_summary_c111.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "East Oakland | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "East Oakland",
+      "ref": "output/neighborhood_texture_c111.md \"### East Oakland\"; events: world_summary_c111.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Fruitvale | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Fruitvale",
+      "ref": "output/neighborhood_texture_c111.md \"### Fruitvale\"; events: world_summary_c111.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Grand Lake | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Grand Lake",
+      "ref": "output/neighborhood_texture_c111.md \"### Grand Lake\"; events: world_summary_c111.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Jack London | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Jack London",
+      "ref": "output/neighborhood_texture_c111.md \"### Jack London\"; events: world_summary_c111.md \"## World Events\"",
+      "popids": []
+    }
+  ],
+  "laneEntries": 20,
+  "angleCapHits": 0,
+  "ranAt": "2026-10-16T11:16:08.250Z"
+}

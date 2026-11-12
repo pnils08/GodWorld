@@ -144,7 +144,7 @@ async function main() {
         profile: cd.deriveCitizenProfile(f.name.split(' ').join('|') + '|' + f.popId, f.age, f.nbhd, ledgerFreq),
       })),
       sweep,
-      distributions: { ms, nc, gn, distinctRoles },
+      distributions: { gn, distinctRoles },
       gates: { failures, passed: failures.length === 0 },
     }, null, 2));
     console.log('\n  JSON written to ' + outPath);

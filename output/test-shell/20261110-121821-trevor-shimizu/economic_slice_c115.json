@@ -1,0 +1,1420 @@
+{
+  "version": "ECONOMIC-SLICE-4",
+  "empty": false,
+  "cycle": 115,
+  "kind": "economic-storefront",
+  "variant": "business",
+  "hood": "Baylight District",
+  "pulse": {
+    "className": "hood-businesses",
+    "score": 37,
+    "label": "Baylight District businesses · Baylight Construction Authority, Anthropic",
+    "hood": "Baylight District",
+    "namedBusinesses": [
+      "Baylight Construction Authority",
+      "Anthropic",
+      "Oakland Casino Town",
+      "Marine Systems",
+      "DigitalOcean"
+    ]
+  },
+  "story": {
+    "angle": "Baylight District businesses: Baylight Construction Authority, Anthropic, Oakland Casino Town — the people who work there",
+    "label": "Baylight District businesses · Baylight Construction Authority, Anthropic",
+    "hookLine": "Keisha Ramos, Director, Baylight Redevelopment Authority at Baylight Construction Authority. 12 named workers at 4 named businesses in Baylight District on the ledger this cycle.",
+    "hood": "Baylight District",
+    "pulseClass": "hood-businesses",
+    "namedBusinesses": [
+      "Baylight Construction Authority",
+      "Anthropic",
+      "Oakland Casino Town",
+      "Marine Systems",
+      "DigitalOcean"
+    ],
+    "citizens": [
+      "Keisha Ramos (POP-00041)",
+      "Brianna Lee (POP-00134)",
+      "Tariq Jello (POP-00174)",
+      "Talmon Lint (POP-00176)",
+      "Broderick Mitchell (POP-00221)",
+      "Kelvon Ochoa (POP-00481)",
+      "Iggy Davis (POP-00699)",
+      "Linda Chow (POP-00749)",
+      "Gregory Mims (POP-00023)",
+      "Philly Rodriguez (POP-00027)",
+      "Manfred Owens (POP-00028)",
+      "Mina Linas (POP-00135)",
+      "Iris Pham (POP-01203)",
+      "Dawson Nguyen (POP-00347)",
+      "Ron Arenson (POP-00367)",
+      "Freya Rao (POP-01127)"
+    ],
+    "popids": [
+      "POP-00041",
+      "POP-00134",
+      "POP-00174",
+      "POP-00176",
+      "POP-00221",
+      "POP-00481",
+      "POP-00699",
+      "POP-00749",
+      "POP-00023",
+      "POP-00027",
+      "POP-00028",
+      "POP-00135",
+      "POP-01203",
+      "POP-00347",
+      "POP-00367",
+      "POP-01127"
+    ],
+    "ref": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+    "cycle": 115
+  },
+  "approach": "Business desk approach: this slice is one neighborhood's businesses from the ledger and the people on the roster who work there — plus what moved since last cycle: revenue and headcount deltas, contractions, closures on the archive, and the week's casino action. When the record shows a business closing or shedding workers, that is the story. Open from a named business or a named worker on it — the block, the counter, the hiring board, what the owner is worried about. One claim about how the block is moving. Not civic process roundup. Not multi-voice business-desk average. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "businesses": [
+    {
+      "bizId": "BIZ-00020",
+      "name": "Baylight Construction Authority",
+      "sector": "Construction",
+      "hood": "Baylight District",
+      "employeeCount": 451,
+      "avgSalary": 66868,
+      "annualRevenue": 31337640,
+      "growthRate": 1.69,
+      "keyPersonnel": null,
+      "staff": [
+        {
+          "popid": "POP-00041",
+          "name": "Keisha Ramos",
+          "role": "Director, Baylight Redevelopment Authority"
+        },
+        {
+          "popid": "POP-00134",
+          "name": "Brianna Lee",
+          "role": "Historic Preservation Carpenter"
+        },
+        {
+          "popid": "POP-00174",
+          "name": "Tariq Jello",
+          "role": "Appliance Repair Technician"
+        },
+        {
+          "popid": "POP-00176",
+          "name": "Talmon Lint",
+          "role": "Solar Panel Installation Lead"
+        },
+        {
+          "popid": "POP-00185",
+          "name": "Lila Patty",
+          "role": "Solar Panel Installation Lead"
+        },
+        {
+          "popid": "POP-00186",
+          "name": "Ray Samson",
+          "role": "Appliance Repair Technician"
+        },
+        {
+          "popid": "POP-00192",
+          "name": "Bea Cartier",
+          "role": "Roofing Contractor"
+        },
+        {
+          "popid": "POP-00313",
+          "name": "Soria Herrin",
+          "role": "Stone Mason"
+        },
+        {
+          "popid": "POP-00349",
+          "name": "Jiu Wong",
+          "role": "Carpet Installer"
+        },
+        {
+          "popid": "POP-00367",
+          "name": "Ron Arenson",
+          "role": "Maintenance Tech"
+        },
+        {
+          "popid": "POP-00446",
+          "name": "Dimas Wong",
+          "role": "Stone Mason"
+        },
+        {
+          "popid": "POP-00450",
+          "name": "Rivers Escodedo",
+          "role": "Carpet Installer"
+        },
+        {
+          "popid": "POP-00454",
+          "name": "Amanda Hall",
+          "role": "Glazier"
+        },
+        {
+          "popid": "POP-00456",
+          "name": "Bailey Allen",
+          "role": "Licensed Plumber"
+        },
+        {
+          "popid": "POP-00468",
+          "name": "Collete Allen",
+          "role": "Elevator Mechanic"
+        },
+        {
+          "popid": "POP-00472",
+          "name": "Josie Wong",
+          "role": "Commercial Painter"
+        },
+        {
+          "popid": "POP-00478",
+          "name": "Maya Brooks",
+          "role": "Concrete Specialist"
+        },
+        {
+          "popid": "POP-00490",
+          "name": "Keenan Kim",
+          "role": "Master Electrician"
+        },
+        {
+          "popid": "POP-00500",
+          "name": "Bali Cruz",
+          "role": "Historic Preservation Carpenter"
+        },
+        {
+          "popid": "POP-00629",
+          "name": "Marcus Ibarra",
+          "role": "Construction Foreman"
+        },
+        {
+          "popid": "POP-00652",
+          "name": "Brine Williams",
+          "role": "Mechanic"
+        },
+        {
+          "popid": "POP-00687",
+          "name": "Alexa Ward",
+          "role": "Licensed Plumber"
+        },
+        {
+          "popid": "POP-00724",
+          "name": "Milo Lanning",
+          "role": "Mechanic"
+        },
+        {
+          "popid": "POP-00741",
+          "name": "Hector Navarro",
+          "role": "HVAC Technician"
+        },
+        {
+          "popid": "POP-00802",
+          "name": "Funmi Shah",
+          "role": "Glazier"
+        },
+        {
+          "popid": "POP-00808",
+          "name": "Sahana Joshi",
+          "role": "Elevator Mechanic"
+        },
+        {
+          "popid": "POP-00809",
+          "name": "Hazel Lockhart",
+          "role": "Glazier"
+        },
+        {
+          "popid": "POP-00834",
+          "name": "Alma Zhang",
+          "role": "Glazier"
+        },
+        {
+          "popid": "POP-00837",
+          "name": "Fang Crawford",
+          "role": "Elevator Mechanic"
+        },
+        {
+          "popid": "POP-00849",
+          "name": "Rosa Foster",
+          "role": "Plumber"
+        },
+        {
+          "popid": "POP-00852",
+          "name": "Naoko Morales",
+          "role": "HVAC Technician"
+        },
+        {
+          "popid": "POP-00859",
+          "name": "Tatiana Flores",
+          "role": "HVAC Technician"
+        },
+        {
+          "popid": "POP-00892",
+          "name": "Geneva Zhou",
+          "role": "Elevator Mechanic"
+        },
+        {
+          "popid": "POP-00912",
+          "name": "Chandni Kessler",
+          "role": "Elevator Mechanic"
+        },
+        {
+          "popid": "POP-00913",
+          "name": "Beatriz Kapoor",
+          "role": "Elevator Mechanic"
+        },
+        {
+          "popid": "POP-00930",
+          "name": "Margarita Crawford",
+          "role": "Elevator Mechanic"
+        },
+        {
+          "popid": "POP-00945",
+          "name": "Briar Crawford",
+          "role": "Elevator Mechanic"
+        },
+        {
+          "popid": "POP-00948",
+          "name": "Akua Ortiz",
+          "role": "HVAC Technician"
+        },
+        {
+          "popid": "POP-00984",
+          "name": "Jaylen Cloak",
+          "role": "Construction Laborer"
+        },
+        {
+          "popid": "POP-01042",
+          "name": "Isaac Renteria",
+          "role": "Construction laborer"
+        }
+      ],
+      "delta": {
+        "vsCycle": 114,
+        "employees": 0,
+        "revenue": 10181,
+        "growth": -0.56
+      }
+    },
+    {
+      "bizId": "BIZ-00001",
+      "name": "Anthropic",
+      "sector": "AI Research",
+      "hood": "Baylight District",
+      "employeeCount": 86,
+      "avgSalary": 185000,
+      "annualRevenue": 649781060,
+      "growthRate": 2.68,
+      "keyPersonnel": null,
+      "staff": [
+        {
+          "popid": "POP-00221",
+          "name": "Broderick Mitchell",
+          "role": "Security guard"
+        },
+        {
+          "popid": "POP-00481",
+          "name": "Kelvon Ochoa",
+          "role": "AI Safety Researcher (Anthropic)"
+        },
+        {
+          "popid": "POP-00699",
+          "name": "Iggy Davis",
+          "role": "AI Safety Researcher (Anthropic)"
+        },
+        {
+          "popid": "POP-00749",
+          "name": "Linda Chow",
+          "role": "AI Safety Researcher (Anthropic)"
+        },
+        {
+          "popid": "POP-00805",
+          "name": "Latasha Jefferson",
+          "role": "AI Safety Researcher (Anthropic)"
+        },
+        {
+          "popid": "POP-00840",
+          "name": "Soledad Coleman",
+          "role": "AI Safety Researcher (Anthropic)"
+        },
+        {
+          "popid": "POP-00864",
+          "name": "Genevieve Martinez",
+          "role": "AI Safety Researcher (Anthropic)"
+        },
+        {
+          "popid": "POP-00870",
+          "name": "Sabah Cruz",
+          "role": "AI Safety Researcher (Anthropic)"
+        },
+        {
+          "popid": "POP-00885",
+          "name": "Bria Ramirez",
+          "role": "AI Safety Researcher (Anthropic)"
+        },
+        {
+          "popid": "POP-00927",
+          "name": "Farah Vasquez",
+          "role": "AI Safety Researcher (Anthropic)"
+        },
+        {
+          "popid": "POP-00942",
+          "name": "Zaniya Adams",
+          "role": "AI Safety Researcher (Anthropic)"
+        }
+      ],
+      "delta": {
+        "vsCycle": 114,
+        "employees": 0,
+        "revenue": 334715,
+        "growth": -0.8799999999999999
+      }
+    },
+    {
+      "bizId": "BIZ-00100",
+      "name": "Oakland Casino Town",
+      "sector": "Nightlife & Entertainment",
+      "hood": "Baylight District",
+      "employeeCount": 99,
+      "avgSalary": 70000,
+      "annualRevenue": null,
+      "growthRate": -2.34,
+      "keyPersonnel": null,
+      "staff": [
+        {
+          "popid": "POP-00023",
+          "name": "Gregory Mims",
+          "role": "Organized Crime"
+        },
+        {
+          "popid": "POP-00027",
+          "name": "Philly Rodriguez",
+          "role": "Casino Manager"
+        },
+        {
+          "popid": "POP-00028",
+          "name": "Manfred Owens",
+          "role": "Booky"
+        }
+      ],
+      "delta": {
+        "vsCycle": 114,
+        "employees": -1,
+        "revenue": null,
+        "growth": -0.5599999999999998
+      }
+    },
+    {
+      "bizId": "BIZ-00105",
+      "name": "Marine Systems",
+      "sector": "Science",
+      "hood": "Baylight District",
+      "employeeCount": 3,
+      "avgSalary": 180000,
+      "annualRevenue": null,
+      "growthRate": -2.9,
+      "keyPersonnel": null,
+      "staff": [
+        {
+          "popid": "POP-00135",
+          "name": "Mina Linas",
+          "role": "Sea Level Monitoring Technician"
+        }
+      ],
+      "delta": {
+        "vsCycle": 114,
+        "employees": -2,
+        "revenue": null,
+        "growth": -0.6200000000000001
+      }
+    },
+    {
+      "bizId": "BIZ-00002",
+      "name": "DigitalOcean",
+      "sector": "Cloud Infrastructure",
+      "hood": "Baylight District",
+      "employeeCount": 800,
+      "avgSalary": 153677,
+      "annualRevenue": 521378885,
+      "growthRate": 5.24,
+      "keyPersonnel": null,
+      "staff": [],
+      "delta": {
+        "vsCycle": 114,
+        "employees": 0,
+        "revenue": 524861,
+        "growth": -0.46999999999999975
+      }
+    }
+  ],
+  "seeds": [
+    {
+      "seedId": "306afbac",
+      "hood": "Baylight District",
+      "domain": "ECONOMIC",
+      "citizens": [
+        {
+          "popid": "POP-01203",
+          "name": "Iris Pham"
+        },
+        {
+          "popid": "POP-00347",
+          "name": "Dawson Nguyen"
+        },
+        {
+          "popid": "POP-00367",
+          "name": "Ron Arenson"
+        },
+        {
+          "popid": "POP-01127",
+          "name": "Freya Rao"
+        }
+      ],
+      "citizenEvents": [
+        "Iris Pham — traded produce over a fence and came out ahead",
+        "Dawson Nguyen — caught the recap of last night's game at the counter and stayed for the second retelling",
+        "Ron Arenson — drank the free cold brew in the company kitchen and felt completely disconnected from the neighborhood outside",
+        "Freya Rao — recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for near a pregame tailgate"
+      ],
+      "businesses": [
+        {
+          "bizId": "BIZ-00105",
+          "name": "Marine Systems"
+        },
+        {
+          "bizId": "BIZ-00100",
+          "name": "Oakland Casino Town"
+        }
+      ],
+      "otherEntities": "Vinnie Keane Gala (program)",
+      "magnitude": -8,
+      "trend": "carrying, -8.00 strength left of 4-cycle run",
+      "suggestedJournalist": null,
+      "suggestedAngle": "general coverage"
+    }
+  ],
+  "citizens": [
+    {
+      "popid": "POP-00041",
+      "name": "Keisha Ramos",
+      "role": "Director, Baylight Redevelopment Authority",
+      "neighborhood": "Baylight District",
+      "business": "Baylight Construction Authority",
+      "profile": "Keisha Ramos — Director, Baylight Redevelopment Authority — Baylight Construction Authority, Baylight District",
+      "why": "works at Baylight Construction Authority (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00134",
+      "name": "Brianna Lee",
+      "role": "Historic Preservation Carpenter",
+      "neighborhood": "Baylight District",
+      "business": "Baylight Construction Authority",
+      "profile": "Brianna Lee — Historic Preservation Carpenter — Baylight Construction Authority, Baylight District",
+      "why": "works at Baylight Construction Authority (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00174",
+      "name": "Tariq Jello",
+      "role": "Appliance Repair Technician",
+      "neighborhood": "Baylight District",
+      "business": "Baylight Construction Authority",
+      "profile": "Tariq Jello — Appliance Repair Technician — Baylight Construction Authority, Baylight District",
+      "why": "works at Baylight Construction Authority (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00176",
+      "name": "Talmon Lint",
+      "role": "Solar Panel Installation Lead",
+      "neighborhood": "Baylight District",
+      "business": "Baylight Construction Authority",
+      "profile": "Talmon Lint — Solar Panel Installation Lead — Baylight Construction Authority, Baylight District",
+      "why": "works at Baylight Construction Authority (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00221",
+      "name": "Broderick Mitchell",
+      "role": "Security guard",
+      "neighborhood": "Baylight District",
+      "business": "Anthropic",
+      "profile": "Broderick Mitchell — Security guard — Anthropic, Baylight District",
+      "why": "works at Anthropic (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00481",
+      "name": "Kelvon Ochoa",
+      "role": "AI Safety Researcher (Anthropic)",
+      "neighborhood": "Baylight District",
+      "business": "Anthropic",
+      "profile": "Kelvon Ochoa — AI Safety Researcher (Anthropic) — Anthropic, Baylight District",
+      "why": "works at Anthropic (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00699",
+      "name": "Iggy Davis",
+      "role": "AI Safety Researcher (Anthropic)",
+      "neighborhood": "Baylight District",
+      "business": "Anthropic",
+      "profile": "Iggy Davis — AI Safety Researcher (Anthropic) — Anthropic, Baylight District",
+      "why": "works at Anthropic (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00749",
+      "name": "Linda Chow",
+      "role": "AI Safety Researcher (Anthropic)",
+      "neighborhood": "Baylight District",
+      "business": "Anthropic",
+      "profile": "Linda Chow — AI Safety Researcher (Anthropic) — Anthropic, Baylight District",
+      "why": "works at Anthropic (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00023",
+      "name": "Gregory Mims",
+      "role": "Organized Crime",
+      "neighborhood": "Baylight District",
+      "business": "Oakland Casino Town",
+      "profile": "Gregory Mims — Organized Crime — Oakland Casino Town, Baylight District",
+      "why": "works at Oakland Casino Town (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00027",
+      "name": "Philly Rodriguez",
+      "role": "Casino Manager",
+      "neighborhood": "Baylight District",
+      "business": "Oakland Casino Town",
+      "profile": "Philly Rodriguez — Casino Manager — Oakland Casino Town, Baylight District",
+      "why": "works at Oakland Casino Town (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00028",
+      "name": "Manfred Owens",
+      "role": "Booky",
+      "neighborhood": "Baylight District",
+      "business": "Oakland Casino Town",
+      "profile": "Manfred Owens — Booky — Oakland Casino Town, Baylight District",
+      "why": "works at Oakland Casino Town (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00135",
+      "name": "Mina Linas",
+      "role": "Sea Level Monitoring Technician",
+      "neighborhood": "Baylight District",
+      "business": "Marine Systems",
+      "profile": "Mina Linas — Sea Level Monitoring Technician — Marine Systems, Baylight District",
+      "why": "works at Marine Systems (Employment_Roster)"
+    },
+    {
+      "popid": "POP-01203",
+      "name": "Iris Pham",
+      "role": null,
+      "neighborhood": "Baylight District",
+      "business": null,
+      "profile": "Iris Pham — Baylight District",
+      "why": "city seed for Baylight District this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00347",
+      "name": "Dawson Nguyen",
+      "role": null,
+      "neighborhood": "Baylight District",
+      "business": null,
+      "profile": "Dawson Nguyen — Baylight District",
+      "why": "city seed for Baylight District this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00367",
+      "name": "Ron Arenson",
+      "role": null,
+      "neighborhood": "Baylight District",
+      "business": null,
+      "profile": "Ron Arenson — Baylight District",
+      "why": "city seed for Baylight District this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-01127",
+      "name": "Freya Rao",
+      "role": null,
+      "neighborhood": "Baylight District",
+      "business": null,
+      "profile": "Freya Rao — Baylight District",
+      "why": "city seed for Baylight District this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00159",
+      "name": "Sharon Okafor",
+      "role": "Journalist, Lifestyle",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Sharon Okafor — Journalist, Lifestyle — Rockridge",
+      "why": "on the Casino_Ledger this cycle — settled a sports wager"
+    },
+    {
+      "popid": "POP-00204",
+      "name": "Orlando Phillips",
+      "role": "Retail worker",
+      "neighborhood": "Laurel",
+      "business": null,
+      "profile": "Orlando Phillips — Retail worker — Laurel",
+      "why": "on the Casino_Ledger this cycle — settled a sports wager"
+    },
+    {
+      "popid": "POP-00210",
+      "name": "Depak Ying",
+      "role": "Server",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Depak Ying — Server — Rockridge",
+      "why": "on the Casino_Ledger this cycle — settled a sports wager"
+    },
+    {
+      "popid": "POP-00253",
+      "name": "Jango Lango",
+      "role": "Hardware Store Owner",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Jango Lango — Hardware Store Owner — Piedmont Ave",
+      "why": "on the Casino_Ledger this cycle — settled a sports wager"
+    },
+    {
+      "popid": "POP-00295",
+      "name": "Christopher Clerk",
+      "role": "Mover",
+      "neighborhood": "Chinatown",
+      "business": null,
+      "profile": "Christopher Clerk — Mover — Chinatown",
+      "why": "on the Casino_Ledger this cycle — settled a sports wager"
+    },
+    {
+      "popid": "POP-00797",
+      "name": "Curtis Boone",
+      "role": "Longshoreman",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Curtis Boone — Longshoreman — West Oakland",
+      "why": "defaulted on the debts this cycle (Simulation_Ledger)"
+    },
+    {
+      "popid": "POP-00966",
+      "name": "Marco Johnson",
+      "role": "Nurse Aide",
+      "neighborhood": "Adams Point",
+      "business": null,
+      "profile": "Marco Johnson — Nurse Aide — Adams Point",
+      "why": "defaulted on the debts this cycle (Simulation_Ledger)"
+    },
+    {
+      "popid": "POP-00973",
+      "name": "Delia Fuentes",
+      "role": "Letter Writer",
+      "neighborhood": "Fruitvale",
+      "business": null,
+      "profile": "Delia Fuentes — Letter Writer — Fruitvale",
+      "why": "defaulted on the debts this cycle (Simulation_Ledger)"
+    }
+  ],
+  "closures": [],
+  "contractionWatch": [
+    {
+      "bizId": "BIZ-00105",
+      "name": "Marine Systems",
+      "sector": "Science",
+      "hood": "Baylight District",
+      "employeeCount": 3,
+      "avgSalary": 180000,
+      "annualRevenue": null,
+      "growthRate": -2.9,
+      "keyPersonnel": null,
+      "staff": [
+        {
+          "popid": "POP-00135",
+          "name": "Mina Linas",
+          "role": "Sea Level Monitoring Technician"
+        }
+      ],
+      "delta": {
+        "vsCycle": 114,
+        "employees": -2,
+        "revenue": null,
+        "growth": -0.6200000000000001
+      }
+    },
+    {
+      "bizId": "BIZ-00151",
+      "name": "Ivy Hill Cafe",
+      "sector": "Cafe / dining",
+      "hood": "Ivy Hill",
+      "employeeCount": 1,
+      "avgSalary": 39000,
+      "annualRevenue": 311399,
+      "growthRate": -3.31,
+      "keyPersonnel": null,
+      "staff": [],
+      "delta": {
+        "vsCycle": 114,
+        "employees": -2,
+        "revenue": -198,
+        "growth": -0.3900000000000001
+      }
+    },
+    {
+      "bizId": "BIZ-00152",
+      "name": "Ivy Cleaners",
+      "sector": "Services",
+      "hood": "Ivy Hill",
+      "employeeCount": 0,
+      "avgSalary": 43000,
+      "annualRevenue": 257743,
+      "growthRate": -2.48,
+      "keyPersonnel": null,
+      "staff": [],
+      "delta": {
+        "vsCycle": 114,
+        "employees": -2,
+        "revenue": -123,
+        "growth": -0.5
+      }
+    },
+    {
+      "bizId": "BIZ-00153",
+      "name": "Ivy Hill Family Dental",
+      "sector": "Healthcare",
+      "hood": "Ivy Hill",
+      "employeeCount": 1,
+      "avgSalary": 74000,
+      "annualRevenue": 591405,
+      "growthRate": -1.99,
+      "keyPersonnel": null,
+      "staff": [],
+      "delta": {
+        "vsCycle": 114,
+        "employees": -2,
+        "revenue": -226,
+        "growth": -0.16999999999999993
+      }
+    },
+    {
+      "bizId": "BIZ-00154",
+      "name": "Hillcrest Kitchen",
+      "sector": "Restaurant & Dining",
+      "hood": "Ivy Hill",
+      "employeeCount": 4,
+      "avgSalary": 41000,
+      "annualRevenue": 572773,
+      "growthRate": -4.06,
+      "keyPersonnel": null,
+      "staff": [],
+      "delta": {
+        "vsCycle": 114,
+        "employees": -2,
+        "revenue": -448,
+        "growth": -0.49999999999999956
+      }
+    }
+  ],
+  "casino": {
+    "wagers": [
+      {
+        "popid": "POP-00159",
+        "name": "Sharon Okafor",
+        "market": "sports",
+        "stake": 481,
+        "payout": 0,
+        "settled": true,
+        "status": "void-gate"
+      },
+      {
+        "popid": "POP-00204",
+        "name": "Orlando Phillips",
+        "market": "sports",
+        "stake": 534,
+        "payout": 0,
+        "settled": true,
+        "status": "void-gate"
+      },
+      {
+        "popid": "POP-00210",
+        "name": "Depak Ying",
+        "market": "sports",
+        "stake": 269,
+        "payout": 0,
+        "settled": true,
+        "status": "void-gate"
+      },
+      {
+        "popid": "POP-00253",
+        "name": "Jango Lango",
+        "market": "sports",
+        "stake": 535,
+        "payout": 0,
+        "settled": true,
+        "status": "void-gate"
+      },
+      {
+        "popid": "POP-00295",
+        "name": "Christopher Clerk",
+        "market": "sports",
+        "stake": 157,
+        "payout": 0,
+        "settled": true,
+        "status": "void-gate"
+      }
+    ],
+    "houseFloat": 245886,
+    "totalRows": 42
+  },
+  "cityMoney": {
+    "treasury": {
+      "state": "ON_RECORD",
+      "opening": 121536668,
+      "closing": 126644030,
+      "income": {
+        "WEEKLY-ALLOCATION": {
+          "amount": 5000000,
+          "count": 1,
+          "charges": null
+        },
+        "COURT": {
+          "amount": 107362,
+          "count": 1,
+          "charges": 24
+        }
+      },
+      "outflows": []
+    },
+    "debt": {
+      "defaults": [
+        "POP-00797",
+        "POP-00966",
+        "POP-00973"
+      ],
+      "overLine": 83,
+      "crisisByHood": {
+        "West Oakland": {
+          "crisis": 0,
+          "defaults": 1
+        },
+        "Adams Point": {
+          "crisis": 0,
+          "defaults": 1
+        },
+        "Fruitvale": {
+          "crisis": 0,
+          "defaults": 1
+        }
+      }
+    }
+  },
+  "deltas": {
+    "state": "PRIOR_CYCLE_ON_DISK",
+    "vs": 114
+  },
+  "prewrite": {
+    "pulseClass": "hood-businesses",
+    "angle": "Baylight District businesses: Baylight Construction Authority, Anthropic, Oakland Casino Town — the people who work there",
+    "hookLine": "Keisha Ramos, Director, Baylight Redevelopment Authority at Baylight Construction Authority. 12 named workers at 4 named businesses in Baylight District on the ledger this cycle.",
+    "namedBusinesses": [
+      "Baylight Construction Authority",
+      "Anthropic",
+      "Oakland Casino Town",
+      "Marine Systems",
+      "DigitalOcean"
+    ],
+    "anchorFacts": [
+      "Baylight Construction Authority · Construction · 451 employees · growth 1.7% · revenue $31.3M (+$10k vs C114) · on the roster: Keisha Ramos (Director, Baylight Redevelopment Authority); Brianna Lee (Historic Preservation Carpenter); Tariq Jello (Appliance Repair Technician); Talmon Lint (Solar Panel Installation Lead) +36 more",
+      "Anthropic · AI Research · 86 employees · growth 2.7% · revenue $649.8M (+$335k vs C114) · on the roster: Broderick Mitchell (Security guard); Kelvon Ochoa (AI Safety Researcher (Anthropic)); Iggy Davis (AI Safety Researcher (Anthropic)); Linda Chow (AI Safety Researcher (Anthropic)) +7 more",
+      "Oakland Casino Town · Nightlife & Entertainment · 99 employees (-1 vs C114) · growth -2.3% · on the roster: Gregory Mims (Organized Crime); Philly Rodriguez (Casino Manager); Manfred Owens (Booky)",
+      "Marine Systems · Science · 3 employees (-2 vs C114) · growth -2.9% · on the roster: Mina Linas (Sea Level Monitoring Technician)",
+      "DigitalOcean · Cloud Infrastructure · 800 employees · growth 5.2% · revenue $521.4M (+$525k vs C114)",
+      "CITY SEED (Baylight District): citizens Iris Pham; Dawson Nguyen; Ron Arenson; Freya Rao · businesses Marine Systems; Oakland Casino Town · Vinnie Keane Gala (program)",
+      "CONTRACTING: Marine Systems (Baylight District) shed 2 workers vs C114 and growth is -2.9%",
+      "CONTRACTING: Ivy Hill Cafe (Ivy Hill) shed 2 workers vs C114 and growth is -3.3%",
+      "CONTRACTING: Ivy Cleaners (Ivy Hill) shed 2 workers vs C114 and growth is -2.5%",
+      "CONTRACTING: Ivy Hill Family Dental (Ivy Hill) shed 2 workers vs C114 and growth is -2%",
+      "CONTRACTING: Hillcrest Kitchen (Ivy Hill) shed 2 workers vs C114 and growth is -4.1%",
+      "CASINO: Sharon Okafor — sports wager, staked $481, settled for $0",
+      "CASINO: Orlando Phillips — sports wager, staked $534, settled for $0",
+      "CASINO: Depak Ying — sports wager, staked $269, settled for $0",
+      "CASINO: Jango Lango — sports wager, staked $535, settled for $0",
+      "CASINO: Christopher Clerk — sports wager, staked $157, settled for $0",
+      "CASINO: the house float stands at $246k",
+      "CITY MONEY: City treasury this cycle took in $5.1M: $5M the weekly budget allocation, $107,362 court money on 24 cleared charges",
+      "CITY MONEY: City treasury balance at the close: $126.6M (from $121.5M)",
+      "DEBT: Debt this cycle: 3 defaulted: Curtis Boone (West Oakland), Marco Johnson (Adams Point), Delia Fuentes (Fruitvale)",
+      "DEBT: 83 tracked residents on the ledger carry debt at or over the crisis line — most in Uptown 13, Fruitvale 13, West Oakland 10, Lake Merritt 9"
+    ],
+    "evidence": [
+      {
+        "text": "Baylight Construction Authority · Construction · 451 employees · growth 1.7% · revenue $31.3M (+$10k vs C114) · on the roster: Keisha Ramos (Director, Baylight Redevelopment Authority); Brianna Lee (Historic Preservation Carpenter); Tariq Jello (Appliance Repair Technician); Talmon Lint (Solar Panel Installation Lead) +36 more",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115"
+      },
+      {
+        "text": "Anthropic · AI Research · 86 employees · growth 2.7% · revenue $649.8M (+$335k vs C114) · on the roster: Broderick Mitchell (Security guard); Kelvon Ochoa (AI Safety Researcher (Anthropic)); Iggy Davis (AI Safety Researcher (Anthropic)); Linda Chow (AI Safety Researcher (Anthropic)) +7 more",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115"
+      },
+      {
+        "text": "Oakland Casino Town · Nightlife & Entertainment · 99 employees (-1 vs C114) · growth -2.3% · on the roster: Gregory Mims (Organized Crime); Philly Rodriguez (Casino Manager); Manfred Owens (Booky)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115"
+      },
+      {
+        "text": "Marine Systems · Science · 3 employees (-2 vs C114) · growth -2.9% · on the roster: Mina Linas (Sea Level Monitoring Technician)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115"
+      },
+      {
+        "text": "DigitalOcean · Cloud Infrastructure · 800 employees · growth 5.2% · revenue $521.4M (+$525k vs C114)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115"
+      },
+      {
+        "text": "CITY SEED (Baylight District): citizens Iris Pham; Dawson Nguyen; Ron Arenson; Freya Rao · businesses Marine Systems; Oakland Casino Town · Vinnie Keane Gala (program)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C115"
+      },
+      {
+        "text": "CONTRACTING: Marine Systems (Baylight District) shed 2 workers vs C114 and growth is -2.9%",
+        "src": "output/beats/prev/Business_Ledger.jsonl vs Business_Ledger.jsonl @C115"
+      },
+      {
+        "text": "CONTRACTING: Ivy Hill Cafe (Ivy Hill) shed 2 workers vs C114 and growth is -3.3%",
+        "src": "output/beats/prev/Business_Ledger.jsonl vs Business_Ledger.jsonl @C115"
+      },
+      {
+        "text": "CONTRACTING: Ivy Cleaners (Ivy Hill) shed 2 workers vs C114 and growth is -2.5%",
+        "src": "output/beats/prev/Business_Ledger.jsonl vs Business_Ledger.jsonl @C115"
+      },
+      {
+        "text": "CONTRACTING: Ivy Hill Family Dental (Ivy Hill) shed 2 workers vs C114 and growth is -2%",
+        "src": "output/beats/prev/Business_Ledger.jsonl vs Business_Ledger.jsonl @C115"
+      },
+      {
+        "text": "CONTRACTING: Hillcrest Kitchen (Ivy Hill) shed 2 workers vs C114 and growth is -4.1%",
+        "src": "output/beats/prev/Business_Ledger.jsonl vs Business_Ledger.jsonl @C115"
+      },
+      {
+        "text": "CASINO: Sharon Okafor — sports wager, staked $481, settled for $0",
+        "src": "output/beats/Casino_Ledger.jsonl @C115"
+      },
+      {
+        "text": "CASINO: Orlando Phillips — sports wager, staked $534, settled for $0",
+        "src": "output/beats/Casino_Ledger.jsonl @C115"
+      },
+      {
+        "text": "CASINO: Depak Ying — sports wager, staked $269, settled for $0",
+        "src": "output/beats/Casino_Ledger.jsonl @C115"
+      },
+      {
+        "text": "CASINO: Jango Lango — sports wager, staked $535, settled for $0",
+        "src": "output/beats/Casino_Ledger.jsonl @C115"
+      },
+      {
+        "text": "CASINO: Christopher Clerk — sports wager, staked $157, settled for $0",
+        "src": "output/beats/Casino_Ledger.jsonl @C115"
+      },
+      {
+        "text": "CASINO: the house float stands at $246k",
+        "src": "output/beats/Casino_Ledger.jsonl @C115"
+      },
+      {
+        "text": "CITY MONEY: City treasury this cycle took in $5.1M: $5M the weekly budget allocation, $107,362 court money on 24 cleared charges",
+        "src": "output/beats/City_Treasury.jsonl @C115"
+      },
+      {
+        "text": "CITY MONEY: City treasury balance at the close: $126.6M (from $121.5M)",
+        "src": "output/beats/City_Treasury.jsonl @C115"
+      },
+      {
+        "text": "DEBT: Debt this cycle: 3 defaulted: Curtis Boone (West Oakland), Marco Johnson (Adams Point), Delia Fuentes (Fruitvale)",
+        "src": "output/beats/Story_Hook_Deck.jsonl DEBT_CRISIS/DEBT_DEFAULT + Simulation_Ledger DialState"
+      },
+      {
+        "text": "DEBT: 83 tracked residents on the ledger carry debt at or over the crisis line — most in Uptown 13, Fruitvale 13, West Oakland 10, Lake Merritt 9",
+        "src": "output/simulation_ledger_snapshot.jsonl DebtLevel >= 5"
+      }
+    ],
+    "hooks": [
+      {
+        "text": "High concentration of ambitious, driven personalities. Career competition and economic hustle stories.",
+        "angle": "baseline context piece",
+        "hood": null
+      },
+      {
+        "text": "Dearie Beacon has not advanced in 57 years",
+        "angle": "baseline context piece",
+        "hood": null
+      },
+      {
+        "text": "Felicia Grandberry has not advanced in 57 years",
+        "angle": "baseline context piece",
+        "hood": null
+      },
+      {
+        "text": "defaulted on the debts — the savings are gone and the record carries it",
+        "angle": "observational analysis",
+        "hood": "West Oakland"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a business, a worker, an owner or a place — every name comes from this slice",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose",
+      "Do not contradict a role, employer or neighborhood listed here"
+    ]
+  },
+  "rotation": {
+    "pool": [
+      {
+        "hood": "Baylight District",
+        "staffed": 4,
+        "workers": 55,
+        "lastCovered": null
+      },
+      {
+        "hood": "Lake Merritt",
+        "staffed": 1,
+        "workers": 3,
+        "lastCovered": null
+      },
+      {
+        "hood": "Temescal",
+        "staffed": 5,
+        "workers": 14,
+        "lastCovered": 113
+      },
+      {
+        "hood": "West Oakland",
+        "staffed": 7,
+        "workers": 21,
+        "lastCovered": 114
+      },
+      {
+        "hood": "Brooklyn Basin",
+        "staffed": 1,
+        "workers": 5,
+        "lastCovered": null
+      },
+      {
+        "hood": "Old Oakland",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "Jack London",
+        "staffed": 7,
+        "workers": 47,
+        "lastCovered": 111
+      },
+      {
+        "hood": "Downtown",
+        "staffed": 7,
+        "workers": 10,
+        "lastCovered": 110
+      },
+      {
+        "hood": "Piedmont Ave",
+        "staffed": 2,
+        "workers": 7,
+        "lastCovered": null
+      },
+      {
+        "hood": "Fruitvale",
+        "staffed": 4,
+        "workers": 5,
+        "lastCovered": null
+      },
+      {
+        "hood": "Coliseum",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "Uptown",
+        "staffed": 4,
+        "workers": 13,
+        "lastCovered": 112
+      },
+      {
+        "hood": "Chinatown",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "Rockridge",
+        "staffed": 2,
+        "workers": 6,
+        "lastCovered": null
+      },
+      {
+        "hood": "KONO",
+        "staffed": 2,
+        "workers": 2,
+        "lastCovered": null
+      },
+      {
+        "hood": "Dimond",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "Grand Lake",
+        "staffed": 2,
+        "workers": 2,
+        "lastCovered": null
+      },
+      {
+        "hood": "Laurel",
+        "staffed": 3,
+        "workers": 3,
+        "lastCovered": null
+      },
+      {
+        "hood": "East Oakland",
+        "staffed": 2,
+        "workers": 2,
+        "lastCovered": null
+      },
+      {
+        "hood": "Eastlake",
+        "staffed": 2,
+        "workers": 2,
+        "lastCovered": null
+      },
+      {
+        "hood": "San Antonio",
+        "staffed": 1,
+        "workers": 2,
+        "lastCovered": null
+      }
+    ],
+    "picked": "Baylight District"
+  },
+  "candidates": [
+    {
+      "className": "hood-businesses",
+      "hood": "Lake Merritt",
+      "label": "Lake Merritt · 1 staffed / 10 listed",
+      "namedBusinesses": [
+        "Ridgeline Ventures"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Temescal",
+      "label": "Temescal · 5 staffed / 11 listed",
+      "namedBusinesses": [
+        "Gridiron Analytics",
+        "OakTown Social",
+        "Calderon-Nishi"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "West Oakland",
+      "label": "West Oakland · 7 staffed / 14 listed",
+      "namedBusinesses": [
+        "Oakmesh Systems",
+        "West Side Cafe",
+        "Civis Systems"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Brooklyn Basin",
+      "label": "Brooklyn Basin · 1 staffed / 1 listed",
+      "namedBusinesses": [
+        "Portside Bio"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Old Oakland",
+      "label": "Old Oakland · 1 staffed / 1 listed",
+      "namedBusinesses": [
+        "Tenth Street Digital"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Jack London",
+      "label": "Jack London · 7 staffed / 15 listed",
+      "namedBusinesses": [
+        "Port of Oakland",
+        "Jack London Square Markets",
+        "Blue Lantern Bar"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Downtown",
+      "label": "Downtown · 7 staffed / 14 listed",
+      "namedBusinesses": [
+        "EBMUD",
+        "Miso Metro",
+        "SpeedyBurger"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Piedmont Ave",
+      "label": "Piedmont Ave · 2 staffed / 14 listed",
+      "namedBusinesses": [
+        "Piedmont Avenue Medical Center",
+        "Mayday Movers"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Fruitvale",
+      "label": "Fruitvale · 4 staffed / 12 listed",
+      "namedBusinesses": [
+        "Fruitvale Community Clinic",
+        "Fruitvale Diner",
+        "Foothill Builders"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Coliseum",
+      "label": "Coliseum · 1 staffed / 1 listed",
+      "namedBusinesses": [
+        "Coliseum District Development"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Uptown",
+      "label": "Uptown · 4 staffed / 12 listed",
+      "namedBusinesses": [
+        "Oakland Tech Collective",
+        "Ridgeline Studio",
+        "Art Walk Cafe"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Chinatown",
+      "label": "Chinatown · 1 staffed / 11 listed",
+      "namedBusinesses": [
+        "Heritage Bakehouse"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Rockridge",
+      "label": "Rockridge · 2 staffed / 11 listed",
+      "namedBusinesses": [
+        "OakHouse",
+        "Claremont Table"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "KONO",
+      "label": "KONO · 2 staffed / 11 listed",
+      "namedBusinesses": [
+        "Telegraph Press",
+        "The Northgate Bar"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Dimond",
+      "label": "Dimond · 1 staffed / 11 listed",
+      "namedBusinesses": [
+        "Romano's"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Grand Lake",
+      "label": "Grand Lake · 2 staffed / 12 listed",
+      "namedBusinesses": [
+        "Port Grind",
+        "Grand Lake Books"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Laurel",
+      "label": "Laurel · 3 staffed / 12 listed",
+      "namedBusinesses": [
+        "Nino's",
+        "Laurel Market",
+        "Schoolgate Cafe"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "East Oakland",
+      "label": "East Oakland · 2 staffed / 10 listed",
+      "namedBusinesses": [
+        "Eastside Family Market",
+        "Sunrise Cafe"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Eastlake",
+      "label": "Eastlake · 2 staffed / 10 listed",
+      "namedBusinesses": [
+        "Eastlake Barbers",
+        "Parkedge Diner"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "San Antonio",
+      "label": "San Antonio · 1 staffed / 10 listed",
+      "namedBusinesses": [
+        "Park Boulevard Cafe"
+      ]
+    }
+  ],
+  "signals": {
+    "businessLaneCount": 41,
+    "sample": [
+      {
+        "kind": "anomaly",
+        "label": "economic ailment — economic footprint, affected businesses, workforce impact in West Oakland",
+        "hood": "West Oakland, East Oakland, Fruitvale",
+        "ref": "output/engine_audit_c115.json patterns[0]; evidence: Initiative_Tracker row(s) 7; storyline INIT-007:implementation-active"
+      },
+      {
+        "kind": "anomaly",
+        "label": "transit ailment — economic footprint, affected businesses, workforce impact in Fruitvale",
+        "hood": "Fruitvale",
+        "ref": "output/engine_audit_c115.json patterns[2]; evidence: Neighborhood_Map row(s) 6; storyline INIT-007:implementation-active"
+      },
+      {
+        "kind": "anomaly",
+        "label": "economic ailment — economic footprint, affected businesses, workforce impact in Downtown",
+        "hood": "Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Piedmont Ave, Brooklyn, Glenview, Dimond, Ivy Hill, San Antonio, KONO, Lake Merritt, Uptown, Baylight District",
+        "ref": "output/engine_audit_c115.json patterns[8]; evidence: Neighborhood_Map row(s) "
+      },
+      {
+        "kind": "anomaly",
+        "label": "Commercial Stabilization for Grand Lake — economic upside, jobs and footprint in Grand Lake",
+        "hood": "Grand Lake",
+        "ref": "output/engine_audit_c115.json patterns[9]; evidence: Initiative_Tracker row(s) 9; storyline INIT-009:vote-ready"
+      },
+      {
+        "kind": "anomaly",
+        "label": "INIT-007 — economic upside, jobs and footprint in West Oakland",
+        "hood": "West Oakland, Fruitvale",
+        "ref": "output/engine_audit_c115.json patterns[10]; evidence: Neighborhood_Map row(s) ; storyline INIT-007:implementation-active"
+      }
+    ]
+  },
+  "scene": {
+    "namedOnTop": [
+      "Baylight Construction Authority",
+      "Anthropic",
+      "Oakland Casino Town",
+      "Marine Systems",
+      "DigitalOcean"
+    ]
+  },
+  "pointers": [
+    "output/beats/Business_Ledger.jsonl (283 rows @C115)",
+    "output/beats/Employment_Roster.jsonl (971 rows)",
+    "output/beats/Story_Seed_Deck.jsonl (business seeds this cycle: 2)",
+    "output/beats/prev/Business_Ledger.jsonl (movement vs C114)",
+    "output/beats/Casino_Ledger.jsonl (42 wager rows this cycle)",
+    "output/beats/City_Treasury.jsonl (the city's money this cycle)",
+    "output/beats/Story_Hook_Deck.jsonl (business hooks this cycle: 4)",
+    "output/desk_signal_c115.json lanes.business (pointers only)"
+  ]
+}

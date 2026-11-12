@@ -1,0 +1,67 @@
+{
+  "cycle": 115,
+  "popid": "POP-00789",
+  "wake": "journal",
+  "replayKey": "POP-00789:C115:journal",
+  "pageCustomId": "cp-POP-00789-c115-journal",
+  "leadFindingId": "AUD-8211ecb93092",
+  "findings": [
+    {
+      "auditPatternId": "AUD-297480ab0ac2",
+      "type": "stuck-initiative",
+      "target": "West Oakland",
+      "civisFinding": "Oakland Youth Apprenticeship Pipeline (West Oakland) has not left its implementation active stage in three weeks.",
+      "selected": true
+    },
+    {
+      "auditPatternId": "AUD-c094775a5fda",
+      "type": "math-imbalance",
+      "target": null,
+      "civisFinding": "Readings decayed in five districts this week. Mood fell in West Oakland, Fruitvale, Jack London, San Antonio and KONO; street trade cooled in San Antonio; housing pressure climbed in West Oakland, Fruitvale, Jack London and KONO. West Oakland and Fruitvale still carry the brightest mood in the city; San Antonio the lowest.",
+      "covers": [
+        "AUD-c094775a5fda",
+        "AUD-33cea4164ae4",
+        "AUD-4d378d6032cf",
+        "AUD-2896906446ca",
+        "AUD-3b717e89a43b"
+      ],
+      "selected": true
+    },
+    {
+      "auditPatternId": "AUD-7e86beacac05",
+      "type": "coverage-gap",
+      "target": null,
+      "civisFinding": "The city's faith life produced five events this week, and the paper ran nothing on it the week before.",
+      "selected": false
+    },
+    {
+      "auditPatternId": "AUD-8211ecb93092",
+      "type": "cascade-failure",
+      "target": "West Oakland",
+      "civisFinding": "One unanswered signal is spreading into another part of the city in West Oakland.",
+      "selected": true
+    },
+    {
+      "auditPatternId": "AUD-b845720d561b",
+      "type": "production-imbalance",
+      "target": "Downtown",
+      "civisFinding": "People moved in or out of nineteen districts this week, and the instrument logged no economic activity behind any of it.",
+      "selected": true
+    },
+    {
+      "auditPatternId": "AUD-eac164e71ba1",
+      "type": "improvement",
+      "target": "Grand Lake",
+      "civisFinding": "Commercial Stabilization for Grand Lake moved from announced to vote ready.",
+      "selected": false
+    },
+    {
+      "auditPatternId": "AUD-b1e31e9be95b",
+      "type": "improvement",
+      "target": "West Oakland",
+      "civisFinding": "A previous remedy moved beyond its expected mark in West Oakland.",
+      "selected": false
+    }
+  ],
+  "prose": "Last week I wrote that I would not wait for the unanswered signal in West Oakland to become someone else's emergency. Nothing has answered it. It has spread into another part of the same district. The instrument is my product, and a signal that travels with no downstream is not only the city's failure to respond. It is also mine, because the instrument has told me where it goes and I have not yet built the thing that makes someone answer.\n\nThe same district shows more. The Oakland Youth Apprenticeship Pipeline has sat in its implementation stage for three weeks. Three weeks is a long time for something built for young people who are not going to wait. Nobody is lying, and nobody is moving. That is how a program dies politely. Put it beside this week's readings: housing pressure climbed in West Oakland, mood fell, and the signal is spreading. I will not call that a coincidence. These are links, and nobody at City Hall has drawn the line between them.\n\nThe wider week is uneven. Readings decayed in five districts. Mood fell in West Oakland, Fruitvale, Jack London, San Antonio and KONO. Street trade cooled in San Antonio, which already holds the lowest mood in the city. Housing pressure climbed in four of those districts. West Oakland and Fruitvale still carry the brightest mood in Oakland, but a bright reading with rising pressure under it is a warning, not a comfort.\n\nThen there is the blind spot that bothers me almost as much. Across nearly every district, more people were out and about, and fewer residents showed up sick. That is good news on its face. But the instrument logged no economic activity behind any of that movement in nearly twenty districts. Either people are arriving and spending nothing we can see, or Civis cannot see where they spend. I do not get to assume the first. I suspect the second.\n\nHere is what I am promising, and I expect to be held to it.\n\nBefore the Oaks' season turns, Civis will build a downstream trace for the unanswered signal in West Oakland. It will show, in plain words, which office the signal should reach and how long it has sat unanswered. I will publish that trace in this journal, and I will carry it to Mayor Avery Santana's office myself.\n\nBy the same point, we will add a stall check to the instrument. When an initiative sits in one stage too long, it will flag, starting with the Oakland Youth Apprenticeship Pipeline.\n\nAnd we are hiring a small team of analysts to chase the movement that has no economic trace. Their first job is to find out whether the city has stopped spending or Civis has stopped seeing. If it is us, I will say so here.\n\nThe Town is being built on a clock. The city around it deserves one too."
+}

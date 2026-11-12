@@ -1,0 +1,79 @@
+{
+  "draft": "output/cron-compare/civic_c115_angela-reyes_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "115",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "db77e49b97e91795c52cfc031c8d4b0007c13bd2101b0e92d63ce4f2b58a1e00",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes match verified interview records, citizen profiles match ledger data, and canon integrity is clean.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "angela-education-stability-v1",
+    "packageVersion": "ANGELA-LEP2-2",
+    "manifestId": "AM-c0ab494ef68a",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "05",
+          "8.4",
+          "84",
+          "54",
+          "94",
+          "74.53",
+          "9"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Jun Leu",
+      "Patricia Nolan",
+      "Rick Walker"
+    ],
+    "unverified": [
+      "Reaves Line Transit Fund"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0115,
+  "durationMs": 6323,
+  "parseError": false,
+  "ranAt": "2026-11-11T00:17:34.567Z",
+  "contractScore": {
+    "opened": false,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 699,
+    "short": "The opening paragraph opens with a narrative scene rather than a packet-backed school, youth-program, apprenticeship, or continuity fact.",
+    "score": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "db77e49b97e91795c52cfc031c8d4b0007c13bd2101b0e92d63ce4f2b58a1e00",
+    "costUsd": 0.0018
+  }
+}

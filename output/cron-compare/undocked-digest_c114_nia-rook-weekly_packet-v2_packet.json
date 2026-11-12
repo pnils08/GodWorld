@@ -1,0 +1,836 @@
+{
+  "stage": "report",
+  "desk": "undocked-digest",
+  "cycle": "114",
+  "persona": "nia-rook-weekly",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Nia Rook",
+    "popid": "POP-01076"
+  },
+  "assignment": {
+    "story": {
+      "ref": "undocked-week:weekly-c114",
+      "label": "UNDOCKED week-in-review c114",
+      "kind": "undocked-digest",
+      "angle": "UNDOCKED week: pilots who flew this cycle (Luis Taz, Lena Okafor, Ronald Silk). Standings: Ronald Silk leads the board — rank #1, 38.15 achievement points, 0 credits, 1 cycle(s) led, current streak 1. In the chair: Luis Taz — Janitor; Lena Okafor — Daycare Director; Ronald Silk — Electrician.",
+      "facts": [
+        "Luis Taz's Sunday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Timberline, Arcturus, Ross 154, Maplevale, Miaplacidus, Cervantes, Ridgecrest, Grumium, Celaeno, Lanternwick and Diadem; mined 2 iron ore; got into 12 fights; came out even on credits; flew until the show's time ran out.",
+        "Luis Taz's Wednesday night on UNDOCKED: went through Nova Terra, Sirius, Lacaille 9352, Grumium, Celaeno, Lanternwick, Diadem, Intercrus, Gsc 0044, Atlas, Cedarhold, Achernar and The Experiment; mined 9 copper ore, 2 antimatter containment cell and 4 iron ore; came out even on credits; flew until the show's time ran out.",
+        "Lena Okafor's Monday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale and Miaplacidus; mined 11 iron ore and 6 copper ore; got into 1 fight; came out even on credits; flew until the show's time ran out.",
+        "Lena Okafor's Thursday night on UNDOCKED: went through Alpha Centauri, Sol, Sirius, Nova Terra, Epsilon Eridani, Procyon, Proxima Centauri and Barnards Star; took the Copper Requisition contract; mined 3 copper ore, 8 iron ore, 1 antimatter containment cell and 4 aluminum ore; sold 6 copper ore and 12 iron ore; got into 1 fight; came out 18 credits up; flew until the show's time ran out.",
+        "Ronald Silk's Tuesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Timberline, Arcturus, Ross 154, Maplevale, Miaplacidus, Cervantes, Ridgecrest, Hatysa, Nembus, Gienah, Oakridge, Aldhibah, Izar and Tidewater; mined 1 titanium ore and 1 iron ore; came out even on credits; flew until the show's time ran out.",
+        "Ronald Silk's Friday night on UNDOCKED: went through Last Light, Fang, Errai, Wezen, Brightfall, Birchwood, Pinecross, Aludra, Torcular, Gsc 0002, Tejat, Rimegate, Veritate, Betelgeuse, Gsc 0037, Dabih and Gsc 0045; came out even on credits; flew until the show's time ran out.",
+        "Luis Taz — Janitor (ledger)",
+        "Lena Okafor — Daycare Director (ledger)",
+        "Ronald Silk — Electrician (ledger)"
+      ],
+      "citizens": [
+        "Luis Taz — Janitor, UNDOCKED cast pilot",
+        "Lena Okafor — Daycare Director, UNDOCKED cast pilot",
+        "Ronald Silk — Electrician, UNDOCKED cast pilot"
+      ],
+      "popids": [
+        "POP-00298",
+        "POP-00530",
+        "POP-00647"
+      ]
+    }
+  },
+  "angle": "output/cron-compare/undocked-digest_c114_nia-rook-weekly_packet-v2_angle.json",
+  "quotesRequested": 3,
+  "quotesLanded": 2,
+  "quotes": [
+    {
+      "pop": "POP-00647",
+      "name": "Ronald Silk",
+      "quote": "As an Electrician, I've developed a knack for problem-solving and staying calm under pressure. I think that's helped me on UNDOCKED, navigating through the different systems and making quick decisions. My background in electrical work hasn't directly related to flying on UNDOCKED, but the mindset and focus I use for complex wiring jobs seems to translate to navigating through the stars and managing resources during the show.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"As an Electrician, I've developed a knack for problem-solving and staying calm under pressure. I think that's helped me on UNDOCKED, navigating through the different systems and making quick decisions. My background in electrical work hasn't directly related to flying on UNDOCKED, but the mindset and focus I use for complex wiring jobs seems to translate to navigating through the stars and managing resources during the show.\",\n  \"fact_ids\": [\"F-c28f4a646dd3\", \"F-fa7a070aa914\", \"F-6c1e6e161756\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c28f4a646dd3",
+          "F-fa7a070aa914",
+          "F-6c1e6e161756"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00647-81df40326f",
+        "authoredQuote": true,
+        "publishableQuote": "As an Electrician, I've developed a knack for problem-solving and staying calm under pressure. I think that's helped me on UNDOCKED, navigating through the different systems and making quick decisions. My background in electrical work hasn't directly related to flying on UNDOCKED, but the mindset and focus I use for complex wiring jobs seems to translate to navigating through the stars and managing resources during the show."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00647",
+          "name": "Ronald Silk",
+          "role": "UNDOCKED pilot",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "What's his background as an Electrician and how does it relate to his UNDOCKED performance? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked-digest",
+          "hood": null,
+          "focus": "Ronald Silk's performance on UNDOCKED",
+          "src": "undocked-week:weekly-c114"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Ronald Silk — UNDOCKED pilot",
+          "evidence": [
+            {
+              "id": "EV-1ee328030e",
+              "src": "undocked-week:weekly-c114",
+              "text": "UNDOCKED week-in-review c114"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Ronald Silk's Tuesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Timberline, Arcturus, Ross 154, Maplevale, Miaplacidus, Cervantes, Ridgecrest, Hatysa, Nembus, Gienah, Oakridge, Aldhibah, Izar and Tidewater; mined 1 titanium ore and 1 iron ore; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c114",
+            "id": "F-fa7a070aa914"
+          },
+          {
+            "t": "FACT",
+            "text": "Ronald Silk's Friday night on UNDOCKED: went through Last Light, Fang, Errai, Wezen, Brightfall, Birchwood, Pinecross, Aludra, Torcular, Gsc 0002, Tejat, Rimegate, Veritate, Betelgeuse, Gsc 0037, Dabih and Gsc 0045; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c114",
+            "id": "F-6c1e6e161756"
+          },
+          {
+            "t": "FACT",
+            "text": "Ronald Silk — Electrician (ledger)",
+            "src": "undocked-week:weekly-c114",
+            "id": "F-c28f4a646dd3"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED week-in-review c114",
+            "src": "undocked-week:weekly-c114",
+            "id": "F-1e6813cd3f60"
+          },
+          {
+            "t": "FACT",
+            "text": "Luis Taz's Sunday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Timberline, Arcturus, Ross 154, Maplevale, Miaplacidus, Cervantes, Ridgecrest, Grumium, Celaeno, Lanternwick and Diadem; mined 2 iron ore; got into 12 fights; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c114",
+            "id": "F-5cac6e9ee1d5"
+          },
+          {
+            "t": "FACT",
+            "text": "Luis Taz's Wednesday night on UNDOCKED: went through Nova Terra, Sirius, Lacaille 9352, Grumium, Celaeno, Lanternwick, Diadem, Intercrus, Gsc 0044, Atlas, Cedarhold, Achernar and The Experiment; mined 9 copper ore, 2 antimatter containment cell and 4 iron ore; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c114",
+            "id": "F-b9defad5e855"
+          },
+          {
+            "t": "FACT",
+            "text": "Lena Okafor's Monday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale and Miaplacidus; mined 11 iron ore and 6 copper ore; got into 1 fight; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c114",
+            "id": "F-85904443e75a"
+          },
+          {
+            "t": "FACT",
+            "text": "Ronald Silk — UNDOCKED pilot",
+            "src": "Simulation_Ledger profile for POP-00647",
+            "id": "F-c0da3e46cea4"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00298",
+      "name": "Luis Taz",
+      "quote": "As a janitor, I'm used to being on my feet and moving around all day. It wears me out, but it also keeps me sharp. When I'm flying on UNDOCKED, that energy translates into quick decisions and fast reflexes. I'm always on the lookout for the next threat or opportunity, just like I am when I'm cleaning the Coliseum after a game. It's a different kind of mess, but the mindset is the same – stay alert, stay moving, and get the job done.",
+      "disp": "driven, hard to sit still; steady, hard to shake; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"As a janitor, I'm used to being on my feet and moving around all day. It wears me out, but it also keeps me sharp. When I'm flying on UNDOCKED, that energy translates into quick decisions and fast reflexes. I'm always on the lookout for the next threat or opportunity, just like I am when I'm cleaning the Coliseum after a game. It's a different kind of mess, but the mindset is the same – stay alert, stay moving, and get the job done.\",\n  \"fact_ids\": [\"F-cefb59263ee9\", \"F-5cac6e9ee1d5\", \"F-b9defad5e855\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-cefb59263ee9",
+          "F-5cac6e9ee1d5",
+          "F-b9defad5e855"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00298-6e5655913c",
+        "authoredQuote": true,
+        "publishableQuote": "As a janitor, I'm used to being on my feet and moving around all day. It wears me out, but it also keeps me sharp. When I'm flying on UNDOCKED, that energy translates into quick decisions and fast reflexes. I'm always on the lookout for the next threat or opportunity, just like I am when I'm cleaning the Coliseum after a game. It's a different kind of mess, but the mindset is the same – stay alert, stay moving, and get the job done."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00298",
+          "name": "Luis Taz",
+          "role": "UNDOCKED pilot",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "How does Luis Taz's experience as a Janitor influence his UNDOCKED gameplay? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked-digest",
+          "hood": null,
+          "focus": "Ronald Silk's performance on UNDOCKED",
+          "src": "undocked-week:weekly-c114"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Luis Taz — UNDOCKED pilot",
+          "evidence": [
+            {
+              "id": "EV-86b779d651",
+              "src": "undocked-week:weekly-c114",
+              "text": "UNDOCKED week-in-review c114"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Luis Taz's Sunday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Timberline, Arcturus, Ross 154, Maplevale, Miaplacidus, Cervantes, Ridgecrest, Grumium, Celaeno, Lanternwick and Diadem; mined 2 iron ore; got into 12 fights; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c114",
+            "id": "F-5cac6e9ee1d5"
+          },
+          {
+            "t": "FACT",
+            "text": "Luis Taz's Wednesday night on UNDOCKED: went through Nova Terra, Sirius, Lacaille 9352, Grumium, Celaeno, Lanternwick, Diadem, Intercrus, Gsc 0044, Atlas, Cedarhold, Achernar and The Experiment; mined 9 copper ore, 2 antimatter containment cell and 4 iron ore; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c114",
+            "id": "F-b9defad5e855"
+          },
+          {
+            "t": "FACT",
+            "text": "Luis Taz — Janitor (ledger)",
+            "src": "undocked-week:weekly-c114",
+            "id": "F-cefb59263ee9"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED week-in-review c114",
+            "src": "undocked-week:weekly-c114",
+            "id": "F-1e6813cd3f60"
+          },
+          {
+            "t": "FACT",
+            "text": "Lena Okafor's Monday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale and Miaplacidus; mined 11 iron ore and 6 copper ore; got into 1 fight; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c114",
+            "id": "F-85904443e75a"
+          },
+          {
+            "t": "FACT",
+            "text": "Lena Okafor's Thursday night on UNDOCKED: went through Alpha Centauri, Sol, Sirius, Nova Terra, Epsilon Eridani, Procyon, Proxima Centauri and Barnards Star; took the Copper Requisition contract; mined 3 copper ore, 8 iron ore, 1 antimatter containment cell and 4 aluminum ore; sold 6 copper ore and 12 iron ore; got into 1 fight; came out 18 credits up; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c114",
+            "id": "F-c5c8eba689e7"
+          },
+          {
+            "t": "FACT",
+            "text": "Ronald Silk's Tuesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Timberline, Arcturus, Ross 154, Maplevale, Miaplacidus, Cervantes, Ridgecrest, Hatysa, Nembus, Gienah, Oakridge, Aldhibah, Izar and Tidewater; mined 1 titanium ore and 1 iron ore; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c114",
+            "id": "F-fa7a070aa914"
+          },
+          {
+            "t": "FACT",
+            "text": "Luis Taz — UNDOCKED pilot",
+            "src": "Simulation_Ledger profile for POP-00298",
+            "id": "F-ff87f51fde09"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-00647",
+      "name": "Ronald Silk",
+      "quote": "As an Electrician, I've developed a knack for problem-solving and staying calm under pressure. I think that's helped me on UNDOCKED, navigating through the different systems and making quick decisions. My background in electrical work hasn't directly related to flying on UNDOCKED, but the mindset and focus I use for complex wiring jobs seems to translate to navigating through the stars and managing resources during the show.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"As an Electrician, I've developed a knack for problem-solving and staying calm under pressure. I think that's helped me on UNDOCKED, navigating through the different systems and making quick decisions. My background in electrical work hasn't directly related to flying on UNDOCKED, but the mindset and focus I use for complex wiring jobs seems to translate to navigating through the stars and managing resources during the show.\",\n  \"fact_ids\": [\"F-c28f4a646dd3\", \"F-fa7a070aa914\", \"F-6c1e6e161756\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c28f4a646dd3",
+          "F-fa7a070aa914",
+          "F-6c1e6e161756"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00647-81df40326f",
+        "authoredQuote": true,
+        "publishableQuote": "As an Electrician, I've developed a knack for problem-solving and staying calm under pressure. I think that's helped me on UNDOCKED, navigating through the different systems and making quick decisions. My background in electrical work hasn't directly related to flying on UNDOCKED, but the mindset and focus I use for complex wiring jobs seems to translate to navigating through the stars and managing resources during the show."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00647",
+          "name": "Ronald Silk",
+          "role": "UNDOCKED pilot",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "What's his background as an Electrician and how does it relate to his UNDOCKED performance? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked-digest",
+          "hood": null,
+          "focus": "Ronald Silk's performance on UNDOCKED",
+          "src": "undocked-week:weekly-c114"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Ronald Silk — UNDOCKED pilot",
+          "evidence": [
+            {
+              "id": "EV-1ee328030e",
+              "src": "undocked-week:weekly-c114",
+              "text": "UNDOCKED week-in-review c114"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Ronald Silk's Tuesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Timberline, Arcturus, Ross 154, Maplevale, Miaplacidus, Cervantes, Ridgecrest, Hatysa, Nembus, Gienah, Oakridge, Aldhibah, Izar and Tidewater; mined 1 titanium ore and 1 iron ore; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c114",
+            "id": "F-fa7a070aa914"
+          },
+          {
+            "t": "FACT",
+            "text": "Ronald Silk's Friday night on UNDOCKED: went through Last Light, Fang, Errai, Wezen, Brightfall, Birchwood, Pinecross, Aludra, Torcular, Gsc 0002, Tejat, Rimegate, Veritate, Betelgeuse, Gsc 0037, Dabih and Gsc 0045; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c114",
+            "id": "F-6c1e6e161756"
+          },
+          {
+            "t": "FACT",
+            "text": "Ronald Silk — Electrician (ledger)",
+            "src": "undocked-week:weekly-c114",
+            "id": "F-c28f4a646dd3"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED week-in-review c114",
+            "src": "undocked-week:weekly-c114",
+            "id": "F-1e6813cd3f60"
+          },
+          {
+            "t": "FACT",
+            "text": "Luis Taz's Sunday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Timberline, Arcturus, Ross 154, Maplevale, Miaplacidus, Cervantes, Ridgecrest, Grumium, Celaeno, Lanternwick and Diadem; mined 2 iron ore; got into 12 fights; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c114",
+            "id": "F-5cac6e9ee1d5"
+          },
+          {
+            "t": "FACT",
+            "text": "Luis Taz's Wednesday night on UNDOCKED: went through Nova Terra, Sirius, Lacaille 9352, Grumium, Celaeno, Lanternwick, Diadem, Intercrus, Gsc 0044, Atlas, Cedarhold, Achernar and The Experiment; mined 9 copper ore, 2 antimatter containment cell and 4 iron ore; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c114",
+            "id": "F-b9defad5e855"
+          },
+          {
+            "t": "FACT",
+            "text": "Lena Okafor's Monday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale and Miaplacidus; mined 11 iron ore and 6 copper ore; got into 1 fight; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c114",
+            "id": "F-85904443e75a"
+          },
+          {
+            "t": "FACT",
+            "text": "Ronald Silk — UNDOCKED pilot",
+            "src": "Simulation_Ledger profile for POP-00647",
+            "id": "F-c0da3e46cea4"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00298",
+      "name": "Luis Taz",
+      "quote": "As a janitor, I'm used to being on my feet and moving around all day. It wears me out, but it also keeps me sharp. When I'm flying on UNDOCKED, that energy translates into quick decisions and fast reflexes. I'm always on the lookout for the next threat or opportunity, just like I am when I'm cleaning the Coliseum after a game. It's a different kind of mess, but the mindset is the same – stay alert, stay moving, and get the job done.",
+      "disp": "driven, hard to sit still; steady, hard to shake; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"As a janitor, I'm used to being on my feet and moving around all day. It wears me out, but it also keeps me sharp. When I'm flying on UNDOCKED, that energy translates into quick decisions and fast reflexes. I'm always on the lookout for the next threat or opportunity, just like I am when I'm cleaning the Coliseum after a game. It's a different kind of mess, but the mindset is the same – stay alert, stay moving, and get the job done.\",\n  \"fact_ids\": [\"F-cefb59263ee9\", \"F-5cac6e9ee1d5\", \"F-b9defad5e855\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-cefb59263ee9",
+          "F-5cac6e9ee1d5",
+          "F-b9defad5e855"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00298-6e5655913c",
+        "authoredQuote": true,
+        "publishableQuote": "As a janitor, I'm used to being on my feet and moving around all day. It wears me out, but it also keeps me sharp. When I'm flying on UNDOCKED, that energy translates into quick decisions and fast reflexes. I'm always on the lookout for the next threat or opportunity, just like I am when I'm cleaning the Coliseum after a game. It's a different kind of mess, but the mindset is the same – stay alert, stay moving, and get the job done."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00298",
+          "name": "Luis Taz",
+          "role": "UNDOCKED pilot",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "How does Luis Taz's experience as a Janitor influence his UNDOCKED gameplay? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked-digest",
+          "hood": null,
+          "focus": "Ronald Silk's performance on UNDOCKED",
+          "src": "undocked-week:weekly-c114"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Luis Taz — UNDOCKED pilot",
+          "evidence": [
+            {
+              "id": "EV-86b779d651",
+              "src": "undocked-week:weekly-c114",
+              "text": "UNDOCKED week-in-review c114"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Luis Taz's Sunday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Timberline, Arcturus, Ross 154, Maplevale, Miaplacidus, Cervantes, Ridgecrest, Grumium, Celaeno, Lanternwick and Diadem; mined 2 iron ore; got into 12 fights; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c114",
+            "id": "F-5cac6e9ee1d5"
+          },
+          {
+            "t": "FACT",
+            "text": "Luis Taz's Wednesday night on UNDOCKED: went through Nova Terra, Sirius, Lacaille 9352, Grumium, Celaeno, Lanternwick, Diadem, Intercrus, Gsc 0044, Atlas, Cedarhold, Achernar and The Experiment; mined 9 copper ore, 2 antimatter containment cell and 4 iron ore; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c114",
+            "id": "F-b9defad5e855"
+          },
+          {
+            "t": "FACT",
+            "text": "Luis Taz — Janitor (ledger)",
+            "src": "undocked-week:weekly-c114",
+            "id": "F-cefb59263ee9"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED week-in-review c114",
+            "src": "undocked-week:weekly-c114",
+            "id": "F-1e6813cd3f60"
+          },
+          {
+            "t": "FACT",
+            "text": "Lena Okafor's Monday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale and Miaplacidus; mined 11 iron ore and 6 copper ore; got into 1 fight; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c114",
+            "id": "F-85904443e75a"
+          },
+          {
+            "t": "FACT",
+            "text": "Lena Okafor's Thursday night on UNDOCKED: went through Alpha Centauri, Sol, Sirius, Nova Terra, Epsilon Eridani, Procyon, Proxima Centauri and Barnards Star; took the Copper Requisition contract; mined 3 copper ore, 8 iron ore, 1 antimatter containment cell and 4 aluminum ore; sold 6 copper ore and 12 iron ore; got into 1 fight; came out 18 credits up; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c114",
+            "id": "F-c5c8eba689e7"
+          },
+          {
+            "t": "FACT",
+            "text": "Ronald Silk's Tuesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Timberline, Arcturus, Ross 154, Maplevale, Miaplacidus, Cervantes, Ridgecrest, Hatysa, Nembus, Gienah, Oakridge, Aldhibah, Izar and Tidewater; mined 1 titanium ore and 1 iron ore; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c114",
+            "id": "F-fa7a070aa914"
+          },
+          {
+            "t": "FACT",
+            "text": "Luis Taz — UNDOCKED pilot",
+            "src": "Simulation_Ledger profile for POP-00298",
+            "id": "F-ff87f51fde09"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00530",
+      "name": null,
+      "quote": null,
+      "disp": null,
+      "recorded": false,
+      "fallback": "call-failed: Quota exceeded for quota metric 'Read requests' and limit 'Read requests per minute per user' of service 'sheets.googleapis.com' for consumer 'project_number:559534329568'.",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00530",
+          "name": "Lena Okafor",
+          "role": "UNDOCKED pilot",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "What's Lena Okafor's approach to UNDOCKED given her role as a Daycare Director? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked-digest",
+          "hood": null,
+          "focus": "Ronald Silk's performance on UNDOCKED",
+          "src": "undocked-week:weekly-c114"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Lena Okafor — UNDOCKED pilot",
+          "evidence": [
+            {
+              "id": "EV-931b875634",
+              "src": "undocked-week:weekly-c114",
+              "text": "UNDOCKED week-in-review c114"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Lena Okafor's Monday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale and Miaplacidus; mined 11 iron ore and 6 copper ore; got into 1 fight; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c114",
+            "id": "F-85904443e75a"
+          },
+          {
+            "t": "FACT",
+            "text": "Lena Okafor's Thursday night on UNDOCKED: went through Alpha Centauri, Sol, Sirius, Nova Terra, Epsilon Eridani, Procyon, Proxima Centauri and Barnards Star; took the Copper Requisition contract; mined 3 copper ore, 8 iron ore, 1 antimatter containment cell and 4 aluminum ore; sold 6 copper ore and 12 iron ore; got into 1 fight; came out 18 credits up; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c114",
+            "id": "F-c5c8eba689e7"
+          },
+          {
+            "t": "FACT",
+            "text": "Lena Okafor — Daycare Director (ledger)",
+            "src": "undocked-week:weekly-c114",
+            "id": "F-0f00a8a8340a"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED week-in-review c114",
+            "src": "undocked-week:weekly-c114",
+            "id": "F-1e6813cd3f60"
+          },
+          {
+            "t": "FACT",
+            "text": "Luis Taz's Sunday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Timberline, Arcturus, Ross 154, Maplevale, Miaplacidus, Cervantes, Ridgecrest, Grumium, Celaeno, Lanternwick and Diadem; mined 2 iron ore; got into 12 fights; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c114",
+            "id": "F-5cac6e9ee1d5"
+          },
+          {
+            "t": "FACT",
+            "text": "Luis Taz's Wednesday night on UNDOCKED: went through Nova Terra, Sirius, Lacaille 9352, Grumium, Celaeno, Lanternwick, Diadem, Intercrus, Gsc 0044, Atlas, Cedarhold, Achernar and The Experiment; mined 9 copper ore, 2 antimatter containment cell and 4 iron ore; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c114",
+            "id": "F-b9defad5e855"
+          },
+          {
+            "t": "FACT",
+            "text": "Ronald Silk's Tuesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Timberline, Arcturus, Ross 154, Maplevale, Miaplacidus, Cervantes, Ridgecrest, Hatysa, Nembus, Gienah, Oakridge, Aldhibah, Izar and Tidewater; mined 1 titanium ore and 1 iron ore; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c114",
+            "id": "F-fa7a070aa914"
+          },
+          {
+            "t": "FACT",
+            "text": "Lena Okafor — UNDOCKED pilot",
+            "src": "Simulation_Ledger profile for POP-00530",
+            "id": "F-411855505fe1"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-11-07T15:15:38.243Z"
+}

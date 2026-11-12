@@ -1,0 +1,982 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "112",
+  "persona": "trevor-shimizu",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Trevor Shimizu",
+    "popid": "POP-00155"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-transit",
+      "angle": "19th St Oakland ridership 14,789 | 8 stations + 10 corridors on the record (rebased this cycle — not comparable) — the platforms and the people who run them",
+      "label": "19th St Oakland ridership 14,789 | 8 stations + 10 corridors on the record (rebased this cycle — not comparable)",
+      "hookLine": "19th St Oakland carried the most riders this cycle — base: ledger; rebased; game day (Downtown); events in Lake Merritt; Baylight District — Final Council Vote: construction-active; 14 transit workers on the roster, 8 citizens who lived a transit line.",
+      "hood": null,
+      "citizens": [
+        "Evan Lewis (POP-00200)",
+        "Joel Wren (POP-00218)",
+        "Jerald Jensen (POP-00280)",
+        "Coen Cartier (POP-00338)",
+        "Daire Green (POP-00442)",
+        "Ray Neal (POP-00448)",
+        "Calvin Mwangi (POP-00573)",
+        "Eleanor Rivera (POP-00617)",
+        "Elena Soria Dominguez (POP-00791)",
+        "Ivy Tran (POP-01037)",
+        "Ximena Mehta (POP-01039)",
+        "Rosario Medina (POP-01053)",
+        "Delia Vargas-Ruiz (POP-01054)",
+        "Jerome Pittman (POP-01055)",
+        "Hal Richmond (POP-00007)",
+        "Dana Reeve (POP-00010)",
+        "Simon Leary (POP-00016)",
+        "Alisha Peña (POP-00029)",
+        "Janae Rivers (POP-00043)",
+        "Pamela Amelia (POP-00049)",
+        "JR Rosado (POP-00054)",
+        "Sidney Tumolo (POP-00058)"
+      ],
+      "popids": [
+        "POP-00200",
+        "POP-00218",
+        "POP-00280",
+        "POP-00338",
+        "POP-00442",
+        "POP-00448",
+        "POP-00573",
+        "POP-00617",
+        "POP-00791",
+        "POP-01037",
+        "POP-01039",
+        "POP-01053",
+        "POP-01054",
+        "POP-01055",
+        "POP-00007",
+        "POP-00010",
+        "POP-00016",
+        "POP-00029",
+        "POP-00043",
+        "POP-00049",
+        "POP-00054",
+        "POP-00058"
+      ],
+      "ref": "output/beats/Transit_Metrics.jsonl Cycle 112",
+      "cycle": 112
+    }
+  },
+  "angle": "output/cron-compare/civic_c112_trevor-shimizu_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 2,
+  "quotes": [
+    {
+      "pop": "POP-00617",
+      "name": "Eleanor Rivera",
+      "quote": "From the booth at 19th, on a game day it's not one thing — it's the whole rhythm stacking up. You see the platform fill, and you know the trains are coming, but they're coming full from the last stop. So it's dwell time, sure — people squeezing on, people stepping back, doors cycling. But it's also crowd control, because when the platform's that packed, you're watching for people too close to the edge, and you're holding the train an extra few seconds just to be safe. And honestly, sometimes it's just the sheer number of bodies moving at once — everyone's got somewhere to be, and they all want to be first. That's what explains the gap between how many people we move and how on-time we look. We're moving a lot of people, but moving a lot of people takes time.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"From the booth at 19th, on a game day it's not one thing — it's the whole rhythm stacking up. You see the platform fill, and you know the trains are coming, but they're coming full from the last stop. So it's dwell time, sure — people squeezing on, people stepping back, doors cycling. But it's also crowd control, because when the platform's that packed, you're watching for people too close to the edge, and you're holding the train an extra few seconds just to be safe. And honestly, sometimes it's just the sheer number of bodies moving at once — everyone's got somewhere to be, and they all want to be first. That's what explains the gap between how many people we move and how on-time we look. We're moving a lot of people, but moving a lot of people takes time.\",\n  \"fact_ids\": [\n    \"F-f5b728afa7a8\",\n    \"F-8bad44efda89\"\n  ],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-f5b728afa7a8",
+          "F-8bad44efda89"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00617-15c7bc1da3",
+        "authoredQuote": true,
+        "publishableQuote": "From the booth at 19th, on a game day it's not one thing — it's the whole rhythm stacking up. You see the platform fill, and you know the trains are coming, but they're coming full from the last stop. So it's dwell time, sure — people squeezing on, people stepping back, doors cycling. But it's also crowd control, because when the platform's that packed, you're watching for people too close to the edge, and you're holding the train an extra few seconds just to be safe. And honestly, sometimes it's just the sheer number of bodies moving at once — everyone's got somewhere to be, and they all want to be first. That's what explains the gap between how many people we move and how on-time we look. We're moving a lot of people, but moving a lot of people takes time."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00617",
+          "name": "Eleanor Rivera",
+          "role": "BART Station Manager",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Trevor Shimizu",
+          "question": "When the platform fills up at 19th St on a game day with events at Lake Merritt, what do you see from the station manager booth that explains the delays — is it dwell time, crowd control, or something else? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-transit",
+          "hood": null,
+          "focus": "Why 19th St Oakland carried the most riders on the line this cycle while posting the lowest on-time performance — and what the people running that station and those trains say about the gap.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 112"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Eleanor Rivera — BART Station Manager — BART Oakland Division",
+          "evidence": [
+            {
+              "id": "EV-ed560507e7",
+              "src": "output/beats/Transit_Metrics.jsonl Cycle 112",
+              "text": "19th St Oakland carried the most riders this cycle — base: ledger; rebased; game day (Downtown); events in Lake Merritt; Baylight District — Final Council Vote: construction-active; 14 transit workers on the roster, 8 citizens who lived a transit line."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "19th St Oakland ridership 14,789 | 8 stations + 10 corridors on the record (rebased this cycle — not comparable)",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 112",
+            "id": "F-7f27c7518895"
+          },
+          {
+            "t": "FACT",
+            "text": "19th St Oakland carried the most riders this cycle — base: ledger; rebased; game day (Downtown); events in Lake Merritt; Baylight District — Final Council Vote: construction-active; 14 transit workers on the roster, 8 citizens who lived a transit line.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 112",
+            "id": "F-f5b728afa7a8"
+          },
+          {
+            "t": "FACT",
+            "text": "Day type this cycle: ordinary weekday — no citywide cut. A station that moved more than the citywide rule names its own reason on its row.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 112 Factors (frame)",
+            "id": "F-0d43a139f8c6"
+          },
+          {
+            "t": "FACT",
+            "text": "The week on the line — every cause on the record this cycle, once: game day (Downtown, Jack London); events in Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; game day (Downtown); events in Lake Merritt; events in Lake Merritt, Chinatown; events in Fruitvale, East Oakland ×3; Fruitvale Transit Hub Phase II — Visioning: design-phase; events in East Oakland ×3; game day (Jack London); events in Jack London; events in Montclair; game day (Jack London, Downtow",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 112 Factors",
+            "id": "F-480e7a636df7"
+          },
+          {
+            "t": "FACT",
+            "text": "Weather this cycle: clear, 48°F (2 cycles of clear)",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 112",
+            "id": "F-6b769ea53514"
+          },
+          {
+            "t": "FACT",
+            "text": "Game on the sports feed this cycle: Oaks at KONO — The Oaks open their inaugural season at home vs the San Antonio Spurs and instantly get their first win in franchise history, After 0-9 through rookie camp and preseason the team had grown anxious. Coach Shepard was asked after the game how the locker room responded to the win and he laughed and said his ears were still ringing. Coach Shepard, who is also celebrating his first win as a rookie head coach, emphasized that it was important to honor",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 112",
+            "id": "F-8bad44efda89"
+          },
+          {
+            "t": "FACT",
+            "text": "No chaos car touched the trains or the transit agencies this cycle (Chaos_Cars rows read; none on bart_train, BART or AC Transit)",
+            "src": "output/world_summary_c112.md ## Chaos Events",
+            "id": "F-9ddce708e826"
+          },
+          {
+            "t": "FACT",
+            "text": "Eleanor Rivera — BART Station Manager — BART Oakland Division",
+            "src": "Simulation_Ledger profile for POP-00617",
+            "id": "F-6412715ef9fb"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00200",
+      "name": "Evan Lewis",
+      "quote": "I drive the 18 through downtown most evenings, and 19th St has always been the heartbeat stop — folks transferring, heading to work, catching a game. It doesn't surprise me it carries the most people. But I'll tell you, when I pull up alongside that station, I see the crowds waiting and the trains crawling in late, and I think: that's the price of being the busiest. The folks running it, they're doing their best with what they've got — construction everywhere, big events pulling people in. You can't move that many bodies and keep a perfect clock. It's like my route on a game day — you're packed, you're slow, but you're moving people where they need to go. That's the job.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; curious, open to new things; steady, hard to shake; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "{\"answer\":\"quote\",\"quote\":\"I drive the 18 through downtown most evenings, and 19th St has always been the heartbeat stop — folks transferring, heading to work, catching a game. It doesn't surprise me it carries the most people. But I'll tell you, when I pull up alongside that station, I see the crowds waiting and the trains crawling in late, and I think: that's the price of being the busiest. The folks running it, they're doing their best with what they've got — construction everywhere, big events pulling people in. You can't move that many bodies and keep a perfect clock. It's like my route on a game day — you're packed, you're slow, but you're moving people where they need to go. That's the job.\",\"fact_ids\":[\"F-f5b728afa7a8\",\"F-0d43a139f8c6\",\"F-480e7a636df7\"],\"basis\":\"lived-context\",\"unverifiedLead\":null,\"abstain_reason\":null}",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-f5b728afa7a8",
+          "F-0d43a139f8c6",
+          "F-480e7a636df7"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00200-c433b41722",
+        "authoredQuote": true,
+        "publishableQuote": "I drive the 18 through downtown most evenings, and 19th St has always been the heartbeat stop — folks transferring, heading to work, catching a game. It doesn't surprise me it carries the most people. But I'll tell you, when I pull up alongside that station, I see the crowds waiting and the trains crawling in late, and I think: that's the price of being the busiest. The folks running it, they're doing their best with what they've got — construction everywhere, big events pulling people in. You can't move that many bodies and keep a perfect clock. It's like my route on a game day — you're packed, you're slow, but you're moving people where they need to go. That's the job."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00200",
+          "name": "Evan Lewis",
+          "role": "Bus driver",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Trevor Shimizu",
+          "question": "What have you seen, felt, or understood about \"Why 19th St Oakland carried the most riders on the line this cycle while posting the lowest on-time performance — and what the people running that station and those trains say about the gap.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-transit",
+          "hood": null,
+          "focus": "Why 19th St Oakland carried the most riders on the line this cycle while posting the lowest on-time performance — and what the people running that station and those trains say about the gap.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 112"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Evan Lewis — Bus driver — AC Transit",
+          "evidence": [
+            {
+              "id": "EV-ca89301ecc",
+              "src": "output/beats/Transit_Metrics.jsonl Cycle 112",
+              "text": "19th St Oakland carried the most riders this cycle — base: ledger; rebased; game day (Downtown); events in Lake Merritt; Baylight District — Final Council Vote: construction-active; 14 transit workers on the roster, 8 citizens who lived a transit line."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "19th St Oakland ridership 14,789 | 8 stations + 10 corridors on the record (rebased this cycle — not comparable)",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 112",
+            "id": "F-7f27c7518895"
+          },
+          {
+            "t": "FACT",
+            "text": "19th St Oakland carried the most riders this cycle — base: ledger; rebased; game day (Downtown); events in Lake Merritt; Baylight District — Final Council Vote: construction-active; 14 transit workers on the roster, 8 citizens who lived a transit line.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 112",
+            "id": "F-f5b728afa7a8"
+          },
+          {
+            "t": "FACT",
+            "text": "Day type this cycle: ordinary weekday — no citywide cut. A station that moved more than the citywide rule names its own reason on its row.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 112 Factors (frame)",
+            "id": "F-0d43a139f8c6"
+          },
+          {
+            "t": "FACT",
+            "text": "The week on the line — every cause on the record this cycle, once: game day (Downtown, Jack London); events in Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; game day (Downtown); events in Lake Merritt; events in Lake Merritt, Chinatown; events in Fruitvale, East Oakland ×3; Fruitvale Transit Hub Phase II — Visioning: design-phase; events in East Oakland ×3; game day (Jack London); events in Jack London; events in Montclair; game day (Jack London, Downtow",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 112 Factors",
+            "id": "F-480e7a636df7"
+          },
+          {
+            "t": "FACT",
+            "text": "Weather this cycle: clear, 48°F (2 cycles of clear)",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 112",
+            "id": "F-6b769ea53514"
+          },
+          {
+            "t": "FACT",
+            "text": "Game on the sports feed this cycle: Oaks at KONO — The Oaks open their inaugural season at home vs the San Antonio Spurs and instantly get their first win in franchise history, After 0-9 through rookie camp and preseason the team had grown anxious. Coach Shepard was asked after the game how the locker room responded to the win and he laughed and said his ears were still ringing. Coach Shepard, who is also celebrating his first win as a rookie head coach, emphasized that it was important to honor",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 112",
+            "id": "F-8bad44efda89"
+          },
+          {
+            "t": "FACT",
+            "text": "No chaos car touched the trains or the transit agencies this cycle (Chaos_Cars rows read; none on bart_train, BART or AC Transit)",
+            "src": "output/world_summary_c112.md ## Chaos Events",
+            "id": "F-9ddce708e826"
+          },
+          {
+            "t": "FACT",
+            "text": "Evan Lewis — Bus driver — AC Transit",
+            "src": "Simulation_Ledger profile for POP-00200",
+            "id": "F-43ae64c832ec"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-00617",
+      "name": "Eleanor Rivera",
+      "quote": "From the booth at 19th, on a game day it's not one thing — it's the whole rhythm stacking up. You see the platform fill, and you know the trains are coming, but they're coming full from the last stop. So it's dwell time, sure — people squeezing on, people stepping back, doors cycling. But it's also crowd control, because when the platform's that packed, you're watching for people too close to the edge, and you're holding the train an extra few seconds just to be safe. And honestly, sometimes it's just the sheer number of bodies moving at once — everyone's got somewhere to be, and they all want to be first. That's what explains the gap between how many people we move and how on-time we look. We're moving a lot of people, but moving a lot of people takes time.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"From the booth at 19th, on a game day it's not one thing — it's the whole rhythm stacking up. You see the platform fill, and you know the trains are coming, but they're coming full from the last stop. So it's dwell time, sure — people squeezing on, people stepping back, doors cycling. But it's also crowd control, because when the platform's that packed, you're watching for people too close to the edge, and you're holding the train an extra few seconds just to be safe. And honestly, sometimes it's just the sheer number of bodies moving at once — everyone's got somewhere to be, and they all want to be first. That's what explains the gap between how many people we move and how on-time we look. We're moving a lot of people, but moving a lot of people takes time.\",\n  \"fact_ids\": [\n    \"F-f5b728afa7a8\",\n    \"F-8bad44efda89\"\n  ],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-f5b728afa7a8",
+          "F-8bad44efda89"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00617-15c7bc1da3",
+        "authoredQuote": true,
+        "publishableQuote": "From the booth at 19th, on a game day it's not one thing — it's the whole rhythm stacking up. You see the platform fill, and you know the trains are coming, but they're coming full from the last stop. So it's dwell time, sure — people squeezing on, people stepping back, doors cycling. But it's also crowd control, because when the platform's that packed, you're watching for people too close to the edge, and you're holding the train an extra few seconds just to be safe. And honestly, sometimes it's just the sheer number of bodies moving at once — everyone's got somewhere to be, and they all want to be first. That's what explains the gap between how many people we move and how on-time we look. We're moving a lot of people, but moving a lot of people takes time."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00617",
+          "name": "Eleanor Rivera",
+          "role": "BART Station Manager",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Trevor Shimizu",
+          "question": "When the platform fills up at 19th St on a game day with events at Lake Merritt, what do you see from the station manager booth that explains the delays — is it dwell time, crowd control, or something else? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-transit",
+          "hood": null,
+          "focus": "Why 19th St Oakland carried the most riders on the line this cycle while posting the lowest on-time performance — and what the people running that station and those trains say about the gap.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 112"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Eleanor Rivera — BART Station Manager — BART Oakland Division",
+          "evidence": [
+            {
+              "id": "EV-ed560507e7",
+              "src": "output/beats/Transit_Metrics.jsonl Cycle 112",
+              "text": "19th St Oakland carried the most riders this cycle — base: ledger; rebased; game day (Downtown); events in Lake Merritt; Baylight District — Final Council Vote: construction-active; 14 transit workers on the roster, 8 citizens who lived a transit line."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "19th St Oakland ridership 14,789 | 8 stations + 10 corridors on the record (rebased this cycle — not comparable)",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 112",
+            "id": "F-7f27c7518895"
+          },
+          {
+            "t": "FACT",
+            "text": "19th St Oakland carried the most riders this cycle — base: ledger; rebased; game day (Downtown); events in Lake Merritt; Baylight District — Final Council Vote: construction-active; 14 transit workers on the roster, 8 citizens who lived a transit line.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 112",
+            "id": "F-f5b728afa7a8"
+          },
+          {
+            "t": "FACT",
+            "text": "Day type this cycle: ordinary weekday — no citywide cut. A station that moved more than the citywide rule names its own reason on its row.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 112 Factors (frame)",
+            "id": "F-0d43a139f8c6"
+          },
+          {
+            "t": "FACT",
+            "text": "The week on the line — every cause on the record this cycle, once: game day (Downtown, Jack London); events in Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; game day (Downtown); events in Lake Merritt; events in Lake Merritt, Chinatown; events in Fruitvale, East Oakland ×3; Fruitvale Transit Hub Phase II — Visioning: design-phase; events in East Oakland ×3; game day (Jack London); events in Jack London; events in Montclair; game day (Jack London, Downtow",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 112 Factors",
+            "id": "F-480e7a636df7"
+          },
+          {
+            "t": "FACT",
+            "text": "Weather this cycle: clear, 48°F (2 cycles of clear)",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 112",
+            "id": "F-6b769ea53514"
+          },
+          {
+            "t": "FACT",
+            "text": "Game on the sports feed this cycle: Oaks at KONO — The Oaks open their inaugural season at home vs the San Antonio Spurs and instantly get their first win in franchise history, After 0-9 through rookie camp and preseason the team had grown anxious. Coach Shepard was asked after the game how the locker room responded to the win and he laughed and said his ears were still ringing. Coach Shepard, who is also celebrating his first win as a rookie head coach, emphasized that it was important to honor",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 112",
+            "id": "F-8bad44efda89"
+          },
+          {
+            "t": "FACT",
+            "text": "No chaos car touched the trains or the transit agencies this cycle (Chaos_Cars rows read; none on bart_train, BART or AC Transit)",
+            "src": "output/world_summary_c112.md ## Chaos Events",
+            "id": "F-9ddce708e826"
+          },
+          {
+            "t": "FACT",
+            "text": "Eleanor Rivera — BART Station Manager — BART Oakland Division",
+            "src": "Simulation_Ledger profile for POP-00617",
+            "id": "F-6412715ef9fb"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00338",
+      "name": "Coen Cartier",
+      "quote": null,
+      "disp": "close to family",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: fact_ids contains an unknown id",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I drive the buses, not the trains, so I can't speak to what's happening on the BART platforms themselves. But I can tell you this: when there's a game or a big event downtown, the crowds at 12th Street come in waves — you get that big push before and after, then it clears out. 19th Street feels different. It's steadier, more constant, because it's not just event folks — it's people going to work, going to school, running errands. So if it's carrying more riders but running late, that makes sense to me. It's a busier, more complicated station, and when everyone's trying to get somewhere at the same time, things just take longer. I see the same thing on my routes when there's construction or a big crowd — you can't rush it, you just have to move people safely.\",\n  \"fact_ids\": [\"F-7f27c7518895\", \"F-f5b728afa7a8\", \"F-0d43a139f6c8\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00338",
+          "name": "Coen Cartier",
+          "role": "Transit Operator (AC Transit)",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Trevor Shimizu",
+          "question": "As a transit operator on the line, what do you notice about boarding patterns at 19th St compared to 12th St on days with the same events and game-day crowds? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-transit",
+          "hood": null,
+          "focus": "Why 19th St Oakland carried the most riders on the line this cycle while posting the lowest on-time performance — and what the people running that station and those trains say about the gap.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 112"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Coen Cartier — Transit Operator (AC Transit) — AC Transit",
+          "evidence": [
+            {
+              "id": "EV-a8bc4c8dbb",
+              "src": "output/beats/Transit_Metrics.jsonl Cycle 112",
+              "text": "19th St Oakland carried the most riders this cycle — base: ledger; rebased; game day (Downtown); events in Lake Merritt; Baylight District — Final Council Vote: construction-active; 14 transit workers on the roster, 8 citizens who lived a transit line."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "19th St Oakland ridership 14,789 | 8 stations + 10 corridors on the record (rebased this cycle — not comparable)",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 112",
+            "id": "F-7f27c7518895"
+          },
+          {
+            "t": "FACT",
+            "text": "19th St Oakland carried the most riders this cycle — base: ledger; rebased; game day (Downtown); events in Lake Merritt; Baylight District — Final Council Vote: construction-active; 14 transit workers on the roster, 8 citizens who lived a transit line.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 112",
+            "id": "F-f5b728afa7a8"
+          },
+          {
+            "t": "FACT",
+            "text": "Day type this cycle: ordinary weekday — no citywide cut. A station that moved more than the citywide rule names its own reason on its row.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 112 Factors (frame)",
+            "id": "F-0d43a139f8c6"
+          },
+          {
+            "t": "FACT",
+            "text": "The week on the line — every cause on the record this cycle, once: game day (Downtown, Jack London); events in Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; game day (Downtown); events in Lake Merritt; events in Lake Merritt, Chinatown; events in Fruitvale, East Oakland ×3; Fruitvale Transit Hub Phase II — Visioning: design-phase; events in East Oakland ×3; game day (Jack London); events in Jack London; events in Montclair; game day (Jack London, Downtow",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 112 Factors",
+            "id": "F-480e7a636df7"
+          },
+          {
+            "t": "FACT",
+            "text": "Weather this cycle: clear, 48°F (2 cycles of clear)",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 112",
+            "id": "F-6b769ea53514"
+          },
+          {
+            "t": "FACT",
+            "text": "Game on the sports feed this cycle: Oaks at KONO — The Oaks open their inaugural season at home vs the San Antonio Spurs and instantly get their first win in franchise history, After 0-9 through rookie camp and preseason the team had grown anxious. Coach Shepard was asked after the game how the locker room responded to the win and he laughed and said his ears were still ringing. Coach Shepard, who is also celebrating his first win as a rookie head coach, emphasized that it was important to honor",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 112",
+            "id": "F-8bad44efda89"
+          },
+          {
+            "t": "FACT",
+            "text": "No chaos car touched the trains or the transit agencies this cycle (Chaos_Cars rows read; none on bart_train, BART or AC Transit)",
+            "src": "output/world_summary_c112.md ## Chaos Events",
+            "id": "F-9ddce708e826"
+          },
+          {
+            "t": "FACT",
+            "text": "Coen Cartier — Transit Operator (AC Transit) — AC Transit",
+            "src": "Simulation_Ledger profile for POP-00338",
+            "id": "F-46d5971db351"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00442",
+      "name": "Daire Green",
+      "quote": null,
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: direct reaction exceeds 80 words; direct reaction must be one to four sentences",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Look, I drive buses, not the trains, so I can't speak to what happens on the platform at 19th Street. But I know that kind of pressure. When you're running late and the crowd's pushing on, you've got to make a call. Holding the doors for one more person can cost you thirty seconds, and that throws the whole schedule off for everyone behind you. But you also can't just shut them in someone's face. It's a judgment call every single time, and the on-time number doesn't tell you whether you made the right one.\",\n  \"fact_ids\": [\"F-7f27c7518895\", \"F-f5b728afa7a8\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00442",
+          "name": "Daire Green",
+          "role": "Transit Operator (AC Transit)",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Trevor Shimizu",
+          "question": "When you pull into 19th St on a crowded day, what determines whether you hold the doors or close them — and how does that play into the on-time number? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-transit",
+          "hood": null,
+          "focus": "Why 19th St Oakland carried the most riders on the line this cycle while posting the lowest on-time performance — and what the people running that station and those trains say about the gap.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 112"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Daire Green — Transit Operator (AC Transit) — AC Transit",
+          "evidence": [
+            {
+              "id": "EV-41a757d38c",
+              "src": "output/beats/Transit_Metrics.jsonl Cycle 112",
+              "text": "19th St Oakland carried the most riders this cycle — base: ledger; rebased; game day (Downtown); events in Lake Merritt; Baylight District — Final Council Vote: construction-active; 14 transit workers on the roster, 8 citizens who lived a transit line."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "19th St Oakland ridership 14,789 | 8 stations + 10 corridors on the record (rebased this cycle — not comparable)",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 112",
+            "id": "F-7f27c7518895"
+          },
+          {
+            "t": "FACT",
+            "text": "19th St Oakland carried the most riders this cycle — base: ledger; rebased; game day (Downtown); events in Lake Merritt; Baylight District — Final Council Vote: construction-active; 14 transit workers on the roster, 8 citizens who lived a transit line.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 112",
+            "id": "F-f5b728afa7a8"
+          },
+          {
+            "t": "FACT",
+            "text": "Day type this cycle: ordinary weekday — no citywide cut. A station that moved more than the citywide rule names its own reason on its row.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 112 Factors (frame)",
+            "id": "F-0d43a139f8c6"
+          },
+          {
+            "t": "FACT",
+            "text": "The week on the line — every cause on the record this cycle, once: game day (Downtown, Jack London); events in Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; game day (Downtown); events in Lake Merritt; events in Lake Merritt, Chinatown; events in Fruitvale, East Oakland ×3; Fruitvale Transit Hub Phase II — Visioning: design-phase; events in East Oakland ×3; game day (Jack London); events in Jack London; events in Montclair; game day (Jack London, Downtow",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 112 Factors",
+            "id": "F-480e7a636df7"
+          },
+          {
+            "t": "FACT",
+            "text": "Weather this cycle: clear, 48°F (2 cycles of clear)",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 112",
+            "id": "F-6b769ea53514"
+          },
+          {
+            "t": "FACT",
+            "text": "Game on the sports feed this cycle: Oaks at KONO — The Oaks open their inaugural season at home vs the San Antonio Spurs and instantly get their first win in franchise history, After 0-9 through rookie camp and preseason the team had grown anxious. Coach Shepard was asked after the game how the locker room responded to the win and he laughed and said his ears were still ringing. Coach Shepard, who is also celebrating his first win as a rookie head coach, emphasized that it was important to honor",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 112",
+            "id": "F-8bad44efda89"
+          },
+          {
+            "t": "FACT",
+            "text": "No chaos car touched the trains or the transit agencies this cycle (Chaos_Cars rows read; none on bart_train, BART or AC Transit)",
+            "src": "output/world_summary_c112.md ## Chaos Events",
+            "id": "F-9ddce708e826"
+          },
+          {
+            "t": "FACT",
+            "text": "Daire Green — Transit Operator (AC Transit) — AC Transit",
+            "src": "Simulation_Ledger profile for POP-00442",
+            "id": "F-21b80ca291b0"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00200",
+      "name": "Evan Lewis",
+      "quote": "I drive the 18 through downtown most evenings, and 19th St has always been the heartbeat stop — folks transferring, heading to work, catching a game. It doesn't surprise me it carries the most people. But I'll tell you, when I pull up alongside that station, I see the crowds waiting and the trains crawling in late, and I think: that's the price of being the busiest. The folks running it, they're doing their best with what they've got — construction everywhere, big events pulling people in. You can't move that many bodies and keep a perfect clock. It's like my route on a game day — you're packed, you're slow, but you're moving people where they need to go. That's the job.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; curious, open to new things; steady, hard to shake; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "{\"answer\":\"quote\",\"quote\":\"I drive the 18 through downtown most evenings, and 19th St has always been the heartbeat stop — folks transferring, heading to work, catching a game. It doesn't surprise me it carries the most people. But I'll tell you, when I pull up alongside that station, I see the crowds waiting and the trains crawling in late, and I think: that's the price of being the busiest. The folks running it, they're doing their best with what they've got — construction everywhere, big events pulling people in. You can't move that many bodies and keep a perfect clock. It's like my route on a game day — you're packed, you're slow, but you're moving people where they need to go. That's the job.\",\"fact_ids\":[\"F-f5b728afa7a8\",\"F-0d43a139f8c6\",\"F-480e7a636df7\"],\"basis\":\"lived-context\",\"unverifiedLead\":null,\"abstain_reason\":null}",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-f5b728afa7a8",
+          "F-0d43a139f8c6",
+          "F-480e7a636df7"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00200-c433b41722",
+        "authoredQuote": true,
+        "publishableQuote": "I drive the 18 through downtown most evenings, and 19th St has always been the heartbeat stop — folks transferring, heading to work, catching a game. It doesn't surprise me it carries the most people. But I'll tell you, when I pull up alongside that station, I see the crowds waiting and the trains crawling in late, and I think: that's the price of being the busiest. The folks running it, they're doing their best with what they've got — construction everywhere, big events pulling people in. You can't move that many bodies and keep a perfect clock. It's like my route on a game day — you're packed, you're slow, but you're moving people where they need to go. That's the job."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00200",
+          "name": "Evan Lewis",
+          "role": "Bus driver",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Trevor Shimizu",
+          "question": "What have you seen, felt, or understood about \"Why 19th St Oakland carried the most riders on the line this cycle while posting the lowest on-time performance — and what the people running that station and those trains say about the gap.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-transit",
+          "hood": null,
+          "focus": "Why 19th St Oakland carried the most riders on the line this cycle while posting the lowest on-time performance — and what the people running that station and those trains say about the gap.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 112"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Evan Lewis — Bus driver — AC Transit",
+          "evidence": [
+            {
+              "id": "EV-ca89301ecc",
+              "src": "output/beats/Transit_Metrics.jsonl Cycle 112",
+              "text": "19th St Oakland carried the most riders this cycle — base: ledger; rebased; game day (Downtown); events in Lake Merritt; Baylight District — Final Council Vote: construction-active; 14 transit workers on the roster, 8 citizens who lived a transit line."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "19th St Oakland ridership 14,789 | 8 stations + 10 corridors on the record (rebased this cycle — not comparable)",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 112",
+            "id": "F-7f27c7518895"
+          },
+          {
+            "t": "FACT",
+            "text": "19th St Oakland carried the most riders this cycle — base: ledger; rebased; game day (Downtown); events in Lake Merritt; Baylight District — Final Council Vote: construction-active; 14 transit workers on the roster, 8 citizens who lived a transit line.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 112",
+            "id": "F-f5b728afa7a8"
+          },
+          {
+            "t": "FACT",
+            "text": "Day type this cycle: ordinary weekday — no citywide cut. A station that moved more than the citywide rule names its own reason on its row.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 112 Factors (frame)",
+            "id": "F-0d43a139f8c6"
+          },
+          {
+            "t": "FACT",
+            "text": "The week on the line — every cause on the record this cycle, once: game day (Downtown, Jack London); events in Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; game day (Downtown); events in Lake Merritt; events in Lake Merritt, Chinatown; events in Fruitvale, East Oakland ×3; Fruitvale Transit Hub Phase II — Visioning: design-phase; events in East Oakland ×3; game day (Jack London); events in Jack London; events in Montclair; game day (Jack London, Downtow",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 112 Factors",
+            "id": "F-480e7a636df7"
+          },
+          {
+            "t": "FACT",
+            "text": "Weather this cycle: clear, 48°F (2 cycles of clear)",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 112",
+            "id": "F-6b769ea53514"
+          },
+          {
+            "t": "FACT",
+            "text": "Game on the sports feed this cycle: Oaks at KONO — The Oaks open their inaugural season at home vs the San Antonio Spurs and instantly get their first win in franchise history, After 0-9 through rookie camp and preseason the team had grown anxious. Coach Shepard was asked after the game how the locker room responded to the win and he laughed and said his ears were still ringing. Coach Shepard, who is also celebrating his first win as a rookie head coach, emphasized that it was important to honor",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 112",
+            "id": "F-8bad44efda89"
+          },
+          {
+            "t": "FACT",
+            "text": "No chaos car touched the trains or the transit agencies this cycle (Chaos_Cars rows read; none on bart_train, BART or AC Transit)",
+            "src": "output/world_summary_c112.md ## Chaos Events",
+            "id": "F-9ddce708e826"
+          },
+          {
+            "t": "FACT",
+            "text": "Evan Lewis — Bus driver — AC Transit",
+            "src": "Simulation_Ledger profile for POP-00200",
+            "id": "F-43ae64c832ec"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-10-19T18:17:35.909Z"
+}

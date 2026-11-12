@@ -1,0 +1,432 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "114",
+  "persona": "tanya-cruz",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00014",
+      "name": "Tanya Cruz",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Five starters and one Carmen Mesa. Who is the odd arm out?",
+      "approach": "Sideline approach (Tanya Cruz): you file from the clubhouse. That SET is yours — the Packet will never list a clubhouse event. Paint what the supplied sports line predicts. Packet player quotes and numbers only. New in-world spots go on INTAKE BIZ. No real-world Oakland venues. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview. The feed notes report what people said in paraphrase; none of it is a quote — never put it in quotation marks or attribute it as speech.",
+      "creativeBrief": {
+        "kind": "sideline-dispatch",
+        "pulseClass": "record-only-sideline",
+        "bagModes": [
+          "10 Inference Close"
+        ],
+        "claim": "The supplied sports record is the weather. The clubhouse SET is allotted hallucination fitted to that line.",
+        "anchorFacts": [
+          "Five starters and one Carmen Mesa. Who is the odd arm out?",
+          "Pablo Almanzar took the rotation spot most expected Carmen Mesa to fill, then threw a no-hitter in his debut and a 1-hitter to close the ALCS. That leaves the rotation full with Coles, Ramos, Rivas, Ellis and Almanzar. Mesa sits at AAA on a $780K deal with nowhere to start in Oakland. Henry Rivas is the most expensive arm at $28. 2M and missed time this season before his complete game in World Series game 4.",
+          "Is Mesa the A's best trade chip this winter, and how long does the front office keep paying top dollar for Rivas while the cheap arms win?"
+        ],
+        "accessEvidence": {
+          "state": "ALLOTTED",
+          "facts": [
+            "clubhouse/sideline SET is the reporter's room"
+          ]
+        },
+        "quoteEvidence": {
+          "state": "NOT_SUPPLIED",
+          "quotes": []
+        },
+        "observationEvidence": {
+          "state": "ALLOTTED",
+          "facts": []
+        },
+        "missing": [
+          "Packet player quotes",
+          "injury or team-response facts beyond the supplied record"
+        ],
+        "sceneRule": "Clubhouse SET is authorized. Invented player quotes and real-world venues are not.",
+        "sourcePointers": [
+          "output/world_summary_c114.md ## Sports",
+          "docs/media/TANYA_SIDELINE_BAG.md"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "sideline-signal",
+      "hood": "Dimond",
+      "score": null,
+      "src": "world_summary_c114.md ## Sports",
+      "nearby": [
+        {
+          "text": "A's | rumor | (off-season) | Ian Devine, Louis Cross, Hitoki Ka, Mariano Rosales, Clark Saryan, Julio Valencia",
+          "src": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | rumor | (off-season) | Carmen Mesa, Pablo Almanzar, Henry Rivas, Arturo Ramos",
+          "src": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | front-office | (off-season) | Travis Coles, John Ellis, Ernesto Quintero, Vladimir Gonzalez, Mike Paulson",
+          "src": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (off-season) | Benji Dillon, Vinnie Keane",
+          "src": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (off-season) | Isley Kelley, Darrin Davis, Danny Horn",
+          "src": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00081",
+          "name": "Carmen Mesa",
+          "profile": "Carmen Mesa — Starting Pitcher, Midland RockHounds (AA)",
+          "role": "Starting Pitcher, Midland RockHounds (AA)",
+          "hood": "Lake Merritt",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c114.md ## Sports",
+            "pop": "POP-00081",
+            "rowName": "Carmen Mesa",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01078",
+          "name": "Pablo Almanzar",
+          "profile": "Pablo Almanzar — SP / Oakland A's",
+          "role": "SP / Oakland A's",
+          "hood": "Chinatown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c114.md ## Sports",
+            "pop": "POP-01078",
+            "rowName": "Pablo Almanzar",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00024",
+          "name": "Henry Rivas",
+          "profile": "Henry Rivas — Starting Pitcher, Oakland A's",
+          "role": "Starting Pitcher, Oakland A's",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c114.md ## Sports",
+            "pop": "POP-00024",
+            "rowName": "Henry Rivas",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00025",
+          "name": "Arturo Ramos",
+          "profile": "Arturo Ramos — Starting Pitcher, Oakland A's",
+          "role": "Starting Pitcher, Oakland A's",
+          "hood": "Laurel",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c114.md ## Sports",
+            "pop": "POP-00025",
+            "rowName": "Arturo Ramos",
+            "kind": "slice-row"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C114",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-4261fa115617"
+      },
+      {
+        "t": "FACT",
+        "text": "Five starters and one Carmen Mesa. Who is the odd arm out?",
+        "src": "world_summary_c114.md ## Sports",
+        "id": "F-04594a6d25c5"
+      },
+      {
+        "t": "FACT",
+        "text": "Pablo Almanzar took the rotation spot most expected Carmen Mesa to fill, then threw a no-hitter in his debut and a 1-hitter to close the ALCS. That leaves the rotation full with Coles, Ramos, Rivas, Ellis and Almanzar. Mesa sits at AAA on a $780K deal with nowhere to start in Oakland. Henry Rivas is the most expensive arm at $28. 2M and missed time this season before his complete game in World Series game 4.",
+        "src": "world_summary_c114.md ## Sports",
+        "id": "F-788b5caab458"
+      },
+      {
+        "t": "FACT",
+        "text": "Is Mesa the A's best trade chip this winter, and how long does the front office keep paying top dollar for Rivas while the cheap arms win?",
+        "src": "world_summary_c114.md ## Sports",
+        "id": "F-5ab076c8ddeb"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "named",
+    "candidates": [
+      {
+        "pop": "POP-00081",
+        "name": "Carmen Mesa",
+        "role": "Starting Pitcher, Midland RockHounds (AA)",
+        "hood": "Lake Merritt",
+        "profile": "Carmen Mesa — Starting Pitcher, Midland RockHounds (AA)",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c114.md ## Sports",
+          "pop": "POP-00081",
+          "rowName": "Carmen Mesa",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01078",
+        "name": "Pablo Almanzar",
+        "role": "SP / Oakland A's",
+        "hood": "Chinatown",
+        "profile": "Pablo Almanzar — SP / Oakland A's",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c114.md ## Sports",
+          "pop": "POP-01078",
+          "rowName": "Pablo Almanzar",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00024",
+        "name": "Henry Rivas",
+        "role": "Starting Pitcher, Oakland A's",
+        "hood": "West Oakland",
+        "profile": "Henry Rivas — Starting Pitcher, Oakland A's",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c114.md ## Sports",
+          "pop": "POP-00024",
+          "rowName": "Henry Rivas",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00025",
+        "name": "Arturo Ramos",
+        "role": "Starting Pitcher, Oakland A's",
+        "hood": "Laurel",
+        "profile": "Arturo Ramos — Starting Pitcher, Oakland A's",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c114.md ## Sports",
+          "pop": "POP-00025",
+          "rowName": "Arturo Ramos",
+          "kind": "slice-row"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014"
+  },
+  "assignment": {
+    "story": {
+      "angle": "Five starters and one Carmen Mesa. Who is the odd arm out?",
+      "label": "Five starters and one Carmen Mesa. Who is the odd arm out?",
+      "hookLine": "Five starters and one Carmen Mesa. Who is the odd arm out?",
+      "kind": "sideline-signal",
+      "hood": "Dimond",
+      "popids": [
+        "POP-00081",
+        "POP-01078",
+        "POP-00024",
+        "POP-00025"
+      ],
+      "citizens": [
+        "Carmen Mesa (POP-00081)",
+        "Pablo Almanzar (POP-01078)",
+        "Henry Rivas (POP-00024)",
+        "Arturo Ramos (POP-00025)"
+      ],
+      "ref": "world_summary_c114.md ## Sports",
+      "cycle": 114
+    },
+    "approach": "Sideline approach (Tanya Cruz): you file from the clubhouse. That SET is yours — the Packet will never list a clubhouse event. Paint what the supplied sports line predicts. Packet player quotes and numbers only. New in-world spots go on INTAKE BIZ. No real-world Oakland venues. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview. The feed notes report what people said in paraphrase; none of it is a quote — never put it in quotation marks or attribute it as speech."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014",
+    "text": "I'm standing at the back of the clubhouse where the light stays low and the offseason lockers are already half-emptied. The rotation board still has five names on it — Coles, Ramos, Rivas, Ellis, Almanzar — and somewhere down in AAA there's Carmen Mesa with a $780K deal and no door in. That's the thing that doesn't line up for me. Almanzar didn't just take the spot; he threw a no-hitter in his debut and a 1-hitter to close the ALCS. You don't send that back down. So the question isn't really who the odd arm out is — it's whether the front office has the stomach to admit it. Rivas is the most expensive arm at $28.2M and he missed time this season before his complete game in World Series game",
+    "plan": {
+      "chase": "I'm standing at the back of the clubhouse where the light stays low and the offseason lockers are already half-emptied. The rotation board still has five names on it — Coles, Ramos, Rivas, Ellis, Almanzar — and somewhere down in AAA there's Carmen Mesa with a $780K deal and no door in. That's the thing that doesn't line up for me. Almanzar didn't just take the spot; he threw a no-hitter in his debut and a 1-hitter to close the ALCS. You don't send that back down. So the question isn't really who the odd arm out is — it's whether the front office has the stomach to admit it. Rivas is the most expensive arm at $28.2M and he missed time this season before his complete game in World Series game ",
+      "focus": "The gap between what the rotation costs and what it produces, and where Carmen Mesa fits in a full house.",
+      "why": "The supplied record sets up a clear tension: a cheap arm outperformed expectations and a costly arm underdelivered. The human story is in how the clubhouse navigates that math without saying it out loud.",
+      "checks": [
+        "No invented player quotes or attributed speech",
+        "No new named people, institutions, events, dates, or numbers beyond the supplied facts",
+        "Clubhouse setting stays within the authorized sideline SET",
+        "All targets use supplied non-empty candidate pops"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00081",
+          "question": "What does a starter with no rotation spot do with his winter, and how does he carry himself in the clubhouse while the front office decides?",
+          "basis": "Mesa sits at AAA on a $780K deal with nowhere to start in Oakland — the human weight of that is the sideline angle."
+        },
+        {
+          "pop": "POP-01078",
+          "question": "How does the clubhouse treat the arm that took the spot everyone expected Mesa to fill, after a no-hitter and a 1-hitter to close the ALCS?",
+          "basis": "Almanzar's performance is the supplied fact that reshaped the rotation and left Mesa outside."
+        },
+        {
+          "pop": "POP-00024",
+          "question": "What does the most expensive arm on the staff make of the cheap arms winning, and how does he hold the room after missing time?",
+          "basis": "Rivas at $28.2M with missed time before his World Series game 4 complete game is the cost-side tension in the supplied record."
+        },
+        {
+          "pop": "POP-00025",
+          "question": "As a veteran in the rotation, how does Ramos read the balance between what the team pays and what it gets?",
+          "basis": "Ramos is a named starter in the full five-man rotation — his perspective anchors the clubhouse temperature."
+        }
+      ],
+      "interpretation": "The rotation is full and the math is awkward. The front office has to decide whether to move a veteran contract or keep paying top dollar for an arm that missed time. The clubhouse knows the numbers even if nobody says them. Mesa's silence is the loudest thing in the room.",
+      "unverifiedLead": [
+        "The clubhouse lights stay low in the offseason and the usual chatter is thinner than in season",
+        "Coaches may linger near some stalls and not others, but that's observation, not fact"
+      ],
+      "closeQuestion": "How long does a team keep paying for a name when the kids are the ones who win?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "A's | rumor | (off-season) | Ian Devine, Louis Cross, Hitoki Ka, Mariano Rosales, Clark Saryan, Julio Valencia",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01082",
+        "POP-01080",
+        "POP-01081",
+        "POP-00555",
+        "POP-00052",
+        "POP-00077"
+      ]
+    },
+    {
+      "label": "A's | rumor | (off-season) | Carmen Mesa, Pablo Almanzar, Henry Rivas, Arturo Ramos",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00081",
+        "POP-01078",
+        "POP-00024",
+        "POP-00025"
+      ]
+    },
+    {
+      "label": "A's | front-office | (off-season) | Travis Coles, John Ellis, Ernesto Quintero, Vladimir Gonzalez, Mike Paulson",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00533",
+        "POP-00033",
+        "POP-00050",
+        "POP-00598",
+        "POP-00527"
+      ]
+    },
+    {
+      "label": "A's | player-feature | (off-season) | Benji Dillon, Vinnie Keane",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00018",
+        "POP-00001"
+      ]
+    },
+    {
+      "label": "A's | player-feature | (off-season) | Isley Kelley, Darrin Davis, Danny Horn",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00019",
+        "POP-00021",
+        "POP-00022"
+      ]
+    }
+  ],
+  "laneEntries": 15,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-04T12:16:35.548Z"
+}

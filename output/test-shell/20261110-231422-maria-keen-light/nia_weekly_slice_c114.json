@@ -1,0 +1,113 @@
+{
+  "v": "NIA-SLICE/1",
+  "cycle": 114,
+  "empty": false,
+  "pilots": [
+    {
+      "POPID": "POP-00298",
+      "episodes": 2,
+      "creditsDelta": 0,
+      "combatEvents": 12,
+      "mishapCount": 0,
+      "hasWindowed": false,
+      "name": "Luis Taz",
+      "hood": "Fruitvale",
+      "roleType": "Janitor",
+      "employerBizId": "SELF_EMPLOYED",
+      "tier": "4",
+      "career": [],
+      "who": "Luis Taz — Janitor",
+      "nights": [
+        "Luis Taz's Sunday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Timberline, Arcturus, Ross 154, Maplevale, Miaplacidus, Cervantes, Ridgecrest, Grumium, Celaeno, Lanternwick and Diadem; mined 2 iron ore; got into 12 fights; came out even on credits; flew until the show's time ran out.",
+        "Luis Taz's Wednesday night on UNDOCKED: went through Nova Terra, Sirius, Lacaille 9352, Grumium, Celaeno, Lanternwick, Diadem, Intercrus, Gsc 0044, Atlas, Cedarhold, Achernar and The Experiment; mined 9 copper ore, 2 antimatter containment cell and 4 iron ore; came out even on credits; flew until the show's time ran out."
+      ],
+      "nightSource": "record"
+    },
+    {
+      "POPID": "POP-00530",
+      "episodes": 2,
+      "creditsDelta": 18,
+      "combatEvents": 2,
+      "mishapCount": 0,
+      "hasWindowed": false,
+      "name": "Lena Okafor",
+      "hood": "Fruitvale",
+      "roleType": "Daycare Director",
+      "employerBizId": "SELF_EMPLOYED",
+      "tier": "4",
+      "career": [],
+      "who": "Lena Okafor — Daycare Director",
+      "nights": [
+        "Lena Okafor's Monday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale and Miaplacidus; mined 11 iron ore and 6 copper ore; got into 1 fight; came out even on credits; flew until the show's time ran out.",
+        "Lena Okafor's Thursday night on UNDOCKED: went through Alpha Centauri, Sol, Sirius, Nova Terra, Epsilon Eridani, Procyon, Proxima Centauri and Barnards Star; took the Copper Requisition contract; mined 3 copper ore, 8 iron ore, 1 antimatter containment cell and 4 aluminum ore; sold 6 copper ore and 12 iron ore; got into 1 fight; came out 18 credits up; flew until the show's time ran out."
+      ],
+      "nightSource": "record"
+    },
+    {
+      "POPID": "POP-00647",
+      "episodes": 2,
+      "creditsDelta": 0,
+      "combatEvents": 0,
+      "mishapCount": 0,
+      "hasWindowed": false,
+      "name": "Ronald Silk",
+      "hood": "Chinatown",
+      "roleType": "Electrician",
+      "employerBizId": "BIZ-00090",
+      "tier": "4",
+      "career": [],
+      "who": "Ronald Silk — Electrician",
+      "nights": [
+        "Ronald Silk's Tuesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Timberline, Arcturus, Ross 154, Maplevale, Miaplacidus, Cervantes, Ridgecrest, Hatysa, Nembus, Gienah, Oakridge, Aldhibah, Izar and Tidewater; mined 1 titanium ore and 1 iron ore; came out even on credits; flew until the show's time ran out.",
+        "Ronald Silk's Friday night on UNDOCKED: went through Last Light, Fang, Errai, Wezen, Brightfall, Birchwood, Pinecross, Aludra, Torcular, Gsc 0002, Tejat, Rimegate, Veritate, Betelgeuse, Gsc 0037, Dabih and Gsc 0045; came out even on credits; flew until the show's time ran out."
+      ],
+      "nightSource": "record"
+    }
+  ],
+  "standings": {
+    "asOf": "2026-11-07T02:55:42.349Z",
+    "leader": {
+      "Rank": 1,
+      "POPID": "POP-00647",
+      "Holder": "Ronald Silk",
+      "Episodes": 2,
+      "PointsTotal": 38.15,
+      "CreditsTotal": 0,
+      "CombatTotal": 0,
+      "MishapTotal": 0,
+      "BestMagnitude": 2,
+      "LastAiredCycle": 115,
+      "CyclesLed": 1,
+      "CurrentStreak": 1,
+      "PointsPending": 0
+    }
+  },
+  "story": {
+    "ref": "undocked-week:weekly-c114",
+    "label": "UNDOCKED week-in-review c114",
+    "kind": "undocked-digest",
+    "angle": "UNDOCKED week: pilots who flew this cycle (Luis Taz, Lena Okafor, Ronald Silk). Standings: Ronald Silk leads the board — rank #1, 38.15 achievement points, 0 credits, 1 cycle(s) led, current streak 1. In the chair: Luis Taz — Janitor; Lena Okafor — Daycare Director; Ronald Silk — Electrician.",
+    "facts": [
+      "Luis Taz's Sunday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Timberline, Arcturus, Ross 154, Maplevale, Miaplacidus, Cervantes, Ridgecrest, Grumium, Celaeno, Lanternwick and Diadem; mined 2 iron ore; got into 12 fights; came out even on credits; flew until the show's time ran out.",
+      "Luis Taz's Wednesday night on UNDOCKED: went through Nova Terra, Sirius, Lacaille 9352, Grumium, Celaeno, Lanternwick, Diadem, Intercrus, Gsc 0044, Atlas, Cedarhold, Achernar and The Experiment; mined 9 copper ore, 2 antimatter containment cell and 4 iron ore; came out even on credits; flew until the show's time ran out.",
+      "Lena Okafor's Monday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale and Miaplacidus; mined 11 iron ore and 6 copper ore; got into 1 fight; came out even on credits; flew until the show's time ran out.",
+      "Lena Okafor's Thursday night on UNDOCKED: went through Alpha Centauri, Sol, Sirius, Nova Terra, Epsilon Eridani, Procyon, Proxima Centauri and Barnards Star; took the Copper Requisition contract; mined 3 copper ore, 8 iron ore, 1 antimatter containment cell and 4 aluminum ore; sold 6 copper ore and 12 iron ore; got into 1 fight; came out 18 credits up; flew until the show's time ran out.",
+      "Ronald Silk's Tuesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Timberline, Arcturus, Ross 154, Maplevale, Miaplacidus, Cervantes, Ridgecrest, Hatysa, Nembus, Gienah, Oakridge, Aldhibah, Izar and Tidewater; mined 1 titanium ore and 1 iron ore; came out even on credits; flew until the show's time ran out.",
+      "Ronald Silk's Friday night on UNDOCKED: went through Last Light, Fang, Errai, Wezen, Brightfall, Birchwood, Pinecross, Aludra, Torcular, Gsc 0002, Tejat, Rimegate, Veritate, Betelgeuse, Gsc 0037, Dabih and Gsc 0045; came out even on credits; flew until the show's time ran out.",
+      "Luis Taz — Janitor (ledger)",
+      "Lena Okafor — Daycare Director (ledger)",
+      "Ronald Silk — Electrician (ledger)"
+    ],
+    "citizens": [
+      "Luis Taz — Janitor, UNDOCKED cast pilot",
+      "Lena Okafor — Daycare Director, UNDOCKED cast pilot",
+      "Ronald Silk — Electrician, UNDOCKED cast pilot"
+    ],
+    "popids": [
+      "POP-00298",
+      "POP-00530",
+      "POP-00647"
+    ]
+  },
+  "generatedAt": "2026-11-07T14:15:11.184Z"
+}

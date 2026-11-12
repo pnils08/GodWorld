@@ -1,0 +1,66 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "112",
+  "persona": "tamsin-pruitt",
+  "byline": "Tamsin Pruitt",
+  "bylinePopid": "POP-01210",
+  "article": "output/cron-compare/staged/culture_c112_tamsin-pruitt_packet-v2_x-ai-grok-4-3.staged-2320.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Brian Adams",
+        "role": "quoted-source",
+        "popid": "POP-00258"
+      },
+      {
+        "name": "Joseph Cramp",
+        "role": "quoted-source",
+        "popid": "POP-00272"
+      },
+      {
+        "name": "Jorry Cula",
+        "role": "quoted-source",
+        "popid": "POP-00182"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Jack London"
+    ],
+    "claims": [
+      {
+        "claim": "The winter mood's been weighing on me, making me want to stay in more. It's like a fog that doesn't lift, you know? I've been keeping to myself, not going out as much as I usually do. My wife and kids are used to it by now; they know when I'm like this, it's best to just let me be.",
+        "sourceRef": "citizenVoice PRESS Brian Adams"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-38aed434970e",
+    "draftSha256": "d42cc0697e878de9b9925df7cb68b674bfc6e11d6676e46350286f0951b06353",
+    "verdict": "output/cron-compare/culture_c112_tamsin-pruitt_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-10-21T23:20:10.701Z",
+    "contractScore": {
+      "opened": false,
+      "closed": false,
+      "purposeMet": false,
+      "inTarget": false,
+      "inTargetBy": "code floor 450",
+      "words": 287,
+      "short": "The piece falls under the 450-word minimum and reports personal moods and street vibes rather than milestone life events like births, deaths, or hospitalizations.",
+      "score": 0,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "d42cc0697e878de9b9925df7cb68b674bfc6e11d6676e46350286f0951b06353",
+      "costUsd": 0.0014
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-21T23:20:27.050Z"
+}

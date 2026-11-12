@@ -1,0 +1,1193 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "114",
+  "persona": "freelance-firebrand",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Jax Caldera",
+    "popid": "POP-00799"
+  },
+  "assignment": {
+    "story": {
+      "ref": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+      "label": "Rockridge: decay [Sentiment -0.030, RetailVitality -2.16, HousingPressure +1.000] — Sentiment now 0.03 (17 of 22, city median 0.085); RetailVitality now 10.98 (8 of 22, city median 8.265); HousingPressure now 5 (17 of 22, city median 0) — with no matching active initiative",
+      "kind": "anomaly",
+      "angle": "The map says decay; the program roster does not answer it.",
+      "hookLine": null,
+      "hood": "Rockridge",
+      "popids": [
+        "POP-00742",
+        "POP-00759",
+        "POP-00194",
+        "POP-00543",
+        "POP-00743",
+        "POP-00927",
+        "POP-00769",
+        "POP-00257",
+        "POP-00658",
+        "POP-00691"
+      ],
+      "citizens": [
+        "Maya Torres-Dillon — Bay Conservation Alliance Advisory board, High School Science Teacher, Rockridge",
+        "Naomi Sterling — Senior Pastor / Faith Leader, Rockridge",
+        "Yu Zen — Commercial Insurance Broker, Rockridge",
+        "Derek Obi — IT Support Specialist, Rockridge",
+        "Rick Dillon — Grade Schooler, Rockridge",
+        "Farah Vasquez — AI Safety Researcher (Anthropic), Rockridge",
+        "Dax Monroe — Artist, Rockridge",
+        "Farah Lindqvist — City Building Inspector, Downtown",
+        "Darius Cike — Quantum Computing Researcher, West Oakland",
+        "Tom Jilner — Wine Bar Owner, Rockridge"
+      ],
+      "stinkClass": "metric-contradiction",
+      "stinkScore": 61
+    }
+  },
+  "angle": "output/cron-compare/civic_c114_freelance-firebrand_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 4,
+  "quotes": [
+    {
+      "pop": "POP-00742",
+      "name": "Maya Torres-Dillon",
+      "quote": "To be honest, I'm a bit torn about the changes in Rockridge. On one hand, it's great to see the retail strip bustling and new residents exploring the neighborhood. It's a sign of life and energy. On the other hand, I've heard from friends who bought homes here last year that the first year was really tough, and that's concerning. As someone who's been here a while and is involved with the Bay Conservation Alliance, I hope we can keep the community spirit strong while navigating these changes.",
+      "disp": "a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, I'm a bit torn about the changes in Rockridge. On one hand, it's great to see the retail strip bustling and new residents exploring the neighborhood. It's a sign of life and energy. On the other hand, I've heard from friends who bought homes here last year that the first year was really tough, and that's concerning. As someone who's been here a while and is involved with the Bay Conservation Alliance, I hope we can keep the community spirit strong while navigating these changes.\",\n  \"fact_ids\": [\"F-f9fabac3ed61\", \"F-b0ddf69076ef\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-f9fabac3ed61",
+          "F-b0ddf69076ef"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00742-2c92c84387",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, I'm a bit torn about the changes in Rockridge. On one hand, it's great to see the retail strip bustling and new residents exploring the neighborhood. It's a sign of life and energy. On the other hand, I've heard from friends who bought homes here last year that the first year was really tough, and that's concerning. As someone who's been here a while and is involved with the Bay Conservation Alliance, I hope we can keep the community spirit strong while navigating these changes."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00742",
+          "name": "Maya Torres-Dillon",
+          "role": "Bay Conservation Alliance Advisory board, High School Science Teacher",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jax Caldera",
+          "question": "What's your take on the neighborhood's changes? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "Rockridge",
+          "focus": "Rockridge's decay despite positive metrics",
+          "src": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Maya Torres-Dillon (POP-00742) — role: Bay Conservation Alliance Advisory board, High School Science Teacher; neighborhood: Rockridge; born: 2010; careerStage: mid-career; wealth: 6; employerBiz: BIZ-00016; skills: Education; tier: 2",
+          "evidence": [
+            {
+              "id": "EV-9639504f32",
+              "src": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+              "text": "Rockridge: decay [Sentiment -0.030, RetailVitality -2.16, HousingPressure +1.000] — Sentiment now 0.03 (17 of 22, city median 0.085); RetailVitality now 10.98 (8 of 22, city median 8.265); HousingPressure now 5 (17 of 22, city median 0) — with no matching active initiative"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "Rockridge: decay [Sentiment -0.030, RetailVitality -2.16, HousingPressure +1.000] — Sentiment now 0.03 (17 of 22, city median 0.085); RetailVitality now 10.98 (8 of 22, city median 8.265); HousingPressure now 5 (17 of 22, city median 0) — with no matching active initiative",
+            "src": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+            "id": "F-b0ddf69076ef"
+          },
+          {
+            "t": "FACT",
+            "text": "No active initiative (or mitigator) owns this break on the record",
+            "src": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+            "id": "F-e477fa1a1e03"
+          },
+          {
+            "t": "FACT",
+            "text": "Season: Spring | Weather: 55°F mild, NW 8 mph, clear (frontState CLEAR), humidity 54, visibility 10",
+            "src": "World_Config/weather snapshot for C114",
+            "id": "F-8ede5a4ea7df"
+          },
+          {
+            "t": "FACT",
+            "text": "Rockridge’s retail strip is bustling, with BART delays causing minor frustrations for commuters. New residents from Downtown are spotted exploring the neighborhood.",
+            "src": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+            "id": "F-f9fabac3ed61"
+          },
+          {
+            "t": "FACT",
+            "text": "Maya Torres-Dillon (POP-00742) — role: Bay Conservation Alliance Advisory board, High School Science Teacher; neighborhood: Rockridge; born: 2010; careerStage: mid-career; wealth: 6; employerBiz: BIZ-00016; skills: Education; tier: 2",
+            "src": "Simulation_Ledger profile for POP-00742",
+            "id": "F-273b77335e6f"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00759",
+      "name": "Naomi Sterling",
+      "quote": "From what I see, Rockridge is still vibrant. The retail strip is bustling, and while BART delays can be frustrating, it doesn't seem to be dampening the atmosphere much. We've also had new residents moving in from Downtown, which is nice to see. As a faith leader, I've been focused on our community's response to challenges, and it's heartening to see different faith organizations coming together to support each other.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"From what I see, Rockridge is still vibrant. The retail strip is bustling, and while BART delays can be frustrating, it doesn't seem to be dampening the atmosphere much. We've also had new residents moving in from Downtown, which is nice to see. As a faith leader, I've been focused on our community's response to challenges, and it's heartening to see different faith organizations coming together to support each other.\",\n  \"fact_ids\": [\"F-f9fabac3ed61\", \"F-7584509f880a\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-f9fabac3ed61",
+          "F-7584509f880a"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00759-86b6b0931e",
+        "authoredQuote": true,
+        "publishableQuote": "From what I see, Rockridge is still vibrant. The retail strip is bustling, and while BART delays can be frustrating, it doesn't seem to be dampening the atmosphere much. We've also had new residents moving in from Downtown, which is nice to see. As a faith leader, I've been focused on our community's response to challenges, and it's heartening to see different faith organizations coming together to support each other."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00759",
+          "name": "Naomi Sterling",
+          "role": "Senior Pastor / Faith Leader",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jax Caldera",
+          "question": "How do you see the community responding to the current state of Rockridge? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "Rockridge",
+          "focus": "Rockridge's decay despite positive metrics",
+          "src": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Naomi Sterling (POP-00759) — role: Senior Pastor / Faith Leader; neighborhood: Rockridge; born: 1975; careerStage: retired; wealth: 8; employerBiz: BIZ-00028; skills: Faith & Community; tier: 2",
+          "evidence": [
+            {
+              "id": "EV-0235d93e26",
+              "src": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+              "text": "Rockridge: decay [Sentiment -0.030, RetailVitality -2.16, HousingPressure +1.000] — Sentiment now 0.03 (17 of 22, city median 0.085); RetailVitality now 10.98 (8 of 22, city median 8.265); HousingPressure now 5 (17 of 22, city median 0) — with no matching active initiative"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "Rockridge: decay [Sentiment -0.030, RetailVitality -2.16, HousingPressure +1.000] — Sentiment now 0.03 (17 of 22, city median 0.085); RetailVitality now 10.98 (8 of 22, city median 8.265); HousingPressure now 5 (17 of 22, city median 0) — with no matching active initiative",
+            "src": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+            "id": "F-b0ddf69076ef"
+          },
+          {
+            "t": "FACT",
+            "text": "No active initiative (or mitigator) owns this break on the record",
+            "src": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+            "id": "F-e477fa1a1e03"
+          },
+          {
+            "t": "FACT",
+            "text": "Season: Spring | Weather: 55°F mild, NW 8 mph, clear (frontState CLEAR), humidity 54, visibility 10",
+            "src": "World_Config/weather snapshot for C114",
+            "id": "F-8ede5a4ea7df"
+          },
+          {
+            "t": "FACT",
+            "text": "Rockridge’s retail strip is bustling, with BART delays causing minor frustrations for commuters. New residents from Downtown are spotted exploring the neighborhood.",
+            "src": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+            "id": "F-f9fabac3ed61"
+          },
+          {
+            "t": "FACT",
+            "text": "Naomi Sterling (POP-00759) — role: Senior Pastor / Faith Leader; neighborhood: Rockridge; born: 1975; careerStage: retired; wealth: 8; employerBiz: BIZ-00028; skills: Faith & Community; tier: 2",
+            "src": "Simulation_Ledger profile for POP-00759",
+            "id": "F-7584509f880a"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00691",
+      "name": "Tom Jilner",
+      "quote": "I've noticed new faces around my wine bar, people from Downtown exploring Rockridge. The retail strip is still lively, although BART delays can be a bit of a hassle for some customers. Overall, business feels steady.",
+      "disp": "close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've noticed new faces around my wine bar, people from Downtown exploring Rockridge. The retail strip is still lively, although BART delays can be a bit of a hassle for some customers. Overall, business feels steady.\",\n  \"fact_ids\": [\"F-f9fabac3ed61\", \"F-db70abe9515b\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-f9fabac3ed61",
+          "F-db70abe9515b"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00691-37f33e118b",
+        "authoredQuote": true,
+        "publishableQuote": "I've noticed new faces around my wine bar, people from Downtown exploring Rockridge. The retail strip is still lively, although BART delays can be a bit of a hassle for some customers. Overall, business feels steady."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00691",
+          "name": "Tom Jilner",
+          "role": "Wine Bar Owner",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jax Caldera",
+          "question": "Has your business noticed any shifts in customer behavior or foot traffic? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "Rockridge",
+          "focus": "Rockridge's decay despite positive metrics",
+          "src": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Tom Jilner (POP-00691) — role: Wine Bar Owner; neighborhood: Rockridge; born: 2003; careerStage: mid-career; wealth: 6; employerBiz: SELF_EMPLOYED; skills: Food & Culture; tier: 4",
+          "evidence": [
+            {
+              "id": "EV-7059ca00da",
+              "src": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+              "text": "Rockridge: decay [Sentiment -0.030, RetailVitality -2.16, HousingPressure +1.000] — Sentiment now 0.03 (17 of 22, city median 0.085); RetailVitality now 10.98 (8 of 22, city median 8.265); HousingPressure now 5 (17 of 22, city median 0) — with no matching active initiative"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "Rockridge: decay [Sentiment -0.030, RetailVitality -2.16, HousingPressure +1.000] — Sentiment now 0.03 (17 of 22, city median 0.085); RetailVitality now 10.98 (8 of 22, city median 8.265); HousingPressure now 5 (17 of 22, city median 0) — with no matching active initiative",
+            "src": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+            "id": "F-b0ddf69076ef"
+          },
+          {
+            "t": "FACT",
+            "text": "No active initiative (or mitigator) owns this break on the record",
+            "src": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+            "id": "F-e477fa1a1e03"
+          },
+          {
+            "t": "FACT",
+            "text": "Season: Spring | Weather: 55°F mild, NW 8 mph, clear (frontState CLEAR), humidity 54, visibility 10",
+            "src": "World_Config/weather snapshot for C114",
+            "id": "F-8ede5a4ea7df"
+          },
+          {
+            "t": "FACT",
+            "text": "Rockridge’s retail strip is bustling, with BART delays causing minor frustrations for commuters. New residents from Downtown are spotted exploring the neighborhood.",
+            "src": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+            "id": "F-f9fabac3ed61"
+          },
+          {
+            "t": "FACT",
+            "text": "Tom Jilner (POP-00691) — role: Wine Bar Owner; neighborhood: Rockridge; born: 2003; careerStage: mid-career; wealth: 6; employerBiz: SELF_EMPLOYED; skills: Food & Culture; tier: 4",
+            "src": "Simulation_Ledger profile for POP-00691",
+            "id": "F-db70abe9515b"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00194",
+      "name": "Yu Zen",
+      "quote": "To be honest, I've seen some mixed things in Rockridge lately. On one hand, our retail strip is doing well, and it's nice to see new folks from Downtown checking out our neighborhood. But at the same time, I've noticed that with BART delays, commuters are getting a bit frustrated. As someone who's been around for a while and has a family to think about, it's made me wonder if we're doing enough to keep our neighborhood livable for everyone. I've been thinking a lot about community and what's important since my accident, and Rockridge feels like home, but I want to make sure it stays that way for everyone.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; warm, tender with people; curious, open to new things; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, I've seen some mixed things in Rockridge lately. On one hand, our retail strip is doing well, and it's nice to see new folks from Downtown checking out our neighborhood. But at the same time, I've noticed that with BART delays, commuters are getting a bit frustrated. As someone who's been around for a while and has a family to think about, it's made me wonder if we're doing enough to keep our neighborhood livable for everyone. I've been thinking a lot about community and what's important since my accident, and Rockridge feels like home, but I want to make sure it stays that way for everyone.\",\n  \"fact_ids\": [\"F-f9fabac3ed61\", \"F-13258530214a\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-f9fabac3ed61",
+          "F-13258530214a"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00194-4c2a2ca73f",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, I've seen some mixed things in Rockridge lately. On one hand, our retail strip is doing well, and it's nice to see new folks from Downtown checking out our neighborhood. But at the same time, I've noticed that with BART delays, commuters are getting a bit frustrated. As someone who's been around for a while and has a family to think about, it's made me wonder if we're doing enough to keep our neighborhood livable for everyone. I've been thinking a lot about community and what's important since my accident, and Rockridge feels like home, but I want to make sure it stays that way for everyone."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00194",
+          "name": "Yu Zen",
+          "role": "Commercial Insurance Broker",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jax Caldera",
+          "question": "As a resident of Rockridge, what have you seen, felt, or understood about \"Rockridge's decay despite positive metrics\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "Rockridge",
+          "focus": "Rockridge's decay despite positive metrics",
+          "src": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Yu Zen (POP-00194) — role: Commercial Insurance Broker; neighborhood: Rockridge; born: 1990; careerStage: senior; wealth: 8; employerBiz: SELF_EMPLOYED; skills: Professional; tier: 3",
+          "evidence": [
+            {
+              "id": "EV-d2374e372f",
+              "src": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+              "text": "Rockridge: decay [Sentiment -0.030, RetailVitality -2.16, HousingPressure +1.000] — Sentiment now 0.03 (17 of 22, city median 0.085); RetailVitality now 10.98 (8 of 22, city median 8.265); HousingPressure now 5 (17 of 22, city median 0) — with no matching active initiative"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "Rockridge: decay [Sentiment -0.030, RetailVitality -2.16, HousingPressure +1.000] — Sentiment now 0.03 (17 of 22, city median 0.085); RetailVitality now 10.98 (8 of 22, city median 8.265); HousingPressure now 5 (17 of 22, city median 0) — with no matching active initiative",
+            "src": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+            "id": "F-b0ddf69076ef"
+          },
+          {
+            "t": "FACT",
+            "text": "No active initiative (or mitigator) owns this break on the record",
+            "src": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+            "id": "F-e477fa1a1e03"
+          },
+          {
+            "t": "FACT",
+            "text": "Season: Spring | Weather: 55°F mild, NW 8 mph, clear (frontState CLEAR), humidity 54, visibility 10",
+            "src": "World_Config/weather snapshot for C114",
+            "id": "F-8ede5a4ea7df"
+          },
+          {
+            "t": "FACT",
+            "text": "Rockridge’s retail strip is bustling, with BART delays causing minor frustrations for commuters. New residents from Downtown are spotted exploring the neighborhood.",
+            "src": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+            "id": "F-f9fabac3ed61"
+          },
+          {
+            "t": "FACT",
+            "text": "Yu Zen (POP-00194) — role: Commercial Insurance Broker; neighborhood: Rockridge; born: 1990; careerStage: senior; wealth: 8; employerBiz: SELF_EMPLOYED; skills: Professional; tier: 3",
+            "src": "Simulation_Ledger profile for POP-00194",
+            "id": "F-13258530214a"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-00742",
+      "name": "Maya Torres-Dillon",
+      "quote": "To be honest, I'm a bit torn about the changes in Rockridge. On one hand, it's great to see the retail strip bustling and new residents exploring the neighborhood. It's a sign of life and energy. On the other hand, I've heard from friends who bought homes here last year that the first year was really tough, and that's concerning. As someone who's been here a while and is involved with the Bay Conservation Alliance, I hope we can keep the community spirit strong while navigating these changes.",
+      "disp": "a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, I'm a bit torn about the changes in Rockridge. On one hand, it's great to see the retail strip bustling and new residents exploring the neighborhood. It's a sign of life and energy. On the other hand, I've heard from friends who bought homes here last year that the first year was really tough, and that's concerning. As someone who's been here a while and is involved with the Bay Conservation Alliance, I hope we can keep the community spirit strong while navigating these changes.\",\n  \"fact_ids\": [\"F-f9fabac3ed61\", \"F-b0ddf69076ef\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-f9fabac3ed61",
+          "F-b0ddf69076ef"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00742-2c92c84387",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, I'm a bit torn about the changes in Rockridge. On one hand, it's great to see the retail strip bustling and new residents exploring the neighborhood. It's a sign of life and energy. On the other hand, I've heard from friends who bought homes here last year that the first year was really tough, and that's concerning. As someone who's been here a while and is involved with the Bay Conservation Alliance, I hope we can keep the community spirit strong while navigating these changes."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00742",
+          "name": "Maya Torres-Dillon",
+          "role": "Bay Conservation Alliance Advisory board, High School Science Teacher",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jax Caldera",
+          "question": "What's your take on the neighborhood's changes? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "Rockridge",
+          "focus": "Rockridge's decay despite positive metrics",
+          "src": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Maya Torres-Dillon (POP-00742) — role: Bay Conservation Alliance Advisory board, High School Science Teacher; neighborhood: Rockridge; born: 2010; careerStage: mid-career; wealth: 6; employerBiz: BIZ-00016; skills: Education; tier: 2",
+          "evidence": [
+            {
+              "id": "EV-9639504f32",
+              "src": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+              "text": "Rockridge: decay [Sentiment -0.030, RetailVitality -2.16, HousingPressure +1.000] — Sentiment now 0.03 (17 of 22, city median 0.085); RetailVitality now 10.98 (8 of 22, city median 8.265); HousingPressure now 5 (17 of 22, city median 0) — with no matching active initiative"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "Rockridge: decay [Sentiment -0.030, RetailVitality -2.16, HousingPressure +1.000] — Sentiment now 0.03 (17 of 22, city median 0.085); RetailVitality now 10.98 (8 of 22, city median 8.265); HousingPressure now 5 (17 of 22, city median 0) — with no matching active initiative",
+            "src": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+            "id": "F-b0ddf69076ef"
+          },
+          {
+            "t": "FACT",
+            "text": "No active initiative (or mitigator) owns this break on the record",
+            "src": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+            "id": "F-e477fa1a1e03"
+          },
+          {
+            "t": "FACT",
+            "text": "Season: Spring | Weather: 55°F mild, NW 8 mph, clear (frontState CLEAR), humidity 54, visibility 10",
+            "src": "World_Config/weather snapshot for C114",
+            "id": "F-8ede5a4ea7df"
+          },
+          {
+            "t": "FACT",
+            "text": "Rockridge’s retail strip is bustling, with BART delays causing minor frustrations for commuters. New residents from Downtown are spotted exploring the neighborhood.",
+            "src": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+            "id": "F-f9fabac3ed61"
+          },
+          {
+            "t": "FACT",
+            "text": "Maya Torres-Dillon (POP-00742) — role: Bay Conservation Alliance Advisory board, High School Science Teacher; neighborhood: Rockridge; born: 2010; careerStage: mid-career; wealth: 6; employerBiz: BIZ-00016; skills: Education; tier: 2",
+            "src": "Simulation_Ledger profile for POP-00742",
+            "id": "F-273b77335e6f"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00759",
+      "name": "Naomi Sterling",
+      "quote": "From what I see, Rockridge is still vibrant. The retail strip is bustling, and while BART delays can be frustrating, it doesn't seem to be dampening the atmosphere much. We've also had new residents moving in from Downtown, which is nice to see. As a faith leader, I've been focused on our community's response to challenges, and it's heartening to see different faith organizations coming together to support each other.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"From what I see, Rockridge is still vibrant. The retail strip is bustling, and while BART delays can be frustrating, it doesn't seem to be dampening the atmosphere much. We've also had new residents moving in from Downtown, which is nice to see. As a faith leader, I've been focused on our community's response to challenges, and it's heartening to see different faith organizations coming together to support each other.\",\n  \"fact_ids\": [\"F-f9fabac3ed61\", \"F-7584509f880a\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-f9fabac3ed61",
+          "F-7584509f880a"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00759-86b6b0931e",
+        "authoredQuote": true,
+        "publishableQuote": "From what I see, Rockridge is still vibrant. The retail strip is bustling, and while BART delays can be frustrating, it doesn't seem to be dampening the atmosphere much. We've also had new residents moving in from Downtown, which is nice to see. As a faith leader, I've been focused on our community's response to challenges, and it's heartening to see different faith organizations coming together to support each other."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00759",
+          "name": "Naomi Sterling",
+          "role": "Senior Pastor / Faith Leader",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jax Caldera",
+          "question": "How do you see the community responding to the current state of Rockridge? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "Rockridge",
+          "focus": "Rockridge's decay despite positive metrics",
+          "src": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Naomi Sterling (POP-00759) — role: Senior Pastor / Faith Leader; neighborhood: Rockridge; born: 1975; careerStage: retired; wealth: 8; employerBiz: BIZ-00028; skills: Faith & Community; tier: 2",
+          "evidence": [
+            {
+              "id": "EV-0235d93e26",
+              "src": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+              "text": "Rockridge: decay [Sentiment -0.030, RetailVitality -2.16, HousingPressure +1.000] — Sentiment now 0.03 (17 of 22, city median 0.085); RetailVitality now 10.98 (8 of 22, city median 8.265); HousingPressure now 5 (17 of 22, city median 0) — with no matching active initiative"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "Rockridge: decay [Sentiment -0.030, RetailVitality -2.16, HousingPressure +1.000] — Sentiment now 0.03 (17 of 22, city median 0.085); RetailVitality now 10.98 (8 of 22, city median 8.265); HousingPressure now 5 (17 of 22, city median 0) — with no matching active initiative",
+            "src": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+            "id": "F-b0ddf69076ef"
+          },
+          {
+            "t": "FACT",
+            "text": "No active initiative (or mitigator) owns this break on the record",
+            "src": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+            "id": "F-e477fa1a1e03"
+          },
+          {
+            "t": "FACT",
+            "text": "Season: Spring | Weather: 55°F mild, NW 8 mph, clear (frontState CLEAR), humidity 54, visibility 10",
+            "src": "World_Config/weather snapshot for C114",
+            "id": "F-8ede5a4ea7df"
+          },
+          {
+            "t": "FACT",
+            "text": "Rockridge’s retail strip is bustling, with BART delays causing minor frustrations for commuters. New residents from Downtown are spotted exploring the neighborhood.",
+            "src": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+            "id": "F-f9fabac3ed61"
+          },
+          {
+            "t": "FACT",
+            "text": "Naomi Sterling (POP-00759) — role: Senior Pastor / Faith Leader; neighborhood: Rockridge; born: 1975; careerStage: retired; wealth: 8; employerBiz: BIZ-00028; skills: Faith & Community; tier: 2",
+            "src": "Simulation_Ledger profile for POP-00759",
+            "id": "F-7584509f880a"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00691",
+      "name": "Tom Jilner",
+      "quote": "I've noticed new faces around my wine bar, people from Downtown exploring Rockridge. The retail strip is still lively, although BART delays can be a bit of a hassle for some customers. Overall, business feels steady.",
+      "disp": "close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've noticed new faces around my wine bar, people from Downtown exploring Rockridge. The retail strip is still lively, although BART delays can be a bit of a hassle for some customers. Overall, business feels steady.\",\n  \"fact_ids\": [\"F-f9fabac3ed61\", \"F-db70abe9515b\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-f9fabac3ed61",
+          "F-db70abe9515b"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00691-37f33e118b",
+        "authoredQuote": true,
+        "publishableQuote": "I've noticed new faces around my wine bar, people from Downtown exploring Rockridge. The retail strip is still lively, although BART delays can be a bit of a hassle for some customers. Overall, business feels steady."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00691",
+          "name": "Tom Jilner",
+          "role": "Wine Bar Owner",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jax Caldera",
+          "question": "Has your business noticed any shifts in customer behavior or foot traffic? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "Rockridge",
+          "focus": "Rockridge's decay despite positive metrics",
+          "src": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Tom Jilner (POP-00691) — role: Wine Bar Owner; neighborhood: Rockridge; born: 2003; careerStage: mid-career; wealth: 6; employerBiz: SELF_EMPLOYED; skills: Food & Culture; tier: 4",
+          "evidence": [
+            {
+              "id": "EV-7059ca00da",
+              "src": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+              "text": "Rockridge: decay [Sentiment -0.030, RetailVitality -2.16, HousingPressure +1.000] — Sentiment now 0.03 (17 of 22, city median 0.085); RetailVitality now 10.98 (8 of 22, city median 8.265); HousingPressure now 5 (17 of 22, city median 0) — with no matching active initiative"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "Rockridge: decay [Sentiment -0.030, RetailVitality -2.16, HousingPressure +1.000] — Sentiment now 0.03 (17 of 22, city median 0.085); RetailVitality now 10.98 (8 of 22, city median 8.265); HousingPressure now 5 (17 of 22, city median 0) — with no matching active initiative",
+            "src": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+            "id": "F-b0ddf69076ef"
+          },
+          {
+            "t": "FACT",
+            "text": "No active initiative (or mitigator) owns this break on the record",
+            "src": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+            "id": "F-e477fa1a1e03"
+          },
+          {
+            "t": "FACT",
+            "text": "Season: Spring | Weather: 55°F mild, NW 8 mph, clear (frontState CLEAR), humidity 54, visibility 10",
+            "src": "World_Config/weather snapshot for C114",
+            "id": "F-8ede5a4ea7df"
+          },
+          {
+            "t": "FACT",
+            "text": "Rockridge’s retail strip is bustling, with BART delays causing minor frustrations for commuters. New residents from Downtown are spotted exploring the neighborhood.",
+            "src": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+            "id": "F-f9fabac3ed61"
+          },
+          {
+            "t": "FACT",
+            "text": "Tom Jilner (POP-00691) — role: Wine Bar Owner; neighborhood: Rockridge; born: 2003; careerStage: mid-career; wealth: 6; employerBiz: SELF_EMPLOYED; skills: Food & Culture; tier: 4",
+            "src": "Simulation_Ledger profile for POP-00691",
+            "id": "F-db70abe9515b"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00194",
+      "name": "Yu Zen",
+      "quote": "To be honest, I've seen some mixed things in Rockridge lately. On one hand, our retail strip is doing well, and it's nice to see new folks from Downtown checking out our neighborhood. But at the same time, I've noticed that with BART delays, commuters are getting a bit frustrated. As someone who's been around for a while and has a family to think about, it's made me wonder if we're doing enough to keep our neighborhood livable for everyone. I've been thinking a lot about community and what's important since my accident, and Rockridge feels like home, but I want to make sure it stays that way for everyone.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; warm, tender with people; curious, open to new things; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, I've seen some mixed things in Rockridge lately. On one hand, our retail strip is doing well, and it's nice to see new folks from Downtown checking out our neighborhood. But at the same time, I've noticed that with BART delays, commuters are getting a bit frustrated. As someone who's been around for a while and has a family to think about, it's made me wonder if we're doing enough to keep our neighborhood livable for everyone. I've been thinking a lot about community and what's important since my accident, and Rockridge feels like home, but I want to make sure it stays that way for everyone.\",\n  \"fact_ids\": [\"F-f9fabac3ed61\", \"F-13258530214a\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-f9fabac3ed61",
+          "F-13258530214a"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00194-4c2a2ca73f",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, I've seen some mixed things in Rockridge lately. On one hand, our retail strip is doing well, and it's nice to see new folks from Downtown checking out our neighborhood. But at the same time, I've noticed that with BART delays, commuters are getting a bit frustrated. As someone who's been around for a while and has a family to think about, it's made me wonder if we're doing enough to keep our neighborhood livable for everyone. I've been thinking a lot about community and what's important since my accident, and Rockridge feels like home, but I want to make sure it stays that way for everyone."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00194",
+          "name": "Yu Zen",
+          "role": "Commercial Insurance Broker",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jax Caldera",
+          "question": "As a resident of Rockridge, what have you seen, felt, or understood about \"Rockridge's decay despite positive metrics\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "Rockridge",
+          "focus": "Rockridge's decay despite positive metrics",
+          "src": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Yu Zen (POP-00194) — role: Commercial Insurance Broker; neighborhood: Rockridge; born: 1990; careerStage: senior; wealth: 8; employerBiz: SELF_EMPLOYED; skills: Professional; tier: 3",
+          "evidence": [
+            {
+              "id": "EV-d2374e372f",
+              "src": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+              "text": "Rockridge: decay [Sentiment -0.030, RetailVitality -2.16, HousingPressure +1.000] — Sentiment now 0.03 (17 of 22, city median 0.085); RetailVitality now 10.98 (8 of 22, city median 8.265); HousingPressure now 5 (17 of 22, city median 0) — with no matching active initiative"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "Rockridge: decay [Sentiment -0.030, RetailVitality -2.16, HousingPressure +1.000] — Sentiment now 0.03 (17 of 22, city median 0.085); RetailVitality now 10.98 (8 of 22, city median 8.265); HousingPressure now 5 (17 of 22, city median 0) — with no matching active initiative",
+            "src": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+            "id": "F-b0ddf69076ef"
+          },
+          {
+            "t": "FACT",
+            "text": "No active initiative (or mitigator) owns this break on the record",
+            "src": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+            "id": "F-e477fa1a1e03"
+          },
+          {
+            "t": "FACT",
+            "text": "Season: Spring | Weather: 55°F mild, NW 8 mph, clear (frontState CLEAR), humidity 54, visibility 10",
+            "src": "World_Config/weather snapshot for C114",
+            "id": "F-8ede5a4ea7df"
+          },
+          {
+            "t": "FACT",
+            "text": "Rockridge’s retail strip is bustling, with BART delays causing minor frustrations for commuters. New residents from Downtown are spotted exploring the neighborhood.",
+            "src": "output/engine_audit_c114.json patterns[1]; evidence: Neighborhood_Map row(s) 8",
+            "id": "F-f9fabac3ed61"
+          },
+          {
+            "t": "FACT",
+            "text": "Yu Zen (POP-00194) — role: Commercial Insurance Broker; neighborhood: Rockridge; born: 1990; careerStage: senior; wealth: 8; employerBiz: SELF_EMPLOYED; skills: Professional; tier: 3",
+            "src": "Simulation_Ledger profile for POP-00194",
+            "id": "F-13258530214a"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-11-04T19:16:08.404Z"
+}

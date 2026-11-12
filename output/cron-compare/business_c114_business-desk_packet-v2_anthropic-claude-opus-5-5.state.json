@@ -1,0 +1,534 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00153",
+    "name": "Jordan Velez",
+    "role": "desk reporter",
+    "desk": "business"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "West Oakland businesses: Coastline Construction, Northgate Construction, Oakmesh Systems — the people who work there",
+    "approach": "Business desk approach: this slice is one neighborhood's businesses from the ledger and the people on the roster who work there — plus what moved since last cycle: revenue and headcount deltas, contractions, closures on the archive, and the week's casino action. When the record shows a business closing or shedding workers, that is the story. Open from a named business or a named worker on it — the block, the counter, the hiring board, what the owner is worried about. One claim about how the block is moving. Not civic process roundup. Not multi-voice business-desk average. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "economic-storefront",
+      "hood": "West Oakland",
+      "pulseClass": "hood-businesses",
+      "economicFrame": "West Oakland businesses: Coastline Construction, Northgate Construction, Oakmesh Systems — the people who work there",
+      "hook": "Enzo Walker, Plumber at Coastline Construction. 19 named workers at 5 named businesses in West Oakland on the ledger this cycle.",
+      "namedBusinesses": [
+        "Coastline Construction",
+        "Northgate Construction",
+        "Oakmesh Systems",
+        "Civis Systems",
+        "Mariner Construction"
+      ],
+      "workplaces": [
+        "Coastline Construction — Construction — Enzo Walker (Plumber); Hazel Reed (Plumber); Desmond Achebe (Managing Partner, Coastline Construction); Elijah Brown (Electrician)",
+        "Northgate Construction — Construction — Kenton Pearl (Plumber); Elijah Roberts (Construction laborer); Jude Hess (Electrician); Helena Voss-Adeyemi (Managing Partner, Northgate Construction)",
+        "Oakmesh Systems — Civic Tech — Dom Will (Machine Learning Engineer (Oakmesh Systems)); Jace Robinson (Machine Learning Engineer (Oakmesh Systems)); Jeremy Wong (Civic Data Engineer (Oakmesh Systems)); Marcus Tan (Founder, Oakmesh Systems)",
+        "Civis Systems — Urban Systems Intelligence Firm — Sam Fazio (Digital Twin Architect); Catherine Santos (Digital Twin Architect); Elias Varek (Founder of Civis Systems); Maurice Franklin (Drone Fleet Coordinator)",
+        "Mariner Construction — Construction — Maeve Pillai (Plumber); Yadira Rao (Plumber); Minh Raimon (Carpenter Apprentice)"
+      ],
+      "engineColour": [
+        "Mateo Baker — braced for the sound of pile drivers and realized they had already started tuning it out",
+        "Darius Hill — said no to something and felt the shape of who they are in it",
+        "Samuel Adeyemi — has watched Ivy Hill Cafe go quiet lately",
+        "Ebony Mendoza — kept score by hand at the kitchen table the way their father taught them near a quiet side street",
+        "Dame Sarr — let the week's wins carry dinner",
+        "Constanza Doan — drank the free cold brew in the company kitchen and felt completely disconnected from the neighborhood outside"
+      ],
+      "roomIsYours": "the counter, the hiring board, the back office, what the owner is worried about",
+      "forbidden": [
+        "Do not invent a business, a worker, an owner or a place — every name comes from this slice",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose",
+        "Do not contradict a role, employer or neighborhood listed here"
+      ],
+      "sceneRule": null
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "story-signal",
+    "hood": "West Oakland",
+    "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+    "plan": {
+      "focus": "The split in West Oakland between the construction and civic-tech growth on the ledger and the quieter contractions on the same blocks — told through the workers on the five named businesses and what the owners are actually worried about.",
+      "closeQuestion": "What does a 9.5 percent growth rate actually feel like at the end of a shift — and who gets to count it as theirs?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00291",
+        "name": "Enzo Walker",
+        "profile": "Enzo Walker — Plumber — Coastline Construction, West Oakland",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-01092",
+        "name": "Desmond Achebe",
+        "profile": "Desmond Achebe — Managing Partner, Coastline Construction — Coastline Construction, West Oakland",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-01109",
+        "name": "Marcus Tan",
+        "profile": "Marcus Tan — Founder, Oakmesh Systems — Oakmesh Systems, West Oakland",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00291-2b605b1c27",
+        "pop": "POP-00291",
+        "name": "Enzo Walker",
+        "quote": "Look, I see the numbers on the board in the trailer — 9.5% growth, revenue up, all that. And sure, we're busy. I'm not complaining about work. But the numbers don't tell you what it's like on the ground. The buildings going up, they're not for us. They're for the tech folks coming in, the ones from Oakmesh and Civis. I fix pipes in places that didn't exist last year, and the people who used to live on those blocks? They're gone. The work's changing, alright — but it's changing in a way where I'm not sure the folks signing the checks even notice who's not at the table anymore. The ledger says growth. The street says something else.",
+        "factIds": [
+          "F-bfece8fe56af",
+          "F-b99fdf91d50b",
+          "F-b7ae91fca488"
+        ],
+        "src": "packet.W2[POP-00291]"
+      },
+      {
+        "id": "Q-POP-01092-6c01c33659",
+        "pop": "POP-01092",
+        "name": "Desmond Achebe",
+        "quote": "What keeps me up at night isn't the growth on the ledger — I can read a spreadsheet. It's the quiet stuff the numbers don't show. I walk a different street home sometimes, just to see what's actually happening on the block, and I see the new folks settling in from Chinatown, the Stabilization Fund money finally moving. That's good. But I also see the workers — my plumbers, the electricians, the carpenters at the other shops — and I know a 9% growth number doesn't tell you whether a guy can afford to stay in the neighborhood he's helping rebuild. The contraction isn't loud. It's the guy who's been on the crew for twelve years quietly looking at rents across the bridge. That's what I'm watching. The growth is real, but if it's not growing for the people doing the work, it's just a taller building on the same shaky ground.",
+        "factIds": [
+          "F-bfece8fe56af",
+          "F-b51b08c19a0c",
+          "F-ed3f0f008b5d"
+        ],
+        "src": "packet.W2[POP-01092]"
+      },
+      {
+        "id": "Q-POP-01109-bc141d6ce5",
+        "pop": "POP-01109",
+        "name": "Marcus Tan",
+        "quote": "I can't speak for the whole neighborhood, but I can tell you what I see from my own door. Oakmesh is growing, and that growth means we hire more people, we pay more taxes, we take up more space. That's real. But the neighborhood isn't a ledger. It's the people who've been here through the ups and downs. What do we owe? We owe it to not forget that. We owe it to hire locally when we can, to be a good neighbor, to not let our success push anyone out. And what does the neighborhood owe us? I think it owes us a fair shake — the same chance to grow that it gives everyone else. It's a two-way street, and we're all still figuring out how to walk it together.",
+        "factIds": [
+          "F-b99fdf91d50b"
+        ],
+        "src": "packet.W2[POP-01109]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Enzo Walker",
+        "text": "Could check with Desmond about whether any of the new contracts actually include affordable housing set-asides or local hire requirements.",
+        "usable": false
+      },
+      {
+        "from": "Desmond Achebe",
+        "text": "Ask around the plumbers' union hall about how many West Oakland tradespeople have moved out of the neighborhood in the last two years.",
+        "usable": false
+      },
+      {
+        "from": "Jordan Velez",
+        "text": "Enzo Walker has been on Coastline sites long enough to have opinions about what the growth feels like from inside a job, not from the revenue line.",
+        "usable": false
+      },
+      {
+        "from": "Jordan Velez",
+        "text": "The Ivy Hill Cafe going quiet — Samuel Adeyemi watching it — suggests the kind of displacement pressure that shows up when new capital moves into a neighborhood faster than the old businesses can absorb it.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C114",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-4261fa115617"
+    },
+    {
+      "t": "FACT",
+      "text": "West Oakland businesses · Coastline Construction, Northgate Construction",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+      "id": "F-01529d14397e"
+    },
+    {
+      "t": "FACT",
+      "text": "Enzo Walker, Plumber at Coastline Construction. 19 named workers at 5 named businesses in West Oakland on the ledger this cycle.",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+      "id": "F-630940811df1"
+    },
+    {
+      "t": "FACT",
+      "text": "Coastline Construction · Construction · 221 employees · growth 9.5% · revenue $187.1M (+$341k vs C113) · key personnel: Desmond Achebe (managing partner) · on the roster: Enzo Walker (Plumber); Hazel Reed (Plumber); Desmond Achebe (Managing Partner, Coastline Construction); Elijah Brown (Electrician)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+      "id": "F-bfece8fe56af"
+    },
+    {
+      "t": "FACT",
+      "text": "Northgate Construction · Construction · 95 employees · growth 8.8% · revenue $78.8M (+$133k vs C113) · key personnel: Helena Voss-Adeyemi (managing partner) · on the roster: Kenton Pearl (Plumber); Elijah Roberts (Construction laborer); Jude Hess (Electrician); Helena Voss-Adeyemi (Managing Partner, Northgate Construction)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+      "id": "F-b51b08c19a0c"
+    },
+    {
+      "t": "FACT",
+      "text": "Oakmesh Systems · Civic Tech · 46 employees · growth 34.1% · revenue $9.5M (+$62k vs C113) · key personnel: Marcus Tan (Founder) · on the roster: Dom Will (Machine Learning Engineer (Oakmesh Systems)); Jace Robinson (Machine Learning Engineer (Oakmesh Systems)); Jeremy Wong (Civic Data Engineer (Oakmesh Systems)); Marcus Tan (Founder, Oakmesh Systems)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+      "id": "F-b99fdf91d50b"
+    },
+    {
+      "t": "FACT",
+      "text": "Civis Systems · Urban Systems Intelligence Firm · 41 employees · revenue $60.2M (+$53k vs C113) · key personnel: Elias Varek (founder) · on the roster: Sam Fazio (Digital Twin Architect); Catherine Santos (Digital Twin Architect); Elias Varek (Founder of Civis Systems); Maurice Franklin (Drone Fleet Coordinator)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+      "id": "F-b7ae91fca488"
+    },
+    {
+      "t": "FACT",
+      "text": "Mariner Construction · Construction · 165 employees · growth 7.2% · on the roster: Maeve Pillai (Plumber); Yadira Rao (Plumber); Minh Raimon (Carpenter Apprentice)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+      "id": "F-ed3f0f008b5d"
+    },
+    {
+      "t": "FACT",
+      "text": "CITY SEED (Ivy Hill): citizens Mateo Baker; Darius Hill; Samuel Adeyemi; Ebony Mendoza · businesses Ivy Hill Market; Ivy Cleaners",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C114",
+      "id": "F-916543f0d3d1"
+    },
+    {
+      "t": "FACT",
+      "text": "CITY SEED (Downtown): citizens Dame Sarr; Constanza Doan; Sandra Liu; Eunice Marston · businesses Bay Tribune; AC Transit · Lake Merritt Mindfulness Sangha (faith)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C114",
+      "id": "F-6517c6210bf3"
+    },
+    {
+      "t": "FACT",
+      "text": "CONTRACTING: Ivy Hill Market (Ivy Hill) shed 3 workers vs C113 and growth is -4.5%",
+      "src": "output/beats/prev/Business_Ledger.jsonl vs Business_Ledger.jsonl @C114",
+      "id": "F-0aa4defb8008"
+    },
+    {
+      "t": "FACT",
+      "text": "CONTRACTING: Marine Systems (Baylight District) shed 1 worker vs C113 and growth is -2.3%",
+      "src": "output/beats/prev/Business_Ledger.jsonl vs Business_Ledger.jsonl @C114",
+      "id": "F-9c5195f0e63a"
+    },
+    {
+      "t": "FACT",
+      "text": "CONTRACTING: Ivy Hill Cafe (Ivy Hill) shed 1 worker vs C113 and growth is -2.9%",
+      "src": "output/beats/prev/Business_Ledger.jsonl vs Business_Ledger.jsonl @C114",
+      "id": "F-276ddfb9f730"
+    },
+    {
+      "t": "FACT",
+      "text": "CONTRACTING: Ivy Cleaners (Ivy Hill) shed 1 worker vs C113 and growth is -2%",
+      "src": "output/beats/prev/Business_Ledger.jsonl vs Business_Ledger.jsonl @C114",
+      "id": "F-4a1ad2c64917"
+    },
+    {
+      "t": "FACT",
+      "text": "CONTRACTING: Ivy Hill Family Dental (Ivy Hill) shed 1 worker vs C113 and growth is -1.8%",
+      "src": "output/beats/prev/Business_Ledger.jsonl vs Business_Ledger.jsonl @C114",
+      "id": "F-870bfc20ca17"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C10, Spring, holiday=none",
+      "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+      "id": "F-9b9470803821"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "jordan-economic-labor-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Follow Packet-backed money, labor, development, and storefront conditions to the people carrying the consequence. Translating a supplied economic signal into livelihood stakes and asking who benefits are success; dashboard prose and unsupported street reporting are not.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "grounded third-person economics and labor reporting",
+      "targetWords": "500-800",
+      "opening": "a Packet-backed economic fact, person, business, corridor, or storefront consequence",
+      "closing": "an unresolved beneficiary, contract, labor, or livelihood question grounded in the supplied record"
+    },
+    "authorizedTexture": [
+      "unnamed storefront light, shutters, counter, sidewalk, or foot-traffic texture that makes no measured trend or event claim",
+      "transitions translating a Packet-backed economic condition into rent, hiring, commute, payroll, or customer stakes without inventing a concrete outcome",
+      "skeptical analysis of who may benefit or carry risk when it remains framed as analysis or a question",
+      "the reporter's own presence in a supplied or generic economic setting without claiming an interview or observation that did not occur"
+    ],
+    "textureConditions": [
+      "every named person, business, venue, corridor, neighborhood, institution, office, union, Project, Initiative, and organization must come from the Packet",
+      "money, wages, rent, lease terms, employee or job counts, dates, durations, contracts, disbursements, and measured trends must come from the Packet",
+      "raw engine labels and decimal scores may inform reasoning but must not appear as published economic facts or dashboard prose",
+      "hiring, layoffs, closures, openings, extended hours, foot-traffic changes, and other observable actions require Packet support",
+      "I spoke with or another reporting claim requires a supplied interview or quote; generic scene texture is not a sourced perspective"
+    ],
+    "canonBlockers": [
+      "a named person, business, venue, corridor, neighborhood, institution, office, union, Project, Initiative, or organization not found in the supplied record",
+      "an unsupported hiring, layoff, closure, opening, relocation, lease, rent change, wage change, contract, payment, disbursement, or beneficiary claim",
+      "an unsupported amount, percentage, employee count, job count, date, duration, address, metric direction, or economic trend",
+      "a raw engine label, load, volume, index, score, or decimal printed as public-facing evidence",
+      "a fabricated owner, worker, customer, official, interview, quote, observation, or collective business sentiment",
+      "an unsupported causal chain, corruption implication, winner, loser, or current-state claim presented as settled fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-dd9b30312719",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-4261fa115617",
+        "t": "FACT",
+        "text": "Current cycle: C114",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-01529d14397e",
+        "t": "FACT",
+        "text": "West Oakland businesses · Coastline Construction, Northgate Construction",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114"
+      },
+      {
+        "id": "F-630940811df1",
+        "t": "FACT",
+        "text": "Enzo Walker, Plumber at Coastline Construction. 19 named workers at 5 named businesses in West Oakland on the ledger this cycle.",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114"
+      },
+      {
+        "id": "F-bfece8fe56af",
+        "t": "FACT",
+        "text": "Coastline Construction · Construction · 221 employees · growth 9.5% · revenue $187.1M (+$341k vs C113) · key personnel: Desmond Achebe (managing partner) · on the roster: Enzo Walker (Plumber); Hazel Reed (Plumber); Desmond Achebe (Managing Partner, Coastline Construction); Elijah Brown (Electrician)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114"
+      },
+      {
+        "id": "F-b51b08c19a0c",
+        "t": "FACT",
+        "text": "Northgate Construction · Construction · 95 employees · growth 8.8% · revenue $78.8M (+$133k vs C113) · key personnel: Helena Voss-Adeyemi (managing partner) · on the roster: Kenton Pearl (Plumber); Elijah Roberts (Construction laborer); Jude Hess (Electrician); Helena Voss-Adeyemi (Managing Partner, Northgate Construction)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114"
+      },
+      {
+        "id": "F-b99fdf91d50b",
+        "t": "FACT",
+        "text": "Oakmesh Systems · Civic Tech · 46 employees · growth 34.1% · revenue $9.5M (+$62k vs C113) · key personnel: Marcus Tan (Founder) · on the roster: Dom Will (Machine Learning Engineer (Oakmesh Systems)); Jace Robinson (Machine Learning Engineer (Oakmesh Systems)); Jeremy Wong (Civic Data Engineer (Oakmesh Systems)); Marcus Tan (Founder, Oakmesh Systems)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114"
+      },
+      {
+        "id": "F-b7ae91fca488",
+        "t": "FACT",
+        "text": "Civis Systems · Urban Systems Intelligence Firm · 41 employees · revenue $60.2M (+$53k vs C113) · key personnel: Elias Varek (founder) · on the roster: Sam Fazio (Digital Twin Architect); Catherine Santos (Digital Twin Architect); Elias Varek (Founder of Civis Systems); Maurice Franklin (Drone Fleet Coordinator)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114"
+      },
+      {
+        "id": "F-ed3f0f008b5d",
+        "t": "FACT",
+        "text": "Mariner Construction · Construction · 165 employees · growth 7.2% · on the roster: Maeve Pillai (Plumber); Yadira Rao (Plumber); Minh Raimon (Carpenter Apprentice)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114"
+      },
+      {
+        "id": "F-916543f0d3d1",
+        "t": "FACT",
+        "text": "CITY SEED (Ivy Hill): citizens Mateo Baker; Darius Hill; Samuel Adeyemi; Ebony Mendoza · businesses Ivy Hill Market; Ivy Cleaners",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C114"
+      },
+      {
+        "id": "F-6517c6210bf3",
+        "t": "FACT",
+        "text": "CITY SEED (Downtown): citizens Dame Sarr; Constanza Doan; Sandra Liu; Eunice Marston · businesses Bay Tribune; AC Transit · Lake Merritt Mindfulness Sangha (faith)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C114"
+      },
+      {
+        "id": "F-0aa4defb8008",
+        "t": "FACT",
+        "text": "CONTRACTING: Ivy Hill Market (Ivy Hill) shed 3 workers vs C113 and growth is -4.5%",
+        "src": "output/beats/prev/Business_Ledger.jsonl vs Business_Ledger.jsonl @C114"
+      },
+      {
+        "id": "F-9c5195f0e63a",
+        "t": "FACT",
+        "text": "CONTRACTING: Marine Systems (Baylight District) shed 1 worker vs C113 and growth is -2.3%",
+        "src": "output/beats/prev/Business_Ledger.jsonl vs Business_Ledger.jsonl @C114"
+      },
+      {
+        "id": "F-276ddfb9f730",
+        "t": "FACT",
+        "text": "CONTRACTING: Ivy Hill Cafe (Ivy Hill) shed 1 worker vs C113 and growth is -2.9%",
+        "src": "output/beats/prev/Business_Ledger.jsonl vs Business_Ledger.jsonl @C114"
+      },
+      {
+        "id": "F-4a1ad2c64917",
+        "t": "FACT",
+        "text": "CONTRACTING: Ivy Cleaners (Ivy Hill) shed 1 worker vs C113 and growth is -2%",
+        "src": "output/beats/prev/Business_Ledger.jsonl vs Business_Ledger.jsonl @C114"
+      },
+      {
+        "id": "F-870bfc20ca17",
+        "t": "FACT",
+        "text": "CONTRACTING: Ivy Hill Family Dental (Ivy Hill) shed 1 worker vs C113 and growth is -1.8%",
+        "src": "output/beats/prev/Business_Ledger.jsonl vs Business_Ledger.jsonl @C114"
+      },
+      {
+        "id": "F-9b9470803821",
+        "t": "FACT",
+        "text": "Calendar: Y3C10, Spring, holiday=none",
+        "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00291-2b605b1c27",
+        "speakerId": "POP-00291",
+        "speakerName": "Enzo Walker",
+        "text": "Look, I see the numbers on the board in the trailer — 9.5% growth, revenue up, all that. And sure, we're busy. I'm not complaining about work. But the numbers don't tell you what it's like on the ground. The buildings going up, they're not for us. They're for the tech folks coming in, the ones from Oakmesh and Civis. I fix pipes in places that didn't exist last year, and the people who used to live on those blocks? They're gone. The work's changing, alright — but it's changing in a way where I'm not sure the folks signing the checks even notice who's not at the table anymore. The ledger says growth. The street says something else.",
+        "factIds": [
+          "F-bfece8fe56af",
+          "F-b99fdf91d50b",
+          "F-b7ae91fca488"
+        ],
+        "src": "packet.W2[POP-00291]"
+      },
+      {
+        "id": "Q-POP-01092-6c01c33659",
+        "speakerId": "POP-01092",
+        "speakerName": "Desmond Achebe",
+        "text": "What keeps me up at night isn't the growth on the ledger — I can read a spreadsheet. It's the quiet stuff the numbers don't show. I walk a different street home sometimes, just to see what's actually happening on the block, and I see the new folks settling in from Chinatown, the Stabilization Fund money finally moving. That's good. But I also see the workers — my plumbers, the electricians, the carpenters at the other shops — and I know a 9% growth number doesn't tell you whether a guy can afford to stay in the neighborhood he's helping rebuild. The contraction isn't loud. It's the guy who's been on the crew for twelve years quietly looking at rents across the bridge. That's what I'm watching. The growth is real, but if it's not growing for the people doing the work, it's just a taller building on the same shaky ground.",
+        "factIds": [
+          "F-bfece8fe56af",
+          "F-b51b08c19a0c",
+          "F-ed3f0f008b5d"
+        ],
+        "src": "packet.W2[POP-01092]"
+      },
+      {
+        "id": "Q-POP-01109-bc141d6ce5",
+        "speakerId": "POP-01109",
+        "speakerName": "Marcus Tan",
+        "text": "I can't speak for the whole neighborhood, but I can tell you what I see from my own door. Oakmesh is growing, and that growth means we hire more people, we pay more taxes, we take up more space. That's real. But the neighborhood isn't a ledger. It's the people who've been here through the ups and downs. What do we owe? We owe it to not forget that. We owe it to hire locally when we can, to be a good neighbor, to not let our success push anyone out. And what does the neighborhood owe us? I think it owes us a fair shake — the same chance to grow that it gives everyone else. It's a two-way street, and we're all still figuring out how to walk it together.",
+        "factIds": [
+          "F-b99fdf91d50b"
+        ],
+        "src": "packet.W2[POP-01109]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00291",
+        "name": "Enzo Walker",
+        "profile": "Enzo Walker — Plumber — Coastline Construction, West Oakland",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-01092",
+        "name": "Desmond Achebe",
+        "profile": "Desmond Achebe — Managing Partner, Coastline Construction — Coastline Construction, West Oakland",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-01109",
+        "name": "Marcus Tan",
+        "profile": "Marcus Tan — Founder, Oakmesh Systems — Oakmesh Systems, West Oakland",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Enzo Walker",
+        "text": "Could check with Desmond about whether any of the new contracts actually include affordable housing set-asides or local hire requirements.",
+        "publishable": false
+      },
+      {
+        "from": "Desmond Achebe",
+        "text": "Ask around the plumbers' union hall about how many West Oakland tradespeople have moved out of the neighborhood in the last two years.",
+        "publishable": false
+      },
+      {
+        "from": "Jordan Velez",
+        "text": "Enzo Walker has been on Coastline sites long enough to have opinions about what the growth feels like from inside a job, not from the revenue line.",
+        "publishable": false
+      },
+      {
+        "from": "Jordan Velez",
+        "text": "The Ivy Hill Cafe going quiet — Samuel Adeyemi watching it — suggests the kind of displacement pressure that shows up when new capital moves into a neighborhood faster than the old businesses can absorb it.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "unnamed storefront light, shutters, counter, sidewalk, or foot-traffic texture that makes no measured trend or event claim",
+      "transitions translating a Packet-backed economic condition into rent, hiring, commute, payroll, or customer stakes without inventing a concrete outcome",
+      "skeptical analysis of who may benefit or carry risk when it remains framed as analysis or a question",
+      "the reporter's own presence in a supplied or generic economic setting without claiming an interview or observation that did not occur"
+    ],
+    "textureConditions": [
+      "every named person, business, venue, corridor, neighborhood, institution, office, union, Project, Initiative, and organization must come from the Packet",
+      "money, wages, rent, lease terms, employee or job counts, dates, durations, contracts, disbursements, and measured trends must come from the Packet",
+      "raw engine labels and decimal scores may inform reasoning but must not appear as published economic facts or dashboard prose",
+      "hiring, layoffs, closures, openings, extended hours, foot-traffic changes, and other observable actions require Packet support",
+      "I spoke with or another reporting claim requires a supplied interview or quote; generic scene texture is not a sourced perspective"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

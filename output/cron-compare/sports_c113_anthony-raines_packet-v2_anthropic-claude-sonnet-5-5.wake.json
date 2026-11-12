@@ -1,0 +1,64 @@
+{
+  "mode": "wake-write",
+  "desk": "sports",
+  "cycle": "113",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "anthony-raines",
+  "byline": {
+    "name": "Anthony Raines",
+    "popid": "POP-00017",
+    "beatDomain": "SPORTS"
+  },
+  "laneEntries": 9,
+  "quotesLanded": 0,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "dossier_read",
+    "dossier_read",
+    "sheet_read",
+    "canon_search",
+    "canon_search",
+    "dossier_read"
+  ],
+  "toolCalls": 6,
+  "wordCount": 827,
+  "targetWords": "evidence-bounded",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 827,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "1857f14477e78deabb8bde8e1c9ed3c17a8f6b570a372bc3abb59f3f3853f578",
+    "costUsd": 0.0015
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 4/4 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/sports_c113_anthony-raines_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "ts for agents [www.dotenvx.com]\n{\n  \"popId\": \"POP-00017\",\n  \"name\": \"Anthony Raines\",\n  \"recorded\": true,\n  \"text\": \"filed: Morton's 285 At-Bats Are the Evidence the Outfield Math Has to Start From\"\n}"
+  },
+  "ranAt": "2026-10-26T23:19:48.070Z",
+  "dispositionReconciledAt": "2026-10-31T17:00:02.883Z"
+}

@@ -1,0 +1,33 @@
+{
+  "model": "anthropic/claude-sonnet-5.5",
+  "calls": [
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Faith_Organizations",
+        "match": "Cathedral of the Living Word"
+      },
+      "resultChars": 347,
+      "resultHead": "Organization | FaithTradition | Neighborhood | Founded | Congregation | Leader | Character | ActiveStatus | LeaderPOPID | MembersList\nCathedral of the Living Word | Catholic | Lake Merritt | 2008 | 2000 | Bishop Antoine Vermeer | architectural landmark, diverse congregation | active | POP-00755 | [\"POP-01094\",\"POP-00665\",\"POP-00697\",\"POP-00211\"]"
+    },
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Faith_Ledger",
+        "match": "Cathedral of the Living Word"
+      },
+      "resultChars": 1899,
+      "resultHead": "Timestamp | Cycle | Organization | FaithTradition | EventType | EventDescription | Neighborhood | Attendance | Status\nC99 | 99 | Cathedral of the Living Word | Catholic | holy_day | congregation celebrates All Saints | Lake Merritt | 1110 | occurred\nY2C49 | 101 | Cathedral of the Living Word | Catholic | holy_day | special Advent and Christmas service fills sanctuary | Lake Merritt | 1279 | occurred\nY2C50 | 102 | Cathedral of the Living Word | Catholic | holy_day | traditional Advent and Christmas rituals observed | Lake Merritt | 961 | occurred\nY2C51 | 103 | Cathedral of the Living Word | Cat"
+    },
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Faith_Ledger",
+        "match": "Bay Pure Land Buddhist Temple"
+      },
+      "resultChars": 399,
+      "resultHead": "Timestamp | Cycle | Organization | FaithTradition | EventType | EventDescription | Neighborhood | Attendance | Status\nY3C5 | 109 | Bay Pure Land Buddhist Temple | Buddhist | crisis_response | congregation opens doors for community support | Chinatown | 41 | occurred\nY3C7 | 111 | Bay Pure Land Buddhist Temple | Buddhist | community_program | community health fair hosted | Chinatown | 38 | occurred"
+    }
+  ],
+  "ranAt": "2026-11-06T00:15:31.255Z"
+}

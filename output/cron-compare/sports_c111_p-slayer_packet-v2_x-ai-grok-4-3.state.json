@@ -1,0 +1,400 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00008",
+    "name": "P Slayer",
+    "role": "desk reporter",
+    "desk": "sports"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "The A's parade roll through Downtown.",
+    "approach": "Fan-heat approach (P Slayer pulse): do NOT open from the FO press release or the award board. Open from gut or Oakland sensory (bar, lot, bleacher row, BART after). First-person I/we only. Pick 1–2 charge-bag modes from this slice. Friction pivot required — name the counter-argument, kill it. ONE real foil number max (from FoilNumber / AnchorFacts); never invent x-stats or roster moves. Hook PriorTake when present — eat it or double down (\"I was wrong\" is craft). End on charge that sticks: dare, confession, or update. Not Anthony. Not Hal. Not multi-voice sports-desk average.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "fan-heat",
+      "fanCharge": "defiance",
+      "bagModes": [
+        "3 Friction Pivot",
+        "5 Paper Cuts vs the Nerds",
+        "9 Breakout Feeling"
+      ],
+      "friction": "Euphoria with friction: name the doubter, kill soft contentment.",
+      "centralFeeling": "Oakland should refuse the soft rewrite of what just happened.",
+      "priorTake": "NONE — write cold or invent no prior; wall may still inject at wake",
+      "sceneRule": "You may invent unnamed bar / lot / BART / bleacher texture that contradicts nothing on this slice. Do not invent star players, contracts, stats, or quotes. Named people stay on PLAYERS list or Tribune colleagues (Anthony, Hal, Mags) as foils."
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "award-board",
+    "hood": "Downtown",
+    "src": "Oakland_Sports_Feed cycle 111; world_summary_c111.md \"## Sports\" · The A's parade roll through Downtown.",
+    "plan": {
+      "focus": "The defiance behind the euphoria; refusing the sanitized version of the championship parade.",
+      "closeQuestion": "Is this a moment of peace, or is it just the fuel for the next fight?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00145",
+        "name": "Janelle Rourke",
+        "profile": "Janelle Rourke — ASSISTANT DISTRICT ATTORNEY (Community Safety)",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00196",
+        "name": "Inga Creator",
+        "profile": "Inga Creator — Boutique Owner",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-01107",
+        "name": "Daniel Yoon",
+        "profile": "Daniel Yoon — Co-Founder, Gridiron Analytics",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-01107-dc9d887bab",
+        "pop": "POP-01107",
+        "name": "Daniel Yoon",
+        "quote": "I just picked up a new A's jersey. Honestly, I'm still riding the high from that win last night.",
+        "factIds": [
+          "F-f79c88b81a20"
+        ],
+        "src": "packet.W2[POP-01107]"
+      },
+      {
+        "id": "Q-POP-00145-6519d443da",
+        "pop": "POP-00145",
+        "name": "Janelle Rourke",
+        "quote": "I bought a new A's jersey and, honestly, it's been really exciting to put it on. There's this sense of anticipation hanging in the air that I just can't shake. I'm looking forward to the next season, maybe even catching a game or two.",
+        "factIds": [
+          "F-03ef48e7a71a"
+        ],
+        "src": "packet.W2[POP-00145]"
+      },
+      {
+        "id": "Q-POP-00196-e8626da7c9",
+        "pop": "POP-00196",
+        "name": "Inga Creator",
+        "quote": "I'm still on cloud nine after last night's win! I celebrated by buying a new A's jersey - it's my way of showing team spirit. The energy around here is electric, and I'm loving every minute of it.",
+        "factIds": [
+          "F-f79c88b81a20"
+        ],
+        "src": "packet.W2[POP-00196]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "P Slayer",
+        "text": "The contrast between the polished parade floats and the industrial gray of the surrounding blocks.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C111",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-a43c5d888b36"
+    },
+    {
+      "t": "FACT",
+      "text": "The A's parade roll through Downtown.",
+      "src": "Oakland_Sports_Feed cycle 111; world_summary_c111.md \"## Sports\" · The A's parade roll through Downtown.",
+      "id": "F-c99fb396b575"
+    },
+    {
+      "t": "FACT",
+      "text": "Euphoria with friction: name the doubter, kill soft contentment.",
+      "src": "Oakland_Sports_Feed cycle 111; world_summary_c111.md \"## Sports\" · The A's parade roll through Downtown.",
+      "id": "F-6008caf2a9b6"
+    },
+    {
+      "t": "FACT",
+      "text": "StoryAngle (feed): The A's parade roll through Downtown.",
+      "src": "Oakland_Sports_Feed cycle 111; world_summary_c111.md \"## Sports\" · The A's parade roll through Downtown.",
+      "id": "F-6959041c57fc"
+    },
+    {
+      "t": "FACT",
+      "text": "Event: A's — editorial-note (off-season)",
+      "src": "Oakland_Sports_Feed cycle 111; world_summary_c111.md \"## Sports\" · The A's parade roll through Downtown.",
+      "id": "F-b3e2ed11906c"
+    },
+    {
+      "t": "FACT",
+      "text": "NamesUsed: Mike Paulson",
+      "src": "Oakland_Sports_Feed cycle 111; world_summary_c111.md \"## Sports\" · The A's parade roll through Downtown.",
+      "id": "F-4c8f42fa73b4"
+    },
+    {
+      "t": "FACT",
+      "text": "FanSentiment: euphoric · Mood: electric",
+      "src": "Oakland_Sports_Feed cycle 111; world_summary_c111.md \"## Sports\" · The A's parade roll through Downtown.",
+      "id": "F-d60ee58155df"
+    },
+    {
+      "t": "FACT",
+      "text": "Y3C7 — [Sports] bought a new A's jersey and still riding the high from last night's win",
+      "src": "output/simulation_ledger_snapshot.jsonl",
+      "id": "F-f79c88b81a20"
+    },
+    {
+      "t": "FACT",
+      "text": "Y3C7 — [Sports] bought a new A's jersey and a sense of anticipation hangs in the air",
+      "src": "output/simulation_ledger_snapshot.jsonl",
+      "id": "F-03ef48e7a71a"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "p-slayer-fan-heat-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Turn a Packet-backed sports result or roster move into fan consequence. Owning or doubling down on a prior take and applying fan or front-office pressure are success; press-box analysis and tidy resolution are not.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "first-person I/we fan-heat column",
+      "targetWords": "400-700",
+      "opening": "a bar, lot, bleacher, sidewalk, or sports-viewing sensory moment",
+      "closing": "a dare, confession, or update with the central friction still live"
+    },
+    "authorizedTexture": [
+      "a bar, lot, bleacher, sidewalk, or sports-viewing setting; a named in-world venue is allotted texture",
+      "the reporter's own presence, gut reaction, or sensory observation",
+      "collective I or we used as columnist rhetoric and emotional stance, not as measured public sentiment or a poll",
+      "a rhetorical counterargument from unnamed fans used as an argument foil, not as an attributed quote",
+      "metaphor and emotional inference grounded in a supplied fact"
+    ],
+    "textureConditions": [
+      "I or we must not claim a verified collective sentiment, count, gathering, or event",
+      "an unnamed counterargument must remain rhetorical rather than becoming a quote or sourced statement",
+      "scene texture must carry no roster move, result, stat, contract, injury, player act, or front-office act",
+      "a prior-take confession or paraphrase requires a Packet-backed prior article or wall entry, and an exact quote requires supplied text",
+      "in-world named spots that are not real Oakland are allotted hallucination and belong on INTAKE BIZ if newly named",
+      "player, team, roster, statistic, result, and front-office facts still require Packet support"
+    ],
+    "canonBlockers": [
+      "a real-world player, team, venue, business, institution, or organization imported into the city; or an invented person given the authority of an established citizen",
+      "an unsupported roster move, signing, trade, non-move, result, record, streak, award, contract, or front-office act",
+      "an unsupported stat, metric, number, date, duration, or salary",
+      "an unsupported injury, medical, private-life, or mindset claim",
+      "a fabricated player, coach, or front-office quote or interview",
+      "collective fan sentiment presented as measured fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-70ae5bc40507",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-a43c5d888b36",
+        "t": "FACT",
+        "text": "Current cycle: C111",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-c99fb396b575",
+        "t": "FACT",
+        "text": "The A's parade roll through Downtown.",
+        "src": "Oakland_Sports_Feed cycle 111; world_summary_c111.md \"## Sports\" · The A's parade roll through Downtown."
+      },
+      {
+        "id": "F-6008caf2a9b6",
+        "t": "FACT",
+        "text": "Euphoria with friction: name the doubter, kill soft contentment.",
+        "src": "Oakland_Sports_Feed cycle 111; world_summary_c111.md \"## Sports\" · The A's parade roll through Downtown."
+      },
+      {
+        "id": "F-6959041c57fc",
+        "t": "FACT",
+        "text": "StoryAngle (feed): The A's parade roll through Downtown.",
+        "src": "Oakland_Sports_Feed cycle 111; world_summary_c111.md \"## Sports\" · The A's parade roll through Downtown."
+      },
+      {
+        "id": "F-b3e2ed11906c",
+        "t": "FACT",
+        "text": "Event: A's — editorial-note (off-season)",
+        "src": "Oakland_Sports_Feed cycle 111; world_summary_c111.md \"## Sports\" · The A's parade roll through Downtown."
+      },
+      {
+        "id": "F-4c8f42fa73b4",
+        "t": "FACT",
+        "text": "NamesUsed: Mike Paulson",
+        "src": "Oakland_Sports_Feed cycle 111; world_summary_c111.md \"## Sports\" · The A's parade roll through Downtown."
+      },
+      {
+        "id": "F-d60ee58155df",
+        "t": "FACT",
+        "text": "FanSentiment: euphoric · Mood: electric",
+        "src": "Oakland_Sports_Feed cycle 111; world_summary_c111.md \"## Sports\" · The A's parade roll through Downtown."
+      },
+      {
+        "id": "F-f79c88b81a20",
+        "t": "FACT",
+        "text": "Y3C7 — [Sports] bought a new A's jersey and still riding the high from last night's win",
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      },
+      {
+        "id": "F-03ef48e7a71a",
+        "t": "FACT",
+        "text": "Y3C7 — [Sports] bought a new A's jersey and a sense of anticipation hangs in the air",
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-01107-dc9d887bab",
+        "speakerId": "POP-01107",
+        "speakerName": "Daniel Yoon",
+        "text": "I just picked up a new A's jersey. Honestly, I'm still riding the high from that win last night.",
+        "factIds": [
+          "F-f79c88b81a20"
+        ],
+        "src": "packet.W2[POP-01107]"
+      },
+      {
+        "id": "Q-POP-00145-6519d443da",
+        "speakerId": "POP-00145",
+        "speakerName": "Janelle Rourke",
+        "text": "I bought a new A's jersey and, honestly, it's been really exciting to put it on. There's this sense of anticipation hanging in the air that I just can't shake. I'm looking forward to the next season, maybe even catching a game or two.",
+        "factIds": [
+          "F-03ef48e7a71a"
+        ],
+        "src": "packet.W2[POP-00145]"
+      },
+      {
+        "id": "Q-POP-00196-e8626da7c9",
+        "speakerId": "POP-00196",
+        "speakerName": "Inga Creator",
+        "text": "I'm still on cloud nine after last night's win! I celebrated by buying a new A's jersey - it's my way of showing team spirit. The energy around here is electric, and I'm loving every minute of it.",
+        "factIds": [
+          "F-f79c88b81a20"
+        ],
+        "src": "packet.W2[POP-00196]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00145",
+        "name": "Janelle Rourke",
+        "profile": "Janelle Rourke — ASSISTANT DISTRICT ATTORNEY (Community Safety)",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00196",
+        "name": "Inga Creator",
+        "profile": "Inga Creator — Boutique Owner",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-01107",
+        "name": "Daniel Yoon",
+        "profile": "Daniel Yoon — Co-Founder, Gridiron Analytics",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "P Slayer",
+        "text": "The contrast between the polished parade floats and the industrial gray of the surrounding blocks.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "a bar, lot, bleacher, sidewalk, or sports-viewing setting; a named in-world venue is allotted texture",
+      "the reporter's own presence, gut reaction, or sensory observation",
+      "collective I or we used as columnist rhetoric and emotional stance, not as measured public sentiment or a poll",
+      "a rhetorical counterargument from unnamed fans used as an argument foil, not as an attributed quote",
+      "metaphor and emotional inference grounded in a supplied fact"
+    ],
+    "textureConditions": [
+      "I or we must not claim a verified collective sentiment, count, gathering, or event",
+      "an unnamed counterargument must remain rhetorical rather than becoming a quote or sourced statement",
+      "scene texture must carry no roster move, result, stat, contract, injury, player act, or front-office act",
+      "a prior-take confession or paraphrase requires a Packet-backed prior article or wall entry, and an exact quote requires supplied text",
+      "in-world named spots that are not real Oakland are allotted hallucination and belong on INTAKE BIZ if newly named",
+      "player, team, roster, statistic, result, and front-office facts still require Packet support"
+    ],
+    "forbiddenClaimClasses": [
+      "a real-world player, team, venue, business, institution, or organization imported into the city; or an invented person given the authority of an established citizen",
+      "an unsupported roster move, signing, trade, non-move, result, record, streak, award, contract, or front-office act",
+      "an unsupported stat, metric, number, date, duration, or salary",
+      "an unsupported injury, medical, private-life, or mindset claim",
+      "a fabricated player, coach, or front-office quote or interview",
+      "collective fan sentiment presented as measured fact"
+    ]
+  }
+}

@@ -1,0 +1,310 @@
+{
+  "stage": "report",
+  "desk": "undocked",
+  "cycle": "114",
+  "persona": "nia-rook",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Nia Rook",
+    "popid": "POP-01076"
+  },
+  "assignment": {
+    "story": {
+      "ref": "undocked:undocked-pop00530-Y3C10-e2",
+      "label": "UNDOCKED: Lena Okafor, Thursday night",
+      "kind": "undocked",
+      "angle": "UNDOCKED episode: Lena Okafor, Thursday night. Standings: Luis Taz leads the board — rank #1, 37.96 achievement points, 0 credits, 1 cycle(s) led, current streak 1. In the chair: Lena Okafor — Daycare Director.",
+      "facts": [
+        "Lena Okafor's Thursday night on UNDOCKED: went through Alpha Centauri, Sol, Sirius, Nova Terra, Epsilon Eridani, Procyon, Proxima Centauri and Barnards Star; took the Copper Requisition contract; mined 3 copper ore, 8 iron ore, 1 antimatter containment cell and 4 aluminum ore; sold 6 copper ore and 12 iron ore; got into 1 fight; came out 18 credits up; flew until the show's time ran out.",
+        "Lena Okafor — Daycare Director (ledger)"
+      ],
+      "citizens": [
+        "Lena Okafor — Daycare Director, UNDOCKED cast pilot"
+      ],
+      "popids": [
+        "POP-00530"
+      ],
+      "hood": "Fruitvale"
+    }
+  },
+  "angle": "output/cron-compare/undocked_c114_nia-rook_packet-v2_angle.json",
+  "quotesRequested": 1,
+  "quotesLanded": 1,
+  "quotes": [
+    {
+      "pop": "POP-00530",
+      "name": "Lena Okafor",
+      "quote": "To be honest, I don't really see a connection between my performance in UNDOCKED and my role as a Daycare Director. I mean, they're just two different things I do. One is a hobby, really, and the other is my job. I enjoy flying on UNDOCKED, it's a way for me to unwind and challenge myself, but it doesn't directly relate to how I manage the daycare.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, I don't really see a connection between my performance in UNDOCKED and my role as a Daycare Director. I mean, they're just two different things I do. One is a hobby, really, and the other is my job. I enjoy flying on UNDOCKED, it's a way for me to unwind and challenge myself, but it doesn't directly relate to how I manage the daycare.\",\n  \"fact_ids\": [\"F-411855505fe1\", \"F-31ba7e9ec4ee\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-411855505fe1",
+          "F-31ba7e9ec4ee"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00530-c22ea8f123",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, I don't really see a connection between my performance in UNDOCKED and my role as a Daycare Director. I mean, they're just two different things I do. One is a hobby, really, and the other is my job. I enjoy flying on UNDOCKED, it's a way for me to unwind and challenge myself, but it doesn't directly relate to how I manage the daycare."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00530",
+          "name": "Lena Okafor",
+          "role": "UNDOCKED pilot",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "How does Lena Okafor's performance in UNDOCKED relate to her role as a Daycare Director? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked",
+          "hood": "Fruitvale",
+          "focus": "Lena Okafor's UNDOCKED episode",
+          "src": "undocked:undocked-pop00530-Y3C10-e2"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Lena Okafor — UNDOCKED pilot",
+          "evidence": [
+            {
+              "id": "EV-dbbc7e3152",
+              "src": "undocked:undocked-pop00530-Y3C10-e2",
+              "text": "UNDOCKED: Lena Okafor, Thursday night"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "UNDOCKED: Lena Okafor, Thursday night",
+            "src": "undocked:undocked-pop00530-Y3C10-e2",
+            "id": "F-0215e397cfef"
+          },
+          {
+            "t": "FACT",
+            "text": "Lena Okafor's Thursday night on UNDOCKED: went through Alpha Centauri, Sol, Sirius, Nova Terra, Epsilon Eridani, Procyon, Proxima Centauri and Barnards Star; took the Copper Requisition contract; mined 3 copper ore, 8 iron ore, 1 antimatter containment cell and 4 aluminum ore; sold 6 copper ore and 12 iron ore; got into 1 fight; came out 18 credits up; flew until the show's time ran out.",
+            "src": "undocked:undocked-pop00530-Y3C10-e2",
+            "id": "F-f00e00704d79"
+          },
+          {
+            "t": "FACT",
+            "text": "Lena Okafor — Daycare Director (ledger)",
+            "src": "undocked:undocked-pop00530-Y3C10-e2",
+            "id": "F-31ba7e9ec4ee"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "Lena Okafor — UNDOCKED pilot",
+            "src": "Simulation_Ledger profile for POP-00530",
+            "id": "F-411855505fe1"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-00530",
+      "name": "Lena Okafor",
+      "quote": "To be honest, I don't really see a connection between my performance in UNDOCKED and my role as a Daycare Director. I mean, they're just two different things I do. One is a hobby, really, and the other is my job. I enjoy flying on UNDOCKED, it's a way for me to unwind and challenge myself, but it doesn't directly relate to how I manage the daycare.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, I don't really see a connection between my performance in UNDOCKED and my role as a Daycare Director. I mean, they're just two different things I do. One is a hobby, really, and the other is my job. I enjoy flying on UNDOCKED, it's a way for me to unwind and challenge myself, but it doesn't directly relate to how I manage the daycare.\",\n  \"fact_ids\": [\"F-411855505fe1\", \"F-31ba7e9ec4ee\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-411855505fe1",
+          "F-31ba7e9ec4ee"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00530-c22ea8f123",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, I don't really see a connection between my performance in UNDOCKED and my role as a Daycare Director. I mean, they're just two different things I do. One is a hobby, really, and the other is my job. I enjoy flying on UNDOCKED, it's a way for me to unwind and challenge myself, but it doesn't directly relate to how I manage the daycare."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00530",
+          "name": "Lena Okafor",
+          "role": "UNDOCKED pilot",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "How does Lena Okafor's performance in UNDOCKED relate to her role as a Daycare Director? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked",
+          "hood": "Fruitvale",
+          "focus": "Lena Okafor's UNDOCKED episode",
+          "src": "undocked:undocked-pop00530-Y3C10-e2"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Lena Okafor — UNDOCKED pilot",
+          "evidence": [
+            {
+              "id": "EV-dbbc7e3152",
+              "src": "undocked:undocked-pop00530-Y3C10-e2",
+              "text": "UNDOCKED: Lena Okafor, Thursday night"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "UNDOCKED: Lena Okafor, Thursday night",
+            "src": "undocked:undocked-pop00530-Y3C10-e2",
+            "id": "F-0215e397cfef"
+          },
+          {
+            "t": "FACT",
+            "text": "Lena Okafor's Thursday night on UNDOCKED: went through Alpha Centauri, Sol, Sirius, Nova Terra, Epsilon Eridani, Procyon, Proxima Centauri and Barnards Star; took the Copper Requisition contract; mined 3 copper ore, 8 iron ore, 1 antimatter containment cell and 4 aluminum ore; sold 6 copper ore and 12 iron ore; got into 1 fight; came out 18 credits up; flew until the show's time ran out.",
+            "src": "undocked:undocked-pop00530-Y3C10-e2",
+            "id": "F-f00e00704d79"
+          },
+          {
+            "t": "FACT",
+            "text": "Lena Okafor — Daycare Director (ledger)",
+            "src": "undocked:undocked-pop00530-Y3C10-e2",
+            "id": "F-31ba7e9ec4ee"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "Lena Okafor — UNDOCKED pilot",
+            "src": "Simulation_Ledger profile for POP-00530",
+            "id": "F-411855505fe1"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-11-06T19:21:49.228Z"
+}

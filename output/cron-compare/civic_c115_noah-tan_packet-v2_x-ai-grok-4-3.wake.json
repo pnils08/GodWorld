@@ -1,0 +1,58 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "115",
+  "provider": "openrouter",
+  "model": "x-ai/grok-4.3",
+  "configuredWriterModel": "x-ai/grok-4.3",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "noah-tan",
+  "byline": {
+    "name": "Noah Tan",
+    "popid": "POP-00157",
+    "beatDomain": "ENVIRONMENT"
+  },
+  "laneEntries": 93,
+  "quotesLanded": 1,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "canon_recall"
+  ],
+  "toolCalls": 1,
+  "wordCount": 336,
+  "targetWords": "400-700",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": false,
+    "inTargetBy": "code floor 400",
+    "words": 336,
+    "short": "The piece falls short of the 400-word minimum target.",
+    "score": 2,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "566503a4d39fbde1b663aa6240425b796388fd2df56dd66c27a7619a20824024",
+    "costUsd": 0.0006
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 2/3 — The piece falls short of the 400-word minimum target."
+  },
+  "article": "output/cron-compare/staged/civic_c115_noah-tan_packet-v2_x-ai-grok-4-3.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "bug: true }\n{\n  \"popId\": \"POP-00157\",\n  \"name\": \"Noah Tan\",\n  \"recorded\": true,\n  \"text\": \"filed: Ramon Vega stood on the same West Oakland block where the new bench had gone in the day before. The\"\n}"
+  },
+  "ranAt": "2026-11-12T00:17:42.273Z"
+}

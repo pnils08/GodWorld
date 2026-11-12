@@ -1,0 +1,17 @@
+{
+  "draft": "output/cron-compare/culture_c113_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 450",
+    "words": 1247,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "scoredWithoutRhea": true,
+    "draftSha256": "1208efdd700105963488d5415667c51a9aa8c55c5415d4ca76238853e4c735c7"
+  },
+  "ranAt": "2026-10-29T23:20:09.955Z"
+}

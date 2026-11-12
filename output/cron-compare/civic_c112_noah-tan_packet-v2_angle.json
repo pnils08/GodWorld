@@ -1,0 +1,900 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "112",
+  "persona": "noah-tan",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00157",
+      "name": "Noah Tan",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "C112 clear, 48°F — 2 cycles of clear — what this weather does to a day in the city",
+      "approach": "Weather and environment approach: this slice is the cycle's weather row, the streak, and the last three cycles beside it, plus whoever the record says lived it. Science-first ground translation — temperature is context, never the lede. Show what this weather moved. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "environment",
+        "hood": null,
+        "facts": [
+          "This cycle: clear, 48°F, impact 1, comfort 0.65, mood content, 2 cycles of clear",
+          "Last 3 cycles: C109 overcast 49°F, C110 fog 52°F, C111 mild 57°F",
+          "Jonas Patel — dealt with a seasonal health concern",
+          "Xavier Ramington — relied on familiar social circles during cold period",
+          "Derlik Green — relied on familiar social circles during cold period",
+          "Brian Adams — limited social activity due to winter mood"
+        ],
+        "priorCycle": "PRIOR_CYCLE_IN_TABLE",
+        "note": null,
+        "engineHooks": [
+          "Multiple weather signals detected. Could be coincidence or early pattern. (general coverage)",
+          "Daphne Stafford moved from Chinatown to West Oakland — moving up from Chinatown (desk rotation)",
+          "Jasmine Torres moved from Downtown to Chinatown — leaving Downtown for a better fit (desk rotation)"
+        ],
+        "roomIsYours": "the sidewalk, the coats, what this weather does to a plan, who is out in it and who stayed in, what the bay smells like today",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-weather",
+      "hood": null,
+      "score": null,
+      "src": "output/beats/Cycle_Weather.jsonl CycleID 112",
+      "nearby": [
+        {
+          "text": "Avery Santana (mayor gavel): approved — \"Month-eleven, 23-day standard maintained — this fund delivers because Brenda Okoro's team treats every application like family.\"",
+          "src": "output/civic-voice/mayor_gavel_c112.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): approved with conditions — \"OARI works — and D3's right to ask for district-level data before the next expansion. Transparency builds trust.\"",
+          "src": "output/civic-voice/mayor_gavel_c112.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): celebrated — \"Grand Lake's quiet engine gets fuel with strings attached — milestones and audits, because accountability and investment walk together.\"",
+          "src": "output/civic-voice/mayor_gavel_c112.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): celebrated with commitment — \"Downtown businesses waited long enough — and Uptown's next. Councilmember Mobley spoke for his district, and I heard him.\"",
+          "src": "output/civic-voice/mayor_gavel_c112.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): approved — \"Independent oversight verified, remediation proceeds — Cycle 115 milestone stands. This city builds what it promises.\"",
+          "src": "output/civic-voice/mayor_gavel_c112.json"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00142",
+          "name": "Jonas Patel",
+          "profile": "Jonas Patel — MEDICAL EXAMINER — Chinatown",
+          "role": "MEDICAL EXAMINER",
+          "hood": "Chinatown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cycle_Weather.jsonl CycleID 112",
+            "pop": "POP-00142",
+            "rowName": "Jonas Patel",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00181",
+          "name": "Xavier Ramington",
+          "profile": "Xavier Ramington — Herbalist — Temescal",
+          "role": "Herbalist",
+          "hood": "Temescal",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cycle_Weather.jsonl CycleID 112",
+            "pop": "POP-00181",
+            "rowName": "Xavier Ramington",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00244",
+          "name": "Derlik Green",
+          "profile": "Derlik Green — Delivery Driver — Downtown",
+          "role": "Delivery Driver",
+          "hood": "Downtown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cycle_Weather.jsonl CycleID 112",
+            "pop": "POP-00244",
+            "rowName": "Derlik Green",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00258",
+          "name": "Brian Adams",
+          "profile": "Brian Adams — Janitor — Jack London",
+          "role": "Janitor",
+          "hood": "Jack London",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cycle_Weather.jsonl CycleID 112",
+            "pop": "POP-00258",
+            "rowName": "Brian Adams",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00004",
+          "name": "Lucia Polito",
+          "profile": "Lucia Polito — Aura Wellness Practitioner",
+          "role": "Aura Wellness Practitioner",
+          "hood": "Fruitvale",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "YLwQtb9NjkQY1U6pLxkHsa",
+            "customId": "cp-POP-00004-c102-PRESS",
+            "cycle": 102,
+            "excerpt": "Just yesterday, I was at the Fruitvale BART area, and it’s clear something’s shifting.",
+            "highlightKind": "weather",
+            "entity": "clear",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00245",
+          "name": "Jaren Lanning",
+          "profile": "Jaren Lanning — Mechanic",
+          "role": "Mechanic",
+          "hood": "Uptown",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "uRJjmyeq7MYASsLCVxsAGF",
+            "customId": "cp-POP-00245-c98-evening",
+            "cycle": 98,
+            "excerpt": "Maybe I should take a walk later, clear my head.",
+            "highlightKind": "weather",
+            "entity": "clear",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00297",
+          "name": "Jorge Wusther",
+          "profile": "Jorge Wusther — Nurse aide",
+          "role": "Nurse aide",
+          "hood": "Uptown",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "HciYeFSPSCVSjHbALFKZxK",
+            "customId": "cp-POP-00297-c101-CONVO",
+            "cycle": 101,
+            "excerpt": "Saw him launch one clear into the bleachers last week.",
+            "highlightKind": "weather",
+            "entity": "clear",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00325",
+          "name": "Isabel Lopes",
+          "profile": "Isabel Lopes — ESL Teacher",
+          "role": "ESL Teacher",
+          "hood": "Fruitvale",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "Xd5uAr71HwtiB73RB3wTUP",
+            "customId": "cp-POP-00325-c102-CONVO",
+            "cycle": 102,
+            "excerpt": "\" I shrug, trying to laugh it off, but it’s clear the dream’s still got me tangled.",
+            "highlightKind": "weather",
+            "entity": "clear",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00722",
+          "name": "Daniel Cloak",
+          "profile": "Daniel Cloak — Bakery Worker",
+          "role": "Bakery Worker",
+          "hood": "West Oakland",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "3szZQxu4JPqx6kSNGkibVm",
+            "customId": "cp-POP-00722-c107-PRESS",
+            "cycle": 107,
+            "excerpt": "I’ve heard folks talking about the funds coming in, but it’s hard to tell who’s really getting helped—it feels like whispers more than clear answers.",
+            "highlightKind": "weather",
+            "entity": "clear",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00756",
+          "name": "Ramon Solano",
+          "profile": "Ramon Solano — Senior Pastor / Faith Leader",
+          "role": "Senior Pastor / Faith Leader",
+          "hood": "Fruitvale",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "54UndHt6Z6f18KrPFwXNp3",
+            "customId": "cp-POP-00756-c105-PRESS",
+            "cycle": 105,
+            "excerpt": "I've heard that the Oakland Alternative Response Initiative is supposed to be making our community safer, but from what I see in my neighborhood, it's not entirely clear that's happening.",
+            "highlightKind": "weather",
+            "entity": "clear",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00789",
+          "name": "Elias Varek",
+          "profile": "Elias Varek — Founder of Civis Systems",
+          "role": "Founder of Civis Systems",
+          "hood": "West Oakland",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "sCctzCSoMB9TBDyp44SKY6",
+            "customId": "cp-POP-00789-c103-afternoon",
+            "cycle": 103,
+            "excerpt": "There’s an understanding between us, unspoken but clear: we don’t step on each other’s work.",
+            "highlightKind": "weather",
+            "entity": "clear",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-01063",
+          "name": "Alma Vasquez",
+          "profile": "Alma Vasquez — sculptor",
+          "role": "sculptor",
+          "hood": "Laurel",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "8SSogcHPbgqDhP5QJ3E6aM",
+            "customId": "cp-POP-01063-c111-PRESS",
+            "cycle": 111,
+            "excerpt": "I live in Laurel, and while I'm aware of the general vibe around Oakland, I don't have a clear view of what's going on in Rockridge.",
+            "highlightKind": "weather",
+            "entity": "clear",
+            "predicate": "observe"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C112",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-7cd6ffd2aeb3"
+      },
+      {
+        "t": "FACT",
+        "text": "C112 clear, 48°F — 2 cycles of clear",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 112",
+        "id": "F-b34b4f2d6356"
+      },
+      {
+        "t": "FACT",
+        "text": "C112 clear, 48°F — 2 cycles of clear; 4 residents on the record lived it.",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 112",
+        "id": "F-404e2e2c1b89"
+      },
+      {
+        "t": "FACT",
+        "text": "This cycle: clear, 48°F, impact 1, comfort 0.65, mood content, 2 cycles of clear",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 112",
+        "id": "F-84fc6d6fee27"
+      },
+      {
+        "t": "FACT",
+        "text": "Last 3 cycles: C109 overcast 49°F, C110 fog 52°F, C111 mild 57°F",
+        "src": "output/beats/Cycle_Weather.jsonl",
+        "id": "F-f385ee178ae7"
+      },
+      {
+        "t": "FACT",
+        "text": "Jonas Patel — dealt with a seasonal health concern",
+        "src": "output/world_summary_c112.md ## Who Lived It",
+        "id": "F-d8444195813e"
+      },
+      {
+        "t": "FACT",
+        "text": "Xavier Ramington — relied on familiar social circles during cold period",
+        "src": "output/world_summary_c112.md ## Who Lived It",
+        "id": "F-b087e6d932d4"
+      },
+      {
+        "t": "FACT",
+        "text": "Derlik Green — relied on familiar social circles during cold period",
+        "src": "output/world_summary_c112.md ## Who Lived It",
+        "id": "F-b7f76d035d0b"
+      },
+      {
+        "t": "FACT",
+        "text": "Brian Adams — limited social activity due to winter mood",
+        "src": "output/world_summary_c112.md ## Who Lived It",
+        "id": "F-2490b7dab574"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "street",
+    "candidates": [
+      {
+        "pop": "POP-00142",
+        "name": "Jonas Patel",
+        "role": "MEDICAL EXAMINER",
+        "hood": "Chinatown",
+        "profile": "Jonas Patel — MEDICAL EXAMINER — Chinatown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cycle_Weather.jsonl CycleID 112",
+          "pop": "POP-00142",
+          "rowName": "Jonas Patel",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00181",
+        "name": "Xavier Ramington",
+        "role": "Herbalist",
+        "hood": "Temescal",
+        "profile": "Xavier Ramington — Herbalist — Temescal",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cycle_Weather.jsonl CycleID 112",
+          "pop": "POP-00181",
+          "rowName": "Xavier Ramington",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00244",
+        "name": "Derlik Green",
+        "role": "Delivery Driver",
+        "hood": "Downtown",
+        "profile": "Derlik Green — Delivery Driver — Downtown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cycle_Weather.jsonl CycleID 112",
+          "pop": "POP-00244",
+          "rowName": "Derlik Green",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00258",
+        "name": "Brian Adams",
+        "role": "Janitor",
+        "hood": "Jack London",
+        "profile": "Brian Adams — Janitor — Jack London",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cycle_Weather.jsonl CycleID 112",
+          "pop": "POP-00258",
+          "rowName": "Brian Adams",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00004",
+        "name": "Lucia Polito",
+        "role": "Aura Wellness Practitioner",
+        "hood": "Fruitvale",
+        "profile": "Lucia Polito — Aura Wellness Practitioner",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "YLwQtb9NjkQY1U6pLxkHsa",
+          "customId": "cp-POP-00004-c102-PRESS",
+          "cycle": 102,
+          "excerpt": "Just yesterday, I was at the Fruitvale BART area, and it’s clear something’s shifting.",
+          "highlightKind": "weather",
+          "entity": "clear",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "Just yesterday, I was at the Fruitvale BART area, and it’s clear something’s shifting."
+      },
+      {
+        "pop": "POP-00245",
+        "name": "Jaren Lanning",
+        "role": "Mechanic",
+        "hood": "Uptown",
+        "profile": "Jaren Lanning — Mechanic",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "uRJjmyeq7MYASsLCVxsAGF",
+          "customId": "cp-POP-00245-c98-evening",
+          "cycle": 98,
+          "excerpt": "Maybe I should take a walk later, clear my head.",
+          "highlightKind": "weather",
+          "entity": "clear",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "Maybe I should take a walk later, clear my head."
+      },
+      {
+        "pop": "POP-00297",
+        "name": "Jorge Wusther",
+        "role": "Nurse aide",
+        "hood": "Uptown",
+        "profile": "Jorge Wusther — Nurse aide",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "HciYeFSPSCVSjHbALFKZxK",
+          "customId": "cp-POP-00297-c101-CONVO",
+          "cycle": 101,
+          "excerpt": "Saw him launch one clear into the bleachers last week.",
+          "highlightKind": "weather",
+          "entity": "clear",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "Saw him launch one clear into the bleachers last week."
+      },
+      {
+        "pop": "POP-00325",
+        "name": "Isabel Lopes",
+        "role": "ESL Teacher",
+        "hood": "Fruitvale",
+        "profile": "Isabel Lopes — ESL Teacher",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "Xd5uAr71HwtiB73RB3wTUP",
+          "customId": "cp-POP-00325-c102-CONVO",
+          "cycle": 102,
+          "excerpt": "\" I shrug, trying to laugh it off, but it’s clear the dream’s still got me tangled.",
+          "highlightKind": "weather",
+          "entity": "clear",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "\" I shrug, trying to laugh it off, but it’s clear the dream’s still got me tangled."
+      },
+      {
+        "pop": "POP-00722",
+        "name": "Daniel Cloak",
+        "role": "Bakery Worker",
+        "hood": "West Oakland",
+        "profile": "Daniel Cloak — Bakery Worker",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "3szZQxu4JPqx6kSNGkibVm",
+          "customId": "cp-POP-00722-c107-PRESS",
+          "cycle": 107,
+          "excerpt": "I’ve heard folks talking about the funds coming in, but it’s hard to tell who’s really getting helped—it feels like whispers more than clear answers.",
+          "highlightKind": "weather",
+          "entity": "clear",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I’ve heard folks talking about the funds coming in, but it’s hard to tell who’s really getting helped—it feels like whispers more than clear answers."
+      },
+      {
+        "pop": "POP-00756",
+        "name": "Ramon Solano",
+        "role": "Senior Pastor / Faith Leader",
+        "hood": "Fruitvale",
+        "profile": "Ramon Solano — Senior Pastor / Faith Leader",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "54UndHt6Z6f18KrPFwXNp3",
+          "customId": "cp-POP-00756-c105-PRESS",
+          "cycle": 105,
+          "excerpt": "I've heard that the Oakland Alternative Response Initiative is supposed to be making our community safer, but from what I see in my neighborhood, it's not entirely clear that's happening.",
+          "highlightKind": "weather",
+          "entity": "clear",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I've heard that the Oakland Alternative Response Initiative is supposed to be making our community safer, but from what I see in my neighborhood, it's not entirely clear that's happening."
+      },
+      {
+        "pop": "POP-00789",
+        "name": "Elias Varek",
+        "role": "Founder of Civis Systems",
+        "hood": "West Oakland",
+        "profile": "Elias Varek — Founder of Civis Systems",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "sCctzCSoMB9TBDyp44SKY6",
+          "customId": "cp-POP-00789-c103-afternoon",
+          "cycle": 103,
+          "excerpt": "There’s an understanding between us, unspoken but clear: we don’t step on each other’s work.",
+          "highlightKind": "weather",
+          "entity": "clear",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "There’s an understanding between us, unspoken but clear: we don’t step on each other’s work."
+      },
+      {
+        "pop": "POP-01063",
+        "name": "Alma Vasquez",
+        "role": "sculptor",
+        "hood": "Laurel",
+        "profile": "Alma Vasquez — sculptor",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "8SSogcHPbgqDhP5QJ3E6aM",
+          "customId": "cp-POP-01063-c111-PRESS",
+          "cycle": 111,
+          "excerpt": "I live in Laurel, and while I'm aware of the general vibe around Oakland, I don't have a clear view of what's going on in Rockridge.",
+          "highlightKind": "weather",
+          "entity": "clear",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I live in Laurel, and while I'm aware of the general vibe around Oakland, I don't have a clear view of what's going on in Rockridge."
+      },
+      {
+        "pop": "POP-01096",
+        "name": "Priyanka Raman",
+        "role": "Principal, Oakland Tech Collective",
+        "hood": "West Oakland",
+        "profile": "Priyanka Raman — Principal, Oakland Tech Collective",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "kz85AnvtbbBz5VyyDDxNtc",
+          "customId": "cp-POP-01096-c107-midday",
+          "cycle": 107,
+          "excerpt": "I keep noticing how the light hits the sidewalk around 2 PM—sharp and clear, like it’s pointing things out to me.",
+          "highlightKind": "weather",
+          "entity": "clear",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I keep noticing how the light hits the sidewalk around 2 PM—sharp and clear, like it’s pointing things out to me."
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Noah Tan",
+    "popid": "POP-00157"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-weather",
+      "angle": "C112 clear, 48°F — 2 cycles of clear — what this weather does to a day in the city",
+      "label": "C112 clear, 48°F — 2 cycles of clear",
+      "hookLine": "C112 clear, 48°F — 2 cycles of clear; 4 residents on the record lived it.",
+      "hood": null,
+      "citizens": [
+        "Jonas Patel (POP-00142)",
+        "Xavier Ramington (POP-00181)",
+        "Derlik Green (POP-00244)",
+        "Brian Adams (POP-00258)"
+      ],
+      "popids": [
+        "POP-00142",
+        "POP-00181",
+        "POP-00244",
+        "POP-00258"
+      ],
+      "ref": "output/beats/Cycle_Weather.jsonl CycleID 112",
+      "cycle": 112
+    },
+    "approach": "Weather and environment approach: this slice is the cycle's weather row, the streak, and the last three cycles beside it, plus whoever the record says lived it. Science-first ground translation — temperature is context, never the lede. Show what this weather moved. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "ENVIRONMENT-SLICE-2",
+    "kind": "beat-weather",
+    "seat": {
+      "slug": "noah-tan",
+      "name": "Noah Tan",
+      "popid": "POP-00157",
+      "desk": "civic",
+      "domain": "environment",
+      "builder": "buildEnvironmentSlice.js"
+    },
+    "hood": null,
+    "pulse": {
+      "className": "beat-weather",
+      "score": 100,
+      "label": "C112 clear, 48°F — 2 cycles of clear",
+      "hood": null,
+      "source": "output/beats/Cycle_Weather.jsonl CycleID 112"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "C112 clear, 48°F — 2 cycles of clear — what this weather does to a day in the city",
+      "hookLine": "C112 clear, 48°F — 2 cycles of clear; 4 residents on the record lived it.",
+      "anchorFacts": [
+        "This cycle: clear, 48°F, impact 1, comfort 0.65, mood content, 2 cycles of clear",
+        "Last 3 cycles: C109 overcast 49°F, C110 fog 52°F, C111 mild 57°F",
+        "Jonas Patel — dealt with a seasonal health concern",
+        "Xavier Ramington — relied on familiar social circles during cold period",
+        "Derlik Green — relied on familiar social circles during cold period",
+        "Brian Adams — limited social activity due to winter mood"
+      ],
+      "evidence": [
+        {
+          "text": "This cycle: clear, 48°F, impact 1, comfort 0.65, mood content, 2 cycles of clear",
+          "src": "output/beats/Cycle_Weather.jsonl CycleID 112"
+        },
+        {
+          "text": "Last 3 cycles: C109 overcast 49°F, C110 fog 52°F, C111 mild 57°F",
+          "src": "output/beats/Cycle_Weather.jsonl"
+        },
+        {
+          "text": "Jonas Patel — dealt with a seasonal health concern",
+          "src": "output/world_summary_c112.md ## Who Lived It"
+        },
+        {
+          "text": "Xavier Ramington — relied on familiar social circles during cold period",
+          "src": "output/world_summary_c112.md ## Who Lived It"
+        },
+        {
+          "text": "Derlik Green — relied on familiar social circles during cold period",
+          "src": "output/world_summary_c112.md ## Who Lived It"
+        },
+        {
+          "text": "Brian Adams — limited social activity due to winter mood",
+          "src": "output/world_summary_c112.md ## Who Lived It"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": {
+        "state": "PRIOR_CYCLE_IN_TABLE",
+        "vs": 111
+      },
+      "hooks": [
+        {
+          "text": "Multiple weather signals detected. Could be coincidence or early pattern.",
+          "angle": "general coverage",
+          "domain": "WEATHER",
+          "hood": null,
+          "priority": 2
+        },
+        {
+          "text": "Daphne Stafford moved from Chinatown to West Oakland — moving up from Chinatown",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "West Oakland",
+          "priority": 5
+        },
+        {
+          "text": "Jasmine Torres moved from Downtown to Chinatown — leaving Downtown for a better fit",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "Chinatown",
+          "priority": 5
+        }
+      ],
+      "note": null,
+      "pageVoices": [],
+      "roomIsYours": "the sidewalk, the coats, what this weather does to a plan, who is out in it and who stayed in, what the bay smells like today"
+    },
+    "citizens": [
+      {
+        "popid": "POP-00142",
+        "name": "Jonas Patel",
+        "role": "MEDICAL EXAMINER",
+        "neighborhood": "Chinatown",
+        "business": null,
+        "profile": "Jonas Patel — MEDICAL EXAMINER — Chinatown",
+        "why": "lived the weather this cycle (Who Lived It)"
+      },
+      {
+        "popid": "POP-00181",
+        "name": "Xavier Ramington",
+        "role": "Herbalist",
+        "neighborhood": "Temescal",
+        "business": null,
+        "profile": "Xavier Ramington — Herbalist — Temescal",
+        "why": "lived the weather this cycle (Who Lived It)"
+      },
+      {
+        "popid": "POP-00244",
+        "name": "Derlik Green",
+        "role": "Delivery Driver",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Derlik Green — Delivery Driver — Downtown",
+        "why": "lived the weather this cycle (Who Lived It)"
+      },
+      {
+        "popid": "POP-00258",
+        "name": "Brian Adams",
+        "role": "Janitor",
+        "neighborhood": "Jack London",
+        "business": null,
+        "profile": "Brian Adams — Janitor — Jack London",
+        "why": "lived the weather this cycle (Who Lived It)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Cycle_Weather.jsonl CycleID 112",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Noah Tan this cycle)",
+      "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Noah Tan",
+    "popid": "POP-00157",
+    "text": "I'm standing at the corner of College and Manila, coffee in hand, watching people walk past with their coats unbuttoned. Two cycles of clear sky after a week of overcast, fog, and mild gray — the air has that sharp, honest feel to it, the kind that makes you notice everyone's face. I want to write about what this weather actually does to a day, not the temperature itself. The record says four people lived this cycle in specific ways: Jonas Patel dealt with a seasonal health concern, Xavier Ramington and Derlik Green both leaned on familiar social circles during the cold stretch, and Brian Adams pulled back from social activity because of winter mood. That's the story — the same clear sky, fo",
+    "plan": {
+      "chase": "I'm standing at the corner of College and Manila, coffee in hand, watching people walk past with their coats unbuttoned. Two cycles of clear sky after a week of overcast, fog, and mild gray — the air has that sharp, honest feel to it, the kind that makes you notice everyone's face. I want to write about what this weather actually does to a day, not the temperature itself. The record says four people lived this cycle in specific ways: Jonas Patel dealt with a seasonal health concern, Xavier Ramington and Derlik Green both leaned on familiar social circles during the cold stretch, and Brian Adams pulled back from social activity because of winter mood. That's the story — the same clear sky, fo",
+      "focus": "How the first clear stretch after a gray week changes — or fails to change — the daily patterns of four residents who each weathered the cold differently.",
+      "why": "The weather is context, not the lede. What matters is what this clear sky moved: who it pulled out, who it left inside, and what the cold weeks before it are still doing to people's routines.",
+      "checks": [
+        "Keep temperature out of the lede; use it only as grounding context.",
+        "Write at least 400 words — no rhetorical-question endings.",
+        "End with what remains unfinished for the subject, not a question.",
+        "Use only the four named residents from the slice; no invented people or places.",
+        "Show the gap between the clear sky and the lingering effects of the cold period."
+      ],
+      "targets": [
+        {
+          "pop": "POP-00142",
+          "question": "What does a clear day change for someone who spent the cold weeks managing a seasonal health concern — and what does it not change?",
+          "basis": "Jonas Patel dealt with a seasonal health concern during the cold period; the clear cycle may ease or merely shift that burden."
+        },
+        {
+          "pop": "POP-00181",
+          "question": "How does relying on familiar social circles during the cold period shape what this clear day means — is it a relief, or just another day in the same rhythm?",
+          "basis": "Xavier Ramington relied on familiar social circles during the cold period; the clear sky may or may not alter that reliance."
+        },
+        {
+          "pop": "POP-00244",
+          "question": "For someone whose work keeps them moving through the city, does a clear day change the route, the pace, or the people they check in with?",
+          "basis": "Derlik Green relied on familiar social circles during the cold period; as a delivery driver, the clear weather may shift his day's texture."
+        },
+        {
+          "pop": "POP-00258",
+          "question": "What does a clear day look like from inside, when winter mood has already limited your social activity — does the sun reach you, or does it stay outside?",
+          "basis": "Brian Adams limited social activity due to winter mood; the clear cycle may not automatically pull him out."
+        }
+      ],
+      "interpretation": "The clear sky is the same for everyone, but the cold weeks before it left different marks. Some people leaned in, some pulled back. The weather didn't erase those patterns — it just made them more visible. The story is in that visibility.",
+      "unverifiedLead": [
+        "The clear stretch may be easing some routines while leaving others unchanged — the cold's effects don't lift with the clouds.",
+        "Familiar social circles that carried people through the cold may still be the anchor now, even with better weather.",
+        "Winter mood may not break with a single clear day — the pullback could persist beyond the forecast."
+      ],
+      "closeQuestion": "What remains unfinished is whether the clear sky actually reaches the people who spent the cold weeks inside — or whether the weather changes the day without changing the pattern."
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Avery Santana (mayor gavel): approved — \"Month-eleven, 23-day standard maintained — this fund delivers because Brenda Okoro's team treats every application like family.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c112.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): approved with conditions — \"OARI works — and D3's right to ask for district-level data before the next expansion. Transparency builds trust.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c112.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): celebrated — \"Grand Lake's quiet engine gets fuel with strings attached — milestones and audits, because accountability and investment walk together.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c112.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): celebrated with commitment — \"Downtown businesses waited long enough — and Uptown's next. Councilmember Mobley spoke for his district, and I heard him.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c112.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): approved — \"Independent oversight verified, remediation proceeds — Cycle 115 milestone stands. This city builds what it promises.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c112.json",
+      "popids": []
+    }
+  ],
+  "laneEntries": 95,
+  "angleCapHits": 0,
+  "ranAt": "2026-10-21T11:16:22.840Z"
+}

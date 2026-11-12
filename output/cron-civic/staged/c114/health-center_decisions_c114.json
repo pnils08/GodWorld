@@ -1,0 +1,25 @@
+{
+  "initiative": "INIT-005",
+  "initiativeId": "INIT-005",
+  "cycle": 114,
+  "primaryVoice": "Chen-Ramirez (health_center-001)",
+  "consolidatedFrom": [
+    "STMT-114-health_center-001 (Chen-Ramirez — Second quarterly clinical verification audit — filed to HCAI and council clerk)",
+    "STMT-114-health_center-002 (Chen-Ramirez — Frontline verification — merchant and clinic-staff walkthrough at Telegraph &...)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-005",
+    "ImplementationPhase": "operational",
+    "MilestoneNotes": "C114: Filed second quarterly clinical verification packet (intake by service line, staffing ratios vs. license commitments) to HCAI and council clerk.",
+    "NextScheduledAction": "Operator staffing reconciliation review + third quarterly verification packet prep",
+    "NextActionCycle": 115,
+    "LastWorkCycle": 114,
+    "LastWorkSeat": "civic-office-council-d7, proj-health-center"
+  },
+  "_moveFold": {
+    "moveIds": [
+      "MV-113-civic-office-council-d7-2026-10-28",
+      "MV-113-proj-health-center-2026-10-30"
+    ]
+  }
+}

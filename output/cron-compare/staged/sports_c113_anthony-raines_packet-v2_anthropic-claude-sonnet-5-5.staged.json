@@ -1,0 +1,78 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "113",
+  "persona": "anthony-raines",
+  "byline": "Anthony Raines",
+  "bylinePopid": "POP-00017",
+  "article": "output/cron-compare/staged/sports_c113_anthony-raines_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Danny Horn",
+        "role": "mentioned",
+        "popid": "POP-00022",
+        "floor": true
+      },
+      {
+        "name": "Desmond Morton",
+        "role": "mentioned",
+        "popid": "POP-00051",
+        "floor": true
+      },
+      {
+        "name": "Frank Reyna",
+        "role": "mentioned",
+        "popid": "POP-00079",
+        "floor": true
+      },
+      {
+        "name": "Mike Paulson",
+        "role": "mentioned",
+        "popid": "POP-00527",
+        "floor": true
+      },
+      {
+        "name": "Vladimir Gonzalez",
+        "role": "mentioned",
+        "popid": "POP-00598",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "A's · rumor — The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+        "sourceRef": "world_summary_c113.md ## Sports"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-77e7b3224ebd",
+    "draftSha256": "1857f14477e78deabb8bde8e1c9ed3c17a8f6b570a372bc3abb59f3f3853f578",
+    "verdict": "output/cron-compare/sports_c113_anthony-raines_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-10-26T23:19:14.734Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 827,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "1857f14477e78deabb8bde8e1c9ed3c17a8f6b570a372bc3abb59f3f3853f578",
+      "costUsd": 0.0015
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-26T23:19:20.204Z"
+}

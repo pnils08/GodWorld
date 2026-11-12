@@ -1,0 +1,12 @@
+{
+  "status": "ungated-sample",
+  "desk": "sports",
+  "cycle": "114",
+  "persona": "hal-richmond",
+  "byline": "Hal Richmond",
+  "bylinePopid": "POP-00007",
+  "article": "output/test-shell/20261111-012443-hal-richmond-live/samples/sports_c114_hal-richmond_packet-v2_anthropic-claude-sonnet-5-5.sample.md",
+  "quotesLanded": 0,
+  "note": "UNGATED sample (--no-gate, S332): writer+quotes ran on raw API; the Rhea gate was skipped (needs subscription). NOT canon, review-only.",
+  "builtAt": "2026-11-11T07:24:51.970Z"
+}

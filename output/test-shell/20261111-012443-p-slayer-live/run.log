@@ -1,0 +1,80 @@
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌁ auth for agents [www.vestauth.com]
+Wake 3 WRITE — sports c114 (p-slayer)
+===================================
+[run] 2026-11-11T07:24:44.707Z byline: P Slayer (POP-00008, persona)
+[run] 2026-11-11T07:24:44.756Z writing on typed Packet (21924 B injected state + stance anchor)...
+[run] 2026-11-11T07:24:44.756Z writer tools ON: max 4 calls (canon_recall only)
+[run] 2026-11-11T07:24:44.757Z reward loop ON (package): rubric shown, contract scored, grade carried
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ override existing { override: true }
+Headless Desk Writer — sports desk
+===================================
+model=x-ai/grok-4.3 maxTurns=15
+[INFO] 2026-11-11T07:24:45.031Z lane state-file injected: output/test-shell/20261111-012443-p-slayer-live/sports_c114_p-slayer_packet-v2_x-ai-grok-4-3.state.json (21867 chars) — full-summary blob bypassed
+[INFO] 2026-11-11T07:24:45.250Z packet-only compose via OpenRouter (x-ai/grok-4.3, 0 live tools)...
+[INFO] 2026-11-11T07:25:05.401Z tool trace: 5 call(s) → sports_c115_packet-v2_p-slayer.tooltrace.json
+[INFO] 2026-11-11T07:25:05.411Z tool facts → manifest: none used (5 call(s))
+[INFO] 2026-11-11T07:25:05.418Z LEP/2 lexical observations deferred to Rhea (AM-0828a603e186): UNAPPROVED_NUMBER=-100
+
+--- run summary ---
+{
+  "desk": "sports",
+  "cycle": "115",
+  "model": "x-ai/grok-4.3",
+  "turns": 6,
+  "maxTurns": 15,
+  "usageInputTokens": 25855,
+  "usageOutputTokens": 1877,
+  "savedFiles": [
+    "output/test-shell/20261111-012443-p-slayer-live/sports_c115_p-slayer_packet-v2_x-ai-grok-4-3.md"
+  ],
+  "compareAgainst": "output/desk-output/sports_c115.md",
+  "durationMs": 20414,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-11-11T07:25:05.421Z"
+}
+
+tokens: 25855 in / 1877 out · 6 turn(s) · 20414ms
+compare: diff output/desk-output/sports_c115.md  ↔  output/test-shell/20261111-012443-p-slayer-live/sports_c115_p-slayer_packet-v2_x-ai-grok-4-3.md
+[run] 2026-11-11T07:25:05.449Z s344 slot observations: s344-slot=missing-unanswered-question
+[run] 2026-11-11T07:25:05.451Z gate SKIPPED (--no-gate sample) — output is ungated, NOT canon
+
+=== write disposition: UNGATED-SAMPLE ===
+{
+  "mode": "wake-write",
+  "desk": "sports",
+  "cycle": "114",
+  "provider": "openrouter",
+  "model": "x-ai/grok-4.3",
+  "configuredWriterModel": "x-ai/grok-4.3",
+  "gateModel": "sonnet",
+  "persona": "p-slayer",
+  "byline": {
+    "name": "P Slayer",
+    "popid": "POP-00008",
+    "beatDomain": "SPORTS"
+  },
+  "laneEntries": 15,
+  "quotesLanded": 4,
+  "disposition": "ungated-sample",
+  "rheaPass": null,
+  "rheaFlagCount": null,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [],
+  "toolCalls": 0,
+  "wordCount": 465,
+  "targetWords": "400-700",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": null,
+  "gradeRecord": null,
+  "article": "output/test-shell/20261111-012443-p-slayer-live/samples/sports_c114_p-slayer_packet-v2_x-ai-grok-4-3.sample.md",
+  "selfRecord": null,
+  "ranAt": "2026-11-11T07:25:05.454Z"
+}

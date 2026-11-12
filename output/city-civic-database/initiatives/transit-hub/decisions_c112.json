@@ -1,0 +1,16 @@
+{
+  "initiative": "INIT-003",
+  "initiativeId": "INIT-003",
+  "cycle": 112,
+  "primaryVoice": "move-fold",
+  "consolidatedFrom": [],
+  "trackerUpdates": {
+    "LastWorkCycle": 112,
+    "LastWorkSeat": "proj-transit-hub"
+  },
+  "_moveFold": {
+    "moveIds": [
+      "MV-111-proj-transit-hub-2026-10-16"
+    ]
+  }
+}

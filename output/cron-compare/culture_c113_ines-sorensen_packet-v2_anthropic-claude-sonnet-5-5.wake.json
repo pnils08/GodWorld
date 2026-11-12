@@ -1,0 +1,56 @@
+{
+  "mode": "wake-write",
+  "desk": "culture",
+  "cycle": "113",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "ines-sorensen",
+  "byline": {
+    "name": "Ines Sorensen",
+    "popid": "POP-01211",
+    "beatDomain": "COMMUNITY"
+  },
+  "laneEntries": 23,
+  "quotesLanded": 4,
+  "disposition": "staged",
+  "rheaPass": null,
+  "rheaFlagCount": null,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [],
+  "toolCalls": 0,
+  "wordCount": 425,
+  "targetWords": "300-600",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": false,
+    "inTarget": true,
+    "inTargetBy": "code floor 300",
+    "words": 425,
+    "short": "The names and framing precede the quotes for Omar Amici and Dax Monroe instead of putting the line first, and the quotes were gathered by reporter questions rather than drawn from what citizens wrote on their own pages.",
+    "score": 3,
+    "model": "google/gemini-3.7-flash",
+    "scoredWithoutRhea": true,
+    "draftSha256": "6bc085776c2ffdf58a2fa4711edc86b0adfe0b51325538a13de685fb1f05744e"
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/4 — The names and framing precede the quotes for Omar Amici and Dax Monroe instead of putting the line first, and the quotes were gathered by reporter questions rather than drawn from what citizens wrote on their own pages."
+  },
+  "article": "output/cron-compare/staged/culture_c113_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5.staged-1815.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "ue }\n{\n  \"popId\": \"POP-01211\",\n  \"name\": \"Ines Sorensen\",\n  \"recorded\": true,\n  \"text\": \"filed: \\\"The A's success is all anyone can talk about around here. I mean, I'm a huge fan, and my husband De\"\n}"
+  },
+  "ranAt": "2026-11-01T18:15:48.656Z"
+}

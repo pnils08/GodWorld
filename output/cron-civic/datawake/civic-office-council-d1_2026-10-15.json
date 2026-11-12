@@ -1,0 +1,23 @@
+{
+  "office": "council_d1",
+  "agentDir": "civic-office-council-d1",
+  "holder": "Denise Carter",
+  "popid": "POP-00501",
+  "title": "City Council District 1",
+  "date": "2026-10-15",
+  "cycle": 111,
+  "model": "deepseek/deepseek-v4-flash-0731",
+  "statement": "I'm standing with Brooklyn — not because it's easy, but because it's right. The numbers don't lie: sentiment at 0.21 against a citywide 0.34, property crime at 34, and a decay momentum of 4 that's been building. This isn't a blip; it's a pattern. And the people I represent in Brooklyn are feeling it every day — Kaila closing the bakery earlier, Drago and Sefu watching their block change, Minh seeing fewer jobs come through. I've already filed the Tenant Defense Fund to keep families in their homes. Now I'm taking the Stabilization Fund to the storefronts that are going quiet. If Brooklyn falls, West Oakland falls. We don't leave our own behind.",
+  "moves": [
+    {
+      "type": "work",
+      "payload": {
+        "initiativeId": "INIT-010"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": "Working the Tenant Defense Fund through the vote pipeline ensures Brooklyn families have legal defense against displacement — that's the immediate lever I'm pulling this week.",
+  "ranAt": "2026-10-15T10:45:24.862Z",
+  "fellBackFrom": null
+}

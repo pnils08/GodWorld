@@ -1,0 +1,70 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "112",
+  "provider": "openrouter",
+  "model": "anthropic/claude-haiku-5.5",
+  "configuredWriterModel": "anthropic/claude-haiku-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "lila-mezran",
+  "byline": {
+    "name": "Dr. Lila Mezran",
+    "popid": "POP-00154",
+    "beatDomain": "HEALTH"
+  },
+  "laneEntries": 94,
+  "quotesLanded": 4,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [],
+  "toolCalls": 0,
+  "wordCount": 1122,
+  "targetWords": "evidence-bounded",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [
+    {
+      "text": "Jonas Patel dealt with a seasonal health concern (Chinatown).",
+      "run": "jonas patel seasonal health concern chinatown"
+    },
+    {
+      "text": "Elle Lilo cooked healthier meals all week and felt the difference (Jack London).",
+      "run": "cooked healthier meals all week and"
+    },
+    {
+      "text": "Elena Leon cooked healthier meals all week and felt the difference (Jack London).",
+      "run": "cooked healthier meals all week and"
+    }
+  ],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": false,
+    "closed": false,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 1122,
+    "short": "The opening begins with anecdotal scene-setting instead of a Packet-backed health-service or access fact, and the closing ends on a rhetorical question rather than stating the next record still needed.",
+    "score": 2,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "7de1e2fa840198538a7597d6c320b94e57bb5adccc51505dd0c09fe27cd74bd6",
+    "costUsd": 0.0019
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 2/4 — The opening begins with anecdotal scene-setting instead of a Packet-backed health-service or access fact, and the closing ends on a rhetorical question rather than stating the next record still needed."
+  },
+  "article": "output/cron-compare/staged/civic_c112_lila-mezran_packet-v2_anthropic-claude-haiku-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "rom ../.config/godworld/.env // tip: ◈ secrets for agents [www.dotenvx.com]\n{\n  \"popId\": \"POP-00154\",\n  \"name\": \"Lila Mezran\",\n  \"recorded\": true,\n  \"text\": \"filed: Six Names for 142 Sick Residents\"\n}"
+  },
+  "ranAt": "2026-10-19T23:18:21.376Z",
+  "dispositionReconciledAt": "2026-10-24T17:00:01.984Z"
+}

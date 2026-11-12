@@ -1,0 +1,1057 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-01210",
+    "name": "Tamsin Pruitt",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "The lives of C113, 2026-10-27: 11 people — Orion Kerkering moved into a place of their own in Lake Merritt, renting",
+    "approach": "Lives approach: this slice is the people something happened to this Cycle — a birth, a death in the house, a hospital stay, a retirement, a promotion; a household set up or a place of their own; a win or a loss on the book; the people a turn of the city reached and what it did to their day; and the smaller moments the record kept. Each person gets their own passage: the event, then the thread under it — the stay or strain that led there, the other lines the record kept for them, what the Tribune or this page already said of them, and what they did next if the record says. Read the thread in order and name where two lines of it do not agree; do not restate a ledger value as the story. The fact exactly right; never a trend, never a number first; the person, not the system the event belongs to. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent p",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "lives",
+      "hood": null,
+      "facts": [
+        "Orion Kerkering moved into a place of their own in Lake Merritt, renting (C113)",
+        "Orion Kerkering — on the log, C113: dodged the running groups circling the lake and found a quiet bench near the pergola",
+        "Orion Kerkering — on the log, C113: closed their eyes during the choir solo and actually felt the tension leave their shoulders",
+        "Orion Kerkering — on the log, C113: woke up at 5 AM just to have thirty minutes of total silence before the house woke up",
+        "Orion Kerkering — on the log, C113: organized the clothing drive donations and recognized a coat they had donated two years ago",
+        "Orion Kerkering — the Tribune named them in a piece headlined Unsung Architects of a Dynasty (Sports)",
+        "Isla Sike moved into a place of their own in West Oakland, renting (C113)",
+        "Isla Sike — on the log, C112: had a routine period at work with no major changes",
+        "Isla Sike — on the log, C112: a stack of stabilization fund applications waits on the community board",
+        "Isla Sike — on the log, C113: heard a kid explain something to a parent with total authority and grinned",
+        "Isla Sike — on the log, C113: heard Jack London was lively last night",
+        "Christopher Johnson won on the UNDOCKED book — staked 411, paid 752, Lake Merritt (C113)",
+        "Christopher Johnson — on the log, C112: caught their reflection in a shop window and stood a little straighter",
+        "Christopher Johnson — on the log, C113: noticed three new pop-up restaurants on Telegraph and wondered how long any of them would last",
+        "Christopher Johnson — on the log, C113: checked the Civis Systems Field livestream just to see if the grass had been laid down yet",
+        "Omar Amici lost on the UNDOCKED book — staked 329, the book kept it, Uptown (C113)",
+        "Omar Amici — on the log, C112: the for-rent signs outnumbered the welcome mats this month",
+        "Omar Amici — on the log, C113: relied on familiar social circles during cold period",
+        "Omar Amici — on the log, C113: found a quiet minute at a venue doorway and felt the season starting to turn",
+        "Omar Amici — on the log, C113: argued with a stranger about the Oaks bullpen depth and ended up buying them a beer",
+        "Nakia Pena — avoided Downtown after hearing about last night's crowds, Temescal — one of 4 people the Cycle's city turn reached (Temescal Community Health Center is operational — ongoing health effects in Temescal; the city feels it through these neighborhoods) (C113)",
+        "Nakia Pena — on the log, C112: the for-rent signs outnumbered the welcome mats this month",
+        "Nakia Pena — on the log, C112: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+        "Aisha Toure — the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever., Downtown — one of 4 people the Cycle's city turn reached (Downtown Economic Revitalization is legislation-filed — ongoing economic effects in Downtown; the city feels it through these neighborhoods) (C113)",
+        "Aisha Toure — on the log, C112: waved at the regulars on the usual route, all present and accounted for",
+        "Aisha Toure — on the log, C113: caught themselves bragging a little about the neighborhood lately near a civic plaza",
+        "Aisha Toure — on the log, C113: checked out a new shop that just opened nearby near a public office lobby",
+        "Aisha Toure — on the log, C113: felt a lift at Temple Lounge after the win",
+        "Mina Kapoor — spent too long in a bookstore aisle they'd never stopped at, Grand Lake — one of 4 people the Cycle's city turn reached (Commercial Stabilization for Grand Lake is legislation-filed — ongoing economic effects in Grand Lake; the city feels it through these…) (C113)",
+        "Mina Kapoor — on the log, C112: noticed the new streetlights went in before anyone had to ask",
+        "Mina Kapoor — on the log, C112: caught themselves bragging a little about the neighborhood lately",
+        "Clarence Moody — called an old coworker just to catch up and talked for an hour, Dimond (C113, PostCareer)",
+        "Clarence Moody — on the log, C113: shared a small piece of history with someone who needed it",
+        "Clarence Moody — on the log, C113: heard Jack London was packed last night",
+        "Clarence Moody — the Tribune named them in a piece headlined In Montclair, the Night of Krishna's Birth (Arts & Entertainment, C87)",
+        "Dorothy Rios — fixed a squeaky hinge that had been squeaking since the kids left home, Fruitvale (C113, PostCareer)",
+        "Dorothy Rios — on the log, C112: argued with a stranger about the Oaks bullpen depth and ended up buying them a beer",
+        "Dorothy Rios — on the log, C112: compared rent notes with a neighbor over the fence in Fruitvale",
+        "Dorothy Rios — on the log, C113: found a quiet minute at the station plaza and the hum of a bassline from a passing car",
+        "Dorothy Rios — on the log, C113: checked the Civis Systems Field livestream just to see if the grass had been laid down yet",
+        "Dorothy Rios — the Tribune named them in a piece headlined The Days That Feed Us (Culture, C82)",
+        "Charlene Gutierrez — dispensed advice at the hardware store — unsolicited, graciously received, Temescal (C113, PostCareer)",
+        "Charlene Gutierrez — on the log, C112: said no to something and felt the shape of who they are in it",
+        "Charlene Gutierrez — on the log, C112: found a quiet minute at a cafe near the clinics and the hum of a bassline from a passing car",
+        "Charlene Gutierrez — on the log, C112: put on their good suit for the Sunday service because some traditions still matter",
+        "Charlene Gutierrez — on the log, C112: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+        "Desmond Morton — moved from Jack London to Chinatown — leaving Jack London for a better fit, Chinatown (C113, Relocation-Composure-Up-M)",
+        "Desmond Morton — on the log, C113: saw their name in the sports pages again",
+        "Desmond Morton — on the log, C113: traded produce over a fence and came out ahead",
+        "Desmond Morton — on the log, C113: watched the fog roll over the port cranes from their front window",
+        "Desmond Morton — the Tribune named them in a piece headlined The Ledger Closes Before the Ink Is Dry (Sports, C111)",
+        "Desmond Morton — the Tribune named them in a piece headlined Six Straight and a Debut: The A's Pull Away as Morton Arrives (Sports, C97)",
+        "Desmond Morton — the Tribune named them in a piece headlined Tomorrow’s Triad: The Next Three Who Could Carry Oakland (Editorial)"
+      ],
+      "priorCycle": null,
+      "note": "none of today's people has written their own page this Cycle — no quotes",
+      "engineHooks": [
+        "A family bought their home in Jack London (observational analysis)",
+        "A family bought their home in Uptown (observational analysis)",
+        "A family bought their home in Chinatown (observational analysis)",
+        "A family bought their home in Rockridge (observational analysis)"
+      ],
+      "roomIsYours": "the plain respect, what the event meant in that house or on that block, the detail the family would have picked — from the lines below, never invented",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-lives",
+    "hood": null,
+    "src": "output/beats/Lived_Events.jsonl @C113 2026-10-27",
+    "plan": {
+      "focus": "Orion Kerkering and Isla Sike, who both moved into a place of their own this cycle",
+      "closeQuestion": "What insights can be gained from comparing the experiences of individuals moving into new homes in different neighborhoods?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00187",
+        "name": "Isla Sike",
+        "profile": "Isla Sike — Domestic Violence Shelter Director — West Oakland",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00211",
+        "name": "Christopher Johnson",
+        "profile": "Christopher Johnson — Janitor — Lake Merritt",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00263",
+        "name": "Omar Amici",
+        "profile": "Omar Amici — Construction laborer — Uptown",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00187-3c2c8b6d20",
+        "pop": "POP-00187",
+        "name": "Isla Sike",
+        "quote": "Moving into a place of my own feels like a big step, especially after being widowed. It's not just about having a new space, it's about starting a new chapter. I've been focused on my work at the shelter and this feels like a personal milestone. I'm still getting used to it, but it's a relief to have some stability.",
+        "factIds": [
+          "F-efbb6cfc4768",
+          "F-2c1319646eb5"
+        ],
+        "src": "packet.W2[POP-00187]"
+      },
+      {
+        "id": "Q-POP-00211-73cddc701e",
+        "pop": "POP-00211",
+        "name": "Christopher Johnson",
+        "quote": "I've seen Orion Kerkering's new place, they're renting in Lake Merritt. I noticed it because I've been keeping an eye on the neighborhood. It's nice to see young folks setting up on their own. I've been around here long enough to know it's not always easy.",
+        "factIds": [
+          "F-14d33dae78e6",
+          "F-50e830b6db4f"
+        ],
+        "src": "packet.W2[POP-00211]"
+      },
+      {
+        "id": "Q-POP-00263-92a4dc4770",
+        "pop": "POP-00263",
+        "name": "Omar Amici",
+        "quote": "I've seen more for-rent signs popping up around Uptown, it's like the neighborhood's changing fast. People moving in, people moving out. I don't know Orion Kerkering or Isla Sike personally, but I can relate to the struggle of finding a place to call your own. It's tough out here.",
+        "factIds": [
+          "F-fab04b750e4d",
+          "F-14d33dae78e6",
+          "F-49cb41ed222b"
+        ],
+        "src": "packet.W2[POP-00263]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Tamsin Pruitt",
+        "text": "The story might explore the emotional and practical aspects of setting up a new home, and how it reflects or contrasts with broader neighborhood trends.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C113",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-876f95b5eb98"
+    },
+    {
+      "t": "FACT",
+      "text": "Orion Kerkering moved into a place of their own in Lake Merritt, renting",
+      "src": "output/beats/Lived_Events.jsonl @C113 2026-10-27",
+      "id": "F-14d33dae78e6"
+    },
+    {
+      "t": "FACT",
+      "text": "Orion Kerkering first. The event is the lead; one true detail; what came next only if the record says.",
+      "src": "output/beats/Lived_Events.jsonl @C113 2026-10-27",
+      "id": "F-0012dcbf61bf"
+    },
+    {
+      "t": "FACT",
+      "text": "Orion Kerkering moved into a place of their own in Lake Merritt, renting (C113)",
+      "src": "output/beats/Household_Ledger.jsonl @C113",
+      "id": "F-50e830b6db4f"
+    },
+    {
+      "t": "FACT",
+      "text": "Orion Kerkering — on the log, C113: dodged the running groups circling the lake and found a quiet bench near the pergola",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-b3e60202ad23"
+    },
+    {
+      "t": "FACT",
+      "text": "Orion Kerkering — on the log, C113: closed their eyes during the choir solo and actually felt the tension leave their shoulders",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-4c377b39dfa1"
+    },
+    {
+      "t": "FACT",
+      "text": "Orion Kerkering — on the log, C113: woke up at 5 AM just to have thirty minutes of total silence before the house woke up",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-1083340b9a69"
+    },
+    {
+      "t": "FACT",
+      "text": "Orion Kerkering — on the log, C113: organized the clothing drive donations and recognized a coat they had donated two years ago",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-72cb4fe9d553"
+    },
+    {
+      "t": "FACT",
+      "text": "Orion Kerkering — the Tribune named them in a piece headlined Unsung Architects of a Dynasty (Sports)",
+      "src": "archive/ARTICLE_INDEX.jsonl 1ab41325cca00406",
+      "id": "F-c3c0f545ec6b"
+    },
+    {
+      "t": "FACT",
+      "text": "Isla Sike moved into a place of their own in West Oakland, renting (C113)",
+      "src": "output/beats/Household_Ledger.jsonl @C113",
+      "id": "F-efbb6cfc4768"
+    },
+    {
+      "t": "FACT",
+      "text": "Isla Sike — on the log, C112: had a routine period at work with no major changes",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-205aedf2ffb8"
+    },
+    {
+      "t": "FACT",
+      "text": "Isla Sike — on the log, C112: a stack of stabilization fund applications waits on the community board",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-084a7b4b8042"
+    },
+    {
+      "t": "FACT",
+      "text": "Isla Sike — on the log, C113: heard a kid explain something to a parent with total authority and grinned",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-50c226580987"
+    },
+    {
+      "t": "FACT",
+      "text": "Isla Sike — on the log, C113: heard Jack London was lively last night",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-c1305d55475d"
+    },
+    {
+      "t": "FACT",
+      "text": "Christopher Johnson won on the UNDOCKED book — staked 411, paid 752, Lake Merritt (C113)",
+      "src": "output/beats/Casino_Ledger.jsonl @C113",
+      "id": "F-e281e53014c3"
+    },
+    {
+      "t": "FACT",
+      "text": "Christopher Johnson — on the log, C112: caught their reflection in a shop window and stood a little straighter",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-e63a9d6cd2a8"
+    },
+    {
+      "t": "FACT",
+      "text": "Christopher Johnson — on the log, C113: noticed three new pop-up restaurants on Telegraph and wondered how long any of them would last",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-016a9c6196c0"
+    },
+    {
+      "t": "FACT",
+      "text": "Christopher Johnson — on the log, C113: checked the Civis Systems Field livestream just to see if the grass had been laid down yet",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-c2805d9bb96f"
+    },
+    {
+      "t": "FACT",
+      "text": "Omar Amici lost on the UNDOCKED book — staked 329, the book kept it, Uptown (C113)",
+      "src": "output/beats/Casino_Ledger.jsonl @C113",
+      "id": "F-cb61033600dd"
+    },
+    {
+      "t": "FACT",
+      "text": "Omar Amici — on the log, C112: the for-rent signs outnumbered the welcome mats this month",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-fab04b750e4d"
+    },
+    {
+      "t": "FACT",
+      "text": "Omar Amici — on the log, C113: relied on familiar social circles during cold period",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-7dfe36e454a7"
+    },
+    {
+      "t": "FACT",
+      "text": "Omar Amici — on the log, C113: found a quiet minute at a venue doorway and felt the season starting to turn",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-c3b48764797e"
+    },
+    {
+      "t": "FACT",
+      "text": "Omar Amici — on the log, C113: argued with a stranger about the Oaks bullpen depth and ended up buying them a beer",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-3b532513bb9f"
+    },
+    {
+      "t": "FACT",
+      "text": "Nakia Pena — avoided Downtown after hearing about last night's crowds, Temescal — one of 4 people the Cycle's city turn reached (Temescal Community Health Center is operational — ongoing health effects in Temescal; the city feels it through these neighborhoods) (C113)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C113",
+      "id": "F-eb2cfea7fbc7"
+    },
+    {
+      "t": "FACT",
+      "text": "Nakia Pena — on the log, C112: the for-rent signs outnumbered the welcome mats this month",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-9bbc86c0d76f"
+    },
+    {
+      "t": "FACT",
+      "text": "Nakia Pena — on the log, C112: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-1c07c079cec1"
+    },
+    {
+      "t": "FACT",
+      "text": "Aisha Toure — the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever., Downtown — one of 4 people the Cycle's city turn reached (Downtown Economic Revitalization is legislation-filed — ongoing economic effects in Downtown; the city feels it through these neighborhoods) (C113)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C113",
+      "id": "F-d3d21df82e38"
+    },
+    {
+      "t": "FACT",
+      "text": "Aisha Toure — on the log, C112: waved at the regulars on the usual route, all present and accounted for",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-fd28929f9255"
+    },
+    {
+      "t": "FACT",
+      "text": "Aisha Toure — on the log, C113: caught themselves bragging a little about the neighborhood lately near a civic plaza",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-1abca6569f76"
+    },
+    {
+      "t": "FACT",
+      "text": "Aisha Toure — on the log, C113: checked out a new shop that just opened nearby near a public office lobby",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-5d5e423bf2f2"
+    },
+    {
+      "t": "FACT",
+      "text": "Aisha Toure — on the log, C113: felt a lift at Temple Lounge after the win",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-a225dcfbff72"
+    },
+    {
+      "t": "FACT",
+      "text": "Mina Kapoor — spent too long in a bookstore aisle they'd never stopped at, Grand Lake — one of 4 people the Cycle's city turn reached (Commercial Stabilization for Grand Lake is legislation-filed — ongoing economic effects in Grand Lake; the city feels it through these…) (C113)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C113",
+      "id": "F-50225cf54344"
+    },
+    {
+      "t": "FACT",
+      "text": "Mina Kapoor — on the log, C112: noticed the new streetlights went in before anyone had to ask",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-1de1eaf1eb27"
+    },
+    {
+      "t": "FACT",
+      "text": "Mina Kapoor — on the log, C112: caught themselves bragging a little about the neighborhood lately",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-1ce4683262d5"
+    },
+    {
+      "t": "FACT",
+      "text": "Clarence Moody — called an old coworker just to catch up and talked for an hour, Dimond (C113, PostCareer)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-7aef1fddb231"
+    },
+    {
+      "t": "FACT",
+      "text": "Clarence Moody — on the log, C113: shared a small piece of history with someone who needed it",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-662a800a5d9c"
+    },
+    {
+      "t": "FACT",
+      "text": "Clarence Moody — on the log, C113: heard Jack London was packed last night",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-1bb3205ae37e"
+    },
+    {
+      "t": "FACT",
+      "text": "Clarence Moody — the Tribune named them in a piece headlined In Montclair, the Night of Krishna's Birth (Arts & Entertainment, C87)",
+      "src": "archive/ARTICLE_INDEX.jsonl d20fa0177f32d20f",
+      "id": "F-cf8132c4f908"
+    },
+    {
+      "t": "FACT",
+      "text": "Dorothy Rios — fixed a squeaky hinge that had been squeaking since the kids left home, Fruitvale (C113, PostCareer)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-409921abbf0f"
+    },
+    {
+      "t": "FACT",
+      "text": "Dorothy Rios — on the log, C112: argued with a stranger about the Oaks bullpen depth and ended up buying them a beer",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-544eaf6206fa"
+    },
+    {
+      "t": "FACT",
+      "text": "Dorothy Rios — on the log, C112: compared rent notes with a neighbor over the fence in Fruitvale",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-818dd1e04b2e"
+    },
+    {
+      "t": "FACT",
+      "text": "Dorothy Rios — on the log, C113: found a quiet minute at the station plaza and the hum of a bassline from a passing car",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-c8849cd4e5a4"
+    },
+    {
+      "t": "FACT",
+      "text": "Dorothy Rios — on the log, C113: checked the Civis Systems Field livestream just to see if the grass had been laid down yet",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-77039e89e574"
+    },
+    {
+      "t": "FACT",
+      "text": "Dorothy Rios — the Tribune named them in a piece headlined The Days That Feed Us (Culture, C82)",
+      "src": "archive/ARTICLE_INDEX.jsonl 38d97731abae38d9",
+      "id": "F-948c345bc380"
+    },
+    {
+      "t": "FACT",
+      "text": "Charlene Gutierrez — dispensed advice at the hardware store — unsolicited, graciously received, Temescal (C113, PostCareer)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-80426b3cfbc2"
+    },
+    {
+      "t": "FACT",
+      "text": "Charlene Gutierrez — on the log, C112: said no to something and felt the shape of who they are in it",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-415a79a36c85"
+    },
+    {
+      "t": "FACT",
+      "text": "Charlene Gutierrez — on the log, C112: found a quiet minute at a cafe near the clinics and the hum of a bassline from a passing car",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-7b66aa88fe78"
+    },
+    {
+      "t": "FACT",
+      "text": "Charlene Gutierrez — on the log, C112: put on their good suit for the Sunday service because some traditions still matter",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-243381126c95"
+    },
+    {
+      "t": "FACT",
+      "text": "Charlene Gutierrez — on the log, C112: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-1b5625cb8045"
+    },
+    {
+      "t": "FACT",
+      "text": "Desmond Morton — moved from Jack London to Chinatown — leaving Jack London for a better fit, Chinatown (C113, Relocation-Composure-Up-M)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-a13869b3d20b"
+    },
+    {
+      "t": "FACT",
+      "text": "Desmond Morton — on the log, C113: saw their name in the sports pages again",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-9e35ac6e636b"
+    },
+    {
+      "t": "FACT",
+      "text": "Desmond Morton — on the log, C113: traded produce over a fence and came out ahead",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-687f9259ee5f"
+    },
+    {
+      "t": "FACT",
+      "text": "Desmond Morton — on the log, C113: watched the fog roll over the port cranes from their front window",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-f330a0c0a806"
+    },
+    {
+      "t": "FACT",
+      "text": "Desmond Morton — the Tribune named them in a piece headlined The Ledger Closes Before the Ink Is Dry (Sports, C111)",
+      "src": "archive/ARTICLE_INDEX.jsonl 9c87d9c351fe088c",
+      "id": "F-b5cd068118b4"
+    },
+    {
+      "t": "FACT",
+      "text": "Desmond Morton — the Tribune named them in a piece headlined Six Straight and a Debut: The A's Pull Away as Morton Arrives (Sports, C97)",
+      "src": "archive/ARTICLE_INDEX.jsonl 8211cce9c3b2a6f4",
+      "id": "F-1883289575a8"
+    },
+    {
+      "t": "FACT",
+      "text": "Desmond Morton — the Tribune named them in a piece headlined Tomorrow’s Triad: The Next Three Who Could Carry Oakland (Editorial)",
+      "src": "archive/ARTICLE_INDEX.jsonl 5cd37ab27c105cd3",
+      "id": "F-67c11dc512a7"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C9, Winter, holiday=none",
+      "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+      "id": "F-ab9d6786094e"
+    },
+    {
+      "t": "FACT",
+      "text": "Isla Sike — Domestic Violence Shelter Director — West Oakland",
+      "src": "Simulation_Ledger profile for POP-00187",
+      "id": "F-2c1319646eb5"
+    },
+    {
+      "t": "FACT",
+      "text": "Omar Amici — Construction laborer — Uptown",
+      "src": "Simulation_Ledger profile for POP-00263",
+      "id": "F-49cb41ed222b"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "tamsin-lives-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Put the cycle's person events in the paper as news, one person at a time — a birth, a death, a hospital stay, a retirement, a promotion, a household set up or a place of one's own, a win or a loss on the book, what a turn of the city did to someone's day, and the smaller moments the record kept. The event is the lead, the person is named as the slice names them, and what came next appears only when a later record holds it. A stake or a payout is the person's own fact, not a statistic. The page is the city's real calendar; every person on it is one the record holds.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "plain respect — a neighborhood weekly's births-and-obituaries hand, unhurried, exact",
+      "targetWords": "450-1200",
+      "opening": "the heaviest event on the slice, stated as it happened to the named person",
+      "closing": "the last person's passage ends on what the record holds next for them, or on the fact itself — no moral, no roundup"
+    },
+    "authorizedTexture": [
+      "the plain respect of the form — the ordinary weight of a birth, a retirement, a discharge, stated without ornament",
+      "the frame around a supplied fact — what a promotion to the supplied role means in plain words, without inventing the workplace",
+      "the neighborhood the slice names as where the person lives, without an invented street scene",
+      "the order and pacing of the passages — heaviest first, one person at a time"
+    ],
+    "textureConditions": [
+      "every person, event, role, employer, neighborhood, hospital stay, household and family tie must come from the slice",
+      "a quote appears only verbatim from the person's own supplied page; nothing paraphrased into quotation marks",
+      "what came next appears only when a later Cycle's supplied record holds it",
+      "a thin day (few events) is written as a short page, not padded"
+    ],
+    "canonBlockers": [
+      "any person, event, quote, venue, employer or family member not on the slice",
+      "a paraphrased or invented quote",
+      "a cause, diagnosis or outcome the record does not state",
+      "a statistic, rate or trend claim — the page is people, not numbers",
+      "intake bookkeeping rows (Emerged into Tier, Added to Simulation_Ledger, Updated to Tier) written as life events",
+      "raw engine labels or decimals printed as public-facing evidence"
+    ]
+  },
+  "manifest": {
+    "id": "AM-fefbdd32b0dc",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-876f95b5eb98",
+        "t": "FACT",
+        "text": "Current cycle: C113",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-14d33dae78e6",
+        "t": "FACT",
+        "text": "Orion Kerkering moved into a place of their own in Lake Merritt, renting",
+        "src": "output/beats/Lived_Events.jsonl @C113 2026-10-27"
+      },
+      {
+        "id": "F-0012dcbf61bf",
+        "t": "FACT",
+        "text": "Orion Kerkering first. The event is the lead; one true detail; what came next only if the record says.",
+        "src": "output/beats/Lived_Events.jsonl @C113 2026-10-27"
+      },
+      {
+        "id": "F-50e830b6db4f",
+        "t": "FACT",
+        "text": "Orion Kerkering moved into a place of their own in Lake Merritt, renting (C113)",
+        "src": "output/beats/Household_Ledger.jsonl @C113"
+      },
+      {
+        "id": "F-b3e60202ad23",
+        "t": "FACT",
+        "text": "Orion Kerkering — on the log, C113: dodged the running groups circling the lake and found a quiet bench near the pergola",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-4c377b39dfa1",
+        "t": "FACT",
+        "text": "Orion Kerkering — on the log, C113: closed their eyes during the choir solo and actually felt the tension leave their shoulders",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-1083340b9a69",
+        "t": "FACT",
+        "text": "Orion Kerkering — on the log, C113: woke up at 5 AM just to have thirty minutes of total silence before the house woke up",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-72cb4fe9d553",
+        "t": "FACT",
+        "text": "Orion Kerkering — on the log, C113: organized the clothing drive donations and recognized a coat they had donated two years ago",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-c3c0f545ec6b",
+        "t": "FACT",
+        "text": "Orion Kerkering — the Tribune named them in a piece headlined Unsung Architects of a Dynasty (Sports)",
+        "src": "archive/ARTICLE_INDEX.jsonl 1ab41325cca00406"
+      },
+      {
+        "id": "F-efbb6cfc4768",
+        "t": "FACT",
+        "text": "Isla Sike moved into a place of their own in West Oakland, renting (C113)",
+        "src": "output/beats/Household_Ledger.jsonl @C113"
+      },
+      {
+        "id": "F-205aedf2ffb8",
+        "t": "FACT",
+        "text": "Isla Sike — on the log, C112: had a routine period at work with no major changes",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-084a7b4b8042",
+        "t": "FACT",
+        "text": "Isla Sike — on the log, C112: a stack of stabilization fund applications waits on the community board",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-50c226580987",
+        "t": "FACT",
+        "text": "Isla Sike — on the log, C113: heard a kid explain something to a parent with total authority and grinned",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-c1305d55475d",
+        "t": "FACT",
+        "text": "Isla Sike — on the log, C113: heard Jack London was lively last night",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-e281e53014c3",
+        "t": "FACT",
+        "text": "Christopher Johnson won on the UNDOCKED book — staked 411, paid 752, Lake Merritt (C113)",
+        "src": "output/beats/Casino_Ledger.jsonl @C113"
+      },
+      {
+        "id": "F-e63a9d6cd2a8",
+        "t": "FACT",
+        "text": "Christopher Johnson — on the log, C112: caught their reflection in a shop window and stood a little straighter",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-016a9c6196c0",
+        "t": "FACT",
+        "text": "Christopher Johnson — on the log, C113: noticed three new pop-up restaurants on Telegraph and wondered how long any of them would last",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-c2805d9bb96f",
+        "t": "FACT",
+        "text": "Christopher Johnson — on the log, C113: checked the Civis Systems Field livestream just to see if the grass had been laid down yet",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-cb61033600dd",
+        "t": "FACT",
+        "text": "Omar Amici lost on the UNDOCKED book — staked 329, the book kept it, Uptown (C113)",
+        "src": "output/beats/Casino_Ledger.jsonl @C113"
+      },
+      {
+        "id": "F-fab04b750e4d",
+        "t": "FACT",
+        "text": "Omar Amici — on the log, C112: the for-rent signs outnumbered the welcome mats this month",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-7dfe36e454a7",
+        "t": "FACT",
+        "text": "Omar Amici — on the log, C113: relied on familiar social circles during cold period",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-c3b48764797e",
+        "t": "FACT",
+        "text": "Omar Amici — on the log, C113: found a quiet minute at a venue doorway and felt the season starting to turn",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-3b532513bb9f",
+        "t": "FACT",
+        "text": "Omar Amici — on the log, C113: argued with a stranger about the Oaks bullpen depth and ended up buying them a beer",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-eb2cfea7fbc7",
+        "t": "FACT",
+        "text": "Nakia Pena — avoided Downtown after hearing about last night's crowds, Temescal — one of 4 people the Cycle's city turn reached (Temescal Community Health Center is operational — ongoing health effects in Temescal; the city feels it through these neighborhoods) (C113)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C113"
+      },
+      {
+        "id": "F-9bbc86c0d76f",
+        "t": "FACT",
+        "text": "Nakia Pena — on the log, C112: the for-rent signs outnumbered the welcome mats this month",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-1c07c079cec1",
+        "t": "FACT",
+        "text": "Nakia Pena — on the log, C112: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-d3d21df82e38",
+        "t": "FACT",
+        "text": "Aisha Toure — the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever., Downtown — one of 4 people the Cycle's city turn reached (Downtown Economic Revitalization is legislation-filed — ongoing economic effects in Downtown; the city feels it through these neighborhoods) (C113)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C113"
+      },
+      {
+        "id": "F-fd28929f9255",
+        "t": "FACT",
+        "text": "Aisha Toure — on the log, C112: waved at the regulars on the usual route, all present and accounted for",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-1abca6569f76",
+        "t": "FACT",
+        "text": "Aisha Toure — on the log, C113: caught themselves bragging a little about the neighborhood lately near a civic plaza",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-5d5e423bf2f2",
+        "t": "FACT",
+        "text": "Aisha Toure — on the log, C113: checked out a new shop that just opened nearby near a public office lobby",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-a225dcfbff72",
+        "t": "FACT",
+        "text": "Aisha Toure — on the log, C113: felt a lift at Temple Lounge after the win",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-50225cf54344",
+        "t": "FACT",
+        "text": "Mina Kapoor — spent too long in a bookstore aisle they'd never stopped at, Grand Lake — one of 4 people the Cycle's city turn reached (Commercial Stabilization for Grand Lake is legislation-filed — ongoing economic effects in Grand Lake; the city feels it through these…) (C113)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C113"
+      },
+      {
+        "id": "F-1de1eaf1eb27",
+        "t": "FACT",
+        "text": "Mina Kapoor — on the log, C112: noticed the new streetlights went in before anyone had to ask",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-1ce4683262d5",
+        "t": "FACT",
+        "text": "Mina Kapoor — on the log, C112: caught themselves bragging a little about the neighborhood lately",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-7aef1fddb231",
+        "t": "FACT",
+        "text": "Clarence Moody — called an old coworker just to catch up and talked for an hour, Dimond (C113, PostCareer)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-662a800a5d9c",
+        "t": "FACT",
+        "text": "Clarence Moody — on the log, C113: shared a small piece of history with someone who needed it",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-1bb3205ae37e",
+        "t": "FACT",
+        "text": "Clarence Moody — on the log, C113: heard Jack London was packed last night",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-cf8132c4f908",
+        "t": "FACT",
+        "text": "Clarence Moody — the Tribune named them in a piece headlined In Montclair, the Night of Krishna's Birth (Arts & Entertainment, C87)",
+        "src": "archive/ARTICLE_INDEX.jsonl d20fa0177f32d20f"
+      },
+      {
+        "id": "F-409921abbf0f",
+        "t": "FACT",
+        "text": "Dorothy Rios — fixed a squeaky hinge that had been squeaking since the kids left home, Fruitvale (C113, PostCareer)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-544eaf6206fa",
+        "t": "FACT",
+        "text": "Dorothy Rios — on the log, C112: argued with a stranger about the Oaks bullpen depth and ended up buying them a beer",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-818dd1e04b2e",
+        "t": "FACT",
+        "text": "Dorothy Rios — on the log, C112: compared rent notes with a neighbor over the fence in Fruitvale",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-c8849cd4e5a4",
+        "t": "FACT",
+        "text": "Dorothy Rios — on the log, C113: found a quiet minute at the station plaza and the hum of a bassline from a passing car",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-77039e89e574",
+        "t": "FACT",
+        "text": "Dorothy Rios — on the log, C113: checked the Civis Systems Field livestream just to see if the grass had been laid down yet",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-948c345bc380",
+        "t": "FACT",
+        "text": "Dorothy Rios — the Tribune named them in a piece headlined The Days That Feed Us (Culture, C82)",
+        "src": "archive/ARTICLE_INDEX.jsonl 38d97731abae38d9"
+      },
+      {
+        "id": "F-80426b3cfbc2",
+        "t": "FACT",
+        "text": "Charlene Gutierrez — dispensed advice at the hardware store — unsolicited, graciously received, Temescal (C113, PostCareer)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-415a79a36c85",
+        "t": "FACT",
+        "text": "Charlene Gutierrez — on the log, C112: said no to something and felt the shape of who they are in it",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-7b66aa88fe78",
+        "t": "FACT",
+        "text": "Charlene Gutierrez — on the log, C112: found a quiet minute at a cafe near the clinics and the hum of a bassline from a passing car",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-243381126c95",
+        "t": "FACT",
+        "text": "Charlene Gutierrez — on the log, C112: put on their good suit for the Sunday service because some traditions still matter",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-1b5625cb8045",
+        "t": "FACT",
+        "text": "Charlene Gutierrez — on the log, C112: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-a13869b3d20b",
+        "t": "FACT",
+        "text": "Desmond Morton — moved from Jack London to Chinatown — leaving Jack London for a better fit, Chinatown (C113, Relocation-Composure-Up-M)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-9e35ac6e636b",
+        "t": "FACT",
+        "text": "Desmond Morton — on the log, C113: saw their name in the sports pages again",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-687f9259ee5f",
+        "t": "FACT",
+        "text": "Desmond Morton — on the log, C113: traded produce over a fence and came out ahead",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-f330a0c0a806",
+        "t": "FACT",
+        "text": "Desmond Morton — on the log, C113: watched the fog roll over the port cranes from their front window",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-b5cd068118b4",
+        "t": "FACT",
+        "text": "Desmond Morton — the Tribune named them in a piece headlined The Ledger Closes Before the Ink Is Dry (Sports, C111)",
+        "src": "archive/ARTICLE_INDEX.jsonl 9c87d9c351fe088c"
+      },
+      {
+        "id": "F-1883289575a8",
+        "t": "FACT",
+        "text": "Desmond Morton — the Tribune named them in a piece headlined Six Straight and a Debut: The A's Pull Away as Morton Arrives (Sports, C97)",
+        "src": "archive/ARTICLE_INDEX.jsonl 8211cce9c3b2a6f4"
+      },
+      {
+        "id": "F-67c11dc512a7",
+        "t": "FACT",
+        "text": "Desmond Morton — the Tribune named them in a piece headlined Tomorrow’s Triad: The Next Three Who Could Carry Oakland (Editorial)",
+        "src": "archive/ARTICLE_INDEX.jsonl 5cd37ab27c105cd3"
+      },
+      {
+        "id": "F-ab9d6786094e",
+        "t": "FACT",
+        "text": "Calendar: Y3C9, Winter, holiday=none",
+        "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)"
+      },
+      {
+        "id": "F-2c1319646eb5",
+        "t": "FACT",
+        "text": "Isla Sike — Domestic Violence Shelter Director — West Oakland",
+        "src": "Simulation_Ledger profile for POP-00187"
+      },
+      {
+        "id": "F-49cb41ed222b",
+        "t": "FACT",
+        "text": "Omar Amici — Construction laborer — Uptown",
+        "src": "Simulation_Ledger profile for POP-00263"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00187-3c2c8b6d20",
+        "speakerId": "POP-00187",
+        "speakerName": "Isla Sike",
+        "text": "Moving into a place of my own feels like a big step, especially after being widowed. It's not just about having a new space, it's about starting a new chapter. I've been focused on my work at the shelter and this feels like a personal milestone. I'm still getting used to it, but it's a relief to have some stability.",
+        "factIds": [
+          "F-efbb6cfc4768",
+          "F-2c1319646eb5"
+        ],
+        "src": "packet.W2[POP-00187]"
+      },
+      {
+        "id": "Q-POP-00211-73cddc701e",
+        "speakerId": "POP-00211",
+        "speakerName": "Christopher Johnson",
+        "text": "I've seen Orion Kerkering's new place, they're renting in Lake Merritt. I noticed it because I've been keeping an eye on the neighborhood. It's nice to see young folks setting up on their own. I've been around here long enough to know it's not always easy.",
+        "factIds": [
+          "F-14d33dae78e6",
+          "F-50e830b6db4f"
+        ],
+        "src": "packet.W2[POP-00211]"
+      },
+      {
+        "id": "Q-POP-00263-92a4dc4770",
+        "speakerId": "POP-00263",
+        "speakerName": "Omar Amici",
+        "text": "I've seen more for-rent signs popping up around Uptown, it's like the neighborhood's changing fast. People moving in, people moving out. I don't know Orion Kerkering or Isla Sike personally, but I can relate to the struggle of finding a place to call your own. It's tough out here.",
+        "factIds": [
+          "F-fab04b750e4d",
+          "F-14d33dae78e6",
+          "F-49cb41ed222b"
+        ],
+        "src": "packet.W2[POP-00263]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00187",
+        "name": "Isla Sike",
+        "profile": "Isla Sike — Domestic Violence Shelter Director — West Oakland",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00211",
+        "name": "Christopher Johnson",
+        "profile": "Christopher Johnson — Janitor — Lake Merritt",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00263",
+        "name": "Omar Amici",
+        "profile": "Omar Amici — Construction laborer — Uptown",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Tamsin Pruitt",
+        "text": "The story might explore the emotional and practical aspects of setting up a new home, and how it reflects or contrasts with broader neighborhood trends.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "the plain respect of the form — the ordinary weight of a birth, a retirement, a discharge, stated without ornament",
+      "the frame around a supplied fact — what a promotion to the supplied role means in plain words, without inventing the workplace",
+      "the neighborhood the slice names as where the person lives, without an invented street scene",
+      "the order and pacing of the passages — heaviest first, one person at a time"
+    ],
+    "textureConditions": [
+      "every person, event, role, employer, neighborhood, hospital stay, household and family tie must come from the slice",
+      "a quote appears only verbatim from the person's own supplied page; nothing paraphrased into quotation marks",
+      "what came next appears only when a later Cycle's supplied record holds it",
+      "a thin day (few events) is written as a short page, not padded"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

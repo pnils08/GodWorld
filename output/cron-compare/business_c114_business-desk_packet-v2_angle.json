@@ -1,0 +1,1515 @@
+{
+  "stage": "angle",
+  "desk": "business",
+  "cycle": "114",
+  "persona": "business-desk",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00153",
+      "name": "Jordan Velez",
+      "role": "desk reporter",
+      "desk": "business"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "West Oakland businesses: Coastline Construction, Northgate Construction, Oakmesh Systems — the people who work there",
+      "approach": "Business desk approach: this slice is one neighborhood's businesses from the ledger and the people on the roster who work there — plus what moved since last cycle: revenue and headcount deltas, contractions, closures on the archive, and the week's casino action. When the record shows a business closing or shedding workers, that is the story. Open from a named business or a named worker on it — the block, the counter, the hiring board, what the owner is worried about. One claim about how the block is moving. Not civic process roundup. Not multi-voice business-desk average. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "economic-storefront",
+        "hood": "West Oakland",
+        "pulseClass": "hood-businesses",
+        "economicFrame": "West Oakland businesses: Coastline Construction, Northgate Construction, Oakmesh Systems — the people who work there",
+        "hook": "Enzo Walker, Plumber at Coastline Construction. 19 named workers at 5 named businesses in West Oakland on the ledger this cycle.",
+        "namedBusinesses": [
+          "Coastline Construction",
+          "Northgate Construction",
+          "Oakmesh Systems",
+          "Civis Systems",
+          "Mariner Construction"
+        ],
+        "workplaces": [
+          "Coastline Construction — Construction — Enzo Walker (Plumber); Hazel Reed (Plumber); Desmond Achebe (Managing Partner, Coastline Construction); Elijah Brown (Electrician)",
+          "Northgate Construction — Construction — Kenton Pearl (Plumber); Elijah Roberts (Construction laborer); Jude Hess (Electrician); Helena Voss-Adeyemi (Managing Partner, Northgate Construction)",
+          "Oakmesh Systems — Civic Tech — Dom Will (Machine Learning Engineer (Oakmesh Systems)); Jace Robinson (Machine Learning Engineer (Oakmesh Systems)); Jeremy Wong (Civic Data Engineer (Oakmesh Systems)); Marcus Tan (Founder, Oakmesh Systems)",
+          "Civis Systems — Urban Systems Intelligence Firm — Sam Fazio (Digital Twin Architect); Catherine Santos (Digital Twin Architect); Elias Varek (Founder of Civis Systems); Maurice Franklin (Drone Fleet Coordinator)",
+          "Mariner Construction — Construction — Maeve Pillai (Plumber); Yadira Rao (Plumber); Minh Raimon (Carpenter Apprentice)"
+        ],
+        "engineColour": [
+          "Mateo Baker — braced for the sound of pile drivers and realized they had already started tuning it out",
+          "Darius Hill — said no to something and felt the shape of who they are in it",
+          "Samuel Adeyemi — has watched Ivy Hill Cafe go quiet lately",
+          "Ebony Mendoza — kept score by hand at the kitchen table the way their father taught them near a quiet side street",
+          "Dame Sarr — let the week's wins carry dinner",
+          "Constanza Doan — drank the free cold brew in the company kitchen and felt completely disconnected from the neighborhood outside"
+        ],
+        "roomIsYours": "the counter, the hiring board, the back office, what the owner is worried about",
+        "forbidden": [
+          "Do not invent a business, a worker, an owner or a place — every name comes from this slice",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose",
+          "Do not contradict a role, employer or neighborhood listed here"
+        ],
+        "sceneRule": null
+      }
+    },
+    "signal": {
+      "kind": "story-signal",
+      "hood": "West Oakland",
+      "score": null,
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+      "nearby": [
+        {
+          "text": "Downtown Economic Revitalization — economic upside, jobs and footprint in Downtown | Business momentum in Downtown tracks the civic gain.",
+          "src": "output/engine_audit_c114.json patterns[4]; evidence: Initiative_Tracker row(s) 8; storyline INIT-008:vote-scheduled"
+        },
+        {
+          "text": "Commercial Stabilization for Grand Lake — economic upside, jobs and footprint in Grand Lake | Business momentum in Grand Lake tracks the housing gain.",
+          "src": "output/engine_audit_c114.json patterns[5]; evidence: Initiative_Tracker row(s) 9; storyline INIT-009:announced"
+        },
+        {
+          "text": "West Oakland Tenant Defense Fund — economic upside, jobs and footprint in West Oakland | Business momentum in West Oakland tracks the civic gain.",
+          "src": "output/engine_audit_c114.json patterns[6]; evidence: Initiative_Tracker row(s) 10; storyline INIT-010:announced"
+        },
+        {
+          "text": "civic — economic upside, jobs and footprint in Downtown | Business momentum in Downtown tracks the civic gain.",
+          "src": "output/engine_audit_c114.json patterns[7]; evidence: Neighborhood_Map row(s)"
+        },
+        {
+          "text": "civic — economic upside, jobs and footprint in West Oakland | Business momentum in West Oakland tracks the civic gain.",
+          "src": "output/engine_audit_c114.json patterns[8]; evidence: Neighborhood_Map row(s)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00291",
+          "name": "Enzo Walker",
+          "profile": "Enzo Walker — Plumber — Coastline Construction, West Oakland",
+          "role": "Plumber",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+            "pop": "POP-00291",
+            "rowName": "Enzo Walker",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00938",
+          "name": "Hazel Reed",
+          "profile": "Hazel Reed — Plumber — Coastline Construction, West Oakland",
+          "role": "Plumber",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+            "pop": "POP-00938",
+            "rowName": "Hazel Reed",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01092",
+          "name": "Desmond Achebe",
+          "profile": "Desmond Achebe — Managing Partner, Coastline Construction — Coastline Construction, West Oakland",
+          "role": "Managing Partner, Coastline Construction",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+            "pop": "POP-01092",
+            "rowName": "Desmond Achebe",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01195",
+          "name": "Elijah Brown",
+          "profile": "Elijah Brown — Electrician — Coastline Construction, West Oakland",
+          "role": "Electrician",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+            "pop": "POP-01195",
+            "rowName": "Elijah Brown",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00217",
+          "name": "Kenton Pearl",
+          "profile": "Kenton Pearl — Plumber — Northgate Construction, West Oakland",
+          "role": "Plumber",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+            "pop": "POP-00217",
+            "rowName": "Kenton Pearl",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00275",
+          "name": "Elijah Roberts",
+          "profile": "Elijah Roberts — Construction laborer — Northgate Construction, West Oakland",
+          "role": "Construction laborer",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+            "pop": "POP-00275",
+            "rowName": "Elijah Roberts",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00521",
+          "name": "Jude Hess",
+          "profile": "Jude Hess — Electrician — Northgate Construction, West Oakland",
+          "role": "Electrician",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+            "pop": "POP-00521",
+            "rowName": "Jude Hess",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01095",
+          "name": "Helena Voss-Adeyemi",
+          "profile": "Helena Voss-Adeyemi — Managing Partner, Northgate Construction — Northgate Construction, West Oakland",
+          "role": "Managing Partner, Northgate Construction",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+            "pop": "POP-01095",
+            "rowName": "Helena Voss-Adeyemi",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00368",
+          "name": "Dom Will",
+          "profile": "Dom Will — Machine Learning Engineer (Oakmesh Systems) — Oakmesh Systems, West Oakland",
+          "role": "Machine Learning Engineer (Oakmesh Systems)",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+            "pop": "POP-00368",
+            "rowName": "Dom Will",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00483",
+          "name": "Jace Robinson",
+          "profile": "Jace Robinson — Machine Learning Engineer (Oakmesh Systems) — Oakmesh Systems, West Oakland",
+          "role": "Machine Learning Engineer (Oakmesh Systems)",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+            "pop": "POP-00483",
+            "rowName": "Jace Robinson",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00712",
+          "name": "Jeremy Wong",
+          "profile": "Jeremy Wong — Civic Data Engineer (Oakmesh Systems) — Oakmesh Systems, West Oakland",
+          "role": "Civic Data Engineer (Oakmesh Systems)",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+            "pop": "POP-00712",
+            "rowName": "Jeremy Wong",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01109",
+          "name": "Marcus Tan",
+          "profile": "Marcus Tan — Founder, Oakmesh Systems — Oakmesh Systems, West Oakland",
+          "role": "Founder, Oakmesh Systems",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+            "pop": "POP-01109",
+            "rowName": "Marcus Tan",
+            "kind": "slice-row"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C114",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-4261fa115617"
+      },
+      {
+        "t": "FACT",
+        "text": "West Oakland businesses · Coastline Construction, Northgate Construction",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+        "id": "F-01529d14397e"
+      },
+      {
+        "t": "FACT",
+        "text": "Enzo Walker, Plumber at Coastline Construction. 19 named workers at 5 named businesses in West Oakland on the ledger this cycle.",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+        "id": "F-630940811df1"
+      },
+      {
+        "t": "FACT",
+        "text": "Coastline Construction · Construction · 221 employees · growth 9.5% · revenue $187.1M (+$341k vs C113) · key personnel: Desmond Achebe (managing partner) · on the roster: Enzo Walker (Plumber); Hazel Reed (Plumber); Desmond Achebe (Managing Partner, Coastline Construction); Elijah Brown (Electrician)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+        "id": "F-bfece8fe56af"
+      },
+      {
+        "t": "FACT",
+        "text": "Northgate Construction · Construction · 95 employees · growth 8.8% · revenue $78.8M (+$133k vs C113) · key personnel: Helena Voss-Adeyemi (managing partner) · on the roster: Kenton Pearl (Plumber); Elijah Roberts (Construction laborer); Jude Hess (Electrician); Helena Voss-Adeyemi (Managing Partner, Northgate Construction)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+        "id": "F-b51b08c19a0c"
+      },
+      {
+        "t": "FACT",
+        "text": "Oakmesh Systems · Civic Tech · 46 employees · growth 34.1% · revenue $9.5M (+$62k vs C113) · key personnel: Marcus Tan (Founder) · on the roster: Dom Will (Machine Learning Engineer (Oakmesh Systems)); Jace Robinson (Machine Learning Engineer (Oakmesh Systems)); Jeremy Wong (Civic Data Engineer (Oakmesh Systems)); Marcus Tan (Founder, Oakmesh Systems)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+        "id": "F-b99fdf91d50b"
+      },
+      {
+        "t": "FACT",
+        "text": "Civis Systems · Urban Systems Intelligence Firm · 41 employees · revenue $60.2M (+$53k vs C113) · key personnel: Elias Varek (founder) · on the roster: Sam Fazio (Digital Twin Architect); Catherine Santos (Digital Twin Architect); Elias Varek (Founder of Civis Systems); Maurice Franklin (Drone Fleet Coordinator)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+        "id": "F-b7ae91fca488"
+      },
+      {
+        "t": "FACT",
+        "text": "Mariner Construction · Construction · 165 employees · growth 7.2% · on the roster: Maeve Pillai (Plumber); Yadira Rao (Plumber); Minh Raimon (Carpenter Apprentice)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+        "id": "F-ed3f0f008b5d"
+      },
+      {
+        "t": "FACT",
+        "text": "CITY SEED (Ivy Hill): citizens Mateo Baker; Darius Hill; Samuel Adeyemi; Ebony Mendoza · businesses Ivy Hill Market; Ivy Cleaners",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C114",
+        "id": "F-916543f0d3d1"
+      },
+      {
+        "t": "FACT",
+        "text": "CITY SEED (Downtown): citizens Dame Sarr; Constanza Doan; Sandra Liu; Eunice Marston · businesses Bay Tribune; AC Transit · Lake Merritt Mindfulness Sangha (faith)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C114",
+        "id": "F-6517c6210bf3"
+      },
+      {
+        "t": "FACT",
+        "text": "CONTRACTING: Ivy Hill Market (Ivy Hill) shed 3 workers vs C113 and growth is -4.5%",
+        "src": "output/beats/prev/Business_Ledger.jsonl vs Business_Ledger.jsonl @C114",
+        "id": "F-0aa4defb8008"
+      },
+      {
+        "t": "FACT",
+        "text": "CONTRACTING: Marine Systems (Baylight District) shed 1 worker vs C113 and growth is -2.3%",
+        "src": "output/beats/prev/Business_Ledger.jsonl vs Business_Ledger.jsonl @C114",
+        "id": "F-9c5195f0e63a"
+      },
+      {
+        "t": "FACT",
+        "text": "CONTRACTING: Ivy Hill Cafe (Ivy Hill) shed 1 worker vs C113 and growth is -2.9%",
+        "src": "output/beats/prev/Business_Ledger.jsonl vs Business_Ledger.jsonl @C114",
+        "id": "F-276ddfb9f730"
+      },
+      {
+        "t": "FACT",
+        "text": "CONTRACTING: Ivy Cleaners (Ivy Hill) shed 1 worker vs C113 and growth is -2%",
+        "src": "output/beats/prev/Business_Ledger.jsonl vs Business_Ledger.jsonl @C114",
+        "id": "F-4a1ad2c64917"
+      },
+      {
+        "t": "FACT",
+        "text": "CONTRACTING: Ivy Hill Family Dental (Ivy Hill) shed 1 worker vs C113 and growth is -1.8%",
+        "src": "output/beats/prev/Business_Ledger.jsonl vs Business_Ledger.jsonl @C114",
+        "id": "F-870bfc20ca17"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "workplace",
+    "candidates": [
+      {
+        "pop": "POP-00291",
+        "name": "Enzo Walker",
+        "role": "Plumber",
+        "hood": "West Oakland",
+        "profile": "Enzo Walker — Plumber — Coastline Construction, West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "pop": "POP-00291",
+          "rowName": "Enzo Walker",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00938",
+        "name": "Hazel Reed",
+        "role": "Plumber",
+        "hood": "West Oakland",
+        "profile": "Hazel Reed — Plumber — Coastline Construction, West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "pop": "POP-00938",
+          "rowName": "Hazel Reed",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01092",
+        "name": "Desmond Achebe",
+        "role": "Managing Partner, Coastline Construction",
+        "hood": "West Oakland",
+        "profile": "Desmond Achebe — Managing Partner, Coastline Construction — Coastline Construction, West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "pop": "POP-01092",
+          "rowName": "Desmond Achebe",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01195",
+        "name": "Elijah Brown",
+        "role": "Electrician",
+        "hood": "West Oakland",
+        "profile": "Elijah Brown — Electrician — Coastline Construction, West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "pop": "POP-01195",
+          "rowName": "Elijah Brown",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00217",
+        "name": "Kenton Pearl",
+        "role": "Plumber",
+        "hood": "West Oakland",
+        "profile": "Kenton Pearl — Plumber — Northgate Construction, West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "pop": "POP-00217",
+          "rowName": "Kenton Pearl",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00275",
+        "name": "Elijah Roberts",
+        "role": "Construction laborer",
+        "hood": "West Oakland",
+        "profile": "Elijah Roberts — Construction laborer — Northgate Construction, West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "pop": "POP-00275",
+          "rowName": "Elijah Roberts",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00521",
+        "name": "Jude Hess",
+        "role": "Electrician",
+        "hood": "West Oakland",
+        "profile": "Jude Hess — Electrician — Northgate Construction, West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "pop": "POP-00521",
+          "rowName": "Jude Hess",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01095",
+        "name": "Helena Voss-Adeyemi",
+        "role": "Managing Partner, Northgate Construction",
+        "hood": "West Oakland",
+        "profile": "Helena Voss-Adeyemi — Managing Partner, Northgate Construction — Northgate Construction, West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "pop": "POP-01095",
+          "rowName": "Helena Voss-Adeyemi",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00368",
+        "name": "Dom Will",
+        "role": "Machine Learning Engineer (Oakmesh Systems)",
+        "hood": "West Oakland",
+        "profile": "Dom Will — Machine Learning Engineer (Oakmesh Systems) — Oakmesh Systems, West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "pop": "POP-00368",
+          "rowName": "Dom Will",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00483",
+        "name": "Jace Robinson",
+        "role": "Machine Learning Engineer (Oakmesh Systems)",
+        "hood": "West Oakland",
+        "profile": "Jace Robinson — Machine Learning Engineer (Oakmesh Systems) — Oakmesh Systems, West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "pop": "POP-00483",
+          "rowName": "Jace Robinson",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00712",
+        "name": "Jeremy Wong",
+        "role": "Civic Data Engineer (Oakmesh Systems)",
+        "hood": "West Oakland",
+        "profile": "Jeremy Wong — Civic Data Engineer (Oakmesh Systems) — Oakmesh Systems, West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "pop": "POP-00712",
+          "rowName": "Jeremy Wong",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01109",
+        "name": "Marcus Tan",
+        "role": "Founder, Oakmesh Systems",
+        "hood": "West Oakland",
+        "profile": "Marcus Tan — Founder, Oakmesh Systems — Oakmesh Systems, West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "pop": "POP-01109",
+          "rowName": "Marcus Tan",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00445",
+        "name": "Sam Fazio",
+        "role": "Digital Twin Architect",
+        "hood": "West Oakland",
+        "profile": "Sam Fazio — Digital Twin Architect — Civis Systems, West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "pop": "POP-00445",
+          "rowName": "Sam Fazio",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00482",
+        "name": "Catherine Santos",
+        "role": "Digital Twin Architect",
+        "hood": "West Oakland",
+        "profile": "Catherine Santos — Digital Twin Architect — Civis Systems, West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "pop": "POP-00482",
+          "rowName": "Catherine Santos",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00789",
+        "name": "Elias Varek",
+        "role": "Founder of Civis Systems",
+        "hood": "West Oakland",
+        "profile": "Elias Varek — Founder of Civis Systems — Civis Systems, West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "pop": "POP-00789",
+          "rowName": "Elias Varek",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00801",
+        "name": "Maurice Franklin",
+        "role": "Drone Fleet Coordinator",
+        "hood": "West Oakland",
+        "profile": "Maurice Franklin — Drone Fleet Coordinator — Civis Systems, West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "pop": "POP-00801",
+          "rowName": "Maurice Franklin",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00851",
+        "name": "Maeve Pillai",
+        "role": "Plumber",
+        "hood": "West Oakland",
+        "profile": "Maeve Pillai — Plumber — Mariner Construction, West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "pop": "POP-00851",
+          "rowName": "Maeve Pillai",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00866",
+        "name": "Yadira Rao",
+        "role": "Plumber",
+        "hood": "West Oakland",
+        "profile": "Yadira Rao — Plumber — Mariner Construction, West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "pop": "POP-00866",
+          "rowName": "Yadira Rao",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01010",
+        "name": "Minh Raimon",
+        "role": "Carpenter Apprentice",
+        "hood": "West Oakland",
+        "profile": "Minh Raimon — Carpenter Apprentice — Mariner Construction, West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "pop": "POP-01010",
+          "rowName": "Minh Raimon",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00020",
+        "name": "Elena Vásquez",
+        "role": "Waterfront Urban Planner",
+        "hood": "Jack London",
+        "profile": "Elena Vásquez — Waterfront Urban Planner — Jack London",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "pop": "POP-00020",
+          "rowName": "Elena Vásquez",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00048",
+        "name": "Carlos Presti",
+        "role": "Corporate Accountant",
+        "hood": "Downtown",
+        "profile": "Carlos Presti — Corporate Accountant — Downtown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "pop": "POP-00048",
+          "rowName": "Carlos Presti",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00207",
+        "name": "Owen Tower",
+        "role": "Taxi driver",
+        "hood": "Fruitvale",
+        "profile": "Owen Tower — Taxi driver — Fruitvale",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "pop": "POP-00207",
+          "rowName": "Owen Tower",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00282",
+        "name": "Edmund Alegero",
+        "role": "Construction laborer",
+        "hood": "Lake Merritt",
+        "profile": "Edmund Alegero — Construction laborer — Lake Merritt",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "pop": "POP-00282",
+          "rowName": "Edmund Alegero",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00339",
+        "name": "Kaila Nguyen",
+        "role": "Pupuseria Owner",
+        "hood": "Fruitvale",
+        "profile": "Kaila Nguyen — Pupuseria Owner — Fruitvale",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "pop": "POP-00339",
+          "rowName": "Kaila Nguyen",
+          "kind": "slice-row"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Jordan Velez",
+    "popid": "POP-00153"
+  },
+  "assignment": {
+    "story": {
+      "angle": "West Oakland businesses: Coastline Construction, Northgate Construction, Oakmesh Systems — the people who work there",
+      "label": "West Oakland businesses · Coastline Construction, Northgate Construction",
+      "hookLine": "Enzo Walker, Plumber at Coastline Construction. 19 named workers at 5 named businesses in West Oakland on the ledger this cycle.",
+      "hood": "West Oakland",
+      "pulseClass": "hood-businesses",
+      "namedBusinesses": [
+        "Coastline Construction",
+        "Northgate Construction",
+        "Oakmesh Systems",
+        "Civis Systems",
+        "Mariner Construction"
+      ],
+      "citizens": [
+        "Enzo Walker (POP-00291)",
+        "Hazel Reed (POP-00938)",
+        "Desmond Achebe (POP-01092)",
+        "Elijah Brown (POP-01195)",
+        "Kenton Pearl (POP-00217)",
+        "Elijah Roberts (POP-00275)",
+        "Jude Hess (POP-00521)",
+        "Helena Voss-Adeyemi (POP-01095)",
+        "Dom Will (POP-00368)",
+        "Jace Robinson (POP-00483)",
+        "Jeremy Wong (POP-00712)",
+        "Marcus Tan (POP-01109)",
+        "Sam Fazio (POP-00445)",
+        "Catherine Santos (POP-00482)",
+        "Elias Varek (POP-00789)",
+        "Maurice Franklin (POP-00801)",
+        "Maeve Pillai (POP-00851)",
+        "Yadira Rao (POP-00866)",
+        "Minh Raimon (POP-01010)"
+      ],
+      "popids": [
+        "POP-00291",
+        "POP-00938",
+        "POP-01092",
+        "POP-01195",
+        "POP-00217",
+        "POP-00275",
+        "POP-00521",
+        "POP-01095",
+        "POP-00368",
+        "POP-00483",
+        "POP-00712",
+        "POP-01109",
+        "POP-00445",
+        "POP-00482",
+        "POP-00789",
+        "POP-00801",
+        "POP-00851",
+        "POP-00866",
+        "POP-01010"
+      ],
+      "ref": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+      "cycle": 114
+    },
+    "approach": "Business desk approach: this slice is one neighborhood's businesses from the ledger and the people on the roster who work there — plus what moved since last cycle: revenue and headcount deltas, contractions, closures on the archive, and the week's casino action. When the record shows a business closing or shedding workers, that is the story. Open from a named business or a named worker on it — the block, the counter, the hiring board, what the owner is worried about. One claim about how the block is moving. Not civic process roundup. Not multi-voice business-desk average. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": {
+    "version": "ECONOMIC-SLICE-4",
+    "variant": "business",
+    "hood": "West Oakland",
+    "pulse": {
+      "className": "hood-businesses",
+      "score": 38,
+      "label": "West Oakland businesses · Coastline Construction, Northgate Construction",
+      "hood": "West Oakland",
+      "namedBusinesses": [
+        "Coastline Construction",
+        "Northgate Construction",
+        "Oakmesh Systems",
+        "Civis Systems",
+        "Mariner Construction"
+      ]
+    },
+    "prewrite": {
+      "pulseClass": "hood-businesses",
+      "angle": "West Oakland businesses: Coastline Construction, Northgate Construction, Oakmesh Systems — the people who work there",
+      "hookLine": "Enzo Walker, Plumber at Coastline Construction. 19 named workers at 5 named businesses in West Oakland on the ledger this cycle.",
+      "namedBusinesses": [
+        "Coastline Construction",
+        "Northgate Construction",
+        "Oakmesh Systems",
+        "Civis Systems",
+        "Mariner Construction"
+      ],
+      "anchorFacts": [
+        "Coastline Construction · Construction · 221 employees · growth 9.5% · revenue $187.1M (+$341k vs C113) · key personnel: Desmond Achebe (managing partner) · on the roster: Enzo Walker (Plumber); Hazel Reed (Plumber); Desmond Achebe (Managing Partner, Coastline Construction); Elijah Brown (Electrician)",
+        "Northgate Construction · Construction · 95 employees · growth 8.8% · revenue $78.8M (+$133k vs C113) · key personnel: Helena Voss-Adeyemi (managing partner) · on the roster: Kenton Pearl (Plumber); Elijah Roberts (Construction laborer); Jude Hess (Electrician); Helena Voss-Adeyemi (Managing Partner, Northgate Construction)",
+        "Oakmesh Systems · Civic Tech · 46 employees · growth 34.1% · revenue $9.5M (+$62k vs C113) · key personnel: Marcus Tan (Founder) · on the roster: Dom Will (Machine Learning Engineer (Oakmesh Systems)); Jace Robinson (Machine Learning Engineer (Oakmesh Systems)); Jeremy Wong (Civic Data Engineer (Oakmesh Systems)); Marcus Tan (Founder, Oakmesh Systems)",
+        "Civis Systems · Urban Systems Intelligence Firm · 41 employees · revenue $60.2M (+$53k vs C113) · key personnel: Elias Varek (founder) · on the roster: Sam Fazio (Digital Twin Architect); Catherine Santos (Digital Twin Architect); Elias Varek (Founder of Civis Systems); Maurice Franklin (Drone Fleet Coordinator)",
+        "Mariner Construction · Construction · 165 employees · growth 7.2% · on the roster: Maeve Pillai (Plumber); Yadira Rao (Plumber); Minh Raimon (Carpenter Apprentice)",
+        "CITY SEED (Ivy Hill): citizens Mateo Baker; Darius Hill; Samuel Adeyemi; Ebony Mendoza · businesses Ivy Hill Market; Ivy Cleaners",
+        "CITY SEED (Downtown): citizens Dame Sarr; Constanza Doan; Sandra Liu; Eunice Marston · businesses Bay Tribune; AC Transit · Lake Merritt Mindfulness Sangha (faith)",
+        "CONTRACTING: Ivy Hill Market (Ivy Hill) shed 3 workers vs C113 and growth is -4.5%",
+        "CONTRACTING: Marine Systems (Baylight District) shed 1 worker vs C113 and growth is -2.3%",
+        "CONTRACTING: Ivy Hill Cafe (Ivy Hill) shed 1 worker vs C113 and growth is -2.9%",
+        "CONTRACTING: Ivy Cleaners (Ivy Hill) shed 1 worker vs C113 and growth is -2%",
+        "CONTRACTING: Ivy Hill Family Dental (Ivy Hill) shed 1 worker vs C113 and growth is -1.8%",
+        "CASINO: Elena Vásquez — sports wager, staked $202, settled for $0",
+        "CASINO: Carlos Presti — sports wager, staked $668, settled for $0",
+        "CASINO: Owen Tower — sports wager, staked $531, settled for $0",
+        "CASINO: Edmund Alegero — sports wager, staked $675, settled for $0",
+        "CASINO: Kaila Nguyen — sports wager, staked $378, settled for $0",
+        "CASINO: the house float stands at $246k",
+        "CITY MONEY: City treasury this cycle took in $5.2M: $5M the weekly budget allocation, $193,849 court money on 43 cleared charges",
+        "CITY MONEY: City treasury balance at the close: $121.5M (from $116.3M)",
+        "DEBT: Debt this cycle: 1 household's debts crossed the line this cycle (Fruitvale 1)",
+        "DEBT: 95 tracked residents on the ledger carry debt at or over the crisis line — most in Fruitvale 17, Uptown 13, West Oakland 11, Lake Merritt 9"
+      ],
+      "evidence": [
+        {
+          "text": "Coastline Construction · Construction · 221 employees · growth 9.5% · revenue $187.1M (+$341k vs C113) · key personnel: Desmond Achebe (managing partner) · on the roster: Enzo Walker (Plumber); Hazel Reed (Plumber); Desmond Achebe (Managing Partner, Coastline Construction); Elijah Brown (Electrician)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114"
+        },
+        {
+          "text": "Northgate Construction · Construction · 95 employees · growth 8.8% · revenue $78.8M (+$133k vs C113) · key personnel: Helena Voss-Adeyemi (managing partner) · on the roster: Kenton Pearl (Plumber); Elijah Roberts (Construction laborer); Jude Hess (Electrician); Helena Voss-Adeyemi (Managing Partner, Northgate Construction)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114"
+        },
+        {
+          "text": "Oakmesh Systems · Civic Tech · 46 employees · growth 34.1% · revenue $9.5M (+$62k vs C113) · key personnel: Marcus Tan (Founder) · on the roster: Dom Will (Machine Learning Engineer (Oakmesh Systems)); Jace Robinson (Machine Learning Engineer (Oakmesh Systems)); Jeremy Wong (Civic Data Engineer (Oakmesh Systems)); Marcus Tan (Founder, Oakmesh Systems)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114"
+        },
+        {
+          "text": "Civis Systems · Urban Systems Intelligence Firm · 41 employees · revenue $60.2M (+$53k vs C113) · key personnel: Elias Varek (founder) · on the roster: Sam Fazio (Digital Twin Architect); Catherine Santos (Digital Twin Architect); Elias Varek (Founder of Civis Systems); Maurice Franklin (Drone Fleet Coordinator)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114"
+        },
+        {
+          "text": "Mariner Construction · Construction · 165 employees · growth 7.2% · on the roster: Maeve Pillai (Plumber); Yadira Rao (Plumber); Minh Raimon (Carpenter Apprentice)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114"
+        },
+        {
+          "text": "CITY SEED (Ivy Hill): citizens Mateo Baker; Darius Hill; Samuel Adeyemi; Ebony Mendoza · businesses Ivy Hill Market; Ivy Cleaners",
+          "src": "output/beats/Story_Seed_Deck.jsonl @C114"
+        },
+        {
+          "text": "CITY SEED (Downtown): citizens Dame Sarr; Constanza Doan; Sandra Liu; Eunice Marston · businesses Bay Tribune; AC Transit · Lake Merritt Mindfulness Sangha (faith)",
+          "src": "output/beats/Story_Seed_Deck.jsonl @C114"
+        },
+        {
+          "text": "CONTRACTING: Ivy Hill Market (Ivy Hill) shed 3 workers vs C113 and growth is -4.5%",
+          "src": "output/beats/prev/Business_Ledger.jsonl vs Business_Ledger.jsonl @C114"
+        },
+        {
+          "text": "CONTRACTING: Marine Systems (Baylight District) shed 1 worker vs C113 and growth is -2.3%",
+          "src": "output/beats/prev/Business_Ledger.jsonl vs Business_Ledger.jsonl @C114"
+        },
+        {
+          "text": "CONTRACTING: Ivy Hill Cafe (Ivy Hill) shed 1 worker vs C113 and growth is -2.9%",
+          "src": "output/beats/prev/Business_Ledger.jsonl vs Business_Ledger.jsonl @C114"
+        },
+        {
+          "text": "CONTRACTING: Ivy Cleaners (Ivy Hill) shed 1 worker vs C113 and growth is -2%",
+          "src": "output/beats/prev/Business_Ledger.jsonl vs Business_Ledger.jsonl @C114"
+        },
+        {
+          "text": "CONTRACTING: Ivy Hill Family Dental (Ivy Hill) shed 1 worker vs C113 and growth is -1.8%",
+          "src": "output/beats/prev/Business_Ledger.jsonl vs Business_Ledger.jsonl @C114"
+        },
+        {
+          "text": "CASINO: Elena Vásquez — sports wager, staked $202, settled for $0",
+          "src": "output/beats/Casino_Ledger.jsonl @C114"
+        },
+        {
+          "text": "CASINO: Carlos Presti — sports wager, staked $668, settled for $0",
+          "src": "output/beats/Casino_Ledger.jsonl @C114"
+        },
+        {
+          "text": "CASINO: Owen Tower — sports wager, staked $531, settled for $0",
+          "src": "output/beats/Casino_Ledger.jsonl @C114"
+        },
+        {
+          "text": "CASINO: Edmund Alegero — sports wager, staked $675, settled for $0",
+          "src": "output/beats/Casino_Ledger.jsonl @C114"
+        },
+        {
+          "text": "CASINO: Kaila Nguyen — sports wager, staked $378, settled for $0",
+          "src": "output/beats/Casino_Ledger.jsonl @C114"
+        },
+        {
+          "text": "CASINO: the house float stands at $246k",
+          "src": "output/beats/Casino_Ledger.jsonl @C114"
+        },
+        {
+          "text": "CITY MONEY: City treasury this cycle took in $5.2M: $5M the weekly budget allocation, $193,849 court money on 43 cleared charges",
+          "src": "output/beats/City_Treasury.jsonl @C114"
+        },
+        {
+          "text": "CITY MONEY: City treasury balance at the close: $121.5M (from $116.3M)",
+          "src": "output/beats/City_Treasury.jsonl @C114"
+        },
+        {
+          "text": "DEBT: Debt this cycle: 1 household's debts crossed the line this cycle (Fruitvale 1)",
+          "src": "output/beats/Story_Hook_Deck.jsonl DEBT_CRISIS/DEBT_DEFAULT"
+        },
+        {
+          "text": "DEBT: 95 tracked residents on the ledger carry debt at or over the crisis line — most in Fruitvale 17, Uptown 13, West Oakland 11, Lake Merritt 9",
+          "src": "output/simulation_ledger_snapshot.jsonl DebtLevel >= 5"
+        }
+      ],
+      "hooks": [
+        {
+          "text": "Notable event: \"Medium-severity economic spike in East Oakland\". Follow-up recommended.",
+          "angle": "desk rotation",
+          "hood": "East Oakland"
+        },
+        {
+          "text": "High concentration of ambitious, driven personalities. Career competition and economic hustle stories.",
+          "angle": "baseline context piece",
+          "hood": null
+        },
+        {
+          "text": "Orlando Phillips has not advanced in 57 years",
+          "angle": "baseline context piece",
+          "hood": null
+        },
+        {
+          "text": "Daniel Yoon has not advanced in 57 years",
+          "angle": "baseline context piece",
+          "hood": null
+        },
+        {
+          "text": "the debts crossed a line this week — sleep comes harder now",
+          "angle": "observational analysis",
+          "hood": "Fruitvale"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a business, a worker, an owner or a place — every name comes from this slice",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose",
+        "Do not contradict a role, employer or neighborhood listed here"
+      ]
+    },
+    "businesses": [
+      {
+        "bizId": "BIZ-00056",
+        "name": "Coastline Construction",
+        "sector": "Construction",
+        "staff": [
+          {
+            "popid": "POP-00291",
+            "name": "Enzo Walker",
+            "role": "Plumber"
+          },
+          {
+            "popid": "POP-00938",
+            "name": "Hazel Reed",
+            "role": "Plumber"
+          },
+          {
+            "popid": "POP-01092",
+            "name": "Desmond Achebe",
+            "role": "Managing Partner, Coastline Construction"
+          },
+          {
+            "popid": "POP-01195",
+            "name": "Elijah Brown",
+            "role": "Electrician"
+          }
+        ]
+      },
+      {
+        "bizId": "BIZ-00060",
+        "name": "Northgate Construction",
+        "sector": "Construction",
+        "staff": [
+          {
+            "popid": "POP-00217",
+            "name": "Kenton Pearl",
+            "role": "Plumber"
+          },
+          {
+            "popid": "POP-00275",
+            "name": "Elijah Roberts",
+            "role": "Construction laborer"
+          },
+          {
+            "popid": "POP-00521",
+            "name": "Jude Hess",
+            "role": "Electrician"
+          },
+          {
+            "popid": "POP-01095",
+            "name": "Helena Voss-Adeyemi",
+            "role": "Managing Partner, Northgate Construction"
+          }
+        ]
+      },
+      {
+        "bizId": "BIZ-00009",
+        "name": "Oakmesh Systems",
+        "sector": "Civic Tech",
+        "staff": [
+          {
+            "popid": "POP-00368",
+            "name": "Dom Will",
+            "role": "Machine Learning Engineer (Oakmesh Systems)"
+          },
+          {
+            "popid": "POP-00483",
+            "name": "Jace Robinson",
+            "role": "Machine Learning Engineer (Oakmesh Systems)"
+          },
+          {
+            "popid": "POP-00712",
+            "name": "Jeremy Wong",
+            "role": "Civic Data Engineer (Oakmesh Systems)"
+          },
+          {
+            "popid": "POP-01109",
+            "name": "Marcus Tan",
+            "role": "Founder, Oakmesh Systems"
+          }
+        ]
+      },
+      {
+        "bizId": "BIZ-00052",
+        "name": "Civis Systems",
+        "sector": "Urban Systems Intelligence Firm",
+        "staff": [
+          {
+            "popid": "POP-00445",
+            "name": "Sam Fazio",
+            "role": "Digital Twin Architect"
+          },
+          {
+            "popid": "POP-00482",
+            "name": "Catherine Santos",
+            "role": "Digital Twin Architect"
+          },
+          {
+            "popid": "POP-00789",
+            "name": "Elias Varek",
+            "role": "Founder of Civis Systems"
+          },
+          {
+            "popid": "POP-00801",
+            "name": "Maurice Franklin",
+            "role": "Drone Fleet Coordinator"
+          }
+        ]
+      },
+      {
+        "bizId": "BIZ-00058",
+        "name": "Mariner Construction",
+        "sector": "Construction",
+        "staff": [
+          {
+            "popid": "POP-00851",
+            "name": "Maeve Pillai",
+            "role": "Plumber"
+          },
+          {
+            "popid": "POP-00866",
+            "name": "Yadira Rao",
+            "role": "Plumber"
+          },
+          {
+            "popid": "POP-01010",
+            "name": "Minh Raimon",
+            "role": "Carpenter Apprentice"
+          }
+        ]
+      }
+    ],
+    "seeds": [
+      {
+        "seedId": "cc30ad6d",
+        "hood": "Ivy Hill",
+        "citizens": [
+          {
+            "popid": "POP-01101",
+            "name": "Mateo Baker"
+          },
+          {
+            "popid": "POP-01116",
+            "name": "Darius Hill"
+          },
+          {
+            "popid": "POP-01161",
+            "name": "Samuel Adeyemi"
+          },
+          {
+            "popid": "POP-01103",
+            "name": "Ebony Mendoza"
+          }
+        ]
+      },
+      {
+        "seedId": "816c38a9",
+        "hood": "Downtown",
+        "citizens": [
+          {
+            "popid": "POP-01025",
+            "name": "Dame Sarr"
+          },
+          {
+            "popid": "POP-00921",
+            "name": "Constanza Doan"
+          },
+          {
+            "popid": "POP-00750",
+            "name": "Sandra Liu"
+          },
+          {
+            "popid": "POP-00753",
+            "name": "Eunice Marston"
+          }
+        ]
+      }
+    ],
+    "rotation": {
+      "pool": [
+        {
+          "hood": "Baylight District",
+          "staffed": 4,
+          "workers": 55,
+          "lastCovered": null
+        },
+        {
+          "hood": "Lake Merritt",
+          "staffed": 1,
+          "workers": 3,
+          "lastCovered": null
+        },
+        {
+          "hood": "Temescal",
+          "staffed": 5,
+          "workers": 14,
+          "lastCovered": 113
+        },
+        {
+          "hood": "West Oakland",
+          "staffed": 7,
+          "workers": 21,
+          "lastCovered": null
+        },
+        {
+          "hood": "Brooklyn Basin",
+          "staffed": 1,
+          "workers": 5,
+          "lastCovered": null
+        },
+        {
+          "hood": "Old Oakland",
+          "staffed": 1,
+          "workers": 1,
+          "lastCovered": null
+        },
+        {
+          "hood": "Jack London",
+          "staffed": 7,
+          "workers": 47,
+          "lastCovered": 111
+        },
+        {
+          "hood": "Downtown",
+          "staffed": 7,
+          "workers": 10,
+          "lastCovered": 110
+        },
+        {
+          "hood": "Piedmont Ave",
+          "staffed": 2,
+          "workers": 7,
+          "lastCovered": null
+        },
+        {
+          "hood": "Fruitvale",
+          "staffed": 4,
+          "workers": 5,
+          "lastCovered": null
+        },
+        {
+          "hood": "Coliseum",
+          "staffed": 1,
+          "workers": 1,
+          "lastCovered": null
+        },
+        {
+          "hood": "Uptown",
+          "staffed": 4,
+          "workers": 13,
+          "lastCovered": 112
+        },
+        {
+          "hood": "Chinatown",
+          "staffed": 1,
+          "workers": 1,
+          "lastCovered": null
+        },
+        {
+          "hood": "Rockridge",
+          "staffed": 2,
+          "workers": 6,
+          "lastCovered": null
+        },
+        {
+          "hood": "KONO",
+          "staffed": 2,
+          "workers": 2,
+          "lastCovered": null
+        },
+        {
+          "hood": "Dimond",
+          "staffed": 1,
+          "workers": 1,
+          "lastCovered": null
+        },
+        {
+          "hood": "Grand Lake",
+          "staffed": 2,
+          "workers": 2,
+          "lastCovered": null
+        },
+        {
+          "hood": "Laurel",
+          "staffed": 3,
+          "workers": 3,
+          "lastCovered": null
+        },
+        {
+          "hood": "East Oakland",
+          "staffed": 2,
+          "workers": 2,
+          "lastCovered": null
+        },
+        {
+          "hood": "Eastlake",
+          "staffed": 2,
+          "workers": 2,
+          "lastCovered": null
+        },
+        {
+          "hood": "San Antonio",
+          "staffed": 1,
+          "workers": 2,
+          "lastCovered": null
+        }
+      ],
+      "picked": "West Oakland"
+    },
+    "candidates": [
+      {
+        "className": "hood-businesses",
+        "hood": "Baylight District",
+        "label": "Baylight District · 4 staffed / 10 listed",
+        "namedBusinesses": [
+          "Anthropic",
+          "Baylight Construction Authority",
+          "Oakland Casino Town"
+        ]
+      },
+      {
+        "className": "hood-businesses",
+        "hood": "Lake Merritt",
+        "label": "Lake Merritt · 1 staffed / 10 listed",
+        "namedBusinesses": [
+          "Ridgeline Ventures"
+        ]
+      },
+      {
+        "className": "hood-businesses",
+        "hood": "Temescal",
+        "label": "Temescal · 5 staffed / 11 listed",
+        "namedBusinesses": [
+          "Gridiron Analytics",
+          "OakTown Social",
+          "Calderon-Nishi"
+        ]
+      },
+      {
+        "className": "hood-businesses",
+        "hood": "Brooklyn Basin",
+        "label": "Brooklyn Basin · 1 staffed / 1 listed",
+        "namedBusinesses": [
+          "Portside Bio"
+        ]
+      },
+      {
+        "className": "hood-businesses",
+        "hood": "Old Oakland",
+        "label": "Old Oakland · 1 staffed / 1 listed",
+        "namedBusinesses": [
+          "Tenth Street Digital"
+        ]
+      },
+      {
+        "className": "hood-businesses",
+        "hood": "Jack London",
+        "label": "Jack London · 7 staffed / 15 listed",
+        "namedBusinesses": [
+          "Port of Oakland",
+          "Jack London Square Markets",
+          "Blue Lantern Bar"
+        ]
+      },
+      {
+        "className": "hood-businesses",
+        "hood": "Downtown",
+        "label": "Downtown · 7 staffed / 14 listed",
+        "namedBusinesses": [
+          "EBMUD",
+          "Miso Metro",
+          "SpeedyBurger"
+        ]
+      },
+      {
+        "className": "hood-businesses",
+        "hood": "Piedmont Ave",
+        "label": "Piedmont Ave · 2 staffed / 14 listed",
+        "namedBusinesses": [
+          "Piedmont Avenue Medical Center",
+          "Mayday Movers"
+        ]
+      }
+    ]
+  },
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Jordan Velez",
+    "popid": "POP-00153",
+    "text": "I've been hearing the pile drivers before I see them now — that rhythm is just part of the morning. But there's a different sound underneath it, and I can't shake it. The West Oakland blocks with the new money — the construction outfits and the tech shops — they're all still growing on paper. Coastline's up 9.5 percent, Northgate close behind, Oakmesh growing at 34 percent. That's the story everyone wants to tell: the boom, the jobs, the footprint. But I keep thinking about Enzo Walker, a plumber at Coastline, the kind of guy who's been on these jobs long enough to know what a foundation actually costs. And I'm watching the Ivy Hill Cafe go quiet — Samuel Adeyemi's been sitting in there long",
+    "plan": {
+      "chase": "I've been hearing the pile drivers before I see them now — that rhythm is just part of the morning. But there's a different sound underneath it, and I can't shake it. The West Oakland blocks with the new money — the construction outfits and the tech shops — they're all still growing on paper. Coastline's up 9.5 percent, Northgate close behind, Oakmesh growing at 34 percent. That's the story everyone wants to tell: the boom, the jobs, the footprint. But I keep thinking about Enzo Walker, a plumber at Coastline, the kind of guy who's been on these jobs long enough to know what a foundation actually costs. And I'm watching the Ivy Hill Cafe go quiet — Samuel Adeyemi's been sitting in there long",
+      "focus": "The split in West Oakland between the construction and civic-tech growth on the ledger and the quieter contractions on the same blocks — told through the workers on the five named businesses and what the owners are actually worried about.",
+      "why": "The business desk keeps chasing the upside — the revenue deltas, the headcount growth, the footprint. But the record shows both directions at once, and that tension is the real story. A block doesn't move as one number. It moves as a hundred small decisions, and some of those decisions are contractions wearing a hard hat.",
+      "checks": [
+        "Confirm the five West Oakland businesses and their roster names are the only ones I use — no invented workers or owners.",
+        "Anchor the piece in a named worker: Enzo Walker first, then build outward to the other four businesses only through their listed people.",
+        "Keep revenue and headcount figures to the deltas given — no new numbers, no projections.",
+        "Use the Ivy Hill contractions only as context, not as the lead — the assignment is West Oakland's five businesses.",
+        "Do not turn this into a civic process roundup. No meetings, no votes, no official actions."
+      ],
+      "targets": [
+        {
+          "pop": "POP-00291",
+          "question": "When you look at the growth on Coastline's books, does it match what you see on the ground — or is the work changing in a way the numbers don't capture?",
+          "basis": "Enzo Walker is a named plumber at Coastline Construction, the business with the largest revenue on the West Oakland slice this cycle."
+        },
+        {
+          "pop": "POP-01092",
+          "question": "What keeps you up at night about the next twelve months — the growth or something the growth is hiding?",
+          "basis": "Desmond Achebe is the managing partner of Coastline Construction, the largest of the five West Oakland businesses by revenue and headcount."
+        },
+        {
+          "pop": "POP-01095",
+          "question": "Northgate is growing slower than Coastline. Is that a choice or a constraint — and what does it mean for the crews in the field?",
+          "basis": "Helena Voss-Adeyemi is the managing partner of Northgate Construction, the second construction firm on the West Oakland slice."
+        },
+        {
+          "pop": "POP-01109",
+          "question": "At 34 percent growth, what does Oakmesh owe the neighborhood that houses it — and what does the neighborhood owe you back?",
+          "basis": "Marcus Tan founded Oakmesh Systems, the fastest-growing business on the West Oakland slice this cycle."
+        }
+      ],
+      "interpretation": "The five West Oakland businesses are all growing, but the pace is uneven and the character is different. The construction firms are moving on volume — crews, sites, small deltas. The civic-tech and urban-systems firms are moving on velocity — a 34 percent jump that feels like it belongs to a different economy than the one plumbers and electricians clock into. The contractions in nearby Ivy Hill suggest that growth is not spreading evenly. The people who work these jobs are the connective tissue ",
+      "unverifiedLead": [
+        "Enzo Walker has been on Coastline sites long enough to have opinions about what the growth feels like from inside a job, not from the revenue line.",
+        "The Ivy Hill Cafe going quiet — Samuel Adeyemi watching it — suggests the kind of displacement pressure that shows up when new capital moves into a neighborhood faster than the old businesses can absorb it."
+      ],
+      "closeQuestion": "What does a 9.5 percent growth rate actually feel like at the end of a shift — and who gets to count it as theirs?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Downtown Economic Revitalization — economic upside, jobs and footprint in Downtown | Business momentum in Downtown tracks the civic gain.",
+      "kind": "anomaly",
+      "hood": "Downtown",
+      "ref": "output/engine_audit_c114.json patterns[4]; evidence: Initiative_Tracker row(s) 8; storyline INIT-008:vote-scheduled",
+      "popids": [
+        "POP-00212",
+        "POP-00753",
+        "POP-00764"
+      ]
+    },
+    {
+      "label": "Commercial Stabilization for Grand Lake — economic upside, jobs and footprint in Grand Lake | Business momentum in Grand Lake tracks the housing gain.",
+      "kind": "anomaly",
+      "hood": "Grand Lake",
+      "ref": "output/engine_audit_c114.json patterns[5]; evidence: Initiative_Tracker row(s) 9; storyline INIT-009:announced",
+      "popids": [
+        "POP-00001",
+        "POP-01049",
+        "POP-01218"
+      ]
+    },
+    {
+      "label": "West Oakland Tenant Defense Fund — economic upside, jobs and footprint in West Oakland | Business momentum in West Oakland tracks the civic gain.",
+      "kind": "anomaly",
+      "hood": "West Oakland",
+      "ref": "output/engine_audit_c114.json patterns[6]; evidence: Initiative_Tracker row(s) 10; storyline INIT-010:announced",
+      "popids": [
+        "POP-00007",
+        "POP-00527",
+        "POP-00789"
+      ]
+    },
+    {
+      "label": "civic — economic upside, jobs and footprint in Downtown | Business momentum in Downtown tracks the civic gain.",
+      "kind": "anomaly",
+      "hood": "Downtown",
+      "ref": "output/engine_audit_c114.json patterns[7]; evidence: Neighborhood_Map row(s) ",
+      "popids": [
+        "POP-00056",
+        "POP-00688",
+        "POP-01023"
+      ]
+    },
+    {
+      "label": "civic — economic upside, jobs and footprint in West Oakland | Business momentum in West Oakland tracks the civic gain.",
+      "kind": "anomaly",
+      "hood": "West Oakland",
+      "ref": "output/engine_audit_c114.json patterns[8]; evidence: Neighborhood_Map row(s) ",
+      "popids": [
+        "POP-00143",
+        "POP-00722",
+        "POP-01027"
+      ]
+    }
+  ],
+  "laneEntries": 48,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-02T12:16:01.631Z"
+}

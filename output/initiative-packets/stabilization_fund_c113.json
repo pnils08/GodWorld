@@ -1,0 +1,1116 @@
+{
+  "meta": {
+    "type": "initiative-packet",
+    "initiative": "stabilization-fund",
+    "initiativeId": "INIT-001",
+    "cycle": 113,
+    "generatedAt": "2026-10-26T05:32:45.711Z",
+    "description": "Neighborhood Stabilization Fund — $28M for housing stability, small business support, and workforce development in displacement-risk neighborhoods"
+  },
+  "initiative": {
+    "id": "INIT-001",
+    "name": "West Oakland Stabilization Fund",
+    "type": "vote",
+    "status": "passed",
+    "budget": "$28M",
+    "voteRequirement": "6-3",
+    "voteCycle": "78",
+    "projection": "lean pass",
+    "outcome": "PASSED",
+    "leadFaction": "OPP",
+    "oppositionFaction": "CRC",
+    "swingVoter": "Ramon Vega",
+    "affectedNeighborhoods": "West Oakland",
+    "policyDomain": "economic",
+    "consequences": "Initiative approved. Implementation begins.",
+    "mayoralAction": "signed",
+    "mayoralActionCycle": "78",
+    "notes": "Cycle 78: Passed 6-3. Ramon Vega voted yes. Leonard Tran voted no. (Elliott Crane voted yes remotely)",
+    "lastUpdated": "10/25/2026",
+    "implementationPhase": "disbursement-active",
+    "milestoneNotes": "C107: Downtown canvass deployment authorized alongside month-eight disbursement review.\nC108 conversion: passed C78 before the mayoral-action step existed; the mayor's own bill, recorded signed at C78.\nC108 conversion: Stage Standing — Stabilization Fund, disbursement-active since C78 (economic — not playable, no Delivering gate yet; the untended clock still runs). | C108 retag economic→housing (ruled 2026-09-22 — the Fund is a household anti-displacement fund in canon; engine.255 wires it as the first budgeted disbursement).\nC108: scope recorded as chartered — stabilization grants for long-tenure West Oakland residents priced out as the flats built out (the remnant the charter named), not hood-wide relief; 47 checks (~$4.2M) disbursed under Deputy Mayor Okoro’s authority C84–C90; authorization $28M, ~$23.8M remaining.\nC108: retag reversed — housing→economic (the 2026-09-22 retag was engine-sheet error; the Fund is not a housing fund).\nC109 scope correction: the Fund serves West Oakland businesses and residents. The C107 'Downtown canvass' line and the C108 'residents only' reading are superseded.\nC109: month-eight tranche $400,000 released in West Oakland (2 household grants, $81,188). Downtown is outside the Fund's area — that is INIT-008, proposed, not voted.\nC110: Month-nine disbursement $400K approved; 23-day avg processing time achieved\nC111: Month-ten disbursement $400K approved; 23-day processing standard maintained.\nC112: Month-eleven disbursement $400K approved; 23-day processing standard maintained; cumulative $5M+ disbursed\nC113: Month-11 audit published; Month-12 $400K approved with charter scope preservation directive",
+    "nextScheduledAction": "Month-12 disbursement execution and charter renewal drafting",
+    "nextActionCycle": "114"
+  },
+  "office": {
+    "name": "Office of Economic and Workforce Development (OEWD)",
+    "policyDomains": [
+      "economic",
+      "housing",
+      "workforce"
+    ],
+    "officials": [
+      {
+        "officeId": "MAYOR-01",
+        "title": "Mayor",
+        "name": "Avery Santana",
+        "popId": "POP-00034",
+        "status": "active",
+        "faction": "OPP"
+      },
+      {
+        "officeId": "STAFF-COS",
+        "title": "Chief of Staff",
+        "name": "Laila Cortez",
+        "popId": "POP-00035",
+        "status": "active",
+        "faction": "STAFF"
+      },
+      {
+        "officeId": "PLANNING-DIR",
+        "title": "City Planning Director",
+        "name": "Mara Vance",
+        "popId": "POP-00507",
+        "status": "active",
+        "faction": "STAFF"
+      }
+    ]
+  },
+  "previousCycle": {
+    "decisions": {
+      "initiative": "INIT-001",
+      "initiativeId": "INIT-001",
+      "cycle": 112,
+      "primaryVoice": "Mayor gavel (mayor_gavel-001)",
+      "consolidatedFrom": [
+        "STMT-112-mayor_gavel-001 (Mayor gavel — West Oakland Stabilization Fund Month-Eleven Disbursement)",
+        "STMT-112-stabilization_fund-001 (Webb — Month-eleven disbursement)",
+        "STMT-112-stabilization_fund-003 (Webb — West Oakland stability)"
+      ],
+      "trackerUpdates": {
+        "InitiativeID": "INIT-001",
+        "ImplementationPhase": "disbursement-active",
+        "MilestoneNotes": "C112: Month-eleven disbursement $400K approved; 23-day processing standard maintained; cumulative $5M+ disbursed",
+        "NextScheduledAction": "Month-twelve disbursement review",
+        "NextActionCycle": 113,
+        "LastWorkCycle": 112,
+        "LastWorkSeat": "proj-stabilization-fund"
+      },
+      "_moveFold": {
+        "moveIds": [
+          "MV-111-proj-stabilization-fund-2026-10-14"
+        ]
+      }
+    },
+    "voiceDecisions": {
+      "mayorDecisions": [
+        {
+          "statementId": "STMT-112-mayor_gavel-001",
+          "type": "authorization_response",
+          "topic": "West Oakland Stabilization Fund Month-Eleven Disbursement",
+          "decision": "approved",
+          "amount": null,
+          "initiative": "INIT-001",
+          "conditions": [],
+          "quote": "Month-eleven, 23-day standard maintained — this fund delivers because Brenda Okoro's team treats every application like family."
+        },
+        {
+          "statementId": "STMT-112-mayor_open-001",
+          "type": "authorization_response",
+          "topic": "West Oakland Stabilization Fund Month-Eleven Disbursement",
+          "decision": "approved",
+          "amount": null,
+          "initiative": "INIT-001",
+          "conditions": [],
+          "quote": "West Oakland families don't need promises—they need checks that clear. Month-eleven disbursement approved."
+        }
+      ],
+      "factionReactions": []
+    },
+    "documentsProduced": [
+      "STAB-C000-ProjectCharter-20400101.md",
+      "STAB-C076-CouncilPositions-20410301.md",
+      "STAB-C084-OEWDResponse-20410801.md",
+      "STAB-C085-DisbursementRequest-20410901.md",
+      "decisions_c103.json",
+      "decisions_c104.json",
+      "decisions_c105.json",
+      "decisions_c106.json",
+      "decisions_c107.json",
+      "decisions_c108.json",
+      "decisions_c109.json",
+      "decisions_c110.json",
+      "decisions_c111.json",
+      "decisions_c112.json",
+      "decisions_c113.json"
+    ]
+  },
+  "maraDirective": "# C112 Voice Directives — Mara Vance (AUTO)\n\n**Cycle:** 112\n**Issued:** C112 (auto-derived, cron-civic-run.js --stage=directive, post-close)\n**Source:** close_c112 + world_summary_c112 + engine review HIGHs + tracker + C111 voice record\n\n---\n## Denise Carter — City Council District 1\n\n- **Agent:** `.claude/agents/civic-office-council-d1/`\n- **Address:** Cast the committee vote to advance the West Oakland Tenant Defense Fund (INIT-010) and publish a targeted municipal service response for the Brooklyn corridor.\n- **Why:** District 1 logged zero voice in the C112 close while INIT-010 reached its scheduled committee vote milestone and Brooklyn deteriorated to a sentiment of -0.12, crime index of 0.62, and decay momentum of 3 with one active citizen complaint on the record.\n- **Acceptance:** A recorded committee vote on INIT-010 and a published Brooklyn service audit observable in C113.\n- **Silence consequence:** INIT-010 stalls at the committee gate before reaching the full council, leaving D1 tenants without defense appropriations as Brooklyn commercial decay deepens.\n\n## Ramon Vega — City Council District 4\n\n- **Agent:** `.claude/agents/civic-office-council-d4/`\n- **Address:** File the legislative ordinance for the Ivy Hill Revitalization Initiative (INIT-011) and docket an emergency infrastructure response for District 4 corridors.\n- **Why:** INIT-011 has remained at announced status past its C111 legislation-filed milestone with its stall clock expiring at C113, while Dimond drops to city-low sentiment of -0.18, Ivy Hill records sentiment of -0.16 with decay momentum of 2 and crime index of 0.63, and Glenview sits at -0.09.\n- **Acceptance:** Formally filed ordinance text for INIT-011 with the City Clerk observable in C113.\n- **Silence consequence:** INIT-011 lapses into an administrative stall under charter rules, leaving Ivy Hill and Dimond without capital revitalization authority.\n\n## Avery Santana — Mayor\n\n- **Agent:** `.claude/agents/civic-office-mayor/`\n- **Address:** Publish the Month-11 disbursement audit for INIT-001, the OARI quarterly outcome report for INIT-002, and the first cohort placement data for INIT-007, while resolving the two standing citizen complaints on the executive ledger.\n- **Why:** Eight initiatives on the mayoral board (INIT-001, INIT-002, INIT-005, INIT-007, INIT-008, INIT-009, INIT-010, INIT-011) carry stall clocks expiring at or before C113, with three core operational reviews (INIT-001, INIT-002, INIT-007) overdue as of C112.\n- **Acceptance:** Published executive deliverable reports for INIT-001, INIT-002, and INIT-007, plus recorded disposition of the two citizen complaints in C113.\n- **Silence consequence:** Administrative tracking records multiple executive milestone defaults across stabilization, safety dispatch, and youth workforce pipelines.\n\n## Leonard Tran — City Council District 2\n\n- **Agent:** `.claude/agents/civic-office-council-d2/`\n- **Address:** Convene the Economic Development Committee hearing for the $15M Downtown Economic Revitalization ordinance (INIT-008) and report committee findings.\n- **Why:** INIT-008 was filed in C110 and scheduled for committee hearing in C112 with its C113 stall threshold closing, while Baylight District commercial vitality remains depressed at 6.43 and sentiment sits at -0.04.\n- **Acceptance:** A recorded committee hearing transcript and vote or referral action on INIT-008 in C113.\n- **Silence consequence:** The $15M downtown revitalization authorization freezes at the committee threshold, blocking capital deployment to downtown commercial corridors.\n\n## Nina Chen — City Council District 8\n\n- **Agent:** `.claude/agents/civic-office-council-d8/`\n- **Address:** Execute the committee vote on the $2.5M Commercial Stabilization for Grand Lake ordinance (INIT-009) and file an administrative service audit for Eastlake and Adams Point.\n- **Why:** INIT-009 reached its C112 committee hearing and vote milestone under a C113 stall clock, while Eastlake exhibits severe decay momentum of 4 (sentiment -0.09, retail vitality 6.54) and Adams Point records sentiment of -0.14 with decay momentum of 2.\n- **Acceptance:** A recorded committee vote advancing INIT-009 to the full council floor and filed service audit criteria for Eastlake in C113.\n- **Silence consequence:** Grand Lake commercial stabilization funds fail to appropriate, and Eastlake's commercial corridor continues uncontrolled deterioration.\n\n## Rose Delgado — City Council District 3\n\n- **Agent:** `.claude/agents/civic-office-council-d3/`\n- **Address:** Submit the District 3 dispatch breakdown for INIT-002, confirm D3 placements for INIT-007, and file an operational response to the active San Antonio citizen complaint.\n- **Why:** Both INIT-002 and INIT-007 reached their C112 reporting milestones, while San Antonio shows crime at 0.65, retail vitality down at 5.22, sentiment at -0.06, and decay momentum at 2 with an unaddressed citizen complaint on file.\n- **Acceptance:** Filed District 3 outcome metrics for INIT-002 and INIT-007, alongside an official response to the San Antonio petition in C113.\n- **Silence consequence:** Citywide emergency dispatch and youth pipeline reports proceed with District 3 data missing, leaving San Antonio without municipal recovery commitments.\n\n## Janae Rivers — City Council District 5\n\n- **Agent:** `.claude/agents/civic-office-council-d5/`\n- **Address:** Deliver verified East Oakland youth intake figures for the INIT-007 placement report and submit the District 5 dispatch performance assessment for INIT-002.\n- **Why:** INIT-002 and INIT-007 both reached their C112 reporting deadlines with stall clocks closing in C113, and District 5 claims of youth prioritization remain unsupported by published cohort data.\n- **Acceptance:** Published cohort placement totals for District 5 in INIT-007 and filed dispatch response metrics for INIT-002 in C113.\n- **Silence consequence:** East Oakland's share of workforce appropriations and alternative emergency dispatch resources cannot be certified in the city record.\n\n## Warren Ashford — City Council District 7\n\n- **Agent:** `.claude/agents/civic-office-council-d7/`\n- **Address:** File the pre-audit operational benchmark framework and intake criteria for the Temescal Community Health Center (INIT-005) ahead of its C113 utilization review.\n- **Why:** INIT-005 is fully operational and faces its first-quarter utilization review milestone in C113, while Temescal records depressed retail vitality of 6.40 and an elevated crime index of 0.65.\n- **Acceptance:** Published post-occupancy audit benchmarks and patient intake metrics for INIT-005 in C113.\n- **Silence consequence:** The health center operates without baseline fiscal oversight metrics on the public record as its quarterly utilization deadline passes.\n",
+  "citizens": {
+    "total": 257,
+    "tierBreakdown": {
+      "1": 5,
+      "2": 19,
+      "3": 53,
+      "4": 180
+    },
+    "avgIncome": 1851109,
+    "medianIncome": 96200,
+    "atDisplacementRisk": 188,
+    "linkedProfiles": [
+      {
+        "popId": "POP-00772",
+        "name": "Beverly Hayes",
+        "tier": 3,
+        "age": 0,
+        "neighborhood": "West Oakland",
+        "occupation": "",
+        "roleType": "Community Director, West Oakland Community Center",
+        "employer": "",
+        "income": 58000,
+        "householdId": "",
+        "maritalStatus": "single",
+        "displacementRisk": 2,
+        "migrationIntent": "staying",
+        "healthStatus": "",
+        "notes": ""
+      }
+    ],
+    "notableCitizens": [
+      {
+        "popId": "POP-00007",
+        "name": "Hal Richmond",
+        "tier": 1,
+        "neighborhood": "West Oakland",
+        "occupation": "",
+        "displacementRisk": 0
+      },
+      {
+        "popId": "POP-00011",
+        "name": "Carmen Delaine",
+        "tier": 2,
+        "neighborhood": "West Oakland",
+        "occupation": "",
+        "displacementRisk": 0
+      },
+      {
+        "popId": "POP-00024",
+        "name": "Henry Rivas",
+        "tier": 2,
+        "neighborhood": "West Oakland",
+        "occupation": "",
+        "displacementRisk": 2
+      },
+      {
+        "popId": "POP-00031",
+        "name": "Martin Richards",
+        "tier": 1,
+        "neighborhood": "Fruitvale",
+        "occupation": "",
+        "displacementRisk": 2
+      },
+      {
+        "popId": "POP-00143",
+        "name": "Clarissa Dane",
+        "tier": 2,
+        "neighborhood": "West Oakland",
+        "occupation": "",
+        "displacementRisk": 0
+      },
+      {
+        "popId": "POP-00198",
+        "name": "Rick Walker",
+        "tier": 1,
+        "neighborhood": "Fruitvale",
+        "occupation": "",
+        "displacementRisk": 4
+      },
+      {
+        "popId": "POP-00231",
+        "name": "Calvin Turner",
+        "tier": 2,
+        "neighborhood": "Fruitvale",
+        "occupation": "",
+        "displacementRisk": 2
+      },
+      {
+        "popId": "POP-00527",
+        "name": "Mike Paulson",
+        "tier": 1,
+        "neighborhood": "West Oakland",
+        "occupation": "",
+        "displacementRisk": 0
+      },
+      {
+        "popId": "POP-00591",
+        "name": "Selena Grant",
+        "tier": 2,
+        "neighborhood": "West Oakland",
+        "occupation": "",
+        "displacementRisk": 0
+      },
+      {
+        "popId": "POP-00722",
+        "name": "Daniel Cloak",
+        "tier": 2,
+        "neighborhood": "West Oakland",
+        "occupation": "",
+        "displacementRisk": 2
+      },
+      {
+        "popId": "POP-00744",
+        "name": "Tomas Renteria",
+        "tier": 2,
+        "neighborhood": "Fruitvale",
+        "occupation": "",
+        "displacementRisk": 2
+      },
+      {
+        "popId": "POP-00754",
+        "name": "Ophelia Brenner",
+        "tier": 2,
+        "neighborhood": "Fruitvale",
+        "occupation": "",
+        "displacementRisk": 4
+      },
+      {
+        "popId": "POP-00756",
+        "name": "Ramon Solano",
+        "tier": 2,
+        "neighborhood": "Fruitvale",
+        "occupation": "",
+        "displacementRisk": 5
+      },
+      {
+        "popId": "POP-00758",
+        "name": "Robert Jaston",
+        "tier": 2,
+        "neighborhood": "West Oakland",
+        "occupation": "",
+        "displacementRisk": 2
+      },
+      {
+        "popId": "POP-00762",
+        "name": "Aziz Rahimi",
+        "tier": 2,
+        "neighborhood": "Fruitvale",
+        "occupation": "",
+        "displacementRisk": 4
+      },
+      {
+        "popId": "POP-00766",
+        "name": "Manjit Singh",
+        "tier": 2,
+        "neighborhood": "Fruitvale",
+        "occupation": "",
+        "displacementRisk": 4
+      },
+      {
+        "popId": "POP-00771",
+        "name": "Sage Vienta",
+        "tier": 2,
+        "neighborhood": "West Oakland",
+        "occupation": "",
+        "displacementRisk": 0
+      },
+      {
+        "popId": "POP-00773",
+        "name": "Jada Rayes",
+        "tier": 2,
+        "neighborhood": "West Oakland",
+        "occupation": "",
+        "displacementRisk": 0
+      },
+      {
+        "popId": "POP-00789",
+        "name": "Elias Varek",
+        "tier": 1,
+        "neighborhood": "West Oakland",
+        "occupation": "",
+        "displacementRisk": 0
+      },
+      {
+        "popId": "POP-00953",
+        "name": "Carmen Solis",
+        "tier": 2,
+        "neighborhood": "Fruitvale",
+        "occupation": "",
+        "displacementRisk": 2
+      }
+    ]
+  },
+  "neighborhoods": [
+    {
+      "neighborhood": "West Oakland",
+      "sentiment": 0.25,
+      "medianIncome": "145871",
+      "medianRent": "3647",
+      "trajectory": "growth",
+      "housingPressure": "2.5",
+      "crimeIndex": 0.59,
+      "retailVitality": 9.68,
+      "students": 317,
+      "adults": 1683,
+      "seniors": 304,
+      "unemployed": 47,
+      "sick": 86,
+      "schoolQuality": 8.12,
+      "propertyCrime": 34,
+      "violentCrime": 25,
+      "responseTime": 9.9,
+      "incidents": 7
+    },
+    {
+      "neighborhood": "Fruitvale",
+      "sentiment": 0.24,
+      "medianIncome": "99380",
+      "medianRent": "2485",
+      "trajectory": "growth",
+      "housingPressure": "6.5",
+      "crimeIndex": 0.62,
+      "retailVitality": 11.35,
+      "students": 423,
+      "adults": 1559,
+      "seniors": 351,
+      "unemployed": 63,
+      "sick": 114,
+      "schoolQuality": 7.6,
+      "propertyCrime": 34,
+      "violentCrime": 28,
+      "responseTime": 10.3,
+      "incidents": 6
+    },
+    {
+      "neighborhood": "Brooklyn",
+      "sentiment": 0,
+      "medianIncome": "129480",
+      "medianRent": "3237",
+      "trajectory": "decay",
+      "housingPressure": "0",
+      "crimeIndex": 0.57,
+      "retailVitality": 5.12,
+      "students": 348,
+      "adults": 1494,
+      "seniors": 291,
+      "unemployed": 53,
+      "sick": 70,
+      "schoolQuality": 8.14,
+      "propertyCrime": 33,
+      "violentCrime": 24,
+      "responseTime": 10.3,
+      "incidents": 4
+    },
+    {
+      "neighborhood": "San Antonio",
+      "sentiment": -0.04,
+      "medianIncome": "69650",
+      "medianRent": "1625",
+      "trajectory": "decay",
+      "housingPressure": "0",
+      "crimeIndex": 0.61,
+      "retailVitality": 5.03,
+      "students": 388,
+      "adults": 1523,
+      "seniors": 301,
+      "unemployed": 109,
+      "sick": 110,
+      "schoolQuality": 6.76,
+      "propertyCrime": 35,
+      "violentCrime": 28,
+      "responseTime": 9.5,
+      "incidents": 6
+    },
+    {
+      "neighborhood": "East Oakland",
+      "sentiment": 0.2,
+      "medianIncome": "72072",
+      "medianRent": "1562",
+      "trajectory": "decay",
+      "housingPressure": "0",
+      "crimeIndex": 0.59,
+      "retailVitality": 6.1,
+      "students": 478,
+      "adults": 1541,
+      "seniors": 328,
+      "unemployed": 96,
+      "sick": 121,
+      "schoolQuality": 6.73,
+      "propertyCrime": 35,
+      "violentCrime": 28,
+      "responseTime": 9.5,
+      "incidents": 6
+    }
+  ],
+  "businesses": [
+    {
+      "bizId": "BIZ-00056",
+      "name": "Coastline Construction",
+      "sector": "Construction",
+      "neighborhood": "West Oakland",
+      "employeeCount": 221,
+      "avgSalary": 85000,
+      "growthRate": "8.49",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00058",
+      "name": "Mariner Construction",
+      "sector": "Construction",
+      "neighborhood": "West Oakland",
+      "employeeCount": 165,
+      "avgSalary": 90000,
+      "growthRate": "6.23",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00059",
+      "name": "Foothill Builders",
+      "sector": "Construction",
+      "neighborhood": "Fruitvale",
+      "employeeCount": 110,
+      "avgSalary": 78000,
+      "growthRate": "10.75",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00060",
+      "name": "Northgate Construction",
+      "sector": "Construction",
+      "neighborhood": "West Oakland",
+      "employeeCount": 95,
+      "avgSalary": 76000,
+      "growthRate": "7.79",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00028",
+      "name": "West Oakland Community Center",
+      "sector": "Community Services",
+      "neighborhood": "West Oakland",
+      "employeeCount": 94,
+      "avgSalary": 58000,
+      "growthRate": "9.97",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00009",
+      "name": "Oakmesh Systems",
+      "sector": "Civic Tech",
+      "neighborhood": "West Oakland",
+      "employeeCount": 46,
+      "avgSalary": 135000,
+      "growthRate": "33.12",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00186",
+      "name": "Varek Systems",
+      "sector": "Tech",
+      "neighborhood": "West Oakland",
+      "employeeCount": 45,
+      "avgSalary": 120000,
+      "growthRate": "9",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00187",
+      "name": "Prescott Foundry Labs",
+      "sector": "Tech / Applied Robotics",
+      "neighborhood": "West Oakland",
+      "employeeCount": 45,
+      "avgSalary": 120000,
+      "growthRate": "8.97",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00188",
+      "name": "Mandela Data Works",
+      "sector": "Tech / Data Infrastructure",
+      "neighborhood": "West Oakland",
+      "employeeCount": 45,
+      "avgSalary": 120000,
+      "growthRate": "8.36",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00189",
+      "name": "Hoover Street Software",
+      "sector": "Tech / Software",
+      "neighborhood": "West Oakland",
+      "employeeCount": 45,
+      "avgSalary": 120000,
+      "growthRate": "8.83",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00184",
+      "name": "Oakland 12",
+      "sector": "Media & Journalism",
+      "neighborhood": "Fruitvale",
+      "employeeCount": 42,
+      "avgSalary": 58000,
+      "growthRate": "5.64",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00052",
+      "name": "Civis Systems",
+      "sector": "Urban Systems Intelligence Firm",
+      "neighborhood": "West Oakland",
+      "employeeCount": 41,
+      "avgSalary": 230000,
+      "growthRate": "362%",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00026",
+      "name": "Fruitvale Community Clinic",
+      "sector": "Healthcare",
+      "neighborhood": "Fruitvale",
+      "employeeCount": 38,
+      "avgSalary": 85000,
+      "growthRate": "12.18",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00257",
+      "name": "Estuary Pediatrics",
+      "sector": "Pediatric Clinic",
+      "neighborhood": "Brooklyn",
+      "employeeCount": 38,
+      "avgSalary": 85000,
+      "growthRate": "2.25",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00029",
+      "name": "Coliseum District Development",
+      "sector": "Real Estate",
+      "neighborhood": "Coliseum",
+      "employeeCount": 31,
+      "avgSalary": 105000,
+      "growthRate": "9.64",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00068",
+      "name": "Marigold Cafe",
+      "sector": "Cafe / dining",
+      "neighborhood": "Fruitvale",
+      "employeeCount": 30,
+      "avgSalary": 51000,
+      "growthRate": "9.97",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00272",
+      "name": "Coliseum Way Builders",
+      "sector": "Construction",
+      "neighborhood": "East Oakland",
+      "employeeCount": 30,
+      "avgSalary": 80000,
+      "growthRate": "5.63",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00273",
+      "name": "Hegenberger Concrete & Steel",
+      "sector": "Construction Supply",
+      "neighborhood": "East Oakland",
+      "employeeCount": 30,
+      "avgSalary": 80000,
+      "growthRate": "5.84",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00078",
+      "name": "Foothill Baptist Tabernacle",
+      "sector": "Faith Organization",
+      "neighborhood": "East Oakland",
+      "employeeCount": 26,
+      "avgSalary": 58000,
+      "growthRate": "3.48",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00260",
+      "name": "International Boulevard Staffing",
+      "sector": "Staffing Agency / Professional Services",
+      "neighborhood": "San Antonio",
+      "employeeCount": 26,
+      "avgSalary": 95000,
+      "growthRate": "3.63",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00082",
+      "name": "New Covenant Pentecostal Assembly",
+      "sector": "Faith Organization",
+      "neighborhood": "West Oakland",
+      "employeeCount": 22,
+      "avgSalary": 56000,
+      "growthRate": "2.88",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00099",
+      "name": "OakTown Echo",
+      "sector": "Media & Journalism",
+      "neighborhood": "West Oakland",
+      "employeeCount": 20,
+      "avgSalary": 90000,
+      "growthRate": "2.47",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00103",
+      "name": "Firehouse 29 West Oakland Baseball Academy",
+      "sector": "Sports",
+      "neighborhood": "West Oakland",
+      "employeeCount": 20,
+      "avgSalary": 76000,
+      "growthRate": "1.8",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00094",
+      "name": "West Oakland Stabilization Fund",
+      "sector": "Community Development",
+      "neighborhood": "West Oakland",
+      "employeeCount": 19,
+      "avgSalary": 78000,
+      "growthRate": "2.55",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00096",
+      "name": "Fruitvale Transit Hub Authority",
+      "sector": "Transit & Infrastructure",
+      "neighborhood": "Fruitvale",
+      "employeeCount": 18,
+      "avgSalary": 92000,
+      "growthRate": "5.21",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00116",
+      "name": "Slip Street Kitchen",
+      "sector": "Restaurant & Dining",
+      "neighborhood": "Brooklyn",
+      "employeeCount": 16,
+      "avgSalary": 68000,
+      "growthRate": "5.66",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00261",
+      "name": "Early Shift Childcare",
+      "sector": "Preschool & Early Education",
+      "neighborhood": "San Antonio",
+      "employeeCount": 15,
+      "avgSalary": 62000,
+      "growthRate": "1.85",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00073",
+      "name": "Spooky Spirits Lounge",
+      "sector": "Hospitality",
+      "neighborhood": "West Oakland",
+      "employeeCount": 14,
+      "avgSalary": 80000,
+      "growthRate": "7.05",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00114",
+      "name": "Basin Grocer",
+      "sector": "Retail",
+      "neighborhood": "Brooklyn",
+      "employeeCount": 14,
+      "avgSalary": 72000,
+      "growthRate": "5.81",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00129",
+      "name": "Eastside Family Market",
+      "sector": "Retail",
+      "neighborhood": "East Oakland",
+      "employeeCount": 13,
+      "avgSalary": 40000,
+      "growthRate": "9.57",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00115",
+      "name": "Basin Athletic Club",
+      "sector": "Services",
+      "neighborhood": "Brooklyn",
+      "employeeCount": 12,
+      "avgSalary": 72000,
+      "growthRate": "6.37",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00132",
+      "name": "Foothill Kitchen",
+      "sector": "Restaurant & Dining",
+      "neighborhood": "East Oakland",
+      "employeeCount": 12,
+      "avgSalary": 37000,
+      "growthRate": "8.11",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00172",
+      "name": "Shift Change Kitchen",
+      "sector": "Restaurant & Dining",
+      "neighborhood": "San Antonio",
+      "employeeCount": 12,
+      "avgSalary": 36000,
+      "growthRate": "0.14",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00048",
+      "name": "West Side Cafe",
+      "sector": "Restaurant & Dining",
+      "neighborhood": "West Oakland",
+      "employeeCount": 11,
+      "avgSalary": 75000,
+      "growthRate": "8.07",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00081",
+      "name": "St. Esperanza Parish",
+      "sector": "Faith Organization",
+      "neighborhood": "Fruitvale",
+      "employeeCount": 11,
+      "avgSalary": 54000,
+      "growthRate": "3.83",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00173",
+      "name": "Twelfth Avenue Market",
+      "sector": "Retail",
+      "neighborhood": "San Antonio",
+      "employeeCount": 11,
+      "avgSalary": 39000,
+      "growthRate": "1.82",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00262",
+      "name": "Panadería La Doce",
+      "sector": "Bakery",
+      "neighborhood": "San Antonio",
+      "employeeCount": 11,
+      "avgSalary": 48000,
+      "growthRate": "2.47",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00265",
+      "name": "Taquería El Andén",
+      "sector": "Taquería / Restaurant",
+      "neighborhood": "Fruitvale",
+      "employeeCount": 11,
+      "avgSalary": 48000,
+      "growthRate": "3.54",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00267",
+      "name": "Platform Brunch",
+      "sector": "Brunch Restaurant",
+      "neighborhood": "Fruitvale",
+      "employeeCount": 11,
+      "avgSalary": 48000,
+      "growthRate": "3.96",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00269",
+      "name": "Taco Fusion",
+      "sector": "Fusion Restaurant",
+      "neighborhood": "Fruitvale",
+      "employeeCount": 11,
+      "avgSalary": 48000,
+      "growthRate": "3.53",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00270",
+      "name": "Hub Ramen",
+      "sector": "Ramen Bar",
+      "neighborhood": "Fruitvale",
+      "employeeCount": 11,
+      "avgSalary": 48000,
+      "growthRate": "3.85",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00271",
+      "name": "Masa & Vine",
+      "sector": "Small Plates & Natural Wine Bar",
+      "neighborhood": "Fruitvale",
+      "employeeCount": 11,
+      "avgSalary": 48000,
+      "growthRate": "3.77",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00274",
+      "name": "Coliseum Corner Sports Bar",
+      "sector": "Sports Bar & Grill",
+      "neighborhood": "East Oakland",
+      "employeeCount": 11,
+      "avgSalary": 48000,
+      "growthRate": "3.95",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00275",
+      "name": "Flatlands Soul Kitchen",
+      "sector": "Restaurant & Dining",
+      "neighborhood": "East Oakland",
+      "employeeCount": 11,
+      "avgSalary": 48000,
+      "growthRate": "4",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00113",
+      "name": "Quay Coffee",
+      "sector": "Cafe / dining",
+      "neighborhood": "Brooklyn",
+      "employeeCount": 9,
+      "avgSalary": 65000,
+      "growthRate": "6.89",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00131",
+      "name": "Eastside Auto",
+      "sector": "Services",
+      "neighborhood": "East Oakland",
+      "employeeCount": 9,
+      "avgSalary": 40000,
+      "growthRate": "4.84",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00117",
+      "name": "Brooklyn Pharmacy",
+      "sector": "Retail",
+      "neighborhood": "Brooklyn",
+      "employeeCount": 8,
+      "avgSalary": 72000,
+      "growthRate": "5.24",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00130",
+      "name": "Sunrise Cafe",
+      "sector": "Cafe / dining",
+      "neighborhood": "East Oakland",
+      "employeeCount": 8,
+      "avgSalary": 36000,
+      "growthRate": "6.53",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00176",
+      "name": "Park Boulevard Cafe",
+      "sector": "Cafe / dining",
+      "neighborhood": "San Antonio",
+      "employeeCount": 8,
+      "avgSalary": 35000,
+      "growthRate": "4.04",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00072",
+      "name": "Mendez Printing",
+      "sector": "Services",
+      "neighborhood": "West Oakland",
+      "employeeCount": 7,
+      "avgSalary": 80000,
+      "growthRate": "4.13",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00175",
+      "name": "San Antonio Pharmacy",
+      "sector": "Retail",
+      "neighborhood": "San Antonio",
+      "employeeCount": 7,
+      "avgSalary": 39000,
+      "growthRate": "2.08",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00190",
+      "name": "Seventh Street Rail Supply",
+      "sector": "Industrial Supply / Services",
+      "neighborhood": "West Oakland",
+      "employeeCount": 6,
+      "avgSalary": 45000,
+      "growthRate": "2.36",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00256",
+      "name": "Basin Residential Management",
+      "sector": "Property Management / Real Estate",
+      "neighborhood": "Brooklyn",
+      "employeeCount": 6,
+      "avgSalary": 45000,
+      "growthRate": "1.09",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00258",
+      "name": "Shoreline Kayak & Paddle",
+      "sector": "Outdoor Rental / Services",
+      "neighborhood": "Brooklyn",
+      "employeeCount": 6,
+      "avgSalary": 45000,
+      "growthRate": "1.14",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00263",
+      "name": "San Antonio Transmission & Tire",
+      "sector": "Auto Repair / Services",
+      "neighborhood": "San Antonio",
+      "employeeCount": 6,
+      "avgSalary": 45000,
+      "growthRate": "1.63",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00276",
+      "name": "Eastside Braids & Barbers",
+      "sector": "Hair Salon / Services",
+      "neighborhood": "East Oakland",
+      "employeeCount": 6,
+      "avgSalary": 45000,
+      "growthRate": "2.68",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00277",
+      "name": "Stabilization Fund East Oakland Disbursement Office",
+      "sector": "Community Development",
+      "neighborhood": "East Oakland",
+      "employeeCount": 6,
+      "avgSalary": 45000,
+      "growthRate": "2.95",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00278",
+      "name": "Oakland Coliseum",
+      "sector": "Stadium / Historic Landmark",
+      "neighborhood": "East Oakland",
+      "employeeCount": 6,
+      "avgSalary": 45000,
+      "growthRate": "2.86",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00079",
+      "name": "Masjid An-Nur Oakland",
+      "sector": "Faith Organization",
+      "neighborhood": "East Oakland",
+      "employeeCount": 5,
+      "avgSalary": 49000,
+      "growthRate": "3.41",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00118",
+      "name": "Estuary Cleaners",
+      "sector": "Services",
+      "neighborhood": "Brooklyn",
+      "employeeCount": 5,
+      "avgSalary": 72000,
+      "growthRate": "3.26",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00174",
+      "name": "Sunny Day Laundry",
+      "sector": "Services",
+      "neighborhood": "San Antonio",
+      "employeeCount": 5,
+      "avgSalary": 39000,
+      "growthRate": "0.96",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00177",
+      "name": "Crew Cut Barbers",
+      "sector": "Services",
+      "neighborhood": "San Antonio",
+      "employeeCount": 5,
+      "avgSalary": 39000,
+      "growthRate": "2.19",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00070",
+      "name": "Vance's Vintage",
+      "sector": "Retail",
+      "neighborhood": "West Oakland",
+      "employeeCount": 4,
+      "avgSalary": 80000,
+      "growthRate": "6.06",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00259",
+      "name": "Ninth Avenue Bottle Shop",
+      "sector": "Wine & Spirits Shop",
+      "neighborhood": "Brooklyn",
+      "employeeCount": 4,
+      "avgSalary": 42000,
+      "growthRate": "1",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00264",
+      "name": "Mercado Fruitvale",
+      "sector": "Mexican Grocery",
+      "neighborhood": "Fruitvale",
+      "employeeCount": 4,
+      "avgSalary": 42000,
+      "growthRate": "2.5",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00266",
+      "name": "Boutique Reina",
+      "sector": "Quinceañera & Formalwear Boutique",
+      "neighborhood": "Fruitvale",
+      "employeeCount": 4,
+      "avgSalary": 42000,
+      "growthRate": "2.66",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00268",
+      "name": "International Cycle Works",
+      "sector": "Bike Shop",
+      "neighborhood": "Fruitvale",
+      "employeeCount": 4,
+      "avgSalary": 42000,
+      "growthRate": "2.66",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00045",
+      "name": "Fruitvale Diner",
+      "sector": "Restaurant & Dining",
+      "neighborhood": "Fruitvale",
+      "employeeCount": 2,
+      "avgSalary": 51000,
+      "growthRate": "10.53",
+      "status": ""
+    }
+  ]
+}

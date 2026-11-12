@@ -1,0 +1,63 @@
+{
+  "draft": "output/cron-compare/sports_c113_simon-leary_packet-v2_openai-gpt-5-6-luna.md",
+  "cycle": "113",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "d23e6829ce5b5b437bf61b7c89a97a9bc8ce9e3f297d7e95527f5ea17b181df6",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes and citizen profiles match canon interview records and ledger ground truth with zero contradictions.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "simon-longview-v1",
+    "packageVersion": "SIMON-LEP2-1",
+    "manifestId": "AM-6e80c8000ee1",
+    "lexicalObservations": [],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Adash Stanley",
+      "Austin Reaves"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 2,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0098,
+  "durationMs": 7396,
+  "parseError": false,
+  "ranAt": "2026-10-29T23:16:28.941Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": false,
+    "inTargetBy": "judge",
+    "words": 450,
+    "short": "The piece falls short of the 450-word target.",
+    "score": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "d23e6829ce5b5b437bf61b7c89a97a9bc8ce9e3f297d7e95527f5ea17b181df6",
+    "costUsd": 0.003
+  }
+}

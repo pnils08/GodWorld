@@ -1,0 +1,23 @@
+{
+  "model": "anthropic/claude-sonnet-5.5",
+  "calls": [
+    {
+      "tool": "canon_search",
+      "input": {
+        "query": "Jax Caldera Chinatown"
+      },
+      "resultChars": 2246,
+      "resultHead": "312 file(s) matched on disk for 'Jax Caldera Chinatown':\n— output/simulation_ledger_snapshot.jsonl: 631:{\"Name\":\"Jax Caldera\",\"POPID\":\"POP-00799\",\"First\":\"Jax\",\"MaidenName\":\"\",\"Last\":\"Caldera\",\"OriginGame\":\"Bay Tribune\",\"UNI (y/n)\":\"no\",\"MED (y/n)\":\"yes\",\"CIV (y/n)\":\"no\",\"ClockMode\":\"MEDIA\",\"Tier\":\"3\",\"RoleType\":\"Journalist, freelance accountability writer\",\"Status\":\"Active\",\"BirthYear\":\"2018\",\"OrginCity\":\"Oakland\",\"LifeHistory\":\"[Compressed: 11 entries | 2026-06-20 23:35 → 2026-06-20 23:35 | Dominant:Daily,PrevEvening,Media | Archetype:Watcher | Mods:driven,outgoing,adventurous,principled,oft"
+    },
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Neighborhood_Map",
+        "match": "Chinatown"
+      },
+      "resultChars": 2501,
+      "resultHead": "Timestamp | Cycle | Neighborhood | NightlifeProfile | NoiseIndex | CrimeIndex | RetailVitality | EventAttractiveness | Sentiment | DemographicMarker | Holiday | HolidayPriority | FirstFriday | CreationDay | SportsSeason | MigrationFlow | NeighborhoodTrajectory | HousingPressure | TrajectoryStartCycle | MedianIncome | MedianRent | TrajectoryMomentum | District | CoreSimRank | IncomeTier | BoomExposure | BoomIndex | EmployerCharacter | WealthMin | WealthMax | ChildAreas | WeatherZone | Adjacent | AttentionWeight | Scenes | RentShare\nY3C9 | 113 | Downtown | 0.76 | 6.22 | 0.51 | 11.31 | 6.3 | 0.16"
+    }
+  ],
+  "ranAt": "2026-10-28T23:15:38.753Z"
+}

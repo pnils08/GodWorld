@@ -1,0 +1,13 @@
+{
+  "draft": "sports_c114_selena-grant_packet-v2_openai-gpt-5-6-luna.md",
+  "flags": [
+    {
+      "claim": "The record is 5-1, with a one-game winning streak... The Oaks now have a 5-1 record and the league’s most recent evidence is a 60-point win.",
+      "issue": "Direct contradiction of recorded state: by the end of Cycle 114, the Oaks played and defeated Oklahoma City 101-95 in the NBA Cup opener, moving their record to 6-1 with a two-game winning streak (W2). The 135-75 win over Toronto is not their most recent game.",
+      "severity": "high"
+    }
+  ],
+  "checkFlags": [],
+  "contamination": [],
+  "summary": "Direct contradiction of recorded sports state: Oaks finished Cycle 114 at 6-1 (W2) after defeating OKC 101-95, not 5-1."
+}

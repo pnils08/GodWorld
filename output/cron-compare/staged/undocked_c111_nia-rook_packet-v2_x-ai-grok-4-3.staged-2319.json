@@ -1,0 +1,63 @@
+{
+  "status": "staged",
+  "desk": "undocked",
+  "cycle": "111",
+  "persona": "nia-rook",
+  "byline": "Nia Rook",
+  "bylinePopid": "POP-01076",
+  "article": "output/cron-compare/staged/undocked_c111_nia-rook_packet-v2_x-ai-grok-4-3.staged-2319.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Eric Taveras",
+        "role": "mentioned",
+        "popid": "POP-00597",
+        "floor": true
+      },
+      {
+        "name": "Mike Paulson",
+        "role": "mentioned",
+        "popid": "POP-00527",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Downtown"
+    ],
+    "claims": [
+      {
+        "claim": "UNDOCKED: Eric Taveras — up 1170 on the night",
+        "sourceRef": "undocked:undocked-pop00597-Y3C7-e2"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-746a5805d54b",
+    "draftSha256": "05ababf990ede95cfa84b5a87b191cc93c6fc2fb4af3e3e152898f11d94ff650",
+    "verdict": "output/cron-compare/undocked_c111_nia-rook_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-10-16T23:19:15.247Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": false,
+      "inTargetBy": "code floor 350",
+      "words": 318,
+      "short": "The piece falls short of the 350-word minimum target.",
+      "score": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "05ababf990ede95cfa84b5a87b191cc93c6fc2fb4af3e3e152898f11d94ff650",
+      "costUsd": 0.001
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-16T23:19:19.953Z"
+}

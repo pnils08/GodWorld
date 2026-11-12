@@ -1,0 +1,63 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "113",
+  "persona": "tanya-cruz",
+  "byline": "Tanya Cruz",
+  "bylinePopid": "POP-00014",
+  "article": "output/cron-compare/staged/sports_c113_tanya-cruz_packet-v2_x-ai-grok-4-3.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Desmond Morton",
+        "role": "mentioned",
+        "popid": "POP-00051"
+      },
+      {
+        "name": "Frank Reyna",
+        "role": "mentioned",
+        "popid": "POP-00079"
+      },
+      {
+        "name": "Vladimir Gonzalez",
+        "role": "quoted-source",
+        "popid": "POP-00598"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "Honestly, the coaches haven't given me a clear answer yet. They know I've shown I can play at this level, but with Danny locked in center and Vladimir coming off the year he had, it's a real squeeze for left. I'm just trying to control what I can—show up, work, and let my play make the case. I know Frank and J.R. are pushing too, so it's not something I lose sleep over. The team's got a good problem, and whoever gets the spot, we're all pulling the same direction.",
+        "sourceRef": "citizenVoice PRESS Desmond Morton"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-ed04690a70b7",
+    "draftSha256": "8508e02b5a01cd3aecea2f36e459fa301ccad432c29f532088eb50a25c0f6236",
+    "verdict": "output/cron-compare/sports_c113_tanya-cruz_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-10-28T23:19:06.362Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 204,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "8508e02b5a01cd3aecea2f36e459fa301ccad432c29f532088eb50a25c0f6236",
+      "costUsd": 0.0007
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-28T23:19:09.303Z"
+}

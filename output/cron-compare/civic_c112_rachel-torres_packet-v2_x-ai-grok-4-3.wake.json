@@ -1,0 +1,57 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "112",
+  "provider": "openrouter",
+  "model": "x-ai/grok-4.3",
+  "configuredWriterModel": "x-ai/grok-4.3",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "rachel-torres",
+  "byline": {
+    "name": "Sgt. Rachel Torres",
+    "popid": "POP-00057",
+    "beatDomain": "SAFETY"
+  },
+  "laneEntries": 95,
+  "quotesLanded": 0,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [],
+  "toolCalls": 0,
+  "wordCount": 283,
+  "targetWords": "500-800",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": false,
+    "inTargetBy": "code floor 500",
+    "words": 283,
+    "short": "The piece falls well short of the 500-word minimum target length.",
+    "score": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "7514bd7e46098ef50302e1f151256f80883018106ca96d515a83ed10d5bec960",
+    "costUsd": 0.0008
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/4 — The piece falls well short of the 500-word minimum target length."
+  },
+  "article": "output/cron-compare/staged/civic_c112_rachel-torres_packet-v2_x-ai-grok-4-3.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "v'] }\n{\n  \"popId\": \"POP-00057\",\n  \"name\": \"Rachel Torres\",\n  \"recorded\": true,\n  \"text\": \"filed: Dimond recorded eight incidents this cycle, the highest total among the twenty-two neighborhoods tra\"\n}"
+  },
+  "ranAt": "2026-10-20T23:16:57.521Z",
+  "dispositionReconciledAt": "2026-10-24T17:00:02.045Z"
+}

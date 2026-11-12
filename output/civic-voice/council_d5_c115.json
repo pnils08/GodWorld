@@ -1,0 +1,72 @@
+{
+  "office": "council_d5",
+  "cycle": 115,
+  "speaker": "Janae Rivers",
+  "cascadeSummary": "I am filing the INIT-007 placement-gap analysis with named adjustments for West Oakland and Fruitvale, and recording a formal resolution to the D5 constituent complaint, because the families who called for help deserve a public answer. I am holding OARI expansion until the D3 East Oakland briefing is conducted and documented with Fruitvale data — not represented as done. I vote YES on Grand Lake with the Chen-Vega milestone and audit conditions intact, and I keep pressing that East Oakland's low crime is a result to protect, not a budget cut to absorb.",
+  "statements": [
+    {
+      "statementId": "STMT-115-council_d5-001",
+      "type": "vote_statement",
+      "topic": "Oakland Alternative Response Initiative — D3 East Oakland community briefing before expansion",
+      "initiative": "Oakland Alternative Response Initiative",
+      "decision": "Hold OARI expansion until the D3 East Oakland community briefing is conducted and documented with district-level and Fruitvale data this cycle; do not represent the D5 audit or Baylight feasibility review as completed.",
+      "quote": "The people who called 911 get to see their own numbers, in their own neighborhood, before this program takes one more step.",
+      "fullStatement": "East Oakland has been patient through this rollout. We asked for the dispatch protocol, we got it. We asked for district data, and now we are asking for the briefing — and I am not going to let a document on a shelf stand in for a room full of neighbors who want to look at their own numbers. Hold the expansion. Conduct the D3 East Oakland briefing this cycle, bring the Fruitvale data with it, and put the D5 audit and the Baylight feasibility review on the record honestly: directed, not done. Trust in alternative response is earned neighborhood by neighborhood, not announced from this dais.",
+      "disposition": "statement",
+      "actionAsked": "Conduct and document the D3 East Oakland community briefing with district-level and Fruitvale data this cycle; keep expansion held until afterward; report the D5 audit and Baylight feasibility review as directed, not completed.",
+      "tone": "passionate-substantive",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-115-council_d5-002",
+      "type": "vote_statement",
+      "topic": "Oakland Youth Apprenticeship Pipeline — placement gap analysis and program adjustment plan",
+      "initiative": "Oakland Youth Apprenticeship Pipeline",
+      "decision": "Publish the INIT-007 placement-gap analysis with explicit West Oakland and Fruitvale findings and named cohort adjustments, and require a clear recommendation on whether the implementation record supports advancement or a failed-phase finding.",
+      "quote": "We handed East Oakland's youth the first rung — now the ladder has to reach West Oakland and Fruitvale.",
+      "fullStatement": "We promised East Oakland's young people a first rung, and we delivered it. But a pipeline that only reaches one neighborhood is not a pipeline — it is a favor. West Oakland and Fruitvale are in the same analysis, and their mood is slipping while we sit in the same stage. So I am publishing the placement-gap analysis this cycle with their findings named, not folded into an average. The adjustments go to intake and cohort placement, and I want a straight recommendation on whether this record supports advancement or a failed-phase finding. No invented gap count, no softened language. Where young Oaklanders actually land is the only measure that counts, and I intend to judge it by that.",
+      "disposition": "YES",
+      "actionAsked": "Publish the placement-gap analysis and adjustment plan this cycle with explicit West Oakland and Fruitvale findings and a clear advance-or-fail recommendation.",
+      "tone": "righteous-direct",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-115-council_d5-003",
+      "type": "vote_statement",
+      "topic": "Commercial Stabilization for Grand Lake — recorded full-council decision",
+      "initiative": "Commercial Stabilization for Grand Lake",
+      "decision": "Vote YES on INIT-009 with every Chen-Vega milestone and audit condition intact.",
+      "quote": "Yes on Grand Lake — and yes with the receipts attached, not the conditions stripped.",
+      "fullStatement": "I am voting yes on Grand Lake's commercial stabilization, and I am voting yes with the Chen-Vega milestone and audit conditions intact. Small corridors across this city are holding on by their fingernails, and Grand Lake's neighbors deserve the same steadying hand we argue for in East Oakland. But a yes on the money is not a yes on blind faith. Mandatory milestones, audit criteria, a public record of what actually got stabilized — that is the deal, and I am not voting for a version that quietly loses it. Same standard in every district: invest, then show your work.",
+      "disposition": "YES",
+      "actionAsked": "Record a YES on INIT-009 with all Chen-Vega milestone and audit conditions preserved and reported publicly.",
+      "tone": "measured-coalition",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-115-council_d5-004",
+      "type": "vote_statement",
+      "topic": "D5 constituent complaint and East Oakland follow-through",
+      "initiative": null,
+      "decision": "File a formal disposition resolving the active District 5 citizen complaint this cycle, with the responsible office and remedy named in the public record.",
+      "quote": "One unanswered complaint is one neighbor we told to wait — and I am done telling East Oakland to wait.",
+      "fullStatement": "There is one open complaint in this district, and one is too many. Somebody in East Oakland called for help and got a case number instead of an answer. This cycle I am filing the formal disposition: the responsible office named, the remedy stated, the next public date on the record where the family can see it. East Oakland's crime being low and its mood being steady is not a reason to hand us a thinner response — it is the result we are supposed to protect and build on. Seven petitions sit on the Mayor's ledger; mine is one of them, and I intend for it to be closed with an answer, not an apology.",
+      "disposition": "statement",
+      "actionAsked": "File the formal D5 complaint disposition this cycle naming the responsible office, the proposed remedy, and the next public date.",
+      "tone": "community-centered",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    }
+  ]
+}

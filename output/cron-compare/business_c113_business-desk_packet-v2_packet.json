@@ -1,0 +1,833 @@
+{
+  "stage": "report",
+  "desk": "business",
+  "cycle": "113",
+  "persona": "business-desk",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Jordan Velez",
+    "popid": "POP-00153"
+  },
+  "assignment": {
+    "story": {
+      "angle": "Temescal businesses: Gridiron Analytics, Calderon-Nishi, Temescal Community Health Center — the people who work there",
+      "label": "Temescal businesses · Gridiron Analytics, Calderon-Nishi",
+      "hookLine": "Ariana Reyes, Data Analyst (Gridiron Analytics) at Gridiron Analytics. 12 named workers at 5 named businesses in Temescal on the ledger this cycle.",
+      "hood": "Temescal",
+      "pulseClass": "hood-businesses",
+      "namedBusinesses": [
+        "Gridiron Analytics",
+        "Calderon-Nishi",
+        "Temescal Community Health Center",
+        "OakTown Social",
+        "Da Dough"
+      ],
+      "citizens": [
+        "Ariana Reyes (POP-00133)",
+        "Dawson Nguyen (POP-00347)",
+        "Jade Soy (POP-00434)",
+        "Wesley Clark (POP-00461)",
+        "Jett Walker (POP-00230)",
+        "Ronald Silk (POP-00647)",
+        "Cristina Norwood (POP-00908)",
+        "Clearence Leighton (POP-00238)",
+        "Bobby Chen-Ramirez (POP-00792)",
+        "Vanessa Treary (POP-00781)",
+        "Vanessa Ramas (POP-01045)",
+        "Melton Neilon (POP-00170)"
+      ],
+      "popids": [
+        "POP-00133",
+        "POP-00347",
+        "POP-00434",
+        "POP-00461",
+        "POP-00230",
+        "POP-00647",
+        "POP-00908",
+        "POP-00238",
+        "POP-00792",
+        "POP-00781",
+        "POP-01045",
+        "POP-00170"
+      ],
+      "ref": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+      "cycle": 113
+    }
+  },
+  "angle": "output/cron-compare/business_c113_business-desk_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 1,
+  "quotes": [
+    {
+      "pop": "POP-00792",
+      "name": "Bobby Chen-Ramirez",
+      "quote": "Look, I run a health center project, not a spreadsheet. But I walk that block every day, and I see the same thing you're describing — the numbers on the wall don't mean a damn thing if Mrs. Okafor still can't get her blood pressure checked without taking two buses. What creates accountability for me is simple: I've got 14 employees on my roster, and every one of them lives in this neighborhood. When I see hiring signs in every storefront on the Jack London corridor, I want to know who's actually getting those jobs — is it the kid who grew up here, or is it somebody who commutes in from the hills? That's the story. That's what I want answered. Because if growth just means the ledger gets fatter while the sidewalk stays the same, then we're building a ghost town with good accounting.",
+      "disp": "driven, hard to sit still; draws people in, deep with them; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Look, I run a health center project, not a spreadsheet. But I walk that block every day, and I see the same thing you're describing — the numbers on the wall don't mean a damn thing if Mrs. Okafor still can't get her blood pressure checked without taking two buses. What creates accountability for me is simple: I've got 14 employees on my roster, and every one of them lives in this neighborhood. When I see hiring signs in every storefront on the Jack London corridor, I want to know who's actually getting those jobs — is it the kid who grew up here, or is it somebody who commutes in from the hills? That's the story. That's what I want answered. Because if growth just means the ledger gets fatter while the sidewalk stays the same, then we're building a ghost town with good accounting.\",\n  \"fact_ids\": [\"F-e045aa4f35ec\", \"F-28b0ade68728\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": [\"I'd like to know how many of those 12 named workers at the 5 Temescal businesses actually live within walking distance of their jobs.\"],\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-e045aa4f35ec",
+          "F-28b0ade68728"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [
+          "I'd like to know how many of those 12 named workers at the 5 Temescal businesses actually live within walking distance of their jobs."
+        ],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00792-992821602f",
+        "authoredQuote": true,
+        "publishableQuote": "Look, I run a health center project, not a spreadsheet. But I walk that block every day, and I see the same thing you're describing — the numbers on the wall don't mean a damn thing if Mrs. Okafor still can't get her blood pressure checked without taking two buses. What creates accountability for me is simple: I've got 14 employees on my roster, and every one of them lives in this neighborhood. When I see hiring signs in every storefront on the Jack London corridor, I want to know who's actually getting those jobs — is it the kid who grew up here, or is it somebody who commutes in from the hills? That's the story. That's what I want answered. Because if growth just means the ledger gets fatter while the sidewalk stays the same, then we're building a ghost town with good accounting."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00792",
+          "name": "Bobby Chen-Ramirez",
+          "role": "Health Center Project Director",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jordan Velez",
+          "question": "Using only the supplied facts, what about \"Temescal's five businesses are all growing on paper, but the story is whether that growth reaches the people who actually live and work on the block — or whether it's just the ledger getting fatter while the sidewalk stays the same.\" creates accountability for you, and what answer do you want? Do not claim any past or future official action that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Temescal",
+          "focus": "Temescal's five businesses are all growing on paper, but the story is whether that growth reaches the people who actually live and work on the block — or whether it's just the ledger getting fatter while the sidewalk stays the same.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Bobby Chen-Ramirez — Health Center Project Director — Temescal Community Health Center, Temescal",
+          "evidence": [
+            {
+              "id": "EV-cbab76c7b3",
+              "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+              "text": "Ariana Reyes, Data Analyst (Gridiron Analytics) at Gridiron Analytics. 12 named workers at 5 named businesses in Temescal on the ledger this cycle."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Temescal Community Health Center · Healthcare · 14 employees · growth 1.2% · revenue $45.1M (+$10k vs C112) · key personnel: Bobby Chen-Ramirez, Project Director · on the roster: Clearence Leighton (Physical Therapist); Bobby Chen-Ramirez (Health Center Project Director)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+            "id": "F-e045aa4f35ec"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal businesses · Gridiron Analytics, Calderon-Nishi",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+            "id": "F-d3dc1dba945a"
+          },
+          {
+            "t": "FACT",
+            "text": "Ariana Reyes, Data Analyst (Gridiron Analytics) at Gridiron Analytics. 12 named workers at 5 named businesses in Temescal on the ledger this cycle.",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+            "id": "F-28b0ade68728"
+          },
+          {
+            "t": "FACT",
+            "text": "Gridiron Analytics · Sports Analytics · 20 employees · growth 27.9% · revenue $2.9M (+$16k vs C112) · key personnel: Daniel Yoon (Co-Founder); Christine Nakamura (Co-Founder) · on the roster: Ariana Reyes (Data Analyst (Gridiron Analytics)); Dawson Nguyen (Sports Analytics Lead (Gridiron Analytics)); Jade Soy (Data Analyst (Gridiron Analytics)); Wesley Clark (Sports Analytics Lead (Gridiron Analytics)) +2 more",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+            "id": "F-2a8777af672a"
+          },
+          {
+            "t": "FACT",
+            "text": "Calderon-Nishi · Construction · 34 employees · growth 8.2% · revenue $9M (+$14k vs C112) · on the roster: Jett Walker (Plumber); Ronald Silk (Electrician); Cristina Norwood (Electrician)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+            "id": "F-94e838e1fb1a"
+          },
+          {
+            "t": "FACT",
+            "text": "OakTown Social · Nightlife & Entertainment · 7 employees · growth 3.1% · revenue $521k (+$308 vs C112) · on the roster: Vanessa Treary (Barista); Vanessa Ramas (Barista)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+            "id": "F-2f907b63d3ea"
+          },
+          {
+            "t": "FACT",
+            "text": "Da Dough · Services · 5 employees · growth 1.8% · revenue $371k (+$128 vs C112) · on the roster: Melton Neilon (Sourdough Baker)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+            "id": "F-891cac4a4b46"
+          },
+          {
+            "t": "FACT",
+            "text": "Bobby Chen-Ramirez — Health Center Project Director — Temescal Community Health Center, Temescal",
+            "src": "Simulation_Ledger profile for POP-00792",
+            "id": "F-f9fa2aa23489"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-00133",
+      "name": "Ariana Reyes",
+      "quote": null,
+      "disp": "close to family",
+      "recorded": false,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: answer must be quote|abstain",
+      "raw": "{\n  \"answer\": \"I see the same five businesses on paper that everyone else does, but what the reports miss is the gap between the ledger and the sidewalk. Numbers show growth, sure, but I live here — I see the baristas at OakTown Social who know my order, the folks at the health center who nod hello, the construction crew that’s been working on the same corner for months. The growth isn’t reaching them the way it should. It’s like the businesses are getting bigger, but the people who make this block run are still just getting by. That’s what I notice, and it’s not in any spreadsheet.\",\n  \"fact_ids\": [\"F-28b0ade68728\", \"F-2a8777af672a\", \"F-94e838e1fb1a\", \"F-e045aa4f35ec\", \"F-2f907b63d3ea\", \"F-891cac4a4b46\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": [],\n  \"abstain_reason\": null\n}",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00133",
+          "name": "Ariana Reyes",
+          "role": "Data Analyst (Gridiron Analytics)",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jordan Velez",
+          "question": "When you run the numbers on this block, what do you see that the public reports don't capture? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Temescal",
+          "focus": "Temescal's five businesses are all growing on paper, but the story is whether that growth reaches the people who actually live and work on the block — or whether it's just the ledger getting fatter while the sidewalk stays the same.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Ariana Reyes — Data Analyst (Gridiron Analytics) — Gridiron Analytics, Temescal",
+          "evidence": [
+            {
+              "id": "EV-d91a30f8e1",
+              "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+              "text": "Ariana Reyes, Data Analyst (Gridiron Analytics) at Gridiron Analytics. 12 named workers at 5 named businesses in Temescal on the ledger this cycle."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Ariana Reyes, Data Analyst (Gridiron Analytics) at Gridiron Analytics. 12 named workers at 5 named businesses in Temescal on the ledger this cycle.",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+            "id": "F-28b0ade68728"
+          },
+          {
+            "t": "FACT",
+            "text": "Gridiron Analytics · Sports Analytics · 20 employees · growth 27.9% · revenue $2.9M (+$16k vs C112) · key personnel: Daniel Yoon (Co-Founder); Christine Nakamura (Co-Founder) · on the roster: Ariana Reyes (Data Analyst (Gridiron Analytics)); Dawson Nguyen (Sports Analytics Lead (Gridiron Analytics)); Jade Soy (Data Analyst (Gridiron Analytics)); Wesley Clark (Sports Analytics Lead (Gridiron Analytics)) +2 more",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+            "id": "F-2a8777af672a"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal businesses · Gridiron Analytics, Calderon-Nishi",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+            "id": "F-d3dc1dba945a"
+          },
+          {
+            "t": "FACT",
+            "text": "Calderon-Nishi · Construction · 34 employees · growth 8.2% · revenue $9M (+$14k vs C112) · on the roster: Jett Walker (Plumber); Ronald Silk (Electrician); Cristina Norwood (Electrician)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+            "id": "F-94e838e1fb1a"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal Community Health Center · Healthcare · 14 employees · growth 1.2% · revenue $45.1M (+$10k vs C112) · key personnel: Bobby Chen-Ramirez, Project Director · on the roster: Clearence Leighton (Physical Therapist); Bobby Chen-Ramirez (Health Center Project Director)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+            "id": "F-e045aa4f35ec"
+          },
+          {
+            "t": "FACT",
+            "text": "OakTown Social · Nightlife & Entertainment · 7 employees · growth 3.1% · revenue $521k (+$308 vs C112) · on the roster: Vanessa Treary (Barista); Vanessa Ramas (Barista)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+            "id": "F-2f907b63d3ea"
+          },
+          {
+            "t": "FACT",
+            "text": "Da Dough · Services · 5 employees · growth 1.8% · revenue $371k (+$128 vs C112) · on the roster: Melton Neilon (Sourdough Baker)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+            "id": "F-891cac4a4b46"
+          },
+          {
+            "t": "FACT",
+            "text": "Ariana Reyes — Data Analyst (Gridiron Analytics) — Gridiron Analytics, Temescal",
+            "src": "Simulation_Ledger profile for POP-00133",
+            "id": "F-37d809614786"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00792",
+      "name": "Bobby Chen-Ramirez",
+      "quote": "Look, I run a health center project, not a spreadsheet. But I walk that block every day, and I see the same thing you're describing — the numbers on the wall don't mean a damn thing if Mrs. Okafor still can't get her blood pressure checked without taking two buses. What creates accountability for me is simple: I've got 14 employees on my roster, and every one of them lives in this neighborhood. When I see hiring signs in every storefront on the Jack London corridor, I want to know who's actually getting those jobs — is it the kid who grew up here, or is it somebody who commutes in from the hills? That's the story. That's what I want answered. Because if growth just means the ledger gets fatter while the sidewalk stays the same, then we're building a ghost town with good accounting.",
+      "disp": "driven, hard to sit still; draws people in, deep with them; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Look, I run a health center project, not a spreadsheet. But I walk that block every day, and I see the same thing you're describing — the numbers on the wall don't mean a damn thing if Mrs. Okafor still can't get her blood pressure checked without taking two buses. What creates accountability for me is simple: I've got 14 employees on my roster, and every one of them lives in this neighborhood. When I see hiring signs in every storefront on the Jack London corridor, I want to know who's actually getting those jobs — is it the kid who grew up here, or is it somebody who commutes in from the hills? That's the story. That's what I want answered. Because if growth just means the ledger gets fatter while the sidewalk stays the same, then we're building a ghost town with good accounting.\",\n  \"fact_ids\": [\"F-e045aa4f35ec\", \"F-28b0ade68728\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": [\"I'd like to know how many of those 12 named workers at the 5 Temescal businesses actually live within walking distance of their jobs.\"],\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-e045aa4f35ec",
+          "F-28b0ade68728"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [
+          "I'd like to know how many of those 12 named workers at the 5 Temescal businesses actually live within walking distance of their jobs."
+        ],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00792-992821602f",
+        "authoredQuote": true,
+        "publishableQuote": "Look, I run a health center project, not a spreadsheet. But I walk that block every day, and I see the same thing you're describing — the numbers on the wall don't mean a damn thing if Mrs. Okafor still can't get her blood pressure checked without taking two buses. What creates accountability for me is simple: I've got 14 employees on my roster, and every one of them lives in this neighborhood. When I see hiring signs in every storefront on the Jack London corridor, I want to know who's actually getting those jobs — is it the kid who grew up here, or is it somebody who commutes in from the hills? That's the story. That's what I want answered. Because if growth just means the ledger gets fatter while the sidewalk stays the same, then we're building a ghost town with good accounting."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00792",
+          "name": "Bobby Chen-Ramirez",
+          "role": "Health Center Project Director",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jordan Velez",
+          "question": "Using only the supplied facts, what about \"Temescal's five businesses are all growing on paper, but the story is whether that growth reaches the people who actually live and work on the block — or whether it's just the ledger getting fatter while the sidewalk stays the same.\" creates accountability for you, and what answer do you want? Do not claim any past or future official action that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Temescal",
+          "focus": "Temescal's five businesses are all growing on paper, but the story is whether that growth reaches the people who actually live and work on the block — or whether it's just the ledger getting fatter while the sidewalk stays the same.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Bobby Chen-Ramirez — Health Center Project Director — Temescal Community Health Center, Temescal",
+          "evidence": [
+            {
+              "id": "EV-cbab76c7b3",
+              "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+              "text": "Ariana Reyes, Data Analyst (Gridiron Analytics) at Gridiron Analytics. 12 named workers at 5 named businesses in Temescal on the ledger this cycle."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Temescal Community Health Center · Healthcare · 14 employees · growth 1.2% · revenue $45.1M (+$10k vs C112) · key personnel: Bobby Chen-Ramirez, Project Director · on the roster: Clearence Leighton (Physical Therapist); Bobby Chen-Ramirez (Health Center Project Director)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+            "id": "F-e045aa4f35ec"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal businesses · Gridiron Analytics, Calderon-Nishi",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+            "id": "F-d3dc1dba945a"
+          },
+          {
+            "t": "FACT",
+            "text": "Ariana Reyes, Data Analyst (Gridiron Analytics) at Gridiron Analytics. 12 named workers at 5 named businesses in Temescal on the ledger this cycle.",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+            "id": "F-28b0ade68728"
+          },
+          {
+            "t": "FACT",
+            "text": "Gridiron Analytics · Sports Analytics · 20 employees · growth 27.9% · revenue $2.9M (+$16k vs C112) · key personnel: Daniel Yoon (Co-Founder); Christine Nakamura (Co-Founder) · on the roster: Ariana Reyes (Data Analyst (Gridiron Analytics)); Dawson Nguyen (Sports Analytics Lead (Gridiron Analytics)); Jade Soy (Data Analyst (Gridiron Analytics)); Wesley Clark (Sports Analytics Lead (Gridiron Analytics)) +2 more",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+            "id": "F-2a8777af672a"
+          },
+          {
+            "t": "FACT",
+            "text": "Calderon-Nishi · Construction · 34 employees · growth 8.2% · revenue $9M (+$14k vs C112) · on the roster: Jett Walker (Plumber); Ronald Silk (Electrician); Cristina Norwood (Electrician)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+            "id": "F-94e838e1fb1a"
+          },
+          {
+            "t": "FACT",
+            "text": "OakTown Social · Nightlife & Entertainment · 7 employees · growth 3.1% · revenue $521k (+$308 vs C112) · on the roster: Vanessa Treary (Barista); Vanessa Ramas (Barista)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+            "id": "F-2f907b63d3ea"
+          },
+          {
+            "t": "FACT",
+            "text": "Da Dough · Services · 5 employees · growth 1.8% · revenue $371k (+$128 vs C112) · on the roster: Melton Neilon (Sourdough Baker)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+            "id": "F-891cac4a4b46"
+          },
+          {
+            "t": "FACT",
+            "text": "Bobby Chen-Ramirez — Health Center Project Director — Temescal Community Health Center, Temescal",
+            "src": "Simulation_Ledger profile for POP-00792",
+            "id": "F-f9fa2aa23489"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00230",
+      "name": null,
+      "quote": null,
+      "disp": null,
+      "recorded": false,
+      "fallback": "call-failed: Quota exceeded for quota metric 'Read requests' and limit 'Read requests per minute per user' of service 'sheets.googleapis.com' for consumer 'project_number:559534329568'.",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00230",
+          "name": "Jett Walker",
+          "role": "Plumber",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jordan Velez",
+          "question": "What are you seeing in the walls of this block — which buildings are getting real investment and which are just getting patched? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Temescal",
+          "focus": "Temescal's five businesses are all growing on paper, but the story is whether that growth reaches the people who actually live and work on the block — or whether it's just the ledger getting fatter while the sidewalk stays the same.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Jett Walker — Plumber — Calderon-Nishi, Temescal",
+          "evidence": [
+            {
+              "id": "EV-f7546f4a63",
+              "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+              "text": "Ariana Reyes, Data Analyst (Gridiron Analytics) at Gridiron Analytics. 12 named workers at 5 named businesses in Temescal on the ledger this cycle."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Calderon-Nishi · Construction · 34 employees · growth 8.2% · revenue $9M (+$14k vs C112) · on the roster: Jett Walker (Plumber); Ronald Silk (Electrician); Cristina Norwood (Electrician)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+            "id": "F-94e838e1fb1a"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal businesses · Gridiron Analytics, Calderon-Nishi",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+            "id": "F-d3dc1dba945a"
+          },
+          {
+            "t": "FACT",
+            "text": "Ariana Reyes, Data Analyst (Gridiron Analytics) at Gridiron Analytics. 12 named workers at 5 named businesses in Temescal on the ledger this cycle.",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+            "id": "F-28b0ade68728"
+          },
+          {
+            "t": "FACT",
+            "text": "Gridiron Analytics · Sports Analytics · 20 employees · growth 27.9% · revenue $2.9M (+$16k vs C112) · key personnel: Daniel Yoon (Co-Founder); Christine Nakamura (Co-Founder) · on the roster: Ariana Reyes (Data Analyst (Gridiron Analytics)); Dawson Nguyen (Sports Analytics Lead (Gridiron Analytics)); Jade Soy (Data Analyst (Gridiron Analytics)); Wesley Clark (Sports Analytics Lead (Gridiron Analytics)) +2 more",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+            "id": "F-2a8777af672a"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal Community Health Center · Healthcare · 14 employees · growth 1.2% · revenue $45.1M (+$10k vs C112) · key personnel: Bobby Chen-Ramirez, Project Director · on the roster: Clearence Leighton (Physical Therapist); Bobby Chen-Ramirez (Health Center Project Director)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+            "id": "F-e045aa4f35ec"
+          },
+          {
+            "t": "FACT",
+            "text": "OakTown Social · Nightlife & Entertainment · 7 employees · growth 3.1% · revenue $521k (+$308 vs C112) · on the roster: Vanessa Treary (Barista); Vanessa Ramas (Barista)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+            "id": "F-2f907b63d3ea"
+          },
+          {
+            "t": "FACT",
+            "text": "Da Dough · Services · 5 employees · growth 1.8% · revenue $371k (+$128 vs C112) · on the roster: Melton Neilon (Sourdough Baker)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+            "id": "F-891cac4a4b46"
+          },
+          {
+            "t": "FACT",
+            "text": "Jett Walker — Plumber — Calderon-Nishi, Temescal",
+            "src": "Simulation_Ledger profile for POP-00230",
+            "id": "F-d8564de31aae"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00347",
+      "name": null,
+      "quote": null,
+      "disp": null,
+      "recorded": false,
+      "fallback": "call-failed: Quota exceeded for quota metric 'Read requests' and limit 'Read requests per minute per user' of service 'sheets.googleapis.com' for consumer 'project_number:559534329568'.",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00347",
+          "name": "Dawson Nguyen",
+          "role": "Sports Analytics Lead (Gridiron Analytics)",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jordan Velez",
+          "question": "As a resident of Temescal, what have you seen, felt, or understood about \"Temescal's five businesses are all growing on paper, but the story is whether that growth reaches the people who actually live and work on the block — or whether it's just the ledger getting fatter while the sidewalk stays the same.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Temescal",
+          "focus": "Temescal's five businesses are all growing on paper, but the story is whether that growth reaches the people who actually live and work on the block — or whether it's just the ledger getting fatter while the sidewalk stays the same.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Dawson Nguyen — Sports Analytics Lead (Gridiron Analytics) — Gridiron Analytics, Temescal",
+          "evidence": [
+            {
+              "id": "EV-bf73b67bfc",
+              "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+              "text": "Ariana Reyes, Data Analyst (Gridiron Analytics) at Gridiron Analytics. 12 named workers at 5 named businesses in Temescal on the ledger this cycle."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Gridiron Analytics · Sports Analytics · 20 employees · growth 27.9% · revenue $2.9M (+$16k vs C112) · key personnel: Daniel Yoon (Co-Founder); Christine Nakamura (Co-Founder) · on the roster: Ariana Reyes (Data Analyst (Gridiron Analytics)); Dawson Nguyen (Sports Analytics Lead (Gridiron Analytics)); Jade Soy (Data Analyst (Gridiron Analytics)); Wesley Clark (Sports Analytics Lead (Gridiron Analytics)) +2 more",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+            "id": "F-2a8777af672a"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal businesses · Gridiron Analytics, Calderon-Nishi",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+            "id": "F-d3dc1dba945a"
+          },
+          {
+            "t": "FACT",
+            "text": "Ariana Reyes, Data Analyst (Gridiron Analytics) at Gridiron Analytics. 12 named workers at 5 named businesses in Temescal on the ledger this cycle.",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+            "id": "F-28b0ade68728"
+          },
+          {
+            "t": "FACT",
+            "text": "Calderon-Nishi · Construction · 34 employees · growth 8.2% · revenue $9M (+$14k vs C112) · on the roster: Jett Walker (Plumber); Ronald Silk (Electrician); Cristina Norwood (Electrician)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+            "id": "F-94e838e1fb1a"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal Community Health Center · Healthcare · 14 employees · growth 1.2% · revenue $45.1M (+$10k vs C112) · key personnel: Bobby Chen-Ramirez, Project Director · on the roster: Clearence Leighton (Physical Therapist); Bobby Chen-Ramirez (Health Center Project Director)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+            "id": "F-e045aa4f35ec"
+          },
+          {
+            "t": "FACT",
+            "text": "OakTown Social · Nightlife & Entertainment · 7 employees · growth 3.1% · revenue $521k (+$308 vs C112) · on the roster: Vanessa Treary (Barista); Vanessa Ramas (Barista)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+            "id": "F-2f907b63d3ea"
+          },
+          {
+            "t": "FACT",
+            "text": "Da Dough · Services · 5 employees · growth 1.8% · revenue $371k (+$128 vs C112) · on the roster: Melton Neilon (Sourdough Baker)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+            "id": "F-891cac4a4b46"
+          },
+          {
+            "t": "FACT",
+            "text": "Dawson Nguyen — Sports Analytics Lead (Gridiron Analytics) — Gridiron Analytics, Temescal",
+            "src": "Simulation_Ledger profile for POP-00347",
+            "id": "F-7283dc0de45f"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-10-26T18:39:35.170Z"
+}

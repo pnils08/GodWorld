@@ -1,0 +1,413 @@
+{
+  "stage": "report",
+  "desk": "sports",
+  "cycle": "114",
+  "persona": "simon-leary",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Simon Leary",
+    "popid": "POP-00016"
+  },
+  "assignment": {
+    "story": {
+      "angle": "The Oaks record is 5-1.",
+      "label": "The Oaks record is 5-1.",
+      "hookLine": "The Oaks record is 5-1.",
+      "kind": "long-view-signal",
+      "hood": "San Antonio",
+      "popids": [
+        "POP-01027",
+        "POP-01023"
+      ],
+      "citizens": [
+        "Austin Reaves (POP-01027)",
+        "Adash Stanley (POP-01023)"
+      ],
+      "ref": "world_summary_c114.md ## Sports",
+      "cycle": 114
+    }
+  },
+  "angle": "output/cron-compare/sports_c114_simon-leary_packet-v2_angle.json",
+  "quotesRequested": 2,
+  "quotesLanded": 1,
+  "quotes": [
+    {
+      "pop": "POP-01023",
+      "name": "Adash Stanley",
+      "quote": "The part that feels constant is the work itself. When the lineup shifts or the assignment changes, the game still asks the same thing — show up, do your job, don't make it about you. The record sits there at 5-1 and it doesn't care who's carrying it. That's what I hold onto.",
+      "disp": "steady, hard to shake; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"The part that feels constant is the work itself. When the lineup shifts or the assignment changes, the game still asks the same thing — show up, do your job, don't make it about you. The record sits there at 5-1 and it doesn't care who's carrying it. That's what I hold onto.\",\n  \"fact_ids\": [\"F-be74de39bd73\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-be74de39bd73"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01023-fcef23dd17",
+        "authoredQuote": true,
+        "publishableQuote": "The part that feels constant is the work itself. When the lineup shifts or the assignment changes, the game still asks the same thing — show up, do your job, don't make it about you. The record sits there at 5-1 and it doesn't care who's carrying it. That's what I hold onto."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01023",
+          "name": "Adash Stanley",
+          "role": "PG / The Oaks",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Simon Leary",
+          "question": "What part of the game feels like a constant even when the lineup or assignment changes? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "long-view-signal",
+          "hood": "San Antonio",
+          "focus": "The Oaks' 5-1 record as a study in load-bearing continuity — how a team's steadiness can be a function of role change, not resistance to it.",
+          "src": "world_summary_c114.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Adash Stanley — PG / The Oaks",
+          "evidence": [
+            {
+              "id": "EV-530726e6e4",
+              "src": "world_summary_c114.md ## Sports",
+              "text": "The Oaks record is 5-1."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks record is 5-1.",
+            "src": "world_summary_c114.md ## Sports",
+            "id": "F-be74de39bd73"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks have won 1 straight.",
+            "src": "world_summary_c114.md ## Sports",
+            "id": "F-53e6b78f84bb"
+          },
+          {
+            "t": "FACT",
+            "text": "Adash Stanley — PG / The Oaks",
+            "src": "Simulation_Ledger profile for POP-01023",
+            "id": "F-1164a6e4fd0d"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-01027",
+      "name": "Austin Reaves",
+      "quote": null,
+      "disp": "steady, hard to shake; a real fan, plans around games",
+      "recorded": false,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: answer must be quote|abstain",
+      "raw": "{\"answer\":\"When the rotation shifts, the thing I carry that stays the same is the work itself. The drills, the film, the early mornings — that doesn't change no matter who's out there with me. I've seen enough seasons to know roles move around, but the steadiness comes from showing up the same way every day. That's what holds the building up, not the record. The record's just a scoreboard. The guys inside, the habits we build together — that's the load-bearing part. And honestly, that's what I love about this group. We're not pretending one win settles anything, but we're building something you can stand on.\", \"fact_ids\": [\"F-be74de39bd73\"], \"basis\": \"lived-context\", \"unverifiedLead\": null, \"abstain_reason\": null}",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01027",
+          "name": "Austin Reaves",
+          "role": "SG / The Oaks",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Simon Leary",
+          "question": "When the rotation shifts and the weight moves, what do you carry that stays the same? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "long-view-signal",
+          "hood": "San Antonio",
+          "focus": "The Oaks' 5-1 record as a study in load-bearing continuity — how a team's steadiness can be a function of role change, not resistance to it.",
+          "src": "world_summary_c114.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Austin Reaves — SG / The Oaks",
+          "evidence": [
+            {
+              "id": "EV-8b3705628d",
+              "src": "world_summary_c114.md ## Sports",
+              "text": "The Oaks record is 5-1."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks record is 5-1.",
+            "src": "world_summary_c114.md ## Sports",
+            "id": "F-be74de39bd73"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks have won 1 straight.",
+            "src": "world_summary_c114.md ## Sports",
+            "id": "F-53e6b78f84bb"
+          },
+          {
+            "t": "FACT",
+            "text": "Austin Reaves — SG / The Oaks",
+            "src": "Simulation_Ledger profile for POP-01027",
+            "id": "F-d653907c94cf"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01023",
+      "name": "Adash Stanley",
+      "quote": "The part that feels constant is the work itself. When the lineup shifts or the assignment changes, the game still asks the same thing — show up, do your job, don't make it about you. The record sits there at 5-1 and it doesn't care who's carrying it. That's what I hold onto.",
+      "disp": "steady, hard to shake; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"The part that feels constant is the work itself. When the lineup shifts or the assignment changes, the game still asks the same thing — show up, do your job, don't make it about you. The record sits there at 5-1 and it doesn't care who's carrying it. That's what I hold onto.\",\n  \"fact_ids\": [\"F-be74de39bd73\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-be74de39bd73"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01023-fcef23dd17",
+        "authoredQuote": true,
+        "publishableQuote": "The part that feels constant is the work itself. When the lineup shifts or the assignment changes, the game still asks the same thing — show up, do your job, don't make it about you. The record sits there at 5-1 and it doesn't care who's carrying it. That's what I hold onto."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01023",
+          "name": "Adash Stanley",
+          "role": "PG / The Oaks",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Simon Leary",
+          "question": "What part of the game feels like a constant even when the lineup or assignment changes? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "long-view-signal",
+          "hood": "San Antonio",
+          "focus": "The Oaks' 5-1 record as a study in load-bearing continuity — how a team's steadiness can be a function of role change, not resistance to it.",
+          "src": "world_summary_c114.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Adash Stanley — PG / The Oaks",
+          "evidence": [
+            {
+              "id": "EV-530726e6e4",
+              "src": "world_summary_c114.md ## Sports",
+              "text": "The Oaks record is 5-1."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks record is 5-1.",
+            "src": "world_summary_c114.md ## Sports",
+            "id": "F-be74de39bd73"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks have won 1 straight.",
+            "src": "world_summary_c114.md ## Sports",
+            "id": "F-53e6b78f84bb"
+          },
+          {
+            "t": "FACT",
+            "text": "Adash Stanley — PG / The Oaks",
+            "src": "Simulation_Ledger profile for POP-01023",
+            "id": "F-1164a6e4fd0d"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-11-05T19:16:07.672Z"
+}

@@ -1,0 +1,70 @@
+{
+  "status": "staged",
+  "desk": "undocked-digest",
+  "cycle": "113",
+  "persona": "nia-rook-weekly",
+  "byline": "Nia Rook",
+  "bylinePopid": "POP-01076",
+  "article": "output/cron-compare/staged/undocked-digest_c113_nia-rook-weekly_packet-v2_openai-gpt-6-luna.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Father Miguel",
+        "role": "subject",
+        "popid": "POP-00734"
+      },
+      {
+        "name": "Daphne Stafford",
+        "role": "subject",
+        "popid": "POP-00816"
+      },
+      {
+        "name": "Cristina Booker",
+        "role": "subject",
+        "popid": "POP-00836",
+        "floor": true
+      },
+      {
+        "name": "Eric Taveras",
+        "role": "mentioned",
+        "popid": "POP-00597",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "I've flown on UNDOCKED a couple of times this week, and I have to say, my performance has been pretty steady. I've earned 5 points so far, and I'm 22nd out of 24. From what I've seen, Cristina Booker's performance was a bit more up and down - she earned 10 points on Monday, but didn't even get her ship moving on Thursday. I guess you could say I'm more consistent, but she's more explosive when she gets it right.",
+        "sourceRef": "citizenVoice PRESS Father Miguel"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-39bef0e65331",
+    "draftSha256": "6f0ee9462d6094377eff199c297d9e24292ec11c7da6953d1426bb1db31f2c9f",
+    "verdict": "output/cron-compare/undocked-digest_c113_nia-rook-weekly_packet-v2_openai-gpt-6-luna.rhea.json",
+    "ranAt": "2026-10-31T15:15:34.712Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 350",
+      "words": 440,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "6f0ee9462d6094377eff199c297d9e24292ec11c7da6953d1426bb1db31f2c9f",
+      "costUsd": 0.0014
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-31T15:15:41.374Z"
+}

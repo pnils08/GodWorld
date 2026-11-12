@@ -1,0 +1,168 @@
+{
+  "cycle": "114",
+  "signals": [
+    {
+      "slug": "INIT-001:disbursement-active",
+      "advanced": 1,
+      "opened": 0,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "civic_c114_carmen-delaine_packet-v2_anthropic-claude-sonnet-5-5"
+      ],
+      "hoods": [
+        "West Oakland"
+      ],
+      "citizens": [
+        "POP-00037"
+      ],
+      "desks": [
+        "civic"
+      ]
+    },
+    {
+      "slug": "INIT-007:implementation-active",
+      "advanced": 0,
+      "opened": 0,
+      "closed": 0,
+      "referenced": 2,
+      "articles": [
+        "culture_c114_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0020",
+        "culture_c114_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0021"
+      ],
+      "hoods": [],
+      "citizens": [
+        "POP-00447",
+        "POP-00230",
+        "POP-00344",
+        "POP-00658",
+        "POP-00848",
+        "POP-00024"
+      ],
+      "desks": [
+        "culture"
+      ]
+    },
+    {
+      "slug": "INIT-003:design-phase",
+      "advanced": 0,
+      "opened": 0,
+      "closed": 0,
+      "referenced": 1,
+      "articles": [
+        "culture_c114_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0020"
+      ],
+      "hoods": [],
+      "citizens": [
+        "POP-00447",
+        "POP-00230",
+        "POP-00344"
+      ],
+      "desks": [
+        "culture"
+      ]
+    },
+    {
+      "slug": "INIT-006:construction-active",
+      "advanced": 0,
+      "opened": 0,
+      "closed": 0,
+      "referenced": 1,
+      "articles": [
+        "culture_c114_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0020"
+      ],
+      "hoods": [],
+      "citizens": [
+        "POP-00447",
+        "POP-00230",
+        "POP-00344"
+      ],
+      "desks": [
+        "culture"
+      ]
+    }
+  ],
+  "registry": [
+    {
+      "id": "CRISIS-114-DOWNTOWN",
+      "status": "open",
+      "stage": "early"
+    },
+    {
+      "id": "INIT-001:disbursement-active",
+      "status": "open",
+      "stage": "disbursement-active"
+    },
+    {
+      "id": "INIT-002:dispatch-live",
+      "status": "open",
+      "stage": "dispatch-live"
+    },
+    {
+      "id": "INIT-003:design-phase",
+      "status": "open",
+      "stage": "design-phase"
+    },
+    {
+      "id": "INIT-005:operational",
+      "status": "open",
+      "stage": "operational"
+    },
+    {
+      "id": "INIT-006:construction-active",
+      "status": "open",
+      "stage": "construction-active"
+    },
+    {
+      "id": "INIT-007:implementation-active",
+      "status": "open",
+      "stage": "implementation-active"
+    },
+    {
+      "id": "INIT-008:vote-scheduled",
+      "status": "open",
+      "stage": "vote-scheduled"
+    },
+    {
+      "id": "INIT-009:announced",
+      "status": "open",
+      "stage": "announced"
+    },
+    {
+      "id": "INIT-010:announced",
+      "status": "open",
+      "stage": "announced"
+    },
+    {
+      "id": "INIT-011:announced",
+      "status": "open",
+      "stage": "announced"
+    },
+    {
+      "id": "INIT-012:announced",
+      "status": "open",
+      "stage": "announced"
+    },
+    {
+      "id": "INIT-013:announced",
+      "status": "open",
+      "stage": "announced"
+    },
+    {
+      "id": "INIT-008:legislation-filed",
+      "status": "closed",
+      "stage": "legislation-filed"
+    },
+    {
+      "id": "INIT-009:legislation-filed",
+      "status": "closed",
+      "stage": "legislation-filed"
+    },
+    {
+      "id": "INIT-010:operational",
+      "status": "closed",
+      "stage": "operational"
+    }
+  ],
+  "retiredSlugsIgnored": 0
+}

@@ -1,0 +1,26 @@
+{
+  "office": "police_chief",
+  "agentDir": "civic-office-police-chief",
+  "holder": "Rafael Montez",
+  "popid": "POP-00136",
+  "title": "Police Chief",
+  "date": "2026-10-22",
+  "cycle": 112,
+  "model": "deepseek/deepseek-v4-flash-0731",
+  "statement": "The Oakland Police Department has filed the East Oakland co-response protocol alignment memo requested this cycle. The memo establishes clear transfer thresholds between OPD sector patrol and OARI dispatchers — specifying when a behavioral health call is transferred from sworn patrol to alternative responders, the notification protocol at the scene, and the minimum call-back window when a scene escalates back to sworn units. This documentation formalizes the coordination standard we've been operating under in the pilot districts and puts the operational expectations on the record. The goal is straightforward: behavioral health calls receive behavioral health responses without creating gaps in emergency coverage. The department stands ready to brief the Mayor's office and OARI program leadership on the alignment protocol at their convenience.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-107-civic-office-police-chief",
+        "text": "The East Oakland co-response protocol alignment memo has been filed. It establishes clear transfer thresholds between OPD sector patrol and OARI dispatchers for behavioral health calls, including dispatch notification criteria, scene hand-off protocols, and escalation call-back windows for sworn units. The memo is on file with the Mayor's office and the OARI program office.",
+        "directiveCycle": 107,
+        "confrontationSeat": "civic-office-police-chief"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": "1",
+  "ranAt": "2026-10-22T10:45:16.257Z",
+  "fellBackFrom": null
+}

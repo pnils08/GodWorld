@@ -1,0 +1,744 @@
+{
+  "stage": "angle",
+  "desk": "culture",
+  "cycle": "112",
+  "persona": "elliot-graye",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00012",
+      "name": "Elliot Graye",
+      "role": "desk reporter",
+      "desk": "culture"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "crisis response at Bay Pure Land Buddhist Temple (Chinatown) — the week in faith, and Telegraph Presbyterian Fellowship in focus",
+      "approach": "Faith and quiet-work approach: this slice is the week's faith events on the record — services, holy days, outreach, crisis response, with the congregations and neighborhoods named — plus one congregation in focus and the community programs around it. Dignity, not doctrine wars. The events, institutions and people are real; the sanctuary on a weeknight, the basement kitchen, the Tuesday meeting are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "faith",
+        "hood": "Downtown",
+        "facts": [
+          "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+          "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+          "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+          "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+          "Cathedral of the Living Word (Lake Merritt), C108 — holy day: traditional Epiphany rituals observed (attendance 1,077)",
+          "St. Esperanza Parish (Fruitvale), C108 — holy day: congregation celebrates Epiphany (attendance 374)",
+          "Cathedral of the Living Word (Lake Merritt), C107 — holy day: congregation celebrates Epiphany (attendance 1,185)",
+          "St. Esperanza Parish (Fruitvale), C107 — holy day: traditional Epiphany rituals observed (attendance 427)",
+          "In focus: Telegraph Presbyterian Fellowship — Protestant, Downtown, congregation 450, founded 189 years ago, led today by Rev. Eunice Marston — historic mainline, social justice focus",
+          "NeuroCity Youth Lab (tech-education), Downtown, founded by Priya Nair, since C101",
+          "Also in Downtown: Lake Merritt Mindfulness Sangha (Buddhist)"
+        ],
+        "priorCycle": null,
+        "note": null,
+        "engineHooks": [
+          "Heavy faith activity this cycle. Multiple incidents creating a pattern. Deep-dive opportunity. (general coverage)",
+          "A family bought their home in Fruitvale (observational analysis)",
+          "Jerome Lindqvist moved from Eastlake to Fruitvale — moving up from Eastlake (desk rotation)"
+        ],
+        "roomIsYours": "the sanctuary on a weeknight, the folding chairs, who sets up and who stays late, what the leader says when the room is half empty",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-faith",
+      "hood": "Downtown",
+      "score": null,
+      "src": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\"",
+      "nearby": [
+        {
+          "text": "Grand Lake neighborhood texture — how residents experience the improvement | Residents of Grand Lake feel the change firsthand.",
+          "src": "output/engine_audit_c112.json patterns[12]; evidence: Initiative_Tracker row(s) 9"
+        },
+        {
+          "text": "Baylight District | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c112.md \"### Baylight District\"; events: world_summary_c112.md \"## World Events\""
+        },
+        {
+          "text": "Downtown | 2 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c112.md \"### Downtown\"; events: world_summary_c112.md \"## World Events\""
+        },
+        {
+          "text": "Grand Lake | 2 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c112.md \"### Grand Lake\"; events: world_summary_c112.md \"## World Events\""
+        },
+        {
+          "text": "Jack London | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c112.md \"### Jack London\"; events: world_summary_c112.md \"## World Events\""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00753",
+          "name": "Eunice Marston",
+          "profile": "Eunice Marston — Senior Pastor / Faith Leader — Downtown",
+          "role": "Senior Pastor / Faith Leader",
+          "hood": "Downtown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\"",
+            "pop": "POP-00753",
+            "rowName": "Eunice Marston",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00603",
+          "name": "Amir Delia",
+          "profile": "Amir Delia — Home Health Aide — Downtown",
+          "role": "Home Health Aide",
+          "hood": "Downtown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\"",
+            "pop": "POP-00603",
+            "rowName": "Amir Delia",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00335",
+          "name": "Imie Calero",
+          "profile": "Imie Calero — Civil Rights Attorney — Downtown",
+          "role": "Civil Rights Attorney",
+          "hood": "Downtown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\"",
+            "pop": "POP-00335",
+            "rowName": "Imie Calero",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00763",
+          "name": "Kenji Tanaka",
+          "profile": "Kenji Tanaka — Senior Pastor / Faith Leader — Chinatown",
+          "role": "Senior Pastor / Faith Leader",
+          "hood": "Chinatown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\"",
+            "pop": "POP-00763",
+            "rowName": "Kenji Tanaka",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00755",
+          "name": "Antoine Vermeer",
+          "profile": "Antoine Vermeer — Senior Pastor / Faith Leader — Lake Merritt",
+          "role": "Senior Pastor / Faith Leader",
+          "hood": "Lake Merritt",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\"",
+            "pop": "POP-00755",
+            "rowName": "Antoine Vermeer",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00756",
+          "name": "Ramon Solano",
+          "profile": "Ramon Solano — Senior Pastor / Faith Leader — Fruitvale",
+          "role": "Senior Pastor / Faith Leader",
+          "hood": "Fruitvale",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\"",
+            "pop": "POP-00756",
+            "rowName": "Ramon Solano",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00531",
+          "name": "Priya Nair",
+          "profile": "Priya Nair — Climate Adaptation Engineer — Downtown",
+          "role": "Climate Adaptation Engineer",
+          "hood": "Downtown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\"",
+            "pop": "POP-00531",
+            "rowName": "Priya Nair",
+            "kind": "slice-row"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C112",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-7cd6ffd2aeb3"
+      },
+      {
+        "t": "FACT",
+        "text": "8 faith events on the record since C106 · Telegraph Presbyterian Fellowship in Downtown | 7 named on the record",
+        "src": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\"",
+        "id": "F-38953bd46583"
+      },
+      {
+        "t": "FACT",
+        "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+        "src": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\"",
+        "id": "F-4c266c9b8831"
+      },
+      {
+        "t": "FACT",
+        "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+        "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\"",
+        "id": "F-61024524d215"
+      },
+      {
+        "t": "FACT",
+        "text": "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+        "src": "output/beats/Faith_Ledger.jsonl C107 \"Telegraph Presbyterian Fellowship\"",
+        "id": "F-7d24d6975c0b"
+      },
+      {
+        "t": "FACT",
+        "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+        "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\"",
+        "id": "F-c6268244f8ea"
+      },
+      {
+        "t": "FACT",
+        "text": "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+        "src": "output/beats/Faith_Ledger.jsonl C109 \"Cathedral of the Living Word\"",
+        "id": "F-2e38ae74adc2"
+      },
+      {
+        "t": "FACT",
+        "text": "Cathedral of the Living Word (Lake Merritt), C108 — holy day: traditional Epiphany rituals observed (attendance 1,077)",
+        "src": "output/beats/Faith_Ledger.jsonl C108 \"Cathedral of the Living Word\"",
+        "id": "F-53d1f53fb120"
+      },
+      {
+        "t": "FACT",
+        "text": "St. Esperanza Parish (Fruitvale), C108 — holy day: congregation celebrates Epiphany (attendance 374)",
+        "src": "output/beats/Faith_Ledger.jsonl C108 \"St. Esperanza Parish\"",
+        "id": "F-3cbfd5530d60"
+      },
+      {
+        "t": "FACT",
+        "text": "Cathedral of the Living Word (Lake Merritt), C107 — holy day: congregation celebrates Epiphany (attendance 1,185)",
+        "src": "output/beats/Faith_Ledger.jsonl C107 \"Cathedral of the Living Word\"",
+        "id": "F-760718ad78bc"
+      },
+      {
+        "t": "FACT",
+        "text": "St. Esperanza Parish (Fruitvale), C107 — holy day: traditional Epiphany rituals observed (attendance 427)",
+        "src": "output/beats/Faith_Ledger.jsonl C107 \"St. Esperanza Parish\"",
+        "id": "F-c585ca789af1"
+      },
+      {
+        "t": "FACT",
+        "text": "In focus: Telegraph Presbyterian Fellowship — Protestant, Downtown, congregation 450, founded 189 years ago, led today by Rev. Eunice Marston — historic mainline, social justice focus",
+        "src": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\"",
+        "id": "F-809239ff7f1c"
+      },
+      {
+        "t": "FACT",
+        "text": "NeuroCity Youth Lab (tech-education), Downtown, founded by Priya Nair, since C101",
+        "src": "output/beats/Community_Programs.jsonl PRG-017",
+        "id": "F-c3ebac270758"
+      },
+      {
+        "t": "FACT",
+        "text": "Also in Downtown: Lake Merritt Mindfulness Sangha (Buddhist)",
+        "src": "output/beats/Faith_Organizations.jsonl",
+        "id": "F-f9fb8a3a3dbd"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "named",
+    "candidates": [
+      {
+        "pop": "POP-00753",
+        "name": "Eunice Marston",
+        "role": "Senior Pastor / Faith Leader",
+        "hood": "Downtown",
+        "profile": "Eunice Marston — Senior Pastor / Faith Leader — Downtown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\"",
+          "pop": "POP-00753",
+          "rowName": "Eunice Marston",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00603",
+        "name": "Amir Delia",
+        "role": "Home Health Aide",
+        "hood": "Downtown",
+        "profile": "Amir Delia — Home Health Aide — Downtown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\"",
+          "pop": "POP-00603",
+          "rowName": "Amir Delia",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00335",
+        "name": "Imie Calero",
+        "role": "Civil Rights Attorney",
+        "hood": "Downtown",
+        "profile": "Imie Calero — Civil Rights Attorney — Downtown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\"",
+          "pop": "POP-00335",
+          "rowName": "Imie Calero",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00763",
+        "name": "Kenji Tanaka",
+        "role": "Senior Pastor / Faith Leader",
+        "hood": "Chinatown",
+        "profile": "Kenji Tanaka — Senior Pastor / Faith Leader — Chinatown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\"",
+          "pop": "POP-00763",
+          "rowName": "Kenji Tanaka",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00755",
+        "name": "Antoine Vermeer",
+        "role": "Senior Pastor / Faith Leader",
+        "hood": "Lake Merritt",
+        "profile": "Antoine Vermeer — Senior Pastor / Faith Leader — Lake Merritt",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\"",
+          "pop": "POP-00755",
+          "rowName": "Antoine Vermeer",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00756",
+        "name": "Ramon Solano",
+        "role": "Senior Pastor / Faith Leader",
+        "hood": "Fruitvale",
+        "profile": "Ramon Solano — Senior Pastor / Faith Leader — Fruitvale",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\"",
+          "pop": "POP-00756",
+          "rowName": "Ramon Solano",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00531",
+        "name": "Priya Nair",
+        "role": "Climate Adaptation Engineer",
+        "hood": "Downtown",
+        "profile": "Priya Nair — Climate Adaptation Engineer — Downtown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\"",
+          "pop": "POP-00531",
+          "rowName": "Priya Nair",
+          "kind": "slice-row"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Elliot Graye",
+    "popid": "POP-00012"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-faith",
+      "angle": "crisis response at Bay Pure Land Buddhist Temple (Chinatown) — the week in faith, and Telegraph Presbyterian Fellowship in focus",
+      "label": "8 faith events on the record since C106 · Telegraph Presbyterian Fellowship in Downtown | 7 named on the record",
+      "hookLine": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+      "hood": "Downtown",
+      "citizens": [
+        "Eunice Marston (POP-00753)",
+        "Amir Delia (POP-00603)",
+        "Imie Calero (POP-00335)",
+        "Kenji Tanaka (POP-00763)",
+        "Antoine Vermeer (POP-00755)",
+        "Ramon Solano (POP-00756)",
+        "Priya Nair (POP-00531)"
+      ],
+      "popids": [
+        "POP-00753",
+        "POP-00603",
+        "POP-00335",
+        "POP-00763",
+        "POP-00755",
+        "POP-00756",
+        "POP-00531"
+      ],
+      "ref": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\"",
+      "cycle": 112
+    },
+    "approach": "Faith and quiet-work approach: this slice is the week's faith events on the record — services, holy days, outreach, crisis response, with the congregations and neighborhoods named — plus one congregation in focus and the community programs around it. Dignity, not doctrine wars. The events, institutions and people are real; the sanctuary on a weeknight, the basement kitchen, the Tuesday meeting are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "FAITH-SLICE-2",
+    "kind": "beat-faith",
+    "seat": {
+      "slug": "elliot-graye",
+      "name": "Elliot Graye",
+      "popid": "POP-00012",
+      "desk": "culture",
+      "domain": "faith",
+      "builder": "buildFaithSlice.js"
+    },
+    "hood": "Downtown",
+    "pulse": {
+      "className": "beat-faith",
+      "score": 100,
+      "label": "8 faith events on the record since C106 · Telegraph Presbyterian Fellowship in Downtown | 7 named on the record",
+      "hood": "Downtown",
+      "source": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\""
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "crisis response at Bay Pure Land Buddhist Temple (Chinatown) — the week in faith, and Telegraph Presbyterian Fellowship in focus",
+      "hookLine": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+      "anchorFacts": [
+        "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+        "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+        "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+        "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+        "Cathedral of the Living Word (Lake Merritt), C108 — holy day: traditional Epiphany rituals observed (attendance 1,077)",
+        "St. Esperanza Parish (Fruitvale), C108 — holy day: congregation celebrates Epiphany (attendance 374)",
+        "Cathedral of the Living Word (Lake Merritt), C107 — holy day: congregation celebrates Epiphany (attendance 1,185)",
+        "St. Esperanza Parish (Fruitvale), C107 — holy day: traditional Epiphany rituals observed (attendance 427)",
+        "In focus: Telegraph Presbyterian Fellowship — Protestant, Downtown, congregation 450, founded 189 years ago, led today by Rev. Eunice Marston — historic mainline, social justice focus",
+        "NeuroCity Youth Lab (tech-education), Downtown, founded by Priya Nair, since C101",
+        "Also in Downtown: Lake Merritt Mindfulness Sangha (Buddhist)"
+      ],
+      "evidence": [
+        {
+          "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+          "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\""
+        },
+        {
+          "text": "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+          "src": "output/beats/Faith_Ledger.jsonl C107 \"Telegraph Presbyterian Fellowship\""
+        },
+        {
+          "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+          "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\""
+        },
+        {
+          "text": "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+          "src": "output/beats/Faith_Ledger.jsonl C109 \"Cathedral of the Living Word\""
+        },
+        {
+          "text": "Cathedral of the Living Word (Lake Merritt), C108 — holy day: traditional Epiphany rituals observed (attendance 1,077)",
+          "src": "output/beats/Faith_Ledger.jsonl C108 \"Cathedral of the Living Word\""
+        },
+        {
+          "text": "St. Esperanza Parish (Fruitvale), C108 — holy day: congregation celebrates Epiphany (attendance 374)",
+          "src": "output/beats/Faith_Ledger.jsonl C108 \"St. Esperanza Parish\""
+        },
+        {
+          "text": "Cathedral of the Living Word (Lake Merritt), C107 — holy day: congregation celebrates Epiphany (attendance 1,185)",
+          "src": "output/beats/Faith_Ledger.jsonl C107 \"Cathedral of the Living Word\""
+        },
+        {
+          "text": "St. Esperanza Parish (Fruitvale), C107 — holy day: traditional Epiphany rituals observed (attendance 427)",
+          "src": "output/beats/Faith_Ledger.jsonl C107 \"St. Esperanza Parish\""
+        },
+        {
+          "text": "In focus: Telegraph Presbyterian Fellowship — Protestant, Downtown, congregation 450, founded 189 years ago, led today by Rev. Eunice Marston — historic mainline, social justice focus",
+          "src": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\""
+        },
+        {
+          "text": "NeuroCity Youth Lab (tech-education), Downtown, founded by Priya Nair, since C101",
+          "src": "output/beats/Community_Programs.jsonl PRG-017"
+        },
+        {
+          "text": "Also in Downtown: Lake Merritt Mindfulness Sangha (Buddhist)",
+          "src": "output/beats/Faith_Organizations.jsonl"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": null,
+      "hooks": [
+        {
+          "text": "Heavy faith activity this cycle. Multiple incidents creating a pattern. Deep-dive opportunity.",
+          "angle": "general coverage",
+          "domain": "FAITH",
+          "hood": null,
+          "priority": 3
+        },
+        {
+          "text": "A family bought their home in Fruitvale",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Fruitvale",
+          "priority": 3
+        },
+        {
+          "text": "Jerome Lindqvist moved from Eastlake to Fruitvale — moving up from Eastlake",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "Fruitvale",
+          "priority": 5
+        }
+      ],
+      "note": null,
+      "pageVoices": [],
+      "roomIsYours": "the sanctuary on a weeknight, the folding chairs, who sets up and who stays late, what the leader says when the room is half empty"
+    },
+    "citizens": [
+      {
+        "popid": "POP-00753",
+        "name": "Eunice Marston",
+        "role": "Senior Pastor / Faith Leader",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Eunice Marston — Senior Pastor / Faith Leader — Downtown",
+        "why": "leads Telegraph Presbyterian Fellowship (Faith_Organizations)"
+      },
+      {
+        "popid": "POP-00603",
+        "name": "Amir Delia",
+        "role": "Home Health Aide",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Amir Delia — Home Health Aide — Downtown",
+        "why": "member of Telegraph Presbyterian Fellowship (Faith_Organizations.MembersList)"
+      },
+      {
+        "popid": "POP-00335",
+        "name": "Imie Calero",
+        "role": "Civil Rights Attorney",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Imie Calero — Civil Rights Attorney — Downtown",
+        "why": "member of Telegraph Presbyterian Fellowship (Faith_Organizations.MembersList)"
+      },
+      {
+        "popid": "POP-00763",
+        "name": "Kenji Tanaka",
+        "role": "Senior Pastor / Faith Leader",
+        "neighborhood": "Chinatown",
+        "business": null,
+        "profile": "Kenji Tanaka — Senior Pastor / Faith Leader — Chinatown",
+        "why": "leads Bay Pure Land Buddhist Temple — crisis response this week (Faith_Ledger)"
+      },
+      {
+        "popid": "POP-00755",
+        "name": "Antoine Vermeer",
+        "role": "Senior Pastor / Faith Leader",
+        "neighborhood": "Lake Merritt",
+        "business": null,
+        "profile": "Antoine Vermeer — Senior Pastor / Faith Leader — Lake Merritt",
+        "why": "leads Cathedral of the Living Word — holy day this week (Faith_Ledger)"
+      },
+      {
+        "popid": "POP-00756",
+        "name": "Ramon Solano",
+        "role": "Senior Pastor / Faith Leader",
+        "neighborhood": "Fruitvale",
+        "business": null,
+        "profile": "Ramon Solano — Senior Pastor / Faith Leader — Fruitvale",
+        "why": "leads St. Esperanza Parish — holy day this week (Faith_Ledger)"
+      },
+      {
+        "popid": "POP-00531",
+        "name": "Priya Nair",
+        "role": "Climate Adaptation Engineer",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Priya Nair — Climate Adaptation Engineer — Downtown",
+        "why": "founded NeuroCity Youth Lab (Community_Programs)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\"",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Elliot Graye this cycle)",
+      "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Elliot Graye",
+    "popid": "POP-00012",
+    "text": "I will focus on Telegraph Presbyterian Fellowship's crisis response efforts and their community programs, particularly their collaboration with NeuroCity Youth Lab.",
+    "plan": {
+      "chase": "I will focus on Telegraph Presbyterian Fellowship's crisis response efforts and their community programs, particularly their collaboration with NeuroCity Youth Lab.",
+      "focus": "Telegraph Presbyterian Fellowship",
+      "why": "The congregation has been actively opening its doors for community support during the crisis, and its social justice focus aligns with the faith beat's emphasis on dignity and community programs.",
+      "checks": [
+        "Verify the attendance numbers for crisis response events",
+        "Confirm the details of Telegraph Presbyterian Fellowship's community programs",
+        "Check if there are any notable community leaders or members involved with the congregation"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00753",
+          "question": "How does Rev. Eunice Marston see the congregation's role in the community during times of crisis?",
+          "basis": "Rev. Eunice Marston is the Senior Pastor of Telegraph Presbyterian Fellowship"
+        },
+        {
+          "pop": "POP-00531",
+          "question": "What is Priya Nair's perspective on the collaboration between NeuroCity Youth Lab and Telegraph Presbyterian Fellowship?",
+          "basis": "Priya Nair founded NeuroCity Youth Lab, which is mentioned alongside Telegraph Presbyterian Fellowship"
+        }
+      ],
+      "interpretation": "The faith community is coming together to support each other during times of crisis, with congregations like Telegraph Presbyterian Fellowship playing a key role.",
+      "unverifiedLead": [
+        "The congregation's crisis response efforts may be having a positive impact on the community",
+        "There may be opportunities for further collaboration between faith organizations and community programs"
+      ],
+      "closeQuestion": "How can the faith community continue to support each other and the broader community in the face of ongoing challenges?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Grand Lake neighborhood texture — how residents experience the improvement | Residents of Grand Lake feel the change firsthand.",
+      "kind": "anomaly",
+      "hood": "Grand Lake",
+      "ref": "output/engine_audit_c112.json patterns[12]; evidence: Initiative_Tracker row(s) 9",
+      "popids": [
+        "POP-00002",
+        "POP-01049",
+        "POP-01080"
+      ]
+    },
+    {
+      "label": "Baylight District | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Baylight District",
+      "ref": "output/neighborhood_texture_c112.md \"### Baylight District\"; events: world_summary_c112.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Downtown | 2 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Downtown",
+      "ref": "output/neighborhood_texture_c112.md \"### Downtown\"; events: world_summary_c112.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Grand Lake | 2 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Grand Lake",
+      "ref": "output/neighborhood_texture_c112.md \"### Grand Lake\"; events: world_summary_c112.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Jack London | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Jack London",
+      "ref": "output/neighborhood_texture_c112.md \"### Jack London\"; events: world_summary_c112.md \"## World Events\"",
+      "popids": []
+    }
+  ],
+  "laneEntries": 20,
+  "angleCapHits": 0,
+  "ranAt": "2026-10-22T11:15:49.244Z"
+}

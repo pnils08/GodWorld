@@ -1,0 +1,22 @@
+{
+  "cycle": 113,
+  "candidates": {
+    "MV-112-civic-office-council-d4-2026-10-19": {
+      "moveId": "MV-112-civic-office-council-d4-2026-10-19",
+      "cycle": 113,
+      "date": "2026-10-19",
+      "agentDir": "civic-office-council-d4",
+      "popid": "POP-00042",
+      "proposingOffice": "COUNCIL-D4",
+      "title": "Ivy Hill Community Revitalization",
+      "category": "safety",
+      "reach": "hood",
+      "hoods": [
+        "Ivy Hill"
+      ],
+      "problem": "addressing decay momentum and crime index",
+      "budget": "$2M",
+      "status": "pending"
+    }
+  }
+}

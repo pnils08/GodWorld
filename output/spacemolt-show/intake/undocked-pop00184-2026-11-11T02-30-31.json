@@ -1,0 +1,55 @@
+{
+  "v": "UNDOCKED-INTAKE/1",
+  "Timestamp": "2026-11-11T02:55:48.027Z",
+  "POPID": "POP-00184",
+  "Cycle": 115,
+  "Seq": 1,
+  "Daypart": "SHOW",
+  "Tag": "undocked-episode",
+  "EpisodeId": "undocked-pop00184-2026-11-11T02-30-31",
+  "Applied": "yes",
+  "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop00184-2026-11-11T02-30-31.json",
+  "Holder": "Brooklyn Nguyen",
+  "CreditsDelta": 0,
+  "Magnitude": 2,
+  "Flags": [
+    "credits_delta_windowed"
+  ],
+  "Excerpt": "Brooklyn Nguyen credits=0 systems=sol,alpha_centauri,tau_ceti,electra,mimosa,ross_154,arcturus,timberline,maplevale,miaplacidus,cervantes,ridgecrest,nembus",
+  "DecidedAt": "2026-11-11T02:55:48.030Z",
+  "DecidedBy": "auto-gate",
+  "Note": "auto-approved on contract validation (§2.5)",
+  "FeedEvent": {
+    "v": "UNDOCKED-FEED/1",
+    "Cycle": 115,
+    "EventType": "undocked-episode",
+    "POPID": "POP-00184",
+    "Holder": "Brooklyn Nguyen",
+    "EpisodeId": "undocked-pop00184-Y3C11",
+    "CreditsDelta": 0,
+    "PointsDelta": 24.93,
+    "Systems": [
+      "sol",
+      "alpha_centauri",
+      "tau_ceti",
+      "electra",
+      "mimosa",
+      "ross_154",
+      "arcturus",
+      "timberline",
+      "maplevale",
+      "miaplacidus",
+      "cervantes",
+      "ridgecrest",
+      "nembus"
+    ],
+    "CombatEvents": 0,
+    "MishapCount": 0,
+    "Magnitude": 2,
+    "Flags": [
+      "credits_delta_windowed"
+    ],
+    "StagedPath": "output/spacemolt-show/staged/undocked-pop00184-2026-11-11T02-30-31.json"
+  },
+  "PointsDelta": 24.93
+}

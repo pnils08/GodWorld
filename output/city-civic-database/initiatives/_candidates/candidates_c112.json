@@ -1,0 +1,22 @@
+{
+  "cycle": 112,
+  "candidates": {
+    "MV-111-civic-office-council-d4-2026-10-12": {
+      "moveId": "MV-111-civic-office-council-d4-2026-10-12",
+      "cycle": 112,
+      "date": "2026-10-12",
+      "agentDir": "civic-office-council-d4",
+      "popid": "POP-00042",
+      "proposingOffice": "COUNCIL-D4",
+      "title": "Dimond Revitalization Initiative",
+      "category": "economic",
+      "reach": "hood",
+      "hoods": [
+        "Dimond"
+      ],
+      "problem": "Commercial contraction and public safety concerns in Dimond",
+      "budget": "$2.5M",
+      "status": "pending"
+    }
+  }
+}

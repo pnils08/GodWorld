@@ -1,0 +1,337 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00160",
+    "name": "Mason Ortega",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Fruitvale kitchens: Marigold Cafe, Fruitvale Diner, Hub Ramen — the people who work the shift",
+    "approach": "Food & hospitality approach — kitchens as workplaces: this slice is one neighborhood's restaurants, cafes and bars from the ledger and the people on the roster who work in them. The people on this slice are real; the rest of the room is yours — the line on a Tuesday, the regulars, the walk-in, the tip jar. One kitchen, one shift, one true thing about the work. Not a review. Not multi-voice culture-desk average. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "food-workplaces",
+      "hood": "Fruitvale",
+      "pulseClass": "hood-kitchens",
+      "economicFrame": "Fruitvale kitchens: Marigold Cafe, Fruitvale Diner, Hub Ramen — the people who work the shift",
+      "hook": "Tariq Mitchell, Line Cook at Marigold Cafe. 2 named workers at 2 named kitchens in Fruitvale on the ledger this cycle.",
+      "namedBusinesses": [
+        "Marigold Cafe",
+        "Fruitvale Diner",
+        "Hub Ramen",
+        "Masa & Vine",
+        "Platform Brunch"
+      ],
+      "workplaces": [
+        "Marigold Cafe — Cafe / dining — Tariq Mitchell (Line Cook)",
+        "Fruitvale Diner — Restaurant & Dining — Hazel Salazar (Line Cook)",
+        "Hub Ramen — Ramen Bar — no roster names",
+        "Masa & Vine — Small Plates & Natural Wine Bar — no roster names",
+        "Platform Brunch — Brunch Restaurant — no roster names"
+      ],
+      "engineColour": [
+        "Mateo Baker — braced for the sound of pile drivers and realized they had already started tuning it out",
+        "Darius Hill — said no to something and felt the shape of who they are in it",
+        "Samuel Adeyemi — has watched Ivy Hill Cafe go quiet lately",
+        "Ebony Mendoza — kept score by hand at the kitchen table the way their father taught them near a quiet side street",
+        "Dame Sarr — let the week's wins carry dinner",
+        "Constanza Doan — drank the free cold brew in the company kitchen and felt completely disconnected from the neighborhood outside"
+      ],
+      "roomIsYours": "the line, the regulars, the pace, the tip jar, what the cook is worried about",
+      "forbidden": [
+        "Do not invent a business, a worker, an owner or a place — every name comes from this slice",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose",
+        "Do not contradict a role, employer or neighborhood listed here"
+      ],
+      "sceneRule": null
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "story-signal",
+    "hood": "Fruitvale",
+    "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+    "plan": {
+      "focus": "The working conditions and daily reality of line cooks at two Fruitvale kitchens of vastly different scale — Marigold Cafe's Tariq Mitchell and Fruitvale Diner's Hazel Salazar — and what the work actually demands of them.",
+      "closeQuestion": "What does a cook need — not to make the food, but to make it through the shift — and who's responsible for making sure they have it?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [],
+    "sources": [],
+    "excludedLeads": [
+      {
+        "from": "Mason Ortega",
+        "text": "Tariq Mitchell may have been working the Marigold line for a while — the way he moved at the flat-top suggested muscle memory, not a new hire.",
+        "usable": false
+      },
+      {
+        "from": "Mason Ortega",
+        "text": "Hazel Salazar might be the kind of cook who's been in the Fruitvale kitchen scene long enough to have opinions about how the neighborhood's changed around the diner.",
+        "usable": false
+      },
+      {
+        "from": "Mason Ortega",
+        "text": "The tip jar situation at Fruitvale Diner might be more personal than at Marigold — regulars who know Hazel by name versus a crowd that cycles through.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C114",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-4261fa115617"
+    },
+    {
+      "t": "FACT",
+      "text": "Fruitvale kitchens · Marigold Cafe, Fruitvale Diner",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+      "id": "F-8f652b0ac965"
+    },
+    {
+      "t": "FACT",
+      "text": "Tariq Mitchell, Line Cook at Marigold Cafe. 2 named workers at 2 named kitchens in Fruitvale on the ledger this cycle.",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+      "id": "F-78d4c9912cc7"
+    },
+    {
+      "t": "FACT",
+      "text": "Marigold Cafe · Cafe / dining · 30 employees · growth 10.7% · revenue $3.1M (+$6k vs C113) · on the roster: Tariq Mitchell (Line Cook)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+      "id": "F-f5b99ee4b698"
+    },
+    {
+      "t": "FACT",
+      "text": "Fruitvale Diner · Restaurant & Dining · 2 employees · growth 10.9% · revenue $207k (+$432 vs C113) · on the roster: Hazel Salazar (Line Cook)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+      "id": "F-30fcdbb2184e"
+    },
+    {
+      "t": "FACT",
+      "text": "Hub Ramen · Ramen Bar · 11 employees · growth 4.1% · revenue $721k (+$572 vs C113)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+      "id": "F-9973e1fc652f"
+    },
+    {
+      "t": "FACT",
+      "text": "Masa & Vine · Small Plates & Natural Wine Bar · 11 employees · growth 4.3% · revenue $721k (+$593 vs C113)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+      "id": "F-f89a3d2faa98"
+    },
+    {
+      "t": "FACT",
+      "text": "Platform Brunch · Brunch Restaurant · 11 employees · growth 4.3% · revenue $721k (+$597 vs C113)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+      "id": "F-ae8e7e99e7d9"
+    },
+    {
+      "t": "FACT",
+      "text": "CITY SEED (Ivy Hill): citizens Mateo Baker; Darius Hill; Samuel Adeyemi; Ebony Mendoza · businesses Ivy Hill Market; Ivy Cleaners",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C114",
+      "id": "F-916543f0d3d1"
+    },
+    {
+      "t": "FACT",
+      "text": "CITY SEED (Downtown): citizens Dame Sarr; Constanza Doan; Sandra Liu; Eunice Marston · businesses Bay Tribune; AC Transit · Lake Merritt Mindfulness Sangha (faith)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C114",
+      "id": "F-6517c6210bf3"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C10, Spring, holiday=none",
+      "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+      "id": "F-9b9470803821"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. No named ledger citizen spoke for this piece (manifest.approvedQuotes is empty): put no words in a named citizen's mouth. Unnamed voices are yours. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "mason-kitchen-ground-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Treat a Packet-supplied restaurant signal as a workplace question without inventing Mason's presence, a worker, shift, service state, business condition, or labor consequence.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "evidence-bounded kitchen-work brief",
+      "targetWords": "evidence-bounded",
+      "opening": "one Packet-named restaurant and location",
+      "closing": "the worker or operating account still needed"
+    },
+    "authorizedTexture": [
+      "workplace-oriented questions about a supplied restaurant without claiming an answer",
+      "kitchen vocabulary used only as interpretation and never as proof of a worker, action, condition, or event"
+    ],
+    "textureConditions": [
+      "a restaurant appearing on an evening list proves only the supplied venue-location relation, not that it was open, busy, staffed, serving, struggling, or observed",
+      "first-person embedding, every worker, owner, patron, shift, quote, action, count, wage, cost, supply issue, health score, and business outcome requires Packet support"
+    ],
+    "canonBlockers": [
+      "invented attendance, kitchen access, worker, owner, patron, service, rush, shift, dialogue, quote, wage, cost, ticket count, equipment state, supply problem, health score, business condition, or labor consequence",
+      "an invented or altered venue, person, neighborhood, event, relationship, date, number, or quote",
+      "review language, raw engine labels, citywide food trend assigned to one venue, or collective worker sentiment presented as fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-20b7146949a9",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-4261fa115617",
+        "t": "FACT",
+        "text": "Current cycle: C114",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-8f652b0ac965",
+        "t": "FACT",
+        "text": "Fruitvale kitchens · Marigold Cafe, Fruitvale Diner",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114"
+      },
+      {
+        "id": "F-78d4c9912cc7",
+        "t": "FACT",
+        "text": "Tariq Mitchell, Line Cook at Marigold Cafe. 2 named workers at 2 named kitchens in Fruitvale on the ledger this cycle.",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114"
+      },
+      {
+        "id": "F-f5b99ee4b698",
+        "t": "FACT",
+        "text": "Marigold Cafe · Cafe / dining · 30 employees · growth 10.7% · revenue $3.1M (+$6k vs C113) · on the roster: Tariq Mitchell (Line Cook)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114"
+      },
+      {
+        "id": "F-30fcdbb2184e",
+        "t": "FACT",
+        "text": "Fruitvale Diner · Restaurant & Dining · 2 employees · growth 10.9% · revenue $207k (+$432 vs C113) · on the roster: Hazel Salazar (Line Cook)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114"
+      },
+      {
+        "id": "F-9973e1fc652f",
+        "t": "FACT",
+        "text": "Hub Ramen · Ramen Bar · 11 employees · growth 4.1% · revenue $721k (+$572 vs C113)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114"
+      },
+      {
+        "id": "F-f89a3d2faa98",
+        "t": "FACT",
+        "text": "Masa & Vine · Small Plates & Natural Wine Bar · 11 employees · growth 4.3% · revenue $721k (+$593 vs C113)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114"
+      },
+      {
+        "id": "F-ae8e7e99e7d9",
+        "t": "FACT",
+        "text": "Platform Brunch · Brunch Restaurant · 11 employees · growth 4.3% · revenue $721k (+$597 vs C113)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114"
+      },
+      {
+        "id": "F-916543f0d3d1",
+        "t": "FACT",
+        "text": "CITY SEED (Ivy Hill): citizens Mateo Baker; Darius Hill; Samuel Adeyemi; Ebony Mendoza · businesses Ivy Hill Market; Ivy Cleaners",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C114"
+      },
+      {
+        "id": "F-6517c6210bf3",
+        "t": "FACT",
+        "text": "CITY SEED (Downtown): citizens Dame Sarr; Constanza Doan; Sandra Liu; Eunice Marston · businesses Bay Tribune; AC Transit · Lake Merritt Mindfulness Sangha (faith)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C114"
+      },
+      {
+        "id": "F-9b9470803821",
+        "t": "FACT",
+        "text": "Calendar: Y3C10, Spring, holiday=none",
+        "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)"
+      }
+    ],
+    "approvedQuotes": [],
+    "approvedSubjects": [],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Mason Ortega",
+        "text": "Tariq Mitchell may have been working the Marigold line for a while — the way he moved at the flat-top suggested muscle memory, not a new hire.",
+        "publishable": false
+      },
+      {
+        "from": "Mason Ortega",
+        "text": "Hazel Salazar might be the kind of cook who's been in the Fruitvale kitchen scene long enough to have opinions about how the neighborhood's changed around the diner.",
+        "publishable": false
+      },
+      {
+        "from": "Mason Ortega",
+        "text": "The tip jar situation at Fruitvale Diner might be more personal than at Marigold — regulars who know Hazel by name versus a crowd that cycles through.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "workplace-oriented questions about a supplied restaurant without claiming an answer",
+      "kitchen vocabulary used only as interpretation and never as proof of a worker, action, condition, or event"
+    ],
+    "textureConditions": [
+      "a restaurant appearing on an evening list proves only the supplied venue-location relation, not that it was open, busy, staffed, serving, struggling, or observed",
+      "first-person embedding, every worker, owner, patron, shift, quote, action, count, wage, cost, supply issue, health score, and business outcome requires Packet support"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

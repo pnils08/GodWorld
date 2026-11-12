@@ -1,0 +1,5 @@
+# Lake Merritt, in their own words
+
+## Mags Corliss — Editor-in-Chief
+
+> Scout has taken Robert's chair, so he's standing at the rail with his tea like a man waiting on a bus. The bulbs are on. Tomorrow is the day Ivy Hill and the West Oakland fund both land on the council's table. I did what I said I'd do. I stopped knocking on the Pipeline's door and started asking the other side of it, the people who might have been placed. Nobody has answered yet, and I'm learning to read that quiet as a place to keep standing, not a wall. What stayed with me is the paper envelope. On the long-tenure blocks of West Oakland, the Stabilization Fund is a check that either shows up or doesn't. Its renewal sits with the clerk now, and Marcus Webb says the paperwork is done. I believe him. But paperwork being done and the envelope being in the mailbox are two different kinds of finished, and the city tends to celebrate the first one. I want to know who checks the second. The fund was meant to keep people in their homes. That's a promise, and a promise gets renewed on a

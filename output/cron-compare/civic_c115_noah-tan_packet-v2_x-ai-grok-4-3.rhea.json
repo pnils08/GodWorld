@@ -1,0 +1,62 @@
+{
+  "draft": "output/cron-compare/civic_c115_noah-tan_packet-v2_x-ai-grok-4-3.md",
+  "cycle": "115",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "566503a4d39fbde1b663aa6240425b796388fd2df56dd66c27a7619a20824024",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All named citizens and quotes verified against ground truth with zero canon violations.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "noah-weather-ground-v1",
+    "packageVersion": "NOAH-LEP2-1",
+    "manifestId": "AM-15a009a2ecac",
+    "lexicalObservations": [],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Ramon Vega"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 1,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0108,
+  "durationMs": 4345,
+  "parseError": false,
+  "ranAt": "2026-11-12T00:16:54.888Z",
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": false,
+    "inTargetBy": "code floor 400",
+    "words": 336,
+    "short": "The piece falls short of the 400-word minimum target.",
+    "score": 2,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "566503a4d39fbde1b663aa6240425b796388fd2df56dd66c27a7619a20824024",
+    "costUsd": 0.0006
+  }
+}

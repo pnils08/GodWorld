@@ -1,0 +1,220 @@
+{
+  "stage": "angle",
+  "desk": "undocked",
+  "cycle": "114",
+  "persona": "nia-rook",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-01076",
+      "name": "Nia Rook",
+      "role": "desk reporter",
+      "desk": "undocked"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "UNDOCKED episode: Lena Okafor, Thursday night. Standings: Luis Taz leads the board — rank #1, 37.96 achievement points, 0 credits, 1 cycle(s) led, current streak 1. In the chair: Lena Okafor — Daycare Director.",
+      "approach": "UNDOCKED show beat: current episode and standings from the approved feed; earlier episodes from the approved show history."
+    },
+    "signal": {
+      "kind": "undocked",
+      "hood": "Fruitvale",
+      "score": null,
+      "src": "undocked:undocked-pop00530-Y3C10-e2",
+      "nearby": [
+        {
+          "text": "UNDOCKED: Lena Okafor, Thursday night",
+          "src": "undocked:undocked-pop00530-Y3C10-e2"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00530",
+          "name": "Lena Okafor",
+          "profile": "Lena Okafor — UNDOCKED pilot",
+          "role": "UNDOCKED pilot",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "undocked-feed-row",
+          "evidence": {
+            "source": "output/spacemolt-show/feed/c114.json",
+            "episodeId": "undocked-pop00530-Y3C10-e2",
+            "pop": "POP-00530"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C114",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-4261fa115617"
+      },
+      {
+        "t": "FACT",
+        "text": "UNDOCKED: Lena Okafor, Thursday night",
+        "src": "undocked:undocked-pop00530-Y3C10-e2",
+        "id": "F-0215e397cfef"
+      },
+      {
+        "t": "FACT",
+        "text": "Lena Okafor's Thursday night on UNDOCKED: went through Alpha Centauri, Sol, Sirius, Nova Terra, Epsilon Eridani, Procyon, Proxima Centauri and Barnards Star; took the Copper Requisition contract; mined 3 copper ore, 8 iron ore, 1 antimatter containment cell and 4 aluminum ore; sold 6 copper ore and 12 iron ore; got into 1 fight; came out 18 credits up; flew until the show's time ran out.",
+        "src": "undocked:undocked-pop00530-Y3C10-e2",
+        "id": "F-f00e00704d79"
+      },
+      {
+        "t": "FACT",
+        "text": "Lena Okafor — Daycare Director (ledger)",
+        "src": "undocked:undocked-pop00530-Y3C10-e2",
+        "id": "F-31ba7e9ec4ee"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "named",
+    "candidates": [
+      {
+        "pop": "POP-00530",
+        "name": "Lena Okafor",
+        "role": "UNDOCKED pilot",
+        "hood": null,
+        "profile": "Lena Okafor — UNDOCKED pilot",
+        "mode": "named",
+        "sourceKind": "undocked-feed-row",
+        "evidence": {
+          "source": "output/spacemolt-show/feed/c114.json",
+          "episodeId": "undocked-pop00530-Y3C10-e2",
+          "pop": "POP-00530"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Nia Rook",
+    "popid": "POP-01076"
+  },
+  "assignment": {
+    "story": {
+      "ref": "undocked:undocked-pop00530-Y3C10-e2",
+      "label": "UNDOCKED: Lena Okafor, Thursday night",
+      "kind": "undocked",
+      "angle": "UNDOCKED episode: Lena Okafor, Thursday night. Standings: Luis Taz leads the board — rank #1, 37.96 achievement points, 0 credits, 1 cycle(s) led, current streak 1. In the chair: Lena Okafor — Daycare Director.",
+      "facts": [
+        "Lena Okafor's Thursday night on UNDOCKED: went through Alpha Centauri, Sol, Sirius, Nova Terra, Epsilon Eridani, Procyon, Proxima Centauri and Barnards Star; took the Copper Requisition contract; mined 3 copper ore, 8 iron ore, 1 antimatter containment cell and 4 aluminum ore; sold 6 copper ore and 12 iron ore; got into 1 fight; came out 18 credits up; flew until the show's time ran out.",
+        "Lena Okafor — Daycare Director (ledger)"
+      ],
+      "citizens": [
+        "Lena Okafor — Daycare Director, UNDOCKED cast pilot"
+      ],
+      "popids": [
+        "POP-00530"
+      ],
+      "hood": "Fruitvale"
+    },
+    "approach": "UNDOCKED show beat: current episode and standings from the approved feed; earlier episodes from the approved show history."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Nia Rook",
+    "popid": "POP-01076",
+    "text": "Nia Rook checks in on Lena Okafor's Thursday night UNDOCKED episode to see if the Daycare Director's performance aligns with her role outside the show.",
+    "plan": {
+      "chase": "Nia Rook checks in on Lena Okafor's Thursday night UNDOCKED episode to see if the Daycare Director's performance aligns with her role outside the show.",
+      "focus": "Lena Okafor's UNDOCKED episode",
+      "why": "Lena Okafor's recent UNDOCKED performance and her day job as a Daycare Director may offer insight into how her real-life responsibilities influence her in-show decisions.",
+      "checks": [
+        "UNDOCKED standings",
+        "Lena Okafor's episode details"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00530",
+          "question": "How does Lena Okafor's performance in UNDOCKED relate to her role as a Daycare Director?",
+          "basis": "Lena Okafor's UNDOCKED episode and her known role"
+        }
+      ],
+      "interpretation": "The UNDOCKED performance may reflect or contrast with Lena Okafor's day job, offering a story angle on how different personas or skills intersect.",
+      "unverifiedLead": [
+        "Lena Okafor's decision-making process during the UNDOCKED episode might be influenced by her experience managing a daycare."
+      ],
+      "closeQuestion": "Does Lena Okafor's UNDOCKED performance indicate a connection between her in-show actions and her real-life job responsibilities?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "UNDOCKED: Lena Okafor, Thursday night",
+      "kind": "undocked",
+      "hood": "Fruitvale",
+      "ref": "undocked:undocked-pop00530-Y3C10-e2",
+      "popids": [
+        "POP-00530"
+      ]
+    }
+  ],
+  "laneEntries": 1,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-06T12:18:54.168Z"
+}

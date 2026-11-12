@@ -1,0 +1,72 @@
+{
+  "draft": "output/cron-compare/civic_c115_rachel-torres_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "115",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "a0a817316cf9170c93dd9f712a5b146d12622f9c7d43411faaccf96c8a58cd01",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Clean data-analysis piece verifying public-safety sheet metrics with no fabricated speech, accurate canon roles for Chief Montez and Deputy Chief Cho, and no ground-truth contradictions.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "rachel-public-safety-v1",
+    "packageVersion": "RACHEL-LEP2-2",
+    "manifestId": "AM-dcc6fbfc443f",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_QUOTE",
+        "values": [
+          "steady.",
+          "cleared",
+          "cleared"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Kimberly Cho",
+      "Rafael Montez"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 2,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0113,
+  "durationMs": 7269,
+  "parseError": false,
+  "ranAt": "2026-11-11T00:16:37.073Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 500",
+    "words": 786,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "a0a817316cf9170c93dd9f712a5b146d12622f9c7d43411faaccf96c8a58cd01",
+    "costUsd": 0.0013
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "status": "staged",
+  "desk": "undocked-digest",
+  "cycle": "114",
+  "persona": "nia-rook-weekly",
+  "byline": "Nia Rook",
+  "bylinePopid": "POP-01076",
+  "article": "output/cron-compare/staged/undocked-digest_c114_nia-rook-weekly_packet-v2_openai-gpt-6-luna.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Luis Taz",
+        "role": "subject",
+        "popid": "POP-00298"
+      },
+      {
+        "name": "Ronald Silk",
+        "role": "subject",
+        "popid": "POP-00647"
+      },
+      {
+        "name": "Lena Okafor",
+        "role": "subject",
+        "popid": "POP-00530",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "As an Electrician, I've developed a knack for problem-solving and staying calm under pressure. I think that's helped me on UNDOCKED, navigating through the different systems and making quick decisions. My background in electrical work hasn't directly related to flying on UNDOCKED, but the mindset and focus I use for complex wiring jobs seems to translate to navigating through the stars and managing resources during the show.",
+        "sourceRef": "citizenVoice PRESS Ronald Silk"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-52ab0cb6a876",
+    "draftSha256": "1bd068192ead2ca6fd98238e7d3c0c9bf5f0e97f6764a782a629a70b03b35603",
+    "verdict": "output/cron-compare/undocked-digest_c114_nia-rook-weekly_packet-v2_openai-gpt-6-luna.rhea.json",
+    "ranAt": "2026-11-07T16:15:49.354Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 350",
+      "words": 419,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "1bd068192ead2ca6fd98238e7d3c0c9bf5f0e97f6764a782a629a70b03b35603",
+      "costUsd": 0.0009
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-07T16:16:00.560Z"
+}

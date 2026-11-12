@@ -1,0 +1,16 @@
+{
+  "office": "council_d9",
+  "agentDir": "civic-office-council-d9",
+  "holder": "Terrence Mobley",
+  "popid": "POP-00506",
+  "title": "City Council District 9",
+  "date": "2026-10-15",
+  "cycle": 111,
+  "model": "deepseek/deepseek-v4-flash-0731",
+  "statement": "Laurel and Uptown are holding steady. With no proposals in play and no pressing conditions on my turf, there's no urgent need for me to force a move this cycle. I'm watching the sick-resident counts in both neighborhoods — Laurel at 111, Uptown at 23 — and I'll stay ready to act if those numbers trend the wrong way. Sometimes the right call is to hold the line and let good work continue without interference.",
+  "moves": [],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-10-15T10:45:12.128Z",
+  "fellBackFrom": null
+}

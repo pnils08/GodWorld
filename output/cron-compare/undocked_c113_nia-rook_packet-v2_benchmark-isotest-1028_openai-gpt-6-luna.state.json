@@ -1,0 +1,218 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-01076",
+    "name": "Nia Rook",
+    "role": "desk reporter",
+    "desk": "undocked"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Recap Father Miguel's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits 0, systems lacaille_9352, sirius, sol, alpha_centauri, combat 0, mishaps 0, magnitude 2/5. Standings: Eric Taveras leads the board — rank #1, 3 cycle(s) led, current streak 3. In the chair: Father Miguel — Parish priest. The career is who they are, not the story; the story is the flight.",
+    "approach": "Recap approach (UNDOCKED show beat): open on the CITY watching, not the cockpit. Pick 1-2 bag modes and hold them. The typed episode facts are the spine — credits, systems, combat, mishaps, magnitude — but lead with what it MEANS for who's up and who's down, never with the numbers. The pilot's packet interview is the only place their voice comes from. End on the one sentence the hallway will argue about tomorrow. This is the desk that's allowed to have fun.",
+    "voice": null,
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "undocked",
+    "hood": "Fruitvale",
+    "src": "undocked:undocked-pop00734-Y3C9",
+    "plan": {
+      "focus": "The city's watch on Eric Taveras and the leaderboard",
+      "closeQuestion": "Will Father Miguel's 'dead even on the night' performance be enough to challenge Eric Taveras' standing as the leaderboard leader?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [],
+    "sources": [],
+    "excludedLeads": [
+      {
+        "from": "Nia Rook",
+        "text": "The potential for a shift in the leaderboard dynamics due to Father Miguel's episode",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C113",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-876f95b5eb98"
+    },
+    {
+      "t": "FACT",
+      "text": "UNDOCKED: Father Miguel — dead even on the night",
+      "src": "undocked:undocked-pop00734-Y3C9",
+      "id": "F-aa684741dbbd"
+    },
+    {
+      "t": "FACT",
+      "text": "Father Miguel — Parish priest (ledger)",
+      "src": "undocked:undocked-pop00734-Y3C9",
+      "id": "F-19e445474586"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C9, Winter, holiday=none",
+      "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+      "id": "F-ab9d6786094e"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. No named ledger citizen spoke for this piece (manifest.approvedQuotes is empty): put no words in a named citizen's mouth. Unnamed voices are yours. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "nia-rook-undocked-recap-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Turn a gate-approved UNDOCKED episode into the city's entertainment conversation — who's up, who's down, what Oakland argues about tomorrow. Arc-tracking recap energy; personality-forward. NOT hard news, NOT sports analytics, NOT civic process.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "third-person recap with first-person flashes — entertainment beat, having fun on purpose",
+      "targetWords": "350-600",
+      "opening": "a watch-party, bar, break-room, or street moment of the city reacting to the episode",
+      "closing": "the one sentence the hallway will argue about tomorrow"
+    },
+    "authorizedTexture": [
+      "an unnamed bar, watch-party, break-room, bus, or sidewalk setting where the city watches or argues — no invented named venue, entity, or event",
+      "the reporter's own recap persona, arc memory of prior episodes she herself filed, and who's-up-who's-down framing",
+      "unnamed audience argument and aspiration lines used as city color, never as attributed quotes or measured sentiment",
+      "metaphor and emotional inference grounded in a supplied typed fact from the episode feed"
+    ],
+    "textureConditions": [
+      "every named person, cast pilot, venue, business, and institution must come from the Packet",
+      "episode facts only from the typed feed fields (CreditsDelta, Systems, CombatEvents, MishapCount, Magnitude, Flags) — a blank CreditsDelta is unsettled, never zero and never invented",
+      "pilot speech only from the wake-2 packet interviews — no other quote source exists for this lane",
+      "no standings, records, or streaks beyond what the supplied facts state",
+      "unnamed audience reaction stays rhetorical — it must not become a count, a poll, or a named person"
+    ],
+    "canonBlockers": [
+      "video game",
+      "videogame",
+      "simulation",
+      "engine",
+      "MCP",
+      "server",
+      "commander",
+      "tool",
+      "API",
+      "spacemolt-lib",
+      "openrouter",
+      "real-world calendar dates (YYYY-MM-DD)",
+      "captains_log",
+      "leaderboard math not present in the supplied facts"
+    ]
+  },
+  "manifest": {
+    "id": "AM-095779e4f217",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-876f95b5eb98",
+        "t": "FACT",
+        "text": "Current cycle: C113",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-aa684741dbbd",
+        "t": "FACT",
+        "text": "UNDOCKED: Father Miguel — dead even on the night",
+        "src": "undocked:undocked-pop00734-Y3C9"
+      },
+      {
+        "id": "F-19e445474586",
+        "t": "FACT",
+        "text": "Father Miguel — Parish priest (ledger)",
+        "src": "undocked:undocked-pop00734-Y3C9"
+      },
+      {
+        "id": "F-ab9d6786094e",
+        "t": "FACT",
+        "text": "Calendar: Y3C9, Winter, holiday=none",
+        "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)"
+      }
+    ],
+    "approvedQuotes": [],
+    "approvedSubjects": [],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Nia Rook",
+        "text": "The potential for a shift in the leaderboard dynamics due to Father Miguel's episode",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "an unnamed bar, watch-party, break-room, bus, or sidewalk setting where the city watches or argues — no invented named venue, entity, or event",
+      "the reporter's own recap persona, arc memory of prior episodes she herself filed, and who's-up-who's-down framing",
+      "unnamed audience argument and aspiration lines used as city color, never as attributed quotes or measured sentiment",
+      "metaphor and emotional inference grounded in a supplied typed fact from the episode feed"
+    ],
+    "textureConditions": [
+      "every named person, cast pilot, venue, business, and institution must come from the Packet",
+      "episode facts only from the typed feed fields (CreditsDelta, Systems, CombatEvents, MishapCount, Magnitude, Flags) — a blank CreditsDelta is unsettled, never zero and never invented",
+      "pilot speech only from the wake-2 packet interviews — no other quote source exists for this lane",
+      "no standings, records, or streaks beyond what the supplied facts state",
+      "unnamed audience reaction stays rhetorical — it must not become a count, a poll, or a named person"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

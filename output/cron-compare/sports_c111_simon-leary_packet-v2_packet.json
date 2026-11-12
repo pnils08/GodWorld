@@ -1,0 +1,624 @@
+{
+  "stage": "report",
+  "desk": "sports",
+  "cycle": "111",
+  "persona": "simon-leary",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Simon Leary",
+    "popid": "POP-00016"
+  },
+  "assignment": {
+    "story": {
+      "angle": "The A's record is 4-1.",
+      "label": "The A's record is 4-1.",
+      "hookLine": "The A's record is 4-1.",
+      "kind": "long-view-signal",
+      "hood": "Downtown",
+      "popids": [
+        "POP-00033",
+        "POP-00597",
+        "POP-00001",
+        "POP-00018"
+      ],
+      "citizens": [
+        "John Ellis (POP-00033)",
+        "Eric Taveras (POP-00597)",
+        "Vinnie Keane (POP-00001)",
+        "Benji Dillon (POP-00018)"
+      ],
+      "ref": "world_summary_c111.md ## Sports",
+      "cycle": 111
+    }
+  },
+  "angle": "output/cron-compare/sports_c111_simon-leary_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 1,
+  "quotes": [
+    {
+      "pop": "POP-00001",
+      "name": "Vinnie Keane",
+      "quote": "You know, people hear 'role change' and they brace for something breaking. But a 4-1 start with three straight — that's not a crack in the foundation, that's the foundation telling you it can hold more than one shape. I've seen it in this game a hundred times: a guy moves from cleanup to second, or a pitcher shifts from starter to relief, and everyone acts like the earth moved. But the load doesn't disappear — it just finds a new way to sit. The wins don't lie. When the machine keeps humming through a change, that's not disruption, that's the team telling you it knows what it's doing. It's like the crack in the sidewalk outside our store — the city patches it, but the light still finds its way through. The structure holds. It always did. The role was never the point; the trust was. And right now, that trust is carrying the load just fine.",
+      "disp": "can't switch off, working themselves thin; draws people in, deep with them; warm, tender with people; curious, open to new things; unshakable, calm under anything; principled, plays it straight; close to family; often out in the neighborhood; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "{\"answer\":\"quote\",\"quote\":\"You know, people hear 'role change' and they brace for something breaking. But a 4-1 start with three straight — that's not a crack in the foundation, that's the foundation telling you it can hold more than one shape. I've seen it in this game a hundred times: a guy moves from cleanup to second, or a pitcher shifts from starter to relief, and everyone acts like the earth moved. But the load doesn't disappear — it just finds a new way to sit. The wins don't lie. When the machine keeps humming through a change, that's not disruption, that's the team telling you it knows what it's doing. It's like the crack in the sidewalk outside our store — the city patches it, but the light still finds its way through. The structure holds. It always did. The role was never the point; the trust was. And right now, that trust is carrying the load just fine.\",\"fact_ids\":[\"F-198811406e03\",\"F-297a24edbcbc\"],\"basis\":\"lived-context\",\"unverifiedLead\":null,\"abstain_reason\":null}",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-198811406e03",
+          "F-297a24edbcbc"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00001-5a2dd95bae",
+        "authoredQuote": true,
+        "publishableQuote": "You know, people hear 'role change' and they brace for something breaking. But a 4-1 start with three straight — that's not a crack in the foundation, that's the foundation telling you it can hold more than one shape. I've seen it in this game a hundred times: a guy moves from cleanup to second, or a pitcher shifts from starter to relief, and everyone acts like the earth moved. But the load doesn't disappear — it just finds a new way to sit. The wins don't lie. When the machine keeps humming through a change, that's not disruption, that's the team telling you it knows what it's doing. It's like the crack in the sidewalk outside our store — the city patches it, but the light still finds its way through. The structure holds. It always did. The role was never the point; the trust was. And right now, that trust is carrying the load just fine."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00001",
+          "name": "Vinnie Keane",
+          "role": "Designated Hitter, Oakland A's Legend",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Simon Leary",
+          "question": "What have you seen, felt, or understood about \"The structural continuity of a 4-1 start and three straight wins as a frame for understanding a role change — not as disruption, but as the load finding a new way to distribute itself.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "long-view-signal",
+          "hood": "Downtown",
+          "focus": "The structural continuity of a 4-1 start and three straight wins as a frame for understanding a role change — not as disruption, but as the load finding a new way to distribute itself.",
+          "src": "world_summary_c111.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Vinnie Keane — Designated Hitter, Oakland A's Legend",
+          "evidence": [
+            {
+              "id": "EV-58d932ba7b",
+              "src": "world_summary_c111.md ## Sports",
+              "text": "The A's record is 4-1."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C111",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-a43c5d888b36"
+          },
+          {
+            "t": "FACT",
+            "text": "The A's record is 4-1.",
+            "src": "world_summary_c111.md ## Sports",
+            "id": "F-198811406e03"
+          },
+          {
+            "t": "FACT",
+            "text": "The A's have won 3 straight.",
+            "src": "world_summary_c111.md ## Sports",
+            "id": "F-297a24edbcbc"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane — Designated Hitter, Oakland A's Legend",
+            "src": "Simulation_Ledger profile for POP-00001",
+            "id": "F-6c412eff96ee"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-00033",
+      "name": "John Ellis",
+      "quote": null,
+      "disp": "driven, hard to sit still; curious, open to new things; a real fan, plans around games",
+      "recorded": false,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: answer must be quote|abstain",
+      "raw": "{\"answer\":\"Honestly, the feel of the work doesn't change much for me — it's still the same mound, same ball, same batter's box. But when the load shifts, I notice my rhythm gets a little more deliberate. I start paying attention to the spaces between pitches more, the breaths, the way I reset my feet. It's not about results, it's about making sure I'm not rushing to fill a gap that isn't mine to fill. We're 4-1, three straight, and that's a good place to be — but I'm not going to pretend I've got it all figured out. I just try to keep my own tempo steady and let the game come to me.\",\"fact_ids\":[\"F-198811406e03\",\"F-297a24edbcbc\"],\"basis\":\"lived-context\",\"unverifiedLead\":null,\"abstain_reason\":null}",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00033",
+          "name": "John Ellis",
+          "role": "Starting Pitcher, Oakland A's",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Simon Leary",
+          "question": "John Ellis is a starting pitcher on a team that's 4-1. If the load shifts around him, what does he notice about his own rhythm — not the results, but the feel of the work? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "long-view-signal",
+          "hood": "Downtown",
+          "focus": "The structural continuity of a 4-1 start and three straight wins as a frame for understanding a role change — not as disruption, but as the load finding a new way to distribute itself.",
+          "src": "world_summary_c111.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "John Ellis — Starting Pitcher, Oakland A's",
+          "evidence": [
+            {
+              "id": "EV-3485922c37",
+              "src": "world_summary_c111.md ## Sports",
+              "text": "The A's record is 4-1."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C111",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-a43c5d888b36"
+          },
+          {
+            "t": "FACT",
+            "text": "The A's record is 4-1.",
+            "src": "world_summary_c111.md ## Sports",
+            "id": "F-198811406e03"
+          },
+          {
+            "t": "FACT",
+            "text": "The A's have won 3 straight.",
+            "src": "world_summary_c111.md ## Sports",
+            "id": "F-297a24edbcbc"
+          },
+          {
+            "t": "FACT",
+            "text": "John Ellis — Starting Pitcher, Oakland A's",
+            "src": "Simulation_Ledger profile for POP-00033",
+            "id": "F-bc7918c1624e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00597",
+      "name": "Eric Taveras",
+      "quote": null,
+      "disp": "driven, hard to sit still; curious, open to new things; a real fan, plans around games",
+      "recorded": false,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: answer must be quote|abstain",
+      "raw": "```json\n{\n  \"answer\": \"Consistency from the middle of the field is almost like a heartbeat — you don't notice it until it skips. When we're rolling like this, three straight, the rhythm just carries you. Every ground ball feels the same, every turn at second is automatic. It's not about thinking, it's about trusting that the work you put in before the season is still there, game after game. And when the whole infield is locked in like that, you can feel the pitcher feeding off it too. It's a quiet thing, but it's real.\",\n  \"fact_ids\": [\"F-198811406e03\", \"F-297a24edbcbc\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00597",
+          "name": "Eric Taveras",
+          "role": "Second Baseman, Oakland A's",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Simon Leary",
+          "question": "Eric Taveras plays second base, a position that depends on repetition. In a stretch of three straight wins, what does consistency feel like from the middle of the field? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "long-view-signal",
+          "hood": "Downtown",
+          "focus": "The structural continuity of a 4-1 start and three straight wins as a frame for understanding a role change — not as disruption, but as the load finding a new way to distribute itself.",
+          "src": "world_summary_c111.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Eric Taveras — Second Baseman, Oakland A's",
+          "evidence": [
+            {
+              "id": "EV-c116ced4a5",
+              "src": "world_summary_c111.md ## Sports",
+              "text": "The A's record is 4-1."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C111",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-a43c5d888b36"
+          },
+          {
+            "t": "FACT",
+            "text": "The A's record is 4-1.",
+            "src": "world_summary_c111.md ## Sports",
+            "id": "F-198811406e03"
+          },
+          {
+            "t": "FACT",
+            "text": "The A's have won 3 straight.",
+            "src": "world_summary_c111.md ## Sports",
+            "id": "F-297a24edbcbc"
+          },
+          {
+            "t": "FACT",
+            "text": "Eric Taveras — Second Baseman, Oakland A's",
+            "src": "Simulation_Ledger profile for POP-00597",
+            "id": "F-1e092a13984c"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00018",
+      "name": "Benji Dillon",
+      "quote": null,
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; warm, tender with people; curious, open to new things; unshakable, calm under anything; principled, plays it straight; close to family; a real fan, plans around games",
+      "recorded": false,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: answer must be quote|abstain",
+      "raw": "{\"answer\":\"I've been on both sides of that shift — the guy who's asked to change roles, and the guy who watches someone else take on a new one. The teams that keep their footing aren't the ones that pretend nothing's different. They're the ones that let the load redistribute without making a fuss about it. You don't announce a role change; you just start carrying the weight differently, and everyone else adjusts their step without being told. That's what I see in a 4-1 start and three straight wins — it's not about avoiding the shift, it's about trusting that the new shape holds. The game doesn't care who's doing what, it just cares that the work gets done. And when it does, you feel it in the clubhouse — that quiet hum of people who know their part and don't need to talk about it.\",\"fact_ids\":[\"F-198811406e03\",\"F-297a24edbcbc\"],\"basis\":\"lived-context\",\"unverifiedLead\":null,\"abstain_reason\":null}",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00018",
+          "name": "Benji Dillon",
+          "role": "Pitcher, Oakland A's Legend",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Simon Leary",
+          "question": "Benji Dillon has lived through a role change himself. From where he sits now, what does it look like when a team keeps its footing mid-shift? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "long-view-signal",
+          "hood": "Downtown",
+          "focus": "The structural continuity of a 4-1 start and three straight wins as a frame for understanding a role change — not as disruption, but as the load finding a new way to distribute itself.",
+          "src": "world_summary_c111.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Benji Dillon — Pitcher, Oakland A's Legend",
+          "evidence": [
+            {
+              "id": "EV-c998e5f214",
+              "src": "world_summary_c111.md ## Sports",
+              "text": "The A's record is 4-1."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C111",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-a43c5d888b36"
+          },
+          {
+            "t": "FACT",
+            "text": "The A's record is 4-1.",
+            "src": "world_summary_c111.md ## Sports",
+            "id": "F-198811406e03"
+          },
+          {
+            "t": "FACT",
+            "text": "The A's have won 3 straight.",
+            "src": "world_summary_c111.md ## Sports",
+            "id": "F-297a24edbcbc"
+          },
+          {
+            "t": "FACT",
+            "text": "Benji Dillon — Pitcher, Oakland A's Legend",
+            "src": "Simulation_Ledger profile for POP-00018",
+            "id": "F-2b937e94a839"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00001",
+      "name": "Vinnie Keane",
+      "quote": "You know, people hear 'role change' and they brace for something breaking. But a 4-1 start with three straight — that's not a crack in the foundation, that's the foundation telling you it can hold more than one shape. I've seen it in this game a hundred times: a guy moves from cleanup to second, or a pitcher shifts from starter to relief, and everyone acts like the earth moved. But the load doesn't disappear — it just finds a new way to sit. The wins don't lie. When the machine keeps humming through a change, that's not disruption, that's the team telling you it knows what it's doing. It's like the crack in the sidewalk outside our store — the city patches it, but the light still finds its way through. The structure holds. It always did. The role was never the point; the trust was. And right now, that trust is carrying the load just fine.",
+      "disp": "can't switch off, working themselves thin; draws people in, deep with them; warm, tender with people; curious, open to new things; unshakable, calm under anything; principled, plays it straight; close to family; often out in the neighborhood; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "{\"answer\":\"quote\",\"quote\":\"You know, people hear 'role change' and they brace for something breaking. But a 4-1 start with three straight — that's not a crack in the foundation, that's the foundation telling you it can hold more than one shape. I've seen it in this game a hundred times: a guy moves from cleanup to second, or a pitcher shifts from starter to relief, and everyone acts like the earth moved. But the load doesn't disappear — it just finds a new way to sit. The wins don't lie. When the machine keeps humming through a change, that's not disruption, that's the team telling you it knows what it's doing. It's like the crack in the sidewalk outside our store — the city patches it, but the light still finds its way through. The structure holds. It always did. The role was never the point; the trust was. And right now, that trust is carrying the load just fine.\",\"fact_ids\":[\"F-198811406e03\",\"F-297a24edbcbc\"],\"basis\":\"lived-context\",\"unverifiedLead\":null,\"abstain_reason\":null}",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-198811406e03",
+          "F-297a24edbcbc"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00001-5a2dd95bae",
+        "authoredQuote": true,
+        "publishableQuote": "You know, people hear 'role change' and they brace for something breaking. But a 4-1 start with three straight — that's not a crack in the foundation, that's the foundation telling you it can hold more than one shape. I've seen it in this game a hundred times: a guy moves from cleanup to second, or a pitcher shifts from starter to relief, and everyone acts like the earth moved. But the load doesn't disappear — it just finds a new way to sit. The wins don't lie. When the machine keeps humming through a change, that's not disruption, that's the team telling you it knows what it's doing. It's like the crack in the sidewalk outside our store — the city patches it, but the light still finds its way through. The structure holds. It always did. The role was never the point; the trust was. And right now, that trust is carrying the load just fine."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00001",
+          "name": "Vinnie Keane",
+          "role": "Designated Hitter, Oakland A's Legend",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Simon Leary",
+          "question": "What have you seen, felt, or understood about \"The structural continuity of a 4-1 start and three straight wins as a frame for understanding a role change — not as disruption, but as the load finding a new way to distribute itself.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "long-view-signal",
+          "hood": "Downtown",
+          "focus": "The structural continuity of a 4-1 start and three straight wins as a frame for understanding a role change — not as disruption, but as the load finding a new way to distribute itself.",
+          "src": "world_summary_c111.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Vinnie Keane — Designated Hitter, Oakland A's Legend",
+          "evidence": [
+            {
+              "id": "EV-58d932ba7b",
+              "src": "world_summary_c111.md ## Sports",
+              "text": "The A's record is 4-1."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C111",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-a43c5d888b36"
+          },
+          {
+            "t": "FACT",
+            "text": "The A's record is 4-1.",
+            "src": "world_summary_c111.md ## Sports",
+            "id": "F-198811406e03"
+          },
+          {
+            "t": "FACT",
+            "text": "The A's have won 3 straight.",
+            "src": "world_summary_c111.md ## Sports",
+            "id": "F-297a24edbcbc"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane — Designated Hitter, Oakland A's Legend",
+            "src": "Simulation_Ledger profile for POP-00001",
+            "id": "F-6c412eff96ee"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-10-15T18:16:26.325Z"
+}

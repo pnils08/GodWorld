@@ -1,0 +1,64 @@
+{
+  "mode": "wake-write",
+  "desk": "sports",
+  "cycle": "114",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "hal-richmond",
+  "byline": {
+    "name": "Hal Richmond",
+    "popid": "POP-00007",
+    "beatDomain": "SPORTS"
+  },
+  "laneEntries": 15,
+  "quotesLanded": 0,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "canon_search",
+    "canon_search",
+    "canon_search",
+    "dossier_read",
+    "dossier_read",
+    "dossier_read"
+  ],
+  "toolCalls": 6,
+  "wordCount": 951,
+  "targetWords": "800-1200 words, bounded by the Packet and what the tools returned",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": false,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 800",
+    "words": 951,
+    "short": "The opening paragraph delivers the present fact but does not establish the ground the man came from.",
+    "score": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "3ed7013b92c7691fc9529367860007169cfa8bea0ce70141a40c67e02aa6ca7b",
+    "costUsd": 0.0024
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/4 — The opening paragraph delivers the present fact but does not establish the ground the man came from."
+  },
+  "article": "output/cron-compare/staged/sports_c114_hal-richmond_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "m ../.config/godworld/.env // tip: ◈ secrets for agents [www.dotenvx.com]\n{\n  \"popId\": \"POP-00007\",\n  \"name\": \"Hal Richmond\",\n  \"recorded\": true,\n  \"text\": \"filed: Fifty-Six, and the Road Behind It\"\n}"
+  },
+  "ranAt": "2026-11-06T00:18:24.669Z",
+  "dispositionReconciledAt": "2026-11-07T18:00:02.661Z"
+}

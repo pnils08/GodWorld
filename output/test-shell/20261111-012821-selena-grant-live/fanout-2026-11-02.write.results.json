@@ -1,0 +1,247 @@
+{
+  "date": "2026-11-02",
+  "stage": "write",
+  "results": [
+    {
+      "name": "Carmen Delaine",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 3,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 821,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Jordan Velez",
+      "desk": "business",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 3,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 1033,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Dr. Lila Mezran",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 3,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 1000,
+        "contractScore": 2
+      }
+    },
+    {
+      "name": "Trevor Shimizu",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 2,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 999,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Anthony Raines",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 5,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 892,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Tamsin Pruitt",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 6,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [
+          {
+            "text": "Elle Lilo moved into a place of their own in Jack London, renting",
+            "run": "elle lilo moved into a place"
+          },
+          {
+            "text": "Elle Lilo — in their life, C114: closed their eyes during the choir solo and actually felt the tension leave their shoulders",
+            "run": "felt the tension leave their shoulders"
+          },
+          {
+            "text": "Elle Lilo — in their life, C114: lent a neighbor a tool and got a story back with it",
+            "run": "lent a neighbor a tool and"
+          },
+          {
+            "text": "Elle Lilo — in their life, C114: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+            "run": "read the flyer for the oakland"
+          },
+          {
+            "text": "Cee Lee — in their life, C113: tried a new recipe that mostly worked",
+            "run": "tried a new recipe that mostly"
+          },
+          {
+            "text": "Cee Lee — in their life, C113: dealt with a seasonal health concern",
+            "run": "dealt with a seasonal health concern"
+          },
+          {
+            "text": "Cee Lee — in their life, C114: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+            "run": "recognized the oari van idling outside"
+          },
+          {
+            "text": "Aanya Rivera — in their life, C113: counted cranes on the skyline from the bus stop and got a different number than yesterday",
+            "run": "counted cranes on the skyline from"
+          },
+          {
+            "text": "Aanya Rivera — in their life, C113: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+            "run": "read the flyer for the oakland"
+          },
+          {
+            "text": "Aanya Rivera — in their life, C114: checked the Civis Systems Field livestream just to see if the grass had been laid down yet",
+            "run": "checked the civis systems field livestream"
+          },
+          {
+            "text": "Jose Johnson — in their life, C114: observed art enthusiasts wandering the streets",
+            "run": "observed art enthusiasts wandering the streets"
+          },
+          {
+            "text": "Pamela Amelia — in their life, C113: carried three boxes of canned goods from the pantry truck and felt it in their lower back",
+            "run": "carried three boxes of canned goods"
+          },
+          {
+            "text": "Pamela Amelia — in their life, C113: walked a different street home just to see it",
+            "run": "walked a different street home just"
+          },
+          {
+            "text": "Shawn Neighbor — in their life, C113: walked the Mandela Parkway median under the trees and took the long way home",
+            "run": "walked the mandela parkway median under"
+          },
+          {
+            "text": "Shawn Neighbor — in their life, C113: haggled for a flat of bruised peaches at the Saturday market just to have a reason to talk to someone",
+            "run": "a flat of bruised peaches at"
+          },
+          {
+            "text": "Shawn Neighbor — in their life, C113: lent a neighbor a tool and got a story back with it",
+            "run": "lent a neighbor a tool and"
+          },
+          {
+            "text": "Shawn Neighbor — in their life, C114: knew the rules cold — two nights in the chair, the galaxy keeps the score, the board adds it up — and had never been drawn",
+            "run": "the rules cold two nights in"
+          },
+          {
+            "text": "Billy Storip — called an old coworker just to catch up and talked for an hour, Rockridge (C114 — what happened in their life, not words they said)",
+            "run": "called an old coworker just to"
+          },
+          {
+            "text": "Billy Storip — in their life, C113: fixed a squeaky hinge that had been squeaking since the kids left home near a bookstore corner",
+            "run": "hinge that had been squeaking since"
+          },
+          {
+            "text": "Billy Storip — in their life, C114: found a quiet minute at a bookstore corner and the quiet satisfaction of finding a favorite song on the jukebox",
+            "run": "found a quiet minute at a"
+          },
+          {
+            "text": "Billy Storip — in their life, C114: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
+            "run": "attended a community feedback session for"
+          },
+          {
+            "text": "Clarence Moody — swapped seed packets with a neighbor over the fence, Dimond (C114 — what happened in their life, not words they said)",
+            "run": "swapped seed packets with a neighbor"
+          },
+          {
+            "text": "Clarence Moody — in their life, C113: shared a small piece of history with someone who needed it",
+            "run": "shared a small piece of history"
+          },
+          {
+            "text": "Clarence Moody — in their life, C114: showed up to set up the chairs in the fellowship hall because if they didn't do it, no one would",
+            "run": "set up the chairs in the"
+          },
+          {
+            "text": "Clarence Moody — in their life, C114: closed their eyes during the choir solo and actually felt the tension leave their shoulders",
+            "run": "felt the tension leave their shoulders"
+          },
+          {
+            "text": "Gloria Liu — reorganized the garage into a system only he understood near College Avenue, Rockridge (C114 — what happened in their life, not words they said)",
+            "run": "into a system only he understood"
+          },
+          {
+            "text": "Gloria Liu — in their life, C113: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+            "run": "read the flyer for the oakland"
+          },
+          {
+            "text": "Gloria Liu — in their life, C113: dodged the running groups circling the lake and found a quiet bench near the pergola",
+            "run": "found a quiet bench near the"
+          },
+          {
+            "text": "Gloria Liu — in their life, C114: wrote a letter by hand because email felt like cheating",
+            "run": "wrote a letter by hand because"
+          },
+          {
+            "text": "Amear Thompson — moved from Chinatown to West Oakland — moving up from Chinatown, West Oakland (C114 — what happened in their life, not words they said)",
+            "run": "moved from chinatown to west oakland"
+          },
+          {
+            "text": "Amear Thompson — in their life, C113: took the long way home just to check the Baylight fence line's progress",
+            "run": "to check the baylight fence lines"
+          },
+          {
+            "text": "Amear Thompson — in their life, C114: smelled the incense from the steps of Bay Pure Land Buddhist Temple",
+            "run": "smelled the incense from the steps"
+          },
+          {
+            "text": "Amear Thompson — in their life, C114: saw someone running for the bus make it, and felt weirdly invested",
+            "run": "bus make it and felt weirdly"
+          }
+        ],
+        "words": 1387,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 3,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 402,
+        "contractScore": 4
+      }
+    }
+  ],
+  "checkTotals": {
+    "seats": 7,
+    "toolSeats": 7,
+    "capHits": 0,
+    "thin": 0,
+    "verbatim": 1,
+    "graded": 7,
+    "gradeSum": 26
+  },
+  "ranAt": "2026-11-04T07:46:00.545Z"
+}

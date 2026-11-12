@@ -1,0 +1,525 @@
+[
+  {
+    "pop": "POP-01111",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01111\",\"name\":\"Jasmine Torres\",\"role\":\"Founder, Tenth Street Digital\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Jax Caldera\",\"question\":\"What's your take on the neighborhood's condition? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"anomaly\",\"hood\":\"KONO\",\"focus\":\"KONO neighborhood decay\",\"src\":\"output/engine_audit_c115.json patterns[5]; evidence: Neighborhood_Map row(s) 19\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Jasmine Torres (POP-01111) — role: Founder, Tenth Street Digital; neighborhood: KONO; born: 2010; careerStage: mid-career; wealth: 4; employerBiz: BIZ-00011; skills: Small Business; tier: 3\",\"evidence\":[{\"id\":\"EV-452d3ab896\",\"src\":\"output/engine_audit_c115.json patterns[5]; evidence: Neighborhood_Map row(s) 19\",\"text\":\"KONO: decay [Sentiment -0.180, HousingPressure +0.500] — Sentiment now -0.02 (12 of 22, city median -0.015); HousingPressure now 0.5 (14 of 22, city median 0) — with no matching active initiative\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C115\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-bc84fc0b7718\"},{\"t\":\"FACT\",\"text\":\"KONO: decay [Sentiment -0.180, HousingPressure +0.500] — Sentiment now -0.02 (12 of 22, city median -0.015); HousingPressure now 0.5 (14 of 22, city median 0) — with no matching active initiative\",\"src\":\"output/engine_audit_c115.json patterns[5]; evidence: Neighborhood_Map row(s) 19\",\"id\":\"F-8dbb277c6053\"},{\"t\":\"FACT\",\"text\":\"No active initiative (or mitigator) owns this break on the record\",\"src\":\"output/engine_audit_c115.json patterns[5]; evidence: Neighborhood_Map row(s) 19\",\"id\":\"F-a845ecc7a741\"},{\"t\":\"FACT\",\"text\":\"Season: Spring | Weather: 55°F mild, W 10 mph, clear (frontState CLEAR), humidity 51, visibility 10\",\"src\":\"World_Config/weather snapshot for C115\",\"id\":\"F-35631fd2e64f\"},{\"t\":\"FACT\",\"text\":\"Retail is busy, events are drawing crowds, and new households are moving into the neighborhood from various parts of the city.\",\"src\":\"output/engine_audit_c115.json patterns[5]; evidence: Neighborhood_Map row(s) 19\",\"id\":\"F-aaf753c6d042\"},{\"t\":\"FACT\",\"text\":\"Jasmine Torres (POP-01111) — role: Founder, Tenth Street Digital; neighborhood: KONO; born: 2010; careerStage: mid-career; wealth: 4; employerBiz: BIZ-00011; skills: Small Business; tier: 3\",\"src\":\"Simulation_Ledger profile for POP-01111\",\"id\":\"F-3af4838dc22b\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01111",
+        "name": "Jasmine Torres",
+        "role": "Founder, Tenth Street Digital",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Jax Caldera",
+        "question": "What's your take on the neighborhood's condition? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "anomaly",
+        "hood": "KONO",
+        "focus": "KONO neighborhood decay",
+        "src": "output/engine_audit_c115.json patterns[5]; evidence: Neighborhood_Map row(s) 19"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Jasmine Torres (POP-01111) — role: Founder, Tenth Street Digital; neighborhood: KONO; born: 2010; careerStage: mid-career; wealth: 4; employerBiz: BIZ-00011; skills: Small Business; tier: 3",
+        "evidence": [
+          {
+            "id": "EV-452d3ab896",
+            "src": "output/engine_audit_c115.json patterns[5]; evidence: Neighborhood_Map row(s) 19",
+            "text": "KONO: decay [Sentiment -0.180, HousingPressure +0.500] — Sentiment now -0.02 (12 of 22, city median -0.015); HousingPressure now 0.5 (14 of 22, city median 0) — with no matching active initiative"
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C115",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-bc84fc0b7718"
+        },
+        {
+          "t": "FACT",
+          "text": "KONO: decay [Sentiment -0.180, HousingPressure +0.500] — Sentiment now -0.02 (12 of 22, city median -0.015); HousingPressure now 0.5 (14 of 22, city median 0) — with no matching active initiative",
+          "src": "output/engine_audit_c115.json patterns[5]; evidence: Neighborhood_Map row(s) 19",
+          "id": "F-8dbb277c6053"
+        },
+        {
+          "t": "FACT",
+          "text": "No active initiative (or mitigator) owns this break on the record",
+          "src": "output/engine_audit_c115.json patterns[5]; evidence: Neighborhood_Map row(s) 19",
+          "id": "F-a845ecc7a741"
+        },
+        {
+          "t": "FACT",
+          "text": "Season: Spring | Weather: 55°F mild, W 10 mph, clear (frontState CLEAR), humidity 51, visibility 10",
+          "src": "World_Config/weather snapshot for C115",
+          "id": "F-35631fd2e64f"
+        },
+        {
+          "t": "FACT",
+          "text": "Retail is busy, events are drawing crowds, and new households are moving into the neighborhood from various parts of the city.",
+          "src": "output/engine_audit_c115.json patterns[5]; evidence: Neighborhood_Map row(s) 19",
+          "id": "F-aaf753c6d042"
+        },
+        {
+          "t": "FACT",
+          "text": "Jasmine Torres (POP-01111) — role: Founder, Tenth Street Digital; neighborhood: KONO; born: 2010; careerStage: mid-career; wealth: 4; employerBiz: BIZ-00011; skills: Small Business; tier: 3",
+          "src": "Simulation_Ledger profile for POP-01111",
+          "id": "F-3af4838dc22b"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C11, Spring, holiday=none",
+          "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+          "id": "F-82d77e9a4a71"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01214",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01214\",\"name\":\"Priya Raghunathan\",\"role\":\"BART Rail Dispatcher\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Jax Caldera\",\"question\":\"Have you noticed any changes in the neighborhood? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"anomaly\",\"hood\":\"KONO\",\"focus\":\"KONO neighborhood decay\",\"src\":\"output/engine_audit_c115.json patterns[5]; evidence: Neighborhood_Map row(s) 19\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Priya Raghunathan (POP-01214) — role: BART Rail Dispatcher; neighborhood: KONO; born: 1993; careerStage: senior; wealth: 5; employerBiz: BIZ-00014; skills: Transit & Infrastructure; tier: 4\",\"evidence\":[{\"id\":\"EV-cd51af5c95\",\"src\":\"output/engine_audit_c115.json patterns[5]; evidence: Neighborhood_Map row(s) 19\",\"text\":\"KONO: decay [Sentiment -0.180, HousingPressure +0.500] — Sentiment now -0.02 (12 of 22, city median -0.015); HousingPressure now 0.5 (14 of 22, city median 0) — with no matching active initiative\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C115\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-bc84fc0b7718\"},{\"t\":\"FACT\",\"text\":\"KONO: decay [Sentiment -0.180, HousingPressure +0.500] — Sentiment now -0.02 (12 of 22, city median -0.015); HousingPressure now 0.5 (14 of 22, city median 0) — with no matching active initiative\",\"src\":\"output/engine_audit_c115.json patterns[5]; evidence: Neighborhood_Map row(s) 19\",\"id\":\"F-8dbb277c6053\"},{\"t\":\"FACT\",\"text\":\"No active initiative (or mitigator) owns this break on the record\",\"src\":\"output/engine_audit_c115.json patterns[5]; evidence: Neighborhood_Map row(s) 19\",\"id\":\"F-a845ecc7a741\"},{\"t\":\"FACT\",\"text\":\"Season: Spring | Weather: 55°F mild, W 10 mph, clear (frontState CLEAR), humidity 51, visibility 10\",\"src\":\"World_Config/weather snapshot for C115\",\"id\":\"F-35631fd2e64f\"},{\"t\":\"FACT\",\"text\":\"Retail is busy, events are drawing crowds, and new households are moving into the neighborhood from various parts of the city.\",\"src\":\"output/engine_audit_c115.json patterns[5]; evidence: Neighborhood_Map row(s) 19\",\"id\":\"F-aaf753c6d042\"},{\"t\":\"FACT\",\"text\":\"Priya Raghunathan (POP-01214) — role: BART Rail Dispatcher; neighborhood: KONO; born: 1993; careerStage: senior; wealth: 5; employerBiz: BIZ-00014; skills: Transit & Infrastructure; tier: 4\",\"src\":\"Simulation_Ledger profile for POP-01214\",\"id\":\"F-07dd663e8ff3\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01214",
+        "name": "Priya Raghunathan",
+        "role": "BART Rail Dispatcher",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Jax Caldera",
+        "question": "Have you noticed any changes in the neighborhood? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "anomaly",
+        "hood": "KONO",
+        "focus": "KONO neighborhood decay",
+        "src": "output/engine_audit_c115.json patterns[5]; evidence: Neighborhood_Map row(s) 19"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Priya Raghunathan (POP-01214) — role: BART Rail Dispatcher; neighborhood: KONO; born: 1993; careerStage: senior; wealth: 5; employerBiz: BIZ-00014; skills: Transit & Infrastructure; tier: 4",
+        "evidence": [
+          {
+            "id": "EV-cd51af5c95",
+            "src": "output/engine_audit_c115.json patterns[5]; evidence: Neighborhood_Map row(s) 19",
+            "text": "KONO: decay [Sentiment -0.180, HousingPressure +0.500] — Sentiment now -0.02 (12 of 22, city median -0.015); HousingPressure now 0.5 (14 of 22, city median 0) — with no matching active initiative"
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C115",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-bc84fc0b7718"
+        },
+        {
+          "t": "FACT",
+          "text": "KONO: decay [Sentiment -0.180, HousingPressure +0.500] — Sentiment now -0.02 (12 of 22, city median -0.015); HousingPressure now 0.5 (14 of 22, city median 0) — with no matching active initiative",
+          "src": "output/engine_audit_c115.json patterns[5]; evidence: Neighborhood_Map row(s) 19",
+          "id": "F-8dbb277c6053"
+        },
+        {
+          "t": "FACT",
+          "text": "No active initiative (or mitigator) owns this break on the record",
+          "src": "output/engine_audit_c115.json patterns[5]; evidence: Neighborhood_Map row(s) 19",
+          "id": "F-a845ecc7a741"
+        },
+        {
+          "t": "FACT",
+          "text": "Season: Spring | Weather: 55°F mild, W 10 mph, clear (frontState CLEAR), humidity 51, visibility 10",
+          "src": "World_Config/weather snapshot for C115",
+          "id": "F-35631fd2e64f"
+        },
+        {
+          "t": "FACT",
+          "text": "Retail is busy, events are drawing crowds, and new households are moving into the neighborhood from various parts of the city.",
+          "src": "output/engine_audit_c115.json patterns[5]; evidence: Neighborhood_Map row(s) 19",
+          "id": "F-aaf753c6d042"
+        },
+        {
+          "t": "FACT",
+          "text": "Priya Raghunathan (POP-01214) — role: BART Rail Dispatcher; neighborhood: KONO; born: 1993; careerStage: senior; wealth: 5; employerBiz: BIZ-00014; skills: Transit & Infrastructure; tier: 4",
+          "src": "Simulation_Ledger profile for POP-01214",
+          "id": "F-07dd663e8ff3"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C11, Spring, holiday=none",
+          "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+          "id": "F-82d77e9a4a71"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00276",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00276\",\"name\":\"Dmitri Soto\",\"role\":\"Container Yard Supervisor\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Jax Caldera\",\"question\":\"How do you see the neighborhood's decay affecting your work? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"anomaly\",\"hood\":\"KONO\",\"focus\":\"KONO neighborhood decay\",\"src\":\"output/engine_audit_c115.json patterns[5]; evidence: Neighborhood_Map row(s) 19\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Dmitri Soto (POP-00276) — role: Container Yard Supervisor; neighborhood: KONO; born: 1994; careerStage: senior; wealth: 5; employerBiz: BIZ-00012; skills: Port & Labor; tier: 4\",\"evidence\":[{\"id\":\"EV-e216aa149d\",\"src\":\"output/engine_audit_c115.json patterns[5]; evidence: Neighborhood_Map row(s) 19\",\"text\":\"KONO: decay [Sentiment -0.180, HousingPressure +0.500] — Sentiment now -0.02 (12 of 22, city median -0.015); HousingPressure now 0.5 (14 of 22, city median 0) — with no matching active initiative\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C115\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-bc84fc0b7718\"},{\"t\":\"FACT\",\"text\":\"KONO: decay [Sentiment -0.180, HousingPressure +0.500] — Sentiment now -0.02 (12 of 22, city median -0.015); HousingPressure now 0.5 (14 of 22, city median 0) — with no matching active initiative\",\"src\":\"output/engine_audit_c115.json patterns[5]; evidence: Neighborhood_Map row(s) 19\",\"id\":\"F-8dbb277c6053\"},{\"t\":\"FACT\",\"text\":\"No active initiative (or mitigator) owns this break on the record\",\"src\":\"output/engine_audit_c115.json patterns[5]; evidence: Neighborhood_Map row(s) 19\",\"id\":\"F-a845ecc7a741\"},{\"t\":\"FACT\",\"text\":\"Season: Spring | Weather: 55°F mild, W 10 mph, clear (frontState CLEAR), humidity 51, visibility 10\",\"src\":\"World_Config/weather snapshot for C115\",\"id\":\"F-35631fd2e64f\"},{\"t\":\"FACT\",\"text\":\"Retail is busy, events are drawing crowds, and new households are moving into the neighborhood from various parts of the city.\",\"src\":\"output/engine_audit_c115.json patterns[5]; evidence: Neighborhood_Map row(s) 19\",\"id\":\"F-aaf753c6d042\"},{\"t\":\"FACT\",\"text\":\"Dmitri Soto (POP-00276) — role: Container Yard Supervisor; neighborhood: KONO; born: 1994; careerStage: senior; wealth: 5; employerBiz: BIZ-00012; skills: Port & Labor; tier: 4\",\"src\":\"Simulation_Ledger profile for POP-00276\",\"id\":\"F-245c9eb616bd\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00276",
+        "name": "Dmitri Soto",
+        "role": "Container Yard Supervisor",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Jax Caldera",
+        "question": "How do you see the neighborhood's decay affecting your work? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "anomaly",
+        "hood": "KONO",
+        "focus": "KONO neighborhood decay",
+        "src": "output/engine_audit_c115.json patterns[5]; evidence: Neighborhood_Map row(s) 19"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Dmitri Soto (POP-00276) — role: Container Yard Supervisor; neighborhood: KONO; born: 1994; careerStage: senior; wealth: 5; employerBiz: BIZ-00012; skills: Port & Labor; tier: 4",
+        "evidence": [
+          {
+            "id": "EV-e216aa149d",
+            "src": "output/engine_audit_c115.json patterns[5]; evidence: Neighborhood_Map row(s) 19",
+            "text": "KONO: decay [Sentiment -0.180, HousingPressure +0.500] — Sentiment now -0.02 (12 of 22, city median -0.015); HousingPressure now 0.5 (14 of 22, city median 0) — with no matching active initiative"
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C115",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-bc84fc0b7718"
+        },
+        {
+          "t": "FACT",
+          "text": "KONO: decay [Sentiment -0.180, HousingPressure +0.500] — Sentiment now -0.02 (12 of 22, city median -0.015); HousingPressure now 0.5 (14 of 22, city median 0) — with no matching active initiative",
+          "src": "output/engine_audit_c115.json patterns[5]; evidence: Neighborhood_Map row(s) 19",
+          "id": "F-8dbb277c6053"
+        },
+        {
+          "t": "FACT",
+          "text": "No active initiative (or mitigator) owns this break on the record",
+          "src": "output/engine_audit_c115.json patterns[5]; evidence: Neighborhood_Map row(s) 19",
+          "id": "F-a845ecc7a741"
+        },
+        {
+          "t": "FACT",
+          "text": "Season: Spring | Weather: 55°F mild, W 10 mph, clear (frontState CLEAR), humidity 51, visibility 10",
+          "src": "World_Config/weather snapshot for C115",
+          "id": "F-35631fd2e64f"
+        },
+        {
+          "t": "FACT",
+          "text": "Retail is busy, events are drawing crowds, and new households are moving into the neighborhood from various parts of the city.",
+          "src": "output/engine_audit_c115.json patterns[5]; evidence: Neighborhood_Map row(s) 19",
+          "id": "F-aaf753c6d042"
+        },
+        {
+          "t": "FACT",
+          "text": "Dmitri Soto (POP-00276) — role: Container Yard Supervisor; neighborhood: KONO; born: 1994; careerStage: senior; wealth: 5; employerBiz: BIZ-00012; skills: Port & Labor; tier: 4",
+          "src": "Simulation_Ledger profile for POP-00276",
+          "id": "F-245c9eb616bd"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C11, Spring, holiday=none",
+          "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+          "id": "F-82d77e9a4a71"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00796",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00796\",\"name\":\"Dank Abara\",\"role\":\"Waiter\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Jax Caldera\",\"question\":\"What have you seen, felt, or understood about \\\"KONO neighborhood decay\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"anomaly\",\"hood\":\"KONO\",\"focus\":\"KONO neighborhood decay\",\"src\":\"output/engine_audit_c115.json patterns[5]; evidence: Neighborhood_Map row(s) 19\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Dank Abara (POP-00796) — role: Waiter; neighborhood: San Antonio; born: 2000; careerStage: mid-career; wealth: 4; employerBiz: UNTRACKED; skills: Food & Culture; tier: 4\",\"evidence\":[{\"id\":\"EV-01e3796c7d\",\"src\":\"output/engine_audit_c115.json patterns[5]; evidence: Neighborhood_Map row(s) 19\",\"text\":\"KONO: decay [Sentiment -0.180, HousingPressure +0.500] — Sentiment now -0.02 (12 of 22, city median -0.015); HousingPressure now 0.5 (14 of 22, city median 0) — with no matching active initiative\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C115\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-bc84fc0b7718\"},{\"t\":\"FACT\",\"text\":\"KONO: decay [Sentiment -0.180, HousingPressure +0.500] — Sentiment now -0.02 (12 of 22, city median -0.015); HousingPressure now 0.5 (14 of 22, city median 0) — with no matching active initiative\",\"src\":\"output/engine_audit_c115.json patterns[5]; evidence: Neighborhood_Map row(s) 19\",\"id\":\"F-8dbb277c6053\"},{\"t\":\"FACT\",\"text\":\"No active initiative (or mitigator) owns this break on the record\",\"src\":\"output/engine_audit_c115.json patterns[5]; evidence: Neighborhood_Map row(s) 19\",\"id\":\"F-a845ecc7a741\"},{\"t\":\"FACT\",\"text\":\"Season: Spring | Weather: 55°F mild, W 10 mph, clear (frontState CLEAR), humidity 51, visibility 10\",\"src\":\"World_Config/weather snapshot for C115\",\"id\":\"F-35631fd2e64f\"},{\"t\":\"FACT\",\"text\":\"Retail is busy, events are drawing crowds, and new households are moving into the neighborhood from various parts of the city.\",\"src\":\"output/engine_audit_c115.json patterns[5]; evidence: Neighborhood_Map row(s) 19\",\"id\":\"F-aaf753c6d042\"},{\"t\":\"FACT\",\"text\":\"Dank Abara (POP-00796) — role: Waiter; neighborhood: San Antonio; born: 2000; careerStage: mid-career; wealth: 4; employerBiz: UNTRACKED; skills: Food & Culture; tier: 4\",\"src\":\"Simulation_Ledger profile for POP-00796\",\"id\":\"F-57901f64d700\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00796",
+        "name": "Dank Abara",
+        "role": "Waiter",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Jax Caldera",
+        "question": "What have you seen, felt, or understood about \"KONO neighborhood decay\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "anomaly",
+        "hood": "KONO",
+        "focus": "KONO neighborhood decay",
+        "src": "output/engine_audit_c115.json patterns[5]; evidence: Neighborhood_Map row(s) 19"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Dank Abara (POP-00796) — role: Waiter; neighborhood: San Antonio; born: 2000; careerStage: mid-career; wealth: 4; employerBiz: UNTRACKED; skills: Food & Culture; tier: 4",
+        "evidence": [
+          {
+            "id": "EV-01e3796c7d",
+            "src": "output/engine_audit_c115.json patterns[5]; evidence: Neighborhood_Map row(s) 19",
+            "text": "KONO: decay [Sentiment -0.180, HousingPressure +0.500] — Sentiment now -0.02 (12 of 22, city median -0.015); HousingPressure now 0.5 (14 of 22, city median 0) — with no matching active initiative"
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C115",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-bc84fc0b7718"
+        },
+        {
+          "t": "FACT",
+          "text": "KONO: decay [Sentiment -0.180, HousingPressure +0.500] — Sentiment now -0.02 (12 of 22, city median -0.015); HousingPressure now 0.5 (14 of 22, city median 0) — with no matching active initiative",
+          "src": "output/engine_audit_c115.json patterns[5]; evidence: Neighborhood_Map row(s) 19",
+          "id": "F-8dbb277c6053"
+        },
+        {
+          "t": "FACT",
+          "text": "No active initiative (or mitigator) owns this break on the record",
+          "src": "output/engine_audit_c115.json patterns[5]; evidence: Neighborhood_Map row(s) 19",
+          "id": "F-a845ecc7a741"
+        },
+        {
+          "t": "FACT",
+          "text": "Season: Spring | Weather: 55°F mild, W 10 mph, clear (frontState CLEAR), humidity 51, visibility 10",
+          "src": "World_Config/weather snapshot for C115",
+          "id": "F-35631fd2e64f"
+        },
+        {
+          "t": "FACT",
+          "text": "Retail is busy, events are drawing crowds, and new households are moving into the neighborhood from various parts of the city.",
+          "src": "output/engine_audit_c115.json patterns[5]; evidence: Neighborhood_Map row(s) 19",
+          "id": "F-aaf753c6d042"
+        },
+        {
+          "t": "FACT",
+          "text": "Dank Abara (POP-00796) — role: Waiter; neighborhood: San Antonio; born: 2000; careerStage: mid-career; wealth: 4; employerBiz: UNTRACKED; skills: Food & Culture; tier: 4",
+          "src": "Simulation_Ledger profile for POP-00796",
+          "id": "F-57901f64d700"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C11, Spring, holiday=none",
+          "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+          "id": "F-82d77e9a4a71"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  }
+]

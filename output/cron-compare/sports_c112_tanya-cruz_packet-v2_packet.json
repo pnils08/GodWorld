@@ -1,0 +1,296 @@
+{
+  "stage": "report",
+  "desk": "sports",
+  "cycle": "112",
+  "persona": "tanya-cruz",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014"
+  },
+  "assignment": {
+    "story": {
+      "angle": "Oaks early-season update: 1-0",
+      "label": "Oaks early-season update: 1-0",
+      "hookLine": "Oaks early-season update: 1-0",
+      "kind": "sideline-signal",
+      "hood": "KONO",
+      "popids": [
+        "POP-01023",
+        "POP-01027"
+      ],
+      "citizens": [
+        "Adash Stanley (POP-01023)",
+        "Austin Reaves (POP-01027)"
+      ],
+      "ref": "world_summary_c112.md ## Sports",
+      "cycle": 112
+    }
+  },
+  "angle": "output/cron-compare/sports_c112_tanya-cruz_packet-v2_angle.json",
+  "quotesRequested": 2,
+  "quotesLanded": 0,
+  "quotes": [],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-01023",
+      "name": "Adash Stanley",
+      "quote": null,
+      "disp": "a real fan, plans around games",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: direct reaction exceeds 80 words; direct reaction must be one to four sentences",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Honestly, after going 0-9 in preseason, there was this weight in the room that just wouldn't lift. Tonight, once that lead felt secure, it was like everybody finally exhaled at the same time. Coach was laughing, guys were just hugging it out — it wasn't about being perfect, it was about finally seeing all the work show up on the scoreboard. But we all know it's one game. The vibe was more 'okay, we can do this' than 'we've arrived.' That's the reset we needed.\",\n  \"fact_ids\": [\n    \"F-90b86ae8d257\",\n    \"F-840758f351e1\",\n    \"F-86df95d8b1a9\"\n  ],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01023",
+          "name": "Adash Stanley",
+          "role": "PG / The Oaks",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Tanya Cruz",
+          "question": "After the 0-9 preseason, what changed in the locker room's mindset once the lead felt secure tonight? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "sideline-signal",
+          "hood": "KONO",
+          "focus": "The emotional release and cautious reset inside the Oaks' locker room after their first franchise win.",
+          "src": "world_summary_c112.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Adash Stanley — PG / The Oaks",
+          "evidence": [
+            {
+              "id": "EV-63a0251642",
+              "src": "world_summary_c112.md ## Sports",
+              "text": "Oaks early-season update: 1-0"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks early-season update: 1-0",
+            "src": "world_summary_c112.md ## Sports",
+            "id": "F-b4d3d0f493c7"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks record is 1-0.",
+            "src": "world_summary_c112.md ## Sports",
+            "id": "F-69a60b207537"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks open their inaugural season at home. AJ Dybantsa shines in his rookie debut as the Oaks win their first win as a franchise.",
+            "src": "world_summary_c112.md ## Sports",
+            "id": "F-840758f351e1"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks open their inaugural season at home vs the San Antonio Spurs and instantly get their first win in franchise history, After 0-9 through rookie camp and preseason the team had grown anxious. Coach Shepard was asked after the game how the locker room responded to the win and he laughed and said his ears were still ringing.",
+            "src": "world_summary_c112.md ## Sports",
+            "id": "F-90b86ae8d257"
+          },
+          {
+            "t": "FACT",
+            "text": "Coach Shepard, who is also celebrating his first win as a rookie head coach, emphasized that it was important to honor the moment for its context but to not get too caught up and the next loss could be a game away. Saying that its important to build on the things that were good and eliminate the bad. The Oaks scored 97 while holding San Antonio to 84. The Oaks next game will be at home while Charolette comes to town.",
+            "src": "world_summary_c112.md ## Sports",
+            "id": "F-86df95d8b1a9"
+          },
+          {
+            "t": "FACT",
+            "text": "Adash Stanley — PG / The Oaks",
+            "src": "Simulation_Ledger profile for POP-01023",
+            "id": "F-1164a6e4fd0d"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01027",
+      "name": null,
+      "quote": null,
+      "disp": null,
+      "recorded": false,
+      "fallback": "call-failed: fetch failed",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01027",
+          "name": "Austin Reaves",
+          "role": "SG / The Oaks",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Tanya Cruz",
+          "question": "What does it mean to be part of a franchise's first win, knowing there's no past to lean on — only this moment? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "sideline-signal",
+          "hood": "KONO",
+          "focus": "The emotional release and cautious reset inside the Oaks' locker room after their first franchise win.",
+          "src": "world_summary_c112.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Austin Reaves — SG / The Oaks",
+          "evidence": [
+            {
+              "id": "EV-45a04fecfc",
+              "src": "world_summary_c112.md ## Sports",
+              "text": "Oaks early-season update: 1-0"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks early-season update: 1-0",
+            "src": "world_summary_c112.md ## Sports",
+            "id": "F-b4d3d0f493c7"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks record is 1-0.",
+            "src": "world_summary_c112.md ## Sports",
+            "id": "F-69a60b207537"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks open their inaugural season at home. AJ Dybantsa shines in his rookie debut as the Oaks win their first win as a franchise.",
+            "src": "world_summary_c112.md ## Sports",
+            "id": "F-840758f351e1"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks open their inaugural season at home vs the San Antonio Spurs and instantly get their first win in franchise history, After 0-9 through rookie camp and preseason the team had grown anxious. Coach Shepard was asked after the game how the locker room responded to the win and he laughed and said his ears were still ringing.",
+            "src": "world_summary_c112.md ## Sports",
+            "id": "F-90b86ae8d257"
+          },
+          {
+            "t": "FACT",
+            "text": "Coach Shepard, who is also celebrating his first win as a rookie head coach, emphasized that it was important to honor the moment for its context but to not get too caught up and the next loss could be a game away. Saying that its important to build on the things that were good and eliminate the bad. The Oaks scored 97 while holding San Antonio to 84. The Oaks next game will be at home while Charolette comes to town.",
+            "src": "world_summary_c112.md ## Sports",
+            "id": "F-86df95d8b1a9"
+          },
+          {
+            "t": "FACT",
+            "text": "Austin Reaves — SG / The Oaks",
+            "src": "Simulation_Ledger profile for POP-01027",
+            "id": "F-d653907c94cf"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-10-21T18:20:05.555Z"
+}

@@ -1,0 +1,22 @@
+{
+  "status": "arc-seed",
+  "cycle": "112",
+  "desk": "civic",
+  "persona": "carmen-delaine",
+  "hood": "West Oakland",
+  "quotes": [
+    {
+      "pop": "POP-00034",
+      "name": "Avery Santana",
+      "quote": "Month-eleven, 23-day standard maintained — this fund delivers because Brenda Okoro's team treats every application like family."
+    },
+    {
+      "pop": "POP-00034",
+      "name": "Avery Santana",
+      "quote": "West Oakland families don't need promises—they need checks that clear. Month-eleven disbursement approved."
+    }
+  ],
+  "claim": "Month-eleven, 23-day standard maintained — this fund delivers because Brenda Okoro's team treats every application like family.",
+  "src": "citizenVoice PRESS c112",
+  "ranAt": "2026-10-19T18:15:01.280Z"
+}

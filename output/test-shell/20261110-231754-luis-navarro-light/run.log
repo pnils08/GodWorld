@@ -1,0 +1,90 @@
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ custom filepath { path: '/custom/path/.env' }
+Wake 3 WRITE — civic c115 (luis-navarro)
+===================================
+[run] 2026-11-11T05:17:57.085Z byline: Luis Navarro (POP-00636, persona)
+[run] 2026-11-11T05:17:57.098Z W3: no citizen on the record — filing without a quote
+[run] 2026-11-11T05:17:57.286Z writing on typed Packet (12978 B injected state + stance anchor)...
+[run] 2026-11-11T05:17:57.287Z writer tools ON (package): max 6 calls
+[run] 2026-11-11T05:17:57.287Z reward loop ON (package): rubric shown, contract scored, grade carried
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ custom filepath { path: '/custom/path/.env' }
+Headless Desk Writer — civic desk
+===================================
+model=anthropic/claude-sonnet-5.5 maxTurns=15
+[INFO] 2026-11-11T05:17:57.951Z lane state-file injected: output/test-shell/20261110-231754-luis-navarro-light/civic_c115_luis-navarro_packet-v2_anthropic-claude-sonnet-5-5.state.json (12906 chars) — full-summary blob bypassed
+[INFO] 2026-11-11T05:17:58.220Z packet-only compose via OpenRouter (anthropic/claude-sonnet-5.5, 0 live tools)...
+[INFO] 2026-11-11T05:18:33.345Z tool trace: 2 call(s) → civic_c115_packet-v2_luis-navarro.tooltrace.json
+[INFO] 2026-11-11T05:18:33.406Z tool facts → manifest: none used (2 call(s))
+[INFO] 2026-11-11T05:18:33.477Z LEP/2 lexical observations deferred to Rhea (AM-e6c2103144ea): UNAPPROVED_NUMBER=73,-007,12.5,-01,107,111,112,113,114,116,76,78,80,83,12,500,000,400; UNAPPROVED_QUOTE=passed,not a standalone council vote.,required for publication,,implementation continues.,Publish the placement-gap analysis and program adjustment plan.,directed,,required.,no coverage since C73,,unverified.,gap,400+ Baylight placements by Year 3,required; INVESTIGATION_EPISTEMIC_OVERREACH=no request
+[INFO] 2026-11-11T05:18:33.525Z summary-article shape notes (non-blocking, deferred to Rhea): tracker-recap,fact-list
+[INFO] 2026-11-11T05:18:33.526Z summary-article shape observations: phase-lede
+
+--- run summary ---
+{
+  "desk": "civic",
+  "cycle": "115",
+  "model": "anthropic/claude-sonnet-5.5",
+  "turns": 3,
+  "maxTurns": 15,
+  "usageInputTokens": 23915,
+  "usageOutputTokens": 2627,
+  "savedFiles": [
+    "output/test-shell/20261110-231754-luis-navarro-light/civic_c115_luis-navarro_packet-v2_anthropic-claude-sonnet-5-5.md"
+  ],
+  "compareAgainst": "output/desk-output/civic_c115.md",
+  "durationMs": 35601,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-11-11T05:18:33.526Z"
+}
+
+tokens: 23915 in / 2627 out · 3 turn(s) · 35601ms
+compare: diff output/desk-output/civic_c115.md  ↔  output/test-shell/20261110-231754-luis-navarro-light/civic_c115_luis-navarro_packet-v2_anthropic-claude-sonnet-5-5.md
+[run] 2026-11-11T05:18:34.579Z s344 slot findings (non-blocking): summary=tracker-recap; summary=fact-list
+[run] 2026-11-11T05:18:34.580Z s344 slot observations: summary=phase-lede
+[run] 2026-11-11T05:18:34.580Z article shape notes (non-blocking): tracker-recap,fact-list
+[run] 2026-11-11T05:18:34.580Z article shape observations: phase-lede
+[run] 2026-11-11T05:18:34.587Z gate SKIPPED (--no-gate sample) — output is ungated, NOT canon
+[run] 2026-11-11T05:18:34.642Z gaps logged: 3 line(s) → production log
+
+=== write disposition: UNGATED-SAMPLE ===
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "115",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "sonnet",
+  "persona": "luis-navarro",
+  "byline": {
+    "name": "Luis Navarro",
+    "popid": "POP-00636",
+    "beatDomain": "CIVIC"
+  },
+  "laneEntries": 93,
+  "quotesLanded": 0,
+  "disposition": "ungated-sample",
+  "rheaPass": null,
+  "rheaFlagCount": null,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "sheet_read",
+    "canon_search"
+  ],
+  "toolCalls": 2,
+  "wordCount": 768,
+  "targetWords": "400-700",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": null,
+  "gradeRecord": null,
+  "article": "output/test-shell/20261110-231754-luis-navarro-light/samples/civic_c115_luis-navarro_packet-v2_anthropic-claude-sonnet-5-5.sample.md",
+  "selfRecord": null,
+  "ranAt": "2026-11-11T05:18:34.596Z"
+}

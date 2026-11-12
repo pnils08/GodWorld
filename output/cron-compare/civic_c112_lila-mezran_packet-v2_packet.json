@@ -1,0 +1,1282 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "112",
+  "persona": "lila-mezran",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Dr. Lila Mezran",
+    "popid": "POP-00154"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-health",
+      "angle": "Chinatown carries the most sick residents (142) | 6 named on the hospital and cause records",
+      "label": "Chinatown carries the most sick residents (142) | 6 named on the hospital and cause records",
+      "hookLine": "Yu Zen is one of 6 residents on the record this cycle; Chinatown carries the most illness; 73 in hospital care citywide, 73 beds occupied; illness is up in Chinatown — Kenji Tanaka and Matra Woven can speak for the block.",
+      "hood": "Chinatown",
+      "citizens": [
+        "Yu Zen (POP-00194)",
+        "Deacon Seymour (POP-00528)",
+        "Maurice Franklin (POP-00801)",
+        "Jonas Patel (POP-00142)",
+        "Elle Lilo (POP-00177)",
+        "Elena Leon (POP-00193)",
+        "Kenji Tanaka (POP-00763)",
+        "Matra Woven (POP-00785)"
+      ],
+      "popids": [
+        "POP-00194",
+        "POP-00528",
+        "POP-00801",
+        "POP-00142",
+        "POP-00177",
+        "POP-00193",
+        "POP-00763",
+        "POP-00785"
+      ],
+      "ref": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+      "cycle": 112
+    }
+  },
+  "angle": "output/cron-compare/civic_c112_lila-mezran_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 4,
+  "quotes": [
+    {
+      "pop": "POP-00763",
+      "name": "Kenji Tanaka",
+      "quote": "The numbers tell us how many are sick, but they don't tell you about the quiet ones. I see the faces of people who don't want to be a burden — the grandmother who still shows up to help fold flyers even though she's been coughing for weeks, the man who waves from his doorway but won't come to the community meal because he doesn't want to answer questions about his health. The city counts beds and cases. I count the people who are too proud, too scared, or too tired to be counted.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"The numbers tell us how many are sick, but they don't tell you about the quiet ones. I see the faces of people who don't want to be a burden — the grandmother who still shows up to help fold flyers even though she's been coughing for weeks, the man who waves from his doorway but won't come to the community meal because he doesn't want to answer questions about his health. The city counts beds and cases. I count the people who are too proud, too scared, or too tired to be counted.\",\n  \"fact_ids\": [\"F-7d6eb163e88d\", \"F-142b80af9227\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-7d6eb163e88d",
+          "F-142b80af9227"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00763-371dd4da1b",
+        "authoredQuote": true,
+        "publishableQuote": "The numbers tell us how many are sick, but they don't tell you about the quiet ones. I see the faces of people who don't want to be a burden — the grandmother who still shows up to help fold flyers even though she's been coughing for weeks, the man who waves from his doorway but won't come to the community meal because he doesn't want to answer questions about his health. The city counts beds and cases. I count the people who are too proud, too scared, or too tired to be counted."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00763",
+          "name": "Kenji Tanaka",
+          "role": "Senior Pastor / Faith Leader",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Dr. Lila Mezran",
+          "question": "Pastor Tanaka, when you walk through Chinatown, what do you see in the faces of your congregation and neighbors that the city's numbers don't capture? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-health",
+          "hood": "Chinatown",
+          "focus": "The gap between Chinatown's illness burden and the named faces of hospital care — who is in the beds, and who is left unnamed.",
+          "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Kenji Tanaka — Senior Pastor / Faith Leader — Chinatown",
+          "evidence": [
+            {
+              "id": "EV-2077c9371c",
+              "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+              "text": "Yu Zen is one of 6 residents on the record this cycle; Chinatown carries the most illness; 73 in hospital care citywide, 73 beds occupied; illness is up in Chinatown — Kenji Tanaka and Matra Woven can speak for the block."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "Chinatown carries the most sick residents (142) | 6 named on the hospital and cause records",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+            "id": "F-7d6eb163e88d"
+          },
+          {
+            "t": "FACT",
+            "text": "Yu Zen is one of 6 residents on the record this cycle; Chinatown carries the most illness; 73 in hospital care citywide, 73 beds occupied; illness is up in Chinatown — Kenji Tanaka and Matra Woven can speak for the block.",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+            "id": "F-27f5e1068c36"
+          },
+          {
+            "t": "FACT",
+            "text": "Sick residents by neighborhood: Chinatown 142 (-2 vs C111), East Oakland 123 (+0 vs C111), Ivy Hill 121 (-1 vs C111), Fruitvale 115 (-3 vs C111), San Antonio 111 (-1 vs C111), Laurel 109 (-2 vs C111), Grand Lake 106 (+0 vs C111), Rockridge 105 (-2 vs C111) — 1,874 across 22 neighborhoods",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112",
+            "id": "F-142b80af9227"
+          },
+          {
+            "t": "FACT",
+            "text": "Yu Zen (Rockridge) — in hospital care, active, admitted C105 after a workplace accident",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00194",
+            "id": "F-fd3a5ebe69ce"
+          },
+          {
+            "t": "FACT",
+            "text": "Deacon Seymour (Lake Merritt) — in hospital care, active, admitted C105 after a workplace accident",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00528",
+            "id": "F-488f0c9977b3"
+          },
+          {
+            "t": "FACT",
+            "text": "Maurice Franklin (Rockridge) — in hospital care, active, admitted C106 after severe seasonal flu",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00801",
+            "id": "F-c6bc1a20be8e"
+          },
+          {
+            "t": "FACT",
+            "text": "The city illness rate stands at 4.3%, with 36 hospital admissions this cycle and 73 in care at the close.",
+            "src": "output/world_summary_c112.md \"## City State\"",
+            "id": "F-a3bc786f3bc4"
+          },
+          {
+            "t": "FACT",
+            "text": "Kenji Tanaka — Senior Pastor / Faith Leader — Chinatown",
+            "src": "Simulation_Ledger profile for POP-00763",
+            "id": "F-d98f55e040fe"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00785",
+      "name": "Matra Woven",
+      "quote": "I see the same faces every day, and lately some of them aren't there. It's not like I keep a list, but you notice when Mrs. Chen's grandson is the one walking her dog, or when the usual guy at the corner store has his daughter running the register. I don't know who's in the hospital beds, but I know who's covering for someone at home. That's just how it goes around here — family steps in, neighbors help out, and we don't always ask why.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "{\"answer\":\"quote\",\"quote\":\"I see the same faces every day, and lately some of them aren't there. It's not like I keep a list, but you notice when Mrs. Chen's grandson is the one walking her dog, or when the usual guy at the corner store has his daughter running the register. I don't know who's in the hospital beds, but I know who's covering for someone at home. That's just how it goes around here — family steps in, neighbors help out, and we don't always ask why.\",\"fact_ids\":[\"F-7d6eb163e88d\",\"F-27f5e1068c36\"],\"basis\":\"lived-context\",\"unverifiedLead\":null,\"abstain_reason\":null}",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-7d6eb163e88d",
+          "F-27f5e1068c36"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00785-059a3e379f",
+        "authoredQuote": true,
+        "publishableQuote": "I see the same faces every day, and lately some of them aren't there. It's not like I keep a list, but you notice when Mrs. Chen's grandson is the one walking her dog, or when the usual guy at the corner store has his daughter running the register. I don't know who's in the hospital beds, but I know who's covering for someone at home. That's just how it goes around here — family steps in, neighbors help out, and we don't always ask why."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00785",
+          "name": "Matra Woven",
+          "role": "Janitor",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Dr. Lila Mezran",
+          "question": "Matra, as someone who cleans and moves through the neighborhood daily, what do you notice about who's missing from the streets or who's covering for someone at home? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-health",
+          "hood": "Chinatown",
+          "focus": "The gap between Chinatown's illness burden and the named faces of hospital care — who is in the beds, and who is left unnamed.",
+          "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Matra Woven — Janitor — Chinatown",
+          "evidence": [
+            {
+              "id": "EV-5cac068c4a",
+              "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+              "text": "Yu Zen is one of 6 residents on the record this cycle; Chinatown carries the most illness; 73 in hospital care citywide, 73 beds occupied; illness is up in Chinatown — Kenji Tanaka and Matra Woven can speak for the block."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "Chinatown carries the most sick residents (142) | 6 named on the hospital and cause records",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+            "id": "F-7d6eb163e88d"
+          },
+          {
+            "t": "FACT",
+            "text": "Yu Zen is one of 6 residents on the record this cycle; Chinatown carries the most illness; 73 in hospital care citywide, 73 beds occupied; illness is up in Chinatown — Kenji Tanaka and Matra Woven can speak for the block.",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+            "id": "F-27f5e1068c36"
+          },
+          {
+            "t": "FACT",
+            "text": "Sick residents by neighborhood: Chinatown 142 (-2 vs C111), East Oakland 123 (+0 vs C111), Ivy Hill 121 (-1 vs C111), Fruitvale 115 (-3 vs C111), San Antonio 111 (-1 vs C111), Laurel 109 (-2 vs C111), Grand Lake 106 (+0 vs C111), Rockridge 105 (-2 vs C111) — 1,874 across 22 neighborhoods",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112",
+            "id": "F-142b80af9227"
+          },
+          {
+            "t": "FACT",
+            "text": "Yu Zen (Rockridge) — in hospital care, active, admitted C105 after a workplace accident",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00194",
+            "id": "F-fd3a5ebe69ce"
+          },
+          {
+            "t": "FACT",
+            "text": "Deacon Seymour (Lake Merritt) — in hospital care, active, admitted C105 after a workplace accident",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00528",
+            "id": "F-488f0c9977b3"
+          },
+          {
+            "t": "FACT",
+            "text": "Maurice Franklin (Rockridge) — in hospital care, active, admitted C106 after severe seasonal flu",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00801",
+            "id": "F-c6bc1a20be8e"
+          },
+          {
+            "t": "FACT",
+            "text": "The city illness rate stands at 4.3%, with 36 hospital admissions this cycle and 73 in care at the close.",
+            "src": "output/world_summary_c112.md \"## City State\"",
+            "id": "F-a3bc786f3bc4"
+          },
+          {
+            "t": "FACT",
+            "text": "Matra Woven — Janitor — Chinatown",
+            "src": "Simulation_Ledger profile for POP-00785",
+            "id": "F-a6c67c2af27f"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00194",
+      "name": "Yu Zen",
+      "quote": "When I was in that hospital bed, I kept thinking about the numbers I deal with every day as an insurance broker — the claims, the paperwork, the names on the forms. But lying there, I realized the names on the forms aren't the same as the names on the beds. Chinatown's been hit so hard, and I know it's not because those folks matter less. It's just that nobody's writing their names down the same way. I'm lucky — I've got people who can advocate for me, who know how to work the system. Not everyone has that. That gap isn't about who's sicker. It's about who gets seen.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; warm, tender with people; curious, open to new things; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "{\"answer\":\"quote\",\"quote\":\"When I was in that hospital bed, I kept thinking about the numbers I deal with every day as an insurance broker — the claims, the paperwork, the names on the forms. But lying there, I realized the names on the forms aren't the same as the names on the beds. Chinatown's been hit so hard, and I know it's not because those folks matter less. It's just that nobody's writing their names down the same way. I'm lucky — I've got people who can advocate for me, who know how to work the system. Not everyone has that. That gap isn't about who's sicker. It's about who gets seen.\",\"fact_ids\":[\"F-7d6eb163e88d\",\"F-fd3a5ebe69ce\"],\"basis\":\"lived-context\",\"unverifiedLead\":null,\"abstain_reason\":null}",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-7d6eb163e88d",
+          "F-fd3a5ebe69ce"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00194-fdceb7af49",
+        "authoredQuote": true,
+        "publishableQuote": "When I was in that hospital bed, I kept thinking about the numbers I deal with every day as an insurance broker — the claims, the paperwork, the names on the forms. But lying there, I realized the names on the forms aren't the same as the names on the beds. Chinatown's been hit so hard, and I know it's not because those folks matter less. It's just that nobody's writing their names down the same way. I'm lucky — I've got people who can advocate for me, who know how to work the system. Not everyone has that. That gap isn't about who's sicker. It's about who gets seen."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00194",
+          "name": "Yu Zen",
+          "role": "Commercial Insurance Broker",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Dr. Lila Mezran",
+          "question": "What have you seen, felt, or understood about \"The gap between Chinatown's illness burden and the named faces of hospital care — who is in the beds, and who is left unnamed.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-health",
+          "hood": "Chinatown",
+          "focus": "The gap between Chinatown's illness burden and the named faces of hospital care — who is in the beds, and who is left unnamed.",
+          "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Yu Zen — Commercial Insurance Broker — Rockridge",
+          "evidence": [
+            {
+              "id": "EV-09017bcdf3",
+              "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+              "text": "Yu Zen is one of 6 residents on the record this cycle; Chinatown carries the most illness; 73 in hospital care citywide, 73 beds occupied; illness is up in Chinatown — Kenji Tanaka and Matra Woven can speak for the block."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "Chinatown carries the most sick residents (142) | 6 named on the hospital and cause records",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+            "id": "F-7d6eb163e88d"
+          },
+          {
+            "t": "FACT",
+            "text": "Yu Zen is one of 6 residents on the record this cycle; Chinatown carries the most illness; 73 in hospital care citywide, 73 beds occupied; illness is up in Chinatown — Kenji Tanaka and Matra Woven can speak for the block.",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+            "id": "F-27f5e1068c36"
+          },
+          {
+            "t": "FACT",
+            "text": "Sick residents by neighborhood: Chinatown 142 (-2 vs C111), East Oakland 123 (+0 vs C111), Ivy Hill 121 (-1 vs C111), Fruitvale 115 (-3 vs C111), San Antonio 111 (-1 vs C111), Laurel 109 (-2 vs C111), Grand Lake 106 (+0 vs C111), Rockridge 105 (-2 vs C111) — 1,874 across 22 neighborhoods",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112",
+            "id": "F-142b80af9227"
+          },
+          {
+            "t": "FACT",
+            "text": "Yu Zen (Rockridge) — in hospital care, active, admitted C105 after a workplace accident",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00194",
+            "id": "F-fd3a5ebe69ce"
+          },
+          {
+            "t": "FACT",
+            "text": "Deacon Seymour (Lake Merritt) — in hospital care, active, admitted C105 after a workplace accident",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00528",
+            "id": "F-488f0c9977b3"
+          },
+          {
+            "t": "FACT",
+            "text": "Maurice Franklin (Rockridge) — in hospital care, active, admitted C106 after severe seasonal flu",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00801",
+            "id": "F-c6bc1a20be8e"
+          },
+          {
+            "t": "FACT",
+            "text": "The city illness rate stands at 4.3%, with 36 hospital admissions this cycle and 73 in care at the close.",
+            "src": "output/world_summary_c112.md \"## City State\"",
+            "id": "F-a3bc786f3bc4"
+          },
+          {
+            "t": "FACT",
+            "text": "Yu Zen — Commercial Insurance Broker — Rockridge",
+            "src": "Simulation_Ledger profile for POP-00194",
+            "id": "F-0cea0a3d84d3"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00528",
+      "name": "Deacon Seymour",
+      "quote": "I spent my own stretch in a hospital bed not long ago, and I know what it's like to have your name on the door, to have people checking on you. But I also know that bed I was in—that was one bed, and there are a lot more filled by folks nobody's naming. Chinatown's carrying more sickness than anywhere else in this city right now, and I can't help but think about all those people who are just a number on a chart, not a face anyone's asking about. That gap, it's not about who's sicker—it's about who gets seen. And that weighs on me.",
+      "disp": "can't switch off, working themselves thin; draws people in, deep with them; warm, tender with people; curious, open to new things; steady, hard to shake; principled, plays it straight; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I spent my own stretch in a hospital bed not long ago, and I know what it's like to have your name on the door, to have people checking on you. But I also know that bed I was in—that was one bed, and there are a lot more filled by folks nobody's naming. Chinatown's carrying more sickness than anywhere else in this city right now, and I can't help but think about all those people who are just a number on a chart, not a face anyone's asking about. That gap, it's not about who's sicker—it's about who gets seen. And that weighs on me.\",\n  \"fact_ids\": [\n    \"F-7d6eb163e88d\",\n    \"F-27f5e1068c36\",\n    \"F-488f0c9977b3\"\n  ],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-7d6eb163e88d",
+          "F-27f5e1068c36",
+          "F-488f0c9977b3"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00528-30cbfdc912",
+        "authoredQuote": true,
+        "publishableQuote": "I spent my own stretch in a hospital bed not long ago, and I know what it's like to have your name on the door, to have people checking on you. But I also know that bed I was in—that was one bed, and there are a lot more filled by folks nobody's naming. Chinatown's carrying more sickness than anywhere else in this city right now, and I can't help but think about all those people who are just a number on a chart, not a face anyone's asking about. That gap, it's not about who's sicker—it's about who gets seen. And that weighs on me."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00528",
+          "name": "Deacon Seymour",
+          "role": "Manager, Oakland A's",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Dr. Lila Mezran",
+          "question": "What have you seen, felt, or understood about \"The gap between Chinatown's illness burden and the named faces of hospital care — who is in the beds, and who is left unnamed.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-health",
+          "hood": "Chinatown",
+          "focus": "The gap between Chinatown's illness burden and the named faces of hospital care — who is in the beds, and who is left unnamed.",
+          "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Deacon Seymour — Manager, Oakland A's — Lake Merritt",
+          "evidence": [
+            {
+              "id": "EV-f389ba611d",
+              "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+              "text": "Yu Zen is one of 6 residents on the record this cycle; Chinatown carries the most illness; 73 in hospital care citywide, 73 beds occupied; illness is up in Chinatown — Kenji Tanaka and Matra Woven can speak for the block."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "Chinatown carries the most sick residents (142) | 6 named on the hospital and cause records",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+            "id": "F-7d6eb163e88d"
+          },
+          {
+            "t": "FACT",
+            "text": "Yu Zen is one of 6 residents on the record this cycle; Chinatown carries the most illness; 73 in hospital care citywide, 73 beds occupied; illness is up in Chinatown — Kenji Tanaka and Matra Woven can speak for the block.",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+            "id": "F-27f5e1068c36"
+          },
+          {
+            "t": "FACT",
+            "text": "Sick residents by neighborhood: Chinatown 142 (-2 vs C111), East Oakland 123 (+0 vs C111), Ivy Hill 121 (-1 vs C111), Fruitvale 115 (-3 vs C111), San Antonio 111 (-1 vs C111), Laurel 109 (-2 vs C111), Grand Lake 106 (+0 vs C111), Rockridge 105 (-2 vs C111) — 1,874 across 22 neighborhoods",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112",
+            "id": "F-142b80af9227"
+          },
+          {
+            "t": "FACT",
+            "text": "Yu Zen (Rockridge) — in hospital care, active, admitted C105 after a workplace accident",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00194",
+            "id": "F-fd3a5ebe69ce"
+          },
+          {
+            "t": "FACT",
+            "text": "Deacon Seymour (Lake Merritt) — in hospital care, active, admitted C105 after a workplace accident",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00528",
+            "id": "F-488f0c9977b3"
+          },
+          {
+            "t": "FACT",
+            "text": "Maurice Franklin (Rockridge) — in hospital care, active, admitted C106 after severe seasonal flu",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00801",
+            "id": "F-c6bc1a20be8e"
+          },
+          {
+            "t": "FACT",
+            "text": "The city illness rate stands at 4.3%, with 36 hospital admissions this cycle and 73 in care at the close.",
+            "src": "output/world_summary_c112.md \"## City State\"",
+            "id": "F-a3bc786f3bc4"
+          },
+          {
+            "t": "FACT",
+            "text": "Deacon Seymour — Manager, Oakland A's — Lake Merritt",
+            "src": "Simulation_Ledger profile for POP-00528",
+            "id": "F-3375023542ff"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-00763",
+      "name": "Kenji Tanaka",
+      "quote": "The numbers tell us how many are sick, but they don't tell you about the quiet ones. I see the faces of people who don't want to be a burden — the grandmother who still shows up to help fold flyers even though she's been coughing for weeks, the man who waves from his doorway but won't come to the community meal because he doesn't want to answer questions about his health. The city counts beds and cases. I count the people who are too proud, too scared, or too tired to be counted.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"The numbers tell us how many are sick, but they don't tell you about the quiet ones. I see the faces of people who don't want to be a burden — the grandmother who still shows up to help fold flyers even though she's been coughing for weeks, the man who waves from his doorway but won't come to the community meal because he doesn't want to answer questions about his health. The city counts beds and cases. I count the people who are too proud, too scared, or too tired to be counted.\",\n  \"fact_ids\": [\"F-7d6eb163e88d\", \"F-142b80af9227\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-7d6eb163e88d",
+          "F-142b80af9227"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00763-371dd4da1b",
+        "authoredQuote": true,
+        "publishableQuote": "The numbers tell us how many are sick, but they don't tell you about the quiet ones. I see the faces of people who don't want to be a burden — the grandmother who still shows up to help fold flyers even though she's been coughing for weeks, the man who waves from his doorway but won't come to the community meal because he doesn't want to answer questions about his health. The city counts beds and cases. I count the people who are too proud, too scared, or too tired to be counted."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00763",
+          "name": "Kenji Tanaka",
+          "role": "Senior Pastor / Faith Leader",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Dr. Lila Mezran",
+          "question": "Pastor Tanaka, when you walk through Chinatown, what do you see in the faces of your congregation and neighbors that the city's numbers don't capture? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-health",
+          "hood": "Chinatown",
+          "focus": "The gap between Chinatown's illness burden and the named faces of hospital care — who is in the beds, and who is left unnamed.",
+          "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Kenji Tanaka — Senior Pastor / Faith Leader — Chinatown",
+          "evidence": [
+            {
+              "id": "EV-2077c9371c",
+              "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+              "text": "Yu Zen is one of 6 residents on the record this cycle; Chinatown carries the most illness; 73 in hospital care citywide, 73 beds occupied; illness is up in Chinatown — Kenji Tanaka and Matra Woven can speak for the block."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "Chinatown carries the most sick residents (142) | 6 named on the hospital and cause records",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+            "id": "F-7d6eb163e88d"
+          },
+          {
+            "t": "FACT",
+            "text": "Yu Zen is one of 6 residents on the record this cycle; Chinatown carries the most illness; 73 in hospital care citywide, 73 beds occupied; illness is up in Chinatown — Kenji Tanaka and Matra Woven can speak for the block.",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+            "id": "F-27f5e1068c36"
+          },
+          {
+            "t": "FACT",
+            "text": "Sick residents by neighborhood: Chinatown 142 (-2 vs C111), East Oakland 123 (+0 vs C111), Ivy Hill 121 (-1 vs C111), Fruitvale 115 (-3 vs C111), San Antonio 111 (-1 vs C111), Laurel 109 (-2 vs C111), Grand Lake 106 (+0 vs C111), Rockridge 105 (-2 vs C111) — 1,874 across 22 neighborhoods",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112",
+            "id": "F-142b80af9227"
+          },
+          {
+            "t": "FACT",
+            "text": "Yu Zen (Rockridge) — in hospital care, active, admitted C105 after a workplace accident",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00194",
+            "id": "F-fd3a5ebe69ce"
+          },
+          {
+            "t": "FACT",
+            "text": "Deacon Seymour (Lake Merritt) — in hospital care, active, admitted C105 after a workplace accident",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00528",
+            "id": "F-488f0c9977b3"
+          },
+          {
+            "t": "FACT",
+            "text": "Maurice Franklin (Rockridge) — in hospital care, active, admitted C106 after severe seasonal flu",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00801",
+            "id": "F-c6bc1a20be8e"
+          },
+          {
+            "t": "FACT",
+            "text": "The city illness rate stands at 4.3%, with 36 hospital admissions this cycle and 73 in care at the close.",
+            "src": "output/world_summary_c112.md \"## City State\"",
+            "id": "F-a3bc786f3bc4"
+          },
+          {
+            "t": "FACT",
+            "text": "Kenji Tanaka — Senior Pastor / Faith Leader — Chinatown",
+            "src": "Simulation_Ledger profile for POP-00763",
+            "id": "F-d98f55e040fe"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00785",
+      "name": "Matra Woven",
+      "quote": "I see the same faces every day, and lately some of them aren't there. It's not like I keep a list, but you notice when Mrs. Chen's grandson is the one walking her dog, or when the usual guy at the corner store has his daughter running the register. I don't know who's in the hospital beds, but I know who's covering for someone at home. That's just how it goes around here — family steps in, neighbors help out, and we don't always ask why.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "{\"answer\":\"quote\",\"quote\":\"I see the same faces every day, and lately some of them aren't there. It's not like I keep a list, but you notice when Mrs. Chen's grandson is the one walking her dog, or when the usual guy at the corner store has his daughter running the register. I don't know who's in the hospital beds, but I know who's covering for someone at home. That's just how it goes around here — family steps in, neighbors help out, and we don't always ask why.\",\"fact_ids\":[\"F-7d6eb163e88d\",\"F-27f5e1068c36\"],\"basis\":\"lived-context\",\"unverifiedLead\":null,\"abstain_reason\":null}",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-7d6eb163e88d",
+          "F-27f5e1068c36"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00785-059a3e379f",
+        "authoredQuote": true,
+        "publishableQuote": "I see the same faces every day, and lately some of them aren't there. It's not like I keep a list, but you notice when Mrs. Chen's grandson is the one walking her dog, or when the usual guy at the corner store has his daughter running the register. I don't know who's in the hospital beds, but I know who's covering for someone at home. That's just how it goes around here — family steps in, neighbors help out, and we don't always ask why."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00785",
+          "name": "Matra Woven",
+          "role": "Janitor",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Dr. Lila Mezran",
+          "question": "Matra, as someone who cleans and moves through the neighborhood daily, what do you notice about who's missing from the streets or who's covering for someone at home? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-health",
+          "hood": "Chinatown",
+          "focus": "The gap between Chinatown's illness burden and the named faces of hospital care — who is in the beds, and who is left unnamed.",
+          "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Matra Woven — Janitor — Chinatown",
+          "evidence": [
+            {
+              "id": "EV-5cac068c4a",
+              "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+              "text": "Yu Zen is one of 6 residents on the record this cycle; Chinatown carries the most illness; 73 in hospital care citywide, 73 beds occupied; illness is up in Chinatown — Kenji Tanaka and Matra Woven can speak for the block."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "Chinatown carries the most sick residents (142) | 6 named on the hospital and cause records",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+            "id": "F-7d6eb163e88d"
+          },
+          {
+            "t": "FACT",
+            "text": "Yu Zen is one of 6 residents on the record this cycle; Chinatown carries the most illness; 73 in hospital care citywide, 73 beds occupied; illness is up in Chinatown — Kenji Tanaka and Matra Woven can speak for the block.",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+            "id": "F-27f5e1068c36"
+          },
+          {
+            "t": "FACT",
+            "text": "Sick residents by neighborhood: Chinatown 142 (-2 vs C111), East Oakland 123 (+0 vs C111), Ivy Hill 121 (-1 vs C111), Fruitvale 115 (-3 vs C111), San Antonio 111 (-1 vs C111), Laurel 109 (-2 vs C111), Grand Lake 106 (+0 vs C111), Rockridge 105 (-2 vs C111) — 1,874 across 22 neighborhoods",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112",
+            "id": "F-142b80af9227"
+          },
+          {
+            "t": "FACT",
+            "text": "Yu Zen (Rockridge) — in hospital care, active, admitted C105 after a workplace accident",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00194",
+            "id": "F-fd3a5ebe69ce"
+          },
+          {
+            "t": "FACT",
+            "text": "Deacon Seymour (Lake Merritt) — in hospital care, active, admitted C105 after a workplace accident",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00528",
+            "id": "F-488f0c9977b3"
+          },
+          {
+            "t": "FACT",
+            "text": "Maurice Franklin (Rockridge) — in hospital care, active, admitted C106 after severe seasonal flu",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00801",
+            "id": "F-c6bc1a20be8e"
+          },
+          {
+            "t": "FACT",
+            "text": "The city illness rate stands at 4.3%, with 36 hospital admissions this cycle and 73 in care at the close.",
+            "src": "output/world_summary_c112.md \"## City State\"",
+            "id": "F-a3bc786f3bc4"
+          },
+          {
+            "t": "FACT",
+            "text": "Matra Woven — Janitor — Chinatown",
+            "src": "Simulation_Ledger profile for POP-00785",
+            "id": "F-a6c67c2af27f"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00194",
+      "name": "Yu Zen",
+      "quote": "When I was in that hospital bed, I kept thinking about the numbers I deal with every day as an insurance broker — the claims, the paperwork, the names on the forms. But lying there, I realized the names on the forms aren't the same as the names on the beds. Chinatown's been hit so hard, and I know it's not because those folks matter less. It's just that nobody's writing their names down the same way. I'm lucky — I've got people who can advocate for me, who know how to work the system. Not everyone has that. That gap isn't about who's sicker. It's about who gets seen.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; warm, tender with people; curious, open to new things; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "{\"answer\":\"quote\",\"quote\":\"When I was in that hospital bed, I kept thinking about the numbers I deal with every day as an insurance broker — the claims, the paperwork, the names on the forms. But lying there, I realized the names on the forms aren't the same as the names on the beds. Chinatown's been hit so hard, and I know it's not because those folks matter less. It's just that nobody's writing their names down the same way. I'm lucky — I've got people who can advocate for me, who know how to work the system. Not everyone has that. That gap isn't about who's sicker. It's about who gets seen.\",\"fact_ids\":[\"F-7d6eb163e88d\",\"F-fd3a5ebe69ce\"],\"basis\":\"lived-context\",\"unverifiedLead\":null,\"abstain_reason\":null}",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-7d6eb163e88d",
+          "F-fd3a5ebe69ce"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00194-fdceb7af49",
+        "authoredQuote": true,
+        "publishableQuote": "When I was in that hospital bed, I kept thinking about the numbers I deal with every day as an insurance broker — the claims, the paperwork, the names on the forms. But lying there, I realized the names on the forms aren't the same as the names on the beds. Chinatown's been hit so hard, and I know it's not because those folks matter less. It's just that nobody's writing their names down the same way. I'm lucky — I've got people who can advocate for me, who know how to work the system. Not everyone has that. That gap isn't about who's sicker. It's about who gets seen."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00194",
+          "name": "Yu Zen",
+          "role": "Commercial Insurance Broker",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Dr. Lila Mezran",
+          "question": "What have you seen, felt, or understood about \"The gap between Chinatown's illness burden and the named faces of hospital care — who is in the beds, and who is left unnamed.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-health",
+          "hood": "Chinatown",
+          "focus": "The gap between Chinatown's illness burden and the named faces of hospital care — who is in the beds, and who is left unnamed.",
+          "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Yu Zen — Commercial Insurance Broker — Rockridge",
+          "evidence": [
+            {
+              "id": "EV-09017bcdf3",
+              "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+              "text": "Yu Zen is one of 6 residents on the record this cycle; Chinatown carries the most illness; 73 in hospital care citywide, 73 beds occupied; illness is up in Chinatown — Kenji Tanaka and Matra Woven can speak for the block."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "Chinatown carries the most sick residents (142) | 6 named on the hospital and cause records",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+            "id": "F-7d6eb163e88d"
+          },
+          {
+            "t": "FACT",
+            "text": "Yu Zen is one of 6 residents on the record this cycle; Chinatown carries the most illness; 73 in hospital care citywide, 73 beds occupied; illness is up in Chinatown — Kenji Tanaka and Matra Woven can speak for the block.",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+            "id": "F-27f5e1068c36"
+          },
+          {
+            "t": "FACT",
+            "text": "Sick residents by neighborhood: Chinatown 142 (-2 vs C111), East Oakland 123 (+0 vs C111), Ivy Hill 121 (-1 vs C111), Fruitvale 115 (-3 vs C111), San Antonio 111 (-1 vs C111), Laurel 109 (-2 vs C111), Grand Lake 106 (+0 vs C111), Rockridge 105 (-2 vs C111) — 1,874 across 22 neighborhoods",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112",
+            "id": "F-142b80af9227"
+          },
+          {
+            "t": "FACT",
+            "text": "Yu Zen (Rockridge) — in hospital care, active, admitted C105 after a workplace accident",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00194",
+            "id": "F-fd3a5ebe69ce"
+          },
+          {
+            "t": "FACT",
+            "text": "Deacon Seymour (Lake Merritt) — in hospital care, active, admitted C105 after a workplace accident",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00528",
+            "id": "F-488f0c9977b3"
+          },
+          {
+            "t": "FACT",
+            "text": "Maurice Franklin (Rockridge) — in hospital care, active, admitted C106 after severe seasonal flu",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00801",
+            "id": "F-c6bc1a20be8e"
+          },
+          {
+            "t": "FACT",
+            "text": "The city illness rate stands at 4.3%, with 36 hospital admissions this cycle and 73 in care at the close.",
+            "src": "output/world_summary_c112.md \"## City State\"",
+            "id": "F-a3bc786f3bc4"
+          },
+          {
+            "t": "FACT",
+            "text": "Yu Zen — Commercial Insurance Broker — Rockridge",
+            "src": "Simulation_Ledger profile for POP-00194",
+            "id": "F-0cea0a3d84d3"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00528",
+      "name": "Deacon Seymour",
+      "quote": "I spent my own stretch in a hospital bed not long ago, and I know what it's like to have your name on the door, to have people checking on you. But I also know that bed I was in—that was one bed, and there are a lot more filled by folks nobody's naming. Chinatown's carrying more sickness than anywhere else in this city right now, and I can't help but think about all those people who are just a number on a chart, not a face anyone's asking about. That gap, it's not about who's sicker—it's about who gets seen. And that weighs on me.",
+      "disp": "can't switch off, working themselves thin; draws people in, deep with them; warm, tender with people; curious, open to new things; steady, hard to shake; principled, plays it straight; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I spent my own stretch in a hospital bed not long ago, and I know what it's like to have your name on the door, to have people checking on you. But I also know that bed I was in—that was one bed, and there are a lot more filled by folks nobody's naming. Chinatown's carrying more sickness than anywhere else in this city right now, and I can't help but think about all those people who are just a number on a chart, not a face anyone's asking about. That gap, it's not about who's sicker—it's about who gets seen. And that weighs on me.\",\n  \"fact_ids\": [\n    \"F-7d6eb163e88d\",\n    \"F-27f5e1068c36\",\n    \"F-488f0c9977b3\"\n  ],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-7d6eb163e88d",
+          "F-27f5e1068c36",
+          "F-488f0c9977b3"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00528-30cbfdc912",
+        "authoredQuote": true,
+        "publishableQuote": "I spent my own stretch in a hospital bed not long ago, and I know what it's like to have your name on the door, to have people checking on you. But I also know that bed I was in—that was one bed, and there are a lot more filled by folks nobody's naming. Chinatown's carrying more sickness than anywhere else in this city right now, and I can't help but think about all those people who are just a number on a chart, not a face anyone's asking about. That gap, it's not about who's sicker—it's about who gets seen. And that weighs on me."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00528",
+          "name": "Deacon Seymour",
+          "role": "Manager, Oakland A's",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Dr. Lila Mezran",
+          "question": "What have you seen, felt, or understood about \"The gap between Chinatown's illness burden and the named faces of hospital care — who is in the beds, and who is left unnamed.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-health",
+          "hood": "Chinatown",
+          "focus": "The gap between Chinatown's illness burden and the named faces of hospital care — who is in the beds, and who is left unnamed.",
+          "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Deacon Seymour — Manager, Oakland A's — Lake Merritt",
+          "evidence": [
+            {
+              "id": "EV-f389ba611d",
+              "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+              "text": "Yu Zen is one of 6 residents on the record this cycle; Chinatown carries the most illness; 73 in hospital care citywide, 73 beds occupied; illness is up in Chinatown — Kenji Tanaka and Matra Woven can speak for the block."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "Chinatown carries the most sick residents (142) | 6 named on the hospital and cause records",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+            "id": "F-7d6eb163e88d"
+          },
+          {
+            "t": "FACT",
+            "text": "Yu Zen is one of 6 residents on the record this cycle; Chinatown carries the most illness; 73 in hospital care citywide, 73 beds occupied; illness is up in Chinatown — Kenji Tanaka and Matra Woven can speak for the block.",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+            "id": "F-27f5e1068c36"
+          },
+          {
+            "t": "FACT",
+            "text": "Sick residents by neighborhood: Chinatown 142 (-2 vs C111), East Oakland 123 (+0 vs C111), Ivy Hill 121 (-1 vs C111), Fruitvale 115 (-3 vs C111), San Antonio 111 (-1 vs C111), Laurel 109 (-2 vs C111), Grand Lake 106 (+0 vs C111), Rockridge 105 (-2 vs C111) — 1,874 across 22 neighborhoods",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112",
+            "id": "F-142b80af9227"
+          },
+          {
+            "t": "FACT",
+            "text": "Yu Zen (Rockridge) — in hospital care, active, admitted C105 after a workplace accident",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00194",
+            "id": "F-fd3a5ebe69ce"
+          },
+          {
+            "t": "FACT",
+            "text": "Deacon Seymour (Lake Merritt) — in hospital care, active, admitted C105 after a workplace accident",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00528",
+            "id": "F-488f0c9977b3"
+          },
+          {
+            "t": "FACT",
+            "text": "Maurice Franklin (Rockridge) — in hospital care, active, admitted C106 after severe seasonal flu",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00801",
+            "id": "F-c6bc1a20be8e"
+          },
+          {
+            "t": "FACT",
+            "text": "The city illness rate stands at 4.3%, with 36 hospital admissions this cycle and 73 in care at the close.",
+            "src": "output/world_summary_c112.md \"## City State\"",
+            "id": "F-a3bc786f3bc4"
+          },
+          {
+            "t": "FACT",
+            "text": "Deacon Seymour — Manager, Oakland A's — Lake Merritt",
+            "src": "Simulation_Ledger profile for POP-00528",
+            "id": "F-3375023542ff"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-10-19T18:16:40.318Z"
+}

@@ -1,0 +1,134 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "115",
+  "persona": "tamsin-pruitt",
+  "byline": "Tamsin Pruitt",
+  "bylinePopid": "POP-01210",
+  "article": "output/cron-compare/staged/culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.staged-0020.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Mara Vance",
+        "role": "mentioned",
+        "popid": "POP-00507"
+      },
+      {
+        "name": "Howard Yell",
+        "role": "quoted-source",
+        "popid": "POP-00651"
+      },
+      {
+        "name": "Xavier Robinson",
+        "role": "mentioned",
+        "popid": "POP-00711"
+      },
+      {
+        "name": "Imani Delacroix",
+        "role": "mentioned",
+        "popid": "POP-01165"
+      },
+      {
+        "name": "Jee Lei",
+        "role": "subject",
+        "popid": "POP-00321"
+      },
+      {
+        "name": "Avery Santana",
+        "role": "mentioned",
+        "popid": "POP-00034",
+        "floor": true
+      },
+      {
+        "name": "Briar Soto",
+        "role": "mentioned",
+        "popid": "POP-00926",
+        "floor": true
+      },
+      {
+        "name": "Brielle Lewis",
+        "role": "mentioned",
+        "popid": "POP-00459",
+        "floor": true
+      },
+      {
+        "name": "Coen Cartier",
+        "role": "mentioned",
+        "popid": "POP-00338",
+        "floor": true
+      },
+      {
+        "name": "Denise Carter",
+        "role": "mentioned",
+        "popid": "POP-00501",
+        "floor": true
+      },
+      {
+        "name": "Dmitri Soto",
+        "role": "mentioned",
+        "popid": "POP-00276",
+        "floor": true
+      },
+      {
+        "name": "Elena Soria Dominguez",
+        "role": "mentioned",
+        "popid": "POP-00791",
+        "floor": true
+      },
+      {
+        "name": "Joesph Allen",
+        "role": "mentioned",
+        "popid": "POP-00289",
+        "floor": true
+      },
+      {
+        "name": "Mateo Allen",
+        "role": "mentioned",
+        "popid": "POP-00199",
+        "floor": true
+      },
+      {
+        "name": "Ophelia Brenner",
+        "role": "mentioned",
+        "popid": "POP-00754",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "For me, accountability in 'The lives of C115: significant events and personal stories' comes down to being transparent about my own life and actions during that time. I've recently moved into a place of my own in Rockridge, which is a significant personal step. Professionally, I've been focused on my role as City Planning Director, and the directive I issued in C115 is part of that. I directed Avery Santana and Denise Carter to provide specific information and reconciliations related to petition responses and filings. I want to be clear that my actions are guided by a commitment to the principles of my office and the needs of the community.",
+        "sourceRef": "citizenVoice PRESS Mara Vance"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-c40e545559a6",
+    "draftSha256": "548b92dd90efca3b26844b95c65e094884a0d5bbda7825611e4adf7440fe7bbf",
+    "verdict": "output/cron-compare/culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-11T00:19:56.846Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 450",
+      "words": 1514,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "548b92dd90efca3b26844b95c65e094884a0d5bbda7825611e4adf7440fe7bbf",
+      "costUsd": 0.0018
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-11T00:20:00.800Z"
+}

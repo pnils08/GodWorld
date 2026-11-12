@@ -1,0 +1,63 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "115",
+  "persona": "trevor-shimizu",
+  "byline": "Trevor Shimizu",
+  "bylinePopid": "POP-00155",
+  "article": "output/cron-compare/staged/civic_c115_trevor-shimizu_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Coen Cartier",
+        "role": "quoted-source",
+        "popid": "POP-00338"
+      },
+      {
+        "name": "Elena Soria Dominguez",
+        "role": "mentioned",
+        "popid": "POP-00791"
+      },
+      {
+        "name": "Ximena Mehta",
+        "role": "mentioned",
+        "popid": "POP-01039"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "Honestly, I can tell you what the chatter is, and it's not one big thing — it's a bunch of little things stacking up. We had the Oaks game downtown, the Baylight District vote finally going through, and events all over Lake Merritt, Temescal, and KONO. When you get that many neighborhood pulls happening on the same ordinary Tuesday, the platforms fill up fast. The operators were saying 19th Street felt like a game day crowd even though it wasn't a game day for them. It's just what happens when the whole city decides to move at once.",
+        "sourceRef": "citizenVoice PRESS Ximena Mehta"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-104ffa0a3472",
+    "draftSha256": "d392d5e5bfae5295ad076e7fa805316ad0bf384ccc000fafd08f6a2cd3ff3748",
+    "verdict": "output/cron-compare/civic_c115_trevor-shimizu_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-10T00:19:26.144Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 500",
+      "words": 939,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "d392d5e5bfae5295ad076e7fa805316ad0bf384ccc000fafd08f6a2cd3ff3748",
+      "costUsd": 0.001
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-10T00:19:29.641Z"
+}

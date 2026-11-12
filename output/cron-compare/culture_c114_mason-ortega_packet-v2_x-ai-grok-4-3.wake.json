@@ -1,0 +1,55 @@
+{
+  "mode": "wake-write",
+  "desk": "culture",
+  "cycle": "114",
+  "provider": "openrouter",
+  "model": "x-ai/grok-4.3",
+  "configuredWriterModel": "x-ai/grok-4.3",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "mason-ortega",
+  "byline": {
+    "name": "Mason Ortega",
+    "popid": "POP-00160",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 28,
+  "quotesLanded": 0,
+  "disposition": "flagged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [],
+  "toolCalls": 0,
+  "wordCount": 119,
+  "targetWords": "evidence-bounded",
+  "capHit": 0,
+  "checkFlags": [
+    "thin: 119 words (floor 150, seat target evidence-bounded)"
+  ],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": false,
+    "closed": false,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 119,
+    "short": "The opening introduces two restaurants rather than one, and the closing asks broad questions instead of identifying the worker or operating account still needed.",
+    "score": 2,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "085f23b8fc89451162de7b5f89274a50c5b5cf847393590577b751ec7f9adc1e",
+    "costUsd": 0.001
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 2/4 — The opening introduces two restaurants rather than one, and the closing asks broad questions instead of identifying the worker or operating account still needed."
+  },
+  "article": "output/cron-compare/flagged/culture_c114_mason-ortega_packet-v2_x-ai-grok-4-3-1801.md",
+  "selfRecord": null,
+  "ranAt": "2026-11-07T18:01:53.592Z"
+}

@@ -1,0 +1,77 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "112",
+  "persona": "ines-sorensen",
+  "byline": "Ines Sorensen",
+  "bylinePopid": "POP-01211",
+  "article": "output/cron-compare/staged/culture_c112_ines-sorensen_packet-v2_x-ai-grok-4-3.staged-1615.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Bobby Chen-Ramirez",
+        "role": "quoted-source",
+        "popid": "POP-00792"
+      },
+      {
+        "name": "Elena Soria Dominguez",
+        "role": "quoted-source",
+        "popid": "POP-00791"
+      },
+      {
+        "name": "Keisha Ramos",
+        "role": "quoted-source",
+        "popid": "POP-00041"
+      },
+      {
+        "name": "Omar Amici",
+        "role": "quoted-source",
+        "popid": "POP-00263"
+      },
+      {
+        "name": "Dmitri Soto",
+        "role": "mentioned",
+        "popid": "POP-00276",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Jack London"
+    ],
+    "claims": [
+      {
+        "claim": "To be honest, the changes in Uptown have me feeling a bit uneasy. The streets are busier than ever, and it seems like every other place is a for-rent sign these days. I've lived here long enough to see the neighborhood transform, but this feels different. It's like the neighborhood is shifting away from the people who've been here all along. I put on my good suit for Sunday service because some traditions still matter, but walking around, I see more strangers than familiar faces. It's hard not to wonder if this is still my neighborhood or if I'm just a ghost walking through someone else's plans.",
+        "sourceRef": "citizenVoice PRESS Omar Amici"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-81d57279b81a",
+    "draftSha256": "a4034759bce9826c4f2298a4bb33cfcdc492889d550b4768e77d41747193d8ab",
+    "verdict": "output/cron-compare/culture_c112_ines-sorensen_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-10-24T16:15:48.986Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 300",
+      "words": 508,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "a4034759bce9826c4f2298a4bb33cfcdc492889d550b4768e77d41747193d8ab",
+      "costUsd": 0.0016
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-24T16:15:56.751Z"
+}

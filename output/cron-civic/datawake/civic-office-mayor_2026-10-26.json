@@ -1,0 +1,26 @@
+{
+  "office": "mayor",
+  "agentDir": "civic-office-mayor",
+  "holder": "Avery Santana",
+  "popid": "POP-00034",
+  "title": "Mayor",
+  "date": "2026-10-26",
+  "cycle": 113,
+  "model": "moonshotai/kimi-k2",
+  "statement": "The West Oakland Tenant Defense Fund is in committee this week — and I'm watching. This $4.2M program is legal defense as housing stability. Oakland funds both. The Housing and Community Development Committee has the analysis they asked for. I expect them to move it. West Oakland families facing eviction deserve more than process — they deserve representation. My office is ready to implement the day council sends it forward.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-107-civic-office-mayor",
+        "text": "The Oakland Youth Apprenticeship Pipeline enrollment event is scheduled. My team is finalizing venue and partner coordination with the Building Trades Council. Certification of operational rollout follows the enrollment event — we're sequencing this properly, not rushing the foundation.",
+        "directiveCycle": 107,
+        "confrontationSeat": "civic-office-mayor"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": "1",
+  "ranAt": "2026-10-26T10:46:05.625Z",
+  "fellBackFrom": null
+}

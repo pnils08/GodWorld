@@ -1,0 +1,72 @@
+{
+  "draft": "output/cron-compare/sports_c114_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "114",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "1d3573fa1b7a9dfa987e8e6a941ea3197da779d91c61c61ac067cb42407d1f9d",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All player statistics and comparative analysis for Vladimir Gonzalez and Frank Reyna match canon records with zero contradictions or fabrications.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "marbury-data-desk-v1",
+    "packageVersion": "MARBURY-LEP2-2",
+    "manifestId": "AM-d717915e64b2",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "-36",
+          "181",
+          "500"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Frank Reyna",
+      "Vladimir Gonzalez"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0104,
+  "durationMs": 5546,
+  "parseError": false,
+  "ranAt": "2026-11-05T00:17:35.807Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 350",
+    "words": 727,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "1d3573fa1b7a9dfa987e8e6a941ea3197da779d91c61c61ac067cb42407d1f9d",
+    "costUsd": 0.0019
+  }
+}

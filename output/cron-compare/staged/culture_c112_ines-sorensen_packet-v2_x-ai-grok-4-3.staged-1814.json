@@ -1,0 +1,71 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "112",
+  "persona": "ines-sorensen",
+  "byline": "Ines Sorensen",
+  "bylinePopid": "POP-01211",
+  "article": "output/cron-compare/staged/culture_c112_ines-sorensen_packet-v2_x-ai-grok-4-3.staged-1814.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Marcus Webb",
+        "role": "mentioned",
+        "popid": "POP-00790"
+      },
+      {
+        "name": "Vanessa Tran-Muñoz",
+        "role": "mentioned",
+        "popid": "POP-01021"
+      },
+      {
+        "name": "Clarissa Dane",
+        "role": "mentioned",
+        "popid": "POP-00143"
+      },
+      {
+        "name": "Priya Narang",
+        "role": "mentioned",
+        "popid": "POP-00141"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Downtown"
+    ],
+    "claims": [
+      {
+        "claim": "The Voices page for this cycle keeps me accountable because it shows the real people behind the numbers. I'm still thinking about the Johnson application, where one missing document is holding up an entire family's assistance. I want to know that we're processing these applications fast enough to make a difference in people's lives. I'm pushing for faster processing because every delay feels like we're risking someone falling through the cracks.",
+        "sourceRef": "citizenVoice PRESS Marcus Webb"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-08c301294254",
+    "draftSha256": "6a6fb83526d2cd1d105d3acbf6606d2f42a38ece4562f93c4cd88efc9f0030f7",
+    "verdict": "output/cron-compare/culture_c112_ines-sorensen_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-10-23T18:13:13.762Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 300",
+      "words": 428,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "6a6fb83526d2cd1d105d3acbf6606d2f42a38ece4562f93c4cd88efc9f0030f7",
+      "costUsd": 0.0019
+    }
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-10-23T18:14:12.137Z"
+}

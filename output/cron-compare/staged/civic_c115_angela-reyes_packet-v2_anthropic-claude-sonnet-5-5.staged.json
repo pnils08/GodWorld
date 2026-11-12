@@ -1,0 +1,65 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "115",
+  "persona": "angela-reyes",
+  "byline": "Angela Reyes",
+  "bylinePopid": "POP-00156",
+  "article": "output/cron-compare/staged/civic_c115_angela-reyes_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Patricia Nolan",
+        "role": "mentioned",
+        "popid": "POP-00729"
+      },
+      {
+        "name": "Jun Leu",
+        "role": "mentioned",
+        "popid": "POP-00994"
+      },
+      {
+        "name": "Rick Walker",
+        "role": "quoted-source",
+        "popid": "POP-00198"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Temescal"
+    ],
+    "claims": [
+      {
+        "claim": "When I walk past the school now, I see the same kids I always saw — the ones who show up early to help the janitor, the ones who pass notes in the back, the ones who ask the question that stops the whole lesson because they actually want to know. The index doesn't see any of that. It sees a number. But I've watched those kids for thirty years, and I know the difference between a kid who can't learn and a kid who hasn't been given a reason to yet. That 6.3 — it doesn't tell you about the girl who reads to her little brother every night because their mom works late, or the boy who fixes the classroom door hinge because he notices it's loose. Those kids are there, all 314 of them, and they're not flat numbers. They're just waiting for someone to see them the way I got to see them.",
+        "sourceRef": "citizenVoice PRESS Patricia Nolan"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-c0ab494ef68a",
+    "draftSha256": "db77e49b97e91795c52cfc031c8d4b0007c13bd2101b0e92d63ce4f2b58a1e00",
+    "verdict": "output/cron-compare/civic_c115_angela-reyes_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-11T00:17:34.567Z",
+    "contractScore": {
+      "opened": false,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 699,
+      "short": "The opening paragraph opens with a narrative scene rather than a packet-backed school, youth-program, apprenticeship, or continuity fact.",
+      "score": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "db77e49b97e91795c52cfc031c8d4b0007c13bd2101b0e92d63ce4f2b58a1e00",
+      "costUsd": 0.0018
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-11T00:17:42.375Z"
+}

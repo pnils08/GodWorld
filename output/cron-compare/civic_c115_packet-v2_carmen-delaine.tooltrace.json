@@ -1,0 +1,31 @@
+{
+  "model": "anthropic/claude-sonnet-5.5",
+  "calls": [
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Initiative_Tracker",
+        "match": "Stabilization"
+      },
+      "resultChars": 5314,
+      "resultHead": "InitiativeID | Name | Type | Status | Budget | VoteRequirement | VoteCycle | Projection | LeadFaction | OppositionFaction | SwingVoter | Outcome | SwingVoter2 | SwingVoter2Lean | Consequences | Notes | LastUpdated | AffectedNeighborhoods | PolicyDomain | MayoralAction | MayoralActionCycle | VetoReason | OverrideVoteCycle | OverrideOutcome | ImplementationPhase | MilestoneNotes | NextScheduledAction | NextActionCycle | Proposer | ProposingOffice | ProposedCycle | Stage | StageBaseline | LastStageChangeCycle | LastWorkCycle | LastWorkSeat | PriorPhase | StageHold | BudgetTotal | BudgetRemaining "
+    },
+    {
+      "tool": "canon_search",
+      "input": {
+        "query": "West Oakland Stabilization Fund households closeout"
+      },
+      "resultChars": 910,
+      "resultHead": "4 file(s) matched on disk for 'West Oakland Stabilization Fund households closeout':\n— output/cron-compare/staged/civic_c114_carmen-delaine_packet-v2_anthropic-claude-sonnet-5-5.staged.md: # The Fund Has Moved $6.6 Million in West Oakland. The Public Record Names Two Households.\n— output/civic-voice/stabilization_fund_c114.json: \"initiative\": \"West Oakland Stabilization Fund\",\n— output/civic-voice/mayor_open_c104.json: \"fullStatement\": \"The West Oakland Stabilization Fund exists for one reason: to keep families in their homes and neighborhoods stable. Right now, 12 more households have cleared"
+    },
+    {
+      "tool": "citizen_lookup",
+      "input": {
+        "name": "Marcus Webb"
+      },
+      "resultChars": 183,
+      "resultHead": "Marcus Webb — role: OEWD Program Director; neighborhood: Downtown; born: 2000; wealth: 5; careerStage: mid-career; employerBiz: BIZ-00094; skills: Government & Civic; popid: POP-00790"
+    }
+  ],
+  "ranAt": "2026-11-10T00:15:32.979Z"
+}

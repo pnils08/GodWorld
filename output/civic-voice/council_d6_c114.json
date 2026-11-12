@@ -1,0 +1,38 @@
+{
+  "office": "council_d6",
+  "cycle": 114,
+  "speaker": "Elliott Crane",
+  "cascadeSummary": "District 6 remains focused on core municipal fundamentals, defending the baseline services that keep Piedmont Avenue stable, safe, and commercially active while celebrating the milestone of B'nai Tikvah Synagogue's seniors lunch program. Across the city docket, I am maintaining strict fiscal oversight by demanding published Month-12 reconciliation before any charter renewal moves on INIT-001, and insisting that all Chen-Vega audit conditions remain non-negotiable prerequisites for INIT-009.",
+  "statements": [
+    {
+      "statementId": "STMT-114-council_d6-001",
+      "type": "statement",
+      "topic": "Piedmont Avenue Baseline Services and Neighborhood Stability",
+      "initiative": null,
+      "decision": "Prioritize baseline municipal maintenance and public safety continuity along Piedmont Avenue while recognizing neighborhood community milestones.",
+      "quote": "When local commerce is steady and crime remains low, City Hall's primary responsibility is reliable municipal stewardship, not disruptive intervention.",
+      "fullStatement": "Piedmont Avenue continues to demonstrate the tangible benefits of baseline municipal reliability. With steady street trade, low crime rates, and community anchors like B'nai Tikvah Synagogue marking meaningful milestones with their seniors lunch program, the neighborhood shows what works when fundamentals are preserved. My priority remains ensuring prompt municipal services, clean public rights-of-way, and responsive public safety so our commercial corridors continue to flourish. District 6 does not need experimental restructuring; it requires City Hall to reliably deliver baseline municipal operations.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-114-council_d6-002",
+      "type": "vote_statement",
+      "topic": "Commercial Stabilization Audit and Milestone Safeguards",
+      "initiative": "Commercial Stabilization for Grand Lake",
+      "decision": "Condition any affirmative vote on the preservation of strict Chen-Vega audit benchmarks and milestone reporting.",
+      "quote": "Public funds require public proof, and no revitalization expenditure passes this council without enforceable audit safeguards.",
+      "fullStatement": "As the proposal for commercial stabilization advances toward a recorded full-council vote, District 6 will not support unconditioned disbursements. The Chen-Vega milestone criteria and audit controls must remain intact and legally binding throughout implementation. We cannot treat fiscal oversight as an optional amendment when authorizing multi-million dollar outlays. If verified accounting and regular progress reports are maintained in the legislation, the policy can stand on its procedural merits; if those audit controls are stripped, it will not have my support.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-114-council_d6-003",
+      "type": "vote_statement",
+      "topic": "Stabilization Fund Closeout and Charter Renewal Oversight",
+      "initiative": "West Oakland Stabilization Fund",
+      "decision": "Demand fully published Month-12 closeout records and expenditure reconciliation prior to advancing charter renewal drafting.",
+      "quote": "Charter renewals cannot outpace the ledger—we must verify the Month-12 closeout documentation before committing to extensions.",
+      "fullStatement": "While the Mayor moves execution of the approved Month-12 disbursement forward, District 6 requires comprehensive ledger reconciliation before considering charter renewal drafting. The processing records and grant administration performance must be transparently published for council examination. Procedural discipline ensures public dollars achieve their intended purpose across all districts. I will review the closeout filings on the floor, but any long-term extension of the fund must be justified by audited outcomes rather than routine administrative momentum.",
+      "trackerUpdates": {}
+    }
+  ]
+}

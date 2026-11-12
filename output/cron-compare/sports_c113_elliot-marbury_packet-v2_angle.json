@@ -1,0 +1,418 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "113",
+  "persona": "elliot-marbury",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00166",
+      "name": "Elliot Marbury",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Vladimir Gonzalez — 3 seasons on the dossier, 2039 the latest | hitter density memo, multi-year — what the line proves, on what sample, and what would disprove it",
+      "approach": "Data-desk approach: this slice is one player's season-by-season line off the dossier, the rates worked out from it, and two peers at the same job. Third person, dry, source-forward. One hard claim the numbers carry, with its sample size stated; a thin season is variance, not identity. Say which number next season would kill the claim. No quotes, no scene, no clubhouse — the memo is the proof. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "data-desk",
+        "hood": null,
+        "facts": [
+          "Vladimir Gonzalez — RF, Athletics; 3 seasons on the dossier",
+          "Vladimir Gonzalez 2039 ATH: 127 G, 506 AB, 137 H, 14 HR, 60 RBI, 49 BB, 78 SO, 15 SB, AVG .271, OBP .335, SLG .427",
+          "Vladimir Gonzalez 2038 ATH: 35 G, 120 AB, 24 H, 2 HR, 10 RBI, 20 BB, 25 SO, 7 SB, AVG .200, OBP .322, SLG .317",
+          "Vladimir Gonzalez 2037 ATH: 16 G, 61 AB, 16 H, 2 HR, 8 RBI, 4 BB, 8 SO, 0 SB, AVG .262, OBP .318, SLG .459",
+          "Vladimir Gonzalez 2039 rates (506 AB): one HR every 36.1 AB, one SO every 6.5 AB (worked from the season line)",
+          "Vladimir Gonzalez 2038 rates (120 AB): one HR every 60.0 AB, one SO every 4.8 AB (worked from the season line)",
+          "Vladimir Gonzalez 2037 rates (61 AB): one HR every 30.5 AB, one SO every 7.6 AB (worked from the season line)",
+          "Peer — Frank Reyna (RF, Athletics) 2041 ATH: 46 G, 164 AB, 52 H, 14 HR, 34 RBI, 6 BB, 18 SO, 7 SB, AVG .317, OBP .339, SLG .683",
+          "Peer — Frank Reyna 2041 rates (164 AB): one HR every 11.7 AB, one SO every 9.1 AB (worked from the season line)"
+        ],
+        "priorCycle": "DOSSIER",
+        "note": "subject is on this cycle's feed",
+        "engineHooks": [],
+        "roomIsYours": "the order the columns are read in, which season is the hinge, what the peer band makes ordinary or strange",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-data-desk",
+      "hood": null,
+      "score": null,
+      "src": "output/player_truesource_mirror.json Vladimir Gonzalez @C113",
+      "nearby": [
+        {
+          "text": "Oaks | game-result | (early-season) | Adash Stanley, Austin Reaves, AJ Dybantsa, Wilson Shepard",
+          "src": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | game-result | (early-season) | Adash Stanley, AJ Dybantsa, Austin Reaves",
+          "src": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | game-result | (early-season) | Adash Stanley, AJ Dybantsa, Austin Reaves",
+          "src": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | rumor | (off-season) | Desmond Morton, Frank Reyna, Danny Horn, Vladimir Gonzalez, JR Rosado",
+          "src": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | community-outreach | (off-season) | Darrin Davis, Rafael Montez",
+          "src": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": []
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C113",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-876f95b5eb98"
+      },
+      {
+        "t": "FACT",
+        "text": "Vladimir Gonzalez — 3 seasons on the dossier, 2039 the latest | hitter density memo, multi-year",
+        "src": "output/player_truesource_mirror.json Vladimir Gonzalez @C113",
+        "id": "F-ca19f5351fae"
+      },
+      {
+        "t": "FACT",
+        "text": "Vladimir Gonzalez's 2039 line against 2 earlier seasons and 1 peer.",
+        "src": "output/player_truesource_mirror.json Vladimir Gonzalez @C113",
+        "id": "F-6bcb0dd70462"
+      },
+      {
+        "t": "FACT",
+        "text": "Vladimir Gonzalez — RF, Athletics; 3 seasons on the dossier",
+        "src": "output/player_truesource_mirror.json Vladimir Gonzalez",
+        "id": "F-70c13639eeda"
+      },
+      {
+        "t": "FACT",
+        "text": "Vladimir Gonzalez 2039 ATH: 127 G, 506 AB, 137 H, 14 HR, 60 RBI, 49 BB, 78 SO, 15 SB, AVG .271, OBP .335, SLG .427",
+        "src": "output/player_truesource_mirror.json Vladimir Gonzalez",
+        "id": "F-7f49db22a569"
+      },
+      {
+        "t": "FACT",
+        "text": "Vladimir Gonzalez 2038 ATH: 35 G, 120 AB, 24 H, 2 HR, 10 RBI, 20 BB, 25 SO, 7 SB, AVG .200, OBP .322, SLG .317",
+        "src": "output/player_truesource_mirror.json Vladimir Gonzalez",
+        "id": "F-f39d1778d468"
+      },
+      {
+        "t": "FACT",
+        "text": "Vladimir Gonzalez 2037 ATH: 16 G, 61 AB, 16 H, 2 HR, 8 RBI, 4 BB, 8 SO, 0 SB, AVG .262, OBP .318, SLG .459",
+        "src": "output/player_truesource_mirror.json Vladimir Gonzalez",
+        "id": "F-7b5fb6d03f02"
+      },
+      {
+        "t": "FACT",
+        "text": "Vladimir Gonzalez 2039 rates (506 AB): one HR every 36.1 AB, one SO every 6.5 AB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Vladimir Gonzalez",
+        "id": "F-6450675e6a4d"
+      },
+      {
+        "t": "FACT",
+        "text": "Vladimir Gonzalez 2038 rates (120 AB): one HR every 60.0 AB, one SO every 4.8 AB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Vladimir Gonzalez",
+        "id": "F-23aaf2b0264b"
+      },
+      {
+        "t": "FACT",
+        "text": "Vladimir Gonzalez 2037 rates (61 AB): one HR every 30.5 AB, one SO every 7.6 AB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Vladimir Gonzalez",
+        "id": "F-15259dba2c1a"
+      },
+      {
+        "t": "FACT",
+        "text": "Peer — Frank Reyna (RF, Athletics) 2041 ATH: 46 G, 164 AB, 52 H, 14 HR, 34 RBI, 6 BB, 18 SO, 7 SB, AVG .317, OBP .339, SLG .683",
+        "src": "output/player_truesource_mirror.json Frank Reyna",
+        "id": "F-efceafb7b9f2"
+      },
+      {
+        "t": "FACT",
+        "text": "Peer — Frank Reyna 2041 rates (164 AB): one HR every 11.7 AB, one SO every 9.1 AB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Frank Reyna",
+        "id": "F-fe269157c110"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "No target candidate was supplied. Return targets as an empty array; do not invent a person or identifier. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "records",
+    "candidates": [],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Elliot Marbury",
+    "popid": "POP-00166"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-data-desk",
+      "angle": "Vladimir Gonzalez — 3 seasons on the dossier, 2039 the latest | hitter density memo, multi-year — what the line proves, on what sample, and what would disprove it",
+      "label": "Vladimir Gonzalez — 3 seasons on the dossier, 2039 the latest | hitter density memo, multi-year",
+      "hookLine": "Vladimir Gonzalez's 2039 line against 2 earlier seasons and 1 peer.",
+      "hood": null,
+      "citizens": [
+        "Vladimir Gonzalez (POP-00598)"
+      ],
+      "popids": [
+        "POP-00598"
+      ],
+      "ref": "output/player_truesource_mirror.json Vladimir Gonzalez @C113",
+      "cycle": 113
+    },
+    "approach": "Data-desk approach: this slice is one player's season-by-season line off the dossier, the rates worked out from it, and two peers at the same job. Third person, dry, source-forward. One hard claim the numbers carry, with its sample size stated; a thin season is variance, not identity. Say which number next season would kill the claim. No quotes, no scene, no clubhouse — the memo is the proof. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "DATA-DESK-SLICE-1",
+    "kind": "beat-data-desk",
+    "seat": {
+      "slug": "elliot-marbury",
+      "name": "Elliot Marbury",
+      "popid": "POP-00166",
+      "desk": "sports",
+      "domain": "data-desk",
+      "builder": "buildMarburySlice.js"
+    },
+    "hood": null,
+    "pulse": {
+      "className": "beat-data-desk",
+      "score": 100,
+      "label": "Vladimir Gonzalez — 3 seasons on the dossier, 2039 the latest | hitter density memo, multi-year",
+      "hood": null,
+      "source": "output/player_truesource_mirror.json Vladimir Gonzalez @C113"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "Vladimir Gonzalez — 3 seasons on the dossier, 2039 the latest | hitter density memo, multi-year — what the line proves, on what sample, and what would disprove it",
+      "hookLine": "Vladimir Gonzalez's 2039 line against 2 earlier seasons and 1 peer.",
+      "anchorFacts": [
+        "Vladimir Gonzalez — RF, Athletics; 3 seasons on the dossier",
+        "Vladimir Gonzalez 2039 ATH: 127 G, 506 AB, 137 H, 14 HR, 60 RBI, 49 BB, 78 SO, 15 SB, AVG .271, OBP .335, SLG .427",
+        "Vladimir Gonzalez 2038 ATH: 35 G, 120 AB, 24 H, 2 HR, 10 RBI, 20 BB, 25 SO, 7 SB, AVG .200, OBP .322, SLG .317",
+        "Vladimir Gonzalez 2037 ATH: 16 G, 61 AB, 16 H, 2 HR, 8 RBI, 4 BB, 8 SO, 0 SB, AVG .262, OBP .318, SLG .459",
+        "Vladimir Gonzalez 2039 rates (506 AB): one HR every 36.1 AB, one SO every 6.5 AB (worked from the season line)",
+        "Vladimir Gonzalez 2038 rates (120 AB): one HR every 60.0 AB, one SO every 4.8 AB (worked from the season line)",
+        "Vladimir Gonzalez 2037 rates (61 AB): one HR every 30.5 AB, one SO every 7.6 AB (worked from the season line)",
+        "Peer — Frank Reyna (RF, Athletics) 2041 ATH: 46 G, 164 AB, 52 H, 14 HR, 34 RBI, 6 BB, 18 SO, 7 SB, AVG .317, OBP .339, SLG .683",
+        "Peer — Frank Reyna 2041 rates (164 AB): one HR every 11.7 AB, one SO every 9.1 AB (worked from the season line)"
+      ],
+      "evidence": [
+        {
+          "text": "Vladimir Gonzalez — RF, Athletics; 3 seasons on the dossier",
+          "src": "output/player_truesource_mirror.json Vladimir Gonzalez"
+        },
+        {
+          "text": "Vladimir Gonzalez 2039 ATH: 127 G, 506 AB, 137 H, 14 HR, 60 RBI, 49 BB, 78 SO, 15 SB, AVG .271, OBP .335, SLG .427",
+          "src": "output/player_truesource_mirror.json Vladimir Gonzalez"
+        },
+        {
+          "text": "Vladimir Gonzalez 2038 ATH: 35 G, 120 AB, 24 H, 2 HR, 10 RBI, 20 BB, 25 SO, 7 SB, AVG .200, OBP .322, SLG .317",
+          "src": "output/player_truesource_mirror.json Vladimir Gonzalez"
+        },
+        {
+          "text": "Vladimir Gonzalez 2037 ATH: 16 G, 61 AB, 16 H, 2 HR, 8 RBI, 4 BB, 8 SO, 0 SB, AVG .262, OBP .318, SLG .459",
+          "src": "output/player_truesource_mirror.json Vladimir Gonzalez"
+        },
+        {
+          "text": "Vladimir Gonzalez 2039 rates (506 AB): one HR every 36.1 AB, one SO every 6.5 AB (worked from the season line)",
+          "src": "output/player_truesource_mirror.json Vladimir Gonzalez"
+        },
+        {
+          "text": "Vladimir Gonzalez 2038 rates (120 AB): one HR every 60.0 AB, one SO every 4.8 AB (worked from the season line)",
+          "src": "output/player_truesource_mirror.json Vladimir Gonzalez"
+        },
+        {
+          "text": "Vladimir Gonzalez 2037 rates (61 AB): one HR every 30.5 AB, one SO every 7.6 AB (worked from the season line)",
+          "src": "output/player_truesource_mirror.json Vladimir Gonzalez"
+        },
+        {
+          "text": "Peer — Frank Reyna (RF, Athletics) 2041 ATH: 46 G, 164 AB, 52 H, 14 HR, 34 RBI, 6 BB, 18 SO, 7 SB, AVG .317, OBP .339, SLG .683",
+          "src": "output/player_truesource_mirror.json Frank Reyna"
+        },
+        {
+          "text": "Peer — Frank Reyna 2041 rates (164 AB): one HR every 11.7 AB, one SO every 9.1 AB (worked from the season line)",
+          "src": "output/player_truesource_mirror.json Frank Reyna"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": {
+        "state": "DOSSIER",
+        "vs": null
+      },
+      "hooks": [],
+      "note": "subject is on this cycle's feed",
+      "pageVoices": [],
+      "roomIsYours": "the order the columns are read in, which season is the hinge, what the peer band makes ordinary or strange"
+    },
+    "citizens": [
+      {
+        "popid": "POP-00598",
+        "name": "Vladimir Gonzalez",
+        "role": "RF, Athletics",
+        "neighborhood": null,
+        "business": null,
+        "profile": "Vladimir Gonzalez — RF, Athletics",
+        "why": "dossier on file (player_truesource_mirror)"
+      }
+    ],
+    "pointers": [
+      "output/player_truesource_mirror.json Vladimir Gonzalez @C113",
+      "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Elliot Marbury",
+    "popid": "POP-00166",
+    "text": "The dossier gives me three seasons of Vladimir Gonzalez and one peer season from Frank Reyna, and the order you read them in changes the story. Read 2037 first — 16 games, 61 at-bats, a home run every 30.5 at-bats, a strikeout every 7.6 — and you see a young corner outfielder with pop and a swing that misses. Read 2038 next — 35 games, 120 at-bats, two home runs, one every 60 at-bats, a strikeout every 4.8 — and the pop looks like it vanished while the whiff rate got worse. Then read 2039, the full season, 127 games, 506 at-bats, 14 home runs, one every 36.1 at-bats, a strikeout every 6.5 — and the power is back to roughly where it started, the strikeout rate improved, and the batting averag",
+    "plan": {
+      "chase": "The dossier gives me three seasons of Vladimir Gonzalez and one peer season from Frank Reyna, and the order you read them in changes the story. Read 2037 first — 16 games, 61 at-bats, a home run every 30.5 at-bats, a strikeout every 7.6 — and you see a young corner outfielder with pop and a swing that misses. Read 2038 next — 35 games, 120 at-bats, two home runs, one every 60 at-bats, a strikeout every 4.8 — and the pop looks like it vanished while the whiff rate got worse. Then read 2039, the full season, 127 games, 506 at-bats, 14 home runs, one every 36.1 at-bats, a strikeout every 6.5 — and the power is back to roughly where it started, the strikeout rate improved, and the batting averag",
+      "focus": "Vladimir Gonzalez's 2039 full-season line as the reliable estimate of his true power and contact rates, against the thin-sample 2038 season and the peer band set by Frank Reyna's 2041.",
+      "why": "The 2038 season is the trap — 120 at-bats is too small to carry meaning, but it is the season that would get cited in a roster debate. The 2039 season, at 506 at-bats, is the evidence. The peer comparison keeps the claim honest: it does not overstate Gonzalez.",
+      "checks": [
+        "F-ca19f5351fae",
+        "F-6bcb0dd70462",
+        "F-70c13639eeda",
+        "F-7f49db22a569",
+        "F-f39d1778d468",
+        "F-7b5fb6d03f02",
+        "F-6450675e6a4d",
+        "F-23aaf2b0264b"
+      ],
+      "targets": [],
+      "interpretation": "The 2038 season is the hinge. It is the smallest sample and the worst line. The 2039 season, on a full-year sample, restores the power rate to roughly the 2037 level and improves the strikeout rate. The peer band from Reyna shows what elite production at the position looks like — and Gonzalez is not that. He is a solid everyday corner outfielder, not a star. The claim is that the 2039 line is the identity, and the 2038 line is noise.",
+      "unverifiedLead": [
+        "Whether Gonzalez's 2040 season, when it arrives, keeps the home run rate near one per 36 at-bats or drifts toward the 2038 rate — that is the number that would confirm or kill the claim."
+      ],
+      "closeQuestion": "Does the 2040 season, on a full-year sample, hold the home run rate above one per 50 at-bats and the strikeout rate below one per 5?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Oaks | game-result | (early-season) | Adash Stanley, Austin Reaves, AJ Dybantsa, Wilson Shepard",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01023",
+        "POP-01027",
+        "POP-01024",
+        "POP-01022"
+      ]
+    },
+    {
+      "label": "Oaks | game-result | (early-season) | Adash Stanley, AJ Dybantsa, Austin Reaves",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01023",
+        "POP-01024",
+        "POP-01027"
+      ]
+    },
+    {
+      "label": "Oaks | game-result | (early-season) | Adash Stanley, AJ Dybantsa, Austin Reaves",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01023",
+        "POP-01024",
+        "POP-01027"
+      ]
+    },
+    {
+      "label": "A's | rumor | (off-season) | Desmond Morton, Frank Reyna, Danny Horn, Vladimir Gonzalez, JR Rosado",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00051",
+        "POP-00079",
+        "POP-00022",
+        "POP-00598",
+        "POP-00054"
+      ]
+    },
+    {
+      "label": "A's | community-outreach | (off-season) | Darrin Davis, Rafael Montez",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00021",
+        "POP-00136"
+      ]
+    }
+  ],
+  "laneEntries": 9,
+  "angleCapHits": 0,
+  "ranAt": "2026-10-28T11:16:36.261Z"
+}

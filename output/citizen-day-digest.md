@@ -1,51 +1,45 @@
 # Today in Oakland — told by its people
 
-A daily digest of citizen life over the last 24 hours, assembled from the citizens' own reflections and life events on record (through Cycle 113). Everything below is sourced from the world ledger — nothing is invented.
+A daily digest of citizen life over the last 24 hours, assembled from the citizens' own reflections and life events on record (through Cycle 115). Everything below is sourced from the world ledger — nothing is invented.
 
 ## The big moments
 
-- **Shai Diaz** (Fruitvale) — Closed out a problem at Mayday Movers that had been open since before they started.
-- **Jori Clame** (Laurel) — Left Schoolgate Cafe on Friday with a thank-you from the person whose job they covered all week.
-- **Bryce Lee** (Temescal) — A manager at Eastside Family Market stopped by their desk to say the last stretch of work had not gone unnoticed.
-- **Valentina Campbell** (Jack London) — Was asked to run the morning meeting at Green & Gold Tavern while the lead was out.
-- **Leanne Wu** (Rockridge) — A client thanked them by name in front of the whole floor at Oakland Housing Authority.
-- **Dexter Patel** (Downtown) — The project they built at Oakland Tech Collective was handed to someone else without a word.
-- **Saniya Washington** (Lake Merritt) — A colleague at West Oakland Community Center said the team runs smoother on their days.
-- **Ridley Holt** (Lake Merritt) — Covered for a coworker at West Oakland Community Center for a week and heard nothing about it.
-- **Devin Castellanos** (Dimond) — Finished the week at Oakland Police Department with the hardest account on the floor squared away.
-- **Kaila Braun** (Fruitvale) — An email at Alameda County Courts about priorities did not mention their team.
+- **Tariq Harris** (Chinatown) — Trained the new person at Grand Lake Books and heard afterward it was the best onboarding in years.
+- **Xavier Davis** (Downtown) — Someone at Oakland Housing Authority is being groomed for the next step up, and it is not them.
+- **Priyanka Raman** (West Oakland) — A supervisor at Oakland Tech Collective asked what they want next, and seemed to mean it.
+- **Rupert Ochoa** (Fruitvale) — A client at West Oakland Community Center asked for someone more senior.
+- **Isaac Renteria** (Fruitvale) — A coworker at Baylight Construction Authority said the new hires keep getting pointed their way for answers.
+- **Chandni Kessler** (Laurel) — Covered for a coworker at Baylight Construction Authority for a week and heard nothing about it.
+- **Alexa Ward** (West Oakland) — A supervisor at Baylight Construction Authority corrected them in front of a customer.
+- **Tara Ellison** (Rockridge) — Was left off the invite at Bay Tribune for the meeting about their own account.
+- **Thuy Pham-Larsen** (Brooklyn) — Got pulled into a bigger conversation at Oakland City Schools than the job description covers.
+- **Tariq Mansouri** (West Oakland) — Someone from another team at Oakland Hospital asked if they would ever consider moving over.
 
 ## The people, in their own words
 
 ### P Slayer — Journalist, Fan Columnist - Sports — West Oakland
 
-> graded: 3/4 — The closing ends on a flat rhetorical question rather than a dare, confession, or live-friction update.
+> It's the sandwich board outside the corner store—the one that's been leaning crooked for a week now, advertising "FRESH COLD DRINKS" in letters that are peeling. Every time I walk past it, I straighten it. Every time, it's crooked again by the next morning. I know it's not about the board.
 
-> filed: I sat at the counter of The Railcar last night, the one by the old loading docks where the winter wi
+> graded: 3/3 — nothing fell short
 
-### Maria Keen — Journalist, Cultural Liason — Lake Merritt
+### Omar Amici — Construction laborer — Uptown
 
-> graded: 4/4 — nothing fell short
+> To be honest, the changes in Uptown have me feeling a bit uneasy. The streets are busier than ever, and it seems like every other place is a for-rent sign these days. I've lived he
 
-> filed: Three Programs, One Rent Bill: Fruitvale Counts What Holds
+### Clarissa Dane — DISTRICT ATTORNEY — West Oakland
 
-### Daphne Stafford — Home Health Aide — West Oakland
+> Isaac, I've spent enough time walking these blocks to know that the empty storefronts aren't just eyesores — they're a signal. This initiative keeps the landlords who held the line
 
-> Hey, Miguel. Good to see you. How’s everything going with you and the family? Ha, that upstairs drip sounds like the same one we had at our old place—drove me crazy until we finall *(talking with Miguel Joson)*
+### Benji Dillon — Pitcher, Oakland A's Legend — Rockridge
 
-> I'm 23rd out of 24 on the leaderboard, and I only got 5 points last week, so I guess my struggles didn't change the standings much. I mean, there were people above and below me who
+> When Vinnie made it official, I wasn't at the press conference. I was at home, and Rick asked me why I was quiet at dinner. That's the thing about the last of the old guard steppin
 
-### Lila Mezran — Journalist, Health Desk — Piedmont Ave
+*Around the neighborhood: put on their good suit for the Sunday service because some traditions still matter*
 
-> graded: 4/4 — nothing fell short
+### Adash Stanley — PG / The Oaks — Downtown
 
-> filed: Chinatown's 140 Sick Are Mostly at Home, and Home Is Doing the Work
-
-*Around the neighborhood: handled responsibilities that didn't make the news*
-
-### Miguel Joson — Plumber — Chinatown
-
-> Daphne, good to see you too. The family’s doing alright—kids keep busy, and the wife’s got her hands full with her own projects. Me, I’m just trying to keep the house in one piece *(talking with Daphne Stafford)*
+> The energy around the Oaks is electric. I've felt it building, and it's like the whole city is waking up with the team. When we're playing like we are now, it's clear the fans are
 
 ---
-*Assembled 2026-11-01 from Reflection_Intake (21 reflections, 15 citizens) and LifeHistory_Log (80 life events) over the last 1 day by scripts/buildCitizenWeekDigest.js --daily. Read-only; no content generated.*
+*Assembled 2026-11-12 from Reflection_Intake (39 reflections, 30 citizens) and LifeHistory_Log (85 life events) over the last 1 day by scripts/buildCitizenWeekDigest.js --daily. Read-only; no content generated.*

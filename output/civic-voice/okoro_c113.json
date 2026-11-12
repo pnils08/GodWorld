@@ -1,0 +1,58 @@
+{
+  "office": "okoro",
+  "cycle": 113,
+  "speaker": "Brenda Okoro",
+  "cascadeSummary": "Month-twelve disbursement approved, keeping the West Oakland Stabilization Fund ahead of displacement — $5.6M cumulative across twelve months of steady checks. I back the Grand Lake committee vote with milestones and audits, and I'm naming West Oakland's improvement as community-led work. Ivy Hill gets a direct answer: the revitalization pairing is filed and sequenced first, and I'm committing operational attention to the street-level decline there before it becomes a crisis.",
+  "statements": [
+    {
+      "statementId": "STMT-113-okoro-001",
+      "type": "operational_status",
+      "topic": "West Oakland Stabilization Fund month-twelve disbursement",
+      "initiative": "INIT-001",
+      "decision": "Approved the month-twelve disbursement, maintaining the 23-day processing standard and directing charter renewal language that keeps the Fund's scope fixed on the long-tenure West Oakland cohort.",
+      "quote": "Twelve months, twelve checks, $5.6 million — and West Oakland's oldest residents are still in their homes. That's the race against displacement, and we're still ahead.",
+      "fullStatement": "Month-twelve is in. $400,000 disbursed to the long-tenure West Oakland cohort the charter named — the remnant priced out as the flats built out. We've held the 23-day processing standard for four consecutive months, and cumulative disbursement now sits at $5.6 million. The Mayor says five million kept 47 families in their homes — that's true, and month-twelve adds to it. The engine flags West Oakland's mood as slipping and storefronts quieter. I hear that. The Fund has never been hood-wide relief — it's targeted at the cohort the boom priced out — but when the neighborhood signal softens, I read that as a sign to renew charter language, not to widen scope. We approved final disbursement and directed charter renewal this cycle. The work continues because the displacement pressure hasn't stopped.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-113-okoro-002",
+      "type": "cascade_response",
+      "topic": "Grand Lake commercial stabilization committee vote",
+      "initiative": "INIT-009",
+      "decision": "Full support for committee passage with milestone reporting and audit criteria attached.",
+      "quote": "Grand Lake's quiet engine gets fuel with strings attached — milestones and audits are how we know the $2.5 million lands where it's supposed to.",
+      "fullStatement": "The committee hearing is this cycle, and I'm supporting passage with the conditions Councilmembers Chen and Vega set: mandatory milestone reporting and audit protocols. $2.5 million is real money, and real money comes with real accountability. Grand Lake's commercial corridor has been the quiet engine of that neighborhood for decades — small businesses holding on without fanfare. This funding is fuel, but it's fuel with a gauge. We'll know exactly how much is spent, where it lands, and what it produces. That's how Oakland keeps its word.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-113-okoro-003",
+      "type": "field_observation",
+      "topic": "Ivy Hill decline and revitalization sequencing",
+      "initiative": "INIT-011",
+      "decision": "Supporting the paired Ivy Hill/Dimond revitalization filing with Ivy Hill priority sequencing, and committing field-visit attention to Ivy Hill's street-level decline this cycle.",
+      "quote": "Ivy Hill is hurting now — mood soured, street trade struggling. We answer with action, not studies — and I'm putting my feet on the ground there this cycle.",
+      "fullStatement": "The engine flags Ivy Hill: mood soured, street trade struggling, crime low. Low crime but declining daily life — that's a neighborhood that isn't being seen. The Mayor directed paired revitalization bills with Ivy Hill sequenced first, and I'm backing that order because Ivy Hill's hurt is current, not projected. Dimond's steady strength is real and worth protecting — but Ivy Hill needs attention today. I'm committing a field visit this cycle to hear directly from the people there, because the numbers don't tell me which storefronts are quietest or which block feels most abandoned. The bill answers with action; my visit makes sure that action lands where the need is.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-113-okoro-004",
+      "type": "cascade_response",
+      "topic": "West Oakland improvement recognition",
+      "initiative": "INIT-001",
+      "decision": "Accepting the Mayor's recognition of the housing unit for West Oakland's visible improvement, and redirecting credit to the community organizations doing block-level engagement.",
+      "quote": "The Mayor names our housing unit for West Oakland's improvement — I'll take the recognition, but the credit belongs to the block associations and tenant leaders who did the daily work.",
+      "fullStatement": "The Mayor's naming my housing unit for West Oakland's visible improvement — mood up, street trade steady. I'll accept that recognition on behalf of the team, but I want to be precise about whose work this is. The Stabilization Fund kept 47 families in their homes — that's our checks. But the neighborhood feeling better — that's the block associations, the tenant leaders, the small-business owners who stayed and organized. City Hall didn't deliver that momentum; the community did. My unit's job is to make sure the city doesn't get in the way of that momentum and that the Fund keeps moving at 23 days. We're doing that. The credit goes to West Oakland.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-113-okoro-005",
+      "type": "operational_status",
+      "topic": "West Oakland Stabilization Fund charter renewal",
+      "initiative": "INIT-001",
+      "decision": "Directed charter renewal language that keeps the Fund's scope fixed on the long-tenure West Oakland cohort, with district-equity tracking maintained through the renewal process.",
+      "quote": "Charter renewal isn't a blank check — it's a recommitment to the exact cohort the Fund was created to serve.",
+      "fullStatement": "With month-twelve approved, charter renewal is now the operational focus. I'm directing language that holds the line on scope: stabilization grants for the long-tenure West Oakland residents priced out as the flats built out — not hood-wide relief, not Downtown, not a general anti-displacement fund. The renewal also carries forward district-equity tracking, because a Fund that drifts from its district is a Fund that's lost its charter. We've disbursed $5.6 million across twelve months at a 23-day processing standard. Renewal keeps that standard and that scope. That's the commitment.",
+      "trackerUpdates": {}
+    }
+  ]
+}

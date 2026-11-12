@@ -1,0 +1,547 @@
+[
+  {
+    "pop": "POP-00540",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00540\",\"name\":\"Jade Orion\",\"role\":\"Musician\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Celeste Tran\",\"question\":\"What's behind Jade Orion's rising fame and how is it impacting the community? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-trends\",\"hood\":\"Lake Merritt\",\"focus\":\"The movement of people into West Oakland and other neighborhoods, and the rising fame of cultural figures like Jade Orion, Tara Ellison, and Vinnie Keane.\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Jade Orion — Musician — Lake Merritt\",\"evidence\":[{\"id\":\"EV-c8efef121c\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\",\"text\":\"Jade Orion — gained 1 mention this cycle (18 total), viral. The trend is the story; the mood is yours.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C112\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-7cd6ffd2aeb3\"},{\"t\":\"FACT\",\"text\":\"Jade Orion gained 1 mention this cycle (18 total); West Oakland moves the most\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\",\"id\":\"F-6c5b8442e00f\"},{\"t\":\"FACT\",\"text\":\"Jade Orion — gained 1 mention this cycle (18 total), viral. The trend is the story; the mood is yours.\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\",\"id\":\"F-82f725f37ad8\"},{\"t\":\"FACT\",\"text\":\"Jade Orion (musician), Arts — gained 1 mention this cycle (18 total), viral, fame 104\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112 vs output/beats/prev/Cultural_Ledger.jsonl @C111\",\"id\":\"F-505fb99a62ae\"},{\"t\":\"FACT\",\"text\":\"Tara Ellison (journalist), Media — gained 1 mention this cycle (12 total), surging, fame 68\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112 vs output/beats/prev/Cultural_Ledger.jsonl @C111\",\"id\":\"F-153faa10f220\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane (A's player), Sports — gained 1 mention this cycle (5 total), surging, fame 31\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112 vs output/beats/prev/Cultural_Ledger.jsonl @C111\",\"id\":\"F-167b13f87df5\"},{\"t\":\"FACT\",\"text\":\"Movement vs C111: West Oakland +18 people, Jack London +12 people, Fruitvale +7 people, Adams Point +7 people, Grand Lake +7 people\",\"src\":\"output/beats/prev/Neighborhood_Demographics.jsonl vs current @C112\",\"id\":\"F-5228544f2479\"},{\"t\":\"FACT\",\"text\":\"Jade Orion — Musician — Lake Merritt\",\"src\":\"Simulation_Ledger profile for POP-00540\",\"id\":\"F-301232ed83b0\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00540",
+        "name": "Jade Orion",
+        "role": "Musician",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Celeste Tran",
+        "question": "What's behind Jade Orion's rising fame and how is it impacting the community? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-trends",
+        "hood": "Lake Merritt",
+        "focus": "The movement of people into West Oakland and other neighborhoods, and the rising fame of cultural figures like Jade Orion, Tara Ellison, and Vinnie Keane.",
+        "src": "output/beats/Cultural_Ledger.jsonl @C112"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Jade Orion — Musician — Lake Merritt",
+        "evidence": [
+          {
+            "id": "EV-c8efef121c",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "text": "Jade Orion — gained 1 mention this cycle (18 total), viral. The trend is the story; the mood is yours."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C112",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-7cd6ffd2aeb3"
+        },
+        {
+          "t": "FACT",
+          "text": "Jade Orion gained 1 mention this cycle (18 total); West Oakland moves the most",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112",
+          "id": "F-6c5b8442e00f"
+        },
+        {
+          "t": "FACT",
+          "text": "Jade Orion — gained 1 mention this cycle (18 total), viral. The trend is the story; the mood is yours.",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112",
+          "id": "F-82f725f37ad8"
+        },
+        {
+          "t": "FACT",
+          "text": "Jade Orion (musician), Arts — gained 1 mention this cycle (18 total), viral, fame 104",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112 vs output/beats/prev/Cultural_Ledger.jsonl @C111",
+          "id": "F-505fb99a62ae"
+        },
+        {
+          "t": "FACT",
+          "text": "Tara Ellison (journalist), Media — gained 1 mention this cycle (12 total), surging, fame 68",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112 vs output/beats/prev/Cultural_Ledger.jsonl @C111",
+          "id": "F-153faa10f220"
+        },
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane (A's player), Sports — gained 1 mention this cycle (5 total), surging, fame 31",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112 vs output/beats/prev/Cultural_Ledger.jsonl @C111",
+          "id": "F-167b13f87df5"
+        },
+        {
+          "t": "FACT",
+          "text": "Movement vs C111: West Oakland +18 people, Jack London +12 people, Fruitvale +7 people, Adams Point +7 people, Grand Lake +7 people",
+          "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C112",
+          "id": "F-5228544f2479"
+        },
+        {
+          "t": "FACT",
+          "text": "Jade Orion — Musician — Lake Merritt",
+          "src": "Simulation_Ledger profile for POP-00540",
+          "id": "F-301232ed83b0"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00546",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00546\",\"name\":\"Tara Ellison\",\"role\":\"Journalist\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Celeste Tran\",\"question\":\"How is Tara Ellison's work as a journalist reflecting or influencing the trends in Oakland? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-trends\",\"hood\":\"Lake Merritt\",\"focus\":\"The movement of people into West Oakland and other neighborhoods, and the rising fame of cultural figures like Jade Orion, Tara Ellison, and Vinnie Keane.\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Tara Ellison — Journalist — Rockridge\",\"evidence\":[{\"id\":\"EV-e304bce091\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\",\"text\":\"Jade Orion — gained 1 mention this cycle (18 total), viral. The trend is the story; the mood is yours.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C112\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-7cd6ffd2aeb3\"},{\"t\":\"FACT\",\"text\":\"Jade Orion gained 1 mention this cycle (18 total); West Oakland moves the most\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\",\"id\":\"F-6c5b8442e00f\"},{\"t\":\"FACT\",\"text\":\"Jade Orion — gained 1 mention this cycle (18 total), viral. The trend is the story; the mood is yours.\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\",\"id\":\"F-82f725f37ad8\"},{\"t\":\"FACT\",\"text\":\"Jade Orion (musician), Arts — gained 1 mention this cycle (18 total), viral, fame 104\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112 vs output/beats/prev/Cultural_Ledger.jsonl @C111\",\"id\":\"F-505fb99a62ae\"},{\"t\":\"FACT\",\"text\":\"Tara Ellison (journalist), Media — gained 1 mention this cycle (12 total), surging, fame 68\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112 vs output/beats/prev/Cultural_Ledger.jsonl @C111\",\"id\":\"F-153faa10f220\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane (A's player), Sports — gained 1 mention this cycle (5 total), surging, fame 31\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112 vs output/beats/prev/Cultural_Ledger.jsonl @C111\",\"id\":\"F-167b13f87df5\"},{\"t\":\"FACT\",\"text\":\"Movement vs C111: West Oakland +18 people, Jack London +12 people, Fruitvale +7 people, Adams Point +7 people, Grand Lake +7 people\",\"src\":\"output/beats/prev/Neighborhood_Demographics.jsonl vs current @C112\",\"id\":\"F-5228544f2479\"},{\"t\":\"FACT\",\"text\":\"Tara Ellison — Journalist — Rockridge\",\"src\":\"Simulation_Ledger profile for POP-00546\",\"id\":\"F-2b5f06ca9054\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00546",
+        "name": "Tara Ellison",
+        "role": "Journalist",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Celeste Tran",
+        "question": "How is Tara Ellison's work as a journalist reflecting or influencing the trends in Oakland? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-trends",
+        "hood": "Lake Merritt",
+        "focus": "The movement of people into West Oakland and other neighborhoods, and the rising fame of cultural figures like Jade Orion, Tara Ellison, and Vinnie Keane.",
+        "src": "output/beats/Cultural_Ledger.jsonl @C112"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Tara Ellison — Journalist — Rockridge",
+        "evidence": [
+          {
+            "id": "EV-e304bce091",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "text": "Jade Orion — gained 1 mention this cycle (18 total), viral. The trend is the story; the mood is yours."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C112",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-7cd6ffd2aeb3"
+        },
+        {
+          "t": "FACT",
+          "text": "Jade Orion gained 1 mention this cycle (18 total); West Oakland moves the most",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112",
+          "id": "F-6c5b8442e00f"
+        },
+        {
+          "t": "FACT",
+          "text": "Jade Orion — gained 1 mention this cycle (18 total), viral. The trend is the story; the mood is yours.",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112",
+          "id": "F-82f725f37ad8"
+        },
+        {
+          "t": "FACT",
+          "text": "Jade Orion (musician), Arts — gained 1 mention this cycle (18 total), viral, fame 104",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112 vs output/beats/prev/Cultural_Ledger.jsonl @C111",
+          "id": "F-505fb99a62ae"
+        },
+        {
+          "t": "FACT",
+          "text": "Tara Ellison (journalist), Media — gained 1 mention this cycle (12 total), surging, fame 68",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112 vs output/beats/prev/Cultural_Ledger.jsonl @C111",
+          "id": "F-153faa10f220"
+        },
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane (A's player), Sports — gained 1 mention this cycle (5 total), surging, fame 31",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112 vs output/beats/prev/Cultural_Ledger.jsonl @C111",
+          "id": "F-167b13f87df5"
+        },
+        {
+          "t": "FACT",
+          "text": "Movement vs C111: West Oakland +18 people, Jack London +12 people, Fruitvale +7 people, Adams Point +7 people, Grand Lake +7 people",
+          "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C112",
+          "id": "F-5228544f2479"
+        },
+        {
+          "t": "FACT",
+          "text": "Tara Ellison — Journalist — Rockridge",
+          "src": "Simulation_Ledger profile for POP-00546",
+          "id": "F-2b5f06ca9054"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00001",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00001\",\"name\":\"Vinnie Keane\",\"role\":\"Designated Hitter, Oakland A's Legend\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Celeste Tran\",\"question\":\"What's Vinnie Keane's perspective on the A's and the community's response to it? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-trends\",\"hood\":\"Lake Merritt\",\"focus\":\"The movement of people into West Oakland and other neighborhoods, and the rising fame of cultural figures like Jade Orion, Tara Ellison, and Vinnie Keane.\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake\",\"evidence\":[{\"id\":\"EV-f9b3f6cac9\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\",\"text\":\"Jade Orion — gained 1 mention this cycle (18 total), viral. The trend is the story; the mood is yours.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C112\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-7cd6ffd2aeb3\"},{\"t\":\"FACT\",\"text\":\"Jade Orion gained 1 mention this cycle (18 total); West Oakland moves the most\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\",\"id\":\"F-6c5b8442e00f\"},{\"t\":\"FACT\",\"text\":\"Jade Orion — gained 1 mention this cycle (18 total), viral. The trend is the story; the mood is yours.\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\",\"id\":\"F-82f725f37ad8\"},{\"t\":\"FACT\",\"text\":\"Jade Orion (musician), Arts — gained 1 mention this cycle (18 total), viral, fame 104\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112 vs output/beats/prev/Cultural_Ledger.jsonl @C111\",\"id\":\"F-505fb99a62ae\"},{\"t\":\"FACT\",\"text\":\"Tara Ellison (journalist), Media — gained 1 mention this cycle (12 total), surging, fame 68\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112 vs output/beats/prev/Cultural_Ledger.jsonl @C111\",\"id\":\"F-153faa10f220\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane (A's player), Sports — gained 1 mention this cycle (5 total), surging, fame 31\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112 vs output/beats/prev/Cultural_Ledger.jsonl @C111\",\"id\":\"F-167b13f87df5\"},{\"t\":\"FACT\",\"text\":\"Movement vs C111: West Oakland +18 people, Jack London +12 people, Fruitvale +7 people, Adams Point +7 people, Grand Lake +7 people\",\"src\":\"output/beats/prev/Neighborhood_Demographics.jsonl vs current @C112\",\"id\":\"F-5228544f2479\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake\",\"src\":\"Simulation_Ledger profile for POP-00001\",\"id\":\"F-2b3e2e3d075f\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00001",
+        "name": "Vinnie Keane",
+        "role": "Designated Hitter, Oakland A's Legend",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Celeste Tran",
+        "question": "What's Vinnie Keane's perspective on the A's and the community's response to it? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-trends",
+        "hood": "Lake Merritt",
+        "focus": "The movement of people into West Oakland and other neighborhoods, and the rising fame of cultural figures like Jade Orion, Tara Ellison, and Vinnie Keane.",
+        "src": "output/beats/Cultural_Ledger.jsonl @C112"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+        "evidence": [
+          {
+            "id": "EV-f9b3f6cac9",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "text": "Jade Orion — gained 1 mention this cycle (18 total), viral. The trend is the story; the mood is yours."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C112",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-7cd6ffd2aeb3"
+        },
+        {
+          "t": "FACT",
+          "text": "Jade Orion gained 1 mention this cycle (18 total); West Oakland moves the most",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112",
+          "id": "F-6c5b8442e00f"
+        },
+        {
+          "t": "FACT",
+          "text": "Jade Orion — gained 1 mention this cycle (18 total), viral. The trend is the story; the mood is yours.",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112",
+          "id": "F-82f725f37ad8"
+        },
+        {
+          "t": "FACT",
+          "text": "Jade Orion (musician), Arts — gained 1 mention this cycle (18 total), viral, fame 104",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112 vs output/beats/prev/Cultural_Ledger.jsonl @C111",
+          "id": "F-505fb99a62ae"
+        },
+        {
+          "t": "FACT",
+          "text": "Tara Ellison (journalist), Media — gained 1 mention this cycle (12 total), surging, fame 68",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112 vs output/beats/prev/Cultural_Ledger.jsonl @C111",
+          "id": "F-153faa10f220"
+        },
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane (A's player), Sports — gained 1 mention this cycle (5 total), surging, fame 31",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112 vs output/beats/prev/Cultural_Ledger.jsonl @C111",
+          "id": "F-167b13f87df5"
+        },
+        {
+          "t": "FACT",
+          "text": "Movement vs C111: West Oakland +18 people, Jack London +12 people, Fruitvale +7 people, Adams Point +7 people, Grand Lake +7 people",
+          "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C112",
+          "id": "F-5228544f2479"
+        },
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+          "src": "Simulation_Ledger profile for POP-00001",
+          "id": "F-2b3e2e3d075f"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00194",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00194\",\"name\":\"Yu Zen\",\"role\":\"Commercial Insurance Broker\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Celeste Tran\",\"question\":\"What have you seen, felt, or understood about \\\"The movement of people into West Oakland and other neighborhoods, and the rising fame of cultural figures like Jade Orion, Tara Ellison, and Vinnie Keane.\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-trends\",\"hood\":\"Lake Merritt\",\"focus\":\"The movement of people into West Oakland and other neighborhoods, and the rising fame of cultural figures like Jade Orion, Tara Ellison, and Vinnie Keane.\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Yu Zen — Commercial Insurance Broker — Rockridge\",\"evidence\":[{\"id\":\"EV-f113b05bc4\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\",\"text\":\"Jade Orion — gained 1 mention this cycle (18 total), viral. The trend is the story; the mood is yours.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C112\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-7cd6ffd2aeb3\"},{\"t\":\"FACT\",\"text\":\"Jade Orion gained 1 mention this cycle (18 total); West Oakland moves the most\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\",\"id\":\"F-6c5b8442e00f\"},{\"t\":\"FACT\",\"text\":\"Jade Orion — gained 1 mention this cycle (18 total), viral. The trend is the story; the mood is yours.\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112\",\"id\":\"F-82f725f37ad8\"},{\"t\":\"FACT\",\"text\":\"Jade Orion (musician), Arts — gained 1 mention this cycle (18 total), viral, fame 104\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112 vs output/beats/prev/Cultural_Ledger.jsonl @C111\",\"id\":\"F-505fb99a62ae\"},{\"t\":\"FACT\",\"text\":\"Tara Ellison (journalist), Media — gained 1 mention this cycle (12 total), surging, fame 68\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112 vs output/beats/prev/Cultural_Ledger.jsonl @C111\",\"id\":\"F-153faa10f220\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane (A's player), Sports — gained 1 mention this cycle (5 total), surging, fame 31\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C112 vs output/beats/prev/Cultural_Ledger.jsonl @C111\",\"id\":\"F-167b13f87df5\"},{\"t\":\"FACT\",\"text\":\"Movement vs C111: West Oakland +18 people, Jack London +12 people, Fruitvale +7 people, Adams Point +7 people, Grand Lake +7 people\",\"src\":\"output/beats/prev/Neighborhood_Demographics.jsonl vs current @C112\",\"id\":\"F-5228544f2479\"},{\"t\":\"FACT\",\"text\":\"Yu Zen — Commercial Insurance Broker — Rockridge\",\"src\":\"Simulation_Ledger profile for POP-00194\",\"id\":\"F-0cea0a3d84d3\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00194",
+        "name": "Yu Zen",
+        "role": "Commercial Insurance Broker",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Celeste Tran",
+        "question": "What have you seen, felt, or understood about \"The movement of people into West Oakland and other neighborhoods, and the rising fame of cultural figures like Jade Orion, Tara Ellison, and Vinnie Keane.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-trends",
+        "hood": "Lake Merritt",
+        "focus": "The movement of people into West Oakland and other neighborhoods, and the rising fame of cultural figures like Jade Orion, Tara Ellison, and Vinnie Keane.",
+        "src": "output/beats/Cultural_Ledger.jsonl @C112"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Yu Zen — Commercial Insurance Broker — Rockridge",
+        "evidence": [
+          {
+            "id": "EV-f113b05bc4",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "text": "Jade Orion — gained 1 mention this cycle (18 total), viral. The trend is the story; the mood is yours."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C112",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-7cd6ffd2aeb3"
+        },
+        {
+          "t": "FACT",
+          "text": "Jade Orion gained 1 mention this cycle (18 total); West Oakland moves the most",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112",
+          "id": "F-6c5b8442e00f"
+        },
+        {
+          "t": "FACT",
+          "text": "Jade Orion — gained 1 mention this cycle (18 total), viral. The trend is the story; the mood is yours.",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112",
+          "id": "F-82f725f37ad8"
+        },
+        {
+          "t": "FACT",
+          "text": "Jade Orion (musician), Arts — gained 1 mention this cycle (18 total), viral, fame 104",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112 vs output/beats/prev/Cultural_Ledger.jsonl @C111",
+          "id": "F-505fb99a62ae"
+        },
+        {
+          "t": "FACT",
+          "text": "Tara Ellison (journalist), Media — gained 1 mention this cycle (12 total), surging, fame 68",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112 vs output/beats/prev/Cultural_Ledger.jsonl @C111",
+          "id": "F-153faa10f220"
+        },
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane (A's player), Sports — gained 1 mention this cycle (5 total), surging, fame 31",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112 vs output/beats/prev/Cultural_Ledger.jsonl @C111",
+          "id": "F-167b13f87df5"
+        },
+        {
+          "t": "FACT",
+          "text": "Movement vs C111: West Oakland +18 people, Jack London +12 people, Fruitvale +7 people, Adams Point +7 people, Grand Lake +7 people",
+          "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C112",
+          "id": "F-5228544f2479"
+        },
+        {
+          "t": "FACT",
+          "text": "Yu Zen — Commercial Insurance Broker — Rockridge",
+          "src": "Simulation_Ledger profile for POP-00194",
+          "id": "F-0cea0a3d84d3"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  }
+]

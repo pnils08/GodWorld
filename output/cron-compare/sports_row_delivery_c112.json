@@ -1,0 +1,113 @@
+{
+  "loggedAt": "2026-10-23T11:17:30.874Z",
+  "cycle": 112,
+  "writersWithFiles": [
+    "Anthony Raines",
+    "Hal Richmond",
+    "P Slayer",
+    "Simon Leary",
+    "Tanya Cruz",
+    "Selena Grant",
+    "Talia Finch"
+  ],
+  "rows": [
+    {
+      "n": 1,
+      "team": "A's",
+      "eventType": "player-feature",
+      "eventTrigger": "hot-streak",
+      "snippet": "A's star Eric Taveras fresh off a Worl",
+      "writers": [
+        "Hal Richmond",
+        "P Slayer",
+        "Simon Leary",
+        "Tanya Cruz"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 2,
+      "team": "A's",
+      "eventType": "rumor",
+      "eventTrigger": "hot-streak",
+      "snippet": "Mark Aitken pending free agency, is it",
+      "writers": [
+        "Anthony Raines",
+        "Hal Richmond",
+        "P Slayer",
+        "Simon Leary",
+        "Tanya Cruz"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 3,
+      "team": "A's",
+      "eventType": "player-feature",
+      "eventTrigger": "hot-streak",
+      "snippet": "The Blue Lattern Bar is Jack London ho",
+      "writers": [
+        "Anthony Raines",
+        "Hal Richmond",
+        "P Slayer",
+        "Simon Leary",
+        "Tanya Cruz"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 4,
+      "team": "Oaks",
+      "eventType": "game-result",
+      "eventTrigger": "home-opener",
+      "snippet": "The Oaks open their inaugural season a",
+      "writers": [
+        "Anthony Raines",
+        "Hal Richmond",
+        "P Slayer",
+        "Simon Leary",
+        "Tanya Cruz",
+        "Selena Grant",
+        "Talia Finch"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 5,
+      "team": "Oaks",
+      "eventType": "season-state",
+      "eventTrigger": "hot-streak",
+      "snippet": "Elias Varek meets the media, happy ove",
+      "writers": [
+        "Anthony Raines",
+        "P Slayer",
+        "Simon Leary",
+        "Tanya Cruz",
+        "Selena Grant",
+        "Talia Finch"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    }
+  ],
+  "stranded": 0
+}

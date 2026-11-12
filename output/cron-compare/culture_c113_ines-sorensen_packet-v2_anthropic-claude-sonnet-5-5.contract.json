@@ -1,0 +1,17 @@
+{
+  "draft": "output/cron-compare/culture_c113_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": false,
+    "inTarget": true,
+    "inTargetBy": "code floor 300",
+    "words": 425,
+    "short": "The names and framing precede the quotes for Omar Amici and Dax Monroe instead of putting the line first, and the quotes were gathered by reporter questions rather than drawn from what citizens wrote on their own pages.",
+    "score": 3,
+    "model": "google/gemini-3.7-flash",
+    "scoredWithoutRhea": true,
+    "draftSha256": "6bc085776c2ffdf58a2fa4711edc86b0adfe0b51325538a13de685fb1f05744e"
+  },
+  "ranAt": "2026-11-01T18:15:23.461Z"
+}

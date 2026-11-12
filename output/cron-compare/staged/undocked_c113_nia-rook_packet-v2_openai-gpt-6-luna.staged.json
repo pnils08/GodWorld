@@ -1,0 +1,62 @@
+{
+  "status": "staged",
+  "desk": "undocked",
+  "cycle": "113",
+  "persona": "nia-rook",
+  "byline": "Nia Rook",
+  "bylinePopid": "POP-01076",
+  "article": "output/cron-compare/staged/undocked_c113_nia-rook_packet-v2_openai-gpt-6-luna.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Eric Taveras",
+        "role": "mentioned",
+        "popid": "POP-00597",
+        "floor": true
+      },
+      {
+        "name": "Father Miguel",
+        "role": "mentioned",
+        "popid": "POP-00734",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Fruitvale"
+    ],
+    "claims": [
+      {
+        "claim": "UNDOCKED: Father Miguel — dead even on the night",
+        "sourceRef": "undocked:undocked-pop00734-Y3C9"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-095779e4f217",
+    "draftSha256": "b080978b659e4bcb12b9d9278cac58a079e294747921f482acf406f04808dcdb",
+    "verdict": "output/cron-compare/undocked_c113_nia-rook_packet-v2_openai-gpt-6-luna.rhea.json",
+    "ranAt": "2026-10-28T23:21:50.464Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 350",
+      "words": 359,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "b080978b659e4bcb12b9d9278cac58a079e294747921f482acf406f04808dcdb",
+      "costUsd": 0.0007
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-28T23:21:53.582Z"
+}

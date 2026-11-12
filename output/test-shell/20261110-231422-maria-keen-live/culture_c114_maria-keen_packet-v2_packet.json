@@ -1,0 +1,1046 @@
+{
+  "stage": "report",
+  "desk": "culture",
+  "cycle": "114",
+  "persona": "maria-keen",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Maria Keen",
+    "popid": "POP-00013"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-neighborhood",
+      "angle": "Temescal — the programs that hold the block and the people who founded them",
+      "label": "Temescal: 2 active programs on the record",
+      "hookLine": "2 active programs in Temescal; Austin Reaves founded one.",
+      "hood": "Temescal",
+      "citizens": [
+        "Austin Reaves (POP-01027)"
+      ],
+      "popids": [
+        "POP-01027"
+      ],
+      "ref": "output/beats/Community_Programs.jsonl @C114",
+      "cycle": 114
+    }
+  },
+  "angle": "output/test-shell/20261110-231422-maria-keen-live/culture_c114_maria-keen_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 4,
+  "quotes": [
+    {
+      "pop": "POP-01027",
+      "name": "Austin Reaves",
+      "quote": "To be honest, I'm not really sure about The Reaves Line Transit Fund's impact on Temescal. I founded it, but I've been focused on the A's and family stuff lately. I know it's been around since C109, and it's still active, but I haven't been keeping up with its day-to-day. I live in West Oakland, so I don't really see its effects firsthand.",
+      "disp": "steady, hard to shake; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, I'm not really sure about The Reaves Line Transit Fund's impact on Temescal. I founded it, but I've been focused on the A's and family stuff lately. I know it's been around since C109, and it's still active, but I haven't been keeping up with its day-to-day. I live in West Oakland, so I don't really see its effects firsthand.\",\n  \"fact_ids\": [\"F-c73e7a1d4c67\", \"F-d1f725faf549\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c73e7a1d4c67",
+          "F-d1f725faf549"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01027-7eb99d71b7",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, I'm not really sure about The Reaves Line Transit Fund's impact on Temescal. I founded it, but I've been focused on the A's and family stuff lately. I know it's been around since C109, and it's still active, but I haven't been keeping up with its day-to-day. I live in West Oakland, so I don't really see its effects firsthand."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01027",
+          "name": "Austin Reaves",
+          "role": "SG / The Oaks",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "What's the story behind The Reaves Line Transit Fund and its impact on Temescal? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "Temescal",
+          "focus": "Community programs in Temescal",
+          "src": "output/beats/Community_Programs.jsonl @C114"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Austin Reaves — SG / The Oaks — West Oakland",
+          "evidence": [
+            {
+              "id": "EV-cd1bf624db",
+              "src": "output/beats/Community_Programs.jsonl @C114",
+              "text": "2 active programs in Temescal; Austin Reaves founded one."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "2 active programs in Temescal; Austin Reaves founded one.",
+            "src": "output/beats/Community_Programs.jsonl @C114",
+            "id": "F-047875521911"
+          },
+          {
+            "t": "FACT",
+            "text": "The Reaves Line Transit Fund (transit), Temescal — founded by Austin Reaves, since C109",
+            "src": "output/beats/Community_Programs.jsonl @C114 PRG-032",
+            "id": "F-c73e7a1d4c67"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal: 2 active programs on the record",
+            "src": "output/beats/Community_Programs.jsonl @C114",
+            "id": "F-f468dc5d926c"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal Islamic Center Food Pantry (mutual-aid), Temescal, since C83",
+            "src": "output/beats/Community_Programs.jsonl @C114 PRG-026",
+            "id": "F-7c20691ce8ba"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal this cycle: 313 students, 2,131 adults, 298 seniors — moved vs C113: +6 adults",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C114 vs prev/",
+            "id": "F-66def05dff07"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal: 8 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+            "src": "output/beats/Care_Justice_Census.jsonl @C114 judicial Temescal",
+            "id": "F-8501821afd98"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal: 86 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+            "src": "output/beats/Care_Justice_Census.jsonl @C114 hospital Temescal",
+            "id": "F-d81ee323aced"
+          },
+          {
+            "t": "FACT",
+            "text": "Austin Reaves — SG / The Oaks — West Oakland",
+            "src": "Simulation_Ledger profile for POP-01027",
+            "id": "F-d1f725faf549"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00169",
+      "name": "Brie Harris",
+      "quote": "Having my own place in Temescal is still a game-changer for me. It's been nice to have a spot to unwind after being on my feet all day at the flower shop. I feel like I'm still getting used to it, but it's made me appreciate the neighborhood even more.",
+      "disp": "can't switch off, working themselves thin; draws people in, deep with them; steady, hard to shake; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Having my own place in Temescal is still a game-changer for me. It's been nice to have a spot to unwind after being on my feet all day at the flower shop. I feel like I'm still getting used to it, but it's made me appreciate the neighborhood even more.\",\n  \"fact_ids\": [\"F-be98682e0443\", \"F-65b41602508c\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-be98682e0443",
+          "F-65b41602508c"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00169-30a635c7e6",
+        "authoredQuote": true,
+        "publishableQuote": "Having my own place in Temescal is still a game-changer for me. It's been nice to have a spot to unwind after being on my feet all day at the flower shop. I feel like I'm still getting used to it, but it's made me appreciate the neighborhood even more."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00169",
+          "name": "Brie Harris",
+          "role": "Flower Shop Owner",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "Your own page at C114 says: \"To be honest, having a place of my own in Temescal has been a game-changer\". Is that still how you see Temescal? Speak only from that and your own reaction."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "Temescal",
+          "focus": "Community programs in Temescal",
+          "src": "output/beats/Community_Programs.jsonl @C114"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Brie Harris — Flower Shop Owner",
+          "evidence": [
+            {
+              "id": "EV-PAGE-259d79e68a",
+              "src": "cp-POP-00169-c114-PRESS-mon-affdhg",
+              "text": "To be honest, having a place of my own in Temescal has been a game-changer."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "INTERPRETATION",
+            "text": "To be honest, having a place of my own in Temescal has been a game-changer.",
+            "src": "cp-POP-00169-c114-PRESS-mon-affdhg",
+            "id": "F-be98682e0443"
+          },
+          {
+            "t": "FACT",
+            "text": "Brie Harris — Flower Shop Owner",
+            "src": "Simulation_Ledger profile for POP-00169",
+            "id": "F-65b41602508c"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01095",
+      "name": "Helena Voss-Adeyemi",
+      "quote": "I walked north across the Temescal line and watched the storefronts change. It's always interesting to see the different vibes on either side. Temescal's got a unique energy, lots of new businesses popping up.",
+      "disp": "can't switch off, working themselves thin; draws people in, deep with them; steady, hard to shake; close to family; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I walked north across the Temescal line and watched the storefronts change. It's always interesting to see the different vibes on either side. Temescal's got a unique energy, lots of new businesses popping up.\",\n  \"fact_ids\": [\"F-ad953460864b\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-ad953460864b"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01095-891c022b6e",
+        "authoredQuote": true,
+        "publishableQuote": "I walked north across the Temescal line and watched the storefronts change. It's always interesting to see the different vibes on either side. Temescal's got a unique energy, lots of new businesses popping up."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01095",
+          "name": "Helena Voss-Adeyemi",
+          "role": "Managing Partner, Northgate Construction",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "Your own current-cycle line says: \"Y3C10 — [Neighborhood-Openness-Up-S] walked north across the Temescal line and watched the storefronts change\". What did you notice about Temescal? Speak only from that line and your own reaction."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "Temescal",
+          "focus": "Community programs in Temescal",
+          "src": "output/beats/Community_Programs.jsonl @C114"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Helena Voss-Adeyemi — Managing Partner, Northgate Construction",
+          "evidence": [
+            {
+              "id": "EV-LIFE-fc2801bcea",
+              "src": "output/simulation_ledger_snapshot.jsonl",
+              "text": "Y3C10 — [Neighborhood-Openness-Up-S] walked north across the Temescal line and watched the storefronts change"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Y3C10 — [Neighborhood-Openness-Up-S] walked north across the Temescal line and watched the storefronts change",
+            "src": "output/simulation_ledger_snapshot.jsonl",
+            "id": "F-ad953460864b"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00038",
+      "name": "Theo Park",
+      "quote": "To be honest, that moment at Temescal Brewing really stuck with me. Seeing the janitor from the Islamic Center chatting with Danny Horn like they were old friends... it felt like a small but real sign of how the neighborhood is evolving. It's not just about new faces moving in; it's about how we all connect. I still see Temescal as a place where you can bump into anyone, and that's something I appreciate.",
+      "disp": "draws people in, deep with them",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, that moment at Temescal Brewing really stuck with me. Seeing the janitor from the Islamic Center chatting with Danny Horn like they were old friends... it felt like a small but real sign of how the neighborhood is evolving. It's not just about new faces moving in; it's about how we all connect. I still see Temescal as a place where you can bump into anyone, and that's something I appreciate.\",\n  \"fact_ids\": [\"F-38a8a9847046\", \"F-ec81e174ab07\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-38a8a9847046",
+          "F-ec81e174ab07"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00038-7afe9d725b",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, that moment at Temescal Brewing really stuck with me. Seeing the janitor from the Islamic Center chatting with Danny Horn like they were old friends... it felt like a small but real sign of how the neighborhood is evolving. It's not just about new faces moving in; it's about how we all connect. I still see Temescal as a place where you can bump into anyone, and that's something I appreciate."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00038",
+          "name": "Theo Park",
+          "role": "Communications Director",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "Your own page at C102 says: \"You know, I was just thinking about this yesterday while waiting in line at Temescal Brewing\". Is that still how you see Temescal? Speak only from that and your own reaction."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "Temescal",
+          "focus": "Community programs in Temescal",
+          "src": "output/beats/Community_Programs.jsonl @C114"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Theo Park — Communications Director",
+          "evidence": [
+            {
+              "id": "EV-PAGE-8f6583f1ea",
+              "src": "cp-POP-00038-c102-PRESS",
+              "text": "You know, I was just thinking about this yesterday while waiting in line at Temescal Brewing."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "INTERPRETATION",
+            "text": "You know, I was just thinking about this yesterday while waiting in line at Temescal Brewing.",
+            "src": "cp-POP-00038-c102-PRESS",
+            "id": "F-38a8a9847046"
+          },
+          {
+            "t": "FACT",
+            "text": "Theo Park — Communications Director",
+            "src": "Simulation_Ledger profile for POP-00038",
+            "id": "F-ec81e174ab07"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-01027",
+      "name": "Austin Reaves",
+      "quote": "To be honest, I'm not really sure about The Reaves Line Transit Fund's impact on Temescal. I founded it, but I've been focused on the A's and family stuff lately. I know it's been around since C109, and it's still active, but I haven't been keeping up with its day-to-day. I live in West Oakland, so I don't really see its effects firsthand.",
+      "disp": "steady, hard to shake; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, I'm not really sure about The Reaves Line Transit Fund's impact on Temescal. I founded it, but I've been focused on the A's and family stuff lately. I know it's been around since C109, and it's still active, but I haven't been keeping up with its day-to-day. I live in West Oakland, so I don't really see its effects firsthand.\",\n  \"fact_ids\": [\"F-c73e7a1d4c67\", \"F-d1f725faf549\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c73e7a1d4c67",
+          "F-d1f725faf549"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01027-7eb99d71b7",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, I'm not really sure about The Reaves Line Transit Fund's impact on Temescal. I founded it, but I've been focused on the A's and family stuff lately. I know it's been around since C109, and it's still active, but I haven't been keeping up with its day-to-day. I live in West Oakland, so I don't really see its effects firsthand."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01027",
+          "name": "Austin Reaves",
+          "role": "SG / The Oaks",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "What's the story behind The Reaves Line Transit Fund and its impact on Temescal? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "Temescal",
+          "focus": "Community programs in Temescal",
+          "src": "output/beats/Community_Programs.jsonl @C114"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Austin Reaves — SG / The Oaks — West Oakland",
+          "evidence": [
+            {
+              "id": "EV-cd1bf624db",
+              "src": "output/beats/Community_Programs.jsonl @C114",
+              "text": "2 active programs in Temescal; Austin Reaves founded one."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "2 active programs in Temescal; Austin Reaves founded one.",
+            "src": "output/beats/Community_Programs.jsonl @C114",
+            "id": "F-047875521911"
+          },
+          {
+            "t": "FACT",
+            "text": "The Reaves Line Transit Fund (transit), Temescal — founded by Austin Reaves, since C109",
+            "src": "output/beats/Community_Programs.jsonl @C114 PRG-032",
+            "id": "F-c73e7a1d4c67"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal: 2 active programs on the record",
+            "src": "output/beats/Community_Programs.jsonl @C114",
+            "id": "F-f468dc5d926c"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal Islamic Center Food Pantry (mutual-aid), Temescal, since C83",
+            "src": "output/beats/Community_Programs.jsonl @C114 PRG-026",
+            "id": "F-7c20691ce8ba"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal this cycle: 313 students, 2,131 adults, 298 seniors — moved vs C113: +6 adults",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C114 vs prev/",
+            "id": "F-66def05dff07"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal: 8 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+            "src": "output/beats/Care_Justice_Census.jsonl @C114 judicial Temescal",
+            "id": "F-8501821afd98"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal: 86 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+            "src": "output/beats/Care_Justice_Census.jsonl @C114 hospital Temescal",
+            "id": "F-d81ee323aced"
+          },
+          {
+            "t": "FACT",
+            "text": "Austin Reaves — SG / The Oaks — West Oakland",
+            "src": "Simulation_Ledger profile for POP-01027",
+            "id": "F-d1f725faf549"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00169",
+      "name": "Brie Harris",
+      "quote": "Having my own place in Temescal is still a game-changer for me. It's been nice to have a spot to unwind after being on my feet all day at the flower shop. I feel like I'm still getting used to it, but it's made me appreciate the neighborhood even more.",
+      "disp": "can't switch off, working themselves thin; draws people in, deep with them; steady, hard to shake; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Having my own place in Temescal is still a game-changer for me. It's been nice to have a spot to unwind after being on my feet all day at the flower shop. I feel like I'm still getting used to it, but it's made me appreciate the neighborhood even more.\",\n  \"fact_ids\": [\"F-be98682e0443\", \"F-65b41602508c\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-be98682e0443",
+          "F-65b41602508c"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00169-30a635c7e6",
+        "authoredQuote": true,
+        "publishableQuote": "Having my own place in Temescal is still a game-changer for me. It's been nice to have a spot to unwind after being on my feet all day at the flower shop. I feel like I'm still getting used to it, but it's made me appreciate the neighborhood even more."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00169",
+          "name": "Brie Harris",
+          "role": "Flower Shop Owner",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "Your own page at C114 says: \"To be honest, having a place of my own in Temescal has been a game-changer\". Is that still how you see Temescal? Speak only from that and your own reaction."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "Temescal",
+          "focus": "Community programs in Temescal",
+          "src": "output/beats/Community_Programs.jsonl @C114"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Brie Harris — Flower Shop Owner",
+          "evidence": [
+            {
+              "id": "EV-PAGE-259d79e68a",
+              "src": "cp-POP-00169-c114-PRESS-mon-affdhg",
+              "text": "To be honest, having a place of my own in Temescal has been a game-changer."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "INTERPRETATION",
+            "text": "To be honest, having a place of my own in Temescal has been a game-changer.",
+            "src": "cp-POP-00169-c114-PRESS-mon-affdhg",
+            "id": "F-be98682e0443"
+          },
+          {
+            "t": "FACT",
+            "text": "Brie Harris — Flower Shop Owner",
+            "src": "Simulation_Ledger profile for POP-00169",
+            "id": "F-65b41602508c"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01095",
+      "name": "Helena Voss-Adeyemi",
+      "quote": "I walked north across the Temescal line and watched the storefronts change. It's always interesting to see the different vibes on either side. Temescal's got a unique energy, lots of new businesses popping up.",
+      "disp": "can't switch off, working themselves thin; draws people in, deep with them; steady, hard to shake; close to family; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I walked north across the Temescal line and watched the storefronts change. It's always interesting to see the different vibes on either side. Temescal's got a unique energy, lots of new businesses popping up.\",\n  \"fact_ids\": [\"F-ad953460864b\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-ad953460864b"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01095-891c022b6e",
+        "authoredQuote": true,
+        "publishableQuote": "I walked north across the Temescal line and watched the storefronts change. It's always interesting to see the different vibes on either side. Temescal's got a unique energy, lots of new businesses popping up."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01095",
+          "name": "Helena Voss-Adeyemi",
+          "role": "Managing Partner, Northgate Construction",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "Your own current-cycle line says: \"Y3C10 — [Neighborhood-Openness-Up-S] walked north across the Temescal line and watched the storefronts change\". What did you notice about Temescal? Speak only from that line and your own reaction."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "Temescal",
+          "focus": "Community programs in Temescal",
+          "src": "output/beats/Community_Programs.jsonl @C114"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Helena Voss-Adeyemi — Managing Partner, Northgate Construction",
+          "evidence": [
+            {
+              "id": "EV-LIFE-fc2801bcea",
+              "src": "output/simulation_ledger_snapshot.jsonl",
+              "text": "Y3C10 — [Neighborhood-Openness-Up-S] walked north across the Temescal line and watched the storefronts change"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Y3C10 — [Neighborhood-Openness-Up-S] walked north across the Temescal line and watched the storefronts change",
+            "src": "output/simulation_ledger_snapshot.jsonl",
+            "id": "F-ad953460864b"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00038",
+      "name": "Theo Park",
+      "quote": "To be honest, that moment at Temescal Brewing really stuck with me. Seeing the janitor from the Islamic Center chatting with Danny Horn like they were old friends... it felt like a small but real sign of how the neighborhood is evolving. It's not just about new faces moving in; it's about how we all connect. I still see Temescal as a place where you can bump into anyone, and that's something I appreciate.",
+      "disp": "draws people in, deep with them",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, that moment at Temescal Brewing really stuck with me. Seeing the janitor from the Islamic Center chatting with Danny Horn like they were old friends... it felt like a small but real sign of how the neighborhood is evolving. It's not just about new faces moving in; it's about how we all connect. I still see Temescal as a place where you can bump into anyone, and that's something I appreciate.\",\n  \"fact_ids\": [\"F-38a8a9847046\", \"F-ec81e174ab07\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-38a8a9847046",
+          "F-ec81e174ab07"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00038-7afe9d725b",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, that moment at Temescal Brewing really stuck with me. Seeing the janitor from the Islamic Center chatting with Danny Horn like they were old friends... it felt like a small but real sign of how the neighborhood is evolving. It's not just about new faces moving in; it's about how we all connect. I still see Temescal as a place where you can bump into anyone, and that's something I appreciate."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00038",
+          "name": "Theo Park",
+          "role": "Communications Director",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "Your own page at C102 says: \"You know, I was just thinking about this yesterday while waiting in line at Temescal Brewing\". Is that still how you see Temescal? Speak only from that and your own reaction."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "Temescal",
+          "focus": "Community programs in Temescal",
+          "src": "output/beats/Community_Programs.jsonl @C114"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Theo Park — Communications Director",
+          "evidence": [
+            {
+              "id": "EV-PAGE-8f6583f1ea",
+              "src": "cp-POP-00038-c102-PRESS",
+              "text": "You know, I was just thinking about this yesterday while waiting in line at Temescal Brewing."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "INTERPRETATION",
+            "text": "You know, I was just thinking about this yesterday while waiting in line at Temescal Brewing.",
+            "src": "cp-POP-00038-c102-PRESS",
+            "id": "F-38a8a9847046"
+          },
+          {
+            "t": "FACT",
+            "text": "Theo Park — Communications Director",
+            "src": "Simulation_Ledger profile for POP-00038",
+            "id": "F-ec81e174ab07"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-11-06T19:19:00.284Z"
+}

@@ -1,0 +1,102 @@
+{
+  "draft": "output/cron-compare/business_c113_business-desk_packet-v2_anthropic-claude-opus-5-5.md",
+  "cycle": "113",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "022300dddcbddf3890cfdf672f353c7d959f0b0538b09605655b3c3b69379cca",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All 15 named citizen profiles, economic data points, and Bobby Chen-Ramirez quote verified against cycle 113 ground truth.",
+  "review": {
+    "profileId": "jordan-velez",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "jordan-economic-labor-v1",
+    "packageVersion": "JORDAN-LEP2-1",
+    "manifestId": "AM-83dcffcf71e7",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "000",
+          "27.9",
+          "8.2",
+          "1.2",
+          "40",
+          "450",
+          "45",
+          "7th",
+          "2017",
+          "3.9"
+        ]
+      },
+      {
+        "code": "UNAPPROVED_QUOTE",
+        "values": [
+          "development"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Ariana Reyes",
+      "Bobby Chen-Ramirez",
+      "Christine Nakamura",
+      "Clearence Leighton",
+      "Cristina Norwood",
+      "Daniel Yoon",
+      "Dawson Nguyen",
+      "Jade Soy",
+      "Jett Walker",
+      "Jordan Velez",
+      "Melton Neilon",
+      "Ronald Silk",
+      "Vanessa Ramas",
+      "Vanessa Treary",
+      "Wesley Clark"
+    ],
+    "unverified": [
+      "Business Reporter",
+      "Da Dough",
+      "Ivy Hill Market"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 1,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0109,
+  "durationMs": 7756,
+  "parseError": false,
+  "ranAt": "2026-10-26T23:16:55.669Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 500",
+    "words": 896,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "022300dddcbddf3890cfdf672f353c7d959f0b0538b09605655b3c3b69379cca",
+    "costUsd": 0.0015
+  }
+}

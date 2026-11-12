@@ -1,0 +1,17 @@
+{
+  "cycle": "112",
+  "selected": [
+    "wire_c112_celeste-tran_packet-v2_x-ai-grok-4-3",
+    "civic_c112_noah-tan_packet-v2_x-ai-grok-4-3",
+    "culture_c112_ines-sorensen_packet-v2_x-ai-grok-4-3-1615",
+    "culture_c112_ines-sorensen_packet-v2_x-ai-grok-4-3-1814",
+    "sports_c112_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5",
+    "sports_c112_p-slayer_packet-v2_x-ai-grok-4-3",
+    "civic_c112_carmen-delaine_packet-v2_anthropic-claude-haiku-5-5",
+    "culture_c112_maria-keen_packet-v2_anthropic-claude-sonnet-5-5",
+    "undocked-digest_c112_nia-rook-weekly_packet-v2_x-ai-grok-4-3"
+  ],
+  "edition": "editions/cycle_pulse_c112.txt",
+  "editionSha256": "4d4ba2fb5e0f31b78f7698088a9aa1f3e6995697f36ed02b51d8b5bc8fc49e19",
+  "publishedAt": "2026-10-24T21:03:38.967Z"
+}

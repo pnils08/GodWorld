@@ -1,0 +1,1063 @@
+{
+  "version": "ECONOMIC-SLICE-4",
+  "empty": false,
+  "cycle": 112,
+  "kind": "economic-storefront",
+  "variant": "business",
+  "hood": "Uptown",
+  "pulse": {
+    "className": "hood-businesses",
+    "score": 33,
+    "label": "Uptown businesses · Oakland Tech Collective, Ridgeline Studio",
+    "hood": "Uptown",
+    "namedBusinesses": [
+      "Oakland Tech Collective",
+      "Ridgeline Studio",
+      "Art Walk Cafe",
+      "Night Walk Records",
+      "Gallery Night Lounge"
+    ]
+  },
+  "story": {
+    "angle": "Uptown businesses: Oakland Tech Collective, Ridgeline Studio, Art Walk Cafe — the people who work there",
+    "label": "Uptown businesses · Oakland Tech Collective, Ridgeline Studio",
+    "hookLine": "Dexter Patel, Cybersecurity Analyst at Oakland Tech Collective. 7 named workers at 4 named businesses in Uptown on the ledger this cycle.",
+    "hood": "Uptown",
+    "pulseClass": "hood-businesses",
+    "namedBusinesses": [
+      "Oakland Tech Collective",
+      "Ridgeline Studio",
+      "Art Walk Cafe",
+      "Night Walk Records",
+      "Gallery Night Lounge"
+    ],
+    "citizens": [
+      "Dexter Patel (POP-00365)",
+      "Derek Obi (POP-00543)",
+      "Michael Creighton (POP-00589)",
+      "Sarah Corliss (POP-00595)",
+      "Naomi Castellanos (POP-01098)",
+      "Brady Lopez (POP-00256)",
+      "Cedric Nakamura (POP-01033)"
+    ],
+    "popids": [
+      "POP-00365",
+      "POP-00543",
+      "POP-00589",
+      "POP-00595",
+      "POP-01098",
+      "POP-00256",
+      "POP-01033"
+    ],
+    "ref": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C112",
+    "cycle": 112
+  },
+  "approach": "Business desk approach: this slice is one neighborhood's businesses from the ledger and the people on the roster who work there — plus what moved since last cycle: revenue and headcount deltas, contractions, closures on the archive, and the week's casino action. When the record shows a business closing or shedding workers, that is the story. Open from a named business or a named worker on it — the block, the counter, the hiring board, what the owner is worried about. One claim about how the block is moving. Not civic process roundup. Not multi-voice business-desk average. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "businesses": [
+    {
+      "bizId": "BIZ-00030",
+      "name": "Oakland Tech Collective",
+      "sector": "Coworking / Tech Hub",
+      "hood": "Uptown",
+      "employeeCount": 62,
+      "avgSalary": 105000,
+      "annualRevenue": 60671038,
+      "growthRate": 13.2,
+      "keyPersonnel": "Priyanka Raman (principal)",
+      "staff": [
+        {
+          "popid": "POP-00365",
+          "name": "Dexter Patel",
+          "role": "Cybersecurity Analyst"
+        },
+        {
+          "popid": "POP-00543",
+          "name": "Derek Obi",
+          "role": "IT Support Specialist"
+        },
+        {
+          "popid": "POP-00589",
+          "name": "Michael Creighton",
+          "role": "Writer"
+        },
+        {
+          "popid": "POP-00595",
+          "name": "Sarah Corliss",
+          "role": "Capacity Analyst, DigitalOcean"
+        },
+        {
+          "popid": "POP-00658",
+          "name": "Darius Cike",
+          "role": "Quantum Computing Researcher"
+        },
+        {
+          "popid": "POP-00748",
+          "name": "Vince Okoye",
+          "role": "Software engineer"
+        },
+        {
+          "popid": "POP-00818",
+          "name": "Latasha Rivera",
+          "role": "Quantum Computing Researcher"
+        },
+        {
+          "popid": "POP-00860",
+          "name": "Saniya Williams",
+          "role": "Quantum Computing Researcher"
+        },
+        {
+          "popid": "POP-00879",
+          "name": "Ruth Gaines",
+          "role": "Cybersecurity Analyst"
+        },
+        {
+          "popid": "POP-01096",
+          "name": "Priyanka Raman",
+          "role": "Principal, Oakland Tech Collective"
+        }
+      ],
+      "delta": {
+        "vsCycle": 111,
+        "employees": 0,
+        "revenue": 153621,
+        "growth": 1.3699999999999992
+      }
+    },
+    {
+      "bizId": "BIZ-00053",
+      "name": "Ridgeline Studio",
+      "sector": "Architecture",
+      "hood": "Uptown",
+      "employeeCount": 61,
+      "avgSalary": 108000,
+      "annualRevenue": 32605341,
+      "growthRate": 14.73,
+      "keyPersonnel": "Naomi Castellanos (principal)",
+      "staff": [
+        {
+          "popid": "POP-01098",
+          "name": "Naomi Castellanos",
+          "role": "Principal, Ridgeline Studio"
+        }
+      ],
+      "delta": {
+        "vsCycle": 111,
+        "employees": 0,
+        "revenue": 92100,
+        "growth": 0.7800000000000011
+      }
+    },
+    {
+      "bizId": "BIZ-00064",
+      "name": "Art Walk Cafe",
+      "sector": "Cafe / gallery",
+      "hood": "Uptown",
+      "employeeCount": 30,
+      "avgSalary": 48000,
+      "annualRevenue": 2905367,
+      "growthRate": 8.03,
+      "keyPersonnel": null,
+      "staff": [
+        {
+          "popid": "POP-00256",
+          "name": "Brady Lopez",
+          "role": "Dishwasher"
+        }
+      ],
+      "delta": {
+        "vsCycle": 111,
+        "employees": 0,
+        "revenue": 4480,
+        "growth": 1.419999999999999
+      }
+    },
+    {
+      "bizId": "BIZ-00179",
+      "name": "Night Walk Records",
+      "sector": "Retail",
+      "hood": "Uptown",
+      "employeeCount": 6,
+      "avgSalary": 53000,
+      "annualRevenue": 641268,
+      "growthRate": 7.58,
+      "keyPersonnel": null,
+      "staff": [
+        {
+          "popid": "POP-01033",
+          "name": "Cedric Nakamura",
+          "role": "Retail clerk"
+        }
+      ],
+      "delta": {
+        "vsCycle": 111,
+        "employees": 0,
+        "revenue": 933,
+        "growth": 3.41
+      }
+    },
+    {
+      "bizId": "BIZ-00066",
+      "name": "Gallery Night Lounge",
+      "sector": "Bar / lounge",
+      "hood": "Uptown",
+      "employeeCount": 30,
+      "avgSalary": 53000,
+      "annualRevenue": 3207893,
+      "growthRate": 7.96,
+      "keyPersonnel": null,
+      "staff": [],
+      "delta": {
+        "vsCycle": 111,
+        "employees": 0,
+        "revenue": 4903,
+        "growth": 1.4500000000000002
+      }
+    }
+  ],
+  "seeds": [
+    {
+      "seedId": "3b54d421",
+      "hood": "Jack London",
+      "domain": "ECONOMIC",
+      "citizens": [
+        {
+          "popid": "POP-00690",
+          "name": "Eloise Jackson"
+        },
+        {
+          "popid": "POP-00824",
+          "name": "Padma Hong"
+        },
+        {
+          "popid": "POP-00893",
+          "name": "Erica Le"
+        },
+        {
+          "popid": "POP-00311",
+          "name": "Andre Lee"
+        }
+      ],
+      "citizenEvents": [
+        "Eloise Jackson — planned the whole weekend around a day game",
+        "Padma Hong — navigated the stroller traffic on College Avenue and silently judged the parking jobs",
+        "Erica Le — compared rent notes with a neighbor over the fence in Jack London",
+        "Andre Lee — put on their good suit for the Sunday service because some traditions still matter"
+      ],
+      "businesses": [
+        {
+          "bizId": "BIZ-00183",
+          "name": "Bayline 6"
+        },
+        {
+          "bizId": "BIZ-00057",
+          "name": "Anchor Build"
+        }
+      ],
+      "otherEntities": null,
+      "magnitude": 15,
+      "trend": "carrying, 5.00 strength left of 3-cycle run",
+      "suggestedJournalist": "Jordan Velez",
+      "suggestedAngle": "baseline context piece"
+    },
+    {
+      "seedId": "1704509d",
+      "hood": "West Oakland",
+      "domain": "ECONOMIC",
+      "citizens": [
+        {
+          "popid": "POP-00932",
+          "name": "Winifred Chen"
+        },
+        {
+          "popid": "POP-00355",
+          "name": "Sammie Soft"
+        },
+        {
+          "popid": "POP-00787",
+          "name": "Robert Hayes"
+        },
+        {
+          "popid": "POP-01083",
+          "name": "Antone Bautista"
+        }
+      ],
+      "citizenEvents": [
+        "Winifred Chen — the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+        "Sammie Soft — overheard a stranger asking the way to a new shop on the block and pointed them right to it",
+        "Robert Hayes — caught their reflection in a shop window and stood a little straighter",
+        "Antone Bautista — felt West Oakland riding a genuine good stretch near a porch-lit block"
+      ],
+      "businesses": [
+        {
+          "bizId": "BIZ-00058",
+          "name": "Mariner Construction"
+        },
+        {
+          "bizId": "BIZ-00082",
+          "name": "New Covenant Pentecostal Assembly"
+        }
+      ],
+      "otherEntities": "West Oakland Freight & Logistics Pipeline (program)",
+      "magnitude": -8,
+      "trend": "carrying, -2.00 strength left of 4-cycle run",
+      "suggestedJournalist": null,
+      "suggestedAngle": "general coverage"
+    }
+  ],
+  "citizens": [
+    {
+      "popid": "POP-00365",
+      "name": "Dexter Patel",
+      "role": "Cybersecurity Analyst",
+      "neighborhood": "Uptown",
+      "business": "Oakland Tech Collective",
+      "profile": "Dexter Patel — Cybersecurity Analyst — Oakland Tech Collective, Uptown",
+      "why": "works at Oakland Tech Collective (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00543",
+      "name": "Derek Obi",
+      "role": "IT Support Specialist",
+      "neighborhood": "Uptown",
+      "business": "Oakland Tech Collective",
+      "profile": "Derek Obi — IT Support Specialist — Oakland Tech Collective, Uptown",
+      "why": "works at Oakland Tech Collective (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00589",
+      "name": "Michael Creighton",
+      "role": "Writer",
+      "neighborhood": "Uptown",
+      "business": "Oakland Tech Collective",
+      "profile": "Michael Creighton — Writer — Oakland Tech Collective, Uptown",
+      "why": "works at Oakland Tech Collective (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00595",
+      "name": "Sarah Corliss",
+      "role": "Capacity Analyst, DigitalOcean",
+      "neighborhood": "Uptown",
+      "business": "Oakland Tech Collective",
+      "profile": "Sarah Corliss — Capacity Analyst, DigitalOcean — Oakland Tech Collective, Uptown",
+      "why": "works at Oakland Tech Collective (Employment_Roster)"
+    },
+    {
+      "popid": "POP-01098",
+      "name": "Naomi Castellanos",
+      "role": "Principal, Ridgeline Studio",
+      "neighborhood": "Uptown",
+      "business": "Ridgeline Studio",
+      "profile": "Naomi Castellanos — Principal, Ridgeline Studio — Ridgeline Studio, Uptown",
+      "why": "works at Ridgeline Studio (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00256",
+      "name": "Brady Lopez",
+      "role": "Dishwasher",
+      "neighborhood": "Uptown",
+      "business": "Art Walk Cafe",
+      "profile": "Brady Lopez — Dishwasher — Art Walk Cafe, Uptown",
+      "why": "works at Art Walk Cafe (Employment_Roster)"
+    },
+    {
+      "popid": "POP-01033",
+      "name": "Cedric Nakamura",
+      "role": "Retail clerk",
+      "neighborhood": "Uptown",
+      "business": "Night Walk Records",
+      "profile": "Cedric Nakamura — Retail clerk — Night Walk Records, Uptown",
+      "why": "works at Night Walk Records (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00174",
+      "name": "Tariq Jello",
+      "role": "Appliance Repair Technician",
+      "neighborhood": "Laurel",
+      "business": null,
+      "profile": "Tariq Jello — Appliance Repair Technician — Laurel",
+      "why": "on the Casino_Ledger this cycle — settled a undocked wager"
+    },
+    {
+      "popid": "POP-00215",
+      "name": "Ricky Wilton",
+      "role": "Janitor",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Ricky Wilton — Janitor — Downtown",
+      "why": "on the Casino_Ledger this cycle — settled a undocked wager"
+    },
+    {
+      "popid": "POP-00299",
+      "name": "Joel Henry",
+      "role": "Plumber",
+      "neighborhood": "Uptown",
+      "business": null,
+      "profile": "Joel Henry — Plumber — Uptown",
+      "why": "on the Casino_Ledger this cycle — settled a undocked wager"
+    },
+    {
+      "popid": "POP-00301",
+      "name": "Lila Leap",
+      "role": "Muralist",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Lila Leap — Muralist — West Oakland",
+      "why": "on the Casino_Ledger this cycle — settled a undocked wager"
+    },
+    {
+      "popid": "POP-00556",
+      "name": "Renata Voss",
+      "role": "Pharmacist",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Renata Voss — Pharmacist — Rockridge",
+      "why": "on the Casino_Ledger this cycle — settled a undocked wager"
+    },
+    {
+      "popid": "POP-00980",
+      "name": "Karim Avery",
+      "role": "Security Guard",
+      "neighborhood": "Fruitvale",
+      "business": null,
+      "profile": "Karim Avery — Security Guard — Fruitvale",
+      "why": "defaulted on the debts this cycle (Simulation_Ledger)"
+    },
+    {
+      "popid": "POP-01031",
+      "name": "Aaliyah Yamamoto",
+      "role": "Electrician",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Aaliyah Yamamoto — Electrician — West Oakland",
+      "why": "defaulted on the debts this cycle (Simulation_Ledger)"
+    }
+  ],
+  "closures": [],
+  "contractionWatch": [
+    {
+      "bizId": "BIZ-00150",
+      "name": "Ivy Hill Market",
+      "sector": "Retail",
+      "hood": "Ivy Hill",
+      "employeeCount": 5,
+      "avgSalary": 43000,
+      "annualRevenue": 514908,
+      "growthRate": -3.68,
+      "keyPersonnel": null,
+      "staff": [],
+      "delta": {
+        "vsCycle": 111,
+        "employees": -1,
+        "revenue": -365,
+        "growth": 2.4999999999999996
+      }
+    }
+  ],
+  "casino": {
+    "wagers": [
+      {
+        "popid": "POP-00174",
+        "name": "Tariq Jello",
+        "market": "undocked",
+        "stake": 478,
+        "payout": 0,
+        "settled": true,
+        "status": "settled-loss"
+      },
+      {
+        "popid": "POP-00215",
+        "name": "Ricky Wilton",
+        "market": "undocked",
+        "stake": 518,
+        "payout": 0,
+        "settled": true,
+        "status": "settled-loss"
+      },
+      {
+        "popid": "POP-00299",
+        "name": "Joel Henry",
+        "market": "undocked",
+        "stake": 269,
+        "payout": 492,
+        "settled": true,
+        "status": "settled-win"
+      },
+      {
+        "popid": "POP-00301",
+        "name": "Lila Leap",
+        "market": "undocked",
+        "stake": 519,
+        "payout": 0,
+        "settled": true,
+        "status": "void-gate"
+      },
+      {
+        "popid": "POP-00556",
+        "name": "Renata Voss",
+        "market": "undocked",
+        "stake": 185,
+        "payout": 0,
+        "settled": true,
+        "status": "settled-loss"
+      }
+    ],
+    "houseFloat": 244203,
+    "totalRows": 34
+  },
+  "cityMoney": {
+    "treasury": {
+      "state": "ON_RECORD",
+      "opening": 110289093,
+      "closing": 115411128,
+      "income": {
+        "WEEKLY-ALLOCATION": {
+          "amount": 5000000,
+          "count": 1,
+          "charges": null
+        },
+        "COURT": {
+          "amount": 122035,
+          "count": 1,
+          "charges": 27
+        }
+      },
+      "outflows": []
+    },
+    "debt": {
+      "defaults": [
+        "POP-00980",
+        "POP-01031"
+      ],
+      "overLine": 97,
+      "crisisByHood": {
+        "Lake Merritt": {
+          "crisis": 1,
+          "defaults": 0
+        },
+        "Fruitvale": {
+          "crisis": 0,
+          "defaults": 1
+        },
+        "West Oakland": {
+          "crisis": 0,
+          "defaults": 1
+        }
+      }
+    }
+  },
+  "deltas": {
+    "state": "PRIOR_CYCLE_ON_DISK",
+    "vs": 111
+  },
+  "prewrite": {
+    "pulseClass": "hood-businesses",
+    "angle": "Uptown businesses: Oakland Tech Collective, Ridgeline Studio, Art Walk Cafe — the people who work there",
+    "hookLine": "Dexter Patel, Cybersecurity Analyst at Oakland Tech Collective. 7 named workers at 4 named businesses in Uptown on the ledger this cycle.",
+    "namedBusinesses": [
+      "Oakland Tech Collective",
+      "Ridgeline Studio",
+      "Art Walk Cafe",
+      "Night Walk Records",
+      "Gallery Night Lounge"
+    ],
+    "anchorFacts": [
+      "Oakland Tech Collective · Coworking / Tech Hub · 62 employees · growth 13.2% · revenue $60.7M (+$154k vs C111) · key personnel: Priyanka Raman (principal) · on the roster: Dexter Patel (Cybersecurity Analyst); Derek Obi (IT Support Specialist); Michael Creighton (Writer); Sarah Corliss (Capacity Analyst, DigitalOcean) +6 more",
+      "Ridgeline Studio · Architecture · 61 employees · growth 14.7% · revenue $32.6M (+$92k vs C111) · key personnel: Naomi Castellanos (principal) · on the roster: Naomi Castellanos (Principal, Ridgeline Studio)",
+      "Art Walk Cafe · Cafe / gallery · 30 employees · growth 8% · revenue $2.9M (+$4k vs C111) · on the roster: Brady Lopez (Dishwasher)",
+      "Night Walk Records · Retail · 6 employees · growth 7.6% · revenue $641k (+$933 vs C111) · on the roster: Cedric Nakamura (Retail clerk)",
+      "Gallery Night Lounge · Bar / lounge · 30 employees · growth 8% · revenue $3.2M (+$5k vs C111)",
+      "CITY SEED (Jack London): citizens Eloise Jackson; Padma Hong; Erica Le; Andre Lee · businesses Bayline 6; Anchor Build",
+      "CITY SEED (West Oakland): citizens Winifred Chen; Sammie Soft; Robert Hayes; Antone Bautista · businesses Mariner Construction; New Covenant Pentecostal Assembly · West Oakland Freight & Logistics Pipeline (program)",
+      "CONTRACTING: Ivy Hill Market (Ivy Hill) shed 1 worker vs C111 and growth is -3.7%",
+      "CASINO: Tariq Jello — undocked wager, staked $478, settled for $0",
+      "CASINO: Ricky Wilton — undocked wager, staked $518, settled for $0",
+      "CASINO: Joel Henry — undocked wager, staked $269, settled for $492",
+      "CASINO: Lila Leap — undocked wager, staked $519, settled for $0",
+      "CASINO: Renata Voss — undocked wager, staked $185, settled for $0",
+      "CASINO: the house float stands at $244k",
+      "CITY MONEY: City treasury this cycle took in $5.1M: $5M the weekly budget allocation, $122,035 court money on 27 cleared charges",
+      "CITY MONEY: City treasury balance at the close: $115.4M (from $110.3M)",
+      "DEBT: Debt this cycle: 1 household's debts crossed the line this cycle (Lake Merritt 1); 2 defaulted: Karim Avery (Fruitvale), Aaliyah Yamamoto (West Oakland)",
+      "DEBT: 97 tracked residents on the ledger carry debt at or over the crisis line — most in Fruitvale 16, Uptown 14, West Oakland 10, Lake Merritt 9"
+    ],
+    "evidence": [
+      {
+        "text": "Oakland Tech Collective · Coworking / Tech Hub · 62 employees · growth 13.2% · revenue $60.7M (+$154k vs C111) · key personnel: Priyanka Raman (principal) · on the roster: Dexter Patel (Cybersecurity Analyst); Derek Obi (IT Support Specialist); Michael Creighton (Writer); Sarah Corliss (Capacity Analyst, DigitalOcean) +6 more",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C112"
+      },
+      {
+        "text": "Ridgeline Studio · Architecture · 61 employees · growth 14.7% · revenue $32.6M (+$92k vs C111) · key personnel: Naomi Castellanos (principal) · on the roster: Naomi Castellanos (Principal, Ridgeline Studio)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C112"
+      },
+      {
+        "text": "Art Walk Cafe · Cafe / gallery · 30 employees · growth 8% · revenue $2.9M (+$4k vs C111) · on the roster: Brady Lopez (Dishwasher)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C112"
+      },
+      {
+        "text": "Night Walk Records · Retail · 6 employees · growth 7.6% · revenue $641k (+$933 vs C111) · on the roster: Cedric Nakamura (Retail clerk)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C112"
+      },
+      {
+        "text": "Gallery Night Lounge · Bar / lounge · 30 employees · growth 8% · revenue $3.2M (+$5k vs C111)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C112"
+      },
+      {
+        "text": "CITY SEED (Jack London): citizens Eloise Jackson; Padma Hong; Erica Le; Andre Lee · businesses Bayline 6; Anchor Build",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C112"
+      },
+      {
+        "text": "CITY SEED (West Oakland): citizens Winifred Chen; Sammie Soft; Robert Hayes; Antone Bautista · businesses Mariner Construction; New Covenant Pentecostal Assembly · West Oakland Freight & Logistics Pipeline (program)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C112"
+      },
+      {
+        "text": "CONTRACTING: Ivy Hill Market (Ivy Hill) shed 1 worker vs C111 and growth is -3.7%",
+        "src": "output/beats/prev/Business_Ledger.jsonl vs Business_Ledger.jsonl @C112"
+      },
+      {
+        "text": "CASINO: Tariq Jello — undocked wager, staked $478, settled for $0",
+        "src": "output/beats/Casino_Ledger.jsonl @C112"
+      },
+      {
+        "text": "CASINO: Ricky Wilton — undocked wager, staked $518, settled for $0",
+        "src": "output/beats/Casino_Ledger.jsonl @C112"
+      },
+      {
+        "text": "CASINO: Joel Henry — undocked wager, staked $269, settled for $492",
+        "src": "output/beats/Casino_Ledger.jsonl @C112"
+      },
+      {
+        "text": "CASINO: Lila Leap — undocked wager, staked $519, settled for $0",
+        "src": "output/beats/Casino_Ledger.jsonl @C112"
+      },
+      {
+        "text": "CASINO: Renata Voss — undocked wager, staked $185, settled for $0",
+        "src": "output/beats/Casino_Ledger.jsonl @C112"
+      },
+      {
+        "text": "CASINO: the house float stands at $244k",
+        "src": "output/beats/Casino_Ledger.jsonl @C112"
+      },
+      {
+        "text": "CITY MONEY: City treasury this cycle took in $5.1M: $5M the weekly budget allocation, $122,035 court money on 27 cleared charges",
+        "src": "output/beats/City_Treasury.jsonl @C112"
+      },
+      {
+        "text": "CITY MONEY: City treasury balance at the close: $115.4M (from $110.3M)",
+        "src": "output/beats/City_Treasury.jsonl @C112"
+      },
+      {
+        "text": "DEBT: Debt this cycle: 1 household's debts crossed the line this cycle (Lake Merritt 1); 2 defaulted: Karim Avery (Fruitvale), Aaliyah Yamamoto (West Oakland)",
+        "src": "output/beats/Story_Hook_Deck.jsonl DEBT_CRISIS/DEBT_DEFAULT + Simulation_Ledger DialState"
+      },
+      {
+        "text": "DEBT: 97 tracked residents on the ledger carry debt at or over the crisis line — most in Fruitvale 16, Uptown 14, West Oakland 10, Lake Merritt 9",
+        "src": "output/simulation_ledger_snapshot.jsonl DebtLevel >= 5"
+      }
+    ],
+    "hooks": [
+      {
+        "text": "Multiple business signals detected. Could be coincidence or early pattern.",
+        "angle": "baseline context piece",
+        "hood": null
+      },
+      {
+        "text": "Notable event: \"Port of Oakland: the berth delay is over — the berths are filling again, and the businesses that waited it out take stock\". Follow-up recommended.",
+        "angle": "baseline context piece",
+        "hood": "Jack London"
+      },
+      {
+        "text": "High concentration of ambitious, driven personalities. Career competition and economic hustle stories.",
+        "angle": "baseline context piece",
+        "hood": null
+      },
+      {
+        "text": "Jaylen Cloak has not advanced in 56 years",
+        "angle": "baseline context piece",
+        "hood": null
+      },
+      {
+        "text": "Quinn Adeyemi has not advanced in 56 years",
+        "angle": "baseline context piece",
+        "hood": null
+      },
+      {
+        "text": "the debts crossed a line this week — sleep comes harder now",
+        "angle": "observational analysis",
+        "hood": "Lake Merritt"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a business, a worker, an owner or a place — every name comes from this slice",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose",
+      "Do not contradict a role, employer or neighborhood listed here"
+    ]
+  },
+  "rotation": {
+    "pool": [
+      {
+        "hood": "Baylight District",
+        "staffed": 4,
+        "workers": 55,
+        "lastCovered": 108
+      },
+      {
+        "hood": "Lake Merritt",
+        "staffed": 1,
+        "workers": 3,
+        "lastCovered": null
+      },
+      {
+        "hood": "Temescal",
+        "staffed": 5,
+        "workers": 14,
+        "lastCovered": 107
+      },
+      {
+        "hood": "West Oakland",
+        "staffed": 7,
+        "workers": 21,
+        "lastCovered": 109
+      },
+      {
+        "hood": "Brooklyn Basin",
+        "staffed": 1,
+        "workers": 5,
+        "lastCovered": null
+      },
+      {
+        "hood": "Old Oakland",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "Jack London",
+        "staffed": 7,
+        "workers": 47,
+        "lastCovered": 111
+      },
+      {
+        "hood": "Downtown",
+        "staffed": 7,
+        "workers": 10,
+        "lastCovered": 110
+      },
+      {
+        "hood": "Piedmont Ave",
+        "staffed": 2,
+        "workers": 7,
+        "lastCovered": null
+      },
+      {
+        "hood": "Fruitvale",
+        "staffed": 4,
+        "workers": 5,
+        "lastCovered": null
+      },
+      {
+        "hood": "Coliseum",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "Uptown",
+        "staffed": 4,
+        "workers": 13,
+        "lastCovered": null
+      },
+      {
+        "hood": "Chinatown",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "Rockridge",
+        "staffed": 2,
+        "workers": 6,
+        "lastCovered": null
+      },
+      {
+        "hood": "KONO",
+        "staffed": 2,
+        "workers": 2,
+        "lastCovered": null
+      },
+      {
+        "hood": "Dimond",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "Grand Lake",
+        "staffed": 2,
+        "workers": 2,
+        "lastCovered": null
+      },
+      {
+        "hood": "Laurel",
+        "staffed": 3,
+        "workers": 3,
+        "lastCovered": null
+      },
+      {
+        "hood": "East Oakland",
+        "staffed": 2,
+        "workers": 2,
+        "lastCovered": null
+      },
+      {
+        "hood": "Eastlake",
+        "staffed": 2,
+        "workers": 2,
+        "lastCovered": null
+      },
+      {
+        "hood": "San Antonio",
+        "staffed": 1,
+        "workers": 2,
+        "lastCovered": null
+      }
+    ],
+    "picked": "Uptown"
+  },
+  "candidates": [
+    {
+      "className": "hood-businesses",
+      "hood": "Baylight District",
+      "label": "Baylight District · 4 staffed / 10 listed",
+      "namedBusinesses": [
+        "Anthropic",
+        "Baylight Construction Authority",
+        "Oakland Casino Town"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Lake Merritt",
+      "label": "Lake Merritt · 1 staffed / 3 listed",
+      "namedBusinesses": [
+        "Ridgeline Ventures"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Temescal",
+      "label": "Temescal · 5 staffed / 6 listed",
+      "namedBusinesses": [
+        "Gridiron Analytics",
+        "OakTown Social",
+        "Calderon-Nishi"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "West Oakland",
+      "label": "West Oakland · 7 staffed / 10 listed",
+      "namedBusinesses": [
+        "Oakmesh Systems",
+        "West Side Cafe",
+        "Civis Systems"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Brooklyn Basin",
+      "label": "Brooklyn Basin · 1 staffed / 1 listed",
+      "namedBusinesses": [
+        "Portside Bio"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Old Oakland",
+      "label": "Old Oakland · 1 staffed / 1 listed",
+      "namedBusinesses": [
+        "Tenth Street Digital"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Jack London",
+      "label": "Jack London · 7 staffed / 7 listed",
+      "namedBusinesses": [
+        "Port of Oakland",
+        "Jack London Square Markets",
+        "Blue Lantern Bar"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Downtown",
+      "label": "Downtown · 7 staffed / 11 listed",
+      "namedBusinesses": [
+        "EBMUD",
+        "Miso Metro",
+        "SpeedyBurger"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Piedmont Ave",
+      "label": "Piedmont Ave · 2 staffed / 5 listed",
+      "namedBusinesses": [
+        "Piedmont Avenue Medical Center",
+        "Mayday Movers"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Fruitvale",
+      "label": "Fruitvale · 4 staffed / 4 listed",
+      "namedBusinesses": [
+        "Fruitvale Community Clinic",
+        "Fruitvale Diner",
+        "Foothill Builders"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Coliseum",
+      "label": "Coliseum · 1 staffed / 1 listed",
+      "namedBusinesses": [
+        "Coliseum District Development"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Chinatown",
+      "label": "Chinatown · 1 staffed / 6 listed",
+      "namedBusinesses": [
+        "Heritage Bakehouse"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Rockridge",
+      "label": "Rockridge · 2 staffed / 7 listed",
+      "namedBusinesses": [
+        "OakHouse",
+        "Claremont Table"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "KONO",
+      "label": "KONO · 2 staffed / 6 listed",
+      "namedBusinesses": [
+        "Telegraph Press",
+        "The Northgate Bar"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Dimond",
+      "label": "Dimond · 1 staffed / 6 listed",
+      "namedBusinesses": [
+        "Romano's"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Grand Lake",
+      "label": "Grand Lake · 2 staffed / 7 listed",
+      "namedBusinesses": [
+        "Port Grind",
+        "Grand Lake Books"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Laurel",
+      "label": "Laurel · 3 staffed / 6 listed",
+      "namedBusinesses": [
+        "Nino's",
+        "Laurel Market",
+        "Schoolgate Cafe"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "East Oakland",
+      "label": "East Oakland · 2 staffed / 4 listed",
+      "namedBusinesses": [
+        "Eastside Family Market",
+        "Sunrise Cafe"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Eastlake",
+      "label": "Eastlake · 2 staffed / 6 listed",
+      "namedBusinesses": [
+        "Eastlake Barbers",
+        "Parkedge Diner"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "San Antonio",
+      "label": "San Antonio · 1 staffed / 6 listed",
+      "namedBusinesses": [
+        "Park Boulevard Cafe"
+      ]
+    }
+  ],
+  "signals": {
+    "businessLaneCount": 45,
+    "sample": [
+      {
+        "kind": "anomaly",
+        "label": "transit ailment — economic footprint, affected businesses, workforce impact in Fruitvale",
+        "hood": "Fruitvale",
+        "ref": "output/engine_audit_c112.json patterns[2]; evidence: Neighborhood_Map row(s) 6"
+      },
+      {
+        "kind": "anomaly",
+        "label": "economic ailment — economic footprint, affected businesses, workforce impact in Downtown",
+        "hood": "Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Chinatown, Brooklyn, Eastlake, Glenview, Ivy Hill, San Antonio, KONO, Lake Merritt, Uptown, Baylight District",
+        "ref": "output/engine_audit_c112.json patterns[10]; evidence: Neighborhood_Map row(s) "
+      },
+      {
+        "kind": "anomaly",
+        "label": "Oakland Youth Apprenticeship Pipeline — economic upside, jobs and footprint in West Oakland",
+        "hood": "West Oakland, East Oakland, Fruitvale",
+        "ref": "output/engine_audit_c112.json patterns[11]; evidence: Initiative_Tracker row(s) 7"
+      },
+      {
+        "kind": "anomaly",
+        "label": "Commercial Stabilization for Grand Lake — economic upside, jobs and footprint in Grand Lake",
+        "hood": "Grand Lake",
+        "ref": "output/engine_audit_c112.json patterns[12]; evidence: Initiative_Tracker row(s) 9"
+      },
+      {
+        "kind": "anomaly",
+        "label": "West Oakland Tenant Defense Fund — economic upside, jobs and footprint in West Oakland",
+        "hood": "West Oakland",
+        "ref": "output/engine_audit_c112.json patterns[13]; evidence: Initiative_Tracker row(s) 10"
+      }
+    ]
+  },
+  "scene": {
+    "namedOnTop": [
+      "Oakland Tech Collective",
+      "Ridgeline Studio",
+      "Art Walk Cafe",
+      "Night Walk Records",
+      "Gallery Night Lounge"
+    ]
+  },
+  "pointers": [
+    "output/beats/Business_Ledger.jsonl (180 rows @C112)",
+    "output/beats/Employment_Roster.jsonl (971 rows)",
+    "output/beats/Story_Seed_Deck.jsonl (business seeds this cycle: 4)",
+    "output/beats/prev/Business_Ledger.jsonl (movement vs C111)",
+    "output/beats/Casino_Ledger.jsonl (34 wager rows this cycle)",
+    "output/beats/City_Treasury.jsonl (the city's money this cycle)",
+    "output/beats/Story_Hook_Deck.jsonl (business hooks this cycle: 6)",
+    "output/desk_signal_c112.json lanes.business (pointers only)",
+    "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 2"
+  ]
+}

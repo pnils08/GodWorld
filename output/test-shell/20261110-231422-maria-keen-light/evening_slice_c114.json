@@ -1,0 +1,892 @@
+{
+  "empty": false,
+  "cycle": 114,
+  "kind": "evening-life",
+  "journalist": {
+    "shared": true,
+    "consumers": [
+      "mason-ortega",
+      "kai-marston",
+      "sharon-okafor",
+      "maria-keen",
+      "elliot-graye"
+    ]
+  },
+  "texture": {
+    "famous": [
+      "Vinnie Keane",
+      "Henry Rivas",
+      "Kai Tanaka"
+    ],
+    "restaurants": [
+      {
+        "name": "Grand Avenue Wine Bar",
+        "hood": "Lake Merritt"
+      },
+      {
+        "name": "Montclair Patisserie",
+        "hood": "Piedmont Ave"
+      },
+      {
+        "name": "Green & Gold Tavern",
+        "hood": "Jack London"
+      }
+    ],
+    "fastFood": [
+      {
+        "name": "SpeedyBurger",
+        "hood": "Downtown"
+      }
+    ],
+    "nightlife": [
+      {
+        "name": "Bridge & Barrel",
+        "hood": "Jack London"
+      },
+      {
+        "name": "Temple Lounge",
+        "hood": "Downtown"
+      },
+      {
+        "name": "Canvas Club",
+        "hood": "Temescal"
+      }
+    ],
+    "nightlifeMeta": {
+      "volume": 5,
+      "vibe": "art-scene",
+      "movement": "art-walk",
+      "weatherImpact": 1
+    },
+    "cityEvents": [
+      "The Aitken Line Founding Celebration",
+      "Downtown Plaza Noon Music Session",
+      "Downtown First Friday Live Music",
+      "KONO First Friday Gallery Hop"
+    ],
+    "tv": [
+      "Gallery Hour",
+      "Crisis Desk",
+      "Spring Lineup",
+      "Jack London Ballpark Stories",
+      "Wendell Carter Jr (C) — Player Profile"
+    ],
+    "movies": [
+      "Art of the City",
+      "New Bloom",
+      "Franchise"
+    ],
+    "sportsBroadcast": "Oakland Sports Tonight",
+    "streamingTrend": "arts documentaries",
+    "foodTrend": "First Friday arts district dining - gallery crowd"
+  },
+  "signals": {
+    "fameCount": 8,
+    "sightingCount": 3,
+    "faithCount": 6,
+    "eveningPointer": {
+      "ref": "output/world_summary_c114.md \"## Evening Texture\"",
+      "label": "Named venues that moved — restaurants, fast food, nightlife spots, city events, media"
+    },
+    "sightings": [
+      {
+        "kind": "lifestyle-sighting",
+        "label": "sighting | Vinnie Keane spotted at Grand Avenue Wine Bar",
+        "name": "Vinnie Keane",
+        "venue": "Grand Avenue Wine Bar",
+        "ref": "Ripple_Ledger cycle 114 (CauseType lifestyle-sighting); rendered: world_summary_c114.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "hood": "Lake Merritt",
+        "popids": []
+      },
+      {
+        "kind": "lifestyle-sighting",
+        "label": "sighting | Henry Rivas spotted at Calderon-Nishi",
+        "name": "Henry Rivas",
+        "venue": "Calderon-Nishi",
+        "ref": "Ripple_Ledger cycle 114 (CauseType lifestyle-sighting); rendered: world_summary_c114.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "hood": "Temescal",
+        "popids": []
+      },
+      {
+        "kind": "lifestyle-sighting",
+        "label": "sighting | Kai Tanaka spotted at Temescal Urgent Care",
+        "name": "Kai Tanaka",
+        "venue": "Temescal Urgent Care",
+        "ref": "Ripple_Ledger cycle 114 (CauseType lifestyle-sighting); rendered: world_summary_c114.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "hood": "Temescal",
+        "popids": []
+      }
+    ],
+    "fame": [
+      {
+        "kind": "fame-event",
+        "label": "tier-climb | Maria Keen — the city keeps saying the name: Tier 4 -> 3",
+        "name": "Maria Keen",
+        "ref": "Ripple_Ledger cycle 114 (CauseType fame-event); rendered: world_summary_c114.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Lake Merritt",
+        "popids": [
+          "POP-00013"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "tier-climb | Anthony Raines — the city keeps saying the name: Tier 3 -> 2",
+        "name": "Anthony Raines",
+        "ref": "Ripple_Ledger cycle 114 (CauseType fame-event); rendered: world_summary_c114.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Rockridge",
+        "popids": [
+          "POP-00017"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "tier-climb | Noah Tan — the city keeps saying the name: Tier 4 -> 3",
+        "name": "Noah Tan",
+        "ref": "Ripple_Ledger cycle 114 (CauseType fame-event); rendered: world_summary_c114.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Rockridge",
+        "popids": [
+          "POP-00157"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "tier-climb | Elle Lilo — the city keeps saying the name: Tier 4 -> 3",
+        "name": "Elle Lilo",
+        "ref": "Ripple_Ledger cycle 114 (CauseType fame-event); rendered: world_summary_c114.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Jack London",
+        "popids": [
+          "POP-00177"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "tier-climb | Yu Zen — the city keeps saying the name: Tier 4 -> 3",
+        "name": "Yu Zen",
+        "ref": "Ripple_Ledger cycle 114 (CauseType fame-event); rendered: world_summary_c114.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Rockridge",
+        "popids": [
+          "POP-00194"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "tier-climb | Omar Amici — the city keeps saying the name: Tier 4 -> 3",
+        "name": "Omar Amici",
+        "ref": "Ripple_Ledger cycle 114 (CauseType fame-event); rendered: world_summary_c114.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Uptown",
+        "popids": [
+          "POP-00263"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "tier-climb | Nia Rook — the city keeps saying the name: Tier 4 -> 3",
+        "name": "Nia Rook",
+        "ref": "Ripple_Ledger cycle 114 (CauseType fame-event); rendered: world_summary_c114.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "West Oakland",
+        "popids": [
+          "POP-01076"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "tier-climb | Tamsin Pruitt — the city keeps saying the name: Tier 4 -> 3",
+        "name": "Tamsin Pruitt",
+        "ref": "Ripple_Ledger cycle 114 (CauseType fame-event); rendered: world_summary_c114.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Fruitvale",
+        "popids": [
+          "POP-01210"
+        ]
+      }
+    ]
+  },
+  "pulse": {
+    "className": "fame-sighting",
+    "score": 23,
+    "label": "Vinnie Keane at Grand Avenue Wine Bar (Lake Merritt)",
+    "named": "Grand Avenue Wine Bar",
+    "hood": "Lake Merritt",
+    "person": "Vinnie Keane",
+    "venue": "Grand Avenue Wine Bar"
+  },
+  "candidates": [
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Vinnie Keane at Grand Avenue Wine Bar (Lake Merritt)",
+      "named": "Grand Avenue Wine Bar",
+      "hood": "Lake Merritt"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Henry Rivas at Calderon-Nishi (Temescal)",
+      "named": "Calderon-Nishi",
+      "hood": "Temescal"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Kai Tanaka at Temescal Urgent Care (Temescal)",
+      "named": "Temescal Urgent Care",
+      "hood": "Temescal"
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Grand Avenue Wine Bar (Lake Merritt)",
+      "named": "Grand Avenue Wine Bar",
+      "hood": "Lake Merritt"
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Montclair Patisserie (Piedmont Ave)",
+      "named": "Montclair Patisserie",
+      "hood": "Piedmont Ave"
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Green & Gold Tavern (Jack London)",
+      "named": "Green & Gold Tavern",
+      "hood": "Jack London"
+    },
+    {
+      "className": "nightlife-spot",
+      "score": 18,
+      "label": "Bridge & Barrel (Jack London)",
+      "named": "Bridge & Barrel",
+      "hood": "Jack London"
+    },
+    {
+      "className": "nightlife-spot",
+      "score": 18,
+      "label": "Temple Lounge (Downtown)",
+      "named": "Temple Lounge",
+      "hood": "Downtown"
+    },
+    {
+      "className": "nightlife-spot",
+      "score": 18,
+      "label": "Canvas Club (Temescal)",
+      "named": "Canvas Club",
+      "hood": "Temescal"
+    },
+    {
+      "className": "city-event",
+      "score": 17,
+      "label": "Downtown Plaza Noon Music Session",
+      "named": "Downtown Plaza Noon Music Session",
+      "hood": null
+    },
+    {
+      "className": "city-event",
+      "score": 17,
+      "label": "Downtown First Friday Live Music",
+      "named": "Downtown First Friday Live Music",
+      "hood": null
+    },
+    {
+      "className": "city-event",
+      "score": 17,
+      "label": "KONO First Friday Gallery Hop",
+      "named": "KONO First Friday Gallery Hop",
+      "hood": null
+    }
+  ],
+  "pulses": [
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Vinnie Keane at Grand Avenue Wine Bar (Lake Merritt)",
+      "named": "Grand Avenue Wine Bar",
+      "hood": "Lake Merritt",
+      "names": [
+        "Vinnie Keane",
+        "Grand Avenue Wine Bar"
+      ],
+      "person": "Vinnie Keane",
+      "venue": "Grand Avenue Wine Bar",
+      "popids": [],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 114 (CauseType lifestyle-sighting); rendered: world_summary_c114.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "angle": "Vinnie Keane spotted at Grand Avenue Wine Bar in Lake Merritt — ground truth only, no invented companions",
+      "hookLine": "sighting | Vinnie Keane spotted at Grand Avenue Wine Bar",
+      "sceneBits": [
+        "PERSON: Vinnie Keane",
+        "VENUE: Grand Avenue Wine Bar",
+        "HOOD: Lake Merritt"
+      ],
+      "cycle": 114
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Henry Rivas at Calderon-Nishi (Temescal)",
+      "named": "Calderon-Nishi",
+      "hood": "Temescal",
+      "names": [
+        "Henry Rivas",
+        "Calderon-Nishi"
+      ],
+      "person": "Henry Rivas",
+      "venue": "Calderon-Nishi",
+      "popids": [],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 114 (CauseType lifestyle-sighting); rendered: world_summary_c114.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "angle": "Henry Rivas spotted at Calderon-Nishi in Temescal — ground truth only, no invented companions",
+      "hookLine": "sighting | Henry Rivas spotted at Calderon-Nishi",
+      "sceneBits": [
+        "PERSON: Henry Rivas",
+        "VENUE: Calderon-Nishi",
+        "HOOD: Temescal"
+      ],
+      "cycle": 114
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Kai Tanaka at Temescal Urgent Care (Temescal)",
+      "named": "Temescal Urgent Care",
+      "hood": "Temescal",
+      "names": [
+        "Kai Tanaka",
+        "Temescal Urgent Care"
+      ],
+      "person": "Kai Tanaka",
+      "venue": "Temescal Urgent Care",
+      "popids": [],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 114 (CauseType lifestyle-sighting); rendered: world_summary_c114.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "angle": "Kai Tanaka spotted at Temescal Urgent Care in Temescal — ground truth only, no invented companions",
+      "hookLine": "sighting | Kai Tanaka spotted at Temescal Urgent Care",
+      "sceneBits": [
+        "PERSON: Kai Tanaka",
+        "VENUE: Temescal Urgent Care",
+        "HOOD: Temescal"
+      ],
+      "cycle": 114
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Grand Avenue Wine Bar (Lake Merritt)",
+      "named": "Grand Avenue Wine Bar",
+      "hood": "Lake Merritt",
+      "names": [
+        "Grand Avenue Wine Bar"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Restaurants",
+      "angle": "Grand Avenue Wine Bar appears on the evening restaurant list in Lake Merritt. What was happening there is not established.",
+      "hookLine": "Grand Avenue Wine Bar appears on the evening restaurant list in Lake Merritt.",
+      "sceneBits": [
+        "VENUE: Grand Avenue Wine Bar",
+        "HOOD: Lake Merritt"
+      ],
+      "cycle": 114
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Montclair Patisserie (Piedmont Ave)",
+      "named": "Montclair Patisserie",
+      "hood": "Piedmont Ave",
+      "names": [
+        "Montclair Patisserie"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Restaurants",
+      "angle": "Montclair Patisserie appears on the evening restaurant list in Piedmont Ave. What was happening there is not established.",
+      "hookLine": "Montclair Patisserie appears on the evening restaurant list in Piedmont Ave.",
+      "sceneBits": [
+        "VENUE: Montclair Patisserie",
+        "HOOD: Piedmont Ave"
+      ],
+      "cycle": 114
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Green & Gold Tavern (Jack London)",
+      "named": "Green & Gold Tavern",
+      "hood": "Jack London",
+      "names": [
+        "Green & Gold Tavern"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Restaurants",
+      "angle": "Green & Gold Tavern appears on the evening restaurant list in Jack London. What was happening there is not established.",
+      "hookLine": "Green & Gold Tavern appears on the evening restaurant list in Jack London.",
+      "sceneBits": [
+        "VENUE: Green & Gold Tavern",
+        "HOOD: Jack London"
+      ],
+      "cycle": 114
+    },
+    {
+      "className": "nightlife-spot",
+      "score": 18,
+      "label": "Bridge & Barrel (Jack London)",
+      "named": "Bridge & Barrel",
+      "hood": "Jack London",
+      "names": [
+        "Bridge & Barrel"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Nightlife",
+      "angle": "Nightlife at Bridge & Barrel — who is out and what the block is saying",
+      "hookLine": "Bridge & Barrel holds the evening out in Jack London.",
+      "sceneBits": [
+        "VENUE: Bridge & Barrel",
+        "HOOD: Jack London",
+        "EVENING RECORD: open and quiet"
+      ],
+      "nightlifeMeta": {
+        "volume": 5,
+        "vibe": "art-scene",
+        "movement": "art-walk",
+        "weatherImpact": 1
+      },
+      "cycle": 114
+    },
+    {
+      "className": "nightlife-spot",
+      "score": 18,
+      "label": "Temple Lounge (Downtown)",
+      "named": "Temple Lounge",
+      "hood": "Downtown",
+      "names": [
+        "Temple Lounge"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Nightlife",
+      "angle": "Nightlife at Temple Lounge — who is out and what the block is saying",
+      "hookLine": "Temple Lounge holds the evening out in Downtown.",
+      "sceneBits": [
+        "VENUE: Temple Lounge",
+        "HOOD: Downtown",
+        "EVENING RECORD: open and quiet"
+      ],
+      "nightlifeMeta": {
+        "volume": 5,
+        "vibe": "art-scene",
+        "movement": "art-walk",
+        "weatherImpact": 1
+      },
+      "cycle": 114
+    },
+    {
+      "className": "nightlife-spot",
+      "score": 18,
+      "label": "Canvas Club (Temescal)",
+      "named": "Canvas Club",
+      "hood": "Temescal",
+      "names": [
+        "Canvas Club"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Nightlife",
+      "angle": "Nightlife at Canvas Club — who is out and what the block is saying",
+      "hookLine": "Canvas Club holds the evening out in Temescal.",
+      "sceneBits": [
+        "VENUE: Canvas Club",
+        "HOOD: Temescal",
+        "EVENING RECORD: open and quiet"
+      ],
+      "nightlifeMeta": {
+        "volume": 5,
+        "vibe": "art-scene",
+        "movement": "art-walk",
+        "weatherImpact": 1
+      },
+      "cycle": 114
+    },
+    {
+      "className": "city-event",
+      "score": 17,
+      "label": "Downtown Plaza Noon Music Session",
+      "named": "Downtown Plaza Noon Music Session",
+      "hood": null,
+      "names": [
+        "Downtown Plaza Noon Music Session"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · City events",
+      "angle": "Arts/cultural event: Downtown Plaza Noon Music Session — present-tense room, not calendar filler",
+      "hookLine": "Downtown Plaza Noon Music Session is on the evening board.",
+      "sceneBits": [
+        "EVENT: Downtown Plaza Noon Music Session",
+        "ARTS SIGNAL: yes"
+      ],
+      "cycle": 114
+    },
+    {
+      "className": "city-event",
+      "score": 17,
+      "label": "Downtown First Friday Live Music",
+      "named": "Downtown First Friday Live Music",
+      "hood": null,
+      "names": [
+        "Downtown First Friday Live Music"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · City events",
+      "angle": "Arts/cultural event: Downtown First Friday Live Music — present-tense room, not calendar filler",
+      "hookLine": "Downtown First Friday Live Music is on the evening board.",
+      "sceneBits": [
+        "EVENT: Downtown First Friday Live Music",
+        "ARTS SIGNAL: yes"
+      ],
+      "cycle": 114
+    },
+    {
+      "className": "city-event",
+      "score": 17,
+      "label": "KONO First Friday Gallery Hop",
+      "named": "KONO First Friday Gallery Hop",
+      "hood": null,
+      "names": [
+        "KONO First Friday Gallery Hop"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · City events",
+      "angle": "Arts/cultural event: KONO First Friday Gallery Hop — present-tense room, not calendar filler",
+      "hookLine": "KONO First Friday Gallery Hop is on the evening board.",
+      "sceneBits": [
+        "EVENT: KONO First Friday Gallery Hop",
+        "ARTS SIGNAL: yes"
+      ],
+      "cycle": 114
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Maria Keen — fame rise",
+      "named": "Maria Keen",
+      "hood": "Lake Merritt",
+      "names": [
+        "Maria Keen"
+      ],
+      "person": "Maria Keen",
+      "popids": [
+        "POP-00013"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 114 (CauseType fame-event); rendered: world_summary_c114.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Maria Keen — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Maria Keen — the city keeps saying the name: Tier 4 -> 3",
+      "sceneBits": [
+        "PERSON: Maria Keen",
+        "HOOD: Lake Merritt",
+        "LABEL: tier-climb | Maria Keen — the city keeps saying the name: Tier 4 -> 3"
+      ],
+      "cycle": 114
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Anthony Raines — fame rise",
+      "named": "Anthony Raines",
+      "hood": "Rockridge",
+      "names": [
+        "Anthony Raines"
+      ],
+      "person": "Anthony Raines",
+      "popids": [
+        "POP-00017"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 114 (CauseType fame-event); rendered: world_summary_c114.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Anthony Raines — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Anthony Raines — the city keeps saying the name: Tier 3 -> 2",
+      "sceneBits": [
+        "PERSON: Anthony Raines",
+        "HOOD: Rockridge",
+        "LABEL: tier-climb | Anthony Raines — the city keeps saying the name: Tier 3 -> 2"
+      ],
+      "cycle": 114
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Noah Tan — fame rise",
+      "named": "Noah Tan",
+      "hood": "Rockridge",
+      "names": [
+        "Noah Tan"
+      ],
+      "person": "Noah Tan",
+      "popids": [
+        "POP-00157"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 114 (CauseType fame-event); rendered: world_summary_c114.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Noah Tan — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Noah Tan — the city keeps saying the name: Tier 4 -> 3",
+      "sceneBits": [
+        "PERSON: Noah Tan",
+        "HOOD: Rockridge",
+        "LABEL: tier-climb | Noah Tan — the city keeps saying the name: Tier 4 -> 3"
+      ],
+      "cycle": 114
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Elle Lilo — fame rise",
+      "named": "Elle Lilo",
+      "hood": "Jack London",
+      "names": [
+        "Elle Lilo"
+      ],
+      "person": "Elle Lilo",
+      "popids": [
+        "POP-00177"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 114 (CauseType fame-event); rendered: world_summary_c114.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Elle Lilo — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Elle Lilo — the city keeps saying the name: Tier 4 -> 3",
+      "sceneBits": [
+        "PERSON: Elle Lilo",
+        "HOOD: Jack London",
+        "LABEL: tier-climb | Elle Lilo — the city keeps saying the name: Tier 4 -> 3"
+      ],
+      "cycle": 114
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Yu Zen — fame rise",
+      "named": "Yu Zen",
+      "hood": "Rockridge",
+      "names": [
+        "Yu Zen"
+      ],
+      "person": "Yu Zen",
+      "popids": [
+        "POP-00194"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 114 (CauseType fame-event); rendered: world_summary_c114.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Yu Zen — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Yu Zen — the city keeps saying the name: Tier 4 -> 3",
+      "sceneBits": [
+        "PERSON: Yu Zen",
+        "HOOD: Rockridge",
+        "LABEL: tier-climb | Yu Zen — the city keeps saying the name: Tier 4 -> 3"
+      ],
+      "cycle": 114
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Omar Amici — fame rise",
+      "named": "Omar Amici",
+      "hood": "Uptown",
+      "names": [
+        "Omar Amici"
+      ],
+      "person": "Omar Amici",
+      "popids": [
+        "POP-00263"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 114 (CauseType fame-event); rendered: world_summary_c114.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Omar Amici — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Omar Amici — the city keeps saying the name: Tier 4 -> 3",
+      "sceneBits": [
+        "PERSON: Omar Amici",
+        "HOOD: Uptown",
+        "LABEL: tier-climb | Omar Amici — the city keeps saying the name: Tier 4 -> 3"
+      ],
+      "cycle": 114
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Nia Rook — fame rise",
+      "named": "Nia Rook",
+      "hood": "West Oakland",
+      "names": [
+        "Nia Rook"
+      ],
+      "person": "Nia Rook",
+      "popids": [
+        "POP-01076"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 114 (CauseType fame-event); rendered: world_summary_c114.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Nia Rook — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Nia Rook — the city keeps saying the name: Tier 4 -> 3",
+      "sceneBits": [
+        "PERSON: Nia Rook",
+        "HOOD: West Oakland",
+        "LABEL: tier-climb | Nia Rook — the city keeps saying the name: Tier 4 -> 3"
+      ],
+      "cycle": 114
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Tamsin Pruitt — fame rise",
+      "named": "Tamsin Pruitt",
+      "hood": "Fruitvale",
+      "names": [
+        "Tamsin Pruitt"
+      ],
+      "person": "Tamsin Pruitt",
+      "popids": [
+        "POP-01210"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 114 (CauseType fame-event); rendered: world_summary_c114.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Tamsin Pruitt — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Tamsin Pruitt — the city keeps saying the name: Tier 4 -> 3",
+      "sceneBits": [
+        "PERSON: Tamsin Pruitt",
+        "HOOD: Fruitvale",
+        "LABEL: tier-climb | Tamsin Pruitt — the city keeps saying the name: Tier 4 -> 3"
+      ],
+      "cycle": 114
+    }
+  ],
+  "recommend": {
+    "bag": "ground",
+    "slug": "maria-keen",
+    "name": "Maria Keen",
+    "popid": "POP-00013",
+    "bagDoc": "docs/media/MARIA_GROUND_BAG.md",
+    "reason": "top pulse fame-sighting → ground",
+    "pulseClass": "fame-sighting",
+    "pulseLabel": "Vinnie Keane at Grand Avenue Wine Bar (Lake Merritt)"
+  },
+  "perSeat": {
+    "mason-ortega": {
+      "pulseClass": "named-restaurant",
+      "label": "Grand Avenue Wine Bar (Lake Merritt)",
+      "score": 34,
+      "bag": "kitchen"
+    },
+    "kai-marston": {
+      "pulseClass": "city-event",
+      "label": "Downtown Plaza Noon Music Session",
+      "score": 31,
+      "bag": "arts"
+    },
+    "sharon-okafor": {
+      "pulseClass": "fame-sighting",
+      "label": "Vinnie Keane at Grand Avenue Wine Bar (Lake Merritt)",
+      "score": 31,
+      "bag": "lifestyle"
+    },
+    "maria-keen": {
+      "pulseClass": "fame-sighting",
+      "label": "Vinnie Keane at Grand Avenue Wine Bar (Lake Merritt)",
+      "score": 31,
+      "bag": "ground"
+    },
+    "elliot-graye": {
+      "pulseClass": "fame-sighting",
+      "label": "Vinnie Keane at Grand Avenue Wine Bar (Lake Merritt)",
+      "score": 31,
+      "bag": "faith"
+    }
+  },
+  "approach": "Evening-life approach (shared culture pack): open from a NAMED place or sighting in this slice — restaurant, bar, festival, TV slate, or fame stop — never invent venues or employees. Use nightlife volume/vibe/movement as scene color only; translate to human language (no raw decimals as lead). Pick ONE life pulse; ride the recommended consumer bag when it matches your seat (kitchen / arts / lifestyle / ground / faith). Do not file multi-voice culture-desk average. One room, one night, one truth.",
+  "story": {
+    "angle": "Vinnie Keane spotted at Grand Avenue Wine Bar in Lake Merritt — ground truth only, no invented companions",
+    "label": "Vinnie Keane at Grand Avenue Wine Bar (Lake Merritt)",
+    "hookLine": "sighting | Vinnie Keane spotted at Grand Avenue Wine Bar",
+    "hood": "Lake Merritt",
+    "pulseClass": "fame-sighting",
+    "citizens": [
+      "Vinnie Keane"
+    ],
+    "popids": [],
+    "named": "Grand Avenue Wine Bar",
+    "venue": "Grand Avenue Wine Bar",
+    "ref": "Ripple_Ledger cycle 114 (CauseType lifestyle-sighting); rendered: world_summary_c114.md \"## What Moved\" > \"### lifestyle-sighting\"",
+    "cycle": 114
+  },
+  "prewrite": {
+    "pulseClass": "fame-sighting",
+    "angle": "Vinnie Keane spotted at Grand Avenue Wine Bar in Lake Merritt — ground truth only, no invented companions",
+    "hookLine": "sighting | Vinnie Keane spotted at Grand Avenue Wine Bar",
+    "anchorFacts": [
+      "NAMED: Grand Avenue Wine Bar",
+      "PERSON: Vinnie Keane",
+      "VENUE: Grand Avenue Wine Bar",
+      "HOOD: Lake Merritt",
+      "PERSON: Vinnie Keane",
+      "VENUE: Grand Avenue Wine Bar",
+      "HOOD: Lake Merritt"
+    ],
+    "bagRecommend": "ground",
+    "bagSlug": "maria-keen"
+  },
+  "scene": {
+    "venues": [
+      {
+        "name": "Grand Avenue Wine Bar",
+        "hood": "Lake Merritt"
+      },
+      {
+        "name": "Montclair Patisserie",
+        "hood": "Piedmont Ave"
+      },
+      {
+        "name": "Green & Gold Tavern",
+        "hood": "Jack London"
+      },
+      {
+        "name": "SpeedyBurger",
+        "hood": "Downtown"
+      },
+      {
+        "name": "Bridge & Barrel",
+        "hood": "Jack London"
+      },
+      {
+        "name": "Temple Lounge",
+        "hood": "Downtown"
+      },
+      {
+        "name": "Canvas Club",
+        "hood": "Temescal"
+      }
+    ],
+    "nightlifeMeta": {
+      "volume": 5,
+      "vibe": "art-scene",
+      "movement": "art-walk",
+      "weatherImpact": 1
+    },
+    "cityEvents": [
+      "The Aitken Line Founding Celebration",
+      "Downtown Plaza Noon Music Session",
+      "Downtown First Friday Live Music",
+      "KONO First Friday Gallery Hop"
+    ],
+    "tv": [
+      "Gallery Hour",
+      "Crisis Desk",
+      "Spring Lineup",
+      "Jack London Ballpark Stories",
+      "Wendell Carter Jr (C) — Player Profile"
+    ],
+    "movies": [
+      "Art of the City",
+      "New Bloom",
+      "Franchise"
+    ],
+    "colorRoom": "Named places only from Evening Texture / desk_signal.  Sensory room (weather, light, sound) is free; careers and employees are not."
+  },
+  "pointers": [
+    "output/world_summary_c114.md ## Evening Texture",
+    "output/desk_signal_c114.json lanes.culture",
+    "docs/media/MARIA_GROUND_BAG.md"
+  ]
+}

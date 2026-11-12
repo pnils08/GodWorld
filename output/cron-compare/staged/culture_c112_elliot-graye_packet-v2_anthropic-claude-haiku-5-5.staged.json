@@ -1,0 +1,65 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "112",
+  "persona": "elliot-graye",
+  "byline": "Elliot Graye",
+  "bylinePopid": "POP-00012",
+  "article": "output/cron-compare/staged/culture_c112_elliot-graye_packet-v2_anthropic-claude-haiku-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Eunice Marston",
+        "role": "quoted-source",
+        "popid": "POP-00753"
+      },
+      {
+        "name": "Amir Delia",
+        "role": "quoted-source",
+        "popid": "POP-00603"
+      },
+      {
+        "name": "Imie Calero",
+        "role": "quoted-source",
+        "popid": "POP-00335"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Downtown"
+    ],
+    "claims": [
+      {
+        "claim": "As a faith leader, I believe our congregation's role in the community during times of crisis is to offer support and be present for those affected. We've seen this in action at Telegraph Presbyterian Fellowship, where we've opened our doors to provide a sense of community and comfort. I think it's essential for faith organizations to be available and welcoming, just as we've observed other faith communities doing in our area.",
+        "sourceRef": "citizenVoice PRESS Eunice Marston"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-89803dfafc0a",
+    "draftSha256": "979a2e55773350a1791cc162869038e7ac7baebed81de246f56c2a3d17ddb1e2",
+    "verdict": "output/cron-compare/culture_c112_elliot-graye_packet-v2_anthropic-claude-haiku-5-5.rhea.json",
+    "ranAt": "2026-10-22T23:15:28.140Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 708,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "979a2e55773350a1791cc162869038e7ac7baebed81de246f56c2a3d17ddb1e2",
+      "costUsd": 0.0013
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-22T23:15:34.867Z"
+}

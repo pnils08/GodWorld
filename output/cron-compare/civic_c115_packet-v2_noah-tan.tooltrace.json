@@ -1,0 +1,14 @@
+{
+  "model": "x-ai/grok-4.3",
+  "calls": [
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Ramon Vega"
+      },
+      "resultChars": 3239,
+      "resultHead": "[earlier · reference] District 4 — Ramon Vega (Independent) The district the boom passed over, and the only one that was passed over for a *reputation* rather than a hardship. Its emptiness is canon, not an accident. Dimond — a small commercial village on the hill approach, and the district still living down a past era. The strip's cash businesses were the home of an organized-crime operation in the decades before the boom; the operation is gone and the name is not. Nothing current, everything remembered — the city's one place where pro\n[C114 · daily · Noah Tan] Ramon Vega stood at the edge of"
+    }
+  ],
+  "ranAt": "2026-11-12T00:16:50.165Z"
+}

@@ -1,0 +1,57 @@
+{
+  "mode": "wake-write",
+  "desk": "sports",
+  "cycle": "112",
+  "provider": "openrouter",
+  "model": "x-ai/grok-4.3",
+  "configuredWriterModel": "x-ai/grok-4.3",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "p-slayer",
+  "byline": {
+    "name": "P Slayer",
+    "popid": "POP-00008",
+    "beatDomain": "SPORTS"
+  },
+  "laneEntries": 9,
+  "quotesLanded": 4,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [],
+  "toolCalls": 0,
+  "wordCount": 584,
+  "targetWords": "400-700",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 400",
+    "words": 584,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "1de6654c095f88fe03fde785a8a312e62728abd02dbca0bf74e1f1275f72f8bf",
+    "costUsd": 0.0011
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 4/4 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/sports_c112_p-slayer_packet-v2_x-ai-grok-4-3.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "ug: true }\n{\n  \"popId\": \"POP-00008\",\n  \"name\": \"P Slayer\",\n  \"recorded\": true,\n  \"text\": \"filed: I stepped into the Blue Lattern Bar just after the lights came up, the kind of Jack London night whe\"\n}"
+  },
+  "ranAt": "2026-10-21T23:19:09.440Z",
+  "dispositionReconciledAt": "2026-10-24T17:00:04.648Z"
+}

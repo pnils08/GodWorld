@@ -1,0 +1,50 @@
+{
+  "draft": "output/cron-compare/civic_c111_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "111",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "ee28533d40da28e405d62b845686692cbe0e02604ed554052ad69e2a05d2d2c7",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Fruitvale decay metrics, initiative status, and ranking data precisely match cycle 111 engine audit with authorized columnist texture.",
+  "review": {
+    "profileId": "jax-accountability-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "jax-accountability-v1",
+    "packageVersion": "JAX-LEP2-1",
+    "manifestId": "AM-3f143afc0ff7",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Jax Caldera"
+    ],
+    "unverified": [
+      "Youth Apprenticeship Pipeline"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0102,
+  "durationMs": 6102,
+  "parseError": false,
+  "ranAt": "2026-10-14T23:15:32.779Z"
+}

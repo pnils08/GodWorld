@@ -1,0 +1,204 @@
+{
+  "cycle": 114,
+  "v": "CITYHALL/1",
+  "hearing": [
+    {
+      "officeId": "COUNCIL-D3",
+      "popid": "POP-00503",
+      "holder": "Rose Delgado",
+      "district": "D3",
+      "faction": "OPP",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "East Oakland gets the briefing, the Fruitvale data, and the Baylight review in the daylight — before anyone asks this district to accept expansion.",
+      "actionAsked": "Schedule and publish the D3 OARI community briefing date this cycle with Fruitvale district-level data and the Baylight feasibility review.",
+      "voiceFile": "output/civic-voice/council_d3_c114.json"
+    },
+    {
+      "officeId": "STAFF-DM-COMM",
+      "popid": "POP-00037",
+      "holder": "Brenda Okoro",
+      "district": "citywide",
+      "faction": "STAFF",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "The Fund renew's with its scope intact and its Month-12 records public, because trust requires both delivered support and documentation.",
+      "actionAsked": "The Month-12 $400,000 disbursement is executed, and the charter renewal moves to draft completion, explicitly preserving the Fund's scope to West Oakland businesses and residents.",
+      "voiceFile": "output/civic-voice/okoro_c114.json"
+    },
+    {
+      "officeId": "COUNCIL-D9",
+      "popid": "POP-00506",
+      "holder": "Terrence Mobley",
+      "district": "D9",
+      "faction": "OPP",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Uptown's busy streets are somebody's work paying off — now they get a dated track, not just a speaking order.",
+      "actionAsked": "Support the Mayor's INIT-008 ask: put the $15 million authorization on a recorded council decision path with Ashford's benchmarks attached, require a concrete C114 Uptown timeline, and include Downtown transit access in implementation planning.",
+      "voiceFile": "output/civic-voice/council_d9_c114.json"
+    },
+    {
+      "officeId": "COUNCIL-D1",
+      "popid": "POP-00501",
+      "holder": "Denise Carter",
+      "district": "D1",
+      "faction": "OPP",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Month twelve is not a closing — it's a renewal, and I won't sign a charter that writes our people out.",
+      "actionAsked": "Vote YES to execute the $400,000 Month-12 disbursement under the 23-day processing standard and to open charter renewal drafting with the Fund's scope intact for West Oakland businesses and residents.",
+      "voiceFile": "output/civic-voice/council_d1_c114.json"
+    },
+    {
+      "officeId": "COUNCIL-D5",
+      "popid": "POP-00043",
+      "holder": "Janae Rivers",
+      "district": "D5",
+      "faction": "OPP",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "The data is in — now let's make sure the folks who called 911 actually get to see it, in their own neighborhood, with their own numbers.",
+      "actionAsked": "File the D5 dispatch performance audit, execute the East Oakland D3 briefing with Fruitvale and Baylight data this cycle, and file a written response to the East Oakland citizen complaint.",
+      "voiceFile": "output/civic-voice/council_d5_c114.json"
+    },
+    {
+      "officeId": "COUNCIL-D6",
+      "popid": "POP-00044",
+      "holder": "Elliott Crane",
+      "district": "D6",
+      "faction": "CRC",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "When local commerce is steady and crime remains low, City Hall's primary responsibility is reliable municipal stewardship, not disruptive intervention.",
+      "actionAsked": "Prioritize baseline municipal maintenance and public safety continuity along Piedmont Avenue while recognizing neighborhood community milestones.",
+      "voiceFile": "output/civic-voice/council_d6_c114.json"
+    },
+    {
+      "officeId": "COUNCIL-D4",
+      "popid": "POP-00042",
+      "holder": "Ramon Vega",
+      "district": "D4",
+      "faction": "IND",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Ivy Hill needs a hearing with a schedule, not another promise that action is coming.",
+      "actionAsked": "Schedule the INIT-011 committee referral and hearing in C114.",
+      "voiceFile": "output/civic-voice/council_d4_c114.json"
+    },
+    {
+      "officeId": "COUNCIL-D2",
+      "popid": "POP-00502",
+      "holder": "Leonard Tran",
+      "district": "D2",
+      "faction": "IND",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "The work is on schedule; the next milestone still has to be proven.",
+      "actionAsked": "YES; keep the C115 construction milestone review contingent on its evidence.",
+      "voiceFile": "output/civic-voice/council_d2_c114.json"
+    },
+    {
+      "officeId": "COUNCIL-D8",
+      "popid": "POP-00505",
+      "holder": "Nina Chen",
+      "district": "D8",
+      "faction": "CRC",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Relief without accountability is merely an expenditure; District 8 votes YES because the Chen-Vega audit protocols guarantee that every dollar deployed in Grand Lake is tracked, verified, and earned.",
+      "actionAsked": "Immediate floor passage of INIT-009 with required quarterly milestone audits and public reporting.",
+      "voiceFile": "output/civic-voice/council_d8_c114.json"
+    },
+    {
+      "officeId": "COUNCIL-D7",
+      "popid": "POP-00504",
+      "holder": "Warren Ashford",
+      "district": "D7",
+      "faction": "CRC",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Rockridge cannot be treated as an unmonitored tax engine while its daily life declines and storefronts face pressure without city support.",
+      "actionAsked": "Execute a formal commercial corridor and housing pressure assessment for Rockridge with published audit findings.",
+      "voiceFile": "output/civic-voice/council_d7_c114.json"
+    }
+  ],
+  "votes": [],
+  "gavel": {
+    "officeId": "MAYOR-01",
+    "popid": "POP-00034",
+    "holder": "Avery Santana",
+    "dispositions": [
+      {
+        "initiativeId": "INIT-001",
+        "mayoralAction": "none",
+        "implementationPhase": "disbursement-active",
+        "note": "C114: Month-12 $400K executed under the 23-day standard; closeout publication and charter renewal drafting directed with West Oakland business-and-resident scope intact."
+      },
+      {
+        "initiativeId": "INIT-002",
+        "mayoralAction": "none",
+        "implementationPhase": "dispatch-live",
+        "note": "C114: D3 East Oakland briefing and D5 audit directed; Fruitvale data and Baylight feasibility review docketed, with expansion held until after briefing."
+      },
+      {
+        "initiativeId": "INIT-003",
+        "mayoralAction": "none",
+        "implementationPhase": "design-phase",
+        "note": "C114: Preliminary schematics delivery and documented Fruitvale community review directed; further design advancement awaits a public comment-and-response record."
+      },
+      {
+        "initiativeId": "Baylight District — Final Council Vote",
+        "mayoralAction": "none",
+        "implementationPhase": null,
+        "note": "Keep the C115 milestone review contingent on independent remediation verification, neighborhood protections, hotline records, and workforce results; make no early milestone declaration."
+      },
+      {
+        "initiativeId": "INIT-007",
+        "mayoralAction": "none",
+        "implementationPhase": null,
+        "note": "C114: Placement-gap analysis and adjustment plan directed for publication, with explicit West Oakland and Fruitvale review."
+      },
+      {
+        "initiativeId": "INIT-008",
+        "mayoralAction": "none",
+        "implementationPhase": "vote-ready",
+        "note": "C114: $15M ordinance marked vote-ready with Ashford benchmarks; recorded council decision, C114 Uptown timeline, and Downtown transit-access planning directed."
+      },
+      {
+        "initiativeId": "INIT-009",
+        "mayoralAction": "none",
+        "implementationPhase": "vote-ready",
+        "note": "C114: Mayor backed YES and requested a recorded full-council decision with all Chen-Vega milestone and audit conditions intact."
+      },
+      {
+        "initiativeId": "INIT-010",
+        "mayoralAction": "none",
+        "implementationPhase": null,
+        "note": "C114: Committee directed to publish its legal-support analysis and record a decision on the $4.2M tenant-defense proposal."
+      }
+    ],
+    "quote": "West Oakland's $400,000 Month-12 disbursement is executed, and charter renewal will protect the fund's scope—not quietly rewrite it.",
+    "voiceFile": "output/civic-voice/mayor_gavel_c114.json"
+  }
+}

@@ -1,0 +1,798 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "112",
+  "persona": "lila-mezran",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00154",
+      "name": "Dr. Lila Mezran",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Chinatown carries the most sick residents (142) | 6 named on the hospital and cause records",
+      "approach": "Health approach: this slice is the illness count by neighborhood, every resident named on the hospital and live cause records, the residents the cycle summary names under Health/Recovering, and the care trail — sick residents to admissions to who is in a bed, hood by hood, tracked and other residents apart. A person listed as living in a neighborhood where illness is up is a neighbour to quote about the block, not a patient — nothing on the record says they are sick. Clinical calm, human cost, no diagnosis beyond what the record says. When the named rows are few, write the neighborhood, not a ward. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "health",
+        "hood": "Chinatown",
+        "facts": [
+          "Sick residents by neighborhood: Chinatown 142 (-2 vs C111), East Oakland 123 (+0 vs C111), Ivy Hill 121 (-1 vs C111), Fruitvale 115 (-3 vs C111), San Antonio 111 (-1 vs C111), Laurel 109 (-2 vs C111), Grand Lake 106 (+0 vs C111), Rockridge 105 (-2 vs C111) — 1,874 across 22 neighborhoods",
+          "Yu Zen (Rockridge) — in hospital care, active, admitted C105 after a workplace accident",
+          "Deacon Seymour (Lake Merritt) — in hospital care, active, admitted C105 after a workplace accident",
+          "Maurice Franklin (Rockridge) — in hospital care, active, admitted C106 after severe seasonal flu",
+          "The city illness rate stands at 4.3%, with 36 hospital admissions this cycle and 73 in care at the close.",
+          "Jonas Patel dealt with a seasonal health concern (Chinatown).",
+          "Elle Lilo cooked healthier meals all week and felt the difference (Jack London).",
+          "Elena Leon cooked healthier meals all week and felt the difference (Jack London).",
+          "Citywide hospital this cycle: 36 admissions (0 tracked, 36 other residents); 73 in care at the close, 73 beds occupied; 38 left",
+          "Chinatown: 142 sick residents → 3 admissions → 6 in care at the close (0 tracked, 6 other residents) → 6 beds occupied; tracked: none tracked",
+          "Adams Point: 87 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+          "Dimond: 96 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked"
+        ],
+        "priorCycle": "PRIOR_CYCLE_ON_DISK",
+        "note": null,
+        "engineHooks": [],
+        "roomIsYours": "the waiting room, the walk to the clinic, what a household does when one person is sick, who covers the shift",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-health",
+      "hood": "Chinatown",
+      "score": null,
+      "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+      "nearby": [
+        {
+          "text": "Avery Santana (mayor gavel): approved — \"Month-eleven, 23-day standard maintained — this fund delivers because Brenda Okoro's team treats every application like family.\"",
+          "src": "output/civic-voice/mayor_gavel_c112.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): approved with conditions — \"OARI works — and D3's right to ask for district-level data before the next expansion. Transparency builds trust.\"",
+          "src": "output/civic-voice/mayor_gavel_c112.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): celebrated — \"Grand Lake's quiet engine gets fuel with strings attached — milestones and audits, because accountability and investment walk together.\"",
+          "src": "output/civic-voice/mayor_gavel_c112.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): celebrated with commitment — \"Downtown businesses waited long enough — and Uptown's next. Councilmember Mobley spoke for his district, and I heard him.\"",
+          "src": "output/civic-voice/mayor_gavel_c112.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): approved — \"Independent oversight verified, remediation proceeds — Cycle 115 milestone stands. This city builds what it promises.\"",
+          "src": "output/civic-voice/mayor_gavel_c112.json"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00194",
+          "name": "Yu Zen",
+          "profile": "Yu Zen — Commercial Insurance Broker — Rockridge",
+          "role": "Commercial Insurance Broker",
+          "hood": "Rockridge",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+            "pop": "POP-00194",
+            "rowName": "Yu Zen",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00528",
+          "name": "Deacon Seymour",
+          "profile": "Deacon Seymour — Manager, Oakland A's — Lake Merritt",
+          "role": "Manager, Oakland A's",
+          "hood": "Lake Merritt",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+            "pop": "POP-00528",
+            "rowName": "Deacon Seymour",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00801",
+          "name": "Maurice Franklin",
+          "profile": "Maurice Franklin — Drone Fleet Coordinator — Rockridge",
+          "role": "Drone Fleet Coordinator",
+          "hood": "Rockridge",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+            "pop": "POP-00801",
+            "rowName": "Maurice Franklin",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00142",
+          "name": "Jonas Patel",
+          "profile": "Jonas Patel — MEDICAL EXAMINER — Chinatown",
+          "role": "MEDICAL EXAMINER",
+          "hood": "Chinatown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+            "pop": "POP-00142",
+            "rowName": "Jonas Patel",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00177",
+          "name": "Elle Lilo",
+          "profile": "Elle Lilo — Harbor Tugboat Captain — Jack London",
+          "role": "Harbor Tugboat Captain",
+          "hood": "Jack London",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+            "pop": "POP-00177",
+            "rowName": "Elle Lilo",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00193",
+          "name": "Elena Leon",
+          "profile": "Elena Leon — Longshoreman (Port of Oakland) — Jack London",
+          "role": "Longshoreman (Port of Oakland)",
+          "hood": "Jack London",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+            "pop": "POP-00193",
+            "rowName": "Elena Leon",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00763",
+          "name": "Kenji Tanaka",
+          "profile": "Kenji Tanaka — Senior Pastor / Faith Leader — Chinatown",
+          "role": "Senior Pastor / Faith Leader",
+          "hood": "Chinatown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+            "pop": "POP-00763",
+            "rowName": "Kenji Tanaka",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00785",
+          "name": "Matra Woven",
+          "profile": "Matra Woven — Janitor — Chinatown",
+          "role": "Janitor",
+          "hood": "Chinatown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+            "pop": "POP-00785",
+            "rowName": "Matra Woven",
+            "kind": "slice-row"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C112",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-7cd6ffd2aeb3"
+      },
+      {
+        "t": "FACT",
+        "text": "Chinatown carries the most sick residents (142) | 6 named on the hospital and cause records",
+        "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+        "id": "F-7d6eb163e88d"
+      },
+      {
+        "t": "FACT",
+        "text": "Yu Zen is one of 6 residents on the record this cycle; Chinatown carries the most illness; 73 in hospital care citywide, 73 beds occupied; illness is up in Chinatown — Kenji Tanaka and Matra Woven can speak for the block.",
+        "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+        "id": "F-27f5e1068c36"
+      },
+      {
+        "t": "FACT",
+        "text": "Sick residents by neighborhood: Chinatown 142 (-2 vs C111), East Oakland 123 (+0 vs C111), Ivy Hill 121 (-1 vs C111), Fruitvale 115 (-3 vs C111), San Antonio 111 (-1 vs C111), Laurel 109 (-2 vs C111), Grand Lake 106 (+0 vs C111), Rockridge 105 (-2 vs C111) — 1,874 across 22 neighborhoods",
+        "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112",
+        "id": "F-142b80af9227"
+      },
+      {
+        "t": "FACT",
+        "text": "Yu Zen (Rockridge) — in hospital care, active, admitted C105 after a workplace accident",
+        "src": "output/beats/Hospital_Ledger.jsonl POP-00194",
+        "id": "F-fd3a5ebe69ce"
+      },
+      {
+        "t": "FACT",
+        "text": "Deacon Seymour (Lake Merritt) — in hospital care, active, admitted C105 after a workplace accident",
+        "src": "output/beats/Hospital_Ledger.jsonl POP-00528",
+        "id": "F-488f0c9977b3"
+      },
+      {
+        "t": "FACT",
+        "text": "Maurice Franklin (Rockridge) — in hospital care, active, admitted C106 after severe seasonal flu",
+        "src": "output/beats/Hospital_Ledger.jsonl POP-00801",
+        "id": "F-c6bc1a20be8e"
+      },
+      {
+        "t": "FACT",
+        "text": "The city illness rate stands at 4.3%, with 36 hospital admissions this cycle and 73 in care at the close.",
+        "src": "output/world_summary_c112.md \"## City State\"",
+        "id": "F-a3bc786f3bc4"
+      },
+      {
+        "t": "FACT",
+        "text": "Jonas Patel dealt with a seasonal health concern (Chinatown).",
+        "src": "output/world_summary_c112.md \"## Who Lived It ### Health\"",
+        "id": "F-581d0aa5a48c"
+      },
+      {
+        "t": "FACT",
+        "text": "Elle Lilo cooked healthier meals all week and felt the difference (Jack London).",
+        "src": "output/world_summary_c112.md \"## Who Lived It ### Recovering\"",
+        "id": "F-09925d4d7bc3"
+      },
+      {
+        "t": "FACT",
+        "text": "Elena Leon cooked healthier meals all week and felt the difference (Jack London).",
+        "src": "output/world_summary_c112.md \"## Who Lived It ### Recovering\"",
+        "id": "F-2618f6a8feef"
+      },
+      {
+        "t": "FACT",
+        "text": "Citywide hospital this cycle: 36 admissions (0 tracked, 36 other residents); 73 in care at the close, 73 beds occupied; 38 left",
+        "src": "output/beats/Care_Justice_Census.jsonl hospital @C112 city",
+        "id": "F-32d585b91066"
+      },
+      {
+        "t": "FACT",
+        "text": "Chinatown: 142 sick residents → 3 admissions → 6 in care at the close (0 tracked, 6 other residents) → 6 beds occupied; tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl hospital @C112 Chinatown",
+        "id": "F-21b91cb25bcb"
+      },
+      {
+        "t": "FACT",
+        "text": "Adams Point: 87 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl hospital @C112 Adams Point",
+        "id": "F-01fbd75742b8"
+      },
+      {
+        "t": "FACT",
+        "text": "Dimond: 96 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl hospital @C112 Dimond",
+        "id": "F-4c3f621e5230"
+      },
+      {
+        "t": "FACT",
+        "text": "Downtown: 80 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl hospital @C112 Downtown",
+        "id": "F-3c5f30cf8b60"
+      },
+      {
+        "t": "FACT",
+        "text": "East Oakland: 123 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl hospital @C112 East Oakland",
+        "id": "F-0873cf20d737"
+      },
+      {
+        "t": "FACT",
+        "text": "Chinatown: 142 sick of 2,193 residents, 6.5% — at or over the 6% watch bar",
+        "src": "output/beats/Neighborhood_Demographics.jsonl Sick/Students+Adults+Seniors @C112",
+        "id": "F-18734d0c98da"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "named",
+    "candidates": [
+      {
+        "pop": "POP-00194",
+        "name": "Yu Zen",
+        "role": "Commercial Insurance Broker",
+        "hood": "Rockridge",
+        "profile": "Yu Zen — Commercial Insurance Broker — Rockridge",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+          "pop": "POP-00194",
+          "rowName": "Yu Zen",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00528",
+        "name": "Deacon Seymour",
+        "role": "Manager, Oakland A's",
+        "hood": "Lake Merritt",
+        "profile": "Deacon Seymour — Manager, Oakland A's — Lake Merritt",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+          "pop": "POP-00528",
+          "rowName": "Deacon Seymour",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00801",
+        "name": "Maurice Franklin",
+        "role": "Drone Fleet Coordinator",
+        "hood": "Rockridge",
+        "profile": "Maurice Franklin — Drone Fleet Coordinator — Rockridge",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+          "pop": "POP-00801",
+          "rowName": "Maurice Franklin",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00142",
+        "name": "Jonas Patel",
+        "role": "MEDICAL EXAMINER",
+        "hood": "Chinatown",
+        "profile": "Jonas Patel — MEDICAL EXAMINER — Chinatown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+          "pop": "POP-00142",
+          "rowName": "Jonas Patel",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00177",
+        "name": "Elle Lilo",
+        "role": "Harbor Tugboat Captain",
+        "hood": "Jack London",
+        "profile": "Elle Lilo — Harbor Tugboat Captain — Jack London",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+          "pop": "POP-00177",
+          "rowName": "Elle Lilo",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00193",
+        "name": "Elena Leon",
+        "role": "Longshoreman (Port of Oakland)",
+        "hood": "Jack London",
+        "profile": "Elena Leon — Longshoreman (Port of Oakland) — Jack London",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+          "pop": "POP-00193",
+          "rowName": "Elena Leon",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00763",
+        "name": "Kenji Tanaka",
+        "role": "Senior Pastor / Faith Leader",
+        "hood": "Chinatown",
+        "profile": "Kenji Tanaka — Senior Pastor / Faith Leader — Chinatown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+          "pop": "POP-00763",
+          "rowName": "Kenji Tanaka",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00785",
+        "name": "Matra Woven",
+        "role": "Janitor",
+        "hood": "Chinatown",
+        "profile": "Matra Woven — Janitor — Chinatown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+          "pop": "POP-00785",
+          "rowName": "Matra Woven",
+          "kind": "slice-row"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Dr. Lila Mezran",
+    "popid": "POP-00154"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-health",
+      "angle": "Chinatown carries the most sick residents (142) | 6 named on the hospital and cause records",
+      "label": "Chinatown carries the most sick residents (142) | 6 named on the hospital and cause records",
+      "hookLine": "Yu Zen is one of 6 residents on the record this cycle; Chinatown carries the most illness; 73 in hospital care citywide, 73 beds occupied; illness is up in Chinatown — Kenji Tanaka and Matra Woven can speak for the block.",
+      "hood": "Chinatown",
+      "citizens": [
+        "Yu Zen (POP-00194)",
+        "Deacon Seymour (POP-00528)",
+        "Maurice Franklin (POP-00801)",
+        "Jonas Patel (POP-00142)",
+        "Elle Lilo (POP-00177)",
+        "Elena Leon (POP-00193)",
+        "Kenji Tanaka (POP-00763)",
+        "Matra Woven (POP-00785)"
+      ],
+      "popids": [
+        "POP-00194",
+        "POP-00528",
+        "POP-00801",
+        "POP-00142",
+        "POP-00177",
+        "POP-00193",
+        "POP-00763",
+        "POP-00785"
+      ],
+      "ref": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+      "cycle": 112
+    },
+    "approach": "Health approach: this slice is the illness count by neighborhood, every resident named on the hospital and live cause records, the residents the cycle summary names under Health/Recovering, and the care trail — sick residents to admissions to who is in a bed, hood by hood, tracked and other residents apart. A person listed as living in a neighborhood where illness is up is a neighbour to quote about the block, not a patient — nothing on the record says they are sick. Clinical calm, human cost, no diagnosis beyond what the record says. When the named rows are few, write the neighborhood, not a ward. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "HEALTH-SLICE-5",
+    "kind": "beat-health",
+    "seat": {
+      "slug": "lila-mezran",
+      "name": "Dr. Lila Mezran",
+      "popid": "POP-00154",
+      "desk": "civic",
+      "domain": "health",
+      "builder": "buildHealthSlice.js"
+    },
+    "hood": "Chinatown",
+    "pulse": {
+      "className": "beat-health",
+      "score": 100,
+      "label": "Chinatown carries the most sick residents (142) | 6 named on the hospital and cause records",
+      "hood": "Chinatown",
+      "source": "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "Chinatown carries the most sick residents (142) | 6 named on the hospital and cause records",
+      "hookLine": "Yu Zen is one of 6 residents on the record this cycle; Chinatown carries the most illness; 73 in hospital care citywide, 73 beds occupied; illness is up in Chinatown — Kenji Tanaka and Matra Woven can speak for the block.",
+      "anchorFacts": [
+        "Sick residents by neighborhood: Chinatown 142 (-2 vs C111), East Oakland 123 (+0 vs C111), Ivy Hill 121 (-1 vs C111), Fruitvale 115 (-3 vs C111), San Antonio 111 (-1 vs C111), Laurel 109 (-2 vs C111), Grand Lake 106 (+0 vs C111), Rockridge 105 (-2 vs C111) — 1,874 across 22 neighborhoods",
+        "Yu Zen (Rockridge) — in hospital care, active, admitted C105 after a workplace accident",
+        "Deacon Seymour (Lake Merritt) — in hospital care, active, admitted C105 after a workplace accident",
+        "Maurice Franklin (Rockridge) — in hospital care, active, admitted C106 after severe seasonal flu",
+        "The city illness rate stands at 4.3%, with 36 hospital admissions this cycle and 73 in care at the close.",
+        "Jonas Patel dealt with a seasonal health concern (Chinatown).",
+        "Elle Lilo cooked healthier meals all week and felt the difference (Jack London).",
+        "Elena Leon cooked healthier meals all week and felt the difference (Jack London).",
+        "Citywide hospital this cycle: 36 admissions (0 tracked, 36 other residents); 73 in care at the close, 73 beds occupied; 38 left",
+        "Chinatown: 142 sick residents → 3 admissions → 6 in care at the close (0 tracked, 6 other residents) → 6 beds occupied; tracked: none tracked",
+        "Adams Point: 87 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+        "Dimond: 96 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+        "Downtown: 80 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+        "East Oakland: 123 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+        "Chinatown: 142 sick of 2,193 residents, 6.5% — at or over the 6% watch bar"
+      ],
+      "evidence": [
+        {
+          "text": "Sick residents by neighborhood: Chinatown 142 (-2 vs C111), East Oakland 123 (+0 vs C111), Ivy Hill 121 (-1 vs C111), Fruitvale 115 (-3 vs C111), San Antonio 111 (-1 vs C111), Laurel 109 (-2 vs C111), Grand Lake 106 (+0 vs C111), Rockridge 105 (-2 vs C111) — 1,874 across 22 neighborhoods",
+          "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C112"
+        },
+        {
+          "text": "Yu Zen (Rockridge) — in hospital care, active, admitted C105 after a workplace accident",
+          "src": "output/beats/Hospital_Ledger.jsonl POP-00194"
+        },
+        {
+          "text": "Deacon Seymour (Lake Merritt) — in hospital care, active, admitted C105 after a workplace accident",
+          "src": "output/beats/Hospital_Ledger.jsonl POP-00528"
+        },
+        {
+          "text": "Maurice Franklin (Rockridge) — in hospital care, active, admitted C106 after severe seasonal flu",
+          "src": "output/beats/Hospital_Ledger.jsonl POP-00801"
+        },
+        {
+          "text": "The city illness rate stands at 4.3%, with 36 hospital admissions this cycle and 73 in care at the close.",
+          "src": "output/world_summary_c112.md \"## City State\""
+        },
+        {
+          "text": "Jonas Patel dealt with a seasonal health concern (Chinatown).",
+          "src": "output/world_summary_c112.md \"## Who Lived It ### Health\""
+        },
+        {
+          "text": "Elle Lilo cooked healthier meals all week and felt the difference (Jack London).",
+          "src": "output/world_summary_c112.md \"## Who Lived It ### Recovering\""
+        },
+        {
+          "text": "Elena Leon cooked healthier meals all week and felt the difference (Jack London).",
+          "src": "output/world_summary_c112.md \"## Who Lived It ### Recovering\""
+        },
+        {
+          "text": "Citywide hospital this cycle: 36 admissions (0 tracked, 36 other residents); 73 in care at the close, 73 beds occupied; 38 left",
+          "src": "output/beats/Care_Justice_Census.jsonl hospital @C112 city"
+        },
+        {
+          "text": "Chinatown: 142 sick residents → 3 admissions → 6 in care at the close (0 tracked, 6 other residents) → 6 beds occupied; tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl hospital @C112 Chinatown"
+        },
+        {
+          "text": "Adams Point: 87 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl hospital @C112 Adams Point"
+        },
+        {
+          "text": "Dimond: 96 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl hospital @C112 Dimond"
+        },
+        {
+          "text": "Downtown: 80 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl hospital @C112 Downtown"
+        },
+        {
+          "text": "East Oakland: 123 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl hospital @C112 East Oakland"
+        },
+        {
+          "text": "Chinatown: 142 sick of 2,193 residents, 6.5% — at or over the 6% watch bar",
+          "src": "output/beats/Neighborhood_Demographics.jsonl Sick/Students+Adults+Seniors @C112"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": {
+        "state": "PRIOR_CYCLE_ON_DISK",
+        "vs": 111
+      },
+      "hooks": [],
+      "note": null,
+      "pageVoices": [],
+      "roomIsYours": "the waiting room, the walk to the clinic, what a household does when one person is sick, who covers the shift"
+    },
+    "citizens": [
+      {
+        "popid": "POP-00194",
+        "name": "Yu Zen",
+        "role": "Commercial Insurance Broker",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Yu Zen — Commercial Insurance Broker — Rockridge",
+        "why": "on Hospital_Ledger this cycle"
+      },
+      {
+        "popid": "POP-00528",
+        "name": "Deacon Seymour",
+        "role": "Manager, Oakland A's",
+        "neighborhood": "Lake Merritt",
+        "business": null,
+        "profile": "Deacon Seymour — Manager, Oakland A's — Lake Merritt",
+        "why": "on Hospital_Ledger this cycle"
+      },
+      {
+        "popid": "POP-00801",
+        "name": "Maurice Franklin",
+        "role": "Drone Fleet Coordinator",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Maurice Franklin — Drone Fleet Coordinator — Rockridge",
+        "why": "on Hospital_Ledger this cycle"
+      },
+      {
+        "popid": "POP-00142",
+        "name": "Jonas Patel",
+        "role": "MEDICAL EXAMINER",
+        "neighborhood": "Chinatown",
+        "business": null,
+        "profile": "Jonas Patel — MEDICAL EXAMINER — Chinatown",
+        "why": "named in the cycle health record"
+      },
+      {
+        "popid": "POP-00177",
+        "name": "Elle Lilo",
+        "role": "Harbor Tugboat Captain",
+        "neighborhood": "Jack London",
+        "business": null,
+        "profile": "Elle Lilo — Harbor Tugboat Captain — Jack London",
+        "why": "named in the cycle health record"
+      },
+      {
+        "popid": "POP-00193",
+        "name": "Elena Leon",
+        "role": "Longshoreman (Port of Oakland)",
+        "neighborhood": "Jack London",
+        "business": null,
+        "profile": "Elena Leon — Longshoreman (Port of Oakland) — Jack London",
+        "why": "named in the cycle health record"
+      },
+      {
+        "popid": "POP-00763",
+        "name": "Kenji Tanaka",
+        "role": "Senior Pastor / Faith Leader",
+        "neighborhood": "Chinatown",
+        "business": null,
+        "profile": "Kenji Tanaka — Senior Pastor / Faith Leader — Chinatown",
+        "why": "lives in Chinatown, where illness is up this cycle — a neighbour to quote, not a patient"
+      },
+      {
+        "popid": "POP-00785",
+        "name": "Matra Woven",
+        "role": "Janitor",
+        "neighborhood": "Chinatown",
+        "business": null,
+        "profile": "Matra Woven — Janitor — Chinatown",
+        "why": "lives in Chinatown, where illness is up this cycle — a neighbour to quote, not a patient"
+      }
+    ],
+    "pointers": [
+      "output/beats/Neighborhood_Demographics.jsonl Sick @C112 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+      "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Lila Mezran",
+    "popid": "POP-00154",
+    "text": "I'm standing at the corner of Webster and 8th, watching the evening crowd move past the herbal shops and the bakery. The numbers say Chinatown is carrying the most sick residents in the city — 142, down two from last cycle, but still the highest. Six of them are in hospital beds right now, and the care trail stops short: three admissions this cycle, six in care, six beds occupied, and not one of them tracked by name on the public record. That's the thing that doesn't line up for me. The city says 73 beds are full, 36 people came in this cycle, but the names we get are from Rockridge and Lake Merritt — not from the neighborhood that's sickest. I want to walk the block with Kenji Tanaka, the p",
+    "plan": {
+      "chase": "I'm standing at the corner of Webster and 8th, watching the evening crowd move past the herbal shops and the bakery. The numbers say Chinatown is carrying the most sick residents in the city — 142, down two from last cycle, but still the highest. Six of them are in hospital beds right now, and the care trail stops short: three admissions this cycle, six in care, six beds occupied, and not one of them tracked by name on the public record. That's the thing that doesn't line up for me. The city says 73 beds are full, 36 people came in this cycle, but the names we get are from Rockridge and Lake Merritt — not from the neighborhood that's sickest. I want to walk the block with Kenji Tanaka, the p",
+      "focus": "The gap between Chinatown's illness burden and the named faces of hospital care — who is in the beds, and who is left unnamed.",
+      "why": "Because the numbers say Chinatown is carrying the most sick residents, but the only names on the hospital record are from Rockridge and Lake Merritt. That disconnect is the story — not the diagnosis, but the silence.",
+      "checks": [
+        "Confirm Chinatown's 142 sick residents is the highest neighborhood count this cycle.",
+        "Verify that Chinatown's 6 in care are all listed as 'other residents' with no tracked names.",
+        "Confirm the citywide illness rate of 4.3% and 73 beds occupied.",
+        "Check that Yu Zen, Deacon Seymour, and Maurice Franklin are the only named hospital patients, and none are from Chinatown."
+      ],
+      "targets": [
+        {
+          "pop": "POP-00763",
+          "question": "Pastor Tanaka, when you walk through Chinatown, what do you see in the faces of your congregation and neighbors that the city's numbers don't capture?",
+          "basis": "Kenji Tanaka is a named Chinatown resident and faith leader, able to speak for the block without naming anyone as sick."
+        },
+        {
+          "pop": "POP-00785",
+          "question": "Matra, as someone who cleans and moves through the neighborhood daily, what do you notice about who's missing from the streets or who's covering for someone at home?",
+          "basis": "Matra Woven is a named Chinatown resident and janitor, with a ground-level view of the neighborhood's daily rhythms."
+        }
+      ],
+      "interpretation": "The record shows Chinatown's illness count is the highest in the city, but the named hospital patients are from other neighborhoods. This suggests a visibility gap — the sickest neighborhood is also the least named in the care system. The human cost is in the quiet: the shifts covered, the meals cooked, the doors kept closed.",
+      "unverifiedLead": [
+        "Possible that Chinatown's sick residents are less likely to be admitted to the hospital, or that their admissions are not tracked in the public ledger.",
+        "Possible that the neighborhood's care burden falls on families and neighbors rather than formal care systems."
+      ],
+      "closeQuestion": "What does it mean for a neighborhood to carry the most illness but have no one named in the hospital record?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Avery Santana (mayor gavel): approved — \"Month-eleven, 23-day standard maintained — this fund delivers because Brenda Okoro's team treats every application like family.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c112.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): approved with conditions — \"OARI works — and D3's right to ask for district-level data before the next expansion. Transparency builds trust.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c112.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): celebrated — \"Grand Lake's quiet engine gets fuel with strings attached — milestones and audits, because accountability and investment walk together.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c112.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): celebrated with commitment — \"Downtown businesses waited long enough — and Uptown's next. Councilmember Mobley spoke for his district, and I heard him.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c112.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): approved — \"Independent oversight verified, remediation proceeds — Cycle 115 milestone stands. This city builds what it promises.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c112.json",
+      "popids": []
+    }
+  ],
+  "laneEntries": 94,
+  "angleCapHits": 0,
+  "ranAt": "2026-10-19T11:16:14.583Z"
+}

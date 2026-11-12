@@ -1,0 +1,32 @@
+{
+  "status": "arc-seed",
+  "cycle": "112",
+  "desk": "civic",
+  "persona": "freelance-firebrand",
+  "hood": "KONO",
+  "quotes": [
+    {
+      "pop": "POP-00859",
+      "name": "Tatiana Flores",
+      "quote": "To be honest, I've been feeling pretty positive about KONO since I moved here ten weeks ago. The energy around the Fox Theater is great, and Northgate Kitchen is always bustling. I've seen new faces around, which is nice. I haven't really noticed any lack of initiative, but I'm not sure I'd be aware of everything going on behind the scenes. My focus is on getting settled and enjoying the neighborhood."
+    },
+    {
+      "pop": "POP-00934",
+      "name": "Florencia Shah",
+      "quote": "To be honest, I haven't noticed much decay around here. The Fox Theater is still lively, and Northgate Kitchen is always bustling. More people are walking around, which is good for my bookstore. I've seen new faces from Adams Point moving in, and that brings some fresh energy. I think the neighborhood is doing okay."
+    },
+    {
+      "pop": "POP-00867",
+      "name": "Makayla Wu",
+      "quote": "I've noticed that KONO is changing, but not in a straightforward way. On one hand, places like Northgate Kitchen are bustling, and you see more people on Telegraph Avenue now. My husband and I even talked about checking out the Fox Theater for a show. On the other hand, I've had some jobs that make me wonder about the overall condition. It's like there's this mix of renewal and neglect. I don't know, maybe it's just my perspective as someone who's been around for a while."
+    },
+    {
+      "pop": "POP-01203",
+      "name": "Iris Pham",
+      "quote": "I've noticed that the waterfront in Baylight District feels unusually quiet lately. There's a tension in the air that I've never seen before. I think it's related to what's going on in other neighborhoods, like KONO. I've heard people talking about how some areas are struggling, and it makes me wonder if we'll be affected too."
+    }
+  ],
+  "claim": "To be honest, I've been feeling pretty positive about KONO since I moved here ten weeks ago. The energy around the Fox Theater is great, and Northgate Kitchen is always bustling. I've seen new faces around, which is nice. I haven't really noticed any lack of initiative, but I'm not sure I'd be aware of everything going on behind the scenes. My focus is on getting settled and enjoying the neighborhood.",
+  "src": "citizenVoice PRESS c112",
+  "ranAt": "2026-10-21T18:16:41.896Z"
+}

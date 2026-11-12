@@ -1,0 +1,79 @@
+{
+  "draft": "output/cron-compare/civic_c113_carmen-delaine_packet-v2_anthropic-claude-haiku-5-5.md",
+  "cycle": "113",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "13d58d7d4c578283a860a2c5e03de519a0063c77f88dfa9b1c45b710ce328a3d",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes, official roles, and civic initiative references match ground truth and verified interview records.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "carmen-civic-ledger-v1",
+    "packageVersion": "CARMEN-LEP2-2",
+    "manifestId": "AM-f618b855fd4c",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "21.8",
+          "6.2"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Avery Santana",
+      "Brenda Okoro",
+      "Denise Carter",
+      "Elliott Crane",
+      "Leonard Tran",
+      "Ramon Vega"
+    ],
+    "unverified": [
+      "Stabilization Fund",
+      "Tallow Street",
+      "West Oakland Tenant Defense"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0101,
+  "durationMs": 4755,
+  "parseError": false,
+  "ranAt": "2026-10-26T23:15:32.134Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 500",
+    "words": 778,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "13d58d7d4c578283a860a2c5e03de519a0063c77f88dfa9b1c45b710ce328a3d",
+    "costUsd": 0.0013
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "status": "arc-seed",
+  "cycle": "112",
+  "desk": "civic",
+  "persona": "angela-reyes",
+  "hood": "Rockridge",
+  "quotes": [
+    {
+      "pop": "POP-00287",
+      "name": "Simone Adesanya",
+      "quote": "Honestly, that dip is a blip on a page to most of us. Teacher quality at 9.08 — that's the number my staff feels every single day, in the hallways, in the way a kid who was struggling suddenly gets it. The index is a snapshot; the teachers are the whole album. We don't walk around quoting our own score. We walk around making sure every kid in this building knows someone's got their back. That's the real index, and it doesn't move a tenth of a point because of a cycle."
+    },
+    {
+      "pop": "POP-01036",
+      "name": "Mei Wong",
+      "quote": "Parents mostly ask about homework and whether their kid ate a real snack, but underneath it's about feeling safe and known. They want to know their child is with adults who see them, not just supervising. What keeps people here is that sense of community—the same faces at pickup, teachers who remember your kid's name, neighbors who look out. It's not flashy, but it's steady. That's why families stay even when other places might be growing faster."
+    },
+    {
+      "pop": "POP-00742",
+      "name": "Maya Torres-Dillon",
+      "quote": "Honestly, that 76% number — I recognize it in the hallways more than in any single test score. It's the kid who stays after class to ask one more question about the lab, or the group that argues about the data until the bell rings. I see it in the parents who show up to every back-to-school night, and in the way my colleagues share lesson plans without being asked. But I also teach long enough to know that number doesn't capture the kid who's brilliant but has to work nights, or the one who freezes on test day. It's a real signal, but it's not the whole story. What I recognize is the effort behind it — and that's something you can't put in a percentage."
+    }
+  ],
+  "claim": "Honestly, that dip is a blip on a page to most of us. Teacher quality at 9.08 — that's the number my staff feels every single day, in the hallways, in the way a kid who was struggling suddenly gets it. The index is a snapshot; the teachers are the whole album. We don't walk around quoting our own score. We walk around making sure every kid in this building knows someone's got their back. That's the real index, and it doesn't move a tenth of a point because of a cycle.",
+  "src": "citizenVoice PRESS c112",
+  "ranAt": "2026-10-20T18:16:44.184Z"
+}

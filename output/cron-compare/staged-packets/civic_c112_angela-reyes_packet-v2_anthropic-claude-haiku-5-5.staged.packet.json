@@ -1,0 +1,426 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00156",
+    "name": "Angela Reyes",
+    "role": "desk reporter",
+    "desk": "civic"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Enrollment moved in West Oakland — Rockridge has the strongest school record on the table (index 8.63) — the students and teachers who live it",
+    "approach": "Schools approach: this slice is the school table for every neighborhood, the enrollment movement this cycle, the district card, and the students and teachers on the ledger. The quality table is stable cycle to cycle — never write as if a score moved when it did not; enrollment is the number that moves. Warm, precise. Never invent a named student or teacher; a score trend is colour unless it is on this table. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "schools",
+      "hood": "Rockridge",
+      "facts": [
+        "Enrollment moved: West Oakland +3 students, East Oakland +2 students, Rockridge +1 students, Piedmont Ave +1 students, Laurel +1 students, Adams Point +1 students vs C111",
+        "Ranked by school quality index: Rockridge 8.63, Baylight District 8.17, Piedmont Ave 8.15, West Oakland 8.12, Brooklyn 8.11, Laurel 7.95, Adams Point 7.95, Lake Merritt 7.9, Jack London 7.75, Fruitvale 7.7, Downtown 7.64, Grand Lake 7.58, Uptown 7.51, Eastlake 6.95, KONO 6.94, Chinatown 6.93, Glenview 6.9, Dimond 6.9, Ivy Hill 6.81, San Antonio 6.8, East Oakland 6.77, Temescal 6.51 (22 neighborhoods)",
+        "Rockridge: school quality index 8.63 (was 8.7 at C111), graduation 94.53%, college-ready 76.03%, teacher quality 9.08, funding 15,000, 247 students",
+        "Temescal: school quality index 6.51 (was 6.6 at C111), graduation 84.94%, college-ready 55.5%, teacher quality 6.9, funding 11,500, 313 students",
+        "The district: Oakland City Schools — 5,201 employees citywide, growth 8.11%; per-hood funding on the table totals 286,000"
+      ],
+      "priorCycle": "PRIOR_CYCLE_ON_DISK",
+      "note": null,
+      "engineHooks": [
+        "The Brown household (2) moved from Uptown to West Oakland — moving up from Uptown — sold up and bought in West Oakland (desk rotation)",
+        "Lo Thoop moved from Temescal to Jack London — moving up from Temescal (desk rotation)",
+        "Wendell Price moved from Lake Merritt to West Oakland — leaving Lake Merritt for a better fit (desk rotation)"
+      ],
+      "roomIsYours": "the classroom, the pickup line, what a parent asks at the door, what the teacher is worried about, what the hallway sounds like at 3:05",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF",
+    "runningStoriesNote": "signal.runningStories are events the city is already living through and where each one stands. Background only — write nothing about tracking them."
+  },
+  "signal": {
+    "kind": "beat-schools",
+    "hood": "Rockridge",
+    "src": "output/beats/Neighborhood_Demographics.jsonl @C112",
+    "plan": {
+      "focus": "The human texture behind Rockridge's top-ranked school index — what the numbers look like from the classroom, the pickup line, and the principal's office.",
+      "closeQuestion": "What does it feel like to be the best school on the table — and to know that one new family chose you, while three chose somewhere else?"
+    },
+    "runningStories": [
+      "West Oakland Stabilization Fund — disbursement-active [West Oakland] — week 4",
+      "Oakland Alternative Response Initiative — dispatch-live [West Oakland, Fruitvale, East Oakland] — week 4",
+      "Fruitvale Transit Hub Phase II — Visioning — design-phase [Fruitvale] — week 4",
+      "Temescal Community Health Center — operational [Temescal] — week 4",
+      "Baylight District — Final Council Vote — construction-active [Jack London, Downtown] — week 4",
+      "Oakland Youth Apprenticeship Pipeline — implementation-active [West Oakland, East Oakland, Fruitvale] — under way",
+      "Downtown Economic Revitalization — legislation-filed [Downtown] — week 2",
+      "Commercial Stabilization for Grand Lake — legislation-filed [Grand Lake] — under way",
+      "West Oakland Tenant Defense Fund — vote-scheduled [West Oakland] — under way",
+      "Ivy Hill Revitalization Initiative — announced [Ivy Hill] — under way",
+      "Oakland Youth Apprenticeship Pipeline — operational [West Oakland, East Oakland, Fruitvale] — ENDED this week after 4 week(s); now implementation-active",
+      "Commercial Stabilization for Grand Lake — announced [Grand Lake] — ENDED this week after 2 week(s); now legislation-filed",
+      "West Oakland Tenant Defense Fund — announced [West Oakland] — ENDED this week after 2 week(s); now vote-scheduled"
+    ]
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-01036",
+        "name": "Mei Wong",
+        "profile": "Mei Wong — After-school program aide — Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00742",
+        "name": "Maya Torres-Dillon",
+        "profile": "Maya Torres-Dillon — Bay Conservation Alliance Advisory board, High School Science Teacher — Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00287",
+        "name": "Simone Adesanya",
+        "profile": "Simone Adesanya — School Principal — Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00287-167eb74c97",
+        "pop": "POP-00287",
+        "name": "Simone Adesanya",
+        "quote": "Honestly, that dip is a blip on a page to most of us. Teacher quality at 9.08 — that's the number my staff feels every single day, in the hallways, in the way a kid who was struggling suddenly gets it. The index is a snapshot; the teachers are the whole album. We don't walk around quoting our own score. We walk around making sure every kid in this building knows someone's got their back. That's the real index, and it doesn't move a tenth of a point because of a cycle.",
+        "factIds": [
+          "F-099b6e9d5391"
+        ],
+        "src": "packet.W2[POP-00287]"
+      },
+      {
+        "id": "Q-POP-01036-4806336729",
+        "pop": "POP-01036",
+        "name": "Mei Wong",
+        "quote": "Parents mostly ask about homework and whether their kid ate a real snack, but underneath it's about feeling safe and known. They want to know their child is with adults who see them, not just supervising. What keeps people here is that sense of community—the same faces at pickup, teachers who remember your kid's name, neighbors who look out. It's not flashy, but it's steady. That's why families stay even when other places might be growing faster.",
+        "factIds": [
+          "F-93602c970cd8",
+          "F-099b6e9d5391"
+        ],
+        "src": "packet.W2[POP-01036]"
+      },
+      {
+        "id": "Q-POP-00742-00df5568bd",
+        "pop": "POP-00742",
+        "name": "Maya Torres-Dillon",
+        "quote": "Honestly, that 76% number — I recognize it in the hallways more than in any single test score. It's the kid who stays after class to ask one more question about the lab, or the group that argues about the data until the bell rings. I see it in the parents who show up to every back-to-school night, and in the way my colleagues share lesson plans without being asked. But I also teach long enough to know that number doesn't capture the kid who's brilliant but has to work nights, or the one who freezes on test day. It's a real signal, but it's not the whole story. What I recognize is the effort behind it — and that's something you can't put in a percentage.",
+        "factIds": [
+          "F-099b6e9d5391"
+        ],
+        "src": "packet.W2[POP-00742]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Angela Reyes",
+        "text": "A family moved into Rockridge this cycle — one student — but I don't know who they are or what drew them; worth asking at the front office",
+        "usable": false
+      },
+      {
+        "from": "Angela Reyes",
+        "text": "The index dipped from 8.7 to 8.63 — no one has explained why; could be a recalibration or something real in the classroom",
+        "usable": false
+      },
+      {
+        "from": "Angela Reyes",
+        "text": "The Brown household sold up in Uptown and bought in West Oakland — that's a different story, but it frames what Rockridge families might be weighing",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C112",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-7cd6ffd2aeb3"
+    },
+    {
+      "t": "FACT",
+      "text": "Rockridge has the strongest school record on the table (index 8.63)",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C112",
+      "id": "F-93602c970cd8"
+    },
+    {
+      "t": "FACT",
+      "text": "10 students and educators in Rockridge; the table says why their school reads the way it does.",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C112",
+      "id": "F-35474f51e323"
+    },
+    {
+      "t": "FACT",
+      "text": "Enrollment moved: West Oakland +3 students, East Oakland +2 students, Rockridge +1 students, Piedmont Ave +1 students, Laurel +1 students, Adams Point +1 students vs C111",
+      "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C112",
+      "id": "F-a933d1d1f32d"
+    },
+    {
+      "t": "FACT",
+      "text": "Ranked by school quality index: Rockridge 8.63, Baylight District 8.17, Piedmont Ave 8.15, West Oakland 8.12, Brooklyn 8.11, Laurel 7.95, Adams Point 7.95, Lake Merritt 7.9, Jack London 7.75, Fruitvale 7.7, Downtown 7.64, Grand Lake 7.58, Uptown 7.51, Eastlake 6.95, KONO 6.94, Chinatown 6.93, Glenview 6.9, Dimond 6.9, Ivy Hill 6.81, San Antonio 6.8, East Oakland 6.77, Temescal 6.51 (22 neighborhoods)",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C112",
+      "id": "F-8a8063d4102e"
+    },
+    {
+      "t": "FACT",
+      "text": "Rockridge: school quality index 8.63 (was 8.7 at C111), graduation 94.53%, college-ready 76.03%, teacher quality 9.08, funding 15,000, 247 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C112",
+      "id": "F-099b6e9d5391"
+    },
+    {
+      "t": "FACT",
+      "text": "Temescal: school quality index 6.51 (was 6.6 at C111), graduation 84.94%, college-ready 55.5%, teacher quality 6.9, funding 11,500, 313 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C112",
+      "id": "F-e2ac49595c33"
+    },
+    {
+      "t": "FACT",
+      "text": "The district: Oakland City Schools — 5,201 employees citywide, growth 8.11%; per-hood funding on the table totals 286,000",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00016 @C112",
+      "id": "F-5b86c4ad504b"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "angela-education-stability-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Translate one Packet-backed school, youth, or apprenticeship Initiative into a warm account of program stability without inventing participants, institutions, access, or outcomes.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "warm, brief third-person education reporting",
+      "targetWords": "evidence-bounded",
+      "opening": "one Packet-backed school, youth-program, apprenticeship, or continuity fact",
+      "closing": "the next participant, access, continuity, or outcome record still needed"
+    },
+    "authorizedTexture": [
+      "plain-language translation of a supplied education or youth-program implementation fact",
+      "a careful stability or access question that remains explicitly unanswered",
+      "transitions between supplied education facts that add no participant, institution, number, schedule, placement, or outcome claim"
+    ],
+    "textureConditions": [
+      "every named student, teacher, family member, school, program, employer, partner, site, Initiative, Project, office, neighborhood, and organization must come from the Packet",
+      "eligibility, applications, enrollment, attendance, participation, placements, schedules, staffing, funding, support services, retention, completion, learning, credentials, employment, dates, durations, counts, measurements, and outcomes require Packet support",
+      "unestablished stability evidence must remain unestablished; do not manufacture a participant, educator, family, quote, classroom scene, school, employer, or collective experience",
+      "raw tracker status, phase labels, source paths, engine fields, and real-world institutions absent from canon may not appear as public prose"
+    ],
+    "canonBlockers": [
+      "an invented student, teacher, family, participant, staff member, school, employer, partner, site, quote, classroom scene, eligibility rule, application, enrollment, attendance, placement, schedule, staffing level, budget, measurement, credential, completion, learning, employment, or youth outcome",
+      "a named education institution, school, program, employer, partner, office, Project, Initiative, person, neighborhood, or organization not found in the supplied record",
+      "an unsupported launch, closure, delay, continuity, access, participation, placement, duty, response, promise, timeline, or causal education claim",
+      "raw engine or tracker labels, phases, scores, decimals, source paths, row metadata, or non-canon real-world institutions printed as public-facing evidence"
+    ]
+  },
+  "manifest": {
+    "id": "AM-83923a469b85",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-7cd6ffd2aeb3",
+        "t": "FACT",
+        "text": "Current cycle: C112",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-93602c970cd8",
+        "t": "FACT",
+        "text": "Rockridge has the strongest school record on the table (index 8.63)",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C112"
+      },
+      {
+        "id": "F-35474f51e323",
+        "t": "FACT",
+        "text": "10 students and educators in Rockridge; the table says why their school reads the way it does.",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C112"
+      },
+      {
+        "id": "F-a933d1d1f32d",
+        "t": "FACT",
+        "text": "Enrollment moved: West Oakland +3 students, East Oakland +2 students, Rockridge +1 students, Piedmont Ave +1 students, Laurel +1 students, Adams Point +1 students vs C111",
+        "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C112"
+      },
+      {
+        "id": "F-8a8063d4102e",
+        "t": "FACT",
+        "text": "Ranked by school quality index: Rockridge 8.63, Baylight District 8.17, Piedmont Ave 8.15, West Oakland 8.12, Brooklyn 8.11, Laurel 7.95, Adams Point 7.95, Lake Merritt 7.9, Jack London 7.75, Fruitvale 7.7, Downtown 7.64, Grand Lake 7.58, Uptown 7.51, Eastlake 6.95, KONO 6.94, Chinatown 6.93, Glenview 6.9, Dimond 6.9, Ivy Hill 6.81, San Antonio 6.8, East Oakland 6.77, Temescal 6.51 (22 neighborhoods)",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C112"
+      },
+      {
+        "id": "F-099b6e9d5391",
+        "t": "FACT",
+        "text": "Rockridge: school quality index 8.63 (was 8.7 at C111), graduation 94.53%, college-ready 76.03%, teacher quality 9.08, funding 15,000, 247 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C112"
+      },
+      {
+        "id": "F-e2ac49595c33",
+        "t": "FACT",
+        "text": "Temescal: school quality index 6.51 (was 6.6 at C111), graduation 84.94%, college-ready 55.5%, teacher quality 6.9, funding 11,500, 313 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C112"
+      },
+      {
+        "id": "F-5b86c4ad504b",
+        "t": "FACT",
+        "text": "The district: Oakland City Schools — 5,201 employees citywide, growth 8.11%; per-hood funding on the table totals 286,000",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00016 @C112"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00287-167eb74c97",
+        "speakerId": "POP-00287",
+        "speakerName": "Simone Adesanya",
+        "text": "Honestly, that dip is a blip on a page to most of us. Teacher quality at 9.08 — that's the number my staff feels every single day, in the hallways, in the way a kid who was struggling suddenly gets it. The index is a snapshot; the teachers are the whole album. We don't walk around quoting our own score. We walk around making sure every kid in this building knows someone's got their back. That's the real index, and it doesn't move a tenth of a point because of a cycle.",
+        "factIds": [
+          "F-099b6e9d5391"
+        ],
+        "src": "packet.W2[POP-00287]"
+      },
+      {
+        "id": "Q-POP-01036-4806336729",
+        "speakerId": "POP-01036",
+        "speakerName": "Mei Wong",
+        "text": "Parents mostly ask about homework and whether their kid ate a real snack, but underneath it's about feeling safe and known. They want to know their child is with adults who see them, not just supervising. What keeps people here is that sense of community—the same faces at pickup, teachers who remember your kid's name, neighbors who look out. It's not flashy, but it's steady. That's why families stay even when other places might be growing faster.",
+        "factIds": [
+          "F-93602c970cd8",
+          "F-099b6e9d5391"
+        ],
+        "src": "packet.W2[POP-01036]"
+      },
+      {
+        "id": "Q-POP-00742-00df5568bd",
+        "speakerId": "POP-00742",
+        "speakerName": "Maya Torres-Dillon",
+        "text": "Honestly, that 76% number — I recognize it in the hallways more than in any single test score. It's the kid who stays after class to ask one more question about the lab, or the group that argues about the data until the bell rings. I see it in the parents who show up to every back-to-school night, and in the way my colleagues share lesson plans without being asked. But I also teach long enough to know that number doesn't capture the kid who's brilliant but has to work nights, or the one who freezes on test day. It's a real signal, but it's not the whole story. What I recognize is the effort behind it — and that's something you can't put in a percentage.",
+        "factIds": [
+          "F-099b6e9d5391"
+        ],
+        "src": "packet.W2[POP-00742]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-01036",
+        "name": "Mei Wong",
+        "profile": "Mei Wong — After-school program aide — Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00742",
+        "name": "Maya Torres-Dillon",
+        "profile": "Maya Torres-Dillon — Bay Conservation Alliance Advisory board, High School Science Teacher — Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00287",
+        "name": "Simone Adesanya",
+        "profile": "Simone Adesanya — School Principal — Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Angela Reyes",
+        "text": "A family moved into Rockridge this cycle — one student — but I don't know who they are or what drew them; worth asking at the front office",
+        "publishable": false
+      },
+      {
+        "from": "Angela Reyes",
+        "text": "The index dipped from 8.7 to 8.63 — no one has explained why; could be a recalibration or something real in the classroom",
+        "publishable": false
+      },
+      {
+        "from": "Angela Reyes",
+        "text": "The Brown household sold up in Uptown and bought in West Oakland — that's a different story, but it frames what Rockridge families might be weighing",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "plain-language translation of a supplied education or youth-program implementation fact",
+      "a careful stability or access question that remains explicitly unanswered",
+      "transitions between supplied education facts that add no participant, institution, number, schedule, placement, or outcome claim"
+    ],
+    "textureConditions": [
+      "every named student, teacher, family member, school, program, employer, partner, site, Initiative, Project, office, neighborhood, and organization must come from the Packet",
+      "eligibility, applications, enrollment, attendance, participation, placements, schedules, staffing, funding, support services, retention, completion, learning, credentials, employment, dates, durations, counts, measurements, and outcomes require Packet support",
+      "unestablished stability evidence must remain unestablished; do not manufacture a participant, educator, family, quote, classroom scene, school, employer, or collective experience",
+      "raw tracker status, phase labels, source paths, engine fields, and real-world institutions absent from canon may not appear as public prose"
+    ],
+    "forbiddenClaimClasses": [
+      "an invented student, teacher, family, participant, staff member, school, employer, partner, site, quote, classroom scene, eligibility rule, application, enrollment, attendance, placement, schedule, staffing level, budget, measurement, credential, completion, learning, employment, or youth outcome",
+      "a named education institution, school, program, employer, partner, office, Project, Initiative, person, neighborhood, or organization not found in the supplied record",
+      "an unsupported launch, closure, delay, continuity, access, participation, placement, duty, response, promise, timeline, or causal education claim",
+      "raw engine or tracker labels, phases, scores, decimals, source paths, row metadata, or non-canon real-world institutions printed as public-facing evidence"
+    ]
+  }
+}

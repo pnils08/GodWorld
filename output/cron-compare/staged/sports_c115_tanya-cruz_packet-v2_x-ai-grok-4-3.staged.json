@@ -1,0 +1,63 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "115",
+  "persona": "tanya-cruz",
+  "byline": "Tanya Cruz",
+  "bylinePopid": "POP-00014",
+  "article": "output/cron-compare/staged/sports_c115_tanya-cruz_packet-v2_x-ai-grok-4-3.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Vinnie Keane",
+        "role": "mentioned",
+        "popid": "POP-00001"
+      },
+      {
+        "name": "Benji Dillon",
+        "role": "mentioned",
+        "popid": "POP-00018"
+      },
+      {
+        "name": "Mike Paulson",
+        "role": "quoted-source",
+        "popid": "POP-00527"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "The formal part doesn't change the silence — the silence was already there. I walked in and out of that clubhouse for twenty years, and the thing people don't understand is that the voice they're talking about was never just mine. It was the sound of the game itself, the way it asks something of you every single day. Now it's Taveras's turn to answer that, and Quintero's, and I've got nothing but faith in both of them. The clubhouse doesn't see itself differently because I signed a paper — it sees itself the way it always has: hungry, young, and ready to prove something. That's the Oakland way. That doesn't retire with me.",
+        "sourceRef": "citizenVoice PRESS Vinnie Keane"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-e8dab9b96a2b",
+    "draftSha256": "c8e9005d3bab38a95116e32add9acd95e9fc7cf398940a8b5f36b9214ede06e2",
+    "verdict": "output/cron-compare/sports_c115_tanya-cruz_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-11-12T00:20:53.557Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 447,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "c8e9005d3bab38a95116e32add9acd95e9fc7cf398940a8b5f36b9214ede06e2",
+      "costUsd": 0.0011
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-12T00:20:58.687Z"
+}

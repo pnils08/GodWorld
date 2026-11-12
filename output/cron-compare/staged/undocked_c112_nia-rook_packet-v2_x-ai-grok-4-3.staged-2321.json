@@ -1,0 +1,56 @@
+{
+  "status": "staged",
+  "desk": "undocked",
+  "cycle": "112",
+  "persona": "nia-rook",
+  "byline": "Nia Rook",
+  "bylinePopid": "POP-01076",
+  "article": "output/cron-compare/staged/undocked_c112_nia-rook_packet-v2_x-ai-grok-4-3.staged-2321.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Sammie Alvarez",
+        "role": "mentioned",
+        "popid": "POP-00775"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Temescal"
+    ],
+    "claims": [
+      {
+        "claim": "To be honest, I've been wondering if my work still matters the way it used to. I've seen a lot of energy in Temescal, people caring about improving the neighborhood, but it doesn't seem to be translating into action. I'm not sure how people perceive me or my reporting, but I feel like I'm just trying to capture the essence of what's going on around here.",
+        "sourceRef": "citizenVoice PRESS Sammie Alvarez"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-1a4291505330",
+    "draftSha256": "e6d37a0c6a26c1f80d331dcf0260841f5f6f793096ec3f14bbf456cdd65d9a2e",
+    "verdict": "output/cron-compare/undocked_c112_nia-rook_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-10-23T23:21:32.102Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": false,
+      "inTargetBy": "code floor 350",
+      "words": 271,
+      "short": "The piece falls short of the 350-word minimum target.",
+      "score": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "e6d37a0c6a26c1f80d331dcf0260841f5f6f793096ec3f14bbf456cdd65d9a2e",
+      "costUsd": 0.001
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-23T23:21:35.327Z"
+}

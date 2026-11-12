@@ -1,0 +1,133 @@
+{
+  "version": "VOICES-SLICE-1",
+  "empty": false,
+  "cycle": 112,
+  "kind": "beat-voices",
+  "seat": {
+    "slug": "ines-sorensen",
+    "name": "Ines Sorensen",
+    "popid": null,
+    "desk": "culture",
+    "domain": "voices",
+    "builder": "buildVoicesSlice.js"
+  },
+  "hood": "Laurel",
+  "pulse": {
+    "className": "beat-voices",
+    "score": 100,
+    "label": "Marco Fabregas in their own words, and 1 more",
+    "hood": "Laurel",
+    "source": "output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-25"
+  },
+  "story": {
+    "kind": "beat-voices",
+    "angle": "Voices, 2026-10-25: Marco Fabregas in their own words, and 1 more",
+    "label": "Marco Fabregas in their own words, and 1 more",
+    "hookLine": "Open on Marco Fabregas's own line, verbatim. Their words are the piece; yours are the frame.",
+    "hood": "Laurel",
+    "citizens": [
+      "Marco Fabregas (POP-00060)",
+      "Eleanor Fong (POP-00981)"
+    ],
+    "popids": [
+      "POP-00060",
+      "POP-00981"
+    ],
+    "ref": "output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-25",
+    "cycle": 112
+  },
+  "approach": "Voices approach: this slice is what citizens wrote on their own pages — verbatim, attributed, the day it happened. The person's own line first, before their name; then who they are in one plain clause; then what in the city they were answering, from the page's own tags. Fewer, longer passages; the words are the product. Never a count, never a statistic, never an explanation of what they meant. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-00060",
+      "name": "Marco Fabregas",
+      "role": "Catcher, Las Vegas Aviators (AAA)",
+      "neighborhood": "Laurel",
+      "business": null,
+      "profile": "Marco Fabregas — Catcher, Las Vegas Aviators (AAA) — Laurel",
+      "why": "wrote it on their own page — the night page, C112, about personal, feeling calm"
+    },
+    {
+      "popid": "POP-00981",
+      "name": "Eleanor Fong",
+      "role": "student",
+      "neighborhood": "Chinatown",
+      "business": null,
+      "profile": "Eleanor Fong — student — Chinatown",
+      "why": "wrote it on their own page — the morning page, C112, about personal, feeling content"
+    }
+  ],
+  "facts": [
+    {
+      "text": "“Man, Arturo. I don't even know where we stand half the time. We're teammates, sure, and we've got that bond from grinding through the minors together, but lately it feels like he's got one foot in the big leagues and one foot back here in Oakland, and I'm just... here. He doesn't call as much, and when we do talk, it's all about pitch counts and bullpen sessions, not the real stuff. I still got love for him, but I've stopped expecting him to show up like he used to, you know? It's not anger — it's just this quiet acceptance that we're on different paths now, and that's okay, even if it stings a little.” — Marco Fabregas, Catcher, Las Vegas Aviators (AAA), Laurel (own page, the night page, C112)",
+      "src": "output/citizen_pages/index.jsonl cp-POP-00060-c112-night",
+      "docId": "ENFC7jsXzSsCdXfgckPqNp",
+      "popid": "POP-00060",
+      "slot": "night",
+      "cycle": 112
+    },
+    {
+      "text": "“The little thing is the way the coffee shop guy—Marcus, I think?—remembered my order without me saying it. It’s dumb, but it felt like being seen. I don’t get that a lot, not really, not in a city that big. It made me want to be that kind of person, the one who notices. Or maybe it just made me feel less invisible, and that’s enough.” — Eleanor Fong, student, Chinatown (own page, the morning page, C112)",
+      "src": "output/citizen_pages/index.jsonl cp-POP-00981-c112-morning",
+      "docId": "vG81f51nhDLFTkKvS7PorV",
+      "popid": "POP-00981",
+      "slot": "morning",
+      "cycle": 112
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "Voices, 2026-10-25: Marco Fabregas in their own words, and 1 more",
+    "hookLine": "Open on Marco Fabregas's own line, verbatim. Their words are the piece; yours are the frame.",
+    "anchorFacts": [
+      "“Man, Arturo. I don't even know where we stand half the time. We're teammates, sure, and we've got that bond from grinding through the minors together, but lately it feels like he's got one foot in the big leagues and one foot back here in Oakland, and I'm just... here. He doesn't call as much, and when we do talk, it's all about pitch counts and bullpen sessions, not the real stuff. I still got love for him, but I've stopped expecting him to show up like he used to, you know? It's not anger — it's just this quiet acceptance that we're on different paths now, and that's okay, even if it stings a little.” — Marco Fabregas, Catcher, Las Vegas Aviators (AAA), Laurel (own page, the night page, C112)",
+      "“The little thing is the way the coffee shop guy—Marcus, I think?—remembered my order without me saying it. It’s dumb, but it felt like being seen. I don’t get that a lot, not really, not in a city that big. It made me want to be that kind of person, the one who notices. Or maybe it just made me feel less invisible, and that’s enough.” — Eleanor Fong, student, Chinatown (own page, the morning page, C112)"
+    ],
+    "evidence": [
+      {
+        "text": "“Man, Arturo. I don't even know where we stand half the time. We're teammates, sure, and we've got that bond from grinding through the minors together, but lately it feels like he's got one foot in the big leagues and one foot back here in Oakland, and I'm just... here. He doesn't call as much, and when we do talk, it's all about pitch counts and bullpen sessions, not the real stuff. I still got love for him, but I've stopped expecting him to show up like he used to, you know? It's not anger — it's just this quiet acceptance that we're on different paths now, and that's okay, even if it stings a little.” — Marco Fabregas, Catcher, Las Vegas Aviators (AAA), Laurel (own page, the night page, C112)",
+        "src": "output/citizen_pages/index.jsonl cp-POP-00060-c112-night",
+        "docId": "ENFC7jsXzSsCdXfgckPqNp",
+        "popid": "POP-00060",
+        "slot": "night",
+        "cycle": 112
+      },
+      {
+        "text": "“The little thing is the way the coffee shop guy—Marcus, I think?—remembered my order without me saying it. It’s dumb, but it felt like being seen. I don’t get that a lot, not really, not in a city that big. It made me want to be that kind of person, the one who notices. Or maybe it just made me feel less invisible, and that’s enough.” — Eleanor Fong, student, Chinatown (own page, the morning page, C112)",
+        "src": "output/citizen_pages/index.jsonl cp-POP-00981-c112-morning",
+        "docId": "vG81f51nhDLFTkKvS7PorV",
+        "popid": "POP-00981",
+        "slot": "morning",
+        "cycle": 112
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": null,
+    "hooks": [],
+    "note": null,
+    "pageVoices": [
+      "“Man, Arturo. I don't even know where we stand half the time. We're teammates, sure, and we've got that bond from grinding through the minors together, but lately it feels like he's got one foot in the big leagues and one foot back here in Oakland, and I'm just... here. He doesn't call as much, and when we do talk, it's all about pitch counts and bullpen sessions, not the real stuff. I still got love for him, but I've stopped expecting him to show up like he used to, you know? It's not anger — it's just this quiet acceptance that we're on different paths now, and that's okay, even if it stings a little.” — Marco Fabregas, Catcher, Las Vegas Aviators (AAA), Laurel (own page, the night page, C112)",
+      "“The little thing is the way the coffee shop guy—Marcus, I think?—remembered my order without me saying it. It’s dumb, but it felt like being seen. I don’t get that a lot, not really, not in a city that big. It made me want to be that kind of person, the one who notices. Or maybe it just made me feel less invisible, and that’s enough.” — Eleanor Fong, student, Chinatown (own page, the morning page, C112)"
+    ],
+    "roomIsYours": "where they were standing when they wrote it, the one plain clause that says who this is, the silence after their last line — never a word inside the quotation marks that is not on the page"
+  },
+  "day": "2026-10-25",
+  "counted": {
+    "index": 2019,
+    "self": 614,
+    "inWindow": 2,
+    "candidates": 2,
+    "citizens": 2,
+    "todays": 2
+  },
+  "pointers": [
+    "output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-25",
+    "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+  ]
+}

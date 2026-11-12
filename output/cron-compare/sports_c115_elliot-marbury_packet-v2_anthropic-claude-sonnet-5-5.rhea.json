@@ -1,0 +1,75 @@
+{
+  "draft": "output/cron-compare/sports_c115_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "115",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "ea3560ecd19d9801b6a6e75261b2b08dbc89c10c0d2cdbcdaddf5aa7328cc58d",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Clean analytical sports memo verifying Eric Taveras's 2041 statistical baseline against ledger career dossier.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "marbury-data-desk-v1",
+    "packageVersion": "MARBURY-LEP2-2",
+    "manifestId": "AM-4769ee4e688d",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "2042",
+          "500",
+          "-2041",
+          "110"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Eric Taveras",
+      "Sidney Tumolo"
+    ],
+    "unverified": [
+      "Earlier Tribune"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0114,
+  "durationMs": 5308,
+  "parseError": false,
+  "ranAt": "2026-11-12T00:18:14.417Z",
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 350",
+    "words": 755,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "ea3560ecd19d9801b6a6e75261b2b08dbc89c10c0d2cdbcdaddf5aa7328cc58d",
+    "costUsd": 0.0015
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "initiative": "INIT-014",
+  "initiativeId": "INIT-014",
+  "cycle": 115,
+  "primaryVoice": "Mayor gavel (mayor_gavel-008)",
+  "consolidatedFrom": [
+    "STMT-115-mayor_gavel-008 (Mayor gavel — Ivy Hill legislation filing)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-014",
+    "ImplementationPhase": "vote-scheduled",
+    "MilestoneNotes": "C115: Legislation filed on current Ivy Hill evidence—low crime, slow trade, and soured mood—with no manufactured emergency premise.",
+    "NextScheduledAction": "Council review of the filed INIT-014 legislation",
+    "Status": "pending-vote",
+    "VoteCycle": 116
+  },
+  "_callVote": {
+    "moveId": "MV-114-civic-office-mayor-2026-11-02",
+    "agentDir": "civic-office-mayor"
+  }
+}

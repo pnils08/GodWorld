@@ -1,0 +1,1583 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-01210",
+    "name": "Tamsin Pruitt",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "The lives of C115: 14 people — Vinnie Keane retired from work as Former Designated Hitter, Oakland A's Legend, Grand Lake",
+    "approach": "Lives approach: this slice is the people something happened to this Cycle — a birth, a death in the house, a hospital stay, a retirement, a promotion; a household set up or a place of their own; a win or a loss on the book; the people a turn of the city reached and what it did to their day; and the smaller moments the record kept. Each person gets their own passage: the event, then the thread under it — the stay or strain that led there, the other lines the record kept for them, what the Tribune or this page already said of them, and what they did next if the record says. Read the thread in order and name where two lines of it do not agree; do not restate a ledger value as the story. The fact exactly right; never a trend, never a number first; the person, not the system the event belongs to. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent p",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "lives",
+      "hood": "Grand Lake",
+      "facts": [
+        "Vinnie Keane retired from work as Former Designated Hitter, Oakland A's Legend, Grand Lake (C115). What came next: the record does not say yet",
+        "Vinnie Keane — in their life, C115: got recognized twice at the grocery store after the story ran",
+        "Vinnie Keane — in their life, C115: spent the night on the phone working out where the family would land",
+        "Vinnie Keane — in their life, C115: came home from the event with a bag of thank-you cards from kids who'd never seen a game",
+        "Vinnie Keane — in their life, C115: overheard coworkers talking about last night's scene",
+        "Vinnie Keane — Lives already wrote this person: a moment the record kept (C114)",
+        "Vinnie Keane — the Tribune named them in a piece headlined The Lives of C114 (Culture, C114)",
+        "Vinnie Keane — the Tribune named them in a piece headlined When a Name Fades, Who Still Says Hello? (Culture, C114)",
+        "Vinnie Keane — the Tribune named them in a piece headlined Keane's 2041 Strikeout Rate Is an Outlier on 127 At-Bats. Next Season Decides Whether It Is a New Baseline. (Sports, C112)",
+        "Elle Lilo retired from work as Harbor Tugboat Captain, Jack London (C115). What came next: the record does not say yet",
+        "Elle Lilo — in their life, C114: experienced renewed social energy",
+        "Elle Lilo — in their life, C115: grabbed coffee from the cart outside the hospital before the morning rush hit",
+        "Elle Lilo — in their life, C115: stayed thirty minutes after the service just catching up in the parking lot",
+        "Elle Lilo — in their life, C115: left the playoff watch party with hoarse vocals and sticky shoes",
+        "Elle Lilo — Lives already wrote this person: the new household (C114)",
+        "Elle Lilo — the Tribune named them in a piece headlined Chinatown's 140 Sick Are Mostly at Home, and Home Is Doing the Work (Civic, C113)",
+        "Elle Lilo — the Tribune named them in a piece headlined Last, UNDOCKED. Nia Rook has Eric Taveras holding the top spot and Cristina Booker's ten-point Mon (Civic, C113)",
+        "Elle Lilo — the Tribune named them in a piece headlined Six Names for 142 Sick Residents (Civic, C112)",
+        "Marguerite Salcedo was promoted; the record lists their work as Managing Partner, Anchor Build, Piedmont Ave (C115). What came next: the record does not say yet",
+        "Marguerite Salcedo — in their life, C115: Promoted at Anchor Build (Tier 3 counted) after 9 years as a Managing Partner, Anchor Build.",
+        "Marguerite Salcedo — in their life, C115: drove the church van for the senior trip and listened to three hours of unfiltered neighborhood gossip",
+        "Marguerite Salcedo — in their life, C115: realized they're becoming more like an older relative — and didn't mind",
+        "Marguerite Salcedo — in their life, C115: closed their eyes during the choir solo and actually felt the tension leave their shoulders",
+        "Marguerite Salcedo — the Tribune named them in a piece headlined The Port Got Louder. Down the Block, the Ledger Barely Moved. (Business Reporter, C111)",
+        "Richie Ramiro moved into a place of their own in Uptown, renting (C115)",
+        "Richie Ramiro — in their life, C114: painted over graffiti on the recreation center wall alongside five neighbors they barely knew",
+        "Richie Ramiro — in their life, C114: spent too long in a bookstore aisle they'd never stopped at",
+        "Richie Ramiro — in their life, C115: grabbed coffee from the cart outside the hospital before the morning rush hit near a late-night counter",
+        "Richie Ramiro — the Tribune named them in a piece headlined Slayer Syndicate – Minor League Deep Dive (AA Level) (Sports)",
+        "Tobert Lewis moved into a place of their own in Downtown, renting (C115)",
+        "Tobert Lewis — in their life, C114: badged into the Baylight office early and tried not to think about the protestors from last month",
+        "Tobert Lewis — in their life, C114: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+        "Tobert Lewis — in their life, C114: Downtown is thriving, with events drawing crowds and new faces adding to the vibrant mix of the neighborhood.",
+        "Tobert Lewis — in their life, C115: finally fixed the thing that had been broken for months",
+        "Tobert Lewis — Lives already wrote this person: what the Cycle's turn reached them with (C114)",
+        "Tobert Lewis — the Tribune named them in a piece headlined The Lives of C114 (Culture, C114)",
+        "Farah Lindqvist lost on the UNDOCKED book — staked 529, the book kept it, Downtown (C115)",
+        "Farah Lindqvist — in their life, C114: said no to something and felt the shape of who they are in it",
+        "Farah Lindqvist — in their life, C115: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+        "Farah Lindqvist — in their life, C115: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+        "Farah Lindqvist — in their life, C115: felt the urban rhythm of the city center",
+        "Farah Lindqvist — the Tribune named them in a piece headlined Steel and Schedule (Infrastructure, C87)",
+        "Darius Scoot won on the UNDOCKED book — staked 478, paid 875, Rockridge (C115)",
+        "Darius Scoot — in their life, C115: traded produce over a fence and came out ahead",
+        "Darius Scoot — in their life, C115: waved at the regulars on the usual route, all present and accounted for",
+        "Darius Scoot — in their life, C115: felt energy from seasonal change",
+        "Darius Scoot — in their life, C115: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+        "Darrin Davis — saw their name in the sports pages again, Piedmont Ave — one of 6 people the Cycle's sports turn reached (A's [retirement]; A's [community-outreach]; A's [community-outreach]; Oaks W4 [big-win]; Oaks W4 [big-win]) (C115)",
+        "Darrin Davis — in their life, C114: had a neighbor tape the article to the building's front door",
+        "Darrin Davis — in their life, C114: saw someone running for the bus make it, and felt weirdly invested",
+        "Darrin Davis — in their life, C115: stayed an extra hour at the community center because nobody wanted to leave",
+        "Darrin Davis — in their life, C115: stayed thirty minutes after the service just catching up in the parking lot",
+        "Darrin Davis — the Tribune named them in a piece headlined The Pole on Rockridge Corner Is Starting to Say His Name (Culture, C114)",
+        "Darrin Davis — the Tribune named them in a piece headlined Fifty-Six, and the Road Behind It (Sports, C114)",
+        "Darrin Davis — the Tribune named them in a piece headlined Keane's 2041 Strikeout Rate Is an Outlier on 127 At-Bats. Next Season Decides Whether It Is a New Baseline. (Sports, C112)",
+        "Camila Osman — read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline, Chinatown — one of 4 people the Cycle's civic turn reached (Citywide reaction: last week's Tribune INFRASTRUCTURE coverage rated -3 (negative, 1 article, Trevor Shimizu).) (C115)",
+        "Camila Osman — in their life, C114: adjusted today's plans after last night's gridlock",
+        "Camila Osman — in their life, C114: bought a tea blend at the herbalist shop on the way home",
+        "Camila Osman — in their life, C114: felt quietly lucky to call Chinatown home",
+        "Camila Osman — in their life, C114: tried a new recipe that mostly worked near a family-run counter",
+        "Rosa Foster — thought about an old friend on the walk home, Rockridge — one of 4 people the Cycle's community turn reached (Citywide reaction: last week's Tribune COMMUNITY coverage rated +3 (positive, 1 article, Tamsin Pruitt).) (C115)",
+        "Rosa Foster — in their life, C114: helped a neighbor navigate the West Oakland Stabilization Fund portal because the interface was confusing",
+        "Rosa Foster — in their life, C114: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+        "Rosa Foster — in their life, C114: felt a lift at OakHouse after the win",
+        "Dalton Rushing — took a call about a future partnership opportunity, Chinatown (C115 — what happened in their life, not words they said)",
+        "Dalton Rushing — in their life, C115: loved the A's on principle and still cleared the night for UNDOCKED",
+        "Dalton Rushing — Lives already wrote this person: what the Cycle's turn reached them with (C113)",
+        "Dalton Rushing — the Tribune named them in a piece headlined Unsung Architects of a Dynasty (Sports)",
+        "Illy Jile — read the whole paper front to back with coffee going cold beside it near the market street, Chinatown (C115 — what happened in their life, not words they said)",
+        "Illy Jile — in their life, C114: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+        "Illy Jile — in their life, C114: waited at the family market register while the regulars lined up behind",
+        "Illy Jile — in their life, C115: the bar went silent for UNDOCKED the way it used to for a late A's lead",
+        "Illy Jile — in their life, C115: looked up how something works and came away more amazed, not less",
+        "Laila Cortez and Cedric Nakamura — moved from Uptown to West Oakland — moving up from Uptown, West Oakland (C115 — what happened in their life, not words they said)",
+        "Laila Cortez — in their life, C114: couldn't shake a strange dream through the morning coffee",
+        "Laila Cortez — in their life, C115: a flyer for a seniors lunch program flutters on a community bulletin board",
+        "Laila Cortez — in their life, C115: still feeling the energy from last night's city buzz",
+        "Laila Cortez — in their life, C115: A line at the Uptown corner store turned into a small crowd of people with the same complaint.",
+        "Laila Cortez — the Tribune named them in a piece headlined He Builds Baylight. On Creation Day, the City Walked His Jobsite. (Business, C100)",
+        "Laila Cortez — the Tribune named them in a piece headlined Mayor Names Cycle 95 As OARI's Decision Cycle, Signals Sunset Vote If Expansion Stalls (Civic, C92)",
+        "Laila Cortez — the Tribune named them in a piece headlined BUSINESS TICKER (Business, C87)",
+        "Cedric Nakamura — in their life, C115: noticed the corner had a different crowd after dark",
+        "Cedric Nakamura — in their life, C115: bought a new A's jersey and counted what was going right for once",
+        "Cedric Nakamura — in their life, C115: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
+        "Cedric Nakamura — in their life, C115: noticed the creative scene near the Fox",
+        "Cedric Nakamura — the Tribune named them in a piece headlined Uptown's Two Speeds: The Block Moves Faster Than the Store (Business, C112)",
+        "Xavier Ramington — moved from Temescal to West Oakland — moving up from Temescal, West Oakland (C115 — what happened in their life, not words they said)",
+        "Xavier Ramington — in their life, C114: managed small chores and daily responsibilities",
+        "Xavier Ramington — in their life, C115: found a quiet minute at a cafe near the clinics and the muffled thump of a car stereo playing last summer's hit",
+        "Xavier Ramington — in their life, C115: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+        "Xavier Ramington — in their life, C115: heard the block erupt through an open window when the final play landed"
+      ],
+      "priorCycle": null,
+      "note": "none of today's people has written their own page this Cycle — no quotes",
+      "engineHooks": [
+        "Household dissolved in Lake Merritt due to economic hardship (observational analysis)",
+        "A family bought their home in Chinatown (observational analysis)",
+        "The Cortez household (2) moved from Uptown to West Oakland — moving up from Uptown (observational analysis)",
+        "Xavier Ramington moved from Temescal to West Oakland — moving up from Temescal (desk rotation)"
+      ],
+      "roomIsYours": "the plain respect, what the event meant in that house or on that block, the detail the family would have picked — from the lines below, never invented",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-lives",
+    "hood": "Grand Lake",
+    "src": "output/beats/Lived_Events.jsonl @C115 batch 49af59",
+    "plan": {
+      "focus": "Vinnie Keane's post-retirement life",
+      "closeQuestion": "How will Vinnie Keane's retirement continue to shape his life in the coming cycles?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00001",
+        "name": "Vinnie Keane",
+        "profile": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Grand Lake",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00177",
+        "name": "Elle Lilo",
+        "profile": "Elle Lilo — Harbor Tugboat Captain — Jack London",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-01093",
+        "name": "Marguerite Salcedo",
+        "profile": "Marguerite Salcedo — Managing Partner, Anchor Build — Piedmont Ave",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00085",
+        "name": "Richie Ramiro",
+        "profile": "Richie Ramiro — First Baseman, Midland RockHounds (AA) — Uptown",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00001-d1cae000a4",
+        "pop": "POP-00001",
+        "name": "Vinnie Keane",
+        "quote": "After retiring from the A's, I've been keeping busy with appearances and staying involved with the community. I still get recognized around Grand Lake, which is nice. My wife Amara and I are enjoying our time together, and I'm looking forward to seeing what's next for the A's, especially with the catcher situation being a topic of discussion.",
+        "factIds": [
+          "F-bcd59a4fc42d",
+          "F-16d44fde8e2f",
+          "F-49e13b539f93"
+        ],
+        "src": "packet.W2[POP-00001]"
+      },
+      {
+        "id": "Q-POP-00177-497e28bd3e",
+        "pop": "POP-00177",
+        "name": "Elle Lilo",
+        "quote": "I've seen Vinnie Keane around, and to be honest, it's been nice to see him taking it easy after stepping back from work. I know how hard it is to adjust to not being on the job every day. I retired recently too, and it's been...interesting. The alarm still goes off at 4:30, old habit. But now I get to enjoy that first cup of coffee without the rush. I think Vinnie's probably figuring out his own new routine. We don't talk about it much, but I can relate.",
+        "factIds": [
+          "F-16d0222696c7"
+        ],
+        "src": "packet.W2[POP-00177]"
+      },
+      {
+        "id": "Q-POP-01093-cd495bf71e",
+        "pop": "POP-01093",
+        "name": "Marguerite Salcedo",
+        "quote": "I've seen Vinnie Keane around Grand Lake a few times since he retired. He seems to be enjoying his post-baseball life, taking it easy, and spending time with family. I've noticed he's still got that same energy, just not on the field anymore. We haven't had a chance to really catch up, but it's clear he's savoring this new chapter.",
+        "factIds": [
+          "F-bcd59a4fc42d",
+          "F-4681eaac6a91"
+        ],
+        "src": "packet.W2[POP-01093]"
+      },
+      {
+        "id": "Q-POP-00085-3ce0d65f74",
+        "pop": "POP-00085",
+        "name": "Richie Ramiro",
+        "quote": "I've seen Vinnie Keane around Grand Lake a few times since he retired. He seems to be enjoying life, taking it easy. I don't know him personally, but you can tell he's still a baseball guy at heart. I've heard he's been to some A's games, which isn't surprising. He's a legend, after all.",
+        "factIds": [
+          "F-bcd59a4fc42d",
+          "F-a28398ea2177"
+        ],
+        "src": "packet.W2[POP-00085]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Vinnie Keane's recognition at the grocery store suggests he's still a familiar figure in Grand Lake",
+        "usable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "His phone call about family arrangements indicates potential changes in his personal life",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C115",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-bc84fc0b7718"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane retired from work as Former Designated Hitter, Oakland A's Legend, Grand Lake",
+      "src": "output/beats/Lived_Events.jsonl @C115 batch 49af59",
+      "id": "F-bcd59a4fc42d"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane first. The event is the lead; one true detail; what came next only if the record says.",
+      "src": "output/beats/Lived_Events.jsonl @C115 batch 49af59",
+      "id": "F-a28398ea2177"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane retired from work as Former Designated Hitter, Oakland A's Legend, Grand Lake (C115). What came next: the record does not say yet",
+      "src": "output/beats/Lived_Events.jsonl @C115",
+      "id": "F-f0f0ab0f9896"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane — in their life, C115: got recognized twice at the grocery store after the story ran",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-49e13b539f93"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane — in their life, C115: spent the night on the phone working out where the family would land",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-365730568bb9"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane — in their life, C115: came home from the event with a bag of thank-you cards from kids who'd never seen a game",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-16d44fde8e2f"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane — in their life, C115: overheard coworkers talking about last night's scene",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-cff637da81e9"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane — Lives already wrote this person: a moment the record kept (C114)",
+      "src": "output/cron-compare/lives_covered.json",
+      "id": "F-33b6d0ecfdf9"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane — the Tribune named them in a piece headlined The Lives of C114 (Culture, C114)",
+      "src": "archive/ARTICLE_INDEX.jsonl ad7f65b09c46717e",
+      "id": "F-d14994303d42"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane — the Tribune named them in a piece headlined When a Name Fades, Who Still Says Hello? (Culture, C114)",
+      "src": "archive/ARTICLE_INDEX.jsonl 1303d315aea45c7e",
+      "id": "F-574e6e95f199"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane — the Tribune named them in a piece headlined Keane's 2041 Strikeout Rate Is an Outlier on 127 At-Bats. Next Season Decides Whether It Is a New Baseline. (Sports, C112)",
+      "src": "archive/ARTICLE_INDEX.jsonl 2ead09deff9943ce",
+      "id": "F-08ba298f3785"
+    },
+    {
+      "t": "FACT",
+      "text": "Elle Lilo retired from work as Harbor Tugboat Captain, Jack London (C115). What came next: the record does not say yet",
+      "src": "output/beats/Lived_Events.jsonl @C115",
+      "id": "F-16d0222696c7"
+    },
+    {
+      "t": "FACT",
+      "text": "Elle Lilo — in their life, C114: experienced renewed social energy",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-65cd60e2a933"
+    },
+    {
+      "t": "FACT",
+      "text": "Elle Lilo — in their life, C115: grabbed coffee from the cart outside the hospital before the morning rush hit",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-4b86fdf5921e"
+    },
+    {
+      "t": "FACT",
+      "text": "Elle Lilo — in their life, C115: stayed thirty minutes after the service just catching up in the parking lot",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-20cdc1867906"
+    },
+    {
+      "t": "FACT",
+      "text": "Elle Lilo — in their life, C115: left the playoff watch party with hoarse vocals and sticky shoes",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-150a0b0b8f95"
+    },
+    {
+      "t": "FACT",
+      "text": "Elle Lilo — Lives already wrote this person: the new household (C114)",
+      "src": "output/cron-compare/lives_covered.json",
+      "id": "F-db3c8a488a24"
+    },
+    {
+      "t": "FACT",
+      "text": "Elle Lilo — the Tribune named them in a piece headlined Chinatown's 140 Sick Are Mostly at Home, and Home Is Doing the Work (Civic, C113)",
+      "src": "archive/ARTICLE_INDEX.jsonl 415a8378a3cc8be1",
+      "id": "F-949eab6a11ff"
+    },
+    {
+      "t": "FACT",
+      "text": "Elle Lilo — the Tribune named them in a piece headlined Last, UNDOCKED. Nia Rook has Eric Taveras holding the top spot and Cristina Booker's ten-point Mon (Civic, C113)",
+      "src": "archive/ARTICLE_INDEX.jsonl 7b568104deca2649",
+      "id": "F-01db0778278f"
+    },
+    {
+      "t": "FACT",
+      "text": "Elle Lilo — the Tribune named them in a piece headlined Six Names for 142 Sick Residents (Civic, C112)",
+      "src": "archive/ARTICLE_INDEX.jsonl bad852382ed2ab09",
+      "id": "F-ca6b2975e581"
+    },
+    {
+      "t": "FACT",
+      "text": "Marguerite Salcedo was promoted; the record lists their work as Managing Partner, Anchor Build, Piedmont Ave (C115). What came next: the record does not say yet",
+      "src": "output/beats/Lived_Events.jsonl @C115",
+      "id": "F-c65190cdede1"
+    },
+    {
+      "t": "FACT",
+      "text": "Marguerite Salcedo — in their life, C115: Promoted at Anchor Build (Tier 3 counted) after 9 years as a Managing Partner, Anchor Build.",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-69019e4c56be"
+    },
+    {
+      "t": "FACT",
+      "text": "Marguerite Salcedo — in their life, C115: drove the church van for the senior trip and listened to three hours of unfiltered neighborhood gossip",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-ad1600024451"
+    },
+    {
+      "t": "FACT",
+      "text": "Marguerite Salcedo — in their life, C115: realized they're becoming more like an older relative — and didn't mind",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-2062f6a0bb0c"
+    },
+    {
+      "t": "FACT",
+      "text": "Marguerite Salcedo — in their life, C115: closed their eyes during the choir solo and actually felt the tension leave their shoulders",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-c9036fa9841a"
+    },
+    {
+      "t": "FACT",
+      "text": "Marguerite Salcedo — the Tribune named them in a piece headlined The Port Got Louder. Down the Block, the Ledger Barely Moved. (Business Reporter, C111)",
+      "src": "archive/ARTICLE_INDEX.jsonl 0ddf91444ec2bfd5",
+      "id": "F-6c6c4c1f73af"
+    },
+    {
+      "t": "FACT",
+      "text": "Richie Ramiro moved into a place of their own in Uptown, renting (C115)",
+      "src": "output/beats/Household_Ledger.jsonl @C115",
+      "id": "F-ca5603f83d7b"
+    },
+    {
+      "t": "FACT",
+      "text": "Richie Ramiro — in their life, C114: painted over graffiti on the recreation center wall alongside five neighbors they barely knew",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-0f8f7ebf83f8"
+    },
+    {
+      "t": "FACT",
+      "text": "Richie Ramiro — in their life, C114: spent too long in a bookstore aisle they'd never stopped at",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-c39b378d4e78"
+    },
+    {
+      "t": "FACT",
+      "text": "Richie Ramiro — in their life, C115: grabbed coffee from the cart outside the hospital before the morning rush hit near a late-night counter",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-21637f2cee93"
+    },
+    {
+      "t": "FACT",
+      "text": "Richie Ramiro — the Tribune named them in a piece headlined Slayer Syndicate – Minor League Deep Dive (AA Level) (Sports)",
+      "src": "archive/ARTICLE_INDEX.jsonl a7d89a21e0a69459",
+      "id": "F-a58e4692a0cb"
+    },
+    {
+      "t": "FACT",
+      "text": "Tobert Lewis moved into a place of their own in Downtown, renting (C115)",
+      "src": "output/beats/Household_Ledger.jsonl @C115",
+      "id": "F-cba5e8a3847a"
+    },
+    {
+      "t": "FACT",
+      "text": "Tobert Lewis — in their life, C114: badged into the Baylight office early and tried not to think about the protestors from last month",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-152a578098de"
+    },
+    {
+      "t": "FACT",
+      "text": "Tobert Lewis — in their life, C114: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-5e716feaa016"
+    },
+    {
+      "t": "FACT",
+      "text": "Tobert Lewis — in their life, C114: Downtown is thriving, with events drawing crowds and new faces adding to the vibrant mix of the neighborhood.",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-ed291434316a"
+    },
+    {
+      "t": "FACT",
+      "text": "Tobert Lewis — in their life, C115: finally fixed the thing that had been broken for months",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-7574310cef28"
+    },
+    {
+      "t": "FACT",
+      "text": "Tobert Lewis — Lives already wrote this person: what the Cycle's turn reached them with (C114)",
+      "src": "output/cron-compare/lives_covered.json",
+      "id": "F-916b3eb3a49b"
+    },
+    {
+      "t": "FACT",
+      "text": "Tobert Lewis — the Tribune named them in a piece headlined The Lives of C114 (Culture, C114)",
+      "src": "archive/ARTICLE_INDEX.jsonl ad7f65b09c46717e",
+      "id": "F-47550a603c28"
+    },
+    {
+      "t": "FACT",
+      "text": "Farah Lindqvist lost on the UNDOCKED book — staked 529, the book kept it, Downtown (C115)",
+      "src": "output/beats/Casino_Ledger.jsonl @C115",
+      "id": "F-16c1ecd932ca"
+    },
+    {
+      "t": "FACT",
+      "text": "Farah Lindqvist — in their life, C114: said no to something and felt the shape of who they are in it",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-0c430550b413"
+    },
+    {
+      "t": "FACT",
+      "text": "Farah Lindqvist — in their life, C115: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-e9e4ba1d6c23"
+    },
+    {
+      "t": "FACT",
+      "text": "Farah Lindqvist — in their life, C115: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-d0f76db224fd"
+    },
+    {
+      "t": "FACT",
+      "text": "Farah Lindqvist — in their life, C115: felt the urban rhythm of the city center",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-e3809627dada"
+    },
+    {
+      "t": "FACT",
+      "text": "Farah Lindqvist — the Tribune named them in a piece headlined Steel and Schedule (Infrastructure, C87)",
+      "src": "archive/ARTICLE_INDEX.jsonl 65a126f7cbbcf970",
+      "id": "F-244cfb32a02d"
+    },
+    {
+      "t": "FACT",
+      "text": "Darius Scoot won on the UNDOCKED book — staked 478, paid 875, Rockridge (C115)",
+      "src": "output/beats/Casino_Ledger.jsonl @C115",
+      "id": "F-bbf57392dd65"
+    },
+    {
+      "t": "FACT",
+      "text": "Darius Scoot — in their life, C115: traded produce over a fence and came out ahead",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-7b1d37825e48"
+    },
+    {
+      "t": "FACT",
+      "text": "Darius Scoot — in their life, C115: waved at the regulars on the usual route, all present and accounted for",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-a2759b47a3aa"
+    },
+    {
+      "t": "FACT",
+      "text": "Darius Scoot — in their life, C115: felt energy from seasonal change",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-59798cf9e5e4"
+    },
+    {
+      "t": "FACT",
+      "text": "Darius Scoot — in their life, C115: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-3e6490a31704"
+    },
+    {
+      "t": "FACT",
+      "text": "Darrin Davis — saw their name in the sports pages again, Piedmont Ave — one of 6 people the Cycle's sports turn reached (A's [retirement]; A's [community-outreach]; A's [community-outreach]; Oaks W4 [big-win]; Oaks W4 [big-win]) (C115)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C115",
+      "id": "F-be157cdc9920"
+    },
+    {
+      "t": "FACT",
+      "text": "Darrin Davis — in their life, C114: had a neighbor tape the article to the building's front door",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-e40d99ed28b6"
+    },
+    {
+      "t": "FACT",
+      "text": "Darrin Davis — in their life, C114: saw someone running for the bus make it, and felt weirdly invested",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-8eaac3d850ef"
+    },
+    {
+      "t": "FACT",
+      "text": "Darrin Davis — in their life, C115: stayed an extra hour at the community center because nobody wanted to leave",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-b60d6cdbe18e"
+    },
+    {
+      "t": "FACT",
+      "text": "Darrin Davis — in their life, C115: stayed thirty minutes after the service just catching up in the parking lot",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-63b3901e7730"
+    },
+    {
+      "t": "FACT",
+      "text": "Darrin Davis — the Tribune named them in a piece headlined The Pole on Rockridge Corner Is Starting to Say His Name (Culture, C114)",
+      "src": "archive/ARTICLE_INDEX.jsonl db859c2206e0282a",
+      "id": "F-89da35fb6509"
+    },
+    {
+      "t": "FACT",
+      "text": "Darrin Davis — the Tribune named them in a piece headlined Fifty-Six, and the Road Behind It (Sports, C114)",
+      "src": "archive/ARTICLE_INDEX.jsonl 6a58d696e6125498",
+      "id": "F-5a5ada4fa33d"
+    },
+    {
+      "t": "FACT",
+      "text": "Darrin Davis — the Tribune named them in a piece headlined Keane's 2041 Strikeout Rate Is an Outlier on 127 At-Bats. Next Season Decides Whether It Is a New Baseline. (Sports, C112)",
+      "src": "archive/ARTICLE_INDEX.jsonl 2ead09deff9943ce",
+      "id": "F-94b9df59598c"
+    },
+    {
+      "t": "FACT",
+      "text": "Camila Osman — read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline, Chinatown — one of 4 people the Cycle's civic turn reached (Citywide reaction: last week's Tribune INFRASTRUCTURE coverage rated -3 (negative, 1 article, Trevor Shimizu).) (C115)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C115",
+      "id": "F-02bdaa888fbd"
+    },
+    {
+      "t": "FACT",
+      "text": "Camila Osman — in their life, C114: adjusted today's plans after last night's gridlock",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-50a52bbdeb04"
+    },
+    {
+      "t": "FACT",
+      "text": "Camila Osman — in their life, C114: bought a tea blend at the herbalist shop on the way home",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-b6417b32a23a"
+    },
+    {
+      "t": "FACT",
+      "text": "Camila Osman — in their life, C114: felt quietly lucky to call Chinatown home",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-d8e928386e8b"
+    },
+    {
+      "t": "FACT",
+      "text": "Camila Osman — in their life, C114: tried a new recipe that mostly worked near a family-run counter",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-91d8f8cf8974"
+    },
+    {
+      "t": "FACT",
+      "text": "Rosa Foster — thought about an old friend on the walk home, Rockridge — one of 4 people the Cycle's community turn reached (Citywide reaction: last week's Tribune COMMUNITY coverage rated +3 (positive, 1 article, Tamsin Pruitt).) (C115)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C115",
+      "id": "F-b27c172a6fa4"
+    },
+    {
+      "t": "FACT",
+      "text": "Rosa Foster — in their life, C114: helped a neighbor navigate the West Oakland Stabilization Fund portal because the interface was confusing",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-46a1310f24fd"
+    },
+    {
+      "t": "FACT",
+      "text": "Rosa Foster — in their life, C114: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-7f9fd7420f12"
+    },
+    {
+      "t": "FACT",
+      "text": "Rosa Foster — in their life, C114: felt a lift at OakHouse after the win",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-bb9f35e929c8"
+    },
+    {
+      "t": "FACT",
+      "text": "Dalton Rushing — took a call about a future partnership opportunity, Chinatown (C115 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-1345ce078dc6"
+    },
+    {
+      "t": "FACT",
+      "text": "Dalton Rushing — in their life, C115: loved the A's on principle and still cleared the night for UNDOCKED",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-4733b3bdf29e"
+    },
+    {
+      "t": "FACT",
+      "text": "Dalton Rushing — Lives already wrote this person: what the Cycle's turn reached them with (C113)",
+      "src": "output/cron-compare/lives_covered.json",
+      "id": "F-2eaf62af0adc"
+    },
+    {
+      "t": "FACT",
+      "text": "Dalton Rushing — the Tribune named them in a piece headlined Unsung Architects of a Dynasty (Sports)",
+      "src": "archive/ARTICLE_INDEX.jsonl 1ab41325cca00406",
+      "id": "F-c88098577c83"
+    },
+    {
+      "t": "FACT",
+      "text": "Illy Jile — read the whole paper front to back with coffee going cold beside it near the market street, Chinatown (C115 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-59e23e9f9ccb"
+    },
+    {
+      "t": "FACT",
+      "text": "Illy Jile — in their life, C114: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-8f05abe1267d"
+    },
+    {
+      "t": "FACT",
+      "text": "Illy Jile — in their life, C114: waited at the family market register while the regulars lined up behind",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-9ac4630b082f"
+    },
+    {
+      "t": "FACT",
+      "text": "Illy Jile — in their life, C115: the bar went silent for UNDOCKED the way it used to for a late A's lead",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-d7f3b07c0cf0"
+    },
+    {
+      "t": "FACT",
+      "text": "Illy Jile — in their life, C115: looked up how something works and came away more amazed, not less",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-f1c104211ad5"
+    },
+    {
+      "t": "FACT",
+      "text": "Laila Cortez and Cedric Nakamura — moved from Uptown to West Oakland — moving up from Uptown, West Oakland (C115 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-54585e7112c2"
+    },
+    {
+      "t": "FACT",
+      "text": "Laila Cortez — in their life, C114: couldn't shake a strange dream through the morning coffee",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-1da877fcab96"
+    },
+    {
+      "t": "FACT",
+      "text": "Laila Cortez — in their life, C115: a flyer for a seniors lunch program flutters on a community bulletin board",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-469c03526fdd"
+    },
+    {
+      "t": "FACT",
+      "text": "Laila Cortez — in their life, C115: still feeling the energy from last night's city buzz",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-f97adeb15b92"
+    },
+    {
+      "t": "FACT",
+      "text": "Laila Cortez — in their life, C115: A line at the Uptown corner store turned into a small crowd of people with the same complaint.",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-a8be7f6d1f61"
+    },
+    {
+      "t": "FACT",
+      "text": "Laila Cortez — the Tribune named them in a piece headlined He Builds Baylight. On Creation Day, the City Walked His Jobsite. (Business, C100)",
+      "src": "archive/ARTICLE_INDEX.jsonl 9c4b3fed6abb9c4b",
+      "id": "F-56faec6d68a0"
+    },
+    {
+      "t": "FACT",
+      "text": "Laila Cortez — the Tribune named them in a piece headlined Mayor Names Cycle 95 As OARI's Decision Cycle, Signals Sunset Vote If Expansion Stalls (Civic, C92)",
+      "src": "archive/ARTICLE_INDEX.jsonl 4d77c8f78b37eda1",
+      "id": "F-8c88741a9084"
+    },
+    {
+      "t": "FACT",
+      "text": "Laila Cortez — the Tribune named them in a piece headlined BUSINESS TICKER (Business, C87)",
+      "src": "archive/ARTICLE_INDEX.jsonl f1273c7746c0862f",
+      "id": "F-fc6bad3426b1"
+    },
+    {
+      "t": "FACT",
+      "text": "Cedric Nakamura — in their life, C115: noticed the corner had a different crowd after dark",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-9dcf34203283"
+    },
+    {
+      "t": "FACT",
+      "text": "Cedric Nakamura — in their life, C115: bought a new A's jersey and counted what was going right for once",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-b8c63a361922"
+    },
+    {
+      "t": "FACT",
+      "text": "Cedric Nakamura — in their life, C115: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-977eb1232554"
+    },
+    {
+      "t": "FACT",
+      "text": "Cedric Nakamura — in their life, C115: noticed the creative scene near the Fox",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-791b995eae04"
+    },
+    {
+      "t": "FACT",
+      "text": "Cedric Nakamura — the Tribune named them in a piece headlined Uptown's Two Speeds: The Block Moves Faster Than the Store (Business, C112)",
+      "src": "archive/ARTICLE_INDEX.jsonl 6bc955294e6e05a5",
+      "id": "F-8817fd2d386e"
+    },
+    {
+      "t": "FACT",
+      "text": "Xavier Ramington — moved from Temescal to West Oakland — moving up from Temescal, West Oakland (C115 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-7a6c8ec34b45"
+    },
+    {
+      "t": "FACT",
+      "text": "Xavier Ramington — in their life, C114: managed small chores and daily responsibilities",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-873bf6b041b6"
+    },
+    {
+      "t": "FACT",
+      "text": "Xavier Ramington — in their life, C115: found a quiet minute at a cafe near the clinics and the muffled thump of a car stereo playing last summer's hit",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-3687c47f8a9d"
+    },
+    {
+      "t": "FACT",
+      "text": "Xavier Ramington — in their life, C115: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-568a54e36b51"
+    },
+    {
+      "t": "FACT",
+      "text": "Xavier Ramington — in their life, C115: heard the block erupt through an open window when the final play landed",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-d7402f2cf3cb"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C11, Spring, holiday=none",
+      "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+      "id": "F-82d77e9a4a71"
+    },
+    {
+      "t": "FACT",
+      "text": "Marguerite Salcedo — Managing Partner, Anchor Build — Piedmont Ave",
+      "src": "Simulation_Ledger profile for POP-01093",
+      "id": "F-4681eaac6a91"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "tamsin-lives-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Put the cycle's person events in the paper as news, one person at a time — a birth, a death, a hospital stay, a retirement, a promotion, a household set up or a place of one's own, a win or a loss on the book, what a turn of the city did to someone's day, and the smaller moments the record kept. The event is the lead, the person is named as the slice names them, and what came next appears only when a later record holds it. A stake or a payout is the person's own fact, not a statistic. The page is the city's real calendar; every person on it is one the record holds.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "plain respect — a neighborhood weekly's births-and-obituaries hand, unhurried, exact",
+      "targetWords": "450-1200",
+      "opening": "the heaviest event on the slice, stated as it happened to the named person",
+      "closing": "the last person's passage ends on what the record holds next for them, or on the fact itself — no moral, no roundup"
+    },
+    "authorizedTexture": [
+      "the plain respect of the form — the ordinary weight of a birth, a retirement, a discharge, stated without ornament",
+      "the frame around a supplied fact — what a promotion to the supplied role means in plain words, without inventing the workplace",
+      "the neighborhood the slice names as where the person lives, without an invented street scene",
+      "the order and pacing of the passages — heaviest first, one person at a time"
+    ],
+    "textureConditions": [
+      "every person, event, role, employer, neighborhood, hospital stay, household and family tie must come from the slice",
+      "a quote appears only verbatim from the person's own supplied page; nothing paraphrased into quotation marks",
+      "what came next appears only when a later Cycle's supplied record holds it",
+      "a thin day (few events) is written as a short page, not padded"
+    ],
+    "canonBlockers": [
+      "any person, event, quote, venue, employer or family member not on the slice",
+      "a paraphrased or invented quote",
+      "a cause, diagnosis or outcome the record does not state",
+      "a statistic, rate or trend claim — the page is people, not numbers",
+      "intake bookkeeping rows (Emerged into Tier, Added to Simulation_Ledger, Updated to Tier) written as life events",
+      "raw engine labels or decimals printed as public-facing evidence"
+    ]
+  },
+  "manifest": {
+    "id": "AM-660320b35c0d",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-bc84fc0b7718",
+        "t": "FACT",
+        "text": "Current cycle: C115",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-bcd59a4fc42d",
+        "t": "FACT",
+        "text": "Vinnie Keane retired from work as Former Designated Hitter, Oakland A's Legend, Grand Lake",
+        "src": "output/beats/Lived_Events.jsonl @C115 batch 49af59"
+      },
+      {
+        "id": "F-a28398ea2177",
+        "t": "FACT",
+        "text": "Vinnie Keane first. The event is the lead; one true detail; what came next only if the record says.",
+        "src": "output/beats/Lived_Events.jsonl @C115 batch 49af59"
+      },
+      {
+        "id": "F-f0f0ab0f9896",
+        "t": "FACT",
+        "text": "Vinnie Keane retired from work as Former Designated Hitter, Oakland A's Legend, Grand Lake (C115). What came next: the record does not say yet",
+        "src": "output/beats/Lived_Events.jsonl @C115"
+      },
+      {
+        "id": "F-49e13b539f93",
+        "t": "FACT",
+        "text": "Vinnie Keane — in their life, C115: got recognized twice at the grocery store after the story ran",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-365730568bb9",
+        "t": "FACT",
+        "text": "Vinnie Keane — in their life, C115: spent the night on the phone working out where the family would land",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-16d44fde8e2f",
+        "t": "FACT",
+        "text": "Vinnie Keane — in their life, C115: came home from the event with a bag of thank-you cards from kids who'd never seen a game",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-cff637da81e9",
+        "t": "FACT",
+        "text": "Vinnie Keane — in their life, C115: overheard coworkers talking about last night's scene",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-33b6d0ecfdf9",
+        "t": "FACT",
+        "text": "Vinnie Keane — Lives already wrote this person: a moment the record kept (C114)",
+        "src": "output/cron-compare/lives_covered.json"
+      },
+      {
+        "id": "F-d14994303d42",
+        "t": "FACT",
+        "text": "Vinnie Keane — the Tribune named them in a piece headlined The Lives of C114 (Culture, C114)",
+        "src": "archive/ARTICLE_INDEX.jsonl ad7f65b09c46717e"
+      },
+      {
+        "id": "F-574e6e95f199",
+        "t": "FACT",
+        "text": "Vinnie Keane — the Tribune named them in a piece headlined When a Name Fades, Who Still Says Hello? (Culture, C114)",
+        "src": "archive/ARTICLE_INDEX.jsonl 1303d315aea45c7e"
+      },
+      {
+        "id": "F-08ba298f3785",
+        "t": "FACT",
+        "text": "Vinnie Keane — the Tribune named them in a piece headlined Keane's 2041 Strikeout Rate Is an Outlier on 127 At-Bats. Next Season Decides Whether It Is a New Baseline. (Sports, C112)",
+        "src": "archive/ARTICLE_INDEX.jsonl 2ead09deff9943ce"
+      },
+      {
+        "id": "F-16d0222696c7",
+        "t": "FACT",
+        "text": "Elle Lilo retired from work as Harbor Tugboat Captain, Jack London (C115). What came next: the record does not say yet",
+        "src": "output/beats/Lived_Events.jsonl @C115"
+      },
+      {
+        "id": "F-65cd60e2a933",
+        "t": "FACT",
+        "text": "Elle Lilo — in their life, C114: experienced renewed social energy",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-4b86fdf5921e",
+        "t": "FACT",
+        "text": "Elle Lilo — in their life, C115: grabbed coffee from the cart outside the hospital before the morning rush hit",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-20cdc1867906",
+        "t": "FACT",
+        "text": "Elle Lilo — in their life, C115: stayed thirty minutes after the service just catching up in the parking lot",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-150a0b0b8f95",
+        "t": "FACT",
+        "text": "Elle Lilo — in their life, C115: left the playoff watch party with hoarse vocals and sticky shoes",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-db3c8a488a24",
+        "t": "FACT",
+        "text": "Elle Lilo — Lives already wrote this person: the new household (C114)",
+        "src": "output/cron-compare/lives_covered.json"
+      },
+      {
+        "id": "F-949eab6a11ff",
+        "t": "FACT",
+        "text": "Elle Lilo — the Tribune named them in a piece headlined Chinatown's 140 Sick Are Mostly at Home, and Home Is Doing the Work (Civic, C113)",
+        "src": "archive/ARTICLE_INDEX.jsonl 415a8378a3cc8be1"
+      },
+      {
+        "id": "F-01db0778278f",
+        "t": "FACT",
+        "text": "Elle Lilo — the Tribune named them in a piece headlined Last, UNDOCKED. Nia Rook has Eric Taveras holding the top spot and Cristina Booker's ten-point Mon (Civic, C113)",
+        "src": "archive/ARTICLE_INDEX.jsonl 7b568104deca2649"
+      },
+      {
+        "id": "F-ca6b2975e581",
+        "t": "FACT",
+        "text": "Elle Lilo — the Tribune named them in a piece headlined Six Names for 142 Sick Residents (Civic, C112)",
+        "src": "archive/ARTICLE_INDEX.jsonl bad852382ed2ab09"
+      },
+      {
+        "id": "F-c65190cdede1",
+        "t": "FACT",
+        "text": "Marguerite Salcedo was promoted; the record lists their work as Managing Partner, Anchor Build, Piedmont Ave (C115). What came next: the record does not say yet",
+        "src": "output/beats/Lived_Events.jsonl @C115"
+      },
+      {
+        "id": "F-69019e4c56be",
+        "t": "FACT",
+        "text": "Marguerite Salcedo — in their life, C115: Promoted at Anchor Build (Tier 3 counted) after 9 years as a Managing Partner, Anchor Build.",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-ad1600024451",
+        "t": "FACT",
+        "text": "Marguerite Salcedo — in their life, C115: drove the church van for the senior trip and listened to three hours of unfiltered neighborhood gossip",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-2062f6a0bb0c",
+        "t": "FACT",
+        "text": "Marguerite Salcedo — in their life, C115: realized they're becoming more like an older relative — and didn't mind",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-c9036fa9841a",
+        "t": "FACT",
+        "text": "Marguerite Salcedo — in their life, C115: closed their eyes during the choir solo and actually felt the tension leave their shoulders",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-6c6c4c1f73af",
+        "t": "FACT",
+        "text": "Marguerite Salcedo — the Tribune named them in a piece headlined The Port Got Louder. Down the Block, the Ledger Barely Moved. (Business Reporter, C111)",
+        "src": "archive/ARTICLE_INDEX.jsonl 0ddf91444ec2bfd5"
+      },
+      {
+        "id": "F-ca5603f83d7b",
+        "t": "FACT",
+        "text": "Richie Ramiro moved into a place of their own in Uptown, renting (C115)",
+        "src": "output/beats/Household_Ledger.jsonl @C115"
+      },
+      {
+        "id": "F-0f8f7ebf83f8",
+        "t": "FACT",
+        "text": "Richie Ramiro — in their life, C114: painted over graffiti on the recreation center wall alongside five neighbors they barely knew",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-c39b378d4e78",
+        "t": "FACT",
+        "text": "Richie Ramiro — in their life, C114: spent too long in a bookstore aisle they'd never stopped at",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-21637f2cee93",
+        "t": "FACT",
+        "text": "Richie Ramiro — in their life, C115: grabbed coffee from the cart outside the hospital before the morning rush hit near a late-night counter",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-a58e4692a0cb",
+        "t": "FACT",
+        "text": "Richie Ramiro — the Tribune named them in a piece headlined Slayer Syndicate – Minor League Deep Dive (AA Level) (Sports)",
+        "src": "archive/ARTICLE_INDEX.jsonl a7d89a21e0a69459"
+      },
+      {
+        "id": "F-cba5e8a3847a",
+        "t": "FACT",
+        "text": "Tobert Lewis moved into a place of their own in Downtown, renting (C115)",
+        "src": "output/beats/Household_Ledger.jsonl @C115"
+      },
+      {
+        "id": "F-152a578098de",
+        "t": "FACT",
+        "text": "Tobert Lewis — in their life, C114: badged into the Baylight office early and tried not to think about the protestors from last month",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-5e716feaa016",
+        "t": "FACT",
+        "text": "Tobert Lewis — in their life, C114: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-ed291434316a",
+        "t": "FACT",
+        "text": "Tobert Lewis — in their life, C114: Downtown is thriving, with events drawing crowds and new faces adding to the vibrant mix of the neighborhood.",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-7574310cef28",
+        "t": "FACT",
+        "text": "Tobert Lewis — in their life, C115: finally fixed the thing that had been broken for months",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-916b3eb3a49b",
+        "t": "FACT",
+        "text": "Tobert Lewis — Lives already wrote this person: what the Cycle's turn reached them with (C114)",
+        "src": "output/cron-compare/lives_covered.json"
+      },
+      {
+        "id": "F-47550a603c28",
+        "t": "FACT",
+        "text": "Tobert Lewis — the Tribune named them in a piece headlined The Lives of C114 (Culture, C114)",
+        "src": "archive/ARTICLE_INDEX.jsonl ad7f65b09c46717e"
+      },
+      {
+        "id": "F-16c1ecd932ca",
+        "t": "FACT",
+        "text": "Farah Lindqvist lost on the UNDOCKED book — staked 529, the book kept it, Downtown (C115)",
+        "src": "output/beats/Casino_Ledger.jsonl @C115"
+      },
+      {
+        "id": "F-0c430550b413",
+        "t": "FACT",
+        "text": "Farah Lindqvist — in their life, C114: said no to something and felt the shape of who they are in it",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-e9e4ba1d6c23",
+        "t": "FACT",
+        "text": "Farah Lindqvist — in their life, C115: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-d0f76db224fd",
+        "t": "FACT",
+        "text": "Farah Lindqvist — in their life, C115: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-e3809627dada",
+        "t": "FACT",
+        "text": "Farah Lindqvist — in their life, C115: felt the urban rhythm of the city center",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-244cfb32a02d",
+        "t": "FACT",
+        "text": "Farah Lindqvist — the Tribune named them in a piece headlined Steel and Schedule (Infrastructure, C87)",
+        "src": "archive/ARTICLE_INDEX.jsonl 65a126f7cbbcf970"
+      },
+      {
+        "id": "F-bbf57392dd65",
+        "t": "FACT",
+        "text": "Darius Scoot won on the UNDOCKED book — staked 478, paid 875, Rockridge (C115)",
+        "src": "output/beats/Casino_Ledger.jsonl @C115"
+      },
+      {
+        "id": "F-7b1d37825e48",
+        "t": "FACT",
+        "text": "Darius Scoot — in their life, C115: traded produce over a fence and came out ahead",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-a2759b47a3aa",
+        "t": "FACT",
+        "text": "Darius Scoot — in their life, C115: waved at the regulars on the usual route, all present and accounted for",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-59798cf9e5e4",
+        "t": "FACT",
+        "text": "Darius Scoot — in their life, C115: felt energy from seasonal change",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-3e6490a31704",
+        "t": "FACT",
+        "text": "Darius Scoot — in their life, C115: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-be157cdc9920",
+        "t": "FACT",
+        "text": "Darrin Davis — saw their name in the sports pages again, Piedmont Ave — one of 6 people the Cycle's sports turn reached (A's [retirement]; A's [community-outreach]; A's [community-outreach]; Oaks W4 [big-win]; Oaks W4 [big-win]) (C115)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C115"
+      },
+      {
+        "id": "F-e40d99ed28b6",
+        "t": "FACT",
+        "text": "Darrin Davis — in their life, C114: had a neighbor tape the article to the building's front door",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-8eaac3d850ef",
+        "t": "FACT",
+        "text": "Darrin Davis — in their life, C114: saw someone running for the bus make it, and felt weirdly invested",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-b60d6cdbe18e",
+        "t": "FACT",
+        "text": "Darrin Davis — in their life, C115: stayed an extra hour at the community center because nobody wanted to leave",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-63b3901e7730",
+        "t": "FACT",
+        "text": "Darrin Davis — in their life, C115: stayed thirty minutes after the service just catching up in the parking lot",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-89da35fb6509",
+        "t": "FACT",
+        "text": "Darrin Davis — the Tribune named them in a piece headlined The Pole on Rockridge Corner Is Starting to Say His Name (Culture, C114)",
+        "src": "archive/ARTICLE_INDEX.jsonl db859c2206e0282a"
+      },
+      {
+        "id": "F-5a5ada4fa33d",
+        "t": "FACT",
+        "text": "Darrin Davis — the Tribune named them in a piece headlined Fifty-Six, and the Road Behind It (Sports, C114)",
+        "src": "archive/ARTICLE_INDEX.jsonl 6a58d696e6125498"
+      },
+      {
+        "id": "F-94b9df59598c",
+        "t": "FACT",
+        "text": "Darrin Davis — the Tribune named them in a piece headlined Keane's 2041 Strikeout Rate Is an Outlier on 127 At-Bats. Next Season Decides Whether It Is a New Baseline. (Sports, C112)",
+        "src": "archive/ARTICLE_INDEX.jsonl 2ead09deff9943ce"
+      },
+      {
+        "id": "F-02bdaa888fbd",
+        "t": "FACT",
+        "text": "Camila Osman — read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline, Chinatown — one of 4 people the Cycle's civic turn reached (Citywide reaction: last week's Tribune INFRASTRUCTURE coverage rated -3 (negative, 1 article, Trevor Shimizu).) (C115)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C115"
+      },
+      {
+        "id": "F-50a52bbdeb04",
+        "t": "FACT",
+        "text": "Camila Osman — in their life, C114: adjusted today's plans after last night's gridlock",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-b6417b32a23a",
+        "t": "FACT",
+        "text": "Camila Osman — in their life, C114: bought a tea blend at the herbalist shop on the way home",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-d8e928386e8b",
+        "t": "FACT",
+        "text": "Camila Osman — in their life, C114: felt quietly lucky to call Chinatown home",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-91d8f8cf8974",
+        "t": "FACT",
+        "text": "Camila Osman — in their life, C114: tried a new recipe that mostly worked near a family-run counter",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-b27c172a6fa4",
+        "t": "FACT",
+        "text": "Rosa Foster — thought about an old friend on the walk home, Rockridge — one of 4 people the Cycle's community turn reached (Citywide reaction: last week's Tribune COMMUNITY coverage rated +3 (positive, 1 article, Tamsin Pruitt).) (C115)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C115"
+      },
+      {
+        "id": "F-46a1310f24fd",
+        "t": "FACT",
+        "text": "Rosa Foster — in their life, C114: helped a neighbor navigate the West Oakland Stabilization Fund portal because the interface was confusing",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-7f9fd7420f12",
+        "t": "FACT",
+        "text": "Rosa Foster — in their life, C114: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-bb9f35e929c8",
+        "t": "FACT",
+        "text": "Rosa Foster — in their life, C114: felt a lift at OakHouse after the win",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-1345ce078dc6",
+        "t": "FACT",
+        "text": "Dalton Rushing — took a call about a future partnership opportunity, Chinatown (C115 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-4733b3bdf29e",
+        "t": "FACT",
+        "text": "Dalton Rushing — in their life, C115: loved the A's on principle and still cleared the night for UNDOCKED",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-2eaf62af0adc",
+        "t": "FACT",
+        "text": "Dalton Rushing — Lives already wrote this person: what the Cycle's turn reached them with (C113)",
+        "src": "output/cron-compare/lives_covered.json"
+      },
+      {
+        "id": "F-c88098577c83",
+        "t": "FACT",
+        "text": "Dalton Rushing — the Tribune named them in a piece headlined Unsung Architects of a Dynasty (Sports)",
+        "src": "archive/ARTICLE_INDEX.jsonl 1ab41325cca00406"
+      },
+      {
+        "id": "F-59e23e9f9ccb",
+        "t": "FACT",
+        "text": "Illy Jile — read the whole paper front to back with coffee going cold beside it near the market street, Chinatown (C115 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-8f05abe1267d",
+        "t": "FACT",
+        "text": "Illy Jile — in their life, C114: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-9ac4630b082f",
+        "t": "FACT",
+        "text": "Illy Jile — in their life, C114: waited at the family market register while the regulars lined up behind",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-d7f3b07c0cf0",
+        "t": "FACT",
+        "text": "Illy Jile — in their life, C115: the bar went silent for UNDOCKED the way it used to for a late A's lead",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-f1c104211ad5",
+        "t": "FACT",
+        "text": "Illy Jile — in their life, C115: looked up how something works and came away more amazed, not less",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-54585e7112c2",
+        "t": "FACT",
+        "text": "Laila Cortez and Cedric Nakamura — moved from Uptown to West Oakland — moving up from Uptown, West Oakland (C115 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-1da877fcab96",
+        "t": "FACT",
+        "text": "Laila Cortez — in their life, C114: couldn't shake a strange dream through the morning coffee",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-469c03526fdd",
+        "t": "FACT",
+        "text": "Laila Cortez — in their life, C115: a flyer for a seniors lunch program flutters on a community bulletin board",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-f97adeb15b92",
+        "t": "FACT",
+        "text": "Laila Cortez — in their life, C115: still feeling the energy from last night's city buzz",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-a8be7f6d1f61",
+        "t": "FACT",
+        "text": "Laila Cortez — in their life, C115: A line at the Uptown corner store turned into a small crowd of people with the same complaint.",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-56faec6d68a0",
+        "t": "FACT",
+        "text": "Laila Cortez — the Tribune named them in a piece headlined He Builds Baylight. On Creation Day, the City Walked His Jobsite. (Business, C100)",
+        "src": "archive/ARTICLE_INDEX.jsonl 9c4b3fed6abb9c4b"
+      },
+      {
+        "id": "F-8c88741a9084",
+        "t": "FACT",
+        "text": "Laila Cortez — the Tribune named them in a piece headlined Mayor Names Cycle 95 As OARI's Decision Cycle, Signals Sunset Vote If Expansion Stalls (Civic, C92)",
+        "src": "archive/ARTICLE_INDEX.jsonl 4d77c8f78b37eda1"
+      },
+      {
+        "id": "F-fc6bad3426b1",
+        "t": "FACT",
+        "text": "Laila Cortez — the Tribune named them in a piece headlined BUSINESS TICKER (Business, C87)",
+        "src": "archive/ARTICLE_INDEX.jsonl f1273c7746c0862f"
+      },
+      {
+        "id": "F-9dcf34203283",
+        "t": "FACT",
+        "text": "Cedric Nakamura — in their life, C115: noticed the corner had a different crowd after dark",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-b8c63a361922",
+        "t": "FACT",
+        "text": "Cedric Nakamura — in their life, C115: bought a new A's jersey and counted what was going right for once",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-977eb1232554",
+        "t": "FACT",
+        "text": "Cedric Nakamura — in their life, C115: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-791b995eae04",
+        "t": "FACT",
+        "text": "Cedric Nakamura — in their life, C115: noticed the creative scene near the Fox",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-8817fd2d386e",
+        "t": "FACT",
+        "text": "Cedric Nakamura — the Tribune named them in a piece headlined Uptown's Two Speeds: The Block Moves Faster Than the Store (Business, C112)",
+        "src": "archive/ARTICLE_INDEX.jsonl 6bc955294e6e05a5"
+      },
+      {
+        "id": "F-7a6c8ec34b45",
+        "t": "FACT",
+        "text": "Xavier Ramington — moved from Temescal to West Oakland — moving up from Temescal, West Oakland (C115 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-873bf6b041b6",
+        "t": "FACT",
+        "text": "Xavier Ramington — in their life, C114: managed small chores and daily responsibilities",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-3687c47f8a9d",
+        "t": "FACT",
+        "text": "Xavier Ramington — in their life, C115: found a quiet minute at a cafe near the clinics and the muffled thump of a car stereo playing last summer's hit",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-568a54e36b51",
+        "t": "FACT",
+        "text": "Xavier Ramington — in their life, C115: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-d7402f2cf3cb",
+        "t": "FACT",
+        "text": "Xavier Ramington — in their life, C115: heard the block erupt through an open window when the final play landed",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-82d77e9a4a71",
+        "t": "FACT",
+        "text": "Calendar: Y3C11, Spring, holiday=none",
+        "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)"
+      },
+      {
+        "id": "F-4681eaac6a91",
+        "t": "FACT",
+        "text": "Marguerite Salcedo — Managing Partner, Anchor Build — Piedmont Ave",
+        "src": "Simulation_Ledger profile for POP-01093"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00001-d1cae000a4",
+        "speakerId": "POP-00001",
+        "speakerName": "Vinnie Keane",
+        "text": "After retiring from the A's, I've been keeping busy with appearances and staying involved with the community. I still get recognized around Grand Lake, which is nice. My wife Amara and I are enjoying our time together, and I'm looking forward to seeing what's next for the A's, especially with the catcher situation being a topic of discussion.",
+        "factIds": [
+          "F-bcd59a4fc42d",
+          "F-16d44fde8e2f",
+          "F-49e13b539f93"
+        ],
+        "src": "packet.W2[POP-00001]"
+      },
+      {
+        "id": "Q-POP-00177-497e28bd3e",
+        "speakerId": "POP-00177",
+        "speakerName": "Elle Lilo",
+        "text": "I've seen Vinnie Keane around, and to be honest, it's been nice to see him taking it easy after stepping back from work. I know how hard it is to adjust to not being on the job every day. I retired recently too, and it's been...interesting. The alarm still goes off at 4:30, old habit. But now I get to enjoy that first cup of coffee without the rush. I think Vinnie's probably figuring out his own new routine. We don't talk about it much, but I can relate.",
+        "factIds": [
+          "F-16d0222696c7"
+        ],
+        "src": "packet.W2[POP-00177]"
+      },
+      {
+        "id": "Q-POP-01093-cd495bf71e",
+        "speakerId": "POP-01093",
+        "speakerName": "Marguerite Salcedo",
+        "text": "I've seen Vinnie Keane around Grand Lake a few times since he retired. He seems to be enjoying his post-baseball life, taking it easy, and spending time with family. I've noticed he's still got that same energy, just not on the field anymore. We haven't had a chance to really catch up, but it's clear he's savoring this new chapter.",
+        "factIds": [
+          "F-bcd59a4fc42d",
+          "F-4681eaac6a91"
+        ],
+        "src": "packet.W2[POP-01093]"
+      },
+      {
+        "id": "Q-POP-00085-3ce0d65f74",
+        "speakerId": "POP-00085",
+        "speakerName": "Richie Ramiro",
+        "text": "I've seen Vinnie Keane around Grand Lake a few times since he retired. He seems to be enjoying life, taking it easy. I don't know him personally, but you can tell he's still a baseball guy at heart. I've heard he's been to some A's games, which isn't surprising. He's a legend, after all.",
+        "factIds": [
+          "F-bcd59a4fc42d",
+          "F-a28398ea2177"
+        ],
+        "src": "packet.W2[POP-00085]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00001",
+        "name": "Vinnie Keane",
+        "profile": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Grand Lake",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00177",
+        "name": "Elle Lilo",
+        "profile": "Elle Lilo — Harbor Tugboat Captain — Jack London",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-01093",
+        "name": "Marguerite Salcedo",
+        "profile": "Marguerite Salcedo — Managing Partner, Anchor Build — Piedmont Ave",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00085",
+        "name": "Richie Ramiro",
+        "profile": "Richie Ramiro — First Baseman, Midland RockHounds (AA) — Uptown",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Vinnie Keane's recognition at the grocery store suggests he's still a familiar figure in Grand Lake",
+        "publishable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "His phone call about family arrangements indicates potential changes in his personal life",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "the plain respect of the form — the ordinary weight of a birth, a retirement, a discharge, stated without ornament",
+      "the frame around a supplied fact — what a promotion to the supplied role means in plain words, without inventing the workplace",
+      "the neighborhood the slice names as where the person lives, without an invented street scene",
+      "the order and pacing of the passages — heaviest first, one person at a time"
+    ],
+    "textureConditions": [
+      "every person, event, role, employer, neighborhood, hospital stay, household and family tie must come from the slice",
+      "a quote appears only verbatim from the person's own supplied page; nothing paraphrased into quotation marks",
+      "what came next appears only when a later Cycle's supplied record holds it",
+      "a thin day (few events) is written as a short page, not padded"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

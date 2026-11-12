@@ -1,0 +1,78 @@
+{
+  "draft": "output/test-shell/20261110-231422-lila-mezran-live/civic_c115_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "115",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "2b7af4f59f14919eecd3388927d47dfd2f0c2287b90c8a9e483347d8fa76182f",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All citizen identities, exact interview quotes, hospital census figures, and world state facts verify cleanly against Cycle 115 ground truth.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "lila-health-service-v1",
+    "packageVersion": "LILA-LEP2-2",
+    "manifestId": "AM-f29b4866c879",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "142",
+          "112",
+          "140",
+          "113",
+          "137",
+          "129"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Akua Adeyemi",
+      "Deacon Seymour",
+      "Howard Travis",
+      "Maurice Franklin",
+      "Yu Zen"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 2,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0121,
+  "durationMs": 7611,
+  "parseError": false,
+  "ranAt": "2026-11-10T00:18:13.266Z",
+  "contractScore": {
+    "opened": false,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 933,
+    "short": "The opening begins with an anecdotal feature hook about a plumber rather than a health-service, access, place, or implementation fact.",
+    "score": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "2b7af4f59f14919eecd3388927d47dfd2f0c2287b90c8a9e483347d8fa76182f",
+    "costUsd": 0.0017
+  }
+}

@@ -1,0 +1,162 @@
+{
+  "mode": "wake-write",
+  "desk": "culture",
+  "cycle": "114",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "tamsin-pruitt",
+  "byline": {
+    "name": "Tamsin Pruitt",
+    "popid": "POP-01210",
+    "beatDomain": "COMMUNITY"
+  },
+  "laneEntries": 28,
+  "quotesLanded": 3,
+  "disposition": "flagged",
+  "rheaPass": false,
+  "rheaFlagCount": 1,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "citizen_lookup",
+    "citizen_lookup",
+    "citizen_lookup",
+    "citizen_lookup",
+    "citizen_lookup",
+    "citizen_lookup"
+  ],
+  "toolCalls": 6,
+  "wordCount": 1303,
+  "targetWords": "450-1200",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [
+    {
+      "text": "Alexa Ward moved into a place of their own in West Oakland, renting",
+      "run": "ward moved place own west oakland renting"
+    },
+    {
+      "text": "Antoine Vermeer — in their life, C113: wrote half a letter to family, then decided to call instead",
+      "run": "wrote half a letter to family"
+    },
+    {
+      "text": "Antoine Vermeer — in their life, C114: played a relative's voicemail twice before saving it again",
+      "run": "played a relatives voicemail twice before"
+    },
+    {
+      "text": "Sidney Tumolo — in their life, C113: read the Tribune's front page twice — once for the news, once to see who was in it",
+      "run": "read the tribunes front page twice"
+    },
+    {
+      "text": "Sidney Tumolo — in their life, C114: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence",
+      "run": "to read the architectural renderings for"
+    },
+    {
+      "text": "Sidney Tumolo — in their life, C114: counted cranes on the skyline from the bus stop and got a different number than yesterday",
+      "run": "cranes on the skyline from the"
+    },
+    {
+      "text": "Bruce Turner — in their life, C114: told the story of their first A's game again, and nobody minded",
+      "run": "first as game again and nobody"
+    },
+    {
+      "text": "Tobias Ramas — in their life, C113: painted over graffiti on the recreation center wall alongside five neighbors they barely knew",
+      "run": "painted over graffiti on the recreation"
+    },
+    {
+      "text": "Tobias Ramas — in their life, C113: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner near the lakeside path",
+      "run": "saw an oakland alternative response initiative"
+    },
+    {
+      "text": "Tobias Ramas — in their life, C114: noticed the listing price on a place like theirs and read it twice",
+      "run": "noticed the listing price on a"
+    },
+    {
+      "text": "Vinnie Keane — Keane Mercantile returned $2043 to the line this week, Grand Lake (C114 — what happened in their life, not words they said)",
+      "run": "keane mercantile returned 2043 to the"
+    },
+    {
+      "text": "Vinnie Keane — in their life, C114: got recognized twice at the grocery store after the story ran",
+      "run": "recognized twice at the grocery store"
+    },
+    {
+      "text": "Vinnie Keane — in their life, C114: realized the same seven meals had rotated for a month, and shrugged",
+      "run": "the same seven meals had rotated"
+    },
+    {
+      "text": "Vinnie Keane — in their life, C114: felt quietly lucky to call Grand Lake home near a busy shopping block",
+      "run": "home near a busy shopping block"
+    },
+    {
+      "text": "Vinnie Keane — in their life, C114: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+      "run": "saw an oakland alternative response initiative"
+    },
+    {
+      "text": "Bethany Foster — in their life, C113: navigated the stroller traffic on College Avenue and silently judged the parking jobs",
+      "run": "navigated the stroller traffic on college"
+    },
+    {
+      "text": "Bethany Foster — in their life, C114: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+      "run": "recognized the oari van idling outside"
+    },
+    {
+      "text": "Bethany Foster — in their life, C114: retold an old family story and caught a detail they'd never noticed",
+      "run": "retold an old family story and"
+    },
+    {
+      "text": "Debbie Kaplan — in their life, C114: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+      "run": "read the flyer for the oakland"
+    },
+    {
+      "text": "Debbie Kaplan — in their life, C114: picked a favorite Oak before the team had even settled its rotation",
+      "run": "picked a favorite oak before the"
+    },
+    {
+      "text": "Debbie Kaplan — in their life, C114: checked in with a relative near the lakeside path",
+      "run": "checked in with a relative near"
+    },
+    {
+      "text": "Ivy Tran — Finished the week at AC Transit with the hardest account on the floor squared away., Fruitvale (C114 — what happened in their life, not words they sa",
+      "run": "finished the week at ac transit"
+    },
+    {
+      "text": "Ivy Tran — in their life, C113: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+      "run": "read the flyer about the fruitvale"
+    },
+    {
+      "text": "Ivy Tran — in their life, C114: organized the clothing drive donations and recognized a coat they had donated two years ago",
+      "run": "organized the clothing drive donations and"
+    },
+    {
+      "text": "Ivy Tran — in their life, C114: saw a stranger laugh at their phone and invented the joke all the way home",
+      "run": "phone and invented the joke all"
+    }
+  ],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 450",
+    "words": 1303,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "32e7a351d879ea5af9bb4292475cef6a663a7ecaaca36f3c11b8f388477a0f57",
+    "costUsd": 0.0014
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 4/4 — nothing fell short"
+  },
+  "article": "output/cron-compare/flagged/culture_c114_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "selfRecord": null,
+  "ranAt": "2026-11-07T00:20:18.247Z",
+  "dispositionReconciledAt": "2026-11-07T18:00:02.413Z"
+}

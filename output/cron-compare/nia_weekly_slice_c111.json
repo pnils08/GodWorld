@@ -1,0 +1,115 @@
+{
+  "v": "NIA-SLICE/1",
+  "cycle": 111,
+  "empty": false,
+  "pilots": [
+    {
+      "POPID": "POP-01053",
+      "episodes": 2,
+      "creditsDelta": 110,
+      "combatEvents": 0,
+      "mishapCount": 0,
+      "hasWindowed": false,
+      "name": "Rosario Medina",
+      "hood": "Fruitvale",
+      "roleType": "CBA Compliance Monitor, Fruitvale Transit Hub",
+      "employerBizId": "BIZ-00096",
+      "tier": "4",
+      "career": [],
+      "who": "Rosario Medina — CBA Compliance Monitor, Fruitvale Transit Hub"
+    },
+    {
+      "POPID": "POP-00597",
+      "episodes": 2,
+      "creditsDelta": 1170,
+      "combatEvents": 0,
+      "mishapCount": 0,
+      "hasWindowed": false,
+      "name": "Eric Taveras",
+      "hood": "Downtown",
+      "roleType": "Second Baseman, Oakland A's",
+      "employerBizId": "BIZ-00005",
+      "tier": "1",
+      "career": [
+        {
+          "cycle": 110,
+          "seasonType": "playoffs",
+          "eventType": "game-result",
+          "line": "Playoffs: The A's offense continues to be carried by playoff MVP Eric Taveras with his 7th Homerun in this playoff and run. Mike Paulson celebrated his veteran stars on their season and warned the league of Eric Taveras and Ern..."
+        },
+        {
+          "cycle": 110,
+          "seasonType": "championship",
+          "eventType": "game-result",
+          "line": "Championship: Eric Taveras win World Series MVP to go along with his post-season MVP for the earlier rounds, Taveras showing tremendous value in signing him this past off-season."
+        },
+        {
+          "cycle": 109,
+          "seasonType": "playoffs",
+          "eventType": "game-result",
+          "line": "Playoffs: Eric Taveras continues his amazing playoff campaign with 2 homeruns."
+        }
+      ],
+      "who": "Eric Taveras — Second Baseman, Oakland A's. Playoffs: The A's offense continues to be carried by playoff MVP Eric Taveras with his 7th Homerun in this playoff and run. Mike Paulson celebrated his veteran stars on their season and warned the league of Eric Taveras and Ern... Championship: Eric Taveras win World Series MVP to go along with his post-season MVP for the earlier rounds, Taveras showing tremendous value in signing him this past off-season. Playoffs: Eric Taveras continues his amazing playoff campaign with 2 homeruns"
+    },
+    {
+      "POPID": "POP-00926",
+      "episodes": 2,
+      "creditsDelta": 0,
+      "combatEvents": 0,
+      "mishapCount": 0,
+      "hasWindowed": false,
+      "name": "Briar Soto",
+      "hood": "Jack London",
+      "roleType": "Electrician",
+      "employerBizId": "BIZ-00057",
+      "tier": "4",
+      "career": [],
+      "who": "Briar Soto — Electrician"
+    }
+  ],
+  "standings": {
+    "asOf": "2026-10-17T01:40:25.286Z",
+    "leader": {
+      "Rank": 1,
+      "POPID": "POP-00597",
+      "Holder": "Eric Taveras",
+      "Episodes": 2,
+      "CreditsTotal": 1170,
+      "CombatTotal": 0,
+      "MishapTotal": 0,
+      "BestMagnitude": 3,
+      "LastAiredCycle": 112,
+      "CyclesLed": 1,
+      "CurrentStreak": 1
+    }
+  },
+  "story": {
+    "ref": "undocked-week:weekly-c111",
+    "label": "UNDOCKED week-in-review c111",
+    "kind": "undocked-digest",
+    "angle": "Week-in-UNDOCKED leaderboard digest — every pilot who flew this cycle (Rosario Medina, Eric Taveras, Briar Soto), who is climbing and who is fading. Standings: Eric Taveras leads the board — rank #1, 1 cycle(s) led, current streak 1. In the chair: Rosario Medina — CBA Compliance Monitor, Fruitvale Transit Hub; Eric Taveras — Second Baseman, Oakland A's; Briar Soto — Electrician. The career is who they are, not the story; the story is the flight.",
+    "facts": [
+      "Rosario Medina — 2 episode(s) this cycle, credits 110, combat 0, mishaps 0 (UNDOCKED feed)",
+      "Eric Taveras — 2 episode(s) this cycle, credits 1170, combat 0, mishaps 0 (UNDOCKED feed)",
+      "Briar Soto — 2 episode(s) this cycle, credits 0, combat 0, mishaps 0 (UNDOCKED feed)",
+      "Rosario Medina — CBA Compliance Monitor, Fruitvale Transit Hub (ledger)",
+      "Eric Taveras — Second Baseman, Oakland A's (ledger)",
+      "Eric Taveras, Playoffs: The A's offense continues to be carried by playoff MVP Eric Taveras with his 7th Homerun in this playoff and run. Mike Paulson celebrated his veteran stars on their season and warned the league of Eric Taveras and Ern...",
+      "Eric Taveras, Championship: Eric Taveras win World Series MVP to go along with his post-season MVP for the earlier rounds, Taveras showing tremendous value in signing him this past off-season.",
+      "Eric Taveras, Playoffs: Eric Taveras continues his amazing playoff campaign with 2 homeruns.",
+      "Briar Soto — Electrician (ledger)"
+    ],
+    "citizens": [
+      "Rosario Medina — CBA Compliance Monitor, Fruitvale Transit Hub, UNDOCKED cast pilot",
+      "Eric Taveras — Second Baseman, Oakland A's, UNDOCKED cast pilot",
+      "Briar Soto — Electrician, UNDOCKED cast pilot"
+    ],
+    "popids": [
+      "POP-01053",
+      "POP-00597",
+      "POP-00926"
+    ]
+  },
+  "generatedAt": "2026-10-17T13:15:15.136Z"
+}

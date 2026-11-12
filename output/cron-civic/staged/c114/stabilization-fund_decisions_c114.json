@@ -1,0 +1,26 @@
+{
+  "initiative": "INIT-001",
+  "initiativeId": "INIT-001",
+  "cycle": 114,
+  "primaryVoice": "Mayor gavel (mayor_gavel-001)",
+  "consolidatedFrom": [
+    "STMT-114-mayor_gavel-001 (Mayor gavel — INIT-001 Month-12 execution and charter renewal)",
+    "STMT-114-stabilization_fund-001 (Webb — Month-12 disbursement executed and closeout published)",
+    "STMT-114-stabilization_fund-002 (Webb — Charter renewal drafting — scope preservation)",
+    "STMT-114-stabilization_fund-004 (Webb — Who answers for West Oakland)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-001",
+    "ImplementationPhase": "disbursement-active",
+    "MilestoneNotes": "C114: Month-12 $400K executed under the 23-day standard; closeout publication and charter renewal drafting directed with West Oakland business-and-resident scope intact.",
+    "NextScheduledAction": "Publish Month-12 closeout and complete charter renewal draft",
+    "NextActionCycle": 114,
+    "LastWorkCycle": 114,
+    "LastWorkSeat": "proj-stabilization-fund"
+  },
+  "_moveFold": {
+    "moveIds": [
+      "MV-113-proj-stabilization-fund-2026-10-28"
+    ]
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "113",
+  "persona": "sharon-okafor",
+  "byline": "Sharon Okafor",
+  "bylinePopid": "POP-00159",
+  "article": "output/cron-compare/staged/culture_c113_sharon-okafor_packet-v2_openai-gpt-5-6-luna.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Lena Cross",
+        "role": "quoted-source",
+        "popid": "POP-00539"
+      },
+      {
+        "name": "Marin Tao",
+        "role": "mentioned",
+        "popid": "POP-00537",
+        "floor": true
+      },
+      {
+        "name": "Marisol Rivera",
+        "role": "mentioned",
+        "popid": "POP-01062",
+        "floor": true
+      },
+      {
+        "name": "Rico Valez",
+        "role": "mentioned",
+        "popid": "POP-00632",
+        "floor": true
+      },
+      {
+        "name": "Rowan Pierce",
+        "role": "mentioned",
+        "popid": "POP-00545",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Piedmont Ave"
+    ],
+    "claims": [
+      {
+        "claim": "To be honest, I've noticed Marisol Rivera's name popping up less often in conversations around Piedmont Ave, and when it does, it's usually in the context of looking back at her past work. I've seen her flyers and posters around, but they seem a bit outdated. People still speak highly of her community work, though. I think she's done some great things, but it feels like she's not as actively involved as she used to be.",
+        "sourceRef": "citizenVoice PRESS Lena Cross"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-c6291a86d0dc",
+    "draftSha256": "0883427268ce87cdda2fd65deeb3d8898d1e7febce7f5d778de177dee9e61ae3",
+    "verdict": "output/cron-compare/culture_c113_sharon-okafor_packet-v2_openai-gpt-5-6-luna.rhea.json",
+    "ranAt": "2026-10-30T23:17:06.330Z",
+    "contractScore": {
+      "opened": false,
+      "closed": true,
+      "purposeMet": false,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 441,
+      "short": "The opening fails to name a specific venue and its condition, focusing instead on personal reputations.",
+      "score": 2,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "0883427268ce87cdda2fd65deeb3d8898d1e7febce7f5d778de177dee9e61ae3",
+      "costUsd": 0.001
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-30T23:17:09.937Z"
+}

@@ -1,0 +1,456 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00159",
+    "name": "Sharon Okafor",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Lena Cross is fading — how the city follows its names",
+    "approach": "Lifestyle approach: this slice is the fame record — who the city knows, who is fading, who just arrived — with their domains, tiers and neighborhoods. Behavior patterns, warm analytical. The names and trajectories are real; the morning routine, the regular order, what the neighbors think are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "lifestyle",
+      "hood": "Piedmont Ave",
+      "facts": [
+        "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 4, cooling), 17 media mentions",
+        "Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 2, cooling), 14 media mentions",
+        "Marisol Rivera (Community Advocate), Civic, Rockridge, Regional-tier — fading — the where-are-they-now file (fame 0, cooling), 7 media mentions",
+        "Vinnie Keane (A's player), Sports, Grand Lake, National-tier — the city knows them (fame 48, stable), 6 media mentions",
+        "Benji Dillon (A's player), Sports, Rockridge, Local-tier — the city knows them (fame 48, rising), 1 media mentions"
+      ],
+      "priorCycle": null,
+      "note": null,
+      "engineHooks": [
+        "First Friday nightlife surge expected. Restaurant and bar scene coverage available. (general coverage)",
+        "Downtown housing pressure at 10/10: rents climbing, households stretching to stay (observational analysis)",
+        "West Oakland boom sustained — momentum 8/10, the block everyone wants onto (observational analysis)",
+        "Fruitvale boom sustained — momentum 10/10, the block everyone wants onto (observational analysis)"
+      ],
+      "roomIsYours": "the coffee order, the dog's name, who recognizes them at the farmers market and who pretends not to",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-lifestyle",
+    "hood": "Piedmont Ave",
+    "src": "output/beats/Cultural_Ledger.jsonl @C114",
+    "plan": {
+      "focus": "Lena Cross's fading fame in Rockridge and Piedmont Ave",
+      "closeQuestion": "How does the local community respond to Lena Cross's fading fame?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00539",
+        "name": "Lena Cross",
+        "profile": "Lena Cross — Actor — Piedmont Ave",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00545",
+        "name": "Rowan Pierce",
+        "profile": "Rowan Pierce — Freelance Writer — Piedmont Ave",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-01062",
+        "name": "Marisol Rivera",
+        "profile": "Marisol Rivera — Community Advocate — Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00001",
+        "name": "Vinnie Keane",
+        "profile": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00539-b1c7b6db31",
+        "pop": "POP-00539",
+        "name": "Lena Cross",
+        "quote": "To be honest, I'm still pretty active in the local arts scene. I just attended a community feedback session for the Fruitvale Transit Hub Phase II, and I felt really heard, which was great. I've also been enjoying events like First Friday, it feels like the creative energy is still there. I'm not sure what you mean by 'fading fame,' but around here on Piedmont Ave, people still know me and we chat about the A's or other local happenings.",
+        "factIds": [
+          "F-f580a535e402",
+          "F-9b9470803821"
+        ],
+        "src": "packet.W2[POP-00539]"
+      },
+      {
+        "id": "Q-POP-00545-466577167b",
+        "pop": "POP-00545",
+        "name": "Rowan Pierce",
+        "quote": "To be honest, I don't really know Lena Cross or follow her work closely. I'm not sure how I feel about her fading fame.",
+        "factIds": [
+          "F-fddee223ff86",
+          "F-ab2b44fe8d45"
+        ],
+        "src": "packet.W2[POP-00545]"
+      },
+      {
+        "id": "Q-POP-01062-7403801949",
+        "pop": "POP-01062",
+        "name": "Marisol Rivera",
+        "quote": "To be honest, I haven't seen much of Lena Cross around Rockridge or Piedmont Ave lately. I used to see her at some events, but now it seems like she's not as involved in the community as she used to be. I don't know if she's just busy or what, but it's like she's faded into the background.",
+        "factIds": [
+          "F-fddee223ff86",
+          "F-ab2b44fe8d45"
+        ],
+        "src": "packet.W2[POP-01062]"
+      },
+      {
+        "id": "Q-POP-00001-46eecf49f0",
+        "pop": "POP-00001",
+        "name": "Vinnie Keane",
+        "quote": "To be honest, I haven't really noticed anything about Lena Cross's fame fading around Rockridge or Piedmont Ave. I live in Grand Lake, and while I'm aware of the A's and some local faces, I don't really keep up with the Arts scene on Piedmont Ave that closely. I do know Louis Cross, though - he's a teammate, and we got a big contract for him and Ian Devine last season. I haven't seen much about Lena around, but I don't know if that's because she's fading from the spotlight or just not something I pay attention to.",
+        "factIds": [
+          "F-fddee223ff86",
+          "F-2b3e2e3d075f"
+        ],
+        "src": "packet.W2[POP-00001]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Sharon Okafor",
+        "text": "Lena Cross might be involved in a local charity event",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C114",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-4261fa115617"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane leads the fame table; 3 fading, 0 new",
+      "src": "output/beats/Cultural_Ledger.jsonl @C114",
+      "id": "F-32e226f93abf"
+    },
+    {
+      "t": "FACT",
+      "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 4, cooling), 17 media mentions.",
+      "src": "output/beats/Cultural_Ledger.jsonl @C114",
+      "id": "F-fddee223ff86"
+    },
+    {
+      "t": "FACT",
+      "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 4, cooling), 17 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C114",
+      "id": "F-ab2b44fe8d45"
+    },
+    {
+      "t": "FACT",
+      "text": "Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 2, cooling), 14 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C114",
+      "id": "F-7957e0f7cb91"
+    },
+    {
+      "t": "FACT",
+      "text": "Marisol Rivera (Community Advocate), Civic, Rockridge, Regional-tier — fading — the where-are-they-now file (fame 0, cooling), 7 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C114",
+      "id": "F-ec2def3b3ca2"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane (A's player), Sports, Grand Lake, National-tier — the city knows them (fame 48, stable), 6 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C114",
+      "id": "F-2c6dec8a8911"
+    },
+    {
+      "t": "FACT",
+      "text": "Benji Dillon (A's player), Sports, Rockridge, Local-tier — the city knows them (fame 48, rising), 1 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C114",
+      "id": "F-b27581cf1215"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C10, Spring, holiday=none",
+      "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+      "id": "F-9b9470803821"
+    },
+    {
+      "t": "FACT",
+      "text": "Lena Cross — Actor — Piedmont Ave",
+      "src": "Simulation_Ledger profile for POP-00539",
+      "id": "F-f580a535e402"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+      "src": "Simulation_Ledger profile for POP-00001",
+      "id": "F-2b3e2e3d075f"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "sharon-behavior-ground-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Frame one Packet-supplied venue condition as a behavior question without inventing Sharon's presence, patrons, habits, activity, cause, trend, diagnosis, or social meaning.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "warm evidence-bounded lifestyle brief",
+      "targetWords": "evidence-bounded",
+      "opening": "one Packet-named venue, location, and condition",
+      "closing": "the human behavior account still needed"
+    },
+    "authorizedTexture": [
+      "warm interpretation of a supplied venue condition without claiming observation, attendance, or a behavior pattern",
+      "lifestyle vocabulary used only to pose a question and never as proof of a habit, preference, mood, trend, or diagnosis"
+    ],
+    "textureConditions": [
+      "a quiet venue record proves only the supplied venue condition and location, not patron count, decline, closure, mood, cause, habit, preference, or citywide trend",
+      "first-person visits, every patron, manager, regular, worker, expert, psychologist, quote, action, date, count, behavior change, and social meaning require Packet support"
+    ],
+    "canonBlockers": [
+      "invented attendance, observation, patron, manager, regular, worker, expert, psychologist, interview, dialogue, quote, line, gathering, habit, preference, behavior change, diagnosis, or social meaning",
+      "an invented or altered venue, person, neighborhood, event, relationship, date, count, or cause",
+      "closure or decline claims, citywide lifestyle trend, collective sentiment, raw engine labels, or economic conclusion presented as fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-5fb7dd828534",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-4261fa115617",
+        "t": "FACT",
+        "text": "Current cycle: C114",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-32e226f93abf",
+        "t": "FACT",
+        "text": "Vinnie Keane leads the fame table; 3 fading, 0 new",
+        "src": "output/beats/Cultural_Ledger.jsonl @C114"
+      },
+      {
+        "id": "F-fddee223ff86",
+        "t": "FACT",
+        "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 4, cooling), 17 media mentions.",
+        "src": "output/beats/Cultural_Ledger.jsonl @C114"
+      },
+      {
+        "id": "F-ab2b44fe8d45",
+        "t": "FACT",
+        "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 4, cooling), 17 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C114"
+      },
+      {
+        "id": "F-7957e0f7cb91",
+        "t": "FACT",
+        "text": "Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 2, cooling), 14 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C114"
+      },
+      {
+        "id": "F-ec2def3b3ca2",
+        "t": "FACT",
+        "text": "Marisol Rivera (Community Advocate), Civic, Rockridge, Regional-tier — fading — the where-are-they-now file (fame 0, cooling), 7 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C114"
+      },
+      {
+        "id": "F-2c6dec8a8911",
+        "t": "FACT",
+        "text": "Vinnie Keane (A's player), Sports, Grand Lake, National-tier — the city knows them (fame 48, stable), 6 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C114"
+      },
+      {
+        "id": "F-b27581cf1215",
+        "t": "FACT",
+        "text": "Benji Dillon (A's player), Sports, Rockridge, Local-tier — the city knows them (fame 48, rising), 1 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C114"
+      },
+      {
+        "id": "F-9b9470803821",
+        "t": "FACT",
+        "text": "Calendar: Y3C10, Spring, holiday=none",
+        "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)"
+      },
+      {
+        "id": "F-f580a535e402",
+        "t": "FACT",
+        "text": "Lena Cross — Actor — Piedmont Ave",
+        "src": "Simulation_Ledger profile for POP-00539"
+      },
+      {
+        "id": "F-2b3e2e3d075f",
+        "t": "FACT",
+        "text": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+        "src": "Simulation_Ledger profile for POP-00001"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00539-b1c7b6db31",
+        "speakerId": "POP-00539",
+        "speakerName": "Lena Cross",
+        "text": "To be honest, I'm still pretty active in the local arts scene. I just attended a community feedback session for the Fruitvale Transit Hub Phase II, and I felt really heard, which was great. I've also been enjoying events like First Friday, it feels like the creative energy is still there. I'm not sure what you mean by 'fading fame,' but around here on Piedmont Ave, people still know me and we chat about the A's or other local happenings.",
+        "factIds": [
+          "F-f580a535e402",
+          "F-9b9470803821"
+        ],
+        "src": "packet.W2[POP-00539]"
+      },
+      {
+        "id": "Q-POP-00545-466577167b",
+        "speakerId": "POP-00545",
+        "speakerName": "Rowan Pierce",
+        "text": "To be honest, I don't really know Lena Cross or follow her work closely. I'm not sure how I feel about her fading fame.",
+        "factIds": [
+          "F-fddee223ff86",
+          "F-ab2b44fe8d45"
+        ],
+        "src": "packet.W2[POP-00545]"
+      },
+      {
+        "id": "Q-POP-01062-7403801949",
+        "speakerId": "POP-01062",
+        "speakerName": "Marisol Rivera",
+        "text": "To be honest, I haven't seen much of Lena Cross around Rockridge or Piedmont Ave lately. I used to see her at some events, but now it seems like she's not as involved in the community as she used to be. I don't know if she's just busy or what, but it's like she's faded into the background.",
+        "factIds": [
+          "F-fddee223ff86",
+          "F-ab2b44fe8d45"
+        ],
+        "src": "packet.W2[POP-01062]"
+      },
+      {
+        "id": "Q-POP-00001-46eecf49f0",
+        "speakerId": "POP-00001",
+        "speakerName": "Vinnie Keane",
+        "text": "To be honest, I haven't really noticed anything about Lena Cross's fame fading around Rockridge or Piedmont Ave. I live in Grand Lake, and while I'm aware of the A's and some local faces, I don't really keep up with the Arts scene on Piedmont Ave that closely. I do know Louis Cross, though - he's a teammate, and we got a big contract for him and Ian Devine last season. I haven't seen much about Lena around, but I don't know if that's because she's fading from the spotlight or just not something I pay attention to.",
+        "factIds": [
+          "F-fddee223ff86",
+          "F-2b3e2e3d075f"
+        ],
+        "src": "packet.W2[POP-00001]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00539",
+        "name": "Lena Cross",
+        "profile": "Lena Cross — Actor — Piedmont Ave",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00545",
+        "name": "Rowan Pierce",
+        "profile": "Rowan Pierce — Freelance Writer — Piedmont Ave",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-01062",
+        "name": "Marisol Rivera",
+        "profile": "Marisol Rivera — Community Advocate — Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00001",
+        "name": "Vinnie Keane",
+        "profile": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Sharon Okafor",
+        "text": "Lena Cross might be involved in a local charity event",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "warm interpretation of a supplied venue condition without claiming observation, attendance, or a behavior pattern",
+      "lifestyle vocabulary used only to pose a question and never as proof of a habit, preference, mood, trend, or diagnosis"
+    ],
+    "textureConditions": [
+      "a quiet venue record proves only the supplied venue condition and location, not patron count, decline, closure, mood, cause, habit, preference, or citywide trend",
+      "first-person visits, every patron, manager, regular, worker, expert, psychologist, quote, action, date, count, behavior change, and social meaning require Packet support"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

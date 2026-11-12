@@ -1,0 +1,571 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00592",
+    "name": "Talia Finch",
+    "role": "desk reporter",
+    "desk": "sports"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Oaks ground read C113 — neutral — the people around the second club",
+    "approach": "Oaks ground approach: this slice is what the Oaks feed says about the people — the mood in the room, the fans, the neighborhood around the park — with the record as context. First-person ground report. The moods and sentiments are feed rows, real; the walk to the park, the vendor, the kid with the glove are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "oaks",
+      "hood": "Uptown",
+      "facts": [
+        "Oaks fans, C113: neutral",
+        "Room mood, C113: hungry",
+        "Notebook (feed): After getting their first win in their franchise history the Oaks followed with their second win in the very next game. The Oaks traveled to Detroit where its defense would shine in a 91-78 victory. Adash Stanley shined with 29 points while Austin Rivers facilitated the action with 10 assists while also contributing 12 points a 7 rebounds. AJ Dybansta continued his strong start and little spoken on second round pick , rookie Harry Hayward emergered with 12 points",
+        "Oaks — game-result (early-season), C113: The Oaks win again behind a big game behind Adash Stanley. The Oaks 91 - Pistons 78 on the road in Detroit.",
+        "Context: record 2-0 · streak W2",
+        "Home neighborhood (feed): Uptown",
+        "Oaks fans, C113: excited",
+        "Room mood, C113: locked-in",
+        "Notebook (feed): Watch out now but the Oaks have won three straight games to start the inauguaral season. This time the Oaks traveled to New York to face the Knicks and had another convincing win beting the Knicks 115-93. Austin Reaves and AJ Dybansta lead scoring with 23 points a piece while Adash Stanley flirted with his first triple double. Harry Hayward repeats his strong performance recording a double double.",
+        "Oaks — game-result (early-season), C113: The Oaks remain sizzling hot after a winless preseason have now shot out of the gate winning 3 straight. Oaks 115 - Knicks 93 in New York",
+        "Context: record 3-0 · streak W3",
+        "Home neighborhood (feed): San Antonio"
+      ],
+      "priorCycle": null,
+      "note": null,
+      "engineHooks": [],
+      "roomIsYours": "the walk from the bus stop, the vendor who knows the regulars, what the crowd sounds like when the club is losing, the kid waiting by the tunnel",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-oaks-ground",
+    "hood": "Uptown",
+    "src": "output/beats/Oakland_Sports_Feed.jsonl @C113",
+    "plan": {
+      "focus": "Oaks fans and neighborhood reaction to the team's 4-0 start",
+      "closeQuestion": "How will the Oaks' momentum continue to affect the local community?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-01023",
+        "name": "Adash Stanley",
+        "profile": "Adash Stanley — PG / The Oaks — Downtown",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-01027",
+        "name": "Austin Reaves",
+        "profile": "Austin Reaves — SG / The Oaks — West Oakland",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00273",
+        "name": "Trenton Nawan",
+        "profile": "Trenton Nawan — Server",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-01023-b969f7bc5a",
+        "pop": "POP-01023",
+        "name": "Adash Stanley",
+        "quote": "The mood among fans is electric. I've felt the excitement building around the Oaks, it's like the whole city is waking up with the team. There's a buzz in the air, and I think people are really looking forward to seeing what they can do this season.",
+        "factIds": [
+          "F-4fd934fec315",
+          "F-684f84b7fbeb",
+          "F-c03b20272df4"
+        ],
+        "src": "packet.W2[POP-01023]"
+      },
+      {
+        "id": "Q-POP-00273-0798df50fb",
+        "pop": "POP-00273",
+        "name": "Trenton Nawan",
+        "quote": "I'm still a bit worried about the Oaks, but their 4-0 start is really giving me hope. I checked the scores twice a day all week and was happy every time they won. Maybe they're finally getting their act together.",
+        "factIds": [
+          "F-c79defca2199",
+          "F-89e10834b5eb"
+        ],
+        "src": "packet.W2[POP-00273]"
+      },
+      {
+        "id": "Q-POP-01027-1ca51d1b12",
+        "pop": "POP-01027",
+        "name": "Austin Reaves",
+        "quote": "To be honest, the neighborhood's been buzzing about the Oaks' 4-0 start. I've seen fans around here getting really excited, and it's infectious. People are talking about it while they're out and about, like when they're unloading groceries or just hanging out on their stoops. The mood feels hungry for more, like they're really craving the next win. I've even noticed some folks around here discussing the team's defense and how well they're working together. It's great to see the community coming together like this behind the team.",
+        "factIds": [
+          "F-4fd934fec315",
+          "F-b4e950346d5a",
+          "F-d1f725faf549"
+        ],
+        "src": "packet.W2[POP-01027]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Talia Finch",
+        "text": "The energy around the Oaks is electric, with fans and locals alike buzzing about their chances this season",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C113",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-876f95b5eb98"
+    },
+    {
+      "t": "FACT",
+      "text": "Oaks ground read C113 — neutral",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl @C113",
+      "id": "F-7ce2f8574872"
+    },
+    {
+      "t": "FACT",
+      "text": "neutral",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl @C113",
+      "id": "F-61315da125a3"
+    },
+    {
+      "t": "FACT",
+      "text": "Oaks fans, C113: neutral",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C113",
+      "id": "F-4e8cfff1e85d"
+    },
+    {
+      "t": "FACT",
+      "text": "Room mood, C113: hungry",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C113",
+      "id": "F-b4e950346d5a"
+    },
+    {
+      "t": "FACT",
+      "text": "Notebook (feed): After getting their first win in their franchise history the Oaks followed with their second win in the very next game. The Oaks traveled to Detroit where its defense would shine in a 91-78 victory. Adash Stanley shined with 29 points while Austin Rivers facilitated the action with 10 assists while also contributing 12 points a 7 rebounds. AJ Dybansta continued his strong start and little spoken on second round pick , rookie Harry Hayward emergered with 12 points",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C113",
+      "id": "F-c03b20272df4"
+    },
+    {
+      "t": "FACT",
+      "text": "Oaks — game-result (early-season), C113: The Oaks win again behind a big game behind Adash Stanley. The Oaks 91 - Pistons 78 on the road in Detroit.",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C113",
+      "id": "F-98940fce84bb"
+    },
+    {
+      "t": "FACT",
+      "text": "Context: record 2-0 · streak W2",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C113",
+      "id": "F-46338c42350d"
+    },
+    {
+      "t": "FACT",
+      "text": "Home neighborhood (feed): Uptown",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C113",
+      "id": "F-c7cf7297d788"
+    },
+    {
+      "t": "FACT",
+      "text": "Oaks fans, C113: excited",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C113",
+      "id": "F-cf67136d577a"
+    },
+    {
+      "t": "FACT",
+      "text": "Room mood, C113: locked-in",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C113",
+      "id": "F-964bfb707ff5"
+    },
+    {
+      "t": "FACT",
+      "text": "Notebook (feed): Watch out now but the Oaks have won three straight games to start the inauguaral season. This time the Oaks traveled to New York to face the Knicks and had another convincing win beting the Knicks 115-93. Austin Reaves and AJ Dybansta lead scoring with 23 points a piece while Adash Stanley flirted with his first triple double. Harry Hayward repeats his strong performance recording a double double.",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C113",
+      "id": "F-684f84b7fbeb"
+    },
+    {
+      "t": "FACT",
+      "text": "Oaks — game-result (early-season), C113: The Oaks remain sizzling hot after a winless preseason have now shot out of the gate winning 3 straight. Oaks 115 - Knicks 93 in New York",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C113",
+      "id": "F-93fd571759e2"
+    },
+    {
+      "t": "FACT",
+      "text": "Context: record 3-0 · streak W3",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C113",
+      "id": "F-48c58aaf0cbd"
+    },
+    {
+      "t": "FACT",
+      "text": "Home neighborhood (feed): San Antonio",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C113",
+      "id": "F-72ba66cc215c"
+    },
+    {
+      "t": "FACT",
+      "text": "Notebook (feed): The Oaks now have won their first 4 games to start their first season in the NBA. This latest being the most jarring yet. The Oaks traveled to Washington and blew out the Wizards with a score of 105-62. A 43 point win in just their forth game speaks to the roster configuration and the coaching in the young season. Adash Stanley and Austin Reaves both scored 23 respectively in a game that mainly featured well orchestrated defense by the Oaks",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C113",
+      "id": "F-4fd934fec315"
+    },
+    {
+      "t": "FACT",
+      "text": "Oaks — game-result (early-season), C113: The Oaks completly dismantle the Wizards in Washington. Oaks 105 - Wizards 62",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C113",
+      "id": "F-e1f3cf075586"
+    },
+    {
+      "t": "FACT",
+      "text": "Context: record 4-0 · streak W4",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C113",
+      "id": "F-cd2e17d120ae"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C9, Winter, holiday=none",
+      "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+      "id": "F-ab9d6786094e"
+    },
+    {
+      "t": "INTERPRETATION",
+      "text": "To be honest, I'm still a bit worried about the Oaks.",
+      "src": "cp-POP-00273-c112-PRESS",
+      "id": "F-c79defca2199"
+    },
+    {
+      "t": "FACT",
+      "text": "Trenton Nawan — Server",
+      "src": "Simulation_Ledger profile for POP-00273",
+      "id": "F-89e10834b5eb"
+    },
+    {
+      "t": "FACT",
+      "text": "Austin Reaves — SG / The Oaks — West Oakland",
+      "src": "Simulation_Ledger profile for POP-01027",
+      "id": "F-d1f725faf549"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "talia-finch-oaks-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Carry one supplied Oaks fact into a room — a bar, a platform, a corner — and let the people there say what the city thinks of a franchise it hasn't decided on. The room is allotted texture; the fact is the Packet's. NOT analysis, NOT fan certainty, NOT the A's.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "first-person, physically present, sensory",
+      "targetWords": "400-650",
+      "opening": "a specific real-Oakland place and one sensory channel — weather, sound, a drink, a platform announcement",
+      "closing": "atmosphere, not analysis — the reader left sitting in the scene"
+    },
+    "authorizedTexture": [
+      "an unnamed bar, corner store, BART platform, sidewalk, or fence line in Jack London, West Oakland, Downtown, or the Baylight blocks — a newly named venue belongs on INTAKE BIZ",
+      "the reporter's own presence and sensory observation",
+      "unnamed patrons, regulars, and strangers speaking as city color — never a named attributed quote unless the Packet names them",
+      "the deciding-fan question as her standing thread, grounded in a supplied result"
+    ],
+    "textureConditions": [
+      "the result, the names, and what the coach said come from the Packet's Oaks feed rows (TeamsUsed: Oaks)",
+      "room voices stay unnamed and rhetorical — they must not become a count, a poll, a named person, or a fact about the team",
+      "real NBA players and teams may be named by a stranger as the feed names them; no life the feed didn't supply",
+      "no piece when the cycle has no Oaks row"
+    ],
+    "canonBlockers": [
+      "a real-world venue, business, institution, or organization imported into the city; or an invented person given the authority of an established citizen",
+      "an unsupported roster move, signing, trade, result, record, streak, minute, injury, or front-office act",
+      "an unsupported stat, metric, number, date, duration, or salary",
+      "a fabricated player, coach, owner, or front-office quote",
+      "a personal life, hometown, family, or citizen record given to a real NBA player the feed only names",
+      "the A's as the subject (five other seats own them)",
+      "Chicago, the Bulls, or any prior bureau",
+      "engine or simulation vocabulary; real-world calendar dates (YYYY-MM-DD)"
+    ]
+  },
+  "manifest": {
+    "id": "AM-55eaab2e4ca0",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-876f95b5eb98",
+        "t": "FACT",
+        "text": "Current cycle: C113",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-7ce2f8574872",
+        "t": "FACT",
+        "text": "Oaks ground read C113 — neutral",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C113"
+      },
+      {
+        "id": "F-61315da125a3",
+        "t": "FACT",
+        "text": "neutral",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C113"
+      },
+      {
+        "id": "F-4e8cfff1e85d",
+        "t": "FACT",
+        "text": "Oaks fans, C113: neutral",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+      },
+      {
+        "id": "F-b4e950346d5a",
+        "t": "FACT",
+        "text": "Room mood, C113: hungry",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+      },
+      {
+        "id": "F-c03b20272df4",
+        "t": "FACT",
+        "text": "Notebook (feed): After getting their first win in their franchise history the Oaks followed with their second win in the very next game. The Oaks traveled to Detroit where its defense would shine in a 91-78 victory. Adash Stanley shined with 29 points while Austin Rivers facilitated the action with 10 assists while also contributing 12 points a 7 rebounds. AJ Dybansta continued his strong start and little spoken on second round pick , rookie Harry Hayward emergered with 12 points",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+      },
+      {
+        "id": "F-98940fce84bb",
+        "t": "FACT",
+        "text": "Oaks — game-result (early-season), C113: The Oaks win again behind a big game behind Adash Stanley. The Oaks 91 - Pistons 78 on the road in Detroit.",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+      },
+      {
+        "id": "F-46338c42350d",
+        "t": "FACT",
+        "text": "Context: record 2-0 · streak W2",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+      },
+      {
+        "id": "F-c7cf7297d788",
+        "t": "FACT",
+        "text": "Home neighborhood (feed): Uptown",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+      },
+      {
+        "id": "F-cf67136d577a",
+        "t": "FACT",
+        "text": "Oaks fans, C113: excited",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+      },
+      {
+        "id": "F-964bfb707ff5",
+        "t": "FACT",
+        "text": "Room mood, C113: locked-in",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+      },
+      {
+        "id": "F-684f84b7fbeb",
+        "t": "FACT",
+        "text": "Notebook (feed): Watch out now but the Oaks have won three straight games to start the inauguaral season. This time the Oaks traveled to New York to face the Knicks and had another convincing win beting the Knicks 115-93. Austin Reaves and AJ Dybansta lead scoring with 23 points a piece while Adash Stanley flirted with his first triple double. Harry Hayward repeats his strong performance recording a double double.",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+      },
+      {
+        "id": "F-93fd571759e2",
+        "t": "FACT",
+        "text": "Oaks — game-result (early-season), C113: The Oaks remain sizzling hot after a winless preseason have now shot out of the gate winning 3 straight. Oaks 115 - Knicks 93 in New York",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+      },
+      {
+        "id": "F-48c58aaf0cbd",
+        "t": "FACT",
+        "text": "Context: record 3-0 · streak W3",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+      },
+      {
+        "id": "F-72ba66cc215c",
+        "t": "FACT",
+        "text": "Home neighborhood (feed): San Antonio",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+      },
+      {
+        "id": "F-4fd934fec315",
+        "t": "FACT",
+        "text": "Notebook (feed): The Oaks now have won their first 4 games to start their first season in the NBA. This latest being the most jarring yet. The Oaks traveled to Washington and blew out the Wizards with a score of 105-62. A 43 point win in just their forth game speaks to the roster configuration and the coaching in the young season. Adash Stanley and Austin Reaves both scored 23 respectively in a game that mainly featured well orchestrated defense by the Oaks",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+      },
+      {
+        "id": "F-e1f3cf075586",
+        "t": "FACT",
+        "text": "Oaks — game-result (early-season), C113: The Oaks completly dismantle the Wizards in Washington. Oaks 105 - Wizards 62",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+      },
+      {
+        "id": "F-cd2e17d120ae",
+        "t": "FACT",
+        "text": "Context: record 4-0 · streak W4",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+      },
+      {
+        "id": "F-ab9d6786094e",
+        "t": "FACT",
+        "text": "Calendar: Y3C9, Winter, holiday=none",
+        "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)"
+      },
+      {
+        "id": "F-c79defca2199",
+        "t": "INTERPRETATION",
+        "text": "To be honest, I'm still a bit worried about the Oaks.",
+        "src": "cp-POP-00273-c112-PRESS"
+      },
+      {
+        "id": "F-89e10834b5eb",
+        "t": "FACT",
+        "text": "Trenton Nawan — Server",
+        "src": "Simulation_Ledger profile for POP-00273"
+      },
+      {
+        "id": "F-d1f725faf549",
+        "t": "FACT",
+        "text": "Austin Reaves — SG / The Oaks — West Oakland",
+        "src": "Simulation_Ledger profile for POP-01027"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-01023-b969f7bc5a",
+        "speakerId": "POP-01023",
+        "speakerName": "Adash Stanley",
+        "text": "The mood among fans is electric. I've felt the excitement building around the Oaks, it's like the whole city is waking up with the team. There's a buzz in the air, and I think people are really looking forward to seeing what they can do this season.",
+        "factIds": [
+          "F-4fd934fec315",
+          "F-684f84b7fbeb",
+          "F-c03b20272df4"
+        ],
+        "src": "packet.W2[POP-01023]"
+      },
+      {
+        "id": "Q-POP-00273-0798df50fb",
+        "speakerId": "POP-00273",
+        "speakerName": "Trenton Nawan",
+        "text": "I'm still a bit worried about the Oaks, but their 4-0 start is really giving me hope. I checked the scores twice a day all week and was happy every time they won. Maybe they're finally getting their act together.",
+        "factIds": [
+          "F-c79defca2199",
+          "F-89e10834b5eb"
+        ],
+        "src": "packet.W2[POP-00273]"
+      },
+      {
+        "id": "Q-POP-01027-1ca51d1b12",
+        "speakerId": "POP-01027",
+        "speakerName": "Austin Reaves",
+        "text": "To be honest, the neighborhood's been buzzing about the Oaks' 4-0 start. I've seen fans around here getting really excited, and it's infectious. People are talking about it while they're out and about, like when they're unloading groceries or just hanging out on their stoops. The mood feels hungry for more, like they're really craving the next win. I've even noticed some folks around here discussing the team's defense and how well they're working together. It's great to see the community coming together like this behind the team.",
+        "factIds": [
+          "F-4fd934fec315",
+          "F-b4e950346d5a",
+          "F-d1f725faf549"
+        ],
+        "src": "packet.W2[POP-01027]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-01023",
+        "name": "Adash Stanley",
+        "profile": "Adash Stanley — PG / The Oaks — Downtown",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-01027",
+        "name": "Austin Reaves",
+        "profile": "Austin Reaves — SG / The Oaks — West Oakland",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00273",
+        "name": "Trenton Nawan",
+        "profile": "Trenton Nawan — Server",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Talia Finch",
+        "text": "The energy around the Oaks is electric, with fans and locals alike buzzing about their chances this season",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "an unnamed bar, corner store, BART platform, sidewalk, or fence line in Jack London, West Oakland, Downtown, or the Baylight blocks — a newly named venue belongs on INTAKE BIZ",
+      "the reporter's own presence and sensory observation",
+      "unnamed patrons, regulars, and strangers speaking as city color — never a named attributed quote unless the Packet names them",
+      "the deciding-fan question as her standing thread, grounded in a supplied result"
+    ],
+    "textureConditions": [
+      "the result, the names, and what the coach said come from the Packet's Oaks feed rows (TeamsUsed: Oaks)",
+      "room voices stay unnamed and rhetorical — they must not become a count, a poll, a named person, or a fact about the team",
+      "real NBA players and teams may be named by a stranger as the feed names them; no life the feed didn't supply",
+      "no piece when the cycle has no Oaks row"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

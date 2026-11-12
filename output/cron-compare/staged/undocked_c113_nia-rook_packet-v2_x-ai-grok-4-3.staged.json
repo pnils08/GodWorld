@@ -1,0 +1,61 @@
+{
+  "status": "staged",
+  "desk": "undocked",
+  "cycle": "113",
+  "persona": "nia-rook",
+  "byline": "Nia Rook",
+  "bylinePopid": "POP-01076",
+  "article": "output/cron-compare/staged/undocked_c113_nia-rook_packet-v2_x-ai-grok-4-3.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Cristina Booker",
+        "role": "mentioned",
+        "popid": "POP-00836"
+      },
+      {
+        "name": "Eric Taveras",
+        "role": "mentioned",
+        "popid": "POP-00597",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Downtown"
+    ],
+    "claims": [
+      {
+        "claim": "To be honest, I'm not sure what you're referring to with my 'dead even performance.' I'm just going about my daily life as an immigration attorney here in Downtown Oakland. I haven't noticed anything out of the ordinary happening to me recently.",
+        "sourceRef": "citizenVoice PRESS Cristina Booker"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-5ee945221010",
+    "draftSha256": "ad6157eea28b38a69211720e8afdac10b9b0c9a3d0e51856f307bfdbf4d48444",
+    "verdict": "output/cron-compare/undocked_c113_nia-rook_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-10-27T23:20:12.082Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": false,
+      "inTargetBy": "code floor 350",
+      "words": 265,
+      "short": "The piece falls short of the 350-word minimum target.",
+      "score": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "ad6157eea28b38a69211720e8afdac10b9b0c9a3d0e51856f307bfdbf4d48444",
+      "costUsd": 0.0009
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-27T23:20:15.587Z"
+}

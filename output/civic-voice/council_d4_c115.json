@@ -1,0 +1,88 @@
+{
+  "office": "council_d4",
+  "cycle": 115,
+  "speaker": "Ramon Vega",
+  "cascadeSummary": "I vote YES on Commercial Stabilization for Grand Lake with its milestone and audit conditions intact, and support filing the Ivy Hill legislation on the evidence we have—not on an invented emergency. I will also follow through on my C114 docket commitments and ask for documented neighborhood-specific attention, including Glenview's public-works issue.",
+  "statements": [
+    {
+      "statementId": "STMT-115-council_d4-001",
+      "type": "vote_statement",
+      "topic": "Recorded full-council decision",
+      "initiative": "Commercial Stabilization for Grand Lake",
+      "decision": "YES, with the milestone and audit conditions intact.",
+      "quote": "I support the proposal with its safeguards intact; the low-severity improvement flag is a reason to monitor, not to skip a recorded decision.",
+      "fullStatement": "I vote YES on Commercial Stabilization for Grand Lake, with the Chen-Vega milestone and audit conditions intact. The $2.5 million proposal has reached its scheduled recorded decision, and the review flags improvement at low severity. That is a reason to keep the promised oversight meaningful, not to treat the review as proof that every outcome is settled. A recorded vote and transparent milestones give the council and public a way to assess performance against the conditions we set.",
+      "disposition": "YES",
+      "actionAsked": "Record my YES vote and retain all milestone and audit conditions.",
+      "tone": "deliberate-analytical",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-115-council_d4-002",
+      "type": "vote_statement",
+      "topic": "Ivy Hill legislation filing on current evidence",
+      "initiative": "Ivy Hill Community Support Initiative",
+      "decision": "Support filing the legislation this cycle; this is not a vote to claim passage or funding delivery.",
+      "quote": "Ivy Hill deserves a clear legislative path argued from today's conditions, not an emergency label the evidence does not support.",
+      "fullStatement": "I support placing the $2.5 million Ivy Hill Community Support Initiative on this cycle's filing agenda. The current evidence is a soured mood, slow street trade, and low crime. Those conditions warrant attention and a clear legislative path, but they do not establish a crime emergency, passage, or delivery of funds. File the proposal on that record and let the public and council assess the text on its merits.",
+      "disposition": "statement",
+      "actionAsked": "File the legislation on current evidence without representing it as passed or funded.",
+      "tone": "measured",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-115-council_d4-003",
+      "type": "statement",
+      "topic": "Ivy Hill committee referral and hearing",
+      "initiative": "Ivy Hill Revitalization Initiative",
+      "decision": "Request that the Clerk publish a formal committee referral and hearing schedule.",
+      "quote": "A referral is useful only when residents can see where the work goes and when they can be heard.",
+      "fullStatement": "In my C114 public statement, I committed to putting INIT-011 on a formal committee referral and hearing schedule. I am asking the Clerk to make that schedule visible, including the committee assignment and hearing date, rather than allowing the commitment to remain an announcement. This request is about a traceable process; it does not claim that a hearing has occurred or predetermine what the committee or council should decide.",
+      "disposition": "statement",
+      "actionAsked": "Publish the formal committee referral and hearing schedule for INIT-011.",
+      "tone": "procedural-authoritative",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-115-council_d4-004",
+      "type": "statement",
+      "topic": "Distinct legislative texts for Dimond and Ivy Hill",
+      "initiative": null,
+      "decision": "Ask the Clerk to docket distinct texts for INIT-012 and INIT-013 and keep their records separate.",
+      "quote": "Two initiatives need two readable texts; a consolidated docket should clarify the record, not blur the proposals.",
+      "fullStatement": "In my C114 public statement, I committed to docketing distinct legislative texts for INIT-012, the Dimond Revitalization Initiative, and INIT-013, the Ivy Hill Community Revitalization. I am asking the Clerk to make each text separately identifiable on the docket so residents can tell which proposal is under consideration. Dimond's current report shows flat mood, steady street trade, and low crime; it does not justify claiming an accelerating crisis. The record should reflect the proposal and the evidence, not an unsupported premise.",
+      "disposition": "statement",
+      "actionAsked": "Docket separately identifiable legislative texts for INIT-012 and INIT-013.",
+      "tone": "blunt-practical",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-115-council_d4-005",
+      "type": "statement",
+      "topic": "District 4 neighborhood conditions and Glenview follow-through",
+      "initiative": null,
+      "decision": "Ask staff to document Glenview's low-severity public-works spike at the Civic Response Meeting and address each neighborhood on its own evidence.",
+      "quote": "Follow-through should be specific to the block and the facts; there is no need to manufacture an emergency.",
+      "fullStatement": "Dimond is reported with flat mood, steady street trade, and low crime. Glenview's mood has slipped, its trade is slow, and the brief notes a low-severity public-works spike; I want that issue documented at the Civic Response Meeting. Ivy Hill's mood has soured and trade is slow, while crime remains low and the brief notes a neighborhood grievance. These are different conditions and call for specific follow-through, not one sweeping claim about District 4.",
+      "disposition": "statement",
+      "actionAsked": "Document Glenview's public-works spike at the Civic Response Meeting and report neighborhood-specific follow-through.",
+      "tone": "deliberate-analytical",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    }
+  ]
+}

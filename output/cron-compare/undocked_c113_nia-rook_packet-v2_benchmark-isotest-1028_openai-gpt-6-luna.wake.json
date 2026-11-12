@@ -1,0 +1,43 @@
+{
+  "mode": "wake-write",
+  "desk": "undocked",
+  "cycle": "113",
+  "provider": "openrouter",
+  "model": "openai/gpt-6-luna",
+  "configuredWriterModel": "openai/gpt-6-luna",
+  "gateModel": "sonnet",
+  "persona": "nia-rook",
+  "byline": {
+    "name": "Nia Rook",
+    "popid": "POP-01076",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 1,
+  "quotesLanded": 0,
+  "disposition": "ungated-sample",
+  "rheaPass": null,
+  "rheaFlagCount": null,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "citizen_lookup",
+    "citizen_lookup",
+    "canon_search",
+    "canon_search"
+  ],
+  "toolCalls": 4,
+  "wordCount": 304,
+  "targetWords": "350-600",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": null,
+  "gradeRecord": null,
+  "article": "output/cron-compare/samples/undocked_c113_nia-rook_packet-v2_benchmark-isotest-1028_openai-gpt-6-luna.sample.md",
+  "selfRecord": null,
+  "ranAt": "2026-10-28T16:17:54.435Z"
+}

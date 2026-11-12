@@ -1,0 +1,119 @@
+{
+  "v": "NIA-SLICE/1",
+  "cycle": 115,
+  "empty": false,
+  "events": [
+    {
+      "v": "UNDOCKED-FEED/1",
+      "Cycle": 115,
+      "EventType": "undocked-episode",
+      "POPID": "POP-00184",
+      "Holder": "Brooklyn Nguyen",
+      "EpisodeId": "undocked-pop00184-Y3C11",
+      "CreditsDelta": 0,
+      "PointsDelta": 24.93,
+      "Systems": [
+        "sol",
+        "alpha_centauri",
+        "tau_ceti",
+        "electra",
+        "mimosa",
+        "ross_154",
+        "arcturus",
+        "timberline",
+        "maplevale",
+        "miaplacidus",
+        "cervantes",
+        "ridgecrest",
+        "nembus"
+      ],
+      "CombatEvents": 0,
+      "MishapCount": 0,
+      "Magnitude": 2,
+      "Flags": [
+        "credits_delta_windowed"
+      ],
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00184-2026-11-11T02-30-31.json"
+    }
+  ],
+  "laneEntries": [
+    {
+      "ref": "undocked:undocked-pop00184-Y3C11",
+      "label": "UNDOCKED: Brooklyn Nguyen, Tuesday night",
+      "kind": "undocked",
+      "popids": [
+        "POP-00184"
+      ],
+      "nightSource": "record",
+      "handle": {
+        "angle": "UNDOCKED episode: Brooklyn Nguyen, Tuesday night. Standings: Luis Taz leads the board — rank #1, 45.19 achievement points, 0 credits, 2 cycle(s) led, current streak 2. In the chair: Brooklyn Nguyen — Community Programs Coordinator.",
+        "citizens": [
+          "Brooklyn Nguyen — Community Programs Coordinator, UNDOCKED cast pilot"
+        ],
+        "facts": [
+          "Brooklyn Nguyen's Tuesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes, Ridgecrest and Nembus; mined 3 copper ore, 3 iron ore and 1 sol alloy ore; came out even on credits; flew until the show's time ran out.",
+          "Brooklyn Nguyen — Community Programs Coordinator (ledger)"
+        ]
+      },
+      "who": {
+        "name": "Brooklyn Nguyen",
+        "roleType": "Community Programs Coordinator",
+        "employerBizId": "BIZ-00094",
+        "tier": "4",
+        "career": []
+      },
+      "undockedEvent": {
+        "v": "UNDOCKED-FEED/1",
+        "Cycle": 115,
+        "EventType": "undocked-episode",
+        "POPID": "POP-00184",
+        "Holder": "Brooklyn Nguyen",
+        "EpisodeId": "undocked-pop00184-Y3C11",
+        "CreditsDelta": 0,
+        "PointsDelta": 24.93,
+        "Systems": [
+          "sol",
+          "alpha_centauri",
+          "tau_ceti",
+          "electra",
+          "mimosa",
+          "ross_154",
+          "arcturus",
+          "timberline",
+          "maplevale",
+          "miaplacidus",
+          "cervantes",
+          "ridgecrest",
+          "nembus"
+        ],
+        "CombatEvents": 0,
+        "MishapCount": 0,
+        "Magnitude": 2,
+        "Flags": [
+          "credits_delta_windowed"
+        ],
+        "StagedPath": "output/spacemolt-show/staged/undocked-pop00184-2026-11-11T02-30-31.json"
+      },
+      "hood": "Fruitvale"
+    }
+  ],
+  "standings": {
+    "asOf": "2026-11-11T02:55:59.842Z",
+    "leader": {
+      "Rank": 1,
+      "POPID": "POP-00298",
+      "Holder": "Luis Taz",
+      "Episodes": 3,
+      "PointsTotal": 45.19,
+      "CreditsTotal": 0,
+      "CombatTotal": 12,
+      "MishapTotal": 0,
+      "BestMagnitude": 2,
+      "LastAiredCycle": 115,
+      "CyclesLed": 2,
+      "CurrentStreak": 2,
+      "PointsPending": 0
+    }
+  },
+  "generatedAt": "2026-11-11T12:15:10.524Z"
+}

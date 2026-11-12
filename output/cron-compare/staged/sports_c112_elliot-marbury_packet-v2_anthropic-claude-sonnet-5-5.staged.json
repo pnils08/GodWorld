@@ -1,0 +1,66 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "112",
+  "persona": "elliot-marbury",
+  "byline": "Elliot Marbury",
+  "bylinePopid": "POP-00166",
+  "article": "output/cron-compare/staged/sports_c112_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Darrin Davis",
+        "role": "mentioned",
+        "popid": "POP-00021",
+        "floor": true
+      },
+      {
+        "name": "Martin Richards",
+        "role": "mentioned",
+        "popid": "POP-00031",
+        "floor": true
+      },
+      {
+        "name": "Vinnie Keane",
+        "role": "mentioned",
+        "popid": "POP-00001",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "Vinnie Keane — 17 seasons on the dossier, 2041 the latest — hitter density memo, multi-year",
+        "sourceRef": "output/player_truesource_mirror.json Vinnie Keane @C112"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-68eccbdc779f",
+    "draftSha256": "544ec027b24a6cd8878ae09fb756b232b4f293016230f98ea59d1c661b929145",
+    "verdict": "output/cron-compare/sports_c112_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-10-21T23:17:58.125Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 350",
+      "words": 709,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "544ec027b24a6cd8878ae09fb756b232b4f293016230f98ea59d1c661b929145",
+      "costUsd": 0.0017
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-21T23:18:02.250Z"
+}

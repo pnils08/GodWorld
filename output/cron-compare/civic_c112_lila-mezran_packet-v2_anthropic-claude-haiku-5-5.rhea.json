@@ -1,0 +1,76 @@
+{
+  "draft": "output/cron-compare/civic_c112_lila-mezran_packet-v2_anthropic-claude-haiku-5-5.md",
+  "cycle": "112",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "7de1e2fa840198538a7597d6c320b94e57bb5adccc51505dd0c09fe27cd74bd6",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All citizen profiles, exact quotes, and health/hospital census metrics match cycle 112 ground truth and packet provenance.",
+  "review": {
+    "profileId": "lila-health-service-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "lila-health-service-v1",
+    "packageVersion": "LILA-LEP2-1",
+    "manifestId": "AM-f49bc2d4abf3",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "6.5",
+          "4.3"
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [
+      "Deacon Seymour",
+      "Elena Leon",
+      "Elle Lilo",
+      "Jonas Patel",
+      "Kenji Tanaka",
+      "Matra Woven",
+      "Maurice Franklin",
+      "Yu Zen"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0106,
+  "durationMs": 9976,
+  "parseError": false,
+  "ranAt": "2026-10-19T23:17:48.914Z",
+  "contractScore": {
+    "opened": false,
+    "closed": false,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 1122,
+    "short": "The opening begins with anecdotal scene-setting instead of a Packet-backed health-service or access fact, and the closing ends on a rhetorical question rather than stating the next record still needed.",
+    "score": 2,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "7de1e2fa840198538a7597d6c320b94e57bb5adccc51505dd0c09fe27cd74bd6",
+    "costUsd": 0.0019
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "115",
+  "persona": "p-slayer",
+  "byline": "P Slayer",
+  "bylinePopid": "POP-00008",
+  "article": "output/cron-compare/staged/sports_c115_p-slayer_packet-v2_x-ai-grok-4-3.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Adash Stanley",
+        "role": "mentioned",
+        "popid": "POP-01023"
+      },
+      {
+        "name": "Dillon Brooks",
+        "role": "mentioned",
+        "popid": "POP-01079"
+      },
+      {
+        "name": "Austin Reaves",
+        "role": "mentioned",
+        "popid": "POP-01027"
+      },
+      {
+        "name": "Harry Hayward",
+        "role": "mentioned",
+        "popid": "POP-01223"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "KONO"
+    ],
+    "claims": [
+      {
+        "claim": "It's a great feeling to be contributing to the team's winning streak. We're all just trying to stay focused and keep pushing through, and it's awesome to see the community's energy behind us. My wife loves seeing the wins too, she's always hyped after a game.",
+        "sourceRef": "citizenVoice PRESS Dillon Brooks"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-fa9118137a0f",
+    "draftSha256": "f1d6f8ddaf0876188b8f02f462fe0d8d126e6d8da0a3963dcd5a0fba1ec0b957",
+    "verdict": "output/cron-compare/sports_c115_p-slayer_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-11-12T00:19:39.077Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 400",
+      "words": 501,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "f1d6f8ddaf0876188b8f02f462fe0d8d126e6d8da0a3963dcd5a0fba1ec0b957",
+      "costUsd": 0.001
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-12T00:19:43.276Z"
+}

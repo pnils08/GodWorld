@@ -1,0 +1,233 @@
+{
+  "date": "2026-11-04",
+  "stage": "write",
+  "results": [
+    {
+      "name": "Jax Caldera",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 2,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 766,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Noah Tan",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 418,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Elliot Marbury",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 2,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 727,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "P Slayer",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 465,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Tanya Cruz",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 255,
+        "contractScore": 2
+      }
+    },
+    {
+      "name": "Tamsin Pruitt",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 6,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [
+          {
+            "text": "Tyler Filet moved into a place of their own in Lake Merritt, renting",
+            "run": "moved into a place of their"
+          },
+          {
+            "text": "Tyler Filet — in their life, C113: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+            "run": "read the flyer for the oakland"
+          },
+          {
+            "text": "Tyler Filet — in their life, C114: couldn't sleep for the wind rattling the window frame near a front porch",
+            "run": "couldnt sleep wind rattling window frame near front porch"
+          },
+          {
+            "text": "Tyler Filet — in their life, C114: wondered if a decision from years back had been the right one",
+            "run": "a decision from years back had"
+          },
+          {
+            "text": "Kenji Okafor — in their life, C113: navigated the stroller traffic on College Avenue and silently judged the parking jobs",
+            "run": "the stroller traffic on college avenue"
+          },
+          {
+            "text": "Kenji Okafor — in their life, C114: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard near a bookstore corner",
+            "run": "attended a community feedback session for"
+          },
+          {
+            "text": "Kenji Okafor — in their life, C114: caught the Oaks chatter at the gym and joined in like a regular",
+            "run": "the oaks chatter at the gym"
+          },
+          {
+            "text": "Jett Walker — in their life, C113: watched an old man feed pigeons like a ritual and wondered what theirs was",
+            "run": "watched an old man feed pigeons"
+          },
+          {
+            "text": "Jett Walker — in their life, C114: kept a spare trap gasket in every pocket and used one before lunch",
+            "run": "kept a spare trap gasket in"
+          },
+          {
+            "text": "Tobert Lewis — in their life, C114: badged into the Baylight office early and tried not to think about the protestors from last month",
+            "run": "badged into the baylight office early"
+          },
+          {
+            "text": "Tobert Lewis — in their life, C114: Downtown is thriving, with events drawing crowds and new faces adding to the vibrant mix of the neighborhood.",
+            "run": "downtown is thriving with events drawing"
+          },
+          {
+            "text": "Graciela Foster — in their life, C113: the for-rent signs outnumbered the welcome mats this month",
+            "run": "the for rent signs outnumbered the"
+          },
+          {
+            "text": "Graciela Foster — in their life, C114: caught the coffee order coming out of their mouth before deciding to order it near a venue doorway",
+            "run": "coffee order coming out of their"
+          },
+          {
+            "text": "Graciela Foster — in their life, C114: moved from Uptown to East Oakland — moving for a better fit between household income and housing costs",
+            "run": "moved from uptown to east oakland"
+          },
+          {
+            "text": "Derek Obi — in their life, C113: felt a lift at Miso Metro after the win",
+            "run": "felt a lift at miso metro"
+          },
+          {
+            "text": "Derek Obi — in their life, C113: stayed thirty minutes after the service just catching up in the parking lot",
+            "run": "stayed thirty minutes after the service"
+          },
+          {
+            "text": "Patrice Rao — moved from Chinatown to West Oakland — moving up from Chinatown, West Oakland (C114 — what happened in their life, not words they said)",
+            "run": "moved from chinatown to west oakland"
+          },
+          {
+            "text": "Patrice Rao — in their life, C114: wondered when exactly they became the adult in the room",
+            "run": "wondered when exactly they became the"
+          },
+          {
+            "text": "Patrice Rao — in their life, C114: knew the rules cold — two nights in the chair, the galaxy keeps the score, the board adds it up — and had never been drawn",
+            "run": "knew the rules cold two nights"
+          },
+          {
+            "text": "Jerome Lindqvist — in their life, C113: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+            "run": "the fruitvale transit hub delays and"
+          },
+          {
+            "text": "Jerome Lindqvist — in their life, C114: watched the morning shuttles roll along the waterfront into the Baylight District and timed their own walk to beat them",
+            "run": "the morning shuttles roll along the"
+          },
+          {
+            "text": "Jerome Lindqvist — in their life, C114: kept score by hand at the kitchen table the way their father taught them near a vendor by the transit stop",
+            "run": "the way their father taught them"
+          },
+          {
+            "text": "Jerome Lindqvist — in their life, C114: enjoyed Fruitvale's community atmosphere",
+            "run": "c114 enjoyed fruitvales community atmosphere"
+          },
+          {
+            "text": "Priscilla Chang — walked across the stage at their commencement ceremony, Fruitvale (C114 — what happened in their life, not words they said)",
+            "run": "walked across the stage at their"
+          },
+          {
+            "text": "Priscilla Chang — in their life, C113: saved the Tribune clipping with their neighborhood in it — the good one",
+            "run": "saved the tribune clipping with their"
+          },
+          {
+            "text": "Priscilla Chang — in their life, C114: ran the numbers on staying put another year",
+            "run": "ran the numbers on staying put"
+          }
+        ],
+        "words": 1251,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Ines Sorensen",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 468,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 4,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 376,
+        "contractScore": 4
+      }
+    }
+  ],
+  "checkTotals": {
+    "seats": 8,
+    "toolSeats": 4,
+    "capHits": 0,
+    "thin": 0,
+    "verbatim": 1,
+    "graded": 8,
+    "gradeSum": 30
+  },
+  "ranAt": "2026-11-05T00:22:49.522Z"
+}

@@ -1,0 +1,275 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00014",
+    "name": "Tanya Cruz",
+    "role": "desk reporter",
+    "desk": "sports"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Oaks early-season update: 1-0",
+    "approach": "Sideline approach (Tanya Cruz): you file from the clubhouse. That SET is yours — the Packet will never list a clubhouse event. Paint what the supplied sports line predicts. Packet player quotes and numbers only. New in-world spots go on INTAKE BIZ. No real-world Oakland venues. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview. The feed notes report what people said in paraphrase; none of it is a quote — never put it in quotation marks or attribute it as speech.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "sideline-dispatch",
+      "pulseClass": "record-only-sideline",
+      "bagModes": [
+        "10 Inference Close"
+      ],
+      "claim": "The supplied sports record is the weather. The clubhouse SET is allotted hallucination fitted to that line.",
+      "anchorFacts": [
+        "The Oaks record is 1-0.",
+        "The Oaks open their inaugural season at home. AJ Dybantsa shines in his rookie debut as the Oaks win their first win as a franchise.",
+        "The Oaks open their inaugural season at home vs the San Antonio Spurs and instantly get their first win in franchise history, After 0-9 through rookie camp and preseason the team had grown anxious. Coach Shepard was asked after the game how the locker room responded to the win and he laughed and said his ears were still ringing.",
+        "Coach Shepard, who is also celebrating his first win as a rookie head coach, emphasized that it was important to honor the moment for its context but to not get too caught up and the next loss could be a game away. Saying that its important to build on the things that were good and eliminate the bad. The Oaks scored 97 while holding San Antonio to 84. The Oaks next game will be at home while Charolette comes to town."
+      ],
+      "accessEvidence": {
+        "state": "ALLOTTED",
+        "facts": [
+          "clubhouse/sideline SET is the reporter's room"
+        ]
+      },
+      "quoteEvidence": {
+        "state": "NOT_SUPPLIED",
+        "quotes": []
+      },
+      "observationEvidence": {
+        "state": "ALLOTTED",
+        "facts": []
+      },
+      "missing": [
+        "Packet player quotes",
+        "injury or team-response facts beyond the supplied record"
+      ],
+      "sceneRule": "Clubhouse SET is authorized. Invented player quotes and real-world venues are not.",
+      "sourcePointers": [
+        "output/world_summary_c112.md ## Sports",
+        "scripts/sportsSubstrate.js",
+        "docs/media/TANYA_SIDELINE_BAG.md"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "sideline-signal",
+    "hood": "KONO",
+    "src": "world_summary_c112.md ## Sports",
+    "plan": {
+      "focus": "The emotional release and cautious reset inside the Oaks' locker room after their first franchise win.",
+      "closeQuestion": "How do you honor a first win without letting it become the whole story?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [],
+    "sources": [],
+    "excludedLeads": [
+      {
+        "from": "Tanya Cruz",
+        "text": "The locker room was loud enough that Coach Shepard laughed about his ears ringing — that's from the feed notes, not a direct quote.",
+        "usable": false
+      },
+      {
+        "from": "Tanya Cruz",
+        "text": "There may be a quieter moment after the celebration dies down, where the coach's warning about the next loss starts to settle in.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C112",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-7cd6ffd2aeb3"
+    },
+    {
+      "t": "FACT",
+      "text": "Oaks early-season update: 1-0",
+      "src": "world_summary_c112.md ## Sports",
+      "id": "F-b4d3d0f493c7"
+    },
+    {
+      "t": "FACT",
+      "text": "The Oaks record is 1-0.",
+      "src": "world_summary_c112.md ## Sports",
+      "id": "F-69a60b207537"
+    },
+    {
+      "t": "FACT",
+      "text": "The Oaks open their inaugural season at home. AJ Dybantsa shines in his rookie debut as the Oaks win their first win as a franchise.",
+      "src": "world_summary_c112.md ## Sports",
+      "id": "F-840758f351e1"
+    },
+    {
+      "t": "FACT",
+      "text": "The Oaks open their inaugural season at home vs the San Antonio Spurs and instantly get their first win in franchise history, After 0-9 through rookie camp and preseason the team had grown anxious. Coach Shepard was asked after the game how the locker room responded to the win and he laughed and said his ears were still ringing.",
+      "src": "world_summary_c112.md ## Sports",
+      "id": "F-90b86ae8d257"
+    },
+    {
+      "t": "FACT",
+      "text": "Coach Shepard, who is also celebrating his first win as a rookie head coach, emphasized that it was important to honor the moment for its context but to not get too caught up and the next loss could be a game away. Saying that its important to build on the things that were good and eliminate the bad. The Oaks scored 97 while holding San Antonio to 84. The Oaks next game will be at home while Charolette comes to town.",
+      "src": "world_summary_c112.md ## Sports",
+      "id": "F-86df95d8b1a9"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. No citizen spoke for this piece: manifest.approvedQuotes is empty. Write no quoted speech and attribute no statement to any person; the piece stands on the record and the place. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "tanya-sideline-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "File a short sideline dispatch from the clubhouse SET. Packet owns player quotes and numbers. The room itself is allotted hallucination.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "short first-person sideline interpretation",
+      "targetWords": "evidence-bounded",
+      "opening": "one supplied sports fact",
+      "closing": "the access or observation still needed"
+    },
+    "authorizedTexture": [
+      "first-person clubhouse/sideline SET that does not invent a player quote, statistic, or real-world venue",
+      "room mood and presence as allotted hallucination fitted to the supplied sports line"
+    ],
+    "textureConditions": [
+      "player quotes, statistics, injuries, and results require Packet support",
+      "in-world clubhouse SET and named spots that are not real Oakland are allotted hallucination and belong on INTAKE BIZ if newly named",
+      "an unresolved feed subject may not receive a POPID, role, biography, quote, or interview"
+    ],
+    "canonBlockers": [
+      "invented player quotes, invented statistics, invented injuries, or real-world Oakland venues",
+      "an invented or altered Packet person, quote, statistic, result, or roster move",
+      "an unresolved feed spelling silently assigned an identity or role"
+    ]
+  },
+  "manifest": {
+    "id": "AM-4ccbfd54b325",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-7cd6ffd2aeb3",
+        "t": "FACT",
+        "text": "Current cycle: C112",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-b4d3d0f493c7",
+        "t": "FACT",
+        "text": "Oaks early-season update: 1-0",
+        "src": "world_summary_c112.md ## Sports"
+      },
+      {
+        "id": "F-69a60b207537",
+        "t": "FACT",
+        "text": "The Oaks record is 1-0.",
+        "src": "world_summary_c112.md ## Sports"
+      },
+      {
+        "id": "F-840758f351e1",
+        "t": "FACT",
+        "text": "The Oaks open their inaugural season at home. AJ Dybantsa shines in his rookie debut as the Oaks win their first win as a franchise.",
+        "src": "world_summary_c112.md ## Sports"
+      },
+      {
+        "id": "F-90b86ae8d257",
+        "t": "FACT",
+        "text": "The Oaks open their inaugural season at home vs the San Antonio Spurs and instantly get their first win in franchise history, After 0-9 through rookie camp and preseason the team had grown anxious. Coach Shepard was asked after the game how the locker room responded to the win and he laughed and said his ears were still ringing.",
+        "src": "world_summary_c112.md ## Sports"
+      },
+      {
+        "id": "F-86df95d8b1a9",
+        "t": "FACT",
+        "text": "Coach Shepard, who is also celebrating his first win as a rookie head coach, emphasized that it was important to honor the moment for its context but to not get too caught up and the next loss could be a game away. Saying that its important to build on the things that were good and eliminate the bad. The Oaks scored 97 while holding San Antonio to 84. The Oaks next game will be at home while Charolette comes to town.",
+        "src": "world_summary_c112.md ## Sports"
+      }
+    ],
+    "approvedQuotes": [],
+    "approvedSubjects": [],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Tanya Cruz",
+        "text": "The locker room was loud enough that Coach Shepard laughed about his ears ringing — that's from the feed notes, not a direct quote.",
+        "publishable": false
+      },
+      {
+        "from": "Tanya Cruz",
+        "text": "There may be a quieter moment after the celebration dies down, where the coach's warning about the next loss starts to settle in.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "first-person clubhouse/sideline SET that does not invent a player quote, statistic, or real-world venue",
+      "room mood and presence as allotted hallucination fitted to the supplied sports line"
+    ],
+    "textureConditions": [
+      "player quotes, statistics, injuries, and results require Packet support",
+      "in-world clubhouse SET and named spots that are not real Oakland are allotted hallucination and belong on INTAKE BIZ if newly named",
+      "an unresolved feed subject may not receive a POPID, role, biography, quote, or interview"
+    ],
+    "forbiddenClaimClasses": [
+      "invented player quotes, invented statistics, invented injuries, or real-world Oakland venues",
+      "an invented or altered Packet person, quote, statistic, result, or roster move",
+      "an unresolved feed spelling silently assigned an identity or role"
+    ]
+  }
+}

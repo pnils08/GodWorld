@@ -1,0 +1,593 @@
+{
+ "note": "builder go 2026-11-09: single-parent NumChildren cleared where no tracked child attached; set old back to undo",
+ "edits": [
+  {
+   "POPID": "POP-00039",
+   "row": 37,
+   "column": "NumChildren",
+   "old": "1",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00052",
+   "row": 50,
+   "column": "NumChildren",
+   "old": "2",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00078",
+   "row": 59,
+   "column": "NumChildren",
+   "old": "1",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00092",
+   "row": 66,
+   "column": "NumChildren",
+   "old": "2",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00107",
+   "row": 69,
+   "column": "NumChildren",
+   "old": "2",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00126",
+   "row": 81,
+   "column": "NumChildren",
+   "old": "1",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00134",
+   "row": 88,
+   "column": "NumChildren",
+   "old": "1",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00139",
+   "row": 93,
+   "column": "NumChildren",
+   "old": "1",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00190",
+   "row": 143,
+   "column": "NumChildren",
+   "old": "1",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00192",
+   "row": 145,
+   "column": "NumChildren",
+   "old": "2",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00197",
+   "row": 150,
+   "column": "NumChildren",
+   "old": "3",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00209",
+   "row": 162,
+   "column": "NumChildren",
+   "old": "3",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00248",
+   "row": 201,
+   "column": "NumChildren",
+   "old": "1",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00251",
+   "row": 204,
+   "column": "NumChildren",
+   "old": "2",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00253",
+   "row": 206,
+   "column": "NumChildren",
+   "old": "1",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00266",
+   "row": 219,
+   "column": "NumChildren",
+   "old": "1",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00290",
+   "row": 243,
+   "column": "NumChildren",
+   "old": "2",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00309",
+   "row": 262,
+   "column": "NumChildren",
+   "old": "1",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00323",
+   "row": 276,
+   "column": "NumChildren",
+   "old": "1",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00367",
+   "row": 319,
+   "column": "NumChildren",
+   "old": "1",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00436",
+   "row": 327,
+   "column": "NumChildren",
+   "old": "3",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00449",
+   "row": 340,
+   "column": "NumChildren",
+   "old": "4",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00486",
+   "row": 377,
+   "column": "NumChildren",
+   "old": "1",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00499",
+   "row": 389,
+   "column": "NumChildren",
+   "old": "2",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00508",
+   "row": 398,
+   "column": "NumChildren",
+   "old": "2",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00529",
+   "row": 419,
+   "column": "NumChildren",
+   "old": "1",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00555",
+   "row": 439,
+   "column": "NumChildren",
+   "old": "1",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00595",
+   "row": 450,
+   "column": "NumChildren",
+   "old": "2",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00627",
+   "row": 466,
+   "column": "NumChildren",
+   "old": "2",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00640",
+   "row": 479,
+   "column": "NumChildren",
+   "old": "4",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00721",
+   "row": 557,
+   "column": "NumChildren",
+   "old": "3",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00725",
+   "row": 561,
+   "column": "NumChildren",
+   "old": "1",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00727",
+   "row": 563,
+   "column": "NumChildren",
+   "old": "3",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00730",
+   "row": 566,
+   "column": "NumChildren",
+   "old": "1",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00735",
+   "row": 571,
+   "column": "NumChildren",
+   "old": "2",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00753",
+   "row": 587,
+   "column": "NumChildren",
+   "old": "2",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00754",
+   "row": 588,
+   "column": "NumChildren",
+   "old": "4",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00755",
+   "row": 589,
+   "column": "NumChildren",
+   "old": "3",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00756",
+   "row": 590,
+   "column": "NumChildren",
+   "old": "2",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00758",
+   "row": 592,
+   "column": "NumChildren",
+   "old": "2",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00759",
+   "row": 593,
+   "column": "NumChildren",
+   "old": "2",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00760",
+   "row": 594,
+   "column": "NumChildren",
+   "old": "2",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00761",
+   "row": 595,
+   "column": "NumChildren",
+   "old": "1",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00763",
+   "row": 597,
+   "column": "NumChildren",
+   "old": "2",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00765",
+   "row": 599,
+   "column": "NumChildren",
+   "old": "1",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00766",
+   "row": 600,
+   "column": "NumChildren",
+   "old": "2",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00767",
+   "row": 601,
+   "column": "NumChildren",
+   "old": "4",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00768",
+   "row": 602,
+   "column": "NumChildren",
+   "old": "3",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00769",
+   "row": 603,
+   "column": "NumChildren",
+   "old": "2",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00770",
+   "row": 604,
+   "column": "NumChildren",
+   "old": "2",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00771",
+   "row": 605,
+   "column": "NumChildren",
+   "old": "2",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00773",
+   "row": 607,
+   "column": "NumChildren",
+   "old": "2",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00781",
+   "row": 615,
+   "column": "NumChildren",
+   "old": "2",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00782",
+   "row": 616,
+   "column": "NumChildren",
+   "old": "1",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00783",
+   "row": 617,
+   "column": "NumChildren",
+   "old": "1",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00784",
+   "row": 618,
+   "column": "NumChildren",
+   "old": "2",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00786",
+   "row": 620,
+   "column": "NumChildren",
+   "old": "1",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00787",
+   "row": 621,
+   "column": "NumChildren",
+   "old": "3",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00795",
+   "row": 628,
+   "column": "NumChildren",
+   "old": "4",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00797",
+   "row": 630,
+   "column": "NumChildren",
+   "old": "2",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00801",
+   "row": 634,
+   "column": "NumChildren",
+   "old": "3",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00803",
+   "row": 636,
+   "column": "NumChildren",
+   "old": "3",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00826",
+   "row": 658,
+   "column": "NumChildren",
+   "old": "1",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00829",
+   "row": 660,
+   "column": "NumChildren",
+   "old": "1",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00844",
+   "row": 675,
+   "column": "NumChildren",
+   "old": "4",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00846",
+   "row": 677,
+   "column": "NumChildren",
+   "old": "1",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00849",
+   "row": 680,
+   "column": "NumChildren",
+   "old": "1",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00869",
+   "row": 700,
+   "column": "NumChildren",
+   "old": "3",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00889",
+   "row": 720,
+   "column": "NumChildren",
+   "old": "2",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00890",
+   "row": 721,
+   "column": "NumChildren",
+   "old": "1",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00917",
+   "row": 748,
+   "column": "NumChildren",
+   "old": "3",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00920",
+   "row": 751,
+   "column": "NumChildren",
+   "old": "1",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00932",
+   "row": 763,
+   "column": "NumChildren",
+   "old": "1",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00941",
+   "row": 771,
+   "column": "NumChildren",
+   "old": "2",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-00952",
+   "row": 782,
+   "column": "NumChildren",
+   "old": "1",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-01113",
+   "row": 941,
+   "column": "NumChildren",
+   "old": "1",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-01141",
+   "row": 969,
+   "column": "NumChildren",
+   "old": "1",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-01142",
+   "row": 970,
+   "column": "NumChildren",
+   "old": "3",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-01145",
+   "row": 973,
+   "column": "NumChildren",
+   "old": "1",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-01163",
+   "row": 991,
+   "column": "NumChildren",
+   "old": "1",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-01167",
+   "row": 995,
+   "column": "NumChildren",
+   "old": "3",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-01172",
+   "row": 1000,
+   "column": "NumChildren",
+   "old": "1",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-01174",
+   "row": 1002,
+   "column": "NumChildren",
+   "old": "1",
+   "new": "0"
+  },
+  {
+   "POPID": "POP-01186",
+   "row": 1014,
+   "column": "NumChildren",
+   "old": "2",
+   "new": "0"
+  }
+ ]
+}

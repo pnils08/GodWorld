@@ -1,0 +1,434 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00017",
+    "name": "Anthony Raines",
+    "role": "desk reporter",
+    "desk": "sports"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "The season line (6.2WAR) has to carry the claim before the narrative does: The bargain core: is it time to extend Coles, Ellis, Quintero and Gonzalez?",
+    "approach": "Analytic approach (Anthony Raines): third-person only — never fan \"we.\" One evaluative claim built on verifiable feed line numbers (Stats / record / StoryAngle). Open from the board (roster fact, contract on the feed, season line) — not the bleachers. Pick 1–2 tools from the analysis bag in this slice. Numbers as the card or feed prints them, named to their source. FORBIDDEN: inventing x-stats, barrel%, launch angle, contracts, or salaries not on the feed; P Slayer charge; Hal elegy as spine; multi-voice sports-desk average.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "sports-analytics",
+      "pulseClass": "award-board",
+      "bagTools": [
+        "1 Box-Card Read",
+        "7 Is-It-Real (ledger PANDAS)"
+      ],
+      "claim": "The season line (6.2WAR) has to carry the claim before the narrative does: The bargain core: is it time to extend Coles, Ellis, Quintero and Gonzalez?",
+      "lineFacts": [
+        "Feed line: Travis Coles/22-4/2.72ERA/254SO/6.2WAR/$780K",
+        "Feed line: John Ellis/20-3/3.42ERA/$780K",
+        "Feed line: Ernesto Quintero/.282AVG/46HR/92RBI/5.8WAR/$980K",
+        "Feed line: Vladimir Gonzalez/.306AVG/28HR/4.7WAR/$2.7M",
+        "Event kind (feed): A's — front-office (off-season)",
+        "NamesUsed (feed): Travis Coles (SP), John Ellis (SP), Ernesto Quintero (3B), Vladimir Gonzalez (RF), Mike Paulson (GM)"
+      ],
+      "missing": [
+        "x-stats / barrel% / launch angle / OAA not on feed",
+        "contracts or salaries not printed on this feed row",
+        "As_Roster sheet cells (offline pack uses feed Stats only — do not invent WAR/ERA beyond feed)"
+      ],
+      "sceneRule": "Press-box / clubhouse quiet. Numbers from feed Stats only. No invented Savant cards. RoleType from ledger when present — never invent careers.",
+      "sourcePointers": [
+        "output/world_summary_c114.md ## Sports",
+        "docs/media/ANTHONY_ANALYSIS_BAG.md"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "sports-analytics",
+    "hood": "Jack London",
+    "src": "world_summary_c114.md ## Sports",
+    "plan": {
+      "focus": "Whether the A's front office extends the bargain core — Coles, Ellis, Quintero, Gonzalez — before the market re-prices them, using the feed's season lines as the evidentiary floor.",
+      "closeQuestion": "If the A's let Coles hit the open market after a 6.2 WAR season at $780K, what does that say about what the front office actually values — the production or the payroll?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [],
+    "sources": [],
+    "excludedLeads": [
+      {
+        "from": "Anthony Raines",
+        "text": "Possible that the front office is already in talks with one or more of the four — no confirmation on the feed.",
+        "usable": false
+      },
+      {
+        "from": "Anthony Raines",
+        "text": "Possible that the A's are planning to move a veteran contract to make room for Saryan and Valencia — rumor only, not fact.",
+        "usable": false
+      },
+      {
+        "from": "Anthony Raines",
+        "text": "Possible that the bargain core's agents are waiting for the market to set the price before engaging — speculative.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C114",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-4261fa115617"
+    },
+    {
+      "t": "FACT",
+      "text": "A's · front-office — The bargain core: is it time to extend Coles, Ellis, Quintero and Gonzalez?",
+      "src": "world_summary_c114.md ## Sports",
+      "id": "F-3ac48aaebc7f"
+    },
+    {
+      "t": "FACT",
+      "text": "The bargain core: is it time to extend Coles, Ellis, Quintero and Gonzalez?",
+      "src": "world_summary_c114.md ## Sports",
+      "id": "F-d5e0c82094cc"
+    },
+    {
+      "t": "FACT",
+      "text": "Feed line: Travis Coles/22-4/2.72ERA/254SO/6.2WAR/$780K",
+      "src": "world_summary_c114.md ## Sports",
+      "id": "F-6e00e7c169ed"
+    },
+    {
+      "t": "FACT",
+      "text": "Feed line: John Ellis/20-3/3.42ERA/$780K",
+      "src": "world_summary_c114.md ## Sports",
+      "id": "F-3e3062ed39a1"
+    },
+    {
+      "t": "FACT",
+      "text": "Feed line: Ernesto Quintero/.282AVG/46HR/92RBI/5.8WAR/$980K",
+      "src": "world_summary_c114.md ## Sports",
+      "id": "F-7716fb8cb0ac"
+    },
+    {
+      "t": "FACT",
+      "text": "Feed line: Vladimir Gonzalez/.306AVG/28HR/4.7WAR/$2.7M",
+      "src": "world_summary_c114.md ## Sports",
+      "id": "F-dd933b189f5f"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C10, Spring, holiday=none",
+      "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+      "id": "F-9b9470803821"
+    },
+    {
+      "t": "FACT",
+      "text": "Travis Coles 2041 ATH: 32 G, 32 GS, 22-4, 0 SV, 215 IP, 166 H, 65 ER, 25 HR, 39 BB, 254 SO, ERA 2.72",
+      "src": "tool:dossier_read:Travis Coles",
+      "id": "F-e9a744a0b02d"
+    },
+    {
+      "t": "FACT",
+      "text": "Travis Coles 2040 WSH: 33 G, 33 GS, 13-8, 0 SV, 219.1 IP, 177 H, 50 ER, 17 HR, 61 BB, 207 SO, ERA 2.05",
+      "src": "tool:dossier_read:Travis Coles",
+      "id": "F-6cd3ce398c37"
+    },
+    {
+      "t": "FACT",
+      "text": "Travis Coles 2039 WSH: 33 G, 33 GS, 9-15, 0 SV, 197.2 IP, 179 H, 87 ER, 26 HR, 51 BB, 198 SO, ERA 3.96",
+      "src": "tool:dossier_read:Travis Coles",
+      "id": "F-ef0e8e066596"
+    },
+    {
+      "t": "FACT",
+      "text": "Travis Coles 2041 rates (215 IP): 10.6 K per 9, 1.6 BB per 9, 6.51 K per BB (worked from the season line)",
+      "src": "tool:dossier_read:Travis Coles",
+      "id": "F-21a83c5a23c6"
+    },
+    {
+      "t": "FACT",
+      "text": "Travis Coles 2040 rates (219.1 IP): 8.5 K per 9, 2.5 BB per 9, 3.39 K per BB (worked from the season line)",
+      "src": "tool:dossier_read:Travis Coles",
+      "id": "F-e6f3614be7b5"
+    },
+    {
+      "t": "FACT",
+      "text": "Travis Coles 2039 rates (197.2 IP): 9.0 K per 9, 2.3 BB per 9, 3.88 K per BB (worked from the season line)",
+      "src": "tool:dossier_read:Travis Coles",
+      "id": "F-df3e68bba1b5"
+    },
+    {
+      "t": "FACT",
+      "text": "John Ellis 2041 ATH: 32 G, 32 GS, 20-3, 0 SV, 189.2 IP, 184 H, 72 ER, 18 HR, 54 BB, 153 SO, ERA 3.42",
+      "src": "tool:dossier_read:John Ellis",
+      "id": "F-756c0b573a64"
+    },
+    {
+      "t": "FACT",
+      "text": "John Ellis 2041 rates (189.2 IP): 7.3 K per 9, 2.6 BB per 9, 2.83 K per BB (worked from the season line)",
+      "src": "tool:dossier_read:John Ellis",
+      "id": "F-91dcc2ff8536"
+    },
+    {
+      "t": "FACT",
+      "text": "Vladimir Gonzalez 2039 ATH: 127 G, 506 AB, 137 H, 14 HR, 60 RBI, 49 BB, 78 SO, 15 SB, AVG .271, OBP .335, SLG .427",
+      "src": "tool:dossier_read:Vladimir Gonzalez",
+      "id": "F-d44e4d656fbd"
+    },
+    {
+      "t": "FACT",
+      "text": "Vladimir Gonzalez 2039 rates (506 AB): one HR every 36.1 AB, one SO every 6.5 AB (worked from the season line)",
+      "src": "tool:dossier_read:Vladimir Gonzalez",
+      "id": "F-d649134fb09e"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. No named ledger citizen spoke for this piece (manifest.approvedQuotes is empty): put no words in a named citizen's mouth. Unnamed voices are yours. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "anthony-sports-analytics-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Evaluate one Packet-backed sports line, roster fit, or feed delta with correctly attributed numbers and explicit sample limits. The board is read through the tools — the player's TrueSource card for the career line, the archive for his Statcast card, the PANDAS method and prior coverage, the feed for this cycle — never recalled. One sourced analytic claim is success; fan heat, elegy, and invented advanced metrics are not.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "precise third-person sports analysis",
+      "targetWords": "evidence-bounded",
+      "opening": "the strongest Packet-backed player line or roster fact",
+      "closing": "the sample, roster, or dossier evidence still needed to test the claim"
+    },
+    "authorizedTexture": [
+      "plain-language comparison of supplied player lines with each statistic kept with its named subject",
+      "a cautious variance or role-fit interpretation explicitly limited by the supplied sample",
+      "an unnamed quiet press-box or clubhouse transition that adds no person, venue, event, result, statistic, or team act"
+    ],
+    "textureConditions": [
+      "every named player, team, venue, institution, league, organization, and source must come from the Packet",
+      "every statistic, record, streak, result, roster move, role, award, contract, salary, injury, date, and sample claim requires Packet support",
+      "an unresolved feed subject may be named only as supplied and may not receive a POPID, biography, role beyond the supplied label, quote, or interview",
+      "single-game production may support a feed-delta observation but not an unsupported season projection or new player identity",
+      "a number from a TrueSource card, a Statcast card or the feed enters only through a tool call, printed as returned and named to its source; a method (PANDAS, Paper Cuts) shapes the reasoning and supplies no number of its own"
+    ],
+    "canonBlockers": [
+      "a statistic attributed to the wrong player or two player lines merged into one subject",
+      "alternate feed spellings presented as distinct people or silently assigned an invented identity",
+      "an invented advanced metric, projection, split, roster fact, contract, salary, award, injury, result, quote, interview, or front-office act",
+      "a named player, team, venue, institution, league, organization, or real-world entity not found in the supplied record",
+      "fan we, emotional crowd consensus, or historical elegy replacing the analytic claim"
+    ]
+  },
+  "manifest": {
+    "id": "AM-7520b56c5dea",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-4261fa115617",
+        "t": "FACT",
+        "text": "Current cycle: C114",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-3ac48aaebc7f",
+        "t": "FACT",
+        "text": "A's · front-office — The bargain core: is it time to extend Coles, Ellis, Quintero and Gonzalez?",
+        "src": "world_summary_c114.md ## Sports"
+      },
+      {
+        "id": "F-d5e0c82094cc",
+        "t": "FACT",
+        "text": "The bargain core: is it time to extend Coles, Ellis, Quintero and Gonzalez?",
+        "src": "world_summary_c114.md ## Sports"
+      },
+      {
+        "id": "F-6e00e7c169ed",
+        "t": "FACT",
+        "text": "Feed line: Travis Coles/22-4/2.72ERA/254SO/6.2WAR/$780K",
+        "src": "world_summary_c114.md ## Sports"
+      },
+      {
+        "id": "F-3e3062ed39a1",
+        "t": "FACT",
+        "text": "Feed line: John Ellis/20-3/3.42ERA/$780K",
+        "src": "world_summary_c114.md ## Sports"
+      },
+      {
+        "id": "F-7716fb8cb0ac",
+        "t": "FACT",
+        "text": "Feed line: Ernesto Quintero/.282AVG/46HR/92RBI/5.8WAR/$980K",
+        "src": "world_summary_c114.md ## Sports"
+      },
+      {
+        "id": "F-dd933b189f5f",
+        "t": "FACT",
+        "text": "Feed line: Vladimir Gonzalez/.306AVG/28HR/4.7WAR/$2.7M",
+        "src": "world_summary_c114.md ## Sports"
+      },
+      {
+        "id": "F-9b9470803821",
+        "t": "FACT",
+        "text": "Calendar: Y3C10, Spring, holiday=none",
+        "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)"
+      },
+      {
+        "id": "F-e9a744a0b02d",
+        "t": "FACT",
+        "text": "Travis Coles 2041 ATH: 32 G, 32 GS, 22-4, 0 SV, 215 IP, 166 H, 65 ER, 25 HR, 39 BB, 254 SO, ERA 2.72",
+        "src": "tool:dossier_read:Travis Coles"
+      },
+      {
+        "id": "F-6cd3ce398c37",
+        "t": "FACT",
+        "text": "Travis Coles 2040 WSH: 33 G, 33 GS, 13-8, 0 SV, 219.1 IP, 177 H, 50 ER, 17 HR, 61 BB, 207 SO, ERA 2.05",
+        "src": "tool:dossier_read:Travis Coles"
+      },
+      {
+        "id": "F-ef0e8e066596",
+        "t": "FACT",
+        "text": "Travis Coles 2039 WSH: 33 G, 33 GS, 9-15, 0 SV, 197.2 IP, 179 H, 87 ER, 26 HR, 51 BB, 198 SO, ERA 3.96",
+        "src": "tool:dossier_read:Travis Coles"
+      },
+      {
+        "id": "F-21a83c5a23c6",
+        "t": "FACT",
+        "text": "Travis Coles 2041 rates (215 IP): 10.6 K per 9, 1.6 BB per 9, 6.51 K per BB (worked from the season line)",
+        "src": "tool:dossier_read:Travis Coles"
+      },
+      {
+        "id": "F-e6f3614be7b5",
+        "t": "FACT",
+        "text": "Travis Coles 2040 rates (219.1 IP): 8.5 K per 9, 2.5 BB per 9, 3.39 K per BB (worked from the season line)",
+        "src": "tool:dossier_read:Travis Coles"
+      },
+      {
+        "id": "F-df3e68bba1b5",
+        "t": "FACT",
+        "text": "Travis Coles 2039 rates (197.2 IP): 9.0 K per 9, 2.3 BB per 9, 3.88 K per BB (worked from the season line)",
+        "src": "tool:dossier_read:Travis Coles"
+      },
+      {
+        "id": "F-756c0b573a64",
+        "t": "FACT",
+        "text": "John Ellis 2041 ATH: 32 G, 32 GS, 20-3, 0 SV, 189.2 IP, 184 H, 72 ER, 18 HR, 54 BB, 153 SO, ERA 3.42",
+        "src": "tool:dossier_read:John Ellis"
+      },
+      {
+        "id": "F-91dcc2ff8536",
+        "t": "FACT",
+        "text": "John Ellis 2041 rates (189.2 IP): 7.3 K per 9, 2.6 BB per 9, 2.83 K per BB (worked from the season line)",
+        "src": "tool:dossier_read:John Ellis"
+      },
+      {
+        "id": "F-d44e4d656fbd",
+        "t": "FACT",
+        "text": "Vladimir Gonzalez 2039 ATH: 127 G, 506 AB, 137 H, 14 HR, 60 RBI, 49 BB, 78 SO, 15 SB, AVG .271, OBP .335, SLG .427",
+        "src": "tool:dossier_read:Vladimir Gonzalez"
+      },
+      {
+        "id": "F-d649134fb09e",
+        "t": "FACT",
+        "text": "Vladimir Gonzalez 2039 rates (506 AB): one HR every 36.1 AB, one SO every 6.5 AB (worked from the season line)",
+        "src": "tool:dossier_read:Vladimir Gonzalez"
+      }
+    ],
+    "approvedQuotes": [],
+    "approvedSubjects": [],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Anthony Raines",
+        "text": "Possible that the front office is already in talks with one or more of the four — no confirmation on the feed.",
+        "publishable": false
+      },
+      {
+        "from": "Anthony Raines",
+        "text": "Possible that the A's are planning to move a veteran contract to make room for Saryan and Valencia — rumor only, not fact.",
+        "publishable": false
+      },
+      {
+        "from": "Anthony Raines",
+        "text": "Possible that the bargain core's agents are waiting for the market to set the price before engaging — speculative.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "plain-language comparison of supplied player lines with each statistic kept with its named subject",
+      "a cautious variance or role-fit interpretation explicitly limited by the supplied sample",
+      "an unnamed quiet press-box or clubhouse transition that adds no person, venue, event, result, statistic, or team act"
+    ],
+    "textureConditions": [
+      "every named player, team, venue, institution, league, organization, and source must come from the Packet",
+      "every statistic, record, streak, result, roster move, role, award, contract, salary, injury, date, and sample claim requires Packet support",
+      "an unresolved feed subject may be named only as supplied and may not receive a POPID, biography, role beyond the supplied label, quote, or interview",
+      "single-game production may support a feed-delta observation but not an unsupported season projection or new player identity",
+      "a number from a TrueSource card, a Statcast card or the feed enters only through a tool call, printed as returned and named to its source; a method (PANDAS, Paper Cuts) shapes the reasoning and supplies no number of its own"
+    ],
+    "forbiddenClaimClasses": [],
+    "toolFacts": [
+      "F-e9a744a0b02d",
+      "F-6cd3ce398c37",
+      "F-ef0e8e066596",
+      "F-21a83c5a23c6",
+      "F-e6f3614be7b5",
+      "F-df3e68bba1b5",
+      "F-756c0b573a64",
+      "F-91dcc2ff8536",
+      "F-d44e4d656fbd",
+      "F-d649134fb09e"
+    ]
+  }
+}

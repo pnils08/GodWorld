@@ -1,0 +1,33 @@
+{
+  "mode": "wake-write",
+  "desk": "sports",
+  "cycle": "111",
+  "provider": "openrouter",
+  "model": "x-ai/grok-4.3",
+  "configuredWriterModel": "x-ai/grok-4.3",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "p-slayer",
+  "byline": {
+    "name": "P Slayer",
+    "popid": "POP-00008",
+    "beatDomain": "SPORTS"
+  },
+  "laneEntries": 8,
+  "quotesLanded": 3,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/staged/sports_c111_p-slayer_packet-v2_x-ai-grok-4-3.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "et: true }\n{\n  \"popId\": \"POP-00008\",\n  \"name\": \"P Slayer\",\n  \"recorded\": true,\n  \"text\": \"filed: I stood on the Downtown sidewalk with the parade floats rolling past, the crowd pressing in so close\"\n}"
+  },
+  "ranAt": "2026-10-14T23:16:58.283Z",
+  "dispositionReconciledAt": "2026-10-17T17:00:03.076Z"
+}

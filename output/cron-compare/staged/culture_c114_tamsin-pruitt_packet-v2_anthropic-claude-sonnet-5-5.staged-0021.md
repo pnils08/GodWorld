@@ -1,0 +1,39 @@
+# The Lives Page, Cycle 114
+
+**Lena Cross** has a place of her own on Piedmont Ave, and she is renting it. The household ledger set it down in C114. The ledger lists Cross as an actor, and Piedmont Ave is the neighborhood it names for her. It does not say where she lived before or what the rent is.
+
+The record kept two small lines for her that week. She felt the creative energy of First Friday. She also adjusted the day's plans after the night before's gridlock, which is the kind of line a person gets when the roads have already taken something from the morning.
+
+The week before held lines that don't match. In C113 she disagreed with a Tribune column out loud to an empty kitchen. The same cycle, she argued over dinner about which of the Baylight job postings were worth applying for. The record doesn't say who sat at that dinner, and it doesn't say whether she applied. This paper named her in three culture pieces, in C111, C112 and C113, and the C112 line in her record says the coverage was not kind.
+
+Tanisha Freeman, a Grand Lake electrician, had heard about the move secondhand. "I haven't seen Lena Cross's new home, but I did hear they moved into a place on Piedmont Ave. I don't know much about it, though," Freeman said. Nobody on this page has been inside yet.
+
+**Darius Cike** also moved into a place of his own this cycle, renting, in West Oakland. The ledger lists him as a quantum computing researcher. The record holds two moves for him: one in C112, from Rockridge, "for a better fit," and this C114 entry, which sets him up in his own rented place. It doesn't say whether the second is a new address or the same one entered properly. The ledger also marks him retired, though a C114 line has him badging into the Baylight office early, trying not to think about the protestors from last month near a new-construction corner.
+
+"To be honest, my work in Quantum Computing doesn't directly relate to my decision to move to West Oakland," Cike said. "I've been drawn to the area's industrial character and the energy of the community. As a researcher, I'm often consumed by my work, but living here gives me a different kind of stimulation. I've enjoyed checking out local events like First Friday galleries, and it's nice to be around people who aren't all in the tech space. My work is pretty isolating, so it's good to have a change of pace."
+
+In C113 the crack of a bat from a nearby screen stopped a small crowd of pedestrians, and he was part of it. In C114 a colleague, Kai Davis, became a real friend.
+
+**Tanisha Freeman** is listed among four people the cycle's safety turn reached. The turn's headline in the story deck reads: papers served at the counter, a lawsuit, and lawyers the shop never budgeted for. The record doesn't say whose shop that is, whether it is hers, or what the papers say. What it does say is that she watched the morning shuttles roll along the waterfront into the Baylight District and timed her walk to beat them. She also showed up to set up the chairs in the fellowship hall, because if she didn't, no one would. The same line sits in her record from C107, so this is not the first time. In C113 a flyer for a seniors lunch program fluttered on a community bulletin board, and she saw it.
+
+**Drago Helio**, of Brooklyn, is another of the four. The story deck files him under a turn where a transformer blows, a block goes dark, freezers thaw and registers go cold. The record does not say whether his block lost power. It says that near a small park he realized the week had passed without a single thing worth retelling. Near a front porch he had watched a parish priest fly UNDOCKED, and by the second mission the whole block had a stake in it. In C113 he heard the freight trains clanking near the Port and timed his breathing to them.
+
+**Henry Rivas** is the third of the four, in West Oakland. He pitches for the Oakland A's, and at a family dinner in C114 he got asked about the club. His turn is the one the deck labels *OARI talks it down*, a crisis ended without cuffs. The record gives no OARI call at his door. It gives a pop-up where he found a quiet minute with anticipation in the air. It gives a cafe where he heard someone complain about Baylight District noise and bit his tongue, and a stranger laughing at a phone, a joke he invented all the way home. In C113 he argued about the best tamale cart on International Boulevard and refused to back down.
+
+"As a Starting Pitcher for the Oakland A's, my daily life in West Oakland is pretty hectic," Rivas said. "I'm always on the go, whether it's heading to the stadium or getting back to my family. The A's are a big part of my life, and I plan my days around the games. When I'm not pitching, I'm thinking about the next start or recovering from the last one. It's not easy, but it's worth it when I see the kids looking up to me like I'm some kinda hero."
+
+**Marco Fabregas** came home to Laurel for the weekend in C114 and noticed the house felt smaller. The ledger lists him as a catcher for the Las Vegas Aviators (AAA). The record does not say who was home, or how long he stayed. It does say he read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots. Darius Cike's record carries the same flyer and the same wondering. Marco also found a quiet minute at a small park and felt the season starting to turn. In C113 he did a radio interview.
+
+**Elias Varek**, founder of Civis Systems in West Oakland, saw two of his firms return money to the line this week. Civis Systems returned $487,928 and Varek Systems returned $34,765. The record doesn't say what the line is or where the money went. It keeps three smaller things beside it: the new streetlights went in before anyone had to ask, the freight trains clanked near the Port, and he timed his breathing to them. One more line, in the engine's own shorthand, says the line's standing is near the bar. It does not say which bar, and I won't dress it up.
+
+**Isley Kelley** of Rockridge had Kelley Mercantile return $2,058 to the line this week. The week's other lines are smaller. A round of texts came in from people who hadn't called in years. Kelley felt quietly proud of how they handled something small. They looked up how something works and came away more amazed, not less. In C113 Kelley caught the recap of the previous night's game at the counter and stayed for the second retelling. The Tribune named Kelley in C100 and C101, in pieces on the Richards trade and the Third Annual Gala.
+
+**Benji Dillon** had Dillon Clinic, in Rockridge, return $7,514 to the line this week. The record says he was recognized twice at the grocery store after the story ran, and doesn't say which story. He drove the church van on the senior trip near a cafe on the avenue and heard three hours of unfiltered neighborhood gossip. The kids could say Father Miguel before they could say the mayor's name. Dillon felt quietly proud of how he handled something small. The paper last named him in C111, in "Ellis's Game Five Line Carries the Title."
+
+The record has nothing further on any of the nine. Lena Cross's address on Piedmont Ave is the one entry that is new.
+
+## INTAKE
+NAMES: Darius Cike | quoted-source
+NAMES: Tanisha Freeman | quoted-source
+NAMES: Henry Rivas | quoted-source
+CLAIM: To be honest, my work in Quantum Computing doesn't directly relate to my decision to move to West Oakland. I've been drawn to the area's industrial character and the energy of the community. As a researcher, I'm often consumed by my work, but living here gives me a different kind of stimulation. I've enjoyed checking out local events like First Friday galleries, and it's nice to be around people who aren't all in the tech space. My work is pretty isolating, so it's good to have a change of pace. | citizenVoice PRESS Darius Cike

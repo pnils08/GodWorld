@@ -1,0 +1,91 @@
+{
+  "v": "NIA-SLICE/1",
+  "cycle": 112,
+  "empty": false,
+  "events": [
+    {
+      "v": "UNDOCKED-FEED/1",
+      "Cycle": 112,
+      "EventType": "undocked-episode",
+      "POPID": "POP-00775",
+      "Holder": "Sammie Alvarez",
+      "EpisodeId": "undocked-pop00775-Y3C8-e2",
+      "CreditsDelta": 0,
+      "Systems": [
+        "sol",
+        "sirius"
+      ],
+      "CombatEvents": 0,
+      "MishapCount": 0,
+      "Magnitude": 2,
+      "Flags": [
+        "credits_delta_windowed"
+      ],
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00775-2026-10-23T01-30-04.json"
+    }
+  ],
+  "laneEntries": [
+    {
+      "ref": "undocked:undocked-pop00775-Y3C8-e2",
+      "label": "UNDOCKED: Sammie Alvarez — dead even on the night",
+      "kind": "undocked",
+      "popids": [
+        "POP-00775"
+      ],
+      "handle": {
+        "angle": "Recap Sammie Alvarez's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits 0, systems sol, sirius, combat 0, mishaps 0, magnitude 2/5. Standings: Eric Taveras leads the board — rank #1, 2 cycle(s) led, current streak 2. In the chair: Sammie Alvarez — Civic & Neighborhood Reporter, OakTown Echo. The career is who they are, not the story; the story is the flight.",
+        "citizens": [
+          "Sammie Alvarez — Civic & Neighborhood Reporter, OakTown Echo, UNDOCKED cast pilot"
+        ],
+        "facts": [
+          "Sammie Alvarez — Civic & Neighborhood Reporter, OakTown Echo (ledger)"
+        ]
+      },
+      "who": {
+        "name": "Sammie Alvarez",
+        "roleType": "Civic & Neighborhood Reporter, OakTown Echo",
+        "employerBizId": "BIZ-00099",
+        "tier": "4",
+        "career": []
+      },
+      "undockedEvent": {
+        "v": "UNDOCKED-FEED/1",
+        "Cycle": 112,
+        "EventType": "undocked-episode",
+        "POPID": "POP-00775",
+        "Holder": "Sammie Alvarez",
+        "EpisodeId": "undocked-pop00775-Y3C8-e2",
+        "CreditsDelta": 0,
+        "Systems": [
+          "sol",
+          "sirius"
+        ],
+        "CombatEvents": 0,
+        "MishapCount": 0,
+        "Magnitude": 2,
+        "Flags": [
+          "credits_delta_windowed"
+        ],
+        "StagedPath": "output/spacemolt-show/staged/undocked-pop00775-2026-10-23T01-30-04.json"
+      },
+      "hood": "Temescal"
+    }
+  ],
+  "standings": {
+    "asOf": "2026-10-23T01:36:50.136Z",
+    "leader": {
+      "Rank": 1,
+      "POPID": "POP-00597",
+      "Holder": "Eric Taveras",
+      "Episodes": 3,
+      "CreditsTotal": 1170,
+      "CombatTotal": 0,
+      "MishapTotal": 0,
+      "BestMagnitude": 3,
+      "LastAiredCycle": 112,
+      "CyclesLed": 2,
+      "CurrentStreak": 2
+    }
+  },
+  "generatedAt": "2026-10-23T11:15:03.999Z"
+}

@@ -1,0 +1,53 @@
+{
+  "office": "police_chief",
+  "agentDir": "civic-office-police-chief",
+  "holder": "Rafael Montez",
+  "popid": "POP-00136",
+  "title": "Police Chief",
+  "date": "2026-11-05",
+  "cycle": 114,
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "statement": "No public safety event in this cycle's export requires an institutional statement from this office. The district readings show elevated CrimeIndex in Fruitvale, San Antonio, Temescal, and Glenview alongside quieter numbers in Dimond, which is the kind of split the department watches rather than announces. I am holding the citywide patrol posture at balanced — sworn resources spread evenly — while OARI transfer thresholds in East and West Oakland remain in place. The safety category is open to me and I have not filed against it; nothing in this week's evidence argues for a new program over steady coverage.",
+  "moves": [],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-11-05T11:45:21.740Z",
+  "usage": {
+    "prompt_tokens": 12710,
+    "completion_tokens": 149,
+    "total_tokens": 12859,
+    "cost": 0.00239508,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.00239508,
+      "upstream_inference_prompt_cost": 0.0022878,
+      "upstream_inference_completions_cost": 0.00010728
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "fellBackFrom": null,
+  "evidenceGenerationHash": "625fc65e258fd2fe3d38d613ddc8fe6e9ae4ae4487a8350ea1d8882ac488130d",
+  "evidenceReads": [],
+  "provider": "DigitalOcean",
+  "finishReason": "stop",
+  "elapsedMs": 1246,
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00136",
+    "id": "GhgoL1WmbDeMeexDqRyEmD",
+    "customId": "cp-POP-00136-c114-CIVIC-datawake-2026-11-05"
+  }
+}

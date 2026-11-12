@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-19",
+  "stage": "report",
+  "results": [
+    {
+      "name": "Carmen Delaine",
+      "desk": "civic",
+      "ok": true,
+      "checks": null
+    },
+    {
+      "name": "Jordan Velez",
+      "desk": "business",
+      "ok": true,
+      "checks": null
+    },
+    {
+      "name": "Dr. Lila Mezran",
+      "desk": "civic",
+      "ok": true,
+      "checks": null
+    },
+    {
+      "name": "Trevor Shimizu",
+      "desk": "civic",
+      "ok": true,
+      "checks": null
+    },
+    {
+      "name": "Anthony Raines",
+      "desk": "sports",
+      "ok": true,
+      "checks": null
+    },
+    {
+      "name": "Tamsin Pruitt",
+      "desk": "culture",
+      "ok": true,
+      "checks": null
+    }
+  ],
+  "checkTotals": null,
+  "ranAt": "2026-10-19T18:19:02.984Z"
+}

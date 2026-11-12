@@ -1,0 +1,60 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "114",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "freelance-firebrand",
+  "byline": {
+    "name": "Jax Caldera",
+    "popid": "POP-00799",
+    "beatDomain": "ACCOUNTABILITY"
+  },
+  "laneEntries": 114,
+  "quotesLanded": 4,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "canon_search",
+    "sheet_read"
+  ],
+  "toolCalls": 2,
+  "wordCount": 766,
+  "targetWords": "400-650",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 400",
+    "words": 766,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "2adbc6f98016d0ffbaa5d2034f96d6b68a45a2397426b5cbb21534f349ec9f1b",
+    "costUsd": 0.0013
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 4/4 — nothing fell short"
+  },
+  "article": "output/test-shell/20261110-231422-freelance-firebrand-light/staged/civic_c114_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "tip: ⌘ enable debugging { debug: true }\n{\n  \"popId\": \"POP-00799\",\n  \"name\": \"Jax Caldera\",\n  \"recorded\": true,\n  \"text\": \"filed: Rockridge Wine Bar Says \\\"Steady.\\\" The Map Says Decay. Who Answers?\"\n}"
+  },
+  "ranAt": "2026-11-05T00:16:02.236Z",
+  "dispositionReconciledAt": "2026-11-07T18:00:02.145Z"
+}

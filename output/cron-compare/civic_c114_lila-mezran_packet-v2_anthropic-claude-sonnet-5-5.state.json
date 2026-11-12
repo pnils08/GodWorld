@@ -1,0 +1,561 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00154",
+    "name": "Dr. Lila Mezran",
+    "role": "desk reporter",
+    "desk": "civic"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Chinatown carries the most sick residents (137) | 4 named on the hospital and cause records",
+    "approach": "Health approach: this slice is the illness count by neighborhood, every resident named on the hospital and live cause records, the residents the cycle summary names under Health/Recovering, and the care trail — sick residents to admissions to who is in a bed, hood by hood, tracked and other residents apart. A person listed as living in a neighborhood where illness is up is a neighbour to quote about the block, not a patient — nothing on the record says they are sick. Clinical calm, human cost, no diagnosis beyond what the record says. When the named rows are few, write the neighborhood, not a ward. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "health",
+      "hood": "Chinatown",
+      "facts": [
+        "Sick residents by neighborhood: Chinatown 137 (-3 vs C113), East Oakland 119 (-2 vs C113), Ivy Hill 118 (-2 vs C113), Fruitvale 112 (-2 vs C113), San Antonio 109 (-1 vs C113), Laurel 106 (-1 vs C113), Grand Lake 101 (-3 vs C113), Rockridge 101 (-3 vs C113) — 1,812 across 22 neighborhoods",
+        "Yu Zen (Rockridge) — in hospital care, active, admitted C105 after a workplace accident",
+        "Deacon Seymour (Lake Merritt) — in hospital care, active, admitted C105 after a workplace accident",
+        "Maurice Franklin (Rockridge) — in hospital care, active, admitted C106 after severe seasonal flu",
+        "The city illness rate stands at 4.2%, with 35 hospital admissions this cycle and 70 in care at the close.",
+        "Jacob King nursed a sore back after overdoing it around the house (Rockridge).",
+        "Citywide hospital this cycle: 35 admissions (0 tracked, 35 other residents); 70 in care at the close, 70 beds occupied; 36 left",
+        "Chinatown: 137 sick residents → 3 admissions → 6 in care at the close (0 tracked, 6 other residents) → 6 beds occupied; tracked: none tracked",
+        "Adams Point: 84 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+        "Dimond: 93 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+        "Downtown: 75 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+        "East Oakland: 119 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked"
+      ],
+      "priorCycle": "PRIOR_CYCLE_ON_DISK",
+      "note": "named rows are few (4) — write the neighborhood, not a ward",
+      "engineHooks": [],
+      "roomIsYours": "the waiting room, the walk to the clinic, what a household does when one person is sick, who covers the shift",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF",
+    "runningStoriesNote": "signal.runningStories are events the city is already living through and where each one stands. Background only — write nothing about tracking them."
+  },
+  "signal": {
+    "kind": "beat-health",
+    "hood": "Chinatown",
+    "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C114 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+    "plan": {
+      "focus": "Chinatown's illness burden is the highest in the city, but its hospital footprint is small — who is caring for the sick, and where?",
+      "closeQuestion": "When the sick count is highest and the hospital beds are few, who is actually doing the caring — and are they being counted?"
+    },
+    "runningStories": [
+      "The Downtown Transit Snarl [Downtown] — early, week 1",
+      "West Oakland Stabilization Fund — disbursement-active [West Oakland] — under way",
+      "Oakland Alternative Response Initiative — dispatch-live [West Oakland, Fruitvale, East Oakland] — under way",
+      "Fruitvale Transit Hub Phase II — Visioning — design-phase [Fruitvale] — under way",
+      "Temescal Community Health Center — operational [Temescal] — under way",
+      "Baylight District — Final Council Vote — construction-active [Jack London, Downtown] — under way",
+      "Oakland Youth Apprenticeship Pipeline — implementation-active [West Oakland, East Oakland, Fruitvale] — under way",
+      "Downtown Economic Revitalization — vote-scheduled [Downtown] — under way",
+      "Commercial Stabilization for Grand Lake — announced [Grand Lake] — under way",
+      "West Oakland Tenant Defense Fund — announced [West Oakland] — under way",
+      "Ivy Hill Revitalization Initiative — announced [Ivy Hill] — under way",
+      "Dimond Revitalization Initiative — announced [Dimond] — under way",
+      "Ivy Hill Community Revitalization — announced [Ivy Hill] — under way",
+      "Downtown Economic Revitalization — legislation-filed [Downtown] — ENDED this week; now vote-scheduled",
+      "Commercial Stabilization for Grand Lake — legislation-filed [Grand Lake] — ENDED this week; now announced",
+      "West Oakland Tenant Defense Fund — operational [West Oakland] — ENDED this week; now announced"
+    ]
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00194",
+        "name": "Yu Zen",
+        "profile": "Yu Zen — Commercial Insurance Broker — Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00799",
+        "name": "Jax Caldera",
+        "profile": "Jax Caldera — Journalist, freelance accountability writer — Chinatown",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00803",
+        "name": "Akua Adeyemi",
+        "profile": "Akua Adeyemi — Plumber — Chinatown",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00799-fb5625f4d2",
+        "pop": "POP-00799",
+        "name": "Jax Caldera",
+        "quote": "Honestly, I see people push through more than they go in. It's not stubbornness — it's that the hospital's not close, and a lot of folks here work jobs where taking a day off means losing pay or losing a shift. I've watched neighbors ride out fevers with herbal tea and a heating pad because the alternative was a bill they couldn't explain. The ones who do go in are usually past the point of choice. That's the part that gets me — by the time someone here decides to see a doctor, it's not a precaution anymore, it's an emergency.",
+        "factIds": [
+          "F-8ee50511c6c5",
+          "F-95cedf2ac885"
+        ],
+        "src": "packet.W2[POP-00799]"
+      },
+      {
+        "id": "Q-POP-00803-90cd9a747e",
+        "pop": "POP-00803",
+        "name": "Akua Adeyemi",
+        "quote": "I see it in the little things, honestly. A bottle of cough syrup moved from the bathroom to the kitchen counter, so it's right there where someone'll remember it. Or a chair pulled up by the window, where someone's been sitting a long time, just watching the street. Sometimes the whole house gets rearranged — the bed moved downstairs, or the living room turned into a bedroom, because stairs got too hard. You don't have to ask. You just see it.",
+        "factIds": [
+          "F-9d9b930ce663"
+        ],
+        "src": "packet.W2[POP-00803]"
+      },
+      {
+        "id": "Q-POP-00194-ebdc018959",
+        "pop": "POP-00194",
+        "name": "Yu Zen",
+        "quote": "When I was in that hospital bed after my accident, I learned something about who shows up for you. It's not the building with the big sign — it's the people. Chinatown's got the most sick right now, and I know that neighborhood doesn't have the hospital footprint the rest of us take for granted. But I've seen how those communities work — the families, the shopkeepers, the elders checking on each other. That's where the caring happens when the beds are full. I think about that every morning now when I walk past the hospital cart for coffee. The city's at 70 beds, all full — that's not a number to me anymore. That's 70 people hoping someone shows up for them the way my family showed up for me.",
+        "factIds": [
+          "F-8ee50511c6c5",
+          "F-fd3a5ebe69ce",
+          "F-3ca1e208ac32"
+        ],
+        "src": "packet.W2[POP-00194]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Jax Caldera",
+        "text": "Ask local shopkeepers if they know of workers who've missed multiple days without seeking care — that pattern might show where the gap really is.",
+        "usable": false
+      },
+      {
+        "from": "Dr. Lila Mezran",
+        "text": "Chinatown residents may be relying on family and neighbor networks rather than hospital care, given the low admission count relative to the sick count",
+        "usable": false
+      },
+      {
+        "from": "Dr. Lila Mezran",
+        "text": "The six beds occupied in Chinatown may represent a smaller share of care than the neighborhood's illness burden would suggest",
+        "usable": false
+      },
+      {
+        "from": "Dr. Lila Mezran",
+        "text": "The drop of three sick residents from last cycle may indicate a slow recovery rather than a new wave",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C114",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-4261fa115617"
+    },
+    {
+      "t": "FACT",
+      "text": "Chinatown carries the most sick residents (137) | 4 named on the hospital and cause records",
+      "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C114 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+      "id": "F-95cedf2ac885"
+    },
+    {
+      "t": "FACT",
+      "text": "Yu Zen is one of 4 residents on the record this cycle; Chinatown carries the most illness; 70 in hospital care citywide, 70 beds occupied; illness is up in Chinatown — Jax Caldera and Akua Adeyemi can speak for the block.",
+      "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C114 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+      "id": "F-8ee50511c6c5"
+    },
+    {
+      "t": "FACT",
+      "text": "Sick residents by neighborhood: Chinatown 137 (-3 vs C113), East Oakland 119 (-2 vs C113), Ivy Hill 118 (-2 vs C113), Fruitvale 112 (-2 vs C113), San Antonio 109 (-1 vs C113), Laurel 106 (-1 vs C113), Grand Lake 101 (-3 vs C113), Rockridge 101 (-3 vs C113) — 1,812 across 22 neighborhoods",
+      "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C114",
+      "id": "F-cba1895ca9aa"
+    },
+    {
+      "t": "FACT",
+      "text": "Yu Zen (Rockridge) — in hospital care, active, admitted C105 after a workplace accident",
+      "src": "output/beats/Hospital_Ledger.jsonl POP-00194",
+      "id": "F-fd3a5ebe69ce"
+    },
+    {
+      "t": "FACT",
+      "text": "Deacon Seymour (Lake Merritt) — in hospital care, active, admitted C105 after a workplace accident",
+      "src": "output/beats/Hospital_Ledger.jsonl POP-00528",
+      "id": "F-488f0c9977b3"
+    },
+    {
+      "t": "FACT",
+      "text": "Maurice Franklin (Rockridge) — in hospital care, active, admitted C106 after severe seasonal flu",
+      "src": "output/beats/Hospital_Ledger.jsonl POP-00801",
+      "id": "F-c6bc1a20be8e"
+    },
+    {
+      "t": "FACT",
+      "text": "The city illness rate stands at 4.2%, with 35 hospital admissions this cycle and 70 in care at the close.",
+      "src": "output/world_summary_c114.md \"## City State\"",
+      "id": "F-3ca1e208ac32"
+    },
+    {
+      "t": "FACT",
+      "text": "Jacob King nursed a sore back after overdoing it around the house (Rockridge).",
+      "src": "output/world_summary_c114.md \"## Who Lived It ### Health\"",
+      "id": "F-2da14ca542c7"
+    },
+    {
+      "t": "FACT",
+      "text": "Citywide hospital this cycle: 35 admissions (0 tracked, 35 other residents); 70 in care at the close, 70 beds occupied; 36 left",
+      "src": "output/beats/Care_Justice_Census.jsonl hospital @C114 city",
+      "id": "F-1fa7db8552b0"
+    },
+    {
+      "t": "FACT",
+      "text": "Chinatown: 137 sick residents → 3 admissions → 6 in care at the close (0 tracked, 6 other residents) → 6 beds occupied; tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl hospital @C114 Chinatown",
+      "id": "F-2c8049a45707"
+    },
+    {
+      "t": "FACT",
+      "text": "Adams Point: 84 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl hospital @C114 Adams Point",
+      "id": "F-9b16462dd576"
+    },
+    {
+      "t": "FACT",
+      "text": "Dimond: 93 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl hospital @C114 Dimond",
+      "id": "F-f2b5640c74a6"
+    },
+    {
+      "t": "FACT",
+      "text": "Downtown: 75 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl hospital @C114 Downtown",
+      "id": "F-5d160741dfc8"
+    },
+    {
+      "t": "FACT",
+      "text": "East Oakland: 119 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl hospital @C114 East Oakland",
+      "id": "F-530be5943b5a"
+    },
+    {
+      "t": "FACT",
+      "text": "Chinatown: 137 sick of 2,213 residents, 6.2% — at or over the 6% watch bar",
+      "src": "output/beats/Neighborhood_Demographics.jsonl Sick/Students+Adults+Seniors @C114",
+      "id": "F-68f443539ac6"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C10, Spring, holiday=none",
+      "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+      "id": "F-9b9470803821"
+    },
+    {
+      "t": "FACT",
+      "text": "Akua Adeyemi — Plumber — Chinatown",
+      "src": "Simulation_Ledger profile for POP-00803",
+      "id": "F-9d9b930ce663"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "lila-health-service-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Translate one Packet-backed health-service Initiative or access condition into a careful public record without diagnosing residents or inventing clinical outcomes.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "clinical calm in precise third-person public-service reporting",
+      "targetWords": "evidence-bounded",
+      "opening": "one Packet-backed health-service, access, place, or implementation fact",
+      "closing": "the next resident-impact, access, capacity, or timeline record still needed"
+    },
+    "authorizedTexture": [
+      "plain-language translation of a supplied health-service implementation fact",
+      "a careful access or human-cost question that remains explicitly unanswered",
+      "transitions between supplied health-service facts that add no patient, diagnosis, outcome, count, or causal claim"
+    ],
+    "textureConditions": [
+      "every named person, clinic, hospital, service, Initiative, Project, office, institution, neighborhood, and organization must come from the Packet",
+      "diagnoses, symptoms, prevalence, treatment results, access changes, capacity, staffing, budgets, dates, durations, counts, measurements, and causal health outcomes require Packet support",
+      "an unestablished human consequence must remain unestablished; do not manufacture a patient, resident, clinician, quote, or collective experience",
+      "raw tracker status, phase labels, source paths, and engine fields may not appear as public prose"
+    ],
+    "canonBlockers": [
+      "an invented diagnosis, symptom, condition, patient, resident, clinician, quote, treatment, outcome, access effect, wait time, capacity, staffing level, budget, measurement, or health cluster",
+      "a named health service, institution, office, Project, Initiative, person, neighborhood, or organization not found in the supplied record",
+      "an unsupported opening, closure, delay, service change, official act, duty, response, promise, timeline, or causal health claim",
+      "raw engine or tracker labels, phases, scores, decimals, source paths, or row metadata printed as public-facing evidence"
+    ]
+  },
+  "manifest": {
+    "id": "AM-565616bef8b2",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-4261fa115617",
+        "t": "FACT",
+        "text": "Current cycle: C114",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-95cedf2ac885",
+        "t": "FACT",
+        "text": "Chinatown carries the most sick residents (137) | 4 named on the hospital and cause records",
+        "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C114 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl"
+      },
+      {
+        "id": "F-8ee50511c6c5",
+        "t": "FACT",
+        "text": "Yu Zen is one of 4 residents on the record this cycle; Chinatown carries the most illness; 70 in hospital care citywide, 70 beds occupied; illness is up in Chinatown — Jax Caldera and Akua Adeyemi can speak for the block.",
+        "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C114 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl"
+      },
+      {
+        "id": "F-cba1895ca9aa",
+        "t": "FACT",
+        "text": "Sick residents by neighborhood: Chinatown 137 (-3 vs C113), East Oakland 119 (-2 vs C113), Ivy Hill 118 (-2 vs C113), Fruitvale 112 (-2 vs C113), San Antonio 109 (-1 vs C113), Laurel 106 (-1 vs C113), Grand Lake 101 (-3 vs C113), Rockridge 101 (-3 vs C113) — 1,812 across 22 neighborhoods",
+        "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C114"
+      },
+      {
+        "id": "F-fd3a5ebe69ce",
+        "t": "FACT",
+        "text": "Yu Zen (Rockridge) — in hospital care, active, admitted C105 after a workplace accident",
+        "src": "output/beats/Hospital_Ledger.jsonl POP-00194"
+      },
+      {
+        "id": "F-488f0c9977b3",
+        "t": "FACT",
+        "text": "Deacon Seymour (Lake Merritt) — in hospital care, active, admitted C105 after a workplace accident",
+        "src": "output/beats/Hospital_Ledger.jsonl POP-00528"
+      },
+      {
+        "id": "F-c6bc1a20be8e",
+        "t": "FACT",
+        "text": "Maurice Franklin (Rockridge) — in hospital care, active, admitted C106 after severe seasonal flu",
+        "src": "output/beats/Hospital_Ledger.jsonl POP-00801"
+      },
+      {
+        "id": "F-3ca1e208ac32",
+        "t": "FACT",
+        "text": "The city illness rate stands at 4.2%, with 35 hospital admissions this cycle and 70 in care at the close.",
+        "src": "output/world_summary_c114.md \"## City State\""
+      },
+      {
+        "id": "F-2da14ca542c7",
+        "t": "FACT",
+        "text": "Jacob King nursed a sore back after overdoing it around the house (Rockridge).",
+        "src": "output/world_summary_c114.md \"## Who Lived It ### Health\""
+      },
+      {
+        "id": "F-1fa7db8552b0",
+        "t": "FACT",
+        "text": "Citywide hospital this cycle: 35 admissions (0 tracked, 35 other residents); 70 in care at the close, 70 beds occupied; 36 left",
+        "src": "output/beats/Care_Justice_Census.jsonl hospital @C114 city"
+      },
+      {
+        "id": "F-2c8049a45707",
+        "t": "FACT",
+        "text": "Chinatown: 137 sick residents → 3 admissions → 6 in care at the close (0 tracked, 6 other residents) → 6 beds occupied; tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl hospital @C114 Chinatown"
+      },
+      {
+        "id": "F-9b16462dd576",
+        "t": "FACT",
+        "text": "Adams Point: 84 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl hospital @C114 Adams Point"
+      },
+      {
+        "id": "F-f2b5640c74a6",
+        "t": "FACT",
+        "text": "Dimond: 93 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl hospital @C114 Dimond"
+      },
+      {
+        "id": "F-5d160741dfc8",
+        "t": "FACT",
+        "text": "Downtown: 75 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl hospital @C114 Downtown"
+      },
+      {
+        "id": "F-530be5943b5a",
+        "t": "FACT",
+        "text": "East Oakland: 119 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl hospital @C114 East Oakland"
+      },
+      {
+        "id": "F-68f443539ac6",
+        "t": "FACT",
+        "text": "Chinatown: 137 sick of 2,213 residents, 6.2% — at or over the 6% watch bar",
+        "src": "output/beats/Neighborhood_Demographics.jsonl Sick/Students+Adults+Seniors @C114"
+      },
+      {
+        "id": "F-9b9470803821",
+        "t": "FACT",
+        "text": "Calendar: Y3C10, Spring, holiday=none",
+        "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)"
+      },
+      {
+        "id": "F-9d9b930ce663",
+        "t": "FACT",
+        "text": "Akua Adeyemi — Plumber — Chinatown",
+        "src": "Simulation_Ledger profile for POP-00803"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00799-fb5625f4d2",
+        "speakerId": "POP-00799",
+        "speakerName": "Jax Caldera",
+        "text": "Honestly, I see people push through more than they go in. It's not stubbornness — it's that the hospital's not close, and a lot of folks here work jobs where taking a day off means losing pay or losing a shift. I've watched neighbors ride out fevers with herbal tea and a heating pad because the alternative was a bill they couldn't explain. The ones who do go in are usually past the point of choice. That's the part that gets me — by the time someone here decides to see a doctor, it's not a precaution anymore, it's an emergency.",
+        "factIds": [
+          "F-8ee50511c6c5",
+          "F-95cedf2ac885"
+        ],
+        "src": "packet.W2[POP-00799]"
+      },
+      {
+        "id": "Q-POP-00803-90cd9a747e",
+        "speakerId": "POP-00803",
+        "speakerName": "Akua Adeyemi",
+        "text": "I see it in the little things, honestly. A bottle of cough syrup moved from the bathroom to the kitchen counter, so it's right there where someone'll remember it. Or a chair pulled up by the window, where someone's been sitting a long time, just watching the street. Sometimes the whole house gets rearranged — the bed moved downstairs, or the living room turned into a bedroom, because stairs got too hard. You don't have to ask. You just see it.",
+        "factIds": [
+          "F-9d9b930ce663"
+        ],
+        "src": "packet.W2[POP-00803]"
+      },
+      {
+        "id": "Q-POP-00194-ebdc018959",
+        "speakerId": "POP-00194",
+        "speakerName": "Yu Zen",
+        "text": "When I was in that hospital bed after my accident, I learned something about who shows up for you. It's not the building with the big sign — it's the people. Chinatown's got the most sick right now, and I know that neighborhood doesn't have the hospital footprint the rest of us take for granted. But I've seen how those communities work — the families, the shopkeepers, the elders checking on each other. That's where the caring happens when the beds are full. I think about that every morning now when I walk past the hospital cart for coffee. The city's at 70 beds, all full — that's not a number to me anymore. That's 70 people hoping someone shows up for them the way my family showed up for me.",
+        "factIds": [
+          "F-8ee50511c6c5",
+          "F-fd3a5ebe69ce",
+          "F-3ca1e208ac32"
+        ],
+        "src": "packet.W2[POP-00194]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00194",
+        "name": "Yu Zen",
+        "profile": "Yu Zen — Commercial Insurance Broker — Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00799",
+        "name": "Jax Caldera",
+        "profile": "Jax Caldera — Journalist, freelance accountability writer — Chinatown",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00803",
+        "name": "Akua Adeyemi",
+        "profile": "Akua Adeyemi — Plumber — Chinatown",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Jax Caldera",
+        "text": "Ask local shopkeepers if they know of workers who've missed multiple days without seeking care — that pattern might show where the gap really is.",
+        "publishable": false
+      },
+      {
+        "from": "Dr. Lila Mezran",
+        "text": "Chinatown residents may be relying on family and neighbor networks rather than hospital care, given the low admission count relative to the sick count",
+        "publishable": false
+      },
+      {
+        "from": "Dr. Lila Mezran",
+        "text": "The six beds occupied in Chinatown may represent a smaller share of care than the neighborhood's illness burden would suggest",
+        "publishable": false
+      },
+      {
+        "from": "Dr. Lila Mezran",
+        "text": "The drop of three sick residents from last cycle may indicate a slow recovery rather than a new wave",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "plain-language translation of a supplied health-service implementation fact",
+      "a careful access or human-cost question that remains explicitly unanswered",
+      "transitions between supplied health-service facts that add no patient, diagnosis, outcome, count, or causal claim"
+    ],
+    "textureConditions": [
+      "every named person, clinic, hospital, service, Initiative, Project, office, institution, neighborhood, and organization must come from the Packet",
+      "diagnoses, symptoms, prevalence, treatment results, access changes, capacity, staffing, budgets, dates, durations, counts, measurements, and causal health outcomes require Packet support",
+      "an unestablished human consequence must remain unestablished; do not manufacture a patient, resident, clinician, quote, or collective experience",
+      "raw tracker status, phase labels, source paths, and engine fields may not appear as public prose"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

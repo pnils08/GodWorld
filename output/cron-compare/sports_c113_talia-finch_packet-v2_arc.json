@@ -1,0 +1,27 @@
+{
+  "status": "arc-seed",
+  "cycle": "113",
+  "desk": "sports",
+  "persona": "talia-finch",
+  "hood": "Uptown",
+  "quotes": [
+    {
+      "pop": "POP-01023",
+      "name": "Adash Stanley",
+      "quote": "The mood among fans is electric. I've felt the excitement building around the Oaks, it's like the whole city is waking up with the team. There's a buzz in the air, and I think people are really looking forward to seeing what they can do this season."
+    },
+    {
+      "pop": "POP-00273",
+      "name": "Trenton Nawan",
+      "quote": "I'm still a bit worried about the Oaks, but their 4-0 start is really giving me hope. I checked the scores twice a day all week and was happy every time they won. Maybe they're finally getting their act together."
+    },
+    {
+      "pop": "POP-01027",
+      "name": "Austin Reaves",
+      "quote": "To be honest, the neighborhood's been buzzing about the Oaks' 4-0 start. I've seen fans around here getting really excited, and it's infectious. People are talking about it while they're out and about, like when they're unloading groceries or just hanging out on their stoops. The mood feels hungry for more, like they're really craving the next win. I've even noticed some folks around here discussing the team's defense and how well they're working together. It's great to see the community coming together like this behind the team."
+    }
+  ],
+  "claim": "The mood among fans is electric. I've felt the excitement building around the Oaks, it's like the whole city is waking up with the team. There's a buzz in the air, and I think people are really looking forward to seeing what they can do this season.",
+  "src": "citizenVoice PRESS c113",
+  "ranAt": "2026-10-29T18:18:19.038Z"
+}

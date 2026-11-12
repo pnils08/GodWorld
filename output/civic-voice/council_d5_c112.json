@@ -1,0 +1,38 @@
+{
+  "office": "council_d5",
+  "cycle": 112,
+  "speaker": "Janae Rivers",
+  "cascadeSummary": "I'm filing the D5 dispatch performance audit for INIT-002 and the East Oakland cohort placement numbers for INIT-007—no more holding our data while the city waits. I'm also drawing a hard line on West Oakland and Fruitvale: the Mayor's agenda points money at stabilization, but the engine sees decline compounding. If we don't act now, we're writing the next crisis memo, not preventing it.",
+  "statements": [
+    {
+      "statementId": "STMT-112-council_d5-001",
+      "type": "vote_statement",
+      "topic": "OARI quarterly dispatch performance — D5 audit filed",
+      "initiative": "INIT-002",
+      "decision": "Filed the District 5 dispatch performance audit for the Alternative Response Initiative, verifying response metrics and pushing for continued expansion into East Oakland.",
+      "quote": "We don't need another report that sits on a shelf — we need dispatch data that tells the truth about who gets help and who gets ignored.",
+      "fullStatement": "I'm filing the D5 dispatch performance audit because East Oakland has been the proving ground for this program, and the people here deserve to see the numbers. Violent crime at 31 against a city average of 23.8 is not a statistic — it's a warning. But the sentiment 0.48 vs 0.34 shows folks feel the difference when a health worker shows up instead of a patrol car. This audit isn't a checkbox; it's a promise that we will measure what matters and fix what fails.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-112-council_d5-002",
+      "type": "vote_statement",
+      "topic": "Youth Apprenticeship Pipeline — East Oakland cohort verified and filed",
+      "initiative": "INIT-007",
+      "decision": "Verified and filed the East Oakland cohort placement intake numbers for the first cohort, confirming prioritized placements and demanding follow-through.",
+      "quote": "East Oakland's youth have been promised a ladder for too long — this time, I'm handing them the first rung myself.",
+      "fullStatement": "The first cohort placement report is filed, and I made sure East Oakland's numbers are loud and clear. We didn't just hit a target; we told our young people they are not an afterthought. This is the pathway out of poverty we've been fighting for — and I'll be watching every cohort after this one to make sure the promises turn into paychecks, not press releases.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-112-council_d5-003",
+      "type": "statement",
+      "topic": "West Oakland and Fruitvale decline — demand for immediate action",
+      "initiative": null,
+      "decision": "Demanded immediate Council attention to the compounding decline in West Oakland and Fruitvale, calling for targeted interventions before the crisis deepens.",
+      "quote": "The city can't keep pointing at East Oakland and pretending the cracks aren't spreading to West Oakland and Fruitvale — the engine already sees the chain reaction, and so do I.",
+      "fullStatement": "I read the city's own analysis: West Oakland's mood is slipping, Fruitvale's daily life is declining, and no program is pointed at them. That's not an oversight — that's a choice. We cannot let one neighborhood's progress become another's neglect. I'm calling on the Mayor and my colleagues to move with the same urgency for these communities as we did for East Oakland. This is how we build an Oakland that doesn't just survive — it thrives.",
+      "trackerUpdates": {}
+    }
+  ]
+}

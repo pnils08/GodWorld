@@ -1,0 +1,108 @@
+{
+  "office": "mayor_gavel",
+  "cycle": 112,
+  "speaker": "Avery Santana",
+  "cascadeSummary": "Council delivered tonight: West Oakland Stabilization Fund month-eleven disbursement approved, OARI quarterly report accepted with D3 community-comment condition, Grand Lake stabilization advances with audit protocols, Downtown Revitalization moves to committee with Uptown track requested, and Baylight remediation continues to Cycle 115 milestone. I filed INIT-009 and INIT-010 per the City Planning Director's directive and responded to the three standing citizen petitions with formal administrative action.",
+  "statements": [
+    {
+      "statementId": "STMT-112-mayor_gavel-001",
+      "type": "authorization_response",
+      "topic": "West Oakland Stabilization Fund Month-Eleven Disbursement",
+      "initiative": "INIT-001",
+      "decision": "approved",
+      "quote": "Month-eleven, 23-day standard maintained — this fund delivers because Brenda Okoro's team treats every application like family.",
+      "fullStatement": "The West Oakland Stabilization Fund month-eleven disbursement of $400,000 is approved. Deputy Mayor Okoro's housing unit has held the 23-day processing standard through eleven months — that's not bureaucracy, that's respect for people facing displacement. The Fund has now disbursed over $5 million to West Oakland households and businesses priced out by the boom we built. The remaining $22.8 million stays focused on this community. I want the engine's flag heard: West Oakland daily life is declining, housing pressure is building. This fund is pointed there. We need more.",
+      "trackerUpdates": {
+        "initiative": "INIT-001",
+        "ImplementationPhase": "disbursement-active",
+        "MilestoneNotes": "C112: Month-eleven disbursement $400K approved; 23-day processing standard maintained; cumulative $5M+ disbursed",
+        "NextScheduledAction": "Month-twelve disbursement review",
+        "NextActionCycle": 113
+      }
+    },
+    {
+      "statementId": "STMT-112-mayor_gavel-002",
+      "type": "authorization_response",
+      "topic": "Oakland Alternative Response Initiative Quarterly Outcome Report",
+      "initiative": "INIT-002",
+      "decision": "approved with conditions",
+      "quote": "OARI works — and D3's right to ask for district-level data before the next expansion. Transparency builds trust.",
+      "fullStatement": "I accept the OARI quarterly outcome report and approve continuation of District 1 expanded dispatch protocols. Councilmember Rivers' condition stands: before any further expansion, the public gets district-level response times and diversion rates, not just citywide aggregates, with a D3 community briefing. I've walked with the responders. I've seen the calls that used to end with badges now ending with care. But the community that lives this deserves to see the numbers their way. Next report delivers that breakdown.",
+      "trackerUpdates": {
+        "initiative": "INIT-002",
+        "ImplementationPhase": "dispatch-live",
+        "MilestoneNotes": "C112: Quarterly report accepted; D3 condition added for district-level data breakdown and community briefing before expansion",
+        "NextScheduledAction": "District-level data report and D3 community briefing",
+        "NextActionCycle": 113
+      }
+    },
+    {
+      "statementId": "STMT-112-mayor_gavel-003",
+      "type": "vote_reaction",
+      "topic": "Commercial Stabilization for Grand Lake Committee Advancement",
+      "initiative": "INIT-009",
+      "decision": "celebrated",
+      "quote": "Grand Lake's quiet engine gets fuel with strings attached — milestones and audits, because accountability and investment walk together.",
+      "fullStatement": "The Commercial Stabilization for Grand Lake advances to committee with Council President Vega's support and Councilmember Chen's conditions locked in: mandatory disbursement milestones and audit protocols. That's the right way to do this. Grand Lake's improvement is flagged at low severity — we catch neighborhoods before they tip, not after. The $2.5 million is targeted, tracked, and transparent. This is how Oakland builds trust in public investment.",
+      "trackerUpdates": {
+        "initiative": "INIT-009",
+        "ImplementationPhase": "legislation-filed",
+        "MilestoneNotes": "C112: Advanced to Economic Development Committee with mandatory milestones and audit protocols per Chen/Vega conditions",
+        "NextScheduledAction": "Committee hearing and vote",
+        "NextActionCycle": 113
+      }
+    },
+    {
+      "statementId": "STMT-112-mayor_gavel-004",
+      "type": "vote_reaction",
+      "topic": "Downtown Economic Revitalization Emergency Committee Hearing",
+      "initiative": "INIT-008",
+      "decision": "celebrated with commitment",
+      "quote": "Downtown businesses waited long enough — and Uptown's next. Councilmember Mobley spoke for his district, and I heard him.",
+      "fullStatement": "The emergency Economic Development Committee hearing for Downtown Revitalization is convened. Councilmember Mobley made the ask: Uptown deserves a dedicated stabilization track within two cycles, and he's right. The $15 million authorization moves with Councilmember Ashford's line-item benchmarks attached — verified ROI before disbursement. That's fair. Downtown and Jack London daily life are flagged declining. This hearing is the start, not the finish. Uptown gets its hearing. The whole corridor deserves attention.",
+      "trackerUpdates": {
+        "initiative": "INIT-008",
+        "ImplementationPhase": "legislation-filed",
+        "MilestoneNotes": "C112: Emergency Economic Development Committee hearing convened; Ashford benchmarks attached; Uptown track committed for C114",
+        "NextScheduledAction": "Committee vote and Uptown stabilization planning",
+        "NextActionCycle": 113
+      }
+    },
+    {
+      "statementId": "STMT-112-mayor_gavel-005",
+      "type": "authorization_response",
+      "topic": "Baylight District Remediation Continuation",
+      "initiative": "INIT-006",
+      "decision": "approved",
+      "quote": "Independent oversight verified, remediation proceeds — Cycle 115 milestone stands. This city builds what it promises.",
+      "fullStatement": "Baylight District Phase II remediation continues with independent oversight verified. Councilmember Tran's condition is met: the oversight is real, the testing is verified, the work proceeds. I'm holding the construction milestone review for Cycle 115. This is Oakland's signature project — $2.1 billion of belief that our future is worth building. The Downtown and Jack London daily-life flags sting because this construction disrupts before it delivers. But deliver it will. The milestone stands.",
+      "trackerUpdates": {
+        "initiative": "INIT-006",
+        "ImplementationPhase": "construction-active",
+        "MilestoneNotes": "C112: Independent oversight verified; remediation continues; construction milestone review held for C115",
+        "NextScheduledAction": "Construction milestone review",
+        "NextActionCycle": 115
+      }
+    },
+    {
+      "statementId": "STMT-112-mayor_gavel-006",
+      "type": "executive_order",
+      "topic": "Mara Vance Directive — INIT-009 and INIT-010 Filing, Citizen Petition Response",
+      "initiative": null,
+      "decision": "filed and responded",
+      "quote": "Administrative stall is not how this office operates — INIT-009 and INIT-010 are filed, and the three standing petitions have their answer.",
+      "fullStatement": "Per City Planning Director Mara Vance's directive, I have filed draft ordinances for INIT-009 (Commercial Stabilization for Grand Lake) and INIT-010 (West Oakland Tenant Defense Fund) with the City Clerk. Both sat at the C110 stall threshold; both now move. I have also recorded formal administrative responses to the three verified citizen petitions that crossed visibility without executive proposal. Silence is not governance. These actions are now city record.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-112-mayor_gavel-007",
+      "type": "public_remark",
+      "topic": "Fruitvale Success Recognition and Dimond Stability",
+      "initiative": null,
+      "decision": "credit claimed and concern noted",
+      "quote": "Fruitvale's busy streets happened because this community organizes — Dimond's steady strength is Oakland working, and I'm watching the mood shift.",
+      "fullStatement": "Fruitvale's mildly positive mood and busy street trade didn't happen by accident. This community organizes — the merchants, the residents, the cultural anchors that make International Boulevard live. That success belongs to the people who built it. Dimond's steady strength is Oakland working too: low crime, steady trade, but the mood soured this cycle. I'm watching. The street-level signal matters as much as any dashboard. We celebrate Fruitvale's win and we tend to Dimond's worry — both are this city's work.",
+      "trackerUpdates": {}
+    }
+  ]
+}

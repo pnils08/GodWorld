@@ -1,0 +1,56 @@
+{
+  "office": "council_d5",
+  "cycle": 113,
+  "speaker": "Janae Rivers",
+  "cascadeSummary": "I'm filing both overdue D5 deliverables — the East Oakland cohort placement numbers for INIT-007 and the dispatch performance audit for INIT-002 — and I'm putting the city on notice: the engine sees West Oakland and Fruitvale in decline, and we don't get to pretend that's someone else's problem while we celebrate East Oakland's win. I'm moving a resolution to extend OARI's D5 protocol into the Baylight District corridor and demanding the D3 briefing happen in East Oakland, not just downtown.",
+  "statements": [
+    {
+      "statementId": "STMT-113-council_d5-001",
+      "type": "vote_statement",
+      "topic": "Oakland Alternative Response Initiative — district data and D3 community briefing",
+      "initiative": "INIT-002",
+      "decision": "Accept the district-level data report and direct the D3 community briefing be held in East Oakland, not just downtown, with a Baylight District expansion feasibility review included.",
+      "quote": "The data is in — now let's make sure the folks who called 911 actually get to see it.",
+      "fullStatement": "I filed the D5 dispatch audit and I've read the district-level numbers. East Oakland's violent crime sits at 31 against a city average of 23.8 — that's not a footnote, that's the headline. The dispatch-live protocol is working, and sentiment here runs 0.48 against the city's 0.34, so people feel it. But we don't get to hand downtown a report and call it community engagement. When the D3 briefing happens, it happens in East Oakland, where the calls come from — and I want a look at extending the protocol further into the Baylight District corridor, because that community has been waiting long enough.",
+      "disposition": "YES",
+      "actionAsked": "Move D3 briefing to East Oakland; add Baylight District expansion feasibility review to the C114 agenda.",
+      "tone": "passionate-substantive",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-113-council_d5-002",
+      "type": "vote_statement",
+      "topic": "Youth Apprenticeship Pipeline — cohort placement accountability",
+      "initiative": "INIT-007",
+      "decision": "File the verified East Oakland cohort placement totals and demand the Mayor's office produce the expedited placement report on blockers, not just the wins.",
+      "quote": "We handed the first rung to East Oakland's youth — now let's see who's holding the ladder for West Oakland and Fruitvale.",
+      "fullStatement": "The first cohort placement report is filed, and the verified intake numbers show East Oakland's youth showed up — that's real. But I can't stand here and let this city celebrate one district while the engine flags West Oakland and Fruitvale for visible decline. Those storefronts are quieter, the housing pressure is building, and no program is pointed at them. The Mayor wants answers on blockers — I want answers on why our neighbors are still waiting for a ladder of their own. This pipeline is a working model, so let's use it before the cracks spread.",
+      "disposition": "YES",
+      "actionAsked": "Produce expedited placement report on blockers and begin scoping Youth Apprenticeship Pipeline cohort expansion to West Oakland and Fruitvale.",
+      "tone": "righteous-direct",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-113-council_d5-003",
+      "type": "vote_statement",
+      "topic": "East Oakland constituent response — who answers for the district",
+      "initiative": null,
+      "decision": "Publicly credit the community and the Mayor's dispatch-live protocol for the upbeat mood and low crime numbers while committing to not letting the City use that as an excuse to redirect resources away from the district.",
+      "quote": "Crime is down and morale is up — that's not a reason to cut us loose, it's a reason to double down.",
+      "fullStatement": "East Oakland's mood is upbeat, street trade is slow, and crime is low — my people are living it, not just reading a report. That didn't happen by accident. It happened because a health worker shows up instead of a squad car, because we invested in youth who showed up for the first rung. So I'm saying it plain: don't look at these numbers and think East Oakland is fixed. We are still carrying decades of under-investment, and this is the moment to build on the momentum — not to declare victory and move the money elsewhere. Who answers for East Oakland? I do. And I'm not done yet.",
+      "disposition": "statement",
+      "actionAsked": "Maintain current funding levels for East Oakland and prioritize the Baylight District corridor as the next expansion target for both OARI and the Youth Apprenticeship Pipeline.",
+      "tone": "community-celebratory",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    }
+  ]
+}

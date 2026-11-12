@@ -1,0 +1,213 @@
+{
+  "stage": "angle",
+  "desk": "undocked",
+  "cycle": "112",
+  "persona": "nia-rook",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-01076",
+      "name": "Nia Rook",
+      "role": "desk reporter",
+      "desk": "undocked"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Recap Sammie Alvarez's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits 0, systems sol, sirius, combat 0, mishaps 0, magnitude 2/5. Standings: Eric Taveras leads the board — rank #1, 2 cycle(s) led, current streak 2. In the chair: Sammie Alvarez — Civic & Neighborhood Reporter, OakTown Echo. The career is who they are, not the story; the story is the flight.",
+      "approach": "Recap approach (UNDOCKED show beat): open on the CITY watching, not the cockpit. Pick 1-2 bag modes and hold them. The typed episode facts are the spine — credits, systems, combat, mishaps, magnitude — but lead with what it MEANS for who's up and who's down, never with the numbers. The pilot's packet interview is the only place their voice comes from. End on the one sentence the hallway will argue about tomorrow. This is the desk that's allowed to have fun."
+    },
+    "signal": {
+      "kind": "undocked",
+      "hood": "Temescal",
+      "score": null,
+      "src": "undocked:undocked-pop00775-Y3C8-e2",
+      "nearby": [
+        {
+          "text": "UNDOCKED: Sammie Alvarez — dead even on the night",
+          "src": "undocked:undocked-pop00775-Y3C8-e2"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00775",
+          "name": "Sammie Alvarez",
+          "profile": "Sammie Alvarez — UNDOCKED pilot",
+          "role": "UNDOCKED pilot",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "undocked-feed-row",
+          "evidence": {
+            "source": "output/spacemolt-show/feed/c112.json",
+            "episodeId": "undocked-pop00775-Y3C8-e2",
+            "pop": "POP-00775"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C112",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-7cd6ffd2aeb3"
+      },
+      {
+        "t": "FACT",
+        "text": "UNDOCKED: Sammie Alvarez — dead even on the night",
+        "src": "undocked:undocked-pop00775-Y3C8-e2",
+        "id": "F-e3a692caf134"
+      },
+      {
+        "t": "FACT",
+        "text": "Sammie Alvarez — Civic & Neighborhood Reporter, OakTown Echo (ledger)",
+        "src": "undocked:undocked-pop00775-Y3C8-e2",
+        "id": "F-c0fd0faa3f60"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "named",
+    "candidates": [
+      {
+        "pop": "POP-00775",
+        "name": "Sammie Alvarez",
+        "role": "UNDOCKED pilot",
+        "hood": null,
+        "profile": "Sammie Alvarez — UNDOCKED pilot",
+        "mode": "named",
+        "sourceKind": "undocked-feed-row",
+        "evidence": {
+          "source": "output/spacemolt-show/feed/c112.json",
+          "episodeId": "undocked-pop00775-Y3C8-e2",
+          "pop": "POP-00775"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Nia Rook",
+    "popid": "POP-01076"
+  },
+  "assignment": {
+    "story": {
+      "ref": "undocked:undocked-pop00775-Y3C8-e2",
+      "label": "UNDOCKED: Sammie Alvarez — dead even on the night",
+      "kind": "undocked",
+      "angle": "Recap Sammie Alvarez's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits 0, systems sol, sirius, combat 0, mishaps 0, magnitude 2/5. Standings: Eric Taveras leads the board — rank #1, 2 cycle(s) led, current streak 2. In the chair: Sammie Alvarez — Civic & Neighborhood Reporter, OakTown Echo. The career is who they are, not the story; the story is the flight.",
+      "facts": [
+        "Sammie Alvarez — Civic & Neighborhood Reporter, OakTown Echo (ledger)"
+      ],
+      "citizens": [
+        "Sammie Alvarez — Civic & Neighborhood Reporter, OakTown Echo, UNDOCKED cast pilot"
+      ],
+      "popids": [
+        "POP-00775"
+      ],
+      "hood": "Temescal"
+    },
+    "approach": "Recap approach (UNDOCKED show beat): open on the CITY watching, not the cockpit. Pick 1-2 bag modes and hold them. The typed episode facts are the spine — credits, systems, combat, mishaps, magnitude — but lead with what it MEANS for who's up and who's down, never with the numbers. The pilot's packet interview is the only place their voice comes from. End on the one sentence the hallway will argue about tomorrow. This is the desk that's allowed to have fun."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Nia Rook",
+    "popid": "POP-01076",
+    "text": "Nia Rook will chase the city's reaction to Sammie Alvarez's UNDOCKED episode, focusing on how the community responds to the pilot's performance and the implications for the standings.",
+    "plan": {
+      "chase": "Nia Rook will chase the city's reaction to Sammie Alvarez's UNDOCKED episode, focusing on how the community responds to the pilot's performance and the implications for the standings.",
+      "focus": "The city's reaction to Sammie Alvarez's UNDOCKED episode",
+      "why": "To understand the impact of the episode on the community and the standings",
+      "checks": [
+        "Verify the pilot's performance and its impact on the standings",
+        "Assess the community's response to the episode"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00775",
+          "question": "How does Sammie Alvarez's performance affect the city's perception of them?",
+          "basis": "Sammie Alvarez — UNDOCKED pilot"
+        }
+      ],
+      "interpretation": "The episode's outcome will likely influence the city's discussion around the pilot's abilities and the standings.",
+      "unverifiedLead": [
+        "The community's reaction may be influenced by Eric Taveras's current lead in the standings"
+      ],
+      "closeQuestion": "Will Sammie Alvarez's performance change the city's opinion about their capabilities?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "UNDOCKED: Sammie Alvarez — dead even on the night",
+      "kind": "undocked",
+      "hood": "Temescal",
+      "ref": "undocked:undocked-pop00775-Y3C8-e2",
+      "popids": [
+        "POP-00775"
+      ]
+    }
+  ],
+  "laneEntries": 1,
+  "angleCapHits": 0,
+  "ranAt": "2026-10-23T11:17:30.819Z"
+}

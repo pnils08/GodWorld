@@ -1,0 +1,524 @@
+[
+  {
+    "pop": "POP-00439",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00439\",\"name\":\"Timmie Hall\",\"role\":\"Refugee Resettlement Case Worker\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Jax Caldera\",\"question\":\"Has Timmie Hall noticed any changes in the community? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"anomaly\",\"hood\":\"Chinatown\",\"focus\":\"Chinatown decay without an active initiative\",\"src\":\"output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Timmie Hall (POP-00439) — role: Refugee Resettlement Case Worker; neighborhood: Chinatown; born: 1995; careerStage: senior; wealth: 5; employerBiz: BIZ-00028; skills: Faith & Community; tier: 3\",\"evidence\":[{\"id\":\"EV-c9a90762aa\",\"src\":\"output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12\",\"text\":\"Chinatown: decay [Sentiment -0.050, RetailVitality -2.07, HousingPressure +1.000] — Sentiment now -0.06 (20 of 22, city median 0.03); RetailVitality now 7.78 (9 of 22, city median 7.165); HousingPressure now 1.5 (14 of 22, city median 0) — with no matching active initiative\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C113\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-876f95b5eb98\"},{\"t\":\"FACT\",\"text\":\"Chinatown: decay [Sentiment -0.050, RetailVitality -2.07, HousingPressure +1.000] — Sentiment now -0.06 (20 of 22, city median 0.03); RetailVitality now 7.78 (9 of 22, city median 7.165); HousingPressure now 1.5 (14 of 22, city median 0) — with no matching active initiative\",\"src\":\"output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12\",\"id\":\"F-c8e82a5d4fb3\"},{\"t\":\"FACT\",\"text\":\"No active initiative (or mitigator) owns this break on the record\",\"src\":\"output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12\",\"id\":\"F-b19f8e2095d7\"},{\"t\":\"FACT\",\"text\":\"Season: Winter | Weather: 58°F clear, W 8 mph, clear (frontState CLEAR), humidity 56, visibility 10\",\"src\":\"World_Config/weather snapshot for C113\",\"id\":\"F-3bdb2a72e3d1\"},{\"t\":\"FACT\",\"text\":\"A medical team rushes to an emergency on the sidewalk, drawing a small crowd. The usual lunch spot is suddenly closed, with a notice taped to the door.\",\"src\":\"output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12\",\"id\":\"F-1d30d0c91c34\"},{\"t\":\"FACT\",\"text\":\"Timmie Hall (POP-00439) — role: Refugee Resettlement Case Worker; neighborhood: Chinatown; born: 1995; careerStage: senior; wealth: 5; employerBiz: BIZ-00028; skills: Faith & Community; tier: 3\",\"src\":\"Simulation_Ledger profile for POP-00439\",\"id\":\"F-648de0447ce6\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C9, Winter, holiday=none\",\"src\":\"output/world_summary_c113.md Calendar context (Simulation_Calendar)\",\"id\":\"F-ab9d6786094e\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00439",
+        "name": "Timmie Hall",
+        "role": "Refugee Resettlement Case Worker",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Jax Caldera",
+        "question": "Has Timmie Hall noticed any changes in the community? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "anomaly",
+        "hood": "Chinatown",
+        "focus": "Chinatown decay without an active initiative",
+        "src": "output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Timmie Hall (POP-00439) — role: Refugee Resettlement Case Worker; neighborhood: Chinatown; born: 1995; careerStage: senior; wealth: 5; employerBiz: BIZ-00028; skills: Faith & Community; tier: 3",
+        "evidence": [
+          {
+            "id": "EV-c9a90762aa",
+            "src": "output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+            "text": "Chinatown: decay [Sentiment -0.050, RetailVitality -2.07, HousingPressure +1.000] — Sentiment now -0.06 (20 of 22, city median 0.03); RetailVitality now 7.78 (9 of 22, city median 7.165); HousingPressure now 1.5 (14 of 22, city median 0) — with no matching active initiative"
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C113",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-876f95b5eb98"
+        },
+        {
+          "t": "FACT",
+          "text": "Chinatown: decay [Sentiment -0.050, RetailVitality -2.07, HousingPressure +1.000] — Sentiment now -0.06 (20 of 22, city median 0.03); RetailVitality now 7.78 (9 of 22, city median 7.165); HousingPressure now 1.5 (14 of 22, city median 0) — with no matching active initiative",
+          "src": "output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+          "id": "F-c8e82a5d4fb3"
+        },
+        {
+          "t": "FACT",
+          "text": "No active initiative (or mitigator) owns this break on the record",
+          "src": "output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+          "id": "F-b19f8e2095d7"
+        },
+        {
+          "t": "FACT",
+          "text": "Season: Winter | Weather: 58°F clear, W 8 mph, clear (frontState CLEAR), humidity 56, visibility 10",
+          "src": "World_Config/weather snapshot for C113",
+          "id": "F-3bdb2a72e3d1"
+        },
+        {
+          "t": "FACT",
+          "text": "A medical team rushes to an emergency on the sidewalk, drawing a small crowd. The usual lunch spot is suddenly closed, with a notice taped to the door.",
+          "src": "output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+          "id": "F-1d30d0c91c34"
+        },
+        {
+          "t": "FACT",
+          "text": "Timmie Hall (POP-00439) — role: Refugee Resettlement Case Worker; neighborhood: Chinatown; born: 1995; careerStage: senior; wealth: 5; employerBiz: BIZ-00028; skills: Faith & Community; tier: 3",
+          "src": "Simulation_Ledger profile for POP-00439",
+          "id": "F-648de0447ce6"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C9, Winter, holiday=none",
+          "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+          "id": "F-ab9d6786094e"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00635",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00635\",\"name\":\"Mei Chen\",\"role\":\"Gallery Owner/Curator\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Jax Caldera\",\"question\":\"How does Mei Chen see the current state of local businesses? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"anomaly\",\"hood\":\"Chinatown\",\"focus\":\"Chinatown decay without an active initiative\",\"src\":\"output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Mei Chen (POP-00635) — role: Gallery Owner/Curator; neighborhood: Chinatown; born: 1994; careerStage: senior; wealth: 5; employerBiz: SELF_EMPLOYED; skills: Government & Civic; tier: 3\",\"evidence\":[{\"id\":\"EV-b2087b13c4\",\"src\":\"output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12\",\"text\":\"Chinatown: decay [Sentiment -0.050, RetailVitality -2.07, HousingPressure +1.000] — Sentiment now -0.06 (20 of 22, city median 0.03); RetailVitality now 7.78 (9 of 22, city median 7.165); HousingPressure now 1.5 (14 of 22, city median 0) — with no matching active initiative\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C113\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-876f95b5eb98\"},{\"t\":\"FACT\",\"text\":\"Chinatown: decay [Sentiment -0.050, RetailVitality -2.07, HousingPressure +1.000] — Sentiment now -0.06 (20 of 22, city median 0.03); RetailVitality now 7.78 (9 of 22, city median 7.165); HousingPressure now 1.5 (14 of 22, city median 0) — with no matching active initiative\",\"src\":\"output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12\",\"id\":\"F-c8e82a5d4fb3\"},{\"t\":\"FACT\",\"text\":\"No active initiative (or mitigator) owns this break on the record\",\"src\":\"output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12\",\"id\":\"F-b19f8e2095d7\"},{\"t\":\"FACT\",\"text\":\"Season: Winter | Weather: 58°F clear, W 8 mph, clear (frontState CLEAR), humidity 56, visibility 10\",\"src\":\"World_Config/weather snapshot for C113\",\"id\":\"F-3bdb2a72e3d1\"},{\"t\":\"FACT\",\"text\":\"A medical team rushes to an emergency on the sidewalk, drawing a small crowd. The usual lunch spot is suddenly closed, with a notice taped to the door.\",\"src\":\"output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12\",\"id\":\"F-1d30d0c91c34\"},{\"t\":\"FACT\",\"text\":\"Mei Chen (POP-00635) — role: Gallery Owner/Curator; neighborhood: Chinatown; born: 1994; careerStage: senior; wealth: 5; employerBiz: SELF_EMPLOYED; skills: Government & Civic; tier: 3\",\"src\":\"Simulation_Ledger profile for POP-00635\",\"id\":\"F-5d83dd3ebffb\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C9, Winter, holiday=none\",\"src\":\"output/world_summary_c113.md Calendar context (Simulation_Calendar)\",\"id\":\"F-ab9d6786094e\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00635",
+        "name": "Mei Chen",
+        "role": "Gallery Owner/Curator",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Jax Caldera",
+        "question": "How does Mei Chen see the current state of local businesses? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "anomaly",
+        "hood": "Chinatown",
+        "focus": "Chinatown decay without an active initiative",
+        "src": "output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Mei Chen (POP-00635) — role: Gallery Owner/Curator; neighborhood: Chinatown; born: 1994; careerStage: senior; wealth: 5; employerBiz: SELF_EMPLOYED; skills: Government & Civic; tier: 3",
+        "evidence": [
+          {
+            "id": "EV-b2087b13c4",
+            "src": "output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+            "text": "Chinatown: decay [Sentiment -0.050, RetailVitality -2.07, HousingPressure +1.000] — Sentiment now -0.06 (20 of 22, city median 0.03); RetailVitality now 7.78 (9 of 22, city median 7.165); HousingPressure now 1.5 (14 of 22, city median 0) — with no matching active initiative"
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C113",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-876f95b5eb98"
+        },
+        {
+          "t": "FACT",
+          "text": "Chinatown: decay [Sentiment -0.050, RetailVitality -2.07, HousingPressure +1.000] — Sentiment now -0.06 (20 of 22, city median 0.03); RetailVitality now 7.78 (9 of 22, city median 7.165); HousingPressure now 1.5 (14 of 22, city median 0) — with no matching active initiative",
+          "src": "output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+          "id": "F-c8e82a5d4fb3"
+        },
+        {
+          "t": "FACT",
+          "text": "No active initiative (or mitigator) owns this break on the record",
+          "src": "output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+          "id": "F-b19f8e2095d7"
+        },
+        {
+          "t": "FACT",
+          "text": "Season: Winter | Weather: 58°F clear, W 8 mph, clear (frontState CLEAR), humidity 56, visibility 10",
+          "src": "World_Config/weather snapshot for C113",
+          "id": "F-3bdb2a72e3d1"
+        },
+        {
+          "t": "FACT",
+          "text": "A medical team rushes to an emergency on the sidewalk, drawing a small crowd. The usual lunch spot is suddenly closed, with a notice taped to the door.",
+          "src": "output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+          "id": "F-1d30d0c91c34"
+        },
+        {
+          "t": "FACT",
+          "text": "Mei Chen (POP-00635) — role: Gallery Owner/Curator; neighborhood: Chinatown; born: 1994; careerStage: senior; wealth: 5; employerBiz: SELF_EMPLOYED; skills: Government & Civic; tier: 3",
+          "src": "Simulation_Ledger profile for POP-00635",
+          "id": "F-5d83dd3ebffb"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C9, Winter, holiday=none",
+          "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+          "id": "F-ab9d6786094e"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01128",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01128\",\"name\":\"Liliana Salazar\",\"role\":\"EV mechanic\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Jax Caldera\",\"question\":\"What have you seen, felt, or understood about \\\"Chinatown decay without an active initiative\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"anomaly\",\"hood\":\"Chinatown\",\"focus\":\"Chinatown decay without an active initiative\",\"src\":\"output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Liliana Salazar (POP-01128) — role: EV mechanic; neighborhood: Glenview; born: 1968; careerStage: mid-career; wealth: 5; tier: 4\",\"evidence\":[{\"id\":\"EV-7d0de139fd\",\"src\":\"output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12\",\"text\":\"Chinatown: decay [Sentiment -0.050, RetailVitality -2.07, HousingPressure +1.000] — Sentiment now -0.06 (20 of 22, city median 0.03); RetailVitality now 7.78 (9 of 22, city median 7.165); HousingPressure now 1.5 (14 of 22, city median 0) — with no matching active initiative\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C113\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-876f95b5eb98\"},{\"t\":\"FACT\",\"text\":\"Chinatown: decay [Sentiment -0.050, RetailVitality -2.07, HousingPressure +1.000] — Sentiment now -0.06 (20 of 22, city median 0.03); RetailVitality now 7.78 (9 of 22, city median 7.165); HousingPressure now 1.5 (14 of 22, city median 0) — with no matching active initiative\",\"src\":\"output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12\",\"id\":\"F-c8e82a5d4fb3\"},{\"t\":\"FACT\",\"text\":\"No active initiative (or mitigator) owns this break on the record\",\"src\":\"output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12\",\"id\":\"F-b19f8e2095d7\"},{\"t\":\"FACT\",\"text\":\"Season: Winter | Weather: 58°F clear, W 8 mph, clear (frontState CLEAR), humidity 56, visibility 10\",\"src\":\"World_Config/weather snapshot for C113\",\"id\":\"F-3bdb2a72e3d1\"},{\"t\":\"FACT\",\"text\":\"A medical team rushes to an emergency on the sidewalk, drawing a small crowd. The usual lunch spot is suddenly closed, with a notice taped to the door.\",\"src\":\"output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12\",\"id\":\"F-1d30d0c91c34\"},{\"t\":\"FACT\",\"text\":\"Liliana Salazar (POP-01128) — role: EV mechanic; neighborhood: Glenview; born: 1968; careerStage: mid-career; wealth: 5; tier: 4\",\"src\":\"Simulation_Ledger profile for POP-01128\",\"id\":\"F-f48938595ec8\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C9, Winter, holiday=none\",\"src\":\"output/world_summary_c113.md Calendar context (Simulation_Calendar)\",\"id\":\"F-ab9d6786094e\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01128",
+        "name": "Liliana Salazar",
+        "role": "EV mechanic",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Jax Caldera",
+        "question": "What have you seen, felt, or understood about \"Chinatown decay without an active initiative\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "anomaly",
+        "hood": "Chinatown",
+        "focus": "Chinatown decay without an active initiative",
+        "src": "output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Liliana Salazar (POP-01128) — role: EV mechanic; neighborhood: Glenview; born: 1968; careerStage: mid-career; wealth: 5; tier: 4",
+        "evidence": [
+          {
+            "id": "EV-7d0de139fd",
+            "src": "output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+            "text": "Chinatown: decay [Sentiment -0.050, RetailVitality -2.07, HousingPressure +1.000] — Sentiment now -0.06 (20 of 22, city median 0.03); RetailVitality now 7.78 (9 of 22, city median 7.165); HousingPressure now 1.5 (14 of 22, city median 0) — with no matching active initiative"
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C113",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-876f95b5eb98"
+        },
+        {
+          "t": "FACT",
+          "text": "Chinatown: decay [Sentiment -0.050, RetailVitality -2.07, HousingPressure +1.000] — Sentiment now -0.06 (20 of 22, city median 0.03); RetailVitality now 7.78 (9 of 22, city median 7.165); HousingPressure now 1.5 (14 of 22, city median 0) — with no matching active initiative",
+          "src": "output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+          "id": "F-c8e82a5d4fb3"
+        },
+        {
+          "t": "FACT",
+          "text": "No active initiative (or mitigator) owns this break on the record",
+          "src": "output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+          "id": "F-b19f8e2095d7"
+        },
+        {
+          "t": "FACT",
+          "text": "Season: Winter | Weather: 58°F clear, W 8 mph, clear (frontState CLEAR), humidity 56, visibility 10",
+          "src": "World_Config/weather snapshot for C113",
+          "id": "F-3bdb2a72e3d1"
+        },
+        {
+          "t": "FACT",
+          "text": "A medical team rushes to an emergency on the sidewalk, drawing a small crowd. The usual lunch spot is suddenly closed, with a notice taped to the door.",
+          "src": "output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+          "id": "F-1d30d0c91c34"
+        },
+        {
+          "t": "FACT",
+          "text": "Liliana Salazar (POP-01128) — role: EV mechanic; neighborhood: Glenview; born: 1968; careerStage: mid-career; wealth: 5; tier: 4",
+          "src": "Simulation_Ledger profile for POP-01128",
+          "id": "F-f48938595ec8"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C9, Winter, holiday=none",
+          "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+          "id": "F-ab9d6786094e"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01137",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01137\",\"name\":\"Wren Choi\",\"role\":\"Youth mentor\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Jax Caldera\",\"question\":\"What have you seen, felt, or understood about \\\"Chinatown decay without an active initiative\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"anomaly\",\"hood\":\"Chinatown\",\"focus\":\"Chinatown decay without an active initiative\",\"src\":\"output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Wren Choi (POP-01137) — role: Youth mentor; neighborhood: Glenview; born: 1999; careerStage: mid-career; wealth: 4; tier: 4\",\"evidence\":[{\"id\":\"EV-e08b21dcf2\",\"src\":\"output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12\",\"text\":\"Chinatown: decay [Sentiment -0.050, RetailVitality -2.07, HousingPressure +1.000] — Sentiment now -0.06 (20 of 22, city median 0.03); RetailVitality now 7.78 (9 of 22, city median 7.165); HousingPressure now 1.5 (14 of 22, city median 0) — with no matching active initiative\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C113\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-876f95b5eb98\"},{\"t\":\"FACT\",\"text\":\"Chinatown: decay [Sentiment -0.050, RetailVitality -2.07, HousingPressure +1.000] — Sentiment now -0.06 (20 of 22, city median 0.03); RetailVitality now 7.78 (9 of 22, city median 7.165); HousingPressure now 1.5 (14 of 22, city median 0) — with no matching active initiative\",\"src\":\"output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12\",\"id\":\"F-c8e82a5d4fb3\"},{\"t\":\"FACT\",\"text\":\"No active initiative (or mitigator) owns this break on the record\",\"src\":\"output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12\",\"id\":\"F-b19f8e2095d7\"},{\"t\":\"FACT\",\"text\":\"Season: Winter | Weather: 58°F clear, W 8 mph, clear (frontState CLEAR), humidity 56, visibility 10\",\"src\":\"World_Config/weather snapshot for C113\",\"id\":\"F-3bdb2a72e3d1\"},{\"t\":\"FACT\",\"text\":\"A medical team rushes to an emergency on the sidewalk, drawing a small crowd. The usual lunch spot is suddenly closed, with a notice taped to the door.\",\"src\":\"output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12\",\"id\":\"F-1d30d0c91c34\"},{\"t\":\"FACT\",\"text\":\"Wren Choi (POP-01137) — role: Youth mentor; neighborhood: Glenview; born: 1999; careerStage: mid-career; wealth: 4; tier: 4\",\"src\":\"Simulation_Ledger profile for POP-01137\",\"id\":\"F-d2da469f01e2\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C9, Winter, holiday=none\",\"src\":\"output/world_summary_c113.md Calendar context (Simulation_Calendar)\",\"id\":\"F-ab9d6786094e\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01137",
+        "name": "Wren Choi",
+        "role": "Youth mentor",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Jax Caldera",
+        "question": "What have you seen, felt, or understood about \"Chinatown decay without an active initiative\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "anomaly",
+        "hood": "Chinatown",
+        "focus": "Chinatown decay without an active initiative",
+        "src": "output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Wren Choi (POP-01137) — role: Youth mentor; neighborhood: Glenview; born: 1999; careerStage: mid-career; wealth: 4; tier: 4",
+        "evidence": [
+          {
+            "id": "EV-e08b21dcf2",
+            "src": "output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+            "text": "Chinatown: decay [Sentiment -0.050, RetailVitality -2.07, HousingPressure +1.000] — Sentiment now -0.06 (20 of 22, city median 0.03); RetailVitality now 7.78 (9 of 22, city median 7.165); HousingPressure now 1.5 (14 of 22, city median 0) — with no matching active initiative"
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C113",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-876f95b5eb98"
+        },
+        {
+          "t": "FACT",
+          "text": "Chinatown: decay [Sentiment -0.050, RetailVitality -2.07, HousingPressure +1.000] — Sentiment now -0.06 (20 of 22, city median 0.03); RetailVitality now 7.78 (9 of 22, city median 7.165); HousingPressure now 1.5 (14 of 22, city median 0) — with no matching active initiative",
+          "src": "output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+          "id": "F-c8e82a5d4fb3"
+        },
+        {
+          "t": "FACT",
+          "text": "No active initiative (or mitigator) owns this break on the record",
+          "src": "output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+          "id": "F-b19f8e2095d7"
+        },
+        {
+          "t": "FACT",
+          "text": "Season: Winter | Weather: 58°F clear, W 8 mph, clear (frontState CLEAR), humidity 56, visibility 10",
+          "src": "World_Config/weather snapshot for C113",
+          "id": "F-3bdb2a72e3d1"
+        },
+        {
+          "t": "FACT",
+          "text": "A medical team rushes to an emergency on the sidewalk, drawing a small crowd. The usual lunch spot is suddenly closed, with a notice taped to the door.",
+          "src": "output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+          "id": "F-1d30d0c91c34"
+        },
+        {
+          "t": "FACT",
+          "text": "Wren Choi (POP-01137) — role: Youth mentor; neighborhood: Glenview; born: 1999; careerStage: mid-career; wealth: 4; tier: 4",
+          "src": "Simulation_Ledger profile for POP-01137",
+          "id": "F-d2da469f01e2"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C9, Winter, holiday=none",
+          "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+          "id": "F-ab9d6786094e"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  }
+]

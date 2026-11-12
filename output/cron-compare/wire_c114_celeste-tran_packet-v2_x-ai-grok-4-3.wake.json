@@ -1,0 +1,57 @@
+{
+  "mode": "wake-write",
+  "desk": "wire",
+  "cycle": "114",
+  "provider": "openrouter",
+  "model": "x-ai/grok-4.3",
+  "configuredWriterModel": "x-ai/grok-4.3",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "celeste-tran",
+  "byline": {
+    "name": "Celeste Tran",
+    "popid": "POP-00164",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 28,
+  "quotesLanded": 4,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [],
+  "toolCalls": 0,
+  "wordCount": 444,
+  "targetWords": "400-700",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 400",
+    "words": 444,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "7442d2266d51de083b727672b063279f2bbd6e8bc7b1a85b69a9c058aba3ae57",
+    "costUsd": 0.0009
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 4/4 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/wire_c114_celeste-tran_packet-v2_x-ai-grok-4-3.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "x.com]\n{\n  \"popId\": \"POP-00164\",\n  \"name\": \"Celeste Tran\",\n  \"recorded\": true,\n  \"text\": \"filed: West Oakland added nineteen residents this cycle while Vinnie Keane’s mentions climbed to six. Henry\"\n}"
+  },
+  "ranAt": "2026-11-07T00:19:08.249Z",
+  "dispositionReconciledAt": "2026-11-07T18:00:02.746Z"
+}

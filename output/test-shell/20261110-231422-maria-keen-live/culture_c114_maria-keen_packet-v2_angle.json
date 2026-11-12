@@ -1,0 +1,1334 @@
+{
+  "stage": "angle",
+  "desk": "culture",
+  "cycle": "114",
+  "persona": "maria-keen",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00013",
+      "name": "Maria Keen",
+      "role": "desk reporter",
+      "desk": "culture"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Temescal — the programs that hold the block and the people who founded them",
+      "approach": "Neighborhood approach: this slice is one block's record — its community programs and their founders, who is moving in or out, who the block has in a hospital bed or in custody, what it paid on tax day, whose debts crossed the line, and the city's neighborhood hooks this cycle. First-person witness, one block one truth. The programs, founders, movement numbers, patients, defendants and money lines are real; the stoop conversations, the mailboxes, the dog everyone knows are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "neighborhood",
+        "hood": "Temescal",
+        "facts": [
+          "Temescal Islamic Center Food Pantry (mutual-aid), Temescal, since C83",
+          "The Reaves Line Transit Fund (transit), Temescal — founded by Austin Reaves, since C109",
+          "Temescal this cycle: 313 students, 2,131 adults, 298 seniors — moved vs C113: +6 adults",
+          "Temescal: 8 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+          "Temescal: 86 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked"
+        ],
+        "priorCycle": "PRIOR_CYCLE_ON_DISK",
+        "note": null,
+        "engineHooks": [
+          "First Friday: Monthly art walk tonight. Gallery openings, street vendors, neighborhood energy. Photo walk opportunity. (desk rotation)",
+          "Vince Okoye and Idalia Okonkwo — a friendship turned into something more (observational analysis)",
+          "Isabel Lopes and Shawn Neighbor — a friendship turned into something more (observational analysis)",
+          "Household in Lake Merritt spending 53% of income on housing (observational analysis)"
+        ],
+        "roomIsYours": "the stoop, the corner store counter, who moved in last month and who is thinking about leaving, what the block argues about",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-neighborhood",
+      "hood": "Temescal",
+      "score": null,
+      "src": "output/beats/Community_Programs.jsonl @C114",
+      "nearby": [
+        {
+          "text": "Grand Lake neighborhood texture — how residents experience the improvement | Residents of Grand Lake feel the change firsthand.",
+          "src": "output/engine_audit_c114.json patterns[5]; evidence: Initiative_Tracker row(s) 9; storyline INIT-009:announced"
+        },
+        {
+          "text": "Chinatown | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c114.md \"### Chinatown\"; events: world_summary_c114.md \"## World Events\""
+        },
+        {
+          "text": "Downtown | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c114.md \"### Downtown\"; events: world_summary_c114.md \"## World Events\""
+        },
+        {
+          "text": "East Oakland | 2 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c114.md \"### East Oakland\"; events: world_summary_c114.md \"## World Events\""
+        },
+        {
+          "text": "Lake Merritt | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c114.md \"### Lake Merritt\"; events: world_summary_c114.md \"## World Events\""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-01027",
+          "name": "Austin Reaves",
+          "profile": "Austin Reaves — SG / The Oaks — West Oakland",
+          "role": "SG / The Oaks",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Community_Programs.jsonl @C114",
+            "pop": "POP-01027",
+            "rowName": "Austin Reaves",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01095",
+          "name": "Helena Voss-Adeyemi",
+          "profile": "Helena Voss-Adeyemi — Managing Partner, Northgate Construction",
+          "role": "Managing Partner, Northgate Construction",
+          "hood": "Rockridge",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 114,
+            "tag": "Neighborhood-Openness-Up-S",
+            "line": "Y3C10 — [Neighborhood-Openness-Up-S] walked north across the Temescal line and watched the storefronts change",
+            "highlightKind": "hood",
+            "entity": "Temescal",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00038",
+          "name": "Theo Park",
+          "profile": "Theo Park — Communications Director",
+          "role": "Communications Director",
+          "hood": "Rockridge",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "LSTk8ML7HriPSR5kvsqmF3",
+            "customId": "cp-POP-00038-c102-PRESS",
+            "cycle": 102,
+            "excerpt": "You know, I was just thinking about this yesterday while waiting in line at Temescal Brewing.",
+            "highlightKind": "hood",
+            "entity": "Temescal",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00042",
+          "name": "Ramon Vega",
+          "profile": "Ramon Vega — City Council President - D1",
+          "role": "City Council President - D1",
+          "hood": "Lake Merritt",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "h6zEfGA8fbeknJ8gB654JE",
+            "customId": "cp-POP-00042-c111-midday",
+            "cycle": 111,
+            "excerpt": "But if I called him tonight about the Temescal clinic renderings, he'd pick up on the second ring, and that's worth more than a hundred handshakes.",
+            "highlightKind": "hood",
+            "entity": "Temescal",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00169",
+          "name": "Brie Harris",
+          "profile": "Brie Harris — Flower Shop Owner",
+          "role": "Flower Shop Owner",
+          "hood": "Temescal",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "uXToxmGoGEjthnc7q7xSKX",
+            "customId": "cp-POP-00169-c114-PRESS-mon-affdhg",
+            "cycle": 114,
+            "excerpt": "To be honest, having a place of my own in Temescal has been a game-changer.",
+            "highlightKind": "hood",
+            "entity": "Temescal",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00170",
+          "name": "Melton Neilon",
+          "profile": "Melton Neilon — Sourdough Baker",
+          "role": "Sourdough Baker",
+          "hood": "Temescal",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "WYUMismkzFTK1BqJq8eSKJ",
+            "customId": "cp-POP-00170-c107-night",
+            "cycle": 107,
+            "excerpt": "I always end up at that little bench outside Temescal Alley, even when it’s late.",
+            "highlightKind": "hood",
+            "entity": "Temescal",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00175",
+          "name": "Sara Copper",
+          "profile": "Sara Copper — Theater Director",
+          "role": "Theater Director",
+          "hood": "Temescal",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "C2ASN39iUisYg8KKe5SjwY",
+            "customId": "cp-POP-00175-c100-afternoon",
+            "cycle": 100,
+            "excerpt": "I always find myself drawn to Temescal Alley, even if I don’t need anything.",
+            "highlightKind": "hood",
+            "entity": "Temescal",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00190",
+          "name": "Jackson Sift",
+          "profile": "Jackson Sift — Ex-Offender Reentry Counselor",
+          "role": "Ex-Offender Reentry Counselor",
+          "hood": "West Oakland",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "ajbg29ybL8z4b7gciL9T1K",
+            "customId": "cp-POP-00190-c109-PRESS",
+            "cycle": 109,
+            "excerpt": "I was talking to some folks last night and they mentioned the Temescal Holiday Market, it sounds like a great way for the community to come together.",
+            "highlightKind": "hood",
+            "entity": "Temescal",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00206",
+          "name": "Omar Lingio",
+          "profile": "Omar Lingio — Vintage Clothing Store Owner",
+          "role": "Vintage Clothing Store Owner",
+          "hood": "Temescal",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "KZQkFutFDqaeaK3J7cpZxe",
+            "customId": "cp-POP-00206-c109-PRESS",
+            "cycle": 109,
+            "excerpt": "You know, it's moments like those that remind me why I love Temescal so much.",
+            "highlightKind": "hood",
+            "entity": "Temescal",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00213",
+          "name": "Davey Martinez",
+          "profile": "Davey Martinez — Maintenance tech",
+          "role": "Maintenance tech",
+          "hood": "Temescal",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "LjgahH58H3QxWNkKxBEUjZ",
+            "customId": "cp-POP-00213-c103-evening",
+            "cycle": 103,
+            "excerpt": "I head over to that little bench near Temescal Alley, the one tucked just out of the main flow of foot traffic.",
+            "highlightKind": "hood",
+            "entity": "Temescal",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00221",
+          "name": "Broderick Mitchell",
+          "profile": "Broderick Mitchell — Security guard",
+          "role": "Security guard",
+          "hood": "Rockridge",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "866JGAgr3x2zfDn1STGapD",
+            "customId": "cp-POP-00221-c100-evening",
+            "cycle": 100,
+            "excerpt": "I walk down to that little stretch of grass by the Temescal Library—not the busy part with the benches, but around back where the old oak leans heavy.",
+            "highlightKind": "hood",
+            "entity": "Temescal",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00228",
+          "name": "Javier Robertson",
+          "profile": "Javier Robertson — Delivery driver",
+          "role": "Delivery driver",
+          "hood": "Temescal",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "R3GXHmRP844oMomhy5veEE",
+            "customId": "cp-POP-00228-c102-midday",
+            "cycle": 102,
+            "excerpt": "That tree's been there longer than me, longer than most of us in Temescal, just doing its thing without needing an audience.",
+            "highlightKind": "hood",
+            "entity": "Temescal",
+            "predicate": "observe"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C114",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-4261fa115617"
+      },
+      {
+        "t": "FACT",
+        "text": "Temescal: 2 active programs on the record",
+        "src": "output/beats/Community_Programs.jsonl @C114",
+        "id": "F-f468dc5d926c"
+      },
+      {
+        "t": "FACT",
+        "text": "2 active programs in Temescal; Austin Reaves founded one.",
+        "src": "output/beats/Community_Programs.jsonl @C114",
+        "id": "F-047875521911"
+      },
+      {
+        "t": "FACT",
+        "text": "Temescal Islamic Center Food Pantry (mutual-aid), Temescal, since C83",
+        "src": "output/beats/Community_Programs.jsonl @C114 PRG-026",
+        "id": "F-7c20691ce8ba"
+      },
+      {
+        "t": "FACT",
+        "text": "The Reaves Line Transit Fund (transit), Temescal — founded by Austin Reaves, since C109",
+        "src": "output/beats/Community_Programs.jsonl @C114 PRG-032",
+        "id": "F-c73e7a1d4c67"
+      },
+      {
+        "t": "FACT",
+        "text": "Temescal this cycle: 313 students, 2,131 adults, 298 seniors — moved vs C113: +6 adults",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C114 vs prev/",
+        "id": "F-66def05dff07"
+      },
+      {
+        "t": "FACT",
+        "text": "Temescal: 8 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl @C114 judicial Temescal",
+        "id": "F-8501821afd98"
+      },
+      {
+        "t": "FACT",
+        "text": "Temescal: 86 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl @C114 hospital Temescal",
+        "id": "F-d81ee323aced"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "street",
+    "candidates": [
+      {
+        "pop": "POP-01027",
+        "name": "Austin Reaves",
+        "role": "SG / The Oaks",
+        "hood": "West Oakland",
+        "profile": "Austin Reaves — SG / The Oaks — West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Community_Programs.jsonl @C114",
+          "pop": "POP-01027",
+          "rowName": "Austin Reaves",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01095",
+        "name": "Helena Voss-Adeyemi",
+        "role": "Managing Partner, Northgate Construction",
+        "hood": "Rockridge",
+        "profile": "Helena Voss-Adeyemi — Managing Partner, Northgate Construction",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 114,
+          "tag": "Neighborhood-Openness-Up-S",
+          "line": "Y3C10 — [Neighborhood-Openness-Up-S] walked north across the Temescal line and watched the storefronts change",
+          "highlightKind": "hood",
+          "entity": "Temescal",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C10 — [Neighborhood-Openness-Up-S] walked north across the Temescal line and watched the storefronts change"
+      },
+      {
+        "pop": "POP-00038",
+        "name": "Theo Park",
+        "role": "Communications Director",
+        "hood": "Rockridge",
+        "profile": "Theo Park — Communications Director",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "LSTk8ML7HriPSR5kvsqmF3",
+          "customId": "cp-POP-00038-c102-PRESS",
+          "cycle": 102,
+          "excerpt": "You know, I was just thinking about this yesterday while waiting in line at Temescal Brewing.",
+          "highlightKind": "hood",
+          "entity": "Temescal",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "You know, I was just thinking about this yesterday while waiting in line at Temescal Brewing."
+      },
+      {
+        "pop": "POP-00042",
+        "name": "Ramon Vega",
+        "role": "City Council President - D1",
+        "hood": "Lake Merritt",
+        "profile": "Ramon Vega — City Council President - D1",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "h6zEfGA8fbeknJ8gB654JE",
+          "customId": "cp-POP-00042-c111-midday",
+          "cycle": 111,
+          "excerpt": "But if I called him tonight about the Temescal clinic renderings, he'd pick up on the second ring, and that's worth more than a hundred handshakes.",
+          "highlightKind": "hood",
+          "entity": "Temescal",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "But if I called him tonight about the Temescal clinic renderings, he'd pick up on the second ring, and that's worth more than a hundred handshakes."
+      },
+      {
+        "pop": "POP-00169",
+        "name": "Brie Harris",
+        "role": "Flower Shop Owner",
+        "hood": "Temescal",
+        "profile": "Brie Harris — Flower Shop Owner",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "uXToxmGoGEjthnc7q7xSKX",
+          "customId": "cp-POP-00169-c114-PRESS-mon-affdhg",
+          "cycle": 114,
+          "excerpt": "To be honest, having a place of my own in Temescal has been a game-changer.",
+          "highlightKind": "hood",
+          "entity": "Temescal",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "To be honest, having a place of my own in Temescal has been a game-changer."
+      },
+      {
+        "pop": "POP-00170",
+        "name": "Melton Neilon",
+        "role": "Sourdough Baker",
+        "hood": "Temescal",
+        "profile": "Melton Neilon — Sourdough Baker",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "WYUMismkzFTK1BqJq8eSKJ",
+          "customId": "cp-POP-00170-c107-night",
+          "cycle": 107,
+          "excerpt": "I always end up at that little bench outside Temescal Alley, even when it’s late.",
+          "highlightKind": "hood",
+          "entity": "Temescal",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I always end up at that little bench outside Temescal Alley, even when it’s late."
+      },
+      {
+        "pop": "POP-00175",
+        "name": "Sara Copper",
+        "role": "Theater Director",
+        "hood": "Temescal",
+        "profile": "Sara Copper — Theater Director",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "C2ASN39iUisYg8KKe5SjwY",
+          "customId": "cp-POP-00175-c100-afternoon",
+          "cycle": 100,
+          "excerpt": "I always find myself drawn to Temescal Alley, even if I don’t need anything.",
+          "highlightKind": "hood",
+          "entity": "Temescal",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I always find myself drawn to Temescal Alley, even if I don’t need anything."
+      },
+      {
+        "pop": "POP-00190",
+        "name": "Jackson Sift",
+        "role": "Ex-Offender Reentry Counselor",
+        "hood": "West Oakland",
+        "profile": "Jackson Sift — Ex-Offender Reentry Counselor",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "ajbg29ybL8z4b7gciL9T1K",
+          "customId": "cp-POP-00190-c109-PRESS",
+          "cycle": 109,
+          "excerpt": "I was talking to some folks last night and they mentioned the Temescal Holiday Market, it sounds like a great way for the community to come together.",
+          "highlightKind": "hood",
+          "entity": "Temescal",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I was talking to some folks last night and they mentioned the Temescal Holiday Market, it sounds like a great way for the community to come together."
+      },
+      {
+        "pop": "POP-00206",
+        "name": "Omar Lingio",
+        "role": "Vintage Clothing Store Owner",
+        "hood": "Temescal",
+        "profile": "Omar Lingio — Vintage Clothing Store Owner",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "KZQkFutFDqaeaK3J7cpZxe",
+          "customId": "cp-POP-00206-c109-PRESS",
+          "cycle": 109,
+          "excerpt": "You know, it's moments like those that remind me why I love Temescal so much.",
+          "highlightKind": "hood",
+          "entity": "Temescal",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "You know, it's moments like those that remind me why I love Temescal so much."
+      },
+      {
+        "pop": "POP-00213",
+        "name": "Davey Martinez",
+        "role": "Maintenance tech",
+        "hood": "Temescal",
+        "profile": "Davey Martinez — Maintenance tech",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "LjgahH58H3QxWNkKxBEUjZ",
+          "customId": "cp-POP-00213-c103-evening",
+          "cycle": 103,
+          "excerpt": "I head over to that little bench near Temescal Alley, the one tucked just out of the main flow of foot traffic.",
+          "highlightKind": "hood",
+          "entity": "Temescal",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I head over to that little bench near Temescal Alley, the one tucked just out of the main flow of foot traffic."
+      },
+      {
+        "pop": "POP-00221",
+        "name": "Broderick Mitchell",
+        "role": "Security guard",
+        "hood": "Rockridge",
+        "profile": "Broderick Mitchell — Security guard",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "866JGAgr3x2zfDn1STGapD",
+          "customId": "cp-POP-00221-c100-evening",
+          "cycle": 100,
+          "excerpt": "I walk down to that little stretch of grass by the Temescal Library—not the busy part with the benches, but around back where the old oak leans heavy.",
+          "highlightKind": "hood",
+          "entity": "Temescal",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I walk down to that little stretch of grass by the Temescal Library—not the busy part with the benches, but around back where the old oak leans heavy."
+      },
+      {
+        "pop": "POP-00228",
+        "name": "Javier Robertson",
+        "role": "Delivery driver",
+        "hood": "Temescal",
+        "profile": "Javier Robertson — Delivery driver",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "R3GXHmRP844oMomhy5veEE",
+          "customId": "cp-POP-00228-c102-midday",
+          "cycle": 102,
+          "excerpt": "That tree's been there longer than me, longer than most of us in Temescal, just doing its thing without needing an audience.",
+          "highlightKind": "hood",
+          "entity": "Temescal",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "That tree's been there longer than me, longer than most of us in Temescal, just doing its thing without needing an audience."
+      },
+      {
+        "pop": "POP-00241",
+        "name": "Marc Allie",
+        "role": "Security guard",
+        "hood": "Laurel",
+        "profile": "Marc Allie — Security guard",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "QsnnHj5NfmwnNGspy7XnPz",
+          "customId": "cp-POP-00241-c109-PRESS",
+          "cycle": 109,
+          "excerpt": "I was just walking by and heard some folks talking about the Temescal Holiday Market, sounded like it's going to be a nice event, you know, something to bring the community together.",
+          "highlightKind": "hood",
+          "entity": "Temescal",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I was just walking by and heard some folks talking about the Temescal Holiday Market, sounded like it's going to be a nice event, you know, something to bring the community together."
+      },
+      {
+        "pop": "POP-00286",
+        "name": "Yammie Perez",
+        "role": "Delivery driver",
+        "hood": "Temescal",
+        "profile": "Yammie Perez — Delivery driver",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "Bg1DqNno9MRHe881u286Fy",
+          "customId": "cp-POP-00286-c109-PRESS",
+          "cycle": 109,
+          "excerpt": "I love how Temescal always has this energy, you know?",
+          "highlightKind": "hood",
+          "entity": "Temescal",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I love how Temescal always has this energy, you know?"
+      },
+      {
+        "pop": "POP-00315",
+        "name": "Jahill West",
+        "role": "Hair Stylist",
+        "hood": "Temescal",
+        "profile": "Jahill West — Hair Stylist",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "kxLpzMsPvzFuRHwv7z2Lzo",
+          "customId": "cp-POP-00315-c102-night",
+          "cycle": 102,
+          "excerpt": "I’ve known him since we were kids running around Temescal, but lately, it feels like there’s this distance between us.",
+          "highlightKind": "hood",
+          "entity": "Temescal",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I’ve known him since we were kids running around Temescal, but lately, it feels like there’s this distance between us."
+      },
+      {
+        "pop": "POP-00332",
+        "name": "Diego Remo",
+        "role": "Independent Bookstore Owner",
+        "hood": "Temescal",
+        "profile": "Diego Remo — Independent Bookstore Owner",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "1iQHaAQ2RVQCmAPaTJrVVs",
+          "customId": "cp-POP-00332-c110-CONVO",
+          "cycle": 110,
+          "excerpt": "Funny how Temescal keeps us crossing paths, huh?",
+          "highlightKind": "hood",
+          "entity": "Temescal",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "Funny how Temescal keeps us crossing paths, huh?"
+      },
+      {
+        "pop": "POP-00666",
+        "name": "Kaila Raimon",
+        "role": "Sourdough Baker",
+        "hood": "Brooklyn",
+        "profile": "Kaila Raimon — Sourdough Baker",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "qwGbVZWvxqBB46NwsmQfXH",
+          "customId": "cp-POP-00666-c103-evening",
+          "cycle": 103,
+          "excerpt": "I sit there, sometimes with a coffee, sometimes just my thoughts, and let the rhythm of Temescal settle me.",
+          "highlightKind": "hood",
+          "entity": "Temescal",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I sit there, sometimes with a coffee, sometimes just my thoughts, and let the rhythm of Temescal settle me."
+      },
+      {
+        "pop": "POP-00667",
+        "name": "Lo Thoop",
+        "role": "Creative Writing Teacher",
+        "hood": "Jack London",
+        "profile": "Lo Thoop — Creative Writing Teacher",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "xqTFW7LjYEGJt7yjC47XiK",
+          "customId": "cp-POP-00667-c109-PRESS",
+          "cycle": 109,
+          "excerpt": "You know, living here in Temescal, I’ve seen kids graduate—they walk across that stage, families cheering—but then there’s this quiet worry afterward.",
+          "highlightKind": "hood",
+          "entity": "Temescal",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "You know, living here in Temescal, I’ve seen kids graduate—they walk across that stage, families cheering—but then there’s this quiet worry afterward."
+      },
+      {
+        "pop": "POP-00741",
+        "name": "Hector Navarro",
+        "role": "HVAC Technician",
+        "hood": "Temescal",
+        "profile": "Hector Navarro — HVAC Technician",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "5b8dpYsxjmP2SCPv7JUp8K",
+          "customId": "cp-POP-00741-c102-CONVO",
+          "cycle": 102,
+          "excerpt": "Actually, just yesterday I was browsing the Temescal Alley shops—always something new to discover there.",
+          "highlightKind": "hood",
+          "entity": "Temescal",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "Actually, just yesterday I was browsing the Temescal Alley shops—always something new to discover there."
+      },
+      {
+        "pop": "POP-00859",
+        "name": "Tatiana Flores",
+        "role": "HVAC Technician",
+        "hood": "KONO",
+        "profile": "Tatiana Flores — HVAC Technician",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "sREcUZptxFUfuN5MJ1fcqA",
+          "customId": "cp-POP-00859-c102-PRESS",
+          "cycle": 102,
+          "excerpt": "I’ve lived in Oakland my whole life, but when the rent in Temescal kept climbing, I had to make the tough decision to leave.",
+          "highlightKind": "hood",
+          "entity": "Temescal",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I’ve lived in Oakland my whole life, but when the rent in Temescal kept climbing, I had to make the tough decision to leave."
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Maria Keen",
+    "popid": "POP-00013"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-neighborhood",
+      "angle": "Temescal — the programs that hold the block and the people who founded them",
+      "label": "Temescal: 2 active programs on the record",
+      "hookLine": "2 active programs in Temescal; Austin Reaves founded one.",
+      "hood": "Temescal",
+      "citizens": [
+        "Austin Reaves (POP-01027)"
+      ],
+      "popids": [
+        "POP-01027"
+      ],
+      "ref": "output/beats/Community_Programs.jsonl @C114",
+      "cycle": 114
+    },
+    "approach": "Neighborhood approach: this slice is one block's record — its community programs and their founders, who is moving in or out, who the block has in a hospital bed or in custody, what it paid on tax day, whose debts crossed the line, and the city's neighborhood hooks this cycle. First-person witness, one block one truth. The programs, founders, movement numbers, patients, defendants and money lines are real; the stoop conversations, the mailboxes, the dog everyone knows are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": {
+    "pulse": {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Vinnie Keane at Grand Avenue Wine Bar (Lake Merritt)",
+      "named": "Grand Avenue Wine Bar",
+      "hood": "Lake Merritt",
+      "person": "Vinnie Keane",
+      "venue": "Grand Avenue Wine Bar"
+    },
+    "recommend": {
+      "bag": "ground",
+      "slug": "maria-keen",
+      "name": "Maria Keen",
+      "popid": "POP-00013",
+      "bagDoc": "docs/media/MARIA_GROUND_BAG.md",
+      "reason": "top pulse fame-sighting → ground",
+      "pulseClass": "fame-sighting",
+      "pulseLabel": "Vinnie Keane at Grand Avenue Wine Bar (Lake Merritt)"
+    },
+    "prewrite": {
+      "pulseClass": "fame-sighting",
+      "angle": "Vinnie Keane spotted at Grand Avenue Wine Bar in Lake Merritt — ground truth only, no invented companions",
+      "hookLine": "sighting | Vinnie Keane spotted at Grand Avenue Wine Bar",
+      "anchorFacts": [
+        "NAMED: Grand Avenue Wine Bar",
+        "PERSON: Vinnie Keane",
+        "VENUE: Grand Avenue Wine Bar",
+        "HOOD: Lake Merritt",
+        "PERSON: Vinnie Keane",
+        "VENUE: Grand Avenue Wine Bar",
+        "HOOD: Lake Merritt"
+      ],
+      "bagRecommend": "ground",
+      "bagSlug": "maria-keen"
+    },
+    "texture": {
+      "famous": [
+        "Vinnie Keane",
+        "Henry Rivas",
+        "Kai Tanaka"
+      ],
+      "restaurants": [
+        {
+          "name": "Grand Avenue Wine Bar",
+          "hood": "Lake Merritt"
+        },
+        {
+          "name": "Montclair Patisserie",
+          "hood": "Piedmont Ave"
+        },
+        {
+          "name": "Green & Gold Tavern",
+          "hood": "Jack London"
+        }
+      ],
+      "fastFood": [
+        {
+          "name": "SpeedyBurger",
+          "hood": "Downtown"
+        }
+      ],
+      "nightlife": [
+        {
+          "name": "Bridge & Barrel",
+          "hood": "Jack London"
+        },
+        {
+          "name": "Temple Lounge",
+          "hood": "Downtown"
+        },
+        {
+          "name": "Canvas Club",
+          "hood": "Temescal"
+        }
+      ],
+      "nightlifeMeta": {
+        "volume": 5,
+        "vibe": "art-scene",
+        "movement": "art-walk",
+        "weatherImpact": 1
+      },
+      "cityEvents": [
+        "The Aitken Line Founding Celebration",
+        "Downtown Plaza Noon Music Session",
+        "Downtown First Friday Live Music",
+        "KONO First Friday Gallery Hop"
+      ],
+      "tv": [
+        "Gallery Hour",
+        "Crisis Desk",
+        "Spring Lineup",
+        "Jack London Ballpark Stories",
+        "Wendell Carter Jr (C) — Player Profile"
+      ],
+      "movies": [
+        "Art of the City",
+        "New Bloom",
+        "Franchise"
+      ],
+      "sportsBroadcast": "Oakland Sports Tonight",
+      "streamingTrend": "arts documentaries",
+      "foodTrend": "First Friday arts district dining - gallery crowd"
+    },
+    "signals": {
+      "fameCount": 8,
+      "sightingCount": 3,
+      "sightings": [
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Vinnie Keane spotted at Grand Avenue Wine Bar",
+          "name": "Vinnie Keane",
+          "venue": "Grand Avenue Wine Bar",
+          "ref": "Ripple_Ledger cycle 114 (CauseType lifestyle-sighting); rendered: world_summary_c114.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Lake Merritt",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Henry Rivas spotted at Calderon-Nishi",
+          "name": "Henry Rivas",
+          "venue": "Calderon-Nishi",
+          "ref": "Ripple_Ledger cycle 114 (CauseType lifestyle-sighting); rendered: world_summary_c114.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Temescal",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Kai Tanaka spotted at Temescal Urgent Care",
+          "name": "Kai Tanaka",
+          "venue": "Temescal Urgent Care",
+          "ref": "Ripple_Ledger cycle 114 (CauseType lifestyle-sighting); rendered: world_summary_c114.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Temescal",
+          "popids": []
+        }
+      ]
+    },
+    "scene": {
+      "venues": [
+        {
+          "name": "Grand Avenue Wine Bar",
+          "hood": "Lake Merritt"
+        },
+        {
+          "name": "Montclair Patisserie",
+          "hood": "Piedmont Ave"
+        },
+        {
+          "name": "Green & Gold Tavern",
+          "hood": "Jack London"
+        },
+        {
+          "name": "SpeedyBurger",
+          "hood": "Downtown"
+        },
+        {
+          "name": "Bridge & Barrel",
+          "hood": "Jack London"
+        },
+        {
+          "name": "Temple Lounge",
+          "hood": "Downtown"
+        },
+        {
+          "name": "Canvas Club",
+          "hood": "Temescal"
+        }
+      ],
+      "nightlifeMeta": {
+        "volume": 5,
+        "vibe": "art-scene",
+        "movement": "art-walk",
+        "weatherImpact": 1
+      },
+      "cityEvents": [
+        "The Aitken Line Founding Celebration",
+        "Downtown Plaza Noon Music Session",
+        "Downtown First Friday Live Music",
+        "KONO First Friday Gallery Hop"
+      ],
+      "tv": [
+        "Gallery Hour",
+        "Crisis Desk",
+        "Spring Lineup",
+        "Jack London Ballpark Stories",
+        "Wendell Carter Jr (C) — Player Profile"
+      ],
+      "movies": [
+        "Art of the City",
+        "New Bloom",
+        "Franchise"
+      ],
+      "colorRoom": "Named places only from Evening Texture / desk_signal.  Sensory room (weather, light, sound) is free; careers and employees are not."
+    },
+    "candidates": [
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Vinnie Keane at Grand Avenue Wine Bar (Lake Merritt)",
+        "named": "Grand Avenue Wine Bar",
+        "hood": "Lake Merritt"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Henry Rivas at Calderon-Nishi (Temescal)",
+        "named": "Calderon-Nishi",
+        "hood": "Temescal"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Kai Tanaka at Temescal Urgent Care (Temescal)",
+        "named": "Temescal Urgent Care",
+        "hood": "Temescal"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Grand Avenue Wine Bar (Lake Merritt)",
+        "named": "Grand Avenue Wine Bar",
+        "hood": "Lake Merritt"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Montclair Patisserie (Piedmont Ave)",
+        "named": "Montclair Patisserie",
+        "hood": "Piedmont Ave"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Green & Gold Tavern (Jack London)",
+        "named": "Green & Gold Tavern",
+        "hood": "Jack London"
+      },
+      {
+        "className": "nightlife-spot",
+        "score": 18,
+        "label": "Bridge & Barrel (Jack London)",
+        "named": "Bridge & Barrel",
+        "hood": "Jack London"
+      },
+      {
+        "className": "nightlife-spot",
+        "score": 18,
+        "label": "Temple Lounge (Downtown)",
+        "named": "Temple Lounge",
+        "hood": "Downtown"
+      }
+    ],
+    "perSeat": {
+      "mason-ortega": {
+        "pulseClass": "named-restaurant",
+        "label": "Grand Avenue Wine Bar (Lake Merritt)",
+        "score": 34,
+        "bag": "kitchen"
+      },
+      "kai-marston": {
+        "pulseClass": "city-event",
+        "label": "Downtown Plaza Noon Music Session",
+        "score": 31,
+        "bag": "arts"
+      },
+      "sharon-okafor": {
+        "pulseClass": "fame-sighting",
+        "label": "Vinnie Keane at Grand Avenue Wine Bar (Lake Merritt)",
+        "score": 31,
+        "bag": "lifestyle"
+      },
+      "maria-keen": {
+        "pulseClass": "fame-sighting",
+        "label": "Vinnie Keane at Grand Avenue Wine Bar (Lake Merritt)",
+        "score": 31,
+        "bag": "ground"
+      },
+      "elliot-graye": {
+        "pulseClass": "fame-sighting",
+        "label": "Vinnie Keane at Grand Avenue Wine Bar (Lake Merritt)",
+        "score": 31,
+        "bag": "faith"
+      }
+    }
+  },
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "HOOD-SLICE-3",
+    "kind": "beat-neighborhood",
+    "seat": {
+      "slug": "maria-keen",
+      "name": "Maria Keen",
+      "popid": "POP-00013",
+      "desk": "culture",
+      "domain": "neighborhood",
+      "builder": "buildNeighborhoodSlice.js"
+    },
+    "hood": "Temescal",
+    "pulse": {
+      "className": "beat-neighborhood",
+      "score": 100,
+      "label": "Temescal: 2 active programs on the record",
+      "hood": "Temescal",
+      "source": "output/beats/Community_Programs.jsonl @C114"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "Temescal — the programs that hold the block and the people who founded them",
+      "hookLine": "2 active programs in Temescal; Austin Reaves founded one.",
+      "anchorFacts": [
+        "Temescal Islamic Center Food Pantry (mutual-aid), Temescal, since C83",
+        "The Reaves Line Transit Fund (transit), Temescal — founded by Austin Reaves, since C109",
+        "Temescal this cycle: 313 students, 2,131 adults, 298 seniors — moved vs C113: +6 adults",
+        "Temescal: 8 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+        "Temescal: 86 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked"
+      ],
+      "evidence": [
+        {
+          "text": "Temescal Islamic Center Food Pantry (mutual-aid), Temescal, since C83",
+          "src": "output/beats/Community_Programs.jsonl @C114 PRG-026"
+        },
+        {
+          "text": "The Reaves Line Transit Fund (transit), Temescal — founded by Austin Reaves, since C109",
+          "src": "output/beats/Community_Programs.jsonl @C114 PRG-032"
+        },
+        {
+          "text": "Temescal this cycle: 313 students, 2,131 adults, 298 seniors — moved vs C113: +6 adults",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C114 vs prev/"
+        },
+        {
+          "text": "Temescal: 8 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl @C114 judicial Temescal"
+        },
+        {
+          "text": "Temescal: 86 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl @C114 hospital Temescal"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": {
+        "state": "PRIOR_CYCLE_ON_DISK",
+        "vs": 113
+      },
+      "hooks": [
+        {
+          "text": "First Friday: Monthly art walk tonight. Gallery openings, street vendors, neighborhood energy. Photo walk opportunity.",
+          "angle": "desk rotation",
+          "domain": "CULTURE",
+          "hood": "Uptown",
+          "priority": 2
+        },
+        {
+          "text": "Vince Okoye and Idalia Okonkwo — a friendship turned into something more",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Lake Merritt",
+          "priority": 3
+        },
+        {
+          "text": "Isabel Lopes and Shawn Neighbor — a friendship turned into something more",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Fruitvale",
+          "priority": 3
+        },
+        {
+          "text": "Household in Lake Merritt spending 53% of income on housing",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Lake Merritt",
+          "priority": 6
+        },
+        {
+          "text": "the debts crossed a line this week — sleep comes harder now",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Fruitvale",
+          "priority": 3
+        },
+        {
+          "text": "Downtown boom sustained — momentum 10/10, the block everyone wants onto",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Downtown",
+          "priority": 7
+        },
+        {
+          "text": "Jack London boom sustained — momentum 10/10, the block everyone wants onto",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Jack London",
+          "priority": 7
+        },
+        {
+          "text": "Uptown boom sustained — momentum 10/10, the block everyone wants onto",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Uptown",
+          "priority": 7
+        }
+      ],
+      "note": null,
+      "pageVoices": [],
+      "roomIsYours": "the stoop, the corner store counter, who moved in last month and who is thinking about leaving, what the block argues about"
+    },
+    "citizens": [
+      {
+        "popid": "POP-01027",
+        "name": "Austin Reaves",
+        "role": "SG / The Oaks",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "Austin Reaves — SG / The Oaks — West Oakland",
+        "why": "founded The Reaves Line Transit Fund (Community_Programs)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Community_Programs.jsonl @C114",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Maria Keen this cycle)"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Maria Keen",
+    "popid": "POP-00013",
+    "text": "I'm heading to Temescal to get a pulse on the community programs and their founders. I'll start by visiting the Temescal Islamic Center Food Pantry and talking to Austin Reaves about The Reaves Line Transit Fund. I want to understand how these programs are impacting the neighborhood and what challenges they're facing.",
+    "plan": {
+      "chase": "I'm heading to Temescal to get a pulse on the community programs and their founders. I'll start by visiting the Temescal Islamic Center Food Pantry and talking to Austin Reaves about The Reaves Line Transit Fund. I want to understand how these programs are impacting the neighborhood and what challenges they're facing.",
+      "focus": "Community programs in Temescal",
+      "why": "To understand the role of community programs in Temescal and their impact on the neighborhood",
+      "checks": [
+        "Verify the founders of the community programs",
+        "Assess the impact of the programs on the neighborhood"
+      ],
+      "targets": [
+        {
+          "pop": "POP-01027",
+          "question": "What's the story behind The Reaves Line Transit Fund and its impact on Temescal?",
+          "basis": "Austin Reaves is the founder of The Reaves Line Transit Fund"
+        },
+        {
+          "pop": "POP-00169",
+          "question": "How do local business owners perceive the community programs in Temescal?",
+          "basis": "Brie Harris is a Flower Shop Owner in Temescal"
+        }
+      ],
+      "interpretation": "The community programs in Temescal seem to be playing a vital role in the neighborhood, and understanding their impact will be crucial to capturing the essence of the community.",
+      "unverifiedLead": [
+        "The growth in adult population in Temescal could be related to the community programs",
+        "The low number of tracked residents in custody or care might indicate effective support systems"
+      ],
+      "closeQuestion": "How do the community programs in Temescal contribute to the neighborhood's overall well-being?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Grand Lake neighborhood texture — how residents experience the improvement | Residents of Grand Lake feel the change firsthand.",
+      "kind": "anomaly",
+      "hood": "Grand Lake",
+      "ref": "output/engine_audit_c114.json patterns[5]; evidence: Initiative_Tracker row(s) 9; storyline INIT-009:announced",
+      "popids": [
+        "POP-00001",
+        "POP-01049",
+        "POP-01218"
+      ]
+    },
+    {
+      "label": "Chinatown | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Chinatown",
+      "ref": "output/neighborhood_texture_c114.md \"### Chinatown\"; events: world_summary_c114.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Downtown | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Downtown",
+      "ref": "output/neighborhood_texture_c114.md \"### Downtown\"; events: world_summary_c114.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "East Oakland | 2 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "East Oakland",
+      "ref": "output/neighborhood_texture_c114.md \"### East Oakland\"; events: world_summary_c114.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Lake Merritt | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Lake Merritt",
+      "ref": "output/neighborhood_texture_c114.md \"### Lake Merritt\"; events: world_summary_c114.md \"## World Events\"",
+      "popids": []
+    }
+  ],
+  "laneEntries": 28,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-06T12:16:37.318Z"
+}

@@ -1,0 +1,60 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "113",
+  "persona": "elliot-marbury",
+  "byline": "Elliot Marbury",
+  "bylinePopid": "POP-00166",
+  "article": "output/cron-compare/staged/sports_c113_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Frank Reyna",
+        "role": "mentioned",
+        "popid": "POP-00079",
+        "floor": true
+      },
+      {
+        "name": "Vladimir Gonzalez",
+        "role": "mentioned",
+        "popid": "POP-00598",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "Vladimir Gonzalez — 3 seasons on the dossier, 2039 the latest — hitter density memo, multi-year",
+        "sourceRef": "output/player_truesource_mirror.json Vladimir Gonzalez @C113"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-028290a81cd2",
+    "draftSha256": "a2cef5ac747269ed938ee947016df6cb1e9fc4bf0fcd1fcc6a5ae04eea8ca07f",
+    "verdict": "output/cron-compare/sports_c113_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-10-28T23:17:26.329Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 350",
+      "words": 699,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "a2cef5ac747269ed938ee947016df6cb1e9fc4bf0fcd1fcc6a5ae04eea8ca07f",
+      "costUsd": 0.0017
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-28T23:17:32.325Z"
+}

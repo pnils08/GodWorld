@@ -1,0 +1,547 @@
+[
+  {
+    "pop": "POP-00263",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00263\",\"name\":\"Omar Amici\",\"role\":\"Construction laborer\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Ines Sorensen\",\"question\":\"How do you feel about the changes in Uptown? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-voices\",\"hood\":\"Jack London\",\"focus\":\"Omar Amici's perspective on neighborhood change\",\"src\":\"output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-24\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Omar Amici — Construction laborer — Uptown\",\"evidence\":[{\"id\":\"EV-e1f149e21c\",\"src\":\"output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-24\",\"text\":\"Open on Bobby Chen-Ramirez's own line, verbatim. Their words are the piece; yours are the frame.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C112\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-7cd6ffd2aeb3\"},{\"t\":\"FACT\",\"text\":\"Bobby Chen-Ramirez in their own words, and 3 more\",\"src\":\"output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-24\",\"id\":\"F-571da882824f\"},{\"t\":\"FACT\",\"text\":\"Open on Bobby Chen-Ramirez's own line, verbatim. Their words are the piece; yours are the frame.\",\"src\":\"output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-24\",\"id\":\"F-e75463349b0c\"},{\"t\":\"FACT\",\"text\":\"“The inspection list is clean again, which means I can sleep. But I keep coming back to that audit report — first cycle, D7 office, public portal. Numbers are the only thing that don't lie to you, but they don't tell you if Mrs. Okafor can actually get her blood pressure checked without taking two buses. We built the damn building, that part's done. Now we've got to prove it works, every quarter, on paper, in public. That's the job now. Fine. I'd rather be accountable than comfortable.” — Bobby\",\"src\":\"output/citizen_pages/index.jsonl cp-POP-00792-c112-work\",\"id\":\"F-fa79e440ec22\"},{\"t\":\"FACT\",\"text\":\"“Four cycles of visioning, and still the same knot in my stomach: we've got the blueprints, the budget line, even the consultant picked—but no vote, no shovels. I keep going back to Doña Esperanza's cart on the renderings, making sure the diagonal path doesn't clip her awning, because that's the part people will actually feel. C86 gave us the mandate, but C108's silence is a reminder that \\\"authorized\\\" isn't \\\"approved.\\\" Tonight I'm just tired of the gap between what we've planned and what the cou\",\"src\":\"output/citizen_pages/index.jsonl cp-POP-00791-c112-work\",\"id\":\"F-8d092084ddd6\"},{\"t\":\"FACT\",\"text\":\"“The C115 review is next week, and I keep coming back to the fact that the soil verification is the one thing we can point to that’s truly done. No more debate about whether the ground is clean — that’s settled. The fence hotline is in place, which is good, but it’s a Band-Aid, not a relationship. People are going to be looking at that fence for years, and I need to remind myself that the response time matters less than what happens after the call. We’ve got contractors on site, work gloves in t\",\"src\":\"output/citizen_pages/index.jsonl cp-POP-00041-c112-work\",\"id\":\"F-cf936e1e30c5\"},{\"t\":\"FACT\",\"text\":\"“Helena, I was just thinkin' about you—how you always tell it to me straight. The coffee pot's acting up again, and I swear it's the little things that get under my skin these days. How's your week treating you? Quiet minutes sound like gold right about now. I spent half the weekend staring at for-rent signs, trying to figure out if this neighborhood's still mine or if I'm just a ghost walking through someone else's plans. You always know how to ground a man. Maybe you're right—maybe stickin' ar\",\"src\":\"output/citizen_pages/index.jsonl cp-POP-00263-c112-CONVO\",\"id\":\"F-06c346cfd3f5\"},{\"t\":\"FACT\",\"text\":\"Omar Amici — Construction laborer — Uptown\",\"src\":\"Simulation_Ledger profile for POP-00263\",\"id\":\"F-49cb41ed222b\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00263",
+        "name": "Omar Amici",
+        "role": "Construction laborer",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Ines Sorensen",
+        "question": "How do you feel about the changes in Uptown? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-voices",
+        "hood": "Jack London",
+        "focus": "Omar Amici's perspective on neighborhood change",
+        "src": "output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-24"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Omar Amici — Construction laborer — Uptown",
+        "evidence": [
+          {
+            "id": "EV-e1f149e21c",
+            "src": "output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-24",
+            "text": "Open on Bobby Chen-Ramirez's own line, verbatim. Their words are the piece; yours are the frame."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C112",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-7cd6ffd2aeb3"
+        },
+        {
+          "t": "FACT",
+          "text": "Bobby Chen-Ramirez in their own words, and 3 more",
+          "src": "output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-24",
+          "id": "F-571da882824f"
+        },
+        {
+          "t": "FACT",
+          "text": "Open on Bobby Chen-Ramirez's own line, verbatim. Their words are the piece; yours are the frame.",
+          "src": "output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-24",
+          "id": "F-e75463349b0c"
+        },
+        {
+          "t": "FACT",
+          "text": "“The inspection list is clean again, which means I can sleep. But I keep coming back to that audit report — first cycle, D7 office, public portal. Numbers are the only thing that don't lie to you, but they don't tell you if Mrs. Okafor can actually get her blood pressure checked without taking two buses. We built the damn building, that part's done. Now we've got to prove it works, every quarter, on paper, in public. That's the job now. Fine. I'd rather be accountable than comfortable.” — Bobby",
+          "src": "output/citizen_pages/index.jsonl cp-POP-00792-c112-work",
+          "id": "F-fa79e440ec22"
+        },
+        {
+          "t": "FACT",
+          "text": "“Four cycles of visioning, and still the same knot in my stomach: we've got the blueprints, the budget line, even the consultant picked—but no vote, no shovels. I keep going back to Doña Esperanza's cart on the renderings, making sure the diagonal path doesn't clip her awning, because that's the part people will actually feel. C86 gave us the mandate, but C108's silence is a reminder that \"authorized\" isn't \"approved.\" Tonight I'm just tired of the gap between what we've planned and what the cou",
+          "src": "output/citizen_pages/index.jsonl cp-POP-00791-c112-work",
+          "id": "F-8d092084ddd6"
+        },
+        {
+          "t": "FACT",
+          "text": "“The C115 review is next week, and I keep coming back to the fact that the soil verification is the one thing we can point to that’s truly done. No more debate about whether the ground is clean — that’s settled. The fence hotline is in place, which is good, but it’s a Band-Aid, not a relationship. People are going to be looking at that fence for years, and I need to remind myself that the response time matters less than what happens after the call. We’ve got contractors on site, work gloves in t",
+          "src": "output/citizen_pages/index.jsonl cp-POP-00041-c112-work",
+          "id": "F-cf936e1e30c5"
+        },
+        {
+          "t": "FACT",
+          "text": "“Helena, I was just thinkin' about you—how you always tell it to me straight. The coffee pot's acting up again, and I swear it's the little things that get under my skin these days. How's your week treating you? Quiet minutes sound like gold right about now. I spent half the weekend staring at for-rent signs, trying to figure out if this neighborhood's still mine or if I'm just a ghost walking through someone else's plans. You always know how to ground a man. Maybe you're right—maybe stickin' ar",
+          "src": "output/citizen_pages/index.jsonl cp-POP-00263-c112-CONVO",
+          "id": "F-06c346cfd3f5"
+        },
+        {
+          "t": "FACT",
+          "text": "Omar Amici — Construction laborer — Uptown",
+          "src": "Simulation_Ledger profile for POP-00263",
+          "id": "F-49cb41ed222b"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00792",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00792\",\"name\":\"Bobby Chen-Ramirez\",\"role\":\"Health Center Project Director\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Ines Sorensen\",\"question\":\"Using only the supplied facts, what about \\\"Omar Amici's perspective on neighborhood change\\\" creates accountability for you, and what answer do you want? Do not claim any past or future official action that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-voices\",\"hood\":\"Jack London\",\"focus\":\"Omar Amici's perspective on neighborhood change\",\"src\":\"output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-24\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Bobby Chen-Ramirez — Health Center Project Director — Jack London\",\"evidence\":[{\"id\":\"EV-32d492439f\",\"src\":\"output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-24\",\"text\":\"Open on Bobby Chen-Ramirez's own line, verbatim. Their words are the piece; yours are the frame.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C112\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-7cd6ffd2aeb3\"},{\"t\":\"FACT\",\"text\":\"Bobby Chen-Ramirez in their own words, and 3 more\",\"src\":\"output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-24\",\"id\":\"F-571da882824f\"},{\"t\":\"FACT\",\"text\":\"Open on Bobby Chen-Ramirez's own line, verbatim. Their words are the piece; yours are the frame.\",\"src\":\"output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-24\",\"id\":\"F-e75463349b0c\"},{\"t\":\"FACT\",\"text\":\"“The inspection list is clean again, which means I can sleep. But I keep coming back to that audit report — first cycle, D7 office, public portal. Numbers are the only thing that don't lie to you, but they don't tell you if Mrs. Okafor can actually get her blood pressure checked without taking two buses. We built the damn building, that part's done. Now we've got to prove it works, every quarter, on paper, in public. That's the job now. Fine. I'd rather be accountable than comfortable.” — Bobby\",\"src\":\"output/citizen_pages/index.jsonl cp-POP-00792-c112-work\",\"id\":\"F-fa79e440ec22\"},{\"t\":\"FACT\",\"text\":\"“Four cycles of visioning, and still the same knot in my stomach: we've got the blueprints, the budget line, even the consultant picked—but no vote, no shovels. I keep going back to Doña Esperanza's cart on the renderings, making sure the diagonal path doesn't clip her awning, because that's the part people will actually feel. C86 gave us the mandate, but C108's silence is a reminder that \\\"authorized\\\" isn't \\\"approved.\\\" Tonight I'm just tired of the gap between what we've planned and what the cou\",\"src\":\"output/citizen_pages/index.jsonl cp-POP-00791-c112-work\",\"id\":\"F-8d092084ddd6\"},{\"t\":\"FACT\",\"text\":\"“The C115 review is next week, and I keep coming back to the fact that the soil verification is the one thing we can point to that’s truly done. No more debate about whether the ground is clean — that’s settled. The fence hotline is in place, which is good, but it’s a Band-Aid, not a relationship. People are going to be looking at that fence for years, and I need to remind myself that the response time matters less than what happens after the call. We’ve got contractors on site, work gloves in t\",\"src\":\"output/citizen_pages/index.jsonl cp-POP-00041-c112-work\",\"id\":\"F-cf936e1e30c5\"},{\"t\":\"FACT\",\"text\":\"“Helena, I was just thinkin' about you—how you always tell it to me straight. The coffee pot's acting up again, and I swear it's the little things that get under my skin these days. How's your week treating you? Quiet minutes sound like gold right about now. I spent half the weekend staring at for-rent signs, trying to figure out if this neighborhood's still mine or if I'm just a ghost walking through someone else's plans. You always know how to ground a man. Maybe you're right—maybe stickin' ar\",\"src\":\"output/citizen_pages/index.jsonl cp-POP-00263-c112-CONVO\",\"id\":\"F-06c346cfd3f5\"},{\"t\":\"FACT\",\"text\":\"Bobby Chen-Ramirez — Health Center Project Director — Jack London\",\"src\":\"Simulation_Ledger profile for POP-00792\",\"id\":\"F-d9ed57d26a94\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00792",
+        "name": "Bobby Chen-Ramirez",
+        "role": "Health Center Project Director",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Ines Sorensen",
+        "question": "Using only the supplied facts, what about \"Omar Amici's perspective on neighborhood change\" creates accountability for you, and what answer do you want? Do not claim any past or future official action that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-voices",
+        "hood": "Jack London",
+        "focus": "Omar Amici's perspective on neighborhood change",
+        "src": "output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-24"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Bobby Chen-Ramirez — Health Center Project Director — Jack London",
+        "evidence": [
+          {
+            "id": "EV-32d492439f",
+            "src": "output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-24",
+            "text": "Open on Bobby Chen-Ramirez's own line, verbatim. Their words are the piece; yours are the frame."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C112",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-7cd6ffd2aeb3"
+        },
+        {
+          "t": "FACT",
+          "text": "Bobby Chen-Ramirez in their own words, and 3 more",
+          "src": "output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-24",
+          "id": "F-571da882824f"
+        },
+        {
+          "t": "FACT",
+          "text": "Open on Bobby Chen-Ramirez's own line, verbatim. Their words are the piece; yours are the frame.",
+          "src": "output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-24",
+          "id": "F-e75463349b0c"
+        },
+        {
+          "t": "FACT",
+          "text": "“The inspection list is clean again, which means I can sleep. But I keep coming back to that audit report — first cycle, D7 office, public portal. Numbers are the only thing that don't lie to you, but they don't tell you if Mrs. Okafor can actually get her blood pressure checked without taking two buses. We built the damn building, that part's done. Now we've got to prove it works, every quarter, on paper, in public. That's the job now. Fine. I'd rather be accountable than comfortable.” — Bobby",
+          "src": "output/citizen_pages/index.jsonl cp-POP-00792-c112-work",
+          "id": "F-fa79e440ec22"
+        },
+        {
+          "t": "FACT",
+          "text": "“Four cycles of visioning, and still the same knot in my stomach: we've got the blueprints, the budget line, even the consultant picked—but no vote, no shovels. I keep going back to Doña Esperanza's cart on the renderings, making sure the diagonal path doesn't clip her awning, because that's the part people will actually feel. C86 gave us the mandate, but C108's silence is a reminder that \"authorized\" isn't \"approved.\" Tonight I'm just tired of the gap between what we've planned and what the cou",
+          "src": "output/citizen_pages/index.jsonl cp-POP-00791-c112-work",
+          "id": "F-8d092084ddd6"
+        },
+        {
+          "t": "FACT",
+          "text": "“The C115 review is next week, and I keep coming back to the fact that the soil verification is the one thing we can point to that’s truly done. No more debate about whether the ground is clean — that’s settled. The fence hotline is in place, which is good, but it’s a Band-Aid, not a relationship. People are going to be looking at that fence for years, and I need to remind myself that the response time matters less than what happens after the call. We’ve got contractors on site, work gloves in t",
+          "src": "output/citizen_pages/index.jsonl cp-POP-00041-c112-work",
+          "id": "F-cf936e1e30c5"
+        },
+        {
+          "t": "FACT",
+          "text": "“Helena, I was just thinkin' about you—how you always tell it to me straight. The coffee pot's acting up again, and I swear it's the little things that get under my skin these days. How's your week treating you? Quiet minutes sound like gold right about now. I spent half the weekend staring at for-rent signs, trying to figure out if this neighborhood's still mine or if I'm just a ghost walking through someone else's plans. You always know how to ground a man. Maybe you're right—maybe stickin' ar",
+          "src": "output/citizen_pages/index.jsonl cp-POP-00263-c112-CONVO",
+          "id": "F-06c346cfd3f5"
+        },
+        {
+          "t": "FACT",
+          "text": "Bobby Chen-Ramirez — Health Center Project Director — Jack London",
+          "src": "Simulation_Ledger profile for POP-00792",
+          "id": "F-d9ed57d26a94"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00791",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00791\",\"name\":\"Elena Soria Dominguez\",\"role\":\"Transit Hub Planning Lead\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Ines Sorensen\",\"question\":\"What have you seen, felt, or understood about \\\"Omar Amici's perspective on neighborhood change\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-voices\",\"hood\":\"Jack London\",\"focus\":\"Omar Amici's perspective on neighborhood change\",\"src\":\"output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-24\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Elena Soria Dominguez — Transit Hub Planning Lead — Fruitvale\",\"evidence\":[{\"id\":\"EV-3cceb5dc27\",\"src\":\"output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-24\",\"text\":\"Open on Bobby Chen-Ramirez's own line, verbatim. Their words are the piece; yours are the frame.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C112\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-7cd6ffd2aeb3\"},{\"t\":\"FACT\",\"text\":\"Bobby Chen-Ramirez in their own words, and 3 more\",\"src\":\"output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-24\",\"id\":\"F-571da882824f\"},{\"t\":\"FACT\",\"text\":\"Open on Bobby Chen-Ramirez's own line, verbatim. Their words are the piece; yours are the frame.\",\"src\":\"output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-24\",\"id\":\"F-e75463349b0c\"},{\"t\":\"FACT\",\"text\":\"“The inspection list is clean again, which means I can sleep. But I keep coming back to that audit report — first cycle, D7 office, public portal. Numbers are the only thing that don't lie to you, but they don't tell you if Mrs. Okafor can actually get her blood pressure checked without taking two buses. We built the damn building, that part's done. Now we've got to prove it works, every quarter, on paper, in public. That's the job now. Fine. I'd rather be accountable than comfortable.” — Bobby\",\"src\":\"output/citizen_pages/index.jsonl cp-POP-00792-c112-work\",\"id\":\"F-fa79e440ec22\"},{\"t\":\"FACT\",\"text\":\"“Four cycles of visioning, and still the same knot in my stomach: we've got the blueprints, the budget line, even the consultant picked—but no vote, no shovels. I keep going back to Doña Esperanza's cart on the renderings, making sure the diagonal path doesn't clip her awning, because that's the part people will actually feel. C86 gave us the mandate, but C108's silence is a reminder that \\\"authorized\\\" isn't \\\"approved.\\\" Tonight I'm just tired of the gap between what we've planned and what the cou\",\"src\":\"output/citizen_pages/index.jsonl cp-POP-00791-c112-work\",\"id\":\"F-8d092084ddd6\"},{\"t\":\"FACT\",\"text\":\"“The C115 review is next week, and I keep coming back to the fact that the soil verification is the one thing we can point to that’s truly done. No more debate about whether the ground is clean — that’s settled. The fence hotline is in place, which is good, but it’s a Band-Aid, not a relationship. People are going to be looking at that fence for years, and I need to remind myself that the response time matters less than what happens after the call. We’ve got contractors on site, work gloves in t\",\"src\":\"output/citizen_pages/index.jsonl cp-POP-00041-c112-work\",\"id\":\"F-cf936e1e30c5\"},{\"t\":\"FACT\",\"text\":\"“Helena, I was just thinkin' about you—how you always tell it to me straight. The coffee pot's acting up again, and I swear it's the little things that get under my skin these days. How's your week treating you? Quiet minutes sound like gold right about now. I spent half the weekend staring at for-rent signs, trying to figure out if this neighborhood's still mine or if I'm just a ghost walking through someone else's plans. You always know how to ground a man. Maybe you're right—maybe stickin' ar\",\"src\":\"output/citizen_pages/index.jsonl cp-POP-00263-c112-CONVO\",\"id\":\"F-06c346cfd3f5\"},{\"t\":\"FACT\",\"text\":\"Elena Soria Dominguez — Transit Hub Planning Lead — Fruitvale\",\"src\":\"Simulation_Ledger profile for POP-00791\",\"id\":\"F-d03923cc814f\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00791",
+        "name": "Elena Soria Dominguez",
+        "role": "Transit Hub Planning Lead",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Ines Sorensen",
+        "question": "What have you seen, felt, or understood about \"Omar Amici's perspective on neighborhood change\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-voices",
+        "hood": "Jack London",
+        "focus": "Omar Amici's perspective on neighborhood change",
+        "src": "output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-24"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Elena Soria Dominguez — Transit Hub Planning Lead — Fruitvale",
+        "evidence": [
+          {
+            "id": "EV-3cceb5dc27",
+            "src": "output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-24",
+            "text": "Open on Bobby Chen-Ramirez's own line, verbatim. Their words are the piece; yours are the frame."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C112",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-7cd6ffd2aeb3"
+        },
+        {
+          "t": "FACT",
+          "text": "Bobby Chen-Ramirez in their own words, and 3 more",
+          "src": "output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-24",
+          "id": "F-571da882824f"
+        },
+        {
+          "t": "FACT",
+          "text": "Open on Bobby Chen-Ramirez's own line, verbatim. Their words are the piece; yours are the frame.",
+          "src": "output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-24",
+          "id": "F-e75463349b0c"
+        },
+        {
+          "t": "FACT",
+          "text": "“The inspection list is clean again, which means I can sleep. But I keep coming back to that audit report — first cycle, D7 office, public portal. Numbers are the only thing that don't lie to you, but they don't tell you if Mrs. Okafor can actually get her blood pressure checked without taking two buses. We built the damn building, that part's done. Now we've got to prove it works, every quarter, on paper, in public. That's the job now. Fine. I'd rather be accountable than comfortable.” — Bobby",
+          "src": "output/citizen_pages/index.jsonl cp-POP-00792-c112-work",
+          "id": "F-fa79e440ec22"
+        },
+        {
+          "t": "FACT",
+          "text": "“Four cycles of visioning, and still the same knot in my stomach: we've got the blueprints, the budget line, even the consultant picked—but no vote, no shovels. I keep going back to Doña Esperanza's cart on the renderings, making sure the diagonal path doesn't clip her awning, because that's the part people will actually feel. C86 gave us the mandate, but C108's silence is a reminder that \"authorized\" isn't \"approved.\" Tonight I'm just tired of the gap between what we've planned and what the cou",
+          "src": "output/citizen_pages/index.jsonl cp-POP-00791-c112-work",
+          "id": "F-8d092084ddd6"
+        },
+        {
+          "t": "FACT",
+          "text": "“The C115 review is next week, and I keep coming back to the fact that the soil verification is the one thing we can point to that’s truly done. No more debate about whether the ground is clean — that’s settled. The fence hotline is in place, which is good, but it’s a Band-Aid, not a relationship. People are going to be looking at that fence for years, and I need to remind myself that the response time matters less than what happens after the call. We’ve got contractors on site, work gloves in t",
+          "src": "output/citizen_pages/index.jsonl cp-POP-00041-c112-work",
+          "id": "F-cf936e1e30c5"
+        },
+        {
+          "t": "FACT",
+          "text": "“Helena, I was just thinkin' about you—how you always tell it to me straight. The coffee pot's acting up again, and I swear it's the little things that get under my skin these days. How's your week treating you? Quiet minutes sound like gold right about now. I spent half the weekend staring at for-rent signs, trying to figure out if this neighborhood's still mine or if I'm just a ghost walking through someone else's plans. You always know how to ground a man. Maybe you're right—maybe stickin' ar",
+          "src": "output/citizen_pages/index.jsonl cp-POP-00263-c112-CONVO",
+          "id": "F-06c346cfd3f5"
+        },
+        {
+          "t": "FACT",
+          "text": "Elena Soria Dominguez — Transit Hub Planning Lead — Fruitvale",
+          "src": "Simulation_Ledger profile for POP-00791",
+          "id": "F-d03923cc814f"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00041",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00041\",\"name\":\"Keisha Ramos\",\"role\":\"Director, Baylight Redevelopment Authority\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Ines Sorensen\",\"question\":\"Using only the supplied facts, what about \\\"Omar Amici's perspective on neighborhood change\\\" creates accountability for you, and what answer do you want? Do not claim any past or future official action that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-voices\",\"hood\":\"Jack London\",\"focus\":\"Omar Amici's perspective on neighborhood change\",\"src\":\"output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-24\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Keisha Ramos — Director, Baylight Redevelopment Authority — Lake Merritt\",\"evidence\":[{\"id\":\"EV-5ff47eccfe\",\"src\":\"output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-24\",\"text\":\"Open on Bobby Chen-Ramirez's own line, verbatim. Their words are the piece; yours are the frame.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C112\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-7cd6ffd2aeb3\"},{\"t\":\"FACT\",\"text\":\"Bobby Chen-Ramirez in their own words, and 3 more\",\"src\":\"output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-24\",\"id\":\"F-571da882824f\"},{\"t\":\"FACT\",\"text\":\"Open on Bobby Chen-Ramirez's own line, verbatim. Their words are the piece; yours are the frame.\",\"src\":\"output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-24\",\"id\":\"F-e75463349b0c\"},{\"t\":\"FACT\",\"text\":\"“The inspection list is clean again, which means I can sleep. But I keep coming back to that audit report — first cycle, D7 office, public portal. Numbers are the only thing that don't lie to you, but they don't tell you if Mrs. Okafor can actually get her blood pressure checked without taking two buses. We built the damn building, that part's done. Now we've got to prove it works, every quarter, on paper, in public. That's the job now. Fine. I'd rather be accountable than comfortable.” — Bobby\",\"src\":\"output/citizen_pages/index.jsonl cp-POP-00792-c112-work\",\"id\":\"F-fa79e440ec22\"},{\"t\":\"FACT\",\"text\":\"“Four cycles of visioning, and still the same knot in my stomach: we've got the blueprints, the budget line, even the consultant picked—but no vote, no shovels. I keep going back to Doña Esperanza's cart on the renderings, making sure the diagonal path doesn't clip her awning, because that's the part people will actually feel. C86 gave us the mandate, but C108's silence is a reminder that \\\"authorized\\\" isn't \\\"approved.\\\" Tonight I'm just tired of the gap between what we've planned and what the cou\",\"src\":\"output/citizen_pages/index.jsonl cp-POP-00791-c112-work\",\"id\":\"F-8d092084ddd6\"},{\"t\":\"FACT\",\"text\":\"“The C115 review is next week, and I keep coming back to the fact that the soil verification is the one thing we can point to that’s truly done. No more debate about whether the ground is clean — that’s settled. The fence hotline is in place, which is good, but it’s a Band-Aid, not a relationship. People are going to be looking at that fence for years, and I need to remind myself that the response time matters less than what happens after the call. We’ve got contractors on site, work gloves in t\",\"src\":\"output/citizen_pages/index.jsonl cp-POP-00041-c112-work\",\"id\":\"F-cf936e1e30c5\"},{\"t\":\"FACT\",\"text\":\"“Helena, I was just thinkin' about you—how you always tell it to me straight. The coffee pot's acting up again, and I swear it's the little things that get under my skin these days. How's your week treating you? Quiet minutes sound like gold right about now. I spent half the weekend staring at for-rent signs, trying to figure out if this neighborhood's still mine or if I'm just a ghost walking through someone else's plans. You always know how to ground a man. Maybe you're right—maybe stickin' ar\",\"src\":\"output/citizen_pages/index.jsonl cp-POP-00263-c112-CONVO\",\"id\":\"F-06c346cfd3f5\"},{\"t\":\"FACT\",\"text\":\"Keisha Ramos — Director, Baylight Redevelopment Authority — Lake Merritt\",\"src\":\"Simulation_Ledger profile for POP-00041\",\"id\":\"F-f06705718e3e\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00041",
+        "name": "Keisha Ramos",
+        "role": "Director, Baylight Redevelopment Authority",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Ines Sorensen",
+        "question": "Using only the supplied facts, what about \"Omar Amici's perspective on neighborhood change\" creates accountability for you, and what answer do you want? Do not claim any past or future official action that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-voices",
+        "hood": "Jack London",
+        "focus": "Omar Amici's perspective on neighborhood change",
+        "src": "output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-24"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Keisha Ramos — Director, Baylight Redevelopment Authority — Lake Merritt",
+        "evidence": [
+          {
+            "id": "EV-5ff47eccfe",
+            "src": "output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-24",
+            "text": "Open on Bobby Chen-Ramirez's own line, verbatim. Their words are the piece; yours are the frame."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C112",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-7cd6ffd2aeb3"
+        },
+        {
+          "t": "FACT",
+          "text": "Bobby Chen-Ramirez in their own words, and 3 more",
+          "src": "output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-24",
+          "id": "F-571da882824f"
+        },
+        {
+          "t": "FACT",
+          "text": "Open on Bobby Chen-Ramirez's own line, verbatim. Their words are the piece; yours are the frame.",
+          "src": "output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-24",
+          "id": "F-e75463349b0c"
+        },
+        {
+          "t": "FACT",
+          "text": "“The inspection list is clean again, which means I can sleep. But I keep coming back to that audit report — first cycle, D7 office, public portal. Numbers are the only thing that don't lie to you, but they don't tell you if Mrs. Okafor can actually get her blood pressure checked without taking two buses. We built the damn building, that part's done. Now we've got to prove it works, every quarter, on paper, in public. That's the job now. Fine. I'd rather be accountable than comfortable.” — Bobby",
+          "src": "output/citizen_pages/index.jsonl cp-POP-00792-c112-work",
+          "id": "F-fa79e440ec22"
+        },
+        {
+          "t": "FACT",
+          "text": "“Four cycles of visioning, and still the same knot in my stomach: we've got the blueprints, the budget line, even the consultant picked—but no vote, no shovels. I keep going back to Doña Esperanza's cart on the renderings, making sure the diagonal path doesn't clip her awning, because that's the part people will actually feel. C86 gave us the mandate, but C108's silence is a reminder that \"authorized\" isn't \"approved.\" Tonight I'm just tired of the gap between what we've planned and what the cou",
+          "src": "output/citizen_pages/index.jsonl cp-POP-00791-c112-work",
+          "id": "F-8d092084ddd6"
+        },
+        {
+          "t": "FACT",
+          "text": "“The C115 review is next week, and I keep coming back to the fact that the soil verification is the one thing we can point to that’s truly done. No more debate about whether the ground is clean — that’s settled. The fence hotline is in place, which is good, but it’s a Band-Aid, not a relationship. People are going to be looking at that fence for years, and I need to remind myself that the response time matters less than what happens after the call. We’ve got contractors on site, work gloves in t",
+          "src": "output/citizen_pages/index.jsonl cp-POP-00041-c112-work",
+          "id": "F-cf936e1e30c5"
+        },
+        {
+          "t": "FACT",
+          "text": "“Helena, I was just thinkin' about you—how you always tell it to me straight. The coffee pot's acting up again, and I swear it's the little things that get under my skin these days. How's your week treating you? Quiet minutes sound like gold right about now. I spent half the weekend staring at for-rent signs, trying to figure out if this neighborhood's still mine or if I'm just a ghost walking through someone else's plans. You always know how to ground a man. Maybe you're right—maybe stickin' ar",
+          "src": "output/citizen_pages/index.jsonl cp-POP-00263-c112-CONVO",
+          "id": "F-06c346cfd3f5"
+        },
+        {
+          "t": "FACT",
+          "text": "Keisha Ramos — Director, Baylight Redevelopment Authority — Lake Merritt",
+          "src": "Simulation_Ledger profile for POP-00041",
+          "id": "F-f06705718e3e"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  }
+]

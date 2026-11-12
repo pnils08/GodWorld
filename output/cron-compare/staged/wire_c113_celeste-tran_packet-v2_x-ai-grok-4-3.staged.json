@@ -1,0 +1,71 @@
+{
+  "status": "staged",
+  "desk": "wire",
+  "cycle": "113",
+  "persona": "celeste-tran",
+  "byline": "Celeste Tran",
+  "bylinePopid": "POP-00164",
+  "article": "output/cron-compare/staged/wire_c113_celeste-tran_packet-v2_x-ai-grok-4-3.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Claire Ashford",
+        "role": "quoted-source",
+        "popid": "POP-01071"
+      },
+      {
+        "name": "Deacon Seymour",
+        "role": "quoted-source",
+        "popid": "POP-00528"
+      },
+      {
+        "name": "Yu Zen",
+        "role": "quoted-source",
+        "popid": "POP-00194"
+      },
+      {
+        "name": "Marisol Rivera",
+        "role": "mentioned",
+        "popid": "POP-01062",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Rockridge"
+    ],
+    "claims": [
+      {
+        "claim": "To be honest, I don't know much about the changing demographics in West Oakland. I've been focused on my own neighborhood, Rockridge, and my family. I've been dealing with my own recovery and getting back to my routine after my accident. I haven't had a chance to pay much attention to what's going on in West Oakland. I can tell you that I've noticed the commotion at the train station when the delayed train leaves, and I've seen the regulars debating the A's game at the diner, but that's about it.",
+        "sourceRef": "citizenVoice PRESS Yu Zen"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-420323195b25",
+    "draftSha256": "fca1fd333173868c32a6cc1b4a13fe6a8c48fedcee5c65d9856c2de64b37a1c7",
+    "verdict": "output/cron-compare/wire_c113_celeste-tran_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-10-30T23:18:48.512Z",
+    "contractScore": {
+      "opened": true,
+      "closed": false,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 400",
+      "words": 418,
+      "short": "The closing trails off into a rhetorical question rather than stating the pattern's implication about the city's mood.",
+      "score": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "fca1fd333173868c32a6cc1b4a13fe6a8c48fedcee5c65d9856c2de64b37a1c7",
+      "costUsd": 0.0013
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-30T23:18:54.812Z"
+}

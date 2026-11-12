@@ -1,0 +1,324 @@
+{
+  "stage": "angle",
+  "desk": "undocked-digest",
+  "cycle": "113",
+  "persona": "nia-rook-weekly",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-01076",
+      "name": "Nia Rook",
+      "role": "desk reporter",
+      "desk": "undocked-digest"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "UNDOCKED week: pilots who flew this cycle (Cristina Booker, Father Miguel, Daphne Stafford). Standings: Eric Taveras leads the board — rank #1, 20 achievement points, 1170 credits, 3 cycle(s) led, current streak 3. In the chair: Cristina Booker — Immigration Attorney; Father Miguel — Parish priest; Daphne Stafford — Home Health Aide.",
+      "approach": null
+    },
+    "signal": {
+      "kind": "undocked-digest",
+      "hood": null,
+      "score": null,
+      "src": "undocked-week:weekly-c113",
+      "nearby": [
+        {
+          "text": "",
+          "src": ""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00836",
+          "name": "Cristina Booker",
+          "profile": "Cristina Booker — UNDOCKED pilot",
+          "role": "UNDOCKED pilot",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "undocked-feed-row",
+          "evidence": {
+            "source": "output/spacemolt-show/feed/c113.json",
+            "episodeId": "undocked-pop00836-Y3C9",
+            "pop": "POP-00836"
+          }
+        },
+        {
+          "pop": "POP-00734",
+          "name": "Father Miguel",
+          "profile": "Father Miguel — UNDOCKED pilot",
+          "role": "UNDOCKED pilot",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "undocked-feed-row",
+          "evidence": {
+            "source": "output/spacemolt-show/feed/c113.json",
+            "episodeId": "undocked-pop00734-Y3C9",
+            "pop": "POP-00734"
+          }
+        },
+        {
+          "pop": "POP-00816",
+          "name": "Daphne Stafford",
+          "profile": "Daphne Stafford — UNDOCKED pilot",
+          "role": "UNDOCKED pilot",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "undocked-feed-row",
+          "evidence": {
+            "source": "output/spacemolt-show/feed/c113.json",
+            "episodeId": "undocked-pop00816-Y3C9",
+            "pop": "POP-00816"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C113",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-876f95b5eb98"
+      },
+      {
+        "t": "FACT",
+        "text": "UNDOCKED week-in-review c113",
+        "src": "undocked-week:weekly-c113",
+        "id": "F-73d67346d148"
+      },
+      {
+        "t": "FACT",
+        "text": "Cristina Booker's Monday night on UNDOCKED: went through Alpha Centauri; took the Copper Requisition and Welcome to Sol Central contracts; earned First Steps (5 points) and Maiden Jump (5 points); came out even on credits; flew until the show's time ran out.",
+        "src": "undocked-week:weekly-c113",
+        "id": "F-e5905c8a4bf4"
+      },
+      {
+        "t": "FACT",
+        "text": "Cristina Booker's Thursday night on UNDOCKED: never got the ship moving.",
+        "src": "undocked-week:weekly-c113",
+        "id": "F-a9af913d0dcb"
+      },
+      {
+        "t": "FACT",
+        "text": "Father Miguel's Tuesday night on UNDOCKED: went through Lacaille 9352, Sirius, Sol and Alpha Centauri; took the Copper Requisition contract; earned Maiden Jump (5 points); came out even on credits; flew until the show's time ran out.",
+        "src": "undocked-week:weekly-c113",
+        "id": "F-5720f376a3b3"
+      },
+      {
+        "t": "FACT",
+        "text": "Father Miguel's Friday night on UNDOCKED: went through Sirius, Lacaille 9352, Grumium and Sol; mined 2 aluminum ore and 1 platinum ore; earned no new points; came out even on credits; flew until the show's time ran out.",
+        "src": "undocked-week:weekly-c113",
+        "id": "F-e1589dfe130d"
+      },
+      {
+        "t": "FACT",
+        "text": "Daphne Stafford's Wednesday night on UNDOCKED: earned First Steps (5 points); never got the ship moving.",
+        "src": "undocked-week:weekly-c113",
+        "id": "F-5037b3e1ecc5"
+      },
+      {
+        "t": "FACT",
+        "text": "Cristina Booker — Immigration Attorney (ledger)",
+        "src": "undocked-week:weekly-c113",
+        "id": "F-a7f8a3920841"
+      },
+      {
+        "t": "FACT",
+        "text": "Father Miguel — Parish priest (ledger)",
+        "src": "undocked-week:weekly-c113",
+        "id": "F-aa9b9e515b1f"
+      },
+      {
+        "t": "FACT",
+        "text": "Daphne Stafford — Home Health Aide (ledger)",
+        "src": "undocked-week:weekly-c113",
+        "id": "F-262fe69148ac"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "named",
+    "candidates": [
+      {
+        "pop": "POP-00836",
+        "name": "Cristina Booker",
+        "role": "UNDOCKED pilot",
+        "hood": null,
+        "profile": "Cristina Booker — UNDOCKED pilot",
+        "mode": "named",
+        "sourceKind": "undocked-feed-row",
+        "evidence": {
+          "source": "output/spacemolt-show/feed/c113.json",
+          "episodeId": "undocked-pop00836-Y3C9",
+          "pop": "POP-00836"
+        }
+      },
+      {
+        "pop": "POP-00734",
+        "name": "Father Miguel",
+        "role": "UNDOCKED pilot",
+        "hood": null,
+        "profile": "Father Miguel — UNDOCKED pilot",
+        "mode": "named",
+        "sourceKind": "undocked-feed-row",
+        "evidence": {
+          "source": "output/spacemolt-show/feed/c113.json",
+          "episodeId": "undocked-pop00734-Y3C9",
+          "pop": "POP-00734"
+        }
+      },
+      {
+        "pop": "POP-00816",
+        "name": "Daphne Stafford",
+        "role": "UNDOCKED pilot",
+        "hood": null,
+        "profile": "Daphne Stafford — UNDOCKED pilot",
+        "mode": "named",
+        "sourceKind": "undocked-feed-row",
+        "evidence": {
+          "source": "output/spacemolt-show/feed/c113.json",
+          "episodeId": "undocked-pop00816-Y3C9",
+          "pop": "POP-00816"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Nia Rook",
+    "popid": "POP-01076"
+  },
+  "assignment": {
+    "story": {
+      "ref": "undocked-week:weekly-c113",
+      "label": "UNDOCKED week-in-review c113",
+      "kind": "undocked-digest",
+      "angle": "UNDOCKED week: pilots who flew this cycle (Cristina Booker, Father Miguel, Daphne Stafford). Standings: Eric Taveras leads the board — rank #1, 20 achievement points, 1170 credits, 3 cycle(s) led, current streak 3. In the chair: Cristina Booker — Immigration Attorney; Father Miguel — Parish priest; Daphne Stafford — Home Health Aide.",
+      "facts": [
+        "Cristina Booker's Monday night on UNDOCKED: went through Alpha Centauri; took the Copper Requisition and Welcome to Sol Central contracts; earned First Steps (5 points) and Maiden Jump (5 points); came out even on credits; flew until the show's time ran out.",
+        "Cristina Booker's Thursday night on UNDOCKED: never got the ship moving.",
+        "Father Miguel's Tuesday night on UNDOCKED: went through Lacaille 9352, Sirius, Sol and Alpha Centauri; took the Copper Requisition contract; earned Maiden Jump (5 points); came out even on credits; flew until the show's time ran out.",
+        "Father Miguel's Friday night on UNDOCKED: went through Sirius, Lacaille 9352, Grumium and Sol; mined 2 aluminum ore and 1 platinum ore; earned no new points; came out even on credits; flew until the show's time ran out.",
+        "Daphne Stafford's Wednesday night on UNDOCKED: earned First Steps (5 points); never got the ship moving.",
+        "Cristina Booker — Immigration Attorney (ledger)",
+        "Father Miguel — Parish priest (ledger)",
+        "Daphne Stafford — Home Health Aide (ledger)"
+      ],
+      "citizens": [
+        "Cristina Booker — Immigration Attorney, UNDOCKED cast pilot",
+        "Father Miguel — Parish priest, UNDOCKED cast pilot",
+        "Daphne Stafford — Home Health Aide, UNDOCKED cast pilot"
+      ],
+      "popids": [
+        "POP-00836",
+        "POP-00734",
+        "POP-00816"
+      ]
+    }
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Nia Rook",
+    "popid": "POP-01076",
+    "text": "I'm going to dig into Cristina Booker's UNDOCKED performance this cycle. She had a strong Monday night but struggled on Thursday. I want to understand what made the difference and how it affects her standing in the leaderboard.",
+    "plan": {
+      "chase": "I'm going to dig into Cristina Booker's UNDOCKED performance this cycle. She had a strong Monday night but struggled on Thursday. I want to understand what made the difference and how it affects her standing in the leaderboard.",
+      "focus": "Cristina Booker's UNDOCKED performance",
+      "why": "Cristina Booker is currently in the chair, and her performance has been inconsistent. Understanding her strengths and weaknesses can provide insight into the leaderboard dynamics.",
+      "checks": [
+        "Review Cristina Booker's UNDOCKED logs for this cycle",
+        "Compare Cristina Booker's performance with other pilots"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00836",
+          "question": "What factors contributed to Cristina Booker's inconsistent performance on UNDOCKED this cycle?",
+          "basis": "Cristina Booker's UNDOCKED pilot performance"
+        },
+        {
+          "pop": "POP-00734",
+          "question": "How does Father Miguel's consistent performance on UNDOCKED compare to Cristina Booker's?",
+          "basis": "Father Miguel's UNDOCKED pilot performance"
+        },
+        {
+          "pop": "POP-00816",
+          "question": "Did Daphne Stafford's struggles on UNDOCKED impact the overall leaderboard standings?",
+          "basis": "Daphne Stafford's UNDOCKED pilot performance"
+        }
+      ],
+      "interpretation": "The inconsistency in Cristina Booker's performance may indicate a need for further training or strategy adjustment.",
+      "unverifiedLead": [
+        "Cristina Booker may be struggling with a specific aspect of UNDOCKED"
+      ],
+      "closeQuestion": "Can Cristina Booker maintain her current standing in the leaderboard?"
+    }
+  },
+  "lanePicks": [
+    {
+      "popids": []
+    }
+  ],
+  "laneEntries": 1,
+  "angleCapHits": 0,
+  "ranAt": "2026-10-31T13:15:41.525Z"
+}

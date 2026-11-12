@@ -1,0 +1,65 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "111",
+  "persona": "mason-ortega",
+  "byline": "Mason Ortega",
+  "bylinePopid": "POP-00160",
+  "article": "output/cron-compare/staged/culture_c111_mason-ortega_packet-v2_x-ai-grok-4-3.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Hector Leech",
+        "role": "quoted-source",
+        "popid": "POP-00252"
+      },
+      {
+        "name": "Trenton Nawan",
+        "role": "quoted-source",
+        "popid": "POP-00273"
+      },
+      {
+        "name": "Guadalupe Lupe",
+        "role": "quoted-source",
+        "popid": "POP-00643"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Jack London"
+    ],
+    "claims": [
+      {
+        "claim": "A full shift in the pit is a marathon, not a sprint. You're in the steam before the first ticket even prints, and the heat just sits on you like a second skin. The sprayer's going, the racks are clanking, and your hands are in and out of the water so much they prune up and crack. But the rhythm is what keeps you going — you get into a groove where you're not even thinking about the plates, you're just moving. And that's when my mind wanders. I think about my kids, about the house, about the little things — like finding a penny heads-up on the sidewalk this morning and slipping it in my pocket. It's silly, but it made me feel seen for a second. Mostly, though, I'm thinking about the folks on the other side of that pass — the servers, the cooks, the regulars at the bar. I'm holding it together for them. That's the job. That's the whole job.",
+        "sourceRef": "citizenVoice PRESS Hector Leech"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-d0d387bd3656",
+    "draftSha256": "eba8281e466b6cac4b8ac97ced86b1e06a819db0fa71dd8e4018139b194dc0ab",
+    "verdict": "output/cron-compare/culture_c111_mason-ortega_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-10-16T23:15:20.941Z",
+    "contractScore": {
+      "opened": true,
+      "closed": false,
+      "purposeMet": false,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 561,
+      "short": "The piece invents workers, shifts, and dialogue rather than treating the signal as an evidence-bounded question, and fails to close on the worker or operating account still needed.",
+      "score": 2,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "eba8281e466b6cac4b8ac97ced86b1e06a819db0fa71dd8e4018139b194dc0ab",
+      "costUsd": 0.0013
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-16T23:15:27.712Z"
+}

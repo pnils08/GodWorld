@@ -1,0 +1,283 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-01210",
+    "name": "Tamsin Pruitt",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "The lives of C112, 2026-10-22: 1 people — Aaliyah Brennan — enjoyed the lakeside neighborhood tranquility",
+    "approach": "Lives approach: this slice is the people something happened to this Cycle — a birth, a death in the house, a hospital stay, a retirement, a promotion — and the smaller moments the record kept. Each person gets their own short passage: the event, the one true detail the record carries, what they did next if the record says. The fact exactly right; never a trend, never a number first; the person, not the system the event belongs to. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "lives",
+      "hood": "Lake Merritt",
+      "facts": [
+        "Aaliyah Brennan — enjoyed the lakeside neighborhood tranquility, Lake Merritt (C112, Household)"
+      ],
+      "priorCycle": null,
+      "note": "none of today's people has written their own page this Cycle — no quotes",
+      "engineHooks": [],
+      "roomIsYours": "the plain respect, what the event meant in that house or on that block, the detail the family would have picked — from the lines below, never invented",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-lives",
+    "hood": "Lake Merritt",
+    "src": "output/beats/Lived_Events.jsonl @C112 2026-10-22",
+    "plan": {
+      "focus": "Aaliyah Brennan's experience of lakeside neighborhood tranquility",
+      "closeQuestion": "What specific aspects of the lakeside neighborhood tranquility had the most impact on Aaliyah Brennan?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00235",
+        "name": "Aaliyah Brennan",
+        "profile": "Aaliyah Brennan — Mobile Clinic Nurse — Lake Merritt",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00235-da78dddff8",
+        "pop": "POP-00235",
+        "name": "Aaliyah Brennan",
+        "quote": "The tranquility around Lake Merritt really helps me unwind, especially after a long day at the mobile clinic. It's like a balm for my soul. Living here, I feel like I'm in a better headspace to help my patients and be there for my family.",
+        "factIds": [
+          "F-45836d8f2002",
+          "F-7bfd3f1cd5be"
+        ],
+        "src": "packet.W2[POP-00235]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Tamsin Pruitt",
+        "text": "She might have shared her experience with colleagues or family members",
+        "usable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "The tranquility could be related to a specific event or change in her neighborhood",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C112",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-7cd6ffd2aeb3"
+    },
+    {
+      "t": "FACT",
+      "text": "Aaliyah Brennan — enjoyed the lakeside neighborhood tranquility",
+      "src": "output/beats/Lived_Events.jsonl @C112 2026-10-22",
+      "id": "F-45836d8f2002"
+    },
+    {
+      "t": "FACT",
+      "text": "Aaliyah Brennan first. The event is the lead; one true detail; what came next only if the record says.",
+      "src": "output/beats/Lived_Events.jsonl @C112 2026-10-22",
+      "id": "F-81516d6777d5"
+    },
+    {
+      "t": "FACT",
+      "text": "Aaliyah Brennan — enjoyed the lakeside neighborhood tranquility, Lake Merritt (C112, Household)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-7bfd3f1cd5be"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "tamsin-lives-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Put the cycle's person events in the paper as news, one person at a time — a birth, a death, a hospital stay, a retirement, a promotion. The event is the lead, the person is named as the slice names them, and what came next appears only when a later record holds it. The page is the city's real calendar; every person on it is one the record holds.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "plain respect — a neighborhood weekly's births-and-obituaries hand, unhurried, exact",
+      "targetWords": "450-750",
+      "opening": "the heaviest event on the slice, stated as it happened to the named person",
+      "closing": "the last person's passage ends on what the record holds next for them, or on the fact itself — no moral, no roundup"
+    },
+    "authorizedTexture": [
+      "the plain respect of the form — the ordinary weight of a birth, a retirement, a discharge, stated without ornament",
+      "the frame around a supplied fact — what a promotion to the supplied role means in plain words, without inventing the workplace",
+      "the neighborhood the slice names as where the person lives, without an invented street scene",
+      "the order and pacing of the passages — heaviest first, one person at a time"
+    ],
+    "textureConditions": [
+      "every person, event, role, employer, neighborhood, hospital stay, household and family tie must come from the slice",
+      "a quote appears only verbatim from the person's own supplied page; nothing paraphrased into quotation marks",
+      "what came next appears only when a later Cycle's supplied record holds it",
+      "a thin day (few events) is written as a short page, not padded"
+    ],
+    "canonBlockers": [
+      "any person, event, quote, venue, employer or family member not on the slice",
+      "a paraphrased or invented quote",
+      "a cause, diagnosis or outcome the record does not state",
+      "a statistic, rate or trend claim — the page is people, not numbers",
+      "intake bookkeeping rows (Emerged into Tier, Added to Simulation_Ledger, Updated to Tier) written as life events",
+      "raw engine labels or decimals printed as public-facing evidence"
+    ]
+  },
+  "manifest": {
+    "id": "AM-0749fd816cfe",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-7cd6ffd2aeb3",
+        "t": "FACT",
+        "text": "Current cycle: C112",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-45836d8f2002",
+        "t": "FACT",
+        "text": "Aaliyah Brennan — enjoyed the lakeside neighborhood tranquility",
+        "src": "output/beats/Lived_Events.jsonl @C112 2026-10-22"
+      },
+      {
+        "id": "F-81516d6777d5",
+        "t": "FACT",
+        "text": "Aaliyah Brennan first. The event is the lead; one true detail; what came next only if the record says.",
+        "src": "output/beats/Lived_Events.jsonl @C112 2026-10-22"
+      },
+      {
+        "id": "F-7bfd3f1cd5be",
+        "t": "FACT",
+        "text": "Aaliyah Brennan — enjoyed the lakeside neighborhood tranquility, Lake Merritt (C112, Household)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00235-da78dddff8",
+        "speakerId": "POP-00235",
+        "speakerName": "Aaliyah Brennan",
+        "text": "The tranquility around Lake Merritt really helps me unwind, especially after a long day at the mobile clinic. It's like a balm for my soul. Living here, I feel like I'm in a better headspace to help my patients and be there for my family.",
+        "factIds": [
+          "F-45836d8f2002",
+          "F-7bfd3f1cd5be"
+        ],
+        "src": "packet.W2[POP-00235]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00235",
+        "name": "Aaliyah Brennan",
+        "profile": "Aaliyah Brennan — Mobile Clinic Nurse — Lake Merritt",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Tamsin Pruitt",
+        "text": "She might have shared her experience with colleagues or family members",
+        "publishable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "The tranquility could be related to a specific event or change in her neighborhood",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "the plain respect of the form — the ordinary weight of a birth, a retirement, a discharge, stated without ornament",
+      "the frame around a supplied fact — what a promotion to the supplied role means in plain words, without inventing the workplace",
+      "the neighborhood the slice names as where the person lives, without an invented street scene",
+      "the order and pacing of the passages — heaviest first, one person at a time"
+    ],
+    "textureConditions": [
+      "every person, event, role, employer, neighborhood, hospital stay, household and family tie must come from the slice",
+      "a quote appears only verbatim from the person's own supplied page; nothing paraphrased into quotation marks",
+      "what came next appears only when a later Cycle's supplied record holds it",
+      "a thin day (few events) is written as a short page, not padded"
+    ],
+    "forbiddenClaimClasses": [
+      "any person, event, quote, venue, employer or family member not on the slice",
+      "a paraphrased or invented quote",
+      "a cause, diagnosis or outcome the record does not state",
+      "a statistic, rate or trend claim — the page is people, not numbers",
+      "intake bookkeeping rows (Emerged into Tier, Added to Simulation_Ledger, Updated to Tier) written as life events",
+      "raw engine labels or decimals printed as public-facing evidence"
+    ]
+  }
+}

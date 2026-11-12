@@ -1,0 +1,218 @@
+{
+  "loggedAt": "2026-11-06T12:18:54.214Z",
+  "cycle": 114,
+  "writersWithFiles": [
+    "Anthony Raines",
+    "Hal Richmond",
+    "P Slayer",
+    "Simon Leary",
+    "Tanya Cruz",
+    "Selena Grant",
+    "Talia Finch"
+  ],
+  "rows": [
+    {
+      "n": 1,
+      "team": "A's",
+      "eventType": "rumor",
+      "eventTrigger": "",
+      "snippet": "$22 million in veteran relief and the ",
+      "writers": [
+        "Anthony Raines",
+        "Hal Richmond",
+        "Simon Leary",
+        "Tanya Cruz"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 2,
+      "team": "A's",
+      "eventType": "rumor",
+      "eventTrigger": "",
+      "snippet": "Five starters and one Carmen Mesa. Who",
+      "writers": [
+        "Anthony Raines",
+        "Hal Richmond",
+        "Tanya Cruz"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 3,
+      "team": "A's",
+      "eventType": "front-office",
+      "eventTrigger": "",
+      "snippet": "The bargain core: is it time to extend",
+      "writers": [
+        "Anthony Raines",
+        "Hal Richmond",
+        "P Slayer",
+        "Tanya Cruz"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 4,
+      "team": "A's",
+      "eventType": "player-feature",
+      "eventTrigger": "",
+      "snippet": "Keane said goodbye. Dillon still hasn'",
+      "writers": [
+        "Anthony Raines",
+        "Hal Richmond",
+        "Simon Leary",
+        "Tanya Cruz"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 5,
+      "team": "A's",
+      "eventType": "player-feature",
+      "eventTrigger": "",
+      "snippet": "The last of the dynasty core: how long",
+      "writers": [
+        "Anthony Raines",
+        "Hal Richmond",
+        "P Slayer",
+        "Tanya Cruz"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 6,
+      "team": "Oaks",
+      "eventType": "game-result",
+      "eventTrigger": "",
+      "snippet": "The Oaks storm back from 20 down in In",
+      "writers": [
+        "Anthony Raines",
+        "Hal Richmond",
+        "P Slayer",
+        "Simon Leary",
+        "Tanya Cruz",
+        "Selena Grant",
+        "Talia Finch"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 7,
+      "team": "Oaks",
+      "eventType": "player-feature",
+      "eventTrigger": "",
+      "snippet": "Second-round rookie Harry Hayward is s",
+      "writers": [
+        "Simon Leary",
+        "Tanya Cruz",
+        "Selena Grant",
+        "Talia Finch"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 8,
+      "team": "Oaks",
+      "eventType": "game-result",
+      "eventTrigger": "",
+      "snippet": "The Oaks bounce back with a 60-point r",
+      "writers": [
+        "Anthony Raines",
+        "Hal Richmond",
+        "P Slayer",
+        "Simon Leary",
+        "Tanya Cruz",
+        "Selena Grant",
+        "Talia Finch"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 9,
+      "team": "Oaks",
+      "eventType": "player-feature",
+      "eventTrigger": "",
+      "snippet": "Harry Hayward's minutes keep climbing,",
+      "writers": [
+        "Anthony Raines",
+        "P Slayer",
+        "Simon Leary",
+        "Talia Finch"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 10,
+      "team": "Oaks",
+      "eventType": "team-update",
+      "eventTrigger": "",
+      "snippet": "Henderson, Jerome and the depth turn a",
+      "writers": [
+        "P Slayer",
+        "Simon Leary",
+        "Talia Finch"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 11,
+      "team": "Oaks",
+      "eventType": "game-result",
+      "eventTrigger": "",
+      "snippet": "Dillon Brooks' six threes carry the Oa",
+      "writers": [
+        "Anthony Raines",
+        "P Slayer",
+        "Simon Leary",
+        "Talia Finch"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    }
+  ],
+  "stranded": 0
+}

@@ -1,0 +1,403 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-01076",
+    "name": "Nia Rook",
+    "role": "desk reporter",
+    "desk": "undocked-digest"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Week-in-UNDOCKED leaderboard digest — every pilot who flew this cycle (Sammie Alvarez, Rafael Phillips, Iris Pham), who is climbing and who is fading. Standings: Eric Taveras leads the board — rank #1, 2 cycle(s) led, current streak 2. In the chair: Sammie Alvarez — Civic & Neighborhood Reporter, OakTown Echo; Rafael Phillips — Nurse aide; Iris Pham — Barista. The career is who they are, not the story; the story is the flight.",
+    "approach": null,
+    "voice": null,
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "undocked-digest",
+    "hood": null,
+    "src": "undocked-week:weekly-c112",
+    "plan": {
+      "focus": "UNDOCKED leaderboard digest for cycle C112",
+      "closeQuestion": "What are the key factors driving Eric Taveras' lead in the standings?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00775",
+        "name": "Sammie Alvarez",
+        "profile": "Sammie Alvarez — UNDOCKED pilot",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-01077",
+        "name": "Rafael Phillips",
+        "profile": "Rafael Phillips — UNDOCKED pilot",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-01203",
+        "name": "Iris Pham",
+        "profile": "Iris Pham — UNDOCKED pilot",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00775-b029e72991",
+        "pop": "POP-00775",
+        "name": "Sammie Alvarez",
+        "quote": "To be honest, I've been feeling a bit uncertain about my role as a Civic & Neighborhood Reporter lately. I've seen a lot of energy in Temescal, people caring about improving the neighborhood, but it doesn't seem to be translating into action. I'm not sure how people perceive me or my reporting, but I feel like I'm just trying to capture the essence of what's going on around here.",
+        "factIds": [
+          "F-76c40d35a927",
+          "F-3fc910e1b191"
+        ],
+        "src": "packet.W2[POP-00775]"
+      },
+      {
+        "id": "Q-POP-01077-d4776dc0e6",
+        "pop": "POP-01077",
+        "name": "Rafael Phillips",
+        "quote": "To be honest, money's been tight lately. I've been managing, but it's a hard squeeze. My routine as a nurse aide is what keeps me going.",
+        "factIds": [
+          "F-9c82888ba179"
+        ],
+        "src": "packet.W2[POP-01077]"
+      },
+      {
+        "id": "Q-POP-01203-c9c36775ff",
+        "pop": "POP-01203",
+        "name": "Iris Pham",
+        "quote": "I've had one episode this cycle, and it looks like my credits went up by 1. I'm not sure how it impacted them exactly, but I guess it's a positive change.",
+        "factIds": [
+          "F-466e88f84704"
+        ],
+        "src": "packet.W2[POP-01203]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Nia Rook",
+        "text": "The impact of Sammie Alvarez's reporting experience on their UNDOCKED performance",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C112",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-7cd6ffd2aeb3"
+    },
+    {
+      "t": "FACT",
+      "text": "UNDOCKED week-in-review c112",
+      "src": "undocked-week:weekly-c112",
+      "id": "F-a79b3311bdd9"
+    },
+    {
+      "t": "FACT",
+      "text": "Sammie Alvarez — 2 episode(s) this cycle, credits -209, combat 0, mishaps 0 (UNDOCKED feed)",
+      "src": "undocked-week:weekly-c112",
+      "id": "F-5106f5c73752"
+    },
+    {
+      "t": "FACT",
+      "text": "Rafael Phillips — 2 episode(s) this cycle, credits 0, combat 0, mishaps 0 (UNDOCKED feed)",
+      "src": "undocked-week:weekly-c112",
+      "id": "F-8938a01054c7"
+    },
+    {
+      "t": "FACT",
+      "text": "Iris Pham — 1 episode(s) this cycle, credits 1, combat 0, mishaps 0 (UNDOCKED feed)",
+      "src": "undocked-week:weekly-c112",
+      "id": "F-466e88f84704"
+    },
+    {
+      "t": "FACT",
+      "text": "Sammie Alvarez — Civic & Neighborhood Reporter, OakTown Echo (ledger)",
+      "src": "undocked-week:weekly-c112",
+      "id": "F-76c40d35a927"
+    },
+    {
+      "t": "FACT",
+      "text": "Rafael Phillips — Nurse aide (ledger)",
+      "src": "undocked-week:weekly-c112",
+      "id": "F-9c82888ba179"
+    },
+    {
+      "t": "FACT",
+      "text": "Iris Pham — Barista (ledger)",
+      "src": "undocked-week:weekly-c112",
+      "id": "F-02402e85f129"
+    },
+    {
+      "t": "FACT",
+      "text": "Sammie Alvarez — UNDOCKED pilot",
+      "src": "Simulation_Ledger profile for POP-00775",
+      "id": "F-3fc910e1b191"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "nia-rook-undocked-weekly-digest-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Turn the week's UNDOCKED episodes into one leaderboard/digest naming every pilot who flew — not a single-episode recap. Standings-forward: rank, streaks, who's climbing, who's fading, what the whole cast looked like this week.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "third-person leaderboard recap — entertainment-beat energy, ranking-and-recap format",
+      "targetWords": "350-650",
+      "opening": "a scoreboard, standings post, or watch-party moment framing the whole week at once",
+      "closing": "the one line that sets up who the city watches next"
+    },
+    "authorizedTexture": [
+      "an unnamed bar, watch-party, break-room, bus, or sidewalk setting where the city watches or argues — no invented named venue, entity, or event",
+      "the reporter's own recap persona and who's-up-who's-down framing, now across the full week's cast rather than one episode",
+      "unnamed audience argument and aspiration lines used as city color, never as attributed quotes or measured sentiment",
+      "metaphor and emotional inference grounded in a supplied typed fact from the week's feed or standings"
+    ],
+    "textureConditions": [
+      "every named person, cast pilot, venue, business, and institution must come from the Packet",
+      "episode facts only from the typed feed fields (CreditsDelta, Systems, CombatEvents, MishapCount, Magnitude, Flags) — a blank CreditsDelta is unsettled, never zero and never invented",
+      "pilot speech only from the wake-2 packet interviews — no other quote source exists for this lane",
+      "standings/leaderboard facts (Rank, CyclesLed, CurrentStreak) come only from the supplied Standings block — never invented math",
+      "unnamed audience reaction stays rhetorical — it must not become a count, a poll, or a named person",
+      "every pilot named in the supplied week's roster should appear at least once, even briefly, so the article actually prints their name"
+    ],
+    "canonBlockers": [
+      "video game",
+      "videogame",
+      "simulation",
+      "engine",
+      "MCP",
+      "server",
+      "commander",
+      "tool",
+      "API",
+      "spacemolt-lib",
+      "openrouter",
+      "real-world calendar dates (YYYY-MM-DD)",
+      "captains_log",
+      "leaderboard math beyond the supplied Standings/pilot facts"
+    ]
+  },
+  "manifest": {
+    "id": "AM-94dfca12e0ec",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-7cd6ffd2aeb3",
+        "t": "FACT",
+        "text": "Current cycle: C112",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-a79b3311bdd9",
+        "t": "FACT",
+        "text": "UNDOCKED week-in-review c112",
+        "src": "undocked-week:weekly-c112"
+      },
+      {
+        "id": "F-5106f5c73752",
+        "t": "FACT",
+        "text": "Sammie Alvarez — 2 episode(s) this cycle, credits -209, combat 0, mishaps 0 (UNDOCKED feed)",
+        "src": "undocked-week:weekly-c112"
+      },
+      {
+        "id": "F-8938a01054c7",
+        "t": "FACT",
+        "text": "Rafael Phillips — 2 episode(s) this cycle, credits 0, combat 0, mishaps 0 (UNDOCKED feed)",
+        "src": "undocked-week:weekly-c112"
+      },
+      {
+        "id": "F-466e88f84704",
+        "t": "FACT",
+        "text": "Iris Pham — 1 episode(s) this cycle, credits 1, combat 0, mishaps 0 (UNDOCKED feed)",
+        "src": "undocked-week:weekly-c112"
+      },
+      {
+        "id": "F-76c40d35a927",
+        "t": "FACT",
+        "text": "Sammie Alvarez — Civic & Neighborhood Reporter, OakTown Echo (ledger)",
+        "src": "undocked-week:weekly-c112"
+      },
+      {
+        "id": "F-9c82888ba179",
+        "t": "FACT",
+        "text": "Rafael Phillips — Nurse aide (ledger)",
+        "src": "undocked-week:weekly-c112"
+      },
+      {
+        "id": "F-02402e85f129",
+        "t": "FACT",
+        "text": "Iris Pham — Barista (ledger)",
+        "src": "undocked-week:weekly-c112"
+      },
+      {
+        "id": "F-3fc910e1b191",
+        "t": "FACT",
+        "text": "Sammie Alvarez — UNDOCKED pilot",
+        "src": "Simulation_Ledger profile for POP-00775"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00775-b029e72991",
+        "speakerId": "POP-00775",
+        "speakerName": "Sammie Alvarez",
+        "text": "To be honest, I've been feeling a bit uncertain about my role as a Civic & Neighborhood Reporter lately. I've seen a lot of energy in Temescal, people caring about improving the neighborhood, but it doesn't seem to be translating into action. I'm not sure how people perceive me or my reporting, but I feel like I'm just trying to capture the essence of what's going on around here.",
+        "factIds": [
+          "F-76c40d35a927",
+          "F-3fc910e1b191"
+        ],
+        "src": "packet.W2[POP-00775]"
+      },
+      {
+        "id": "Q-POP-01077-d4776dc0e6",
+        "speakerId": "POP-01077",
+        "speakerName": "Rafael Phillips",
+        "text": "To be honest, money's been tight lately. I've been managing, but it's a hard squeeze. My routine as a nurse aide is what keeps me going.",
+        "factIds": [
+          "F-9c82888ba179"
+        ],
+        "src": "packet.W2[POP-01077]"
+      },
+      {
+        "id": "Q-POP-01203-c9c36775ff",
+        "speakerId": "POP-01203",
+        "speakerName": "Iris Pham",
+        "text": "I've had one episode this cycle, and it looks like my credits went up by 1. I'm not sure how it impacted them exactly, but I guess it's a positive change.",
+        "factIds": [
+          "F-466e88f84704"
+        ],
+        "src": "packet.W2[POP-01203]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00775",
+        "name": "Sammie Alvarez",
+        "profile": "Sammie Alvarez — UNDOCKED pilot",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-01077",
+        "name": "Rafael Phillips",
+        "profile": "Rafael Phillips — UNDOCKED pilot",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-01203",
+        "name": "Iris Pham",
+        "profile": "Iris Pham — UNDOCKED pilot",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Nia Rook",
+        "text": "The impact of Sammie Alvarez's reporting experience on their UNDOCKED performance",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "an unnamed bar, watch-party, break-room, bus, or sidewalk setting where the city watches or argues — no invented named venue, entity, or event",
+      "the reporter's own recap persona and who's-up-who's-down framing, now across the full week's cast rather than one episode",
+      "unnamed audience argument and aspiration lines used as city color, never as attributed quotes or measured sentiment",
+      "metaphor and emotional inference grounded in a supplied typed fact from the week's feed or standings"
+    ],
+    "textureConditions": [
+      "every named person, cast pilot, venue, business, and institution must come from the Packet",
+      "episode facts only from the typed feed fields (CreditsDelta, Systems, CombatEvents, MishapCount, Magnitude, Flags) — a blank CreditsDelta is unsettled, never zero and never invented",
+      "pilot speech only from the wake-2 packet interviews — no other quote source exists for this lane",
+      "standings/leaderboard facts (Rank, CyclesLed, CurrentStreak) come only from the supplied Standings block — never invented math",
+      "unnamed audience reaction stays rhetorical — it must not become a count, a poll, or a named person",
+      "every pilot named in the supplied week's roster should appear at least once, even briefly, so the article actually prints their name"
+    ],
+    "forbiddenClaimClasses": [
+      "video game",
+      "videogame",
+      "simulation",
+      "engine",
+      "MCP",
+      "server",
+      "commander",
+      "tool",
+      "API",
+      "spacemolt-lib",
+      "openrouter",
+      "real-world calendar dates (YYYY-MM-DD)",
+      "captains_log",
+      "leaderboard math beyond the supplied Standings/pilot facts"
+    ]
+  }
+}

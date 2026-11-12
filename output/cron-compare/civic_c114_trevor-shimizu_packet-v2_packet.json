@@ -1,0 +1,1360 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "114",
+  "persona": "trevor-shimizu",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Trevor Shimizu",
+    "popid": "POP-00155"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-transit",
+      "angle": "Coliseum ridership down 799 vs C113 | 8 stations + 10 corridors on the record — the platforms and the people who run them",
+      "label": "Coliseum ridership down 799 vs C113 | 8 stations + 10 corridors on the record",
+      "hookLine": "Coliseum moved down the most this cycle — mild; weekend; base: ledger; crowded platforms (city transit congestion 0.30); 14 transit workers on the roster, 8 citizens who lived a transit line.",
+      "hood": null,
+      "citizens": [
+        "Evan Lewis (POP-00200)",
+        "Joel Wren (POP-00218)",
+        "Jerald Jensen (POP-00280)",
+        "Coen Cartier (POP-00338)",
+        "Daire Green (POP-00442)",
+        "Ray Neal (POP-00448)",
+        "Calvin Mwangi (POP-00573)",
+        "Eleanor Rivera (POP-00617)",
+        "Elena Soria Dominguez (POP-00791)",
+        "Ivy Tran (POP-01037)",
+        "Ximena Mehta (POP-01039)",
+        "Rosario Medina (POP-01053)",
+        "Delia Vargas-Ruiz (POP-01054)",
+        "Jerome Pittman (POP-01055)",
+        "Alisha Peña (POP-00029)",
+        "Marlon Hingsley (POP-00172)",
+        "Elijah Roberts (POP-00275)",
+        "Rasha Brown (POP-00922)",
+        "Lucia Polito (POP-00004)",
+        "Tanya Cruz (POP-00014)",
+        "Avery Santana (POP-00034)",
+        "Ernesto Quintero (POP-00050)"
+      ],
+      "popids": [
+        "POP-00200",
+        "POP-00218",
+        "POP-00280",
+        "POP-00338",
+        "POP-00442",
+        "POP-00448",
+        "POP-00573",
+        "POP-00617",
+        "POP-00791",
+        "POP-01037",
+        "POP-01039",
+        "POP-01053",
+        "POP-01054",
+        "POP-01055",
+        "POP-00029",
+        "POP-00172",
+        "POP-00275",
+        "POP-00922",
+        "POP-00004",
+        "POP-00014",
+        "POP-00034",
+        "POP-00050"
+      ],
+      "ref": "output/beats/Transit_Metrics.jsonl Cycle 114",
+      "cycle": 114
+    }
+  },
+  "angle": "output/cron-compare/civic_c114_trevor-shimizu_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 4,
+  "quotes": [
+    {
+      "pop": "POP-00791",
+      "name": "Elena Soria Dominguez",
+      "quote": "The documents show sightlines and path widths. They don't show the woman who sets up her cart at the panadería corner every morning, or the way riders slow down to talk to her even when the platform's crowded. Phase II's about geometry, but what I see is that people are already making this place theirs — the question is whether the design lets them keep doing that or just moves them through faster.",
+      "disp": "driven, hard to sit still; draws people in, deep with them; principled, plays it straight",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"The documents show sightlines and path widths. They don't show the woman who sets up her cart at the panadería corner every morning, or the way riders slow down to talk to her even when the platform's crowded. Phase II's about geometry, but what I see is that people are already making this place theirs — the question is whether the design lets them keep doing that or just moves them through faster.\",\n  \"fact_ids\": [\"F-864fb941c11c\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-864fb941c11c"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00791-4e343eb844",
+        "authoredQuote": true,
+        "publishableQuote": "The documents show sightlines and path widths. They don't show the woman who sets up her cart at the panadería corner every morning, or the way riders slow down to talk to her even when the platform's crowded. Phase II's about geometry, but what I see is that people are already making this place theirs — the question is whether the design lets them keep doing that or just moves them through faster."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00791",
+          "name": "Elena Soria Dominguez",
+          "role": "Transit Hub Planning Lead",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Trevor Shimizu",
+          "question": "With Phase II still in visioning and ridership up 510 this cycle, what are you seeing on the platform that the design documents don't capture? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-transit",
+          "hood": null,
+          "focus": "Coliseum's 799-rider drop against a citywide pattern that doesn't account for it — what the platform records don't say.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Elena Soria Dominguez — Transit Hub Planning Lead — Fruitvale Transit Hub Authority",
+          "evidence": [
+            {
+              "id": "EV-8985776f7c",
+              "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+              "text": "Coliseum moved down the most this cycle — mild; weekend; base: ledger; crowded platforms (city transit congestion 0.30); 14 transit workers on the roster, 8 citizens who lived a transit line."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "Coliseum ridership down 799 vs C113 | 8 stations + 10 corridors on the record",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+            "id": "F-c3a558a5eebc"
+          },
+          {
+            "t": "FACT",
+            "text": "Coliseum moved down the most this cycle — mild; weekend; base: ledger; crowded platforms (city transit congestion 0.30); 14 transit workers on the roster, 8 citizens who lived a transit line.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+            "id": "F-fe6ab4e258ae"
+          },
+          {
+            "t": "FACT",
+            "text": "Day type this cycle: weekend — riders cut citywide by the weekend rule. A station that moved more than the citywide rule names its own reason on its row.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 114 Factors (frame)",
+            "id": "F-b5a2467ec472"
+          },
+          {
+            "t": "FACT",
+            "text": "The week on the line — every cause on the record this cycle, once: mild; weekend; First Friday; game day (Downtown, Jack London); events in Downtown ×3, Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.30); game day (Downtown); events in Downtown ×3, Lake Merritt, Temescal; events in Lake Merritt, Chinatown ×2; events in Fruitvale ×3; Fruitvale Transit Hub Phase II — Visioning: design-phase; BART train: medical h",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 114 Factors",
+            "id": "F-864fb941c11c"
+          },
+          {
+            "t": "FACT",
+            "text": "Weather this cycle: mild, 55°F (4 cycles of clear)",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 114",
+            "id": "F-bf932e517031"
+          },
+          {
+            "t": "FACT",
+            "text": "Game on the sports feed this cycle: Oaks at San Antonio — The Oaks' perfect start ends at four. In Indiana, in front of a building at 90% capacity, the Pacers built a 61-42 halftime lead behind a 34-point second quarter and led 82-62 after three. The Oaks answered with 38 points in the fourth and won the quarter 38-22, but the comeback came up four short, Pacers 104 - Oaks 100. Adash Stanley and Austin Reaves led the way with 19 apiece. Stanley hit 5 of 11 from three, and Reaves had 7 assists an",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 114",
+            "id": "F-12f06b61a7ed"
+          },
+          {
+            "t": "FACT",
+            "text": "Game on the sports feed this cycle: Oaks at San Antonio — After the perfect start ended in Indiana, the Oaks went to Toronto and answered with the most lopsided win in franchise history, Oaks 135 - Raptors 75, in front of a 95% crowd. The Oaks led 39-19 after one, 73-40 at the half and 101-62 after three, and nobody played more than 28 minutes. Austin Reaves led with 20 on 4 of 6 from three, T. Jerome had 19 points, 7 rebounds and 7 assists, and Adash Stanley went 4 for 4 from three for 16 with",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 114",
+            "id": "F-d9f893d15444"
+          },
+          {
+            "t": "FACT",
+            "text": "Elena Soria Dominguez — Transit Hub Planning Lead — Fruitvale Transit Hub Authority",
+            "src": "Simulation_Ledger profile for POP-00791",
+            "id": "F-79a3d1428db6"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00617",
+      "name": "Eleanor Rivera",
+      "quote": "At 7:40 on a weekend morning at 12th Street, the shift is quiet in a different way than a weekday. The crowds aren't there, so you hear the announcements bounce off the tile more. And you notice the regulars — the ones who are always there, not the game-day rush. If riders didn't come, most of the time it's the weather or a holiday or something happening downtown. But I can't speak for Coliseum specifically — I wasn't there, and I don't have that platform's view. What I can tell you is that when a station drops more than the usual weekend pattern, it's rarely one thing. It's usually a rhythm stacking up — something at the station, something on the line, something in that neighborhood. But I'd be guessing if I told you where those riders went.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"At 7:40 on a weekend morning at 12th Street, the shift is quiet in a different way than a weekday. The crowds aren't there, so you hear the announcements bounce off the tile more. And you notice the regulars — the ones who are always there, not the game-day rush. If riders didn't come, most of the time it's the weather or a holiday or something happening downtown. But I can't speak for Coliseum specifically — I wasn't there, and I don't have that platform's view. What I can tell you is that when a station drops more than the usual weekend pattern, it's rarely one thing. It's usually a rhythm stacking up — something at the station, something on the line, something in that neighborhood. But I'd be guessing if I told you where those riders went.\",\n  \"fact_ids\": [\n    \"F-c3a558a5eebc\",\n    \"F-b5a2467ec472\",\n    \"F-864fb941c11c\"\n  ],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c3a558a5eebc",
+          "F-b5a2467ec472",
+          "F-864fb941c11c"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00617-2fb6b216d1",
+        "authoredQuote": true,
+        "publishableQuote": "At 7:40 on a weekend morning at 12th Street, the shift is quiet in a different way than a weekday. The crowds aren't there, so you hear the announcements bounce off the tile more. And you notice the regulars — the ones who are always there, not the game-day rush. If riders didn't come, most of the time it's the weather or a holiday or something happening downtown. But I can't speak for Coliseum specifically — I wasn't there, and I don't have that platform's view. What I can tell you is that when a station drops more than the usual weekend pattern, it's rarely one thing. It's usually a rhythm stacking up — something at the station, something on the line, something in that neighborhood. But I'd be guessing if I told you where those riders went."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00617",
+          "name": "Eleanor Rivera",
+          "role": "BART Station Manager",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Trevor Shimizu",
+          "question": "At 7:40 a.m. on 12th Street, what did the shift look like — and what tells you the riders who didn't come, where did they go? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-transit",
+          "hood": null,
+          "focus": "Coliseum's 799-rider drop against a citywide pattern that doesn't account for it — what the platform records don't say.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Eleanor Rivera — BART Station Manager — BART Oakland Division",
+          "evidence": [
+            {
+              "id": "EV-1cdd50c1d6",
+              "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+              "text": "Coliseum moved down the most this cycle — mild; weekend; base: ledger; crowded platforms (city transit congestion 0.30); 14 transit workers on the roster, 8 citizens who lived a transit line."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "Coliseum ridership down 799 vs C113 | 8 stations + 10 corridors on the record",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+            "id": "F-c3a558a5eebc"
+          },
+          {
+            "t": "FACT",
+            "text": "Coliseum moved down the most this cycle — mild; weekend; base: ledger; crowded platforms (city transit congestion 0.30); 14 transit workers on the roster, 8 citizens who lived a transit line.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+            "id": "F-fe6ab4e258ae"
+          },
+          {
+            "t": "FACT",
+            "text": "Day type this cycle: weekend — riders cut citywide by the weekend rule. A station that moved more than the citywide rule names its own reason on its row.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 114 Factors (frame)",
+            "id": "F-b5a2467ec472"
+          },
+          {
+            "t": "FACT",
+            "text": "The week on the line — every cause on the record this cycle, once: mild; weekend; First Friday; game day (Downtown, Jack London); events in Downtown ×3, Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.30); game day (Downtown); events in Downtown ×3, Lake Merritt, Temescal; events in Lake Merritt, Chinatown ×2; events in Fruitvale ×3; Fruitvale Transit Hub Phase II — Visioning: design-phase; BART train: medical h",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 114 Factors",
+            "id": "F-864fb941c11c"
+          },
+          {
+            "t": "FACT",
+            "text": "Weather this cycle: mild, 55°F (4 cycles of clear)",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 114",
+            "id": "F-bf932e517031"
+          },
+          {
+            "t": "FACT",
+            "text": "Game on the sports feed this cycle: Oaks at San Antonio — The Oaks' perfect start ends at four. In Indiana, in front of a building at 90% capacity, the Pacers built a 61-42 halftime lead behind a 34-point second quarter and led 82-62 after three. The Oaks answered with 38 points in the fourth and won the quarter 38-22, but the comeback came up four short, Pacers 104 - Oaks 100. Adash Stanley and Austin Reaves led the way with 19 apiece. Stanley hit 5 of 11 from three, and Reaves had 7 assists an",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 114",
+            "id": "F-12f06b61a7ed"
+          },
+          {
+            "t": "FACT",
+            "text": "Game on the sports feed this cycle: Oaks at San Antonio — After the perfect start ended in Indiana, the Oaks went to Toronto and answered with the most lopsided win in franchise history, Oaks 135 - Raptors 75, in front of a 95% crowd. The Oaks led 39-19 after one, 73-40 at the half and 101-62 after three, and nobody played more than 28 minutes. Austin Reaves led with 20 on 4 of 6 from three, T. Jerome had 19 points, 7 rebounds and 7 assists, and Adash Stanley went 4 for 4 from three for 16 with",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 114",
+            "id": "F-d9f893d15444"
+          },
+          {
+            "t": "FACT",
+            "text": "Eleanor Rivera — BART Station Manager — BART Oakland Division",
+            "src": "Simulation_Ledger profile for POP-00617",
+            "id": "F-6412715ef9fb"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00280",
+      "name": "Jerald Jensen",
+      "quote": "The schedule tells you how many people came through. It doesn't tell you why they left. When the Coliseum empties out like that on a weekend, I see it in the trash cans — fewer cups, fewer wrappers, fewer folks lingering after the last train. The platform records don't catch the quiet. They don't catch the feeling that people aren't just missing a train, they're missing a reason to be there. That's what I see.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; restless for the new, adventurous; steady, hard to shake",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"The schedule tells you how many people came through. It doesn't tell you why they left. When the Coliseum empties out like that on a weekend, I see it in the trash cans — fewer cups, fewer wrappers, fewer folks lingering after the last train. The platform records don't catch the quiet. They don't catch the feeling that people aren't just missing a train, they're missing a reason to be there. That's what I see.\",\n  \"fact_ids\": [\"F-c3a558a5eebc\", \"F-fe6ab4e258ae\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": [],\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c3a558a5eebc",
+          "F-fe6ab4e258ae"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00280-b841095919",
+        "authoredQuote": true,
+        "publishableQuote": "The schedule tells you how many people came through. It doesn't tell you why they left. When the Coliseum empties out like that on a weekend, I see it in the trash cans — fewer cups, fewer wrappers, fewer folks lingering after the last train. The platform records don't catch the quiet. They don't catch the feeling that people aren't just missing a train, they're missing a reason to be there. That's what I see."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00280",
+          "name": "Jerald Jensen",
+          "role": "Janitor",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Trevor Shimizu",
+          "question": "On a weekend when the trains had no breakdowns this week but Coliseum emptied out, what do you see in the station that the schedule doesn't? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-transit",
+          "hood": null,
+          "focus": "Coliseum's 799-rider drop against a citywide pattern that doesn't account for it — what the platform records don't say.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Jerald Jensen — Janitor — AC Transit",
+          "evidence": [
+            {
+              "id": "EV-089b1c6eff",
+              "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+              "text": "Coliseum moved down the most this cycle — mild; weekend; base: ledger; crowded platforms (city transit congestion 0.30); 14 transit workers on the roster, 8 citizens who lived a transit line."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "Coliseum ridership down 799 vs C113 | 8 stations + 10 corridors on the record",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+            "id": "F-c3a558a5eebc"
+          },
+          {
+            "t": "FACT",
+            "text": "Coliseum moved down the most this cycle — mild; weekend; base: ledger; crowded platforms (city transit congestion 0.30); 14 transit workers on the roster, 8 citizens who lived a transit line.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+            "id": "F-fe6ab4e258ae"
+          },
+          {
+            "t": "FACT",
+            "text": "Day type this cycle: weekend — riders cut citywide by the weekend rule. A station that moved more than the citywide rule names its own reason on its row.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 114 Factors (frame)",
+            "id": "F-b5a2467ec472"
+          },
+          {
+            "t": "FACT",
+            "text": "The week on the line — every cause on the record this cycle, once: mild; weekend; First Friday; game day (Downtown, Jack London); events in Downtown ×3, Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.30); game day (Downtown); events in Downtown ×3, Lake Merritt, Temescal; events in Lake Merritt, Chinatown ×2; events in Fruitvale ×3; Fruitvale Transit Hub Phase II — Visioning: design-phase; BART train: medical h",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 114 Factors",
+            "id": "F-864fb941c11c"
+          },
+          {
+            "t": "FACT",
+            "text": "Weather this cycle: mild, 55°F (4 cycles of clear)",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 114",
+            "id": "F-bf932e517031"
+          },
+          {
+            "t": "FACT",
+            "text": "Game on the sports feed this cycle: Oaks at San Antonio — The Oaks' perfect start ends at four. In Indiana, in front of a building at 90% capacity, the Pacers built a 61-42 halftime lead behind a 34-point second quarter and led 82-62 after three. The Oaks answered with 38 points in the fourth and won the quarter 38-22, but the comeback came up four short, Pacers 104 - Oaks 100. Adash Stanley and Austin Reaves led the way with 19 apiece. Stanley hit 5 of 11 from three, and Reaves had 7 assists an",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 114",
+            "id": "F-12f06b61a7ed"
+          },
+          {
+            "t": "FACT",
+            "text": "Game on the sports feed this cycle: Oaks at San Antonio — After the perfect start ended in Indiana, the Oaks went to Toronto and answered with the most lopsided win in franchise history, Oaks 135 - Raptors 75, in front of a 95% crowd. The Oaks led 39-19 after one, 73-40 at the half and 101-62 after three, and nobody played more than 28 minutes. Austin Reaves led with 20 on 4 of 6 from three, T. Jerome had 19 points, 7 rebounds and 7 assists, and Adash Stanley went 4 for 4 from three for 16 with",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 114",
+            "id": "F-d9f893d15444"
+          },
+          {
+            "t": "FACT",
+            "text": "Jerald Jensen — Janitor — AC Transit",
+            "src": "Simulation_Ledger profile for POP-00280",
+            "id": "F-767f2a765161"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00200",
+      "name": "Evan Lewis",
+      "quote": "Look, I drive that line past the Coliseum plenty, and you can feel it when something's off before you ever see it in a report. On a weekend, yeah, the whole city thins out a bit — that's just how it goes. But when you pull up to that station and it's quieter than it ought to be, even for a Saturday, you start wondering. It's not about the numbers on a page. It's about the folks who used to be standing there who aren't anymore — the ones who found another way, or who just stopped going where they used to go. The platform records don't tell you about them. They don't tell you about the family that used to catch that train to a game and decided it wasn't worth the hassle this month. That's what I see. That's what stays with me after I clock out. I've been doing this long enough to know that when a stop drops like that, it's never just one reason. But nobody's asking the folks who aren't there anymore why they stopped. That's the part the numbers can't say.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; curious, open to new things; steady, hard to shake; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "{\"answer\":\"quote\",\"quote\":\"Look, I drive that line past the Coliseum plenty, and you can feel it when something's off before you ever see it in a report. On a weekend, yeah, the whole city thins out a bit — that's just how it goes. But when you pull up to that station and it's quieter than it ought to be, even for a Saturday, you start wondering. It's not about the numbers on a page. It's about the folks who used to be standing there who aren't anymore — the ones who found another way, or who just stopped going where they used to go. The platform records don't tell you about them. They don't tell you about the family that used to catch that train to a game and decided it wasn't worth the hassle this month. That's what I see. That's what stays with me after I clock out.\\n\\nI've been doing this long enough to know that when a stop drops like that, it's never just one reason. But nobody's asking the folks who aren't there anymore why they stopped. That's the part the numbers can't say.\",\"fact_ids\":[\"F-c3a558a5eebc\",\"F-fe6ab4e258ae\"],\"basis\":\"lived-context\",\"unverifiedLead\":null,\"abstain_reason\":null}",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c3a558a5eebc",
+          "F-fe6ab4e258ae"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00200-67003a328e",
+        "authoredQuote": true,
+        "publishableQuote": "Look, I drive that line past the Coliseum plenty, and you can feel it when something's off before you ever see it in a report. On a weekend, yeah, the whole city thins out a bit — that's just how it goes. But when you pull up to that station and it's quieter than it ought to be, even for a Saturday, you start wondering. It's not about the numbers on a page. It's about the folks who used to be standing there who aren't anymore — the ones who found another way, or who just stopped going where they used to go. The platform records don't tell you about them. They don't tell you about the family that used to catch that train to a game and decided it wasn't worth the hassle this month. That's what I see. That's what stays with me after I clock out. I've been doing this long enough to know that when a stop drops like that, it's never just one reason. But nobody's asking the folks who aren't there anymore why they stopped. That's the part the numbers can't say."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00200",
+          "name": "Evan Lewis",
+          "role": "Bus driver",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Trevor Shimizu",
+          "question": "What have you seen, felt, or understood about \"Coliseum's 799-rider drop against a citywide pattern that doesn't account for it — what the platform records don't say.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-transit",
+          "hood": null,
+          "focus": "Coliseum's 799-rider drop against a citywide pattern that doesn't account for it — what the platform records don't say.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Evan Lewis — Bus driver — AC Transit",
+          "evidence": [
+            {
+              "id": "EV-a54f19028e",
+              "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+              "text": "Coliseum moved down the most this cycle — mild; weekend; base: ledger; crowded platforms (city transit congestion 0.30); 14 transit workers on the roster, 8 citizens who lived a transit line."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "Coliseum ridership down 799 vs C113 | 8 stations + 10 corridors on the record",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+            "id": "F-c3a558a5eebc"
+          },
+          {
+            "t": "FACT",
+            "text": "Coliseum moved down the most this cycle — mild; weekend; base: ledger; crowded platforms (city transit congestion 0.30); 14 transit workers on the roster, 8 citizens who lived a transit line.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+            "id": "F-fe6ab4e258ae"
+          },
+          {
+            "t": "FACT",
+            "text": "Day type this cycle: weekend — riders cut citywide by the weekend rule. A station that moved more than the citywide rule names its own reason on its row.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 114 Factors (frame)",
+            "id": "F-b5a2467ec472"
+          },
+          {
+            "t": "FACT",
+            "text": "The week on the line — every cause on the record this cycle, once: mild; weekend; First Friday; game day (Downtown, Jack London); events in Downtown ×3, Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.30); game day (Downtown); events in Downtown ×3, Lake Merritt, Temescal; events in Lake Merritt, Chinatown ×2; events in Fruitvale ×3; Fruitvale Transit Hub Phase II — Visioning: design-phase; BART train: medical h",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 114 Factors",
+            "id": "F-864fb941c11c"
+          },
+          {
+            "t": "FACT",
+            "text": "Weather this cycle: mild, 55°F (4 cycles of clear)",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 114",
+            "id": "F-bf932e517031"
+          },
+          {
+            "t": "FACT",
+            "text": "Game on the sports feed this cycle: Oaks at San Antonio — The Oaks' perfect start ends at four. In Indiana, in front of a building at 90% capacity, the Pacers built a 61-42 halftime lead behind a 34-point second quarter and led 82-62 after three. The Oaks answered with 38 points in the fourth and won the quarter 38-22, but the comeback came up four short, Pacers 104 - Oaks 100. Adash Stanley and Austin Reaves led the way with 19 apiece. Stanley hit 5 of 11 from three, and Reaves had 7 assists an",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 114",
+            "id": "F-12f06b61a7ed"
+          },
+          {
+            "t": "FACT",
+            "text": "Game on the sports feed this cycle: Oaks at San Antonio — After the perfect start ended in Indiana, the Oaks went to Toronto and answered with the most lopsided win in franchise history, Oaks 135 - Raptors 75, in front of a 95% crowd. The Oaks led 39-19 after one, 73-40 at the half and 101-62 after three, and nobody played more than 28 minutes. Austin Reaves led with 20 on 4 of 6 from three, T. Jerome had 19 points, 7 rebounds and 7 assists, and Adash Stanley went 4 for 4 from three for 16 with",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 114",
+            "id": "F-d9f893d15444"
+          },
+          {
+            "t": "FACT",
+            "text": "Evan Lewis — Bus driver — AC Transit",
+            "src": "Simulation_Ledger profile for POP-00200",
+            "id": "F-43ae64c832ec"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-00791",
+      "name": "Elena Soria Dominguez",
+      "quote": "The documents show sightlines and path widths. They don't show the woman who sets up her cart at the panadería corner every morning, or the way riders slow down to talk to her even when the platform's crowded. Phase II's about geometry, but what I see is that people are already making this place theirs — the question is whether the design lets them keep doing that or just moves them through faster.",
+      "disp": "driven, hard to sit still; draws people in, deep with them; principled, plays it straight",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"The documents show sightlines and path widths. They don't show the woman who sets up her cart at the panadería corner every morning, or the way riders slow down to talk to her even when the platform's crowded. Phase II's about geometry, but what I see is that people are already making this place theirs — the question is whether the design lets them keep doing that or just moves them through faster.\",\n  \"fact_ids\": [\"F-864fb941c11c\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-864fb941c11c"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00791-4e343eb844",
+        "authoredQuote": true,
+        "publishableQuote": "The documents show sightlines and path widths. They don't show the woman who sets up her cart at the panadería corner every morning, or the way riders slow down to talk to her even when the platform's crowded. Phase II's about geometry, but what I see is that people are already making this place theirs — the question is whether the design lets them keep doing that or just moves them through faster."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00791",
+          "name": "Elena Soria Dominguez",
+          "role": "Transit Hub Planning Lead",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Trevor Shimizu",
+          "question": "With Phase II still in visioning and ridership up 510 this cycle, what are you seeing on the platform that the design documents don't capture? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-transit",
+          "hood": null,
+          "focus": "Coliseum's 799-rider drop against a citywide pattern that doesn't account for it — what the platform records don't say.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Elena Soria Dominguez — Transit Hub Planning Lead — Fruitvale Transit Hub Authority",
+          "evidence": [
+            {
+              "id": "EV-8985776f7c",
+              "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+              "text": "Coliseum moved down the most this cycle — mild; weekend; base: ledger; crowded platforms (city transit congestion 0.30); 14 transit workers on the roster, 8 citizens who lived a transit line."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "Coliseum ridership down 799 vs C113 | 8 stations + 10 corridors on the record",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+            "id": "F-c3a558a5eebc"
+          },
+          {
+            "t": "FACT",
+            "text": "Coliseum moved down the most this cycle — mild; weekend; base: ledger; crowded platforms (city transit congestion 0.30); 14 transit workers on the roster, 8 citizens who lived a transit line.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+            "id": "F-fe6ab4e258ae"
+          },
+          {
+            "t": "FACT",
+            "text": "Day type this cycle: weekend — riders cut citywide by the weekend rule. A station that moved more than the citywide rule names its own reason on its row.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 114 Factors (frame)",
+            "id": "F-b5a2467ec472"
+          },
+          {
+            "t": "FACT",
+            "text": "The week on the line — every cause on the record this cycle, once: mild; weekend; First Friday; game day (Downtown, Jack London); events in Downtown ×3, Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.30); game day (Downtown); events in Downtown ×3, Lake Merritt, Temescal; events in Lake Merritt, Chinatown ×2; events in Fruitvale ×3; Fruitvale Transit Hub Phase II — Visioning: design-phase; BART train: medical h",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 114 Factors",
+            "id": "F-864fb941c11c"
+          },
+          {
+            "t": "FACT",
+            "text": "Weather this cycle: mild, 55°F (4 cycles of clear)",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 114",
+            "id": "F-bf932e517031"
+          },
+          {
+            "t": "FACT",
+            "text": "Game on the sports feed this cycle: Oaks at San Antonio — The Oaks' perfect start ends at four. In Indiana, in front of a building at 90% capacity, the Pacers built a 61-42 halftime lead behind a 34-point second quarter and led 82-62 after three. The Oaks answered with 38 points in the fourth and won the quarter 38-22, but the comeback came up four short, Pacers 104 - Oaks 100. Adash Stanley and Austin Reaves led the way with 19 apiece. Stanley hit 5 of 11 from three, and Reaves had 7 assists an",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 114",
+            "id": "F-12f06b61a7ed"
+          },
+          {
+            "t": "FACT",
+            "text": "Game on the sports feed this cycle: Oaks at San Antonio — After the perfect start ended in Indiana, the Oaks went to Toronto and answered with the most lopsided win in franchise history, Oaks 135 - Raptors 75, in front of a 95% crowd. The Oaks led 39-19 after one, 73-40 at the half and 101-62 after three, and nobody played more than 28 minutes. Austin Reaves led with 20 on 4 of 6 from three, T. Jerome had 19 points, 7 rebounds and 7 assists, and Adash Stanley went 4 for 4 from three for 16 with",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 114",
+            "id": "F-d9f893d15444"
+          },
+          {
+            "t": "FACT",
+            "text": "Elena Soria Dominguez — Transit Hub Planning Lead — Fruitvale Transit Hub Authority",
+            "src": "Simulation_Ledger profile for POP-00791",
+            "id": "F-79a3d1428db6"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00617",
+      "name": "Eleanor Rivera",
+      "quote": "At 7:40 on a weekend morning at 12th Street, the shift is quiet in a different way than a weekday. The crowds aren't there, so you hear the announcements bounce off the tile more. And you notice the regulars — the ones who are always there, not the game-day rush. If riders didn't come, most of the time it's the weather or a holiday or something happening downtown. But I can't speak for Coliseum specifically — I wasn't there, and I don't have that platform's view. What I can tell you is that when a station drops more than the usual weekend pattern, it's rarely one thing. It's usually a rhythm stacking up — something at the station, something on the line, something in that neighborhood. But I'd be guessing if I told you where those riders went.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"At 7:40 on a weekend morning at 12th Street, the shift is quiet in a different way than a weekday. The crowds aren't there, so you hear the announcements bounce off the tile more. And you notice the regulars — the ones who are always there, not the game-day rush. If riders didn't come, most of the time it's the weather or a holiday or something happening downtown. But I can't speak for Coliseum specifically — I wasn't there, and I don't have that platform's view. What I can tell you is that when a station drops more than the usual weekend pattern, it's rarely one thing. It's usually a rhythm stacking up — something at the station, something on the line, something in that neighborhood. But I'd be guessing if I told you where those riders went.\",\n  \"fact_ids\": [\n    \"F-c3a558a5eebc\",\n    \"F-b5a2467ec472\",\n    \"F-864fb941c11c\"\n  ],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c3a558a5eebc",
+          "F-b5a2467ec472",
+          "F-864fb941c11c"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00617-2fb6b216d1",
+        "authoredQuote": true,
+        "publishableQuote": "At 7:40 on a weekend morning at 12th Street, the shift is quiet in a different way than a weekday. The crowds aren't there, so you hear the announcements bounce off the tile more. And you notice the regulars — the ones who are always there, not the game-day rush. If riders didn't come, most of the time it's the weather or a holiday or something happening downtown. But I can't speak for Coliseum specifically — I wasn't there, and I don't have that platform's view. What I can tell you is that when a station drops more than the usual weekend pattern, it's rarely one thing. It's usually a rhythm stacking up — something at the station, something on the line, something in that neighborhood. But I'd be guessing if I told you where those riders went."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00617",
+          "name": "Eleanor Rivera",
+          "role": "BART Station Manager",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Trevor Shimizu",
+          "question": "At 7:40 a.m. on 12th Street, what did the shift look like — and what tells you the riders who didn't come, where did they go? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-transit",
+          "hood": null,
+          "focus": "Coliseum's 799-rider drop against a citywide pattern that doesn't account for it — what the platform records don't say.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Eleanor Rivera — BART Station Manager — BART Oakland Division",
+          "evidence": [
+            {
+              "id": "EV-1cdd50c1d6",
+              "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+              "text": "Coliseum moved down the most this cycle — mild; weekend; base: ledger; crowded platforms (city transit congestion 0.30); 14 transit workers on the roster, 8 citizens who lived a transit line."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "Coliseum ridership down 799 vs C113 | 8 stations + 10 corridors on the record",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+            "id": "F-c3a558a5eebc"
+          },
+          {
+            "t": "FACT",
+            "text": "Coliseum moved down the most this cycle — mild; weekend; base: ledger; crowded platforms (city transit congestion 0.30); 14 transit workers on the roster, 8 citizens who lived a transit line.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+            "id": "F-fe6ab4e258ae"
+          },
+          {
+            "t": "FACT",
+            "text": "Day type this cycle: weekend — riders cut citywide by the weekend rule. A station that moved more than the citywide rule names its own reason on its row.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 114 Factors (frame)",
+            "id": "F-b5a2467ec472"
+          },
+          {
+            "t": "FACT",
+            "text": "The week on the line — every cause on the record this cycle, once: mild; weekend; First Friday; game day (Downtown, Jack London); events in Downtown ×3, Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.30); game day (Downtown); events in Downtown ×3, Lake Merritt, Temescal; events in Lake Merritt, Chinatown ×2; events in Fruitvale ×3; Fruitvale Transit Hub Phase II — Visioning: design-phase; BART train: medical h",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 114 Factors",
+            "id": "F-864fb941c11c"
+          },
+          {
+            "t": "FACT",
+            "text": "Weather this cycle: mild, 55°F (4 cycles of clear)",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 114",
+            "id": "F-bf932e517031"
+          },
+          {
+            "t": "FACT",
+            "text": "Game on the sports feed this cycle: Oaks at San Antonio — The Oaks' perfect start ends at four. In Indiana, in front of a building at 90% capacity, the Pacers built a 61-42 halftime lead behind a 34-point second quarter and led 82-62 after three. The Oaks answered with 38 points in the fourth and won the quarter 38-22, but the comeback came up four short, Pacers 104 - Oaks 100. Adash Stanley and Austin Reaves led the way with 19 apiece. Stanley hit 5 of 11 from three, and Reaves had 7 assists an",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 114",
+            "id": "F-12f06b61a7ed"
+          },
+          {
+            "t": "FACT",
+            "text": "Game on the sports feed this cycle: Oaks at San Antonio — After the perfect start ended in Indiana, the Oaks went to Toronto and answered with the most lopsided win in franchise history, Oaks 135 - Raptors 75, in front of a 95% crowd. The Oaks led 39-19 after one, 73-40 at the half and 101-62 after three, and nobody played more than 28 minutes. Austin Reaves led with 20 on 4 of 6 from three, T. Jerome had 19 points, 7 rebounds and 7 assists, and Adash Stanley went 4 for 4 from three for 16 with",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 114",
+            "id": "F-d9f893d15444"
+          },
+          {
+            "t": "FACT",
+            "text": "Eleanor Rivera — BART Station Manager — BART Oakland Division",
+            "src": "Simulation_Ledger profile for POP-00617",
+            "id": "F-6412715ef9fb"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00280",
+      "name": "Jerald Jensen",
+      "quote": "The schedule tells you how many people came through. It doesn't tell you why they left. When the Coliseum empties out like that on a weekend, I see it in the trash cans — fewer cups, fewer wrappers, fewer folks lingering after the last train. The platform records don't catch the quiet. They don't catch the feeling that people aren't just missing a train, they're missing a reason to be there. That's what I see.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; restless for the new, adventurous; steady, hard to shake",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"The schedule tells you how many people came through. It doesn't tell you why they left. When the Coliseum empties out like that on a weekend, I see it in the trash cans — fewer cups, fewer wrappers, fewer folks lingering after the last train. The platform records don't catch the quiet. They don't catch the feeling that people aren't just missing a train, they're missing a reason to be there. That's what I see.\",\n  \"fact_ids\": [\"F-c3a558a5eebc\", \"F-fe6ab4e258ae\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": [],\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c3a558a5eebc",
+          "F-fe6ab4e258ae"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00280-b841095919",
+        "authoredQuote": true,
+        "publishableQuote": "The schedule tells you how many people came through. It doesn't tell you why they left. When the Coliseum empties out like that on a weekend, I see it in the trash cans — fewer cups, fewer wrappers, fewer folks lingering after the last train. The platform records don't catch the quiet. They don't catch the feeling that people aren't just missing a train, they're missing a reason to be there. That's what I see."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00280",
+          "name": "Jerald Jensen",
+          "role": "Janitor",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Trevor Shimizu",
+          "question": "On a weekend when the trains had no breakdowns this week but Coliseum emptied out, what do you see in the station that the schedule doesn't? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-transit",
+          "hood": null,
+          "focus": "Coliseum's 799-rider drop against a citywide pattern that doesn't account for it — what the platform records don't say.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Jerald Jensen — Janitor — AC Transit",
+          "evidence": [
+            {
+              "id": "EV-089b1c6eff",
+              "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+              "text": "Coliseum moved down the most this cycle — mild; weekend; base: ledger; crowded platforms (city transit congestion 0.30); 14 transit workers on the roster, 8 citizens who lived a transit line."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "Coliseum ridership down 799 vs C113 | 8 stations + 10 corridors on the record",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+            "id": "F-c3a558a5eebc"
+          },
+          {
+            "t": "FACT",
+            "text": "Coliseum moved down the most this cycle — mild; weekend; base: ledger; crowded platforms (city transit congestion 0.30); 14 transit workers on the roster, 8 citizens who lived a transit line.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+            "id": "F-fe6ab4e258ae"
+          },
+          {
+            "t": "FACT",
+            "text": "Day type this cycle: weekend — riders cut citywide by the weekend rule. A station that moved more than the citywide rule names its own reason on its row.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 114 Factors (frame)",
+            "id": "F-b5a2467ec472"
+          },
+          {
+            "t": "FACT",
+            "text": "The week on the line — every cause on the record this cycle, once: mild; weekend; First Friday; game day (Downtown, Jack London); events in Downtown ×3, Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.30); game day (Downtown); events in Downtown ×3, Lake Merritt, Temescal; events in Lake Merritt, Chinatown ×2; events in Fruitvale ×3; Fruitvale Transit Hub Phase II — Visioning: design-phase; BART train: medical h",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 114 Factors",
+            "id": "F-864fb941c11c"
+          },
+          {
+            "t": "FACT",
+            "text": "Weather this cycle: mild, 55°F (4 cycles of clear)",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 114",
+            "id": "F-bf932e517031"
+          },
+          {
+            "t": "FACT",
+            "text": "Game on the sports feed this cycle: Oaks at San Antonio — The Oaks' perfect start ends at four. In Indiana, in front of a building at 90% capacity, the Pacers built a 61-42 halftime lead behind a 34-point second quarter and led 82-62 after three. The Oaks answered with 38 points in the fourth and won the quarter 38-22, but the comeback came up four short, Pacers 104 - Oaks 100. Adash Stanley and Austin Reaves led the way with 19 apiece. Stanley hit 5 of 11 from three, and Reaves had 7 assists an",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 114",
+            "id": "F-12f06b61a7ed"
+          },
+          {
+            "t": "FACT",
+            "text": "Game on the sports feed this cycle: Oaks at San Antonio — After the perfect start ended in Indiana, the Oaks went to Toronto and answered with the most lopsided win in franchise history, Oaks 135 - Raptors 75, in front of a 95% crowd. The Oaks led 39-19 after one, 73-40 at the half and 101-62 after three, and nobody played more than 28 minutes. Austin Reaves led with 20 on 4 of 6 from three, T. Jerome had 19 points, 7 rebounds and 7 assists, and Adash Stanley went 4 for 4 from three for 16 with",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 114",
+            "id": "F-d9f893d15444"
+          },
+          {
+            "t": "FACT",
+            "text": "Jerald Jensen — Janitor — AC Transit",
+            "src": "Simulation_Ledger profile for POP-00280",
+            "id": "F-767f2a765161"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00200",
+      "name": "Evan Lewis",
+      "quote": "Look, I drive that line past the Coliseum plenty, and you can feel it when something's off before you ever see it in a report. On a weekend, yeah, the whole city thins out a bit — that's just how it goes. But when you pull up to that station and it's quieter than it ought to be, even for a Saturday, you start wondering. It's not about the numbers on a page. It's about the folks who used to be standing there who aren't anymore — the ones who found another way, or who just stopped going where they used to go. The platform records don't tell you about them. They don't tell you about the family that used to catch that train to a game and decided it wasn't worth the hassle this month. That's what I see. That's what stays with me after I clock out. I've been doing this long enough to know that when a stop drops like that, it's never just one reason. But nobody's asking the folks who aren't there anymore why they stopped. That's the part the numbers can't say.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; curious, open to new things; steady, hard to shake; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "{\"answer\":\"quote\",\"quote\":\"Look, I drive that line past the Coliseum plenty, and you can feel it when something's off before you ever see it in a report. On a weekend, yeah, the whole city thins out a bit — that's just how it goes. But when you pull up to that station and it's quieter than it ought to be, even for a Saturday, you start wondering. It's not about the numbers on a page. It's about the folks who used to be standing there who aren't anymore — the ones who found another way, or who just stopped going where they used to go. The platform records don't tell you about them. They don't tell you about the family that used to catch that train to a game and decided it wasn't worth the hassle this month. That's what I see. That's what stays with me after I clock out.\\n\\nI've been doing this long enough to know that when a stop drops like that, it's never just one reason. But nobody's asking the folks who aren't there anymore why they stopped. That's the part the numbers can't say.\",\"fact_ids\":[\"F-c3a558a5eebc\",\"F-fe6ab4e258ae\"],\"basis\":\"lived-context\",\"unverifiedLead\":null,\"abstain_reason\":null}",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c3a558a5eebc",
+          "F-fe6ab4e258ae"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00200-67003a328e",
+        "authoredQuote": true,
+        "publishableQuote": "Look, I drive that line past the Coliseum plenty, and you can feel it when something's off before you ever see it in a report. On a weekend, yeah, the whole city thins out a bit — that's just how it goes. But when you pull up to that station and it's quieter than it ought to be, even for a Saturday, you start wondering. It's not about the numbers on a page. It's about the folks who used to be standing there who aren't anymore — the ones who found another way, or who just stopped going where they used to go. The platform records don't tell you about them. They don't tell you about the family that used to catch that train to a game and decided it wasn't worth the hassle this month. That's what I see. That's what stays with me after I clock out. I've been doing this long enough to know that when a stop drops like that, it's never just one reason. But nobody's asking the folks who aren't there anymore why they stopped. That's the part the numbers can't say."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00200",
+          "name": "Evan Lewis",
+          "role": "Bus driver",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Trevor Shimizu",
+          "question": "What have you seen, felt, or understood about \"Coliseum's 799-rider drop against a citywide pattern that doesn't account for it — what the platform records don't say.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-transit",
+          "hood": null,
+          "focus": "Coliseum's 799-rider drop against a citywide pattern that doesn't account for it — what the platform records don't say.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Evan Lewis — Bus driver — AC Transit",
+          "evidence": [
+            {
+              "id": "EV-a54f19028e",
+              "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+              "text": "Coliseum moved down the most this cycle — mild; weekend; base: ledger; crowded platforms (city transit congestion 0.30); 14 transit workers on the roster, 8 citizens who lived a transit line."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "Coliseum ridership down 799 vs C113 | 8 stations + 10 corridors on the record",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+            "id": "F-c3a558a5eebc"
+          },
+          {
+            "t": "FACT",
+            "text": "Coliseum moved down the most this cycle — mild; weekend; base: ledger; crowded platforms (city transit congestion 0.30); 14 transit workers on the roster, 8 citizens who lived a transit line.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+            "id": "F-fe6ab4e258ae"
+          },
+          {
+            "t": "FACT",
+            "text": "Day type this cycle: weekend — riders cut citywide by the weekend rule. A station that moved more than the citywide rule names its own reason on its row.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 114 Factors (frame)",
+            "id": "F-b5a2467ec472"
+          },
+          {
+            "t": "FACT",
+            "text": "The week on the line — every cause on the record this cycle, once: mild; weekend; First Friday; game day (Downtown, Jack London); events in Downtown ×3, Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.30); game day (Downtown); events in Downtown ×3, Lake Merritt, Temescal; events in Lake Merritt, Chinatown ×2; events in Fruitvale ×3; Fruitvale Transit Hub Phase II — Visioning: design-phase; BART train: medical h",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 114 Factors",
+            "id": "F-864fb941c11c"
+          },
+          {
+            "t": "FACT",
+            "text": "Weather this cycle: mild, 55°F (4 cycles of clear)",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 114",
+            "id": "F-bf932e517031"
+          },
+          {
+            "t": "FACT",
+            "text": "Game on the sports feed this cycle: Oaks at San Antonio — The Oaks' perfect start ends at four. In Indiana, in front of a building at 90% capacity, the Pacers built a 61-42 halftime lead behind a 34-point second quarter and led 82-62 after three. The Oaks answered with 38 points in the fourth and won the quarter 38-22, but the comeback came up four short, Pacers 104 - Oaks 100. Adash Stanley and Austin Reaves led the way with 19 apiece. Stanley hit 5 of 11 from three, and Reaves had 7 assists an",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 114",
+            "id": "F-12f06b61a7ed"
+          },
+          {
+            "t": "FACT",
+            "text": "Game on the sports feed this cycle: Oaks at San Antonio — After the perfect start ended in Indiana, the Oaks went to Toronto and answered with the most lopsided win in franchise history, Oaks 135 - Raptors 75, in front of a 95% crowd. The Oaks led 39-19 after one, 73-40 at the half and 101-62 after three, and nobody played more than 28 minutes. Austin Reaves led with 20 on 4 of 6 from three, T. Jerome had 19 points, 7 rebounds and 7 assists, and Adash Stanley went 4 for 4 from three for 16 with",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 114",
+            "id": "F-d9f893d15444"
+          },
+          {
+            "t": "FACT",
+            "text": "Evan Lewis — Bus driver — AC Transit",
+            "src": "Simulation_Ledger profile for POP-00200",
+            "id": "F-43ae64c832ec"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-11-02T19:17:30.977Z"
+}

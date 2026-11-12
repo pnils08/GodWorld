@@ -49,7 +49,7 @@ const { parseJsonField } = require('/root/GodWorld/scripts/buildWorldSummary');
 const { loadFaithBlocklist } = require('/root/GodWorld/lib/canonBlocklist');
 
 const REPO_ROOT = path.resolve(__dirname, '..');
-const SCRIPT_VERSION = '1.1.0';
+const SCRIPT_VERSION = '1.2.0';
 const QUIET_LINE = 'A quiet week — nothing much out of the ordinary around the neighborhood.';
 
 // ── Story_Seed_Deck → lived-particular sources (S456, Mike-direct "Go") ─────────
@@ -225,7 +225,7 @@ function assembleHoodSources(hood, slicer, worldEvents, venues, cityEventsByHood
 
 // ── generation ────────────────────────────────────────────────────────────────
 
-function buildPrompt(bundles, canon) {
+function buildPrompt(bundles, canon, redo) {
   const ident = (canon && canon.identity) || {};
   const marks = (canon && canon.landmarks) || {};
   const system = [
@@ -238,12 +238,17 @@ function buildPrompt(bundles, canon) {
     '- NEVER invent drama, hardship, or events. If the sources are thin, write something small and ordinary. The GROUNDING notes only keep you truthful (don\'t describe hardship in a comfortable area, or wealth in a working-class one) — never print them.',
     '- NEVER name real-world people, sports figures, or real churches/clergy. Use only what the source lines name.',
     '- NOTED lines are the city\'s own record of what moved in that neighborhood this week (a build underway, a program paying out, someone new on the block, the strip busier or quieter). They are things that happened; render what a person would see or hear of them, never the wording.',
+    // G-EC38 (C115): the model took a program seed ("job training workshop begins
+    // new session") and seated it at a canon temple, and read "in design" as
+    // "under construction". Both are inventions that read as fact in a wake.
+    '- A SOURCE line stands alone. NEVER combine two lines, and NEVER place a program, event or project at a named place unless that same line names the place. A program with no place in its line happens somewhere unnamed ("a workshop", "the program").',
+    '- State a project\'s stage exactly as the line gives it: "in design" is not construction, "being talked about" is not a plan, "headed for a vote" is not passed. Never add an opening, a groundbreaking, a result, a vote or a completion the line does not say.',
     // G-PF23: identity is REGISTER, not content. It tells you what kind of place
     // this is so the observation lands in the right key — a quiet week in
     // Chinatown does not read like a quiet week in Baylight. It is never itself
     // a thing that happened.
     '- IDENTITY is what the neighborhood IS, permanently. Never print it, never restate it, never treat it as news. Use it only to keep your register true: the same small event reads differently in a district that inherited its money than in one that just got built.',
-    '- CANON NAMES are the real, permitted names of places in that neighborhood. If a SOURCE line already puts a resident somewhere those names cover, name it instead of writing "the theater" or "the bookstore". Never introduce one as a new subject — a name is not an event, and a week where nothing happened at it is still a week where nothing happened at it.',
+    '- CANON NAMES are the real, permitted names of places in that neighborhood. Use one ONLY where a SOURCE line itself names that place or says the thing happened at that kind of place. Never introduce one as a new subject or as the setting of a program or event — a name is not an event, and a week where nothing happened at it is still a week where nothing happened at it.',
     '',
     'OUTPUT FORMAT: for each neighborhood, exactly one line "### <NeighborhoodName>" then the 2-4 sentences on the next line(s), then a blank line. Use the neighborhood names EXACTLY as given.',
   ].join('\n');
@@ -253,7 +258,8 @@ function buildPrompt(bundles, canon) {
     const grd = b.grounding.length ? `\n  GROUNDING (do not print): ${b.grounding.join('; ')}` : '';
     const idn = ident[b.hood] ? `\n  IDENTITY (do not print): ${ident[b.hood]}` : '';
     const lmk = (marks[b.hood] || []).length ? `\n  CANON NAMES: ${marks[b.hood].join('; ')}` : '';
-    return `### ${b.hood}\nSOURCES:\n${src}${idn}${lmk}${grd}`;
+    const fix = redo && redo[b.hood] ? `\n  YOUR LAST DRAFT FAILED (rewrite without these): ${redo[b.hood].join('; ')}` : '';
+    return `### ${b.hood}\nSOURCES:\n${src}${idn}${lmk}${grd}${fix}`;
   }).join('\n\n');
 
   return { system, user };
@@ -455,6 +461,54 @@ function metricWarnings(blocksMap) {
   return warns;
 }
 
+// ── semantic grounding gate (G-EC38, C115) ────────────────────────────────────
+// The prompt asks the model not to invent; this is the part that checks. A block
+// fails when it (a) names a canon place its hood's source lines never name, or
+// (b) states a stage or result (construction, opening, a vote, a game detail)
+// that none of the hood's source lines state. Identity and grounding text do not
+// count as sources — they are register, never news.
+const STATE_CLAIMS = [
+  ['construction', /\bconstruction\b|\bbroke ground\b|\bgroundbreaking\b|\bscaffold|\bcranes?\b|\bbulldoz|\bjackhammer/i],
+  ['an opening', /\bribbon[- ]cutting\b|\bgrand opening\b|\bnewly opened\b|\bjust opened\b|\bopened (?:its|this|last)\b/i],
+  ['a vote or approval', /\bvoted\b|\bapproved\b|\bratified\b/i],
+  ['a game detail', /\binnings?\b|\btouchdowns?\b|\bhome runs?\b|\bbuzzer\b|\bhalftime\b|\bfinal score\b/i],
+];
+
+function sourceText(bundle) {
+  return bundle.sources.join(' \n ').toLowerCase();
+}
+
+// Pure; exported for tests. Returns a list of human-readable violations ([] = grounded).
+function groundingViolations(text, bundle, allCanonNames) {
+  const out = [];
+  const low = String(text || '').toLowerCase();
+  const src = sourceText(bundle);
+  for (const name of allCanonNames || []) {
+    const n = String(name).toLowerCase();
+    if (n.length > 3 && low.includes(n) && !src.includes(n)) out.push(`names "${name}", which no source line names`);
+  }
+  for (const [label, re] of STATE_CLAIMS) {
+    if (re.test(low) && !re.test(src)) out.push(`states ${label} that no source line states`);
+  }
+  return out;
+}
+
+// Deterministic block built from the plain source lines themselves — used only
+// when a rewrite still fails the gate. Says no more than the sources say.
+function fallbackBlock(bundle) {
+  const plain = [];
+  const venues = [];
+  for (const line of bundle.sources) {
+    let m = line.match(/^(?:NOTED|EVENT|CITY EVENT): (.+)$/);
+    if (m) { plain.push(m[1].trim()); continue; }
+    m = line.match(/^VENUE \((.+?)\): (.+)$/);
+    if (m) venues.push(`${m[2].trim()} (${m[1]})`);
+  }
+  const sentences = plain.map((t) => t.charAt(0).toUpperCase() + t.slice(1)).map((t) => (/[.!?]$/.test(t) ? t : t + '.'));
+  if (!sentences.length && venues.length) sentences.push(`${venues.slice(0, 3).join(', ')} ${venues.length > 1 ? 'are' : 'is'} among the places on the block.`);
+  return sentences.length ? sentences.join(' ') : QUIET_LINE;
+}
+
 // ── orchestration ─────────────────────────────────────────────────────────────
 
 async function buildNeighborhoodTexture(cycle) {
@@ -515,6 +569,23 @@ async function buildNeighborhoodTexture(cycle) {
     const gen = parseBlocks(raw, hoods);
     for (const b of withSignal) {
       blocksMap[b.hood] = gen[b.hood] || QUIET_LINE; // unmatched hood -> safe quiet line
+    }
+
+    // G-EC38: check every generated block against its own hood's sources; one
+    // targeted rewrite for the failures, then the deterministic fallback.
+    const allCanon = [...new Set(Object.values(canon.landmarks || {}).flat())];
+    const failed = () => withSignal.map((b) => ({ b, v: gen[b.hood] ? groundingViolations(blocksMap[b.hood], b, allCanon) : [] })).filter((x) => x.v.length);
+    let bad = failed();
+    if (bad.length) {
+      console.error('[texture] grounding gate: ' + bad.map((x) => `${x.b.hood} (${x.v.join(' / ')})`).join('; ') + ' — rewriting');
+      const redo = Object.fromEntries(bad.map((x) => [x.b.hood, x.v]));
+      const again = parseBlocks(await generateTexture(...Object.values(buildPrompt(bad.map((x) => x.b), canon, redo))), hoods);
+      for (const x of bad) if (again[x.b.hood]) blocksMap[x.b.hood] = again[x.b.hood];
+      bad = bad.filter((x) => !again[x.b.hood] || groundingViolations(blocksMap[x.b.hood], x.b, allCanon).length);
+      for (const x of bad) {
+        console.error(`[texture] grounding gate: ${x.b.hood} still ungrounded after rewrite — source-line fallback`);
+        blocksMap[x.b.hood] = fallbackBlock(x.b);
+      }
     }
   }
 
@@ -581,6 +652,9 @@ module.exports = {
   buildRealNameSweep,
   sweepBlocks,
   metricWarnings,
+  groundingViolations,
+  fallbackBlock,
+  buildPrompt,
   SCRIPT_VERSION,
 };
 

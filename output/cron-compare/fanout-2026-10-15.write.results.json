@@ -1,0 +1,92 @@
+{
+  "date": "2026-10-15",
+  "stage": "write",
+  "results": [
+    {
+      "name": "Elliot Graye",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "engineTerms": [],
+        "verbatim": [],
+        "words": 823,
+        "contractScore": 2
+      }
+    },
+    {
+      "name": "Simon Leary",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "engineTerms": [],
+        "verbatim": [],
+        "words": 487,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Hal Richmond",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "engineTerms": [],
+        "verbatim": [],
+        "words": 1050,
+        "contractScore": 3
+      }
+    },
+    {
+      "name": "Talia Finch",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "engineTerms": [],
+        "verbatim": [],
+        "words": 459,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "engineTerms": [],
+        "verbatim": [],
+        "words": 309,
+        "contractScore": 3
+      }
+    }
+  ],
+  "checkTotals": {
+    "seats": 5,
+    "toolSeats": 0,
+    "capHits": 0,
+    "thin": 0,
+    "engineTerm": 0,
+    "verbatim": 0,
+    "graded": 5,
+    "gradeSum": 16
+  },
+  "ranAt": "2026-10-15T23:21:16.708Z"
+}

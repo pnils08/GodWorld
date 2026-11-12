@@ -1,0 +1,50 @@
+{
+  "office": "stabilization_fund",
+  "cycle": 115,
+  "speaker": "Marcus Webb",
+  "cascadeSummary": "I am publishing the C114 closeout and completing the charter renewal draft this cycle, transmitting the ordinance to the C115 council agenda with the business-and-resident scope and the 23-day processing standard preserved — and I am not claiming renewal, because that is council's call, not mine. On Grand Lake, the $2.5 million goes to its recorded full-council decision with every Chen-Vega milestone and audit condition still attached; I do not write the result in advance. The queue in West Oakland keeps moving while the paperwork that protects it goes to the record.",
+  "statements": [
+    {
+      "statementId": "STMT-115-stabilization_fund-001",
+      "type": "operational_status",
+      "topic": "C114 closeout published; charter renewal ordinance transmitted to C115 agenda",
+      "initiative": "INIT-001",
+      "decision": "Publish the C114 closeout and expenditure reconciliation, complete the charter renewal draft in scope-preservation language, and transmit the renewal ordinance to the C115 council agenda — preserving the West Oakland business-and-resident scope and the 23-day processing standard without claiming renewal.",
+      "quote": "The closeout is on the record, the renewal draft is in the clerk's hands, and the 23-day standard holds — but renewal belongs to the council, and I will not call their vote before they do.",
+      "fullStatement": "The C114 closeout is published and the expenditure reconciliation is filed with it. That document says what the ledger says: the twelfth consecutive monthly disbursement executed under the 23-day processing standard, every case file closed to a paid receipt, every dollar matched to an authorization. The charter renewal draft is complete and it names back what the charter named — the long-tenure West Oakland cohort, the business-and-resident scope, the 23-day standard. No quiet rewrite, no widened purpose, no narrowed neighborhood. I have transmitted the renewal ordinance to the C115 council agenda. What I have not done, and will not do, is claim renewal. That is the council's decision, made openly, backed by published results rather than expiration and silence. My files are ready for any councilmember who wants to read them before they vote.",
+      "trackerUpdates": {
+        "initiative": "INIT-001",
+        "ImplementationPhase": "disbursement-active",
+        "MilestoneNotes": "C115: C114 closeout published; charter renewal draft completed in scope-preservation language; ordinance transmitted to C115 agenda, no renewal claimed.",
+        "NextScheduledAction": "Council action on charter renewal ordinance at C115; next monthly disbursement under 23-day standard",
+        "NextActionCycle": 116
+      }
+    },
+    {
+      "statementId": "STMT-115-stabilization_fund-002",
+      "type": "operational_status",
+      "topic": "Grand Lake $2.5M to recorded full-council decision with all conditions intact",
+      "initiative": "INIT-009",
+      "decision": "Bring the Grand Lake $2.5 million to its recorded full-council decision with every Chen-Vega milestone and audit condition attached and unmodified; do not presume or predict the vote.",
+      "quote": "Grand Lake's two and a half million dollars walks into the council chamber with every milestone and audit condition still stapled to it — and I do not get to write the result.",
+      "fullStatement": "The Grand Lake commercial stabilization request reaches its recorded full-council decision this cycle with the Chen-Vega milestone-and-audit conditions intact — nothing dropped, nothing softened, nothing traded. If the council votes yes, the funds flow only against those recorded milestones, and the audit conditions are not negotiable post-vote. If the council votes no, the file closes and I say so plainly. What I do in the meantime is what I do on every file: keep the ledger, keep the documentation clean, and let the record speak at the vote. The engine flags Grand Lake improvement at low severity. I read that. I am not the office that decides what the neighborhood means; I am the office that makes sure the money — if it moves — moves accountable.",
+      "trackerUpdates": {
+        "initiative": "INIT-009",
+        "ImplementationPhase": "vote-ready",
+        "MilestoneNotes": "C115: Grand Lake $2.5M brought to recorded full-council decision with all Chen-Vega milestone and audit conditions intact; vote not presumed.",
+        "NextScheduledAction": "Recorded full-council decision on INIT-009; if passed, milestone-tracking disbursement begins",
+        "NextActionCycle": 116
+      }
+    },
+    {
+      "statementId": "STMT-115-stabilization_fund-003",
+      "type": "constituent_commitment",
+      "topic": "West Oakland queue, 23-day standard, and housing pressure",
+      "initiative": "INIT-001",
+      "decision": "Hold the 23-day processing standard and keep the West Oakland queue moving to the remaining long-tenure cohort while the closeout and renewal sit on the council record.",
+      "quote": "The mood in West Oakland is slipping and the housing pressure is building — which is exactly why the queue does not stop while the paperwork goes to the record.",
+      "fullStatement": "The engine's reading is right: West Oakland's mood is slipping and housing pressure is building. That is the whole reason this fund exists — the long-tenure residents priced out as the flats built out, the remnant the charter named. So while the closeout and the renewal ordinance sit on the council record, the disbursement office keeps its Tuesday and Friday check days. The reviewers keep the queue moving under the 23-day standard. Every household that clears gets a determination letter and a paid receipt in the case file. I do not narrate West Oakland. I keep its queue honest and moving until the money is spent on the people the charter named — and every case file meets standards that will survive audit.",
+      "trackerUpdates": {}
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "model": "openai/gpt-6-luna",
+  "calls": [
+    {
+      "tool": "undocked_history",
+      "input": {
+        "pilot": "Father Miguel"
+      },
+      "resultChars": 171,
+      "resultHead": "Available gate-approved UNDOCKED feed history for Father Miguel before C113:\nNo earlier episode found in the available approved packs; this does not prove none ever aired."
+    },
+    {
+      "tool": "undocked_history",
+      "input": {
+        "pilot": "Eric Taveras"
+      },
+      "resultChars": 391,
+      "resultHead": "Available gate-approved UNDOCKED feed history for Eric Taveras before C113:\nC111 UNDOCKED: Eric Taveras — credits 0; systems Sol, sol, sirius; combat 0; mishaps 0.\nC111 UNDOCKED: Eric Taveras — credits 1170; systems sirius; combat 0; mishaps 0.\nC111 UNDOCKED: Eric Taveras — credits 0; systems node_alpha, synchrony, pherkad, gsc_0041, antares, homam, furud, nova_terra; combat 0; mishaps 0."
+    }
+  ],
+  "ranAt": "2026-10-28T17:04:47.538Z"
+}

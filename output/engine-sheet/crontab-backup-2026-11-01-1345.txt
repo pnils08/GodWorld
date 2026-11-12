@@ -1,0 +1,73 @@
+# Mags Daily Heartbeat (scripts/daily-reflection.js) — DISABLED S187 to save API calls; orphan script, no cron entry
+
+# Mags Discord Reflection — now 3x/day 07:00/12:00/19:00 (S252 wakes; formerly nightly 10PM), entries below
+
+# GodWorld Daily Backup - 11:00 PM CST / 12:00 AM CDT
+0 5 * * * cd /root/GodWorld && bash scripts/backup.sh >> /root/GodWorld/logs/backup.log 2>&1
+
+# Server Health Check - every 6 hours
+0 */6 * * * /root/GodWorld/scripts/server-health-check.sh >> /root/GodWorld/logs/health-check.log 2>&1
+
+
+# GodWorld Weekly Maintenance — Wednesday 4:00 AM UTC
+0 4 * * 3 /root/GodWorld/scripts/weekly-maintenance.sh >> /root/GodWorld/logs/weekly-maintenance.log 2>&1
+# Mags 24/7 wakes — morning/midday/evening (S252)
+0 7 * * * /usr/bin/node /root/GodWorld/scripts/discord-reflection.js >> /root/GodWorld/logs/discord-reflection.log 2>&1
+0 12 * * * /usr/bin/node /root/GodWorld/scripts/discord-reflection.js >> /root/GodWorld/logs/discord-reflection.log 2>&1
+0 19 * * * /usr/bin/node /root/GodWorld/scripts/discord-reflection.js >> /root/GodWorld/logs/discord-reflection.log 2>&1
+# Citizen-loop wakes — rotate a shaped citizen around Mags' anchor, offset +30min (S262, citizen-wake.js)
+30 7 * * * /usr/bin/node /root/GodWorld/scripts/citizen-wake.js --wake=morning >> /root/GodWorld/logs/citizen-wake.log 2>&1
+30 12 * * * /usr/bin/node /root/GodWorld/scripts/citizen-wake.js --wake=midday >> /root/GodWorld/logs/citizen-wake.log 2>&1
+# Agent exchange — one daily conversation/interview/debate between the afternoon and evening wakes (engine.53 T5, S312)
+0 17 * * * /usr/bin/node /root/GodWorld/scripts/citizen-exchange.js >> /root/GodWorld/logs/citizen-exchange.log 2>&1
+30 21 * * * /usr/bin/node /root/GodWorld/scripts/citizen-wake.js --wake=night >> /root/GodWorld/logs/citizen-wake.log 2>&1
+# GodWorld Monthly Droplet Snapshot - 1st of month 03:00 UTC (keep 1)
+0 3 * * 1 /root/GodWorld/scripts/snapshot-droplet.sh >> /root/GodWorld/logs/snapshot.log 2>&1
+# 2026-07-25: Phase 1 sampler RETIRED (Mike-direct) — superseded by the Phase 2.3
+# three-wake fan-out below (rotation of ~20 byline journalists, 6/day, gated).
+# old: 0 6 * * * for d in civic sports culture business; do cron-desk-run.js --wake --no-gate --desk "$d"; done
+0 6 * * * /usr/bin/node /root/GodWorld/scripts/newsroom-digest.js >> /root/GodWorld/logs/newsroom-digest.log 2>&1  # Phase 2.3 morning digest for Mike
+15 6 * * 1-5 /usr/bin/node /root/GodWorld/scripts/cron-desk-run.js --stage=angle --fanout >> /root/GodWorld/logs/newsroom-fanout.log 2>&1  # wake 1: angle (builds today's rotation)
+15 13 * * 1-5 /usr/bin/node /root/GodWorld/scripts/cron-desk-run.js --stage=report --fanout >> /root/GodWorld/logs/newsroom-fanout.log 2>&1  # wake 2: report (citizen quotes)
+15 18 * * 1-5 /usr/bin/node /root/GodWorld/scripts/cron-desk-run.js --stage=write --fanout --gate-backend api >> /root/GodWorld/logs/newsroom-fanout.log 2>&1  # wake 3: write + Rhea gate (OpenRouter gemini-3.5-flash, ~$0.06/run) -> staged/flagged (probation wall)
+
+# NotebookLM daily newsroom listening brief — source-grounded, NOT CANON
+0 8 * * * /usr/bin/node /root/GodWorld/scripts/notebooklmDailyNews.js >> /root/GodWorld/logs/notebooklm-daily-news.log 2>&1
+45 5 * * 1-4 /usr/bin/node /root/GodWorld/scripts/cron-civic-run.js --stage=datawake >> /root/GodWorld/logs/civic-cron.log 2>&1  # civic.15 Mon-Thu office datawakes (before 06:15 angle wake reads the lane)
+30 14 * * 0 /usr/bin/node /root/GodWorld/scripts/cron-civic-run.js --stage=chain --apply >> /root/GodWorld/logs/civic-cron.log 2>&1  # civic.15 Sunday chain (APPLY; guarded: exits clean if engine not fired / already ran)
+0 21 * * 0 /usr/bin/node /root/GodWorld/scripts/cron-civic-run.js --stage=chain --apply >> /root/GodWorld/logs/civic-cron.log 2>&1  # civic.15 Sunday chain late retry (same guard)
+0 15 * * 0 /usr/bin/node /root/GodWorld/scripts/cron-civic-run.js --stage=status >> /root/GodWorld/logs/civic-cron.log 2>&1  # S431 Sunday 15:00 check-in: did the 14:30 chain write? one Discord line (builder ask)
+
+# GodWorld monthly Markdown audit — UTC-guarded, report-only (governance.42)
+30 * 1,2 * * [ "$(/usr/bin/date -u +\%d-\%H:\%M)" = "02-04:30" ] && cd /root/GodWorld && /usr/bin/node scripts/mdStalenessDetector.js >> /root/GodWorld/output/md-audit-cron.log 2>&1
+7 23 * * 0 cd /root/GodWorld && node scripts/buildCitizenBondGraph.js --live --out output/citizen-bond-graph.json --html output/citizen-bond-graph.html >> logs/bond-graph.log 2>&1
+
+# pipeline.45 Saturday run — EIC scorecard, curation, Mags narration, canon door, Supermemory sweep, sheet ingest (Mike go 2026-08-05)
+0 16 * * 6 cd /root/GodWorld && /usr/bin/node scripts/cron-saturday-run.js --apply >> /root/GodWorld/logs/saturday-run.log 2>&1
+0 12 * * 6 cd /root/GodWorld && /usr/bin/node scripts/preSaturdayCoverageSweep.js >> /root/GodWorld/logs/pre-saturday-sweep.log 2>&1  # pipeline.64 pre-Saturday coverage sweep: retries any reporter stuck report-complete/never-staged before the 16:00 compile locks the cycle
+0 14 * * * /usr/bin/node /root/GodWorld/scripts/moltbook-heartbeat.js >> /root/GodWorld/logs/moltbook-out.log 2>> /root/GodWorld/logs/moltbook-error.log  # moltbook heartbeat — moved off pm2 cron_restart S360 (restart-storm dup-action fix)
+30 20 * * * cd /root/GodWorld && /usr/bin/node scripts/cron-undocked-run.js >> /root/GodWorld/logs/undocked-run.log 2>&1  # UNDOCKED daily flight (plan §2.5, S379) — flight+adapter+gate+push+standings, one-shot per principle 5
+30 22 * * 0 cd /root/GodWorld && /usr/bin/node scripts/compactCycleOutput.js --apply >> /root/GodWorld/logs/cycle-compaction.log 2>&1  # governance.50 weekly cycle-output compaction, dormant until a cycle crosses the 5-cycle threshold
+30 16 * * 6 cd /root/GodWorld && /usr/bin/node --env-file=/root/.config/godworld/.env /root/GodWorld/scripts/deliver-articles.js >> /root/GodWorld/logs/deliver-articles.log 2>&1  # Saturday edition to Discord after the 16:00 run
+45 18 * * 1-5 /usr/bin/node --env-file=/root/.config/godworld/.env /root/GodWorld/scripts/deliver-articles.js >> /root/GodWorld/logs/deliver-articles.log 2>&1  # articles to Discord after the 18:15 write wake (Mike-direct 2026-08-23)
+0 15 * * 5 cd /root/GodWorld && /usr/bin/node --env-file=/root/.config/godworld/.env scripts/cron-lore-run.js >> /root/GodWorld/logs/lore-cron.log 2>&1  # pipeline.56 weekly lore-writer: generate-only, quarantine output needs /lore-ingest at next research-build session
+47 21 * * * cd /root/GodWorld && /usr/bin/node scripts/undockedHealthcheck.js >> /root/GodWorld/logs/undocked-health.log 2>&1  # UNDOCKED show canary (builder ask 2026-09-08) — Clerk key + episode recency, fails loud
+15 4 * * 1 cd /root/GodWorld && /usr/bin/npx claude-mem restart >> /root/GodWorld/logs/claude-mem-maint.log 2>&1  # infra: weekly worker restart, caps the chroma RSS leak (S447)
+10 4 1 * * cd /root/GodWorld && { echo "=== $(date -Iseconds) claude-mem monthly check ==="; echo "chroma RSS MB: $(ps -eo rss,args --no-headers | grep chroma-mcp | grep -v grep | awk '{s+=$1} END {printf \"%.0f\", s/1024}')"; echo "disk: $(du -sh /root/.claude-mem/chroma 2>/dev/null | cut -f1)"; echo "rows: $(sqlite3 'file:/root/.claude-mem/chroma/chroma.sqlite3?mode=ro' 'select count(*) from embeddings;' 2>/dev/null)"; echo "host avail MB: $(free -m | awk 'NR==2{print $7}')"; } >> /root/GodWorld/logs/claude-mem-maint.log 2>&1  # infra: monthly growth check (S447)
+
+# Work-wake packs — working citizens (ME/EMS/players) reflect on their day's work data, Tue/Thu 20:18 (civic.34, cron-work-wake.js)
+18 20 * * 2,4 /usr/bin/node /root/GodWorld/scripts/cron-work-wake.js >> /root/GodWorld/logs/cron-work-wake.log 2>&1
+15 4 * * * cd /root/GodWorld && /usr/bin/node scripts/brainSearch.js --sync >> /root/GodWorld/logs/sl-rules-sync.log 2>&1  # sl-rules mirror (memory files, SIM_DOCTRINE, ADRs) — builder-direct 2026-09-24
+17 * * * * /usr/bin/node /root/GodWorld/scripts/cron-civic-run.js --stage=tick --apply >> /root/GodWorld/logs/civic-cron.log 2>&1  # civic.39 hourly tick (no model, idempotent) — builder-installed 2026-09-24
+15 8 * * 6 cd /root/GodWorld && /usr/bin/node scripts/cron-desk-run.js --stage=angle --desk undocked-digest --persona nia-rook-weekly >> /root/GodWorld/logs/undocked-weekly.log 2>&1  # plan (e) NEXT BUILD 2026-09-25: UNDOCKED weekly leaderboard/digest wake 1 (angle) — the reliable Citizen_Media_Usage credit path (tags every pilot who flew 'subject'), runs before the 12:00 pre-Saturday sweep
+15 9 * * 6 cd /root/GodWorld && /usr/bin/node scripts/cron-desk-run.js --stage=report --desk undocked-digest --persona nia-rook-weekly >> /root/GodWorld/logs/undocked-weekly.log 2>&1  # wake 2 (report/citizen quotes)
+15 10 * * 6 cd /root/GodWorld && /usr/bin/node scripts/cron-desk-run.js --stage=write --desk undocked-digest --persona nia-rook-weekly --gate-backend api >> /root/GodWorld/logs/undocked-weekly.log 2>&1  # wake 3 (write + Rhea gate) -> staged/flagged
+30 17 * * 6 cd /root/GodWorld && /usr/bin/node scripts/sweepCanonIngest.js --apply >> /root/GodWorld/logs/canon-sweep.log 2>&1  # engine.91 T4 weekly Drive canon sweep (builder go 2026-09-28): new files in the Tribune Media Archive / Deep Canon Drive folders become bay-tribune canon; idempotent (customId drive-<fileId>-<n>)
+15 7 * * 6 cd /root/GodWorld && /usr/bin/node scripts/cron-desk-run.js --stage=angle --desk culture --persona ines-sorensen >> /root/GodWorld/logs/ines-weekend.log 2>&1  # pipeline.73 Ines Sorensen (Voices) Saturday wake 1 (angle) — her seat alone, never --fanout; before the 12:00 sweep
+15 9 * * 6 cd /root/GodWorld && /usr/bin/node scripts/cron-desk-run.js --stage=report --desk culture --persona ines-sorensen >> /root/GodWorld/logs/ines-weekend.log 2>&1  # Ines Saturday wake 2 (report)
+15 11 * * 6 cd /root/GodWorld && /usr/bin/node scripts/cron-desk-run.js --stage=write --desk culture --persona ines-sorensen --gate-backend api >> /root/GodWorld/logs/ines-weekend.log 2>&1  # Ines Saturday wake 3 (write + Rhea gate) -> staged before the 12:00 sweep / 16:00 compile
+15 6 * * 0 cd /root/GodWorld && /usr/bin/node scripts/cron-desk-run.js --stage=angle --desk culture --persona ines-sorensen >> /root/GodWorld/logs/ines-weekend.log 2>&1  # Ines Sunday wake 1 (angle) — pages only, safe either side of the fire
+15 9 * * 0 cd /root/GodWorld && /usr/bin/node scripts/cron-desk-run.js --stage=report --desk culture --persona ines-sorensen >> /root/GodWorld/logs/ines-weekend.log 2>&1  # Ines Sunday wake 2 (report)
+15 12 * * 0 cd /root/GodWorld && /usr/bin/node scripts/cron-desk-run.js --stage=write --desk culture --persona ines-sorensen --gate-backend api >> /root/GodWorld/logs/ines-weekend.log 2>&1  # Ines Sunday wake 3 (write + Rhea gate)
+45 12 * * 0 /usr/bin/node --env-file=/root/.config/godworld/.env /root/GodWorld/scripts/deliver-articles.js >> /root/GodWorld/logs/deliver-articles.log 2>&1  # Sunday delivery of Ines's piece to Discord (pipeline.73)
+50 18 * * 1-5 cd /root/GodWorld && /usr/bin/node scripts/cron-saturday-run.js --step daily --apply >> /root/GodWorld/logs/canon-daily.log 2>&1  # daily canon ingest after wake 3 (builder 2026-10-20 via rb): gate-passed Articles to Supermemory the evening they stage, same customId as the Saturday sweep; Saturday retracts EIC canon-violations

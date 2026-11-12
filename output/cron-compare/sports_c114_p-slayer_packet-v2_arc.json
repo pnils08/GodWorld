@@ -1,0 +1,32 @@
+{
+  "status": "arc-seed",
+  "cycle": "114",
+  "desk": "sports",
+  "persona": "p-slayer",
+  "hood": "San Antonio",
+  "quotes": [
+    {
+      "pop": "POP-01027",
+      "name": "Austin Reaves",
+      "quote": "To be honest, I'm still feeling the sting of that loss. We were down 20 and fought our way back, but it feels like we left it on the road. I'm proud of how we responded, though. We can't let one loss get us down."
+    },
+    {
+      "pop": "POP-00722",
+      "name": "Daniel Cloak",
+      "quote": "Yeah, that's still how I feel. The Oaks trying to be part of the community is a positive step. I was at the community feedback session for the Fruitvale Transit Hub, and it felt like they were really listening. Maybe the Oaks can be like that too, you know, more involved locally."
+    },
+    {
+      "pop": "POP-01023",
+      "name": "Adash Stanley",
+      "quote": "The loss stings, but you could feel the energy in the stands still. We came back from 20 down, so there's a lot to build on. The guys fought hard, and that's what matters."
+    },
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": "To be honest, the Oaks' loss still has me a bit down, but I'm trying not to overthink it. I mean, I'm a baker, not a stats expert. I just enjoy watching the games and cheering them on. The A's storming back from 20 down was thrilling, but that final score... it's tough. I guess that's just how it goes sometimes."
+    }
+  ],
+  "claim": "To be honest, I'm still feeling the sting of that loss. We were down 20 and fought our way back, but it feels like we left it on the road. I'm proud of how we responded, though. We can't let one loss get us down.",
+  "src": "citizenVoice PRESS c114",
+  "ranAt": "2026-11-04T19:17:25.340Z"
+}

@@ -1,0 +1,65 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "111",
+  "persona": "elliot-graye",
+  "byline": "Elliot Graye",
+  "bylinePopid": "POP-00012",
+  "article": "output/cron-compare/staged/culture_c111_elliot-graye_packet-v2_anthropic-claude-haiku-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Manny Ellen",
+        "role": "quoted-source",
+        "popid": "POP-00046"
+      },
+      {
+        "name": "Kenji Tanaka",
+        "role": "quoted-source",
+        "popid": "POP-00763"
+      },
+      {
+        "name": "Eunice Marston",
+        "role": "quoted-source",
+        "popid": "POP-00753"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Lake Merritt"
+    ],
+    "claims": [
+      {
+        "claim": "I'm not sure. I know the Bay Pure Land Buddhist Temple is a place of peace for our community, but I haven't seen their crisis response efforts in action myself, so I can't say what specifically brought those people in.",
+        "sourceRef": "citizenVoice PRESS Kenji Tanaka"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-529e516e9c62",
+    "draftSha256": "1ef31222d28a5763537b6aea4a655f183d9dd135c49aaba08092710762dda863",
+    "verdict": "output/cron-compare/culture_c111_elliot-graye_packet-v2_anthropic-claude-haiku-5-5.rhea.json",
+    "ranAt": "2026-10-15T23:15:30.127Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": false,
+      "inTarget": false,
+      "inTargetBy": "judge",
+      "words": 823,
+      "short": "The piece covers multiple faith-community signals rather than focusing on one, and falls short of the target word count.",
+      "score": 2,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "1ef31222d28a5763537b6aea4a655f183d9dd135c49aaba08092710762dda863",
+      "costUsd": 0.0023
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-15T23:15:40.923Z"
+}

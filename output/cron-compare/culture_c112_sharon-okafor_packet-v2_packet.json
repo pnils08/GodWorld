@@ -1,0 +1,1226 @@
+{
+  "stage": "report",
+  "desk": "culture",
+  "cycle": "112",
+  "persona": "sharon-okafor",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Sharon Okafor",
+    "popid": "POP-00159"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-lifestyle",
+      "angle": "Lena Cross is fading — how the city follows its names",
+      "label": "Marin Tao leads the fame table; 2 fading, 0 new",
+      "hookLine": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 93, cooling), 17 media mentions.",
+      "hood": "Piedmont Ave",
+      "citizens": [
+        "Lena Cross (POP-00539)",
+        "Rowan Pierce (POP-00545)",
+        "Marin Tao (POP-00537)",
+        "Rico Valez (POP-00632)"
+      ],
+      "popids": [
+        "POP-00539",
+        "POP-00545",
+        "POP-00537",
+        "POP-00632"
+      ],
+      "ref": "output/beats/Cultural_Ledger.jsonl @C112",
+      "cycle": 112
+    }
+  },
+  "angle": "output/cron-compare/culture_c112_sharon-okafor_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 4,
+  "quotes": [
+    {
+      "pop": "POP-00539",
+      "name": "Lena Cross",
+      "quote": "To be honest, I'm not really sure what you're referring to with 'fading fame.' I've just been living my life, working on my craft, and being a mom to Max. I haven't really noticed any change in how people treat me around here on Piedmont Ave. I still run into familiar faces, like Darrin Davis, and we chat about the A's. Sure, I was named in some coverage recently, but it wasn't exactly kind. Still, it's just part of life, you know? I try not to let it get to me.",
+      "disp": "draws people in, deep with them",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, I'm not really sure what you're referring to with 'fading fame.' I've just been living my life, working on my craft, and being a mom to Max. I haven't really noticed any change in how people treat me around here on Piedmont Ave. I still run into familiar faces, like Darrin Davis, and we chat about the A's. Sure, I was named in some coverage recently, but it wasn't exactly kind. Still, it's just part of life, you know? I try not to let it get to me.\",\n  \"fact_ids\": [\"F-d321e311606c\", \"F-f580a535e402\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-d321e311606c",
+          "F-f580a535e402"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00539-157e90b3fd",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, I'm not really sure what you're referring to with 'fading fame.' I've just been living my life, working on my craft, and being a mom to Max. I haven't really noticed any change in how people treat me around here on Piedmont Ave. I still run into familiar faces, like Darrin Davis, and we chat about the A's. Sure, I was named in some coverage recently, but it wasn't exactly kind. Still, it's just part of life, you know? I try not to let it get to me."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00539",
+          "name": "Lena Cross",
+          "role": "Actor",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sharon Okafor",
+          "question": "How does Lena Cross's fading fame affect her daily life on Piedmont Ave? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-lifestyle",
+          "hood": "Piedmont Ave",
+          "focus": "Lena Cross's fading fame and its impact on Piedmont Ave",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Lena Cross — Actor — Piedmont Ave",
+          "evidence": [
+            {
+              "id": "EV-f43fdbdd16",
+              "src": "output/beats/Cultural_Ledger.jsonl @C112",
+              "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 93, cooling), 17 media mentions."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "Marin Tao leads the fame table; 2 fading, 0 new",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-053f388c5ecb"
+          },
+          {
+            "t": "FACT",
+            "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 93, cooling), 17 media mentions.",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-d321e311606c"
+          },
+          {
+            "t": "FACT",
+            "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 93, cooling), 17 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-de3e2737a934"
+          },
+          {
+            "t": "FACT",
+            "text": "Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 67, cooling), 14 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-f5626c8ab3a6"
+          },
+          {
+            "t": "FACT",
+            "text": "Marin Tao (Celebrity), Arts, Chinatown, Iconic-tier — the city knows them (fame 153, viral), 25 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-727f3aa9d3b9"
+          },
+          {
+            "t": "FACT",
+            "text": "Rico Valez (Celebrity), Arts, Fruitvale, Iconic-tier — the city knows them (fame 116, viral), 19 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-1ca1caa2610f"
+          },
+          {
+            "t": "FACT",
+            "text": "Lena Cross — Actor — Piedmont Ave",
+            "src": "Simulation_Ledger profile for POP-00539",
+            "id": "F-f580a535e402"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00545",
+      "name": "Rowan Pierce",
+      "quote": "To be honest, I don't really know Lena Cross or follow her work closely. I see the Oakland Alternative Response Initiative getting a lot of attention around here, and I lent a tool to a neighbor recently, but Lena Cross isn't someone I've noticed around Piedmont Ave lately. I'm not sure how I feel about her fading fame because I'm not really aware of her current status.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, I don't really know Lena Cross or follow her work closely. I see the Oakland Alternative Response Initiative getting a lot of attention around here, and I lent a tool to a neighbor recently, but Lena Cross isn't someone I've noticed around Piedmont Ave lately. I'm not sure how I feel about her fading fame because I'm not really aware of her current status.\",\n  \"fact_ids\": [\"F-d321e311606c\", \"F-f5626c8ab3a6\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-d321e311606c",
+          "F-f5626c8ab3a6"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00545-25ebbc8af2",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, I don't really know Lena Cross or follow her work closely. I see the Oakland Alternative Response Initiative getting a lot of attention around here, and I lent a tool to a neighbor recently, but Lena Cross isn't someone I've noticed around Piedmont Ave lately. I'm not sure how I feel about her fading fame because I'm not really aware of her current status."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00545",
+          "name": "Rowan Pierce",
+          "role": "Freelance Writer",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sharon Okafor",
+          "question": "How does Rowan Pierce, a fellow Piedmont Ave resident and journalist, perceive Lena Cross's fading fame? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-lifestyle",
+          "hood": "Piedmont Ave",
+          "focus": "Lena Cross's fading fame and its impact on Piedmont Ave",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Rowan Pierce — Freelance Writer — Piedmont Ave",
+          "evidence": [
+            {
+              "id": "EV-cc7776389b",
+              "src": "output/beats/Cultural_Ledger.jsonl @C112",
+              "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 93, cooling), 17 media mentions."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "Marin Tao leads the fame table; 2 fading, 0 new",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-053f388c5ecb"
+          },
+          {
+            "t": "FACT",
+            "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 93, cooling), 17 media mentions.",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-d321e311606c"
+          },
+          {
+            "t": "FACT",
+            "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 93, cooling), 17 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-de3e2737a934"
+          },
+          {
+            "t": "FACT",
+            "text": "Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 67, cooling), 14 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-f5626c8ab3a6"
+          },
+          {
+            "t": "FACT",
+            "text": "Marin Tao (Celebrity), Arts, Chinatown, Iconic-tier — the city knows them (fame 153, viral), 25 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-727f3aa9d3b9"
+          },
+          {
+            "t": "FACT",
+            "text": "Rico Valez (Celebrity), Arts, Fruitvale, Iconic-tier — the city knows them (fame 116, viral), 19 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-1ca1caa2610f"
+          },
+          {
+            "t": "FACT",
+            "text": "Rowan Pierce — Freelance Writer — Piedmont Ave",
+            "src": "Simulation_Ledger profile for POP-00545",
+            "id": "F-2d6b32c4c072"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00537",
+      "name": "Marin Tao",
+      "quote": "To be honest, I haven't really thought about Lena Cross or Piedmont Ave that much. I'm pretty focused on my own music scene here in Chinatown. I've noticed some new faces around, probably from the Winter Lights festival, but I don't really know what's going on elsewhere.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, I haven't really thought about Lena Cross or Piedmont Ave that much. I'm pretty focused on my own music scene here in Chinatown. I've noticed some new faces around, probably from the Winter Lights festival, but I don't really know what's going on elsewhere.\",\n  \"fact_ids\": [\"F-5cfd163bed8d\", \"F-d321e311606c\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-5cfd163bed8d",
+          "F-d321e311606c"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00537-e57d638336",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, I haven't really thought about Lena Cross or Piedmont Ave that much. I'm pretty focused on my own music scene here in Chinatown. I've noticed some new faces around, probably from the Winter Lights festival, but I don't really know what's going on elsewhere."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00537",
+          "name": "Marin Tao",
+          "role": "Musician",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sharon Okafor",
+          "question": "What have you seen, felt, or understood about \"Lena Cross's fading fame and its impact on Piedmont Ave\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-lifestyle",
+          "hood": "Piedmont Ave",
+          "focus": "Lena Cross's fading fame and its impact on Piedmont Ave",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Marin Tao — Musician — Chinatown",
+          "evidence": [
+            {
+              "id": "EV-e27f63e0d5",
+              "src": "output/beats/Cultural_Ledger.jsonl @C112",
+              "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 93, cooling), 17 media mentions."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "Marin Tao leads the fame table; 2 fading, 0 new",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-053f388c5ecb"
+          },
+          {
+            "t": "FACT",
+            "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 93, cooling), 17 media mentions.",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-d321e311606c"
+          },
+          {
+            "t": "FACT",
+            "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 93, cooling), 17 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-de3e2737a934"
+          },
+          {
+            "t": "FACT",
+            "text": "Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 67, cooling), 14 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-f5626c8ab3a6"
+          },
+          {
+            "t": "FACT",
+            "text": "Marin Tao (Celebrity), Arts, Chinatown, Iconic-tier — the city knows them (fame 153, viral), 25 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-727f3aa9d3b9"
+          },
+          {
+            "t": "FACT",
+            "text": "Rico Valez (Celebrity), Arts, Fruitvale, Iconic-tier — the city knows them (fame 116, viral), 19 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-1ca1caa2610f"
+          },
+          {
+            "t": "FACT",
+            "text": "Marin Tao — Musician — Chinatown",
+            "src": "Simulation_Ledger profile for POP-00537",
+            "id": "F-5cfd163bed8d"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00632",
+      "name": "Rico Valez",
+      "quote": "To be honest, I haven't really noticed much about Lena Cross's fading fame around Piedmont Ave. I live in Fruitvale, and while I catch the vibe of the city, I don't spend a lot of time over there. I do know that the cultural scene in Oakland is buzzing, and people are excited about what's happening here. I've been feeling that energy, especially with Marin Tao's rise to fame. It's cool to see people taking notice of our city's arts scene.",
+      "disp": "draws people in, deep with them",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, I haven't really noticed much about Lena Cross's fading fame around Piedmont Ave. I live in Fruitvale, and while I catch the vibe of the city, I don't spend a lot of time over there. I do know that the cultural scene in Oakland is buzzing, and people are excited about what's happening here. I've been feeling that energy, especially with Marin Tao's rise to fame. It's cool to see people taking notice of our city's arts scene.\",\n  \"fact_ids\": [\"F-d321e311606c\", \"F-727f3aa9d3b9\", \"F-1ca1caa2610f\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-d321e311606c",
+          "F-727f3aa9d3b9",
+          "F-1ca1caa2610f"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00632-52a9a407c5",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, I haven't really noticed much about Lena Cross's fading fame around Piedmont Ave. I live in Fruitvale, and while I catch the vibe of the city, I don't spend a lot of time over there. I do know that the cultural scene in Oakland is buzzing, and people are excited about what's happening here. I've been feeling that energy, especially with Marin Tao's rise to fame. It's cool to see people taking notice of our city's arts scene."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00632",
+          "name": "Rico Valez",
+          "role": "Musician",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sharon Okafor",
+          "question": "What have you seen, felt, or understood about \"Lena Cross's fading fame and its impact on Piedmont Ave\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-lifestyle",
+          "hood": "Piedmont Ave",
+          "focus": "Lena Cross's fading fame and its impact on Piedmont Ave",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Rico Valez — Musician — Fruitvale",
+          "evidence": [
+            {
+              "id": "EV-88a4eef6e1",
+              "src": "output/beats/Cultural_Ledger.jsonl @C112",
+              "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 93, cooling), 17 media mentions."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "Marin Tao leads the fame table; 2 fading, 0 new",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-053f388c5ecb"
+          },
+          {
+            "t": "FACT",
+            "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 93, cooling), 17 media mentions.",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-d321e311606c"
+          },
+          {
+            "t": "FACT",
+            "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 93, cooling), 17 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-de3e2737a934"
+          },
+          {
+            "t": "FACT",
+            "text": "Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 67, cooling), 14 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-f5626c8ab3a6"
+          },
+          {
+            "t": "FACT",
+            "text": "Marin Tao (Celebrity), Arts, Chinatown, Iconic-tier — the city knows them (fame 153, viral), 25 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-727f3aa9d3b9"
+          },
+          {
+            "t": "FACT",
+            "text": "Rico Valez (Celebrity), Arts, Fruitvale, Iconic-tier — the city knows them (fame 116, viral), 19 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-1ca1caa2610f"
+          },
+          {
+            "t": "FACT",
+            "text": "Rico Valez — Musician — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00632",
+            "id": "F-addc622b548f"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-00539",
+      "name": "Lena Cross",
+      "quote": "To be honest, I'm not really sure what you're referring to with 'fading fame.' I've just been living my life, working on my craft, and being a mom to Max. I haven't really noticed any change in how people treat me around here on Piedmont Ave. I still run into familiar faces, like Darrin Davis, and we chat about the A's. Sure, I was named in some coverage recently, but it wasn't exactly kind. Still, it's just part of life, you know? I try not to let it get to me.",
+      "disp": "draws people in, deep with them",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, I'm not really sure what you're referring to with 'fading fame.' I've just been living my life, working on my craft, and being a mom to Max. I haven't really noticed any change in how people treat me around here on Piedmont Ave. I still run into familiar faces, like Darrin Davis, and we chat about the A's. Sure, I was named in some coverage recently, but it wasn't exactly kind. Still, it's just part of life, you know? I try not to let it get to me.\",\n  \"fact_ids\": [\"F-d321e311606c\", \"F-f580a535e402\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-d321e311606c",
+          "F-f580a535e402"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00539-157e90b3fd",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, I'm not really sure what you're referring to with 'fading fame.' I've just been living my life, working on my craft, and being a mom to Max. I haven't really noticed any change in how people treat me around here on Piedmont Ave. I still run into familiar faces, like Darrin Davis, and we chat about the A's. Sure, I was named in some coverage recently, but it wasn't exactly kind. Still, it's just part of life, you know? I try not to let it get to me."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00539",
+          "name": "Lena Cross",
+          "role": "Actor",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sharon Okafor",
+          "question": "How does Lena Cross's fading fame affect her daily life on Piedmont Ave? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-lifestyle",
+          "hood": "Piedmont Ave",
+          "focus": "Lena Cross's fading fame and its impact on Piedmont Ave",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Lena Cross — Actor — Piedmont Ave",
+          "evidence": [
+            {
+              "id": "EV-f43fdbdd16",
+              "src": "output/beats/Cultural_Ledger.jsonl @C112",
+              "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 93, cooling), 17 media mentions."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "Marin Tao leads the fame table; 2 fading, 0 new",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-053f388c5ecb"
+          },
+          {
+            "t": "FACT",
+            "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 93, cooling), 17 media mentions.",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-d321e311606c"
+          },
+          {
+            "t": "FACT",
+            "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 93, cooling), 17 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-de3e2737a934"
+          },
+          {
+            "t": "FACT",
+            "text": "Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 67, cooling), 14 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-f5626c8ab3a6"
+          },
+          {
+            "t": "FACT",
+            "text": "Marin Tao (Celebrity), Arts, Chinatown, Iconic-tier — the city knows them (fame 153, viral), 25 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-727f3aa9d3b9"
+          },
+          {
+            "t": "FACT",
+            "text": "Rico Valez (Celebrity), Arts, Fruitvale, Iconic-tier — the city knows them (fame 116, viral), 19 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-1ca1caa2610f"
+          },
+          {
+            "t": "FACT",
+            "text": "Lena Cross — Actor — Piedmont Ave",
+            "src": "Simulation_Ledger profile for POP-00539",
+            "id": "F-f580a535e402"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00545",
+      "name": "Rowan Pierce",
+      "quote": "To be honest, I don't really know Lena Cross or follow her work closely. I see the Oakland Alternative Response Initiative getting a lot of attention around here, and I lent a tool to a neighbor recently, but Lena Cross isn't someone I've noticed around Piedmont Ave lately. I'm not sure how I feel about her fading fame because I'm not really aware of her current status.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, I don't really know Lena Cross or follow her work closely. I see the Oakland Alternative Response Initiative getting a lot of attention around here, and I lent a tool to a neighbor recently, but Lena Cross isn't someone I've noticed around Piedmont Ave lately. I'm not sure how I feel about her fading fame because I'm not really aware of her current status.\",\n  \"fact_ids\": [\"F-d321e311606c\", \"F-f5626c8ab3a6\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-d321e311606c",
+          "F-f5626c8ab3a6"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00545-25ebbc8af2",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, I don't really know Lena Cross or follow her work closely. I see the Oakland Alternative Response Initiative getting a lot of attention around here, and I lent a tool to a neighbor recently, but Lena Cross isn't someone I've noticed around Piedmont Ave lately. I'm not sure how I feel about her fading fame because I'm not really aware of her current status."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00545",
+          "name": "Rowan Pierce",
+          "role": "Freelance Writer",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sharon Okafor",
+          "question": "How does Rowan Pierce, a fellow Piedmont Ave resident and journalist, perceive Lena Cross's fading fame? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-lifestyle",
+          "hood": "Piedmont Ave",
+          "focus": "Lena Cross's fading fame and its impact on Piedmont Ave",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Rowan Pierce — Freelance Writer — Piedmont Ave",
+          "evidence": [
+            {
+              "id": "EV-cc7776389b",
+              "src": "output/beats/Cultural_Ledger.jsonl @C112",
+              "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 93, cooling), 17 media mentions."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "Marin Tao leads the fame table; 2 fading, 0 new",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-053f388c5ecb"
+          },
+          {
+            "t": "FACT",
+            "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 93, cooling), 17 media mentions.",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-d321e311606c"
+          },
+          {
+            "t": "FACT",
+            "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 93, cooling), 17 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-de3e2737a934"
+          },
+          {
+            "t": "FACT",
+            "text": "Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 67, cooling), 14 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-f5626c8ab3a6"
+          },
+          {
+            "t": "FACT",
+            "text": "Marin Tao (Celebrity), Arts, Chinatown, Iconic-tier — the city knows them (fame 153, viral), 25 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-727f3aa9d3b9"
+          },
+          {
+            "t": "FACT",
+            "text": "Rico Valez (Celebrity), Arts, Fruitvale, Iconic-tier — the city knows them (fame 116, viral), 19 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-1ca1caa2610f"
+          },
+          {
+            "t": "FACT",
+            "text": "Rowan Pierce — Freelance Writer — Piedmont Ave",
+            "src": "Simulation_Ledger profile for POP-00545",
+            "id": "F-2d6b32c4c072"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00537",
+      "name": "Marin Tao",
+      "quote": "To be honest, I haven't really thought about Lena Cross or Piedmont Ave that much. I'm pretty focused on my own music scene here in Chinatown. I've noticed some new faces around, probably from the Winter Lights festival, but I don't really know what's going on elsewhere.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, I haven't really thought about Lena Cross or Piedmont Ave that much. I'm pretty focused on my own music scene here in Chinatown. I've noticed some new faces around, probably from the Winter Lights festival, but I don't really know what's going on elsewhere.\",\n  \"fact_ids\": [\"F-5cfd163bed8d\", \"F-d321e311606c\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-5cfd163bed8d",
+          "F-d321e311606c"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00537-e57d638336",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, I haven't really thought about Lena Cross or Piedmont Ave that much. I'm pretty focused on my own music scene here in Chinatown. I've noticed some new faces around, probably from the Winter Lights festival, but I don't really know what's going on elsewhere."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00537",
+          "name": "Marin Tao",
+          "role": "Musician",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sharon Okafor",
+          "question": "What have you seen, felt, or understood about \"Lena Cross's fading fame and its impact on Piedmont Ave\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-lifestyle",
+          "hood": "Piedmont Ave",
+          "focus": "Lena Cross's fading fame and its impact on Piedmont Ave",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Marin Tao — Musician — Chinatown",
+          "evidence": [
+            {
+              "id": "EV-e27f63e0d5",
+              "src": "output/beats/Cultural_Ledger.jsonl @C112",
+              "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 93, cooling), 17 media mentions."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "Marin Tao leads the fame table; 2 fading, 0 new",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-053f388c5ecb"
+          },
+          {
+            "t": "FACT",
+            "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 93, cooling), 17 media mentions.",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-d321e311606c"
+          },
+          {
+            "t": "FACT",
+            "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 93, cooling), 17 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-de3e2737a934"
+          },
+          {
+            "t": "FACT",
+            "text": "Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 67, cooling), 14 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-f5626c8ab3a6"
+          },
+          {
+            "t": "FACT",
+            "text": "Marin Tao (Celebrity), Arts, Chinatown, Iconic-tier — the city knows them (fame 153, viral), 25 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-727f3aa9d3b9"
+          },
+          {
+            "t": "FACT",
+            "text": "Rico Valez (Celebrity), Arts, Fruitvale, Iconic-tier — the city knows them (fame 116, viral), 19 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-1ca1caa2610f"
+          },
+          {
+            "t": "FACT",
+            "text": "Marin Tao — Musician — Chinatown",
+            "src": "Simulation_Ledger profile for POP-00537",
+            "id": "F-5cfd163bed8d"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00632",
+      "name": "Rico Valez",
+      "quote": "To be honest, I haven't really noticed much about Lena Cross's fading fame around Piedmont Ave. I live in Fruitvale, and while I catch the vibe of the city, I don't spend a lot of time over there. I do know that the cultural scene in Oakland is buzzing, and people are excited about what's happening here. I've been feeling that energy, especially with Marin Tao's rise to fame. It's cool to see people taking notice of our city's arts scene.",
+      "disp": "draws people in, deep with them",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, I haven't really noticed much about Lena Cross's fading fame around Piedmont Ave. I live in Fruitvale, and while I catch the vibe of the city, I don't spend a lot of time over there. I do know that the cultural scene in Oakland is buzzing, and people are excited about what's happening here. I've been feeling that energy, especially with Marin Tao's rise to fame. It's cool to see people taking notice of our city's arts scene.\",\n  \"fact_ids\": [\"F-d321e311606c\", \"F-727f3aa9d3b9\", \"F-1ca1caa2610f\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-d321e311606c",
+          "F-727f3aa9d3b9",
+          "F-1ca1caa2610f"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00632-52a9a407c5",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, I haven't really noticed much about Lena Cross's fading fame around Piedmont Ave. I live in Fruitvale, and while I catch the vibe of the city, I don't spend a lot of time over there. I do know that the cultural scene in Oakland is buzzing, and people are excited about what's happening here. I've been feeling that energy, especially with Marin Tao's rise to fame. It's cool to see people taking notice of our city's arts scene."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00632",
+          "name": "Rico Valez",
+          "role": "Musician",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sharon Okafor",
+          "question": "What have you seen, felt, or understood about \"Lena Cross's fading fame and its impact on Piedmont Ave\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-lifestyle",
+          "hood": "Piedmont Ave",
+          "focus": "Lena Cross's fading fame and its impact on Piedmont Ave",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Rico Valez — Musician — Fruitvale",
+          "evidence": [
+            {
+              "id": "EV-88a4eef6e1",
+              "src": "output/beats/Cultural_Ledger.jsonl @C112",
+              "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 93, cooling), 17 media mentions."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "Marin Tao leads the fame table; 2 fading, 0 new",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-053f388c5ecb"
+          },
+          {
+            "t": "FACT",
+            "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 93, cooling), 17 media mentions.",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-d321e311606c"
+          },
+          {
+            "t": "FACT",
+            "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 93, cooling), 17 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-de3e2737a934"
+          },
+          {
+            "t": "FACT",
+            "text": "Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 67, cooling), 14 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-f5626c8ab3a6"
+          },
+          {
+            "t": "FACT",
+            "text": "Marin Tao (Celebrity), Arts, Chinatown, Iconic-tier — the city knows them (fame 153, viral), 25 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-727f3aa9d3b9"
+          },
+          {
+            "t": "FACT",
+            "text": "Rico Valez (Celebrity), Arts, Fruitvale, Iconic-tier — the city knows them (fame 116, viral), 19 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C112",
+            "id": "F-1ca1caa2610f"
+          },
+          {
+            "t": "FACT",
+            "text": "Rico Valez — Musician — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00632",
+            "id": "F-addc622b548f"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-10-23T18:17:50.920Z"
+}

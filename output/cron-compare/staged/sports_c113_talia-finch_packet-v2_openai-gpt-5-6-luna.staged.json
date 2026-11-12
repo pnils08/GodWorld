@@ -1,0 +1,71 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "113",
+  "persona": "talia-finch",
+  "byline": "Talia Finch",
+  "bylinePopid": "POP-00592",
+  "article": "output/cron-compare/staged/sports_c113_talia-finch_packet-v2_openai-gpt-5-6-luna.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Adash Stanley",
+        "role": "mentioned",
+        "popid": "POP-01023"
+      },
+      {
+        "name": "Austin Reaves",
+        "role": "quoted-source",
+        "popid": "POP-01027"
+      },
+      {
+        "name": "Trenton Nawan",
+        "role": "quoted-source",
+        "popid": "POP-00273"
+      },
+      {
+        "name": "Harry Hayward",
+        "role": "mentioned",
+        "popid": "POP-01223",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Uptown"
+    ],
+    "claims": [
+      {
+        "claim": "The mood among fans is electric. I've felt the excitement building around the Oaks, it's like the whole city is waking up with the team. There's a buzz in the air, and I think people are really looking forward to seeing what they can do this season.",
+        "sourceRef": "citizenVoice PRESS Adash Stanley"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-55eaab2e4ca0",
+    "draftSha256": "9ac05d0d1f28c7d196f3c270333d2437fc2b5201bf7568107c6ba5d30a4ec853",
+    "verdict": "output/cron-compare/sports_c113_talia-finch_packet-v2_openai-gpt-5-6-luna.rhea.json",
+    "ranAt": "2026-10-29T23:18:54.669Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 400",
+      "words": 489,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "9ac05d0d1f28c7d196f3c270333d2437fc2b5201bf7568107c6ba5d30a4ec853",
+      "costUsd": 0.0023
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-29T23:19:04.118Z"
+}

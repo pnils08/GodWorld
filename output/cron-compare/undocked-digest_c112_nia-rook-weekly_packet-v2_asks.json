@@ -1,0 +1,428 @@
+[
+  {
+    "pop": "POP-00775",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00775\",\"name\":\"Sammie Alvarez\",\"role\":\"UNDOCKED pilot\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Nia Rook\",\"question\":\"How is Sammie Alvarez performing in their role as Civic & Neighborhood Reporter? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"undocked-digest\",\"hood\":null,\"focus\":\"UNDOCKED leaderboard digest for cycle C112\",\"src\":\"undocked-week:weekly-c112\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Sammie Alvarez — UNDOCKED pilot\",\"evidence\":[{\"id\":\"EV-197c024d3c\",\"src\":\"undocked-week:weekly-c112\",\"text\":\"UNDOCKED week-in-review c112\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C112\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-7cd6ffd2aeb3\"},{\"t\":\"FACT\",\"text\":\"UNDOCKED week-in-review c112\",\"src\":\"undocked-week:weekly-c112\",\"id\":\"F-a79b3311bdd9\"},{\"t\":\"FACT\",\"text\":\"Sammie Alvarez — 2 episode(s) this cycle, credits -209, combat 0, mishaps 0 (UNDOCKED feed)\",\"src\":\"undocked-week:weekly-c112\",\"id\":\"F-5106f5c73752\"},{\"t\":\"FACT\",\"text\":\"Rafael Phillips — 2 episode(s) this cycle, credits 0, combat 0, mishaps 0 (UNDOCKED feed)\",\"src\":\"undocked-week:weekly-c112\",\"id\":\"F-8938a01054c7\"},{\"t\":\"FACT\",\"text\":\"Iris Pham — 1 episode(s) this cycle, credits 1, combat 0, mishaps 0 (UNDOCKED feed)\",\"src\":\"undocked-week:weekly-c112\",\"id\":\"F-466e88f84704\"},{\"t\":\"FACT\",\"text\":\"Sammie Alvarez — Civic & Neighborhood Reporter, OakTown Echo (ledger)\",\"src\":\"undocked-week:weekly-c112\",\"id\":\"F-76c40d35a927\"},{\"t\":\"FACT\",\"text\":\"Rafael Phillips — Nurse aide (ledger)\",\"src\":\"undocked-week:weekly-c112\",\"id\":\"F-9c82888ba179\"},{\"t\":\"FACT\",\"text\":\"Iris Pham — Barista (ledger)\",\"src\":\"undocked-week:weekly-c112\",\"id\":\"F-02402e85f129\"},{\"t\":\"FACT\",\"text\":\"Sammie Alvarez — UNDOCKED pilot\",\"src\":\"Simulation_Ledger profile for POP-00775\",\"id\":\"F-3fc910e1b191\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00775",
+        "name": "Sammie Alvarez",
+        "role": "UNDOCKED pilot",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Nia Rook",
+        "question": "How is Sammie Alvarez performing in their role as Civic & Neighborhood Reporter? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "undocked-digest",
+        "hood": null,
+        "focus": "UNDOCKED leaderboard digest for cycle C112",
+        "src": "undocked-week:weekly-c112"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Sammie Alvarez — UNDOCKED pilot",
+        "evidence": [
+          {
+            "id": "EV-197c024d3c",
+            "src": "undocked-week:weekly-c112",
+            "text": "UNDOCKED week-in-review c112"
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C112",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-7cd6ffd2aeb3"
+        },
+        {
+          "t": "FACT",
+          "text": "UNDOCKED week-in-review c112",
+          "src": "undocked-week:weekly-c112",
+          "id": "F-a79b3311bdd9"
+        },
+        {
+          "t": "FACT",
+          "text": "Sammie Alvarez — 2 episode(s) this cycle, credits -209, combat 0, mishaps 0 (UNDOCKED feed)",
+          "src": "undocked-week:weekly-c112",
+          "id": "F-5106f5c73752"
+        },
+        {
+          "t": "FACT",
+          "text": "Rafael Phillips — 2 episode(s) this cycle, credits 0, combat 0, mishaps 0 (UNDOCKED feed)",
+          "src": "undocked-week:weekly-c112",
+          "id": "F-8938a01054c7"
+        },
+        {
+          "t": "FACT",
+          "text": "Iris Pham — 1 episode(s) this cycle, credits 1, combat 0, mishaps 0 (UNDOCKED feed)",
+          "src": "undocked-week:weekly-c112",
+          "id": "F-466e88f84704"
+        },
+        {
+          "t": "FACT",
+          "text": "Sammie Alvarez — Civic & Neighborhood Reporter, OakTown Echo (ledger)",
+          "src": "undocked-week:weekly-c112",
+          "id": "F-76c40d35a927"
+        },
+        {
+          "t": "FACT",
+          "text": "Rafael Phillips — Nurse aide (ledger)",
+          "src": "undocked-week:weekly-c112",
+          "id": "F-9c82888ba179"
+        },
+        {
+          "t": "FACT",
+          "text": "Iris Pham — Barista (ledger)",
+          "src": "undocked-week:weekly-c112",
+          "id": "F-02402e85f129"
+        },
+        {
+          "t": "FACT",
+          "text": "Sammie Alvarez — UNDOCKED pilot",
+          "src": "Simulation_Ledger profile for POP-00775",
+          "id": "F-3fc910e1b191"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01077",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01077\",\"name\":\"Rafael Phillips\",\"role\":\"UNDOCKED pilot\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Nia Rook\",\"question\":\"What factors contributed to Rafael Phillips' current standing? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"undocked-digest\",\"hood\":null,\"focus\":\"UNDOCKED leaderboard digest for cycle C112\",\"src\":\"undocked-week:weekly-c112\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Rafael Phillips — UNDOCKED pilot\",\"evidence\":[{\"id\":\"EV-9a7c79a9b7\",\"src\":\"undocked-week:weekly-c112\",\"text\":\"UNDOCKED week-in-review c112\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C112\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-7cd6ffd2aeb3\"},{\"t\":\"FACT\",\"text\":\"UNDOCKED week-in-review c112\",\"src\":\"undocked-week:weekly-c112\",\"id\":\"F-a79b3311bdd9\"},{\"t\":\"FACT\",\"text\":\"Sammie Alvarez — 2 episode(s) this cycle, credits -209, combat 0, mishaps 0 (UNDOCKED feed)\",\"src\":\"undocked-week:weekly-c112\",\"id\":\"F-5106f5c73752\"},{\"t\":\"FACT\",\"text\":\"Rafael Phillips — 2 episode(s) this cycle, credits 0, combat 0, mishaps 0 (UNDOCKED feed)\",\"src\":\"undocked-week:weekly-c112\",\"id\":\"F-8938a01054c7\"},{\"t\":\"FACT\",\"text\":\"Iris Pham — 1 episode(s) this cycle, credits 1, combat 0, mishaps 0 (UNDOCKED feed)\",\"src\":\"undocked-week:weekly-c112\",\"id\":\"F-466e88f84704\"},{\"t\":\"FACT\",\"text\":\"Sammie Alvarez — Civic & Neighborhood Reporter, OakTown Echo (ledger)\",\"src\":\"undocked-week:weekly-c112\",\"id\":\"F-76c40d35a927\"},{\"t\":\"FACT\",\"text\":\"Rafael Phillips — Nurse aide (ledger)\",\"src\":\"undocked-week:weekly-c112\",\"id\":\"F-9c82888ba179\"},{\"t\":\"FACT\",\"text\":\"Iris Pham — Barista (ledger)\",\"src\":\"undocked-week:weekly-c112\",\"id\":\"F-02402e85f129\"},{\"t\":\"FACT\",\"text\":\"Rafael Phillips — UNDOCKED pilot\",\"src\":\"Simulation_Ledger profile for POP-01077\",\"id\":\"F-8ff7e9c2c2ea\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01077",
+        "name": "Rafael Phillips",
+        "role": "UNDOCKED pilot",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Nia Rook",
+        "question": "What factors contributed to Rafael Phillips' current standing? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "undocked-digest",
+        "hood": null,
+        "focus": "UNDOCKED leaderboard digest for cycle C112",
+        "src": "undocked-week:weekly-c112"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Rafael Phillips — UNDOCKED pilot",
+        "evidence": [
+          {
+            "id": "EV-9a7c79a9b7",
+            "src": "undocked-week:weekly-c112",
+            "text": "UNDOCKED week-in-review c112"
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C112",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-7cd6ffd2aeb3"
+        },
+        {
+          "t": "FACT",
+          "text": "UNDOCKED week-in-review c112",
+          "src": "undocked-week:weekly-c112",
+          "id": "F-a79b3311bdd9"
+        },
+        {
+          "t": "FACT",
+          "text": "Sammie Alvarez — 2 episode(s) this cycle, credits -209, combat 0, mishaps 0 (UNDOCKED feed)",
+          "src": "undocked-week:weekly-c112",
+          "id": "F-5106f5c73752"
+        },
+        {
+          "t": "FACT",
+          "text": "Rafael Phillips — 2 episode(s) this cycle, credits 0, combat 0, mishaps 0 (UNDOCKED feed)",
+          "src": "undocked-week:weekly-c112",
+          "id": "F-8938a01054c7"
+        },
+        {
+          "t": "FACT",
+          "text": "Iris Pham — 1 episode(s) this cycle, credits 1, combat 0, mishaps 0 (UNDOCKED feed)",
+          "src": "undocked-week:weekly-c112",
+          "id": "F-466e88f84704"
+        },
+        {
+          "t": "FACT",
+          "text": "Sammie Alvarez — Civic & Neighborhood Reporter, OakTown Echo (ledger)",
+          "src": "undocked-week:weekly-c112",
+          "id": "F-76c40d35a927"
+        },
+        {
+          "t": "FACT",
+          "text": "Rafael Phillips — Nurse aide (ledger)",
+          "src": "undocked-week:weekly-c112",
+          "id": "F-9c82888ba179"
+        },
+        {
+          "t": "FACT",
+          "text": "Iris Pham — Barista (ledger)",
+          "src": "undocked-week:weekly-c112",
+          "id": "F-02402e85f129"
+        },
+        {
+          "t": "FACT",
+          "text": "Rafael Phillips — UNDOCKED pilot",
+          "src": "Simulation_Ledger profile for POP-01077",
+          "id": "F-8ff7e9c2c2ea"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01203",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01203\",\"name\":\"Iris Pham\",\"role\":\"UNDOCKED pilot\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Nia Rook\",\"question\":\"How did Iris Pham's single episode impact their credits? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"undocked-digest\",\"hood\":null,\"focus\":\"UNDOCKED leaderboard digest for cycle C112\",\"src\":\"undocked-week:weekly-c112\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Iris Pham — UNDOCKED pilot\",\"evidence\":[{\"id\":\"EV-1aca5dfd5f\",\"src\":\"undocked-week:weekly-c112\",\"text\":\"UNDOCKED week-in-review c112\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C112\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-7cd6ffd2aeb3\"},{\"t\":\"FACT\",\"text\":\"UNDOCKED week-in-review c112\",\"src\":\"undocked-week:weekly-c112\",\"id\":\"F-a79b3311bdd9\"},{\"t\":\"FACT\",\"text\":\"Sammie Alvarez — 2 episode(s) this cycle, credits -209, combat 0, mishaps 0 (UNDOCKED feed)\",\"src\":\"undocked-week:weekly-c112\",\"id\":\"F-5106f5c73752\"},{\"t\":\"FACT\",\"text\":\"Rafael Phillips — 2 episode(s) this cycle, credits 0, combat 0, mishaps 0 (UNDOCKED feed)\",\"src\":\"undocked-week:weekly-c112\",\"id\":\"F-8938a01054c7\"},{\"t\":\"FACT\",\"text\":\"Iris Pham — 1 episode(s) this cycle, credits 1, combat 0, mishaps 0 (UNDOCKED feed)\",\"src\":\"undocked-week:weekly-c112\",\"id\":\"F-466e88f84704\"},{\"t\":\"FACT\",\"text\":\"Sammie Alvarez — Civic & Neighborhood Reporter, OakTown Echo (ledger)\",\"src\":\"undocked-week:weekly-c112\",\"id\":\"F-76c40d35a927\"},{\"t\":\"FACT\",\"text\":\"Rafael Phillips — Nurse aide (ledger)\",\"src\":\"undocked-week:weekly-c112\",\"id\":\"F-9c82888ba179\"},{\"t\":\"FACT\",\"text\":\"Iris Pham — Barista (ledger)\",\"src\":\"undocked-week:weekly-c112\",\"id\":\"F-02402e85f129\"},{\"t\":\"FACT\",\"text\":\"Iris Pham — UNDOCKED pilot\",\"src\":\"Simulation_Ledger profile for POP-01203\",\"id\":\"F-594a6ce29801\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01203",
+        "name": "Iris Pham",
+        "role": "UNDOCKED pilot",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Nia Rook",
+        "question": "How did Iris Pham's single episode impact their credits? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "undocked-digest",
+        "hood": null,
+        "focus": "UNDOCKED leaderboard digest for cycle C112",
+        "src": "undocked-week:weekly-c112"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Iris Pham — UNDOCKED pilot",
+        "evidence": [
+          {
+            "id": "EV-1aca5dfd5f",
+            "src": "undocked-week:weekly-c112",
+            "text": "UNDOCKED week-in-review c112"
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C112",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-7cd6ffd2aeb3"
+        },
+        {
+          "t": "FACT",
+          "text": "UNDOCKED week-in-review c112",
+          "src": "undocked-week:weekly-c112",
+          "id": "F-a79b3311bdd9"
+        },
+        {
+          "t": "FACT",
+          "text": "Sammie Alvarez — 2 episode(s) this cycle, credits -209, combat 0, mishaps 0 (UNDOCKED feed)",
+          "src": "undocked-week:weekly-c112",
+          "id": "F-5106f5c73752"
+        },
+        {
+          "t": "FACT",
+          "text": "Rafael Phillips — 2 episode(s) this cycle, credits 0, combat 0, mishaps 0 (UNDOCKED feed)",
+          "src": "undocked-week:weekly-c112",
+          "id": "F-8938a01054c7"
+        },
+        {
+          "t": "FACT",
+          "text": "Iris Pham — 1 episode(s) this cycle, credits 1, combat 0, mishaps 0 (UNDOCKED feed)",
+          "src": "undocked-week:weekly-c112",
+          "id": "F-466e88f84704"
+        },
+        {
+          "t": "FACT",
+          "text": "Sammie Alvarez — Civic & Neighborhood Reporter, OakTown Echo (ledger)",
+          "src": "undocked-week:weekly-c112",
+          "id": "F-76c40d35a927"
+        },
+        {
+          "t": "FACT",
+          "text": "Rafael Phillips — Nurse aide (ledger)",
+          "src": "undocked-week:weekly-c112",
+          "id": "F-9c82888ba179"
+        },
+        {
+          "t": "FACT",
+          "text": "Iris Pham — Barista (ledger)",
+          "src": "undocked-week:weekly-c112",
+          "id": "F-02402e85f129"
+        },
+        {
+          "t": "FACT",
+          "text": "Iris Pham — UNDOCKED pilot",
+          "src": "Simulation_Ledger profile for POP-01203",
+          "id": "F-594a6ce29801"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  }
+]

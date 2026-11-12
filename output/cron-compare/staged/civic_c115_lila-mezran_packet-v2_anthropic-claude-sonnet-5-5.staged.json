@@ -1,0 +1,78 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "115",
+  "persona": "lila-mezran",
+  "byline": "Dr. Lila Mezran",
+  "bylinePopid": "POP-00154",
+  "article": "output/cron-compare/staged/civic_c115_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Deacon Seymour",
+        "role": "quoted-source",
+        "popid": "POP-00528"
+      },
+      {
+        "name": "Akua Adeyemi",
+        "role": "quoted-source",
+        "popid": "POP-00803"
+      },
+      {
+        "name": "Howard Travis",
+        "role": "mentioned",
+        "popid": "POP-00255",
+        "floor": true
+      },
+      {
+        "name": "Maurice Franklin",
+        "role": "mentioned",
+        "popid": "POP-00801",
+        "floor": true
+      },
+      {
+        "name": "Yu Zen",
+        "role": "mentioned",
+        "popid": "POP-00194",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Chinatown"
+    ],
+    "claims": [
+      {
+        "claim": "I go into a lot of homes, and you can tell pretty quick when someone's down. It's not the mess or the dishes — it's the quiet. The TV off in the middle of the day. A chair pulled up by the window where somebody's been sitting a long time. Sometimes the medicine gets moved to the kitchen counter so it's right there where someone'll remember it. And you learn to work quiet, not to bang pipes, because somebody's sleeping in the next room. I see more of that in Chinatown than anywhere else I work. People here take care of their own — you'll see a neighbor bring soup, or a cousin come by after their shift. It's not always the hospital that carries the load. It's the family that rearranges the whole house around one sick person.",
+        "sourceRef": "citizenVoice PRESS Akua Adeyemi"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-f29b4866c879",
+    "draftSha256": "2b7af4f59f14919eecd3388927d47dfd2f0c2287b90c8a9e483347d8fa76182f",
+    "verdict": "output/cron-compare/civic_c115_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-10T00:18:13.266Z",
+    "contractScore": {
+      "opened": false,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 933,
+      "short": "The opening begins with an anecdotal feature hook about a plumber rather than a health-service, access, place, or implementation fact.",
+      "score": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "2b7af4f59f14919eecd3388927d47dfd2f0c2287b90c8a9e483347d8fa76182f",
+      "costUsd": 0.0017
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-10T00:18:21.361Z"
+}

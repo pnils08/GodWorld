@@ -1,0 +1,447 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00159",
+    "name": "Sharon Okafor",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Lena Cross is fading — how the city follows its names",
+    "approach": "Lifestyle approach: this slice is the fame record — who the city knows, who is fading, who just arrived — with their domains, tiers and neighborhoods. Behavior patterns, warm analytical. The names and trajectories are real; the morning routine, the regular order, what the neighbors think are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "lifestyle",
+      "hood": "Piedmont Ave",
+      "facts": [
+        "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 93, cooling), 17 media mentions",
+        "Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 67, cooling), 14 media mentions",
+        "Marin Tao (Celebrity), Arts, Chinatown, Iconic-tier — the city knows them (fame 153, viral), 25 media mentions",
+        "Rico Valez (Celebrity), Arts, Fruitvale, Iconic-tier — the city knows them (fame 116, viral), 19 media mentions"
+      ],
+      "priorCycle": null,
+      "note": null,
+      "engineHooks": [
+        "The Varek family opened Varek Systems (observational analysis)",
+        "Downtown housing pressure at 9/10: rents climbing, households stretching to stay (observational analysis)",
+        "Fruitvale boom sustained — momentum 10/10, the block everyone wants onto (observational analysis)",
+        "Chinatown turning upward: retail busy, events drawing crowds, people moving in (observational analysis)"
+      ],
+      "roomIsYours": "the coffee order, the dog's name, who recognizes them at the farmers market and who pretends not to",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-lifestyle",
+    "hood": "Piedmont Ave",
+    "src": "output/beats/Cultural_Ledger.jsonl @C112",
+    "plan": {
+      "focus": "Lena Cross's fading fame and its impact on Piedmont Ave",
+      "closeQuestion": "How will the neighborhood's perception of Lena Cross change as her fame continues to fade?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00539",
+        "name": "Lena Cross",
+        "profile": "Lena Cross — Actor — Piedmont Ave",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00545",
+        "name": "Rowan Pierce",
+        "profile": "Rowan Pierce — Freelance Writer — Piedmont Ave",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00537",
+        "name": "Marin Tao",
+        "profile": "Marin Tao — Musician — Chinatown",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00632",
+        "name": "Rico Valez",
+        "profile": "Rico Valez — Musician — Fruitvale",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00539-157e90b3fd",
+        "pop": "POP-00539",
+        "name": "Lena Cross",
+        "quote": "To be honest, I'm not really sure what you're referring to with 'fading fame.' I've just been living my life, working on my craft, and being a mom to Max. I haven't really noticed any change in how people treat me around here on Piedmont Ave. I still run into familiar faces, like Darrin Davis, and we chat about the A's. Sure, I was named in some coverage recently, but it wasn't exactly kind. Still, it's just part of life, you know? I try not to let it get to me.",
+        "factIds": [
+          "F-d321e311606c",
+          "F-f580a535e402"
+        ],
+        "src": "packet.W2[POP-00539]"
+      },
+      {
+        "id": "Q-POP-00545-25ebbc8af2",
+        "pop": "POP-00545",
+        "name": "Rowan Pierce",
+        "quote": "To be honest, I don't really know Lena Cross or follow her work closely. I see the Oakland Alternative Response Initiative getting a lot of attention around here, and I lent a tool to a neighbor recently, but Lena Cross isn't someone I've noticed around Piedmont Ave lately. I'm not sure how I feel about her fading fame because I'm not really aware of her current status.",
+        "factIds": [
+          "F-d321e311606c",
+          "F-f5626c8ab3a6"
+        ],
+        "src": "packet.W2[POP-00545]"
+      },
+      {
+        "id": "Q-POP-00537-e57d638336",
+        "pop": "POP-00537",
+        "name": "Marin Tao",
+        "quote": "To be honest, I haven't really thought about Lena Cross or Piedmont Ave that much. I'm pretty focused on my own music scene here in Chinatown. I've noticed some new faces around, probably from the Winter Lights festival, but I don't really know what's going on elsewhere.",
+        "factIds": [
+          "F-5cfd163bed8d",
+          "F-d321e311606c"
+        ],
+        "src": "packet.W2[POP-00537]"
+      },
+      {
+        "id": "Q-POP-00632-52a9a407c5",
+        "pop": "POP-00632",
+        "name": "Rico Valez",
+        "quote": "To be honest, I haven't really noticed much about Lena Cross's fading fame around Piedmont Ave. I live in Fruitvale, and while I catch the vibe of the city, I don't spend a lot of time over there. I do know that the cultural scene in Oakland is buzzing, and people are excited about what's happening here. I've been feeling that energy, especially with Marin Tao's rise to fame. It's cool to see people taking notice of our city's arts scene.",
+        "factIds": [
+          "F-d321e311606c",
+          "F-727f3aa9d3b9",
+          "F-1ca1caa2610f"
+        ],
+        "src": "packet.W2[POP-00632]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Sharon Okafor",
+        "text": "Lena Cross might be less visible in local events",
+        "usable": false
+      },
+      {
+        "from": "Sharon Okafor",
+        "text": "The neighborhood might have mixed feelings about her fading fame",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C112",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-7cd6ffd2aeb3"
+    },
+    {
+      "t": "FACT",
+      "text": "Marin Tao leads the fame table; 2 fading, 0 new",
+      "src": "output/beats/Cultural_Ledger.jsonl @C112",
+      "id": "F-053f388c5ecb"
+    },
+    {
+      "t": "FACT",
+      "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 93, cooling), 17 media mentions.",
+      "src": "output/beats/Cultural_Ledger.jsonl @C112",
+      "id": "F-d321e311606c"
+    },
+    {
+      "t": "FACT",
+      "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 93, cooling), 17 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C112",
+      "id": "F-de3e2737a934"
+    },
+    {
+      "t": "FACT",
+      "text": "Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 67, cooling), 14 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C112",
+      "id": "F-f5626c8ab3a6"
+    },
+    {
+      "t": "FACT",
+      "text": "Marin Tao (Celebrity), Arts, Chinatown, Iconic-tier — the city knows them (fame 153, viral), 25 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C112",
+      "id": "F-727f3aa9d3b9"
+    },
+    {
+      "t": "FACT",
+      "text": "Rico Valez (Celebrity), Arts, Fruitvale, Iconic-tier — the city knows them (fame 116, viral), 19 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C112",
+      "id": "F-1ca1caa2610f"
+    },
+    {
+      "t": "FACT",
+      "text": "Lena Cross — Actor — Piedmont Ave",
+      "src": "Simulation_Ledger profile for POP-00539",
+      "id": "F-f580a535e402"
+    },
+    {
+      "t": "FACT",
+      "text": "Marin Tao — Musician — Chinatown",
+      "src": "Simulation_Ledger profile for POP-00537",
+      "id": "F-5cfd163bed8d"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "sharon-behavior-ground-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Frame one Packet-supplied venue condition as a behavior question without inventing Sharon's presence, patrons, habits, activity, cause, trend, diagnosis, or social meaning.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "warm evidence-bounded lifestyle brief",
+      "targetWords": "evidence-bounded",
+      "opening": "one Packet-named venue, location, and condition",
+      "closing": "the human behavior account still needed"
+    },
+    "authorizedTexture": [
+      "warm interpretation of a supplied venue condition without claiming observation, attendance, or a behavior pattern",
+      "lifestyle vocabulary used only to pose a question and never as proof of a habit, preference, mood, trend, or diagnosis"
+    ],
+    "textureConditions": [
+      "a quiet venue record proves only the supplied venue condition and location, not patron count, decline, closure, mood, cause, habit, preference, or citywide trend",
+      "first-person visits, every patron, manager, regular, worker, expert, psychologist, quote, action, date, count, behavior change, and social meaning require Packet support"
+    ],
+    "canonBlockers": [
+      "invented attendance, observation, patron, manager, regular, worker, expert, psychologist, interview, dialogue, quote, line, gathering, habit, preference, behavior change, diagnosis, or social meaning",
+      "an invented or altered venue, person, neighborhood, event, relationship, date, count, or cause",
+      "closure or decline claims, citywide lifestyle trend, collective sentiment, raw engine labels, or economic conclusion presented as fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-49eb9e254297",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-7cd6ffd2aeb3",
+        "t": "FACT",
+        "text": "Current cycle: C112",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-053f388c5ecb",
+        "t": "FACT",
+        "text": "Marin Tao leads the fame table; 2 fading, 0 new",
+        "src": "output/beats/Cultural_Ledger.jsonl @C112"
+      },
+      {
+        "id": "F-d321e311606c",
+        "t": "FACT",
+        "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 93, cooling), 17 media mentions.",
+        "src": "output/beats/Cultural_Ledger.jsonl @C112"
+      },
+      {
+        "id": "F-de3e2737a934",
+        "t": "FACT",
+        "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 93, cooling), 17 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C112"
+      },
+      {
+        "id": "F-f5626c8ab3a6",
+        "t": "FACT",
+        "text": "Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 67, cooling), 14 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C112"
+      },
+      {
+        "id": "F-727f3aa9d3b9",
+        "t": "FACT",
+        "text": "Marin Tao (Celebrity), Arts, Chinatown, Iconic-tier — the city knows them (fame 153, viral), 25 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C112"
+      },
+      {
+        "id": "F-1ca1caa2610f",
+        "t": "FACT",
+        "text": "Rico Valez (Celebrity), Arts, Fruitvale, Iconic-tier — the city knows them (fame 116, viral), 19 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C112"
+      },
+      {
+        "id": "F-f580a535e402",
+        "t": "FACT",
+        "text": "Lena Cross — Actor — Piedmont Ave",
+        "src": "Simulation_Ledger profile for POP-00539"
+      },
+      {
+        "id": "F-5cfd163bed8d",
+        "t": "FACT",
+        "text": "Marin Tao — Musician — Chinatown",
+        "src": "Simulation_Ledger profile for POP-00537"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00539-157e90b3fd",
+        "speakerId": "POP-00539",
+        "speakerName": "Lena Cross",
+        "text": "To be honest, I'm not really sure what you're referring to with 'fading fame.' I've just been living my life, working on my craft, and being a mom to Max. I haven't really noticed any change in how people treat me around here on Piedmont Ave. I still run into familiar faces, like Darrin Davis, and we chat about the A's. Sure, I was named in some coverage recently, but it wasn't exactly kind. Still, it's just part of life, you know? I try not to let it get to me.",
+        "factIds": [
+          "F-d321e311606c",
+          "F-f580a535e402"
+        ],
+        "src": "packet.W2[POP-00539]"
+      },
+      {
+        "id": "Q-POP-00545-25ebbc8af2",
+        "speakerId": "POP-00545",
+        "speakerName": "Rowan Pierce",
+        "text": "To be honest, I don't really know Lena Cross or follow her work closely. I see the Oakland Alternative Response Initiative getting a lot of attention around here, and I lent a tool to a neighbor recently, but Lena Cross isn't someone I've noticed around Piedmont Ave lately. I'm not sure how I feel about her fading fame because I'm not really aware of her current status.",
+        "factIds": [
+          "F-d321e311606c",
+          "F-f5626c8ab3a6"
+        ],
+        "src": "packet.W2[POP-00545]"
+      },
+      {
+        "id": "Q-POP-00537-e57d638336",
+        "speakerId": "POP-00537",
+        "speakerName": "Marin Tao",
+        "text": "To be honest, I haven't really thought about Lena Cross or Piedmont Ave that much. I'm pretty focused on my own music scene here in Chinatown. I've noticed some new faces around, probably from the Winter Lights festival, but I don't really know what's going on elsewhere.",
+        "factIds": [
+          "F-5cfd163bed8d",
+          "F-d321e311606c"
+        ],
+        "src": "packet.W2[POP-00537]"
+      },
+      {
+        "id": "Q-POP-00632-52a9a407c5",
+        "speakerId": "POP-00632",
+        "speakerName": "Rico Valez",
+        "text": "To be honest, I haven't really noticed much about Lena Cross's fading fame around Piedmont Ave. I live in Fruitvale, and while I catch the vibe of the city, I don't spend a lot of time over there. I do know that the cultural scene in Oakland is buzzing, and people are excited about what's happening here. I've been feeling that energy, especially with Marin Tao's rise to fame. It's cool to see people taking notice of our city's arts scene.",
+        "factIds": [
+          "F-d321e311606c",
+          "F-727f3aa9d3b9",
+          "F-1ca1caa2610f"
+        ],
+        "src": "packet.W2[POP-00632]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00539",
+        "name": "Lena Cross",
+        "profile": "Lena Cross — Actor — Piedmont Ave",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00545",
+        "name": "Rowan Pierce",
+        "profile": "Rowan Pierce — Freelance Writer — Piedmont Ave",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00537",
+        "name": "Marin Tao",
+        "profile": "Marin Tao — Musician — Chinatown",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00632",
+        "name": "Rico Valez",
+        "profile": "Rico Valez — Musician — Fruitvale",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Sharon Okafor",
+        "text": "Lena Cross might be less visible in local events",
+        "publishable": false
+      },
+      {
+        "from": "Sharon Okafor",
+        "text": "The neighborhood might have mixed feelings about her fading fame",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "warm interpretation of a supplied venue condition without claiming observation, attendance, or a behavior pattern",
+      "lifestyle vocabulary used only to pose a question and never as proof of a habit, preference, mood, trend, or diagnosis"
+    ],
+    "textureConditions": [
+      "a quiet venue record proves only the supplied venue condition and location, not patron count, decline, closure, mood, cause, habit, preference, or citywide trend",
+      "first-person visits, every patron, manager, regular, worker, expert, psychologist, quote, action, date, count, behavior change, and social meaning require Packet support"
+    ],
+    "forbiddenClaimClasses": [
+      "invented attendance, observation, patron, manager, regular, worker, expert, psychologist, interview, dialogue, quote, line, gathering, habit, preference, behavior change, diagnosis, or social meaning",
+      "an invented or altered venue, person, neighborhood, event, relationship, date, count, or cause",
+      "closure or decline claims, citywide lifestyle trend, collective sentiment, raw engine labels, or economic conclusion presented as fact"
+    ]
+  }
+}

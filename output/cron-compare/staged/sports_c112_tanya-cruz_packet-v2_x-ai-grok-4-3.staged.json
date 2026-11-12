@@ -1,0 +1,48 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "112",
+  "persona": "tanya-cruz",
+  "byline": "Tanya Cruz",
+  "bylinePopid": "POP-00014",
+  "article": "output/cron-compare/staged/sports_c112_tanya-cruz_packet-v2_x-ai-grok-4-3.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "Oaks early-season update: 1-0",
+        "sourceRef": "world_summary_c112.md ## Sports"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-4ccbfd54b325",
+    "draftSha256": "d5283e4fcc090ce6504433e00dd628283beec4e1e6f1d4f41d241e753f023eee",
+    "verdict": "output/cron-compare/sports_c112_tanya-cruz_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-10-21T23:19:28.518Z",
+    "contractScore": {
+      "opened": true,
+      "closed": false,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 84,
+      "short": "The closing fails to specify the access or observation still needed.",
+      "score": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "d5283e4fcc090ce6504433e00dd628283beec4e1e6f1d4f41d241e753f023eee",
+      "costUsd": 0.0013
+    }
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-10-24T17:00:04.680Z"
+}

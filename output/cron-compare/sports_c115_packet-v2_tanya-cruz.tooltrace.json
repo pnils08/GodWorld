@@ -1,0 +1,30 @@
+{
+  "model": "x-ai/grok-4.3",
+  "calls": [
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Vinnie Keane"
+      },
+      "resultChars": 3221,
+      "resultHead": "[C100 · edition] Origins - Vinnie Keane Vinnie Keane - The Complete Origins (Parts I through IV) Written by Hal Richmond Part I - The Dock and the Dream He came from the water. Not the kind that glimmers in postcards, but the cold Atlantic that chews at the Massachusetts coast until the docks creak and the gulls go quiet. Vinnie Keane grew up the youngest of five children in a two-bedroom house where dinner smelled of diesel, salt, and hope. His father worked the harbor, a dock fisherman who measured time by tides and storms. His m\n[C100 · edition] Numbers could not contain him. His worth live"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Benji Dillon"
+      },
+      "resultChars": 3244,
+      "resultHead": "[C94 · supplemental] It is true, he said, that the franchise is running a farewell campaign for Vinnie Keane. Keane is set to retire. That is confirmed. That was already in print. What had not been in print — what I want to make sure lands here — is the architecture underneath it. *Benji Dillon came back on a one-year deal to make one last run with Vinnie.* That sentence has not appeared in this paper before this piece. Read it again. Dillon is back not as an afterthought, not as a rotation anchor who happens to be aging in the same di\n[C100 · edition] Origins - Benji Dillon Benji Dillon: The "
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Mike Paulson"
+      },
+      "resultChars": 3241,
+      "resultHead": "[C89 · supplemental] THE CARPENTER’S THREAD Mike Paulson was born in 1987 to Lars Erik Paulson and Maureen Shannon-Paulson. The pairing read like a Chicago fairy tale: a stoic Swedish carpenter who came to America at age seven, and a fiery Irish-Italian woman from the Romano-Shannon family — the clan that ran the bakery on 35th Street and held quiet stakes in properties across the South Side. Lars was a master carpenter. Broad hands, few words, endless patience. The kind of man who could make a house stand or a child believe in their o\n[earlier · supplemental] It is an active pursuit. And for "
+    }
+  ],
+  "ranAt": "2026-11-12T00:20:43.226Z"
+}

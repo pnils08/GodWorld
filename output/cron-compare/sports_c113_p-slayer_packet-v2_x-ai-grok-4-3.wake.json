@@ -1,0 +1,56 @@
+{
+  "mode": "wake-write",
+  "desk": "sports",
+  "cycle": "113",
+  "provider": "openrouter",
+  "model": "x-ai/grok-4.3",
+  "configuredWriterModel": "x-ai/grok-4.3",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "p-slayer",
+  "byline": {
+    "name": "P Slayer",
+    "popid": "POP-00008",
+    "beatDomain": "SPORTS"
+  },
+  "laneEntries": 9,
+  "quotesLanded": 4,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [],
+  "toolCalls": 0,
+  "wordCount": 414,
+  "targetWords": "400-700",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": false,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 400",
+    "words": 414,
+    "short": "The closing ends on a flat rhetorical question rather than a dare, confession, or live-friction update.",
+    "score": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "e4a49e59a7286d4c4e6c769953f4e93b57e58f6496980a4b216b925864fff948",
+    "costUsd": 0.0014
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/4 — The closing ends on a flat rhetorical question rather than a dare, confession, or live-friction update."
+  },
+  "article": "output/cron-compare/staged/sports_c113_p-slayer_packet-v2_x-ai-grok-4-3.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "th/.env' }\n{\n  \"popId\": \"POP-00008\",\n  \"name\": \"P Slayer\",\n  \"recorded\": true,\n  \"text\": \"filed: I sat at the counter of The Railcar last night, the one by the old loading docks where the winter wi\"\n}"
+  },
+  "ranAt": "2026-10-31T17:03:10.760Z"
+}

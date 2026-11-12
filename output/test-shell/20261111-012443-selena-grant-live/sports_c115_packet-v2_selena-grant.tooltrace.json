@@ -1,0 +1,94 @@
+{
+  "model": "openai/gpt-5.6-luna",
+  "calls": [
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Harry Hayward"
+      },
+      "resultChars": 550,
+      "resultHead": "[C114 · daily · Selena Grant] Harry Hayward, a second-round rookie, scored eight points, collected four rebounds and went three for four from the field, including two for two from three-point range, in 13 minutes. That is a compact line, but it gives the franchise something an expansion team needs: a young player whose usefulness can be measured without requiring the entire roster to be remade around him. Hayward is shaping up as a solid rotation piece, and the 13-minute sample is enough to identify the possibility, not enough to settle it. The"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Adash Stanley"
+      },
+      "resultChars": 3235,
+      "resultHead": "[C100 · edition] thing that jumps out when you watch the tape of Adash Stanley dropping twenty-six points against the Detroit Pistons last season isn't the scoring itself. It is the geometry of how he arrives there. He is nineteen years old, an undrafted six-foot-two guard out of Kraków, Poland, and he plays like a man perpetually out of time. In the third quarter of that Detroit game, Stanley drove hard to his left, missed a contested floater, fought through his own rebound against two seven-footers, tipped the ball to the perimet\n[earlier · archive] END SUPPLEMENTAL EDITION — ADASH STANLEY O"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "AJ Dybantsa"
+      },
+      "resultChars": 3214,
+      "resultHead": "[earlier · archive] Title: The Hostage Wire: Why Dybantsa is a Blueprint, Not a Savior By Anthony Raines Look at the transaction wire. Strip away the emotion and read it again. *Oakland acquires F AJ Dybantsa in exchange for F Herbert Jones and a Y5C1 draft pick.* The city saw that notification and celebrated a championship. They looked at Dybantsa’s isolation metrics, his scoring gravity in the half-court, and concluded that General Manager Mike Paulson finally pushed his chips into the center of the table. Fans think this trade was \n[C112 · daily · Selena Grant] # Oaks' First Win Offers a Us"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Wendell Carter Jr"
+      },
+      "resultChars": 3265,
+      "resultHead": "[C99 · supplemental] # The Tip of the Spear his ceiling. It’s about his floor. He is a nineteen-year-old who dives for loose balls in the second quarter of a Tuesday night game like it's Game 7 of the Finals. He bleeds for the basketball. Paulson saw a number on a page. A 99-Hustle rating. You can't teach that. He staked his entire reputation on the belief that a 99-Hustle rating isn't just a scouting anomaly; it's a pathology. He didn't sign a point guard. He signed a blunt instrument. Look at the roster they’ve built around him. Wils\n[earlier · archive] # The Tip of the Spear his ceiling. It"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "T. Jerome"
+      },
+      "resultChars": 51,
+      "resultHead": "tool budget exhausted — compose from what you have."
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "J. Champagnie"
+      },
+      "resultChars": 51,
+      "resultHead": "tool budget exhausted — compose from what you have."
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Austin Reaves"
+      },
+      "resultChars": 51,
+      "resultHead": "tool budget exhausted — compose from what you have."
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Dillon Brooks"
+      },
+      "resultChars": 51,
+      "resultHead": "tool budget exhausted — compose from what you have."
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Philadelphia"
+      },
+      "resultChars": 51,
+      "resultHead": "tool budget exhausted — compose from what you have."
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Orlando"
+      },
+      "resultChars": 51,
+      "resultHead": "tool budget exhausted — compose from what you have."
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "San Antonio"
+      },
+      "resultChars": 51,
+      "resultHead": "tool budget exhausted — compose from what you have."
+    }
+  ],
+  "ranAt": "2026-11-11T07:25:13.787Z"
+}

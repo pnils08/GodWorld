@@ -1,0 +1,77 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "114",
+  "persona": "talia-finch",
+  "byline": "Talia Finch",
+  "bylinePopid": "POP-00592",
+  "article": "output/cron-compare/staged/sports_c114_talia-finch_packet-v2_openai-gpt-5-6-luna.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Adash Stanley",
+        "role": "quoted-source",
+        "popid": "POP-01023"
+      },
+      {
+        "name": "Trevor Henderson",
+        "role": "quoted-source",
+        "popid": "POP-01224"
+      },
+      {
+        "name": "Trenton Nawan",
+        "role": "quoted-source",
+        "popid": "POP-00273"
+      },
+      {
+        "name": "Dillon Brooks",
+        "role": "mentioned",
+        "popid": "POP-01079",
+        "floor": true
+      },
+      {
+        "name": "Wendell Carter Jr",
+        "role": "mentioned",
+        "popid": "POP-01028",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "KONO"
+    ],
+    "claims": [
+      {
+        "claim": "The mood among fans is electric. I've felt the excitement building around the Oaks, it's like the whole city is waking up with the team. There's a buzz in the air, and I think people are really looking forward to seeing what they can do this season.",
+        "sourceRef": "citizenVoice PRESS Adash Stanley"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-8822279216b2",
+    "draftSha256": "4b34199ba29ceb0a5bbebba099002f0334506fdaaefc581acf62c12650632734",
+    "verdict": "output/cron-compare/sports_c114_talia-finch_packet-v2_openai-gpt-5-6-luna.rhea.json",
+    "ranAt": "2026-11-06T00:18:50.305Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 400",
+      "words": 531,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "4b34199ba29ceb0a5bbebba099002f0334506fdaaefc581acf62c12650632734",
+      "costUsd": 0.0011
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-06T00:18:53.965Z"
+}

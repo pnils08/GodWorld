@@ -1,0 +1,486 @@
+[
+  {
+    "pop": "POP-00642",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00642\",\"name\":\"Ollie Campbell\",\"role\":\"Bakery Worker\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Talia Finch\",\"question\":\"Your own page at C103 says: \\\"I don't follow the Oaks too close, but 23 points sounds like Adash did his job\\\". Is that still how you see Oaks? Speak only from that and your own reaction.\"},\"signal\":{\"kind\":\"beat-oaks-ground\",\"hood\":\"KONO\",\"focus\":\"The mood around the Oaks game\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C112\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Ollie Campbell — Bakery Worker\",\"evidence\":[{\"id\":\"EV-PAGE-4aa566f2bb\",\"src\":\"cp-POP-00642-c103-PRESS\",\"text\":\"I don't follow the Oaks too close, but 23 points sounds like Adash did his job.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"INTERPRETATION\",\"text\":\"I don't follow the Oaks too close, but 23 points sounds like Adash did his job.\",\"src\":\"cp-POP-00642-c103-PRESS\",\"id\":\"F-47aa77be7ede\"},{\"t\":\"FACT\",\"text\":\"Ollie Campbell — Bakery Worker\",\"src\":\"Simulation_Ledger profile for POP-00642\",\"id\":\"F-3d14f123f8c5\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00642",
+        "name": "Ollie Campbell",
+        "role": "Bakery Worker",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Talia Finch",
+        "question": "Your own page at C103 says: \"I don't follow the Oaks too close, but 23 points sounds like Adash did his job\". Is that still how you see Oaks? Speak only from that and your own reaction."
+      },
+      "signal": {
+        "kind": "beat-oaks-ground",
+        "hood": "KONO",
+        "focus": "The mood around the Oaks game",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C112"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Ollie Campbell — Bakery Worker",
+        "evidence": [
+          {
+            "id": "EV-PAGE-4aa566f2bb",
+            "src": "cp-POP-00642-c103-PRESS",
+            "text": "I don't follow the Oaks too close, but 23 points sounds like Adash did his job."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "INTERPRETATION",
+          "text": "I don't follow the Oaks too close, but 23 points sounds like Adash did his job.",
+          "src": "cp-POP-00642-c103-PRESS",
+          "id": "F-47aa77be7ede"
+        },
+        {
+          "t": "FACT",
+          "text": "Ollie Campbell — Bakery Worker",
+          "src": "Simulation_Ledger profile for POP-00642",
+          "id": "F-3d14f123f8c5"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00273",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00273\",\"name\":\"Trenton Nawan\",\"role\":\"Server\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Talia Finch\",\"question\":\"Your own page at C108 says: \\\"I've seen the Oaks struggle in their preseason performance, it's got me a bit worried about how they'll do this season\\\". Is that still how you see Oaks? Speak only from that and your own reaction.\"},\"signal\":{\"kind\":\"beat-oaks-ground\",\"hood\":\"KONO\",\"focus\":\"The mood around the Oaks game\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C112\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Trenton Nawan — Server\",\"evidence\":[{\"id\":\"EV-PAGE-5bed27dc19\",\"src\":\"cp-POP-00273-c108-PRESS\",\"text\":\"I've seen the Oaks struggle in their preseason performance, it's got me a bit worried about how they'll do this season.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"INTERPRETATION\",\"text\":\"I've seen the Oaks struggle in their preseason performance, it's got me a bit worried about how they'll do this season.\",\"src\":\"cp-POP-00273-c108-PRESS\",\"id\":\"F-1b4075e40edb\"},{\"t\":\"FACT\",\"text\":\"Trenton Nawan — Server\",\"src\":\"Simulation_Ledger profile for POP-00273\",\"id\":\"F-89e10834b5eb\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00273",
+        "name": "Trenton Nawan",
+        "role": "Server",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Talia Finch",
+        "question": "Your own page at C108 says: \"I've seen the Oaks struggle in their preseason performance, it's got me a bit worried about how they'll do this season\". Is that still how you see Oaks? Speak only from that and your own reaction."
+      },
+      "signal": {
+        "kind": "beat-oaks-ground",
+        "hood": "KONO",
+        "focus": "The mood around the Oaks game",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C112"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Trenton Nawan — Server",
+        "evidence": [
+          {
+            "id": "EV-PAGE-5bed27dc19",
+            "src": "cp-POP-00273-c108-PRESS",
+            "text": "I've seen the Oaks struggle in their preseason performance, it's got me a bit worried about how they'll do this season."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "INTERPRETATION",
+          "text": "I've seen the Oaks struggle in their preseason performance, it's got me a bit worried about how they'll do this season.",
+          "src": "cp-POP-00273-c108-PRESS",
+          "id": "F-1b4075e40edb"
+        },
+        {
+          "t": "FACT",
+          "text": "Trenton Nawan — Server",
+          "src": "Simulation_Ledger profile for POP-00273",
+          "id": "F-89e10834b5eb"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01023",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01023\",\"name\":\"Adash Stanley\",\"role\":\"PG / The Oaks\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Talia Finch\",\"question\":\"What have you seen, felt, or understood about \\\"The mood around the Oaks game\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-oaks-ground\",\"hood\":\"KONO\",\"focus\":\"The mood around the Oaks game\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C112\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Adash Stanley — PG / The Oaks — Downtown\",\"evidence\":[{\"id\":\"EV-c57af05ab4\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C112\",\"text\":\"moderate\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C112\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-7cd6ffd2aeb3\"},{\"t\":\"FACT\",\"text\":\"Oaks ground read C112 — moderate\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C112\",\"id\":\"F-ac80e66d07fd\"},{\"t\":\"FACT\",\"text\":\"moderate\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C112\",\"id\":\"F-bfb23e35a6f6\"},{\"t\":\"FACT\",\"text\":\"Oaks fans, C112: moderate\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C112\",\"id\":\"F-ff12aab6e19f\"},{\"t\":\"FACT\",\"text\":\"Room mood, C112: electric\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C112\",\"id\":\"F-a6a4664b24f4\"},{\"t\":\"FACT\",\"text\":\"Notebook (feed): The Oaks open their inaugural season at home vs the San Antonio Spurs and instantly get their first win in franchise history, After 0-9 through rookie camp and preseason the team had grown anxious. Co\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C112\",\"id\":\"F-ee1f350b565d\"},{\"t\":\"FACT\",\"text\":\"Oaks — game-result (early-season), C112: The Oaks open their inaugural season at home. AJ Dybantsa shines in his rookie debut as the Oaks win their first win as a franchise.\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C112\",\"id\":\"F-e1e1c4186316\"},{\"t\":\"FACT\",\"text\":\"Context: record 1-0 · streak W1\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C112\",\"id\":\"F-e2b05caea517\"},{\"t\":\"FACT\",\"text\":\"Adash Stanley — PG / The Oaks — Downtown\",\"src\":\"Simulation_Ledger profile for POP-01023\",\"id\":\"F-26cdcab1a2d4\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01023",
+        "name": "Adash Stanley",
+        "role": "PG / The Oaks",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Talia Finch",
+        "question": "What have you seen, felt, or understood about \"The mood around the Oaks game\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-oaks-ground",
+        "hood": "KONO",
+        "focus": "The mood around the Oaks game",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C112"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Adash Stanley — PG / The Oaks — Downtown",
+        "evidence": [
+          {
+            "id": "EV-c57af05ab4",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C112",
+            "text": "moderate"
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C112",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-7cd6ffd2aeb3"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks ground read C112 — moderate",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C112",
+          "id": "F-ac80e66d07fd"
+        },
+        {
+          "t": "FACT",
+          "text": "moderate",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C112",
+          "id": "F-bfb23e35a6f6"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks fans, C112: moderate",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C112",
+          "id": "F-ff12aab6e19f"
+        },
+        {
+          "t": "FACT",
+          "text": "Room mood, C112: electric",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C112",
+          "id": "F-a6a4664b24f4"
+        },
+        {
+          "t": "FACT",
+          "text": "Notebook (feed): The Oaks open their inaugural season at home vs the San Antonio Spurs and instantly get their first win in franchise history, After 0-9 through rookie camp and preseason the team had grown anxious. Co",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C112",
+          "id": "F-ee1f350b565d"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks — game-result (early-season), C112: The Oaks open their inaugural season at home. AJ Dybantsa shines in his rookie debut as the Oaks win their first win as a franchise.",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C112",
+          "id": "F-e1e1c4186316"
+        },
+        {
+          "t": "FACT",
+          "text": "Context: record 1-0 · streak W1",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C112",
+          "id": "F-e2b05caea517"
+        },
+        {
+          "t": "FACT",
+          "text": "Adash Stanley — PG / The Oaks — Downtown",
+          "src": "Simulation_Ledger profile for POP-01023",
+          "id": "F-26cdcab1a2d4"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01027",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01027\",\"name\":\"Austin Reaves\",\"role\":\"SG / The Oaks\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Talia Finch\",\"question\":\"What have you seen, felt, or understood about \\\"The mood around the Oaks game\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-oaks-ground\",\"hood\":\"KONO\",\"focus\":\"The mood around the Oaks game\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C112\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Austin Reaves — SG / The Oaks — Downtown\",\"evidence\":[{\"id\":\"EV-465afa6d3e\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C112\",\"text\":\"moderate\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C112\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-7cd6ffd2aeb3\"},{\"t\":\"FACT\",\"text\":\"Oaks ground read C112 — moderate\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C112\",\"id\":\"F-ac80e66d07fd\"},{\"t\":\"FACT\",\"text\":\"moderate\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C112\",\"id\":\"F-bfb23e35a6f6\"},{\"t\":\"FACT\",\"text\":\"Oaks fans, C112: moderate\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C112\",\"id\":\"F-ff12aab6e19f\"},{\"t\":\"FACT\",\"text\":\"Room mood, C112: electric\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C112\",\"id\":\"F-a6a4664b24f4\"},{\"t\":\"FACT\",\"text\":\"Notebook (feed): The Oaks open their inaugural season at home vs the San Antonio Spurs and instantly get their first win in franchise history, After 0-9 through rookie camp and preseason the team had grown anxious. Co\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C112\",\"id\":\"F-ee1f350b565d\"},{\"t\":\"FACT\",\"text\":\"Oaks — game-result (early-season), C112: The Oaks open their inaugural season at home. AJ Dybantsa shines in his rookie debut as the Oaks win their first win as a franchise.\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C112\",\"id\":\"F-e1e1c4186316\"},{\"t\":\"FACT\",\"text\":\"Context: record 1-0 · streak W1\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C112\",\"id\":\"F-e2b05caea517\"},{\"t\":\"FACT\",\"text\":\"Austin Reaves — SG / The Oaks — Downtown\",\"src\":\"Simulation_Ledger profile for POP-01027\",\"id\":\"F-afa8c27895bb\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01027",
+        "name": "Austin Reaves",
+        "role": "SG / The Oaks",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Talia Finch",
+        "question": "What have you seen, felt, or understood about \"The mood around the Oaks game\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-oaks-ground",
+        "hood": "KONO",
+        "focus": "The mood around the Oaks game",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C112"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Austin Reaves — SG / The Oaks — Downtown",
+        "evidence": [
+          {
+            "id": "EV-465afa6d3e",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C112",
+            "text": "moderate"
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C112",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-7cd6ffd2aeb3"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks ground read C112 — moderate",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C112",
+          "id": "F-ac80e66d07fd"
+        },
+        {
+          "t": "FACT",
+          "text": "moderate",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C112",
+          "id": "F-bfb23e35a6f6"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks fans, C112: moderate",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C112",
+          "id": "F-ff12aab6e19f"
+        },
+        {
+          "t": "FACT",
+          "text": "Room mood, C112: electric",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C112",
+          "id": "F-a6a4664b24f4"
+        },
+        {
+          "t": "FACT",
+          "text": "Notebook (feed): The Oaks open their inaugural season at home vs the San Antonio Spurs and instantly get their first win in franchise history, After 0-9 through rookie camp and preseason the team had grown anxious. Co",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C112",
+          "id": "F-ee1f350b565d"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks — game-result (early-season), C112: The Oaks open their inaugural season at home. AJ Dybantsa shines in his rookie debut as the Oaks win their first win as a franchise.",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C112",
+          "id": "F-e1e1c4186316"
+        },
+        {
+          "t": "FACT",
+          "text": "Context: record 1-0 · streak W1",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C112",
+          "id": "F-e2b05caea517"
+        },
+        {
+          "t": "FACT",
+          "text": "Austin Reaves — SG / The Oaks — Downtown",
+          "src": "Simulation_Ledger profile for POP-01027",
+          "id": "F-afa8c27895bb"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  }
+]

@@ -1,0 +1,207 @@
+{
+  "version": "OAKS-BEAT-1",
+  "empty": false,
+  "cycle": 114,
+  "kind": "beat-oaks-beat",
+  "seat": {
+    "slug": "selena-grant",
+    "name": "Selena Grant",
+    "popid": "POP-00591",
+    "desk": "sports",
+    "domain": "oaks",
+    "builder": "buildOaksBeatSlice.js"
+  },
+  "hood": "San Antonio",
+  "pulse": {
+    "className": "beat-oaks-beat",
+    "score": 100,
+    "label": "Oaks — game-result C114 · 4-1 · L1",
+    "hood": "San Antonio",
+    "source": "output/beats/Oakland_Sports_Feed.jsonl @C114"
+  },
+  "story": {
+    "kind": "beat-oaks-beat",
+    "angle": "Oaks — game-result C114 · 4-1 · L1 — the second club's board read",
+    "label": "Oaks — game-result C114 · 4-1 · L1",
+    "hookLine": "The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+    "hood": "San Antonio",
+    "citizens": [
+      "Adash Stanley (POP-01023)",
+      "Austin Reaves (POP-01027)",
+      "Harry Hayward (POP-01223)"
+    ],
+    "popids": [
+      "POP-01023",
+      "POP-01027",
+      "POP-01223"
+    ],
+    "ref": "output/beats/Oakland_Sports_Feed.jsonl @C114",
+    "cycle": 114
+  },
+  "approach": "Oaks beat-analyst approach: this slice is the Oaks feed raw — the record, the streak, the stats lines, the trigger behind each event. Third-person board read on the second club, not fan heat. Numbers come from the feed only — never invent a stat. The named players are real; the press row, the cage, the bus are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-01023",
+      "name": "Adash Stanley",
+      "role": "PG / The Oaks ",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Adash Stanley — PG / The Oaks  — Downtown",
+      "why": "named on the Oaks feed C114 (Oakland_Sports_Feed)"
+    },
+    {
+      "popid": "POP-01027",
+      "name": "Austin Reaves",
+      "role": "SG / The Oaks",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Austin Reaves — SG / The Oaks — West Oakland",
+      "why": "named on the Oaks feed C114 (Oakland_Sports_Feed)"
+    },
+    {
+      "popid": "POP-01223",
+      "name": "Harry Hayward",
+      "role": "Oakland Oaks - Power Forward",
+      "neighborhood": "KONO",
+      "business": null,
+      "profile": "Harry Hayward — Oakland Oaks - Power Forward — KONO",
+      "why": "named on the Oaks feed C114 (Oakland_Sports_Feed)"
+    }
+  ],
+  "facts": [
+    {
+      "text": "Oaks — game-result (early-season), C114: The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+    },
+    {
+      "text": "Record 4-1 · streak L1",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+    },
+    {
+      "text": "Stats (feed): Adash Stanley/19PTS/5REB/4ASST/5-11 3PT, Austin Reaves/19PTS/6REB/7ASST/0TO, AJ Dybantsa/15PTS/5REB, Wendell Carter Jr/10PTS/7REB/5-6FG, T. Jerome/10PTS/5ASST",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+    },
+    {
+      "text": "Franchise stability: growing",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+    },
+    {
+      "text": "Oaks — player-feature (early-season), C114: Second-round rookie Harry Hayward is shaping up as a solid rotation piece",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+    },
+    {
+      "text": "Record 4-1 · streak L1",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+    },
+    {
+      "text": "Stats (feed): Harry Hayward/8PTS/4REB/3-4FG/2-2 3PT in 13 minutes",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+    },
+    {
+      "text": "Franchise stability: growing",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+    },
+    {
+      "text": "Oaks — game-result (early-season), C114: The Oaks bounce back with a 60-point rout in Toronto. Oaks 135 - Raptors 75",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+    },
+    {
+      "text": "Record 5-1 · streak W1",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+    },
+    {
+      "text": "Stats (feed): Austin Reaves/20PTS/8-16FG/4-6 3PT, T. Jerome/19PTS/7REB/7ASST, Adash Stanley/16PTS/7REB/6ASST/4-4 3PT, Wendell Carter Jr/14PTS/15REB/5OREB, AJ Dybantsa/12PTS/5-8FG",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+    },
+    {
+      "text": "Franchise stability: growing",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "Oaks — game-result C114 · 4-1 · L1 — the second club's board read",
+    "hookLine": "The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+    "anchorFacts": [
+      "Oaks — game-result (early-season), C114: The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+      "Record 4-1 · streak L1",
+      "Stats (feed): Adash Stanley/19PTS/5REB/4ASST/5-11 3PT, Austin Reaves/19PTS/6REB/7ASST/0TO, AJ Dybantsa/15PTS/5REB, Wendell Carter Jr/10PTS/7REB/5-6FG, T. Jerome/10PTS/5ASST",
+      "Franchise stability: growing",
+      "Oaks — player-feature (early-season), C114: Second-round rookie Harry Hayward is shaping up as a solid rotation piece",
+      "Record 4-1 · streak L1",
+      "Stats (feed): Harry Hayward/8PTS/4REB/3-4FG/2-2 3PT in 13 minutes",
+      "Franchise stability: growing",
+      "Oaks — game-result (early-season), C114: The Oaks bounce back with a 60-point rout in Toronto. Oaks 135 - Raptors 75",
+      "Record 5-1 · streak W1",
+      "Stats (feed): Austin Reaves/20PTS/8-16FG/4-6 3PT, T. Jerome/19PTS/7REB/7ASST, Adash Stanley/16PTS/7REB/6ASST/4-4 3PT, Wendell Carter Jr/14PTS/15REB/5OREB, AJ Dybantsa/12PTS/5-8FG",
+      "Franchise stability: growing"
+    ],
+    "evidence": [
+      {
+        "text": "Oaks — game-result (early-season), C114: The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+      },
+      {
+        "text": "Record 4-1 · streak L1",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+      },
+      {
+        "text": "Stats (feed): Adash Stanley/19PTS/5REB/4ASST/5-11 3PT, Austin Reaves/19PTS/6REB/7ASST/0TO, AJ Dybantsa/15PTS/5REB, Wendell Carter Jr/10PTS/7REB/5-6FG, T. Jerome/10PTS/5ASST",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+      },
+      {
+        "text": "Franchise stability: growing",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+      },
+      {
+        "text": "Oaks — player-feature (early-season), C114: Second-round rookie Harry Hayward is shaping up as a solid rotation piece",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+      },
+      {
+        "text": "Record 4-1 · streak L1",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+      },
+      {
+        "text": "Stats (feed): Harry Hayward/8PTS/4REB/3-4FG/2-2 3PT in 13 minutes",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+      },
+      {
+        "text": "Franchise stability: growing",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+      },
+      {
+        "text": "Oaks — game-result (early-season), C114: The Oaks bounce back with a 60-point rout in Toronto. Oaks 135 - Raptors 75",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+      },
+      {
+        "text": "Record 5-1 · streak W1",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+      },
+      {
+        "text": "Stats (feed): Austin Reaves/20PTS/8-16FG/4-6 3PT, T. Jerome/19PTS/7REB/7ASST, Adash Stanley/16PTS/7REB/6ASST/4-4 3PT, Wendell Carter Jr/14PTS/15REB/5OREB, AJ Dybantsa/12PTS/5-8FG",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+      },
+      {
+        "text": "Franchise stability: growing",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": null,
+    "hooks": [],
+    "note": null,
+    "pageVoices": [],
+    "roomIsYours": "the near-empty press row, the bullpen chatter, what the manager says when the record is ugly, the drumbeat of a losing streak"
+  },
+  "feedRows": 17,
+  "currentCycleRows": 6,
+  "pointers": [
+    "output/beats/Oakland_Sports_Feed.jsonl @C114"
+  ]
+}

@@ -1,0 +1,519 @@
+# GodWorld Daily Newsroom Source Pack — Cycle 111
+
+Artifact class: NLM_DAILY_SOURCE_PACK
+Canon status: NOT CANON. This is a bounded listening/research input.
+Authority order: current world summary first; published Edition archive second; staged and ungated newsroom reports are leads/interpretation only.
+Conflict rule: never let a staged or sample report override the world summary or published archive.
+Flagged reports are excluded from the report body and listed only as exclusions.
+Pack SHA-256: 5b5b8ceaf4ad37bf11a47c9b0da9b1969eb996c0e5e341e9ace36dd62a6303b3
+
+## Current world state — derived engine summary
+
+Source: output/world_summary_c111.md
+Cycle: 111
+
+# World Summary — Cycle 111
+
+**Season:** Winter | **Weather:** 57°F mild, SW 6 mph, clear (frontState CLEAR), humidity 58, visibility 10
+**Cycle Weight:** high-signal | **Pattern:** strain-trend | **Shock:** none | **Civic Load:** minor-variance
+**Cycle Weight Reason:** High event volume (10); Very positive sentiment; Strain trend detected; 37 high-priority story hooks; Wide domain spread (10 active).
+**Calendar context:** Y3C7, Winter, holiday=Valentine's | Sports season: A's off-season, Oaks early-season | First Friday: false
+
+---
+
+Snapshot: Cycle 111 | Pop 396,713 | Illness 4.4% | Employment 95.0% | Sentiment +0.44 | Weight high-signal | Pattern strain-trend | Shock none | Load minor-variance | Hospital 0 in care (0% load)
+
+## City State
+
+- **Population:** 396,713 | Illness rate 4.4% | Employment 95.0% | Economy strong | Hospital: 0 in care (0% load)
+- **Migration:** 1349 (MigrationDrift 19 this cycle)
+- **Events generated:** 2577 (prior-cycle 2287) | **Citizens aged:** 870 | **Intake processed:** 0
+- **Story seed count:** 41 (prior-cycle 58)
+- **Traffic load:** 1.06 | **Economic influence:** normal
+- **Nightlife volume:** 4 | **Vibe:** tense | **Movement:** restricted
+- **City sentiment (Riley_Digest.CitySentiment):** +0.44
+- **Domain event counts (10 total):** FAITH 5, CIVIC 1, TRAFFIC 1, GENERAL 1, EDUCATION 1, BUSINESS 1
+
+### Neighborhood snapshot (Neighborhood_Map cycle 111)
+
+| Neighborhood | Sentiment | RetailVitality | EventAttractiveness | CrimeIndex |
+|---|---:|---:|---:|---:|
+| Jack London | +0.50 | 13.75 | 13.34 | 0.5 |
+| Uptown | +0.41 | 12.49 | 13.29 | 0.56 |
+| Downtown | +0.46 | 11.90 | 10.44 | 0.55 |
+| Piedmont Ave | +0.32 | 11.55 | 6.86 | 0.57 |
+| Fruitvale | +0.52 | 10.55 | 10.33 | 0.63 |
+| Grand Lake | +0.25 | 10.39 | 11.25 | 0.6 |
+| Rockridge | +0.36 | 10.20 | 9.16 | 0.55 |
+| Dimond | +0.17 | 9.78 | 7.25 | 0.62 |
+| Chinatown | +0.38 | 9.27 | 11.24 | 0.59 |
+| West Oakland | +0.51 | 8.65 | 8.53 | 0.57 |
+| KONO | +0.30 | 8.48 | 12.25 | 0.62 |
+| Lake Merritt | +0.30 | 8.07 | 6.73 | 0.52 |
+| Brooklyn | +0.21 | 7.63 | 6 | 0.6 |
+| Eastlake | +0.23 | 6.72 | 8.68 | 0.45 |
+| Laurel | +0.32 | 6.47 | 8.32 | 0.63 |
+| East Oakland | +0.48 | 5.99 | 7.89 | 0.7 |
+| Baylight District | +0.30 | 5.72 | 6.25 | 0.48 |
+| Adams Point | +0.20 | 5.58 | 6.03 | 0.55 |
+| Temescal | +0.45 | 5.50 | 9.24 | 0.64 |
+| San Antonio | +0.28 | 4.88 | 8 | 0.63 |
+| Ivy Hill | +0.20 | 4.53 | 6.75 | 0.64 |
+| Glenview | +0.33 | 4.38 | 6 | 0.62 |
+
+## What Moved (Ripple_Ledger, cycle 111 — 65 ripples)
+
+### migration (15)
+- CITIZEN_RELOCATED | Hal Richmond moved from Chinatown to West Oakland — moving up from Chinatown | West Oakland | mag 5 | targets POP-00007
+- CITIZEN_RELOCATED | Philly Rodriguez moved from Jack London to West Oakland — moving up from Jack London | West Oakland | mag 5 | targets POP-00027
+- CITIZEN_RELOCATED | Raymond Torres moved from Laurel to Lake Merritt — moving up from Laurel | Lake Merritt | mag 5 | targets POP-00512
+- CITIZEN_RELOCATED | Simone Limone moved from Chinatown to West Oakland — moving up from Chinatown | West Oakland | mag 5 | targets POP-00662
+- CITIZEN_RELOCATED | The Santos household (2) moved from Chinatown to West Oakland — moving up from Chinatown | West Oakland | mag 5 | targets POP-00710
+- CITIZEN_RELOCATED | Bobby Chen-Ramirez moved from Temescal to Jack London — moving up from Temescal | Jack London | mag 5 | targets POP-00792
+- CITIZEN_RELOCATED | Yasmin Robinson moved from Lake Merritt to East Oakland — priced out of Lake Merritt | East Oakland | mag 5 | targets POP-00804
+- CITIZEN_RELOCATED | Lucinda Tanaka moved from KONO to West Oakland — moving up from KONO | West Oakland | mag 5 | targets POP-00899
+- CITIZEN_RELOCATED | Wilson Shepard moved from Downtown to West Oakland — moving up from Downtown | West Oakland | mag 5 | targets POP-01022
+- CITIZEN_RELOCATED | Desmond Achebe moved from Rockridge to West Oakland — leaving Rockridge for a better fit | West Oakland | mag 5 | targets POP-01092
+- CITIZEN_RELOCATED | Ignacio Zavala moved from Lake Merritt to West Oakland — leaving Lake Merritt for a better fit | West Oakland | mag 5 | targets POP-01094
+- CITIZEN_RELOCATED | Wesley Oduya moved from East Oakland to Jack London — moving up from East Oakland | Jack London | mag 5 | targets POP-01157
+- CITIZEN_RELOCATED | Priscilla Chang moved from KONO to Fruitvale — moving up from KONO | Fruitvale | mag 5 | targets POP-01158
+- CITIZEN_RELOCATED | Arjun Venkataraman moved from Temescal to Jack London — moving up from Temescal | Jack London | mag 5 | targets POP-01172
+- FORCED_MIGRATION | Juliet Choi at severe displacement risk in Downtown (risk: 10/10) | Downtown | mag 7 | targets POP-00857
+
+### trajectory (8)
+- NEIGHBORHOOD_BOOM | Downtown boom sustained — momentum 10/10, the block everyone wants onto | Downtown | mag 7 | targets Downtown
+- HOUSING_PRESSURE_HIGH | Downtown housing pressure at 8/10: rents climbing, households stretching to stay | Downtown | mag 7 | targets Downtown
+- NEIGHBORHOOD_BOOM | Fruitvale boom sustained — momentum 10/10, the block everyone wants onto | Fruitvale | mag 7 | targets Fruitvale
+- NEIGHBORHOOD_BOOM | Jack London boom sustained — momentum 10/10, the block everyone wants onto | Jack London | mag 7 | targets Jack London
+- NEIGHBORHOOD_BOOM | Grand Lake boom sustained — momentum 10/10, the block everyone wants onto | Grand Lake | mag 7 | targets Grand Lake
+- NEIGHBORHOOD_COOLING | Brooklyn cooling off: foot traffic down, storefronts quieter than the rest of the city | Brooklyn | mag 6 | targets Brooklyn
+- NEIGHBORHOOD_BOOM | Uptown boom sustained — momentum 10/10, the block everyone wants onto | Uptown | mag 7 | targets Uptown
+- HOUSING_PRESSURE_HIGH | Uptown housing pressure at 8/10: rents climbing, households stretching to stay | Uptown | mag 7 | targets Uptown
+
+### economic-event (6)
+- carryover | carryover: cycle 1 of 3 | Jack London | mag 15 | targets Jack London
+- carryover | carryover: cycle 2 of 4 | West Oakland | mag -8 | targets West Oakland
+- carryover | carryover: cycle 2 of 3 | Jack London | mag 8 | targets Jack London
+- carryover | carryover: cycle 1 of 3 | Downtown | mag 5 | targets BIZ-00095
+- carryover | carryover: cycle 2 of 3 | mag 6 | targets all
+- carryover | carryover: cycle 3 of 6 | mag -4 | targets all
+
+### faith-event (5)
+- community_program | food pantry serves neighbors in need | East Oakland | mag 0.01 | targets Masjid An-Nur Oakland
+- community_program | community health fair hosted | Chinatown | mag 0.01 | targets Bay Pure Land Buddhist Temple
+- community_program | after-school tutoring program expands | Montclair | mag 0.01 | targets Bharat Mandir of the East Bay
+- community_program | seniors lunch program marks milestone | Grand Lake | mag 0.01 | targets Or Hashalom Renewal Community
+- community_program | seniors lunch program marks milestone | Lake Merritt | mag 0.01 | targets Lakeshore Unitarian Universalist Fellowship
+
+### city-event (4)
+- city-event | Chinatown Neighborhood Stabilization Panel (Chinatown) | Chinatown | mag 0.02
+- city-event | Downtown Neon Terrace DJ Night (Downtown) | Downtown | mag 0.02
+- city-event | The Dillon Family Block Party (Rockridge) | Rockridge | mag 0.02
+- city-event | West Oakland Club Crawl (West Oakland) | West Oakland | mag 0.02
+
+### lifestyle-sighting (3)
+- sighting | Pixel Pete spotted at Blue Lantern Bar | Jack London | mag 0.01 | targets BIZ-00036
+- sighting | Sienna Vale spotted at The Northgate Bar | KONO | mag 0.01 | targets BIZ-00158
+- sighting | Lumi Crest spotted at Sunrise Cafe | East Oakland | mag 0.01 | targets BIZ-00130
+
+### sports (2)
+- sentiment | aftermath: A's title week 1 after C110 | mag 0.085
+- game-night | The sports week reached 9 citizen(s) — 9 named, 0 staff week lines, 0 fan week lines | mag 9 | targets POP-00527|POP-00598|POP-00003|POP-00081|POP-00051|POP-00079|POP-00053|POP-01046|POP-01023
+
+### neighborhood-fold (2)
+
+### edition-coverage (2)
+- traffic/retail/nightlife/publicSpaces/communityEngagement/culturalActivity | Edition coverage lifted the city: traffic -0.02, retail +0, nightlife +0, publicSpaces -0.05, communityEngagement -0.04, culturalActivity +0 | mag -0.02
+- sentiment | prior-cycle coverage ratings × sentimentWeight × 0.015, clamped ±0.20 | mag -0.051
+
+### chaos-event (2)
+- power_outage_restored | Lights flicker back after hours dark — relief, and the question of why it went out. | Eastlake | mag 0.05
+- power_outage_restored | Lights flicker back after hours dark — relief, and the question of why it went out. | Downtown | mag 0.05 | targets BIZ-00093
+
+### faith-join (2)
+- congregation-growth | 1 citizen(s) joined the congregation at Cathedral of the Living Word | Lake Merritt | mag 0.01 | targets POP-00665
+- congregation-growth | 1 citizen(s) joined the congregation at Lakeshore Unitarian Universalist Fellowship | Lake Merritt | mag 0.01 | targets POP-00046
+
+### fame-event (1)
+- fame-rise | Vinnie Keane — the city is watching: realized the week had passed without a single thing worth retelling near a storefront window | Grand Lake | mag 0.05 | targets POP-00001
+
+## Who Lived It (cycle 111)
+
+### Promotion (8)
+- POP-01198 Victor Baker — Emerged into Tier-4 in Ivy Hill (Ivy Hill)
+- POP-01199 Patrick Clark — Emerged into Tier-4 in Dimond (Dimond)
+- POP-01200 Mina Kapoor — Emerged into Tier-4 in Grand Lake (Grand Lake)
+- POP-01201 Sakura Dubois — Emerged into Tier-4 in Baylight District (Baylight District)
+- POP-01202 Dahlia Cruz — Emerged into Tier-4 in Baylight District (Baylight District)
+- POP-01203 Iris Pham — Emerged into Tier-4 in Baylight District (Baylight District)
+- POP-00280 Jerald Jensen — Got the nod for the lead role at AC Transit after 14 years as a Janitor. (West Oakland)
+- POP-00488 Rupert Ochoa — Promoted at West Oakland Community Center after 40 years as a Mutual Aid Network Organizer. (Fruitvale)
+
+### Birth (1)
+- POP-00892  — welcomed a new child into their family
+
+### Retirement (1)
+- POP-00470  — transitioned into retirement
+
+### Health (2)
+- POP-00168 Ariana Lee — nursed a sore back after overdoing it around the house (Piedmont Ave)
+- POP-00355  — took time to recover from the flu
+
+### Relationship (4)
+- POP-00218 Joel Wren — reconnected with an old friend (West Oakland)
+- POP-00228 Javier Robertson — limited social activity due to winter mood (Temescal)
+- POP-00237 Jerry Nelson — built a new casual acquaintance (Uptown)
+- POP-00243 Xanny Allen — shared a moment of support with a neighbor (Jack London)
+
+### Household (5)
+- POP-00027 Philly Rodriguez — spent a calm evening in their living space (Jack London)
+- POP-00134 Brianna Lee — watched a movie with the kids piled on the couch (Laurel)
+- POP-00181 Xavier Ramington — settled into a quiet evening on the couch with their partner (Temescal)
+- POP-00204 Orlando Phillips — appreciated the peaceful block (Laurel)
+- POP-00211 Christopher Johnson — managed small chores and daily responsibilities (Lake Merritt)
+
+### Households formed (18: solo 18)
+- HH-0111-F001 | solo | head POP-00092 | Laurel
+- HH-0111-F002 | solo | head POP-00137 | Piedmont Ave
+- HH-0111-F003 | solo | head POP-00142 | Chinatown
+- HH-0111-F004 | solo | head POP-00436 | Fruitvale
+- HH-0111-F005 | solo | head POP-00497 | Chinatown
+- HH-0111-F006 | solo | head POP-00500 | Laurel
+- HH-0111-F007 | solo | head POP-00505 | Lake Merritt
+- HH-0111-F008 | solo | head POP-00661 | Lake Merritt
+- HH-0111-F009 | solo | head POP-00731 | Rockridge
+- HH-0111-F010 | solo | head POP-00777 | Baylight District
+- HH-0111-F011 | solo | head POP-00803 | Chinatown
+- HH-0111-F012 | solo | head POP-00812 | Chinatown
+- HH-0111-F013 | solo | head POP-00826 | Piedmont Ave
+- HH-0111-F014 | solo | head POP-00850 | West Oakland
+- HH-0111-F015 | solo | head POP-00927 | Rockridge
+- _+3 more — Household_Ledger FormedCycle 111_
+
+## Sports (literal `Oakland_Sports_Feed.StoryAngle` column per row — current cycle + 2 prior)
+
+### C111 (6 entries)
+
+- **A's — editorial-note (off-season):** Mike Paulson
+  - StoryAngle: The A's parade roll through Downtown.
+  - Notes: The Oakland A's celebrated their 7th World Series championship in the Paulson era with a parade and rally in Downtown. Despite the colder temps the Oakland citizens were out in masses to honor their beloved A's. Mike Paulson , Vinnie Keane, Benji Dillon all stood a front the double decker bus cheering and waving to their fans. Darrin Davis, Isley Kelley, and Mark Aitken all laughing and celebrating together to what may likely have a much different feel with Keane and Dillon retiring and Aitken pending free agency unknown. Manager Deacon Seymour and rookie phenon Ernestor Quintero were seen throwing A's beads into the crowd. Playoff MVP Eric Taveras and A's ace Arturo Ramos taking selfie snapshots with fans and dancing with the crowds. The parade ran through Downtown and Jake London Square. After a season of near perfection, the city of Oakland celebrates together, the choices for the direction for next season remain unclear in a few areas but what can be expected is yet another run and the pursuit if championship number 8.
+  - Stats: -
+  - Record -, Streak -, Mood electric, FanSentiment euphoric, Neighborhood Downtown
+- **A's — community-outreach (off-season):** Vladimir Gonzalez (RF)
+  - StoryAngle: The Oakland A's and Vladimir Gonzales support wellness at the Fruitvale Community Clinic.
+  - Notes: After securing a 7th championship for the A's and playing a pivotal role, Vladimir was in is local community for a event at the Fruitvale Community Clinic.  Vladimir was in attendance to bring awareness to seasonal health care to families in need. Also Fruitvale Community Clinic is providing vacanations and basic health care knowledge. The A's being a sponsor and providing a kids zone with inflatables, rides and free games.  
+  - Stats: -
+  - Record -, Streak -, Mood reflective, FanSentiment euphoric, Neighborhood Fruitvale
+- **A's — editorial-note (off-season):** Mark Aitken (1B), Carmen Mesa (SP), Desmond Morton (OF), Frank Reyna (RF), Kevin Clark (3B)
+  - StoryAngle: The city celebrates its championship, we look at the looming decisions heading into the offseason
+  - Notes: While the city celebrates its 7th championship in this current era, we take a quick inventory of the choices Mike Paulson is facing this offseason. As there will undoubtably be moves and decisions by Paulson we will not be able to forsee, there are some we can at least speculate on. The biggest decision being the future of franchise icon Mark Aitken. Aitken who is 33 years old would figure to be on the wron side of his peak years but in 2041 posted some of his best offensive numbers of his career. However similar to Martin Richards being traded away to allow the everyday bats for Ernesto Quintero the same script may be the one to read for Kevin Clark. Clark who flashed some potential this past season figures to get everyday at bats which would naturally move Quintero to his second position, first base. Its possible that the emergence of Ernesto Quintero will ultimately seal the fate of Richards and Aitken. Carmen Mesa had looked to be the front runner to take Benji Dillon place in the rotation next season until Pablo Almanzar cemented himself in that slot. Does Mesa return to AAA or will Mesa be moved? Desmond Morton and Frank Reyna are completing for the 1 everyday spot in the OF that is available. The other would be the forth outfielder. This is a story to watch that shapes itself alot like last years decision between Vladimir Gonzales and Peter Busch. Both players figure to have a great career, but you cant keep everyone. Lastly, the bullpen showed some cracks late in the season and the mix of veterans and young arms may need a refresh. As many of the bullpen spots are likely accounted for is their a high end free agent signing that can makes sense.
+  - Stats: -
+  - Record -, Streak -, Mood uncertain, FanSentiment euphoric, Neighborhood Baylight District
+- **A's — player-feature (off-season):** -
+  - StoryAngle: Open space to cover A's players/team
+  - Notes: Summarize and debate A's TrueSource records for 2041
+  - Stats: see As roster tab, TrueSource
+  - Record -, Streak -, Mood electric, FanSentiment euphoric, Neighborhood Fruitvale
+- **Oaks — season-state (early-season):** Elliot Abraham
+  - StoryAngle: Elliot Abraham faces the media, is Draymond coming back to the Oaks?
+  - Notes: As the season is set to start next cycle GM Elliot Abraham met with the media to address questions and state of the team. Abraham acknowledge the losing and reassured that noone is panicking as it was intentional to try many variations to determine and provide data that is necessary to long term success. Abraham also shared some regret with the Draymond Green situation and how that all played out. Saying how Green is a revered athlete in the community and how that was handled "wasn't ideal form". Grant who hasnt played at all this preseason know becomes a question mark of his status. If Grant hasnt been healthy was a health evaluation passed? When Abraham was asked he replied it was a issue the league is looking into. Something to watch this cycle.   
+  - Stats: -
+  - Record -, Streak -, Mood frustrated, FanSentiment uncertain, Neighborhood Jack London
+- **Oaks — player-feature (early-season):** Adash Stanley (PG)
+  - StoryAngle: Adash Stanley in attendance at the A's rally to show support.
+  - Notes: Adash Stanley was spoted at the A's championship rally in support. When asked why it was important to him that he show his support Stanley shared that he wanted to show his support in that success as thats the winning culture the team is looking to build for the Oaks. Thats it was important to build a system of suport to achieve the goals they set out for. Adash shared that Vinnie Keane has shown him alot of support in coming to Oakland and wants to see The Oaks and Stanley have success. Adash who had volunteered at the Vinnie Keane Firehouse 29 West Oakland Baseball Academy in c106 had stated then similar support from Keane. The system that build itself from within is a driving source of Oakland sports success story.
+  - Stats: -
+  - Record -, Streak -, Mood confident, FanSentiment uncertain, Neighborhood Downtown
+
+### C110 (5 entries)
+
+- **A's — game-result (playoffs):** Henry Rivas (SP), Danny Horn (CF), Mark Aitken (1B), Isley Kelley (SS)
+  - StoryAngle: Henry Rivas shines in game 4, while Horn stays hot and Mark Aitken and Isley Kelley provide power.
+  - Notes: Game 4 of the WS; A's visit the Phillies for game 4. Henry Rivas would come out and pitch the game of his career in a game 4 a complete game win in Philly. Danny Horn bat comes alive again with a Homerun and two stolen bases. Mark Aitken continues to show power in these World Series with another Homerun and Isley Kelley gets hot with three hits with one beinga homerun. A's take hold of the series going up 3-1 with the next game is Philly.
+  - Stats: Henry Rivas/9IP/4H/1ER/9SO, Danny Horn/1HR/2RBI, Isley Kelly/1HR/3-4, Mark Aitken/1HR/1RBI
+  - Record 3-1, Streak W2, Mood locked-in, FanSentiment high, Neighborhood Jack London
+- **A's — game-result (playoffs):** John Ellis (SP), Eric Taveras (2B), Vinnie Keane (DH), Benji Dillon (RP)
+  - StoryAngle: John Ellis bounces back in game 5 to win the A's their 7th World Series title under Mike Paulson. Eric Taveras fittingly provides the power along with veterans Darrin Davis , and Mark Aitken. Vinnie Keane , Benji Dillon appear in their final games.
+  - Notes: Game 5 of the WS; A's visit the Phillies for game 5. The Oakland A's win the World Series behing John Ellis continued string of strong pitching only giving up 3 earned runs. The bullpen stayed hot in the World Series shutting the door on the Phillies offense. The A's offense continues to be carried by playoff MVP Eric Taveras with his 7th Homerun in this playoff and run. Veterans Mark Aitken and Darrin Davis also add their home-runs. Vinne Keane would get the start and play third base in his final MLB game and would provide a hit and one RBI. Benji Dillon and Vinnie Keane joked after in the locker room celebration that the 7th time is the charm. Mike Paulson celebrated his veteran stars on their season and warned the league of Eric Taveras and Ernesto Quintero taking the bext chapter. Danny Horn , who has stuggled mightly up until the World Series shared that he was glad his bat woke up for the World Series, "after the season I had it would have hung on me if I didnt effect the playoffs". Horn who has zero homeruns leading up to the World Series hit 2 in the World Series and added 8 stolen bases. Deacon Seymour joked that having a record breaking season in his first year sets some unreal expectations going forward. 
+  - Stats: John Ellis/6IP/2ER/5SO, Eric Taveras/1HR/2RBI, Darrin Davis/1HR/2RBI/3-4, Mark Aitken/1HR/1RBI, Vinnie Keane/1H/1RBI
+  - Record 4-1, Streak W3, Mood electric, FanSentiment high, Neighborhood Downtown
+- **Oaks — game-result (preseason):** Austin Reaves (SG), AJ Dybantsa (SF)
+  - StoryAngle: The Oaks visit the Chicago Bulls, The Oaks lose their 4th straight pre-season game. The Chicago Bulls, where Paulson ran the the front office last season, gets the better of him in this matchup
+  - Notes: The Oaks lost in Chicago as Mike Paulson's served as GM last season in Chicago along with his then assistant Elliot Abraham. Abraham now serves as the Oaks GM while Paulson is President of Operations. The Bulls however would get the best in the matchup beating the Oaks. Austin Reaves scored 17, While AJ Dybantsa contributed 21 points.
+  - Stats: Austin Reaves/17PTS/5ASST, AJ Dybantsa/22PTS/6REB
+  - Record 0-4, Streak L4, Mood frustrated, FanSentiment low, Neighborhood Dimond
+- **Oaks — game-result (preseason):** Adash Stanley (PG), Austin Reaves (SG), AJ Dybantsa (SF), Wilson Shepard (Coach)
+  - StoryAngle: The Oaks welcome the Miami Heat to Oakland to lose their final preseason game. The Oaks are winless as a franchise between rookie camp and preseason.
+  - Notes: The Oaks lose their final preseason game bringing the total franchise record to 0-9 through rookie camp and preseason. Wilson Shepard reassures that the full team has yet to suit up as one and opening night of the season will show a team that hasnt been on display thus far and that he is not worried. Fans on the other hand are worried as having a first year coach in Shepard and first time GM is Elliot Abraham, Mike Paulson as VP of operations is dealing with alot of uncertainty with his Oaks as the A's are winning yet another World Series. Can the fans be patient? Albiet this is preseason but this is also all we have to judge on thus far and its not looking great. That said the talent is clear and the concern is can a rookie coach materialize wins. Adash Stanley returned to floor from his jammed wrist and scored 8pt and 11 assts. The Oaks begin the regular season next cycle
+  - Stats: Adash Stanley/8PTS/11ASST, Ausin Reaves/20PTS, AJ Dybantsa/11PTS
+  - Record 0-5, Streak L5, Mood frustrated, FanSentiment low, Neighborhood Downtown
+- **A's — game-result (championship):** Mike Paulson, Vinnie Keane, Benji Dillon, Mark Aitken, Eric Taveras, Pablo Almanzar, Arturo Ramos, Isley Kelley, Darrin Davis, Frank Reyna
+  - StoryAngle: A's win their 7th championship in the "Paulson" era. A storybook ending to a farewell season for both Vinnie Keane and Benji Dillon
+  - Notes: The Oakland A's won their 7th championship in the Paulson era lead by stars like Vinnie Keane, Benji Dillon, Mark Aitken, Isley Kelley, Darrin Davis. In a farewell season that will see 2 retire Vinnie Keane and Benji Dillon, 1 potentially leave in free agency Mark Aitken, and 2 remaining to further carry the franchise to the next era Isely Kelley and Darrin Davis. In a seaon where the A's absolutely dominated breaking the single season win records and then only losing 3 games in its playoff run, the A's don't appear as a team on the decline, However with a franchise that AAA team also won its championship, the A's are eager to see the young prospects emerge. But for now the fans of the A's can just rejoice in the perfection the season played out to be. Eric Taveras win World Series MVP to go along with his post-season MVP for the earlier rounds, Taveras showing tremendous value in signing him this past off-season. Pablo Alamanzar continued to show tremendous potential with a no hitter in his MLB debut and then a 1-hitter in his playoff debut and following that up with a game 3 win in the World Series. Arturo Ramos stayed consistent throughout the playoff as well. Championship parade is set for Downtown in c111.
+  - Stats: Eric Taveras/20-59/.339AVG/7HR/12RBI/8R, Darrin Davis/17-53/.315AVG/4HR/6RBI/7R/4SB, Frank Reyna/9-21/.429AVG/4R/4SB, Pablo Almanzar/16IP/1.13ERA/6H/10SO, Arturo Ramos/20IP/2.70ERA/14H/11SO
+  - Record 11-3, Streak W3, Mood electric, FanSentiment high, Neighborhood Downtown
+
+### C109 (5 entries)
+
+- **A's — game-result (playoffs):** Arturo Ramos (SP), Danny Horn (CF), Mark Aitken (1B)
+  - StoryAngle: Arturo Ramos does enough, Danny Horn shows some life, Frank Reyna doesnt make an out.
+  - Notes: Game 1 of the WS; Phillies visit the A's for game 1. As win a close game 4-2 to take a 1-0 series lead. Arturo Ramos had a shaky start, by his own standards, but setlled in going 6 innings and allowing 3 earned runs. Danny Horn, who had been in a slump lead off with a solo homerun. Would later reach getting hit by a pitch and stealing 2nd and 3rd base, and score on a sac fly. Pending free agent, and A's icon, Mark Aitken provided the insurance with a solo homerun in the 7th. Can Travis Coles grab game 2?
+  - Stats: Arturo Ramos/6IP/5H/3ER/5SO, Danny Horn/1HR/2R/1RBI/2SB, Mark Aitken/1HR/1RBI, Frank Reyna/3-3/2Doubles
+  - Record 1-0, Streak W2, Mood locked-in, FanSentiment high, Neighborhood Jack London
+- **A's — game-result (playoffs):** Travis Coles (SP), Eric Taveras (2B), Desmond Morton (LF)
+  - StoryAngle: Travis Coles and the bullpen struggle, Eric Taveras shows up big again but not enough.
+  - Notes: Game 2 of the WS Phillies visit the A's for game 2. Phillies offense shines in an impressive win and announcing their pressence. Travis Coles did not have his ususal dominate stuff and gave up four runs in six innings. The bullpen did not help as Clark Sayran and Mariano Rosales both gave up 2 runs each in relief. Eric Taveras continues his amazing playoff campaign with 2 homeruns. Desmond Morton builds on his great role play with a great game. Game 3 now shifts to Philledelphia were the pressure shifts on the A's
+  - Stats: Travis Coles/6IP/4H/4ER/6SO, Eric Taveras/2HR/4RBI, Desmond Morton/1HR/3-5/2RBI
+  - Record 1-1, Streak L1, Mood locked-in, FanSentiment high, Neighborhood Jack London
+- **A's — game-result (playoffs):** Pablo Almanzar (SP), Ernesto Quintero (3B), Jose Colon (C)
+  - StoryAngle: Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense.
+  - Notes: Game 3 of the WS; A's visit the Phillies for game 3. Pablo Almanzar gets the call in a crucial game 3, and does not disappoint. Pablo goes seven innings surrendering 2 runs. In a pitchers dual , the offense finally cracked late with homeruns by Ernesto Quintero and Jose Colon. Eric Taveras would provide a rbi sac fly that proved to be a crucial run. Next is game 4 , also in Philledelphia, which A's will start Henry Rivas ina crucial game. How will Henry Rivas handle game 4 in Philidephia? After returing from injury how are Henry Rivas stats? What is the feeling on Eric Taveras signing after a breakout season in Oakland?
+  - Stats: Pablo Almanzar/7IP/5H/2ER/7SO, Ernesto Quintero/1HR/1RBI, Jose Colon/1HR/1RBI, Darrin Davis/4-4
+  - Record 2-1, Streak W1, Mood locked-in, FanSentiment high, Neighborhood Chinatown
+- **Oaks — game-result (preseason):** AJ Dybantsa (SF), Wendell Carter Jr (C)
+  - StoryAngle: The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory, 
+  - Notes: Albiet preseason, the Oaks still have yet to taste a win. Rookie AJ Dybantsa continues to show promise scoring 19 points, 7 rebounds, 2 assists. Wendell Carter plays his first game and played the first half and had 8 points , 8 rebounds. Austin Reaves, Adash Stanley, Dillon Brooks and Jermai Grant did not play
+  - Stats: AJ Dybantsa/19pts/7rebs/2asst, Wendell Carter Jr/8pts/8rebs
+  - Record 0-2, Streak L6, Mood frustrated, FanSentiment low, Neighborhood Baylight District
+- **Oaks — game-result (preseason):** Wilson Shepard (Coach), Austin Reaves (SG), Dillon Brooks (SF)
+  - StoryAngle: The Oaks lose yet again even with strong efforts from Austin Reaves, 
+  - Notes: Still without a win to show for it but Austin Reaves and Dillon Brooks show great promise in the loss. Reaves scores 24 points and Dillon Brooks adds 21 points. Wendell Carter scores 12 points. Adash Stanles and AJ Dybantsa did not play. Media is now looking at Wilson Shepard for answers on why the team is struggling this preseason and when Adash Stanley injured wrist will allow him to play. Why havent we seen the entire team play together yet this preseason?
+  - Stats: Austin Reaves/24pts/4asst, Dillon Brooks/21pts/8rebs, Wendell Carter Jr/12pts/7rebs
+  - Record 0-3, Streak L7, Mood frustrated, FanSentiment low, Neighborhood Downtown
+
+## Evening Texture (Riley_Digest cycle 111)
+
+- **Famous people spotted:** Pixel Pete, Sienna Vale, Lumi Crest
+- **Restaurants:** **Romano's** (Dimond), **West Side Cafe** (West Oakland)
+- **Fast food:** **SpeedyBurger** (Downtown)
+- **Nightlife:** **Neighborhood Response Hub** (East Oakland). Volume 4, vibe tense, movement restricted. Weather impact 1.00.
+- **City events:** Chinatown Neighborhood Stabilization Panel, Downtown Neon Terrace DJ Night, The Dillon Family Block Party, West Oakland Club Crawl
+- **Evening media TV:** **Valentine Special**, **Breaking Bulletin**, **Warm House**, **A's Sports Central**, **One-on-One with Vladimir Gonzalez (RF)**
+- **Evening media movies:** **Love in Oakland**, **Rising Star**, **Diamond City**
+- **Sports broadcast:** Oakland Sports Tonight
+- **Streaming trend:** romantic comedies
+- **Food trend:** High mobility / civic-tension food trend
+
+## World Events (cycle 111 — 10 total)
+
+**Medium-severity:**
+- **CIVIC — crisis-spike — Fruitvale:** Medium-severity civic spike in Fruitvale (impactScore 33)
+- **BUSINESS — port-episode — Jack London:** Port of Oakland: berth delay — the waterfront, the shops and the builders who run on its cargo take the hit (impactScore 8)
+
+**Low-severity:**
+- **TRAFFIC — texture — (no neighborhood):** signal malfunction
+- **GENERAL — texture — (no neighborhood):** earthquake rumble
+- **EDUCATION — texture — (no neighborhood):** teacher highlight
+- **FAITH — community_program — East Oakland:** Masjid An-Nur Oakland: food pantry serves neighbors in need
+- **FAITH — community_program — Chinatown:** Bay Pure Land Buddhist Temple: community health fair hosted
+- **FAITH — community_program — Montclair:** Bharat Mandir of the East Bay: after-school tutoring program expands
+- **FAITH — community_program — Grand Lake:** Or Hashalom Renewal Community: seniors lunch program marks milestone
+- **FAITH — community_program — Lake Merritt:** Lakeshore Unitarian Universalist Fellowship: seniors lunch program marks milestone
+
+## Chaos Events (Chaos_Cars, cycle 111 — 9 total)
+
+| Vehicle | Outcome | Target | Metric | Magnitude | Floor fired |
+|---|---|---|---|---|---|
+| fire_engine | minor_fire | neighborhood Laurel | Sentiment | -0.06 | FALSE |
+| pge_truck | power_outage_restored | neighborhood Eastlake | Sentiment | -0.07 | FALSE |
+| pge_truck | planned_shutoff | neighborhood Lake Merritt | Sentiment | -0.11 | FALSE |
+| cop_car | ticket | neighborhood Eastlake | CrimeIndex | -0.14 | FALSE |
+| fire_engine | minor_fire | neighborhood Brooklyn | Sentiment | -0.07 | FALSE |
+| ambulance | minor_injury | neighborhood Grand Lake | Sentiment | -0.03 | FALSE |
+| street_sweeper | street_beautification | neighborhood Dimond | RetailVitality | 2.96 | FALSE |
+| pge_truck | power_outage_restored | business BIZ-00093 | Growth_Rate | 0 | FALSE |
+| cargo_ship | berth_delay | port Port of Oakland | Growth_Rate | -3 | FALSE |
+
+**Narrative seeds:**
+- pge_truck → Eastlake: Lights flicker back after hours dark — relief, and the question of why it went out.
+- pge_truck → BIZ-00093: Lights flicker back after hours dark — relief, and the question of why it went out.
+- cargo_ship → Port of Oakland: Ships idle off the breakwater — a berth delay, and shelves across town wait on what is still at sea.
+
+## Three-Cycle Trends (C109–C111)
+
+- **Cycle weight:** C109 high-signal → C110 high-signal → C111 high-signal
+- **Civic load:** C109 minor-variance → C110 load-strain → C111 minor-variance
+- **Pattern flag:** C109 strain-trend → C110 none → C111 strain-trend
+- **Shock flag:** C109 none → C110 none → C111 none
+- **Migration drift:** C109 13 → C110 19 → C111 19
+- **Events generated:** C109 2007 → C110 2287 → C111 2577
+- **Story seed count:** C109 41 → C110 58 → C111 41
+- **City sentiment:** C109 0.36 → C110 0.85 → C111 0.44
+
+## The people, in their own words — daily citizen digest
+
+Source: output/citizen-day-digest.md
+Canon status: NOT CANON. Verbatim citizen reflections and life events from the world ledger — a listening slice, not published reporting.
+
+# Today in Oakland — told by its people
+
+A daily digest of citizen life over the last 24 hours, assembled from the citizens' own reflections and life events on record (through Cycle 111). Everything below is sourced from the world ledger — nothing is invented.
+
+## The big moments
+
+- **Rafael Brannie** (Piedmont Ave) — A coworker at Mayday Movers with less time in got the assignment they had asked about.
+- **Clearence Leighton** (Piedmont Ave) — A supervisor at Temescal Community Health Center corrected them in front of a customer.
+- **Tariq Mitchell** (Uptown) — A manager at Marigold Cafe asked them to redo work that had already been approved.
+- **Miguel Joson** (Chinatown) — A manager at Foothill Builders stopped by their desk to say the last stretch of work had not gone unnoticed.
+- **Ingrid Bautista** (Chinatown) — The owner at West Oakland Community Center said hours are being looked at across the board.
+- **Sammie Soft** (West Oakland) — A colleague at West Oakland Community Center said the team runs smoother on their days.
+- **Hana Petrosyan** (San Antonio) — A client thanked them by name in front of the whole floor at Oakland Police Department.
+- **Devin Castellanos** (Dimond) — A quiet nod from the owner at Oakland Police Department on the way out, the kind that means something.
+- **Samuel Adeyemi** (Ivy Hill) — Heard secondhand that the opening at Oakland Fire Department they wanted had been filled from outside.
+- **Leo Leonard** (Downtown) — Their name came up in a good way at the Alameda County Courts staff meeting.
+
+## The people, in their own words
+
+### Avery Santana — Mayor of Oakland — Rockridge
+
+> Hal, I’m not going to pretend this is a line-item debate. We’ve got families in West Oakland getting eviction notices because they can’t afford a lawyer — that’s the whole fight. T
+
+*Around the neighborhood: put on their good suit for the Sunday service because some traditions still matter*
+
+### Hal Richmond — Journalist, Senior Historian — West Oakland
+
+> Avery, you're not wrong that folks are getting squeezed—I see the notices taped to doors two blocks from my place. But I've watched this city pour money into programs that look goo
+
+### Eric Taveras — Second Baseman, Oakland A's — Downtown
+
+> To be honest, I haven't been thinking about being MVP that much. The pressure's always there, but when we're winning, it feels more like a team thing. The flight isn't really a par
+
+### Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake
+
+> The one thing I'm quietly hoping for is that the crack in the sidewalk outside the Mercantile is still there when I walk by this morning. That sounds small, I know, but some things
+
+### Nia Rook — Journalist, UNDOCKED Recap — West Oakland
+
+> graded: 3/4 — The closing fails to set up who the city watches next.
+
+> filed: A watch-party crowd gathered around a screen in an unnamed break room near the Fruitvale Transit Hub
+
+*Around the neighborhood: slipped into the back pew at Foothill Baptist Tabernacle just to sit somewhere air-conditioned and quiet*
+
+---
+*Assembled 2026-10-18 from Reflection_Intake (10 reflections, 9 citizens) and LifeHistory_Log (48 life events) over the last 1 day by scripts/buildCitizenWeekDigest.js --daily. Read-only; no content generated.*
+
+## Daily program
+
+- proposed profile: CYCLE_OPEN
+- proposed presentation: brief/short
+- activation eligible: true
+- reason codes: REPORTED_THRESHOLD_NOT_MET_3, W1_ACTIVE_1, RHEA_FLAGGED_1, WORLD_HIGH_SIGNAL
+- Rhea dispositions: passed=1, rhea-flagged=1, never-gated=0
+
+### W1 reporter chases
+
+- Nia Rook — Week-in-UNDOCKED leaderboard digest — every pilot who flew this cycle (Rosario Medina, Eric Taveras, Briar Soto), who is climbing and who is fading. Standings: Eric Taveras leads the board — rank #1, 1 cycle(s) led, current streak 1. In the chair: Rosario Medina — CBA Compliance Monitor, Fruitvale Transit Hub; Eric Taveras — Second Baseman, Oakland A's; Briar Soto — Electrician. The career is who they are, not the story; the story is the flight.: I'm looking at the gap between the leaderboard and the ground. Eric Taveras is dominating everything right now—the World Series, the MVP trophies, and the UNDOCKED board. Then you have Briar Soto at zero credits. I want to see if the momentum from the baseball field is bleeding into the cockpit, or if the flight is the only place where the scale actually levels out.
+
+### W2 Packet-backed quote coverage
+
+- Week-in-UNDOCKED leaderboard digest — every pilot who flew this cycle (Rosario Medina, Eric Taveras, Briar Soto), who is climbing and who is fading. Standings: Eric Taveras leads the board — rank #1, 1 cycle(s) led, current streak 1. In the chair: Rosario Medina — CBA Compliance Monitor, Fruitvale Transit Hub; Eric Taveras — Second Baseman, Oakland A's; Briar Soto — Electrician. The career is who they are, not the story; the story is the flight.: 3 quote(s).
+
+## Recent newsroom reports — not established fact
+
+### FLAGGED — output/cron-compare/flagged/wire_c111_celeste-tran_packet-v2_x-ai-grok-4-3.md
+
+This report is a gate-flagged draft that did NOT publish. Report on it and on the gate decision; never present it as published fact.
+
+Gate summary: Draft blocked due to ungrounded real-world basketball alumnus import ('Warriors Alumni Thompson') and system-engine vocabulary leak in prose.
+
+- gate finding [high]: Named figure not found in ledger or cycle ground truth; imports real-world Warriors basketball entity/alumnus into culture record without packet provenance.
+- gate finding [med]: Meta/system vocabulary ('the engine') appears in public-facing article prose.
+
+Marin Tao's name is running the city this cycle. The arts celebrity logged 25 media mentions, viral spike and all, fame score sitting at 153 while the rest of the record trails behind. Dax Monroe sits at 20 established mentions in sports. Rico Valez follows at 19 viral in arts. Warriors Alumni Thompson landed on the culture record last cycle and still hangs in the conversation.
+
+The numbers sit next to something else moving on the ground. West Oakland added 18 people since the last count. Jack London added 8. Grand Lake added 8. East Oakland added 8. Adams Point added 7. The same weeks the downtown and Fruitvale blocks keep their 10/10 momentum as the places the city keeps choosing.
+
+Oakland is splitting its attention between the screen and the sidewalk. The group chat keeps surfacing Marin Tao clips between dinner plans. The third rewatch of whatever went viral last week turns into the default background noise while people pack boxes for West Oakland. The migration numbers do not line up with the downtown boom the engine keeps flagging. They sit beside it, a separate current.
+
+The pattern leaves the same open line every time the counts refresh. The arrivals in West Oakland could be riding the same wave that pushed Marin Tao to the top of the mentions, or they could be stepping away from it, looking for a block that does not already carry the downtown label. The record shows the split. The city has not said which side it lands on.
+
+### STAGED — output/cron-compare/staged/lore_c111_danny-horn-deep-dive.staged.md
+
+This report is behind the publication gate and is not yet canon.
+
+# THE MAN IN CENTER FIELD: DANNY HORN’S TEMESCAL ANCHOR
+
+### By Anthony Raines | Bay Tribune Sports
+
+The turf in center field at the Oakland Coliseum has an acoustic signature that television never quite catches. When forty thousand people stand up at once in the late innings, the roar doesn't strike the grass directly; it funnels off the concrete rim, bounces off Mount Davis, and drops onto the green expanse like sudden barometric pressure. 
+
+At thirty years old, Danny Horn lives inside that pocket of sound. 
+
+He stands there with his knees slightly flexed, weight balanced over the balls of his cleats, tracking the seam rotation on every pitch. To the casual spectator on the Coliseum concourse, Horn looks like someone who was assembled specifically to patrol four hundred feet of outfield grass. His frame is lean, reactive, and fluid—the kind of athlete who covers thirty yards of gap without appearing to strain his hamstrings. When General Manager Mike Paulson announced Horn’s $37.8 million annual contract extension, making him the highest-paid athlete on the roster and the focal point of the franchise through the middle of the decade, the front office wasn't paying for sentimental memories. They were paying for an anchor.
+
+"People talk about the championship banners like they belong in a museum," Horn said on a brisk Tuesday morning, leaning his spikes against the dugout railing. "I love the guys who hung those flags. I share a locker room with them. But I’m not playing a museum piece. I have to play the game that’s in front of me tonight."
+
+### The Seam Between Eras
+
+That distinction is the central tension of modern Oakland baseball. For nearly a generation, the Coliseum was defined by its Dynasty Five—a group of legendary veterans whose careers shaped the golden age of East Bay baseball. Shortstop Isley Kelley, now thirty-three and wrapping up an inner-circle career from his home in Rockridge, has spent the season receiving prolonged standing ovations in every visiting ballpark. Left fielder Darrin Davis, thirty-three, battled through grueling knee rehabilitation to rejoin the outfield, moving up the hill to Piedmont Avenue with his six children while still providing the emotional heartbeat of the dugout. 
+
+Those men are writing their epilogues. Danny Horn is writing the chapter that follows.
+
+Horn is not part of the farewell generation. While Kelley and Davis prepare for life beyond the baseline—Kelley recently founding Kelley Mercantile in Rockridge, Davis sitting quietly in the back pews of community services across town—Horn represents the bridge. Behind him in the batting order is twenty-four-year-old infielder Ernesto Quintero, who arrived from the minor leagues making $980,000 and moved into the brand-new residential towers rising above the Baylight District. Quintero looks toward Horn in the batting cage the way a young deckhand looks at a harbor master.
+
+"Danny doesn't miss a rep," Quintero noted earlier this spring. "He takes his cuts at eight in the morning, tracks fly balls off the bat during live batting practice when most guys are drinking coffee, and then he goes home to Temescal. He makes the work look normal."
+
+Front office arithmetic, however, is never completely normal. Paulson’s ledger is a delicate high-wire act: committing $37.8 million per year to Horn leaves little room for middle-tier veteran contracts, requiring cost-controlled young players like Quintero to fill regular at-bats. When Horn hits—such as his torrid six-homer surge across eight games in early autumn, or his .336 regular-season masterclasses—the payroll math looks like genius. When he experiences an October drought, as he did during a frustrating postseason stretch of forty-two at-bats with a zero in the home run column, the sports desk analytics grind into motion. 
+
+Yet Horn has never flinched from the microscope. His trait profile in the civic ledger lists him as a striper—relentless, outgoing, steady, with a drive rating of 87 and composure fixed at 66. When pressure rises, Horn does not retreat into private seclusion. He simply tightens his glove laces and steps back onto the field.
+
+### The Keys in Temescal
+
+The choice of where to live tells you almost everything you need to know about Horn. 
+
+Many athletes commanding wealth level ten choose the hillside retreats of Montclair or the quiet avenues of Piedmont. Others purchase high-rise penthouses overlooking the marina in Jack London or the developing promenade of the Baylight District, where the city’s planned $2.1 billion waterfront stadium will eventually replace the Coliseum. 
+
+Horn chose Temescal. 
+
+In Y3C1, he officially closed on a classic craftsman home nestled on a quiet residential block off Telegraph Avenue. The transaction was logged without fanfare: keys in hand, rent checks done, stepping into homeownership. By Y3C2, the city’s lineage ledger formally registered the Horn line (LIN-00007)—anchoring a household that includes his spouse and two children (HH-0102-F005). 
+
+Temescal is not a gated sanctuary. In the broader story of Oakland’s prosperity era, Temescal is Council District 7, represented by Warren Ashford—a neighborhood that did not experience the easy capital influx of KONO or the rapid mid-rise transformation of the waterfront. Temescal has carried the weight of community health strains, fighting for clinical resources at the Temescal Community Health Center site on Phase II development, where neighbors still pack civic halls to demand shorter wait times. 
+
+Living in Temescal means Horn does not live insulated from reality. On his morning walks down Telegraph Avenue, he watches the neighborhood change in real time. In Y3C2, he paused outside three new pop-up restaurants, wondering aloud to a passerby how long their commercial leases would survive the rising rents. In Y3C4, he watched a longtime neighbor pack up a moving van for somewhere cheaper across the county line. In Y3C7, while leaning over a redwood fence, he spent twenty minutes comparing property notes and neighborhood rent jumps with the homeowner next door.
+
+"It’s real here," Horn said, pulling on a knit cap. "You smell the woodsmoke from the backyard pits, you hear the Port of Oakland freight trains clanking down by the water late at night, and you know the people who live next to you. My kids play on the same sidewalks every other kid plays on."
+
+Sensory grounding seems vital to him. In Y3C4, he made a lighthearted swap of backyard garden produce over the fence with an elderly neighbor, declaring that he came out ahead because he traded zucchini for fresh heirloom tomatoes. Later that afternoon, he stopped to listen to an acoustic busker playing on the corner of 49th and Telegraph, humming the melodic hook the rest of the way to his front door. 
+
+### Bushrod Grass and the Player Lot
+
+That neighborly impulse explains why Horn has become a folk hero in District 7 without ever holding public office. During mid-season breaks, while other stars fly south, Horn has been spotted dragging plastic bins across the lawn at Bushrod Park. Armed with two hundred yellow plastic wiffleball bats, he organizes informal neighborhood double-elimination tournaments, pitching underhand to lines of local kids wearing hand-me-down green and gold jerseys. 
+
+When City Council discussions heated up around the Stabilization Fund and local infrastructure, Horn’s presence at the park wasn't a corporate photo opportunity; it was a block party. Smoked meats drifted from sidewalk grills, teenagers drew bracket pairings in chalk on the asphalt, and Horn shagged fly balls in gym shorts until the sun dropped below the skyline.
+
+That accessibility extends to the Coliseum itself. Following a hard-fought evening victory in Y3C6, long after the television lights had been turned off in the broadcast booth and the maintenance crews began sweeping peanut shells from section 118, Horn was still standing outside the player lot gate. In the cool Bay breeze, he worked his way down a line of fifty young fans, signing ticket stubs, baseball caps, and worn leather gloves until security had to turn off the exterior floodlights.
+
+Even when everyday life gets tangled, Horn absorbs it with wry humor. In Y3C6, when a postal vehicle misplaced an essential domestic package, he chuckled about it at the local market counter. In Y3C7, while running errands, he caught himself reciting an elaborate coffee order to a barista before his brain had even decided what he wanted to drink. Moments later, standing by a pharmacy counter near the medical corridor, he juggled phone calendars, baseball travel schedules, and family plans with the frazzled concentration of any working father.
+
+### The Ninth Inning on the Porch
+
+The modern sports machine is designed to detach athletes from the pavement beneath their feet. Contracts worth thirty-seven million dollars typically come with security details, private compounds, and social media managers who filter out the city's pulse. 
+
+Danny Horn has rejected that script entirely. 
+
+On off-day evenings during road trips, neighbors on his Temescal block know exactly when the Athletics are playing. In Y3C6, on a crisp late-summer evening, Horn sat out on his wooden front porch with an old tabletop radio tuned to the local broadcast. As the team fought through a tense ninth inning on the road, he cranked the volume dial, letting the play-by-play crackle through the open screen door and across the sidewalk so that passing neighbors could pause, listen to the count, and celebrate the final strikeout together.
+
+That is Danny Horn’s true value to Oakland. The home runs in the gap and the highlight catches against the center-field wall are what Mike Paulson pays for on the ledger. But the anchor that holds a franchise to its hometown is forged in the ordinary moments—in the dirt at Bushrod Park, in the conversations over a backyard fence, and in a thirty-year-old superstar who decided that the best place to build a lasting legacy was on a porch in Temescal.
+
+***
+
+### STAGED — output/cron-compare/staged/undocked-digest_c111_nia-rook-weekly_packet-v2_x-ai-grok-4-3.staged.md
+
+This report is behind the publication gate and is not yet canon.
+
+A watch-party crowd gathered around a screen in an unnamed break room near the Fruitvale Transit Hub, tracking the week’s UNDOCKED standings as they refreshed. Eric Taveras sat at number one with a one-cycle lead and a fresh streak of one, his 1,170 credits from two flights pulling clear of the field while Rosario Medina logged 110 credits across her own two episodes and Briar Soto finished at zero despite matching flight counts. No combat or mishaps appeared for any of them.
+
+Rosario Medina, CBA Compliance Monitor at the Fruitvale Transit Hub, had been asked directly about her time in the chair. “I’m not really sure what you’re talking about,” she said. “I’m a CBA Compliance Monitor, not a pilot.”
+
+Eric Taveras, the Second Baseman whose bat has carried the Oakland A’s through the playoffs and into the championship, watched the same numbers with a different weight. “To be honest, I haven’t been thinking about being MVP that much,” he said. “The pressure’s always there, but when we’re winning, it feels more like a team thing. The flight isn’t really a part of my life right now; I’m focused on the game. I don’t know if it’s a sanctuary or another competition for me.”
+
+Briar Soto, the Electrician whose ledger showed no credits after the same two flights, stood at the edge of the group and spoke quietly. “I don’t really know how to reconcile it,” Soto said. “I’ve had things go smoothly before, but when the books don’t balance out and you’re sitting at zero while everyone else is climbing, it’s just a weird feeling.”
+
+The screen kept updating. Taveras’s name stayed pinned at the top. Medina’s total held steady in the middle. Soto’s line remained blank. The room’s conversation drifted between the numbers and the day jobs the three pilots carried outside the chair—compliance work at the hub, the second-base line at the ballpark, wiring jobs across the city—without settling on which identity mattered more once the flights began.
+
+Is the flight a way to escape the professional identity, or does that identity follow you into the air?
+
+## Gate decisions this window
+
+- `output/cron-compare/flagged/wire_c111_celeste-tran_packet-v2_x-ai-grok-4-3.flags.json` — 2 gate finding(s); disposition=legacy-flagged. Draft included above under FLAGGED.

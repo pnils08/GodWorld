@@ -1,0 +1,427 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00160",
+    "name": "Mason Ortega",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Jack London kitchens: Green & Gold Tavern, Harborline Grill, Blue Lantern Bar — the people who work the shift",
+    "approach": "Food & hospitality approach — kitchens as workplaces: this slice is one neighborhood's restaurants, cafes and bars from the ledger and the people on the roster who work in them. The people on this slice are real; the rest of the room is yours — the line on a Tuesday, the regulars, the walk-in, the tip jar. One kitchen, one shift, one true thing about the work. Not a review. Not multi-voice culture-desk average. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "food-workplaces",
+      "hood": "Jack London",
+      "pulseClass": "hood-kitchens",
+      "economicFrame": "Jack London kitchens: Green & Gold Tavern, Harborline Grill, Blue Lantern Bar — the people who work the shift",
+      "hook": "Hector Leech, Dishwasher at Green & Gold Tavern. 12 named workers at 5 named kitchens in Jack London on the ledger this cycle.",
+      "namedBusinesses": [
+        "Green & Gold Tavern",
+        "Harborline Grill",
+        "Blue Lantern Bar",
+        "Jack London Square Markets",
+        "Dockhouse BBQ"
+      ],
+      "workplaces": [
+        "Green & Gold Tavern — Sports Bar & Dining — Hector Leech (Dishwasher); Trenton Nawan (Server); Guadalupe Lupe (Bartender); Valentina Campbell (Server)",
+        "Harborline Grill — Restaurant & Dining — Tomas Renteria (Podcast Host / Line Cook); Quynh Le (Line Cook); Jalen Hill (Line Cook); Bruce Wright (Line Cook)",
+        "Blue Lantern Bar — Nightlife & Entertainment — Yuki Ji (Bartender); Guadalupe Lee (Bartender)",
+        "Jack London Square Markets — Retail & Food — Gauri Han (Security Guard)",
+        "Dockhouse BBQ — Restaurant & Dining — Mesi Westin (Dishwasher)"
+      ],
+      "engineColour": [
+        "Ty Yule — felt quietly proud of how they handled something small",
+        "Lamine Sissoko — noticed the new streetlights went in before anyone had to ask",
+        "Derek Simmons — read about something unfamiliar and kept pulling the thread",
+        "Vincent Cho — noticed another new spot opening up in Jack London"
+      ],
+      "roomIsYours": "the line, the regulars, the pace, the tip jar, what the cook is worried about",
+      "forbidden": [
+        "Do not invent a business, a worker, an owner or a place — every name comes from this slice",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose",
+        "Do not contradict a role, employer or neighborhood listed here"
+      ],
+      "sceneRule": null
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "story-signal",
+    "hood": "Jack London",
+    "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111",
+    "plan": {
+      "focus": "The people who work the shift in Jack London kitchens — specifically the dishwashers and line cooks who hold the places together — and what the work looks like from inside the steam.",
+      "closeQuestion": "What does one true thing about the work look like when it's told from the dish pit, not the dining room?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00252",
+        "name": "Hector Leech",
+        "profile": "Hector Leech — Dishwasher",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00273",
+        "name": "Trenton Nawan",
+        "profile": "Trenton Nawan — Server",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00643",
+        "name": "Guadalupe Lupe",
+        "profile": "Guadalupe Lupe — Bartender",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00252-bb5218ef2d",
+        "pop": "POP-00252",
+        "name": "Hector Leech",
+        "quote": "A full shift in the pit is a marathon, not a sprint. You're in the steam before the first ticket even prints, and the heat just sits on you like a second skin. The sprayer's going, the racks are clanking, and your hands are in and out of the water so much they prune up and crack. But the rhythm is what keeps you going — you get into a groove where you're not even thinking about the plates, you're just moving. And that's when my mind wanders. I think about my kids, about the house, about the little things — like finding a penny heads-up on the sidewalk this morning and slipping it in my pocket. It's silly, but it made me feel seen for a second. Mostly, though, I'm thinking about the folks on the other side of that pass — the servers, the cooks, the regulars at the bar. I'm holding it together for them. That's the job. That's the whole job.",
+        "factIds": [
+          "F-aad6f22cde91",
+          "F-23d3e9625f4e"
+        ],
+        "src": "packet.W2[POP-00252]"
+      },
+      {
+        "id": "Q-POP-00273-6cffab2f1b",
+        "pop": "POP-00273",
+        "name": "Trenton Nawan",
+        "quote": "Tuesday's a different animal entirely. You get the regulars — the ones who've been coming in for years, the ones who just want a quiet beer and to watch the game without the chaos. The tip jar on a Tuesday tells you who's had a good day, who's just passing through, who's celebrating something small. Saturday's a whole other beast. The place is packed, everyone's loud, and the tips reflect that energy — but they're not always bigger. Sometimes it's a bunch of small bills from folks who came for the atmosphere, not the food. The real story is the folks in the back. The dishwashers, the line cooks — they're the ones holding it all together while we're out front. Hector's been in that pit all night, steam coming off the sink, and nobody sees him. But without him, we'd be done by seven. The tip jar's just the visible part. The neighborhood's real character is in who shows up and does the work, day in and day out, whether it's a slow Tuesday or a packed Saturday.",
+        "factIds": [
+          "F-23d3e9625f4e",
+          "F-aad6f22cde91"
+        ],
+        "src": "packet.W2[POP-00273]"
+      },
+      {
+        "id": "Q-POP-00643-d45a41fed7",
+        "pop": "POP-00643",
+        "name": "Guadalupe Lupe",
+        "quote": "From behind the stick, you see the whole shift of the place. The regulars come in at the same time, order the same thing, and you know their stories without them saying much. The walk-ins are the ones looking around, trying to figure out if this is their kind of spot. And the moment the night turns — that's when the noise changes, when people stop checking their phones and start actually talking to each other. But honestly, the people I notice most are the ones in the back, the dishwashers and line cooks. They're the ones holding it all together, working through the steam and the heat while the rest of us are out front. You don't see them unless something breaks down, but when it does, you feel it. That's what a lot of folks miss — the work that keeps the place standing isn't the showy part. It's the quiet, steady grind behind the wall.",
+        "factIds": [
+          "F-23d3e9625f4e",
+          "F-eaa34219a15c"
+        ],
+        "src": "packet.W2[POP-00643]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Mason Ortega",
+        "text": "Possible angle: the dishwasher at Dockhouse BBQ is the entire pit crew at a two-person operation — what does that do to a person's night?",
+        "usable": false
+      },
+      {
+        "from": "Mason Ortega",
+        "text": "Possible angle: the line at Harborline Grill is all line cooks, no dedicated prep — how does a four-person kitchen split a shift that most places give to six?",
+        "usable": false
+      },
+      {
+        "from": "Mason Ortega",
+        "text": "Possible angle: the security guard at Jack London Square Markets sees the whole neighborhood walk through — what does that vantage point reveal about the kitchens nearby?",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C111",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-a43c5d888b36"
+    },
+    {
+      "t": "FACT",
+      "text": "Jack London kitchens · Green & Gold Tavern, Harborline Grill",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111",
+      "id": "F-eaa34219a15c"
+    },
+    {
+      "t": "FACT",
+      "text": "Hector Leech, Dishwasher at Green & Gold Tavern. 12 named workers at 5 named kitchens in Jack London on the ledger this cycle.",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111",
+      "id": "F-aad6f22cde91"
+    },
+    {
+      "t": "FACT",
+      "text": "Green & Gold Tavern · Sports Bar & Dining · 30 employees · growth 7.9% · revenue $3.7M (+$6k vs C110) · on the roster: Hector Leech (Dishwasher); Trenton Nawan (Server); Guadalupe Lupe (Bartender); Valentina Campbell (Server)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111",
+      "id": "F-23d3e9625f4e"
+    },
+    {
+      "t": "FACT",
+      "text": "Harborline Grill · Restaurant & Dining · 7 employees · growth 7.6% · revenue $860k (+$1k vs C110) · on the roster: Tomas Renteria (Podcast Host / Line Cook); Quynh Le (Line Cook); Jalen Hill (Line Cook); Bruce Wright (Line Cook)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111",
+      "id": "F-12c97a380b04"
+    },
+    {
+      "t": "FACT",
+      "text": "Blue Lantern Bar · Nightlife & Entertainment · 30 employees · growth 8.8% · revenue $3.9M (+$7k vs C110) · on the roster: Yuki Ji (Bartender); Guadalupe Lee (Bartender)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111",
+      "id": "F-cbc6f8ed4434"
+    },
+    {
+      "t": "FACT",
+      "text": "Jack London Square Markets · Retail & Food · 30 employees · growth 5.9% · revenue $3.9M (+$4k vs C110) · on the roster: Gauri Han (Security Guard)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111",
+      "id": "F-398a748a04fc"
+    },
+    {
+      "t": "FACT",
+      "text": "Dockhouse BBQ · Restaurant & Dining · 2 employees · growth 8.7% · revenue $246k (+$409 vs C110) · on the roster: Mesi Westin (Dishwasher)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111",
+      "id": "F-55bab5fb1a08"
+    },
+    {
+      "t": "FACT",
+      "text": "ENGINE SEED (Jack London): citizens Ty Yule; Lamine Sissoko; Derek Simmons; Vincent Cho · businesses Bayline 6; Blue Lantern Bar",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C111",
+      "id": "F-b4bfe061c751"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "mason-kitchen-ground-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Treat a Packet-supplied restaurant signal as a workplace question without inventing Mason's presence, a worker, shift, service state, business condition, or labor consequence.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "evidence-bounded kitchen-work brief",
+      "targetWords": "evidence-bounded",
+      "opening": "one Packet-named restaurant and location",
+      "closing": "the worker or operating account still needed"
+    },
+    "authorizedTexture": [
+      "workplace-oriented questions about a supplied restaurant without claiming an answer",
+      "kitchen vocabulary used only as interpretation and never as proof of a worker, action, condition, or event"
+    ],
+    "textureConditions": [
+      "a restaurant appearing on an evening list proves only the supplied venue-location relation, not that it was open, busy, staffed, serving, struggling, or observed",
+      "first-person embedding, every worker, owner, patron, shift, quote, action, count, wage, cost, supply issue, health score, and business outcome requires Packet support"
+    ],
+    "canonBlockers": [
+      "invented attendance, kitchen access, worker, owner, patron, service, rush, shift, dialogue, quote, wage, cost, ticket count, equipment state, supply problem, health score, business condition, or labor consequence",
+      "an invented or altered venue, person, neighborhood, event, relationship, date, number, or quote",
+      "review language, raw engine labels, citywide food trend assigned to one venue, or collective worker sentiment presented as fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-d0d387bd3656",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-a43c5d888b36",
+        "t": "FACT",
+        "text": "Current cycle: C111",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-eaa34219a15c",
+        "t": "FACT",
+        "text": "Jack London kitchens · Green & Gold Tavern, Harborline Grill",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111"
+      },
+      {
+        "id": "F-aad6f22cde91",
+        "t": "FACT",
+        "text": "Hector Leech, Dishwasher at Green & Gold Tavern. 12 named workers at 5 named kitchens in Jack London on the ledger this cycle.",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111"
+      },
+      {
+        "id": "F-23d3e9625f4e",
+        "t": "FACT",
+        "text": "Green & Gold Tavern · Sports Bar & Dining · 30 employees · growth 7.9% · revenue $3.7M (+$6k vs C110) · on the roster: Hector Leech (Dishwasher); Trenton Nawan (Server); Guadalupe Lupe (Bartender); Valentina Campbell (Server)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111"
+      },
+      {
+        "id": "F-12c97a380b04",
+        "t": "FACT",
+        "text": "Harborline Grill · Restaurant & Dining · 7 employees · growth 7.6% · revenue $860k (+$1k vs C110) · on the roster: Tomas Renteria (Podcast Host / Line Cook); Quynh Le (Line Cook); Jalen Hill (Line Cook); Bruce Wright (Line Cook)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111"
+      },
+      {
+        "id": "F-cbc6f8ed4434",
+        "t": "FACT",
+        "text": "Blue Lantern Bar · Nightlife & Entertainment · 30 employees · growth 8.8% · revenue $3.9M (+$7k vs C110) · on the roster: Yuki Ji (Bartender); Guadalupe Lee (Bartender)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111"
+      },
+      {
+        "id": "F-398a748a04fc",
+        "t": "FACT",
+        "text": "Jack London Square Markets · Retail & Food · 30 employees · growth 5.9% · revenue $3.9M (+$4k vs C110) · on the roster: Gauri Han (Security Guard)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111"
+      },
+      {
+        "id": "F-55bab5fb1a08",
+        "t": "FACT",
+        "text": "Dockhouse BBQ · Restaurant & Dining · 2 employees · growth 8.7% · revenue $246k (+$409 vs C110) · on the roster: Mesi Westin (Dishwasher)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111"
+      },
+      {
+        "id": "F-b4bfe061c751",
+        "t": "FACT",
+        "text": "ENGINE SEED (Jack London): citizens Ty Yule; Lamine Sissoko; Derek Simmons; Vincent Cho · businesses Bayline 6; Blue Lantern Bar",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C111"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00252-bb5218ef2d",
+        "speakerId": "POP-00252",
+        "speakerName": "Hector Leech",
+        "text": "A full shift in the pit is a marathon, not a sprint. You're in the steam before the first ticket even prints, and the heat just sits on you like a second skin. The sprayer's going, the racks are clanking, and your hands are in and out of the water so much they prune up and crack. But the rhythm is what keeps you going — you get into a groove where you're not even thinking about the plates, you're just moving. And that's when my mind wanders. I think about my kids, about the house, about the little things — like finding a penny heads-up on the sidewalk this morning and slipping it in my pocket. It's silly, but it made me feel seen for a second. Mostly, though, I'm thinking about the folks on the other side of that pass — the servers, the cooks, the regulars at the bar. I'm holding it together for them. That's the job. That's the whole job.",
+        "factIds": [
+          "F-aad6f22cde91",
+          "F-23d3e9625f4e"
+        ],
+        "src": "packet.W2[POP-00252]"
+      },
+      {
+        "id": "Q-POP-00273-6cffab2f1b",
+        "speakerId": "POP-00273",
+        "speakerName": "Trenton Nawan",
+        "text": "Tuesday's a different animal entirely. You get the regulars — the ones who've been coming in for years, the ones who just want a quiet beer and to watch the game without the chaos. The tip jar on a Tuesday tells you who's had a good day, who's just passing through, who's celebrating something small. Saturday's a whole other beast. The place is packed, everyone's loud, and the tips reflect that energy — but they're not always bigger. Sometimes it's a bunch of small bills from folks who came for the atmosphere, not the food. The real story is the folks in the back. The dishwashers, the line cooks — they're the ones holding it all together while we're out front. Hector's been in that pit all night, steam coming off the sink, and nobody sees him. But without him, we'd be done by seven. The tip jar's just the visible part. The neighborhood's real character is in who shows up and does the work, day in and day out, whether it's a slow Tuesday or a packed Saturday.",
+        "factIds": [
+          "F-23d3e9625f4e",
+          "F-aad6f22cde91"
+        ],
+        "src": "packet.W2[POP-00273]"
+      },
+      {
+        "id": "Q-POP-00643-d45a41fed7",
+        "speakerId": "POP-00643",
+        "speakerName": "Guadalupe Lupe",
+        "text": "From behind the stick, you see the whole shift of the place. The regulars come in at the same time, order the same thing, and you know their stories without them saying much. The walk-ins are the ones looking around, trying to figure out if this is their kind of spot. And the moment the night turns — that's when the noise changes, when people stop checking their phones and start actually talking to each other. But honestly, the people I notice most are the ones in the back, the dishwashers and line cooks. They're the ones holding it all together, working through the steam and the heat while the rest of us are out front. You don't see them unless something breaks down, but when it does, you feel it. That's what a lot of folks miss — the work that keeps the place standing isn't the showy part. It's the quiet, steady grind behind the wall.",
+        "factIds": [
+          "F-23d3e9625f4e",
+          "F-eaa34219a15c"
+        ],
+        "src": "packet.W2[POP-00643]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00252",
+        "name": "Hector Leech",
+        "profile": "Hector Leech — Dishwasher",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00273",
+        "name": "Trenton Nawan",
+        "profile": "Trenton Nawan — Server",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00643",
+        "name": "Guadalupe Lupe",
+        "profile": "Guadalupe Lupe — Bartender",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Mason Ortega",
+        "text": "Possible angle: the dishwasher at Dockhouse BBQ is the entire pit crew at a two-person operation — what does that do to a person's night?",
+        "publishable": false
+      },
+      {
+        "from": "Mason Ortega",
+        "text": "Possible angle: the line at Harborline Grill is all line cooks, no dedicated prep — how does a four-person kitchen split a shift that most places give to six?",
+        "publishable": false
+      },
+      {
+        "from": "Mason Ortega",
+        "text": "Possible angle: the security guard at Jack London Square Markets sees the whole neighborhood walk through — what does that vantage point reveal about the kitchens nearby?",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "workplace-oriented questions about a supplied restaurant without claiming an answer",
+      "kitchen vocabulary used only as interpretation and never as proof of a worker, action, condition, or event"
+    ],
+    "textureConditions": [
+      "a restaurant appearing on an evening list proves only the supplied venue-location relation, not that it was open, busy, staffed, serving, struggling, or observed",
+      "first-person embedding, every worker, owner, patron, shift, quote, action, count, wage, cost, supply issue, health score, and business outcome requires Packet support"
+    ],
+    "forbiddenClaimClasses": [
+      "invented attendance, kitchen access, worker, owner, patron, service, rush, shift, dialogue, quote, wage, cost, ticket count, equipment state, supply problem, health score, business condition, or labor consequence",
+      "an invented or altered venue, person, neighborhood, event, relationship, date, number, or quote",
+      "review language, raw engine labels, citywide food trend assigned to one venue, or collective worker sentiment presented as fact"
+    ]
+  }
+}

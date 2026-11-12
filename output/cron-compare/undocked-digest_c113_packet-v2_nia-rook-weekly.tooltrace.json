@@ -1,0 +1,44 @@
+{
+  "model": "openai/gpt-6-luna",
+  "calls": [
+    {
+      "tool": "citizen_lookup",
+      "input": {
+        "name": "Cristina Booker"
+      },
+      "resultChars": 184,
+      "resultHead": "Cristina Booker — role: Immigration Attorney; neighborhood: Downtown; born: 2012; wealth: 5; careerStage: mid-career; employerBiz: SELF_EMPLOYED; skills: Professional; popid: POP-00836"
+    },
+    {
+      "tool": "citizen_lookup",
+      "input": {
+        "name": "Father Miguel"
+      },
+      "resultChars": 173,
+      "resultHead": "Father Miguel — role: Parish priest; neighborhood: Fruitvale; born: 1989; wealth: 7; careerStage: senior; employerBiz: BIZ-00028; skills: Faith & Community; popid: POP-00734"
+    },
+    {
+      "tool": "citizen_lookup",
+      "input": {
+        "name": "Daphne Stafford"
+      },
+      "resultChars": 174,
+      "resultHead": "Daphne Stafford — role: Home Health Aide; neighborhood: West Oakland; born: 1992; wealth: 6; careerStage: senior; employerBiz: BIZ-00015; skills: Healthcare; popid: POP-00816"
+    },
+    {
+      "tool": "undocked_history",
+      "input": {},
+      "resultChars": 781,
+      "resultHead": "Available gate-approved UNDOCKED feed history before C113:\nC112 UNDOCKED: Sammie Alvarez — credits -209; systems Sol, sol, alpha_centauri; combat 0; mishaps 0.\nC112 UNDOCKED: Rafael Phillips — credits 0; systems sirius, sol, alpha_centauri; combat 0; mishaps 0.\nC112 UNDOCKED: Iris Pham — credits 1; systems Sol; combat 0; mishaps 0.\nC112 UNDOCKED: Sammie Alvarez — credits 0; systems sol, sirius; combat 0; mishaps 0.\nC112 UNDOCKED: Rafael Phillips — credits 0; systems procyon, nova_terra, sirius; combat 0; mishaps 0.\nC112 UNDOCKED: Iris Pham — credits 0; systems Nihal, Nova Terra, Furud, nihal, "
+    },
+    {
+      "tool": "undocked_history",
+      "input": {
+        "beforeCycle": 112
+      },
+      "resultChars": 926,
+      "resultHead": "Available gate-approved UNDOCKED feed history before C112:\nC111 UNDOCKED: Rosario Medina — credits 110; systems Sol; combat 0; mishaps 0.\nC111 UNDOCKED: Eric Taveras — credits 0; systems Sol, sol, sirius; combat 0; mishaps 0.\nC111 UNDOCKED: Briar Soto — credits 0; systems Sol; combat 0; mishaps 0.\nC111 UNDOCKED: Rosario Medina — credits 0; systems Sol, epsilon_eridani, sirius, sol, alpha_centauri; combat 0; mishaps 0.\nC111 UNDOCKED: Eric Taveras — credits 1170; systems sirius; combat 0; mishaps 0.\nC111 UNDOCKED: Briar Soto — credits 0; systems sol, alpha_centauri, sirius; combat 0; mishaps 0.\n"
+    }
+  ],
+  "ranAt": "2026-10-31T15:15:27.580Z"
+}

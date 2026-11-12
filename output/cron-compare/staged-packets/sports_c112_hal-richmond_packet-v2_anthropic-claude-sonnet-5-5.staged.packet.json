@@ -1,0 +1,373 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00007",
+    "name": "Hal Richmond",
+    "role": "desk reporter",
+    "desk": "sports"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "What the supplied C112 line card establishes, and what history remains unsupplied.",
+    "approach": "Historian approach (Hal Richmond): the Origins of the Dynasty bar — third-person biography, first person at most once; literary, not wire, not bleacher rage. Present fact first (feed-true: StoryAngle, Stats, record), then the ground the man came from. An origin, road, nickname or recorded word may enter only when canon_search or the Packet holds it; otherwise leave it out. Pick 1–2 archive-bag shapes. Numbers plain as the record prints them, not poetry and not scouting grades. End on the closing note in this slice (the line that holds, or the quiet note the class carries). FORBIDDEN: fan \"we\" charge, Anthony salary–value architecture as spine, elegy as the default register, inventing seasons/x-stats, FO bullet strategy, business-desk storefront assignment, multi-voice sports-desk average.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "sports-history",
+      "pulseClass": "era-door",
+      "bagModes": [
+        "6 What He Became",
+        "8 The Archive Entry"
+      ],
+      "historicalAnchor": "era door — living chapter vs the age it closes or extends",
+      "presentFacts": [
+        "Event (feed): A's — rumor (off-season)",
+        "Cycle: C112"
+      ],
+      "dossierFacts": [
+        "Mark Aitken TrueSource: 2041 REGULAR SEASON G: 138 PA: 572 AB: 540 R: 84 H: 153 2B: 23 3B: 0 HR: 33 RBI: 87 BB: 25 SO: 65 HBP: 3 SF: 3 SAC: 1 GIDP: 7 AVG: 0.283 OBP: 0.317 SL | WAR: 3.2 | AWARDS (Career Reference) - Rookie of the Year (2032) - Gold Glove (2032, 2038, 2039) - Si",
+        "Kevin Clark TrueSource: 2041 REGULAR SEASON G: 18 PA: 67 AB: 64 R: 11 H: 19 2B: 5 3B: 1 HR: 3 RBI: 12 BB: 1 SO: 3 HBP: 1 SF: 1 SAC: 0 GIDP: 1 AVG: 0.297 OBP: 0.313 SLG: 0.547 | WAR: 0.9"
+      ],
+      "missing": [
+        "Historical people, places, teams, events, seasons, and statistics are unsupplied unless named in the packet",
+        "No invented seasons or franchise history beyond packet + feed",
+        "No x-stats / barrel% / invented OPS+",
+        "Not a business-desk storefront assignment",
+        "Not P Slayer charge; not Anthony board architecture as spine"
+      ],
+      "closingNote": "the line that holds",
+      "priorFiling": "NONE — wall may still inject at wake",
+      "sceneRule": "An unnamed desk or quiet archive transition; literary texture may carry no witnessed event. People, places, teams, seasons, events, and statistics only from the packet. Not a business storefront beat.",
+      "sourcePointers": [
+        "output/world_summary_c112.md ## Sports",
+        "docs/media/HAL_ARCHIVE_BAG.md",
+        "scripts/sportsSubstrate.js",
+        "docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 5"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "story-signal",
+    "hood": "Jack London",
+    "src": "world_summary_c112.md ## Sports",
+    "plan": {
+      "focus": "Mark Aitken and Kevin Clark",
+      "closeQuestion": "What do the rumors surrounding Mark Aitken and Kevin Clark reveal about the A's current state and future plans?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [],
+    "sources": [],
+    "excludedLeads": [
+      {
+        "from": "Hal Richmond",
+        "text": "The significance of their current stats and past achievements might be pointing to a larger story about the team's strategy or future plans.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C112",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-7cd6ffd2aeb3"
+    },
+    {
+      "t": "FACT",
+      "text": "A's — rumor — supplied C112 line card",
+      "src": "world_summary_c112.md ## Sports",
+      "id": "F-388909e37f0a"
+    },
+    {
+      "t": "FACT",
+      "text": "Event (feed): A's — rumor (off-season)",
+      "src": "world_summary_c112.md ## Sports",
+      "id": "F-c2b9044cbd39"
+    },
+    {
+      "t": "FACT",
+      "text": "Cycle: C112",
+      "src": "world_summary_c112.md ## Sports",
+      "id": "F-21537f74428d"
+    },
+    {
+      "t": "FACT",
+      "text": "Mark Aitken 2041 ATH: 138 G, 540 AB, 153 H, 33 HR, 87 RBI, 25 BB, 65 SO, 5 SB, AVG .283, OBP .317, SLG .509",
+      "src": "tool:dossier_read:Mark Aitken",
+      "id": "F-ff4b9f1a4a63"
+    },
+    {
+      "t": "FACT",
+      "text": "Mark Aitken 2040 ATH: 144 G, 550 AB, 143 H, 30 HR, 79 RBI, 64 BB, 110 SO, 9 SB, AVG .260, OBP .342, SLG .473",
+      "src": "tool:dossier_read:Mark Aitken",
+      "id": "F-47ad83b2c02b"
+    },
+    {
+      "t": "FACT",
+      "text": "Mark Aitken 2039 ATH: 148 G, 579 AB, 165 H, 20 HR, 75 RBI, 62 BB, 101 SO, 14 SB, AVG .285, OBP .355, SLG .459",
+      "src": "tool:dossier_read:Mark Aitken",
+      "id": "F-235861c16c89"
+    },
+    {
+      "t": "FACT",
+      "text": "Mark Aitken 2036 ATH: 159 G, 615 AB, 182 H, 35 HR, 124 RBI, 70 BB, 114 SO, 17 SB, AVG .296, OBP .374, SLG .535",
+      "src": "tool:dossier_read:Mark Aitken",
+      "id": "F-3b3283c05d4b"
+    },
+    {
+      "t": "FACT",
+      "text": "Mark Aitken 2034 ATH: 160 G, 637 AB, 184 H, 39 HR, 100 RBI, 63 BB, 134 SO, 16 SB, AVG .289, OBP .355, SLG .521",
+      "src": "tool:dossier_read:Mark Aitken",
+      "id": "F-e13e3115a2d0"
+    },
+    {
+      "t": "FACT",
+      "text": "Mark Aitken 2033 ATH: 45 G, 183 AB, 35 H, 2 HR, 27 RBI, 11 BB, 47 SO, 2 SB, AVG .191, OBP .232, SLG .295",
+      "src": "tool:dossier_read:Mark Aitken",
+      "id": "F-367125e195b3"
+    },
+    {
+      "t": "FACT",
+      "text": "Mark Aitken 2032 ATH: 156 G, 601 AB, 167 H, 21 HR, 80 RBI, 49 BB, 123 SO, 9 SB, AVG .278, OBP .337, SLG .436",
+      "src": "tool:dossier_read:Mark Aitken",
+      "id": "F-1f1214dd839f"
+    },
+    {
+      "t": "FACT",
+      "text": "Mark Aitken 2031 ATH: 23 G, 86 AB, 19 H, 4 HR, 10 RBI, 7 BB, 18 SO, 1 SB, AVG .221, OBP .280, SLG .430",
+      "src": "tool:dossier_read:Mark Aitken",
+      "id": "F-7d68b2622f39"
+    },
+    {
+      "t": "FACT",
+      "text": "Kevin Clark 2041 ATH: 18 G, 64 AB, 19 H, 3 HR, 12 RBI, 1 BB, 3 SO, 6 SB, AVG .297, OBP .313, SLG .547",
+      "src": "tool:dossier_read:Kevin Clark",
+      "id": "F-4fbce0e2a993"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. No citizen spoke for this piece: manifest.approvedQuotes is empty. Write no quoted speech and attribute no statement to any person; the piece stands on the record and the place. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "hal-richmond-archive-v2",
+    "canonPolicy": "load-bearing",
+    "purpose": "Put one Packet-backed present fact in the river of the Richmond Archive: where the man came from, the road to Oakland, the name the city gave him, his own recorded words, what he became. The Origins of the Dynasty series is the bar for who Hal is. The archive is read through the tools, never recalled; what it holds is his to cite. Invented current stats and real-world Oakland geography still fail.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "third-person biography in the Richmond Archive register — a place you can smell, sentences that land one at a time, warmth, the nickname as the city's memory; the historian steps in first person at most once",
+      "targetWords": "800-1200 words, bounded by the Packet and what the tools returned",
+      "opening": "one Packet-backed present fact, then the ground the man came from",
+      "closing": "the line that holds — an aphorism the piece has earned, not a summary"
+    },
+    "authorizedTexture": [
+      "the sensory ground of a place the archive names — the fields, the docks, the hometown lights — adding no named person, business or event",
+      "the frame around a recorded quote and the pacing of short lines",
+      "the nickname the archive or the Packet holds, used as the city's memory",
+      "two men the archive puts on the same locker row (the Calm and the Storm) set against the Packet-present line",
+      "warmth and humor in the historian's own voice, first person at most once"
+    ],
+    "textureConditions": [
+      "the present fact, current statistic, living roster name and current event come from the Packet or a tool, printed exactly as returned and named to its source",
+      "origins, nicknames, prior seasons and quotes come from the archive or the dossier through a tool call; a man whose archive returns nothing stays in the present and the piece says less",
+      "a quote is the man's recorded words from the archive, the dossier or the Packet, never composed for him",
+      "numbers land plain as the record holds them — a year as a numeral, a line as the dossier prints it — never stacked like a card",
+      "an unresolved feed subject keeps the supplied label and receives no POPID, biography, role, quote or origin"
+    ],
+    "canonBlockers": [
+      "a real-world Oakland place or landmark imported as if it were this city",
+      "a real-world fact the archive and the Packet do not hold",
+      "an invented current-cycle statistic, season, roster move, injury, contract, result or player line",
+      "a quote, interview or scene composed for a living person",
+      "an origin, hometown, family, nickname or predecessor the archive does not hold for the named man",
+      "an unresolved feed spelling silently given a POPID, biography, role or history",
+      "fan consensus, front-office strategy or analytic grading as the spine"
+    ]
+  },
+  "manifest": {
+    "id": "AM-04d826843934",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-7cd6ffd2aeb3",
+        "t": "FACT",
+        "text": "Current cycle: C112",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-388909e37f0a",
+        "t": "FACT",
+        "text": "A's — rumor — supplied C112 line card",
+        "src": "world_summary_c112.md ## Sports"
+      },
+      {
+        "id": "F-c2b9044cbd39",
+        "t": "FACT",
+        "text": "Event (feed): A's — rumor (off-season)",
+        "src": "world_summary_c112.md ## Sports"
+      },
+      {
+        "id": "F-21537f74428d",
+        "t": "FACT",
+        "text": "Cycle: C112",
+        "src": "world_summary_c112.md ## Sports"
+      },
+      {
+        "id": "F-ff4b9f1a4a63",
+        "t": "FACT",
+        "text": "Mark Aitken 2041 ATH: 138 G, 540 AB, 153 H, 33 HR, 87 RBI, 25 BB, 65 SO, 5 SB, AVG .283, OBP .317, SLG .509",
+        "src": "tool:dossier_read:Mark Aitken"
+      },
+      {
+        "id": "F-47ad83b2c02b",
+        "t": "FACT",
+        "text": "Mark Aitken 2040 ATH: 144 G, 550 AB, 143 H, 30 HR, 79 RBI, 64 BB, 110 SO, 9 SB, AVG .260, OBP .342, SLG .473",
+        "src": "tool:dossier_read:Mark Aitken"
+      },
+      {
+        "id": "F-235861c16c89",
+        "t": "FACT",
+        "text": "Mark Aitken 2039 ATH: 148 G, 579 AB, 165 H, 20 HR, 75 RBI, 62 BB, 101 SO, 14 SB, AVG .285, OBP .355, SLG .459",
+        "src": "tool:dossier_read:Mark Aitken"
+      },
+      {
+        "id": "F-3b3283c05d4b",
+        "t": "FACT",
+        "text": "Mark Aitken 2036 ATH: 159 G, 615 AB, 182 H, 35 HR, 124 RBI, 70 BB, 114 SO, 17 SB, AVG .296, OBP .374, SLG .535",
+        "src": "tool:dossier_read:Mark Aitken"
+      },
+      {
+        "id": "F-e13e3115a2d0",
+        "t": "FACT",
+        "text": "Mark Aitken 2034 ATH: 160 G, 637 AB, 184 H, 39 HR, 100 RBI, 63 BB, 134 SO, 16 SB, AVG .289, OBP .355, SLG .521",
+        "src": "tool:dossier_read:Mark Aitken"
+      },
+      {
+        "id": "F-367125e195b3",
+        "t": "FACT",
+        "text": "Mark Aitken 2033 ATH: 45 G, 183 AB, 35 H, 2 HR, 27 RBI, 11 BB, 47 SO, 2 SB, AVG .191, OBP .232, SLG .295",
+        "src": "tool:dossier_read:Mark Aitken"
+      },
+      {
+        "id": "F-1f1214dd839f",
+        "t": "FACT",
+        "text": "Mark Aitken 2032 ATH: 156 G, 601 AB, 167 H, 21 HR, 80 RBI, 49 BB, 123 SO, 9 SB, AVG .278, OBP .337, SLG .436",
+        "src": "tool:dossier_read:Mark Aitken"
+      },
+      {
+        "id": "F-7d68b2622f39",
+        "t": "FACT",
+        "text": "Mark Aitken 2031 ATH: 23 G, 86 AB, 19 H, 4 HR, 10 RBI, 7 BB, 18 SO, 1 SB, AVG .221, OBP .280, SLG .430",
+        "src": "tool:dossier_read:Mark Aitken"
+      },
+      {
+        "id": "F-4fbce0e2a993",
+        "t": "FACT",
+        "text": "Kevin Clark 2041 ATH: 18 G, 64 AB, 19 H, 3 HR, 12 RBI, 1 BB, 3 SO, 6 SB, AVG .297, OBP .313, SLG .547",
+        "src": "tool:dossier_read:Kevin Clark"
+      }
+    ],
+    "approvedQuotes": [],
+    "approvedSubjects": [],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Hal Richmond",
+        "text": "The significance of their current stats and past achievements might be pointing to a larger story about the team's strategy or future plans.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "the sensory ground of a place the archive names — the fields, the docks, the hometown lights — adding no named person, business or event",
+      "the frame around a recorded quote and the pacing of short lines",
+      "the nickname the archive or the Packet holds, used as the city's memory",
+      "two men the archive puts on the same locker row (the Calm and the Storm) set against the Packet-present line",
+      "warmth and humor in the historian's own voice, first person at most once"
+    ],
+    "textureConditions": [
+      "the present fact, current statistic, living roster name and current event come from the Packet or a tool, printed exactly as returned and named to its source",
+      "origins, nicknames, prior seasons and quotes come from the archive or the dossier through a tool call; a man whose archive returns nothing stays in the present and the piece says less",
+      "a quote is the man's recorded words from the archive, the dossier or the Packet, never composed for him",
+      "numbers land plain as the record holds them — a year as a numeral, a line as the dossier prints it — never stacked like a card",
+      "an unresolved feed subject keeps the supplied label and receives no POPID, biography, role, quote or origin"
+    ],
+    "forbiddenClaimClasses": [
+      "a real-world Oakland place or landmark imported as if it were this city",
+      "a real-world fact the archive and the Packet do not hold",
+      "an invented current-cycle statistic, season, roster move, injury, contract, result or player line",
+      "a quote, interview or scene composed for a living person",
+      "an origin, hometown, family, nickname or predecessor the archive does not hold for the named man",
+      "an unresolved feed spelling silently given a POPID, biography, role or history",
+      "fan consensus, front-office strategy or analytic grading as the spine"
+    ],
+    "toolFacts": [
+      "F-ff4b9f1a4a63",
+      "F-47ad83b2c02b",
+      "F-235861c16c89",
+      "F-3b3283c05d4b",
+      "F-e13e3115a2d0",
+      "F-367125e195b3",
+      "F-1f1214dd839f",
+      "F-7d68b2622f39",
+      "F-4fbce0e2a993"
+    ]
+  }
+}

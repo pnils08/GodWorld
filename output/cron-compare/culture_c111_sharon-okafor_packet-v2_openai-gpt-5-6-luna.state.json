@@ -1,0 +1,276 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00159",
+    "name": "Sharon Okafor",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Lena Cross is fading — how the city follows its names",
+    "approach": "Lifestyle approach: this slice is the fame record — who the city knows, who is fading, who just arrived — with their domains, tiers and neighborhoods. Behavior patterns, warm analytical. The names and trajectories are real; the morning routine, the regular order, what the neighbors think are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "lifestyle",
+      "hood": "Piedmont Ave",
+      "facts": [
+        "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 94, cooling), 17 media mentions",
+        "Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 68, cooling), 14 media mentions",
+        "Marin Tao (Celebrity), Arts, Chinatown, Iconic-tier — the city knows them (fame 153, viral), 25 media mentions",
+        "Rico Valez (Celebrity), Arts, Fruitvale, Iconic-tier — the city knows them (fame 116, viral), 19 media mentions",
+        "Warriors Alumni Thompson (basketball legend), Sports, Temescal, Local-tier — new on the culture record last cycle (fame 18, rising), 1 media mentions"
+      ],
+      "priorCycle": null,
+      "note": null,
+      "engineHooks": [
+        "defaulted on the debts — the savings are gone and the record carries it (observational analysis)",
+        "defaulted on the debts — the savings are gone and the record carries it (observational analysis)",
+        "the debts crossed a line this week — sleep comes harder now (observational analysis)",
+        "The Keane family opened Keane Mercantile (observational analysis)"
+      ],
+      "roomIsYours": "the coffee order, the dog's name, who recognizes them at the farmers market and who pretends not to",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-lifestyle",
+    "hood": "Piedmont Ave",
+    "src": "output/beats/Cultural_Ledger.jsonl @C111",
+    "plan": {
+      "focus": "The trajectory of fading fame on Piedmont Ave.",
+      "closeQuestion": "Does the city forget the person, or just the version of them that was famous?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [],
+    "sources": [],
+    "excludedLeads": [
+      {
+        "from": "Sharon Okafor",
+        "text": "Whether the financial decline of these figures is visible in their daily routines on Piedmont Ave.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C111",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-a43c5d888b36"
+    },
+    {
+      "t": "FACT",
+      "text": "Marin Tao leads the fame table; 2 fading, 1 new",
+      "src": "output/beats/Cultural_Ledger.jsonl @C111",
+      "id": "F-9ac6754e1aad"
+    },
+    {
+      "t": "FACT",
+      "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 94, cooling), 17 media mentions.",
+      "src": "output/beats/Cultural_Ledger.jsonl @C111",
+      "id": "F-c436c79ef289"
+    },
+    {
+      "t": "FACT",
+      "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 94, cooling), 17 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C111",
+      "id": "F-0be90eebddec"
+    },
+    {
+      "t": "FACT",
+      "text": "Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 68, cooling), 14 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C111",
+      "id": "F-b4186ae55e12"
+    },
+    {
+      "t": "FACT",
+      "text": "Marin Tao (Celebrity), Arts, Chinatown, Iconic-tier — the city knows them (fame 153, viral), 25 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C111",
+      "id": "F-11a3d518c4c3"
+    },
+    {
+      "t": "FACT",
+      "text": "Rico Valez (Celebrity), Arts, Fruitvale, Iconic-tier — the city knows them (fame 116, viral), 19 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C111",
+      "id": "F-57447ba77225"
+    },
+    {
+      "t": "FACT",
+      "text": "Warriors Alumni Thompson (basketball legend), Sports, Temescal, Local-tier — new on the culture record last cycle (fame 18, rising), 1 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C111",
+      "id": "F-6af3ab1ed224"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. No citizen spoke for this piece: manifest.approvedQuotes is empty. Write no quoted speech and attribute no statement to any person; the piece stands on the record and the place. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "sharon-behavior-ground-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Frame one Packet-supplied venue condition as a behavior question without inventing Sharon's presence, patrons, habits, activity, cause, trend, diagnosis, or social meaning.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "warm evidence-bounded lifestyle brief",
+      "targetWords": "evidence-bounded",
+      "opening": "one Packet-named venue, location, and condition",
+      "closing": "the human behavior account still needed"
+    },
+    "authorizedTexture": [
+      "warm interpretation of a supplied venue condition without claiming observation, attendance, or a behavior pattern",
+      "lifestyle vocabulary used only to pose a question and never as proof of a habit, preference, mood, trend, or diagnosis"
+    ],
+    "textureConditions": [
+      "a quiet venue record proves only the supplied venue condition and location, not patron count, decline, closure, mood, cause, habit, preference, or citywide trend",
+      "first-person visits, every patron, manager, regular, worker, expert, psychologist, quote, action, date, count, behavior change, and social meaning require Packet support"
+    ],
+    "canonBlockers": [
+      "invented attendance, observation, patron, manager, regular, worker, expert, psychologist, interview, dialogue, quote, line, gathering, habit, preference, behavior change, diagnosis, or social meaning",
+      "an invented or altered venue, person, neighborhood, event, relationship, date, count, or cause",
+      "closure or decline claims, citywide lifestyle trend, collective sentiment, raw engine labels, or economic conclusion presented as fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-7d5127840f09",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-a43c5d888b36",
+        "t": "FACT",
+        "text": "Current cycle: C111",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-9ac6754e1aad",
+        "t": "FACT",
+        "text": "Marin Tao leads the fame table; 2 fading, 1 new",
+        "src": "output/beats/Cultural_Ledger.jsonl @C111"
+      },
+      {
+        "id": "F-c436c79ef289",
+        "t": "FACT",
+        "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 94, cooling), 17 media mentions.",
+        "src": "output/beats/Cultural_Ledger.jsonl @C111"
+      },
+      {
+        "id": "F-0be90eebddec",
+        "t": "FACT",
+        "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 94, cooling), 17 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C111"
+      },
+      {
+        "id": "F-b4186ae55e12",
+        "t": "FACT",
+        "text": "Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 68, cooling), 14 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C111"
+      },
+      {
+        "id": "F-11a3d518c4c3",
+        "t": "FACT",
+        "text": "Marin Tao (Celebrity), Arts, Chinatown, Iconic-tier — the city knows them (fame 153, viral), 25 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C111"
+      },
+      {
+        "id": "F-57447ba77225",
+        "t": "FACT",
+        "text": "Rico Valez (Celebrity), Arts, Fruitvale, Iconic-tier — the city knows them (fame 116, viral), 19 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C111"
+      },
+      {
+        "id": "F-6af3ab1ed224",
+        "t": "FACT",
+        "text": "Warriors Alumni Thompson (basketball legend), Sports, Temescal, Local-tier — new on the culture record last cycle (fame 18, rising), 1 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C111"
+      }
+    ],
+    "approvedQuotes": [],
+    "approvedSubjects": [],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Sharon Okafor",
+        "text": "Whether the financial decline of these figures is visible in their daily routines on Piedmont Ave.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "warm interpretation of a supplied venue condition without claiming observation, attendance, or a behavior pattern",
+      "lifestyle vocabulary used only to pose a question and never as proof of a habit, preference, mood, trend, or diagnosis"
+    ],
+    "textureConditions": [
+      "a quiet venue record proves only the supplied venue condition and location, not patron count, decline, closure, mood, cause, habit, preference, or citywide trend",
+      "first-person visits, every patron, manager, regular, worker, expert, psychologist, quote, action, date, count, behavior change, and social meaning require Packet support"
+    ],
+    "forbiddenClaimClasses": [
+      "invented attendance, observation, patron, manager, regular, worker, expert, psychologist, interview, dialogue, quote, line, gathering, habit, preference, behavior change, diagnosis, or social meaning",
+      "an invented or altered venue, person, neighborhood, event, relationship, date, count, or cause",
+      "closure or decline claims, citywide lifestyle trend, collective sentiment, raw engine labels, or economic conclusion presented as fact"
+    ]
+  }
+}

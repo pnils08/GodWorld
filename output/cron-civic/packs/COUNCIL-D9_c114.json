@@ -1,0 +1,696 @@
+{
+  "v": "OFFICE/1",
+  "team": "civic-office",
+  "empty": false,
+  "actor": {
+    "id": "POP-00506",
+    "name": "Terrence Mobley",
+    "role": "City Council District 9",
+    "officeId": "COUNCIL-D9",
+    "district": "D9",
+    "faction": "OPP",
+    "agentDir": "civic-office-council-d9",
+    "initiative": null,
+    "dials": {
+      "approval": 64
+    }
+  },
+  "task": {
+    "a": "district-week",
+    "goal": "what is happening in Laurel"
+  },
+  "pulse": {
+    "className": "district-heat",
+    "score": 215.1909090909091,
+    "label": "Laurel — sentiment -0.03 vs city 0.115",
+    "lever": "what is happening in Laurel",
+    "hood": "Laurel",
+    "initiative": null,
+    "vsCity": {
+      "sentiment": -0.03,
+      "citySentiment": 0.115,
+      "crime": 0.69,
+      "cityCrime": 0.6554545454545454,
+      "heat": 15.190909090909093,
+      "outlier": true
+    }
+  },
+  "prewrite": {
+    "claim": "what is happening in Laurel",
+    "lineFacts": [
+      "approval 64",
+      "Laurel: sentiment -0.03 vs city 0.115; crime index 0.69 vs city 0.655; steady momentum 5",
+      "Laurel crime: property 42, violent 28, incidents 8 (cycle 114) — city property 40.7, violent 26.1, incidents 8.3",
+      "Laurel: sentiment -0.03 vs city 0.115; crime index 0.69 vs city 0.655; retail 4.34; housing pressure 0; steady; momentum 5"
+    ],
+    "missing": [
+      "no shop names on disk for this turf",
+      "no invented vote, POPID, or complete"
+    ]
+  },
+  "game": {
+    "geographyIssue": null,
+    "lastMove": {
+      "text": "No move for this seat in the available ledgers through C114.",
+      "moves": []
+    },
+    "board": [],
+    "boardAvailable": true,
+    "boardIds": [],
+    "boardText": "Your board is empty: no initiative sponsors you or touches your turf.",
+    "categories": {
+      "available": true,
+      "list": [
+        {
+          "key": "health",
+          "label": "clinics, care",
+          "band": "$5M-$100M",
+          "canDeliver": true
+        },
+        {
+          "key": "transit",
+          "label": "stations, lines",
+          "band": "$20M-$500M",
+          "canDeliver": true
+        },
+        {
+          "key": "education",
+          "label": "schools, youth learning",
+          "band": "$1M-$50M",
+          "canDeliver": true
+        },
+        {
+          "key": "economic",
+          "label": "business, local economy",
+          "band": "$2M-$50M",
+          "canDeliver": false
+        },
+        {
+          "key": "workforce",
+          "label": "jobs, training",
+          "band": "$1M-$30M",
+          "canDeliver": false
+        },
+        {
+          "key": "safety",
+          "label": "public safety, response",
+          "band": "$2M-$30M",
+          "canDeliver": false
+        },
+        {
+          "key": "sports",
+          "label": "stadiums, recreation",
+          "band": "$10M-$500M",
+          "canDeliver": false
+        },
+        {
+          "key": "environment",
+          "label": "parks, air, water",
+          "band": "$1M-$30M",
+          "canDeliver": false
+        }
+      ],
+      "text": "Propose in your own words under one category; reach is hood, district, or all (citywide seats only). Budget must sit in the band. * = runs, but cannot reach Delivering yet.\n- health: clinics, care $5M-$100M\n- transit: stations, lines $20M-$500M\n- education: schools, youth learning $1M-$50M\n- economic*: business, local economy $2M-$50M\n- workforce*: jobs, training $1M-$30M\n- safety*: public safety, response $2M-$30M\n- sports*: stadiums, recreation $10M-$500M\n- environment*: parks, air, water $1M-$30M"
+    },
+    "petitionPool": {
+      "available": true,
+      "complaints": [
+        {
+          "cycle": "113",
+          "hood": "Uptown",
+          "snippet": "filed: Eastlake Led the City in Incidents This Cycle. Its Row Still Reads \"Steady.\"",
+          "affect": "Frustrated"
+        }
+      ],
+      "participation": [],
+      "unlocatedRows": 0,
+      "invalidCycleRows": 0,
+      "sinceCycle": 112,
+      "throughCycle": 114,
+      "window": "Complaint display C112–C114; condition counter C114 only.",
+      "text": "Complaint display C112–C114; condition counter C114 only.\nPeople are talking (1 complaint):\n- filed: Eastlake Led the City in Incidents This Cycle. Its Row Still Reads \"Steady.\" (Uptown, C113)"
+    },
+    "workingCity": {
+      "available": true,
+      "totalStaff": 4,
+      "shownStaff": 4,
+      "text": "The working city:\n- Elena Soria Dominguez: The schematics are close—we're maybe three weeks out from the community review, and I keep second-guessing… (C113)\n- Bobby Chen-Ramirez: The audit went out clean, and I should feel done, but there's a knot in my chest I can't shake. Numbers don't… (C113)\n- Vanessa Tran-Muñoz: Fruitvale numbers are in my head, not the report. The response time was good today — 6 minutes on the 42nd… (C113)\n- Marcus Webb: Month eleven closed clean. Audit published, no findings flagged, and that four hundred K for next month is… (C113)"
+    },
+    "patrol": {
+      "available": true,
+      "strategy": "balanced",
+      "text": "City patrol strategy: balanced (patrols spread evenly — the default posture). The Police Chief has not set one."
+    },
+    "confrontations": {
+      "available": true,
+      "all": [
+        {
+          "id": "CONF-108-civic-office-council-d9",
+          "cycle": 108,
+          "agentDir": "civic-office-council-d9",
+          "demand": "Terrence Mobley — City Council District 9 — Reconcile Uptown commercial distress metrics with district small-business stabilization deployment.",
+          "sourceText": "## Terrence Mobley — City Council District 9\n\n- **Agent:** `.claude/agents/civic-office-council-d9/`\n- **Address:** Reconcile Uptown commercial distress metrics with district small-business stabilization deployment.\n- **Why:** Despite C107 claims of community success, Uptown triggered a C108 engine review math-imbalance (Sentiment -0.150 to 0.25, RetailVitality -1.26, HousingPressure rank 22 of 22 at 5.000).\n- **Acceptance:** A published Uptown commercial assessment detailing business retention allocations from the Downtown outreach expansion of INIT-001.\n- **Silence consequence:** Severe commercial and housing pressures in Uptown continue unmitigated by municipal stabilization resources.\n",
+          "src": "output/mara-directives/mara_directive_c108_AUTO.txt",
+          "expectsMove": "answer"
+        }
+      ],
+      "latestCycle": 114,
+      "open": [],
+      "answeredIds": []
+    },
+    "conditions": {
+      "available": true,
+      "proposals": [],
+      "text": "No proposals in the available board/move evidence need condition counts."
+    },
+    "problemContinuity": {
+      "available": true,
+      "cycle": 114,
+      "problems": [
+        {
+          "id": "[\"Laurel\",\"health.sickResidents\"]",
+          "hood": "Laurel",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 106,
+          "cycle": 114
+        },
+        {
+          "id": "[\"Laurel\",\"safety.aboveMedianHoods\"]",
+          "hood": "Laurel",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 114
+        },
+        {
+          "id": "[\"Uptown\",\"health.sickResidents\"]",
+          "hood": "Uptown",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 22,
+          "cycle": 114
+        }
+      ],
+      "visibleProblems": [
+        {
+          "id": "[\"Laurel\",\"health.sickResidents\"]",
+          "hood": "Laurel",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 106,
+          "cycle": 114
+        },
+        {
+          "id": "[\"Laurel\",\"safety.aboveMedianHoods\"]",
+          "hood": "Laurel",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 114
+        },
+        {
+          "id": "[\"Uptown\",\"health.sickResidents\"]",
+          "hood": "Uptown",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 22,
+          "cycle": 114
+        }
+      ],
+      "passedOver": [
+        {
+          "id": "[\"Laurel\",\"health.sickResidents\"]",
+          "hood": "Laurel",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 106,
+          "cycle": 114,
+          "passedOverCycle": 110
+        },
+        {
+          "id": "[\"Uptown\",\"health.sickResidents\"]",
+          "hood": "Uptown",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 22,
+          "cycle": 114,
+          "passedOverCycle": 110
+        },
+        {
+          "id": "[\"Laurel\",\"safety.aboveMedianHoods\"]",
+          "hood": "Laurel",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 114,
+          "passedOverCycle": 112
+        }
+      ],
+      "issues": [],
+      "missingFoldCycles": [],
+      "text": "Health and safety readings this week (C114).\n- Laurel: 106 residents sick; violence above the city middle\n- Uptown: 22 residents sick"
+    }
+  },
+  "signal": {
+    "kind": "district-heat",
+    "hoods": [
+      "Laurel",
+      "Uptown"
+    ],
+    "src": "lib/districtMap.js + civic-office-map.json"
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00060",
+        "name": "Marco Fabregas",
+        "neighborhood": "Laurel",
+        "role": "Catcher, Las Vegas Aviators (AAA)",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Laurel — Laurel — sentiment -0.03 vs city 0.115"
+      },
+      {
+        "pop": "POP-00092",
+        "name": "Carlos Flores",
+        "neighborhood": "Laurel",
+        "role": "Center Fielder, Midland RockHounds (AA)",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Laurel — Laurel — sentiment -0.03 vs city 0.115"
+      },
+      {
+        "pop": "POP-00134",
+        "name": "Brianna Lee",
+        "neighborhood": "Laurel",
+        "role": "Historic Preservation Carpenter",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Laurel — Laurel — sentiment -0.03 vs city 0.115"
+      },
+      {
+        "pop": "POP-00174",
+        "name": "Tariq Jello",
+        "neighborhood": "Laurel",
+        "role": "Appliance Repair Technician",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Laurel — Laurel — sentiment -0.03 vs city 0.115"
+      }
+    ],
+    "businesses": [],
+    "churches": [],
+    "sources": []
+  },
+  "known": [
+    {
+      "id": "F-office-COUNCIL-D9",
+      "t": "FACT",
+      "text": "Terrence Mobley holds COUNCIL-D9 at approval 64",
+      "src": "engine_audit snapshots.Civic_Office_Ledger"
+    },
+    {
+      "id": "F-heat-Laurel",
+      "t": "FACT",
+      "text": "Laurel: sentiment -0.03 vs city 0.115; crime index 0.69 vs city 0.655; steady momentum 5",
+      "src": "engine_audit snapshots.Neighborhood_Map ranked vs city"
+    },
+    {
+      "id": "F-crime-Laurel",
+      "t": "FACT",
+      "text": "Laurel crime: property 42, violent 28, incidents 8 (cycle 114) — city property 40.7, violent 26.1, incidents 8.3",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-hood-Laurel",
+      "t": "FACT",
+      "text": "Laurel: sentiment -0.03 vs city 0.115; crime index 0.69 vs city 0.655; retail 4.34; housing pressure 0; steady; momentum 5",
+      "src": "engine_audit snapshots.Neighborhood_Map"
+    },
+    {
+      "id": "F-chaos-garbage_truck-neighborhood Laurel",
+      "t": "FACT",
+      "text": "garbage_truck missed_pickup → neighborhood Laurel Sentiment -0.09",
+      "src": "world_summary Chaos_Cars"
+    }
+  ],
+  "role": {
+    "officeRows": [
+      {
+        "OfficeId": "COUNCIL-D9",
+        "PopId": "POP-00506",
+        "Holder": "Terrence Mobley",
+        "District": "D9",
+        "Approval": "64"
+      }
+    ],
+    "civicPeers": [
+      {
+        "OfficeId": "COUNCIL-D1",
+        "PopId": "POP-00501",
+        "Holder": "Denise Carter",
+        "District": "D1",
+        "Faction": "OPP",
+        "Approval": 95
+      },
+      {
+        "OfficeId": "COUNCIL-D3",
+        "PopId": "POP-00503",
+        "Holder": "Rose Delgado",
+        "District": "D3",
+        "Faction": "OPP",
+        "Approval": 85
+      },
+      {
+        "OfficeId": "COUNCIL-D5",
+        "PopId": "POP-00043",
+        "Holder": "Janae Rivers",
+        "District": "D5",
+        "Faction": "OPP",
+        "Approval": 85
+      }
+    ]
+  },
+  "limits": {
+    "assert": [
+      "only named subjects in exposure.subjects",
+      "only named shops in exposure.businesses",
+      "only named churches in exposure.churches",
+      "only project facts in known",
+      "no invented POPID, vote, or complete"
+    ],
+    "invent": [
+      "no new citizens",
+      "no new businesses",
+      "no sheet numbers"
+    ]
+  },
+  "output": {
+    "contract": "statement + moves + numberMoved",
+    "dest": "office wiki (civic.16) then next Sunday city-hall packet"
+  },
+  "brief": {
+    "version": "CIVIC-BRIEF/2",
+    "cycle": 114,
+    "generation": {
+      "cycle": 114,
+      "observedAt": "2026-11-01T22:24:29.105Z",
+      "sources": {
+        "sports": {
+          "available": true,
+          "hash": "b78aaae66ac12aca66d5fa395108cfe2aa74c4de5f10df5c08eec00d10a966f7"
+        },
+        "summary": {
+          "available": true,
+          "hash": "99535f5182e66eb922782c14f98daace067903c034240604a5ece898c8f011e4"
+        }
+      },
+      "hash": "625fc65e258fd2fe3d38d613ddc8fe6e9ae4ae4487a8350ea1d8882ac488130d",
+      "completeThrough": "2026-11-01T22:24:29.105Z",
+      "issues": [],
+      "statement": "Events reflect the saved export as of its refresh watermark; later same-Cycle events require a new export."
+    },
+    "sections": {
+      "events": {
+        "available": true,
+        "items": [],
+        "omittedCount": 0,
+        "retrievalKeys": []
+      },
+      "measuredState": {
+        "districts": [
+          {
+            "district": "D9",
+            "available": true,
+            "retrievalKey": "district/D9",
+            "neighborhoods": [
+              {
+                "hood": "Laurel",
+                "available": true,
+                "measured": {
+                  "Sentiment": {
+                    "value": "-0.03",
+                    "previous": "0",
+                    "change": -0.03
+                  },
+                  "CrimeIndex": {
+                    "value": "0.69",
+                    "previous": "0.61",
+                    "change": 0.07999999999999996
+                  },
+                  "RetailVitality": {
+                    "value": "4.34",
+                    "previous": "7.34",
+                    "change": -3
+                  },
+                  "HousingPressure": {
+                    "value": "0",
+                    "previous": "0",
+                    "change": 0
+                  },
+                  "NeighborhoodTrajectory": {
+                    "value": "steady",
+                    "previous": "decay",
+                    "change": null
+                  },
+                  "TrajectoryMomentum": {
+                    "value": "5",
+                    "previous": "4",
+                    "change": 1
+                  }
+                }
+              },
+              {
+                "hood": "Uptown",
+                "available": true,
+                "measured": {
+                  "Sentiment": {
+                    "value": "0.2",
+                    "previous": "0.05",
+                    "change": 0.15000000000000002
+                  },
+                  "CrimeIndex": {
+                    "value": "0.62",
+                    "previous": "0.55",
+                    "change": 0.06999999999999995
+                  },
+                  "RetailVitality": {
+                    "value": "13.66",
+                    "previous": "11.07",
+                    "change": 2.59
+                  },
+                  "HousingPressure": {
+                    "value": "10",
+                    "previous": "10",
+                    "change": 0
+                  },
+                  "NeighborhoodTrajectory": {
+                    "value": "growth",
+                    "previous": "growth",
+                    "change": null
+                  },
+                  "TrajectoryMomentum": {
+                    "value": "10",
+                    "previous": "10",
+                    "change": 0
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "previousCycleAvailable": true
+      },
+      "commitments": {
+        "priorMoves": [],
+        "evidenceAvailable": true,
+        "outcomeFeedAvailable": false,
+        "actionOutcomes": [],
+        "actionReconciliationAvailable": false,
+        "actionReconciliationReason": "ENOENT: no such file or directory, open '/root/GodWorld/output/beats/Civic_Action_Ledger.jsonl'",
+        "reconciledActions": []
+      },
+      "opportunities": {
+        "board": [],
+        "omittedCount": 0,
+        "boardRetrievalKeys": [],
+        "selectedInitiative": null,
+        "resourceBalanceAvailable": false,
+        "budgetAuthorityKey": "budget/authority",
+        "openChoice": "No selected initiative; a reasoned no-op or a grounded opportunity is available."
+      },
+      "response": {
+        "petitionWindow": "Complaint display C112–C114; condition counter C114 only.",
+        "complaints": 1,
+        "participation": 0,
+        "mediaOutcomeAvailable": false,
+        "committedResponseAvailable": false,
+        "committedResponse": [],
+        "note": "Response counts require saved experience and reaction receipts, and are not a representative poll. Only published receipts appear as coverage."
+      },
+      "authorizedActions": {
+        "categoriesAvailable": true,
+        "categoryKeys": [
+          "health",
+          "transit",
+          "education",
+          "economic",
+          "workforce",
+          "safety",
+          "sports",
+          "environment"
+        ],
+        "detailKey": "budget/authority",
+        "note": "Move validation and later execution decide authority. An accepted request is not an applied outcome."
+      }
+    }
+  },
+  "_briefEvidence": {
+    "event": {},
+    "district": {
+      "D9": {
+        "available": true,
+        "district": "D9",
+        "neighborhoods": [
+          {
+            "hood": "Laurel",
+            "available": true,
+            "measured": {
+              "Sentiment": {
+                "value": "-0.03",
+                "previous": "0",
+                "change": -0.03
+              },
+              "CrimeIndex": {
+                "value": "0.69",
+                "previous": "0.61",
+                "change": 0.07999999999999996
+              },
+              "RetailVitality": {
+                "value": "4.34",
+                "previous": "7.34",
+                "change": -3
+              },
+              "HousingPressure": {
+                "value": "0",
+                "previous": "0",
+                "change": 0
+              },
+              "NeighborhoodTrajectory": {
+                "value": "steady",
+                "previous": "decay",
+                "change": null
+              },
+              "TrajectoryMomentum": {
+                "value": "5",
+                "previous": "4",
+                "change": 1
+              }
+            },
+            "sourceRef": "engine_audit snapshots.Neighborhood_Map"
+          },
+          {
+            "hood": "Uptown",
+            "available": true,
+            "measured": {
+              "Sentiment": {
+                "value": "0.2",
+                "previous": "0.05",
+                "change": 0.15000000000000002
+              },
+              "CrimeIndex": {
+                "value": "0.62",
+                "previous": "0.55",
+                "change": 0.06999999999999995
+              },
+              "RetailVitality": {
+                "value": "13.66",
+                "previous": "11.07",
+                "change": 2.59
+              },
+              "HousingPressure": {
+                "value": "10",
+                "previous": "10",
+                "change": 0
+              },
+              "NeighborhoodTrajectory": {
+                "value": "growth",
+                "previous": "growth",
+                "change": null
+              },
+              "TrajectoryMomentum": {
+                "value": "10",
+                "previous": "10",
+                "change": 0
+              }
+            },
+            "sourceRef": "engine_audit snapshots.Neighborhood_Map"
+          }
+        ],
+        "previousCycleAvailable": true
+      }
+    },
+    "project": {},
+    "budget": {
+      "authority": {
+        "officeId": "COUNCIL-D9",
+        "district": "D9",
+        "categories": [
+          {
+            "key": "health",
+            "label": "clinics, care",
+            "band": "$5M-$100M",
+            "canDeliver": true
+          },
+          {
+            "key": "transit",
+            "label": "stations, lines",
+            "band": "$20M-$500M",
+            "canDeliver": true
+          },
+          {
+            "key": "education",
+            "label": "schools, youth learning",
+            "band": "$1M-$50M",
+            "canDeliver": true
+          },
+          {
+            "key": "economic",
+            "label": "business, local economy",
+            "band": "$2M-$50M",
+            "canDeliver": false
+          },
+          {
+            "key": "workforce",
+            "label": "jobs, training",
+            "band": "$1M-$30M",
+            "canDeliver": false
+          },
+          {
+            "key": "safety",
+            "label": "public safety, response",
+            "band": "$2M-$30M",
+            "canDeliver": false
+          },
+          {
+            "key": "sports",
+            "label": "stadiums, recreation",
+            "band": "$10M-$500M",
+            "canDeliver": false
+          },
+          {
+            "key": "environment",
+            "label": "parks, air, water",
+            "band": "$1M-$30M",
+            "canDeliver": false
+          }
+        ],
+        "resourceBalance": null,
+        "resourceBalanceAvailable": false,
+        "note": "Category bands are filing constraints. Spendable treasury balance requires typed current allocation evidence."
+      }
+    },
+    "prior": {}
+  }
+}

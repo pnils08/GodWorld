@@ -1,0 +1,26 @@
+{
+  "cycle": 114,
+  "moveCycle": 113,
+  "work": {
+    "INIT-001": [
+      "MV-113-proj-stabilization-fund-2026-10-28"
+    ],
+    "INIT-002": [
+      "MV-113-proj-oari-2026-10-28"
+    ],
+    "INIT-005": [
+      "MV-113-civic-office-council-d7-2026-10-28",
+      "MV-113-proj-health-center-2026-10-30"
+    ],
+    "INIT-003": [
+      "MV-113-proj-transit-hub-2026-10-30"
+    ],
+    "INIT-006": [
+      "MV-113-proj-baylight-2026-10-30"
+    ]
+  },
+  "candidates": [
+    "MV-113-civic-office-council-d4-2026-10-26"
+  ],
+  "foldedAt": "2026-11-01T23:32:09.533Z"
+}

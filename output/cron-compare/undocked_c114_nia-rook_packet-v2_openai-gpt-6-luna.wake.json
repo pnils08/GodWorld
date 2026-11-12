@@ -1,0 +1,61 @@
+{
+  "mode": "wake-write",
+  "desk": "undocked",
+  "cycle": "114",
+  "provider": "openrouter",
+  "model": "openai/gpt-6-luna",
+  "configuredWriterModel": "openai/gpt-6-luna",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "nia-rook",
+  "byline": {
+    "name": "Nia Rook",
+    "popid": "POP-01076",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 1,
+  "quotesLanded": 1,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "undocked_history",
+    "undocked_history",
+    "citizen_lookup"
+  ],
+  "toolCalls": 3,
+  "wordCount": 405,
+  "targetWords": "350-600",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 350",
+    "words": 405,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "01c8295dd43d693d1434ba991ac7b42bbce928e103d94e96e6c1e904b0f228d6",
+    "costUsd": 0.0014
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 4/4 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/undocked_c114_nia-rook_packet-v2_openai-gpt-6-luna.staged-0021.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "tenvx.com]\n{\n  \"popId\": \"POP-01076\",\n  \"name\": \"Nia Rook\",\n  \"recorded\": true,\n  \"text\": \"filed: Lena Okafor’s Thursday-night run ended 18 credits up, with one fight behind her and the show’s clock\"\n}"
+  },
+  "ranAt": "2026-11-07T00:21:58.504Z",
+  "dispositionReconciledAt": "2026-11-07T18:00:02.737Z"
+}

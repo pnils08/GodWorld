@@ -1,0 +1,33 @@
+{
+  "model": "anthropic/claude-sonnet-5.5",
+  "calls": [
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Faith_Organizations",
+        "match": "Foothill Baptist Tabernacle"
+      },
+      "resultChars": 284,
+      "resultHead": "Organization | FaithTradition | Neighborhood | Founded | Congregation | Leader | Character | ActiveStatus | LeaderPOPID | MembersList\nFoothill Baptist Tabernacle | Baptist | East Oakland | 1919 | 5000 | Dr. Ophelia Brenner | anchor institution, community programs | active | POP-00754"
+    },
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Faith_Ledger",
+        "match": "Bay Pure Land Buddhist Temple"
+      },
+      "resultChars": 399,
+      "resultHead": "Timestamp | Cycle | Organization | FaithTradition | EventType | EventDescription | Neighborhood | Attendance | Status\nY3C5 | 109 | Bay Pure Land Buddhist Temple | Buddhist | crisis_response | congregation opens doors for community support | Chinatown | 41 | occurred\nY3C7 | 111 | Bay Pure Land Buddhist Temple | Buddhist | community_program | community health fair hosted | Chinatown | 38 | occurred"
+    },
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Faith_Ledger",
+        "match": "Foothill Baptist Tabernacle"
+      },
+      "resultChars": 1839,
+      "resultHead": "Timestamp | Cycle | Organization | FaithTradition | EventType | EventDescription | Neighborhood | Attendance | Status\nC97 | 97 | Foothill Baptist Tabernacle | Baptist | holy_day | Thanksgiving observance brings community together | East Oakland | 2659 | occurred\nC98 | 98 | Foothill Baptist Tabernacle | Baptist | holy_day | special Thanksgiving service fills sanctuary | East Oakland | 2329 | occurred\nC99 | 99 | Foothill Baptist Tabernacle | Baptist | holy_day | traditional Thanksgiving rituals observed | East Oakland | 2255 | occurred\nY2C48 | 100 | Foothill Baptist Tabernacle | Baptist | holy_d"
+    }
+  ],
+  "ranAt": "2026-10-29T23:15:29.981Z"
+}

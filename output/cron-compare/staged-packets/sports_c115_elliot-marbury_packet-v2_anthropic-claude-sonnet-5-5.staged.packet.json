@@ -1,0 +1,468 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00166",
+    "name": "Elliot Marbury",
+    "role": "desk reporter",
+    "desk": "sports"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Eric Taveras — 7 seasons on the dossier, 2041 the latest | hitter density memo, multi-year — what the line proves, on what sample, and what would disprove it",
+    "approach": "Data-desk approach: this slice is one player's season-by-season line off the dossier, the rates worked out from it, and two peers at the same job. Third person, dry, source-forward. One hard claim the numbers carry, with its sample size stated; a thin season is variance, not identity. Say which number next season would kill the claim. No quotes, no scene, no clubhouse — the memo is the proof. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "data-desk",
+      "hood": null,
+      "facts": [
+        "Eric Taveras — 2B, Athletics; 7 seasons on the dossier",
+        "Eric Taveras 2041 ATH: 138 G, 555 AB, 164 H, 54 HR, 124 RBI, 36 BB, 81 SO, 2 SB, AVG .295, OBP .339, SLG .638",
+        "Eric Taveras 2040 TB: 146 G, 582 AB, 138 H, 31 HR, 92 RBI, 48 BB, 132 SO, 5 SB, AVG .237, OBP .300, SLG .459",
+        "Eric Taveras 2039 TOT: 152 G, 606 AB, 150 H, 30 HR, 84 RBI, 49 BB, 122 SO, 7 SB, AVG .248, OBP .307, SLG .447",
+        "Eric Taveras 2038 CLE: 109 G, 424 AB, 102 H, 26 HR, 64 RBI, 35 BB, 87 SO, 6 SB, AVG .241, OBP .301, SLG .495",
+        "Eric Taveras 2037 TOT: 158 G, 627 AB, 154 H, 26 HR, 87 RBI, 49 BB, 141 SO, 7 SB, AVG .246, OBP .303, SLG .421",
+        "Eric Taveras 2036 BAL: 151 G, 596 AB, 134 H, 19 HR, 68 RBI, 47 BB, 144 SO, 10 SB, AVG .225, OBP .286, SLG .374",
+        "Eric Taveras 2041 rates (555 AB): one HR every 10.3 AB, one SO every 6.9 AB (worked from the season line)",
+        "Eric Taveras 2040 rates (582 AB): one HR every 18.8 AB, one SO every 4.4 AB (worked from the season line)",
+        "Eric Taveras 2039 rates (606 AB): one HR every 20.2 AB, one SO every 5.0 AB (worked from the season line)",
+        "Eric Taveras 2038 rates (424 AB): one HR every 16.3 AB, one SO every 4.9 AB (worked from the season line)",
+        "Eric Taveras 2037 rates (627 AB): one HR every 24.1 AB, one SO every 4.4 AB (worked from the season line)"
+      ],
+      "priorCycle": "DOSSIER",
+      "note": "subject is on this cycle's feed",
+      "engineHooks": [],
+      "roomIsYours": "the order the columns are read in, which season is the hinge, what the peer band makes ordinary or strange",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-data-desk",
+    "hood": null,
+    "src": "output/player_truesource_mirror.json Eric Taveras @C115",
+    "plan": {
+      "focus": "Whether Eric Taveras's 2041 power and strikeout rates represent a sustainable change or a single-season outlier, measured against his own six prior seasons and the thin peer sample."
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [],
+    "sources": [],
+    "excludedLeads": [
+      {
+        "from": "Elliot Marbury",
+        "text": "The A's front office may have internal batted-ball data on Taveras that explains the 2041 power jump.",
+        "usable": false
+      },
+      {
+        "from": "Elliot Marbury",
+        "text": "Taveras's 2041 season may have coincided with a change in his approach or swing that is not captured in the box-score line.",
+        "usable": false
+      },
+      {
+        "from": "Elliot Marbury",
+        "text": "The organization's decision to feature Taveras in the off-season feed could signal they are planning to extend or build around him.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C115",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-bc84fc0b7718"
+    },
+    {
+      "t": "FACT",
+      "text": "Eric Taveras — 7 seasons on the dossier, 2041 the latest | hitter density memo, multi-year",
+      "src": "output/player_truesource_mirror.json Eric Taveras @C115",
+      "id": "F-15e501ce9831"
+    },
+    {
+      "t": "FACT",
+      "text": "Eric Taveras's 2041 line against 6 earlier seasons and 1 peer.",
+      "src": "output/player_truesource_mirror.json Eric Taveras @C115",
+      "id": "F-39ac3551319c"
+    },
+    {
+      "t": "FACT",
+      "text": "Eric Taveras — 2B, Athletics; 7 seasons on the dossier",
+      "src": "output/player_truesource_mirror.json Eric Taveras",
+      "id": "F-d6074e190f63"
+    },
+    {
+      "t": "FACT",
+      "text": "Eric Taveras 2041 ATH: 138 G, 555 AB, 164 H, 54 HR, 124 RBI, 36 BB, 81 SO, 2 SB, AVG .295, OBP .339, SLG .638",
+      "src": "output/player_truesource_mirror.json Eric Taveras",
+      "id": "F-83f281412bca"
+    },
+    {
+      "t": "FACT",
+      "text": "Eric Taveras 2040 TB: 146 G, 582 AB, 138 H, 31 HR, 92 RBI, 48 BB, 132 SO, 5 SB, AVG .237, OBP .300, SLG .459",
+      "src": "output/player_truesource_mirror.json Eric Taveras",
+      "id": "F-56c44cc2e5b9"
+    },
+    {
+      "t": "FACT",
+      "text": "Eric Taveras 2039 TOT: 152 G, 606 AB, 150 H, 30 HR, 84 RBI, 49 BB, 122 SO, 7 SB, AVG .248, OBP .307, SLG .447",
+      "src": "output/player_truesource_mirror.json Eric Taveras",
+      "id": "F-611d2d48793f"
+    },
+    {
+      "t": "FACT",
+      "text": "Eric Taveras 2038 CLE: 109 G, 424 AB, 102 H, 26 HR, 64 RBI, 35 BB, 87 SO, 6 SB, AVG .241, OBP .301, SLG .495",
+      "src": "output/player_truesource_mirror.json Eric Taveras",
+      "id": "F-4c0b751ebeae"
+    },
+    {
+      "t": "FACT",
+      "text": "Eric Taveras 2037 TOT: 158 G, 627 AB, 154 H, 26 HR, 87 RBI, 49 BB, 141 SO, 7 SB, AVG .246, OBP .303, SLG .421",
+      "src": "output/player_truesource_mirror.json Eric Taveras",
+      "id": "F-b53cb870e949"
+    },
+    {
+      "t": "FACT",
+      "text": "Eric Taveras 2036 BAL: 151 G, 596 AB, 134 H, 19 HR, 68 RBI, 47 BB, 144 SO, 10 SB, AVG .225, OBP .286, SLG .374",
+      "src": "output/player_truesource_mirror.json Eric Taveras",
+      "id": "F-8d4cc9b898df"
+    },
+    {
+      "t": "FACT",
+      "text": "Eric Taveras 2041 rates (555 AB): one HR every 10.3 AB, one SO every 6.9 AB (worked from the season line)",
+      "src": "output/player_truesource_mirror.json Eric Taveras",
+      "id": "F-43e0c8597f23"
+    },
+    {
+      "t": "FACT",
+      "text": "Eric Taveras 2040 rates (582 AB): one HR every 18.8 AB, one SO every 4.4 AB (worked from the season line)",
+      "src": "output/player_truesource_mirror.json Eric Taveras",
+      "id": "F-e12f97b9e3fb"
+    },
+    {
+      "t": "FACT",
+      "text": "Eric Taveras 2039 rates (606 AB): one HR every 20.2 AB, one SO every 5.0 AB (worked from the season line)",
+      "src": "output/player_truesource_mirror.json Eric Taveras",
+      "id": "F-99ec54879aa9"
+    },
+    {
+      "t": "FACT",
+      "text": "Eric Taveras 2038 rates (424 AB): one HR every 16.3 AB, one SO every 4.9 AB (worked from the season line)",
+      "src": "output/player_truesource_mirror.json Eric Taveras",
+      "id": "F-ac303a25e905"
+    },
+    {
+      "t": "FACT",
+      "text": "Eric Taveras 2037 rates (627 AB): one HR every 24.1 AB, one SO every 4.4 AB (worked from the season line)",
+      "src": "output/player_truesource_mirror.json Eric Taveras",
+      "id": "F-bf816f6f85d3"
+    },
+    {
+      "t": "FACT",
+      "text": "Eric Taveras 2036 rates (596 AB): one HR every 31.4 AB, one SO every 4.1 AB (worked from the season line)",
+      "src": "output/player_truesource_mirror.json Eric Taveras",
+      "id": "F-91aaf83356c6"
+    },
+    {
+      "t": "FACT",
+      "text": "Peer — Sidney Tumolo (2B, Athletics) 2041 ATH: 23 G, 88 AB, 28 H, 3 HR, 12 RBI, 2 BB, 6 SO, 2 SB, AVG .318, OBP .344, SLG .511",
+      "src": "output/player_truesource_mirror.json Sidney Tumolo",
+      "id": "F-8eafeadbdcd8"
+    },
+    {
+      "t": "FACT",
+      "text": "Peer — Sidney Tumolo 2041 rates (88 AB): one HR every 29.3 AB, one SO every 14.7 AB (worked from the season line)",
+      "src": "output/player_truesource_mirror.json Sidney Tumolo",
+      "id": "F-ad537ca28ed4"
+    },
+    {
+      "t": "FACT",
+      "text": "This cycle (feed, off-season): Eric Taveras/3 EP/20 PTS/1170 CR/5th",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl @C115",
+      "id": "F-91af9f24c489"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C11, Spring, holiday=none",
+      "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+      "id": "F-82d77e9a4a71"
+    },
+    {
+      "t": "FACT",
+      "text": "Eric Taveras 2035 BAL: 144 G, 564 AB, 152 H, 27 HR, 90 RBI, 53 BB, 131 SO, 10 SB, AVG .270, OBP .337, SLG .465",
+      "src": "tool:dossier_read:Eric Taveras:2035",
+      "id": "F-9f21cf722faa"
+    },
+    {
+      "t": "FACT",
+      "text": "Eric Taveras 2035 rates (564 AB): one HR every 20.9 AB, one SO every 4.3 AB (worked from the season line)",
+      "src": "tool:dossier_read:Eric Taveras:2035",
+      "id": "F-112ae094ea5a"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. No named ledger citizen spoke for this piece (manifest.approvedQuotes is empty): put no words in a named citizen's mouth. Unnamed voices are yours. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "marbury-data-desk-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Put one audit-grade claim in the paper: a single player's Packet-backed season lines, the rates the Packet has already worked from them, and the peer band, with the sample stated. The memo is the proof. One falsifiable claim the numbers carry is success; a quote, a scene, fan heat, elegy, or a number the Packet does not hold is not.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "dry third-person data-desk memo, source-forward",
+      "targetWords": "evidence-bounded; 350-600",
+      "opening": "the one Packet-backed season line or rate that carries the claim"
+    },
+    "authorizedTexture": [
+      "plain-language reading of supplied season lines with each statistic kept with its named player and season",
+      "a trend or peer-band interpretation explicitly limited by the supplied games, innings, or at-bats",
+      "a blank or thin sample named as blank or thin rather than filled in"
+    ],
+    "textureConditions": [
+      "every named player, team, position, season, and source must come from the Packet",
+      "every statistic and rate must be a Packet figure as supplied; the memo performs no arithmetic the Packet has not already worked",
+      "a season year belongs to the player's dossier as supplied and is never moved, merged, or projected forward",
+      "the piece interviews nobody and attributes no statement, mood, or intention to any player, coach, or front office"
+    ],
+    "canonBlockers": [
+      "a statistic or rate attributed to the wrong player or the wrong season, or two players' lines merged into one subject",
+      "a rate, split, projection, or advanced metric the Packet does not supply",
+      "an invented award, contract, salary, injury, roster move, result, quote, interview, or front-office act",
+      "a named player, team, venue, institution, league, organization, or real-world entity not found in the supplied record",
+      "a one-season or thin-sample line presented as settled identity"
+    ]
+  },
+  "manifest": {
+    "id": "AM-4769ee4e688d",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-bc84fc0b7718",
+        "t": "FACT",
+        "text": "Current cycle: C115",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-15e501ce9831",
+        "t": "FACT",
+        "text": "Eric Taveras — 7 seasons on the dossier, 2041 the latest | hitter density memo, multi-year",
+        "src": "output/player_truesource_mirror.json Eric Taveras @C115"
+      },
+      {
+        "id": "F-39ac3551319c",
+        "t": "FACT",
+        "text": "Eric Taveras's 2041 line against 6 earlier seasons and 1 peer.",
+        "src": "output/player_truesource_mirror.json Eric Taveras @C115"
+      },
+      {
+        "id": "F-d6074e190f63",
+        "t": "FACT",
+        "text": "Eric Taveras — 2B, Athletics; 7 seasons on the dossier",
+        "src": "output/player_truesource_mirror.json Eric Taveras"
+      },
+      {
+        "id": "F-83f281412bca",
+        "t": "FACT",
+        "text": "Eric Taveras 2041 ATH: 138 G, 555 AB, 164 H, 54 HR, 124 RBI, 36 BB, 81 SO, 2 SB, AVG .295, OBP .339, SLG .638",
+        "src": "output/player_truesource_mirror.json Eric Taveras"
+      },
+      {
+        "id": "F-56c44cc2e5b9",
+        "t": "FACT",
+        "text": "Eric Taveras 2040 TB: 146 G, 582 AB, 138 H, 31 HR, 92 RBI, 48 BB, 132 SO, 5 SB, AVG .237, OBP .300, SLG .459",
+        "src": "output/player_truesource_mirror.json Eric Taveras"
+      },
+      {
+        "id": "F-611d2d48793f",
+        "t": "FACT",
+        "text": "Eric Taveras 2039 TOT: 152 G, 606 AB, 150 H, 30 HR, 84 RBI, 49 BB, 122 SO, 7 SB, AVG .248, OBP .307, SLG .447",
+        "src": "output/player_truesource_mirror.json Eric Taveras"
+      },
+      {
+        "id": "F-4c0b751ebeae",
+        "t": "FACT",
+        "text": "Eric Taveras 2038 CLE: 109 G, 424 AB, 102 H, 26 HR, 64 RBI, 35 BB, 87 SO, 6 SB, AVG .241, OBP .301, SLG .495",
+        "src": "output/player_truesource_mirror.json Eric Taveras"
+      },
+      {
+        "id": "F-b53cb870e949",
+        "t": "FACT",
+        "text": "Eric Taveras 2037 TOT: 158 G, 627 AB, 154 H, 26 HR, 87 RBI, 49 BB, 141 SO, 7 SB, AVG .246, OBP .303, SLG .421",
+        "src": "output/player_truesource_mirror.json Eric Taveras"
+      },
+      {
+        "id": "F-8d4cc9b898df",
+        "t": "FACT",
+        "text": "Eric Taveras 2036 BAL: 151 G, 596 AB, 134 H, 19 HR, 68 RBI, 47 BB, 144 SO, 10 SB, AVG .225, OBP .286, SLG .374",
+        "src": "output/player_truesource_mirror.json Eric Taveras"
+      },
+      {
+        "id": "F-43e0c8597f23",
+        "t": "FACT",
+        "text": "Eric Taveras 2041 rates (555 AB): one HR every 10.3 AB, one SO every 6.9 AB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Eric Taveras"
+      },
+      {
+        "id": "F-e12f97b9e3fb",
+        "t": "FACT",
+        "text": "Eric Taveras 2040 rates (582 AB): one HR every 18.8 AB, one SO every 4.4 AB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Eric Taveras"
+      },
+      {
+        "id": "F-99ec54879aa9",
+        "t": "FACT",
+        "text": "Eric Taveras 2039 rates (606 AB): one HR every 20.2 AB, one SO every 5.0 AB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Eric Taveras"
+      },
+      {
+        "id": "F-ac303a25e905",
+        "t": "FACT",
+        "text": "Eric Taveras 2038 rates (424 AB): one HR every 16.3 AB, one SO every 4.9 AB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Eric Taveras"
+      },
+      {
+        "id": "F-bf816f6f85d3",
+        "t": "FACT",
+        "text": "Eric Taveras 2037 rates (627 AB): one HR every 24.1 AB, one SO every 4.4 AB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Eric Taveras"
+      },
+      {
+        "id": "F-91aaf83356c6",
+        "t": "FACT",
+        "text": "Eric Taveras 2036 rates (596 AB): one HR every 31.4 AB, one SO every 4.1 AB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Eric Taveras"
+      },
+      {
+        "id": "F-8eafeadbdcd8",
+        "t": "FACT",
+        "text": "Peer — Sidney Tumolo (2B, Athletics) 2041 ATH: 23 G, 88 AB, 28 H, 3 HR, 12 RBI, 2 BB, 6 SO, 2 SB, AVG .318, OBP .344, SLG .511",
+        "src": "output/player_truesource_mirror.json Sidney Tumolo"
+      },
+      {
+        "id": "F-ad537ca28ed4",
+        "t": "FACT",
+        "text": "Peer — Sidney Tumolo 2041 rates (88 AB): one HR every 29.3 AB, one SO every 14.7 AB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Sidney Tumolo"
+      },
+      {
+        "id": "F-91af9f24c489",
+        "t": "FACT",
+        "text": "This cycle (feed, off-season): Eric Taveras/3 EP/20 PTS/1170 CR/5th",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C115"
+      },
+      {
+        "id": "F-82d77e9a4a71",
+        "t": "FACT",
+        "text": "Calendar: Y3C11, Spring, holiday=none",
+        "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)"
+      },
+      {
+        "id": "F-9f21cf722faa",
+        "t": "FACT",
+        "text": "Eric Taveras 2035 BAL: 144 G, 564 AB, 152 H, 27 HR, 90 RBI, 53 BB, 131 SO, 10 SB, AVG .270, OBP .337, SLG .465",
+        "src": "tool:dossier_read:Eric Taveras:2035"
+      },
+      {
+        "id": "F-112ae094ea5a",
+        "t": "FACT",
+        "text": "Eric Taveras 2035 rates (564 AB): one HR every 20.9 AB, one SO every 4.3 AB (worked from the season line)",
+        "src": "tool:dossier_read:Eric Taveras:2035"
+      }
+    ],
+    "approvedQuotes": [],
+    "approvedSubjects": [],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Elliot Marbury",
+        "text": "The A's front office may have internal batted-ball data on Taveras that explains the 2041 power jump.",
+        "publishable": false
+      },
+      {
+        "from": "Elliot Marbury",
+        "text": "Taveras's 2041 season may have coincided with a change in his approach or swing that is not captured in the box-score line.",
+        "publishable": false
+      },
+      {
+        "from": "Elliot Marbury",
+        "text": "The organization's decision to feature Taveras in the off-season feed could signal they are planning to extend or build around him.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "plain-language reading of supplied season lines with each statistic kept with its named player and season",
+      "a trend or peer-band interpretation explicitly limited by the supplied games, innings, or at-bats",
+      "a blank or thin sample named as blank or thin rather than filled in"
+    ],
+    "textureConditions": [
+      "every named player, team, position, season, and source must come from the Packet",
+      "every statistic and rate must be a Packet figure as supplied; the memo performs no arithmetic the Packet has not already worked",
+      "a season year belongs to the player's dossier as supplied and is never moved, merged, or projected forward",
+      "the piece interviews nobody and attributes no statement, mood, or intention to any player, coach, or front office"
+    ],
+    "forbiddenClaimClasses": [],
+    "toolFacts": [
+      "F-9f21cf722faa",
+      "F-112ae094ea5a"
+    ]
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "draft": "output/cron-compare/culture_c112_tamsin-pruitt_packet-v2_x-ai-grok-4-3.md",
+  "cycle": "112",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "311f92090068d64440893877f905d83fa76a43865ba75076b858bca92cfb4e59",
+  "pass": true,
+  "advisory": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Single factual claim regarding Jack London world events accurately reflects Cycle 112 ground truth with no sourcing violations.",
+  "review": {
+    "profileId": "tamsin-lives-v1",
+    "canonIntegrity": "pass",
+    "texture": "none"
+  },
+  "reviewProfile": {
+    "id": "tamsin-lives-v1",
+    "packageVersion": "TAMSIN-LIVES-1",
+    "manifestId": "AM-c65bc2ef4f81",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [],
+    "unverified": [
+      "World Events"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0092,
+  "durationMs": 4666,
+  "parseError": false,
+  "ranAt": "2026-10-23T23:20:09.411Z",
+  "contractScore": {
+    "opened": false,
+    "closed": false,
+    "purposeMet": false,
+    "inTarget": false,
+    "inTargetBy": "code floor 450",
+    "words": 45,
+    "short": "The piece falls severely short of the target word count and fails to report any individual person events.",
+    "score": 0,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "311f92090068d64440893877f905d83fa76a43865ba75076b858bca92cfb4e59",
+    "costUsd": 0.0007
+  }
+}

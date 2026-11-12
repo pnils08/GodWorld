@@ -1,0 +1,46 @@
+{
+  "stage": "report",
+  "desk": "wire",
+  "cycle": "111",
+  "persona": "celeste-tran",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Celeste Tran",
+    "popid": "POP-00164"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-trends",
+      "angle": "Marin Tao leads the conversation (25 mentions); West Oakland moves the most — what Oakland is doing together this week",
+      "label": "Marin Tao leads the conversation (25 mentions); West Oakland moves the most",
+      "hookLine": "Marin Tao — 25 mentions, viral. The trend is the story; the mood is yours.",
+      "hood": "Chinatown",
+      "citizens": [
+        "Marin Tao (POP-00537)",
+        "Dax Monroe (POP-00769)",
+        "Rico Valez (POP-00632)",
+        "Vinnie Keane (POP-00001)",
+        "Melton Neilon (POP-00170)",
+        "Eunice Marston (POP-00753)"
+      ],
+      "popids": [
+        "POP-00537",
+        "POP-00769",
+        "POP-00632",
+        "POP-00001",
+        "POP-00170",
+        "POP-00753"
+      ],
+      "ref": "output/beats/Cultural_Ledger.jsonl @C111",
+      "cycle": 111
+    }
+  },
+  "angle": "output/cron-compare/wire_c111_celeste-tran_packet-v2_angle.json",
+  "quotesRequested": 0,
+  "quotesLanded": 0,
+  "quotes": [],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [],
+  "ranAt": "2026-10-16T18:17:28.326Z"
+}

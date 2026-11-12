@@ -1,0 +1,101 @@
+# GodWorld Daily News v1.9 — Cycle 113
+
+Artifact class: NLM_DAILY_BRIEF
+Canon status: NOT CANON. This is a source-grounded newsroom/listening artifact.
+Notebook source IDs: f5814004-7ea5-4181-a342-220d47ca6cc1
+
+# **The Bay Tribune Daily News — Cycle 113**
+
+---
+
+### **The Edition’s Stories by Reporter**
+
+#### **Three Clear Days: Weather and the Rhythm of Recovery**
+*By Noah Tan, Civic Desk*
+
+Three consecutive clear, 58°F days brought a break from winter fog across Oakland, shifting how residents moved through their daily routines while reminding them of what weather cannot cure:
+
+*   In Jack London, **Elle Lilo** returned to the bridge after finally shaking off a stubborn winter cough, stepping onto the metal grating to watch the tugs and cranes under an open sky: *"The work doesn't change, not really — the tugs still pull, the horns still sound — but the day feels lighter... It's like the harbor is breathing again, and so am I."*
+*   Around Lake Merritt, **Cee Lee** resumed walking the perimeter path at a steadier pace, though she cautioned that the cold was merely paused rather than lifted: *"Seasonal stuff like this, it lingers in the background... You learn to live with the ebb and flow of it."*
+*   In Rockridge, **Johhny Necklar** made the unbundled walk to the diner, pausing twice along the way: *"Recovery isn't on a weather schedule... My body tells me when it's ready, not the sky."*
+*   On Piedmont Avenue, **Rafael Brannie** kept moving between jobs, noting that sunny light does not automatically lift a winter mood: *"The mood outlasts the weather, I think. The sun gets you halfway there, the rest is on you."*
+*   In Uptown, **Kwame Fitzgerald** and **Omar Amici** kept to familiar rooms and close circles, navigating the difference between blue skies and personal routine.
+
+---
+
+#### **Three Programs, One Rent Bill: Fruitvale Counts What Holds**
+*By Maria Keen, Culture Desk*
+
+In Fruitvale, community networks that have operated on the block since Cycle 101 face the hard economic reality of neighborhood housing costs:
+
+*   **Lucia Polito**, founder of the **Postpartum Oakland Network**, expressed deep gratitude for programs that support new parents during vulnerable hours: *"It's amazing to see the difference these programs make in Fruitvale. As someone who's dedicated to wellness and has been a part of this community for a while, I feel grateful to see the positive changes happening around us."*
+*   **Rick Walker**, an elementary school teacher and former line cook, offered the view from the classroom and the street. While noticing tutoring posters at St. Esperanza Parish and lunch crowds at the mercado, Walker stressed that bills keep climbing: *"Fruitvale's still got its issues... the mercado's still buzzing, people are still grabbing lunch between train transfers. It's not like nothing's happening. But, yeah, the rent went up again, so it's still a struggle. I don't know if it's enough, though."*
+*   **Gregory Mims** voiced skepticism about how deeply community assistance penetrates the neighborhood, noting that hearing about one youth landing a plumbing apprenticeship does not make it a community norm: *"I've seen too many programs come and go. You hear about success stories, but they're not always the ones that stick."*
+*   **Ramon Vega** acknowledged that past political disputes over the Fruitvale transit hub left scars, maintaining that he continues to reflect on those decisions while standing behind local community programs.
+
+---
+
+#### **Chinatown’s 140 Sick Are Mostly at Home, and Home Is Doing the Work**
+*By Dr. Lila Mezran, Civic & Health Desk*
+
+Chinatown holds 140 sick residents—the highest count of any neighborhood in the city—yet the neighborhood hospital census lists only six residents occupying hospital beds. On the pavement, the care of the remaining 134 falls almost entirely onto families and neighborhood coordinators:
+
+*   **Marisio Curazo**, an elder care coordinator, organizes her daily notebook by urgency—placing home health aides, prescription deliveries, and check-in calls at the top: *"When I see a number like 140 sick in Chinatown, I don't see a number — I see the families I work with every day. Most of them aren't going to the hospital. They're staying home because that's what we do. The daughter takes the bus from Fruitvale to cook. The nephew calls in late to pick up prescriptions... The hospital has six of our folks right now... The rest of us are doing what we've always done: taking care of each other, block by block, door by door."*
+*   **Omarion Farah**, driving his cab through Chinatown, hears the reality of household illness from passengers: *"People talk in the cab, but not about hospitals much. They're more worried about who's going to cover a shift or pick up the kids. I see folks staying home, taking care of each other."*
+*   **Yu Zen**, a commercial insurance broker living in Rockridge who spent weeks in a hospital bed following a workplace accident, reflected on the disparity between institutional and home care: *"The six of us in hospital care, we've got nurses and monitors and someone bringing us meals. The other 134 — they've got a cousin or an auntie or a neighbor who's doing all that and still trying to keep the shop open. That's who's caring for them. And that's the part that keeps me up at night, because I know that kind of care doesn't show up on any ledger."*
+
+---
+
+#### **Morton’s 285 At-Bats Are the Evidence the Outfield Math Starts From**
+*By Anthony Raines & Tanya Cruz, Sports Desk*
+
+The Athletics enter the offseason confronting a five-man competition for three outfield spots, with center fielder **Danny Horn** locked in and **Darrin Davis** under contract at designated hitter. The baseball desk weighed the numbers and the clubhouse mood:
+
+*   **Desmond Morton:** Holds the most reliable full-season baseline in left field, batting .291 across 285 at-bats with 83 hits, 7 home runs, 44 RBIs, a .348 on-base percentage, and a team-leading 28 stolen bases over 80 games.
+*   **Frank Reyna:** Brought explosive power across 46 games, hitting .317 with 14 home runs (one every 11.7 at-bats) and a .683 slugging percentage over 164 at-bats, though on a much smaller sample size with just 6 walks.
+*   **JR Rosado:** Sits between them as a contact hitter (.298 AVG, 7 HR, 27 RBI in 184 ABs), creating direct positional overlap with Morton in left field.
+*   **Clubhouse Texture:** From the lockers, **Vladimir Gonzalez** noted that depth is a healthy sign for a winning ballclub, while Morton and Reyna stretched side-by-side near a whiteboard where names were written but none circled. General Manager **Mike Paulson** faces the fundamental choice between proven, everyday durability and small-sample slugging power.
+
+---
+
+#### **The Page of Lives: A Place of Their Own**
+*By Tamsin Pruitt, Culture Desk*
+
+Across Oakland, citizens logged significant housing transitions, betting slip outcomes, and personal milestones:
+
+*   **New Keys & Leases:** Dishwasher **Brady Lopez** cleared his final debts and rented a place of his own on Piedmont Avenue, wondering if the quiet rhythm of the days represents lasting peace. Craft brewery owner **Kwame Fitzgerald** rented a place in Uptown, feeling disconnected from the street while drinking cold brew in the company kitchen. **Orion Kerkering** (retired former A's player) settled into a Lake Merritt rental, rising at 5 a.m. for quiet time and sorting clothing-drive donations. Domestic violence shelter director **Isla Sike**, widowed, rented a place in West Oakland to begin a new chapter. Athletics outfielder **Desmond Morton** relocated from Jack London to Chinatown for a better personal fit.
+*   **The Betting Window:** On the *UNDOCKED* betting book, Downtown housing inspector **Solis Walmart** won (staked 336, paid 615), feeling lucky to call Downtown home. In Fruitvale, auto body shop owner **Reggie Soto** lost his 247 stake and took a reflective walk down a new street home. Janitor **Christopher Johnson** won in Lake Merritt (staked 411, paid 752), while Uptown construction worker **Omar Amici** lost his 329 stake, noticing how for-rent signs continue to outnumber welcome mats on his block.
+*   **Quiet Moments:** In Rockridge, Senior Pastor **Naomi Sterling** caught herself narrating her day aloud, while in Chinatown, **Matra Woven** painted over recreation center graffiti alongside neighbors before catching the neon reflection of the Tribune Tower in a street puddle.
+
+---
+
+### **Civis Systems Journal: Reading of the Week**
+
+The *Civis Systems Journal* filed no dispatched analysis or field reading for Cycle 113. On the ground, neighborhood residents engaged with system tracking independently: in Lake Merritt and Fruitvale, **Christopher Johnson** and **Dorothy Rios** kept an eye on neighborhood progress by checking the *Civis Systems Field* livestream from their porches to see if new grass had been laid down yet.
+
+---
+
+### **The UNDOCKED Digest**
+*By Nia Rook, Broadcast Desk*
+
+Three pilots took the flight chair this cycle, but the leaderboard's summit remained undisturbed:
+
+*   **Eric Taveras Holds the Top:** Athletics second baseman **Eric Taveras** retained the **#1 ranking** on the leaderboard for his third consecutive cycle, holding 20 achievement points, 1,170 credits, and an active three-cycle lead streak.
+*   **Cristina Booker’s Split Week:** Immigration attorney **Cristina Booker** opened Monday with an explosive run through Alpha Centauri, completing the Copper Requisition and Welcome to Sol Central contracts while unlocking two five-point achievements (*First Steps* and *Maiden Jump*). However, her ship stalled on Thursday, leaving her without new points and her overall standing unranked.
+*   **Father Miguel:** Parish priest **Father Miguel** flew Tuesday through Lacaille 9352, Sirius, Sol, and Alpha Centauri to earn *Maiden Jump* (5 points), followed by a Friday mining run yielding aluminum and platinum ore. Sitting **22nd out of 24** on the board, he observed: *"I guess you could say I'm more consistent, but she's more explosive when she gets it right."*
+*   **Daphne Stafford:** Home health aide **Daphne Stafford** earned *First Steps* on Wednesday for 5 points, though her ship failed to gain momentum that evening, leaving her **23rd out of 24**.
+
+---
+
+### **What the Newsroom Should Watch Next**
+
+As Cycle 113 concludes, *The Bay Tribune* desks are tracking the following developing storylines:
+
+1.  **Chinatown Discharge & In-Home Support:** Following up with elder care coordinator Marisio Curazo to track whether the three hospitalized Chinatown residents receive formal discharge plans, and how homebound families manage prescription and grocery runs as illness lingers.
+2.  **The Outfield Resolution:** Monitoring Athletics General Manager Mike Paulson as front-office meetings begin to resolve whether Desmond Morton’s 285 at-bat sample or Frank Reyna’s power hitting claims starting left field.
+3.  **Fruitvale Rent Pressures vs. Community Aid:** Investigating whether neighborhood mutual-aid and parenting networks can provide tangible relief to families facing rent increases along the International Boulevard and transit corridors.
+4.  **UNDOCKED Leaderboard Consistency:** Watching whether Cristina Booker can translate her ten-point burst into steady flight performance, or if Eric Taveras extends his reign at the summit for a fourth straight cycle.
+
+---
+
+🎙️ **Would you like to draft a targeted reporter interview guide for the Chinatown elder-care network, or set up a beat tracking sheet comparing these citizen reports across Oakland's neighborhoods?**

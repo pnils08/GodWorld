@@ -1,0 +1,102 @@
+{
+  "draft": "output/cron-compare/business_c115_business-desk_packet-v2_anthropic-claude-opus-5-5.md",
+  "cycle": "115",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "88f36d363b480442d25c35bd42f7f5c45b21df96a59f659f637dadaf5446dff1",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Clean verification: Marine Systems staff reduction and Baylight business/citizen details accurately match ledger and ground truth.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "jordan-economic-labor-v1",
+    "packageVersion": "JORDAN-LEP2-2",
+    "manifestId": "AM-5fbc53e21e10",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "2.9%",
+          "40%",
+          "180",
+          "000",
+          "360",
+          "185",
+          "66",
+          "868",
+          "2.3%",
+          "70",
+          "7th",
+          "2017"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Brianna Lee",
+      "Broderick Mitchell",
+      "Gregory Mims",
+      "Iggy Davis",
+      "Jordan Velez",
+      "Keisha Ramos",
+      "Kelvon Ochoa",
+      "Linda Chow",
+      "Manfred Owens",
+      "Mina Linas",
+      "Philly Rodriguez",
+      "Ron Arenson",
+      "Talmon Lint",
+      "Tariq Jello"
+    ],
+    "unverified": [
+      "Bay Tribune Business Desk",
+      "Baylight Construction Authority",
+      "Baylight Redevelopment Authority",
+      "Hillcrest Kitchen",
+      "Ivy Cleaners",
+      "Ivy Hill Cafe",
+      "Ivy Hill Family Dental",
+      "Marine Systems"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 1,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0124,
+  "durationMs": 8619,
+  "parseError": false,
+  "ranAt": "2026-11-10T00:17:02.097Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 500",
+    "words": 874,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "88f36d363b480442d25c35bd42f7f5c45b21df96a59f659f637dadaf5446dff1",
+    "costUsd": 0.001
+  }
+}

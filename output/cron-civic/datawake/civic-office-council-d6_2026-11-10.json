@@ -1,0 +1,53 @@
+{
+  "office": "council_d6",
+  "agentDir": "civic-office-council-d6",
+  "holder": "Elliott Crane",
+  "popid": "POP-00044",
+  "title": "City Council District 6",
+  "date": "2026-11-10",
+  "cycle": 115,
+  "model": "google/gemini-3.8-flash",
+  "statement": "District 6 is holding steady on Piedmont Avenue with healthy commercial vitality and reliable municipal baselines, warranting no new legislative moves or spending requests this cycle. My priority remains disciplined stewardship and careful fiscal oversight, ensuring basic city services perform effectively without adding unneeded programs to the docket.",
+  "moves": [],
+  "movesRejected": [],
+  "numberMoved": "0",
+  "ranAt": "2026-11-10T11:45:39.821Z",
+  "usage": {
+    "prompt_tokens": 4443,
+    "completion_tokens": 888,
+    "total_tokens": 5331,
+    "cost": 0.00666225,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.00666225,
+      "upstream_inference_prompt_cost": 0.00333225,
+      "upstream_inference_completions_cost": 0.00333
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 808,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "fellBackFrom": null,
+  "evidenceGenerationHash": "8bfd87940a666380c5a9b73d2151cff4f6286856fa3673a770c7259a48d6c71b",
+  "evidenceReads": [],
+  "provider": "Google",
+  "finishReason": "stop",
+  "elapsedMs": 16630,
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00044",
+    "id": "ikAExSdRYdULnxSMBLHE5a",
+    "customId": "cp-POP-00044-c115-CIVIC-datawake-2026-11-10"
+  }
+}

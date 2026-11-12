@@ -1,0 +1,83 @@
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ override existing { override: true }
+Wake 3 WRITE — civic c115 (lila-mezran)
+===================================
+[run] 2026-11-11T05:14:26.149Z byline: Dr. Lila Mezran (POP-00154, persona)
+[run] 2026-11-11T05:14:26.283Z writing on typed Packet (27985 B injected state + stance anchor)...
+[run] 2026-11-11T05:14:26.314Z writer tools ON (package): max 6 calls
+[run] 2026-11-11T05:14:26.315Z reward loop ON (package): rubric shown, contract scored, grade carried
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ enable debugging { debug: true }
+Headless Desk Writer — civic desk
+===================================
+model=anthropic/claude-sonnet-5.5 maxTurns=15
+[INFO] 2026-11-11T05:14:27.127Z lane state-file injected: output/test-shell/20261110-231422-lila-mezran-live/civic_c115_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5.state.json (27745 chars) — full-summary blob bypassed
+[INFO] 2026-11-11T05:14:27.276Z packet-only compose via OpenRouter (anthropic/claude-sonnet-5.5, 0 live tools)...
+[INFO] 2026-11-11T05:16:46.328Z tool trace: 2 call(s) → civic_c115_packet-v2_lila-mezran.tooltrace.json
+[INFO] 2026-11-11T05:16:46.398Z tool facts → manifest: none used (2 call(s))
+[INFO] 2026-11-11T05:16:46.438Z LEP/2 lexical observations deferred to Rhea (AM-f29b4866c879): UNAPPROVED_NUMBER=6.1,129
+
+--- run summary ---
+{
+  "desk": "civic",
+  "cycle": "115",
+  "model": "anthropic/claude-sonnet-5.5",
+  "turns": 3,
+  "maxTurns": 15,
+  "usageInputTokens": 36528,
+  "usageOutputTokens": 2715,
+  "savedFiles": [
+    "output/test-shell/20261110-231422-lila-mezran-live/civic_c115_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5.md"
+  ],
+  "compareAgainst": "output/desk-output/civic_c115.md",
+  "durationMs": 139339,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-11-11T05:16:46.453Z"
+}
+
+tokens: 36528 in / 2715 out · 3 turn(s) · 139339ms
+compare: diff output/desk-output/civic_c115.md  ↔  output/test-shell/20261110-231422-lila-mezran-live/civic_c115_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5.md
+[run] 2026-11-11T05:16:46.625Z gate SKIPPED (--no-gate sample) — output is ungated, NOT canon
+[run] 2026-11-11T05:16:46.683Z gaps logged: 3 line(s) → production log
+
+=== write disposition: UNGATED-SAMPLE ===
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "115",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "sonnet",
+  "persona": "lila-mezran",
+  "byline": {
+    "name": "Dr. Lila Mezran",
+    "popid": "POP-00154",
+    "beatDomain": "HEALTH"
+  },
+  "laneEntries": 93,
+  "quotesLanded": 2,
+  "disposition": "ungated-sample",
+  "rheaPass": null,
+  "rheaFlagCount": null,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "sheet_read",
+    "canon_search"
+  ],
+  "toolCalls": 2,
+  "wordCount": 894,
+  "targetWords": "evidence-bounded",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": null,
+  "gradeRecord": null,
+  "article": "output/test-shell/20261110-231422-lila-mezran-live/samples/civic_c115_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5.sample.md",
+  "selfRecord": null,
+  "ranAt": "2026-11-11T05:16:46.632Z"
+}

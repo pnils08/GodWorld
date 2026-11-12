@@ -1,0 +1,56 @@
+{
+  "office": "council_d2",
+  "cycle": 115,
+  "speaker": "Leonard Tran",
+  "cascadeSummary": "I support a recorded YES vote on Downtown Economic Revitalization, with formal Chinatown and Uptown appropriation tracks and public timeline and transit-access information. I will vote YES on Grand Lake with its milestone and audit conditions intact. For Baylight, I support the scheduled evidence review but will not call the construction milestone passed before its findings are published.",
+  "statements": [
+    {
+      "statementId": "STMT-115-council_d2-001",
+      "type": "vote_statement",
+      "topic": "Downtown Economic Revitalization",
+      "initiative": "Downtown Economic Revitalization",
+      "decision": "Vote YES on INIT-008, with formalized appropriation tracks for Chinatown and Uptown and public timeline and transit-access planning.",
+      "quote": "I support the investment, but the public should be able to see where the money is assigned and how people will reach the corridors it serves.",
+      "fullStatement": "I support a binding vote on Downtown Economic Revitalization and will vote YES. That support comes with a clear expectation: formalize and publish the appropriation tracks for Chinatown and Uptown, along with the timeline and transit-access planning. Chinatown's mood has soured even as street trade remains busy and crime is low; that deserves a concrete, transparent response, not an inflated emergency claim. The packet does not provide D2 neighborhood mapping, so I will not present either Chinatown or Uptown as my district turf. I am asking for the public record to make the proposed allocations and implementation schedule inspectable.",
+      "disposition": "YES",
+      "actionAsked": "Record the full-council vote and publish the Chinatown and Uptown appropriation tracks, timeline, and transit-access planning.",
+      "tone": "evidence-driven",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-115-council_d2-002",
+      "type": "vote_statement",
+      "topic": "Commercial Stabilization for Grand Lake",
+      "initiative": "Commercial Stabilization for Grand Lake",
+      "decision": "Vote YES with all Chen-Vega milestone reporting and audit conditions intact.",
+      "quote": "A low-severity improvement is encouraging; it is not a reason to drop the reporting that lets the public judge the work.",
+      "fullStatement": "I will vote YES on Commercial Stabilization for Grand Lake, with every milestone and audit condition intact. The current review flags improvement at low severity, which is a positive sign, but it does not replace the need to report progress and account for the use of the $2.5 million. A recorded decision gives the public a clear commitment to assess rather than an open-ended promise. I want the required reporting to remain part of the initiative as it moves forward.",
+      "disposition": "YES",
+      "actionAsked": "Record the full-council decision and retain all milestone reporting and audit conditions.",
+      "tone": "quiet-substantive",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-115-council_d2-003",
+      "type": "statement",
+      "topic": "Baylight District — Final Council Vote",
+      "initiative": "Baylight District — Final Council Vote",
+      "decision": "Conduct the C115 construction milestone review against the assembled evidence file and publish findings before declaring whether the milestone passed.",
+      "quote": "The evidence file is ready for review; the milestone is not earned until the findings say so.",
+      "fullStatement": "The C115 review should proceed against the assembled evidence file, and its findings should be made public. The record describes independent remediation verification, hotline and dust-control records, and Jack London workforce results as assembled; it does not give me the review's findings. I will not call the construction milestone passed before that review is complete. Jack London's mood has slipped, so the workforce results matter, but I will not assume what they show or claim Jack London as D2 turf when the packet supplies no district mapping.",
+      "disposition": "statement",
+      "actionAsked": "Complete and publish the C115 evidence review before declaring the construction milestone passed.",
+      "tone": "evidence-driven",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    }
+  ]
+}

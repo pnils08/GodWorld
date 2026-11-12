@@ -1,0 +1,92 @@
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ override existing { override: true }
+Wake 3 WRITE — sports c115 (selena-grant)
+===================================
+[run] 2026-11-11T07:28:24.205Z byline: Selena Grant (POP-00591, persona)
+[run] 2026-11-11T07:28:24.206Z W3: no citizen on the record — filing without a quote
+[run] 2026-11-11T07:28:24.214Z writing on typed Packet (17960 B injected state + stance anchor)...
+[run] 2026-11-11T07:28:24.214Z writer tools ON: max 4 calls (canon_recall only)
+[run] 2026-11-11T07:28:24.215Z reward loop ON (package): rubric shown, contract scored, grade carried
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ override existing { override: true }
+Headless Desk Writer — sports desk
+===================================
+model=openai/gpt-5.6-luna maxTurns=15
+[INFO] 2026-11-11T07:28:24.378Z lane state-file injected: output/test-shell/20261111-012823-selena-grant-live/sports_c115_selena-grant_packet-v2_openai-gpt-5-6-luna.state.json (17896 chars) — full-summary blob bypassed
+[INFO] 2026-11-11T07:28:24.508Z packet-only compose via OpenRouter (openai/gpt-5.6-luna, 0 live tools)...
+[INFO] 2026-11-11T07:28:42.887Z tool trace: 10 call(s) → sports_c115_packet-v2_selena-grant.tooltrace.json
+[INFO] 2026-11-11T07:28:42.898Z tool facts → manifest: none used (10 call(s))
+[INFO] 2026-11-11T07:28:42.903Z LEP/2 lexical observations deferred to Rhea (AM-ce09e99c8d35): UNAPPROVED_NUMBER=-106,114,-109
+
+--- run summary ---
+{
+  "desk": "sports",
+  "cycle": "115",
+  "model": "openai/gpt-5.6-luna",
+  "turns": 11,
+  "maxTurns": 15,
+  "usageInputTokens": 19942,
+  "usageOutputTokens": 1517,
+  "savedFiles": [
+    "output/test-shell/20261111-012823-selena-grant-live/sports_c115_selena-grant_packet-v2_openai-gpt-5-6-luna.md"
+  ],
+  "compareAgainst": "output/desk-output/sports_c115.md",
+  "durationMs": 18535,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-11-11T07:28:42.905Z"
+}
+
+tokens: 19942 in / 1517 out · 11 turn(s) · 18535ms
+compare: diff output/desk-output/sports_c115.md  ↔  output/test-shell/20261111-012823-selena-grant-live/sports_c115_selena-grant_packet-v2_openai-gpt-5-6-luna.md
+[run] 2026-11-11T07:28:42.932Z gate SKIPPED (--no-gate sample) — output is ungated, NOT canon
+[run] 2026-11-11T07:28:42.954Z gaps logged: 7 line(s) → production log
+
+=== write disposition: UNGATED-SAMPLE ===
+{
+  "mode": "wake-write",
+  "desk": "sports",
+  "cycle": "115",
+  "provider": "openrouter",
+  "model": "openai/gpt-5.6-luna",
+  "configuredWriterModel": "openai/gpt-5.6-luna",
+  "gateModel": "sonnet",
+  "persona": "selena-grant",
+  "byline": {
+    "name": "Selena Grant",
+    "popid": "POP-00591",
+    "beatDomain": "SPORTS"
+  },
+  "laneEntries": 12,
+  "quotesLanded": 0,
+  "disposition": "ungated-sample",
+  "rheaPass": null,
+  "rheaFlagCount": null,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "canon_recall",
+    "canon_recall",
+    "canon_recall",
+    "canon_recall",
+    "canon_recall",
+    "canon_recall",
+    "canon_recall",
+    "canon_recall",
+    "canon_recall",
+    "canon_recall"
+  ],
+  "toolCalls": 10,
+  "wordCount": 459,
+  "targetWords": "400-650",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": null,
+  "gradeRecord": null,
+  "article": "output/test-shell/20261111-012823-selena-grant-live/samples/sports_c115_selena-grant_packet-v2_openai-gpt-5-6-luna.sample.md",
+  "selfRecord": null,
+  "ranAt": "2026-11-11T07:28:42.935Z"
+}

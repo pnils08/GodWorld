@@ -1,0 +1,65 @@
+{
+  "office": "council_d1",
+  "agentDir": "civic-office-council-d1",
+  "holder": "Denise Carter",
+  "popid": "POP-00501",
+  "title": "City Council District 1",
+  "date": "2026-11-05",
+  "cycle": 114,
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "statement": "Brooklyn's numbers this week are not abstract to me — Kaila Raimon, Drago Helio, Sefu Helio, and Minh Raimon live with the sentiment reading of -0.09 while the city sits at 0.115, and a transformer blowout on top of it. That is inside my district, and it is not new. I'm not going to call a quiet number a catastrophe, and I'm not going to let it be waved away either. The director wants the Brooklyn service audit baseline and the District 1 dispatch evaluation for the Alternative Response Initiative on the record; I'll file that answer, because if the audit exists, the neighbors who live with it get to see it. West Oakland, meanwhile, built its own good mood — sentiment at 0.41, retail at 12.6 — and I intend to keep saying that out loud. My continuing work is the Tenant Defense Fund, on the board again at C115, and I will not let procedural silence answer tenant defense.",
+  "moves": [
+    {
+      "type": "work",
+      "payload": {
+        "initiativeId": "INIT-010"
+      }
+    }
+  ],
+  "movesRejected": [
+    {
+      "type": "answer",
+      "reason": "required evidence not retrieved and available: district/D1"
+    }
+  ],
+  "numberMoved": null,
+  "ranAt": "2026-11-05T11:45:34.539Z",
+  "usage": {
+    "prompt_tokens": 6589,
+    "completion_tokens": 484,
+    "total_tokens": 7073,
+    "cost": 0.001326765,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.001326765,
+      "upstream_inference_prompt_cost": 0.001087185,
+      "upstream_inference_completions_cost": 0.00023958
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "fellBackFrom": null,
+  "evidenceGenerationHash": "625fc65e258fd2fe3d38d613ddc8fe6e9ae4ae4487a8350ea1d8882ac488130d",
+  "evidenceReads": [],
+  "provider": "Ionstream",
+  "finishReason": "stop",
+  "elapsedMs": 8630,
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00501",
+    "id": "K3WUUkXGFkTfSqw4q1gfWJ",
+    "customId": "cp-POP-00501-c114-CIVIC-datawake-2026-11-05"
+  }
+}

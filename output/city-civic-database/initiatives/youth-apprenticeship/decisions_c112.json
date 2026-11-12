@@ -1,0 +1,14 @@
+{
+  "initiative": "INIT-007",
+  "initiativeId": "INIT-007",
+  "cycle": 112,
+  "primaryVoice": "Delgado D3 (council_d3-002)",
+  "consolidatedFrom": [
+    "STMT-112-council_d3-002 (Delgado D3 — Oakland Youth Apprenticeship Pipeline First Cohort Placement Report)",
+    "STMT-112-council_d5-002 (Rivers D5 — Youth Apprenticeship Pipeline — East Oakland cohort verified and filed)",
+    "STMT-112-mayor_open-004 (Mayor agenda — Oakland Youth Apprenticeship Pipeline First Cohort Placement)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-007"
+  }
+}

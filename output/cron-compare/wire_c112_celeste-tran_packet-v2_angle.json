@@ -1,0 +1,632 @@
+{
+  "stage": "angle",
+  "desk": "wire",
+  "cycle": "112",
+  "persona": "celeste-tran",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00164",
+      "name": "Celeste Tran",
+      "role": "desk reporter",
+      "desk": "wire"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Jade Orion gained 1 mention this cycle (18 total); West Oakland moves the most — what Oakland is doing together this week",
+      "approach": "Social-trends approach: this slice is what the city is doing together — the names climbing the culture record, where people are moving, what the city's hooks say is shifting. Fast, reactive, grounded: a trend claim needs a window and a number from this slice. The names and moves are real; the group chat, the binge-night, the collective mood swing are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "trends",
+        "hood": "Lake Merritt",
+        "facts": [
+          "Jade Orion (musician), Arts — gained 1 mention this cycle (18 total), viral, fame 104",
+          "Tara Ellison (journalist), Media — gained 1 mention this cycle (12 total), surging, fame 68",
+          "Vinnie Keane (A's player), Sports — gained 1 mention this cycle (5 total), surging, fame 31",
+          "Movement vs C111: West Oakland +18 people, Jack London +12 people, Fruitvale +7 people, Adams Point +7 people, Grand Lake +7 people"
+        ],
+        "priorCycle": "PRIOR_CYCLE_ON_DISK",
+        "note": null,
+        "engineHooks": [
+          "Household in Lake Merritt spending 53% of income on housing (observational analysis)",
+          "Downtown boom sustained — momentum 10/10, the block everyone wants onto (observational analysis)",
+          "Fruitvale boom sustained — momentum 10/10, the block everyone wants onto (observational analysis)",
+          "Jack London boom sustained — momentum 10/10, the block everyone wants onto (observational analysis)"
+        ],
+        "roomIsYours": "the group chat, the third rewatch, who suddenly has an opinion about something nobody mentioned last month, what the city collectively decided to care about",
+        "pageVoices": [
+          "the A's — steady; most of the city over the last two months, still talking this week. Loudest: Vinnie Keane (Grand Lake), on their own page at C112 (not an interview — colour only, never a quote): “I'm still getting used to not being as active with the A's, but it's nice to see people coming together like that.”",
+          "the clinic — rising; dozens of citizens over the last two months, still talking this week. Loudest: Yu Zen (Rockridge), on their own page at C112 (not an interview — colour only, never a quote): “When I was in that hospital bed, I kept thinking about the numbers I deal with every day as an insurance broker — the claims",
+          "transit — steady; dozens of citizens over the last two months, still talking this week. Loudest: Melton Neilon (Temescal), on their own page at C109 (not an interview — colour only, never a quote): “I’ve heard folks at the farmers market talking about the Fruitvale Transit Hub delays, but honestly, I’m not sure who’s s",
+          "faith — fading; a dozen or so citizens over the last two months, still talking this week. Loudest: Eunice Marston (Downtown), on their own page at C112 (not an interview — colour only, never a quote): “As a faith leader, I believe our congregation's role in the community during times of crisis is to offer support and b",
+          "the Oaks — new this week; dozens of citizens over the last two months, still talking this week. Loudest: Trenton Nawan (Jack London), on their own page at C112 (not an interview — colour only, never a quote): “To be honest, I'm still a bit worried about the Oaks.”"
+        ],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-trends",
+      "hood": "Lake Merritt",
+      "score": null,
+      "src": "output/beats/Cultural_Ledger.jsonl @C112",
+      "nearby": [
+        {
+          "text": "Grand Lake neighborhood texture — how residents experience the improvement | Residents of Grand Lake feel the change firsthand.",
+          "src": "output/engine_audit_c112.json patterns[12]; evidence: Initiative_Tracker row(s) 9"
+        },
+        {
+          "text": "Baylight District | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c112.md \"### Baylight District\"; events: world_summary_c112.md \"## World Events\""
+        },
+        {
+          "text": "Downtown | 2 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c112.md \"### Downtown\"; events: world_summary_c112.md \"## World Events\""
+        },
+        {
+          "text": "Grand Lake | 2 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c112.md \"### Grand Lake\"; events: world_summary_c112.md \"## World Events\""
+        },
+        {
+          "text": "Jack London | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c112.md \"### Jack London\"; events: world_summary_c112.md \"## World Events\""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00540",
+          "name": "Jade Orion",
+          "profile": "Jade Orion — Musician — Lake Merritt",
+          "role": "Musician",
+          "hood": "Lake Merritt",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C112",
+            "pop": "POP-00540",
+            "rowName": "Jade Orion",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00546",
+          "name": "Tara Ellison",
+          "profile": "Tara Ellison — Journalist — Rockridge",
+          "role": "Journalist",
+          "hood": "Rockridge",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C112",
+            "pop": "POP-00546",
+            "rowName": "Tara Ellison",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00001",
+          "name": "Vinnie Keane",
+          "profile": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+          "role": "Designated Hitter, Oakland A's Legend",
+          "hood": "Grand Lake",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C112",
+            "pop": "POP-00001",
+            "rowName": "Vinnie Keane",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00194",
+          "name": "Yu Zen",
+          "profile": "Yu Zen — Commercial Insurance Broker — Rockridge",
+          "role": "Commercial Insurance Broker",
+          "hood": "Rockridge",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C112",
+            "pop": "POP-00194",
+            "rowName": "Yu Zen",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00170",
+          "name": "Melton Neilon",
+          "profile": "Melton Neilon — Sourdough Baker — Temescal",
+          "role": "Sourdough Baker",
+          "hood": "Temescal",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C112",
+            "pop": "POP-00170",
+            "rowName": "Melton Neilon",
+            "kind": "slice-row"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C112",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-7cd6ffd2aeb3"
+      },
+      {
+        "t": "FACT",
+        "text": "Jade Orion gained 1 mention this cycle (18 total); West Oakland moves the most",
+        "src": "output/beats/Cultural_Ledger.jsonl @C112",
+        "id": "F-6c5b8442e00f"
+      },
+      {
+        "t": "FACT",
+        "text": "Jade Orion — gained 1 mention this cycle (18 total), viral. The trend is the story; the mood is yours.",
+        "src": "output/beats/Cultural_Ledger.jsonl @C112",
+        "id": "F-82f725f37ad8"
+      },
+      {
+        "t": "FACT",
+        "text": "Jade Orion (musician), Arts — gained 1 mention this cycle (18 total), viral, fame 104",
+        "src": "output/beats/Cultural_Ledger.jsonl @C112 vs output/beats/prev/Cultural_Ledger.jsonl @C111",
+        "id": "F-505fb99a62ae"
+      },
+      {
+        "t": "FACT",
+        "text": "Tara Ellison (journalist), Media — gained 1 mention this cycle (12 total), surging, fame 68",
+        "src": "output/beats/Cultural_Ledger.jsonl @C112 vs output/beats/prev/Cultural_Ledger.jsonl @C111",
+        "id": "F-153faa10f220"
+      },
+      {
+        "t": "FACT",
+        "text": "Vinnie Keane (A's player), Sports — gained 1 mention this cycle (5 total), surging, fame 31",
+        "src": "output/beats/Cultural_Ledger.jsonl @C112 vs output/beats/prev/Cultural_Ledger.jsonl @C111",
+        "id": "F-167b13f87df5"
+      },
+      {
+        "t": "FACT",
+        "text": "Movement vs C111: West Oakland +18 people, Jack London +12 people, Fruitvale +7 people, Adams Point +7 people, Grand Lake +7 people",
+        "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C112",
+        "id": "F-5228544f2479"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "street",
+    "candidates": [
+      {
+        "pop": "POP-00540",
+        "name": "Jade Orion",
+        "role": "Musician",
+        "hood": "Lake Merritt",
+        "profile": "Jade Orion — Musician — Lake Merritt",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C112",
+          "pop": "POP-00540",
+          "rowName": "Jade Orion",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00546",
+        "name": "Tara Ellison",
+        "role": "Journalist",
+        "hood": "Rockridge",
+        "profile": "Tara Ellison — Journalist — Rockridge",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C112",
+          "pop": "POP-00546",
+          "rowName": "Tara Ellison",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00001",
+        "name": "Vinnie Keane",
+        "role": "Designated Hitter, Oakland A's Legend",
+        "hood": "Grand Lake",
+        "profile": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C112",
+          "pop": "POP-00001",
+          "rowName": "Vinnie Keane",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00194",
+        "name": "Yu Zen",
+        "role": "Commercial Insurance Broker",
+        "hood": "Rockridge",
+        "profile": "Yu Zen — Commercial Insurance Broker — Rockridge",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C112",
+          "pop": "POP-00194",
+          "rowName": "Yu Zen",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00170",
+        "name": "Melton Neilon",
+        "role": "Sourdough Baker",
+        "hood": "Temescal",
+        "profile": "Melton Neilon — Sourdough Baker — Temescal",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C112",
+          "pop": "POP-00170",
+          "rowName": "Melton Neilon",
+          "kind": "slice-row"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Celeste Tran",
+    "popid": "POP-00164"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-trends",
+      "angle": "Jade Orion gained 1 mention this cycle (18 total); West Oakland moves the most — what Oakland is doing together this week",
+      "label": "Jade Orion gained 1 mention this cycle (18 total); West Oakland moves the most",
+      "hookLine": "Jade Orion — gained 1 mention this cycle (18 total), viral. The trend is the story; the mood is yours.",
+      "hood": "Lake Merritt",
+      "citizens": [
+        "Jade Orion (POP-00540)",
+        "Tara Ellison (POP-00546)",
+        "Vinnie Keane (POP-00001)",
+        "Yu Zen (POP-00194)",
+        "Melton Neilon (POP-00170)"
+      ],
+      "popids": [
+        "POP-00540",
+        "POP-00546",
+        "POP-00001",
+        "POP-00194",
+        "POP-00170"
+      ],
+      "ref": "output/beats/Cultural_Ledger.jsonl @C112",
+      "cycle": 112
+    },
+    "approach": "Social-trends approach: this slice is what the city is doing together — the names climbing the culture record, where people are moving, what the city's hooks say is shifting. Fast, reactive, grounded: a trend claim needs a window and a number from this slice. The names and moves are real; the group chat, the binge-night, the collective mood swing are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "TRENDS-SLICE-4",
+    "kind": "beat-trends",
+    "seat": {
+      "slug": "celeste-tran",
+      "name": "Celeste Tran",
+      "popid": "POP-00164",
+      "desk": "wire",
+      "domain": "trends",
+      "builder": "buildTrendsSlice.js"
+    },
+    "hood": "Lake Merritt",
+    "pulse": {
+      "generatedAt": "2026-10-23T11:15:16.010Z",
+      "docs": 808,
+      "citizens": 269
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "Jade Orion gained 1 mention this cycle (18 total); West Oakland moves the most — what Oakland is doing together this week",
+      "hookLine": "Jade Orion — gained 1 mention this cycle (18 total), viral. The trend is the story; the mood is yours.",
+      "anchorFacts": [
+        "Jade Orion (musician), Arts — gained 1 mention this cycle (18 total), viral, fame 104",
+        "Tara Ellison (journalist), Media — gained 1 mention this cycle (12 total), surging, fame 68",
+        "Vinnie Keane (A's player), Sports — gained 1 mention this cycle (5 total), surging, fame 31",
+        "Movement vs C111: West Oakland +18 people, Jack London +12 people, Fruitvale +7 people, Adams Point +7 people, Grand Lake +7 people"
+      ],
+      "evidence": [
+        {
+          "text": "Jade Orion (musician), Arts — gained 1 mention this cycle (18 total), viral, fame 104",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112 vs output/beats/prev/Cultural_Ledger.jsonl @C111"
+        },
+        {
+          "text": "Tara Ellison (journalist), Media — gained 1 mention this cycle (12 total), surging, fame 68",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112 vs output/beats/prev/Cultural_Ledger.jsonl @C111"
+        },
+        {
+          "text": "Vinnie Keane (A's player), Sports — gained 1 mention this cycle (5 total), surging, fame 31",
+          "src": "output/beats/Cultural_Ledger.jsonl @C112 vs output/beats/prev/Cultural_Ledger.jsonl @C111"
+        },
+        {
+          "text": "Movement vs C111: West Oakland +18 people, Jack London +12 people, Fruitvale +7 people, Adams Point +7 people, Grand Lake +7 people",
+          "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C112"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": {
+        "state": "PRIOR_CYCLE_ON_DISK",
+        "vs": 111
+      },
+      "hooks": [
+        {
+          "text": "Household in Lake Merritt spending 53% of income on housing",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Lake Merritt",
+          "priority": 6
+        },
+        {
+          "text": "Downtown boom sustained — momentum 10/10, the block everyone wants onto",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Downtown",
+          "priority": 7
+        },
+        {
+          "text": "Fruitvale boom sustained — momentum 10/10, the block everyone wants onto",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Fruitvale",
+          "priority": 7
+        },
+        {
+          "text": "Jack London boom sustained — momentum 10/10, the block everyone wants onto",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Jack London",
+          "priority": 7
+        },
+        {
+          "text": "Chinatown turning upward: retail busy, events drawing crowds, people moving in",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Chinatown",
+          "priority": 5
+        },
+        {
+          "text": "Eastlake cooling off: foot traffic down, storefronts quieter than the rest of the city",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Eastlake",
+          "priority": 6
+        },
+        {
+          "text": "KONO turning upward: retail busy, events drawing crowds, people moving in",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "KONO",
+          "priority": 5
+        },
+        {
+          "text": "Uptown boom sustained — momentum 10/10, the block everyone wants onto",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Uptown",
+          "priority": 7
+        }
+      ],
+      "note": null,
+      "pageVoices": [
+        "the A's — steady; most of the city over the last two months, still talking this week. Loudest: Vinnie Keane (Grand Lake), on their own page at C112 (not an interview — colour only, never a quote): “I'm still getting used to not being as active with the A's, but it's nice to see people coming together like that.”",
+        "the clinic — rising; dozens of citizens over the last two months, still talking this week. Loudest: Yu Zen (Rockridge), on their own page at C112 (not an interview — colour only, never a quote): “When I was in that hospital bed, I kept thinking about the numbers I deal with every day as an insurance broker — the claims, the paperwork, the names on the forms.”",
+        "transit — steady; dozens of citizens over the last two months, still talking this week. Loudest: Melton Neilon (Temescal), on their own page at C109 (not an interview — colour only, never a quote): “I’ve heard folks at the farmers market talking about the Fruitvale Transit Hub delays, but honestly, I’m not sure who’s supposed to be steering it forward.”",
+        "faith — fading; a dozen or so citizens over the last two months, still talking this week. Loudest: Eunice Marston (Downtown), on their own page at C112 (not an interview — colour only, never a quote): “As a faith leader, I believe our congregation's role in the community during times of crisis is to offer support and be present for those affected.”",
+        "the Oaks — new this week; dozens of citizens over the last two months, still talking this week. Loudest: Trenton Nawan (Jack London), on their own page at C112 (not an interview — colour only, never a quote): “To be honest, I'm still a bit worried about the Oaks.”"
+      ],
+      "roomIsYours": "the group chat, the third rewatch, who suddenly has an opinion about something nobody mentioned last month, what the city collectively decided to care about"
+    },
+    "citizens": [
+      {
+        "popid": "POP-00540",
+        "name": "Jade Orion",
+        "role": "Musician",
+        "neighborhood": "Lake Merritt",
+        "business": null,
+        "profile": "Jade Orion — Musician — Lake Merritt",
+        "why": "the city is talking about them (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-00546",
+        "name": "Tara Ellison",
+        "role": "Journalist",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Tara Ellison — Journalist — Rockridge",
+        "why": "the city is talking about them (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-00001",
+        "name": "Vinnie Keane",
+        "role": "Designated Hitter, Oakland A's Legend",
+        "neighborhood": "Grand Lake",
+        "business": null,
+        "profile": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+        "why": "the city is talking about them (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-00194",
+        "name": "Yu Zen",
+        "role": "Commercial Insurance Broker",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Yu Zen — Commercial Insurance Broker — Rockridge",
+        "why": "has been saying it on their own page — the clinic, C112: “When I was in that hospital bed, I kept thinking about the numbers I deal with every day as an insurance broker — the claims, the paperwork, the names on the forms.”"
+      },
+      {
+        "popid": "POP-00170",
+        "name": "Melton Neilon",
+        "role": "Sourdough Baker",
+        "neighborhood": "Temescal",
+        "business": null,
+        "profile": "Melton Neilon — Sourdough Baker — Temescal",
+        "why": "has been saying it on their own page — transit, C109: “I’ve heard folks at the farmers market talking about the Fruitvale Transit Hub delays, but honestly, I’m not sure who’s supposed to be steering it forward.”"
+      }
+    ],
+    "pointers": [
+      "output/beats/Cultural_Ledger.jsonl @C112",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Celeste Tran this cycle)",
+      "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Celeste Tran",
+    "popid": "POP-00164",
+    "text": "I'm going to chase the story of what's bringing people together in Oakland this week, focusing on the trends that are emerging from the movement of people into different neighborhoods and the rising figures in the city's cultural scene.",
+    "plan": {
+      "chase": "I'm going to chase the story of what's bringing people together in Oakland this week, focusing on the trends that are emerging from the movement of people into different neighborhoods and the rising figures in the city's cultural scene.",
+      "focus": "The movement of people into West Oakland and other neighborhoods, and the rising fame of cultural figures like Jade Orion, Tara Ellison, and Vinnie Keane.",
+      "why": "The city's cultural landscape is shifting with new faces moving into neighborhoods like West Oakland, and figures like Jade Orion gaining more attention. I want to understand what's behind these trends and how they're affecting the community.",
+      "checks": [
+        "Verify the numbers behind the movement into different neighborhoods",
+        "Talk to people in the neighborhoods to understand their experiences",
+        "Look into the factors contributing to the rising fame of cultural figures"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00540",
+          "question": "What's behind Jade Orion's rising fame and how is it impacting the community?",
+          "basis": "Jade Orion gained 1 mention this cycle"
+        },
+        {
+          "pop": "POP-00546",
+          "question": "How is Tara Ellison's work as a journalist reflecting or influencing the trends in Oakland?",
+          "basis": "Tara Ellison gained 1 mention this cycle"
+        },
+        {
+          "pop": "POP-00001",
+          "question": "What's Vinnie Keane's perspective on the A's and the community's response to it?",
+          "basis": "Vinnie Keane gained 1 mention this cycle"
+        }
+      ],
+      "interpretation": "The trends suggest a vibrant cultural scene with new energy coming into Oakland's neighborhoods, but there's a need to ground this in the experiences of the people living there.",
+      "unverifiedLead": [
+        "The sense of community is palpable in West Oakland, where new faces are appearing alongside long-time residents.",
+        "The West Side Cafe is filling up with regulars, indicating a growing sense of neighborhood identity."
+      ],
+      "closeQuestion": "How do the trends in Oakland's cultural scene and neighborhood demographics reflect the city's overall direction and community spirit?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Grand Lake neighborhood texture — how residents experience the improvement | Residents of Grand Lake feel the change firsthand.",
+      "kind": "anomaly",
+      "hood": "Grand Lake",
+      "ref": "output/engine_audit_c112.json patterns[12]; evidence: Initiative_Tracker row(s) 9",
+      "popids": [
+        "POP-00002",
+        "POP-01049",
+        "POP-01080"
+      ]
+    },
+    {
+      "label": "Baylight District | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Baylight District",
+      "ref": "output/neighborhood_texture_c112.md \"### Baylight District\"; events: world_summary_c112.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Downtown | 2 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Downtown",
+      "ref": "output/neighborhood_texture_c112.md \"### Downtown\"; events: world_summary_c112.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Grand Lake | 2 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Grand Lake",
+      "ref": "output/neighborhood_texture_c112.md \"### Grand Lake\"; events: world_summary_c112.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Jack London | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Jack London",
+      "ref": "output/neighborhood_texture_c112.md \"### Jack London\"; events: world_summary_c112.md \"## World Events\"",
+      "popids": []
+    }
+  ],
+  "laneEntries": 20,
+  "angleCapHits": 0,
+  "ranAt": "2026-10-23T11:16:44.461Z"
+}

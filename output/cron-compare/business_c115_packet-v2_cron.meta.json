@@ -1,0 +1,17 @@
+{
+  "desk": "business",
+  "cycle": "115",
+  "model": "anthropic/claude-opus-5.5",
+  "turns": 3,
+  "maxTurns": 15,
+  "usageInputTokens": 43166,
+  "usageOutputTokens": 3423,
+  "savedFiles": [
+    "output/cron-compare/business_c115_business-desk_packet-v2_anthropic-claude-opus-5-5.md"
+  ],
+  "compareAgainst": "output/desk-output/business_c115.md",
+  "durationMs": 36974,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-11-10T00:16:53.090Z"
+}

@@ -1,0 +1,512 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00013",
+    "name": "Maria Keen",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Temescal — the programs that hold the block and the people who founded them",
+    "approach": "Neighborhood approach: this slice is one block's record — its community programs and their founders, who is moving in or out, who the block has in a hospital bed or in custody, what it paid on tax day, whose debts crossed the line, and the city's neighborhood hooks this cycle. First-person witness, one block one truth. The programs, founders, movement numbers, patients, defendants and money lines are real; the stoop conversations, the mailboxes, the dog everyone knows are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "neighborhood",
+      "hood": "Temescal",
+      "facts": [
+        "Temescal Islamic Center Food Pantry (mutual-aid), Temescal, since C83",
+        "The Reaves Line Transit Fund (transit), Temescal — founded by Austin Reaves, since C109",
+        "Temescal this cycle: 313 students, 2,131 adults, 298 seniors — moved vs C113: +6 adults",
+        "Temescal: 8 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+        "Temescal: 86 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked"
+      ],
+      "priorCycle": "PRIOR_CYCLE_ON_DISK",
+      "note": null,
+      "engineHooks": [
+        "First Friday: Monthly art walk tonight. Gallery openings, street vendors, neighborhood energy. Photo walk opportunity. (desk rotation)",
+        "Vince Okoye and Idalia Okonkwo — a friendship turned into something more (observational analysis)",
+        "Isabel Lopes and Shawn Neighbor — a friendship turned into something more (observational analysis)",
+        "Household in Lake Merritt spending 53% of income on housing (observational analysis)"
+      ],
+      "roomIsYours": "the stoop, the corner store counter, who moved in last month and who is thinking about leaving, what the block argues about",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-neighborhood",
+    "hood": "Temescal",
+    "src": "output/beats/Community_Programs.jsonl @C114",
+    "plan": {
+      "focus": "Community programs in Temescal",
+      "closeQuestion": "How do the community programs in Temescal contribute to the neighborhood's overall well-being?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-01027",
+        "name": "Austin Reaves",
+        "profile": "Austin Reaves — SG / The Oaks — West Oakland",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-01095",
+        "name": "Helena Voss-Adeyemi",
+        "profile": "Helena Voss-Adeyemi — Managing Partner, Northgate Construction",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00038",
+        "name": "Theo Park",
+        "profile": "Theo Park — Communications Director",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00169",
+        "name": "Brie Harris",
+        "profile": "Brie Harris — Flower Shop Owner",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-01027-7eb99d71b7",
+        "pop": "POP-01027",
+        "name": "Austin Reaves",
+        "quote": "To be honest, I'm not really sure about The Reaves Line Transit Fund's impact on Temescal. I founded it, but I've been focused on the A's and family stuff lately. I know it's been around since C109, and it's still active, but I haven't been keeping up with its day-to-day. I live in West Oakland, so I don't really see its effects firsthand.",
+        "factIds": [
+          "F-c73e7a1d4c67",
+          "F-d1f725faf549"
+        ],
+        "src": "packet.W2[POP-01027]"
+      },
+      {
+        "id": "Q-POP-00169-30a635c7e6",
+        "pop": "POP-00169",
+        "name": "Brie Harris",
+        "quote": "Having my own place in Temescal is still a game-changer for me. It's been nice to have a spot to unwind after being on my feet all day at the flower shop. I feel like I'm still getting used to it, but it's made me appreciate the neighborhood even more.",
+        "factIds": [
+          "F-be98682e0443",
+          "F-65b41602508c"
+        ],
+        "src": "packet.W2[POP-00169]"
+      },
+      {
+        "id": "Q-POP-01095-891c022b6e",
+        "pop": "POP-01095",
+        "name": "Helena Voss-Adeyemi",
+        "quote": "I walked north across the Temescal line and watched the storefronts change. It's always interesting to see the different vibes on either side. Temescal's got a unique energy, lots of new businesses popping up.",
+        "factIds": [
+          "F-ad953460864b"
+        ],
+        "src": "packet.W2[POP-01095]"
+      },
+      {
+        "id": "Q-POP-00038-7afe9d725b",
+        "pop": "POP-00038",
+        "name": "Theo Park",
+        "quote": "To be honest, that moment at Temescal Brewing really stuck with me. Seeing the janitor from the Islamic Center chatting with Danny Horn like they were old friends... it felt like a small but real sign of how the neighborhood is evolving. It's not just about new faces moving in; it's about how we all connect. I still see Temescal as a place where you can bump into anyone, and that's something I appreciate.",
+        "factIds": [
+          "F-38a8a9847046",
+          "F-ec81e174ab07"
+        ],
+        "src": "packet.W2[POP-00038]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Maria Keen",
+        "text": "The growth in adult population in Temescal could be related to the community programs",
+        "usable": false
+      },
+      {
+        "from": "Maria Keen",
+        "text": "The low number of tracked residents in custody or care might indicate effective support systems",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C114",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-4261fa115617"
+    },
+    {
+      "t": "FACT",
+      "text": "Temescal: 2 active programs on the record",
+      "src": "output/beats/Community_Programs.jsonl @C114",
+      "id": "F-f468dc5d926c"
+    },
+    {
+      "t": "FACT",
+      "text": "2 active programs in Temescal; Austin Reaves founded one.",
+      "src": "output/beats/Community_Programs.jsonl @C114",
+      "id": "F-047875521911"
+    },
+    {
+      "t": "FACT",
+      "text": "Temescal Islamic Center Food Pantry (mutual-aid), Temescal, since C83",
+      "src": "output/beats/Community_Programs.jsonl @C114 PRG-026",
+      "id": "F-7c20691ce8ba"
+    },
+    {
+      "t": "FACT",
+      "text": "The Reaves Line Transit Fund (transit), Temescal — founded by Austin Reaves, since C109",
+      "src": "output/beats/Community_Programs.jsonl @C114 PRG-032",
+      "id": "F-c73e7a1d4c67"
+    },
+    {
+      "t": "FACT",
+      "text": "Temescal this cycle: 313 students, 2,131 adults, 298 seniors — moved vs C113: +6 adults",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C114 vs prev/",
+      "id": "F-66def05dff07"
+    },
+    {
+      "t": "FACT",
+      "text": "Temescal: 8 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl @C114 judicial Temescal",
+      "id": "F-8501821afd98"
+    },
+    {
+      "t": "FACT",
+      "text": "Temescal: 86 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl @C114 hospital Temescal",
+      "id": "F-d81ee323aced"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C10, Spring, holiday=none",
+      "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+      "id": "F-9b9470803821"
+    },
+    {
+      "t": "FACT",
+      "text": "Austin Reaves — SG / The Oaks — West Oakland",
+      "src": "Simulation_Ledger profile for POP-01027",
+      "id": "F-d1f725faf549"
+    },
+    {
+      "t": "INTERPRETATION",
+      "text": "To be honest, having a place of my own in Temescal has been a game-changer.",
+      "src": "cp-POP-00169-c114-PRESS-mon-affdhg",
+      "id": "F-be98682e0443"
+    },
+    {
+      "t": "FACT",
+      "text": "Brie Harris — Flower Shop Owner",
+      "src": "Simulation_Ledger profile for POP-00169",
+      "id": "F-65b41602508c"
+    },
+    {
+      "t": "FACT",
+      "text": "Y3C10 — [Neighborhood-Openness-Up-S] walked north across the Temescal line and watched the storefronts change",
+      "src": "output/simulation_ledger_snapshot.jsonl",
+      "id": "F-ad953460864b"
+    },
+    {
+      "t": "INTERPRETATION",
+      "text": "You know, I was just thinking about this yesterday while waiting in line at Temescal Brewing.",
+      "src": "cp-POP-00038-c102-PRESS",
+      "id": "F-38a8a9847046"
+    },
+    {
+      "t": "FACT",
+      "text": "Theo Park — Communications Director",
+      "src": "Simulation_Ledger profile for POP-00038",
+      "id": "F-ec81e174ab07"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "maria-ground-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Translate one Packet-named neighborhood or evening condition into a human-scale ground brief without inventing Maria's attendance, a neighbor, an action, a quote, or a civic outcome.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "intimate neighborhood ground brief",
+      "targetWords": "evidence-bounded",
+      "opening": "one Packet-named place and condition",
+      "closing": "the human observation still needed"
+    },
+    "authorizedTexture": [
+      "warm interpretation of a supplied place or condition without claiming attendance or observation",
+      "unnamed sensory metaphor carrying no person, action, event, institution, or factual premise"
+    ],
+    "textureConditions": [
+      "first person may express interpretation but may not assert presence, walking, seeing, hearing, meeting, speaking, or memory unless the Packet supplies it",
+      "every named person, place, business, institution, gathering, action, quote, policy effect, and civic outcome requires Packet support"
+    ],
+    "canonBlockers": [
+      "invented attendance, witnessed scene, neighbor, worker, patron, dialogue, gathering, action, policy consequence, or civic outcome",
+      "an invented or altered venue, person, neighborhood, event, institution, relationship, date, count, or quote",
+      "raw nightlife metrics, engine labels, or collective neighborhood sentiment presented as public fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-3792d8937913",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-4261fa115617",
+        "t": "FACT",
+        "text": "Current cycle: C114",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-f468dc5d926c",
+        "t": "FACT",
+        "text": "Temescal: 2 active programs on the record",
+        "src": "output/beats/Community_Programs.jsonl @C114"
+      },
+      {
+        "id": "F-047875521911",
+        "t": "FACT",
+        "text": "2 active programs in Temescal; Austin Reaves founded one.",
+        "src": "output/beats/Community_Programs.jsonl @C114"
+      },
+      {
+        "id": "F-7c20691ce8ba",
+        "t": "FACT",
+        "text": "Temescal Islamic Center Food Pantry (mutual-aid), Temescal, since C83",
+        "src": "output/beats/Community_Programs.jsonl @C114 PRG-026"
+      },
+      {
+        "id": "F-c73e7a1d4c67",
+        "t": "FACT",
+        "text": "The Reaves Line Transit Fund (transit), Temescal — founded by Austin Reaves, since C109",
+        "src": "output/beats/Community_Programs.jsonl @C114 PRG-032"
+      },
+      {
+        "id": "F-66def05dff07",
+        "t": "FACT",
+        "text": "Temescal this cycle: 313 students, 2,131 adults, 298 seniors — moved vs C113: +6 adults",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C114 vs prev/"
+      },
+      {
+        "id": "F-8501821afd98",
+        "t": "FACT",
+        "text": "Temescal: 8 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl @C114 judicial Temescal"
+      },
+      {
+        "id": "F-d81ee323aced",
+        "t": "FACT",
+        "text": "Temescal: 86 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl @C114 hospital Temescal"
+      },
+      {
+        "id": "F-9b9470803821",
+        "t": "FACT",
+        "text": "Calendar: Y3C10, Spring, holiday=none",
+        "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)"
+      },
+      {
+        "id": "F-d1f725faf549",
+        "t": "FACT",
+        "text": "Austin Reaves — SG / The Oaks — West Oakland",
+        "src": "Simulation_Ledger profile for POP-01027"
+      },
+      {
+        "id": "F-be98682e0443",
+        "t": "INTERPRETATION",
+        "text": "To be honest, having a place of my own in Temescal has been a game-changer.",
+        "src": "cp-POP-00169-c114-PRESS-mon-affdhg"
+      },
+      {
+        "id": "F-65b41602508c",
+        "t": "FACT",
+        "text": "Brie Harris — Flower Shop Owner",
+        "src": "Simulation_Ledger profile for POP-00169"
+      },
+      {
+        "id": "F-ad953460864b",
+        "t": "FACT",
+        "text": "Y3C10 — [Neighborhood-Openness-Up-S] walked north across the Temescal line and watched the storefronts change",
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      },
+      {
+        "id": "F-38a8a9847046",
+        "t": "INTERPRETATION",
+        "text": "You know, I was just thinking about this yesterday while waiting in line at Temescal Brewing.",
+        "src": "cp-POP-00038-c102-PRESS"
+      },
+      {
+        "id": "F-ec81e174ab07",
+        "t": "FACT",
+        "text": "Theo Park — Communications Director",
+        "src": "Simulation_Ledger profile for POP-00038"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-01027-7eb99d71b7",
+        "speakerId": "POP-01027",
+        "speakerName": "Austin Reaves",
+        "text": "To be honest, I'm not really sure about The Reaves Line Transit Fund's impact on Temescal. I founded it, but I've been focused on the A's and family stuff lately. I know it's been around since C109, and it's still active, but I haven't been keeping up with its day-to-day. I live in West Oakland, so I don't really see its effects firsthand.",
+        "factIds": [
+          "F-c73e7a1d4c67",
+          "F-d1f725faf549"
+        ],
+        "src": "packet.W2[POP-01027]"
+      },
+      {
+        "id": "Q-POP-00169-30a635c7e6",
+        "speakerId": "POP-00169",
+        "speakerName": "Brie Harris",
+        "text": "Having my own place in Temescal is still a game-changer for me. It's been nice to have a spot to unwind after being on my feet all day at the flower shop. I feel like I'm still getting used to it, but it's made me appreciate the neighborhood even more.",
+        "factIds": [
+          "F-be98682e0443",
+          "F-65b41602508c"
+        ],
+        "src": "packet.W2[POP-00169]"
+      },
+      {
+        "id": "Q-POP-01095-891c022b6e",
+        "speakerId": "POP-01095",
+        "speakerName": "Helena Voss-Adeyemi",
+        "text": "I walked north across the Temescal line and watched the storefronts change. It's always interesting to see the different vibes on either side. Temescal's got a unique energy, lots of new businesses popping up.",
+        "factIds": [
+          "F-ad953460864b"
+        ],
+        "src": "packet.W2[POP-01095]"
+      },
+      {
+        "id": "Q-POP-00038-7afe9d725b",
+        "speakerId": "POP-00038",
+        "speakerName": "Theo Park",
+        "text": "To be honest, that moment at Temescal Brewing really stuck with me. Seeing the janitor from the Islamic Center chatting with Danny Horn like they were old friends... it felt like a small but real sign of how the neighborhood is evolving. It's not just about new faces moving in; it's about how we all connect. I still see Temescal as a place where you can bump into anyone, and that's something I appreciate.",
+        "factIds": [
+          "F-38a8a9847046",
+          "F-ec81e174ab07"
+        ],
+        "src": "packet.W2[POP-00038]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-01027",
+        "name": "Austin Reaves",
+        "profile": "Austin Reaves — SG / The Oaks — West Oakland",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-01095",
+        "name": "Helena Voss-Adeyemi",
+        "profile": "Helena Voss-Adeyemi — Managing Partner, Northgate Construction",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00038",
+        "name": "Theo Park",
+        "profile": "Theo Park — Communications Director",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00169",
+        "name": "Brie Harris",
+        "profile": "Brie Harris — Flower Shop Owner",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Maria Keen",
+        "text": "The growth in adult population in Temescal could be related to the community programs",
+        "publishable": false
+      },
+      {
+        "from": "Maria Keen",
+        "text": "The low number of tracked residents in custody or care might indicate effective support systems",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "warm interpretation of a supplied place or condition without claiming attendance or observation",
+      "unnamed sensory metaphor carrying no person, action, event, institution, or factual premise"
+    ],
+    "textureConditions": [
+      "first person may express interpretation but may not assert presence, walking, seeing, hearing, meeting, speaking, or memory unless the Packet supplies it",
+      "every named person, place, business, institution, gathering, action, quote, policy effect, and civic outcome requires Packet support"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

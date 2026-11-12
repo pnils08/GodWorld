@@ -1,0 +1,789 @@
+{
+  "meta": {
+    "type": "initiative-packet",
+    "initiative": "baylight",
+    "initiativeId": "INIT-006",
+    "cycle": 115,
+    "generatedAt": "2026-11-09T08:49:28.844Z",
+    "description": "Baylight District Development — $2.1B mixed-use waterfront development with 5 deliverables on the schedule"
+  },
+  "initiative": {
+    "id": "INIT-006",
+    "name": "Baylight District — Final Council Vote",
+    "type": "vote",
+    "status": "passed",
+    "budget": "$2.1B",
+    "voteRequirement": "5-4",
+    "voteCycle": "83",
+    "projection": "likely pass",
+    "outcome": "PASSED",
+    "leadFaction": "OPP",
+    "oppositionFaction": "CRC",
+    "swingVoter": "Ramon Vega",
+    "affectedNeighborhoods": "Jack London, Downtown",
+    "policyDomain": "sports",
+    "consequences": "Initiative approved. Implementation begins.",
+    "mayoralAction": "signed",
+    "mayoralActionCycle": "83",
+    "notes": "Cycle 83: Passed 6-3. Denise Carter voted yes. Rose Delgado voted yes. Janae Rivers voted yes. Terrence Mobley voted yes. Elliott Crane voted no. Warren Ashford voted no. Nina Chen voted no. Ramon Vega voted yes. Leonard Tran voted yes.",
+    "lastUpdated": "11/9/2026",
+    "implementationPhase": "complete",
+    "milestoneNotes": "C107: Construction contracts executed; site preparation mobilization begins\nC109: Phase II remediation commenced with independent oversight\nC110: Soil test verification complete; Phase II remediation proceeds with independent oversight\nC111: Construction milestone review scheduled for Cycle 115; remediation proceeds with oversight.\nC112: Independent oversight verified; remediation continues; construction milestone review held for C115\nC113: Phase II remediation on schedule with independent oversight; 48hr construction hotline live; dust control active on haul routes; Jack London workforce coordination meeting set pre-C115 review.\nC114: C115 evidence file assembled — independent remediation verification, hotline/dust records, Jack London workforce results; no milestone declared passed\nC115: Evidence-file milestone review ordered; no construction milestone pass declared, and remediation, hotline, dust-control, and workforce oversight continue.\nC115: closed.",
+    "nextScheduledAction": "",
+    "nextActionCycle": ""
+  },
+  "office": {
+    "name": "Baylight Authority",
+    "policyDomains": [
+      "infrastructure",
+      "economic",
+      "housing"
+    ],
+    "officials": [
+      {
+        "officeId": "MAYOR-01",
+        "title": "Mayor",
+        "name": "Avery Santana",
+        "popId": "POP-00034",
+        "status": "active",
+        "faction": "OPP"
+      },
+      {
+        "officeId": "STAFF-COS",
+        "title": "Chief of Staff",
+        "name": "Laila Cortez",
+        "popId": "POP-00035",
+        "status": "active",
+        "faction": "STAFF"
+      },
+      {
+        "officeId": "PLANNING-DIR",
+        "title": "City Planning Director",
+        "name": "Mara Vance",
+        "popId": "POP-00507",
+        "status": "active",
+        "faction": "STAFF"
+      }
+    ]
+  },
+  "previousCycle": {
+    "decisions": {
+      "initiative": "INIT-006",
+      "initiativeId": "INIT-006",
+      "cycle": 114,
+      "primaryVoice": "Ramos (baylight_authority-001)",
+      "consolidatedFrom": [
+        "STMT-114-baylight_authority-001 (Ramos — Baylight District Construction Milestone Review — C115 Evidence Assembly)",
+        "STMT-114-baylight_authority-002 (Ramos — Baylight District Community Impact Mitigation — Jack London Workforce Coordin...)",
+        "STMT-114-council_d2-001 (Tran D2 — Baylight District — Final Council Vote)",
+        "STMT-114-council_d5-001 (Rivers D5 — Oakland Alternative Response Initiative — D3 community briefing, dispatch per...)",
+        "STMT-114-oari-003 (Tran-Muñoz — Baylight District corridor protocol extension — feasibility review only)"
+      ],
+      "trackerUpdates": {
+        "InitiativeID": "INIT-006",
+        "MilestoneNotes": "C114: C115 evidence file assembled — independent remediation verification, hotline/dust records, Jack London workforce results; no milestone declared passed",
+        "NextScheduledAction": "C115 construction milestone review against the assembled evidence file",
+        "NextActionCycle": 115,
+        "LastWorkCycle": 114,
+        "LastWorkSeat": "proj-baylight"
+      },
+      "_moveFold": {
+        "moveIds": [
+          "MV-113-proj-baylight-2026-10-30"
+        ]
+      }
+    },
+    "voiceDecisions": {
+      "mayorDecisions": [],
+      "factionReactions": [
+        {
+          "statementId": "STMT-114-council_d2-001",
+          "faction": "D2",
+          "speaker": "Leonard Tran",
+          "type": "vote_statement",
+          "topic": "Baylight District — Final Council Vote",
+          "position": "YES; keep the C115 construction milestone review contingent on its evidence.",
+          "quote": "The work is on schedule; the next milestone still has to be proven.",
+          "relatedInitiatives": [
+            "Baylight District — Final Council Vote"
+          ]
+        },
+        {
+          "statementId": "STMT-114-council_d5-001",
+          "faction": "D5",
+          "speaker": "Janae Rivers",
+          "type": "vote_statement",
+          "topic": "Oakland Alternative Response Initiative — D3 community briefing, dispatch performance audit, and Baylight corridor extension",
+          "position": "File the D5 dispatch performance audit responding to Planning Director Vance's directive, docket and execute the D3 East Oakland community briefing with Fruitvale district-level data and the Baylight feasibility review this cycle, extend the OARI D5 protocol into the Baylight District corridor for feasibility review, and answer the East Oakland citizen complaint in the public record.",
+          "quote": "The data is in — now let's make sure the folks who called 911 actually get to see it, in their own neighborhood, with their own numbers.",
+          "relatedInitiatives": [
+            "Oakland Alternative Response Initiative"
+          ]
+        }
+      ]
+    },
+    "documentsProduced": [
+      "BAYL-C000-ProjectCharter-20400101.md",
+      "BAYL-C081-DEIR-20410501.md",
+      "BAYL-C082-ProjectImpactAnalysis-20410601.md",
+      "BAYL-C084-RemediationBond-20410801.md",
+      "BAYL-C084-TIFOrdinance-20410801.md",
+      "BAYL-C085-MobilizationRequest-20410901.md",
+      "decisions_c103.json",
+      "decisions_c104.json",
+      "decisions_c105.json",
+      "decisions_c106.json",
+      "decisions_c107.json",
+      "decisions_c108.json",
+      "decisions_c109.json",
+      "decisions_c110.json",
+      "decisions_c111.json",
+      "decisions_c112.json",
+      "decisions_c113.json",
+      "decisions_c114.json",
+      "decisions_c115.json"
+    ]
+  },
+  "maraDirective": "# C114 Voice Directives — Mara Vance (AUTO)\n\n**Cycle:** 114\n**Issued:** C114 (auto-derived, cron-civic-run.js --stage=directive, post-close)\n**Source:** close_c114 + world_summary_c114 + engine review HIGHs + tracker + C113 voice record\n\n---\n## Leonard Tran — City Council District 2\n\n- **Agent:** `.claude/agents/civic-office-council-d2/`\n- **Address:** Bring the $15M Downtown Economic Revitalization ordinance (INIT-008) to a binding full council floor vote with formalized appropriation tracks for Chinatown and Uptown.\n- **Why:** INIT-008 has sat at vote-scheduled since emergency committee hearings in C112 and C113, facing a C115 stall-clock expiration while commercial corridors wait on capital release and District 2 carries an unaddressed citizen complaint.\n- **Acceptance:** A recorded full council roll-call vote on INIT-008 and published appropriation allocations for Chinatown and Uptown observable in C115.\n- **Silence consequence:** The $15M revitalization package stalls past its legislative window, freezing municipal capital across Downtown, Uptown, and Chinatown commercial corridors.\n\n## Nina Chen — City Council District 8\n\n- **Agent:** `.claude/agents/civic-office-council-d8/`\n- **Address:** Docket and record the full council roll-call vote on the $2.5M Commercial Stabilization for Grand Lake ordinance (INIT-009) and file baseline service allocations for Eastlake.\n- **Why:** INIT-009 advanced to full council in C113 with audit conditions but remains unvoted with its stall clock expiring at C115, while Eastlake carries a decay momentum of 2, a crime index of 0.70, and 1 unresolved citizen petition.\n- **Acceptance:** A published council floor vote on INIT-009 and docketed municipal maintenance allocations for Eastlake observable in C115.\n- **Silence consequence:** INIT-009 expires without appropriation on the council floor, leaving Grand Lake storefronts and Eastlake's compounding corridor decay without authorized stabilization funds.\n\n## Ramon Vega — City Council District 4\n\n- **Agent:** `.claude/agents/civic-office-council-d4/`\n- **Address:** Docket formal committee referral schedules for the Ivy Hill Revitalization Initiative (INIT-011) and reconcile the duplicate announced filings for INIT-012 and INIT-013 with targeted municipal interventions for Dimond.\n- **Why:** Following ordinance filings in C113, INIT-011, INIT-012, and INIT-013 face C115 stall clocks without committee assignment, while Dimond's decay momentum surged to 3 with sentiment at 0.00, Ivy Hill carries sentiment of -0.04 and crime at 0.70, and Glenview sits at a 0.72 crime index.\n- **Acceptance:** Transmitted committee referral schedules for INIT-011 and consolidated filings for INIT-012/INIT-013 with an attached municipal service plan for Dimond in C115.\n- **Silence consequence:** District 4 revitalization initiatives freeze at announcement status, leaving Dimond's accelerating decay momentum unaddressed.\n\n## Avery Santana — Mayor\n\n- **Agent:** `.claude/agents/civic-office-mayor/`\n- **Address:** Transmit responsive legislative proposals for the 7 citizen complaints on the executive ledger and file the charter renewal ordinance for the West Oakland Stabilization Fund (INIT-001).\n- **Why:** The mayoral petition pool has grown to 7 unresolved complaints—more than double the charter visibility line of 3—with no proposals filed, while INIT-001 completed Month-12 disbursement in C114 and requires charter renewal legislation before its C115 stall clock lapses.\n- **Acceptance:** Formal legislative filings responding to the 7 citizen petitions and a transmitted INIT-001 charter renewal proposal on the council docket in C115.\n- **Silence consequence:** Executive default under municipal petition rules and programmatic expiration of West Oakland's primary stabilization vehicle at the close of its twelve-month disbursement cycle.\n\n## Denise Carter — City Council District 1\n\n- **Agent:** `.claude/agents/civic-office-council-d1/`\n- **Address:** Publish the baseline findings of the Brooklyn municipal service audit and file District 1 dispatch evaluation metrics for the Oakland Alternative Response Initiative (INIT-002).\n- **Why:** Brooklyn logged the city's lowest sentiment at -0.09 with decay momentum of 1 in C114, while District 1 carries 1 unresolved citizen petition and faces C115 stall clocks across INIT-001, INIT-002, INIT-007, and INIT-010.\n- **Acceptance:** A published administrative service audit report for Brooklyn and filed D1 evaluation data for INIT-002 in C115.\n- **Silence consequence:** Brooklyn corridor sentiment declines further without municipal intervention, and District 1 alternative response data remains missing from citywide safety reporting.\n\n## Rose Delgado — City Council District 3\n\n- **Agent:** `.claude/agents/civic-office-council-d3/`\n- **Address:** Execute the District 3 community briefing for the Oakland Alternative Response Initiative (INIT-002) and publish the preliminary schematics review schedule for Fruitvale Transit Hub Phase II (INIT-003).\n- **Why:** INIT-002 and INIT-003 carry C114 milestones approaching C115 stall thresholds, while San Antonio registers a city-high crime index of 0.73, retail vitality of 6.43, and 2 unresolved citizen complaints on the district board.\n- **Acceptance:** Documented execution of the D3 OARI community briefing and a published schematic review date for INIT-003 in C115.\n- **Silence consequence:** Community oversight on alternative dispatch lapses in San Antonio, and capital planning for Fruitvale Phase II freezes at preliminary design.\n\n## Janae Rivers — City Council District 5\n\n- **Agent:** `.claude/agents/civic-office-council-d5/`\n- **Address:** Publish the placement gap analysis and cohort adjustments for the Oakland Youth Apprenticeship Pipeline (INIT-007) and file a formal disposition for the active District 5 citizen complaint.\n- **Why:** INIT-007 reached its C114 placement gap milestone and faces a C115 stall clock following initial cohort reporting in C113, while District 5 carries 1 unaddressed complaint and co-manages dispatch expansion milestones under INIT-002.\n- **Acceptance:** A filed placement gap analysis with programmatic adjustments for INIT-007 and a recorded resolution to the D5 citizen petition in C115.\n- **Silence consequence:** Apprenticeship cohort allocations miss the adjustment window, stalling intake expansion for East Oakland applicants.\n",
+  "citizens": {
+    "total": 168,
+    "tierBreakdown": {
+      "1": 5,
+      "2": 4,
+      "3": 33,
+      "4": 126
+    },
+    "avgIncome": 838013,
+    "medianIncome": 110000,
+    "atDisplacementRisk": 165,
+    "linkedProfiles": [],
+    "notableCitizens": [
+      {
+        "popId": "POP-00003",
+        "name": "Mark Aitken",
+        "tier": 1,
+        "neighborhood": "Jack London",
+        "occupation": "",
+        "displacementRisk": 4
+      },
+      {
+        "popId": "POP-00056",
+        "name": "Mint Condition",
+        "tier": 2,
+        "neighborhood": "Downtown",
+        "occupation": "",
+        "displacementRisk": 5
+      },
+      {
+        "popId": "POP-00127",
+        "name": "Mason Miller",
+        "tier": 1,
+        "neighborhood": "Downtown",
+        "occupation": "",
+        "displacementRisk": 5
+      },
+      {
+        "popId": "POP-00533",
+        "name": "Travis Coles",
+        "tier": 1,
+        "neighborhood": "Downtown",
+        "occupation": "",
+        "displacementRisk": 7
+      },
+      {
+        "popId": "POP-00597",
+        "name": "Eric Taveras",
+        "tier": 1,
+        "neighborhood": "Downtown",
+        "occupation": "",
+        "displacementRisk": 7
+      },
+      {
+        "popId": "POP-00688",
+        "name": "Merkin Jumper",
+        "tier": 2,
+        "neighborhood": "Downtown",
+        "occupation": "",
+        "displacementRisk": 7
+      },
+      {
+        "popId": "POP-00753",
+        "name": "Eunice Marston",
+        "tier": 2,
+        "neighborhood": "Downtown",
+        "occupation": "",
+        "displacementRisk": 7
+      },
+      {
+        "popId": "POP-00764",
+        "name": "Tao Lee",
+        "tier": 2,
+        "neighborhood": "Downtown",
+        "occupation": "",
+        "displacementRisk": 7
+      },
+      {
+        "popId": "POP-01023",
+        "name": "Adash Stanley",
+        "tier": 1,
+        "neighborhood": "Downtown",
+        "occupation": "",
+        "displacementRisk": 5
+      }
+    ]
+  },
+  "neighborhoods": [
+    {
+      "neighborhood": "Downtown",
+      "sentiment": 0.11,
+      "medianIncome": "122665",
+      "medianRent": "3067",
+      "trajectory": "growth",
+      "housingPressure": "10",
+      "crimeIndex": 0.57,
+      "retailVitality": 14.51,
+      "students": 242,
+      "adults": 2299,
+      "seniors": 234,
+      "unemployed": 56,
+      "sick": 74,
+      "schoolQuality": 7.37,
+      "propertyCrime": 37,
+      "violentCrime": 20,
+      "responseTime": 10.8,
+      "incidents": 5
+    },
+    {
+      "neighborhood": "Jack London",
+      "sentiment": 0.2,
+      "medianIncome": "120380",
+      "medianRent": "3010",
+      "trajectory": "growth",
+      "housingPressure": "10",
+      "crimeIndex": 0.58,
+      "retailVitality": 17.41,
+      "students": 202,
+      "adults": 2205,
+      "seniors": 183,
+      "unemployed": 61,
+      "sick": 68,
+      "schoolQuality": 7.48,
+      "propertyCrime": 39,
+      "violentCrime": 19,
+      "responseTime": 10.7,
+      "incidents": 6
+    },
+    {
+      "neighborhood": "Brooklyn",
+      "sentiment": -0.11,
+      "medianIncome": "129222",
+      "medianRent": "3231",
+      "trajectory": "decay",
+      "housingPressure": "0",
+      "crimeIndex": 0.62,
+      "retailVitality": 6.22,
+      "students": 350,
+      "adults": 1504,
+      "seniors": 293,
+      "unemployed": 49,
+      "sick": 67,
+      "schoolQuality": 8.18,
+      "propertyCrime": 35,
+      "violentCrime": 27,
+      "responseTime": 11.3,
+      "incidents": 6
+    }
+  ],
+  "businesses": [
+    {
+      "bizId": "BIZ-00013",
+      "name": "AC Transit",
+      "sector": "Public Transit",
+      "neighborhood": "Downtown",
+      "employeeCount": 2101,
+      "avgSalary": 78000,
+      "growthRate": "12.16",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00019",
+      "name": "EBMUD",
+      "sector": "Utilities",
+      "neighborhood": "Downtown",
+      "employeeCount": 1900,
+      "avgSalary": 44312,
+      "growthRate": "12.05",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00012",
+      "name": "Port of Oakland",
+      "sector": "Port & Logistics",
+      "neighborhood": "Jack London",
+      "employeeCount": 1501,
+      "avgSalary": 95000,
+      "growthRate": "12.45",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00017",
+      "name": "City of Oakland",
+      "sector": "Municipal Government",
+      "neighborhood": "Downtown",
+      "employeeCount": 1201,
+      "avgSalary": 88000,
+      "growthRate": "11.57",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00014",
+      "name": "BART Oakland Division",
+      "sector": "Public Transit",
+      "neighborhood": "Downtown",
+      "employeeCount": 900,
+      "avgSalary": 86086,
+      "growthRate": "15.7",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00022",
+      "name": "Alameda County Courts",
+      "sector": "Legal & Judicial",
+      "neighborhood": "Downtown",
+      "employeeCount": 222,
+      "avgSalary": 95000,
+      "growthRate": "13.71",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00057",
+      "name": "Anchor Build",
+      "sector": "Construction",
+      "neighborhood": "Jack London",
+      "employeeCount": 181,
+      "avgSalary": 80000,
+      "growthRate": "12.67",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00183",
+      "name": "Bayline 6",
+      "sector": "Media & Journalism",
+      "neighborhood": "Jack London",
+      "employeeCount": 142,
+      "avgSalary": 82000,
+      "growthRate": "11.79",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00054",
+      "name": "Pacific Standard Architecture",
+      "sector": "Architecture",
+      "neighborhood": "Downtown",
+      "employeeCount": 97,
+      "avgSalary": 112000,
+      "growthRate": "9.99",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00089",
+      "name": "Atlas Bay Architects",
+      "sector": "Architecture",
+      "neighborhood": "Downtown",
+      "employeeCount": 86,
+      "avgSalary": 110000,
+      "growthRate": "11.99",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00018",
+      "name": "Bay Tribune",
+      "sector": "Media & Journalism",
+      "neighborhood": "Downtown",
+      "employeeCount": 62,
+      "avgSalary": 73758,
+      "growthRate": "13.71",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00095",
+      "name": "Oakland Alternative Response Initiative",
+      "sector": "Public Safety / Crisis Response",
+      "neighborhood": "Downtown",
+      "employeeCount": 47,
+      "avgSalary": 74000,
+      "growthRate": "6.17",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00257",
+      "name": "Estuary Pediatrics",
+      "sector": "Pediatric Clinic",
+      "neighborhood": "Brooklyn",
+      "employeeCount": 38,
+      "avgSalary": 85000,
+      "growthRate": "1.19",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00029",
+      "name": "Coliseum District Development",
+      "sector": "Real Estate",
+      "neighborhood": "Coliseum",
+      "employeeCount": 31,
+      "avgSalary": 105000,
+      "growthRate": "9.85",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00036",
+      "name": "Blue Lantern Bar",
+      "sector": "Nightlife & Entertainment",
+      "neighborhood": "Jack London",
+      "employeeCount": 31,
+      "avgSalary": 65000,
+      "growthRate": "12.86",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00051",
+      "name": "SpeedyBurger",
+      "sector": "Fast Food & Quick Service",
+      "neighborhood": "Downtown",
+      "employeeCount": 31,
+      "avgSalary": 58000,
+      "growthRate": "12.2",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00033",
+      "name": "Jack London Square Markets",
+      "sector": "Retail & Food",
+      "neighborhood": "Jack London",
+      "employeeCount": 30,
+      "avgSalary": 65000,
+      "growthRate": "9.99",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00037",
+      "name": "Temple Lounge",
+      "sector": "Nightlife & Entertainment",
+      "neighborhood": "Downtown",
+      "employeeCount": 30,
+      "avgSalary": 66000,
+      "growthRate": "12.3",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00041",
+      "name": "Green & Gold Tavern",
+      "sector": "Sports Bar & Dining",
+      "neighborhood": "Jack London",
+      "employeeCount": 30,
+      "avgSalary": 61000,
+      "growthRate": "11.68",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00199",
+      "name": "Broadway Mutual Bank",
+      "sector": "Finance & Banking",
+      "neighborhood": "Downtown",
+      "employeeCount": 26,
+      "avgSalary": 95000,
+      "growthRate": "5.61",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00200",
+      "name": "Clay Street Law Group",
+      "sector": "Law Firm",
+      "neighborhood": "Downtown",
+      "employeeCount": 26,
+      "avgSalary": 95000,
+      "growthRate": "5.42",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00201",
+      "name": "Fourteenth Street Capital",
+      "sector": "Wealth Management / Finance",
+      "neighborhood": "Downtown",
+      "employeeCount": 26,
+      "avgSalary": 95000,
+      "growthRate": "5.21",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00202",
+      "name": "Tower Commercial Property",
+      "sector": "Real Estate Finance",
+      "neighborhood": "Downtown",
+      "employeeCount": 26,
+      "avgSalary": 95000,
+      "growthRate": "5.21",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00116",
+      "name": "Slip Street Kitchen",
+      "sector": "Restaurant & Dining",
+      "neighborhood": "Brooklyn",
+      "employeeCount": 16,
+      "avgSalary": 68000,
+      "growthRate": "4.21",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00114",
+      "name": "Basin Grocer",
+      "sector": "Retail",
+      "neighborhood": "Brooklyn",
+      "employeeCount": 14,
+      "avgSalary": 72000,
+      "growthRate": "4.02",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00115",
+      "name": "Basin Athletic Club",
+      "sector": "Services",
+      "neighborhood": "Brooklyn",
+      "employeeCount": 12,
+      "avgSalary": 72000,
+      "growthRate": "4.89",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00098",
+      "name": "Oakland Youth Apprenticeship Pipeline",
+      "sector": "Workforce Development",
+      "neighborhood": "Downtown",
+      "employeeCount": 11,
+      "avgSalary": 0,
+      "growthRate": "7",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00191",
+      "name": "Heinold's First and Last Chance Saloon",
+      "sector": "Bar / Saloon / Historic Landmark",
+      "neighborhood": "Jack London",
+      "employeeCount": 11,
+      "avgSalary": 48000,
+      "growthRate": "5.66",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00194",
+      "name": "Estuary Oyster House",
+      "sector": "Restaurant & Dining",
+      "neighborhood": "Jack London",
+      "employeeCount": 11,
+      "avgSalary": 48000,
+      "growthRate": "5.15",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00195",
+      "name": "Dockside Comedy Club",
+      "sector": "Comedy Club",
+      "neighborhood": "Jack London",
+      "employeeCount": 11,
+      "avgSalary": 48000,
+      "growthRate": "5.89",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00196",
+      "name": "Warehouse Nine Brewing",
+      "sector": "Brewery",
+      "neighborhood": "Jack London",
+      "employeeCount": 11,
+      "avgSalary": 48000,
+      "growthRate": "5.21",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00197",
+      "name": "The Hold",
+      "sector": "Dance Club / Nightlife & Entertainment",
+      "neighborhood": "Jack London",
+      "employeeCount": 11,
+      "avgSalary": 48000,
+      "growthRate": "4.97",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00198",
+      "name": "Third Street Late Kitchen",
+      "sector": "Late-Night Restaurant & Dining",
+      "neighborhood": "Jack London",
+      "employeeCount": 11,
+      "avgSalary": 48000,
+      "growthRate": "4.7",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00101",
+      "name": "Oakland Entertainment Talent Agency",
+      "sector": "Talent Management",
+      "neighborhood": "Downtown",
+      "employeeCount": 10,
+      "avgSalary": 66000,
+      "growthRate": "6.91",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00113",
+      "name": "Quay Coffee",
+      "sector": "Cafe / dining",
+      "neighborhood": "Brooklyn",
+      "employeeCount": 9,
+      "avgSalary": 65000,
+      "growthRate": "5.22",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00192",
+      "name": "Embarcadero Music Hall",
+      "sector": "Music Venue",
+      "neighborhood": "Jack London",
+      "employeeCount": 9,
+      "avgSalary": 55000,
+      "growthRate": "5.05",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00193",
+      "name": "Loading Dock Studios",
+      "sector": "Design Studio",
+      "neighborhood": "Jack London",
+      "employeeCount": 9,
+      "avgSalary": 55000,
+      "growthRate": "4.14",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00117",
+      "name": "Brooklyn Pharmacy",
+      "sector": "Retail",
+      "neighborhood": "Brooklyn",
+      "employeeCount": 8,
+      "avgSalary": 72000,
+      "growthRate": "3.55",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00044",
+      "name": "Harborline Grill",
+      "sector": "Restaurant & Dining",
+      "neighborhood": "Jack London",
+      "employeeCount": 7,
+      "avgSalary": 61000,
+      "growthRate": "11",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00256",
+      "name": "Basin Residential Management",
+      "sector": "Property Management / Real Estate",
+      "neighborhood": "Brooklyn",
+      "employeeCount": 6,
+      "avgSalary": 45000,
+      "growthRate": "-0.19",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00258",
+      "name": "Shoreline Kayak & Paddle",
+      "sector": "Outdoor Rental / Services",
+      "neighborhood": "Brooklyn",
+      "employeeCount": 6,
+      "avgSalary": 45000,
+      "growthRate": "-0.15",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00093",
+      "name": "Telegraph Presbyterian Fellowship",
+      "sector": "Church",
+      "neighborhood": "Downtown",
+      "employeeCount": 5,
+      "avgSalary": 53000,
+      "growthRate": "4.8",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00118",
+      "name": "Estuary Cleaners",
+      "sector": "Services",
+      "neighborhood": "Brooklyn",
+      "employeeCount": 5,
+      "avgSalary": 72000,
+      "growthRate": "1.98",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00087",
+      "name": "Lake Merritt Mindfulness Sangha",
+      "sector": "Faith Organization",
+      "neighborhood": "Downtown",
+      "employeeCount": 4,
+      "avgSalary": 47000,
+      "growthRate": "7.87",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00259",
+      "name": "Ninth Avenue Bottle Shop",
+      "sector": "Wine & Spirits Shop",
+      "neighborhood": "Brooklyn",
+      "employeeCount": 4,
+      "avgSalary": 42000,
+      "growthRate": "-0.27",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00102",
+      "name": "Presti Accounting",
+      "sector": "Corporate",
+      "neighborhood": "Downtown",
+      "employeeCount": 3,
+      "avgSalary": 120000,
+      "growthRate": "7.34",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00047",
+      "name": "Miso Metro",
+      "sector": "Restaurant & Dining",
+      "neighborhood": "Downtown",
+      "employeeCount": 2,
+      "avgSalary": 62000,
+      "growthRate": "11.77",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00049",
+      "name": "Midnight Bistro",
+      "sector": "Restaurant & Dining",
+      "neighborhood": "Downtown",
+      "employeeCount": 2,
+      "avgSalary": 62000,
+      "growthRate": "12.48",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00050",
+      "name": "Dockhouse BBQ",
+      "sector": "Restaurant & Dining",
+      "neighborhood": "Jack London",
+      "employeeCount": 2,
+      "avgSalary": 61000,
+      "growthRate": "10.72",
+      "status": ""
+    }
+  ]
+}

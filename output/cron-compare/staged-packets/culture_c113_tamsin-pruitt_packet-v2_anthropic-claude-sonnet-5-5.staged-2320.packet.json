@@ -1,0 +1,1169 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-01210",
+    "name": "Tamsin Pruitt",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "The lives of C113, 2026-10-28: 11 people — Brady Lopez moved into a place of their own in Piedmont Ave, renting",
+    "approach": "Lives approach: this slice is the people something happened to this Cycle — a birth, a death in the house, a hospital stay, a retirement, a promotion; a household set up or a place of their own; a win or a loss on the book; the people a turn of the city reached and what it did to their day; and the smaller moments the record kept. Each person gets their own passage: the event, then the thread under it — the stay or strain that led there, the other lines the record kept for them, what the Tribune or this page already said of them, and what they did next if the record says. Read the thread in order and name where two lines of it do not agree; do not restate a ledger value as the story. The fact exactly right; never a trend, never a number first; the person, not the system the event belongs to. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent p",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "lives",
+      "hood": null,
+      "facts": [
+        "Brady Lopez moved into a place of their own in Piedmont Ave, renting (C113)",
+        "Brady Lopez — on the log, C112: saved the Tribune clipping with their neighborhood in it — the good one",
+        "Brady Lopez — on the log, C112: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+        "Brady Lopez — on the log, C112: painted over graffiti on the recreation center wall alongside five neighbors they barely knew",
+        "Brady Lopez — on the log, C113: noticed the calendar squares all look alike lately, and couldn't decide if that's peace",
+        "Brady Lopez — the Tribune named them in a piece headlined Uptown's Two Speeds: The Block Moves Faster Than the Store (Business, C112)",
+        "Kwame Fitzgerald moved into a place of their own in Uptown, renting (C113)",
+        "Kwame Fitzgerald — on the log, C112: engaged with urban arts education",
+        "Kwame Fitzgerald — on the log, C113: drank the free cold brew in the company kitchen and felt completely disconnected from the neighborhood outside",
+        "Kwame Fitzgerald — on the log, C113: limited social activity due to winter mood",
+        "Kwame Fitzgerald — on the log, C113: navigated the stroller traffic on College Avenue and silently judged the parking jobs",
+        "Kwame Fitzgerald — the Tribune named them in a piece headlined The Foundation and the Pillars: Baylight Phase II Steps Into the Light (Business, C99)",
+        "Solis Walmart won on the UNDOCKED book — staked 336, paid 615, Downtown (C113)",
+        "Solis Walmart — on the log, C112: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+        "Solis Walmart — on the log, C113: joined the crowd at Downtown Volunteer Boost Rally last night",
+        "Solis Walmart — on the log, C113: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+        "Solis Walmart — on the log, C113: felt quietly lucky to call Downtown home",
+        "Reggie Soto lost on the UNDOCKED book — staked 247, the book kept it, Fruitvale (C113)",
+        "Reggie Soto — on the log, C112: got recognized by a stranger who'd read about them in the Tribune",
+        "Reggie Soto — on the log, C112: read about something unfamiliar and kept pulling the thread near a corner market",
+        "Reggie Soto — on the log, C112: noticed another new spot opening up in Fruitvale",
+        "Reggie Soto — on the log, C113: walked a different street home just to see it",
+        "Reggie Soto — the Tribune named them in a piece headlined The Slot and the Street: Fruitvale's Transit Bargain Comes Due (Civic Affairs, C99)",
+        "Naomi Sterling — caught themselves narrating the day as if telling it to someone gone, Rockridge — one of 4 people the Cycle's city turn reached (Initiative work landed in 7 neighborhood(s): Downtown, Temescal, West Oakland, Fruitvale, Jack London, Grand Lake, East Oakland) (C113)",
+        "Naomi Sterling — on the log, C112: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
+        "Matra Woven — stepped over a puddle reflecting the Tribune Tower neon and thought about taking a picture, Chinatown — one of 4 people the Cycle's safety turn reached (A letter ends the biggest account on the books — the owner reads it twice before telling the staff.) (C113)",
+        "Matra Woven — on the log, C113: painted over graffiti on the recreation center wall alongside five neighbors they barely knew",
+        "Matra Woven — on the log, C113: noticed the busy morning markets",
+        "Matra Woven — on the log, C113: noticed the blend of old and new storefronts",
+        "Matra Woven — the Tribune named them in a piece headlined Six Names for 142 Sick Residents (Civic, C112)",
+        "Howard Yell — the Rockridge streets are bustling with shoppers and diners, Rockridge — one of 4 people the Cycle's safety turn reached (A train dead on the track between stations — riders walked the tunnel, and the morning never recovered.) (C113)",
+        "Tina Kozlov — moved from Temescal to Grand Lake — moving up from Temescal, Grand Lake (C113, Relocation-Drive-Up-M)",
+        "Tina Kozlov — on the log, C112: The schedule at Piedmont Avenue Medical Center came out with their name in the slot that used to belong to someone senior.",
+        "Tina Kozlov — on the log, C112: drove the church van for the senior trip and listened to three hours of unfiltered neighborhood gossip",
+        "Tina Kozlov — on the log, C112: walked through the alleyways behind Telegraph to avoid the weekend crowd",
+        "Tina Kozlov — on the log, C113: reorganized a closet and found something thought lost",
+        "Linda Chow — moved from Rockridge to West Oakland — leaving Rockridge for a better fit — sold up and bought in West Oakland, West Oakland (C113, Relocation-Composure-Up-M)",
+        "Linda Chow — on the log, C113: watched the ferry cut across the bay at sunset and felt lucky to live this close to the water",
+        "Linda Chow — on the log, C113: the Rockridge streets are bustling with shoppers and diners",
+        "Linda Chow — on the log, C113: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+        "Linda Chow — the Tribune named them in a piece headlined THE BLOCKS (Culture, C86)",
+        "Linda Chow — the Tribune named them in a piece headlined The Footprint (Business, C84)",
+        "Linda Chow — the Tribune named them in a piece headlined The Oakland Stack (Social Trends, C84)",
+        "Austin Reaves — moved from Downtown to West Oakland — moving up from Downtown — sold up and bought in West Oakland, West Oakland (C113, Relocation-Drive-Up-M)",
+        "Austin Reaves — on the log, C113: came home to find the neighbors had left a case of something cold on the porch",
+        "Austin Reaves — on the log, C113: drove home with the radio off, letting the win settle",
+        "Austin Reaves — on the log, C113: tried to keep the streak out of the conversation at dinner and failed",
+        "Austin Reaves — on the log, C113: let the week's wins carry dinner",
+        "Austin Reaves — the Tribune named them in a piece headlined Oaks' First Win Offers a Useful Opening Read (Sports, C112)",
+        "Austin Reaves — the Tribune named them in a piece headlined The Weight of One (Sports, C112)",
+        "Austin Reaves — the Tribune named them in a piece headlined The First Win Has Made the Room Louder, Not Certain (Sports, C112)",
+        "Amara Osei — moved from Jack London to West Oakland — moving up from Jack London, West Oakland (C113, Relocation-Drive-Up-M)",
+        "Amara Osei — on the log, C113: found a quiet minute at a venue doorway and let the week's noise settle",
+        "Amara Osei — on the log, C113: put on their good suit for the Sunday service because some traditions still matter",
+        "Amara Osei — on the log, C113: stood by the bar at a ferry-adjacent corner, nodding along to the DJ’s set",
+        "Amara Osei — on the log, C113: had a quiet moment at home",
+        "Amara Osei — the Tribune named them in a piece headlined The Oakland Stack (Social Trends, C84)",
+        "Amara Osei — the Tribune named them in a piece headlined THE TURNING POINT EDITION (General, C40)",
+        "Amara Osei — the Tribune named them in a piece headlined The_Cycle_Pulse(Sonnet4.5) (General, C39)"
+      ],
+      "priorCycle": null,
+      "note": "none of today's people has written their own page this Cycle — no quotes",
+      "engineHooks": [
+        "A family bought their home in Jack London (observational analysis)",
+        "A family bought their home in Uptown (observational analysis)",
+        "A family bought their home in Chinatown (observational analysis)",
+        "A family bought their home in Rockridge (observational analysis)"
+      ],
+      "roomIsYours": "the plain respect, what the event meant in that house or on that block, the detail the family would have picked — from the lines below, never invented",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-lives",
+    "hood": null,
+    "src": "output/beats/Lived_Events.jsonl @C113 2026-10-28",
+    "plan": {
+      "focus": "Lives of C113: people who experienced significant events",
+      "closeQuestion": "How do these individual life events reflect the broader trends in Oakland?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00256",
+        "name": "Brady Lopez",
+        "profile": "Brady Lopez — Dishwasher — Piedmont Ave",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00334",
+        "name": "Solis Walmart",
+        "profile": "Solis Walmart — Housing Authority Inspector — Downtown",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00590",
+        "name": "Reggie Soto",
+        "profile": "Reggie Soto — Auto Body Shop Owner — Fruitvale",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00759",
+        "name": "Naomi Sterling",
+        "profile": "Naomi Sterling — Senior Pastor / Faith Leader — Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00256-e85d1aff19",
+        "pop": "POP-00256",
+        "name": "Brady Lopez",
+        "quote": "I've been playing to climb — a place of my own first. The last stretch threw a money week that mattered. Now I'm renting a place on Piedmont Ave.",
+        "factIds": [
+          "F-c8210678d2a3",
+          "F-feb2153d6cbd",
+          "F-f5cfc71f1fb7"
+        ],
+        "src": "packet.W2[POP-00256]"
+      },
+      {
+        "id": "Q-POP-00334-d6dfd26354",
+        "pop": "POP-00334",
+        "name": "Solis Walmart",
+        "quote": "The window paid, that's all I can say. The week changed color. I was on cloud nine for a bit.",
+        "factIds": [
+          "F-ec711fe7eea3",
+          "F-fea9cf861b9c"
+        ],
+        "src": "packet.W2[POP-00334]"
+      },
+      {
+        "id": "Q-POP-00590-775bb06ac7",
+        "pop": "POP-00590",
+        "name": "Reggie Soto",
+        "quote": "I wasn't too surprised when the slip came back empty. I'd been thinking about it, and it just didn't feel right. Losing 247 isn't great, but it's not the end of the world either. I've been around here long enough to know that sometimes things just don't go your way.",
+        "factIds": [
+          "F-8caa69fd9d4c",
+          "F-d9eeaf2db5a1"
+        ],
+        "src": "packet.W2[POP-00590]"
+      },
+      {
+        "id": "Q-POP-00759-2080f5b333",
+        "pop": "POP-00759",
+        "name": "Naomi Sterling",
+        "quote": "I attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard. That's the kind of initiative work that resonates with me.",
+        "factIds": [
+          "F-b32dfaad7a5d",
+          "F-cd432e69eb67"
+        ],
+        "src": "packet.W2[POP-00759]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Tamsin Pruitt",
+        "text": "The impact of the Oakland Alternative Response Initiative on residents' feelings of safety",
+        "usable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "The significance of people moving into new places in different neighborhoods",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C113",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-876f95b5eb98"
+    },
+    {
+      "t": "FACT",
+      "text": "Brady Lopez moved into a place of their own in Piedmont Ave, renting",
+      "src": "output/beats/Lived_Events.jsonl @C113 2026-10-28",
+      "id": "F-c8210678d2a3"
+    },
+    {
+      "t": "FACT",
+      "text": "Brady Lopez first. The event is the lead; one true detail; what came next only if the record says.",
+      "src": "output/beats/Lived_Events.jsonl @C113 2026-10-28",
+      "id": "F-f752dd2f1b2b"
+    },
+    {
+      "t": "FACT",
+      "text": "Brady Lopez moved into a place of their own in Piedmont Ave, renting (C113)",
+      "src": "output/beats/Household_Ledger.jsonl @C113",
+      "id": "F-feb2153d6cbd"
+    },
+    {
+      "t": "FACT",
+      "text": "Brady Lopez — on the log, C112: saved the Tribune clipping with their neighborhood in it — the good one",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-150bdf49633d"
+    },
+    {
+      "t": "FACT",
+      "text": "Brady Lopez — on the log, C112: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-5356639e4f8a"
+    },
+    {
+      "t": "FACT",
+      "text": "Brady Lopez — on the log, C112: painted over graffiti on the recreation center wall alongside five neighbors they barely knew",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-205d378c95a7"
+    },
+    {
+      "t": "FACT",
+      "text": "Brady Lopez — on the log, C113: noticed the calendar squares all look alike lately, and couldn't decide if that's peace",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-f5cfc71f1fb7"
+    },
+    {
+      "t": "FACT",
+      "text": "Brady Lopez — the Tribune named them in a piece headlined Uptown's Two Speeds: The Block Moves Faster Than the Store (Business, C112)",
+      "src": "archive/ARTICLE_INDEX.jsonl 6bc955294e6e05a5",
+      "id": "F-67709b0d69e8"
+    },
+    {
+      "t": "FACT",
+      "text": "Kwame Fitzgerald moved into a place of their own in Uptown, renting (C113)",
+      "src": "output/beats/Household_Ledger.jsonl @C113",
+      "id": "F-c8f9f0dfbb5b"
+    },
+    {
+      "t": "FACT",
+      "text": "Kwame Fitzgerald — on the log, C112: engaged with urban arts education",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-59520c455b02"
+    },
+    {
+      "t": "FACT",
+      "text": "Kwame Fitzgerald — on the log, C113: drank the free cold brew in the company kitchen and felt completely disconnected from the neighborhood outside",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-7a119868eac1"
+    },
+    {
+      "t": "FACT",
+      "text": "Kwame Fitzgerald — on the log, C113: limited social activity due to winter mood",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-84ea9328298f"
+    },
+    {
+      "t": "FACT",
+      "text": "Kwame Fitzgerald — on the log, C113: navigated the stroller traffic on College Avenue and silently judged the parking jobs",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-5bf0070ebe04"
+    },
+    {
+      "t": "FACT",
+      "text": "Kwame Fitzgerald — the Tribune named them in a piece headlined The Foundation and the Pillars: Baylight Phase II Steps Into the Light (Business, C99)",
+      "src": "archive/ARTICLE_INDEX.jsonl 76cef62ddd47bd4d",
+      "id": "F-cb4f862c8d86"
+    },
+    {
+      "t": "FACT",
+      "text": "Solis Walmart won on the UNDOCKED book — staked 336, paid 615, Downtown (C113)",
+      "src": "output/beats/Casino_Ledger.jsonl @C113",
+      "id": "F-ec711fe7eea3"
+    },
+    {
+      "t": "FACT",
+      "text": "Solis Walmart — on the log, C112: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-d3fa91ac9003"
+    },
+    {
+      "t": "FACT",
+      "text": "Solis Walmart — on the log, C113: joined the crowd at Downtown Volunteer Boost Rally last night",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-fea9cf861b9c"
+    },
+    {
+      "t": "FACT",
+      "text": "Solis Walmart — on the log, C113: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-57ba0d269e0e"
+    },
+    {
+      "t": "FACT",
+      "text": "Solis Walmart — on the log, C113: felt quietly lucky to call Downtown home",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-dd09215fd6ae"
+    },
+    {
+      "t": "FACT",
+      "text": "Reggie Soto lost on the UNDOCKED book — staked 247, the book kept it, Fruitvale (C113)",
+      "src": "output/beats/Casino_Ledger.jsonl @C113",
+      "id": "F-8caa69fd9d4c"
+    },
+    {
+      "t": "FACT",
+      "text": "Reggie Soto — on the log, C112: got recognized by a stranger who'd read about them in the Tribune",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-8bfc34bce2c0"
+    },
+    {
+      "t": "FACT",
+      "text": "Reggie Soto — on the log, C112: read about something unfamiliar and kept pulling the thread near a corner market",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-78162525683a"
+    },
+    {
+      "t": "FACT",
+      "text": "Reggie Soto — on the log, C112: noticed another new spot opening up in Fruitvale",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-e2a581efd702"
+    },
+    {
+      "t": "FACT",
+      "text": "Reggie Soto — on the log, C113: walked a different street home just to see it",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-0d1d6d8d4daf"
+    },
+    {
+      "t": "FACT",
+      "text": "Reggie Soto — the Tribune named them in a piece headlined The Slot and the Street: Fruitvale's Transit Bargain Comes Due (Civic Affairs, C99)",
+      "src": "archive/ARTICLE_INDEX.jsonl 251fc8e200c99977",
+      "id": "F-a3a51934deb5"
+    },
+    {
+      "t": "FACT",
+      "text": "Naomi Sterling — caught themselves narrating the day as if telling it to someone gone, Rockridge — one of 4 people the Cycle's city turn reached (Initiative work landed in 7 neighborhood(s): Downtown, Temescal, West Oakland, Fruitvale, Jack London, Grand Lake, East Oakland) (C113)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C113",
+      "id": "F-cd432e69eb67"
+    },
+    {
+      "t": "FACT",
+      "text": "Naomi Sterling — on the log, C112: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-b32dfaad7a5d"
+    },
+    {
+      "t": "FACT",
+      "text": "Matra Woven — stepped over a puddle reflecting the Tribune Tower neon and thought about taking a picture, Chinatown — one of 4 people the Cycle's safety turn reached (A letter ends the biggest account on the books — the owner reads it twice before telling the staff.) (C113)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C113",
+      "id": "F-0b517b8ce38c"
+    },
+    {
+      "t": "FACT",
+      "text": "Matra Woven — on the log, C113: painted over graffiti on the recreation center wall alongside five neighbors they barely knew",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-f8a54b56870c"
+    },
+    {
+      "t": "FACT",
+      "text": "Matra Woven — on the log, C113: noticed the busy morning markets",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-a7aee583c961"
+    },
+    {
+      "t": "FACT",
+      "text": "Matra Woven — on the log, C113: noticed the blend of old and new storefronts",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-4e45b86ddf9b"
+    },
+    {
+      "t": "FACT",
+      "text": "Matra Woven — the Tribune named them in a piece headlined Six Names for 142 Sick Residents (Civic, C112)",
+      "src": "archive/ARTICLE_INDEX.jsonl bad852382ed2ab09",
+      "id": "F-133dabe65b26"
+    },
+    {
+      "t": "FACT",
+      "text": "Howard Yell — the Rockridge streets are bustling with shoppers and diners, Rockridge — one of 4 people the Cycle's safety turn reached (A train dead on the track between stations — riders walked the tunnel, and the morning never recovered.) (C113)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C113",
+      "id": "F-db72abad12eb"
+    },
+    {
+      "t": "FACT",
+      "text": "Tina Kozlov — moved from Temescal to Grand Lake — moving up from Temescal, Grand Lake (C113, Relocation-Drive-Up-M)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-05e31f154705"
+    },
+    {
+      "t": "FACT",
+      "text": "Tina Kozlov — on the log, C112: The schedule at Piedmont Avenue Medical Center came out with their name in the slot that used to belong to someone senior.",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-003000ecf145"
+    },
+    {
+      "t": "FACT",
+      "text": "Tina Kozlov — on the log, C112: drove the church van for the senior trip and listened to three hours of unfiltered neighborhood gossip",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-dd4f56e23745"
+    },
+    {
+      "t": "FACT",
+      "text": "Tina Kozlov — on the log, C112: walked through the alleyways behind Telegraph to avoid the weekend crowd",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-b2a9e8dec2bc"
+    },
+    {
+      "t": "FACT",
+      "text": "Tina Kozlov — on the log, C113: reorganized a closet and found something thought lost",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-6826dcc62373"
+    },
+    {
+      "t": "FACT",
+      "text": "Linda Chow — moved from Rockridge to West Oakland — leaving Rockridge for a better fit — sold up and bought in West Oakland, West Oakland (C113, Relocation-Composure-Up-M)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-43fbc4c01a76"
+    },
+    {
+      "t": "FACT",
+      "text": "Linda Chow — on the log, C113: watched the ferry cut across the bay at sunset and felt lucky to live this close to the water",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-2e27d8827571"
+    },
+    {
+      "t": "FACT",
+      "text": "Linda Chow — on the log, C113: the Rockridge streets are bustling with shoppers and diners",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-a7ed50829e10"
+    },
+    {
+      "t": "FACT",
+      "text": "Linda Chow — on the log, C113: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-8d38cfb0882f"
+    },
+    {
+      "t": "FACT",
+      "text": "Linda Chow — the Tribune named them in a piece headlined THE BLOCKS (Culture, C86)",
+      "src": "archive/ARTICLE_INDEX.jsonl 32e78115b00878e3",
+      "id": "F-b44066e8ce80"
+    },
+    {
+      "t": "FACT",
+      "text": "Linda Chow — the Tribune named them in a piece headlined The Footprint (Business, C84)",
+      "src": "archive/ARTICLE_INDEX.jsonl 6c527edbcc72fc27",
+      "id": "F-2b0c165b2aab"
+    },
+    {
+      "t": "FACT",
+      "text": "Linda Chow — the Tribune named them in a piece headlined The Oakland Stack (Social Trends, C84)",
+      "src": "archive/ARTICLE_INDEX.jsonl 03e7888a95a8413b",
+      "id": "F-b565a587d485"
+    },
+    {
+      "t": "FACT",
+      "text": "Austin Reaves — moved from Downtown to West Oakland — moving up from Downtown — sold up and bought in West Oakland, West Oakland (C113, Relocation-Drive-Up-M)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-18796cc342f7"
+    },
+    {
+      "t": "FACT",
+      "text": "Austin Reaves — on the log, C113: came home to find the neighbors had left a case of something cold on the porch",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-cd0d3db57d20"
+    },
+    {
+      "t": "FACT",
+      "text": "Austin Reaves — on the log, C113: drove home with the radio off, letting the win settle",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-2589b11556a1"
+    },
+    {
+      "t": "FACT",
+      "text": "Austin Reaves — on the log, C113: tried to keep the streak out of the conversation at dinner and failed",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-f451b2239ec5"
+    },
+    {
+      "t": "FACT",
+      "text": "Austin Reaves — on the log, C113: let the week's wins carry dinner",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-2d5131f91b08"
+    },
+    {
+      "t": "FACT",
+      "text": "Austin Reaves — the Tribune named them in a piece headlined Oaks' First Win Offers a Useful Opening Read (Sports, C112)",
+      "src": "archive/ARTICLE_INDEX.jsonl 5df1d92b058d51c6",
+      "id": "F-6d82e2b24dec"
+    },
+    {
+      "t": "FACT",
+      "text": "Austin Reaves — the Tribune named them in a piece headlined The Weight of One (Sports, C112)",
+      "src": "archive/ARTICLE_INDEX.jsonl feb13cba35476ac9",
+      "id": "F-676a17876f76"
+    },
+    {
+      "t": "FACT",
+      "text": "Austin Reaves — the Tribune named them in a piece headlined The First Win Has Made the Room Louder, Not Certain (Sports, C112)",
+      "src": "archive/ARTICLE_INDEX.jsonl 01f402b34413050e",
+      "id": "F-be875f329486"
+    },
+    {
+      "t": "FACT",
+      "text": "Amara Osei — moved from Jack London to West Oakland — moving up from Jack London, West Oakland (C113, Relocation-Drive-Up-M)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-cde2f968d3c6"
+    },
+    {
+      "t": "FACT",
+      "text": "Amara Osei — on the log, C113: found a quiet minute at a venue doorway and let the week's noise settle",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-46a8b968dd06"
+    },
+    {
+      "t": "FACT",
+      "text": "Amara Osei — on the log, C113: put on their good suit for the Sunday service because some traditions still matter",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-c2aafc3cc465"
+    },
+    {
+      "t": "FACT",
+      "text": "Amara Osei — on the log, C113: stood by the bar at a ferry-adjacent corner, nodding along to the DJ’s set",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-7cc147bb2018"
+    },
+    {
+      "t": "FACT",
+      "text": "Amara Osei — on the log, C113: had a quiet moment at home",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-d486e719fb35"
+    },
+    {
+      "t": "FACT",
+      "text": "Amara Osei — the Tribune named them in a piece headlined The Oakland Stack (Social Trends, C84)",
+      "src": "archive/ARTICLE_INDEX.jsonl 03e7888a95a8413b",
+      "id": "F-2beb0a41e37e"
+    },
+    {
+      "t": "FACT",
+      "text": "Amara Osei — the Tribune named them in a piece headlined THE TURNING POINT EDITION (General, C40)",
+      "src": "archive/ARTICLE_INDEX.jsonl 3608fc2dd191651e",
+      "id": "F-a9664471fff5"
+    },
+    {
+      "t": "FACT",
+      "text": "Amara Osei — the Tribune named them in a piece headlined The_Cycle_Pulse(Sonnet4.5) (General, C39)",
+      "src": "archive/ARTICLE_INDEX.jsonl b24daaef20f44f09",
+      "id": "F-911875901cc3"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C9, Winter, holiday=none",
+      "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+      "id": "F-ab9d6786094e"
+    },
+    {
+      "t": "FACT",
+      "text": "Reggie Soto — Auto Body Shop Owner — Fruitvale",
+      "src": "Simulation_Ledger profile for POP-00590",
+      "id": "F-d9eeaf2db5a1"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "tamsin-lives-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Put the cycle's person events in the paper as news, one person at a time — a birth, a death, a hospital stay, a retirement, a promotion, a household set up or a place of one's own, a win or a loss on the book, what a turn of the city did to someone's day, and the smaller moments the record kept. The event is the lead, the person is named as the slice names them, and what came next appears only when a later record holds it. A stake or a payout is the person's own fact, not a statistic. The page is the city's real calendar; every person on it is one the record holds.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "plain respect — a neighborhood weekly's births-and-obituaries hand, unhurried, exact",
+      "targetWords": "450-1200",
+      "opening": "the heaviest event on the slice, stated as it happened to the named person",
+      "closing": "the last person's passage ends on what the record holds next for them, or on the fact itself — no moral, no roundup"
+    },
+    "authorizedTexture": [
+      "the plain respect of the form — the ordinary weight of a birth, a retirement, a discharge, stated without ornament",
+      "the frame around a supplied fact — what a promotion to the supplied role means in plain words, without inventing the workplace",
+      "the neighborhood the slice names as where the person lives, without an invented street scene",
+      "the order and pacing of the passages — heaviest first, one person at a time"
+    ],
+    "textureConditions": [
+      "every person, event, role, employer, neighborhood, hospital stay, household and family tie must come from the slice",
+      "a quote appears only verbatim from the person's own supplied page; nothing paraphrased into quotation marks",
+      "what came next appears only when a later Cycle's supplied record holds it",
+      "a thin day (few events) is written as a short page, not padded"
+    ],
+    "canonBlockers": [
+      "any person, event, quote, venue, employer or family member not on the slice",
+      "a paraphrased or invented quote",
+      "a cause, diagnosis or outcome the record does not state",
+      "a statistic, rate or trend claim — the page is people, not numbers",
+      "intake bookkeeping rows (Emerged into Tier, Added to Simulation_Ledger, Updated to Tier) written as life events",
+      "raw engine labels or decimals printed as public-facing evidence"
+    ]
+  },
+  "manifest": {
+    "id": "AM-747e8ac6638b",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-876f95b5eb98",
+        "t": "FACT",
+        "text": "Current cycle: C113",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-c8210678d2a3",
+        "t": "FACT",
+        "text": "Brady Lopez moved into a place of their own in Piedmont Ave, renting",
+        "src": "output/beats/Lived_Events.jsonl @C113 2026-10-28"
+      },
+      {
+        "id": "F-f752dd2f1b2b",
+        "t": "FACT",
+        "text": "Brady Lopez first. The event is the lead; one true detail; what came next only if the record says.",
+        "src": "output/beats/Lived_Events.jsonl @C113 2026-10-28"
+      },
+      {
+        "id": "F-feb2153d6cbd",
+        "t": "FACT",
+        "text": "Brady Lopez moved into a place of their own in Piedmont Ave, renting (C113)",
+        "src": "output/beats/Household_Ledger.jsonl @C113"
+      },
+      {
+        "id": "F-150bdf49633d",
+        "t": "FACT",
+        "text": "Brady Lopez — on the log, C112: saved the Tribune clipping with their neighborhood in it — the good one",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-5356639e4f8a",
+        "t": "FACT",
+        "text": "Brady Lopez — on the log, C112: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-205d378c95a7",
+        "t": "FACT",
+        "text": "Brady Lopez — on the log, C112: painted over graffiti on the recreation center wall alongside five neighbors they barely knew",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-f5cfc71f1fb7",
+        "t": "FACT",
+        "text": "Brady Lopez — on the log, C113: noticed the calendar squares all look alike lately, and couldn't decide if that's peace",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-67709b0d69e8",
+        "t": "FACT",
+        "text": "Brady Lopez — the Tribune named them in a piece headlined Uptown's Two Speeds: The Block Moves Faster Than the Store (Business, C112)",
+        "src": "archive/ARTICLE_INDEX.jsonl 6bc955294e6e05a5"
+      },
+      {
+        "id": "F-c8f9f0dfbb5b",
+        "t": "FACT",
+        "text": "Kwame Fitzgerald moved into a place of their own in Uptown, renting (C113)",
+        "src": "output/beats/Household_Ledger.jsonl @C113"
+      },
+      {
+        "id": "F-59520c455b02",
+        "t": "FACT",
+        "text": "Kwame Fitzgerald — on the log, C112: engaged with urban arts education",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-7a119868eac1",
+        "t": "FACT",
+        "text": "Kwame Fitzgerald — on the log, C113: drank the free cold brew in the company kitchen and felt completely disconnected from the neighborhood outside",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-84ea9328298f",
+        "t": "FACT",
+        "text": "Kwame Fitzgerald — on the log, C113: limited social activity due to winter mood",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-5bf0070ebe04",
+        "t": "FACT",
+        "text": "Kwame Fitzgerald — on the log, C113: navigated the stroller traffic on College Avenue and silently judged the parking jobs",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-cb4f862c8d86",
+        "t": "FACT",
+        "text": "Kwame Fitzgerald — the Tribune named them in a piece headlined The Foundation and the Pillars: Baylight Phase II Steps Into the Light (Business, C99)",
+        "src": "archive/ARTICLE_INDEX.jsonl 76cef62ddd47bd4d"
+      },
+      {
+        "id": "F-ec711fe7eea3",
+        "t": "FACT",
+        "text": "Solis Walmart won on the UNDOCKED book — staked 336, paid 615, Downtown (C113)",
+        "src": "output/beats/Casino_Ledger.jsonl @C113"
+      },
+      {
+        "id": "F-d3fa91ac9003",
+        "t": "FACT",
+        "text": "Solis Walmart — on the log, C112: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-fea9cf861b9c",
+        "t": "FACT",
+        "text": "Solis Walmart — on the log, C113: joined the crowd at Downtown Volunteer Boost Rally last night",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-57ba0d269e0e",
+        "t": "FACT",
+        "text": "Solis Walmart — on the log, C113: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-dd09215fd6ae",
+        "t": "FACT",
+        "text": "Solis Walmart — on the log, C113: felt quietly lucky to call Downtown home",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-8caa69fd9d4c",
+        "t": "FACT",
+        "text": "Reggie Soto lost on the UNDOCKED book — staked 247, the book kept it, Fruitvale (C113)",
+        "src": "output/beats/Casino_Ledger.jsonl @C113"
+      },
+      {
+        "id": "F-8bfc34bce2c0",
+        "t": "FACT",
+        "text": "Reggie Soto — on the log, C112: got recognized by a stranger who'd read about them in the Tribune",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-78162525683a",
+        "t": "FACT",
+        "text": "Reggie Soto — on the log, C112: read about something unfamiliar and kept pulling the thread near a corner market",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-e2a581efd702",
+        "t": "FACT",
+        "text": "Reggie Soto — on the log, C112: noticed another new spot opening up in Fruitvale",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-0d1d6d8d4daf",
+        "t": "FACT",
+        "text": "Reggie Soto — on the log, C113: walked a different street home just to see it",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-a3a51934deb5",
+        "t": "FACT",
+        "text": "Reggie Soto — the Tribune named them in a piece headlined The Slot and the Street: Fruitvale's Transit Bargain Comes Due (Civic Affairs, C99)",
+        "src": "archive/ARTICLE_INDEX.jsonl 251fc8e200c99977"
+      },
+      {
+        "id": "F-cd432e69eb67",
+        "t": "FACT",
+        "text": "Naomi Sterling — caught themselves narrating the day as if telling it to someone gone, Rockridge — one of 4 people the Cycle's city turn reached (Initiative work landed in 7 neighborhood(s): Downtown, Temescal, West Oakland, Fruitvale, Jack London, Grand Lake, East Oakland) (C113)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C113"
+      },
+      {
+        "id": "F-b32dfaad7a5d",
+        "t": "FACT",
+        "text": "Naomi Sterling — on the log, C112: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-0b517b8ce38c",
+        "t": "FACT",
+        "text": "Matra Woven — stepped over a puddle reflecting the Tribune Tower neon and thought about taking a picture, Chinatown — one of 4 people the Cycle's safety turn reached (A letter ends the biggest account on the books — the owner reads it twice before telling the staff.) (C113)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C113"
+      },
+      {
+        "id": "F-f8a54b56870c",
+        "t": "FACT",
+        "text": "Matra Woven — on the log, C113: painted over graffiti on the recreation center wall alongside five neighbors they barely knew",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-a7aee583c961",
+        "t": "FACT",
+        "text": "Matra Woven — on the log, C113: noticed the busy morning markets",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-4e45b86ddf9b",
+        "t": "FACT",
+        "text": "Matra Woven — on the log, C113: noticed the blend of old and new storefronts",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-133dabe65b26",
+        "t": "FACT",
+        "text": "Matra Woven — the Tribune named them in a piece headlined Six Names for 142 Sick Residents (Civic, C112)",
+        "src": "archive/ARTICLE_INDEX.jsonl bad852382ed2ab09"
+      },
+      {
+        "id": "F-db72abad12eb",
+        "t": "FACT",
+        "text": "Howard Yell — the Rockridge streets are bustling with shoppers and diners, Rockridge — one of 4 people the Cycle's safety turn reached (A train dead on the track between stations — riders walked the tunnel, and the morning never recovered.) (C113)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C113"
+      },
+      {
+        "id": "F-05e31f154705",
+        "t": "FACT",
+        "text": "Tina Kozlov — moved from Temescal to Grand Lake — moving up from Temescal, Grand Lake (C113, Relocation-Drive-Up-M)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-003000ecf145",
+        "t": "FACT",
+        "text": "Tina Kozlov — on the log, C112: The schedule at Piedmont Avenue Medical Center came out with their name in the slot that used to belong to someone senior.",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-dd4f56e23745",
+        "t": "FACT",
+        "text": "Tina Kozlov — on the log, C112: drove the church van for the senior trip and listened to three hours of unfiltered neighborhood gossip",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-b2a9e8dec2bc",
+        "t": "FACT",
+        "text": "Tina Kozlov — on the log, C112: walked through the alleyways behind Telegraph to avoid the weekend crowd",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-6826dcc62373",
+        "t": "FACT",
+        "text": "Tina Kozlov — on the log, C113: reorganized a closet and found something thought lost",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-43fbc4c01a76",
+        "t": "FACT",
+        "text": "Linda Chow — moved from Rockridge to West Oakland — leaving Rockridge for a better fit — sold up and bought in West Oakland, West Oakland (C113, Relocation-Composure-Up-M)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-2e27d8827571",
+        "t": "FACT",
+        "text": "Linda Chow — on the log, C113: watched the ferry cut across the bay at sunset and felt lucky to live this close to the water",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-a7ed50829e10",
+        "t": "FACT",
+        "text": "Linda Chow — on the log, C113: the Rockridge streets are bustling with shoppers and diners",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-8d38cfb0882f",
+        "t": "FACT",
+        "text": "Linda Chow — on the log, C113: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-b44066e8ce80",
+        "t": "FACT",
+        "text": "Linda Chow — the Tribune named them in a piece headlined THE BLOCKS (Culture, C86)",
+        "src": "archive/ARTICLE_INDEX.jsonl 32e78115b00878e3"
+      },
+      {
+        "id": "F-2b0c165b2aab",
+        "t": "FACT",
+        "text": "Linda Chow — the Tribune named them in a piece headlined The Footprint (Business, C84)",
+        "src": "archive/ARTICLE_INDEX.jsonl 6c527edbcc72fc27"
+      },
+      {
+        "id": "F-b565a587d485",
+        "t": "FACT",
+        "text": "Linda Chow — the Tribune named them in a piece headlined The Oakland Stack (Social Trends, C84)",
+        "src": "archive/ARTICLE_INDEX.jsonl 03e7888a95a8413b"
+      },
+      {
+        "id": "F-18796cc342f7",
+        "t": "FACT",
+        "text": "Austin Reaves — moved from Downtown to West Oakland — moving up from Downtown — sold up and bought in West Oakland, West Oakland (C113, Relocation-Drive-Up-M)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-cd0d3db57d20",
+        "t": "FACT",
+        "text": "Austin Reaves — on the log, C113: came home to find the neighbors had left a case of something cold on the porch",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-2589b11556a1",
+        "t": "FACT",
+        "text": "Austin Reaves — on the log, C113: drove home with the radio off, letting the win settle",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-f451b2239ec5",
+        "t": "FACT",
+        "text": "Austin Reaves — on the log, C113: tried to keep the streak out of the conversation at dinner and failed",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-2d5131f91b08",
+        "t": "FACT",
+        "text": "Austin Reaves — on the log, C113: let the week's wins carry dinner",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-6d82e2b24dec",
+        "t": "FACT",
+        "text": "Austin Reaves — the Tribune named them in a piece headlined Oaks' First Win Offers a Useful Opening Read (Sports, C112)",
+        "src": "archive/ARTICLE_INDEX.jsonl 5df1d92b058d51c6"
+      },
+      {
+        "id": "F-676a17876f76",
+        "t": "FACT",
+        "text": "Austin Reaves — the Tribune named them in a piece headlined The Weight of One (Sports, C112)",
+        "src": "archive/ARTICLE_INDEX.jsonl feb13cba35476ac9"
+      },
+      {
+        "id": "F-be875f329486",
+        "t": "FACT",
+        "text": "Austin Reaves — the Tribune named them in a piece headlined The First Win Has Made the Room Louder, Not Certain (Sports, C112)",
+        "src": "archive/ARTICLE_INDEX.jsonl 01f402b34413050e"
+      },
+      {
+        "id": "F-cde2f968d3c6",
+        "t": "FACT",
+        "text": "Amara Osei — moved from Jack London to West Oakland — moving up from Jack London, West Oakland (C113, Relocation-Drive-Up-M)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-46a8b968dd06",
+        "t": "FACT",
+        "text": "Amara Osei — on the log, C113: found a quiet minute at a venue doorway and let the week's noise settle",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-c2aafc3cc465",
+        "t": "FACT",
+        "text": "Amara Osei — on the log, C113: put on their good suit for the Sunday service because some traditions still matter",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-7cc147bb2018",
+        "t": "FACT",
+        "text": "Amara Osei — on the log, C113: stood by the bar at a ferry-adjacent corner, nodding along to the DJ’s set",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-d486e719fb35",
+        "t": "FACT",
+        "text": "Amara Osei — on the log, C113: had a quiet moment at home",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-2beb0a41e37e",
+        "t": "FACT",
+        "text": "Amara Osei — the Tribune named them in a piece headlined The Oakland Stack (Social Trends, C84)",
+        "src": "archive/ARTICLE_INDEX.jsonl 03e7888a95a8413b"
+      },
+      {
+        "id": "F-a9664471fff5",
+        "t": "FACT",
+        "text": "Amara Osei — the Tribune named them in a piece headlined THE TURNING POINT EDITION (General, C40)",
+        "src": "archive/ARTICLE_INDEX.jsonl 3608fc2dd191651e"
+      },
+      {
+        "id": "F-911875901cc3",
+        "t": "FACT",
+        "text": "Amara Osei — the Tribune named them in a piece headlined The_Cycle_Pulse(Sonnet4.5) (General, C39)",
+        "src": "archive/ARTICLE_INDEX.jsonl b24daaef20f44f09"
+      },
+      {
+        "id": "F-ab9d6786094e",
+        "t": "FACT",
+        "text": "Calendar: Y3C9, Winter, holiday=none",
+        "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)"
+      },
+      {
+        "id": "F-d9eeaf2db5a1",
+        "t": "FACT",
+        "text": "Reggie Soto — Auto Body Shop Owner — Fruitvale",
+        "src": "Simulation_Ledger profile for POP-00590"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00256-e85d1aff19",
+        "speakerId": "POP-00256",
+        "speakerName": "Brady Lopez",
+        "text": "I've been playing to climb — a place of my own first. The last stretch threw a money week that mattered. Now I'm renting a place on Piedmont Ave.",
+        "factIds": [
+          "F-c8210678d2a3",
+          "F-feb2153d6cbd",
+          "F-f5cfc71f1fb7"
+        ],
+        "src": "packet.W2[POP-00256]"
+      },
+      {
+        "id": "Q-POP-00334-d6dfd26354",
+        "speakerId": "POP-00334",
+        "speakerName": "Solis Walmart",
+        "text": "The window paid, that's all I can say. The week changed color. I was on cloud nine for a bit.",
+        "factIds": [
+          "F-ec711fe7eea3",
+          "F-fea9cf861b9c"
+        ],
+        "src": "packet.W2[POP-00334]"
+      },
+      {
+        "id": "Q-POP-00590-775bb06ac7",
+        "speakerId": "POP-00590",
+        "speakerName": "Reggie Soto",
+        "text": "I wasn't too surprised when the slip came back empty. I'd been thinking about it, and it just didn't feel right. Losing 247 isn't great, but it's not the end of the world either. I've been around here long enough to know that sometimes things just don't go your way.",
+        "factIds": [
+          "F-8caa69fd9d4c",
+          "F-d9eeaf2db5a1"
+        ],
+        "src": "packet.W2[POP-00590]"
+      },
+      {
+        "id": "Q-POP-00759-2080f5b333",
+        "speakerId": "POP-00759",
+        "speakerName": "Naomi Sterling",
+        "text": "I attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard. That's the kind of initiative work that resonates with me.",
+        "factIds": [
+          "F-b32dfaad7a5d",
+          "F-cd432e69eb67"
+        ],
+        "src": "packet.W2[POP-00759]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00256",
+        "name": "Brady Lopez",
+        "profile": "Brady Lopez — Dishwasher — Piedmont Ave",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00334",
+        "name": "Solis Walmart",
+        "profile": "Solis Walmart — Housing Authority Inspector — Downtown",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00590",
+        "name": "Reggie Soto",
+        "profile": "Reggie Soto — Auto Body Shop Owner — Fruitvale",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00759",
+        "name": "Naomi Sterling",
+        "profile": "Naomi Sterling — Senior Pastor / Faith Leader — Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Tamsin Pruitt",
+        "text": "The impact of the Oakland Alternative Response Initiative on residents' feelings of safety",
+        "publishable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "The significance of people moving into new places in different neighborhoods",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "the plain respect of the form — the ordinary weight of a birth, a retirement, a discharge, stated without ornament",
+      "the frame around a supplied fact — what a promotion to the supplied role means in plain words, without inventing the workplace",
+      "the neighborhood the slice names as where the person lives, without an invented street scene",
+      "the order and pacing of the passages — heaviest first, one person at a time"
+    ],
+    "textureConditions": [
+      "every person, event, role, employer, neighborhood, hospital stay, household and family tie must come from the slice",
+      "a quote appears only verbatim from the person's own supplied page; nothing paraphrased into quotation marks",
+      "what came next appears only when a later Cycle's supplied record holds it",
+      "a thin day (few events) is written as a short page, not padded"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

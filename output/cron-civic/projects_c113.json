@@ -1,0 +1,58 @@
+{
+  "stage": "projects",
+  "cycle": 113,
+  "results": [
+    {
+      "slug": "stabilization_fund",
+      "model": "deepseek/deepseek-v4-flash-0731",
+      "ok": true,
+      "output": "output/civic-voice/stabilization_fund_c113.json",
+      "statements": 3,
+      "triggeredBy": [
+        "council_d1",
+        "council_d6",
+        "mayor_gavel",
+        "mayor_open",
+        "okoro",
+        "okoro",
+        "okoro"
+      ]
+    },
+    {
+      "slug": "oari",
+      "model": "deepseek/deepseek-v4-flash-0731",
+      "ok": true,
+      "output": "output/civic-voice/oari_c113.json",
+      "statements": 1,
+      "triggeredBy": [
+        "council_d3",
+        "council_d5",
+        "mayor_gavel",
+        "mayor_open"
+      ]
+    },
+    {
+      "slug": "health_center",
+      "model": "deepseek/deepseek-v4-flash-0731",
+      "ok": true,
+      "output": "output/civic-voice/health_center_c113.json",
+      "statements": 2,
+      "triggeredBy": [
+        "council_d7",
+        "mayor_gavel",
+        "mayor_open"
+      ]
+    },
+    {
+      "slug": "baylight_authority",
+      "model": "deepseek/deepseek-v4-flash-0731",
+      "ok": true,
+      "output": "output/civic-voice/baylight_authority_c113.json",
+      "statements": 1,
+      "triggeredBy": [
+        "council_d2"
+      ]
+    }
+  ],
+  "ranAt": "2026-10-26T04:21:45.292Z"
+}

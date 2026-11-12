@@ -1,0 +1,69 @@
+{
+  "draft": "output/cron-compare/civic_c113_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "113",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "01be33ac2f978f7f99365855cb6044da6ccbd16f5e3129ab59b91afc21e3e5f6",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All citizen profiles, quotes, hospital census figures, and health cluster data strictly align with Cycle 113 canon.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "lila-health-service-v1",
+    "packageVersion": "LILA-LEP2-2",
+    "manifestId": "AM-30c52ff3bb84",
+    "lexicalObservations": [],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Cee Lee",
+      "Deacon Seymour",
+      "Elle Lilo",
+      "Marisio Curazo",
+      "Maurice Franklin",
+      "Omarion Farah",
+      "Victor King",
+      "Yu Zen"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0102,
+  "durationMs": 5756,
+  "parseError": false,
+  "ranAt": "2026-10-31T17:00:39.473Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 1029,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "01be33ac2f978f7f99365855cb6044da6ccbd16f5e3129ab59b91afc21e3e5f6",
+    "costUsd": 0.0018
+  }
+}

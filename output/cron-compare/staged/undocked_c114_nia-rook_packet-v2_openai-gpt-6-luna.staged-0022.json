@@ -1,0 +1,62 @@
+{
+  "status": "staged",
+  "desk": "undocked",
+  "cycle": "114",
+  "persona": "nia-rook",
+  "byline": "Nia Rook",
+  "bylinePopid": "POP-01076",
+  "article": "output/cron-compare/staged/undocked_c114_nia-rook_packet-v2_openai-gpt-6-luna.staged-0022.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Ronald Silk",
+        "role": "quoted-source",
+        "popid": "POP-00647"
+      },
+      {
+        "name": "Daphne Stafford",
+        "role": "mentioned",
+        "popid": "POP-00816",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Chinatown"
+    ],
+    "claims": [
+      {
+        "claim": "I didn't challenge Daphne Stafford's lead on Tuesday night; I was still a few points behind her when the show ended. I came out even on credits, but my points total didn't overtake hers.",
+        "sourceRef": "citizenVoice PRESS Ronald Silk"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-ac2f750b73f0",
+    "draftSha256": "10999b4e7bd743418b1251dbe05ad8721476443fe9dac1d3deb75bf95576b9db",
+    "verdict": "output/cron-compare/undocked_c114_nia-rook_packet-v2_openai-gpt-6-luna.rhea.json",
+    "ranAt": "2026-11-05T00:22:20.714Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 350",
+      "words": 376,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "10999b4e7bd743418b1251dbe05ad8721476443fe9dac1d3deb75bf95576b9db",
+      "costUsd": 0.0011
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-05T00:22:24.460Z"
+}

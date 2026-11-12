@@ -1,0 +1,60 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "114",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "angela-reyes",
+  "byline": {
+    "name": "Angela Reyes",
+    "popid": "POP-00156",
+    "beatDomain": "EDUCATION"
+  },
+  "laneEntries": 111,
+  "quotesLanded": 4,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "sheet_read",
+    "sheet_read"
+  ],
+  "toolCalls": 2,
+  "wordCount": 969,
+  "targetWords": "evidence-bounded",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": false,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": false,
+    "inTargetBy": "judge",
+    "words": 969,
+    "short": "The opening paragraph begins with narrative scene-setting rather than a Packet-backed school, youth-program, apprenticeship, or continuity fact, and the piece falls short of the target word count.",
+    "score": 2,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "8b0da70478231c088561e0ab07359fe96df573585fe81a58fc7bc19144bff8fe",
+    "costUsd": 0.0021
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 2/4 — The opening paragraph begins with narrative scene-setting rather than a Packet-backed school, youth-program, apprenticeship, or continuity fact, and the piece falls short of the target word count."
+  },
+  "article": "output/cron-compare/staged/civic_c114_angela-reyes_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "true }\n{\n  \"popId\": \"POP-00156\",\n  \"name\": \"Angela Reyes\",\n  \"recorded\": true,\n  \"text\": \"filed: At Rockridge pickup, the strongest school record in the city slips by five hundredths and the hallwa\"\n}"
+  },
+  "ranAt": "2026-11-04T07:48:34.773Z",
+  "dispositionReconciledAt": "2026-11-07T18:00:02.129Z"
+}

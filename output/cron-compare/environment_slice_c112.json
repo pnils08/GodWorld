@@ -1,0 +1,243 @@
+{
+  "version": "ENVIRONMENT-SLICE-2",
+  "empty": false,
+  "cycle": 112,
+  "kind": "beat-weather",
+  "seat": {
+    "slug": "noah-tan",
+    "name": "Noah Tan",
+    "popid": "POP-00157",
+    "desk": "civic",
+    "domain": "environment",
+    "builder": "buildEnvironmentSlice.js"
+  },
+  "hood": null,
+  "pulse": {
+    "className": "beat-weather",
+    "score": 100,
+    "label": "C112 clear, 48°F — 2 cycles of clear",
+    "hood": null,
+    "source": "output/beats/Cycle_Weather.jsonl CycleID 112"
+  },
+  "story": {
+    "kind": "beat-weather",
+    "angle": "C112 clear, 48°F — 2 cycles of clear — what this weather does to a day in the city",
+    "label": "C112 clear, 48°F — 2 cycles of clear",
+    "hookLine": "C112 clear, 48°F — 2 cycles of clear; 4 residents on the record lived it.",
+    "hood": null,
+    "citizens": [
+      "Jonas Patel (POP-00142)",
+      "Xavier Ramington (POP-00181)",
+      "Derlik Green (POP-00244)",
+      "Brian Adams (POP-00258)"
+    ],
+    "popids": [
+      "POP-00142",
+      "POP-00181",
+      "POP-00244",
+      "POP-00258"
+    ],
+    "ref": "output/beats/Cycle_Weather.jsonl CycleID 112",
+    "cycle": 112
+  },
+  "approach": "Weather and environment approach: this slice is the cycle's weather row, the streak, and the last three cycles beside it, plus whoever the record says lived it. Science-first ground translation — temperature is context, never the lede. Show what this weather moved. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-00142",
+      "name": "Jonas Patel",
+      "role": "MEDICAL EXAMINER",
+      "neighborhood": "Chinatown",
+      "business": null,
+      "profile": "Jonas Patel — MEDICAL EXAMINER — Chinatown",
+      "why": "lived the weather this cycle (Who Lived It)"
+    },
+    {
+      "popid": "POP-00181",
+      "name": "Xavier Ramington",
+      "role": "Herbalist",
+      "neighborhood": "Temescal",
+      "business": null,
+      "profile": "Xavier Ramington — Herbalist — Temescal",
+      "why": "lived the weather this cycle (Who Lived It)"
+    },
+    {
+      "popid": "POP-00244",
+      "name": "Derlik Green",
+      "role": "Delivery Driver",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Derlik Green — Delivery Driver — Downtown",
+      "why": "lived the weather this cycle (Who Lived It)"
+    },
+    {
+      "popid": "POP-00258",
+      "name": "Brian Adams",
+      "role": "Janitor",
+      "neighborhood": "Jack London",
+      "business": null,
+      "profile": "Brian Adams — Janitor — Jack London",
+      "why": "lived the weather this cycle (Who Lived It)"
+    }
+  ],
+  "facts": [
+    {
+      "text": "This cycle: clear, 48°F, impact 1, comfort 0.65, mood content, 2 cycles of clear",
+      "src": "output/beats/Cycle_Weather.jsonl CycleID 112"
+    },
+    {
+      "text": "Last 3 cycles: C109 overcast 49°F, C110 fog 52°F, C111 mild 57°F",
+      "src": "output/beats/Cycle_Weather.jsonl"
+    },
+    {
+      "text": "Jonas Patel — dealt with a seasonal health concern",
+      "src": "output/world_summary_c112.md ## Who Lived It"
+    },
+    {
+      "text": "Xavier Ramington — relied on familiar social circles during cold period",
+      "src": "output/world_summary_c112.md ## Who Lived It"
+    },
+    {
+      "text": "Derlik Green — relied on familiar social circles during cold period",
+      "src": "output/world_summary_c112.md ## Who Lived It"
+    },
+    {
+      "text": "Brian Adams — limited social activity due to winter mood",
+      "src": "output/world_summary_c112.md ## Who Lived It"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "C112 clear, 48°F — 2 cycles of clear — what this weather does to a day in the city",
+    "hookLine": "C112 clear, 48°F — 2 cycles of clear; 4 residents on the record lived it.",
+    "anchorFacts": [
+      "This cycle: clear, 48°F, impact 1, comfort 0.65, mood content, 2 cycles of clear",
+      "Last 3 cycles: C109 overcast 49°F, C110 fog 52°F, C111 mild 57°F",
+      "Jonas Patel — dealt with a seasonal health concern",
+      "Xavier Ramington — relied on familiar social circles during cold period",
+      "Derlik Green — relied on familiar social circles during cold period",
+      "Brian Adams — limited social activity due to winter mood"
+    ],
+    "evidence": [
+      {
+        "text": "This cycle: clear, 48°F, impact 1, comfort 0.65, mood content, 2 cycles of clear",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 112"
+      },
+      {
+        "text": "Last 3 cycles: C109 overcast 49°F, C110 fog 52°F, C111 mild 57°F",
+        "src": "output/beats/Cycle_Weather.jsonl"
+      },
+      {
+        "text": "Jonas Patel — dealt with a seasonal health concern",
+        "src": "output/world_summary_c112.md ## Who Lived It"
+      },
+      {
+        "text": "Xavier Ramington — relied on familiar social circles during cold period",
+        "src": "output/world_summary_c112.md ## Who Lived It"
+      },
+      {
+        "text": "Derlik Green — relied on familiar social circles during cold period",
+        "src": "output/world_summary_c112.md ## Who Lived It"
+      },
+      {
+        "text": "Brian Adams — limited social activity due to winter mood",
+        "src": "output/world_summary_c112.md ## Who Lived It"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": {
+      "state": "PRIOR_CYCLE_IN_TABLE",
+      "vs": 111
+    },
+    "hooks": [
+      {
+        "text": "Multiple weather signals detected. Could be coincidence or early pattern.",
+        "angle": "general coverage",
+        "domain": "WEATHER",
+        "hood": null,
+        "priority": 2
+      },
+      {
+        "text": "Daphne Stafford moved from Chinatown to West Oakland — moving up from Chinatown",
+        "angle": "desk rotation",
+        "domain": "COMMUNITY",
+        "hood": "West Oakland",
+        "priority": 5
+      },
+      {
+        "text": "Jasmine Torres moved from Downtown to Chinatown — leaving Downtown for a better fit",
+        "angle": "desk rotation",
+        "domain": "COMMUNITY",
+        "hood": "Chinatown",
+        "priority": 5
+      }
+    ],
+    "note": null,
+    "pageVoices": [],
+    "roomIsYours": "the sidewalk, the coats, what this weather does to a plan, who is out in it and who stayed in, what the bay smells like today"
+  },
+  "weather": {
+    "CycleID": "112",
+    "Type": "clear",
+    "Temp": "48",
+    "Impact": "1",
+    "Advisory": "",
+    "Comfort": "0.65",
+    "Mood": "content",
+    "Alerts": "",
+    "Streak": "2",
+    "StreakType": "clear",
+    "Timestamp": "Y3C8"
+  },
+  "recent": [
+    {
+      "CycleID": "109",
+      "Type": "overcast",
+      "Temp": "49",
+      "Impact": "1.05",
+      "Advisory": "",
+      "Comfort": "0.5",
+      "Mood": "neutral",
+      "Alerts": "",
+      "Streak": "1",
+      "StreakType": "overcast",
+      "Timestamp": "Y3C5"
+    },
+    {
+      "CycleID": "110",
+      "Type": "fog",
+      "Temp": "52",
+      "Impact": "1.3",
+      "Advisory": "",
+      "Comfort": "0.4",
+      "Mood": "introspective",
+      "Alerts": "",
+      "Streak": "1",
+      "StreakType": "fog",
+      "Timestamp": "Y3C6"
+    },
+    {
+      "CycleID": "111",
+      "Type": "mild",
+      "Temp": "57",
+      "Impact": "1",
+      "Advisory": "",
+      "Comfort": "0.75",
+      "Mood": "content",
+      "Alerts": "",
+      "Streak": "1",
+      "StreakType": "clear",
+      "Timestamp": "Y3C7"
+    }
+  ],
+  "pointers": [
+    "output/beats/Cycle_Weather.jsonl CycleID 112",
+    "output/beats/Story_Hook_Deck.jsonl (hooks for Noah Tan this cycle)",
+    "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+  ]
+}

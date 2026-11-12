@@ -1,0 +1,82 @@
+# C115 Voice Directives — Mara Vance (AUTO)
+
+**Cycle:** 115
+**Issued:** C115 (auto-derived, cron-civic-run.js --stage=directive, post-close)
+**Source:** close_c115 + the week's statements + promise record + world_summary_c115 + tracker
+
+---
+## Avery Santana — Mayor
+
+- **Agent:** `.claude/agents/civic-office-mayor/`
+- **Address:** Provide the docket references for the seven petition responses and the claimed INIT-014 filing, reconciling those statements with the current complaint ledger and initiative tracker.
+- **Why:** Your Cycle 115 opening statement committed to seven petition-specific filings, while the Cycle 115 office record now lists ten complaints; your closing statement says INIT-014 was filed, but the live tracker still shows it announced with its legislation-filing step past due from Cycle 114.
+- **Acceptance:** A ledger-to-filing crosswalk identifying which complaints the seven responses cover, the status of every remaining complaint, and each response’s responsible office, proposed remedy and next date; the Clerk reference for INIT-014, or an explicit correction if filing has not occurred.
+- **Promise:** P-d94459ae1189b667; P-b87ef751a66c370d
+## Denise Carter — City Council District 1
+
+- **Agent:** `.claude/agents/civic-office-council-d1/`
+- **Address:** File your promised answer on the Brooklyn service-audit baseline and District 1 OARI evaluation, explaining what the office sees behind Brooklyn’s continuing negative sentiment.
+- **Why:** Your Cycle 114 weekday statement said you would file that answer; Brooklyn’s sentiment moved from -0.09 in that statement to -0.11 in the Cycle 115 neighborhood record, while its crime index is 0.62 and recorded decay momentum is zero.
+- **Acceptance:** References to any existing audit baseline and D1 dispatch evaluation, their findings and limitations, and the status of the transformer-related service issue you identified; if either document does not exist, say so and identify the responsible office and next reporting date.
+- **Promise:** P-25699b7f650ca053
+## Leonard Tran — City Council District 2
+
+- **Agent:** `.claude/agents/civic-office-council-d2/`
+- **Address:** Reconcile your stated YES commitment on Downtown Economic Revitalization with INIT-008’s failed status and identify what legislative decision actually occurred.
+- **Why:** Your Cycle 115 Sunday statement supported a binding vote and promised a YES, but the Cycle 115 live tracker lists INIT-008 as failed, still in vote-scheduled phase, with no dated next step.
+- **Acceptance:** The recorded decision and your vote if a vote occurred, or a clear statement that no such record is available; explain the basis for the failed status and whether any Chinatown or Uptown appropriations were actually authorized, without treating proposed allocation tracks as delivered funding.
+- **Promise:** P-1adc611984aee8f1
+## Rose Delgado — City Council District 3
+
+- **Agent:** `.claude/agents/civic-office-council-d3/`
+- **Address:** Provide the district’s briefing and transit-review notice records, clarifying the actual OARI venue and how the promised Fruitvale access was provided.
+- **Why:** Your Cycle 114 weekday statement placed the OARI briefing in Fruitvale and promised the review calendar and public numbers; the OARI director’s Cycle 115 statement reports a documented briefing in East Oakland, while the transit lead reports review sessions opened at the branch library and senior center.
+- **Acceptance:** The actual briefing date and venue, notice and accessibility arrangements, district-data references, the published schematics-review calendar, and any Clerk filing references; distinguish completed documentation from the OARI packet and transit response record scheduled for publication in Cycle 116, without requiring a duplicate briefing.
+- **Promise:** P-71776abe706ff093
+## Ramon Vega — City Council District 4
+
+- **Agent:** `.claude/agents/civic-office-council-d4/`
+- **Address:** Report what the Glenview Civic Response Meeting established about the public-works issue and identify any remaining municipal follow-through.
+- **Why:** The Cycle 115 city summary records both the Glenview meeting and a low-severity public-works spike; your Cycle 115 Sunday statement asked staff to document that issue, but the supplied record does not contain the resulting findings.
+- **Acceptance:** What staff found, any work performed, what remains open, the responsible department and next update date—or a reasoned explanation that no additional municipal action is needed; keep the response proportional to the documented issue.
+## Janae Rivers — City Council District 5
+
+- **Agent:** `.claude/agents/civic-office-council-d5/`
+- **Address:** Provide the published INIT-007 placement-gap analysis and adjustment plan, including the named West Oakland and Fruitvale findings and your recommendation for the next implementation decision.
+- **Why:** Your Cycle 115 Sunday statement said you were publishing the neighborhood findings that cycle, while the live tracker still marks publication of the analysis and adjustment plan past due at Cycle 115; the Mayor’s Cycle 114 weekday response also directed recruitment and intake corrections into that plan.
+- **Acceptance:** An inspectable analysis connecting each documented gap to an intake or placement adjustment, a responsible office and follow-up placement report; identify unresolved recruitment bottlenecks and ground the implementation recommendation in evidence rather than time spent in the current phase.
+- **Promise:** P-36f7939757489205
+## Warren Ashford — City Council District 7
+
+- **Agent:** `.claude/agents/civic-office-council-d7/`
+- **Address:** What did your Rockridge canvass establish about merchant sentiment and municipal services, and does it support any specific corridor adjustment?
+- **Why:** Your Cycle 114 weekday record documents a Rockridge canvass and retail vitality of 10.98; the Cycle 115 neighborhood snapshot shows retail vitality recovering to 11.89 while sentiment falls to -0.06, so trade and mood are not moving together.
+- **Acceptance:** The canvass findings, any identifiable service problems, and the office’s proposed response or reason for maintaining current services; distinguish observed conditions from assumptions about what the health center or commercial spending will change.
+## Nina Chen — City Council District 8
+
+- **Agent:** `.claude/agents/civic-office-council-d8/`
+- **Address:** Provide the Eastlake allocation and service-schedule records, account for the district’s three recorded complaints, and clarify the official disposition of Grand Lake stabilization.
+- **Why:** Your Cycle 115 Sunday statement says Eastlake maintenance allocations are being docketed and records your YES on INIT-009; the Cycle 115 office evidence lists three complaints, while the live tracker marks INIT-009 failed rather than passed.
+- **Acceptance:** Docket references and authorization status for Eastlake allocations, actual service schedules, a complaint-to-response crosswalk using the underlying cases, and the official INIT-009 decision record or an explicit statement that no final decision record is available; distinguish an individual YES position from council passage.
+- **Promise:** P-6903e362468303b6
+## Terrence Mobley — City Council District 9
+
+- **Agent:** `.claude/agents/civic-office-council-d9/`
+- **Address:** Report what has moved on Laurel Neighborhood Patch and Clean-Up, including missed-pickup recovery and how the district’s recorded complaints relate to the proposed work.
+- **Why:** Your Cycle 114 weekday statement proposed the $6 million measure and promised to report back; the Cycle 115 record shows Laurel sentiment at -0.15, decay momentum at four and four district complaints, alongside the city summary’s report of quieter storefronts and reduced foot traffic.
+- **Acceptance:** Separate proposal, filing, authorization and completed work; identify what happened on the missed pickup, what the actual complaint records require, and the responsible offices and next dates for remaining steps, without presenting proposed spending as approved.
+- **Promise:** P-b6cac45e0bdc5443
+## Keisha Ramos — Baylight Authority Director
+
+- **Agent:** `.claude/agents/civic-office-baylight-authority/`
+- **Address:** What determination did the Cycle 115 construction milestone review reach, and where can the public inspect the findings supporting it?
+- **Why:** Your Cycle 115 Sunday statement reports that the review was conducted and findings published, while the live tracker still lists the Cycle 115 review as past due; neither the findings nor their milestone determination appear in the supplied material.
+- **Acceptance:** The published findings reference, the determination and its evidentiary basis, any unresolved remediation or workforce conditions, and an explanation of the unchanged tracker entry; do not substitute the assembled evidence file or the construction-active phase for a milestone result.
+
+## Not directing
+
+- Elliott Crane (City Council District 6): The Cycle 115 record identifies no dated outstanding step or specific district issue requiring an answer; independent fiscal scrutiny does not itself create a new deliverable.
+- Marcus Webb (OEWD Program Director (Stabilization Fund)): His Cycle 115 statement reports the closeout and reconciliation published, renewal draft completed and ordinance transmitted—the substance of the tracker’s dated step; council renewal is not his to declare.
+- Vanessa Tran-Muñoz (OARI Program Director): Her Cycle 115 statement reports the briefing executed and documented, with public packet publication scheduled for Cycle 116; expansion remains held and the unfinished audit and feasibility review remain openly identified.
+- Bobby Chen-Ramirez (Health Center Project Director): The utilization audit is due in Cycle 116, not overdue, and his Cycle 115 statement describes the standing filing and verification process.
+- Elena Soria Dominguez (Transit Hub Planning Lead): Her Cycle 115 update reports schematics delivered and community review opened, with the comment-and-response record scheduled for Cycle 116; continued design-phase status is not, by itself, a missed obligation.

@@ -1,0 +1,318 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00016",
+    "name": "Simon Leary",
+    "role": "desk reporter",
+    "desk": "sports"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "The Oaks record is 2-0.",
+    "approach": "Long-view approach (Simon Leary): third-person essayist. Treat supplied sports facts as present structure, not as proof of history or collective memory. A metaphor about continuity, load, or change may interpret the Packet but may not add a person, place, institution, event, season, statistic, cause, organizational intention, or citywide belief. Do not write a game recap, Hal elegy, P Slayer fan heat, or Anthony board memo.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "sports-long-view",
+      "pulseClass": "role-change-under-continuity",
+      "bagModes": [
+        "2 Keystone Player",
+        "4 Load-Bearing Continuity"
+      ],
+      "claim": "A role change inside a sustained team record can support a structural interpretation; it does not establish franchise history, organizational intent, or citywide meaning.",
+      "anchorFacts": [
+        "The Oaks record is 2-0.",
+        "The Oaks have won 2 straight."
+      ],
+      "missing": [
+        "why the role change was made",
+        "historical comparison or franchise precedent",
+        "organizational intention or future plan",
+        "citywide, clubhouse, or fan interpretation"
+      ],
+      "sceneRule": "No witnessed room or scene is supplied. Structure and continuity may appear only as clearly interpretive metaphor grounded in the approved present facts.",
+      "sourcePointers": [
+        "output/world_summary_c113.md ## Sports",
+        "scripts/sportsSubstrate.js",
+        "docs/media/SIMON_LONGVIEW_BAG.md"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "long-view-signal",
+    "hood": "Uptown",
+    "src": "world_summary_c113.md ## Sports",
+    "plan": {
+      "focus": "The structural interpretation of a role change inside a sustained 2-0 record—what it means for continuity when the load-bearing pieces shift.",
+      "closeQuestion": "When the record stays perfect but the structure underneath shifts, what does that say about the nature of continuity itself?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-01023",
+        "name": "Adash Stanley",
+        "profile": "Adash Stanley — PG / The Oaks",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-01027",
+        "name": "Austin Reaves",
+        "profile": "Austin Reaves — SG / The Oaks",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-01023-9d9fc62ca4",
+        "pop": "POP-01023",
+        "name": "Adash Stanley",
+        "quote": "When the role changes, the record doesn't care who's carrying it. It just sits there at 2-0 and asks the next guy to keep it honest. For me, that means showing up the same way I always have — steady, ready, not making it about me. The continuity is in the work, not the title.",
+        "factIds": [
+          "F-1b1ab64b18fd",
+          "F-b604c81bd368"
+        ],
+        "src": "packet.W2[POP-01023]"
+      },
+      {
+        "id": "Q-POP-01027-f91c74d89e",
+        "pop": "POP-01027",
+        "name": "Austin Reaves",
+        "quote": "Look, 2-0 feels good, don't get me wrong. But I've been around long enough to know a record doesn't hold the building up. It's the guys inside it. We're still figuring out who we are out there — roles, rotations, all that. The structure shifting? That's just part of the game. You don't carry the weight by pretending everything's locked in. You carry it by showing up, doing your job, and trusting the guys next to you. That's what I'm doing. That's all I can do.",
+        "factIds": [
+          "F-1b1ab64b18fd",
+          "F-b604c81bd368"
+        ],
+        "src": "packet.W2[POP-01027]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Simon Leary",
+        "text": "The role change might be tied to a player's condition or a strategic adjustment, but that's not in the packet.",
+        "usable": false
+      },
+      {
+        "from": "Simon Leary",
+        "text": "There may be a deeper story about how the team is handling the early-season pressure, but I have no evidence for it.",
+        "usable": false
+      },
+      {
+        "from": "Simon Leary",
+        "text": "The community might be reacting to the role change, but I have no source for that.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C113",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-876f95b5eb98"
+    },
+    {
+      "t": "FACT",
+      "text": "The Oaks record is 2-0.",
+      "src": "world_summary_c113.md ## Sports",
+      "id": "F-1b1ab64b18fd"
+    },
+    {
+      "t": "FACT",
+      "text": "The Oaks have won 2 straight.",
+      "src": "world_summary_c113.md ## Sports",
+      "id": "F-b604c81bd368"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C9, Winter, holiday=none",
+      "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+      "id": "F-ab9d6786094e"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "simon-longview-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Interpret one Packet-backed present sports structure as civic architecture without turning metaphor into biography, history, collective memory, or institutional fact.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "third-person contemplative sports essay",
+      "targetWords": "evidence-bounded",
+      "opening": "one supplied present structure",
+      "closing": "one question about what the present record cannot establish"
+    },
+    "authorizedTexture": [
+      "third-person metaphor about structure, continuity, load, or change grounded only in supplied present facts",
+      "a philosophical inference explicitly framed as interpretation and carrying no new person, place, institution, event, number, or history"
+    ],
+    "textureConditions": [
+      "continuity describes only the supplied current record unless a historical fact is explicitly supplied",
+      "every named person, place, institution, team, event, season, statistic, role change, cause, intention, and quote requires Packet support"
+    ],
+    "canonBlockers": [
+      "invented franchise or city history, precedent, collective memory, institutional meaning, or civic behavior",
+      "an invented cause, organizational intention, future plan, clubhouse fact, fan consensus, relationship, quote, event, statistic, or role",
+      "Hal-style witnessed history, P Slayer fan heat, or Anthony-style unsupplied analytics presented as fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-6e80c8000ee1",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-876f95b5eb98",
+        "t": "FACT",
+        "text": "Current cycle: C113",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-1b1ab64b18fd",
+        "t": "FACT",
+        "text": "The Oaks record is 2-0.",
+        "src": "world_summary_c113.md ## Sports"
+      },
+      {
+        "id": "F-b604c81bd368",
+        "t": "FACT",
+        "text": "The Oaks have won 2 straight.",
+        "src": "world_summary_c113.md ## Sports"
+      },
+      {
+        "id": "F-ab9d6786094e",
+        "t": "FACT",
+        "text": "Calendar: Y3C9, Winter, holiday=none",
+        "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-01023-9d9fc62ca4",
+        "speakerId": "POP-01023",
+        "speakerName": "Adash Stanley",
+        "text": "When the role changes, the record doesn't care who's carrying it. It just sits there at 2-0 and asks the next guy to keep it honest. For me, that means showing up the same way I always have — steady, ready, not making it about me. The continuity is in the work, not the title.",
+        "factIds": [
+          "F-1b1ab64b18fd",
+          "F-b604c81bd368"
+        ],
+        "src": "packet.W2[POP-01023]"
+      },
+      {
+        "id": "Q-POP-01027-f91c74d89e",
+        "speakerId": "POP-01027",
+        "speakerName": "Austin Reaves",
+        "text": "Look, 2-0 feels good, don't get me wrong. But I've been around long enough to know a record doesn't hold the building up. It's the guys inside it. We're still figuring out who we are out there — roles, rotations, all that. The structure shifting? That's just part of the game. You don't carry the weight by pretending everything's locked in. You carry it by showing up, doing your job, and trusting the guys next to you. That's what I'm doing. That's all I can do.",
+        "factIds": [
+          "F-1b1ab64b18fd",
+          "F-b604c81bd368"
+        ],
+        "src": "packet.W2[POP-01027]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-01023",
+        "name": "Adash Stanley",
+        "profile": "Adash Stanley — PG / The Oaks",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-01027",
+        "name": "Austin Reaves",
+        "profile": "Austin Reaves — SG / The Oaks",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Simon Leary",
+        "text": "The role change might be tied to a player's condition or a strategic adjustment, but that's not in the packet.",
+        "publishable": false
+      },
+      {
+        "from": "Simon Leary",
+        "text": "There may be a deeper story about how the team is handling the early-season pressure, but I have no evidence for it.",
+        "publishable": false
+      },
+      {
+        "from": "Simon Leary",
+        "text": "The community might be reacting to the role change, but I have no source for that.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "third-person metaphor about structure, continuity, load, or change grounded only in supplied present facts",
+      "a philosophical inference explicitly framed as interpretation and carrying no new person, place, institution, event, number, or history"
+    ],
+    "textureConditions": [
+      "continuity describes only the supplied current record unless a historical fact is explicitly supplied",
+      "every named person, place, institution, team, event, season, statistic, role change, cause, intention, and quote requires Packet support"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "mode": "wake-write",
+  "desk": "culture",
+  "cycle": "112",
+  "provider": "openrouter",
+  "model": "x-ai/grok-4.3",
+  "configuredWriterModel": "x-ai/grok-4.3",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "mason-ortega",
+  "byline": {
+    "name": "Mason Ortega",
+    "popid": "POP-00160",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 20,
+  "quotesLanded": 3,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [],
+  "toolCalls": 0,
+  "wordCount": 378,
+  "targetWords": "evidence-bounded",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": false,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 378,
+    "short": "The piece invents specific workers, shifts, service states, and quotes rather than treating the signal without invented labor details.",
+    "score": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "def5cbeee7993981684cc179a8f3293a4687bf479217f2b4261d2c9638a56b36",
+    "costUsd": 0.002
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/4 — The piece invents specific workers, shifts, service states, and quotes rather than treating the signal without invented labor details."
+  },
+  "article": "output/cron-compare/staged/culture_c112_mason-ortega_packet-v2_x-ai-grok-4-3.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "rue }\n{\n  \"popId\": \"POP-00160\",\n  \"name\": \"Mason Ortega\",\n  \"recorded\": true,\n  \"text\": \"filed: Downtown at SpeedyBurger, server Devon Willis keeps the counter moving through the lunch waves. \\\"A t\"\n}"
+  },
+  "ranAt": "2026-10-23T23:15:50.282Z",
+  "dispositionReconciledAt": "2026-10-24T17:00:02.144Z"
+}

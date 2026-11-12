@@ -1,0 +1,72 @@
+{
+  "draft": "output/cron-compare/civic_c114_angela-reyes_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "114",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "8b0da70478231c088561e0ab07359fe96df573585fe81a58fc7bc19144bff8fe",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All named citizen roles, neighborhood ties, and direct quotes verify exactly against ledger ground truth and interview records with zero canon violations.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "angela-education-stability-v1",
+    "packageVersion": "ANGELA-LEP2-2",
+    "manifestId": "AM-8ab206061533",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "21"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Gloria Liu",
+      "Maya Torres-Dillon",
+      "Mei Wong",
+      "Rick Dillon"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0106,
+  "durationMs": 6049,
+  "parseError": false,
+  "ranAt": "2026-11-04T07:48:07.313Z",
+  "contractScore": {
+    "opened": false,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": false,
+    "inTargetBy": "judge",
+    "words": 969,
+    "short": "The opening paragraph begins with narrative scene-setting rather than a Packet-backed school, youth-program, apprenticeship, or continuity fact, and the piece falls short of the target word count.",
+    "score": 2,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "8b0da70478231c088561e0ab07359fe96df573585fe81a58fc7bc19144bff8fe",
+    "costUsd": 0.0021
+  }
+}

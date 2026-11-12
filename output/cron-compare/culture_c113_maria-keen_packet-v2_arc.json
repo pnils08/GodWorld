@@ -1,0 +1,32 @@
+{
+  "status": "arc-seed",
+  "cycle": "113",
+  "desk": "culture",
+  "persona": "maria-keen",
+  "hood": "Fruitvale",
+  "quotes": [
+    {
+      "pop": "POP-00004",
+      "name": "Lucia Polito",
+      "quote": "I've seen the impact that community programs like the Postpartum Oakland Network, which I founded, can have on people's lives. It's amazing to see the difference these programs make in Fruitvale. As someone who's dedicated to wellness and has been a part of this community for a while, I feel grateful to see the positive changes happening around us."
+    },
+    {
+      "pop": "POP-00198",
+      "name": "Rick Walker",
+      "quote": "To be honest, it's getting harder to feel that way. Fruitvale's still got its issues, but I've seen some new posters around, like the expanded tutoring program at St. Esperanza Parish. It's something, you know? The mercado's still buzzing, people are still grabbing lunch between train transfers. It's not like nothing's happening. But, yeah, the rent went up again, so it's still a struggle. I don't know if it's enough, though."
+    },
+    {
+      "pop": "POP-00023",
+      "name": "Gregory Mims",
+      "quote": "Fruitvale's still a ways off for a lot of folks around here, you know? I mean, that kid's cousin getting placed with a plumbing crew is great and all, but it's not like that's the norm. I've seen too many programs come and go. You hear about success stories, but they're not always the ones that stick. I'm still a little skeptical."
+    },
+    {
+      "pop": "POP-00042",
+      "name": "Ramon Vega",
+      "quote": "To be honest, that council fight still lingers in my mind. I understand why Christopher felt I was leaning too far into the developer's corner on the Fruitvale hub. At the time, I believed it was a necessary compromise to move the project forward, but looking back, I can see how it might have appeared otherwise. The Fruitvale community programs are crucial, and I still stand by the importance of supporting them. However, I acknowledge that the approach we took was contentious, and it's something I've reflected on since then."
+    }
+  ],
+  "claim": "I've seen the impact that community programs like the Postpartum Oakland Network, which I founded, can have on people's lives. It's amazing to see the difference these programs make in Fruitvale. As someone who's dedicated to wellness and has been a part of this community for a while, I feel grateful to see the positive changes happening around us.",
+  "src": "citizenVoice PRESS c113",
+  "ranAt": "2026-10-30T18:18:16.050Z"
+}

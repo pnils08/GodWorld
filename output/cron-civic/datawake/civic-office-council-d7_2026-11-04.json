@@ -1,0 +1,61 @@
+{
+  "office": "council_d7",
+  "agentDir": "civic-office-council-d7",
+  "holder": "Warren Ashford",
+  "popid": "POP-00504",
+  "title": "City Council District 7",
+  "date": "2026-11-04",
+  "cycle": 114,
+  "model": "google/gemini-3.8-flash",
+  "statement": "Rockridge is registering growth trajectory with momentum 7, but the underlying balance sheet demands scrutiny rather than complacency. Retail vitality slipped to 10.98 from 13.14, housing pressure sits at 5, and neighborhood sentiment is lagging at 0.03 against the city benchmark of 0.115, compounded by 101 residents reported sick. With the Temescal Community Health Center operational and holding $16,269,230.75 in remaining budget through its next step in Cycle 116, District 7 does not treat its commercial districts as passive revenue engines while service delivery fluctuates. I am canvassing Rockridge to inspect merchant corridor stability and municipal maintenance directly, ensuring city allocations produce verifiable returns rather than unmonitored line items.",
+  "moves": [
+    {
+      "type": "canvass",
+      "payload": {
+        "hood": "Rockridge",
+        "note": "Canvassing Rockridge commercial corridors to evaluate retail conditions and municipal service performance against reported metric shifts."
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": "1",
+  "ranAt": "2026-11-04T11:45:25.097Z",
+  "usage": {
+    "prompt_tokens": 6342,
+    "completion_tokens": 2124,
+    "total_tokens": 8466,
+    "cost": 0.0127215,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0127215,
+      "upstream_inference_prompt_cost": 0.0047565,
+      "upstream_inference_completions_cost": 0.007965
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 1854,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "fellBackFrom": null,
+  "evidenceGenerationHash": "625fc65e258fd2fe3d38d613ddc8fe6e9ae4ae4487a8350ea1d8882ac488130d",
+  "evidenceReads": [],
+  "provider": "Google",
+  "finishReason": "stop",
+  "elapsedMs": 18456,
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00504",
+    "id": "27JECNrMWpNrtgrVQF3kEB",
+    "customId": "cp-POP-00504-c114-CIVIC-datawake-2026-11-04"
+  }
+}

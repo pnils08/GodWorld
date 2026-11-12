@@ -1,0 +1,4 @@
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ enable debugging { debug: true }
+Wake 3 WRITE — civic c115 (trevor-shimizu)
+===================================
+[run] Fatal: invalid wake handoff: angle pointer mismatch

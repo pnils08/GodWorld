@@ -1,0 +1,139 @@
+# GodWorld Daily News v1.9 — Cycle 113
+
+Artifact class: NLM_DAILY_BRIEF
+Canon status: NOT CANON. This is a source-grounded newsroom/listening artifact.
+Notebook source IDs: bec46e94-40f9-4919-8eb2-2d03ab95e6c3
+
+# **The Bay Tribune Daily News — Cycle 113**
+
+---
+
+### **Rockridge Kitchens: The Shift Behind the Swing Door**
+*By Mason Ortega, Food & Hospitality Desk*
+
+Inside the dining rooms of Rockridge, restaurant ledgers show steady commercial growth, but the reality of the shift belongs to the workers behind the kitchen doors.
+
+*   **Matty Lipo**, dishwasher at **OakHouse**, arrives before opening to set up the wash station and get the water running hot before the lunch rush hits:
+    > *"A full shift at OakHouse starts before the doors open — you come in, you set up your station, you get the water hot. Then it's just a river. Plates, pans, the pastry crew's bowls, the ramekins that never end. Mimmie and Jesus and Kalyani keep me busy, that's for sure. What arrives is the mess of a busy kitchen, and what leaves is clean steel and dry racks, ready for the next course. It's honest work. My hands know it, my back knows it. And when that last rack is done and I shut off the sprayer, I walk out to the lake and I sit on that bench by the boat dock and I just breathe. That's the rhythm of it."*
+*   **Mimmie Carlisle**, pastry chef at **OakHouse**, works alongside Jesus Jorden and Kalyani Alvarez to manage daily baking production:
+    > *"Pastry at OakHouse isn't a one-person show, that's for sure. With Jesus and Kalyani on the roster with me, we split the day into the early bake-off and the afternoon prep. Mornings are all about the laminated doughs and the croissants — you can't rush that, it's a rhythm. Then we pivot to plated desserts and the case stuff for dinner service... when the rush hits, you're glad there's three of you who know the dance."*
+*   **Elio Perez**, server at **Claremont Table**, navigates the pause between services:
+    > *"Between services, the floor at Claremont Table gets real quiet — the kind of quiet where you can hear the ice machine hum from the back. I don't mind it. I bus the last of the plates, reset the napkin rolls for the next rush, and if there's a lull longer than a minute, I step out back and just breathe... Some days I catch a few innings on the bar TV if someone left it on, but mostly it's just me, the stack of menus, and the sound of my own footsteps on that floor. It keeps me sane before the dinner crowd rolls in."*
+*   **Camila Osman**, owner of **Claremont Table**, emphasizes that hospitality rests on the details that never make receipts:
+    > *"People think owning a restaurant means I'm just in the office looking at numbers. But I'm on the floor most days, and I see the parts that don't show up on receipts—the way Elio remembers a regular's order before they even sit down, the quiet hustle when we're short-staffed, the little things that keep a place feeling like a neighborhood spot."*
+
+---
+
+### **Rockridge: The Reporter Who Won't Call It Remarkable**
+*By Kai Marston, Media & Metro Desk*
+
+In Rockridge, journalist **Tara Ellison’s** byline is appearing more frequently across local coverage, yet Ellison herself describes her daily rhythm as ordinary community legwork.
+
+*   Walking through the busy aisles of **Canopy Market**, Ellison noted:
+    > *"I've been noticing the usual things in Rockridge, like the busy aisles at Canopy Market. I don't feel like I've been working on anything particularly remarkable or influential lately."*
+*   Ellison acknowledged the quiet editorial friction that comes with the beat, sharing:
+    > *"Recently, a manager at Bay Tribune asked me to redo some work that had already been approved, which was a bit frustrating."*
+
+Tribune reporting notes that Ellison's rising local recognition stems not from flashy breakthroughs, but from the unglamorous habit of walking the same aisles, attending neighborhood meetings, and reporting on the daily realities of the block.
+
+---
+
+### **The Names That Stay on the Wall: Fading Visibility on Piedmont Ave**
+*By Sharon Okafor, Culture Desk*
+
+On Piedmont Avenue, actor **Lena Cross** reflected on what happens when a community’s public memory outlasts daily conversation, observing the shifting recognition surrounding Rockridge civic advocate **Marisol Rivera**:
+
+> *"To be honest, I've noticed Marisol Rivera's name popping up less often in conversations around Piedmont Ave, and when it does, it's usually in the context of looking back at her past work. I've seen her flyers and posters around, but they seem a bit outdated. People still speak highly of her community work, though. I think she's done some great things, but it feels like she's not as actively involved as she used to be."*
+
+While cultural figures like **Marin Tao** in Chinatown and **Rico Valez** in Fruitvale carry widespread citywide recognition, local advocates like Rivera—and writers like **Rowan Pierce** on Piedmont Ave—move through quieter stretches. As Cross observed, an outdated flyer on a wall does not mean past advocacy has ended; it marks the subtle space between remembered history and daily neighborhood presence.
+
+---
+
+### **Mobility and Mentions: West Oakland's New Arrivals**
+*By Celeste Tran, Wire Desk*
+
+West Oakland absorbed twenty new residents this cycle, leading citywide relocations as neighborhood sidewalks grew busier around transit hubs and local corridors:
+
+*   **Deacon Seymour** (Oakland A's Manager, Lake Merritt) noted the neighborhood's shifting energy:
+    > *"I've seen a lot of new faces around West Oakland lately... It's not just the numbers that are moving in; it's the vibe. People are excited, and there's a buzz. I've had to wait longer for tables at brunch spots because out-of-town friends want to try them out. It's a different feel, but I'm not sure if it's entirely comfortable yet."*
+*   **Yu Zen** (Rockridge) kept his attention close to home while recovering from his accident:
+    > *"I've been focused on my own neighborhood, Rockridge, and my family. I've been dealing with my own recovery and getting back to my routine after my accident... I've noticed the commotion at the train station when the delayed train leaves, and I've seen the regulars debating the A's game at the diner, but that's about it."*
+*   **Claire Ashford** (Piedmont Ave) heard about the neighborhood shift from across town:
+    > *"I haven't really noticed much of a change around here on Piedmont Ave, but I've heard that West Oakland is getting more crowded. I mean, I checked the Civis Systems Field livestream the other day and it looked like they were making some progress, but that's about it."*
+
+---
+
+### **The Championship Lift & The Left Field Question**
+*By Ines Sorensen, Culture Desk*
+
+Sidewalks and neighborhood gathering spots across Oakland continue to ride the energy of the Athletics' World Series championship, even as front-office roster questions loom over the winter:
+
+*   **Ximena Mehta** (BART Transit PR, Lake Merritt) described the citywide mood:
+    > *"The A's success is all anyone can talk about around here. I mean, I'm a huge fan, and my husband Deacon is too. We plan our whole schedule around the games. It's electric. Even people who aren't huge baseball fans get caught up in it. I was at the recreation center recently when some neighbors were painting over graffiti, and it was a great community moment. The A's doing well just adds to that energy."*
+*   **Deacon Seymour** (Manager, Oakland A's) admitted the impending outfield decision remains top of mind:
+    > *"I'm still thinking about the left field decision. We've got three capable players, but each brings something different to the table. Desmond Morton's our future star with five tools, Frank Reyna's a power hitter who can make an immediate impact, and JR Rosado's a steady hand with good contact numbers. It's not an easy call."*
+*   **Omar Lingio** (Vintage Clothing Store Owner, Temescal) noted the lift in his shop:
+    > *"When the A's are good, this whole town walks a little taller, even in Temescal. I mean, Danny Horn is the real deal."*
+*   **Tiro Worso** (Mover, Piedmont Ave) weighed in from the street while navigating College Avenue traffic:
+    > *"Honestly, I don’t think about the A’s lineup except when I’m stuck behind the stroller traffic on College Avenue and someone’s wearing a Horn jersey. I mean, Danny Horn being the best in baseball and an easy call—sure, I get that part. But the left field thing with Morton, Reyna, and Rosado? That’s the kind of decision I’d lose sleep over if my paycheck depended on it, and I’m glad it doesn’t."*
+
+---
+
+### **UNDOCKED: Cristina Booker’s Night Leaves the Ledger Hanging**
+*By Nia Rook, Broadcast Desk*
+
+Immigration attorney **Cristina Booker** stepped into the *UNDOCKED* pilot chair for an episode that left broadcast scorekeepers waiting. Logging a 2/5 magnitude flight, Booker recorded unlisted systems, unsettled credits, zero combat, and zero mishaps. 
+
+While viewers in local break rooms debated whether an unresolved flight represents quiet stability or a missed opportunity, Athletics second baseman **Eric Taveras** maintained his secure hold on the **#1 leaderboard rank**, extending his streak to three consecutive cycles as Booker’s final tally remains pending.
+
+---
+
+### **The Page: Eleven Lives of Cycle 113**
+*By Tamsin Pruitt, Lives Desk*
+
+Citizens across Oakland marked housing relocations, educational milestones, and personal reflections over the last 24 hours:
+
+*   **Ily Gonzalez** (Fashion Designer) moved into a rented place of their own in Uptown after clearing their final debt in Cycle 110.
+*   **Tomas Aguilar** (Freight Logistics Coordinator, Port of Oakland) signed a rental lease in Jack London after weighing his household budget over multiple cycles.
+*   **Juliet Choi** (East Oakland) earned an advanced degree, having relocated from Downtown to balance household finances while fielding an inquiry from the Oakland Public Library System about a larger opening.
+*   **Mateo Jilner** (Student, Rockridge) received an acceptance email at lunch and shared the news with his table, staying up late to talk about what comes next.
+*   **Mei Patel** (Jack London) sat for a senior portrait, marking a milestone as high school completion nears.
+*   **Mei-Lin Zhou** (Obstetrician, Chinatown) lost a 186 stake on the *UNDOCKED* betting book, then spent time debating bullpen strategies at the barbershop.
+*   **Dax Monroe** (Artist, Rockridge) lost a 130 stake on the book, later reflecting from his window on how personal lives are intertwined with changing neighborhood cycles.
+*   **Weston Herrin** (Chinatown) received a street-sweeper parking ticket, later pointing a lost stranger toward a newly opened shop on the block.
+*   **Genevieve Martinez** (Rockridge) stepped into the back pew at Foothill Baptist Tabernacle for a quiet, cool moment of personal reflection.
+*   **Imogen Soto** (Uptown) waved to both drivers as a shuttle and a city bus pulled up side by side at a traffic light.
+*   **Drew Lemon** (Downtown) stepped over a puddle reflecting the neon glow of the Tribune Tower during a calm evening walk.
+
+---
+
+### **Citizen Life: Daily Workplace Rhythms & Reflections**
+
+Across Oakland, residents recorded key daily developments and personal milestones:
+
+*   **Shai Diaz** (Fruitvale) resolved a longstanding account issue at Mayday Movers.
+*   **Jori Clame** (Laurel) received a personal thank-you at Schoolgate Cafe after covering a coworker's shift all week.
+*   **Bryce Lee** (Temescal) received managerial recognition at Eastside Family Market for recent hard work.
+*   **Valentina Campbell** (Jack London) stepped up to run the morning staff meeting at Green & Gold Tavern while the lead was out.
+*   **Leanne Wu** (Rockridge) was publicly thanked by a client in front of the entire office floor at the Oakland Housing Authority.
+*   **Dexter Patel** (Downtown) saw a project built at Oakland Tech Collective reassigned without advance notice.
+*   **Saniya Washington** & **Ridley Holt** (Lake Merritt) coordinated workflow at the West Oakland Community Center.
+*   **Devin Castellanos** (Dimond) squared away demanding accounts at the Oakland Police Department.
+*   **Kaila Braun** (Fruitvale) noted shifting priority emails at Alameda County Courts.
+*   **Rick Walker** (K-8 Teacher, Fruitvale) observed new tutoring posters at St. Esperanza Parish and bustling lunch crowds at the mercado, while noting that rising neighborhood rents keep daily life challenging for families.
+
+---
+
+### **What the Newsroom Should Watch Next**
+
+As Cycle 113 unfolds, *The Bay Tribune* desks will monitor the following developing storylines across Oakland:
+
+1.  **Rockridge Kitchen Staffing & Hours:** Tracking whether expanding customer volumes at OakHouse and Claremont Table translate into better support and manageable schedules for back-of-house staff like Matty Lipo and Elio Perez.
+2.  **The Left Field Decision:** Watching how Athletics General Manager Mike Paulson and manager Deacon Seymour resolve the competition between Desmond Morton, Frank Reyna, and JR Rosado.
+3.  **West Oakland Housing Absorption:** Monitoring how the influx of 20 new residents into West Oakland impacts local housing turnover and neighborhood gathering spaces.
+4.  **UNDOCKED Flight Resolution:** Following up with broadcast monitors to see when Cristina Booker's credits are officially tallied and how the result affects Eric Taveras's leaderboard streak.
+5.  **Community Memory and Advocacy:** Observing how neighborhood groups on Piedmont Avenue and Rockridge continue civic outreach as public attention shifts around longtime advocates like Marisol Rivera.
+
+---
+
+🎙️ **Would you like to draft a reporter interview guide for the Rockridge restaurant beat, or organize an editorial tracking sheet comparing these citizen reports across Oakland?**

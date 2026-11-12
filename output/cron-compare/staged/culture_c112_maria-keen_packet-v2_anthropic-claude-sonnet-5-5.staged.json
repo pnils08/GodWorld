@@ -1,0 +1,65 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "112",
+  "persona": "maria-keen",
+  "byline": "Maria Keen",
+  "bylinePopid": "POP-00013",
+  "article": "output/cron-compare/staged/culture_c112_maria-keen_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Mark Aitken",
+        "role": "quoted-source",
+        "popid": "POP-00003"
+      },
+      {
+        "name": "Marcus Whitfield",
+        "role": "quoted-source",
+        "popid": "POP-00532"
+      },
+      {
+        "name": "Janae Rivers",
+        "role": "quoted-source",
+        "popid": "POP-00043"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "East Oakland"
+    ],
+    "claims": [
+      {
+        "claim": "I've been involved with the Mark Aitken Youth Baseball League since it started, and I've seen firsthand the positive impact it's had on East Oakland's youth. It's not just about teaching them baseball; it's about giving them a sense of community and discipline. As a player rep and community liaison, I've worked closely with the kids and their families, and it's rewarding to see the difference it's making in their lives.",
+        "sourceRef": "citizenVoice PRESS Mark Aitken"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-902b69672aae",
+    "draftSha256": "a4ae0c4ddfa2e087be0a96d2495954763d7e87012efaa7af3183558f5a74ba04",
+    "verdict": "output/cron-compare/culture_c112_maria-keen_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-10-23T23:18:39.223Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 878,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "a4ae0c4ddfa2e087be0a96d2495954763d7e87012efaa7af3183558f5a74ba04",
+      "costUsd": 0.0014
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-23T23:18:45.093Z"
+}

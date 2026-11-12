@@ -1,0 +1,79 @@
+{
+  "draft": "output/cron-compare/civic_c114_rachel-torres_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "114",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "ab6d1eea197b01d7850433ff1c1c119cfb6bb21459fb00d457ba6b3b85dcd371",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All named personnel and civic metrics verified cleanly against cycle 114 ground truth with zero canon violations.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "rachel-public-safety-v1",
+    "packageVersion": "RACHEL-LEP2-2",
+    "manifestId": "AM-1a1186c707d9",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "19th",
+          "26"
+        ]
+      },
+      {
+        "code": "UNAPPROVED_QUOTE",
+        "values": [
+          "most incidents in the city.",
+          "steady,",
+          "steady,"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Kimberly Cho",
+      "Rafael Montez"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 2,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0101,
+  "durationMs": 5718,
+  "parseError": false,
+  "ranAt": "2026-11-04T07:47:10.173Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 500",
+    "words": 780,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "ab6d1eea197b01d7850433ff1c1c119cfb6bb21459fb00d457ba6b3b85dcd371",
+    "costUsd": 0.0009
+  }
+}

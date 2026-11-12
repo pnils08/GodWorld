@@ -1,0 +1,473 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "113",
+  "persona": "tanya-cruz",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00014",
+      "name": "Tanya Cruz",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+      "approach": "Sideline approach (Tanya Cruz): you file from the clubhouse. That SET is yours — the Packet will never list a clubhouse event. Paint what the supplied sports line predicts. Packet player quotes and numbers only. New in-world spots go on INTAKE BIZ. No real-world Oakland venues. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview. The feed notes report what people said in paraphrase; none of it is a quote — never put it in quotation marks or attribute it as speech.",
+      "creativeBrief": {
+        "kind": "sideline-dispatch",
+        "pulseClass": "record-only-sideline",
+        "bagModes": [
+          "10 Inference Close"
+        ],
+        "claim": "The supplied sports record is the weather. The clubhouse SET is allotted hallucination fitted to that line.",
+        "anchorFacts": [
+          "The Outfield squeeze for next season. 5 Outfielders for 3 positions.",
+          "Danny Horn is your starting CF. A returing MVP and the best player in baseball makes it an easy decision. Darrin Davis figures to be your DH as he remains under contract and showed his numbers did not decline, albiet he was injured. Davis has missed substantial time twice over the past three seasons. Vladimir is entering his peak and put up his best numbers of his career last season. Rates as a clutch perfomer and is essentially who you chose over Peter Busch last offseason.",
+          "If those spots are set then you have three players for one left field opening. Desmond Morton is you highest rated prospect with 5 tools and has shown success at the MLB level, Frank Reyna is a power hitter with a mass of potential that also showed success. JR Rosado performed well in his major league experience and had good contact numbers but may trend as a role player in the grand scheme. What is the choice Paulson should make here."
+        ],
+        "accessEvidence": {
+          "state": "ALLOTTED",
+          "facts": [
+            "clubhouse/sideline SET is the reporter's room"
+          ]
+        },
+        "quoteEvidence": {
+          "state": "NOT_SUPPLIED",
+          "quotes": []
+        },
+        "observationEvidence": {
+          "state": "ALLOTTED",
+          "facts": []
+        },
+        "missing": [
+          "Packet player quotes",
+          "injury or team-response facts beyond the supplied record"
+        ],
+        "sceneRule": "Clubhouse SET is authorized. Invented player quotes and real-world venues are not.",
+        "sourcePointers": [
+          "output/world_summary_c113.md ## Sports",
+          "scripts/sportsSubstrate.js",
+          "docs/media/TANYA_SIDELINE_BAG.md"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "sideline-signal",
+      "hood": "Downtown",
+      "score": null,
+      "src": "world_summary_c113.md ## Sports",
+      "nearby": [
+        {
+          "text": "Oaks | game-result | (early-season) | Adash Stanley, Austin Reaves, AJ Dybantsa, Wilson Shepard",
+          "src": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | game-result | (early-season) | Adash Stanley, AJ Dybantsa, Austin Reaves",
+          "src": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | game-result | (early-season) | Adash Stanley, AJ Dybantsa, Austin Reaves",
+          "src": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | rumor | (off-season) | Desmond Morton, Frank Reyna, Danny Horn, Vladimir Gonzalez, JR Rosado",
+          "src": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | community-outreach | (off-season) | Darrin Davis, Rafael Montez",
+          "src": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00051",
+          "name": "Desmond Morton",
+          "profile": "Desmond Morton — Left Fielder, Oakland A's",
+          "role": "Left Fielder, Oakland A's",
+          "hood": "Chinatown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c113.md ## Sports",
+            "pop": "POP-00051",
+            "rowName": "Desmond Morton",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00079",
+          "name": "Frank Reyna",
+          "profile": "Frank Reyna — Right Fielder, Oakland A's",
+          "role": "Right Fielder, Oakland A's",
+          "hood": "Lake Merritt",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c113.md ## Sports",
+            "pop": "POP-00079",
+            "rowName": "Frank Reyna",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00022",
+          "name": "Danny Horn",
+          "profile": "Danny Horn — Center Fielder, Oakland A's - Best player in the MLB",
+          "role": "Center Fielder, Oakland A's - Best player in the MLB",
+          "hood": "Temescal",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c113.md ## Sports",
+            "pop": "POP-00022",
+            "rowName": "Danny Horn",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00598",
+          "name": "Vladimir Gonzalez",
+          "profile": "Vladimir Gonzalez — Right Fielder, Oakland A's",
+          "role": "Right Fielder, Oakland A's",
+          "hood": "Fruitvale",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c113.md ## Sports",
+            "pop": "POP-00598",
+            "rowName": "Vladimir Gonzalez",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00021",
+          "name": "Darrin Davis",
+          "profile": "Darrin Davis — Left Fielder, Oakland A's Legend",
+          "role": "Left Fielder, Oakland A's Legend",
+          "hood": "Piedmont Ave",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c113.md ## Sports",
+            "pop": "POP-00021",
+            "rowName": "Darrin Davis",
+            "kind": "slice-row"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C113",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-876f95b5eb98"
+      },
+      {
+        "t": "FACT",
+        "text": "The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+        "src": "world_summary_c113.md ## Sports",
+        "id": "F-36b4b175ea0e"
+      },
+      {
+        "t": "FACT",
+        "text": "The Outfield squeeze for next season. 5 Outfielders for 3 positions.",
+        "src": "world_summary_c113.md ## Sports",
+        "id": "F-2a3f8cb11e5a"
+      },
+      {
+        "t": "FACT",
+        "text": "Danny Horn is your starting CF. A returing MVP and the best player in baseball makes it an easy decision. Darrin Davis figures to be your DH as he remains under contract and showed his numbers did not decline, albiet he was injured. Davis has missed substantial time twice over the past three seasons. Vladimir is entering his peak and put up his best numbers of his career last season. Rates as a clutch perfomer and is essentially who you chose over Peter Busch last offseason.",
+        "src": "world_summary_c113.md ## Sports",
+        "id": "F-582d1a631369"
+      },
+      {
+        "t": "FACT",
+        "text": "If those spots are set then you have three players for one left field opening. Desmond Morton is you highest rated prospect with 5 tools and has shown success at the MLB level, Frank Reyna is a power hitter with a mass of potential that also showed success. JR Rosado performed well in his major league experience and had good contact numbers but may trend as a role player in the grand scheme. What is the choice Paulson should make here.",
+        "src": "world_summary_c113.md ## Sports",
+        "id": "F-67f3cfbf6b42"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "named",
+    "candidates": [
+      {
+        "pop": "POP-00051",
+        "name": "Desmond Morton",
+        "role": "Left Fielder, Oakland A's",
+        "hood": "Chinatown",
+        "profile": "Desmond Morton — Left Fielder, Oakland A's",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c113.md ## Sports",
+          "pop": "POP-00051",
+          "rowName": "Desmond Morton",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00079",
+        "name": "Frank Reyna",
+        "role": "Right Fielder, Oakland A's",
+        "hood": "Lake Merritt",
+        "profile": "Frank Reyna — Right Fielder, Oakland A's",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c113.md ## Sports",
+          "pop": "POP-00079",
+          "rowName": "Frank Reyna",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00022",
+        "name": "Danny Horn",
+        "role": "Center Fielder, Oakland A's - Best player in the MLB",
+        "hood": "Temescal",
+        "profile": "Danny Horn — Center Fielder, Oakland A's - Best player in the MLB",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c113.md ## Sports",
+          "pop": "POP-00022",
+          "rowName": "Danny Horn",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00598",
+        "name": "Vladimir Gonzalez",
+        "role": "Right Fielder, Oakland A's",
+        "hood": "Fruitvale",
+        "profile": "Vladimir Gonzalez — Right Fielder, Oakland A's",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c113.md ## Sports",
+          "pop": "POP-00598",
+          "rowName": "Vladimir Gonzalez",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00021",
+        "name": "Darrin Davis",
+        "role": "Left Fielder, Oakland A's Legend",
+        "hood": "Piedmont Ave",
+        "profile": "Darrin Davis — Left Fielder, Oakland A's Legend",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c113.md ## Sports",
+          "pop": "POP-00021",
+          "rowName": "Darrin Davis",
+          "kind": "slice-row"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014"
+  },
+  "assignment": {
+    "story": {
+      "angle": "The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+      "label": "The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+      "hookLine": "The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+      "kind": "sideline-signal",
+      "hood": "Downtown",
+      "popids": [
+        "POP-00051",
+        "POP-00079",
+        "POP-00022",
+        "POP-00598",
+        "POP-00021"
+      ],
+      "citizens": [
+        "Desmond Morton (POP-00051)",
+        "Frank Reyna (POP-00079)",
+        "Danny Horn (POP-00022)",
+        "Vladimir Gonzalez (POP-00598)",
+        "Darrin Davis (POP-00021)"
+      ],
+      "ref": "world_summary_c113.md ## Sports",
+      "cycle": 113
+    },
+    "approach": "Sideline approach (Tanya Cruz): you file from the clubhouse. That SET is yours — the Packet will never list a clubhouse event. Paint what the supplied sports line predicts. Packet player quotes and numbers only. New in-world spots go on INTAKE BIZ. No real-world Oakland venues. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview. The feed notes report what people said in paraphrase; none of it is a quote — never put it in quotation marks or attribute it as speech."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014",
+    "text": "I'm standing at the edge of the clubhouse, coffee going cold, watching the outfielders' names get penciled in and erased on the whiteboard. Danny Horn in center is a lock — that's not even a conversation. Darrin Davis at DH makes sense on paper, but the man's missed real time twice in three years, and the numbers staying flat doesn't mean the body holds up. Vladimir's entering his peak, put up career-best numbers, clutch — he's earned his spot. So that leaves three guys for one left field opening, and I keep circling the same question: what does Paulson actually see when he watches them? Desmond Morton's the highest-rated prospect, five tools, already shown he can do it at this level. Frank",
+    "plan": {
+      "chase": "I'm standing at the edge of the clubhouse, coffee going cold, watching the outfielders' names get penciled in and erased on the whiteboard. Danny Horn in center is a lock — that's not even a conversation. Darrin Davis at DH makes sense on paper, but the man's missed real time twice in three years, and the numbers staying flat doesn't mean the body holds up. Vladimir's entering his peak, put up career-best numbers, clutch — he's earned his spot. So that leaves three guys for one left field opening, and I keep circling the same question: what does Paulson actually see when he watches them? Desmond Morton's the highest-rated prospect, five tools, already shown he can do it at this level. Frank ",
+      "focus": "The unresolved competition for the final outfield spot and what it signals about the A's direction this off-season.",
+      "why": "The roster math is clean on paper but the human cost is not — three capable players, one slot, and the clubhouse is holding its breath. That tension is the story.",
+      "checks": [
+        "Confirm the five outfielders and the three locked spots from the supplied record.",
+        "Verify Davis's injury history is limited to what the record states — no new details.",
+        "Ensure no player quotes are invented; only the supplied facts anchor the piece.",
+        "Keep the clubhouse scene as the reporter's vantage point, not a reported event."
+      ],
+      "targets": [
+        {
+          "pop": "POP-00051",
+          "question": "Desmond, what have the coaches told you about where you fit this spring?",
+          "basis": "Highest-rated prospect with five tools and MLB success — the natural frontrunner for the left field job."
+        },
+        {
+          "pop": "POP-00079",
+          "question": "Frank, how do you separate yourself in a competition where everyone's already proven something?",
+          "basis": "Power hitter with mass potential and prior MLB success — the ceiling argument for the opening."
+        },
+        {
+          "pop": "POP-00022",
+          "question": "Danny, from your vantage in center, what do you see in the three guys fighting for left?",
+          "basis": "Returning MVP and best player in baseball — his read on the competition carries weight in the room."
+        },
+        {
+          "pop": "POP-00598",
+          "question": "Vladimir, you've earned your spot — what's the vibe in the room about the odd man out?",
+          "basis": "Entering his peak with career-best numbers — a locked starter who can speak to the clubhouse mood."
+        },
+        {
+          "pop": "POP-00021",
+          "question": "Darrin, with your history of injuries, does the DH role feel like a safeguard or a demotion?",
+          "basis": "Under contract, numbers didn't decline, but missed substantial time twice in three seasons — the fragility factor."
+        }
+      ],
+      "interpretation": "The outfield squeeze is less about talent and more about timing — Davis's health, Vladimir's peak, and three young players all arriving at once. Paulson's choice will signal whether the A's are building for now or for later.",
+      "unverifiedLead": [
+        "The clubhouse whiteboard had Morton's name written in the left field slot before being erased — could be nothing, could be a hint at the front office's lean.",
+        "A coach was overheard saying the decision might come down to who fits the lineup's defensive needs, not just the bat."
+      ],
+      "closeQuestion": "What I still need is a minute with Paulson after a workout — just to see which name he glances at when he thinks nobody's watching."
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Oaks | game-result | (early-season) | Adash Stanley, Austin Reaves, AJ Dybantsa, Wilson Shepard",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01023",
+        "POP-01027",
+        "POP-01024",
+        "POP-01022"
+      ]
+    },
+    {
+      "label": "Oaks | game-result | (early-season) | Adash Stanley, AJ Dybantsa, Austin Reaves",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01023",
+        "POP-01024",
+        "POP-01027"
+      ]
+    },
+    {
+      "label": "Oaks | game-result | (early-season) | Adash Stanley, AJ Dybantsa, Austin Reaves",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01023",
+        "POP-01024",
+        "POP-01027"
+      ]
+    },
+    {
+      "label": "A's | rumor | (off-season) | Desmond Morton, Frank Reyna, Danny Horn, Vladimir Gonzalez, JR Rosado",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00051",
+        "POP-00079",
+        "POP-00022",
+        "POP-00598",
+        "POP-00054"
+      ]
+    },
+    {
+      "label": "A's | community-outreach | (off-season) | Darrin Davis, Rafael Montez",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00021",
+        "POP-00136"
+      ]
+    }
+  ],
+  "laneEntries": 9,
+  "angleCapHits": 0,
+  "ranAt": "2026-10-28T11:17:32.179Z"
+}

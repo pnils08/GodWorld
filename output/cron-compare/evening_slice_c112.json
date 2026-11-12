@@ -1,0 +1,748 @@
+{
+  "empty": false,
+  "cycle": 112,
+  "kind": "evening-life",
+  "journalist": {
+    "shared": true,
+    "consumers": [
+      "mason-ortega",
+      "kai-marston",
+      "sharon-okafor",
+      "maria-keen",
+      "elliot-graye"
+    ]
+  },
+  "texture": {
+    "famous": [
+      "Tara Ellison",
+      "Jade Orion",
+      "Vinnie Keane"
+    ],
+    "restaurants": [
+      {
+        "name": "Northgate Kitchen",
+        "hood": "KONO"
+      },
+      {
+        "name": "Midnight Bistro",
+        "hood": "Downtown"
+      },
+      {
+        "name": "West Side Cafe",
+        "hood": "West Oakland"
+      }
+    ],
+    "fastFood": [
+      {
+        "name": "SpeedyBurger",
+        "hood": "Downtown"
+      }
+    ],
+    "nightlife": [
+      {
+        "name": "Neighborhood Response Hub",
+        "hood": "Downtown"
+      }
+    ],
+    "nightlifeMeta": {
+      "volume": 4,
+      "vibe": "tense",
+      "movement": "restricted",
+      "weatherImpact": 1
+    },
+    "cityEvents": [
+      "Downtown Volunteer Boost Rally",
+      "Chinatown Winter Lights",
+      "Jack London Waterfront Stroll",
+      "Temescal Street Vendors Block"
+    ],
+    "tv": [
+      "Breaking Bulletin",
+      "Lake Merritt Laughs",
+      "Comfort Kitchen",
+      "A's Sports Central",
+      "One-on-One with Vinnie Keane (3B)"
+    ],
+    "movies": [
+      "Second Chance",
+      "Snowlight",
+      "Opening Day"
+    ],
+    "sportsBroadcast": "Oakland Sports Tonight",
+    "streamingTrend": "political commentary surge",
+    "foodTrend": "High mobility / civic-tension food trend"
+  },
+  "signals": {
+    "fameCount": 1,
+    "sightingCount": 3,
+    "faithCount": 6,
+    "eveningPointer": {
+      "ref": "output/world_summary_c112.md \"## Evening Texture\"",
+      "label": "Named venues that moved — restaurants, fast food, nightlife spots, city events, media"
+    },
+    "sightings": [
+      {
+        "kind": "lifestyle-sighting",
+        "label": "sighting | Tara Ellison spotted at Keane Mercantile",
+        "name": "Tara Ellison",
+        "venue": "Keane Mercantile",
+        "ref": "Ripple_Ledger cycle 112 (CauseType lifestyle-sighting); rendered: world_summary_c112.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "hood": "Grand Lake",
+        "popids": []
+      },
+      {
+        "kind": "lifestyle-sighting",
+        "label": "sighting | Jade Orion spotted at St. Esperanza Parish",
+        "name": "Jade Orion",
+        "venue": "St. Esperanza Parish",
+        "ref": "Ripple_Ledger cycle 112 (CauseType lifestyle-sighting); rendered: world_summary_c112.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "hood": "Fruitvale",
+        "popids": []
+      },
+      {
+        "kind": "lifestyle-sighting",
+        "label": "sighting | Vinnie Keane spotted at Brie Bouquets",
+        "name": "Vinnie Keane",
+        "venue": "Brie Bouquets",
+        "ref": "Ripple_Ledger cycle 112 (CauseType lifestyle-sighting); rendered: world_summary_c112.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "hood": "Temescal",
+        "popids": []
+      }
+    ],
+    "fame": [
+      {
+        "kind": "fame-event",
+        "label": "fame-rise | Jade Orion — the city is watching: wondered when exactly they became the adult in the room",
+        "name": "Jade Orion",
+        "ref": "Ripple_Ledger cycle 112 (CauseType fame-event); rendered: world_summary_c112.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Lake Merritt",
+        "popids": [
+          "POP-00540"
+        ]
+      }
+    ]
+  },
+  "pulse": {
+    "className": "quiet-nightlife",
+    "score": 24,
+    "label": "Neighborhood Response Hub (Downtown) · quiet night",
+    "named": "Neighborhood Response Hub",
+    "hood": "Downtown",
+    "person": null,
+    "venue": null
+  },
+  "candidates": [
+    {
+      "className": "quiet-nightlife",
+      "score": 24,
+      "label": "Neighborhood Response Hub (Downtown) · quiet night",
+      "named": "Neighborhood Response Hub",
+      "hood": "Downtown"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Tara Ellison at Keane Mercantile (Grand Lake)",
+      "named": "Keane Mercantile",
+      "hood": "Grand Lake"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Jade Orion at St. Esperanza Parish (Fruitvale)",
+      "named": "St. Esperanza Parish",
+      "hood": "Fruitvale"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Vinnie Keane at Brie Bouquets (Temescal)",
+      "named": "Brie Bouquets",
+      "hood": "Temescal"
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Northgate Kitchen (KONO)",
+      "named": "Northgate Kitchen",
+      "hood": "KONO"
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Midnight Bistro (Downtown)",
+      "named": "Midnight Bistro",
+      "hood": "Downtown"
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "West Side Cafe (West Oakland)",
+      "named": "West Side Cafe",
+      "hood": "West Oakland"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Jade Orion — fame rise",
+      "named": "Jade Orion",
+      "hood": "Lake Merritt"
+    },
+    {
+      "className": "tv-slate",
+      "score": 16,
+      "label": "TV slate: Breaking Bulletin; Lake Merritt Laughs; Comfort Kitchen",
+      "named": "Breaking Bulletin",
+      "hood": null
+    },
+    {
+      "className": "city-event",
+      "score": 14,
+      "label": "Downtown Volunteer Boost Rally",
+      "named": "Downtown Volunteer Boost Rally",
+      "hood": null
+    },
+    {
+      "className": "city-event",
+      "score": 14,
+      "label": "Chinatown Winter Lights",
+      "named": "Chinatown Winter Lights",
+      "hood": null
+    },
+    {
+      "className": "city-event",
+      "score": 14,
+      "label": "Jack London Waterfront Stroll",
+      "named": "Jack London Waterfront Stroll",
+      "hood": null
+    }
+  ],
+  "pulses": [
+    {
+      "className": "quiet-nightlife",
+      "score": 24,
+      "label": "Neighborhood Response Hub (Downtown) · quiet night",
+      "named": "Neighborhood Response Hub",
+      "hood": "Downtown",
+      "names": [
+        "Neighborhood Response Hub"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Nightlife",
+      "angle": "Neighborhood Response Hub is open and quiet in Downtown. What that condition means is not yet established.",
+      "hookLine": "Neighborhood Response Hub is open and quiet in Downtown.",
+      "sceneBits": [
+        "VENUE: Neighborhood Response Hub",
+        "HOOD: Downtown",
+        "EVENING RECORD: open and quiet"
+      ],
+      "nightlifeMeta": {
+        "volume": 4,
+        "vibe": "tense",
+        "movement": "restricted",
+        "weatherImpact": 1
+      },
+      "cycle": 112
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Tara Ellison at Keane Mercantile (Grand Lake)",
+      "named": "Keane Mercantile",
+      "hood": "Grand Lake",
+      "names": [
+        "Tara Ellison",
+        "Keane Mercantile"
+      ],
+      "person": "Tara Ellison",
+      "venue": "Keane Mercantile",
+      "popids": [],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 112 (CauseType lifestyle-sighting); rendered: world_summary_c112.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "angle": "Tara Ellison spotted at Keane Mercantile in Grand Lake — ground truth only, no invented companions",
+      "hookLine": "sighting | Tara Ellison spotted at Keane Mercantile",
+      "sceneBits": [
+        "PERSON: Tara Ellison",
+        "VENUE: Keane Mercantile",
+        "HOOD: Grand Lake"
+      ],
+      "cycle": 112
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Jade Orion at St. Esperanza Parish (Fruitvale)",
+      "named": "St. Esperanza Parish",
+      "hood": "Fruitvale",
+      "names": [
+        "Jade Orion",
+        "St. Esperanza Parish"
+      ],
+      "person": "Jade Orion",
+      "venue": "St. Esperanza Parish",
+      "popids": [],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 112 (CauseType lifestyle-sighting); rendered: world_summary_c112.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "angle": "Jade Orion spotted at St. Esperanza Parish in Fruitvale — ground truth only, no invented companions",
+      "hookLine": "sighting | Jade Orion spotted at St. Esperanza Parish",
+      "sceneBits": [
+        "PERSON: Jade Orion",
+        "VENUE: St. Esperanza Parish",
+        "HOOD: Fruitvale"
+      ],
+      "cycle": 112
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Vinnie Keane at Brie Bouquets (Temescal)",
+      "named": "Brie Bouquets",
+      "hood": "Temescal",
+      "names": [
+        "Vinnie Keane",
+        "Brie Bouquets"
+      ],
+      "person": "Vinnie Keane",
+      "venue": "Brie Bouquets",
+      "popids": [],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 112 (CauseType lifestyle-sighting); rendered: world_summary_c112.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "angle": "Vinnie Keane spotted at Brie Bouquets in Temescal — ground truth only, no invented companions",
+      "hookLine": "sighting | Vinnie Keane spotted at Brie Bouquets",
+      "sceneBits": [
+        "PERSON: Vinnie Keane",
+        "VENUE: Brie Bouquets",
+        "HOOD: Temescal"
+      ],
+      "cycle": 112
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Northgate Kitchen (KONO)",
+      "named": "Northgate Kitchen",
+      "hood": "KONO",
+      "names": [
+        "Northgate Kitchen"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Restaurants",
+      "angle": "Northgate Kitchen appears on the evening restaurant list in KONO. What was happening there is not established.",
+      "hookLine": "Northgate Kitchen appears on the evening restaurant list in KONO.",
+      "sceneBits": [
+        "VENUE: Northgate Kitchen",
+        "HOOD: KONO"
+      ],
+      "cycle": 112
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Midnight Bistro (Downtown)",
+      "named": "Midnight Bistro",
+      "hood": "Downtown",
+      "names": [
+        "Midnight Bistro"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Restaurants",
+      "angle": "Midnight Bistro appears on the evening restaurant list in Downtown. What was happening there is not established.",
+      "hookLine": "Midnight Bistro appears on the evening restaurant list in Downtown.",
+      "sceneBits": [
+        "VENUE: Midnight Bistro",
+        "HOOD: Downtown"
+      ],
+      "cycle": 112
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "West Side Cafe (West Oakland)",
+      "named": "West Side Cafe",
+      "hood": "West Oakland",
+      "names": [
+        "West Side Cafe"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Restaurants",
+      "angle": "West Side Cafe appears on the evening restaurant list in West Oakland. What was happening there is not established.",
+      "hookLine": "West Side Cafe appears on the evening restaurant list in West Oakland.",
+      "sceneBits": [
+        "VENUE: West Side Cafe",
+        "HOOD: West Oakland"
+      ],
+      "cycle": 112
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Jade Orion — fame rise",
+      "named": "Jade Orion",
+      "hood": "Lake Merritt",
+      "names": [
+        "Jade Orion"
+      ],
+      "person": "Jade Orion",
+      "popids": [
+        "POP-00540"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 112 (CauseType fame-event); rendered: world_summary_c112.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Jade Orion — city watching; do not invent the private life",
+      "hookLine": "fame-rise | Jade Orion — the city is watching: wondered when exactly they became the adult in the room",
+      "sceneBits": [
+        "PERSON: Jade Orion",
+        "HOOD: Lake Merritt",
+        "LABEL: fame-rise | Jade Orion — the city is watching: wondered when exactly they became the adult in the room"
+      ],
+      "cycle": 112
+    },
+    {
+      "className": "tv-slate",
+      "score": 16,
+      "label": "TV slate: Breaking Bulletin; Lake Merritt Laughs; Comfort Kitchen",
+      "named": "Breaking Bulletin",
+      "hood": null,
+      "names": [
+        "Breaking Bulletin",
+        "Lake Merritt Laughs",
+        "Comfort Kitchen",
+        "A's Sports Central",
+        "One-on-One with Vinnie Keane (3B)"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Evening media TV",
+      "angle": "Evening TV slate — Breaking Bulletin, Lake Merritt Laughs, Comfort Kitchen; sports desk: Oakland Sports Tonight",
+      "hookLine": "On the box tonight: Breaking Bulletin, Lake Merritt Laughs.",
+      "sceneBits": [
+        "TV: Breaking Bulletin; Lake Merritt Laughs; Comfort Kitchen; A's Sports Central; One-on-One with Vinnie Keane (3B)",
+        "SPORTS BROADCAST: Oakland Sports Tonight"
+      ],
+      "cycle": 112
+    },
+    {
+      "className": "city-event",
+      "score": 14,
+      "label": "Downtown Volunteer Boost Rally",
+      "named": "Downtown Volunteer Boost Rally",
+      "hood": null,
+      "names": [
+        "Downtown Volunteer Boost Rally"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · City events",
+      "angle": "City event: Downtown Volunteer Boost Rally — present-tense room, not calendar filler",
+      "hookLine": "Downtown Volunteer Boost Rally is on the evening board.",
+      "sceneBits": [
+        "EVENT: Downtown Volunteer Boost Rally"
+      ],
+      "cycle": 112
+    },
+    {
+      "className": "city-event",
+      "score": 14,
+      "label": "Chinatown Winter Lights",
+      "named": "Chinatown Winter Lights",
+      "hood": null,
+      "names": [
+        "Chinatown Winter Lights"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · City events",
+      "angle": "City event: Chinatown Winter Lights — present-tense room, not calendar filler",
+      "hookLine": "Chinatown Winter Lights is on the evening board.",
+      "sceneBits": [
+        "EVENT: Chinatown Winter Lights"
+      ],
+      "cycle": 112
+    },
+    {
+      "className": "city-event",
+      "score": 14,
+      "label": "Jack London Waterfront Stroll",
+      "named": "Jack London Waterfront Stroll",
+      "hood": null,
+      "names": [
+        "Jack London Waterfront Stroll"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · City events",
+      "angle": "City event: Jack London Waterfront Stroll — present-tense room, not calendar filler",
+      "hookLine": "Jack London Waterfront Stroll is on the evening board.",
+      "sceneBits": [
+        "EVENT: Jack London Waterfront Stroll"
+      ],
+      "cycle": 112
+    },
+    {
+      "className": "city-event",
+      "score": 14,
+      "label": "Temescal Street Vendors Block",
+      "named": "Temescal Street Vendors Block",
+      "hood": null,
+      "names": [
+        "Temescal Street Vendors Block"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · City events",
+      "angle": "City event: Temescal Street Vendors Block — present-tense room, not calendar filler",
+      "hookLine": "Temescal Street Vendors Block is on the evening board.",
+      "sceneBits": [
+        "EVENT: Temescal Street Vendors Block"
+      ],
+      "cycle": 112
+    },
+    {
+      "className": "fast-food",
+      "score": 13,
+      "label": "SpeedyBurger (Downtown)",
+      "named": "SpeedyBurger",
+      "hood": "Downtown",
+      "names": [
+        "SpeedyBurger"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Fast food",
+      "angle": "SpeedyBurger appears on the evening fast-food list in Downtown. What was happening there is not established.",
+      "hookLine": "SpeedyBurger appears on the evening fast-food list in Downtown.",
+      "sceneBits": [
+        "VENUE: SpeedyBurger",
+        "HOOD: Downtown"
+      ],
+      "cycle": 112
+    },
+    {
+      "className": "movie-slate",
+      "score": 13,
+      "label": "Movies: Second Chance; Snowlight; Opening Day",
+      "named": "Second Chance",
+      "hood": null,
+      "names": [
+        "Second Chance",
+        "Snowlight",
+        "Opening Day"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Evening media movies",
+      "angle": "Evening movie slate — Second Chance, Snowlight, Opening Day",
+      "hookLine": "Screens tonight: Second Chance, Snowlight, Opening Day.",
+      "sceneBits": [
+        "MOVIES: Second Chance; Snowlight; Opening Day"
+      ],
+      "cycle": 112
+    },
+    {
+      "className": "fame-sighting",
+      "score": 12,
+      "label": "Tara Ellison spotted (Riley famous list)",
+      "named": "Tara Ellison",
+      "hood": null,
+      "names": [
+        "Tara Ellison"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Famous people spotted",
+      "angle": "Tara Ellison is on the evening famous list — sighting without inventing a stop",
+      "hookLine": "Tara Ellison is being seen around town.",
+      "sceneBits": [
+        "NAME: Tara Ellison"
+      ],
+      "cycle": 112
+    },
+    {
+      "className": "fame-sighting",
+      "score": 12,
+      "label": "Jade Orion spotted (Riley famous list)",
+      "named": "Jade Orion",
+      "hood": null,
+      "names": [
+        "Jade Orion"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Famous people spotted",
+      "angle": "Jade Orion is on the evening famous list — sighting without inventing a stop",
+      "hookLine": "Jade Orion is being seen around town.",
+      "sceneBits": [
+        "NAME: Jade Orion"
+      ],
+      "cycle": 112
+    },
+    {
+      "className": "fame-sighting",
+      "score": 12,
+      "label": "Vinnie Keane spotted (Riley famous list)",
+      "named": "Vinnie Keane",
+      "hood": null,
+      "names": [
+        "Vinnie Keane"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Famous people spotted",
+      "angle": "Vinnie Keane is on the evening famous list — sighting without inventing a stop",
+      "hookLine": "Vinnie Keane is being seen around town.",
+      "sceneBits": [
+        "NAME: Vinnie Keane"
+      ],
+      "cycle": 112
+    },
+    {
+      "className": "faith-overlap",
+      "score": 11,
+      "label": "Faith / quiet work overlap with evening city",
+      "named": null,
+      "hood": null,
+      "names": [],
+      "requiresName": false,
+      "source": "Faith_Organizations tab (LeaderPOPID-linked)",
+      "angle": "Quiet institutional care against the evening board — congregations, not doctrine wars",
+      "hookLine": "Faith work continues while the city evenings out.",
+      "sceneBits": [
+        "FAITH REGISTRY: present"
+      ],
+      "cycle": 112
+    },
+    {
+      "className": "food-trend",
+      "score": 9,
+      "label": "High mobility / civic-tension food trend",
+      "named": "High mobility / civic-tension food trend",
+      "hood": null,
+      "names": [
+        "High mobility / civic-tension food trend"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Food trend",
+      "angle": "Food trend under stress: High mobility / civic-tension food trend",
+      "hookLine": "Food trend line: High mobility / civic-tension food trend.",
+      "sceneBits": [
+        "FOOD TREND: High mobility / civic-tension food trend"
+      ],
+      "cycle": 112
+    }
+  ],
+  "recommend": {
+    "bag": "lifestyle",
+    "slug": "sharon-okafor",
+    "name": "Sharon Okafor",
+    "popid": "POP-00159",
+    "bagDoc": "docs/media/SHARON_LIFESTYLE_BAG.md",
+    "reason": "top pulse quiet-nightlife → lifestyle",
+    "pulseClass": "quiet-nightlife",
+    "pulseLabel": "Neighborhood Response Hub (Downtown) · quiet night"
+  },
+  "perSeat": {
+    "mason-ortega": {
+      "pulseClass": "named-restaurant",
+      "label": "Northgate Kitchen (KONO)",
+      "score": 34,
+      "bag": "kitchen"
+    },
+    "kai-marston": {
+      "pulseClass": "quiet-nightlife",
+      "label": "Neighborhood Response Hub (Downtown) · quiet night",
+      "score": 32,
+      "bag": "arts"
+    },
+    "sharon-okafor": {
+      "pulseClass": "quiet-nightlife",
+      "label": "Neighborhood Response Hub (Downtown) · quiet night",
+      "score": 32,
+      "bag": "lifestyle"
+    },
+    "maria-keen": {
+      "pulseClass": "quiet-nightlife",
+      "label": "Neighborhood Response Hub (Downtown) · quiet night",
+      "score": 32,
+      "bag": "ground"
+    },
+    "elliot-graye": {
+      "pulseClass": "fame-sighting",
+      "label": "Tara Ellison at Keane Mercantile (Grand Lake)",
+      "score": 31,
+      "bag": "faith"
+    }
+  },
+  "approach": "Evening-life approach (shared culture pack): open from a NAMED place or sighting in this slice — restaurant, bar, festival, TV slate, or fame stop — never invent venues or employees. Use nightlife volume/vibe/movement as scene color only; translate to human language (no raw decimals as lead). Pick ONE life pulse; ride the recommended consumer bag when it matches your seat (kitchen / arts / lifestyle / ground / faith). Do not file multi-voice culture-desk average. One room, one night, one truth.",
+  "story": {
+    "angle": "Neighborhood Response Hub is open and quiet in Downtown. What that condition means is not yet established.",
+    "label": "Neighborhood Response Hub (Downtown) · quiet night",
+    "hookLine": "Neighborhood Response Hub is open and quiet in Downtown.",
+    "hood": "Downtown",
+    "pulseClass": "quiet-nightlife",
+    "citizens": [],
+    "popids": [],
+    "named": "Neighborhood Response Hub",
+    "venue": "Neighborhood Response Hub",
+    "ref": "world_summary ## Evening Texture · Nightlife",
+    "cycle": 112
+  },
+  "prewrite": {
+    "pulseClass": "quiet-nightlife",
+    "angle": "Neighborhood Response Hub is open and quiet in Downtown. What that condition means is not yet established.",
+    "hookLine": "Neighborhood Response Hub is open and quiet in Downtown.",
+    "anchorFacts": [
+      "NAMED: Neighborhood Response Hub",
+      "HOOD: Downtown",
+      "VENUE: Neighborhood Response Hub",
+      "HOOD: Downtown",
+      "EVENING RECORD: open and quiet"
+    ],
+    "bagRecommend": "lifestyle",
+    "bagSlug": "sharon-okafor"
+  },
+  "scene": {
+    "venues": [
+      {
+        "name": "Northgate Kitchen",
+        "hood": "KONO"
+      },
+      {
+        "name": "Midnight Bistro",
+        "hood": "Downtown"
+      },
+      {
+        "name": "West Side Cafe",
+        "hood": "West Oakland"
+      },
+      {
+        "name": "SpeedyBurger",
+        "hood": "Downtown"
+      },
+      {
+        "name": "Neighborhood Response Hub",
+        "hood": "Downtown"
+      }
+    ],
+    "nightlifeMeta": {
+      "volume": 4,
+      "vibe": "tense",
+      "movement": "restricted",
+      "weatherImpact": 1
+    },
+    "cityEvents": [
+      "Downtown Volunteer Boost Rally",
+      "Chinatown Winter Lights",
+      "Jack London Waterfront Stroll",
+      "Temescal Street Vendors Block"
+    ],
+    "tv": [
+      "Breaking Bulletin",
+      "Lake Merritt Laughs",
+      "Comfort Kitchen",
+      "A's Sports Central",
+      "One-on-One with Vinnie Keane (3B)"
+    ],
+    "movies": [
+      "Second Chance",
+      "Snowlight",
+      "Opening Day"
+    ],
+    "colorRoom": "Named places only from Evening Texture / desk_signal. The supplied evening record describes nightlife as quiet; raw scoring fields stay internal.  Sensory room (weather, light, sound) is free; careers and employees are not."
+  },
+  "pointers": [
+    "output/world_summary_c112.md ## Evening Texture",
+    "output/desk_signal_c112.json lanes.culture",
+    "docs/media/SHARON_LIFESTYLE_BAG.md",
+    "docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 1"
+  ]
+}

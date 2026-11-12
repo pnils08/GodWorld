@@ -1,0 +1,439 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-01211",
+    "name": "Ines Sorensen",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Voices, 2026-10-22: Marcus Webb in their own words, and 3 more",
+    "approach": "Voices approach: this slice is what citizens wrote on their own pages — verbatim, attributed, the day it happened. The person's own line first, before their name; then who they are in one plain clause; then what in the city they were answering, from the page's own tags. Fewer, longer passages; the words are the product. Never a count, never a statistic, never an explanation of what they meant. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "voices",
+      "hood": "Downtown",
+      "facts": [
+        "“Month eleven’s done, $400K moved, and the queue’s finally down to six files waiting on title search. I keep telling myself twenty-three days is fine, it’s the standard, but the standard doesn’t tell me which of those six households is one missed payment from losing it all. I walked past a couple of the addresses on my way home—didn’t stop, just saw the lights on, and that’s the whole game, isn’t it. The spreadsheet says we’re ahead, but the spreadsheet never has to sit in a kitchen and explain a delay. Tomorrow I’ll push the title vendor again, and tonight I’ll just let the numbers sit.” — Marcus Webb, OEWD Program Director, Downtown (own page, after work, C112)",
+        "“The Chinatown call still sits heavy. We got someone there eventually, but the wait was too long, and I know West Oakland’s crews would’ve been faster. That’s the part nobody puts in the report—the minutes that stretch when you’re waiting and the system already knows better. I keep pushing the district-level data because I need the city to see the gap the way I do, not as a line on a spreadsheet but as a block where someone’s neighbor could’ve been the one answering. I’m tired of being the one who knows what’s possible and still has to argue for it.” — Vanessa Tran-Muñoz, OARI Program Director, Rockridge (own page, after work, C112)",
+        "“The Fruitvale number keeps coming back. Eighteen percent on my internal sheet, twenty-three on the public file—someone's rounding, or someone's lag. I don't know which bothers me more. Federal habit: I want to build the case myself, drive the interview, but that's not this job now. I'm managing gaps I can't close, just watching where the protocol catches and where it doesn't. West Oakland tonight, same as every night. I should eat something.” — Clarissa Dane, DISTRICT ATTORNEY, West Oakland (own page, after work, C112)",
+        "“Yu Zen’s file is still open on my desk. Twenty-nine years old, Rockridge, and now he’s looking at months of rehab for a hand that might never close right. Deacon’s losing his, I know that much already. Some days I wonder if the board sees the numbers or the people behind them, and I’m too tired to keep fighting that fight tonight. I just keep coming back to the same question: did we get there fast enough, and will it ever feel like we did?” — Priya Narang, EMS DIRECTOR, Uptown (own page, after work, C112)"
+      ],
+      "priorCycle": null,
+      "note": "4 more citizens wrote today and wait for the next run",
+      "engineHooks": [],
+      "roomIsYours": "where they were standing when they wrote it, the one plain clause that says who this is, the silence after their last line — never a word inside the quotation marks that is not on the page",
+      "pageVoices": [
+        "“Month eleven’s done, $400K moved, and the queue’s finally down to six files waiting on title search. I keep telling myself twenty-three days is fine, it’s the standard, but the standard doesn’t tell me which of those six households is one missed payment from losing it all. I walked past a couple of the addresses on my",
+        "“The Chinatown call still sits heavy. We got someone there eventually, but the wait was too long, and I know West Oakland’s crews would’ve been faster. That’s the part nobody puts in the report—the minutes that stretch when you’re waiting and the system already knows better. I keep pushing the district-level data becau",
+        "“The Fruitvale number keeps coming back. Eighteen percent on my internal sheet, twenty-three on the public file—someone's rounding, or someone's lag. I don't know which bothers me more. Federal habit: I want to build the case myself, drive the interview, but that's not this job now. I'm managing gaps I can't close, jus",
+        "“Yu Zen’s file is still open on my desk. Twenty-nine years old, Rockridge, and now he’s looking at months of rehab for a hand that might never close right. Deacon’s losing his, I know that much already. Some days I wonder if the board sees the numbers or the people behind them, and I’m too tired to keep fighting that f"
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-voices",
+    "hood": "Downtown",
+    "src": "output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-22",
+    "plan": {
+      "focus": "The Voices page for this cycle",
+      "closeQuestion": "How can we better capture the essence of citizens' experiences in their own words?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00790",
+        "name": "Marcus Webb",
+        "profile": "Marcus Webb — OEWD Program Director — Downtown",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-01021",
+        "name": "Vanessa Tran-Muñoz",
+        "profile": "Vanessa Tran-Muñoz — OARI Program Director — Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00143",
+        "name": "Clarissa Dane",
+        "profile": "Clarissa Dane — DISTRICT ATTORNEY — West Oakland",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00141",
+        "name": "Priya Narang",
+        "profile": "Priya Narang — EMS DIRECTOR — Uptown",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00790-8080c3d71b",
+        "pop": "POP-00790",
+        "name": "Marcus Webb",
+        "quote": "The Voices page for this cycle keeps me accountable because it shows the real people behind the numbers. I'm still thinking about the Johnson application, where one missing document is holding up an entire family's assistance. I want to know that we're processing these applications fast enough to make a difference in people's lives. I'm pushing for faster processing because every delay feels like we're risking someone falling through the cracks.",
+        "factIds": [
+          "F-48d063da98a0",
+          "F-de08bd7a733e"
+        ],
+        "src": "packet.W2[POP-00790]"
+      },
+      {
+        "id": "Q-POP-01021-394de31590",
+        "pop": "POP-01021",
+        "name": "Vanessa Tran-Muñoz",
+        "quote": "The Voices page for this cycle creates accountability for me because it shows the real human impact of our work. Marcus Webb's words, for example, are a reminder that we're not just processing numbers, we're affecting people's lives. What I want is for the city to see the gaps in our response times and understand that it's not just about statistics, it's about people's experiences. I want the city to recognize that trained neighbors can make a difference, just like we proved in West Oakland.",
+        "factIds": [
+          "F-de08bd7a733e",
+          "F-ba1dda976b44",
+          "F-7642fd3fdcaf"
+        ],
+        "src": "packet.W2[POP-01021]"
+      },
+      {
+        "id": "Q-POP-00143-d4a958b756",
+        "pop": "POP-00143",
+        "name": "Clarissa Dane",
+        "quote": "As DISTRICT ATTORNEY, I've seen firsthand how the city's data management affects our community. The OARI protocols look good on paper, but I'm still waiting to see them hold up when things get tough. I'm pushing for better district-level data because I need the city to understand the gaps we're facing here in West Oakland. It's not just about numbers; it's about people and response times that can make all the difference.",
+        "factIds": [
+          "F-8517e6363444",
+          "F-b3dd223d9322"
+        ],
+        "src": "packet.W2[POP-00143]"
+      },
+      {
+        "id": "Q-POP-00141-76f87fe6a4",
+        "pop": "POP-00141",
+        "name": "Priya Narang",
+        "quote": "The Voices page for this cycle makes me think about accountability because it has my own words on it, and people like Marcus Webb's. Seeing my own reflection on the page alongside others makes me accountable. I want to be able to say that we've done better by the people we're supposed to help. I want to be able to look at cases like Yu Zen's and know we did everything we could.",
+        "factIds": [
+          "F-757aa9edaeee",
+          "F-de08bd7a733e",
+          "F-ba1dda976b44"
+        ],
+        "src": "packet.W2[POP-00141]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Ines Sorensen",
+        "text": "The potential for a deeper dive into the emotional toll of their jobs on public servants",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C112",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-7cd6ffd2aeb3"
+    },
+    {
+      "t": "FACT",
+      "text": "Marcus Webb in their own words, and 3 more",
+      "src": "output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-22",
+      "id": "F-de08bd7a733e"
+    },
+    {
+      "t": "FACT",
+      "text": "Open on Marcus Webb's own line, verbatim. Their words are the piece; yours are the frame.",
+      "src": "output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-22",
+      "id": "F-ba1dda976b44"
+    },
+    {
+      "t": "FACT",
+      "text": "“Month eleven’s done, $400K moved, and the queue’s finally down to six files waiting on title search. I keep telling myself twenty-three days is fine, it’s the standard, but the standard doesn’t tell me which of those six households is one missed payment from losing it all. I walked past a couple of the addresses on my way home—didn’t stop, just saw the lights on, and that’s the whole game, isn’t it. The spreadsheet says we’re ahead, but the spreadsheet never has to sit in a kitchen and explain",
+      "src": "output/citizen_pages/index.jsonl cp-POP-00790-c112-work",
+      "id": "F-48d063da98a0"
+    },
+    {
+      "t": "FACT",
+      "text": "“The Chinatown call still sits heavy. We got someone there eventually, but the wait was too long, and I know West Oakland’s crews would’ve been faster. That’s the part nobody puts in the report—the minutes that stretch when you’re waiting and the system already knows better. I keep pushing the district-level data because I need the city to see the gap the way I do, not as a line on a spreadsheet but as a block where someone’s neighbor could’ve been the one answering. I’m tired of being the one w",
+      "src": "output/citizen_pages/index.jsonl cp-POP-01021-c112-work",
+      "id": "F-7642fd3fdcaf"
+    },
+    {
+      "t": "FACT",
+      "text": "“The Fruitvale number keeps coming back. Eighteen percent on my internal sheet, twenty-three on the public file—someone's rounding, or someone's lag. I don't know which bothers me more. Federal habit: I want to build the case myself, drive the interview, but that's not this job now. I'm managing gaps I can't close, just watching where the protocol catches and where it doesn't. West Oakland tonight, same as every night. I should eat something.” — Clarissa Dane, DISTRICT ATTORNEY, West Oakland (ow",
+      "src": "output/citizen_pages/index.jsonl cp-POP-00143-c112-work",
+      "id": "F-8517e6363444"
+    },
+    {
+      "t": "FACT",
+      "text": "“Yu Zen’s file is still open on my desk. Twenty-nine years old, Rockridge, and now he’s looking at months of rehab for a hand that might never close right. Deacon’s losing his, I know that much already. Some days I wonder if the board sees the numbers or the people behind them, and I’m too tired to keep fighting that fight tonight. I just keep coming back to the same question: did we get there fast enough, and will it ever feel like we did?” — Priya Narang, EMS DIRECTOR, Uptown (own page, after",
+      "src": "output/citizen_pages/index.jsonl cp-POP-00141-c112-work",
+      "id": "F-757aa9edaeee"
+    },
+    {
+      "t": "FACT",
+      "text": "Clarissa Dane — DISTRICT ATTORNEY — West Oakland",
+      "src": "Simulation_Ledger profile for POP-00143",
+      "id": "F-b3dd223d9322"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "ines-voices-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Carry what citizens wrote on their own pages into the paper, verbatim and attributed, the day it happened — the line first, then the name, the city only as the frame. Up to four people and one conversation; nothing paraphrased, nothing added.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "a call-in host's ear — the person's own words first, the frame short and plain",
+      "targetWords": "300-600",
+      "opening": "a citizen's own line, verbatim, before their name",
+      "closing": "the last person's own words, left standing — no summary of what the voices add up to"
+    },
+    "authorizedTexture": [
+      "the frame around a quote — who the person is as the ledger line says, where they live, what the page was about",
+      "the order of the voices and the cut between them",
+      "naming that Lives carried the person's event this week, when the slice says so",
+      "the plain respect of letting a line stand without comment"
+    ],
+    "textureConditions": [
+      "every quote is verbatim from the supplied page excerpt; ellipses only for cuts, never for additions",
+      "every person, neighborhood, role and employer must come from the slice",
+      "a day with two pages is written as two passages, not stretched",
+      "no second-hand voice — no 'neighbors say', no composite"
+    ],
+    "canonBlockers": [
+      "any person, page, quote, venue or employer not on the slice",
+      "a paraphrased quote inside quotation marks, or words added to a quote",
+      "a statistic, rate or trend claim drawn from the voices",
+      "a journalist or masthead member quoted as a citizen",
+      "raw engine labels or decimals printed as public-facing evidence"
+    ]
+  },
+  "manifest": {
+    "id": "AM-08c301294254",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-7cd6ffd2aeb3",
+        "t": "FACT",
+        "text": "Current cycle: C112",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-de08bd7a733e",
+        "t": "FACT",
+        "text": "Marcus Webb in their own words, and 3 more",
+        "src": "output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-22"
+      },
+      {
+        "id": "F-ba1dda976b44",
+        "t": "FACT",
+        "text": "Open on Marcus Webb's own line, verbatim. Their words are the piece; yours are the frame.",
+        "src": "output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-22"
+      },
+      {
+        "id": "F-48d063da98a0",
+        "t": "FACT",
+        "text": "“Month eleven’s done, $400K moved, and the queue’s finally down to six files waiting on title search. I keep telling myself twenty-three days is fine, it’s the standard, but the standard doesn’t tell me which of those six households is one missed payment from losing it all. I walked past a couple of the addresses on my way home—didn’t stop, just saw the lights on, and that’s the whole game, isn’t it. The spreadsheet says we’re ahead, but the spreadsheet never has to sit in a kitchen and explain",
+        "src": "output/citizen_pages/index.jsonl cp-POP-00790-c112-work"
+      },
+      {
+        "id": "F-7642fd3fdcaf",
+        "t": "FACT",
+        "text": "“The Chinatown call still sits heavy. We got someone there eventually, but the wait was too long, and I know West Oakland’s crews would’ve been faster. That’s the part nobody puts in the report—the minutes that stretch when you’re waiting and the system already knows better. I keep pushing the district-level data because I need the city to see the gap the way I do, not as a line on a spreadsheet but as a block where someone’s neighbor could’ve been the one answering. I’m tired of being the one w",
+        "src": "output/citizen_pages/index.jsonl cp-POP-01021-c112-work"
+      },
+      {
+        "id": "F-8517e6363444",
+        "t": "FACT",
+        "text": "“The Fruitvale number keeps coming back. Eighteen percent on my internal sheet, twenty-three on the public file—someone's rounding, or someone's lag. I don't know which bothers me more. Federal habit: I want to build the case myself, drive the interview, but that's not this job now. I'm managing gaps I can't close, just watching where the protocol catches and where it doesn't. West Oakland tonight, same as every night. I should eat something.” — Clarissa Dane, DISTRICT ATTORNEY, West Oakland (ow",
+        "src": "output/citizen_pages/index.jsonl cp-POP-00143-c112-work"
+      },
+      {
+        "id": "F-757aa9edaeee",
+        "t": "FACT",
+        "text": "“Yu Zen’s file is still open on my desk. Twenty-nine years old, Rockridge, and now he’s looking at months of rehab for a hand that might never close right. Deacon’s losing his, I know that much already. Some days I wonder if the board sees the numbers or the people behind them, and I’m too tired to keep fighting that fight tonight. I just keep coming back to the same question: did we get there fast enough, and will it ever feel like we did?” — Priya Narang, EMS DIRECTOR, Uptown (own page, after",
+        "src": "output/citizen_pages/index.jsonl cp-POP-00141-c112-work"
+      },
+      {
+        "id": "F-b3dd223d9322",
+        "t": "FACT",
+        "text": "Clarissa Dane — DISTRICT ATTORNEY — West Oakland",
+        "src": "Simulation_Ledger profile for POP-00143"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00790-8080c3d71b",
+        "speakerId": "POP-00790",
+        "speakerName": "Marcus Webb",
+        "text": "The Voices page for this cycle keeps me accountable because it shows the real people behind the numbers. I'm still thinking about the Johnson application, where one missing document is holding up an entire family's assistance. I want to know that we're processing these applications fast enough to make a difference in people's lives. I'm pushing for faster processing because every delay feels like we're risking someone falling through the cracks.",
+        "factIds": [
+          "F-48d063da98a0",
+          "F-de08bd7a733e"
+        ],
+        "src": "packet.W2[POP-00790]"
+      },
+      {
+        "id": "Q-POP-01021-394de31590",
+        "speakerId": "POP-01021",
+        "speakerName": "Vanessa Tran-Muñoz",
+        "text": "The Voices page for this cycle creates accountability for me because it shows the real human impact of our work. Marcus Webb's words, for example, are a reminder that we're not just processing numbers, we're affecting people's lives. What I want is for the city to see the gaps in our response times and understand that it's not just about statistics, it's about people's experiences. I want the city to recognize that trained neighbors can make a difference, just like we proved in West Oakland.",
+        "factIds": [
+          "F-de08bd7a733e",
+          "F-ba1dda976b44",
+          "F-7642fd3fdcaf"
+        ],
+        "src": "packet.W2[POP-01021]"
+      },
+      {
+        "id": "Q-POP-00143-d4a958b756",
+        "speakerId": "POP-00143",
+        "speakerName": "Clarissa Dane",
+        "text": "As DISTRICT ATTORNEY, I've seen firsthand how the city's data management affects our community. The OARI protocols look good on paper, but I'm still waiting to see them hold up when things get tough. I'm pushing for better district-level data because I need the city to understand the gaps we're facing here in West Oakland. It's not just about numbers; it's about people and response times that can make all the difference.",
+        "factIds": [
+          "F-8517e6363444",
+          "F-b3dd223d9322"
+        ],
+        "src": "packet.W2[POP-00143]"
+      },
+      {
+        "id": "Q-POP-00141-76f87fe6a4",
+        "speakerId": "POP-00141",
+        "speakerName": "Priya Narang",
+        "text": "The Voices page for this cycle makes me think about accountability because it has my own words on it, and people like Marcus Webb's. Seeing my own reflection on the page alongside others makes me accountable. I want to be able to say that we've done better by the people we're supposed to help. I want to be able to look at cases like Yu Zen's and know we did everything we could.",
+        "factIds": [
+          "F-757aa9edaeee",
+          "F-de08bd7a733e",
+          "F-ba1dda976b44"
+        ],
+        "src": "packet.W2[POP-00141]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00790",
+        "name": "Marcus Webb",
+        "profile": "Marcus Webb — OEWD Program Director — Downtown",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-01021",
+        "name": "Vanessa Tran-Muñoz",
+        "profile": "Vanessa Tran-Muñoz — OARI Program Director — Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00143",
+        "name": "Clarissa Dane",
+        "profile": "Clarissa Dane — DISTRICT ATTORNEY — West Oakland",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00141",
+        "name": "Priya Narang",
+        "profile": "Priya Narang — EMS DIRECTOR — Uptown",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Ines Sorensen",
+        "text": "The potential for a deeper dive into the emotional toll of their jobs on public servants",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "the frame around a quote — who the person is as the ledger line says, where they live, what the page was about",
+      "the order of the voices and the cut between them",
+      "naming that Lives carried the person's event this week, when the slice says so",
+      "the plain respect of letting a line stand without comment"
+    ],
+    "textureConditions": [
+      "every quote is verbatim from the supplied page excerpt; ellipses only for cuts, never for additions",
+      "every person, neighborhood, role and employer must come from the slice",
+      "a day with two pages is written as two passages, not stretched",
+      "no second-hand voice — no 'neighbors say', no composite"
+    ],
+    "forbiddenClaimClasses": [
+      "any person, page, quote, venue or employer not on the slice",
+      "a paraphrased quote inside quotation marks, or words added to a quote",
+      "a statistic, rate or trend claim drawn from the voices",
+      "a journalist or masthead member quoted as a citizen",
+      "raw engine labels or decimals printed as public-facing evidence"
+    ]
+  }
+}

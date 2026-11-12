@@ -1,0 +1,38 @@
+{
+  "office": "council_d2",
+  "cycle": 114,
+  "speaker": "Leonard Tran",
+  "cascadeSummary": "I vote YES on Baylight, with the C115 review still to be earned through independent verification and documented neighborhood protections. I reaffirm support for Downtown Economic Revitalization and want its Uptown timeline and transit-access planning made public. I am also asking for a recorded response to Chinatown’s decay flag while recognizing that current conditions there are flat mood, steady trade, and low crime. The packet provides no D2 neighborhood mapping, so I will not claim Chinatown or Jack London as D2 turf.",
+  "statements": [
+    {
+      "statementId": "STMT-114-council_d2-001",
+      "type": "vote_statement",
+      "topic": "Baylight District — Final Council Vote",
+      "initiative": "Baylight District — Final Council Vote",
+      "decision": "YES; keep the C115 construction milestone review contingent on its evidence.",
+      "quote": "The work is on schedule; the next milestone still has to be proven.",
+      "fullStatement": "I vote YES on Baylight District remediation. The record shows Phase II proceeding with independent oversight, soil verification complete, and the hotline and dust controls in place. Those are meaningful safeguards, not proof that the next construction milestone has already been met. I support the scheduled C115 review and expect the independent verification, hotline and dust-control records, and Jack London workforce-coordination results to be examined before anyone declares success.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-114-council_d2-002",
+      "type": "vote_statement",
+      "topic": "Downtown Economic Revitalization",
+      "initiative": "Downtown Economic Revitalization",
+      "decision": "YES on the $15 million authorization; require publication of the C114 Uptown timeline and include Downtown transit access in planning.",
+      "quote": "A yes vote is not a blank check: publish the timeline and show how transit access fits.",
+      "fullStatement": "I reaffirm my YES for Downtown Economic Revitalization. The committee’s benchmarks should travel with the $15 million authorization, and the promised Uptown track needs a concrete, public C114 timeline. Downtown is busy but under transit strain; implementation planning must address access rather than treating commercial activity as proof that the disruption does not matter. I also stand by my direction to include Chinatown in revitalization planning, without claiming that the current record establishes a specific remedy or outcome there.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-114-council_d2-003",
+      "type": "statement",
+      "topic": "Chinatown response and Jack London credit",
+      "initiative": null,
+      "decision": "Request a recorded municipal response to Chinatown’s decay flag and recognize Jack London’s local businesses, workers, and residents without claiming unproven causation.",
+      "quote": "Take Chinatown’s warning seriously, and give Jack London credit without inventing a cause.",
+      "fullStatement": "I am asking the appropriate city staff to publish a recorded response to the Chinatown decay flag, including what the city will monitor and what options it will consider. The current brief describes Chinatown’s mood as flat, with steady trade and low crime; that deserves attention, not an unsupported claim of emergency conditions. Jack London’s upbeat mood and busy trade are worth recognizing. Local businesses, workers, and residents deserve credit for the life of that place, while the city should avoid claiming a program caused the result without evidence. The packet does not map either neighborhood to D2, so I make no district-turf claim.",
+      "trackerUpdates": {}
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "113",
+  "persona": "mason-ortega",
+  "byline": "Mason Ortega",
+  "bylinePopid": "POP-00160",
+  "article": "output/cron-compare/staged/culture_c113_mason-ortega_packet-v2_x-ai-grok-4-3.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Matty Lipo",
+        "role": "quoted-source",
+        "popid": "POP-00265"
+      },
+      {
+        "name": "Mimmie Carlisle",
+        "role": "quoted-source",
+        "popid": "POP-00682"
+      },
+      {
+        "name": "Elio Perez",
+        "role": "quoted-source",
+        "popid": "POP-00201"
+      },
+      {
+        "name": "Camila Osman",
+        "role": "quoted-source",
+        "popid": "POP-01134"
+      },
+      {
+        "name": "Jesus Jorden",
+        "role": "mentioned",
+        "popid": "POP-00721",
+        "floor": true
+      },
+      {
+        "name": "Kalyani Alvarez",
+        "role": "mentioned",
+        "popid": "POP-00905",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Rockridge"
+    ],
+    "claims": [
+      {
+        "claim": "A full shift at OakHouse starts before the doors open — you come in, you set up your station, you get the water hot. Then it's just a river. Plates, pans, the pastry crew's bowls, the ramekins that never end. Mimmie and Jesus and Kalyani keep me busy, that's for sure. What arrives is the mess of a busy kitchen, and what leaves is clean steel and dry racks, ready for the next course. It's honest work. My hands know it, my back knows it. And when that last rack is done and I shut off the sprayer, I walk out to the lake and I sit on that bench by the boat dock and I just breathe. That's the rhythm of it.",
+        "sourceRef": "citizenVoice PRESS Matty Lipo"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-deb79fbec65f",
+    "draftSha256": "35bd257fa1c6f440f62ee7368526df571ffca97a58c6ab49478b8599fc7ed23f",
+    "verdict": "output/cron-compare/culture_c113_mason-ortega_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-10-30T23:15:25.264Z",
+    "contractScore": {
+      "opened": true,
+      "closed": false,
+      "purposeMet": true,
+      "inTarget": false,
+      "inTargetBy": "judge",
+      "words": 528,
+      "short": "The closing does not name the worker or operating account still needed, and the piece falls short of the target word count.",
+      "score": 2,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "35bd257fa1c6f440f62ee7368526df571ffca97a58c6ab49478b8599fc7ed23f",
+      "costUsd": 0.0015
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-30T23:15:33.266Z"
+}

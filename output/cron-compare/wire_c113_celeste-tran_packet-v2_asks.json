@@ -1,0 +1,572 @@
+[
+  {
+    "pop": "POP-01062",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01062\",\"name\":\"Marisol Rivera\",\"role\":\"Community Advocate\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Celeste Tran\",\"question\":\"What are your thoughts on the recent influx of new residents in West Oakland? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-trends\",\"hood\":\"Rockridge\",\"focus\":\"West Oakland's population surge\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C113\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Marisol Rivera — Community Advocate — Rockridge\",\"evidence\":[{\"id\":\"EV-3d20e54fb6\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C113\",\"text\":\"Marisol Rivera — gained 1 mention this cycle (7 total), cooling. The trend is the story; the mood is yours.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Marisol Rivera gained 1 mention this cycle (7 total); West Oakland moves the most\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C113\",\"id\":\"F-0dd875a18091\"},{\"t\":\"FACT\",\"text\":\"Marisol Rivera — gained 1 mention this cycle (7 total), cooling. The trend is the story; the mood is yours.\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C113\",\"id\":\"F-be6998b65ca2\"},{\"t\":\"FACT\",\"text\":\"Marisol Rivera (Community Advocate), Civic — gained 1 mention this cycle (7 total), cooling, fame 39\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C113 vs output/beats/prev/Cultural_Ledger.jsonl @C112\",\"id\":\"F-6c76f836f87f\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C113\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-876f95b5eb98\"},{\"t\":\"FACT\",\"text\":\"Claire Ashford (author), Literature — gained 1 mention this cycle (3 total), stable, fame 16\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C113 vs output/beats/prev/Cultural_Ledger.jsonl @C112\",\"id\":\"F-ee9079becfd2\"},{\"t\":\"FACT\",\"text\":\"Deacon Seymour (A's player), Sports — gained 1 mention this cycle (2 total), stable, fame 2\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C113 vs output/beats/prev/Cultural_Ledger.jsonl @C112\",\"id\":\"F-3008e4e2b3d8\"},{\"t\":\"FACT\",\"text\":\"Movement vs C112: West Oakland +20 people, Fruitvale +9 people, Jack London +8 people, Chinatown +8 people, East Oakland +8 people\",\"src\":\"output/beats/prev/Neighborhood_Demographics.jsonl vs current @C113\",\"id\":\"F-27fdbddf8160\"},{\"t\":\"FACT\",\"text\":\"Marisol Rivera — Community Advocate — Rockridge\",\"src\":\"Simulation_Ledger profile for POP-01062\",\"id\":\"F-6ef46a712636\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C9, Winter, holiday=none\",\"src\":\"output/world_summary_c113.md Calendar context (Simulation_Calendar)\",\"id\":\"F-ab9d6786094e\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01062",
+        "name": "Marisol Rivera",
+        "role": "Community Advocate",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Celeste Tran",
+        "question": "What are your thoughts on the recent influx of new residents in West Oakland? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-trends",
+        "hood": "Rockridge",
+        "focus": "West Oakland's population surge",
+        "src": "output/beats/Cultural_Ledger.jsonl @C113"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Marisol Rivera — Community Advocate — Rockridge",
+        "evidence": [
+          {
+            "id": "EV-3d20e54fb6",
+            "src": "output/beats/Cultural_Ledger.jsonl @C113",
+            "text": "Marisol Rivera — gained 1 mention this cycle (7 total), cooling. The trend is the story; the mood is yours."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Marisol Rivera gained 1 mention this cycle (7 total); West Oakland moves the most",
+          "src": "output/beats/Cultural_Ledger.jsonl @C113",
+          "id": "F-0dd875a18091"
+        },
+        {
+          "t": "FACT",
+          "text": "Marisol Rivera — gained 1 mention this cycle (7 total), cooling. The trend is the story; the mood is yours.",
+          "src": "output/beats/Cultural_Ledger.jsonl @C113",
+          "id": "F-be6998b65ca2"
+        },
+        {
+          "t": "FACT",
+          "text": "Marisol Rivera (Community Advocate), Civic — gained 1 mention this cycle (7 total), cooling, fame 39",
+          "src": "output/beats/Cultural_Ledger.jsonl @C113 vs output/beats/prev/Cultural_Ledger.jsonl @C112",
+          "id": "F-6c76f836f87f"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C113",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-876f95b5eb98"
+        },
+        {
+          "t": "FACT",
+          "text": "Claire Ashford (author), Literature — gained 1 mention this cycle (3 total), stable, fame 16",
+          "src": "output/beats/Cultural_Ledger.jsonl @C113 vs output/beats/prev/Cultural_Ledger.jsonl @C112",
+          "id": "F-ee9079becfd2"
+        },
+        {
+          "t": "FACT",
+          "text": "Deacon Seymour (A's player), Sports — gained 1 mention this cycle (2 total), stable, fame 2",
+          "src": "output/beats/Cultural_Ledger.jsonl @C113 vs output/beats/prev/Cultural_Ledger.jsonl @C112",
+          "id": "F-3008e4e2b3d8"
+        },
+        {
+          "t": "FACT",
+          "text": "Movement vs C112: West Oakland +20 people, Fruitvale +9 people, Jack London +8 people, Chinatown +8 people, East Oakland +8 people",
+          "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C113",
+          "id": "F-27fdbddf8160"
+        },
+        {
+          "t": "FACT",
+          "text": "Marisol Rivera — Community Advocate — Rockridge",
+          "src": "Simulation_Ledger profile for POP-01062",
+          "id": "F-6ef46a712636"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C9, Winter, holiday=none",
+          "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+          "id": "F-ab9d6786094e"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00194",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00194\",\"name\":\"Yu Zen\",\"role\":\"Commercial Insurance Broker\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Celeste Tran\",\"question\":\"How do you think the changing demographics in West Oakland will impact the community? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-trends\",\"hood\":\"Rockridge\",\"focus\":\"West Oakland's population surge\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C113\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Yu Zen — Commercial Insurance Broker — Rockridge\",\"evidence\":[{\"id\":\"EV-b847c7d424\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C113\",\"text\":\"Marisol Rivera — gained 1 mention this cycle (7 total), cooling. The trend is the story; the mood is yours.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C113\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-876f95b5eb98\"},{\"t\":\"FACT\",\"text\":\"Marisol Rivera gained 1 mention this cycle (7 total); West Oakland moves the most\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C113\",\"id\":\"F-0dd875a18091\"},{\"t\":\"FACT\",\"text\":\"Marisol Rivera — gained 1 mention this cycle (7 total), cooling. The trend is the story; the mood is yours.\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C113\",\"id\":\"F-be6998b65ca2\"},{\"t\":\"FACT\",\"text\":\"Marisol Rivera (Community Advocate), Civic — gained 1 mention this cycle (7 total), cooling, fame 39\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C113 vs output/beats/prev/Cultural_Ledger.jsonl @C112\",\"id\":\"F-6c76f836f87f\"},{\"t\":\"FACT\",\"text\":\"Claire Ashford (author), Literature — gained 1 mention this cycle (3 total), stable, fame 16\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C113 vs output/beats/prev/Cultural_Ledger.jsonl @C112\",\"id\":\"F-ee9079becfd2\"},{\"t\":\"FACT\",\"text\":\"Deacon Seymour (A's player), Sports — gained 1 mention this cycle (2 total), stable, fame 2\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C113 vs output/beats/prev/Cultural_Ledger.jsonl @C112\",\"id\":\"F-3008e4e2b3d8\"},{\"t\":\"FACT\",\"text\":\"Movement vs C112: West Oakland +20 people, Fruitvale +9 people, Jack London +8 people, Chinatown +8 people, East Oakland +8 people\",\"src\":\"output/beats/prev/Neighborhood_Demographics.jsonl vs current @C113\",\"id\":\"F-27fdbddf8160\"},{\"t\":\"FACT\",\"text\":\"Yu Zen — Commercial Insurance Broker — Rockridge\",\"src\":\"Simulation_Ledger profile for POP-00194\",\"id\":\"F-0cea0a3d84d3\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C9, Winter, holiday=none\",\"src\":\"output/world_summary_c113.md Calendar context (Simulation_Calendar)\",\"id\":\"F-ab9d6786094e\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00194",
+        "name": "Yu Zen",
+        "role": "Commercial Insurance Broker",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Celeste Tran",
+        "question": "How do you think the changing demographics in West Oakland will impact the community? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-trends",
+        "hood": "Rockridge",
+        "focus": "West Oakland's population surge",
+        "src": "output/beats/Cultural_Ledger.jsonl @C113"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Yu Zen — Commercial Insurance Broker — Rockridge",
+        "evidence": [
+          {
+            "id": "EV-b847c7d424",
+            "src": "output/beats/Cultural_Ledger.jsonl @C113",
+            "text": "Marisol Rivera — gained 1 mention this cycle (7 total), cooling. The trend is the story; the mood is yours."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C113",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-876f95b5eb98"
+        },
+        {
+          "t": "FACT",
+          "text": "Marisol Rivera gained 1 mention this cycle (7 total); West Oakland moves the most",
+          "src": "output/beats/Cultural_Ledger.jsonl @C113",
+          "id": "F-0dd875a18091"
+        },
+        {
+          "t": "FACT",
+          "text": "Marisol Rivera — gained 1 mention this cycle (7 total), cooling. The trend is the story; the mood is yours.",
+          "src": "output/beats/Cultural_Ledger.jsonl @C113",
+          "id": "F-be6998b65ca2"
+        },
+        {
+          "t": "FACT",
+          "text": "Marisol Rivera (Community Advocate), Civic — gained 1 mention this cycle (7 total), cooling, fame 39",
+          "src": "output/beats/Cultural_Ledger.jsonl @C113 vs output/beats/prev/Cultural_Ledger.jsonl @C112",
+          "id": "F-6c76f836f87f"
+        },
+        {
+          "t": "FACT",
+          "text": "Claire Ashford (author), Literature — gained 1 mention this cycle (3 total), stable, fame 16",
+          "src": "output/beats/Cultural_Ledger.jsonl @C113 vs output/beats/prev/Cultural_Ledger.jsonl @C112",
+          "id": "F-ee9079becfd2"
+        },
+        {
+          "t": "FACT",
+          "text": "Deacon Seymour (A's player), Sports — gained 1 mention this cycle (2 total), stable, fame 2",
+          "src": "output/beats/Cultural_Ledger.jsonl @C113 vs output/beats/prev/Cultural_Ledger.jsonl @C112",
+          "id": "F-3008e4e2b3d8"
+        },
+        {
+          "t": "FACT",
+          "text": "Movement vs C112: West Oakland +20 people, Fruitvale +9 people, Jack London +8 people, Chinatown +8 people, East Oakland +8 people",
+          "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C113",
+          "id": "F-27fdbddf8160"
+        },
+        {
+          "t": "FACT",
+          "text": "Yu Zen — Commercial Insurance Broker — Rockridge",
+          "src": "Simulation_Ledger profile for POP-00194",
+          "id": "F-0cea0a3d84d3"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C9, Winter, holiday=none",
+          "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+          "id": "F-ab9d6786094e"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01071",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01071\",\"name\":\"Claire Ashford\",\"role\":\"author\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Celeste Tran\",\"question\":\"What have you seen, felt, or understood about \\\"West Oakland's population surge\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-trends\",\"hood\":\"Rockridge\",\"focus\":\"West Oakland's population surge\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C113\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Claire Ashford — author — Piedmont Ave\",\"evidence\":[{\"id\":\"EV-1d7d9b889b\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C113\",\"text\":\"Marisol Rivera — gained 1 mention this cycle (7 total), cooling. The trend is the story; the mood is yours.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Claire Ashford (author), Literature — gained 1 mention this cycle (3 total), stable, fame 16\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C113 vs output/beats/prev/Cultural_Ledger.jsonl @C112\",\"id\":\"F-ee9079becfd2\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C113\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-876f95b5eb98\"},{\"t\":\"FACT\",\"text\":\"Marisol Rivera gained 1 mention this cycle (7 total); West Oakland moves the most\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C113\",\"id\":\"F-0dd875a18091\"},{\"t\":\"FACT\",\"text\":\"Marisol Rivera — gained 1 mention this cycle (7 total), cooling. The trend is the story; the mood is yours.\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C113\",\"id\":\"F-be6998b65ca2\"},{\"t\":\"FACT\",\"text\":\"Marisol Rivera (Community Advocate), Civic — gained 1 mention this cycle (7 total), cooling, fame 39\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C113 vs output/beats/prev/Cultural_Ledger.jsonl @C112\",\"id\":\"F-6c76f836f87f\"},{\"t\":\"FACT\",\"text\":\"Deacon Seymour (A's player), Sports — gained 1 mention this cycle (2 total), stable, fame 2\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C113 vs output/beats/prev/Cultural_Ledger.jsonl @C112\",\"id\":\"F-3008e4e2b3d8\"},{\"t\":\"FACT\",\"text\":\"Movement vs C112: West Oakland +20 people, Fruitvale +9 people, Jack London +8 people, Chinatown +8 people, East Oakland +8 people\",\"src\":\"output/beats/prev/Neighborhood_Demographics.jsonl vs current @C113\",\"id\":\"F-27fdbddf8160\"},{\"t\":\"FACT\",\"text\":\"Claire Ashford — author — Piedmont Ave\",\"src\":\"Simulation_Ledger profile for POP-01071\",\"id\":\"F-26aca55438c0\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C9, Winter, holiday=none\",\"src\":\"output/world_summary_c113.md Calendar context (Simulation_Calendar)\",\"id\":\"F-ab9d6786094e\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01071",
+        "name": "Claire Ashford",
+        "role": "author",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Celeste Tran",
+        "question": "What have you seen, felt, or understood about \"West Oakland's population surge\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-trends",
+        "hood": "Rockridge",
+        "focus": "West Oakland's population surge",
+        "src": "output/beats/Cultural_Ledger.jsonl @C113"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Claire Ashford — author — Piedmont Ave",
+        "evidence": [
+          {
+            "id": "EV-1d7d9b889b",
+            "src": "output/beats/Cultural_Ledger.jsonl @C113",
+            "text": "Marisol Rivera — gained 1 mention this cycle (7 total), cooling. The trend is the story; the mood is yours."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Claire Ashford (author), Literature — gained 1 mention this cycle (3 total), stable, fame 16",
+          "src": "output/beats/Cultural_Ledger.jsonl @C113 vs output/beats/prev/Cultural_Ledger.jsonl @C112",
+          "id": "F-ee9079becfd2"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C113",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-876f95b5eb98"
+        },
+        {
+          "t": "FACT",
+          "text": "Marisol Rivera gained 1 mention this cycle (7 total); West Oakland moves the most",
+          "src": "output/beats/Cultural_Ledger.jsonl @C113",
+          "id": "F-0dd875a18091"
+        },
+        {
+          "t": "FACT",
+          "text": "Marisol Rivera — gained 1 mention this cycle (7 total), cooling. The trend is the story; the mood is yours.",
+          "src": "output/beats/Cultural_Ledger.jsonl @C113",
+          "id": "F-be6998b65ca2"
+        },
+        {
+          "t": "FACT",
+          "text": "Marisol Rivera (Community Advocate), Civic — gained 1 mention this cycle (7 total), cooling, fame 39",
+          "src": "output/beats/Cultural_Ledger.jsonl @C113 vs output/beats/prev/Cultural_Ledger.jsonl @C112",
+          "id": "F-6c76f836f87f"
+        },
+        {
+          "t": "FACT",
+          "text": "Deacon Seymour (A's player), Sports — gained 1 mention this cycle (2 total), stable, fame 2",
+          "src": "output/beats/Cultural_Ledger.jsonl @C113 vs output/beats/prev/Cultural_Ledger.jsonl @C112",
+          "id": "F-3008e4e2b3d8"
+        },
+        {
+          "t": "FACT",
+          "text": "Movement vs C112: West Oakland +20 people, Fruitvale +9 people, Jack London +8 people, Chinatown +8 people, East Oakland +8 people",
+          "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C113",
+          "id": "F-27fdbddf8160"
+        },
+        {
+          "t": "FACT",
+          "text": "Claire Ashford — author — Piedmont Ave",
+          "src": "Simulation_Ledger profile for POP-01071",
+          "id": "F-26aca55438c0"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C9, Winter, holiday=none",
+          "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+          "id": "F-ab9d6786094e"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00528",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00528\",\"name\":\"Deacon Seymour\",\"role\":\"Manager, Oakland A's\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Celeste Tran\",\"question\":\"What have you seen, felt, or understood about \\\"West Oakland's population surge\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-trends\",\"hood\":\"Rockridge\",\"focus\":\"West Oakland's population surge\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C113\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Deacon Seymour — Manager, Oakland A's — Lake Merritt\",\"evidence\":[{\"id\":\"EV-c3bcd6e18e\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C113\",\"text\":\"Marisol Rivera — gained 1 mention this cycle (7 total), cooling. The trend is the story; the mood is yours.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Deacon Seymour (A's player), Sports — gained 1 mention this cycle (2 total), stable, fame 2\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C113 vs output/beats/prev/Cultural_Ledger.jsonl @C112\",\"id\":\"F-3008e4e2b3d8\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C113\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-876f95b5eb98\"},{\"t\":\"FACT\",\"text\":\"Marisol Rivera gained 1 mention this cycle (7 total); West Oakland moves the most\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C113\",\"id\":\"F-0dd875a18091\"},{\"t\":\"FACT\",\"text\":\"Marisol Rivera — gained 1 mention this cycle (7 total), cooling. The trend is the story; the mood is yours.\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C113\",\"id\":\"F-be6998b65ca2\"},{\"t\":\"FACT\",\"text\":\"Marisol Rivera (Community Advocate), Civic — gained 1 mention this cycle (7 total), cooling, fame 39\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C113 vs output/beats/prev/Cultural_Ledger.jsonl @C112\",\"id\":\"F-6c76f836f87f\"},{\"t\":\"FACT\",\"text\":\"Claire Ashford (author), Literature — gained 1 mention this cycle (3 total), stable, fame 16\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C113 vs output/beats/prev/Cultural_Ledger.jsonl @C112\",\"id\":\"F-ee9079becfd2\"},{\"t\":\"FACT\",\"text\":\"Movement vs C112: West Oakland +20 people, Fruitvale +9 people, Jack London +8 people, Chinatown +8 people, East Oakland +8 people\",\"src\":\"output/beats/prev/Neighborhood_Demographics.jsonl vs current @C113\",\"id\":\"F-27fdbddf8160\"},{\"t\":\"FACT\",\"text\":\"Deacon Seymour — Manager, Oakland A's — Lake Merritt\",\"src\":\"Simulation_Ledger profile for POP-00528\",\"id\":\"F-3375023542ff\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C9, Winter, holiday=none\",\"src\":\"output/world_summary_c113.md Calendar context (Simulation_Calendar)\",\"id\":\"F-ab9d6786094e\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00528",
+        "name": "Deacon Seymour",
+        "role": "Manager, Oakland A's",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Celeste Tran",
+        "question": "What have you seen, felt, or understood about \"West Oakland's population surge\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-trends",
+        "hood": "Rockridge",
+        "focus": "West Oakland's population surge",
+        "src": "output/beats/Cultural_Ledger.jsonl @C113"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Deacon Seymour — Manager, Oakland A's — Lake Merritt",
+        "evidence": [
+          {
+            "id": "EV-c3bcd6e18e",
+            "src": "output/beats/Cultural_Ledger.jsonl @C113",
+            "text": "Marisol Rivera — gained 1 mention this cycle (7 total), cooling. The trend is the story; the mood is yours."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Deacon Seymour (A's player), Sports — gained 1 mention this cycle (2 total), stable, fame 2",
+          "src": "output/beats/Cultural_Ledger.jsonl @C113 vs output/beats/prev/Cultural_Ledger.jsonl @C112",
+          "id": "F-3008e4e2b3d8"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C113",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-876f95b5eb98"
+        },
+        {
+          "t": "FACT",
+          "text": "Marisol Rivera gained 1 mention this cycle (7 total); West Oakland moves the most",
+          "src": "output/beats/Cultural_Ledger.jsonl @C113",
+          "id": "F-0dd875a18091"
+        },
+        {
+          "t": "FACT",
+          "text": "Marisol Rivera — gained 1 mention this cycle (7 total), cooling. The trend is the story; the mood is yours.",
+          "src": "output/beats/Cultural_Ledger.jsonl @C113",
+          "id": "F-be6998b65ca2"
+        },
+        {
+          "t": "FACT",
+          "text": "Marisol Rivera (Community Advocate), Civic — gained 1 mention this cycle (7 total), cooling, fame 39",
+          "src": "output/beats/Cultural_Ledger.jsonl @C113 vs output/beats/prev/Cultural_Ledger.jsonl @C112",
+          "id": "F-6c76f836f87f"
+        },
+        {
+          "t": "FACT",
+          "text": "Claire Ashford (author), Literature — gained 1 mention this cycle (3 total), stable, fame 16",
+          "src": "output/beats/Cultural_Ledger.jsonl @C113 vs output/beats/prev/Cultural_Ledger.jsonl @C112",
+          "id": "F-ee9079becfd2"
+        },
+        {
+          "t": "FACT",
+          "text": "Movement vs C112: West Oakland +20 people, Fruitvale +9 people, Jack London +8 people, Chinatown +8 people, East Oakland +8 people",
+          "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C113",
+          "id": "F-27fdbddf8160"
+        },
+        {
+          "t": "FACT",
+          "text": "Deacon Seymour — Manager, Oakland A's — Lake Merritt",
+          "src": "Simulation_Ledger profile for POP-00528",
+          "id": "F-3375023542ff"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C9, Winter, holiday=none",
+          "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+          "id": "F-ab9d6786094e"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  }
+]

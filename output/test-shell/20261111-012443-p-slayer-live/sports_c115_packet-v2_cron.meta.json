@@ -1,0 +1,17 @@
+{
+  "desk": "sports",
+  "cycle": "115",
+  "model": "x-ai/grok-4.3",
+  "turns": 6,
+  "maxTurns": 15,
+  "usageInputTokens": 25855,
+  "usageOutputTokens": 1877,
+  "savedFiles": [
+    "output/test-shell/20261111-012443-p-slayer-live/sports_c115_p-slayer_packet-v2_x-ai-grok-4-3.md"
+  ],
+  "compareAgainst": "output/desk-output/sports_c115.md",
+  "durationMs": 20414,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-11-11T07:25:05.421Z"
+}

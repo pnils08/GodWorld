@@ -1,0 +1,84 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "114",
+  "persona": "carmen-delaine",
+  "byline": "Carmen Delaine",
+  "bylinePopid": "POP-00011",
+  "article": "output/cron-compare/staged/civic_c114_carmen-delaine_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Brenda Okoro",
+        "role": "quoted-source",
+        "popid": "POP-00037"
+      },
+      {
+        "name": "Avery Santana",
+        "role": "mentioned",
+        "popid": "POP-00034",
+        "floor": true
+      },
+      {
+        "name": "Elliott Crane",
+        "role": "mentioned",
+        "popid": "POP-00044",
+        "floor": true
+      },
+      {
+        "name": "Leonard Tran",
+        "role": "mentioned",
+        "popid": "POP-00502",
+        "floor": true
+      },
+      {
+        "name": "Ramon Vega",
+        "role": "mentioned",
+        "popid": "POP-00042",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "INIT-001:disbursement-active",
+        "verb": "advanced"
+      }
+    ],
+    "hoods": [
+      "West Oakland"
+    ],
+    "claims": [
+      {
+        "claim": "The Fund renew's with its scope intact and its Month-12 records public, because trust requires both delivered support and documentation.",
+        "sourceRef": "citizenVoice PRESS Brenda Okoro"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-b07f00865cce",
+    "draftSha256": "191b5513aa18a99c939944f5ed313e9515cac6b6bb746a5bab8be9a626bb4637",
+    "verdict": "output/cron-compare/civic_c114_carmen-delaine_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-04T07:38:23.629Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 500",
+      "words": 821,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "191b5513aa18a99c939944f5ed313e9515cac6b6bb746a5bab8be9a626bb4637",
+      "costUsd": 0.0013
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-04T07:38:41.834Z"
+}

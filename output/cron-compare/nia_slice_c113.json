@@ -1,0 +1,85 @@
+{
+  "v": "NIA-SLICE/1",
+  "cycle": 113,
+  "empty": false,
+  "events": [
+    {
+      "v": "UNDOCKED-FEED/1",
+      "Cycle": 113,
+      "EventType": "undocked-episode",
+      "POPID": "POP-00836",
+      "Holder": "Cristina Booker",
+      "EpisodeId": "undocked-pop00836-Y3C9-e2",
+      "CreditsDelta": null,
+      "Systems": [],
+      "CombatEvents": 0,
+      "MishapCount": 0,
+      "Magnitude": 2,
+      "Flags": [
+        "credits_delta_windowed"
+      ],
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00836-2026-10-30T01-30-05.json"
+    }
+  ],
+  "laneEntries": [
+    {
+      "ref": "undocked:undocked-pop00836-Y3C9-e2",
+      "label": "UNDOCKED: Cristina Booker — a night the books can't settle yet",
+      "kind": "undocked",
+      "popids": [
+        "POP-00836"
+      ],
+      "handle": {
+        "angle": "UNDOCKED episode: Cristina Booker. Credits unsettled, systems unlisted, combat 0, mishaps 0, magnitude 2/5. Standings: Eric Taveras leads the board — rank #1, 3 cycle(s) led, current streak 3. In the chair: Cristina Booker — Immigration Attorney.",
+        "citizens": [
+          "Cristina Booker — Immigration Attorney, UNDOCKED cast pilot"
+        ],
+        "facts": [
+          "Cristina Booker — Immigration Attorney (ledger)"
+        ]
+      },
+      "who": {
+        "name": "Cristina Booker",
+        "roleType": "Immigration Attorney",
+        "employerBizId": "SELF_EMPLOYED",
+        "tier": "4",
+        "career": []
+      },
+      "undockedEvent": {
+        "v": "UNDOCKED-FEED/1",
+        "Cycle": 113,
+        "EventType": "undocked-episode",
+        "POPID": "POP-00836",
+        "Holder": "Cristina Booker",
+        "EpisodeId": "undocked-pop00836-Y3C9-e2",
+        "CreditsDelta": null,
+        "Systems": [],
+        "CombatEvents": 0,
+        "MishapCount": 0,
+        "Magnitude": 2,
+        "Flags": [
+          "credits_delta_windowed"
+        ],
+        "StagedPath": "output/spacemolt-show/staged/undocked-pop00836-2026-10-30T01-30-05.json"
+      },
+      "hood": "Downtown"
+    }
+  ],
+  "standings": {
+    "asOf": "2026-10-30T01:35:28.366Z",
+    "leader": {
+      "Rank": 1,
+      "POPID": "POP-00597",
+      "Holder": "Eric Taveras",
+      "Episodes": 3,
+      "CreditsTotal": 1170,
+      "CombatTotal": 0,
+      "MishapTotal": 0,
+      "BestMagnitude": 3,
+      "LastAiredCycle": 112,
+      "CyclesLed": 3,
+      "CurrentStreak": 3
+    }
+  },
+  "generatedAt": "2026-10-30T11:15:04.589Z"
+}

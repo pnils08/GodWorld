@@ -1,0 +1,72 @@
+{
+  "draft": "output/cron-compare/culture_c113_sharon-okafor_packet-v2_openai-gpt-5-6-luna.md",
+  "cycle": "113",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "0883427268ce87cdda2fd65deeb3d8898d1e7febce7f5d778de177dee9e61ae3",
+  "pass": true,
+  "flags": [
+    {
+      "claim": "Rowan Pierce, a journalist on Piedmont Ave, is also in the fading file.",
+      "issue": "World summary records a fame-rise event for Rowan Pierce in C113, though referencing them in relation to shifting neighborhood visibility operates within acceptable thematic framing.",
+      "severity": "low"
+    }
+  ],
+  "flagCount": 1,
+  "highSeverityCount": 0,
+  "summary": "All named citizen roles, neighborhoods, and verbatim interview quotes match ground truth canon.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "sharon-behavior-ground-v1",
+    "packageVersion": "SHARON-LEP2-1",
+    "manifestId": "AM-c6291a86d0dc",
+    "lexicalObservations": [],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Lena Cross",
+      "Marin Tao",
+      "Marisol Rivera",
+      "Rico Valez",
+      "Rowan Pierce"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 1,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0104,
+  "durationMs": 11518,
+  "parseError": false,
+  "ranAt": "2026-10-30T23:17:06.330Z",
+  "contractScore": {
+    "opened": false,
+    "closed": true,
+    "purposeMet": false,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 441,
+    "short": "The opening fails to name a specific venue and its condition, focusing instead on personal reputations.",
+    "score": 2,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "0883427268ce87cdda2fd65deeb3d8898d1e7febce7f5d778de177dee9e61ae3",
+    "costUsd": 0.001
+  }
+}

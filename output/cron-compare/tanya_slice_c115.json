@@ -1,0 +1,146 @@
+{
+  "empty": false,
+  "cycle": 115,
+  "kind": "tanya-sideline",
+  "desk": "sports",
+  "journalist": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014",
+    "persona": "tanya-cruz"
+  },
+  "pulse": {
+    "className": "record-only-sideline",
+    "score": 70,
+    "label": "It's official: Vinnie Keane retires. Undrafted to undeniable, and staying in Grand Lake — Vinnie Keane recorded 2041 and 127AB and .315AVG and 40H and 13HR and 29RBI and 1.1WAR, Vinnie Keane career and 8229AB and 2363H and 436HR and 1321RBI and .287AVG and .523SLG and 71.4WAR and 1x MVP and 7x All-Star and 3x Gold Glove and 5x Silver Slugger and 3x HR Derby and 7x World Series."
+  },
+  "prewrite": {
+    "bagModes": [
+      {
+        "id": 10,
+        "name": "Inference Close"
+      }
+    ],
+    "anchorFacts": [
+      "Vinnie Keane recorded 2041 and 127AB and .315AVG and 40H and 13HR and 29RBI and 1.1WAR, Vinnie Keane career and 8229AB and 2363H and 436HR and 1321RBI and .287AVG and .523SLG and 71.4WAR and 1x MVP and 7x All-Star and 3x Gold Glove and 5x Silver Slugger and 3x HR Derby and 7x World Series.",
+      "It's official: Vinnie Keane retires. Undrafted to undeniable, and staying in Grand Lake.",
+      "Vinnie Keane made it official this cycle: he is retiring from baseball. The announcement closes a career that went from undrafted to undeniable, with 7 World Series titles in Oakland, an MVP, 7 All-Star selections, 3 Gold Gloves, 5 Silver Sluggers and 436 career homeruns. Keane said goodbye in pieces all season.",
+      "He hit a 3-run homer in his final visit to New York, went 4-5 with a 3-run homer in his last regular season at bat to close the record 127-35 season, went 3-4 in a playoff game in Minnesota, and started at third base in the World Series clincher in Philadelphia, driving in a run. The parade in C111 and the Blue Lattern Bar night in C112 felt like the end, but this is the formal announcement. Keane is not leaving Oakland.",
+      "He and his wife Amara live in Grand Lake, where the family opened Keane Mercantile, and the Keane Foundation runs the Firehouse 29 West Oakland Baseball Academy and the annual Keane for Kids Gala. His contract ran through 2041, so nothing is left on the books, only a DH/third base spot and a clubhouse voice to replace as Taveras and Quintero take over."
+    ],
+    "claim": "The supplied sports record is the weather. The clubhouse SET is allotted hallucination fitted to that line.",
+    "accessEvidence": {
+      "state": "ALLOTTED",
+      "facts": [
+        "clubhouse/sideline SET is the reporter's room"
+      ]
+    },
+    "quoteEvidence": {
+      "state": "NOT_SUPPLIED",
+      "quotes": []
+    },
+    "observationEvidence": {
+      "state": "ALLOTTED",
+      "facts": []
+    },
+    "missing": [
+      "Packet player quotes",
+      "injury or team-response facts beyond the supplied record",
+      "the rest of the feed notes (2 more sentences not carried)"
+    ],
+    "hooks": []
+  },
+  "hooks": [],
+  "seeds": [],
+  "story": {
+    "angle": "It's official: Vinnie Keane retires. Undrafted to undeniable, and staying in Grand Lake — Vinnie Keane recorded 2041 and 127AB and .315AVG and 40H and 13HR and 29RBI and 1.1WAR, Vinnie Keane career and 8229AB and 2363H and 436HR and 1321RBI and .287AVG and .523SLG and 71.4WAR and 1x MVP and 7x All-Star and 3x Gold Glove and 5x Silver Slugger and 3x HR Derby and 7x World Series.",
+    "label": "It's official: Vinnie Keane retires. Undrafted to undeniable, and staying in Grand Lake — Vinnie Keane recorded 2041 and 127AB and .315AVG and 40H and 13HR and 29RBI and 1.1WAR, Vinnie Keane career and 8229AB and 2363H and 436HR and 1321RBI and .287AVG and .523SLG and 71.4WAR and 1x MVP and 7x All-Star and 3x Gold Glove and 5x Silver Slugger and 3x HR Derby and 7x World Series.",
+    "hookLine": "It's official: Vinnie Keane retires. Undrafted to undeniable, and staying in Grand Lake — Vinnie Keane recorded 2041 and 127AB and .315AVG and 40H and 13HR and 29RBI and 1.1WAR, Vinnie Keane career and 8229AB and 2363H and 436HR and 1321RBI and .287AVG and .523SLG and 71.4WAR and 1x MVP and 7x All-Star and 3x Gold Glove and 5x Silver Slugger and 3x HR Derby and 7x World Series.",
+    "kind": "sideline-signal",
+    "hood": "Grand Lake",
+    "popids": [
+      "POP-00001",
+      "POP-00018",
+      "POP-00527"
+    ],
+    "citizens": [
+      "Vinnie Keane (POP-00001)",
+      "Benji Dillon (POP-00018)",
+      "Mike Paulson (POP-00527)"
+    ],
+    "ref": "world_summary_c115.md ## Sports",
+    "cycle": 115
+  },
+  "approach": "Sideline approach (Tanya Cruz): you file from the clubhouse. That SET is yours — the Packet will never list a clubhouse event. Paint what the supplied sports line predicts. Packet player quotes and numbers only. New in-world spots go on INTAKE BIZ. No real-world Oakland venues. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview. The feed notes report what people said in paraphrase; none of it is a quote — never put it in quotation marks or attribute it as speech.",
+  "players": [
+    {
+      "name": "Vinnie Keane",
+      "popid": "POP-00001",
+      "role": "Former Designated Hitter, Oakland A's Legend",
+      "neighborhood": "Grand Lake",
+      "why": "feed-names"
+    },
+    {
+      "name": "Benji Dillon",
+      "popid": "POP-00018",
+      "role": "Pitcher, Oakland A's Legend",
+      "neighborhood": "Rockridge",
+      "why": "feed-names"
+    },
+    {
+      "name": "Mike Paulson",
+      "popid": "POP-00527",
+      "role": "General Manager, Oakland A's & The Oaks",
+      "neighborhood": "West Oakland",
+      "why": "feed-names"
+    }
+  ],
+  "scene": {
+    "colorRoom": "Clubhouse SET is authorized. Invented player quotes and real-world venues are not."
+  },
+  "candidates": [
+    {
+      "score": 70,
+      "label": "It's official: Vinnie Keane retires. Undrafted to undeniable, and staying in Grand Lake.",
+      "cycle": 115
+    },
+    {
+      "score": 58,
+      "label": "Darrin Davis and Chief Montez put the badge on the pickleball court. First Youth Community Event is the Badge & Paddle Classic",
+      "cycle": 115
+    },
+    {
+      "score": 50,
+      "label": "Fifth on points, first in credits: Taveras's Undocked pledge to Keane's academy is still waiting on a payout",
+      "cycle": 115
+    },
+    {
+      "score": 50,
+      "label": "The backup outhit the starter and two kids are knocking. Who catches for the A's in 2042?",
+      "cycle": 115
+    },
+    {
+      "score": 50,
+      "label": "Second-round rookie Harry Hayward scores a career high and makes his case for a bigger role",
+      "cycle": 115
+    },
+    {
+      "score": 50,
+      "label": "The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+      "cycle": 115
+    },
+    {
+      "score": 50,
+      "label": "Down two after three in Philadelphia, the Oaks drop 40 in the fourth and Hayward scores a career high. Oaks 120 - 76ers 106",
+      "cycle": 115
+    },
+    {
+      "score": 40,
+      "label": "Five starters and one Carmen Mesa. Who is the odd arm out?",
+      "cycle": 114
+    }
+  ],
+  "pointers": [
+    "output/world_summary_c115.md ## Sports",
+    "docs/media/TANYA_SIDELINE_BAG.md"
+  ]
+}

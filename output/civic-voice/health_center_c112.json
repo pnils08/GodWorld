@@ -1,0 +1,24 @@
+{
+  "office": "health_center",
+  "cycle": 112,
+  "speaker": "Roberta Chen-Ramirez",
+  "cascadeSummary": "I'm embracing Councilmember Ashford's quarterly utilization audit benchmarks as an operational commitment, not a political hurdle. The Temescal Community Health Center is in its post-occupancy audit readiness phase, and I'm formalizing the reporting cadence — pulling clinical utilization data from the operator, tying it to our construction closeout ledger, and putting it on a schedule that the 51st Street bench crowd can track. Every dollar gets a line item; every line item gets a number; every number goes to the public.",
+  "statements": [
+    {
+      "statementId": "STMT-112-health_center-001",
+      "type": "operational_status",
+      "topic": "post-occupancy audit readiness — quarterly utilization benchmarks",
+      "initiative": "Temescal Community Health Center",
+      "decision": "Adopt the D7 quarterly utilization audit benchmark framework as standing operational procedure, with the first reporting cycle established and a public-facing reporting commitment through the 47th & Telegraph bulletin board and the City's open data portal.",
+      "quote": "Temescal didn't wait five cycles for a building that doesn't prove its worth — every dollar gets a line item, every line item gets a number, every number goes to the public.",
+      "fullStatement": "I've read Councilmember Ashford's directive, and I'm treating it as the operational baseline we should have set the day we broke ground. The community didn't wait through the priority designation delay for a building that just looks good — it has to perform. So here's what happens next: we're formalizing the quarterly utilization audit as standing procedure, pulling clinical encounter data, service utilization rates, and wait times from the operator, and tying that to our construction closeout ledger so the cost-to-care ratio is transparent. The first reporting cycle is now scheduled, and every report will be filed to the bulletin board at 47th & Telegraph, the City's open data portal, and the District 7 office. The merchants built the neighborhood's confidence; we'll build the health center's accountability. That's the deal. That's the standard.",
+      "trackerUpdates": {
+        "initiative": "INIT-005",
+        "ImplementationPhase": "implementation-active",
+        "MilestoneNotes": "C112: Adopted D7 quarterly utilization audit benchmarks as standing procedure; first reporting cycle scheduled with public-data commitment.",
+        "NextScheduledAction": "First quarterly utilization audit report filed to D7 office and public data portal",
+        "NextActionCycle": 113
+      }
+    }
+  ]
+}

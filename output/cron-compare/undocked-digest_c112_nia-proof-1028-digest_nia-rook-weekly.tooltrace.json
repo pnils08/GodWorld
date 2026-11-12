@@ -1,0 +1,44 @@
+{
+  "model": "openai/gpt-6-luna",
+  "calls": [
+    {
+      "tool": "undocked_history",
+      "input": {
+        "pilot": "Sammie Alvarez"
+      },
+      "resultChars": 172,
+      "resultHead": "Available gate-approved UNDOCKED feed history for Sammie Alvarez before C112:\nNo earlier episode found in the available approved packs; this does not prove none ever aired."
+    },
+    {
+      "tool": "undocked_history",
+      "input": {
+        "pilot": "Rafael Phillips"
+      },
+      "resultChars": 173,
+      "resultHead": "Available gate-approved UNDOCKED feed history for Rafael Phillips before C112:\nNo earlier episode found in the available approved packs; this does not prove none ever aired."
+    },
+    {
+      "tool": "undocked_history",
+      "input": {
+        "pilot": "Iris Pham"
+      },
+      "resultChars": 167,
+      "resultHead": "Available gate-approved UNDOCKED feed history for Iris Pham before C112:\nNo earlier episode found in the available approved packs; this does not prove none ever aired."
+    },
+    {
+      "tool": "undocked_history",
+      "input": {},
+      "resultChars": 926,
+      "resultHead": "Available gate-approved UNDOCKED feed history before C112:\nC111 UNDOCKED: Rosario Medina — credits 110; systems Sol; combat 0; mishaps 0.\nC111 UNDOCKED: Eric Taveras — credits 0; systems Sol, sol, sirius; combat 0; mishaps 0.\nC111 UNDOCKED: Briar Soto — credits 0; systems Sol; combat 0; mishaps 0.\nC111 UNDOCKED: Rosario Medina — credits 0; systems Sol, epsilon_eridani, sirius, sol, alpha_centauri; combat 0; mishaps 0.\nC111 UNDOCKED: Eric Taveras — credits 1170; systems sirius; combat 0; mishaps 0.\nC111 UNDOCKED: Briar Soto — credits 0; systems sol, alpha_centauri, sirius; combat 0; mishaps 0.\n"
+    },
+    {
+      "tool": "citizen_lookup",
+      "input": {
+        "name": "Eric Taveras"
+      },
+      "resultChars": 181,
+      "resultHead": "Eric Taveras — role: Second Baseman, Oakland A's; neighborhood: Downtown; born: 2016; wealth: 9; careerStage: early-career; employerBiz: BIZ-00005; skills: athlete; popid: POP-00597"
+    }
+  ],
+  "ranAt": "2026-10-28T17:06:10.550Z"
+}

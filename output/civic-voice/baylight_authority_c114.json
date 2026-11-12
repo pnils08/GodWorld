@@ -1,0 +1,33 @@
+{
+  "office": "baylight_authority",
+  "cycle": 114,
+  "speaker": "Keisha Ramos",
+  "cascadeSummary": "The Mayor's gavel set the C115 construction milestone review as an evidence-gated event, not an announcement — independent remediation verification, hotline and dust-control records, and Jack London workforce-coordination results. I'm accepting that frame because it's the one the project actually runs on. This cycle the Authority assembles the evidence file that will carry into the C115 review, and the neighborhood mitigation commitments I put on the record last cycle — the 48-hour hotline and active dust control on the haul routes — are now the records being compiled, not brand-new promises. The milestone isn't declared passed this cycle; it's declared earnable this cycle.",
+  "statements": [
+    {
+      "statementId": "STMT-114-baylight_authority-001",
+      "type": "milestone_update",
+      "topic": "Baylight District Construction Milestone Review — C115 Evidence Assembly",
+      "initiative": "INIT-006",
+      "decision": "Accept the C115 evidence agenda as set by the Mayor and D2: independent remediation verification, 48-hour construction hotline and dust-control records, and Jack London workforce-coordination results assembled into a public evidence file this cycle as the basis for the C115 milestone review — with no milestone declared passed this cycle.",
+      "quote": "The soil sample doesn't care what we say about it — it only tells the truth. That's exactly why we're loading the C115 file with verification, not verbs.",
+      "fullStatement": "The Baylight Authority is doing what the Mayor's gavel asked: assembling the C115 evidence file before anyone declares the construction milestone passed. Three stacks on the table this cycle. First, the independent remediation verification — the soil-test results from the Phase II grid, signed by the verification consultant, not by me. Second, the neighborhood records: the 48-hour construction hotline logs, every call coded by issue and disposition, and the dust-control readings from the haul routes, active since last cycle. Third, the Jack London workforce-coordination results — what came out of the meeting I moved into this cycle, and who from the neighborhood showed up. None of that is a declaration. All of it is evidence. The pads schedule stands; the file is what the C115 review will be judged on, and it's being built to be read.",
+      "trackerUpdates": {
+        "initiative": "INIT-006",
+        "MilestoneNotes": "C114: C115 evidence file assembled — independent remediation verification, hotline/dust records, Jack London workforce results; no milestone declared passed",
+        "NextScheduledAction": "C115 construction milestone review against the assembled evidence file",
+        "NextActionCycle": 115
+      }
+    },
+    {
+      "statementId": "STMT-114-baylight_authority-002",
+      "type": "community_engagement",
+      "topic": "Baylight District Community Impact Mitigation — Jack London Workforce Coordination Results",
+      "initiative": "INIT-006",
+      "decision": "Report back on the Jack London workforce coordination meeting moved into this cycle ahead of the C115 review: what neighborhood businesses and the trade locals put on the table, and what the Authority is committing to carry into C115 and beyond.",
+      "quote": "The construction fence has a number, and this cycle it had a room — Jack London businesses sat across from the trades and told us what the build looks like from their side of the plywood.",
+      "fullStatement": "The Jack London workforce coordination meeting ran this cycle, ahead of the C115 review as promised. What came out of it the Authority is carrying forward: the neighborhood businesses want a clearer pipeline from the site to their own hires, and the trades want that pipeline to run through the apprenticeship coordination that's already standing up. The 48-hour hotline is live and the logs are being coded by issue — dust, noise, haul hours, access. Those logs are not a complaint file; they're the neighborhood side of the evidence the C115 review will read. I walk the haul routes myself, and the trucks are running the hours they were given, not the hours they'd like. The build holds to the project clock. The neighborhoods hold with it.",
+      "trackerUpdates": {}
+    }
+  ]
+}

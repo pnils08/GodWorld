@@ -1,0 +1,86 @@
+{
+  "ingested": {
+    "article-c112-culture_c112_tamsin-pruitt_packet-v2_x-ai-grok-4-3": {
+      "cycle": "112",
+      "sha256": "48aa8d3cc729fc219b11dc159f9f81d8bb20629408211fc0e59da294d3aa85d9",
+      "restoredBy": "builder 2026-10-25 (false canon-violation overridden)"
+    },
+    "article-c112-civic_c112_angela-reyes_packet-v2_anthropic-claude-haiku-5-5": {
+      "cycle": "112",
+      "sha256": "7863e04535cc9cca102c56fdc63599f12d0ae6de49d8c284a9a092161a24e5e1",
+      "restoredBy": "builder 2026-10-25 (false canon-violation overridden)"
+    },
+    "article-c115-business_c115_business-desk_packet-v2_anthropic-claude-opus-5-5": {
+      "cycle": "115",
+      "sha256": "88f36d363b480442d25c35bd42f7f5c45b21df96a59f659f637dadaf5446dff1"
+    },
+    "article-c115-civic_c115_carmen-delaine_packet-v2_anthropic-claude-sonnet-5-5": {
+      "cycle": "115",
+      "sha256": "c07907a9ef871088a702ee35382859166e16fe199757e8fb2bdbb589e4fd6ea1"
+    },
+    "article-c115-civic_c115_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5": {
+      "cycle": "115",
+      "sha256": "2b7af4f59f14919eecd3388927d47dfd2f0c2287b90c8a9e483347d8fa76182f"
+    },
+    "article-c115-civic_c115_trevor-shimizu_packet-v2_anthropic-claude-sonnet-5-5": {
+      "cycle": "115",
+      "sha256": "d392d5e5bfae5295ad076e7fa805316ad0bf384ccc000fafd08f6a2cd3ff3748"
+    },
+    "article-c115-culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5": {
+      "cycle": "115",
+      "sha256": "7f3ce07a49bca08cdbf2d6f7b1ce9d8902ca9c0690a9b2e2bf7e653c95cd4996"
+    },
+    "article-c115-civic_c115_angela-reyes_packet-v2_anthropic-claude-sonnet-5-5": {
+      "cycle": "115",
+      "sha256": "db77e49b97e91795c52cfc031c8d4b0007c13bd2101b0e92d63ce4f2b58a1e00"
+    },
+    "article-c115-civic_c115_luis-navarro_packet-v2_anthropic-claude-sonnet-5-5": {
+      "cycle": "115",
+      "sha256": "454173be98a100db7b22513e92df63234105bb364aacb096803c0bbaa4e3d052"
+    },
+    "article-c115-civic_c115_rachel-torres_packet-v2_anthropic-claude-sonnet-5-5": {
+      "cycle": "115",
+      "sha256": "a0a817316cf9170c93dd9f712a5b146d12622f9c7d43411faaccf96c8a58cd01"
+    },
+    "article-c115-culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0020": {
+      "cycle": "115",
+      "sha256": "548b92dd90efca3b26844b95c65e094884a0d5bbda7825611e4adf7440fe7bbf"
+    },
+    "article-c115-sports_c115_selena-grant_packet-v2_openai-gpt-5-6-luna": {
+      "cycle": "115",
+      "sha256": "ac995e55c2cf4441b312e7833a3ab3969b7fe03017470082c9e9ed7c82bf2652"
+    },
+    "article-c115-undocked_c115_nia-rook_packet-v2_openai-gpt-6-luna": {
+      "cycle": "115",
+      "sha256": "162addddf9ffbf6827ec0ad9d709d7424b5687be4eb931c26cae2f705435c9d4"
+    },
+    "article-c115-civic_c115_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5-5": {
+      "cycle": "115",
+      "sha256": "e92090b2072391088437efcb1989239a4d5a63723648b6bbeaa964bcba86b983"
+    },
+    "article-c115-civic_c115_noah-tan_packet-v2_x-ai-grok-4-3": {
+      "cycle": "115",
+      "sha256": "566503a4d39fbde1b663aa6240425b796388fd2df56dd66c27a7619a20824024"
+    },
+    "article-c115-culture_c115_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5": {
+      "cycle": "115",
+      "sha256": "0ee80226948da090e77b4a4dc296f95d9788848a092c78c102512691e65c2bc4"
+    },
+    "article-c115-culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0023": {
+      "cycle": "115",
+      "sha256": "02213ed743a3a566154c4fd0f15f34bb239ae963dd87a00f799963ececc6b4d7"
+    },
+    "article-c115-sports_c115_p-slayer_packet-v2_x-ai-grok-4-3": {
+      "cycle": "115",
+      "sha256": "f1d6f8ddaf0876188b8f02f462fe0d8d126e6d8da0a3963dcd5a0fba1ec0b957"
+    },
+    "article-c115-sports_c115_tanya-cruz_packet-v2_x-ai-grok-4-3": {
+      "cycle": "115",
+      "sha256": "c8e9005d3bab38a95116e32add9acd95e9fc7cf398940a8b5f36b9214ede06e2"
+    },
+    "article-c115-undocked_c115_nia-rook_packet-v2_openai-gpt-6-luna-0025": {
+      "cycle": "115",
+      "sha256": "62c903ad9c1eee900c3b4610f20c95f0660e21506e511cc42049ee88aae918f4"
+    }
+  }
+}

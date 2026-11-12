@@ -1,0 +1,26 @@
+{
+  "office": "council_d5",
+  "agentDir": "civic-office-council-d5",
+  "holder": "Janae Rivers",
+  "popid": "POP-00043",
+  "title": "City Council District 5",
+  "date": "2026-10-27",
+  "cycle": 113,
+  "model": "deepseek/deepseek-v4-flash-0731",
+  "statement": "The D3 community briefing on the Alternative Response Initiative is the accountability step this program promised from day one — the data belongs to the people who called for help, not just the people who answer. East Oakland's 911 callers have been patient through rollout, and now Fruitvale and the rest of D3 get the same transparency we demanded for ourselves. This is how trust gets rebuilt: not with a pamphlet, but with a room full of neighbors hearing exactly what dispatch does when the call comes in, what the response team finds on scene, and where the gaps still are. I'm watching the schedule, and I expect the outreach office to treat this briefing like the obligation it is, not a favor to the district.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-113-civic-office-council-d5",
+        "text": "The East Oakland placement gap analysis for the Youth Apprenticeship Pipeline is filed. The intake numbers verified in the Cycle 112 report show our cohort is real and showing up — but the verification also shows the ladder's rungs are still unevenly spaced across the city. East Oakland's decay momentum isn't a street condition, it's a jobs condition, and the action plan I'm filing pairs the placement data with a neighborhood-level outreach push so the next cohort doesn't come from the same three block groups we already know. West Oakland and Fruitvale are already showing the same cracks — the engine sees it, and so do I. The plan addresses the momentum directly: more recruitment tables in the hoods with the highest idle time, earlier pipeline entry points, and a mid-cycle check so a gap doesn't become a canyon by the time the next report drops.",
+        "directiveCycle": 113,
+        "confrontationSeat": "civic-office-council-d5"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-10-27T10:45:13.812Z",
+  "fellBackFrom": null
+}

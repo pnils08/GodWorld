@@ -1,0 +1,38 @@
+{
+  "office": "council_d8",
+  "cycle": 115,
+  "speaker": "Nina Chen",
+  "cascadeSummary": "District 8 cast a floor vote of YES on the $2.5 million Commercial Stabilization for Grand Lake ordinance, locking in mandatory Chen-Vega audit protocols and milestone reporting. Concurrently, we docketed baseline municipal maintenance allocations for Eastlake to address corridor decay and ensure petition follow-through. Across Lake Merritt and Adams Point, we maintained rigorous administrative oversight while supporting civic anchors like the Cathedral of the Living Word.",
+  "statements": [
+    {
+      "statementId": "STMT-115-council_d8-001",
+      "type": "vote_statement",
+      "topic": "Commercial Stabilization for Grand Lake Floor Vote",
+      "initiative": "Commercial Stabilization for Grand Lake",
+      "decision": "Vote YES on INIT-009 with mandatory Chen-Vega milestone reporting and audit criteria fully preserved",
+      "quote": "Relief without accountability is merely an expenditure; District 8 votes YES because the Chen-Vega audit protocols guarantee that every dollar deployed in Grand Lake is tracked, verified, and earned.",
+      "fullStatement": "District 8 votes YES on the $2.5 million Commercial Stabilization for Grand Lake ordinance because the Chen-Vega milestone reporting and independent audit protocols are locked directly into the legislative text. Commercial revitalization requires measurable standards, not unmonitored disbursements. With Grand Lake's street trade remaining busy despite soured sentiment, authorized capital will be tied directly to verified storefront stabilization metrics and regular public reporting. This council roll-call vote prevents the initiative from expiring without action while ensuring complete fiscal transparency before a single dollar is deployed.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-115-council_d8-002",
+      "type": "policy_statement",
+      "topic": "Eastlake Baseline Municipal Service Allocations",
+      "initiative": null,
+      "decision": "Docket formal baseline municipal maintenance allocations and commercial corridor service standards for Eastlake",
+      "quote": "Revitalization cannot halt at Grand Avenue while adjacent commercial corridors shoulder documented decay; Eastlake must receive verified baseline services.",
+      "fullStatement": "In response to corridor decay indicators and the Planning Director's directive, District 8 is docketing formal baseline municipal maintenance allocations and service standards for Eastlake. With neighborhood sentiment slipping, steady street trade, and an unresolved citizen petition on the ledger, Eastlake cannot be treated as an afterthought to Grand Lake. We require documented public works scheduling, corridor upkeep, and transparent commercial support. District 8 delivers equitable procedural oversight across all commercial corridors, ensuring Eastlake receives verified baseline services and responsive administrative action.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-115-council_d8-003",
+      "type": "oversight_statement",
+      "topic": "Lake Merritt Community Anchors and Adams Point Maintenance Parity",
+      "initiative": null,
+      "decision": "Demand scheduled municipal maintenance parity for Adams Point while recognizing civic educational expansions in Lake Merritt",
+      "quote": "Accountability means holding city departments to documented performance timelines while supporting community anchors that sustain our neighborhoods.",
+      "fullStatement": "District 8 continues rigorous administrative tracking across Adams Point and Lake Merritt to ensure municipal service consistency. We commend the Cathedral of the Living Word for expanding its after-school tutoring program in Lake Merritt, demonstrating how civic institutions stabilize neighborhood youth during flat sentiment cycles. Meanwhile, in Adams Point, where street trade is slow and mood remains flat following the interfaith prayer breakfast, we demand scheduled municipal maintenance parity. Accountability means holding city departments to documented performance timelines while supporting community-led anchors that sustain our neighborhoods.",
+      "trackerUpdates": {}
+    }
+  ]
+}

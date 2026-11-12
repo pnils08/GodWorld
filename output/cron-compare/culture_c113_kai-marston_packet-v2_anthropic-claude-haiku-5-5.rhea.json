@@ -1,0 +1,65 @@
+{
+  "draft": "output/cron-compare/culture_c113_kai-marston_packet-v2_anthropic-claude-haiku-5-5.md",
+  "cycle": "113",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "7ae22702e4a0f596a8a2a231eb38c23f1ffad4eb4032ba182ca06015d516a54f",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Draft verified cleanly against Ground Truth C113; exact quote attribution and profile fidelity for Tara Ellison (POP-00546).",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "kai-arts-entertainment-v1",
+    "packageVersion": "KAI-LEP2-1",
+    "manifestId": "AM-b773454e8b06",
+    "lexicalObservations": [],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Tara Ellison"
+    ],
+    "unverified": [
+      "Canopy Market",
+      "Whatever Rockridge"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 1,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0096,
+  "durationMs": 4784,
+  "parseError": false,
+  "ranAt": "2026-10-30T23:16:18.040Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 500",
+    "words": 585,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "7ae22702e4a0f596a8a2a231eb38c23f1ffad4eb4032ba182ca06015d516a54f",
+    "costUsd": 0.0011
+  }
+}

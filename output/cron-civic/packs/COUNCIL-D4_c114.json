@@ -1,0 +1,1318 @@
+{
+  "v": "OFFICE/1",
+  "team": "civic-office",
+  "empty": false,
+  "actor": {
+    "id": "POP-00042",
+    "name": "Ramon Vega",
+    "role": "City Council District 4",
+    "officeId": "COUNCIL-D4",
+    "district": "D4",
+    "faction": "IND",
+    "agentDir": "civic-office-council-d4",
+    "initiative": null,
+    "dials": {
+      "approval": 57
+    }
+  },
+  "task": {
+    "a": "district-week",
+    "goal": "what is happening in Ivy Hill"
+  },
+  "pulse": {
+    "className": "district-heat",
+    "score": 231.39090909090908,
+    "label": "Ivy Hill — sentiment -0.04 vs city 0.115",
+    "lever": "what is happening in Ivy Hill",
+    "hood": "Ivy Hill",
+    "initiative": null,
+    "vsCity": {
+      "sentiment": -0.04,
+      "citySentiment": 0.115,
+      "crime": 0.7,
+      "cityCrime": 0.6554545454545454,
+      "heat": 31.39090909090909,
+      "outlier": true
+    }
+  },
+  "prewrite": {
+    "claim": "what is happening in Ivy Hill",
+    "lineFacts": [
+      "approval 57",
+      "Ivy Hill: sentiment -0.04 vs city 0.115; crime index 0.7 vs city 0.655; decay momentum 0; decay momentum 0",
+      "Ivy Hill crime: property 43, violent 27, incidents 6 (cycle 114) — city property 40.7, violent 26.1, incidents 8.3",
+      "Ivy Hill: sentiment -0.04 vs city 0.115; crime index 0.7 vs city 0.655; decay momentum 0; retail 5.24; housing pressure 0; decay; momentum 0"
+    ],
+    "missing": [
+      "no shop names on disk for this turf",
+      "no invented vote, POPID, or complete"
+    ]
+  },
+  "game": {
+    "geographyIssue": null,
+    "lastMove": {
+      "text": "Latest moves:\nC113 - propose \"Ivy Hill Community Support Initiative\": applied to the tracker\nLatest terminal outcome (C113):\n- propose \"Ivy Hill Community Support Initiative\": applied to the tracker",
+      "moves": [
+        {
+          "moveId": "MV-113-civic-office-council-d4-2026-10-26",
+          "cycle": 113,
+          "date": "2026-10-26",
+          "agentDir": "civic-office-council-d4",
+          "popid": "POP-00042",
+          "type": "propose",
+          "payload": {
+            "title": "Ivy Hill Community Support Initiative",
+            "problem": "Ivy Hill is showing signs of decay momentum and increased crime index, requiring immediate community support and targeted investment.",
+            "category": "safety",
+            "reach": "hood",
+            "hoods": [
+              "Ivy Hill"
+            ],
+            "budget": "$2.5M"
+          },
+          "status": "applied",
+          "at": "2026-11-01T23:32:30.885Z",
+          "closeCycle": 114,
+          "detail": "candidate row appended to Initiative_Tracker"
+        }
+      ]
+    },
+    "board": [
+      {
+        "id": "INIT-011",
+        "name": "Ivy Hill Revitalization Initiative",
+        "domain": "economic",
+        "phase": "announced",
+        "status": "failed",
+        "voteCycle": null,
+        "stage": "Proposed",
+        "cyclesSinceStageChange": null,
+        "lastStageChangeCycle": null,
+        "sponsored": true,
+        "hoods": [
+          "Ivy Hill"
+        ],
+        "needsNext": "Proposed — a passed council vote funds it",
+        "budget": "budget $2,500,000 left",
+        "requirement": {
+          "stage": "Proposed",
+          "next": "Funded",
+          "clears": false,
+          "moveThatClears": null,
+          "blocked": null,
+          "text": "Proposed — a passed council vote funds it"
+        },
+        "metricEvidence": null
+      },
+      {
+        "id": "INIT-012",
+        "name": "Dimond Revitalization Initiative",
+        "domain": "economic",
+        "phase": "announced",
+        "status": "failed",
+        "voteCycle": null,
+        "stage": "Proposed",
+        "cyclesSinceStageChange": null,
+        "lastStageChangeCycle": null,
+        "sponsored": true,
+        "hoods": [
+          "Dimond"
+        ],
+        "needsNext": "Proposed — a passed council vote funds it",
+        "budget": "budget $2,500,000 left",
+        "requirement": {
+          "stage": "Proposed",
+          "next": "Funded",
+          "clears": false,
+          "moveThatClears": null,
+          "blocked": null,
+          "text": "Proposed — a passed council vote funds it"
+        },
+        "metricEvidence": null
+      },
+      {
+        "id": "INIT-013",
+        "name": "Ivy Hill Community Revitalization",
+        "domain": "safety",
+        "phase": "announced",
+        "status": "failed",
+        "voteCycle": null,
+        "stage": "Proposed",
+        "cyclesSinceStageChange": null,
+        "lastStageChangeCycle": null,
+        "sponsored": true,
+        "hoods": [
+          "Ivy Hill"
+        ],
+        "needsNext": "Proposed — a passed council vote funds it",
+        "budget": "budget $2,000,000 left",
+        "requirement": {
+          "stage": "Proposed",
+          "next": "Funded",
+          "clears": false,
+          "moveThatClears": null,
+          "blocked": null,
+          "text": "Proposed — a passed council vote funds it"
+        },
+        "metricEvidence": null
+      },
+      {
+        "id": "INIT-014",
+        "name": "Ivy Hill Community Support Initiative",
+        "domain": "safety",
+        "phase": "announced",
+        "status": "proposed",
+        "voteCycle": null,
+        "stage": "Proposed",
+        "cyclesSinceStageChange": null,
+        "lastStageChangeCycle": null,
+        "sponsored": true,
+        "hoods": [
+          "Ivy Hill"
+        ],
+        "needsNext": "Proposed — a passed council vote funds it",
+        "budget": "budget: no parsed budget",
+        "requirement": {
+          "stage": "Proposed",
+          "next": "Funded",
+          "clears": false,
+          "moveThatClears": null,
+          "blocked": null,
+          "text": "Proposed — a passed council vote funds it"
+        },
+        "metricEvidence": null
+      }
+    ],
+    "boardAvailable": true,
+    "boardIds": [
+      "INIT-011",
+      "INIT-012",
+      "INIT-013",
+      "INIT-014"
+    ],
+    "boardText": "Your board:\n- INIT-011 Ivy Hill Revitalization Initiative [announced] — Proposed — a passed council vote funds it — budget $2,500,000 left\n- INIT-012 Dimond Revitalization Initiative [announced] — Proposed — a passed council vote funds it — budget $2,500,000 left\n- INIT-013 Ivy Hill Community Revitalization [announced] — Proposed — a passed council vote funds it — budget $2,000,000 left\n- INIT-014 Ivy Hill Community Support Initiative [announced] — Proposed — a passed council vote funds it — budget: no parsed budget",
+    "categories": {
+      "available": true,
+      "list": [
+        {
+          "key": "health",
+          "label": "clinics, care",
+          "band": "$5M-$100M",
+          "canDeliver": true
+        },
+        {
+          "key": "transit",
+          "label": "stations, lines",
+          "band": "$20M-$500M",
+          "canDeliver": true
+        },
+        {
+          "key": "education",
+          "label": "schools, youth learning",
+          "band": "$1M-$50M",
+          "canDeliver": true
+        },
+        {
+          "key": "economic",
+          "label": "business, local economy",
+          "band": "$2M-$50M",
+          "canDeliver": false
+        },
+        {
+          "key": "workforce",
+          "label": "jobs, training",
+          "band": "$1M-$30M",
+          "canDeliver": false
+        },
+        {
+          "key": "safety",
+          "label": "public safety, response",
+          "band": "$2M-$30M",
+          "canDeliver": false
+        },
+        {
+          "key": "sports",
+          "label": "stadiums, recreation",
+          "band": "$10M-$500M",
+          "canDeliver": false
+        },
+        {
+          "key": "environment",
+          "label": "parks, air, water",
+          "band": "$1M-$30M",
+          "canDeliver": false
+        }
+      ],
+      "text": "Propose in your own words under one category; reach is hood, district, or all (citywide seats only). Budget must sit in the band. * = runs, but cannot reach Delivering yet.\n- health: clinics, care $5M-$100M\n- transit: stations, lines $20M-$500M\n- education: schools, youth learning $1M-$50M\n- economic*: business, local economy $2M-$50M\n- workforce*: jobs, training $1M-$30M\n- safety*: public safety, response $2M-$30M\n- sports*: stadiums, recreation $10M-$500M\n- environment*: parks, air, water $1M-$30M"
+    },
+    "petitionPool": {
+      "available": true,
+      "complaints": [],
+      "participation": [],
+      "unlocatedRows": 0,
+      "invalidCycleRows": 0,
+      "sinceCycle": 112,
+      "throughCycle": 114,
+      "window": "Complaint display C112–C114; condition counter C114 only.",
+      "text": "Complaint display C112–C114; condition counter C114 only.\nNo Civic complaints from your turf in this window."
+    },
+    "workingCity": {
+      "available": true,
+      "totalStaff": 4,
+      "shownStaff": 4,
+      "text": "The working city:\n- Elena Soria Dominguez: The schematics are close—we're maybe three weeks out from the community review, and I keep second-guessing… (C113)\n- Bobby Chen-Ramirez: The audit went out clean, and I should feel done, but there's a knot in my chest I can't shake. Numbers don't… (C113)\n- Vanessa Tran-Muñoz: Fruitvale numbers are in my head, not the report. The response time was good today — 6 minutes on the 42nd… (C113)\n- Marcus Webb: Month eleven closed clean. Audit published, no findings flagged, and that four hundred K for next month is… (C113)"
+    },
+    "patrol": {
+      "available": true,
+      "strategy": "balanced",
+      "text": "City patrol strategy: balanced (patrols spread evenly — the default posture). The Police Chief has not set one."
+    },
+    "confrontations": {
+      "available": true,
+      "all": [
+        {
+          "id": "CONF-105-civic-office-council-d4",
+          "cycle": 105,
+          "agentDir": "civic-office-council-d4",
+          "demand": "Ramon Vega — City Council District 4 — Call the final City Council authorization vote on the Baylight District Phase II development bid (INIT-006) during the C105 legislative session.",
+          "sourceText": "## Ramon Vega — City Council District 4\n\n- **Agent:** `.claude/agents/civic-office-council-d4/`\n- **Address:** Call the final City Council authorization vote on the Baylight District Phase II development bid (INIT-006) during the C105 legislative session.\n- **Why:** Following C104 approval of the three-bidder shortlist and transmission of the evaluation rubric, INIT-006 is scheduled on the tracker for its decisive council vote in C105.\n- **Acceptance:** A recorded roll-call vote or official council action on the Phase II developer selection in the C105 legislative record.\n- **Silence consequence:** Stalls the Phase II procurement timeline, leaving the Baylight development pipeline without an authorized execution partner.\n",
+          "src": "output/mara-directives/mara_directive_c105_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-108-civic-office-council-d4",
+          "cycle": 108,
+          "agentDir": "civic-office-council-d4",
+          "demand": "Ramon Vega — City Council District 4 — Address commercial contraction in Grand Lake and Glenview by reviewing citywide small-business stabilization coverage.",
+          "sourceText": "## Ramon Vega — City Council District 4\n\n- **Agent:** `.claude/agents/civic-office-council-d4/`\n- **Address:** Address commercial contraction in Grand Lake and Glenview by reviewing citywide small-business stabilization coverage.\n- **Why:** Grand Lake triggered a C108 math-imbalance flag (Sentiment -0.300, RetailVitality -2.12 to 8.52, HousingPressure +1.000), while Glenview records decay momentum 2 and a city-low RetailVitality of 4.02.\n- **Acceptance:** Legislative action or committee referral targeting commercial revitalization and retail vacancy relief for D4 commercial nodes.\n- **Silence consequence:** Neighborhood commercial cores face unmonitored retail vitality collapse without council intervention.\n",
+          "src": "output/mara-directives/mara_directive_c108_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-112-civic-office-council-d4",
+          "cycle": 112,
+          "agentDir": "civic-office-council-d4",
+          "demand": "Ramon Vega — City Council District 4 — File the legislative ordinance for the Ivy Hill Revitalization Initiative (INIT-011) and docket an emergency infrastructure response for District 4 corridors.",
+          "sourceText": "## Ramon Vega — City Council District 4\n\n- **Agent:** `.claude/agents/civic-office-council-d4/`\n- **Address:** File the legislative ordinance for the Ivy Hill Revitalization Initiative (INIT-011) and docket an emergency infrastructure response for District 4 corridors.\n- **Why:** INIT-011 has remained at announced status past its C111 legislation-filed milestone with its stall clock expiring at C113, while Dimond drops to city-low sentiment of -0.18, Ivy Hill records sentiment of -0.16 with decay momentum of 2 and crime index of 0.63, and Glenview sits at -0.09.\n- **Acceptance:** Formally filed ordinance text for INIT-011 with the City Clerk observable in C113.\n- **Silence consequence:** INIT-011 lapses into an administrative stall under charter rules, leaving Ivy Hill and Dimond without capital revitalization authority.\n",
+          "src": "output/mara-directives/mara_directive_c112_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-113-civic-office-council-d4",
+          "cycle": 113,
+          "agentDir": "civic-office-council-d4",
+          "demand": "Ramon Vega — City Council District 4 — Docket the committee referral and hearing for the Ivy Hill Revitalization Initiative (INIT-011) and reconcile the duplicate announced filings for INIT-012 and INIT-013.",
+          "sourceText": "## Ramon Vega — City Council District 4\n\n- **Agent:** `.claude/agents/civic-office-council-d4/`\n- **Address:** Docket the committee referral and hearing for the Ivy Hill Revitalization Initiative (INIT-011) and reconcile the duplicate announced filings for INIT-012 and INIT-013.\n- **Why:** INIT-011 reached legislation-filed status in C113 with a C114 committee referral deadline, while Ivy Hill records the city's lowest sentiment at -0.10 with crime at 0.62 and Glenview carries a crime index of 0.65.\n- **Acceptance:** A formal committee referral schedule for INIT-011 and docketed legislative text for INIT-012/INIT-013 in C114.\n- **Silence consequence:** Legislative momentum on District 4 revitalization stalls, leaving Ivy Hill and Glenview unaddressed as crime remains elevated.\n",
+          "src": "output/mara-directives/mara_directive_c113_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-114-civic-office-council-d4",
+          "cycle": 114,
+          "agentDir": "civic-office-council-d4",
+          "demand": "Ramon Vega — City Council District 4 — Docket formal committee referral schedules for the Ivy Hill Revitalization Initiative (INIT-011) and reconcile the duplicate announced filings for INIT-012 and INIT-013 with targeted municipal interventions for Dimond.",
+          "sourceText": "## Ramon Vega — City Council District 4\n\n- **Agent:** `.claude/agents/civic-office-council-d4/`\n- **Address:** Docket formal committee referral schedules for the Ivy Hill Revitalization Initiative (INIT-011) and reconcile the duplicate announced filings for INIT-012 and INIT-013 with targeted municipal interventions for Dimond.\n- **Why:** Following ordinance filings in C113, INIT-011, INIT-012, and INIT-013 face C115 stall clocks without committee assignment, while Dimond's decay momentum surged to 3 with sentiment at 0.00, Ivy Hill carries sentiment of -0.04 and crime at 0.70, and Glenview sits at a 0.72 crime index.\n- **Acceptance:** Transmitted committee referral schedules for INIT-011 and consolidated filings for INIT-012/INIT-013 with an attached municipal service plan for Dimond in C115.\n- **Silence consequence:** District 4 revitalization initiatives freeze at announcement status, leaving Dimond's accelerating decay momentum unaddressed.\n",
+          "src": "output/mara-directives/mara_directive_c114_AUTO.txt",
+          "expectsMove": "answer"
+        }
+      ],
+      "open": [
+        {
+          "id": "CONF-105-civic-office-council-d4",
+          "cycle": 105,
+          "agentDir": "civic-office-council-d4",
+          "demand": "Ramon Vega — City Council District 4 — Call the final City Council authorization vote on the Baylight District Phase II development bid (INIT-006) during the C105 legislative session.",
+          "sourceText": "## Ramon Vega — City Council District 4\n\n- **Agent:** `.claude/agents/civic-office-council-d4/`\n- **Address:** Call the final City Council authorization vote on the Baylight District Phase II development bid (INIT-006) during the C105 legislative session.\n- **Why:** Following C104 approval of the three-bidder shortlist and transmission of the evaluation rubric, INIT-006 is scheduled on the tracker for its decisive council vote in C105.\n- **Acceptance:** A recorded roll-call vote or official council action on the Phase II developer selection in the C105 legislative record.\n- **Silence consequence:** Stalls the Phase II procurement timeline, leaving the Baylight development pipeline without an authorized execution partner.\n",
+          "src": "output/mara-directives/mara_directive_c105_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-108-civic-office-council-d4",
+          "cycle": 108,
+          "agentDir": "civic-office-council-d4",
+          "demand": "Ramon Vega — City Council District 4 — Address commercial contraction in Grand Lake and Glenview by reviewing citywide small-business stabilization coverage.",
+          "sourceText": "## Ramon Vega — City Council District 4\n\n- **Agent:** `.claude/agents/civic-office-council-d4/`\n- **Address:** Address commercial contraction in Grand Lake and Glenview by reviewing citywide small-business stabilization coverage.\n- **Why:** Grand Lake triggered a C108 math-imbalance flag (Sentiment -0.300, RetailVitality -2.12 to 8.52, HousingPressure +1.000), while Glenview records decay momentum 2 and a city-low RetailVitality of 4.02.\n- **Acceptance:** Legislative action or committee referral targeting commercial revitalization and retail vacancy relief for D4 commercial nodes.\n- **Silence consequence:** Neighborhood commercial cores face unmonitored retail vitality collapse without council intervention.\n",
+          "src": "output/mara-directives/mara_directive_c108_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-112-civic-office-council-d4",
+          "cycle": 112,
+          "agentDir": "civic-office-council-d4",
+          "demand": "Ramon Vega — City Council District 4 — File the legislative ordinance for the Ivy Hill Revitalization Initiative (INIT-011) and docket an emergency infrastructure response for District 4 corridors.",
+          "sourceText": "## Ramon Vega — City Council District 4\n\n- **Agent:** `.claude/agents/civic-office-council-d4/`\n- **Address:** File the legislative ordinance for the Ivy Hill Revitalization Initiative (INIT-011) and docket an emergency infrastructure response for District 4 corridors.\n- **Why:** INIT-011 has remained at announced status past its C111 legislation-filed milestone with its stall clock expiring at C113, while Dimond drops to city-low sentiment of -0.18, Ivy Hill records sentiment of -0.16 with decay momentum of 2 and crime index of 0.63, and Glenview sits at -0.09.\n- **Acceptance:** Formally filed ordinance text for INIT-011 with the City Clerk observable in C113.\n- **Silence consequence:** INIT-011 lapses into an administrative stall under charter rules, leaving Ivy Hill and Dimond without capital revitalization authority.\n",
+          "src": "output/mara-directives/mara_directive_c112_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-113-civic-office-council-d4",
+          "cycle": 113,
+          "agentDir": "civic-office-council-d4",
+          "demand": "Ramon Vega — City Council District 4 — Docket the committee referral and hearing for the Ivy Hill Revitalization Initiative (INIT-011) and reconcile the duplicate announced filings for INIT-012 and INIT-013.",
+          "sourceText": "## Ramon Vega — City Council District 4\n\n- **Agent:** `.claude/agents/civic-office-council-d4/`\n- **Address:** Docket the committee referral and hearing for the Ivy Hill Revitalization Initiative (INIT-011) and reconcile the duplicate announced filings for INIT-012 and INIT-013.\n- **Why:** INIT-011 reached legislation-filed status in C113 with a C114 committee referral deadline, while Ivy Hill records the city's lowest sentiment at -0.10 with crime at 0.62 and Glenview carries a crime index of 0.65.\n- **Acceptance:** A formal committee referral schedule for INIT-011 and docketed legislative text for INIT-012/INIT-013 in C114.\n- **Silence consequence:** Legislative momentum on District 4 revitalization stalls, leaving Ivy Hill and Glenview unaddressed as crime remains elevated.\n",
+          "src": "output/mara-directives/mara_directive_c113_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-114-civic-office-council-d4",
+          "cycle": 114,
+          "agentDir": "civic-office-council-d4",
+          "demand": "Ramon Vega — City Council District 4 — Docket formal committee referral schedules for the Ivy Hill Revitalization Initiative (INIT-011) and reconcile the duplicate announced filings for INIT-012 and INIT-013 with targeted municipal interventions for Dimond.",
+          "sourceText": "## Ramon Vega — City Council District 4\n\n- **Agent:** `.claude/agents/civic-office-council-d4/`\n- **Address:** Docket formal committee referral schedules for the Ivy Hill Revitalization Initiative (INIT-011) and reconcile the duplicate announced filings for INIT-012 and INIT-013 with targeted municipal interventions for Dimond.\n- **Why:** Following ordinance filings in C113, INIT-011, INIT-012, and INIT-013 face C115 stall clocks without committee assignment, while Dimond's decay momentum surged to 3 with sentiment at 0.00, Ivy Hill carries sentiment of -0.04 and crime at 0.70, and Glenview sits at a 0.72 crime index.\n- **Acceptance:** Transmitted committee referral schedules for INIT-011 and consolidated filings for INIT-012/INIT-013 with an attached municipal service plan for Dimond in C115.\n- **Silence consequence:** District 4 revitalization initiatives freeze at announcement status, leaving Dimond's accelerating decay momentum unaddressed.\n",
+          "src": "output/mara-directives/mara_directive_c114_AUTO.txt",
+          "expectsMove": "answer"
+        }
+      ],
+      "answeredIds": []
+    },
+    "confrontation": {
+      "id": "CONF-105-civic-office-council-d4",
+      "cycle": 105,
+      "agentDir": "civic-office-council-d4",
+      "demand": "Ramon Vega — City Council District 4 — Call the final City Council authorization vote on the Baylight District Phase II development bid (INIT-006) during the C105 legislative session.",
+      "sourceText": "## Ramon Vega — City Council District 4\n\n- **Agent:** `.claude/agents/civic-office-council-d4/`\n- **Address:** Call the final City Council authorization vote on the Baylight District Phase II development bid (INIT-006) during the C105 legislative session.\n- **Why:** Following C104 approval of the three-bidder shortlist and transmission of the evaluation rubric, INIT-006 is scheduled on the tracker for its decisive council vote in C105.\n- **Acceptance:** A recorded roll-call vote or official council action on the Phase II developer selection in the C105 legislative record.\n- **Silence consequence:** Stalls the Phase II procurement timeline, leaving the Baylight development pipeline without an authorized execution partner.\n",
+      "src": "output/mara-directives/mara_directive_c105_AUTO.txt",
+      "expectsMove": "answer"
+    },
+    "conditions": {
+      "available": true,
+      "cycle": 114,
+      "proposals": [
+        {
+          "id": "INIT-014",
+          "available": true,
+          "cycle": 114,
+          "policyDomain": "safety",
+          "hoods": [
+            "Ivy Hill"
+          ],
+          "hardshipBand": 0.3,
+          "counts": {
+            "cityMedianViolentLevel": 26.89,
+            "cityHoods": 22,
+            "hoodConditions": [
+              {
+                "hood": "Ivy Hill",
+                "violentLevel": 27.3,
+                "aboveCityMedian": true
+              }
+            ],
+            "aboveMedianHoods": 1
+          },
+          "population": {
+            "value": 2094,
+            "source": "Neighborhood_Demographics.Students + Adults + Seniors",
+            "missingHoods": []
+          },
+          "support": {
+            "band": null,
+            "numerator": null,
+            "unit": "hood-condition-not-signatures",
+            "requiredCount": null,
+            "cleared": false,
+            "reason": "domain-rules-deferred",
+            "basis": "Observed condition counts only; no sample extrapolation. Housing households are not population signatures."
+          },
+          "quality": {
+            "unlocatedConditionRows": 0,
+            "invalidConditionRows": 0,
+            "canonCacheMissing": []
+          }
+        }
+      ],
+      "text": "Proposal conditions at C114 (observations; no support band supplied):\nINIT-014: 1 hoods above city violent-level median; support domain-rules-deferred; bad rows 0, unlocated 0"
+    },
+    "problemContinuity": {
+      "available": true,
+      "cycle": 114,
+      "problems": [
+        {
+          "id": "[\"Dimond\",\"health.sickResidents\"]",
+          "hood": "Dimond",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 93,
+          "cycle": 114
+        },
+        {
+          "id": "[\"Dimond\",\"safety.aboveMedianHoods\"]",
+          "hood": "Dimond",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 114
+        },
+        {
+          "id": "[\"Glenview\",\"health.sickResidents\"]",
+          "hood": "Glenview",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 89,
+          "cycle": 114
+        },
+        {
+          "id": "[\"Glenview\",\"safety.aboveMedianHoods\"]",
+          "hood": "Glenview",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 114
+        },
+        {
+          "id": "[\"Ivy Hill\",\"health.sickResidents\"]",
+          "hood": "Ivy Hill",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 118,
+          "cycle": 114
+        },
+        {
+          "id": "[\"Ivy Hill\",\"safety.aboveMedianHoods\"]",
+          "hood": "Ivy Hill",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 114
+        }
+      ],
+      "visibleProblems": [
+        {
+          "id": "[\"Glenview\",\"health.sickResidents\"]",
+          "hood": "Glenview",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 89,
+          "cycle": 114,
+          "passedOverCycle": 110
+        },
+        {
+          "id": "[\"Glenview\",\"safety.aboveMedianHoods\"]",
+          "hood": "Glenview",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 114,
+          "passedOverCycle": 110
+        },
+        {
+          "id": "[\"Dimond\",\"health.sickResidents\"]",
+          "hood": "Dimond",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 93,
+          "cycle": 114,
+          "passedOverCycle": 112
+        },
+        {
+          "id": "[\"Dimond\",\"safety.aboveMedianHoods\"]",
+          "hood": "Dimond",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 114,
+          "passedOverCycle": 112
+        },
+        {
+          "id": "[\"Ivy Hill\",\"health.sickResidents\"]",
+          "hood": "Ivy Hill",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 118,
+          "cycle": 114
+        },
+        {
+          "id": "[\"Ivy Hill\",\"safety.aboveMedianHoods\"]",
+          "hood": "Ivy Hill",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 114
+        }
+      ],
+      "passedOver": [
+        {
+          "id": "[\"Glenview\",\"health.sickResidents\"]",
+          "hood": "Glenview",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 89,
+          "cycle": 114,
+          "passedOverCycle": 110
+        },
+        {
+          "id": "[\"Glenview\",\"safety.aboveMedianHoods\"]",
+          "hood": "Glenview",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 114,
+          "passedOverCycle": 110
+        },
+        {
+          "id": "[\"Dimond\",\"health.sickResidents\"]",
+          "hood": "Dimond",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 93,
+          "cycle": 114,
+          "passedOverCycle": 112
+        },
+        {
+          "id": "[\"Dimond\",\"safety.aboveMedianHoods\"]",
+          "hood": "Dimond",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 114,
+          "passedOverCycle": 112
+        }
+      ],
+      "issues": [],
+      "missingFoldCycles": [],
+      "text": "Condition problems at C114; prior Sunday folds through C113.\n- Glenview: sick residents 89 [passed over C110]\n- Glenview: hoods above city violent-level median 1 [passed over C110]\n- Dimond: sick residents 93 [passed over C112]\n- Dimond: hoods above city violent-level median 1 [passed over C112]\n- Ivy Hill: sick residents 118\n- Ivy Hill: hoods above city violent-level median 1\n"
+    }
+  },
+  "signal": {
+    "kind": "district-heat",
+    "hoods": [
+      "Glenview",
+      "Dimond",
+      "Ivy Hill"
+    ],
+    "src": "lib/districtMap.js + civic-office-map.json"
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00784",
+        "name": "Isaac Martinez",
+        "neighborhood": "Ivy Hill",
+        "role": "Plumber",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Ivy Hill — Ivy Hill — sentiment -0.04 vs city 0.115"
+      },
+      {
+        "pop": "POP-01101",
+        "name": "Mateo Baker",
+        "neighborhood": "Ivy Hill",
+        "role": "Taxi driver",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Ivy Hill — Ivy Hill — sentiment -0.04 vs city 0.115"
+      },
+      {
+        "pop": "POP-01103",
+        "name": "Ebony Mendoza",
+        "neighborhood": "Ivy Hill",
+        "role": "Server",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Ivy Hill — Ivy Hill — sentiment -0.04 vs city 0.115"
+      },
+      {
+        "pop": "POP-01116",
+        "name": "Darius Hill",
+        "neighborhood": "Ivy Hill",
+        "role": "Security guard",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Ivy Hill — Ivy Hill — sentiment -0.04 vs city 0.115"
+      }
+    ],
+    "businesses": [],
+    "churches": [],
+    "sources": []
+  },
+  "known": [
+    {
+      "id": "F-office-COUNCIL-D4",
+      "t": "FACT",
+      "text": "Ramon Vega holds COUNCIL-D4 at approval 57",
+      "src": "engine_audit snapshots.Civic_Office_Ledger"
+    },
+    {
+      "id": "F-heat-IvyHill",
+      "t": "FACT",
+      "text": "Ivy Hill: sentiment -0.04 vs city 0.115; crime index 0.7 vs city 0.655; decay momentum 0; decay momentum 0",
+      "src": "engine_audit snapshots.Neighborhood_Map ranked vs city"
+    },
+    {
+      "id": "F-crime-IvyHill",
+      "t": "FACT",
+      "text": "Ivy Hill crime: property 43, violent 27, incidents 6 (cycle 114) — city property 40.7, violent 26.1, incidents 8.3",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-hood-IvyHill",
+      "t": "FACT",
+      "text": "Ivy Hill: sentiment -0.04 vs city 0.115; crime index 0.7 vs city 0.655; decay momentum 0; retail 5.24; housing pressure 0; decay; momentum 0",
+      "src": "engine_audit snapshots.Neighborhood_Map"
+    }
+  ],
+  "role": {
+    "officeRows": [
+      {
+        "OfficeId": "COUNCIL-D4",
+        "PopId": "POP-00042",
+        "Holder": "Ramon Vega",
+        "District": "D4",
+        "Approval": "57"
+      }
+    ],
+    "civicPeers": [
+      {
+        "OfficeId": "COUNCIL-D2",
+        "PopId": "POP-00502",
+        "Holder": "Leonard Tran",
+        "District": "D2",
+        "Faction": "IND",
+        "Approval": 59
+      }
+    ]
+  },
+  "limits": {
+    "assert": [
+      "only named subjects in exposure.subjects",
+      "only named shops in exposure.businesses",
+      "only named churches in exposure.churches",
+      "only project facts in known",
+      "no invented POPID, vote, or complete"
+    ],
+    "invent": [
+      "no new citizens",
+      "no new businesses",
+      "no sheet numbers"
+    ]
+  },
+  "output": {
+    "contract": "statement + moves + numberMoved",
+    "dest": "office wiki (civic.16) then next Sunday city-hall packet"
+  },
+  "brief": {
+    "version": "CIVIC-BRIEF/2",
+    "cycle": 114,
+    "generation": {
+      "cycle": 114,
+      "observedAt": "2026-11-01T22:24:29.105Z",
+      "sources": {
+        "sports": {
+          "available": true,
+          "hash": "b78aaae66ac12aca66d5fa395108cfe2aa74c4de5f10df5c08eec00d10a966f7"
+        },
+        "summary": {
+          "available": true,
+          "hash": "99535f5182e66eb922782c14f98daace067903c034240604a5ece898c8f011e4"
+        }
+      },
+      "hash": "625fc65e258fd2fe3d38d613ddc8fe6e9ae4ae4487a8350ea1d8882ac488130d",
+      "completeThrough": "2026-11-01T22:24:29.105Z",
+      "issues": [],
+      "statement": "Events reflect the saved export as of its refresh watermark; later same-Cycle events require a new export."
+    },
+    "sections": {
+      "events": {
+        "available": true,
+        "items": [],
+        "omittedCount": 0,
+        "retrievalKeys": []
+      },
+      "measuredState": {
+        "districts": [
+          {
+            "district": "D4",
+            "available": true,
+            "retrievalKey": "district/D4",
+            "neighborhoods": [
+              {
+                "hood": "Glenview",
+                "available": true,
+                "measured": {
+                  "Sentiment": {
+                    "value": "0.07",
+                    "previous": "0.03",
+                    "change": 0.04000000000000001
+                  },
+                  "CrimeIndex": {
+                    "value": "0.72",
+                    "previous": "0.65",
+                    "change": 0.06999999999999995
+                  },
+                  "RetailVitality": {
+                    "value": "5.45",
+                    "previous": "5.23",
+                    "change": 0.21999999999999975
+                  },
+                  "HousingPressure": {
+                    "value": "0",
+                    "previous": "0",
+                    "change": 0
+                  },
+                  "NeighborhoodTrajectory": {
+                    "value": "decay",
+                    "previous": "decay",
+                    "change": null
+                  },
+                  "TrajectoryMomentum": {
+                    "value": "0",
+                    "previous": "0",
+                    "change": 0
+                  }
+                }
+              },
+              {
+                "hood": "Dimond",
+                "available": true,
+                "measured": {
+                  "Sentiment": {
+                    "value": "0",
+                    "previous": "-0.02",
+                    "change": 0.02
+                  },
+                  "CrimeIndex": {
+                    "value": "0.61",
+                    "previous": "0.64",
+                    "change": -0.030000000000000027
+                  },
+                  "RetailVitality": {
+                    "value": "7.93",
+                    "previous": "6.92",
+                    "change": 1.0099999999999998
+                  },
+                  "HousingPressure": {
+                    "value": "0",
+                    "previous": "0",
+                    "change": 0
+                  },
+                  "NeighborhoodTrajectory": {
+                    "value": "decay",
+                    "previous": "steady",
+                    "change": null
+                  },
+                  "TrajectoryMomentum": {
+                    "value": "3",
+                    "previous": "4",
+                    "change": -1
+                  }
+                }
+              },
+              {
+                "hood": "Ivy Hill",
+                "available": true,
+                "measured": {
+                  "Sentiment": {
+                    "value": "-0.04",
+                    "previous": "-0.1",
+                    "change": 0.060000000000000005
+                  },
+                  "CrimeIndex": {
+                    "value": "0.7",
+                    "previous": "0.62",
+                    "change": 0.07999999999999996
+                  },
+                  "RetailVitality": {
+                    "value": "5.24",
+                    "previous": "4.67",
+                    "change": 0.5700000000000003
+                  },
+                  "HousingPressure": {
+                    "value": "0",
+                    "previous": "0",
+                    "change": 0
+                  },
+                  "NeighborhoodTrajectory": {
+                    "value": "decay",
+                    "previous": "decay",
+                    "change": null
+                  },
+                  "TrajectoryMomentum": {
+                    "value": "0",
+                    "previous": "1",
+                    "change": -1
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "previousCycleAvailable": true
+      },
+      "commitments": {
+        "priorMoves": [
+          {
+            "moveId": "MV-113-civic-office-council-d4-2026-10-26",
+            "type": "propose",
+            "status": "applied",
+            "cycle": 113,
+            "retrievalKey": "prior/MV-113-civic-office-council-d4-2026-10-26"
+          }
+        ],
+        "evidenceAvailable": true,
+        "outcomeFeedAvailable": false,
+        "actionOutcomes": [],
+        "actionReconciliationAvailable": false,
+        "actionReconciliationReason": "ENOENT: no such file or directory, open '/root/GodWorld/output/beats/Civic_Action_Ledger.jsonl'",
+        "reconciledActions": []
+      },
+      "opportunities": {
+        "board": [
+          {
+            "id": "INIT-011",
+            "name": "Ivy Hill Revitalization Initiative",
+            "domain": "economic",
+            "phase": "announced",
+            "status": "failed",
+            "voteCycle": null,
+            "stage": "Proposed",
+            "cyclesSinceStageChange": null,
+            "lastStageChangeCycle": null,
+            "sponsored": true,
+            "hoods": [
+              "Ivy Hill"
+            ],
+            "needsNext": "Proposed — a passed council vote funds it",
+            "budget": "budget $2,500,000 left",
+            "requirement": {
+              "stage": "Proposed",
+              "next": "Funded",
+              "clears": false,
+              "moveThatClears": null,
+              "blocked": null,
+              "text": "Proposed — a passed council vote funds it"
+            },
+            "metricEvidence": null,
+            "retrievalKey": "project/INIT-011"
+          },
+          {
+            "id": "INIT-012",
+            "name": "Dimond Revitalization Initiative",
+            "domain": "economic",
+            "phase": "announced",
+            "status": "failed",
+            "voteCycle": null,
+            "stage": "Proposed",
+            "cyclesSinceStageChange": null,
+            "lastStageChangeCycle": null,
+            "sponsored": true,
+            "hoods": [
+              "Dimond"
+            ],
+            "needsNext": "Proposed — a passed council vote funds it",
+            "budget": "budget $2,500,000 left",
+            "requirement": {
+              "stage": "Proposed",
+              "next": "Funded",
+              "clears": false,
+              "moveThatClears": null,
+              "blocked": null,
+              "text": "Proposed — a passed council vote funds it"
+            },
+            "metricEvidence": null,
+            "retrievalKey": "project/INIT-012"
+          },
+          {
+            "id": "INIT-013",
+            "name": "Ivy Hill Community Revitalization",
+            "domain": "safety",
+            "phase": "announced",
+            "status": "failed",
+            "voteCycle": null,
+            "stage": "Proposed",
+            "cyclesSinceStageChange": null,
+            "lastStageChangeCycle": null,
+            "sponsored": true,
+            "hoods": [
+              "Ivy Hill"
+            ],
+            "needsNext": "Proposed — a passed council vote funds it",
+            "budget": "budget $2,000,000 left",
+            "requirement": {
+              "stage": "Proposed",
+              "next": "Funded",
+              "clears": false,
+              "moveThatClears": null,
+              "blocked": null,
+              "text": "Proposed — a passed council vote funds it"
+            },
+            "metricEvidence": null,
+            "retrievalKey": "project/INIT-013"
+          },
+          {
+            "id": "INIT-014",
+            "name": "Ivy Hill Community Support Initiative",
+            "domain": "safety",
+            "phase": "announced",
+            "status": "proposed",
+            "voteCycle": null,
+            "stage": "Proposed",
+            "cyclesSinceStageChange": null,
+            "lastStageChangeCycle": null,
+            "sponsored": true,
+            "hoods": [
+              "Ivy Hill"
+            ],
+            "needsNext": "Proposed — a passed council vote funds it",
+            "budget": "budget: no parsed budget",
+            "requirement": {
+              "stage": "Proposed",
+              "next": "Funded",
+              "clears": false,
+              "moveThatClears": null,
+              "blocked": null,
+              "text": "Proposed — a passed council vote funds it"
+            },
+            "metricEvidence": null,
+            "retrievalKey": "project/INIT-014"
+          }
+        ],
+        "omittedCount": 0,
+        "boardRetrievalKeys": [
+          "project/INIT-011",
+          "project/INIT-012",
+          "project/INIT-013",
+          "project/INIT-014"
+        ],
+        "selectedInitiative": null,
+        "resourceBalanceAvailable": false,
+        "budgetAuthorityKey": "budget/authority",
+        "openChoice": "No selected initiative; a reasoned no-op or a grounded opportunity is available."
+      },
+      "response": {
+        "petitionWindow": "Complaint display C112–C114; condition counter C114 only.",
+        "complaints": 0,
+        "participation": 0,
+        "mediaOutcomeAvailable": false,
+        "committedResponseAvailable": false,
+        "committedResponse": [],
+        "note": "Response counts require saved experience and reaction receipts, and are not a representative poll. Only published receipts appear as coverage."
+      },
+      "authorizedActions": {
+        "categoriesAvailable": true,
+        "categoryKeys": [
+          "health",
+          "transit",
+          "education",
+          "economic",
+          "workforce",
+          "safety",
+          "sports",
+          "environment"
+        ],
+        "detailKey": "budget/authority",
+        "note": "Move validation and later execution decide authority. An accepted request is not an applied outcome."
+      }
+    }
+  },
+  "_briefEvidence": {
+    "event": {},
+    "district": {
+      "D4": {
+        "available": true,
+        "district": "D4",
+        "neighborhoods": [
+          {
+            "hood": "Glenview",
+            "available": true,
+            "measured": {
+              "Sentiment": {
+                "value": "0.07",
+                "previous": "0.03",
+                "change": 0.04000000000000001
+              },
+              "CrimeIndex": {
+                "value": "0.72",
+                "previous": "0.65",
+                "change": 0.06999999999999995
+              },
+              "RetailVitality": {
+                "value": "5.45",
+                "previous": "5.23",
+                "change": 0.21999999999999975
+              },
+              "HousingPressure": {
+                "value": "0",
+                "previous": "0",
+                "change": 0
+              },
+              "NeighborhoodTrajectory": {
+                "value": "decay",
+                "previous": "decay",
+                "change": null
+              },
+              "TrajectoryMomentum": {
+                "value": "0",
+                "previous": "0",
+                "change": 0
+              }
+            },
+            "sourceRef": "engine_audit snapshots.Neighborhood_Map"
+          },
+          {
+            "hood": "Dimond",
+            "available": true,
+            "measured": {
+              "Sentiment": {
+                "value": "0",
+                "previous": "-0.02",
+                "change": 0.02
+              },
+              "CrimeIndex": {
+                "value": "0.61",
+                "previous": "0.64",
+                "change": -0.030000000000000027
+              },
+              "RetailVitality": {
+                "value": "7.93",
+                "previous": "6.92",
+                "change": 1.0099999999999998
+              },
+              "HousingPressure": {
+                "value": "0",
+                "previous": "0",
+                "change": 0
+              },
+              "NeighborhoodTrajectory": {
+                "value": "decay",
+                "previous": "steady",
+                "change": null
+              },
+              "TrajectoryMomentum": {
+                "value": "3",
+                "previous": "4",
+                "change": -1
+              }
+            },
+            "sourceRef": "engine_audit snapshots.Neighborhood_Map"
+          },
+          {
+            "hood": "Ivy Hill",
+            "available": true,
+            "measured": {
+              "Sentiment": {
+                "value": "-0.04",
+                "previous": "-0.1",
+                "change": 0.060000000000000005
+              },
+              "CrimeIndex": {
+                "value": "0.7",
+                "previous": "0.62",
+                "change": 0.07999999999999996
+              },
+              "RetailVitality": {
+                "value": "5.24",
+                "previous": "4.67",
+                "change": 0.5700000000000003
+              },
+              "HousingPressure": {
+                "value": "0",
+                "previous": "0",
+                "change": 0
+              },
+              "NeighborhoodTrajectory": {
+                "value": "decay",
+                "previous": "decay",
+                "change": null
+              },
+              "TrajectoryMomentum": {
+                "value": "0",
+                "previous": "1",
+                "change": -1
+              }
+            },
+            "sourceRef": "engine_audit snapshots.Neighborhood_Map"
+          }
+        ],
+        "previousCycleAvailable": true
+      }
+    },
+    "project": {
+      "INIT-011": {
+        "id": "INIT-011",
+        "name": "Ivy Hill Revitalization Initiative",
+        "domain": "economic",
+        "phase": "announced",
+        "status": "failed",
+        "voteCycle": null,
+        "stage": "Proposed",
+        "cyclesSinceStageChange": null,
+        "lastStageChangeCycle": null,
+        "sponsored": true,
+        "hoods": [
+          "Ivy Hill"
+        ],
+        "needsNext": "Proposed — a passed council vote funds it",
+        "budget": "budget $2,500,000 left",
+        "requirement": {
+          "stage": "Proposed",
+          "next": "Funded",
+          "clears": false,
+          "moveThatClears": null,
+          "blocked": null,
+          "text": "Proposed — a passed council vote funds it"
+        },
+        "metricEvidence": null
+      },
+      "INIT-012": {
+        "id": "INIT-012",
+        "name": "Dimond Revitalization Initiative",
+        "domain": "economic",
+        "phase": "announced",
+        "status": "failed",
+        "voteCycle": null,
+        "stage": "Proposed",
+        "cyclesSinceStageChange": null,
+        "lastStageChangeCycle": null,
+        "sponsored": true,
+        "hoods": [
+          "Dimond"
+        ],
+        "needsNext": "Proposed — a passed council vote funds it",
+        "budget": "budget $2,500,000 left",
+        "requirement": {
+          "stage": "Proposed",
+          "next": "Funded",
+          "clears": false,
+          "moveThatClears": null,
+          "blocked": null,
+          "text": "Proposed — a passed council vote funds it"
+        },
+        "metricEvidence": null
+      },
+      "INIT-013": {
+        "id": "INIT-013",
+        "name": "Ivy Hill Community Revitalization",
+        "domain": "safety",
+        "phase": "announced",
+        "status": "failed",
+        "voteCycle": null,
+        "stage": "Proposed",
+        "cyclesSinceStageChange": null,
+        "lastStageChangeCycle": null,
+        "sponsored": true,
+        "hoods": [
+          "Ivy Hill"
+        ],
+        "needsNext": "Proposed — a passed council vote funds it",
+        "budget": "budget $2,000,000 left",
+        "requirement": {
+          "stage": "Proposed",
+          "next": "Funded",
+          "clears": false,
+          "moveThatClears": null,
+          "blocked": null,
+          "text": "Proposed — a passed council vote funds it"
+        },
+        "metricEvidence": null
+      },
+      "INIT-014": {
+        "id": "INIT-014",
+        "name": "Ivy Hill Community Support Initiative",
+        "domain": "safety",
+        "phase": "announced",
+        "status": "proposed",
+        "voteCycle": null,
+        "stage": "Proposed",
+        "cyclesSinceStageChange": null,
+        "lastStageChangeCycle": null,
+        "sponsored": true,
+        "hoods": [
+          "Ivy Hill"
+        ],
+        "needsNext": "Proposed — a passed council vote funds it",
+        "budget": "budget: no parsed budget",
+        "requirement": {
+          "stage": "Proposed",
+          "next": "Funded",
+          "clears": false,
+          "moveThatClears": null,
+          "blocked": null,
+          "text": "Proposed — a passed council vote funds it"
+        },
+        "metricEvidence": null
+      }
+    },
+    "budget": {
+      "authority": {
+        "officeId": "COUNCIL-D4",
+        "district": "D4",
+        "categories": [
+          {
+            "key": "health",
+            "label": "clinics, care",
+            "band": "$5M-$100M",
+            "canDeliver": true
+          },
+          {
+            "key": "transit",
+            "label": "stations, lines",
+            "band": "$20M-$500M",
+            "canDeliver": true
+          },
+          {
+            "key": "education",
+            "label": "schools, youth learning",
+            "band": "$1M-$50M",
+            "canDeliver": true
+          },
+          {
+            "key": "economic",
+            "label": "business, local economy",
+            "band": "$2M-$50M",
+            "canDeliver": false
+          },
+          {
+            "key": "workforce",
+            "label": "jobs, training",
+            "band": "$1M-$30M",
+            "canDeliver": false
+          },
+          {
+            "key": "safety",
+            "label": "public safety, response",
+            "band": "$2M-$30M",
+            "canDeliver": false
+          },
+          {
+            "key": "sports",
+            "label": "stadiums, recreation",
+            "band": "$10M-$500M",
+            "canDeliver": false
+          },
+          {
+            "key": "environment",
+            "label": "parks, air, water",
+            "band": "$1M-$30M",
+            "canDeliver": false
+          }
+        ],
+        "resourceBalance": null,
+        "resourceBalanceAvailable": false,
+        "note": "Category bands are filing constraints. Spendable treasury balance requires typed current allocation evidence."
+      }
+    },
+    "prior": {
+      "MV-113-civic-office-council-d4-2026-10-26": {
+        "moveId": "MV-113-civic-office-council-d4-2026-10-26",
+        "cycle": 113,
+        "date": "2026-10-26",
+        "agentDir": "civic-office-council-d4",
+        "popid": "POP-00042",
+        "type": "propose",
+        "payload": {
+          "title": "Ivy Hill Community Support Initiative",
+          "problem": "Ivy Hill is showing signs of decay momentum and increased crime index, requiring immediate community support and targeted investment.",
+          "category": "safety",
+          "reach": "hood",
+          "hoods": [
+            "Ivy Hill"
+          ],
+          "budget": "$2.5M"
+        },
+        "status": "applied",
+        "at": "2026-11-01T23:32:30.885Z",
+        "closeCycle": 114,
+        "detail": "candidate row appended to Initiative_Tracker"
+      }
+    }
+  }
+}

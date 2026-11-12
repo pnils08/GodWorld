@@ -1,0 +1,86 @@
+{
+  "draft": "output/cron-compare/culture_c112_ines-sorensen_packet-v2_x-ai-grok-4-3.md",
+  "cycle": "112",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "6a6fb83526d2cd1d105d3acbf6606d2f42a38ece4562f93c4cd88efc9f0030f7",
+  "pass": false,
+  "flags": [
+    {
+      "claim": "Month eleven’s done, $400K moved, and the queue’s finally down to six files waiting on title search...",
+      "issue": "Fabricated speech: monologue attributed to Marcus Webb does not match the authorized verbatim quote in the packet manifest.",
+      "severity": "high"
+    },
+    {
+      "claim": "The Chinatown call still sits heavy. We got someone there eventually...",
+      "issue": "Fabricated speech: monologue attributed to Vanessa Tran-Muñoz does not match the authorized verbatim quote in the packet manifest.",
+      "severity": "high"
+    },
+    {
+      "claim": "The Fruitvale number keeps coming back. Eighteen percent on my internal sheet...",
+      "issue": "Fabricated speech: monologue attributed to Clarissa Dane does not match the authorized verbatim quote in the packet manifest.",
+      "severity": "high"
+    },
+    {
+      "claim": "Yu Zen’s file is still open on my desk. Twenty-nine years old, Rockridge...",
+      "issue": "Fabricated speech: monologue attributed to Priya Narang does not match the authorized verbatim quote in the packet manifest.",
+      "severity": "high"
+    }
+  ],
+  "flagCount": 4,
+  "highSeverityCount": 4,
+  "summary": "Complete failure of verbatim quote requirement: all four citizen monologues are fabricated rather than drawn from authorized packet provenance.",
+  "review": {
+    "profileId": "ines-voices-v1",
+    "canonIntegrity": "fail",
+    "texture": "overreach"
+  },
+  "reviewProfile": {
+    "id": "ines-voices-v1",
+    "packageVersion": "INES-VOICES-1",
+    "manifestId": "AM-08c301294254",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Clarissa Dane",
+      "Marcus Webb",
+      "Priya Narang",
+      "Vanessa Tran-Muñoz",
+      "Yu Zen"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0126,
+  "durationMs": 8805,
+  "parseError": false,
+  "ranAt": "2026-10-22T23:18:46.274Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 300",
+    "words": 428,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "6a6fb83526d2cd1d105d3acbf6606d2f42a38ece4562f93c4cd88efc9f0030f7",
+    "costUsd": 0.0015
+  }
+}

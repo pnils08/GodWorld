@@ -1,0 +1,465 @@
+{
+  "v": "OFFICE/1",
+  "team": "civic-office",
+  "empty": false,
+  "actor": {
+    "id": "POP-00504",
+    "name": "Warren Ashford",
+    "role": "City Council District 7",
+    "officeId": "COUNCIL-D7",
+    "district": "D7",
+    "faction": "CRC",
+    "agentDir": "civic-office-council-d7",
+    "initiative": null,
+    "dials": {
+      "approval": 65
+    }
+  },
+  "task": {
+    "a": "district-week",
+    "goal": "Second quarterly audit cycle"
+  },
+  "pulse": {
+    "className": "initiative",
+    "score": 8,
+    "label": "Temescal Community Health Center — Second quarterly audit cycle",
+    "lever": "Second quarterly audit cycle",
+    "hood": "Temescal",
+    "initiative": "INIT-005",
+    "vsCity": {
+      "sentiment": 0.08,
+      "citySentiment": 0.045454545454545456,
+      "crime": 0.66,
+      "cityCrime": 0.5868181818181818,
+      "heat": -1.9909090909090899,
+      "outlier": false
+    }
+  },
+  "prewrite": {
+    "claim": "Second quarterly audit cycle",
+    "lineFacts": [
+      "approval 65",
+      "Temescal Community Health Center is in operational; budget $45M — C107: MEP rough-ins completed, utility inspections certified ahead of schedule\nC108 conversion: passed C80 before the mayoral-action step existed; the mayor's own bill, recorded signed at C80.\nC108 conversion: Stage Standing — Temescal…",
+      "due: Second quarterly audit cycle",
+      "Temescal crime: property 44, violent 22, incidents 6 (cycle 113) — city property 35.9, violent 23.1, incidents 5.9",
+      "Temescal: sentiment 0.08 vs city 0.045; crime index 0.66 vs city 0.587; retail 5.29; housing pressure 2.5; steady; momentum 5"
+    ],
+    "missing": [
+      "no invented vote, POPID, or complete"
+    ]
+  },
+  "game": {
+    "geographyIssue": null,
+    "lastMove": {
+      "text": "Latest moves:\nC112 - answer CONF-112-civic-office-council-d7: awaiting the Sunday fold\nLatest terminal outcome (C111):\n- work INIT-005: applied to the tracker",
+      "moves": [
+        {
+          "moveId": "MV-112-civic-office-council-d7-2026-10-21",
+          "cycle": 112,
+          "date": "2026-10-21",
+          "agentDir": "civic-office-council-d7",
+          "popid": "POP-00504",
+          "type": "answer",
+          "payload": {
+            "confrontationId": "CONF-112-civic-office-council-d7",
+            "text": "The pre-audit operational benchmark framework and intake criteria for INIT-005 are formally submitted to guide the upcoming review and safeguard the remaining $16,961,538.45 balance.",
+            "directiveCycle": 112,
+            "confrontationSeat": "civic-office-council-d7"
+          },
+          "status": "pending",
+          "at": "2026-10-21T10:45:16.826Z"
+        },
+        {
+          "moveId": "MV-111-civic-office-council-d7-2026-10-14",
+          "cycle": 111,
+          "date": "2026-10-14",
+          "agentDir": "civic-office-council-d7",
+          "popid": "POP-00504",
+          "type": "work",
+          "payload": {
+            "initiativeId": "INIT-005"
+          },
+          "status": "applied",
+          "at": "2026-10-19T04:22:18.851Z",
+          "closeCycle": 112,
+          "detail": "LastWorkCycle/LastWorkSeat written for INIT-005"
+        }
+      ]
+    },
+    "board": [
+      {
+        "id": "INIT-005",
+        "name": "Temescal Community Health Center",
+        "domain": "health",
+        "phase": "operational",
+        "status": "passed",
+        "voteCycle": 80,
+        "stage": "Standing",
+        "cyclesSinceStageChange": 5,
+        "lastStageChangeCycle": 108,
+        "sponsored": false,
+        "hoods": [
+          "Temescal"
+        ],
+        "needsNext": "Standing — delivers when Sick moves down against its baseline — metric evidence unavailable: current World_Config dump unavailable",
+        "budget": "budget $16,615,384.6 left, renewable",
+        "requirement": {
+          "stage": "Standing",
+          "next": "Delivering",
+          "clears": false,
+          "moveThatClears": null,
+          "blocked": null,
+          "text": "Standing — delivers when Sick moves down against its baseline"
+        },
+        "metricEvidence": {
+          "available": false,
+          "metricMoved": false,
+          "reason": "current World_Config dump unavailable"
+        }
+      }
+    ],
+    "boardAvailable": true,
+    "boardIds": [
+      "INIT-005"
+    ],
+    "boardText": "Your board:\n- INIT-005 Temescal Community Health Center [operational] — Standing — delivers when Sick moves down against its baseline — metric evidence unavailable: current World_Config dump unavailable — budget $16,615,384.6 left, renewable",
+    "categories": {
+      "available": true,
+      "list": [
+        {
+          "key": "health",
+          "label": "clinics, care",
+          "band": "$5M-$100M",
+          "canDeliver": true
+        },
+        {
+          "key": "transit",
+          "label": "stations, lines",
+          "band": "$20M-$500M",
+          "canDeliver": true
+        },
+        {
+          "key": "education",
+          "label": "schools, youth learning",
+          "band": "$1M-$50M",
+          "canDeliver": true
+        },
+        {
+          "key": "economic",
+          "label": "business, local economy",
+          "band": "$2M-$50M",
+          "canDeliver": false
+        },
+        {
+          "key": "workforce",
+          "label": "jobs, training",
+          "band": "$1M-$30M",
+          "canDeliver": false
+        },
+        {
+          "key": "safety",
+          "label": "public safety, response",
+          "band": "$2M-$30M",
+          "canDeliver": false
+        },
+        {
+          "key": "sports",
+          "label": "stadiums, recreation",
+          "band": "$10M-$500M",
+          "canDeliver": false
+        },
+        {
+          "key": "environment",
+          "label": "parks, air, water",
+          "band": "$1M-$30M",
+          "canDeliver": false
+        }
+      ],
+      "text": "Propose in your own words under one category; reach is hood, district, or all (citywide seats only). Budget must sit in the band. * = runs, but cannot reach Delivering yet.\n- health: clinics, care $5M-$100M\n- transit: stations, lines $20M-$500M\n- education: schools, youth learning $1M-$50M\n- economic*: business, local economy $2M-$50M\n- workforce*: jobs, training $1M-$30M\n- safety*: public safety, response $2M-$30M\n- sports*: stadiums, recreation $10M-$500M\n- environment*: parks, air, water $1M-$30M"
+    },
+    "petitionPool": {
+      "available": true,
+      "complaints": [],
+      "participation": [],
+      "unlocatedRows": 0,
+      "invalidCycleRows": 0,
+      "sinceCycle": 111,
+      "throughCycle": 113,
+      "window": "Complaint display C111–C113; condition counter C113 only.",
+      "text": "Complaint display C111–C113; condition counter C113 only.\nNo Civic complaints from your turf in this window."
+    },
+    "workingCity": {
+      "available": true,
+      "totalStaff": 4,
+      "shownStaff": 3,
+      "text": "The working city:\n- Elena Soria Dominguez: Four cycles of visioning, and still the same knot in my stomach: we've got the blueprints, the budget line… (C112)\n- Bobby Chen-Ramirez: The inspection list is clean again, which means I can sleep. But I keep coming back to that audit report —… (C112)\n- Vanessa Tran-Muñoz: The Chinatown call still sits heavy. We got someone there eventually, but the wait was too long, and I know… (C112)\n1 more staff beyond this block."
+    },
+    "patrol": {
+      "available": true,
+      "strategy": "balanced",
+      "text": "City patrol strategy: balanced (patrols spread evenly — the default posture). The Police Chief has not set one."
+    },
+    "confrontations": {
+      "available": true,
+      "all": [
+        {
+          "id": "CONF-108-civic-office-council-d7",
+          "cycle": 108,
+          "agentDir": "civic-office-council-d7",
+          "demand": "Warren Ashford — City Council District 7 — Sign off on the fire-rated wall inspections and drywall milestone for the Temescal Community Health Center (INIT-005) while addressing KONO district sentiment distress.",
+          "sourceText": "## Warren Ashford — City Council District 7\n\n- **Agent:** `.claude/agents/civic-office-council-d7/`\n- **Address:** Sign off on the fire-rated wall inspections and drywall milestone for the Temescal Community Health Center (INIT-005) while addressing KONO district sentiment distress.\n- **Why:** Following C107 MEP rough-in completion, INIT-005 requires C108 drywall inspection approvals; simultaneously, KONO records the lowest sentiment in Oakland (0.17 vs city 0.330, CrimeIndex 0.61).\n- **Acceptance:** Transmittal of the certified fire-rated wall inspection sign-off and a municipal service request targeting KONO corridor safety.\n- **Silence consequence:** Construction crews stall prior to interior enclosure, delaying the operational handover of the Temescal facility.\n",
+          "src": "output/mara-directives/mara_directive_c108_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-109-civic-office-council-d7",
+          "cycle": 109,
+          "agentDir": "civic-office-council-d7",
+          "demand": "Warren Ashford — City Council District 7 — Submit the certified fire-rated wall and drywall inspection sign-off for the Temescal Community Health Center (INIT-005).",
+          "sourceText": "## Warren Ashford — City Council District 7\n\n- **Agent:** `.claude/agents/civic-office-council-d7/`\n- **Address:** Submit the certified fire-rated wall and drywall inspection sign-off for the Temescal Community Health Center (INIT-005).\n- **Why:** Following C108 MEP verification, INIT-005 is scheduled for drywall installation and certified wall inspection sign-offs in C109, with the project board facing a C110 stall clock.\n- **Acceptance:** Transmittal of the certified building inspection sign-off and drywall authorization for the Temescal facility to the Planning and Building Department.\n- **Silence consequence:** Interior enclosure work on the Temescal facility stops, causing construction delays that compromise the facility's operational delivery schedule.\n",
+          "src": "output/mara-directives/mara_directive_c109_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-112-civic-office-council-d7",
+          "cycle": 112,
+          "agentDir": "civic-office-council-d7",
+          "demand": "Warren Ashford — City Council District 7 — File the pre-audit operational benchmark framework and intake criteria for the Temescal Community Health Center (INIT-005) ahead of its C113 utilization review.",
+          "sourceText": "## Warren Ashford — City Council District 7\n\n- **Agent:** `.claude/agents/civic-office-council-d7/`\n- **Address:** File the pre-audit operational benchmark framework and intake criteria for the Temescal Community Health Center (INIT-005) ahead of its C113 utilization review.\n- **Why:** INIT-005 is fully operational and faces its first-quarter utilization review milestone in C113, while Temescal records depressed retail vitality of 6.40 and an elevated crime index of 0.65.\n- **Acceptance:** Published post-occupancy audit benchmarks and patient intake metrics for INIT-005 in C113.\n- **Silence consequence:** The health center operates without baseline fiscal oversight metrics on the public record as its quarterly utilization deadline passes.\n",
+          "src": "output/mara-directives/mara_directive_c112_AUTO.txt",
+          "expectsMove": "answer"
+        }
+      ],
+      "open": [],
+      "answeredIds": [
+        "CONF-108-civic-office-council-d7",
+        "CONF-109-civic-office-council-d7",
+        "CONF-112-civic-office-council-d7"
+      ]
+    },
+    "conditions": {
+      "available": true,
+      "proposals": [],
+      "text": "No proposals in the available board/move evidence need condition counts."
+    },
+    "problemContinuity": {
+      "available": true,
+      "cycle": 113,
+      "problems": [
+        {
+          "id": "[\"KONO\",\"health.sickResidents\"]",
+          "hood": "KONO",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 17,
+          "cycle": 113
+        },
+        {
+          "id": "[\"Rockridge\",\"health.sickResidents\"]",
+          "hood": "Rockridge",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 104,
+          "cycle": 113
+        },
+        {
+          "id": "[\"Temescal\",\"health.sickResidents\"]",
+          "hood": "Temescal",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 89,
+          "cycle": 113
+        }
+      ],
+      "visibleProblems": [
+        {
+          "id": "[\"Rockridge\",\"health.sickResidents\"]",
+          "hood": "Rockridge",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 104,
+          "cycle": 113,
+          "passedOverCycle": 108
+        },
+        {
+          "id": "[\"KONO\",\"health.sickResidents\"]",
+          "hood": "KONO",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 17,
+          "cycle": 113,
+          "passedOverCycle": 109
+        },
+        {
+          "id": "[\"Temescal\",\"health.sickResidents\"]",
+          "hood": "Temescal",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 89,
+          "cycle": 113
+        }
+      ],
+      "passedOver": [
+        {
+          "id": "[\"Rockridge\",\"health.sickResidents\"]",
+          "hood": "Rockridge",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 104,
+          "cycle": 113,
+          "passedOverCycle": 108
+        },
+        {
+          "id": "[\"KONO\",\"health.sickResidents\"]",
+          "hood": "KONO",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 17,
+          "cycle": 113,
+          "passedOverCycle": 109
+        }
+      ],
+      "issues": [],
+      "missingFoldCycles": [],
+      "text": "Condition problems at C113; prior Sunday folds through C112.\n- Rockridge: sick residents 104 [passed over C108]\n- KONO: sick residents 17 [passed over C109]\n- Temescal: sick residents 89\n"
+    }
+  },
+  "signal": {
+    "kind": "district-heat",
+    "hoods": [
+      "Temescal",
+      "Rockridge",
+      "KONO"
+    ],
+    "src": "lib/districtMap.js + civic-office-map.json"
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00219",
+        "name": "Tyrone Bennington",
+        "neighborhood": "Temescal",
+        "role": "Nurse aide",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Temescal — Temescal Community Health Center — Second quarterly audit cycle"
+      },
+      {
+        "pop": "POP-00055",
+        "name": "Ross Cabral",
+        "neighborhood": "Temescal",
+        "role": "Catcher, Las Vegas Aviators (AAA)",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Temescal — Temescal Community Health Center — Second quarterly audit cycle"
+      },
+      {
+        "pop": "POP-00161",
+        "name": "Farrah Del Rio",
+        "neighborhood": "Temescal",
+        "role": "Journalist, Civic & Cultural Opinion",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Temescal — Temescal Community Health Center — Second quarterly audit cycle"
+      },
+      {
+        "pop": "POP-00169",
+        "name": "Brie Harris",
+        "neighborhood": "Temescal",
+        "role": "Flower Shop Owner",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Temescal — Temescal Community Health Center — Second quarterly audit cycle"
+      }
+    ],
+    "businesses": [],
+    "churches": [
+      {
+        "name": "Temescal Islamic Center",
+        "neighborhood": "Temescal",
+        "text": "job training workshop begins new session",
+        "src": "world_summary faith-event"
+      }
+    ],
+    "sources": []
+  },
+  "known": [
+    {
+      "id": "F-office-COUNCIL-D7",
+      "t": "FACT",
+      "text": "Warren Ashford holds COUNCIL-D7 at approval 65",
+      "src": "engine_audit snapshots.Civic_Office_Ledger"
+    },
+    {
+      "id": "F-INIT-005",
+      "t": "FACT",
+      "text": "Temescal Community Health Center is in operational; budget $45M — C107: MEP rough-ins completed, utility inspections certified ahead of schedule\nC108 conversion: passed C80 before the mayoral-action step existed; the mayor's own bill, recorded signed at C80.\nC108 conversion: Stage Standing — Temescal…",
+      "src": "output/initiative_tracker.json"
+    },
+    {
+      "id": "F-crime-Temescal",
+      "t": "FACT",
+      "text": "Temescal crime: property 44, violent 22, incidents 6 (cycle 113) — city property 35.9, violent 23.1, incidents 5.9",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-hood-Temescal",
+      "t": "FACT",
+      "text": "Temescal: sentiment 0.08 vs city 0.045; crime index 0.66 vs city 0.587; retail 5.29; housing pressure 2.5; steady; momentum 5",
+      "src": "engine_audit snapshots.Neighborhood_Map"
+    },
+    {
+      "id": "F-we-2",
+      "t": "FACT",
+      "text": "FAITH — community_program — Temescal: Temescal Islamic Center: job training workshop begins new session",
+      "src": "world_summary World Events"
+    }
+  ],
+  "role": {
+    "officeRows": [
+      {
+        "OfficeId": "COUNCIL-D7",
+        "PopId": "POP-00504",
+        "Holder": "Warren Ashford",
+        "District": "D7",
+        "Approval": "65"
+      }
+    ],
+    "civicPeers": [
+      {
+        "OfficeId": "COUNCIL-D6",
+        "PopId": "POP-00044",
+        "Holder": "Elliott Crane",
+        "District": "D6",
+        "Faction": "CRC",
+        "Approval": 55
+      },
+      {
+        "OfficeId": "COUNCIL-D8",
+        "PopId": "POP-00505",
+        "Holder": "Nina Chen",
+        "District": "D8",
+        "Faction": "CRC",
+        "Approval": 55
+      }
+    ]
+  },
+  "limits": {
+    "assert": [
+      "only named subjects in exposure.subjects",
+      "only named shops in exposure.businesses",
+      "only named churches in exposure.churches",
+      "only project facts in known",
+      "no invented POPID, vote, or complete"
+    ],
+    "invent": [
+      "no new citizens",
+      "no new businesses",
+      "no sheet numbers"
+    ]
+  },
+  "output": {
+    "contract": "statement + moves + numberMoved",
+    "dest": "office wiki (civic.16) then next Sunday city-hall packet"
+  }
+}

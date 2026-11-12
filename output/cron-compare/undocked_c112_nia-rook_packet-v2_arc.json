@@ -1,0 +1,17 @@
+{
+  "status": "arc-seed",
+  "cycle": "112",
+  "desk": "undocked",
+  "persona": "nia-rook",
+  "hood": "Temescal",
+  "quotes": [
+    {
+      "pop": "POP-00775",
+      "name": "Sammie Alvarez",
+      "quote": "To be honest, I've been wondering if my work still matters the way it used to. I've seen a lot of energy in Temescal, people caring about improving the neighborhood, but it doesn't seem to be translating into action. I'm not sure how people perceive me or my reporting, but I feel like I'm just trying to capture the essence of what's going on around here."
+    }
+  ],
+  "claim": "To be honest, I've been wondering if my work still matters the way it used to. I've seen a lot of energy in Temescal, people caring about improving the neighborhood, but it doesn't seem to be translating into action. I'm not sure how people perceive me or my reporting, but I feel like I'm just trying to capture the essence of what's going on around here.",
+  "src": "citizenVoice PRESS c112",
+  "ranAt": "2026-10-23T18:21:11.871Z"
+}

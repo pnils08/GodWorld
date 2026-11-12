@@ -1,0 +1,981 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "115",
+  "persona": "lila-mezran",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Dr. Lila Mezran",
+    "popid": "POP-00154"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-health",
+      "angle": "Chinatown carries the most sick residents (135) | 4 named on the hospital and cause records",
+      "label": "Chinatown carries the most sick residents (135) | 4 named on the hospital and cause records",
+      "hookLine": "Yu Zen is one of 4 residents on the record this cycle; Chinatown carries the most illness; 69 in hospital care citywide, 69 beds occupied; illness is up in Chinatown — Jax Caldera and Akua Adeyemi can speak for the block.",
+      "hood": "Chinatown",
+      "citizens": [
+        "Yu Zen (POP-00194)",
+        "Deacon Seymour (POP-00528)",
+        "Maurice Franklin (POP-00801)",
+        "Howard Travis (POP-00255)",
+        "Jax Caldera (POP-00799)",
+        "Akua Adeyemi (POP-00803)"
+      ],
+      "popids": [
+        "POP-00194",
+        "POP-00528",
+        "POP-00801",
+        "POP-00255",
+        "POP-00799",
+        "POP-00803"
+      ],
+      "ref": "output/beats/Neighborhood_Demographics.jsonl Sick @C115 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+      "cycle": 115
+    }
+  },
+  "angle": "output/test-shell/20261111-012823-lila-mezran-live/civic_c115_lila-mezran_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 2,
+  "quotes": [
+    {
+      "pop": "POP-00803",
+      "name": "Akua Adeyemi",
+      "quote": "I go into a lot of homes, and you can tell pretty quick when someone's down. It's not the mess or the dishes — it's the quiet. The TV off in the middle of the day. A chair pulled up by the window where somebody's been sitting a long time. Sometimes the medicine gets moved to the kitchen counter so it's right there where someone'll remember it. And you learn to work quiet, not to bang pipes, because somebody's sleeping in the next room. I see more of that in Chinatown than anywhere else I work. People here take care of their own — you'll see a neighbor bring soup, or a cousin come by after their shift. It's not always the hospital that carries the load. It's the family that rearranges the whole house around one sick person.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I go into a lot of homes, and you can tell pretty quick when someone's down. It's not the mess or the dishes — it's the quiet. The TV off in the middle of the day. A chair pulled up by the window where somebody's been sitting a long time. Sometimes the medicine gets moved to the kitchen counter so it's right there where someone'll remember it. And you learn to work quiet, not to bang pipes, because somebody's sleeping in the next room. I see more of that in Chinatown than anywhere else I work. People here take care of their own — you'll see a neighbor bring soup, or a cousin come by after their shift. It's not always the hospital that carries the load. It's the family that rearranges the whole house around one sick person.\",\n  \"fact_ids\": [\"F-eb5983bccc1f\", \"F-c1aac7746aca\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": [],\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-eb5983bccc1f",
+          "F-c1aac7746aca"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00803-e76ace7ba7",
+        "authoredQuote": true,
+        "publishableQuote": "I go into a lot of homes, and you can tell pretty quick when someone's down. It's not the mess or the dishes — it's the quiet. The TV off in the middle of the day. A chair pulled up by the window where somebody's been sitting a long time. Sometimes the medicine gets moved to the kitchen counter so it's right there where someone'll remember it. And you learn to work quiet, not to bang pipes, because somebody's sleeping in the next room. I see more of that in Chinatown than anywhere else I work. People here take care of their own — you'll see a neighbor bring soup, or a cousin come by after their shift. It's not always the hospital that carries the load. It's the family that rearranges the whole house around one sick person."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00803",
+          "name": "Akua Adeyemi",
+          "role": "Plumber",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Dr. Lila Mezran",
+          "question": "What does a plumber see when they go door to door — who's home sick, who's caring for someone, what does a household do when one person can't get out of bed? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-health",
+          "hood": "Chinatown",
+          "focus": "Chinatown carries the most sick residents in the city — 135, at or over the 6% watch bar — yet the hospital ledger names no one from the neighborhood, and the care trail shows 3 admissions and 6 beds occupied, all untracked. The piece will follow the neighborhood, not a ward: what it looks like, who is there, what a household does when someone is sick.",
+          "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C115 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Akua Adeyemi — Plumber — Chinatown",
+          "evidence": [
+            {
+              "id": "EV-29d6291087",
+              "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C115 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+              "text": "Yu Zen is one of 4 residents on the record this cycle; Chinatown carries the most illness; 69 in hospital care citywide, 69 beds occupied; illness is up in Chinatown — Jax Caldera and Akua Adeyemi can speak for the block."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Yu Zen is one of 4 residents on the record this cycle; Chinatown carries the most illness; 69 in hospital care citywide, 69 beds occupied; illness is up in Chinatown — Jax Caldera and Akua Adeyemi can speak for the block.",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C115 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+            "id": "F-935efc980c95"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C115",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-bc84fc0b7718"
+          },
+          {
+            "t": "FACT",
+            "text": "Chinatown carries the most sick residents (135) | 4 named on the hospital and cause records",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C115 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+            "id": "F-eb5983bccc1f"
+          },
+          {
+            "t": "FACT",
+            "text": "Sick residents by neighborhood: Chinatown 135 (-2 vs C114), East Oakland 117 (-2 vs C114), Ivy Hill 115 (-3 vs C114), Fruitvale 109 (-3 vs C114), Laurel 107 (+1 vs C114), San Antonio 107 (-2 vs C114), Grand Lake 99 (-2 vs C114), Rockridge 98 (-3 vs C114) — 1,771 across 22 neighborhoods",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C115",
+            "id": "F-c1aac7746aca"
+          },
+          {
+            "t": "FACT",
+            "text": "Yu Zen (Rockridge) — in hospital care, active, admitted C105 after a workplace accident",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00194",
+            "id": "F-fd3a5ebe69ce"
+          },
+          {
+            "t": "FACT",
+            "text": "Deacon Seymour (Lake Merritt) — in hospital care, active, admitted C105 after a workplace accident",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00528",
+            "id": "F-488f0c9977b3"
+          },
+          {
+            "t": "FACT",
+            "text": "Maurice Franklin (Rockridge) — in hospital care, active, admitted C106 after severe seasonal flu",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00801",
+            "id": "F-c6bc1a20be8e"
+          },
+          {
+            "t": "FACT",
+            "text": "The city illness rate stands at 4.0%, with 34 hospital admissions this cycle and 69 in care at the close.",
+            "src": "output/world_summary_c115.md \"## City State\"",
+            "id": "F-864011eb5188"
+          },
+          {
+            "t": "FACT",
+            "text": "Akua Adeyemi — Plumber — Chinatown",
+            "src": "Simulation_Ledger profile for POP-00803",
+            "id": "F-9d9b930ce663"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C11, Spring, holiday=none",
+            "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+            "id": "F-82d77e9a4a71"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00528",
+      "name": "Deacon Seymour",
+      "quote": "I spent my own stretch in a hospital bed not long ago, and I know what it's like to have your name on the door, to have people checking on you. But I also know that bed I was in—that was one bed, and there are a lot more filled by folks nobody's naming. Chinatown's carrying more sickness than anywhere else in this city, and if the ledger doesn't show them, that doesn't mean they're not there. It means nobody's counting. And when nobody's counting, people get missed. That's the part that keeps me up at night.",
+      "disp": "can't switch off, working themselves thin; draws people in, deep with them; warm, tender with people; curious, open to new things; steady, hard to shake; principled, plays it straight; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "{\"answer\":\"quote\",\"quote\":\"I spent my own stretch in a hospital bed not long ago, and I know what it's like to have your name on the door, to have people checking on you. But I also know that bed I was in—that was one bed, and there are a lot more filled by folks nobody's naming. Chinatown's carrying more sickness than anywhere else in this city, and if the ledger doesn't show them, that doesn't mean they're not there. It means nobody's counting. And when nobody's counting, people get missed. That's the part that keeps me up at night.\",\"fact_ids\":[\"F-eb5983bccc1f\",\"F-488f0c9977b3\"],\"basis\":\"lived-context\",\"unverifiedLead\":[],\"abstain_reason\":null}",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-eb5983bccc1f",
+          "F-488f0c9977b3"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00528-1bb2269ce7",
+        "authoredQuote": true,
+        "publishableQuote": "I spent my own stretch in a hospital bed not long ago, and I know what it's like to have your name on the door, to have people checking on you. But I also know that bed I was in—that was one bed, and there are a lot more filled by folks nobody's naming. Chinatown's carrying more sickness than anywhere else in this city, and if the ledger doesn't show them, that doesn't mean they're not there. It means nobody's counting. And when nobody's counting, people get missed. That's the part that keeps me up at night."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00528",
+          "name": "Deacon Seymour",
+          "role": "Manager, Oakland A's",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Dr. Lila Mezran",
+          "question": "What have you seen, felt, or understood about \"Chinatown carries the most sick residents in the city — 135, at or over the 6% watch bar — yet the hospital ledger names no one from the neighborhood, and the care trail shows 3 admissions and 6 beds occupied, all untracked. The piece will follow the neighborh\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-health",
+          "hood": "Chinatown",
+          "focus": "Chinatown carries the most sick residents in the city — 135, at or over the 6% watch bar — yet the hospital ledger names no one from the neighborhood, and the care trail shows 3 admissions and 6 beds occupied, all untracked. The piece will follow the neighborhood, not a ward: what it looks like, who is there, what a household does when someone is sick.",
+          "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C115 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Deacon Seymour — Manager, Oakland A's — Lake Merritt",
+          "evidence": [
+            {
+              "id": "EV-1b29860859",
+              "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C115 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+              "text": "Yu Zen is one of 4 residents on the record this cycle; Chinatown carries the most illness; 69 in hospital care citywide, 69 beds occupied; illness is up in Chinatown — Jax Caldera and Akua Adeyemi can speak for the block."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Deacon Seymour (Lake Merritt) — in hospital care, active, admitted C105 after a workplace accident",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00528",
+            "id": "F-488f0c9977b3"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C115",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-bc84fc0b7718"
+          },
+          {
+            "t": "FACT",
+            "text": "Chinatown carries the most sick residents (135) | 4 named on the hospital and cause records",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C115 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+            "id": "F-eb5983bccc1f"
+          },
+          {
+            "t": "FACT",
+            "text": "Yu Zen is one of 4 residents on the record this cycle; Chinatown carries the most illness; 69 in hospital care citywide, 69 beds occupied; illness is up in Chinatown — Jax Caldera and Akua Adeyemi can speak for the block.",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C115 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+            "id": "F-935efc980c95"
+          },
+          {
+            "t": "FACT",
+            "text": "Sick residents by neighborhood: Chinatown 135 (-2 vs C114), East Oakland 117 (-2 vs C114), Ivy Hill 115 (-3 vs C114), Fruitvale 109 (-3 vs C114), Laurel 107 (+1 vs C114), San Antonio 107 (-2 vs C114), Grand Lake 99 (-2 vs C114), Rockridge 98 (-3 vs C114) — 1,771 across 22 neighborhoods",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C115",
+            "id": "F-c1aac7746aca"
+          },
+          {
+            "t": "FACT",
+            "text": "Yu Zen (Rockridge) — in hospital care, active, admitted C105 after a workplace accident",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00194",
+            "id": "F-fd3a5ebe69ce"
+          },
+          {
+            "t": "FACT",
+            "text": "Maurice Franklin (Rockridge) — in hospital care, active, admitted C106 after severe seasonal flu",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00801",
+            "id": "F-c6bc1a20be8e"
+          },
+          {
+            "t": "FACT",
+            "text": "The city illness rate stands at 4.0%, with 34 hospital admissions this cycle and 69 in care at the close.",
+            "src": "output/world_summary_c115.md \"## City State\"",
+            "id": "F-864011eb5188"
+          },
+          {
+            "t": "FACT",
+            "text": "Deacon Seymour — Manager, Oakland A's — Lake Merritt",
+            "src": "Simulation_Ledger profile for POP-00528",
+            "id": "F-3375023542ff"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C11, Spring, holiday=none",
+            "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+            "id": "F-82d77e9a4a71"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-00799",
+      "name": "Jax Caldera",
+      "quote": null,
+      "disp": "driven, hard to sit still; draws people in, deep with them; restless for the new, adventurous; principled, plays it straight; often out in the neighborhood; a real fan, plans around games",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: unverifiedLead must be an array or null",
+      "raw": "{\"answer\":\"quote\",\"quote\":\"You want to know what a block does? We don't wait for a ledger to tell us who's sick. We know. The herbal shop lady knows who stopped coming in for their tea. The bakery knows whose order went unpicked. The seniors lunch program flyer on the board — that's not decoration, that's a lifeline. When someone's down, the shift gets covered because the person next door just shows up. Food gets brought because that's how we've always done it. And the elderly? We check. Not because a system told us to, but because Mrs. Chen's light being on at 6 a.m. is how we know she's okay. The hospital ledger can say whatever it wants. The block keeps its own books, and those books are full of names nobody's tracking.\",\"fact_ids\":[\"F-eb5983bccc1f\",\"F-864011eb5188\"],\"basis\":\"lived-context\",\"unverifiedLead\":\"The seniors lunch program flyer on the community bulletin board — I could ask around about who coordinates it and whether they've seen attendance drop this cycle.\",\"abstain_reason\":null}",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00799",
+          "name": "Jax Caldera",
+          "role": "Journalist, freelance accountability writer",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Dr. Lila Mezran",
+          "question": "What does a block do when 135 of its residents are sick — who covers the shift, who brings the food, who checks on the elderly? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-health",
+          "hood": "Chinatown",
+          "focus": "Chinatown carries the most sick residents in the city — 135, at or over the 6% watch bar — yet the hospital ledger names no one from the neighborhood, and the care trail shows 3 admissions and 6 beds occupied, all untracked. The piece will follow the neighborhood, not a ward: what it looks like, who is there, what a household does when someone is sick.",
+          "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C115 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Jax Caldera — Journalist, freelance accountability writer — Chinatown",
+          "evidence": [
+            {
+              "id": "EV-cb4157c8f6",
+              "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C115 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+              "text": "Yu Zen is one of 4 residents on the record this cycle; Chinatown carries the most illness; 69 in hospital care citywide, 69 beds occupied; illness is up in Chinatown — Jax Caldera and Akua Adeyemi can speak for the block."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Yu Zen is one of 4 residents on the record this cycle; Chinatown carries the most illness; 69 in hospital care citywide, 69 beds occupied; illness is up in Chinatown — Jax Caldera and Akua Adeyemi can speak for the block.",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C115 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+            "id": "F-935efc980c95"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C115",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-bc84fc0b7718"
+          },
+          {
+            "t": "FACT",
+            "text": "Chinatown carries the most sick residents (135) | 4 named on the hospital and cause records",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C115 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+            "id": "F-eb5983bccc1f"
+          },
+          {
+            "t": "FACT",
+            "text": "Sick residents by neighborhood: Chinatown 135 (-2 vs C114), East Oakland 117 (-2 vs C114), Ivy Hill 115 (-3 vs C114), Fruitvale 109 (-3 vs C114), Laurel 107 (+1 vs C114), San Antonio 107 (-2 vs C114), Grand Lake 99 (-2 vs C114), Rockridge 98 (-3 vs C114) — 1,771 across 22 neighborhoods",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C115",
+            "id": "F-c1aac7746aca"
+          },
+          {
+            "t": "FACT",
+            "text": "Yu Zen (Rockridge) — in hospital care, active, admitted C105 after a workplace accident",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00194",
+            "id": "F-fd3a5ebe69ce"
+          },
+          {
+            "t": "FACT",
+            "text": "Deacon Seymour (Lake Merritt) — in hospital care, active, admitted C105 after a workplace accident",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00528",
+            "id": "F-488f0c9977b3"
+          },
+          {
+            "t": "FACT",
+            "text": "Maurice Franklin (Rockridge) — in hospital care, active, admitted C106 after severe seasonal flu",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00801",
+            "id": "F-c6bc1a20be8e"
+          },
+          {
+            "t": "FACT",
+            "text": "The city illness rate stands at 4.0%, with 34 hospital admissions this cycle and 69 in care at the close.",
+            "src": "output/world_summary_c115.md \"## City State\"",
+            "id": "F-864011eb5188"
+          },
+          {
+            "t": "FACT",
+            "text": "Jax Caldera — Journalist, freelance accountability writer — Chinatown",
+            "src": "Simulation_Ledger profile for POP-00799",
+            "id": "F-54b72de0be36"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C11, Spring, holiday=none",
+            "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+            "id": "F-82d77e9a4a71"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00803",
+      "name": "Akua Adeyemi",
+      "quote": "I go into a lot of homes, and you can tell pretty quick when someone's down. It's not the mess or the dishes — it's the quiet. The TV off in the middle of the day. A chair pulled up by the window where somebody's been sitting a long time. Sometimes the medicine gets moved to the kitchen counter so it's right there where someone'll remember it. And you learn to work quiet, not to bang pipes, because somebody's sleeping in the next room. I see more of that in Chinatown than anywhere else I work. People here take care of their own — you'll see a neighbor bring soup, or a cousin come by after their shift. It's not always the hospital that carries the load. It's the family that rearranges the whole house around one sick person.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I go into a lot of homes, and you can tell pretty quick when someone's down. It's not the mess or the dishes — it's the quiet. The TV off in the middle of the day. A chair pulled up by the window where somebody's been sitting a long time. Sometimes the medicine gets moved to the kitchen counter so it's right there where someone'll remember it. And you learn to work quiet, not to bang pipes, because somebody's sleeping in the next room. I see more of that in Chinatown than anywhere else I work. People here take care of their own — you'll see a neighbor bring soup, or a cousin come by after their shift. It's not always the hospital that carries the load. It's the family that rearranges the whole house around one sick person.\",\n  \"fact_ids\": [\"F-eb5983bccc1f\", \"F-c1aac7746aca\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": [],\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-eb5983bccc1f",
+          "F-c1aac7746aca"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00803-e76ace7ba7",
+        "authoredQuote": true,
+        "publishableQuote": "I go into a lot of homes, and you can tell pretty quick when someone's down. It's not the mess or the dishes — it's the quiet. The TV off in the middle of the day. A chair pulled up by the window where somebody's been sitting a long time. Sometimes the medicine gets moved to the kitchen counter so it's right there where someone'll remember it. And you learn to work quiet, not to bang pipes, because somebody's sleeping in the next room. I see more of that in Chinatown than anywhere else I work. People here take care of their own — you'll see a neighbor bring soup, or a cousin come by after their shift. It's not always the hospital that carries the load. It's the family that rearranges the whole house around one sick person."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00803",
+          "name": "Akua Adeyemi",
+          "role": "Plumber",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Dr. Lila Mezran",
+          "question": "What does a plumber see when they go door to door — who's home sick, who's caring for someone, what does a household do when one person can't get out of bed? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-health",
+          "hood": "Chinatown",
+          "focus": "Chinatown carries the most sick residents in the city — 135, at or over the 6% watch bar — yet the hospital ledger names no one from the neighborhood, and the care trail shows 3 admissions and 6 beds occupied, all untracked. The piece will follow the neighborhood, not a ward: what it looks like, who is there, what a household does when someone is sick.",
+          "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C115 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Akua Adeyemi — Plumber — Chinatown",
+          "evidence": [
+            {
+              "id": "EV-29d6291087",
+              "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C115 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+              "text": "Yu Zen is one of 4 residents on the record this cycle; Chinatown carries the most illness; 69 in hospital care citywide, 69 beds occupied; illness is up in Chinatown — Jax Caldera and Akua Adeyemi can speak for the block."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Yu Zen is one of 4 residents on the record this cycle; Chinatown carries the most illness; 69 in hospital care citywide, 69 beds occupied; illness is up in Chinatown — Jax Caldera and Akua Adeyemi can speak for the block.",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C115 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+            "id": "F-935efc980c95"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C115",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-bc84fc0b7718"
+          },
+          {
+            "t": "FACT",
+            "text": "Chinatown carries the most sick residents (135) | 4 named on the hospital and cause records",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C115 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+            "id": "F-eb5983bccc1f"
+          },
+          {
+            "t": "FACT",
+            "text": "Sick residents by neighborhood: Chinatown 135 (-2 vs C114), East Oakland 117 (-2 vs C114), Ivy Hill 115 (-3 vs C114), Fruitvale 109 (-3 vs C114), Laurel 107 (+1 vs C114), San Antonio 107 (-2 vs C114), Grand Lake 99 (-2 vs C114), Rockridge 98 (-3 vs C114) — 1,771 across 22 neighborhoods",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C115",
+            "id": "F-c1aac7746aca"
+          },
+          {
+            "t": "FACT",
+            "text": "Yu Zen (Rockridge) — in hospital care, active, admitted C105 after a workplace accident",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00194",
+            "id": "F-fd3a5ebe69ce"
+          },
+          {
+            "t": "FACT",
+            "text": "Deacon Seymour (Lake Merritt) — in hospital care, active, admitted C105 after a workplace accident",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00528",
+            "id": "F-488f0c9977b3"
+          },
+          {
+            "t": "FACT",
+            "text": "Maurice Franklin (Rockridge) — in hospital care, active, admitted C106 after severe seasonal flu",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00801",
+            "id": "F-c6bc1a20be8e"
+          },
+          {
+            "t": "FACT",
+            "text": "The city illness rate stands at 4.0%, with 34 hospital admissions this cycle and 69 in care at the close.",
+            "src": "output/world_summary_c115.md \"## City State\"",
+            "id": "F-864011eb5188"
+          },
+          {
+            "t": "FACT",
+            "text": "Akua Adeyemi — Plumber — Chinatown",
+            "src": "Simulation_Ledger profile for POP-00803",
+            "id": "F-9d9b930ce663"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C11, Spring, holiday=none",
+            "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+            "id": "F-82d77e9a4a71"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00194",
+      "name": "Yu Zen",
+      "quote": null,
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; warm, tender with people; curious, open to new things; devoted, family is everything",
+      "recorded": false,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: answer must be quote|abstain",
+      "raw": "{\"answer\":\"I've been on the other side of that ledger — lying in a hospital bed myself after my accident. And I'll tell you, when you're the one in the bed, you don't think about what neighborhood you're from. You think about getting home to your family. But those numbers — 135 sick in Chinatown — that's not a statistic to me. That's somebody's grandmother, somebody's father, somebody's kid who can't get to school. And when I look at the care trail and see nobody from that neighborhood on it, I know what that means. It means people are staying home because they can't afford not to, or they're afraid of what the bill will do to them. I've seen that fear in my own work — the paperwork, the claims, the fine print. When you're the one in the bed, you don't care about any of that. You just want someone to see you. And right now, it sounds like Chinatown isn't being seen.\",\"fact_ids\":[\"F-eb5983bccc1f\",\"F-fd3a5ebe69ce\"],\"basis\":\"lived-context\",\"unverifiedLead\":null,\"abstain_reason\":null}",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00194",
+          "name": "Yu Zen",
+          "role": "Commercial Insurance Broker",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Dr. Lila Mezran",
+          "question": "What have you seen, felt, or understood about \"Chinatown carries the most sick residents in the city — 135, at or over the 6% watch bar — yet the hospital ledger names no one from the neighborhood, and the care trail shows 3 admissions and 6 beds occupied, all untracked. The piece will follow the neighborh\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-health",
+          "hood": "Chinatown",
+          "focus": "Chinatown carries the most sick residents in the city — 135, at or over the 6% watch bar — yet the hospital ledger names no one from the neighborhood, and the care trail shows 3 admissions and 6 beds occupied, all untracked. The piece will follow the neighborhood, not a ward: what it looks like, who is there, what a household does when someone is sick.",
+          "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C115 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Yu Zen — Commercial Insurance Broker — Rockridge",
+          "evidence": [
+            {
+              "id": "EV-4970deb33b",
+              "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C115 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+              "text": "Yu Zen is one of 4 residents on the record this cycle; Chinatown carries the most illness; 69 in hospital care citywide, 69 beds occupied; illness is up in Chinatown — Jax Caldera and Akua Adeyemi can speak for the block."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Yu Zen is one of 4 residents on the record this cycle; Chinatown carries the most illness; 69 in hospital care citywide, 69 beds occupied; illness is up in Chinatown — Jax Caldera and Akua Adeyemi can speak for the block.",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C115 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+            "id": "F-935efc980c95"
+          },
+          {
+            "t": "FACT",
+            "text": "Yu Zen (Rockridge) — in hospital care, active, admitted C105 after a workplace accident",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00194",
+            "id": "F-fd3a5ebe69ce"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C115",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-bc84fc0b7718"
+          },
+          {
+            "t": "FACT",
+            "text": "Chinatown carries the most sick residents (135) | 4 named on the hospital and cause records",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C115 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+            "id": "F-eb5983bccc1f"
+          },
+          {
+            "t": "FACT",
+            "text": "Sick residents by neighborhood: Chinatown 135 (-2 vs C114), East Oakland 117 (-2 vs C114), Ivy Hill 115 (-3 vs C114), Fruitvale 109 (-3 vs C114), Laurel 107 (+1 vs C114), San Antonio 107 (-2 vs C114), Grand Lake 99 (-2 vs C114), Rockridge 98 (-3 vs C114) — 1,771 across 22 neighborhoods",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C115",
+            "id": "F-c1aac7746aca"
+          },
+          {
+            "t": "FACT",
+            "text": "Deacon Seymour (Lake Merritt) — in hospital care, active, admitted C105 after a workplace accident",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00528",
+            "id": "F-488f0c9977b3"
+          },
+          {
+            "t": "FACT",
+            "text": "Maurice Franklin (Rockridge) — in hospital care, active, admitted C106 after severe seasonal flu",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00801",
+            "id": "F-c6bc1a20be8e"
+          },
+          {
+            "t": "FACT",
+            "text": "The city illness rate stands at 4.0%, with 34 hospital admissions this cycle and 69 in care at the close.",
+            "src": "output/world_summary_c115.md \"## City State\"",
+            "id": "F-864011eb5188"
+          },
+          {
+            "t": "FACT",
+            "text": "Yu Zen — Commercial Insurance Broker — Rockridge",
+            "src": "Simulation_Ledger profile for POP-00194",
+            "id": "F-0cea0a3d84d3"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C11, Spring, holiday=none",
+            "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+            "id": "F-82d77e9a4a71"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00528",
+      "name": "Deacon Seymour",
+      "quote": "I spent my own stretch in a hospital bed not long ago, and I know what it's like to have your name on the door, to have people checking on you. But I also know that bed I was in—that was one bed, and there are a lot more filled by folks nobody's naming. Chinatown's carrying more sickness than anywhere else in this city, and if the ledger doesn't show them, that doesn't mean they're not there. It means nobody's counting. And when nobody's counting, people get missed. That's the part that keeps me up at night.",
+      "disp": "can't switch off, working themselves thin; draws people in, deep with them; warm, tender with people; curious, open to new things; steady, hard to shake; principled, plays it straight; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "{\"answer\":\"quote\",\"quote\":\"I spent my own stretch in a hospital bed not long ago, and I know what it's like to have your name on the door, to have people checking on you. But I also know that bed I was in—that was one bed, and there are a lot more filled by folks nobody's naming. Chinatown's carrying more sickness than anywhere else in this city, and if the ledger doesn't show them, that doesn't mean they're not there. It means nobody's counting. And when nobody's counting, people get missed. That's the part that keeps me up at night.\",\"fact_ids\":[\"F-eb5983bccc1f\",\"F-488f0c9977b3\"],\"basis\":\"lived-context\",\"unverifiedLead\":[],\"abstain_reason\":null}",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-eb5983bccc1f",
+          "F-488f0c9977b3"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00528-1bb2269ce7",
+        "authoredQuote": true,
+        "publishableQuote": "I spent my own stretch in a hospital bed not long ago, and I know what it's like to have your name on the door, to have people checking on you. But I also know that bed I was in—that was one bed, and there are a lot more filled by folks nobody's naming. Chinatown's carrying more sickness than anywhere else in this city, and if the ledger doesn't show them, that doesn't mean they're not there. It means nobody's counting. And when nobody's counting, people get missed. That's the part that keeps me up at night."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00528",
+          "name": "Deacon Seymour",
+          "role": "Manager, Oakland A's",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Dr. Lila Mezran",
+          "question": "What have you seen, felt, or understood about \"Chinatown carries the most sick residents in the city — 135, at or over the 6% watch bar — yet the hospital ledger names no one from the neighborhood, and the care trail shows 3 admissions and 6 beds occupied, all untracked. The piece will follow the neighborh\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-health",
+          "hood": "Chinatown",
+          "focus": "Chinatown carries the most sick residents in the city — 135, at or over the 6% watch bar — yet the hospital ledger names no one from the neighborhood, and the care trail shows 3 admissions and 6 beds occupied, all untracked. The piece will follow the neighborhood, not a ward: what it looks like, who is there, what a household does when someone is sick.",
+          "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C115 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Deacon Seymour — Manager, Oakland A's — Lake Merritt",
+          "evidence": [
+            {
+              "id": "EV-1b29860859",
+              "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C115 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+              "text": "Yu Zen is one of 4 residents on the record this cycle; Chinatown carries the most illness; 69 in hospital care citywide, 69 beds occupied; illness is up in Chinatown — Jax Caldera and Akua Adeyemi can speak for the block."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Deacon Seymour (Lake Merritt) — in hospital care, active, admitted C105 after a workplace accident",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00528",
+            "id": "F-488f0c9977b3"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C115",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-bc84fc0b7718"
+          },
+          {
+            "t": "FACT",
+            "text": "Chinatown carries the most sick residents (135) | 4 named on the hospital and cause records",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C115 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+            "id": "F-eb5983bccc1f"
+          },
+          {
+            "t": "FACT",
+            "text": "Yu Zen is one of 4 residents on the record this cycle; Chinatown carries the most illness; 69 in hospital care citywide, 69 beds occupied; illness is up in Chinatown — Jax Caldera and Akua Adeyemi can speak for the block.",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C115 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+            "id": "F-935efc980c95"
+          },
+          {
+            "t": "FACT",
+            "text": "Sick residents by neighborhood: Chinatown 135 (-2 vs C114), East Oakland 117 (-2 vs C114), Ivy Hill 115 (-3 vs C114), Fruitvale 109 (-3 vs C114), Laurel 107 (+1 vs C114), San Antonio 107 (-2 vs C114), Grand Lake 99 (-2 vs C114), Rockridge 98 (-3 vs C114) — 1,771 across 22 neighborhoods",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C115",
+            "id": "F-c1aac7746aca"
+          },
+          {
+            "t": "FACT",
+            "text": "Yu Zen (Rockridge) — in hospital care, active, admitted C105 after a workplace accident",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00194",
+            "id": "F-fd3a5ebe69ce"
+          },
+          {
+            "t": "FACT",
+            "text": "Maurice Franklin (Rockridge) — in hospital care, active, admitted C106 after severe seasonal flu",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00801",
+            "id": "F-c6bc1a20be8e"
+          },
+          {
+            "t": "FACT",
+            "text": "The city illness rate stands at 4.0%, with 34 hospital admissions this cycle and 69 in care at the close.",
+            "src": "output/world_summary_c115.md \"## City State\"",
+            "id": "F-864011eb5188"
+          },
+          {
+            "t": "FACT",
+            "text": "Deacon Seymour — Manager, Oakland A's — Lake Merritt",
+            "src": "Simulation_Ledger profile for POP-00528",
+            "id": "F-3375023542ff"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C11, Spring, holiday=none",
+            "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+            "id": "F-82d77e9a4a71"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-11-09T19:18:16.220Z"
+}

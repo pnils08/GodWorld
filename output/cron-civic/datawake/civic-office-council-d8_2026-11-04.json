@@ -1,0 +1,68 @@
+{
+  "office": "council_d8",
+  "agentDir": "civic-office-council-d8",
+  "holder": "Nina Chen",
+  "popid": "POP-00505",
+  "title": "City Council District 8",
+  "date": "2026-11-04",
+  "cycle": 114,
+  "model": "google/gemini-3.8-flash",
+  "statement": "District 8 is calling the roll-call vote on the $2.5M Commercial Stabilization for Grand Lake ordinance (INIT-009) to ensure strict fiscal tracking and verification on the official record. Concurrently, we are reviewing administrative service standards in Adams Point, where sentiment measures -0.02 against the city baseline of 0.115 despite retail vitality reaching 7.01 and decay momentum standing at 0. Adams Point residents—including Grace Yamamoto, Devon Willis, Ezekiel Campbell, and Rev. Han—deserve documented public service schedules, just as Eastlake requires codified municipal baseline allocations. Every neighborhood in District 8 must receive thorough procedural oversight and verified service delivery.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-114-civic-office-council-d8",
+        "text": "District 8 is docketing the $2.5M Commercial Stabilization for Grand Lake ordinance (INIT-009) for a full recorded council roll-call vote under rigorous audit protocols, while requiring documented baseline municipal service allocations and oversight reporting for the Eastlake commercial corridor.",
+        "directiveCycle": 114,
+        "confrontationSeat": "civic-office-council-d8"
+      }
+    }
+  ],
+  "movesRejected": [
+    {
+      "type": "call-vote",
+      "reason": "call-vote-row-not-petition-pending(INIT-009 — Status=failed, VoteCycle=blank)"
+    }
+  ],
+  "numberMoved": "1",
+  "ranAt": "2026-11-04T11:45:48.106Z",
+  "usage": {
+    "prompt_tokens": 6209,
+    "completion_tokens": 3821,
+    "total_tokens": 10030,
+    "cost": 0.0189855,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0189855,
+      "upstream_inference_prompt_cost": 0.00465675,
+      "upstream_inference_completions_cost": 0.01432875
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 3501,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "fellBackFrom": null,
+  "evidenceGenerationHash": "625fc65e258fd2fe3d38d613ddc8fe6e9ae4ae4487a8350ea1d8882ac488130d",
+  "evidenceReads": [],
+  "provider": "Google",
+  "finishReason": "stop",
+  "elapsedMs": 19194,
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00505",
+    "id": "m2EWfUZRqJ1pDEyRJKjJBs",
+    "customId": "cp-POP-00505-c114-CIVIC-datawake-2026-11-04"
+  }
+}

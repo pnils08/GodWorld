@@ -1,0 +1,16 @@
+{
+  "draft": "civic_c113_lila-mezran_packet-v2_anthropic-claude-haiku-5-5.md",
+  "draftSha256": "6fe95285272677f7c37bc754e0e6e969c48223eaa91498567bfbe0f806a9d37c",
+  "verdict": "output/cron-compare/civic_c113_lila-mezran_packet-v2_anthropic-claude-haiku-5-5.rhea.json",
+  "flags": [
+    {
+      "claim": "\"The hospital counts the ones it has to take,\" she says. \"We're counting the rest, and nobody's paying us to do it.\"",
+      "issue": "Fabricated speech: additional quote attributed to named ledger citizen Marisio Curazo (POP-00698) that does not exist in the provided interview record.",
+      "severity": "high"
+    }
+  ],
+  "checkFlags": [],
+  "contamination": [],
+  "summary": "Failed due to fabricated speech attributed to named ledger citizen Marisio Curazo.",
+  "reviewedAt": "2026-10-27T04:13:56.111Z"
+}

@@ -1,0 +1,465 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00008",
+    "name": "P Slayer",
+    "role": "desk reporter",
+    "desk": "sports"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+    "approach": "Fan-heat approach (P Slayer pulse): do NOT open from the FO press release or the award board. Open from gut or Oakland sensory (bar, lot, bleacher row, BART after). First-person I/we only. Pick 1–2 charge-bag modes from this slice. Friction pivot required — name the counter-argument, kill it. ONE real foil number max (from FoilNumber / AnchorFacts); never invent x-stats or roster moves. Hook PriorTake when present — eat it or double down (\"I was wrong\" is craft). End on charge that sticks: dare, confession, or update. Not Anthony. Not Hal. Not multi-voice sports-desk average.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "fan-heat",
+      "fanCharge": "grief",
+      "bagModes": [
+        "3 Friction Pivot",
+        "6 Superman We Asked Him to Be",
+        "7 We Still Believe / We're Done"
+      ],
+      "friction": "Grief without inventing medical private life — we demanded too much.",
+      "centralFeeling": "Oakland should feel the cost of what we asked a man to carry.",
+      "priorTake": "NONE — write cold or invent no prior; wall may still inject at wake",
+      "sceneRule": "You may invent unnamed bar / lot / BART / bleacher texture that contradicts nothing on this slice. Do not invent star players, contracts, stats, or quotes. Named people stay on PLAYERS list or Tribune colleagues (Anthony, Hal, Mags) as foils."
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "injury-load",
+    "hood": "Downtown",
+    "src": "Oakland_Sports_Feed cycle 113; world_summary_c113.md \"## Sports\" · The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+    "plan": {
+      "focus": "The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+      "closeQuestion": "Who will Paulson choose to start in left field?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00051",
+        "name": "Desmond Morton",
+        "profile": "Desmond Morton — Left Fielder, Oakland A's",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00079",
+        "name": "Frank Reyna",
+        "profile": "Frank Reyna — Right Fielder, Oakland A's",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00022",
+        "name": "Danny Horn",
+        "profile": "Danny Horn — Center Fielder, Oakland A's - Best player in the MLB",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00598",
+        "name": "Vladimir Gonzalez",
+        "profile": "Vladimir Gonzalez — Right Fielder, Oakland A's",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00022-7304c4925a",
+        "pop": "POP-00022",
+        "name": "Danny Horn",
+        "quote": "As the best player in baseball and our center fielder, my status doesn't directly influence outfield decisions, but I know Paulson's got a tough call ahead with five outfielders for three spots. Desmond Morton, Frank Reyna, Vladimir Gonzalez, JR Rosado, and I'm in center, so it's about who gets left field and right field. Vladimir's been clutch, and Desmond's got those five tools, so I think they're strong contenders. It's not my call, but I trust Paulson to make the right decision for the team.",
+        "factIds": [
+          "F-9b7cfdc06b31",
+          "F-dcf29d0d5e3b",
+          "F-ef4aff038e21"
+        ],
+        "src": "packet.W2[POP-00022]"
+      },
+      {
+        "id": "Q-POP-00051-8bce43b5a4",
+        "pop": "POP-00051",
+        "name": "Desmond Morton",
+        "quote": "To be honest, I'm not sure if my 5-tool potential makes me a lock for one of the outfield spots. The A's have some talented guys vying for the same positions, and it's up to Paulson to decide. I've seen Danny Horn is starting in center field, and Vladimir's coming off a great season, so it's looking like a tough competition. I think it's more about how we all fit together as a team rather than just individual talent.",
+        "factIds": [
+          "F-dcf29d0d5e3b",
+          "F-e9774345218c",
+          "F-89ee9a459546"
+        ],
+        "src": "packet.W2[POP-00051]"
+      },
+      {
+        "id": "Q-POP-00598-3819c9e40b",
+        "pop": "POP-00598",
+        "name": "Vladimir Gonzalez",
+        "quote": "To be honest, I'm not sure how my clutch performance will impact my chances in the outfield. We've got a lot of talented guys vying for spots, and it's up to Paulson to decide. I know I've had a good season, but with Desmond Morton and Frank Reyna also playing well, it's a tough call.",
+        "factIds": [
+          "F-02ab66f6dc49",
+          "F-dcf29d0d5e3b",
+          "F-89ee9a459546"
+        ],
+        "src": "packet.W2[POP-00598]"
+      },
+      {
+        "id": "Q-POP-00079-cae3f238a0",
+        "pop": "POP-00079",
+        "name": "Frank Reyna",
+        "quote": "I'm one of the guys fighting for a spot, to be honest. It's tough seeing five outfielders for three positions. I know I'm a power hitter and have shown I can succeed at this level, but it's a grind. I've been around the block with Rayon Dart, and we talk about stuff like this. He's seen it before. I just need to stay focused and keep doing what I'm doing.",
+        "factIds": [
+          "F-dcf29d0d5e3b",
+          "F-e9774345218c",
+          "F-89ee9a459546"
+        ],
+        "src": "packet.W2[POP-00079]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "P Slayer",
+        "text": "The decision may come down to a trade-off between experience and potential",
+        "usable": false
+      },
+      {
+        "from": "P Slayer",
+        "text": "Paulson's past decisions may influence the current outfield shuffle",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C113",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-876f95b5eb98"
+    },
+    {
+      "t": "FACT",
+      "text": "The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+      "src": "Oakland_Sports_Feed cycle 113; world_summary_c113.md \"## Sports\" · The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+      "id": "F-89ee9a459546"
+    },
+    {
+      "t": "FACT",
+      "text": "Grief without inventing medical private life — we demanded too much.",
+      "src": "Oakland_Sports_Feed cycle 113; world_summary_c113.md \"## Sports\" · The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+      "id": "F-e1c853446011"
+    },
+    {
+      "t": "FACT",
+      "text": "StoryAngle (feed): The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+      "src": "Oakland_Sports_Feed cycle 113; world_summary_c113.md \"## Sports\" · The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+      "id": "F-9b7cfdc06b31"
+    },
+    {
+      "t": "FACT",
+      "text": "Stats (feed): Desmond Morton/285AB/.291AVG/7HR/44RBI, Frank Reyna/164/.317AVG/14HR/34RBI,JR Rosado/184AB/.298AVG/7HR/27RBI",
+      "src": "Oakland_Sports_Feed cycle 113; world_summary_c113.md \"## Sports\" · The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+      "id": "F-dcf29d0d5e3b"
+    },
+    {
+      "t": "FACT",
+      "text": "Event: A's — rumor (off-season)",
+      "src": "Oakland_Sports_Feed cycle 113; world_summary_c113.md \"## Sports\" · The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+      "id": "F-8de0c1410dea"
+    },
+    {
+      "t": "FACT",
+      "text": "NamesUsed: Desmond Morton (LF), Frank Reyna (RF), Danny Horn (CF), Vladimir Gonzalez (RF), JR Rosado (LF)",
+      "src": "Oakland_Sports_Feed cycle 113; world_summary_c113.md \"## Sports\" · The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+      "id": "F-e9774345218c"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C9, Winter, holiday=none",
+      "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+      "id": "F-ab9d6786094e"
+    },
+    {
+      "t": "FACT",
+      "text": "Danny Horn — Center Fielder, Oakland A's - Best player in the MLB",
+      "src": "Simulation_Ledger profile for POP-00022",
+      "id": "F-ef4aff038e21"
+    },
+    {
+      "t": "FACT",
+      "text": "Vladimir Gonzalez — Right Fielder, Oakland A's",
+      "src": "Simulation_Ledger profile for POP-00598",
+      "id": "F-02ab66f6dc49"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "p-slayer-fan-heat-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Turn a Packet-backed sports result or roster move into fan consequence. Owning or doubling down on a prior take and applying fan or front-office pressure are success; press-box analysis and tidy resolution are not.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "first-person I/we fan-heat column",
+      "targetWords": "400-700",
+      "opening": "a bar, lot, bleacher, sidewalk, or sports-viewing sensory moment",
+      "closing": "a dare, confession, or update with the central friction still live"
+    },
+    "authorizedTexture": [
+      "a bar, lot, bleacher, sidewalk, or sports-viewing setting; a named in-world venue is allotted texture",
+      "the reporter's own presence, gut reaction, or sensory observation",
+      "collective I or we used as columnist rhetoric and emotional stance, not as measured public sentiment or a poll",
+      "a rhetorical counterargument from unnamed fans used as an argument foil, not as an attributed quote",
+      "metaphor and emotional inference grounded in a supplied fact"
+    ],
+    "textureConditions": [
+      "I or we must not claim a verified collective sentiment, count, gathering, or event",
+      "an unnamed counterargument must remain rhetorical rather than becoming a quote or sourced statement",
+      "scene texture must carry no roster move, result, stat, contract, injury, player act, or front-office act",
+      "a prior-take confession or paraphrase requires a Packet-backed prior article or wall entry, and an exact quote requires supplied text",
+      "in-world named spots that are not real Oakland are allotted hallucination and belong on INTAKE BIZ if newly named",
+      "player, team, roster, statistic, result, and front-office facts still require Packet support"
+    ],
+    "canonBlockers": [
+      "a real-world player, team, venue, business, institution, or organization imported into the city; or an invented person given the authority of an established citizen",
+      "an unsupported roster move, signing, trade, non-move, result, record, streak, award, contract, or front-office act",
+      "an unsupported stat, metric, number, date, duration, or salary",
+      "an unsupported injury, medical, private-life, or mindset claim",
+      "a fabricated player, coach, or front-office quote or interview",
+      "collective fan sentiment presented as measured fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-b4eaf8a8dcf8",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-876f95b5eb98",
+        "t": "FACT",
+        "text": "Current cycle: C113",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-89ee9a459546",
+        "t": "FACT",
+        "text": "The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+        "src": "Oakland_Sports_Feed cycle 113; world_summary_c113.md \"## Sports\" · The Outfield squeeze for next season. 5 Outfielders for 3 positions"
+      },
+      {
+        "id": "F-e1c853446011",
+        "t": "FACT",
+        "text": "Grief without inventing medical private life — we demanded too much.",
+        "src": "Oakland_Sports_Feed cycle 113; world_summary_c113.md \"## Sports\" · The Outfield squeeze for next season. 5 Outfielders for 3 positions"
+      },
+      {
+        "id": "F-9b7cfdc06b31",
+        "t": "FACT",
+        "text": "StoryAngle (feed): The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+        "src": "Oakland_Sports_Feed cycle 113; world_summary_c113.md \"## Sports\" · The Outfield squeeze for next season. 5 Outfielders for 3 positions"
+      },
+      {
+        "id": "F-dcf29d0d5e3b",
+        "t": "FACT",
+        "text": "Stats (feed): Desmond Morton/285AB/.291AVG/7HR/44RBI, Frank Reyna/164/.317AVG/14HR/34RBI,JR Rosado/184AB/.298AVG/7HR/27RBI",
+        "src": "Oakland_Sports_Feed cycle 113; world_summary_c113.md \"## Sports\" · The Outfield squeeze for next season. 5 Outfielders for 3 positions"
+      },
+      {
+        "id": "F-8de0c1410dea",
+        "t": "FACT",
+        "text": "Event: A's — rumor (off-season)",
+        "src": "Oakland_Sports_Feed cycle 113; world_summary_c113.md \"## Sports\" · The Outfield squeeze for next season. 5 Outfielders for 3 positions"
+      },
+      {
+        "id": "F-e9774345218c",
+        "t": "FACT",
+        "text": "NamesUsed: Desmond Morton (LF), Frank Reyna (RF), Danny Horn (CF), Vladimir Gonzalez (RF), JR Rosado (LF)",
+        "src": "Oakland_Sports_Feed cycle 113; world_summary_c113.md \"## Sports\" · The Outfield squeeze for next season. 5 Outfielders for 3 positions"
+      },
+      {
+        "id": "F-ab9d6786094e",
+        "t": "FACT",
+        "text": "Calendar: Y3C9, Winter, holiday=none",
+        "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)"
+      },
+      {
+        "id": "F-ef4aff038e21",
+        "t": "FACT",
+        "text": "Danny Horn — Center Fielder, Oakland A's - Best player in the MLB",
+        "src": "Simulation_Ledger profile for POP-00022"
+      },
+      {
+        "id": "F-02ab66f6dc49",
+        "t": "FACT",
+        "text": "Vladimir Gonzalez — Right Fielder, Oakland A's",
+        "src": "Simulation_Ledger profile for POP-00598"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00022-7304c4925a",
+        "speakerId": "POP-00022",
+        "speakerName": "Danny Horn",
+        "text": "As the best player in baseball and our center fielder, my status doesn't directly influence outfield decisions, but I know Paulson's got a tough call ahead with five outfielders for three spots. Desmond Morton, Frank Reyna, Vladimir Gonzalez, JR Rosado, and I'm in center, so it's about who gets left field and right field. Vladimir's been clutch, and Desmond's got those five tools, so I think they're strong contenders. It's not my call, but I trust Paulson to make the right decision for the team.",
+        "factIds": [
+          "F-9b7cfdc06b31",
+          "F-dcf29d0d5e3b",
+          "F-ef4aff038e21"
+        ],
+        "src": "packet.W2[POP-00022]"
+      },
+      {
+        "id": "Q-POP-00051-8bce43b5a4",
+        "speakerId": "POP-00051",
+        "speakerName": "Desmond Morton",
+        "text": "To be honest, I'm not sure if my 5-tool potential makes me a lock for one of the outfield spots. The A's have some talented guys vying for the same positions, and it's up to Paulson to decide. I've seen Danny Horn is starting in center field, and Vladimir's coming off a great season, so it's looking like a tough competition. I think it's more about how we all fit together as a team rather than just individual talent.",
+        "factIds": [
+          "F-dcf29d0d5e3b",
+          "F-e9774345218c",
+          "F-89ee9a459546"
+        ],
+        "src": "packet.W2[POP-00051]"
+      },
+      {
+        "id": "Q-POP-00598-3819c9e40b",
+        "speakerId": "POP-00598",
+        "speakerName": "Vladimir Gonzalez",
+        "text": "To be honest, I'm not sure how my clutch performance will impact my chances in the outfield. We've got a lot of talented guys vying for spots, and it's up to Paulson to decide. I know I've had a good season, but with Desmond Morton and Frank Reyna also playing well, it's a tough call.",
+        "factIds": [
+          "F-02ab66f6dc49",
+          "F-dcf29d0d5e3b",
+          "F-89ee9a459546"
+        ],
+        "src": "packet.W2[POP-00598]"
+      },
+      {
+        "id": "Q-POP-00079-cae3f238a0",
+        "speakerId": "POP-00079",
+        "speakerName": "Frank Reyna",
+        "text": "I'm one of the guys fighting for a spot, to be honest. It's tough seeing five outfielders for three positions. I know I'm a power hitter and have shown I can succeed at this level, but it's a grind. I've been around the block with Rayon Dart, and we talk about stuff like this. He's seen it before. I just need to stay focused and keep doing what I'm doing.",
+        "factIds": [
+          "F-dcf29d0d5e3b",
+          "F-e9774345218c",
+          "F-89ee9a459546"
+        ],
+        "src": "packet.W2[POP-00079]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00051",
+        "name": "Desmond Morton",
+        "profile": "Desmond Morton — Left Fielder, Oakland A's",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00079",
+        "name": "Frank Reyna",
+        "profile": "Frank Reyna — Right Fielder, Oakland A's",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00022",
+        "name": "Danny Horn",
+        "profile": "Danny Horn — Center Fielder, Oakland A's - Best player in the MLB",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00598",
+        "name": "Vladimir Gonzalez",
+        "profile": "Vladimir Gonzalez — Right Fielder, Oakland A's",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "P Slayer",
+        "text": "The decision may come down to a trade-off between experience and potential",
+        "publishable": false
+      },
+      {
+        "from": "P Slayer",
+        "text": "Paulson's past decisions may influence the current outfield shuffle",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "a bar, lot, bleacher, sidewalk, or sports-viewing setting; a named in-world venue is allotted texture",
+      "the reporter's own presence, gut reaction, or sensory observation",
+      "collective I or we used as columnist rhetoric and emotional stance, not as measured public sentiment or a poll",
+      "a rhetorical counterargument from unnamed fans used as an argument foil, not as an attributed quote",
+      "metaphor and emotional inference grounded in a supplied fact"
+    ],
+    "textureConditions": [
+      "I or we must not claim a verified collective sentiment, count, gathering, or event",
+      "an unnamed counterargument must remain rhetorical rather than becoming a quote or sourced statement",
+      "scene texture must carry no roster move, result, stat, contract, injury, player act, or front-office act",
+      "a prior-take confession or paraphrase requires a Packet-backed prior article or wall entry, and an exact quote requires supplied text",
+      "in-world named spots that are not real Oakland are allotted hallucination and belong on INTAKE BIZ if newly named",
+      "player, team, roster, statistic, result, and front-office facts still require Packet support"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

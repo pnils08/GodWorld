@@ -1,0 +1,172 @@
+{
+  "cycle": 112,
+  "v": "CITYHALL/1",
+  "hearing": [
+    {
+      "officeId": "STAFF-DM-COMM",
+      "popid": "POP-00037",
+      "holder": "Brenda Okoro",
+      "district": "citywide",
+      "faction": "STAFF",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Stabilization is a race against displacement—month-eleven keeps us ahead.",
+      "actionAsked": "Approved month-eleven disbursement of $400K for West Oakland Stabilization Fund, maintaining the 23-day processing standard.",
+      "voiceFile": "output/civic-voice/okoro_c112.json"
+    },
+    {
+      "officeId": "COUNCIL-D6",
+      "popid": "POP-00044",
+      "holder": "Elliott Crane",
+      "district": "D6",
+      "faction": "CRC",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "When local commercial corridors maintain low crime and steady street trade, City Hall's primary responsibility is delivering reliable municipal fundamentals.",
+      "actionAsked": "Prioritize seamless baseline infrastructure and municipal service delivery along Piedmont Avenue",
+      "voiceFile": "output/civic-voice/council_d6_c112.json"
+    },
+    {
+      "officeId": "COUNCIL-D8",
+      "popid": "POP-00505",
+      "holder": "Nina Chen",
+      "district": "D8",
+      "faction": "CRC",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "A stabilization fund only works if the procedural plumbing is sound—we are locking in transparent disbursement milestones to ensure Grand Lake merchants receive real, auditable relief.",
+      "actionAsked": "Vote YES to advance the $2.5 million Commercial Stabilization for Grand Lake ordinance with mandatory disbursement milestones and audit protocols.",
+      "voiceFile": "output/civic-voice/council_d8_c112.json"
+    },
+    {
+      "officeId": "COUNCIL-D4",
+      "popid": "POP-00042",
+      "holder": "Ramon Vega",
+      "district": "D4",
+      "faction": "IND",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "We have moved past the point of emergency response; it is time to build a sustainable future for Ivy Hill.",
+      "actionAsked": "Pass legislation",
+      "voiceFile": "output/civic-voice/council_d4_c112.json"
+    },
+    {
+      "officeId": "COUNCIL-D9",
+      "popid": "POP-00506",
+      "holder": "Terrence Mobley",
+      "district": "D9",
+      "faction": "OPP",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Uptown's quieting streets aren't a mystery — they're a message. We can't let downtown get the hearing while Uptown gets the silence.",
+      "actionAsked": "Add a dedicated Uptown commercial stabilization track to the Economic Development Committee docket within the next two cycles",
+      "voiceFile": "output/civic-voice/council_d9_c112.json"
+    },
+    {
+      "officeId": "COUNCIL-D7",
+      "popid": "POP-00504",
+      "holder": "Warren Ashford",
+      "district": "D7",
+      "faction": "CRC",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "A multi-million-dollar downtown revitalization fund cannot be an open checkbook without verifiable benchmarks and audit triggers attached.",
+      "actionAsked": "Demand line-item benchmarks and verified ROI metrics at the Economic Development Committee hearing before authorizing downtown disbursements.",
+      "voiceFile": "output/civic-voice/council_d7_c112.json"
+    },
+    {
+      "officeId": "COUNCIL-D5",
+      "popid": "POP-00043",
+      "holder": "Janae Rivers",
+      "district": "D5",
+      "faction": "OPP",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "We don't need another report that sits on a shelf — we need dispatch data that tells the truth about who gets help and who gets ignored.",
+      "actionAsked": "Filed the District 5 dispatch performance audit for the Alternative Response Initiative, verifying response metrics and pushing for continued expansion into East Oakland.",
+      "voiceFile": "output/civic-voice/council_d5_c112.json"
+    },
+    {
+      "officeId": "COUNCIL-D2",
+      "popid": "POP-00502",
+      "holder": "Leonard Tran",
+      "district": "D2",
+      "faction": "IND",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "The data in the soil test verification provides the evidence-based assurance I require to move this forward.",
+      "actionAsked": "Confirm verification of remediation reports",
+      "voiceFile": "output/civic-voice/council_d2_c112.json"
+    },
+    {
+      "officeId": "COUNCIL-D3",
+      "popid": "POP-00503",
+      "holder": "Rose Delgado",
+      "district": "D3",
+      "faction": "OPP",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "OARI's promise is that the right responder shows up — the report has to prove that promise works on Fruitvale's streets, not just in the city's spreadsheets.",
+      "actionAsked": "I am voting to accept the OARI quarterly outcome report but adding a community-comment condition: numbers must break down response times and diversion rates by district, not just citywide, and I want a public briefing in D3 before any further expansion.",
+      "voiceFile": "output/civic-voice/council_d3_c112.json"
+    }
+  ],
+  "votes": [],
+  "gavel": {
+    "officeId": "MAYOR-01",
+    "popid": "POP-00034",
+    "holder": "Avery Santana",
+    "dispositions": [
+      {
+        "initiativeId": "INIT-001",
+        "mayoralAction": "none",
+        "implementationPhase": "disbursement-active",
+        "note": "C112: Month-eleven disbursement $400K approved; 23-day processing standard maintained; cumulative $5M+ disbursed"
+      },
+      {
+        "initiativeId": "INIT-002",
+        "mayoralAction": "none",
+        "implementationPhase": "dispatch-live",
+        "note": "C112: Quarterly report accepted; D3 condition added for district-level data breakdown and community briefing before expansion"
+      },
+      {
+        "initiativeId": "INIT-009",
+        "mayoralAction": "none",
+        "implementationPhase": "legislation-filed",
+        "note": "C112: Advanced to Economic Development Committee with mandatory milestones and audit protocols per Chen/Vega conditions"
+      },
+      {
+        "initiativeId": "INIT-008",
+        "mayoralAction": "none",
+        "implementationPhase": "legislation-filed",
+        "note": "C112: Emergency Economic Development Committee hearing convened; Ashford benchmarks attached; Uptown track committed for C114"
+      },
+      {
+        "initiativeId": "INIT-006",
+        "mayoralAction": "none",
+        "implementationPhase": "construction-active",
+        "note": "C112: Independent oversight verified; remediation continues; construction milestone review held for C115"
+      }
+    ],
+    "quote": "Month-eleven, 23-day standard maintained — this fund delivers because Brenda Okoro's team treats every application like family.",
+    "voiceFile": "output/civic-voice/mayor_gavel_c112.json"
+  }
+}

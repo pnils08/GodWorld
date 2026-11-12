@@ -1,0 +1,26 @@
+{
+  "initiative": "INIT-006",
+  "initiativeId": "INIT-006",
+  "cycle": 114,
+  "primaryVoice": "Ramos (baylight_authority-001)",
+  "consolidatedFrom": [
+    "STMT-114-baylight_authority-001 (Ramos — Baylight District Construction Milestone Review — C115 Evidence Assembly)",
+    "STMT-114-baylight_authority-002 (Ramos — Baylight District Community Impact Mitigation — Jack London Workforce Coordin...)",
+    "STMT-114-council_d2-001 (Tran D2 — Baylight District — Final Council Vote)",
+    "STMT-114-council_d5-001 (Rivers D5 — Oakland Alternative Response Initiative — D3 community briefing, dispatch per...)",
+    "STMT-114-oari-003 (Tran-Muñoz — Baylight District corridor protocol extension — feasibility review only)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-006",
+    "MilestoneNotes": "C114: C115 evidence file assembled — independent remediation verification, hotline/dust records, Jack London workforce results; no milestone declared passed",
+    "NextScheduledAction": "C115 construction milestone review against the assembled evidence file",
+    "NextActionCycle": 115,
+    "LastWorkCycle": 114,
+    "LastWorkSeat": "proj-baylight"
+  },
+  "_moveFold": {
+    "moveIds": [
+      "MV-113-proj-baylight-2026-10-30"
+    ]
+  }
+}

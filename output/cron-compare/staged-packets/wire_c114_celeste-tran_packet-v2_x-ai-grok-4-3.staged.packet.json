@@ -1,0 +1,483 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00164",
+    "name": "Celeste Tran",
+    "role": "desk reporter",
+    "desk": "wire"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Vinnie Keane gained 1 mention this cycle (6 total); West Oakland moves the most — what Oakland is doing together this week",
+    "approach": "Social-trends approach: this slice is what the city is doing together — the names climbing the culture record, where people are moving, what the city's hooks say is shifting. Fast, reactive, grounded: a trend claim needs a window and a number from this slice. The names and moves are real; the group chat, the binge-night, the collective mood swing are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "trends",
+      "hood": "Grand Lake",
+      "facts": [
+        "Vinnie Keane (A's player), Sports — gained 1 mention this cycle (6 total), stable, fame 48",
+        "Henry Rivas (A's player), Sports — gained 1 mention this cycle (3 total), stable, fame 23",
+        "Kai Tanaka (artist), Arts — gained 1 mention this cycle (2 total), stable, fame 1",
+        "Movement vs C113: West Oakland +19 people, Grand Lake +10 people, Chinatown +10 people, Adams Point +7 people, Temescal +6 people"
+      ],
+      "priorCycle": "PRIOR_CYCLE_ON_DISK",
+      "note": null,
+      "engineHooks": [
+        "Household in Lake Merritt spending 53% of income on housing (observational analysis)",
+        "Downtown boom sustained — momentum 10/10, the block everyone wants onto (observational analysis)",
+        "West Oakland boom sustained — momentum 8/10, the block everyone wants onto (observational analysis)",
+        "Fruitvale boom sustained — momentum 10/10, the block everyone wants onto (observational analysis)"
+      ],
+      "roomIsYours": "the group chat, the third rewatch, who suddenly has an opinion about something nobody mentioned last month, what the city collectively decided to care about",
+      "pageVoices": [
+        "the A's — steady; most of the city over the last two months, still talking this week. Loudest: Vinnie Keane (Grand Lake), on their own page at C112 (not an interview — colour only, never a quote): “I'm still getting used to not being as active with the A's, but it's nice to see people coming together like that.”",
+        "transit — rising; dozens of citizens over the last two months, still talking this week. Loudest: Evan Lewis (Laurel), on their own page at C114 (not an interview — colour only, never a quote): “The platform records don't tell you about them.”",
+        "rent — fading; dozens of citizens over the last two months, still talking this week. Loudest: Omar Amici (Uptown), on their own page at C114 (not an interview — colour only, never a quote): “The streets are busier than ever, and it seems like every other place is a for-rent sign these days.”",
+        "the clinic — fading; dozens of citizens over the last two months, still talking this week. Loudest: Maurice Franklin (Rockridge), on their own page at C112 (not an interview — colour only, never a quote): “After coming home from the hospital, I had to get my feet back on the ground, and the first thing I did was check ",
+        "faith — fading; dozens of citizens over the last two months, still talking this week. Loudest: Eunice Marston (Downtown), on their own page at C112 (not an interview — colour only, never a quote): “As a faith leader, I believe our congregation's role in the community during times of crisis is to offer support and be pr"
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-trends",
+    "hood": "Grand Lake",
+    "src": "output/beats/Cultural_Ledger.jsonl @C114",
+    "plan": {
+      "focus": "The A's and community engagement in West Oakland",
+      "closeQuestion": "How will the A's continue to shape the community in West Oakland as more people move in?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00001",
+        "name": "Vinnie Keane",
+        "profile": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00024",
+        "name": "Henry Rivas",
+        "profile": "Henry Rivas — Starting Pitcher, Oakland A's — West Oakland",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-01068",
+        "name": "Kai Tanaka",
+        "profile": "Kai Tanaka — artist — Fruitvale",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00200",
+        "name": "Evan Lewis",
+        "profile": "Evan Lewis — Bus driver — Laurel",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00001-65b6226fe7",
+        "pop": "POP-00001",
+        "name": "Vinnie Keane",
+        "quote": "The A's are a big part of Oakland's identity, and I'm proud to have been a part of it. I feel like they bring the community together, especially on game days. I've seen it firsthand in Grand Lake, where people come out to support the team. It's not just about the games, though - the A's have a presence in the city that's hard to ignore. I've been recognized a couple of times at the grocery store recently, and it's nice to feel like I'm still a part of something bigger than myself. As for their influence on the community, I think it's positive overall. They've got a lot of young talent coming up, and it's exciting to see what the future holds.",
+        "factIds": [
+          "F-2b3e2e3d075f",
+          "F-c3f5b6e254d9"
+        ],
+        "src": "packet.W2[POP-00001]"
+      },
+      {
+        "id": "Q-POP-00024-39f2d75c79",
+        "pop": "POP-00024",
+        "name": "Henry Rivas",
+        "quote": "The A's are a big part of my life, and I plan my days around the games. When I'm not pitching, I'm thinking about the next start or recovering from the last one. I've lived in West Oakland for a while now, and I see the neighborhood changing. More people are moving in, and it's getting livelier. I think the A's bring a sense of community and pride to the area. I'm proud to be a part of it, and I hope we can keep being a positive presence here.",
+        "factIds": [
+          "F-192cce51beb8",
+          "F-a7781c96a850"
+        ],
+        "src": "packet.W2[POP-00024]"
+      },
+      {
+        "id": "Q-POP-01068-16c64adf17",
+        "pop": "POP-01068",
+        "name": "Kai Tanaka",
+        "quote": "To be honest, I haven't really thought much about The A's and their community engagement in West Oakland. I live in Fruitvale, and while I'm aware of the team, it's not something that's directly impacted my daily life. I mean, I know they're based in Oakland, but my connection to them is pretty casual. I do notice when there's a lot of activity around the city, and sometimes I hear conversations about the team, but it's not something I engage with regularly.",
+        "factIds": [
+          "F-dbc51dbabde7",
+          "F-a7781c96a850"
+        ],
+        "src": "packet.W2[POP-01068]"
+      },
+      {
+        "id": "Q-POP-00200-6b40d0c3bc",
+        "pop": "POP-00200",
+        "name": "Evan Lewis",
+        "quote": "To be honest, I haven't really seen much of The A's around West Oakland lately. I drive past the Coliseum all the time, and you can tell when there's a game or event going on, but it's not like they're out in the community that much. I mean, I've seen Arturo Ramos and John Ellis around Laurel, they're nice guys, but that's about it. I'm not sure how much they're really engaging with the community in West Oakland.",
+        "factIds": [
+          "F-de1611829a4e",
+          "F-a7781c96a850"
+        ],
+        "src": "packet.W2[POP-00200]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Celeste Tran",
+        "text": "I suspect that the A's are hosting or sponsoring community events that are bringing people together, but I need to verify this through conversations with locals and team representatives.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C114",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-4261fa115617"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane gained 1 mention this cycle (6 total); West Oakland moves the most",
+      "src": "output/beats/Cultural_Ledger.jsonl @C114",
+      "id": "F-c3f5b6e254d9"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane — gained 1 mention this cycle (6 total), stable. The trend is the story; the mood is yours.",
+      "src": "output/beats/Cultural_Ledger.jsonl @C114",
+      "id": "F-72f244cb2861"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane (A's player), Sports — gained 1 mention this cycle (6 total), stable, fame 48",
+      "src": "output/beats/Cultural_Ledger.jsonl @C114 vs output/beats/prev/Cultural_Ledger.jsonl @C113",
+      "id": "F-6b2e8c08f776"
+    },
+    {
+      "t": "FACT",
+      "text": "Henry Rivas (A's player), Sports — gained 1 mention this cycle (3 total), stable, fame 23",
+      "src": "output/beats/Cultural_Ledger.jsonl @C114 vs output/beats/prev/Cultural_Ledger.jsonl @C113",
+      "id": "F-ac93343c8ada"
+    },
+    {
+      "t": "FACT",
+      "text": "Kai Tanaka (artist), Arts — gained 1 mention this cycle (2 total), stable, fame 1",
+      "src": "output/beats/Cultural_Ledger.jsonl @C114 vs output/beats/prev/Cultural_Ledger.jsonl @C113",
+      "id": "F-eef7400adb8d"
+    },
+    {
+      "t": "FACT",
+      "text": "Movement vs C113: West Oakland +19 people, Grand Lake +10 people, Chinatown +10 people, Adams Point +7 people, Temescal +6 people",
+      "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C114",
+      "id": "F-a7781c96a850"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C10, Spring, holiday=none",
+      "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+      "id": "F-9b9470803821"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+      "src": "Simulation_Ledger profile for POP-00001",
+      "id": "F-2b3e2e3d075f"
+    },
+    {
+      "t": "FACT",
+      "text": "Henry Rivas — Starting Pitcher, Oakland A's — West Oakland",
+      "src": "Simulation_Ledger profile for POP-00024",
+      "id": "F-192cce51beb8"
+    },
+    {
+      "t": "FACT",
+      "text": "Kai Tanaka — artist — Fruitvale",
+      "src": "Simulation_Ledger profile for POP-01068",
+      "id": "F-dbc51dbabde7"
+    },
+    {
+      "t": "FACT",
+      "text": "Evan Lewis — Bus driver — Laurel",
+      "src": "Simulation_Ledger profile for POP-00200",
+      "id": "F-de1611829a4e"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "celeste-social-trends-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Turn the culture record's most-talked-about names, new arrivals, and neighborhood movement into a fast, reactive trend read — the count is Celeste's, the mood underneath it is hers to name.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "fast, reactive, semi-chaotic but grounded trend analyst",
+      "targetWords": "400-700",
+      "opening": "a Packet-named figure's media-mention count, a new arrival on the culture record, or a neighborhood movement delta",
+      "closing": "the implication, not the proof — what the pattern says about the city's mood, stated once and left there"
+    },
+    "authorizedTexture": [
+      "a declarative thesis about what the counted pattern means for the city's collective mood, grounded in the supplied numbers",
+      "unnamed color about the conversation itself — the group chat, the rewatch, who suddenly has an opinion — that adds no new named fact",
+      "connecting a Packet-supplied mention spike or movement delta to other Packet-supplied civic conditions already in the packet",
+      "treating the aggregate as a single intentional act ('Oakland decided') without claiming a specific poll, survey, or interview"
+    ],
+    "textureConditions": [
+      "every named figure, trend tag, media-mention count, and neighborhood movement number must come from the packet",
+      "no named show, movie, or streaming title unless the packet itself supplies one — the evening-media slate is not wired to this slice; unnamed viewing/mood color is fine, a specific invented title is not",
+      "a flat week (no mentions, no movement) is written as a real flat week, not papered over with an invented spike",
+      "the thesis follows the data window, never precedes it"
+    ],
+    "canonBlockers": [
+      "a named figure, show, movie, streaming title, venue, or neighborhood event not found in the supplied packet",
+      "an invented survey, poll, interview, direct quote, or social-media reaction",
+      "raw engine scores, labels, or decimals printed as public-facing evidence",
+      "a citywide mood or trend claim with no supplied count or movement delta behind it",
+      "a generic culture-desk roundup that abandons the assigned data window"
+    ]
+  },
+  "manifest": {
+    "id": "AM-ba61a75a5348",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-4261fa115617",
+        "t": "FACT",
+        "text": "Current cycle: C114",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-c3f5b6e254d9",
+        "t": "FACT",
+        "text": "Vinnie Keane gained 1 mention this cycle (6 total); West Oakland moves the most",
+        "src": "output/beats/Cultural_Ledger.jsonl @C114"
+      },
+      {
+        "id": "F-72f244cb2861",
+        "t": "FACT",
+        "text": "Vinnie Keane — gained 1 mention this cycle (6 total), stable. The trend is the story; the mood is yours.",
+        "src": "output/beats/Cultural_Ledger.jsonl @C114"
+      },
+      {
+        "id": "F-6b2e8c08f776",
+        "t": "FACT",
+        "text": "Vinnie Keane (A's player), Sports — gained 1 mention this cycle (6 total), stable, fame 48",
+        "src": "output/beats/Cultural_Ledger.jsonl @C114 vs output/beats/prev/Cultural_Ledger.jsonl @C113"
+      },
+      {
+        "id": "F-ac93343c8ada",
+        "t": "FACT",
+        "text": "Henry Rivas (A's player), Sports — gained 1 mention this cycle (3 total), stable, fame 23",
+        "src": "output/beats/Cultural_Ledger.jsonl @C114 vs output/beats/prev/Cultural_Ledger.jsonl @C113"
+      },
+      {
+        "id": "F-eef7400adb8d",
+        "t": "FACT",
+        "text": "Kai Tanaka (artist), Arts — gained 1 mention this cycle (2 total), stable, fame 1",
+        "src": "output/beats/Cultural_Ledger.jsonl @C114 vs output/beats/prev/Cultural_Ledger.jsonl @C113"
+      },
+      {
+        "id": "F-a7781c96a850",
+        "t": "FACT",
+        "text": "Movement vs C113: West Oakland +19 people, Grand Lake +10 people, Chinatown +10 people, Adams Point +7 people, Temescal +6 people",
+        "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C114"
+      },
+      {
+        "id": "F-9b9470803821",
+        "t": "FACT",
+        "text": "Calendar: Y3C10, Spring, holiday=none",
+        "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)"
+      },
+      {
+        "id": "F-2b3e2e3d075f",
+        "t": "FACT",
+        "text": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+        "src": "Simulation_Ledger profile for POP-00001"
+      },
+      {
+        "id": "F-192cce51beb8",
+        "t": "FACT",
+        "text": "Henry Rivas — Starting Pitcher, Oakland A's — West Oakland",
+        "src": "Simulation_Ledger profile for POP-00024"
+      },
+      {
+        "id": "F-dbc51dbabde7",
+        "t": "FACT",
+        "text": "Kai Tanaka — artist — Fruitvale",
+        "src": "Simulation_Ledger profile for POP-01068"
+      },
+      {
+        "id": "F-de1611829a4e",
+        "t": "FACT",
+        "text": "Evan Lewis — Bus driver — Laurel",
+        "src": "Simulation_Ledger profile for POP-00200"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00001-65b6226fe7",
+        "speakerId": "POP-00001",
+        "speakerName": "Vinnie Keane",
+        "text": "The A's are a big part of Oakland's identity, and I'm proud to have been a part of it. I feel like they bring the community together, especially on game days. I've seen it firsthand in Grand Lake, where people come out to support the team. It's not just about the games, though - the A's have a presence in the city that's hard to ignore. I've been recognized a couple of times at the grocery store recently, and it's nice to feel like I'm still a part of something bigger than myself. As for their influence on the community, I think it's positive overall. They've got a lot of young talent coming up, and it's exciting to see what the future holds.",
+        "factIds": [
+          "F-2b3e2e3d075f",
+          "F-c3f5b6e254d9"
+        ],
+        "src": "packet.W2[POP-00001]"
+      },
+      {
+        "id": "Q-POP-00024-39f2d75c79",
+        "speakerId": "POP-00024",
+        "speakerName": "Henry Rivas",
+        "text": "The A's are a big part of my life, and I plan my days around the games. When I'm not pitching, I'm thinking about the next start or recovering from the last one. I've lived in West Oakland for a while now, and I see the neighborhood changing. More people are moving in, and it's getting livelier. I think the A's bring a sense of community and pride to the area. I'm proud to be a part of it, and I hope we can keep being a positive presence here.",
+        "factIds": [
+          "F-192cce51beb8",
+          "F-a7781c96a850"
+        ],
+        "src": "packet.W2[POP-00024]"
+      },
+      {
+        "id": "Q-POP-01068-16c64adf17",
+        "speakerId": "POP-01068",
+        "speakerName": "Kai Tanaka",
+        "text": "To be honest, I haven't really thought much about The A's and their community engagement in West Oakland. I live in Fruitvale, and while I'm aware of the team, it's not something that's directly impacted my daily life. I mean, I know they're based in Oakland, but my connection to them is pretty casual. I do notice when there's a lot of activity around the city, and sometimes I hear conversations about the team, but it's not something I engage with regularly.",
+        "factIds": [
+          "F-dbc51dbabde7",
+          "F-a7781c96a850"
+        ],
+        "src": "packet.W2[POP-01068]"
+      },
+      {
+        "id": "Q-POP-00200-6b40d0c3bc",
+        "speakerId": "POP-00200",
+        "speakerName": "Evan Lewis",
+        "text": "To be honest, I haven't really seen much of The A's around West Oakland lately. I drive past the Coliseum all the time, and you can tell when there's a game or event going on, but it's not like they're out in the community that much. I mean, I've seen Arturo Ramos and John Ellis around Laurel, they're nice guys, but that's about it. I'm not sure how much they're really engaging with the community in West Oakland.",
+        "factIds": [
+          "F-de1611829a4e",
+          "F-a7781c96a850"
+        ],
+        "src": "packet.W2[POP-00200]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00001",
+        "name": "Vinnie Keane",
+        "profile": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00024",
+        "name": "Henry Rivas",
+        "profile": "Henry Rivas — Starting Pitcher, Oakland A's — West Oakland",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-01068",
+        "name": "Kai Tanaka",
+        "profile": "Kai Tanaka — artist — Fruitvale",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00200",
+        "name": "Evan Lewis",
+        "profile": "Evan Lewis — Bus driver — Laurel",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Celeste Tran",
+        "text": "I suspect that the A's are hosting or sponsoring community events that are bringing people together, but I need to verify this through conversations with locals and team representatives.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "a declarative thesis about what the counted pattern means for the city's collective mood, grounded in the supplied numbers",
+      "unnamed color about the conversation itself — the group chat, the rewatch, who suddenly has an opinion — that adds no new named fact",
+      "connecting a Packet-supplied mention spike or movement delta to other Packet-supplied civic conditions already in the packet",
+      "treating the aggregate as a single intentional act ('Oakland decided') without claiming a specific poll, survey, or interview"
+    ],
+    "textureConditions": [
+      "every named figure, trend tag, media-mention count, and neighborhood movement number must come from the packet",
+      "no named show, movie, or streaming title unless the packet itself supplies one — the evening-media slate is not wired to this slice; unnamed viewing/mood color is fine, a specific invented title is not",
+      "a flat week (no mentions, no movement) is written as a real flat week, not papered over with an invented spike",
+      "the thesis follows the data window, never precedes it"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

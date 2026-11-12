@@ -1,0 +1,86 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "112",
+  "persona": "kai-marston",
+  "byline": "Kai Marston",
+  "bylinePopid": "POP-00158",
+  "article": "output/cron-compare/staged/culture_c112_kai-marston_packet-v2_anthropic-claude-haiku-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Alma Vasquez",
+        "role": "mentioned",
+        "popid": "POP-01063",
+        "floor": true
+      },
+      {
+        "name": "Lena Cross",
+        "role": "mentioned",
+        "popid": "POP-00539",
+        "floor": true
+      },
+      {
+        "name": "Nina Reyes",
+        "role": "mentioned",
+        "popid": "POP-01057",
+        "floor": true
+      },
+      {
+        "name": "Rowan Pierce",
+        "role": "mentioned",
+        "popid": "POP-00545",
+        "floor": true
+      },
+      {
+        "name": "Tara Ellison",
+        "role": "mentioned",
+        "popid": "POP-00546",
+        "floor": true
+      },
+      {
+        "name": "Theo Banks",
+        "role": "mentioned",
+        "popid": "POP-01056",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Rockridge"
+    ],
+    "claims": [
+      {
+        "claim": "36 culture figures rising; 0 new on the record",
+        "sourceRef": "output/beats/Cultural_Ledger.jsonl @C112"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-bba8e7d8a9a2",
+    "draftSha256": "c7ad35fa2dc9495493c69f9db18cf2f2263db16e6ba611996e370499fa9192c7",
+    "verdict": "output/cron-compare/culture_c112_kai-marston_packet-v2_anthropic-claude-haiku-5-5.rhea.json",
+    "ranAt": "2026-10-23T23:16:23.367Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 500",
+      "words": 698,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "c7ad35fa2dc9495493c69f9db18cf2f2263db16e6ba611996e370499fa9192c7",
+      "costUsd": 0.0012
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-23T23:16:32.644Z"
+}

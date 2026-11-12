@@ -1,0 +1,58 @@
+{
+  "mode": "wake-write",
+  "desk": "sports",
+  "cycle": "111",
+  "provider": "openrouter",
+  "model": "openai/gpt-5.6-luna",
+  "configuredWriterModel": "openai/gpt-5.6-luna",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "talia-finch",
+  "byline": {
+    "name": "Talia Finch",
+    "popid": "POP-00592",
+    "beatDomain": "SPORTS"
+  },
+  "laneEntries": 8,
+  "quotesLanded": 2,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [],
+  "toolCalls": 0,
+  "wordCount": 459,
+  "targetWords": "400-650",
+  "capHit": 0,
+  "checkFlags": [],
+  "engineTerms": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 400",
+    "words": 459,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "5bc3220f79b2e7703ccb307a83f96fb6e005e7c93ba84f33232fc8592fb35a98",
+    "costUsd": 0.0009
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 4/4 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/sports_c111_talia-finch_packet-v2_openai-gpt-5-6-luna.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "m ../.config/godworld/.env // tip: ⌘ override existing { override: true }\n{\n  \"popId\": \"POP-00592\",\n  \"name\": \"Talia Finch\",\n  \"recorded\": true,\n  \"text\": \"filed: The Oaks Have Not Won the Room Yet\"\n}"
+  },
+  "ranAt": "2026-10-15T23:20:11.267Z",
+  "dispositionReconciledAt": "2026-10-17T17:00:03.142Z"
+}

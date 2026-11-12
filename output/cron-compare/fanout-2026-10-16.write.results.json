@@ -1,0 +1,107 @@
+{
+  "date": "2026-10-16",
+  "stage": "write",
+  "results": [
+    {
+      "name": "Mason Ortega",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "engineTerms": [],
+        "verbatim": [],
+        "words": 561,
+        "contractScore": 2
+      }
+    },
+    {
+      "name": "Kai Marston",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "engineTerms": [],
+        "verbatim": [],
+        "words": 584,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Sharon Okafor",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "engineTerms": [],
+        "verbatim": [],
+        "words": 328,
+        "contractScore": 2
+      }
+    },
+    {
+      "name": "Maria Keen",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "engineTerms": [],
+        "verbatim": [],
+        "words": 762,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Celeste Tran",
+      "desk": "wire",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "engineTerms": [],
+        "verbatim": [],
+        "words": 256,
+        "contractScore": 3
+      }
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "engineTerms": [],
+        "verbatim": [],
+        "words": 318,
+        "contractScore": 3
+      }
+    }
+  ],
+  "checkTotals": {
+    "seats": 6,
+    "toolSeats": 0,
+    "capHits": 0,
+    "thin": 0,
+    "engineTerm": 0,
+    "verbatim": 0,
+    "graded": 6,
+    "gradeSum": 18
+  },
+  "ranAt": "2026-10-16T23:19:40.042Z"
+}

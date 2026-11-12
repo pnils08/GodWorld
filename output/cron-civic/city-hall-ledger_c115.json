@@ -1,0 +1,176 @@
+{
+  "cycle": 115,
+  "v": "CITYHALL/1",
+  "hearing": [
+    {
+      "officeId": "COUNCIL-D9",
+      "popid": "POP-00506",
+      "holder": "Terrence Mobley",
+      "district": "D9",
+      "faction": "OPP",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Grand Lake gets my yes because the conditions are real and the record is public — not because the money is easy.",
+      "actionAsked": "Record the YES vote and hold the milestone and audit conditions as written.",
+      "voiceFile": "output/civic-voice/council_d9_c115.json"
+    },
+    {
+      "officeId": "STAFF-DM-COMM",
+      "popid": "POP-00037",
+      "holder": "Brenda Okoro",
+      "district": "citywide",
+      "faction": "STAFF",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "The closeout is published, the renewal ordinance is transmitted, and the standard holds at 23 days. Renewal is council's call — I won't call it before they do.",
+      "actionAsked": "Publish the C114 closeout and transmit the charter renewal ordinance to the C115 agenda, preserving the West Oakland business-and-resident scope and the 23-day processing standard, without claiming renewal before council action.",
+      "voiceFile": "output/civic-voice/okoro_c115.json"
+    },
+    {
+      "officeId": "COUNCIL-D8",
+      "popid": "POP-00505",
+      "holder": "Nina Chen",
+      "district": "D8",
+      "faction": "CRC",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Relief without accountability is merely an expenditure; District 8 votes YES because the Chen-Vega audit protocols guarantee that every dollar deployed in Grand Lake is tracked, verified, and earned.",
+      "actionAsked": "Vote YES on INIT-009 with mandatory Chen-Vega milestone reporting and audit criteria fully preserved",
+      "voiceFile": "output/civic-voice/council_d8_c115.json"
+    },
+    {
+      "officeId": "COUNCIL-D6",
+      "popid": "POP-00044",
+      "holder": "Elliott Crane",
+      "district": "D6",
+      "faction": "CRC",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "When public funds are bound by enforceable audits and transparent milestones, investment delivers real results rather than empty promises.",
+      "actionAsked": "Vote YES on INIT-009 with Chen-Vega audit and milestone reporting conditions intact",
+      "voiceFile": "output/civic-voice/council_d6_c115.json"
+    },
+    {
+      "officeId": "COUNCIL-D2",
+      "popid": "POP-00502",
+      "holder": "Leonard Tran",
+      "district": "D2",
+      "faction": "IND",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "I support the investment, but the public should be able to see where the money is assigned and how people will reach the corridors it serves.",
+      "actionAsked": "Record the full-council vote and publish the Chinatown and Uptown appropriation tracks, timeline, and transit-access planning.",
+      "voiceFile": "output/civic-voice/council_d2_c115.json"
+    },
+    {
+      "officeId": "COUNCIL-D7",
+      "popid": "POP-00504",
+      "holder": "Warren Ashford",
+      "district": "D7",
+      "faction": "CRC",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Accountability triggers make the difference between an investment and an open checkbook; because those audit milestones are intact, I vote yes.",
+      "actionAsked": "Enforce all Chen-Vega audit protocols and require milestone compliance before releasing commercial stabilization disbursements.",
+      "voiceFile": "output/civic-voice/council_d7_c115.json"
+    },
+    {
+      "officeId": "COUNCIL-D5",
+      "popid": "POP-00043",
+      "holder": "Janae Rivers",
+      "district": "D5",
+      "faction": "OPP",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "The people who called 911 get to see their own numbers, in their own neighborhood, before this program takes one more step.",
+      "actionAsked": "Conduct and document the D3 East Oakland community briefing with district-level and Fruitvale data this cycle; keep expansion held until afterward; report the D5 audit and Baylight feasibility review as directed, not completed.",
+      "voiceFile": "output/civic-voice/council_d5_c115.json"
+    },
+    {
+      "officeId": "COUNCIL-D4",
+      "popid": "POP-00042",
+      "holder": "Ramon Vega",
+      "district": "D4",
+      "faction": "IND",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "I support the proposal with its safeguards intact; the low-severity improvement flag is a reason to monitor, not to skip a recorded decision.",
+      "actionAsked": "Record my YES vote and retain all milestone and audit conditions.",
+      "voiceFile": "output/civic-voice/council_d4_c115.json"
+    }
+  ],
+  "votes": [],
+  "gavel": {
+    "officeId": "MAYOR-01",
+    "popid": "POP-00034",
+    "holder": "Avery Santana",
+    "dispositions": [
+      {
+        "initiativeId": "INIT-001",
+        "mayoralAction": "none",
+        "implementationPhase": "disbursement-active",
+        "note": "C115: C114 closeout publication ordered and charter renewal ordinance transmitted; business-and-resident scope and 23-day standard preserved pending council action."
+      },
+      {
+        "initiativeId": "INIT-002",
+        "mayoralAction": "none",
+        "implementationPhase": "dispatch-live",
+        "note": "C115: D3 East Oakland briefing execution and documentation required; expansion held, with D5 audit and Baylight feasibility review still incomplete."
+      },
+      {
+        "initiativeId": "INIT-003",
+        "mayoralAction": "none",
+        "implementationPhase": "design-phase",
+        "note": "C115: Schematics delivery and documented Fruitvale review required; further design advancement awaits a public comment-and-response record."
+      },
+      {
+        "initiativeId": "INIT-006",
+        "mayoralAction": "none",
+        "implementationPhase": null,
+        "note": "C115: Evidence-file milestone review ordered; no construction milestone pass declared, and remediation, hotline, dust-control, and workforce oversight continue."
+      },
+      {
+        "initiativeId": "INIT-007",
+        "mayoralAction": "none",
+        "implementationPhase": "implementation-active",
+        "note": "C115: Placement-gap analysis and adjustment plan required for publication with explicit West Oakland and Fruitvale review; implementation continues."
+      },
+      {
+        "initiativeId": "INIT-009",
+        "mayoralAction": "none",
+        "implementationPhase": "vote-scheduled",
+        "note": "C115: Recorded full-council decision scheduled with Chen-Vega milestone and audit conditions intact; no vote outcome claimed."
+      },
+      {
+        "initiativeId": "INIT-010",
+        "mayoralAction": "none",
+        "implementationPhase": "vote-scheduled",
+        "note": "C115: Recorded committee decision scheduled; legal-support analysis must be published before the vote, with no outcome claimed in advance."
+      },
+      {
+        "initiativeId": "INIT-014",
+        "mayoralAction": "none",
+        "implementationPhase": "legislation-filed",
+        "note": "C115: Legislation filed on current Ivy Hill evidence—low crime, slow trade, and soured mood—with no manufactured emergency premise."
+      }
+    ],
+    "quote": "West Oakland’s fund keeps its business-and-resident scope, its 23-day standard, and a renewal decision made openly by the council.",
+    "voiceFile": "output/civic-voice/mayor_gavel_c115.json"
+  }
+}

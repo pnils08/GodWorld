@@ -1,0 +1,38 @@
+{
+  "office": "okoro",
+  "cycle": 112,
+  "speaker": "Brenda Okoro",
+  "cascadeSummary": "Approved the month-eleven West Oakland Stabilization Fund disbursement, maintaining the 23-day processing standard as a race against displacement. Backed the Grand Lake commercial stabilization committee hearing with clear milestone expectations, and credited Fruitvale's community organizing while committing sustained operational attention to Dimond.",
+  "statements": [
+    {
+      "statementId": "STMT-112-okoro-001",
+      "type": "operational_status",
+      "topic": "West Oakland Stabilization Fund month-eleven disbursement",
+      "initiative": "West Oakland Stabilization Fund",
+      "decision": "Approved month-eleven disbursement of $400K for West Oakland Stabilization Fund, maintaining the 23-day processing standard.",
+      "quote": "Stabilization is a race against displacement—month-eleven keeps us ahead.",
+      "fullStatement": "Month-eleven disbursement is approved. We're moving $400,000 to long-tenure West Oakland residents and businesses, and we're holding the 23-day processing standard. The engine's own signal this cycle is clear—daily life in West Oakland is visibly declining, housing pressure is building. That's exactly what this Fund exists to counter. We don't wait for the decline to become a headline; we process applications and move money while it's still a trend on a whiteboard.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-112-okoro-002",
+      "type": "initiative_response",
+      "topic": "Commercial Stabilization for Grand Lake committee hearing",
+      "initiative": "Commercial Stabilization for Grand Lake",
+      "decision": "Support the Grand Lake committee hearing this cycle, with milestone reporting and audit criteria attached.",
+      "quote": "Grand Lake's quiet engine gets its hearing—$2.5 million with milestones and audits attached.",
+      "fullStatement": "Grand Lake's commercial stabilization heads to committee this cycle. This is a $2.5 million investment in a neighborhood that keeps the city running without asking for credit. The milestones and audit criteria attached to this aren't red tape—they're how we make sure the money lands on storefronts and not on a shelf. I'll be watching the committee's work closely, and I expect a clear path to disbursement once the hearing concludes.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-112-okoro-003",
+      "type": "cascade_response",
+      "topic": "Fruitvale success and Dimond stability",
+      "initiative": null,
+      "decision": "Credit Fruitvale's community organizing for its success and commit sustained operational focus to Dimond's stability.",
+      "quote": "Fruitvale's busy streets are built on block-by-block engagement—Dimond's steady strength is Oakland working.",
+      "fullStatement": "Fruitvale's busy streets didn't happen by accident—they happened because this community organizes. City Hall didn't deliver that momentum; the people did. And in Dimond, the mood has soured even as the street trade holds steady. That's not a contradiction—it's a signal. I'm directing my community-development team to maintain close contact with Dimond's merchants and residents, because stability there isn't something we take for granted. It's something we protect.",
+      "trackerUpdates": {}
+    }
+  ]
+}

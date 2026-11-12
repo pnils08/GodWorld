@@ -1,0 +1,118 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "115",
+  "persona": "tamsin-pruitt",
+  "byline": "Tamsin Pruitt",
+  "bylinePopid": "POP-01210",
+  "article": "output/cron-compare/staged/culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.staged-0023.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Soledad Coleman",
+        "role": "quoted-source",
+        "popid": "POP-00840"
+      },
+      {
+        "name": "Tom Jilner",
+        "role": "quoted-source",
+        "popid": "POP-00691"
+      },
+      {
+        "name": "Marisol Achebe",
+        "role": "quoted-source",
+        "popid": "POP-00526"
+      },
+      {
+        "name": "Everly Rainey",
+        "role": "mentioned",
+        "popid": "POP-00737",
+        "floor": true
+      },
+      {
+        "name": "Jasmine Torres",
+        "role": "mentioned",
+        "popid": "POP-01111",
+        "floor": true
+      },
+      {
+        "name": "Jesus Jorden",
+        "role": "mentioned",
+        "popid": "POP-00721",
+        "floor": true
+      },
+      {
+        "name": "Kelvon Ochoa",
+        "role": "mentioned",
+        "popid": "POP-00481",
+        "floor": true
+      },
+      {
+        "name": "Latasha Rivera",
+        "role": "mentioned",
+        "popid": "POP-00818",
+        "floor": true
+      },
+      {
+        "name": "Maurice Franklin",
+        "role": "mentioned",
+        "popid": "POP-00801",
+        "floor": true
+      },
+      {
+        "name": "Mina Kapoor",
+        "role": "mentioned",
+        "popid": "POP-01200",
+        "floor": true
+      },
+      {
+        "name": "Ruth Anyanwu",
+        "role": "mentioned",
+        "popid": "POP-01147",
+        "floor": true
+      },
+      {
+        "name": "Tomas Aguilar",
+        "role": "mentioned",
+        "popid": "POP-00529",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "I've seen Maurice Franklin around the neighborhood, but I don't really know them. I moved into my place in Rockridge, and so did they, I think around the same time. We haven't really talked, just nodded at each other when we see each other.",
+        "sourceRef": "citizenVoice PRESS Soledad Coleman"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-c08188c723c1",
+    "draftSha256": "02213ed743a3a566154c4fd0f15f34bb239ae963dd87a00f799963ececc6b4d7",
+    "verdict": "output/cron-compare/culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-12T00:23:10.557Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 450",
+      "words": 1305,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "02213ed743a3a566154c4fd0f15f34bb239ae963dd87a00f799963ececc6b4d7",
+      "costUsd": 0.0015
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-12T00:23:14.834Z"
+}

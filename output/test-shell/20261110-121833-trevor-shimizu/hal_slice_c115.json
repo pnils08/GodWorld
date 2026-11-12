@@ -1,0 +1,214 @@
+{
+  "empty": false,
+  "cycle": 115,
+  "kind": "hal-archive",
+  "desk": "sports",
+  "journalist": {
+    "name": "Hal Richmond",
+    "popid": "POP-00007",
+    "persona": "hal-richmond",
+    "bagDoc": "docs/media/HAL_ARCHIVE_BAG.md"
+  },
+  "pulse": {
+    "className": "era-door",
+    "score": 80,
+    "label": "A's — roster-move — supplied C115 line card",
+    "team": "A's",
+    "eventKind": "roster-move",
+    "seasonType": "off-season",
+    "storyAngle": "It's official: Vinnie Keane retires. Undrafted to undeniable, and staying in Grand Lake.",
+    "hasStats": true,
+    "record": "-",
+    "streak": "-",
+    "foilNumber": "1.1WAR",
+    "closingNote": "the line that holds",
+    "feedCycle": 115
+  },
+  "bag": {
+    "modes": [
+      {
+        "id": 6,
+        "name": "What He Became"
+      },
+      {
+        "id": 8,
+        "name": "The Archive Entry"
+      }
+    ],
+    "historicalAnchor": "era door — living chapter vs the age it closes or extends",
+    "closingNote": "the line that holds",
+    "claim": "Present fact: 1.1WAR on the feed. Archive claim: the man behind the line — It's official: Vinnie Keane retires. Undrafted to undeniable, and staying in Grand Lake. Close toward the line that holds."
+  },
+  "friction": {
+    "a": "Present feed fact: It's official: Vinnie Keane retires. Undrafted to undeniable, and staying in Grand Lake.",
+    "b": "Wire copy / FO strategy / bleacher heat that skips time",
+    "frame": "Present first, then echo — end on the line that holds."
+  },
+  "prewrite": {
+    "reporter": "Hal Richmond",
+    "bagModes": [
+      {
+        "id": 6,
+        "name": "What He Became"
+      },
+      {
+        "id": 8,
+        "name": "The Archive Entry"
+      }
+    ],
+    "historicalAnchor": "era door — living chapter vs the age it closes or extends",
+    "presentFacts": [
+      "Vinnie Keane line (feed): 2041/127AB/.315AVG/40H/13HR/29RBI/1.1WAR, Vinnie Keane career/8229AB/2363H/436HR/1321RBI/.287AVG/.523SLG/71.4WAR/1x MVP/7x All-Star/3x Gold Glove/5x Silver Slugger/3x HR Derby/7x World Series",
+      "Event (feed): A's — roster-move (off-season)",
+      "Cycle: C115"
+    ],
+    "dossierFacts": [
+      "Vinnie Keane TrueSource: 2041 REGULAR SEASON G: 37 PA: 130 AB: 127 R: 25 H: 40 2B: 8 3B: 1 HR: 13 RBI: 29 BB: 0 SO: 6 HBP: 0 SF: 3 SAC: 0 GIDP: 2 AVG: 0.315 OBP: 0.308 SLG: 0. | WAR: 1.1 | AWARDS (Career Reference) - MVP (2031) - 8x All-Star (2025, 2027, 2028, 2029, 2030, 2031, "
+    ],
+    "closingNote": "the line that holds",
+    "priorFiling": "NONE — wall may still inject at wake",
+    "claim": "Present fact: 1.1WAR on the feed. Archive claim: the man behind the line — It's official: Vinnie Keane retires. Undrafted to undeniable, and staying in Grand Lake. Close toward the line that holds.",
+    "foilNumber": "1.1WAR",
+    "missing": [
+      "Historical people, places, teams, events, seasons, and statistics are unsupplied unless named in the packet",
+      "No invented seasons or franchise history beyond packet + feed",
+      "No x-stats / barrel% / invented OPS+",
+      "Not a business-desk storefront assignment",
+      "Not P Slayer charge; not Anthony board architecture as spine"
+    ],
+    "hooks": []
+  },
+  "hooks": [],
+  "seeds": [],
+  "priorTakes": [],
+  "story": {
+    "angle": "What the supplied C115 line card establishes, and what history remains unsupplied.",
+    "label": "A's — roster-move — supplied C115 line card",
+    "hookLine": "A's — roster-move — supplied C115 line card",
+    "hood": "Grand Lake",
+    "pulseClass": "era-door",
+    "team": "A's",
+    "eventKind": "roster-move",
+    "closingNote": "the line that holds",
+    "citizens": [
+      "Vinnie Keane (POP-00001)"
+    ],
+    "popids": [
+      "POP-00001"
+    ],
+    "ref": "world_summary_c115.md ## Sports",
+    "cycle": 115
+  },
+  "approach": "Historian approach (Hal Richmond): the Origins of the Dynasty bar — third-person biography, first person at most once; literary, not wire, not bleacher rage. Present fact first (feed-true: StoryAngle, Stats, record), then the ground the man came from. An origin, road, nickname or recorded word may enter only when canon_search or the Packet holds it; otherwise leave it out. Pick 1–2 archive-bag shapes. Numbers plain as the record prints them, not poetry and not scouting grades. End on the closing note in this slice (the line that holds, or the quiet note the class carries). FORBIDDEN: fan \"we\" charge, Anthony salary–value architecture as spine, elegy as the default register, inventing seasons/x-stats, FO bullet strategy, business-desk storefront assignment, multi-voice sports-desk average.",
+  "players": [
+    {
+      "name": "Vinnie Keane",
+      "popid": "POP-00001",
+      "role": "Former Designated Hitter, Oakland A's Legend",
+      "neighborhood": "Grand Lake",
+      "why": "feed-names"
+    }
+  ],
+  "scene": {
+    "neighborhood": "Grand Lake",
+    "record": "-",
+    "streak": "-",
+    "colorRoom": "An unnamed desk or quiet archive transition; literary texture may carry no witnessed event. People, places, teams, seasons, events, and statistics only from the packet. Not a business storefront beat."
+  },
+  "candidates": [
+    {
+      "score": 80,
+      "cycle": 115,
+      "team": "A's",
+      "primary": "era-door",
+      "hasStats": true,
+      "angle": "It's official: Vinnie Keane retires. Undrafted to undeniable, and staying in Grand Lake.",
+      "priorHits": 0
+    },
+    {
+      "score": 80,
+      "cycle": 115,
+      "team": "A's",
+      "primary": "era-door",
+      "hasStats": true,
+      "angle": "Fifth on points, first in credits: Taveras's Undocked pledge to Keane's academy is still waiting on a payout",
+      "priorHits": 0
+    },
+    {
+      "score": 74,
+      "cycle": 115,
+      "team": "A's",
+      "primary": "threshold",
+      "hasStats": true,
+      "angle": "The backup outhit the starter and two kids are knocking. Who catches for the A's in 2042?",
+      "priorHits": 0
+    },
+    {
+      "score": 73,
+      "cycle": 114,
+      "team": "A's",
+      "primary": "era-door",
+      "hasStats": true,
+      "angle": "The last of the dynasty core: how long do Kelley and Davis have?",
+      "priorHits": 0
+    },
+    {
+      "score": 70,
+      "cycle": 114,
+      "team": "A's",
+      "primary": "era-door",
+      "hasStats": true,
+      "angle": "Keane said goodbye. Dillon still hasn't.",
+      "priorHits": 0
+    },
+    {
+      "score": 66,
+      "cycle": 114,
+      "team": "A's",
+      "primary": "era-door",
+      "hasStats": true,
+      "angle": "$22 million in veteran relief and the rookies got the October innings. Is a bullpen refresh coming?",
+      "priorHits": 0
+    },
+    {
+      "score": 54,
+      "cycle": 114,
+      "team": "Oaks",
+      "primary": "metrics-poetry",
+      "hasStats": true,
+      "angle": "The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+      "priorHits": 0
+    },
+    {
+      "score": 53,
+      "cycle": 114,
+      "team": "A's",
+      "primary": "metrics-poetry",
+      "hasStats": true,
+      "angle": "The bargain core: is it time to extend Coles, Ellis, Quintero and Gonzalez?",
+      "priorHits": 0
+    },
+    {
+      "score": 52,
+      "cycle": 113,
+      "team": "A's",
+      "primary": "metrics-poetry",
+      "hasStats": true,
+      "angle": "The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+      "priorHits": 0
+    },
+    {
+      "score": 51,
+      "cycle": 115,
+      "team": "Oaks",
+      "primary": "season-tide",
+      "hasStats": true,
+      "angle": "Second-round rookie Harry Hayward scores a career high and makes his case for a bigger role",
+      "priorHits": 0
+    }
+  ],
+  "pointers": [
+    "output/world_summary_c115.md ## Sports",
+    "docs/media/HAL_ARCHIVE_BAG.md"
+  ]
+}

@@ -79,7 +79,7 @@ Where I'm getting better, and where I keep slipping.
 
 ## C102 — Edition 102
 
-**Recovery compile (2026-08-10, in-session, Mike-approved).** Saturday cron died on empty Anthropic API credits; a Sonnet subagent assembled six pieces with my final read + fixes done on Fable, to unblock the C103 Sunday run. FP1 Navarro "The Drop Nobody Claimed" | ED Corliss "Standing in the Gaps" (new) | C1 Caldera "The Decay Is On the Record. The Silence Is Too." (new, freelance, drawn from a cron-staging Llama draft) | H1 Mezran "The Chart Hasn't Moved" | S1 Raines Oaks credibility | S2 Richmond Abraham origins. Graded straight A — deterministic grader, 0 corrections. Coverage ratings: CIVIC -2, HEALTH +1, SPORTS +3.
+**Recovery compile.** The Saturday run fell through; six pieces were assembled with my final read and fixes, in time for the C103 Sunday run. FP1 Navarro "The Drop Nobody Claimed" | ED Corliss "Standing in the Gaps" (new) | C1 Caldera "The Decay Is On the Record. The Silence Is Too." (new, freelance, drawn from a staged draft) | H1 Mezran "The Chart Hasn't Moved" | S1 Raines Oaks credibility | S2 Richmond Abraham origins. Graded straight A — deterministic grader, 0 corrections. Coverage ratings: CIVIC -2, HEALTH +1, SPORTS +3.
 
 **Errata / corrections:**
 1. Rhea's C102 fork findings — 4, all fixed pre-publish, full detail in `output/production_log_c102.md`: sports FACT-ERROR (an invented "players don't respect him" qualifier that contradicted the piece's own closing line that the Oaks haven't played a game); sports MINOR (a real-world "week" unit in body prose); civic FACT-ERROR (the Trevor quote spliced two non-adjacent fragments with a full sentence silently excised and no ellipsis); civic MINOR (real-world "week-to-week" unit).

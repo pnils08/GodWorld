@@ -1,0 +1,60 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "115",
+  "persona": "elliot-marbury",
+  "byline": "Elliot Marbury",
+  "bylinePopid": "POP-00166",
+  "article": "output/cron-compare/staged/sports_c115_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Eric Taveras",
+        "role": "mentioned",
+        "popid": "POP-00597",
+        "floor": true
+      },
+      {
+        "name": "Sidney Tumolo",
+        "role": "mentioned",
+        "popid": "POP-00058",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "Eric Taveras — 7 seasons on the dossier, 2041 the latest — hitter density memo, multi-year",
+        "sourceRef": "output/player_truesource_mirror.json Eric Taveras @C115"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-4769ee4e688d",
+    "draftSha256": "ea3560ecd19d9801b6a6e75261b2b08dbc89c10c0d2cdbcdaddf5aa7328cc58d",
+    "verdict": "output/cron-compare/sports_c115_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-12T00:18:14.417Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 350",
+      "words": 755,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "ea3560ecd19d9801b6a6e75261b2b08dbc89c10c0d2cdbcdaddf5aa7328cc58d",
+      "costUsd": 0.0015
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-12T00:18:18.981Z"
+}

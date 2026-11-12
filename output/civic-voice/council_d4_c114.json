@@ -1,0 +1,48 @@
+{
+  "office": "council_d4",
+  "cycle": 114,
+  "speaker": "Ramon Vega",
+  "cascadeSummary": "I will put INIT-011 on a formal C114 committee referral and hearing schedule, and docket distinct legislative texts for INIT-012 and INIT-013 so the announced filings are traceable without conflating them. Ivy Hill deserves follow-through, but this cycle’s brief reports low crime there; I will not repeat a conflicting crime claim. I will also credit Glenview’s residents and structured support for the neighborhood’s mildly positive mood.",
+  "statements": [
+    {
+      "statementId": "STMT-114-council_d4-001",
+      "type": "statement",
+      "topic": "Ivy Hill committee referral and hearing",
+      "initiative": "Ivy Hill Revitalization Initiative",
+      "decision": "Schedule the INIT-011 committee referral and hearing in C114.",
+      "quote": "Ivy Hill needs a hearing with a schedule, not another promise that action is coming.",
+      "fullStatement": "As Council President, I will docket a formal C114 committee referral and hearing schedule for the Ivy Hill Revitalization Initiative. The C113 filing should move through a visible process, with the hearing giving the district a place to examine the proposal and its next steps. Ivy Hill’s current conditions are flat mood, slow street trade, and low crime. I will not repeat a conflicting crime claim from the directive as if it were this cycle’s district report. The case for timely attention stands on its own, and residents deserve a clear path from filing to deliberation.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-114-council_d4-002",
+      "type": "statement",
+      "topic": "Dimond legislative filing",
+      "initiative": "Dimond Revitalization Initiative",
+      "decision": "Docket distinct legislative text for INIT-012 in C114 and reconcile its announced filing record.",
+      "quote": "Dimond should have a filing residents can find, not a duplicate announcement with no clear path.",
+      "fullStatement": "I will docket legislative text for the Dimond Revitalization Initiative in C114 and reconcile its announced filing record so the initiative has a distinct, traceable entry. Dimond’s mood is flat, street trade is steady, and crime is low. That is a reason to pursue careful neighborhood revitalization, not to manufacture an emergency. The public should be able to distinguish this proposal from the Ivy Hill filing and see what is actually before the council.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-114-council_d4-003",
+      "type": "statement",
+      "topic": "Ivy Hill Community Revitalization legislative filing",
+      "initiative": "Ivy Hill Community Revitalization",
+      "decision": "Docket distinct legislative text for INIT-013 in C114 and reconcile its announced filing record.",
+      "quote": "Two announced filings must not blur into one; each needs its own text and a clear public record.",
+      "fullStatement": "I will docket legislative text for Ivy Hill Community Revitalization in C114 and reconcile the announced filing record separately from INIT-012. These are distinct named initiatives, and the docket should make that distinction clear rather than leave residents guessing which text is under consideration. This procedural step does not decide the merits or claim results that have not occurred. It makes the proposal available for scrutiny and gives District 4 a more accountable path to deliberation.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-114-council_d4-004",
+      "type": "statement",
+      "topic": "District 4 neighborhood conditions and Glenview credit",
+      "initiative": null,
+      "decision": "Recognize Ivy Hill’s need for follow-through and credit Glenview residents and structured support for its positive progress.",
+      "quote": "Glenview’s progress belongs first to the people sustaining it, with structured support sharing credit where it helped.",
+      "fullStatement": "Ivy Hill’s flat mood and slow street trade deserve attention, even with crime reported low this cycle; I will keep pressing for a practical response without overstating the evidence. Glenview is mildly positive, though street trade remains slow. Its residents deserve credit for the progress, and the structured support already acknowledged in my public remarks should share credit where it has contributed. As D4’s representative, I want both neighborhoods judged by their current conditions and met with follow-through, not a one-size-fits-all claim.",
+      "trackerUpdates": {}
+    }
+  ]
+}

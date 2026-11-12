@@ -1,0 +1,127 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "114",
+  "persona": "tamsin-pruitt",
+  "byline": "Tamsin Pruitt",
+  "bylinePopid": "POP-01210",
+  "article": "output/cron-compare/staged/culture_c114_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.staged-0020.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Tyler Filet",
+        "role": "quoted-source",
+        "popid": "POP-00447"
+      },
+      {
+        "name": "Kenji Okafor",
+        "role": "mentioned",
+        "popid": "POP-00460"
+      },
+      {
+        "name": "Jett Walker",
+        "role": "quoted-source",
+        "popid": "POP-00230"
+      },
+      {
+        "name": "Tobert Lewis",
+        "role": "quoted-source",
+        "popid": "POP-00344"
+      },
+      {
+        "name": "Derek Obi",
+        "role": "mentioned",
+        "popid": "POP-00543",
+        "floor": true
+      },
+      {
+        "name": "Graciela Foster",
+        "role": "mentioned",
+        "popid": "POP-01117",
+        "floor": true
+      },
+      {
+        "name": "Jenna Comer",
+        "role": "mentioned",
+        "popid": "POP-00476",
+        "floor": true
+      },
+      {
+        "name": "Jerome Lindqvist",
+        "role": "mentioned",
+        "popid": "POP-01148",
+        "floor": true
+      },
+      {
+        "name": "Patrice Rao",
+        "role": "mentioned",
+        "popid": "POP-00822",
+        "floor": true
+      },
+      {
+        "name": "Priscilla Chang",
+        "role": "mentioned",
+        "popid": "POP-01158",
+        "floor": true
+      },
+      {
+        "name": "Vinnie Keane",
+        "role": "mentioned",
+        "popid": "POP-00001",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "INIT-003:design-phase",
+        "verb": "referenced",
+        "attachedBy": "stepAttach"
+      },
+      {
+        "slug": "INIT-006:construction-active",
+        "verb": "referenced",
+        "attachedBy": "stepAttach"
+      },
+      {
+        "slug": "INIT-007:implementation-active",
+        "verb": "referenced",
+        "attachedBy": "stepAttach"
+      }
+    ],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "I moved into my place in Lake Merritt and it's been a real adjustment. The other night, the wind was rattling the window frame near the front porch and I couldn't sleep. It got me thinking about some of the decisions I've made, wondering if they were the right ones. I've been seeing some familiar faces around the neighborhood, like Vinnie Keane at Grand Avenue Wine Bar. It's nice to have some continuity.",
+        "sourceRef": "citizenVoice PRESS Tyler Filet"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-3513961d699a",
+    "draftSha256": "f185d878ee726a9530a0aee8671fc78365eb95d5da9c91554bb8c7bac1c4f136",
+    "verdict": "output/cron-compare/culture_c114_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-05T00:20:42.077Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 450",
+      "words": 1251,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "f185d878ee726a9530a0aee8671fc78365eb95d5da9c91554bb8c7bac1c4f136",
+      "costUsd": 0.0015
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-05T00:20:45.326Z"
+}

@@ -1,0 +1,54 @@
+{
+  "office": "oari",
+  "cycle": 114,
+  "speaker": "Dr. Vanessa Tran-Muñoz",
+  "cascadeSummary": "I executed the D3 East Oakland community briefing this cycle with Fruitvale corridor street-level response data and the Baylight District feasibility review presented in the daylight, holding expansion until residents and merchants saw the numbers themselves. I filed the D5 dispatch performance audit and the D1 evaluation review, and extended the OARI response protocol into the Baylight District corridor for feasibility review only. The briefing is done; the expansion decision now waits on the public record, not on my office.",
+  "statements": [
+    {
+      "statementId": "STMT-114-oari-001",
+      "type": "community_briefing",
+      "topic": "D3 East Oakland community briefing — Fruitvale data and Baylight feasibility review",
+      "initiative": "Oakland Alternative Response Initiative",
+      "decision": "Executed the D3 East Oakland community briefing with district-level Fruitvale corridor response data and the Baylight District feasibility review presented publicly; held the expansion decision pending the public process.",
+      "quote": "The right number isn't the citywide average — it's how fast care reaches Fruitvale's streets, and that's the number we put in front of the people who called 911.",
+      "fullStatement": "We held the D3 community briefing this cycle, in East Oakland, in daylight. Fruitvale corridor street-level response data on the screen, the Baylight District feasibility review on the docket, and the residents who actually placed the calls in the room asking the questions. That is the deal I made last cycle and that is the deal I kept. The expansion decision holds until this public process closes — not because I don't want to move, but because the people who live with the results get to see the numbers before anyone asks them to accept a change. The briefing is on the record. The data is in their hands.",
+      "trackerUpdates": {
+        "initiative": "INIT-002",
+        "ImplementationPhase": "pilot_evaluation",
+        "MilestoneNotes": "C114: D3 East Oakland community briefing executed with Fruitvale street-level response data + Baylight feasibility review; expansion held pending public process.",
+        "NextScheduledAction": "Publish D3 briefing record and D5 dispatch performance audit; close expansion evidence packet",
+        "NextActionCycle": 115
+      }
+    },
+    {
+      "statementId": "STMT-114-oari-002",
+      "type": "audit_report",
+      "topic": "D5 dispatch performance audit and D1 evaluation review",
+      "initiative": "Oakland Alternative Response Initiative",
+      "decision": "Filed the D5 dispatch performance audit responding to Planning Director Vance's directive and completed the D1 OARI evaluation review reporting dispatch evaluation metrics for INIT-002.",
+      "quote": "We answered the D5 dispatch audit and the D1 evaluation review on paper, with numbers, where anyone can find them — because a program that can't show its dispatch record has no business asking for a bigger one.",
+      "fullStatement": "Two filings went in this cycle. The D5 dispatch performance audit came back answering Planning Director Vance's directive — the actual call-routing record, not a summary of a summary. And the D1 OARI evaluation review is complete, reporting dispatch evaluation metrics for the initiative in the public record. Two active District 1 citizen complaints, two public answers: this is where you find them. What a reporter would see if they pulled the filings is the same thing a neighbor would see: the response times, the routing, the handoffs, the places we're still slow. That's the point. You don't earn the next district by hiding the last one's paperwork.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-114-oari-003",
+      "type": "protocol_extension",
+      "topic": "Baylight District corridor protocol extension — feasibility review only",
+      "initiative": "Oakland Alternative Response Initiative",
+      "decision": "Extended the OARI D5 response protocol into the Baylight District corridor for feasibility review — operational assessment only, no expansion authorization implied.",
+      "quote": "Extending the protocol into the Baylight corridor is a question we're asking, not an answer we're announcing — feasibility first, authorization second, and never the other way around.",
+      "fullStatement": "We extended the OARI D5 response protocol into the Baylight District corridor this cycle, and I want to be precise about what that is and is not. It is a feasibility review — a real operational assessment of whether civilian crisis responders can reach Baylight the way they reach D5, what the travel times look like, where the handoffs would land. It is not an expansion. It is not a deployment. Nothing in the corridor changes for residents until the council authorizes it and the public process closes. I'm not going to let a feasibility review get spun into a launch, and I'm not going to skip the review just because the political calendar would prefer the headline. The corridor question gets answered on the ground before it gets answered at a podium.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-114-oari-004",
+      "type": "constituent_response",
+      "topic": "East Oakland response and West Oakland credit",
+      "initiative": null,
+      "decision": "Named the East Oakland briefing room and the responder crews as the accountable answer for East Oakland this cycle; credited West Oakland's low-crime, high-activity conditions to residents, workers, and merchants operating the program day to day.",
+      "quote": "East Oakland got the briefing and the numbers in their own neighborhood — and West Oakland's calm isn't a City Hall press release, it's neighbors and the crews who show up for them.",
+      "fullStatement": "For East Oakland: the answer this cycle is a briefing in the room, the Fruitvale data in hand, and the responders who are already taking those calls named where people can see them. The mood there has lifted — slow street trade, low crime, a hard economic stretch that didn't break the neighborhood — and the tutoring program at Masjid An-Nur expanding is exactly the kind of thing that holds a district together while the bigger systems catch up. For West Oakland: the low crime and the busy street trade aren't mine to claim and they're not the Mayor's to claim. They belong to the residents, the workers, and the merchants who show up every day and make a district safe by being in it. City programs share credit where the evidence supports it — and the evidence supports the people first.",
+      "trackerUpdates": {}
+    }
+  ]
+}

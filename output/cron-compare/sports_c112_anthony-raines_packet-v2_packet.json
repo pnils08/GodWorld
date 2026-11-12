@@ -1,0 +1,41 @@
+{
+  "stage": "report",
+  "desk": "sports",
+  "cycle": "112",
+  "persona": "anthony-raines",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Anthony Raines",
+    "popid": "POP-00017"
+  },
+  "assignment": {
+    "story": {
+      "kind": "sports-analytics",
+      "angle": "One line anchors the board read — .283AVG — and the evaluative question is whether that production is architecture or variance: Mark Aitken pending free agency, is it Kevin Clarks time?",
+      "label": "A's · rumor — Mark Aitken pending free agency, is it Kevin Clarks time?",
+      "hookLine": "Mark Aitken pending free agency, is it Kevin Clarks time?",
+      "hood": "Jack London",
+      "pulseClass": "line-card",
+      "team": "A's",
+      "eventKind": "rumor",
+      "citizens": [
+        "Mark Aitken (POP-00003)",
+        "Kevin Clark (POP-00053)"
+      ],
+      "popids": [
+        "POP-00003",
+        "POP-00053"
+      ],
+      "ref": "world_summary_c112.md ## Sports",
+      "cycle": 112
+    }
+  },
+  "angle": "output/cron-compare/sports_c112_anthony-raines_packet-v2_angle.json",
+  "quotesRequested": 0,
+  "quotesLanded": 0,
+  "quotes": [],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [],
+  "ranAt": "2026-10-19T18:17:35.922Z"
+}

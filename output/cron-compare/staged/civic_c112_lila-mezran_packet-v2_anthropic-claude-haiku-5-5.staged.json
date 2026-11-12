@@ -1,0 +1,94 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "112",
+  "persona": "lila-mezran",
+  "byline": "Dr. Lila Mezran",
+  "bylinePopid": "POP-00154",
+  "article": "output/cron-compare/staged/civic_c112_lila-mezran_packet-v2_anthropic-claude-haiku-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Yu Zen",
+        "role": "quoted-source",
+        "popid": "POP-00194"
+      },
+      {
+        "name": "Deacon Seymour",
+        "role": "quoted-source",
+        "popid": "POP-00528"
+      },
+      {
+        "name": "Kenji Tanaka",
+        "role": "quoted-source",
+        "popid": "POP-00763"
+      },
+      {
+        "name": "Matra Woven",
+        "role": "quoted-source",
+        "popid": "POP-00785"
+      },
+      {
+        "name": "Elena Leon",
+        "role": "mentioned",
+        "popid": "POP-00193",
+        "floor": true
+      },
+      {
+        "name": "Elle Lilo",
+        "role": "mentioned",
+        "popid": "POP-00177",
+        "floor": true
+      },
+      {
+        "name": "Jonas Patel",
+        "role": "mentioned",
+        "popid": "POP-00142",
+        "floor": true
+      },
+      {
+        "name": "Maurice Franklin",
+        "role": "mentioned",
+        "popid": "POP-00801",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Chinatown"
+    ],
+    "claims": [
+      {
+        "claim": "The numbers tell us how many are sick, but they don't tell you about the quiet ones. I see the faces of people who don't want to be a burden — the grandmother who still shows up to help fold flyers even though she's been coughing for weeks, the man who waves from his doorway but won't come to the community meal because he doesn't want to answer questions about his health. The city counts beds and cases. I count the people who are too proud, too scared, or too tired to be counted.",
+        "sourceRef": "citizenVoice PRESS Kenji Tanaka"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-f49bc2d4abf3",
+    "draftSha256": "7de1e2fa840198538a7597d6c320b94e57bb5adccc51505dd0c09fe27cd74bd6",
+    "verdict": "output/cron-compare/civic_c112_lila-mezran_packet-v2_anthropic-claude-haiku-5-5.rhea.json",
+    "ranAt": "2026-10-19T23:17:48.914Z",
+    "contractScore": {
+      "opened": false,
+      "closed": false,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 1122,
+      "short": "The opening begins with anecdotal scene-setting instead of a Packet-backed health-service or access fact, and the closing ends on a rhetorical question rather than stating the next record still needed.",
+      "score": 2,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "7de1e2fa840198538a7597d6c320b94e57bb5adccc51505dd0c09fe27cd74bd6",
+      "costUsd": 0.0019
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-19T23:17:54.572Z"
+}

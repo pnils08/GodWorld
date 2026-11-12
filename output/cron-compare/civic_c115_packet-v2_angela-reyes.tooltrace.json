@@ -1,0 +1,24 @@
+{
+  "model": "anthropic/claude-sonnet-5.5",
+  "calls": [
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Neighborhood_Demographics",
+        "match": "Temescal"
+      },
+      "resultChars": 243,
+      "resultHead": "Neighborhood | Students | Adults | Seniors | Unemployed | Sick | LastUpdated | SchoolQualityIndex | GraduationRate | CollegeReadinessRate | TeacherQuality | Funding\nTemescal | 314 | 2138 | 299 | 167 | 83 | 115 | 6.3 | 84.08 | 54 | 6.84 | 11500"
+    },
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Community_Programs",
+        "match": "Temescal"
+      },
+      "resultChars": 254,
+      "resultHead": "Program_ID | Name | Founder_POPID | Neighborhood | Type | Founded_Cycle | Status\nPRG-026 | Temescal Islamic Center Food Pantry |  | Temescal | mutual-aid | 83 | active\nPRG-032 | The Reaves Line Transit Fund | POP-01027 | Temescal | transit | 109 | active"
+    }
+  ],
+  "ranAt": "2026-11-11T00:17:27.841Z"
+}

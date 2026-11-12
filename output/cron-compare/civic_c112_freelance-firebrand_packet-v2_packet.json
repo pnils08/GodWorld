@@ -1,0 +1,1135 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "112",
+  "persona": "freelance-firebrand",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Jax Caldera",
+    "popid": "POP-00799"
+  },
+  "assignment": {
+    "story": {
+      "ref": "output/engine_audit_c112.json patterns[6]; evidence: Neighborhood_Map row(s) 19",
+      "label": "KONO: decay [Sentiment -0.310, RetailVitality -0.60, HousingPressure +0.500] — Sentiment now -0.01 (11 of 22, city median -0.025); RetailVitality now 7.88 (13 of 22, city median 8.879999999999999); HousingPressure now 0.5 (13 of 22, city median 0.25) — with no matching active initiative",
+      "kind": "anomaly",
+      "angle": "The map says decay; the program roster does not answer it.",
+      "hookLine": null,
+      "hood": "KONO",
+      "popids": [
+        "POP-00859",
+        "POP-00867",
+        "POP-01203",
+        "POP-01208",
+        "POP-00648",
+        "POP-00934"
+      ],
+      "citizens": [
+        "Tatiana Flores — HVAC Technician, KONO",
+        "Makayla Wu — Electrician, KONO",
+        "Iris Pham — Barista, Baylight District",
+        "Pooja Coleman — Warehouse worker, Baylight District",
+        "Mart Johns — Nurse Aide, KONO",
+        "Florencia Shah — Independent Bookstore Owner, KONO"
+      ],
+      "stinkClass": "metric-contradiction",
+      "stinkScore": 61
+    }
+  },
+  "angle": "output/cron-compare/civic_c112_freelance-firebrand_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 4,
+  "quotes": [
+    {
+      "pop": "POP-00859",
+      "name": "Tatiana Flores",
+      "quote": "To be honest, I've been feeling pretty positive about KONO since I moved here ten weeks ago. The energy around the Fox Theater is great, and Northgate Kitchen is always bustling. I've seen new faces around, which is nice. I haven't really noticed any lack of initiative, but I'm not sure I'd be aware of everything going on behind the scenes. My focus is on getting settled and enjoying the neighborhood.",
+      "disp": "draws people in, deep with them",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, I've been feeling pretty positive about KONO since I moved here ten weeks ago. The energy around the Fox Theater is great, and Northgate Kitchen is always bustling. I've seen new faces around, which is nice. I haven't really noticed any lack of initiative, but I'm not sure I'd be aware of everything going on behind the scenes. My focus is on getting settled and enjoying the neighborhood.\",\n  \"fact_ids\": [\"F-c3257fa50cbd\", \"F-35f59f20b487\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c3257fa50cbd",
+          "F-35f59f20b487"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00859-07fdd40e95",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, I've been feeling pretty positive about KONO since I moved here ten weeks ago. The energy around the Fox Theater is great, and Northgate Kitchen is always bustling. I've seen new faces around, which is nice. I haven't really noticed any lack of initiative, but I'm not sure I'd be aware of everything going on behind the scenes. My focus is on getting settled and enjoying the neighborhood."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00859",
+          "name": "Tatiana Flores",
+          "role": "HVAC Technician",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jax Caldera",
+          "question": "What's your take on the current state of KONO and how do you think the lack of initiative is affecting the neighborhood? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "KONO",
+          "focus": "KONO neighborhood's decay metrics without a matching active initiative",
+          "src": "output/engine_audit_c112.json patterns[6]; evidence: Neighborhood_Map row(s) 19"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Tatiana Flores (POP-00859) — role: HVAC Technician; neighborhood: KONO; born: 2000; careerStage: mid-career; wealth: 8; employerBiz: BIZ-00020; skills: Trades; tier: 4",
+          "evidence": [
+            {
+              "id": "EV-9440db9166",
+              "src": "output/engine_audit_c112.json patterns[6]; evidence: Neighborhood_Map row(s) 19",
+              "text": "KONO: decay [Sentiment -0.310, RetailVitality -0.60, HousingPressure +0.500] — Sentiment now -0.01 (11 of 22, city median -0.025); RetailVitality now 7.88 (13 of 22, city median 8.879999999999999); HousingPressure now 0.5 (13 of 22, city median 0.25) — with no matching active initiative"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "KONO: decay [Sentiment -0.310, RetailVitality -0.60, HousingPressure +0.500] — Sentiment now -0.01 (11 of 22, city median -0.025); RetailVitality now 7.88 (13 of 22, city median 8.879999999999999); HousingPressure now 0.5 (13 of 22, city median 0.25) — with no matching active initiative",
+            "src": "output/engine_audit_c112.json patterns[6]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-35f59f20b487"
+          },
+          {
+            "t": "FACT",
+            "text": "No active initiative (or mitigator) owns this break on the record",
+            "src": "output/engine_audit_c112.json patterns[6]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-f483be714894"
+          },
+          {
+            "t": "FACT",
+            "text": "Season: Winter | Weather: 48°F clear, W 8 mph, clear (frontState CLEAR), humidity 51, visibility 10",
+            "src": "World_Config/weather snapshot for C112",
+            "id": "F-4555bd4f4ddd"
+          },
+          {
+            "t": "FACT",
+            "text": "Northgate Kitchen buzzes with diners, and new residents arrive from Adams Point. The Fox Theater anchors the neighborhood’s growing energy, with more people walking Telegraph Avenue.",
+            "src": "output/engine_audit_c112.json patterns[6]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-c3257fa50cbd"
+          },
+          {
+            "t": "FACT",
+            "text": "Tatiana Flores (POP-00859) — role: HVAC Technician; neighborhood: KONO; born: 2000; careerStage: mid-career; wealth: 8; employerBiz: BIZ-00020; skills: Trades; tier: 4",
+            "src": "Simulation_Ledger profile for POP-00859",
+            "id": "F-ec5e234a3653"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00934",
+      "name": "Florencia Shah",
+      "quote": "To be honest, I haven't noticed much decay around here. The Fox Theater is still lively, and Northgate Kitchen is always bustling. More people are walking around, which is good for my bookstore. I've seen new faces from Adams Point moving in, and that brings some fresh energy. I think the neighborhood is doing okay.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, I haven't noticed much decay around here. The Fox Theater is still lively, and Northgate Kitchen is always bustling. More people are walking around, which is good for my bookstore. I've seen new faces from Adams Point moving in, and that brings some fresh energy. I think the neighborhood is doing okay.\",\n  \"fact_ids\": [\"F-c3257fa50cbd\", \"F-35f59f20b487\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c3257fa50cbd",
+          "F-35f59f20b487"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00934-73aa1891f0",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, I haven't noticed much decay around here. The Fox Theater is still lively, and Northgate Kitchen is always bustling. More people are walking around, which is good for my bookstore. I've seen new faces from Adams Point moving in, and that brings some fresh energy. I think the neighborhood is doing okay."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00934",
+          "name": "Florencia Shah",
+          "role": "Independent Bookstore Owner",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jax Caldera",
+          "question": "How has the supposed decay in KONO affected your business and what do you think should be done about it? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "KONO",
+          "focus": "KONO neighborhood's decay metrics without a matching active initiative",
+          "src": "output/engine_audit_c112.json patterns[6]; evidence: Neighborhood_Map row(s) 19"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Florencia Shah (POP-00934) — role: Independent Bookstore Owner; neighborhood: KONO; born: 1955; careerStage: retired; wealth: 6; employerBiz: SELF_EMPLOYED; skills: Small Business; tier: 4",
+          "evidence": [
+            {
+              "id": "EV-621a3fb032",
+              "src": "output/engine_audit_c112.json patterns[6]; evidence: Neighborhood_Map row(s) 19",
+              "text": "KONO: decay [Sentiment -0.310, RetailVitality -0.60, HousingPressure +0.500] — Sentiment now -0.01 (11 of 22, city median -0.025); RetailVitality now 7.88 (13 of 22, city median 8.879999999999999); HousingPressure now 0.5 (13 of 22, city median 0.25) — with no matching active initiative"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "KONO: decay [Sentiment -0.310, RetailVitality -0.60, HousingPressure +0.500] — Sentiment now -0.01 (11 of 22, city median -0.025); RetailVitality now 7.88 (13 of 22, city median 8.879999999999999); HousingPressure now 0.5 (13 of 22, city median 0.25) — with no matching active initiative",
+            "src": "output/engine_audit_c112.json patterns[6]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-35f59f20b487"
+          },
+          {
+            "t": "FACT",
+            "text": "No active initiative (or mitigator) owns this break on the record",
+            "src": "output/engine_audit_c112.json patterns[6]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-f483be714894"
+          },
+          {
+            "t": "FACT",
+            "text": "Season: Winter | Weather: 48°F clear, W 8 mph, clear (frontState CLEAR), humidity 51, visibility 10",
+            "src": "World_Config/weather snapshot for C112",
+            "id": "F-4555bd4f4ddd"
+          },
+          {
+            "t": "FACT",
+            "text": "Northgate Kitchen buzzes with diners, and new residents arrive from Adams Point. The Fox Theater anchors the neighborhood’s growing energy, with more people walking Telegraph Avenue.",
+            "src": "output/engine_audit_c112.json patterns[6]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-c3257fa50cbd"
+          },
+          {
+            "t": "FACT",
+            "text": "Florencia Shah (POP-00934) — role: Independent Bookstore Owner; neighborhood: KONO; born: 1955; careerStage: retired; wealth: 6; employerBiz: SELF_EMPLOYED; skills: Small Business; tier: 4",
+            "src": "Simulation_Ledger profile for POP-00934",
+            "id": "F-d47776b8d8fa"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00867",
+      "name": "Makayla Wu",
+      "quote": "I've noticed that KONO is changing, but not in a straightforward way. On one hand, places like Northgate Kitchen are bustling, and you see more people on Telegraph Avenue now. My husband and I even talked about checking out the Fox Theater for a show. On the other hand, I've had some jobs that make me wonder about the overall condition. It's like there's this mix of renewal and neglect. I don't know, maybe it's just my perspective as someone who's been around for a while.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've noticed that KONO is changing, but not in a straightforward way. On one hand, places like Northgate Kitchen are bustling, and you see more people on Telegraph Avenue now. My husband and I even talked about checking out the Fox Theater for a show. On the other hand, I've had some jobs that make me wonder about the overall condition. It's like there's this mix of renewal and neglect. I don't know, maybe it's just my perspective as someone who's been around for a while.\",\n  \"fact_ids\": [\"F-c3257fa50cbd\", \"F-35f59f20b487\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c3257fa50cbd",
+          "F-35f59f20b487"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00867-1c35468694",
+        "authoredQuote": true,
+        "publishableQuote": "I've noticed that KONO is changing, but not in a straightforward way. On one hand, places like Northgate Kitchen are bustling, and you see more people on Telegraph Avenue now. My husband and I even talked about checking out the Fox Theater for a show. On the other hand, I've had some jobs that make me wonder about the overall condition. It's like there's this mix of renewal and neglect. I don't know, maybe it's just my perspective as someone who's been around for a while."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00867",
+          "name": "Makayla Wu",
+          "role": "Electrician",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jax Caldera",
+          "question": "As a resident of KONO, what have you seen, felt, or understood about \"KONO neighborhood's decay metrics without a matching active initiative\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "KONO",
+          "focus": "KONO neighborhood's decay metrics without a matching active initiative",
+          "src": "output/engine_audit_c112.json patterns[6]; evidence: Neighborhood_Map row(s) 19"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Makayla Wu (POP-00867) — role: Electrician; neighborhood: KONO; born: 2007; careerStage: mid-career; wealth: 5; employerBiz: UNTRACKED; skills: Trades; tier: 4",
+          "evidence": [
+            {
+              "id": "EV-34fd6fb6ca",
+              "src": "output/engine_audit_c112.json patterns[6]; evidence: Neighborhood_Map row(s) 19",
+              "text": "KONO: decay [Sentiment -0.310, RetailVitality -0.60, HousingPressure +0.500] — Sentiment now -0.01 (11 of 22, city median -0.025); RetailVitality now 7.88 (13 of 22, city median 8.879999999999999); HousingPressure now 0.5 (13 of 22, city median 0.25) — with no matching active initiative"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "KONO: decay [Sentiment -0.310, RetailVitality -0.60, HousingPressure +0.500] — Sentiment now -0.01 (11 of 22, city median -0.025); RetailVitality now 7.88 (13 of 22, city median 8.879999999999999); HousingPressure now 0.5 (13 of 22, city median 0.25) — with no matching active initiative",
+            "src": "output/engine_audit_c112.json patterns[6]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-35f59f20b487"
+          },
+          {
+            "t": "FACT",
+            "text": "No active initiative (or mitigator) owns this break on the record",
+            "src": "output/engine_audit_c112.json patterns[6]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-f483be714894"
+          },
+          {
+            "t": "FACT",
+            "text": "Season: Winter | Weather: 48°F clear, W 8 mph, clear (frontState CLEAR), humidity 51, visibility 10",
+            "src": "World_Config/weather snapshot for C112",
+            "id": "F-4555bd4f4ddd"
+          },
+          {
+            "t": "FACT",
+            "text": "Northgate Kitchen buzzes with diners, and new residents arrive from Adams Point. The Fox Theater anchors the neighborhood’s growing energy, with more people walking Telegraph Avenue.",
+            "src": "output/engine_audit_c112.json patterns[6]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-c3257fa50cbd"
+          },
+          {
+            "t": "FACT",
+            "text": "Makayla Wu (POP-00867) — role: Electrician; neighborhood: KONO; born: 2007; careerStage: mid-career; wealth: 5; employerBiz: UNTRACKED; skills: Trades; tier: 4",
+            "src": "Simulation_Ledger profile for POP-00867",
+            "id": "F-9337ddf45150"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01203",
+      "name": "Iris Pham",
+      "quote": "I've noticed that the waterfront in Baylight District feels unusually quiet lately. There's a tension in the air that I've never seen before. I think it's related to what's going on in other neighborhoods, like KONO. I've heard people talking about how some areas are struggling, and it makes me wonder if we'll be affected too.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've noticed that the waterfront in Baylight District feels unusually quiet lately. There's a tension in the air that I've never seen before. I think it's related to what's going on in other neighborhoods, like KONO. I've heard people talking about how some areas are struggling, and it makes me wonder if we'll be affected too.\",\n  \"fact_ids\": [\"F-35f59f20b487\", \"F-de8bc1bb2eaf\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-35f59f20b487",
+          "F-de8bc1bb2eaf"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01203-63970fa0fa",
+        "authoredQuote": true,
+        "publishableQuote": "I've noticed that the waterfront in Baylight District feels unusually quiet lately. There's a tension in the air that I've never seen before. I think it's related to what's going on in other neighborhoods, like KONO. I've heard people talking about how some areas are struggling, and it makes me wonder if we'll be affected too."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01203",
+          "name": "Iris Pham",
+          "role": "Barista",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jax Caldera",
+          "question": "What have you seen, felt, or understood about \"KONO neighborhood's decay metrics without a matching active initiative\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "KONO",
+          "focus": "KONO neighborhood's decay metrics without a matching active initiative",
+          "src": "output/engine_audit_c112.json patterns[6]; evidence: Neighborhood_Map row(s) 19"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Iris Pham (POP-01203) — role: Barista; neighborhood: Baylight District; born: 2018; careerStage: entry-level; wealth: 5; tier: 4",
+          "evidence": [
+            {
+              "id": "EV-ccde0c439c",
+              "src": "output/engine_audit_c112.json patterns[6]; evidence: Neighborhood_Map row(s) 19",
+              "text": "KONO: decay [Sentiment -0.310, RetailVitality -0.60, HousingPressure +0.500] — Sentiment now -0.01 (11 of 22, city median -0.025); RetailVitality now 7.88 (13 of 22, city median 8.879999999999999); HousingPressure now 0.5 (13 of 22, city median 0.25) — with no matching active initiative"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "KONO: decay [Sentiment -0.310, RetailVitality -0.60, HousingPressure +0.500] — Sentiment now -0.01 (11 of 22, city median -0.025); RetailVitality now 7.88 (13 of 22, city median 8.879999999999999); HousingPressure now 0.5 (13 of 22, city median 0.25) — with no matching active initiative",
+            "src": "output/engine_audit_c112.json patterns[6]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-35f59f20b487"
+          },
+          {
+            "t": "FACT",
+            "text": "No active initiative (or mitigator) owns this break on the record",
+            "src": "output/engine_audit_c112.json patterns[6]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-f483be714894"
+          },
+          {
+            "t": "FACT",
+            "text": "Season: Winter | Weather: 48°F clear, W 8 mph, clear (frontState CLEAR), humidity 51, visibility 10",
+            "src": "World_Config/weather snapshot for C112",
+            "id": "F-4555bd4f4ddd"
+          },
+          {
+            "t": "FACT",
+            "text": "Northgate Kitchen buzzes with diners, and new residents arrive from Adams Point. The Fox Theater anchors the neighborhood’s growing energy, with more people walking Telegraph Avenue.",
+            "src": "output/engine_audit_c112.json patterns[6]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-c3257fa50cbd"
+          },
+          {
+            "t": "FACT",
+            "text": "Iris Pham (POP-01203) — role: Barista; neighborhood: Baylight District; born: 2018; careerStage: entry-level; wealth: 5; tier: 4",
+            "src": "Simulation_Ledger profile for POP-01203",
+            "id": "F-de8bc1bb2eaf"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-00859",
+      "name": "Tatiana Flores",
+      "quote": "To be honest, I've been feeling pretty positive about KONO since I moved here ten weeks ago. The energy around the Fox Theater is great, and Northgate Kitchen is always bustling. I've seen new faces around, which is nice. I haven't really noticed any lack of initiative, but I'm not sure I'd be aware of everything going on behind the scenes. My focus is on getting settled and enjoying the neighborhood.",
+      "disp": "draws people in, deep with them",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, I've been feeling pretty positive about KONO since I moved here ten weeks ago. The energy around the Fox Theater is great, and Northgate Kitchen is always bustling. I've seen new faces around, which is nice. I haven't really noticed any lack of initiative, but I'm not sure I'd be aware of everything going on behind the scenes. My focus is on getting settled and enjoying the neighborhood.\",\n  \"fact_ids\": [\"F-c3257fa50cbd\", \"F-35f59f20b487\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c3257fa50cbd",
+          "F-35f59f20b487"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00859-07fdd40e95",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, I've been feeling pretty positive about KONO since I moved here ten weeks ago. The energy around the Fox Theater is great, and Northgate Kitchen is always bustling. I've seen new faces around, which is nice. I haven't really noticed any lack of initiative, but I'm not sure I'd be aware of everything going on behind the scenes. My focus is on getting settled and enjoying the neighborhood."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00859",
+          "name": "Tatiana Flores",
+          "role": "HVAC Technician",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jax Caldera",
+          "question": "What's your take on the current state of KONO and how do you think the lack of initiative is affecting the neighborhood? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "KONO",
+          "focus": "KONO neighborhood's decay metrics without a matching active initiative",
+          "src": "output/engine_audit_c112.json patterns[6]; evidence: Neighborhood_Map row(s) 19"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Tatiana Flores (POP-00859) — role: HVAC Technician; neighborhood: KONO; born: 2000; careerStage: mid-career; wealth: 8; employerBiz: BIZ-00020; skills: Trades; tier: 4",
+          "evidence": [
+            {
+              "id": "EV-9440db9166",
+              "src": "output/engine_audit_c112.json patterns[6]; evidence: Neighborhood_Map row(s) 19",
+              "text": "KONO: decay [Sentiment -0.310, RetailVitality -0.60, HousingPressure +0.500] — Sentiment now -0.01 (11 of 22, city median -0.025); RetailVitality now 7.88 (13 of 22, city median 8.879999999999999); HousingPressure now 0.5 (13 of 22, city median 0.25) — with no matching active initiative"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "KONO: decay [Sentiment -0.310, RetailVitality -0.60, HousingPressure +0.500] — Sentiment now -0.01 (11 of 22, city median -0.025); RetailVitality now 7.88 (13 of 22, city median 8.879999999999999); HousingPressure now 0.5 (13 of 22, city median 0.25) — with no matching active initiative",
+            "src": "output/engine_audit_c112.json patterns[6]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-35f59f20b487"
+          },
+          {
+            "t": "FACT",
+            "text": "No active initiative (or mitigator) owns this break on the record",
+            "src": "output/engine_audit_c112.json patterns[6]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-f483be714894"
+          },
+          {
+            "t": "FACT",
+            "text": "Season: Winter | Weather: 48°F clear, W 8 mph, clear (frontState CLEAR), humidity 51, visibility 10",
+            "src": "World_Config/weather snapshot for C112",
+            "id": "F-4555bd4f4ddd"
+          },
+          {
+            "t": "FACT",
+            "text": "Northgate Kitchen buzzes with diners, and new residents arrive from Adams Point. The Fox Theater anchors the neighborhood’s growing energy, with more people walking Telegraph Avenue.",
+            "src": "output/engine_audit_c112.json patterns[6]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-c3257fa50cbd"
+          },
+          {
+            "t": "FACT",
+            "text": "Tatiana Flores (POP-00859) — role: HVAC Technician; neighborhood: KONO; born: 2000; careerStage: mid-career; wealth: 8; employerBiz: BIZ-00020; skills: Trades; tier: 4",
+            "src": "Simulation_Ledger profile for POP-00859",
+            "id": "F-ec5e234a3653"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00934",
+      "name": "Florencia Shah",
+      "quote": "To be honest, I haven't noticed much decay around here. The Fox Theater is still lively, and Northgate Kitchen is always bustling. More people are walking around, which is good for my bookstore. I've seen new faces from Adams Point moving in, and that brings some fresh energy. I think the neighborhood is doing okay.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, I haven't noticed much decay around here. The Fox Theater is still lively, and Northgate Kitchen is always bustling. More people are walking around, which is good for my bookstore. I've seen new faces from Adams Point moving in, and that brings some fresh energy. I think the neighborhood is doing okay.\",\n  \"fact_ids\": [\"F-c3257fa50cbd\", \"F-35f59f20b487\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c3257fa50cbd",
+          "F-35f59f20b487"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00934-73aa1891f0",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, I haven't noticed much decay around here. The Fox Theater is still lively, and Northgate Kitchen is always bustling. More people are walking around, which is good for my bookstore. I've seen new faces from Adams Point moving in, and that brings some fresh energy. I think the neighborhood is doing okay."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00934",
+          "name": "Florencia Shah",
+          "role": "Independent Bookstore Owner",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jax Caldera",
+          "question": "How has the supposed decay in KONO affected your business and what do you think should be done about it? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "KONO",
+          "focus": "KONO neighborhood's decay metrics without a matching active initiative",
+          "src": "output/engine_audit_c112.json patterns[6]; evidence: Neighborhood_Map row(s) 19"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Florencia Shah (POP-00934) — role: Independent Bookstore Owner; neighborhood: KONO; born: 1955; careerStage: retired; wealth: 6; employerBiz: SELF_EMPLOYED; skills: Small Business; tier: 4",
+          "evidence": [
+            {
+              "id": "EV-621a3fb032",
+              "src": "output/engine_audit_c112.json patterns[6]; evidence: Neighborhood_Map row(s) 19",
+              "text": "KONO: decay [Sentiment -0.310, RetailVitality -0.60, HousingPressure +0.500] — Sentiment now -0.01 (11 of 22, city median -0.025); RetailVitality now 7.88 (13 of 22, city median 8.879999999999999); HousingPressure now 0.5 (13 of 22, city median 0.25) — with no matching active initiative"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "KONO: decay [Sentiment -0.310, RetailVitality -0.60, HousingPressure +0.500] — Sentiment now -0.01 (11 of 22, city median -0.025); RetailVitality now 7.88 (13 of 22, city median 8.879999999999999); HousingPressure now 0.5 (13 of 22, city median 0.25) — with no matching active initiative",
+            "src": "output/engine_audit_c112.json patterns[6]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-35f59f20b487"
+          },
+          {
+            "t": "FACT",
+            "text": "No active initiative (or mitigator) owns this break on the record",
+            "src": "output/engine_audit_c112.json patterns[6]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-f483be714894"
+          },
+          {
+            "t": "FACT",
+            "text": "Season: Winter | Weather: 48°F clear, W 8 mph, clear (frontState CLEAR), humidity 51, visibility 10",
+            "src": "World_Config/weather snapshot for C112",
+            "id": "F-4555bd4f4ddd"
+          },
+          {
+            "t": "FACT",
+            "text": "Northgate Kitchen buzzes with diners, and new residents arrive from Adams Point. The Fox Theater anchors the neighborhood’s growing energy, with more people walking Telegraph Avenue.",
+            "src": "output/engine_audit_c112.json patterns[6]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-c3257fa50cbd"
+          },
+          {
+            "t": "FACT",
+            "text": "Florencia Shah (POP-00934) — role: Independent Bookstore Owner; neighborhood: KONO; born: 1955; careerStage: retired; wealth: 6; employerBiz: SELF_EMPLOYED; skills: Small Business; tier: 4",
+            "src": "Simulation_Ledger profile for POP-00934",
+            "id": "F-d47776b8d8fa"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00867",
+      "name": "Makayla Wu",
+      "quote": "I've noticed that KONO is changing, but not in a straightforward way. On one hand, places like Northgate Kitchen are bustling, and you see more people on Telegraph Avenue now. My husband and I even talked about checking out the Fox Theater for a show. On the other hand, I've had some jobs that make me wonder about the overall condition. It's like there's this mix of renewal and neglect. I don't know, maybe it's just my perspective as someone who's been around for a while.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've noticed that KONO is changing, but not in a straightforward way. On one hand, places like Northgate Kitchen are bustling, and you see more people on Telegraph Avenue now. My husband and I even talked about checking out the Fox Theater for a show. On the other hand, I've had some jobs that make me wonder about the overall condition. It's like there's this mix of renewal and neglect. I don't know, maybe it's just my perspective as someone who's been around for a while.\",\n  \"fact_ids\": [\"F-c3257fa50cbd\", \"F-35f59f20b487\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c3257fa50cbd",
+          "F-35f59f20b487"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00867-1c35468694",
+        "authoredQuote": true,
+        "publishableQuote": "I've noticed that KONO is changing, but not in a straightforward way. On one hand, places like Northgate Kitchen are bustling, and you see more people on Telegraph Avenue now. My husband and I even talked about checking out the Fox Theater for a show. On the other hand, I've had some jobs that make me wonder about the overall condition. It's like there's this mix of renewal and neglect. I don't know, maybe it's just my perspective as someone who's been around for a while."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00867",
+          "name": "Makayla Wu",
+          "role": "Electrician",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jax Caldera",
+          "question": "As a resident of KONO, what have you seen, felt, or understood about \"KONO neighborhood's decay metrics without a matching active initiative\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "KONO",
+          "focus": "KONO neighborhood's decay metrics without a matching active initiative",
+          "src": "output/engine_audit_c112.json patterns[6]; evidence: Neighborhood_Map row(s) 19"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Makayla Wu (POP-00867) — role: Electrician; neighborhood: KONO; born: 2007; careerStage: mid-career; wealth: 5; employerBiz: UNTRACKED; skills: Trades; tier: 4",
+          "evidence": [
+            {
+              "id": "EV-34fd6fb6ca",
+              "src": "output/engine_audit_c112.json patterns[6]; evidence: Neighborhood_Map row(s) 19",
+              "text": "KONO: decay [Sentiment -0.310, RetailVitality -0.60, HousingPressure +0.500] — Sentiment now -0.01 (11 of 22, city median -0.025); RetailVitality now 7.88 (13 of 22, city median 8.879999999999999); HousingPressure now 0.5 (13 of 22, city median 0.25) — with no matching active initiative"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "KONO: decay [Sentiment -0.310, RetailVitality -0.60, HousingPressure +0.500] — Sentiment now -0.01 (11 of 22, city median -0.025); RetailVitality now 7.88 (13 of 22, city median 8.879999999999999); HousingPressure now 0.5 (13 of 22, city median 0.25) — with no matching active initiative",
+            "src": "output/engine_audit_c112.json patterns[6]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-35f59f20b487"
+          },
+          {
+            "t": "FACT",
+            "text": "No active initiative (or mitigator) owns this break on the record",
+            "src": "output/engine_audit_c112.json patterns[6]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-f483be714894"
+          },
+          {
+            "t": "FACT",
+            "text": "Season: Winter | Weather: 48°F clear, W 8 mph, clear (frontState CLEAR), humidity 51, visibility 10",
+            "src": "World_Config/weather snapshot for C112",
+            "id": "F-4555bd4f4ddd"
+          },
+          {
+            "t": "FACT",
+            "text": "Northgate Kitchen buzzes with diners, and new residents arrive from Adams Point. The Fox Theater anchors the neighborhood’s growing energy, with more people walking Telegraph Avenue.",
+            "src": "output/engine_audit_c112.json patterns[6]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-c3257fa50cbd"
+          },
+          {
+            "t": "FACT",
+            "text": "Makayla Wu (POP-00867) — role: Electrician; neighborhood: KONO; born: 2007; careerStage: mid-career; wealth: 5; employerBiz: UNTRACKED; skills: Trades; tier: 4",
+            "src": "Simulation_Ledger profile for POP-00867",
+            "id": "F-9337ddf45150"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01203",
+      "name": "Iris Pham",
+      "quote": "I've noticed that the waterfront in Baylight District feels unusually quiet lately. There's a tension in the air that I've never seen before. I think it's related to what's going on in other neighborhoods, like KONO. I've heard people talking about how some areas are struggling, and it makes me wonder if we'll be affected too.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've noticed that the waterfront in Baylight District feels unusually quiet lately. There's a tension in the air that I've never seen before. I think it's related to what's going on in other neighborhoods, like KONO. I've heard people talking about how some areas are struggling, and it makes me wonder if we'll be affected too.\",\n  \"fact_ids\": [\"F-35f59f20b487\", \"F-de8bc1bb2eaf\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-35f59f20b487",
+          "F-de8bc1bb2eaf"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01203-63970fa0fa",
+        "authoredQuote": true,
+        "publishableQuote": "I've noticed that the waterfront in Baylight District feels unusually quiet lately. There's a tension in the air that I've never seen before. I think it's related to what's going on in other neighborhoods, like KONO. I've heard people talking about how some areas are struggling, and it makes me wonder if we'll be affected too."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01203",
+          "name": "Iris Pham",
+          "role": "Barista",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jax Caldera",
+          "question": "What have you seen, felt, or understood about \"KONO neighborhood's decay metrics without a matching active initiative\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "KONO",
+          "focus": "KONO neighborhood's decay metrics without a matching active initiative",
+          "src": "output/engine_audit_c112.json patterns[6]; evidence: Neighborhood_Map row(s) 19"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Iris Pham (POP-01203) — role: Barista; neighborhood: Baylight District; born: 2018; careerStage: entry-level; wealth: 5; tier: 4",
+          "evidence": [
+            {
+              "id": "EV-ccde0c439c",
+              "src": "output/engine_audit_c112.json patterns[6]; evidence: Neighborhood_Map row(s) 19",
+              "text": "KONO: decay [Sentiment -0.310, RetailVitality -0.60, HousingPressure +0.500] — Sentiment now -0.01 (11 of 22, city median -0.025); RetailVitality now 7.88 (13 of 22, city median 8.879999999999999); HousingPressure now 0.5 (13 of 22, city median 0.25) — with no matching active initiative"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "KONO: decay [Sentiment -0.310, RetailVitality -0.60, HousingPressure +0.500] — Sentiment now -0.01 (11 of 22, city median -0.025); RetailVitality now 7.88 (13 of 22, city median 8.879999999999999); HousingPressure now 0.5 (13 of 22, city median 0.25) — with no matching active initiative",
+            "src": "output/engine_audit_c112.json patterns[6]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-35f59f20b487"
+          },
+          {
+            "t": "FACT",
+            "text": "No active initiative (or mitigator) owns this break on the record",
+            "src": "output/engine_audit_c112.json patterns[6]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-f483be714894"
+          },
+          {
+            "t": "FACT",
+            "text": "Season: Winter | Weather: 48°F clear, W 8 mph, clear (frontState CLEAR), humidity 51, visibility 10",
+            "src": "World_Config/weather snapshot for C112",
+            "id": "F-4555bd4f4ddd"
+          },
+          {
+            "t": "FACT",
+            "text": "Northgate Kitchen buzzes with diners, and new residents arrive from Adams Point. The Fox Theater anchors the neighborhood’s growing energy, with more people walking Telegraph Avenue.",
+            "src": "output/engine_audit_c112.json patterns[6]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-c3257fa50cbd"
+          },
+          {
+            "t": "FACT",
+            "text": "Iris Pham (POP-01203) — role: Barista; neighborhood: Baylight District; born: 2018; careerStage: entry-level; wealth: 5; tier: 4",
+            "src": "Simulation_Ledger profile for POP-01203",
+            "id": "F-de8bc1bb2eaf"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-10-21T18:16:41.893Z"
+}

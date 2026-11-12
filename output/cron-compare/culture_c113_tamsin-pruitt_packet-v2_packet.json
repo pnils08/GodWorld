@@ -1,0 +1,846 @@
+{
+  "stage": "report",
+  "desk": "culture",
+  "cycle": "113",
+  "persona": "tamsin-pruitt",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Tamsin Pruitt",
+    "popid": "POP-01210"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-lives",
+      "angle": "The lives of C113: 11 people — Ily Gonzalez moved into a place of their own in Uptown, renting",
+      "label": "Ily Gonzalez moved into a place of their own in Uptown, renting",
+      "hookLine": "Ily Gonzalez first. The event is the lead; one true detail; what came next only if the record says.",
+      "hood": null,
+      "citizens": [
+        "Ily Gonzalez (POP-00455)",
+        "Tomas Aguilar (POP-00529)",
+        "Mei-Lin Zhou (POP-01177)",
+        "Dax Monroe (POP-00769)",
+        "Genevieve Martinez (POP-00864)",
+        "Imogen Soto (POP-00825)",
+        "Drew Lemon (POP-00670)",
+        "Weston Herrin (POP-00494)",
+        "Juliet Choi (POP-00857)",
+        "Mateo Jilner (POP-01001)",
+        "Mei Patel (POP-01007)"
+      ],
+      "popids": [
+        "POP-00455",
+        "POP-00529",
+        "POP-01177",
+        "POP-00769",
+        "POP-00864",
+        "POP-00825",
+        "POP-00670",
+        "POP-00494",
+        "POP-00857",
+        "POP-01001",
+        "POP-01007"
+      ],
+      "ref": "output/beats/Lived_Events.jsonl @C113 batch 63d367",
+      "cycle": 113
+    }
+  },
+  "angle": "output/cron-compare/culture_c113_tamsin-pruitt_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 1,
+  "quotes": [
+    {
+      "pop": "POP-00769",
+      "name": "Dax Monroe",
+      "quote": "I've been thinking a lot about the cycles of life in Rockridge lately. The other night, I was at the window, just observing the world go by. It made me reflect on how people's lives are intertwined with the events around them. I've seen it in my own life, with my kids growing up and the community changing. It's like the lives of those 11 people must have been shaped by the events they experienced, just like mine are shaped by the everyday moments here in Rockridge.",
+      "disp": "draws people in, deep with them",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've been thinking a lot about the cycles of life in Rockridge lately. The other night, I was at the window, just observing the world go by. It made me reflect on how people's lives are intertwined with the events around them. I've seen it in my own life, with my kids growing up and the community changing. It's like the lives of those 11 people must have been shaped by the events they experienced, just like mine are shaped by the everyday moments here in Rockridge.\",\n  \"fact_ids\": [\"F-1ea8110bf408\", \"F-e19a7524b395\", \"F-a67ff8afd037\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-1ea8110bf408",
+          "F-e19a7524b395",
+          "F-a67ff8afd037"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00769-4eebce6732",
+        "authoredQuote": true,
+        "publishableQuote": "I've been thinking a lot about the cycles of life in Rockridge lately. The other night, I was at the window, just observing the world go by. It made me reflect on how people's lives are intertwined with the events around them. I've seen it in my own life, with my kids growing up and the community changing. It's like the lives of those 11 people must have been shaped by the events they experienced, just like mine are shaped by the everyday moments here in Rockridge."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00769",
+          "name": "Dax Monroe",
+          "role": "Artist",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Tamsin Pruitt",
+          "question": "What have you seen, felt, or understood about \"The lives of C113: 11 people and the events that shaped their cycle\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-lives",
+          "hood": null,
+          "focus": "The lives of C113: 11 people and the events that shaped their cycle",
+          "src": "output/beats/Lived_Events.jsonl @C113 batch 63d367"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Dax Monroe — Artist — Rockridge",
+          "evidence": [
+            {
+              "id": "EV-9c3dfdc525",
+              "src": "output/beats/Lived_Events.jsonl @C113 batch 63d367",
+              "text": "Ily Gonzalez first. The event is the lead; one true detail; what came next only if the record says."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Dax Monroe lost on the UNDOCKED book — staked 130, the book kept it, Rockridge (C113)",
+            "src": "output/beats/Casino_Ledger.jsonl @C113",
+            "id": "F-2792272224c2"
+          },
+          {
+            "t": "FACT",
+            "text": "Dax Monroe — in their life, C113: caught the recap of last night's game at the counter and stayed for the second retelling",
+            "src": "output/beats/LifeHistory_Log.jsonl @C113",
+            "id": "F-1ea8110bf408"
+          },
+          {
+            "t": "FACT",
+            "text": "Dax Monroe — in their life, C113: navigated around a film crew blocking the sidewalk near the waterfront and rolled their eyes near a bookstore corner",
+            "src": "output/beats/LifeHistory_Log.jsonl @C113",
+            "id": "F-e19a7524b395"
+          },
+          {
+            "t": "FACT",
+            "text": "Dax Monroe — in their life, C113: dodged the running groups circling the lake and found a quiet bench near the pergola near a cafe on the avenue",
+            "src": "output/beats/LifeHistory_Log.jsonl @C113",
+            "id": "F-984ea5522097"
+          },
+          {
+            "t": "FACT",
+            "text": "Dax Monroe — in their life, C113: spent the evening sorting a box of things that used to be someone's",
+            "src": "output/beats/LifeHistory_Log.jsonl @C113",
+            "id": "F-a67ff8afd037"
+          },
+          {
+            "t": "FACT",
+            "text": "Dax Monroe — the Tribune named them in a piece headlined OAKLAND TRIBUNE (General, C69)",
+            "src": "archive/ARTICLE_INDEX.jsonl 457aef4e0c520006",
+            "id": "F-e7c2324b932b"
+          },
+          {
+            "t": "FACT",
+            "text": "Dax Monroe — the Tribune named them in a piece headlined CYCLES 23–33 (General, C23)",
+            "src": "archive/ARTICLE_INDEX.jsonl d2a5b7dd0e49efb4",
+            "id": "F-21bbb34d9935"
+          },
+          {
+            "t": "FACT",
+            "text": "Dax Monroe — the Tribune named them in a piece headlined UPTOWN STREET FAIR AND PIER LIGHTS CONCERT TURN OAKLAND EVENINGS INTO A CANVAS (cycle 12-18) (Arts, C12)",
+            "src": "archive/ARTICLE_INDEX.jsonl 825dce54af59dbe3",
+            "id": "F-d5c90bde020a"
+          },
+          {
+            "t": "FACT",
+            "text": "Dax Monroe — Artist — Rockridge",
+            "src": "Simulation_Ledger profile for POP-00769",
+            "id": "F-9e0d1a641a6e"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-00455",
+      "name": "Ily Gonzalez",
+      "quote": null,
+      "disp": "even-keeled, unremarkable",
+      "recorded": false,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"abstain\",\n  \"quote\": null,\n  \"fact_ids\": [],\n  \"basis\": null,\n  \"unverifiedLead\": null,\n  \"abstain_reason\": \"no_lived_basis\"\n}\n```",
+      "claims": {
+        "answer": "abstain",
+        "factIds": [],
+        "basis": null,
+        "unverifiedLead": [],
+        "abstainReason": "no_lived_basis",
+        "quoteId": null,
+        "authoredQuote": false,
+        "publishableQuote": null
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00455",
+          "name": "Ily Gonzalez",
+          "role": "Fashion Designer",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Tamsin Pruitt",
+          "question": "What led Ily Gonzalez to move into a place of their own in Uptown? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-lives",
+          "hood": null,
+          "focus": "The lives of C113: 11 people and the events that shaped their cycle",
+          "src": "output/beats/Lived_Events.jsonl @C113 batch 63d367"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Ily Gonzalez — Fashion Designer — Uptown",
+          "evidence": [
+            {
+              "id": "EV-9ea4429fc0",
+              "src": "output/beats/Lived_Events.jsonl @C113 batch 63d367",
+              "text": "Ily Gonzalez first. The event is the lead; one true detail; what came next only if the record says."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Ily Gonzalez moved into a place of their own in Uptown, renting",
+            "src": "output/beats/Lived_Events.jsonl @C113 batch 63d367",
+            "id": "F-dcba563ff0a0"
+          },
+          {
+            "t": "FACT",
+            "text": "Ily Gonzalez first. The event is the lead; one true detail; what came next only if the record says.",
+            "src": "output/beats/Lived_Events.jsonl @C113 batch 63d367",
+            "id": "F-419740f9e0ea"
+          },
+          {
+            "t": "FACT",
+            "text": "Ily Gonzalez moved into a place of their own in Uptown, renting (C113)",
+            "src": "output/beats/Household_Ledger.jsonl @C113",
+            "id": "F-4fdf4e673413"
+          },
+          {
+            "t": "FACT",
+            "text": "Ily Gonzalez — in their life, C112: read or studied indoors during winter pace",
+            "src": "output/beats/LifeHistory_Log.jsonl @C112",
+            "id": "F-8813671b9238"
+          },
+          {
+            "t": "FACT",
+            "text": "Ily Gonzalez — in their life, C112: loved the A's on principle and still cleared the night for UNDOCKED",
+            "src": "output/beats/LifeHistory_Log.jsonl @C112",
+            "id": "F-2446d11a0bde"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "Tomas Aguilar moved into a place of their own in Jack London, renting (C113)",
+            "src": "output/beats/Household_Ledger.jsonl @C113",
+            "id": "F-1b0bb0040fff"
+          },
+          {
+            "t": "FACT",
+            "text": "Tomas Aguilar — in their life, C112: overheard their own name in a conversation outside the cafe near a late-night counter",
+            "src": "output/beats/LifeHistory_Log.jsonl @C112",
+            "id": "F-93f735ccc8da"
+          },
+          {
+            "t": "FACT",
+            "text": "Ily Gonzalez — Fashion Designer — Uptown",
+            "src": "Simulation_Ledger profile for POP-00455",
+            "id": "F-999795693242"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00529",
+      "name": "Tomas Aguilar",
+      "quote": null,
+      "disp": "even-keeled, unremarkable",
+      "recorded": false,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"abstain\",\n  \"quote\": null,\n  \"fact_ids\": [],\n  \"basis\": null,\n  \"unverifiedLead\": null,\n  \"abstain_reason\": \"no_lived_basis\"\n}\n```",
+      "claims": {
+        "answer": "abstain",
+        "factIds": [],
+        "basis": null,
+        "unverifiedLead": [],
+        "abstainReason": "no_lived_basis",
+        "quoteId": null,
+        "authoredQuote": false,
+        "publishableQuote": null
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00529",
+          "name": "Tomas Aguilar",
+          "role": "Freight Logistics Coordinator (Port of Oakland)",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Tamsin Pruitt",
+          "question": "How does Tomas Aguilar's experience of moving into a new place relate to their work and personal life? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-lives",
+          "hood": null,
+          "focus": "The lives of C113: 11 people and the events that shaped their cycle",
+          "src": "output/beats/Lived_Events.jsonl @C113 batch 63d367"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Tomas Aguilar — Freight Logistics Coordinator (Port of Oakland) — Jack London",
+          "evidence": [
+            {
+              "id": "EV-dfb0e666ee",
+              "src": "output/beats/Lived_Events.jsonl @C113 batch 63d367",
+              "text": "Ily Gonzalez first. The event is the lead; one true detail; what came next only if the record says."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Tomas Aguilar moved into a place of their own in Jack London, renting (C113)",
+            "src": "output/beats/Household_Ledger.jsonl @C113",
+            "id": "F-1b0bb0040fff"
+          },
+          {
+            "t": "FACT",
+            "text": "Tomas Aguilar — in their life, C112: overheard their own name in a conversation outside the cafe near a late-night counter",
+            "src": "output/beats/LifeHistory_Log.jsonl @C112",
+            "id": "F-93f735ccc8da"
+          },
+          {
+            "t": "FACT",
+            "text": "Tomas Aguilar — in their life, C112: heard Jack London was packed last night",
+            "src": "output/beats/LifeHistory_Log.jsonl @C112",
+            "id": "F-466d152ef52a"
+          },
+          {
+            "t": "FACT",
+            "text": "Tomas Aguilar — in their life, C112: ran the numbers on staying put another year",
+            "src": "output/beats/LifeHistory_Log.jsonl @C112",
+            "id": "F-dbf50e4cd88d"
+          },
+          {
+            "t": "FACT",
+            "text": "Tomas Aguilar — in their life, C113: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+            "src": "output/beats/LifeHistory_Log.jsonl @C113",
+            "id": "F-c04bd4593f31"
+          },
+          {
+            "t": "FACT",
+            "text": "Tomas Aguilar — the Tribune named them in a piece headlined Oakland on the NBA Expansion List: The Systems Guy Behind the Bid (Business, C91)",
+            "src": "archive/ARTICLE_INDEX.jsonl fd2640e7ebaa48d1",
+            "id": "F-a39a2d20e555"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "Ily Gonzalez moved into a place of their own in Uptown, renting",
+            "src": "output/beats/Lived_Events.jsonl @C113 batch 63d367",
+            "id": "F-dcba563ff0a0"
+          },
+          {
+            "t": "FACT",
+            "text": "Tomas Aguilar — Freight Logistics Coordinator (Port of Oakland) — Jack London",
+            "src": "Simulation_Ledger profile for POP-00529",
+            "id": "F-9cea5852d64c"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01177",
+      "name": "Mei-Lin Zhou",
+      "quote": null,
+      "disp": "even-keeled, unremarkable",
+      "recorded": false,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"abstain\",\n  \"quote\": null,\n  \"fact_ids\": [],\n  \"basis\": null,\n  \"unverifiedLead\": null,\n  \"abstain_reason\": \"no_lived_basis\"\n}\n```",
+      "claims": {
+        "answer": "abstain",
+        "factIds": [],
+        "basis": null,
+        "unverifiedLead": [],
+        "abstainReason": "no_lived_basis",
+        "quoteId": null,
+        "authoredQuote": false,
+        "publishableQuote": null
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01177",
+          "name": "Mei-Lin Zhou",
+          "role": "Obstetrician",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Tamsin Pruitt",
+          "question": "How did Mei-Lin Zhou react to losing on the UNDOCKED book, and what does this say about their engagement with the community? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-lives",
+          "hood": null,
+          "focus": "The lives of C113: 11 people and the events that shaped their cycle",
+          "src": "output/beats/Lived_Events.jsonl @C113 batch 63d367"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Mei-Lin Zhou — Obstetrician — Chinatown",
+          "evidence": [
+            {
+              "id": "EV-d6f8a2ca9d",
+              "src": "output/beats/Lived_Events.jsonl @C113 batch 63d367",
+              "text": "Ily Gonzalez first. The event is the lead; one true detail; what came next only if the record says."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Mei-Lin Zhou lost on the UNDOCKED book — staked 186, the book kept it, Chinatown (C113)",
+            "src": "output/beats/Casino_Ledger.jsonl @C113",
+            "id": "F-5b5a1ac205cd"
+          },
+          {
+            "t": "FACT",
+            "text": "Mei-Lin Zhou — in their life, C113: argued the bullpen order at the barbershop like it was city policy",
+            "src": "output/beats/LifeHistory_Log.jsonl @C113",
+            "id": "F-152d7fb110ce"
+          },
+          {
+            "t": "FACT",
+            "text": "Mei-Lin Zhou — in their life, C113: heard someone at the cafe complain about the Baylight District noise and bit their tongue",
+            "src": "output/beats/LifeHistory_Log.jsonl @C113",
+            "id": "F-797548ba93e8"
+          },
+          {
+            "t": "FACT",
+            "text": "Mei-Lin Zhou — in their life, C113: a group of fans huddle under an awning debating last night's game, their voices rising above the sound of rain hitting the pavement",
+            "src": "output/beats/LifeHistory_Log.jsonl @C113",
+            "id": "F-4282017a325c"
+          },
+          {
+            "t": "FACT",
+            "text": "Mei-Lin Zhou — in their life, C113: took the long way home just to check the Baylight fence line's progress",
+            "src": "output/beats/LifeHistory_Log.jsonl @C113",
+            "id": "F-3115b969ec45"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "Ily Gonzalez moved into a place of their own in Uptown, renting",
+            "src": "output/beats/Lived_Events.jsonl @C113 batch 63d367",
+            "id": "F-dcba563ff0a0"
+          },
+          {
+            "t": "FACT",
+            "text": "Ily Gonzalez first. The event is the lead; one true detail; what came next only if the record says.",
+            "src": "output/beats/Lived_Events.jsonl @C113 batch 63d367",
+            "id": "F-419740f9e0ea"
+          },
+          {
+            "t": "FACT",
+            "text": "Mei-Lin Zhou — Obstetrician — Chinatown",
+            "src": "Simulation_Ledger profile for POP-01177",
+            "id": "F-4bda85fb9e5b"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00769",
+      "name": "Dax Monroe",
+      "quote": "I've been thinking a lot about the cycles of life in Rockridge lately. The other night, I was at the window, just observing the world go by. It made me reflect on how people's lives are intertwined with the events around them. I've seen it in my own life, with my kids growing up and the community changing. It's like the lives of those 11 people must have been shaped by the events they experienced, just like mine are shaped by the everyday moments here in Rockridge.",
+      "disp": "draws people in, deep with them",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've been thinking a lot about the cycles of life in Rockridge lately. The other night, I was at the window, just observing the world go by. It made me reflect on how people's lives are intertwined with the events around them. I've seen it in my own life, with my kids growing up and the community changing. It's like the lives of those 11 people must have been shaped by the events they experienced, just like mine are shaped by the everyday moments here in Rockridge.\",\n  \"fact_ids\": [\"F-1ea8110bf408\", \"F-e19a7524b395\", \"F-a67ff8afd037\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-1ea8110bf408",
+          "F-e19a7524b395",
+          "F-a67ff8afd037"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00769-4eebce6732",
+        "authoredQuote": true,
+        "publishableQuote": "I've been thinking a lot about the cycles of life in Rockridge lately. The other night, I was at the window, just observing the world go by. It made me reflect on how people's lives are intertwined with the events around them. I've seen it in my own life, with my kids growing up and the community changing. It's like the lives of those 11 people must have been shaped by the events they experienced, just like mine are shaped by the everyday moments here in Rockridge."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00769",
+          "name": "Dax Monroe",
+          "role": "Artist",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Tamsin Pruitt",
+          "question": "What have you seen, felt, or understood about \"The lives of C113: 11 people and the events that shaped their cycle\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-lives",
+          "hood": null,
+          "focus": "The lives of C113: 11 people and the events that shaped their cycle",
+          "src": "output/beats/Lived_Events.jsonl @C113 batch 63d367"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Dax Monroe — Artist — Rockridge",
+          "evidence": [
+            {
+              "id": "EV-9c3dfdc525",
+              "src": "output/beats/Lived_Events.jsonl @C113 batch 63d367",
+              "text": "Ily Gonzalez first. The event is the lead; one true detail; what came next only if the record says."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Dax Monroe lost on the UNDOCKED book — staked 130, the book kept it, Rockridge (C113)",
+            "src": "output/beats/Casino_Ledger.jsonl @C113",
+            "id": "F-2792272224c2"
+          },
+          {
+            "t": "FACT",
+            "text": "Dax Monroe — in their life, C113: caught the recap of last night's game at the counter and stayed for the second retelling",
+            "src": "output/beats/LifeHistory_Log.jsonl @C113",
+            "id": "F-1ea8110bf408"
+          },
+          {
+            "t": "FACT",
+            "text": "Dax Monroe — in their life, C113: navigated around a film crew blocking the sidewalk near the waterfront and rolled their eyes near a bookstore corner",
+            "src": "output/beats/LifeHistory_Log.jsonl @C113",
+            "id": "F-e19a7524b395"
+          },
+          {
+            "t": "FACT",
+            "text": "Dax Monroe — in their life, C113: dodged the running groups circling the lake and found a quiet bench near the pergola near a cafe on the avenue",
+            "src": "output/beats/LifeHistory_Log.jsonl @C113",
+            "id": "F-984ea5522097"
+          },
+          {
+            "t": "FACT",
+            "text": "Dax Monroe — in their life, C113: spent the evening sorting a box of things that used to be someone's",
+            "src": "output/beats/LifeHistory_Log.jsonl @C113",
+            "id": "F-a67ff8afd037"
+          },
+          {
+            "t": "FACT",
+            "text": "Dax Monroe — the Tribune named them in a piece headlined OAKLAND TRIBUNE (General, C69)",
+            "src": "archive/ARTICLE_INDEX.jsonl 457aef4e0c520006",
+            "id": "F-e7c2324b932b"
+          },
+          {
+            "t": "FACT",
+            "text": "Dax Monroe — the Tribune named them in a piece headlined CYCLES 23–33 (General, C23)",
+            "src": "archive/ARTICLE_INDEX.jsonl d2a5b7dd0e49efb4",
+            "id": "F-21bbb34d9935"
+          },
+          {
+            "t": "FACT",
+            "text": "Dax Monroe — the Tribune named them in a piece headlined UPTOWN STREET FAIR AND PIER LIGHTS CONCERT TURN OAKLAND EVENINGS INTO A CANVAS (cycle 12-18) (Arts, C12)",
+            "src": "archive/ARTICLE_INDEX.jsonl 825dce54af59dbe3",
+            "id": "F-d5c90bde020a"
+          },
+          {
+            "t": "FACT",
+            "text": "Dax Monroe — Artist — Rockridge",
+            "src": "Simulation_Ledger profile for POP-00769",
+            "id": "F-9e0d1a641a6e"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-10-30T18:20:03.504Z"
+}

@@ -1,0 +1,247 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-01076",
+    "name": "Nia Rook",
+    "role": "desk reporter",
+    "desk": "undocked"
+  },
+  "task": {
+    "goal": "Cover this UNDOCKED episode and its show history.",
+    "assignment": "UNDOCKED episode: Cristina Booker. Credits unsettled, systems unlisted, combat 0, mishaps 0, magnitude 2/5. Standings: Eric Taveras leads the board — rank #1, 3 cycle(s) led, current streak 3. In the chair: Cristina Booker — Immigration Attorney.",
+    "approach": "UNDOCKED show beat: current episode and standings from the approved feed; earlier episodes from the approved show history.",
+    "voice": null,
+    "writingMode": "SOURCE_BRIEF",
+    "reportingQuestion": "What did earlier approved UNDOCKED episodes record for this pilot or the current board leader?"
+  },
+  "signal": {
+    "kind": "undocked",
+    "hood": "Downtown",
+    "src": "undocked:undocked-pop00836-Y3C9-e2",
+    "plan": {
+      "focus": "Cristina Booker",
+      "closeQuestion": "How will Cristina Booker address the issues highlighted in the UNDOCKED episode?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [],
+    "sources": [],
+    "excludedLeads": [
+      {
+        "from": "Nia Rook",
+        "text": "The unsettled credits and unlisted systems may be related to a larger issue within the Immigration Attorney community",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C113",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-876f95b5eb98"
+    },
+    {
+      "t": "FACT",
+      "text": "UNDOCKED: Cristina Booker — a night the books can't settle yet",
+      "src": "undocked:undocked-pop00836-Y3C9-e2",
+      "id": "F-2b6971298391"
+    },
+    {
+      "t": "FACT",
+      "text": "Cristina Booker — Immigration Attorney (ledger)",
+      "src": "undocked:undocked-pop00836-Y3C9-e2",
+      "id": "F-b349caa64d5c"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C9, Winter, holiday=none",
+      "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+      "id": "F-ab9d6786094e"
+    },
+    {
+      "t": "FACT",
+      "text": "C111 UNDOCKED: Eric Taveras — credits 0; systems Sol, sol, sirius; combat 0; mishaps 0.",
+      "src": "tool:undocked_history:feed/c111.json#undocked-pop00597-Y3C7",
+      "id": "F-f7dd0e8fe6bb"
+    },
+    {
+      "t": "FACT",
+      "text": "C111 UNDOCKED: Eric Taveras — credits 1170; systems sirius; combat 0; mishaps 0.",
+      "src": "tool:undocked_history:feed/c111.json#undocked-pop00597-Y3C7-e2",
+      "id": "F-56d3321a3c45"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. No named ledger citizen spoke for this piece (manifest.approvedQuotes is empty): put no words in a named citizen's mouth. Unnamed voices are yours."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to a supplied source ref.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "nia-rook-undocked-recap-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Turn a gate-approved UNDOCKED episode into the city's entertainment conversation — who's up, who's down, what Oakland argues about tomorrow. Arc-tracking recap energy; personality-forward. NOT hard news, NOT sports analytics, NOT civic process.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "third-person recap with first-person flashes — entertainment beat, having fun on purpose",
+      "targetWords": "350-600",
+      "opening": "the episode's consequence for the pilot or the board",
+      "closing": "the unresolved show question or next consequence"
+    },
+    "authorizedTexture": [
+      "an in-world bar, watch-party, break-room, bus, or sidewalk setting where the city watches or argues; a new named business goes on INTAKE BIZ",
+      "the reporter's own recap persona, approved show history, and who's-up-who's-down framing",
+      "unnamed audience argument and aspiration lines as city color, never as measured sentiment",
+      "metaphor and emotional inference grounded in a supplied typed fact from the episode feed"
+    ],
+    "textureConditions": [
+      "a named person must resolve to a ledger citizen; a new in-world place or business is scene color, not a recorded show event",
+      "current episode facts come from the supplied typed feed; prior episode facts come from the approved undocked_history result — a blank CreditsDelta is unsettled, never zero and never invented",
+      "pilot speech only from the wake-2 packet interviews — no other quote source exists for this lane",
+      "standings, ranks, and streaks come only from the supplied Standings block; earlier episodes do not establish an earlier rank",
+      "unnamed audience reaction stays rhetorical — it must not become a count, a poll, or a named person"
+    ],
+    "canonBlockers": [
+      "video game",
+      "videogame",
+      "simulation",
+      "engine",
+      "MCP",
+      "server",
+      "commander",
+      "tool",
+      "API",
+      "spacemolt-lib",
+      "openrouter",
+      "real-world calendar dates (YYYY-MM-DD)",
+      "captains_log",
+      "leaderboard math not present in the supplied facts"
+    ]
+  },
+  "manifest": {
+    "id": "AM-e05699627403",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-876f95b5eb98",
+        "t": "FACT",
+        "text": "Current cycle: C113",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-2b6971298391",
+        "t": "FACT",
+        "text": "UNDOCKED: Cristina Booker — a night the books can't settle yet",
+        "src": "undocked:undocked-pop00836-Y3C9-e2"
+      },
+      {
+        "id": "F-b349caa64d5c",
+        "t": "FACT",
+        "text": "Cristina Booker — Immigration Attorney (ledger)",
+        "src": "undocked:undocked-pop00836-Y3C9-e2"
+      },
+      {
+        "id": "F-ab9d6786094e",
+        "t": "FACT",
+        "text": "Calendar: Y3C9, Winter, holiday=none",
+        "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)"
+      },
+      {
+        "id": "F-f7dd0e8fe6bb",
+        "t": "FACT",
+        "text": "C111 UNDOCKED: Eric Taveras — credits 0; systems Sol, sol, sirius; combat 0; mishaps 0.",
+        "src": "tool:undocked_history:feed/c111.json#undocked-pop00597-Y3C7"
+      },
+      {
+        "id": "F-56d3321a3c45",
+        "t": "FACT",
+        "text": "C111 UNDOCKED: Eric Taveras — credits 1170; systems sirius; combat 0; mishaps 0.",
+        "src": "tool:undocked_history:feed/c111.json#undocked-pop00597-Y3C7-e2"
+      }
+    ],
+    "approvedQuotes": [],
+    "approvedSubjects": [],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Nia Rook",
+        "text": "The unsettled credits and unlisted systems may be related to a larger issue within the Immigration Attorney community",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "an in-world bar, watch-party, break-room, bus, or sidewalk setting where the city watches or argues; a new named business goes on INTAKE BIZ",
+      "the reporter's own recap persona, approved show history, and who's-up-who's-down framing",
+      "unnamed audience argument and aspiration lines as city color, never as measured sentiment",
+      "metaphor and emotional inference grounded in a supplied typed fact from the episode feed"
+    ],
+    "textureConditions": [
+      "a named person must resolve to a ledger citizen; a new in-world place or business is scene color, not a recorded show event",
+      "current episode facts come from the supplied typed feed; prior episode facts come from the approved undocked_history result — a blank CreditsDelta is unsettled, never zero and never invented",
+      "pilot speech only from the wake-2 packet interviews — no other quote source exists for this lane",
+      "standings, ranks, and streaks come only from the supplied Standings block; earlier episodes do not establish an earlier rank",
+      "unnamed audience reaction stays rhetorical — it must not become a count, a poll, or a named person"
+    ],
+    "forbiddenClaimClasses": [],
+    "toolFacts": [
+      "F-f7dd0e8fe6bb",
+      "F-56d3321a3c45"
+    ]
+  }
+}

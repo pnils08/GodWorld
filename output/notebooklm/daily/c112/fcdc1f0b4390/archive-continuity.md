@@ -1,0 +1,172 @@
+# Published-archive continuity — Cycle 112
+
+Artifact class: NLM_RESEARCH_BRIEF
+Canon status: NOT CANON. NotebookLM is a reader over published sources; this synthesis does not alter canon.
+Archive notebook: 417e2d29-4167-420f-a9cc-76fb6b2b7de2
+Prompt: Using only the selected published editions, prepare a cited continuity brief for Cycle 112.
+Trace prior events, promises, named citizens, institutions, and unresolved storylines that bear on these current newsroom leads:
+- sports_c112_tanya-cruz_packet-v2_x-ai-grok-4-3.md
+- Who Owns KONO's Decay? Nobody on the Roster
+- civic_c112_noah-tan_packet-v2_x-ai-grok-4-3.staged.md
+- culture_c112_ines-sorensen_packet-v2_x-ai-grok-4-3.staged.md
+- culture_c112_tamsin-pruitt_packet-v2_x-ai-grok-4-3.staged-2320.md
+- Keane's 2041 Strikeout Rate Is an Outlier on 127 At-Bats. Next Season Decides Whether It Is a New Baseline.
+- sports_c112_p-slayer_packet-v2_x-ai-grok-4-3.staged.md
+- undocked_c112_nia-rook_packet-v2_x-ai-grok-4-3.staged.md
+Separate direct published fact from inference. Do not invent missing history, quotes, figures, or current-cycle outcomes.
+
+## NotebookLM synthesis
+
+### **Cycle 112 Newsroom Continuity Brief**
+
+**Selected Sources:**
+1. *The Cycle Pulse — Y2C110* [1]
+2. *The Cycle Pulse — Y3C7* [2]
+
+---
+
+### **1. Athletics Dynasty & Offseason Roster Math**
+*Current Lead: `sports_c112_tanya-cruz_packet-v2_x-ai-grok-4-3.md`*
+
+#### **Prior Events, Promises & Published Baseline**
+* **Playoff Momentum & Clubhouse Chemistry:** In Cycle 110, sports reporter **Tanya Cruz** reported from the Athletics clubhouse where starting pitcher **John Ellis** (tape on fingers) and veteran **Benji Dillon** described clubhouse chemistry as "electric" and grounded in mutual trust at a 4–1 playoff mark [1].
+* **World Series Championship & Parade Bus:** In Cycle 111 (Y3C7), Tanya Cruz reported from the **Downtown double-decker championship parade bus** following the Athletics' **World Series Game 5 victory** (their **seventh World Series title under General Manager Mike Paulson**) [2]. 
+* **End-of-Era Reflections:** On the bus, Paulson, **Vinnie Keane**, and Benji Dillon rode at the front [2]. Back in the clubhouse near the lockers with confetti still in their sleeves:
+  * First baseman **Mark Aitken** noted: *"The bus was loud... but when it quiets down... that's when it hits you. I look over at Vinnie and Benji and I know they're taking it all in, every last wave, because this is it for them. And me? I'm taking it in too, but for a different reason. I don't know what's next. None of us do... We're not just celebrating a win. We're saying goodbye to something, whether we're ready to or not"* [2].
+  * Pitcher **Benji Dillon** agreed: *"It's the quiet after the noise, when you're standing there with your teammates and you realize you don't have to do it again... it's finally okay to put it down"* [2].
+  * General Manager **Mike Paulson** observed: *"The part nobody sees. The confetti's still in your hair, and you're already doing the math in your head — who stays, who goes, who's got one more year in them. It's heavy... a current pulling you toward decisions you're not ready to make"* [2].
+
+#### **Direct Published Fact vs. Analytical Inference**
+* **Direct Published Fact:** The Athletics won World Series Game 5 under Paulson [2]. Paulson, Keane, Dillon, and Aitken celebrated on the Downtown parade bus while reflecting on impending departures and roster decisions [2].
+* **Analytical Inference & Unresolved Storylines:** Tanya Cruz and Editor-in-Chief **Mags Corliss** infer that championship joy sits directly on top of difficult free agency, contract, and retirement decisions [2]. The core unresolved storyline for Cycle 112 is how Paulson resolves his "roster math" regarding veteran legends Vinnie Keane, Benji Dillon, and Mark Aitken as the 2042 campaign approaches [2].
+
+---
+
+### **2. Commercial Corridor Decay & Municipal Ownership Void**
+*Current Lead: `Who Owns KONO's Decay? Nobody on the Roster`*
+
+#### **Paper-Trail Boundary Note**
+* **Direct Published Fact:** In the selected published editions (*The Cycle Pulse — Y2C110* and *Y3C7*), the explicit acronym/name **"KONO"** does **not** appear in the text [1, 2].
+
+#### **Prior History & Published Baseline (Corridor Pressures & Accountability Void)**
+* **Fruitvale Corridor Audit (Jax Caldera):** In Cycle 111 (Y3C7), investigative reporter **Jax Caldera** (`JAX-TIPS`) conducted a field audit in **Fruitvale**, contrasting a taqueria with lunch lines out the door against official **Neighborhood Maps** showing sliding sentiment (0.52), falling retail vitality (down 2.04 to 10.55), and rising **Housing Pressure (+1.00 to 4.5, ranking 17th of 22)** [2].
+* **The Program Footprint Void:** Caldera verified that while two active city initiatives (**Oakland Alternative Response Initiative** and **Youth Apprenticeship Pipeline**) list Fruitvale in their footprint on paper, neither program owns or mitigates the actual rent pressure or retail slide [2].
+* **The Ownership Question:** Caldera posed the central question: *"Putting a place in a program's footprint doesn't mean anyone is working the problem that is actually hurting it... So whose name goes on the answer?"* [2]
+
+#### **Direct Published Fact vs. Analytical Inference**
+* **Direct Published Fact:** Municipal dashboards log neighborhood decay while active city programs list commercial corridors in their footprint without addressing underlying housing pressure or retail decay [2].
+* **Analytical Inference & Unresolved Storylines:** Caldera and Corliss infer a structural accountability void across commercial corridors (such as Fruitvale and KONO) where program footprints serve as administrative window dressing rather than active problem ownership [2]. The unresolved storyline for Cycle 112 is whether City Hall designates a specific municipal official with a name and phone number to take ownership of corridor decay and rent pressure [2].
+
+---
+
+### **3. Civic Rhythms, Transit & Construction Detours**
+*Current Lead: `civic_c112_noah-tan_packet-v2_x-ai-grok-4-3.staged.md`*
+
+#### **Prior Events, Promises & Transit Metrics**
+* **Transit Station Drops:** In Cycle 110, **Trevor Shimizu** reported Lake Merritt station ridership fell by 2,588 to **5,896 boardings** (84% on-time) amid damp fog, where janitor **Jerald Jensen** described thinner crowds altering station atmosphere (*"the lifeblood of a place starts to thin out"*) [1].
+* **12th Street & Systemwide Shifts (Y3C7):** In Cycle 111 (Y3C7), Trevor Shimizu reported total 8-station transit ridership fell from 91,564 down to **36,303 boardings** during a holiday/event period [2]. **12th St Oakland City Center Station** lost **15,192 riders** (down to 8,293 boardings, 86% on-time) [2].
+* **Construction Disruptions:** AC Transit bus drivers **Evan Lewis**, **Calvin Mwangi**, and **Ray Neal**, alongside mechanic **Joel Wren**, reported that street blockages, dust, and detours from ongoing **Baylight District construction** discouraged commuters from using Downtown platforms [2]. Lewis noted: *"Doesn't matter if the bus shows up on time if the sidewalks are blocked... folks just find another way"* [2].
+
+#### **Direct Published Fact vs. Analytical Inference**
+* **Direct Published Fact:** 12th St Station lost 15,192 riders in Cycle 111 while achieving 86% on-time performance [2]. Surface construction around Baylight projects detours pedestrians and blocks bus stops [2].
+* **Analytical Inference & Unresolved Storylines:** Noah Tan, Trevor Shimizu, and Mags Corliss infer that municipal transit statistics (like on-time rates) fail to capture rider frustration or platform desertion caused by construction detours [2]. The unresolved storyline for Cycle 112 is how civic beats track neighborhood transit recovery as City Council votes on Baylight District approvals proceed [2].
+
+---
+
+### **4. Culture Scene, Artisans & Small-Scale Industry**
+*Current Lead: `culture_c112_ines-sorensen_packet-v2_x-ai-grok-4-3.staged.md`*
+
+#### **Paper-Trail Boundary Note**
+* **Direct Published Fact:** In the selected published editions (*The Cycle Pulse — Y2C110* and *Y3C7*), the explicit name **"Ines Sorensen"** does **not** appear in the text [1, 2].
+
+#### **Prior History & Published Baseline (Jack London & Temescal Artisans)**
+* **Nino's Bakery (Cycle 110):** Culture reporter **Mason Ortega** profiled baker **Colin Phillips** at **Nino's bakery**, who arrives before sunrise, measures flour, shapes loaves, and fills racks before the morning rush while learning pastry [1]. Mags Corliss praised this work as a rare example of a tangible, warm deliverable produced on a reliable schedule [1].
+* **Jack London Bar Rails (Cycle 111 / Y3C7):** Business reporter **Jordan Velez** and Mason Ortega profiled Jack London dining and bar workers (**Hector Leech**, **Trenton Nawan**, **Guadalupe Lupe** at Green & Gold Tavern; **Yuki Ji**, **Guadalupe Lee** at Blue Lantern Bar; **Tomas Renteria**, **Quynh Le** at Harborline Grill), showing how commerce and culture overlap at the bar rail [2]. Corliss observed: *"A bar rail is a balance sheet and a scene at once, and when the money lands unevenly, the scene feels it"* [2].
+
+#### **Direct Published Fact vs. Analytical Inference**
+* **Direct Published Fact:** Kitchen staff, bar workers, and bakers across Jack London and Temescal maintain daily neighborhood rhythms independently of macro-economic statistics [1, 2].
+* **Analytical Inference & Unresolved Storylines:** Ortega, Velez, and Corliss infer that small-scale neighborhood culture anchors provide authentic community cohesion when municipal systems and corporate investments feel distant [1, 2]. The unresolved storyline for Cycle 112 is whether culture reporting captures emerging local figures (like Ines Sorensen) who bridge neighborhood scene culture and small business survival.
+
+---
+
+### **5. Media Indexing vs. Block-Level Recognition**
+*Current Lead: `culture_c112_tamsin-pruitt_packet-v2_x-ai-grok-4-3.staged-2320.md`*
+
+#### **Paper-Trail Boundary Note**
+* **Direct Published Fact:** In the selected published editions (*The Cycle Pulse — Y2C110* and *Y3C7*), the explicit name **"Tamsin Pruitt"** does **not** appear in the text [1, 2].
+
+#### **Prior History & Published Baseline (Kai Marston's Media Audit)**
+* **The Rockridge Sidewalk Audit (Y3C7):** Culture reporter **Kai Marston** audited journalist **Tara Ellison**, whom the municipal culture ledger flagged as "surging/rising" among 39 culture figures in Rockridge [2].
+* **Street Disconnect:** When interviewed on a Rockridge sidewalk, Ellison stated: *"I'm not sure what you mean. I'm just here in Rockridge, and I'm not in a room with anyone right now"* [2]. Surrounding local artists—sculptor **Alma Vasquez** in Laurel (listening to car basslines at red lights) and actress **Nina Reyes** in Fruitvale—had no knowledge of Ellison's rise [2].
+* **Fading Figures:** The culture ledger reallocated former surging figures like **Lena Cross** and **Rowan Pierce** to the "where-are-they-now" list [2].
+
+#### **Direct Published Fact vs. Analytical Inference**
+* **Direct Published Fact:** Municipal culture ledgers track 39 surging/rising profiles and archive declining names, but street-level awareness among neighboring artists (Vasquez, Reyes) is disconnected from ledger rankings [2].
+* **Analytical Inference & Unresolved Storylines:** Kai Marston and Mags Corliss infer that dashboard-tracked cultural surges do not equal block-level community presence (*"being counted is one thing; being talked about on the block is another"*) [2]. The unresolved storyline for Cycle 112 is whether newly emerging figures (like Tamsin Pruitt) establish authentic street-level recognition or remain temporary statistical entries on municipal dashboards [2].
+
+---
+
+### **6. Hitter Sample Sizes & Career Baselines**
+*Current Lead: `Keane's 2041 Strikeout Rate Is an Outlier on 127 At-Bats. Next Season Decides Whether It Is a New Baseline.`*
+
+#### **Prior History & Published Baseline (Vinnie Keane & Data Desk Methodology)**
+* **Vinnie Keane (POP-00001):** Designated hitter Vinnie Keane is the legendary "Anchor of Oakland" and part of the Athletics' veteran Dynasty core alongside Mark Aitken, Benji Dillon, Isley Kelley, and Darrin Davis [2]. In Cycle 111 (Y3C7), Keane celebrated the Athletics' World Series Game 5 victory on the Downtown double-decker parade bus alongside Benji Dillon and Mike Paulson [2].
+* **Data Desk Methodology (Elliot Marbury):**
+  * In Cycle 110, Elliot Marbury audited center fielder **Danny Horn's** 2041 line (56 HRs, 113 RBIs, 80 SBs, .338 AVG across 621 ABs), proving 2041 was a full-season power breakthrough (1 HR per 11.1 ABs; 1 SO per 9.6 ABs) compared to his 2037–2040 baseline band [1].
+  * In Cycle 111 (Y3C7), Marbury audited third baseman **Martin Richards's** 2041 line (.302 AVG, 27 HRs, 70 SOs across 463 ABs) [2]. Marbury showed that Richards's reduced strikeout rate (1 SO per 6.6 ABs in 2041, 6.7 in 2040, 7.9 in 2039) held clear of his 2034–2038 baseline (1 SO per 5.1–5.6 ABs) [2].
+  * Marbury established that small sample sizes (e.g. Richards's 348 ABs in 2039 or Kevin Clark's 64 ABs in 2041) represent variance until confirmed over subsequent full-season workloads [2].
+
+#### **Direct Published Fact vs. Analytical Inference**
+* **Direct Published Fact:** Vinnie Keane appeared in the Athletics' closing World Series sequence and parade bus celebration as players reflect on career transitions [2].
+* **Analytical Inference & Unresolved Storylines:** Elliot Marbury and sports desk analysts infer that a single season's strikeout rate on a limited 127 at-bat sample cannot be classified as a permanent skill transformation without a full-season 2042 sample [2]. The unresolved storyline for Cycle 112 is whether Keane's 2041 rate holds as a new baseline or stands as a small-sample outlier as free agency / retirement decisions conclude [2].
+
+---
+
+### **7. Expansion Team Build & Fan Sentiment**
+*Current Lead: `sports_c112_p-slayer_packet-v2_x-ai-grok-4-3.staged.md`*
+
+#### **Prior History & Published Baseline (P Slayer Beat & Expansion Oaks)**
+* **Preseason Winless Record:** In Cycle 110, sports columnist **P Slayer** caught up with fan **Jessie Hess** and baker **Daniel Cloak** outside the arena after the expansion **Oakland Oaks** lost their final preseason game to the Miami Heat, finishing preseason winless at **0–5 (0–9 overall including rookie camp)** [1]. P Slayer observed fans drifting toward exits before the final buzzer, calling it *"the sound of the same story starting again... A winless run this long already tells you the habits that are baked in"* [1].
+* **Community Connection vs. On-Court Winning:** In Cycle 111 (Y3C7), **Talia Finch** and Mags Corliss reported from Jack London bars (where sourdough baker **Melton Neilon** and teacher **Rick Walker** follow games between work shifts) that GM **Elliot Abraham** acknowledged early losses and offered media reassurances, while questions lingered regarding **Draymond's** potential return to the Oaks [2].
+
+#### **Direct Published Fact vs. Analytical Inference**
+* **Direct Published Fact:** The Oaks went 0–5 in preseason (0–9 overall) [1]. P Slayer documented fan frustration; GM Elliot Abraham offered media reassurances [1, 2].
+* **Analytical Inference & Unresolved Storylines:** P Slayer and Talia Finch infer that community outreach cannot replace on-court wins, and media reassurances cannot substitute for a functioning team build [1, 2]. The unresolved storyline for Cycle 112 is how P Slayer evaluates the Oaks as regular-season games begin, and whether Draymond's return alters the team's trajectory [2].
+
+---
+
+### **8. Broadcast Media & Standings Desk**
+*Current Lead: `undocked_c112_nia-rook_packet-v2_x-ai-grok-4-3.staged.md`*
+
+#### **Prior History & Published Baseline (Nia Rook / *UNDOCKED* Standings)**
+* **The 143-Credit Swing:** Reporter **Nia Rook** reported from Rockridge on an *UNDOCKED* broadcast featuring **Otis Redd**, who logged a **143-credit swing** on the night (*"Otis Redd — up 143 on the night"*), driving late-night neighborhood debate across Rockridge [1, 2].
+* **Championship Crossover:** In Cycle 111 (Y3C7), Mags Corliss highlighted a crossover in Nia Rook's *UNDOCKED* reporting file: World Series champion General Manager **Mike Paulson** and slugger **Eric Taveras** both appear in Rook's *UNDOCKED* standings file alongside their championship parade appearances [2]. Corliss noted: *"It matters that the man on the parade bus and the man at the plate are also in a file about something else. A championship doesn't suspend the rest of a person's life. It sits on top of it"* [2].
+
+#### **Direct Published Fact vs. Analytical Inference**
+* **Direct Published Fact:** Otis Redd gained 143 credits on *UNDOCKED* [2]. Mike Paulson and Eric Taveras appear in Nia Rook's *UNDOCKED* standings file [2].
+* **Analytical Inference & Unresolved Storylines:** Nia Rook and Corliss infer that screen spotlights and broadcast credit swings act as temporary civic amplifiers, overlapping athletic glory with broader urban standings files [2]. The unresolved storyline for Cycle 112 is how Nia Rook's *UNDOCKED* digest tracks Paulson's offseason decisions and Taveras's standings trajectory following the World Series title [2].
+
+---
+
+### **Direct Fact vs. Analytical Inference Summary Matrix**
+
+| Current Newsroom Lead | Direct Published Fact (Cycles Y2C110–Y3C7) | Analytical Inference / Unresolved Storyline for Cycle 112 |
+| :--- | :--- | :--- |
+| **A's Offseason (`tanya-cruz...`)** | A's won World Series Game 5 [2]. Paulson, Keane, Dillon, & Aitken celebrated on Downtown parade bus [2]. | Corliss & Cruz infer celebration sits on top of roster decisions [2]. Unresolved: Paulson's roster math on Keane, Dillon, & Aitken [2]. |
+| **KONO Corridor Decay** | Name "KONO" absent in text [1, 2]. Fruitvale map logs Housing Pressure at 4.5; programs list area without owning decay [2]. | Caldera & Corliss infer program footprints serve as window dressing without problem ownership [2]. Unresolved: assigning a named city official to corridor decay [2]. |
+| **Civic Rhythms (`noah-tan...`)** | 12th St lost 15,192 riders (86% on-time) [2]. Baylight construction detours pedestrians & blocks bus stops [2]. | Tan, Shimizu, & Corliss infer on-time stats fail to capture sidewalk frustration [2]. Unresolved: transit platform recovery during Baylight Council votes [2]. |
+| **Culture Scene (`ines-sorensen...`)** | Name "Ines Sorensen" absent in text [1, 2]. Bakers & bar workers in Jack London/Temescal maintain daily neighborhood rhythms [1, 2]. | Ortega, Velez, & Corliss infer small culture anchors provide cohesion when city systems lag [1, 2]. Unresolved: capturing local scene figures [1, 2]. |
+| **Media Auditing (`tamsin-pruitt...`)** | Name "Tamsin Pruitt" absent in text [1, 2]. Tara Ellison flagged as surging in Rockridge, but local artists Vasquez & Reyes were unaware [2]. | Marston & Corliss infer ledger surges do not equal block-level presence [2]. Unresolved: whether emerging figures establish genuine block presence [2]. |
+| **Keane Strikeout Rate** | Keane celebrated World Series title on parade bus in final season [2]. Data Desk establishes small samples represent variance [1, 2]. | Marbury infers 127 AB sample cannot confirm skill baseline without 2042 data [1, 2]. Unresolved: whether Keane's rate holds or stands as outlier [2]. |
+| **Expansion Oaks (`p-slayer...`)** | Oaks finished preseason 0–5 (0–9 overall) [1]. P Slayer documented fan frustration; GM Elliot Abraham offered reassurances [1, 2]. | P Slayer & Finch infer outreach cannot substitute for winning games [1, 2]. Unresolved: Oaks regular-season performance & Draymond's return [2]. |
+| **Nia Rook / *UNDOCKED*** | Otis Redd gained 143 credits [2]. Paulson & Taveras appear in Nia Rook's *UNDOCKED* standings file [2]. | Rook & Corliss infer broadcast credit swings overlap athletic glory with city files [2]. Unresolved: Paulson & Taveras standings trajectory [2]. |
+
+***
+
+🏀 *Would you like an editorial assignment outline, reporter interview guide, or visual timeline mapping these Cycle 112 newsroom storylines against Oakland's neighborhood beats?*
+
+## Reported source citations
+
+```json
+[]
+```

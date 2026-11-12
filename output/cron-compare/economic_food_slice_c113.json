@@ -1,0 +1,610 @@
+{
+  "version": "ECONOMIC-SLICE-4",
+  "empty": false,
+  "cycle": 113,
+  "kind": "food-workplaces",
+  "variant": "food",
+  "hood": "Rockridge",
+  "pulse": {
+    "className": "hood-kitchens",
+    "score": 24,
+    "label": "Rockridge kitchens · OakHouse, Claremont Table",
+    "hood": "Rockridge",
+    "namedBusinesses": [
+      "OakHouse",
+      "Claremont Table"
+    ]
+  },
+  "story": {
+    "angle": "Rockridge kitchens: OakHouse, Claremont Table — the people who work the shift",
+    "label": "Rockridge kitchens · OakHouse, Claremont Table",
+    "hookLine": "Matty Lipo, Dishwasher at OakHouse. 6 named workers at 2 named kitchens in Rockridge on the ledger this cycle.",
+    "hood": "Rockridge",
+    "pulseClass": "hood-kitchens",
+    "namedBusinesses": [
+      "OakHouse",
+      "Claremont Table"
+    ],
+    "citizens": [
+      "Matty Lipo (POP-00265)",
+      "Mimmie Carlisle (POP-00682)",
+      "Jesus Jorden (POP-00721)",
+      "Kalyani Alvarez (POP-00905)",
+      "Elio Perez (POP-00201)",
+      "Camila Osman (POP-01134)"
+    ],
+    "popids": [
+      "POP-00265",
+      "POP-00682",
+      "POP-00721",
+      "POP-00905",
+      "POP-00201",
+      "POP-01134"
+    ],
+    "ref": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+    "cycle": 113
+  },
+  "approach": "Food & hospitality approach — kitchens as workplaces: this slice is one neighborhood's restaurants, cafes and bars from the ledger and the people on the roster who work in them. The people on this slice are real; the rest of the room is yours — the line on a Tuesday, the regulars, the walk-in, the tip jar. One kitchen, one shift, one true thing about the work. Not a review. Not multi-voice culture-desk average. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "businesses": [
+    {
+      "bizId": "BIZ-00043",
+      "name": "OakHouse",
+      "sector": "Restaurant & Dining",
+      "hood": "Rockridge",
+      "employeeCount": 22,
+      "avgSalary": 83000,
+      "annualRevenue": 3691572,
+      "growthRate": 9.05,
+      "keyPersonnel": null,
+      "staff": [
+        {
+          "popid": "POP-00265",
+          "name": "Matty Lipo",
+          "role": "Dishwasher"
+        },
+        {
+          "popid": "POP-00682",
+          "name": "Mimmie Carlisle",
+          "role": "Pastry Chef"
+        },
+        {
+          "popid": "POP-00721",
+          "name": "Jesus Jorden",
+          "role": "Pastry Chef, OakHouse"
+        },
+        {
+          "popid": "POP-00905",
+          "name": "Kalyani Alvarez",
+          "role": "Pastry Chef"
+        }
+      ],
+      "delta": {
+        "vsCycle": 112,
+        "employees": 0,
+        "revenue": 6414,
+        "growth": 1
+      }
+    },
+    {
+      "bizId": "BIZ-00169",
+      "name": "Claremont Table",
+      "sector": "Restaurant & Dining",
+      "hood": "Rockridge",
+      "employeeCount": 15,
+      "avgSalary": 83000,
+      "annualRevenue": 2512228,
+      "growthRate": 7.76,
+      "keyPersonnel": "Camila Osman (owner)",
+      "staff": [
+        {
+          "popid": "POP-00201",
+          "name": "Elio Perez",
+          "role": "Server"
+        },
+        {
+          "popid": "POP-01134",
+          "name": "Camila Osman",
+          "role": "Owner, Claremont Table"
+        }
+      ],
+      "delta": {
+        "vsCycle": 112,
+        "employees": 0,
+        "revenue": 3743,
+        "growth": 1
+      }
+    }
+  ],
+  "seeds": [
+    {
+      "seedId": "47a196ca",
+      "hood": "Downtown",
+      "domain": "ECONOMIC",
+      "citizens": [
+        {
+          "popid": "POP-00764",
+          "name": "Tao Lee"
+        },
+        {
+          "popid": "POP-00334",
+          "name": "Solis Walmart"
+        },
+        {
+          "popid": "POP-00180",
+          "name": "Cameron Wallen"
+        },
+        {
+          "popid": "POP-00924",
+          "name": "Donna Xu"
+        }
+      ],
+      "citizenEvents": [
+        "Tao Lee — stopped by a community program run out of Lake Merritt Mindfulness Sangha",
+        "Solis Walmart — joined the crowd at Downtown Volunteer Boost Rally last night",
+        "Cameron Wallen — sought more information due to recent city events",
+        "Donna Xu — a DJ spins records at a crowded bar near Broadway, the bassline thumping through the foggy night"
+      ],
+      "businesses": [
+        {
+          "bizId": "BIZ-00018",
+          "name": "Bay Tribune"
+        },
+        {
+          "bizId": "BIZ-00022",
+          "name": "Alameda County Courts"
+        }
+      ],
+      "otherEntities": "Lake Merritt Mindfulness Sangha (faith)",
+      "magnitude": 5,
+      "trend": "carrying, 3.33 strength left of 3-cycle run",
+      "suggestedJournalist": "Jordan Velez",
+      "suggestedAngle": "baseline context piece"
+    },
+    {
+      "seedId": "e3d2cfb3",
+      "hood": "Citywide",
+      "domain": "ECONOMIC",
+      "citizens": [
+        {
+          "popid": "POP-00945",
+          "name": "Briar Crawford"
+        },
+        {
+          "popid": "POP-00881",
+          "name": "Matilda Okonkwo"
+        },
+        {
+          "popid": "POP-00249",
+          "name": "Marrin Benry"
+        },
+        {
+          "popid": "POP-00802",
+          "name": "Funmi Shah"
+        }
+      ],
+      "citizenEvents": [
+        "Briar Crawford — recognized a face from years ago across the street near the main street sidewalk",
+        "Matilda Okonkwo — folded a slip for Sammie Alvarez and then would not look at the table",
+        "Marrin Benry — stayed cautious after hearing last night felt tense",
+        "Funmi Shah — watched someone repair a fence for an hour and wondered when they last finished anything"
+      ],
+      "businesses": [],
+      "otherEntities": null,
+      "magnitude": -4,
+      "trend": "carrying, -0.67 strength left of 6-cycle run",
+      "suggestedJournalist": "Jordan Velez",
+      "suggestedAngle": "baseline context piece"
+    }
+  ],
+  "citizens": [
+    {
+      "popid": "POP-00265",
+      "name": "Matty Lipo",
+      "role": "Dishwasher",
+      "neighborhood": "Rockridge",
+      "business": "OakHouse",
+      "profile": "Matty Lipo — Dishwasher — OakHouse, Rockridge",
+      "why": "works at OakHouse (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00682",
+      "name": "Mimmie Carlisle",
+      "role": "Pastry Chef",
+      "neighborhood": "Rockridge",
+      "business": "OakHouse",
+      "profile": "Mimmie Carlisle — Pastry Chef — OakHouse, Rockridge",
+      "why": "works at OakHouse (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00721",
+      "name": "Jesus Jorden",
+      "role": "Pastry Chef, OakHouse",
+      "neighborhood": "Rockridge",
+      "business": "OakHouse",
+      "profile": "Jesus Jorden — Pastry Chef, OakHouse — OakHouse, Rockridge",
+      "why": "works at OakHouse (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00905",
+      "name": "Kalyani Alvarez",
+      "role": "Pastry Chef",
+      "neighborhood": "Rockridge",
+      "business": "OakHouse",
+      "profile": "Kalyani Alvarez — Pastry Chef — OakHouse, Rockridge",
+      "why": "works at OakHouse (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00201",
+      "name": "Elio Perez",
+      "role": "Server",
+      "neighborhood": "Rockridge",
+      "business": "Claremont Table",
+      "profile": "Elio Perez — Server — Claremont Table, Rockridge",
+      "why": "works at Claremont Table (Employment_Roster)"
+    },
+    {
+      "popid": "POP-01134",
+      "name": "Camila Osman",
+      "role": "Owner, Claremont Table",
+      "neighborhood": "Rockridge",
+      "business": "Claremont Table",
+      "profile": "Camila Osman — Owner, Claremont Table — Claremont Table, Rockridge",
+      "why": "works at Claremont Table (Employment_Roster)"
+    }
+  ],
+  "closures": [],
+  "contractionWatch": [],
+  "casino": null,
+  "cityMoney": null,
+  "deltas": {
+    "state": "PRIOR_CYCLE_ON_DISK",
+    "vs": 112
+  },
+  "prewrite": {
+    "pulseClass": "hood-kitchens",
+    "angle": "Rockridge kitchens: OakHouse, Claremont Table — the people who work the shift",
+    "hookLine": "Matty Lipo, Dishwasher at OakHouse. 6 named workers at 2 named kitchens in Rockridge on the ledger this cycle.",
+    "namedBusinesses": [
+      "OakHouse",
+      "Claremont Table"
+    ],
+    "anchorFacts": [
+      "OakHouse · Restaurant & Dining · 22 employees · growth 9.1% · revenue $3.7M (+$6k vs C112) · on the roster: Matty Lipo (Dishwasher); Mimmie Carlisle (Pastry Chef); Jesus Jorden (Pastry Chef, OakHouse); Kalyani Alvarez (Pastry Chef)",
+      "Claremont Table · Restaurant & Dining · 15 employees · growth 7.8% · revenue $2.5M (+$4k vs C112) · key personnel: Camila Osman (owner) · on the roster: Elio Perez (Server); Camila Osman (Owner, Claremont Table)",
+      "CITY SEED (Downtown): citizens Tao Lee; Solis Walmart; Cameron Wallen; Donna Xu · businesses Bay Tribune; Alameda County Courts · Lake Merritt Mindfulness Sangha (faith)",
+      "CITY SEED (Citywide): citizens Briar Crawford; Matilda Okonkwo; Marrin Benry; Funmi Shah"
+    ],
+    "evidence": [
+      {
+        "text": "OakHouse · Restaurant & Dining · 22 employees · growth 9.1% · revenue $3.7M (+$6k vs C112) · on the roster: Matty Lipo (Dishwasher); Mimmie Carlisle (Pastry Chef); Jesus Jorden (Pastry Chef, OakHouse); Kalyani Alvarez (Pastry Chef)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113"
+      },
+      {
+        "text": "Claremont Table · Restaurant & Dining · 15 employees · growth 7.8% · revenue $2.5M (+$4k vs C112) · key personnel: Camila Osman (owner) · on the roster: Elio Perez (Server); Camila Osman (Owner, Claremont Table)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113"
+      },
+      {
+        "text": "CITY SEED (Downtown): citizens Tao Lee; Solis Walmart; Cameron Wallen; Donna Xu · businesses Bay Tribune; Alameda County Courts · Lake Merritt Mindfulness Sangha (faith)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C113"
+      },
+      {
+        "text": "CITY SEED (Citywide): citizens Briar Crawford; Matilda Okonkwo; Marrin Benry; Funmi Shah",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C113"
+      }
+    ],
+    "hooks": [
+      {
+        "text": "High concentration of ambitious, driven personalities. Career competition and economic hustle stories.",
+        "angle": "baseline context piece",
+        "hood": null
+      },
+      {
+        "text": "Ernesto Quintero has not advanced in 56 years",
+        "angle": "baseline context piece",
+        "hood": null
+      },
+      {
+        "text": "Mariano Rosales has not advanced in 56 years",
+        "angle": "baseline context piece",
+        "hood": null
+      },
+      {
+        "text": "Hazel Salazar has not advanced in 56 years",
+        "angle": "baseline context piece",
+        "hood": null
+      },
+      {
+        "text": "Rev. Han has not advanced in 56 years",
+        "angle": "baseline context piece",
+        "hood": null
+      },
+      {
+        "text": "the debts crossed a line this week — sleep comes harder now",
+        "angle": "observational analysis",
+        "hood": "West Oakland"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a business, a worker, an owner or a place — every name comes from this slice",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose",
+      "Do not contradict a role, employer or neighborhood listed here"
+    ]
+  },
+  "rotation": {
+    "pool": [
+      {
+        "hood": "Jack London",
+        "staffed": 5,
+        "workers": 14,
+        "lastCovered": 111
+      },
+      {
+        "hood": "Downtown",
+        "staffed": 2,
+        "workers": 2,
+        "lastCovered": 112
+      },
+      {
+        "hood": "Temescal",
+        "staffed": 1,
+        "workers": 2,
+        "lastCovered": 108
+      },
+      {
+        "hood": "Uptown",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "Chinatown",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "Rockridge",
+        "staffed": 2,
+        "workers": 6,
+        "lastCovered": null
+      },
+      {
+        "hood": "Fruitvale",
+        "staffed": 2,
+        "workers": 2,
+        "lastCovered": 109
+      },
+      {
+        "hood": "KONO",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "West Oakland",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "Dimond",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "Grand Lake",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "Laurel",
+        "staffed": 2,
+        "workers": 2,
+        "lastCovered": 110
+      },
+      {
+        "hood": "Baylight District",
+        "staffed": 1,
+        "workers": 3,
+        "lastCovered": null
+      },
+      {
+        "hood": "East Oakland",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "Eastlake",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "San Antonio",
+        "staffed": 1,
+        "workers": 2,
+        "lastCovered": null
+      }
+    ],
+    "picked": "Rockridge"
+  },
+  "candidates": [
+    {
+      "className": "hood-kitchens",
+      "hood": "Jack London",
+      "label": "Jack London · 5 staffed / 10 listed",
+      "namedBusinesses": [
+        "Jack London Square Markets",
+        "Blue Lantern Bar",
+        "Green & Gold Tavern"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Downtown",
+      "label": "Downtown · 2 staffed / 4 listed",
+      "namedBusinesses": [
+        "Miso Metro",
+        "SpeedyBurger"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Temescal",
+      "label": "Temescal · 1 staffed / 2 listed",
+      "namedBusinesses": [
+        "OakTown Social"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Uptown",
+      "label": "Uptown · 1 staffed / 6 listed",
+      "namedBusinesses": [
+        "Art Walk Cafe"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Chinatown",
+      "label": "Chinatown · 1 staffed / 4 listed",
+      "namedBusinesses": [
+        "Heritage Bakehouse"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Fruitvale",
+      "label": "Fruitvale · 2 staffed / 7 listed",
+      "namedBusinesses": [
+        "Fruitvale Diner",
+        "Marigold Cafe"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "KONO",
+      "label": "KONO · 1 staffed / 5 listed",
+      "namedBusinesses": [
+        "The Northgate Bar"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "West Oakland",
+      "label": "West Oakland · 1 staffed / 2 listed",
+      "namedBusinesses": [
+        "West Side Cafe"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Dimond",
+      "label": "Dimond · 1 staffed / 4 listed",
+      "namedBusinesses": [
+        "Romano's"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Grand Lake",
+      "label": "Grand Lake · 1 staffed / 5 listed",
+      "namedBusinesses": [
+        "Port Grind"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Laurel",
+      "label": "Laurel · 2 staffed / 3 listed",
+      "namedBusinesses": [
+        "Nino's",
+        "Schoolgate Cafe"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Baylight District",
+      "label": "Baylight District · 1 staffed / 2 listed",
+      "namedBusinesses": [
+        "Oakland Casino Town"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "East Oakland",
+      "label": "East Oakland · 1 staffed / 4 listed",
+      "namedBusinesses": [
+        "Sunrise Cafe"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Eastlake",
+      "label": "Eastlake · 1 staffed / 4 listed",
+      "namedBusinesses": [
+        "Parkedge Diner"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "San Antonio",
+      "label": "San Antonio · 1 staffed / 2 listed",
+      "namedBusinesses": [
+        "Park Boulevard Cafe"
+      ]
+    }
+  ],
+  "signals": {
+    "businessLaneCount": 43,
+    "sample": [
+      {
+        "kind": "anomaly",
+        "label": "transit ailment — economic footprint, affected businesses, workforce impact in Fruitvale",
+        "hood": "Fruitvale",
+        "ref": "output/engine_audit_c113.json patterns[3]; evidence: Neighborhood_Map row(s) 6"
+      },
+      {
+        "kind": "anomaly",
+        "label": "economic ailment — economic footprint, affected businesses, workforce impact in Downtown",
+        "hood": "Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Piedmont Ave, Chinatown, Brooklyn, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, KONO, Uptown, East Oakland",
+        "ref": "output/engine_audit_c113.json patterns[10]; evidence: Neighborhood_Map row(s) "
+      },
+      {
+        "kind": "anomaly",
+        "label": "West Oakland Tenant Defense Fund — economic upside, jobs and footprint in West Oakland",
+        "hood": "West Oakland",
+        "ref": "output/engine_audit_c113.json patterns[11]; evidence: Initiative_Tracker row(s) 10"
+      },
+      {
+        "kind": "anomaly",
+        "label": "civic — economic upside, jobs and footprint in Adams Point",
+        "hood": "Adams Point",
+        "ref": "output/engine_audit_c113.json patterns[12]; evidence: Neighborhood_Map row(s) "
+      },
+      {
+        "kind": "anomaly",
+        "label": "civic — economic upside, jobs and footprint in Brooklyn",
+        "hood": "Brooklyn",
+        "ref": "output/engine_audit_c113.json patterns[13]; evidence: Neighborhood_Map row(s) "
+      }
+    ]
+  },
+  "scene": {
+    "namedOnTop": [
+      "OakHouse",
+      "Claremont Table"
+    ]
+  },
+  "pointers": [
+    "output/beats/Business_Ledger.jsonl (283 rows @C113)",
+    "output/beats/Employment_Roster.jsonl (971 rows)",
+    "output/beats/Story_Seed_Deck.jsonl (business seeds this cycle: 3)",
+    "output/beats/prev/Business_Ledger.jsonl (movement vs C112)",
+    "output/beats/Story_Hook_Deck.jsonl (business hooks this cycle: 6)",
+    "output/desk_signal_c113.json lanes.business (pointers only)"
+  ]
+}

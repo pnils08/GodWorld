@@ -1,0 +1,17 @@
+{
+  "status": "arc-seed",
+  "cycle": "113",
+  "desk": "undocked",
+  "persona": "nia-rook",
+  "hood": "Downtown",
+  "quotes": [
+    {
+      "pop": "POP-00836",
+      "name": "Cristina Booker",
+      "quote": "To be honest, I'm not sure what you're referring to with my 'dead even performance.' I'm just going about my daily life as an immigration attorney here in Downtown Oakland. I haven't noticed anything out of the ordinary happening to me recently."
+    }
+  ],
+  "claim": "To be honest, I'm not sure what you're referring to with my 'dead even performance.' I'm just going about my daily life as an immigration attorney here in Downtown Oakland. I haven't noticed anything out of the ordinary happening to me recently.",
+  "src": "citizenVoice PRESS c113",
+  "ranAt": "2026-10-27T18:18:19.711Z"
+}

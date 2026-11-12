@@ -1,0 +1,60 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "114",
+  "persona": "ines-sorensen",
+  "byline": "Ines Sorensen",
+  "bylinePopid": "POP-01211",
+  "article": "output/cron-compare/staged/culture_c114_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5.staged-0021.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Omar Amici",
+        "role": "quoted-source",
+        "popid": "POP-00263"
+      },
+      {
+        "name": "Ingmar Jordan",
+        "role": "quoted-source",
+        "popid": "POP-00346"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "To be honest, the changes in Uptown have me feeling a bit uneasy. The streets are busier than ever, and it seems like every other place is a for-rent sign these days. I've lived here long enough to see the neighborhood transform, but this feels different. It's like the neighborhood is shifting away from the people who've been here all along.",
+        "sourceRef": "citizenVoice PRESS Omar Amici"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "gate": "off",
+    "model": null,
+    "manifestId": null,
+    "draftSha256": "c48ab36b21979777201052610f52f5ba49d2ff6fc1389c2ce05dc18b7296f478",
+    "verdict": null,
+    "ranAt": "2026-11-06T00:21:07.952Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": false,
+      "inTarget": true,
+      "inTargetBy": "code floor 300",
+      "words": 348,
+      "short": "The piece introduces Ingmar Jordan before his quote rather than placing the line first, and includes commentary beyond framing what citizens wrote.",
+      "score": 3,
+      "model": "google/gemini-3.7-flash",
+      "scoredWithoutRhea": true,
+      "draftSha256": "c48ab36b21979777201052610f52f5ba49d2ff6fc1389c2ce05dc18b7296f478"
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-06T00:21:07.952Z"
+}

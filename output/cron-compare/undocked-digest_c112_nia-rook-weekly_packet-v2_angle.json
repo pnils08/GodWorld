@@ -1,0 +1,310 @@
+{
+  "stage": "angle",
+  "desk": "undocked-digest",
+  "cycle": "112",
+  "persona": "nia-rook-weekly",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-01076",
+      "name": "Nia Rook",
+      "role": "desk reporter",
+      "desk": "undocked-digest"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Week-in-UNDOCKED leaderboard digest — every pilot who flew this cycle (Sammie Alvarez, Rafael Phillips, Iris Pham), who is climbing and who is fading. Standings: Eric Taveras leads the board — rank #1, 2 cycle(s) led, current streak 2. In the chair: Sammie Alvarez — Civic & Neighborhood Reporter, OakTown Echo; Rafael Phillips — Nurse aide; Iris Pham — Barista. The career is who they are, not the story; the story is the flight.",
+      "approach": null
+    },
+    "signal": {
+      "kind": "undocked-digest",
+      "hood": null,
+      "score": null,
+      "src": "undocked-week:weekly-c112",
+      "nearby": [
+        {
+          "text": "",
+          "src": ""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00775",
+          "name": "Sammie Alvarez",
+          "profile": "Sammie Alvarez — UNDOCKED pilot",
+          "role": "UNDOCKED pilot",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "undocked-feed-row",
+          "evidence": {
+            "source": "output/spacemolt-show/feed/c112.json",
+            "episodeId": "undocked-pop00775-Y3C8",
+            "pop": "POP-00775"
+          }
+        },
+        {
+          "pop": "POP-01077",
+          "name": "Rafael Phillips",
+          "profile": "Rafael Phillips — UNDOCKED pilot",
+          "role": "UNDOCKED pilot",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "undocked-feed-row",
+          "evidence": {
+            "source": "output/spacemolt-show/feed/c112.json",
+            "episodeId": "undocked-pop01077-Y3C8",
+            "pop": "POP-01077"
+          }
+        },
+        {
+          "pop": "POP-01203",
+          "name": "Iris Pham",
+          "profile": "Iris Pham — UNDOCKED pilot",
+          "role": "UNDOCKED pilot",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "undocked-feed-row",
+          "evidence": {
+            "source": "output/spacemolt-show/feed/c112.json",
+            "episodeId": "undocked-pop01203-Y3C8",
+            "pop": "POP-01203"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C112",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-7cd6ffd2aeb3"
+      },
+      {
+        "t": "FACT",
+        "text": "UNDOCKED week-in-review c112",
+        "src": "undocked-week:weekly-c112",
+        "id": "F-a79b3311bdd9"
+      },
+      {
+        "t": "FACT",
+        "text": "Sammie Alvarez — 2 episode(s) this cycle, credits -209, combat 0, mishaps 0 (UNDOCKED feed)",
+        "src": "undocked-week:weekly-c112",
+        "id": "F-5106f5c73752"
+      },
+      {
+        "t": "FACT",
+        "text": "Rafael Phillips — 2 episode(s) this cycle, credits 0, combat 0, mishaps 0 (UNDOCKED feed)",
+        "src": "undocked-week:weekly-c112",
+        "id": "F-8938a01054c7"
+      },
+      {
+        "t": "FACT",
+        "text": "Iris Pham — 1 episode(s) this cycle, credits 1, combat 0, mishaps 0 (UNDOCKED feed)",
+        "src": "undocked-week:weekly-c112",
+        "id": "F-466e88f84704"
+      },
+      {
+        "t": "FACT",
+        "text": "Sammie Alvarez — Civic & Neighborhood Reporter, OakTown Echo (ledger)",
+        "src": "undocked-week:weekly-c112",
+        "id": "F-76c40d35a927"
+      },
+      {
+        "t": "FACT",
+        "text": "Rafael Phillips — Nurse aide (ledger)",
+        "src": "undocked-week:weekly-c112",
+        "id": "F-9c82888ba179"
+      },
+      {
+        "t": "FACT",
+        "text": "Iris Pham — Barista (ledger)",
+        "src": "undocked-week:weekly-c112",
+        "id": "F-02402e85f129"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "named",
+    "candidates": [
+      {
+        "pop": "POP-00775",
+        "name": "Sammie Alvarez",
+        "role": "UNDOCKED pilot",
+        "hood": null,
+        "profile": "Sammie Alvarez — UNDOCKED pilot",
+        "mode": "named",
+        "sourceKind": "undocked-feed-row",
+        "evidence": {
+          "source": "output/spacemolt-show/feed/c112.json",
+          "episodeId": "undocked-pop00775-Y3C8",
+          "pop": "POP-00775"
+        }
+      },
+      {
+        "pop": "POP-01077",
+        "name": "Rafael Phillips",
+        "role": "UNDOCKED pilot",
+        "hood": null,
+        "profile": "Rafael Phillips — UNDOCKED pilot",
+        "mode": "named",
+        "sourceKind": "undocked-feed-row",
+        "evidence": {
+          "source": "output/spacemolt-show/feed/c112.json",
+          "episodeId": "undocked-pop01077-Y3C8",
+          "pop": "POP-01077"
+        }
+      },
+      {
+        "pop": "POP-01203",
+        "name": "Iris Pham",
+        "role": "UNDOCKED pilot",
+        "hood": null,
+        "profile": "Iris Pham — UNDOCKED pilot",
+        "mode": "named",
+        "sourceKind": "undocked-feed-row",
+        "evidence": {
+          "source": "output/spacemolt-show/feed/c112.json",
+          "episodeId": "undocked-pop01203-Y3C8",
+          "pop": "POP-01203"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Nia Rook",
+    "popid": "POP-01076"
+  },
+  "assignment": {
+    "story": {
+      "ref": "undocked-week:weekly-c112",
+      "label": "UNDOCKED week-in-review c112",
+      "kind": "undocked-digest",
+      "angle": "Week-in-UNDOCKED leaderboard digest — every pilot who flew this cycle (Sammie Alvarez, Rafael Phillips, Iris Pham), who is climbing and who is fading. Standings: Eric Taveras leads the board — rank #1, 2 cycle(s) led, current streak 2. In the chair: Sammie Alvarez — Civic & Neighborhood Reporter, OakTown Echo; Rafael Phillips — Nurse aide; Iris Pham — Barista. The career is who they are, not the story; the story is the flight.",
+      "facts": [
+        "Sammie Alvarez — 2 episode(s) this cycle, credits -209, combat 0, mishaps 0 (UNDOCKED feed)",
+        "Rafael Phillips — 2 episode(s) this cycle, credits 0, combat 0, mishaps 0 (UNDOCKED feed)",
+        "Iris Pham — 1 episode(s) this cycle, credits 1, combat 0, mishaps 0 (UNDOCKED feed)",
+        "Sammie Alvarez — Civic & Neighborhood Reporter, OakTown Echo (ledger)",
+        "Rafael Phillips — Nurse aide (ledger)",
+        "Iris Pham — Barista (ledger)"
+      ],
+      "citizens": [
+        "Sammie Alvarez — Civic & Neighborhood Reporter, OakTown Echo, UNDOCKED cast pilot",
+        "Rafael Phillips — Nurse aide, UNDOCKED cast pilot",
+        "Iris Pham — Barista, UNDOCKED cast pilot"
+      ],
+      "popids": [
+        "POP-00775",
+        "POP-01077",
+        "POP-01203"
+      ]
+    }
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Nia Rook",
+    "popid": "POP-01076",
+    "text": "Track the top UNDOCKED pilots this cycle, focusing on their performance and career backgrounds to understand the leaderboard dynamics.",
+    "plan": {
+      "chase": "Track the top UNDOCKED pilots this cycle, focusing on their performance and career backgrounds to understand the leaderboard dynamics.",
+      "focus": "UNDOCKED leaderboard digest for cycle C112",
+      "why": "To analyze the current standings and identify trends among the top pilots",
+      "checks": [
+        "Verify pilot information against the UNDOCKED feed",
+        "Cross-check career backgrounds with the ledger"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00775",
+          "question": "How is Sammie Alvarez performing in their role as Civic & Neighborhood Reporter?",
+          "basis": "F-5106f5c73752"
+        },
+        {
+          "pop": "POP-01077",
+          "question": "What factors contributed to Rafael Phillips' current standing?",
+          "basis": "F-8938a01054c7"
+        },
+        {
+          "pop": "POP-01203",
+          "question": "How did Iris Pham's single episode impact their credits?",
+          "basis": "F-466e88f84704"
+        }
+      ],
+      "interpretation": "The current leaderboard reflects a mix of performance and career experience among the top UNDOCKED pilots.",
+      "unverifiedLead": [
+        "The impact of Sammie Alvarez's reporting experience on their UNDOCKED performance"
+      ],
+      "closeQuestion": "What are the key factors driving Eric Taveras' lead in the standings?"
+    }
+  },
+  "lanePicks": [
+    {
+      "popids": []
+    }
+  ],
+  "laneEntries": 1,
+  "angleCapHits": 0,
+  "ranAt": "2026-10-24T13:15:38.929Z"
+}

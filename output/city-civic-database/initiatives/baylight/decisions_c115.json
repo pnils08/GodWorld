@@ -1,0 +1,28 @@
+{
+  "initiative": "INIT-006",
+  "initiativeId": "INIT-006",
+  "cycle": 115,
+  "primaryVoice": "Mayor gavel (mayor_gavel-004)",
+  "consolidatedFrom": [
+    "STMT-115-baylight_authority-001 (Ramos — Baylight District Construction Milestone Review — C115 Findings)",
+    "STMT-115-baylight_authority-002 (Ramos — Baylight District Community Impact Mitigation — Jack London Findings Carry Fo...)",
+    "STMT-115-council_d2-003 (Tran D2 — Baylight District — Final Council Vote)",
+    "STMT-115-mayor_gavel-004 (Mayor gavel — Baylight C115 construction milestone evidence review)",
+    "STMT-115-mayor_open-005 (Mayor agenda — C115 Baylight construction milestone evidence review)",
+    "STMT-115-oari-002 (Tran-Muñoz — Baylight corridor protocol extension and open oversight items)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-006",
+    "MilestoneNotes": "C115: Evidence-file milestone review ordered; no construction milestone pass declared, and remediation, hotline, dust-control, and workforce oversight continue.",
+    "NextScheduledAction": "Publish the C115 evidence review and milestone determination",
+    "NextActionCycle": 115,
+    "LastWorkCycle": 115,
+    "LastWorkSeat": "civic-office-council-d2, proj-baylight"
+  },
+  "_moveFold": {
+    "moveIds": [
+      "MV-114-civic-office-council-d2-2026-11-03",
+      "MV-114-proj-baylight-2026-11-05"
+    ]
+  }
+}

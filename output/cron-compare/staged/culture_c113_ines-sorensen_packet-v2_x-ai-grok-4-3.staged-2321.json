@@ -1,0 +1,83 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "113",
+  "persona": "ines-sorensen",
+  "byline": "Ines Sorensen",
+  "bylinePopid": "POP-01211",
+  "article": "output/cron-compare/staged/culture_c113_ines-sorensen_packet-v2_x-ai-grok-4-3.staged-2321.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Deacon Seymour",
+        "role": "quoted-source",
+        "popid": "POP-00528"
+      },
+      {
+        "name": "Ximena Mehta",
+        "role": "quoted-source",
+        "popid": "POP-01039"
+      },
+      {
+        "name": "Omar Lingio",
+        "role": "quoted-source",
+        "popid": "POP-00206"
+      },
+      {
+        "name": "Danny Horn",
+        "role": "mentioned",
+        "popid": "POP-00022",
+        "floor": true
+      },
+      {
+        "name": "Desmond Morton",
+        "role": "mentioned",
+        "popid": "POP-00051",
+        "floor": true
+      },
+      {
+        "name": "Frank Reyna",
+        "role": "mentioned",
+        "popid": "POP-00079",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "I'm still thinking about the left field decision. We've got three capable players, but each brings something different to the table. Desmond Morton's our future star with five tools, Frank Reyna's a power hitter who can make an immediate impact, and JR Rosado's a steady hand with good contact numbers. It's not an easy call.",
+        "sourceRef": "citizenVoice PRESS Deacon Seymour"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "gate": "off",
+    "model": null,
+    "manifestId": null,
+    "draftSha256": "554dc40732fb21a950636f40ad2cb6b27d9182256b818e68228d8749a9925417",
+    "verdict": null,
+    "ranAt": "2026-10-30T23:20:44.412Z",
+    "contractScore": {
+      "opened": true,
+      "closed": false,
+      "purposeMet": true,
+      "inTarget": false,
+      "inTargetBy": "code floor 300",
+      "words": 211,
+      "short": "The piece fell short of the 300-word minimum and ended on an attribution frame rather than leaving the last person's words standing.",
+      "score": 2,
+      "model": "google/gemini-3.7-flash",
+      "scoredWithoutRhea": true,
+      "draftSha256": "554dc40732fb21a950636f40ad2cb6b27d9182256b818e68228d8749a9925417"
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-30T23:20:44.412Z"
+}

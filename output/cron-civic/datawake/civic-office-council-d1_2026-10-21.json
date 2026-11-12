@@ -1,0 +1,26 @@
+{
+  "office": "council_d1",
+  "agentDir": "civic-office-council-d1",
+  "holder": "Denise Carter",
+  "popid": "POP-00501",
+  "title": "City Council District 1",
+  "date": "2026-10-21",
+  "cycle": 112,
+  "model": "deepseek/deepseek-v4-flash-0731",
+  "statement": "I'm standing with Brooklyn — not because it's easy, but because it's right. The numbers don't lie: sentiment at -0.12 against a citywide -0.008, property crime at 37, and decay momentum building to 3. This isn't a blip; it's a pattern. And the people in my district are feeling it every day — Kaila closing the bakery earlier, Drago and Sefu watching their block change, Minh seeing fewer jobs on the board. The Tenant Defense Fund is moving — I'm filing the ordinance today because displacement doesn't pause for process. And to Brooklyn's storefronts: submit your municipal service plans by week's end so we can direct stabilization dollars where they'll matter most.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-112-civic-office-council-d1",
+        "text": "I cast my vote to advance the West Oakland Tenant Defense Fund (INIT-010) and I'm directing stabilization dollars to the Brooklyn corridor — municipal service plans due by week's end so we target relief where the decay is building.",
+        "directiveCycle": 112,
+        "confrontationSeat": "civic-office-council-d1"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": "property crime 37 → 34",
+  "ranAt": "2026-10-21T10:45:36.434Z",
+  "fellBackFrom": null
+}

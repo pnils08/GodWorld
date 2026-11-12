@@ -1,0 +1,82 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "115",
+  "persona": "ines-sorensen",
+  "byline": "Ines Sorensen",
+  "bylinePopid": "POP-01211",
+  "article": "output/cron-compare/staged/culture_c115_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Omar Amici",
+        "role": "quoted-source",
+        "popid": "POP-00263"
+      },
+      {
+        "name": "Priya Narang",
+        "role": "quoted-source",
+        "popid": "POP-00141"
+      },
+      {
+        "name": "Ingmar Jordan",
+        "role": "quoted-source",
+        "popid": "POP-00346"
+      },
+      {
+        "name": "Carmen Mesa",
+        "role": "mentioned",
+        "popid": "POP-00081",
+        "floor": true
+      },
+      {
+        "name": "Pablo Almanzar",
+        "role": "mentioned",
+        "popid": "POP-01078",
+        "floor": true
+      },
+      {
+        "name": "Yu Zen",
+        "role": "mentioned",
+        "popid": "POP-00194",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "To be honest, the changes in Uptown have me feeling a bit uneasy. The streets are busier than ever, and it seems like every other place is a for-rent sign these days. I've lived here long enough to see the neighborhood transform, but this feels different. It's like the neighborhood is shifting away from the people who've been here for a while.",
+        "sourceRef": "citizenVoice PRESS Omar Amici"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "gate": "off",
+    "model": null,
+    "manifestId": null,
+    "draftSha256": "0ee80226948da090e77b4a4dc296f95d9788848a092c78c102512691e65c2bc4",
+    "verdict": null,
+    "ranAt": "2026-11-12T00:24:15.109Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": false,
+      "inTarget": true,
+      "inTargetBy": "code floor 300",
+      "words": 475,
+      "short": "The piece puts names and reporter commentary before citizen quotes rather than leading with their lines and keeping the frame minimal.",
+      "score": 2,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "scoredWithoutRhea": true,
+      "draftSha256": "0ee80226948da090e77b4a4dc296f95d9788848a092c78c102512691e65c2bc4"
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-12T00:24:15.109Z"
+}

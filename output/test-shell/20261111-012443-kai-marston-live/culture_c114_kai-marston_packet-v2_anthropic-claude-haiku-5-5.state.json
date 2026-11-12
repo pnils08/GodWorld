@@ -1,0 +1,526 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00158",
+    "name": "Kai Marston",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Benji Dillon is rising — the acts and the rooms they play",
+    "approach": "Arts & entertainment approach: this slice is the culture ledger — who is rising, who just appeared, who is fading, with their domains and neighborhoods — plus the city's culture seeds this cycle. Present-tense, neighborhood act not gallery PR. The names and trajectories are real; the garage rehearsal, the opening-night crowd, the set list are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "arts",
+      "hood": "Rockridge",
+      "facts": [
+        "Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 48, rising), last seen C105",
+        "Darrin Davis (A's player), Sports, Piedmont Ave — fame rising (fame 37, rising), last seen C108",
+        "Danny Horn (A's player), Sports, Temescal — fame rising (fame 37, rising), last seen C99",
+        "Travis Coles (A's player), Sports, Downtown — fame rising (fame 29, rising), last seen C96",
+        "CITY SEED (Citywide): Shawn Neighbor; Eric Taveras; Jada Rayes",
+        "CITY SEED (Chinatown): Niani Oakley; Victor Han; Ronald Silk · at Oakland Asian Cultural Center; Heritage Bakehouse",
+        "CITY SEED (Lake Merritt): Ximena Mehta; Mina Linas; Malot Bielo · at Merritt Club; Adams & Daughters Antiques"
+      ],
+      "priorCycle": null,
+      "note": null,
+      "engineHooks": [
+        "Multiple culture signals detected. Could be coincidence or early pattern. (arts/culture feature)",
+        "Multiple arts signals detected. Could be coincidence or early pattern. (general coverage)",
+        "First Friday: Monthly art walk tonight. Gallery openings, street vendors, neighborhood energy. Photo walk opportunity. (desk rotation)",
+        "First Friday nightlife surge expected. Restaurant and bar scene coverage available. (general coverage)"
+      ],
+      "roomIsYours": "the rehearsal space, the flyer on the pole, who showed up, what the room felt like when the second act started",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-arts",
+    "hood": "Rockridge",
+    "src": "output/beats/Cultural_Ledger.jsonl @C114",
+    "plan": {
+      "focus": "Benji Dillon's rising fame"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00018",
+        "name": "Benji Dillon",
+        "profile": "Benji Dillon — Pitcher, Oakland A's Legend — Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00021",
+        "name": "Darrin Davis",
+        "profile": "Darrin Davis — Left Fielder, Oakland A's Legend — Piedmont Ave",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00022",
+        "name": "Danny Horn",
+        "profile": "Danny Horn — Center Fielder, Oakland A's - Best player in the MLB — Temescal",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00533",
+        "name": "Travis Coles",
+        "profile": "Travis Coles — Starting Pitcher, Oakland A's — Downtown",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00018-36a295bfc1",
+        "pop": "POP-00018",
+        "name": "Benji Dillon",
+        "quote": "I'm not sure what's behind my growing presence in Rockridge. I live here, I've been part of the community for a while, and I'm just doing my thing. I've been around long enough that people know me, I guess. I'm just trying to be a good neighbor and a good dad to Rick.",
+        "factIds": [
+          "F-2620383281c8",
+          "F-78a73baebc9b"
+        ],
+        "src": "packet.W2[POP-00018]"
+      },
+      {
+        "id": "Q-POP-00021-304667b8cb",
+        "pop": "POP-00021",
+        "name": "Darrin Davis",
+        "quote": "I've seen Benji Dillon's name popping up more often around the A's, and it's clear he's gaining traction. To be honest, I'm not super close to him, but you can tell when someone's rising through the ranks. I've been around long enough to recognize the buzz. It's like when I was breaking in – everyone's curious, and you're getting more attention. I think it's great for the team to have fresh talent making waves.",
+        "factIds": [
+          "F-78a73baebc9b",
+          "F-a45f74fce772",
+          "F-8f00159f4598"
+        ],
+        "src": "packet.W2[POP-00021]"
+      },
+      {
+        "id": "Q-POP-00022-f3aaf6ee5b",
+        "pop": "POP-00022",
+        "name": "Danny Horn",
+        "quote": "To be honest, I've not really thought much about Benji Dillon's rising fame. I'm focused on my own game and helping the A's make a deep run. I've seen him around the clubhouse, he's a talented kid, but I don't know him well enough to say much about his personal story or what's behind his recent performances.",
+        "factIds": [
+          "F-78a73baebc9b",
+          "F-3dc8503c3adc"
+        ],
+        "src": "packet.W2[POP-00022]"
+      },
+      {
+        "id": "Q-POP-00533-a9d8bd8d38",
+        "pop": "POP-00533",
+        "name": "Travis Coles",
+        "quote": "To be honest, I haven't really thought much about Benji Dillon's rising fame. I'm focused on my own game and the A's season. I know he's a teammate, but I don't really know him personally. I've seen his name in the papers, though.",
+        "factIds": [
+          "F-311b78d2af00",
+          "F-78a73baebc9b"
+        ],
+        "src": "packet.W2[POP-00533]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Kai Marston",
+        "text": "Benji Dillon might be involved in local events or charities",
+        "usable": false
+      },
+      {
+        "from": "Kai Marston",
+        "text": "His rising fame could be influencing local businesses or cultural activities",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C114",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-4261fa115617"
+    },
+    {
+      "t": "FACT",
+      "text": "31 culture figures rising; 0 new on the record",
+      "src": "output/beats/Cultural_Ledger.jsonl @C114",
+      "id": "F-590786b3f248"
+    },
+    {
+      "t": "FACT",
+      "text": "Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 48, rising), last seen C105.",
+      "src": "output/beats/Cultural_Ledger.jsonl @C114",
+      "id": "F-78a73baebc9b"
+    },
+    {
+      "t": "FACT",
+      "text": "Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 48, rising), last seen C105",
+      "src": "output/beats/Cultural_Ledger.jsonl @C114",
+      "id": "F-a45f74fce772"
+    },
+    {
+      "t": "FACT",
+      "text": "Darrin Davis (A's player), Sports, Piedmont Ave — fame rising (fame 37, rising), last seen C108",
+      "src": "output/beats/Cultural_Ledger.jsonl @C114",
+      "id": "F-46a55c0910d1"
+    },
+    {
+      "t": "FACT",
+      "text": "Danny Horn (A's player), Sports, Temescal — fame rising (fame 37, rising), last seen C99",
+      "src": "output/beats/Cultural_Ledger.jsonl @C114",
+      "id": "F-5a6a9eeb0dcc"
+    },
+    {
+      "t": "FACT",
+      "text": "Travis Coles (A's player), Sports, Downtown — fame rising (fame 29, rising), last seen C96",
+      "src": "output/beats/Cultural_Ledger.jsonl @C114",
+      "id": "F-17642c41860e"
+    },
+    {
+      "t": "FACT",
+      "text": "CITY SEED (Citywide): Shawn Neighbor; Eric Taveras; Jada Rayes",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C114",
+      "id": "F-2096623fa04e"
+    },
+    {
+      "t": "FACT",
+      "text": "CITY SEED (Chinatown): Niani Oakley; Victor Han; Ronald Silk · at Oakland Asian Cultural Center; Heritage Bakehouse",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C114",
+      "id": "F-cac5828c3ccf"
+    },
+    {
+      "t": "FACT",
+      "text": "CITY SEED (Lake Merritt): Ximena Mehta; Mina Linas; Malot Bielo · at Merritt Club; Adams & Daughters Antiques",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C114",
+      "id": "F-4978108ce9d0"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C10, Spring, holiday=none",
+      "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+      "id": "F-9b9470803821"
+    },
+    {
+      "t": "FACT",
+      "text": "Benji Dillon — Pitcher, Oakland A's Legend — Rockridge",
+      "src": "Simulation_Ledger profile for POP-00018",
+      "id": "F-2620383281c8"
+    },
+    {
+      "t": "FACT",
+      "text": "Darrin Davis — Left Fielder, Oakland A's Legend — Piedmont Ave",
+      "src": "Simulation_Ledger profile for POP-00021",
+      "id": "F-8f00159f4598"
+    },
+    {
+      "t": "FACT",
+      "text": "Danny Horn — Center Fielder, Oakland A's - Best player in the MLB — Temescal",
+      "src": "Simulation_Ledger profile for POP-00022",
+      "id": "F-3dc8503c3adc"
+    },
+    {
+      "t": "FACT",
+      "text": "Travis Coles — Starting Pitcher, Oakland A's — Downtown",
+      "src": "Simulation_Ledger profile for POP-00533",
+      "id": "F-311b78d2af00"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "kai-arts-entertainment-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Turn a sourced evening pulse into present-tense arts and entertainment reporting where art, media, and a named place become a neighborhood act. A vivid room grounded in the Packet is success; generic culture roundup and invented nightlife are not.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "present-tense arts and entertainment scene with grounded neighborhood analysis",
+      "targetWords": "500-800",
+      "opening": "a Packet-backed named event, media slate, sighting, venue, or neighborhood arts consequence",
+      "closing": "an image or open question about what the room, screen, or block is becoming"
+    },
+    "authorizedTexture": [
+      "unnamed sensory room color—light, sound, weather, crowd movement, or the reporter's presence—that adds no new named fact",
+      "present-tense interpretation of how a Packet-backed arts, TV, movie, streaming, event, or sighting pulse lands on a neighborhood",
+      "metaphor, contrast, and scene transition grounded in the supplied pulse",
+      "a skeptical or curious question about what the supplied cultural signal means, framed as analysis rather than settled fact"
+    ],
+    "textureConditions": [
+      "every named person, artist, show, movie, event, venue, business, institution, neighborhood, and organization must come from the Packet",
+      "TV, movie, streaming, fame-sighting, event, and venue details must remain tied to the supplied evening source or pulse",
+      "unnamed sensory color may not create a new event, attendance count, quote, review, business action, or public reaction",
+      "the reporter may not claim an interview, attendance, observation, trend, or social-media response that the Packet does not supply",
+      "do not turn a shared evening substrate into a multi-voice culture average; one pulse, one room, one truth"
+    ],
+    "canonBlockers": [
+      "a named artist, celebrity, show, movie, event, venue, business, institution, neighborhood, or organization not found in the supplied record",
+      "an invented opening, screening, performance, appearance, sighting, crowd, attendance figure, review, or social-media reaction",
+      "an unsupported quote, interview, direct observation, career claim, release date, rating, or cultural trend",
+      "raw engine scores, labels, or decimals printed as public-facing cultural evidence",
+      "a causal claim about what a neighborhood or audience feels presented as measured fact",
+      "a generic culture-desk roundup that abandons the assigned evening pulse"
+    ]
+  },
+  "manifest": {
+    "id": "AM-76734ddb654e",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-4261fa115617",
+        "t": "FACT",
+        "text": "Current cycle: C114",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-590786b3f248",
+        "t": "FACT",
+        "text": "31 culture figures rising; 0 new on the record",
+        "src": "output/beats/Cultural_Ledger.jsonl @C114"
+      },
+      {
+        "id": "F-78a73baebc9b",
+        "t": "FACT",
+        "text": "Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 48, rising), last seen C105.",
+        "src": "output/beats/Cultural_Ledger.jsonl @C114"
+      },
+      {
+        "id": "F-a45f74fce772",
+        "t": "FACT",
+        "text": "Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 48, rising), last seen C105",
+        "src": "output/beats/Cultural_Ledger.jsonl @C114"
+      },
+      {
+        "id": "F-46a55c0910d1",
+        "t": "FACT",
+        "text": "Darrin Davis (A's player), Sports, Piedmont Ave — fame rising (fame 37, rising), last seen C108",
+        "src": "output/beats/Cultural_Ledger.jsonl @C114"
+      },
+      {
+        "id": "F-5a6a9eeb0dcc",
+        "t": "FACT",
+        "text": "Danny Horn (A's player), Sports, Temescal — fame rising (fame 37, rising), last seen C99",
+        "src": "output/beats/Cultural_Ledger.jsonl @C114"
+      },
+      {
+        "id": "F-17642c41860e",
+        "t": "FACT",
+        "text": "Travis Coles (A's player), Sports, Downtown — fame rising (fame 29, rising), last seen C96",
+        "src": "output/beats/Cultural_Ledger.jsonl @C114"
+      },
+      {
+        "id": "F-2096623fa04e",
+        "t": "FACT",
+        "text": "CITY SEED (Citywide): Shawn Neighbor; Eric Taveras; Jada Rayes",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C114"
+      },
+      {
+        "id": "F-cac5828c3ccf",
+        "t": "FACT",
+        "text": "CITY SEED (Chinatown): Niani Oakley; Victor Han; Ronald Silk · at Oakland Asian Cultural Center; Heritage Bakehouse",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C114"
+      },
+      {
+        "id": "F-4978108ce9d0",
+        "t": "FACT",
+        "text": "CITY SEED (Lake Merritt): Ximena Mehta; Mina Linas; Malot Bielo · at Merritt Club; Adams & Daughters Antiques",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C114"
+      },
+      {
+        "id": "F-9b9470803821",
+        "t": "FACT",
+        "text": "Calendar: Y3C10, Spring, holiday=none",
+        "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)"
+      },
+      {
+        "id": "F-2620383281c8",
+        "t": "FACT",
+        "text": "Benji Dillon — Pitcher, Oakland A's Legend — Rockridge",
+        "src": "Simulation_Ledger profile for POP-00018"
+      },
+      {
+        "id": "F-8f00159f4598",
+        "t": "FACT",
+        "text": "Darrin Davis — Left Fielder, Oakland A's Legend — Piedmont Ave",
+        "src": "Simulation_Ledger profile for POP-00021"
+      },
+      {
+        "id": "F-3dc8503c3adc",
+        "t": "FACT",
+        "text": "Danny Horn — Center Fielder, Oakland A's - Best player in the MLB — Temescal",
+        "src": "Simulation_Ledger profile for POP-00022"
+      },
+      {
+        "id": "F-311b78d2af00",
+        "t": "FACT",
+        "text": "Travis Coles — Starting Pitcher, Oakland A's — Downtown",
+        "src": "Simulation_Ledger profile for POP-00533"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00018-36a295bfc1",
+        "speakerId": "POP-00018",
+        "speakerName": "Benji Dillon",
+        "text": "I'm not sure what's behind my growing presence in Rockridge. I live here, I've been part of the community for a while, and I'm just doing my thing. I've been around long enough that people know me, I guess. I'm just trying to be a good neighbor and a good dad to Rick.",
+        "factIds": [
+          "F-2620383281c8",
+          "F-78a73baebc9b"
+        ],
+        "src": "packet.W2[POP-00018]"
+      },
+      {
+        "id": "Q-POP-00021-304667b8cb",
+        "speakerId": "POP-00021",
+        "speakerName": "Darrin Davis",
+        "text": "I've seen Benji Dillon's name popping up more often around the A's, and it's clear he's gaining traction. To be honest, I'm not super close to him, but you can tell when someone's rising through the ranks. I've been around long enough to recognize the buzz. It's like when I was breaking in – everyone's curious, and you're getting more attention. I think it's great for the team to have fresh talent making waves.",
+        "factIds": [
+          "F-78a73baebc9b",
+          "F-a45f74fce772",
+          "F-8f00159f4598"
+        ],
+        "src": "packet.W2[POP-00021]"
+      },
+      {
+        "id": "Q-POP-00022-f3aaf6ee5b",
+        "speakerId": "POP-00022",
+        "speakerName": "Danny Horn",
+        "text": "To be honest, I've not really thought much about Benji Dillon's rising fame. I'm focused on my own game and helping the A's make a deep run. I've seen him around the clubhouse, he's a talented kid, but I don't know him well enough to say much about his personal story or what's behind his recent performances.",
+        "factIds": [
+          "F-78a73baebc9b",
+          "F-3dc8503c3adc"
+        ],
+        "src": "packet.W2[POP-00022]"
+      },
+      {
+        "id": "Q-POP-00533-a9d8bd8d38",
+        "speakerId": "POP-00533",
+        "speakerName": "Travis Coles",
+        "text": "To be honest, I haven't really thought much about Benji Dillon's rising fame. I'm focused on my own game and the A's season. I know he's a teammate, but I don't really know him personally. I've seen his name in the papers, though.",
+        "factIds": [
+          "F-311b78d2af00",
+          "F-78a73baebc9b"
+        ],
+        "src": "packet.W2[POP-00533]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00018",
+        "name": "Benji Dillon",
+        "profile": "Benji Dillon — Pitcher, Oakland A's Legend — Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00021",
+        "name": "Darrin Davis",
+        "profile": "Darrin Davis — Left Fielder, Oakland A's Legend — Piedmont Ave",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00022",
+        "name": "Danny Horn",
+        "profile": "Danny Horn — Center Fielder, Oakland A's - Best player in the MLB — Temescal",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00533",
+        "name": "Travis Coles",
+        "profile": "Travis Coles — Starting Pitcher, Oakland A's — Downtown",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Kai Marston",
+        "text": "Benji Dillon might be involved in local events or charities",
+        "publishable": false
+      },
+      {
+        "from": "Kai Marston",
+        "text": "His rising fame could be influencing local businesses or cultural activities",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "unnamed sensory room color—light, sound, weather, crowd movement, or the reporter's presence—that adds no new named fact",
+      "present-tense interpretation of how a Packet-backed arts, TV, movie, streaming, event, or sighting pulse lands on a neighborhood",
+      "metaphor, contrast, and scene transition grounded in the supplied pulse",
+      "a skeptical or curious question about what the supplied cultural signal means, framed as analysis rather than settled fact"
+    ],
+    "textureConditions": [
+      "every named person, artist, show, movie, event, venue, business, institution, neighborhood, and organization must come from the Packet",
+      "TV, movie, streaming, fame-sighting, event, and venue details must remain tied to the supplied evening source or pulse",
+      "unnamed sensory color may not create a new event, attendance count, quote, review, business action, or public reaction",
+      "the reporter may not claim an interview, attendance, observation, trend, or social-media response that the Packet does not supply",
+      "do not turn a shared evening substrate into a multi-voice culture average; one pulse, one room, one truth"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

@@ -1,0 +1,484 @@
+{
+  "v": "UNDOCKED-ADAPTER/1",
+  "show": "UNDOCKED",
+  "episode_id": "undocked-pop00008-2026-11-12T02-30-29",
+  "popid": "POP-00008",
+  "holder": "P Slayer",
+  "session": "undocked-pop00008",
+  "window": {
+    "startedAt": "2026-11-12T02:30:29.654Z",
+    "endedAt": "2026-11-12T02:50:44.715Z"
+  },
+  "runner": {
+    "turns": 39,
+    "exitCode": null,
+    "capped": true,
+    "toolErrors": 3,
+    "estCostUsd": 0.0179,
+    "tokensIn": 154020,
+    "tokensOut": 4941,
+    "log": "output/spacemolt-show/episodes/undocked-pop00008-2026-11-12T02-30-29.log",
+    "stopReason": "window",
+    "toolCalls": 48
+  },
+  "stall": null,
+  "source": {
+    "kind": "get_action_log",
+    "categories": [
+      "mining",
+      "trading",
+      "mission",
+      "combat",
+      "navigation",
+      "session",
+      "achievement"
+    ],
+    "fetchedAt": "2026-11-12T02:55:45.403Z"
+  },
+  "facts": {
+    "credits_delta": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "hits": 0,
+      "note": "gameplay in window carries no credit event — measured zero",
+      "value": 0
+    },
+    "points_delta": {
+      "type": "FACT",
+      "source": "get_achievements",
+      "basis": "progress",
+      "items": [
+        {
+          "id": "wanderer",
+          "name": "Wanderer",
+          "gained": 9
+        },
+        {
+          "id": "first_contact",
+          "name": "First Contact",
+          "gained": 5
+        },
+        {
+          "id": "maiden_jump",
+          "name": "Maiden Jump",
+          "gained": 5
+        },
+        {
+          "id": "voyager_i",
+          "name": "Voyager I",
+          "gained": 4.8
+        },
+        {
+          "id": "cartographer",
+          "name": "Cartographer",
+          "gained": 3.6
+        },
+        {
+          "id": "the_truth_is_out_there",
+          "name": "The Truth Is Out There",
+          "gained": 2.5
+        },
+        {
+          "id": "voyager_ii",
+          "name": "Voyager II",
+          "gained": 1.2
+        },
+        {
+          "id": "master_explorer",
+          "name": "Master Explorer",
+          "gained": 0.5
+        },
+        {
+          "id": "far_traveler",
+          "name": "Far Traveler",
+          "gained": 0.01
+        },
+        {
+          "id": "jump_master",
+          "name": "Jump Master",
+          "gained": 0.01
+        },
+        {
+          "id": "prospector_i",
+          "name": "Prospector I",
+          "gained": 0.01
+        },
+        {
+          "id": "prospector_ii",
+          "name": "Prospector II",
+          "gained": 0
+        }
+      ],
+      "beforeTakenAt": "2026-11-12T02:30:29.426Z",
+      "value": 31.63
+    },
+    "systems_visited": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": [
+        "sol",
+        "alpha_centauri",
+        "tau_ceti",
+        "electra",
+        "mimosa",
+        "ross_154",
+        "arcturus",
+        "timberline",
+        "maplevale",
+        "miaplacidus",
+        "cervantes",
+        "nembus"
+      ]
+    },
+    "combat_results": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "events": 2,
+        "kills": 0,
+        "deaths": 0,
+        "other": 2
+      }
+    },
+    "cargo": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mined": {
+          "iron_ore": 1
+        },
+        "sold": {}
+      }
+    },
+    "mishaps": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "event_counts": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": 1,
+        "trading": 0,
+        "mission": 1,
+        "combat": 2,
+        "navigation": 12,
+        "session": 1,
+        "achievement": 3
+      }
+    },
+    "entries": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": [
+          {
+            "id": 266578161,
+            "created_at": "2026-11-12T02:35:55Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 1 Iron Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 1,
+              "resource_id": "iron_ore",
+              "resource_name": "Iron Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 1
+            }
+          }
+        ],
+        "trading": [],
+        "mission": [
+          {
+            "id": 266585086,
+            "created_at": "2026-11-12T02:41:38Z",
+            "category": "mission",
+            "event_type": "mission.data_copied",
+            "summary": "Copied a local observation archive",
+            "data": {
+              "poi_id": "abandoned_sensor_mast"
+            }
+          }
+        ],
+        "combat": [
+          {
+            "id": 266595386,
+            "created_at": "2026-11-12T02:49:28Z",
+            "category": "combat",
+            "event_type": "combat.sensor_sweep",
+            "summary": "Sensor sweep complete. No anomalies detected.",
+            "data": {
+              "contacts": 0,
+              "signature_detected": false
+            }
+          },
+          {
+            "id": 266584898,
+            "created_at": "2026-11-12T02:41:27Z",
+            "category": "combat",
+            "event_type": "combat.sensor_sweep",
+            "summary": "Sensor sweep complete. No anomalies detected.",
+            "data": {
+              "contacts": 0,
+              "signature_detected": false
+            }
+          }
+        ],
+        "navigation": [
+          {
+            "id": 266592070,
+            "created_at": "2026-11-12T02:48:17Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Cervantes to Nembus",
+            "data": {
+              "arrival_poi": "nembus_ii",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "cervantes",
+              "is_pathfinder": false,
+              "to_system": "nembus",
+              "to_system_name": "Nembus"
+            }
+          },
+          {
+            "id": 266591010,
+            "created_at": "2026-11-12T02:47:07Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Miaplacidus to Cervantes",
+            "data": {
+              "arrival_poi": "cervantes_vapor_fields",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "miaplacidus",
+              "is_pathfinder": false,
+              "to_system": "cervantes",
+              "to_system_name": "Cervantes"
+            }
+          },
+          {
+            "id": 266589925,
+            "created_at": "2026-11-12T02:45:57Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Maplevale to Miaplacidus",
+            "data": {
+              "arrival_poi": "miaplacidus_iii",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "maplevale",
+              "is_pathfinder": false,
+              "to_system": "miaplacidus",
+              "to_system_name": "Miaplacidus"
+            }
+          },
+          {
+            "id": 266588042,
+            "created_at": "2026-11-12T02:44:47Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Ross 154 to Maplevale",
+            "data": {
+              "arrival_poi": "maplevale_vapor_fields",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "ross_154",
+              "is_pathfinder": false,
+              "to_system": "maplevale",
+              "to_system_name": "Maplevale"
+            }
+          },
+          {
+            "id": 266586893,
+            "created_at": "2026-11-12T02:43:36Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Timberline to Ross 154",
+            "data": {
+              "arrival_poi": "ross_154_weak_annihilation_zone",
+              "cloaked": false,
+              "first_visit": false,
+              "from_system": "timberline",
+              "is_pathfinder": false,
+              "to_system": "ross_154",
+              "to_system_name": "Ross 154"
+            }
+          },
+          {
+            "id": 266582895,
+            "created_at": "2026-11-12T02:40:07Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Arcturus to Timberline",
+            "data": {
+              "arrival_poi": "timberline_ice_shelf",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "arcturus",
+              "is_pathfinder": false,
+              "to_system": "timberline",
+              "to_system_name": "Timberline"
+            }
+          },
+          {
+            "id": 266581749,
+            "created_at": "2026-11-12T02:38:57Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Ross 154 to Arcturus",
+            "data": {
+              "arrival_poi": "arcturus_iii",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "ross_154",
+              "is_pathfinder": false,
+              "to_system": "arcturus",
+              "to_system_name": "Arcturus"
+            }
+          },
+          {
+            "id": 266580604,
+            "created_at": "2026-11-12T02:37:46Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Mimosa to Ross 154",
+            "data": {
+              "arrival_poi": "ross_154_weak_annihilation_zone",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "mimosa",
+              "is_pathfinder": false,
+              "to_system": "ross_154",
+              "to_system_name": "Ross 154"
+            }
+          },
+          {
+            "id": 266579483,
+            "created_at": "2026-11-12T02:36:37Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Electra to Mimosa",
+            "data": {
+              "arrival_poi": "mimosa_iii",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "electra",
+              "is_pathfinder": false,
+              "to_system": "mimosa",
+              "to_system_name": "Mimosa"
+            }
+          },
+          {
+            "id": 266577515,
+            "created_at": "2026-11-12T02:35:26Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Tau Ceti to Electra",
+            "data": {
+              "arrival_poi": "electra_i",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "tau_ceti",
+              "is_pathfinder": false,
+              "to_system": "electra",
+              "to_system_name": "Electra"
+            }
+          },
+          {
+            "id": 266576414,
+            "created_at": "2026-11-12T02:34:17Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Alpha Centauri to Tau Ceti",
+            "data": {
+              "arrival_poi": "fomalhaut_4675g_star",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "alpha_centauri",
+              "is_pathfinder": false,
+              "to_system": "tau_ceti",
+              "to_system_name": "Tau Ceti"
+            }
+          },
+          {
+            "id": 266575328,
+            "created_at": "2026-11-12T02:33:07Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Sol to Alpha Centauri",
+            "data": {
+              "arrival_poi": "farwatch",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "sol",
+              "is_pathfinder": false,
+              "to_system": "alpha_centauri",
+              "to_system_name": "Alpha Centauri"
+            }
+          }
+        ],
+        "session": [
+          {
+            "id": 266570087,
+            "created_at": "2026-11-12T02:30:31Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "PSlayer logged in",
+            "data": {
+              "last_login_at": "2026-11-12T02:30:29Z",
+              "source": "password"
+            }
+          }
+        ],
+        "achievement": [
+          {
+            "id": 266590141,
+            "created_at": "2026-11-12T02:46:11Z",
+            "category": "achievement",
+            "event_type": "achievement.unlocked",
+            "summary": "Unlocked achievement: Wanderer",
+            "data": {
+              "achievement_id": "wanderer",
+              "points": 10
+            }
+          },
+          {
+            "id": 266584897,
+            "created_at": "2026-11-12T02:41:27Z",
+            "category": "achievement",
+            "event_type": "achievement.unlocked",
+            "summary": "Unlocked achievement: First Contact",
+            "data": {
+              "achievement_id": "first_contact",
+              "points": 5
+            }
+          },
+          {
+            "id": 266575516,
+            "created_at": "2026-11-12T02:33:18Z",
+            "category": "achievement",
+            "event_type": "achievement.unlocked",
+            "summary": "Unlocked achievement: Maiden Jump",
+            "data": {
+              "achievement_id": "maiden_jump",
+              "points": 5
+            }
+          }
+        ]
+      }
+    }
+  },
+  "captains_log": {
+    "kind": "QUOTED_SUBJECTIVE_COLOR",
+    "type": "INTERPRETATION",
+    "provenance": "captains_log_list",
+    "windowed": 0,
+    "listed": 0,
+    "entries": [],
+    "unwindowed": []
+  }
+}

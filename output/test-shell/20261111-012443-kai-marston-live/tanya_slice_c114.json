@@ -1,0 +1,152 @@
+{
+  "empty": false,
+  "cycle": 114,
+  "kind": "tanya-sideline",
+  "desk": "sports",
+  "journalist": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014",
+    "persona": "tanya-cruz"
+  },
+  "pulse": {
+    "className": "record-only-sideline",
+    "score": 70,
+    "label": "Five starters and one Carmen Mesa. Who is the odd arm out?"
+  },
+  "prewrite": {
+    "bagModes": [
+      {
+        "id": 10,
+        "name": "Inference Close"
+      }
+    ],
+    "anchorFacts": [
+      "Five starters and one Carmen Mesa. Who is the odd arm out?",
+      "Pablo Almanzar took the rotation spot most expected Carmen Mesa to fill, then threw a no-hitter in his debut and a 1-hitter to close the ALCS. That leaves the rotation full with Coles, Ramos, Rivas, Ellis and Almanzar. Mesa sits at AAA on a $780K deal with nowhere to start in Oakland. Henry Rivas is the most expensive arm at $28. 2M and missed time this season before his complete game in World Series game 4.",
+      "Is Mesa the A's best trade chip this winter, and how long does the front office keep paying top dollar for Rivas while the cheap arms win?"
+    ],
+    "claim": "The supplied sports record is the weather. The clubhouse SET is allotted hallucination fitted to that line.",
+    "accessEvidence": {
+      "state": "ALLOTTED",
+      "facts": [
+        "clubhouse/sideline SET is the reporter's room"
+      ]
+    },
+    "quoteEvidence": {
+      "state": "NOT_SUPPLIED",
+      "quotes": []
+    },
+    "observationEvidence": {
+      "state": "ALLOTTED",
+      "facts": []
+    },
+    "missing": [
+      "Packet player quotes",
+      "injury or team-response facts beyond the supplied record"
+    ],
+    "hooks": []
+  },
+  "hooks": [],
+  "seeds": [],
+  "story": {
+    "angle": "Five starters and one Carmen Mesa. Who is the odd arm out?",
+    "label": "Five starters and one Carmen Mesa. Who is the odd arm out?",
+    "hookLine": "Five starters and one Carmen Mesa. Who is the odd arm out?",
+    "kind": "sideline-signal",
+    "hood": "Dimond",
+    "popids": [
+      "POP-00081",
+      "POP-01078",
+      "POP-00024",
+      "POP-00025"
+    ],
+    "citizens": [
+      "Carmen Mesa (POP-00081)",
+      "Pablo Almanzar (POP-01078)",
+      "Henry Rivas (POP-00024)",
+      "Arturo Ramos (POP-00025)"
+    ],
+    "ref": "world_summary_c114.md ## Sports",
+    "cycle": 114
+  },
+  "approach": "Sideline approach (Tanya Cruz): you file from the clubhouse. That SET is yours — the Packet will never list a clubhouse event. Paint what the supplied sports line predicts. Packet player quotes and numbers only. New in-world spots go on INTAKE BIZ. No real-world Oakland venues. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview. The feed notes report what people said in paraphrase; none of it is a quote — never put it in quotation marks or attribute it as speech.",
+  "players": [
+    {
+      "name": "Carmen Mesa",
+      "popid": "POP-00081",
+      "role": "Starting Pitcher, Midland RockHounds (AA)",
+      "neighborhood": "Lake Merritt",
+      "why": "feed-names"
+    },
+    {
+      "name": "Pablo Almanzar",
+      "popid": "POP-01078",
+      "role": "SP / Oakland A's",
+      "neighborhood": "Chinatown",
+      "why": "feed-names"
+    },
+    {
+      "name": "Henry Rivas",
+      "popid": "POP-00024",
+      "role": "Starting Pitcher, Oakland A's",
+      "neighborhood": "West Oakland",
+      "why": "feed-names"
+    },
+    {
+      "name": "Arturo Ramos",
+      "popid": "POP-00025",
+      "role": "Starting Pitcher, Oakland A's",
+      "neighborhood": "Laurel",
+      "why": "feed-names"
+    }
+  ],
+  "scene": {
+    "colorRoom": "Clubhouse SET is authorized. Invented player quotes and real-world venues are not."
+  },
+  "candidates": [
+    {
+      "score": 70,
+      "label": "Five starters and one Carmen Mesa. Who is the odd arm out?",
+      "cycle": 114
+    },
+    {
+      "score": 50,
+      "label": "$22 million in veteran relief and the rookies got the October innings. Is a bullpen refresh coming?",
+      "cycle": 114
+    },
+    {
+      "score": 50,
+      "label": "The bargain core: is it time to extend Coles, Ellis, Quintero and Gonzalez?",
+      "cycle": 114
+    },
+    {
+      "score": 50,
+      "label": "Keane said goodbye. Dillon still hasn't.",
+      "cycle": 114
+    },
+    {
+      "score": 50,
+      "label": "The last of the dynasty core: how long do Kelley and Davis have?",
+      "cycle": 114
+    },
+    {
+      "score": 50,
+      "label": "The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+      "cycle": 114
+    },
+    {
+      "score": 50,
+      "label": "Second-round rookie Harry Hayward is shaping up as a solid rotation piece",
+      "cycle": 114
+    },
+    {
+      "score": 50,
+      "label": "The Oaks bounce back with a 60-point rout in Toronto. Oaks 135 - Raptors 75",
+      "cycle": 114
+    }
+  ],
+  "pointers": [
+    "output/world_summary_c114.md ## Sports",
+    "docs/media/TANYA_SIDELINE_BAG.md"
+  ]
+}

@@ -280,5 +280,53 @@
     "cycle": "113",
     "stem": "undocked-digest_c113_nia-rook-weekly_packet-v2_openai-gpt-6-luna",
     "disposition": "staged"
+  },
+  "undocked-pop00298-Y3C10": {
+    "at": "2026-11-04T07:45:39.510Z",
+    "cycle": "114",
+    "stem": "undocked_c114_nia-rook_packet-v2_openai-gpt-6-luna",
+    "disposition": "staged"
+  },
+  "undocked-pop00530-Y3C10": {
+    "at": "2026-11-04T07:45:39.510Z",
+    "cycle": "114",
+    "stem": "undocked_c114_nia-rook_packet-v2_openai-gpt-6-luna",
+    "disposition": "staged"
+  },
+  "undocked-pop00647-Y3C10": {
+    "at": "2026-11-05T00:22:24.462Z",
+    "cycle": "114",
+    "stem": "undocked_c114_nia-rook_packet-v2_openai-gpt-6-luna",
+    "disposition": "staged"
+  },
+  "undocked-pop00298-Y3C10-e2": {
+    "at": "2026-11-06T00:22:10.907Z",
+    "cycle": "114",
+    "stem": "undocked_c114_nia-rook_packet-v2_openai-gpt-6-luna",
+    "disposition": "staged"
+  },
+  "undocked-pop00530-Y3C10-e2": {
+    "at": "2026-11-07T00:21:36.508Z",
+    "cycle": "114",
+    "stem": "undocked_c114_nia-rook_packet-v2_openai-gpt-6-luna",
+    "disposition": "staged"
+  },
+  "weekly-c114": {
+    "at": "2026-11-07T16:16:00.563Z",
+    "cycle": "114",
+    "stem": "undocked-digest_c114_nia-rook-weekly_packet-v2_openai-gpt-6-luna",
+    "disposition": "staged"
+  },
+  "undocked-pop01195-Y3C11": {
+    "at": "2026-11-11T00:21:04.875Z",
+    "cycle": "115",
+    "stem": "undocked_c115_nia-rook_packet-v2_openai-gpt-6-luna",
+    "disposition": "staged"
+  },
+  "undocked-pop00184-Y3C11": {
+    "at": "2026-11-12T00:25:24.952Z",
+    "cycle": "115",
+    "stem": "undocked_c115_nia-rook_packet-v2_openai-gpt-6-luna",
+    "disposition": "staged"
   }
 }

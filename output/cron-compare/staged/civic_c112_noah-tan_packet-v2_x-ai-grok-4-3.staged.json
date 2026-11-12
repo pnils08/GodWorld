@@ -1,0 +1,69 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "112",
+  "persona": "noah-tan",
+  "byline": "Noah Tan",
+  "bylinePopid": "POP-00157",
+  "article": "output/cron-compare/staged/civic_c112_noah-tan_packet-v2_x-ai-grok-4-3.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Xavier Ramington",
+        "role": "quoted-source",
+        "popid": "POP-00181"
+      },
+      {
+        "name": "Derlik Green",
+        "role": "quoted-source",
+        "popid": "POP-00244"
+      },
+      {
+        "name": "Brian Adams",
+        "role": "quoted-source",
+        "popid": "POP-00258"
+      },
+      {
+        "name": "Jonas Patel",
+        "role": "mentioned",
+        "popid": "POP-00142",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "The clear sky today — it's not a relief so much as a reminder. The cold weeks, I leaned on the same faces, the same counters, the same conversations. That rhythm kept me steady. So when the sun finally breaks through, it doesn't change what I do — I still open the shop, still mix the same tinctures, still nod at the same folks on Telegraph. The clear day just makes the familiar feel a little warmer, that's all. It's not a new day; it's the same day with better light.",
+        "sourceRef": "citizenVoice PRESS Xavier Ramington"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-3a23a35291f8",
+    "draftSha256": "cc8eec92260339f2103019ec86baae11873b0b06e6e12c657ae0a6a6485952cb",
+    "verdict": "output/cron-compare/civic_c112_noah-tan_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-10-21T23:16:33.204Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 400",
+      "words": 582,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "cc8eec92260339f2103019ec86baae11873b0b06e6e12c657ae0a6a6485952cb",
+      "costUsd": 0.0012
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-21T23:16:41.013Z"
+}

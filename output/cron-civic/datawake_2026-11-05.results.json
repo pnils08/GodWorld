@@ -1,0 +1,29 @@
+{
+  "date": "2026-11-05",
+  "cycle": 114,
+  "results": [
+    {
+      "office": "civic-office-council-d9",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/civic-office-council-d9_2026-11-05.json"
+    },
+    {
+      "office": "civic-office-police-chief",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/civic-office-police-chief_2026-11-05.json"
+    },
+    {
+      "office": "civic-office-council-d1",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/civic-office-council-d1_2026-11-05.json"
+    }
+  ],
+  "owed": null,
+  "ranAt": "2026-11-05T11:45:36.201Z"
+}

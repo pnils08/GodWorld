@@ -1,0 +1,449 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00160",
+    "name": "Mason Ortega",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Rockridge kitchens: OakHouse, Claremont Table — the people who work the shift",
+    "approach": "Food & hospitality approach — kitchens as workplaces: this slice is one neighborhood's restaurants, cafes and bars from the ledger and the people on the roster who work in them. The people on this slice are real; the rest of the room is yours — the line on a Tuesday, the regulars, the walk-in, the tip jar. One kitchen, one shift, one true thing about the work. Not a review. Not multi-voice culture-desk average. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "food-workplaces",
+      "hood": "Rockridge",
+      "pulseClass": "hood-kitchens",
+      "economicFrame": "Rockridge kitchens: OakHouse, Claremont Table — the people who work the shift",
+      "hook": "Matty Lipo, Dishwasher at OakHouse. 6 named workers at 2 named kitchens in Rockridge on the ledger this cycle.",
+      "namedBusinesses": [
+        "OakHouse",
+        "Claremont Table"
+      ],
+      "workplaces": [
+        "OakHouse — Restaurant & Dining — Matty Lipo (Dishwasher); Mimmie Carlisle (Pastry Chef); Jesus Jorden (Pastry Chef, OakHouse); Kalyani Alvarez (Pastry Chef)",
+        "Claremont Table — Restaurant & Dining — Elio Perez (Server); Camila Osman (Owner, Claremont Table)"
+      ],
+      "engineColour": [
+        "Tao Lee — stopped by a community program run out of Lake Merritt Mindfulness Sangha",
+        "Solis Walmart — joined the crowd at Downtown Volunteer Boost Rally last night",
+        "Cameron Wallen — sought more information due to recent city events",
+        "Donna Xu — a DJ spins records at a crowded bar near Broadway, the bassline thumping through the foggy night",
+        "Briar Crawford — recognized a face from years ago across the street near the main street sidewalk",
+        "Matilda Okonkwo — folded a slip for Sammie Alvarez and then would not look at the table"
+      ],
+      "roomIsYours": "the line, the regulars, the pace, the tip jar, what the cook is worried about",
+      "forbidden": [
+        "Do not invent a business, a worker, an owner or a place — every name comes from this slice",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose",
+        "Do not contradict a role, employer or neighborhood listed here"
+      ],
+      "sceneRule": null
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "story-signal",
+    "hood": "Rockridge",
+    "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+    "plan": {
+      "focus": "The people who work the shift in Rockridge kitchens — OakHouse and Claremont Table — and the rhythm of the work itself.",
+      "closeQuestion": "What does a kitchen owe the people who work it?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00265",
+        "name": "Matty Lipo",
+        "profile": "Matty Lipo — Dishwasher — OakHouse, Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00682",
+        "name": "Mimmie Carlisle",
+        "profile": "Mimmie Carlisle — Pastry Chef — OakHouse, Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00201",
+        "name": "Elio Perez",
+        "profile": "Elio Perez — Server — Claremont Table, Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-01134",
+        "name": "Camila Osman",
+        "profile": "Camila Osman — Owner, Claremont Table — Claremont Table, Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00265-c0c1baef0d",
+        "pop": "POP-00265",
+        "name": "Matty Lipo",
+        "quote": "A full shift at OakHouse starts before the doors open — you come in, you set up your station, you get the water hot. Then it's just a river. Plates, pans, the pastry crew's bowls, the ramekins that never end. Mimmie and Jesus and Kalyani keep me busy, that's for sure. What arrives is the mess of a busy kitchen, and what leaves is clean steel and dry racks, ready for the next course. It's honest work. My hands know it, my back knows it. And when that last rack is done and I shut off the sprayer, I walk out to the lake and I sit on that bench by the boat dock and I just breathe. That's the rhythm of it.",
+        "factIds": [
+          "F-5e1b39217c36",
+          "F-5e7b3dffb8cc"
+        ],
+        "src": "packet.W2[POP-00265]"
+      },
+      {
+        "id": "Q-POP-00201-3837407a4e",
+        "pop": "POP-00201",
+        "name": "Elio Perez",
+        "quote": "Between services, the floor at Claremont Table gets real quiet — the kind of quiet where you can hear the ice machine hum from the back. I don't mind it. I bus the last of the plates, reset the napkin rolls for the next rush, and if there's a lull longer than a minute, I step out back and just breathe. The neighborhood feels different then, slower, like even College Avenue is catching its breath. I try not to think about the next table or the side work stacking up — I just take the quiet while it's there. Some days I catch a few innings on the bar TV if someone left it on, but mostly it's just me, the stack of menus, and the sound of my own footsteps on that floor. It keeps me sane before the dinner crowd rolls in.",
+        "factIds": [
+          "F-56fe224ed98d",
+          "F-701d22f3d9de"
+        ],
+        "src": "packet.W2[POP-00201]"
+      },
+      {
+        "id": "Q-POP-01134-08d5c269f7",
+        "pop": "POP-01134",
+        "name": "Camila Osman",
+        "quote": "People think owning a restaurant means I'm just in the office looking at numbers. But I'm on the floor most days, and I see the parts that don't show up on receipts—the way Elio remembers a regular's order before they even sit down, the quiet hustle when we're short-staffed, the little things that keep a place feeling like a neighborhood spot. That's the real work, and it's what makes Claremont Table feel like home to folks.",
+        "factIds": [
+          "F-56fe224ed98d"
+        ],
+        "src": "packet.W2[POP-01134]"
+      },
+      {
+        "id": "Q-POP-00682-a7fcf7051d",
+        "pop": "POP-00682",
+        "name": "Mimmie Carlisle",
+        "quote": "Pastry at OakHouse isn't a one-person show, that's for sure. With Jesus and Kalyani on the roster with me, we split the day into the early bake-off and the afternoon prep. Mornings are all about the laminated doughs and the croissants — you can't rush that, it's a rhythm. Then we pivot to plated desserts and the case stuff for dinner service. It's a lot of standing, a lot of timing, and a lot of checking that the walk-in is organized so nobody's hunting for a sheet pan mid-shift. We each have our stations, but we're always crossing paths, handing off a tray or a spatula. It's steady work, and when the rush hits, you're glad there's three of you who know the dance.",
+        "factIds": [
+          "F-5e7b3dffb8cc"
+        ],
+        "src": "packet.W2[POP-00682]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Mason Ortega",
+        "text": "Alley behind OakHouse: stacked sheet pans, a hose, a rhythm that only starts when the door swings shut.",
+        "usable": false
+      },
+      {
+        "from": "Mason Ortega",
+        "text": "The quiet hour at Claremont Table — tablecloths folded, silverware rolled, nobody talking.",
+        "usable": false
+      },
+      {
+        "from": "Mason Ortega",
+        "text": "A server walking to BART at midnight with a tip apron rolled under an arm.",
+        "usable": false
+      },
+      {
+        "from": "Mason Ortega",
+        "text": "The dish machine at OakHouse cycling through dinner service, steam rising, heads down.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C113",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-876f95b5eb98"
+    },
+    {
+      "t": "FACT",
+      "text": "Rockridge kitchens · OakHouse, Claremont Table",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+      "id": "F-701d22f3d9de"
+    },
+    {
+      "t": "FACT",
+      "text": "Matty Lipo, Dishwasher at OakHouse. 6 named workers at 2 named kitchens in Rockridge on the ledger this cycle.",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+      "id": "F-5e1b39217c36"
+    },
+    {
+      "t": "FACT",
+      "text": "OakHouse · Restaurant & Dining · 22 employees · growth 9.1% · revenue $3.7M (+$6k vs C112) · on the roster: Matty Lipo (Dishwasher); Mimmie Carlisle (Pastry Chef); Jesus Jorden (Pastry Chef, OakHouse); Kalyani Alvarez (Pastry Chef)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+      "id": "F-5e7b3dffb8cc"
+    },
+    {
+      "t": "FACT",
+      "text": "Claremont Table · Restaurant & Dining · 15 employees · growth 7.8% · revenue $2.5M (+$4k vs C112) · key personnel: Camila Osman (owner) · on the roster: Elio Perez (Server); Camila Osman (Owner, Claremont Table)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113",
+      "id": "F-56fe224ed98d"
+    },
+    {
+      "t": "FACT",
+      "text": "CITY SEED (Downtown): citizens Tao Lee; Solis Walmart; Cameron Wallen; Donna Xu · businesses Bay Tribune; Alameda County Courts · Lake Merritt Mindfulness Sangha (faith)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C113",
+      "id": "F-0320aae0f253"
+    },
+    {
+      "t": "FACT",
+      "text": "CITY SEED (Citywide): citizens Briar Crawford; Matilda Okonkwo; Marrin Benry; Funmi Shah",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C113",
+      "id": "F-43f83c54a586"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C9, Winter, holiday=none",
+      "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+      "id": "F-ab9d6786094e"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "mason-kitchen-ground-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Treat a Packet-supplied restaurant signal as a workplace question without inventing Mason's presence, a worker, shift, service state, business condition, or labor consequence.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "evidence-bounded kitchen-work brief",
+      "targetWords": "evidence-bounded",
+      "opening": "one Packet-named restaurant and location",
+      "closing": "the worker or operating account still needed"
+    },
+    "authorizedTexture": [
+      "workplace-oriented questions about a supplied restaurant without claiming an answer",
+      "kitchen vocabulary used only as interpretation and never as proof of a worker, action, condition, or event"
+    ],
+    "textureConditions": [
+      "a restaurant appearing on an evening list proves only the supplied venue-location relation, not that it was open, busy, staffed, serving, struggling, or observed",
+      "first-person embedding, every worker, owner, patron, shift, quote, action, count, wage, cost, supply issue, health score, and business outcome requires Packet support"
+    ],
+    "canonBlockers": [
+      "invented attendance, kitchen access, worker, owner, patron, service, rush, shift, dialogue, quote, wage, cost, ticket count, equipment state, supply problem, health score, business condition, or labor consequence",
+      "an invented or altered venue, person, neighborhood, event, relationship, date, number, or quote",
+      "review language, raw engine labels, citywide food trend assigned to one venue, or collective worker sentiment presented as fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-deb79fbec65f",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-876f95b5eb98",
+        "t": "FACT",
+        "text": "Current cycle: C113",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-701d22f3d9de",
+        "t": "FACT",
+        "text": "Rockridge kitchens · OakHouse, Claremont Table",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113"
+      },
+      {
+        "id": "F-5e1b39217c36",
+        "t": "FACT",
+        "text": "Matty Lipo, Dishwasher at OakHouse. 6 named workers at 2 named kitchens in Rockridge on the ledger this cycle.",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113"
+      },
+      {
+        "id": "F-5e7b3dffb8cc",
+        "t": "FACT",
+        "text": "OakHouse · Restaurant & Dining · 22 employees · growth 9.1% · revenue $3.7M (+$6k vs C112) · on the roster: Matty Lipo (Dishwasher); Mimmie Carlisle (Pastry Chef); Jesus Jorden (Pastry Chef, OakHouse); Kalyani Alvarez (Pastry Chef)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113"
+      },
+      {
+        "id": "F-56fe224ed98d",
+        "t": "FACT",
+        "text": "Claremont Table · Restaurant & Dining · 15 employees · growth 7.8% · revenue $2.5M (+$4k vs C112) · key personnel: Camila Osman (owner) · on the roster: Elio Perez (Server); Camila Osman (Owner, Claremont Table)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C113"
+      },
+      {
+        "id": "F-0320aae0f253",
+        "t": "FACT",
+        "text": "CITY SEED (Downtown): citizens Tao Lee; Solis Walmart; Cameron Wallen; Donna Xu · businesses Bay Tribune; Alameda County Courts · Lake Merritt Mindfulness Sangha (faith)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C113"
+      },
+      {
+        "id": "F-43f83c54a586",
+        "t": "FACT",
+        "text": "CITY SEED (Citywide): citizens Briar Crawford; Matilda Okonkwo; Marrin Benry; Funmi Shah",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C113"
+      },
+      {
+        "id": "F-ab9d6786094e",
+        "t": "FACT",
+        "text": "Calendar: Y3C9, Winter, holiday=none",
+        "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00265-c0c1baef0d",
+        "speakerId": "POP-00265",
+        "speakerName": "Matty Lipo",
+        "text": "A full shift at OakHouse starts before the doors open — you come in, you set up your station, you get the water hot. Then it's just a river. Plates, pans, the pastry crew's bowls, the ramekins that never end. Mimmie and Jesus and Kalyani keep me busy, that's for sure. What arrives is the mess of a busy kitchen, and what leaves is clean steel and dry racks, ready for the next course. It's honest work. My hands know it, my back knows it. And when that last rack is done and I shut off the sprayer, I walk out to the lake and I sit on that bench by the boat dock and I just breathe. That's the rhythm of it.",
+        "factIds": [
+          "F-5e1b39217c36",
+          "F-5e7b3dffb8cc"
+        ],
+        "src": "packet.W2[POP-00265]"
+      },
+      {
+        "id": "Q-POP-00201-3837407a4e",
+        "speakerId": "POP-00201",
+        "speakerName": "Elio Perez",
+        "text": "Between services, the floor at Claremont Table gets real quiet — the kind of quiet where you can hear the ice machine hum from the back. I don't mind it. I bus the last of the plates, reset the napkin rolls for the next rush, and if there's a lull longer than a minute, I step out back and just breathe. The neighborhood feels different then, slower, like even College Avenue is catching its breath. I try not to think about the next table or the side work stacking up — I just take the quiet while it's there. Some days I catch a few innings on the bar TV if someone left it on, but mostly it's just me, the stack of menus, and the sound of my own footsteps on that floor. It keeps me sane before the dinner crowd rolls in.",
+        "factIds": [
+          "F-56fe224ed98d",
+          "F-701d22f3d9de"
+        ],
+        "src": "packet.W2[POP-00201]"
+      },
+      {
+        "id": "Q-POP-01134-08d5c269f7",
+        "speakerId": "POP-01134",
+        "speakerName": "Camila Osman",
+        "text": "People think owning a restaurant means I'm just in the office looking at numbers. But I'm on the floor most days, and I see the parts that don't show up on receipts—the way Elio remembers a regular's order before they even sit down, the quiet hustle when we're short-staffed, the little things that keep a place feeling like a neighborhood spot. That's the real work, and it's what makes Claremont Table feel like home to folks.",
+        "factIds": [
+          "F-56fe224ed98d"
+        ],
+        "src": "packet.W2[POP-01134]"
+      },
+      {
+        "id": "Q-POP-00682-a7fcf7051d",
+        "speakerId": "POP-00682",
+        "speakerName": "Mimmie Carlisle",
+        "text": "Pastry at OakHouse isn't a one-person show, that's for sure. With Jesus and Kalyani on the roster with me, we split the day into the early bake-off and the afternoon prep. Mornings are all about the laminated doughs and the croissants — you can't rush that, it's a rhythm. Then we pivot to plated desserts and the case stuff for dinner service. It's a lot of standing, a lot of timing, and a lot of checking that the walk-in is organized so nobody's hunting for a sheet pan mid-shift. We each have our stations, but we're always crossing paths, handing off a tray or a spatula. It's steady work, and when the rush hits, you're glad there's three of you who know the dance.",
+        "factIds": [
+          "F-5e7b3dffb8cc"
+        ],
+        "src": "packet.W2[POP-00682]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00265",
+        "name": "Matty Lipo",
+        "profile": "Matty Lipo — Dishwasher — OakHouse, Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00682",
+        "name": "Mimmie Carlisle",
+        "profile": "Mimmie Carlisle — Pastry Chef — OakHouse, Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00201",
+        "name": "Elio Perez",
+        "profile": "Elio Perez — Server — Claremont Table, Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-01134",
+        "name": "Camila Osman",
+        "profile": "Camila Osman — Owner, Claremont Table — Claremont Table, Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Mason Ortega",
+        "text": "Alley behind OakHouse: stacked sheet pans, a hose, a rhythm that only starts when the door swings shut.",
+        "publishable": false
+      },
+      {
+        "from": "Mason Ortega",
+        "text": "The quiet hour at Claremont Table — tablecloths folded, silverware rolled, nobody talking.",
+        "publishable": false
+      },
+      {
+        "from": "Mason Ortega",
+        "text": "A server walking to BART at midnight with a tip apron rolled under an arm.",
+        "publishable": false
+      },
+      {
+        "from": "Mason Ortega",
+        "text": "The dish machine at OakHouse cycling through dinner service, steam rising, heads down.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "workplace-oriented questions about a supplied restaurant without claiming an answer",
+      "kitchen vocabulary used only as interpretation and never as proof of a worker, action, condition, or event"
+    ],
+    "textureConditions": [
+      "a restaurant appearing on an evening list proves only the supplied venue-location relation, not that it was open, busy, staffed, serving, struggling, or observed",
+      "first-person embedding, every worker, owner, patron, shift, quote, action, count, wage, cost, supply issue, health score, and business outcome requires Packet support"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

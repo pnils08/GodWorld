@@ -1,0 +1,152 @@
+{
+  "version": "ENVIRONMENT-SLICE-2",
+  "empty": false,
+  "cycle": 114,
+  "kind": "beat-weather",
+  "seat": {
+    "slug": "noah-tan",
+    "name": "Noah Tan",
+    "popid": "POP-00157",
+    "desk": "civic",
+    "domain": "environment",
+    "builder": "buildEnvironmentSlice.js"
+  },
+  "hood": null,
+  "pulse": {
+    "className": "beat-weather",
+    "score": 100,
+    "label": "C114 mild, 55°F — 4 cycles of clear",
+    "hood": null,
+    "source": "output/beats/Cycle_Weather.jsonl CycleID 114"
+  },
+  "story": {
+    "kind": "beat-weather",
+    "angle": "C114 mild, 55°F — 4 cycles of clear — what this weather does to a day in the city",
+    "label": "C114 mild, 55°F — 4 cycles of clear",
+    "hookLine": "C114 mild, 55°F — 4 cycles of clear.",
+    "hood": null,
+    "citizens": [],
+    "popids": [],
+    "ref": "output/beats/Cycle_Weather.jsonl CycleID 114",
+    "cycle": 114
+  },
+  "approach": "Weather and environment approach: this slice is the cycle's weather row, the streak, and the last three cycles beside it, plus whoever the record says lived it. Science-first ground translation — temperature is context, never the lede. Show what this weather moved. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [],
+  "facts": [
+    {
+      "text": "This cycle: mild, 55°F, impact 1, comfort 0.75, mood content, 4 cycles of clear",
+      "src": "output/beats/Cycle_Weather.jsonl CycleID 114"
+    },
+    {
+      "text": "Last 3 cycles: C111 mild 57°F, C112 clear 48°F, C113 clear 58°F",
+      "src": "output/beats/Cycle_Weather.jsonl"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "C114 mild, 55°F — 4 cycles of clear — what this weather does to a day in the city",
+    "hookLine": "C114 mild, 55°F — 4 cycles of clear.",
+    "anchorFacts": [
+      "This cycle: mild, 55°F, impact 1, comfort 0.75, mood content, 4 cycles of clear",
+      "Last 3 cycles: C111 mild 57°F, C112 clear 48°F, C113 clear 58°F"
+    ],
+    "evidence": [
+      {
+        "text": "This cycle: mild, 55°F, impact 1, comfort 0.75, mood content, 4 cycles of clear",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 114"
+      },
+      {
+        "text": "Last 3 cycles: C111 mild 57°F, C112 clear 48°F, C113 clear 58°F",
+        "src": "output/beats/Cycle_Weather.jsonl"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": {
+      "state": "PRIOR_CYCLE_IN_TABLE",
+      "vs": 113
+    },
+    "hooks": [
+      {
+        "text": "The Thompson household (2) moved from Chinatown to West Oakland — moving up from Chinatown",
+        "angle": "desk rotation",
+        "domain": "COMMUNITY",
+        "hood": "West Oakland",
+        "priority": 5
+      },
+      {
+        "text": "6 residents in Uptown planning to leave for a better household-income fit",
+        "angle": "desk rotation",
+        "domain": "COMMUNITY",
+        "hood": "Uptown",
+        "priority": 8
+      }
+    ],
+    "note": "no resident on the record lived the weather this cycle — the people out in it are yours, unnamed",
+    "pageVoices": [],
+    "roomIsYours": "the sidewalk, the coats, what this weather does to a plan, who is out in it and who stayed in, what the bay smells like today"
+  },
+  "weather": {
+    "CycleID": "114",
+    "Type": "mild",
+    "Temp": "55",
+    "Impact": "1",
+    "Advisory": "",
+    "Comfort": "0.75",
+    "Mood": "content",
+    "Alerts": "",
+    "Streak": "4",
+    "StreakType": "clear",
+    "Timestamp": "Y3C10"
+  },
+  "recent": [
+    {
+      "CycleID": "111",
+      "Type": "mild",
+      "Temp": "57",
+      "Impact": "1",
+      "Advisory": "",
+      "Comfort": "0.75",
+      "Mood": "content",
+      "Alerts": "",
+      "Streak": "1",
+      "StreakType": "clear",
+      "Timestamp": "Y3C7"
+    },
+    {
+      "CycleID": "112",
+      "Type": "clear",
+      "Temp": "48",
+      "Impact": "1",
+      "Advisory": "",
+      "Comfort": "0.65",
+      "Mood": "content",
+      "Alerts": "",
+      "Streak": "2",
+      "StreakType": "clear",
+      "Timestamp": "Y3C8"
+    },
+    {
+      "CycleID": "113",
+      "Type": "clear",
+      "Temp": "58",
+      "Impact": "1",
+      "Advisory": "",
+      "Comfort": "0.75",
+      "Mood": "content",
+      "Alerts": "",
+      "Streak": "3",
+      "StreakType": "clear",
+      "Timestamp": "Y3C9"
+    }
+  ],
+  "pointers": [
+    "output/beats/Cycle_Weather.jsonl CycleID 114",
+    "output/beats/Story_Hook_Deck.jsonl (hooks for Noah Tan this cycle)"
+  ]
+}

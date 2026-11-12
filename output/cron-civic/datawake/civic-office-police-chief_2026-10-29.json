@@ -1,0 +1,16 @@
+{
+  "office": "police_chief",
+  "agentDir": "civic-office-police-chief",
+  "holder": "Rafael Montez",
+  "popid": "POP-00136",
+  "title": "Police Chief",
+  "date": "2026-10-29",
+  "cycle": 113,
+  "model": "deepseek/deepseek-v4-flash-0731",
+  "statement": "No public safety events requiring an official statement from this office occurred this cycle. OPD operations continue uninterrupted with standard deployments and response protocols. Deployment coordination with OARI partners remains in place across East and West Oakland, with call transfer thresholds holding to prevent gaps in emergency coverage. The department remains positioned to respond as events warrant.",
+  "moves": [],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-10-29T10:45:14.524Z",
+  "fellBackFrom": null
+}

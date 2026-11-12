@@ -1,0 +1,1058 @@
+{
+  "stage": "report",
+  "desk": "sports",
+  "cycle": "112",
+  "persona": "p-slayer",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "P Slayer",
+    "popid": "POP-00008"
+  },
+  "assignment": {
+    "story": {
+      "ref": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+      "label": "The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+      "kind": "award-board",
+      "angle": "The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+      "hookLine": "Euphoria with friction: name the doubter, kill soft contentment.",
+      "hood": "Jack London",
+      "team": "A's",
+      "eventKind": "player-feature",
+      "popids": [
+        "POP-00001",
+        "POP-00018"
+      ],
+      "citizens": [
+        "Vinnie Keane (POP-00001)",
+        "Benji Dillon (POP-00018)",
+        "Jack London"
+      ],
+      "pulseClass": "award-board",
+      "pulseScore": 47,
+      "fanCharge": "defiance",
+      "bagModeIds": [
+        3,
+        5,
+        9
+      ]
+    }
+  },
+  "angle": "output/cron-compare/sports_c112_p-slayer_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 4,
+  "quotes": [
+    {
+      "pop": "POP-00649",
+      "name": "Jire Hilt",
+      "quote": "I bought a new A's jersey and I have to say, it's got me pretty excited. The anticipation is building up, I can feel it. I've been looking forward to the season, and now that I've got my new gear, I feel like I'm ready to go.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I bought a new A's jersey and I have to say, it's got me pretty excited. The anticipation is building up, I can feel it. I've been looking forward to the season, and now that I've got my new gear, I feel like I'm ready to go.\",\n  \"fact_ids\": [\"F-783ae1ebe8a0\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-783ae1ebe8a0"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00649-07c0124610",
+        "authoredQuote": true,
+        "publishableQuote": "I bought a new A's jersey and I have to say, it's got me pretty excited. The anticipation is building up, I can feel it. I've been looking forward to the season, and now that I've got my new gear, I feel like I'm ready to go."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00649",
+          "name": "Jire Hilt",
+          "role": "Line Cook",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "P Slayer",
+          "question": "Your own current-cycle line says: \"Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and a sense of anticipation hangs in the air\". What did you do as a fan of A's? Speak only from that line and your own reaction."
+        },
+        "signal": {
+          "kind": "award-board",
+          "hood": "Jack London",
+          "focus": "The atmosphere at the Blue Lattern Bar during the Keane and Dillon farewell event",
+          "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Jire Hilt — Line Cook",
+          "evidence": [
+            {
+              "id": "EV-LIFE-0f327429e4",
+              "src": "output/simulation_ledger_snapshot.jsonl",
+              "text": "Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and a sense of anticipation hangs in the air"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and a sense of anticipation hangs in the air",
+            "src": "output/simulation_ledger_snapshot.jsonl",
+            "id": "F-783ae1ebe8a0"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00001",
+      "name": "Vinnie Keane",
+      "quote": "To be honest, I haven't been honored in the way you're suggesting. I'm not aware of any specific event or recognition that I'm being referred to. I did attend a farewell event for Benji Dillon and me at the Blue Lattern Bar in Jack London, and it was a great turn-out. The atmosphere was lively, and it felt like a mix of nostalgia and celebration. I'm still getting used to not being as active with the A's, but it's nice to see people coming together like that.",
+      "disp": "can't switch off, working themselves thin; draws people in, deep with them; openly affectionate, big-hearted; curious, open to new things; unshakable, calm under anything; principled, plays it straight; close to family; often out in the neighborhood; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, I haven't been honored in the way you're suggesting. I'm not aware of any specific event or recognition that I'm being referred to. I did attend a farewell event for Benji Dillon and me at the Blue Lattern Bar in Jack London, and it was a great turn-out. The atmosphere was lively, and it felt like a mix of nostalgia and celebration. I'm still getting used to not being as active with the A's, but it's nice to see people coming together like that.\",\n  \"fact_ids\": [\"F-c751088c732a\", \"F-7a41dfc993a5\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c751088c732a",
+          "F-7a41dfc993a5"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00001-99fc3b5d84",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, I haven't been honored in the way you're suggesting. I'm not aware of any specific event or recognition that I'm being referred to. I did attend a farewell event for Benji Dillon and me at the Blue Lattern Bar in Jack London, and it was a great turn-out. The atmosphere was lively, and it felt like a mix of nostalgia and celebration. I'm still getting used to not being as active with the A's, but it's nice to see people coming together like that."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00001",
+          "name": "Vinnie Keane",
+          "role": "Designated Hitter, Oakland A's Legend",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "P Slayer",
+          "question": "How does it feel to be honored in this way? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "award-board",
+          "hood": "Jack London",
+          "focus": "The atmosphere at the Blue Lattern Bar during the Keane and Dillon farewell event",
+          "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Vinnie Keane — Designated Hitter, Oakland A's Legend",
+          "evidence": [
+            {
+              "id": "EV-130813ec6d",
+              "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+              "text": "Euphoria with friction: name the doubter, kill soft contentment."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+            "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+            "id": "F-c751088c732a"
+          },
+          {
+            "t": "FACT",
+            "text": "Euphoria with friction: name the doubter, kill soft contentment.",
+            "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+            "id": "F-01d7731f718f"
+          },
+          {
+            "t": "FACT",
+            "text": "StoryAngle (feed): The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+            "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+            "id": "F-b955af6df0a7"
+          },
+          {
+            "t": "FACT",
+            "text": "Event: A's — player-feature (off-season)",
+            "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+            "id": "F-120e4da63805"
+          },
+          {
+            "t": "FACT",
+            "text": "NamesUsed: Vinnie Keane (3B), Benji Dillon (SP)",
+            "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+            "id": "F-093ab16a80f9"
+          },
+          {
+            "t": "FACT",
+            "text": "FanSentiment: euphoric · Mood: reflective",
+            "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+            "id": "F-7a41dfc993a5"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane — Designated Hitter, Oakland A's Legend",
+            "src": "Simulation_Ledger profile for POP-00001",
+            "id": "F-6c412eff96ee"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00018",
+      "name": "Benji Dillon",
+      "quote": "The atmosphere at the Blue Lattern Bar during the Keane and Dillon farewell event was electric, but also a little tense. I've been around long enough to know that when legends are honored, there's always a mix of celebration and scrutiny. People were clearly euphoric, but I could sense some underlying friction, like there were those who weren't entirely on board with the farewell. It's a feeling I've experienced before in the clubhouse, where not everyone's always on the same page. Vinnie and I, we've been through a lot together, and it's weird to think about not being out there on the field as part of the same team anymore.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; warm, tender with people; curious, open to new things; unshakable, calm under anything; principled, plays it straight; close to family; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"The atmosphere at the Blue Lattern Bar during the Keane and Dillon farewell event was electric, but also a little tense. I've been around long enough to know that when legends are honored, there's always a mix of celebration and scrutiny. People were clearly euphoric, but I could sense some underlying friction, like there were those who weren't entirely on board with the farewell. It's a feeling I've experienced before in the clubhouse, where not everyone's always on the same page. Vinnie and I, we've been through a lot together, and it's weird to think about not being out there on the field as part of the same team anymore.\",\n  \"fact_ids\": [\"F-c751088c732a\", \"F-01d7731f718f\", \"F-7a41dfc993a5\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c751088c732a",
+          "F-01d7731f718f",
+          "F-7a41dfc993a5"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00018-fd967d6fe9",
+        "authoredQuote": true,
+        "publishableQuote": "The atmosphere at the Blue Lattern Bar during the Keane and Dillon farewell event was electric, but also a little tense. I've been around long enough to know that when legends are honored, there's always a mix of celebration and scrutiny. People were clearly euphoric, but I could sense some underlying friction, like there were those who weren't entirely on board with the farewell. It's a feeling I've experienced before in the clubhouse, where not everyone's always on the same page. Vinnie and I, we've been through a lot together, and it's weird to think about not being out there on the field as part of the same team anymore."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00018",
+          "name": "Benji Dillon",
+          "role": "Pitcher, Oakland A's Legend",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "P Slayer",
+          "question": "What have you seen, felt, or understood about \"The atmosphere at the Blue Lattern Bar during the Keane and Dillon farewell event\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "award-board",
+          "hood": "Jack London",
+          "focus": "The atmosphere at the Blue Lattern Bar during the Keane and Dillon farewell event",
+          "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Benji Dillon — Pitcher, Oakland A's Legend",
+          "evidence": [
+            {
+              "id": "EV-bbdfb583e2",
+              "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+              "text": "Euphoria with friction: name the doubter, kill soft contentment."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+            "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+            "id": "F-c751088c732a"
+          },
+          {
+            "t": "FACT",
+            "text": "Euphoria with friction: name the doubter, kill soft contentment.",
+            "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+            "id": "F-01d7731f718f"
+          },
+          {
+            "t": "FACT",
+            "text": "StoryAngle (feed): The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+            "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+            "id": "F-b955af6df0a7"
+          },
+          {
+            "t": "FACT",
+            "text": "Event: A's — player-feature (off-season)",
+            "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+            "id": "F-120e4da63805"
+          },
+          {
+            "t": "FACT",
+            "text": "NamesUsed: Vinnie Keane (3B), Benji Dillon (SP)",
+            "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+            "id": "F-093ab16a80f9"
+          },
+          {
+            "t": "FACT",
+            "text": "FanSentiment: euphoric · Mood: reflective",
+            "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+            "id": "F-7a41dfc993a5"
+          },
+          {
+            "t": "FACT",
+            "text": "Benji Dillon — Pitcher, Oakland A's Legend",
+            "src": "Simulation_Ledger profile for POP-00018",
+            "id": "F-2b937e94a839"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00185",
+      "name": "Lila Patty",
+      "quote": "I bought a new A's jersey and took a walk near a new construction site to clear my head after a long week. The noise of the city was still there, but standing by that new construction corner, I felt a bit more at peace.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; curious, open to new things; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I bought a new A's jersey and took a walk near a new construction site to clear my head after a long week. The noise of the city was still there, but standing by that new construction corner, I felt a bit more at peace.\",\n  \"fact_ids\": [\"F-526cb8143980\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-526cb8143980"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00185-08297745f1",
+        "authoredQuote": true,
+        "publishableQuote": "I bought a new A's jersey and took a walk near a new construction site to clear my head after a long week. The noise of the city was still there, but standing by that new construction corner, I felt a bit more at peace."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00185",
+          "name": "Lila Patty",
+          "role": "Solar Panel Installation Lead",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "P Slayer",
+          "question": "Your own current-cycle line says: \"Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and let the week's noise settle near a new-construction corner\". What did you do as a fan of A's? Speak only from that line and your own reaction."
+        },
+        "signal": {
+          "kind": "award-board",
+          "hood": "Jack London",
+          "focus": "The atmosphere at the Blue Lattern Bar during the Keane and Dillon farewell event",
+          "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Lila Patty — Solar Panel Installation Lead",
+          "evidence": [
+            {
+              "id": "EV-LIFE-436be9d9db",
+              "src": "output/simulation_ledger_snapshot.jsonl",
+              "text": "Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and let the week's noise settle near a new-construction corner"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and let the week's noise settle near a new-construction corner",
+            "src": "output/simulation_ledger_snapshot.jsonl",
+            "id": "F-526cb8143980"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-00649",
+      "name": "Jire Hilt",
+      "quote": "I bought a new A's jersey and I have to say, it's got me pretty excited. The anticipation is building up, I can feel it. I've been looking forward to the season, and now that I've got my new gear, I feel like I'm ready to go.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I bought a new A's jersey and I have to say, it's got me pretty excited. The anticipation is building up, I can feel it. I've been looking forward to the season, and now that I've got my new gear, I feel like I'm ready to go.\",\n  \"fact_ids\": [\"F-783ae1ebe8a0\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-783ae1ebe8a0"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00649-07c0124610",
+        "authoredQuote": true,
+        "publishableQuote": "I bought a new A's jersey and I have to say, it's got me pretty excited. The anticipation is building up, I can feel it. I've been looking forward to the season, and now that I've got my new gear, I feel like I'm ready to go."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00649",
+          "name": "Jire Hilt",
+          "role": "Line Cook",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "P Slayer",
+          "question": "Your own current-cycle line says: \"Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and a sense of anticipation hangs in the air\". What did you do as a fan of A's? Speak only from that line and your own reaction."
+        },
+        "signal": {
+          "kind": "award-board",
+          "hood": "Jack London",
+          "focus": "The atmosphere at the Blue Lattern Bar during the Keane and Dillon farewell event",
+          "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Jire Hilt — Line Cook",
+          "evidence": [
+            {
+              "id": "EV-LIFE-0f327429e4",
+              "src": "output/simulation_ledger_snapshot.jsonl",
+              "text": "Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and a sense of anticipation hangs in the air"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and a sense of anticipation hangs in the air",
+            "src": "output/simulation_ledger_snapshot.jsonl",
+            "id": "F-783ae1ebe8a0"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00001",
+      "name": "Vinnie Keane",
+      "quote": "To be honest, I haven't been honored in the way you're suggesting. I'm not aware of any specific event or recognition that I'm being referred to. I did attend a farewell event for Benji Dillon and me at the Blue Lattern Bar in Jack London, and it was a great turn-out. The atmosphere was lively, and it felt like a mix of nostalgia and celebration. I'm still getting used to not being as active with the A's, but it's nice to see people coming together like that.",
+      "disp": "can't switch off, working themselves thin; draws people in, deep with them; openly affectionate, big-hearted; curious, open to new things; unshakable, calm under anything; principled, plays it straight; close to family; often out in the neighborhood; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, I haven't been honored in the way you're suggesting. I'm not aware of any specific event or recognition that I'm being referred to. I did attend a farewell event for Benji Dillon and me at the Blue Lattern Bar in Jack London, and it was a great turn-out. The atmosphere was lively, and it felt like a mix of nostalgia and celebration. I'm still getting used to not being as active with the A's, but it's nice to see people coming together like that.\",\n  \"fact_ids\": [\"F-c751088c732a\", \"F-7a41dfc993a5\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c751088c732a",
+          "F-7a41dfc993a5"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00001-99fc3b5d84",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, I haven't been honored in the way you're suggesting. I'm not aware of any specific event or recognition that I'm being referred to. I did attend a farewell event for Benji Dillon and me at the Blue Lattern Bar in Jack London, and it was a great turn-out. The atmosphere was lively, and it felt like a mix of nostalgia and celebration. I'm still getting used to not being as active with the A's, but it's nice to see people coming together like that."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00001",
+          "name": "Vinnie Keane",
+          "role": "Designated Hitter, Oakland A's Legend",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "P Slayer",
+          "question": "How does it feel to be honored in this way? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "award-board",
+          "hood": "Jack London",
+          "focus": "The atmosphere at the Blue Lattern Bar during the Keane and Dillon farewell event",
+          "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Vinnie Keane — Designated Hitter, Oakland A's Legend",
+          "evidence": [
+            {
+              "id": "EV-130813ec6d",
+              "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+              "text": "Euphoria with friction: name the doubter, kill soft contentment."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+            "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+            "id": "F-c751088c732a"
+          },
+          {
+            "t": "FACT",
+            "text": "Euphoria with friction: name the doubter, kill soft contentment.",
+            "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+            "id": "F-01d7731f718f"
+          },
+          {
+            "t": "FACT",
+            "text": "StoryAngle (feed): The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+            "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+            "id": "F-b955af6df0a7"
+          },
+          {
+            "t": "FACT",
+            "text": "Event: A's — player-feature (off-season)",
+            "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+            "id": "F-120e4da63805"
+          },
+          {
+            "t": "FACT",
+            "text": "NamesUsed: Vinnie Keane (3B), Benji Dillon (SP)",
+            "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+            "id": "F-093ab16a80f9"
+          },
+          {
+            "t": "FACT",
+            "text": "FanSentiment: euphoric · Mood: reflective",
+            "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+            "id": "F-7a41dfc993a5"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane — Designated Hitter, Oakland A's Legend",
+            "src": "Simulation_Ledger profile for POP-00001",
+            "id": "F-6c412eff96ee"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00018",
+      "name": "Benji Dillon",
+      "quote": "The atmosphere at the Blue Lattern Bar during the Keane and Dillon farewell event was electric, but also a little tense. I've been around long enough to know that when legends are honored, there's always a mix of celebration and scrutiny. People were clearly euphoric, but I could sense some underlying friction, like there were those who weren't entirely on board with the farewell. It's a feeling I've experienced before in the clubhouse, where not everyone's always on the same page. Vinnie and I, we've been through a lot together, and it's weird to think about not being out there on the field as part of the same team anymore.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; warm, tender with people; curious, open to new things; unshakable, calm under anything; principled, plays it straight; close to family; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"The atmosphere at the Blue Lattern Bar during the Keane and Dillon farewell event was electric, but also a little tense. I've been around long enough to know that when legends are honored, there's always a mix of celebration and scrutiny. People were clearly euphoric, but I could sense some underlying friction, like there were those who weren't entirely on board with the farewell. It's a feeling I've experienced before in the clubhouse, where not everyone's always on the same page. Vinnie and I, we've been through a lot together, and it's weird to think about not being out there on the field as part of the same team anymore.\",\n  \"fact_ids\": [\"F-c751088c732a\", \"F-01d7731f718f\", \"F-7a41dfc993a5\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c751088c732a",
+          "F-01d7731f718f",
+          "F-7a41dfc993a5"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00018-fd967d6fe9",
+        "authoredQuote": true,
+        "publishableQuote": "The atmosphere at the Blue Lattern Bar during the Keane and Dillon farewell event was electric, but also a little tense. I've been around long enough to know that when legends are honored, there's always a mix of celebration and scrutiny. People were clearly euphoric, but I could sense some underlying friction, like there were those who weren't entirely on board with the farewell. It's a feeling I've experienced before in the clubhouse, where not everyone's always on the same page. Vinnie and I, we've been through a lot together, and it's weird to think about not being out there on the field as part of the same team anymore."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00018",
+          "name": "Benji Dillon",
+          "role": "Pitcher, Oakland A's Legend",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "P Slayer",
+          "question": "What have you seen, felt, or understood about \"The atmosphere at the Blue Lattern Bar during the Keane and Dillon farewell event\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "award-board",
+          "hood": "Jack London",
+          "focus": "The atmosphere at the Blue Lattern Bar during the Keane and Dillon farewell event",
+          "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Benji Dillon — Pitcher, Oakland A's Legend",
+          "evidence": [
+            {
+              "id": "EV-bbdfb583e2",
+              "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+              "text": "Euphoria with friction: name the doubter, kill soft contentment."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+            "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+            "id": "F-c751088c732a"
+          },
+          {
+            "t": "FACT",
+            "text": "Euphoria with friction: name the doubter, kill soft contentment.",
+            "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+            "id": "F-01d7731f718f"
+          },
+          {
+            "t": "FACT",
+            "text": "StoryAngle (feed): The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+            "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+            "id": "F-b955af6df0a7"
+          },
+          {
+            "t": "FACT",
+            "text": "Event: A's — player-feature (off-season)",
+            "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+            "id": "F-120e4da63805"
+          },
+          {
+            "t": "FACT",
+            "text": "NamesUsed: Vinnie Keane (3B), Benji Dillon (SP)",
+            "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+            "id": "F-093ab16a80f9"
+          },
+          {
+            "t": "FACT",
+            "text": "FanSentiment: euphoric · Mood: reflective",
+            "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+            "id": "F-7a41dfc993a5"
+          },
+          {
+            "t": "FACT",
+            "text": "Benji Dillon — Pitcher, Oakland A's Legend",
+            "src": "Simulation_Ledger profile for POP-00018",
+            "id": "F-2b937e94a839"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00185",
+      "name": "Lila Patty",
+      "quote": "I bought a new A's jersey and took a walk near a new construction site to clear my head after a long week. The noise of the city was still there, but standing by that new construction corner, I felt a bit more at peace.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; curious, open to new things; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I bought a new A's jersey and took a walk near a new construction site to clear my head after a long week. The noise of the city was still there, but standing by that new construction corner, I felt a bit more at peace.\",\n  \"fact_ids\": [\"F-526cb8143980\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-526cb8143980"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00185-08297745f1",
+        "authoredQuote": true,
+        "publishableQuote": "I bought a new A's jersey and took a walk near a new construction site to clear my head after a long week. The noise of the city was still there, but standing by that new construction corner, I felt a bit more at peace."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00185",
+          "name": "Lila Patty",
+          "role": "Solar Panel Installation Lead",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "P Slayer",
+          "question": "Your own current-cycle line says: \"Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and let the week's noise settle near a new-construction corner\". What did you do as a fan of A's? Speak only from that line and your own reaction."
+        },
+        "signal": {
+          "kind": "award-board",
+          "hood": "Jack London",
+          "focus": "The atmosphere at the Blue Lattern Bar during the Keane and Dillon farewell event",
+          "src": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Lila Patty — Solar Panel Installation Lead",
+          "evidence": [
+            {
+              "id": "EV-LIFE-436be9d9db",
+              "src": "output/simulation_ledger_snapshot.jsonl",
+              "text": "Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and let the week's noise settle near a new-construction corner"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Y3C8 — [Sports-Fandom-Up-S] bought a new A's jersey and let the week's noise settle near a new-construction corner",
+            "src": "output/simulation_ledger_snapshot.jsonl",
+            "id": "F-526cb8143980"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-10-21T18:18:44.327Z"
+}

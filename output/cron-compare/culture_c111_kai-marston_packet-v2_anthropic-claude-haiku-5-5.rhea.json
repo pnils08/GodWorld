@@ -1,0 +1,65 @@
+{
+  "draft": "output/cron-compare/culture_c111_kai-marston_packet-v2_anthropic-claude-haiku-5-5.md",
+  "cycle": "111",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "f1e4575179403c0e99b7b2d27299ad7316c6f230265b0aaed1923f5feb658de0",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All citizen names, biographical details, and exact quotes perfectly verify against ledger and packet provenance with zero canon violations.",
+  "review": {
+    "profileId": "kai-arts-entertainment-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "kai-arts-entertainment-v1",
+    "packageVersion": "KAI-LEP2-1",
+    "manifestId": "AM-391bf35ed324",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Alma Vasquez",
+      "Lena Cross",
+      "Nina Reyes",
+      "Rowan Pierce",
+      "Tara Ellison"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0096,
+  "durationMs": 4785,
+  "parseError": false,
+  "ranAt": "2026-10-16T23:16:15.398Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 500",
+    "words": 584,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "f1e4575179403c0e99b7b2d27299ad7316c6f230265b0aaed1923f5feb658de0",
+    "costUsd": 0.0008
+  }
+}

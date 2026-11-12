@@ -1,0 +1,71 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "113",
+  "persona": "ines-sorensen",
+  "byline": "Ines Sorensen",
+  "bylinePopid": "POP-01211",
+  "article": "output/cron-compare/staged/culture_c113_ines-sorensen_packet-v2_x-ai-grok-4-3.staged-2320.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Priya Narang",
+        "role": "quoted-source",
+        "popid": "POP-00141"
+      },
+      {
+        "name": "Dame Reed",
+        "role": "quoted-source",
+        "popid": "POP-00634"
+      },
+      {
+        "name": "Omar Amici",
+        "role": "quoted-source",
+        "popid": "POP-00263"
+      },
+      {
+        "name": "Danny Horn",
+        "role": "mentioned",
+        "popid": "POP-00022",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "The A's winning season is a big deal for us in Uptown. I started a savings jar on the counter to buy season tickets next year, hoping Danny Horn stays in center field. It's not just about the team; when they're doing well, the whole neighborhood feels it. The bars and galleries stay packed, and for a while, it seems like the rent signs disappear. It's a small boost, but it matters. My kids are huge fans, and my husband and I love watching them excited. It's moments like those that make all the stress worth it.",
+        "sourceRef": "citizenVoice PRESS Priya Narang"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "gate": "off",
+    "model": null,
+    "manifestId": null,
+    "draftSha256": "59f35e942da852d8ba5a0e8582ec11021fe2cfa45571f9ec8e87c90ee4c224be",
+    "verdict": null,
+    "ranAt": "2026-10-29T23:20:41.468Z",
+    "contractScore": {
+      "opened": true,
+      "closed": false,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 300",
+      "words": 324,
+      "short": "The piece ends on an attribution line rather than leaving the final speaker's own words standing as the closing.",
+      "score": 3,
+      "model": "google/gemini-3.7-flash",
+      "scoredWithoutRhea": true,
+      "draftSha256": "59f35e942da852d8ba5a0e8582ec11021fe2cfa45571f9ec8e87c90ee4c224be"
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-29T23:20:41.468Z"
+}

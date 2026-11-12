@@ -62,9 +62,13 @@ function detectCycle() {
 }
 
 // ### <Hood> blocks out of neighborhood_texture_c{N}.md → { hood: text }.
+// The texture file ends with a `---` rule and a generator footer. Without a
+// boundary the last hood's block swallowed it (G-EC41: footer text surfaced in
+// an East Oakland wake), so the hood section stops at the first rule line.
 function parseHoodBlocks(md) {
   const hoods = {};
-  const sections = md.split(/^### /m).slice(1);
+  const rule = md.search(/^---\s*$/m);
+  const sections = (rule >= 0 ? md.slice(0, rule) : md).split(/^### /m).slice(1);
   for (const s of sections) {
     const nl = s.indexOf('\n');
     if (nl === -1) continue;

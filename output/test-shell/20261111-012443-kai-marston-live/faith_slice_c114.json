@@ -1,0 +1,336 @@
+{
+  "version": "FAITH-SLICE-2",
+  "empty": false,
+  "cycle": 114,
+  "kind": "beat-faith",
+  "seat": {
+    "slug": "elliot-graye",
+    "name": "Elliot Graye",
+    "popid": "POP-00012",
+    "desk": "culture",
+    "domain": "faith",
+    "builder": "buildFaithSlice.js"
+  },
+  "hood": "Lake Merritt",
+  "pulse": {
+    "className": "beat-faith",
+    "score": 100,
+    "label": "8 faith events on the record since C108 · Cathedral of the Living Word in Lake Merritt | 9 named on the record",
+    "hood": "Lake Merritt",
+    "source": "output/beats/Faith_Organizations.jsonl \"Cathedral of the Living Word\""
+  },
+  "story": {
+    "kind": "beat-faith",
+    "angle": "crisis response at Bay Pure Land Buddhist Temple (Chinatown) — the week in faith, and Cathedral of the Living Word in focus",
+    "label": "8 faith events on the record since C108 · Cathedral of the Living Word in Lake Merritt | 9 named on the record",
+    "hookLine": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+    "hood": "Lake Merritt",
+    "citizens": [
+      "Antoine Vermeer (POP-00755)",
+      "Ignacio Zavala (POP-01094)",
+      "Art Scott (POP-00665)",
+      "Declan Toto (POP-00697)",
+      "Christopher Johnson (POP-00211)",
+      "Kenji Tanaka (POP-00763)",
+      "Eunice Marston (POP-00753)",
+      "Ramon Solano (POP-00756)",
+      "Yael Bauer (POP-00760)"
+    ],
+    "popids": [
+      "POP-00755",
+      "POP-01094",
+      "POP-00665",
+      "POP-00697",
+      "POP-00211",
+      "POP-00763",
+      "POP-00753",
+      "POP-00756",
+      "POP-00760"
+    ],
+    "ref": "output/beats/Faith_Organizations.jsonl \"Cathedral of the Living Word\"",
+    "cycle": 114
+  },
+  "approach": "Faith and quiet-work approach: this slice is the week's faith events on the record — services, holy days, outreach, crisis response, with the congregations and neighborhoods named — plus one congregation in focus and the community programs around it. Dignity, not doctrine wars. The events, institutions and people are real; the sanctuary on a weeknight, the basement kitchen, the Tuesday meeting are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-00755",
+      "name": "Antoine Vermeer",
+      "role": "Senior Pastor / Faith Leader",
+      "neighborhood": "Lake Merritt",
+      "business": null,
+      "profile": "Antoine Vermeer — Senior Pastor / Faith Leader — Lake Merritt",
+      "why": "leads Cathedral of the Living Word (Faith_Organizations)"
+    },
+    {
+      "popid": "POP-01094",
+      "name": "Ignacio Zavala",
+      "role": "Managing Partner, Foothill Builders",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Ignacio Zavala — Managing Partner, Foothill Builders — West Oakland",
+      "why": "member of Cathedral of the Living Word (Faith_Organizations.MembersList)"
+    },
+    {
+      "popid": "POP-00665",
+      "name": "Art Scott",
+      "role": "Sustainable Materials Scientist",
+      "neighborhood": "Lake Merritt",
+      "business": null,
+      "profile": "Art Scott — Sustainable Materials Scientist — Lake Merritt",
+      "why": "member of Cathedral of the Living Word (Faith_Organizations.MembersList)"
+    },
+    {
+      "popid": "POP-00697",
+      "name": "Declan Toto",
+      "role": "Gene Therapy Counselor",
+      "neighborhood": "Lake Merritt",
+      "business": null,
+      "profile": "Declan Toto — Gene Therapy Counselor — Lake Merritt",
+      "why": "member of Cathedral of the Living Word (Faith_Organizations.MembersList)"
+    },
+    {
+      "popid": "POP-00211",
+      "name": "Christopher Johnson",
+      "role": "Janitor",
+      "neighborhood": "Lake Merritt",
+      "business": null,
+      "profile": "Christopher Johnson — Janitor — Lake Merritt",
+      "why": "member of Cathedral of the Living Word (Faith_Organizations.MembersList)"
+    },
+    {
+      "popid": "POP-00763",
+      "name": "Kenji Tanaka",
+      "role": "Senior Pastor / Faith Leader",
+      "neighborhood": "Chinatown",
+      "business": null,
+      "profile": "Kenji Tanaka — Senior Pastor / Faith Leader — Chinatown",
+      "why": "leads Bay Pure Land Buddhist Temple — crisis response this week (Faith_Ledger)"
+    },
+    {
+      "popid": "POP-00753",
+      "name": "Eunice Marston",
+      "role": "Senior Pastor / Faith Leader",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Eunice Marston — Senior Pastor / Faith Leader — Downtown",
+      "why": "leads Telegraph Presbyterian Fellowship — holy day this week (Faith_Ledger)"
+    },
+    {
+      "popid": "POP-00756",
+      "name": "Ramon Solano",
+      "role": "Senior Pastor / Faith Leader",
+      "neighborhood": "Fruitvale",
+      "business": null,
+      "profile": "Ramon Solano — Senior Pastor / Faith Leader — Fruitvale",
+      "why": "leads St. Esperanza Parish — holy day this week (Faith_Ledger)"
+    },
+    {
+      "popid": "POP-00760",
+      "name": "Yael Bauer",
+      "role": "Senior Pastor / Faith Leader",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Yael Bauer — Senior Pastor / Faith Leader — Piedmont Ave",
+      "why": "leads B'nai Tikvah Synagogue — community program this week (Faith_Ledger)"
+    }
+  ],
+  "facts": [
+    {
+      "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+      "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\""
+    },
+    {
+      "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+      "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\""
+    },
+    {
+      "text": "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+      "src": "output/beats/Faith_Ledger.jsonl C109 \"Cathedral of the Living Word\""
+    },
+    {
+      "text": "Cathedral of the Living Word (Lake Merritt), C108 — holy day: traditional Epiphany rituals observed (attendance 1,077)",
+      "src": "output/beats/Faith_Ledger.jsonl C108 \"Cathedral of the Living Word\""
+    },
+    {
+      "text": "St. Esperanza Parish (Fruitvale), C108 — holy day: congregation celebrates Epiphany (attendance 374)",
+      "src": "output/beats/Faith_Ledger.jsonl C108 \"St. Esperanza Parish\""
+    },
+    {
+      "text": "Interfaith Council (Chinatown), C114 — interfaith dialogue: dialogue series addresses shared concerns (attendance 53)",
+      "src": "output/beats/Faith_Ledger.jsonl C114 \"Interfaith Council\""
+    },
+    {
+      "text": "Cathedral of the Living Word (Lake Merritt), C114 — community program: job training workshop begins new session (attendance 204)",
+      "src": "output/beats/Faith_Ledger.jsonl C114 \"Cathedral of the Living Word\""
+    },
+    {
+      "text": "B'nai Tikvah Synagogue (Piedmont Ave), C114 — community program: seniors lunch program marks milestone (attendance 25)",
+      "src": "output/beats/Faith_Ledger.jsonl C114 \"B'nai Tikvah Synagogue\""
+    },
+    {
+      "text": "In focus: Cathedral of the Living Word — Catholic, Lake Merritt, congregation 2,000, founded 34 years ago, led today by Bishop Antoine Vermeer — architectural landmark, diverse congregation",
+      "src": "output/beats/Faith_Organizations.jsonl \"Cathedral of the Living Word\""
+    },
+    {
+      "text": "Also in Lake Merritt: Lakeshore Unitarian Universalist Fellowship (Unitarian)",
+      "src": "output/beats/Faith_Organizations.jsonl"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "crisis response at Bay Pure Land Buddhist Temple (Chinatown) — the week in faith, and Cathedral of the Living Word in focus",
+    "hookLine": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+    "anchorFacts": [
+      "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+      "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+      "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+      "Cathedral of the Living Word (Lake Merritt), C108 — holy day: traditional Epiphany rituals observed (attendance 1,077)",
+      "St. Esperanza Parish (Fruitvale), C108 — holy day: congregation celebrates Epiphany (attendance 374)",
+      "Interfaith Council (Chinatown), C114 — interfaith dialogue: dialogue series addresses shared concerns (attendance 53)",
+      "Cathedral of the Living Word (Lake Merritt), C114 — community program: job training workshop begins new session (attendance 204)",
+      "B'nai Tikvah Synagogue (Piedmont Ave), C114 — community program: seniors lunch program marks milestone (attendance 25)",
+      "In focus: Cathedral of the Living Word — Catholic, Lake Merritt, congregation 2,000, founded 34 years ago, led today by Bishop Antoine Vermeer — architectural landmark, diverse congregation",
+      "Also in Lake Merritt: Lakeshore Unitarian Universalist Fellowship (Unitarian)"
+    ],
+    "evidence": [
+      {
+        "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+        "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\""
+      },
+      {
+        "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+        "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\""
+      },
+      {
+        "text": "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+        "src": "output/beats/Faith_Ledger.jsonl C109 \"Cathedral of the Living Word\""
+      },
+      {
+        "text": "Cathedral of the Living Word (Lake Merritt), C108 — holy day: traditional Epiphany rituals observed (attendance 1,077)",
+        "src": "output/beats/Faith_Ledger.jsonl C108 \"Cathedral of the Living Word\""
+      },
+      {
+        "text": "St. Esperanza Parish (Fruitvale), C108 — holy day: congregation celebrates Epiphany (attendance 374)",
+        "src": "output/beats/Faith_Ledger.jsonl C108 \"St. Esperanza Parish\""
+      },
+      {
+        "text": "Interfaith Council (Chinatown), C114 — interfaith dialogue: dialogue series addresses shared concerns (attendance 53)",
+        "src": "output/beats/Faith_Ledger.jsonl C114 \"Interfaith Council\""
+      },
+      {
+        "text": "Cathedral of the Living Word (Lake Merritt), C114 — community program: job training workshop begins new session (attendance 204)",
+        "src": "output/beats/Faith_Ledger.jsonl C114 \"Cathedral of the Living Word\""
+      },
+      {
+        "text": "B'nai Tikvah Synagogue (Piedmont Ave), C114 — community program: seniors lunch program marks milestone (attendance 25)",
+        "src": "output/beats/Faith_Ledger.jsonl C114 \"B'nai Tikvah Synagogue\""
+      },
+      {
+        "text": "In focus: Cathedral of the Living Word — Catholic, Lake Merritt, congregation 2,000, founded 34 years ago, led today by Bishop Antoine Vermeer — architectural landmark, diverse congregation",
+        "src": "output/beats/Faith_Organizations.jsonl \"Cathedral of the Living Word\""
+      },
+      {
+        "text": "Also in Lake Merritt: Lakeshore Unitarian Universalist Fellowship (Unitarian)",
+        "src": "output/beats/Faith_Organizations.jsonl"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": null,
+    "hooks": [
+      {
+        "text": "Heavy faith activity this cycle. Multiple incidents creating a pattern. Deep-dive opportunity.",
+        "angle": "general coverage",
+        "domain": "FAITH",
+        "hood": null,
+        "priority": 3
+      },
+      {
+        "text": "A family bought their home in Rockridge",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Rockridge",
+        "priority": 3
+      }
+    ],
+    "note": null,
+    "pageVoices": [],
+    "roomIsYours": "the sanctuary on a weeknight, the folding chairs, who sets up and who stays late, what the leader says when the room is half empty"
+  },
+  "organization": {
+    "Organization": "Cathedral of the Living Word",
+    "FaithTradition": "Catholic",
+    "Neighborhood": "Lake Merritt",
+    "Founded": "2008",
+    "Congregation": "2000",
+    "Leader": "Bishop Antoine Vermeer",
+    "Character": "architectural landmark, diverse congregation",
+    "ActiveStatus": "active",
+    "LeaderPOPID": "POP-00755",
+    "MembersList": "[\"POP-01094\",\"POP-00665\",\"POP-00697\",\"POP-00211\"]"
+  },
+  "programs": [],
+  "rotation": {
+    "index": 2,
+    "of": 16
+  },
+  "weekEvents": [
+    {
+      "cycle": 109,
+      "organization": "Bay Pure Land Buddhist Temple",
+      "type": "crisis_response",
+      "hood": "Chinatown"
+    },
+    {
+      "cycle": 109,
+      "organization": "Telegraph Presbyterian Fellowship",
+      "type": "holy_day",
+      "hood": "Downtown"
+    },
+    {
+      "cycle": 109,
+      "organization": "Cathedral of the Living Word",
+      "type": "holy_day",
+      "hood": "Lake Merritt"
+    },
+    {
+      "cycle": 108,
+      "organization": "Cathedral of the Living Word",
+      "type": "holy_day",
+      "hood": "Lake Merritt"
+    },
+    {
+      "cycle": 108,
+      "organization": "St. Esperanza Parish",
+      "type": "holy_day",
+      "hood": "Fruitvale"
+    },
+    {
+      "cycle": 114,
+      "organization": "Interfaith Council",
+      "type": "interfaith_dialogue",
+      "hood": "Chinatown"
+    },
+    {
+      "cycle": 114,
+      "organization": "Cathedral of the Living Word",
+      "type": "community_program",
+      "hood": "Lake Merritt"
+    },
+    {
+      "cycle": 114,
+      "organization": "B'nai Tikvah Synagogue",
+      "type": "community_program",
+      "hood": "Piedmont Ave"
+    }
+  ],
+  "pointers": [
+    "output/beats/Faith_Organizations.jsonl \"Cathedral of the Living Word\"",
+    "output/beats/Story_Hook_Deck.jsonl (hooks for Elliot Graye this cycle)"
+  ]
+}

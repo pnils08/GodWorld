@@ -1,0 +1,86 @@
+{
+  "fixture": "civic/c113-autonomy-baseline",
+  "frozen": "2026-10-31",
+  "row": "civic.46",
+  "task": "A1 — freeze half",
+  "plan": "docs/for-claude-review/2026-10-31-codex-civic-autonomy-plan.md",
+  "research": "docs/for-claude-review/2026-10-31-codex-civic-autonomy-research.md",
+  "canonCycle": 113,
+  "headAtFreeze": "a24c9bfc",
+  "files": {
+    "MAYOR-01_c113.json": {
+      "source": "output/cron-civic/packs/MAYOR-01_c113.json",
+      "sha256": "2010b7acc2982d25027d3e88f26baa3d22c89c9d1c1d1f1a8becf14c47c087af",
+      "bytes": 64836
+    },
+    "COUNCIL-D2_c113.json": {
+      "source": "output/cron-civic/packs/COUNCIL-D2_c113.json",
+      "sha256": "39ebde8c0cc0bb309377971a060c5114e2eead3c6464ac3ac1c24fba399570cf",
+      "bytes": 34660
+    },
+    "COUNCIL-D9_c113.json": {
+      "source": "output/cron-civic/packs/COUNCIL-D9_c113.json",
+      "sha256": "53dbbbc2545ba2ac352c9c4cfd6c9c5340ed3eeb4bf2100de579931994a634fc",
+      "bytes": 10733
+    },
+    "civic-office-mayor_2026-10-26.json": {
+      "source": "output/cron-civic/datawake/civic-office-mayor_2026-10-26.json",
+      "sha256": "a3bc77ee1948df034a6664fb7625f5e5b6774e30a2597091034672a72d1f91ed",
+      "bytes": 1293
+    },
+    "civic-office-council-d2_2026-10-28.json": {
+      "source": "output/cron-civic/datawake/civic-office-council-d2_2026-10-28.json",
+      "sha256": "c271d44e0295118c507ae460c783b3e173c16ef7c7e552d78394d79e2ebe418a",
+      "bytes": 1372
+    },
+    "civic-office-council-d9_2026-10-29.json": {
+      "source": "output/cron-civic/datawake/civic-office-council-d9_2026-10-29.json",
+      "sha256": "98d45c21f67ecb234eb8873f12948c99fa25bc0db064d2149b6a5f9c1c39a276",
+      "bytes": 918
+    },
+    "close_c113.json": {
+      "source": "output/cron-civic/close_c113.json",
+      "sha256": "031bebfcb379ffa042a16f53568acde384faf9b83928b955014443d29b1166ae",
+      "bytes": 705
+    },
+    "fold_c113.json": {
+      "source": "output/cron-civic/moves/fold_c113.json",
+      "sha256": "b6176826608096c6e0735e31afc760eef61ff95a3c9860c964fc5c3b98f24ada",
+      "bytes": 507
+    },
+    "moves_c112.jsonl": {
+      "source": "output/cron-civic/moves/moves_c112.jsonl",
+      "sha256": "0c2a873936bf6fa94a8b9016d28d99b8ff23052a7049e32ce39d36e4c5c2ed85",
+      "bytes": 10202
+    },
+    "council_d2_c113.json": {
+      "source": "output/civic-voice/council_d2_c113.json",
+      "sha256": "73ff01d2dde642600d91c4cb28174ce7c8cf25ef3563a080d497ce398548b856",
+      "bytes": 3040
+    },
+    "parade-c111-from-world-summary-c113.md": {
+      "source": "output/world_summary_c113.md (lines 281-287)",
+      "sha256": "4c94907eb925793fd22085ebc25a549d1d5bf79eae6e7c48a4005215ffe289e8",
+      "bytes": 1279
+    }
+  },
+  "codeAtFreeze": {
+    "scripts/buildCivicOfficeSlice.js": "4411e92aed9f576c696d2d59467ee1385033082f72589b9bf46ad498ce6d45a1",
+    "scripts/cron-civic-run.js": "b897b72cc881dd9870ced8b820a3d520a69b3df40c75a71ae24ef21e4cacd6eb",
+    "scripts/civicProblemContinuity.js": "875e3a18b0d765da5e96b01e4ffd12aa05d83435361062d69c36fd61e55de703",
+    "scripts/civic-office-map.json": "c863ec249bc970f600ffbb1baed2f4f85699b7c38143e74c7e1d8398e988e2e6",
+    "scripts/civicPetitions.js": "9bcb1260562ced0cb15e5f339e26bf1eb2914a7e7b4fbaa788f4cec5320c3598",
+    "scripts/cityHallLedger.js": "570b377ecd81b3341bc2eee7e27560aae68ede0710ce1cf5d75bb8e4f22388ea",
+    "lib/initiativePhaseContract.js": "870e3170345cb6308eb7be2fab4b6c2207884ee82535b91e873bded14de7769c",
+    "phase05-citizens/civicInitiativeEngine.js": "1d0441e8f4739f563a156e20484aa21826e1a0f7a8b3c6f66cf5107fcef5be69",
+    "phase02-world-state/applyInitiativeImplementationEffects.js": "9e9c044fdb9f3f14d23e534385cf959fe835caf412ed8e7b6bbf5fdb10a3491e"
+  },
+  "notRetained": {
+    "serializedPrompts": "the weekday runner builds the system/user prompt at call time and the saved wake keeps statement/moves only; capturing the exact serialized prompt is a runner change (A2) — not in this freeze"
+  },
+  "notes": [
+    "Saved local evidence, not a live Sheet read.",
+    "The parade line is a C111 sports editorial note carried in the C113 summary: historical awareness, not a C113 event. A replay must not stage another parade.",
+    "Synthetic cases, if added later, go in a sibling folder and are named synthetic."
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "status": "staged",
+  "desk": "undocked-digest",
+  "cycle": "112",
+  "persona": "nia-rook-weekly",
+  "byline": "Nia Rook",
+  "bylinePopid": "POP-01076",
+  "article": "output/cron-compare/staged/undocked-digest_c112_nia-rook-weekly_packet-v2_x-ai-grok-4-3.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Sammie Alvarez",
+        "role": "subject",
+        "popid": "POP-00775"
+      },
+      {
+        "name": "Rafael Phillips",
+        "role": "subject",
+        "popid": "POP-01077",
+        "ambiguous": true
+      },
+      {
+        "name": "Iris Pham",
+        "role": "subject",
+        "popid": "POP-01203"
+      },
+      {
+        "name": "Eric Taveras",
+        "role": "mentioned",
+        "popid": "POP-00597",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "To be honest, I've been feeling a bit uncertain about my role as a Civic & Neighborhood Reporter lately. I've seen a lot of energy in Temescal, people caring about improving the neighborhood, but it doesn't seem to be translating into action. I'm not sure how people perceive me or my reporting, but I feel like I'm just trying to capture the essence of what's going on around here.",
+        "sourceRef": "citizenVoice PRESS Sammie Alvarez"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-94dfca12e0ec",
+    "draftSha256": "ca57f78c2205d92d07163e70793bcbeab207f80ecc3d13d867b000d06e461070",
+    "verdict": "output/cron-compare/undocked-digest_c112_nia-rook-weekly_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-10-24T15:15:20.565Z",
+    "contractScore": {
+      "opened": true,
+      "closed": false,
+      "purposeMet": false,
+      "inTarget": false,
+      "inTargetBy": "code floor 350",
+      "words": 298,
+      "short": "The piece fell short of the 350-word minimum, derailed into out-of-world civilian dialogue rather than a full leaderboard digest, and ended on a prompt question instead of setting up who the city watches next.",
+      "score": 1,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "ca57f78c2205d92d07163e70793bcbeab207f80ecc3d13d867b000d06e461070",
+      "costUsd": 0.0012
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-24T15:15:28.621Z"
+}

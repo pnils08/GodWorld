@@ -1,0 +1,16 @@
+{
+  "initiative": "INIT-010",
+  "initiativeId": "INIT-010",
+  "cycle": 112,
+  "primaryVoice": "move-fold",
+  "consolidatedFrom": [],
+  "trackerUpdates": {
+    "LastWorkCycle": 112,
+    "LastWorkSeat": "civic-office-council-d1"
+  },
+  "_moveFold": {
+    "moveIds": [
+      "MV-111-civic-office-council-d1-2026-10-15"
+    ]
+  }
+}

@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-11-01",
-  "updatedBy": "initiativeTrackerSnapshot.js (live tab, civic tick 2026-11-01T08:17:03.370Z)",
+  "lastUpdated": "2026-11-12",
+  "updatedBy": "initiativeTrackerSnapshot.js (live tab, civic tick 2026-11-12T07:17:03.960Z)",
   "initiatives": [
     {
       "id": "INIT-001",
@@ -17,16 +17,16 @@
       "implementation": {
         "status": "disbursement-active",
         "phase": "disbursement-active",
-        "summary": "C107: Downtown canvass deployment authorized alongside month-eight disbursement review.\nC108 conversion: passed C78 before the mayoral-action step existed; the mayor's own bill, recorded signed at C78.\nC108 conversion: Stage Standing — Stabilization Fund, disbursement-active since C78 (economic — not playable, no Delivering gate yet; the untended clock still runs). | C108 retag economic→housing (ruled 2026-09-22 — the Fund is a household anti-displacement fund in canon; engine.255 wires it as the first budgeted disbursement).\nC108: scope recorded as chartered — stabilization grants for long-tenure West Oakland residents priced out as the flats built out (the remnant the charter named), not hood-wide relief; 47 checks (~$4.2M) disbursed under Deputy Mayor Okoro’s authority C84–C90; authorization $28M, ~$23.8M remaining.\nC108: retag reversed — housing→economic (the 2026-09-22 retag was engine-sheet error; the Fund is not a housing fund).\nC109 scope correction: the Fund serves West Oakland businesses and residents. The C107 'Downtown canvass' line and the C108 'residents only' reading are superseded.\nC109: month-eight tranche $400,000 released in West Oakland (2 household grants, $81,188). Downtown is outside the Fund's area — that is INIT-008, proposed, not voted.\nC110: Month-nine disbursement $400K approved; 23-day avg processing time achieved\nC111: Month-ten disbursement $400K approved; 23-day processing standard maintained.\nC112: Month-eleven disbursement $400K approved; 23-day processing standard maintained; cumulative $5M+ disbursed\nC113: Month-11 audit published; Month-12 $400K approved with charter scope preservation directive",
-        "nextScheduledAction": "Month-12 disbursement execution and charter renewal drafting",
-        "nextActionCycle": 114
+        "summary": "C107: Downtown canvass deployment authorized alongside a disbursement review.\nC108 conversion: passed C78 before the mayoral-action step existed; the mayor's own bill, recorded signed at C78.\nC108 conversion: Stage Standing — Stabilization Fund, disbursement-active since C78 (economic — not playable, no Delivering gate yet; the untended clock still runs). | C108 retag economic→housing (ruled C108 — the Fund is a household anti-displacement fund in canon; engine.255 wires it as the first budgeted disbursement).\nC108: scope recorded as chartered — stabilization grants for long-tenure West Oakland residents priced out as the flats built out (the remnant the charter named), not hood-wide relief; 47 checks (~$4.2M) disbursed under Deputy Mayor Okoro’s authority C84–C90; authorization $28M, ~$23.8M remaining.\nC108: retag reversed — housing→economic (the C108 retag was engine-sheet error; the Fund is not a housing fund).\nC109 scope correction: the Fund serves West Oakland businesses and residents. The C107 'Downtown canvass' line and the C108 'residents only' reading are superseded.\nC109: tranche $400,000 released in West Oakland (2 household grants, $81,188). Downtown is outside the Fund's area — that is INIT-008, proposed, not voted.\nC110: Disbursement $400K approved; 23-day avg processing time achieved\nC111: Disbursement $400K approved; 23-day processing standard maintained.\nC112: Disbursement $400K approved; 23-day processing standard maintained; cumulative $5M+ disbursed\nC113: C112 audit published; $400K approved with charter scope preservation directive\nC114: $400K executed under the 23-day standard; closeout publication and charter renewal drafting directed with West Oakland business-and-resident scope intact.\nC115: C114 closeout publication ordered and charter renewal ordinance transmitted; business-and-resident scope and 23-day standard preserved pending council action.",
+        "nextScheduledAction": "Council consideration of the charter renewal ordinance",
+        "nextActionCycle": 116
       },
       "stage": "Standing",
       "state": "Standing — no delivering gate exists for this domain yet",
       "opensCycle": null,
       "lastStageChangeCycle": 108,
-      "lastWorkCycle": 113,
-      "budgetRemaining": 21800000
+      "lastWorkCycle": 115,
+      "budgetRemaining": 21000000
     },
     {
       "id": "INIT-002",
@@ -45,16 +45,16 @@
       "implementation": {
         "status": "dispatch-live",
         "phase": "dispatch-live",
-        "summary": "C107: East Oakland dispatch protocol deployment authorized; District 1 evaluation continues.\nC108 conversion: Stage Standing — OARI, dispatch-live, signed C82 (safety — not playable until the safety lever lands; the untended clock still runs).\nC109: Expanded to District 1 with evaluation metrics\nC112: Quarterly report accepted; D3 condition added for district-level data breakdown and community briefing before expansion\nC113: Quarterly report published; D3 East Oakland briefing directed with Fruitvale data and Baylight feasibility review",
-        "nextScheduledAction": "D3 community briefing execution",
-        "nextActionCycle": 114
+        "summary": "C107: East Oakland dispatch protocol deployment authorized; District 1 evaluation continues.\nC108 conversion: Stage Standing — OARI, dispatch-live, signed C82 (safety — not playable until the safety lever lands; the untended clock still runs).\nC109: Expanded to District 1 with evaluation metrics\nC112: Progress report accepted; D3 condition added for district-level data breakdown and community briefing before expansion\nC113: Progress report published; D3 East Oakland briefing directed with Fruitvale data and Baylight feasibility review\nC114: D3 East Oakland briefing and D5 audit directed; Fruitvale data and Baylight feasibility review docketed, with expansion held until after briefing.\nC115: D3 East Oakland briefing execution and documentation required; expansion held, with D5 audit and Baylight feasibility review still incomplete.",
+        "nextScheduledAction": "Execute and publish the D3 briefing record with district-level and Fruitvale data",
+        "nextActionCycle": 116
       },
       "stage": "Standing",
       "state": "Standing — no delivering gate exists for this domain yet",
       "opensCycle": null,
       "lastStageChangeCycle": 108,
-      "lastWorkCycle": 113,
-      "budgetRemaining": 11538461.52
+      "lastWorkCycle": 115,
+      "budgetRemaining": 11057692.28
     },
     {
       "id": "INIT-003",
@@ -69,17 +69,17 @@
         "Fruitvale"
       ],
       "implementation": {
-        "status": "design-phase",
-        "phase": "design-phase",
-        "summary": "C107: Merchant covenants executed, design RFP published with community-informed requirements\nC108 conversion: no council passage on record (VoteCycle 94, Outcome COMPLETED, Status visioning-complete) — enters petition-pending; history above kept, VoteCycle cleared.\nC108 conversion: Stage Proposed — Fruitvale transit hub never had a council vote: petition-pending, history kept, vote via petition band or a call-vote move.\nC109: Mayer & Associates contracted with community oversight provisions\nC110: Preliminary schematics review authorized; Mayer & Associates contracted with community oversight\nC111: Advanced from visioning to design-phase; schematics delivery mandated Cycle 114.\nC111 correction: the council authorized Phase II at C86 ($230M budget, visioning framework binding, design consultant RFP to follow; projected 6-3). The C108 \"no council passage on record\" line was wrong. Vote restored at C86; no stage.",
-        "nextScheduledAction": "Preliminary schematics community review",
-        "nextActionCycle": 114
+        "status": "complete",
+        "phase": "complete",
+        "summary": "C107: Merchant covenants executed, design RFP published with community-informed requirements\nC108 conversion: no council passage on record (VoteCycle 94, Outcome COMPLETED, Status visioning-complete) — enters petition-pending; history above kept, VoteCycle cleared.\nC108 conversion: Stage Proposed — Fruitvale transit hub never had a council vote: petition-pending, history kept, vote via petition band or a call-vote move.\nC109: Mayer & Associates contracted with community oversight provisions\nC110: Preliminary schematics review authorized; Mayer & Associates contracted with community oversight\nC111: Advanced from visioning to design-phase; schematics delivery mandated Cycle 114.\nC111 correction: the council authorized Phase II at C86 ($230M budget, visioning framework binding, design consultant RFP to follow; projected 6-3). The C108 \"no council passage on record\" line was wrong. Vote restored at C86; no stage.\nC114: Preliminary schematics delivery and documented Fruitvale community review directed; further design advancement awaits a public comment-and-response record.\nC115: Schematics delivery and documented Fruitvale review required; further design advancement awaits a public comment-and-response record.\nC115: closed.",
+        "nextScheduledAction": null,
+        "nextActionCycle": null
       },
       "stage": null,
       "state": null,
       "opensCycle": null,
-      "lastStageChangeCycle": 108,
-      "lastWorkCycle": 113,
+      "lastStageChangeCycle": 115,
+      "lastWorkCycle": 115,
       "budgetRemaining": 230000000
     },
     {
@@ -97,16 +97,16 @@
       "implementation": {
         "status": "operational",
         "phase": "operational",
-        "summary": "C107: MEP rough-ins completed, utility inspections certified ahead of schedule\nC108 conversion: passed C80 before the mayoral-action step existed; the mayor's own bill, recorded signed at C80.\nC108 conversion: Stage Standing — Temescal health center, construction-active since C80 (health — playable; delivers once a treating phase moves hood Sick against its conversion baseline).\nC109: opened — construction complete, open to the public.\nC109: Opened 2 weeks early, $1.2M under budget\nC111: Implemented pre-opening clinical intake workflow audits and expenditure reconciliations per D7 directive\nC112: Adopted D7 quarterly utilization audit benchmarks as standing procedure; first reporting cycle scheduled with public-data commitment.\nC113: First quarterly utilization audit filed to D7 and public portal",
-        "nextScheduledAction": "Second quarterly audit cycle",
+        "summary": "C107: MEP rough-ins completed, utility inspections certified ahead of schedule\nC108 conversion: passed C80 before the mayoral-action step existed; the mayor's own bill, recorded signed at C80.\nC108 conversion: Stage Standing — Temescal health center, construction-active since C80 (health — playable; delivers once a treating phase moves hood Sick against its conversion baseline).\nC109: opened — construction complete, open to the public.\nC109: Opened ahead of schedule, $1.2M under budget\nC111: Implemented pre-opening clinical intake workflow audits and expenditure reconciliations per D7 directive\nC112: Adopted D7 utilization audit benchmarks as standing procedure; first reporting cycle scheduled with public-data commitment.\nC113: First utilization audit filed to D7 and public portal\nC115: Q2 intake audit filed as standing schedule to HCAI + Council Clerk; merchant-clinic verification walkthrough at Telegraph & 47th institutionalized.",
+        "nextScheduledAction": "Q3 intake audit filing + recurring merchant verification walkthrough",
         "nextActionCycle": 116
       },
-      "stage": "Standing",
-      "state": "Standing — delivers when Sick moves down against its baseline",
+      "stage": "Delivering",
+      "state": "Delivering — the service is reaching people; it slips back to Standing if the metric stops holding",
       "opensCycle": 88,
-      "lastStageChangeCycle": 108,
-      "lastWorkCycle": 113,
-      "budgetRemaining": 16615384.6
+      "lastStageChangeCycle": 114,
+      "lastWorkCycle": 115,
+      "budgetRemaining": 15923076.9
     },
     {
       "id": "INIT-006",
@@ -122,24 +122,24 @@
         "Downtown"
       ],
       "implementation": {
-        "status": "construction-active",
-        "phase": "construction-active",
-        "summary": "C107: Construction contracts executed; site preparation mobilization begins\nC109: Phase II remediation commenced with independent oversight\nC110: Soil test verification complete; Phase II remediation proceeds with independent oversight\nC111: Construction milestone review scheduled for Cycle 115; remediation proceeds with oversight.\nC112: Independent oversight verified; remediation continues; construction milestone review held for C115\nC113: Phase II remediation on schedule with independent oversight; 48hr construction hotline live; dust control active on haul routes; Jack London workforce coordination meeting set pre-C115 review.",
-        "nextScheduledAction": "Construction milestone review",
-        "nextActionCycle": 115
+        "status": "complete",
+        "phase": "complete",
+        "summary": "C107: Construction contracts executed; site preparation mobilization begins\nC109: Phase II remediation commenced with independent oversight\nC110: Soil test verification complete; Phase II remediation proceeds with independent oversight\nC111: Construction milestone review scheduled for Cycle 115; remediation proceeds with oversight.\nC112: Independent oversight verified; remediation continues; construction milestone review held for C115\nC113: Phase II remediation on schedule with independent oversight; 48hr construction hotline live; dust control active on haul routes; Jack London workforce coordination meeting set pre-C115 review.\nC114: C115 evidence file assembled — independent remediation verification, hotline/dust records, Jack London workforce results; no milestone declared passed\nC115: Evidence-file milestone review ordered; no construction milestone pass declared, and remediation, hotline, dust-control, and workforce oversight continue.\nC115: closed.",
+        "nextScheduledAction": null,
+        "nextActionCycle": null
       },
       "stage": null,
       "state": null,
       "opensCycle": null,
-      "lastStageChangeCycle": null,
-      "lastWorkCycle": 113,
+      "lastStageChangeCycle": 115,
+      "lastWorkCycle": 115,
       "budgetRemaining": 2100000000
     },
     {
       "id": "INIT-007",
       "name": "Oakland Youth Apprenticeship Pipeline",
       "keywords": [],
-      "status": "announced",
+      "status": "passed",
       "voteCycle": null,
       "vote": null,
       "budget": "$12.5M",
@@ -152,9 +152,9 @@
       "implementation": {
         "status": "implementation-active",
         "phase": "implementation-active",
-        "summary": "C107: Public town hall enrollment event convened; applicant intake operational with cohort placement targets established.\nC111: First cohort placement report mandated for Cycle 112; implementation accountability enforced.\nC113: First cohort placement report published; accountability review directed",
-        "nextScheduledAction": "Placement gap analysis and program adjustment",
-        "nextActionCycle": 114
+        "summary": "C107: Public town hall enrollment event convened; applicant intake operational with cohort placement targets established.\nC111: First cohort placement report mandated for Cycle 112; implementation accountability enforced.\nC113: First cohort placement report published; accountability review directed\nC114: Placement-gap analysis and adjustment plan directed for publication, with explicit West Oakland and Fruitvale review.\nC115: Placement-gap analysis and adjustment plan required for publication with explicit West Oakland and Fruitvale review; implementation continues.",
+        "nextScheduledAction": "Publish the placement-gap analysis and program adjustment plan",
+        "nextActionCycle": 116
       },
       "stage": null,
       "state": null,
@@ -182,8 +182,8 @@
         "nextScheduledAction": null,
         "nextActionCycle": null
       },
-      "stage": "Proposed",
-      "state": "Proposed — a passed council vote funds it",
+      "stage": "FAILED",
+      "state": "FAILED — not a stage this model knows",
       "opensCycle": null,
       "lastStageChangeCycle": null,
       "lastWorkCycle": null,
@@ -194,7 +194,7 @@
       "name": "Commercial Stabilization for Grand Lake",
       "keywords": [],
       "status": "failed",
-      "voteCycle": null,
+      "voteCycle": 116,
       "vote": "FAILED",
       "budget": "$2.5M",
       "domain": "economic",
@@ -202,14 +202,14 @@
         "Grand Lake"
       ],
       "implementation": {
-        "status": "announced",
-        "phase": "announced",
-        "summary": "C111: Referred to Economic Development Committee with mandatory milestone reporting and audit criteria.\nC112: Advanced to Economic Development Committee with mandatory milestones and audit protocols per Chen/Vega conditions\nC113: Advanced to full council with Chen/Vega milestone and audit conditions",
-        "nextScheduledAction": null,
-        "nextActionCycle": null
+        "status": "vote-scheduled",
+        "phase": "vote-scheduled",
+        "summary": "C111: Referred to Economic Development Committee with mandatory milestone reporting and audit criteria.\nC112: Advanced to Economic Development Committee with mandatory milestones and audit protocols per Chen/Vega conditions\nC113: Advanced to full council with Chen/Vega milestone and audit conditions\nC114: Mayor backed YES and requested a recorded full-council decision with all Chen-Vega milestone and audit conditions intact.\nC115: Recorded full-council decision scheduled with Chen-Vega milestone and audit conditions intact; no vote outcome claimed.",
+        "nextScheduledAction": "Recorded full-council vote on INIT-009",
+        "nextActionCycle": 116
       },
-      "stage": "Proposed",
-      "state": "Proposed — a passed council vote funds it",
+      "stage": "FAILED",
+      "state": "FAILED — not a stage this model knows",
       "opensCycle": null,
       "lastStageChangeCycle": null,
       "lastWorkCycle": null,
@@ -228,17 +228,17 @@
         "West Oakland"
       ],
       "implementation": {
-        "status": "announced",
-        "phase": "announced",
-        "summary": "C111: Referred to Housing and Community Development Committee with legal support analysis.",
-        "nextScheduledAction": null,
-        "nextActionCycle": null
+        "status": "vote-scheduled",
+        "phase": "vote-scheduled",
+        "summary": "C111: Referred to Housing and Community Development Committee with legal support analysis.\nC114: Committee directed to publish its legal-support analysis and record a decision on the $4.2M tenant-defense proposal.\nC115: Recorded committee decision scheduled; legal-support analysis must be published before the vote, with no outcome claimed in advance.",
+        "nextScheduledAction": "Publish the analysis and record the committee decision",
+        "nextActionCycle": 116
       },
-      "stage": "Standing",
-      "state": "Standing — no delivering gate exists for this domain yet",
+      "stage": "FAILED",
+      "state": "FAILED — not a stage this model knows",
       "opensCycle": null,
       "lastStageChangeCycle": 113,
-      "lastWorkCycle": 112,
+      "lastWorkCycle": 115,
       "budgetRemaining": 4200000
     },
     {
@@ -260,8 +260,8 @@
         "nextScheduledAction": null,
         "nextActionCycle": null
       },
-      "stage": "Proposed",
-      "state": "Proposed — a passed council vote funds it",
+      "stage": "FAILED",
+      "state": "FAILED — not a stage this model knows",
       "opensCycle": null,
       "lastStageChangeCycle": null,
       "lastWorkCycle": null,
@@ -286,8 +286,8 @@
         "nextScheduledAction": null,
         "nextActionCycle": null
       },
-      "stage": "Proposed",
-      "state": "Proposed — a passed council vote funds it",
+      "stage": "FAILED",
+      "state": "FAILED — not a stage this model knows",
       "opensCycle": null,
       "lastStageChangeCycle": null,
       "lastWorkCycle": null,
@@ -311,6 +311,58 @@
         "summary": "",
         "nextScheduledAction": null,
         "nextActionCycle": null
+      },
+      "stage": "FAILED",
+      "state": "FAILED — not a stage this model knows",
+      "opensCycle": null,
+      "lastStageChangeCycle": null,
+      "lastWorkCycle": null,
+      "budgetRemaining": 2000000
+    },
+    {
+      "id": "INIT-014",
+      "name": "Ivy Hill Community Support Initiative",
+      "keywords": [],
+      "status": "pending-vote",
+      "voteCycle": 116,
+      "vote": null,
+      "budget": "$2.5M",
+      "domain": "safety",
+      "neighborhoods": [
+        "Ivy Hill"
+      ],
+      "implementation": {
+        "status": "vote-scheduled",
+        "phase": "vote-scheduled",
+        "summary": "C115: Legislation filed on current Ivy Hill evidence—low crime, slow trade, and soured mood—with no manufactured emergency premise.",
+        "nextScheduledAction": "Council review of the filed INIT-014 legislation",
+        "nextActionCycle": 116
+      },
+      "stage": "Proposed",
+      "state": "Proposed — a passed council vote funds it",
+      "opensCycle": null,
+      "lastStageChangeCycle": null,
+      "lastWorkCycle": null,
+      "budgetRemaining": 2500000
+    },
+    {
+      "id": "INIT-015",
+      "name": "Laurel Neighborhood Patch and Clean-Up",
+      "keywords": [],
+      "status": "proposed",
+      "voteCycle": null,
+      "vote": null,
+      "budget": "$6M",
+      "domain": "environment",
+      "neighborhoods": [
+        "Laurel"
+      ],
+      "implementation": {
+        "status": "announced",
+        "phase": "announced",
+        "summary": "",
+        "nextScheduledAction": "legislation-filed",
+        "nextActionCycle": 115
       },
       "stage": "Proposed",
       "state": "Proposed — a passed council vote funds it",

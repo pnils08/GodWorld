@@ -1,0 +1,1204 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "114",
+  "persona": "talia-finch",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00592",
+      "name": "Talia Finch",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Oaks ground read C114 — excited — the people around the second club",
+      "approach": "Oaks ground approach: this slice is what the Oaks feed says about the people — the mood in the room, the fans, the neighborhood around the park — with the record as context. First-person ground report. The moods and sentiments are feed rows, real; the walk to the park, the vendor, the kid with the glove are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "oaks",
+        "hood": "KONO",
+        "facts": [
+          "Oaks fans, C114: excited",
+          "Room mood, C114: locked-in",
+          "Notebook (feed): The Oaks opened their first NBA Cup run at home in front of a sold-out crowd and held off the Oklahoma City Thunder, 101-95, behind Dillon Brooks' biggest scoring night as an Oak. The Oaks led after every quarter but never by much: 35-30 after one, 63-60 at the half and 78-74 after a 15-14 third. Brooks played 39 minutes and scored 22 on 8 of 15, hitting 6 of 9 from three, with 4 rebounds, 5 assists, 2 steals, a block and one turnover. In a game this close, his threes kept Oklahoma City at arm's length. Adash Stanley added 21 and 6 assists and went 6 for 6 at the line, though he turned it over 6 times. Wendell Carter Jr. was nearly perfect, 8 of 9 for 19 points and 13 rebounds, and AJ Dybantsa ground out a 13-point, 10-rebound double-double on a 4 for 15 night. As a team the Oaks went 13 of 13 from the line. The Oaks move to 6-1 and 1-0 in Cup play.",
+          "Oaks — game-result (early-season), C114: Dillon Brooks' six threes carry the Oaks past OKC in the Cup opener. Oaks 101 - Thunder 95",
+          "Context: record 6-1 · streak W2",
+          "Home neighborhood (feed): KONO",
+          "Room mood, C114: confident",
+          "Notebook (feed): The rout in Toronto gave the rest of the roster a night. T. Henderson Jr. scored 14 in 12 minutes on 7 of 10 shooting, T. Jerome put up 19 points, 7 rebounds and 7 assists, J. Valančiūnas added 8 on 4 of 5, G. Trent Jr. had 7 and B. Simmons 5. J. Champagnie handed out 6 assists in 20 minutes, and B. James Jr. got a minute at the end. Every Oak who played scored except James, and the only DNPs were J. Tate and Coen Carr.",
+          "Oaks — team-update (early-season), C114: Henderson, Jerome and the depth turn a rout into a showcase",
+          "Context: record 5-1 · streak W1",
+          "Home neighborhood (feed): San Antonio",
+          "Room mood, C114: hungry"
+        ],
+        "priorCycle": null,
+        "note": null,
+        "engineHooks": [],
+        "roomIsYours": "the walk from the bus stop, the vendor who knows the regulars, what the crowd sounds like when the club is losing, the kid waiting by the tunnel",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-oaks-ground",
+      "hood": "KONO",
+      "score": null,
+      "src": "output/beats/Oakland_Sports_Feed.jsonl @C114",
+      "nearby": [
+        {
+          "text": "A's | rumor | (off-season) | Ian Devine, Louis Cross, Hitoki Ka, Mariano Rosales, Clark Saryan, Julio Valencia",
+          "src": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | rumor | (off-season) | Carmen Mesa, Pablo Almanzar, Henry Rivas, Arturo Ramos",
+          "src": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | front-office | (off-season) | Travis Coles, John Ellis, Ernesto Quintero, Vladimir Gonzalez, Mike Paulson",
+          "src": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (off-season) | Benji Dillon, Vinnie Keane",
+          "src": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (off-season) | Isley Kelley, Darrin Davis, Danny Horn",
+          "src": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-01079",
+          "name": "Dillon Brooks",
+          "profile": "Dillon Brooks — SF / The Oaks — West Oakland",
+          "role": "SF / The Oaks",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Oakland_Sports_Feed.jsonl @C114",
+            "pop": "POP-01079",
+            "rowName": "Dillon Brooks",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01023",
+          "name": "Adash Stanley",
+          "profile": "Adash Stanley — PG / The Oaks — Downtown",
+          "role": "PG / The Oaks",
+          "hood": "Downtown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Oakland_Sports_Feed.jsonl @C114",
+            "pop": "POP-01023",
+            "rowName": "Adash Stanley",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01224",
+          "name": "Trevor Henderson",
+          "profile": "Trevor Henderson — Oakland Oaks - Center — Lake Merritt",
+          "role": "Oakland Oaks - Center",
+          "hood": "Lake Merritt",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Oakland_Sports_Feed.jsonl @C114",
+            "pop": "POP-01224",
+            "rowName": "Trevor Henderson",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01223",
+          "name": "Harry Hayward",
+          "profile": "Harry Hayward — Oakland Oaks - Power Forward — KONO",
+          "role": "Oakland Oaks - Power Forward",
+          "hood": "KONO",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Oakland_Sports_Feed.jsonl @C114",
+            "pop": "POP-01223",
+            "rowName": "Harry Hayward",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01027",
+          "name": "Austin Reaves",
+          "profile": "Austin Reaves — SG / The Oaks — West Oakland",
+          "role": "SG / The Oaks",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Oakland_Sports_Feed.jsonl @C114",
+            "pop": "POP-01027",
+            "rowName": "Austin Reaves",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00170",
+          "name": "Melton Neilon",
+          "profile": "Melton Neilon — Sourdough Baker",
+          "role": "Sourdough Baker",
+          "hood": "Temescal",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "9Egzmf732GbHQsYNhx7e4G",
+            "customId": "cp-POP-00170-c114-PRESS-wed-fgkakh",
+            "cycle": 114,
+            "excerpt": "To be honest, the Oaks' loss still has me a bit down, but I'm trying not to overthink it.",
+            "highlightKind": "game",
+            "entity": "Oaks",
+            "predicate": "watch"
+          }
+        },
+        {
+          "pop": "POP-00198",
+          "name": "Rick Walker",
+          "profile": "Rick Walker — K-8 Teacher,Former Line cook",
+          "role": "K-8 Teacher,Former Line cook",
+          "hood": "Fruitvale",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "mgXsax3i7irgmarYJpd9bp",
+            "customId": "cp-POP-00198-c106-PRESS",
+            "cycle": 106,
+            "excerpt": "I've heard some folks talking about Oaks analysis around the neighborhood, seems like people are trying to make sense of what's going on with the team, I'm just trying to keep up with the news like everyone else",
+            "highlightKind": "game",
+            "entity": "Oaks",
+            "predicate": "watch"
+          }
+        },
+        {
+          "pop": "POP-00201",
+          "name": "Elio Perez",
+          "profile": "Elio Perez — Server",
+          "role": "Server",
+          "hood": "Rockridge",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "jQ1x55AXJqEnBWBaUX2JyW",
+            "customId": "cp-POP-00201-c106-PRESS",
+            "cycle": 106,
+            "excerpt": "I've heard people talking about Oaks analysis around my neighborhood, it seems like everyone's got an opinion on it, I'm just trying to stay focused on my work and taking care of my family",
+            "highlightKind": "game",
+            "entity": "Oaks",
+            "predicate": "watch"
+          }
+        },
+        {
+          "pop": "POP-00212",
+          "name": "Jessie Hess",
+          "profile": "Jessie Hess — Barista",
+          "role": "Barista",
+          "hood": "Downtown",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "HyhQejEenARxJYxp93ae85",
+            "customId": "cp-POP-00212-c110-PRESS",
+            "cycle": 110,
+            "excerpt": "I was really hyped about the Oaks' starting five and their chances this season, but losing to the Miami Heat doesn't exactly fill me with confidence.",
+            "highlightKind": "game",
+            "entity": "Oaks",
+            "predicate": "watch"
+          }
+        },
+        {
+          "pop": "POP-00224",
+          "name": "Dillon Trevor",
+          "profile": "Dillon Trevor — Server",
+          "role": "Server",
+          "hood": "Downtown",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "4N7gJRG2ySYS7rsQyKK6ay",
+            "customId": "cp-POP-00224-c107-PRESS",
+            "cycle": 107,
+            "excerpt": "I've heard The Oaks are looking strong for the upcoming season, and I'm excited to see how they do.",
+            "highlightKind": "game",
+            "entity": "Oaks",
+            "predicate": "watch"
+          }
+        },
+        {
+          "pop": "POP-00273",
+          "name": "Trenton Nawan",
+          "profile": "Trenton Nawan — Server",
+          "role": "Server",
+          "hood": "Jack London",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "DxgQWWo7xsn1jhWWGHqTHD",
+            "customId": "cp-POP-00273-c113-PRESS",
+            "cycle": 113,
+            "excerpt": "I'm still a bit worried about the Oaks, but their 4-0 start is really giving me hope.",
+            "highlightKind": "game",
+            "entity": "Oaks",
+            "predicate": "watch"
+          }
+        },
+        {
+          "pop": "POP-00540",
+          "name": "Jade Orion",
+          "profile": "Jade Orion — Musician",
+          "role": "Musician",
+          "hood": "Lake Merritt",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "vAkesst5wo8wCX9mn7Rujt",
+            "customId": "cp-POP-00540-c102-PRESS",
+            "cycle": 102,
+            "excerpt": "Look, I don’t know what kind of \"fame-rise\" you’re talking about—I’m just a person who plays guitar at The Oaks sometimes and fixes my own appliances because rent isn’t cheap.",
+            "highlightKind": "game",
+            "entity": "Oaks",
+            "predicate": "watch"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C114",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-4261fa115617"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks ground read C114 — excited",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C114",
+        "id": "F-c9046150dcee"
+      },
+      {
+        "t": "FACT",
+        "text": "excited",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C114",
+        "id": "F-5153191d9f71"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks fans, C114: excited",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+        "id": "F-3b64a0b09383"
+      },
+      {
+        "t": "FACT",
+        "text": "Room mood, C114: locked-in",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+        "id": "F-cb95b554775e"
+      },
+      {
+        "t": "FACT",
+        "text": "Notebook (feed): The Oaks opened their first NBA Cup run at home in front of a sold-out crowd and held off the Oklahoma City Thunder, 101-95, behind Dillon Brooks' biggest scoring night as an Oak. The Oaks led after every quarter but never by much: 35-30 after one, 63-60 at the half and 78-74 after a 15-14 third. Brooks played 39 minutes and scored 22 on 8 of 15, hitting 6 of 9 from three, with 4 rebounds, 5 assists, 2 steals, a block and one turnover. In a game this close, his threes kept Oklah",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+        "id": "F-765fbf574097"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks — game-result (early-season), C114: Dillon Brooks' six threes carry the Oaks past OKC in the Cup opener. Oaks 101 - Thunder 95",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+        "id": "F-ba445558ac70"
+      },
+      {
+        "t": "FACT",
+        "text": "Context: record 6-1 · streak W2",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+        "id": "F-da2293861bb6"
+      },
+      {
+        "t": "FACT",
+        "text": "Home neighborhood (feed): KONO",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+        "id": "F-2256bbf517d6"
+      },
+      {
+        "t": "FACT",
+        "text": "Room mood, C114: confident",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+        "id": "F-c15d8ae6ed65"
+      },
+      {
+        "t": "FACT",
+        "text": "Notebook (feed): The rout in Toronto gave the rest of the roster a night. T. Henderson Jr. scored 14 in 12 minutes on 7 of 10 shooting, T. Jerome put up 19 points, 7 rebounds and 7 assists, J. Valančiūnas added 8 on 4 of 5, G. Trent Jr. had 7 and B. Simmons 5. J. Champagnie handed out 6 assists in 20 minutes, and B. James Jr. got a minute at the end. Every Oak who played scored except James, and the only DNPs were J. Tate and Coen Carr.",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+        "id": "F-2bab1cf916cf"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks — team-update (early-season), C114: Henderson, Jerome and the depth turn a rout into a showcase",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+        "id": "F-aade0efec3d2"
+      },
+      {
+        "t": "FACT",
+        "text": "Context: record 5-1 · streak W1",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+        "id": "F-8bc58150ae16"
+      },
+      {
+        "t": "FACT",
+        "text": "Home neighborhood (feed): San Antonio",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+        "id": "F-dd7238c21e3e"
+      },
+      {
+        "t": "FACT",
+        "text": "Room mood, C114: hungry",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+        "id": "F-d7765d9543a2"
+      },
+      {
+        "t": "FACT",
+        "text": "Notebook (feed): Harry Hayward's minutes went up again. After 13 minutes in Indiana he played 23 in Toronto and filled the line: 8 points on 3 of 5, 2 of 2 from three for the second game running, 5 rebounds, 3 assists, a steal and a block. After 12 in Detroit, a double-double in New York and 8 in Indiana, the second-round rookie looks more like a rotation piece every game.",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+        "id": "F-085518eb319f"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks — player-feature (early-season), C114: Harry Hayward's minutes keep climbing, from 13 to 23",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+        "id": "F-85a3093c09b7"
+      },
+      {
+        "t": "FACT",
+        "text": "Room mood, C114: dominant",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+        "id": "F-785b18144437"
+      },
+      {
+        "t": "FACT",
+        "text": "Notebook (feed): After the perfect start ended in Indiana, the Oaks went to Toronto and answered with the most lopsided win in franchise history, Oaks 135 - Raptors 75, in front of a 95% crowd. The Oaks led 39-19 after one, 73-40 at the half and 101-62 after three, and nobody played more than 28 minutes. Austin Reaves led with 20 on 4 of 6 from three, T. Jerome had 19 points, 7 rebounds and 7 assists, and Adash Stanley went 4 for 4 from three for 16 with 7 rebounds and 6 assists. Wendell Carter",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+        "id": "F-376707c1ea63"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks — game-result (early-season), C114: The Oaks bounce back with a 60-point rout in Toronto. Oaks 135 - Raptors 75",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+        "id": "F-4a561911637a"
+      },
+      {
+        "t": "FACT",
+        "text": "Notebook (feed): Five games in, rookie Harry Hayward is looking like a solid rotation piece. In 13 minutes in Indiana the second-round pick scored 8 points on 3 of 4 shooting, 2 of 2 from three, with 4 rebounds. It follows his 12-point night in Detroit and his 10-point, 10-rebound double-double in New York. Not bad for the name nobody talked about on draft night.",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+        "id": "F-b0732e8c4d22"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks — player-feature (early-season), C114: Second-round rookie Harry Hayward is shaping up as a solid rotation piece",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+        "id": "F-8d8756e17396"
+      },
+      {
+        "t": "FACT",
+        "text": "Context: record 4-1 · streak L1",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+        "id": "F-090ee441675e"
+      },
+      {
+        "t": "FACT",
+        "text": "Room mood, C114: frustrated",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+        "id": "F-fdc62721998f"
+      },
+      {
+        "t": "FACT",
+        "text": "Notebook (feed): The Oaks' perfect start ends at four. In Indiana, in front of a building at 90% capacity, the Pacers built a 61-42 halftime lead behind a 34-point second quarter and led 82-62 after three. The Oaks answered with 38 points in the fourth and won the quarter 38-22, but the comeback came up four short, Pacers 104 - Oaks 100. Adash Stanley and Austin Reaves led the way with 19 apiece. Stanley hit 5 of 11 from three, and Reaves had 7 assists and 6 rebounds without a turnover. AJ Dyban",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+        "id": "F-9540a78a8b78"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks — game-result (early-season), C114: The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+        "id": "F-1199dd5a6a90"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "street",
+    "candidates": [
+      {
+        "pop": "POP-01079",
+        "name": "Dillon Brooks",
+        "role": "SF / The Oaks",
+        "hood": "West Oakland",
+        "profile": "Dillon Brooks — SF / The Oaks — West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Oakland_Sports_Feed.jsonl @C114",
+          "pop": "POP-01079",
+          "rowName": "Dillon Brooks",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01023",
+        "name": "Adash Stanley",
+        "role": "PG / The Oaks",
+        "hood": "Downtown",
+        "profile": "Adash Stanley — PG / The Oaks  — Downtown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Oakland_Sports_Feed.jsonl @C114",
+          "pop": "POP-01023",
+          "rowName": "Adash Stanley",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01224",
+        "name": "Trevor Henderson",
+        "role": "Oakland Oaks - Center",
+        "hood": "Lake Merritt",
+        "profile": "Trevor Henderson — Oakland Oaks - Center — Lake Merritt",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Oakland_Sports_Feed.jsonl @C114",
+          "pop": "POP-01224",
+          "rowName": "Trevor Henderson",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01223",
+        "name": "Harry Hayward",
+        "role": "Oakland Oaks - Power Forward",
+        "hood": "KONO",
+        "profile": "Harry Hayward — Oakland Oaks - Power Forward — KONO",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Oakland_Sports_Feed.jsonl @C114",
+          "pop": "POP-01223",
+          "rowName": "Harry Hayward",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01027",
+        "name": "Austin Reaves",
+        "role": "SG / The Oaks",
+        "hood": "West Oakland",
+        "profile": "Austin Reaves — SG / The Oaks — West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Oakland_Sports_Feed.jsonl @C114",
+          "pop": "POP-01027",
+          "rowName": "Austin Reaves",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00170",
+        "name": "Melton Neilon",
+        "role": "Sourdough Baker",
+        "hood": "Temescal",
+        "profile": "Melton Neilon — Sourdough Baker",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "9Egzmf732GbHQsYNhx7e4G",
+          "customId": "cp-POP-00170-c114-PRESS-wed-fgkakh",
+          "cycle": 114,
+          "excerpt": "To be honest, the Oaks' loss still has me a bit down, but I'm trying not to overthink it.",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "To be honest, the Oaks' loss still has me a bit down, but I'm trying not to overthink it."
+      },
+      {
+        "pop": "POP-00198",
+        "name": "Rick Walker",
+        "role": "K-8 Teacher,Former Line cook",
+        "hood": "Fruitvale",
+        "profile": "Rick Walker — K-8 Teacher,Former Line cook",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "mgXsax3i7irgmarYJpd9bp",
+          "customId": "cp-POP-00198-c106-PRESS",
+          "cycle": 106,
+          "excerpt": "I've heard some folks talking about Oaks analysis around the neighborhood, seems like people are trying to make sense of what's going on with the team, I'm just trying to keep up with the news like everyone else",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "I've heard some folks talking about Oaks analysis around the neighborhood, seems like people are trying to make sense of what's going on with the team, I'm just trying to keep up with the news like everyone else"
+      },
+      {
+        "pop": "POP-00201",
+        "name": "Elio Perez",
+        "role": "Server",
+        "hood": "Rockridge",
+        "profile": "Elio Perez — Server",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "jQ1x55AXJqEnBWBaUX2JyW",
+          "customId": "cp-POP-00201-c106-PRESS",
+          "cycle": 106,
+          "excerpt": "I've heard people talking about Oaks analysis around my neighborhood, it seems like everyone's got an opinion on it, I'm just trying to stay focused on my work and taking care of my family",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "I've heard people talking about Oaks analysis around my neighborhood, it seems like everyone's got an opinion on it, I'm just trying to stay focused on my work and taking care of my family"
+      },
+      {
+        "pop": "POP-00212",
+        "name": "Jessie Hess",
+        "role": "Barista",
+        "hood": "Downtown",
+        "profile": "Jessie Hess — Barista",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "HyhQejEenARxJYxp93ae85",
+          "customId": "cp-POP-00212-c110-PRESS",
+          "cycle": 110,
+          "excerpt": "I was really hyped about the Oaks' starting five and their chances this season, but losing to the Miami Heat doesn't exactly fill me with confidence.",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "I was really hyped about the Oaks' starting five and their chances this season, but losing to the Miami Heat doesn't exactly fill me with confidence."
+      },
+      {
+        "pop": "POP-00224",
+        "name": "Dillon Trevor",
+        "role": "Server",
+        "hood": "Downtown",
+        "profile": "Dillon Trevor — Server",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "4N7gJRG2ySYS7rsQyKK6ay",
+          "customId": "cp-POP-00224-c107-PRESS",
+          "cycle": 107,
+          "excerpt": "I've heard The Oaks are looking strong for the upcoming season, and I'm excited to see how they do.",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "I've heard The Oaks are looking strong for the upcoming season, and I'm excited to see how they do."
+      },
+      {
+        "pop": "POP-00273",
+        "name": "Trenton Nawan",
+        "role": "Server",
+        "hood": "Jack London",
+        "profile": "Trenton Nawan — Server",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "DxgQWWo7xsn1jhWWGHqTHD",
+          "customId": "cp-POP-00273-c113-PRESS",
+          "cycle": 113,
+          "excerpt": "I'm still a bit worried about the Oaks, but their 4-0 start is really giving me hope.",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "I'm still a bit worried about the Oaks, but their 4-0 start is really giving me hope."
+      },
+      {
+        "pop": "POP-00540",
+        "name": "Jade Orion",
+        "role": "Musician",
+        "hood": "Lake Merritt",
+        "profile": "Jade Orion — Musician",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "vAkesst5wo8wCX9mn7Rujt",
+          "customId": "cp-POP-00540-c102-PRESS",
+          "cycle": 102,
+          "excerpt": "Look, I don’t know what kind of \"fame-rise\" you’re talking about—I’m just a person who plays guitar at The Oaks sometimes and fixes my own appliances because rent isn’t cheap.",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "Look, I don’t know what kind of \"fame-rise\" you’re talking about—I’m just a person who plays guitar at The Oaks sometimes and fixes my own appliances because rent isn’t cheap."
+      },
+      {
+        "pop": "POP-00642",
+        "name": "Ollie Campbell",
+        "role": "Bakery Worker",
+        "hood": "Jack London",
+        "profile": "Ollie Campbell — Bakery Worker",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "z6pDb5oTFZ317jUrVDT6oD",
+          "customId": "cp-POP-00642-c113-PRESS",
+          "cycle": 113,
+          "excerpt": "To be honest, I still feel the same way about the Oaks.",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "To be honest, I still feel the same way about the Oaks."
+      },
+      {
+        "pop": "POP-00722",
+        "name": "Daniel Cloak",
+        "role": "Bakery Worker",
+        "hood": "West Oakland",
+        "profile": "Daniel Cloak — Bakery Worker",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "uBnTZrbAsy2cgjJY5UAbsb",
+          "customId": "cp-POP-00722-c110-PRESS",
+          "cycle": 110,
+          "excerpt": "I still feel that way about the Oaks, they're trying to reach out and be part of the community, and that's something positive.",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "I still feel that way about the Oaks, they're trying to reach out and be part of the community, and that's something positive."
+      },
+      {
+        "pop": "POP-00794",
+        "name": "Irene Fay",
+        "role": "Barista",
+        "hood": "West Oakland",
+        "profile": "Irene Fay — Barista",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "toFvMTo3wqpDxkBBseRDVW",
+          "customId": "cp-POP-00794-c106-PRESS",
+          "cycle": 106,
+          "excerpt": "I feel like community engagement with the Oaks team is something I've heard about, but I don't really know much about it.",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "I feel like community engagement with the Oaks team is something I've heard about, but I don't really know much about it."
+      },
+      {
+        "pop": "POP-00961",
+        "name": "Darius Clark",
+        "role": "Bakery Worker",
+        "hood": "West Oakland",
+        "profile": "Darius Clark — Bakery Worker",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "eMYpZ1azxUV7vjTZvhkMiT",
+          "customId": "cp-POP-00961-c106-PRESS",
+          "cycle": 106,
+          "excerpt": "I feel like the community is pretty supportive of the Oaks team, I see people around here talking about them and it seems like they're trying to engage with us more.",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "I feel like the community is pretty supportive of the Oaks team, I see people around here talking about them and it seems like they're trying to engage with us more."
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Talia Finch",
+    "popid": "POP-00592"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-oaks-ground",
+      "angle": "Oaks ground read C114 — excited — the people around the second club",
+      "label": "Oaks ground read C114 — excited",
+      "hookLine": "excited",
+      "hood": "KONO",
+      "citizens": [
+        "Dillon Brooks (POP-01079)",
+        "Adash Stanley (POP-01023)",
+        "Trevor Henderson (POP-01224)",
+        "Harry Hayward (POP-01223)",
+        "Austin Reaves (POP-01027)"
+      ],
+      "popids": [
+        "POP-01079",
+        "POP-01023",
+        "POP-01224",
+        "POP-01223",
+        "POP-01027"
+      ],
+      "ref": "output/beats/Oakland_Sports_Feed.jsonl @C114",
+      "cycle": 114
+    },
+    "approach": "Oaks ground approach: this slice is what the Oaks feed says about the people — the mood in the room, the fans, the neighborhood around the park — with the record as context. First-person ground report. The moods and sentiments are feed rows, real; the walk to the park, the vendor, the kid with the glove are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "OAKS-GROUND-1",
+    "kind": "beat-oaks-ground",
+    "seat": {
+      "slug": "talia-finch",
+      "name": "Talia Finch",
+      "popid": "POP-00592",
+      "desk": "sports",
+      "domain": "oaks",
+      "builder": "buildOaksGroundSlice.js"
+    },
+    "hood": "KONO",
+    "pulse": {
+      "className": "beat-oaks-ground",
+      "score": 100,
+      "label": "Oaks ground read C114 — excited",
+      "hood": "KONO",
+      "source": "output/beats/Oakland_Sports_Feed.jsonl @C114"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "Oaks ground read C114 — excited — the people around the second club",
+      "hookLine": "excited",
+      "anchorFacts": [
+        "Oaks fans, C114: excited",
+        "Room mood, C114: locked-in",
+        "Notebook (feed): The Oaks opened their first NBA Cup run at home in front of a sold-out crowd and held off the Oklahoma City Thunder, 101-95, behind Dillon Brooks' biggest scoring night as an Oak. The Oaks led after every quarter but never by much: 35-30 after one, 63-60 at the half and 78-74 after a 15-14 third. Brooks played 39 minutes and scored 22 on 8 of 15, hitting 6 of 9 from three, with 4 rebounds, 5 assists, 2 steals, a block and one turnover. In a game this close, his threes kept Oklahoma City at arm's length. Adash Stanley added 21 and 6 assists and went 6 for 6 at the line, though he turned it over 6 times. Wendell Carter Jr. was nearly perfect, 8 of 9 for 19 points and 13 rebounds, and AJ Dybantsa ground out a 13-point, 10-rebound double-double on a 4 for 15 night. As a team the Oaks went 13 of 13 from the line. The Oaks move to 6-1 and 1-0 in Cup play.",
+        "Oaks — game-result (early-season), C114: Dillon Brooks' six threes carry the Oaks past OKC in the Cup opener. Oaks 101 - Thunder 95",
+        "Context: record 6-1 · streak W2",
+        "Home neighborhood (feed): KONO",
+        "Oaks fans, C114: excited",
+        "Room mood, C114: confident",
+        "Notebook (feed): The rout in Toronto gave the rest of the roster a night. T. Henderson Jr. scored 14 in 12 minutes on 7 of 10 shooting, T. Jerome put up 19 points, 7 rebounds and 7 assists, J. Valančiūnas added 8 on 4 of 5, G. Trent Jr. had 7 and B. Simmons 5. J. Champagnie handed out 6 assists in 20 minutes, and B. James Jr. got a minute at the end. Every Oak who played scored except James, and the only DNPs were J. Tate and Coen Carr.",
+        "Oaks — team-update (early-season), C114: Henderson, Jerome and the depth turn a rout into a showcase",
+        "Context: record 5-1 · streak W1",
+        "Home neighborhood (feed): San Antonio",
+        "Oaks fans, C114: excited",
+        "Room mood, C114: hungry",
+        "Notebook (feed): Harry Hayward's minutes went up again. After 13 minutes in Indiana he played 23 in Toronto and filled the line: 8 points on 3 of 5, 2 of 2 from three for the second game running, 5 rebounds, 3 assists, a steal and a block. After 12 in Detroit, a double-double in New York and 8 in Indiana, the second-round rookie looks more like a rotation piece every game.",
+        "Oaks — player-feature (early-season), C114: Harry Hayward's minutes keep climbing, from 13 to 23",
+        "Context: record 5-1 · streak W1",
+        "Home neighborhood (feed): San Antonio",
+        "Oaks fans, C114: excited",
+        "Room mood, C114: dominant",
+        "Notebook (feed): After the perfect start ended in Indiana, the Oaks went to Toronto and answered with the most lopsided win in franchise history, Oaks 135 - Raptors 75, in front of a 95% crowd. The Oaks led 39-19 after one, 73-40 at the half and 101-62 after three, and nobody played more than 28 minutes. Austin Reaves led with 20 on 4 of 6 from three, T. Jerome had 19 points, 7 rebounds and 7 assists, and Adash Stanley went 4 for 4 from three for 16 with 7 rebounds and 6 assists. Wendell Carter Jr. owned the glass with 14 points and 15 rebounds, 5 of them offensive. The Oaks shot 57 of 91, 19 of 28 from three, handed out 34 assists and turned it over only twice. The Oaks move to 5-1.",
+        "Oaks — game-result (early-season), C114: The Oaks bounce back with a 60-point rout in Toronto. Oaks 135 - Raptors 75",
+        "Context: record 5-1 · streak W1",
+        "Home neighborhood (feed): San Antonio",
+        "Oaks fans, C114: excited",
+        "Room mood, C114: hungry",
+        "Notebook (feed): Five games in, rookie Harry Hayward is looking like a solid rotation piece. In 13 minutes in Indiana the second-round pick scored 8 points on 3 of 4 shooting, 2 of 2 from three, with 4 rebounds. It follows his 12-point night in Detroit and his 10-point, 10-rebound double-double in New York. Not bad for the name nobody talked about on draft night.",
+        "Oaks — player-feature (early-season), C114: Second-round rookie Harry Hayward is shaping up as a solid rotation piece",
+        "Context: record 4-1 · streak L1",
+        "Home neighborhood (feed): San Antonio",
+        "Oaks fans, C114: excited",
+        "Room mood, C114: frustrated",
+        "Notebook (feed): The Oaks' perfect start ends at four. In Indiana, in front of a building at 90% capacity, the Pacers built a 61-42 halftime lead behind a 34-point second quarter and led 82-62 after three. The Oaks answered with 38 points in the fourth and won the quarter 38-22, but the comeback came up four short, Pacers 104 - Oaks 100. Adash Stanley and Austin Reaves led the way with 19 apiece. Stanley hit 5 of 11 from three, and Reaves had 7 assists and 6 rebounds without a turnover. AJ Dybantsa added 15, Wendell Carter Jr. went 5 for 6 for 10 points and 7 rebounds, and T. Jerome chipped in 10 points and 5 assists. The Oaks fall to 4-1.",
+        "Oaks — game-result (early-season), C114: The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+        "Context: record 4-1 · streak L1",
+        "Home neighborhood (feed): San Antonio"
+      ],
+      "evidence": [
+        {
+          "text": "Oaks fans, C114: excited",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+        },
+        {
+          "text": "Room mood, C114: locked-in",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+        },
+        {
+          "text": "Notebook (feed): The Oaks opened their first NBA Cup run at home in front of a sold-out crowd and held off the Oklahoma City Thunder, 101-95, behind Dillon Brooks' biggest scoring night as an Oak. The Oaks led after every quarter but never by much: 35-30 after one, 63-60 at the half and 78-74 after a 15-14 third. Brooks played 39 minutes and scored 22 on 8 of 15, hitting 6 of 9 from three, with 4 rebounds, 5 assists, 2 steals, a block and one turnover. In a game this close, his threes kept Oklahoma City at arm's length. Adash Stanley added 21 and 6 assists and went 6 for 6 at the line, though he turned it over 6 times. Wendell Carter Jr. was nearly perfect, 8 of 9 for 19 points and 13 rebounds, and AJ Dybantsa ground out a 13-point, 10-rebound double-double on a 4 for 15 night. As a team the Oaks went 13 of 13 from the line. The Oaks move to 6-1 and 1-0 in Cup play.",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+        },
+        {
+          "text": "Oaks — game-result (early-season), C114: Dillon Brooks' six threes carry the Oaks past OKC in the Cup opener. Oaks 101 - Thunder 95",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+        },
+        {
+          "text": "Context: record 6-1 · streak W2",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+        },
+        {
+          "text": "Home neighborhood (feed): KONO",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+        },
+        {
+          "text": "Oaks fans, C114: excited",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+        },
+        {
+          "text": "Room mood, C114: confident",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+        },
+        {
+          "text": "Notebook (feed): The rout in Toronto gave the rest of the roster a night. T. Henderson Jr. scored 14 in 12 minutes on 7 of 10 shooting, T. Jerome put up 19 points, 7 rebounds and 7 assists, J. Valančiūnas added 8 on 4 of 5, G. Trent Jr. had 7 and B. Simmons 5. J. Champagnie handed out 6 assists in 20 minutes, and B. James Jr. got a minute at the end. Every Oak who played scored except James, and the only DNPs were J. Tate and Coen Carr.",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+        },
+        {
+          "text": "Oaks — team-update (early-season), C114: Henderson, Jerome and the depth turn a rout into a showcase",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+        },
+        {
+          "text": "Context: record 5-1 · streak W1",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+        },
+        {
+          "text": "Home neighborhood (feed): San Antonio",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+        },
+        {
+          "text": "Oaks fans, C114: excited",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+        },
+        {
+          "text": "Room mood, C114: hungry",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+        },
+        {
+          "text": "Notebook (feed): Harry Hayward's minutes went up again. After 13 minutes in Indiana he played 23 in Toronto and filled the line: 8 points on 3 of 5, 2 of 2 from three for the second game running, 5 rebounds, 3 assists, a steal and a block. After 12 in Detroit, a double-double in New York and 8 in Indiana, the second-round rookie looks more like a rotation piece every game.",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+        },
+        {
+          "text": "Oaks — player-feature (early-season), C114: Harry Hayward's minutes keep climbing, from 13 to 23",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+        },
+        {
+          "text": "Context: record 5-1 · streak W1",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+        },
+        {
+          "text": "Home neighborhood (feed): San Antonio",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+        },
+        {
+          "text": "Oaks fans, C114: excited",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+        },
+        {
+          "text": "Room mood, C114: dominant",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+        },
+        {
+          "text": "Notebook (feed): After the perfect start ended in Indiana, the Oaks went to Toronto and answered with the most lopsided win in franchise history, Oaks 135 - Raptors 75, in front of a 95% crowd. The Oaks led 39-19 after one, 73-40 at the half and 101-62 after three, and nobody played more than 28 minutes. Austin Reaves led with 20 on 4 of 6 from three, T. Jerome had 19 points, 7 rebounds and 7 assists, and Adash Stanley went 4 for 4 from three for 16 with 7 rebounds and 6 assists. Wendell Carter Jr. owned the glass with 14 points and 15 rebounds, 5 of them offensive. The Oaks shot 57 of 91, 19 of 28 from three, handed out 34 assists and turned it over only twice. The Oaks move to 5-1.",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+        },
+        {
+          "text": "Oaks — game-result (early-season), C114: The Oaks bounce back with a 60-point rout in Toronto. Oaks 135 - Raptors 75",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+        },
+        {
+          "text": "Context: record 5-1 · streak W1",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+        },
+        {
+          "text": "Home neighborhood (feed): San Antonio",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+        },
+        {
+          "text": "Oaks fans, C114: excited",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+        },
+        {
+          "text": "Room mood, C114: hungry",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+        },
+        {
+          "text": "Notebook (feed): Five games in, rookie Harry Hayward is looking like a solid rotation piece. In 13 minutes in Indiana the second-round pick scored 8 points on 3 of 4 shooting, 2 of 2 from three, with 4 rebounds. It follows his 12-point night in Detroit and his 10-point, 10-rebound double-double in New York. Not bad for the name nobody talked about on draft night.",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+        },
+        {
+          "text": "Oaks — player-feature (early-season), C114: Second-round rookie Harry Hayward is shaping up as a solid rotation piece",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+        },
+        {
+          "text": "Context: record 4-1 · streak L1",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+        },
+        {
+          "text": "Home neighborhood (feed): San Antonio",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+        },
+        {
+          "text": "Oaks fans, C114: excited",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+        },
+        {
+          "text": "Room mood, C114: frustrated",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+        },
+        {
+          "text": "Notebook (feed): The Oaks' perfect start ends at four. In Indiana, in front of a building at 90% capacity, the Pacers built a 61-42 halftime lead behind a 34-point second quarter and led 82-62 after three. The Oaks answered with 38 points in the fourth and won the quarter 38-22, but the comeback came up four short, Pacers 104 - Oaks 100. Adash Stanley and Austin Reaves led the way with 19 apiece. Stanley hit 5 of 11 from three, and Reaves had 7 assists and 6 rebounds without a turnover. AJ Dybantsa added 15, Wendell Carter Jr. went 5 for 6 for 10 points and 7 rebounds, and T. Jerome chipped in 10 points and 5 assists. The Oaks fall to 4-1.",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+        },
+        {
+          "text": "Oaks — game-result (early-season), C114: The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+        },
+        {
+          "text": "Context: record 4-1 · streak L1",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+        },
+        {
+          "text": "Home neighborhood (feed): San Antonio",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C114"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": null,
+      "hooks": [],
+      "note": null,
+      "pageVoices": [],
+      "roomIsYours": "the walk from the bus stop, the vendor who knows the regulars, what the crowd sounds like when the club is losing, the kid waiting by the tunnel"
+    },
+    "citizens": [
+      {
+        "popid": "POP-01079",
+        "name": "Dillon Brooks",
+        "role": "SF / The Oaks",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "Dillon Brooks — SF / The Oaks — West Oakland",
+        "why": "named on the Oaks feed C114 (Oakland_Sports_Feed)"
+      },
+      {
+        "popid": "POP-01023",
+        "name": "Adash Stanley",
+        "role": "PG / The Oaks ",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Adash Stanley — PG / The Oaks  — Downtown",
+        "why": "named on the Oaks feed C114 (Oakland_Sports_Feed)"
+      },
+      {
+        "popid": "POP-01224",
+        "name": "Trevor Henderson",
+        "role": "Oakland Oaks - Center",
+        "neighborhood": "Lake Merritt",
+        "business": null,
+        "profile": "Trevor Henderson — Oakland Oaks - Center — Lake Merritt",
+        "why": "named on the Oaks feed C114 (Oakland_Sports_Feed)"
+      },
+      {
+        "popid": "POP-01223",
+        "name": "Harry Hayward",
+        "role": "Oakland Oaks - Power Forward",
+        "neighborhood": "KONO",
+        "business": null,
+        "profile": "Harry Hayward — Oakland Oaks - Power Forward — KONO",
+        "why": "named on the Oaks feed C114 (Oakland_Sports_Feed)"
+      },
+      {
+        "popid": "POP-01027",
+        "name": "Austin Reaves",
+        "role": "SG / The Oaks",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "Austin Reaves — SG / The Oaks — West Oakland",
+        "why": "named on the Oaks feed C114 (Oakland_Sports_Feed)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Oakland_Sports_Feed.jsonl @C114"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Talia Finch",
+    "popid": "POP-00592",
+    "text": "I'm heading to the Oaks game tonight to capture the energy around the second club. The Oaks are on a roll, and I want to see how the fans are reacting. Dillon Brooks' performance against OKC was a highlight, and I'm curious to know if his momentum continues. I'll be talking to fans, checking out the neighborhood around the park, and getting a feel for the mood in the room.",
+    "plan": {
+      "chase": "I'm heading to the Oaks game tonight to capture the energy around the second club. The Oaks are on a roll, and I want to see how the fans are reacting. Dillon Brooks' performance against OKC was a highlight, and I'm curious to know if his momentum continues. I'll be talking to fans, checking out the neighborhood around the park, and getting a feel for the mood in the room.",
+      "focus": "Oaks fans and their reaction to the team's recent performance",
+      "why": "The Oaks are 6-1 and on a 2-game winning streak, and I want to understand how the fans are responding to their success",
+      "checks": [
+        "Fans' sentiment around the second club",
+        "The neighborhood around the park"
+      ],
+      "targets": [
+        {
+          "pop": "POP-01079",
+          "question": "How are fans reacting to Dillon Brooks' recent performance?",
+          "basis": "Dillon Brooks' six threes carried the Oaks past OKC in the Cup opener"
+        },
+        {
+          "pop": "POP-01023",
+          "question": "What's the mood like among fans after the Oaks' win against OKC?",
+          "basis": "Adash Stanley added 21 points and 6 assists in the win against OKC"
+        },
+        {
+          "pop": "POP-00273",
+          "question": "How are fans in Jack London reacting to the Oaks' early-season success?",
+          "basis": "Trenton Nawan is a server in Jack London and has mentioned being worried about the Oaks but hopeful after their 4-0 start"
+        }
+      ],
+      "interpretation": "The Oaks' recent success is likely to have a positive impact on fan sentiment, but I need to gauge the mood around the second club to confirm",
+      "unverifiedLead": [
+        "The energy around the second club might be electric given the Oaks' winning streak"
+      ],
+      "closeQuestion": "Will the Oaks' momentum continue, and how will fans react if they keep winning?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "A's | rumor | (off-season) | Ian Devine, Louis Cross, Hitoki Ka, Mariano Rosales, Clark Saryan, Julio Valencia",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01082",
+        "POP-01080",
+        "POP-01081",
+        "POP-00555",
+        "POP-00052",
+        "POP-00077"
+      ]
+    },
+    {
+      "label": "A's | rumor | (off-season) | Carmen Mesa, Pablo Almanzar, Henry Rivas, Arturo Ramos",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00081",
+        "POP-01078",
+        "POP-00024",
+        "POP-00025"
+      ]
+    },
+    {
+      "label": "A's | front-office | (off-season) | Travis Coles, John Ellis, Ernesto Quintero, Vladimir Gonzalez, Mike Paulson",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00533",
+        "POP-00033",
+        "POP-00050",
+        "POP-00598",
+        "POP-00527"
+      ]
+    },
+    {
+      "label": "A's | player-feature | (off-season) | Benji Dillon, Vinnie Keane",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00018",
+        "POP-00001"
+      ]
+    },
+    {
+      "label": "A's | player-feature | (off-season) | Isley Kelley, Darrin Davis, Danny Horn",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00019",
+        "POP-00021",
+        "POP-00022"
+      ]
+    }
+  ],
+  "laneEntries": 15,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-05T12:16:33.031Z"
+}

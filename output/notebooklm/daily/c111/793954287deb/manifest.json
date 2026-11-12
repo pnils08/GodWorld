@@ -1,0 +1,122 @@
+{
+  "artifactClass": "NLM_DAILY_RUN",
+  "sourceVersion": "1.7",
+  "canonStatus": "NOT_CANON",
+  "cycle": 111,
+  "generatedAt": "2026-10-17T20:23:45.428Z",
+  "lastAttemptAt": "2026-10-17T20:48:44.727Z",
+  "hours": 36,
+  "packHash": "793954287debcffe9d04e0d69b02b776254ad56ede8138c94cad1a846c9d4ac7",
+  "worldSummary": "output/world_summary_c111.md",
+  "citizenDigest": "output/citizen-day-digest.md",
+  "reports": [
+    {
+      "classification": "FLAGGED",
+      "path": "output/cron-compare/flagged/history/wire_c111_celeste-tran_packet-v2_x-ai-grok-4-3.superseded-failure.20261017170003.md"
+    },
+    {
+      "classification": "FLAGGED",
+      "path": "output/cron-compare/flagged/wire_c111_celeste-tran_packet-v2_x-ai-grok-4-3.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/culture_c111_kai-marston_packet-v2_anthropic-claude-haiku-5-5.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/culture_c111_maria-keen_packet-v2_anthropic-claude-sonnet-5-5.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/culture_c111_mason-ortega_packet-v2_x-ai-grok-4-3.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/culture_c111_sharon-okafor_packet-v2_openai-gpt-5-6-luna.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/undocked_c111_nia-rook_packet-v2_x-ai-grok-4-3.staged-2319.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/undocked-digest_c111_nia-rook-weekly_packet-v2_x-ai-grok-4-3.staged.md"
+    }
+  ],
+  "flaggedReports": [
+    "output/cron-compare/flagged/wire_c111_celeste-tran_packet-v2_x-ai-grok-4-3.flags.json"
+  ],
+  "routingShadow": {
+    "version": "NLM-DAILY-ROUTER/1",
+    "mode": "shadow",
+    "profile": "REPORTED_DAY",
+    "format": "deep_dive",
+    "length": "default",
+    "activationEligible": true,
+    "reportedDayThreshold": 3,
+    "sourceClasses": [
+      "WORLD_STATE",
+      "CITIZEN_DIGEST",
+      "W1_CHASE",
+      "W2_QUOTES",
+      "W3_PASSED",
+      "FLAGGED_DISPOSITION",
+      "ENGINE_CIVIC_SIGNAL"
+    ],
+    "reasonCodes": [
+      "RHEA_PASSED_6",
+      "REPORTED_THRESHOLD_MET_3"
+    ],
+    "dispositionCounts": {
+      "passed": 6,
+      "rheaFlagged": 1,
+      "neverGated": 0
+    },
+    "fingerprint": "d9977d3d303d3cc7e5334410df40a8bc0d784c11060ab258daaa8e2691790117"
+  },
+  "newsroomPulse": {
+    "fingerprint": "a16428bb62ca85407aa67366355cc6cf61838cc3e03edfea24eaa88cb28dad97",
+    "counts": {
+      "angles": 7,
+      "asks": 5,
+      "fanoutAssignments": 6,
+      "w2Ready": 4,
+      "quotes": 13,
+      "passed": 6,
+      "rheaFlagged": 1,
+      "neverGated": 0,
+      "flagged": 1,
+      "pending": 0
+    },
+    "priorCompletedCycle": null
+  },
+  "archiveNotebookId": "417e2d29-4167-420f-a9cc-76fb6b2b7de2",
+  "newsroomNotebookId": "73cd50b5-4b8f-4329-bb42-0783c8d93763",
+  "dryRun": false,
+  "archiveScope": {
+    "cycles": [
+      110,
+      109
+    ],
+    "sourceIds": [
+      "3448ce79-e222-46ed-a8b0-6adc8e35429e",
+      "7d5a94fd-e689-41d6-a444-d266c9ddcafb"
+    ]
+  },
+  "boundedSourceHash": "3c2142279ef2a8ff11663691ce021f18317fc67695bdfa7f246175c67025e0b6",
+  "boundedSource": "output/notebooklm/daily/c111/793954287deb/bounded-newsroom-source.md",
+  "sourceIds": [
+    "3663ab41-a3f6-4d99-882b-48491a590ab4"
+  ],
+  "audioDirectionSourceId": "4c721eae-6e1a-4e01-b845-285b6d0ceb81",
+  "audioPresentation": {
+    "format": "deep_dive",
+    "length": "default",
+    "source": "router",
+    "profile": "REPORTED_DAY"
+  },
+  "audioArtifactId": "3dd5ea19-b92a-46ea-afe6-da9cbacb46f7",
+  "audioPath": "output/notebooklm/daily/c111/793954287deb/godworld_daily_c111.m4a",
+  "driveLink": "https://drive.google.com/file/d/1FXESNZPnXzppWBecpBE8rwQm4qpj951h/view?usp=drivesdk",
+  "opsReportArtifactId": "b3228034-6840-49e4-826a-06bb614e74dc"
+}

@@ -1,0 +1,26 @@
+{
+  "cycle": 115,
+  "pass": true,
+  "deterministicPass": true,
+  "sanityStatus": "pass",
+  "failures": [],
+  "touchedInitiatives": [
+    "INIT-005",
+    "INIT-001",
+    "INIT-002",
+    "INIT-003",
+    "INIT-006",
+    "INIT-007",
+    "INIT-009",
+    "INIT-010",
+    "INIT-014",
+    "candidate:MV-114-civic-office-council-d9-2026-11-05"
+  ],
+  "maxRows": 13,
+  "sanity": {
+    "pass": true,
+    "issues": []
+  },
+  "model": "anthropic/claude-haiku-5.5",
+  "ranAt": "2026-11-09T07:27:10.201Z"
+}

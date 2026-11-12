@@ -373,6 +373,13 @@ async function main() {
   if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
   const outPath = path.join(outDir, 'female_balance_ingest_c92.json');
 
+  // engine.339 (codex review H3): the composed rows' family cells are gated BEFORE any append — single, no children
+  {
+    const iMS = headers.indexOf('MaritalStatus'), iNC = headers.indexOf('NumChildren');
+    const familyBad = composedRows.filter(r => r[iMS] !== 'single' || r[iNC] !== 0).length;
+    if (iMS < 0 || iNC < 0 || familyBad) throw new Error('composed rows: MaritalStatus/NumChildren columns missing or not single/0 (' + familyBad + ' bad) — refusing to continue');
+  }
+
   // ─── Apply (if --apply) ──────────────────────────────────────────────────
   if (apply) {
     console.log(`\nAppending ${composedRows.length} rows to ${SHEET}...`);
@@ -386,7 +393,9 @@ async function main() {
     const iVerifyPopid = verifyHeaders.indexOf('POPID');
     const iVerifyGender = verifyHeaders.indexOf('Gender');
 
+    const iVerifyMS = verifyHeaders.indexOf('MaritalStatus'), iVerifyNC = verifyHeaders.indexOf('NumChildren');
     let landedInRange = 0;
+    let landedFamilyOk = 0; // engine.339: typed readback of the family cells
     let landedFemale = 0;
     let totalFemaleAfter = 0;
     let totalAfter = 0;
@@ -397,6 +406,7 @@ async function main() {
       const g = String(vrow[iVerifyGender] || '').trim().toLowerCase();
       if (n >= startNum && n <= endNum) {
         landedInRange++;
+        if (String(vrow[iVerifyMS]) === 'single' && Number(vrow[iVerifyNC]) === 0) landedFamilyOk++;
         if (g === 'female') landedFemale++;
       }
       totalAfter++;
@@ -407,6 +417,7 @@ async function main() {
     audit.appliedAt = new Date().toISOString();
     audit.verification = {
       landedInRange,
+      landedFamilyOk,
       landedFemale,
       totalRowsAfter: totalAfter,
       totalFemaleAfter,
@@ -415,12 +426,13 @@ async function main() {
 
     console.log(`Verification:`);
     console.log(`  Rows landed in target range: ${landedInRange} / ${TARGET_COUNT}`);
+    console.log(`  Rows landed single / 0 children: ${landedFamilyOk} / ${TARGET_COUNT}`);
     console.log(`  Of those, female:            ${landedFemale} / ${TARGET_COUNT}`);
     console.log(`  Total rows after:            ${totalAfter}`);
     console.log(`  Total female after:          ${totalFemaleAfter}`);
     console.log(`  Female share post-apply:     ${audit.verification.femaleSharePct}%`);
 
-    if (landedInRange !== TARGET_COUNT || landedFemale !== TARGET_COUNT) {
+    if (landedInRange !== TARGET_COUNT || landedFemale !== TARGET_COUNT || landedFamilyOk !== TARGET_COUNT) {
       console.error('VERIFICATION FAILED — readback does not match expected.');
       fs.writeFileSync(outPath, JSON.stringify(audit, null, 2));
       process.exit(1);

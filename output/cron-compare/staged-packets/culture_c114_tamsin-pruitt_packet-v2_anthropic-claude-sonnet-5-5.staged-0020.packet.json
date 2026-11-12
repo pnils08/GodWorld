@@ -1,0 +1,974 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-01210",
+    "name": "Tamsin Pruitt",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "The lives of C114: 9 people — Tyler Filet moved into a place of their own in Lake Merritt, renting",
+    "approach": "Lives approach: this slice is the people something happened to this Cycle — a birth, a death in the house, a hospital stay, a retirement, a promotion; a household set up or a place of their own; a win or a loss on the book; the people a turn of the city reached and what it did to their day; and the smaller moments the record kept. Each person gets their own passage: the event, then the thread under it — the stay or strain that led there, the other lines the record kept for them, what the Tribune or this page already said of them, and what they did next if the record says. Read the thread in order and name where two lines of it do not agree; do not restate a ledger value as the story. The fact exactly right; never a trend, never a number first; the person, not the system the event belongs to. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent p",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "lives",
+      "hood": null,
+      "facts": [
+        "Tyler Filet moved into a place of their own in Lake Merritt, renting (C114)",
+        "Tyler Filet — in their life, C113: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+        "Tyler Filet — in their life, C113: caught a stranger humming their song and felt briefly, wrongly, known",
+        "Tyler Filet — in their life, C114: couldn't sleep for the wind rattling the window frame near a front porch",
+        "Tyler Filet — in their life, C114: wondered if a decision from years back had been the right one",
+        "Kenji Okafor moved into a place of their own in Rockridge, renting (C114)",
+        "Kenji Okafor — in their life, C113: navigated the stroller traffic on College Avenue and silently judged the parking jobs",
+        "Kenji Okafor — in their life, C114: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard near a bookstore corner",
+        "Kenji Okafor — in their life, C114: reorganized a closet and found something thought lost",
+        "Kenji Okafor — in their life, C114: caught the Oaks chatter at the gym and joined in like a regular",
+        "Jett Walker — rewound the belt haul on the walk home and smiled at nothing in particular, Rockridge — one of 4 people the Cycle's civic turn reached (Service disruption — BART train: stalled train in Rockridge (last week): on-time fell to 76%, worst around Rockridge, Fruitvale, West…) (C114)",
+        "Jett Walker — in their life, C113: enjoyed the clear skies",
+        "Jett Walker — in their life, C113: watched an old man feed pigeons like a ritual and wondered what theirs was",
+        "Jett Walker — in their life, C114: kept a spare trap gasket in every pocket and used one before lunch",
+        "Jett Walker — in their life, C114: discovered new local artists",
+        "Jett Walker — Lives already wrote this person: a moment the record kept (C113)",
+        "Jett Walker — the Tribune named them in a piece headlined Temescal's Ledger Is Growing. The Question Is Who It's Growing For. (Business, C113)",
+        "Tobert Lewis — read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots, Downtown — one of 4 people the Cycle's safety turn reached (The Downtown Transit Snarl — Downtown under strain: transit disruption; housing pressure 10.00 (city 2.41)) (C114)",
+        "Tobert Lewis — in their life, C114: badged into the Baylight office early and tried not to think about the protestors from last month",
+        "Tobert Lewis — in their life, C114: Downtown is thriving, with events drawing crowds and new faces adding to the vibrant mix of the neighborhood.",
+        "Graciela Foster — checked out First Friday galleries, Uptown — one of 4 people the Cycle's safety turn reached (An accident on the job floor — a stretcher out the loading door.) (C114)",
+        "Graciela Foster — in their life, C113: the for-rent signs outnumbered the welcome mats this month",
+        "Graciela Foster — in their life, C113: bought a new A's jersey and a sense of anticipation hangs in the air",
+        "Graciela Foster — in their life, C114: caught the coffee order coming out of their mouth before deciding to order it near a venue doorway",
+        "Graciela Foster — in their life, C114: moved from Uptown to East Oakland — moving for a better fit between household income and housing costs",
+        "Derek Obi — moved from Downtown to Rockridge — moving up from Downtown — sold the house in Downtown to rent up, Rockridge (C114 — what happened in their life, not words they said)",
+        "Derek Obi — in their life, C113: felt a lift at Miso Metro after the win",
+        "Derek Obi — in their life, C113: stayed thirty minutes after the service just catching up in the parking lot",
+        "Derek Obi — the Tribune named them in a piece headlined Uptown's Two Speeds: The Block Moves Faster Than the Store (Business, C112)",
+        "Derek Obi — the Tribune named them in a piece headlined FAMOUS FACES — CYCLE 70 (Arts, C70)",
+        "Derek Obi — the Tribune named them in a piece headlined FAMOUS FACES — CYCLE 72 (Arts, C70)",
+        "Patrice Rao — moved from Chinatown to West Oakland — moving up from Chinatown, West Oakland (C114 — what happened in their life, not words they said)",
+        "Patrice Rao — in their life, C114: wondered when exactly they became the adult in the room",
+        "Patrice Rao — in their life, C114: discovered new local artists",
+        "Patrice Rao — in their life, C114: knew the rules cold — two nights in the chair, the galaxy keeps the score, the board adds it up — and had never been drawn",
+        "Jerome Lindqvist — graduated with their class in a joyful spring celebration, Fruitvale (C114 — what happened in their life, not words they said)",
+        "Jerome Lindqvist — in their life, C113: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+        "Jerome Lindqvist — in their life, C114: watched the morning shuttles roll along the waterfront into the Baylight District and timed their own walk to beat them",
+        "Jerome Lindqvist — in their life, C114: kept score by hand at the kitchen table the way their father taught them near a vendor by the transit stop",
+        "Jerome Lindqvist — in their life, C114: enjoyed Fruitvale's community atmosphere",
+        "Priscilla Chang — walked across the stage at their commencement ceremony, Fruitvale (C114 — what happened in their life, not words they said)",
+        "Priscilla Chang — in their life, C113: saved the Tribune clipping with their neighborhood in it — the good one",
+        "Priscilla Chang — in their life, C113: the city buzzes with energy after the A's third straight win, fans wearing green and gold everywhere.",
+        "Priscilla Chang — in their life, C114: ran the numbers on staying put another year"
+      ],
+      "priorCycle": null,
+      "note": "none of today's people has written their own page this Cycle — no quotes",
+      "engineHooks": [
+        "A family bought their home in Rockridge (observational analysis)",
+        "The Thompson household (2) moved from Chinatown to West Oakland — moving up from Chinatown (desk rotation)",
+        "Derek Obi moved from Downtown to Rockridge — moving up from Downtown — sold the house in Downtown to rent up (desk rotation)",
+        "Patrice Rao moved from Chinatown to West Oakland — moving up from Chinatown (observational analysis)"
+      ],
+      "roomIsYours": "the plain respect, what the event meant in that house or on that block, the detail the family would have picked — from the lines below, never invented",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-lives",
+    "hood": null,
+    "src": "output/beats/Lived_Events.jsonl @C114 batch f2cb79",
+    "plan": {
+      "focus": "Lives of C114: 9 people",
+      "closeQuestion": "How do the life events of these nine individuals reflect the broader changes and trends in their respective neighborhoods?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00447",
+        "name": "Tyler Filet",
+        "profile": "Tyler Filet — Biotech Lab Director (Portside Bio) — Lake Merritt",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00460",
+        "name": "Kenji Okafor",
+        "profile": "Kenji Okafor — Patent Attorney — Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00230",
+        "name": "Jett Walker",
+        "profile": "Jett Walker — Plumber — Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00344",
+        "name": "Tobert Lewis",
+        "profile": "Tobert Lewis — Civil Rights Attorney — Downtown",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00447-082453ff9a",
+        "pop": "POP-00447",
+        "name": "Tyler Filet",
+        "quote": "I moved into my place in Lake Merritt and it's been a real adjustment. The other night, the wind was rattling the window frame near the front porch and I couldn't sleep. It got me thinking about some of the decisions I've made, wondering if they were the right ones. I've been seeing some familiar faces around the neighborhood, like Vinnie Keane at Grand Avenue Wine Bar. It's nice to have some continuity.",
+        "factIds": [
+          "F-5372481ba7c7",
+          "F-64f55100254e",
+          "F-07544e0ac669"
+        ],
+        "src": "packet.W2[POP-00447]"
+      },
+      {
+        "id": "Q-POP-00460-4159e7cfff",
+        "pop": "POP-00460",
+        "name": "Kenji Okafor",
+        "quote": "I've been feeling pretty settled in Rockridge. I attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard, which was a positive experience. It's nice to be involved in the community.",
+        "factIds": [
+          "F-a4a2f8c20dda",
+          "F-4e79a2884022",
+          "F-2eeb13d603ae"
+        ],
+        "src": "packet.W2[POP-00460]"
+      },
+      {
+        "id": "Q-POP-00230-137bca0a75",
+        "pop": "POP-00230",
+        "name": "Jett Walker",
+        "quote": "To be honest, the BART train disruption was just a minor frustration for me. I've gotten used to it around here. I rewound the belt haul on my walk home and didn't think much of it.",
+        "factIds": [
+          "F-ae719a48c3c6"
+        ],
+        "src": "packet.W2[POP-00230]"
+      },
+      {
+        "id": "Q-POP-00344-7f8beeaf38",
+        "pop": "POP-00344",
+        "name": "Tobert Lewis",
+        "quote": "I read the flyer for the Oakland Youth Apprenticeship Pipeline and honestly, I wondered who was actually going to get those spots. It's great they're offering opportunities, but I've seen programs like this before where the benefits don't always reach the kids who need them most.",
+        "factIds": [
+          "F-65d724df07ee",
+          "F-5663316a0fee"
+        ],
+        "src": "packet.W2[POP-00344]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Tamsin Pruitt",
+        "text": "The impact of the Fruitvale Transit Hub Phase II on the community",
+        "usable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "The effect of the A's performance on local morale",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C114",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-4261fa115617"
+    },
+    {
+      "t": "FACT",
+      "text": "Tyler Filet moved into a place of their own in Lake Merritt, renting",
+      "src": "output/beats/Lived_Events.jsonl @C114 batch f2cb79",
+      "id": "F-7b19c1a21c8e"
+    },
+    {
+      "t": "FACT",
+      "text": "Tyler Filet first. The event is the lead; one true detail; what came next only if the record says.",
+      "src": "output/beats/Lived_Events.jsonl @C114 batch f2cb79",
+      "id": "F-a0cb069b7a44"
+    },
+    {
+      "t": "FACT",
+      "text": "Tyler Filet moved into a place of their own in Lake Merritt, renting (C114)",
+      "src": "output/beats/Household_Ledger.jsonl @C114",
+      "id": "F-5372481ba7c7"
+    },
+    {
+      "t": "FACT",
+      "text": "Tyler Filet — in their life, C113: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-5663316a0fee"
+    },
+    {
+      "t": "FACT",
+      "text": "Tyler Filet — in their life, C113: caught a stranger humming their song and felt briefly, wrongly, known",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-24d96369a526"
+    },
+    {
+      "t": "FACT",
+      "text": "Tyler Filet — in their life, C114: couldn't sleep for the wind rattling the window frame near a front porch",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-64f55100254e"
+    },
+    {
+      "t": "FACT",
+      "text": "Tyler Filet — in their life, C114: wondered if a decision from years back had been the right one",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-07544e0ac669"
+    },
+    {
+      "t": "FACT",
+      "text": "Kenji Okafor moved into a place of their own in Rockridge, renting (C114)",
+      "src": "output/beats/Household_Ledger.jsonl @C114",
+      "id": "F-a4a2f8c20dda"
+    },
+    {
+      "t": "FACT",
+      "text": "Kenji Okafor — in their life, C113: navigated the stroller traffic on College Avenue and silently judged the parking jobs",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-2a4bf8f0a7b6"
+    },
+    {
+      "t": "FACT",
+      "text": "Kenji Okafor — in their life, C114: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard near a bookstore corner",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-4e79a2884022"
+    },
+    {
+      "t": "FACT",
+      "text": "Kenji Okafor — in their life, C114: reorganized a closet and found something thought lost",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-060a5e2591d4"
+    },
+    {
+      "t": "FACT",
+      "text": "Kenji Okafor — in their life, C114: caught the Oaks chatter at the gym and joined in like a regular",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-6013c427e408"
+    },
+    {
+      "t": "FACT",
+      "text": "Jett Walker — rewound the belt haul on the walk home and smiled at nothing in particular, Rockridge — one of 4 people the Cycle's civic turn reached (Service disruption — BART train: stalled train in Rockridge (last week): on-time fell to 76%, worst around Rockridge, Fruitvale, West…) (C114)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C114",
+      "id": "F-ae719a48c3c6"
+    },
+    {
+      "t": "FACT",
+      "text": "Jett Walker — in their life, C113: enjoyed the clear skies",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-d4912991f97a"
+    },
+    {
+      "t": "FACT",
+      "text": "Jett Walker — in their life, C113: watched an old man feed pigeons like a ritual and wondered what theirs was",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-442ee9741c3a"
+    },
+    {
+      "t": "FACT",
+      "text": "Jett Walker — in their life, C114: kept a spare trap gasket in every pocket and used one before lunch",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-cd6a56a0e61a"
+    },
+    {
+      "t": "FACT",
+      "text": "Jett Walker — in their life, C114: discovered new local artists",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-d2bbf9f9092f"
+    },
+    {
+      "t": "FACT",
+      "text": "Jett Walker — Lives already wrote this person: a moment the record kept (C113)",
+      "src": "output/cron-compare/lives_covered.json",
+      "id": "F-07c4486eac0f"
+    },
+    {
+      "t": "FACT",
+      "text": "Jett Walker — the Tribune named them in a piece headlined Temescal's Ledger Is Growing. The Question Is Who It's Growing For. (Business, C113)",
+      "src": "archive/ARTICLE_INDEX.jsonl 87e7fa2ba6bb3437",
+      "id": "F-03cb7b37dd18"
+    },
+    {
+      "t": "FACT",
+      "text": "Tobert Lewis — read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots, Downtown — one of 4 people the Cycle's safety turn reached (The Downtown Transit Snarl — Downtown under strain: transit disruption; housing pressure 10.00 (city 2.41)) (C114)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C114",
+      "id": "F-65d724df07ee"
+    },
+    {
+      "t": "FACT",
+      "text": "Tobert Lewis — in their life, C114: badged into the Baylight office early and tried not to think about the protestors from last month",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-152a578098de"
+    },
+    {
+      "t": "FACT",
+      "text": "Tobert Lewis — in their life, C114: Downtown is thriving, with events drawing crowds and new faces adding to the vibrant mix of the neighborhood.",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-ed291434316a"
+    },
+    {
+      "t": "FACT",
+      "text": "Graciela Foster — checked out First Friday galleries, Uptown — one of 4 people the Cycle's safety turn reached (An accident on the job floor — a stretcher out the loading door.) (C114)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C114",
+      "id": "F-710ec53550b4"
+    },
+    {
+      "t": "FACT",
+      "text": "Graciela Foster — in their life, C113: the for-rent signs outnumbered the welcome mats this month",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-458750a7bacb"
+    },
+    {
+      "t": "FACT",
+      "text": "Graciela Foster — in their life, C113: bought a new A's jersey and a sense of anticipation hangs in the air",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-25d8a4e84953"
+    },
+    {
+      "t": "FACT",
+      "text": "Graciela Foster — in their life, C114: caught the coffee order coming out of their mouth before deciding to order it near a venue doorway",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-21d9af30fd05"
+    },
+    {
+      "t": "FACT",
+      "text": "Graciela Foster — in their life, C114: moved from Uptown to East Oakland — moving for a better fit between household income and housing costs",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-5bfdd5e338e1"
+    },
+    {
+      "t": "FACT",
+      "text": "Derek Obi — moved from Downtown to Rockridge — moving up from Downtown — sold the house in Downtown to rent up, Rockridge (C114 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-669556d02b94"
+    },
+    {
+      "t": "FACT",
+      "text": "Derek Obi — in their life, C113: felt a lift at Miso Metro after the win",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-9d8a1efc31d8"
+    },
+    {
+      "t": "FACT",
+      "text": "Derek Obi — in their life, C113: stayed thirty minutes after the service just catching up in the parking lot",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-70bb5deb2687"
+    },
+    {
+      "t": "FACT",
+      "text": "Derek Obi — the Tribune named them in a piece headlined Uptown's Two Speeds: The Block Moves Faster Than the Store (Business, C112)",
+      "src": "archive/ARTICLE_INDEX.jsonl 6bc955294e6e05a5",
+      "id": "F-8e3edda10235"
+    },
+    {
+      "t": "FACT",
+      "text": "Derek Obi — the Tribune named them in a piece headlined FAMOUS FACES — CYCLE 70 (Arts, C70)",
+      "src": "archive/ARTICLE_INDEX.jsonl 937faa17a267937f",
+      "id": "F-f5f8ac216922"
+    },
+    {
+      "t": "FACT",
+      "text": "Derek Obi — the Tribune named them in a piece headlined FAMOUS FACES — CYCLE 72 (Arts, C70)",
+      "src": "archive/ARTICLE_INDEX.jsonl 392a58ecc483392a",
+      "id": "F-c345f2459543"
+    },
+    {
+      "t": "FACT",
+      "text": "Patrice Rao — moved from Chinatown to West Oakland — moving up from Chinatown, West Oakland (C114 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-e5c6ca705da0"
+    },
+    {
+      "t": "FACT",
+      "text": "Patrice Rao — in their life, C114: wondered when exactly they became the adult in the room",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-9ac5fd6cf60e"
+    },
+    {
+      "t": "FACT",
+      "text": "Patrice Rao — in their life, C114: discovered new local artists",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-5c8d9f762409"
+    },
+    {
+      "t": "FACT",
+      "text": "Patrice Rao — in their life, C114: knew the rules cold — two nights in the chair, the galaxy keeps the score, the board adds it up — and had never been drawn",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-2518f9d4992e"
+    },
+    {
+      "t": "FACT",
+      "text": "Jerome Lindqvist — graduated with their class in a joyful spring celebration, Fruitvale (C114 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-55ffbf4d6eb2"
+    },
+    {
+      "t": "FACT",
+      "text": "Jerome Lindqvist — in their life, C113: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-518485531e52"
+    },
+    {
+      "t": "FACT",
+      "text": "Jerome Lindqvist — in their life, C114: watched the morning shuttles roll along the waterfront into the Baylight District and timed their own walk to beat them",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-aa432361087f"
+    },
+    {
+      "t": "FACT",
+      "text": "Jerome Lindqvist — in their life, C114: kept score by hand at the kitchen table the way their father taught them near a vendor by the transit stop",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-3dbdf96be0f5"
+    },
+    {
+      "t": "FACT",
+      "text": "Jerome Lindqvist — in their life, C114: enjoyed Fruitvale's community atmosphere",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-1551e9946c39"
+    },
+    {
+      "t": "FACT",
+      "text": "Priscilla Chang — walked across the stage at their commencement ceremony, Fruitvale (C114 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-bc64f38bb2ce"
+    },
+    {
+      "t": "FACT",
+      "text": "Priscilla Chang — in their life, C113: saved the Tribune clipping with their neighborhood in it — the good one",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-27a28a5243c8"
+    },
+    {
+      "t": "FACT",
+      "text": "Priscilla Chang — in their life, C113: the city buzzes with energy after the A's third straight win, fans wearing green and gold everywhere.",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-35bb2830b2d6"
+    },
+    {
+      "t": "FACT",
+      "text": "Priscilla Chang — in their life, C114: ran the numbers on staying put another year",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-94a3abf602a9"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C10, Spring, holiday=none",
+      "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+      "id": "F-9b9470803821"
+    },
+    {
+      "t": "FACT",
+      "text": "Kenji Okafor — Patent Attorney — Rockridge",
+      "src": "Simulation_Ledger profile for POP-00460",
+      "id": "F-2eeb13d603ae"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "tamsin-lives-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Put the cycle's person events in the paper as news, one person at a time — a birth, a death, a hospital stay, a retirement, a promotion, a household set up or a place of one's own, a win or a loss on the book, what a turn of the city did to someone's day, and the smaller moments the record kept. The event is the lead, the person is named as the slice names them, and what came next appears only when a later record holds it. A stake or a payout is the person's own fact, not a statistic. The page is the city's real calendar; every person on it is one the record holds.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "plain respect — a neighborhood weekly's births-and-obituaries hand, unhurried, exact",
+      "targetWords": "450-1200",
+      "opening": "the heaviest event on the slice, stated as it happened to the named person",
+      "closing": "the last person's passage ends on what the record holds next for them, or on the fact itself — no moral, no roundup"
+    },
+    "authorizedTexture": [
+      "the plain respect of the form — the ordinary weight of a birth, a retirement, a discharge, stated without ornament",
+      "the frame around a supplied fact — what a promotion to the supplied role means in plain words, without inventing the workplace",
+      "the neighborhood the slice names as where the person lives, without an invented street scene",
+      "the order and pacing of the passages — heaviest first, one person at a time"
+    ],
+    "textureConditions": [
+      "every person, event, role, employer, neighborhood, hospital stay, household and family tie must come from the slice",
+      "a quote appears only verbatim from the person's own supplied page; nothing paraphrased into quotation marks",
+      "what came next appears only when a later Cycle's supplied record holds it",
+      "a thin day (few events) is written as a short page, not padded"
+    ],
+    "canonBlockers": [
+      "any person, event, quote, venue, employer or family member not on the slice",
+      "a paraphrased or invented quote",
+      "a cause, diagnosis or outcome the record does not state",
+      "a statistic, rate or trend claim — the page is people, not numbers",
+      "intake bookkeeping rows (Emerged into Tier, Added to Simulation_Ledger, Updated to Tier) written as life events",
+      "raw engine labels or decimals printed as public-facing evidence"
+    ]
+  },
+  "manifest": {
+    "id": "AM-3513961d699a",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-4261fa115617",
+        "t": "FACT",
+        "text": "Current cycle: C114",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-7b19c1a21c8e",
+        "t": "FACT",
+        "text": "Tyler Filet moved into a place of their own in Lake Merritt, renting",
+        "src": "output/beats/Lived_Events.jsonl @C114 batch f2cb79"
+      },
+      {
+        "id": "F-a0cb069b7a44",
+        "t": "FACT",
+        "text": "Tyler Filet first. The event is the lead; one true detail; what came next only if the record says.",
+        "src": "output/beats/Lived_Events.jsonl @C114 batch f2cb79"
+      },
+      {
+        "id": "F-5372481ba7c7",
+        "t": "FACT",
+        "text": "Tyler Filet moved into a place of their own in Lake Merritt, renting (C114)",
+        "src": "output/beats/Household_Ledger.jsonl @C114"
+      },
+      {
+        "id": "F-5663316a0fee",
+        "t": "FACT",
+        "text": "Tyler Filet — in their life, C113: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-24d96369a526",
+        "t": "FACT",
+        "text": "Tyler Filet — in their life, C113: caught a stranger humming their song and felt briefly, wrongly, known",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-64f55100254e",
+        "t": "FACT",
+        "text": "Tyler Filet — in their life, C114: couldn't sleep for the wind rattling the window frame near a front porch",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-07544e0ac669",
+        "t": "FACT",
+        "text": "Tyler Filet — in their life, C114: wondered if a decision from years back had been the right one",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-a4a2f8c20dda",
+        "t": "FACT",
+        "text": "Kenji Okafor moved into a place of their own in Rockridge, renting (C114)",
+        "src": "output/beats/Household_Ledger.jsonl @C114"
+      },
+      {
+        "id": "F-2a4bf8f0a7b6",
+        "t": "FACT",
+        "text": "Kenji Okafor — in their life, C113: navigated the stroller traffic on College Avenue and silently judged the parking jobs",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-4e79a2884022",
+        "t": "FACT",
+        "text": "Kenji Okafor — in their life, C114: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard near a bookstore corner",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-060a5e2591d4",
+        "t": "FACT",
+        "text": "Kenji Okafor — in their life, C114: reorganized a closet and found something thought lost",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-6013c427e408",
+        "t": "FACT",
+        "text": "Kenji Okafor — in their life, C114: caught the Oaks chatter at the gym and joined in like a regular",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-ae719a48c3c6",
+        "t": "FACT",
+        "text": "Jett Walker — rewound the belt haul on the walk home and smiled at nothing in particular, Rockridge — one of 4 people the Cycle's civic turn reached (Service disruption — BART train: stalled train in Rockridge (last week): on-time fell to 76%, worst around Rockridge, Fruitvale, West…) (C114)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C114"
+      },
+      {
+        "id": "F-d4912991f97a",
+        "t": "FACT",
+        "text": "Jett Walker — in their life, C113: enjoyed the clear skies",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-442ee9741c3a",
+        "t": "FACT",
+        "text": "Jett Walker — in their life, C113: watched an old man feed pigeons like a ritual and wondered what theirs was",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-cd6a56a0e61a",
+        "t": "FACT",
+        "text": "Jett Walker — in their life, C114: kept a spare trap gasket in every pocket and used one before lunch",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-d2bbf9f9092f",
+        "t": "FACT",
+        "text": "Jett Walker — in their life, C114: discovered new local artists",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-07c4486eac0f",
+        "t": "FACT",
+        "text": "Jett Walker — Lives already wrote this person: a moment the record kept (C113)",
+        "src": "output/cron-compare/lives_covered.json"
+      },
+      {
+        "id": "F-03cb7b37dd18",
+        "t": "FACT",
+        "text": "Jett Walker — the Tribune named them in a piece headlined Temescal's Ledger Is Growing. The Question Is Who It's Growing For. (Business, C113)",
+        "src": "archive/ARTICLE_INDEX.jsonl 87e7fa2ba6bb3437"
+      },
+      {
+        "id": "F-65d724df07ee",
+        "t": "FACT",
+        "text": "Tobert Lewis — read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots, Downtown — one of 4 people the Cycle's safety turn reached (The Downtown Transit Snarl — Downtown under strain: transit disruption; housing pressure 10.00 (city 2.41)) (C114)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C114"
+      },
+      {
+        "id": "F-152a578098de",
+        "t": "FACT",
+        "text": "Tobert Lewis — in their life, C114: badged into the Baylight office early and tried not to think about the protestors from last month",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-ed291434316a",
+        "t": "FACT",
+        "text": "Tobert Lewis — in their life, C114: Downtown is thriving, with events drawing crowds and new faces adding to the vibrant mix of the neighborhood.",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-710ec53550b4",
+        "t": "FACT",
+        "text": "Graciela Foster — checked out First Friday galleries, Uptown — one of 4 people the Cycle's safety turn reached (An accident on the job floor — a stretcher out the loading door.) (C114)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C114"
+      },
+      {
+        "id": "F-458750a7bacb",
+        "t": "FACT",
+        "text": "Graciela Foster — in their life, C113: the for-rent signs outnumbered the welcome mats this month",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-25d8a4e84953",
+        "t": "FACT",
+        "text": "Graciela Foster — in their life, C113: bought a new A's jersey and a sense of anticipation hangs in the air",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-21d9af30fd05",
+        "t": "FACT",
+        "text": "Graciela Foster — in their life, C114: caught the coffee order coming out of their mouth before deciding to order it near a venue doorway",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-5bfdd5e338e1",
+        "t": "FACT",
+        "text": "Graciela Foster — in their life, C114: moved from Uptown to East Oakland — moving for a better fit between household income and housing costs",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-669556d02b94",
+        "t": "FACT",
+        "text": "Derek Obi — moved from Downtown to Rockridge — moving up from Downtown — sold the house in Downtown to rent up, Rockridge (C114 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-9d8a1efc31d8",
+        "t": "FACT",
+        "text": "Derek Obi — in their life, C113: felt a lift at Miso Metro after the win",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-70bb5deb2687",
+        "t": "FACT",
+        "text": "Derek Obi — in their life, C113: stayed thirty minutes after the service just catching up in the parking lot",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-8e3edda10235",
+        "t": "FACT",
+        "text": "Derek Obi — the Tribune named them in a piece headlined Uptown's Two Speeds: The Block Moves Faster Than the Store (Business, C112)",
+        "src": "archive/ARTICLE_INDEX.jsonl 6bc955294e6e05a5"
+      },
+      {
+        "id": "F-f5f8ac216922",
+        "t": "FACT",
+        "text": "Derek Obi — the Tribune named them in a piece headlined FAMOUS FACES — CYCLE 70 (Arts, C70)",
+        "src": "archive/ARTICLE_INDEX.jsonl 937faa17a267937f"
+      },
+      {
+        "id": "F-c345f2459543",
+        "t": "FACT",
+        "text": "Derek Obi — the Tribune named them in a piece headlined FAMOUS FACES — CYCLE 72 (Arts, C70)",
+        "src": "archive/ARTICLE_INDEX.jsonl 392a58ecc483392a"
+      },
+      {
+        "id": "F-e5c6ca705da0",
+        "t": "FACT",
+        "text": "Patrice Rao — moved from Chinatown to West Oakland — moving up from Chinatown, West Oakland (C114 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-9ac5fd6cf60e",
+        "t": "FACT",
+        "text": "Patrice Rao — in their life, C114: wondered when exactly they became the adult in the room",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-5c8d9f762409",
+        "t": "FACT",
+        "text": "Patrice Rao — in their life, C114: discovered new local artists",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-2518f9d4992e",
+        "t": "FACT",
+        "text": "Patrice Rao — in their life, C114: knew the rules cold — two nights in the chair, the galaxy keeps the score, the board adds it up — and had never been drawn",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-55ffbf4d6eb2",
+        "t": "FACT",
+        "text": "Jerome Lindqvist — graduated with their class in a joyful spring celebration, Fruitvale (C114 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-518485531e52",
+        "t": "FACT",
+        "text": "Jerome Lindqvist — in their life, C113: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-aa432361087f",
+        "t": "FACT",
+        "text": "Jerome Lindqvist — in their life, C114: watched the morning shuttles roll along the waterfront into the Baylight District and timed their own walk to beat them",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-3dbdf96be0f5",
+        "t": "FACT",
+        "text": "Jerome Lindqvist — in their life, C114: kept score by hand at the kitchen table the way their father taught them near a vendor by the transit stop",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-1551e9946c39",
+        "t": "FACT",
+        "text": "Jerome Lindqvist — in their life, C114: enjoyed Fruitvale's community atmosphere",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-bc64f38bb2ce",
+        "t": "FACT",
+        "text": "Priscilla Chang — walked across the stage at their commencement ceremony, Fruitvale (C114 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-27a28a5243c8",
+        "t": "FACT",
+        "text": "Priscilla Chang — in their life, C113: saved the Tribune clipping with their neighborhood in it — the good one",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-35bb2830b2d6",
+        "t": "FACT",
+        "text": "Priscilla Chang — in their life, C113: the city buzzes with energy after the A's third straight win, fans wearing green and gold everywhere.",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-94a3abf602a9",
+        "t": "FACT",
+        "text": "Priscilla Chang — in their life, C114: ran the numbers on staying put another year",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-9b9470803821",
+        "t": "FACT",
+        "text": "Calendar: Y3C10, Spring, holiday=none",
+        "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)"
+      },
+      {
+        "id": "F-2eeb13d603ae",
+        "t": "FACT",
+        "text": "Kenji Okafor — Patent Attorney — Rockridge",
+        "src": "Simulation_Ledger profile for POP-00460"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00447-082453ff9a",
+        "speakerId": "POP-00447",
+        "speakerName": "Tyler Filet",
+        "text": "I moved into my place in Lake Merritt and it's been a real adjustment. The other night, the wind was rattling the window frame near the front porch and I couldn't sleep. It got me thinking about some of the decisions I've made, wondering if they were the right ones. I've been seeing some familiar faces around the neighborhood, like Vinnie Keane at Grand Avenue Wine Bar. It's nice to have some continuity.",
+        "factIds": [
+          "F-5372481ba7c7",
+          "F-64f55100254e",
+          "F-07544e0ac669"
+        ],
+        "src": "packet.W2[POP-00447]"
+      },
+      {
+        "id": "Q-POP-00460-4159e7cfff",
+        "speakerId": "POP-00460",
+        "speakerName": "Kenji Okafor",
+        "text": "I've been feeling pretty settled in Rockridge. I attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard, which was a positive experience. It's nice to be involved in the community.",
+        "factIds": [
+          "F-a4a2f8c20dda",
+          "F-4e79a2884022",
+          "F-2eeb13d603ae"
+        ],
+        "src": "packet.W2[POP-00460]"
+      },
+      {
+        "id": "Q-POP-00230-137bca0a75",
+        "speakerId": "POP-00230",
+        "speakerName": "Jett Walker",
+        "text": "To be honest, the BART train disruption was just a minor frustration for me. I've gotten used to it around here. I rewound the belt haul on my walk home and didn't think much of it.",
+        "factIds": [
+          "F-ae719a48c3c6"
+        ],
+        "src": "packet.W2[POP-00230]"
+      },
+      {
+        "id": "Q-POP-00344-7f8beeaf38",
+        "speakerId": "POP-00344",
+        "speakerName": "Tobert Lewis",
+        "text": "I read the flyer for the Oakland Youth Apprenticeship Pipeline and honestly, I wondered who was actually going to get those spots. It's great they're offering opportunities, but I've seen programs like this before where the benefits don't always reach the kids who need them most.",
+        "factIds": [
+          "F-65d724df07ee",
+          "F-5663316a0fee"
+        ],
+        "src": "packet.W2[POP-00344]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00447",
+        "name": "Tyler Filet",
+        "profile": "Tyler Filet — Biotech Lab Director (Portside Bio) — Lake Merritt",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00460",
+        "name": "Kenji Okafor",
+        "profile": "Kenji Okafor — Patent Attorney — Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00230",
+        "name": "Jett Walker",
+        "profile": "Jett Walker — Plumber — Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00344",
+        "name": "Tobert Lewis",
+        "profile": "Tobert Lewis — Civil Rights Attorney — Downtown",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Tamsin Pruitt",
+        "text": "The impact of the Fruitvale Transit Hub Phase II on the community",
+        "publishable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "The effect of the A's performance on local morale",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "the plain respect of the form — the ordinary weight of a birth, a retirement, a discharge, stated without ornament",
+      "the frame around a supplied fact — what a promotion to the supplied role means in plain words, without inventing the workplace",
+      "the neighborhood the slice names as where the person lives, without an invented street scene",
+      "the order and pacing of the passages — heaviest first, one person at a time"
+    ],
+    "textureConditions": [
+      "every person, event, role, employer, neighborhood, hospital stay, household and family tie must come from the slice",
+      "a quote appears only verbatim from the person's own supplied page; nothing paraphrased into quotation marks",
+      "what came next appears only when a later Cycle's supplied record holds it",
+      "a thin day (few events) is written as a short page, not padded"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

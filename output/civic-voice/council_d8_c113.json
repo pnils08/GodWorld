@@ -1,0 +1,38 @@
+{
+  "office": "council_d8",
+  "cycle": 113,
+  "speaker": "Nina Chen",
+  "cascadeSummary": "In Cycle 113, District 8 voted to advance the $2.5 million Commercial Stabilization for Grand Lake ordinance out of committee with strict milestone reporting and audit criteria attached. Concurrently, we filed formal administrative service audit criteria for Eastlake and Adams Point to enforce municipal maintenance parity across our commercial corridors, while recognizing local community partners for lifting Lake Merritt.",
+  "statements": [
+    {
+      "statementId": "STMT-113-council_d8-001",
+      "type": "vote_statement",
+      "topic": "Commercial Stabilization for Grand Lake Committee Advancement",
+      "initiative": "Commercial Stabilization for Grand Lake",
+      "decision": "Vote YES in the Economic Development Committee to advance the $2.5M Commercial Stabilization for Grand Lake ordinance to the full City Council.",
+      "quote": "Relief is only as effective as the oversight attached to it—Grand Lake merchants need immediate capital, and taxpayers deserve verified disbursement milestones and auditable metrics.",
+      "fullStatement": "I cast my vote in the Economic Development Committee to advance the $2.5 million Commercial Stabilization for Grand Lake ordinance to the full Council floor. Grand Lake's merchants require dependable support to sustain commercial vitality, but public funds must always be governed by structured milestones and transparent accounting. By embedding mandatory reporting and audit protocols directly into the legislation, we ensure that stabilization dollars reach active storefronts efficiently while maintaining full fiscal accountability.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-113-council_d8-002",
+      "type": "oversight_statement",
+      "topic": "Eastlake and Adams Point Administrative Service Audits",
+      "initiative": null,
+      "decision": "File administrative service audit criteria for Eastlake and Adams Point to enforce scheduled municipal maintenance and service parity.",
+      "quote": "Eastlake and Adams Point cannot be treated as afterthoughts; we are demanding scheduled municipal maintenance reviews and transparent service audits to reverse corridor decline.",
+      "fullStatement": "While commercial activity remains sluggish across District 8 corridors, Eastlake is experiencing acute sentiment and trade strain that demands immediate municipal accountability. I am filing formal administrative service audit criteria for Eastlake and enforcing scheduled maintenance reviews across Adams Point. Procedural parity is non-negotiable—our corridors require scheduled public works follow-through, predictable city services, and verified baseline maintenance to ensure commercial resilience.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-113-council_d8-003",
+      "type": "policy_statement",
+      "topic": "Lake Merritt Community Vitality and Youth Support",
+      "initiative": null,
+      "decision": "Formally recognize the Lakeshore Unitarian Universalist Fellowship for expanding after-school tutoring and supporting Lake Merritt neighborhood sentiment.",
+      "quote": "Lake Merritt's positive momentum is built by the neighborhood partners doing the daily work, including the expanded tutoring at Lakeshore Unitarian Universalist Fellowship.",
+      "fullStatement": "Lake Merritt's positive sentiment this cycle demonstrates the real impact of dedicated community institutions. I want to formally commend the Lakeshore Unitarian Universalist Fellowship for expanding their after-school tutoring program, providing essential support to local students and uplifting our neighborhood. Documented municipal maintenance coupled with strong civic programming is the exact standard of sustained care District 8 needs.",
+      "trackerUpdates": {}
+    }
+  ]
+}

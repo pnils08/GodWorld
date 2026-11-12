@@ -1,0 +1,82 @@
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ suppress logs { quiet: true }
+Wake 3 WRITE — civic c115 (trevor-shimizu)
+===================================
+[run] 2026-11-11T05:14:25.705Z byline: Trevor Shimizu (POP-00155, persona)
+[run] 2026-11-11T05:14:25.725Z writing on typed Packet (43596 B injected state + stance anchor)...
+[run] 2026-11-11T05:14:25.725Z writer tools ON (package): max 6 calls
+[run] 2026-11-11T05:14:25.725Z reward loop ON (package): rubric shown, contract scored, grade carried
+◇ injected env (33) from ../.config/godworld/.env // tip: ◈ encrypted .env [www.dotenvx.com]
+Headless Desk Writer — civic desk
+===================================
+model=anthropic/claude-sonnet-5.5 maxTurns=15
+[INFO] 2026-11-11T05:14:26.785Z lane state-file injected: output/test-shell/20261110-231422-trevor-shimizu-live/civic_c115_trevor-shimizu_packet-v2_anthropic-claude-sonnet-5-5.state.json (43286 chars) — full-summary blob bypassed
+[INFO] 2026-11-11T05:14:27.824Z packet-only compose via OpenRouter (anthropic/claude-sonnet-5.5, 0 live tools)...
+[INFO] 2026-11-11T05:16:47.395Z tool trace: 1 call(s) → civic_c115_packet-v2_trevor-shimizu.tooltrace.json
+[INFO] 2026-11-11T05:16:47.424Z tool facts → manifest: none used (1 call(s))
+[INFO] 2026-11-11T05:16:47.440Z LEP/2 lexical observations deferred to Rhea (AM-104ffa0a3472): UNAPPROVED_NUMBER=58,3,15,1,51,44,38,752,17,104,110,105; UNAPPROVED_QUOTE=weekend
+
+--- run summary ---
+{
+  "desk": "civic",
+  "cycle": "115",
+  "model": "anthropic/claude-sonnet-5.5",
+  "turns": 2,
+  "maxTurns": 15,
+  "usageInputTokens": 50561,
+  "usageOutputTokens": 3060,
+  "savedFiles": [
+    "output/test-shell/20261110-231422-trevor-shimizu-live/civic_c115_trevor-shimizu_packet-v2_anthropic-claude-sonnet-5-5.md"
+  ],
+  "compareAgainst": "output/desk-output/civic_c115.md",
+  "durationMs": 140756,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-11-11T05:16:47.445Z"
+}
+
+tokens: 50561 in / 3060 out · 2 turn(s) · 140756ms
+compare: diff output/desk-output/civic_c115.md  ↔  output/test-shell/20261110-231422-trevor-shimizu-live/civic_c115_trevor-shimizu_packet-v2_anthropic-claude-sonnet-5-5.md
+[run] 2026-11-11T05:16:49.079Z gate SKIPPED (--no-gate sample) — output is ungated, NOT canon
+[run] 2026-11-11T05:16:49.213Z gaps logged: 2 line(s) → production log
+
+=== write disposition: UNGATED-SAMPLE ===
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "115",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "sonnet",
+  "persona": "trevor-shimizu",
+  "byline": {
+    "name": "Trevor Shimizu",
+    "popid": "POP-00155",
+    "beatDomain": "INFRASTRUCTURE"
+  },
+  "laneEntries": 93,
+  "quotesLanded": 3,
+  "disposition": "ungated-sample",
+  "rheaPass": null,
+  "rheaFlagCount": null,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "sheet_read"
+  ],
+  "toolCalls": 1,
+  "wordCount": 933,
+  "targetWords": "500-800",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": null,
+  "gradeRecord": null,
+  "article": "output/test-shell/20261110-231422-trevor-shimizu-live/samples/civic_c115_trevor-shimizu_packet-v2_anthropic-claude-sonnet-5-5.sample.md",
+  "selfRecord": null,
+  "ranAt": "2026-11-11T05:16:49.086Z"
+}

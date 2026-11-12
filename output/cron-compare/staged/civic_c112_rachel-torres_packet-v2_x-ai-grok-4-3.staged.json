@@ -1,0 +1,55 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "112",
+  "persona": "rachel-torres",
+  "byline": "Sgt. Rachel Torres",
+  "bylinePopid": "POP-00057",
+  "article": "output/cron-compare/staged/civic_c112_rachel-torres_packet-v2_x-ai-grok-4-3.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Kimberly Cho",
+        "role": "subject",
+        "popid": "POP-00137"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Dimond"
+    ],
+    "claims": [
+      {
+        "claim": "Dimond logged the most incidents (8) — 22 neighborhoods on the table",
+        "sourceRef": "output/beats/Crime_Metrics.jsonl @C112"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-c51af5ddc8df",
+    "draftSha256": "7514bd7e46098ef50302e1f151256f80883018106ca96d515a83ed10d5bec960",
+    "verdict": "output/cron-compare/civic_c112_rachel-torres_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-10-20T23:16:32.720Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": false,
+      "inTargetBy": "code floor 500",
+      "words": 283,
+      "short": "The piece falls well short of the 500-word minimum target length.",
+      "score": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "7514bd7e46098ef50302e1f151256f80883018106ca96d515a83ed10d5bec960",
+      "costUsd": 0.0008
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-20T23:16:35.618Z"
+}

@@ -1,0 +1,88 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "113",
+  "persona": "carmen-delaine",
+  "byline": "Carmen Delaine",
+  "bylinePopid": "POP-00011",
+  "article": "output/cron-compare/staged/civic_c113_carmen-delaine_packet-v2_anthropic-claude-haiku-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Denise Carter",
+        "role": "quoted-source",
+        "popid": "POP-00501"
+      },
+      {
+        "name": "Avery Santana",
+        "role": "quoted-source",
+        "popid": "POP-00034"
+      },
+      {
+        "name": "Brenda Okoro",
+        "role": "mentioned",
+        "popid": "POP-00037"
+      },
+      {
+        "name": "Elliott Crane",
+        "role": "mentioned",
+        "popid": "POP-00044",
+        "floor": true
+      },
+      {
+        "name": "Leonard Tran",
+        "role": "mentioned",
+        "popid": "POP-00502",
+        "floor": true
+      },
+      {
+        "name": "Ramon Vega",
+        "role": "mentioned",
+        "popid": "POP-00042",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "INIT-001:disbursement-active",
+        "verb": "advanced"
+      }
+    ],
+    "hoods": [
+      "West Oakland"
+    ],
+    "claims": [
+      {
+        "claim": "Five million dollars kept 47 families in their homes — that's Oakland keeping its word.",
+        "sourceRef": "citizenVoice PRESS Denise Carter"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-f618b855fd4c",
+    "draftSha256": "13d58d7d4c578283a860a2c5e03de519a0063c77f88dfa9b1c45b710ce328a3d",
+    "verdict": "output/cron-compare/civic_c113_carmen-delaine_packet-v2_anthropic-claude-haiku-5-5.rhea.json",
+    "ranAt": "2026-10-26T23:15:32.134Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 500",
+      "words": 778,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "13d58d7d4c578283a860a2c5e03de519a0063c77f88dfa9b1c45b710ce328a3d",
+      "costUsd": 0.0013
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-26T23:15:37.999Z"
+}

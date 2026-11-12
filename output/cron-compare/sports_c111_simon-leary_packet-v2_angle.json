@@ -1,0 +1,499 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "111",
+  "persona": "simon-leary",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00016",
+      "name": "Simon Leary",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "The A's record is 4-1.",
+      "approach": "Long-view approach (Simon Leary): third-person essayist. Treat supplied sports facts as present structure, not as proof of history or collective memory. A metaphor about continuity, load, or change may interpret the Packet but may not add a person, place, institution, event, season, statistic, cause, organizational intention, or citywide belief. Do not write a game recap, Hal elegy, P Slayer fan heat, or Anthony board memo.",
+      "creativeBrief": {
+        "kind": "sports-long-view",
+        "pulseClass": "role-change-under-continuity",
+        "bagModes": [
+          "2 Keystone Player",
+          "4 Load-Bearing Continuity"
+        ],
+        "claim": "A role change inside a sustained team record can support a structural interpretation; it does not establish franchise history, organizational intent, or citywide meaning.",
+        "anchorFacts": [
+          "The A's record is 4-1.",
+          "The A's have won 3 straight."
+        ],
+        "missing": [
+          "why the role change was made",
+          "historical comparison or franchise precedent",
+          "organizational intention or future plan",
+          "citywide, clubhouse, or fan interpretation"
+        ],
+        "sceneRule": "No witnessed room or scene is supplied. Structure and continuity may appear only as clearly interpretive metaphor grounded in the approved present facts.",
+        "sourcePointers": [
+          "output/world_summary_c111.md ## Sports",
+          "scripts/sportsSubstrate.js",
+          "docs/media/SIMON_LONGVIEW_BAG.md"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "long-view-signal",
+      "hood": "Downtown",
+      "score": null,
+      "src": "world_summary_c111.md ## Sports",
+      "nearby": [
+        {
+          "text": "A's | editorial-note | (off-season) | Mike Paulson",
+          "src": "Oakland_Sports_Feed cycle 111; rendered: world_summary_c111.md \"## Sports\" C111 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | community-outreach | (off-season) | Vladimir Gonzalez",
+          "src": "Oakland_Sports_Feed cycle 111; rendered: world_summary_c111.md \"## Sports\" C111 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | editorial-note | (off-season) | Mark Aitken, Carmen Mesa, Desmond Morton, Frank Reyna, Kevin Clark",
+          "src": "Oakland_Sports_Feed cycle 111; rendered: world_summary_c111.md \"## Sports\" C111 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (off-season)",
+          "src": "Oakland_Sports_Feed cycle 111; rendered: world_summary_c111.md \"## Sports\" C111 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | season-state | (early-season) | Elliot Abraham",
+          "src": "Oakland_Sports_Feed cycle 111; rendered: world_summary_c111.md \"## Sports\" C111 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00033",
+          "name": "John Ellis",
+          "profile": "John Ellis — Starting Pitcher, Oakland A's",
+          "role": "Starting Pitcher, Oakland A's",
+          "hood": "Laurel",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c111.md ## Sports",
+            "pop": "POP-00033",
+            "rowName": "John Ellis",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00597",
+          "name": "Eric Taveras",
+          "profile": "Eric Taveras — Second Baseman, Oakland A's",
+          "role": "Second Baseman, Oakland A's",
+          "hood": "Downtown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c111.md ## Sports",
+            "pop": "POP-00597",
+            "rowName": "Eric Taveras",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00001",
+          "name": "Vinnie Keane",
+          "profile": "Vinnie Keane — Designated Hitter, Oakland A's Legend",
+          "role": "Designated Hitter, Oakland A's Legend",
+          "hood": "Grand Lake",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c111.md ## Sports",
+            "pop": "POP-00001",
+            "rowName": "Vinnie Keane",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00018",
+          "name": "Benji Dillon",
+          "profile": "Benji Dillon — Pitcher, Oakland A's Legend",
+          "role": "Pitcher, Oakland A's Legend",
+          "hood": "Rockridge",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c111.md ## Sports",
+            "pop": "POP-00018",
+            "rowName": "Benji Dillon",
+            "kind": "slice-row"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C111",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-a43c5d888b36"
+      },
+      {
+        "t": "FACT",
+        "text": "The A's record is 4-1.",
+        "src": "world_summary_c111.md ## Sports",
+        "id": "F-198811406e03"
+      },
+      {
+        "t": "FACT",
+        "text": "The A's have won 3 straight.",
+        "src": "world_summary_c111.md ## Sports",
+        "id": "F-297a24edbcbc"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "named",
+    "candidates": [
+      {
+        "pop": "POP-00033",
+        "name": "John Ellis",
+        "role": "Starting Pitcher, Oakland A's",
+        "hood": "Laurel",
+        "profile": "John Ellis — Starting Pitcher, Oakland A's",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c111.md ## Sports",
+          "pop": "POP-00033",
+          "rowName": "John Ellis",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00597",
+        "name": "Eric Taveras",
+        "role": "Second Baseman, Oakland A's",
+        "hood": "Downtown",
+        "profile": "Eric Taveras — Second Baseman, Oakland A's",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c111.md ## Sports",
+          "pop": "POP-00597",
+          "rowName": "Eric Taveras",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00001",
+        "name": "Vinnie Keane",
+        "role": "Designated Hitter, Oakland A's Legend",
+        "hood": "Grand Lake",
+        "profile": "Vinnie Keane — Designated Hitter, Oakland A's Legend",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c111.md ## Sports",
+          "pop": "POP-00001",
+          "rowName": "Vinnie Keane",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00018",
+        "name": "Benji Dillon",
+        "role": "Pitcher, Oakland A's Legend",
+        "hood": "Rockridge",
+        "profile": "Benji Dillon — Pitcher, Oakland A's Legend",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c111.md ## Sports",
+          "pop": "POP-00018",
+          "rowName": "Benji Dillon",
+          "kind": "slice-row"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Simon Leary",
+    "popid": "POP-00016"
+  },
+  "assignment": {
+    "story": {
+      "angle": "The A's record is 4-1.",
+      "label": "The A's record is 4-1.",
+      "hookLine": "The A's record is 4-1.",
+      "kind": "long-view-signal",
+      "hood": "Downtown",
+      "popids": [
+        "POP-00033",
+        "POP-00597",
+        "POP-00001",
+        "POP-00018"
+      ],
+      "citizens": [
+        "John Ellis (POP-00033)",
+        "Eric Taveras (POP-00597)",
+        "Vinnie Keane (POP-00001)",
+        "Benji Dillon (POP-00018)"
+      ],
+      "ref": "world_summary_c111.md ## Sports",
+      "cycle": 111
+    },
+    "approach": "Long-view approach (Simon Leary): third-person essayist. Treat supplied sports facts as present structure, not as proof of history or collective memory. A metaphor about continuity, load, or change may interpret the Packet but may not add a person, place, institution, event, season, statistic, cause, organizational intention, or citywide belief. Do not write a game recap, Hal elegy, P Slayer fan heat, or Anthony board memo."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": {
+    "pulse": {
+      "className": "role-change-under-continuity",
+      "score": 54,
+      "label": "The A's record is 4-1."
+    },
+    "prewrite": {
+      "bagModes": [
+        {
+          "id": 2,
+          "name": "Keystone Player"
+        },
+        {
+          "id": 4,
+          "name": "Load-Bearing Continuity"
+        }
+      ],
+      "anchorFacts": [
+        "The A's record is 4-1.",
+        "The A's have won 3 straight."
+      ],
+      "claim": "A role change inside a sustained team record can support a structural interpretation; it does not establish franchise history, organizational intent, or citywide meaning.",
+      "missing": [
+        "why the role change was made",
+        "historical comparison or franchise precedent",
+        "organizational intention or future plan",
+        "citywide, clubhouse, or fan interpretation"
+      ],
+      "hooks": []
+    },
+    "players": [
+      {
+        "name": "John Ellis",
+        "popid": "POP-00033",
+        "role": "Starting Pitcher, Oakland A's",
+        "neighborhood": "Laurel",
+        "why": "feed-names"
+      },
+      {
+        "name": "Eric Taveras",
+        "popid": "POP-00597",
+        "role": "Second Baseman, Oakland A's",
+        "neighborhood": "Downtown",
+        "why": "feed-names"
+      },
+      {
+        "name": "Vinnie Keane",
+        "popid": "POP-00001",
+        "role": "Designated Hitter, Oakland A's Legend",
+        "neighborhood": "Grand Lake",
+        "why": "feed-names"
+      },
+      {
+        "name": "Benji Dillon",
+        "popid": "POP-00018",
+        "role": "Pitcher, Oakland A's Legend",
+        "neighborhood": "Rockridge",
+        "why": "feed-names"
+      }
+    ],
+    "scene": {
+      "colorRoom": "No witnessed room or scene is supplied. Structure and continuity may appear only as clearly interpretive metaphor grounded in the approved present facts."
+    },
+    "candidates": [
+      {
+        "score": 58,
+        "cycle": 111,
+        "team": "A's",
+        "label": "The Oakland A's and Vladimir Gonzales support wellness at the Fruitvale Community Clinic."
+      },
+      {
+        "score": 58,
+        "cycle": 111,
+        "team": "A's",
+        "label": "The city celebrates its championship, we look at the looming decisions heading into the offseason"
+      },
+      {
+        "score": 54,
+        "cycle": 110,
+        "team": "A's",
+        "label": "John Ellis bounces back in game 5 to win the A's their 7th World Series title under Mike Paulson. Eric Taveras fittingly provides the power along with veterans Darrin Davis , and Mark Aitken. Vinnie Keane , Benji Dillon appear in their final games."
+      },
+      {
+        "score": 42,
+        "cycle": 109,
+        "team": "A's",
+        "label": "Travis Coles and the bullpen struggle, Eric Taveras shows up big again but not enough."
+      },
+      {
+        "score": 30,
+        "cycle": 111,
+        "team": "A's",
+        "label": "The A's parade roll through Downtown."
+      },
+      {
+        "score": 30,
+        "cycle": 111,
+        "team": "A's",
+        "label": "Open space to cover A's players/team"
+      }
+    ]
+  },
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Simon Leary",
+    "popid": "POP-00016",
+    "text": "I'm standing at my desk in Rockridge with the calendar squares blurring together again, and the A's at 4-1 with three straight wins is the one clean line I can hold onto. The assignment is a long-view piece, so I'm not chasing the box score or the clubhouse. I'm chasing the shape underneath: a team that keeps winning while something inside it shifts. The record is the load-bearing wall. The role change is the crack that makes you look closer. I want to write about how a thing can hold steady precisely because it adjusts — not despite the adjustment. What doesn't line up: everyone wants to talk about what the change means for the season, for the rotation, for October. I don't care about that",
+    "plan": {
+      "chase": "I'm standing at my desk in Rockridge with the calendar squares blurring together again, and the A's at 4-1 with three straight wins is the one clean line I can hold onto. The assignment is a long-view piece, so I'm not chasing the box score or the clubhouse. I'm chasing the shape underneath: a team that keeps winning while something inside it shifts. The record is the load-bearing wall. The role change is the crack that makes you look closer. I want to write about how a thing can hold steady precisely because it adjusts — not despite the adjustment. What doesn't line up: everyone wants to talk about what the change means for the season, for the rotation, for October. I don't care about that ",
+      "focus": "The structural continuity of a 4-1 start and three straight wins as a frame for understanding a role change — not as disruption, but as the load finding a new way to distribute itself.",
+      "why": "Because the easy story is the change itself. The harder, more interesting story is what stays the same while the change happens. A 4-1 record with three straight wins is a fact of continuity. The role change is a fact of motion. The tension between those two is where the long view lives.",
+      "checks": [
+        "Do not invent a reason for the role change.",
+        "Do not compare to any historical season or franchise moment.",
+        "Do not claim what the organization intends or plans.",
+        "Do not describe a clubhouse scene, fan reaction, or citywide mood.",
+        "Keep the interpretation abstract and grounded only in the 4-1 record and three straight wins."
+      ],
+      "targets": [
+        {
+          "pop": "POP-00033",
+          "question": "John Ellis is a starting pitcher on a team that's 4-1. If the load shifts around him, what does he notice about his own rhythm — not the results, but the feel of the work?",
+          "basis": "He is a supplied named player on the current roster, and his position is directly adjacent to any pitching role change."
+        },
+        {
+          "pop": "POP-00597",
+          "question": "Eric Taveras plays second base, a position that depends on repetition. In a stretch of three straight wins, what does consistency feel like from the middle of the field?",
+          "basis": "He is a supplied named player on the current roster, and his defensive position is a natural anchor for a continuity metaphor."
+        },
+        {
+          "pop": "POP-00018",
+          "question": "Benji Dillon has lived through a role change himself. From where he sits now, what does it look like when a team keeps its footing mid-shift?",
+          "basis": "He is a supplied named player with direct experience of a role change, and he is a neighbor in Rockridge, which gives me a natural entry point."
+        }
+      ],
+      "interpretation": "A 4-1 record with three straight wins is not proof of anything beyond itself. But it is a structure. And a structure that holds while something inside it moves is not a contradiction — it is a definition of resilience. The role change is the load finding a new place to rest. The record is the proof that the building did not fall. The long view is not about why the change happened. It is about what it means to keep standing while the weight shifts.",
+      "unverifiedLead": [
+        "I heard about a community circle at Lake Merritt last night — not connected to the A's, but it made me think about how groups hold shape when members change roles.",
+        "There's a new shop that opened near me; I stopped in and noticed how the staff were still finding their positions. It felt like the same kind of rebalancing."
+      ],
+      "closeQuestion": "What does it take for a thing to stay itself while it changes?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "A's | editorial-note | (off-season) | Mike Paulson",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 111; rendered: world_summary_c111.md \"## Sports\" C111 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00527"
+      ]
+    },
+    {
+      "label": "A's | community-outreach | (off-season) | Vladimir Gonzalez",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 111; rendered: world_summary_c111.md \"## Sports\" C111 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00598"
+      ]
+    },
+    {
+      "label": "A's | editorial-note | (off-season) | Mark Aitken, Carmen Mesa, Desmond Morton, Frank Reyna, Kevin Clark",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 111; rendered: world_summary_c111.md \"## Sports\" C111 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00003",
+        "POP-00081",
+        "POP-00051",
+        "POP-00079",
+        "POP-00053"
+      ]
+    },
+    {
+      "label": "A's | player-feature | (off-season)",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 111; rendered: world_summary_c111.md \"## Sports\" C111 (StoryAngle at the pointer)",
+      "popids": []
+    },
+    {
+      "label": "Oaks | season-state | (early-season) | Elliot Abraham",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 111; rendered: world_summary_c111.md \"## Sports\" C111 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01046"
+      ]
+    }
+  ],
+  "laneEntries": 8,
+  "angleCapHits": 0,
+  "ranAt": "2026-10-15T11:15:53.963Z"
+}

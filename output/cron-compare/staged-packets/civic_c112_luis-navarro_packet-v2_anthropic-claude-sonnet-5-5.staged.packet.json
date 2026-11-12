@@ -1,0 +1,468 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00636",
+    "name": "Luis Navarro",
+    "role": "desk reporter",
+    "desk": "civic"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The tracker line is the weather, never the lede.",
+    "assignment": "Baylight District — Final Council Vote stalled in construction-active",
+    "approach": "Investigation approach: distinguish what the supplied record establishes from what it does not. Follow the unresolved gap fairly; no invented response, silence, or accusation.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "civic-investigation",
+      "method": "KNOWN_UNKNOWN",
+      "missing": [
+        "documented response or documented non-response",
+        "request timestamp and elapsed silence duration",
+        "responsible person, office, or duty unless named by the source"
+      ],
+      "reportingEvidence": {
+        "recordChecks": {
+          "state": "NOT_SUPPLIED",
+          "events": []
+        },
+        "requestEvents": {
+          "state": "NOT_SUPPLIED",
+          "events": []
+        },
+        "responseEvents": {
+          "state": "NOT_SUPPLIED",
+          "events": []
+        },
+        "responsibleEntities": {
+          "state": "NOT_SUPPLIED",
+          "entities": []
+        }
+      },
+      "silenceClock": {
+        "state": "UNESTABLISHED",
+        "value": null,
+        "src": null
+      },
+      "forbidden": [
+        "Do not add officials, votes, budgets, outcomes, measurements, quotes, responses, or affected people absent from the supplied entries."
+      ]
+    },
+    "writingMode": "RECORDS_BRIEF",
+    "runningStoriesNote": "signal.runningStories are events the city is already living through and where each one stands. Background only — write nothing about tracking them."
+  },
+  "signal": {
+    "kind": "anomaly",
+    "hood": "Downtown",
+    "src": "output/engine_audit_c112.json patterns[0]; evidence: Neighborhood_Map row(s) 2",
+    "plan": {
+      "focus": "Baylight District — Final Council Vote stalled in construction-active",
+      "closeQuestion": "What is still unfinished for the people living this?"
+    },
+    "runningStories": [
+      "West Oakland Stabilization Fund — disbursement-active [West Oakland] — week 4",
+      "Oakland Alternative Response Initiative — dispatch-live [West Oakland, Fruitvale, East Oakland] — week 4",
+      "Fruitvale Transit Hub Phase II — Visioning — design-phase [Fruitvale] — week 4",
+      "Temescal Community Health Center — operational [Temescal] — week 4",
+      "Baylight District — Final Council Vote — construction-active [Jack London, Downtown] — week 4",
+      "Oakland Youth Apprenticeship Pipeline — implementation-active [West Oakland, East Oakland, Fruitvale] — under way",
+      "Downtown Economic Revitalization — legislation-filed [Downtown] — week 2",
+      "Commercial Stabilization for Grand Lake — legislation-filed [Grand Lake] — under way",
+      "West Oakland Tenant Defense Fund — vote-scheduled [West Oakland] — under way",
+      "Ivy Hill Revitalization Initiative — announced [Ivy Hill] — under way",
+      "Oakland Youth Apprenticeship Pipeline — operational [West Oakland, East Oakland, Fruitvale] — ENDED this week after 4 week(s); now implementation-active",
+      "Commercial Stabilization for Grand Lake — announced [Grand Lake] — ENDED this week after 2 week(s); now legislation-filed",
+      "West Oakland Tenant Defense Fund — announced [West Oakland] — ENDED this week after 2 week(s); now vote-scheduled"
+    ]
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00041",
+        "name": "Keisha Ramos",
+        "profile": "Keisha Ramos — civic office holder",
+        "quotationEligible": true,
+        "src": "output/civic-voice/baylight_authority_c112.json"
+      },
+      {
+        "pop": "POP-00041",
+        "name": "Keisha Ramos",
+        "profile": "Keisha Ramos — civic office holder",
+        "quotationEligible": true,
+        "src": "output/civic-voice/baylight_authority_c112.json"
+      },
+      {
+        "pop": "POP-00034",
+        "name": "Avery Santana",
+        "profile": "Avery Santana — civic office holder",
+        "quotationEligible": true,
+        "src": "output/civic-voice/mayor_gavel_c112.json"
+      },
+      {
+        "pop": "POP-00034",
+        "name": "Avery Santana",
+        "profile": "Avery Santana — civic office holder",
+        "quotationEligible": true,
+        "src": "output/civic-voice/mayor_open_c112.json"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-OFFICE-dd59e81823cb",
+        "pop": "POP-00041",
+        "name": "Keisha Ramos",
+        "quote": "The soil is clean, the oversight is independent, and the Cycle 115 review holds. But a build only succeeds if the neighborhoods beside it hold too.",
+        "factIds": [],
+        "src": "output/civic-voice/baylight_authority_c112.json#STMT-112-baylight_authority-001",
+        "sourceKind": "office-record",
+        "officeRecord": {
+          "sourceKind": "office-record",
+          "cycle": 112,
+          "officeSlug": "baylight_authority",
+          "statementId": "STMT-112-baylight_authority-001",
+          "quote": "The soil is clean, the oversight is independent, and the Cycle 115 review holds. But a build only succeeds if the neighborhoods beside it hold too.",
+          "topic": "Baylight District Construction Milestone Review",
+          "initiativeId": "INIT-006",
+          "filePath": "output/civic-voice/baylight_authority_c112.json",
+          "holderPopid": "POP-00041",
+          "speakerName": "Keisha Ramos"
+        }
+      },
+      {
+        "id": "Q-OFFICE-644f7a14ec57",
+        "pop": "POP-00041",
+        "name": "Keisha Ramos",
+        "quote": "The construction fence has our number — and starting this cycle, it answers within 48 hours.",
+        "factIds": [],
+        "src": "output/civic-voice/baylight_authority_c112.json#STMT-112-baylight_authority-002",
+        "sourceKind": "office-record",
+        "officeRecord": {
+          "sourceKind": "office-record",
+          "cycle": 112,
+          "officeSlug": "baylight_authority",
+          "statementId": "STMT-112-baylight_authority-002",
+          "quote": "The construction fence has our number — and starting this cycle, it answers within 48 hours.",
+          "topic": "Baylight District Community Impact Mitigation",
+          "initiativeId": "INIT-006",
+          "filePath": "output/civic-voice/baylight_authority_c112.json",
+          "holderPopid": "POP-00041",
+          "speakerName": "Keisha Ramos"
+        }
+      },
+      {
+        "id": "Q-OFFICE-82ae4efb7fd0",
+        "pop": "POP-00034",
+        "name": "Avery Santana",
+        "quote": "Independent oversight verified, remediation proceeds — Cycle 115 milestone stands. This city builds what it promises.",
+        "factIds": [],
+        "src": "output/civic-voice/mayor_gavel_c112.json#STMT-112-mayor_gavel-005",
+        "sourceKind": "office-record",
+        "officeRecord": {
+          "sourceKind": "office-record",
+          "cycle": 112,
+          "officeSlug": "mayor_gavel",
+          "statementId": "STMT-112-mayor_gavel-005",
+          "quote": "Independent oversight verified, remediation proceeds — Cycle 115 milestone stands. This city builds what it promises.",
+          "topic": "Baylight District Remediation Continuation",
+          "initiativeId": "INIT-006",
+          "filePath": "output/civic-voice/mayor_gavel_c112.json",
+          "holderPopid": "POP-00034",
+          "speakerName": "Avery Santana"
+        }
+      },
+      {
+        "id": "Q-OFFICE-7d07817d822b",
+        "pop": "POP-00034",
+        "name": "Avery Santana",
+        "quote": "Soil tests verified, remediation proceeds—Baylight's construction milestone review holds for Cycle 115.",
+        "factIds": [],
+        "src": "output/civic-voice/mayor_open_c112.json#STMT-112-mayor_open-003",
+        "sourceKind": "office-record",
+        "officeRecord": {
+          "sourceKind": "office-record",
+          "cycle": 112,
+          "officeSlug": "mayor_open",
+          "statementId": "STMT-112-mayor_open-003",
+          "quote": "Soil tests verified, remediation proceeds—Baylight's construction milestone review holds for Cycle 115.",
+          "topic": "Baylight District Remediation and Construction Timeline",
+          "initiativeId": "INIT-006",
+          "filePath": "output/civic-voice/mayor_open_c112.json",
+          "holderPopid": "POP-00034",
+          "speakerName": "Avery Santana"
+        }
+      }
+    ],
+    "excludedLeads": []
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C112",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-7cd6ffd2aeb3"
+    },
+    {
+      "t": "FACT",
+      "text": "Baylight District — Final Council Vote stalled in construction-active",
+      "src": "output/engine_audit_c112.json patterns[0]; evidence: Neighborhood_Map row(s) 2",
+      "id": "F-406f3c05e987"
+    },
+    {
+      "t": "FACT",
+      "text": "The civic initiative carrying Downtown has not advanced in 2 cycles.",
+      "src": "output/engine_audit_c112.json patterns[0]; evidence: Neighborhood_Map row(s) 2",
+      "id": "F-180c1a44dab5"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. For this investigation, do not convert a source intention to keep watching into past tracking; do not invent conversations, access, requests, responses, files, owners, duties, offices, expectations, or collective conclusions. Attribute each approved quote exactly and separately. Missing fields stay unknown, not implied. Missing evidence stays off the page. Do not print \"the Packet does not establish X\". Never rewrite missing evidence as \"X did not happen,\" \"no one did X,\" \"I looked/asked/requested,\" or \"the absence proves X.\" First-person reporting acts require an approved fact that names that act. Write 400-700 words as this reporter living the known condition. Do not print engine classifier names, severity labels, source row numbers, or a silence-clock section."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "luis-investigation-record-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Separate what the Packet establishes from what remains open, pursue the accountable record fairly, and make a documented contradiction or documented silence visible without inventing either.",
+    "articleContract": {
+      "voice": "evidence-first; concise records brief without reporting events, full investigation only with a Packet-backed reporting trail",
+      "targetWords": "400-700",
+      "opening": "a named person or Packet-named place living the condition",
+      "closing": "one unfinished human question, not a request for more record"
+    },
+    "authorizedTexture": [
+      "a concise known-versus-unknown structure over Packet-backed facts and declared missing fields",
+      "fair pressure framed as a question, interpretation, or explicit request for a record",
+      "short transitions between supplied facts that add no event, response, duration, source, or accusation"
+    ],
+    "textureConditions": [
+      "every named person, office, institution, Project, Initiative, business, organization, quote, response, request, and document must come from the Packet",
+      "a silence clock requires a Packet-backed request or response event and a supplied duration or Cycle span; otherwise its state is unestablished",
+      "decline-to-comment, no-response, refusal, contradiction, and responsible-office claims must each have a supplied source",
+      "an open question must remain a question and must not imply criminality, misconduct, duty, motive, or official knowledge absent from the Packet"
+    ],
+    "canonBlockers": [
+      "an invented records request, interview attempt, response, refusal, decline-to-comment, document, source, or silence duration",
+      "an unsupported contradiction, official duty, responsible office, act, inaction, promise, decision, motive, accusation, or finding",
+      "a named person, office, institution, Project, Initiative, business, or organization not found in the supplied record",
+      "a number, date, duration, budget, metric, count, vote, or timeline that contradicts or lacks the supplied record",
+      "Jax-style theatrical heat that turns an unestablished lead into a settled factual claim"
+    ]
+  },
+  "manifest": {
+    "id": "AM-92ca74e4ecd7",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-7cd6ffd2aeb3",
+        "t": "FACT",
+        "text": "Current cycle: C112",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-406f3c05e987",
+        "t": "FACT",
+        "text": "Baylight District — Final Council Vote stalled in construction-active",
+        "src": "output/engine_audit_c112.json patterns[0]; evidence: Neighborhood_Map row(s) 2"
+      },
+      {
+        "id": "F-180c1a44dab5",
+        "t": "FACT",
+        "text": "The civic initiative carrying Downtown has not advanced in 2 cycles.",
+        "src": "output/engine_audit_c112.json patterns[0]; evidence: Neighborhood_Map row(s) 2"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-OFFICE-dd59e81823cb",
+        "speakerId": "POP-00041",
+        "speakerName": "Keisha Ramos",
+        "text": "The soil is clean, the oversight is independent, and the Cycle 115 review holds. But a build only succeeds if the neighborhoods beside it hold too.",
+        "factIds": [],
+        "sourceKind": "office-record",
+        "officeRecord": {
+          "sourceKind": "office-record",
+          "cycle": 112,
+          "officeSlug": "baylight_authority",
+          "statementId": "STMT-112-baylight_authority-001",
+          "quote": "The soil is clean, the oversight is independent, and the Cycle 115 review holds. But a build only succeeds if the neighborhoods beside it hold too.",
+          "topic": "Baylight District Construction Milestone Review",
+          "initiativeId": "INIT-006",
+          "filePath": "output/civic-voice/baylight_authority_c112.json",
+          "holderPopid": "POP-00041",
+          "speakerName": "Keisha Ramos"
+        },
+        "src": "output/civic-voice/baylight_authority_c112.json#STMT-112-baylight_authority-001"
+      },
+      {
+        "id": "Q-OFFICE-644f7a14ec57",
+        "speakerId": "POP-00041",
+        "speakerName": "Keisha Ramos",
+        "text": "The construction fence has our number — and starting this cycle, it answers within 48 hours.",
+        "factIds": [],
+        "sourceKind": "office-record",
+        "officeRecord": {
+          "sourceKind": "office-record",
+          "cycle": 112,
+          "officeSlug": "baylight_authority",
+          "statementId": "STMT-112-baylight_authority-002",
+          "quote": "The construction fence has our number — and starting this cycle, it answers within 48 hours.",
+          "topic": "Baylight District Community Impact Mitigation",
+          "initiativeId": "INIT-006",
+          "filePath": "output/civic-voice/baylight_authority_c112.json",
+          "holderPopid": "POP-00041",
+          "speakerName": "Keisha Ramos"
+        },
+        "src": "output/civic-voice/baylight_authority_c112.json#STMT-112-baylight_authority-002"
+      },
+      {
+        "id": "Q-OFFICE-82ae4efb7fd0",
+        "speakerId": "POP-00034",
+        "speakerName": "Avery Santana",
+        "text": "Independent oversight verified, remediation proceeds — Cycle 115 milestone stands. This city builds what it promises.",
+        "factIds": [],
+        "sourceKind": "office-record",
+        "officeRecord": {
+          "sourceKind": "office-record",
+          "cycle": 112,
+          "officeSlug": "mayor_gavel",
+          "statementId": "STMT-112-mayor_gavel-005",
+          "quote": "Independent oversight verified, remediation proceeds — Cycle 115 milestone stands. This city builds what it promises.",
+          "topic": "Baylight District Remediation Continuation",
+          "initiativeId": "INIT-006",
+          "filePath": "output/civic-voice/mayor_gavel_c112.json",
+          "holderPopid": "POP-00034",
+          "speakerName": "Avery Santana"
+        },
+        "src": "output/civic-voice/mayor_gavel_c112.json#STMT-112-mayor_gavel-005"
+      },
+      {
+        "id": "Q-OFFICE-7d07817d822b",
+        "speakerId": "POP-00034",
+        "speakerName": "Avery Santana",
+        "text": "Soil tests verified, remediation proceeds—Baylight's construction milestone review holds for Cycle 115.",
+        "factIds": [],
+        "sourceKind": "office-record",
+        "officeRecord": {
+          "sourceKind": "office-record",
+          "cycle": 112,
+          "officeSlug": "mayor_open",
+          "statementId": "STMT-112-mayor_open-003",
+          "quote": "Soil tests verified, remediation proceeds—Baylight's construction milestone review holds for Cycle 115.",
+          "topic": "Baylight District Remediation and Construction Timeline",
+          "initiativeId": "INIT-006",
+          "filePath": "output/civic-voice/mayor_open_c112.json",
+          "holderPopid": "POP-00034",
+          "speakerName": "Avery Santana"
+        },
+        "src": "output/civic-voice/mayor_open_c112.json#STMT-112-mayor_open-003"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00041",
+        "name": "Keisha Ramos",
+        "profile": "Keisha Ramos — civic office holder",
+        "src": "output/civic-voice/baylight_authority_c112.json",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00041",
+        "name": "Keisha Ramos",
+        "profile": "Keisha Ramos — civic office holder",
+        "src": "output/civic-voice/baylight_authority_c112.json",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00034",
+        "name": "Avery Santana",
+        "profile": "Avery Santana — civic office holder",
+        "src": "output/civic-voice/mayor_gavel_c112.json",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00034",
+        "name": "Avery Santana",
+        "profile": "Avery Santana — civic office holder",
+        "src": "output/civic-voice/mayor_open_c112.json",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      },
+      {
+        "id": "P_KNOWN_UNKNOWN",
+        "rule": "Contrast approved facts with creativeBrief.missing only; do not narrate a missing item as an event that occurred."
+      }
+    ],
+    "unverifiedLeads": [],
+    "authorizedTexture": [
+      "a concise known-versus-unknown structure over Packet-backed facts and declared missing fields",
+      "fair pressure framed as a question, interpretation, or explicit request for a record",
+      "short transitions between supplied facts that add no event, response, duration, source, or accusation"
+    ],
+    "textureConditions": [
+      "every named person, office, institution, Project, Initiative, business, organization, quote, response, request, and document must come from the Packet",
+      "a silence clock requires a Packet-backed request or response event and a supplied duration or Cycle span; otherwise its state is unestablished",
+      "decline-to-comment, no-response, refusal, contradiction, and responsible-office claims must each have a supplied source",
+      "an open question must remain a question and must not imply criminality, misconduct, duty, motive, or official knowledge absent from the Packet"
+    ],
+    "forbiddenClaimClasses": [
+      "an invented records request, interview attempt, response, refusal, decline-to-comment, document, source, or silence duration",
+      "an unsupported contradiction, official duty, responsible office, act, inaction, promise, decision, motive, accusation, or finding",
+      "a named person, office, institution, Project, Initiative, business, or organization not found in the supplied record",
+      "a number, date, duration, budget, metric, count, vote, or timeline that contradicts or lacks the supplied record",
+      "Jax-style theatrical heat that turns an unestablished lead into a settled factual claim"
+    ]
+  }
+}

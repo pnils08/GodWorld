@@ -1,0 +1,463 @@
+{
+  "v": "UNDOCKED-ADAPTER/1",
+  "show": "UNDOCKED",
+  "episode_id": "undocked-pop00530-2026-11-06T02-30-29",
+  "popid": "POP-00530",
+  "holder": "Lena Okafor",
+  "session": "undocked-pop00530",
+  "window": {
+    "startedAt": "2026-11-06T02:30:29.920Z",
+    "endedAt": "2026-11-06T02:50:44.958Z"
+  },
+  "runner": {
+    "turns": 61,
+    "exitCode": null,
+    "capped": true,
+    "toolErrors": 7,
+    "estCostUsd": 0.019,
+    "tokensIn": 144671,
+    "tokensOut": 9055,
+    "log": "output/spacemolt-show/episodes/undocked-pop00530-2026-11-06T02-30-29.log",
+    "stopReason": "window",
+    "toolCalls": 53
+  },
+  "stall": null,
+  "source": {
+    "kind": "get_action_log",
+    "categories": [
+      "mining",
+      "trading",
+      "mission",
+      "combat",
+      "navigation",
+      "session",
+      "achievement"
+    ],
+    "fetchedAt": "2026-11-06T02:55:50.938Z"
+  },
+  "facts": {
+    "credits_delta": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "hits": 2,
+      "basis": [
+        {
+          "id": 251504469,
+          "event_type": "trading.exchange_fill",
+          "n": 6
+        },
+        {
+          "id": 251504146,
+          "event_type": "trading.exchange_fill",
+          "n": 12
+        }
+      ],
+      "value": 18
+    },
+    "points_delta": {
+      "type": "FACT",
+      "source": "get_achievements",
+      "basis": "progress",
+      "items": [
+        {
+          "id": "voyager_i",
+          "name": "Voyager I",
+          "gained": 2.4
+        },
+        {
+          "id": "cartographer",
+          "name": "Cartographer",
+          "gained": 1.8
+        },
+        {
+          "id": "open_for_business",
+          "name": "Open For Business",
+          "gained": 0.6
+        },
+        {
+          "id": "voyager_ii",
+          "name": "Voyager II",
+          "gained": 0.6
+        },
+        {
+          "id": "master_explorer",
+          "name": "Master Explorer",
+          "gained": 0.5
+        },
+        {
+          "id": "high_volume_trader",
+          "name": "High-Volume Trader",
+          "gained": 0.05
+        },
+        {
+          "id": "prospector_i",
+          "name": "Prospector I",
+          "gained": 0.03
+        },
+        {
+          "id": "jump_master",
+          "name": "Jump Master",
+          "gained": 0.01
+        },
+        {
+          "id": "millionaire",
+          "name": "Millionaire",
+          "gained": 0
+        },
+        {
+          "id": "far_traveler",
+          "name": "Far Traveler",
+          "gained": 0
+        },
+        {
+          "id": "prospector_ii",
+          "name": "Prospector II",
+          "gained": 0
+        },
+        {
+          "id": "prospector_iii",
+          "name": "Prospector III",
+          "gained": 0
+        }
+      ],
+      "beforeTakenAt": "2026-11-06T02:30:29.694Z",
+      "value": 5.99
+    },
+    "systems_visited": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": [
+        "alpha_centauri",
+        "sol",
+        "sirius",
+        "nova_terra",
+        "epsilon_eridani",
+        "procyon",
+        "proxima_centauri",
+        "barnards_star"
+      ]
+    },
+    "combat_results": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "events": 1,
+        "kills": 0,
+        "deaths": 0,
+        "other": 1
+      }
+    },
+    "cargo": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mined": {
+          "copper_ore": 3,
+          "iron_ore": 8,
+          "antimatter_containment_cell": 1,
+          "aluminum_ore": 4
+        },
+        "sold": {
+          "copper_ore": 6,
+          "iron_ore": 12
+        }
+      }
+    },
+    "mishaps": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "event_counts": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": 4,
+        "trading": 2,
+        "mission": 1,
+        "combat": 1,
+        "navigation": 7,
+        "session": 1,
+        "achievement": 0
+      }
+    },
+    "entries": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": [
+          {
+            "id": 251544066,
+            "created_at": "2026-11-06T02:49:37Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 3 Copper Ore at Patience Field",
+            "data": {
+              "poi_name": "Patience Field",
+              "quantity": 3,
+              "resource_id": "copper_ore",
+              "resource_name": "Copper Ore",
+              "system_id": "barnards_star",
+              "system_name": "Barnard's Star",
+              "ticks": 3
+            }
+          },
+          {
+            "id": 251543798,
+            "created_at": "2026-11-06T02:49:37Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 8 Iron Ore at Patience Field",
+            "data": {
+              "poi_name": "Patience Field",
+              "quantity": 8,
+              "resource_id": "iron_ore",
+              "resource_name": "Iron Ore",
+              "system_id": "barnards_star",
+              "system_name": "Barnard's Star",
+              "ticks": 4
+            }
+          },
+          {
+            "id": 251543527,
+            "created_at": "2026-11-06T02:49:37Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 1 Antimatter Containment Cell at Patience Field",
+            "data": {
+              "poi_name": "Patience Field",
+              "quantity": 1,
+              "resource_id": "antimatter_containment_cell",
+              "resource_name": "Antimatter Containment Cell",
+              "system_id": "barnards_star",
+              "system_name": "Barnard's Star",
+              "ticks": 1
+            }
+          },
+          {
+            "id": 251533665,
+            "created_at": "2026-11-06T02:44:35Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 4 Aluminum Ore at Delta Major Belt",
+            "data": {
+              "poi_name": "Delta Major Belt",
+              "quantity": 4,
+              "resource_id": "aluminum_ore",
+              "resource_name": "Aluminum Ore",
+              "system_id": "epsilon_eridani",
+              "system_name": "Epsilon Eridani",
+              "ticks": 2
+            }
+          }
+        ],
+        "trading": [
+          {
+            "id": 251504469,
+            "created_at": "2026-11-06T02:31:01Z",
+            "category": "trading",
+            "event_type": "trading.exchange_fill",
+            "summary": "Sold 6x Copper Ore @ 1 each (6 credits)",
+            "data": {
+              "base_id": "alpha_centauri_colonial_station",
+              "item_id": "copper_ore",
+              "price": 1,
+              "quantity": 6,
+              "role": "seller",
+              "source": "spot",
+              "total": 6
+            }
+          },
+          {
+            "id": 251504146,
+            "created_at": "2026-11-06T02:30:52Z",
+            "category": "trading",
+            "event_type": "trading.exchange_fill",
+            "summary": "Sold 12x Iron Ore @ 1 each (12 credits)",
+            "data": {
+              "base_id": "alpha_centauri_colonial_station",
+              "item_id": "iron_ore",
+              "price": 1,
+              "quantity": 12,
+              "role": "seller",
+              "source": "spot",
+              "total": 12
+            }
+          }
+        ],
+        "mission": [
+          {
+            "id": 251504764,
+            "created_at": "2026-11-06T02:31:11Z",
+            "category": "mission",
+            "event_type": "mission.accepted",
+            "summary": "Accepted mission: Copper Requisition",
+            "data": {
+              "mission_id": "29e6694c936e0db17081e4e65a2f2647",
+              "template_id": "copper_requisition",
+              "title": "Copper Requisition",
+              "type": "mining"
+            }
+          }
+        ],
+        "combat": [
+          {
+            "id": 251507182,
+            "created_at": "2026-11-06T02:32:31Z",
+            "category": "combat",
+            "event_type": "combat.sensor_sweep",
+            "summary": "Sensor sweep complete. No anomalies detected.",
+            "data": {
+              "contacts": 0,
+              "signature_detected": false
+            }
+          }
+        ],
+        "navigation": [
+          {
+            "id": 251539505,
+            "created_at": "2026-11-06T02:47:28Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Proxima Centauri to Barnard's Star",
+            "data": {
+              "arrival_poi": "barnards_star_star",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "proxima_centauri",
+              "is_pathfinder": false,
+              "to_system": "barnards_star",
+              "to_system_name": "Barnard's Star"
+            }
+          },
+          {
+            "id": 251537398,
+            "created_at": "2026-11-06T02:46:18Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Procyon to Proxima Centauri",
+            "data": {
+              "arrival_poi": "pollux_major_star",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "procyon",
+              "is_pathfinder": false,
+              "to_system": "proxima_centauri",
+              "to_system_name": "Proxima Centauri"
+            }
+          },
+          {
+            "id": 251535332,
+            "created_at": "2026-11-06T02:45:08Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Epsilon Eridani to Procyon",
+            "data": {
+              "arrival_poi": "procyon_a",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "epsilon_eridani",
+              "is_pathfinder": false,
+              "to_system": "procyon",
+              "to_system_name": "Procyon"
+            }
+          },
+          {
+            "id": 251529843,
+            "created_at": "2026-11-06T02:42:38Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Nova Terra to Epsilon Eridani",
+            "data": {
+              "arrival_poi": "delta_major_star",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "nova_terra",
+              "is_pathfinder": false,
+              "to_system": "epsilon_eridani",
+              "to_system_name": "Epsilon Eridani"
+            }
+          },
+          {
+            "id": 251525643,
+            "created_at": "2026-11-06T02:40:18Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Sirius to Nova Terra",
+            "data": {
+              "arrival_poi": "nova_terra_ice_shelf",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "sirius",
+              "is_pathfinder": false,
+              "to_system": "nova_terra",
+              "to_system_name": "Nova Terra"
+            }
+          },
+          {
+            "id": 251522509,
+            "created_at": "2026-11-06T02:39:08Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Sol to Sirius",
+            "data": {
+              "arrival_poi": "sirius_gas_pocket",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "sol",
+              "is_pathfinder": false,
+              "to_system": "sirius",
+              "to_system_name": "Sirius"
+            }
+          },
+          {
+            "id": 251509084,
+            "created_at": "2026-11-06T02:33:38Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Alpha Centauri to Sol",
+            "data": {
+              "arrival_poi": "neptune",
+              "cloaked": false,
+              "first_visit": false,
+              "from_system": "alpha_centauri",
+              "is_pathfinder": false,
+              "to_system": "sol",
+              "to_system_name": "Sol"
+            }
+          }
+        ],
+        "session": [
+          {
+            "id": 251503523,
+            "created_at": "2026-11-06T02:30:31Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "LenaOkafor logged in",
+            "data": {
+              "last_login_at": "2026-11-06T02:30:29Z",
+              "source": "password"
+            }
+          }
+        ],
+        "achievement": []
+      }
+    }
+  },
+  "captains_log": {
+    "kind": "QUOTED_SUBJECTIVE_COLOR",
+    "type": "INTERPRETATION",
+    "provenance": "captains_log_list",
+    "windowed": 0,
+    "listed": 1,
+    "note": "entries exist but created_at is outside startedAt/endedAt (often written at handoff)",
+    "entries": [],
+    "unwindowed": [
+      {
+        "index": 0,
+        "created_at": "2026-11-03 02:50:39",
+        "text": "[Session Handoff] **Handoff: LenaOkafor (Solarian), ship Theoria**\n\n- **Right now:** Mining at Miaplacidus Alloy Remnants (miaplacidus_alloy_remnants) in the Miaplacidus system. The last mine call returned 1 Iron Ore with the deposit at 99,999 units, 0% depleted. Mining is the active loop; the next step is to keep mining or check cargo before moving on.\n- **Location and status:** Miaplacidus (Lawless, no police). Credits 500"
+      }
+    ]
+  }
+}

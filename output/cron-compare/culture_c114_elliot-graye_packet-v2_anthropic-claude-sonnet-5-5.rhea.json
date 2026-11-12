@@ -1,0 +1,86 @@
+{
+  "draft": "output/cron-compare/culture_c114_elliot-graye_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "114",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "dd39d3f0057daf7eaf7f83c85642de90a2a202abe78b6353f0e71b02db36b3de",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All citizen bios, exact interview quotes, and faith ledger events strictly match ground truth and canonical institution mappings.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "graye-faith-ground-v1",
+    "packageVersion": "GRAYE-LEP2-2",
+    "manifestId": "AM-822b5c8c642e",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "111",
+          "38",
+          "196",
+          "112",
+          "102"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Antoine Vermeer",
+      "Art Scott",
+      "Declan Toto",
+      "Ignacio Zavala"
+    ],
+    "unverified": [
+      "Bay Pure Land Buddhist",
+      "Bishop Vermeer",
+      "Esperanza Parish",
+      "Faith Organizations",
+      "Foothill Builders",
+      "Interfaith Council",
+      "Living Word",
+      "Piedmont Avenue",
+      "Telegraph Presbyterian Fellowship"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0114,
+  "durationMs": 6105,
+  "parseError": false,
+  "ranAt": "2026-11-06T00:15:38.093Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 953,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "dd39d3f0057daf7eaf7f83c85642de90a2a202abe78b6353f0e71b02db36b3de",
+    "costUsd": 0.0011
+  }
+}

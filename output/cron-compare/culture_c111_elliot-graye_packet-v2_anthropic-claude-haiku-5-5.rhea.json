@@ -1,0 +1,73 @@
+{
+  "draft": "output/cron-compare/culture_c111_elliot-graye_packet-v2_anthropic-claude-haiku-5-5.md",
+  "cycle": "111",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "1ef31222d28a5763537b6aea4a655f183d9dd135c49aaba08092710762dda863",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes match exact packet provenance, canon faith institutions and citizen roles are verified, with zero fourth-wall or factual contradictions.",
+  "review": {
+    "profileId": "graye-faith-ground-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "graye-faith-ground-v1",
+    "packageVersion": "GRAYE-LEP2-1",
+    "manifestId": "AM-529e516e9c62",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Eleanor Bishop",
+      "Eunice Marston",
+      "Kenji Tanaka",
+      "Manny Ellen"
+    ],
+    "unverified": [
+      "Bay Pure Land",
+      "Bay Pure Land Buddhist",
+      "Elections Office",
+      "Esperanza Parish",
+      "Living Word",
+      "Telegraph Presbyterian",
+      "Telegraph Presbyterian Fellowship",
+      "Telegraph Presbyterian Fellowship's Epiphany"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0101,
+  "durationMs": 6835,
+  "parseError": false,
+  "ranAt": "2026-10-15T23:15:30.127Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": false,
+    "inTarget": false,
+    "inTargetBy": "judge",
+    "words": 823,
+    "short": "The piece covers multiple faith-community signals rather than focusing on one, and falls short of the target word count.",
+    "score": 2,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "1ef31222d28a5763537b6aea4a655f183d9dd135c49aaba08092710762dda863",
+    "costUsd": 0.0023
+  }
+}

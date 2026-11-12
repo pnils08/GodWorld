@@ -1,5 +1,5 @@
 {
-  "cycle": 113,
+  "cycle": 115,
   "mayor": "Avery Santana",
   "executiveBranch": {
     "mayor": "Avery Santana",
@@ -8,7 +8,7 @@
       "title": "Mayor",
       "popId": "POP-00034",
       "status": "active",
-      "approvalRating": "69"
+      "approvalRating": "72"
     },
     "deputyMayor": "Brenda Okoro",
     "deputyMayorDetail": {
@@ -75,13 +75,6 @@
     }
   ],
   "asRoster": [
-    {
-      "name": "Vinnie Keane",
-      "position": "Designated Hitter, Oakland A's Legend",
-      "popId": "POP-00001",
-      "tier": "1",
-      "status": "Active"
-    },
     {
       "name": "Mark Aitken",
       "position": "First Baseman, Oakland A's Legend — Player Rep, Community Liaison",
@@ -210,7 +203,7 @@
     },
     {
       "name": "Sergio Aybar",
-      "position": "Catcher, Midland RockHounds (AA)",
+      "position": "Catcher, Las Vegas Aviators (AAA)",
       "popId": "POP-00078",
       "tier": "4",
       "status": "Active"
@@ -373,7 +366,7 @@
       "name": "Vladimir Gonzalez",
       "position": "Right Fielder, Oakland A's",
       "popId": "POP-00598",
-      "tier": "3",
+      "tier": "2",
       "status": "Active"
     },
     {
@@ -402,13 +395,6 @@
       "position": "SF / The Oaks",
       "popId": "POP-01024",
       "tier": "2",
-      "status": "Active"
-    },
-    {
-      "name": "Dame Sarr",
-      "position": "SG / The Oaks",
-      "popId": "POP-01025",
-      "tier": "4",
       "status": "Active"
     },
     {
@@ -498,10 +484,10 @@
   ],
   "initiatives": [
     {
-      "name": "Oakland Youth Apprenticeship Pipeline",
-      "id": "INIT-007",
-      "status": "announced",
-      "voteBreakdown": "[ENGINE-CLOCK n=3 from=C109] Announced C73 Baylight supplemental. Luis Navarro feature. 3 tracks, 8 trades, 400+ Baylight placements by Year 3. No coverage since C73 — 12-cycle gap. Multiple milestones (Oakland City Schools MOU C76, Oakland Community College District MOU C78, budget allocation C80, A's commitment C83) unverified.",
+      "name": "Ivy Hill Community Support Initiative",
+      "id": "INIT-014",
+      "status": "pending-vote",
+      "voteBreakdown": "Ivy Hill is showing signs of decay momentum and increased crime index, requiring immediate community support and targeted investment.",
       "implementationPhase": null,
       "nextScheduledAction": null,
       "nextActionCycle": null
@@ -512,8 +498,8 @@
       "status": "PASSED",
       "voteBreakdown": "Cycle 78: Passed 6-3. Ramon Vega voted yes. Leonard Tran voted no. (Elliott Crane voted yes remotely)",
       "implementationPhase": "disbursement-active",
-      "nextScheduledAction": "Month-12 disbursement execution and charter renewal drafting",
-      "nextActionCycle": 114
+      "nextScheduledAction": "Council consideration of the charter renewal ordinance",
+      "nextActionCycle": 116
     },
     {
       "name": "Oakland Alternative Response Initiative",
@@ -521,17 +507,17 @@
       "status": "PASSED",
       "voteBreakdown": "Cycle 82: Passed 5-4. Ramon Vega voted no. Leonard Tran voted yes.",
       "implementationPhase": "dispatch-live",
-      "nextScheduledAction": "D3 community briefing execution",
-      "nextActionCycle": 114
+      "nextScheduledAction": "Execute and publish the D3 briefing record with district-level and Fruitvale data",
+      "nextActionCycle": 116
     },
     {
       "name": "Fruitvale Transit Hub Phase II — Visioning",
       "id": "INIT-003",
       "status": "PASSED",
       "voteBreakdown": "Cycle 86: Visioning phase concluded. Input documented.\nCycle 94: Vote scheduled C94 (visioning-complete + vote-ready phase transition; was VoteCycle=86).\nCycle 94: Visioning phase concluded. Input documented.",
-      "implementationPhase": "design-phase",
-      "nextScheduledAction": "Preliminary schematics community review",
-      "nextActionCycle": 114
+      "implementationPhase": "complete",
+      "nextScheduledAction": null,
+      "nextActionCycle": null
     },
     {
       "name": "Temescal Community Health Center",
@@ -539,7 +525,7 @@
       "status": "PASSED",
       "voteBreakdown": "Cycle 80: Passed 6-2. Ramon Vega voted yes. Leonard Tran voted yes. (Elliott Crane absent)",
       "implementationPhase": "operational",
-      "nextScheduledAction": "Second quarterly audit cycle",
+      "nextScheduledAction": "Q3 intake audit filing + recurring merchant verification walkthrough",
       "nextActionCycle": 116
     },
     {
@@ -547,18 +533,72 @@
       "id": "INIT-006",
       "status": "PASSED",
       "voteBreakdown": "Cycle 83: Passed 6-3. Denise Carter voted yes. Rose Delgado voted yes. Janae Rivers voted yes. Terrence Mobley voted yes. Elliott Crane voted no. Warren Ashford voted no. Nina Chen voted no. Ramon Vega voted yes. Leonard Tran voted yes.",
-      "implementationPhase": "construction-active",
-      "nextScheduledAction": "Construction milestone review",
-      "nextActionCycle": 115
+      "implementationPhase": "complete",
+      "nextScheduledAction": null,
+      "nextActionCycle": null
+    },
+    {
+      "name": "Oakland Youth Apprenticeship Pipeline",
+      "id": "INIT-007",
+      "status": "PASSED",
+      "voteBreakdown": "[ENGINE-CLOCK n=3 from=C109] Announced C73 Baylight supplemental. Luis Navarro feature. 3 tracks, 8 trades, 400+ Baylight placements by Year 3. No coverage since C73 — 12-cycle gap. Multiple milestones (Oakland City Schools MOU C76, Oakland Community College District MOU C78, budget allocation C80, A's commitment C83) unverified.",
+      "implementationPhase": "implementation-active",
+      "nextScheduledAction": "Publish the placement-gap analysis and program adjustment plan",
+      "nextActionCycle": 116
+    },
+    {
+      "name": "Downtown Economic Revitalization",
+      "id": "INIT-008",
+      "status": "FAILED",
+      "voteBreakdown": "economic imbalance\nCycle 113: Rejected.",
+      "implementationPhase": "vote-scheduled",
+      "nextScheduledAction": null,
+      "nextActionCycle": null
+    },
+    {
+      "name": "Commercial Stabilization for Grand Lake",
+      "id": "INIT-009",
+      "status": "FAILED",
+      "voteBreakdown": "Proposed by Leonard Tran in C109 — neighborhood math-imbalance flag on Grand Lake retail.\nCycle 113: Rejected.",
+      "implementationPhase": "vote-scheduled",
+      "nextScheduledAction": "Recorded full-council vote on INIT-009",
+      "nextActionCycle": 116
     },
     {
       "name": "West Oakland Tenant Defense Fund",
       "id": "INIT-010",
-      "status": "PASSED",
-      "voteBreakdown": "Proposed by Denise Carter in the C109 week — eviction filings outpacing Stabilization Fund relief.\nCycle 112: Passed 6-3. Denise Carter voted yes. Rose Delgado voted yes. Janae Rivers voted yes. Terrence Mobley voted yes. Elliott Crane voted no. Warren Ashford voted no. Nina Chen voted no. Leonard Tran voted yes. Ramon Vega voted yes.",
-      "implementationPhase": "operational",
-      "nextScheduledAction": "Committee hearing and vote",
-      "nextActionCycle": 113
+      "status": "FAILED",
+      "voteBreakdown": "Proposed by Denise Carter in C109 — eviction filings outpacing Stabilization Fund relief.\nCycle 112: Passed 6-3. Denise Carter voted yes. Rose Delgado voted yes. Janae Rivers voted yes. Terrence Mobley voted yes. Elliott Crane voted no. Warren Ashford voted no. Nina Chen voted no. Leonard Tran voted yes. Ramon Vega voted yes.\nCycle 113: Rejected.",
+      "implementationPhase": "vote-scheduled",
+      "nextScheduledAction": "Publish the analysis and record the committee decision",
+      "nextActionCycle": 116
+    },
+    {
+      "name": "Ivy Hill Revitalization Initiative",
+      "id": "INIT-011",
+      "status": "FAILED",
+      "voteBreakdown": "Commercial contraction and public safety concerns in Ivy Hill\nCycle 113: Rejected.",
+      "implementationPhase": "announced",
+      "nextScheduledAction": null,
+      "nextActionCycle": null
+    },
+    {
+      "name": "Dimond Revitalization Initiative",
+      "id": "INIT-012",
+      "status": "FAILED",
+      "voteBreakdown": "Commercial contraction and public safety concerns in Dimond\nCycle 113: Rejected.",
+      "implementationPhase": "announced",
+      "nextScheduledAction": null,
+      "nextActionCycle": null
+    },
+    {
+      "name": "Ivy Hill Community Revitalization",
+      "id": "INIT-013",
+      "status": "FAILED",
+      "voteBreakdown": "addressing decay momentum and crime index\nCycle 113: Rejected.",
+      "implementationPhase": "announced",
+      "nextScheduledAction": null,
+      "nextActionCycle": null
     }
   ]
 }

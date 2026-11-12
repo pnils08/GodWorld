@@ -96,7 +96,7 @@ var OAKLAND_FAITH_ORGANIZATIONS = [
     founded: 1892,
     congregation: 300,
     leader: 'Rev. David Park',
-    character: 'progressive, LGBTQ affirming'
+    character: ''
   },
   {
     organization: 'Acts Full Gospel Church',

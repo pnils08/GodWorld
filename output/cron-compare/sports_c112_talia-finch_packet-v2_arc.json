@@ -1,0 +1,27 @@
+{
+  "status": "arc-seed",
+  "cycle": "112",
+  "desk": "sports",
+  "persona": "talia-finch",
+  "hood": "KONO",
+  "quotes": [
+    {
+      "pop": "POP-00273",
+      "name": "Trenton Nawan",
+      "quote": "To be honest, I'm still a bit worried about the Oaks. Their preseason didn't exactly fill me with confidence, but the way they're playing now is giving me hope. I checked the scores twice a day all week and was happy every time they won. Maybe they're finally getting their act together."
+    },
+    {
+      "pop": "POP-01023",
+      "name": "Adash Stanley",
+      "quote": "The mood around the Oaks game has been really electric lately. I've felt the excitement building, and it's like the whole city is waking up with the team. After a tough preseason, it was a huge relief to see them win their first game. The buzz in the air is palpable, and I think people are really looking forward to seeing what they can do this season."
+    },
+    {
+      "pop": "POP-01027",
+      "name": "Austin Reaves",
+      "quote": "To be honest, the mood around the Oaks game has been really up and down for me. We're still finding our footing, and it's hard not to worry when we're not seeing the wins. But after that first win, the energy was electric. I stayed late signing autographs for the kids, and it felt amazing. I think fans are getting a little frustrated, but I trust that we'll get it together. We just need to keep working and supporting each other."
+    }
+  ],
+  "claim": "To be honest, I'm still a bit worried about the Oaks. Their preseason didn't exactly fill me with confidence, but the way they're playing now is giving me hope. I checked the scores twice a day all week and was happy every time they won. Maybe they're finally getting their act together.",
+  "src": "citizenVoice PRESS c112",
+  "ranAt": "2026-10-22T18:17:40.031Z"
+}

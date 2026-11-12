@@ -1,0 +1,1330 @@
+{
+  "stage": "report",
+  "desk": "culture",
+  "cycle": "114",
+  "persona": "elliot-graye",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Elliot Graye",
+    "popid": "POP-00012"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-faith",
+      "angle": "crisis response at Bay Pure Land Buddhist Temple (Chinatown) — the week in faith, and Cathedral of the Living Word in focus",
+      "label": "8 faith events on the record since C108 · Cathedral of the Living Word in Lake Merritt | 9 named on the record",
+      "hookLine": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+      "hood": "Lake Merritt",
+      "citizens": [
+        "Antoine Vermeer (POP-00755)",
+        "Ignacio Zavala (POP-01094)",
+        "Art Scott (POP-00665)",
+        "Declan Toto (POP-00697)",
+        "Christopher Johnson (POP-00211)",
+        "Kenji Tanaka (POP-00763)",
+        "Eunice Marston (POP-00753)",
+        "Ramon Solano (POP-00756)",
+        "Yael Bauer (POP-00760)"
+      ],
+      "popids": [
+        "POP-00755",
+        "POP-01094",
+        "POP-00665",
+        "POP-00697",
+        "POP-00211",
+        "POP-00763",
+        "POP-00753",
+        "POP-00756",
+        "POP-00760"
+      ],
+      "ref": "output/beats/Faith_Organizations.jsonl \"Cathedral of the Living Word\"",
+      "cycle": 114
+    }
+  },
+  "angle": "output/cron-compare/culture_c114_elliot-graye_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 4,
+  "quotes": [
+    {
+      "pop": "POP-00755",
+      "name": "Antoine Vermeer",
+      "quote": "I've seen the Cathedral of the Living Word's job training workshop attract attendees from around the neighborhood, which is great. It's a valuable resource for our community.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen the Cathedral of the Living Word's job training workshop attract attendees from around the neighborhood, which is great. It's a valuable resource for our community.\",\n  \"fact_ids\": [\"F-13e9b2332b16\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-13e9b2332b16"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00755-7619668957",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen the Cathedral of the Living Word's job training workshop attract attendees from around the neighborhood, which is great. It's a valuable resource for our community."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00755",
+          "name": "Antoine Vermeer",
+          "role": "Senior Pastor / Faith Leader",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Elliot Graye",
+          "question": "How does the Cathedral of the Living Word's job training workshop support the local community? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-faith",
+          "hood": "Lake Merritt",
+          "focus": "Cathedral of the Living Word",
+          "src": "output/beats/Faith_Organizations.jsonl \"Cathedral of the Living Word\""
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Antoine Vermeer — Senior Pastor / Faith Leader — Lake Merritt",
+          "evidence": [
+            {
+              "id": "EV-ab5c572e79",
+              "src": "output/beats/Faith_Organizations.jsonl \"Cathedral of the Living Word\"",
+              "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "In focus: Cathedral of the Living Word — Catholic, Lake Merritt, congregation 2,000, founded 34 years ago, led today by Bishop Antoine Vermeer — architectural landmark, diverse congregation",
+            "src": "output/beats/Faith_Organizations.jsonl \"Cathedral of the Living Word\"",
+            "id": "F-13e9b2332b16"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "8 faith events on the record since C108 · Cathedral of the Living Word in Lake Merritt | 9 named on the record",
+            "src": "output/beats/Faith_Organizations.jsonl \"Cathedral of the Living Word\"",
+            "id": "F-7fd447ea58d3"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+            "src": "output/beats/Faith_Organizations.jsonl \"Cathedral of the Living Word\"",
+            "id": "F-169bcd402575"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\"",
+            "id": "F-61024524d215"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-c6268244f8ea"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Cathedral of the Living Word\"",
+            "id": "F-2e38ae74adc2"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C108 — holy day: traditional Epiphany rituals observed (attendance 1,077)",
+            "src": "output/beats/Faith_Ledger.jsonl C108 \"Cathedral of the Living Word\"",
+            "id": "F-53d1f53fb120"
+          },
+          {
+            "t": "FACT",
+            "text": "Antoine Vermeer — Senior Pastor / Faith Leader — Lake Merritt",
+            "src": "Simulation_Ledger profile for POP-00755",
+            "id": "F-c1a16947809a"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01094",
+      "name": "Ignacio Zavala",
+      "quote": "I've driven by the Cathedral of the Living Word a few times, it's a big presence around Lake Merritt. I haven't been inside, but I've noticed it's always bustling. I guess that's what 1,000+ people on Epiphany looks like. My wife is into that sort of thing, she's always talking about the different faith communities around Oakland.",
+      "disp": "driven, hard to sit still; steady, hard to shake; principled, plays it straight; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've driven by the Cathedral of the Living Word a few times, it's a big presence around Lake Merritt. I haven't been inside, but I've noticed it's always bustling. I guess that's what 1,000+ people on Epiphany looks like. My wife is into that sort of thing, she's always talking about the different faith communities around Oakland.\",\n  \"fact_ids\": [\"F-2e38ae74adc2\", \"F-53d1f53fb120\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-2e38ae74adc2",
+          "F-53d1f53fb120"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01094-953e53eac6",
+        "authoredQuote": true,
+        "publishableQuote": "I've driven by the Cathedral of the Living Word a few times, it's a big presence around Lake Merritt. I haven't been inside, but I've noticed it's always bustling. I guess that's what 1,000+ people on Epiphany looks like. My wife is into that sort of thing, she's always talking about the different faith communities around Oakland."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01094",
+          "name": "Ignacio Zavala",
+          "role": "Managing Partner, Foothill Builders",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Elliot Graye",
+          "question": "What have you seen, felt, or understood about \"Cathedral of the Living Word\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-faith",
+          "hood": "Lake Merritt",
+          "focus": "Cathedral of the Living Word",
+          "src": "output/beats/Faith_Organizations.jsonl \"Cathedral of the Living Word\""
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Ignacio Zavala — Managing Partner, Foothill Builders — West Oakland",
+          "evidence": [
+            {
+              "id": "EV-83390054b6",
+              "src": "output/beats/Faith_Organizations.jsonl \"Cathedral of the Living Word\"",
+              "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "8 faith events on the record since C108 · Cathedral of the Living Word in Lake Merritt | 9 named on the record",
+            "src": "output/beats/Faith_Organizations.jsonl \"Cathedral of the Living Word\"",
+            "id": "F-7fd447ea58d3"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+            "src": "output/beats/Faith_Organizations.jsonl \"Cathedral of the Living Word\"",
+            "id": "F-169bcd402575"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\"",
+            "id": "F-61024524d215"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-c6268244f8ea"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Cathedral of the Living Word\"",
+            "id": "F-2e38ae74adc2"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C108 — holy day: traditional Epiphany rituals observed (attendance 1,077)",
+            "src": "output/beats/Faith_Ledger.jsonl C108 \"Cathedral of the Living Word\"",
+            "id": "F-53d1f53fb120"
+          },
+          {
+            "t": "FACT",
+            "text": "St. Esperanza Parish (Fruitvale), C108 — holy day: congregation celebrates Epiphany (attendance 374)",
+            "src": "output/beats/Faith_Ledger.jsonl C108 \"St. Esperanza Parish\"",
+            "id": "F-3cbfd5530d60"
+          },
+          {
+            "t": "FACT",
+            "text": "Ignacio Zavala — Managing Partner, Foothill Builders — West Oakland",
+            "src": "Simulation_Ledger profile for POP-01094",
+            "id": "F-c074f45e0359"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00665",
+      "name": "Art Scott",
+      "quote": "I've seen Cathedral of the Living Word hosting a job training workshop recently, it's been drawing people from around the neighborhood. That's something positive for our community.",
+      "disp": "can't switch off, working themselves thin; draws people in, deep with them; warm, tender with people; steady, hard to shake; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen Cathedral of the Living Word hosting a job training workshop recently, it's been drawing people from around the neighborhood. That's something positive for our community.\",\n  \"fact_ids\": [\"F-7fd447ea58d3\", \"F-9c9f3eeeb536\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-7fd447ea58d3",
+          "F-9c9f3eeeb536"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00665-52634ba96b",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen Cathedral of the Living Word hosting a job training workshop recently, it's been drawing people from around the neighborhood. That's something positive for our community."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00665",
+          "name": "Art Scott",
+          "role": "Sustainable Materials Scientist",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Elliot Graye",
+          "question": "As a resident of Lake Merritt, what have you seen, felt, or understood about \"Cathedral of the Living Word\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-faith",
+          "hood": "Lake Merritt",
+          "focus": "Cathedral of the Living Word",
+          "src": "output/beats/Faith_Organizations.jsonl \"Cathedral of the Living Word\""
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Art Scott — Sustainable Materials Scientist — Lake Merritt",
+          "evidence": [
+            {
+              "id": "EV-236479ee81",
+              "src": "output/beats/Faith_Organizations.jsonl \"Cathedral of the Living Word\"",
+              "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "8 faith events on the record since C108 · Cathedral of the Living Word in Lake Merritt | 9 named on the record",
+            "src": "output/beats/Faith_Organizations.jsonl \"Cathedral of the Living Word\"",
+            "id": "F-7fd447ea58d3"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+            "src": "output/beats/Faith_Organizations.jsonl \"Cathedral of the Living Word\"",
+            "id": "F-169bcd402575"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\"",
+            "id": "F-61024524d215"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-c6268244f8ea"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Cathedral of the Living Word\"",
+            "id": "F-2e38ae74adc2"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C108 — holy day: traditional Epiphany rituals observed (attendance 1,077)",
+            "src": "output/beats/Faith_Ledger.jsonl C108 \"Cathedral of the Living Word\"",
+            "id": "F-53d1f53fb120"
+          },
+          {
+            "t": "FACT",
+            "text": "St. Esperanza Parish (Fruitvale), C108 — holy day: congregation celebrates Epiphany (attendance 374)",
+            "src": "output/beats/Faith_Ledger.jsonl C108 \"St. Esperanza Parish\"",
+            "id": "F-3cbfd5530d60"
+          },
+          {
+            "t": "FACT",
+            "text": "Art Scott — Sustainable Materials Scientist — Lake Merritt",
+            "src": "Simulation_Ledger profile for POP-00665",
+            "id": "F-9c9f3eeeb536"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00697",
+      "name": "Declan Toto",
+      "quote": "I've joined the congregation at Cathedral of the Living Word, and I have to say, it's been a really uplifting experience. The scent of incense drifting from the temple doors left ajar is a familiar comfort for me, and it's great to see the community coming together there.",
+      "disp": "driven, hard to sit still; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've joined the congregation at Cathedral of the Living Word, and I have to say, it's been a really uplifting experience. The scent of incense drifting from the temple doors left ajar is a familiar comfort for me, and it's great to see the community coming together there.\",\n  \"fact_ids\": [\"F-2e38ae74adc2\", \"F-1f1184e1c20b\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-2e38ae74adc2",
+          "F-1f1184e1c20b"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00697-d60548f32f",
+        "authoredQuote": true,
+        "publishableQuote": "I've joined the congregation at Cathedral of the Living Word, and I have to say, it's been a really uplifting experience. The scent of incense drifting from the temple doors left ajar is a familiar comfort for me, and it's great to see the community coming together there."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00697",
+          "name": "Declan Toto",
+          "role": "Gene Therapy Counselor",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Elliot Graye",
+          "question": "As a resident of Lake Merritt, what have you seen, felt, or understood about \"Cathedral of the Living Word\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-faith",
+          "hood": "Lake Merritt",
+          "focus": "Cathedral of the Living Word",
+          "src": "output/beats/Faith_Organizations.jsonl \"Cathedral of the Living Word\""
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Declan Toto — Gene Therapy Counselor — Lake Merritt",
+          "evidence": [
+            {
+              "id": "EV-97d0cc009a",
+              "src": "output/beats/Faith_Organizations.jsonl \"Cathedral of the Living Word\"",
+              "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "8 faith events on the record since C108 · Cathedral of the Living Word in Lake Merritt | 9 named on the record",
+            "src": "output/beats/Faith_Organizations.jsonl \"Cathedral of the Living Word\"",
+            "id": "F-7fd447ea58d3"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+            "src": "output/beats/Faith_Organizations.jsonl \"Cathedral of the Living Word\"",
+            "id": "F-169bcd402575"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\"",
+            "id": "F-61024524d215"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-c6268244f8ea"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Cathedral of the Living Word\"",
+            "id": "F-2e38ae74adc2"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C108 — holy day: traditional Epiphany rituals observed (attendance 1,077)",
+            "src": "output/beats/Faith_Ledger.jsonl C108 \"Cathedral of the Living Word\"",
+            "id": "F-53d1f53fb120"
+          },
+          {
+            "t": "FACT",
+            "text": "St. Esperanza Parish (Fruitvale), C108 — holy day: congregation celebrates Epiphany (attendance 374)",
+            "src": "output/beats/Faith_Ledger.jsonl C108 \"St. Esperanza Parish\"",
+            "id": "F-3cbfd5530d60"
+          },
+          {
+            "t": "FACT",
+            "text": "Declan Toto — Gene Therapy Counselor — Lake Merritt",
+            "src": "Simulation_Ledger profile for POP-00697",
+            "id": "F-1f1184e1c20b"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-00755",
+      "name": "Antoine Vermeer",
+      "quote": "I've seen the Cathedral of the Living Word's job training workshop attract attendees from around the neighborhood, which is great. It's a valuable resource for our community.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen the Cathedral of the Living Word's job training workshop attract attendees from around the neighborhood, which is great. It's a valuable resource for our community.\",\n  \"fact_ids\": [\"F-13e9b2332b16\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-13e9b2332b16"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00755-7619668957",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen the Cathedral of the Living Word's job training workshop attract attendees from around the neighborhood, which is great. It's a valuable resource for our community."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00755",
+          "name": "Antoine Vermeer",
+          "role": "Senior Pastor / Faith Leader",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Elliot Graye",
+          "question": "How does the Cathedral of the Living Word's job training workshop support the local community? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-faith",
+          "hood": "Lake Merritt",
+          "focus": "Cathedral of the Living Word",
+          "src": "output/beats/Faith_Organizations.jsonl \"Cathedral of the Living Word\""
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Antoine Vermeer — Senior Pastor / Faith Leader — Lake Merritt",
+          "evidence": [
+            {
+              "id": "EV-ab5c572e79",
+              "src": "output/beats/Faith_Organizations.jsonl \"Cathedral of the Living Word\"",
+              "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "In focus: Cathedral of the Living Word — Catholic, Lake Merritt, congregation 2,000, founded 34 years ago, led today by Bishop Antoine Vermeer — architectural landmark, diverse congregation",
+            "src": "output/beats/Faith_Organizations.jsonl \"Cathedral of the Living Word\"",
+            "id": "F-13e9b2332b16"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "8 faith events on the record since C108 · Cathedral of the Living Word in Lake Merritt | 9 named on the record",
+            "src": "output/beats/Faith_Organizations.jsonl \"Cathedral of the Living Word\"",
+            "id": "F-7fd447ea58d3"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+            "src": "output/beats/Faith_Organizations.jsonl \"Cathedral of the Living Word\"",
+            "id": "F-169bcd402575"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\"",
+            "id": "F-61024524d215"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-c6268244f8ea"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Cathedral of the Living Word\"",
+            "id": "F-2e38ae74adc2"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C108 — holy day: traditional Epiphany rituals observed (attendance 1,077)",
+            "src": "output/beats/Faith_Ledger.jsonl C108 \"Cathedral of the Living Word\"",
+            "id": "F-53d1f53fb120"
+          },
+          {
+            "t": "FACT",
+            "text": "Antoine Vermeer — Senior Pastor / Faith Leader — Lake Merritt",
+            "src": "Simulation_Ledger profile for POP-00755",
+            "id": "F-c1a16947809a"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01094",
+      "name": "Ignacio Zavala",
+      "quote": "I've driven by the Cathedral of the Living Word a few times, it's a big presence around Lake Merritt. I haven't been inside, but I've noticed it's always bustling. I guess that's what 1,000+ people on Epiphany looks like. My wife is into that sort of thing, she's always talking about the different faith communities around Oakland.",
+      "disp": "driven, hard to sit still; steady, hard to shake; principled, plays it straight; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've driven by the Cathedral of the Living Word a few times, it's a big presence around Lake Merritt. I haven't been inside, but I've noticed it's always bustling. I guess that's what 1,000+ people on Epiphany looks like. My wife is into that sort of thing, she's always talking about the different faith communities around Oakland.\",\n  \"fact_ids\": [\"F-2e38ae74adc2\", \"F-53d1f53fb120\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-2e38ae74adc2",
+          "F-53d1f53fb120"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01094-953e53eac6",
+        "authoredQuote": true,
+        "publishableQuote": "I've driven by the Cathedral of the Living Word a few times, it's a big presence around Lake Merritt. I haven't been inside, but I've noticed it's always bustling. I guess that's what 1,000+ people on Epiphany looks like. My wife is into that sort of thing, she's always talking about the different faith communities around Oakland."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01094",
+          "name": "Ignacio Zavala",
+          "role": "Managing Partner, Foothill Builders",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Elliot Graye",
+          "question": "What have you seen, felt, or understood about \"Cathedral of the Living Word\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-faith",
+          "hood": "Lake Merritt",
+          "focus": "Cathedral of the Living Word",
+          "src": "output/beats/Faith_Organizations.jsonl \"Cathedral of the Living Word\""
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Ignacio Zavala — Managing Partner, Foothill Builders — West Oakland",
+          "evidence": [
+            {
+              "id": "EV-83390054b6",
+              "src": "output/beats/Faith_Organizations.jsonl \"Cathedral of the Living Word\"",
+              "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "8 faith events on the record since C108 · Cathedral of the Living Word in Lake Merritt | 9 named on the record",
+            "src": "output/beats/Faith_Organizations.jsonl \"Cathedral of the Living Word\"",
+            "id": "F-7fd447ea58d3"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+            "src": "output/beats/Faith_Organizations.jsonl \"Cathedral of the Living Word\"",
+            "id": "F-169bcd402575"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\"",
+            "id": "F-61024524d215"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-c6268244f8ea"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Cathedral of the Living Word\"",
+            "id": "F-2e38ae74adc2"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C108 — holy day: traditional Epiphany rituals observed (attendance 1,077)",
+            "src": "output/beats/Faith_Ledger.jsonl C108 \"Cathedral of the Living Word\"",
+            "id": "F-53d1f53fb120"
+          },
+          {
+            "t": "FACT",
+            "text": "St. Esperanza Parish (Fruitvale), C108 — holy day: congregation celebrates Epiphany (attendance 374)",
+            "src": "output/beats/Faith_Ledger.jsonl C108 \"St. Esperanza Parish\"",
+            "id": "F-3cbfd5530d60"
+          },
+          {
+            "t": "FACT",
+            "text": "Ignacio Zavala — Managing Partner, Foothill Builders — West Oakland",
+            "src": "Simulation_Ledger profile for POP-01094",
+            "id": "F-c074f45e0359"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00665",
+      "name": "Art Scott",
+      "quote": "I've seen Cathedral of the Living Word hosting a job training workshop recently, it's been drawing people from around the neighborhood. That's something positive for our community.",
+      "disp": "can't switch off, working themselves thin; draws people in, deep with them; warm, tender with people; steady, hard to shake; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen Cathedral of the Living Word hosting a job training workshop recently, it's been drawing people from around the neighborhood. That's something positive for our community.\",\n  \"fact_ids\": [\"F-7fd447ea58d3\", \"F-9c9f3eeeb536\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-7fd447ea58d3",
+          "F-9c9f3eeeb536"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00665-52634ba96b",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen Cathedral of the Living Word hosting a job training workshop recently, it's been drawing people from around the neighborhood. That's something positive for our community."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00665",
+          "name": "Art Scott",
+          "role": "Sustainable Materials Scientist",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Elliot Graye",
+          "question": "As a resident of Lake Merritt, what have you seen, felt, or understood about \"Cathedral of the Living Word\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-faith",
+          "hood": "Lake Merritt",
+          "focus": "Cathedral of the Living Word",
+          "src": "output/beats/Faith_Organizations.jsonl \"Cathedral of the Living Word\""
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Art Scott — Sustainable Materials Scientist — Lake Merritt",
+          "evidence": [
+            {
+              "id": "EV-236479ee81",
+              "src": "output/beats/Faith_Organizations.jsonl \"Cathedral of the Living Word\"",
+              "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "8 faith events on the record since C108 · Cathedral of the Living Word in Lake Merritt | 9 named on the record",
+            "src": "output/beats/Faith_Organizations.jsonl \"Cathedral of the Living Word\"",
+            "id": "F-7fd447ea58d3"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+            "src": "output/beats/Faith_Organizations.jsonl \"Cathedral of the Living Word\"",
+            "id": "F-169bcd402575"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\"",
+            "id": "F-61024524d215"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-c6268244f8ea"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Cathedral of the Living Word\"",
+            "id": "F-2e38ae74adc2"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C108 — holy day: traditional Epiphany rituals observed (attendance 1,077)",
+            "src": "output/beats/Faith_Ledger.jsonl C108 \"Cathedral of the Living Word\"",
+            "id": "F-53d1f53fb120"
+          },
+          {
+            "t": "FACT",
+            "text": "St. Esperanza Parish (Fruitvale), C108 — holy day: congregation celebrates Epiphany (attendance 374)",
+            "src": "output/beats/Faith_Ledger.jsonl C108 \"St. Esperanza Parish\"",
+            "id": "F-3cbfd5530d60"
+          },
+          {
+            "t": "FACT",
+            "text": "Art Scott — Sustainable Materials Scientist — Lake Merritt",
+            "src": "Simulation_Ledger profile for POP-00665",
+            "id": "F-9c9f3eeeb536"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00697",
+      "name": "Declan Toto",
+      "quote": "I've joined the congregation at Cathedral of the Living Word, and I have to say, it's been a really uplifting experience. The scent of incense drifting from the temple doors left ajar is a familiar comfort for me, and it's great to see the community coming together there.",
+      "disp": "driven, hard to sit still; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've joined the congregation at Cathedral of the Living Word, and I have to say, it's been a really uplifting experience. The scent of incense drifting from the temple doors left ajar is a familiar comfort for me, and it's great to see the community coming together there.\",\n  \"fact_ids\": [\"F-2e38ae74adc2\", \"F-1f1184e1c20b\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-2e38ae74adc2",
+          "F-1f1184e1c20b"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00697-d60548f32f",
+        "authoredQuote": true,
+        "publishableQuote": "I've joined the congregation at Cathedral of the Living Word, and I have to say, it's been a really uplifting experience. The scent of incense drifting from the temple doors left ajar is a familiar comfort for me, and it's great to see the community coming together there."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00697",
+          "name": "Declan Toto",
+          "role": "Gene Therapy Counselor",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Elliot Graye",
+          "question": "As a resident of Lake Merritt, what have you seen, felt, or understood about \"Cathedral of the Living Word\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-faith",
+          "hood": "Lake Merritt",
+          "focus": "Cathedral of the Living Word",
+          "src": "output/beats/Faith_Organizations.jsonl \"Cathedral of the Living Word\""
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Declan Toto — Gene Therapy Counselor — Lake Merritt",
+          "evidence": [
+            {
+              "id": "EV-97d0cc009a",
+              "src": "output/beats/Faith_Organizations.jsonl \"Cathedral of the Living Word\"",
+              "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "8 faith events on the record since C108 · Cathedral of the Living Word in Lake Merritt | 9 named on the record",
+            "src": "output/beats/Faith_Organizations.jsonl \"Cathedral of the Living Word\"",
+            "id": "F-7fd447ea58d3"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+            "src": "output/beats/Faith_Organizations.jsonl \"Cathedral of the Living Word\"",
+            "id": "F-169bcd402575"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\"",
+            "id": "F-61024524d215"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-c6268244f8ea"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Cathedral of the Living Word\"",
+            "id": "F-2e38ae74adc2"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C108 — holy day: traditional Epiphany rituals observed (attendance 1,077)",
+            "src": "output/beats/Faith_Ledger.jsonl C108 \"Cathedral of the Living Word\"",
+            "id": "F-53d1f53fb120"
+          },
+          {
+            "t": "FACT",
+            "text": "St. Esperanza Parish (Fruitvale), C108 — holy day: congregation celebrates Epiphany (attendance 374)",
+            "src": "output/beats/Faith_Ledger.jsonl C108 \"St. Esperanza Parish\"",
+            "id": "F-3cbfd5530d60"
+          },
+          {
+            "t": "FACT",
+            "text": "Declan Toto — Gene Therapy Counselor — Lake Merritt",
+            "src": "Simulation_Ledger profile for POP-00697",
+            "id": "F-1f1184e1c20b"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-11-05T19:15:48.651Z"
+}

@@ -1,0 +1,91 @@
+{
+  "draft": "output/cron-compare/culture_c113_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "113",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "8f5692a6990e89935863d94621f589b23e4f1052f421069fc0b40a74edcc5723",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All 11 citizen profiles, life events, quotes, and neighborhood references verified against C113 ground truth.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "tamsin-lives-v1",
+    "packageVersion": "TAMSIN-LIVES-2",
+    "manifestId": "AM-9381d564ebf3",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "108",
+          "110",
+          "111"
+        ]
+      },
+      {
+        "code": "UNAPPROVED_QUOTE",
+        "values": [
+          "finally reads clean."
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Dax Monroe",
+      "Drew Lemon",
+      "Genevieve Martinez",
+      "Ily Gonzalez",
+      "Imogen Soto",
+      "Juliet Choi",
+      "Mateo Jilner",
+      "Mei Patel",
+      "Mei-Lin Zhou",
+      "Tomas Aguilar",
+      "Weston Herrin"
+    ],
+    "unverified": [
+      "Expansion List",
+      "Foothill Baptist Tabernacle",
+      "Pier Lights"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 1,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0108,
+  "durationMs": 7585,
+  "parseError": false,
+  "ranAt": "2026-10-30T23:20:02.827Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 450",
+    "words": 1316,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "8f5692a6990e89935863d94621f589b23e4f1052f421069fc0b40a74edcc5723",
+    "costUsd": 0.0015
+  }
+}

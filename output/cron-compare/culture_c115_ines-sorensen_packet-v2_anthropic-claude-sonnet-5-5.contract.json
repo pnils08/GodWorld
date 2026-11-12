@@ -1,0 +1,17 @@
+{
+  "draft": "output/cron-compare/culture_c115_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "contractScore": {
+    "opened": true,
+    "purposeMet": false,
+    "inTarget": true,
+    "inTargetBy": "code floor 300",
+    "words": 475,
+    "short": "The piece puts names and reporter commentary before citizen quotes rather than leading with their lines and keeping the frame minimal.",
+    "score": 2,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "scoredWithoutRhea": true,
+    "draftSha256": "0ee80226948da090e77b4a4dc296f95d9788848a092c78c102512691e65c2bc4"
+  },
+  "ranAt": "2026-11-12T00:24:14.534Z"
+}

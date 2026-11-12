@@ -1,0 +1,51 @@
+{
+  "v": "UNDOCKED-INTAKE/1",
+  "Timestamp": "2026-11-09T02:55:36.681Z",
+  "POPID": "POP-00530",
+  "Cycle": 114,
+  "Seq": 3,
+  "Daypart": "SHOW",
+  "Tag": "undocked-episode",
+  "EpisodeId": "undocked-pop00530-2026-11-09T02-30-20",
+  "Applied": "yes",
+  "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop00530-2026-11-09T02-30-20.json",
+  "Holder": "Lena Okafor",
+  "CreditsDelta": 0,
+  "Magnitude": 1,
+  "Flags": [
+    "credits_delta_windowed"
+  ],
+  "Excerpt": "Lena Okafor credits=0 systems=dheneb,mira,barnards_star,aspidiske,thabit,canopus,spica,propus,syrma",
+  "DecidedAt": "2026-11-09T02:55:36.684Z",
+  "DecidedBy": "auto-gate",
+  "Note": "auto-approved on contract validation (§2.5)",
+  "FeedEvent": {
+    "v": "UNDOCKED-FEED/1",
+    "Cycle": 114,
+    "EventType": "undocked-episode",
+    "POPID": "POP-00530",
+    "Holder": "Lena Okafor",
+    "EpisodeId": "undocked-pop00530-Y3C10-e3",
+    "CreditsDelta": 0,
+    "PointsDelta": 7.74,
+    "Systems": [
+      "dheneb",
+      "mira",
+      "barnards_star",
+      "aspidiske",
+      "thabit",
+      "canopus",
+      "spica",
+      "propus",
+      "syrma"
+    ],
+    "CombatEvents": 0,
+    "MishapCount": 0,
+    "Magnitude": 1,
+    "Flags": [
+      "credits_delta_windowed"
+    ],
+    "StagedPath": "output/spacemolt-show/staged/undocked-pop00530-2026-11-09T02-30-20.json"
+  },
+  "PointsDelta": 7.74
+}

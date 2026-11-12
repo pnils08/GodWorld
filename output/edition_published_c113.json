@@ -1,0 +1,17 @@
+{
+  "cycle": "113",
+  "selected": [
+    "civic_c113_noah-tan_packet-v2_x-ai-grok-4-3",
+    "culture_c113_maria-keen_packet-v2_anthropic-claude-sonnet-5-5",
+    "culture_c113_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-2320",
+    "sports_c113_anthony-raines_packet-v2_anthropic-claude-sonnet-5-5",
+    "civic_c113_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5",
+    "culture_c113_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5",
+    "sports_c113_tanya-cruz_packet-v2_x-ai-grok-4-3",
+    "civic_c113_luis-navarro_packet-v2_anthropic-claude-sonnet-5-5",
+    "undocked-digest_c113_nia-rook-weekly_packet-v2_openai-gpt-6-luna"
+  ],
+  "edition": "editions/cycle_pulse_c113.txt",
+  "editionSha256": "86938940b5d9afa4074d2815e5f6a29b3441e12883044882bfd1ddb401cd0f61",
+  "publishedAt": "2026-10-31T21:04:14.179Z"
+}

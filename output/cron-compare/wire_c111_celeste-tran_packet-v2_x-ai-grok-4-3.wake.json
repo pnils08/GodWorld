@@ -1,0 +1,55 @@
+{
+  "mode": "wake-write",
+  "desk": "wire",
+  "cycle": "111",
+  "provider": "openrouter",
+  "model": "x-ai/grok-4.3",
+  "configuredWriterModel": "x-ai/grok-4.3",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "celeste-tran",
+  "byline": {
+    "name": "Celeste Tran",
+    "popid": "POP-00164",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 20,
+  "quotesLanded": 0,
+  "disposition": "flagged",
+  "rheaPass": false,
+  "rheaFlagCount": 2,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [],
+  "toolCalls": 0,
+  "wordCount": 256,
+  "targetWords": "400-700",
+  "capHit": 0,
+  "checkFlags": [],
+  "engineTerms": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": false,
+    "inTargetBy": "code floor 400",
+    "words": 256,
+    "short": "The piece falls short of the 400-word minimum target at 256 words.",
+    "score": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "c41749f3849eca50db0fbd78467414c36ac11fb9e7bc30ed0ce89400a8550ef1",
+    "costUsd": 0.0008
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/4 — The piece falls short of the 400-word minimum target at 256 words."
+  },
+  "article": "output/cron-compare/flagged/wire_c111_celeste-tran_packet-v2_x-ai-grok-4-3.md",
+  "selfRecord": null,
+  "ranAt": "2026-10-16T23:18:54.540Z",
+  "dispositionReconciledAt": "2026-10-17T17:00:03.269Z"
+}

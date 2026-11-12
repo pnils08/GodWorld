@@ -1,0 +1,13 @@
+{
+  "draft": "culture_c113_maria-keen_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "flags": [
+    {
+      "claim": "Walker also said the teachers elsewhere work just as hard as the ones in Fruitvale, \"but they're doing it with less.\"",
+      "issue": "Direct quotation \"but they're doing it with less.\" attributed to named ledger citizen Rick Walker is not present in his interview record (Section 4), constituting fabricated speech.",
+      "severity": "high"
+    }
+  ],
+  "checkFlags": [],
+  "contamination": [],
+  "summary": "Fabricated quote attributed to Rick Walker not found in the verified interview record."
+}

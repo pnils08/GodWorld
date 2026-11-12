@@ -1,0 +1,57 @@
+{
+  "mode": "wake-write",
+  "desk": "sports",
+  "cycle": "113",
+  "provider": "openrouter",
+  "model": "openai/gpt-5.6-luna",
+  "configuredWriterModel": "openai/gpt-5.6-luna",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "simon-leary",
+  "byline": {
+    "name": "Simon Leary",
+    "popid": "POP-00016",
+    "beatDomain": "SPORTS"
+  },
+  "laneEntries": 9,
+  "quotesLanded": 2,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [],
+  "toolCalls": 0,
+  "wordCount": 450,
+  "targetWords": "evidence-bounded",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": false,
+    "inTargetBy": "judge",
+    "words": 450,
+    "short": "The piece falls short of the 450-word target.",
+    "score": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "d23e6829ce5b5b437bf61b7c89a97a9bc8ce9e3f297d7e95527f5ea17b181df6",
+    "costUsd": 0.003
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/4 — The piece falls short of the 450-word target."
+  },
+  "article": "output/cron-compare/staged/sports_c113_simon-leary_packet-v2_openai-gpt-5-6-luna.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "◇ injected env (32) from ../.config/godworld/.env // tip: ◈ secrets for agents [www.dotenvx.com]\n{\n  \"popId\": \"POP-00016\",\n  \"name\": \"Simon Leary\",\n  \"recorded\": true,\n  \"text\": \"filed: Sports\"\n}"
+  },
+  "ranAt": "2026-10-29T23:17:01.293Z",
+  "dispositionReconciledAt": "2026-10-31T17:00:02.922Z"
+}

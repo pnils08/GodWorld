@@ -1,0 +1,44 @@
+{
+  "office": "oari",
+  "cycle": 115,
+  "speaker": "Dr. Vanessa Tran-Muñoz",
+  "cascadeSummary": "I executed and documented the D3 East Oakland community briefing this cycle — the deliverable the Mayor and Councilmember Rivers directed — presenting Fruitvale corridor street-level response data and the Baylight District feasibility review in the daylight, in East Oakland, for the people who called 911. Expansion stays held, exactly as directed: the briefing is now a public record residents and merchants can inspect, and the D5 dispatch audit and Baylight feasibility review remain open, not declared complete. The decision to expand now rests on the documented public record, not on my office's word.",
+  "statements": [
+    {
+      "statementId": "STMT-115-oari-001",
+      "type": "operational_status",
+      "topic": "D3 East Oakland community briefing — executed and documented with Fruitvale data",
+      "initiative": "INIT-002",
+      "decision": "Conducted and documented the D3 East Oakland community briefing this cycle, presenting district-level and Fruitvale corridor data and the Baylight feasibility review; kept expansion held; left the D5 audit and Baylight feasibility review open.",
+      "quote": "East Oakland didn't get a slide deck about alternative response — East Oakland got the numbers for its own streets, in its own room, and the record of that is now something anyone can pull and read.",
+      "fullStatement": "The D3 East Oakland community briefing is done, and it is documented. We held it in East Oakland, for East Oakland, and we brought the Fruitvale corridor street-level response numbers — the same numbers I have said since C113 are the only ones that matter, because the right measure is not the citywide average, it is how fast care reaches Fruitvale's streets. The Baylight District feasibility review was presented in the daylight, as a question under review and not an answer we are announcing. Expansion stays held, exactly where the Mayor and Councilmember Rivers put it — this briefing is the precondition, and it is met on the record, not on my say-so. The D5 dispatch performance audit and the Baylight feasibility review remain open. I am not going to stand in front of East Oakland and tell them oversight is finished when it is not; a program that asks people to trust its dispatch record has to show them the record first. What a reporter would find if they walked the room: printed agendas, district-level tables posted on the wall, Fruitvale corridor response times laid out by the block, and residents and merchants asking hard questions about when OPD backup rolls and when it does not. That is the point. The expansion decision now waits on a public document residents can inspect — not on my office, and not on a press release.",
+      "trackerUpdates": {
+        "initiative": "INIT-002",
+        "ImplementationPhase": "dispatch-live",
+        "MilestoneNotes": "C115: D3 East Oakland briefing executed and documented with Fruitvale corridor data and Baylight feasibility review; expansion held; D5 audit and Baylight review open",
+        "NextScheduledAction": "Publish D3 briefing record and district-level Fruitvale data packet for public inspection",
+        "NextActionCycle": 116
+      }
+    },
+    {
+      "statementId": "STMT-115-oari-002",
+      "type": "operational_status",
+      "topic": "Baylight corridor protocol extension and open oversight items",
+      "initiative": "INIT-002",
+      "decision": "Maintained the Baylight corridor protocol extension at feasibility-review status only and kept the D5 dispatch audit and Baylight feasibility review formally open pending documentation.",
+      "quote": "Feasibility first, authorization second, and never the other way around — that has not changed, and one briefing does not finish an oversight file.",
+      "fullStatement": "Two things stay exactly where they were. The protocol extension into the Baylight District corridor remains a feasibility review and nothing more — a question we are still asking, not an answer we are announcing, and no amount of briefing-day momentum changes that. And the D5 dispatch performance audit and the Baylight feasibility review stay open. I know it is tempting, after a good room in East Oakland, to call the oversight work done and move on. I am not doing that. The audit is answered on paper with numbers where anyone can find them, and the feasibility review is a live file until it is closed by evidence, not by a calendar. If a reporter visited the 18th Street site this week they would see the briefing binder on the shelf next to the D5 audit response and the D1 evaluation review, all three of them pullable, all three of them honest about what is finished and what is not. That is the standard I am holding the program to, and it is the standard I will keep holding it to as long as I run it.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-115-oari-003",
+      "type": "constituent_focus",
+      "topic": "Fruitvale and West Oakland residents — what the data and the calm actually mean",
+      "initiative": null,
+      "decision": "Centered the briefing's Fruitvale findings and credited West Oakland's steady conditions to neighbors and the crews who show up, not to City Hall messaging.",
+      "quote": "West Oakland's calm isn't a City Hall press release — it's neighbors and the crews who show up for them, and the Fruitvale numbers are how we prove the crews are reaching the right streets.",
+      "fullStatement": "For the people of Fruitvale and West Oakland, this cycle is about seeing their own neighborhood in the numbers. Fruitvale's streets are steady, the corridor is busy, and the briefing put the corridor's response times up where merchants and residents could read them block by block — because the people who called 911 deserve their own figures, not a citywide blend that hides their block. And West Oakland's calm, which the room in East Oakland kept coming back to, is not something my office manufactured or the Mayor's office printed on a card. It is neighbors and the crews who show up for them, cycle after cycle, on the days nobody is watching. My job is to keep those crews trained, dispatched, and accountable — to publish what they did and where they fell short, so the trust in West Oakland and the questions in Fruitvale are both answered with records instead of reassurances. That is what the people of these districts are owed, and that is what this office will keep delivering.",
+      "trackerUpdates": {}
+    }
+  ]
+}

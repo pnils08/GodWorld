@@ -1,0 +1,17 @@
+{
+  "desk": "civic",
+  "cycle": "115",
+  "model": "x-ai/grok-4.3",
+  "turns": 2,
+  "maxTurns": 15,
+  "usageInputTokens": 14396,
+  "usageOutputTokens": 1304,
+  "savedFiles": [
+    "output/cron-compare/civic_c115_noah-tan_packet-v2_x-ai-grok-4-3.md"
+  ],
+  "compareAgainst": "output/desk-output/civic_c115.md",
+  "durationMs": 13729,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-11-12T00:16:50.187Z"
+}

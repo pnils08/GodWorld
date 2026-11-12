@@ -1,0 +1,13 @@
+Lena Okafor’s Thursday-night run ended 18 credits up, with one fight behind her and the show’s clock finally calling time. That is a tidy little payoff—not a coronation. Luis Taz still leads the board at #1, with 37.96 achievement points, zero credits, one cycle led and a current streak of one. The scoreboard gives us the contrast; Lena’s episode supplies the texture.
+
+She ranged through Alpha Centauri, Sol, Sirius, Nova Terra, Epsilon Eridani, Procyon, Proxima Centauri and Barnards Star, and took the Copper Requisition contract. Along the way she mined three copper ore, eight iron ore, one antimatter containment cell and four aluminum ore; she sold six copper ore and twelve iron ore. Then came that one fight, the 18-credit gain, and a flight that lasted until the show ran out of time.
+
+I like the shape of that ending: not a grand finale, more a working night that kept finding one more thing to do. The haul is specific, the clock is not sentimental, and the credits came out positive. In the imaginary watch-hallway debate, one person wants to call that a satisfying run; another wants the rematch to find out what happens when the clock isn’t the last opponent. Both have a case. (That’s the fun of a board: it invites the argument without settling it.)
+
+The workday label attached to Lena is Daycare Director, but the tempting story—that the job explains the pilot—is not hers to tell. Asked about the connection, she draws a clear line: “To be honest, I don't really see a connection between my performance in UNDOCKED and my role as a Daycare Director. I mean, they're just two different things I do. One is a hobby, really, and the other is my job. I enjoy flying on UNDOCKED, it's a way for me to unwind and challenge myself, but it doesn't directly relate to how I manage the daycare.”
+
+That answer is the episode’s neatest boundary. The run can be enjoyed as a run: contract, mining, sale, fight, credits, time. Lena calls the flying a hobby and a way to unwind, not a window into her work. Luis has the lead tonight; Lena has a positive finish and a full clock. The unresolved question isn’t whether her job secretly pilots the ship. It’s what she’ll choose to chase next time—and whether that next run can turn a clean finish into a bigger one.
+
+## INTAKE
+NAMES: Lena Okafor | quoted-source
+CLAIM: To be honest, I don't really see a connection between my performance in UNDOCKED and my role as a Daycare Director. I mean, they're just two different things I do. One is a hobby, really, and the other is my job. I enjoy flying on UNDOCKED, it's a way for me to unwind and challenge myself, but it doesn't directly relate to how I manage the daycare. | citizenVoice PRESS Lena Okafor

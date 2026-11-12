@@ -1,0 +1,250 @@
+{
+  "date": "2026-10-28",
+  "stage": "write",
+  "results": [
+    {
+      "name": "Jax Caldera",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 2,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 673,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Noah Tan",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 602,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Elliot Marbury",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 2,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 699,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "P Slayer",
+      "desk": "sports",
+      "ok": false,
+      "error": "writer produced no draft at output/cron-compare/sports_c113_p-slayer_packet-v2_x-ai-grok-4-3.md",
+      "checks": null
+    },
+    {
+      "name": "Tanya Cruz",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 204,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Tamsin Pruitt",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 6,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [
+          {
+            "text": "Brady Lopez moved into a place of their own in Piedmont Ave, renting",
+            "run": "brady lopez moved into a place"
+          },
+          {
+            "text": "Brady Lopez — on the log, C112: saved the Tribune clipping with their neighborhood in it — the good one",
+            "run": "saved the tribune clipping with their"
+          },
+          {
+            "text": "Brady Lopez — on the log, C112: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+            "run": "an oakland alternative response initiative team"
+          },
+          {
+            "text": "Brady Lopez — on the log, C112: painted over graffiti on the recreation center wall alongside five neighbors they barely knew",
+            "run": "painted over graffiti on the recreation"
+          },
+          {
+            "text": "Brady Lopez — on the log, C113: noticed the calendar squares all look alike lately, and couldn't decide if that's peace",
+            "run": "noticed the calendar squares all look"
+          },
+          {
+            "text": "Kwame Fitzgerald — on the log, C113: drank the free cold brew in the company kitchen and felt completely disconnected from the neighborhood outside",
+            "run": "the free cold brew in the"
+          },
+          {
+            "text": "Kwame Fitzgerald — on the log, C113: limited social activity due to winter mood",
+            "run": "limited social activity due to winter"
+          },
+          {
+            "text": "Kwame Fitzgerald — on the log, C113: navigated the stroller traffic on College Avenue and silently judged the parking jobs",
+            "run": "the stroller traffic on college avenue"
+          },
+          {
+            "text": "Solis Walmart — on the log, C112: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+            "run": "the oakland alternative response initiative is"
+          },
+          {
+            "text": "Solis Walmart — on the log, C113: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+            "run": "an oakland alternative response initiative team"
+          },
+          {
+            "text": "Solis Walmart — on the log, C113: felt quietly lucky to call Downtown home",
+            "run": "quietly lucky to call downtown home"
+          },
+          {
+            "text": "Reggie Soto — on the log, C112: got recognized by a stranger who'd read about them in the Tribune",
+            "run": "read about them in the tribune"
+          },
+          {
+            "text": "Reggie Soto — on the log, C112: read about something unfamiliar and kept pulling the thread near a corner market",
+            "run": "read about something unfamiliar and kept"
+          },
+          {
+            "text": "Reggie Soto — on the log, C113: walked a different street home just to see it",
+            "run": "walked a different street home just"
+          },
+          {
+            "text": "Naomi Sterling — on the log, C112: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
+            "run": "attended a community feedback session for"
+          },
+          {
+            "text": "Matra Woven — on the log, C113: painted over graffiti on the recreation center wall alongside five neighbors they barely knew",
+            "run": "painted over graffiti on the recreation"
+          },
+          {
+            "text": "Matra Woven — on the log, C113: noticed the blend of old and new storefronts",
+            "run": "noticed the blend of old and"
+          },
+          {
+            "text": "Tina Kozlov — moved from Temescal to Grand Lake — moving up from Temescal, Grand Lake (C113, Relocation-Drive-Up-M)",
+            "run": "moved from temescal to grand lake"
+          },
+          {
+            "text": "Tina Kozlov — on the log, C112: The schedule at Piedmont Avenue Medical Center came out with their name in the slot that used to belong to someone senior.",
+            "run": "the schedule at piedmont avenue medical"
+          },
+          {
+            "text": "Tina Kozlov — on the log, C112: drove the church van for the senior trip and listened to three hours of unfiltered neighborhood gossip",
+            "run": "the senior trip and listened to"
+          },
+          {
+            "text": "Tina Kozlov — on the log, C113: reorganized a closet and found something thought lost",
+            "run": "reorganized a closet and found something"
+          },
+          {
+            "text": "Linda Chow — on the log, C113: watched the ferry cut across the bay at sunset and felt lucky to live this close to the water",
+            "run": "the ferry cut across the bay"
+          },
+          {
+            "text": "Linda Chow — on the log, C113: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+            "run": "the oakland alternative response initiative is"
+          },
+          {
+            "text": "Austin Reaves — moved from Downtown to West Oakland — moving up from Downtown — sold up and bought in West Oakland, West Oakland (C113, Relocation-Drive-Up-M)",
+            "run": "moved from downtown to west oakland"
+          },
+          {
+            "text": "Austin Reaves — on the log, C113: came home to find the neighbors had left a case of something cold on the porch",
+            "run": "came home to find the neighbors"
+          },
+          {
+            "text": "Austin Reaves — on the log, C113: drove home with the radio off, letting the win settle",
+            "run": "drove home with the radio off"
+          },
+          {
+            "text": "Austin Reaves — on the log, C113: tried to keep the streak out of the conversation at dinner and failed",
+            "run": "tried to keep the streak out"
+          },
+          {
+            "text": "Amara Osei — moved from Jack London to West Oakland — moving up from Jack London, West Oakland (C113, Relocation-Drive-Up-M)",
+            "run": "moved from jack london to west"
+          },
+          {
+            "text": "Amara Osei — on the log, C113: found a quiet minute at a venue doorway and let the week's noise settle",
+            "run": "found a quiet minute at a"
+          },
+          {
+            "text": "Amara Osei — on the log, C113: put on their good suit for the Sunday service because some traditions still matter",
+            "run": "service because some traditions still matter"
+          },
+          {
+            "text": "Amara Osei — on the log, C113: stood by the bar at a ferry-adjacent corner, nodding along to the DJ’s set",
+            "run": "stood by the bar at a"
+          },
+          {
+            "text": "Amara Osei — on the log, C113: had a quiet moment at home",
+            "run": "had a quiet moment at home"
+          }
+        ],
+        "words": 1488,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Ines Sorensen",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 321,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 6,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 359,
+        "contractScore": 4
+      }
+    }
+  ],
+  "checkTotals": {
+    "seats": 7,
+    "toolSeats": 4,
+    "capHits": 0,
+    "thin": 0,
+    "verbatim": 1,
+    "graded": 7,
+    "gradeSum": 28
+  },
+  "ranAt": "2026-10-28T23:22:16.009Z"
+}

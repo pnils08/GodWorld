@@ -1,0 +1,17 @@
+{
+  "desk": "sports",
+  "cycle": "112",
+  "model": "anthropic/claude-sonnet-5.5",
+  "turns": 7,
+  "maxTurns": 15,
+  "usageInputTokens": 33113,
+  "usageOutputTokens": 4189,
+  "savedFiles": [
+    "output/cron-compare/sports_c112_hal-richmond_packet-v2_anthropic-claude-sonnet-5-5.md"
+  ],
+  "compareAgainst": "output/desk-output/sports_c112.md",
+  "durationMs": 38781,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-10-24T17:00:43.936Z"
+}

@@ -1,0 +1,26 @@
+{
+  "office": "police_chief",
+  "agentDir": "civic-office-police-chief",
+  "holder": "Rafael Montez",
+  "popid": "POP-00136",
+  "title": "Police Chief",
+  "date": "2026-10-15",
+  "cycle": 111,
+  "model": "deepseek/deepseek-v4-flash-0731",
+  "statement": "The Oakland Police Department has completed deployment adjustments for high-incident zones in East Oakland, West Oakland, and Downtown. Patrol allocation now aligns with CrimeIndex data — 1.11 in East Oakland, 1.10 in West Oakland, and 1.10 in Downtown. These adjustments direct additional sworn resources to the neighborhoods where call volume and violent-level metrics are highest, while maintaining balanced coverage citywide. The department's operational posture remains focused on reducing response gaps and sustaining public safety outcomes across all districts.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-106-civic-office-police-chief",
+        "text": "OPD has transmitted the departmental patrol deployment adjustments for high-incident zones in East Oakland (CrimeIndex 1.11), West Oakland (CrimeIndex 1.10), and Downtown (CrimeIndex 1.10). Patrol allocation in these zones has been increased to match documented call volume and crime-index data, with deployment thresholds maintaining coverage across all districts. The adjustments are operational, data-driven, and in effect.",
+        "directiveCycle": 106,
+        "confrontationSeat": "civic-office-police-chief"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-10-15T10:45:19.002Z",
+  "fellBackFrom": null
+}

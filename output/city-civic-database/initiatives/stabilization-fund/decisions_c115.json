@@ -1,0 +1,25 @@
+{
+  "initiative": "INIT-001",
+  "initiativeId": "INIT-001",
+  "cycle": 115,
+  "primaryVoice": "Mayor gavel (mayor_gavel-001)",
+  "consolidatedFrom": [
+    "STMT-115-mayor_gavel-001 (Mayor gavel — West Oakland Stabilization Fund closeout and charter renewal)",
+    "STMT-115-stabilization_fund-001 (Webb — C114 closeout published; charter renewal ordinance transmitted to C115 agenda)",
+    "STMT-115-stabilization_fund-003 (Webb — West Oakland queue, 23-day standard, and housing pressure)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-001",
+    "ImplementationPhase": "disbursement-active",
+    "MilestoneNotes": "C115: C114 closeout publication ordered and charter renewal ordinance transmitted; business-and-resident scope and 23-day standard preserved pending council action.",
+    "NextScheduledAction": "Council consideration of the charter renewal ordinance",
+    "NextActionCycle": 115,
+    "LastWorkCycle": 115,
+    "LastWorkSeat": "proj-stabilization-fund"
+  },
+  "_moveFold": {
+    "moveIds": [
+      "MV-114-proj-stabilization-fund-2026-11-04"
+    ]
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "status": "arc-seed",
+  "cycle": "113",
+  "desk": "civic",
+  "persona": "carmen-delaine",
+  "hood": "West Oakland",
+  "quotes": [
+    {
+      "pop": "POP-00501",
+      "name": "Denise Carter",
+      "quote": "Five million dollars kept 47 families in their homes — that's Oakland keeping its word."
+    },
+    {
+      "pop": "POP-00034",
+      "name": "Avery Santana",
+      "quote": "Five million dollars in households' hands — and the books are open for anyone to read."
+    },
+    {
+      "pop": "POP-00034",
+      "name": "Avery Santana",
+      "quote": "Five million dollars kept 47 families in their homes — that's Oakland keeping its word."
+    },
+    {
+      "pop": "POP-00037",
+      "name": "Brenda Okoro",
+      "quote": "Twelve months, twelve checks, $5.6 million — and West Oakland's oldest residents are still in their homes. That's the race against displacement, and we're still ahead."
+    },
+    {
+      "pop": "POP-00037",
+      "name": "Brenda Okoro",
+      "quote": "The Mayor names our housing unit for West Oakland's improvement — I'll take the recognition, but the credit belongs to the block associations and tenant leaders who did the daily work."
+    },
+    {
+      "pop": "POP-00037",
+      "name": "Brenda Okoro",
+      "quote": "Charter renewal isn't a blank check — it's a recommitment to the exact cohort the Fund was created to serve."
+    }
+  ],
+  "claim": "Five million dollars kept 47 families in their homes — that's Oakland keeping its word.",
+  "src": "citizenVoice PRESS c113",
+  "ranAt": "2026-10-26T18:38:53.672Z"
+}

@@ -1,0 +1,78 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "114",
+  "persona": "anthony-raines",
+  "byline": "Anthony Raines",
+  "bylinePopid": "POP-00017",
+  "article": "output/cron-compare/staged/sports_c114_anthony-raines_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Ernesto Quintero",
+        "role": "mentioned",
+        "popid": "POP-00050",
+        "floor": true
+      },
+      {
+        "name": "John Ellis",
+        "role": "mentioned",
+        "popid": "POP-00033",
+        "floor": true
+      },
+      {
+        "name": "Mike Paulson",
+        "role": "mentioned",
+        "popid": "POP-00527",
+        "floor": true
+      },
+      {
+        "name": "Travis Coles",
+        "role": "mentioned",
+        "popid": "POP-00533",
+        "floor": true
+      },
+      {
+        "name": "Vladimir Gonzalez",
+        "role": "mentioned",
+        "popid": "POP-00598",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "A's · front-office — The bargain core: is it time to extend Coles, Ellis, Quintero and Gonzalez?",
+        "sourceRef": "world_summary_c114.md ## Sports"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-7520b56c5dea",
+    "draftSha256": "46d6a4acebd5fef8f5a7d29c790533e45195b901f8a7e23d9619fb88180585f0",
+    "verdict": "output/cron-compare/sports_c114_anthony-raines_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-04T07:42:59.302Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 892,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "46d6a4acebd5fef8f5a7d29c790533e45195b901f8a7e23d9619fb88180585f0",
+      "costUsd": 0.0018
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-04T07:43:05.691Z"
+}

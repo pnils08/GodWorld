@@ -1,0 +1,63 @@
+{
+  "office": "council_d1",
+  "agentDir": "civic-office-council-d1",
+  "holder": "Denise Carter",
+  "popid": "POP-00501",
+  "title": "City Council District 1",
+  "date": "2026-11-11",
+  "cycle": 115,
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "statement": "Brooklyn is still sliding — sentiment at -0.11 against a city at 0.020, and the trajectory reading is decay with momentum flat at zero. That is my district, and the people living inside it are Kaila Raimon, Drago Helio, Sefu Helio and Minh Raimon — not a chart. I will not call a dip a catastrophe, and I will not let it be waved away either. My answer to Director Vance is the same one I gave last week and it is still the honest one: the baseline is being assembled, and until it is documented I am not going to dress up a guess as an audit. What I can do this week is keep the West Oakland Stabilization Fund and the Tenant Defense Fund moving so D1 households are not left waiting on paperwork while the readings drift. Enrollment without placement is a schedule; placement with a career is a path, and I want the path for the young people on these blocks too.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-115-civic-office-council-d1",
+        "text": "Director Vance — you asked this office for the Brooklyn service-audit baseline and the District 1 OARI evaluation, and for what we see behind Brooklyn's continuing negative sentiment. Here is what the record shows me and what it does not. Brooklyn reads -0.11 this cycle against a city at 0.020, down from -0.09; the crime index is 0.62 against a city 0.647; retail vitality is 6.22; housing pressure sits at zero; and the trajectory reading is decay with momentum at zero. What that tells me is a neighborhood that is not being pulled down by a single dramatic cause — it is flat, tired, and not recovering on its own. What it does not tell me is why, and I will not manufacture a reason to fill the gap. The service-audit baseline is not yet documented in anything I can cite, so I am not certifying a number I cannot show you. The D1 OARI evaluation is likewise incomplete on my side; the initiative is dispatch-live on my board with the next step due next cycle, and I will bring the evaluation when it is real rather than when it is convenient. In the meantime I am keeping the stabilization and tenant-defense money in motion so Brooklyn and West Oakland households are not held hostage to a missing file. If your department can supply the service records that would close the baseline, this office will take them and finish the audit with you.",
+        "directiveCycle": 115,
+        "confrontationSeat": "civic-office-council-d1"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": "Brooklyn sentiment -0.11 vs city 0.020; crime index 0.62 vs city 0.647; retail vitality 6.22; housing pressure 0; trajectory decay, momentum 0",
+  "ranAt": "2026-11-11T11:56:23.972Z",
+  "usage": {
+    "prompt_tokens": 6365,
+    "completion_tokens": 596,
+    "total_tokens": 6961,
+    "cost": 0.00125275,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.00125275,
+      "upstream_inference_prompt_cost": 0.00095475,
+      "upstream_inference_completions_cost": 0.000298
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "fellBackFrom": null,
+  "evidenceGenerationHash": "8bfd87940a666380c5a9b73d2151cff4f6286856fa3673a770c7259a48d6c71b",
+  "evidenceReads": [],
+  "provider": "Cohere",
+  "finishReason": "stop",
+  "elapsedMs": 3028,
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00501",
+    "id": "zGtrXsdyP98417TjydWTPh",
+    "customId": "cp-POP-00501-c115-CIVIC-datawake-2026-11-11"
+  }
+}

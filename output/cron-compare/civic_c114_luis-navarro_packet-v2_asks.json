@@ -1,0 +1,121 @@
+[
+  {
+    "pop": "POP-00495",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00495\",\"name\":\"Rosalind Young\",\"role\":\"Smoke Shop Owner\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Luis Navarro\",\"question\":\"What civic issue in Laurel has been on your mind, and has anyone from the city or council ever reached out to you about it? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"anomaly\",\"hood\":\"Laurel\",\"focus\":\"Civic gap in Laurel — who is accountable, what council has or hasn't done\",\"src\":\"output/engine_audit_c114.json patterns[0]; evidence: Neighborhood_Map row(s) 4\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Rosalind Young — Smoke Shop Owner — Laurel resident\",\"evidence\":[{\"id\":\"EV-d156c96361\",\"src\":\"output/engine_audit_c114.json patterns[0]; evidence: Neighborhood_Map row(s) 4\",\"text\":\"No civic initiative addresses the Laurel signal surfaced this cycle.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C114\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4261fa115617\"},{\"t\":\"FACT\",\"text\":\"civic gap in Laurel — who is accountable, what council has or hasn't done\",\"src\":\"output/engine_audit_c114.json patterns[0]; evidence: Neighborhood_Map row(s) 4\",\"id\":\"F-a87a3435eede\"},{\"t\":\"FACT\",\"text\":\"No civic initiative addresses the Laurel signal surfaced this cycle.\",\"src\":\"output/engine_audit_c114.json patterns[0]; evidence: Neighborhood_Map row(s) 4\",\"id\":\"F-6b5358102755\"},{\"t\":\"FACT\",\"text\":\"Rosalind Young — Smoke Shop Owner — Laurel resident\",\"src\":\"Simulation_Ledger profile for POP-00495\",\"id\":\"F-a51487df4df0\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C10, Spring, holiday=none\",\"src\":\"output/world_summary_c114.md Calendar context (Simulation_Calendar)\",\"id\":\"F-9b9470803821\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00495",
+        "name": "Rosalind Young",
+        "role": "Smoke Shop Owner",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Luis Navarro",
+        "question": "What civic issue in Laurel has been on your mind, and has anyone from the city or council ever reached out to you about it? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "anomaly",
+        "hood": "Laurel",
+        "focus": "Civic gap in Laurel — who is accountable, what council has or hasn't done",
+        "src": "output/engine_audit_c114.json patterns[0]; evidence: Neighborhood_Map row(s) 4"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Rosalind Young — Smoke Shop Owner — Laurel resident",
+        "evidence": [
+          {
+            "id": "EV-d156c96361",
+            "src": "output/engine_audit_c114.json patterns[0]; evidence: Neighborhood_Map row(s) 4",
+            "text": "No civic initiative addresses the Laurel signal surfaced this cycle."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C114",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4261fa115617"
+        },
+        {
+          "t": "FACT",
+          "text": "civic gap in Laurel — who is accountable, what council has or hasn't done",
+          "src": "output/engine_audit_c114.json patterns[0]; evidence: Neighborhood_Map row(s) 4",
+          "id": "F-a87a3435eede"
+        },
+        {
+          "t": "FACT",
+          "text": "No civic initiative addresses the Laurel signal surfaced this cycle.",
+          "src": "output/engine_audit_c114.json patterns[0]; evidence: Neighborhood_Map row(s) 4",
+          "id": "F-6b5358102755"
+        },
+        {
+          "t": "FACT",
+          "text": "Rosalind Young — Smoke Shop Owner — Laurel resident",
+          "src": "Simulation_Ledger profile for POP-00495",
+          "id": "F-a51487df4df0"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C10, Spring, holiday=none",
+          "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+          "id": "F-9b9470803821"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  }
+]

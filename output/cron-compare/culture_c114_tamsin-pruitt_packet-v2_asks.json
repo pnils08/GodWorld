@@ -1,0 +1,594 @@
+[
+  {
+    "pop": "POP-00687",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00687\",\"name\":\"Alexa Ward\",\"role\":\"Licensed Plumber\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Tamsin Pruitt\",\"question\":\"What was Alexa Ward's experience like when they moved into their new place? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-lives\",\"hood\":null,\"focus\":\"The lives of C114: 9 people\",\"src\":\"output/beats/Lived_Events.jsonl @C114 batch c57479\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Alexa Ward — Licensed Plumber — West Oakland\",\"evidence\":[{\"id\":\"EV-efdf48cad2\",\"src\":\"output/beats/Lived_Events.jsonl @C114 batch c57479\",\"text\":\"Alexa Ward first. The event is the lead; one true detail; what came next only if the record says.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Alexa Ward moved into a place of their own in West Oakland, renting\",\"src\":\"output/beats/Lived_Events.jsonl @C114 batch c57479\",\"id\":\"F-a1e68effa974\"},{\"t\":\"FACT\",\"text\":\"Alexa Ward first. The event is the lead; one true detail; what came next only if the record says.\",\"src\":\"output/beats/Lived_Events.jsonl @C114 batch c57479\",\"id\":\"F-65ddc85d752e\"},{\"t\":\"FACT\",\"text\":\"Alexa Ward moved into a place of their own in West Oakland, renting (C114)\",\"src\":\"output/beats/Household_Ledger.jsonl @C114\",\"id\":\"F-a559843881e1\"},{\"t\":\"FACT\",\"text\":\"Alexa Ward — in their life, C114: spent too long in a bookstore aisle they'd never stopped at\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C114\",\"id\":\"F-cbf7388e695b\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C114\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4261fa115617\"},{\"t\":\"FACT\",\"text\":\"Antoine Vermeer moved into a place of their own in Lake Merritt, renting (C114)\",\"src\":\"output/beats/Household_Ledger.jsonl @C114\",\"id\":\"F-855295f52d53\"},{\"t\":\"FACT\",\"text\":\"Antoine Vermeer — in their life, C113: wrote half a letter to family, then decided to call instead\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C113\",\"id\":\"F-0b138df98a64\"},{\"t\":\"FACT\",\"text\":\"Antoine Vermeer — in their life, C113: adjusted today's plans after last night's gridlock\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C113\",\"id\":\"F-0db5f914343d\"},{\"t\":\"FACT\",\"text\":\"Alexa Ward — Licensed Plumber — West Oakland\",\"src\":\"Simulation_Ledger profile for POP-00687\",\"id\":\"F-9a5bb2371d20\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C10, Spring, holiday=none\",\"src\":\"output/world_summary_c114.md Calendar context (Simulation_Calendar)\",\"id\":\"F-9b9470803821\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00687",
+        "name": "Alexa Ward",
+        "role": "Licensed Plumber",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Tamsin Pruitt",
+        "question": "What was Alexa Ward's experience like when they moved into their new place? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-lives",
+        "hood": null,
+        "focus": "The lives of C114: 9 people",
+        "src": "output/beats/Lived_Events.jsonl @C114 batch c57479"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Alexa Ward — Licensed Plumber — West Oakland",
+        "evidence": [
+          {
+            "id": "EV-efdf48cad2",
+            "src": "output/beats/Lived_Events.jsonl @C114 batch c57479",
+            "text": "Alexa Ward first. The event is the lead; one true detail; what came next only if the record says."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Alexa Ward moved into a place of their own in West Oakland, renting",
+          "src": "output/beats/Lived_Events.jsonl @C114 batch c57479",
+          "id": "F-a1e68effa974"
+        },
+        {
+          "t": "FACT",
+          "text": "Alexa Ward first. The event is the lead; one true detail; what came next only if the record says.",
+          "src": "output/beats/Lived_Events.jsonl @C114 batch c57479",
+          "id": "F-65ddc85d752e"
+        },
+        {
+          "t": "FACT",
+          "text": "Alexa Ward moved into a place of their own in West Oakland, renting (C114)",
+          "src": "output/beats/Household_Ledger.jsonl @C114",
+          "id": "F-a559843881e1"
+        },
+        {
+          "t": "FACT",
+          "text": "Alexa Ward — in their life, C114: spent too long in a bookstore aisle they'd never stopped at",
+          "src": "output/beats/LifeHistory_Log.jsonl @C114",
+          "id": "F-cbf7388e695b"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C114",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4261fa115617"
+        },
+        {
+          "t": "FACT",
+          "text": "Antoine Vermeer moved into a place of their own in Lake Merritt, renting (C114)",
+          "src": "output/beats/Household_Ledger.jsonl @C114",
+          "id": "F-855295f52d53"
+        },
+        {
+          "t": "FACT",
+          "text": "Antoine Vermeer — in their life, C113: wrote half a letter to family, then decided to call instead",
+          "src": "output/beats/LifeHistory_Log.jsonl @C113",
+          "id": "F-0b138df98a64"
+        },
+        {
+          "t": "FACT",
+          "text": "Antoine Vermeer — in their life, C113: adjusted today's plans after last night's gridlock",
+          "src": "output/beats/LifeHistory_Log.jsonl @C113",
+          "id": "F-0db5f914343d"
+        },
+        {
+          "t": "FACT",
+          "text": "Alexa Ward — Licensed Plumber — West Oakland",
+          "src": "Simulation_Ledger profile for POP-00687",
+          "id": "F-9a5bb2371d20"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C10, Spring, holiday=none",
+          "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+          "id": "F-9b9470803821"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00755",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00755\",\"name\":\"Antoine Vermeer\",\"role\":\"Senior Pastor / Faith Leader\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Tamsin Pruitt\",\"question\":\"How did Antoine Vermeer's recent experiences shape their decision to move into a new place? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-lives\",\"hood\":null,\"focus\":\"The lives of C114: 9 people\",\"src\":\"output/beats/Lived_Events.jsonl @C114 batch c57479\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Antoine Vermeer — Senior Pastor / Faith Leader — Lake Merritt\",\"evidence\":[{\"id\":\"EV-75d19df96e\",\"src\":\"output/beats/Lived_Events.jsonl @C114 batch c57479\",\"text\":\"Alexa Ward first. The event is the lead; one true detail; what came next only if the record says.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Antoine Vermeer moved into a place of their own in Lake Merritt, renting (C114)\",\"src\":\"output/beats/Household_Ledger.jsonl @C114\",\"id\":\"F-855295f52d53\"},{\"t\":\"FACT\",\"text\":\"Antoine Vermeer — in their life, C113: wrote half a letter to family, then decided to call instead\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C113\",\"id\":\"F-0b138df98a64\"},{\"t\":\"FACT\",\"text\":\"Antoine Vermeer — in their life, C113: adjusted today's plans after last night's gridlock\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C113\",\"id\":\"F-0db5f914343d\"},{\"t\":\"FACT\",\"text\":\"Antoine Vermeer — in their life, C114: played a relative's voicemail twice before saving it again\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C114\",\"id\":\"F-5ec17cae76d5\"},{\"t\":\"FACT\",\"text\":\"Antoine Vermeer — in their life, C114: checked out a First Friday gallery\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C114\",\"id\":\"F-6265d33f2b4e\"},{\"t\":\"FACT\",\"text\":\"Antoine Vermeer — the Tribune named them in a piece headlined A Week of Many Altars: Oakland's Thanksgiving Convergence (Culture, C99)\",\"src\":\"archive/ARTICLE_INDEX.jsonl 57235fd2f5166f60\",\"id\":\"F-da89a25b155a\"},{\"t\":\"FACT\",\"text\":\"Antoine Vermeer — the Tribune named them in a piece headlined The Season the Congregations Carried — and the Shortstop in a Deacon's Robes (Culture, C97)\",\"src\":\"archive/ARTICLE_INDEX.jsonl 8351dd42bdadab26\",\"id\":\"F-eabeae7aedd4\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C114\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4261fa115617\"},{\"t\":\"FACT\",\"text\":\"Antoine Vermeer — Senior Pastor / Faith Leader — Lake Merritt\",\"src\":\"Simulation_Ledger profile for POP-00755\",\"id\":\"F-c1a16947809a\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C10, Spring, holiday=none\",\"src\":\"output/world_summary_c114.md Calendar context (Simulation_Calendar)\",\"id\":\"F-9b9470803821\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00755",
+        "name": "Antoine Vermeer",
+        "role": "Senior Pastor / Faith Leader",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Tamsin Pruitt",
+        "question": "How did Antoine Vermeer's recent experiences shape their decision to move into a new place? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-lives",
+        "hood": null,
+        "focus": "The lives of C114: 9 people",
+        "src": "output/beats/Lived_Events.jsonl @C114 batch c57479"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Antoine Vermeer — Senior Pastor / Faith Leader — Lake Merritt",
+        "evidence": [
+          {
+            "id": "EV-75d19df96e",
+            "src": "output/beats/Lived_Events.jsonl @C114 batch c57479",
+            "text": "Alexa Ward first. The event is the lead; one true detail; what came next only if the record says."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Antoine Vermeer moved into a place of their own in Lake Merritt, renting (C114)",
+          "src": "output/beats/Household_Ledger.jsonl @C114",
+          "id": "F-855295f52d53"
+        },
+        {
+          "t": "FACT",
+          "text": "Antoine Vermeer — in their life, C113: wrote half a letter to family, then decided to call instead",
+          "src": "output/beats/LifeHistory_Log.jsonl @C113",
+          "id": "F-0b138df98a64"
+        },
+        {
+          "t": "FACT",
+          "text": "Antoine Vermeer — in their life, C113: adjusted today's plans after last night's gridlock",
+          "src": "output/beats/LifeHistory_Log.jsonl @C113",
+          "id": "F-0db5f914343d"
+        },
+        {
+          "t": "FACT",
+          "text": "Antoine Vermeer — in their life, C114: played a relative's voicemail twice before saving it again",
+          "src": "output/beats/LifeHistory_Log.jsonl @C114",
+          "id": "F-5ec17cae76d5"
+        },
+        {
+          "t": "FACT",
+          "text": "Antoine Vermeer — in their life, C114: checked out a First Friday gallery",
+          "src": "output/beats/LifeHistory_Log.jsonl @C114",
+          "id": "F-6265d33f2b4e"
+        },
+        {
+          "t": "FACT",
+          "text": "Antoine Vermeer — the Tribune named them in a piece headlined A Week of Many Altars: Oakland's Thanksgiving Convergence (Culture, C99)",
+          "src": "archive/ARTICLE_INDEX.jsonl 57235fd2f5166f60",
+          "id": "F-da89a25b155a"
+        },
+        {
+          "t": "FACT",
+          "text": "Antoine Vermeer — the Tribune named them in a piece headlined The Season the Congregations Carried — and the Shortstop in a Deacon's Robes (Culture, C97)",
+          "src": "archive/ARTICLE_INDEX.jsonl 8351dd42bdadab26",
+          "id": "F-eabeae7aedd4"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C114",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4261fa115617"
+        },
+        {
+          "t": "FACT",
+          "text": "Antoine Vermeer — Senior Pastor / Faith Leader — Lake Merritt",
+          "src": "Simulation_Ledger profile for POP-00755",
+          "id": "F-c1a16947809a"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C10, Spring, holiday=none",
+          "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+          "id": "F-9b9470803821"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00058",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00058\",\"name\":\"Sidney Tumolo\",\"role\":\"Second Baseman, Oakland A's\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Tamsin Pruitt\",\"question\":\"What was Sidney Tumolo's experience like at the small local gathering they attended? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-lives\",\"hood\":null,\"focus\":\"The lives of C114: 9 people\",\"src\":\"output/beats/Lived_Events.jsonl @C114 batch c57479\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Sidney Tumolo — Second Baseman, Oakland A's — West Oakland\",\"evidence\":[{\"id\":\"EV-966da8cd3a\",\"src\":\"output/beats/Lived_Events.jsonl @C114 batch c57479\",\"text\":\"Alexa Ward first. The event is the lead; one true detail; what came next only if the record says.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Sidney Tumolo — attended a small local gathering and stayed later than planned, West Oakland — one of 4 people the Cycle's city turn reached (West Oakland Stabilization Fund sitting (0, capped); Oakland Alternative Response Initiative sitting (0, capped); Fruitvale Transit Hub…) (C114)\",\"src\":\"output/beats/Story_Seed_Deck.jsonl @C114\",\"id\":\"F-d6138a440c16\"},{\"t\":\"FACT\",\"text\":\"Sidney Tumolo — in their life, C113: read the Tribune's front page twice — once for the news, once to see who was in it\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C113\",\"id\":\"F-1a22b5561bda\"},{\"t\":\"FACT\",\"text\":\"Sidney Tumolo — in their life, C114: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C114\",\"id\":\"F-0ba78c80242d\"},{\"t\":\"FACT\",\"text\":\"Sidney Tumolo — in their life, C114: counted cranes on the skyline from the bus stop and got a different number than yesterday\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C114\",\"id\":\"F-1763e73769c9\"},{\"t\":\"FACT\",\"text\":\"Sidney Tumolo — the Tribune named them in a piece headlined What Comes Next: Seymour's A's Emerge From Spring With a Record and a Question (Sports, C86)\",\"src\":\"archive/ARTICLE_INDEX.jsonl 06b741fe768ab758\",\"id\":\"F-ce250e78ca75\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C114\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4261fa115617\"},{\"t\":\"FACT\",\"text\":\"Alexa Ward moved into a place of their own in West Oakland, renting\",\"src\":\"output/beats/Lived_Events.jsonl @C114 batch c57479\",\"id\":\"F-a1e68effa974\"},{\"t\":\"FACT\",\"text\":\"Alexa Ward first. The event is the lead; one true detail; what came next only if the record says.\",\"src\":\"output/beats/Lived_Events.jsonl @C114 batch c57479\",\"id\":\"F-65ddc85d752e\"},{\"t\":\"FACT\",\"text\":\"Sidney Tumolo — Second Baseman, Oakland A's — West Oakland\",\"src\":\"Simulation_Ledger profile for POP-00058\",\"id\":\"F-d86daf98cbaa\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C10, Spring, holiday=none\",\"src\":\"output/world_summary_c114.md Calendar context (Simulation_Calendar)\",\"id\":\"F-9b9470803821\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00058",
+        "name": "Sidney Tumolo",
+        "role": "Second Baseman, Oakland A's",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Tamsin Pruitt",
+        "question": "What was Sidney Tumolo's experience like at the small local gathering they attended? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-lives",
+        "hood": null,
+        "focus": "The lives of C114: 9 people",
+        "src": "output/beats/Lived_Events.jsonl @C114 batch c57479"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Sidney Tumolo — Second Baseman, Oakland A's — West Oakland",
+        "evidence": [
+          {
+            "id": "EV-966da8cd3a",
+            "src": "output/beats/Lived_Events.jsonl @C114 batch c57479",
+            "text": "Alexa Ward first. The event is the lead; one true detail; what came next only if the record says."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Sidney Tumolo — attended a small local gathering and stayed later than planned, West Oakland — one of 4 people the Cycle's city turn reached (West Oakland Stabilization Fund sitting (0, capped); Oakland Alternative Response Initiative sitting (0, capped); Fruitvale Transit Hub…) (C114)",
+          "src": "output/beats/Story_Seed_Deck.jsonl @C114",
+          "id": "F-d6138a440c16"
+        },
+        {
+          "t": "FACT",
+          "text": "Sidney Tumolo — in their life, C113: read the Tribune's front page twice — once for the news, once to see who was in it",
+          "src": "output/beats/LifeHistory_Log.jsonl @C113",
+          "id": "F-1a22b5561bda"
+        },
+        {
+          "t": "FACT",
+          "text": "Sidney Tumolo — in their life, C114: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence",
+          "src": "output/beats/LifeHistory_Log.jsonl @C114",
+          "id": "F-0ba78c80242d"
+        },
+        {
+          "t": "FACT",
+          "text": "Sidney Tumolo — in their life, C114: counted cranes on the skyline from the bus stop and got a different number than yesterday",
+          "src": "output/beats/LifeHistory_Log.jsonl @C114",
+          "id": "F-1763e73769c9"
+        },
+        {
+          "t": "FACT",
+          "text": "Sidney Tumolo — the Tribune named them in a piece headlined What Comes Next: Seymour's A's Emerge From Spring With a Record and a Question (Sports, C86)",
+          "src": "archive/ARTICLE_INDEX.jsonl 06b741fe768ab758",
+          "id": "F-ce250e78ca75"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C114",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4261fa115617"
+        },
+        {
+          "t": "FACT",
+          "text": "Alexa Ward moved into a place of their own in West Oakland, renting",
+          "src": "output/beats/Lived_Events.jsonl @C114 batch c57479",
+          "id": "F-a1e68effa974"
+        },
+        {
+          "t": "FACT",
+          "text": "Alexa Ward first. The event is the lead; one true detail; what came next only if the record says.",
+          "src": "output/beats/Lived_Events.jsonl @C114 batch c57479",
+          "id": "F-65ddc85d752e"
+        },
+        {
+          "t": "FACT",
+          "text": "Sidney Tumolo — Second Baseman, Oakland A's — West Oakland",
+          "src": "Simulation_Ledger profile for POP-00058",
+          "id": "F-d86daf98cbaa"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C10, Spring, holiday=none",
+          "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+          "id": "F-9b9470803821"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01086",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01086\",\"name\":\"Bruce Turner\",\"role\":\"Server\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Tamsin Pruitt\",\"question\":\"How did Bruce Turner react to hearing that another neighbor was between jobs? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-lives\",\"hood\":null,\"focus\":\"The lives of C114: 9 people\",\"src\":\"output/beats/Lived_Events.jsonl @C114 batch c57479\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Bruce Turner — Server — Dimond\",\"evidence\":[{\"id\":\"EV-b6ddeabd62\",\"src\":\"output/beats/Lived_Events.jsonl @C114 batch c57479\",\"text\":\"Alexa Ward first. The event is the lead; one true detail; what came next only if the record says.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Bruce Turner — heard another neighbor was between jobs, D1 — one of 4 people the Cycle's city turn reached (West Oakland Stabilization Fund sitting (0, capped); Oakland Alternative Response Initiative sitting (0, capped); Oakland Youth…) (C114)\",\"src\":\"output/beats/Story_Seed_Deck.jsonl @C114\",\"id\":\"F-478a70869b08\"},{\"t\":\"FACT\",\"text\":\"Bruce Turner — in their life, C114: walked a different street home just to see it\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C114\",\"id\":\"F-0b544699e33a\"},{\"t\":\"FACT\",\"text\":\"Bruce Turner — in their life, C114: told the story of their first A's game again, and nobody minded\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C114\",\"id\":\"F-bf72e7c9ff53\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C114\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4261fa115617\"},{\"t\":\"FACT\",\"text\":\"Alexa Ward moved into a place of their own in West Oakland, renting\",\"src\":\"output/beats/Lived_Events.jsonl @C114 batch c57479\",\"id\":\"F-a1e68effa974\"},{\"t\":\"FACT\",\"text\":\"Alexa Ward first. The event is the lead; one true detail; what came next only if the record says.\",\"src\":\"output/beats/Lived_Events.jsonl @C114 batch c57479\",\"id\":\"F-65ddc85d752e\"},{\"t\":\"FACT\",\"text\":\"Alexa Ward moved into a place of their own in West Oakland, renting (C114)\",\"src\":\"output/beats/Household_Ledger.jsonl @C114\",\"id\":\"F-a559843881e1\"},{\"t\":\"FACT\",\"text\":\"Alexa Ward — in their life, C114: spent too long in a bookstore aisle they'd never stopped at\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C114\",\"id\":\"F-cbf7388e695b\"},{\"t\":\"FACT\",\"text\":\"Bruce Turner — Server — Dimond\",\"src\":\"Simulation_Ledger profile for POP-01086\",\"id\":\"F-d8abed96c70d\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C10, Spring, holiday=none\",\"src\":\"output/world_summary_c114.md Calendar context (Simulation_Calendar)\",\"id\":\"F-9b9470803821\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01086",
+        "name": "Bruce Turner",
+        "role": "Server",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Tamsin Pruitt",
+        "question": "How did Bruce Turner react to hearing that another neighbor was between jobs? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-lives",
+        "hood": null,
+        "focus": "The lives of C114: 9 people",
+        "src": "output/beats/Lived_Events.jsonl @C114 batch c57479"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Bruce Turner — Server — Dimond",
+        "evidence": [
+          {
+            "id": "EV-b6ddeabd62",
+            "src": "output/beats/Lived_Events.jsonl @C114 batch c57479",
+            "text": "Alexa Ward first. The event is the lead; one true detail; what came next only if the record says."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Bruce Turner — heard another neighbor was between jobs, D1 — one of 4 people the Cycle's city turn reached (West Oakland Stabilization Fund sitting (0, capped); Oakland Alternative Response Initiative sitting (0, capped); Oakland Youth…) (C114)",
+          "src": "output/beats/Story_Seed_Deck.jsonl @C114",
+          "id": "F-478a70869b08"
+        },
+        {
+          "t": "FACT",
+          "text": "Bruce Turner — in their life, C114: walked a different street home just to see it",
+          "src": "output/beats/LifeHistory_Log.jsonl @C114",
+          "id": "F-0b544699e33a"
+        },
+        {
+          "t": "FACT",
+          "text": "Bruce Turner — in their life, C114: told the story of their first A's game again, and nobody minded",
+          "src": "output/beats/LifeHistory_Log.jsonl @C114",
+          "id": "F-bf72e7c9ff53"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C114",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4261fa115617"
+        },
+        {
+          "t": "FACT",
+          "text": "Alexa Ward moved into a place of their own in West Oakland, renting",
+          "src": "output/beats/Lived_Events.jsonl @C114 batch c57479",
+          "id": "F-a1e68effa974"
+        },
+        {
+          "t": "FACT",
+          "text": "Alexa Ward first. The event is the lead; one true detail; what came next only if the record says.",
+          "src": "output/beats/Lived_Events.jsonl @C114 batch c57479",
+          "id": "F-65ddc85d752e"
+        },
+        {
+          "t": "FACT",
+          "text": "Alexa Ward moved into a place of their own in West Oakland, renting (C114)",
+          "src": "output/beats/Household_Ledger.jsonl @C114",
+          "id": "F-a559843881e1"
+        },
+        {
+          "t": "FACT",
+          "text": "Alexa Ward — in their life, C114: spent too long in a bookstore aisle they'd never stopped at",
+          "src": "output/beats/LifeHistory_Log.jsonl @C114",
+          "id": "F-cbf7388e695b"
+        },
+        {
+          "t": "FACT",
+          "text": "Bruce Turner — Server — Dimond",
+          "src": "Simulation_Ledger profile for POP-01086",
+          "id": "F-d8abed96c70d"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C10, Spring, holiday=none",
+          "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+          "id": "F-9b9470803821"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  }
+]

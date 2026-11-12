@@ -1,0 +1,91 @@
+{
+  "cycle": 115,
+  "generatedAt": "C115",
+  "detectorVersion": "1.2.0",
+  "anomalies": [
+    {
+      "type": "anomaly",
+      "severity": "high",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [
+          "POP-00001"
+        ],
+        "neighborhoods": [
+          "Grand Lake"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Simulation_Ledger",
+        "rows": [],
+        "fields": {
+          "POPID": "POP-00001",
+          "previousIncome": 1500000,
+          "currentIncome": 250000,
+          "ratio": "0.167",
+          "peerShare": "0.00",
+          "subCheck": "citizen-income"
+        }
+      },
+      "description": "POPID POP-00001 income Δ -83% (1500000 → 250000); peer move share 0%",
+      "historicalContext": {
+        "priorCycles": [
+          1500000,
+          1500000,
+          1500000,
+          1500000,
+          1500000,
+          1500000
+        ],
+        "currentCycle": 250000
+      },
+      "triagePath": "route-to-engine-debug",
+      "confidence": "high",
+      "detectorVersion": "1.2.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "Piedmont Ave"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Neighborhood_Map",
+        "rows": [],
+        "fields": {
+          "Neighborhood": "Piedmont Ave",
+          "previousMigrationFlow": -1,
+          "currentMigrationFlow": 4,
+          "delta": "5.00",
+          "subCheck": "migration-shift",
+          "band": 3.94
+        }
+      },
+      "description": "Piedmont Ave migration flow shifted -1 → 4",
+      "historicalContext": {
+        "priorCycles": [
+          -1
+        ],
+        "currentCycle": 4
+      },
+      "triagePath": "suppress-until-verified",
+      "confidence": "medium",
+      "detectorVersion": "1.2.0"
+    }
+  ],
+  "summary": {
+    "total": 2,
+    "byTriage": {
+      "route-to-engine-debug": 1,
+      "suppress-until-verified": 1
+    }
+  }
+}

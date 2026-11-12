@@ -1,0 +1,52 @@
+{
+  "v": "UNDOCKED-INTAKE/1",
+  "Timestamp": "2026-11-03T02:55:42.293Z",
+  "POPID": "POP-00530",
+  "Cycle": 114,
+  "Seq": 1,
+  "Daypart": "SHOW",
+  "Tag": "undocked-episode",
+  "EpisodeId": "undocked-pop00530-2026-11-03T02-30-27",
+  "Applied": "yes",
+  "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop00530-2026-11-03T02-30-27.json",
+  "Holder": "Lena Okafor",
+  "CreditsDelta": 0,
+  "Magnitude": 3,
+  "Flags": [
+    "credits_delta_windowed"
+  ],
+  "Excerpt": "Lena Okafor credits=0 systems=sol,alpha_centauri,tau_ceti,electra,mimosa,ross_154,arcturus,timberline,maplevale,miaplacidus",
+  "DecidedAt": "2026-11-03T02:55:42.301Z",
+  "DecidedBy": "auto-gate",
+  "Note": "auto-approved on contract validation (§2.5)",
+  "FeedEvent": {
+    "v": "UNDOCKED-FEED/1",
+    "Cycle": 114,
+    "EventType": "undocked-episode",
+    "POPID": "POP-00530",
+    "Holder": "Lena Okafor",
+    "EpisodeId": "undocked-pop00530-Y3C10",
+    "CreditsDelta": 0,
+    "PointsDelta": 26.84,
+    "Systems": [
+      "sol",
+      "alpha_centauri",
+      "tau_ceti",
+      "electra",
+      "mimosa",
+      "ross_154",
+      "arcturus",
+      "timberline",
+      "maplevale",
+      "miaplacidus"
+    ],
+    "CombatEvents": 1,
+    "MishapCount": 0,
+    "Magnitude": 3,
+    "Flags": [
+      "credits_delta_windowed"
+    ],
+    "StagedPath": "output/spacemolt-show/staged/undocked-pop00530-2026-11-03T02-30-27.json"
+  },
+  "PointsDelta": 26.84
+}

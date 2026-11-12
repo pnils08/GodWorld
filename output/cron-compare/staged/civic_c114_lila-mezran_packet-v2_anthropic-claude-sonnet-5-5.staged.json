@@ -1,0 +1,77 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "114",
+  "persona": "lila-mezran",
+  "byline": "Dr. Lila Mezran",
+  "bylinePopid": "POP-00154",
+  "article": "output/cron-compare/staged/civic_c114_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Yu Zen",
+        "role": "quoted-source",
+        "popid": "POP-00194"
+      },
+      {
+        "name": "Jax Caldera",
+        "role": "quoted-source",
+        "popid": "POP-00799"
+      },
+      {
+        "name": "Akua Adeyemi",
+        "role": "mentioned",
+        "popid": "POP-00803"
+      },
+      {
+        "name": "Deacon Seymour",
+        "role": "mentioned",
+        "popid": "POP-00528",
+        "floor": true
+      },
+      {
+        "name": "Maurice Franklin",
+        "role": "mentioned",
+        "popid": "POP-00801",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Chinatown"
+    ],
+    "claims": [
+      {
+        "claim": "Honestly, I see people push through more than they go in. It's not stubbornness — it's that the hospital's not close, and a lot of folks here work jobs where taking a day off means losing pay or losing a shift. I've watched neighbors ride out fevers with herbal tea and a heating pad because the alternative was a bill they couldn't explain. The ones who do go in are usually past the point of choice. That's the part that gets me — by the time someone here decides to see a doctor, it's not a precaution anymore, it's an emergency.",
+        "sourceRef": "citizenVoice PRESS Jax Caldera"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-565616bef8b2",
+    "draftSha256": "7c6fc88078526eb2506cb892d7a632bad5de80a0035cd2f0c7cfcaa2a1f29fd2",
+    "verdict": "output/cron-compare/civic_c114_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-04T07:40:49.217Z",
+    "contractScore": {
+      "opened": false,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": false,
+      "inTargetBy": "judge",
+      "words": 1000,
+      "short": "The opening paragraph begins with a resident profile rather than a Packet-backed fact, and the text falls short of the 1000-word target.",
+      "score": 2,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "7c6fc88078526eb2506cb892d7a632bad5de80a0035cd2f0c7cfcaa2a1f29fd2",
+      "costUsd": 0.0026
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-04T07:40:58.763Z"
+}

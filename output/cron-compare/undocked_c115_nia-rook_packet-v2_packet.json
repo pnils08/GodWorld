@@ -1,0 +1,308 @@
+{
+  "stage": "report",
+  "desk": "undocked",
+  "cycle": "115",
+  "persona": "nia-rook",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Nia Rook",
+    "popid": "POP-01076"
+  },
+  "assignment": {
+    "story": {
+      "ref": "undocked:undocked-pop00184-Y3C11",
+      "label": "UNDOCKED: Brooklyn Nguyen, Tuesday night",
+      "kind": "undocked",
+      "angle": "UNDOCKED episode: Brooklyn Nguyen, Tuesday night. Standings: Luis Taz leads the board — rank #1, 45.19 achievement points, 0 credits, 2 cycle(s) led, current streak 2. In the chair: Brooklyn Nguyen — Community Programs Coordinator.",
+      "facts": [
+        "Brooklyn Nguyen's Tuesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes, Ridgecrest and Nembus; mined 3 copper ore, 3 iron ore and 1 sol alloy ore; came out even on credits; flew until the show's time ran out.",
+        "Brooklyn Nguyen — Community Programs Coordinator (ledger)"
+      ],
+      "citizens": [
+        "Brooklyn Nguyen — Community Programs Coordinator, UNDOCKED cast pilot"
+      ],
+      "popids": [
+        "POP-00184"
+      ],
+      "hood": "Fruitvale"
+    }
+  },
+  "angle": "output/cron-compare/undocked_c115_nia-rook_packet-v2_angle.json",
+  "quotesRequested": 1,
+  "quotesLanded": 1,
+  "quotes": [
+    {
+      "pop": "POP-00184",
+      "name": "Brooklyn Nguyen",
+      "quote": "I came out even on credits after Tuesday's UNDOCKED flight. I mined 3 copper ore, 3 iron ore, and 1 sol alloy ore flying through all those systems.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; warm, tender with people; curious, open to new things; steady, hard to shake; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I came out even on credits after Tuesday's UNDOCKED flight. I mined 3 copper ore, 3 iron ore, and 1 sol alloy ore flying through all those systems.\",\n  \"fact_ids\": [\"F-d543fd847684\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-d543fd847684"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00184-e1a9192380",
+        "authoredQuote": true,
+        "publishableQuote": "I came out even on credits after Tuesday's UNDOCKED flight. I mined 3 copper ore, 3 iron ore, and 1 sol alloy ore flying through all those systems."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00184",
+          "name": "Brooklyn Nguyen",
+          "role": "UNDOCKED pilot",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "How did Brooklyn Nguyen's navigation and mining activities affect their credit balance? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked",
+          "hood": "Fruitvale",
+          "focus": "Brooklyn Nguyen's UNDOCKED episode on Tuesday night",
+          "src": "undocked:undocked-pop00184-Y3C11"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Brooklyn Nguyen — UNDOCKED pilot",
+          "evidence": [
+            {
+              "id": "EV-7035069336",
+              "src": "undocked:undocked-pop00184-Y3C11",
+              "text": "UNDOCKED: Brooklyn Nguyen, Tuesday night"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "UNDOCKED: Brooklyn Nguyen, Tuesday night",
+            "src": "undocked:undocked-pop00184-Y3C11",
+            "id": "F-cf9ec8f302df"
+          },
+          {
+            "t": "FACT",
+            "text": "Brooklyn Nguyen's Tuesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes, Ridgecrest and Nembus; mined 3 copper ore, 3 iron ore and 1 sol alloy ore; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked:undocked-pop00184-Y3C11",
+            "id": "F-d543fd847684"
+          },
+          {
+            "t": "FACT",
+            "text": "Brooklyn Nguyen — Community Programs Coordinator (ledger)",
+            "src": "undocked:undocked-pop00184-Y3C11",
+            "id": "F-3989ab410ca4"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C115",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-bc84fc0b7718"
+          },
+          {
+            "t": "FACT",
+            "text": "Brooklyn Nguyen — UNDOCKED pilot",
+            "src": "Simulation_Ledger profile for POP-00184",
+            "id": "F-0f7faf8ea20e"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C11, Spring, holiday=none",
+            "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+            "id": "F-82d77e9a4a71"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-00184",
+      "name": "Brooklyn Nguyen",
+      "quote": "I came out even on credits after Tuesday's UNDOCKED flight. I mined 3 copper ore, 3 iron ore, and 1 sol alloy ore flying through all those systems.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; warm, tender with people; curious, open to new things; steady, hard to shake; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I came out even on credits after Tuesday's UNDOCKED flight. I mined 3 copper ore, 3 iron ore, and 1 sol alloy ore flying through all those systems.\",\n  \"fact_ids\": [\"F-d543fd847684\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-d543fd847684"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00184-e1a9192380",
+        "authoredQuote": true,
+        "publishableQuote": "I came out even on credits after Tuesday's UNDOCKED flight. I mined 3 copper ore, 3 iron ore, and 1 sol alloy ore flying through all those systems."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00184",
+          "name": "Brooklyn Nguyen",
+          "role": "UNDOCKED pilot",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "How did Brooklyn Nguyen's navigation and mining activities affect their credit balance? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked",
+          "hood": "Fruitvale",
+          "focus": "Brooklyn Nguyen's UNDOCKED episode on Tuesday night",
+          "src": "undocked:undocked-pop00184-Y3C11"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Brooklyn Nguyen — UNDOCKED pilot",
+          "evidence": [
+            {
+              "id": "EV-7035069336",
+              "src": "undocked:undocked-pop00184-Y3C11",
+              "text": "UNDOCKED: Brooklyn Nguyen, Tuesday night"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "UNDOCKED: Brooklyn Nguyen, Tuesday night",
+            "src": "undocked:undocked-pop00184-Y3C11",
+            "id": "F-cf9ec8f302df"
+          },
+          {
+            "t": "FACT",
+            "text": "Brooklyn Nguyen's Tuesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes, Ridgecrest and Nembus; mined 3 copper ore, 3 iron ore and 1 sol alloy ore; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked:undocked-pop00184-Y3C11",
+            "id": "F-d543fd847684"
+          },
+          {
+            "t": "FACT",
+            "text": "Brooklyn Nguyen — Community Programs Coordinator (ledger)",
+            "src": "undocked:undocked-pop00184-Y3C11",
+            "id": "F-3989ab410ca4"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C115",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-bc84fc0b7718"
+          },
+          {
+            "t": "FACT",
+            "text": "Brooklyn Nguyen — UNDOCKED pilot",
+            "src": "Simulation_Ledger profile for POP-00184",
+            "id": "F-0f7faf8ea20e"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C11, Spring, holiday=none",
+            "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+            "id": "F-82d77e9a4a71"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-11-11T19:24:58.325Z"
+}

@@ -1,0 +1,67 @@
+{
+  "draft": "output/cron-compare/wire_c113_celeste-tran_packet-v2_x-ai-grok-4-3.md",
+  "cycle": "113",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "fca1fd333173868c32a6cc1b4a13fe6a8c48fedcee5c65d9856c2de64b37a1c7",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All citizen profiles, quotes, and neighborhood demographic references match cycle 113 ground truth and ledger records.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "celeste-social-trends-v1",
+    "packageVersion": "CELESTE-TRENDS-1",
+    "manifestId": "AM-420323195b25",
+    "lexicalObservations": [],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Claire Ashford",
+      "Deacon Seymour",
+      "Marisol Rivera",
+      "Yu Zen"
+    ],
+    "unverified": [
+      "Civis Systems Field"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0096,
+  "durationMs": 4458,
+  "parseError": false,
+  "ranAt": "2026-10-30T23:18:48.512Z",
+  "contractScore": {
+    "opened": true,
+    "closed": false,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 400",
+    "words": 418,
+    "short": "The closing trails off into a rhetorical question rather than stating the pattern's implication about the city's mood.",
+    "score": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "fca1fd333173868c32a6cc1b4a13fe6a8c48fedcee5c65d9856c2de64b37a1c7",
+    "costUsd": 0.0013
+  }
+}

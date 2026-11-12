@@ -1,0 +1,411 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "112",
+  "persona": "selena-grant",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00591",
+      "name": "Selena Grant",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Oaks — game-result C112 · 1-0 · W1 — the second club's board read",
+      "approach": "Oaks beat-analyst approach: this slice is the Oaks feed raw — the record, the streak, the stats lines, the trigger behind each event. Third-person board read on the second club, not fan heat. Numbers come from the feed only — never invent a stat. The named players are real; the press row, the cage, the bus are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "oaks",
+        "hood": "KONO",
+        "facts": [
+          "Oaks — game-result (early-season), C112: The Oaks open their inaugural season at home. AJ Dybantsa shines in his rookie debut as the Oaks win their first win as a franchise.",
+          "Record 1-0 · streak W1",
+          "Stats (feed): AJ Dybantsa/25PTS/4REB, Adash Stanley/17PTS/9ASST, Austin Reaves/14PTS/8REB/8ASST, Wendell Carter Jr/15PTS/12REB",
+          "Trigger: home-opener",
+          "Franchise stability: growing",
+          "Oaks — season-state (early-season), C112: Elias Varek meets the media, happy over the win and shares updated on the Oaks.",
+          "Trigger: hot-streak"
+        ],
+        "priorCycle": null,
+        "note": null,
+        "engineHooks": [],
+        "roomIsYours": "the near-empty press row, the bullpen chatter, what the manager says when the record is ugly, the drumbeat of a losing streak",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-oaks-beat",
+      "hood": "KONO",
+      "score": null,
+      "src": "output/beats/Oakland_Sports_Feed.jsonl @C112",
+      "nearby": [
+        {
+          "text": "A's | player-feature | (off-season) | Eric Taveras, Martin Richards",
+          "src": "Oakland_Sports_Feed cycle 112; rendered: world_summary_c112.md \"## Sports\" C112 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | rumor | (off-season) | Mark Aitken, Kevin Clark",
+          "src": "Oakland_Sports_Feed cycle 112; rendered: world_summary_c112.md \"## Sports\" C112 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (off-season) | Vinnie Keane, Benji Dillon",
+          "src": "Oakland_Sports_Feed cycle 112; rendered: world_summary_c112.md \"## Sports\" C112 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | game-result | (early-season) | AJ Dybantsa, Adash Stanley, Wendell Carter Jr, Austin Reaves",
+          "src": "Oakland_Sports_Feed cycle 112; rendered: world_summary_c112.md \"## Sports\" C112 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | season-state | (early-season) | Elias Varek",
+          "src": "Oakland_Sports_Feed cycle 112; rendered: world_summary_c112.md \"## Sports\" C112 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": []
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C112",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-7cd6ffd2aeb3"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks — game-result C112 · 1-0 · W1",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C112",
+        "id": "F-a95311cac2be"
+      },
+      {
+        "t": "FACT",
+        "text": "The Oaks open their inaugural season at home. AJ Dybantsa shines in his rookie debut as the Oaks win their first win as a franchise.",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C112",
+        "id": "F-a801a19458b0"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks — game-result (early-season), C112: The Oaks open their inaugural season at home. AJ Dybantsa shines in his rookie debut as the Oaks win their first win as a franchise.",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C112",
+        "id": "F-e1e1c4186316"
+      },
+      {
+        "t": "FACT",
+        "text": "Record 1-0 · streak W1",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C112",
+        "id": "F-6b4d525fc3df"
+      },
+      {
+        "t": "FACT",
+        "text": "Stats (feed): AJ Dybantsa/25PTS/4REB, Adash Stanley/17PTS/9ASST, Austin Reaves/14PTS/8REB/8ASST, Wendell Carter Jr/15PTS/12REB",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C112",
+        "id": "F-dda80d079c76"
+      },
+      {
+        "t": "FACT",
+        "text": "Trigger: home-opener",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C112",
+        "id": "F-e279fd66cd60"
+      },
+      {
+        "t": "FACT",
+        "text": "Franchise stability: growing",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C112",
+        "id": "F-56844875ea02"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks — season-state (early-season), C112: Elias Varek meets the media, happy over the win and shares updated on the Oaks.",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C112",
+        "id": "F-f1338708b284"
+      },
+      {
+        "t": "FACT",
+        "text": "Trigger: hot-streak",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C112",
+        "id": "F-eaa02338896e"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "No target candidate was supplied. Return targets as an empty array; do not invent a person or identifier. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "records",
+    "candidates": [],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Selena Grant",
+    "popid": "POP-00591"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-oaks-beat",
+      "angle": "Oaks — game-result C112 · 1-0 · W1 — the second club's board read",
+      "label": "Oaks — game-result C112 · 1-0 · W1",
+      "hookLine": "The Oaks open their inaugural season at home. AJ Dybantsa shines in his rookie debut as the Oaks win their first win as a franchise.",
+      "hood": "KONO",
+      "citizens": [
+        "Adash Stanley (POP-01023)",
+        "Austin Reaves (POP-01027)",
+        "Elias Varek (POP-00789)"
+      ],
+      "popids": [
+        "POP-01023",
+        "POP-01027",
+        "POP-00789"
+      ],
+      "ref": "output/beats/Oakland_Sports_Feed.jsonl @C112",
+      "cycle": 112
+    },
+    "approach": "Oaks beat-analyst approach: this slice is the Oaks feed raw — the record, the streak, the stats lines, the trigger behind each event. Third-person board read on the second club, not fan heat. Numbers come from the feed only — never invent a stat. The named players are real; the press row, the cage, the bus are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "OAKS-BEAT-1",
+    "kind": "beat-oaks-beat",
+    "seat": {
+      "slug": "selena-grant",
+      "name": "Selena Grant",
+      "popid": "POP-00591",
+      "desk": "sports",
+      "domain": "oaks",
+      "builder": "buildOaksBeatSlice.js"
+    },
+    "hood": "KONO",
+    "pulse": {
+      "className": "beat-oaks-beat",
+      "score": 100,
+      "label": "Oaks — game-result C112 · 1-0 · W1",
+      "hood": "KONO",
+      "source": "output/beats/Oakland_Sports_Feed.jsonl @C112"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "Oaks — game-result C112 · 1-0 · W1 — the second club's board read",
+      "hookLine": "The Oaks open their inaugural season at home. AJ Dybantsa shines in his rookie debut as the Oaks win their first win as a franchise.",
+      "anchorFacts": [
+        "Oaks — game-result (early-season), C112: The Oaks open their inaugural season at home. AJ Dybantsa shines in his rookie debut as the Oaks win their first win as a franchise.",
+        "Record 1-0 · streak W1",
+        "Stats (feed): AJ Dybantsa/25PTS/4REB, Adash Stanley/17PTS/9ASST, Austin Reaves/14PTS/8REB/8ASST, Wendell Carter Jr/15PTS/12REB",
+        "Trigger: home-opener",
+        "Franchise stability: growing",
+        "Oaks — season-state (early-season), C112: Elias Varek meets the media, happy over the win and shares updated on the Oaks.",
+        "Record 1-0 · streak W1",
+        "Trigger: hot-streak",
+        "Franchise stability: growing"
+      ],
+      "evidence": [
+        {
+          "text": "Oaks — game-result (early-season), C112: The Oaks open their inaugural season at home. AJ Dybantsa shines in his rookie debut as the Oaks win their first win as a franchise.",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+        },
+        {
+          "text": "Record 1-0 · streak W1",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+        },
+        {
+          "text": "Stats (feed): AJ Dybantsa/25PTS/4REB, Adash Stanley/17PTS/9ASST, Austin Reaves/14PTS/8REB/8ASST, Wendell Carter Jr/15PTS/12REB",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+        },
+        {
+          "text": "Trigger: home-opener",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+        },
+        {
+          "text": "Franchise stability: growing",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+        },
+        {
+          "text": "Oaks — season-state (early-season), C112: Elias Varek meets the media, happy over the win and shares updated on the Oaks.",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+        },
+        {
+          "text": "Record 1-0 · streak W1",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+        },
+        {
+          "text": "Trigger: hot-streak",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+        },
+        {
+          "text": "Franchise stability: growing",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C112"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": null,
+      "hooks": [],
+      "note": null,
+      "pageVoices": [],
+      "roomIsYours": "the near-empty press row, the bullpen chatter, what the manager says when the record is ugly, the drumbeat of a losing streak"
+    },
+    "citizens": [
+      {
+        "popid": "POP-01023",
+        "name": "Adash Stanley",
+        "role": "PG / The Oaks ",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Adash Stanley — PG / The Oaks  — Downtown",
+        "why": "named on the Oaks feed C112 (Oakland_Sports_Feed)"
+      },
+      {
+        "popid": "POP-01027",
+        "name": "Austin Reaves",
+        "role": "SG / The Oaks",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Austin Reaves — SG / The Oaks — Downtown",
+        "why": "named on the Oaks feed C112 (Oakland_Sports_Feed)"
+      },
+      {
+        "popid": "POP-00789",
+        "name": "Elias Varek",
+        "role": "Founder of Civis Systems",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "Elias Varek — Founder of Civis Systems — West Oakland",
+        "why": "named on the Oaks feed C112 (Oakland_Sports_Feed)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Oakland_Sports_Feed.jsonl @C112",
+      "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Selena Grant",
+    "popid": "POP-00591",
+    "text": "I'm planning to dig into the Oaks' first win as a franchise, focusing on AJ Dybantsa's rookie debut. I'll be looking into what Elias Varek shared with the media about the team's updates and stability. The press row was nearly empty, so I'll need to rely on the feed and any available comments from the team.",
+    "plan": {
+      "chase": "I'm planning to dig into the Oaks' first win as a franchise, focusing on AJ Dybantsa's rookie debut. I'll be looking into what Elias Varek shared with the media about the team's updates and stability. The press row was nearly empty, so I'll need to rely on the feed and any available comments from the team.",
+      "focus": "Oaks' inaugural season win and Elias Varek's comments",
+      "why": "The Oaks' first win is a significant milestone, and understanding the factors that contributed to it will be crucial for their early-season success.",
+      "checks": [
+        "Verify stats from the feed",
+        "Review Elias Varek's comments for team updates"
+      ],
+      "targets": [],
+      "interpretation": "The Oaks' first win sets a positive tone for their early season, with key players performing well.",
+      "unverifiedLead": [
+        "The team's growing stability could be a factor in their success, but I need more insight into their strategy and challenges."
+      ],
+      "closeQuestion": "What are the Oaks' strengths and weaknesses heading into their next game?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "A's | player-feature | (off-season) | Eric Taveras, Martin Richards",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 112; rendered: world_summary_c112.md \"## Sports\" C112 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00597",
+        "POP-00031"
+      ]
+    },
+    {
+      "label": "A's | rumor | (off-season) | Mark Aitken, Kevin Clark",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 112; rendered: world_summary_c112.md \"## Sports\" C112 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00003",
+        "POP-00053"
+      ]
+    },
+    {
+      "label": "A's | player-feature | (off-season) | Vinnie Keane, Benji Dillon",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 112; rendered: world_summary_c112.md \"## Sports\" C112 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00001",
+        "POP-00018"
+      ]
+    },
+    {
+      "label": "Oaks | game-result | (early-season) | AJ Dybantsa, Adash Stanley, Wendell Carter Jr, Austin Reaves",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 112; rendered: world_summary_c112.md \"## Sports\" C112 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01024",
+        "POP-01023",
+        "POP-01028",
+        "POP-01027"
+      ]
+    },
+    {
+      "label": "Oaks | season-state | (early-season) | Elias Varek",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 112; rendered: world_summary_c112.md \"## Sports\" C112 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00789"
+      ]
+    }
+  ],
+  "laneEntries": 9,
+  "angleCapHits": 0,
+  "ranAt": "2026-10-20T11:55:53.277Z"
+}

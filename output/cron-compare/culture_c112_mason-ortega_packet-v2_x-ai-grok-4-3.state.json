@@ -1,0 +1,413 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00160",
+    "name": "Mason Ortega",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Downtown kitchens: SpeedyBurger, Miso Metro, Temple Lounge — the people who work the shift",
+    "approach": "Food & hospitality approach — kitchens as workplaces: this slice is one neighborhood's restaurants, cafes and bars from the ledger and the people on the roster who work in them. The people on this slice are real; the rest of the room is yours — the line on a Tuesday, the regulars, the walk-in, the tip jar. One kitchen, one shift, one true thing about the work. Not a review. Not multi-voice culture-desk average. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "food-workplaces",
+      "hood": "Downtown",
+      "pulseClass": "hood-kitchens",
+      "economicFrame": "Downtown kitchens: SpeedyBurger, Miso Metro, Temple Lounge — the people who work the shift",
+      "hook": "Devon Willis, Server at SpeedyBurger. 2 named workers at 2 named kitchens in Downtown on the ledger this cycle.",
+      "namedBusinesses": [
+        "SpeedyBurger",
+        "Miso Metro",
+        "Temple Lounge",
+        "Midnight Bistro"
+      ],
+      "workplaces": [
+        "SpeedyBurger — Fast Food & Quick Service — Devon Willis (Server)",
+        "Miso Metro — Restaurant & Dining — Andre Turner (Line cook)",
+        "Temple Lounge — Nightlife & Entertainment — no roster names",
+        "Midnight Bistro — Restaurant & Dining — no roster names"
+      ],
+      "engineColour": [
+        "Drew Lemon — stepped over a puddle reflecting the Tribune Tower neon and thought about taking a picture",
+        "Bruce Wright — argued the bullpen order at the barbershop like it was city policy near a busy plaza",
+        "Ariana Reyes — navigated around a film crew blocking the sidewalk near the waterfront and rolled their eyes near a late-night diner",
+        "Patricia Nwosu — found a quiet minute at a bench outside the courthouse and felt the season starting to turn"
+      ],
+      "roomIsYours": "the line, the regulars, the pace, the tip jar, what the cook is worried about",
+      "forbidden": [
+        "Do not invent a business, a worker, an owner or a place — every name comes from this slice",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose",
+        "Do not contradict a role, employer or neighborhood listed here"
+      ],
+      "sceneRule": null
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "story-signal",
+    "hood": "Downtown",
+    "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C112",
+    "plan": {
+      "focus": "The people who work the shift at SpeedyBurger and Miso Metro — Devon Willis and Andre Turner — and the actual texture of their workdays in Downtown kitchens.",
+      "closeQuestion": "If I can’t get Devon or Andre to speak on the record, what true thing about the work can I responsibly report from observation alone, without inventing a voice?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00782",
+        "name": "Devon Willis",
+        "profile": "Devon Willis — Server — SpeedyBurger, Downtown",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00225",
+        "name": "Andre Turner",
+        "profile": "Andre Turner — Line cook — Miso Metro, Downtown",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00670",
+        "name": "Drew Lemon",
+        "profile": "Drew Lemon — Downtown",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00782-4d2b94192e",
+        "pop": "POP-00782",
+        "name": "Devon Willis",
+        "quote": "A typical Tuesday at SpeedyBurger is steady — not the weekend rush, but enough that you're always moving. The lunch crowd comes in waves, and you learn the regulars by their orders before you learn their names. The part that doesn't show up on a receipt is the rhythm of it — knowing when to step in, when to give someone a minute, when to just let the quiet settle. It's honest work, and lately I've been thinking about how much of what I do is just being there, steady, for people who need that.",
+        "factIds": [
+          "F-213bc9fe761a",
+          "F-6299dcc823b2"
+        ],
+        "src": "packet.W2[POP-00782]"
+      },
+      {
+        "id": "Q-POP-00225-739691881d",
+        "pop": "POP-00225",
+        "name": "Andre Turner",
+        "quote": "Two-person kitchen means when the tickets stack up, there's no hiding. You're the whole line — grill, sauté, plating, expo — and the second you fall behind, the tickets just keep coming. The pressure point is that moment when you know you're buried and there's no one to call for backup. You just have to breathe and work faster, cleaner, and hope the servers are patient. What I wish people understood is that every plate that goes out is a little piece of us. We're not just pushing buttons back there. We're tasting, timing, coordinating, and trying to make sure your meal is right even when we're three deep in tickets and the fryer's screaming. It's hot, it's loud, and it's relentless — but when someone takes that first bite and you see them smile, that's the part that keeps you coming back.",
+        "factIds": [
+          "F-74fa61ff205e",
+          "F-dcc25fc32dd6"
+        ],
+        "src": "packet.W2[POP-00225]"
+      },
+      {
+        "id": "Q-POP-00670-76bacae8b8",
+        "pop": "POP-00670",
+        "name": "Drew Lemon",
+        "quote": "I see Devon and Andre most mornings when I grab coffee before inspections. Devon's always moving fast behind that counter, wiping down the same spots over and over, and he still finds time to nod at me. Andre, he's back in the kitchen at Miso Metro, and I can hear the sizzle from the sidewalk. Their days are long and hot, and they don't get much credit, but they keep this neighborhood fed. That's real work.",
+        "factIds": [
+          "F-dcc25fc32dd6",
+          "F-213bc9fe761a"
+        ],
+        "src": "packet.W2[POP-00670]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Mason Ortega",
+        "text": "Possible that Devon's shift involves handling lunch rush alone despite the larger staff count, based on typical staffing patterns — needs observation.",
+        "usable": false
+      },
+      {
+        "from": "Mason Ortega",
+        "text": "Miso Metro's two-person crew may mean Andre handles both prep and line during peak hours, affecting turnaround — needs confirmation.",
+        "usable": false
+      },
+      {
+        "from": "Mason Ortega",
+        "text": "The gap between the ledger's growth figures and the actual pace of work on a Tuesday — whether that growth translates to more hours or just more pressure.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C112",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-7cd6ffd2aeb3"
+    },
+    {
+      "t": "FACT",
+      "text": "Downtown kitchens · SpeedyBurger, Miso Metro",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C112",
+      "id": "F-dcc25fc32dd6"
+    },
+    {
+      "t": "FACT",
+      "text": "Devon Willis, Server at SpeedyBurger. 2 named workers at 2 named kitchens in Downtown on the ledger this cycle.",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C112",
+      "id": "F-213bc9fe761a"
+    },
+    {
+      "t": "FACT",
+      "text": "SpeedyBurger · Fast Food & Quick Service · 31 employees · growth 9.5% · revenue $3.6M (+$7k vs C111) · on the roster: Devon Willis (Server)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C112",
+      "id": "F-6299dcc823b2"
+    },
+    {
+      "t": "FACT",
+      "text": "Miso Metro · Restaurant & Dining · 2 employees · growth 9.8% · revenue $250k (+$473 vs C111) · on the roster: Andre Turner (Line cook)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C112",
+      "id": "F-74fa61ff205e"
+    },
+    {
+      "t": "FACT",
+      "text": "Temple Lounge · Nightlife & Entertainment · 30 employees · growth 10% · revenue $4M (+$8k vs C111)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C112",
+      "id": "F-2fae6a01e246"
+    },
+    {
+      "t": "FACT",
+      "text": "Midnight Bistro · Restaurant & Dining · 2 employees · growth 9.9% · revenue $250k (+$476 vs C111)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C112",
+      "id": "F-ae391bf9bba4"
+    },
+    {
+      "t": "FACT",
+      "text": "CITY SEED (Downtown): citizens Drew Lemon; Bruce Wright; Ariana Reyes; Patricia Nwosu · businesses Oakland Alternative Response Initiative; Bay Tribune · Lake Merritt Mindfulness Sangha (faith)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C112",
+      "id": "F-c2898913f734"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "mason-kitchen-ground-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Treat a Packet-supplied restaurant signal as a workplace question without inventing Mason's presence, a worker, shift, service state, business condition, or labor consequence.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "evidence-bounded kitchen-work brief",
+      "targetWords": "evidence-bounded",
+      "opening": "one Packet-named restaurant and location",
+      "closing": "the worker or operating account still needed"
+    },
+    "authorizedTexture": [
+      "workplace-oriented questions about a supplied restaurant without claiming an answer",
+      "kitchen vocabulary used only as interpretation and never as proof of a worker, action, condition, or event"
+    ],
+    "textureConditions": [
+      "a restaurant appearing on an evening list proves only the supplied venue-location relation, not that it was open, busy, staffed, serving, struggling, or observed",
+      "first-person embedding, every worker, owner, patron, shift, quote, action, count, wage, cost, supply issue, health score, and business outcome requires Packet support"
+    ],
+    "canonBlockers": [
+      "invented attendance, kitchen access, worker, owner, patron, service, rush, shift, dialogue, quote, wage, cost, ticket count, equipment state, supply problem, health score, business condition, or labor consequence",
+      "an invented or altered venue, person, neighborhood, event, relationship, date, number, or quote",
+      "review language, raw engine labels, citywide food trend assigned to one venue, or collective worker sentiment presented as fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-f2c32226947e",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-7cd6ffd2aeb3",
+        "t": "FACT",
+        "text": "Current cycle: C112",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-dcc25fc32dd6",
+        "t": "FACT",
+        "text": "Downtown kitchens · SpeedyBurger, Miso Metro",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C112"
+      },
+      {
+        "id": "F-213bc9fe761a",
+        "t": "FACT",
+        "text": "Devon Willis, Server at SpeedyBurger. 2 named workers at 2 named kitchens in Downtown on the ledger this cycle.",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C112"
+      },
+      {
+        "id": "F-6299dcc823b2",
+        "t": "FACT",
+        "text": "SpeedyBurger · Fast Food & Quick Service · 31 employees · growth 9.5% · revenue $3.6M (+$7k vs C111) · on the roster: Devon Willis (Server)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C112"
+      },
+      {
+        "id": "F-74fa61ff205e",
+        "t": "FACT",
+        "text": "Miso Metro · Restaurant & Dining · 2 employees · growth 9.8% · revenue $250k (+$473 vs C111) · on the roster: Andre Turner (Line cook)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C112"
+      },
+      {
+        "id": "F-2fae6a01e246",
+        "t": "FACT",
+        "text": "Temple Lounge · Nightlife & Entertainment · 30 employees · growth 10% · revenue $4M (+$8k vs C111)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C112"
+      },
+      {
+        "id": "F-ae391bf9bba4",
+        "t": "FACT",
+        "text": "Midnight Bistro · Restaurant & Dining · 2 employees · growth 9.9% · revenue $250k (+$476 vs C111)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C112"
+      },
+      {
+        "id": "F-c2898913f734",
+        "t": "FACT",
+        "text": "CITY SEED (Downtown): citizens Drew Lemon; Bruce Wright; Ariana Reyes; Patricia Nwosu · businesses Oakland Alternative Response Initiative; Bay Tribune · Lake Merritt Mindfulness Sangha (faith)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C112"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00782-4d2b94192e",
+        "speakerId": "POP-00782",
+        "speakerName": "Devon Willis",
+        "text": "A typical Tuesday at SpeedyBurger is steady — not the weekend rush, but enough that you're always moving. The lunch crowd comes in waves, and you learn the regulars by their orders before you learn their names. The part that doesn't show up on a receipt is the rhythm of it — knowing when to step in, when to give someone a minute, when to just let the quiet settle. It's honest work, and lately I've been thinking about how much of what I do is just being there, steady, for people who need that.",
+        "factIds": [
+          "F-213bc9fe761a",
+          "F-6299dcc823b2"
+        ],
+        "src": "packet.W2[POP-00782]"
+      },
+      {
+        "id": "Q-POP-00225-739691881d",
+        "speakerId": "POP-00225",
+        "speakerName": "Andre Turner",
+        "text": "Two-person kitchen means when the tickets stack up, there's no hiding. You're the whole line — grill, sauté, plating, expo — and the second you fall behind, the tickets just keep coming. The pressure point is that moment when you know you're buried and there's no one to call for backup. You just have to breathe and work faster, cleaner, and hope the servers are patient. What I wish people understood is that every plate that goes out is a little piece of us. We're not just pushing buttons back there. We're tasting, timing, coordinating, and trying to make sure your meal is right even when we're three deep in tickets and the fryer's screaming. It's hot, it's loud, and it's relentless — but when someone takes that first bite and you see them smile, that's the part that keeps you coming back.",
+        "factIds": [
+          "F-74fa61ff205e",
+          "F-dcc25fc32dd6"
+        ],
+        "src": "packet.W2[POP-00225]"
+      },
+      {
+        "id": "Q-POP-00670-76bacae8b8",
+        "speakerId": "POP-00670",
+        "speakerName": "Drew Lemon",
+        "text": "I see Devon and Andre most mornings when I grab coffee before inspections. Devon's always moving fast behind that counter, wiping down the same spots over and over, and he still finds time to nod at me. Andre, he's back in the kitchen at Miso Metro, and I can hear the sizzle from the sidewalk. Their days are long and hot, and they don't get much credit, but they keep this neighborhood fed. That's real work.",
+        "factIds": [
+          "F-dcc25fc32dd6",
+          "F-213bc9fe761a"
+        ],
+        "src": "packet.W2[POP-00670]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00782",
+        "name": "Devon Willis",
+        "profile": "Devon Willis — Server — SpeedyBurger, Downtown",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00225",
+        "name": "Andre Turner",
+        "profile": "Andre Turner — Line cook — Miso Metro, Downtown",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00670",
+        "name": "Drew Lemon",
+        "profile": "Drew Lemon — Downtown",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Mason Ortega",
+        "text": "Possible that Devon's shift involves handling lunch rush alone despite the larger staff count, based on typical staffing patterns — needs observation.",
+        "publishable": false
+      },
+      {
+        "from": "Mason Ortega",
+        "text": "Miso Metro's two-person crew may mean Andre handles both prep and line during peak hours, affecting turnaround — needs confirmation.",
+        "publishable": false
+      },
+      {
+        "from": "Mason Ortega",
+        "text": "The gap between the ledger's growth figures and the actual pace of work on a Tuesday — whether that growth translates to more hours or just more pressure.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "workplace-oriented questions about a supplied restaurant without claiming an answer",
+      "kitchen vocabulary used only as interpretation and never as proof of a worker, action, condition, or event"
+    ],
+    "textureConditions": [
+      "a restaurant appearing on an evening list proves only the supplied venue-location relation, not that it was open, busy, staffed, serving, struggling, or observed",
+      "first-person embedding, every worker, owner, patron, shift, quote, action, count, wage, cost, supply issue, health score, and business outcome requires Packet support"
+    ],
+    "forbiddenClaimClasses": [
+      "invented attendance, kitchen access, worker, owner, patron, service, rush, shift, dialogue, quote, wage, cost, ticket count, equipment state, supply problem, health score, business condition, or labor consequence",
+      "an invented or altered venue, person, neighborhood, event, relationship, date, number, or quote",
+      "review language, raw engine labels, citywide food trend assigned to one venue, or collective worker sentiment presented as fact"
+    ]
+  }
+}

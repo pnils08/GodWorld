@@ -1,0 +1,502 @@
+{
+  "v": "UNDOCKED-ADAPTER/1",
+  "show": "UNDOCKED",
+  "episode_id": "undocked-pop00530-2026-11-09T02-30-20",
+  "popid": "POP-00530",
+  "holder": "Lena Okafor",
+  "session": "undocked-pop00530",
+  "window": {
+    "startedAt": "2026-11-09T02:30:20.887Z",
+    "endedAt": "2026-11-09T02:50:35.954Z"
+  },
+  "runner": {
+    "turns": 50,
+    "exitCode": null,
+    "capped": true,
+    "toolErrors": 2,
+    "estCostUsd": 0.0384,
+    "tokensIn": 338822,
+    "tokensOut": 9043,
+    "log": "output/spacemolt-show/episodes/undocked-pop00530-2026-11-09T02-30-20.log",
+    "stopReason": "window",
+    "toolCalls": 54
+  },
+  "stall": null,
+  "source": {
+    "kind": "get_action_log",
+    "categories": [
+      "mining",
+      "trading",
+      "mission",
+      "combat",
+      "navigation",
+      "session",
+      "achievement"
+    ],
+    "fetchedAt": "2026-11-09T02:55:36.625Z"
+  },
+  "facts": {
+    "credits_delta": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "hits": 0,
+      "note": "gameplay in window carries no credit event — measured zero",
+      "value": 0
+    },
+    "points_delta": {
+      "type": "FACT",
+      "source": "get_achievements",
+      "basis": "progress",
+      "items": [
+        {
+          "id": "voyager_i",
+          "name": "Voyager I",
+          "gained": 3.6
+        },
+        {
+          "id": "cartographer",
+          "name": "Cartographer",
+          "gained": 2.7
+        },
+        {
+          "id": "voyager_ii",
+          "name": "Voyager II",
+          "gained": 0.9
+        },
+        {
+          "id": "master_miner",
+          "name": "Master Miner",
+          "gained": 0.5
+        },
+        {
+          "id": "prospector_i",
+          "name": "Prospector I",
+          "gained": 0.02
+        },
+        {
+          "id": "far_traveler",
+          "name": "Far Traveler",
+          "gained": 0.01
+        },
+        {
+          "id": "jump_master",
+          "name": "Jump Master",
+          "gained": 0.01
+        },
+        {
+          "id": "prospector_ii",
+          "name": "Prospector II",
+          "gained": 0
+        },
+        {
+          "id": "prospector_iii",
+          "name": "Prospector III",
+          "gained": 0
+        }
+      ],
+      "beforeTakenAt": "2026-11-09T02:30:20.592Z",
+      "value": 7.74
+    },
+    "systems_visited": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": [
+        "dheneb",
+        "mira",
+        "barnards_star",
+        "aspidiske",
+        "thabit",
+        "canopus",
+        "spica",
+        "propus",
+        "syrma"
+      ]
+    },
+    "combat_results": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "events": 0,
+        "kills": 0,
+        "deaths": 0,
+        "other": 0
+      }
+    },
+    "cargo": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mined": {
+          "iron_ore": 13,
+          "copper_ore": 11
+        },
+        "sold": {}
+      }
+    },
+    "mishaps": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "event_counts": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": 10,
+        "trading": 0,
+        "mission": 0,
+        "combat": 0,
+        "navigation": 9,
+        "session": 1,
+        "achievement": 0
+      }
+    },
+    "entries": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": [
+          {
+            "id": 259781174,
+            "created_at": "2026-11-09T02:48:57Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 5 Iron Ore at Propus Belt",
+            "data": {
+              "poi_name": "Propus Belt",
+              "quantity": 5,
+              "resource_id": "iron_ore",
+              "resource_name": "Iron Ore",
+              "system_id": "propus",
+              "system_name": "Propus",
+              "ticks": 3
+            }
+          },
+          {
+            "id": 259781145,
+            "created_at": "2026-11-09T02:48:57Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 2 Copper Ore at Spica Belt",
+            "data": {
+              "poi_name": "Spica Belt",
+              "quantity": 2,
+              "resource_id": "copper_ore",
+              "resource_name": "Copper Ore",
+              "system_id": "spica",
+              "system_name": "Spica",
+              "ticks": 2
+            }
+          },
+          {
+            "id": 259780688,
+            "created_at": "2026-11-09T02:48:57Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 1 Copper Ore at Propus Belt",
+            "data": {
+              "poi_name": "Propus Belt",
+              "quantity": 1,
+              "resource_id": "copper_ore",
+              "resource_name": "Copper Ore",
+              "system_id": "propus",
+              "system_name": "Propus",
+              "ticks": 1
+            }
+          },
+          {
+            "id": 259780401,
+            "created_at": "2026-11-09T02:48:57Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 1 Iron Ore at Spica Belt",
+            "data": {
+              "poi_name": "Spica Belt",
+              "quantity": 1,
+              "resource_id": "iron_ore",
+              "resource_name": "Iron Ore",
+              "system_id": "spica",
+              "system_name": "Spica",
+              "ticks": 1
+            }
+          },
+          {
+            "id": 259772320,
+            "created_at": "2026-11-09T02:43:58Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 2 Copper Ore at Canopus Alloy Remnants",
+            "data": {
+              "poi_name": "Canopus Alloy Remnants",
+              "quantity": 2,
+              "resource_id": "copper_ore",
+              "resource_name": "Copper Ore",
+              "system_id": "canopus",
+              "system_name": "Canopus",
+              "ticks": 2
+            }
+          },
+          {
+            "id": 259772211,
+            "created_at": "2026-11-09T02:43:58Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 2 Iron Ore at Canopus Alloy Remnants",
+            "data": {
+              "poi_name": "Canopus Alloy Remnants",
+              "quantity": 2,
+              "resource_id": "iron_ore",
+              "resource_name": "Iron Ore",
+              "system_id": "canopus",
+              "system_name": "Canopus",
+              "ticks": 1
+            }
+          },
+          {
+            "id": 259761774,
+            "created_at": "2026-11-09T02:38:56Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 3 Copper Ore at Aspidiske Belt",
+            "data": {
+              "poi_name": "Aspidiske Belt",
+              "quantity": 3,
+              "resource_id": "copper_ore",
+              "resource_name": "Copper Ore",
+              "system_id": "aspidiske",
+              "system_name": "Aspidiske",
+              "ticks": 3
+            }
+          },
+          {
+            "id": 259760986,
+            "created_at": "2026-11-09T02:38:56Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 4 Iron Ore at Aspidiske Belt",
+            "data": {
+              "poi_name": "Aspidiske Belt",
+              "quantity": 4,
+              "resource_id": "iron_ore",
+              "resource_name": "Iron Ore",
+              "system_id": "aspidiske",
+              "system_name": "Aspidiske",
+              "ticks": 2
+            }
+          },
+          {
+            "id": 259753070,
+            "created_at": "2026-11-09T02:33:57Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 3 Copper Ore at Mira Containment Echo",
+            "data": {
+              "poi_name": "Mira Containment Echo",
+              "quantity": 3,
+              "resource_id": "copper_ore",
+              "resource_name": "Copper Ore",
+              "system_id": "mira",
+              "system_name": "Mira",
+              "ticks": 3
+            }
+          },
+          {
+            "id": 259752881,
+            "created_at": "2026-11-09T02:33:57Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 1 Iron Ore at Mira Containment Echo",
+            "data": {
+              "poi_name": "Mira Containment Echo",
+              "quantity": 1,
+              "resource_id": "iron_ore",
+              "resource_name": "Iron Ore",
+              "system_id": "mira",
+              "system_name": "Mira",
+              "ticks": 1
+            }
+          }
+        ],
+        "trading": [],
+        "mission": [],
+        "combat": [],
+        "navigation": [
+          {
+            "id": 259781697,
+            "created_at": "2026-11-09T02:49:11Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Propus to Syrma",
+            "data": {
+              "arrival_poi": "syrma_i",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "propus",
+              "is_pathfinder": false,
+              "to_system": "syrma",
+              "to_system_name": "Syrma"
+            }
+          },
+          {
+            "id": 259776183,
+            "created_at": "2026-11-09T02:46:20Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Spica to Propus",
+            "data": {
+              "arrival_poi": "propus_star",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "spica",
+              "is_pathfinder": false,
+              "to_system": "propus",
+              "to_system_name": "Propus"
+            }
+          },
+          {
+            "id": 259771516,
+            "created_at": "2026-11-09T02:43:51Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Canopus to Spica",
+            "data": {
+              "arrival_poi": "spica_star",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "canopus",
+              "is_pathfinder": false,
+              "to_system": "spica",
+              "to_system_name": "Spica"
+            }
+          },
+          {
+            "id": 259767736,
+            "created_at": "2026-11-09T02:41:21Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Thabit to Canopus",
+            "data": {
+              "arrival_poi": "canopus_star",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "thabit",
+              "is_pathfinder": false,
+              "to_system": "canopus",
+              "to_system_name": "Canopus"
+            }
+          },
+          {
+            "id": 259763778,
+            "created_at": "2026-11-09T02:40:10Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Dheneb to Thabit",
+            "data": {
+              "arrival_poi": "thabit_star",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "dheneb",
+              "is_pathfinder": false,
+              "to_system": "thabit",
+              "to_system_name": "Thabit"
+            }
+          },
+          {
+            "id": 259760808,
+            "created_at": "2026-11-09T02:38:51Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Aspidiske to Dheneb",
+            "data": {
+              "arrival_poi": "dheneb_cryobelt",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "aspidiske",
+              "is_pathfinder": false,
+              "to_system": "dheneb",
+              "to_system_name": "Dheneb"
+            }
+          },
+          {
+            "id": 259756215,
+            "created_at": "2026-11-09T02:35:51Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Barnard's Star to Aspidiske",
+            "data": {
+              "arrival_poi": "aspidiske_star",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "barnards_star",
+              "is_pathfinder": false,
+              "to_system": "aspidiske",
+              "to_system_name": "Aspidiske"
+            }
+          },
+          {
+            "id": 259754557,
+            "created_at": "2026-11-09T02:34:41Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Mira to Barnard's Star",
+            "data": {
+              "arrival_poi": "barnards_star_gas_pocket",
+              "cloaked": false,
+              "first_visit": false,
+              "from_system": "mira",
+              "is_pathfinder": false,
+              "to_system": "barnards_star",
+              "to_system_name": "Barnard's Star"
+            }
+          },
+          {
+            "id": 259749160,
+            "created_at": "2026-11-09T02:31:40Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Dheneb to Mira",
+            "data": {
+              "arrival_poi": "mira_star",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "dheneb",
+              "is_pathfinder": false,
+              "to_system": "mira",
+              "to_system_name": "Mira"
+            }
+          }
+        ],
+        "session": [
+          {
+            "id": 259747456,
+            "created_at": "2026-11-09T02:30:22Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "LenaOkafor logged in",
+            "data": {
+              "last_login_at": "2026-11-09T02:30:20Z",
+              "source": "password"
+            }
+          }
+        ],
+        "achievement": []
+      }
+    }
+  },
+  "captains_log": {
+    "kind": "QUOTED_SUBJECTIVE_COLOR",
+    "type": "INTERPRETATION",
+    "provenance": "captains_log_list",
+    "windowed": 0,
+    "listed": 1,
+    "note": "entries exist but created_at is outside startedAt/endedAt (often written at handoff)",
+    "entries": [],
+    "unwindowed": [
+      {
+        "index": 0,
+        "created_at": "2026-11-03 02:50:39",
+        "text": "[Session Handoff] **Handoff: LenaOkafor (Solarian), ship Theoria**\n\n- **Right now:** Mining at Miaplacidus Alloy Remnants (miaplacidus_alloy_remnants) in the Miaplacidus system. The last mine call returned 1 Iron Ore with the deposit at 99,999 units, 0% depleted. Mining is the active loop; the next step is to keep mining or check cargo before moving on.\n- **Location and status:** Miaplacidus (Lawless, no police). Credits 500"
+      }
+    ]
+  }
+}

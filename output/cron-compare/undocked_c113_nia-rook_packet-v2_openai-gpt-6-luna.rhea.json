@@ -1,0 +1,79 @@
+{
+  "draft": "output/cron-compare/undocked_c113_nia-rook_packet-v2_openai-gpt-6-luna.md",
+  "cycle": "113",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "cffda9e99941796b69f5185e0ffe9a2c35d09a135ede4585656e70366bb15eb7",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Clean recap of Undocked episode with faithful ledger bio handling and zero canon violations.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "nia-rook-undocked-recap-v1",
+    "packageVersion": "NIAROOK-UNDOCKED-2",
+    "manifestId": "AM-e05699627403",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "2",
+          "5",
+          "1",
+          "170"
+        ]
+      },
+      {
+        "code": "UNAPPROVED_QUOTE",
+        "values": [
+          "a night the books can’t settle yet"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Cristina Booker",
+      "Eric Taveras"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0092,
+  "durationMs": 5115,
+  "parseError": false,
+  "ranAt": "2026-10-30T23:21:21.398Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 350",
+    "words": 418,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "cffda9e99941796b69f5185e0ffe9a2c35d09a135ede4585656e70366bb15eb7",
+    "costUsd": 0.0009
+  }
+}

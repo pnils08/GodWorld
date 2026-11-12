@@ -1,0 +1,15 @@
+{
+  "draft": "sports_c111_tanya-cruz_packet-v2_x-ai-grok-4-3.md",
+  "flags": [
+    {
+      "severity": "high",
+      "claim": "deterministic check",
+      "issue": "thin: 111 words (floor 150, seat target evidence-bounded)"
+    }
+  ],
+  "checkFlags": [
+    "thin: 111 words (floor 150, seat target evidence-bounded)"
+  ],
+  "contamination": [],
+  "summary": "deterministic checks: thin: 111 words (floor 150, seat target evidence-bounded)"
+}

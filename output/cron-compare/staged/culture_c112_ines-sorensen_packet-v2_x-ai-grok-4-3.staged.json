@@ -1,0 +1,55 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "112",
+  "persona": "ines-sorensen",
+  "byline": "Ines Sorensen",
+  "bylinePopid": "POP-01211",
+  "article": "output/cron-compare/staged/culture_c112_ines-sorensen_packet-v2_x-ai-grok-4-3.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Bianca Crook",
+        "role": "quoted-source",
+        "popid": "POP-00661"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Lake Merritt"
+    ],
+    "claims": [
+      {
+        "claim": "I think what I meant was that, despite being surrounded by strangers, there's this shared experience of daily routines that makes me feel a bit more connected. Like, when I heard the coffee grinder downstairs, it was this loud noise that I was annoyed by at first, but then I realized someone else was just trying to start their day like me. It's little moments like those that make the building feel less isolating.",
+        "sourceRef": "citizenVoice PRESS Bianca Crook"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-deea8e087976",
+    "draftSha256": "f3defbfd5e00482c03b801f8ad9a685f05c83c198c6da3172c397a8999c49987",
+    "verdict": "output/cron-compare/culture_c112_ines-sorensen_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-10-21T23:21:05.824Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": false,
+      "inTargetBy": "code floor 300",
+      "words": 205,
+      "short": "The piece falls short of the 300-word minimum target.",
+      "score": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "f3defbfd5e00482c03b801f8ad9a685f05c83c198c6da3172c397a8999c49987",
+      "costUsd": 0.0007
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-21T23:21:09.856Z"
+}

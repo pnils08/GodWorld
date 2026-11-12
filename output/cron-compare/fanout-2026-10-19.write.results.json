@@ -1,0 +1,138 @@
+{
+  "date": "2026-10-19",
+  "stage": "write",
+  "results": [
+    {
+      "name": "Carmen Delaine",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 577,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Jordan Velez",
+      "desk": "business",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 923,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Dr. Lila Mezran",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [
+          {
+            "text": "Jonas Patel dealt with a seasonal health concern (Chinatown).",
+            "run": "jonas patel seasonal health concern chinatown"
+          },
+          {
+            "text": "Elle Lilo cooked healthier meals all week and felt the difference (Jack London).",
+            "run": "cooked healthier meals all week and"
+          },
+          {
+            "text": "Elena Leon cooked healthier meals all week and felt the difference (Jack London).",
+            "run": "cooked healthier meals all week and"
+          }
+        ],
+        "words": 1122,
+        "contractScore": 2
+      }
+    },
+    {
+      "name": "Trevor Shimizu",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 692,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Anthony Raines",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 5,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 934,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Tamsin Pruitt",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [
+          {
+            "text": "Maurice Franklin came home from the hospital — severe seasonal flu, Rockridge",
+            "run": "severe seasonal flu rockridge"
+          },
+          {
+            "text": "Maurice Franklin came home from the hospital — severe seasonal flu, Rockridge (C111). Since then, on the record: the card statement was the first thing read and",
+            "run": "the card statement was the first"
+          },
+          {
+            "text": "Geneva Zhou welcomed a new child, West Oakland (C111). Since then, on the record: watched an old man feed pigeons like a ritual and wondered what theirs was (C1",
+            "run": "geneva zhou welcomed a new child"
+          },
+          {
+            "text": "Maren Johns retired from work as Psychotherapist, Rockridge (C111). Since then, on the record: painted over graffiti on the recreation center wall alongside fiv",
+            "run": "maren johns retired from work as"
+          },
+          {
+            "text": "Antoine Vermeer retired from work as Senior Pastor / Faith Leader, Lake Merritt (C112). What came next: the record does not say yet",
+            "run": "antoine vermeer retired from work as"
+          },
+          {
+            "text": "Xavier Ramington — relied on familiar social circles during cold period, Temescal (C112, Relationship)",
+            "run": "relied on familiar social circles during"
+          }
+        ],
+        "words": 309,
+        "contractScore": 3
+      }
+    }
+  ],
+  "checkTotals": {
+    "seats": 6,
+    "toolSeats": 1,
+    "capHits": 0,
+    "thin": 0,
+    "verbatim": 2,
+    "graded": 6,
+    "gradeSum": 21
+  },
+  "ranAt": "2026-10-19T23:21:32.806Z"
+}

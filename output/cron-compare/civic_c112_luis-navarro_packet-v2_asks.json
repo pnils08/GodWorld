@@ -1,0 +1,115 @@
+[
+  {
+    "pop": "POP-00688",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00688\",\"name\":\"Merkin Jumper\",\"role\":\"Social Services Caseworker\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Luis Navarro\",\"question\":\"As a Downtown resident and caseworker, what have you observed or heard about the Baylight District's stalled vote while construction continues? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"anomaly\",\"hood\":\"Downtown\",\"focus\":\"The unresolved gap between Baylight District's construction-active status and its stalled final council vote — specifically, whether any responsible party has documented a response or non-response to the delay.\",\"src\":\"output/engine_audit_c112.json patterns[0]; evidence: Neighborhood_Map row(s) 2\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Merkin Jumper — Social Services Caseworker — Downtown resident\",\"evidence\":[{\"id\":\"EV-9e4f854cf4\",\"src\":\"output/engine_audit_c112.json patterns[0]; evidence: Neighborhood_Map row(s) 2\",\"text\":\"The civic initiative carrying Downtown has not advanced in 2 cycles.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C112\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-7cd6ffd2aeb3\"},{\"t\":\"FACT\",\"text\":\"Baylight District — Final Council Vote stalled in construction-active\",\"src\":\"output/engine_audit_c112.json patterns[0]; evidence: Neighborhood_Map row(s) 2\",\"id\":\"F-406f3c05e987\"},{\"t\":\"FACT\",\"text\":\"The civic initiative carrying Downtown has not advanced in 2 cycles.\",\"src\":\"output/engine_audit_c112.json patterns[0]; evidence: Neighborhood_Map row(s) 2\",\"id\":\"F-180c1a44dab5\"},{\"t\":\"FACT\",\"text\":\"Merkin Jumper — Social Services Caseworker — Downtown resident\",\"src\":\"Simulation_Ledger profile for POP-00688\",\"id\":\"F-b8921450caaf\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00688",
+        "name": "Merkin Jumper",
+        "role": "Social Services Caseworker",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Luis Navarro",
+        "question": "As a Downtown resident and caseworker, what have you observed or heard about the Baylight District's stalled vote while construction continues? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "anomaly",
+        "hood": "Downtown",
+        "focus": "The unresolved gap between Baylight District's construction-active status and its stalled final council vote — specifically, whether any responsible party has documented a response or non-response to the delay.",
+        "src": "output/engine_audit_c112.json patterns[0]; evidence: Neighborhood_Map row(s) 2"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Merkin Jumper — Social Services Caseworker — Downtown resident",
+        "evidence": [
+          {
+            "id": "EV-9e4f854cf4",
+            "src": "output/engine_audit_c112.json patterns[0]; evidence: Neighborhood_Map row(s) 2",
+            "text": "The civic initiative carrying Downtown has not advanced in 2 cycles."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C112",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-7cd6ffd2aeb3"
+        },
+        {
+          "t": "FACT",
+          "text": "Baylight District — Final Council Vote stalled in construction-active",
+          "src": "output/engine_audit_c112.json patterns[0]; evidence: Neighborhood_Map row(s) 2",
+          "id": "F-406f3c05e987"
+        },
+        {
+          "t": "FACT",
+          "text": "The civic initiative carrying Downtown has not advanced in 2 cycles.",
+          "src": "output/engine_audit_c112.json patterns[0]; evidence: Neighborhood_Map row(s) 2",
+          "id": "F-180c1a44dab5"
+        },
+        {
+          "t": "FACT",
+          "text": "Merkin Jumper — Social Services Caseworker — Downtown resident",
+          "src": "Simulation_Ledger profile for POP-00688",
+          "id": "F-b8921450caaf"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  }
+]

@@ -1,0 +1,87 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "113",
+  "persona": "tamsin-pruitt",
+  "byline": "Tamsin Pruitt",
+  "bylinePopid": "POP-01210",
+  "article": "output/cron-compare/staged/culture_c113_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Isla Sike",
+        "role": "quoted-source",
+        "popid": "POP-00187"
+      },
+      {
+        "name": "Christopher Johnson",
+        "role": "quoted-source",
+        "popid": "POP-00211"
+      },
+      {
+        "name": "Omar Amici",
+        "role": "quoted-source",
+        "popid": "POP-00263"
+      },
+      {
+        "name": "Aisha Toure",
+        "role": "mentioned",
+        "popid": "POP-00624",
+        "floor": true
+      },
+      {
+        "name": "Desmond Morton",
+        "role": "mentioned",
+        "popid": "POP-00051",
+        "floor": true
+      },
+      {
+        "name": "Mina Kapoor",
+        "role": "mentioned",
+        "popid": "POP-01200",
+        "floor": true
+      },
+      {
+        "name": "Nakia Pena",
+        "role": "mentioned",
+        "popid": "POP-00806",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "Moving into a place of my own feels like a big step, especially after being widowed. It's not just about having a new space, it's about starting a new chapter. I've been focused on my work at the shelter and this feels like a personal milestone. I'm still getting used to it, but it's a relief to have some stability.",
+        "sourceRef": "citizenVoice PRESS Isla Sike"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-fefbdd32b0dc",
+    "draftSha256": "ab3ab833e5cc2c23088c51cd4642014865325bd6c56ed700f3a52586583726ff",
+    "verdict": "output/cron-compare/culture_c113_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-10-27T23:19:34.408Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 450",
+      "words": 1135,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "ab3ab833e5cc2c23088c51cd4642014865325bd6c56ed700f3a52586583726ff",
+      "costUsd": 0.0013
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-27T23:19:37.551Z"
+}

@@ -1,0 +1,748 @@
+{
+  "stage": "angle",
+  "desk": "culture",
+  "cycle": "114",
+  "persona": "mason-ortega",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00160",
+      "name": "Mason Ortega",
+      "role": "desk reporter",
+      "desk": "culture"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Fruitvale kitchens: Marigold Cafe, Fruitvale Diner, Hub Ramen — the people who work the shift",
+      "approach": "Food & hospitality approach — kitchens as workplaces: this slice is one neighborhood's restaurants, cafes and bars from the ledger and the people on the roster who work in them. The people on this slice are real; the rest of the room is yours — the line on a Tuesday, the regulars, the walk-in, the tip jar. One kitchen, one shift, one true thing about the work. Not a review. Not multi-voice culture-desk average. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "food-workplaces",
+        "hood": "Fruitvale",
+        "pulseClass": "hood-kitchens",
+        "economicFrame": "Fruitvale kitchens: Marigold Cafe, Fruitvale Diner, Hub Ramen — the people who work the shift",
+        "hook": "Tariq Mitchell, Line Cook at Marigold Cafe. 2 named workers at 2 named kitchens in Fruitvale on the ledger this cycle.",
+        "namedBusinesses": [
+          "Marigold Cafe",
+          "Fruitvale Diner",
+          "Hub Ramen",
+          "Masa & Vine",
+          "Platform Brunch"
+        ],
+        "workplaces": [
+          "Marigold Cafe — Cafe / dining — Tariq Mitchell (Line Cook)",
+          "Fruitvale Diner — Restaurant & Dining — Hazel Salazar (Line Cook)",
+          "Hub Ramen — Ramen Bar — no roster names",
+          "Masa & Vine — Small Plates & Natural Wine Bar — no roster names",
+          "Platform Brunch — Brunch Restaurant — no roster names"
+        ],
+        "engineColour": [
+          "Mateo Baker — braced for the sound of pile drivers and realized they had already started tuning it out",
+          "Darius Hill — said no to something and felt the shape of who they are in it",
+          "Samuel Adeyemi — has watched Ivy Hill Cafe go quiet lately",
+          "Ebony Mendoza — kept score by hand at the kitchen table the way their father taught them near a quiet side street",
+          "Dame Sarr — let the week's wins carry dinner",
+          "Constanza Doan — drank the free cold brew in the company kitchen and felt completely disconnected from the neighborhood outside"
+        ],
+        "roomIsYours": "the line, the regulars, the pace, the tip jar, what the cook is worried about",
+        "forbidden": [
+          "Do not invent a business, a worker, an owner or a place — every name comes from this slice",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose",
+          "Do not contradict a role, employer or neighborhood listed here"
+        ],
+        "sceneRule": null
+      }
+    },
+    "signal": {
+      "kind": "story-signal",
+      "hood": "Fruitvale",
+      "score": null,
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+      "nearby": [
+        {
+          "text": "Grand Lake neighborhood texture — how residents experience the improvement | Residents of Grand Lake feel the change firsthand.",
+          "src": "output/engine_audit_c114.json patterns[5]; evidence: Initiative_Tracker row(s) 9; storyline INIT-009:announced"
+        },
+        {
+          "text": "Chinatown | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c114.md \"### Chinatown\"; events: world_summary_c114.md \"## World Events\""
+        },
+        {
+          "text": "Downtown | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c114.md \"### Downtown\"; events: world_summary_c114.md \"## World Events\""
+        },
+        {
+          "text": "East Oakland | 2 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c114.md \"### East Oakland\"; events: world_summary_c114.md \"## World Events\""
+        },
+        {
+          "text": "Lake Merritt | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c114.md \"### Lake Merritt\"; events: world_summary_c114.md \"## World Events\""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00991",
+          "name": "Tariq Mitchell",
+          "profile": "Tariq Mitchell — Line Cook — Marigold Cafe, Fruitvale",
+          "role": "Line Cook",
+          "hood": "Fruitvale",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+            "pop": "POP-00991",
+            "rowName": "Tariq Mitchell",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00873",
+          "name": "Hazel Salazar",
+          "profile": "Hazel Salazar — Line Cook — Fruitvale Diner, Fruitvale",
+          "role": "Line Cook",
+          "hood": "Fruitvale",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+            "pop": "POP-00873",
+            "rowName": "Hazel Salazar",
+            "kind": "slice-row"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C114",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-4261fa115617"
+      },
+      {
+        "t": "FACT",
+        "text": "Fruitvale kitchens · Marigold Cafe, Fruitvale Diner",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+        "id": "F-8f652b0ac965"
+      },
+      {
+        "t": "FACT",
+        "text": "Tariq Mitchell, Line Cook at Marigold Cafe. 2 named workers at 2 named kitchens in Fruitvale on the ledger this cycle.",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+        "id": "F-78d4c9912cc7"
+      },
+      {
+        "t": "FACT",
+        "text": "Marigold Cafe · Cafe / dining · 30 employees · growth 10.7% · revenue $3.1M (+$6k vs C113) · on the roster: Tariq Mitchell (Line Cook)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+        "id": "F-f5b99ee4b698"
+      },
+      {
+        "t": "FACT",
+        "text": "Fruitvale Diner · Restaurant & Dining · 2 employees · growth 10.9% · revenue $207k (+$432 vs C113) · on the roster: Hazel Salazar (Line Cook)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+        "id": "F-30fcdbb2184e"
+      },
+      {
+        "t": "FACT",
+        "text": "Hub Ramen · Ramen Bar · 11 employees · growth 4.1% · revenue $721k (+$572 vs C113)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+        "id": "F-9973e1fc652f"
+      },
+      {
+        "t": "FACT",
+        "text": "Masa & Vine · Small Plates & Natural Wine Bar · 11 employees · growth 4.3% · revenue $721k (+$593 vs C113)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+        "id": "F-f89a3d2faa98"
+      },
+      {
+        "t": "FACT",
+        "text": "Platform Brunch · Brunch Restaurant · 11 employees · growth 4.3% · revenue $721k (+$597 vs C113)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+        "id": "F-ae8e7e99e7d9"
+      },
+      {
+        "t": "FACT",
+        "text": "CITY SEED (Ivy Hill): citizens Mateo Baker; Darius Hill; Samuel Adeyemi; Ebony Mendoza · businesses Ivy Hill Market; Ivy Cleaners",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C114",
+        "id": "F-916543f0d3d1"
+      },
+      {
+        "t": "FACT",
+        "text": "CITY SEED (Downtown): citizens Dame Sarr; Constanza Doan; Sandra Liu; Eunice Marston · businesses Bay Tribune; AC Transit · Lake Merritt Mindfulness Sangha (faith)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C114",
+        "id": "F-6517c6210bf3"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "workplace",
+    "candidates": [
+      {
+        "pop": "POP-00991",
+        "name": "Tariq Mitchell",
+        "role": "Line Cook",
+        "hood": "Fruitvale",
+        "profile": "Tariq Mitchell — Line Cook — Marigold Cafe, Fruitvale",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "pop": "POP-00991",
+          "rowName": "Tariq Mitchell",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00873",
+        "name": "Hazel Salazar",
+        "role": "Line Cook",
+        "hood": "Fruitvale",
+        "profile": "Hazel Salazar — Line Cook — Fruitvale Diner, Fruitvale",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+          "pop": "POP-00873",
+          "rowName": "Hazel Salazar",
+          "kind": "slice-row"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Mason Ortega",
+    "popid": "POP-00160"
+  },
+  "assignment": {
+    "story": {
+      "angle": "Fruitvale kitchens: Marigold Cafe, Fruitvale Diner, Hub Ramen — the people who work the shift",
+      "label": "Fruitvale kitchens · Marigold Cafe, Fruitvale Diner",
+      "hookLine": "Tariq Mitchell, Line Cook at Marigold Cafe. 2 named workers at 2 named kitchens in Fruitvale on the ledger this cycle.",
+      "hood": "Fruitvale",
+      "pulseClass": "hood-kitchens",
+      "namedBusinesses": [
+        "Marigold Cafe",
+        "Fruitvale Diner",
+        "Hub Ramen",
+        "Masa & Vine",
+        "Platform Brunch"
+      ],
+      "citizens": [
+        "Tariq Mitchell (POP-00991)",
+        "Hazel Salazar (POP-00873)"
+      ],
+      "popids": [
+        "POP-00991",
+        "POP-00873"
+      ],
+      "ref": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114",
+      "cycle": 114
+    },
+    "approach": "Food & hospitality approach — kitchens as workplaces: this slice is one neighborhood's restaurants, cafes and bars from the ledger and the people on the roster who work in them. The people on this slice are real; the rest of the room is yours — the line on a Tuesday, the regulars, the walk-in, the tip jar. One kitchen, one shift, one true thing about the work. Not a review. Not multi-voice culture-desk average. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": {
+    "version": "ECONOMIC-SLICE-4",
+    "variant": "food",
+    "hood": "Fruitvale",
+    "pulse": {
+      "className": "hood-kitchens",
+      "score": 20,
+      "label": "Fruitvale kitchens · Marigold Cafe, Fruitvale Diner",
+      "hood": "Fruitvale",
+      "namedBusinesses": [
+        "Marigold Cafe",
+        "Fruitvale Diner",
+        "Hub Ramen",
+        "Masa & Vine",
+        "Platform Brunch"
+      ]
+    },
+    "prewrite": {
+      "pulseClass": "hood-kitchens",
+      "angle": "Fruitvale kitchens: Marigold Cafe, Fruitvale Diner, Hub Ramen — the people who work the shift",
+      "hookLine": "Tariq Mitchell, Line Cook at Marigold Cafe. 2 named workers at 2 named kitchens in Fruitvale on the ledger this cycle.",
+      "namedBusinesses": [
+        "Marigold Cafe",
+        "Fruitvale Diner",
+        "Hub Ramen",
+        "Masa & Vine",
+        "Platform Brunch"
+      ],
+      "anchorFacts": [
+        "Marigold Cafe · Cafe / dining · 30 employees · growth 10.7% · revenue $3.1M (+$6k vs C113) · on the roster: Tariq Mitchell (Line Cook)",
+        "Fruitvale Diner · Restaurant & Dining · 2 employees · growth 10.9% · revenue $207k (+$432 vs C113) · on the roster: Hazel Salazar (Line Cook)",
+        "Hub Ramen · Ramen Bar · 11 employees · growth 4.1% · revenue $721k (+$572 vs C113)",
+        "Masa & Vine · Small Plates & Natural Wine Bar · 11 employees · growth 4.3% · revenue $721k (+$593 vs C113)",
+        "Platform Brunch · Brunch Restaurant · 11 employees · growth 4.3% · revenue $721k (+$597 vs C113)",
+        "CITY SEED (Ivy Hill): citizens Mateo Baker; Darius Hill; Samuel Adeyemi; Ebony Mendoza · businesses Ivy Hill Market; Ivy Cleaners",
+        "CITY SEED (Downtown): citizens Dame Sarr; Constanza Doan; Sandra Liu; Eunice Marston · businesses Bay Tribune; AC Transit · Lake Merritt Mindfulness Sangha (faith)"
+      ],
+      "evidence": [
+        {
+          "text": "Marigold Cafe · Cafe / dining · 30 employees · growth 10.7% · revenue $3.1M (+$6k vs C113) · on the roster: Tariq Mitchell (Line Cook)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114"
+        },
+        {
+          "text": "Fruitvale Diner · Restaurant & Dining · 2 employees · growth 10.9% · revenue $207k (+$432 vs C113) · on the roster: Hazel Salazar (Line Cook)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114"
+        },
+        {
+          "text": "Hub Ramen · Ramen Bar · 11 employees · growth 4.1% · revenue $721k (+$572 vs C113)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114"
+        },
+        {
+          "text": "Masa & Vine · Small Plates & Natural Wine Bar · 11 employees · growth 4.3% · revenue $721k (+$593 vs C113)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114"
+        },
+        {
+          "text": "Platform Brunch · Brunch Restaurant · 11 employees · growth 4.3% · revenue $721k (+$597 vs C113)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C114"
+        },
+        {
+          "text": "CITY SEED (Ivy Hill): citizens Mateo Baker; Darius Hill; Samuel Adeyemi; Ebony Mendoza · businesses Ivy Hill Market; Ivy Cleaners",
+          "src": "output/beats/Story_Seed_Deck.jsonl @C114"
+        },
+        {
+          "text": "CITY SEED (Downtown): citizens Dame Sarr; Constanza Doan; Sandra Liu; Eunice Marston · businesses Bay Tribune; AC Transit · Lake Merritt Mindfulness Sangha (faith)",
+          "src": "output/beats/Story_Seed_Deck.jsonl @C114"
+        }
+      ],
+      "hooks": [
+        {
+          "text": "Notable event: \"Medium-severity economic spike in East Oakland\". Follow-up recommended.",
+          "angle": "desk rotation",
+          "hood": "East Oakland"
+        },
+        {
+          "text": "High concentration of ambitious, driven personalities. Career competition and economic hustle stories.",
+          "angle": "baseline context piece",
+          "hood": null
+        },
+        {
+          "text": "Orlando Phillips has not advanced in 57 years",
+          "angle": "baseline context piece",
+          "hood": null
+        },
+        {
+          "text": "Daniel Yoon has not advanced in 57 years",
+          "angle": "baseline context piece",
+          "hood": null
+        },
+        {
+          "text": "the debts crossed a line this week — sleep comes harder now",
+          "angle": "observational analysis",
+          "hood": "Fruitvale"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a business, a worker, an owner or a place — every name comes from this slice",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose",
+        "Do not contradict a role, employer or neighborhood listed here"
+      ]
+    },
+    "businesses": [
+      {
+        "bizId": "BIZ-00068",
+        "name": "Marigold Cafe",
+        "sector": "Cafe / dining",
+        "staff": [
+          {
+            "popid": "POP-00991",
+            "name": "Tariq Mitchell",
+            "role": "Line Cook"
+          }
+        ]
+      },
+      {
+        "bizId": "BIZ-00045",
+        "name": "Fruitvale Diner",
+        "sector": "Restaurant & Dining",
+        "staff": [
+          {
+            "popid": "POP-00873",
+            "name": "Hazel Salazar",
+            "role": "Line Cook"
+          }
+        ]
+      },
+      {
+        "bizId": "BIZ-00270",
+        "name": "Hub Ramen",
+        "sector": "Ramen Bar",
+        "staff": []
+      },
+      {
+        "bizId": "BIZ-00271",
+        "name": "Masa & Vine",
+        "sector": "Small Plates & Natural Wine Bar",
+        "staff": []
+      },
+      {
+        "bizId": "BIZ-00267",
+        "name": "Platform Brunch",
+        "sector": "Brunch Restaurant",
+        "staff": []
+      }
+    ],
+    "seeds": [
+      {
+        "seedId": "cc30ad6d",
+        "hood": "Ivy Hill",
+        "citizens": [
+          {
+            "popid": "POP-01101",
+            "name": "Mateo Baker"
+          },
+          {
+            "popid": "POP-01116",
+            "name": "Darius Hill"
+          },
+          {
+            "popid": "POP-01161",
+            "name": "Samuel Adeyemi"
+          },
+          {
+            "popid": "POP-01103",
+            "name": "Ebony Mendoza"
+          }
+        ]
+      },
+      {
+        "seedId": "816c38a9",
+        "hood": "Downtown",
+        "citizens": [
+          {
+            "popid": "POP-01025",
+            "name": "Dame Sarr"
+          },
+          {
+            "popid": "POP-00921",
+            "name": "Constanza Doan"
+          },
+          {
+            "popid": "POP-00750",
+            "name": "Sandra Liu"
+          },
+          {
+            "popid": "POP-00753",
+            "name": "Eunice Marston"
+          }
+        ]
+      }
+    ],
+    "rotation": {
+      "pool": [
+        {
+          "hood": "Jack London",
+          "staffed": 5,
+          "workers": 14,
+          "lastCovered": 111
+        },
+        {
+          "hood": "Downtown",
+          "staffed": 2,
+          "workers": 2,
+          "lastCovered": 112
+        },
+        {
+          "hood": "Temescal",
+          "staffed": 1,
+          "workers": 2,
+          "lastCovered": null
+        },
+        {
+          "hood": "Uptown",
+          "staffed": 1,
+          "workers": 1,
+          "lastCovered": null
+        },
+        {
+          "hood": "Chinatown",
+          "staffed": 1,
+          "workers": 1,
+          "lastCovered": null
+        },
+        {
+          "hood": "Rockridge",
+          "staffed": 2,
+          "workers": 6,
+          "lastCovered": 113
+        },
+        {
+          "hood": "Fruitvale",
+          "staffed": 2,
+          "workers": 2,
+          "lastCovered": null
+        },
+        {
+          "hood": "KONO",
+          "staffed": 1,
+          "workers": 1,
+          "lastCovered": null
+        },
+        {
+          "hood": "West Oakland",
+          "staffed": 1,
+          "workers": 1,
+          "lastCovered": null
+        },
+        {
+          "hood": "Dimond",
+          "staffed": 1,
+          "workers": 1,
+          "lastCovered": null
+        },
+        {
+          "hood": "Grand Lake",
+          "staffed": 1,
+          "workers": 1,
+          "lastCovered": null
+        },
+        {
+          "hood": "Laurel",
+          "staffed": 2,
+          "workers": 2,
+          "lastCovered": 110
+        },
+        {
+          "hood": "Baylight District",
+          "staffed": 1,
+          "workers": 3,
+          "lastCovered": null
+        },
+        {
+          "hood": "East Oakland",
+          "staffed": 1,
+          "workers": 1,
+          "lastCovered": null
+        },
+        {
+          "hood": "Eastlake",
+          "staffed": 1,
+          "workers": 1,
+          "lastCovered": null
+        },
+        {
+          "hood": "San Antonio",
+          "staffed": 1,
+          "workers": 2,
+          "lastCovered": null
+        }
+      ],
+      "picked": "Fruitvale"
+    },
+    "candidates": [
+      {
+        "className": "hood-kitchens",
+        "hood": "Jack London",
+        "label": "Jack London · 5 staffed / 10 listed",
+        "namedBusinesses": [
+          "Jack London Square Markets",
+          "Blue Lantern Bar",
+          "Green & Gold Tavern"
+        ]
+      },
+      {
+        "className": "hood-kitchens",
+        "hood": "Downtown",
+        "label": "Downtown · 2 staffed / 4 listed",
+        "namedBusinesses": [
+          "Miso Metro",
+          "SpeedyBurger"
+        ]
+      },
+      {
+        "className": "hood-kitchens",
+        "hood": "Temescal",
+        "label": "Temescal · 1 staffed / 2 listed",
+        "namedBusinesses": [
+          "OakTown Social"
+        ]
+      },
+      {
+        "className": "hood-kitchens",
+        "hood": "Uptown",
+        "label": "Uptown · 1 staffed / 6 listed",
+        "namedBusinesses": [
+          "Art Walk Cafe"
+        ]
+      },
+      {
+        "className": "hood-kitchens",
+        "hood": "Chinatown",
+        "label": "Chinatown · 1 staffed / 4 listed",
+        "namedBusinesses": [
+          "Heritage Bakehouse"
+        ]
+      },
+      {
+        "className": "hood-kitchens",
+        "hood": "Rockridge",
+        "label": "Rockridge · 2 staffed / 2 listed",
+        "namedBusinesses": [
+          "OakHouse",
+          "Claremont Table"
+        ]
+      },
+      {
+        "className": "hood-kitchens",
+        "hood": "KONO",
+        "label": "KONO · 1 staffed / 5 listed",
+        "namedBusinesses": [
+          "The Northgate Bar"
+        ]
+      },
+      {
+        "className": "hood-kitchens",
+        "hood": "West Oakland",
+        "label": "West Oakland · 1 staffed / 2 listed",
+        "namedBusinesses": [
+          "West Side Cafe"
+        ]
+      }
+    ]
+  },
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Mason Ortega",
+    "popid": "POP-00160",
+    "text": "I'm standing outside Marigold Cafe on a Tuesday before the lunch rush, watching Tariq Mitchell through the window working the flat-top with the kind of focus that says he's been doing this long enough to know exactly where the hot spots are. The place is doing well — you can feel it in the way the regulars don't even look at the menu anymore. But I keep thinking about Fruitvale Diner, two blocks over, where Hazel Salazar is probably running a line with one other person, doing the same work with a fraction of the support. That gap is the story. Not a review, not a trend piece — just the work itself, what it costs, what it returns. I want to stand in both kitchens and watch the shift. I want t",
+    "plan": {
+      "chase": "I'm standing outside Marigold Cafe on a Tuesday before the lunch rush, watching Tariq Mitchell through the window working the flat-top with the kind of focus that says he's been doing this long enough to know exactly where the hot spots are. The place is doing well — you can feel it in the way the regulars don't even look at the menu anymore. But I keep thinking about Fruitvale Diner, two blocks over, where Hazel Salazar is probably running a line with one other person, doing the same work with a fraction of the support. That gap is the story. Not a review, not a trend piece — just the work itself, what it costs, what it returns. I want to stand in both kitchens and watch the shift. I want t",
+      "focus": "The working conditions and daily reality of line cooks at two Fruitvale kitchens of vastly different scale — Marigold Cafe's Tariq Mitchell and Fruitvale Diner's Hazel Salazar — and what the work actually demands of them.",
+      "why": "The assignment is kitchens as workplaces, and the two named workers sit at opposite ends of the same neighborhood's restaurant economy. One has backup, one doesn't. That contrast is the true thing about the work here.",
+      "checks": [
+        "Confirm with Tariq Mitchell at Marigold Cafe what a typical Tuesday line looks like — how many tickets, how many hands on deck, what breaks look like.",
+        "Confirm with Hazel Salazar at Fruitvale Diner how she manages a two-person kitchen through a full service — who covers the dish pit, who does the prep, what happens when someone calls out.",
+        "Observe one full shift at each kitchen, or as much as the cooks will let me stand in the corner for.",
+        "Ask both what they'd change first about their kitchen if they could — not the food, the work.",
+        "Check the tip jar at both places and ask how tips actually get split — that's where the real economics live."
+      ],
+      "targets": [
+        {
+          "pop": "POP-00991",
+          "question": "What does a full shift at Marigold Cafe actually demand from you — physically, mentally — and what's the part of the job nobody sees from the dining room?",
+          "basis": "Tariq Mitchell is the named line cook at Marigold Cafe, a 30-employee operation with real revenue behind it — the scale shapes what the work is."
+        },
+        {
+          "pop": "POP-00873",
+          "question": "How do you run a full service with two people on the roster, and what does that mean for what you carry home at the end of the night?",
+          "basis": "Hazel Salazar is the named line cook at Fruitvale Diner, a two-employee kitchen — the smallest possible version of the same job."
+        }
+      ],
+      "interpretation": "The two kitchens are the same trade at different scales, and the difference between thirty employees and two is the difference between a job that can break you and a job that can break you faster. The work is the work — the question is what the work does to the person doing it.",
+      "unverifiedLead": [
+        "Tariq Mitchell may have been working the Marigold line for a while — the way he moved at the flat-top suggested muscle memory, not a new hire.",
+        "Hazel Salazar might be the kind of cook who's been in the Fruitvale kitchen scene long enough to have opinions about how the neighborhood's changed around the diner.",
+        "The tip jar situation at Fruitvale Diner might be more personal than at Marigold — regulars who know Hazel by name versus a crowd that cycles through."
+      ],
+      "closeQuestion": "What does a cook need — not to make the food, but to make it through the shift — and who's responsible for making sure they have it?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Grand Lake neighborhood texture — how residents experience the improvement | Residents of Grand Lake feel the change firsthand.",
+      "kind": "anomaly",
+      "hood": "Grand Lake",
+      "ref": "output/engine_audit_c114.json patterns[5]; evidence: Initiative_Tracker row(s) 9; storyline INIT-009:announced",
+      "popids": [
+        "POP-00001",
+        "POP-01049",
+        "POP-01218"
+      ]
+    },
+    {
+      "label": "Chinatown | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Chinatown",
+      "ref": "output/neighborhood_texture_c114.md \"### Chinatown\"; events: world_summary_c114.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Downtown | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Downtown",
+      "ref": "output/neighborhood_texture_c114.md \"### Downtown\"; events: world_summary_c114.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "East Oakland | 2 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "East Oakland",
+      "ref": "output/neighborhood_texture_c114.md \"### East Oakland\"; events: world_summary_c114.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Lake Merritt | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Lake Merritt",
+      "ref": "output/neighborhood_texture_c114.md \"### Lake Merritt\"; events: world_summary_c114.md \"## World Events\"",
+      "popids": []
+    }
+  ],
+  "laneEntries": 28,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-06T12:15:45.408Z"
+}

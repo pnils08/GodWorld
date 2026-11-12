@@ -1,0 +1,56 @@
+{
+  "office": "council_d2",
+  "cycle": 112,
+  "speaker": "Leonard Tran",
+  "cascadeSummary": "I have verified the soil remediation reports for the Baylight District and officially convened the emergency hearing for the Downtown Economic Revitalization ordinance. My focus remains on bridging the gap between the success in Jack London and the continuing struggle in the Baylight and Downtown sectors using verified data.",
+  "statements": [
+    {
+      "statementId": "STMT-112-council_d2-001",
+      "type": "vote_statement",
+      "topic": "Baylight District Remediation Milestone",
+      "initiative": "Baylight District — Final Council Vote",
+      "decision": "Confirm independent oversight verification and approve continuation to Cycle 115 milestone.",
+      "quote": "The data in the soil test verification provides the evidence-based assurance I require to move this forward.",
+      "fullStatement": "I have reviewed the independent oversight verification for the Phase II remediation. While sentiment in the Baylight District remains flat, the technical milestones are being met. The success we see in Jack London is predicated on a safe, stable foundation; therefore, I certify the remediation reports to ensure the project remains on schedule for the Cycle 115 review.",
+      "disposition": "YES",
+      "actionAsked": "Confirm verification of remediation reports",
+      "tone": "evidence-driven",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-112-council_d2-002",
+      "type": "vote_statement",
+      "topic": "Downtown Economic Revitalization",
+      "initiative": "Downtown Economic Revitalization",
+      "decision": "Convene Emergency Economic Development Committee hearing and refer for council authorization.",
+      "quote": "Downtown's decline cannot be ignored while we celebrate other sectors; we need targeted support, not just administrative process.",
+      "fullStatement": "The mood in Downtown is slipping and the economic imbalance is evident. I am setting the committee hearing schedule for INIT-008 immediately. A $15M authorization is a significant investment, but the data on street trade and the decline in daily life necessitates a targeted response to prevent further decay of our city core.",
+      "disposition": "YES",
+      "actionAsked": "Set committee hearing date and refer ordinance",
+      "tone": "district-focused",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-112-council_d2-003",
+      "type": "statement",
+      "topic": "District 2 Economic Performance",
+      "initiative": null,
+      "decision": "Acknowledge Jack London success and flag Baylight District stagnation.",
+      "quote": "Jack London's performance proves that basic infrastructure and safety work, but that success must be extended to the Baylight District.",
+      "fullStatement": "I recognize the positive momentum in Jack London as a result of our focus on infrastructure and safety. However, the flat mood and slow trade in the Baylight District remind us that remediation is only the first step. I will continue to push for an integrated approach that ensures the prosperity of the waterfront reaches the surrounding neighborhoods.",
+      "disposition": "statement",
+      "actionAsked": "None",
+      "tone": "quiet-substantive",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    }
+  ]
+}

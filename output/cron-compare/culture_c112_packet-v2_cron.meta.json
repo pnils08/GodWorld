@@ -1,0 +1,17 @@
+{
+  "desk": "culture",
+  "cycle": "112",
+  "model": "x-ai/grok-4.3",
+  "turns": 1,
+  "maxTurns": 15,
+  "usageInputTokens": 9861,
+  "usageOutputTokens": 2290,
+  "savedFiles": [
+    "output/cron-compare/culture_c112_ines-sorensen_packet-v2_x-ai-grok-4-3.md"
+  ],
+  "compareAgainst": "output/desk-output/culture_c112.md",
+  "durationMs": 38192,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-10-24T16:15:40.306Z"
+}

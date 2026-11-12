@@ -1,0 +1,58 @@
+{
+  "mode": "wake-write",
+  "desk": "culture",
+  "cycle": "111",
+  "provider": "openrouter",
+  "model": "anthropic/claude-haiku-5.5",
+  "configuredWriterModel": "anthropic/claude-haiku-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "elliot-graye",
+  "byline": {
+    "name": "Elliot Graye",
+    "popid": "POP-00012",
+    "beatDomain": "COMMUNITY"
+  },
+  "laneEntries": 20,
+  "quotesLanded": 3,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [],
+  "toolCalls": 0,
+  "wordCount": 823,
+  "targetWords": "evidence-bounded",
+  "capHit": 0,
+  "checkFlags": [],
+  "engineTerms": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": false,
+    "inTarget": false,
+    "inTargetBy": "judge",
+    "words": 823,
+    "short": "The piece covers multiple faith-community signals rather than focusing on one, and falls short of the target word count.",
+    "score": 2,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "1ef31222d28a5763537b6aea4a655f183d9dd135c49aaba08092710762dda863",
+    "costUsd": 0.0023
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 2/4 — The piece covers multiple faith-community signals rather than focusing on one, and falls short of the target word count."
+  },
+  "article": "output/cron-compare/staged/culture_c111_elliot-graye_packet-v2_anthropic-claude-haiku-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": " tip: ⌘ custom filepath { path: '/custom/path/.env' }\n{\n  \"popId\": \"POP-00012\",\n  \"name\": \"Elliot Graye\",\n  \"recorded\": true,\n  \"text\": \"filed: The Room Stays Open: Faith on Lake Merritt This Cycle\"\n}"
+  },
+  "ranAt": "2026-10-15T23:16:10.804Z",
+  "dispositionReconciledAt": "2026-10-17T17:00:02.877Z"
+}

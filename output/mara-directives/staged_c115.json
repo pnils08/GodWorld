@@ -1,0 +1,154 @@
+{
+  "promises": [
+    {
+      "kind": "promise",
+      "eventId": "P-d94459ae1189b667",
+      "promiseId": "P-d94459ae1189b667",
+      "office": "civic-office-mayor",
+      "cycle": 115,
+      "said": "Transmit responsive legislative proposals for all seven executive-ledger complaints in C115, each identifying a responsible office, proposed remedy, and next public date; use the actual ledger for petition details and do not claim filing before docketing.",
+      "source": "mayor_open_c115 statements[1].decision",
+      "initiativeId": null,
+      "trackerAtPromise": null,
+      "note": null
+    },
+    {
+      "kind": "promise",
+      "eventId": "P-b87ef751a66c370d",
+      "promiseId": "P-b87ef751a66c370d",
+      "office": "civic-office-mayor",
+      "cycle": 115,
+      "said": "In response to Decision 8, file INIT-014 legislation this cycle using current Ivy Hill conditions and no manufactured emergency premise.",
+      "source": "mayor_gavel_c115 statements[7].decision",
+      "initiativeId": "INIT-014",
+      "trackerAtPromise": {
+        "ImplementationPhase": "announced",
+        "Status": "proposed",
+        "NextScheduledAction": "legislation-filed",
+        "NextActionCycle": "114"
+      },
+      "note": null
+    },
+    {
+      "kind": "promise",
+      "eventId": "P-25699b7f650ca053",
+      "promiseId": "P-25699b7f650ca053",
+      "office": "civic-office-council-d1",
+      "cycle": 115,
+      "said": "The director wants the Brooklyn service audit baseline and the District 1 dispatch evaluation for the Alternative Response Initiative on the record; I'll file that answer, because if the audit exists, the neighbors who live with it get to see it.",
+      "source": "civic-office-council-d1_2026-11-05 statement",
+      "initiativeId": null,
+      "trackerAtPromise": null,
+      "note": null
+    },
+    {
+      "kind": "promise",
+      "eventId": "P-71776abe706ff093",
+      "promiseId": "P-71776abe706ff093",
+      "office": "civic-office-council-d3",
+      "cycle": 115,
+      "said": "This district gets the briefing, the review calendar, and the numbers in the open.",
+      "source": "civic-office-council-d3_2026-11-04 statement",
+      "initiativeId": null,
+      "trackerAtPromise": null,
+      "note": null
+    },
+    {
+      "kind": "promise",
+      "eventId": "P-36f7939757489205",
+      "promiseId": "P-36f7939757489205",
+      "office": "civic-office-council-d5",
+      "cycle": 115,
+      "said": "So I am publishing the placement-gap analysis this cycle with their findings named, not folded into an average.",
+      "source": "council_d5_c115 statements[1].fullStatement",
+      "initiativeId": "INIT-007",
+      "trackerAtPromise": {
+        "ImplementationPhase": "implementation-active",
+        "Status": "passed",
+        "NextScheduledAction": "Publish placement-gap analysis and program adjustment plan",
+        "NextActionCycle": "115"
+      },
+      "note": null
+    },
+    {
+      "kind": "promise",
+      "eventId": "P-6903e362468303b6",
+      "promiseId": "P-6903e362468303b6",
+      "office": "civic-office-council-d8",
+      "cycle": 115,
+      "said": "Docket formal baseline municipal maintenance allocations and commercial corridor service standards for Eastlake",
+      "source": "council_d8_c115 statements[1].decision",
+      "initiativeId": null,
+      "trackerAtPromise": null,
+      "note": null
+    },
+    {
+      "kind": "promise",
+      "eventId": "P-b6cac45e0bdc5443",
+      "promiseId": "P-b6cac45e0bdc5443",
+      "office": "civic-office-council-d9",
+      "cycle": 115,
+      "said": "My district, my name, and I'll report back on what actually moves.",
+      "source": "civic-office-council-d9_2026-11-05 statement",
+      "initiativeId": null,
+      "trackerAtPromise": null,
+      "note": null
+    },
+    {
+      "kind": "promise",
+      "eventId": "P-1adc611984aee8f1",
+      "promiseId": "P-1adc611984aee8f1",
+      "office": "civic-office-council-d2",
+      "cycle": 115,
+      "said": "I support a binding vote on Downtown Economic Revitalization and will vote YES.",
+      "source": "council_d2_c115 statements[0].fullStatement",
+      "initiativeId": "INIT-008",
+      "trackerAtPromise": {
+        "ImplementationPhase": "vote-scheduled",
+        "Status": "failed",
+        "NextScheduledAction": "",
+        "NextActionCycle": ""
+      },
+      "note": null
+    }
+  ],
+  "statuses": [],
+  "rejectedPromises": [],
+  "memoryReads": [],
+  "notes": [],
+  "trace": [
+    {
+      "tool": "promise_record",
+      "resultChars": 27
+    },
+    {
+      "tool": "promise_record",
+      "resultChars": 38
+    },
+    {
+      "tool": "promise_record",
+      "resultChars": 27
+    },
+    {
+      "tool": "promise_record",
+      "resultChars": 27
+    },
+    {
+      "tool": "promise_record",
+      "resultChars": 38
+    },
+    {
+      "tool": "promise_record",
+      "resultChars": 27
+    },
+    {
+      "tool": "promise_record",
+      "resultChars": 27
+    },
+    {
+      "tool": "promise_record",
+      "resultChars": 38
+    }
+  ],
+  "runEntry": "C115 — Mara Vance's directive, written after the close.\nDirected Avery Santana — Mayor: Provide the docket references for the seven petition responses and the claimed INIT-014 filing, reconciling those statements with the current complaint ledger and initiative tracker.\nDirected Denise Carter — City Council District 1: File your promised answer on the Brooklyn service-audit baseline and District 1 OARI evaluation, explaining what the office sees behind Brooklyn’s continuing negative sentiment.\nDirected Leonard Tran — City Council District 2: Reconcile your stated YES commitment on Downtown Economic Revitalization with INIT-008’s failed status and identify what legislative decision actually occurred.\nDirected Rose Delgado — City Council District 3: Provide the district’s briefing and transit-review notice records, clarifying the actual OARI venue and how the promised Fruitvale access was provided.\nDirected Ramon Vega — City Council District 4: Report what the Glenview Civic Response Meeting established about the public-works issue and identify any remaining municipal follow-through.\nDirected Janae Rivers — City Council District 5: Provide the published INIT-007 placement-gap analysis and adjustment plan, including the named West Oakland and Fruitvale findings and your recommendation for the next implementation decision.\nDirected Warren Ashford — City Council District 7: What did your Rockridge canvass establish about merchant sentiment and municipal services, and does it support any specific corridor adjustment?\nDirected Nina Chen — City Council District 8: Provide the Eastlake allocation and service-schedule records, account for the district’s three recorded complaints, and clarify the official disposition of Grand Lake stabilization.\nDirected Terrence Mobley — City Council District 9: Report what has moved on Laurel Neighborhood Patch and Clean-Up, including missed-pickup recovery and how the district’s recorded complaints relate to the proposed work.\nDirected Keisha Ramos — Baylight Authority Director: What determination did the Cycle 115 construction milestone review reach, and where can the public inspect the findings supporting it?\nNot directing:\n- Elliott Crane (City Council District 6): The Cycle 115 record identifies no dated outstanding step or specific district issue requiring an answer; independent fiscal scrutiny does not itself create a new deliverable.\n- Marcus Webb (OEWD Program Director (Stabilization Fund)): His Cycle 115 statement reports the closeout and reconciliation published, renewal draft completed and ordinance transmitted—the substance of the tracker’s dated step; council renewal is not his to declare.\n- Vanessa Tran-Muñoz (OARI Program Director): Her Cycle 115 statement reports the briefing executed and documented, with public packet publication scheduled for Cycle 116; expansion remains held and the unfinished audit and feasibility review remain openly identified.\n- Bobby Chen-Ramirez (Health Center Project Director): The utilization audit is due in Cycle 116, not overdue, and his Cycle 115 statement describes the standing filing and verification process.\n- Elena Soria Dominguez (Transit Hub Planning Lead): Her Cycle 115 update reports schematics delivered and community review opened, with the comment-and-response record scheduled for Cycle 116; continued design-phase status is not, by itself, a missed obligation.\nOpen promises she is watching: mayor \"Transmit responsive legislative proposals for all seven executive-ledger complaints in C115, each identifying a responsible office, proposed remedy, and next public date; use the actual ledger for petition details and do not claim filing before docketing.\"; mayor \"In response to Decision 8, file INIT-014 legislation this cycle using current Ivy Hill conditions and no manufactured emergency premise.\"; council-d1 \"The director wants the Brooklyn service audit baseline and the District 1 dispatch evaluation for the Alternative Response Initiative on the record; I'll file that answer, because if the audit exists, the neighbors who live with it get to see it.\"; council-d3 \"This district gets the briefing, the review calendar, and the numbers in the open.\"; council-d5 \"So I am publishing the placement-gap analysis this cycle with their findings named, not folded into an average.\"; council-d8 \"Docket formal baseline municipal maintenance allocations and commercial corridor service standards for Eastlake\"; council-d9 \"My district, my name, and I'll report back on what actually moves.\"; council-d2 \"I support a binding vote on Downtown Economic Revitalization and will vote YES.\""
+}

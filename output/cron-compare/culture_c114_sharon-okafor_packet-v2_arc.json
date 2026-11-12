@@ -1,0 +1,32 @@
+{
+  "status": "arc-seed",
+  "cycle": "114",
+  "desk": "culture",
+  "persona": "sharon-okafor",
+  "hood": "Piedmont Ave",
+  "quotes": [
+    {
+      "pop": "POP-00539",
+      "name": "Lena Cross",
+      "quote": "To be honest, I'm still pretty active in the local arts scene. I just attended a community feedback session for the Fruitvale Transit Hub Phase II, and I felt really heard, which was great. I've also been enjoying events like First Friday, it feels like the creative energy is still there. I'm not sure what you mean by 'fading fame,' but around here on Piedmont Ave, people still know me and we chat about the A's or other local happenings."
+    },
+    {
+      "pop": "POP-00545",
+      "name": "Rowan Pierce",
+      "quote": "To be honest, I don't really know Lena Cross or follow her work closely. I'm not sure how I feel about her fading fame."
+    },
+    {
+      "pop": "POP-01062",
+      "name": "Marisol Rivera",
+      "quote": "To be honest, I haven't seen much of Lena Cross around Rockridge or Piedmont Ave lately. I used to see her at some events, but now it seems like she's not as involved in the community as she used to be. I don't know if she's just busy or what, but it's like she's faded into the background."
+    },
+    {
+      "pop": "POP-00001",
+      "name": "Vinnie Keane",
+      "quote": "To be honest, I haven't really noticed anything about Lena Cross's fame fading around Rockridge or Piedmont Ave. I live in Grand Lake, and while I'm aware of the A's and some local faces, I don't really keep up with the Arts scene on Piedmont Ave that closely. I do know Louis Cross, though - he's a teammate, and we got a big contract for him and Ian Devine last season. I haven't seen much about Lena around, but I don't know if that's because she's fading from the spotlight or just not something I pay attention to."
+    }
+  ],
+  "claim": "To be honest, I'm still pretty active in the local arts scene. I just attended a community feedback session for the Fruitvale Transit Hub Phase II, and I felt really heard, which was great. I've also been enjoying events like First Friday, it feels like the creative energy is still there. I'm not sure what you mean by 'fading fame,' but around here on Piedmont Ave, people still know me and we chat about the A's or other local happenings.",
+  "src": "citizenVoice PRESS c114",
+  "ranAt": "2026-11-06T19:17:38.382Z"
+}

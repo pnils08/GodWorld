@@ -1,0 +1,22 @@
+{
+  "cycle": 114,
+  "candidates": {
+    "MV-113-civic-office-council-d4-2026-10-26": {
+      "moveId": "MV-113-civic-office-council-d4-2026-10-26",
+      "cycle": 114,
+      "date": "2026-10-26",
+      "agentDir": "civic-office-council-d4",
+      "popid": "POP-00042",
+      "proposingOffice": "COUNCIL-D4",
+      "title": "Ivy Hill Community Support Initiative",
+      "category": "safety",
+      "reach": "hood",
+      "hoods": [
+        "Ivy Hill"
+      ],
+      "problem": "Ivy Hill is showing signs of decay momentum and increased crime index, requiring immediate community support and targeted investment.",
+      "budget": "$2.5M",
+      "status": "pending"
+    }
+  }
+}

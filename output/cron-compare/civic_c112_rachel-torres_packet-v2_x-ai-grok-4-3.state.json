@@ -1,0 +1,395 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00057",
+    "name": "Sgt. Rachel Torres",
+    "role": "desk reporter",
+    "desk": "civic"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Dimond logged the most incidents (8) | 22 neighborhoods on the table — what the table says and who answers for it",
+    "approach": "Public-safety approach: this slice is the crime table for every neighborhood — incidents, response time, clearance — the public-safety staff on the roster, the court record (who was charged, what the court did, what it cost them) and the custody trail from charges to arrests to who is held, hood by hood. Measured, third person, incident structure and classification gaps. The numbers, the officials and the defendants are real; the block, the call, the aftermath are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "public-safety",
+      "hood": "Dimond",
+      "facts": [
+        "129 incidents across 22 neighborhoods; most in Dimond 8, Fruitvale 8, West Oakland 8, San Antonio 7, Chinatown 7; fewest in Glenview 4, Eastlake 4, Lake Merritt 4",
+        "Dimond: 8 incidents (+3 vs C111), response 10.6 min, clearance 22%, property index 38, violent index 26",
+        "Slowest response: Temescal: 5 incidents (-2 vs C111), response 11.1 min, clearance 19%, property index 44, violent index 21",
+        "Moved this cycle — rising: Baylight District; easing: Piedmont Ave",
+        "Citywide custody this cycle: 27 arrests (0 tracked, 27 other residents); 57 in custody at the close; 34 left",
+        "Baylight District: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "Chinatown: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "West Oakland: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "Dimond: 8 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+        "Fruitvale: 8 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked"
+      ],
+      "priorCycle": "PRIOR_CYCLE_ON_DISK",
+      "note": "desk-signal incident rows attached as pointers (5)",
+      "engineHooks": [
+        "Fire incident reported. Scene coverage, who was affected, cause investigation. (general coverage)"
+      ],
+      "roomIsYours": "the corner after the call, the dispatcher's pause, who was on the porch, what the neighborhood watch captain saw first",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF",
+    "runningStoriesNote": "signal.runningStories are events the city is already living through and where each one stands. Background only — write nothing about tracking them."
+  },
+  "signal": {
+    "kind": "beat-safety",
+    "hood": "Dimond",
+    "src": "output/beats/Crime_Metrics.jsonl @C112",
+    "plan": {
+      "focus": "Dimond's incident count is the highest in the city this cycle, but clearance sits at 22% — who answers for the gap between reported incidents and resolved cases?",
+      "closeQuestion": "When a neighborhood logs the most incidents in the city but clears only one in five cases, is that a public safety failure or a reporting problem — and who's willing to say which out loud?"
+    },
+    "runningStories": [
+      "West Oakland Stabilization Fund — disbursement-active [West Oakland] — week 4",
+      "Oakland Alternative Response Initiative — dispatch-live [West Oakland, Fruitvale, East Oakland] — week 4",
+      "Fruitvale Transit Hub Phase II — Visioning — design-phase [Fruitvale] — week 4",
+      "Temescal Community Health Center — operational [Temescal] — week 4",
+      "Baylight District — Final Council Vote — construction-active [Jack London, Downtown] — week 4",
+      "Oakland Youth Apprenticeship Pipeline — implementation-active [West Oakland, East Oakland, Fruitvale] — under way",
+      "Downtown Economic Revitalization — legislation-filed [Downtown] — week 2",
+      "Commercial Stabilization for Grand Lake — legislation-filed [Grand Lake] — under way",
+      "West Oakland Tenant Defense Fund — vote-scheduled [West Oakland] — under way",
+      "Ivy Hill Revitalization Initiative — announced [Ivy Hill] — under way",
+      "Oakland Youth Apprenticeship Pipeline — operational [West Oakland, East Oakland, Fruitvale] — ENDED this week after 4 week(s); now implementation-active",
+      "Commercial Stabilization for Grand Lake — announced [Grand Lake] — ENDED this week after 2 week(s); now legislation-filed",
+      "West Oakland Tenant Defense Fund — announced [West Oakland] — ENDED this week after 2 week(s); now vote-scheduled"
+    ]
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00137",
+        "name": "Kimberly Cho",
+        "profile": "Kimberly Cho — DEPUTY CHIEF OF OPERATIONS — Oakland Police Department",
+        "quotationEligible": false,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [],
+    "excludedLeads": [
+      {
+        "from": "Sgt. Rachel Torres",
+        "text": "Residents in Dimond have mentioned feeling that property crimes in the area don't get follow-up — this needs confirmation before it goes anywhere",
+        "usable": false
+      },
+      {
+        "from": "Sgt. Rachel Torres",
+        "text": "There may be a pattern of incidents clustering around certain blocks in Dimond that the aggregate numbers don't show",
+        "usable": false
+      },
+      {
+        "from": "Sgt. Rachel Torres",
+        "text": "The relationship between the 8 charges and 3 people in custody suggests some cases may be resolved without custody — worth examining how that works",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C112",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-7cd6ffd2aeb3"
+    },
+    {
+      "t": "FACT",
+      "text": "Dimond logged the most incidents (8) | 22 neighborhoods on the table",
+      "src": "output/beats/Crime_Metrics.jsonl @C112",
+      "id": "F-072f79edf47b"
+    },
+    {
+      "t": "FACT",
+      "text": "Dimond leads the incident count; Temescal waits longest for a response; 57 in custody citywide; 39 public-safety staff on the roster.",
+      "src": "output/beats/Crime_Metrics.jsonl @C112",
+      "id": "F-fc6f2c6a192a"
+    },
+    {
+      "t": "FACT",
+      "text": "129 incidents across 22 neighborhoods; most in Dimond 8, Fruitvale 8, West Oakland 8, San Antonio 7, Chinatown 7; fewest in Glenview 4, Eastlake 4, Lake Merritt 4",
+      "src": "output/beats/Crime_Metrics.jsonl @C112",
+      "id": "F-b8e8c5651d4e"
+    },
+    {
+      "t": "FACT",
+      "text": "Dimond: 8 incidents (+3 vs C111), response 10.6 min, clearance 22%, property index 38, violent index 26",
+      "src": "output/beats/Crime_Metrics.jsonl @C112",
+      "id": "F-1a8962939090"
+    },
+    {
+      "t": "FACT",
+      "text": "Slowest response: Temescal: 5 incidents (-2 vs C111), response 11.1 min, clearance 19%, property index 44, violent index 21",
+      "src": "output/beats/Crime_Metrics.jsonl @C112",
+      "id": "F-4423cc9954c7"
+    },
+    {
+      "t": "FACT",
+      "text": "Moved this cycle — rising: Baylight District; easing: Piedmont Ave",
+      "src": "output/beats/Crime_Metrics.jsonl @C112",
+      "id": "F-f0d4197a4ccf"
+    },
+    {
+      "t": "FACT",
+      "text": "Citywide custody this cycle: 27 arrests (0 tracked, 27 other residents); 57 in custody at the close; 34 left",
+      "src": "output/beats/Care_Justice_Census.jsonl judicial @C112 city",
+      "id": "F-97f2639a1db8"
+    },
+    {
+      "t": "FACT",
+      "text": "Baylight District: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl judicial @C112 Baylight District",
+      "id": "F-d1e4eb598537"
+    },
+    {
+      "t": "FACT",
+      "text": "Chinatown: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl judicial @C112 Chinatown",
+      "id": "F-2a5248471e53"
+    },
+    {
+      "t": "FACT",
+      "text": "West Oakland: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl judicial @C112 West Oakland",
+      "id": "F-80710dea01a4"
+    },
+    {
+      "t": "FACT",
+      "text": "Dimond: 8 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl judicial @C112 Dimond",
+      "id": "F-9af4bead96dd"
+    },
+    {
+      "t": "FACT",
+      "text": "Fruitvale: 8 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl judicial @C112 Fruitvale",
+      "id": "F-63fac7a523ea"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. No citizen spoke for this piece: manifest.approvedQuotes is empty. Write no quoted speech and attribute no statement to any person; the piece stands on the record and the place. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "rachel-public-safety-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Trace one Packet-backed public-safety incident, classification gap, or OARI response question without sensationalism or invented case detail.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "measured third-person public-safety reporting",
+      "targetWords": "500-800",
+      "opening": "a Packet-backed safety signal, place, or resident consequence",
+      "closing": "an unresolved accountability or practical-safety question grounded in the record"
+    },
+    "authorizedTexture": [
+      "unnamed restrained scene texture with no incident facts",
+      "analysis of a supplied classification or response gap",
+      "a practical close limited to the supplied record"
+    ],
+    "textureConditions": [
+      "every named person, institution, incident, agency, number, and date must come from the Packet",
+      "do not claim an interview, observation, quote, fear, trend, or response metric absent from the Packet",
+      "crime or safety interpretation must remain framed as analysis when not a supplied fact"
+    ],
+    "canonBlockers": [
+      "invented incident, arrest, officer, case, quote, clearance, response time, or agency action",
+      "unsupported crime classification or collective fear claim",
+      "raw engine labels or decimals as public-facing evidence",
+      "a named person or institution not supplied by the Packet"
+    ]
+  },
+  "manifest": {
+    "id": "AM-c51af5ddc8df",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-7cd6ffd2aeb3",
+        "t": "FACT",
+        "text": "Current cycle: C112",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-072f79edf47b",
+        "t": "FACT",
+        "text": "Dimond logged the most incidents (8) | 22 neighborhoods on the table",
+        "src": "output/beats/Crime_Metrics.jsonl @C112"
+      },
+      {
+        "id": "F-fc6f2c6a192a",
+        "t": "FACT",
+        "text": "Dimond leads the incident count; Temescal waits longest for a response; 57 in custody citywide; 39 public-safety staff on the roster.",
+        "src": "output/beats/Crime_Metrics.jsonl @C112"
+      },
+      {
+        "id": "F-b8e8c5651d4e",
+        "t": "FACT",
+        "text": "129 incidents across 22 neighborhoods; most in Dimond 8, Fruitvale 8, West Oakland 8, San Antonio 7, Chinatown 7; fewest in Glenview 4, Eastlake 4, Lake Merritt 4",
+        "src": "output/beats/Crime_Metrics.jsonl @C112"
+      },
+      {
+        "id": "F-1a8962939090",
+        "t": "FACT",
+        "text": "Dimond: 8 incidents (+3 vs C111), response 10.6 min, clearance 22%, property index 38, violent index 26",
+        "src": "output/beats/Crime_Metrics.jsonl @C112"
+      },
+      {
+        "id": "F-4423cc9954c7",
+        "t": "FACT",
+        "text": "Slowest response: Temescal: 5 incidents (-2 vs C111), response 11.1 min, clearance 19%, property index 44, violent index 21",
+        "src": "output/beats/Crime_Metrics.jsonl @C112"
+      },
+      {
+        "id": "F-f0d4197a4ccf",
+        "t": "FACT",
+        "text": "Moved this cycle — rising: Baylight District; easing: Piedmont Ave",
+        "src": "output/beats/Crime_Metrics.jsonl @C112"
+      },
+      {
+        "id": "F-97f2639a1db8",
+        "t": "FACT",
+        "text": "Citywide custody this cycle: 27 arrests (0 tracked, 27 other residents); 57 in custody at the close; 34 left",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C112 city"
+      },
+      {
+        "id": "F-d1e4eb598537",
+        "t": "FACT",
+        "text": "Baylight District: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C112 Baylight District"
+      },
+      {
+        "id": "F-2a5248471e53",
+        "t": "FACT",
+        "text": "Chinatown: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C112 Chinatown"
+      },
+      {
+        "id": "F-80710dea01a4",
+        "t": "FACT",
+        "text": "West Oakland: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C112 West Oakland"
+      },
+      {
+        "id": "F-9af4bead96dd",
+        "t": "FACT",
+        "text": "Dimond: 8 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C112 Dimond"
+      },
+      {
+        "id": "F-63fac7a523ea",
+        "t": "FACT",
+        "text": "Fruitvale: 8 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C112 Fruitvale"
+      }
+    ],
+    "approvedQuotes": [],
+    "approvedSubjects": [
+      {
+        "id": "POP-00137",
+        "name": "Kimberly Cho",
+        "profile": "Kimberly Cho — DEPUTY CHIEF OF OPERATIONS — Oakland Police Department",
+        "src": "packet.W1.exposure",
+        "quotationEligible": false
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Sgt. Rachel Torres",
+        "text": "Residents in Dimond have mentioned feeling that property crimes in the area don't get follow-up — this needs confirmation before it goes anywhere",
+        "publishable": false
+      },
+      {
+        "from": "Sgt. Rachel Torres",
+        "text": "There may be a pattern of incidents clustering around certain blocks in Dimond that the aggregate numbers don't show",
+        "publishable": false
+      },
+      {
+        "from": "Sgt. Rachel Torres",
+        "text": "The relationship between the 8 charges and 3 people in custody suggests some cases may be resolved without custody — worth examining how that works",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "unnamed restrained scene texture with no incident facts",
+      "analysis of a supplied classification or response gap",
+      "a practical close limited to the supplied record"
+    ],
+    "textureConditions": [
+      "every named person, institution, incident, agency, number, and date must come from the Packet",
+      "do not claim an interview, observation, quote, fear, trend, or response metric absent from the Packet",
+      "crime or safety interpretation must remain framed as analysis when not a supplied fact"
+    ],
+    "forbiddenClaimClasses": [
+      "invented incident, arrest, officer, case, quote, clearance, response time, or agency action",
+      "unsupported crime classification or collective fear claim",
+      "raw engine labels or decimals as public-facing evidence",
+      "a named person or institution not supplied by the Packet"
+    ]
+  }
+}

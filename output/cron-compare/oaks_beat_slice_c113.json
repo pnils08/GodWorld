@@ -1,0 +1,245 @@
+{
+  "version": "OAKS-BEAT-1",
+  "empty": false,
+  "cycle": 113,
+  "kind": "beat-oaks-beat",
+  "seat": {
+    "slug": "selena-grant",
+    "name": "Selena Grant",
+    "popid": "POP-00591",
+    "desk": "sports",
+    "domain": "oaks",
+    "builder": "buildOaksBeatSlice.js"
+  },
+  "hood": "Uptown",
+  "pulse": {
+    "className": "beat-oaks-beat",
+    "score": 100,
+    "label": "Oaks — game-result C113 · 2-0 · W2",
+    "hood": "Uptown",
+    "source": "output/beats/Oakland_Sports_Feed.jsonl @C113"
+  },
+  "story": {
+    "kind": "beat-oaks-beat",
+    "angle": "Oaks — game-result C113 · 2-0 · W2 — the second club's board read",
+    "label": "Oaks — game-result C113 · 2-0 · W2",
+    "hookLine": "The Oaks win again behind a big game behind Adash Stanley. The Oaks 91 - Pistons 78 on the road in Detroit.",
+    "hood": "Uptown",
+    "citizens": [
+      "Adash Stanley (POP-01023)",
+      "Austin Reaves (POP-01027)",
+      "Wilson Shepard (POP-01022)",
+      "Harry Hayward (POP-01223)"
+    ],
+    "popids": [
+      "POP-01023",
+      "POP-01027",
+      "POP-01022",
+      "POP-01223"
+    ],
+    "ref": "output/beats/Oakland_Sports_Feed.jsonl @C113",
+    "cycle": 113
+  },
+  "approach": "Oaks beat-analyst approach: this slice is the Oaks feed raw — the record, the streak, the stats lines, the trigger behind each event. Third-person board read on the second club, not fan heat. Numbers come from the feed only — never invent a stat. The named players are real; the press row, the cage, the bus are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-01023",
+      "name": "Adash Stanley",
+      "role": "PG / The Oaks ",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Adash Stanley — PG / The Oaks  — Downtown",
+      "why": "named on the Oaks feed C113 (Oakland_Sports_Feed)"
+    },
+    {
+      "popid": "POP-01027",
+      "name": "Austin Reaves",
+      "role": "SG / The Oaks",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Austin Reaves — SG / The Oaks — West Oakland",
+      "why": "named on the Oaks feed C113 (Oakland_Sports_Feed)"
+    },
+    {
+      "popid": "POP-01022",
+      "name": "Wilson Shepard",
+      "role": "Head Coach, Oakland Oaks",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Wilson Shepard — Head Coach, Oakland Oaks — West Oakland",
+      "why": "named on the Oaks feed C113 (Oakland_Sports_Feed)"
+    },
+    {
+      "popid": "POP-01223",
+      "name": "Harry Hayward",
+      "role": "Oakland Oaks - Power Forward",
+      "neighborhood": "KONO",
+      "business": null,
+      "profile": "Harry Hayward — Oakland Oaks - Power Forward — KONO",
+      "why": "named on the Oaks feed C113 (Oakland_Sports_Feed)"
+    }
+  ],
+  "facts": [
+    {
+      "text": "Oaks — game-result (early-season), C113: The Oaks win again behind a big game behind Adash Stanley. The Oaks 91 - Pistons 78 on the road in Detroit.",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+    },
+    {
+      "text": "Record 2-0 · streak W2",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+    },
+    {
+      "text": "Stats (feed): Adash Stanley/29PTS, Ausin Reaves/12PTS/7REB/10ASST, AJ Dybantsa/14PTS/9REB, Harry Hayward/12PTS",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+    },
+    {
+      "text": "Trigger: hot-streak",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+    },
+    {
+      "text": "Franchise stability: growing",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+    },
+    {
+      "text": "Oaks — game-result (early-season), C113: The Oaks remain sizzling hot after a winless preseason have now shot out of the gate winning 3 straight. Oaks 115 - Knicks 93 in New York",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+    },
+    {
+      "text": "Record 3-0 · streak W3",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+    },
+    {
+      "text": "Stats (feed): Adash Stanley/16PTS/11REB/9ASST/2STL/2BLK, Ausin Reaves/23PTS/9REB, AJ Dybantsa/23PTS, Harry Hayward/10PTS/10REB",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+    },
+    {
+      "text": "Trigger: hot-streak",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+    },
+    {
+      "text": "Franchise stability: growing",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+    },
+    {
+      "text": "Oaks — game-result (early-season), C113: The Oaks completly dismantle the Wizards in Washington. Oaks 105 - Wizards 62",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+    },
+    {
+      "text": "Record 4-0 · streak W4",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+    },
+    {
+      "text": "Stats (feed): Adash Stanley/23PTS/6REB/8ASST, Ausin Reaves/23PTS/5REB, AJ Dybantsa/8PTS/7REB",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+    },
+    {
+      "text": "Trigger: hot-streak",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+    },
+    {
+      "text": "Franchise stability: growing",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "Oaks — game-result C113 · 2-0 · W2 — the second club's board read",
+    "hookLine": "The Oaks win again behind a big game behind Adash Stanley. The Oaks 91 - Pistons 78 on the road in Detroit.",
+    "anchorFacts": [
+      "Oaks — game-result (early-season), C113: The Oaks win again behind a big game behind Adash Stanley. The Oaks 91 - Pistons 78 on the road in Detroit.",
+      "Record 2-0 · streak W2",
+      "Stats (feed): Adash Stanley/29PTS, Ausin Reaves/12PTS/7REB/10ASST, AJ Dybantsa/14PTS/9REB, Harry Hayward/12PTS",
+      "Trigger: hot-streak",
+      "Franchise stability: growing",
+      "Oaks — game-result (early-season), C113: The Oaks remain sizzling hot after a winless preseason have now shot out of the gate winning 3 straight. Oaks 115 - Knicks 93 in New York",
+      "Record 3-0 · streak W3",
+      "Stats (feed): Adash Stanley/16PTS/11REB/9ASST/2STL/2BLK, Ausin Reaves/23PTS/9REB, AJ Dybantsa/23PTS, Harry Hayward/10PTS/10REB",
+      "Trigger: hot-streak",
+      "Franchise stability: growing",
+      "Oaks — game-result (early-season), C113: The Oaks completly dismantle the Wizards in Washington. Oaks 105 - Wizards 62",
+      "Record 4-0 · streak W4",
+      "Stats (feed): Adash Stanley/23PTS/6REB/8ASST, Ausin Reaves/23PTS/5REB, AJ Dybantsa/8PTS/7REB",
+      "Trigger: hot-streak",
+      "Franchise stability: growing"
+    ],
+    "evidence": [
+      {
+        "text": "Oaks — game-result (early-season), C113: The Oaks win again behind a big game behind Adash Stanley. The Oaks 91 - Pistons 78 on the road in Detroit.",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+      },
+      {
+        "text": "Record 2-0 · streak W2",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+      },
+      {
+        "text": "Stats (feed): Adash Stanley/29PTS, Ausin Reaves/12PTS/7REB/10ASST, AJ Dybantsa/14PTS/9REB, Harry Hayward/12PTS",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+      },
+      {
+        "text": "Trigger: hot-streak",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+      },
+      {
+        "text": "Franchise stability: growing",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+      },
+      {
+        "text": "Oaks — game-result (early-season), C113: The Oaks remain sizzling hot after a winless preseason have now shot out of the gate winning 3 straight. Oaks 115 - Knicks 93 in New York",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+      },
+      {
+        "text": "Record 3-0 · streak W3",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+      },
+      {
+        "text": "Stats (feed): Adash Stanley/16PTS/11REB/9ASST/2STL/2BLK, Ausin Reaves/23PTS/9REB, AJ Dybantsa/23PTS, Harry Hayward/10PTS/10REB",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+      },
+      {
+        "text": "Trigger: hot-streak",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+      },
+      {
+        "text": "Franchise stability: growing",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+      },
+      {
+        "text": "Oaks — game-result (early-season), C113: The Oaks completly dismantle the Wizards in Washington. Oaks 105 - Wizards 62",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+      },
+      {
+        "text": "Record 4-0 · streak W4",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+      },
+      {
+        "text": "Stats (feed): Adash Stanley/23PTS/6REB/8ASST, Ausin Reaves/23PTS/5REB, AJ Dybantsa/8PTS/7REB",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+      },
+      {
+        "text": "Trigger: hot-streak",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+      },
+      {
+        "text": "Franchise stability: growing",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C113"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": null,
+    "hooks": [],
+    "note": null,
+    "pageVoices": [],
+    "roomIsYours": "the near-empty press row, the bullpen chatter, what the manager says when the record is ugly, the drumbeat of a losing streak"
+  },
+  "feedRows": 13,
+  "currentCycleRows": 3,
+  "pointers": [
+    "output/beats/Oakland_Sports_Feed.jsonl @C113"
+  ]
+}

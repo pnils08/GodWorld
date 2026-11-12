@@ -1,0 +1,122 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "113",
+  "persona": "tamsin-pruitt",
+  "byline": "Tamsin Pruitt",
+  "bylinePopid": "POP-01210",
+  "article": "output/cron-compare/staged/culture_c113_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.staged-2320.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Brady Lopez",
+        "role": "quoted-source",
+        "popid": "POP-00256"
+      },
+      {
+        "name": "Solis Walmart",
+        "role": "mentioned",
+        "popid": "POP-00334"
+      },
+      {
+        "name": "Reggie Soto",
+        "role": "quoted-source",
+        "popid": "POP-00590"
+      },
+      {
+        "name": "Naomi Sterling",
+        "role": "quoted-source",
+        "popid": "POP-00759"
+      },
+      {
+        "name": "Amara Osei",
+        "role": "mentioned",
+        "popid": "POP-01110",
+        "floor": true
+      },
+      {
+        "name": "Austin Reaves",
+        "role": "mentioned",
+        "popid": "POP-01027",
+        "floor": true
+      },
+      {
+        "name": "Howard Yell",
+        "role": "mentioned",
+        "popid": "POP-00651",
+        "floor": true
+      },
+      {
+        "name": "Kwame Fitzgerald",
+        "role": "mentioned",
+        "popid": "POP-00259",
+        "floor": true
+      },
+      {
+        "name": "Linda Chow",
+        "role": "mentioned",
+        "popid": "POP-00749",
+        "floor": true
+      },
+      {
+        "name": "Matra Woven",
+        "role": "mentioned",
+        "popid": "POP-00785",
+        "floor": true
+      },
+      {
+        "name": "Tina Kozlov",
+        "role": "mentioned",
+        "popid": "POP-00628",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "INIT-002:dispatch-live",
+        "verb": "referenced",
+        "attachedBy": "stepAttach"
+      },
+      {
+        "slug": "INIT-003:design-phase",
+        "verb": "referenced",
+        "attachedBy": "stepAttach"
+      }
+    ],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "I've been playing to climb — a place of my own first. The last stretch threw a money week that mattered. Now I'm renting a place on Piedmont Ave.",
+        "sourceRef": "citizenVoice PRESS Brady Lopez"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-747e8ac6638b",
+    "draftSha256": "1b2ae71aaa96c75f92a87787ec91af303d7b091c2f41941406ad62189baec7f1",
+    "verdict": "output/cron-compare/culture_c113_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-10-28T23:20:20.547Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 450",
+      "words": 1488,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "1b2ae71aaa96c75f92a87787ec91af303d7b091c2f41941406ad62189baec7f1",
+      "costUsd": 0.0018
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-28T23:20:24.443Z"
+}

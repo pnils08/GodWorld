@@ -1,0 +1,739 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00155",
+    "name": "Trevor Shimizu",
+    "role": "desk reporter",
+    "desk": "civic"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Coliseum ridership down 799 vs C113 | 8 stations + 10 corridors on the record — the platforms and the people who run them",
+    "approach": "Transit approach: this slice is every station on the record this cycle, what moved against last cycle, and the transit workers on the roster. The week header (weather, home games, the union of causes), the chaos car on the line and the citizens who lived a transit line are record; the Factors on each station row are the city's own causes — the frame at their head (weather; weekend; holiday: <name> (major) or (no cut)) is the citywide day-type cut, and the rest are the row's own reasons (holiday lift in its hood, First Friday, game day, events, a stalled train, a short crew, crowded platforms). Riders rise and fall for the reasons written there, never for a reason you add. A BART-train chaos hit this cycle reaches the platforms NEXT cycle. Dry, technical, timestamp and pattern — but it is a place with people in it. One system, one claim about what changed. Facts on this slice: the names,",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "transit",
+      "hood": null,
+      "facts": [
+        "Day type this cycle: weekend — riders cut citywide by the weekend rule. A station that moved more than the citywide rule names its own reason on its row.",
+        "The week on the line — every cause on the record this cycle, once: mild; weekend; First Friday; game day (Downtown, Jack London); events in Downtown ×3, Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.30); game day (Downtown); events in Downtown ×3, Lake Merritt, Temescal; events in Lake Merritt, Chinatown ×2; events in Fruitvale ×3; Fruitvale Transit Hub Phase II — Visioning: design-phase; BART train: medical hold on board in Fruitvale (last week); game day (Jack London); events in Jack London; BART train: signal failure in West Oakland (last week); events in Temescal; BART train: stalled train in Rockridge (last week); game day (Jack London, Downtown)",
+        "Weather this cycle: mild, 55°F (4 cycles of clear)",
+        "Game on the sports feed this cycle: Oaks at San Antonio — The Oaks' perfect start ends at four. In Indiana, in front of a building at 90% capacity, the Pacers built a 61-42 halftime lead behind a 34-point second quarter and led 82-62 after three. The Oaks answered with 38 points in the fourth and won the quarter 38-22, but the comeback came up four short, Pacers 104 - Oaks 100. Adash Stanley and Austin Reaves led the way with 19 apiece. Stanley hit 5 of 11 from three, and Reaves had 7 assists and 6 rebounds without a turnover. AJ Dybantsa added 15, Wendell Carter Jr. went 5 for 6 for 10 points and 7 rebounds, and T. Jerome chipped in 10 points and 5 assists. The Oaks fall to 4-1. (the rider lift is real only where a station row says \"game day\")",
+        "Game on the sports feed this cycle: Oaks at San Antonio — After the perfect start ended in Indiana, the Oaks went to Toronto and answered with the most lopsided win in franchise history, Oaks 135 - Raptors 75, in front of a 95% crowd. The Oaks led 39-19 after one, 73-40 at the half and 101-62 after three, and nobody played more than 28 minutes. Austin Reaves led with 20 on 4 of 6 from three, T. Jerome had 19 points, 7 rebounds and 7 assists, and Adash Stanley went 4 for 4 from three for 16 with 7 rebounds and 6 assists. Wendell Carter Jr. owned the glass with 14 points and 15 rebounds, 5 of them offensive. The Oaks shot 57 of 91, 19 of 28 from three, handed out 34 assists and turned it over only twice. The Oaks move to 5-1. (the rider lift is real only where a station row says \"game day\")",
+        "Game on the sports feed this cycle: Oaks at KONO — The Oaks opened their first NBA Cup run at home in front of a sold-out crowd and held off the Oklahoma City Thunder, 101-95, behind Dillon Brooks' biggest scoring night as an Oak. The Oaks led after every quarter but never by much: 35-30 after one, 63-60 at the half and 78-74 after a 15-14 third. Brooks played 39 minutes and scored 22 on 8 of 15, hitting 6 of 9 from three, with 4 rebounds, 5 assists, 2 steals, a block and one turnover. In a game this close, his threes kept Oklahoma City at arm's length. Adash Stanley added 21 and 6 assists and went 6 for 6 at the line, though he turned it over 6 times. Wendell Carter Jr. was nearly perfect, 8 of 9 for 19 points and 13 rebounds, and AJ Dybantsa ground out a 13-point, 10-rebound double-double on a 4 for 15 night. As a team the Oaks went 13 of 13 from the line. The Oaks move to 6-1 and 1-0 in Cup play. (the rider lift is real only where a station row says \"game day\")",
+        "No chaos car touched the trains or the transit agencies this cycle (Chaos_Cars rows read; none on bart_train, BART or AC Transit)",
+        "8 stations + 10 corridors on the record this cycle; total ridership 46,839 (C113: 46,520)",
+        "Coliseum: ridership 4,796 (-799 vs C113), on-time 81% (-1 pts) — mild; weekend; base: ledger; crowded platforms (city transit congestion 0.30)",
+        "19th St Oakland: ridership 10,752 (+740 vs C113), on-time 80% (-10 pts) — mild; weekend; base: ledger; First Friday; game day (Downtown); events in Downtown ×3, Lake Merritt, Temescal; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.30)",
+        "Lake Merritt: ridership 4,096 (-729 vs C113), on-time 76% (-11 pts) — mild; weekend; base: ledger; events in Lake Merritt, Chinatown ×2; crowded platforms (city transit congestion 0.30)",
+        "12th St Oakland City Center: ridership 10,011 (+670 vs C113), on-time 77% (-7 pts) — mild; weekend; base: ledger; First Friday; game day (Downtown, Jack London); events in Downtown ×3, Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.30)"
+      ],
+      "priorCycle": "PRIOR_CYCLE_IN_TABLE",
+      "note": null,
+      "engineHooks": [
+        "Early signals in Downtown: The Downtown Transit Snarl — Downtown under strain: transit disruption; housing pressure 10.00 (city 2.41) (historical reflection)",
+        "Story seed 1149f5fb (West Oakland): Sage Vienta, Beverly Hayes, Jada Rayes, Brenda Gonzalez — Sage Vienta — watched an old man feed pigeons like a ritual and wondered what theirs was; Beverly Hayes — attended a community feedback session fo",
+        "Story seed a1efa0e8 (Fruitvale): Esperanza Ruiz, Lena Okafor, Kaila Nguyen, Miguel Santos — Esperanza Ruiz — framed an old ticket stub that had finally earned its frame; Lena Okafor — the Oakland Alternative Response Initiative is making wa",
+        "Story seed 1b3c6537 (Rockridge): Jett Walker, Howard Perez, Tara Ellison, Latasha Rivera — Jett Walker — rewound the belt haul on the walk home and smiled at nothing in particular; Howard Perez — caught a stranger humming their song and fel"
+      ],
+      "roomIsYours": "the platform at 7:40, the operator's cab, who is late and why, what the fare gate sounds like, what a regular rider notices first",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF",
+    "runningStoriesNote": "signal.runningStories are events the city is already living through and where each one stands. Background only — write nothing about tracking them."
+  },
+  "signal": {
+    "kind": "beat-transit",
+    "hood": null,
+    "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+    "plan": {
+      "focus": "Coliseum's 799-rider drop against a citywide pattern that doesn't account for it — what the platform records don't say.",
+      "closeQuestion": "What does a station with no event pull and no construction say about the city's transit health — and what will it take for Coliseum to get a reason of its own?"
+    },
+    "runningStories": [
+      "The Downtown Transit Snarl [Downtown] — early, week 1",
+      "West Oakland Stabilization Fund — disbursement-active [West Oakland] — under way",
+      "Oakland Alternative Response Initiative — dispatch-live [West Oakland, Fruitvale, East Oakland] — under way",
+      "Fruitvale Transit Hub Phase II — Visioning — design-phase [Fruitvale] — under way",
+      "Temescal Community Health Center — operational [Temescal] — under way",
+      "Baylight District — Final Council Vote — construction-active [Jack London, Downtown] — under way",
+      "Oakland Youth Apprenticeship Pipeline — implementation-active [West Oakland, East Oakland, Fruitvale] — under way",
+      "Downtown Economic Revitalization — vote-scheduled [Downtown] — under way",
+      "Commercial Stabilization for Grand Lake — announced [Grand Lake] — under way",
+      "West Oakland Tenant Defense Fund — announced [West Oakland] — under way",
+      "Ivy Hill Revitalization Initiative — announced [Ivy Hill] — under way",
+      "Dimond Revitalization Initiative — announced [Dimond] — under way",
+      "Ivy Hill Community Revitalization — announced [Ivy Hill] — under way",
+      "Downtown Economic Revitalization — legislation-filed [Downtown] — ENDED this week; now vote-scheduled",
+      "Commercial Stabilization for Grand Lake — legislation-filed [Grand Lake] — ENDED this week; now announced",
+      "West Oakland Tenant Defense Fund — operational [West Oakland] — ENDED this week; now announced"
+    ]
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00200",
+        "name": "Evan Lewis",
+        "profile": "Evan Lewis — Bus driver — AC Transit",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00280",
+        "name": "Jerald Jensen",
+        "profile": "Jerald Jensen — Janitor — AC Transit",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00617",
+        "name": "Eleanor Rivera",
+        "profile": "Eleanor Rivera — BART Station Manager — BART Oakland Division",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00791",
+        "name": "Elena Soria Dominguez",
+        "profile": "Elena Soria Dominguez — Transit Hub Planning Lead — Fruitvale Transit Hub Authority",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00791-4e343eb844",
+        "pop": "POP-00791",
+        "name": "Elena Soria Dominguez",
+        "quote": "The documents show sightlines and path widths. They don't show the woman who sets up her cart at the panadería corner every morning, or the way riders slow down to talk to her even when the platform's crowded. Phase II's about geometry, but what I see is that people are already making this place theirs — the question is whether the design lets them keep doing that or just moves them through faster.",
+        "factIds": [
+          "F-864fb941c11c"
+        ],
+        "src": "packet.W2[POP-00791]"
+      },
+      {
+        "id": "Q-POP-00617-2fb6b216d1",
+        "pop": "POP-00617",
+        "name": "Eleanor Rivera",
+        "quote": "At 7:40 on a weekend morning at 12th Street, the shift is quiet in a different way than a weekday. The crowds aren't there, so you hear the announcements bounce off the tile more. And you notice the regulars — the ones who are always there, not the game-day rush. If riders didn't come, most of the time it's the weather or a holiday or something happening downtown. But I can't speak for Coliseum specifically — I wasn't there, and I don't have that platform's view. What I can tell you is that when a station drops more than the usual weekend pattern, it's rarely one thing. It's usually a rhythm stacking up — something at the station, something on the line, something in that neighborhood. But I'd be guessing if I told you where those riders went.",
+        "factIds": [
+          "F-c3a558a5eebc",
+          "F-b5a2467ec472",
+          "F-864fb941c11c"
+        ],
+        "src": "packet.W2[POP-00617]"
+      },
+      {
+        "id": "Q-POP-00280-b841095919",
+        "pop": "POP-00280",
+        "name": "Jerald Jensen",
+        "quote": "The schedule tells you how many people came through. It doesn't tell you why they left. When the Coliseum empties out like that on a weekend, I see it in the trash cans — fewer cups, fewer wrappers, fewer folks lingering after the last train. The platform records don't catch the quiet. They don't catch the feeling that people aren't just missing a train, they're missing a reason to be there. That's what I see.",
+        "factIds": [
+          "F-c3a558a5eebc",
+          "F-fe6ab4e258ae"
+        ],
+        "src": "packet.W2[POP-00280]"
+      },
+      {
+        "id": "Q-POP-00200-67003a328e",
+        "pop": "POP-00200",
+        "name": "Evan Lewis",
+        "quote": "Look, I drive that line past the Coliseum plenty, and you can feel it when something's off before you ever see it in a report. On a weekend, yeah, the whole city thins out a bit — that's just how it goes. But when you pull up to that station and it's quieter than it ought to be, even for a Saturday, you start wondering. It's not about the numbers on a page. It's about the folks who used to be standing there who aren't anymore — the ones who found another way, or who just stopped going where they used to go. The platform records don't tell you about them. They don't tell you about the family that used to catch that train to a game and decided it wasn't worth the hassle this month. That's what I see. That's what stays with me after I clock out. I've been doing this long enough to know that when a stop drops like that, it's never just one reason. But nobody's asking the folks who aren't there anymore why they stopped. That's the part the numbers can't say.",
+        "factIds": [
+          "F-c3a558a5eebc",
+          "F-fe6ab4e258ae"
+        ],
+        "src": "packet.W2[POP-00200]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Trevor Shimizu",
+        "text": "Coliseum's drop might tie to a pre-cycle event not on this cycle's row — a previous event or construction that has since been cleared from the ledger.",
+        "usable": false
+      },
+      {
+        "from": "Trevor Shimizu",
+        "text": "Crowded platforms at 0.30 could push riders to skip non-essential trips on weekends, and Coliseum, with no event pull, feels it first.",
+        "usable": false
+      },
+      {
+        "from": "Trevor Shimizu",
+        "text": "The medical hold at Fruitvale last week may still be in riders' memories, even though it reached the platforms this cycle — Coliseum riders could be avoiding the line altogether.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C114",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-4261fa115617"
+    },
+    {
+      "t": "FACT",
+      "text": "Coliseum ridership down 799 vs C113 | 8 stations + 10 corridors on the record",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+      "id": "F-c3a558a5eebc"
+    },
+    {
+      "t": "FACT",
+      "text": "Coliseum moved down the most this cycle — mild; weekend; base: ledger; crowded platforms (city transit congestion 0.30); 14 transit workers on the roster, 8 citizens who lived a transit line.",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+      "id": "F-fe6ab4e258ae"
+    },
+    {
+      "t": "FACT",
+      "text": "Day type this cycle: weekend — riders cut citywide by the weekend rule. A station that moved more than the citywide rule names its own reason on its row.",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 114 Factors (frame)",
+      "id": "F-b5a2467ec472"
+    },
+    {
+      "t": "FACT",
+      "text": "The week on the line — every cause on the record this cycle, once: mild; weekend; First Friday; game day (Downtown, Jack London); events in Downtown ×3, Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.30); game day (Downtown); events in Downtown ×3, Lake Merritt, Temescal; events in Lake Merritt, Chinatown ×2; events in Fruitvale ×3; Fruitvale Transit Hub Phase II — Visioning: design-phase; BART train: medical h",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 114 Factors",
+      "id": "F-864fb941c11c"
+    },
+    {
+      "t": "FACT",
+      "text": "Weather this cycle: mild, 55°F (4 cycles of clear)",
+      "src": "output/beats/Cycle_Weather.jsonl CycleID 114",
+      "id": "F-bf932e517031"
+    },
+    {
+      "t": "FACT",
+      "text": "Game on the sports feed this cycle: Oaks at San Antonio — The Oaks' perfect start ends at four. In Indiana, in front of a building at 90% capacity, the Pacers built a 61-42 halftime lead behind a 34-point second quarter and led 82-62 after three. The Oaks answered with 38 points in the fourth and won the quarter 38-22, but the comeback came up four short, Pacers 104 - Oaks 100. Adash Stanley and Austin Reaves led the way with 19 apiece. Stanley hit 5 of 11 from three, and Reaves had 7 assists an",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 114",
+      "id": "F-12f06b61a7ed"
+    },
+    {
+      "t": "FACT",
+      "text": "Game on the sports feed this cycle: Oaks at San Antonio — After the perfect start ended in Indiana, the Oaks went to Toronto and answered with the most lopsided win in franchise history, Oaks 135 - Raptors 75, in front of a 95% crowd. The Oaks led 39-19 after one, 73-40 at the half and 101-62 after three, and nobody played more than 28 minutes. Austin Reaves led with 20 on 4 of 6 from three, T. Jerome had 19 points, 7 rebounds and 7 assists, and Adash Stanley went 4 for 4 from three for 16 with",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 114",
+      "id": "F-d9f893d15444"
+    },
+    {
+      "t": "FACT",
+      "text": "Game on the sports feed this cycle: Oaks at KONO — The Oaks opened their first NBA Cup run at home in front of a sold-out crowd and held off the Oklahoma City Thunder, 101-95, behind Dillon Brooks' biggest scoring night as an Oak. The Oaks led after every quarter but never by much: 35-30 after one, 63-60 at the half and 78-74 after a 15-14 third. Brooks played 39 minutes and scored 22 on 8 of 15, hitting 6 of 9 from three, with 4 rebounds, 5 assists, 2 steals, a block and one turnover. In a game",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 114",
+      "id": "F-4df90eead524"
+    },
+    {
+      "t": "FACT",
+      "text": "No chaos car touched the trains or the transit agencies this cycle (Chaos_Cars rows read; none on bart_train, BART or AC Transit)",
+      "src": "output/world_summary_c114.md ## Chaos Events",
+      "id": "F-d4fe2f4a1b06"
+    },
+    {
+      "t": "FACT",
+      "text": "8 stations + 10 corridors on the record this cycle; total ridership 46,839 (C113: 46,520)",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+      "id": "F-e916d4094266"
+    },
+    {
+      "t": "FACT",
+      "text": "Coliseum: ridership 4,796 (-799 vs C113), on-time 81% (-1 pts) — mild; weekend; base: ledger; crowded platforms (city transit congestion 0.30)",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+      "id": "F-8f6803b499c8"
+    },
+    {
+      "t": "FACT",
+      "text": "19th St Oakland: ridership 10,752 (+740 vs C113), on-time 80% (-10 pts) — mild; weekend; base: ledger; First Friday; game day (Downtown); events in Downtown ×3, Lake Merritt, Temescal; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.30)",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+      "id": "F-fb0b3335068f"
+    },
+    {
+      "t": "FACT",
+      "text": "Lake Merritt: ridership 4,096 (-729 vs C113), on-time 76% (-11 pts) — mild; weekend; base: ledger; events in Lake Merritt, Chinatown ×2; crowded platforms (city transit congestion 0.30)",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+      "id": "F-552dd60d4a11"
+    },
+    {
+      "t": "FACT",
+      "text": "12th St Oakland City Center: ridership 10,011 (+670 vs C113), on-time 77% (-7 pts) — mild; weekend; base: ledger; First Friday; game day (Downtown, Jack London); events in Downtown ×3, Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.30)",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+      "id": "F-e92bd0f3de15"
+    },
+    {
+      "t": "FACT",
+      "text": "Fruitvale: ridership 5,063 (+510 vs C113), on-time 72% (-9 pts) — mild; weekend; base: ledger; events in Fruitvale ×3; Fruitvale Transit Hub Phase II — Visioning: design-phase; BART train: medical hold on board in Fruitvale (last week); crowded platforms (city transit congestion 0.30)",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+      "id": "F-31f2a90d3e07"
+    },
+    {
+      "t": "FACT",
+      "text": "Rockridge: ridership 3,287 (-219 vs C113), on-time 72% (-10 pts) — mild; weekend; base: ledger; BART train: stalled train in Rockridge (last week); crowded platforms (city transit congestion 0.30)",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+      "id": "F-6630145db16c"
+    },
+    {
+      "t": "FACT",
+      "text": "MacArthur: ridership 2,806 (+156 vs C113), on-time 79% (-9 pts) — mild; weekend; base: ledger; events in Temescal; crowded platforms (city transit congestion 0.30)",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+      "id": "F-239e0035be1f"
+    },
+    {
+      "t": "FACT",
+      "text": "West Oakland: ridership 6,028 (-10 vs C113), on-time 74% (-13 pts) — mild; weekend; base: ledger; game day (Jack London); events in Jack London; Baylight District — Final Council Vote: construction-active; BART train: signal failure in West Oakland (last week); crowded platforms (city transit congestion 0.30)",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+      "id": "F-8fd12599e794"
+    },
+    {
+      "t": "FACT",
+      "text": "I-880 North: traffic index 63 (-5 vs C113) — mild; weekend; base: ledger; game day (Jack London, Downtown); Baylight District — Final Council Vote: construction-active",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+      "id": "F-5075ea39f561"
+    },
+    {
+      "t": "FACT",
+      "text": "I-880 South: traffic index 54 (-15 vs C113) — mild; weekend; base: ledger",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+      "id": "F-0bf6d34125b4"
+    },
+    {
+      "t": "FACT",
+      "text": "I-580 East: traffic index 38 (-19 vs C113) — mild; weekend; base: ledger",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+      "id": "F-0eaa0095c846"
+    },
+    {
+      "t": "FACT",
+      "text": "I-580 West: traffic index 47 (-14 vs C113) — mild; weekend; base: ledger",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+      "id": "F-0a0d3f12ee39"
+    },
+    {
+      "t": "FACT",
+      "text": "I-980: traffic index 62 (-13 vs C113) — mild; weekend; base: ledger; game day (Downtown); Baylight District — Final Council Vote: construction-active",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+      "id": "F-088dfc56837b"
+    },
+    {
+      "t": "FACT",
+      "text": "Broadway: traffic index 65 (+18 vs C113) — mild; weekend; base: ledger; First Friday; game day (Downtown)",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+      "id": "F-ee3f76aac6b2"
+    },
+    {
+      "t": "FACT",
+      "text": "International Blvd: traffic index 47 (+0 vs C113) — mild; weekend; base: ledger",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+      "id": "F-b7a2a69cd59f"
+    },
+    {
+      "t": "FACT",
+      "text": "MacArthur Blvd: traffic index 43 (+0 vs C113) — mild; weekend; base: ledger",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+      "id": "F-24ba94137810"
+    },
+    {
+      "t": "FACT",
+      "text": "Telegraph Ave: traffic index 60 (+3 vs C113) — mild; weekend; base: ledger; First Friday; game day (Downtown)",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+      "id": "F-43e6ff021606"
+    },
+    {
+      "t": "FACT",
+      "text": "Grand Ave: traffic index 35 (-14 vs C113) — mild; weekend; base: ledger",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 114",
+      "id": "F-da3ec2cbc7de"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C10, Spring, holiday=none",
+      "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+      "id": "F-9b9470803821"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "trevor-infrastructure-systems-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Translate one Packet-backed transit or infrastructure condition into a clear systems consequence, while keeping timestamps, failures, causal links, and cascade warnings bounded by the supplied record.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "dry third-person infrastructure and transit systems analysis",
+      "targetWords": "500-800",
+      "opening": "a Packet-backed time, place, system condition, or implementation state",
+      "closing": "a bounded forward warning or maintenance question grounded in what remains unknown"
+    },
+    "authorizedTexture": [
+      "plain-language explanation of a Packet-backed infrastructure or transit condition",
+      "comparison of two supplied system facts when their relationship remains framed as analysis unless the Packet supplies causation",
+      "a restrained forward warning explicitly conditioned on supplied facts and declared missing evidence",
+      "unnamed physical texture at a Packet-backed or generic public site that adds no failure, delay, crowd, damage, or operational fact"
+    ],
+    "textureConditions": [
+      "every named person, place, route, station, system, agency, office, Project, Initiative, business, and organization must come from the Packet",
+      "a timestamp, duration, distance, load, capacity, delay, outage, closure, breakdown, maintenance event, or service change requires a supplied source",
+      "a cascade or shared-cause claim requires at least two supplied facts plus a Packet-backed link; otherwise it remains an open hypothesis",
+      "technical interpretation must use citizen-facing language and must not print raw engine labels, scores, fields, or decimals as public evidence"
+    ],
+    "canonBlockers": [
+      "an invented outage, closure, breakdown, delay, route, station, repair, inspection, maintenance event, service change, or infrastructure damage",
+      "an unsupported timestamp, duration, distance, capacity, load, count, budget, deadline, completion state, or performance metric",
+      "an unsupported causal link, cascade, responsible agency, duty, official act, official inaction, promise, or decision",
+      "a named person, place, route, station, system, agency, office, Project, Initiative, business, or organization not found in the supplied record",
+      "raw engine terminology or simulation values presented as an in-world technical measurement"
+    ]
+  },
+  "manifest": {
+    "id": "AM-9ac86b7e0ee0",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-4261fa115617",
+        "t": "FACT",
+        "text": "Current cycle: C114",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-c3a558a5eebc",
+        "t": "FACT",
+        "text": "Coliseum ridership down 799 vs C113 | 8 stations + 10 corridors on the record",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+      },
+      {
+        "id": "F-fe6ab4e258ae",
+        "t": "FACT",
+        "text": "Coliseum moved down the most this cycle — mild; weekend; base: ledger; crowded platforms (city transit congestion 0.30); 14 transit workers on the roster, 8 citizens who lived a transit line.",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+      },
+      {
+        "id": "F-b5a2467ec472",
+        "t": "FACT",
+        "text": "Day type this cycle: weekend — riders cut citywide by the weekend rule. A station that moved more than the citywide rule names its own reason on its row.",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114 Factors (frame)"
+      },
+      {
+        "id": "F-864fb941c11c",
+        "t": "FACT",
+        "text": "The week on the line — every cause on the record this cycle, once: mild; weekend; First Friday; game day (Downtown, Jack London); events in Downtown ×3, Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.30); game day (Downtown); events in Downtown ×3, Lake Merritt, Temescal; events in Lake Merritt, Chinatown ×2; events in Fruitvale ×3; Fruitvale Transit Hub Phase II — Visioning: design-phase; BART train: medical h",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114 Factors"
+      },
+      {
+        "id": "F-bf932e517031",
+        "t": "FACT",
+        "text": "Weather this cycle: mild, 55°F (4 cycles of clear)",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 114"
+      },
+      {
+        "id": "F-12f06b61a7ed",
+        "t": "FACT",
+        "text": "Game on the sports feed this cycle: Oaks at San Antonio — The Oaks' perfect start ends at four. In Indiana, in front of a building at 90% capacity, the Pacers built a 61-42 halftime lead behind a 34-point second quarter and led 82-62 after three. The Oaks answered with 38 points in the fourth and won the quarter 38-22, but the comeback came up four short, Pacers 104 - Oaks 100. Adash Stanley and Austin Reaves led the way with 19 apiece. Stanley hit 5 of 11 from three, and Reaves had 7 assists an",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 114"
+      },
+      {
+        "id": "F-d9f893d15444",
+        "t": "FACT",
+        "text": "Game on the sports feed this cycle: Oaks at San Antonio — After the perfect start ended in Indiana, the Oaks went to Toronto and answered with the most lopsided win in franchise history, Oaks 135 - Raptors 75, in front of a 95% crowd. The Oaks led 39-19 after one, 73-40 at the half and 101-62 after three, and nobody played more than 28 minutes. Austin Reaves led with 20 on 4 of 6 from three, T. Jerome had 19 points, 7 rebounds and 7 assists, and Adash Stanley went 4 for 4 from three for 16 with",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 114"
+      },
+      {
+        "id": "F-4df90eead524",
+        "t": "FACT",
+        "text": "Game on the sports feed this cycle: Oaks at KONO — The Oaks opened their first NBA Cup run at home in front of a sold-out crowd and held off the Oklahoma City Thunder, 101-95, behind Dillon Brooks' biggest scoring night as an Oak. The Oaks led after every quarter but never by much: 35-30 after one, 63-60 at the half and 78-74 after a 15-14 third. Brooks played 39 minutes and scored 22 on 8 of 15, hitting 6 of 9 from three, with 4 rebounds, 5 assists, 2 steals, a block and one turnover. In a game",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 114"
+      },
+      {
+        "id": "F-d4fe2f4a1b06",
+        "t": "FACT",
+        "text": "No chaos car touched the trains or the transit agencies this cycle (Chaos_Cars rows read; none on bart_train, BART or AC Transit)",
+        "src": "output/world_summary_c114.md ## Chaos Events"
+      },
+      {
+        "id": "F-e916d4094266",
+        "t": "FACT",
+        "text": "8 stations + 10 corridors on the record this cycle; total ridership 46,839 (C113: 46,520)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+      },
+      {
+        "id": "F-8f6803b499c8",
+        "t": "FACT",
+        "text": "Coliseum: ridership 4,796 (-799 vs C113), on-time 81% (-1 pts) — mild; weekend; base: ledger; crowded platforms (city transit congestion 0.30)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+      },
+      {
+        "id": "F-fb0b3335068f",
+        "t": "FACT",
+        "text": "19th St Oakland: ridership 10,752 (+740 vs C113), on-time 80% (-10 pts) — mild; weekend; base: ledger; First Friday; game day (Downtown); events in Downtown ×3, Lake Merritt, Temescal; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.30)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+      },
+      {
+        "id": "F-552dd60d4a11",
+        "t": "FACT",
+        "text": "Lake Merritt: ridership 4,096 (-729 vs C113), on-time 76% (-11 pts) — mild; weekend; base: ledger; events in Lake Merritt, Chinatown ×2; crowded platforms (city transit congestion 0.30)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+      },
+      {
+        "id": "F-e92bd0f3de15",
+        "t": "FACT",
+        "text": "12th St Oakland City Center: ridership 10,011 (+670 vs C113), on-time 77% (-7 pts) — mild; weekend; base: ledger; First Friday; game day (Downtown, Jack London); events in Downtown ×3, Lake Merritt, Jack London; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.30)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+      },
+      {
+        "id": "F-31f2a90d3e07",
+        "t": "FACT",
+        "text": "Fruitvale: ridership 5,063 (+510 vs C113), on-time 72% (-9 pts) — mild; weekend; base: ledger; events in Fruitvale ×3; Fruitvale Transit Hub Phase II — Visioning: design-phase; BART train: medical hold on board in Fruitvale (last week); crowded platforms (city transit congestion 0.30)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+      },
+      {
+        "id": "F-6630145db16c",
+        "t": "FACT",
+        "text": "Rockridge: ridership 3,287 (-219 vs C113), on-time 72% (-10 pts) — mild; weekend; base: ledger; BART train: stalled train in Rockridge (last week); crowded platforms (city transit congestion 0.30)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+      },
+      {
+        "id": "F-239e0035be1f",
+        "t": "FACT",
+        "text": "MacArthur: ridership 2,806 (+156 vs C113), on-time 79% (-9 pts) — mild; weekend; base: ledger; events in Temescal; crowded platforms (city transit congestion 0.30)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+      },
+      {
+        "id": "F-8fd12599e794",
+        "t": "FACT",
+        "text": "West Oakland: ridership 6,028 (-10 vs C113), on-time 74% (-13 pts) — mild; weekend; base: ledger; game day (Jack London); events in Jack London; Baylight District — Final Council Vote: construction-active; BART train: signal failure in West Oakland (last week); crowded platforms (city transit congestion 0.30)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+      },
+      {
+        "id": "F-5075ea39f561",
+        "t": "FACT",
+        "text": "I-880 North: traffic index 63 (-5 vs C113) — mild; weekend; base: ledger; game day (Jack London, Downtown); Baylight District — Final Council Vote: construction-active",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+      },
+      {
+        "id": "F-0bf6d34125b4",
+        "t": "FACT",
+        "text": "I-880 South: traffic index 54 (-15 vs C113) — mild; weekend; base: ledger",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+      },
+      {
+        "id": "F-0eaa0095c846",
+        "t": "FACT",
+        "text": "I-580 East: traffic index 38 (-19 vs C113) — mild; weekend; base: ledger",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+      },
+      {
+        "id": "F-0a0d3f12ee39",
+        "t": "FACT",
+        "text": "I-580 West: traffic index 47 (-14 vs C113) — mild; weekend; base: ledger",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+      },
+      {
+        "id": "F-088dfc56837b",
+        "t": "FACT",
+        "text": "I-980: traffic index 62 (-13 vs C113) — mild; weekend; base: ledger; game day (Downtown); Baylight District — Final Council Vote: construction-active",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+      },
+      {
+        "id": "F-ee3f76aac6b2",
+        "t": "FACT",
+        "text": "Broadway: traffic index 65 (+18 vs C113) — mild; weekend; base: ledger; First Friday; game day (Downtown)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+      },
+      {
+        "id": "F-b7a2a69cd59f",
+        "t": "FACT",
+        "text": "International Blvd: traffic index 47 (+0 vs C113) — mild; weekend; base: ledger",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+      },
+      {
+        "id": "F-24ba94137810",
+        "t": "FACT",
+        "text": "MacArthur Blvd: traffic index 43 (+0 vs C113) — mild; weekend; base: ledger",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+      },
+      {
+        "id": "F-43e6ff021606",
+        "t": "FACT",
+        "text": "Telegraph Ave: traffic index 60 (+3 vs C113) — mild; weekend; base: ledger; First Friday; game day (Downtown)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+      },
+      {
+        "id": "F-da3ec2cbc7de",
+        "t": "FACT",
+        "text": "Grand Ave: traffic index 35 (-14 vs C113) — mild; weekend; base: ledger",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 114"
+      },
+      {
+        "id": "F-9b9470803821",
+        "t": "FACT",
+        "text": "Calendar: Y3C10, Spring, holiday=none",
+        "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00791-4e343eb844",
+        "speakerId": "POP-00791",
+        "speakerName": "Elena Soria Dominguez",
+        "text": "The documents show sightlines and path widths. They don't show the woman who sets up her cart at the panadería corner every morning, or the way riders slow down to talk to her even when the platform's crowded. Phase II's about geometry, but what I see is that people are already making this place theirs — the question is whether the design lets them keep doing that or just moves them through faster.",
+        "factIds": [
+          "F-864fb941c11c"
+        ],
+        "src": "packet.W2[POP-00791]"
+      },
+      {
+        "id": "Q-POP-00617-2fb6b216d1",
+        "speakerId": "POP-00617",
+        "speakerName": "Eleanor Rivera",
+        "text": "At 7:40 on a weekend morning at 12th Street, the shift is quiet in a different way than a weekday. The crowds aren't there, so you hear the announcements bounce off the tile more. And you notice the regulars — the ones who are always there, not the game-day rush. If riders didn't come, most of the time it's the weather or a holiday or something happening downtown. But I can't speak for Coliseum specifically — I wasn't there, and I don't have that platform's view. What I can tell you is that when a station drops more than the usual weekend pattern, it's rarely one thing. It's usually a rhythm stacking up — something at the station, something on the line, something in that neighborhood. But I'd be guessing if I told you where those riders went.",
+        "factIds": [
+          "F-c3a558a5eebc",
+          "F-b5a2467ec472",
+          "F-864fb941c11c"
+        ],
+        "src": "packet.W2[POP-00617]"
+      },
+      {
+        "id": "Q-POP-00280-b841095919",
+        "speakerId": "POP-00280",
+        "speakerName": "Jerald Jensen",
+        "text": "The schedule tells you how many people came through. It doesn't tell you why they left. When the Coliseum empties out like that on a weekend, I see it in the trash cans — fewer cups, fewer wrappers, fewer folks lingering after the last train. The platform records don't catch the quiet. They don't catch the feeling that people aren't just missing a train, they're missing a reason to be there. That's what I see.",
+        "factIds": [
+          "F-c3a558a5eebc",
+          "F-fe6ab4e258ae"
+        ],
+        "src": "packet.W2[POP-00280]"
+      },
+      {
+        "id": "Q-POP-00200-67003a328e",
+        "speakerId": "POP-00200",
+        "speakerName": "Evan Lewis",
+        "text": "Look, I drive that line past the Coliseum plenty, and you can feel it when something's off before you ever see it in a report. On a weekend, yeah, the whole city thins out a bit — that's just how it goes. But when you pull up to that station and it's quieter than it ought to be, even for a Saturday, you start wondering. It's not about the numbers on a page. It's about the folks who used to be standing there who aren't anymore — the ones who found another way, or who just stopped going where they used to go. The platform records don't tell you about them. They don't tell you about the family that used to catch that train to a game and decided it wasn't worth the hassle this month. That's what I see. That's what stays with me after I clock out. I've been doing this long enough to know that when a stop drops like that, it's never just one reason. But nobody's asking the folks who aren't there anymore why they stopped. That's the part the numbers can't say.",
+        "factIds": [
+          "F-c3a558a5eebc",
+          "F-fe6ab4e258ae"
+        ],
+        "src": "packet.W2[POP-00200]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00200",
+        "name": "Evan Lewis",
+        "profile": "Evan Lewis — Bus driver — AC Transit",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00280",
+        "name": "Jerald Jensen",
+        "profile": "Jerald Jensen — Janitor — AC Transit",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00617",
+        "name": "Eleanor Rivera",
+        "profile": "Eleanor Rivera — BART Station Manager — BART Oakland Division",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00791",
+        "name": "Elena Soria Dominguez",
+        "profile": "Elena Soria Dominguez — Transit Hub Planning Lead — Fruitvale Transit Hub Authority",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Trevor Shimizu",
+        "text": "Coliseum's drop might tie to a pre-cycle event not on this cycle's row — a previous event or construction that has since been cleared from the ledger.",
+        "publishable": false
+      },
+      {
+        "from": "Trevor Shimizu",
+        "text": "Crowded platforms at 0.30 could push riders to skip non-essential trips on weekends, and Coliseum, with no event pull, feels it first.",
+        "publishable": false
+      },
+      {
+        "from": "Trevor Shimizu",
+        "text": "The medical hold at Fruitvale last week may still be in riders' memories, even though it reached the platforms this cycle — Coliseum riders could be avoiding the line altogether.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "plain-language explanation of a Packet-backed infrastructure or transit condition",
+      "comparison of two supplied system facts when their relationship remains framed as analysis unless the Packet supplies causation",
+      "a restrained forward warning explicitly conditioned on supplied facts and declared missing evidence",
+      "unnamed physical texture at a Packet-backed or generic public site that adds no failure, delay, crowd, damage, or operational fact"
+    ],
+    "textureConditions": [
+      "every named person, place, route, station, system, agency, office, Project, Initiative, business, and organization must come from the Packet",
+      "a timestamp, duration, distance, load, capacity, delay, outage, closure, breakdown, maintenance event, or service change requires a supplied source",
+      "a cascade or shared-cause claim requires at least two supplied facts plus a Packet-backed link; otherwise it remains an open hypothesis",
+      "technical interpretation must use citizen-facing language and must not print raw engine labels, scores, fields, or decimals as public evidence"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

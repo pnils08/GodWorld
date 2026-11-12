@@ -1,0 +1,61 @@
+{
+  "mode": "wake-write",
+  "desk": "business",
+  "cycle": "114",
+  "provider": "openrouter",
+  "model": "anthropic/claude-opus-5.5",
+  "configuredWriterModel": "anthropic/claude-opus-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "business-desk",
+  "byline": {
+    "name": "Jordan Velez",
+    "popid": "POP-00153",
+    "beatDomain": "ECONOMIC"
+  },
+  "laneEntries": 48,
+  "quotesLanded": 3,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "sheet_read",
+    "sheet_read",
+    "sheet_read"
+  ],
+  "toolCalls": 3,
+  "wordCount": 1033,
+  "targetWords": "500-800",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 500",
+    "words": 1033,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "57936812c1d170b8421005ecdf757a9ceaeb8a118a0943268d4c113ade9cb024",
+    "costUsd": 0.0014
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 4/4 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/business_c114_business-desk_packet-v2_anthropic-claude-opus-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "ebugging { debug: true }\n{\n  \"popId\": \"POP-00153\",\n  \"name\": \"Jordan Velez\",\n  \"recorded\": true,\n  \"text\": \"filed: The Board in the Trailer Says 9.5 Percent. Enzo Walker Is Counting Something Else.\"\n}"
+  },
+  "ranAt": "2026-11-04T07:40:15.449Z",
+  "dispositionReconciledAt": "2026-11-07T18:00:02.101Z"
+}

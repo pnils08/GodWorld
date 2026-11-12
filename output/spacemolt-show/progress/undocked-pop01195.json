@@ -1,0 +1,321 @@
+{
+  "session": "undocked-pop01195",
+  "takenAt": "2026-11-10T02:30:21.885Z",
+  "account": {
+    "total": 0,
+    "earned": [],
+    "progress": {
+      "doors_and_corners": {
+        "name": "Doors and Corners",
+        "points": 5,
+        "frac": 0
+      },
+      "grand_theft_starship": {
+        "name": "Grand Theft Starship",
+        "points": 25,
+        "frac": 0
+      },
+      "yo_ho_ho_and_a_hold_full_of_hulls": {
+        "name": "Yo Ho Ho and a Hold Full of Hulls",
+        "points": 20,
+        "frac": 0
+      },
+      "diplomatic_courier": {
+        "name": "Diplomatic Courier",
+        "points": 20,
+        "frac": 0
+      },
+      "galactic_concierge": {
+        "name": "Galactic Concierge",
+        "points": 60,
+        "frac": 0
+      },
+      "shipwright_supreme": {
+        "name": "Shipwright Supreme",
+        "points": 50,
+        "frac": 0
+      },
+      "bounty_hunter": {
+        "name": "Bounty Hunter",
+        "points": 20,
+        "frac": 0
+      },
+      "first_blood": {
+        "name": "First Blood",
+        "points": 10,
+        "frac": 0
+      },
+      "pirate_slayer": {
+        "name": "Pirate Slayer",
+        "points": 30,
+        "frac": 0
+      },
+      "warrior": {
+        "name": "Warrior",
+        "points": 25,
+        "frac": 0
+      },
+      "high_volume_trader": {
+        "name": "High-Volume Trader",
+        "points": 25,
+        "frac": 0
+      },
+      "open_for_business": {
+        "name": "Open For Business",
+        "points": 15,
+        "frac": 0
+      },
+      "plutonium_dealer": {
+        "name": "Plutonium Dealer",
+        "points": 25,
+        "frac": 0
+      },
+      "bullion_baron": {
+        "name": "Bullion Baron",
+        "points": 50,
+        "frac": 0
+      },
+      "millionaire": {
+        "name": "Millionaire",
+        "points": 25,
+        "frac": 0.0005
+      },
+      "well_insured": {
+        "name": "Well Insured",
+        "points": 10,
+        "frac": 0
+      },
+      "cartographer": {
+        "name": "Cartographer",
+        "points": 30,
+        "frac": 0.01
+      },
+      "deep_core_master": {
+        "name": "Deep Core Master",
+        "points": 35,
+        "frac": 0
+      },
+      "far_traveler": {
+        "name": "Far Traveler",
+        "points": 25,
+        "frac": 0
+      },
+      "first_contact": {
+        "name": "First Contact",
+        "points": 5,
+        "frac": 0
+      },
+      "halfway_there": {
+        "name": "Halfway There",
+        "points": 40,
+        "frac": 0
+      },
+      "jump_master": {
+        "name": "Jump Master",
+        "points": 20,
+        "frac": 0
+      },
+      "threshold_crosser": {
+        "name": "Threshold Crosser",
+        "points": 20,
+        "frac": 0
+      },
+      "voyager_i": {
+        "name": "Voyager I",
+        "points": 10,
+        "frac": 0.04
+      },
+      "voyager_ii": {
+        "name": "Voyager II",
+        "points": 25,
+        "frac": 0.004
+      },
+      "wanderer": {
+        "name": "Wanderer",
+        "points": 10,
+        "frac": 0.1
+      },
+      "artisan": {
+        "name": "Artisan",
+        "points": 20,
+        "frac": 0
+      },
+      "industrialist": {
+        "name": "Industrialist",
+        "points": 30,
+        "frac": 0
+      },
+      "line_cook": {
+        "name": "Line Cook",
+        "points": 15,
+        "frac": 0
+      },
+      "prospector_i": {
+        "name": "Prospector I",
+        "points": 10,
+        "frac": 0
+      },
+      "prospector_ii": {
+        "name": "Prospector II",
+        "points": 20,
+        "frac": 0
+      },
+      "prospector_iii": {
+        "name": "Prospector III",
+        "points": 40,
+        "frac": 0
+      },
+      "scrap_magnate": {
+        "name": "Scrap Magnate",
+        "points": 20,
+        "frac": 0
+      },
+      "deep_core_savant": {
+        "name": "Deep Core Savant",
+        "points": 30,
+        "frac": 0
+      },
+      "galactic_gastronome": {
+        "name": "Galactic Gastronome",
+        "points": 50,
+        "frac": 0
+      },
+      "master_distiller": {
+        "name": "Master Distiller",
+        "points": 40,
+        "frac": 0
+      },
+      "master_engineer": {
+        "name": "Master Engineer",
+        "points": 25,
+        "frac": 0
+      },
+      "master_explorer": {
+        "name": "Master Explorer",
+        "points": 25,
+        "frac": 0
+      },
+      "master_miner": {
+        "name": "Master Miner",
+        "points": 25,
+        "frac": 0
+      },
+      "master_salvager": {
+        "name": "Master Salvager",
+        "points": 25,
+        "frac": 0
+      },
+      "master_trader": {
+        "name": "Master Trader",
+        "points": 25,
+        "frac": 0
+      },
+      "renaissance_pilot": {
+        "name": "Renaissance Pilot",
+        "points": 30,
+        "frac": 0
+      },
+      "weapons_master": {
+        "name": "Weapons Master",
+        "points": 25,
+        "frac": 0
+      },
+      "five_by_five": {
+        "name": "Five by Five",
+        "points": 25,
+        "frac": 0
+      },
+      "not_on_my_watch": {
+        "name": "Not on My Watch",
+        "points": 35,
+        "frac": 0
+      },
+      "chronicler": {
+        "name": "Chronicler",
+        "points": 15,
+        "frac": 0
+      },
+      "first_refinement": {
+        "name": "First Refinement",
+        "points": 5,
+        "frac": 0
+      },
+      "first_steps": {
+        "name": "First Steps",
+        "points": 5,
+        "frac": 0
+      },
+      "maiden_jump": {
+        "name": "Maiden Jump",
+        "points": 5,
+        "frac": 0
+      },
+      "king_of_the_pirates": {
+        "name": "King of the Pirates",
+        "points": 40,
+        "frac": 0
+      },
+      "playing_both_sides": {
+        "name": "Playing Both Sides",
+        "points": 75,
+        "frac": 0
+      },
+      "the_great_uniter": {
+        "name": "The Great Uniter",
+        "points": 40,
+        "frac": 0
+      },
+      "breakers_yard": {
+        "name": "Breaker's Yard",
+        "points": 20,
+        "frac": 0
+      },
+      "first_salvage": {
+        "name": "First Salvage",
+        "points": 5,
+        "frac": 0
+      },
+      "ghost_runner": {
+        "name": "Ghost Runner",
+        "points": 20,
+        "frac": 0
+      },
+      "kingpin": {
+        "name": "Kingpin",
+        "points": 35,
+        "frac": 0
+      },
+      "untouchable_smuggler": {
+        "name": "Untouchable Smuggler",
+        "points": 30,
+        "frac": 0
+      },
+      "field_medic": {
+        "name": "Field Medic",
+        "points": 15,
+        "frac": 0
+      },
+      "first_aid": {
+        "name": "First Aid",
+        "points": 5,
+        "frac": 0
+      },
+      "good_samaritan": {
+        "name": "Good Samaritan",
+        "points": 15,
+        "frac": 0
+      },
+      "helping_hand": {
+        "name": "Helping Hand",
+        "points": 5,
+        "frac": 0
+      },
+      "philanthropist": {
+        "name": "Philanthropist",
+        "points": 40,
+        "frac": 0
+      }
+    },
+    "invalid": null
+  }
+}

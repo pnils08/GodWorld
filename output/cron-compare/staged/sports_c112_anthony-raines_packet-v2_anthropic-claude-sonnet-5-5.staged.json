@@ -1,0 +1,62 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "112",
+  "persona": "anthony-raines",
+  "byline": "Anthony Raines",
+  "bylinePopid": "POP-00017",
+  "article": "output/cron-compare/staged/sports_c112_anthony-raines_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Kevin Clark",
+        "role": "mentioned",
+        "popid": "POP-00053",
+        "floor": true
+      },
+      {
+        "name": "Mark Aitken",
+        "role": "mentioned",
+        "popid": "POP-00003",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Jack London"
+    ],
+    "claims": [
+      {
+        "claim": "A's · rumor — Mark Aitken pending free agency, is it Kevin Clarks time?",
+        "sourceRef": "world_summary_c112.md ## Sports"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-4c78c1506f62",
+    "draftSha256": "4926594fa9f6538b597b7ba12570b15402570068209c2fc14f559c3bc5f5e68d",
+    "verdict": "output/cron-compare/sports_c112_anthony-raines_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-10-19T23:19:58.354Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 934,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "4926594fa9f6538b597b7ba12570b15402570068209c2fc14f559c3bc5f5e68d",
+      "costUsd": 0.0063
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-19T23:20:17.060Z"
+}

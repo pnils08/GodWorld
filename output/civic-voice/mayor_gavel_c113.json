@@ -1,0 +1,156 @@
+{
+  "office": "mayor_gavel",
+  "cycle": 113,
+  "speaker": "Avery Santana",
+  "cascadeSummary": "I resolved all standing executive deliverables: published the Month-11 disbursement audit for INIT-001, the OARI quarterly outcome report for INIT-002, and the first cohort placement data for INIT-007, while clearing two citizen complaints from the executive ledger. I advanced the West Oakland Tenant Defense Fund to full council, filed both the Ivy Hill and Dimond revitalization initiatives, and directed OARI coordinators to produce Fruitvale corridor data per D3's condition.",
+  "statements": [
+    {
+      "statementId": "STMT-113-mayor_gavel-001",
+      "type": "executive_order",
+      "topic": "INIT-001 Month-11 Disbursement Audit Publication",
+      "initiative": "INIT-001",
+      "decision": "Month-11 disbursement audit published; Month-12 disbursement approved with charter renewal language directing Fund scope to remain fixed on long-tenure West Oakland cohort per Deputy Mayor Okoro's directive",
+      "quote": "Five million dollars in households' hands — and the books are open for anyone to read.",
+      "fullStatement": "This city delivers what it promises. The West Oakland Stabilization Fund's Month-11 disbursement audit is now public: $400,000 to 2 households, 23-day processing standard maintained, cumulative $5 million-plus disbursed since we started. I've approved Month-12 disbursement and directed Deputy Mayor Okoro's housing unit to draft charter renewal language that keeps this Fund locked on its purpose — long-tenure West Oakland residents priced out by the boom, not whoever needs a headline. The Fund works because it's targeted. That target stays.",
+      "trackerUpdates": {
+        "initiative": "INIT-001",
+        "ImplementationPhase": "disbursement-active",
+        "MilestoneNotes": "C113: Month-11 audit published; Month-12 $400K approved with charter scope preservation directive",
+        "NextScheduledAction": "Month-12 disbursement execution and charter renewal drafting",
+        "NextActionCycle": 114
+      }
+    },
+    {
+      "statementId": "STMT-113-mayor_gavel-002",
+      "type": "executive_order",
+      "topic": "INIT-002 OARI Quarterly Outcome Report and D3 Conditions",
+      "initiative": "INIT-002",
+      "decision": "Quarterly outcome report published; district-level data report accepted; D3 community briefing directed for East Oakland with Fruitvale corridor street-level response data requirement; Baylight District expansion feasibility review included per D5 request",
+      "quote": "Transparency builds trust — and specific data builds better response.",
+      "fullStatement": "The Oakland Alternative Response Initiative works, and now the numbers prove it. The quarterly outcome report is public. I've accepted the district-level data breakdown and directed the OARI coordination team to hold the D3 community briefing in East Oakland, not downtown — where the people who need to see this actually live. That briefing includes street-level response data for the Fruitvale corridor specifically, and a Baylight District expansion feasibility review. Councilmember Rivers asked for it, and she's right: we don't expand what we haven't examined.",
+      "trackerUpdates": {
+        "initiative": "INIT-002",
+        "ImplementationPhase": "dispatch-live",
+        "MilestoneNotes": "C113: Quarterly report published; D3 East Oakland briefing directed with Fruitvale data and Baylight feasibility review",
+        "NextScheduledAction": "D3 community briefing execution",
+        "NextActionCycle": 114
+      }
+    },
+    {
+      "statementId": "STMT-113-mayor_gavel-003",
+      "type": "executive_order",
+      "topic": "INIT-007 First Cohort Placement Data Publication",
+      "initiative": "INIT-007",
+      "decision": "First cohort placement report published; implementation accountability enforced per C111 mandate",
+      "quote": "Youth workforce is too critical to slip — I want answers, not excuses.",
+      "fullStatement": "The Oakland Youth Apprenticeship Pipeline's first cohort placement data is now public. I mandated this report in Cycle 111 because accountability isn't optional when we're talking about young people's futures. The numbers are what they are — and now we know where to push. My office will review placement rates against targets and direct adjustments where gaps show. This pipeline doesn't get to drift.",
+      "trackerUpdates": {
+        "initiative": "INIT-007",
+        "ImplementationPhase": "implementation-active",
+        "MilestoneNotes": "C113: First cohort placement report published; accountability review directed",
+        "NextScheduledAction": "Placement gap analysis and program adjustment",
+        "NextActionCycle": 114
+      }
+    },
+    {
+      "statementId": "STMT-113-mayor_gavel-004",
+      "type": "executive_order",
+      "topic": "INIT-005 First Quarterly Utilization Audit",
+      "initiative": "INIT-005",
+      "decision": "First quarterly utilization audit report filed to D7 office and public data portal per standing procedure adopted C112",
+      "quote": "Opened early and under budget — now we keep the doors open with data.",
+      "fullStatement": "The Temescal Community Health Center's first quarterly utilization audit is filed and public. Councilmember Ashford asked for benchmarks, and he got them: patient intake metrics, pre-opening clinical workflow audits, expenditure reconciliation. This center opened two weeks early and $1.2 million under budget. The audit ensures we stay that disciplined. The report lives on the public data portal. Anyone can read it.",
+      "trackerUpdates": {
+        "initiative": "INIT-005",
+        "ImplementationPhase": "operational",
+        "MilestoneNotes": "C113: First quarterly utilization audit filed to D7 and public portal",
+        "NextScheduledAction": "Second quarterly audit cycle",
+        "NextActionCycle": 116
+      }
+    },
+    {
+      "statementId": "STMT-113-mayor_gavel-005",
+      "type": "policy_position",
+      "topic": "INIT-010 West Oakland Tenant Defense Fund Committee Advancement",
+      "initiative": "INIT-010",
+      "decision": "Directed Housing and Community Development Committee to advance INIT-010 to full council with $4.2M legal defense appropriation intact per D1 directive",
+      "quote": "Legal defense is housing stability — and Oakland funds both.",
+      "fullStatement": "The West Oakland Tenant Defense Fund moves to full council. I've directed the committee to advance INIT-010 with its $4.2 million legal defense appropriation intact. Councilmember Carter's district knows what this means: lawyers in court keeping families in homes. This is not a study. This is defense. The full council votes next.",
+      "trackerUpdates": {
+        "initiative": "INIT-010",
+        "ImplementationPhase": "vote-ready",
+        "MilestoneNotes": "C113: Advanced to full council with $4.2M appropriation intact per mayoral directive",
+        "NextScheduledAction": "Full council vote",
+        "NextActionCycle": 114
+      }
+    },
+    {
+      "statementId": "STMT-113-mayor_gavel-006",
+      "type": "executive_order",
+      "topic": "INIT-011 and INIT-012 Legislation Filed",
+      "initiative": "INIT-011",
+      "decision": "Legislative ordinance for INIT-011 filed; INIT-012 filed simultaneously as paired revitalization initiative",
+      "quote": "Ivy Hill is hurting now — we answer with action, not studies.",
+      "fullStatement": "Ivy Hill's mood soured this cycle, and the street trade there is struggling. I filed the legislative ordinance for INIT-011 today — $2.5 million for direct revitalization investment, not another planning process. I also filed INIT-012 for Dimond, because when one neighborhood signals distress, we don't wait for the cascade. These are operational funds for operational problems. Council will see them next cycle.",
+      "trackerUpdates": {
+        "initiative": "INIT-011",
+        "ImplementationPhase": "legislation-filed",
+        "MilestoneNotes": "C113: Legislative ordinance filed; INIT-012 paired filing",
+        "NextScheduledAction": "Committee referral and hearing",
+        "NextActionCycle": 114
+      }
+    },
+    {
+      "statementId": "STMT-113-mayor_gavel-007",
+      "type": "policy_position",
+      "topic": "INIT-009 Commercial Stabilization for Grand Lake Committee Vote",
+      "initiative": "INIT-009",
+      "decision": "Directed Economic Development Committee vote YES to advance INIT-009 to full council with mandatory milestones and audit protocols per Chen/Vega conditions intact",
+      "quote": "Grand Lake's quiet engine gets fuel with strings attached — milestones and audits, because accountability and investment walk together.",
+      "fullStatement": "Commercial Stabilization for Grand Lake advances to full council. I've directed the Economic Development Committee to vote yes on INIT-009 — with Councilmember Chen's mandatory milestones and Council President Vega's audit protocols locked in. This is $2.5 million for small business survival, not largesse. The strings are the point. The full council gets this next.",
+      "trackerUpdates": {
+        "initiative": "INIT-009",
+        "ImplementationPhase": "vote-ready",
+        "MilestoneNotes": "C113: Advanced to full council with Chen/Vega milestone and audit conditions",
+        "NextScheduledAction": "Full council vote",
+        "NextActionCycle": 114
+      }
+    },
+    {
+      "statementId": "STMT-113-mayor_gavel-008",
+      "type": "policy_position",
+      "topic": "INIT-008 Downtown Economic Revitalization Committee Vote and Uptown Track",
+      "initiative": "INIT-008",
+      "decision": "Emergency Economic Development Committee convened; Uptown stabilization planning track committed for C114 with concrete timeline per D9 urgency request; Ashford benchmarks attached",
+      "quote": "Downtown waited long enough — and Uptown's next in line.",
+      "fullStatement": "The Downtown Economic Revitalization emergency committee hearing convened this cycle, and I've committed the Uptown stabilization planning track for Cycle 114 with a concrete timeline. Councilmember Mobley spoke for his district's urgency, and I heard him: Uptown's improvement is visible, but fragile. The $15 million authorization moves with Councilmember Ashford's benchmarks attached — because I don't spend money without knowing what success looks like. Downtown first, Uptown next, both with accountability.",
+      "trackerUpdates": {
+        "initiative": "INIT-008",
+        "ImplementationPhase": "vote-scheduled",
+        "MilestoneNotes": "C113: Emergency committee convened; Uptown track committed for C114 with concrete timeline",
+        "NextScheduledAction": "Uptown stabilization planning execution",
+        "NextActionCycle": 114
+      }
+    },
+    {
+      "statementId": "STMT-113-mayor_gavel-009",
+      "type": "public_remark",
+      "topic": "West Oakland Improvement Recognition and Credit",
+      "initiative": null,
+      "decision": "Publicly credited Deputy Mayor Okoro's housing unit for West Oakland's visible improvement; noted low-severity improvement flag in engine review",
+      "quote": "Somebody's work is paying off in West Oakland — I'm naming whose.",
+      "fullStatement": "West Oakland's mood is up this cycle. Storefronts steadier, street trade holding, the housing pressure not breaking through the way it could have. I'm naming whose work this is: Deputy Mayor Brenda Okoro's housing unit, running the Stabilization Fund with discipline and heart. Five million dollars in the right households' hands. The engine caught it — low-severity improvement, but improvement. In this city, we name the people doing the work. That's Okoro's team.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-113-mayor_gavel-010",
+      "type": "executive_order",
+      "topic": "Executive Ledger Citizen Complaints Resolution",
+      "initiative": null,
+      "decision": "Two standing citizen complaints on executive ledger resolved and recorded",
+      "quote": "Administrative stall is not how this office operates.",
+      "fullStatement": "Two citizen complaints cleared from the executive ledger this cycle. One concerned OARI response protocols in District 3 — addressed with the community briefing directive I issued today. One concerned Stabilization Fund eligibility documentation — addressed with the Month-11 audit publication and streamlined processing review. These sat too long. They don't sit anymore.",
+      "trackerUpdates": {}
+    }
+  ]
+}

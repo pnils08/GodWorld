@@ -1,0 +1,479 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "115",
+  "persona": "selena-grant",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00591",
+      "name": "Selena Grant",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Oaks — game-result C115 · 8-1 · W4 — the second club's board read",
+      "approach": "Oaks beat-analyst approach: this slice is the Oaks feed raw — the record, the streak, the stats lines, the trigger behind each event. Third-person board read on the second club, not fan heat. Numbers come from the feed only — never invent a stat. The named players are real; the press row, the cage, the bus are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "oaks",
+        "hood": "San Antonio",
+        "facts": [
+          "Oaks — game-result (early-season), C115: Down two after three in Philadelphia, the Oaks drop 40 in the fourth and Hayward scores a career high. Oaks 120 - 76ers 106",
+          "Record 8-1 · streak W4",
+          "Stats (feed): AJ Dybantsa/25PTS/6REB/10-16FG/3-3 3PT, Adash Stanley/23PTS/7ASST/8-13FG/5-7 3PT, Harry Hayward/19PTS/7REB/2BLK/9-15FG in 22 minutes, Wendell Carter Jr/12PTS/15REB/3OREB, T. Jerome/6PTS/9ASST, J. Champagnie/9PTS/3-5 3PT, Austin Reaves/12PTS/4-14FG",
+          "Trigger: big-win",
+          "Franchise stability: growing",
+          "Oaks — game-result (early-season), C115: The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+          "Record 7-1 · streak W3",
+          "Stats (feed): Adash Stanley/24PTS/5REB/8ASST/0TO/9-18FG/6-12 3PT, AJ Dybantsa/23PTS/5REB/4ASST/11-13FG, Dillon Brooks/23PTS/4REB/3ASST/10-14FG/3-5 3PT, Austin Reaves/15PTS/7ASST/5-10 3PT, Wendell Carter Jr/12PTS/5REB/6-10FG, T. Jerome/9PTS/7ASST, Harry Hayward/5PTS/2STL/1BLK in 16 minutes",
+          "Oaks — player-feature (early-season), C115: Second-round rookie Harry Hayward scores a career high and makes his case for a bigger role",
+          "Stats (feed): Harry Hayward PHI/19PTS/7REB/2BLK/9-15FG in 22 minutes, Harry Hayward ORL/5PTS/2STL/1BLK in 16 minutes, Harry Hayward OKC/4PTS/1STL/2-3FG in 13 minutes, Harry Hayward TOR/8PTS/5REB/3ASST in 23 minutes, Harry Hayward IND/8PTS/3-4FG in 13 minutes, Harry Hayward NYK/10PTS/10REB, Harry Hayward DET/12PTS, Harry Hayward/$4.5M"
+        ],
+        "priorCycle": null,
+        "note": null,
+        "engineHooks": [],
+        "roomIsYours": "the near-empty press row, the bullpen chatter, what the manager says when the record is ugly, the drumbeat of a losing streak",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-oaks-beat",
+      "hood": "San Antonio",
+      "score": null,
+      "src": "output/beats/Oakland_Sports_Feed.jsonl @C115",
+      "nearby": [
+        {
+          "text": "A's | roster-move | (off-season) | Vinnie Keane",
+          "src": "Oakland_Sports_Feed cycle 115; rendered: world_summary_c115.md \"## Sports\" C115 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | community-outreach | (off-season) | Darrin Davis, Rafael Montez",
+          "src": "Oakland_Sports_Feed cycle 115; rendered: world_summary_c115.md \"## Sports\" C115 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (off-season) | Eric Taveras, Vinnie Keane",
+          "src": "Oakland_Sports_Feed cycle 115; rendered: world_summary_c115.md \"## Sports\" C115 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | rumor | (off-season) | Jose Colon, Sergio Aybar, Marco Fabregas, Mike Paulson",
+          "src": "Oakland_Sports_Feed cycle 115; rendered: world_summary_c115.md \"## Sports\" C115 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | player-feature | (early-season) | Harry Hayward, Wilson Shepard",
+          "src": "Oakland_Sports_Feed cycle 115; rendered: world_summary_c115.md \"## Sports\" C115 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": []
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C115",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-bc84fc0b7718"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks — game-result C115 · 8-1 · W4",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C115",
+        "id": "F-f6d7083127b6"
+      },
+      {
+        "t": "FACT",
+        "text": "Down two after three in Philadelphia, the Oaks drop 40 in the fourth and Hayward scores a career high. Oaks 120 - 76ers 106",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C115",
+        "id": "F-5dad288325f0"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks — game-result (early-season), C115: Down two after three in Philadelphia, the Oaks drop 40 in the fourth and Hayward scores a career high. Oaks 120 - 76ers 106",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C115",
+        "id": "F-3a5f97110a9a"
+      },
+      {
+        "t": "FACT",
+        "text": "Record 8-1 · streak W4",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C115",
+        "id": "F-bfb5c87ae9f6"
+      },
+      {
+        "t": "FACT",
+        "text": "Stats (feed): AJ Dybantsa/25PTS/6REB/10-16FG/3-3 3PT, Adash Stanley/23PTS/7ASST/8-13FG/5-7 3PT, Harry Hayward/19PTS/7REB/2BLK/9-15FG in 22 minutes, Wendell Carter Jr/12PTS/15REB/3OREB, T. Jerome/6PTS/9ASST, J. Champagnie/9PTS/3-5 3PT, Austin Reaves/12PTS/4-14FG",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C115",
+        "id": "F-a8d20ea64c9e"
+      },
+      {
+        "t": "FACT",
+        "text": "Trigger: big-win",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C115",
+        "id": "F-4b2d60da7720"
+      },
+      {
+        "t": "FACT",
+        "text": "Franchise stability: growing",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C115",
+        "id": "F-375347469173"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks — game-result (early-season), C115: The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C115",
+        "id": "F-834748048c35"
+      },
+      {
+        "t": "FACT",
+        "text": "Record 7-1 · streak W3",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C115",
+        "id": "F-d858eaf16a9c"
+      },
+      {
+        "t": "FACT",
+        "text": "Stats (feed): Adash Stanley/24PTS/5REB/8ASST/0TO/9-18FG/6-12 3PT, AJ Dybantsa/23PTS/5REB/4ASST/11-13FG, Dillon Brooks/23PTS/4REB/3ASST/10-14FG/3-5 3PT, Austin Reaves/15PTS/7ASST/5-10 3PT, Wendell Carter Jr/12PTS/5REB/6-10FG, T. Jerome/9PTS/7ASST, Harry Hayward/5PTS/2STL/1BLK in 16 minutes",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C115",
+        "id": "F-585cdd97b117"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks — player-feature (early-season), C115: Second-round rookie Harry Hayward scores a career high and makes his case for a bigger role",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C115",
+        "id": "F-f50a3e6cb962"
+      },
+      {
+        "t": "FACT",
+        "text": "Stats (feed): Harry Hayward PHI/19PTS/7REB/2BLK/9-15FG in 22 minutes, Harry Hayward ORL/5PTS/2STL/1BLK in 16 minutes, Harry Hayward OKC/4PTS/1STL/2-3FG in 13 minutes, Harry Hayward TOR/8PTS/5REB/3ASST in 23 minutes, Harry Hayward IND/8PTS/3-4FG in 13 minutes, Harry Hayward NYK/10PTS/10REB, Harry Hayward DET/12PTS, Harry Hayward/$4.5M",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C115",
+        "id": "F-530d63b62c83"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "No target candidate was supplied. Return targets as an empty array; do not invent a person or identifier. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "records",
+    "candidates": [],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Selena Grant",
+    "popid": "POP-00591"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-oaks-beat",
+      "angle": "Oaks — game-result C115 · 8-1 · W4 — the second club's board read",
+      "label": "Oaks — game-result C115 · 8-1 · W4",
+      "hookLine": "Down two after three in Philadelphia, the Oaks drop 40 in the fourth and Hayward scores a career high. Oaks 120 - 76ers 106",
+      "hood": "San Antonio",
+      "citizens": [
+        "Adash Stanley (POP-01023)",
+        "Harry Hayward (POP-01223)",
+        "Dillon Brooks (POP-01079)",
+        "Austin Reaves (POP-01027)",
+        "Wilson Shepard (POP-01022)"
+      ],
+      "popids": [
+        "POP-01023",
+        "POP-01223",
+        "POP-01079",
+        "POP-01027",
+        "POP-01022"
+      ],
+      "ref": "output/beats/Oakland_Sports_Feed.jsonl @C115",
+      "cycle": 115
+    },
+    "approach": "Oaks beat-analyst approach: this slice is the Oaks feed raw — the record, the streak, the stats lines, the trigger behind each event. Third-person board read on the second club, not fan heat. Numbers come from the feed only — never invent a stat. The named players are real; the press row, the cage, the bus are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "OAKS-BEAT-1",
+    "kind": "beat-oaks-beat",
+    "seat": {
+      "slug": "selena-grant",
+      "name": "Selena Grant",
+      "popid": "POP-00591",
+      "desk": "sports",
+      "domain": "oaks",
+      "builder": "buildOaksBeatSlice.js"
+    },
+    "hood": "San Antonio",
+    "pulse": {
+      "className": "beat-oaks-beat",
+      "score": 100,
+      "label": "Oaks — game-result C115 · 8-1 · W4",
+      "hood": "San Antonio",
+      "source": "output/beats/Oakland_Sports_Feed.jsonl @C115"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "Oaks — game-result C115 · 8-1 · W4 — the second club's board read",
+      "hookLine": "Down two after three in Philadelphia, the Oaks drop 40 in the fourth and Hayward scores a career high. Oaks 120 - 76ers 106",
+      "anchorFacts": [
+        "Oaks — game-result (early-season), C115: Down two after three in Philadelphia, the Oaks drop 40 in the fourth and Hayward scores a career high. Oaks 120 - 76ers 106",
+        "Record 8-1 · streak W4",
+        "Stats (feed): AJ Dybantsa/25PTS/6REB/10-16FG/3-3 3PT, Adash Stanley/23PTS/7ASST/8-13FG/5-7 3PT, Harry Hayward/19PTS/7REB/2BLK/9-15FG in 22 minutes, Wendell Carter Jr/12PTS/15REB/3OREB, T. Jerome/6PTS/9ASST, J. Champagnie/9PTS/3-5 3PT, Austin Reaves/12PTS/4-14FG",
+        "Trigger: big-win",
+        "Franchise stability: growing",
+        "Oaks — game-result (early-season), C115: The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+        "Record 7-1 · streak W3",
+        "Stats (feed): Adash Stanley/24PTS/5REB/8ASST/0TO/9-18FG/6-12 3PT, AJ Dybantsa/23PTS/5REB/4ASST/11-13FG, Dillon Brooks/23PTS/4REB/3ASST/10-14FG/3-5 3PT, Austin Reaves/15PTS/7ASST/5-10 3PT, Wendell Carter Jr/12PTS/5REB/6-10FG, T. Jerome/9PTS/7ASST, Harry Hayward/5PTS/2STL/1BLK in 16 minutes",
+        "Trigger: big-win",
+        "Franchise stability: growing",
+        "Oaks — player-feature (early-season), C115: Second-round rookie Harry Hayward scores a career high and makes his case for a bigger role",
+        "Record 8-1 · streak W4",
+        "Stats (feed): Harry Hayward PHI/19PTS/7REB/2BLK/9-15FG in 22 minutes, Harry Hayward ORL/5PTS/2STL/1BLK in 16 minutes, Harry Hayward OKC/4PTS/1STL/2-3FG in 13 minutes, Harry Hayward TOR/8PTS/5REB/3ASST in 23 minutes, Harry Hayward IND/8PTS/3-4FG in 13 minutes, Harry Hayward NYK/10PTS/10REB, Harry Hayward DET/12PTS, Harry Hayward/$4.5M",
+        "Franchise stability: growing"
+      ],
+      "evidence": [
+        {
+          "text": "Oaks — game-result (early-season), C115: Down two after three in Philadelphia, the Oaks drop 40 in the fourth and Hayward scores a career high. Oaks 120 - 76ers 106",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+        },
+        {
+          "text": "Record 8-1 · streak W4",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+        },
+        {
+          "text": "Stats (feed): AJ Dybantsa/25PTS/6REB/10-16FG/3-3 3PT, Adash Stanley/23PTS/7ASST/8-13FG/5-7 3PT, Harry Hayward/19PTS/7REB/2BLK/9-15FG in 22 minutes, Wendell Carter Jr/12PTS/15REB/3OREB, T. Jerome/6PTS/9ASST, J. Champagnie/9PTS/3-5 3PT, Austin Reaves/12PTS/4-14FG",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+        },
+        {
+          "text": "Trigger: big-win",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+        },
+        {
+          "text": "Franchise stability: growing",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+        },
+        {
+          "text": "Oaks — game-result (early-season), C115: The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+        },
+        {
+          "text": "Record 7-1 · streak W3",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+        },
+        {
+          "text": "Stats (feed): Adash Stanley/24PTS/5REB/8ASST/0TO/9-18FG/6-12 3PT, AJ Dybantsa/23PTS/5REB/4ASST/11-13FG, Dillon Brooks/23PTS/4REB/3ASST/10-14FG/3-5 3PT, Austin Reaves/15PTS/7ASST/5-10 3PT, Wendell Carter Jr/12PTS/5REB/6-10FG, T. Jerome/9PTS/7ASST, Harry Hayward/5PTS/2STL/1BLK in 16 minutes",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+        },
+        {
+          "text": "Trigger: big-win",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+        },
+        {
+          "text": "Franchise stability: growing",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+        },
+        {
+          "text": "Oaks — player-feature (early-season), C115: Second-round rookie Harry Hayward scores a career high and makes his case for a bigger role",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+        },
+        {
+          "text": "Record 8-1 · streak W4",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+        },
+        {
+          "text": "Stats (feed): Harry Hayward PHI/19PTS/7REB/2BLK/9-15FG in 22 minutes, Harry Hayward ORL/5PTS/2STL/1BLK in 16 minutes, Harry Hayward OKC/4PTS/1STL/2-3FG in 13 minutes, Harry Hayward TOR/8PTS/5REB/3ASST in 23 minutes, Harry Hayward IND/8PTS/3-4FG in 13 minutes, Harry Hayward NYK/10PTS/10REB, Harry Hayward DET/12PTS, Harry Hayward/$4.5M",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+        },
+        {
+          "text": "Franchise stability: growing",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C115"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": null,
+      "hooks": [],
+      "note": null,
+      "pageVoices": [],
+      "roomIsYours": "the near-empty press row, the bullpen chatter, what the manager says when the record is ugly, the drumbeat of a losing streak"
+    },
+    "citizens": [
+      {
+        "popid": "POP-01023",
+        "name": "Adash Stanley",
+        "role": "PG / The Oaks ",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Adash Stanley — PG / The Oaks  — Downtown",
+        "why": "named on the Oaks feed C115 (Oakland_Sports_Feed)"
+      },
+      {
+        "popid": "POP-01223",
+        "name": "Harry Hayward",
+        "role": "Oakland Oaks - Power Forward",
+        "neighborhood": "KONO",
+        "business": null,
+        "profile": "Harry Hayward — Oakland Oaks - Power Forward — KONO",
+        "why": "named on the Oaks feed C115 (Oakland_Sports_Feed)"
+      },
+      {
+        "popid": "POP-01079",
+        "name": "Dillon Brooks",
+        "role": "SF / The Oaks",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "Dillon Brooks — SF / The Oaks — West Oakland",
+        "why": "named on the Oaks feed C115 (Oakland_Sports_Feed)"
+      },
+      {
+        "popid": "POP-01027",
+        "name": "Austin Reaves",
+        "role": "SG / The Oaks",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "Austin Reaves — SG / The Oaks — West Oakland",
+        "why": "named on the Oaks feed C115 (Oakland_Sports_Feed)"
+      },
+      {
+        "popid": "POP-01022",
+        "name": "Wilson Shepard",
+        "role": "Head Coach, Oakland Oaks",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "Wilson Shepard — Head Coach, Oakland Oaks — West Oakland",
+        "why": "named on the Oaks feed C115 (Oakland_Sports_Feed)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Oakland_Sports_Feed.jsonl @C115"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Selena Grant",
+    "popid": "POP-00591",
+    "text": "I'm going to track down Harry Hayward and the coaching staff to understand the impact of his recent performances on his role in the team. The Oaks' win streak and Hayward's career-high score against the 76ers suggest he's making a case for more playing time.",
+    "plan": {
+      "chase": "I'm going to track down Harry Hayward and the coaching staff to understand the impact of his recent performances on his role in the team. The Oaks' win streak and Hayward's career-high score against the 76ers suggest he's making a case for more playing time.",
+      "focus": "Harry Hayward's growing role",
+      "why": "Hayward's recent performances have been impressive, and he's making a strong case for a bigger role in the team. Understanding the coaching staff's perspective on his development will provide insight into the team's strategy.",
+      "checks": [
+        "Review game footage",
+        "Speak with coaching staff",
+        "Interview Harry Hayward"
+      ],
+      "targets": [],
+      "interpretation": "The Oaks' current win streak and Harry Hayward's standout performances indicate a positive trend for the team. Hayward's growth could be a key factor in their success.",
+      "unverifiedLead": [
+        "If Hayward continues to perform well, he may become a regular starter, potentially changing the team's dynamics."
+      ],
+      "closeQuestion": "How will the coaching staff respond to Hayward's recent performances, and will he secure a more significant role in the team?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "A's | roster-move | (off-season) | Vinnie Keane",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 115; rendered: world_summary_c115.md \"## Sports\" C115 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00001"
+      ]
+    },
+    {
+      "label": "A's | community-outreach | (off-season) | Darrin Davis, Rafael Montez",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 115; rendered: world_summary_c115.md \"## Sports\" C115 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00021",
+        "POP-00136"
+      ]
+    },
+    {
+      "label": "A's | player-feature | (off-season) | Eric Taveras, Vinnie Keane",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 115; rendered: world_summary_c115.md \"## Sports\" C115 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00597",
+        "POP-00001"
+      ]
+    },
+    {
+      "label": "A's | rumor | (off-season) | Jose Colon, Sergio Aybar, Marco Fabregas, Mike Paulson",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 115; rendered: world_summary_c115.md \"## Sports\" C115 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00599",
+        "POP-00078",
+        "POP-00060",
+        "POP-00527"
+      ]
+    },
+    {
+      "label": "Oaks | player-feature | (early-season) | Harry Hayward, Wilson Shepard",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 115; rendered: world_summary_c115.md \"## Sports\" C115 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01223",
+        "POP-01022"
+      ]
+    }
+  ],
+  "laneEntries": 12,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-10T12:16:47.155Z"
+}

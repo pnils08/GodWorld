@@ -1,0 +1,397 @@
+{
+  "stage": "report",
+  "desk": "sports",
+  "cycle": "112",
+  "persona": "simon-leary",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Simon Leary",
+    "popid": "POP-00016"
+  },
+  "assignment": {
+    "story": {
+      "angle": "The Oaks record is 1-0.",
+      "label": "The Oaks record is 1-0.",
+      "hookLine": "The Oaks record is 1-0.",
+      "kind": "long-view-signal",
+      "hood": "KONO",
+      "popids": [
+        "POP-01023",
+        "POP-01027"
+      ],
+      "citizens": [
+        "Adash Stanley (POP-01023)",
+        "Austin Reaves (POP-01027)"
+      ],
+      "ref": "world_summary_c112.md ## Sports",
+      "cycle": 112
+    }
+  },
+  "angle": "output/cron-compare/sports_c112_simon-leary_packet-v2_angle.json",
+  "quotesRequested": 2,
+  "quotesLanded": 1,
+  "quotes": [
+    {
+      "pop": "POP-01027",
+      "name": "Austin Reaves",
+      "quote": "One win is one win. I'm not going to pretend it settles anything — we're still figuring out who we are out there. But it does feel good to have something to build on, you know? The role stuff, that's a conversation that's still happening, and I'm okay with that. I'd rather earn it than have it handed to me. We've got a long season ahead, and I trust the process.",
+      "disp": "a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "{\"answer\":\"quote\",\"quote\":\"One win is one win. I'm not going to pretend it settles anything — we're still figuring out who we are out there. But it does feel good to have something to build on, you know? The role stuff, that's a conversation that's still happening, and I'm okay with that. I'd rather earn it than have it handed to me. We've got a long season ahead, and I trust the process.\",\"fact_ids\":[\"F-69a60b207537\",\"F-6dbd88757b64\"],\"basis\":\"lived-context\",\"unverifiedLead\":null,\"abstain_reason\":null}",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-69a60b207537",
+          "F-6dbd88757b64"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01027-6e1f4a267e",
+        "authoredQuote": true,
+        "publishableQuote": "One win is one win. I'm not going to pretend it settles anything — we're still figuring out who we are out there. But it does feel good to have something to build on, you know? The role stuff, that's a conversation that's still happening, and I'm okay with that. I'd rather earn it than have it handed to me. We've got a long season ahead, and I trust the process."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01027",
+          "name": "Austin Reaves",
+          "role": "SG / The Oaks",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Simon Leary",
+          "question": "After one straight win, does the role change feel like a settled fact or a live question you're still carrying? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "long-view-signal",
+          "hood": "KONO",
+          "focus": "How a single win and a single straight streak can hold a role change without yet meaning anything beyond the present structure.",
+          "src": "world_summary_c112.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Austin Reaves — SG / The Oaks",
+          "evidence": [
+            {
+              "id": "EV-45a04fecfc",
+              "src": "world_summary_c112.md ## Sports",
+              "text": "The Oaks record is 1-0."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks record is 1-0.",
+            "src": "world_summary_c112.md ## Sports",
+            "id": "F-69a60b207537"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks have won 1 straight.",
+            "src": "world_summary_c112.md ## Sports",
+            "id": "F-6dbd88757b64"
+          },
+          {
+            "t": "FACT",
+            "text": "Austin Reaves — SG / The Oaks",
+            "src": "Simulation_Ledger profile for POP-01027",
+            "id": "F-d653907c94cf"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-01023",
+      "name": "Adash Stanley",
+      "quote": null,
+      "disp": "a real fan, plans around games",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: direct reaction exceeds 80 words; direct reaction must be one to four sentences",
+      "raw": "{\"answer\":\"quote\",\"quote\":\"Honestly, I didn't feel the floor shift under me. One win is one win — it's a good start, but it's not like the whole structure changed overnight. We're still figuring out how we fit together, and that takes more than a single game to sort out. The win feels good, sure, but I'm not about to pretend it means everything's solved. We've got a long season ahead, and the real test is whether we can build on this and keep that rhythm going.\",\"fact_ids\":[\"F-69a60b207537\",\"F-6dbd88757b64\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":null,\"abstain_reason\":null}",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01023",
+          "name": "Adash Stanley",
+          "role": "PG / The Oaks",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Simon Leary",
+          "question": "When the role change happened, did the structure of the backcourt feel like it shifted under you, or did the single win make the shift feel like a non-event? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "long-view-signal",
+          "hood": "KONO",
+          "focus": "How a single win and a single straight streak can hold a role change without yet meaning anything beyond the present structure.",
+          "src": "world_summary_c112.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Adash Stanley — PG / The Oaks",
+          "evidence": [
+            {
+              "id": "EV-63a0251642",
+              "src": "world_summary_c112.md ## Sports",
+              "text": "The Oaks record is 1-0."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks record is 1-0.",
+            "src": "world_summary_c112.md ## Sports",
+            "id": "F-69a60b207537"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks have won 1 straight.",
+            "src": "world_summary_c112.md ## Sports",
+            "id": "F-6dbd88757b64"
+          },
+          {
+            "t": "FACT",
+            "text": "Adash Stanley — PG / The Oaks",
+            "src": "Simulation_Ledger profile for POP-01023",
+            "id": "F-1164a6e4fd0d"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01027",
+      "name": "Austin Reaves",
+      "quote": "One win is one win. I'm not going to pretend it settles anything — we're still figuring out who we are out there. But it does feel good to have something to build on, you know? The role stuff, that's a conversation that's still happening, and I'm okay with that. I'd rather earn it than have it handed to me. We've got a long season ahead, and I trust the process.",
+      "disp": "a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "{\"answer\":\"quote\",\"quote\":\"One win is one win. I'm not going to pretend it settles anything — we're still figuring out who we are out there. But it does feel good to have something to build on, you know? The role stuff, that's a conversation that's still happening, and I'm okay with that. I'd rather earn it than have it handed to me. We've got a long season ahead, and I trust the process.\",\"fact_ids\":[\"F-69a60b207537\",\"F-6dbd88757b64\"],\"basis\":\"lived-context\",\"unverifiedLead\":null,\"abstain_reason\":null}",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-69a60b207537",
+          "F-6dbd88757b64"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01027-6e1f4a267e",
+        "authoredQuote": true,
+        "publishableQuote": "One win is one win. I'm not going to pretend it settles anything — we're still figuring out who we are out there. But it does feel good to have something to build on, you know? The role stuff, that's a conversation that's still happening, and I'm okay with that. I'd rather earn it than have it handed to me. We've got a long season ahead, and I trust the process."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01027",
+          "name": "Austin Reaves",
+          "role": "SG / The Oaks",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Simon Leary",
+          "question": "After one straight win, does the role change feel like a settled fact or a live question you're still carrying? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "long-view-signal",
+          "hood": "KONO",
+          "focus": "How a single win and a single straight streak can hold a role change without yet meaning anything beyond the present structure.",
+          "src": "world_summary_c112.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Austin Reaves — SG / The Oaks",
+          "evidence": [
+            {
+              "id": "EV-45a04fecfc",
+              "src": "world_summary_c112.md ## Sports",
+              "text": "The Oaks record is 1-0."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C112",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-7cd6ffd2aeb3"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks record is 1-0.",
+            "src": "world_summary_c112.md ## Sports",
+            "id": "F-69a60b207537"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks have won 1 straight.",
+            "src": "world_summary_c112.md ## Sports",
+            "id": "F-6dbd88757b64"
+          },
+          {
+            "t": "FACT",
+            "text": "Austin Reaves — SG / The Oaks",
+            "src": "Simulation_Ledger profile for POP-01027",
+            "id": "F-d653907c94cf"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-10-22T18:16:15.748Z"
+}

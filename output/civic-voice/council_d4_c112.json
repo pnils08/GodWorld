@@ -1,0 +1,40 @@
+{
+  "office": "council_d4",
+  "cycle": 112,
+  "speaker": "Ramon Vega",
+  "cascadeSummary": "I have voted YES on the Ivy Hill Revitalization Initiative to move from crisis response to long-term investment. I am also calling for a focused review of Dimond's commercial trends to counter the souring mood in that neighborhood.",
+  "statements": [
+    {
+      "statementId": "STMT-112-council_d4-001",
+      "type": "vote_statement",
+      "topic": "Ivy Hill Revitalization Initiative",
+      "initiative": "Ivy Hill Revitalization Initiative",
+      "decision": "YES",
+      "quote": "We have moved past the point of emergency response; it is time to build a sustainable future for Ivy Hill.",
+      "fullStatement": "District 4 cannot survive on reactive measures alone. While the initial infrastructure crisis response kept the lights on, this $2.5 million revitalization initiative is the structural investment required to stabilize the neighborhood's commercial core. I have reviewed the filing, and it meets my standards for fiscal discipline while delivering the direct relief my constituents demand. My vote is YES.",
+      "disposition": "YES",
+      "actionAsked": "Pass legislation",
+      "tone": "deliberate-analytical",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-112-council_d4-002",
+      "type": "constituent_statement",
+      "topic": "D4 Neighborhood Stability",
+      "initiative": null,
+      "decision": "Request for commercial audit in Dimond",
+      "quote": "Stability in Dimond is not a static victory; we must address the souring mood before it becomes a trend of decay.",
+      "fullStatement": "I acknowledge the Mayor's note on Dimond's stability, but the mood on the ground is souring. We cannot be complacent. While street trade remains steady, we must proactively address the factors causing resident dissatisfaction. Furthermore, the progress in Glenview proves that structured city support works, and I will continue to ensure those frameworks remain in place to support our local businesses.",
+      "disposition": "statement",
+      "actionAsked": "Conduct focused commercial review of Dimond",
+      "tone": "blunt-practical",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    }
+  ]
+}

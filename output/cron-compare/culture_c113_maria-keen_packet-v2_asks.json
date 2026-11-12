@@ -1,0 +1,470 @@
+[
+  {
+    "pop": "POP-00004",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00004\",\"name\":\"Lucia Polito\",\"role\":\"Aura Wellness Practitioner\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Maria Keen\",\"question\":\"What's the current state of Postpartum Oakland Network and how is it affecting the community? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-neighborhood\",\"hood\":\"Fruitvale\",\"focus\":\"Fruitvale community programs and their impact\",\"src\":\"output/beats/Community_Programs.jsonl @C113\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Lucia Polito — Aura Wellness Practitioner — Fruitvale\",\"evidence\":[{\"id\":\"EV-690d60d3d1\",\"src\":\"output/beats/Community_Programs.jsonl @C113\",\"text\":\"3 active programs in Fruitvale; Lucia Polito founded one.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"3 active programs in Fruitvale; Lucia Polito founded one.\",\"src\":\"output/beats/Community_Programs.jsonl @C113\",\"id\":\"F-97d835de6f10\"},{\"t\":\"FACT\",\"text\":\"Postpartum Oakland Network (health), Fruitvale — founded by Lucia Polito, since C101\",\"src\":\"output/beats/Community_Programs.jsonl @C113 PRG-016\",\"id\":\"F-26450a861611\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C113\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-876f95b5eb98\"},{\"t\":\"FACT\",\"text\":\"Fruitvale: 3 active programs on the record\",\"src\":\"output/beats/Community_Programs.jsonl @C113\",\"id\":\"F-f950233852c6\"},{\"t\":\"FACT\",\"text\":\"Fruitvale Summer Speed Series (youth-sports), Fruitvale, since C101\",\"src\":\"output/beats/Community_Programs.jsonl @C113 PRG-004\",\"id\":\"F-7d350ad0a801\"},{\"t\":\"FACT\",\"text\":\"Fruitvale Transit Corridor Mutual Aid (mutual-aid), Fruitvale, since C101\",\"src\":\"output/beats/Community_Programs.jsonl @C113 PRG-010\",\"id\":\"F-0c7e8b01f6c5\"},{\"t\":\"FACT\",\"text\":\"Fruitvale this cycle: 423 students, 1,559 adults, 351 seniors — moved vs C112: +2 students, +7 adults, +1 seniors\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl @C113 vs prev/\",\"id\":\"F-22e469d8fcbc\"},{\"t\":\"FACT\",\"text\":\"Fruitvale: 6 charges → 1 arrest → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked\",\"src\":\"output/beats/Care_Justice_Census.jsonl @C113 judicial Fruitvale\",\"id\":\"F-48f319220662\"},{\"t\":\"FACT\",\"text\":\"Lucia Polito — Aura Wellness Practitioner — Fruitvale\",\"src\":\"Simulation_Ledger profile for POP-00004\",\"id\":\"F-d24fafa8a950\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C9, Winter, holiday=none\",\"src\":\"output/world_summary_c113.md Calendar context (Simulation_Calendar)\",\"id\":\"F-ab9d6786094e\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00004",
+        "name": "Lucia Polito",
+        "role": "Aura Wellness Practitioner",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Maria Keen",
+        "question": "What's the current state of Postpartum Oakland Network and how is it affecting the community? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-neighborhood",
+        "hood": "Fruitvale",
+        "focus": "Fruitvale community programs and their impact",
+        "src": "output/beats/Community_Programs.jsonl @C113"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Lucia Polito — Aura Wellness Practitioner — Fruitvale",
+        "evidence": [
+          {
+            "id": "EV-690d60d3d1",
+            "src": "output/beats/Community_Programs.jsonl @C113",
+            "text": "3 active programs in Fruitvale; Lucia Polito founded one."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "3 active programs in Fruitvale; Lucia Polito founded one.",
+          "src": "output/beats/Community_Programs.jsonl @C113",
+          "id": "F-97d835de6f10"
+        },
+        {
+          "t": "FACT",
+          "text": "Postpartum Oakland Network (health), Fruitvale — founded by Lucia Polito, since C101",
+          "src": "output/beats/Community_Programs.jsonl @C113 PRG-016",
+          "id": "F-26450a861611"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C113",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-876f95b5eb98"
+        },
+        {
+          "t": "FACT",
+          "text": "Fruitvale: 3 active programs on the record",
+          "src": "output/beats/Community_Programs.jsonl @C113",
+          "id": "F-f950233852c6"
+        },
+        {
+          "t": "FACT",
+          "text": "Fruitvale Summer Speed Series (youth-sports), Fruitvale, since C101",
+          "src": "output/beats/Community_Programs.jsonl @C113 PRG-004",
+          "id": "F-7d350ad0a801"
+        },
+        {
+          "t": "FACT",
+          "text": "Fruitvale Transit Corridor Mutual Aid (mutual-aid), Fruitvale, since C101",
+          "src": "output/beats/Community_Programs.jsonl @C113 PRG-010",
+          "id": "F-0c7e8b01f6c5"
+        },
+        {
+          "t": "FACT",
+          "text": "Fruitvale this cycle: 423 students, 1,559 adults, 351 seniors — moved vs C112: +2 students, +7 adults, +1 seniors",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C113 vs prev/",
+          "id": "F-22e469d8fcbc"
+        },
+        {
+          "t": "FACT",
+          "text": "Fruitvale: 6 charges → 1 arrest → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl @C113 judicial Fruitvale",
+          "id": "F-48f319220662"
+        },
+        {
+          "t": "FACT",
+          "text": "Lucia Polito — Aura Wellness Practitioner — Fruitvale",
+          "src": "Simulation_Ledger profile for POP-00004",
+          "id": "F-d24fafa8a950"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C9, Winter, holiday=none",
+          "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+          "id": "F-ab9d6786094e"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00198",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00198\",\"name\":\"Rick Walker\",\"role\":\"K-8 Teacher,Former Line cook\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Maria Keen\",\"question\":\"Your own page at C113 says: \\\"The teachers there are working just as hard as we are in Fruitvale, but they're doing it with less\\\". Is that still how you see Fruitvale? Speak only from that and your own reaction.\"},\"signal\":{\"kind\":\"beat-neighborhood\",\"hood\":\"Fruitvale\",\"focus\":\"Fruitvale community programs and their impact\",\"src\":\"output/beats/Community_Programs.jsonl @C113\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Rick Walker — K-8 Teacher,Former Line cook\",\"evidence\":[{\"id\":\"EV-PAGE-287010c265\",\"src\":\"cp-POP-00198-c113-PRESS\",\"text\":\"The teachers there are working just as hard as we are in Fruitvale, but they're doing it with less.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"INTERPRETATION\",\"text\":\"The teachers there are working just as hard as we are in Fruitvale, but they're doing it with less.\",\"src\":\"cp-POP-00198-c113-PRESS\",\"id\":\"F-b2dd7119b5a4\"},{\"t\":\"FACT\",\"text\":\"Rick Walker — K-8 Teacher,Former Line cook\",\"src\":\"Simulation_Ledger profile for POP-00198\",\"id\":\"F-31a3ebe941e2\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C9, Winter, holiday=none\",\"src\":\"output/world_summary_c113.md Calendar context (Simulation_Calendar)\",\"id\":\"F-ab9d6786094e\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00198",
+        "name": "Rick Walker",
+        "role": "K-8 Teacher,Former Line cook",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Maria Keen",
+        "question": "Your own page at C113 says: \"The teachers there are working just as hard as we are in Fruitvale, but they're doing it with less\". Is that still how you see Fruitvale? Speak only from that and your own reaction."
+      },
+      "signal": {
+        "kind": "beat-neighborhood",
+        "hood": "Fruitvale",
+        "focus": "Fruitvale community programs and their impact",
+        "src": "output/beats/Community_Programs.jsonl @C113"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Rick Walker — K-8 Teacher,Former Line cook",
+        "evidence": [
+          {
+            "id": "EV-PAGE-287010c265",
+            "src": "cp-POP-00198-c113-PRESS",
+            "text": "The teachers there are working just as hard as we are in Fruitvale, but they're doing it with less."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "INTERPRETATION",
+          "text": "The teachers there are working just as hard as we are in Fruitvale, but they're doing it with less.",
+          "src": "cp-POP-00198-c113-PRESS",
+          "id": "F-b2dd7119b5a4"
+        },
+        {
+          "t": "FACT",
+          "text": "Rick Walker — K-8 Teacher,Former Line cook",
+          "src": "Simulation_Ledger profile for POP-00198",
+          "id": "F-31a3ebe941e2"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C9, Winter, holiday=none",
+          "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+          "id": "F-ab9d6786094e"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00023",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00023\",\"name\":\"Gregory Mims\",\"role\":\"Organized Crime\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Maria Keen\",\"question\":\"Your own page at C102 says: \\\"Heard some kids talking about it at the bus stop last week—one of ‘em said his cousin got placed with a plumbing crew over in Fruitvale\\\". Is that still how you see Fruitvale? Speak only from that and your own reaction.\"},\"signal\":{\"kind\":\"beat-neighborhood\",\"hood\":\"Fruitvale\",\"focus\":\"Fruitvale community programs and their impact\",\"src\":\"output/beats/Community_Programs.jsonl @C113\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Gregory Mims — Organized Crime\",\"evidence\":[{\"id\":\"EV-PAGE-d3140bb0e3\",\"src\":\"cp-POP-00023-c102-PRESS\",\"text\":\"Heard some kids talking about it at the bus stop last week—one of ‘em said his cousin got placed with a plumbing crew over in Fruitvale.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"INTERPRETATION\",\"text\":\"Heard some kids talking about it at the bus stop last week—one of ‘em said his cousin got placed with a plumbing crew over in Fruitvale.\",\"src\":\"cp-POP-00023-c102-PRESS\",\"id\":\"F-fcb704adfe14\"},{\"t\":\"FACT\",\"text\":\"Gregory Mims — Organized Crime\",\"src\":\"Simulation_Ledger profile for POP-00023\",\"id\":\"F-060c523815a9\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C9, Winter, holiday=none\",\"src\":\"output/world_summary_c113.md Calendar context (Simulation_Calendar)\",\"id\":\"F-ab9d6786094e\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00023",
+        "name": "Gregory Mims",
+        "role": "Organized Crime",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Maria Keen",
+        "question": "Your own page at C102 says: \"Heard some kids talking about it at the bus stop last week—one of ‘em said his cousin got placed with a plumbing crew over in Fruitvale\". Is that still how you see Fruitvale? Speak only from that and your own reaction."
+      },
+      "signal": {
+        "kind": "beat-neighborhood",
+        "hood": "Fruitvale",
+        "focus": "Fruitvale community programs and their impact",
+        "src": "output/beats/Community_Programs.jsonl @C113"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Gregory Mims — Organized Crime",
+        "evidence": [
+          {
+            "id": "EV-PAGE-d3140bb0e3",
+            "src": "cp-POP-00023-c102-PRESS",
+            "text": "Heard some kids talking about it at the bus stop last week—one of ‘em said his cousin got placed with a plumbing crew over in Fruitvale."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "INTERPRETATION",
+          "text": "Heard some kids talking about it at the bus stop last week—one of ‘em said his cousin got placed with a plumbing crew over in Fruitvale.",
+          "src": "cp-POP-00023-c102-PRESS",
+          "id": "F-fcb704adfe14"
+        },
+        {
+          "t": "FACT",
+          "text": "Gregory Mims — Organized Crime",
+          "src": "Simulation_Ledger profile for POP-00023",
+          "id": "F-060c523815a9"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C9, Winter, holiday=none",
+          "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+          "id": "F-ab9d6786094e"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00042",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00042\",\"name\":\"Ramon Vega\",\"role\":\"City Council President - D1\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Maria Keen\",\"question\":\"Your own page at C111 says: \\\"We don't talk as much as we should, not since the last council fight where he thought I was leaning too far into the developer's corner on the Fruitvale hub\\\". Is that still how you see Fruitvale? Speak only from that and your own reaction.\"},\"signal\":{\"kind\":\"beat-neighborhood\",\"hood\":\"Fruitvale\",\"focus\":\"Fruitvale community programs and their impact\",\"src\":\"output/beats/Community_Programs.jsonl @C113\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Ramon Vega — City Council President - D1\",\"evidence\":[{\"id\":\"EV-PAGE-b3d38214a4\",\"src\":\"cp-POP-00042-c111-midday\",\"text\":\"We don't talk as much as we should, not since the last council fight where he thought I was leaning too far into the developer's corner on the Fruitvale hub.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"INTERPRETATION\",\"text\":\"We don't talk as much as we should, not since the last council fight where he thought I was leaning too far into the developer's corner on the Fruitvale hub.\",\"src\":\"cp-POP-00042-c111-midday\",\"id\":\"F-521b556d49a1\"},{\"t\":\"FACT\",\"text\":\"Ramon Vega — City Council President - D1\",\"src\":\"Simulation_Ledger profile for POP-00042\",\"id\":\"F-54dcea97959e\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C9, Winter, holiday=none\",\"src\":\"output/world_summary_c113.md Calendar context (Simulation_Calendar)\",\"id\":\"F-ab9d6786094e\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00042",
+        "name": "Ramon Vega",
+        "role": "City Council President - D1",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Maria Keen",
+        "question": "Your own page at C111 says: \"We don't talk as much as we should, not since the last council fight where he thought I was leaning too far into the developer's corner on the Fruitvale hub\". Is that still how you see Fruitvale? Speak only from that and your own reaction."
+      },
+      "signal": {
+        "kind": "beat-neighborhood",
+        "hood": "Fruitvale",
+        "focus": "Fruitvale community programs and their impact",
+        "src": "output/beats/Community_Programs.jsonl @C113"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Ramon Vega — City Council President - D1",
+        "evidence": [
+          {
+            "id": "EV-PAGE-b3d38214a4",
+            "src": "cp-POP-00042-c111-midday",
+            "text": "We don't talk as much as we should, not since the last council fight where he thought I was leaning too far into the developer's corner on the Fruitvale hub."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "INTERPRETATION",
+          "text": "We don't talk as much as we should, not since the last council fight where he thought I was leaning too far into the developer's corner on the Fruitvale hub.",
+          "src": "cp-POP-00042-c111-midday",
+          "id": "F-521b556d49a1"
+        },
+        {
+          "t": "FACT",
+          "text": "Ramon Vega — City Council President - D1",
+          "src": "Simulation_Ledger profile for POP-00042",
+          "id": "F-54dcea97959e"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C9, Winter, holiday=none",
+          "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+          "id": "F-ab9d6786094e"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  }
+]

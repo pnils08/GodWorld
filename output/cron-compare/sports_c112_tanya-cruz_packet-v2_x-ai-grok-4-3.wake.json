@@ -1,0 +1,56 @@
+{
+  "mode": "wake-write",
+  "desk": "sports",
+  "cycle": "112",
+  "provider": "openrouter",
+  "model": "x-ai/grok-4.3",
+  "configuredWriterModel": "x-ai/grok-4.3",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "tanya-cruz",
+  "byline": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014",
+    "beatDomain": "SPORTS"
+  },
+  "laneEntries": 9,
+  "quotesLanded": 0,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [],
+  "toolCalls": 0,
+  "wordCount": 84,
+  "targetWords": "evidence-bounded",
+  "capHit": 0,
+  "checkFlags": [
+    "thin: 84 words (floor 150, seat target evidence-bounded)"
+  ],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": false,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 84,
+    "short": "The closing fails to specify the access or observation still needed.",
+    "score": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "d5283e4fcc090ce6504433e00dd628283beec4e1e6f1d4f41d241e753f023eee",
+    "costUsd": 0.0013
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/4 — The closing fails to specify the access or observation still needed."
+  },
+  "article": "output/cron-compare/staged/sports_c112_tanya-cruz_packet-v2_x-ai-grok-4-3.staged.md",
+  "selfRecord": null,
+  "ranAt": "2026-10-21T23:19:50.161Z",
+  "dispositionReconciledAt": "2026-10-24T17:00:04.680Z"
+}

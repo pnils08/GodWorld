@@ -1,0 +1,26 @@
+{
+  "office": "council_d5",
+  "agentDir": "civic-office-council-d5",
+  "holder": "Janae Rivers",
+  "popid": "POP-00043",
+  "title": "City Council District 5",
+  "date": "2026-10-20",
+  "cycle": 112,
+  "model": "deepseek/deepseek-v4-flash-0731",
+  "statement": "The first cohort placement report is in, and it confirms what I've been saying from the start: when we invest in East Oakland's youth, they show up. We set placement targets at the town hall in Cycle 107, and the intake numbers verified in this report prove the pipeline is real — not a pamphlet, not a promise, a working ladder. But here's the thing I won't let this city forget: East Oakland still carries violent crime at 28 against a city average of 23.3, and property crime at 38 against 35.4. Our kids are walking past that on their way to these placements. So I'm not treating this report as a finish line — it's a proof point. The structural investment is the ask, and I'll keep making it until the streets match the opportunity we're building.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-112-civic-office-council-d5",
+        "text": "East Oakland intake figures are verified in the INIT-007 placement report — first cohort is placed, numbers are real, and the D5 dispatch performance assessment is filed: we're seeing the gap, and we're closing it.",
+        "directiveCycle": 112,
+        "confrontationSeat": "civic-office-council-d5"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-10-20T10:47:55.734Z",
+  "fellBackFrom": null
+}

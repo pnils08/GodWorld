@@ -1,0 +1,35 @@
+{
+  "office": "council_d4",
+  "agentDir": "civic-office-council-d4",
+  "holder": "Ramon Vega",
+  "popid": "POP-00042",
+  "title": "City Council District 4",
+  "date": "2026-10-19",
+  "cycle": 112,
+  "model": "meta-llama/llama-4-maverick",
+  "statement": "As Council President and representative of District 4, I stand with Ivy Hill. The data shows a concerning trend of decay momentum and crime index in Ivy Hill, which demands our immediate attention. I believe targeted investment and community support are crucial for revitalizing our neighborhood.",
+  "moves": [
+    {
+      "type": "propose",
+      "payload": {
+        "title": "Ivy Hill Community Revitalization",
+        "problem": "addressing decay momentum and crime index",
+        "category": "safety",
+        "reach": "hood",
+        "hoods": [
+          "Ivy Hill"
+        ],
+        "budget": "$2M"
+      }
+    }
+  ],
+  "movesRejected": [
+    {
+      "type": "answer",
+      "reason": "second-consequential-move(one per wake — the first valid one stands)"
+    }
+  ],
+  "numberMoved": "2",
+  "ranAt": "2026-10-19T10:45:26.869Z",
+  "fellBackFrom": null
+}

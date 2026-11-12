@@ -1,0 +1,687 @@
+{
+  "stage": "report",
+  "desk": "sports",
+  "cycle": "114",
+  "persona": "tanya-cruz",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014"
+  },
+  "assignment": {
+    "story": {
+      "angle": "Five starters and one Carmen Mesa. Who is the odd arm out?",
+      "label": "Five starters and one Carmen Mesa. Who is the odd arm out?",
+      "hookLine": "Five starters and one Carmen Mesa. Who is the odd arm out?",
+      "kind": "sideline-signal",
+      "hood": "Dimond",
+      "popids": [
+        "POP-00081",
+        "POP-01078",
+        "POP-00024",
+        "POP-00025"
+      ],
+      "citizens": [
+        "Carmen Mesa (POP-00081)",
+        "Pablo Almanzar (POP-01078)",
+        "Henry Rivas (POP-00024)",
+        "Arturo Ramos (POP-00025)"
+      ],
+      "ref": "world_summary_c114.md ## Sports",
+      "cycle": 114
+    }
+  },
+  "angle": "output/cron-compare/sports_c114_tanya-cruz_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 1,
+  "quotes": [
+    {
+      "pop": "POP-01078",
+      "name": "Pablo Almanzar",
+      "quote": "Look, I know the story — everyone knows the story. I got the spot people thought Carmen would get, and then I went out and threw the games of my life. But in here, nobody treats it like I stole something. The guys in the clubhouse, they just want to win. When I came back in after that no-hitter, the first thing Desmond said to me wasn't about the box score — it was about how we're going to dinner at his mom's place in the Dimond on the off day. That's how it works. Carmen's a pro, he's been around, and he knows this game is weird. The front office will figure out the roster. My job is to keep throwing strikes and not get ahead of myself. The day I start thinking I'm bigger than the name on the front of the jersey is the day I lose it.",
+      "disp": "a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Look, I know the story — everyone knows the story. I got the spot people thought Carmen would get, and then I went out and threw the games of my life. But in here, nobody treats it like I stole something. The guys in the clubhouse, they just want to win. When I came back in after that no-hitter, the first thing Desmond said to me wasn't about the box score — it was about how we're going to dinner at his mom's place in the Dimond on the off day. That's how it works. Carmen's a pro, he's been around, and he knows this game is weird. The front office will figure out the roster. My job is to keep throwing strikes and not get ahead of myself. The day I start thinking I'm bigger than the name on the front of the jersey is the day I lose it.\",\n  \"fact_ids\": [\"F-788b5caab458\", \"F-04594a6d25c5\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": [\"I've heard some talk around the neighborhood about whether the A's might move one of the older arms to make room for the kids, but that's front office business, not mine.\"],\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-788b5caab458",
+          "F-04594a6d25c5"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [
+          "I've heard some talk around the neighborhood about whether the A's might move one of the older arms to make room for the kids, but that's front office business, not mine."
+        ],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01078-43041c1b2e",
+        "authoredQuote": true,
+        "publishableQuote": "Look, I know the story — everyone knows the story. I got the spot people thought Carmen would get, and then I went out and threw the games of my life. But in here, nobody treats it like I stole something. The guys in the clubhouse, they just want to win. When I came back in after that no-hitter, the first thing Desmond said to me wasn't about the box score — it was about how we're going to dinner at his mom's place in the Dimond on the off day. That's how it works. Carmen's a pro, he's been around, and he knows this game is weird. The front office will figure out the roster. My job is to keep throwing strikes and not get ahead of myself. The day I start thinking I'm bigger than the name on the front of the jersey is the day I lose it."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01078",
+          "name": "Pablo Almanzar",
+          "role": "SP / Oakland A's",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Tanya Cruz",
+          "question": "How does the clubhouse treat the arm that took the spot everyone expected Mesa to fill, after a no-hitter and a 1-hitter to close the ALCS? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "sideline-signal",
+          "hood": "Dimond",
+          "focus": "The gap between what the rotation costs and what it produces, and where Carmen Mesa fits in a full house.",
+          "src": "world_summary_c114.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Pablo Almanzar — SP / Oakland A's",
+          "evidence": [
+            {
+              "id": "EV-47d84914a2",
+              "src": "world_summary_c114.md ## Sports",
+              "text": "Five starters and one Carmen Mesa. Who is the odd arm out?"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Pablo Almanzar took the rotation spot most expected Carmen Mesa to fill, then threw a no-hitter in his debut and a 1-hitter to close the ALCS. That leaves the rotation full with Coles, Ramos, Rivas, Ellis and Almanzar. Mesa sits at AAA on a $780K deal with nowhere to start in Oakland. Henry Rivas is the most expensive arm at $28. 2M and missed time this season before his complete game in World Series game 4.",
+            "src": "world_summary_c114.md ## Sports",
+            "id": "F-788b5caab458"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "Five starters and one Carmen Mesa. Who is the odd arm out?",
+            "src": "world_summary_c114.md ## Sports",
+            "id": "F-04594a6d25c5"
+          },
+          {
+            "t": "FACT",
+            "text": "Is Mesa the A's best trade chip this winter, and how long does the front office keep paying top dollar for Rivas while the cheap arms win?",
+            "src": "world_summary_c114.md ## Sports",
+            "id": "F-5ab076c8ddeb"
+          },
+          {
+            "t": "FACT",
+            "text": "Pablo Almanzar — SP / Oakland A's",
+            "src": "Simulation_Ledger profile for POP-01078",
+            "id": "F-4da5f0a93431"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-00081",
+      "name": "Carmen Mesa",
+      "quote": null,
+      "disp": "a real fan, plans around games",
+      "recorded": false,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: answer must be quote|abstain",
+      "raw": "{\"answer\":\"Honestly, the winter is about staying ready without going crazy. I throw, I lift, I run, but I also try to remember that the roster isn't mine to figure out. In the clubhouse, I just show up and do the work — I don't sulk, I don't campaign. The front office has its numbers and its plans; my job is to be the guy they can call on when they need someone who won't fold. If that means waiting, I wait. If it means a trade, I pack. That's the gig.\",\"fact_ids\":[\"F-788b5caab458\",\"F-5ab076c8ddeb\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":null,\"abstain_reason\":null}",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00081",
+          "name": "Carmen Mesa",
+          "role": "Starting Pitcher, Midland RockHounds (AA)",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Tanya Cruz",
+          "question": "What does a starter with no rotation spot do with his winter, and how does he carry himself in the clubhouse while the front office decides? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "sideline-signal",
+          "hood": "Dimond",
+          "focus": "The gap between what the rotation costs and what it produces, and where Carmen Mesa fits in a full house.",
+          "src": "world_summary_c114.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Carmen Mesa — Starting Pitcher, Midland RockHounds (AA)",
+          "evidence": [
+            {
+              "id": "EV-cdb419d152",
+              "src": "world_summary_c114.md ## Sports",
+              "text": "Five starters and one Carmen Mesa. Who is the odd arm out?"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Five starters and one Carmen Mesa. Who is the odd arm out?",
+            "src": "world_summary_c114.md ## Sports",
+            "id": "F-04594a6d25c5"
+          },
+          {
+            "t": "FACT",
+            "text": "Pablo Almanzar took the rotation spot most expected Carmen Mesa to fill, then threw a no-hitter in his debut and a 1-hitter to close the ALCS. That leaves the rotation full with Coles, Ramos, Rivas, Ellis and Almanzar. Mesa sits at AAA on a $780K deal with nowhere to start in Oakland. Henry Rivas is the most expensive arm at $28. 2M and missed time this season before his complete game in World Series game 4.",
+            "src": "world_summary_c114.md ## Sports",
+            "id": "F-788b5caab458"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "Is Mesa the A's best trade chip this winter, and how long does the front office keep paying top dollar for Rivas while the cheap arms win?",
+            "src": "world_summary_c114.md ## Sports",
+            "id": "F-5ab076c8ddeb"
+          },
+          {
+            "t": "FACT",
+            "text": "Carmen Mesa — Starting Pitcher, Midland RockHounds (AA)",
+            "src": "Simulation_Ledger profile for POP-00081",
+            "id": "F-b7bdf157905d"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01078",
+      "name": "Pablo Almanzar",
+      "quote": "Look, I know the story — everyone knows the story. I got the spot people thought Carmen would get, and then I went out and threw the games of my life. But in here, nobody treats it like I stole something. The guys in the clubhouse, they just want to win. When I came back in after that no-hitter, the first thing Desmond said to me wasn't about the box score — it was about how we're going to dinner at his mom's place in the Dimond on the off day. That's how it works. Carmen's a pro, he's been around, and he knows this game is weird. The front office will figure out the roster. My job is to keep throwing strikes and not get ahead of myself. The day I start thinking I'm bigger than the name on the front of the jersey is the day I lose it.",
+      "disp": "a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Look, I know the story — everyone knows the story. I got the spot people thought Carmen would get, and then I went out and threw the games of my life. But in here, nobody treats it like I stole something. The guys in the clubhouse, they just want to win. When I came back in after that no-hitter, the first thing Desmond said to me wasn't about the box score — it was about how we're going to dinner at his mom's place in the Dimond on the off day. That's how it works. Carmen's a pro, he's been around, and he knows this game is weird. The front office will figure out the roster. My job is to keep throwing strikes and not get ahead of myself. The day I start thinking I'm bigger than the name on the front of the jersey is the day I lose it.\",\n  \"fact_ids\": [\"F-788b5caab458\", \"F-04594a6d25c5\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": [\"I've heard some talk around the neighborhood about whether the A's might move one of the older arms to make room for the kids, but that's front office business, not mine.\"],\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-788b5caab458",
+          "F-04594a6d25c5"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [
+          "I've heard some talk around the neighborhood about whether the A's might move one of the older arms to make room for the kids, but that's front office business, not mine."
+        ],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01078-43041c1b2e",
+        "authoredQuote": true,
+        "publishableQuote": "Look, I know the story — everyone knows the story. I got the spot people thought Carmen would get, and then I went out and threw the games of my life. But in here, nobody treats it like I stole something. The guys in the clubhouse, they just want to win. When I came back in after that no-hitter, the first thing Desmond said to me wasn't about the box score — it was about how we're going to dinner at his mom's place in the Dimond on the off day. That's how it works. Carmen's a pro, he's been around, and he knows this game is weird. The front office will figure out the roster. My job is to keep throwing strikes and not get ahead of myself. The day I start thinking I'm bigger than the name on the front of the jersey is the day I lose it."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01078",
+          "name": "Pablo Almanzar",
+          "role": "SP / Oakland A's",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Tanya Cruz",
+          "question": "How does the clubhouse treat the arm that took the spot everyone expected Mesa to fill, after a no-hitter and a 1-hitter to close the ALCS? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "sideline-signal",
+          "hood": "Dimond",
+          "focus": "The gap between what the rotation costs and what it produces, and where Carmen Mesa fits in a full house.",
+          "src": "world_summary_c114.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Pablo Almanzar — SP / Oakland A's",
+          "evidence": [
+            {
+              "id": "EV-47d84914a2",
+              "src": "world_summary_c114.md ## Sports",
+              "text": "Five starters and one Carmen Mesa. Who is the odd arm out?"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Pablo Almanzar took the rotation spot most expected Carmen Mesa to fill, then threw a no-hitter in his debut and a 1-hitter to close the ALCS. That leaves the rotation full with Coles, Ramos, Rivas, Ellis and Almanzar. Mesa sits at AAA on a $780K deal with nowhere to start in Oakland. Henry Rivas is the most expensive arm at $28. 2M and missed time this season before his complete game in World Series game 4.",
+            "src": "world_summary_c114.md ## Sports",
+            "id": "F-788b5caab458"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "Five starters and one Carmen Mesa. Who is the odd arm out?",
+            "src": "world_summary_c114.md ## Sports",
+            "id": "F-04594a6d25c5"
+          },
+          {
+            "t": "FACT",
+            "text": "Is Mesa the A's best trade chip this winter, and how long does the front office keep paying top dollar for Rivas while the cheap arms win?",
+            "src": "world_summary_c114.md ## Sports",
+            "id": "F-5ab076c8ddeb"
+          },
+          {
+            "t": "FACT",
+            "text": "Pablo Almanzar — SP / Oakland A's",
+            "src": "Simulation_Ledger profile for POP-01078",
+            "id": "F-4da5f0a93431"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00024",
+      "name": "Henry Rivas",
+      "quote": null,
+      "disp": "driven, hard to sit still; steady, hard to shake; a real fan, plans around games",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: direct reaction exceeds 80 words; direct reaction must be one to four sentences",
+      "raw": "{\n  \"answer\": \"quote\",\n  \"quote\": \"Look, I know what the numbers say. I'm the expensive arm, and the kid threw a no-hitter in his debut. That's not lost on me. But I've been in this game long enough to know that a rotation isn't a lineup card—it's a season. I missed time this year, and that hurt. But I came back and threw a complete game in the World Series. That's who I am. As for Carmen Mesa, he's a hell of a pitcher, and he's stuck in a tough spot. But I don't control the roster. My job is to take the ball every fifth day and give this team a chance to win. The cheap arms winning? Good for them. That's what we need. But I'm not worried about my spot. I've earned it, and I'll keep earning it.\",\n  \"fact_ids\": [\"F-788b5caab458\", \"F-04594a6d25c5\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00024",
+          "name": "Henry Rivas",
+          "role": "Starting Pitcher, Oakland A's",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Tanya Cruz",
+          "question": "What does the most expensive arm on the staff make of the cheap arms winning, and how does he hold the room after missing time? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "sideline-signal",
+          "hood": "Dimond",
+          "focus": "The gap between what the rotation costs and what it produces, and where Carmen Mesa fits in a full house.",
+          "src": "world_summary_c114.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Henry Rivas — Starting Pitcher, Oakland A's",
+          "evidence": [
+            {
+              "id": "EV-b6e92168e1",
+              "src": "world_summary_c114.md ## Sports",
+              "text": "Five starters and one Carmen Mesa. Who is the odd arm out?"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Pablo Almanzar took the rotation spot most expected Carmen Mesa to fill, then threw a no-hitter in his debut and a 1-hitter to close the ALCS. That leaves the rotation full with Coles, Ramos, Rivas, Ellis and Almanzar. Mesa sits at AAA on a $780K deal with nowhere to start in Oakland. Henry Rivas is the most expensive arm at $28. 2M and missed time this season before his complete game in World Series game 4.",
+            "src": "world_summary_c114.md ## Sports",
+            "id": "F-788b5caab458"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "Five starters and one Carmen Mesa. Who is the odd arm out?",
+            "src": "world_summary_c114.md ## Sports",
+            "id": "F-04594a6d25c5"
+          },
+          {
+            "t": "FACT",
+            "text": "Is Mesa the A's best trade chip this winter, and how long does the front office keep paying top dollar for Rivas while the cheap arms win?",
+            "src": "world_summary_c114.md ## Sports",
+            "id": "F-5ab076c8ddeb"
+          },
+          {
+            "t": "FACT",
+            "text": "Henry Rivas — Starting Pitcher, Oakland A's",
+            "src": "Simulation_Ledger profile for POP-00024",
+            "id": "F-fcdb47a03deb"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00025",
+      "name": "Arturo Ramos",
+      "quote": null,
+      "disp": "driven, hard to sit still; a real fan, plans around games",
+      "recorded": false,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: answer must be quote|abstain",
+      "raw": "{\"answer\":\"Look, I don't get paid to do the math. I get paid to pitch. But I've been around long enough to know the front office's job is to figure out who gives us the best chance to win, not who costs the most. Henry's had his injuries, sure, but he showed what he can do in Game 4. And Carmen — she's been waiting her turn, grinding in AAA on a deal that's nothing. That's not on her. That's just how it shakes out sometimes. I'm not going to sit here and tell you who's odd arm out. That's not my call, and it's not my style to throw a teammate under the bus. What I will say is, we've got a full house, and that's a good problem to have. Somebody's gonna get moved, and whoever it is, I hope they land somewhere they can pitch. That's the part people forget — this is a job, but it's also somebody's life.\",\"fact_ids\":[\"F-788b5caab458\",\"F-5ab076c8ddeb\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":null,\"abstain_reason\":null}",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00025",
+          "name": "Arturo Ramos",
+          "role": "Starting Pitcher, Oakland A's",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Tanya Cruz",
+          "question": "As a veteran in the rotation, how does Ramos read the balance between what the team pays and what it gets? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "sideline-signal",
+          "hood": "Dimond",
+          "focus": "The gap between what the rotation costs and what it produces, and where Carmen Mesa fits in a full house.",
+          "src": "world_summary_c114.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Arturo Ramos — Starting Pitcher, Oakland A's",
+          "evidence": [
+            {
+              "id": "EV-0304f6bc43",
+              "src": "world_summary_c114.md ## Sports",
+              "text": "Five starters and one Carmen Mesa. Who is the odd arm out?"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "Five starters and one Carmen Mesa. Who is the odd arm out?",
+            "src": "world_summary_c114.md ## Sports",
+            "id": "F-04594a6d25c5"
+          },
+          {
+            "t": "FACT",
+            "text": "Pablo Almanzar took the rotation spot most expected Carmen Mesa to fill, then threw a no-hitter in his debut and a 1-hitter to close the ALCS. That leaves the rotation full with Coles, Ramos, Rivas, Ellis and Almanzar. Mesa sits at AAA on a $780K deal with nowhere to start in Oakland. Henry Rivas is the most expensive arm at $28. 2M and missed time this season before his complete game in World Series game 4.",
+            "src": "world_summary_c114.md ## Sports",
+            "id": "F-788b5caab458"
+          },
+          {
+            "t": "FACT",
+            "text": "Is Mesa the A's best trade chip this winter, and how long does the front office keep paying top dollar for Rivas while the cheap arms win?",
+            "src": "world_summary_c114.md ## Sports",
+            "id": "F-5ab076c8ddeb"
+          },
+          {
+            "t": "FACT",
+            "text": "Arturo Ramos — Starting Pitcher, Oakland A's",
+            "src": "Simulation_Ledger profile for POP-00025",
+            "id": "F-0f99ed4be3f0"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-11-04T19:18:05.293Z"
+}

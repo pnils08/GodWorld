@@ -1,0 +1,32 @@
+{
+  "status": "arc-seed",
+  "cycle": "115",
+  "desk": "sports",
+  "persona": "p-slayer",
+  "hood": "KONO",
+  "quotes": [
+    {
+      "pop": "POP-01079",
+      "name": "Dillon Brooks",
+      "quote": "It's a great feeling to be contributing to the team's winning streak. We're all just trying to stay focused and keep pushing through, and it's awesome to see the community's energy behind us. My wife loves seeing the wins too, she's always hyped after a game."
+    },
+    {
+      "pop": "POP-01027",
+      "name": "Austin Reaves",
+      "quote": "The team's vibe is locked-in. We've been playing well, and the energy in the room is good. We're on a three-game winning streak, and everyone's feeling confident. We're still figuring some things out, but we're clicking on a lot of levels right now."
+    },
+    {
+      "pop": "POP-01023",
+      "name": "Adash Stanley",
+      "quote": "The energy around the Oaks is electric. I've felt it building, and it's like the whole city is waking up with the team. When we're playing like we are now, it's clear the fans are excited. The fourth quarter against Philly was a turning point for us, and it's been great to see the fans respond. They're hungry for more, and we're feeding that hunger with wins."
+    },
+    {
+      "pop": "POP-01223",
+      "name": "Harry Hayward",
+      "quote": "I've seen more people around the neighborhood, and they seem excited. The energy's good. Retail's been busy, and I've recognized a few faces from years ago. It's like everyone's feeling the win streak."
+    }
+  ],
+  "claim": "It's a great feeling to be contributing to the team's winning streak. We're all just trying to stay focused and keep pushing through, and it's awesome to see the community's energy behind us. My wife loves seeing the wins too, she's always hyped after a game.",
+  "src": "citizenVoice PRESS c115",
+  "ranAt": "2026-11-11T19:22:22.412Z"
+}

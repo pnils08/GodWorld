@@ -1,0 +1,62 @@
+{
+  "date": "2026-10-15",
+  "stage": "angle",
+  "results": [
+    {
+      "name": "Elliot Graye",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "angle",
+        "capHits": 0
+      }
+    },
+    {
+      "name": "Simon Leary",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "angle",
+        "capHits": 0
+      }
+    },
+    {
+      "name": "Hal Richmond",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "angle",
+        "capHits": 0
+      }
+    },
+    {
+      "name": "Talia Finch",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "angle",
+        "capHits": 0
+      }
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": true,
+      "checks": {
+        "stage": "angle",
+        "capHits": 0
+      }
+    }
+  ],
+  "checkTotals": {
+    "seats": 5,
+    "toolSeats": 0,
+    "capHits": 0,
+    "thin": 0,
+    "engineTerm": 0,
+    "verbatim": 0,
+    "graded": 0,
+    "gradeSum": 0
+  },
+  "ranAt": "2026-10-15T11:16:52.104Z"
+}

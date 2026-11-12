@@ -1,0 +1,12 @@
+{
+  "status": "ungated-sample",
+  "desk": "civic",
+  "cycle": "115",
+  "persona": "trevor-shimizu",
+  "byline": "Trevor Shimizu",
+  "bylinePopid": "POP-00155",
+  "article": "output/test-shell/20261110-121833-trevor-shimizu/samples/civic_c115_trevor-shimizu_packet-v2_anthropic-claude-sonnet-5-5.sample.md",
+  "quotesLanded": 3,
+  "note": "UNGATED sample (--no-gate, S332): writer+quotes ran on raw API; the Rhea gate was skipped (needs subscription). NOT canon, review-only.",
+  "builtAt": "2026-11-10T18:19:02.447Z"
+}

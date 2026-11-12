@@ -1,0 +1,32 @@
+{
+  "status": "arc-seed",
+  "cycle": "113",
+  "desk": "civic",
+  "persona": "noah-tan",
+  "hood": null,
+  "quotes": [
+    {
+      "pop": "POP-00320",
+      "name": "Cee Lee",
+      "quote": "Three clear days helps, I won't lie. The cold stretch had me moving slower than I like—that kind of tired that sits in your bones. But 'lifted'? I'd say paused. Seasonal stuff like this, it lingers in the background. I'm out walking the lake path again, getting back to normal, but I'm not foolish enough to think it's gone for good. You learn to live with the ebb and flow of it."
+    },
+    {
+      "pop": "POP-00509",
+      "name": "Johhny Necklar",
+      "quote": "The clear days help, I won't lie. I was laid up a good while this winter, and there's something about stepping out and not having to bundle up just to get the mail. But recovery isn't on a weather schedule. I take the walk to the diner now because the sun feels good on my back, but I still stop twice on the way. My body tells me when it's ready, not the sky."
+    },
+    {
+      "pop": "POP-00177",
+      "name": "Elle Lilo",
+      "quote": "Three clear days in a row — that's a gift around here. When I finally shook that cold, the first morning I stepped back on the bridge, the sky was wide open, and I swear I could feel it in my chest. The work doesn't change, not really — the tugs still pull, the horns still sound — but the day feels lighter. You can see the whole bay, the cranes, the gulls, all of it. It's like the harbor is breathing again, and so am I."
+    },
+    {
+      "pop": "POP-00223",
+      "name": "Rafael Brannie",
+      "quote": "Three clear days helps, sure. I noticed the light today walking to the job—it's different, makes you want to linger on the corner a moment longer. But the winter mood, that's a heavier coat than the weather. It kind of stays draped on you even when the sun's out. I haven't gone out of my way to see people yet. I'm still moving, working, that part doesn't stop. But sitting with someone, sharing a beer, that takes a little more than blue sky. The mood outlasts the weather, I think. The sun gets you halfway there, the rest is on you."
+    }
+  ],
+  "claim": "Three clear days helps, I won't lie. The cold stretch had me moving slower than I like—that kind of tired that sits in your bones. But 'lifted'? I'd say paused. Seasonal stuff like this, it lingers in the background. I'm out walking the lake path again, getting back to normal, but I'm not foolish enough to think it's gone for good. You learn to live with the ebb and flow of it.",
+  "src": "citizenVoice PRESS c113",
+  "ranAt": "2026-10-28T18:17:35.653Z"
+}

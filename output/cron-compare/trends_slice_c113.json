@@ -1,0 +1,234 @@
+{
+  "version": "TRENDS-SLICE-4",
+  "empty": false,
+  "cycle": 113,
+  "kind": "beat-trends",
+  "seat": {
+    "slug": "celeste-tran",
+    "name": "Celeste Tran",
+    "popid": "POP-00164",
+    "desk": "wire",
+    "domain": "trends",
+    "builder": "buildTrendsSlice.js"
+  },
+  "hood": "Rockridge",
+  "pulse": {
+    "generatedAt": "2026-11-01T12:15:12.594Z",
+    "docs": 914,
+    "citizens": 302
+  },
+  "story": {
+    "kind": "beat-trends",
+    "angle": "Marisol Rivera gained 1 mention this cycle (7 total); West Oakland moves the most — what Oakland is doing together this week",
+    "label": "Marisol Rivera gained 1 mention this cycle (7 total); West Oakland moves the most",
+    "hookLine": "Marisol Rivera — gained 1 mention this cycle (7 total), cooling. The trend is the story; the mood is yours.",
+    "hood": "Rockridge",
+    "citizens": [
+      "Marisol Rivera (POP-01062)",
+      "Claire Ashford (POP-01071)",
+      "Deacon Seymour (POP-00528)",
+      "Vinnie Keane (POP-00001)",
+      "Yu Zen (POP-00194)",
+      "Evan Lewis (POP-00200)"
+    ],
+    "popids": [
+      "POP-01062",
+      "POP-01071",
+      "POP-00528",
+      "POP-00001",
+      "POP-00194",
+      "POP-00200"
+    ],
+    "ref": "output/beats/Cultural_Ledger.jsonl @C113",
+    "cycle": 113
+  },
+  "approach": "Social-trends approach: this slice is what the city is doing together — the names climbing the culture record, where people are moving, what the city's hooks say is shifting. Fast, reactive, grounded: a trend claim needs a window and a number from this slice. The names and moves are real; the group chat, the binge-night, the collective mood swing are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-01062",
+      "name": "Marisol Rivera",
+      "role": "Community Advocate",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Marisol Rivera — Community Advocate — Rockridge",
+      "why": "the city is talking about them (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-01071",
+      "name": "Claire Ashford",
+      "role": "author",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Claire Ashford — author — Piedmont Ave",
+      "why": "the city is talking about them (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-00528",
+      "name": "Deacon Seymour",
+      "role": "Manager, Oakland A's",
+      "neighborhood": "Lake Merritt",
+      "business": null,
+      "profile": "Deacon Seymour — Manager, Oakland A's — Lake Merritt",
+      "why": "the city is talking about them (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-00001",
+      "name": "Vinnie Keane",
+      "role": "Designated Hitter, Oakland A's Legend",
+      "neighborhood": "Grand Lake",
+      "business": null,
+      "profile": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+      "why": "has been saying it on their own page — the A's, C112: “I'm still getting used to not being as active with the A's, but it's nice to see people coming together like that.”"
+    },
+    {
+      "popid": "POP-00194",
+      "name": "Yu Zen",
+      "role": "Commercial Insurance Broker",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Yu Zen — Commercial Insurance Broker — Rockridge",
+      "why": "has been saying it on their own page — the clinic, C113: “I've been on the other side of that ledger — lying in a hospital bed myself after my accident.”"
+    },
+    {
+      "popid": "POP-00200",
+      "name": "Evan Lewis",
+      "role": "Bus driver",
+      "neighborhood": "Laurel",
+      "business": null,
+      "profile": "Evan Lewis — Bus driver — Laurel",
+      "why": "has been saying it on their own page — transit, C113: “The construction around the Baylight District doesn't help either; when streets get torn up, people just find another way, even if the bus still runs on time.”"
+    }
+  ],
+  "facts": [
+    {
+      "text": "Marisol Rivera (Community Advocate), Civic — gained 1 mention this cycle (7 total), cooling, fame 39",
+      "src": "output/beats/Cultural_Ledger.jsonl @C113 vs output/beats/prev/Cultural_Ledger.jsonl @C112"
+    },
+    {
+      "text": "Claire Ashford (author), Literature — gained 1 mention this cycle (3 total), stable, fame 16",
+      "src": "output/beats/Cultural_Ledger.jsonl @C113 vs output/beats/prev/Cultural_Ledger.jsonl @C112"
+    },
+    {
+      "text": "Deacon Seymour (A's player), Sports — gained 1 mention this cycle (2 total), stable, fame 2",
+      "src": "output/beats/Cultural_Ledger.jsonl @C113 vs output/beats/prev/Cultural_Ledger.jsonl @C112"
+    },
+    {
+      "text": "Movement vs C112: West Oakland +20 people, Fruitvale +9 people, Jack London +8 people, Chinatown +8 people, East Oakland +8 people",
+      "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C113"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "Marisol Rivera gained 1 mention this cycle (7 total); West Oakland moves the most — what Oakland is doing together this week",
+    "hookLine": "Marisol Rivera — gained 1 mention this cycle (7 total), cooling. The trend is the story; the mood is yours.",
+    "anchorFacts": [
+      "Marisol Rivera (Community Advocate), Civic — gained 1 mention this cycle (7 total), cooling, fame 39",
+      "Claire Ashford (author), Literature — gained 1 mention this cycle (3 total), stable, fame 16",
+      "Deacon Seymour (A's player), Sports — gained 1 mention this cycle (2 total), stable, fame 2",
+      "Movement vs C112: West Oakland +20 people, Fruitvale +9 people, Jack London +8 people, Chinatown +8 people, East Oakland +8 people"
+    ],
+    "evidence": [
+      {
+        "text": "Marisol Rivera (Community Advocate), Civic — gained 1 mention this cycle (7 total), cooling, fame 39",
+        "src": "output/beats/Cultural_Ledger.jsonl @C113 vs output/beats/prev/Cultural_Ledger.jsonl @C112"
+      },
+      {
+        "text": "Claire Ashford (author), Literature — gained 1 mention this cycle (3 total), stable, fame 16",
+        "src": "output/beats/Cultural_Ledger.jsonl @C113 vs output/beats/prev/Cultural_Ledger.jsonl @C112"
+      },
+      {
+        "text": "Deacon Seymour (A's player), Sports — gained 1 mention this cycle (2 total), stable, fame 2",
+        "src": "output/beats/Cultural_Ledger.jsonl @C113 vs output/beats/prev/Cultural_Ledger.jsonl @C112"
+      },
+      {
+        "text": "Movement vs C112: West Oakland +20 people, Fruitvale +9 people, Jack London +8 people, Chinatown +8 people, East Oakland +8 people",
+        "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C113"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": {
+      "state": "PRIOR_CYCLE_ON_DISK",
+      "vs": 112
+    },
+    "hooks": [
+      {
+        "text": "Household in Lake Merritt spending 53% of income on housing",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Lake Merritt",
+        "priority": 6
+      },
+      {
+        "text": "Downtown boom sustained — momentum 10/10, the block everyone wants onto",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Downtown",
+        "priority": 7
+      },
+      {
+        "text": "Laurel cooling off: foot traffic down, storefronts quieter than the rest of the city",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Laurel",
+        "priority": 6
+      },
+      {
+        "text": "Fruitvale boom sustained — momentum 10/10, the block everyone wants onto",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Fruitvale",
+        "priority": 7
+      },
+      {
+        "text": "Jack London boom sustained — momentum 10/10, the block everyone wants onto",
+        "angle": "desk rotation",
+        "domain": "COMMUNITY",
+        "hood": "Jack London",
+        "priority": 7
+      },
+      {
+        "text": "Grand Lake turning upward: retail busy, events drawing crowds, people moving in",
+        "angle": "desk rotation",
+        "domain": "COMMUNITY",
+        "hood": "Grand Lake",
+        "priority": 5
+      },
+      {
+        "text": "Grand Lake boom sustained — momentum 10/10, the block everyone wants onto",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Grand Lake",
+        "priority": 7
+      },
+      {
+        "text": "Uptown boom sustained — momentum 10/10, the block everyone wants onto",
+        "angle": "desk rotation",
+        "domain": "COMMUNITY",
+        "hood": "Uptown",
+        "priority": 7
+      }
+    ],
+    "note": null,
+    "pageVoices": [
+      "the A's — rising; most of the city over the last two months, still talking this week. Loudest: Vinnie Keane (Grand Lake), on their own page at C112 (not an interview — colour only, never a quote): “I'm still getting used to not being as active with the A's, but it's nice to see people coming together like that.”",
+      "the clinic — steady; dozens of citizens over the last two months, still talking this week. Loudest: Yu Zen (Rockridge), on their own page at C113 (not an interview — colour only, never a quote): “I've been on the other side of that ledger — lying in a hospital bed myself after my accident.”",
+      "transit — rising; dozens of citizens over the last two months, still talking this week. Loudest: Evan Lewis (Laurel), on their own page at C113 (not an interview — colour only, never a quote): “The construction around the Baylight District doesn't help either; when streets get torn up, people just find another way, even if the bus still runs on time.”",
+      "faith — rising; dozens of citizens over the last two months, still talking this week. Loudest: Eunice Marston (Downtown), on their own page at C112 (not an interview — colour only, never a quote): “As a faith leader, I believe our congregation's role in the community during times of crisis is to offer support and be present for those affected.”",
+      "rent — rising; dozens of citizens over the last two months, still talking this week. Loudest: Omar Amici (Uptown), on their own page at C113 (not an interview — colour only, never a quote): “The streets are busier than ever, and it seems like every other place is a for-rent sign these days.”"
+    ],
+    "roomIsYours": "the group chat, the third rewatch, who suddenly has an opinion about something nobody mentioned last month, what the city collectively decided to care about"
+  },
+  "talkedAbout": 3,
+  "appeared": 0,
+  "moves": 22,
+  "pointers": [
+    "output/beats/Cultural_Ledger.jsonl @C113",
+    "output/beats/Story_Hook_Deck.jsonl (hooks for Celeste Tran this cycle)"
+  ]
+}

@@ -1,0 +1,475 @@
+{
+  "stage": "angle",
+  "desk": "wire",
+  "cycle": "111",
+  "persona": "celeste-tran",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00164",
+      "name": "Celeste Tran",
+      "role": "desk reporter",
+      "desk": "wire"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Marin Tao leads the conversation (25 mentions); West Oakland moves the most — what Oakland is doing together this week",
+      "approach": "Social-trends approach: this slice is what the city is doing together — the names climbing the culture record, where people are moving, what the engine's hooks say is shifting. Fast, reactive, grounded: a trend claim needs a window and a number from this slice. The names and moves are real; the group chat, the binge-night, the collective mood swing are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "trends",
+        "hood": "Chinatown",
+        "facts": [
+          "Marin Tao (Celebrity), Arts — 25 media mentions, viral, fame 153",
+          "Dax Monroe (Celebrity), Sports — 20 media mentions, established, fame 85",
+          "Rico Valez (Celebrity), Arts — 19 media mentions, viral, fame 116",
+          "Warriors Alumni Thompson (Sports) — new on the culture record C110",
+          "Movement vs C110: West Oakland +18 people, Jack London +8 people, Grand Lake +8 people, East Oakland +8 people, Adams Point +7 people"
+        ],
+        "priorCycle": "PRIOR_CYCLE_ON_DISK",
+        "note": null,
+        "engineHooks": [
+          "Downtown boom sustained — momentum 10/10, the block everyone wants onto (observational analysis)",
+          "Fruitvale boom sustained — momentum 10/10, the block everyone wants onto (desk rotation)",
+          "Jack London boom sustained — momentum 10/10, the block everyone wants onto (observational analysis)",
+          "Grand Lake boom sustained — momentum 10/10, the block everyone wants onto (observational analysis)"
+        ],
+        "roomIsYours": "the group chat, the third rewatch, who suddenly has an opinion about something nobody mentioned last month, what the city collectively decided to care about",
+        "pageVoices": [
+          "the A's — fading; most of the city over the last two months, still talking this week. Loudest: Vinnie Keane (Grand Lake), on their own page at C109 (not an interview — colour only, never a quote): “Not just the Coliseum, but the soul of the place.”",
+          "transit — rising; dozens of citizens over the last two months, still talking this week. Loudest: Melton Neilon (Temescal), on their own page at C109 (not an interview — colour only, never a quote): “I’ve heard folks at the farmers market talking about the Fruitvale Transit Hub delays, but honestly, I’m not sure who’s s",
+          "faith — fading; dozens of citizens over the last two months, still talking this week. Loudest: Eunice Marston (Downtown), on their own page at C111 (not an interview — colour only, never a quote): “As a faith leader, you just keep your focus on the people and their needs, whether that means providing emergency aid or c",
+          "the Oaks — fading; dozens of citizens over the last two months, quiet this week. Loudest: Jessie Hess (Downtown), on their own page at C110 (not an interview — colour only, never a quote): “I was really hyped about the Oaks' starting five and their chances this season, but losing to the Miami Heat doesn't exactly fill ",
+          "the clinic — rising; a dozen or so citizens over the last two months, still talking this week. Loudest: Yu Zen (Rockridge), on their own page at C111 (not an interview — colour only, never a quote): “From where I'm lying in this hospital bed, all I hear are the nurses talking about how Chinatown's been hit hard.”"
+        ],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-trends",
+      "hood": "Chinatown",
+      "score": null,
+      "src": "output/beats/Cultural_Ledger.jsonl @C111",
+      "nearby": [
+        {
+          "text": "Chinatown | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c111.md \"### Chinatown\"; events: world_summary_c111.md \"## World Events\""
+        },
+        {
+          "text": "East Oakland | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c111.md \"### East Oakland\"; events: world_summary_c111.md \"## World Events\""
+        },
+        {
+          "text": "Fruitvale | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c111.md \"### Fruitvale\"; events: world_summary_c111.md \"## World Events\""
+        },
+        {
+          "text": "Grand Lake | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c111.md \"### Grand Lake\"; events: world_summary_c111.md \"## World Events\""
+        },
+        {
+          "text": "Jack London | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c111.md \"### Jack London\"; events: world_summary_c111.md \"## World Events\""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": []
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C111",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-a43c5d888b36"
+      },
+      {
+        "t": "FACT",
+        "text": "Marin Tao leads the conversation (25 mentions); West Oakland moves the most",
+        "src": "output/beats/Cultural_Ledger.jsonl @C111",
+        "id": "F-60c633ff8401"
+      },
+      {
+        "t": "FACT",
+        "text": "Marin Tao — 25 mentions, viral. The trend is the story; the mood is yours.",
+        "src": "output/beats/Cultural_Ledger.jsonl @C111",
+        "id": "F-355a9107f5c0"
+      },
+      {
+        "t": "FACT",
+        "text": "Marin Tao (Celebrity), Arts — 25 media mentions, viral, fame 153",
+        "src": "output/beats/Cultural_Ledger.jsonl @C111",
+        "id": "F-ddcdf7ac8f78"
+      },
+      {
+        "t": "FACT",
+        "text": "Dax Monroe (Celebrity), Sports — 20 media mentions, established, fame 85",
+        "src": "output/beats/Cultural_Ledger.jsonl @C111",
+        "id": "F-f21479eeb536"
+      },
+      {
+        "t": "FACT",
+        "text": "Rico Valez (Celebrity), Arts — 19 media mentions, viral, fame 116",
+        "src": "output/beats/Cultural_Ledger.jsonl @C111",
+        "id": "F-94e407ef3b22"
+      },
+      {
+        "t": "FACT",
+        "text": "Warriors Alumni Thompson (Sports) — new on the culture record C110",
+        "src": "output/beats/Cultural_Ledger.jsonl @C111",
+        "id": "F-fec17db6350b"
+      },
+      {
+        "t": "FACT",
+        "text": "Movement vs C110: West Oakland +18 people, Jack London +8 people, Grand Lake +8 people, East Oakland +8 people, Adams Point +7 people",
+        "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C111",
+        "id": "F-3c4b817448ec"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "No target candidate was supplied. Return targets as an empty array; do not invent a person or identifier. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "street",
+    "candidates": [],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Celeste Tran",
+    "popid": "POP-00164"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-trends",
+      "angle": "Marin Tao leads the conversation (25 mentions); West Oakland moves the most — what Oakland is doing together this week",
+      "label": "Marin Tao leads the conversation (25 mentions); West Oakland moves the most",
+      "hookLine": "Marin Tao — 25 mentions, viral. The trend is the story; the mood is yours.",
+      "hood": "Chinatown",
+      "citizens": [
+        "Marin Tao (POP-00537)",
+        "Dax Monroe (POP-00769)",
+        "Rico Valez (POP-00632)",
+        "Vinnie Keane (POP-00001)",
+        "Melton Neilon (POP-00170)",
+        "Eunice Marston (POP-00753)"
+      ],
+      "popids": [
+        "POP-00537",
+        "POP-00769",
+        "POP-00632",
+        "POP-00001",
+        "POP-00170",
+        "POP-00753"
+      ],
+      "ref": "output/beats/Cultural_Ledger.jsonl @C111",
+      "cycle": 111
+    },
+    "approach": "Social-trends approach: this slice is what the city is doing together — the names climbing the culture record, where people are moving, what the engine's hooks say is shifting. Fast, reactive, grounded: a trend claim needs a window and a number from this slice. The names and moves are real; the group chat, the binge-night, the collective mood swing are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "TRENDS-SLICE-3",
+    "kind": "beat-trends",
+    "seat": {
+      "slug": "celeste-tran",
+      "name": "Celeste Tran",
+      "popid": "POP-00164",
+      "desk": "wire",
+      "domain": "trends",
+      "builder": "buildTrendsSlice.js"
+    },
+    "hood": "Chinatown",
+    "pulse": {
+      "generatedAt": "2026-10-16T11:15:18.908Z",
+      "docs": 812,
+      "citizens": 260
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "Marin Tao leads the conversation (25 mentions); West Oakland moves the most — what Oakland is doing together this week",
+      "hookLine": "Marin Tao — 25 mentions, viral. The trend is the story; the mood is yours.",
+      "anchorFacts": [
+        "Marin Tao (Celebrity), Arts — 25 media mentions, viral, fame 153",
+        "Dax Monroe (Celebrity), Sports — 20 media mentions, established, fame 85",
+        "Rico Valez (Celebrity), Arts — 19 media mentions, viral, fame 116",
+        "Warriors Alumni Thompson (Sports) — new on the culture record C110",
+        "Movement vs C110: West Oakland +18 people, Jack London +8 people, Grand Lake +8 people, East Oakland +8 people, Adams Point +7 people"
+      ],
+      "evidence": [
+        {
+          "text": "Marin Tao (Celebrity), Arts — 25 media mentions, viral, fame 153",
+          "src": "output/beats/Cultural_Ledger.jsonl @C111"
+        },
+        {
+          "text": "Dax Monroe (Celebrity), Sports — 20 media mentions, established, fame 85",
+          "src": "output/beats/Cultural_Ledger.jsonl @C111"
+        },
+        {
+          "text": "Rico Valez (Celebrity), Arts — 19 media mentions, viral, fame 116",
+          "src": "output/beats/Cultural_Ledger.jsonl @C111"
+        },
+        {
+          "text": "Warriors Alumni Thompson (Sports) — new on the culture record C110",
+          "src": "output/beats/Cultural_Ledger.jsonl @C111"
+        },
+        {
+          "text": "Movement vs C110: West Oakland +18 people, Jack London +8 people, Grand Lake +8 people, East Oakland +8 people, Adams Point +7 people",
+          "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C111"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": {
+        "state": "PRIOR_CYCLE_ON_DISK",
+        "vs": 110
+      },
+      "hooks": [
+        {
+          "text": "Downtown boom sustained — momentum 10/10, the block everyone wants onto",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Downtown",
+          "priority": 7
+        },
+        {
+          "text": "Fruitvale boom sustained — momentum 10/10, the block everyone wants onto",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "Fruitvale",
+          "priority": 7
+        },
+        {
+          "text": "Jack London boom sustained — momentum 10/10, the block everyone wants onto",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Jack London",
+          "priority": 7
+        },
+        {
+          "text": "Grand Lake boom sustained — momentum 10/10, the block everyone wants onto",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Grand Lake",
+          "priority": 7
+        },
+        {
+          "text": "Brooklyn cooling off: foot traffic down, storefronts quieter than the rest of the city",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "Brooklyn",
+          "priority": 6
+        },
+        {
+          "text": "Uptown boom sustained — momentum 10/10, the block everyone wants onto",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "Uptown",
+          "priority": 7
+        },
+        {
+          "text": "Hal Richmond moved from Chinatown to West Oakland — moving up from Chinatown",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "West Oakland",
+          "priority": 5
+        },
+        {
+          "text": "Philly Rodriguez moved from Jack London to West Oakland — moving up from Jack London",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "West Oakland",
+          "priority": 5
+        }
+      ],
+      "note": null,
+      "pageVoices": [
+        "the A's — fading; most of the city over the last two months, still talking this week. Loudest: Vinnie Keane (Grand Lake), on their own page at C109 (not an interview — colour only, never a quote): “Not just the Coliseum, but the soul of the place.”",
+        "transit — rising; dozens of citizens over the last two months, still talking this week. Loudest: Melton Neilon (Temescal), on their own page at C109 (not an interview — colour only, never a quote): “I’ve heard folks at the farmers market talking about the Fruitvale Transit Hub delays, but honestly, I’m not sure who’s supposed to be steering it forward.”",
+        "faith — fading; dozens of citizens over the last two months, still talking this week. Loudest: Eunice Marston (Downtown), on their own page at C111 (not an interview — colour only, never a quote): “As a faith leader, you just keep your focus on the people and their needs, whether that means providing emergency aid or coming together for a holy day.”",
+        "the Oaks — fading; dozens of citizens over the last two months, quiet this week. Loudest: Jessie Hess (Downtown), on their own page at C110 (not an interview — colour only, never a quote): “I was really hyped about the Oaks' starting five and their chances this season, but losing to the Miami Heat doesn't exactly fill me with confidence.”",
+        "the clinic — rising; a dozen or so citizens over the last two months, still talking this week. Loudest: Yu Zen (Rockridge), on their own page at C111 (not an interview — colour only, never a quote): “From where I'm lying in this hospital bed, all I hear are the nurses talking about how Chinatown's been hit hard.”"
+      ],
+      "roomIsYours": "the group chat, the third rewatch, who suddenly has an opinion about something nobody mentioned last month, what the city collectively decided to care about"
+    },
+    "citizens": [
+      {
+        "popid": "POP-00537",
+        "name": "Marin Tao",
+        "role": "Musician",
+        "neighborhood": "Chinatown",
+        "business": null,
+        "profile": "Marin Tao — Musician — Chinatown",
+        "why": "the city is talking about them (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-00769",
+        "name": "Dax Monroe",
+        "role": "Artist",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Dax Monroe — Artist — Rockridge",
+        "why": "the city is talking about them (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-00632",
+        "name": "Rico Valez",
+        "role": "Musician",
+        "neighborhood": "Fruitvale",
+        "business": null,
+        "profile": "Rico Valez — Musician — Fruitvale",
+        "why": "the city is talking about them (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-00001",
+        "name": "Vinnie Keane",
+        "role": "Designated Hitter, Oakland A's Legend",
+        "neighborhood": "Grand Lake",
+        "business": null,
+        "profile": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+        "why": "has been saying it on their own page — the A's, C109: “Not just the Coliseum, but the soul of the place.”"
+      },
+      {
+        "popid": "POP-00170",
+        "name": "Melton Neilon",
+        "role": "Sourdough Baker",
+        "neighborhood": "Temescal",
+        "business": null,
+        "profile": "Melton Neilon — Sourdough Baker — Temescal",
+        "why": "has been saying it on their own page — transit, C109: “I’ve heard folks at the farmers market talking about the Fruitvale Transit Hub delays, but honestly, I’m not sure who’s supposed to be steering it forward.”"
+      },
+      {
+        "popid": "POP-00753",
+        "name": "Eunice Marston",
+        "role": "Senior Pastor / Faith Leader",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Eunice Marston — Senior Pastor / Faith Leader — Downtown",
+        "why": "has been saying it on their own page — faith, C111: “As a faith leader, you just keep your focus on the people and their needs, whether that means providing emergency aid or coming together for a holy day.”"
+      }
+    ],
+    "pointers": [
+      "output/beats/Cultural_Ledger.jsonl @C111",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Celeste Tran this cycle)",
+      "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Celeste Tran",
+    "popid": "POP-00164",
+    "text": "I'm looking at the gap between the noise and the pavement. Marin Tao is everywhere right now—25 mentions, a total viral storm—but while the city is obsessing over that kind of fame, my own block in West Oakland is actually shifting. We've got 18 new people moving in, the most of anywhere in the city this cycle. I want to see if the people unloading U-Hauls by the West Side Cafe are coming for the 'scene' that Tao represents, or if there's something deeper pulling people toward the industrial grays of the West side while the rest of the city just watches a screen.",
+    "plan": {
+      "chase": "I'm looking at the gap between the noise and the pavement. Marin Tao is everywhere right now—25 mentions, a total viral storm—but while the city is obsessing over that kind of fame, my own block in West Oakland is actually shifting. We've got 18 new people moving in, the most of anywhere in the city this cycle. I want to see if the people unloading U-Hauls by the West Side Cafe are coming for the 'scene' that Tao represents, or if there's something deeper pulling people toward the industrial grays of the West side while the rest of the city just watches a screen.",
+      "focus": "The tension between viral celebrity culture (Marin Tao) and the physical migration into West Oakland.",
+      "why": "Because a spike in media mentions is just noise, but 18 people moving onto a block is a change in the neighborhood's DNA.",
+      "checks": [
+        "Verify if the influx in West Oakland is linked to the arts boom driving Tao and Valez's visibility.",
+        "Compare the 'established' energy of Dax Monroe's sports crowd with the 'viral' energy of the arts scene."
+      ],
+      "targets": [],
+      "interpretation": "The city is experiencing a split where the digital conversation is dominated by a few viral figures, but the actual physical momentum is centering on West Oakland.",
+      "unverifiedLead": [
+        "Whether the new arrivals in West Oakland are following the arts trend or seeking something outside the downtown boom."
+      ],
+      "closeQuestion": "Is the growth in West Oakland a result of the same cultural energy making Marin Tao viral, or is it a reaction against it?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Chinatown | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Chinatown",
+      "ref": "output/neighborhood_texture_c111.md \"### Chinatown\"; events: world_summary_c111.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "East Oakland | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "East Oakland",
+      "ref": "output/neighborhood_texture_c111.md \"### East Oakland\"; events: world_summary_c111.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Fruitvale | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Fruitvale",
+      "ref": "output/neighborhood_texture_c111.md \"### Fruitvale\"; events: world_summary_c111.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Grand Lake | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Grand Lake",
+      "ref": "output/neighborhood_texture_c111.md \"### Grand Lake\"; events: world_summary_c111.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Jack London | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Jack London",
+      "ref": "output/neighborhood_texture_c111.md \"### Jack London\"; events: world_summary_c111.md \"## World Events\"",
+      "popids": []
+    }
+  ],
+  "laneEntries": 20,
+  "angleCapHits": 0,
+  "ranAt": "2026-10-16T11:16:46.392Z"
+}

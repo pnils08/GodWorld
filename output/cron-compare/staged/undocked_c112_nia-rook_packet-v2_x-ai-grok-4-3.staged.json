@@ -1,0 +1,56 @@
+{
+  "status": "staged",
+  "desk": "undocked",
+  "cycle": "112",
+  "persona": "nia-rook",
+  "byline": "Nia Rook",
+  "bylinePopid": "POP-01076",
+  "article": "output/cron-compare/staged/undocked_c112_nia-rook_packet-v2_x-ai-grok-4-3.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Rafael Phillips",
+        "role": "mentioned",
+        "popid": "POP-01077",
+        "ambiguous": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Rockridge"
+    ],
+    "claims": [
+      {
+        "claim": "Being 'dead even on the night' doesn't mean much to me, to be honest. I'm just trying to make ends meet as a nurse aide. Money's been tight lately, but I'm managing. I've got my routine, and that's what keeps me going.",
+        "sourceRef": "citizenVoice PRESS Rafael Phillips"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-2d8fbf0bbacf",
+    "draftSha256": "169024ee1bf9b3f243466c47d626aa3049aff5687a892590b74250097c389224",
+    "verdict": "output/cron-compare/undocked_c112_nia-rook_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-10-21T23:21:45.467Z",
+    "contractScore": {
+      "opened": true,
+      "closed": false,
+      "purposeMet": true,
+      "inTarget": false,
+      "inTargetBy": "code floor 350",
+      "words": 317,
+      "short": "The piece falls below the 350-word minimum and ends on a vague meta-reference rather than a specific sentence for hallways to argue about.",
+      "score": 2,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "169024ee1bf9b3f243466c47d626aa3049aff5687a892590b74250097c389224",
+      "costUsd": 0.0012
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-21T23:21:51.312Z"
+}

@@ -1,0 +1,38 @@
+{
+  "office": "council_d7",
+  "cycle": 113,
+  "speaker": "Warren Ashford",
+  "cascadeSummary": "District 7 has published the formal post-occupancy audit benchmarks and clinical intake framework for the Temescal Community Health Center, establishing firm fiscal accountability for its ongoing operations. While City Hall celebrates construction milestones, I am demanding that remaining allocations tie directly to verified patient outcomes in Temescal, Rockridge, and KONO. Furthermore, as millions are slated for commercial corridors across the city, District 7 will not allow KONO's steady merchants to be sidelined without concrete corridor support.",
+  "statements": [
+    {
+      "statementId": "STMT-113-council_d7-001",
+      "type": "oversight_statement",
+      "topic": "Temescal Community Health Center Quarterly Utilization and Operational Benchmarks",
+      "initiative": "Temescal Community Health Center",
+      "decision": "Published post-occupancy audit benchmarks and patient intake metrics for INIT-005's standing quarterly review.",
+      "quote": "Opening under budget was step one; step two is proving that every public dollar translates into verified clinical intake and measurable health outcomes.",
+      "fullStatement": "District 7 has formally submitted and published the post-occupancy audit framework and intake metrics for the Temescal Community Health Center as it enters standing quarterly review. It is not enough to celebrate completing construction under budget. With over sixteen million dollars remaining in the total allocation, public funds require continuous oversight. Our framework establishes measurable clinical intake thresholds and quarterly expenditure reconciliations across Temescal, Rockridge, and KONO. The Mayor may claim credit for the opening, but District 7 is ensuring the balance sheet delivers actual patient care.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-113-council_d7-002",
+      "type": "district_advocacy_statement",
+      "topic": "KONO Corridor Commercial Equity and Temescal Local Resilience",
+      "initiative": null,
+      "decision": "Demanded corridor support equity for KONO and recognized Temescal's merchant discipline as the driver of local stability.",
+      "quote": "Temescal's resilience belongs to the shopkeepers working through slow trade, and KONO cannot remain an afterthought while City Hall funds downtown programs.",
+      "fullStatement": "While Temescal registers mildly positive sentiment, let us be clear: that stability is driven by merchant discipline and community patience, not municipal self-congratulation. Meanwhile, KONO maintains low crime and steady street trade through sheer local tenacity, yet continues to be overlooked as commercial revitalization packages are directed elsewhere. If this Council is going to advance multi-million-dollar economic packages for Downtown and Grand Lake, KONO requires equal line-item investment and measurable commercial retention support.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-113-council_d7-003",
+      "type": "vote_statement",
+      "topic": "Downtown and Commercial Revitalization Fiscal Triggers",
+      "initiative": "Downtown Economic Revitalization",
+      "decision": "Conditioned support on strict line-item benchmarks, pre-disbursement audit triggers, and Northern corridor equity.",
+      "quote": "Revitalization packages cannot operate as open checkbooks without verifiable return on investment and audit triggers attached.",
+      "fullStatement": "As the Downtown Economic Revitalization Initiative and related corridor bills move forward, District 7 maintains that no municipal fund should clear committee without mandatory audit triggers and return-on-investment benchmarks. We must prevent unmonitored capital disbursements. District 7 will hold the line on fiscal rigor, ensuring these economic investments produce documented job growth and verifiable tax base expansion without leaving northern transit corridors behind.",
+      "trackerUpdates": {}
+    }
+  ]
+}

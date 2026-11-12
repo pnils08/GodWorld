@@ -1,0 +1,80 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "113",
+  "persona": "noah-tan",
+  "byline": "Noah Tan",
+  "bylinePopid": "POP-00157",
+  "article": "output/cron-compare/staged/civic_c113_noah-tan_packet-v2_x-ai-grok-4-3.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Cee Lee",
+        "role": "mentioned",
+        "popid": "POP-00320"
+      },
+      {
+        "name": "Johhny Necklar",
+        "role": "mentioned",
+        "popid": "POP-00509"
+      },
+      {
+        "name": "Elle Lilo",
+        "role": "quoted-source",
+        "popid": "POP-00177"
+      },
+      {
+        "name": "Rafael Brannie",
+        "role": "mentioned",
+        "popid": "POP-00223"
+      },
+      {
+        "name": "Kwame Fitzgerald",
+        "role": "mentioned",
+        "popid": "POP-00259",
+        "floor": true
+      },
+      {
+        "name": "Omar Amici",
+        "role": "mentioned",
+        "popid": "POP-00263",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "Three clear days helps, I won't lie. The cold stretch had me moving slower than I like—that kind of tired that sits in your bones. But 'lifted'? I'd say paused. Seasonal stuff like this, it lingers in the background. I'm out walking the lake path again, getting back to normal, but I'm not foolish enough to think it's gone for good. You learn to live with the ebb and flow of it.",
+        "sourceRef": "citizenVoice PRESS Cee Lee"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-391efd71ade0",
+    "draftSha256": "622b057f447e0cff49ac1f968a3a335185ef22d7a58b553e232fc45bc14158bb",
+    "verdict": "output/cron-compare/civic_c113_noah-tan_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-10-28T23:16:35.913Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 400",
+      "words": 602,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "622b057f447e0cff49ac1f968a3a335185ef22d7a58b553e232fc45bc14158bb",
+      "costUsd": 0.0011
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-28T23:16:39.294Z"
+}

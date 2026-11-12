@@ -1,0 +1,32 @@
+{
+  "status": "arc-seed",
+  "cycle": "111",
+  "desk": "culture",
+  "persona": "maria-keen",
+  "hood": "Downtown",
+  "quotes": [
+    {
+      "pop": "POP-00351",
+      "name": "Ryan Stark",
+      "quote": "I walked by SpeedyBurger on Broadway and saw a new lease sign go up above it. The paper was still crisp in the display case. It's another new spot opening up in Downtown, which is great to see."
+    },
+    {
+      "pop": "POP-00148",
+      "name": "Gordon Tate",
+      "quote": "I just noticed another new spot opening up around Downtown. It's always something new popping up, which is fine, but with the rent going up the way it is, you start wondering who these places are actually for."
+    },
+    {
+      "pop": "POP-00048",
+      "name": "Carlos Presti",
+      "quote": "I saw another new spot opening up Downtown. I don't know what it is yet, but I'm always curious to see what actually sticks around here. It's just good to see something new moving in."
+    },
+    {
+      "pop": "POP-00004",
+      "name": "Lucia Polito",
+      "quote": "I heard about Downtown First Friday Live Music last night, and it made me think about how vibrant Downtown can be. It's great to see people coming together for events like that."
+    }
+  ],
+  "claim": "I walked by SpeedyBurger on Broadway and saw a new lease sign go up above it. The paper was still crisp in the display case. It's another new spot opening up in Downtown, which is great to see.",
+  "src": "citizenVoice PRESS c111",
+  "ranAt": "2026-10-16T18:17:28.309Z"
+}

@@ -1,0 +1,155 @@
+{
+  "cycle": "113",
+  "signals": [
+    {
+      "slug": "INIT-006:construction-active",
+      "advanced": 0,
+      "opened": 0,
+      "closed": 0,
+      "referenced": 3,
+      "articles": [
+        "civic_c113_luis-navarro_packet-v2_anthropic-claude-sonnet-5-5",
+        "civic_c113_trevor-shimizu_packet-v2_openai-gpt-5-6-luna",
+        "culture_c113_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-2321"
+      ],
+      "hoods": [
+        "Downtown"
+      ],
+      "citizens": [
+        "POP-00790",
+        "POP-00502",
+        "POP-00200",
+        "POP-00338",
+        "POP-00617",
+        "POP-00769"
+      ],
+      "desks": [
+        "civic",
+        "culture"
+      ]
+    },
+    {
+      "slug": "INIT-005:operational",
+      "advanced": 0,
+      "opened": 0,
+      "closed": 0,
+      "referenced": 2,
+      "articles": [
+        "business_c113_business-desk_packet-v2_anthropic-claude-opus-5-5",
+        "culture_c113_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-2321"
+      ],
+      "hoods": [
+        "Temescal"
+      ],
+      "citizens": [
+        "POP-00792",
+        "POP-00769"
+      ],
+      "desks": [
+        "business",
+        "culture"
+      ]
+    },
+    {
+      "slug": "INIT-002:dispatch-live",
+      "advanced": 0,
+      "opened": 0,
+      "closed": 0,
+      "referenced": 1,
+      "articles": [
+        "culture_c113_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-2320"
+      ],
+      "hoods": [],
+      "citizens": [
+        "POP-00256",
+        "POP-00590",
+        "POP-00759"
+      ],
+      "desks": [
+        "culture"
+      ]
+    },
+    {
+      "slug": "INIT-003:design-phase",
+      "advanced": 0,
+      "opened": 0,
+      "closed": 0,
+      "referenced": 1,
+      "articles": [
+        "culture_c113_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-2320"
+      ],
+      "hoods": [],
+      "citizens": [
+        "POP-00256",
+        "POP-00590",
+        "POP-00759"
+      ],
+      "desks": [
+        "culture"
+      ]
+    }
+  ],
+  "registry": [
+    {
+      "id": "INIT-001:disbursement-active",
+      "status": "open",
+      "stage": "disbursement-active"
+    },
+    {
+      "id": "INIT-002:dispatch-live",
+      "status": "open",
+      "stage": "dispatch-live"
+    },
+    {
+      "id": "INIT-003:design-phase",
+      "status": "open",
+      "stage": "design-phase"
+    },
+    {
+      "id": "INIT-005:operational",
+      "status": "open",
+      "stage": "operational"
+    },
+    {
+      "id": "INIT-006:construction-active",
+      "status": "open",
+      "stage": "construction-active"
+    },
+    {
+      "id": "INIT-007:implementation-active",
+      "status": "open",
+      "stage": "implementation-active"
+    },
+    {
+      "id": "INIT-008:legislation-filed",
+      "status": "open",
+      "stage": "legislation-filed"
+    },
+    {
+      "id": "INIT-009:legislation-filed",
+      "status": "open",
+      "stage": "legislation-filed"
+    },
+    {
+      "id": "INIT-010:operational",
+      "status": "open",
+      "stage": "operational"
+    },
+    {
+      "id": "INIT-011:announced",
+      "status": "open",
+      "stage": "announced"
+    },
+    {
+      "id": "INIT-012:announced",
+      "status": "open",
+      "stage": "announced"
+    },
+    {
+      "id": "INIT-010:vote-scheduled",
+      "status": "closed",
+      "stage": "vote-scheduled"
+    }
+  ],
+  "retiredSlugsIgnored": 0
+}

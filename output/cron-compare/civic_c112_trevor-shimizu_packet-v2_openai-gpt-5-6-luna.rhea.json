@@ -1,0 +1,74 @@
+{
+  "draft": "output/cron-compare/civic_c112_trevor-shimizu_packet-v2_openai-gpt-5-6-luna.md",
+  "cycle": "112",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "30b69a664839007d4301b5c750de46136c76fe9953df0538c9ea5dfc24eb7835",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Transit figures, citizen bios, and verbatim quotes for Eleanor Rivera and Evan Lewis verified against ground truth with clean canon integrity.",
+  "review": {
+    "profileId": "trevor-infrastructure-systems-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "trevor-infrastructure-systems-v1",
+    "packageVersion": "TREVOR-LEP2-1",
+    "manifestId": "AM-3f48cf72526a",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "40",
+          "83"
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [
+      "Eleanor Rivera",
+      "Evan Lewis"
+    ],
+    "unverified": [
+      "Final Council Vote",
+      "St Oakland",
+      "St Oakland City Center"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 2,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0103,
+  "durationMs": 6376,
+  "parseError": false,
+  "ranAt": "2026-10-19T23:18:42.265Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 500",
+    "words": 692,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "30b69a664839007d4301b5c750de46136c76fe9953df0538c9ea5dfc24eb7835",
+    "costUsd": 0.0011
+  }
+}

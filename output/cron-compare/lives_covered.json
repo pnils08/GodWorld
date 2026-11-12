@@ -1,0 +1,534 @@
+{
+  "death:POP-00934:114": {
+    "popid": "POP-00867",
+    "kind": "death",
+    "cycle": 114,
+    "eventCycle": 114,
+    "day": "2026-11-02"
+  },
+  "household:HH-0114-F001:114": {
+    "popid": "POP-00150",
+    "kind": "household",
+    "cycle": 114,
+    "day": "2026-11-02"
+  },
+  "household:HH-0114-F002:114": {
+    "popid": "POP-00169",
+    "kind": "household",
+    "cycle": 114,
+    "day": "2026-11-02"
+  },
+  "casino:2d864b200b92d9fd:114": {
+    "popid": "POP-00276",
+    "kind": "casino",
+    "cycle": 114,
+    "day": "2026-11-02"
+  },
+  "casino:69936ba03d772754:114": {
+    "popid": "POP-00218",
+    "kind": "casino",
+    "cycle": 114,
+    "day": "2026-11-02"
+  },
+  "seed:fd4277fa:114:POP-01082": {
+    "popid": "POP-01082",
+    "kind": "seed",
+    "cycle": 114,
+    "day": "2026-11-02"
+  },
+  "seed:b3f6d32f:114:POP-00771": {
+    "popid": "POP-00771",
+    "kind": "seed",
+    "cycle": 114,
+    "day": "2026-11-02"
+  },
+  "seed:a1efa0e8:114:POP-01169": {
+    "popid": "POP-01169",
+    "kind": "seed",
+    "cycle": 114,
+    "day": "2026-11-02"
+  },
+  "moment:POP-00126:114:PostCareer": {
+    "popid": "POP-00126",
+    "kind": "moment",
+    "cycle": 114,
+    "day": "2026-11-02"
+  },
+  "moment:POP-00308:114:PostCareer": {
+    "popid": "POP-00308",
+    "kind": "moment",
+    "cycle": 114,
+    "day": "2026-11-02"
+  },
+  "moment:POP-00321:114:PostCareer": {
+    "popid": "POP-00321",
+    "kind": "moment",
+    "cycle": 114,
+    "day": "2026-11-02"
+  },
+  "moment:POP-00442:114:PostCareer": {
+    "popid": "POP-00442",
+    "kind": "moment",
+    "cycle": 114,
+    "day": "2026-11-02"
+  },
+  "household:HH-0114-F003:114": {
+    "popid": "POP-00177",
+    "kind": "household",
+    "cycle": 114,
+    "day": "2026-11-03"
+  },
+  "household:HH-0114-F004:114": {
+    "popid": "POP-00320",
+    "kind": "household",
+    "cycle": 114,
+    "day": "2026-11-03"
+  },
+  "casino:4e36b9d8448c3513:114": {
+    "popid": "POP-00861",
+    "kind": "casino",
+    "cycle": 114,
+    "day": "2026-11-03"
+  },
+  "seed:8491626d:114:POP-00968": {
+    "popid": "POP-00968",
+    "kind": "seed",
+    "cycle": 114,
+    "day": "2026-11-03"
+  },
+  "seed:b61124ae:114:POP-00049": {
+    "popid": "POP-00049",
+    "kind": "seed",
+    "cycle": 114,
+    "day": "2026-11-03"
+  },
+  "seed:2068a502:114:POP-00746": {
+    "popid": "POP-00746",
+    "kind": "seed",
+    "cycle": 114,
+    "day": "2026-11-03"
+  },
+  "moment:POP-00510:114:PostCareer": {
+    "popid": "POP-00510",
+    "kind": "moment",
+    "cycle": 114,
+    "day": "2026-11-03"
+  },
+  "moment:POP-00730:114:PostCareer": {
+    "popid": "POP-00730",
+    "kind": "moment",
+    "cycle": 114,
+    "day": "2026-11-03"
+  },
+  "moment:POP-00827:114:PostCareer": {
+    "popid": "POP-00827",
+    "kind": "moment",
+    "cycle": 114,
+    "day": "2026-11-03"
+  },
+  "moment:POP-00679:114:Relocation-Drive-Up-M": {
+    "popid": "POP-00679",
+    "kind": "moment",
+    "cycle": 114,
+    "day": "2026-11-03"
+  },
+  "household:HH-0114-F005:114": {
+    "popid": "POP-00447",
+    "kind": "household",
+    "cycle": 114,
+    "day": "2026-11-04"
+  },
+  "household:HH-0114-F006:114": {
+    "popid": "POP-00460",
+    "kind": "household",
+    "cycle": 114,
+    "day": "2026-11-04"
+  },
+  "seed:1b3c6537:114:POP-00230": {
+    "popid": "POP-00230",
+    "kind": "seed",
+    "cycle": 114,
+    "day": "2026-11-04"
+  },
+  "seed:dd89b853:114:POP-00344": {
+    "popid": "POP-00344",
+    "kind": "seed",
+    "cycle": 114,
+    "day": "2026-11-04"
+  },
+  "seed:e1b3759a:114:POP-01117": {
+    "popid": "POP-01117",
+    "kind": "seed",
+    "cycle": 114,
+    "day": "2026-11-04"
+  },
+  "moment:POP-00543:114:Relocation-Drive-Up-M": {
+    "popid": "POP-00543",
+    "kind": "moment",
+    "cycle": 114,
+    "day": "2026-11-04"
+  },
+  "moment:POP-00822:114:Relocation-Drive-Up-M": {
+    "popid": "POP-00822",
+    "kind": "moment",
+    "cycle": 114,
+    "day": "2026-11-04"
+  },
+  "moment:POP-01148:114:Graduation": {
+    "popid": "POP-01148",
+    "kind": "moment",
+    "cycle": 114,
+    "day": "2026-11-04"
+  },
+  "moment:POP-01158:114:Graduation": {
+    "popid": "POP-01158",
+    "kind": "moment",
+    "cycle": 114,
+    "day": "2026-11-04"
+  },
+  "household:HH-0114-F007:114": {
+    "popid": "POP-00539",
+    "kind": "household",
+    "cycle": 114,
+    "day": "2026-11-05"
+  },
+  "household:HH-0114-F008:114": {
+    "popid": "POP-00658",
+    "kind": "household",
+    "cycle": 114,
+    "day": "2026-11-05"
+  },
+  "seed:891e765c:114:POP-00848": {
+    "popid": "POP-00848",
+    "kind": "seed",
+    "cycle": 114,
+    "day": "2026-11-05"
+  },
+  "seed:258bd2e7:114:POP-00714": {
+    "popid": "POP-00714",
+    "kind": "seed",
+    "cycle": 114,
+    "day": "2026-11-05"
+  },
+  "seed:d94ea23d:114:POP-00024": {
+    "popid": "POP-00024",
+    "kind": "seed",
+    "cycle": 114,
+    "day": "2026-11-05"
+  },
+  "moment:POP-00060:114:Graduation": {
+    "popid": "POP-00060",
+    "kind": "moment",
+    "cycle": 114,
+    "day": "2026-11-05"
+  },
+  "moment:POP-00789:114:Business-Gain": {
+    "popid": "POP-00789",
+    "kind": "moment",
+    "cycle": 114,
+    "day": "2026-11-05"
+  },
+  "moment:POP-00019:114:Business-Gain": {
+    "popid": "POP-00019",
+    "kind": "moment",
+    "cycle": 114,
+    "day": "2026-11-05"
+  },
+  "moment:POP-00018:114:Business-Gain": {
+    "popid": "POP-00018",
+    "kind": "moment",
+    "cycle": 114,
+    "day": "2026-11-05"
+  },
+  "household:HH-0114-F009:114": {
+    "popid": "POP-00687",
+    "kind": "household",
+    "cycle": 114,
+    "day": "2026-11-06"
+  },
+  "household:HH-0114-F010:114": {
+    "popid": "POP-00755",
+    "kind": "household",
+    "cycle": 114,
+    "day": "2026-11-06"
+  },
+  "seed:0d0615e8:114:POP-00058": {
+    "popid": "POP-00058",
+    "kind": "seed",
+    "cycle": 114,
+    "day": "2026-11-06"
+  },
+  "seed:b9b28ced:114:POP-01086": {
+    "popid": "POP-01086",
+    "kind": "seed",
+    "cycle": 114,
+    "day": "2026-11-06"
+  },
+  "seed:f5a04768:114:POP-01044": {
+    "popid": "POP-01044",
+    "kind": "seed",
+    "cycle": 114,
+    "day": "2026-11-06"
+  },
+  "moment:POP-00001:114:Business-Gain": {
+    "popid": "POP-00001",
+    "kind": "moment",
+    "cycle": 114,
+    "day": "2026-11-06"
+  },
+  "moment:POP-00356:114:LifeEvent-Promotion-Down-S": {
+    "popid": "POP-00356",
+    "kind": "moment",
+    "cycle": 114,
+    "day": "2026-11-06"
+  },
+  "moment:POP-00719:114:LifeEvent-Promotion-Up-M": {
+    "popid": "POP-00719",
+    "kind": "moment",
+    "cycle": 114,
+    "day": "2026-11-06"
+  },
+  "moment:POP-01037:114:LifeEvent-Promotion-Up-S": {
+    "popid": "POP-01037",
+    "kind": "moment",
+    "cycle": 114,
+    "day": "2026-11-06"
+  },
+  "retirement:POP-00001:115": {
+    "popid": "POP-00001",
+    "kind": "retirement",
+    "cycle": 115,
+    "eventCycle": 115,
+    "day": "2026-11-09"
+  },
+  "retirement:POP-00177:115": {
+    "popid": "POP-00177",
+    "kind": "retirement",
+    "cycle": 115,
+    "eventCycle": 115,
+    "day": "2026-11-09"
+  },
+  "promotion:POP-01093:115": {
+    "popid": "POP-01093",
+    "kind": "promotion",
+    "cycle": 115,
+    "eventCycle": 115,
+    "day": "2026-11-09"
+  },
+  "household:HH-0115-F001:115": {
+    "popid": "POP-00085",
+    "kind": "household",
+    "cycle": 115,
+    "day": "2026-11-09"
+  },
+  "household:HH-0115-F002:115": {
+    "popid": "POP-00344",
+    "kind": "household",
+    "cycle": 115,
+    "day": "2026-11-09"
+  },
+  "casino:f3410ba9e4ef3e22:115": {
+    "popid": "POP-00257",
+    "kind": "casino",
+    "cycle": 115,
+    "day": "2026-11-09"
+  },
+  "casino:baf6a79123e79cd6:115": {
+    "popid": "POP-00191",
+    "kind": "casino",
+    "cycle": 115,
+    "day": "2026-11-09"
+  },
+  "seed:10ea4b7b:115:POP-00021": {
+    "popid": "POP-00021",
+    "kind": "seed",
+    "cycle": 115,
+    "day": "2026-11-09"
+  },
+  "seed:d9568473:115:POP-01134": {
+    "popid": "POP-01134",
+    "kind": "seed",
+    "cycle": 115,
+    "day": "2026-11-09"
+  },
+  "seed:84b32f87:115:POP-00849": {
+    "popid": "POP-00849",
+    "kind": "seed",
+    "cycle": 115,
+    "day": "2026-11-09"
+  },
+  "moment:POP-00129:115:PostCareer-Influence": {
+    "popid": "POP-00129",
+    "kind": "moment",
+    "cycle": 115,
+    "day": "2026-11-09"
+  },
+  "moment:POP-00354:115:PostCareer": {
+    "popid": "POP-00354",
+    "kind": "moment",
+    "cycle": 115,
+    "day": "2026-11-09"
+  },
+  "moment:POP-00035:115:Relocation-Drive-Up-M": {
+    "popid": "POP-00035",
+    "kind": "moment",
+    "cycle": 115,
+    "day": "2026-11-09"
+  },
+  "moment:POP-00181:115:Relocation-Drive-Up-M": {
+    "popid": "POP-00181",
+    "kind": "moment",
+    "cycle": 115,
+    "day": "2026-11-09"
+  },
+  "moment:POP-01033:115:Relocation-Drive-Up-M": {
+    "popid": "POP-01033",
+    "kind": "moment",
+    "cycle": 115,
+    "day": "2026-11-09"
+  },
+  "household:HH-0115-F003:115": {
+    "popid": "POP-00507",
+    "kind": "household",
+    "cycle": 115,
+    "day": "2026-11-10"
+  },
+  "household:HH-0115-F004:115": {
+    "popid": "POP-00651",
+    "kind": "household",
+    "cycle": 115,
+    "day": "2026-11-10"
+  },
+  "casino:4c5908b368c72777:115": {
+    "popid": "POP-00711",
+    "kind": "casino",
+    "cycle": 115,
+    "day": "2026-11-10"
+  },
+  "casino:bf0742900a9ae52f:115": {
+    "popid": "POP-01165",
+    "kind": "casino",
+    "cycle": 115,
+    "day": "2026-11-10"
+  },
+  "seed:f60e008e:115:POP-00321": {
+    "popid": "POP-00321",
+    "kind": "seed",
+    "cycle": 115,
+    "day": "2026-11-10"
+  },
+  "seed:7fe306c7:115:POP-00754": {
+    "popid": "POP-00754",
+    "kind": "seed",
+    "cycle": 115,
+    "day": "2026-11-10"
+  },
+  "seed:75e2f1ee:115:POP-00236": {
+    "popid": "POP-00236",
+    "kind": "seed",
+    "cycle": 115,
+    "day": "2026-11-10"
+  },
+  "moment:POP-00199:115:Relocation-Drive-Up-M": {
+    "popid": "POP-00199",
+    "kind": "moment",
+    "cycle": 115,
+    "day": "2026-11-10"
+  },
+  "moment:POP-00276:115:Relocation-Composure-Up-M": {
+    "popid": "POP-00276",
+    "kind": "moment",
+    "cycle": 115,
+    "day": "2026-11-10"
+  },
+  "moment:POP-00338:115:Relocation-Composure-Down-M": {
+    "popid": "POP-00338",
+    "kind": "moment",
+    "cycle": 115,
+    "day": "2026-11-10"
+  },
+  "moment:POP-00459:115:Relocation-Drive-Up-M": {
+    "popid": "POP-00459",
+    "kind": "moment",
+    "cycle": 115,
+    "day": "2026-11-10"
+  },
+  "moment:POP-00289:115:Relocation-Drive-Up-M": {
+    "popid": "POP-00289",
+    "kind": "moment",
+    "cycle": 115,
+    "day": "2026-11-10"
+  },
+  "moment:POP-00926:115:Relocation-Composure-Up-M": {
+    "popid": "POP-00926",
+    "kind": "moment",
+    "cycle": 115,
+    "day": "2026-11-10"
+  },
+  "household:HH-0115-F006:115": {
+    "popid": "POP-00801",
+    "kind": "household",
+    "cycle": 115,
+    "day": "2026-11-11"
+  },
+  "household:HH-0115-F007:115": {
+    "popid": "POP-00840",
+    "kind": "household",
+    "cycle": 115,
+    "day": "2026-11-11"
+  },
+  "casino:f67953e74a0047cd:115": {
+    "popid": "POP-00691",
+    "kind": "casino",
+    "cycle": 115,
+    "day": "2026-11-11"
+  },
+  "casino:7cd7a46fc6b05fc9:115": {
+    "popid": "POP-00526",
+    "kind": "casino",
+    "cycle": 115,
+    "day": "2026-11-11"
+  },
+  "seed:2970e1a0:115:POP-01200": {
+    "popid": "POP-01200",
+    "kind": "seed",
+    "cycle": 115,
+    "day": "2026-11-11"
+  },
+  "seed:42fe3bcd:115:POP-00737": {
+    "popid": "POP-00737",
+    "kind": "seed",
+    "cycle": 115,
+    "day": "2026-11-11"
+  },
+  "seed:02cd5790:115:POP-00529": {
+    "popid": "POP-00529",
+    "kind": "seed",
+    "cycle": 115,
+    "day": "2026-11-11"
+  },
+  "moment:POP-00481:115:Relocation-Drive-Up-M": {
+    "popid": "POP-00481",
+    "kind": "moment",
+    "cycle": 115,
+    "day": "2026-11-11"
+  },
+  "moment:POP-00721:115:Relocation-Drive-Up-M": {
+    "popid": "POP-00721",
+    "kind": "moment",
+    "cycle": 115,
+    "day": "2026-11-11"
+  },
+  "moment:POP-01111:115:Relocation-Composure-Up-M": {
+    "popid": "POP-01111",
+    "kind": "moment",
+    "cycle": 115,
+    "day": "2026-11-11"
+  },
+  "moment:POP-01147:115:Relocation-Drive-Up-M": {
+    "popid": "POP-01147",
+    "kind": "moment",
+    "cycle": 115,
+    "day": "2026-11-11"
+  }
+}

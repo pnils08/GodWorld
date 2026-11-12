@@ -1,0 +1,92 @@
+{
+  "draft": "output/cron-compare/civic_c115_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "115",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "e92090b2072391088437efcb1989239a4d5a63723648b6bbeaa964bcba86b983",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All citizen bios, exact quotes, council assignments, and neighborhood metrics match cycle 115 ground truth.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "jax-accountability-v1",
+    "packageVersion": "JAX-LEP2-2",
+    "manifestId": "AM-b067777bb0e1",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "9.74",
+          "10.75",
+          "12th",
+          "14th",
+          "2",
+          "062",
+          "96",
+          "102",
+          "23rd",
+          "27th",
+          "7"
+        ]
+      },
+      {
+        "code": "UNAPPROVED_QUOTE",
+        "values": [
+          "Inflow surge,",
+          "growth.",
+          "growth"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Dank Abara",
+      "Dmitri Soto",
+      "Jax Caldera",
+      "Luis Navarro",
+      "Priya Raghunathan",
+      "Warren Ashford"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0124,
+  "durationMs": 8099,
+  "parseError": false,
+  "ranAt": "2026-11-12T00:15:37.064Z",
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 400",
+    "words": 693,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "e92090b2072391088437efcb1989239a4d5a63723648b6bbeaa964bcba86b983",
+    "costUsd": 0.0009
+  }
+}

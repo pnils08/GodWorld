@@ -1,0 +1,218 @@
+{
+  "stage": "angle",
+  "desk": "undocked",
+  "cycle": "115",
+  "persona": "nia-rook",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-01076",
+      "name": "Nia Rook",
+      "role": "desk reporter",
+      "desk": "undocked"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "UNDOCKED episode: Brooklyn Nguyen, Tuesday night. Standings: Luis Taz leads the board — rank #1, 45.19 achievement points, 0 credits, 2 cycle(s) led, current streak 2. In the chair: Brooklyn Nguyen — Community Programs Coordinator.",
+      "approach": "UNDOCKED show beat: current episode and standings from the approved feed; earlier episodes from the approved show history."
+    },
+    "signal": {
+      "kind": "undocked",
+      "hood": "Fruitvale",
+      "score": null,
+      "src": "undocked:undocked-pop00184-Y3C11",
+      "nearby": [
+        {
+          "text": "UNDOCKED: Brooklyn Nguyen, Tuesday night",
+          "src": "undocked:undocked-pop00184-Y3C11"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00184",
+          "name": "Brooklyn Nguyen",
+          "profile": "Brooklyn Nguyen — UNDOCKED pilot",
+          "role": "UNDOCKED pilot",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "undocked-feed-row",
+          "evidence": {
+            "source": "output/spacemolt-show/feed/c115.json",
+            "episodeId": "undocked-pop00184-Y3C11",
+            "pop": "POP-00184"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C115",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-bc84fc0b7718"
+      },
+      {
+        "t": "FACT",
+        "text": "UNDOCKED: Brooklyn Nguyen, Tuesday night",
+        "src": "undocked:undocked-pop00184-Y3C11",
+        "id": "F-cf9ec8f302df"
+      },
+      {
+        "t": "FACT",
+        "text": "Brooklyn Nguyen's Tuesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes, Ridgecrest and Nembus; mined 3 copper ore, 3 iron ore and 1 sol alloy ore; came out even on credits; flew until the show's time ran out.",
+        "src": "undocked:undocked-pop00184-Y3C11",
+        "id": "F-d543fd847684"
+      },
+      {
+        "t": "FACT",
+        "text": "Brooklyn Nguyen — Community Programs Coordinator (ledger)",
+        "src": "undocked:undocked-pop00184-Y3C11",
+        "id": "F-3989ab410ca4"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ]
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "named",
+    "candidates": [
+      {
+        "pop": "POP-00184",
+        "name": "Brooklyn Nguyen",
+        "role": "UNDOCKED pilot",
+        "hood": null,
+        "profile": "Brooklyn Nguyen — UNDOCKED pilot",
+        "mode": "named",
+        "sourceKind": "undocked-feed-row",
+        "evidence": {
+          "source": "output/spacemolt-show/feed/c115.json",
+          "episodeId": "undocked-pop00184-Y3C11",
+          "pop": "POP-00184"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Nia Rook",
+    "popid": "POP-01076"
+  },
+  "assignment": {
+    "story": {
+      "ref": "undocked:undocked-pop00184-Y3C11",
+      "label": "UNDOCKED: Brooklyn Nguyen, Tuesday night",
+      "kind": "undocked",
+      "angle": "UNDOCKED episode: Brooklyn Nguyen, Tuesday night. Standings: Luis Taz leads the board — rank #1, 45.19 achievement points, 0 credits, 2 cycle(s) led, current streak 2. In the chair: Brooklyn Nguyen — Community Programs Coordinator.",
+      "facts": [
+        "Brooklyn Nguyen's Tuesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes, Ridgecrest and Nembus; mined 3 copper ore, 3 iron ore and 1 sol alloy ore; came out even on credits; flew until the show's time ran out.",
+        "Brooklyn Nguyen — Community Programs Coordinator (ledger)"
+      ],
+      "citizens": [
+        "Brooklyn Nguyen — Community Programs Coordinator, UNDOCKED cast pilot"
+      ],
+      "popids": [
+        "POP-00184"
+      ],
+      "hood": "Fruitvale"
+    },
+    "approach": "UNDOCKED show beat: current episode and standings from the approved feed; earlier episodes from the approved show history."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Nia Rook",
+    "popid": "POP-01076",
+    "text": "Nia Rook is on the UNDOCKED beat, tracking Brooklyn Nguyen's Tuesday night episode. The show's standings are shifting with Luis Taz leading the board. The task is to understand Brooklyn's performance and its impact on the standings.",
+    "plan": {
+      "chase": "Nia Rook is on the UNDOCKED beat, tracking Brooklyn Nguyen's Tuesday night episode. The show's standings are shifting with Luis Taz leading the board. The task is to understand Brooklyn's performance and its impact on the standings.",
+      "focus": "Brooklyn Nguyen's UNDOCKED episode on Tuesday night",
+      "why": "To analyze the episode's outcome and its effect on the current standings",
+      "checks": [
+        "Episode details",
+        "Standings update"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00184",
+          "question": "How did Brooklyn Nguyen's navigation and mining activities affect their credit balance?",
+          "basis": "UNDOCKED episode details"
+        }
+      ],
+      "interpretation": "The episode's outcome seems to be neutral in terms of credits, but its impact on the standings needs further analysis.",
+      "unverifiedLead": [
+        "The performance might have implications for Luis Taz's lead in the standings."
+      ]
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "UNDOCKED: Brooklyn Nguyen, Tuesday night",
+      "kind": "undocked",
+      "hood": "Fruitvale",
+      "ref": "undocked:undocked-pop00184-Y3C11",
+      "popids": [
+        "POP-00184"
+      ]
+    }
+  ],
+  "laneEntries": 1,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-11T14:14:51.128Z"
+}

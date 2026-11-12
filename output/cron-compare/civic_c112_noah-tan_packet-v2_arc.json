@@ -1,0 +1,27 @@
+{
+  "status": "arc-seed",
+  "cycle": "112",
+  "desk": "civic",
+  "persona": "noah-tan",
+  "hood": null,
+  "quotes": [
+    {
+      "pop": "POP-00181",
+      "name": "Xavier Ramington",
+      "quote": "The clear sky today — it's not a relief so much as a reminder. The cold weeks, I leaned on the same faces, the same counters, the same conversations. That rhythm kept me steady. So when the sun finally breaks through, it doesn't change what I do — I still open the shop, still mix the same tinctures, still nod at the same folks on Telegraph. The clear day just makes the familiar feel a little warmer, that's all. It's not a new day; it's the same day with better light."
+    },
+    {
+      "pop": "POP-00244",
+      "name": "Derlik Green",
+      "quote": "A clear day after a gray stretch? Yeah, it changes things. When the sun's out and the air's crisp like this, I don't rush the same way. I'll take the long way down Broadway, catch a few more folks on the sidewalk, maybe linger a beat longer at the light. The pace softens. People look up more, nod more. I check in with the regulars — the barista at Midnight Bistro, the crew at SpeedyBurger — and it feels less like a transaction and more like we're all just glad the fog lifted. I'm still working, don't get me wrong, but the city breathes different when it's clear, and I breathe with it."
+    },
+    {
+      "pop": "POP-00258",
+      "name": "Brian Adams",
+      "quote": "The sun does reach me, but it doesn't come all the way in. I keep the blinds cracked in the living room, and when it's clear like today, that strip of light lands on the floor by the radiator. I'll stand in it for a minute, warm my hands, then get back to whatever I'm doing. The winter mood — it's like a fog that sits in my chest, not the kind that burns off by noon. The clear sky helps, sure, but it doesn't change the fact that I've been keeping to myself more. I see the light, I know it's there, but I'm not always ready to walk out into it. That's just where I am right now."
+    }
+  ],
+  "claim": "The clear sky today — it's not a relief so much as a reminder. The cold weeks, I leaned on the same faces, the same counters, the same conversations. That rhythm kept me steady. So when the sun finally breaks through, it doesn't change what I do — I still open the shop, still mix the same tinctures, still nod at the same folks on Telegraph. The clear day just makes the familiar feel a little warmer, that's all. It's not a new day; it's the same day with better light.",
+  "src": "citizenVoice PRESS c112",
+  "ranAt": "2026-10-21T18:17:23.368Z"
+}

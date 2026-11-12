@@ -1,0 +1,594 @@
+[
+  {
+    "pop": "POP-00136",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00136\",\"name\":\"Rafael Montez\",\"role\":\"Police Chief\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Sgt. Rachel Torres\",\"question\":\"Using only the supplied facts, what about \\\"Grand Lake leads the city in incidents while clearance sits at 21% — what the public-safety command answers for when response times hold but cases don't close.\\\" creates accountability for you, and what answer do you want? Do not claim any past or future official action that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-safety\",\"hood\":\"Grand Lake\",\"focus\":\"Grand Lake leads the city in incidents while clearance sits at 21% — what the public-safety command answers for when response times hold but cases don't close.\",\"src\":\"output/beats/Crime_Metrics.jsonl @C115\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Rafael Montez — Police Chief — Oakland Police Department\",\"evidence\":[{\"id\":\"EV-d7a61c0955\",\"src\":\"output/beats/Crime_Metrics.jsonl @C115\",\"text\":\"Grand Lake leads the incident count; Rockridge waits longest for a response; 67 in custody citywide; 39 public-safety staff on the roster.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C115\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-bc84fc0b7718\"},{\"t\":\"FACT\",\"text\":\"Grand Lake logged the most incidents (8) | 22 neighborhoods on the table\",\"src\":\"output/beats/Crime_Metrics.jsonl @C115\",\"id\":\"F-f62536f1ade9\"},{\"t\":\"FACT\",\"text\":\"Grand Lake leads the incident count; Rockridge waits longest for a response; 67 in custody citywide; 39 public-safety staff on the roster.\",\"src\":\"output/beats/Crime_Metrics.jsonl @C115\",\"id\":\"F-a10507a60889\"},{\"t\":\"FACT\",\"text\":\"130 incidents across 22 neighborhoods; most in Grand Lake 8, East Oakland 7, Dimond 7, Laurel 7, Uptown 7; fewest in Piedmont Ave 5, Downtown 5, Adams Point 4\",\"src\":\"output/beats/Crime_Metrics.jsonl @C115\",\"id\":\"F-cf636f1d5816\"},{\"t\":\"FACT\",\"text\":\"Grand Lake: 8 incidents (-1 vs C114), response 10.6 min, clearance 21%, property index 38, violent index 27\",\"src\":\"output/beats/Crime_Metrics.jsonl @C115\",\"id\":\"F-2b009ac87470\"},{\"t\":\"FACT\",\"text\":\"Slowest response: Rockridge: 6 incidents (-4 vs C114), response 11.8 min, clearance 19%, property index 39, violent index 24\",\"src\":\"output/beats/Crime_Metrics.jsonl @C115\",\"id\":\"F-f1a1e37683c1\"},{\"t\":\"FACT\",\"text\":\"Moved this cycle — rising: none; easing: West Oakland, Baylight District\",\"src\":\"output/beats/Crime_Metrics.jsonl @C115\",\"id\":\"F-384999d1505e\"},{\"t\":\"FACT\",\"text\":\"Citywide custody this cycle: 24 arrests (0 tracked, 24 other residents); 67 in custody at the close; 29 left\",\"src\":\"output/beats/Care_Justice_Census.jsonl judicial @C115 city\",\"id\":\"F-3f98f325f41f\"},{\"t\":\"FACT\",\"text\":\"Rafael Montez — Police Chief — Oakland Police Department\",\"src\":\"Simulation_Ledger profile for POP-00136\",\"id\":\"F-50c22c9cdd5a\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00136",
+        "name": "Rafael Montez",
+        "role": "Police Chief",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Sgt. Rachel Torres",
+        "question": "Using only the supplied facts, what about \"Grand Lake leads the city in incidents while clearance sits at 21% — what the public-safety command answers for when response times hold but cases don't close.\" creates accountability for you, and what answer do you want? Do not claim any past or future official action that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-safety",
+        "hood": "Grand Lake",
+        "focus": "Grand Lake leads the city in incidents while clearance sits at 21% — what the public-safety command answers for when response times hold but cases don't close.",
+        "src": "output/beats/Crime_Metrics.jsonl @C115"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Rafael Montez — Police Chief — Oakland Police Department",
+        "evidence": [
+          {
+            "id": "EV-d7a61c0955",
+            "src": "output/beats/Crime_Metrics.jsonl @C115",
+            "text": "Grand Lake leads the incident count; Rockridge waits longest for a response; 67 in custody citywide; 39 public-safety staff on the roster."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C115",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-bc84fc0b7718"
+        },
+        {
+          "t": "FACT",
+          "text": "Grand Lake logged the most incidents (8) | 22 neighborhoods on the table",
+          "src": "output/beats/Crime_Metrics.jsonl @C115",
+          "id": "F-f62536f1ade9"
+        },
+        {
+          "t": "FACT",
+          "text": "Grand Lake leads the incident count; Rockridge waits longest for a response; 67 in custody citywide; 39 public-safety staff on the roster.",
+          "src": "output/beats/Crime_Metrics.jsonl @C115",
+          "id": "F-a10507a60889"
+        },
+        {
+          "t": "FACT",
+          "text": "130 incidents across 22 neighborhoods; most in Grand Lake 8, East Oakland 7, Dimond 7, Laurel 7, Uptown 7; fewest in Piedmont Ave 5, Downtown 5, Adams Point 4",
+          "src": "output/beats/Crime_Metrics.jsonl @C115",
+          "id": "F-cf636f1d5816"
+        },
+        {
+          "t": "FACT",
+          "text": "Grand Lake: 8 incidents (-1 vs C114), response 10.6 min, clearance 21%, property index 38, violent index 27",
+          "src": "output/beats/Crime_Metrics.jsonl @C115",
+          "id": "F-2b009ac87470"
+        },
+        {
+          "t": "FACT",
+          "text": "Slowest response: Rockridge: 6 incidents (-4 vs C114), response 11.8 min, clearance 19%, property index 39, violent index 24",
+          "src": "output/beats/Crime_Metrics.jsonl @C115",
+          "id": "F-f1a1e37683c1"
+        },
+        {
+          "t": "FACT",
+          "text": "Moved this cycle — rising: none; easing: West Oakland, Baylight District",
+          "src": "output/beats/Crime_Metrics.jsonl @C115",
+          "id": "F-384999d1505e"
+        },
+        {
+          "t": "FACT",
+          "text": "Citywide custody this cycle: 24 arrests (0 tracked, 24 other residents); 67 in custody at the close; 29 left",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C115 city",
+          "id": "F-3f98f325f41f"
+        },
+        {
+          "t": "FACT",
+          "text": "Rafael Montez — Police Chief — Oakland Police Department",
+          "src": "Simulation_Ledger profile for POP-00136",
+          "id": "F-50c22c9cdd5a"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C11, Spring, holiday=none",
+          "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+          "id": "F-82d77e9a4a71"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00137",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00137\",\"name\":\"Kimberly Cho\",\"role\":\"DEPUTY CHIEF OF OPERATIONS\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Sgt. Rachel Torres\",\"question\":\"Using only the supplied facts, what about \\\"Grand Lake leads the city in incidents while clearance sits at 21% — what the public-safety command answers for when response times hold but cases don't close.\\\" creates accountability for you, and what answer do you want? Do not claim any past or future official action that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-safety\",\"hood\":\"Grand Lake\",\"focus\":\"Grand Lake leads the city in incidents while clearance sits at 21% — what the public-safety command answers for when response times hold but cases don't close.\",\"src\":\"output/beats/Crime_Metrics.jsonl @C115\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Kimberly Cho — DEPUTY CHIEF OF OPERATIONS — Oakland Police Department\",\"evidence\":[{\"id\":\"EV-95b03060cf\",\"src\":\"output/beats/Crime_Metrics.jsonl @C115\",\"text\":\"Grand Lake leads the incident count; Rockridge waits longest for a response; 67 in custody citywide; 39 public-safety staff on the roster.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C115\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-bc84fc0b7718\"},{\"t\":\"FACT\",\"text\":\"Grand Lake logged the most incidents (8) | 22 neighborhoods on the table\",\"src\":\"output/beats/Crime_Metrics.jsonl @C115\",\"id\":\"F-f62536f1ade9\"},{\"t\":\"FACT\",\"text\":\"Grand Lake leads the incident count; Rockridge waits longest for a response; 67 in custody citywide; 39 public-safety staff on the roster.\",\"src\":\"output/beats/Crime_Metrics.jsonl @C115\",\"id\":\"F-a10507a60889\"},{\"t\":\"FACT\",\"text\":\"130 incidents across 22 neighborhoods; most in Grand Lake 8, East Oakland 7, Dimond 7, Laurel 7, Uptown 7; fewest in Piedmont Ave 5, Downtown 5, Adams Point 4\",\"src\":\"output/beats/Crime_Metrics.jsonl @C115\",\"id\":\"F-cf636f1d5816\"},{\"t\":\"FACT\",\"text\":\"Grand Lake: 8 incidents (-1 vs C114), response 10.6 min, clearance 21%, property index 38, violent index 27\",\"src\":\"output/beats/Crime_Metrics.jsonl @C115\",\"id\":\"F-2b009ac87470\"},{\"t\":\"FACT\",\"text\":\"Slowest response: Rockridge: 6 incidents (-4 vs C114), response 11.8 min, clearance 19%, property index 39, violent index 24\",\"src\":\"output/beats/Crime_Metrics.jsonl @C115\",\"id\":\"F-f1a1e37683c1\"},{\"t\":\"FACT\",\"text\":\"Moved this cycle — rising: none; easing: West Oakland, Baylight District\",\"src\":\"output/beats/Crime_Metrics.jsonl @C115\",\"id\":\"F-384999d1505e\"},{\"t\":\"FACT\",\"text\":\"Citywide custody this cycle: 24 arrests (0 tracked, 24 other residents); 67 in custody at the close; 29 left\",\"src\":\"output/beats/Care_Justice_Census.jsonl judicial @C115 city\",\"id\":\"F-3f98f325f41f\"},{\"t\":\"FACT\",\"text\":\"Kimberly Cho — DEPUTY CHIEF OF OPERATIONS — Oakland Police Department\",\"src\":\"Simulation_Ledger profile for POP-00137\",\"id\":\"F-824d30ff6008\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00137",
+        "name": "Kimberly Cho",
+        "role": "DEPUTY CHIEF OF OPERATIONS",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Sgt. Rachel Torres",
+        "question": "Using only the supplied facts, what about \"Grand Lake leads the city in incidents while clearance sits at 21% — what the public-safety command answers for when response times hold but cases don't close.\" creates accountability for you, and what answer do you want? Do not claim any past or future official action that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-safety",
+        "hood": "Grand Lake",
+        "focus": "Grand Lake leads the city in incidents while clearance sits at 21% — what the public-safety command answers for when response times hold but cases don't close.",
+        "src": "output/beats/Crime_Metrics.jsonl @C115"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Kimberly Cho — DEPUTY CHIEF OF OPERATIONS — Oakland Police Department",
+        "evidence": [
+          {
+            "id": "EV-95b03060cf",
+            "src": "output/beats/Crime_Metrics.jsonl @C115",
+            "text": "Grand Lake leads the incident count; Rockridge waits longest for a response; 67 in custody citywide; 39 public-safety staff on the roster."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C115",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-bc84fc0b7718"
+        },
+        {
+          "t": "FACT",
+          "text": "Grand Lake logged the most incidents (8) | 22 neighborhoods on the table",
+          "src": "output/beats/Crime_Metrics.jsonl @C115",
+          "id": "F-f62536f1ade9"
+        },
+        {
+          "t": "FACT",
+          "text": "Grand Lake leads the incident count; Rockridge waits longest for a response; 67 in custody citywide; 39 public-safety staff on the roster.",
+          "src": "output/beats/Crime_Metrics.jsonl @C115",
+          "id": "F-a10507a60889"
+        },
+        {
+          "t": "FACT",
+          "text": "130 incidents across 22 neighborhoods; most in Grand Lake 8, East Oakland 7, Dimond 7, Laurel 7, Uptown 7; fewest in Piedmont Ave 5, Downtown 5, Adams Point 4",
+          "src": "output/beats/Crime_Metrics.jsonl @C115",
+          "id": "F-cf636f1d5816"
+        },
+        {
+          "t": "FACT",
+          "text": "Grand Lake: 8 incidents (-1 vs C114), response 10.6 min, clearance 21%, property index 38, violent index 27",
+          "src": "output/beats/Crime_Metrics.jsonl @C115",
+          "id": "F-2b009ac87470"
+        },
+        {
+          "t": "FACT",
+          "text": "Slowest response: Rockridge: 6 incidents (-4 vs C114), response 11.8 min, clearance 19%, property index 39, violent index 24",
+          "src": "output/beats/Crime_Metrics.jsonl @C115",
+          "id": "F-f1a1e37683c1"
+        },
+        {
+          "t": "FACT",
+          "text": "Moved this cycle — rising: none; easing: West Oakland, Baylight District",
+          "src": "output/beats/Crime_Metrics.jsonl @C115",
+          "id": "F-384999d1505e"
+        },
+        {
+          "t": "FACT",
+          "text": "Citywide custody this cycle: 24 arrests (0 tracked, 24 other residents); 67 in custody at the close; 29 left",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C115 city",
+          "id": "F-3f98f325f41f"
+        },
+        {
+          "t": "FACT",
+          "text": "Kimberly Cho — DEPUTY CHIEF OF OPERATIONS — Oakland Police Department",
+          "src": "Simulation_Ledger profile for POP-00137",
+          "id": "F-824d30ff6008"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C11, Spring, holiday=none",
+          "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+          "id": "F-82d77e9a4a71"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01141",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01141\",\"name\":\"Dolores Nwachukwu\",\"role\":\"Police Captain\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Sgt. Rachel Torres\",\"question\":\"As captain working the districts, what do you attribute Grand Lake's clearance rate to — staffing, evidence, witness cooperation, or something else? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-safety\",\"hood\":\"Grand Lake\",\"focus\":\"Grand Lake leads the city in incidents while clearance sits at 21% — what the public-safety command answers for when response times hold but cases don't close.\",\"src\":\"output/beats/Crime_Metrics.jsonl @C115\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Dolores Nwachukwu — Police Captain — Oakland Police Department\",\"evidence\":[{\"id\":\"EV-18ce98bad7\",\"src\":\"output/beats/Crime_Metrics.jsonl @C115\",\"text\":\"Grand Lake leads the incident count; Rockridge waits longest for a response; 67 in custody citywide; 39 public-safety staff on the roster.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C115\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-bc84fc0b7718\"},{\"t\":\"FACT\",\"text\":\"Grand Lake logged the most incidents (8) | 22 neighborhoods on the table\",\"src\":\"output/beats/Crime_Metrics.jsonl @C115\",\"id\":\"F-f62536f1ade9\"},{\"t\":\"FACT\",\"text\":\"Grand Lake leads the incident count; Rockridge waits longest for a response; 67 in custody citywide; 39 public-safety staff on the roster.\",\"src\":\"output/beats/Crime_Metrics.jsonl @C115\",\"id\":\"F-a10507a60889\"},{\"t\":\"FACT\",\"text\":\"130 incidents across 22 neighborhoods; most in Grand Lake 8, East Oakland 7, Dimond 7, Laurel 7, Uptown 7; fewest in Piedmont Ave 5, Downtown 5, Adams Point 4\",\"src\":\"output/beats/Crime_Metrics.jsonl @C115\",\"id\":\"F-cf636f1d5816\"},{\"t\":\"FACT\",\"text\":\"Grand Lake: 8 incidents (-1 vs C114), response 10.6 min, clearance 21%, property index 38, violent index 27\",\"src\":\"output/beats/Crime_Metrics.jsonl @C115\",\"id\":\"F-2b009ac87470\"},{\"t\":\"FACT\",\"text\":\"Slowest response: Rockridge: 6 incidents (-4 vs C114), response 11.8 min, clearance 19%, property index 39, violent index 24\",\"src\":\"output/beats/Crime_Metrics.jsonl @C115\",\"id\":\"F-f1a1e37683c1\"},{\"t\":\"FACT\",\"text\":\"Moved this cycle — rising: none; easing: West Oakland, Baylight District\",\"src\":\"output/beats/Crime_Metrics.jsonl @C115\",\"id\":\"F-384999d1505e\"},{\"t\":\"FACT\",\"text\":\"Citywide custody this cycle: 24 arrests (0 tracked, 24 other residents); 67 in custody at the close; 29 left\",\"src\":\"output/beats/Care_Justice_Census.jsonl judicial @C115 city\",\"id\":\"F-3f98f325f41f\"},{\"t\":\"FACT\",\"text\":\"Dolores Nwachukwu — Police Captain — Oakland Police Department\",\"src\":\"Simulation_Ledger profile for POP-01141\",\"id\":\"F-7118a8770ecf\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01141",
+        "name": "Dolores Nwachukwu",
+        "role": "Police Captain",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Sgt. Rachel Torres",
+        "question": "As captain working the districts, what do you attribute Grand Lake's clearance rate to — staffing, evidence, witness cooperation, or something else? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-safety",
+        "hood": "Grand Lake",
+        "focus": "Grand Lake leads the city in incidents while clearance sits at 21% — what the public-safety command answers for when response times hold but cases don't close.",
+        "src": "output/beats/Crime_Metrics.jsonl @C115"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Dolores Nwachukwu — Police Captain — Oakland Police Department",
+        "evidence": [
+          {
+            "id": "EV-18ce98bad7",
+            "src": "output/beats/Crime_Metrics.jsonl @C115",
+            "text": "Grand Lake leads the incident count; Rockridge waits longest for a response; 67 in custody citywide; 39 public-safety staff on the roster."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C115",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-bc84fc0b7718"
+        },
+        {
+          "t": "FACT",
+          "text": "Grand Lake logged the most incidents (8) | 22 neighborhoods on the table",
+          "src": "output/beats/Crime_Metrics.jsonl @C115",
+          "id": "F-f62536f1ade9"
+        },
+        {
+          "t": "FACT",
+          "text": "Grand Lake leads the incident count; Rockridge waits longest for a response; 67 in custody citywide; 39 public-safety staff on the roster.",
+          "src": "output/beats/Crime_Metrics.jsonl @C115",
+          "id": "F-a10507a60889"
+        },
+        {
+          "t": "FACT",
+          "text": "130 incidents across 22 neighborhoods; most in Grand Lake 8, East Oakland 7, Dimond 7, Laurel 7, Uptown 7; fewest in Piedmont Ave 5, Downtown 5, Adams Point 4",
+          "src": "output/beats/Crime_Metrics.jsonl @C115",
+          "id": "F-cf636f1d5816"
+        },
+        {
+          "t": "FACT",
+          "text": "Grand Lake: 8 incidents (-1 vs C114), response 10.6 min, clearance 21%, property index 38, violent index 27",
+          "src": "output/beats/Crime_Metrics.jsonl @C115",
+          "id": "F-2b009ac87470"
+        },
+        {
+          "t": "FACT",
+          "text": "Slowest response: Rockridge: 6 incidents (-4 vs C114), response 11.8 min, clearance 19%, property index 39, violent index 24",
+          "src": "output/beats/Crime_Metrics.jsonl @C115",
+          "id": "F-f1a1e37683c1"
+        },
+        {
+          "t": "FACT",
+          "text": "Moved this cycle — rising: none; easing: West Oakland, Baylight District",
+          "src": "output/beats/Crime_Metrics.jsonl @C115",
+          "id": "F-384999d1505e"
+        },
+        {
+          "t": "FACT",
+          "text": "Citywide custody this cycle: 24 arrests (0 tracked, 24 other residents); 67 in custody at the close; 29 left",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C115 city",
+          "id": "F-3f98f325f41f"
+        },
+        {
+          "t": "FACT",
+          "text": "Dolores Nwachukwu — Police Captain — Oakland Police Department",
+          "src": "Simulation_Ledger profile for POP-01141",
+          "id": "F-7118a8770ecf"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C11, Spring, holiday=none",
+          "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+          "id": "F-82d77e9a4a71"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00138",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00138\",\"name\":\"Leonard Briggs\",\"role\":\"DEPUTY CHIEF OF COMMUNITY ENGAGEMENT\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Sgt. Rachel Torres\",\"question\":\"Using only the supplied facts, what about \\\"Grand Lake leads the city in incidents while clearance sits at 21% — what the public-safety command answers for when response times hold but cases don't close.\\\" creates accountability for you, and what answer do you want? Do not claim any past or future official action that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-safety\",\"hood\":\"Grand Lake\",\"focus\":\"Grand Lake leads the city in incidents while clearance sits at 21% — what the public-safety command answers for when response times hold but cases don't close.\",\"src\":\"output/beats/Crime_Metrics.jsonl @C115\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Leonard Briggs — DEPUTY CHIEF OF COMMUNITY ENGAGEMENT — Oakland Police Department\",\"evidence\":[{\"id\":\"EV-0ea012638e\",\"src\":\"output/beats/Crime_Metrics.jsonl @C115\",\"text\":\"Grand Lake leads the incident count; Rockridge waits longest for a response; 67 in custody citywide; 39 public-safety staff on the roster.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C115\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-bc84fc0b7718\"},{\"t\":\"FACT\",\"text\":\"Grand Lake logged the most incidents (8) | 22 neighborhoods on the table\",\"src\":\"output/beats/Crime_Metrics.jsonl @C115\",\"id\":\"F-f62536f1ade9\"},{\"t\":\"FACT\",\"text\":\"Grand Lake leads the incident count; Rockridge waits longest for a response; 67 in custody citywide; 39 public-safety staff on the roster.\",\"src\":\"output/beats/Crime_Metrics.jsonl @C115\",\"id\":\"F-a10507a60889\"},{\"t\":\"FACT\",\"text\":\"130 incidents across 22 neighborhoods; most in Grand Lake 8, East Oakland 7, Dimond 7, Laurel 7, Uptown 7; fewest in Piedmont Ave 5, Downtown 5, Adams Point 4\",\"src\":\"output/beats/Crime_Metrics.jsonl @C115\",\"id\":\"F-cf636f1d5816\"},{\"t\":\"FACT\",\"text\":\"Grand Lake: 8 incidents (-1 vs C114), response 10.6 min, clearance 21%, property index 38, violent index 27\",\"src\":\"output/beats/Crime_Metrics.jsonl @C115\",\"id\":\"F-2b009ac87470\"},{\"t\":\"FACT\",\"text\":\"Slowest response: Rockridge: 6 incidents (-4 vs C114), response 11.8 min, clearance 19%, property index 39, violent index 24\",\"src\":\"output/beats/Crime_Metrics.jsonl @C115\",\"id\":\"F-f1a1e37683c1\"},{\"t\":\"FACT\",\"text\":\"Moved this cycle — rising: none; easing: West Oakland, Baylight District\",\"src\":\"output/beats/Crime_Metrics.jsonl @C115\",\"id\":\"F-384999d1505e\"},{\"t\":\"FACT\",\"text\":\"Citywide custody this cycle: 24 arrests (0 tracked, 24 other residents); 67 in custody at the close; 29 left\",\"src\":\"output/beats/Care_Justice_Census.jsonl judicial @C115 city\",\"id\":\"F-3f98f325f41f\"},{\"t\":\"FACT\",\"text\":\"Leonard Briggs — DEPUTY CHIEF OF COMMUNITY ENGAGEMENT — Oakland Police Department\",\"src\":\"Simulation_Ledger profile for POP-00138\",\"id\":\"F-9e4490506512\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00138",
+        "name": "Leonard Briggs",
+        "role": "DEPUTY CHIEF OF COMMUNITY ENGAGEMENT",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Sgt. Rachel Torres",
+        "question": "Using only the supplied facts, what about \"Grand Lake leads the city in incidents while clearance sits at 21% — what the public-safety command answers for when response times hold but cases don't close.\" creates accountability for you, and what answer do you want? Do not claim any past or future official action that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-safety",
+        "hood": "Grand Lake",
+        "focus": "Grand Lake leads the city in incidents while clearance sits at 21% — what the public-safety command answers for when response times hold but cases don't close.",
+        "src": "output/beats/Crime_Metrics.jsonl @C115"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Leonard Briggs — DEPUTY CHIEF OF COMMUNITY ENGAGEMENT — Oakland Police Department",
+        "evidence": [
+          {
+            "id": "EV-0ea012638e",
+            "src": "output/beats/Crime_Metrics.jsonl @C115",
+            "text": "Grand Lake leads the incident count; Rockridge waits longest for a response; 67 in custody citywide; 39 public-safety staff on the roster."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C115",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-bc84fc0b7718"
+        },
+        {
+          "t": "FACT",
+          "text": "Grand Lake logged the most incidents (8) | 22 neighborhoods on the table",
+          "src": "output/beats/Crime_Metrics.jsonl @C115",
+          "id": "F-f62536f1ade9"
+        },
+        {
+          "t": "FACT",
+          "text": "Grand Lake leads the incident count; Rockridge waits longest for a response; 67 in custody citywide; 39 public-safety staff on the roster.",
+          "src": "output/beats/Crime_Metrics.jsonl @C115",
+          "id": "F-a10507a60889"
+        },
+        {
+          "t": "FACT",
+          "text": "130 incidents across 22 neighborhoods; most in Grand Lake 8, East Oakland 7, Dimond 7, Laurel 7, Uptown 7; fewest in Piedmont Ave 5, Downtown 5, Adams Point 4",
+          "src": "output/beats/Crime_Metrics.jsonl @C115",
+          "id": "F-cf636f1d5816"
+        },
+        {
+          "t": "FACT",
+          "text": "Grand Lake: 8 incidents (-1 vs C114), response 10.6 min, clearance 21%, property index 38, violent index 27",
+          "src": "output/beats/Crime_Metrics.jsonl @C115",
+          "id": "F-2b009ac87470"
+        },
+        {
+          "t": "FACT",
+          "text": "Slowest response: Rockridge: 6 incidents (-4 vs C114), response 11.8 min, clearance 19%, property index 39, violent index 24",
+          "src": "output/beats/Crime_Metrics.jsonl @C115",
+          "id": "F-f1a1e37683c1"
+        },
+        {
+          "t": "FACT",
+          "text": "Moved this cycle — rising: none; easing: West Oakland, Baylight District",
+          "src": "output/beats/Crime_Metrics.jsonl @C115",
+          "id": "F-384999d1505e"
+        },
+        {
+          "t": "FACT",
+          "text": "Citywide custody this cycle: 24 arrests (0 tracked, 24 other residents); 67 in custody at the close; 29 left",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C115 city",
+          "id": "F-3f98f325f41f"
+        },
+        {
+          "t": "FACT",
+          "text": "Leonard Briggs — DEPUTY CHIEF OF COMMUNITY ENGAGEMENT — Oakland Police Department",
+          "src": "Simulation_Ledger profile for POP-00138",
+          "id": "F-9e4490506512"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C11, Spring, holiday=none",
+          "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+          "id": "F-82d77e9a4a71"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  }
+]

@@ -1,0 +1,49 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "111",
+  "persona": "hal-richmond",
+  "byline": "Hal Richmond",
+  "bylinePopid": "POP-00007",
+  "article": "output/cron-compare/staged/sports_c111_hal-richmond_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Baylight District"
+    ],
+    "claims": [
+      {
+        "claim": "A's — editorial-note — supplied C111 line card",
+        "sourceRef": "world_summary_c111.md ## Sports"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-4efe136906a2",
+    "draftSha256": "eb9a0b2468e8fd3033b532af5b9263c3f976757363de1bc172c8a1192785fcb8",
+    "verdict": "output/cron-compare/sports_c111_hal-richmond_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-10-15T23:18:16.011Z",
+    "contractScore": {
+      "opened": true,
+      "closed": false,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 800",
+      "words": 1050,
+      "short": "The closing paragraph does not name the historical echo.",
+      "score": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "eb9a0b2468e8fd3033b532af5b9263c3f976757363de1bc172c8a1192785fcb8",
+      "costUsd": 0.0026
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-15T23:18:22.542Z"
+}

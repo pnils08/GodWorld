@@ -1,0 +1,102 @@
+{
+  "mode": "wake-write",
+  "desk": "culture",
+  "cycle": "113",
+  "provider": "openrouter",
+  "model": "x-ai/grok-4.3",
+  "configuredWriterModel": "x-ai/grok-4.3",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "tamsin-pruitt",
+  "byline": {
+    "name": "Tamsin Pruitt",
+    "popid": "POP-01210",
+    "beatDomain": "COMMUNITY"
+  },
+  "laneEntries": 23,
+  "quotesLanded": 3,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [],
+  "toolCalls": 0,
+  "wordCount": 270,
+  "targetWords": "450-1200",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [
+    {
+      "text": "Alicia Hernandez retired from work as Coffee Roaster, Uptown",
+      "run": "alicia hernandez retired work coffee roaster uptown"
+    },
+    {
+      "text": "Alicia Hernandez retired from work as Coffee Roaster, Uptown (C113). What came next: the record does not say yet",
+      "run": "the record does not say yet"
+    },
+    {
+      "text": "Alicia Hernandez — on the log, C113: noticed neighbors being more watchful today",
+      "run": "noticed neighbors being more watchful today"
+    },
+    {
+      "text": "Maren Johns was promoted; the record lists their work as Psychotherapist, Rockridge (C113). What came next: the record does not say yet",
+      "run": "the record does not say yet"
+    },
+    {
+      "text": "Maren Johns — on the log, C113: browsed a bookstore along the avenue",
+      "run": "browsed a bookstore along the avenue"
+    },
+    {
+      "text": "Maren Johns — on the log, C113: Promoted at Oakland Hospital after 49 years as a Psychotherapist.",
+      "run": "promoted at oakland hospital after 49"
+    },
+    {
+      "text": "Maren Johns — on the log, C113: learned the video-call button by heart because that's where the grandkid lives most days",
+      "run": "learned the video call button by"
+    },
+    {
+      "text": "Manfred Owens — on the log, C113: heard the rent talk on the block turn sharp",
+      "run": "heard the rent talk on the"
+    },
+    {
+      "text": "Manfred Owens — on the log, C113: found a quiet minute at a bar patio and the hum of a bassline from a passing car",
+      "run": "found a quiet minute at a"
+    },
+    {
+      "text": "Manfred Owens — on the log, C113: walked the Mandela Parkway median under the trees and took the long way home",
+      "run": "walked the mandela parkway median under"
+    },
+    {
+      "text": "Manfred Owens — on the log, C113: noticed neighbors being more watchful today",
+      "run": "noticed neighbors being more watchful today"
+    }
+  ],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": false,
+    "purposeMet": true,
+    "inTarget": false,
+    "inTargetBy": "code floor 450",
+    "words": 270,
+    "short": "The piece falls short of the 450-word minimum target and ends with a multi-person roundup rather than concluding on the final person's passage.",
+    "score": 2,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "d69f3ed68b033a33ec6f2af700c8c56a86bdb171eb256582661f03660945512c",
+    "costUsd": 0.0012
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 2/4 — The piece falls short of the 450-word minimum target and ends with a multi-person roundup rather than concluding on the final person's passage."
+  },
+  "article": "output/cron-compare/staged/culture_c113_tamsin-pruitt_packet-v2_x-ai-grok-4-3.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "v'] }\n{\n  \"popId\": \"POP-01210\",\n  \"name\": \"Tamsin Pruitt\",\n  \"recorded\": true,\n  \"text\": \"filed: Alicia Hernandez retired from her work as a coffee roaster in Uptown this cycle. She noticed neighbo\"\n}"
+  },
+  "ranAt": "2026-10-26T23:20:46.058Z",
+  "dispositionReconciledAt": "2026-10-31T17:00:02.638Z"
+}

@@ -1,0 +1,293 @@
+{
+  "cycle": 114,
+  "builtAt": "2026-11-06T12:15:04.860Z",
+  "empty": false,
+  "journalist": {
+    "name": "P Slayer",
+    "popid": "POP-00008",
+    "persona": "p-slayer"
+  },
+  "approach": "Fan-heat approach (P Slayer pulse): do NOT open from the FO press release or the award board. Open from gut or Oakland sensory (bar, lot, bleacher row, BART after). First-person I/we only. Pick 1–2 charge-bag modes from this slice. Friction pivot required — name the counter-argument, kill it. ONE real foil number max (from FoilNumber / AnchorFacts); never invent x-stats or roster moves. Hook PriorTake when present — eat it or double down (\"I was wrong\" is craft). End on charge that sticks: dare, confession, or update. Not Anthony. Not Hal. Not multi-voice sports-desk average.",
+  "pulse": {
+    "className": "loss",
+    "classes": [
+      "result-pulse",
+      "loss"
+    ],
+    "score": 58,
+    "label": "The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+    "team": "Oaks",
+    "eventKind": "game-result",
+    "seasonType": "early-season",
+    "feedCycle": 114,
+    "record": "4-1",
+    "streak": "L1",
+    "mood": "frustrated",
+    "fanSentiment": "excited",
+    "neighborhood": "San Antonio",
+    "notes": "The Oaks' perfect start ends at four. In Indiana, in front of a building at 90% capacity, the Pacers built a 61-42 halftime lead behind a 34-point second quarter and led 82-62 after three. The Oaks answered with 38 points in the fourth and won the quarter 38-22, but the comeback came up four short, Pacers 104 - Oaks 100. Adash Stanley and Austin Reaves led the way with 19 apiece. Stanley hit 5 of 11 from three, and Reaves had 7 assists and 6 rebounds without a turnover. AJ Dybantsa added 15, Wendell Carter Jr. went 5 for 6 for 10 points and 7 rebounds, and T. Jerome chipped in 10 points and 5 assists. The Oaks fall to 4-1.",
+    "stats": "Adash Stanley/19PTS/5REB/4ASST/5-11 3PT, Austin Reaves/19PTS/6REB/7ASST/0TO, AJ Dybantsa/15PTS/5REB, Wendell Carter Jr/10PTS/7REB/5-6FG, T. Jerome/10PTS/5ASST"
+  },
+  "charge": {
+    "bagModes": [
+      {
+        "id": 3,
+        "name": "Friction Pivot"
+      },
+      {
+        "id": 4,
+        "name": "Loss Hangover / Empty Win"
+      },
+      {
+        "id": 7,
+        "name": "We Still Believe / We're Done"
+      }
+    ],
+    "fanCharge": "dread",
+    "foilNumber": "5-11",
+    "centralFeeling": "Oakland should name the fear before the next drop.",
+    "palette": [
+      "fury",
+      "euphoria",
+      "dread",
+      "defiance",
+      "confession",
+      "grief",
+      "dare"
+    ]
+  },
+  "prewrite": {
+    "reporter": "P.Slayer",
+    "bagModes": [
+      {
+        "id": 3,
+        "name": "Friction Pivot"
+      },
+      {
+        "id": 4,
+        "name": "Loss Hangover / Empty Win"
+      },
+      {
+        "id": 7,
+        "name": "We Still Believe / We're Done"
+      }
+    ],
+    "fanCharge": "dread",
+    "priorTake": "NONE — write cold or invent no prior; wall may still inject at wake",
+    "anchorFacts": [
+      "StoryAngle (feed): The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+      "Team record (feed): 4-1 · streak L1",
+      "Stats (feed): Adash Stanley/19PTS/5REB/4ASST/5-11 3PT, Austin Reaves/19PTS/6REB/7ASST/0TO, AJ Dybantsa/15PTS/5REB, Wendell Carter Jr/10PTS/7REB/5-6FG, T. Jerome/10PTS/5ASST",
+      "Event: Oaks — game-result (early-season)"
+    ],
+    "foilNumber": "5-11",
+    "centralFeeling": "Oakland should name the fear before the next drop.",
+    "hooks": [
+      {
+        "text": "A's on a W3. Fan energy rising. Momentum story.",
+        "angle": "conflict/tension coverage",
+        "hood": null
+      },
+      {
+        "text": "Oaks on a W2. Fan energy rising in Jack London. Momentum story.",
+        "angle": "conflict/tension coverage",
+        "hood": "Jack London"
+      }
+    ]
+  },
+  "hooks": [
+    {
+      "text": "A's on a W3. Fan energy rising. Momentum story.",
+      "angle": "conflict/tension coverage",
+      "hood": null
+    },
+    {
+      "text": "Oaks on a W2. Fan energy rising in Jack London. Momentum story.",
+      "angle": "conflict/tension coverage",
+      "hood": "Jack London"
+    }
+  ],
+  "seeds": [
+    {
+      "seedId": "fd4277fa",
+      "hood": "Citywide",
+      "citizens": [
+        "POP-01082 Ian Devine",
+        "POP-01080 Louis Cross",
+        "POP-01081 Hitoki Ka",
+        "POP-00555 Mariano Rosales",
+        "POP-00052 Clark Saryan",
+        "POP-00077 Julio Valencia"
+      ],
+      "businesses": [],
+      "angle": "conflict/tension coverage"
+    }
+  ],
+  "friction": {
+    "a": "The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+    "b": "Soft both-sides / FO calm",
+    "frame": "Something the stands feel that the release will not say."
+  },
+  "priorTakes": [],
+  "story": {
+    "ref": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+    "label": "The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+    "kind": "loss",
+    "angle": "The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+    "hookLine": "Something the stands feel that the release will not say.",
+    "hood": "San Antonio",
+    "team": "Oaks",
+    "eventKind": "game-result",
+    "popids": [
+      "POP-01023",
+      "POP-01027"
+    ],
+    "citizens": [
+      "Adash Stanley (POP-01023)",
+      "Austin Reaves (POP-01027)",
+      "Wendell Carter Jr",
+      "In Indiana"
+    ],
+    "pulseClass": "loss",
+    "pulseScore": 58,
+    "fanCharge": "dread",
+    "bagModeIds": [
+      3,
+      4,
+      7
+    ]
+  },
+  "players": [
+    {
+      "name": "Adash Stanley",
+      "popid": "POP-01023",
+      "role": "PG / The Oaks ",
+      "neighborhood": "Downtown",
+      "why": "feed-names"
+    },
+    {
+      "name": "Austin Reaves",
+      "popid": "POP-01027",
+      "role": "SG / The Oaks",
+      "neighborhood": "West Oakland",
+      "why": "feed-names"
+    },
+    {
+      "name": "Wendell Carter Jr",
+      "popid": null,
+      "role": null,
+      "neighborhood": null,
+      "why": "feed-names"
+    },
+    {
+      "name": "In Indiana",
+      "popid": null,
+      "role": null,
+      "neighborhood": null,
+      "why": "feed-names"
+    }
+  ],
+  "scene": {
+    "neighborhood": "San Antonio",
+    "record": "4-1",
+    "streak": "L1",
+    "mood": "frustrated",
+    "fanSentiment": "excited",
+    "colorRoom": "You may invent unnamed bar / lot / BART / bleacher texture that contradicts nothing on this slice. Do not invent star players, contracts, stats, or quotes. Named people stay on PLAYERS list or Tribune colleagues (Anthony, Hal, Mags) as foils."
+  },
+  "candidates": [
+    {
+      "score": 58,
+      "cycle": 114,
+      "team": "Oaks",
+      "primary": "loss",
+      "angle": "The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+      "priorHits": 0
+    },
+    {
+      "score": 45,
+      "cycle": 113,
+      "team": "A's",
+      "primary": "injury-load",
+      "angle": "The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+      "priorHits": 0
+    },
+    {
+      "score": 44,
+      "cycle": 114,
+      "team": "A's",
+      "primary": "award-board",
+      "angle": "The bargain core: is it time to extend Coles, Ellis, Quintero and Gonzalez?",
+      "priorHits": 0
+    },
+    {
+      "score": 44,
+      "cycle": 114,
+      "team": "Oaks",
+      "primary": "win-streak",
+      "angle": "The Oaks bounce back with a 60-point rout in Toronto. Oaks 135 - Raptors 75",
+      "priorHits": 0
+    },
+    {
+      "score": 44,
+      "cycle": 114,
+      "team": "Oaks",
+      "primary": "win-streak",
+      "angle": "Dillon Brooks' six threes carry the Oaks past OKC in the Cup opener. Oaks 101 - Thunder 95",
+      "priorHits": 0
+    },
+    {
+      "score": 42,
+      "cycle": 114,
+      "team": "A's",
+      "primary": "award-board",
+      "angle": "The last of the dynasty core: how long do Kelley and Davis have?",
+      "priorHits": 0
+    },
+    {
+      "score": 42,
+      "cycle": 114,
+      "team": "Oaks",
+      "primary": "win-streak",
+      "angle": "Harry Hayward's minutes keep climbing, from 13 to 23",
+      "priorHits": 0
+    },
+    {
+      "score": 40,
+      "cycle": 114,
+      "team": "Oaks",
+      "primary": "win-streak",
+      "angle": "Henderson, Jerome and the depth turn a rout into a showcase",
+      "priorHits": 0
+    }
+  ],
+  "pointers": [
+    "output/world_summary_c114.md ## Sports",
+    "output/desk_signal_c114.json lanes.sports",
+    "docs/media/P_SLAYER_CHARGE_BAG.md",
+    "docs/media/voices/p_slayer.md",
+    "docs/media/P_SLAYER_JOURNEY_INDEX.md",
+    "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+    "output/beats/Story_Hook_Deck.jsonl + Story_Seed_Deck.jsonl (sports, this cycle)"
+  ],
+  "gaps": {
+    "note": "What would deepen fan-heat further",
+    "missingOrThin": [
+      {
+        "source": "cp-POP-00008 live wall at build time",
+        "status": "wake-time",
+        "why": "reporterWall injects at cron angle; slice uses on-disk prior columns so build stays offline"
+      },
+      {
+        "source": "As_Roster live line for foil",
+        "status": "feed-stats-proxy",
+        "why": "FoilNumber parsed from feed Stats/Notes; live roster sheet would refine without inventing"
+      },
+      {
+        "source": "TrueSource / truesource injury windows",
+        "status": "partial",
+        "why": "Injury-load class relies on feed wording; card detail would strengthen Superman mode"
+      }
+    ]
+  }
+}

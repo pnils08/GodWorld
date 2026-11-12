@@ -1,0 +1,56 @@
+{
+  "status": "staged",
+  "desk": "undocked",
+  "cycle": "114",
+  "persona": "nia-rook",
+  "byline": "Nia Rook",
+  "bylinePopid": "POP-01076",
+  "article": "output/cron-compare/staged/undocked_c114_nia-rook_packet-v2_openai-gpt-6-luna.staged-0023.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Luis Taz",
+        "role": "mentioned",
+        "popid": "POP-00298"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Fruitvale"
+    ],
+    "claims": [
+      {
+        "claim": "I navigated through a bunch of systems on Wednesday night, like Nova Terra and Sirius, then headed towards Lacaille 9352. I kept moving, trying to mine what I could and avoid getting caught in the fights that popped up. I went through Grumium, Celaeno, Lanternwick, Diadem, and a few others, mining copper ore and iron ore along the way. My goal was to come out even, and I managed to do that, so it was a good run.",
+        "sourceRef": "citizenVoice PRESS Luis Taz"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-360433a5848a",
+    "draftSha256": "3701903183159ac059a3539a6f10641279ebc17126b2340b704ca9d5d258b2ce",
+    "verdict": "output/cron-compare/undocked_c114_nia-rook_packet-v2_openai-gpt-6-luna.rhea.json",
+    "ranAt": "2026-11-06T00:22:06.931Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 350",
+      "words": 379,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "3701903183159ac059a3539a6f10641279ebc17126b2340b704ca9d5d258b2ce",
+      "costUsd": 0.001
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-06T00:22:10.903Z"
+}

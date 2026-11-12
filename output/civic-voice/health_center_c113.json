@@ -1,0 +1,34 @@
+{
+  "office": "health_center",
+  "cycle": 113,
+  "speaker": "Bobby Chen-Ramirez",
+  "cascadeSummary": "Filed the first quarterly utilization audit report to the D7 office and the public data portal, formalizing the C112 benchmark commitment. The report ties every dollar from the construction closeout ledger to verified clinical intake numbers — making the post-occupancy promise real. Accountability is now procedural, not political.",
+  "statements": [
+    {
+      "statementId": "STMT-113-health_center-001",
+      "type": "operational_status",
+      "topic": "First quarterly utilization audit filed — post-occupancy accountability",
+      "initiative": "Temescal Community Health Center",
+      "decision": "Filed the first quarterly utilization audit report to the D7 office and public data portal, linking construction closeout expenditures to verified clinical intake metrics per the standing procedure adopted in C112.",
+      "quote": "We opened two weeks early and $1.2 million under budget — now we prove every one of those dollars is seeing patients.",
+      "fullStatement": "The first quarterly utilization audit is filed. Not as a favor to anyone, not as a box to check — as the standing procedure we adopted in C112. Every dollar from the construction closeout ledger is matched to a line item, and every line item is matched to a clinical outcome. The 51st Street bench crowd waited five cycles for this building. They're not going to wait for the numbers. If the doors are open, we show the work. If utilization dips, we say so and we fix it. That's not politics. That's how you build trust that outlasts any administration.",
+      "trackerUpdates": {
+        "initiative": "INIT-005",
+        "ImplementationPhase": "operational",
+        "MilestoneNotes": "C113: First quarterly utilization audit filed to D7 and public portal; construction closeout ledger tied to verified clinical intake metrics.",
+        "NextScheduledAction": "Second quarterly utilization audit reporting cycle",
+        "NextActionCycle": 114
+      }
+    },
+    {
+      "statementId": "STMT-113-health_center-002",
+      "type": "neighborhood_operations",
+      "topic": "Temescal street trade and community responsiveness",
+      "initiative": "Temescal Community Health Center",
+      "decision": "Directed the operator to coordinate with Temescal merchants association on walk-in clinic traffic patterns to support slow street trade, and to keep the health center doors physically open for afternoon foot traffic.",
+      "quote": "A clinic that sits empty isn't a clinic — it's a monument. Ours is a working building in a working neighborhood.",
+      "fullStatement": "Street trade is slow in Temescal this cycle and I hear it. A health center should be part of the answer, not another closed door. I've directed the operator to keep the clinic's front lobby accessible during afternoon hours, coordinate foot traffic with the merchants association so patients and shoppers reinforce each other, and post the walk-in hours on the bulletin board at 51st — the same board the pharmacy hours live on. This building is a neighborhood asset now. It should behave like one.",
+      "trackerUpdates": {}
+    }
+  ]
+}

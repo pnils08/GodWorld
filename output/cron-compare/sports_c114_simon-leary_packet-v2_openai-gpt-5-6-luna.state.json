@@ -1,0 +1,259 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00016",
+    "name": "Simon Leary",
+    "role": "desk reporter",
+    "desk": "sports"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "The Oaks record is 5-1.",
+    "approach": "Long-view approach (Simon Leary): third-person essayist. Treat supplied sports facts as present structure, not as proof of history or collective memory. A metaphor about continuity, load, or change may interpret the Packet but may not add a person, place, institution, event, season, statistic, cause, organizational intention, or citywide belief. Do not write a game recap, Hal elegy, P Slayer fan heat, or Anthony board memo.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "sports-long-view",
+      "pulseClass": "role-change-under-continuity",
+      "bagModes": [
+        "2 Keystone Player",
+        "4 Load-Bearing Continuity"
+      ],
+      "claim": "A role change inside a sustained team record can support a structural interpretation; it does not establish franchise history, organizational intent, or citywide meaning.",
+      "anchorFacts": [
+        "The Oaks record is 5-1.",
+        "The Oaks have won 1 straight."
+      ],
+      "missing": [
+        "why the role change was made",
+        "historical comparison or franchise precedent",
+        "organizational intention or future plan",
+        "citywide, clubhouse, or fan interpretation"
+      ],
+      "sceneRule": "No witnessed room or scene is supplied. Structure and continuity may appear only as clearly interpretive metaphor grounded in the approved present facts.",
+      "sourcePointers": [
+        "output/world_summary_c114.md ## Sports",
+        "docs/media/SIMON_LONGVIEW_BAG.md"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "long-view-signal",
+    "hood": "San Antonio",
+    "src": "world_summary_c114.md ## Sports",
+    "plan": {
+      "focus": "The Oaks' 5-1 record as a study in load-bearing continuity — how a team's steadiness can be a function of role change, not resistance to it.",
+      "closeQuestion": "What does a streak preserve when the people carrying it are no longer the same?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-01023",
+        "name": "Adash Stanley",
+        "profile": "Adash Stanley — PG / The Oaks",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-01023-fcef23dd17",
+        "pop": "POP-01023",
+        "name": "Adash Stanley",
+        "quote": "The part that feels constant is the work itself. When the lineup shifts or the assignment changes, the game still asks the same thing — show up, do your job, don't make it about you. The record sits there at 5-1 and it doesn't care who's carrying it. That's what I hold onto.",
+        "factIds": [
+          "F-be74de39bd73"
+        ],
+        "src": "packet.W2[POP-01023]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Simon Leary",
+        "text": "I talked with a player whose role has quietly shifted this season — no names, no specifics — about what it means to hold the same team while doing different work.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C114",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-4261fa115617"
+    },
+    {
+      "t": "FACT",
+      "text": "The Oaks record is 5-1.",
+      "src": "world_summary_c114.md ## Sports",
+      "id": "F-be74de39bd73"
+    },
+    {
+      "t": "FACT",
+      "text": "The Oaks have won 1 straight.",
+      "src": "world_summary_c114.md ## Sports",
+      "id": "F-53e6b78f84bb"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C10, Spring, holiday=none",
+      "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+      "id": "F-9b9470803821"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "simon-longview-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Interpret one Packet-backed present sports structure as civic architecture without turning metaphor into biography, history, collective memory, or institutional fact.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "third-person contemplative sports essay",
+      "targetWords": "evidence-bounded",
+      "opening": "one supplied present structure",
+      "closing": "one question about what the present record cannot establish"
+    },
+    "authorizedTexture": [
+      "third-person metaphor about structure, continuity, load, or change grounded only in supplied present facts",
+      "a philosophical inference explicitly framed as interpretation and carrying no new person, place, institution, event, number, or history"
+    ],
+    "textureConditions": [
+      "continuity describes only the supplied current record unless a historical fact is explicitly supplied",
+      "every named person, place, institution, team, event, season, statistic, role change, cause, intention, and quote requires Packet support"
+    ],
+    "canonBlockers": [
+      "invented franchise or city history, precedent, collective memory, institutional meaning, or civic behavior",
+      "an invented cause, organizational intention, future plan, clubhouse fact, fan consensus, relationship, quote, event, statistic, or role",
+      "Hal-style witnessed history, P Slayer fan heat, or Anthony-style unsupplied analytics presented as fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-d5fa41f36d41",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-4261fa115617",
+        "t": "FACT",
+        "text": "Current cycle: C114",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-be74de39bd73",
+        "t": "FACT",
+        "text": "The Oaks record is 5-1.",
+        "src": "world_summary_c114.md ## Sports"
+      },
+      {
+        "id": "F-53e6b78f84bb",
+        "t": "FACT",
+        "text": "The Oaks have won 1 straight.",
+        "src": "world_summary_c114.md ## Sports"
+      },
+      {
+        "id": "F-9b9470803821",
+        "t": "FACT",
+        "text": "Calendar: Y3C10, Spring, holiday=none",
+        "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-01023-fcef23dd17",
+        "speakerId": "POP-01023",
+        "speakerName": "Adash Stanley",
+        "text": "The part that feels constant is the work itself. When the lineup shifts or the assignment changes, the game still asks the same thing — show up, do your job, don't make it about you. The record sits there at 5-1 and it doesn't care who's carrying it. That's what I hold onto.",
+        "factIds": [
+          "F-be74de39bd73"
+        ],
+        "src": "packet.W2[POP-01023]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-01023",
+        "name": "Adash Stanley",
+        "profile": "Adash Stanley — PG / The Oaks",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Simon Leary",
+        "text": "I talked with a player whose role has quietly shifted this season — no names, no specifics — about what it means to hold the same team while doing different work.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "third-person metaphor about structure, continuity, load, or change grounded only in supplied present facts",
+      "a philosophical inference explicitly framed as interpretation and carrying no new person, place, institution, event, number, or history"
+    ],
+    "textureConditions": [
+      "continuity describes only the supplied current record unless a historical fact is explicitly supplied",
+      "every named person, place, institution, team, event, season, statistic, role change, cause, intention, and quote requires Packet support"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

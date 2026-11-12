@@ -1,0 +1,55 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "113",
+  "persona": "kai-marston",
+  "byline": "Kai Marston",
+  "bylinePopid": "POP-00158",
+  "article": "output/cron-compare/staged/culture_c113_kai-marston_packet-v2_anthropic-claude-haiku-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Tara Ellison",
+        "role": "mentioned",
+        "popid": "POP-00546"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Rockridge"
+    ],
+    "claims": [
+      {
+        "claim": "To be honest, I've just been doing my job as a journalist, covering local news and events. Recently, a manager at Bay Tribune asked me to redo some work that had already been approved, which was a bit frustrating. I've been noticing the usual things in Rockridge, like the busy aisles at Canopy Market. I don't feel like I've been working on anything particularly remarkable or influential lately.",
+        "sourceRef": "citizenVoice PRESS Tara Ellison"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-b773454e8b06",
+    "draftSha256": "7ae22702e4a0f596a8a2a231eb38c23f1ffad4eb4032ba182ca06015d516a54f",
+    "verdict": "output/cron-compare/culture_c113_kai-marston_packet-v2_anthropic-claude-haiku-5-5.rhea.json",
+    "ranAt": "2026-10-30T23:16:18.040Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 500",
+      "words": 585,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "7ae22702e4a0f596a8a2a231eb38c23f1ffad4eb4032ba182ca06015d516a54f",
+      "costUsd": 0.0011
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-30T23:16:21.584Z"
+}

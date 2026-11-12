@@ -1,0 +1,32 @@
+{
+  "status": "arc-seed",
+  "cycle": "113",
+  "desk": "sports",
+  "persona": "p-slayer",
+  "hood": "Downtown",
+  "quotes": [
+    {
+      "pop": "POP-00022",
+      "name": "Danny Horn",
+      "quote": "As the best player in baseball and our center fielder, my status doesn't directly influence outfield decisions, but I know Paulson's got a tough call ahead with five outfielders for three spots. Desmond Morton, Frank Reyna, Vladimir Gonzalez, JR Rosado, and I'm in center, so it's about who gets left field and right field. Vladimir's been clutch, and Desmond's got those five tools, so I think they're strong contenders. It's not my call, but I trust Paulson to make the right decision for the team."
+    },
+    {
+      "pop": "POP-00051",
+      "name": "Desmond Morton",
+      "quote": "To be honest, I'm not sure if my 5-tool potential makes me a lock for one of the outfield spots. The A's have some talented guys vying for the same positions, and it's up to Paulson to decide. I've seen Danny Horn is starting in center field, and Vladimir's coming off a great season, so it's looking like a tough competition. I think it's more about how we all fit together as a team rather than just individual talent."
+    },
+    {
+      "pop": "POP-00598",
+      "name": "Vladimir Gonzalez",
+      "quote": "To be honest, I'm not sure how my clutch performance will impact my chances in the outfield. We've got a lot of talented guys vying for spots, and it's up to Paulson to decide. I know I've had a good season, but with Desmond Morton and Frank Reyna also playing well, it's a tough call."
+    },
+    {
+      "pop": "POP-00079",
+      "name": "Frank Reyna",
+      "quote": "I'm one of the guys fighting for a spot, to be honest. It's tough seeing five outfielders for three positions. I know I'm a power hitter and have shown I can succeed at this level, but it's a grind. I've been around the block with Rayon Dart, and we talk about stuff like this. He's seen it before. I just need to stay focused and keep doing what I'm doing."
+    }
+  ],
+  "claim": "As the best player in baseball and our center fielder, my status doesn't directly influence outfield decisions, but I know Paulson's got a tough call ahead with five outfielders for three spots. Desmond Morton, Frank Reyna, Vladimir Gonzalez, JR Rosado, and I'm in center, so it's about who gets left field and right field. Vladimir's been clutch, and Desmond's got those five tools, so I think they're strong contenders. It's not my call, but I trust Paulson to make the right decision for the team.",
+  "src": "citizenVoice PRESS c113",
+  "ranAt": "2026-10-28T18:19:20.918Z"
+}

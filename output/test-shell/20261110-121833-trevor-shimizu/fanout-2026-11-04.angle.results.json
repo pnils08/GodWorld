@@ -1,0 +1,88 @@
+{
+  "date": "2026-11-04",
+  "stage": "angle",
+  "results": [
+    {
+      "name": "Jax Caldera",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "angle",
+        "capHits": 0
+      }
+    },
+    {
+      "name": "Noah Tan",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "angle",
+        "capHits": 0
+      }
+    },
+    {
+      "name": "Elliot Marbury",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "angle",
+        "capHits": 0
+      }
+    },
+    {
+      "name": "P Slayer",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "angle",
+        "capHits": 0
+      }
+    },
+    {
+      "name": "Tanya Cruz",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "angle",
+        "capHits": 0
+      }
+    },
+    {
+      "name": "Tamsin Pruitt",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "angle",
+        "capHits": 0
+      }
+    },
+    {
+      "name": "Ines Sorensen",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "angle",
+        "capHits": 0
+      }
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": true,
+      "checks": {
+        "stage": "angle",
+        "capHits": 0
+      }
+    }
+  ],
+  "checkTotals": {
+    "seats": 8,
+    "toolSeats": 0,
+    "capHits": 0,
+    "thin": 0,
+    "verbatim": 0,
+    "graded": 0,
+    "gradeSum": 0
+  },
+  "ranAt": "2026-11-04T12:17:23.546Z"
+}

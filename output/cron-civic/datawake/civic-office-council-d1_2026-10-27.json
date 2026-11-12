@@ -1,0 +1,26 @@
+{
+  "office": "council_d1",
+  "agentDir": "civic-office-council-d1",
+  "holder": "Denise Carter",
+  "popid": "POP-00501",
+  "title": "City Council District 1",
+  "date": "2026-10-27",
+  "cycle": 113,
+  "model": "deepseek/deepseek-v4-flash-0731",
+  "statement": "I'm moving the Tenant Defense Fund out of committee with my full support. The legal defense is the difference between staying and displacement for families in West Oakland, and this committee vote is how we fund that stability. I also owe West Oakland and Brooklyn a direct response — I'm publishing the municipal mitigation response for the two active district complaints and executing the D1 OARI evaluation review under INIT-002. Process isn't bureaucracy; it's how the city keeps its word.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-113-civic-office-council-d1",
+        "text": "Publishing the municipal mitigation response for the two active District 1 citizen complaints (one West Oakland, C111; one West Oakland, C112). The response centers tenant stability and public safety coordination in both corridors. Executing the D1 OARI evaluation review under INIT-002: dispatch times, follow-through, and resident outcomes in West Oakland and Brooklyn will be assessed with a report due by end of cycle.",
+        "directiveCycle": 113,
+        "confrontationSeat": "civic-office-council-d1"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-10-27T10:45:28.703Z",
+  "fellBackFrom": null
+}

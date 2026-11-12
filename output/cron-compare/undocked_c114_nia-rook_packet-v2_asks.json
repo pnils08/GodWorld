@@ -1,0 +1,126 @@
+[
+  {
+    "pop": "POP-00530",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00530\",\"name\":\"Lena Okafor\",\"role\":\"UNDOCKED pilot\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Nia Rook\",\"question\":\"How does Lena Okafor's performance in UNDOCKED relate to her role as a Daycare Director? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"undocked\",\"hood\":\"Fruitvale\",\"focus\":\"Lena Okafor's UNDOCKED episode\",\"src\":\"undocked:undocked-pop00530-Y3C10-e2\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Lena Okafor — UNDOCKED pilot\",\"evidence\":[{\"id\":\"EV-dbbc7e3152\",\"src\":\"undocked:undocked-pop00530-Y3C10-e2\",\"text\":\"UNDOCKED: Lena Okafor, Thursday night\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"UNDOCKED: Lena Okafor, Thursday night\",\"src\":\"undocked:undocked-pop00530-Y3C10-e2\",\"id\":\"F-0215e397cfef\"},{\"t\":\"FACT\",\"text\":\"Lena Okafor's Thursday night on UNDOCKED: went through Alpha Centauri, Sol, Sirius, Nova Terra, Epsilon Eridani, Procyon, Proxima Centauri and Barnards Star; took the Copper Requisition contract; mined 3 copper ore, 8 iron ore, 1 antimatter containment cell and 4 aluminum ore; sold 6 copper ore and 12 iron ore; got into 1 fight; came out 18 credits up; flew until the show's time ran out.\",\"src\":\"undocked:undocked-pop00530-Y3C10-e2\",\"id\":\"F-f00e00704d79\"},{\"t\":\"FACT\",\"text\":\"Lena Okafor — Daycare Director (ledger)\",\"src\":\"undocked:undocked-pop00530-Y3C10-e2\",\"id\":\"F-31ba7e9ec4ee\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C114\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4261fa115617\"},{\"t\":\"FACT\",\"text\":\"Lena Okafor — UNDOCKED pilot\",\"src\":\"Simulation_Ledger profile for POP-00530\",\"id\":\"F-411855505fe1\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C10, Spring, holiday=none\",\"src\":\"output/world_summary_c114.md Calendar context (Simulation_Calendar)\",\"id\":\"F-9b9470803821\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00530",
+        "name": "Lena Okafor",
+        "role": "UNDOCKED pilot",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Nia Rook",
+        "question": "How does Lena Okafor's performance in UNDOCKED relate to her role as a Daycare Director? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "undocked",
+        "hood": "Fruitvale",
+        "focus": "Lena Okafor's UNDOCKED episode",
+        "src": "undocked:undocked-pop00530-Y3C10-e2"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Lena Okafor — UNDOCKED pilot",
+        "evidence": [
+          {
+            "id": "EV-dbbc7e3152",
+            "src": "undocked:undocked-pop00530-Y3C10-e2",
+            "text": "UNDOCKED: Lena Okafor, Thursday night"
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "UNDOCKED: Lena Okafor, Thursday night",
+          "src": "undocked:undocked-pop00530-Y3C10-e2",
+          "id": "F-0215e397cfef"
+        },
+        {
+          "t": "FACT",
+          "text": "Lena Okafor's Thursday night on UNDOCKED: went through Alpha Centauri, Sol, Sirius, Nova Terra, Epsilon Eridani, Procyon, Proxima Centauri and Barnards Star; took the Copper Requisition contract; mined 3 copper ore, 8 iron ore, 1 antimatter containment cell and 4 aluminum ore; sold 6 copper ore and 12 iron ore; got into 1 fight; came out 18 credits up; flew until the show's time ran out.",
+          "src": "undocked:undocked-pop00530-Y3C10-e2",
+          "id": "F-f00e00704d79"
+        },
+        {
+          "t": "FACT",
+          "text": "Lena Okafor — Daycare Director (ledger)",
+          "src": "undocked:undocked-pop00530-Y3C10-e2",
+          "id": "F-31ba7e9ec4ee"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C114",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4261fa115617"
+        },
+        {
+          "t": "FACT",
+          "text": "Lena Okafor — UNDOCKED pilot",
+          "src": "Simulation_Ledger profile for POP-00530",
+          "id": "F-411855505fe1"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C10, Spring, holiday=none",
+          "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+          "id": "F-9b9470803821"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  }
+]

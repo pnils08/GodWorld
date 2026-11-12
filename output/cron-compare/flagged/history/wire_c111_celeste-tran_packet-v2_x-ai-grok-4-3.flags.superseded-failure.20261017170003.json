@@ -1,0 +1,18 @@
+{
+  "draft": "wire_c111_celeste-tran_packet-v2_x-ai-grok-4-3.md",
+  "flags": [
+    {
+      "claim": "Warriors Alumni Thompson landed on the culture record last cycle and still hangs in the conversation.",
+      "issue": "Named figure not found in ledger or cycle ground truth; imports real-world Warriors basketball entity/alumnus into culture record without packet provenance.",
+      "severity": "high"
+    },
+    {
+      "claim": "The migration numbers do not line up with the downtown boom the engine keeps flagging.",
+      "issue": "Meta/system vocabulary ('the engine') appears in public-facing article prose.",
+      "severity": "med"
+    }
+  ],
+  "checkFlags": [],
+  "contamination": [],
+  "summary": "Draft blocked due to ungrounded real-world basketball alumnus import ('Warriors Alumni Thompson') and system-engine vocabulary leak in prose."
+}

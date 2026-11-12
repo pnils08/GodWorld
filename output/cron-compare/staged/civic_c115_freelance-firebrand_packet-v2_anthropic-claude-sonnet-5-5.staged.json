@@ -1,0 +1,77 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "115",
+  "persona": "freelance-firebrand",
+  "byline": "Jax Caldera",
+  "bylinePopid": "POP-00799",
+  "article": "output/cron-compare/staged/civic_c115_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Dmitri Soto",
+        "role": "quoted-source",
+        "popid": "POP-00276"
+      },
+      {
+        "name": "Dank Abara",
+        "role": "quoted-source",
+        "popid": "POP-00796"
+      },
+      {
+        "name": "Priya Raghunathan",
+        "role": "quoted-source",
+        "popid": "POP-01214"
+      },
+      {
+        "name": "Luis Navarro",
+        "role": "mentioned",
+        "popid": "POP-00636",
+        "floor": true
+      },
+      {
+        "name": "Warren Ashford",
+        "role": "mentioned",
+        "popid": "POP-00504",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "KONO"
+    ],
+    "claims": [
+      {
+        "claim": "I've noticed that KONO is getting busier. Retail is busy and events are drawing crowds. We're also getting new households moving into the neighborhood.",
+        "sourceRef": "citizenVoice PRESS Priya Raghunathan"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-b067777bb0e1",
+    "draftSha256": "e92090b2072391088437efcb1989239a4d5a63723648b6bbeaa964bcba86b983",
+    "verdict": "output/cron-compare/civic_c115_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-12T00:15:37.064Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 400",
+      "words": 693,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "e92090b2072391088437efcb1989239a4d5a63723648b6bbeaa964bcba86b983",
+      "costUsd": 0.0009
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-12T00:15:42.985Z"
+}

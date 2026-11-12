@@ -1,0 +1,19 @@
+{
+  "show": "UNDOCKED",
+  "session": "verify-002",
+  "model": "openrouter/deepseek/deepseek-v4-flash-0731",
+  "startedAt": "2026-10-31T03:15:43.384Z",
+  "endedAt": "2026-10-31T03:35:55.928Z",
+  "capMinutes": 20,
+  "exitCode": 0,
+  "capped": true,
+  "stopReason": "window",
+  "toolCalls": 64,
+  "turns": 73,
+  "tokensIn": 50436,
+  "tokensOut": 31734,
+  "toolErrors": 9,
+  "estCostUsd": 0.0136,
+  "log": "output/spacemolt-show/episodes/verify-002-2026-10-31T03-15-43.log",
+  "runner": "scripts/undockedEpisode.js"
+}

@@ -1,0 +1,131 @@
+{
+  "artifactClass": "NLM_DAILY_RUN",
+  "sourceVersion": "1.9",
+  "canonStatus": "NOT_CANON",
+  "cycle": 112,
+  "generatedAt": "2026-10-24T13:00:05.319Z",
+  "lastAttemptAt": "2026-10-24T13:00:05.319Z",
+  "hours": 36,
+  "packHash": "91bad9fb87056e473b3ae45c2cac4998904afe6aac924e22c2f73455313ed96c",
+  "worldSummary": "output/world_summary_c112.md",
+  "citizenDigest": "output/citizen-day-digest.md",
+  "reports": [
+    {
+      "classification": "FLAGGED",
+      "path": "output/cron-compare/flagged/culture_c112_tamsin-pruitt_packet-v2_x-ai-grok-4-3-2320.md"
+    },
+    {
+      "classification": "FLAGGED",
+      "path": "output/cron-compare/flagged/history/culture_c112_tamsin-pruitt_packet-v2_x-ai-grok-4-3.staged-1806.rejected-by-builder.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/culture_c112_ines-sorensen_packet-v2_x-ai-grok-4-3.staged-1814.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/culture_c112_ines-sorensen_packet-v2_x-ai-grok-4-3.staged-2320.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/culture_c112_kai-marston_packet-v2_anthropic-claude-haiku-5-5.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/culture_c112_maria-keen_packet-v2_anthropic-claude-sonnet-5-5.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/culture_c112_mason-ortega_packet-v2_x-ai-grok-4-3.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/culture_c112_sharon-okafor_packet-v2_openai-gpt-5-6-luna.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/undocked_c112_nia-rook_packet-v2_x-ai-grok-4-3.staged-2321.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/wire_c112_celeste-tran_packet-v2_x-ai-grok-4-3.staged.md"
+    }
+  ],
+  "flaggedReports": [
+    "output/cron-compare/flagged/culture_c112_tamsin-pruitt_packet-v2_x-ai-grok-4-3.flags.json"
+  ],
+  "editionDay": false,
+  "firstMorning": false,
+  "routingShadow": {
+    "version": "NLM-DAILY-ROUTER/1",
+    "mode": "shadow",
+    "profile": "REPORTED_DAY",
+    "format": "deep_dive",
+    "length": "default",
+    "activationEligible": true,
+    "reportedDayThreshold": 1,
+    "sourceClasses": [
+      "WORLD_STATE",
+      "CITIZEN_DIGEST",
+      "W1_CHASE",
+      "W2_QUOTES",
+      "W3_PASSED",
+      "ENGINE_CIVIC_SIGNAL"
+    ],
+    "reasonCodes": [
+      "RHEA_PASSED_7",
+      "REPORTED_THRESHOLD_MET_1"
+    ],
+    "dispositionCounts": {
+      "passed": 7,
+      "rheaFlagged": 0,
+      "neverGated": 0
+    },
+    "fingerprint": "e58b846e407be8accd6fa541be77acc04363788a919a7d4f8eff05b518990f83"
+  },
+  "newsroomPulse": {
+    "fingerprint": "e6bf799510f675fca997115950288430d20cd2f5e17bdb55e3961279baeecbf3",
+    "counts": {
+      "angles": 8,
+      "asks": 7,
+      "fanoutAssignments": 8,
+      "w2Ready": 6,
+      "quotes": 16,
+      "passed": 7,
+      "rheaFlagged": 0,
+      "neverGated": 0,
+      "flagged": 0,
+      "pending": 0
+    },
+    "priorCompletedCycle": null
+  },
+  "archiveNotebookId": "417e2d29-4167-420f-a9cc-76fb6b2b7de2",
+  "newsroomNotebookId": "73cd50b5-4b8f-4329-bb42-0783c8d93763",
+  "dryRun": false,
+  "archiveScope": {
+    "cycles": [
+      111,
+      110
+    ],
+    "sourceIds": [
+      "45e84e2f-87a7-4e37-a3ff-2d1f828239ef",
+      "3448ce79-e222-46ed-a8b0-6adc8e35429e"
+    ]
+  },
+  "boundedSourceHash": "11dca55aa9cf5cc91351e74d02dff57bdde41eceabdf4258943953cc6cf2960c",
+  "boundedSource": "output/notebooklm/daily/c112/91bad9fb8705/bounded-newsroom-source.md",
+  "sourceIds": [
+    "759a49f4-9145-40c9-94d5-e31766c33571"
+  ],
+  "audioDirectionSourceId": "4c721eae-6e1a-4e01-b845-285b6d0ceb81",
+  "audioPresentation": {
+    "format": "deep_dive",
+    "length": "default",
+    "source": "router",
+    "profile": "REPORTED_DAY"
+  },
+  "audioArtifactId": "367833e8-b542-447b-bc6a-c927ed658ce0",
+  "audioPath": "output/notebooklm/daily/c112/91bad9fb8705/godworld_daily_c112.m4a",
+  "driveLink": "https://drive.google.com/file/d/1wvRMr6oXoWwMDfYEbtsiTrn9WbQ1keFE/view?usp=drivesdk",
+  "opsReportArtifactId": "73052c7f-23a5-4911-b9be-b4c602acaa86"
+}

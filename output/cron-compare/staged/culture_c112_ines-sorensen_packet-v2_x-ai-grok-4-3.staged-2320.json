@@ -1,0 +1,56 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "112",
+  "persona": "ines-sorensen",
+  "byline": "Ines Sorensen",
+  "bylinePopid": "POP-01211",
+  "article": "output/cron-compare/staged/culture_c112_ines-sorensen_packet-v2_x-ai-grok-4-3.staged-2320.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Marcus Wright",
+        "role": "mentioned",
+        "popid": "POP-00288"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "West Oakland"
+    ],
+    "claims": [
+      {
+        "claim": "It's the quiet that gets me. I'm worried about the folks around here who are barely holding on. The funding moving so slow and Nightline Station going quiet when it shouldn't be... it feels like the ground's shifting under everyone.",
+        "sourceRef": "citizenVoice PRESS Marcus Wright"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-ee1f3056f773",
+    "draftSha256": "9b48a5992879c8cb478a267fc40161b617093d9e8278ab9805b23649502d9d26",
+    "verdict": "output/cron-compare/culture_c112_ines-sorensen_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-10-23T23:20:44.534Z",
+    "contractScore": {
+      "opened": true,
+      "closed": false,
+      "purposeMet": true,
+      "inTarget": false,
+      "inTargetBy": "code floor 300",
+      "words": 112,
+      "short": "The piece fell short of the 300-word minimum and ended on an attribution line rather than leaving the speaker's own words standing.",
+      "score": 2,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "9b48a5992879c8cb478a267fc40161b617093d9e8278ab9805b23649502d9d26",
+      "costUsd": 0.0013
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-23T23:20:50.536Z"
+}

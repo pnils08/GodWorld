@@ -1,0 +1,61 @@
+{
+  "status": "staged",
+  "desk": "undocked",
+  "cycle": "113",
+  "persona": "nia-rook",
+  "byline": "Nia Rook",
+  "bylinePopid": "POP-01076",
+  "article": "output/cron-compare/staged/undocked_c113_nia-rook_packet-v2_openai-gpt-6-luna.staged-2322.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Cristina Booker",
+        "role": "mentioned",
+        "popid": "POP-00836",
+        "floor": true
+      },
+      {
+        "name": "Eric Taveras",
+        "role": "mentioned",
+        "popid": "POP-00597",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "UNDOCKED: Cristina Booker — a night the books can't settle yet",
+        "sourceRef": "undocked:undocked-pop00836-Y3C9-e2"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-e05699627403",
+    "draftSha256": "cffda9e99941796b69f5185e0ffe9a2c35d09a135ede4585656e70366bb15eb7",
+    "verdict": "output/cron-compare/undocked_c113_nia-rook_packet-v2_openai-gpt-6-luna.rhea.json",
+    "ranAt": "2026-10-30T23:21:21.398Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 350",
+      "words": 418,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "cffda9e99941796b69f5185e0ffe9a2c35d09a135ede4585656e70366bb15eb7",
+      "costUsd": 0.0009
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-30T23:21:24.015Z"
+}

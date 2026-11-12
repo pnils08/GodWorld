@@ -1,0 +1,378 @@
+{
+  "version": "ARTS-SLICE-1",
+  "empty": false,
+  "cycle": 112,
+  "kind": "beat-arts",
+  "seat": {
+    "slug": "kai-marston",
+    "name": "Kai Marston",
+    "popid": "POP-00158",
+    "desk": "culture",
+    "domain": "arts",
+    "builder": "buildArtsSlice.js"
+  },
+  "hood": "Rockridge",
+  "pulse": {
+    "className": "beat-arts",
+    "score": 100,
+    "label": "36 culture figures rising; 0 new on the record",
+    "hood": "Rockridge",
+    "source": "output/beats/Cultural_Ledger.jsonl @C112"
+  },
+  "story": {
+    "kind": "beat-arts",
+    "angle": "Tara Ellison is rising — the acts and the rooms they play",
+    "label": "36 culture figures rising; 0 new on the record",
+    "hookLine": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 68, surging), last seen C112.",
+    "hood": "Rockridge",
+    "citizens": [
+      "Tara Ellison (POP-00546)",
+      "Alma Vasquez (POP-01063)",
+      "Nina Reyes (POP-01057)",
+      "Theo Banks (POP-01056)",
+      "Lena Cross (POP-00539)",
+      "Rowan Pierce (POP-00545)",
+      "Caspian Yarbrough (POP-01193)",
+      "Constanza Doan (POP-00921)",
+      "Beatrix Santos (POP-00498)",
+      "Omar Nelson (POP-01124)",
+      "Patrick When (POP-00208)",
+      "Brooks Wright (POP-00637)",
+      "Ruth Gaines (POP-00879)",
+      "Ammie Carter (POP-00680)",
+      "Sage Yamamoto (POP-01126)",
+      "Daley Hill (POP-00240)",
+      "Dame Sarr (POP-01025)",
+      "Dame Reed (POP-00634)"
+    ],
+    "popids": [
+      "POP-00546",
+      "POP-01063",
+      "POP-01057",
+      "POP-01056",
+      "POP-00539",
+      "POP-00545",
+      "POP-01193",
+      "POP-00921",
+      "POP-00498",
+      "POP-01124",
+      "POP-00208",
+      "POP-00637",
+      "POP-00879",
+      "POP-00680",
+      "POP-01126",
+      "POP-00240",
+      "POP-01025",
+      "POP-00634"
+    ],
+    "ref": "output/beats/Cultural_Ledger.jsonl @C112",
+    "cycle": 112
+  },
+  "approach": "Arts & entertainment approach: this slice is the culture ledger — who is rising, who just appeared, who is fading, with their domains and neighborhoods — plus the city's culture seeds this cycle. Present-tense, neighborhood act not gallery PR. The names and trajectories are real; the garage rehearsal, the opening-night crowd, the set list are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-00546",
+      "name": "Tara Ellison",
+      "role": "Journalist",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Tara Ellison — Journalist — Rockridge",
+      "why": "fame rising (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-01063",
+      "name": "Alma Vasquez",
+      "role": "sculptor",
+      "neighborhood": "Laurel",
+      "business": null,
+      "profile": "Alma Vasquez — sculptor — Laurel",
+      "why": "fame rising (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-01057",
+      "name": "Nina Reyes",
+      "role": "actress",
+      "neighborhood": "Fruitvale",
+      "business": null,
+      "profile": "Nina Reyes — actress — Fruitvale",
+      "why": "fame rising (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-01056",
+      "name": "Theo Banks",
+      "role": "rapper",
+      "neighborhood": "Uptown",
+      "business": null,
+      "profile": "Theo Banks — rapper — Uptown",
+      "why": "fame rising (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-00539",
+      "name": "Lena Cross",
+      "role": "Actor",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Lena Cross — Actor — Piedmont Ave",
+      "why": "fading — the where-are-they-now file (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-00545",
+      "name": "Rowan Pierce",
+      "role": "Freelance Writer",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Rowan Pierce — Freelance Writer — Piedmont Ave",
+      "why": "fading — the where-are-they-now file (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-01193",
+      "name": "Caspian Yarbrough",
+      "role": "Band and Music Teacher",
+      "neighborhood": "Uptown",
+      "business": null,
+      "profile": "Caspian Yarbrough — Band and Music Teacher — Uptown",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00921",
+      "name": "Constanza Doan",
+      "role": "Civil Rights Attorney",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Constanza Doan — Civil Rights Attorney — Downtown",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00498",
+      "name": "Beatrix Santos",
+      "role": "Herbalist",
+      "neighborhood": "Temescal",
+      "business": null,
+      "profile": "Beatrix Santos — Herbalist — Temescal",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-01124",
+      "name": "Omar Nelson",
+      "role": "Nurse aide",
+      "neighborhood": "Eastlake",
+      "business": null,
+      "profile": "Omar Nelson — Nurse aide — Eastlake",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00208",
+      "name": "Patrick When",
+      "role": "Janitor",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Patrick When — Janitor — Downtown",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00637",
+      "name": "Brooks Wright",
+      "role": "Line cook",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Brooks Wright — Line cook — Downtown",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00879",
+      "name": "Ruth Gaines",
+      "role": "Cybersecurity Analyst",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Ruth Gaines — Cybersecurity Analyst — Downtown",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00680",
+      "name": "Ammie Carter",
+      "role": "Immigration Attorney",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Ammie Carter — Immigration Attorney — Downtown",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-01126",
+      "name": "Sage Yamamoto",
+      "role": "Teacher",
+      "neighborhood": "San Antonio",
+      "business": null,
+      "profile": "Sage Yamamoto — Teacher — San Antonio",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00240",
+      "name": "Daley Hill",
+      "role": "Painter",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Daley Hill — Painter — Downtown",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-01025",
+      "name": "Dame Sarr",
+      "role": "SG / The Oaks",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Dame Sarr — SG / The Oaks — Downtown",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00634",
+      "name": "Dame Reed",
+      "role": "Artist/Muralist",
+      "neighborhood": "Jack London",
+      "business": null,
+      "profile": "Dame Reed — Artist/Muralist — Jack London",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    }
+  ],
+  "facts": [
+    {
+      "text": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 68, surging), last seen C112",
+      "src": "output/beats/Cultural_Ledger.jsonl @C112"
+    },
+    {
+      "text": "Alma Vasquez (sculptor), Arts, Laurel — fame rising (fame 53, ascending), last seen C86",
+      "src": "output/beats/Cultural_Ledger.jsonl @C112"
+    },
+    {
+      "text": "Nina Reyes (actress), Arts, Fruitvale — fame rising (fame 51, surging), last seen C101",
+      "src": "output/beats/Cultural_Ledger.jsonl @C112"
+    },
+    {
+      "text": "Theo Banks (rapper), Arts, Uptown — fame rising (fame 47, surging), last seen C99",
+      "src": "output/beats/Cultural_Ledger.jsonl @C112"
+    },
+    {
+      "text": "Lena Cross (Celebrity), Arts, Piedmont Ave — fading — the where-are-they-now file (fame 93, cooling), last seen C94",
+      "src": "output/beats/Cultural_Ledger.jsonl @C112"
+    },
+    {
+      "text": "Rowan Pierce (journalist), Media, Piedmont Ave — fading — the where-are-they-now file (fame 67, cooling), last seen C88",
+      "src": "output/beats/Cultural_Ledger.jsonl @C112"
+    },
+    {
+      "text": "CITY SEED (Citywide): Caspian Yarbrough; Constanza Doan; Beatrix Santos",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C112"
+    },
+    {
+      "text": "CITY SEED (Downtown): Patrick When; Brooks Wright; Ruth Gaines · at Oakland Youth Apprenticeship Pipeline; Telegraph Presbyterian Fellowship",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C112"
+    },
+    {
+      "text": "CITY SEED (Montclair): Sage Yamamoto; Daley Hill; Dame Sarr",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C112"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "Tara Ellison is rising — the acts and the rooms they play",
+    "hookLine": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 68, surging), last seen C112.",
+    "anchorFacts": [
+      "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 68, surging), last seen C112",
+      "Alma Vasquez (sculptor), Arts, Laurel — fame rising (fame 53, ascending), last seen C86",
+      "Nina Reyes (actress), Arts, Fruitvale — fame rising (fame 51, surging), last seen C101",
+      "Theo Banks (rapper), Arts, Uptown — fame rising (fame 47, surging), last seen C99",
+      "Lena Cross (Celebrity), Arts, Piedmont Ave — fading — the where-are-they-now file (fame 93, cooling), last seen C94",
+      "Rowan Pierce (journalist), Media, Piedmont Ave — fading — the where-are-they-now file (fame 67, cooling), last seen C88",
+      "CITY SEED (Citywide): Caspian Yarbrough; Constanza Doan; Beatrix Santos",
+      "CITY SEED (Downtown): Patrick When; Brooks Wright; Ruth Gaines · at Oakland Youth Apprenticeship Pipeline; Telegraph Presbyterian Fellowship",
+      "CITY SEED (Montclair): Sage Yamamoto; Daley Hill; Dame Sarr"
+    ],
+    "evidence": [
+      {
+        "text": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 68, surging), last seen C112",
+        "src": "output/beats/Cultural_Ledger.jsonl @C112"
+      },
+      {
+        "text": "Alma Vasquez (sculptor), Arts, Laurel — fame rising (fame 53, ascending), last seen C86",
+        "src": "output/beats/Cultural_Ledger.jsonl @C112"
+      },
+      {
+        "text": "Nina Reyes (actress), Arts, Fruitvale — fame rising (fame 51, surging), last seen C101",
+        "src": "output/beats/Cultural_Ledger.jsonl @C112"
+      },
+      {
+        "text": "Theo Banks (rapper), Arts, Uptown — fame rising (fame 47, surging), last seen C99",
+        "src": "output/beats/Cultural_Ledger.jsonl @C112"
+      },
+      {
+        "text": "Lena Cross (Celebrity), Arts, Piedmont Ave — fading — the where-are-they-now file (fame 93, cooling), last seen C94",
+        "src": "output/beats/Cultural_Ledger.jsonl @C112"
+      },
+      {
+        "text": "Rowan Pierce (journalist), Media, Piedmont Ave — fading — the where-are-they-now file (fame 67, cooling), last seen C88",
+        "src": "output/beats/Cultural_Ledger.jsonl @C112"
+      },
+      {
+        "text": "CITY SEED (Citywide): Caspian Yarbrough; Constanza Doan; Beatrix Santos",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C112"
+      },
+      {
+        "text": "CITY SEED (Downtown): Patrick When; Brooks Wright; Ruth Gaines · at Oakland Youth Apprenticeship Pipeline; Telegraph Presbyterian Fellowship",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C112"
+      },
+      {
+        "text": "CITY SEED (Montclair): Sage Yamamoto; Daley Hill; Dame Sarr",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C112"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": null,
+    "hooks": [
+      {
+        "text": "wondered when exactly they became the adult in the room",
+        "angle": "arts/culture feature",
+        "domain": "CULTURE",
+        "hood": "Lake Merritt",
+        "priority": 3
+      },
+      {
+        "text": "Mike Paulson moved from Jack London to West Oakland — moving up from Jack London — sold up and bought in West Oakland",
+        "angle": "desk rotation",
+        "domain": "COMMUNITY",
+        "hood": "West Oakland",
+        "priority": 5
+      },
+      {
+        "text": "The Norwood household (2) moved from Rockridge to West Oakland — leaving Rockridge for a better fit",
+        "angle": "desk rotation",
+        "domain": "COMMUNITY",
+        "hood": "West Oakland",
+        "priority": 5
+      },
+      {
+        "text": "Nadia Rasmussen moved from Temescal to Fruitvale — moving up from Temescal",
+        "angle": "desk rotation",
+        "domain": "COMMUNITY",
+        "hood": "Fruitvale",
+        "priority": 5
+      }
+    ],
+    "note": null,
+    "pageVoices": [],
+    "roomIsYours": "the rehearsal space, the flyer on the pole, who showed up, what the room felt like when the second act started"
+  },
+  "rising": 36,
+  "appeared": 0,
+  "fading": 2,
+  "seeds": 20,
+  "pointers": [
+    "output/beats/Cultural_Ledger.jsonl @C112",
+    "output/beats/Story_Hook_Deck.jsonl (hooks for Kai Marston this cycle)",
+    "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+  ]
+}

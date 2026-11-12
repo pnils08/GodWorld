@@ -1,0 +1,72 @@
+{
+  "draft": "output/cron-compare/culture_c114_kai-marston_packet-v2_anthropic-claude-haiku-5-5.md",
+  "cycle": "114",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "a75277853cc86550115a48f54b5f1cbcb7a51426d8ecb64e10dc876a0144ccbf",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All citizen profiles, neighborhood residences, and quotes perfectly match ground truth and interview records.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "kai-arts-entertainment-v1",
+    "packageVersion": "KAI-LEP2-1",
+    "manifestId": "AM-76734ddb654e",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_QUOTE",
+        "values": [
+          "To be honest, I've not really thought much about Benji Dillon's rising fame. I've seen him around the clubhouse, he's a talented kid, but I don't know him well enough to say much about his personal story or what's behind his recent performances."
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Benji Dillon",
+      "Danny Horn",
+      "Darrin Davis",
+      "Travis Coles"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0112,
+  "durationMs": 6018,
+  "parseError": false,
+  "ranAt": "2026-11-07T00:16:03.069Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 500",
+    "words": 772,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "a75277853cc86550115a48f54b5f1cbcb7a51426d8ecb64e10dc876a0144ccbf",
+    "costUsd": 0.0015
+  }
+}

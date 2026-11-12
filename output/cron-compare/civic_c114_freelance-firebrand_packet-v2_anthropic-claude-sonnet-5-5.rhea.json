@@ -1,0 +1,89 @@
+{
+  "draft": "output/cron-compare/civic_c114_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "114",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "2adbc6f98016d0ffbaa5d2034f96d6b68a45a2397426b5cbb21534f349ec9f1b",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All citizen identities, interview quotes, metric references, and civic details accurately match canon ground truth.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "jax-accountability-v1",
+    "packageVersion": "JAX-LEP2-2",
+    "manifestId": "AM-b1b5b1e87dee",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "17th",
+          "8th",
+          "2.16",
+          "1.000",
+          "4048",
+          "7"
+        ]
+      },
+      {
+        "code": "UNAPPROVED_QUOTE",
+        "values": [
+          "growth,"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Jax Caldera",
+      "Maya Torres-Dillon",
+      "Naomi Sterling",
+      "Tom Jilner",
+      "Warren Ashford",
+      "Yu Zen"
+    ],
+    "unverified": [
+      "Bay Conservation Alliance",
+      "Bay Conservation Alliance Advisory",
+      "Commercial Stabilization"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.011,
+  "durationMs": 8135,
+  "parseError": false,
+  "ranAt": "2026-11-05T00:15:34.376Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 400",
+    "words": 766,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "2adbc6f98016d0ffbaa5d2034f96d6b68a45a2397426b5cbb21534f349ec9f1b",
+    "costUsd": 0.0013
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "desk": "civic",
+  "cycle": "115",
+  "model": "anthropic/claude-sonnet-5.5",
+  "turns": 3,
+  "maxTurns": 15,
+  "usageInputTokens": 23915,
+  "usageOutputTokens": 2627,
+  "savedFiles": [
+    "output/test-shell/20261110-231754-luis-navarro-light/civic_c115_luis-navarro_packet-v2_anthropic-claude-sonnet-5-5.md"
+  ],
+  "compareAgainst": "output/desk-output/civic_c115.md",
+  "durationMs": 35601,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-11-11T05:18:33.526Z"
+}

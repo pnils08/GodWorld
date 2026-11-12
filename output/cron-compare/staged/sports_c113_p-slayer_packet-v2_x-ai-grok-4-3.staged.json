@@ -1,0 +1,74 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "113",
+  "persona": "p-slayer",
+  "byline": "P Slayer",
+  "bylinePopid": "POP-00008",
+  "article": "output/cron-compare/staged/sports_c113_p-slayer_packet-v2_x-ai-grok-4-3.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Desmond Morton",
+        "role": "mentioned",
+        "popid": "POP-00051"
+      },
+      {
+        "name": "Frank Reyna",
+        "role": "mentioned",
+        "popid": "POP-00079"
+      },
+      {
+        "name": "Danny Horn",
+        "role": "mentioned",
+        "popid": "POP-00022"
+      },
+      {
+        "name": "Vladimir Gonzalez",
+        "role": "mentioned",
+        "popid": "POP-00598"
+      },
+      {
+        "name": "Rayon Dart",
+        "role": "mentioned",
+        "popid": "POP-00363",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "As the best player in baseball and our center fielder, my status doesn't directly influence outfield decisions, but I know Paulson's got a tough call ahead with five outfielders for three spots. Desmond Morton, Frank Reyna, Vladimir Gonzalez, JR Rosado, and I'm in center, so it's about who gets left field and right field. Vladimir's been clutch, and Desmond's got those five tools, so I think they're strong contenders. It's not my call, but I trust Paulson to make the right decision for the team.",
+        "sourceRef": "citizenVoice PRESS Danny Horn"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-b4eaf8a8dcf8",
+    "draftSha256": "e4a49e59a7286d4c4e6c769953f4e93b57e58f6496980a4b216b925864fff948",
+    "verdict": "output/cron-compare/sports_c113_p-slayer_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-10-31T17:02:41.059Z",
+    "contractScore": {
+      "opened": true,
+      "closed": false,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 400",
+      "words": 414,
+      "short": "The closing ends on a flat rhetorical question rather than a dare, confession, or live-friction update.",
+      "score": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "e4a49e59a7286d4c4e6c769953f4e93b57e58f6496980a4b216b925864fff948",
+      "costUsd": 0.0014
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-31T17:02:47.876Z"
+}

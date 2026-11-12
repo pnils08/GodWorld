@@ -1,0 +1,391 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-01210",
+    "name": "Tamsin Pruitt",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "The lives of C112, 2026-10-21: 3 people — Brian Adams — limited social activity due to winter mood",
+    "approach": "Lives approach: this slice is the people something happened to this Cycle — a birth, a death in the house, a hospital stay, a retirement, a promotion — and the smaller moments the record kept. Each person gets their own short passage: the event, the one true detail the record carries, what they did next if the record says. The fact exactly right; never a trend, never a number first; the person, not the system the event belongs to. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "lives",
+      "hood": "Jack London",
+      "facts": [
+        "Brian Adams — limited social activity due to winter mood, Jack London (C112, Relationship)",
+        "Joseph Cramp — felt social atmosphere shift due to today's happenings, Downtown (C112, Relationship)",
+        "Jorry Cula — felt positive atmosphere inside the home, Uptown (C112, Household)"
+      ],
+      "priorCycle": null,
+      "note": "none of today's people has written their own page this Cycle — no quotes",
+      "engineHooks": [],
+      "roomIsYours": "the plain respect, what the event meant in that house or on that block, the detail the family would have picked — from the lines below, never invented",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-lives",
+    "hood": "Jack London",
+    "src": "output/beats/Lived_Events.jsonl @C112 2026-10-21",
+    "plan": {
+      "focus": "Brian Adams",
+      "closeQuestion": "How can I effectively capture the essence of Brian Adams' experience and its aftermath for the Lives page?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00258",
+        "name": "Brian Adams",
+        "profile": "Brian Adams — Janitor — Jack London",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00272",
+        "name": "Joseph Cramp",
+        "profile": "Joseph Cramp — Janitor — Downtown",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00182",
+        "name": "Jorry Cula",
+        "profile": "Jorry Cula — Record Shop Owner — Uptown",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00258-a70a24a651",
+        "pop": "POP-00258",
+        "name": "Brian Adams",
+        "quote": "The winter mood's been weighing on me, making me want to stay in more. It's like a fog that doesn't lift, you know? I've been keeping to myself, not going out as much as I usually do. My wife and kids are used to it by now; they know when I'm like this, it's best to just let me be.",
+        "factIds": [
+          "F-490fadef2c3f",
+          "F-15e71da0df02"
+        ],
+        "src": "packet.W2[POP-00258]"
+      },
+      {
+        "id": "Q-POP-00272-fcbcbb17d3",
+        "pop": "POP-00272",
+        "name": "Joseph Cramp",
+        "quote": "I felt the social atmosphere shift today, it's like the whole town is buzzing now. I've been around Downtown a lot, and it's been dead for years, but now it's like people are finally coming out. I saw a choir performance at Telegraph Presbyterian Fellowship that drew a small crowd, and there were volunteers gathering near City Hall. Even the sidewalks feel busier than ever with people spilling out of Midnight Bistro and SpeedyBurger. It's a good vibe.",
+        "factIds": [
+          "F-74011e297043"
+        ],
+        "src": "packet.W2[POP-00272]"
+      },
+      {
+        "id": "Q-POP-00182-a0c52be783",
+        "pop": "POP-00182",
+        "name": "Jorry Cula",
+        "quote": "To be honest, I've been running on fumes lately, and it's been a strain. But when I'm home with my kid, things feel more grounded. I think that's what made the atmosphere feel positive inside the home. We were just being together, you know? No big drama, just us hanging out. It's those moments that make all the stress worth it.",
+        "factIds": [
+          "F-4220eb3da8df",
+          "F-cd8d29f776c8"
+        ],
+        "src": "packet.W2[POP-00182]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Brian Adams' daily routine during the period of limited social activity",
+        "usable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "The general atmosphere in Jack London during the winter season",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C112",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-7cd6ffd2aeb3"
+    },
+    {
+      "t": "FACT",
+      "text": "Brian Adams — limited social activity due to winter mood",
+      "src": "output/beats/Lived_Events.jsonl @C112 2026-10-21",
+      "id": "F-490fadef2c3f"
+    },
+    {
+      "t": "FACT",
+      "text": "Brian Adams first. The event is the lead; one true detail; what came next only if the record says.",
+      "src": "output/beats/Lived_Events.jsonl @C112 2026-10-21",
+      "id": "F-207913cae72f"
+    },
+    {
+      "t": "FACT",
+      "text": "Brian Adams — limited social activity due to winter mood, Jack London (C112, Relationship)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-15e71da0df02"
+    },
+    {
+      "t": "FACT",
+      "text": "Joseph Cramp — felt social atmosphere shift due to today's happenings, Downtown (C112, Relationship)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-74011e297043"
+    },
+    {
+      "t": "FACT",
+      "text": "Jorry Cula — felt positive atmosphere inside the home, Uptown (C112, Household)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-4220eb3da8df"
+    },
+    {
+      "t": "FACT",
+      "text": "Jorry Cula — Record Shop Owner — Uptown",
+      "src": "Simulation_Ledger profile for POP-00182",
+      "id": "F-cd8d29f776c8"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "tamsin-lives-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Put the cycle's person events in the paper as news, one person at a time — a birth, a death, a hospital stay, a retirement, a promotion. The event is the lead, the person is named as the slice names them, and what came next appears only when a later record holds it. The page is the city's real calendar; every person on it is one the record holds.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "plain respect — a neighborhood weekly's births-and-obituaries hand, unhurried, exact",
+      "targetWords": "450-750",
+      "opening": "the heaviest event on the slice, stated as it happened to the named person",
+      "closing": "the last person's passage ends on what the record holds next for them, or on the fact itself — no moral, no roundup"
+    },
+    "authorizedTexture": [
+      "the plain respect of the form — the ordinary weight of a birth, a retirement, a discharge, stated without ornament",
+      "the frame around a supplied fact — what a promotion to the supplied role means in plain words, without inventing the workplace",
+      "the neighborhood the slice names as where the person lives, without an invented street scene",
+      "the order and pacing of the passages — heaviest first, one person at a time"
+    ],
+    "textureConditions": [
+      "every person, event, role, employer, neighborhood, hospital stay, household and family tie must come from the slice",
+      "a quote appears only verbatim from the person's own supplied page; nothing paraphrased into quotation marks",
+      "what came next appears only when a later Cycle's supplied record holds it",
+      "a thin day (few events) is written as a short page, not padded"
+    ],
+    "canonBlockers": [
+      "any person, event, quote, venue, employer or family member not on the slice",
+      "a paraphrased or invented quote",
+      "a cause, diagnosis or outcome the record does not state",
+      "a statistic, rate or trend claim — the page is people, not numbers",
+      "intake bookkeeping rows (Emerged into Tier, Added to Simulation_Ledger, Updated to Tier) written as life events",
+      "raw engine labels or decimals printed as public-facing evidence"
+    ]
+  },
+  "manifest": {
+    "id": "AM-38aed434970e",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-7cd6ffd2aeb3",
+        "t": "FACT",
+        "text": "Current cycle: C112",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-490fadef2c3f",
+        "t": "FACT",
+        "text": "Brian Adams — limited social activity due to winter mood",
+        "src": "output/beats/Lived_Events.jsonl @C112 2026-10-21"
+      },
+      {
+        "id": "F-207913cae72f",
+        "t": "FACT",
+        "text": "Brian Adams first. The event is the lead; one true detail; what came next only if the record says.",
+        "src": "output/beats/Lived_Events.jsonl @C112 2026-10-21"
+      },
+      {
+        "id": "F-15e71da0df02",
+        "t": "FACT",
+        "text": "Brian Adams — limited social activity due to winter mood, Jack London (C112, Relationship)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-74011e297043",
+        "t": "FACT",
+        "text": "Joseph Cramp — felt social atmosphere shift due to today's happenings, Downtown (C112, Relationship)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-4220eb3da8df",
+        "t": "FACT",
+        "text": "Jorry Cula — felt positive atmosphere inside the home, Uptown (C112, Household)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-cd8d29f776c8",
+        "t": "FACT",
+        "text": "Jorry Cula — Record Shop Owner — Uptown",
+        "src": "Simulation_Ledger profile for POP-00182"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00258-a70a24a651",
+        "speakerId": "POP-00258",
+        "speakerName": "Brian Adams",
+        "text": "The winter mood's been weighing on me, making me want to stay in more. It's like a fog that doesn't lift, you know? I've been keeping to myself, not going out as much as I usually do. My wife and kids are used to it by now; they know when I'm like this, it's best to just let me be.",
+        "factIds": [
+          "F-490fadef2c3f",
+          "F-15e71da0df02"
+        ],
+        "src": "packet.W2[POP-00258]"
+      },
+      {
+        "id": "Q-POP-00272-fcbcbb17d3",
+        "speakerId": "POP-00272",
+        "speakerName": "Joseph Cramp",
+        "text": "I felt the social atmosphere shift today, it's like the whole town is buzzing now. I've been around Downtown a lot, and it's been dead for years, but now it's like people are finally coming out. I saw a choir performance at Telegraph Presbyterian Fellowship that drew a small crowd, and there were volunteers gathering near City Hall. Even the sidewalks feel busier than ever with people spilling out of Midnight Bistro and SpeedyBurger. It's a good vibe.",
+        "factIds": [
+          "F-74011e297043"
+        ],
+        "src": "packet.W2[POP-00272]"
+      },
+      {
+        "id": "Q-POP-00182-a0c52be783",
+        "speakerId": "POP-00182",
+        "speakerName": "Jorry Cula",
+        "text": "To be honest, I've been running on fumes lately, and it's been a strain. But when I'm home with my kid, things feel more grounded. I think that's what made the atmosphere feel positive inside the home. We were just being together, you know? No big drama, just us hanging out. It's those moments that make all the stress worth it.",
+        "factIds": [
+          "F-4220eb3da8df",
+          "F-cd8d29f776c8"
+        ],
+        "src": "packet.W2[POP-00182]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00258",
+        "name": "Brian Adams",
+        "profile": "Brian Adams — Janitor — Jack London",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00272",
+        "name": "Joseph Cramp",
+        "profile": "Joseph Cramp — Janitor — Downtown",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00182",
+        "name": "Jorry Cula",
+        "profile": "Jorry Cula — Record Shop Owner — Uptown",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Brian Adams' daily routine during the period of limited social activity",
+        "publishable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "The general atmosphere in Jack London during the winter season",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "the plain respect of the form — the ordinary weight of a birth, a retirement, a discharge, stated without ornament",
+      "the frame around a supplied fact — what a promotion to the supplied role means in plain words, without inventing the workplace",
+      "the neighborhood the slice names as where the person lives, without an invented street scene",
+      "the order and pacing of the passages — heaviest first, one person at a time"
+    ],
+    "textureConditions": [
+      "every person, event, role, employer, neighborhood, hospital stay, household and family tie must come from the slice",
+      "a quote appears only verbatim from the person's own supplied page; nothing paraphrased into quotation marks",
+      "what came next appears only when a later Cycle's supplied record holds it",
+      "a thin day (few events) is written as a short page, not padded"
+    ],
+    "forbiddenClaimClasses": [
+      "any person, event, quote, venue, employer or family member not on the slice",
+      "a paraphrased or invented quote",
+      "a cause, diagnosis or outcome the record does not state",
+      "a statistic, rate or trend claim — the page is people, not numbers",
+      "intake bookkeeping rows (Emerged into Tier, Added to Simulation_Ledger, Updated to Tier) written as life events",
+      "raw engine labels or decimals printed as public-facing evidence"
+    ]
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "v": "NIA-SLICE/1",
+  "cycle": 112,
+  "empty": false,
+  "pilots": [
+    {
+      "POPID": "POP-00775",
+      "episodes": 2,
+      "creditsDelta": -209,
+      "combatEvents": 0,
+      "mishapCount": 0,
+      "hasWindowed": false,
+      "name": "Sammie Alvarez",
+      "hood": "Temescal",
+      "roleType": "Civic & Neighborhood Reporter, OakTown Echo",
+      "employerBizId": "BIZ-00099",
+      "tier": "4",
+      "career": [],
+      "who": "Sammie Alvarez — Civic & Neighborhood Reporter, OakTown Echo"
+    },
+    {
+      "POPID": "POP-01077",
+      "episodes": 2,
+      "creditsDelta": 0,
+      "combatEvents": 0,
+      "mishapCount": 0,
+      "hasWindowed": false,
+      "name": "Rafael Phillips",
+      "hood": "Rockridge",
+      "roleType": "Nurse aide",
+      "employerBizId": "BIZ-00015",
+      "tier": "4",
+      "career": [],
+      "who": "Rafael Phillips — Nurse aide"
+    },
+    {
+      "POPID": "POP-01203",
+      "episodes": 1,
+      "creditsDelta": 1,
+      "combatEvents": 0,
+      "mishapCount": 0,
+      "hasWindowed": false,
+      "name": "Iris Pham",
+      "hood": "Baylight District",
+      "roleType": "Barista",
+      "employerBizId": null,
+      "tier": "4",
+      "career": [],
+      "who": "Iris Pham — Barista"
+    }
+  ],
+  "standings": {
+    "asOf": "2026-10-24T01:40:16.489Z",
+    "leader": {
+      "Rank": 1,
+      "POPID": "POP-00597",
+      "Holder": "Eric Taveras",
+      "Episodes": 3,
+      "CreditsTotal": 1170,
+      "CombatTotal": 0,
+      "MishapTotal": 0,
+      "BestMagnitude": 3,
+      "LastAiredCycle": 112,
+      "CyclesLed": 2,
+      "CurrentStreak": 2
+    }
+  },
+  "story": {
+    "ref": "undocked-week:weekly-c112",
+    "label": "UNDOCKED week-in-review c112",
+    "kind": "undocked-digest",
+    "angle": "Week-in-UNDOCKED leaderboard digest — every pilot who flew this cycle (Sammie Alvarez, Rafael Phillips, Iris Pham), who is climbing and who is fading. Standings: Eric Taveras leads the board — rank #1, 2 cycle(s) led, current streak 2. In the chair: Sammie Alvarez — Civic & Neighborhood Reporter, OakTown Echo; Rafael Phillips — Nurse aide; Iris Pham — Barista. The career is who they are, not the story; the story is the flight.",
+    "facts": [
+      "Sammie Alvarez — 2 episode(s) this cycle, credits -209, combat 0, mishaps 0 (UNDOCKED feed)",
+      "Rafael Phillips — 2 episode(s) this cycle, credits 0, combat 0, mishaps 0 (UNDOCKED feed)",
+      "Iris Pham — 1 episode(s) this cycle, credits 1, combat 0, mishaps 0 (UNDOCKED feed)",
+      "Sammie Alvarez — Civic & Neighborhood Reporter, OakTown Echo (ledger)",
+      "Rafael Phillips — Nurse aide (ledger)",
+      "Iris Pham — Barista (ledger)"
+    ],
+    "citizens": [
+      "Sammie Alvarez — Civic & Neighborhood Reporter, OakTown Echo, UNDOCKED cast pilot",
+      "Rafael Phillips — Nurse aide, UNDOCKED cast pilot",
+      "Iris Pham — Barista, UNDOCKED cast pilot"
+    ],
+    "popids": [
+      "POP-00775",
+      "POP-01077",
+      "POP-01203"
+    ]
+  },
+  "generatedAt": "2026-10-24T13:15:06.578Z"
+}

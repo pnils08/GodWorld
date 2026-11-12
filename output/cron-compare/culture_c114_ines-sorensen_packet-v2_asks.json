@@ -1,0 +1,446 @@
+[
+  {
+    "pop": "POP-00366",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00366\",\"name\":\"Alicia Hernandez\",\"role\":\"Coffee Roaster\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Ines Sorensen\",\"question\":\"How has the A's success affected your business or daily life in Uptown? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-voices\",\"hood\":null,\"focus\":\"The impact of the A's success on Uptown residents and businesses\",\"src\":\"output/citizen_pages/index.jsonl (pages, whole store) batch d43207\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Alicia Hernandez — Coffee Roaster — Uptown\",\"evidence\":[{\"id\":\"EV-ace35c49aa\",\"src\":\"output/citizen_pages/index.jsonl (pages, whole store) batch d43207\",\"text\":\"Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Alicia Hernandez, Coffee Roaster, Uptown (POP-00366) — 2 pages; latest the morning page, C114; new since your last piece; Lives carried the retirement this Cycle: “The alarm didn't go off, and for a second I forgot and reached for it anyway. Then I just lay there, listening to the house. It's strange, the quiet.…”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-2767c45324bc\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C114\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4261fa115617\"},{\"t\":\"FACT\",\"text\":\"Voices roster, C114: 444 citizens with pages, 2 new since your last piece\",\"src\":\"output/citizen_pages/index.jsonl (pages, whole store) batch d43207\",\"id\":\"F-8d66b25d8fed\"},{\"t\":\"FACT\",\"text\":\"Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.\",\"src\":\"output/citizen_pages/index.jsonl (pages, whole store) batch d43207\",\"id\":\"F-d73bd51f49a2\"},{\"t\":\"FACT\",\"text\":\"Mariana Kapoor, student, Chinatown (POP-00998) — 2 pages; latest the night page, a question they carry, C114; new since your last piece: “Is something ending on this block, like my mom being tired or the A's leaving? How do I hold onto the good parts?”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-c8b1003a81e5\"},{\"t\":\"FACT\",\"text\":\"Pilar Ramirez, Paramedic, Lake Merritt (POP-00943) — 2 pages; latest in conversation, a question they carry, C114: “Who's really gonna get out of these workshops? Will anything actually change this time?”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-711fb8af6b06\"},{\"t\":\"FACT\",\"text\":\"Vincent Ramirez, OPOA President, Lake Merritt (POP-00514) — 3 pages; latest in conversation, C114: “Hey, Pilar. Good to see you. Was just out walking the block, trying to clear my head a bit. Ah, you know. The usual neighborhood stuff. That job…”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-79610d86b6fd\"},{\"t\":\"FACT\",\"text\":\"Lena Okafor, Daycare Director, Fruitvale (POP-00530) — 3 pages; latest to a reporter, C114: “To be honest, I don't really see a connection between my performance in UNDOCKED and my role as a Daycare Director. I mean, they're just two…”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-b6c603805cbe\"},{\"t\":\"FACT\",\"text\":\"Alicia Hernandez — Coffee Roaster — Uptown\",\"src\":\"Simulation_Ledger profile for POP-00366\",\"id\":\"F-6c1e5e318da9\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C10, Spring, holiday=none\",\"src\":\"output/world_summary_c114.md Calendar context (Simulation_Calendar)\",\"id\":\"F-9b9470803821\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00366",
+        "name": "Alicia Hernandez",
+        "role": "Coffee Roaster",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Ines Sorensen",
+        "question": "How has the A's success affected your business or daily life in Uptown? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-voices",
+        "hood": null,
+        "focus": "The impact of the A's success on Uptown residents and businesses",
+        "src": "output/citizen_pages/index.jsonl (pages, whole store) batch d43207"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Alicia Hernandez — Coffee Roaster — Uptown",
+        "evidence": [
+          {
+            "id": "EV-ace35c49aa",
+            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch d43207",
+            "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Alicia Hernandez, Coffee Roaster, Uptown (POP-00366) — 2 pages; latest the morning page, C114; new since your last piece; Lives carried the retirement this Cycle: “The alarm didn't go off, and for a second I forgot and reached for it anyway. Then I just lay there, listening to the house. It's strange, the quiet.…”",
+          "src": "output/citizen_pages/index.jsonl roster",
+          "id": "F-2767c45324bc"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C114",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4261fa115617"
+        },
+        {
+          "t": "FACT",
+          "text": "Voices roster, C114: 444 citizens with pages, 2 new since your last piece",
+          "src": "output/citizen_pages/index.jsonl (pages, whole store) batch d43207",
+          "id": "F-8d66b25d8fed"
+        },
+        {
+          "t": "FACT",
+          "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.",
+          "src": "output/citizen_pages/index.jsonl (pages, whole store) batch d43207",
+          "id": "F-d73bd51f49a2"
+        },
+        {
+          "t": "FACT",
+          "text": "Mariana Kapoor, student, Chinatown (POP-00998) — 2 pages; latest the night page, a question they carry, C114; new since your last piece: “Is something ending on this block, like my mom being tired or the A's leaving? How do I hold onto the good parts?”",
+          "src": "output/citizen_pages/index.jsonl roster",
+          "id": "F-c8b1003a81e5"
+        },
+        {
+          "t": "FACT",
+          "text": "Pilar Ramirez, Paramedic, Lake Merritt (POP-00943) — 2 pages; latest in conversation, a question they carry, C114: “Who's really gonna get out of these workshops? Will anything actually change this time?”",
+          "src": "output/citizen_pages/index.jsonl roster",
+          "id": "F-711fb8af6b06"
+        },
+        {
+          "t": "FACT",
+          "text": "Vincent Ramirez, OPOA President, Lake Merritt (POP-00514) — 3 pages; latest in conversation, C114: “Hey, Pilar. Good to see you. Was just out walking the block, trying to clear my head a bit. Ah, you know. The usual neighborhood stuff. That job…”",
+          "src": "output/citizen_pages/index.jsonl roster",
+          "id": "F-79610d86b6fd"
+        },
+        {
+          "t": "FACT",
+          "text": "Lena Okafor, Daycare Director, Fruitvale (POP-00530) — 3 pages; latest to a reporter, C114: “To be honest, I don't really see a connection between my performance in UNDOCKED and my role as a Daycare Director. I mean, they're just two…”",
+          "src": "output/citizen_pages/index.jsonl roster",
+          "id": "F-b6c603805cbe"
+        },
+        {
+          "t": "FACT",
+          "text": "Alicia Hernandez — Coffee Roaster — Uptown",
+          "src": "Simulation_Ledger profile for POP-00366",
+          "id": "F-6c1e5e318da9"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C10, Spring, holiday=none",
+          "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+          "id": "F-9b9470803821"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00998",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00998\",\"name\":\"Mariana Kapoor\",\"role\":\"student\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Ines Sorensen\",\"question\":\"What are your thoughts on the A's success and its impact on the neighborhood? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-voices\",\"hood\":null,\"focus\":\"The impact of the A's success on Uptown residents and businesses\",\"src\":\"output/citizen_pages/index.jsonl (pages, whole store) batch d43207\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Mariana Kapoor — student — Chinatown\",\"evidence\":[{\"id\":\"EV-56fdcd1a53\",\"src\":\"output/citizen_pages/index.jsonl (pages, whole store) batch d43207\",\"text\":\"Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Mariana Kapoor, student, Chinatown (POP-00998) — 2 pages; latest the night page, a question they carry, C114; new since your last piece: “Is something ending on this block, like my mom being tired or the A's leaving? How do I hold onto the good parts?”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-c8b1003a81e5\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C114\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4261fa115617\"},{\"t\":\"FACT\",\"text\":\"Voices roster, C114: 444 citizens with pages, 2 new since your last piece\",\"src\":\"output/citizen_pages/index.jsonl (pages, whole store) batch d43207\",\"id\":\"F-8d66b25d8fed\"},{\"t\":\"FACT\",\"text\":\"Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.\",\"src\":\"output/citizen_pages/index.jsonl (pages, whole store) batch d43207\",\"id\":\"F-d73bd51f49a2\"},{\"t\":\"FACT\",\"text\":\"Alicia Hernandez, Coffee Roaster, Uptown (POP-00366) — 2 pages; latest the morning page, C114; new since your last piece; Lives carried the retirement this Cycle: “The alarm didn't go off, and for a second I forgot and reached for it anyway. Then I just lay there, listening to the house. It's strange, the quiet.…”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-2767c45324bc\"},{\"t\":\"FACT\",\"text\":\"Pilar Ramirez, Paramedic, Lake Merritt (POP-00943) — 2 pages; latest in conversation, a question they carry, C114: “Who's really gonna get out of these workshops? Will anything actually change this time?”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-711fb8af6b06\"},{\"t\":\"FACT\",\"text\":\"Vincent Ramirez, OPOA President, Lake Merritt (POP-00514) — 3 pages; latest in conversation, C114: “Hey, Pilar. Good to see you. Was just out walking the block, trying to clear my head a bit. Ah, you know. The usual neighborhood stuff. That job…”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-79610d86b6fd\"},{\"t\":\"FACT\",\"text\":\"Lena Okafor, Daycare Director, Fruitvale (POP-00530) — 3 pages; latest to a reporter, C114: “To be honest, I don't really see a connection between my performance in UNDOCKED and my role as a Daycare Director. I mean, they're just two…”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-b6c603805cbe\"},{\"t\":\"FACT\",\"text\":\"Mariana Kapoor — student — Chinatown\",\"src\":\"Simulation_Ledger profile for POP-00998\",\"id\":\"F-ba4df570e478\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C10, Spring, holiday=none\",\"src\":\"output/world_summary_c114.md Calendar context (Simulation_Calendar)\",\"id\":\"F-9b9470803821\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00998",
+        "name": "Mariana Kapoor",
+        "role": "student",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Ines Sorensen",
+        "question": "What are your thoughts on the A's success and its impact on the neighborhood? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-voices",
+        "hood": null,
+        "focus": "The impact of the A's success on Uptown residents and businesses",
+        "src": "output/citizen_pages/index.jsonl (pages, whole store) batch d43207"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Mariana Kapoor — student — Chinatown",
+        "evidence": [
+          {
+            "id": "EV-56fdcd1a53",
+            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch d43207",
+            "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Mariana Kapoor, student, Chinatown (POP-00998) — 2 pages; latest the night page, a question they carry, C114; new since your last piece: “Is something ending on this block, like my mom being tired or the A's leaving? How do I hold onto the good parts?”",
+          "src": "output/citizen_pages/index.jsonl roster",
+          "id": "F-c8b1003a81e5"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C114",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4261fa115617"
+        },
+        {
+          "t": "FACT",
+          "text": "Voices roster, C114: 444 citizens with pages, 2 new since your last piece",
+          "src": "output/citizen_pages/index.jsonl (pages, whole store) batch d43207",
+          "id": "F-8d66b25d8fed"
+        },
+        {
+          "t": "FACT",
+          "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.",
+          "src": "output/citizen_pages/index.jsonl (pages, whole store) batch d43207",
+          "id": "F-d73bd51f49a2"
+        },
+        {
+          "t": "FACT",
+          "text": "Alicia Hernandez, Coffee Roaster, Uptown (POP-00366) — 2 pages; latest the morning page, C114; new since your last piece; Lives carried the retirement this Cycle: “The alarm didn't go off, and for a second I forgot and reached for it anyway. Then I just lay there, listening to the house. It's strange, the quiet.…”",
+          "src": "output/citizen_pages/index.jsonl roster",
+          "id": "F-2767c45324bc"
+        },
+        {
+          "t": "FACT",
+          "text": "Pilar Ramirez, Paramedic, Lake Merritt (POP-00943) — 2 pages; latest in conversation, a question they carry, C114: “Who's really gonna get out of these workshops? Will anything actually change this time?”",
+          "src": "output/citizen_pages/index.jsonl roster",
+          "id": "F-711fb8af6b06"
+        },
+        {
+          "t": "FACT",
+          "text": "Vincent Ramirez, OPOA President, Lake Merritt (POP-00514) — 3 pages; latest in conversation, C114: “Hey, Pilar. Good to see you. Was just out walking the block, trying to clear my head a bit. Ah, you know. The usual neighborhood stuff. That job…”",
+          "src": "output/citizen_pages/index.jsonl roster",
+          "id": "F-79610d86b6fd"
+        },
+        {
+          "t": "FACT",
+          "text": "Lena Okafor, Daycare Director, Fruitvale (POP-00530) — 3 pages; latest to a reporter, C114: “To be honest, I don't really see a connection between my performance in UNDOCKED and my role as a Daycare Director. I mean, they're just two…”",
+          "src": "output/citizen_pages/index.jsonl roster",
+          "id": "F-b6c603805cbe"
+        },
+        {
+          "t": "FACT",
+          "text": "Mariana Kapoor — student — Chinatown",
+          "src": "Simulation_Ledger profile for POP-00998",
+          "id": "F-ba4df570e478"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C10, Spring, holiday=none",
+          "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+          "id": "F-9b9470803821"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00943",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00943\",\"name\":\"Pilar Ramirez\",\"role\":\"Paramedic\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Ines Sorensen\",\"question\":\"How do you think the community can benefit from the A's success? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-voices\",\"hood\":null,\"focus\":\"The impact of the A's success on Uptown residents and businesses\",\"src\":\"output/citizen_pages/index.jsonl (pages, whole store) batch d43207\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Pilar Ramirez — Paramedic — Lake Merritt\",\"evidence\":[{\"id\":\"EV-c56da37b38\",\"src\":\"output/citizen_pages/index.jsonl (pages, whole store) batch d43207\",\"text\":\"Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Pilar Ramirez, Paramedic, Lake Merritt (POP-00943) — 2 pages; latest in conversation, a question they carry, C114: “Who's really gonna get out of these workshops? Will anything actually change this time?”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-711fb8af6b06\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C114\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4261fa115617\"},{\"t\":\"FACT\",\"text\":\"Voices roster, C114: 444 citizens with pages, 2 new since your last piece\",\"src\":\"output/citizen_pages/index.jsonl (pages, whole store) batch d43207\",\"id\":\"F-8d66b25d8fed\"},{\"t\":\"FACT\",\"text\":\"Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.\",\"src\":\"output/citizen_pages/index.jsonl (pages, whole store) batch d43207\",\"id\":\"F-d73bd51f49a2\"},{\"t\":\"FACT\",\"text\":\"Alicia Hernandez, Coffee Roaster, Uptown (POP-00366) — 2 pages; latest the morning page, C114; new since your last piece; Lives carried the retirement this Cycle: “The alarm didn't go off, and for a second I forgot and reached for it anyway. Then I just lay there, listening to the house. It's strange, the quiet.…”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-2767c45324bc\"},{\"t\":\"FACT\",\"text\":\"Mariana Kapoor, student, Chinatown (POP-00998) — 2 pages; latest the night page, a question they carry, C114; new since your last piece: “Is something ending on this block, like my mom being tired or the A's leaving? How do I hold onto the good parts?”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-c8b1003a81e5\"},{\"t\":\"FACT\",\"text\":\"Vincent Ramirez, OPOA President, Lake Merritt (POP-00514) — 3 pages; latest in conversation, C114: “Hey, Pilar. Good to see you. Was just out walking the block, trying to clear my head a bit. Ah, you know. The usual neighborhood stuff. That job…”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-79610d86b6fd\"},{\"t\":\"FACT\",\"text\":\"Lena Okafor, Daycare Director, Fruitvale (POP-00530) — 3 pages; latest to a reporter, C114: “To be honest, I don't really see a connection between my performance in UNDOCKED and my role as a Daycare Director. I mean, they're just two…”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-b6c603805cbe\"},{\"t\":\"FACT\",\"text\":\"Pilar Ramirez — Paramedic — Lake Merritt\",\"src\":\"Simulation_Ledger profile for POP-00943\",\"id\":\"F-0f55ce2c04e2\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C10, Spring, holiday=none\",\"src\":\"output/world_summary_c114.md Calendar context (Simulation_Calendar)\",\"id\":\"F-9b9470803821\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00943",
+        "name": "Pilar Ramirez",
+        "role": "Paramedic",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Ines Sorensen",
+        "question": "How do you think the community can benefit from the A's success? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-voices",
+        "hood": null,
+        "focus": "The impact of the A's success on Uptown residents and businesses",
+        "src": "output/citizen_pages/index.jsonl (pages, whole store) batch d43207"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Pilar Ramirez — Paramedic — Lake Merritt",
+        "evidence": [
+          {
+            "id": "EV-c56da37b38",
+            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch d43207",
+            "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Pilar Ramirez, Paramedic, Lake Merritt (POP-00943) — 2 pages; latest in conversation, a question they carry, C114: “Who's really gonna get out of these workshops? Will anything actually change this time?”",
+          "src": "output/citizen_pages/index.jsonl roster",
+          "id": "F-711fb8af6b06"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C114",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4261fa115617"
+        },
+        {
+          "t": "FACT",
+          "text": "Voices roster, C114: 444 citizens with pages, 2 new since your last piece",
+          "src": "output/citizen_pages/index.jsonl (pages, whole store) batch d43207",
+          "id": "F-8d66b25d8fed"
+        },
+        {
+          "t": "FACT",
+          "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.",
+          "src": "output/citizen_pages/index.jsonl (pages, whole store) batch d43207",
+          "id": "F-d73bd51f49a2"
+        },
+        {
+          "t": "FACT",
+          "text": "Alicia Hernandez, Coffee Roaster, Uptown (POP-00366) — 2 pages; latest the morning page, C114; new since your last piece; Lives carried the retirement this Cycle: “The alarm didn't go off, and for a second I forgot and reached for it anyway. Then I just lay there, listening to the house. It's strange, the quiet.…”",
+          "src": "output/citizen_pages/index.jsonl roster",
+          "id": "F-2767c45324bc"
+        },
+        {
+          "t": "FACT",
+          "text": "Mariana Kapoor, student, Chinatown (POP-00998) — 2 pages; latest the night page, a question they carry, C114; new since your last piece: “Is something ending on this block, like my mom being tired or the A's leaving? How do I hold onto the good parts?”",
+          "src": "output/citizen_pages/index.jsonl roster",
+          "id": "F-c8b1003a81e5"
+        },
+        {
+          "t": "FACT",
+          "text": "Vincent Ramirez, OPOA President, Lake Merritt (POP-00514) — 3 pages; latest in conversation, C114: “Hey, Pilar. Good to see you. Was just out walking the block, trying to clear my head a bit. Ah, you know. The usual neighborhood stuff. That job…”",
+          "src": "output/citizen_pages/index.jsonl roster",
+          "id": "F-79610d86b6fd"
+        },
+        {
+          "t": "FACT",
+          "text": "Lena Okafor, Daycare Director, Fruitvale (POP-00530) — 3 pages; latest to a reporter, C114: “To be honest, I don't really see a connection between my performance in UNDOCKED and my role as a Daycare Director. I mean, they're just two…”",
+          "src": "output/citizen_pages/index.jsonl roster",
+          "id": "F-b6c603805cbe"
+        },
+        {
+          "t": "FACT",
+          "text": "Pilar Ramirez — Paramedic — Lake Merritt",
+          "src": "Simulation_Ledger profile for POP-00943",
+          "id": "F-0f55ce2c04e2"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C10, Spring, holiday=none",
+          "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+          "id": "F-9b9470803821"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  }
+]

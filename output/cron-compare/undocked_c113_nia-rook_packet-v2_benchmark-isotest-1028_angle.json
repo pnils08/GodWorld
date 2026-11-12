@@ -1,0 +1,213 @@
+{
+  "stage": "angle",
+  "desk": "undocked",
+  "cycle": "113",
+  "persona": "nia-rook",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-01076",
+      "name": "Nia Rook",
+      "role": "desk reporter",
+      "desk": "undocked"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Recap Father Miguel's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits 0, systems lacaille_9352, sirius, sol, alpha_centauri, combat 0, mishaps 0, magnitude 2/5. Standings: Eric Taveras leads the board — rank #1, 3 cycle(s) led, current streak 3. In the chair: Father Miguel — Parish priest. The career is who they are, not the story; the story is the flight.",
+      "approach": "Recap approach (UNDOCKED show beat): open on the CITY watching, not the cockpit. Pick 1-2 bag modes and hold them. The typed episode facts are the spine — credits, systems, combat, mishaps, magnitude — but lead with what it MEANS for who's up and who's down, never with the numbers. The pilot's packet interview is the only place their voice comes from. End on the one sentence the hallway will argue about tomorrow. This is the desk that's allowed to have fun."
+    },
+    "signal": {
+      "kind": "undocked",
+      "hood": "Fruitvale",
+      "score": null,
+      "src": "undocked:undocked-pop00734-Y3C9",
+      "nearby": [
+        {
+          "text": "UNDOCKED: Father Miguel — dead even on the night",
+          "src": "undocked:undocked-pop00734-Y3C9"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00734",
+          "name": "Father Miguel",
+          "profile": "Father Miguel — UNDOCKED pilot",
+          "role": "UNDOCKED pilot",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "undocked-feed-row",
+          "evidence": {
+            "source": "output/spacemolt-show/feed/c113.json",
+            "episodeId": "undocked-pop00734-Y3C9",
+            "pop": "POP-00734"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C113",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-876f95b5eb98"
+      },
+      {
+        "t": "FACT",
+        "text": "UNDOCKED: Father Miguel — dead even on the night",
+        "src": "undocked:undocked-pop00734-Y3C9",
+        "id": "F-aa684741dbbd"
+      },
+      {
+        "t": "FACT",
+        "text": "Father Miguel — Parish priest (ledger)",
+        "src": "undocked:undocked-pop00734-Y3C9",
+        "id": "F-19e445474586"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "named",
+    "candidates": [
+      {
+        "pop": "POP-00734",
+        "name": "Father Miguel",
+        "role": "UNDOCKED pilot",
+        "hood": null,
+        "profile": "Father Miguel — UNDOCKED pilot",
+        "mode": "named",
+        "sourceKind": "undocked-feed-row",
+        "evidence": {
+          "source": "output/spacemolt-show/feed/c113.json",
+          "episodeId": "undocked-pop00734-Y3C9",
+          "pop": "POP-00734"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Nia Rook",
+    "popid": "POP-01076"
+  },
+  "assignment": {
+    "story": {
+      "ref": "undocked:undocked-pop00734-Y3C9",
+      "label": "UNDOCKED: Father Miguel — dead even on the night",
+      "kind": "undocked",
+      "angle": "Recap Father Miguel's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits 0, systems lacaille_9352, sirius, sol, alpha_centauri, combat 0, mishaps 0, magnitude 2/5. Standings: Eric Taveras leads the board — rank #1, 3 cycle(s) led, current streak 3. In the chair: Father Miguel — Parish priest. The career is who they are, not the story; the story is the flight.",
+      "facts": [
+        "Father Miguel — Parish priest (ledger)"
+      ],
+      "citizens": [
+        "Father Miguel — Parish priest, UNDOCKED cast pilot"
+      ],
+      "popids": [
+        "POP-00734"
+      ],
+      "hood": "Fruitvale"
+    },
+    "approach": "Recap approach (UNDOCKED show beat): open on the CITY watching, not the cockpit. Pick 1-2 bag modes and hold them. The typed episode facts are the spine — credits, systems, combat, mishaps, magnitude — but lead with what it MEANS for who's up and who's down, never with the numbers. The pilot's packet interview is the only place their voice comes from. End on the one sentence the hallway will argue about tomorrow. This is the desk that's allowed to have fun."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Nia Rook",
+    "popid": "POP-01076",
+    "text": "Nia Rook stands by her recap approach for Father Miguel's UNDOCKED episode, focusing on the city's reaction to the pilot's performance. She'll chase the impact of being 'dead even on the night' on Eric Taveras' standings and the overall leaderboard dynamics.",
+    "plan": {
+      "chase": "Nia Rook stands by her recap approach for Father Miguel's UNDOCKED episode, focusing on the city's reaction to the pilot's performance. She'll chase the impact of being 'dead even on the night' on Eric Taveras' standings and the overall leaderboard dynamics.",
+      "focus": "The city's watch on Eric Taveras and the leaderboard",
+      "why": "Eric Taveras leads the board for the third cycle, and Father Miguel's performance affects the standings",
+      "checks": [
+        "Verify the current standings and Taveras' streak",
+        "Understand the implications of 'dead even on the night' for the leaderboard"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00734",
+          "question": "How does Father Miguel's 'dead even on the night' performance influence the city's perception of Eric Taveras' leadership?",
+          "basis": "UNDOCKED episode facts and pilot's career context"
+        }
+      ],
+      "interpretation": "The city's attention is on Eric Taveras as he continues to lead the board, and Father Miguel's performance may shift perceptions",
+      "unverifiedLead": [
+        "The potential for a shift in the leaderboard dynamics due to Father Miguel's episode"
+      ],
+      "closeQuestion": "Will Father Miguel's 'dead even on the night' performance be enough to challenge Eric Taveras' standing as the leaderboard leader?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "UNDOCKED: Father Miguel — dead even on the night",
+      "kind": "undocked",
+      "hood": "Fruitvale",
+      "ref": "undocked:undocked-pop00734-Y3C9",
+      "popids": [
+        "POP-00734"
+      ]
+    }
+  ],
+  "laneEntries": 1,
+  "angleCapHits": 0,
+  "ranAt": "2026-10-28T11:18:23.452Z"
+}

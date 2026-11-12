@@ -1,0 +1,64 @@
+{
+  "draft": "output/cron-compare/sports_c113_tanya-cruz_packet-v2_x-ai-grok-4-3.md",
+  "cycle": "113",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "8508e02b5a01cd3aecea2f36e459fa301ccad432c29f532088eb50a25c0f6236",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Accurately reflects C113 A's outfield roster situation with verbatim quote attribution and verified canon player profiles.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "tanya-sideline-v1",
+    "packageVersion": "TANYA-LEP2-1",
+    "manifestId": "AM-ed04690a70b7",
+    "lexicalObservations": [],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Desmond Morton",
+      "Frank Reyna",
+      "Vladimir Gonzalez"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0099,
+  "durationMs": 6690,
+  "parseError": false,
+  "ranAt": "2026-10-28T23:19:06.362Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 204,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "8508e02b5a01cd3aecea2f36e459fa301ccad432c29f532088eb50a25c0f6236",
+    "costUsd": 0.0007
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "status": "arc-seed",
+  "cycle": "113",
+  "desk": "culture",
+  "persona": "ines-sorensen",
+  "hood": null,
+  "quotes": [
+    {
+      "pop": "POP-01039",
+      "name": "Ximena Mehta",
+      "quote": "The A's success is all anyone can talk about around here. I mean, I'm a huge fan, and my husband Deacon is too. We plan our whole schedule around the games."
+    },
+    {
+      "pop": "POP-00141",
+      "name": "Priya Narang",
+      "quote": "The A's winning season really brings Uptown together. When they're doing well, the whole neighborhood feels it. The bars and galleries stay packed, and you can feel the energy. It's like we're all connected then."
+    },
+    {
+      "pop": "POP-00263",
+      "name": "Omar Amici",
+      "quote": "To be honest, the changes in Uptown have me feeling a bit uneasy. The streets are busier than ever, and it seems like every other place is a for-rent sign these days. I've lived here long enough to see the neighborhood transform, but this feels different. It's like the neighborhood is shifting away from the people who've been here all along."
+    },
+    {
+      "pop": "POP-00769",
+      "name": "Dax Monroe",
+      "quote": "I've been thinking a lot about the cycles of life in Rockridge lately. The other night, I was at the window, just observing the world go by. It made me reflect on how people's lives are intertwined with the events around them. I've seen it in my own life, with my kids growing up and the community changing."
+    }
+  ],
+  "claim": "The A's success is all anyone can talk about around here. I mean, I'm a huge fan, and my husband Deacon is too. We plan our whole schedule around the games.",
+  "src": "citizenVoice PRESS c113",
+  "ranAt": "2026-11-01T15:16:14.264Z"
+}

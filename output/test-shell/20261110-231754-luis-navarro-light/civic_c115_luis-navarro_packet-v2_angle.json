@@ -1,0 +1,498 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "115",
+  "persona": "luis-navarro",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00636",
+      "name": "Luis Navarro",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Plan one evidence-bounded records brief without inventing a reporting trail",
+      "assignment": "Oakland Youth Apprenticeship Pipeline stalled in implementation-active",
+      "approach": "Investigation approach: distinguish what the supplied record establishes from what it does not. Follow the unresolved gap fairly; no invented response, silence, or accusation.",
+      "creativeBrief": {
+        "kind": "civic-investigation",
+        "method": "KNOWN_UNKNOWN",
+        "missing": [
+          "documented response or documented non-response",
+          "request timestamp and elapsed silence duration",
+          "responsible person, office, or duty unless named by the source"
+        ],
+        "reportingEvidence": {
+          "recordChecks": {
+            "state": "NOT_SUPPLIED",
+            "events": []
+          },
+          "requestEvents": {
+            "state": "NOT_SUPPLIED",
+            "events": []
+          },
+          "responseEvents": {
+            "state": "NOT_SUPPLIED",
+            "events": []
+          },
+          "responsibleEntities": {
+            "state": "NOT_SUPPLIED",
+            "entities": []
+          }
+        },
+        "silenceClock": {
+          "state": "UNESTABLISHED",
+          "value": null,
+          "src": null
+        },
+        "forbidden": [
+          "Do not add officials, votes, budgets, outcomes, measurements, quotes, responses, or affected people absent from the supplied entries."
+        ]
+      }
+    },
+    "signal": {
+      "kind": "anomaly",
+      "hood": "West Oakland, East Oakland, Fruitvale",
+      "score": null,
+      "src": "output/engine_audit_c115.json patterns[0]; evidence: Initiative_Tracker row(s) 7; storyline INIT-007:implementation-active",
+      "nearby": [
+        {
+          "text": "Avery Santana (mayor gavel): In response to Decision 1 and Planning Director Vance’s directive, order publication of the C114 closeout and transmit the charter renewal ordinance to the C115 council agenda, preserving sco",
+          "src": "output/civic-voice/mayor_gavel_c115.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): In response to Decision 2, require execution and documentation of the D3 East Oakland briefing with district-level and Fruitvale data this cycle; hold expansion and leave the D5 audit and Bay",
+          "src": "output/civic-voice/mayor_gavel_c115.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): In response to Decision 3, require preliminary schematics delivery and a documented Fruitvale community review this cycle; keep INIT-003 in design-phase until a public comment-and-response re",
+          "src": "output/civic-voice/mayor_gavel_c115.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): In response to Decision 4, conduct and publish the C115 milestone review against the assembled evidence file; do not declare the construction milestone passed without supporting findings. — \"",
+          "src": "output/civic-voice/mayor_gavel_c115.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): In response to Decision 5, require publication of the placement-gap analysis and adjustment plan with explicit West Oakland and Fruitvale reviews; keep implementation active and require follo",
+          "src": "output/civic-voice/mayor_gavel_c115.json"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-01055",
+          "name": "Jerome Pittman",
+          "profile": "Jerome Pittman — Transit Hub D5 Intake Liaison — East Oakland resident",
+          "role": "Transit Hub D5 Intake Liaison",
+          "hood": "East Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/engine_audit_c115.json patterns[0]; evidence: Initiative_Tracker row(s) 7; storyline INIT-007:implementation-active",
+            "pop": "POP-01055",
+            "rowName": "Jerome Pittman",
+            "kind": "slice-row"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C115",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-bc84fc0b7718"
+      },
+      {
+        "t": "FACT",
+        "text": "Oakland Youth Apprenticeship Pipeline stalled in implementation-active",
+        "src": "output/engine_audit_c115.json patterns[0]; evidence: Initiative_Tracker row(s) 7; storyline INIT-007:implementation-active",
+        "id": "F-2e699469253e"
+      },
+      {
+        "t": "FACT",
+        "text": "The economic initiative carrying West Oakland has not advanced in 3 cycles.",
+        "src": "output/engine_audit_c115.json patterns[0]; evidence: Initiative_Tracker row(s) 7; storyline INIT-007:implementation-active",
+        "id": "F-6d3d5d153479"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase. Missing reporting evidence is a typed state, not proof that an act or response did not occur."
+    }
+  },
+  "sourcingPool": {
+    "mode": "offices",
+    "candidates": [
+      {
+        "pop": "POP-01055",
+        "name": "Jerome Pittman",
+        "role": "Transit Hub D5 Intake Liaison",
+        "hood": "East Oakland",
+        "profile": "Jerome Pittman — Transit Hub D5 Intake Liaison — East Oakland resident",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/engine_audit_c115.json patterns[0]; evidence: Initiative_Tracker row(s) 7; storyline INIT-007:implementation-active",
+          "pop": "POP-01055",
+          "rowName": "Jerome Pittman",
+          "kind": "slice-row"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Luis Navarro",
+    "popid": "POP-00636"
+  },
+  "assignment": {
+    "story": {
+      "ref": "output/engine_audit_c115.json patterns[0]; evidence: Initiative_Tracker row(s) 7; storyline INIT-007:implementation-active",
+      "label": "stuck-initiative (low) | Initiative \"Oakland Youth Apprenticeship Pipeline\" in phase \"implementation-active\" for 3 cycles",
+      "kind": "anomaly",
+      "angle": "Oakland Youth Apprenticeship Pipeline stalled in implementation-active — remedy path + responsible office",
+      "hookLine": "The economic initiative carrying West Oakland has not advanced in 3 cycles.",
+      "hood": "West Oakland, East Oakland, Fruitvale",
+      "popids": [
+        "POP-01055"
+      ],
+      "citizens": [
+        "Jerome Pittman (POP-01055)"
+      ]
+    },
+    "approach": "Investigation approach: distinguish what the supplied record establishes from what it does not. Follow the unresolved gap fairly; no invented response, silence, or accusation."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": {
+    "seat": {
+      "slug": "luis-navarro",
+      "name": "Luis Navarro",
+      "popid": "POP-00636",
+      "domain": "accountability-anomaly"
+    },
+    "pulse": {
+      "className": "accountability-anomaly",
+      "score": 80,
+      "label": "stuck-initiative (low) | Initiative \"Oakland Youth Apprenticeship Pipeline\" in phase \"implementation-active\" for 3 cycles",
+      "hood": "West Oakland, East Oakland, Fruitvale",
+      "source": "output/engine_audit_c115.json patterns[0]; evidence: Initiative_Tracker row(s) 7; storyline INIT-007:implementation-active"
+    },
+    "prewrite": {
+      "anchorFacts": [
+        "stuck-initiative (low) | Initiative \"Oakland Youth Apprenticeship Pipeline\" in phase \"implementation-active\" for 3 cycles"
+      ],
+      "forbidden": [
+        "Do not add officials, votes, budgets, outcomes, measurements, quotes, responses, or affected people absent from the supplied entries."
+      ],
+      "schema": "INVESTIGATION-BRIEF-1",
+      "method": "KNOWN_UNKNOWN",
+      "missing": [
+        "documented response or documented non-response",
+        "request timestamp and elapsed silence duration",
+        "responsible person, office, or duty unless named by the source"
+      ],
+      "reportingEvidence": {
+        "recordChecks": {
+          "state": "NOT_SUPPLIED",
+          "events": []
+        },
+        "requestEvents": {
+          "state": "NOT_SUPPLIED",
+          "events": []
+        },
+        "responseEvents": {
+          "state": "NOT_SUPPLIED",
+          "events": []
+        },
+        "responsibleEntities": {
+          "state": "NOT_SUPPLIED",
+          "entities": []
+        }
+      },
+      "silenceClock": {
+        "state": "UNESTABLISHED",
+        "value": null,
+        "src": null
+      },
+      "excludedCandidates": [
+        {
+          "popid": "POP-01117",
+          "reason": "NEVER_WOKEN"
+        },
+        {
+          "popid": "POP-01164",
+          "reason": "NEVER_WOKEN"
+        }
+      ]
+    },
+    "candidates": [
+      {
+        "actionId": null,
+        "effectReceiptIds": [],
+        "score": 80,
+        "kind": "anomaly",
+        "label": "stuck-initiative (low) | Initiative \"Oakland Youth Apprenticeship Pipeline\" in phase \"implementation-active\" for 3 cycles",
+        "ref": "output/engine_audit_c115.json patterns[0]; evidence: Initiative_Tracker row(s) 7; storyline INIT-007:implementation-active",
+        "hood": "West Oakland, East Oakland, Fruitvale",
+        "popids": [
+          "POP-01055",
+          "POP-01117",
+          "POP-01164"
+        ],
+        "angle": "Oakland Youth Apprenticeship Pipeline stalled in implementation-active — remedy path + responsible office",
+        "hookLine": "The economic initiative carrying West Oakland has not advanced in 3 cycles.",
+        "citizens": [
+          "Hector Quintanilla (POP-01164)",
+          "Jerome Pittman (POP-01055)",
+          "Graciela Foster (POP-01117)"
+        ],
+        "source": "desk-signal",
+        "sourceIndex": 0
+      },
+      {
+        "actionId": null,
+        "effectReceiptIds": [],
+        "score": 80,
+        "kind": "anomaly",
+        "label": "math-imbalance (low) | West Oakland: decay [Sentiment -0.100, HousingPressure +1.000] — Sentiment now 0.31 (1 of 22, city median -0.015); HousingPressure now 4.5 (16 of 22, city median 0) — despite 2 active mitigator(s) [INIT-001, INIT-007]",
+        "ref": "output/engine_audit_c115.json patterns[1]; evidence: Neighborhood_Map row(s) 5",
+        "hood": "West Oakland",
+        "popids": [
+          "POP-00011",
+          "POP-00591",
+          "POP-01076"
+        ],
+        "angle": "West Oakland Stabilization Fund stalled in disbursement-active — remedy path + responsible office",
+        "hookLine": "The civic initiative carrying West Oakland has not advanced in 6 cycles.",
+        "citizens": [
+          "Nia Rook (POP-01076)",
+          "Carmen Delaine (POP-00011)",
+          "Selena Grant (POP-00591)"
+        ],
+        "source": "desk-signal",
+        "sourceIndex": 1
+      },
+      {
+        "actionId": null,
+        "effectReceiptIds": [],
+        "score": 80,
+        "kind": "anomaly",
+        "label": "math-imbalance (low) | Fruitvale: decay [Sentiment -0.030, HousingPressure +1.000] — Sentiment now 0.29 (2 of 22, city median -0.015); HousingPressure now 8.5 (19 of 22, city median 0) — despite 1 active mitigator(s) [INIT-007]",
+        "ref": "output/engine_audit_c115.json patterns[2]; evidence: Neighborhood_Map row(s) 6; storyline INIT-007:implementation-active",
+        "hood": "Fruitvale",
+        "popids": [
+          "POP-00231",
+          "POP-00754",
+          "POP-01057"
+        ],
+        "angle": "Oakland Youth Apprenticeship Pipeline stalled in implementation-active — remedy path + responsible office",
+        "hookLine": "The transit initiative carrying Fruitvale has not advanced in 3 cycles.",
+        "citizens": [
+          "Nina Reyes (POP-01057)",
+          "Calvin Turner (POP-00231)",
+          "Ophelia Brenner (POP-00754)"
+        ],
+        "source": "desk-signal",
+        "sourceIndex": 2
+      },
+      {
+        "actionId": null,
+        "effectReceiptIds": [],
+        "score": 80,
+        "kind": "anomaly",
+        "label": "math-imbalance (low) | Jack London: decay [Sentiment -0.070, HousingPressure +0.500] — Sentiment now 0.2 (3 of 22, city median -0.015); HousingPressure now 10 (21 of 22, city median 0) — despite 1 active mitigator(s) [INIT-006]",
+        "ref": "output/engine_audit_c115.json patterns[3]; evidence: Neighborhood_Map row(s) 7; storyline INIT-006:construction-active",
+        "hood": "Jack London",
+        "popids": [
+          "POP-00003",
+          "POP-00015",
+          "POP-00649"
+        ],
+        "angle": "Baylight District — Final Council Vote stalled in construction-active — remedy path + responsible office",
+        "hookLine": "The civic initiative carrying Jack London has not advanced in 5 cycles.",
+        "citizens": [
+          "Jire Hilt (POP-00649)",
+          "DeShawn Hartley (POP-00015)",
+          "Mark Aitken (POP-00003)"
+        ],
+        "source": "desk-signal",
+        "sourceIndex": 3
+      },
+      {
+        "actionId": null,
+        "effectReceiptIds": [],
+        "score": 80,
+        "kind": "anomaly",
+        "label": "math-imbalance (medium) | San Antonio: decay [Sentiment -0.200, RetailVitality -1.21] — Sentiment now -0.16 (22 of 22, city median -0.015); RetailVitality now 5.22 (21 of 22, city median 8.945) — with no matching active initiative",
+        "ref": "output/engine_audit_c115.json patterns[4]; evidence: Neighborhood_Map row(s) 18",
+        "hood": "San Antonio",
+        "popids": [
+          "POP-01126",
+          "POP-01130",
+          "POP-01131"
+        ],
+        "angle": "civic gap in San Antonio — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the San Antonio signal surfaced this cycle.",
+        "citizens": [
+          "Sage Yamamoto (POP-01126)",
+          "Tomás Villanueva (POP-01130)",
+          "Renata Villanueva (POP-01131)"
+        ],
+        "source": "desk-signal",
+        "sourceIndex": 4
+      },
+      {
+        "actionId": null,
+        "effectReceiptIds": [],
+        "score": 80,
+        "kind": "anomaly",
+        "label": "math-imbalance (medium) | KONO: decay [Sentiment -0.180, HousingPressure +0.500] — Sentiment now -0.02 (12 of 22, city median -0.015); HousingPressure now 0.5 (14 of 22, city median 0) — with no matching active initiative",
+        "ref": "output/engine_audit_c115.json patterns[5]; evidence: Neighborhood_Map row(s) 19",
+        "hood": "KONO",
+        "popids": [
+          "POP-00276",
+          "POP-01081",
+          "POP-01111"
+        ],
+        "angle": "civic gap in KONO — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the KONO signal surfaced this cycle.",
+        "citizens": [
+          "Jasmine Torres (POP-01111)",
+          "Dmitri Soto (POP-00276)",
+          "Hitoki Ka (POP-01081)"
+        ],
+        "source": "desk-signal",
+        "sourceIndex": 5
+      }
+    ],
+    "pointers": [
+      "output/engine_audit_c115.json patterns[0]; evidence: Initiative_Tracker row(s) 7; storyline INIT-007:implementation-active",
+      "output/engine_audit_c115.json patterns[1]; evidence: Neighborhood_Map row(s) 5",
+      "output/engine_audit_c115.json patterns[2]; evidence: Neighborhood_Map row(s) 6; storyline INIT-007:implementation-active",
+      "output/engine_audit_c115.json patterns[3]; evidence: Neighborhood_Map row(s) 7; storyline INIT-006:construction-active",
+      "output/engine_audit_c115.json patterns[4]; evidence: Neighborhood_Map row(s) 18",
+      "output/engine_audit_c115.json patterns[5]; evidence: Neighborhood_Map row(s) 19"
+    ]
+  },
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Luis Navarro",
+    "popid": "POP-00636",
+    "text": "Three cycles. That's what I keep coming back to. The Youth Apprenticeship Pipeline was supposed to be the thing carrying West Oakland, and it's been sitting in implementation-active while the calendar turns. I've covered enough stalled initiatives to know the difference between a program that's quietly working and one that's stuck — and the tracker says stuck. What I don't have yet is the human part: who's supposed to be moving it, and what they say when asked. Jerome Pittman is the name on the intake side, the D5 liaison. He's the one person I can go to without inventing a trail. I want to know if he's seen movement that isn't showing up in the paperwork, or if he's as stuck as the status s",
+    "plan": {
+      "chase": "Three cycles. That's what I keep coming back to. The Youth Apprenticeship Pipeline was supposed to be the thing carrying West Oakland, and it's been sitting in implementation-active while the calendar turns. I've covered enough stalled initiatives to know the difference between a program that's quietly working and one that's stuck — and the tracker says stuck. What I don't have yet is the human part: who's supposed to be moving it, and what they say when asked. Jerome Pittman is the name on the intake side, the D5 liaison. He's the one person I can go to without inventing a trail. I want to know if he's seen movement that isn't showing up in the paperwork, or if he's as stuck as the status s",
+      "focus": "The Oakland Youth Apprenticeship Pipeline has not advanced in three cycles, and no documented response or non-response exists to explain the stall.",
+      "why": "A program carrying West Oakland that sits still for three cycles either has a story worth telling or a problem worth fixing — and the public deserves to know which one it is.",
+      "checks": [
+        "Confirm the initiative remains in implementation-active status in the current cycle.",
+        "Verify whether any response, document, or status change exists that the tracker does not reflect.",
+        "Establish whether Jerome Pittman's role gives him direct knowledge of the stall or only peripheral awareness.",
+        "Determine if the three-cycle stall has a documented cause or if the absence of documentation is itself the finding."
+      ],
+      "targets": [
+        {
+          "pop": "POP-01055",
+          "question": "What has Jerome Pittman seen regarding the Youth Apprenticeship Pipeline's stalled status, and does he have any knowledge of why it has not advanced in three cycles?",
+          "basis": "Pittman is the named D5 Intake Liaison for the Transit Hub, and the initiative carrying West Oakland has not advanced in three cycles."
+        }
+      ],
+      "interpretation": "The record establishes a stall but not a reason. The absence of a documented response is a gap in the public record, not proof of inaction. Someone may be working quietly, or the program may be stuck without anyone accountable. The distinction matters.",
+      "unverifiedLead": [
+        "Pittman may have informal knowledge of the stall that has not reached the official record.",
+        "The three-cycle silence may indicate a staffing gap, a priority shift, or a quiet pause awaiting direction."
+      ],
+      "closeQuestion": "Who is accountable for the Youth Apprenticeship Pipeline, and what do they say about three cycles without movement?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Avery Santana (mayor gavel): In response to Decision 1 and Planning Director Vance’s directive, order publication of the C114 closeout and transmit the charter renewal ordinance to the C115 council agenda, preserving sco",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c115.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): In response to Decision 2, require execution and documentation of the D3 East Oakland briefing with district-level and Fruitvale data this cycle; hold expansion and leave the D5 audit and Bay",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c115.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): In response to Decision 3, require preliminary schematics delivery and a documented Fruitvale community review this cycle; keep INIT-003 in design-phase until a public comment-and-response re",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c115.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): In response to Decision 4, conduct and publish the C115 milestone review against the assembled evidence file; do not declare the construction milestone passed without supporting findings. — \"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c115.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): In response to Decision 5, require publication of the placement-gap analysis and adjustment plan with explicit West Oakland and Fruitvale reviews; keep implementation active and require follo",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c115.json",
+      "popids": []
+    }
+  ],
+  "laneEntries": 93,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-10T12:15:44.367Z"
+}

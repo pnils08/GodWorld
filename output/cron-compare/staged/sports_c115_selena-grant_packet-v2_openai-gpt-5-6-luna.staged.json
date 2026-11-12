@@ -1,0 +1,72 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "115",
+  "persona": "selena-grant",
+  "byline": "Selena Grant",
+  "bylinePopid": "POP-00591",
+  "article": "output/cron-compare/staged/sports_c115_selena-grant_packet-v2_openai-gpt-5-6-luna.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Adash Stanley",
+        "role": "mentioned",
+        "popid": "POP-01023",
+        "floor": true
+      },
+      {
+        "name": "Dillon Brooks",
+        "role": "mentioned",
+        "popid": "POP-01079",
+        "floor": true
+      },
+      {
+        "name": "Harry Hayward",
+        "role": "mentioned",
+        "popid": "POP-01223",
+        "floor": true
+      },
+      {
+        "name": "Wendell Carter Jr",
+        "role": "mentioned",
+        "popid": "POP-01028",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "Oaks — game-result C115 · 8-1 · W4",
+        "sourceRef": "output/beats/Oakland_Sports_Feed.jsonl @C115"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-ce09e99c8d35",
+    "draftSha256": "ac995e55c2cf4441b312e7833a3ab3969b7fe03017470082c9e9ed7c82bf2652",
+    "verdict": "output/cron-compare/sports_c115_selena-grant_packet-v2_openai-gpt-5-6-luna.rhea.json",
+    "ranAt": "2026-11-11T00:18:30.798Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 400",
+      "words": 465,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "ac995e55c2cf4441b312e7833a3ab3969b7fe03017470082c9e9ed7c82bf2652",
+      "costUsd": 0.0017
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-11T00:18:38.702Z"
+}

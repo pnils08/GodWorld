@@ -1,0 +1,114 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "113",
+  "persona": "luis-navarro",
+  "byline": "Luis Navarro",
+  "bylinePopid": "POP-00636",
+  "article": "output/cron-compare/staged/civic_c113_luis-navarro_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Marcus Webb",
+        "role": "quoted-source",
+        "popid": "POP-00790"
+      },
+      {
+        "name": "Leonard Tran",
+        "role": "quoted-source",
+        "popid": "POP-00502"
+      },
+      {
+        "name": "Denise Carter",
+        "role": "mentioned",
+        "popid": "POP-00501",
+        "floor": true
+      },
+      {
+        "name": "Elliott Crane",
+        "role": "mentioned",
+        "popid": "POP-00044",
+        "floor": true
+      },
+      {
+        "name": "Janae Rivers",
+        "role": "mentioned",
+        "popid": "POP-00043",
+        "floor": true
+      },
+      {
+        "name": "Nina Chen",
+        "role": "mentioned",
+        "popid": "POP-00505",
+        "floor": true
+      },
+      {
+        "name": "Ramon Vega",
+        "role": "mentioned",
+        "popid": "POP-00042",
+        "floor": true
+      },
+      {
+        "name": "Rose Delgado",
+        "role": "mentioned",
+        "popid": "POP-00503",
+        "floor": true
+      },
+      {
+        "name": "Terrence Mobley",
+        "role": "mentioned",
+        "popid": "POP-00506",
+        "floor": true
+      },
+      {
+        "name": "Warren Ashford",
+        "role": "mentioned",
+        "popid": "POP-00504",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "INIT-006:construction-active",
+        "verb": "referenced",
+        "attachedBy": "stepAttach"
+      }
+    ],
+    "hoods": [
+      "Downtown"
+    ],
+    "claims": [
+      {
+        "claim": "Three cycles is a long time for something this big to sit in the same spot. For me, the accountability part is that the Baylight District is supposed to be the project that ties the neighborhood together — jobs, housing, the works — and when it stalls, I feel it in the applications on my desk. People are waiting on decisions that ripple out from that one vote. So what I want? I want the council to finish the job. Not another study, not another workshop — a final vote. And I want to know that when it happens, the construction pace we've already started doesn't just keep spinning its wheels. That's what I'm watching for.",
+        "sourceRef": "citizenVoice PRESS Marcus Webb"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-71e32f0033bf",
+    "draftSha256": "25f8a2295e11937eeb9c9ac9f50f5fb57b56dac79352ed283a644d4f1344b89e",
+    "verdict": "output/cron-compare/civic_c113_luis-navarro_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-10-27T23:15:33.851Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 400",
+      "words": 655,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "25f8a2295e11937eeb9c9ac9f50f5fb57b56dac79352ed283a644d4f1344b89e",
+      "costUsd": 0.0015
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-27T23:15:40.414Z"
+}

@@ -1,0 +1,27 @@
+{
+  "status": "arc-seed",
+  "cycle": "114",
+  "desk": "business",
+  "persona": "business-desk",
+  "hood": "West Oakland",
+  "quotes": [
+    {
+      "pop": "POP-00291",
+      "name": "Enzo Walker",
+      "quote": "Look, I see the numbers on the board in the trailer — 9.5% growth, revenue up, all that. And sure, we're busy. I'm not complaining about work. But the numbers don't tell you what it's like on the ground. The buildings going up, they're not for us. They're for the tech folks coming in, the ones from Oakmesh and Civis. I fix pipes in places that didn't exist last year, and the people who used to live on those blocks? They're gone. The work's changing, alright — but it's changing in a way where I'm not sure the folks signing the checks even notice who's not at the table anymore. The ledger says growth. The street says something else."
+    },
+    {
+      "pop": "POP-01092",
+      "name": "Desmond Achebe",
+      "quote": "What keeps me up at night isn't the growth on the ledger — I can read a spreadsheet. It's the quiet stuff the numbers don't show. I walk a different street home sometimes, just to see what's actually happening on the block, and I see the new folks settling in from Chinatown, the Stabilization Fund money finally moving. That's good. But I also see the workers — my plumbers, the electricians, the carpenters at the other shops — and I know a 9% growth number doesn't tell you whether a guy can afford to stay in the neighborhood he's helping rebuild. The contraction isn't loud. It's the guy who's been on the crew for twelve years quietly looking at rents across the bridge. That's what I'm watching. The growth is real, but if it's not growing for the people doing the work, it's just a taller building on the same shaky ground."
+    },
+    {
+      "pop": "POP-01109",
+      "name": "Marcus Tan",
+      "quote": "I can't speak for the whole neighborhood, but I can tell you what I see from my own door. Oakmesh is growing, and that growth means we hire more people, we pay more taxes, we take up more space. That's real. But the neighborhood isn't a ledger. It's the people who've been here through the ups and downs. What do we owe? We owe it to not forget that. We owe it to hire locally when we can, to be a good neighbor, to not let our success push anyone out. And what does the neighborhood owe us? I think it owes us a fair shake — the same chance to grow that it gives everyone else. It's a two-way street, and we're all still figuring out how to walk it together."
+    }
+  ],
+  "claim": "Look, I see the numbers on the board in the trailer — 9.5% growth, revenue up, all that. And sure, we're busy. I'm not complaining about work. But the numbers don't tell you what it's like on the ground. The buildings going up, they're not for us. They're for the tech folks coming in, the ones from Oakmesh and Civis. I fix pipes in places that didn't exist last year, and the people who used to live on those blocks? They're gone. The work's changing, alright — but it's changing in a way where I'm not sure the folks signing the checks even notice who's not at the table anymore. The ledger says growth. The street says something else.",
+  "src": "citizenVoice PRESS c114",
+  "ranAt": "2026-11-02T19:15:52.733Z"
+}

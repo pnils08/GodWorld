@@ -1,0 +1,75 @@
+{
+  "draft": "output/test-shell/20261111-012821-selena-grant-live/sports_c115_selena-grant_packet-v2_openai-gpt-5-6-luna.md",
+  "cycle": "115",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "ac995e55c2cf4441b312e7833a3ab3969b7fe03017470082c9e9ed7c82bf2652",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All sports stats, player lines, game scores, and contract details for Harry Hayward and the Oaks verify exactly against Ground Truth.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "selena-grant-oaks-v1",
+    "packageVersion": "SELENA-OAKS-2",
+    "manifestId": "AM-ce09e99c8d35",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "-106",
+          "-109"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Adash Stanley",
+      "Dillon Brooks",
+      "Harry Hayward",
+      "Wendell Carter Jr"
+    ],
+    "unverified": [
+      "Oklahoma City"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0119,
+  "durationMs": 7643,
+  "parseError": false,
+  "ranAt": "2026-11-11T00:18:30.798Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 400",
+    "words": 465,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "ac995e55c2cf4441b312e7833a3ab3969b7fe03017470082c9e9ed7c82bf2652",
+    "costUsd": 0.0017
+  }
+}

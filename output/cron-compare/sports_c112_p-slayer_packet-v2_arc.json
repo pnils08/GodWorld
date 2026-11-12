@@ -1,0 +1,32 @@
+{
+  "status": "arc-seed",
+  "cycle": "112",
+  "desk": "sports",
+  "persona": "p-slayer",
+  "hood": "Jack London",
+  "quotes": [
+    {
+      "pop": "POP-00649",
+      "name": "Jire Hilt",
+      "quote": "I bought a new A's jersey and I have to say, it's got me pretty excited. The anticipation is building up, I can feel it. I've been looking forward to the season, and now that I've got my new gear, I feel like I'm ready to go."
+    },
+    {
+      "pop": "POP-00001",
+      "name": "Vinnie Keane",
+      "quote": "To be honest, I haven't been honored in the way you're suggesting. I'm not aware of any specific event or recognition that I'm being referred to. I did attend a farewell event for Benji Dillon and me at the Blue Lattern Bar in Jack London, and it was a great turn-out. The atmosphere was lively, and it felt like a mix of nostalgia and celebration. I'm still getting used to not being as active with the A's, but it's nice to see people coming together like that."
+    },
+    {
+      "pop": "POP-00018",
+      "name": "Benji Dillon",
+      "quote": "The atmosphere at the Blue Lattern Bar during the Keane and Dillon farewell event was electric, but also a little tense. I've been around long enough to know that when legends are honored, there's always a mix of celebration and scrutiny. People were clearly euphoric, but I could sense some underlying friction, like there were those who weren't entirely on board with the farewell. It's a feeling I've experienced before in the clubhouse, where not everyone's always on the same page. Vinnie and I, we've been through a lot together, and it's weird to think about not being out there on the field as part of the same team anymore."
+    },
+    {
+      "pop": "POP-00185",
+      "name": "Lila Patty",
+      "quote": "I bought a new A's jersey and took a walk near a new construction site to clear my head after a long week. The noise of the city was still there, but standing by that new construction corner, I felt a bit more at peace."
+    }
+  ],
+  "claim": "I bought a new A's jersey and I have to say, it's got me pretty excited. The anticipation is building up, I can feel it. I've been looking forward to the season, and now that I've got my new gear, I feel like I'm ready to go.",
+  "src": "citizenVoice PRESS c112",
+  "ranAt": "2026-10-21T18:18:44.337Z"
+}

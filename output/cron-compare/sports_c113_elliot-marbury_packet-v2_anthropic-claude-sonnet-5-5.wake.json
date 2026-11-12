@@ -1,0 +1,60 @@
+{
+  "mode": "wake-write",
+  "desk": "sports",
+  "cycle": "113",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "elliot-marbury",
+  "byline": {
+    "name": "Elliot Marbury",
+    "popid": "POP-00166",
+    "beatDomain": "GENERAL"
+  },
+  "laneEntries": 9,
+  "quotesLanded": 0,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "dossier_read",
+    "dossier_read"
+  ],
+  "toolCalls": 2,
+  "wordCount": 699,
+  "targetWords": "evidence-bounded; 350-600",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 350",
+    "words": 699,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "a2cef5ac747269ed938ee947016df6cb1e9fc4bf0fcd1fcc6a5ae04eea8ca07f",
+    "costUsd": 0.0017
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 4/4 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/sports_c113_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "h { path: '/custom/path/.env' }\n{\n  \"popId\": \"POP-00166\",\n  \"name\": \"Elliot Marbury\",\n  \"recorded\": true,\n  \"text\": \"filed: Gonzalez's 2039 Season: What 506 At-Bats Show About His Power and Contact\"\n}"
+  },
+  "ranAt": "2026-10-28T23:17:51.447Z",
+  "dispositionReconciledAt": "2026-10-31T17:00:02.898Z"
+}

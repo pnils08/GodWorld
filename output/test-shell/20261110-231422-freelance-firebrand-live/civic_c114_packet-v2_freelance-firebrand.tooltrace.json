@@ -1,0 +1,23 @@
+{
+  "model": "anthropic/claude-sonnet-5.5",
+  "calls": [
+    {
+      "tool": "canon_search",
+      "input": {
+        "query": "Jax Caldera Rockridge"
+      },
+      "resultChars": 2694,
+      "resultHead": "19 file(s) matched on disk for 'Jax Caldera Rockridge':\n— output/simulation_ledger_snapshot.jsonl: 631:{\"Name\":\"Jax Caldera\",\"POPID\":\"POP-00799\",\"First\":\"Jax\",\"MaidenName\":\"\",\"Last\":\"Caldera\",\"UNI (y/n)\":\"no\",\"MED (y/n)\":\"yes\",\"CIV (y/n)\":\"no\",\"ClockMode\":\"MEDIA\",\"Tier\":\"3\",\"RoleType\":\"Journalist, freelance accountability writer\",\"Status\":\"Active\",\"BirthYear\":\"2018\",\"OrginCity\":\"Oakland\",\"LifeHistory\":\"[Compressed: 12 entries | ? → ? | Dominant:Personal,Neighborhood,Compressed | Archetype:Watcher | Mods:driven,outgoing,adventurous,principled,often out,a real fan | AsOf:c114]\\nY3C3 — [Media] ch"
+    },
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Neighborhood_Map",
+        "match": "Rockridge"
+      },
+      "resultChars": 1510,
+      "resultHead": "Timestamp | Cycle | Neighborhood | NightlifeProfile | NoiseIndex | CrimeIndex | RetailVitality | EventAttractiveness | Sentiment | DemographicMarker | Holiday | HolidayPriority | FirstFriday | CreationDay | SportsSeason | MigrationFlow | NeighborhoodTrajectory | HousingPressure | TrajectoryStartCycle | MedianIncome | MedianRent | TrajectoryMomentum | District | CoreSimRank | IncomeTier | BoomExposure | BoomIndex | EmployerCharacter | WealthMin | WealthMax | ChildAreas | WeatherZone | Adjacent | AttentionWeight | Scenes | RentShare\nY3C10 | 114 | Temescal | 0.88 | 4.52 | 0.73 | 6.23 | 26.13 | 0."
+    }
+  ],
+  "ranAt": "2026-11-05T00:15:25.868Z"
+}

@@ -1,0 +1,79 @@
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
+Wake 3 WRITE — culture c114 (kai-marston)
+===================================
+[run] 2026-11-11T07:24:44.983Z byline: Kai Marston (POP-00158, persona)
+[run] 2026-11-11T07:24:45.040Z writing on typed Packet (23944 B injected state + stance anchor)...
+[run] 2026-11-11T07:24:45.040Z writer tools ON: max 4 calls (canon_recall only)
+[run] 2026-11-11T07:24:45.041Z reward loop ON (package): rubric shown, contract scored, grade carried
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ enable debugging { debug: true }
+Headless Desk Writer — culture desk
+===================================
+model=anthropic/claude-haiku-5.5 maxTurns=15
+[INFO] 2026-11-11T07:24:45.380Z lane state-file injected: output/test-shell/20261111-012443-kai-marston-live/culture_c114_kai-marston_packet-v2_anthropic-claude-haiku-5-5.state.json (23818 chars) — full-summary blob bypassed
+[INFO] 2026-11-11T07:24:45.511Z packet-only compose via OpenRouter (anthropic/claude-haiku-5.5, 0 live tools)...
+[INFO] 2026-11-11T07:25:08.622Z tool trace: 2 call(s) → culture_c115_packet-v2_kai-marston.tooltrace.json
+[INFO] 2026-11-11T07:25:08.631Z tool facts → manifest: none used (2 call(s))
+[INFO] 2026-11-11T07:25:08.639Z LEP/2 lexical observations deferred to Rhea (AM-76734ddb654e): UNAPPROVED_QUOTE=Benji's been around here a lot lately.
+
+--- run summary ---
+{
+  "desk": "culture",
+  "cycle": "115",
+  "model": "anthropic/claude-haiku-5.5",
+  "turns": 3,
+  "maxTurns": 15,
+  "usageInputTokens": 31303,
+  "usageOutputTokens": 4267,
+  "savedFiles": [
+    "output/test-shell/20261111-012443-kai-marston-live/culture_c115_kai-marston_packet-v2_anthropic-claude-haiku-5-5.md"
+  ],
+  "compareAgainst": "output/desk-output/culture_c115.md",
+  "durationMs": 23275,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-11-11T07:25:08.642Z"
+}
+
+tokens: 31303 in / 4267 out · 3 turn(s) · 23275ms
+compare: diff output/desk-output/culture_c115.md  ↔  output/test-shell/20261111-012443-kai-marston-live/culture_c115_kai-marston_packet-v2_anthropic-claude-haiku-5-5.md
+[run] 2026-11-11T07:25:08.671Z gate SKIPPED (--no-gate sample) — output is ungated, NOT canon
+
+=== write disposition: UNGATED-SAMPLE ===
+{
+  "mode": "wake-write",
+  "desk": "culture",
+  "cycle": "114",
+  "provider": "openrouter",
+  "model": "anthropic/claude-haiku-5.5",
+  "configuredWriterModel": "anthropic/claude-haiku-5.5",
+  "gateModel": "sonnet",
+  "persona": "kai-marston",
+  "byline": {
+    "name": "Kai Marston",
+    "popid": "POP-00158",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 28,
+  "quotesLanded": 4,
+  "disposition": "ungated-sample",
+  "rheaPass": null,
+  "rheaFlagCount": null,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [],
+  "toolCalls": 0,
+  "wordCount": 772,
+  "targetWords": "500-800",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": null,
+  "gradeRecord": null,
+  "article": "output/test-shell/20261111-012443-kai-marston-live/samples/culture_c114_kai-marston_packet-v2_anthropic-claude-haiku-5-5.sample.md",
+  "selfRecord": null,
+  "ranAt": "2026-11-11T07:25:08.672Z"
+}

@@ -1,0 +1,50 @@
+{
+  "office": "stabilization_fund",
+  "cycle": 113,
+  "speaker": "Marcus Webb",
+  "cascadeSummary": "Month-twelve disbursement of $400,000 approved and moving, maintaining the 23-day processing standard — the twelfth consecutive monthly check to reach long-tenure West Oakland households. I confirm the Mayor's and Deputy Mayor Okoro's direction that charter renewal language keep the Fund's scope fixed on the long-tenure West Oakland cohort, and I reaffirm my commitment to district-equity tracking and audit-readiness through the renewal process. Commercial Stabilization for Grand Lake advances to committee with mandatory milestone reporting and audit criteria intact.",
+  "statements": [
+    {
+      "statementId": "STMT-113-stabilization_fund-001",
+      "type": "operational_status",
+      "topic": "Month-twelve disbursement",
+      "initiative": "West Oakland Stabilization Fund",
+      "decision": "Approved month-twelve disbursement of $400,000 for long-tenure West Oakland households, maintaining the 23-day processing standard and cumulative $5.6M disbursed across twelve months.",
+      "quote": "Twelve months, twelve checks — and West Oakland's oldest residents are still in their homes. That is the promise kept.",
+      "fullStatement": "I have approved the month-twelve disbursement of $400,000 to long-tenure West Oakland households, maintaining the 23-day processing standard that Deputy Mayor Okoro's team and mine have held since the get-well plan took effect. Twelve months of monthly releases — $5.6 million cumulative — means one hundred fifteen households stabilized this cycle, and every case file meets compliance standards that will survive audit. I confirm the Mayor's direction and Deputy Mayor Okoro's directive that charter renewal language keep the Fund's scope fixed on the long-tenure West Oakland cohort — the remnant the charter named. District-equity tracking continues through the renewal process so that we never lose sight of who this Fund was created to serve. The storefronts may fade first, but the stabilization checks arrive before the displacement notices do — that is the promise we keep, month after month.",
+      "trackerUpdates": {
+        "initiative": "INIT-001",
+        "ImplementationPhase": "disbursement-active",
+        "MilestoneNotes": "C113: Month-12 disbursement $400K approved; 23-day standard maintained; $5.6M cumulative; charter renewal directed with cohort scope fixed.",
+        "NextScheduledAction": "Charter renewal proposal drafting with district-equity tracking",
+        "NextActionCycle": 114
+      }
+    },
+    {
+      "statementId": "STMT-113-stabilization_fund-002",
+      "type": "committee_update",
+      "topic": "Commercial Stabilization for Grand Lake",
+      "initiative": "Commercial Stabilization for Grand Lake",
+      "decision": "Commercial Stabilization for Grand Lake advances to the Economic Development Committee vote with mandatory milestone reporting and audit criteria intact per Chen/Vega conditions.",
+      "quote": "Grand Lake's quiet engine gets fuel with strings attached — the money moves and the accountability holds.",
+      "fullStatement": "The Commercial Stabilization for Grand Lake funding advances to the Economic Development Committee vote this cycle with the mandatory milestone reporting and audit criteria baked into the framework — conditions set by Councilmembers Chen and Vega, and conditions I fully endorse. This is not a blank check; it is a structured commitment. Every dollar disbursed will be tied to measurable milestones and subject to audit, so the accountability holds as the money moves. Grand Lake's quiet engine gets its hearing — stabilization funding with milestones and audits attached, so the money moves and the accountability holds.",
+      "trackerUpdates": {
+        "initiative": "INIT-009",
+        "ImplementationPhase": "vote-scheduled",
+        "MilestoneNotes": "C113: Committee vote scheduled with milestone reporting and audit criteria per Chen/Vega conditions.",
+        "NextScheduledAction": "Economic Development Committee hearing and vote",
+        "NextActionCycle": 113
+      }
+    },
+    {
+      "statementId": "STMT-113-stabilization_fund-003",
+      "type": "constituent_commitment",
+      "topic": "West Oakland stability",
+      "initiative": "West Oakland Stabilization Fund",
+      "decision": "Committed to the long-tenure West Oakland cohort through the charter renewal process, maintaining district-equity tracking and audit-readiness as the Fund's scope is fixed for renewal.",
+      "quote": "One hundred fifteen households stabilized means one hundred fifteen West Oakland families who will not face displacement this month — and every case file meets compliance standards that will survive audit.",
+      "fullStatement": "The people of West Oakland are living this cycle whether City Hall speaks or not — and I answer for them. One hundred fifteen households stabilized means one hundred fifteen West Oakland families who will not face displacement this month — and every case file meets compliance standards that will survive audit. As charter renewal proceeds, I will hold the line on two commitments: the Fund's scope stays fixed on the long-tenure West Oakland cohort, and district-equity tracking continues so no applicant is lost in the process. The Mayor names our housing unit for West Oakland's improvement — I'll take the recognition, but the credit belongs to the block associations and tenant leaders who did the daily work. My job is to make sure the checks arrive before the displacement notices do. That is the promise I keep.",
+      "trackerUpdates": {}
+    }
+  ]
+}

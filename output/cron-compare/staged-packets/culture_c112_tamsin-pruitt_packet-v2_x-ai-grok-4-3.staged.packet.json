@@ -1,0 +1,477 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-01210",
+    "name": "Tamsin Pruitt",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "The lives of C112, 2026-10-19: 7 people — Maurice Franklin came home from the hospital — severe seasonal flu, Rockridge",
+    "approach": "Lives approach: this slice is the people something happened to this Cycle — a birth, a death in the house, a hospital stay, a retirement, a promotion — and the smaller moments the record kept. Each person gets their own short passage: the event, the one true detail the record carries, what they did next if the record says. The fact exactly right; never a trend, never a number first; the person, not the system the event belongs to. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "lives",
+      "hood": "Rockridge",
+      "facts": [
+        "Maurice Franklin came home from the hospital — severe seasonal flu, Rockridge (C111). Since then, on the record: the card statement was the first thing read and the last thing forgotten (C112)",
+        "Geneva Zhou welcomed a new child, West Oakland (C111). Since then, on the record: watched an old man feed pigeons like a ritual and wondered what theirs was (C112)",
+        "Maren Johns retired from work as Psychotherapist, Rockridge (C111). Since then, on the record: painted over graffiti on the recreation center wall alongside five neighbors they barely knew (C112)",
+        "Antoine Vermeer retired from work as Senior Pastor / Faith Leader, Lake Merritt (C112). What came next: the record does not say yet",
+        "Xavier Ramington — relied on familiar social circles during cold period, Temescal (C112, Relationship)",
+        "Mason Walt — reconnected with an old friend, Rockridge (C112, Relationship)",
+        "Jerry Nelson — reconnected with an old friend, Uptown (C112, Relationship)"
+      ],
+      "priorCycle": null,
+      "note": "2 more news-grade events wait for the next day; none of today's people has written their own page this Cycle — no quotes",
+      "engineHooks": [],
+      "roomIsYours": "the plain respect, what the event meant in that house or on that block, the detail the family would have picked — from the lines below, never invented",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-lives",
+    "hood": "Rockridge",
+    "src": "output/beats/Lived_Events.jsonl @C112 2026-10-19",
+    "plan": {
+      "focus": "Lives of individuals with significant events in Cycle 112",
+      "closeQuestion": "What are the common themes or threads among the experiences of these individuals?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00801",
+        "name": "Maurice Franklin",
+        "profile": "Maurice Franklin — Drone Fleet Coordinator — Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00892",
+        "name": "Geneva Zhou",
+        "profile": "Geneva Zhou — Elevator Mechanic — West Oakland",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00470",
+        "name": "Maren Johns",
+        "profile": "Maren Johns — Psychotherapist — Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00755",
+        "name": "Antoine Vermeer",
+        "profile": "Antoine Vermeer — Senior Pastor / Faith Leader — Lake Merritt",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00801-b01d080274",
+        "pop": "POP-00801",
+        "name": "Maurice Franklin",
+        "quote": "After coming home from the hospital, I had to get my feet back on the ground, and the first thing I did was check my finances. The card statement was the first thing I read and it's been on my mind ever since.",
+        "factIds": [
+          "F-e8e7dd9e24f5",
+          "F-a420fd120c1f"
+        ],
+        "src": "packet.W2[POP-00801]"
+      },
+      {
+        "id": "Q-POP-00892-db0bc7ecfd",
+        "pop": "POP-00892",
+        "name": "Geneva Zhou",
+        "quote": "My life has changed a lot since welcoming a new child. It's not the big stuff like changing diapers or feedings that's surprising, it's the little moments like watching Rosa press her nose against the crib bars gently, like she's afraid of something. The house feels quieter at night now, like the whole city could be gone and I wouldn't notice.",
+        "factIds": [
+          "F-46fa7f80fd53"
+        ],
+        "src": "packet.W2[POP-00892]"
+      },
+      {
+        "id": "Q-POP-00470-53da8b8a34",
+        "pop": "POP-00470",
+        "name": "Maren Johns",
+        "quote": "I've been getting used to not having patients to see. It's been a bit of an adjustment. I did help paint over some graffiti on the recreation center wall with some neighbors recently.",
+        "factIds": [
+          "F-28e52645d1a0"
+        ],
+        "src": "packet.W2[POP-00470]"
+      },
+      {
+        "id": "Q-POP-00755-6b3d64aeec",
+        "pop": "POP-00755",
+        "name": "Antoine Vermeer",
+        "quote": "To be honest, I'm still figuring out my plans after retiring as Senior Pastor. It's been a big change for me, not having the responsibilities of the church to attend to every day. I'm enjoying the quiet, but I'm not sure what I'm going to do with all my time yet. I've got some ideas floating around, but nothing concrete.",
+        "factIds": [
+          "F-9088be21cf68",
+          "F-c1a16947809a"
+        ],
+        "src": "packet.W2[POP-00755]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Maurice Franklin's card statement might hold significance",
+        "usable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Geneva Zhou's observation of the old man feeding pigeons could be a meaningful moment",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C112",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-7cd6ffd2aeb3"
+    },
+    {
+      "t": "FACT",
+      "text": "Maurice Franklin came home from the hospital — severe seasonal flu, Rockridge",
+      "src": "output/beats/Lived_Events.jsonl @C112 2026-10-19",
+      "id": "F-e8e7dd9e24f5"
+    },
+    {
+      "t": "FACT",
+      "text": "Maurice Franklin first. The event is the lead; one true detail; what came next only if the record says.",
+      "src": "output/beats/Lived_Events.jsonl @C112 2026-10-19",
+      "id": "F-98f37dea46a4"
+    },
+    {
+      "t": "FACT",
+      "text": "Maurice Franklin came home from the hospital — severe seasonal flu, Rockridge (C111). Since then, on the record: the card statement was the first thing read and the last thing forgotten (C112)",
+      "src": "output/beats/Lived_Events.jsonl @C112",
+      "id": "F-a420fd120c1f"
+    },
+    {
+      "t": "FACT",
+      "text": "Geneva Zhou welcomed a new child, West Oakland (C111). Since then, on the record: watched an old man feed pigeons like a ritual and wondered what theirs was (C112)",
+      "src": "output/beats/Lived_Events.jsonl @C112",
+      "id": "F-46fa7f80fd53"
+    },
+    {
+      "t": "FACT",
+      "text": "Maren Johns retired from work as Psychotherapist, Rockridge (C111). Since then, on the record: painted over graffiti on the recreation center wall alongside five neighbors they barely knew (C112)",
+      "src": "output/beats/Lived_Events.jsonl @C112",
+      "id": "F-28e52645d1a0"
+    },
+    {
+      "t": "FACT",
+      "text": "Antoine Vermeer retired from work as Senior Pastor / Faith Leader, Lake Merritt (C112). What came next: the record does not say yet",
+      "src": "output/beats/Lived_Events.jsonl @C112",
+      "id": "F-9088be21cf68"
+    },
+    {
+      "t": "FACT",
+      "text": "Xavier Ramington — relied on familiar social circles during cold period, Temescal (C112, Relationship)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-462aba05743e"
+    },
+    {
+      "t": "FACT",
+      "text": "Mason Walt — reconnected with an old friend, Rockridge (C112, Relationship)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-744a27d14e95"
+    },
+    {
+      "t": "FACT",
+      "text": "Jerry Nelson — reconnected with an old friend, Uptown (C112, Relationship)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-3bab27766864"
+    },
+    {
+      "t": "FACT",
+      "text": "Antoine Vermeer — Senior Pastor / Faith Leader — Lake Merritt",
+      "src": "Simulation_Ledger profile for POP-00755",
+      "id": "F-c1a16947809a"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "tamsin-lives-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Put the cycle's person events in the paper as news, one person at a time — a birth, a death, a hospital stay, a retirement, a promotion. The event is the lead, the person is named as the slice names them, and what came next appears only when a later record holds it. The page is the city's real calendar; every person on it is one the record holds.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "plain respect — a neighborhood weekly's births-and-obituaries hand, unhurried, exact",
+      "targetWords": "450-750",
+      "opening": "the heaviest event on the slice, stated as it happened to the named person",
+      "closing": "the last person's passage ends on what the record holds next for them, or on the fact itself — no moral, no roundup"
+    },
+    "authorizedTexture": [
+      "the plain respect of the form — the ordinary weight of a birth, a retirement, a discharge, stated without ornament",
+      "the frame around a supplied fact — what a promotion to the supplied role means in plain words, without inventing the workplace",
+      "the neighborhood the slice names as where the person lives, without an invented street scene",
+      "the order and pacing of the passages — heaviest first, one person at a time"
+    ],
+    "textureConditions": [
+      "every person, event, role, employer, neighborhood, hospital stay, household and family tie must come from the slice",
+      "a quote appears only verbatim from the person's own supplied page; nothing paraphrased into quotation marks",
+      "what came next appears only when a later Cycle's supplied record holds it",
+      "a thin day (few events) is written as a short page, not padded"
+    ],
+    "canonBlockers": [
+      "any person, event, quote, venue, employer or family member not on the slice",
+      "a paraphrased or invented quote",
+      "a cause, diagnosis or outcome the record does not state",
+      "a statistic, rate or trend claim — the page is people, not numbers",
+      "intake bookkeeping rows (Emerged into Tier, Added to Simulation_Ledger, Updated to Tier) written as life events",
+      "raw engine labels or decimals printed as public-facing evidence"
+    ]
+  },
+  "manifest": {
+    "id": "AM-05316d678104",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-7cd6ffd2aeb3",
+        "t": "FACT",
+        "text": "Current cycle: C112",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-e8e7dd9e24f5",
+        "t": "FACT",
+        "text": "Maurice Franklin came home from the hospital — severe seasonal flu, Rockridge",
+        "src": "output/beats/Lived_Events.jsonl @C112 2026-10-19"
+      },
+      {
+        "id": "F-98f37dea46a4",
+        "t": "FACT",
+        "text": "Maurice Franklin first. The event is the lead; one true detail; what came next only if the record says.",
+        "src": "output/beats/Lived_Events.jsonl @C112 2026-10-19"
+      },
+      {
+        "id": "F-a420fd120c1f",
+        "t": "FACT",
+        "text": "Maurice Franklin came home from the hospital — severe seasonal flu, Rockridge (C111). Since then, on the record: the card statement was the first thing read and the last thing forgotten (C112)",
+        "src": "output/beats/Lived_Events.jsonl @C112"
+      },
+      {
+        "id": "F-46fa7f80fd53",
+        "t": "FACT",
+        "text": "Geneva Zhou welcomed a new child, West Oakland (C111). Since then, on the record: watched an old man feed pigeons like a ritual and wondered what theirs was (C112)",
+        "src": "output/beats/Lived_Events.jsonl @C112"
+      },
+      {
+        "id": "F-28e52645d1a0",
+        "t": "FACT",
+        "text": "Maren Johns retired from work as Psychotherapist, Rockridge (C111). Since then, on the record: painted over graffiti on the recreation center wall alongside five neighbors they barely knew (C112)",
+        "src": "output/beats/Lived_Events.jsonl @C112"
+      },
+      {
+        "id": "F-9088be21cf68",
+        "t": "FACT",
+        "text": "Antoine Vermeer retired from work as Senior Pastor / Faith Leader, Lake Merritt (C112). What came next: the record does not say yet",
+        "src": "output/beats/Lived_Events.jsonl @C112"
+      },
+      {
+        "id": "F-462aba05743e",
+        "t": "FACT",
+        "text": "Xavier Ramington — relied on familiar social circles during cold period, Temescal (C112, Relationship)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-744a27d14e95",
+        "t": "FACT",
+        "text": "Mason Walt — reconnected with an old friend, Rockridge (C112, Relationship)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-3bab27766864",
+        "t": "FACT",
+        "text": "Jerry Nelson — reconnected with an old friend, Uptown (C112, Relationship)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-c1a16947809a",
+        "t": "FACT",
+        "text": "Antoine Vermeer — Senior Pastor / Faith Leader — Lake Merritt",
+        "src": "Simulation_Ledger profile for POP-00755"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00801-b01d080274",
+        "speakerId": "POP-00801",
+        "speakerName": "Maurice Franklin",
+        "text": "After coming home from the hospital, I had to get my feet back on the ground, and the first thing I did was check my finances. The card statement was the first thing I read and it's been on my mind ever since.",
+        "factIds": [
+          "F-e8e7dd9e24f5",
+          "F-a420fd120c1f"
+        ],
+        "src": "packet.W2[POP-00801]"
+      },
+      {
+        "id": "Q-POP-00892-db0bc7ecfd",
+        "speakerId": "POP-00892",
+        "speakerName": "Geneva Zhou",
+        "text": "My life has changed a lot since welcoming a new child. It's not the big stuff like changing diapers or feedings that's surprising, it's the little moments like watching Rosa press her nose against the crib bars gently, like she's afraid of something. The house feels quieter at night now, like the whole city could be gone and I wouldn't notice.",
+        "factIds": [
+          "F-46fa7f80fd53"
+        ],
+        "src": "packet.W2[POP-00892]"
+      },
+      {
+        "id": "Q-POP-00470-53da8b8a34",
+        "speakerId": "POP-00470",
+        "speakerName": "Maren Johns",
+        "text": "I've been getting used to not having patients to see. It's been a bit of an adjustment. I did help paint over some graffiti on the recreation center wall with some neighbors recently.",
+        "factIds": [
+          "F-28e52645d1a0"
+        ],
+        "src": "packet.W2[POP-00470]"
+      },
+      {
+        "id": "Q-POP-00755-6b3d64aeec",
+        "speakerId": "POP-00755",
+        "speakerName": "Antoine Vermeer",
+        "text": "To be honest, I'm still figuring out my plans after retiring as Senior Pastor. It's been a big change for me, not having the responsibilities of the church to attend to every day. I'm enjoying the quiet, but I'm not sure what I'm going to do with all my time yet. I've got some ideas floating around, but nothing concrete.",
+        "factIds": [
+          "F-9088be21cf68",
+          "F-c1a16947809a"
+        ],
+        "src": "packet.W2[POP-00755]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00801",
+        "name": "Maurice Franklin",
+        "profile": "Maurice Franklin — Drone Fleet Coordinator — Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00892",
+        "name": "Geneva Zhou",
+        "profile": "Geneva Zhou — Elevator Mechanic — West Oakland",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00470",
+        "name": "Maren Johns",
+        "profile": "Maren Johns — Psychotherapist — Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00755",
+        "name": "Antoine Vermeer",
+        "profile": "Antoine Vermeer — Senior Pastor / Faith Leader — Lake Merritt",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Maurice Franklin's card statement might hold significance",
+        "publishable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Geneva Zhou's observation of the old man feeding pigeons could be a meaningful moment",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "the plain respect of the form — the ordinary weight of a birth, a retirement, a discharge, stated without ornament",
+      "the frame around a supplied fact — what a promotion to the supplied role means in plain words, without inventing the workplace",
+      "the neighborhood the slice names as where the person lives, without an invented street scene",
+      "the order and pacing of the passages — heaviest first, one person at a time"
+    ],
+    "textureConditions": [
+      "every person, event, role, employer, neighborhood, hospital stay, household and family tie must come from the slice",
+      "a quote appears only verbatim from the person's own supplied page; nothing paraphrased into quotation marks",
+      "what came next appears only when a later Cycle's supplied record holds it",
+      "a thin day (few events) is written as a short page, not padded"
+    ],
+    "forbiddenClaimClasses": [
+      "any person, event, quote, venue, employer or family member not on the slice",
+      "a paraphrased or invented quote",
+      "a cause, diagnosis or outcome the record does not state",
+      "a statistic, rate or trend claim — the page is people, not numbers",
+      "intake bookkeeping rows (Emerged into Tier, Added to Simulation_Ledger, Updated to Tier) written as life events",
+      "raw engine labels or decimals printed as public-facing evidence"
+    ]
+  }
+}

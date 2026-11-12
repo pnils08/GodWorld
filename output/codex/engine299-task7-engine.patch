@@ -1,0 +1,281 @@
+diff --git a/phase05-citizens/migrationTrackingEngine.js b/phase05-citizens/migrationTrackingEngine.js
+index 30f458de..3a15e184 100644
+--- a/phase05-citizens/migrationTrackingEngine.js
++++ b/phase05-citizens/migrationTrackingEngine.js
+@@ -45,8 +45,8 @@
+  * - Generates story hooks for forced migrations
+  *
+  * Story Hooks:
+- * - FORCED_MIGRATION (severity 7): Citizen displaced by rent/eviction
+- * - MASS_EXODUS (severity 8): 5+ citizens leave same neighborhood in one cycle
++ * - FORCED_MIGRATION (severity 7): High-risk citizen planning an income-fit move
++ * - MASS_EXODUS (severity 8): 5+ residents planning to leave the same neighborhood
+  * - RETURN_MIGRATION (severity 4): Citizen returns to Oakland after leaving
+  * - CITIZEN_RELOCATED (severity 5): unit completed an intra-city move (engine.55)
+  *
+@@ -795,10 +795,10 @@ function processRelocations_(ctx, cycle) {
+     var reason, phrase;
+     if (unit.maxRisk >= 9) {
+       reason = MIGRATION_REASONS.DISPLACED;
+-      phrase = 'displaced from ' + unit.hood + ' (risk ' + unit.maxRisk + '/10)';
++      phrase = 'household income fit favored ' + bestName + ' over ' + unit.hood;
+     } else if (lane === 'pressure') {
+       reason = MIGRATION_REASONS.COST;
+-      phrase = 'priced out of ' + unit.hood;
++      phrase = 'moving for a better fit between household income and housing costs';
+     } else {
+       reason = MIGRATION_REASONS.OPPORTUNITY;
+       // the misfit lane sorts to the best FIT, which is not always a richer hood
+@@ -1028,7 +1028,7 @@ function generateMigrationHooks_(ctx, cycle) {
+         hookType: 'FORCED_MIGRATION',
+         domain: 'COMMUNITY',
+         severity: 7,
+-        description: first + ' ' + last + ' at severe displacement risk in ' + neighborhood + ' (risk: ' + displRisk + '/10)',
++        description: first + ' ' + last + ' planning a move from ' + neighborhood + ' toward a better household-income fit',
+         cycleGenerated: cycle,
+         popid: popid,
+         neighborhood: neighborhood,
+@@ -1041,7 +1041,7 @@ function generateMigrationHooks_(ctx, cycle) {
+     }
+   }
+ 
+-  // MASS_EXODUS (5+ citizens at risk in same neighborhood)
++  // MASS_EXODUS (5+ residents planning to leave the same neighborhood)
+   for (var hood in displacementByNeighborhood) {
+     var count = displacementByNeighborhood[hood];
+     if (count >= 5) {
+@@ -1050,7 +1050,7 @@ function generateMigrationHooks_(ctx, cycle) {
+         hookType: 'MASS_EXODUS',
+         domain: 'COMMUNITY',
+         severity: 8,
+-        description: hood + ' mass displacement risk: ' + count + ' residents planning to leave',
++        description: count + ' residents in ' + hood + ' planning to leave for a better household-income fit',
+         cycleGenerated: cycle,
+         neighborhood: hood,
+         atRiskCount: count
+diff --git a/utilities/ensureCrimeMetrics.js b/utilities/ensureCrimeMetrics.js
+index 6f20a008..b26da2f8 100644
+--- a/utilities/ensureCrimeMetrics.js
++++ b/utilities/ensureCrimeMetrics.js
+@@ -103,7 +103,7 @@ var NEIGHBORHOOD_CRIME_PROFILES = {
+     violentCrimeMod: 1.0,
+     responseMod: 0.8,
+     baseIncidents: 7,
+-    character: 'east flatlands, the Baylight frontier'
++    character: 'east flatlands, arriving frontier' // INSTITUTIONS.md §Neighborhoods: East Oakland
+   },
+   'Lake Merritt': {
+     propertyCrimeMod: 1.0,
+diff --git a/utilities/compressLifeHistory.js b/utilities/compressLifeHistory.js
+index fb7a91ab..38b9c152 100644
+--- a/utilities/compressLifeHistory.js
++++ b/utilities/compressLifeHistory.js
+@@ -1600,7 +1600,10 @@ function foldBiasIntents_(regs, intents, cycle) {
+ // Returns the number of unlived entries captured (0 when regs is null).
+ var UNLIVED_CAP = 3;
+ var UNLIVED_TXT_MAX = 120;
+-var UNLIVED_BRANCH_TAGS = { careershift: 1, relocation: 1, divorce: 1, retirement: 1, businessclose: 1, displacementmove: 1 };
++var UNLIVED_BRANCH_TAGS = { careershift: 1, relocation: 1, divorce: 1, retirement: 1, businessclose: 1, incomefitmove: 1 };
++// Read old history tags; only a NEW capture uses the new key. Existing history
++// and already-stored MemoryRegisters entries are not rewritten.
++var UNLIVED_BRANCH_ALIASES = { displacementmove: 'incomefitmove' };
+ // engine.177 (S438): unstampedOnly=true skips entries that carry a cycle stamp — those
+ // were folded at arrival by foldNewEntries_ (the watermark); only legacy lines fold here.
+ function foldAgedOutEntries_(c, entries, keepCount, regs, unstampedOnly) {
+@@ -1656,9 +1659,11 @@ function foldOneEntry_(c, e, regs) {
+ 
+ // engine.38 B3 unlived capture for one entry (shared by the legacy and per-cycle folds).
+ function captureUnlived_(e, regs) {
+-  if (regs && UNLIVED_BRANCH_TAGS[String(e.tag || '').toLowerCase()]) {
++  var key = String(e.tag || '').toLowerCase();
++  key = UNLIVED_BRANCH_ALIASES[key] || key;
++  if (regs && UNLIVED_BRANCH_TAGS[key]) {
+     regs.unlived.push({
+-      tag: String(e.tag),
++      tag: key === 'incomefitmove' ? key : String(e.tag),
+       txt: String(e.text || '').slice(0, UNLIVED_TXT_MAX),
+       cy: (e.cycle != null ? e.cycle : 0)
+     });
+diff --git a/phase05-citizens/generateCitizensEvents.js b/phase05-citizens/generateCitizensEvents.js
+index f2086327..c8a48acb 100644
+--- a/phase05-citizens/generateCitizensEvents.js
++++ b/phase05-citizens/generateCitizensEvents.js
+@@ -1142,7 +1142,7 @@ function generateCitizensEvents_(ctx) {
+   var UNLIVED_ECHO_TEXT = {
+     careershift: "caught themselves thinking about the job they didn't take",
+     relocation: "thought for a moment about the version of them that stayed",
+-    displacementmove: "thought for a moment about the version of them that stayed",
++    incomefitmove: "thought for a moment about the version of them that stayed",
+     divorce: "wondered briefly about the life that marriage might have been",
+     retirement: "missed the working years for a heartbeat, then let it go",
+     businessclose: "passed a shuttered storefront and thought of the business that didn't make it"
+@@ -1150,7 +1150,7 @@ function generateCitizensEvents_(ctx) {
+   var UNLIVED_RHYME = {
+     careershift: ["career", "work", "promotion", "job", "postcareer"],
+     relocation: ["relocation", "move", "housing", "displacement", "neighborhood"],
+-    displacementmove: ["relocation", "move", "housing", "displacement", "economy"],
++    incomefitmove: ["relocation", "move", "housing", "displacement", "economy"],
+     divorce: ["divorce", "wedding", "marriage", "anniversary"],
+     retirement: ["retirement", "postcareer", "work"],
+     businessclose: ["business"]
+@@ -1169,6 +1169,7 @@ function generateCitizensEvents_(ctx) {
+     if (!tailTags.length) return null;
+     for (var ui = 0; ui < reg.unlived.length; ui++) {
+       var key = String((reg.unlived[ui] && reg.unlived[ui].tag) || "").toLowerCase();
++      if (key === 'displacementmove') key = 'incomefitmove'; // read alias; never rewrite stored registers
+       var fam = UNLIVED_RHYME[key];
+       if (!fam) continue;
+       for (var fi = 0; fi < fam.length; fi++) {
+diff --git a/lib/resonanceRecall.js b/lib/resonanceRecall.js
+index 8bb02c7c..81a9d90c 100644
+--- a/lib/resonanceRecall.js
++++ b/lib/resonanceRecall.js
+@@ -120,7 +120,7 @@ function tensionCandidates(tensionList) {
+ const UNLIVED_PHRASE = {
+   careershift: 'the work you left behind',
+   relocation: 'the version of you that stayed',
+-  displacementmove: 'the version of you that stayed',
++  incomefitmove: 'the version of you that stayed',
+   divorce: 'the life that marriage might have been',
+   retirement: 'your working years',
+   businessclose: 'the business that didn\'t make it',
+@@ -132,7 +132,7 @@ function unlivedCandidates(memRegistersJson) {
+   return reg.unlived
+     .filter((u) => u && u.txt)
+     .map((u) => ({
+-      text: `Sometimes you still think about ${UNLIVED_PHRASE[String(u.tag || '').toLowerCase()] || 'a path not taken'} — back when ${String(u.txt).trim()}`,
++      text: `Sometimes you still think about ${UNLIVED_PHRASE[String(u.tag || '').toLowerCase() === 'displacementmove' ? 'incomefitmove' : String(u.tag || '').toLowerCase()] || 'a path not taken'} — back when ${String(u.txt).trim()}`,
+       meta: null, kind: 'unlived',
+     }));
+ }
+diff --git a/scripts/deadBranchScan.js b/scripts/deadBranchScan.js
+index 8becfa97..e0635a08 100644
+--- a/scripts/deadBranchScan.js
++++ b/scripts/deadBranchScan.js
+@@ -123,10 +123,6 @@ const ALLOWLIST = [
+     reason: 'Enforcement spillover between areas, not a displacement premise.' },
+   { file: 'utilities/tier1EssenceEvents.js', re: /^Reads the anti-displacement and workforce mechanics end to end\.$/,
+     reason: 'Elena POP-00791 published essence, held for the builder (A2).' },
+-  { file: 'utilities/compressLifeHistory.js', re: /^displacementmove$/,
+-    reason: 'Legacy displacementmove tag; paired rename belongs to Task 4 (A3).' },
+-  { file: 'phase05-citizens/generateCitizensEvents.js', re: /^displacementmove$/,
+-    reason: 'Legacy displacementmove tag; paired rename belongs to Task 4 (A3).' },
+   { file: 'utilities/tier1EssenceEvents.js', re: /^Promotion$/,
+     reason: 'Authored Tier-1 essence tag, not a color-pool promotion.' },
+   { file: 'phase05-citizens/generateCitizensEvents.js', re: /^handled a logistics call with an ex$/,
+diff --git a/scripts/deadBranchScan.offenders.test.js b/scripts/deadBranchScan.offenders.test.js
+index 8e4437c6..837a4361 100644
+--- a/scripts/deadBranchScan.offenders.test.js
++++ b/scripts/deadBranchScan.offenders.test.js
+@@ -30,7 +30,7 @@ assert(report.inert.codeSites.some(s => s.tag === 'Daily' && s.line === 1));
+ assert(report.premise.some(h => h.kind === 'string' && h.text === 'SYNTHETIC priced out'));
+ assert(report.premise.some(h => h.allowed && h.kind === 'comment' && h.reason.includes('ordering')));
+ assert(report.premise.some(h => h.allowed && h.reason.includes('Elena')));
+-assert(report.premise.some(h => h.allowed && h.text === 'displacementmove'));
++assert(report.premise.some(h => !h.allowed && h.text === 'displacementmove')); // old exception removed, read aliases remain visible
+ assert(report.premise.some(h => h.where === 'live:Event_Content_Ledger' && h.row === 2));
+ assert(!report.premise.some(h => /decline|inactive/.test(h.text)));
+ assert(report.lifeVerbs.some(h => h.text === 'SYNTHETIC married'));
+@@ -44,7 +44,7 @@ assert.deepEqual(older.inert.byEngine, { oldEngine: 1 });
+ const clean = buildOffenders({ log: [header, log[3]], ecl: [ecl[0]], sources: {}, resolver });
+ assert.equal(clean.inert.total, 0);
+ assert.equal(clean.acceptanceEmpty, true);
+-const allowedOnly = buildOffenders({ log: [header, log[3]], ecl: [ecl[0]], sources: { 'utilities/compressLifeHistory.js': 'var x="displacementmove";' }, resolver });
++const allowedOnly = buildOffenders({ log: [header, log[3]], ecl: [ecl[0]], sources: { 'phase07-evening-media/buildContractSeeds.js': '// never displaced' }, resolver });
+ assert.equal(allowedOnly.acceptanceEmpty, true);
+ assert.equal(allowedOnly.premise.length, 1);
+ const noSource = buildOffenders({ log: [['Cycle','EventTag','EventText'],[111,'Daily','SYNTHETIC long exact prose observation']],
+diff --git a/scripts/unlivedFold.test.js b/scripts/unlivedFold.test.js
+index c3ec8de2..50aa5fe0 100644
+--- a/scripts/unlivedFold.test.js
++++ b/scripts/unlivedFold.test.js
+@@ -102,6 +102,17 @@ console.log('═══ Section B — foldAgedOutEntries_ capture');
+   entries = [mk('DISPLACEMENTMOVE', 'forced out by rent', 82)].concat(fill(20));
+   n = C.foldAgedOutEntries_(E.newCitizen_(), entries, 20, regs);
+   assert('B7 case-insensitive branch match', n === 1);
++  assert('B7a new capture uses income-fit key without rewriting the history event',
++    regs.unlived[0].tag === 'incomefitmove' && entries[0].tag === 'DISPLACEMENTMOVE');
++  const historical = { tag: 'displacementmove', txt: 'SYNTHETIC historical move', cy: 70 };
++  const compatible = C.parseMemoryRegisters_(JSON.stringify({ unlived: [historical] }));
++  C.foldAgedOutEntries_(E.newCitizen_(), [mk('IncomeFitMove', 'SYNTHETIC new move', 83)].concat(fill(20)), 20, compatible);
++  assert('B7b old stored key stays untouched, new key captures alongside it',
++    JSON.stringify(compatible.unlived[0]) === JSON.stringify(historical) && compatible.unlived[1].tag === 'incomefitmove');
++  const recall = require('../lib/resonanceRecall.js');
++  const recallOld = recall.unlivedCandidates(JSON.stringify({ unlived: [historical] }));
++  const recallNew = recall.unlivedCandidates(JSON.stringify({ unlived: [{ ...historical, tag: 'incomefitmove' }] }));
++  assert('B7c recall reads both keys with identical voice', JSON.stringify(recallOld) === JSON.stringify(recallNew) && recallOld[0].text.includes('the version of you that stayed'));
+   n = C.foldAgedOutEntries_(E.newCitizen_(), entries, 20, null);
+   assert('B8 regs=null -> fold-only, returns 0, no throw', n === 0);
+ 
+diff --git a/scripts/migrationRelocation.test.js b/scripts/migrationRelocation.test.js
+index 15f0fa4c..55518981 100644
+--- a/scripts/migrationRelocation.test.js
++++ b/scripts/migrationRelocation.test.js
+@@ -285,6 +285,8 @@ console.log('A10 MASS_EXODUS threshold on planning intent');
+     JSON.stringify(exodus.map(h => h.neighborhood)));
+   assert('exodus count = planning count; a considering row never inflates it', exodus[0].atRiskCount === 5,
+     String(exodus[0].atRiskCount));
++  assert('planning hook describes residents and income fit, without changing the hook type',
++    exodus[0].description === '5 residents in Middleton planning to leave for a better household-income fit', exodus[0].description);
+ }
+ 
+ // ═══ A3: pressure lane — household moves as a unit ═══════════════════════════
+@@ -327,6 +329,9 @@ console.log('A3 pressure lane household move');
+   const moveLines = appendIntents.filter(a => a.tab === 'LifeHistory_Log' && a.row[3] === 'Neighborhood');
+   assert('LifeHistory line per moved member', moveLines.length === 3, String(moveLines.length));
+   assert('line names both hoods and the why', moveLines.every(a => /moved from Highgate to Lowmarket — /.test(a.row[4])), moveLines[0] && moveLines[0].row[4]);
++  assert('move log and hook describe income fit, not displacement or being priced out',
++    moveLines.every(a => /income fit|household income/.test(a.row[4]) && !/displaced|priced out/.test(a.row[4])) &&
++    /income fit|household income/.test(moveHooks[0].description) && !/displaced|priced out/.test(moveHooks[0].description));
+   assert('no LifeHistory line for the bystander', !appendIntents.some(a => a.row[1] === 'POP-13'));
+ }
+ 
+diff --git a/scripts/unlivedEcho.test.js b/scripts/unlivedEcho.test.js
+index 0dedbcf7..48e99e2a 100644
+--- a/scripts/unlivedEcho.test.js
++++ b/scripts/unlivedEcho.test.js
+@@ -88,7 +88,7 @@ function makeCtx(rows, rng) {
+ }
+ 
+ // run N seeded cycles over K citizens; count echo lines + collect emitted text
+-function runTrials(life, memReg, seeds, citizensPerRun) {
++function runTrials(life, memReg, seeds, citizensPerRun, needle = "the job they didn't take") {
+   let echoes = 0, threw = false, leakedSpecifics = 0;
+   for (let s = 1; s <= seeds; s++) {
+     const rows = [];
+@@ -97,7 +97,7 @@ function runTrials(life, memReg, seeds, citizensPerRun) {
+     try { generateCitizensEvents_(ctx); } catch (e) { threw = true; break; }
+     for (const r of ctx.ledger.rows) {
+       const emitted = String(r[5] || '').slice(life.length); // new lines only
+-      if (emitted.indexOf("the job they didn't take") >= 0) echoes++;
++      if (emitted.indexOf(needle) >= 0) echoes++;
+       if (emitted.indexOf('Sacramento') >= 0) leakedSpecifics++;
+     }
+   }
+@@ -146,5 +146,14 @@ console.log('═══ Routing');
+     tagged !== null && /\[Personal(-[A-Za-z]+-(Up|Down)-[SML])?\]/.test(tagged), tagged || 'no echo in 200 single-citizen seeds');   // engine.299: graded form
+ }
+ 
++// Both persisted keys retain the same read behavior; nothing rewrites the input.
++for (const tailTag of ['IncomeFitMove', 'DisplacementMove']) {
++  const life = 'C97 — [' + tailTag + '] SYNTHETIC move history';
++  const oldReg = JSON.stringify({ unlived: [{ tag: 'displacementmove', txt: 'SYNTHETIC old branch', cy: 80 }] });
++  const newReg = JSON.stringify({ unlived: [{ tag: 'incomefitmove', txt: 'SYNTHETIC old branch', cy: 80 }] });
++  const oldRead = runTrials(life, oldReg, 100, 25, 'the version of them that stayed');
++  const newRead = runTrials(life, newReg, 100, 25, 'the version of them that stayed');
++  assert('income-fit echo aliases match on ' + tailTag, oldRead.echoes > 0 && !oldRead.threw && JSON.stringify(oldRead) === JSON.stringify(newRead), JSON.stringify({ oldRead, newRead }));
++}
+ console.log(`\n${passed} passed, ${failed} failed`);
+ process.exit(failed ? 1 : 0);
+diff --git a/scripts/hoodIdentityRemainder.test.js b/scripts/hoodIdentityRemainder.test.js
+index a597d162..b10ae40f 100644
+--- a/scripts/hoodIdentityRemainder.test.js
++++ b/scripts/hoodIdentityRemainder.test.js
+@@ -49,6 +49,7 @@ console.log('═══ Task 4 — crime iterates the Neighborhood_Map set');
+   check('T4a Montclair has no profile', !P.Montclair);
+   check('T4b every Neighborhood_Map hood has an authored profile', NM.every(h => P[h]), NM.filter(h => !P[h]).join(','));
+   check('T4c no 2026 strife labels survive', !Object.keys(P).some(h => /underserved|gentrifying/i.test(P[h].character)));
++  check('T4c2 East Oakland uses its own canon character, not Baylight', P['East Oakland'].character === 'east flatlands, arriving frontier');
+   check('T4d iteration set = canonHoods.list when seeded',
+     JSON.stringify(sb.crimeIterationHoods_({ canonHoods: { list: NM } })) === JSON.stringify(NM));
+   check('T4e iteration set falls to profile keys only when unseeded',

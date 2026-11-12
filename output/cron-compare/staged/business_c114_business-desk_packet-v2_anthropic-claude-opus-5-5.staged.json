@@ -1,0 +1,143 @@
+{
+  "status": "staged",
+  "desk": "business",
+  "cycle": "114",
+  "persona": "business-desk",
+  "byline": "Jordan Velez",
+  "bylinePopid": "POP-00153",
+  "article": "output/cron-compare/staged/business_c114_business-desk_packet-v2_anthropic-claude-opus-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Enzo Walker",
+        "role": "quoted-source",
+        "popid": "POP-00291"
+      },
+      {
+        "name": "Desmond Achebe",
+        "role": "quoted-source",
+        "popid": "POP-01092"
+      },
+      {
+        "name": "Marcus Tan",
+        "role": "quoted-source",
+        "popid": "POP-01109"
+      },
+      {
+        "name": "Catherine Santos",
+        "role": "mentioned",
+        "popid": "POP-00482",
+        "floor": true
+      },
+      {
+        "name": "Elias Varek",
+        "role": "mentioned",
+        "popid": "POP-00789",
+        "floor": true
+      },
+      {
+        "name": "Elijah Brown",
+        "role": "mentioned",
+        "popid": "POP-01195",
+        "floor": true
+      },
+      {
+        "name": "Elijah Roberts",
+        "role": "mentioned",
+        "popid": "POP-00275",
+        "floor": true
+      },
+      {
+        "name": "Hazel Reed",
+        "role": "mentioned",
+        "popid": "POP-00938",
+        "floor": true
+      },
+      {
+        "name": "Helena Voss-Adeyemi",
+        "role": "mentioned",
+        "popid": "POP-01095",
+        "floor": true
+      },
+      {
+        "name": "Jude Hess",
+        "role": "mentioned",
+        "popid": "POP-00521",
+        "floor": true
+      },
+      {
+        "name": "Kenton Pearl",
+        "role": "mentioned",
+        "popid": "POP-00217",
+        "floor": true
+      },
+      {
+        "name": "Maeve Pillai",
+        "role": "mentioned",
+        "popid": "POP-00851",
+        "floor": true
+      },
+      {
+        "name": "Maurice Franklin",
+        "role": "mentioned",
+        "popid": "POP-00801",
+        "floor": true
+      },
+      {
+        "name": "Minh Raimon",
+        "role": "mentioned",
+        "popid": "POP-01010",
+        "floor": true
+      },
+      {
+        "name": "Sam Fazio",
+        "role": "mentioned",
+        "popid": "POP-00445",
+        "floor": true
+      },
+      {
+        "name": "Yadira Rao",
+        "role": "mentioned",
+        "popid": "POP-00866",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "West Oakland"
+    ],
+    "claims": [
+      {
+        "claim": "Look, I see the numbers on the board in the trailer — 9.5% growth, revenue up, all that. And sure, we're busy. I'm not complaining about work. But the numbers don't tell you what it's like on the ground. The buildings going up, they're not for us. They're for the tech folks coming in, the ones from Oakmesh and Civis. I fix pipes in places that didn't exist last year, and the people who used to live on those blocks? They're gone. The work's changing, alright — but it's changing in a way where I'm not sure the folks signing the checks even notice who's not at the table anymore. The ledger says growth. The street says something else.",
+        "sourceRef": "citizenVoice PRESS Enzo Walker"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-dd9b30312719",
+    "draftSha256": "57936812c1d170b8421005ecdf757a9ceaeb8a118a0943268d4c113ade9cb024",
+    "verdict": "output/cron-compare/business_c114_business-desk_packet-v2_anthropic-claude-opus-5-5.rhea.json",
+    "ranAt": "2026-11-04T07:39:47.380Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 500",
+      "words": 1033,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "57936812c1d170b8421005ecdf757a9ceaeb8a118a0943268d4c113ade9cb024",
+      "costUsd": 0.0014
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-04T07:39:52.129Z"
+}

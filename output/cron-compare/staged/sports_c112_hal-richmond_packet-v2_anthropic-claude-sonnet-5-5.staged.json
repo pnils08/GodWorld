@@ -1,0 +1,62 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "112",
+  "persona": "hal-richmond",
+  "byline": "Hal Richmond",
+  "bylinePopid": "POP-00007",
+  "article": "output/cron-compare/staged/sports_c112_hal-richmond_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Kevin Clark",
+        "role": "mentioned",
+        "popid": "POP-00053",
+        "floor": true
+      },
+      {
+        "name": "Mark Aitken",
+        "role": "mentioned",
+        "popid": "POP-00003",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Jack London"
+    ],
+    "claims": [
+      {
+        "claim": "A's — rumor — supplied C112 line card",
+        "sourceRef": "world_summary_c112.md ## Sports"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-04d826843934",
+    "draftSha256": "9db88d6f462a20e2b0a157b294e7eebdd12d95d6c5a98d541a3a7b63358ea2af",
+    "verdict": "output/cron-compare/sports_c112_hal-richmond_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-10-24T17:00:50.317Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 800",
+      "words": 982,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "9db88d6f462a20e2b0a157b294e7eebdd12d95d6c5a98d541a3a7b63358ea2af",
+      "costUsd": 0.002
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-24T17:00:59.190Z"
+}

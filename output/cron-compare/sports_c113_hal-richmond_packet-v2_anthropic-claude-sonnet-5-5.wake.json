@@ -1,0 +1,64 @@
+{
+  "mode": "wake-write",
+  "desk": "sports",
+  "cycle": "113",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "hal-richmond",
+  "byline": {
+    "name": "Hal Richmond",
+    "popid": "POP-00007",
+    "beatDomain": "SPORTS"
+  },
+  "laneEntries": 9,
+  "quotesLanded": 0,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "canon_search",
+    "canon_search",
+    "citizen_lookup",
+    "dossier_read",
+    "dossier_read",
+    "citizen_lookup"
+  ],
+  "toolCalls": 6,
+  "wordCount": 897,
+  "targetWords": "800-1200 words, bounded by the Packet and what the tools returned",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": false,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 800",
+    "words": 897,
+    "short": "The opening paragraph presents the present fact but omits the ground the man came from.",
+    "score": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "2c730ed7b85577de6dec6cef5d15f2162d74483cc736189b0a90a2d5bb020656",
+    "costUsd": 0.0018
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/4 — The opening paragraph presents the present fact but omits the ground the man came from."
+  },
+  "article": "output/cron-compare/staged/sports_c113_hal-richmond_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "/ tip: ◈ secrets for agents [www.dotenvx.com]\n{\n  \"popId\": \"POP-00007\",\n  \"name\": \"Hal Richmond\",\n  \"recorded\": true,\n  \"text\": \"filed: The Left Field Question, and Two Lines That Answer Part of It\"\n}"
+  },
+  "ranAt": "2026-10-29T23:18:30.870Z",
+  "dispositionReconciledAt": "2026-10-31T17:00:02.908Z"
+}

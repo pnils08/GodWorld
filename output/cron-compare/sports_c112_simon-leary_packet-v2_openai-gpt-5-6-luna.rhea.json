@@ -1,0 +1,61 @@
+{
+  "draft": "output/cron-compare/sports_c112_simon-leary_packet-v2_openai-gpt-5-6-luna.md",
+  "cycle": "112",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "9e5f003f1d92d7b05907ed980b9f7be5220e4bfebf0056cd8993a08e7eac60df",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Draft verified clean; Oaks record (1-0, W1) and Austin Reaves quote match exact packet provenance with authorized interpretive texture.",
+  "review": {
+    "profileId": "simon-longview-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "simon-longview-v1",
+    "packageVersion": "SIMON-LEP2-1",
+    "manifestId": "AM-56b53f77e530",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Austin Reaves"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 1,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.009,
+  "durationMs": 4321,
+  "parseError": false,
+  "ranAt": "2026-10-22T23:16:13.452Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 439,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "9e5f003f1d92d7b05907ed980b9f7be5220e4bfebf0056cd8993a08e7eac60df",
+    "costUsd": 0.0008
+  }
+}

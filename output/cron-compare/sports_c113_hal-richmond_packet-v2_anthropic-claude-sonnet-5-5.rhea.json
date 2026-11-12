@@ -1,0 +1,77 @@
+{
+  "draft": "output/cron-compare/sports_c113_hal-richmond_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "113",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "2c730ed7b85577de6dec6cef5d15f2162d74483cc736189b0a90a2d5bb020656",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Clean verification: all biographical facts, migration history, sports stats, and roster notes for Desmond Morton and Frank Reyna match canon and ledger ground truth with no fabricated quotes or fourth-wall leaks.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "hal-richmond-archive-v2",
+    "packageVersion": "HAL-LEP2-3",
+    "manifestId": "AM-cbafbfe1569a",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "2018",
+          "24",
+          "2042",
+          "9",
+          "2021",
+          "21",
+          "101"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Desmond Morton",
+      "Frank Reyna",
+      "Mike Paulson"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.01,
+  "durationMs": 7217,
+  "parseError": false,
+  "ranAt": "2026-10-29T23:17:57.950Z",
+  "contractScore": {
+    "opened": false,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 800",
+    "words": 897,
+    "short": "The opening paragraph presents the present fact but omits the ground the man came from.",
+    "score": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "2c730ed7b85577de6dec6cef5d15f2162d74483cc736189b0a90a2d5bb020656",
+    "costUsd": 0.0018
+  }
+}

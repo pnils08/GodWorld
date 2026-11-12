@@ -1,0 +1,1381 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "115",
+  "persona": "rachel-torres",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00057",
+      "name": "Sgt. Rachel Torres",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Grand Lake logged the most incidents (8) | 22 neighborhoods on the table — what the table says and who answers for it",
+      "approach": "Public-safety approach: this slice is the crime table for every neighborhood — incidents, response time, clearance — the public-safety staff on the roster, the court record (who was charged, what the court did, what it cost them) and the custody trail from charges to arrests to who is held, hood by hood. Measured, third person, incident structure and classification gaps. The numbers, the officials and the defendants are real; the block, the call, the aftermath are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "public-safety",
+        "hood": "Grand Lake",
+        "facts": [
+          "130 incidents across 22 neighborhoods; most in Grand Lake 8, East Oakland 7, Dimond 7, Laurel 7, Uptown 7; fewest in Piedmont Ave 5, Downtown 5, Adams Point 4",
+          "Grand Lake: 8 incidents (-1 vs C114), response 10.6 min, clearance 21%, property index 38, violent index 27",
+          "Slowest response: Rockridge: 6 incidents (-4 vs C114), response 11.8 min, clearance 19%, property index 39, violent index 24",
+          "Moved this cycle — rising: none; easing: West Oakland, Baylight District",
+          "Citywide custody this cycle: 24 arrests (0 tracked, 24 other residents); 67 in custody at the close; 29 left",
+          "Grand Lake: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+          "San Antonio: 6 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+          "Downtown: 5 charges → 1 arrest → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+          "KONO: 6 charges → 1 arrest → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+          "Rockridge: 6 charges → 1 arrest → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked"
+        ],
+        "priorCycle": "PRIOR_CYCLE_ON_DISK",
+        "note": "desk-signal incident rows attached as pointers (5)",
+        "engineHooks": [
+          "Multiple safety signals detected. Could be coincidence or early pattern. (general coverage)"
+        ],
+        "roomIsYours": "the corner after the call, the dispatcher's pause, who was on the porch, what the neighborhood watch captain saw first",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-safety",
+      "hood": "Grand Lake",
+      "score": null,
+      "src": "output/beats/Crime_Metrics.jsonl @C115",
+      "nearby": [
+        {
+          "text": "Avery Santana (mayor gavel): In response to Decision 1 and Planning Director Vance’s directive, order publication of the C114 closeout and transmit the charter renewal ordinance to the C115 council agenda, preserving sco",
+          "src": "output/civic-voice/mayor_gavel_c115.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): In response to Decision 2, require execution and documentation of the D3 East Oakland briefing with district-level and Fruitvale data this cycle; hold expansion and leave the D5 audit and Bay",
+          "src": "output/civic-voice/mayor_gavel_c115.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): In response to Decision 3, require preliminary schematics delivery and a documented Fruitvale community review this cycle; keep INIT-003 in design-phase until a public comment-and-response re",
+          "src": "output/civic-voice/mayor_gavel_c115.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): In response to Decision 4, conduct and publish the C115 milestone review against the assembled evidence file; do not declare the construction milestone passed without supporting findings. — \"",
+          "src": "output/civic-voice/mayor_gavel_c115.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): In response to Decision 5, require publication of the placement-gap analysis and adjustment plan with explicit West Oakland and Fruitvale reviews; keep implementation active and require follo",
+          "src": "output/civic-voice/mayor_gavel_c115.json"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00136",
+          "name": "Rafael Montez",
+          "profile": "Rafael Montez — Police Chief — Oakland Police Department",
+          "role": "Police Chief",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Crime_Metrics.jsonl @C115",
+            "pop": "POP-00136",
+            "rowName": "Rafael Montez",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00137",
+          "name": "Kimberly Cho",
+          "profile": "Kimberly Cho — DEPUTY CHIEF OF OPERATIONS — Oakland Police Department",
+          "role": "DEPUTY CHIEF OF OPERATIONS",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Crime_Metrics.jsonl @C115",
+            "pop": "POP-00137",
+            "rowName": "Kimberly Cho",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00138",
+          "name": "Leonard Briggs",
+          "profile": "Leonard Briggs — DEPUTY CHIEF OF COMMUNITY ENGAGEMENT — Oakland Police Department",
+          "role": "DEPUTY CHIEF OF COMMUNITY ENGAGEMENT",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Crime_Metrics.jsonl @C115",
+            "pop": "POP-00138",
+            "rowName": "Leonard Briggs",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00139",
+          "name": "Samantha Viteri",
+          "profile": "Samantha Viteri — INTERNAL AFFAIRS DIVISION LEAD — Oakland Police Department",
+          "role": "INTERNAL AFFAIRS DIVISION LEAD",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Crime_Metrics.jsonl @C115",
+            "pop": "POP-00139",
+            "rowName": "Samantha Viteri",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00140",
+          "name": "Marcus Hollowell",
+          "profile": "Marcus Hollowell — FIRE CHIEF — Oakland Fire Department",
+          "role": "FIRE CHIEF",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Crime_Metrics.jsonl @C115",
+            "pop": "POP-00140",
+            "rowName": "Marcus Hollowell",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00141",
+          "name": "Priya Narang",
+          "profile": "Priya Narang — EMS DIRECTOR — Oakland Fire Department",
+          "role": "EMS DIRECTOR",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Crime_Metrics.jsonl @C115",
+            "pop": "POP-00141",
+            "rowName": "Priya Narang",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00241",
+          "name": "Marc Allie",
+          "profile": "Marc Allie — Security guard — Oakland Alternative Response Initiative",
+          "role": "Security guard",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Crime_Metrics.jsonl @C115",
+            "pop": "POP-00241",
+            "rowName": "Marc Allie",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00514",
+          "name": "Vincent Ramirez",
+          "profile": "Vincent Ramirez — OPOA President — Oakland Police Department",
+          "role": "OPOA President",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Crime_Metrics.jsonl @C115",
+            "pop": "POP-00514",
+            "rowName": "Vincent Ramirez",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01021",
+          "name": "Vanessa Tran-Muñoz",
+          "profile": "Vanessa Tran-Muñoz — OARI Program Director — Oakland Alternative Response Initiative",
+          "role": "OARI Program Director",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Crime_Metrics.jsonl @C115",
+            "pop": "POP-01021",
+            "rowName": "Vanessa Tran-Muñoz",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01141",
+          "name": "Dolores Nwachukwu",
+          "profile": "Dolores Nwachukwu — Police Captain — Oakland Police Department",
+          "role": "Police Captain",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Crime_Metrics.jsonl @C115",
+            "pop": "POP-01141",
+            "rowName": "Dolores Nwachukwu",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01142",
+          "name": "Tomas Reinholt",
+          "profile": "Tomas Reinholt — Police Lieutenant — Oakland Police Department",
+          "role": "Police Lieutenant",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Crime_Metrics.jsonl @C115",
+            "pop": "POP-01142",
+            "rowName": "Tomas Reinholt",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01143",
+          "name": "Kendra Lyle-Nnamdi",
+          "profile": "Kendra Lyle-Nnamdi — Police Sergeant — Oakland Police Department",
+          "role": "Police Sergeant",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Crime_Metrics.jsonl @C115",
+            "pop": "POP-01143",
+            "rowName": "Kendra Lyle-Nnamdi",
+            "kind": "slice-row"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C115",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-bc84fc0b7718"
+      },
+      {
+        "t": "FACT",
+        "text": "Grand Lake logged the most incidents (8) | 22 neighborhoods on the table",
+        "src": "output/beats/Crime_Metrics.jsonl @C115",
+        "id": "F-f62536f1ade9"
+      },
+      {
+        "t": "FACT",
+        "text": "Grand Lake leads the incident count; Rockridge waits longest for a response; 67 in custody citywide; 39 public-safety staff on the roster.",
+        "src": "output/beats/Crime_Metrics.jsonl @C115",
+        "id": "F-a10507a60889"
+      },
+      {
+        "t": "FACT",
+        "text": "130 incidents across 22 neighborhoods; most in Grand Lake 8, East Oakland 7, Dimond 7, Laurel 7, Uptown 7; fewest in Piedmont Ave 5, Downtown 5, Adams Point 4",
+        "src": "output/beats/Crime_Metrics.jsonl @C115",
+        "id": "F-cf636f1d5816"
+      },
+      {
+        "t": "FACT",
+        "text": "Grand Lake: 8 incidents (-1 vs C114), response 10.6 min, clearance 21%, property index 38, violent index 27",
+        "src": "output/beats/Crime_Metrics.jsonl @C115",
+        "id": "F-2b009ac87470"
+      },
+      {
+        "t": "FACT",
+        "text": "Slowest response: Rockridge: 6 incidents (-4 vs C114), response 11.8 min, clearance 19%, property index 39, violent index 24",
+        "src": "output/beats/Crime_Metrics.jsonl @C115",
+        "id": "F-f1a1e37683c1"
+      },
+      {
+        "t": "FACT",
+        "text": "Moved this cycle — rising: none; easing: West Oakland, Baylight District",
+        "src": "output/beats/Crime_Metrics.jsonl @C115",
+        "id": "F-384999d1505e"
+      },
+      {
+        "t": "FACT",
+        "text": "Citywide custody this cycle: 24 arrests (0 tracked, 24 other residents); 67 in custody at the close; 29 left",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C115 city",
+        "id": "F-3f98f325f41f"
+      },
+      {
+        "t": "FACT",
+        "text": "Grand Lake: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C115 Grand Lake",
+        "id": "F-db6ec5cb3d89"
+      },
+      {
+        "t": "FACT",
+        "text": "San Antonio: 6 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C115 San Antonio",
+        "id": "F-dac10f83ed81"
+      },
+      {
+        "t": "FACT",
+        "text": "Downtown: 5 charges → 1 arrest → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C115 Downtown",
+        "id": "F-23bd024257a1"
+      },
+      {
+        "t": "FACT",
+        "text": "KONO: 6 charges → 1 arrest → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C115 KONO",
+        "id": "F-87f749456533"
+      },
+      {
+        "t": "FACT",
+        "text": "Rockridge: 6 charges → 1 arrest → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C115 Rockridge",
+        "id": "F-6eaff2f7c1e5"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "offices",
+    "candidates": [
+      {
+        "pop": "POP-00136",
+        "name": "Rafael Montez",
+        "role": "Police Chief",
+        "hood": null,
+        "profile": "Rafael Montez — Police Chief — Oakland Police Department",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C115",
+          "pop": "POP-00136",
+          "rowName": "Rafael Montez",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00137",
+        "name": "Kimberly Cho",
+        "role": "DEPUTY CHIEF OF OPERATIONS",
+        "hood": null,
+        "profile": "Kimberly Cho — DEPUTY CHIEF OF OPERATIONS — Oakland Police Department",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C115",
+          "pop": "POP-00137",
+          "rowName": "Kimberly Cho",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00138",
+        "name": "Leonard Briggs",
+        "role": "DEPUTY CHIEF OF COMMUNITY ENGAGEMENT",
+        "hood": null,
+        "profile": "Leonard Briggs — DEPUTY CHIEF OF COMMUNITY ENGAGEMENT — Oakland Police Department",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C115",
+          "pop": "POP-00138",
+          "rowName": "Leonard Briggs",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00139",
+        "name": "Samantha Viteri",
+        "role": "INTERNAL AFFAIRS DIVISION LEAD",
+        "hood": null,
+        "profile": "Samantha Viteri — INTERNAL AFFAIRS DIVISION LEAD — Oakland Police Department",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C115",
+          "pop": "POP-00139",
+          "rowName": "Samantha Viteri",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00140",
+        "name": "Marcus Hollowell",
+        "role": "FIRE CHIEF",
+        "hood": null,
+        "profile": "Marcus Hollowell — FIRE CHIEF — Oakland Fire Department",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C115",
+          "pop": "POP-00140",
+          "rowName": "Marcus Hollowell",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00141",
+        "name": "Priya Narang",
+        "role": "EMS DIRECTOR",
+        "hood": null,
+        "profile": "Priya Narang — EMS DIRECTOR — Oakland Fire Department",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C115",
+          "pop": "POP-00141",
+          "rowName": "Priya Narang",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00241",
+        "name": "Marc Allie",
+        "role": "Security guard",
+        "hood": null,
+        "profile": "Marc Allie — Security guard — Oakland Alternative Response Initiative",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C115",
+          "pop": "POP-00241",
+          "rowName": "Marc Allie",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00514",
+        "name": "Vincent Ramirez",
+        "role": "OPOA President",
+        "hood": null,
+        "profile": "Vincent Ramirez — OPOA President — Oakland Police Department",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C115",
+          "pop": "POP-00514",
+          "rowName": "Vincent Ramirez",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01021",
+        "name": "Vanessa Tran-Muñoz",
+        "role": "OARI Program Director",
+        "hood": null,
+        "profile": "Vanessa Tran-Muñoz — OARI Program Director — Oakland Alternative Response Initiative",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C115",
+          "pop": "POP-01021",
+          "rowName": "Vanessa Tran-Muñoz",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01141",
+        "name": "Dolores Nwachukwu",
+        "role": "Police Captain",
+        "hood": null,
+        "profile": "Dolores Nwachukwu — Police Captain — Oakland Police Department",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C115",
+          "pop": "POP-01141",
+          "rowName": "Dolores Nwachukwu",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01142",
+        "name": "Tomas Reinholt",
+        "role": "Police Lieutenant",
+        "hood": null,
+        "profile": "Tomas Reinholt — Police Lieutenant — Oakland Police Department",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C115",
+          "pop": "POP-01142",
+          "rowName": "Tomas Reinholt",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01143",
+        "name": "Kendra Lyle-Nnamdi",
+        "role": "Police Sergeant",
+        "hood": null,
+        "profile": "Kendra Lyle-Nnamdi — Police Sergeant — Oakland Police Department",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C115",
+          "pop": "POP-01143",
+          "rowName": "Kendra Lyle-Nnamdi",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01144",
+        "name": "Benjamin Tsai",
+        "role": "Police Sergeant",
+        "hood": null,
+        "profile": "Benjamin Tsai — Police Sergeant — Oakland Police Department",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C115",
+          "pop": "POP-01144",
+          "rowName": "Benjamin Tsai",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01145",
+        "name": "Marisol Ibarra",
+        "role": "Detective",
+        "hood": null,
+        "profile": "Marisol Ibarra — Detective — Oakland Police Department",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C115",
+          "pop": "POP-01145",
+          "rowName": "Marisol Ibarra",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01146",
+        "name": "Devin Castellanos",
+        "role": "Detective",
+        "hood": null,
+        "profile": "Devin Castellanos — Detective — Oakland Police Department",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C115",
+          "pop": "POP-01146",
+          "rowName": "Devin Castellanos",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01147",
+        "name": "Ruth Anyanwu",
+        "role": "Police Officer",
+        "hood": null,
+        "profile": "Ruth Anyanwu — Police Officer — Oakland Police Department",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C115",
+          "pop": "POP-01147",
+          "rowName": "Ruth Anyanwu",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01148",
+        "name": "Jerome Lindqvist",
+        "role": "Police Officer",
+        "hood": null,
+        "profile": "Jerome Lindqvist — Police Officer — Oakland Police Department",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C115",
+          "pop": "POP-01148",
+          "rowName": "Jerome Lindqvist",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01149",
+        "name": "Hana Petrosyan",
+        "role": "Police Officer",
+        "hood": null,
+        "profile": "Hana Petrosyan — Police Officer — Oakland Police Department",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C115",
+          "pop": "POP-01149",
+          "rowName": "Hana Petrosyan",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01150",
+        "name": "Calvin Mokoena",
+        "role": "911 Dispatcher",
+        "hood": null,
+        "profile": "Calvin Mokoena — 911 Dispatcher — Oakland Police Department",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C115",
+          "pop": "POP-01150",
+          "rowName": "Calvin Mokoena",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01151",
+        "name": "Luis Ferreira-Nash",
+        "role": "Deputy Fire Chief",
+        "hood": null,
+        "profile": "Luis Ferreira-Nash — Deputy Fire Chief — Oakland Fire Department",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C115",
+          "pop": "POP-01151",
+          "rowName": "Luis Ferreira-Nash",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01152",
+        "name": "Ingrid Solberg",
+        "role": "Battalion Chief",
+        "hood": null,
+        "profile": "Ingrid Solberg — Battalion Chief — Oakland Fire Department",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C115",
+          "pop": "POP-01152",
+          "rowName": "Ingrid Solberg",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01153",
+        "name": "Omar Haddad",
+        "role": "Fire Captain",
+        "hood": null,
+        "profile": "Omar Haddad — Fire Captain — Oakland Fire Department",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C115",
+          "pop": "POP-01153",
+          "rowName": "Omar Haddad",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01154",
+        "name": "Felicia Grandberry",
+        "role": "Fire Lieutenant",
+        "hood": null,
+        "profile": "Felicia Grandberry — Fire Lieutenant — Oakland Fire Department",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C115",
+          "pop": "POP-01154",
+          "rowName": "Felicia Grandberry",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01155",
+        "name": "Teodoro Villalpando",
+        "role": "Fire Engineer",
+        "hood": null,
+        "profile": "Teodoro Villalpando — Fire Engineer — Oakland Fire Department",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C115",
+          "pop": "POP-01155",
+          "rowName": "Teodoro Villalpando",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01156",
+        "name": "Nadia Rasmussen",
+        "role": "Firefighter",
+        "hood": null,
+        "profile": "Nadia Rasmussen — Firefighter — Oakland Fire Department",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C115",
+          "pop": "POP-01156",
+          "rowName": "Nadia Rasmussen",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01157",
+        "name": "Wesley Oduya",
+        "role": "Firefighter",
+        "hood": null,
+        "profile": "Wesley Oduya — Firefighter — Oakland Fire Department",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C115",
+          "pop": "POP-01157",
+          "rowName": "Wesley Oduya",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01158",
+        "name": "Priscilla Chang",
+        "role": "Firefighter",
+        "hood": null,
+        "profile": "Priscilla Chang — Firefighter — Oakland Fire Department",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C115",
+          "pop": "POP-01158",
+          "rowName": "Priscilla Chang",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01159",
+        "name": "Dmitri Volkov",
+        "role": "Firefighter",
+        "hood": null,
+        "profile": "Dmitri Volkov — Firefighter — Oakland Fire Department",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C115",
+          "pop": "POP-01159",
+          "rowName": "Dmitri Volkov",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01160",
+        "name": "Yolanda Beckford",
+        "role": "Firefighter-Paramedic",
+        "hood": null,
+        "profile": "Yolanda Beckford — Firefighter-Paramedic — Oakland Fire Department",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C115",
+          "pop": "POP-01160",
+          "rowName": "Yolanda Beckford",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01161",
+        "name": "Samuel Adeyemi",
+        "role": "Fire Inspector",
+        "hood": null,
+        "profile": "Samuel Adeyemi — Fire Inspector — Oakland Fire Department",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C115",
+          "pop": "POP-01161",
+          "rowName": "Samuel Adeyemi",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01162",
+        "name": "Grace Oyelaran",
+        "role": "OARI Team Lead",
+        "hood": null,
+        "profile": "Grace Oyelaran — OARI Team Lead — Oakland Alternative Response Initiative",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C115",
+          "pop": "POP-01162",
+          "rowName": "Grace Oyelaran",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01163",
+        "name": "Rashida Coleman-Ortiz",
+        "role": "OARI Team Lead",
+        "hood": null,
+        "profile": "Rashida Coleman-Ortiz — OARI Team Lead — Oakland Alternative Response Initiative",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C115",
+          "pop": "POP-01163",
+          "rowName": "Rashida Coleman-Ortiz",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01164",
+        "name": "Hector Quintanilla",
+        "role": "OARI Team Lead",
+        "hood": null,
+        "profile": "Hector Quintanilla — OARI Team Lead — Oakland Alternative Response Initiative",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C115",
+          "pop": "POP-01164",
+          "rowName": "Hector Quintanilla",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01165",
+        "name": "Imani Delacroix",
+        "role": "Crisis Clinician",
+        "hood": null,
+        "profile": "Imani Delacroix — Crisis Clinician — Oakland Alternative Response Initiative",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C115",
+          "pop": "POP-01165",
+          "rowName": "Imani Delacroix",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01166",
+        "name": "Patrick Asante",
+        "role": "Crisis Clinician",
+        "hood": null,
+        "profile": "Patrick Asante — Crisis Clinician — Oakland Alternative Response Initiative",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C115",
+          "pop": "POP-01166",
+          "rowName": "Patrick Asante",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01167",
+        "name": "Lena Marchetti",
+        "role": "Crisis Clinician",
+        "hood": null,
+        "profile": "Lena Marchetti — Crisis Clinician — Oakland Alternative Response Initiative",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C115",
+          "pop": "POP-01167",
+          "rowName": "Lena Marchetti",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01168",
+        "name": "Tobias Nkemelu",
+        "role": "Peer Responder",
+        "hood": null,
+        "profile": "Tobias Nkemelu — Peer Responder — Oakland Alternative Response Initiative",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C115",
+          "pop": "POP-01168",
+          "rowName": "Tobias Nkemelu",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01169",
+        "name": "Esperanza Ruiz",
+        "role": "Peer Responder",
+        "hood": null,
+        "profile": "Esperanza Ruiz — Peer Responder — Oakland Alternative Response Initiative",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C115",
+          "pop": "POP-01169",
+          "rowName": "Esperanza Ruiz",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01170",
+        "name": "Caleb Thornbury",
+        "role": "Peer Responder",
+        "hood": null,
+        "profile": "Caleb Thornbury — Peer Responder — Oakland Alternative Response Initiative",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C115",
+          "pop": "POP-01170",
+          "rowName": "Caleb Thornbury",
+          "kind": "slice-row"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Sgt. Rachel Torres",
+    "popid": "POP-00057"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-safety",
+      "angle": "Grand Lake logged the most incidents (8) | 22 neighborhoods on the table — what the table says and who answers for it",
+      "label": "Grand Lake logged the most incidents (8) | 22 neighborhoods on the table",
+      "hookLine": "Grand Lake leads the incident count; Rockridge waits longest for a response; 67 in custody citywide; 39 public-safety staff on the roster.",
+      "hood": "Grand Lake",
+      "citizens": [
+        "Rafael Montez (POP-00136)",
+        "Kimberly Cho (POP-00137)",
+        "Leonard Briggs (POP-00138)",
+        "Samantha Viteri (POP-00139)",
+        "Marcus Hollowell (POP-00140)",
+        "Priya Narang (POP-00141)",
+        "Marc Allie (POP-00241)",
+        "Vincent Ramirez (POP-00514)",
+        "Vanessa Tran-Muñoz (POP-01021)",
+        "Dolores Nwachukwu (POP-01141)",
+        "Tomas Reinholt (POP-01142)",
+        "Kendra Lyle-Nnamdi (POP-01143)",
+        "Benjamin Tsai (POP-01144)",
+        "Marisol Ibarra (POP-01145)",
+        "Devin Castellanos (POP-01146)",
+        "Ruth Anyanwu (POP-01147)",
+        "Jerome Lindqvist (POP-01148)",
+        "Hana Petrosyan (POP-01149)",
+        "Calvin Mokoena (POP-01150)",
+        "Luis Ferreira-Nash (POP-01151)",
+        "Ingrid Solberg (POP-01152)",
+        "Omar Haddad (POP-01153)",
+        "Felicia Grandberry (POP-01154)",
+        "Teodoro Villalpando (POP-01155)",
+        "Nadia Rasmussen (POP-01156)",
+        "Wesley Oduya (POP-01157)",
+        "Priscilla Chang (POP-01158)",
+        "Dmitri Volkov (POP-01159)",
+        "Yolanda Beckford (POP-01160)",
+        "Samuel Adeyemi (POP-01161)",
+        "Grace Oyelaran (POP-01162)",
+        "Rashida Coleman-Ortiz (POP-01163)",
+        "Hector Quintanilla (POP-01164)",
+        "Imani Delacroix (POP-01165)",
+        "Patrick Asante (POP-01166)",
+        "Lena Marchetti (POP-01167)",
+        "Tobias Nkemelu (POP-01168)",
+        "Esperanza Ruiz (POP-01169)",
+        "Caleb Thornbury (POP-01170)"
+      ],
+      "popids": [
+        "POP-00136",
+        "POP-00137",
+        "POP-00138",
+        "POP-00139",
+        "POP-00140",
+        "POP-00141",
+        "POP-00241",
+        "POP-00514",
+        "POP-01021",
+        "POP-01141",
+        "POP-01142",
+        "POP-01143",
+        "POP-01144",
+        "POP-01145",
+        "POP-01146",
+        "POP-01147",
+        "POP-01148",
+        "POP-01149",
+        "POP-01150",
+        "POP-01151",
+        "POP-01152",
+        "POP-01153",
+        "POP-01154",
+        "POP-01155",
+        "POP-01156",
+        "POP-01157",
+        "POP-01158",
+        "POP-01159",
+        "POP-01160",
+        "POP-01161",
+        "POP-01162",
+        "POP-01163",
+        "POP-01164",
+        "POP-01165",
+        "POP-01166",
+        "POP-01167",
+        "POP-01168",
+        "POP-01169",
+        "POP-01170"
+      ],
+      "ref": "output/beats/Crime_Metrics.jsonl @C115",
+      "cycle": 115
+    },
+    "approach": "Public-safety approach: this slice is the crime table for every neighborhood — incidents, response time, clearance — the public-safety staff on the roster, the court record (who was charged, what the court did, what it cost them) and the custody trail from charges to arrests to who is held, hood by hood. Measured, third person, incident structure and classification gaps. The numbers, the officials and the defendants are real; the block, the call, the aftermath are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "SAFETY-SLICE-4",
+    "kind": "beat-safety",
+    "seat": {
+      "slug": "rachel-torres",
+      "name": "Sgt. Rachel Torres",
+      "popid": "POP-00057",
+      "desk": "civic",
+      "domain": "public-safety",
+      "builder": "buildSafetySlice.js"
+    },
+    "hood": "Grand Lake",
+    "pulse": {
+      "className": "beat-safety",
+      "score": 100,
+      "label": "Grand Lake logged the most incidents (8) | 22 neighborhoods on the table",
+      "hood": "Grand Lake",
+      "source": "output/beats/Crime_Metrics.jsonl @C115"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "Grand Lake logged the most incidents (8) | 22 neighborhoods on the table — what the table says and who answers for it",
+      "hookLine": "Grand Lake leads the incident count; Rockridge waits longest for a response; 67 in custody citywide; 39 public-safety staff on the roster.",
+      "anchorFacts": [
+        "130 incidents across 22 neighborhoods; most in Grand Lake 8, East Oakland 7, Dimond 7, Laurel 7, Uptown 7; fewest in Piedmont Ave 5, Downtown 5, Adams Point 4",
+        "Grand Lake: 8 incidents (-1 vs C114), response 10.6 min, clearance 21%, property index 38, violent index 27",
+        "Slowest response: Rockridge: 6 incidents (-4 vs C114), response 11.8 min, clearance 19%, property index 39, violent index 24",
+        "Moved this cycle — rising: none; easing: West Oakland, Baylight District",
+        "Citywide custody this cycle: 24 arrests (0 tracked, 24 other residents); 67 in custody at the close; 29 left",
+        "Grand Lake: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "San Antonio: 6 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "Downtown: 5 charges → 1 arrest → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "KONO: 6 charges → 1 arrest → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "Rockridge: 6 charges → 1 arrest → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked"
+      ],
+      "evidence": [
+        {
+          "text": "130 incidents across 22 neighborhoods; most in Grand Lake 8, East Oakland 7, Dimond 7, Laurel 7, Uptown 7; fewest in Piedmont Ave 5, Downtown 5, Adams Point 4",
+          "src": "output/beats/Crime_Metrics.jsonl @C115"
+        },
+        {
+          "text": "Grand Lake: 8 incidents (-1 vs C114), response 10.6 min, clearance 21%, property index 38, violent index 27",
+          "src": "output/beats/Crime_Metrics.jsonl @C115"
+        },
+        {
+          "text": "Slowest response: Rockridge: 6 incidents (-4 vs C114), response 11.8 min, clearance 19%, property index 39, violent index 24",
+          "src": "output/beats/Crime_Metrics.jsonl @C115"
+        },
+        {
+          "text": "Moved this cycle — rising: none; easing: West Oakland, Baylight District",
+          "src": "output/beats/Crime_Metrics.jsonl @C115"
+        },
+        {
+          "text": "Citywide custody this cycle: 24 arrests (0 tracked, 24 other residents); 67 in custody at the close; 29 left",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C115 city"
+        },
+        {
+          "text": "Grand Lake: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C115 Grand Lake"
+        },
+        {
+          "text": "San Antonio: 6 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C115 San Antonio"
+        },
+        {
+          "text": "Downtown: 5 charges → 1 arrest → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C115 Downtown"
+        },
+        {
+          "text": "KONO: 6 charges → 1 arrest → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C115 KONO"
+        },
+        {
+          "text": "Rockridge: 6 charges → 1 arrest → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C115 Rockridge"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": {
+        "state": "PRIOR_CYCLE_ON_DISK",
+        "vs": 114
+      },
+      "hooks": [
+        {
+          "text": "Multiple safety signals detected. Could be coincidence or early pattern.",
+          "angle": "general coverage",
+          "domain": "SAFETY",
+          "hood": null,
+          "priority": 2
+        }
+      ],
+      "note": "desk-signal incident rows attached as pointers (5)",
+      "pageVoices": [],
+      "roomIsYours": "the corner after the call, the dispatcher's pause, who was on the porch, what the neighborhood watch captain saw first"
+    },
+    "citizens": [
+      {
+        "popid": "POP-00136",
+        "name": "Rafael Montez",
+        "role": "Police Chief",
+        "neighborhood": null,
+        "business": "Oakland Police Department",
+        "profile": "Rafael Montez — Police Chief — Oakland Police Department",
+        "why": "works at Oakland Police Department (Employment_Roster)"
+      },
+      {
+        "popid": "POP-00137",
+        "name": "Kimberly Cho",
+        "role": "DEPUTY CHIEF OF OPERATIONS",
+        "neighborhood": null,
+        "business": "Oakland Police Department",
+        "profile": "Kimberly Cho — DEPUTY CHIEF OF OPERATIONS — Oakland Police Department",
+        "why": "works at Oakland Police Department (Employment_Roster)"
+      },
+      {
+        "popid": "POP-00138",
+        "name": "Leonard Briggs",
+        "role": "DEPUTY CHIEF OF COMMUNITY ENGAGEMENT",
+        "neighborhood": null,
+        "business": "Oakland Police Department",
+        "profile": "Leonard Briggs — DEPUTY CHIEF OF COMMUNITY ENGAGEMENT — Oakland Police Department",
+        "why": "works at Oakland Police Department (Employment_Roster)"
+      },
+      {
+        "popid": "POP-00139",
+        "name": "Samantha Viteri",
+        "role": "INTERNAL AFFAIRS DIVISION LEAD",
+        "neighborhood": null,
+        "business": "Oakland Police Department",
+        "profile": "Samantha Viteri — INTERNAL AFFAIRS DIVISION LEAD — Oakland Police Department",
+        "why": "works at Oakland Police Department (Employment_Roster)"
+      },
+      {
+        "popid": "POP-00140",
+        "name": "Marcus Hollowell",
+        "role": "FIRE CHIEF",
+        "neighborhood": null,
+        "business": "Oakland Fire Department",
+        "profile": "Marcus Hollowell — FIRE CHIEF — Oakland Fire Department",
+        "why": "works at Oakland Fire Department (Employment_Roster)"
+      },
+      {
+        "popid": "POP-00141",
+        "name": "Priya Narang",
+        "role": "EMS DIRECTOR",
+        "neighborhood": null,
+        "business": "Oakland Fire Department",
+        "profile": "Priya Narang — EMS DIRECTOR — Oakland Fire Department",
+        "why": "works at Oakland Fire Department (Employment_Roster)"
+      },
+      {
+        "popid": "POP-00241",
+        "name": "Marc Allie",
+        "role": "Security guard",
+        "neighborhood": null,
+        "business": "Oakland Alternative Response Initiative",
+        "profile": "Marc Allie — Security guard — Oakland Alternative Response Initiative",
+        "why": "works at Oakland Alternative Response Initiative (Employment_Roster)"
+      },
+      {
+        "popid": "POP-00514",
+        "name": "Vincent Ramirez",
+        "role": "OPOA President",
+        "neighborhood": null,
+        "business": "Oakland Police Department",
+        "profile": "Vincent Ramirez — OPOA President — Oakland Police Department",
+        "why": "works at Oakland Police Department (Employment_Roster)"
+      },
+      {
+        "popid": "POP-01021",
+        "name": "Vanessa Tran-Muñoz",
+        "role": "OARI Program Director",
+        "neighborhood": null,
+        "business": "Oakland Alternative Response Initiative",
+        "profile": "Vanessa Tran-Muñoz — OARI Program Director — Oakland Alternative Response Initiative",
+        "why": "works at Oakland Alternative Response Initiative (Employment_Roster)"
+      },
+      {
+        "popid": "POP-01141",
+        "name": "Dolores Nwachukwu",
+        "role": "Police Captain",
+        "neighborhood": null,
+        "business": "Oakland Police Department",
+        "profile": "Dolores Nwachukwu — Police Captain — Oakland Police Department",
+        "why": "works at Oakland Police Department (Employment_Roster)"
+      },
+      {
+        "popid": "POP-01142",
+        "name": "Tomas Reinholt",
+        "role": "Police Lieutenant",
+        "neighborhood": null,
+        "business": "Oakland Police Department",
+        "profile": "Tomas Reinholt — Police Lieutenant — Oakland Police Department",
+        "why": "works at Oakland Police Department (Employment_Roster)"
+      },
+      {
+        "popid": "POP-01143",
+        "name": "Kendra Lyle-Nnamdi",
+        "role": "Police Sergeant",
+        "neighborhood": null,
+        "business": "Oakland Police Department",
+        "profile": "Kendra Lyle-Nnamdi — Police Sergeant — Oakland Police Department",
+        "why": "works at Oakland Police Department (Employment_Roster)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Crime_Metrics.jsonl @C115",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Sgt. Rachel Torres this cycle)"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Rachel Torres",
+    "popid": "POP-00057",
+    "text": "The table came in and Grand Lake is at the top again — eight incidents, down one from last cycle, but still the most in the city. I know that neighborhood. I know the corner where the calls stack up and the porch where the watch captain sits. What doesn't line up for me is the clearance rate — 21 percent. We answer the call, we get there in 10.6 minutes, and then what? Four out of five of those incidents don't close. That's not a response problem, that's a follow-through problem. Rockridge is slower on response — 11.8 minutes — and clears even less, 19 percent. So the two neighborhoods where people wait the longest and get the least back are the ones with the money and the ones with the lake",
+    "plan": {
+      "chase": "The table came in and Grand Lake is at the top again — eight incidents, down one from last cycle, but still the most in the city. I know that neighborhood. I know the corner where the calls stack up and the porch where the watch captain sits. What doesn't line up for me is the clearance rate — 21 percent. We answer the call, we get there in 10.6 minutes, and then what? Four out of five of those incidents don't close. That's not a response problem, that's a follow-through problem. Rockridge is slower on response — 11.8 minutes — and clears even less, 19 percent. So the two neighborhoods where people wait the longest and get the least back are the ones with the money and the ones with the lake",
+      "focus": "Grand Lake leads the city in incidents while clearance sits at 21% — what the public-safety command answers for when response times hold but cases don't close.",
+      "why": "The numbers show we get there fast enough but don't finish the work. That gap between response and clearance is where trust goes to die, and Grand Lake is the neighborhood carrying the heaviest load this cycle.",
+      "checks": [
+        "Confirm Grand Lake's 8 incidents and 21% clearance against the cycle table",
+        "Verify Rockridge's 11.8-minute response and 19% clearance as the slowest pair",
+        "Confirm citywide custody numbers: 24 arrests, 67 held at close, 29 released",
+        "Verify Grand Lake's judicial trail: 8 charges, 2 arrests, 4 in custody",
+        "Confirm no neighborhoods rose this cycle; West Oakland and Baylight eased"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00136",
+          "question": "With Grand Lake leading the city at 8 incidents and clearance at 21%, what does the department's case-closure process look like for that neighborhood specifically?",
+          "basis": "Chief Montez is the named head of the police department responsible for citywide clearance performance."
+        },
+        {
+          "pop": "POP-00137",
+          "question": "Response time in Grand Lake is 10.6 minutes but clearance is 21% — where does the operation lose cases between dispatch and close?",
+          "basis": "Deputy Chief of Operations oversees the response and follow-up chain that determines clearance."
+        },
+        {
+          "pop": "POP-01141",
+          "question": "As captain working the districts, what do you attribute Grand Lake's clearance rate to — staffing, evidence, witness cooperation, or something else?",
+          "basis": "Captain Nwachukwu is the named police captain responsible for district-level outcomes."
+        }
+      ],
+      "interpretation": "The city is not getting worse — nothing rose this cycle — but it is not getting better where it matters. Grand Lake holds steady at the top of the incident table while clearing barely a fifth of what comes in. Rockridge waits longer and clears less. The custody numbers tell a quieter story: 24 arrests citywide, 67 still held, 29 already out. In Grand Lake, 8 charges became 2 arrests and 4 people in custody. That is a narrow funnel. The public-safety command has the roster and the structure to ex",
+      "unverifiedLead": [
+        "A neighborhood watch captain on Grand Avenue has been keeping a personal log of calls that never got follow-up visits — the count is not confirmed but the frustration is real.",
+        "A dispatcher mentioned that Grand Lake units are frequently pulled to cover gaps in adjacent districts, which may stretch response-to-clearance time — unconfirmed.",
+        "There is talk among patrol that clearance numbers are understated because some cases close informally without paperwork — unverified."
+      ],
+      "closeQuestion": "If we clear one in five incidents in the neighborhood that needs us most, what are we actually doing for the other four?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Avery Santana (mayor gavel): In response to Decision 1 and Planning Director Vance’s directive, order publication of the C114 closeout and transmit the charter renewal ordinance to the C115 council agenda, preserving sco",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c115.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): In response to Decision 2, require execution and documentation of the D3 East Oakland briefing with district-level and Fruitvale data this cycle; hold expansion and leave the D5 audit and Bay",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c115.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): In response to Decision 3, require preliminary schematics delivery and a documented Fruitvale community review this cycle; keep INIT-003 in design-phase until a public comment-and-response re",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c115.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): In response to Decision 4, conduct and publish the C115 milestone review against the assembled evidence file; do not declare the construction milestone passed without supporting findings. — \"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c115.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): In response to Decision 5, require publication of the placement-gap analysis and adjustment plan with explicit West Oakland and Fruitvale reviews; keep implementation active and require follo",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c115.json",
+      "popids": []
+    }
+  ],
+  "laneEntries": 93,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-10T12:16:08.761Z"
+}

@@ -1,0 +1,441 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00007",
+    "name": "Hal Richmond",
+    "role": "desk reporter",
+    "desk": "sports"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "What the supplied C114 line card establishes, and what history remains unsupplied.",
+    "approach": "Historian approach (Hal Richmond): the Origins of the Dynasty bar — third-person biography, first person at most once; literary, not wire, not bleacher rage. Present fact first (feed-true: StoryAngle, Stats, record), then the ground the man came from. An origin, road, nickname or recorded word may enter only when canon_search or the Packet holds it; otherwise leave it out. Pick 1–2 archive-bag shapes. Numbers plain as the record prints them, not poetry and not scouting grades. End on the closing note in this slice (the line that holds, or the quiet note the class carries). FORBIDDEN: fan \"we\" charge, Anthony salary–value architecture as spine, elegy as the default register, inventing seasons/x-stats, FO bullet strategy, business-desk storefront assignment, multi-voice sports-desk average.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "sports-history",
+      "pulseClass": "era-door",
+      "bagModes": [
+        "6 What He Became",
+        "8 The Archive Entry"
+      ],
+      "historicalAnchor": "era door — living chapter vs the age it closes or extends",
+      "presentFacts": [
+        "Event (feed): A's — player-feature (off-season)",
+        "Cycle: C114"
+      ],
+      "dossierFacts": [
+        "Isley Kelley TrueSource: 2041 REGULAR SEASON G: 136 PA: 605 AB: 563 R: 94 H: 181 2B: 41 3B: 3 HR: 31 RBI: 103 BB: 28 SO: 54 HBP: 6 SF: 8 SAC: 0 GIDP: 6 AVG: 0.321 OBP: 0.355 S | WAR: 7.4 | AWARDS (Career Reference) - MVP (2032, 2034, 2035) - Rookie of the Year (2026) - All-Star",
+        "Darrin Davis TrueSource: 2041 REGULAR SEASON G: 95 PA: 406 AB: 374 R: 62 H: 114 2B: 28 3B: 4 HR: 24 RBI: 73 BB: 22 SO: 42 HBP: 6 SF: 4 SAC: 0 GIDP: 3 AVG: 0.305 OBP: 0.350 SLG | WAR: 3.6 | AWARDS (Career Reference) - MVP (2037, 2040) - Hank Aaron Award (2033, 2037) - Silver Slug",
+        "Danny Horn TrueSource: 2041 REGULAR SEASON G: 148 PA: 671 AB: 621 R: 152 H: 210 2B: 48 3B: 9 HR: 56 RBI: 113 BB: 35 SO: 65 HBP: 11 SF: 4 SAC: 0 GIDP: 3 AVG: 0.338 OBP: 0.382 | WAR: 13.3 | AWARDS (Career Reference) - All-Star (2038, 2039, 2040) - Silver Slugger (2039) - MVP (204"
+      ],
+      "missing": [
+        "Historical people, places, teams, events, seasons, and statistics are unsupplied unless named in the packet",
+        "No invented seasons or franchise history beyond packet + feed",
+        "No x-stats / barrel% / invented OPS+",
+        "Not a business-desk storefront assignment",
+        "Not P Slayer charge; not Anthony board architecture as spine"
+      ],
+      "closingNote": "the line that holds",
+      "priorFiling": "NONE — wall may still inject at wake",
+      "sceneRule": "An unnamed desk or quiet archive transition; literary texture may carry no witnessed event. People, places, teams, seasons, events, and statistics only from the packet. Not a business storefront beat.",
+      "sourcePointers": [
+        "output/world_summary_c114.md ## Sports",
+        "docs/media/HAL_ARCHIVE_BAG.md"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "story-signal",
+    "hood": "Glenview",
+    "src": "world_summary_c114.md ## Sports",
+    "plan": {
+      "focus": "The A's players Isley Kelley, Darrin Davis, and Danny Horn",
+      "closeQuestion": "What are the long-term implications of the A's current roster composition?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [],
+    "sources": [],
+    "excludedLeads": [
+      {
+        "from": "Hal Richmond",
+        "text": "The success of Kelley, Davis, and Horn may influence the A's front office decisions regarding veteran contracts and young talent.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C114",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-4261fa115617"
+    },
+    {
+      "t": "FACT",
+      "text": "A's — player-feature — supplied C114 line card",
+      "src": "world_summary_c114.md ## Sports",
+      "id": "F-da8ccdb1b618"
+    },
+    {
+      "t": "FACT",
+      "text": "Event (feed): A's — player-feature (off-season)",
+      "src": "world_summary_c114.md ## Sports",
+      "id": "F-f14b78daa6ff"
+    },
+    {
+      "t": "FACT",
+      "text": "Cycle: C114",
+      "src": "world_summary_c114.md ## Sports",
+      "id": "F-58fc028fe721"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C10, Spring, holiday=none",
+      "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+      "id": "F-9b9470803821"
+    },
+    {
+      "t": "FACT",
+      "text": "Isley Kelley 2041 ATH: 136 G, 563 AB, 181 H, 31 HR, 103 RBI, 28 BB, 54 SO, 7 SB, AVG .321, OBP .355, SLG .570",
+      "src": "tool:dossier_read:Isley Kelley",
+      "id": "F-c2bb5c5aae7a"
+    },
+    {
+      "t": "FACT",
+      "text": "Isley Kelley 2040 ATH: 145 G, 578 AB, 165 H, 21 HR, 74 RBI, 47 BB, 92 SO, 19 SB, AVG .285, OBP .340, SLG .460",
+      "src": "tool:dossier_read:Isley Kelley",
+      "id": "F-89c48071b1dc"
+    },
+    {
+      "t": "FACT",
+      "text": "Darrin Davis 2041 ATH: 95 G, 374 AB, 114 H, 24 HR, 73 RBI, 22 BB, 42 SO, 26 SB, AVG .305, OBP .350, SLG .594",
+      "src": "tool:dossier_read:Darrin Davis",
+      "id": "F-3b165e63563a"
+    },
+    {
+      "t": "FACT",
+      "text": "Darrin Davis 2040 ATH: 137 G, 546 AB, 160 H, 38 HR, 107 RBI, 42 BB, 84 SO, 28 SB, AVG .293, OBP .347, SLG .575",
+      "src": "tool:dossier_read:Darrin Davis",
+      "id": "F-4054456d5914"
+    },
+    {
+      "t": "FACT",
+      "text": "Danny Horn 2041 ATH: 148 G, 621 AB, 210 H, 56 HR, 113 RBI, 35 BB, 65 SO, 80 SB, AVG .338, OBP .382, SLG .715",
+      "src": "tool:dossier_read:Danny Horn",
+      "id": "F-2e826a7dab33"
+    },
+    {
+      "t": "FACT",
+      "text": "Danny Horn 2040 ATH: 147 G, 607 AB, 170 H, 32 HR, 98 RBI, 67 BB, 121 SO, 35 SB, AVG .280, OBP .355, SLG .524",
+      "src": "tool:dossier_read:Danny Horn",
+      "id": "F-0308df1ef360"
+    },
+    {
+      "t": "FACT",
+      "text": "Danny Horn 2039 ATH: 154 G, 614 AB, 198 H, 43 HR, 103 RBI, 66 BB, 104 SO, 28 SB, AVG .322, OBP .391, SLG .598",
+      "src": "tool:dossier_read:Danny Horn",
+      "id": "F-3a0fd20cd455"
+    },
+    {
+      "t": "FACT",
+      "text": "Danny Horn 2038 ATH: 159 G, 611 AB, 158 H, 29 HR, 92 RBI, 64 BB, 110 SO, 6 SB, AVG .259, OBP .335, SLG .480",
+      "src": "tool:dossier_read:Danny Horn",
+      "id": "F-f2400d413c25"
+    },
+    {
+      "t": "FACT",
+      "text": "Danny Horn 2037 ATH: 159 G, 561 AB, 138 H, 31 HR, 83 RBI, 81 BB, 103 SO, 28 SB, AVG .246, OBP .333, SLG .415",
+      "src": "tool:dossier_read:Danny Horn",
+      "id": "F-f75c94c54cde"
+    },
+    {
+      "t": "FACT",
+      "text": "Danny Horn 2036 ATH: 96 G, 323 AB, 64 H, 12 HR, 26 RBI, 14 BB, 79 SO, 9 SB, AVG .198, OBP .237, SLG .341",
+      "src": "tool:dossier_read:Danny Horn",
+      "id": "F-c2b4d9f09fd2"
+    },
+    {
+      "t": "FACT",
+      "text": "Danny Horn 2035 ATH: 122 G, 428 AB, 91 H, 24 HR, 50 RBI, 45 BB, 105 SO, 11 SB, AVG .214, OBP .300, SLG .408",
+      "src": "tool:dossier_read:Danny Horn",
+      "id": "F-bbdf51cabe49"
+    },
+    {
+      "t": "FACT",
+      "text": "Danny Horn 2034 MIN: 79 G, 297 AB, 81 H, 17 HR, 61 RBI, 47 BB, 91 SO, 11 SB, AVG .192, OBP .272, SLG .372",
+      "src": "tool:dossier_read:Danny Horn",
+      "id": "F-0f1c512a42d8"
+    },
+    {
+      "t": "FACT",
+      "text": "Danny Horn 2033 MIN: 58 G, 199 AB, 33 H, 2 HR, 17 RBI, 60 BB, 5 SO, 0 SB, AVG .166, OBP .252, SLG .236",
+      "src": "tool:dossier_read:Danny Horn",
+      "id": "F-35f83b8211b4"
+    },
+    {
+      "t": "FACT",
+      "text": "Danny Horn 2041 rates (621 AB): one HR every 11.1 AB, one SO every 9.6 AB (worked from the season line)",
+      "src": "tool:dossier_read:Danny Horn",
+      "id": "F-600350c4ddb2"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. No named ledger citizen spoke for this piece (manifest.approvedQuotes is empty): put no words in a named citizen's mouth. Unnamed voices are yours. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "hal-richmond-archive-v2",
+    "canonPolicy": "load-bearing",
+    "purpose": "Put one Packet-backed present fact in the river of the Richmond Archive: where the man came from, the road to Oakland, the name the city gave him, his own recorded words, what he became. The Origins of the Dynasty series is the bar for who Hal is. The archive is read through the tools, never recalled; what it holds is his to cite. Invented current stats and real-world Oakland geography still fail.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "third-person biography in the Richmond Archive register — a place you can smell, sentences that land one at a time, warmth, the nickname as the city's memory; the historian steps in first person at most once",
+      "targetWords": "800-1200 words, bounded by the Packet and what the tools returned",
+      "opening": "one Packet-backed present fact, then the ground the man came from",
+      "closing": "the line that holds — an aphorism the piece has earned, not a summary"
+    },
+    "authorizedTexture": [
+      "the sensory ground of a place the archive names — the fields, the docks, the hometown lights — adding no named person, business or event",
+      "the frame around a recorded quote and the pacing of short lines",
+      "the nickname the archive or the Packet holds, used as the city's memory",
+      "two men the archive puts on the same locker row (the Calm and the Storm) set against the Packet-present line",
+      "warmth and humor in the historian's own voice, first person at most once"
+    ],
+    "textureConditions": [
+      "the present fact, current statistic, living roster name and current event come from the Packet or a tool, printed exactly as returned and named to its source",
+      "origins, nicknames, prior seasons and quotes come from the archive or the dossier through a tool call; a man whose archive returns nothing stays in the present and the piece says less",
+      "a quote is the man's recorded words from the archive, the dossier or the Packet, never composed for him",
+      "numbers land plain as the record holds them — a year as a numeral, a line as the dossier prints it — never stacked like a card",
+      "an unresolved feed subject keeps the supplied label and receives no POPID, biography, role, quote or origin"
+    ],
+    "canonBlockers": [
+      "a real-world Oakland place or landmark imported as if it were this city",
+      "a real-world fact the archive and the Packet do not hold",
+      "an invented current-cycle statistic, season, roster move, injury, contract, result or player line",
+      "a quote, interview or scene composed for a living person",
+      "an origin, hometown, family, nickname or predecessor the archive does not hold for the named man",
+      "an unresolved feed spelling silently given a POPID, biography, role or history",
+      "fan consensus, front-office strategy or analytic grading as the spine"
+    ]
+  },
+  "manifest": {
+    "id": "AM-937ea30b5950",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-4261fa115617",
+        "t": "FACT",
+        "text": "Current cycle: C114",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-da8ccdb1b618",
+        "t": "FACT",
+        "text": "A's — player-feature — supplied C114 line card",
+        "src": "world_summary_c114.md ## Sports"
+      },
+      {
+        "id": "F-f14b78daa6ff",
+        "t": "FACT",
+        "text": "Event (feed): A's — player-feature (off-season)",
+        "src": "world_summary_c114.md ## Sports"
+      },
+      {
+        "id": "F-58fc028fe721",
+        "t": "FACT",
+        "text": "Cycle: C114",
+        "src": "world_summary_c114.md ## Sports"
+      },
+      {
+        "id": "F-9b9470803821",
+        "t": "FACT",
+        "text": "Calendar: Y3C10, Spring, holiday=none",
+        "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)"
+      },
+      {
+        "id": "F-c2bb5c5aae7a",
+        "t": "FACT",
+        "text": "Isley Kelley 2041 ATH: 136 G, 563 AB, 181 H, 31 HR, 103 RBI, 28 BB, 54 SO, 7 SB, AVG .321, OBP .355, SLG .570",
+        "src": "tool:dossier_read:Isley Kelley"
+      },
+      {
+        "id": "F-89c48071b1dc",
+        "t": "FACT",
+        "text": "Isley Kelley 2040 ATH: 145 G, 578 AB, 165 H, 21 HR, 74 RBI, 47 BB, 92 SO, 19 SB, AVG .285, OBP .340, SLG .460",
+        "src": "tool:dossier_read:Isley Kelley"
+      },
+      {
+        "id": "F-3b165e63563a",
+        "t": "FACT",
+        "text": "Darrin Davis 2041 ATH: 95 G, 374 AB, 114 H, 24 HR, 73 RBI, 22 BB, 42 SO, 26 SB, AVG .305, OBP .350, SLG .594",
+        "src": "tool:dossier_read:Darrin Davis"
+      },
+      {
+        "id": "F-4054456d5914",
+        "t": "FACT",
+        "text": "Darrin Davis 2040 ATH: 137 G, 546 AB, 160 H, 38 HR, 107 RBI, 42 BB, 84 SO, 28 SB, AVG .293, OBP .347, SLG .575",
+        "src": "tool:dossier_read:Darrin Davis"
+      },
+      {
+        "id": "F-2e826a7dab33",
+        "t": "FACT",
+        "text": "Danny Horn 2041 ATH: 148 G, 621 AB, 210 H, 56 HR, 113 RBI, 35 BB, 65 SO, 80 SB, AVG .338, OBP .382, SLG .715",
+        "src": "tool:dossier_read:Danny Horn"
+      },
+      {
+        "id": "F-0308df1ef360",
+        "t": "FACT",
+        "text": "Danny Horn 2040 ATH: 147 G, 607 AB, 170 H, 32 HR, 98 RBI, 67 BB, 121 SO, 35 SB, AVG .280, OBP .355, SLG .524",
+        "src": "tool:dossier_read:Danny Horn"
+      },
+      {
+        "id": "F-3a0fd20cd455",
+        "t": "FACT",
+        "text": "Danny Horn 2039 ATH: 154 G, 614 AB, 198 H, 43 HR, 103 RBI, 66 BB, 104 SO, 28 SB, AVG .322, OBP .391, SLG .598",
+        "src": "tool:dossier_read:Danny Horn"
+      },
+      {
+        "id": "F-f2400d413c25",
+        "t": "FACT",
+        "text": "Danny Horn 2038 ATH: 159 G, 611 AB, 158 H, 29 HR, 92 RBI, 64 BB, 110 SO, 6 SB, AVG .259, OBP .335, SLG .480",
+        "src": "tool:dossier_read:Danny Horn"
+      },
+      {
+        "id": "F-f75c94c54cde",
+        "t": "FACT",
+        "text": "Danny Horn 2037 ATH: 159 G, 561 AB, 138 H, 31 HR, 83 RBI, 81 BB, 103 SO, 28 SB, AVG .246, OBP .333, SLG .415",
+        "src": "tool:dossier_read:Danny Horn"
+      },
+      {
+        "id": "F-c2b4d9f09fd2",
+        "t": "FACT",
+        "text": "Danny Horn 2036 ATH: 96 G, 323 AB, 64 H, 12 HR, 26 RBI, 14 BB, 79 SO, 9 SB, AVG .198, OBP .237, SLG .341",
+        "src": "tool:dossier_read:Danny Horn"
+      },
+      {
+        "id": "F-bbdf51cabe49",
+        "t": "FACT",
+        "text": "Danny Horn 2035 ATH: 122 G, 428 AB, 91 H, 24 HR, 50 RBI, 45 BB, 105 SO, 11 SB, AVG .214, OBP .300, SLG .408",
+        "src": "tool:dossier_read:Danny Horn"
+      },
+      {
+        "id": "F-0f1c512a42d8",
+        "t": "FACT",
+        "text": "Danny Horn 2034 MIN: 79 G, 297 AB, 81 H, 17 HR, 61 RBI, 47 BB, 91 SO, 11 SB, AVG .192, OBP .272, SLG .372",
+        "src": "tool:dossier_read:Danny Horn"
+      },
+      {
+        "id": "F-35f83b8211b4",
+        "t": "FACT",
+        "text": "Danny Horn 2033 MIN: 58 G, 199 AB, 33 H, 2 HR, 17 RBI, 60 BB, 5 SO, 0 SB, AVG .166, OBP .252, SLG .236",
+        "src": "tool:dossier_read:Danny Horn"
+      },
+      {
+        "id": "F-600350c4ddb2",
+        "t": "FACT",
+        "text": "Danny Horn 2041 rates (621 AB): one HR every 11.1 AB, one SO every 9.6 AB (worked from the season line)",
+        "src": "tool:dossier_read:Danny Horn"
+      }
+    ],
+    "approvedQuotes": [],
+    "approvedSubjects": [],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Hal Richmond",
+        "text": "The success of Kelley, Davis, and Horn may influence the A's front office decisions regarding veteran contracts and young talent.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "the sensory ground of a place the archive names — the fields, the docks, the hometown lights — adding no named person, business or event",
+      "the frame around a recorded quote and the pacing of short lines",
+      "the nickname the archive or the Packet holds, used as the city's memory",
+      "two men the archive puts on the same locker row (the Calm and the Storm) set against the Packet-present line",
+      "warmth and humor in the historian's own voice, first person at most once"
+    ],
+    "textureConditions": [
+      "the present fact, current statistic, living roster name and current event come from the Packet or a tool, printed exactly as returned and named to its source",
+      "origins, nicknames, prior seasons and quotes come from the archive or the dossier through a tool call; a man whose archive returns nothing stays in the present and the piece says less",
+      "a quote is the man's recorded words from the archive, the dossier or the Packet, never composed for him",
+      "numbers land plain as the record holds them — a year as a numeral, a line as the dossier prints it — never stacked like a card",
+      "an unresolved feed subject keeps the supplied label and receives no POPID, biography, role, quote or origin"
+    ],
+    "forbiddenClaimClasses": [],
+    "toolFacts": [
+      "F-c2bb5c5aae7a",
+      "F-89c48071b1dc",
+      "F-3b165e63563a",
+      "F-4054456d5914",
+      "F-2e826a7dab33",
+      "F-0308df1ef360",
+      "F-3a0fd20cd455",
+      "F-f2400d413c25",
+      "F-f75c94c54cde",
+      "F-c2b4d9f09fd2",
+      "F-bbdf51cabe49",
+      "F-0f1c512a42d8",
+      "F-35f83b8211b4",
+      "F-600350c4ddb2"
+    ]
+  }
+}

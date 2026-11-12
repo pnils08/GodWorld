@@ -1,0 +1,17 @@
+{
+  "initiative": "INIT-009",
+  "initiativeId": "INIT-009",
+  "cycle": 115,
+  "primaryVoice": "Mayor gavel (mayor_gavel-006)",
+  "consolidatedFrom": [
+    "STMT-115-mayor_gavel-006 (Mayor gavel — Grand Lake recorded full-council decision)",
+    "STMT-115-stabilization_fund-002 (Webb — Grand Lake $2.5M to recorded full-council decision with all conditions intact)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-009",
+    "ImplementationPhase": "vote-scheduled",
+    "MilestoneNotes": "C115: Recorded full-council decision scheduled with Chen-Vega milestone and audit conditions intact; no vote outcome claimed.",
+    "NextScheduledAction": "Recorded full-council vote on INIT-009",
+    "NextActionCycle": 115
+  }
+}

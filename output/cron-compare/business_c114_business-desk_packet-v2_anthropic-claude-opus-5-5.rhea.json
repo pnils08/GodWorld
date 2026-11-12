@@ -1,0 +1,106 @@
+{
+  "draft": "output/cron-compare/business_c114_business-desk_packet-v2_anthropic-claude-opus-5-5.md",
+  "cycle": "114",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "57936812c1d170b8421005ecdf757a9ceaeb8a118a0943268d4c113ade9cb024",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All citizen identities, verbatim interview quotes, and economic ledger data fully verified against cycle 114 ground truth.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "jordan-economic-labor-v1",
+    "packageVersion": "JORDAN-LEP2-2",
+    "manifestId": "AM-dd9b30312719",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "000",
+          "8.8",
+          "7.2",
+          "34.1",
+          "85",
+          "76",
+          "135",
+          "6",
+          "4.5",
+          "7th"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Catherine Santos",
+      "Desmond Achebe",
+      "Elias Varek",
+      "Elijah Brown",
+      "Elijah Roberts",
+      "Enzo Walker",
+      "Hazel Reed",
+      "Helena Voss-Adeyemi",
+      "Jordan Velez",
+      "Jude Hess",
+      "Kenton Pearl",
+      "Maeve Pillai",
+      "Marcus Tan",
+      "Maurice Franklin",
+      "Minh Raimon",
+      "Sam Fazio",
+      "Yadira Rao"
+    ],
+    "unverified": [
+      "Business Reporter",
+      "Civis Systems",
+      "Coastline Construction",
+      "Ivy Cleaners",
+      "Ivy Hill Cafe",
+      "Ivy Hill Family Dental",
+      "Ivy Hill Market",
+      "Marine Systems",
+      "Mariner Construction",
+      "Oakmesh Systems",
+      "Stabilization Fund"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0113,
+  "durationMs": 5556,
+  "parseError": false,
+  "ranAt": "2026-11-04T07:39:47.380Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 500",
+    "words": 1033,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "57936812c1d170b8421005ecdf757a9ceaeb8a118a0943268d4c113ade9cb024",
+    "costUsd": 0.0014
+  }
+}

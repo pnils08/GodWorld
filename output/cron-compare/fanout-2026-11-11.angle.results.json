@@ -1,0 +1,119 @@
+{
+  "date": "2026-11-11",
+  "stage": "angle",
+  "results": [
+    {
+      "name": "Jax Caldera",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "angle",
+        "capHits": 0
+      }
+    },
+    {
+      "name": "Noah Tan",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "angle",
+        "capHits": 0
+      },
+      "recoveredAt": "2026-11-11T14:44:58.965Z",
+      "recoveredBy": "engine-sheet rerun after the 06:30-08:15 store hang (builder go 2026-11-11)",
+      "firstAttempt": {
+        "ok": false,
+        "error": "spawnSync node ETIMEDOUT"
+      }
+    },
+    {
+      "name": "Elliot Marbury",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "angle",
+        "capHits": 0
+      },
+      "recoveredAt": "2026-11-11T14:51:19.891Z",
+      "recoveredBy": "engine-sheet rerun after the 06:30-08:15 store hang (builder go 2026-11-11)",
+      "firstAttempt": {
+        "ok": false,
+        "error": "spawnSync node ETIMEDOUT"
+      }
+    },
+    {
+      "name": "P Slayer",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "angle",
+        "capHits": 0
+      },
+      "recoveredAt": "2026-11-11T14:57:27.223Z",
+      "recoveredBy": "engine-sheet rerun after the 06:30-08:15 store hang (builder go 2026-11-11)",
+      "firstAttempt": {
+        "ok": false,
+        "error": "spawnSync node ETIMEDOUT"
+      }
+    },
+    {
+      "name": "Tanya Cruz",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "angle",
+        "capHits": 0
+      }
+    },
+    {
+      "name": "Tamsin Pruitt",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "angle",
+        "capHits": 0
+      },
+      "recoveredAt": "2026-11-11T14:58:36.718Z",
+      "recoveredBy": "engine-sheet rerun after the 06:30-08:15 store hang (builder go 2026-11-11)",
+      "firstAttempt": {
+        "ok": false,
+        "error": "spawnSync node ETIMEDOUT"
+      }
+    },
+    {
+      "name": "Ines Sorensen",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "angle",
+        "capHits": 0
+      },
+      "recoveredAt": "2026-11-11T15:00:18.550Z",
+      "recoveredBy": "engine-sheet rerun after the 06:30-08:15 store hang (builder go 2026-11-11)",
+      "firstAttempt": {
+        "ok": false,
+        "error": "spawnSync node ETIMEDOUT"
+      }
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": true,
+      "checks": {
+        "stage": "angle",
+        "capHits": 0
+      }
+    }
+  ],
+  "checkTotals": {
+    "capHits": 0
+  },
+  "ranAt": "2026-11-11T14:14:51.130Z",
+  "recovered": [
+    "Elliot Marbury",
+    "Ines Sorensen",
+    "Noah Tan",
+    "P Slayer",
+    "Tamsin Pruitt"
+  ]
+}

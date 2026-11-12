@@ -1,0 +1,26 @@
+{
+  "initiative": "INIT-002",
+  "initiativeId": "INIT-002",
+  "cycle": 112,
+  "primaryVoice": "Mayor gavel (mayor_gavel-002)",
+  "consolidatedFrom": [
+    "STMT-112-council_d5-001 (Rivers D5 — OARI quarterly dispatch performance — D5 audit filed)",
+    "STMT-112-mayor_gavel-002 (Mayor gavel — Oakland Alternative Response Initiative Quarterly Outcome Report)",
+    "STMT-112-oari-001 (Tran-Muñoz — Quarterly Outcome Report — district-level accountability)",
+    "STMT-112-oari-002 (Tran-Muñoz — East Oakland and District 1 expansion confirmation)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-002",
+    "ImplementationPhase": "dispatch-live",
+    "MilestoneNotes": "C112: Quarterly report accepted; D3 condition added for district-level data breakdown and community briefing before expansion",
+    "NextScheduledAction": "District-level data report and D3 community briefing",
+    "NextActionCycle": 113,
+    "LastWorkCycle": 112,
+    "LastWorkSeat": "proj-oari"
+  },
+  "_moveFold": {
+    "moveIds": [
+      "MV-111-proj-oari-2026-10-14"
+    ]
+  }
+}

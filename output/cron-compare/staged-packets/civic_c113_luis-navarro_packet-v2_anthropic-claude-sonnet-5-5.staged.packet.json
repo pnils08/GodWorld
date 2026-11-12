@@ -1,0 +1,341 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00636",
+    "name": "Luis Navarro",
+    "role": "desk reporter",
+    "desk": "civic"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The tracker line is the weather, never the lede.",
+    "assignment": "Baylight District — Final Council Vote stalled in construction-active",
+    "approach": "Investigation approach: distinguish what the supplied record establishes from what it does not. Follow the unresolved gap fairly; no invented response, silence, or accusation.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "civic-investigation",
+      "method": "KNOWN_UNKNOWN",
+      "missing": [
+        "documented response or documented non-response",
+        "request timestamp and elapsed silence duration",
+        "responsible person, office, or duty unless named by the source"
+      ],
+      "reportingEvidence": {
+        "recordChecks": {
+          "state": "NOT_SUPPLIED",
+          "events": []
+        },
+        "requestEvents": {
+          "state": "NOT_SUPPLIED",
+          "events": []
+        },
+        "responseEvents": {
+          "state": "NOT_SUPPLIED",
+          "events": []
+        },
+        "responsibleEntities": {
+          "state": "NOT_SUPPLIED",
+          "entities": []
+        }
+      },
+      "silenceClock": {
+        "state": "UNESTABLISHED",
+        "value": null,
+        "src": null
+      },
+      "forbidden": [
+        "Do not add officials, votes, budgets, outcomes, measurements, quotes, responses, or affected people absent from the supplied entries."
+      ]
+    },
+    "writingMode": "RECORDS_BRIEF",
+    "runningStoriesNote": "signal.runningStories are events the city is already living through and where each one stands. Background only — write nothing about tracking them."
+  },
+  "signal": {
+    "kind": "anomaly",
+    "hood": "Downtown",
+    "src": "output/engine_audit_c113.json patterns[0]; evidence: Neighborhood_Map row(s) 2",
+    "plan": {
+      "focus": "Baylight District — Final Council Vote stalled in construction-active",
+      "closeQuestion": "What is still unfinished for the people living this?"
+    },
+    "runningStories": [
+      "West Oakland Stabilization Fund — disbursement-active [West Oakland] — week 5",
+      "Oakland Alternative Response Initiative — dispatch-live [West Oakland, Fruitvale, East Oakland] — week 5",
+      "Fruitvale Transit Hub Phase II — Visioning — design-phase [Fruitvale] — week 5",
+      "Temescal Community Health Center — operational [Temescal] — week 5",
+      "Baylight District — Final Council Vote — construction-active [Jack London, Downtown] — week 5",
+      "Oakland Youth Apprenticeship Pipeline — implementation-active [West Oakland, East Oakland, Fruitvale] — week 2",
+      "Downtown Economic Revitalization — legislation-filed [Downtown] — week 3",
+      "Commercial Stabilization for Grand Lake — legislation-filed [Grand Lake] — week 2",
+      "West Oakland Tenant Defense Fund — operational [West Oakland] — under way",
+      "Ivy Hill Revitalization Initiative — announced [Ivy Hill] — week 2",
+      "Dimond Revitalization Initiative — announced [Dimond] — under way",
+      "West Oakland Tenant Defense Fund — vote-scheduled [West Oakland] — ENDED this week after 2 week(s); now operational"
+    ]
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00790",
+        "name": "Marcus Webb",
+        "profile": "Marcus Webb — OEWD Program Director — Downtown resident",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00502",
+        "name": "Leonard Tran",
+        "profile": "Leonard Tran — civic office holder",
+        "quotationEligible": true,
+        "src": "output/civic-voice/council_d2_c113.json"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00790-bde15b857e",
+        "pop": "POP-00790",
+        "name": "Marcus Webb",
+        "quote": "Three cycles is a long time for something this big to sit in the same spot. For me, the accountability part is that the Baylight District is supposed to be the project that ties the neighborhood together — jobs, housing, the works — and when it stalls, I feel it in the applications on my desk. People are waiting on decisions that ripple out from that one vote. So what I want? I want the council to finish the job. Not another study, not another workshop — a final vote. And I want to know that when it happens, the construction pace we've already started doesn't just keep spinning its wheels. That's what I'm watching for.",
+        "factIds": [
+          "F-580c516e986b",
+          "F-cad49c78c10a"
+        ],
+        "src": "packet.W2[POP-00790]"
+      },
+      {
+        "id": "Q-OFFICE-00259a41b62f",
+        "pop": "POP-00502",
+        "name": "Leonard Tran",
+        "quote": "The progress in Baylight District remediation is a crucial step forward.",
+        "factIds": [],
+        "src": "output/civic-voice/council_d2_c113.json#STMT-113-council_d2-003",
+        "sourceKind": "office-record",
+        "officeRecord": {
+          "sourceKind": "office-record",
+          "cycle": 113,
+          "officeSlug": "council_d2",
+          "statementId": "STMT-113-council_d2-003",
+          "quote": "The progress in Baylight District remediation is a crucial step forward.",
+          "topic": "Baylight District Remediation",
+          "initiativeId": "INIT-006",
+          "filePath": "output/civic-voice/council_d2_c113.json",
+          "holderPopid": "POP-00502",
+          "speakerName": "Leonard Tran"
+        }
+      }
+    ],
+    "excludedLeads": []
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C113",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-876f95b5eb98"
+    },
+    {
+      "t": "FACT",
+      "text": "Baylight District — Final Council Vote stalled in construction-active",
+      "src": "output/engine_audit_c113.json patterns[0]; evidence: Neighborhood_Map row(s) 2",
+      "id": "F-580c516e986b"
+    },
+    {
+      "t": "FACT",
+      "text": "The civic initiative carrying Downtown has not advanced in 3 cycles.",
+      "src": "output/engine_audit_c113.json patterns[0]; evidence: Neighborhood_Map row(s) 2",
+      "id": "F-cad49c78c10a"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C9, Winter, holiday=none",
+      "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+      "id": "F-ab9d6786094e"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. For this investigation: do not invent official acts, requests, responses, files, duties, or offices for a named office or named citizen, and claim no reporting act (asked, requested, obtained, tracked) the record does not show. Attribute each approved quote exactly. Missing evidence stays unknown — never rewritten as \"X did not happen,\" \"no one did X,\" or \"the absence proves X.\" Write 400-700 words as this reporter living the known condition. Do not print engine classifier names, severity labels, source row numbers, or a silence-clock section."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "luis-investigation-record-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Separate what the Packet establishes from what remains open, pursue the accountable record fairly, and make a documented contradiction or documented silence visible without inventing either.",
+    "articleContract": {
+      "voice": "evidence-first; concise records brief without reporting events, full investigation only with a Packet-backed reporting trail",
+      "targetWords": "400-700",
+      "opening": "a named person or Packet-named place living the condition",
+      "closing": "one unfinished human question, not a request for more record"
+    },
+    "authorizedTexture": [
+      "a concise known-versus-unknown structure over Packet-backed facts and declared missing fields",
+      "fair pressure framed as a question, interpretation, or explicit request for a record",
+      "short transitions between supplied facts that add no event, response, duration, source, or accusation"
+    ],
+    "textureConditions": [
+      "every named person, office, institution, Project, Initiative, business, organization, quote, response, request, and document must come from the Packet",
+      "a silence clock requires a Packet-backed request or response event and a supplied duration or Cycle span; otherwise its state is unestablished",
+      "decline-to-comment, no-response, refusal, contradiction, and responsible-office claims must each have a supplied source",
+      "an open question must remain a question and must not imply criminality, misconduct, duty, motive, or official knowledge absent from the Packet"
+    ],
+    "canonBlockers": [
+      "an invented records request, interview attempt, response, refusal, decline-to-comment, document, source, or silence duration",
+      "an unsupported contradiction, official duty, responsible office, act, inaction, promise, decision, motive, accusation, or finding",
+      "a named person, office, institution, Project, Initiative, business, or organization not found in the supplied record",
+      "a number, date, duration, budget, metric, count, vote, or timeline that contradicts or lacks the supplied record",
+      "Jax-style theatrical heat that turns an unestablished lead into a settled factual claim"
+    ]
+  },
+  "manifest": {
+    "id": "AM-71e32f0033bf",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-876f95b5eb98",
+        "t": "FACT",
+        "text": "Current cycle: C113",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-580c516e986b",
+        "t": "FACT",
+        "text": "Baylight District — Final Council Vote stalled in construction-active",
+        "src": "output/engine_audit_c113.json patterns[0]; evidence: Neighborhood_Map row(s) 2"
+      },
+      {
+        "id": "F-cad49c78c10a",
+        "t": "FACT",
+        "text": "The civic initiative carrying Downtown has not advanced in 3 cycles.",
+        "src": "output/engine_audit_c113.json patterns[0]; evidence: Neighborhood_Map row(s) 2"
+      },
+      {
+        "id": "F-ab9d6786094e",
+        "t": "FACT",
+        "text": "Calendar: Y3C9, Winter, holiday=none",
+        "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00790-bde15b857e",
+        "speakerId": "POP-00790",
+        "speakerName": "Marcus Webb",
+        "text": "Three cycles is a long time for something this big to sit in the same spot. For me, the accountability part is that the Baylight District is supposed to be the project that ties the neighborhood together — jobs, housing, the works — and when it stalls, I feel it in the applications on my desk. People are waiting on decisions that ripple out from that one vote. So what I want? I want the council to finish the job. Not another study, not another workshop — a final vote. And I want to know that when it happens, the construction pace we've already started doesn't just keep spinning its wheels. That's what I'm watching for.",
+        "factIds": [
+          "F-580c516e986b",
+          "F-cad49c78c10a"
+        ],
+        "src": "packet.W2[POP-00790]"
+      },
+      {
+        "id": "Q-OFFICE-00259a41b62f",
+        "speakerId": "POP-00502",
+        "speakerName": "Leonard Tran",
+        "text": "The progress in Baylight District remediation is a crucial step forward.",
+        "factIds": [],
+        "sourceKind": "office-record",
+        "officeRecord": {
+          "sourceKind": "office-record",
+          "cycle": 113,
+          "officeSlug": "council_d2",
+          "statementId": "STMT-113-council_d2-003",
+          "quote": "The progress in Baylight District remediation is a crucial step forward.",
+          "topic": "Baylight District Remediation",
+          "initiativeId": "INIT-006",
+          "filePath": "output/civic-voice/council_d2_c113.json",
+          "holderPopid": "POP-00502",
+          "speakerName": "Leonard Tran"
+        },
+        "src": "output/civic-voice/council_d2_c113.json#STMT-113-council_d2-003"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00790",
+        "name": "Marcus Webb",
+        "profile": "Marcus Webb — OEWD Program Director — Downtown resident",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00502",
+        "name": "Leonard Tran",
+        "profile": "Leonard Tran — civic office holder",
+        "src": "output/civic-voice/council_d2_c113.json",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      },
+      {
+        "id": "P_KNOWN_UNKNOWN",
+        "rule": "Contrast approved facts with creativeBrief.missing only; do not narrate a missing item as an event that occurred."
+      }
+    ],
+    "unverifiedLeads": [],
+    "authorizedTexture": [
+      "a concise known-versus-unknown structure over Packet-backed facts and declared missing fields",
+      "fair pressure framed as a question, interpretation, or explicit request for a record",
+      "short transitions between supplied facts that add no event, response, duration, source, or accusation"
+    ],
+    "textureConditions": [
+      "every named person, office, institution, Project, Initiative, business, organization, quote, response, request, and document must come from the Packet",
+      "a silence clock requires a Packet-backed request or response event and a supplied duration or Cycle span; otherwise its state is unestablished",
+      "decline-to-comment, no-response, refusal, contradiction, and responsible-office claims must each have a supplied source",
+      "an open question must remain a question and must not imply criminality, misconduct, duty, motive, or official knowledge absent from the Packet"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

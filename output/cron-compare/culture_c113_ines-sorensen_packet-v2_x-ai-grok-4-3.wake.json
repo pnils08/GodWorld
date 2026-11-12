@@ -1,0 +1,56 @@
+{
+  "mode": "wake-write",
+  "desk": "culture",
+  "cycle": "113",
+  "provider": "openrouter",
+  "model": "x-ai/grok-4.3",
+  "configuredWriterModel": "x-ai/grok-4.3",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "ines-sorensen",
+  "byline": {
+    "name": "Ines Sorensen",
+    "popid": "POP-01211",
+    "beatDomain": "COMMUNITY"
+  },
+  "laneEntries": 23,
+  "quotesLanded": 3,
+  "disposition": "staged",
+  "rheaPass": null,
+  "rheaFlagCount": null,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [],
+  "toolCalls": 0,
+  "wordCount": 211,
+  "targetWords": "300-600",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": false,
+    "purposeMet": true,
+    "inTarget": false,
+    "inTargetBy": "code floor 300",
+    "words": 211,
+    "short": "The piece fell short of the 300-word minimum and ended on an attribution frame rather than leaving the last person's words standing.",
+    "score": 2,
+    "model": "google/gemini-3.7-flash",
+    "scoredWithoutRhea": true,
+    "draftSha256": "554dc40732fb21a950636f40ad2cb6b27d9182256b818e68228d8749a9925417"
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 2/4 — The piece fell short of the 300-word minimum and ended on an attribution frame rather than leaving the last person's words standing."
+  },
+  "article": "output/cron-compare/staged/culture_c113_ines-sorensen_packet-v2_x-ai-grok-4-3.staged-2321.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "nv' }\n{\n  \"popId\": \"POP-01211\",\n  \"name\": \"Ines Sorensen\",\n  \"recorded\": true,\n  \"text\": \"filed: The A's success is all anyone can talk about around here. I mean, I'm a huge fan, and my husband Dea\"\n}"
+  },
+  "ranAt": "2026-10-30T23:21:00.789Z"
+}

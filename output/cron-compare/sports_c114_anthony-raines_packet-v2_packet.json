@@ -1,0 +1,47 @@
+{
+  "stage": "report",
+  "desk": "sports",
+  "cycle": "114",
+  "persona": "anthony-raines",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Anthony Raines",
+    "popid": "POP-00017"
+  },
+  "assignment": {
+    "story": {
+      "kind": "sports-analytics",
+      "angle": "The season line (6.2WAR) has to carry the claim before the narrative does: The bargain core: is it time to extend Coles, Ellis, Quintero and Gonzalez?",
+      "label": "A's · front-office — The bargain core: is it time to extend Coles, Ellis, Quintero and Gonzalez?",
+      "hookLine": "The bargain core: is it time to extend Coles, Ellis, Quintero and Gonzalez?",
+      "hood": "Jack London",
+      "pulseClass": "award-board",
+      "team": "A's",
+      "eventKind": "front-office",
+      "citizens": [
+        "Travis Coles (POP-00533)",
+        "John Ellis (POP-00033)",
+        "Ernesto Quintero (POP-00050)",
+        "Vladimir Gonzalez (POP-00598)",
+        "Mike Paulson (POP-00527)"
+      ],
+      "popids": [
+        "POP-00533",
+        "POP-00033",
+        "POP-00050",
+        "POP-00598",
+        "POP-00527"
+      ],
+      "ref": "world_summary_c114.md ## Sports",
+      "cycle": 114
+    }
+  },
+  "angle": "output/cron-compare/sports_c114_anthony-raines_packet-v2_angle.json",
+  "quotesRequested": 0,
+  "quotesLanded": 0,
+  "quotes": [],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [],
+  "ranAt": "2026-11-02T19:17:30.986Z"
+}

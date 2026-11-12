@@ -1,0 +1,1064 @@
+{
+  "stage": "report",
+  "desk": "sports",
+  "cycle": "114",
+  "persona": "talia-finch",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Talia Finch",
+    "popid": "POP-00592"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-oaks-ground",
+      "angle": "Oaks ground read C114 — excited — the people around the second club",
+      "label": "Oaks ground read C114 — excited",
+      "hookLine": "excited",
+      "hood": "KONO",
+      "citizens": [
+        "Dillon Brooks (POP-01079)",
+        "Adash Stanley (POP-01023)",
+        "Trevor Henderson (POP-01224)",
+        "Harry Hayward (POP-01223)",
+        "Austin Reaves (POP-01027)"
+      ],
+      "popids": [
+        "POP-01079",
+        "POP-01023",
+        "POP-01224",
+        "POP-01223",
+        "POP-01027"
+      ],
+      "ref": "output/beats/Oakland_Sports_Feed.jsonl @C114",
+      "cycle": 114
+    }
+  },
+  "angle": "output/test-shell/20261111-012823-talia-finch-live/sports_c114_talia-finch_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 3,
+  "quotes": [
+    {
+      "pop": "POP-01023",
+      "name": "Adash Stanley",
+      "quote": "The mood among fans is electric. I've felt the excitement building around the Oaks, it's like the whole city is waking up with the team. There's a buzz in the air, and I think people are really looking forward to seeing what they can do this season.",
+      "disp": "steady, hard to shake; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"The mood among fans is electric. I've felt the excitement building around the Oaks, it's like the whole city is waking up with the team. There's a buzz in the air, and I think people are really looking forward to seeing what they can do this season.\",\n  \"fact_ids\": [\"F-c9046150dcee\", \"F-3b64a0b09383\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c9046150dcee",
+          "F-3b64a0b09383"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01023-b969f7bc5a",
+        "authoredQuote": true,
+        "publishableQuote": "The mood among fans is electric. I've felt the excitement building around the Oaks, it's like the whole city is waking up with the team. There's a buzz in the air, and I think people are really looking forward to seeing what they can do this season."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01023",
+          "name": "Adash Stanley",
+          "role": "PG / The Oaks",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Talia Finch",
+          "question": "What's the mood like among fans after the Oaks' win against OKC? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-oaks-ground",
+          "hood": "KONO",
+          "focus": "Oaks fans and their reaction to the team's recent performance",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C114"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Adash Stanley — PG / The Oaks — Downtown",
+          "evidence": [
+            {
+              "id": "EV-35746faea4",
+              "src": "output/beats/Oakland_Sports_Feed.jsonl @C114",
+              "text": "excited"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Notebook (feed): After the perfect start ended in Indiana, the Oaks went to Toronto and answered with the most lopsided win in franchise history, Oaks 135 - Raptors 75, in front of a 95% crowd. The Oaks led 39-19 after one, 73-40 at the half and 101-62 after three, and nobody played more than 28 minutes. Austin Reaves led with 20 on 4 of 6 from three, T. Jerome had 19 points, 7 rebounds and 7 assists, and Adash Stanley went 4 for 4 from three for 16 with 7 rebounds and 6 assists. Wendell Carter",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+            "id": "F-376707c1ea63"
+          },
+          {
+            "t": "FACT",
+            "text": "Notebook (feed): The Oaks' perfect start ends at four. In Indiana, in front of a building at 90% capacity, the Pacers built a 61-42 halftime lead behind a 34-point second quarter and led 82-62 after three. The Oaks answered with 38 points in the fourth and won the quarter 38-22, but the comeback came up four short, Pacers 104 - Oaks 100. Adash Stanley and Austin Reaves led the way with 19 apiece. Stanley hit 5 of 11 from three, and Reaves had 7 assists and 6 rebounds without a turnover. AJ Dyban",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+            "id": "F-9540a78a8b78"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks ground read C114 — excited",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C114",
+            "id": "F-c9046150dcee"
+          },
+          {
+            "t": "FACT",
+            "text": "excited",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C114",
+            "id": "F-5153191d9f71"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks fans, C114: excited",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+            "id": "F-3b64a0b09383"
+          },
+          {
+            "t": "FACT",
+            "text": "Room mood, C114: locked-in",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+            "id": "F-cb95b554775e"
+          },
+          {
+            "t": "FACT",
+            "text": "Notebook (feed): The Oaks opened their first NBA Cup run at home in front of a sold-out crowd and held off the Oklahoma City Thunder, 101-95, behind Dillon Brooks' biggest scoring night as an Oak. The Oaks led after every quarter but never by much: 35-30 after one, 63-60 at the half and 78-74 after a 15-14 third. Brooks played 39 minutes and scored 22 on 8 of 15, hitting 6 of 9 from three, with 4 rebounds, 5 assists, 2 steals, a block and one turnover. In a game this close, his threes kept Oklah",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+            "id": "F-765fbf574097"
+          },
+          {
+            "t": "FACT",
+            "text": "Adash Stanley — PG / The Oaks — Downtown",
+            "src": "Simulation_Ledger profile for POP-01023",
+            "id": "F-26cdcab1a2d4"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00273",
+      "name": "Trenton Nawan",
+      "quote": "I'm still feeling pretty good about the Oaks. That 4-0 start has really got me hopeful. I checked the scores twice a day all week and was happy every time they won. Maybe they're finally getting their act together.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; steady, hard to shake; close to family; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I'm still feeling pretty good about the Oaks. That 4-0 start has really got me hopeful. I checked the scores twice a day all week and was happy every time they won. Maybe they're finally getting their act together.\",\n  \"fact_ids\": [\"F-ca7af5743a0e\", \"F-89e10834b5eb\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-ca7af5743a0e",
+          "F-89e10834b5eb"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00273-71fd9027ed",
+        "authoredQuote": true,
+        "publishableQuote": "I'm still feeling pretty good about the Oaks. That 4-0 start has really got me hopeful. I checked the scores twice a day all week and was happy every time they won. Maybe they're finally getting their act together."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00273",
+          "name": "Trenton Nawan",
+          "role": "Server",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Talia Finch",
+          "question": "Your own page at C113 says: \"I'm still a bit worried about the Oaks, but their 4-0 start is really giving me hope\". Is that still how you see Oaks? Speak only from that and your own reaction."
+        },
+        "signal": {
+          "kind": "beat-oaks-ground",
+          "hood": "KONO",
+          "focus": "Oaks fans and their reaction to the team's recent performance",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C114"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Trenton Nawan — Server",
+          "evidence": [
+            {
+              "id": "EV-PAGE-27edcd0c34",
+              "src": "cp-POP-00273-c113-PRESS",
+              "text": "I'm still a bit worried about the Oaks, but their 4-0 start is really giving me hope."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "INTERPRETATION",
+            "text": "I'm still a bit worried about the Oaks, but their 4-0 start is really giving me hope.",
+            "src": "cp-POP-00273-c113-PRESS",
+            "id": "F-ca7af5743a0e"
+          },
+          {
+            "t": "FACT",
+            "text": "Trenton Nawan — Server",
+            "src": "Simulation_Ledger profile for POP-00273",
+            "id": "F-89e10834b5eb"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01224",
+      "name": "Trevor Henderson",
+      "quote": "I've seen the energy around the Oaks lately, and it's electric. The crowd was locked-in during the NBA Cup opener against OKC, and you could feel the excitement. As a player, it's motivating to see the fans so engaged. We're on a two-game win streak, and the vibe is great.",
+      "disp": "driven, hard to sit still",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen the energy around the Oaks lately, and it's electric. The crowd was locked-in during the NBA Cup opener against OKC, and you could feel the excitement. As a player, it's motivating to see the fans so engaged. We're on a two-game win streak, and the vibe is great.\",\n  \"fact_ids\": [\"F-c9046150dcee\", \"F-5153191d9f71\", \"F-cb95b554775e\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c9046150dcee",
+          "F-5153191d9f71",
+          "F-cb95b554775e"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01224-156858f4a0",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen the energy around the Oaks lately, and it's electric. The crowd was locked-in during the NBA Cup opener against OKC, and you could feel the excitement. As a player, it's motivating to see the fans so engaged. We're on a two-game win streak, and the vibe is great."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01224",
+          "name": "Trevor Henderson",
+          "role": "Oakland Oaks - Center",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Talia Finch",
+          "question": "What have you seen, felt, or understood about \"Oaks fans and their reaction to the team's recent performance\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-oaks-ground",
+          "hood": "KONO",
+          "focus": "Oaks fans and their reaction to the team's recent performance",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C114"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Trevor Henderson — Oakland Oaks - Center — Lake Merritt",
+          "evidence": [
+            {
+              "id": "EV-a0595be89a",
+              "src": "output/beats/Oakland_Sports_Feed.jsonl @C114",
+              "text": "excited"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks ground read C114 — excited",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C114",
+            "id": "F-c9046150dcee"
+          },
+          {
+            "t": "FACT",
+            "text": "excited",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C114",
+            "id": "F-5153191d9f71"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks fans, C114: excited",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+            "id": "F-3b64a0b09383"
+          },
+          {
+            "t": "FACT",
+            "text": "Room mood, C114: locked-in",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+            "id": "F-cb95b554775e"
+          },
+          {
+            "t": "FACT",
+            "text": "Notebook (feed): The Oaks opened their first NBA Cup run at home in front of a sold-out crowd and held off the Oklahoma City Thunder, 101-95, behind Dillon Brooks' biggest scoring night as an Oak. The Oaks led after every quarter but never by much: 35-30 after one, 63-60 at the half and 78-74 after a 15-14 third. Brooks played 39 minutes and scored 22 on 8 of 15, hitting 6 of 9 from three, with 4 rebounds, 5 assists, 2 steals, a block and one turnover. In a game this close, his threes kept Oklah",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+            "id": "F-765fbf574097"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks — game-result (early-season), C114: Dillon Brooks' six threes carry the Oaks past OKC in the Cup opener. Oaks 101 - Thunder 95",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+            "id": "F-ba445558ac70"
+          },
+          {
+            "t": "FACT",
+            "text": "Context: record 6-1 · streak W2",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+            "id": "F-da2293861bb6"
+          },
+          {
+            "t": "FACT",
+            "text": "Trevor Henderson — Oakland Oaks - Center — Lake Merritt",
+            "src": "Simulation_Ledger profile for POP-01224",
+            "id": "F-a24d067ddef7"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-01079",
+      "name": null,
+      "quote": null,
+      "disp": null,
+      "recorded": false,
+      "fallback": "call-failed: Quota exceeded for quota metric 'Read requests' and limit 'Read requests per minute per user' of service 'sheets.googleapis.com' for consumer 'project_number:559534329568'.",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01079",
+          "name": "Dillon Brooks",
+          "role": "SF / The Oaks",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Talia Finch",
+          "question": "How are fans reacting to Dillon Brooks' recent performance? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-oaks-ground",
+          "hood": "KONO",
+          "focus": "Oaks fans and their reaction to the team's recent performance",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C114"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Dillon Brooks — SF / The Oaks — West Oakland",
+          "evidence": [
+            {
+              "id": "EV-d9ab71cac1",
+              "src": "output/beats/Oakland_Sports_Feed.jsonl @C114",
+              "text": "excited"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Notebook (feed): The Oaks opened their first NBA Cup run at home in front of a sold-out crowd and held off the Oklahoma City Thunder, 101-95, behind Dillon Brooks' biggest scoring night as an Oak. The Oaks led after every quarter but never by much: 35-30 after one, 63-60 at the half and 78-74 after a 15-14 third. Brooks played 39 minutes and scored 22 on 8 of 15, hitting 6 of 9 from three, with 4 rebounds, 5 assists, 2 steals, a block and one turnover. In a game this close, his threes kept Oklah",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+            "id": "F-765fbf574097"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks — game-result (early-season), C114: Dillon Brooks' six threes carry the Oaks past OKC in the Cup opener. Oaks 101 - Thunder 95",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+            "id": "F-ba445558ac70"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks ground read C114 — excited",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C114",
+            "id": "F-c9046150dcee"
+          },
+          {
+            "t": "FACT",
+            "text": "excited",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C114",
+            "id": "F-5153191d9f71"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks fans, C114: excited",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+            "id": "F-3b64a0b09383"
+          },
+          {
+            "t": "FACT",
+            "text": "Room mood, C114: locked-in",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+            "id": "F-cb95b554775e"
+          },
+          {
+            "t": "FACT",
+            "text": "Context: record 6-1 · streak W2",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+            "id": "F-da2293861bb6"
+          },
+          {
+            "t": "FACT",
+            "text": "Dillon Brooks — SF / The Oaks — West Oakland",
+            "src": "Simulation_Ledger profile for POP-01079",
+            "id": "F-c129b9dc1750"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01023",
+      "name": "Adash Stanley",
+      "quote": "The mood among fans is electric. I've felt the excitement building around the Oaks, it's like the whole city is waking up with the team. There's a buzz in the air, and I think people are really looking forward to seeing what they can do this season.",
+      "disp": "steady, hard to shake; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"The mood among fans is electric. I've felt the excitement building around the Oaks, it's like the whole city is waking up with the team. There's a buzz in the air, and I think people are really looking forward to seeing what they can do this season.\",\n  \"fact_ids\": [\"F-c9046150dcee\", \"F-3b64a0b09383\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c9046150dcee",
+          "F-3b64a0b09383"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01023-b969f7bc5a",
+        "authoredQuote": true,
+        "publishableQuote": "The mood among fans is electric. I've felt the excitement building around the Oaks, it's like the whole city is waking up with the team. There's a buzz in the air, and I think people are really looking forward to seeing what they can do this season."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01023",
+          "name": "Adash Stanley",
+          "role": "PG / The Oaks",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Talia Finch",
+          "question": "What's the mood like among fans after the Oaks' win against OKC? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-oaks-ground",
+          "hood": "KONO",
+          "focus": "Oaks fans and their reaction to the team's recent performance",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C114"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Adash Stanley — PG / The Oaks — Downtown",
+          "evidence": [
+            {
+              "id": "EV-35746faea4",
+              "src": "output/beats/Oakland_Sports_Feed.jsonl @C114",
+              "text": "excited"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Notebook (feed): After the perfect start ended in Indiana, the Oaks went to Toronto and answered with the most lopsided win in franchise history, Oaks 135 - Raptors 75, in front of a 95% crowd. The Oaks led 39-19 after one, 73-40 at the half and 101-62 after three, and nobody played more than 28 minutes. Austin Reaves led with 20 on 4 of 6 from three, T. Jerome had 19 points, 7 rebounds and 7 assists, and Adash Stanley went 4 for 4 from three for 16 with 7 rebounds and 6 assists. Wendell Carter",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+            "id": "F-376707c1ea63"
+          },
+          {
+            "t": "FACT",
+            "text": "Notebook (feed): The Oaks' perfect start ends at four. In Indiana, in front of a building at 90% capacity, the Pacers built a 61-42 halftime lead behind a 34-point second quarter and led 82-62 after three. The Oaks answered with 38 points in the fourth and won the quarter 38-22, but the comeback came up four short, Pacers 104 - Oaks 100. Adash Stanley and Austin Reaves led the way with 19 apiece. Stanley hit 5 of 11 from three, and Reaves had 7 assists and 6 rebounds without a turnover. AJ Dyban",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+            "id": "F-9540a78a8b78"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks ground read C114 — excited",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C114",
+            "id": "F-c9046150dcee"
+          },
+          {
+            "t": "FACT",
+            "text": "excited",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C114",
+            "id": "F-5153191d9f71"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks fans, C114: excited",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+            "id": "F-3b64a0b09383"
+          },
+          {
+            "t": "FACT",
+            "text": "Room mood, C114: locked-in",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+            "id": "F-cb95b554775e"
+          },
+          {
+            "t": "FACT",
+            "text": "Notebook (feed): The Oaks opened their first NBA Cup run at home in front of a sold-out crowd and held off the Oklahoma City Thunder, 101-95, behind Dillon Brooks' biggest scoring night as an Oak. The Oaks led after every quarter but never by much: 35-30 after one, 63-60 at the half and 78-74 after a 15-14 third. Brooks played 39 minutes and scored 22 on 8 of 15, hitting 6 of 9 from three, with 4 rebounds, 5 assists, 2 steals, a block and one turnover. In a game this close, his threes kept Oklah",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+            "id": "F-765fbf574097"
+          },
+          {
+            "t": "FACT",
+            "text": "Adash Stanley — PG / The Oaks — Downtown",
+            "src": "Simulation_Ledger profile for POP-01023",
+            "id": "F-26cdcab1a2d4"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00273",
+      "name": "Trenton Nawan",
+      "quote": "I'm still feeling pretty good about the Oaks. That 4-0 start has really got me hopeful. I checked the scores twice a day all week and was happy every time they won. Maybe they're finally getting their act together.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; steady, hard to shake; close to family; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I'm still feeling pretty good about the Oaks. That 4-0 start has really got me hopeful. I checked the scores twice a day all week and was happy every time they won. Maybe they're finally getting their act together.\",\n  \"fact_ids\": [\"F-ca7af5743a0e\", \"F-89e10834b5eb\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-ca7af5743a0e",
+          "F-89e10834b5eb"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00273-71fd9027ed",
+        "authoredQuote": true,
+        "publishableQuote": "I'm still feeling pretty good about the Oaks. That 4-0 start has really got me hopeful. I checked the scores twice a day all week and was happy every time they won. Maybe they're finally getting their act together."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00273",
+          "name": "Trenton Nawan",
+          "role": "Server",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Talia Finch",
+          "question": "Your own page at C113 says: \"I'm still a bit worried about the Oaks, but their 4-0 start is really giving me hope\". Is that still how you see Oaks? Speak only from that and your own reaction."
+        },
+        "signal": {
+          "kind": "beat-oaks-ground",
+          "hood": "KONO",
+          "focus": "Oaks fans and their reaction to the team's recent performance",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C114"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Trenton Nawan — Server",
+          "evidence": [
+            {
+              "id": "EV-PAGE-27edcd0c34",
+              "src": "cp-POP-00273-c113-PRESS",
+              "text": "I'm still a bit worried about the Oaks, but their 4-0 start is really giving me hope."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "INTERPRETATION",
+            "text": "I'm still a bit worried about the Oaks, but their 4-0 start is really giving me hope.",
+            "src": "cp-POP-00273-c113-PRESS",
+            "id": "F-ca7af5743a0e"
+          },
+          {
+            "t": "FACT",
+            "text": "Trenton Nawan — Server",
+            "src": "Simulation_Ledger profile for POP-00273",
+            "id": "F-89e10834b5eb"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01224",
+      "name": "Trevor Henderson",
+      "quote": "I've seen the energy around the Oaks lately, and it's electric. The crowd was locked-in during the NBA Cup opener against OKC, and you could feel the excitement. As a player, it's motivating to see the fans so engaged. We're on a two-game win streak, and the vibe is great.",
+      "disp": "driven, hard to sit still",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen the energy around the Oaks lately, and it's electric. The crowd was locked-in during the NBA Cup opener against OKC, and you could feel the excitement. As a player, it's motivating to see the fans so engaged. We're on a two-game win streak, and the vibe is great.\",\n  \"fact_ids\": [\"F-c9046150dcee\", \"F-5153191d9f71\", \"F-cb95b554775e\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c9046150dcee",
+          "F-5153191d9f71",
+          "F-cb95b554775e"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01224-156858f4a0",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen the energy around the Oaks lately, and it's electric. The crowd was locked-in during the NBA Cup opener against OKC, and you could feel the excitement. As a player, it's motivating to see the fans so engaged. We're on a two-game win streak, and the vibe is great."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01224",
+          "name": "Trevor Henderson",
+          "role": "Oakland Oaks - Center",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Talia Finch",
+          "question": "What have you seen, felt, or understood about \"Oaks fans and their reaction to the team's recent performance\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-oaks-ground",
+          "hood": "KONO",
+          "focus": "Oaks fans and their reaction to the team's recent performance",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C114"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Trevor Henderson — Oakland Oaks - Center — Lake Merritt",
+          "evidence": [
+            {
+              "id": "EV-a0595be89a",
+              "src": "output/beats/Oakland_Sports_Feed.jsonl @C114",
+              "text": "excited"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C114",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4261fa115617"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks ground read C114 — excited",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C114",
+            "id": "F-c9046150dcee"
+          },
+          {
+            "t": "FACT",
+            "text": "excited",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C114",
+            "id": "F-5153191d9f71"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks fans, C114: excited",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+            "id": "F-3b64a0b09383"
+          },
+          {
+            "t": "FACT",
+            "text": "Room mood, C114: locked-in",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+            "id": "F-cb95b554775e"
+          },
+          {
+            "t": "FACT",
+            "text": "Notebook (feed): The Oaks opened their first NBA Cup run at home in front of a sold-out crowd and held off the Oklahoma City Thunder, 101-95, behind Dillon Brooks' biggest scoring night as an Oak. The Oaks led after every quarter but never by much: 35-30 after one, 63-60 at the half and 78-74 after a 15-14 third. Brooks played 39 minutes and scored 22 on 8 of 15, hitting 6 of 9 from three, with 4 rebounds, 5 assists, 2 steals, a block and one turnover. In a game this close, his threes kept Oklah",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+            "id": "F-765fbf574097"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks — game-result (early-season), C114: Dillon Brooks' six threes carry the Oaks past OKC in the Cup opener. Oaks 101 - Thunder 95",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+            "id": "F-ba445558ac70"
+          },
+          {
+            "t": "FACT",
+            "text": "Context: record 6-1 · streak W2",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C114",
+            "id": "F-da2293861bb6"
+          },
+          {
+            "t": "FACT",
+            "text": "Trevor Henderson — Oakland Oaks - Center — Lake Merritt",
+            "src": "Simulation_Ledger profile for POP-01224",
+            "id": "F-a24d067ddef7"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C10, Spring, holiday=none",
+            "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+            "id": "F-9b9470803821"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-11-05T19:17:00.404Z"
+}

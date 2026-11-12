@@ -1,0 +1,55 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "114",
+  "persona": "luis-navarro",
+  "byline": "Luis Navarro",
+  "bylinePopid": "POP-00636",
+  "article": "output/cron-compare/staged/civic_c114_luis-navarro_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Rosalind Young",
+        "role": "quoted-source",
+        "popid": "POP-00495"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Laurel"
+    ],
+    "claims": [
+      {
+        "claim": "Honestly, I can't say any city council person has ever reached out to me directly about anything. I run a small shop, I keep my head down, I pay my taxes. But I do notice things around the neighborhood — the little things that don't get fixed, the street maintenance that seems to lag, the way the sidewalks get cluttered. It's not one big thing, it's just a feeling that nobody's really asking the small business owners or the regular folks what we need. I haven't heard of any specific initiative for Laurel lately, and that silence kind of speaks for itself.",
+        "sourceRef": "citizenVoice PRESS Rosalind Young"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-3f5a8d2e44ac",
+    "draftSha256": "cf8c4a102ca1d5f93a8bd642daf335b2d047ee4a77f29e8e2a1e0f96a1b8b9e7",
+    "verdict": "output/cron-compare/civic_c114_luis-navarro_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-07T18:00:33.314Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 400",
+      "words": 614,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "cf8c4a102ca1d5f93a8bd642daf335b2d047ee4a77f29e8e2a1e0f96a1b8b9e7",
+      "costUsd": 0.0008
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-07T18:00:38.256Z"
+}

@@ -1,0 +1,229 @@
+{
+  "date": "2026-10-27",
+  "stage": "write",
+  "results": [
+    {
+      "name": "Luis Navarro",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 3,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 655,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Sgt. Rachel Torres",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 3,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 777,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Angela Reyes",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 3,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 796,
+        "contractScore": 1
+      }
+    },
+    {
+      "name": "Selena Grant",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 476,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Tamsin Pruitt",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 5,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [
+          {
+            "text": "Orion Kerkering moved into a place of their own in Lake Merritt, renting",
+            "run": "orion kerkering moved place own lake merritt"
+          },
+          {
+            "text": "Orion Kerkering — on the log, C113: dodged the running groups circling the lake and found a quiet bench near the pergola",
+            "run": "dodged the running groups circling the"
+          },
+          {
+            "text": "Orion Kerkering — on the log, C113: woke up at 5 AM just to have thirty minutes of total silence before the house woke up",
+            "run": "thirty minutes of total silence before"
+          },
+          {
+            "text": "Orion Kerkering — on the log, C113: organized the clothing drive donations and recognized a coat they had donated two years ago",
+            "run": "clothing drive donations and recognized a"
+          },
+          {
+            "text": "Isla Sike — on the log, C112: a stack of stabilization fund applications waits on the community board",
+            "run": "a stack of stabilization fund applications"
+          },
+          {
+            "text": "Isla Sike — on the log, C113: heard a kid explain something to a parent with total authority and grinned",
+            "run": "something to a parent with total"
+          },
+          {
+            "text": "Isla Sike — on the log, C113: heard Jack London was lively last night",
+            "run": "jack london was lively last night"
+          },
+          {
+            "text": "Christopher Johnson — on the log, C113: noticed three new pop-up restaurants on Telegraph and wondered how long any of them would last",
+            "run": "noticed three new pop up restaurants"
+          },
+          {
+            "text": "Christopher Johnson — on the log, C113: checked the Civis Systems Field livestream just to see if the grass had been laid down yet",
+            "run": "checked the civis systems field livestream"
+          },
+          {
+            "text": "Omar Amici — on the log, C113: relied on familiar social circles during cold period",
+            "run": "relied on familiar social circles during"
+          },
+          {
+            "text": "Omar Amici — on the log, C113: found a quiet minute at a venue doorway and felt the season starting to turn",
+            "run": "found a quiet minute at a"
+          },
+          {
+            "text": "Omar Amici — on the log, C113: argued with a stranger about the Oaks bullpen depth and ended up buying them a beer",
+            "run": "argued with a stranger about the"
+          },
+          {
+            "text": "Aisha Toure — on the log, C113: caught themselves bragging a little about the neighborhood lately near a civic plaza",
+            "run": "bragging a little about the neighborhood"
+          },
+          {
+            "text": "Aisha Toure — on the log, C113: checked out a new shop that just opened nearby near a public office lobby",
+            "run": "checked out a new shop that"
+          },
+          {
+            "text": "Aisha Toure — on the log, C113: felt a lift at Temple Lounge after the win",
+            "run": "felt a lift at temple lounge"
+          },
+          {
+            "text": "Mina Kapoor — on the log, C112: noticed the new streetlights went in before anyone had to ask",
+            "run": "noticed the new streetlights went in"
+          },
+          {
+            "text": "Mina Kapoor — on the log, C112: caught themselves bragging a little about the neighborhood lately",
+            "run": "bragging a little about the neighborhood"
+          },
+          {
+            "text": "Clarence Moody — called an old coworker just to catch up and talked for an hour, Dimond (C113, PostCareer)",
+            "run": "called an old coworker just to"
+          },
+          {
+            "text": "Clarence Moody — on the log, C113: shared a small piece of history with someone who needed it",
+            "run": "a small piece of history with"
+          },
+          {
+            "text": "Dorothy Rios — fixed a squeaky hinge that had been squeaking since the kids left home, Fruitvale (C113, PostCareer)",
+            "run": "fixed a squeaky hinge that had"
+          },
+          {
+            "text": "Dorothy Rios — on the log, C112: argued with a stranger about the Oaks bullpen depth and ended up buying them a beer",
+            "run": "argued with a stranger about the"
+          },
+          {
+            "text": "Dorothy Rios — on the log, C112: compared rent notes with a neighbor over the fence in Fruitvale",
+            "run": "compared rent notes with a neighbor"
+          },
+          {
+            "text": "Dorothy Rios — on the log, C113: found a quiet minute at the station plaza and the hum of a bassline from a passing car",
+            "run": "found a quiet minute at the"
+          },
+          {
+            "text": "Dorothy Rios — on the log, C113: checked the Civis Systems Field livestream just to see if the grass had been laid down yet",
+            "run": "checked the civis systems field livestream"
+          },
+          {
+            "text": "Charlene Gutierrez — dispensed advice at the hardware store — unsolicited, graciously received, Temescal (C113, PostCareer)",
+            "run": "advice at the hardware store unsolicited"
+          },
+          {
+            "text": "Charlene Gutierrez — on the log, C112: said no to something and felt the shape of who they are in it",
+            "run": "and felt the shape of who"
+          },
+          {
+            "text": "Charlene Gutierrez — on the log, C112: found a quiet minute at a cafe near the clinics and the hum of a bassline from a passing car",
+            "run": "found a quiet minute at a"
+          },
+          {
+            "text": "Charlene Gutierrez — on the log, C112: put on their good suit for the Sunday service because some traditions still matter",
+            "run": "good suit for the sunday service"
+          },
+          {
+            "text": "Charlene Gutierrez — on the log, C112: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+            "run": "the oari van idling outside the"
+          },
+          {
+            "text": "Desmond Morton — moved from Jack London to Chinatown — leaving Jack London for a better fit, Chinatown (C113, Relocation-Composure-Up-M)",
+            "run": "moved from jack london to chinatown"
+          },
+          {
+            "text": "Desmond Morton — on the log, C113: saw their name in the sports pages again",
+            "run": "name in the sports pages again"
+          },
+          {
+            "text": "Desmond Morton — on the log, C113: watched the fog roll over the port cranes from their front window",
+            "run": "the fog roll over the port"
+          }
+        ],
+        "words": 1135,
+        "contractScore": 4
+      }
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 265,
+        "contractScore": 3
+      }
+    }
+  ],
+  "checkTotals": {
+    "seats": 6,
+    "toolSeats": 4,
+    "capHits": 0,
+    "thin": 0,
+    "verbatim": 1,
+    "graded": 6,
+    "gradeSum": 20
+  },
+  "ranAt": "2026-10-27T23:20:41.747Z"
+}

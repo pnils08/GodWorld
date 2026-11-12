@@ -1,0 +1,32 @@
+{
+  "status": "arc-seed",
+  "cycle": "114",
+  "desk": "culture",
+  "persona": "elliot-graye",
+  "hood": "Lake Merritt",
+  "quotes": [
+    {
+      "pop": "POP-00755",
+      "name": "Antoine Vermeer",
+      "quote": "I've seen the Cathedral of the Living Word's job training workshop attract attendees from around the neighborhood, which is great. It's a valuable resource for our community."
+    },
+    {
+      "pop": "POP-01094",
+      "name": "Ignacio Zavala",
+      "quote": "I've driven by the Cathedral of the Living Word a few times, it's a big presence around Lake Merritt. I haven't been inside, but I've noticed it's always bustling. I guess that's what 1,000+ people on Epiphany looks like. My wife is into that sort of thing, she's always talking about the different faith communities around Oakland."
+    },
+    {
+      "pop": "POP-00665",
+      "name": "Art Scott",
+      "quote": "I've seen Cathedral of the Living Word hosting a job training workshop recently, it's been drawing people from around the neighborhood. That's something positive for our community."
+    },
+    {
+      "pop": "POP-00697",
+      "name": "Declan Toto",
+      "quote": "I've joined the congregation at Cathedral of the Living Word, and I have to say, it's been a really uplifting experience. The scent of incense drifting from the temple doors left ajar is a familiar comfort for me, and it's great to see the community coming together there."
+    }
+  ],
+  "claim": "I've seen the Cathedral of the Living Word's job training workshop attract attendees from around the neighborhood, which is great. It's a valuable resource for our community.",
+  "src": "citizenVoice PRESS c114",
+  "ranAt": "2026-11-05T19:15:48.652Z"
+}

@@ -1,0 +1,228 @@
+{
+  "version": "HOOD-SLICE-3",
+  "empty": false,
+  "cycle": 114,
+  "kind": "beat-neighborhood",
+  "seat": {
+    "slug": "maria-keen",
+    "name": "Maria Keen",
+    "popid": "POP-00013",
+    "desk": "culture",
+    "domain": "neighborhood",
+    "builder": "buildNeighborhoodSlice.js"
+  },
+  "hood": "Temescal",
+  "pulse": {
+    "className": "beat-neighborhood",
+    "score": 100,
+    "label": "Temescal: 2 active programs on the record",
+    "hood": "Temescal",
+    "source": "output/beats/Community_Programs.jsonl @C114"
+  },
+  "story": {
+    "kind": "beat-neighborhood",
+    "angle": "Temescal — the programs that hold the block and the people who founded them",
+    "label": "Temescal: 2 active programs on the record",
+    "hookLine": "2 active programs in Temescal; Austin Reaves founded one.",
+    "hood": "Temescal",
+    "citizens": [
+      "Austin Reaves (POP-01027)"
+    ],
+    "popids": [
+      "POP-01027"
+    ],
+    "ref": "output/beats/Community_Programs.jsonl @C114",
+    "cycle": 114
+  },
+  "approach": "Neighborhood approach: this slice is one block's record — its community programs and their founders, who is moving in or out, who the block has in a hospital bed or in custody, what it paid on tax day, whose debts crossed the line, and the city's neighborhood hooks this cycle. First-person witness, one block one truth. The programs, founders, movement numbers, patients, defendants and money lines are real; the stoop conversations, the mailboxes, the dog everyone knows are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-01027",
+      "name": "Austin Reaves",
+      "role": "SG / The Oaks",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Austin Reaves — SG / The Oaks — West Oakland",
+      "why": "founded The Reaves Line Transit Fund (Community_Programs)"
+    }
+  ],
+  "facts": [
+    {
+      "text": "Temescal Islamic Center Food Pantry (mutual-aid), Temescal, since C83",
+      "src": "output/beats/Community_Programs.jsonl @C114 PRG-026"
+    },
+    {
+      "text": "The Reaves Line Transit Fund (transit), Temescal — founded by Austin Reaves, since C109",
+      "src": "output/beats/Community_Programs.jsonl @C114 PRG-032"
+    },
+    {
+      "text": "Temescal this cycle: 313 students, 2,131 adults, 298 seniors — moved vs C113: +6 adults",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C114 vs prev/"
+    },
+    {
+      "text": "Temescal: 8 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl @C114 judicial Temescal"
+    },
+    {
+      "text": "Temescal: 86 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl @C114 hospital Temescal"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "Temescal — the programs that hold the block and the people who founded them",
+    "hookLine": "2 active programs in Temescal; Austin Reaves founded one.",
+    "anchorFacts": [
+      "Temescal Islamic Center Food Pantry (mutual-aid), Temescal, since C83",
+      "The Reaves Line Transit Fund (transit), Temescal — founded by Austin Reaves, since C109",
+      "Temescal this cycle: 313 students, 2,131 adults, 298 seniors — moved vs C113: +6 adults",
+      "Temescal: 8 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+      "Temescal: 86 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked"
+    ],
+    "evidence": [
+      {
+        "text": "Temescal Islamic Center Food Pantry (mutual-aid), Temescal, since C83",
+        "src": "output/beats/Community_Programs.jsonl @C114 PRG-026"
+      },
+      {
+        "text": "The Reaves Line Transit Fund (transit), Temescal — founded by Austin Reaves, since C109",
+        "src": "output/beats/Community_Programs.jsonl @C114 PRG-032"
+      },
+      {
+        "text": "Temescal this cycle: 313 students, 2,131 adults, 298 seniors — moved vs C113: +6 adults",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C114 vs prev/"
+      },
+      {
+        "text": "Temescal: 8 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl @C114 judicial Temescal"
+      },
+      {
+        "text": "Temescal: 86 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl @C114 hospital Temescal"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": {
+      "state": "PRIOR_CYCLE_ON_DISK",
+      "vs": 113
+    },
+    "hooks": [
+      {
+        "text": "First Friday: Monthly art walk tonight. Gallery openings, street vendors, neighborhood energy. Photo walk opportunity.",
+        "angle": "desk rotation",
+        "domain": "CULTURE",
+        "hood": "Uptown",
+        "priority": 2
+      },
+      {
+        "text": "Vince Okoye and Idalia Okonkwo — a friendship turned into something more",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Lake Merritt",
+        "priority": 3
+      },
+      {
+        "text": "Isabel Lopes and Shawn Neighbor — a friendship turned into something more",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Fruitvale",
+        "priority": 3
+      },
+      {
+        "text": "Household in Lake Merritt spending 53% of income on housing",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Lake Merritt",
+        "priority": 6
+      },
+      {
+        "text": "the debts crossed a line this week — sleep comes harder now",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Fruitvale",
+        "priority": 3
+      },
+      {
+        "text": "Downtown boom sustained — momentum 10/10, the block everyone wants onto",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Downtown",
+        "priority": 7
+      },
+      {
+        "text": "Jack London boom sustained — momentum 10/10, the block everyone wants onto",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Jack London",
+        "priority": 7
+      },
+      {
+        "text": "Uptown boom sustained — momentum 10/10, the block everyone wants onto",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Uptown",
+        "priority": 7
+      }
+    ],
+    "note": null,
+    "pageVoices": [],
+    "roomIsYours": "the stoop, the corner store counter, who moved in last month and who is thinking about leaving, what the block argues about"
+  },
+  "programs": [
+    "Temescal Islamic Center Food Pantry",
+    "The Reaves Line Transit Fund"
+  ],
+  "rotation": {
+    "index": 6,
+    "of": 9
+  },
+  "careJustice": {
+    "custody": {
+      "scope": "neighborhood",
+      "hood": "Temescal",
+      "complete": true,
+      "completeness": "complete",
+      "demand": 8,
+      "intakes": 2,
+      "tracked": 0,
+      "other": 2,
+      "closing": 3,
+      "trackedOcc": 0,
+      "otherOcc": 3,
+      "beds": null,
+      "exits": 1,
+      "names": []
+    },
+    "care": {
+      "scope": "neighborhood",
+      "hood": "Temescal",
+      "complete": true,
+      "completeness": "complete",
+      "demand": 86,
+      "intakes": 2,
+      "tracked": 0,
+      "other": 2,
+      "closing": 4,
+      "trackedOcc": 0,
+      "otherOcc": 4,
+      "beds": 4,
+      "exits": 2,
+      "names": []
+    },
+    "debt": {
+      "defaults": [],
+      "overLine": 7,
+      "crisisByHood": {}
+    }
+  },
+  "pointers": [
+    "output/beats/Community_Programs.jsonl @C114",
+    "output/beats/Story_Hook_Deck.jsonl (hooks for Maria Keen this cycle)"
+  ]
+}

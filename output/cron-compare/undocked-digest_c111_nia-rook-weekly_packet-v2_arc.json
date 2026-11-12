@@ -1,0 +1,27 @@
+{
+  "status": "arc-seed",
+  "cycle": "111",
+  "desk": "undocked-digest",
+  "persona": "nia-rook-weekly",
+  "hood": null,
+  "quotes": [
+    {
+      "pop": "POP-00597",
+      "name": "Eric Taveras",
+      "quote": "To be honest, I haven't been thinking about being MVP that much. The pressure's always there, but when we're winning, it feels more like a team thing. The flight isn't really a part of my life right now; I'm focused on the game. I don't know if it's a sanctuary or another competition for me."
+    },
+    {
+      "pop": "POP-00926",
+      "name": "Briar Soto",
+      "quote": "I don't really know how to reconcile it. I've had things go smoothly before, but when the books don't balance out and you're sitting at zero while everyone else is climbing, it's just a weird feeling."
+    },
+    {
+      "pop": "POP-01053",
+      "name": "Rosario Medina",
+      "quote": "I'm not really sure what you're talking about. I'm a CBA Compliance Monitor, not a pilot."
+    }
+  ],
+  "claim": "To be honest, I haven't been thinking about being MVP that much. The pressure's always there, but when we're winning, it feels more like a team thing. The flight isn't really a part of my life right now; I'm focused on the game. I don't know if it's a sanctuary or another competition for me.",
+  "src": "citizenVoice PRESS c111",
+  "ranAt": "2026-10-17T14:15:41.434Z"
+}

@@ -1,0 +1,56 @@
+{
+  "office": "council_d8",
+  "cycle": 114,
+  "speaker": "Nina Chen",
+  "cascadeSummary": "District 8 cast a decisive floor vote of YES on the $2.5 million Commercial Stabilization for Grand Lake ordinance, preserving the mandatory Chen-Vega audit and milestone reporting conditions. Concurrently, we filed the formal Eastlake Corridor Commercial Stabilization Review in response to the Planning Director's directive and corridor decay indicators. Finally, we demanded scheduled municipal maintenance parity for Adams Point while crediting community institutions like Cathedral of the Living Word for lifting Lake Merritt.",
+  "statements": [
+    {
+      "statementId": "STMT-114-council_d8-001",
+      "type": "vote_statement",
+      "topic": "Commercial Stabilization for Grand Lake Floor Vote",
+      "initiative": "Commercial Stabilization for Grand Lake",
+      "decision": "Vote YES to authorize $2.5M for INIT-009 on the council floor with mandatory Chen-Vega milestone reporting and audit criteria intact.",
+      "quote": "Relief without accountability is merely an expenditure; District 8 votes YES because the Chen-Vega audit protocols guarantee that every dollar deployed in Grand Lake is tracked, verified, and earned.",
+      "fullStatement": "District 8 casts our floor vote in favor of the $2.5 million Commercial Stabilization for Grand Lake ordinance. We advanced this measure through committee because our merchants need targeted stabilization, but we did so only after locking in strict milestone reporting and verified audit criteria. Public investment requires procedural rigor. With our oversight conditions held completely intact, Grand Lake receives stabilization funds that are tied directly to documented municipal milestones rather than open-ended draws. We expect the administration to adhere strictly to these benchmarks and publish every disbursement review.",
+      "disposition": "YES",
+      "actionAsked": "Immediate floor passage of INIT-009 with required quarterly milestone audits and public reporting.",
+      "tone": "procedural, firm, oversight-focused",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-114-council_d8-002",
+      "type": "policy_statement",
+      "topic": "Eastlake Corridor Commercial Stabilization Review",
+      "initiative": null,
+      "decision": "Formally file and publish the Eastlake Corridor Commercial Stabilization Review to address corridor decay and enforce municipal service parity.",
+      "quote": "We are filing the Eastlake corridor commercial stabilization review today because revitalization cannot stop at Grand Avenue while adjacent commercial corridors shoulder documented decay.",
+      "fullStatement": "In response to Planning Director Vance's directive and ongoing commercial indicators across District 8, our office is formally filing the Eastlake Corridor Commercial Stabilization Review. Eastlake has logged a decay momentum of 3 with sentiment trailing city baselines, and we will not allow procedural neglect to erode this neighborhood's commercial corridor. This filing establishes structured oversight metrics, baseline infrastructure assessments, and municipal maintenance schedules. District 8 insists on corridor parity: stabilization protocols proven in Grand Lake must inform administrative accountability and public services across Eastlake.",
+      "disposition": "statement",
+      "actionAsked": "Planning and Public Works execution of scheduled commercial reviews and maintenance parity for Eastlake.",
+      "tone": "rigorous, analytical, process-driven",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-114-council_d8-003",
+      "type": "district_oversight",
+      "topic": "Adams Point Service Audits and Lake Merritt Community Vitality",
+      "initiative": null,
+      "decision": "Demand immediate municipal maintenance scheduling for Adams Point and recognize community institutions driving Lake Merritt's positive momentum.",
+      "quote": "While we demand administrative parity and scheduled public works audits for Adams Point, we credit the neighborhood partners—from Cathedral of the Living Word to local tutoring programs—who actively lift Lake Merritt.",
+      "fullStatement": "District 8 balances rigorous scrutiny with credit where it has been earned. For Adams Point, where street sentiment sits flat and maintenance has lagged, we continue to enforce our administrative service audit criteria, demanding scheduled municipal maintenance parity from city departments. Concurrently, we recognize that Lake Merritt's lifted mood and steady foot trade reflect grassroots dedication. Specifically, Cathedral of the Living Word's new job training workshop session and the ongoing youth tutoring at Lakeshore Unitarian Universalist Fellowship demonstrate that community vitality succeeds through reliable, documented local effort.",
+      "disposition": "statement",
+      "actionAsked": "Implementation of transparent maintenance audits for Adams Point and public commendation of Lake Merritt community partners.",
+      "tone": "balanced, accountable, community-focused",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    }
+  ]
+}

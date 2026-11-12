@@ -1,0 +1,57 @@
+{
+  "mode": "wake-write",
+  "desk": "undocked",
+  "cycle": "113",
+  "provider": "openrouter",
+  "model": "x-ai/grok-4.3",
+  "configuredWriterModel": "x-ai/grok-4.3",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "nia-rook",
+  "byline": {
+    "name": "Nia Rook",
+    "popid": "POP-01076",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 1,
+  "quotesLanded": 1,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [],
+  "toolCalls": 0,
+  "wordCount": 265,
+  "targetWords": "350-600",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": false,
+    "inTargetBy": "code floor 350",
+    "words": 265,
+    "short": "The piece falls short of the 350-word minimum target.",
+    "score": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "ad6157eea28b38a69211720e8afdac10b9b0c9a3d0e51856f307bfdbf4d48444",
+    "costUsd": 0.0009
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/4 — The piece falls short of the 350-word minimum target."
+  },
+  "article": "output/cron-compare/staged/undocked_c113_nia-rook_packet-v2_x-ai-grok-4-3.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "et: true }\n{\n  \"popId\": \"POP-01076\",\n  \"name\": \"Nia Rook\",\n  \"recorded\": true,\n  \"text\": \"filed: In a Downtown break room where the late shift had pulled chairs into a loose circle around a flicker\"\n}"
+  },
+  "ranAt": "2026-10-27T23:20:41.744Z",
+  "dispositionReconciledAt": "2026-10-31T17:00:03.010Z"
+}

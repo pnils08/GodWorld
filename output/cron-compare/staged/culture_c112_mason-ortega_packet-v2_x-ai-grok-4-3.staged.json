@@ -1,0 +1,65 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "112",
+  "persona": "mason-ortega",
+  "byline": "Mason Ortega",
+  "bylinePopid": "POP-00160",
+  "article": "output/cron-compare/staged/culture_c112_mason-ortega_packet-v2_x-ai-grok-4-3.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Devon Willis",
+        "role": "quoted-source",
+        "popid": "POP-00782"
+      },
+      {
+        "name": "Andre Turner",
+        "role": "quoted-source",
+        "popid": "POP-00225"
+      },
+      {
+        "name": "Drew Lemon",
+        "role": "quoted-source",
+        "popid": "POP-00670"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Downtown"
+    ],
+    "claims": [
+      {
+        "claim": "A typical Tuesday at SpeedyBurger is steady — not the weekend rush, but enough that you're always moving. The lunch crowd comes in waves, and you learn the regulars by their orders before you learn their names. The part that doesn't show up on a receipt is the rhythm of it — knowing when to step in, when to give someone a minute, when to just let the quiet settle. It's honest work, and lately I've been thinking about how much of what I do is just being there, steady, for people who need that.",
+        "sourceRef": "citizenVoice PRESS Devon Willis"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-f2c32226947e",
+    "draftSha256": "def5cbeee7993981684cc179a8f3293a4687bf479217f2b4261d2c9638a56b36",
+    "verdict": "output/cron-compare/culture_c112_mason-ortega_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-10-23T23:15:20.357Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": false,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 378,
+      "short": "The piece invents specific workers, shifts, service states, and quotes rather than treating the signal without invented labor details.",
+      "score": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "def5cbeee7993981684cc179a8f3293a4687bf479217f2b4261d2c9638a56b36",
+      "costUsd": 0.002
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-23T23:15:28.737Z"
+}

@@ -1,0 +1,61 @@
+{
+  "status": "staged",
+  "desk": "undocked",
+  "cycle": "114",
+  "persona": "nia-rook",
+  "byline": "Nia Rook",
+  "bylinePopid": "POP-01076",
+  "article": "output/cron-compare/staged/undocked_c114_nia-rook_packet-v2_openai-gpt-6-luna.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Lena Okafor",
+        "role": "mentioned",
+        "popid": "POP-00530"
+      },
+      {
+        "name": "Daphne Stafford",
+        "role": "mentioned",
+        "popid": "POP-00816",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Fruitvale"
+    ],
+    "claims": [
+      {
+        "claim": "To be honest, I just didn't want to stop. I'd had a good run, and I was on a roll. We'd just gotten that windfall, $14,000, and it was nice to feel like I was doing something for myself that night. Plus, the kids were doing well, and my husband was supportive as always. I wasn't thinking about the standings or the credits too much; I just flew until the show ended.",
+        "sourceRef": "citizenVoice PRESS Lena Okafor"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-54b4cac73917",
+    "draftSha256": "69effa51a196596d9cf47993c3e01b07d6eb674b9c71a4d72d86f9d922293bbc",
+    "verdict": "output/cron-compare/undocked_c114_nia-rook_packet-v2_openai-gpt-6-luna.rhea.json",
+    "ranAt": "2026-11-04T07:45:35.462Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 350",
+      "words": 402,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "69effa51a196596d9cf47993c3e01b07d6eb674b9c71a4d72d86f9d922293bbc",
+      "costUsd": 0.0009
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-04T07:45:39.508Z"
+}

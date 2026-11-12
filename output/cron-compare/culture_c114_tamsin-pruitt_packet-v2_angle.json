@@ -1,0 +1,1382 @@
+{
+  "stage": "angle",
+  "desk": "culture",
+  "cycle": "114",
+  "persona": "tamsin-pruitt",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-01210",
+      "name": "Tamsin Pruitt",
+      "role": "desk reporter",
+      "desk": "culture"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "The lives of C114: 9 people — Alexa Ward moved into a place of their own in West Oakland, renting",
+      "approach": "Lives approach: this slice is the people something happened to this Cycle — a birth, a death in the house, a hospital stay, a retirement, a promotion; a household set up or a place of their own; a win or a loss on the book; the people a turn of the city reached and what it did to their day; and the smaller moments the record kept. Each person gets their own passage: the event, then the thread under it — the stay or strain that led there, the other lines the record kept for them, what the Tribune or this page already said of them, and what they did next if the record says. Read the thread in order and name where two lines of it do not agree; do not restate a ledger value as the story. The fact exactly right; never a trend, never a number first; the person, not the system the event belongs to. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent p",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "lives",
+        "hood": null,
+        "facts": [
+          "Alexa Ward moved into a place of their own in West Oakland, renting (C114)",
+          "Alexa Ward — in their life, C114: spent too long in a bookstore aisle they'd never stopped at",
+          "Antoine Vermeer moved into a place of their own in Lake Merritt, renting (C114)",
+          "Antoine Vermeer — in their life, C113: wrote half a letter to family, then decided to call instead",
+          "Antoine Vermeer — in their life, C113: adjusted today's plans after last night's gridlock",
+          "Antoine Vermeer — in their life, C114: played a relative's voicemail twice before saving it again",
+          "Antoine Vermeer — in their life, C114: checked out a First Friday gallery",
+          "Antoine Vermeer — the Tribune named them in a piece headlined A Week of Many Altars: Oakland's Thanksgiving Convergence (Culture, C99)",
+          "Antoine Vermeer — the Tribune named them in a piece headlined The Season the Congregations Carried — and the Shortstop in a Deacon's Robes (Culture, C97)",
+          "Sidney Tumolo — attended a small local gathering and stayed later than planned, West Oakland — one of 4 people the Cycle's city turn reached (West Oakland Stabilization Fund sitting (0, capped); Oakland Alternative Response Initiative sitting (0, capped); Fruitvale Transit Hub…) (C114)",
+          "Sidney Tumolo — in their life, C113: read the Tribune's front page twice — once for the news, once to see who was in it",
+          "Sidney Tumolo — in their life, C114: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence",
+          "Sidney Tumolo — in their life, C114: counted cranes on the skyline from the bus stop and got a different number than yesterday",
+          "Sidney Tumolo — the Tribune named them in a piece headlined What Comes Next: Seymour's A's Emerge From Spring With a Record and a Question (Sports, C86)",
+          "Bruce Turner — heard another neighbor was between jobs, D1 — one of 4 people the Cycle's city turn reached (West Oakland Stabilization Fund sitting (0, capped); Oakland Alternative Response Initiative sitting (0, capped); Oakland Youth…) (C114)",
+          "Bruce Turner — in their life, C114: walked a different street home just to see it",
+          "Bruce Turner — in their life, C114: told the story of their first A's game again, and nobody minded",
+          "Tobias Ramas — kept score by hand at the kitchen table the way their father taught them, Lake Merritt — one of 4 people the Cycle's community turn reached (C114)",
+          "Tobias Ramas — in their life, C113: painted over graffiti on the recreation center wall alongside five neighbors they barely knew",
+          "Tobias Ramas — in their life, C113: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner near the lakeside path",
+          "Tobias Ramas — in their life, C114: noticed the listing price on a place like theirs and read it twice",
+          "Vinnie Keane — Keane Mercantile returned $2043 to the line this week, Grand Lake (C114 — what happened in their life, not words they said)",
+          "Vinnie Keane — in their life, C114: got recognized twice at the grocery store after the story ran",
+          "Vinnie Keane — in their life, C114: realized the same seven meals had rotated for a month, and shrugged",
+          "Vinnie Keane — in their life, C114: felt quietly lucky to call Grand Lake home near a busy shopping block",
+          "Vinnie Keane — in their life, C114: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+          "Vinnie Keane — the Tribune named them in a piece headlined Keane's 2041 Strikeout Rate Is an Outlier on 127 At-Bats. Next Season Decides Whether It Is a New Baseline. (Sports, C112)",
+          "Vinnie Keane — the Tribune named them in a piece headlined Ellis's Game Five Line Carries the Title (Sports, C111)",
+          "Vinnie Keane — the Tribune named them in a piece headlined The Weight of a Banner (Sports, C110)",
+          "Bethany Foster — A coworker at Port of Oakland with less time in got the assignment they had asked about., Lake Merritt (C114 — what happened in their life, not words they said)",
+          "Bethany Foster — in their life, C113: navigated the stroller traffic on College Avenue and silently judged the parking jobs",
+          "Bethany Foster — in their life, C113: checked in with a relative",
+          "Bethany Foster — in their life, C114: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+          "Bethany Foster — in their life, C114: retold an old family story and caught a detail they'd never noticed",
+          "Debbie Kaplan — A director at Port of Oakland asked for a meeting about their future, and it was a good one., Lake Merritt (C114 — what happened in their life, not words they said)",
+          "Debbie Kaplan — in their life, C114: discovered new local artists",
+          "Debbie Kaplan — in their life, C114: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+          "Debbie Kaplan — in their life, C114: picked a favorite Oak before the team had even settled its rotation",
+          "Debbie Kaplan — in their life, C114: checked in with a relative near the lakeside path",
+          "Ivy Tran — Finished the week at AC Transit with the hardest account on the floor squared away., Fruitvale (C114 — what happened in their life, not words they said)",
+          "Ivy Tran — in their life, C113: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+          "Ivy Tran — in their life, C113: grabbed coffee from the cart outside the hospital before the morning rush hit",
+          "Ivy Tran — in their life, C114: organized the clothing drive donations and recognized a coat they had donated two years ago",
+          "Ivy Tran — in their life, C114: saw a stranger laugh at their phone and invented the joke all the way home",
+          "Ivy Tran — the Tribune named them in a piece headlined THEY SENT FOUR COPS FOR MY BROTHER”: PILOT DISTRICT RESIDENTS ON ALTERNATIVE RESPONSE (Managing Editor, C76)"
+        ],
+        "priorCycle": null,
+        "note": null,
+        "engineHooks": [
+          "A family bought their home in Rockridge (observational analysis)",
+          "The Thompson household (2) moved from Chinatown to West Oakland — moving up from Chinatown (desk rotation)",
+          "Derek Obi moved from Downtown to Rockridge — moving up from Downtown — sold the house in Downtown to rent up (desk rotation)",
+          "Patrice Rao moved from Chinatown to West Oakland — moving up from Chinatown (observational analysis)"
+        ],
+        "roomIsYours": "the plain respect, what the event meant in that house or on that block, the detail the family would have picked — from the lines below, never invented",
+        "pageVoices": [
+          "Vinnie Keane, own page (in a talk, a question they carry, C114): “Do I come back for one more run, or step away for good? I haven't decided yet.”"
+        ],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-lives",
+      "hood": null,
+      "score": null,
+      "src": "output/beats/Lived_Events.jsonl @C114 batch c57479",
+      "nearby": [
+        {
+          "text": "Grand Lake neighborhood texture — how residents experience the improvement | Residents of Grand Lake feel the change firsthand.",
+          "src": "output/engine_audit_c114.json patterns[5]; evidence: Initiative_Tracker row(s) 9; storyline INIT-009:announced"
+        },
+        {
+          "text": "Chinatown | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c114.md \"### Chinatown\"; events: world_summary_c114.md \"## World Events\""
+        },
+        {
+          "text": "Downtown | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c114.md \"### Downtown\"; events: world_summary_c114.md \"## World Events\""
+        },
+        {
+          "text": "East Oakland | 2 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c114.md \"### East Oakland\"; events: world_summary_c114.md \"## World Events\""
+        },
+        {
+          "text": "Lake Merritt | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c114.md \"### Lake Merritt\"; events: world_summary_c114.md \"## World Events\""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00687",
+          "name": "Alexa Ward",
+          "profile": "Alexa Ward — Licensed Plumber — West Oakland",
+          "role": "Licensed Plumber",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Lived_Events.jsonl @C114 batch c57479",
+            "pop": "POP-00687",
+            "rowName": "Alexa Ward",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00755",
+          "name": "Antoine Vermeer",
+          "profile": "Antoine Vermeer — Senior Pastor / Faith Leader — Lake Merritt",
+          "role": "Senior Pastor / Faith Leader",
+          "hood": "Lake Merritt",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Lived_Events.jsonl @C114 batch c57479",
+            "pop": "POP-00755",
+            "rowName": "Antoine Vermeer",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00058",
+          "name": "Sidney Tumolo",
+          "profile": "Sidney Tumolo — Second Baseman, Oakland A's — West Oakland",
+          "role": "Second Baseman, Oakland A's",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Lived_Events.jsonl @C114 batch c57479",
+            "pop": "POP-00058",
+            "rowName": "Sidney Tumolo",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01086",
+          "name": "Bruce Turner",
+          "profile": "Bruce Turner — Server — Dimond",
+          "role": "Server",
+          "hood": "Dimond",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Lived_Events.jsonl @C114 batch c57479",
+            "pop": "POP-01086",
+            "rowName": "Bruce Turner",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01044",
+          "name": "Tobias Ramas",
+          "profile": "Tobias Ramas — Bank teller — Lake Merritt",
+          "role": "Bank teller",
+          "hood": "Lake Merritt",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Lived_Events.jsonl @C114 batch c57479",
+            "pop": "POP-01044",
+            "rowName": "Tobias Ramas",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00001",
+          "name": "Vinnie Keane",
+          "profile": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+          "role": "Designated Hitter, Oakland A's Legend",
+          "hood": "Grand Lake",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Lived_Events.jsonl @C114 batch c57479",
+            "pop": "POP-00001",
+            "rowName": "Vinnie Keane",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00356",
+          "name": "Bethany Foster",
+          "profile": "Bethany Foster — Ship Repair Foreman — Lake Merritt",
+          "role": "Ship Repair Foreman",
+          "hood": "Lake Merritt",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Lived_Events.jsonl @C114 batch c57479",
+            "pop": "POP-00356",
+            "rowName": "Bethany Foster",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00719",
+          "name": "Debbie Kaplan",
+          "profile": "Debbie Kaplan — Harbor Tugboat Captain — Lake Merritt",
+          "role": "Harbor Tugboat Captain",
+          "hood": "Lake Merritt",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Lived_Events.jsonl @C114 batch c57479",
+            "pop": "POP-00719",
+            "rowName": "Debbie Kaplan",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01037",
+          "name": "Ivy Tran",
+          "profile": "Ivy Tran — Driver — Fruitvale",
+          "role": "Driver",
+          "hood": "Fruitvale",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Lived_Events.jsonl @C114 batch c57479",
+            "pop": "POP-01037",
+            "rowName": "Ivy Tran",
+            "kind": "slice-row"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C114",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-4261fa115617"
+      },
+      {
+        "t": "FACT",
+        "text": "Alexa Ward moved into a place of their own in West Oakland, renting",
+        "src": "output/beats/Lived_Events.jsonl @C114 batch c57479",
+        "id": "F-a1e68effa974"
+      },
+      {
+        "t": "FACT",
+        "text": "Alexa Ward first. The event is the lead; one true detail; what came next only if the record says.",
+        "src": "output/beats/Lived_Events.jsonl @C114 batch c57479",
+        "id": "F-65ddc85d752e"
+      },
+      {
+        "t": "FACT",
+        "text": "Alexa Ward moved into a place of their own in West Oakland, renting (C114)",
+        "src": "output/beats/Household_Ledger.jsonl @C114",
+        "id": "F-a559843881e1"
+      },
+      {
+        "t": "FACT",
+        "text": "Alexa Ward — in their life, C114: spent too long in a bookstore aisle they'd never stopped at",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114",
+        "id": "F-cbf7388e695b"
+      },
+      {
+        "t": "FACT",
+        "text": "Antoine Vermeer moved into a place of their own in Lake Merritt, renting (C114)",
+        "src": "output/beats/Household_Ledger.jsonl @C114",
+        "id": "F-855295f52d53"
+      },
+      {
+        "t": "FACT",
+        "text": "Antoine Vermeer — in their life, C113: wrote half a letter to family, then decided to call instead",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113",
+        "id": "F-0b138df98a64"
+      },
+      {
+        "t": "FACT",
+        "text": "Antoine Vermeer — in their life, C113: adjusted today's plans after last night's gridlock",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113",
+        "id": "F-0db5f914343d"
+      },
+      {
+        "t": "FACT",
+        "text": "Antoine Vermeer — in their life, C114: played a relative's voicemail twice before saving it again",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114",
+        "id": "F-5ec17cae76d5"
+      },
+      {
+        "t": "FACT",
+        "text": "Antoine Vermeer — in their life, C114: checked out a First Friday gallery",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114",
+        "id": "F-6265d33f2b4e"
+      },
+      {
+        "t": "FACT",
+        "text": "Antoine Vermeer — the Tribune named them in a piece headlined A Week of Many Altars: Oakland's Thanksgiving Convergence (Culture, C99)",
+        "src": "archive/ARTICLE_INDEX.jsonl 57235fd2f5166f60",
+        "id": "F-da89a25b155a"
+      },
+      {
+        "t": "FACT",
+        "text": "Antoine Vermeer — the Tribune named them in a piece headlined The Season the Congregations Carried — and the Shortstop in a Deacon's Robes (Culture, C97)",
+        "src": "archive/ARTICLE_INDEX.jsonl 8351dd42bdadab26",
+        "id": "F-eabeae7aedd4"
+      },
+      {
+        "t": "FACT",
+        "text": "Sidney Tumolo — attended a small local gathering and stayed later than planned, West Oakland — one of 4 people the Cycle's city turn reached (West Oakland Stabilization Fund sitting (0, capped); Oakland Alternative Response Initiative sitting (0, capped); Fruitvale Transit Hub…) (C114)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C114",
+        "id": "F-d6138a440c16"
+      },
+      {
+        "t": "FACT",
+        "text": "Sidney Tumolo — in their life, C113: read the Tribune's front page twice — once for the news, once to see who was in it",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113",
+        "id": "F-1a22b5561bda"
+      },
+      {
+        "t": "FACT",
+        "text": "Sidney Tumolo — in their life, C114: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114",
+        "id": "F-0ba78c80242d"
+      },
+      {
+        "t": "FACT",
+        "text": "Sidney Tumolo — in their life, C114: counted cranes on the skyline from the bus stop and got a different number than yesterday",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114",
+        "id": "F-1763e73769c9"
+      },
+      {
+        "t": "FACT",
+        "text": "Sidney Tumolo — the Tribune named them in a piece headlined What Comes Next: Seymour's A's Emerge From Spring With a Record and a Question (Sports, C86)",
+        "src": "archive/ARTICLE_INDEX.jsonl 06b741fe768ab758",
+        "id": "F-ce250e78ca75"
+      },
+      {
+        "t": "FACT",
+        "text": "Bruce Turner — heard another neighbor was between jobs, D1 — one of 4 people the Cycle's city turn reached (West Oakland Stabilization Fund sitting (0, capped); Oakland Alternative Response Initiative sitting (0, capped); Oakland Youth…) (C114)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C114",
+        "id": "F-478a70869b08"
+      },
+      {
+        "t": "FACT",
+        "text": "Bruce Turner — in their life, C114: walked a different street home just to see it",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114",
+        "id": "F-0b544699e33a"
+      },
+      {
+        "t": "FACT",
+        "text": "Bruce Turner — in their life, C114: told the story of their first A's game again, and nobody minded",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114",
+        "id": "F-bf72e7c9ff53"
+      },
+      {
+        "t": "FACT",
+        "text": "Tobias Ramas — kept score by hand at the kitchen table the way their father taught them, Lake Merritt — one of 4 people the Cycle's community turn reached (C114)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C114",
+        "id": "F-3c0548ab2b63"
+      },
+      {
+        "t": "FACT",
+        "text": "Tobias Ramas — in their life, C113: painted over graffiti on the recreation center wall alongside five neighbors they barely knew",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113",
+        "id": "F-f701b97e5113"
+      },
+      {
+        "t": "FACT",
+        "text": "Tobias Ramas — in their life, C113: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner near the lakeside path",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113",
+        "id": "F-3d6608dbdfd7"
+      },
+      {
+        "t": "FACT",
+        "text": "Tobias Ramas — in their life, C114: noticed the listing price on a place like theirs and read it twice",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114",
+        "id": "F-541e204ee7ad"
+      },
+      {
+        "t": "FACT",
+        "text": "Vinnie Keane — Keane Mercantile returned $2043 to the line this week, Grand Lake (C114 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114",
+        "id": "F-499d5e94cc08"
+      },
+      {
+        "t": "FACT",
+        "text": "Vinnie Keane — in their life, C114: got recognized twice at the grocery store after the story ran",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114",
+        "id": "F-31372c4886df"
+      },
+      {
+        "t": "FACT",
+        "text": "Vinnie Keane — in their life, C114: realized the same seven meals had rotated for a month, and shrugged",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114",
+        "id": "F-1b90b21f3a7a"
+      },
+      {
+        "t": "FACT",
+        "text": "Vinnie Keane — in their life, C114: felt quietly lucky to call Grand Lake home near a busy shopping block",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114",
+        "id": "F-b4b5ef6d9872"
+      },
+      {
+        "t": "FACT",
+        "text": "Vinnie Keane — in their life, C114: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114",
+        "id": "F-625934704127"
+      },
+      {
+        "t": "FACT",
+        "text": "Vinnie Keane — the Tribune named them in a piece headlined Keane's 2041 Strikeout Rate Is an Outlier on 127 At-Bats. Next Season Decides Whether It Is a New Baseline. (Sports, C112)",
+        "src": "archive/ARTICLE_INDEX.jsonl 2ead09deff9943ce",
+        "id": "F-08ba298f3785"
+      },
+      {
+        "t": "FACT",
+        "text": "Vinnie Keane — the Tribune named them in a piece headlined Ellis's Game Five Line Carries the Title (Sports, C111)",
+        "src": "archive/ARTICLE_INDEX.jsonl 932d071f77813236",
+        "id": "F-8a90e10c843a"
+      },
+      {
+        "t": "FACT",
+        "text": "Vinnie Keane — the Tribune named them in a piece headlined The Weight of a Banner (Sports, C110)",
+        "src": "archive/ARTICLE_INDEX.jsonl 1929a6944b1d15a1",
+        "id": "F-29062e4012ea"
+      },
+      {
+        "t": "FACT",
+        "text": "Bethany Foster — A coworker at Port of Oakland with less time in got the assignment they had asked about., Lake Merritt (C114 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114",
+        "id": "F-18273f2174ab"
+      },
+      {
+        "t": "FACT",
+        "text": "Bethany Foster — in their life, C113: navigated the stroller traffic on College Avenue and silently judged the parking jobs",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113",
+        "id": "F-5ca0ee823344"
+      },
+      {
+        "t": "FACT",
+        "text": "Bethany Foster — in their life, C113: checked in with a relative",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113",
+        "id": "F-f2ab8cedc623"
+      },
+      {
+        "t": "FACT",
+        "text": "Bethany Foster — in their life, C114: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114",
+        "id": "F-803eed88249d"
+      },
+      {
+        "t": "FACT",
+        "text": "Bethany Foster — in their life, C114: retold an old family story and caught a detail they'd never noticed",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114",
+        "id": "F-3fb9bc057081"
+      },
+      {
+        "t": "FACT",
+        "text": "Debbie Kaplan — A director at Port of Oakland asked for a meeting about their future, and it was a good one., Lake Merritt (C114 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114",
+        "id": "F-8f563c9d8a0d"
+      },
+      {
+        "t": "FACT",
+        "text": "Debbie Kaplan — in their life, C114: discovered new local artists",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114",
+        "id": "F-952031099e9d"
+      },
+      {
+        "t": "FACT",
+        "text": "Debbie Kaplan — in their life, C114: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114",
+        "id": "F-fa6f4c6e0ad3"
+      },
+      {
+        "t": "FACT",
+        "text": "Debbie Kaplan — in their life, C114: picked a favorite Oak before the team had even settled its rotation",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114",
+        "id": "F-ade65fac69cf"
+      },
+      {
+        "t": "FACT",
+        "text": "Debbie Kaplan — in their life, C114: checked in with a relative near the lakeside path",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114",
+        "id": "F-959dbb7a0f84"
+      },
+      {
+        "t": "FACT",
+        "text": "Ivy Tran — Finished the week at AC Transit with the hardest account on the floor squared away., Fruitvale (C114 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114",
+        "id": "F-c9a7bd63f085"
+      },
+      {
+        "t": "FACT",
+        "text": "Ivy Tran — in their life, C113: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113",
+        "id": "F-b61fd8ab7656"
+      },
+      {
+        "t": "FACT",
+        "text": "Ivy Tran — in their life, C113: grabbed coffee from the cart outside the hospital before the morning rush hit",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113",
+        "id": "F-30f11d9d012b"
+      },
+      {
+        "t": "FACT",
+        "text": "Ivy Tran — in their life, C114: organized the clothing drive donations and recognized a coat they had donated two years ago",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114",
+        "id": "F-f5cbeb7414af"
+      },
+      {
+        "t": "FACT",
+        "text": "Ivy Tran — in their life, C114: saw a stranger laugh at their phone and invented the joke all the way home",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114",
+        "id": "F-964df500dc0c"
+      },
+      {
+        "t": "FACT",
+        "text": "Ivy Tran — the Tribune named them in a piece headlined THEY SENT FOUR COPS FOR MY BROTHER”: PILOT DISTRICT RESIDENTS ON ALTERNATIVE RESPONSE (Managing Editor, C76)",
+        "src": "archive/ARTICLE_INDEX.jsonl 6c8f88f909061b9f",
+        "id": "F-8ed507616e95"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "street",
+    "candidates": [
+      {
+        "pop": "POP-00687",
+        "name": "Alexa Ward",
+        "role": "Licensed Plumber",
+        "hood": "West Oakland",
+        "profile": "Alexa Ward — Licensed Plumber — West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Lived_Events.jsonl @C114 batch c57479",
+          "pop": "POP-00687",
+          "rowName": "Alexa Ward",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00755",
+        "name": "Antoine Vermeer",
+        "role": "Senior Pastor / Faith Leader",
+        "hood": "Lake Merritt",
+        "profile": "Antoine Vermeer — Senior Pastor / Faith Leader — Lake Merritt",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Lived_Events.jsonl @C114 batch c57479",
+          "pop": "POP-00755",
+          "rowName": "Antoine Vermeer",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00058",
+        "name": "Sidney Tumolo",
+        "role": "Second Baseman, Oakland A's",
+        "hood": "West Oakland",
+        "profile": "Sidney Tumolo — Second Baseman, Oakland A's — West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Lived_Events.jsonl @C114 batch c57479",
+          "pop": "POP-00058",
+          "rowName": "Sidney Tumolo",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01086",
+        "name": "Bruce Turner",
+        "role": "Server",
+        "hood": "Dimond",
+        "profile": "Bruce Turner — Server — Dimond",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Lived_Events.jsonl @C114 batch c57479",
+          "pop": "POP-01086",
+          "rowName": "Bruce Turner",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01044",
+        "name": "Tobias Ramas",
+        "role": "Bank teller",
+        "hood": "Lake Merritt",
+        "profile": "Tobias Ramas — Bank teller — Lake Merritt",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Lived_Events.jsonl @C114 batch c57479",
+          "pop": "POP-01044",
+          "rowName": "Tobias Ramas",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00001",
+        "name": "Vinnie Keane",
+        "role": "Designated Hitter, Oakland A's Legend",
+        "hood": "Grand Lake",
+        "profile": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Lived_Events.jsonl @C114 batch c57479",
+          "pop": "POP-00001",
+          "rowName": "Vinnie Keane",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00356",
+        "name": "Bethany Foster",
+        "role": "Ship Repair Foreman",
+        "hood": "Lake Merritt",
+        "profile": "Bethany Foster — Ship Repair Foreman — Lake Merritt",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Lived_Events.jsonl @C114 batch c57479",
+          "pop": "POP-00356",
+          "rowName": "Bethany Foster",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00719",
+        "name": "Debbie Kaplan",
+        "role": "Harbor Tugboat Captain",
+        "hood": "Lake Merritt",
+        "profile": "Debbie Kaplan — Harbor Tugboat Captain — Lake Merritt",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Lived_Events.jsonl @C114 batch c57479",
+          "pop": "POP-00719",
+          "rowName": "Debbie Kaplan",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01037",
+        "name": "Ivy Tran",
+        "role": "Driver",
+        "hood": "Fruitvale",
+        "profile": "Ivy Tran — Driver — Fruitvale",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Lived_Events.jsonl @C114 batch c57479",
+          "pop": "POP-01037",
+          "rowName": "Ivy Tran",
+          "kind": "slice-row"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Tamsin Pruitt",
+    "popid": "POP-01210"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-lives",
+      "angle": "The lives of C114: 9 people — Alexa Ward moved into a place of their own in West Oakland, renting",
+      "label": "Alexa Ward moved into a place of their own in West Oakland, renting",
+      "hookLine": "Alexa Ward first. The event is the lead; one true detail; what came next only if the record says.",
+      "hood": null,
+      "citizens": [
+        "Alexa Ward (POP-00687)",
+        "Antoine Vermeer (POP-00755)",
+        "Sidney Tumolo (POP-00058)",
+        "Bruce Turner (POP-01086)",
+        "Tobias Ramas (POP-01044)",
+        "Vinnie Keane (POP-00001)",
+        "Bethany Foster (POP-00356)",
+        "Debbie Kaplan (POP-00719)",
+        "Ivy Tran (POP-01037)"
+      ],
+      "popids": [
+        "POP-00687",
+        "POP-00755",
+        "POP-00058",
+        "POP-01086",
+        "POP-01044",
+        "POP-00001",
+        "POP-00356",
+        "POP-00719",
+        "POP-01037"
+      ],
+      "ref": "output/beats/Lived_Events.jsonl @C114 batch c57479",
+      "cycle": 114
+    },
+    "approach": "Lives approach: this slice is the people something happened to this Cycle — a birth, a death in the house, a hospital stay, a retirement, a promotion; a household set up or a place of their own; a win or a loss on the book; the people a turn of the city reached and what it did to their day; and the smaller moments the record kept. Each person gets their own passage: the event, then the thread under it — the stay or strain that led there, the other lines the record kept for them, what the Tribune or this page already said of them, and what they did next if the record says. Read the thread in order and name where two lines of it do not agree; do not restate a ledger value as the story. The fact exactly right; never a trend, never a number first; the person, not the system the event belongs to. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "LIVES-SLICE-2",
+    "kind": "beat-lives",
+    "seat": {
+      "slug": "tamsin-pruitt",
+      "name": "Tamsin Pruitt",
+      "popid": "POP-01210",
+      "desk": "culture",
+      "domain": "lives",
+      "builder": "buildLivesSlice.js"
+    },
+    "hood": null,
+    "pulse": {
+      "className": "beat-lives",
+      "score": 100,
+      "label": "Alexa Ward moved into a place of their own in West Oakland, renting",
+      "hood": null,
+      "source": "output/beats/Lived_Events.jsonl @C114 batch c57479"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "The lives of C114: 9 people — Alexa Ward moved into a place of their own in West Oakland, renting",
+      "hookLine": "Alexa Ward first. The event is the lead; one true detail; what came next only if the record says.",
+      "anchorFacts": [
+        "Alexa Ward moved into a place of their own in West Oakland, renting (C114)",
+        "Alexa Ward — in their life, C114: spent too long in a bookstore aisle they'd never stopped at",
+        "Antoine Vermeer moved into a place of their own in Lake Merritt, renting (C114)",
+        "Antoine Vermeer — in their life, C113: wrote half a letter to family, then decided to call instead",
+        "Antoine Vermeer — in their life, C113: adjusted today's plans after last night's gridlock",
+        "Antoine Vermeer — in their life, C114: played a relative's voicemail twice before saving it again",
+        "Antoine Vermeer — in their life, C114: checked out a First Friday gallery",
+        "Antoine Vermeer — the Tribune named them in a piece headlined A Week of Many Altars: Oakland's Thanksgiving Convergence (Culture, C99)",
+        "Antoine Vermeer — the Tribune named them in a piece headlined The Season the Congregations Carried — and the Shortstop in a Deacon's Robes (Culture, C97)",
+        "Sidney Tumolo — attended a small local gathering and stayed later than planned, West Oakland — one of 4 people the Cycle's city turn reached (West Oakland Stabilization Fund sitting (0, capped); Oakland Alternative Response Initiative sitting (0, capped); Fruitvale Transit Hub…) (C114)",
+        "Sidney Tumolo — in their life, C113: read the Tribune's front page twice — once for the news, once to see who was in it",
+        "Sidney Tumolo — in their life, C114: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence",
+        "Sidney Tumolo — in their life, C114: counted cranes on the skyline from the bus stop and got a different number than yesterday",
+        "Sidney Tumolo — the Tribune named them in a piece headlined What Comes Next: Seymour's A's Emerge From Spring With a Record and a Question (Sports, C86)",
+        "Bruce Turner — heard another neighbor was between jobs, D1 — one of 4 people the Cycle's city turn reached (West Oakland Stabilization Fund sitting (0, capped); Oakland Alternative Response Initiative sitting (0, capped); Oakland Youth…) (C114)",
+        "Bruce Turner — in their life, C114: walked a different street home just to see it",
+        "Bruce Turner — in their life, C114: told the story of their first A's game again, and nobody minded",
+        "Tobias Ramas — kept score by hand at the kitchen table the way their father taught them, Lake Merritt — one of 4 people the Cycle's community turn reached (C114)",
+        "Tobias Ramas — in their life, C113: painted over graffiti on the recreation center wall alongside five neighbors they barely knew",
+        "Tobias Ramas — in their life, C113: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner near the lakeside path",
+        "Tobias Ramas — in their life, C114: noticed the listing price on a place like theirs and read it twice",
+        "Vinnie Keane — Keane Mercantile returned $2043 to the line this week, Grand Lake (C114 — what happened in their life, not words they said)",
+        "Vinnie Keane — in their life, C114: got recognized twice at the grocery store after the story ran",
+        "Vinnie Keane — in their life, C114: realized the same seven meals had rotated for a month, and shrugged",
+        "Vinnie Keane — in their life, C114: felt quietly lucky to call Grand Lake home near a busy shopping block",
+        "Vinnie Keane — in their life, C114: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+        "Vinnie Keane — the Tribune named them in a piece headlined Keane's 2041 Strikeout Rate Is an Outlier on 127 At-Bats. Next Season Decides Whether It Is a New Baseline. (Sports, C112)",
+        "Vinnie Keane — the Tribune named them in a piece headlined Ellis's Game Five Line Carries the Title (Sports, C111)",
+        "Vinnie Keane — the Tribune named them in a piece headlined The Weight of a Banner (Sports, C110)",
+        "Bethany Foster — A coworker at Port of Oakland with less time in got the assignment they had asked about., Lake Merritt (C114 — what happened in their life, not words they said)",
+        "Bethany Foster — in their life, C113: navigated the stroller traffic on College Avenue and silently judged the parking jobs",
+        "Bethany Foster — in their life, C113: checked in with a relative",
+        "Bethany Foster — in their life, C114: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+        "Bethany Foster — in their life, C114: retold an old family story and caught a detail they'd never noticed",
+        "Debbie Kaplan — A director at Port of Oakland asked for a meeting about their future, and it was a good one., Lake Merritt (C114 — what happened in their life, not words they said)",
+        "Debbie Kaplan — in their life, C114: discovered new local artists",
+        "Debbie Kaplan — in their life, C114: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+        "Debbie Kaplan — in their life, C114: picked a favorite Oak before the team had even settled its rotation",
+        "Debbie Kaplan — in their life, C114: checked in with a relative near the lakeside path",
+        "Ivy Tran — Finished the week at AC Transit with the hardest account on the floor squared away., Fruitvale (C114 — what happened in their life, not words they said)",
+        "Ivy Tran — in their life, C113: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+        "Ivy Tran — in their life, C113: grabbed coffee from the cart outside the hospital before the morning rush hit",
+        "Ivy Tran — in their life, C114: organized the clothing drive donations and recognized a coat they had donated two years ago",
+        "Ivy Tran — in their life, C114: saw a stranger laugh at their phone and invented the joke all the way home",
+        "Ivy Tran — the Tribune named them in a piece headlined THEY SENT FOUR COPS FOR MY BROTHER”: PILOT DISTRICT RESIDENTS ON ALTERNATIVE RESPONSE (Managing Editor, C76)"
+      ],
+      "evidence": [
+        {
+          "text": "Alexa Ward moved into a place of their own in West Oakland, renting (C114)",
+          "src": "output/beats/Household_Ledger.jsonl @C114",
+          "id": "household:HH-0114-F009:114",
+          "kind": "household",
+          "popid": "POP-00687"
+        },
+        {
+          "text": "Alexa Ward — in their life, C114: spent too long in a bookstore aisle they'd never stopped at",
+          "src": "output/beats/LifeHistory_Log.jsonl @C114",
+          "kind": "thread",
+          "popid": "POP-00687"
+        },
+        {
+          "text": "Antoine Vermeer moved into a place of their own in Lake Merritt, renting (C114)",
+          "src": "output/beats/Household_Ledger.jsonl @C114",
+          "id": "household:HH-0114-F010:114",
+          "kind": "household",
+          "popid": "POP-00755"
+        },
+        {
+          "text": "Antoine Vermeer — in their life, C113: wrote half a letter to family, then decided to call instead",
+          "src": "output/beats/LifeHistory_Log.jsonl @C113",
+          "kind": "thread",
+          "popid": "POP-00755"
+        },
+        {
+          "text": "Antoine Vermeer — in their life, C113: adjusted today's plans after last night's gridlock",
+          "src": "output/beats/LifeHistory_Log.jsonl @C113",
+          "kind": "thread",
+          "popid": "POP-00755"
+        },
+        {
+          "text": "Antoine Vermeer — in their life, C114: played a relative's voicemail twice before saving it again",
+          "src": "output/beats/LifeHistory_Log.jsonl @C114",
+          "kind": "thread",
+          "popid": "POP-00755"
+        },
+        {
+          "text": "Antoine Vermeer — in their life, C114: checked out a First Friday gallery",
+          "src": "output/beats/LifeHistory_Log.jsonl @C114",
+          "kind": "thread",
+          "popid": "POP-00755"
+        },
+        {
+          "text": "Antoine Vermeer — the Tribune named them in a piece headlined A Week of Many Altars: Oakland's Thanksgiving Convergence (Culture, C99)",
+          "src": "archive/ARTICLE_INDEX.jsonl 57235fd2f5166f60",
+          "kind": "thread",
+          "popid": "POP-00755"
+        },
+        {
+          "text": "Antoine Vermeer — the Tribune named them in a piece headlined The Season the Congregations Carried — and the Shortstop in a Deacon's Robes (Culture, C97)",
+          "src": "archive/ARTICLE_INDEX.jsonl 8351dd42bdadab26",
+          "kind": "thread",
+          "popid": "POP-00755"
+        },
+        {
+          "text": "Sidney Tumolo — attended a small local gathering and stayed later than planned, West Oakland — one of 4 people the Cycle's city turn reached (West Oakland Stabilization Fund sitting (0, capped); Oakland Alternative Response Initiative sitting (0, capped); Fruitvale Transit Hub…) (C114)",
+          "src": "output/beats/Story_Seed_Deck.jsonl @C114",
+          "id": "seed:0d0615e8:114:POP-00058",
+          "kind": "seed",
+          "popid": "POP-00058"
+        },
+        {
+          "text": "Sidney Tumolo — in their life, C113: read the Tribune's front page twice — once for the news, once to see who was in it",
+          "src": "output/beats/LifeHistory_Log.jsonl @C113",
+          "kind": "thread",
+          "popid": "POP-00058"
+        },
+        {
+          "text": "Sidney Tumolo — in their life, C114: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence",
+          "src": "output/beats/LifeHistory_Log.jsonl @C114",
+          "kind": "thread",
+          "popid": "POP-00058"
+        },
+        {
+          "text": "Sidney Tumolo — in their life, C114: counted cranes on the skyline from the bus stop and got a different number than yesterday",
+          "src": "output/beats/LifeHistory_Log.jsonl @C114",
+          "kind": "thread",
+          "popid": "POP-00058"
+        },
+        {
+          "text": "Sidney Tumolo — the Tribune named them in a piece headlined What Comes Next: Seymour's A's Emerge From Spring With a Record and a Question (Sports, C86)",
+          "src": "archive/ARTICLE_INDEX.jsonl 06b741fe768ab758",
+          "kind": "thread",
+          "popid": "POP-00058"
+        },
+        {
+          "text": "Bruce Turner — heard another neighbor was between jobs, D1 — one of 4 people the Cycle's city turn reached (West Oakland Stabilization Fund sitting (0, capped); Oakland Alternative Response Initiative sitting (0, capped); Oakland Youth…) (C114)",
+          "src": "output/beats/Story_Seed_Deck.jsonl @C114",
+          "id": "seed:b9b28ced:114:POP-01086",
+          "kind": "seed",
+          "popid": "POP-01086"
+        },
+        {
+          "text": "Bruce Turner — in their life, C114: walked a different street home just to see it",
+          "src": "output/beats/LifeHistory_Log.jsonl @C114",
+          "kind": "thread",
+          "popid": "POP-01086"
+        },
+        {
+          "text": "Bruce Turner — in their life, C114: told the story of their first A's game again, and nobody minded",
+          "src": "output/beats/LifeHistory_Log.jsonl @C114",
+          "kind": "thread",
+          "popid": "POP-01086"
+        },
+        {
+          "text": "Tobias Ramas — kept score by hand at the kitchen table the way their father taught them, Lake Merritt — one of 4 people the Cycle's community turn reached (C114)",
+          "src": "output/beats/Story_Seed_Deck.jsonl @C114",
+          "id": "seed:f5a04768:114:POP-01044",
+          "kind": "seed",
+          "popid": "POP-01044"
+        },
+        {
+          "text": "Tobias Ramas — in their life, C113: painted over graffiti on the recreation center wall alongside five neighbors they barely knew",
+          "src": "output/beats/LifeHistory_Log.jsonl @C113",
+          "kind": "thread",
+          "popid": "POP-01044"
+        },
+        {
+          "text": "Tobias Ramas — in their life, C113: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner near the lakeside path",
+          "src": "output/beats/LifeHistory_Log.jsonl @C113",
+          "kind": "thread",
+          "popid": "POP-01044"
+        },
+        {
+          "text": "Tobias Ramas — in their life, C114: noticed the listing price on a place like theirs and read it twice",
+          "src": "output/beats/LifeHistory_Log.jsonl @C114",
+          "kind": "thread",
+          "popid": "POP-01044"
+        },
+        {
+          "text": "Vinnie Keane — Keane Mercantile returned $2043 to the line this week, Grand Lake (C114 — what happened in their life, not words they said)",
+          "src": "output/beats/LifeHistory_Log.jsonl @C114",
+          "id": "moment:POP-00001:114:Business-Gain",
+          "kind": "moment",
+          "popid": "POP-00001"
+        },
+        {
+          "text": "Vinnie Keane — in their life, C114: got recognized twice at the grocery store after the story ran",
+          "src": "output/beats/LifeHistory_Log.jsonl @C114",
+          "kind": "thread",
+          "popid": "POP-00001"
+        },
+        {
+          "text": "Vinnie Keane — in their life, C114: realized the same seven meals had rotated for a month, and shrugged",
+          "src": "output/beats/LifeHistory_Log.jsonl @C114",
+          "kind": "thread",
+          "popid": "POP-00001"
+        },
+        {
+          "text": "Vinnie Keane — in their life, C114: felt quietly lucky to call Grand Lake home near a busy shopping block",
+          "src": "output/beats/LifeHistory_Log.jsonl @C114",
+          "kind": "thread",
+          "popid": "POP-00001"
+        },
+        {
+          "text": "Vinnie Keane — in their life, C114: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+          "src": "output/beats/LifeHistory_Log.jsonl @C114",
+          "kind": "thread",
+          "popid": "POP-00001"
+        },
+        {
+          "text": "Vinnie Keane — the Tribune named them in a piece headlined Keane's 2041 Strikeout Rate Is an Outlier on 127 At-Bats. Next Season Decides Whether It Is a New Baseline. (Sports, C112)",
+          "src": "archive/ARTICLE_INDEX.jsonl 2ead09deff9943ce",
+          "kind": "thread",
+          "popid": "POP-00001"
+        },
+        {
+          "text": "Vinnie Keane — the Tribune named them in a piece headlined Ellis's Game Five Line Carries the Title (Sports, C111)",
+          "src": "archive/ARTICLE_INDEX.jsonl 932d071f77813236",
+          "kind": "thread",
+          "popid": "POP-00001"
+        },
+        {
+          "text": "Vinnie Keane — the Tribune named them in a piece headlined The Weight of a Banner (Sports, C110)",
+          "src": "archive/ARTICLE_INDEX.jsonl 1929a6944b1d15a1",
+          "kind": "thread",
+          "popid": "POP-00001"
+        },
+        {
+          "text": "Bethany Foster — A coworker at Port of Oakland with less time in got the assignment they had asked about., Lake Merritt (C114 — what happened in their life, not words they said)",
+          "src": "output/beats/LifeHistory_Log.jsonl @C114",
+          "id": "moment:POP-00356:114:LifeEvent-Promotion-Down-S",
+          "kind": "moment",
+          "popid": "POP-00356"
+        },
+        {
+          "text": "Bethany Foster — in their life, C113: navigated the stroller traffic on College Avenue and silently judged the parking jobs",
+          "src": "output/beats/LifeHistory_Log.jsonl @C113",
+          "kind": "thread",
+          "popid": "POP-00356"
+        },
+        {
+          "text": "Bethany Foster — in their life, C113: checked in with a relative",
+          "src": "output/beats/LifeHistory_Log.jsonl @C113",
+          "kind": "thread",
+          "popid": "POP-00356"
+        },
+        {
+          "text": "Bethany Foster — in their life, C114: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+          "src": "output/beats/LifeHistory_Log.jsonl @C114",
+          "kind": "thread",
+          "popid": "POP-00356"
+        },
+        {
+          "text": "Bethany Foster — in their life, C114: retold an old family story and caught a detail they'd never noticed",
+          "src": "output/beats/LifeHistory_Log.jsonl @C114",
+          "kind": "thread",
+          "popid": "POP-00356"
+        },
+        {
+          "text": "Debbie Kaplan — A director at Port of Oakland asked for a meeting about their future, and it was a good one., Lake Merritt (C114 — what happened in their life, not words they said)",
+          "src": "output/beats/LifeHistory_Log.jsonl @C114",
+          "id": "moment:POP-00719:114:LifeEvent-Promotion-Up-M",
+          "kind": "moment",
+          "popid": "POP-00719"
+        },
+        {
+          "text": "Debbie Kaplan — in their life, C114: discovered new local artists",
+          "src": "output/beats/LifeHistory_Log.jsonl @C114",
+          "kind": "thread",
+          "popid": "POP-00719"
+        },
+        {
+          "text": "Debbie Kaplan — in their life, C114: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+          "src": "output/beats/LifeHistory_Log.jsonl @C114",
+          "kind": "thread",
+          "popid": "POP-00719"
+        },
+        {
+          "text": "Debbie Kaplan — in their life, C114: picked a favorite Oak before the team had even settled its rotation",
+          "src": "output/beats/LifeHistory_Log.jsonl @C114",
+          "kind": "thread",
+          "popid": "POP-00719"
+        },
+        {
+          "text": "Debbie Kaplan — in their life, C114: checked in with a relative near the lakeside path",
+          "src": "output/beats/LifeHistory_Log.jsonl @C114",
+          "kind": "thread",
+          "popid": "POP-00719"
+        },
+        {
+          "text": "Ivy Tran — Finished the week at AC Transit with the hardest account on the floor squared away., Fruitvale (C114 — what happened in their life, not words they said)",
+          "src": "output/beats/LifeHistory_Log.jsonl @C114",
+          "id": "moment:POP-01037:114:LifeEvent-Promotion-Up-S",
+          "kind": "moment",
+          "popid": "POP-01037"
+        },
+        {
+          "text": "Ivy Tran — in their life, C113: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+          "src": "output/beats/LifeHistory_Log.jsonl @C113",
+          "kind": "thread",
+          "popid": "POP-01037"
+        },
+        {
+          "text": "Ivy Tran — in their life, C113: grabbed coffee from the cart outside the hospital before the morning rush hit",
+          "src": "output/beats/LifeHistory_Log.jsonl @C113",
+          "kind": "thread",
+          "popid": "POP-01037"
+        },
+        {
+          "text": "Ivy Tran — in their life, C114: organized the clothing drive donations and recognized a coat they had donated two years ago",
+          "src": "output/beats/LifeHistory_Log.jsonl @C114",
+          "kind": "thread",
+          "popid": "POP-01037"
+        },
+        {
+          "text": "Ivy Tran — in their life, C114: saw a stranger laugh at their phone and invented the joke all the way home",
+          "src": "output/beats/LifeHistory_Log.jsonl @C114",
+          "kind": "thread",
+          "popid": "POP-01037"
+        },
+        {
+          "text": "Ivy Tran — the Tribune named them in a piece headlined THEY SENT FOUR COPS FOR MY BROTHER”: PILOT DISTRICT RESIDENTS ON ALTERNATIVE RESPONSE (Managing Editor, C76)",
+          "src": "archive/ARTICLE_INDEX.jsonl 6c8f88f909061b9f",
+          "kind": "thread",
+          "popid": "POP-01037"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": null,
+      "hooks": [
+        {
+          "text": "A family bought their home in Rockridge",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Rockridge",
+          "priority": 3
+        },
+        {
+          "text": "The Thompson household (2) moved from Chinatown to West Oakland — moving up from Chinatown",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "West Oakland",
+          "priority": 5
+        },
+        {
+          "text": "Derek Obi moved from Downtown to Rockridge — moving up from Downtown — sold the house in Downtown to rent up",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "Rockridge",
+          "priority": 5
+        },
+        {
+          "text": "Patrice Rao moved from Chinatown to West Oakland — moving up from Chinatown",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "West Oakland",
+          "priority": 5
+        },
+        {
+          "text": "Graciela Foster moved from Uptown to East Oakland — moving for a better fit between household income and housing costs",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "East Oakland",
+          "priority": 5
+        }
+      ],
+      "note": null,
+      "pageVoices": [
+        "Vinnie Keane, own page (in a talk, a question they carry, C114): “Do I come back for one more run, or step away for good? I haven't decided yet.”"
+      ],
+      "factCap": 120,
+      "peopleCap": 16,
+      "roomIsYours": "the plain respect, what the event meant in that house or on that block, the detail the family would have picked — from the lines below, never invented"
+    },
+    "citizens": [
+      {
+        "popid": "POP-00687",
+        "name": "Alexa Ward",
+        "role": "Licensed Plumber",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "Alexa Ward — Licensed Plumber — West Oakland",
+        "why": "moved into a place of their own this Cycle"
+      },
+      {
+        "popid": "POP-00755",
+        "name": "Antoine Vermeer",
+        "role": "Senior Pastor / Faith Leader",
+        "neighborhood": "Lake Merritt",
+        "business": null,
+        "profile": "Antoine Vermeer — Senior Pastor / Faith Leader — Lake Merritt",
+        "why": "moved into a place of their own this Cycle"
+      },
+      {
+        "popid": "POP-00058",
+        "name": "Sidney Tumolo",
+        "role": "Second Baseman, Oakland A's",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "Sidney Tumolo — Second Baseman, Oakland A's — West Oakland",
+        "why": "reached by the Cycle's city turn: attended a small local gathering and stayed later than planned"
+      },
+      {
+        "popid": "POP-01086",
+        "name": "Bruce Turner",
+        "role": "Server",
+        "neighborhood": "Dimond",
+        "business": null,
+        "profile": "Bruce Turner — Server — Dimond",
+        "why": "reached by the Cycle's city turn: heard another neighbor was between jobs"
+      },
+      {
+        "popid": "POP-01044",
+        "name": "Tobias Ramas",
+        "role": "Bank teller",
+        "neighborhood": "Lake Merritt",
+        "business": null,
+        "profile": "Tobias Ramas — Bank teller — Lake Merritt",
+        "why": "reached by the Cycle's community turn: kept score by hand at the kitchen table the way their father taught them"
+      },
+      {
+        "popid": "POP-00001",
+        "name": "Vinnie Keane",
+        "role": "Designated Hitter, Oakland A's Legend",
+        "neighborhood": "Grand Lake",
+        "business": null,
+        "profile": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+        "why": "business-gain this Cycle: Keane Mercantile returned $2043 to the line this week"
+      },
+      {
+        "popid": "POP-00356",
+        "name": "Bethany Foster",
+        "role": "Ship Repair Foreman",
+        "neighborhood": "Lake Merritt",
+        "business": null,
+        "profile": "Bethany Foster — Ship Repair Foreman — Lake Merritt",
+        "why": "lifeevent-promotion-down-s this Cycle: A coworker at Port of Oakland with less time in got the assignment they had asked about."
+      },
+      {
+        "popid": "POP-00719",
+        "name": "Debbie Kaplan",
+        "role": "Harbor Tugboat Captain",
+        "neighborhood": "Lake Merritt",
+        "business": null,
+        "profile": "Debbie Kaplan — Harbor Tugboat Captain — Lake Merritt",
+        "why": "lifeevent-promotion-up-m this Cycle: A director at Port of Oakland asked for a meeting about their future, and it was a good one."
+      },
+      {
+        "popid": "POP-01037",
+        "name": "Ivy Tran",
+        "role": "Driver",
+        "neighborhood": "Fruitvale",
+        "business": null,
+        "profile": "Ivy Tran — Driver — Fruitvale",
+        "why": "lifeevent-promotion-up-s this Cycle: Finished the week at AC Transit with the hardest account on the floor squared away."
+      }
+    ],
+    "pointers": [
+      "output/beats/Lived_Events.jsonl @C114 batch c57479",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Tamsin Pruitt this cycle)"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Tamsin Pruitt",
+    "popid": "POP-01210",
+    "text": "I will write about the lives of nine people in C114, focusing on the significant events that happened to them. I'll start with Alexa Ward, who moved into a place of their own in West Oakland. I'll explore the details of their life, including the fact that they spent too long in a bookstore aisle they'd never stopped at. I'll then move on to the other eight individuals, weaving their stories together into a cohesive narrative. I'll make sure to conclude directly on the last person's passage, avoiding a summary paragraph.",
+    "plan": {
+      "chase": "I will write about the lives of nine people in C114, focusing on the significant events that happened to them. I'll start with Alexa Ward, who moved into a place of their own in West Oakland. I'll explore the details of their life, including the fact that they spent too long in a bookstore aisle they'd never stopped at. I'll then move on to the other eight individuals, weaving their stories together into a cohesive narrative. I'll make sure to conclude directly on the last person's passage, avoiding a summary paragraph.",
+      "focus": "The lives of C114: 9 people",
+      "why": "To capture the essence of the significant events that occurred in the lives of these nine individuals during C114",
+      "checks": [
+        "Ensure that each person's passage is well-structured and includes the event, relevant details, and what happened next",
+        "Verify that the narrative flows smoothly and logically between the different individuals' stories",
+        "Confirm that the piece concludes directly on the last person's passage"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00687",
+          "question": "What was Alexa Ward's experience like when they moved into their new place?",
+          "basis": "Alexa Ward moved into a place of their own in West Oakland, renting (C114)"
+        },
+        {
+          "pop": "POP-00755",
+          "question": "How did Antoine Vermeer's recent experiences shape their decision to move into a new place?",
+          "basis": "Antoine Vermeer moved into a place of their own in Lake Merritt, renting (C114)"
+        },
+        {
+          "pop": "POP-00058",
+          "question": "What was Sidney Tumolo's experience like at the small local gathering they attended?",
+          "basis": "Sidney Tumolo — attended a small local gathering and stayed later than planned, West Oakland"
+        },
+        {
+          "pop": "POP-01086",
+          "question": "How did Bruce Turner react to hearing that another neighbor was between jobs?",
+          "basis": "Bruce Turner — heard another neighbor was between jobs, D1"
+        },
+        {
+          "pop": "POP-01044",
+          "question": "What was significant about Tobias Ramas keeping score by hand at the kitchen table?",
+          "basis": "Tobias Ramas — kept score by hand at the kitchen table the way their father taught them, Lake Merritt"
+        },
+        {
+          "pop": "POP-00001",
+          "question": "What was the significance of Keane Mercantile returning $2043 to the line?",
+          "basis": "Vinnie Keane — Keane Mercantile returned $2043 to the line this week, Grand Lake (C114)"
+        },
+        {
+          "pop": "POP-00356",
+          "question": "How did Bethany Foster feel about a coworker with less time getting the assignment they had asked about?",
+          "basis": "Bethany Foster — A coworker at Port of Oakland with less time in got the assignment they had asked about., Lake Merritt (C114)"
+        },
+        {
+          "pop": "POP-00719",
+          "question": "What was Debbie Kaplan's reaction to a director asking for a meeting about their future?",
+          "basis": "Debbie Kaplan — A director at Port of Oakland asked for a meeting about their future, and it was a good one., Lake Merritt (C114)"
+        }
+      ],
+      "interpretation": "The lives of these nine individuals are intertwined by the significant events that occurred in C114, revealing a complex tapestry of experiences and emotions.",
+      "unverifiedLead": [
+        "The Fruitvale Transit Hub Phase II design plans being up for public viewing might have influenced Ivy Tran's experience."
+      ],
+      "closeQuestion": "How will the events of C114 continue to shape the lives of these individuals in the future?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Grand Lake neighborhood texture — how residents experience the improvement | Residents of Grand Lake feel the change firsthand.",
+      "kind": "anomaly",
+      "hood": "Grand Lake",
+      "ref": "output/engine_audit_c114.json patterns[5]; evidence: Initiative_Tracker row(s) 9; storyline INIT-009:announced",
+      "popids": [
+        "POP-00001",
+        "POP-01049",
+        "POP-01218"
+      ]
+    },
+    {
+      "label": "Chinatown | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Chinatown",
+      "ref": "output/neighborhood_texture_c114.md \"### Chinatown\"; events: world_summary_c114.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Downtown | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Downtown",
+      "ref": "output/neighborhood_texture_c114.md \"### Downtown\"; events: world_summary_c114.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "East Oakland | 2 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "East Oakland",
+      "ref": "output/neighborhood_texture_c114.md \"### East Oakland\"; events: world_summary_c114.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Lake Merritt | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Lake Merritt",
+      "ref": "output/neighborhood_texture_c114.md \"### Lake Merritt\"; events: world_summary_c114.md \"## World Events\"",
+      "popids": []
+    }
+  ],
+  "laneEntries": 28,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-06T12:17:40.436Z"
+}

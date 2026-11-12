@@ -1,0 +1,82 @@
+{
+  "status": "staged",
+  "desk": "wire",
+  "cycle": "114",
+  "persona": "celeste-tran",
+  "byline": "Celeste Tran",
+  "bylinePopid": "POP-00164",
+  "article": "output/cron-compare/staged/wire_c114_celeste-tran_packet-v2_x-ai-grok-4-3.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Vinnie Keane",
+        "role": "mentioned",
+        "popid": "POP-00001"
+      },
+      {
+        "name": "Henry Rivas",
+        "role": "quoted-source",
+        "popid": "POP-00024"
+      },
+      {
+        "name": "Kai Tanaka",
+        "role": "quoted-source",
+        "popid": "POP-01068"
+      },
+      {
+        "name": "Evan Lewis",
+        "role": "quoted-source",
+        "popid": "POP-00200"
+      },
+      {
+        "name": "Arturo Ramos",
+        "role": "mentioned",
+        "popid": "POP-00025",
+        "floor": true
+      },
+      {
+        "name": "John Ellis",
+        "role": "mentioned",
+        "popid": "POP-00033",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Grand Lake"
+    ],
+    "claims": [
+      {
+        "claim": "The A's are a big part of Oakland's identity, and I'm proud to have been a part of it. I feel like they bring the community together, especially on game days. I've seen it firsthand in Grand Lake, where people come out to support the team. It's not just about the games, though - the A's have a presence in the city that's hard to ignore. I've been recognized a couple of times at the grocery store recently, and it's nice to feel like I'm still a part of something bigger than myself. As for their influence on the community, I think it's positive overall. They've got a lot of young talent coming up, and it's exciting to see what the future holds.",
+        "sourceRef": "citizenVoice PRESS Vinnie Keane"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-ba61a75a5348",
+    "draftSha256": "7442d2266d51de083b727672b063279f2bbd6e8bc7b1a85b69a9c058aba3ae57",
+    "verdict": "output/cron-compare/wire_c114_celeste-tran_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-11-07T00:18:44.149Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 400",
+      "words": 444,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "7442d2266d51de083b727672b063279f2bbd6e8bc7b1a85b69a9c058aba3ae57",
+      "costUsd": 0.0009
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-07T00:18:46.831Z"
+}

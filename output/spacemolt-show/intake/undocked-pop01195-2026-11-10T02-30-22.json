@@ -1,0 +1,59 @@
+{
+  "v": "UNDOCKED-INTAKE/1",
+  "Timestamp": "2026-11-10T02:55:38.489Z",
+  "POPID": "POP-01195",
+  "Cycle": 115,
+  "Seq": 1,
+  "Daypart": "SHOW",
+  "Tag": "undocked-episode",
+  "EpisodeId": "undocked-pop01195-2026-11-10T02-30-22",
+  "Applied": "yes",
+  "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop01195-2026-11-10T02-30-22.json",
+  "Holder": "Elijah Brown",
+  "CreditsDelta": 0,
+  "Magnitude": 1,
+  "Flags": [
+    "credits_delta_windowed"
+  ],
+  "Excerpt": "Elijah Brown credits=0 systems=sol,alpha_centauri,tau_ceti,timberline,arcturus,ross_154,maplevale,miaplacidus,cervantes,ridgecrest,hatysa,nembus,kitalpha,lacaille_8760,kepler_442,theemin,hollowcrest",
+  "DecidedAt": "2026-11-10T02:55:38.496Z",
+  "DecidedBy": "auto-gate",
+  "Note": "auto-approved on contract validation (§2.5)",
+  "FeedEvent": {
+    "v": "UNDOCKED-FEED/1",
+    "Cycle": 115,
+    "EventType": "undocked-episode",
+    "POPID": "POP-01195",
+    "Holder": "Elijah Brown",
+    "EpisodeId": "undocked-pop01195-Y3C11",
+    "CreditsDelta": 0,
+    "PointsDelta": 28.13,
+    "Systems": [
+      "sol",
+      "alpha_centauri",
+      "tau_ceti",
+      "timberline",
+      "arcturus",
+      "ross_154",
+      "maplevale",
+      "miaplacidus",
+      "cervantes",
+      "ridgecrest",
+      "hatysa",
+      "nembus",
+      "kitalpha",
+      "lacaille_8760",
+      "kepler_442",
+      "theemin",
+      "hollowcrest"
+    ],
+    "CombatEvents": 0,
+    "MishapCount": 0,
+    "Magnitude": 1,
+    "Flags": [
+      "credits_delta_windowed"
+    ],
+    "StagedPath": "output/spacemolt-show/staged/undocked-pop01195-2026-11-10T02-30-22.json"
+  },
+  "PointsDelta": 28.13
+}

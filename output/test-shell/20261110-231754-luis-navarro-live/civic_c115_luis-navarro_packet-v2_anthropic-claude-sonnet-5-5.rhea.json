@@ -1,0 +1,99 @@
+{
+  "draft": "output/test-shell/20261110-231754-luis-navarro-live/civic_c115_luis-navarro_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "115",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "454173be98a100db7b22513e92df63234105bb364aacb096803c0bbaa4e3d052",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Clean verification: Oakland Youth Apprenticeship Pipeline status and Mayor Santana attribution match ground truth with zero canon violations.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "luis-investigation-record-v1",
+    "packageVersion": "LUIS-LEP2-2",
+    "manifestId": "AM-e6c2103144ea",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "400",
+          "-007",
+          "12.5",
+          "73",
+          "-01",
+          "107",
+          "111",
+          "112",
+          "113",
+          "114",
+          "116",
+          "12",
+          "500",
+          "000",
+          "76",
+          "78",
+          "80",
+          "83"
+        ]
+      },
+      {
+        "code": "UNAPPROVED_QUOTE",
+        "values": [
+          "passed."
+        ]
+      },
+      {
+        "code": "INVESTIGATION_EPISTEMIC_OVERREACH",
+        "values": [
+          "no record of a request",
+          "no record"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Avery Santana"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.011,
+  "durationMs": 6984,
+  "parseError": false,
+  "ranAt": "2026-11-11T00:15:31.531Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 400",
+    "words": 667,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "454173be98a100db7b22513e92df63234105bb364aacb096803c0bbaa4e3d052",
+    "costUsd": 0.0012
+  }
+}

@@ -1,0 +1,1299 @@
+{
+  "stage": "angle",
+  "desk": "culture",
+  "cycle": "111",
+  "persona": "kai-marston",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00158",
+      "name": "Kai Marston",
+      "role": "desk reporter",
+      "desk": "culture"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Tara Ellison is rising — the acts and the rooms they play",
+      "approach": "Arts & entertainment approach: this slice is the culture ledger — who is rising, who just appeared, who is fading, with their domains and neighborhoods — plus the engine's culture seeds this cycle. Present-tense, neighborhood act not gallery PR. The names and trajectories are real; the garage rehearsal, the opening-night crowd, the set list are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "arts",
+        "hood": "Rockridge",
+        "facts": [
+          "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 63, surging), last seen C110",
+          "Sculptor Alma Vasquez (sculptor), Arts, Laurel — fame rising (fame 54, ascending), last seen C86",
+          "Nina Reyes (actress), Arts, Fruitvale — fame rising (fame 52, surging), last seen C101",
+          "Theo Banks (rapper), Arts, Uptown — fame rising (fame 48, surging), last seen C99",
+          "Warriors Alumni Thompson (basketball legend), Sports, Temescal — new on the culture record last cycle (fame 18, rising), last seen C110",
+          "Lena Cross (Celebrity), Arts, Piedmont Ave — fading — the where-are-they-now file (fame 94, cooling), last seen C94",
+          "Rowan Pierce (journalist), Media, Piedmont Ave — fading — the where-are-they-now file (fame 68, cooling), last seen C88",
+          "ENGINE SEED (Citywide): Iman Horton; Malik Hayes; Victor Baker",
+          "ENGINE SEED (East Oakland): Ruth Anyanwu; Lena Marchetti; Adaeze Onwuka · at Sunrise Cafe; Masjid An-Nur Oakland",
+          "ENGINE SEED (Chinatown): Matra Woven; Dana Reeve; Jose Colon · at Heritage Bakehouse; Ninth Street Kitchen"
+        ],
+        "priorCycle": null,
+        "note": null,
+        "engineHooks": [
+          "realized the week had passed without a single thing worth retelling near a storefront window (arts/culture feature)",
+          "Uptown boom sustained — momentum 10/10, the block everyone wants onto (desk rotation)",
+          "The Santos household (2) moved from Chinatown to West Oakland — moving up from Chinatown (desk rotation)",
+          "Ignacio Zavala moved from Lake Merritt to West Oakland — leaving Lake Merritt for a better fit (desk rotation)"
+        ],
+        "roomIsYours": "the rehearsal space, the flyer on the pole, who showed up, what the room felt like when the second act started",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-arts",
+      "hood": "Rockridge",
+      "score": null,
+      "src": "output/beats/Cultural_Ledger.jsonl @C111",
+      "nearby": [
+        {
+          "text": "Chinatown | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c111.md \"### Chinatown\"; events: world_summary_c111.md \"## World Events\""
+        },
+        {
+          "text": "East Oakland | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c111.md \"### East Oakland\"; events: world_summary_c111.md \"## World Events\""
+        },
+        {
+          "text": "Fruitvale | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c111.md \"### Fruitvale\"; events: world_summary_c111.md \"## World Events\""
+        },
+        {
+          "text": "Grand Lake | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c111.md \"### Grand Lake\"; events: world_summary_c111.md \"## World Events\""
+        },
+        {
+          "text": "Jack London | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c111.md \"### Jack London\"; events: world_summary_c111.md \"## World Events\""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00546",
+          "name": "Tara Ellison",
+          "profile": "Tara Ellison — Journalist — Rockridge",
+          "role": "Journalist",
+          "hood": "Rockridge",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C111",
+            "pop": "POP-00546",
+            "rowName": "Tara Ellison",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01063",
+          "name": "Alma Vasquez",
+          "profile": "Alma Vasquez — sculptor — Laurel",
+          "role": "sculptor",
+          "hood": "Laurel",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C111",
+            "pop": "POP-01063",
+            "rowName": "Alma Vasquez",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01057",
+          "name": "Nina Reyes",
+          "profile": "Nina Reyes — actress — Fruitvale",
+          "role": "actress",
+          "hood": "Fruitvale",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C111",
+            "pop": "POP-01057",
+            "rowName": "Nina Reyes",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01056",
+          "name": "Theo Banks",
+          "profile": "Theo Banks — rapper — Uptown",
+          "role": "rapper",
+          "hood": "Uptown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C111",
+            "pop": "POP-01056",
+            "rowName": "Theo Banks",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00539",
+          "name": "Lena Cross",
+          "profile": "Lena Cross — Actor — Piedmont Ave",
+          "role": "Actor",
+          "hood": "Piedmont Ave",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C111",
+            "pop": "POP-00539",
+            "rowName": "Lena Cross",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00545",
+          "name": "Rowan Pierce",
+          "profile": "Rowan Pierce — Freelance Writer — Piedmont Ave",
+          "role": "Freelance Writer",
+          "hood": "Piedmont Ave",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C111",
+            "pop": "POP-00545",
+            "rowName": "Rowan Pierce",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00343",
+          "name": "Iman Horton",
+          "profile": "Iman Horton — Refugee Resettlement Case Worker — Chinatown",
+          "role": "Refugee Resettlement Case Worker",
+          "hood": "Chinatown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C111",
+            "pop": "POP-00343",
+            "rowName": "Iman Horton",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00774",
+          "name": "Malik Hayes",
+          "profile": "Malik Hayes — Lead Investigator, OakTown Echo — Fruitvale",
+          "role": "Lead Investigator, OakTown Echo",
+          "hood": "Fruitvale",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C111",
+            "pop": "POP-00774",
+            "rowName": "Malik Hayes",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01198",
+          "name": "Victor Baker",
+          "profile": "Victor Baker — Server — Ivy Hill",
+          "role": "Server",
+          "hood": "Ivy Hill",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C111",
+            "pop": "POP-01198",
+            "rowName": "Victor Baker",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00468",
+          "name": "Collete Allen",
+          "profile": "Collete Allen — Elevator Mechanic — Laurel",
+          "role": "Elevator Mechanic",
+          "hood": "Laurel",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C111",
+            "pop": "POP-00468",
+            "rowName": "Collete Allen",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01147",
+          "name": "Ruth Anyanwu",
+          "profile": "Ruth Anyanwu — Police Officer — East Oakland",
+          "role": "Police Officer",
+          "hood": "East Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C111",
+            "pop": "POP-01147",
+            "rowName": "Ruth Anyanwu",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01167",
+          "name": "Lena Marchetti",
+          "profile": "Lena Marchetti — Crisis Clinician — East Oakland",
+          "role": "Crisis Clinician",
+          "hood": "East Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C111",
+            "pop": "POP-01167",
+            "rowName": "Lena Marchetti",
+            "kind": "slice-row"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C111",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-a43c5d888b36"
+      },
+      {
+        "t": "FACT",
+        "text": "39 culture figures rising; 1 new on the record",
+        "src": "output/beats/Cultural_Ledger.jsonl @C111",
+        "id": "F-820358b00bbf"
+      },
+      {
+        "t": "FACT",
+        "text": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 63, surging), last seen C110.",
+        "src": "output/beats/Cultural_Ledger.jsonl @C111",
+        "id": "F-6986132f6bd0"
+      },
+      {
+        "t": "FACT",
+        "text": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 63, surging), last seen C110",
+        "src": "output/beats/Cultural_Ledger.jsonl @C111",
+        "id": "F-9181e9ec18e8"
+      },
+      {
+        "t": "FACT",
+        "text": "Sculptor Alma Vasquez (sculptor), Arts, Laurel — fame rising (fame 54, ascending), last seen C86",
+        "src": "output/beats/Cultural_Ledger.jsonl @C111",
+        "id": "F-e6a3f8136c40"
+      },
+      {
+        "t": "FACT",
+        "text": "Nina Reyes (actress), Arts, Fruitvale — fame rising (fame 52, surging), last seen C101",
+        "src": "output/beats/Cultural_Ledger.jsonl @C111",
+        "id": "F-fdb1c8bf6212"
+      },
+      {
+        "t": "FACT",
+        "text": "Theo Banks (rapper), Arts, Uptown — fame rising (fame 48, surging), last seen C99",
+        "src": "output/beats/Cultural_Ledger.jsonl @C111",
+        "id": "F-b10bef6c77d4"
+      },
+      {
+        "t": "FACT",
+        "text": "Warriors Alumni Thompson (basketball legend), Sports, Temescal — new on the culture record last cycle (fame 18, rising), last seen C110",
+        "src": "output/beats/Cultural_Ledger.jsonl @C111",
+        "id": "F-7f33736dbf1b"
+      },
+      {
+        "t": "FACT",
+        "text": "Lena Cross (Celebrity), Arts, Piedmont Ave — fading — the where-are-they-now file (fame 94, cooling), last seen C94",
+        "src": "output/beats/Cultural_Ledger.jsonl @C111",
+        "id": "F-104386f41960"
+      },
+      {
+        "t": "FACT",
+        "text": "Rowan Pierce (journalist), Media, Piedmont Ave — fading — the where-are-they-now file (fame 68, cooling), last seen C88",
+        "src": "output/beats/Cultural_Ledger.jsonl @C111",
+        "id": "F-e836f4bd7b8d"
+      },
+      {
+        "t": "FACT",
+        "text": "ENGINE SEED (Citywide): Iman Horton; Malik Hayes; Victor Baker",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C111",
+        "id": "F-8945c0eefb74"
+      },
+      {
+        "t": "FACT",
+        "text": "ENGINE SEED (East Oakland): Ruth Anyanwu; Lena Marchetti; Adaeze Onwuka · at Sunrise Cafe; Masjid An-Nur Oakland",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C111",
+        "id": "F-08d4229258cc"
+      },
+      {
+        "t": "FACT",
+        "text": "ENGINE SEED (Chinatown): Matra Woven; Dana Reeve; Jose Colon · at Heritage Bakehouse; Ninth Street Kitchen",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C111",
+        "id": "F-26dca536ec81"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "named",
+    "candidates": [
+      {
+        "pop": "POP-00546",
+        "name": "Tara Ellison",
+        "role": "Journalist",
+        "hood": "Rockridge",
+        "profile": "Tara Ellison — Journalist — Rockridge",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C111",
+          "pop": "POP-00546",
+          "rowName": "Tara Ellison",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01063",
+        "name": "Alma Vasquez",
+        "role": "sculptor",
+        "hood": "Laurel",
+        "profile": "Alma Vasquez — sculptor — Laurel",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C111",
+          "pop": "POP-01063",
+          "rowName": "Alma Vasquez",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01057",
+        "name": "Nina Reyes",
+        "role": "actress",
+        "hood": "Fruitvale",
+        "profile": "Nina Reyes — actress — Fruitvale",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C111",
+          "pop": "POP-01057",
+          "rowName": "Nina Reyes",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01056",
+        "name": "Theo Banks",
+        "role": "rapper",
+        "hood": "Uptown",
+        "profile": "Theo Banks — rapper — Uptown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C111",
+          "pop": "POP-01056",
+          "rowName": "Theo Banks",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00539",
+        "name": "Lena Cross",
+        "role": "Actor",
+        "hood": "Piedmont Ave",
+        "profile": "Lena Cross — Actor — Piedmont Ave",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C111",
+          "pop": "POP-00539",
+          "rowName": "Lena Cross",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00545",
+        "name": "Rowan Pierce",
+        "role": "Freelance Writer",
+        "hood": "Piedmont Ave",
+        "profile": "Rowan Pierce — Freelance Writer — Piedmont Ave",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C111",
+          "pop": "POP-00545",
+          "rowName": "Rowan Pierce",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00343",
+        "name": "Iman Horton",
+        "role": "Refugee Resettlement Case Worker",
+        "hood": "Chinatown",
+        "profile": "Iman Horton — Refugee Resettlement Case Worker — Chinatown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C111",
+          "pop": "POP-00343",
+          "rowName": "Iman Horton",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00774",
+        "name": "Malik Hayes",
+        "role": "Lead Investigator, OakTown Echo",
+        "hood": "Fruitvale",
+        "profile": "Malik Hayes — Lead Investigator, OakTown Echo — Fruitvale",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C111",
+          "pop": "POP-00774",
+          "rowName": "Malik Hayes",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01198",
+        "name": "Victor Baker",
+        "role": "Server",
+        "hood": "Ivy Hill",
+        "profile": "Victor Baker — Server — Ivy Hill",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C111",
+          "pop": "POP-01198",
+          "rowName": "Victor Baker",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00468",
+        "name": "Collete Allen",
+        "role": "Elevator Mechanic",
+        "hood": "Laurel",
+        "profile": "Collete Allen — Elevator Mechanic — Laurel",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C111",
+          "pop": "POP-00468",
+          "rowName": "Collete Allen",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01147",
+        "name": "Ruth Anyanwu",
+        "role": "Police Officer",
+        "hood": "East Oakland",
+        "profile": "Ruth Anyanwu — Police Officer — East Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C111",
+          "pop": "POP-01147",
+          "rowName": "Ruth Anyanwu",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01167",
+        "name": "Lena Marchetti",
+        "role": "Crisis Clinician",
+        "hood": "East Oakland",
+        "profile": "Lena Marchetti — Crisis Clinician — East Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C111",
+          "pop": "POP-01167",
+          "rowName": "Lena Marchetti",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01190",
+        "name": "Adaeze Onwuka",
+        "role": "High School English Teacher",
+        "hood": "East Oakland",
+        "profile": "Adaeze Onwuka — High School English Teacher — East Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C111",
+          "pop": "POP-01190",
+          "rowName": "Adaeze Onwuka",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01113",
+        "name": "Quinn Adeyemi",
+        "role": "Warehouse worker",
+        "hood": "East Oakland",
+        "profile": "Quinn Adeyemi — Warehouse worker — East Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C111",
+          "pop": "POP-01113",
+          "rowName": "Quinn Adeyemi",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00785",
+        "name": "Matra Woven",
+        "role": "Janitor",
+        "hood": "Chinatown",
+        "profile": "Matra Woven — Janitor — Chinatown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C111",
+          "pop": "POP-00785",
+          "rowName": "Matra Woven",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00010",
+        "name": "Dana Reeve",
+        "role": "Lead Journalist",
+        "hood": "Chinatown",
+        "profile": "Dana Reeve — Lead Journalist — Chinatown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C111",
+          "pop": "POP-00010",
+          "rowName": "Dana Reeve",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00599",
+        "name": "Jose Colon",
+        "role": "Catcher, Oakland A's",
+        "hood": "Chinatown",
+        "profile": "Jose Colon — Catcher, Oakland A's — Chinatown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C111",
+          "pop": "POP-00599",
+          "rowName": "Jose Colon",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00106",
+        "name": "Jeff Mateo",
+        "role": "First Baseman, Stockton Ports (A)",
+        "hood": "Chinatown",
+        "profile": "Jeff Mateo — First Baseman, Stockton Ports (A) — Chinatown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C111",
+          "pop": "POP-00106",
+          "rowName": "Jeff Mateo",
+          "kind": "slice-row"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Kai Marston",
+    "popid": "POP-00158"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-arts",
+      "angle": "Tara Ellison is rising — the acts and the rooms they play",
+      "label": "39 culture figures rising; 1 new on the record",
+      "hookLine": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 63, surging), last seen C110.",
+      "hood": "Rockridge",
+      "citizens": [
+        "Tara Ellison (POP-00546)",
+        "Alma Vasquez (POP-01063)",
+        "Nina Reyes (POP-01057)",
+        "Theo Banks (POP-01056)",
+        "Lena Cross (POP-00539)",
+        "Rowan Pierce (POP-00545)",
+        "Iman Horton (POP-00343)",
+        "Malik Hayes (POP-00774)",
+        "Victor Baker (POP-01198)",
+        "Collete Allen (POP-00468)",
+        "Ruth Anyanwu (POP-01147)",
+        "Lena Marchetti (POP-01167)",
+        "Adaeze Onwuka (POP-01190)",
+        "Quinn Adeyemi (POP-01113)",
+        "Matra Woven (POP-00785)",
+        "Dana Reeve (POP-00010)",
+        "Jose Colon (POP-00599)",
+        "Jeff Mateo (POP-00106)"
+      ],
+      "popids": [
+        "POP-00546",
+        "POP-01063",
+        "POP-01057",
+        "POP-01056",
+        "POP-00539",
+        "POP-00545",
+        "POP-00343",
+        "POP-00774",
+        "POP-01198",
+        "POP-00468",
+        "POP-01147",
+        "POP-01167",
+        "POP-01190",
+        "POP-01113",
+        "POP-00785",
+        "POP-00010",
+        "POP-00599",
+        "POP-00106"
+      ],
+      "ref": "output/beats/Cultural_Ledger.jsonl @C111",
+      "cycle": 111
+    },
+    "approach": "Arts & entertainment approach: this slice is the culture ledger — who is rising, who just appeared, who is fading, with their domains and neighborhoods — plus the engine's culture seeds this cycle. Present-tense, neighborhood act not gallery PR. The names and trajectories are real; the garage rehearsal, the opening-night crowd, the set list are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": {
+    "pulse": {
+      "className": "quiet-nightlife",
+      "score": 24,
+      "label": "Neighborhood Response Hub (East Oakland) · quiet night",
+      "named": "Neighborhood Response Hub",
+      "hood": "East Oakland",
+      "person": null,
+      "venue": null
+    },
+    "recommend": {
+      "bag": "lifestyle",
+      "slug": "sharon-okafor",
+      "name": "Sharon Okafor",
+      "popid": "POP-00159",
+      "bagDoc": "docs/media/SHARON_LIFESTYLE_BAG.md",
+      "reason": "top pulse quiet-nightlife → lifestyle",
+      "pulseClass": "quiet-nightlife",
+      "pulseLabel": "Neighborhood Response Hub (East Oakland) · quiet night"
+    },
+    "prewrite": {
+      "pulseClass": "quiet-nightlife",
+      "angle": "Neighborhood Response Hub is open and quiet in East Oakland. What that condition means is not yet established.",
+      "hookLine": "Neighborhood Response Hub is open and quiet in East Oakland.",
+      "anchorFacts": [
+        "NAMED: Neighborhood Response Hub",
+        "HOOD: East Oakland",
+        "VENUE: Neighborhood Response Hub",
+        "HOOD: East Oakland",
+        "EVENING RECORD: open and quiet"
+      ],
+      "bagRecommend": "lifestyle",
+      "bagSlug": "sharon-okafor"
+    },
+    "texture": {
+      "famous": [
+        "Pixel Pete",
+        "Sienna Vale",
+        "Lumi Crest"
+      ],
+      "restaurants": [
+        {
+          "name": "Romano's",
+          "hood": "Dimond"
+        },
+        {
+          "name": "West Side Cafe",
+          "hood": "West Oakland"
+        }
+      ],
+      "fastFood": [
+        {
+          "name": "SpeedyBurger",
+          "hood": "Downtown"
+        }
+      ],
+      "nightlife": [
+        {
+          "name": "Neighborhood Response Hub",
+          "hood": "East Oakland"
+        }
+      ],
+      "nightlifeMeta": {
+        "volume": 4,
+        "vibe": "tense",
+        "movement": "restricted",
+        "weatherImpact": 1
+      },
+      "cityEvents": [
+        "Chinatown Neighborhood Stabilization Panel",
+        "Downtown Neon Terrace DJ Night",
+        "The Dillon Family Block Party",
+        "West Oakland Club Crawl"
+      ],
+      "tv": [
+        "Valentine Special",
+        "Breaking Bulletin",
+        "Warm House",
+        "A's Sports Central",
+        "One-on-One with Vladimir Gonzalez (RF)"
+      ],
+      "movies": [
+        "Love in Oakland",
+        "Rising Star",
+        "Diamond City"
+      ],
+      "sportsBroadcast": "Oakland Sports Tonight",
+      "streamingTrend": "romantic comedies",
+      "foodTrend": "High mobility / civic-tension food trend"
+    },
+    "signals": {
+      "fameCount": 1,
+      "sightingCount": 3,
+      "sightings": [
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Pixel Pete spotted at Blue Lantern Bar",
+          "name": "Pixel Pete",
+          "venue": "Blue Lantern Bar",
+          "ref": "Ripple_Ledger cycle 111 (CauseType lifestyle-sighting); rendered: world_summary_c111.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Jack London",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Sienna Vale spotted at The Northgate Bar",
+          "name": "Sienna Vale",
+          "venue": "The Northgate Bar",
+          "ref": "Ripple_Ledger cycle 111 (CauseType lifestyle-sighting); rendered: world_summary_c111.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "KONO",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Lumi Crest spotted at Sunrise Cafe",
+          "name": "Lumi Crest",
+          "venue": "Sunrise Cafe",
+          "ref": "Ripple_Ledger cycle 111 (CauseType lifestyle-sighting); rendered: world_summary_c111.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "East Oakland",
+          "popids": []
+        }
+      ]
+    },
+    "scene": {
+      "venues": [
+        {
+          "name": "Romano's",
+          "hood": "Dimond"
+        },
+        {
+          "name": "West Side Cafe",
+          "hood": "West Oakland"
+        },
+        {
+          "name": "SpeedyBurger",
+          "hood": "Downtown"
+        },
+        {
+          "name": "Neighborhood Response Hub",
+          "hood": "East Oakland"
+        }
+      ],
+      "nightlifeMeta": {
+        "volume": 4,
+        "vibe": "tense",
+        "movement": "restricted",
+        "weatherImpact": 1
+      },
+      "cityEvents": [
+        "Chinatown Neighborhood Stabilization Panel",
+        "Downtown Neon Terrace DJ Night",
+        "The Dillon Family Block Party",
+        "West Oakland Club Crawl"
+      ],
+      "tv": [
+        "Valentine Special",
+        "Breaking Bulletin",
+        "Warm House",
+        "A's Sports Central",
+        "One-on-One with Vladimir Gonzalez (RF)"
+      ],
+      "movies": [
+        "Love in Oakland",
+        "Rising Star",
+        "Diamond City"
+      ],
+      "colorRoom": "Named places only from Evening Texture / desk_signal. The supplied evening record describes nightlife as quiet; raw scoring fields stay internal.  Sensory room (weather, light, sound) is free; careers and employees are not."
+    },
+    "candidates": [
+      {
+        "className": "quiet-nightlife",
+        "score": 24,
+        "label": "Neighborhood Response Hub (East Oakland) · quiet night",
+        "named": "Neighborhood Response Hub",
+        "hood": "East Oakland"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Pixel Pete at Blue Lantern Bar (Jack London)",
+        "named": "Blue Lantern Bar",
+        "hood": "Jack London"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Sienna Vale at The Northgate Bar (KONO)",
+        "named": "The Northgate Bar",
+        "hood": "KONO"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Lumi Crest at Sunrise Cafe (East Oakland)",
+        "named": "Sunrise Cafe",
+        "hood": "East Oakland"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Romano's (Dimond)",
+        "named": "Romano's",
+        "hood": "Dimond"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "West Side Cafe (West Oakland)",
+        "named": "West Side Cafe",
+        "hood": "West Oakland"
+      },
+      {
+        "className": "city-event",
+        "score": 17,
+        "label": "The Dillon Family Block Party",
+        "named": "The Dillon Family Block Party",
+        "hood": null
+      },
+      {
+        "className": "fame-sighting",
+        "score": 16,
+        "label": "Vinnie Keane — fame rise",
+        "named": "Vinnie Keane",
+        "hood": "Grand Lake"
+      }
+    ],
+    "perSeat": {
+      "mason-ortega": {
+        "pulseClass": "named-restaurant",
+        "label": "Romano's (Dimond)",
+        "score": 34,
+        "bag": "kitchen"
+      },
+      "kai-marston": {
+        "pulseClass": "quiet-nightlife",
+        "label": "Neighborhood Response Hub (East Oakland) · quiet night",
+        "score": 32,
+        "bag": "arts"
+      },
+      "sharon-okafor": {
+        "pulseClass": "quiet-nightlife",
+        "label": "Neighborhood Response Hub (East Oakland) · quiet night",
+        "score": 32,
+        "bag": "lifestyle"
+      },
+      "maria-keen": {
+        "pulseClass": "quiet-nightlife",
+        "label": "Neighborhood Response Hub (East Oakland) · quiet night",
+        "score": 32,
+        "bag": "ground"
+      },
+      "elliot-graye": {
+        "pulseClass": "fame-sighting",
+        "label": "Pixel Pete at Blue Lantern Bar (Jack London)",
+        "score": 31,
+        "bag": "faith"
+      }
+    }
+  },
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "ARTS-SLICE-1",
+    "kind": "beat-arts",
+    "seat": {
+      "slug": "kai-marston",
+      "name": "Kai Marston",
+      "popid": "POP-00158",
+      "desk": "culture",
+      "domain": "arts",
+      "builder": "buildArtsSlice.js"
+    },
+    "hood": "Rockridge",
+    "pulse": {
+      "className": "beat-arts",
+      "score": 100,
+      "label": "39 culture figures rising; 1 new on the record",
+      "hood": "Rockridge",
+      "source": "output/beats/Cultural_Ledger.jsonl @C111"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "Tara Ellison is rising — the acts and the rooms they play",
+      "hookLine": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 63, surging), last seen C110.",
+      "anchorFacts": [
+        "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 63, surging), last seen C110",
+        "Sculptor Alma Vasquez (sculptor), Arts, Laurel — fame rising (fame 54, ascending), last seen C86",
+        "Nina Reyes (actress), Arts, Fruitvale — fame rising (fame 52, surging), last seen C101",
+        "Theo Banks (rapper), Arts, Uptown — fame rising (fame 48, surging), last seen C99",
+        "Warriors Alumni Thompson (basketball legend), Sports, Temescal — new on the culture record last cycle (fame 18, rising), last seen C110",
+        "Lena Cross (Celebrity), Arts, Piedmont Ave — fading — the where-are-they-now file (fame 94, cooling), last seen C94",
+        "Rowan Pierce (journalist), Media, Piedmont Ave — fading — the where-are-they-now file (fame 68, cooling), last seen C88",
+        "ENGINE SEED (Citywide): Iman Horton; Malik Hayes; Victor Baker",
+        "ENGINE SEED (East Oakland): Ruth Anyanwu; Lena Marchetti; Adaeze Onwuka · at Sunrise Cafe; Masjid An-Nur Oakland",
+        "ENGINE SEED (Chinatown): Matra Woven; Dana Reeve; Jose Colon · at Heritage Bakehouse; Ninth Street Kitchen"
+      ],
+      "evidence": [
+        {
+          "text": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 63, surging), last seen C110",
+          "src": "output/beats/Cultural_Ledger.jsonl @C111"
+        },
+        {
+          "text": "Sculptor Alma Vasquez (sculptor), Arts, Laurel — fame rising (fame 54, ascending), last seen C86",
+          "src": "output/beats/Cultural_Ledger.jsonl @C111"
+        },
+        {
+          "text": "Nina Reyes (actress), Arts, Fruitvale — fame rising (fame 52, surging), last seen C101",
+          "src": "output/beats/Cultural_Ledger.jsonl @C111"
+        },
+        {
+          "text": "Theo Banks (rapper), Arts, Uptown — fame rising (fame 48, surging), last seen C99",
+          "src": "output/beats/Cultural_Ledger.jsonl @C111"
+        },
+        {
+          "text": "Warriors Alumni Thompson (basketball legend), Sports, Temescal — new on the culture record last cycle (fame 18, rising), last seen C110",
+          "src": "output/beats/Cultural_Ledger.jsonl @C111"
+        },
+        {
+          "text": "Lena Cross (Celebrity), Arts, Piedmont Ave — fading — the where-are-they-now file (fame 94, cooling), last seen C94",
+          "src": "output/beats/Cultural_Ledger.jsonl @C111"
+        },
+        {
+          "text": "Rowan Pierce (journalist), Media, Piedmont Ave — fading — the where-are-they-now file (fame 68, cooling), last seen C88",
+          "src": "output/beats/Cultural_Ledger.jsonl @C111"
+        },
+        {
+          "text": "ENGINE SEED (Citywide): Iman Horton; Malik Hayes; Victor Baker",
+          "src": "output/beats/Story_Seed_Deck.jsonl @C111"
+        },
+        {
+          "text": "ENGINE SEED (East Oakland): Ruth Anyanwu; Lena Marchetti; Adaeze Onwuka · at Sunrise Cafe; Masjid An-Nur Oakland",
+          "src": "output/beats/Story_Seed_Deck.jsonl @C111"
+        },
+        {
+          "text": "ENGINE SEED (Chinatown): Matra Woven; Dana Reeve; Jose Colon · at Heritage Bakehouse; Ninth Street Kitchen",
+          "src": "output/beats/Story_Seed_Deck.jsonl @C111"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": null,
+      "hooks": [
+        {
+          "text": "realized the week had passed without a single thing worth retelling near a storefront window",
+          "angle": "arts/culture feature",
+          "domain": "CULTURE",
+          "hood": "Grand Lake",
+          "priority": 3
+        },
+        {
+          "text": "Uptown boom sustained — momentum 10/10, the block everyone wants onto",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "Uptown",
+          "priority": 7
+        },
+        {
+          "text": "The Santos household (2) moved from Chinatown to West Oakland — moving up from Chinatown",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "West Oakland",
+          "priority": 5
+        },
+        {
+          "text": "Ignacio Zavala moved from Lake Merritt to West Oakland — leaving Lake Merritt for a better fit",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "West Oakland",
+          "priority": 5
+        }
+      ],
+      "note": null,
+      "pageVoices": [],
+      "roomIsYours": "the rehearsal space, the flyer on the pole, who showed up, what the room felt like when the second act started"
+    },
+    "citizens": [
+      {
+        "popid": "POP-00546",
+        "name": "Tara Ellison",
+        "role": "Journalist",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Tara Ellison — Journalist — Rockridge",
+        "why": "fame rising (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-01063",
+        "name": "Alma Vasquez",
+        "role": "sculptor",
+        "neighborhood": "Laurel",
+        "business": null,
+        "profile": "Alma Vasquez — sculptor — Laurel",
+        "why": "fame rising (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-01057",
+        "name": "Nina Reyes",
+        "role": "actress",
+        "neighborhood": "Fruitvale",
+        "business": null,
+        "profile": "Nina Reyes — actress — Fruitvale",
+        "why": "fame rising (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-01056",
+        "name": "Theo Banks",
+        "role": "rapper",
+        "neighborhood": "Uptown",
+        "business": null,
+        "profile": "Theo Banks — rapper — Uptown",
+        "why": "fame rising (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-00539",
+        "name": "Lena Cross",
+        "role": "Actor",
+        "neighborhood": "Piedmont Ave",
+        "business": null,
+        "profile": "Lena Cross — Actor — Piedmont Ave",
+        "why": "fading — the where-are-they-now file (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-00545",
+        "name": "Rowan Pierce",
+        "role": "Freelance Writer",
+        "neighborhood": "Piedmont Ave",
+        "business": null,
+        "profile": "Rowan Pierce — Freelance Writer — Piedmont Ave",
+        "why": "fading — the where-are-they-now file (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-00343",
+        "name": "Iman Horton",
+        "role": "Refugee Resettlement Case Worker",
+        "neighborhood": "Chinatown",
+        "business": null,
+        "profile": "Iman Horton — Refugee Resettlement Case Worker — Chinatown",
+        "why": "culture seed this cycle (Story_Seed_Deck)"
+      },
+      {
+        "popid": "POP-00774",
+        "name": "Malik Hayes",
+        "role": "Lead Investigator, OakTown Echo",
+        "neighborhood": "Fruitvale",
+        "business": null,
+        "profile": "Malik Hayes — Lead Investigator, OakTown Echo — Fruitvale",
+        "why": "culture seed this cycle (Story_Seed_Deck)"
+      },
+      {
+        "popid": "POP-01198",
+        "name": "Victor Baker",
+        "role": "Server",
+        "neighborhood": "Ivy Hill",
+        "business": null,
+        "profile": "Victor Baker — Server — Ivy Hill",
+        "why": "culture seed this cycle (Story_Seed_Deck)"
+      },
+      {
+        "popid": "POP-00468",
+        "name": "Collete Allen",
+        "role": "Elevator Mechanic",
+        "neighborhood": "Laurel",
+        "business": null,
+        "profile": "Collete Allen — Elevator Mechanic — Laurel",
+        "why": "culture seed this cycle (Story_Seed_Deck)"
+      },
+      {
+        "popid": "POP-01147",
+        "name": "Ruth Anyanwu",
+        "role": "Police Officer",
+        "neighborhood": "East Oakland",
+        "business": null,
+        "profile": "Ruth Anyanwu — Police Officer — East Oakland",
+        "why": "culture seed this cycle (Story_Seed_Deck)"
+      },
+      {
+        "popid": "POP-01167",
+        "name": "Lena Marchetti",
+        "role": "Crisis Clinician",
+        "neighborhood": "East Oakland",
+        "business": null,
+        "profile": "Lena Marchetti — Crisis Clinician — East Oakland",
+        "why": "culture seed this cycle (Story_Seed_Deck)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Cultural_Ledger.jsonl @C111",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Kai Marston this cycle)",
+      "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Kai Marston",
+    "popid": "POP-00158",
+    "text": "I'm tracking Tara Ellison. She's in my own neighborhood, Rockridge, and her trajectory is spiking. I want to see where she's actually spending her time when she's not on the clock—which rooms she's occupying and who is actually showing up to support her. It's one thing to see the numbers climb; it's another to see the crowd in the room.",
+    "plan": {
+      "chase": "I'm tracking Tara Ellison. She's in my own neighborhood, Rockridge, and her trajectory is spiking. I want to see where she's actually spending her time when she's not on the clock—which rooms she's occupying and who is actually showing up to support her. It's one thing to see the numbers climb; it's another to see the crowd in the room.",
+      "focus": "The actual environment surrounding Tara Ellison's rise in Rockridge.",
+      "why": "To move past the PR version of her success and document the real-world momentum of her current surge.",
+      "checks": [
+        "Verify the specific venues or spaces where Ellison is currently gaining traction.",
+        "Compare her current visibility in Rockridge against the fading presence of older media figures like Rowan Pierce."
+      ],
+      "targets": [
+        {
+          "pop": "POP-00546",
+          "question": "Where are you actually being seen right now, and who is in the room?",
+          "basis": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 63, surging)"
+        },
+        {
+          "pop": "POP-00545",
+          "question": "Do you feel the shift in the neighborhood's attention moving toward the new guard?",
+          "basis": "Rowan Pierce (journalist), Media, Piedmont Ave — fading"
+        }
+      ],
+      "interpretation": "A transition of influence within the local media landscape, where new energy is displacing established names.",
+      "unverifiedLead": [
+        "The specific rehearsal spaces or informal gathering spots in Rockridge where Ellison's influence is manifesting."
+      ],
+      "closeQuestion": "Is this a sustainable surge or just a momentary neighborhood trend?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Chinatown | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Chinatown",
+      "ref": "output/neighborhood_texture_c111.md \"### Chinatown\"; events: world_summary_c111.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "East Oakland | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "East Oakland",
+      "ref": "output/neighborhood_texture_c111.md \"### East Oakland\"; events: world_summary_c111.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Fruitvale | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Fruitvale",
+      "ref": "output/neighborhood_texture_c111.md \"### Fruitvale\"; events: world_summary_c111.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Grand Lake | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Grand Lake",
+      "ref": "output/neighborhood_texture_c111.md \"### Grand Lake\"; events: world_summary_c111.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Jack London | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Jack London",
+      "ref": "output/neighborhood_texture_c111.md \"### Jack London\"; events: world_summary_c111.md \"## World Events\"",
+      "popids": []
+    }
+  ],
+  "laneEntries": 20,
+  "angleCapHits": 0,
+  "ranAt": "2026-10-16T11:15:53.180Z"
+}

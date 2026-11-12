@@ -1,0 +1,55 @@
+{
+  "v": "UNDOCKED-INTAKE/1",
+  "Timestamp": "2026-11-05T02:55:52.481Z",
+  "POPID": "POP-00298",
+  "Cycle": 114,
+  "Seq": 2,
+  "Daypart": "SHOW",
+  "Tag": "undocked-episode",
+  "EpisodeId": "undocked-pop00298-2026-11-05T02-30-31",
+  "Applied": "yes",
+  "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop00298-2026-11-05T02-30-31.json",
+  "Holder": "Luis Taz",
+  "CreditsDelta": 0,
+  "Magnitude": 2,
+  "Flags": [
+    "credits_delta_windowed"
+  ],
+  "Excerpt": "Luis Taz credits=0 systems=nova_terra,sirius,lacaille_9352,grumium,celaeno,lanternwick,diadem,intercrus,gsc_0044,atlas,cedarhold,achernar,the_experiment",
+  "DecidedAt": "2026-11-05T02:55:52.483Z",
+  "DecidedBy": "auto-gate",
+  "Note": "auto-approved on contract validation (§2.5)",
+  "FeedEvent": {
+    "v": "UNDOCKED-FEED/1",
+    "Cycle": 114,
+    "EventType": "undocked-episode",
+    "POPID": "POP-00298",
+    "Holder": "Luis Taz",
+    "EpisodeId": "undocked-pop00298-Y3C10-e2",
+    "CreditsDelta": 0,
+    "PointsDelta": 7.24,
+    "Systems": [
+      "nova_terra",
+      "sirius",
+      "lacaille_9352",
+      "grumium",
+      "celaeno",
+      "lanternwick",
+      "diadem",
+      "intercrus",
+      "gsc_0044",
+      "atlas",
+      "cedarhold",
+      "achernar",
+      "the_experiment"
+    ],
+    "CombatEvents": 0,
+    "MishapCount": 0,
+    "Magnitude": 2,
+    "Flags": [
+      "credits_delta_windowed"
+    ],
+    "StagedPath": "output/spacemolt-show/staged/undocked-pop00298-2026-11-05T02-30-31.json"
+  },
+  "PointsDelta": 7.24
+}

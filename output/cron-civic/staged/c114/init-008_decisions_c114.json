@@ -1,0 +1,16 @@
+{
+  "initiative": "INIT-008",
+  "initiativeId": "INIT-008",
+  "cycle": 114,
+  "primaryVoice": "Mayor gavel (mayor_gavel-006)",
+  "consolidatedFrom": [
+    "STMT-114-mayor_gavel-006 (Mayor gavel — INIT-008 recorded council decision path and C114 Uptown track)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-008",
+    "ImplementationPhase": "vote-ready",
+    "MilestoneNotes": "C114: $15M ordinance marked vote-ready with Ashford benchmarks; recorded council decision, C114 Uptown timeline, and Downtown transit-access planning directed.",
+    "NextScheduledAction": "Recorded council decision on the $15M authorization",
+    "NextActionCycle": 114
+  }
+}

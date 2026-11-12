@@ -1,0 +1,34 @@
+{
+  "office": "baylight_authority",
+  "cycle": 112,
+  "speaker": "Keisha Ramos",
+  "cascadeSummary": "With independent oversight confirming soil compliance, Phase II remediation continues on schedule and the Cycle 115 construction milestone review stands. I'm addressing the slipping mood in Downtown and Jack London by committing to targeted community mitigation — dust control on the haul routes, a construction hotline with a 48-hour response guarantee, and a workforce coordination meeting with Jack London businesses before the Cycle 115 review. The build stays on the project clock, not the political clock.",
+  "statements": [
+    {
+      "statementId": "STMT-112-baylight_authority-001",
+      "type": "milestone_update",
+      "topic": "Baylight District Construction Milestone Review",
+      "initiative": "INIT-006",
+      "decision": "Confirm Cycle 115 construction milestone review stands; Phase II remediation continues as scheduled with independent oversight. Commit to a community impact mitigation package — 48-hour response guarantee on the construction hotline, dust suppression on haul routes serving Downtown and Jack London, and a pre-review workforce coordination meeting with neighborhood businesses.",
+      "quote": "The soil is clean, the oversight is independent, and the Cycle 115 review holds. But a build only succeeds if the neighborhoods beside it hold too.",
+      "fullStatement": "Baylight Authority Director Keisha Ramos confirmed that the Cycle 115 construction milestone review remains on schedule, with Phase II site remediation proceeding under independent oversight. Recognizing the slipping mood in Downtown and Jack London, Ramos committed to a targeted community impact package: a 48-hour response guarantee on the construction hotline for dust, noise, and truck-route concerns; enhanced dust suppression along haul routes that serve Downtown and Jack London; and a workforce coordination meeting with neighborhood businesses before the Cycle 115 review to ensure local hiring pipelines are visible and accessible. The project clock governs the build — but the people living beside the fence are part of the milestone.",
+      "trackerUpdates": {
+        "initiative": "INIT-006",
+        "ImplementationPhase": "construction-active",
+        "MilestoneNotes": "C112: Phase II remediation continues under independent oversight; Cycle 115 review confirmed; community mitigation package announced for Downtown and Jack London.",
+        "NextScheduledAction": "Construction milestone review",
+        "NextActionCycle": 115
+      }
+    },
+    {
+      "statementId": "STMT-112-baylight_authority-002",
+      "type": "community_engagement",
+      "topic": "Baylight District Community Impact Mitigation",
+      "initiative": "INIT-006",
+      "decision": "Stand up a pre-Cycle-115 community coordination session with Jack London and Downtown businesses and residents, focused on construction impacts — dust, noise, truck routes, and workforce access.",
+      "quote": "The construction fence has our number — and starting this cycle, it answers within 48 hours.",
+      "fullStatement": "Baylight Authority Director Keisha Ramos announced a pre-review community coordination session for Jack London and Downtown stakeholders ahead of the Cycle 115 construction milestone. The session will cover dust and noise controls, truck route adjustments, and how local residents and small businesses can access the project's workforce pipeline. Ramos reiterated the Authority's 48-hour response guarantee on the construction hotline, emphasizing that community engagement is a deliverable, not a courtesy. The build proceeds on clean ground — and the neighborhoods beside it get a direct line to the people doing the building.",
+      "trackerUpdates": {}
+    }
+  ]
+}

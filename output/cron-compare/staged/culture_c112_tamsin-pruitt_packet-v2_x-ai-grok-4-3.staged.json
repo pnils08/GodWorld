@@ -1,0 +1,88 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "112",
+  "persona": "tamsin-pruitt",
+  "byline": "Tamsin Pruitt",
+  "bylinePopid": "POP-01210",
+  "article": "output/cron-compare/staged/culture_c112_tamsin-pruitt_packet-v2_x-ai-grok-4-3.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Maurice Franklin",
+        "role": "quoted-source",
+        "popid": "POP-00801"
+      },
+      {
+        "name": "Geneva Zhou",
+        "role": "quoted-source",
+        "popid": "POP-00892"
+      },
+      {
+        "name": "Maren Johns",
+        "role": "quoted-source",
+        "popid": "POP-00470"
+      },
+      {
+        "name": "Antoine Vermeer",
+        "role": "quoted-source",
+        "popid": "POP-00755"
+      },
+      {
+        "name": "Jerry Nelson",
+        "role": "mentioned",
+        "popid": "POP-00237",
+        "floor": true
+      },
+      {
+        "name": "Mason Walt",
+        "role": "mentioned",
+        "popid": "POP-00233",
+        "floor": true
+      },
+      {
+        "name": "Xavier Ramington",
+        "role": "mentioned",
+        "popid": "POP-00181",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Rockridge"
+    ],
+    "claims": [
+      {
+        "claim": "After coming home from the hospital, I had to get my feet back on the ground, and the first thing I did was check my finances. The card statement was the first thing I read and it's been on my mind ever since.",
+        "sourceRef": "citizenVoice PRESS Maurice Franklin"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-05316d678104",
+    "draftSha256": "48aa8d3cc729fc219b11dc159f9f81d8bb20629408211fc0e59da294d3aa85d9",
+    "verdict": "output/cron-compare/culture_c112_tamsin-pruitt_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-10-19T23:21:11.134Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": false,
+      "inTargetBy": "code floor 450",
+      "words": 309,
+      "short": "The piece falls short of the 450-word minimum target.",
+      "score": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "48aa8d3cc729fc219b11dc159f9f81d8bb20629408211fc0e59da294d3aa85d9",
+      "costUsd": 0.001
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-19T23:21:14.800Z"
+}

@@ -1,0 +1,498 @@
+[
+  {
+    "pop": "POP-00081",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00081\",\"name\":\"Carmen Mesa\",\"role\":\"Starting Pitcher, Midland RockHounds (AA)\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Tanya Cruz\",\"question\":\"What does a starter with no rotation spot do with his winter, and how does he carry himself in the clubhouse while the front office decides? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"sideline-signal\",\"hood\":\"Dimond\",\"focus\":\"The gap between what the rotation costs and what it produces, and where Carmen Mesa fits in a full house.\",\"src\":\"world_summary_c114.md ## Sports\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Carmen Mesa — Starting Pitcher, Midland RockHounds (AA)\",\"evidence\":[{\"id\":\"EV-cdb419d152\",\"src\":\"world_summary_c114.md ## Sports\",\"text\":\"Five starters and one Carmen Mesa. Who is the odd arm out?\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Five starters and one Carmen Mesa. Who is the odd arm out?\",\"src\":\"world_summary_c114.md ## Sports\",\"id\":\"F-04594a6d25c5\"},{\"t\":\"FACT\",\"text\":\"Pablo Almanzar took the rotation spot most expected Carmen Mesa to fill, then threw a no-hitter in his debut and a 1-hitter to close the ALCS. That leaves the rotation full with Coles, Ramos, Rivas, Ellis and Almanzar. Mesa sits at AAA on a $780K deal with nowhere to start in Oakland. Henry Rivas is the most expensive arm at $28. 2M and missed time this season before his complete game in World Series game 4.\",\"src\":\"world_summary_c114.md ## Sports\",\"id\":\"F-788b5caab458\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C114\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4261fa115617\"},{\"t\":\"FACT\",\"text\":\"Is Mesa the A's best trade chip this winter, and how long does the front office keep paying top dollar for Rivas while the cheap arms win?\",\"src\":\"world_summary_c114.md ## Sports\",\"id\":\"F-5ab076c8ddeb\"},{\"t\":\"FACT\",\"text\":\"Carmen Mesa — Starting Pitcher, Midland RockHounds (AA)\",\"src\":\"Simulation_Ledger profile for POP-00081\",\"id\":\"F-b7bdf157905d\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C10, Spring, holiday=none\",\"src\":\"output/world_summary_c114.md Calendar context (Simulation_Calendar)\",\"id\":\"F-9b9470803821\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00081",
+        "name": "Carmen Mesa",
+        "role": "Starting Pitcher, Midland RockHounds (AA)",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Tanya Cruz",
+        "question": "What does a starter with no rotation spot do with his winter, and how does he carry himself in the clubhouse while the front office decides? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "sideline-signal",
+        "hood": "Dimond",
+        "focus": "The gap between what the rotation costs and what it produces, and where Carmen Mesa fits in a full house.",
+        "src": "world_summary_c114.md ## Sports"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Carmen Mesa — Starting Pitcher, Midland RockHounds (AA)",
+        "evidence": [
+          {
+            "id": "EV-cdb419d152",
+            "src": "world_summary_c114.md ## Sports",
+            "text": "Five starters and one Carmen Mesa. Who is the odd arm out?"
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Five starters and one Carmen Mesa. Who is the odd arm out?",
+          "src": "world_summary_c114.md ## Sports",
+          "id": "F-04594a6d25c5"
+        },
+        {
+          "t": "FACT",
+          "text": "Pablo Almanzar took the rotation spot most expected Carmen Mesa to fill, then threw a no-hitter in his debut and a 1-hitter to close the ALCS. That leaves the rotation full with Coles, Ramos, Rivas, Ellis and Almanzar. Mesa sits at AAA on a $780K deal with nowhere to start in Oakland. Henry Rivas is the most expensive arm at $28. 2M and missed time this season before his complete game in World Series game 4.",
+          "src": "world_summary_c114.md ## Sports",
+          "id": "F-788b5caab458"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C114",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4261fa115617"
+        },
+        {
+          "t": "FACT",
+          "text": "Is Mesa the A's best trade chip this winter, and how long does the front office keep paying top dollar for Rivas while the cheap arms win?",
+          "src": "world_summary_c114.md ## Sports",
+          "id": "F-5ab076c8ddeb"
+        },
+        {
+          "t": "FACT",
+          "text": "Carmen Mesa — Starting Pitcher, Midland RockHounds (AA)",
+          "src": "Simulation_Ledger profile for POP-00081",
+          "id": "F-b7bdf157905d"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C10, Spring, holiday=none",
+          "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+          "id": "F-9b9470803821"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01078",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01078\",\"name\":\"Pablo Almanzar\",\"role\":\"SP / Oakland A's\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Tanya Cruz\",\"question\":\"How does the clubhouse treat the arm that took the spot everyone expected Mesa to fill, after a no-hitter and a 1-hitter to close the ALCS? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"sideline-signal\",\"hood\":\"Dimond\",\"focus\":\"The gap between what the rotation costs and what it produces, and where Carmen Mesa fits in a full house.\",\"src\":\"world_summary_c114.md ## Sports\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Pablo Almanzar — SP / Oakland A's\",\"evidence\":[{\"id\":\"EV-47d84914a2\",\"src\":\"world_summary_c114.md ## Sports\",\"text\":\"Five starters and one Carmen Mesa. Who is the odd arm out?\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Pablo Almanzar took the rotation spot most expected Carmen Mesa to fill, then threw a no-hitter in his debut and a 1-hitter to close the ALCS. That leaves the rotation full with Coles, Ramos, Rivas, Ellis and Almanzar. Mesa sits at AAA on a $780K deal with nowhere to start in Oakland. Henry Rivas is the most expensive arm at $28. 2M and missed time this season before his complete game in World Series game 4.\",\"src\":\"world_summary_c114.md ## Sports\",\"id\":\"F-788b5caab458\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C114\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4261fa115617\"},{\"t\":\"FACT\",\"text\":\"Five starters and one Carmen Mesa. Who is the odd arm out?\",\"src\":\"world_summary_c114.md ## Sports\",\"id\":\"F-04594a6d25c5\"},{\"t\":\"FACT\",\"text\":\"Is Mesa the A's best trade chip this winter, and how long does the front office keep paying top dollar for Rivas while the cheap arms win?\",\"src\":\"world_summary_c114.md ## Sports\",\"id\":\"F-5ab076c8ddeb\"},{\"t\":\"FACT\",\"text\":\"Pablo Almanzar — SP / Oakland A's\",\"src\":\"Simulation_Ledger profile for POP-01078\",\"id\":\"F-4da5f0a93431\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C10, Spring, holiday=none\",\"src\":\"output/world_summary_c114.md Calendar context (Simulation_Calendar)\",\"id\":\"F-9b9470803821\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01078",
+        "name": "Pablo Almanzar",
+        "role": "SP / Oakland A's",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Tanya Cruz",
+        "question": "How does the clubhouse treat the arm that took the spot everyone expected Mesa to fill, after a no-hitter and a 1-hitter to close the ALCS? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "sideline-signal",
+        "hood": "Dimond",
+        "focus": "The gap between what the rotation costs and what it produces, and where Carmen Mesa fits in a full house.",
+        "src": "world_summary_c114.md ## Sports"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Pablo Almanzar — SP / Oakland A's",
+        "evidence": [
+          {
+            "id": "EV-47d84914a2",
+            "src": "world_summary_c114.md ## Sports",
+            "text": "Five starters and one Carmen Mesa. Who is the odd arm out?"
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Pablo Almanzar took the rotation spot most expected Carmen Mesa to fill, then threw a no-hitter in his debut and a 1-hitter to close the ALCS. That leaves the rotation full with Coles, Ramos, Rivas, Ellis and Almanzar. Mesa sits at AAA on a $780K deal with nowhere to start in Oakland. Henry Rivas is the most expensive arm at $28. 2M and missed time this season before his complete game in World Series game 4.",
+          "src": "world_summary_c114.md ## Sports",
+          "id": "F-788b5caab458"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C114",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4261fa115617"
+        },
+        {
+          "t": "FACT",
+          "text": "Five starters and one Carmen Mesa. Who is the odd arm out?",
+          "src": "world_summary_c114.md ## Sports",
+          "id": "F-04594a6d25c5"
+        },
+        {
+          "t": "FACT",
+          "text": "Is Mesa the A's best trade chip this winter, and how long does the front office keep paying top dollar for Rivas while the cheap arms win?",
+          "src": "world_summary_c114.md ## Sports",
+          "id": "F-5ab076c8ddeb"
+        },
+        {
+          "t": "FACT",
+          "text": "Pablo Almanzar — SP / Oakland A's",
+          "src": "Simulation_Ledger profile for POP-01078",
+          "id": "F-4da5f0a93431"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C10, Spring, holiday=none",
+          "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+          "id": "F-9b9470803821"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00024",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00024\",\"name\":\"Henry Rivas\",\"role\":\"Starting Pitcher, Oakland A's\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Tanya Cruz\",\"question\":\"What does the most expensive arm on the staff make of the cheap arms winning, and how does he hold the room after missing time? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"sideline-signal\",\"hood\":\"Dimond\",\"focus\":\"The gap between what the rotation costs and what it produces, and where Carmen Mesa fits in a full house.\",\"src\":\"world_summary_c114.md ## Sports\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Henry Rivas — Starting Pitcher, Oakland A's\",\"evidence\":[{\"id\":\"EV-b6e92168e1\",\"src\":\"world_summary_c114.md ## Sports\",\"text\":\"Five starters and one Carmen Mesa. Who is the odd arm out?\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Pablo Almanzar took the rotation spot most expected Carmen Mesa to fill, then threw a no-hitter in his debut and a 1-hitter to close the ALCS. That leaves the rotation full with Coles, Ramos, Rivas, Ellis and Almanzar. Mesa sits at AAA on a $780K deal with nowhere to start in Oakland. Henry Rivas is the most expensive arm at $28. 2M and missed time this season before his complete game in World Series game 4.\",\"src\":\"world_summary_c114.md ## Sports\",\"id\":\"F-788b5caab458\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C114\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4261fa115617\"},{\"t\":\"FACT\",\"text\":\"Five starters and one Carmen Mesa. Who is the odd arm out?\",\"src\":\"world_summary_c114.md ## Sports\",\"id\":\"F-04594a6d25c5\"},{\"t\":\"FACT\",\"text\":\"Is Mesa the A's best trade chip this winter, and how long does the front office keep paying top dollar for Rivas while the cheap arms win?\",\"src\":\"world_summary_c114.md ## Sports\",\"id\":\"F-5ab076c8ddeb\"},{\"t\":\"FACT\",\"text\":\"Henry Rivas — Starting Pitcher, Oakland A's\",\"src\":\"Simulation_Ledger profile for POP-00024\",\"id\":\"F-fcdb47a03deb\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C10, Spring, holiday=none\",\"src\":\"output/world_summary_c114.md Calendar context (Simulation_Calendar)\",\"id\":\"F-9b9470803821\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00024",
+        "name": "Henry Rivas",
+        "role": "Starting Pitcher, Oakland A's",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Tanya Cruz",
+        "question": "What does the most expensive arm on the staff make of the cheap arms winning, and how does he hold the room after missing time? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "sideline-signal",
+        "hood": "Dimond",
+        "focus": "The gap between what the rotation costs and what it produces, and where Carmen Mesa fits in a full house.",
+        "src": "world_summary_c114.md ## Sports"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Henry Rivas — Starting Pitcher, Oakland A's",
+        "evidence": [
+          {
+            "id": "EV-b6e92168e1",
+            "src": "world_summary_c114.md ## Sports",
+            "text": "Five starters and one Carmen Mesa. Who is the odd arm out?"
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Pablo Almanzar took the rotation spot most expected Carmen Mesa to fill, then threw a no-hitter in his debut and a 1-hitter to close the ALCS. That leaves the rotation full with Coles, Ramos, Rivas, Ellis and Almanzar. Mesa sits at AAA on a $780K deal with nowhere to start in Oakland. Henry Rivas is the most expensive arm at $28. 2M and missed time this season before his complete game in World Series game 4.",
+          "src": "world_summary_c114.md ## Sports",
+          "id": "F-788b5caab458"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C114",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4261fa115617"
+        },
+        {
+          "t": "FACT",
+          "text": "Five starters and one Carmen Mesa. Who is the odd arm out?",
+          "src": "world_summary_c114.md ## Sports",
+          "id": "F-04594a6d25c5"
+        },
+        {
+          "t": "FACT",
+          "text": "Is Mesa the A's best trade chip this winter, and how long does the front office keep paying top dollar for Rivas while the cheap arms win?",
+          "src": "world_summary_c114.md ## Sports",
+          "id": "F-5ab076c8ddeb"
+        },
+        {
+          "t": "FACT",
+          "text": "Henry Rivas — Starting Pitcher, Oakland A's",
+          "src": "Simulation_Ledger profile for POP-00024",
+          "id": "F-fcdb47a03deb"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C10, Spring, holiday=none",
+          "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+          "id": "F-9b9470803821"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00025",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00025\",\"name\":\"Arturo Ramos\",\"role\":\"Starting Pitcher, Oakland A's\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Tanya Cruz\",\"question\":\"As a veteran in the rotation, how does Ramos read the balance between what the team pays and what it gets? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"sideline-signal\",\"hood\":\"Dimond\",\"focus\":\"The gap between what the rotation costs and what it produces, and where Carmen Mesa fits in a full house.\",\"src\":\"world_summary_c114.md ## Sports\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Arturo Ramos — Starting Pitcher, Oakland A's\",\"evidence\":[{\"id\":\"EV-0304f6bc43\",\"src\":\"world_summary_c114.md ## Sports\",\"text\":\"Five starters and one Carmen Mesa. Who is the odd arm out?\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C114\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4261fa115617\"},{\"t\":\"FACT\",\"text\":\"Five starters and one Carmen Mesa. Who is the odd arm out?\",\"src\":\"world_summary_c114.md ## Sports\",\"id\":\"F-04594a6d25c5\"},{\"t\":\"FACT\",\"text\":\"Pablo Almanzar took the rotation spot most expected Carmen Mesa to fill, then threw a no-hitter in his debut and a 1-hitter to close the ALCS. That leaves the rotation full with Coles, Ramos, Rivas, Ellis and Almanzar. Mesa sits at AAA on a $780K deal with nowhere to start in Oakland. Henry Rivas is the most expensive arm at $28. 2M and missed time this season before his complete game in World Series game 4.\",\"src\":\"world_summary_c114.md ## Sports\",\"id\":\"F-788b5caab458\"},{\"t\":\"FACT\",\"text\":\"Is Mesa the A's best trade chip this winter, and how long does the front office keep paying top dollar for Rivas while the cheap arms win?\",\"src\":\"world_summary_c114.md ## Sports\",\"id\":\"F-5ab076c8ddeb\"},{\"t\":\"FACT\",\"text\":\"Arturo Ramos — Starting Pitcher, Oakland A's\",\"src\":\"Simulation_Ledger profile for POP-00025\",\"id\":\"F-0f99ed4be3f0\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C10, Spring, holiday=none\",\"src\":\"output/world_summary_c114.md Calendar context (Simulation_Calendar)\",\"id\":\"F-9b9470803821\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00025",
+        "name": "Arturo Ramos",
+        "role": "Starting Pitcher, Oakland A's",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Tanya Cruz",
+        "question": "As a veteran in the rotation, how does Ramos read the balance between what the team pays and what it gets? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "sideline-signal",
+        "hood": "Dimond",
+        "focus": "The gap between what the rotation costs and what it produces, and where Carmen Mesa fits in a full house.",
+        "src": "world_summary_c114.md ## Sports"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Arturo Ramos — Starting Pitcher, Oakland A's",
+        "evidence": [
+          {
+            "id": "EV-0304f6bc43",
+            "src": "world_summary_c114.md ## Sports",
+            "text": "Five starters and one Carmen Mesa. Who is the odd arm out?"
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C114",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4261fa115617"
+        },
+        {
+          "t": "FACT",
+          "text": "Five starters and one Carmen Mesa. Who is the odd arm out?",
+          "src": "world_summary_c114.md ## Sports",
+          "id": "F-04594a6d25c5"
+        },
+        {
+          "t": "FACT",
+          "text": "Pablo Almanzar took the rotation spot most expected Carmen Mesa to fill, then threw a no-hitter in his debut and a 1-hitter to close the ALCS. That leaves the rotation full with Coles, Ramos, Rivas, Ellis and Almanzar. Mesa sits at AAA on a $780K deal with nowhere to start in Oakland. Henry Rivas is the most expensive arm at $28. 2M and missed time this season before his complete game in World Series game 4.",
+          "src": "world_summary_c114.md ## Sports",
+          "id": "F-788b5caab458"
+        },
+        {
+          "t": "FACT",
+          "text": "Is Mesa the A's best trade chip this winter, and how long does the front office keep paying top dollar for Rivas while the cheap arms win?",
+          "src": "world_summary_c114.md ## Sports",
+          "id": "F-5ab076c8ddeb"
+        },
+        {
+          "t": "FACT",
+          "text": "Arturo Ramos — Starting Pitcher, Oakland A's",
+          "src": "Simulation_Ledger profile for POP-00025",
+          "id": "F-0f99ed4be3f0"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C10, Spring, holiday=none",
+          "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+          "id": "F-9b9470803821"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  }
+]

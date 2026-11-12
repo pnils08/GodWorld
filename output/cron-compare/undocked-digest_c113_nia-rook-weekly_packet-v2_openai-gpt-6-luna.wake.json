@@ -1,0 +1,63 @@
+{
+  "mode": "wake-write",
+  "desk": "undocked-digest",
+  "cycle": "113",
+  "provider": "openrouter",
+  "model": "openai/gpt-6-luna",
+  "configuredWriterModel": "openai/gpt-6-luna",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "nia-rook-weekly",
+  "byline": {
+    "name": "Nia Rook",
+    "popid": "POP-01076",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 1,
+  "quotesLanded": 2,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "citizen_lookup",
+    "citizen_lookup",
+    "citizen_lookup",
+    "undocked_history",
+    "undocked_history"
+  ],
+  "toolCalls": 5,
+  "wordCount": 440,
+  "targetWords": "350-650",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 350",
+    "words": 440,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "6f0ee9462d6094377eff199c297d9e24292ec11c7da6953d1426bb1db31f2c9f",
+    "costUsd": 0.0014
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 4/4 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/undocked-digest_c113_nia-rook-weekly_packet-v2_openai-gpt-6-luna.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "erride existing { override: true }\n{\n  \"popId\": \"POP-01076\",\n  \"name\": \"Nia Rook\",\n  \"recorded\": true,\n  \"text\": \"filed: UNDOCKED: Cristina Booker’s double-digit burst couldn’t carry the whole week\"\n}"
+  },
+  "ranAt": "2026-10-31T15:16:07.204Z",
+  "dispositionReconciledAt": "2026-10-31T17:00:02.975Z"
+}

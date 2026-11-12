@@ -1,0 +1,48 @@
+{
+  "office": "council_d6",
+  "cycle": 113,
+  "speaker": "Elliott Crane",
+  "cascadeSummary": "District 6 remains anchored in municipal fundamentals, ensuring active corridors like Piedmont Avenue receive reliable baseline city services while crime stays low. On the broader docket, I am maintaining strict fiscal oversight, conditioning support for commercial stabilization on audit controls, and demanding rigorous committee review before any charter renewals or new spending commitments move forward.",
+  "statements": [
+    {
+      "statementId": "STMT-113-council_d6-001",
+      "type": "constituent_advocacy",
+      "topic": "Piedmont Avenue Baseline Services and Corridor Reliability",
+      "initiative": null,
+      "decision": "Prioritize baseline municipal service delivery and infrastructure maintenance across Piedmont Avenue and Montclair.",
+      "quote": "When a commercial corridor maintains low crime and steady street trade, City Hall's job is not to overcomplicate things—it is to deliver reliable municipal fundamentals.",
+      "fullStatement": "Piedmont Avenue is doing the hard work: street trade is busy and crime remains low, even as local sentiment stays flat. The best way City Hall can support our merchants and residents is by maintaining clean streets, reliable infrastructure, and predictable municipal services. District 6 will continue to defend these foundational city responsibilities and ensure local tax dollars translate into visible, steady service delivery across Montclair and Piedmont Avenue.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-113-council_d6-002",
+      "type": "committee_action",
+      "topic": "Fiscal Controls on Commercial Revitalization",
+      "initiative": "Commercial Stabilization for Grand Lake",
+      "decision": "Support committee advancement conditioned on binding audit benchmarks and milestone controls.",
+      "quote": "Revitalization dollars must come with verifiable metrics and strict audit controls before public funds clear the ledger.",
+      "fullStatement": "Targeted support for local commercial districts can be sound policy, but only when paired with enforceable fiscal discipline. I support advancing the Commercial Stabilization for Grand Lake measure through committee specifically because it includes milestone and audit conditions. Whether addressing Grand Lake or Downtown, every revitalization allocation must demonstrate clear economic returns, transparent accounting, and measurable business retention rather than open-ended draws.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-113-council_d6-003",
+      "type": "oversight_statement",
+      "topic": "Workforce Placement Accountability",
+      "initiative": "Oakland Youth Apprenticeship Pipeline",
+      "decision": "Demand transparent accounting of placement data and audit reports on cohort progress.",
+      "quote": "Public workforce investments prove their value through verified placement outcomes and transparent accounting records.",
+      "fullStatement": "City-funded training programs must show verified results. I welcome the call for an expedited placement report regarding the Oakland Youth Apprenticeship Pipeline. City Hall cannot treat program enrollments as finished outcomes; we need transparent accounting, identification of operational blockers, and hard placement data to ensure taxpayers and participating youth receive the concrete results they were promised.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-113-council_d6-004",
+      "type": "fiscal_scrutiny",
+      "topic": "Charter Renewal and New Legislative Filings Review",
+      "initiative": "West Oakland Stabilization Fund",
+      "decision": "Insist on comprehensive committee review and fiscal audits prior to charter renewal or new spending commitments.",
+      "quote": "Any charter renewal or multi-million dollar filing must stand on audited performance and undergo rigorous committee examination.",
+      "fullStatement": "As the West Oakland Stabilization Fund concludes its initial disbursement cycle and proposals for charter renewal emerge alongside new paired filings for Ivy Hill and Dimond, the Council must maintain procedural rigor. Having supported the stabilization fund's targeted relief, I insist that any charter extension or new spending measure undergo full committee vetting, complete financial accounting, and balanced evaluation against citywide fiscal obligations before moving to a final vote.",
+      "trackerUpdates": {}
+    }
+  ]
+}

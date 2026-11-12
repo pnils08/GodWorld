@@ -1,0 +1,276 @@
+{
+  "v": "UNDOCKED-ADAPTER/1",
+  "show": "UNDOCKED",
+  "episode_id": "undocked-pop00734-2026-10-31T01-30-31",
+  "popid": "POP-00734",
+  "holder": "Father Miguel",
+  "session": "undocked-pop00734",
+  "window": {
+    "startedAt": "2026-10-31T01:30:31.788Z",
+    "endedAt": "2026-10-31T01:50:42.316Z"
+  },
+  "runner": {
+    "turns": 95,
+    "exitCode": 0,
+    "capped": true,
+    "toolErrors": 43,
+    "estCostUsd": 0.0195,
+    "tokensIn": 130554,
+    "tokensOut": 4273,
+    "log": "output/spacemolt-show/episodes/undocked-pop00734-2026-10-31T01-30-31.log",
+    "stopReason": "window",
+    "toolCalls": 39
+  },
+  "stall": null,
+  "source": {
+    "kind": "get_action_log",
+    "categories": [
+      "mining",
+      "trading",
+      "mission",
+      "combat",
+      "navigation",
+      "session",
+      "achievement"
+    ],
+    "fetchedAt": "2026-10-31T01:50:44.419Z"
+  },
+  "facts": {
+    "credits_delta": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "hits": 0,
+      "note": "gameplay in window carries no credit event — measured zero",
+      "value": 0
+    },
+    "points_delta": {
+      "type": "FACT",
+      "source": "get_achievements",
+      "earned": [],
+      "note": "no achievement earned in window — measured zero",
+      "value": 0
+    },
+    "systems_visited": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": [
+        "sirius",
+        "lacaille_9352",
+        "grumium",
+        "Grumium",
+        "Lacaille 9352",
+        "sol"
+      ]
+    },
+    "combat_results": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "events": 0,
+        "kills": 0,
+        "deaths": 0,
+        "other": 0
+      }
+    },
+    "cargo": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mined": {
+          "aluminum_ore": 2,
+          "platinum_ore": 1
+        },
+        "sold": {}
+      }
+    },
+    "mishaps": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "event_counts": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": 2,
+        "trading": 0,
+        "mission": 0,
+        "combat": 0,
+        "navigation": 5,
+        "session": 2,
+        "achievement": 0
+      }
+    },
+    "entries": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": [
+          {
+            "id": 235365384,
+            "created_at": "2026-10-31T01:37:08Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 2 Aluminum Ore at Grumium Belt",
+            "data": {
+              "poi_name": "Grumium Belt",
+              "quantity": 2,
+              "resource_id": "aluminum_ore",
+              "resource_name": "Aluminum Ore",
+              "system_id": "grumium",
+              "system_name": "Grumium",
+              "ticks": 2
+            }
+          },
+          {
+            "id": 235365095,
+            "created_at": "2026-10-31T01:37:08Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 1 Platinum Ore at Theta Proxima Belt",
+            "data": {
+              "poi_name": "Theta Proxima Belt",
+              "quantity": 1,
+              "resource_id": "platinum_ore",
+              "resource_name": "Platinum Ore",
+              "system_id": "lacaille_9352",
+              "system_name": "Lacaille 9352",
+              "ticks": 1
+            }
+          }
+        ],
+        "trading": [],
+        "mission": [],
+        "combat": [],
+        "navigation": [
+          {
+            "id": 235372638,
+            "created_at": "2026-10-31T01:41:22Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Sirius to Sol",
+            "data": {
+              "arrival_poi": "saturn",
+              "cloaked": false,
+              "first_visit": false,
+              "from_system": "sirius",
+              "is_pathfinder": false,
+              "to_system": "sol",
+              "to_system_name": "Sol"
+            }
+          },
+          {
+            "id": 235369873,
+            "created_at": "2026-10-31T01:39:32Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Lacaille 9352 to Sirius",
+            "data": {
+              "arrival_poi": "sirius_a",
+              "cloaked": false,
+              "first_visit": false,
+              "from_system": "lacaille_9352",
+              "is_pathfinder": false,
+              "to_system": "sirius",
+              "to_system_name": "Sirius"
+            }
+          },
+          {
+            "id": 235367343,
+            "created_at": "2026-10-31T01:38:02Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Grumium to Lacaille 9352",
+            "data": {
+              "arrival_poi": "theta_proxima_star",
+              "cloaked": false,
+              "first_visit": false,
+              "from_system": "grumium",
+              "is_pathfinder": false,
+              "to_system": "lacaille_9352",
+              "to_system_name": "Lacaille 9352"
+            }
+          },
+          {
+            "id": 235361909,
+            "created_at": "2026-10-31T01:35:02Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Lacaille 9352 to Grumium",
+            "data": {
+              "arrival_poi": "grumium_belt",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "lacaille_9352",
+              "is_pathfinder": false,
+              "to_system": "grumium",
+              "to_system_name": "Grumium"
+            }
+          },
+          {
+            "id": 235357656,
+            "created_at": "2026-10-31T01:32:22Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Sirius to Lacaille 9352",
+            "data": {
+              "arrival_poi": "theta_proxima_belt",
+              "cloaked": false,
+              "first_visit": false,
+              "from_system": "sirius",
+              "is_pathfinder": false,
+              "to_system": "lacaille_9352",
+              "to_system_name": "Lacaille 9352"
+            }
+          }
+        ],
+        "session": [
+          {
+            "id": 235390631,
+            "created_at": "2026-10-31T01:50:42Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "FatherMiguel logged in",
+            "data": {
+              "last_login_at": "2026-10-31T01:30:33Z",
+              "source": "password"
+            }
+          },
+          {
+            "id": 235353777,
+            "created_at": "2026-10-31T01:30:33Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "FatherMiguel logged in",
+            "data": {
+              "last_login_at": "2026-10-31T01:30:04Z",
+              "source": "password"
+            }
+          }
+        ],
+        "achievement": []
+      }
+    }
+  },
+  "captains_log": {
+    "kind": "QUOTED_SUBJECTIVE_COLOR",
+    "type": "INTERPRETATION",
+    "provenance": "captains_log_list",
+    "windowed": 1,
+    "listed": 2,
+    "entries": [
+      {
+        "index": 0,
+        "created_at": "2026-10-31 01:50:42",
+        "text": "[Session Handoff] - **Current Status**: Stranded in orbit around Saturn (Sol system) with no fuel cells. Ship has 1 jump worth of fuel left.  \n- **Immediate Next Step**: Dock at a nearby station (e.g., *sol_central_station* or other Sol POI) to purchase fuel cells.  \n- **Ship & Resources**:  \n  - Credits: **500cr**  \n  - Cargo: **Vanadium (1), Osmium (1), Platinum (1), Aluminum (2)**  \n  - Fuel: **1/1 jump** remaining.  \n- **Active Goal**: Acquire fuel cells to enable further travel (buy or craft).  \n- **Recent Issues**: Failed attempts to mine, dock, or find missions due to fuel shortage and station errors."
+      }
+    ],
+    "unwindowed": [
+      {
+        "index": 1,
+        "created_at": "2026-10-28 01:40:12",
+        "text": "[Session Handoff] - **Current Action**: Mining Copper Ore at Theta Proxima Belt in Lacaille 9352 system (deposit depleted after last resource extraction).  \n- **Next Step**: Locate another asteroid belt or resource-rich area to continue mining for the `copper_requisition` mission.  \n- **Location**: Lacaille 9352 system, Theta Proxima Belt. Ship: Unknown (not specified). Credits: Unknown (not specified). Cargo: Contains Vanadium Ore and Osmium Ore.  \n- **Active Goal**: Complete the `copper_requisition` mission by mining 25 units of Copper Ore.  \n- **Recent Events**: Traveled through Sol, Alpha Centauri, and Sirius systems searching for asteroid belts; encountered depletion at Main Belt and Sirius Gas Pocket."
+      }
+    ]
+  }
+}

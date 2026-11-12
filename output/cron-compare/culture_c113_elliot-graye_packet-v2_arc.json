@@ -1,0 +1,27 @@
+{
+  "status": "arc-seed",
+  "cycle": "113",
+  "desk": "culture",
+  "persona": "elliot-graye",
+  "hood": "East Oakland",
+  "quotes": [
+    {
+      "pop": "POP-00754",
+      "name": "Ophelia Brenner",
+      "quote": "As the Senior Pastor at Foothill Baptist Tabernacle, I've seen our community engagement grow significantly. We have various programs that cater to different age groups and needs. For instance, our expanded tutoring program, which is now visible with posters outside St. Esperanza Parish, has been a huge success. It's wonderful to see the mercado buzzing with activity as people grab lunch between train transfers. Our congregation is actively involved in supporting local initiatives, and we're committed to being a positive presence in Fruitvale."
+    },
+    {
+      "pop": "POP-00532",
+      "name": "Marcus Whitfield",
+      "quote": "To be honest, I'm not really sure how Eastside Hoopers Coalition interacts with faith organizations in East Oakland. I founded the Coalition, but I haven't really been involved with any faith organizations directly. I've seen some posters for tutoring programs outside St. Esperanza Parish, but that's about it."
+    },
+    {
+      "pop": "POP-00763",
+      "name": "Kenji Tanaka",
+      "quote": "To be honest, I don't know much about Foothill Baptist Tabernacle. I've seen that faith communities in Oakland, like the Bay Pure Land Buddhist Temple in my own neighborhood, can be a source of comfort and support for people. I appreciate the role they play, even if I'm not directly familiar with their specific activities or events."
+    }
+  ],
+  "claim": "As the Senior Pastor at Foothill Baptist Tabernacle, I've seen our community engagement grow significantly. We have various programs that cater to different age groups and needs. For instance, our expanded tutoring program, which is now visible with posters outside St. Esperanza Parish, has been a huge success. It's wonderful to see the mercado buzzing with activity as people grab lunch between train transfers. Our congregation is actively involved in supporting local initiatives, and we're committed to being a positive presence in Fruitvale.",
+  "src": "citizenVoice PRESS c113",
+  "ranAt": "2026-10-29T18:16:31.627Z"
+}

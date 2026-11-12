@@ -1,0 +1,120 @@
+[
+  {
+    "pop": "POP-00734",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00734\",\"name\":\"Father Miguel\",\"role\":\"UNDOCKED pilot\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Nia Rook\",\"question\":\"How does Father Miguel's 'dead even on the night' performance influence the city's perception of Eric Taveras' leadership? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"undocked\",\"hood\":\"Fruitvale\",\"focus\":\"The city's watch on Eric Taveras and the leaderboard\",\"src\":\"undocked:undocked-pop00734-Y3C9\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Father Miguel — UNDOCKED pilot\",\"evidence\":[{\"id\":\"EV-820d09084c\",\"src\":\"undocked:undocked-pop00734-Y3C9\",\"text\":\"UNDOCKED: Father Miguel — dead even on the night\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"UNDOCKED: Father Miguel — dead even on the night\",\"src\":\"undocked:undocked-pop00734-Y3C9\",\"id\":\"F-aa684741dbbd\"},{\"t\":\"FACT\",\"text\":\"Father Miguel — Parish priest (ledger)\",\"src\":\"undocked:undocked-pop00734-Y3C9\",\"id\":\"F-19e445474586\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C113\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-876f95b5eb98\"},{\"t\":\"FACT\",\"text\":\"Father Miguel — UNDOCKED pilot\",\"src\":\"Simulation_Ledger profile for POP-00734\",\"id\":\"F-db6ae298334e\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C9, Winter, holiday=none\",\"src\":\"output/world_summary_c113.md Calendar context (Simulation_Calendar)\",\"id\":\"F-ab9d6786094e\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00734",
+        "name": "Father Miguel",
+        "role": "UNDOCKED pilot",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Nia Rook",
+        "question": "How does Father Miguel's 'dead even on the night' performance influence the city's perception of Eric Taveras' leadership? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "undocked",
+        "hood": "Fruitvale",
+        "focus": "The city's watch on Eric Taveras and the leaderboard",
+        "src": "undocked:undocked-pop00734-Y3C9"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Father Miguel — UNDOCKED pilot",
+        "evidence": [
+          {
+            "id": "EV-820d09084c",
+            "src": "undocked:undocked-pop00734-Y3C9",
+            "text": "UNDOCKED: Father Miguel — dead even on the night"
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "UNDOCKED: Father Miguel — dead even on the night",
+          "src": "undocked:undocked-pop00734-Y3C9",
+          "id": "F-aa684741dbbd"
+        },
+        {
+          "t": "FACT",
+          "text": "Father Miguel — Parish priest (ledger)",
+          "src": "undocked:undocked-pop00734-Y3C9",
+          "id": "F-19e445474586"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C113",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-876f95b5eb98"
+        },
+        {
+          "t": "FACT",
+          "text": "Father Miguel — UNDOCKED pilot",
+          "src": "Simulation_Ledger profile for POP-00734",
+          "id": "F-db6ae298334e"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C9, Winter, holiday=none",
+          "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+          "id": "F-ab9d6786094e"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": false,
+    "maxTokens": 420
+  }
+]

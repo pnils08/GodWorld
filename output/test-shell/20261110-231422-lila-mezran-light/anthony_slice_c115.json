@@ -1,0 +1,219 @@
+{
+  "empty": false,
+  "cycle": 115,
+  "kind": "anthony-analytic",
+  "journalist": {
+    "name": "Anthony Raines",
+    "popid": "POP-00017",
+    "persona": "anthony-raines",
+    "bagDoc": "docs/media/ANTHONY_ANALYSIS_BAG.md"
+  },
+  "pulse": {
+    "className": "award-board",
+    "score": 83,
+    "label": "A's · player-feature — Fifth on points, first in credits: Taveras's Undocked pledge to Keane's academy is still waiting on a payout",
+    "team": "A's",
+    "eventKind": "player-feature",
+    "seasonType": "off-season",
+    "storyAngle": "Fifth on points, first in credits: Taveras's Undocked pledge to Keane's academy is still waiting on a payout",
+    "hasStats": true,
+    "record": "-",
+    "streak": "-",
+    "foilNumber": "Eric Taveras/3",
+    "feedCycle": 115
+  },
+  "charge": null,
+  "bag": {
+    "tools": [
+      {
+        "id": 1,
+        "name": "Box-Card Read"
+      },
+      {
+        "id": 7,
+        "name": "Is-It-Real (ledger PANDAS)"
+      }
+    ],
+    "claim": "The season line (Eric Taveras/3) has to carry the claim before the narrative does: Fifth on points, first in credits: Taveras's Undocked pledge to Keane's academy is still waiting on a payout",
+    "foilNumber": "Eric Taveras/3"
+  },
+  "friction": {
+    "a": "Feed present fact: Fifth on points, first in credits: Taveras's Undocked pledge to Keane's academy is still waiting on a payout",
+    "b": "Soft FO language or bleacher heat that skips the line",
+    "frame": "Evaluate fit and process with numbers — one claim, third person."
+  },
+  "prewrite": {
+    "reporter": "Anthony Raines",
+    "bagTools": [
+      {
+        "id": 1,
+        "name": "Box-Card Read"
+      },
+      {
+        "id": 7,
+        "name": "Is-It-Real (ledger PANDAS)"
+      }
+    ],
+    "lineFacts": [
+      "Feed line: Eric Taveras/3 EP/20 PTS/1170 CR/5th",
+      "Feed line: Ronald Silk/2 EP/38.15 PTS/1st",
+      "Feed line: Clarissa Dane/9 EP/10 PTS/317 CR",
+      "Event kind (feed): A's — player-feature (off-season)",
+      "NamesUsed (feed): Eric Taveras (2B), Vinnie Keane (DH)",
+      "StoryAngle (feed): Fifth on points, first in credits: Taveras's Undocked pledge to Keane's academy is still waiting on a payout"
+    ],
+    "dossierFacts": [
+      "Eric Taveras TrueSource: FULL STAT TRUE SOURCE — BATTER Name: Eric Taveras Team: Athletics Position: 2B Jersey: #22 -------------------------------------------------- PROFILE Potential: A Overall: 93 MLB Service: 6.000 Age: 25 Bats: L Throws: R Height: 5'10\" Weight: 184 LBS Drafted: RND 1 (2033) Secondar",
+      "Vinnie Keane TrueSource: 2041 REGULAR SEASON G: 37 PA: 130 AB: 127 R: 25 H: 40 2B: 8 3B: 1 HR: 13 RBI: 29 BB: 0 SO: 6 HBP: 0 SF: 3 SAC: 0 GIDP: 2 AVG: 0.315 OBP: 0.308 SLG: 0. | WAR: 1.1 | AWARDS (Career Reference) - MVP (2031) - 8x All-Star (2025, 2027, 2028, 2029, 2030, 2031, "
+    ],
+    "feedFacts": [
+      "StoryAngle: Fifth on points, first in credits: Taveras's Undocked pledge to Keane's academy is still waiting on a payout",
+      "Notes: Back in C112, Eric Taveras posted on Moltbook that anything he won on Undocked would go to the Vinnie Keane Firehouse 29 West Oakland Baseball Academy. With Keane's retirement now official, that promise reads differently: the next face of the franchise pledging to the program that carries the last one's name. So where does it stand? Taveras is fifth in the Undocked standings with 20 points over 3 episodes. But his 1,170 credits are by far the most on the board, nearly four times second-place Clarissa Dane's 317. He led the standings for 2 cycles after his C112 episode, then got passed on points in C114 and C115 by Ronald Silk (38.15), Luis Taz (37.96), Daphne Stafford (32.93) and Lena Okafor (32.83). SpaceMolt still hasn't said what the rankings pay out, and no winnings have gone to anyone yet, so the pledge is real but the amount isn't. The Firehouse 29 academy already ties the two eras together: Adash Stanley volunteered there in C106, and the Keane Foundation runs it out of West Oakland. Taveras, 25, is coming off a 54 homerun season, Postseason MVP and World Series MVP in his first year on a $32.1M deal. Open questions: does Taveras go back on Undocked to reclaim the top spot, when does SpaceMolt pay, and does he give to Firehouse 29 anyway if the money never comes?"
+    ],
+    "claim": "The season line (Eric Taveras/3) has to carry the claim before the narrative does: Fifth on points, first in credits: Taveras's Undocked pledge to Keane's academy is still waiting on a payout",
+    "missing": [
+      "x-stats / barrel% / launch angle / OAA not on feed",
+      "contracts or salaries not printed on this feed row",
+      "As_Roster sheet cells (offline pack uses feed Stats only — do not invent WAR/ERA beyond feed)"
+    ],
+    "foilNumber": "Eric Taveras/3",
+    "anchorFacts": [
+      "Feed line: Eric Taveras/3 EP/20 PTS/1170 CR/5th",
+      "Feed line: Ronald Silk/2 EP/38.15 PTS/1st",
+      "Feed line: Clarissa Dane/9 EP/10 PTS/317 CR",
+      "Event kind (feed): A's — player-feature (off-season)"
+    ],
+    "hooks": []
+  },
+  "hooks": [],
+  "seeds": [],
+  "story": {
+    "kind": "sports-analytics",
+    "angle": "The season line (Eric Taveras/3) has to carry the claim before the narrative does: Fifth on points, first in credits: Taveras's Undocked pledge to Keane's academy is still waiting on a payout",
+    "label": "A's · player-feature — Fifth on points, first in credits: Taveras's Undocked pledge to Keane's academy is still waiting on a payout",
+    "hookLine": "Fifth on points, first in credits: Taveras's Undocked pledge to Keane's academy is still waiting on a payout",
+    "hood": "West Oakland",
+    "pulseClass": "award-board",
+    "team": "A's",
+    "eventKind": "player-feature",
+    "citizens": [
+      "Eric Taveras (POP-00597)",
+      "Vinnie Keane (POP-00001)"
+    ],
+    "popids": [
+      "POP-00597",
+      "POP-00001"
+    ],
+    "ref": "world_summary_c115.md ## Sports",
+    "cycle": 115
+  },
+  "approach": "Analytic approach (Anthony Raines): third-person only — never fan \"we.\" One evaluative claim built on verifiable feed line numbers (Stats / record / StoryAngle). Open from the board (roster fact, contract on the feed, season line) — not the bleachers. Pick 1–2 tools from the analysis bag in this slice. Numbers as the card or feed prints them, named to their source. FORBIDDEN: inventing x-stats, barrel%, launch angle, contracts, or salaries not on the feed; P Slayer charge; Hal elegy as spine; multi-voice sports-desk average.",
+  "players": [
+    {
+      "name": "Eric Taveras",
+      "popid": "POP-00597",
+      "role": "Second Baseman, Oakland A's",
+      "neighborhood": "Downtown",
+      "why": "feed-names"
+    },
+    {
+      "name": "Vinnie Keane",
+      "popid": "POP-00001",
+      "role": "Former Designated Hitter, Oakland A's Legend",
+      "neighborhood": "Grand Lake",
+      "why": "feed-names"
+    }
+  ],
+  "scene": {
+    "neighborhood": "West Oakland",
+    "record": "-",
+    "streak": "-",
+    "colorRoom": "Press-box / clubhouse quiet. Numbers from feed Stats only. No invented Savant cards. RoleType from ledger when present — never invent careers."
+  },
+  "candidates": [
+    {
+      "score": 83,
+      "cycle": 115,
+      "team": "A's",
+      "primary": "award-board",
+      "hasStats": true,
+      "angle": "Fifth on points, first in credits: Taveras's Undocked pledge to Keane's academy is still waiting on a payout"
+    },
+    {
+      "score": 77,
+      "cycle": 115,
+      "team": "A's",
+      "primary": "prospect-fit",
+      "hasStats": true,
+      "angle": "The backup outhit the starter and two kids are knocking. Who catches for the A's in 2042?"
+    },
+    {
+      "score": 75,
+      "cycle": 115,
+      "team": "Oaks",
+      "primary": "line-card",
+      "hasStats": true,
+      "angle": "Second-round rookie Harry Hayward scores a career high and makes his case for a bigger role"
+    },
+    {
+      "score": 75,
+      "cycle": 114,
+      "team": "A's",
+      "primary": "award-board",
+      "hasStats": true,
+      "angle": "The bargain core: is it time to extend Coles, Ellis, Quintero and Gonzalez?"
+    },
+    {
+      "score": 73,
+      "cycle": 115,
+      "team": "A's",
+      "primary": "award-board",
+      "hasStats": true,
+      "angle": "It's official: Vinnie Keane retires. Undrafted to undeniable, and staying in Grand Lake."
+    },
+    {
+      "score": 72,
+      "cycle": 114,
+      "team": "A's",
+      "primary": "award-board",
+      "hasStats": true,
+      "angle": "The last of the dynasty core: how long do Kelley and Davis have?"
+    },
+    {
+      "score": 68,
+      "cycle": 115,
+      "team": "Oaks",
+      "primary": "line-card",
+      "hasStats": true,
+      "angle": "The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109"
+    },
+    {
+      "score": 67,
+      "cycle": 115,
+      "team": "Oaks",
+      "primary": "line-card",
+      "hasStats": true,
+      "angle": "Down two after three in Philadelphia, the Oaks drop 40 in the fourth and Hayward scores a career high. Oaks 120 - 76ers 106"
+    },
+    {
+      "score": 64,
+      "cycle": 114,
+      "team": "A's",
+      "primary": "line-card",
+      "hasStats": true,
+      "angle": "$22 million in veteran relief and the rookies got the October innings. Is a bullpen refresh coming?"
+    },
+    {
+      "score": 60,
+      "cycle": 114,
+      "team": "A's",
+      "primary": "line-card",
+      "hasStats": true,
+      "angle": "Five starters and one Carmen Mesa. Who is the odd arm out?"
+    }
+  ],
+  "pointers": [
+    "output/world_summary_c115.md ## Sports",
+    "docs/media/ANTHONY_ANALYSIS_BAG.md"
+  ]
+}

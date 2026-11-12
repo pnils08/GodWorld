@@ -1,0 +1,27 @@
+{
+  "status": "arc-seed",
+  "cycle": "112",
+  "desk": "culture",
+  "persona": "elliot-graye",
+  "hood": "Downtown",
+  "quotes": [
+    {
+      "pop": "POP-00753",
+      "name": "Eunice Marston",
+      "quote": "As a faith leader, I believe our congregation's role in the community during times of crisis is to offer support and be present for those affected. We've seen this in action at Telegraph Presbyterian Fellowship, where we've opened our doors to provide a sense of community and comfort. I think it's essential for faith organizations to be available and welcoming, just as we've observed other faith communities doing in our area."
+    },
+    {
+      "pop": "POP-00603",
+      "name": "Amir Delia",
+      "quote": "I saw a choir performance at Telegraph Presbyterian Fellowship when I walked by the other day. It was nice to see people gathered like that."
+    },
+    {
+      "pop": "POP-00335",
+      "name": "Imie Calero",
+      "quote": "I've seen Telegraph Presbyterian Fellowship hosting events in our neighborhood, like a choir performance that drew a small crowd. It's great to see community activities happening around here."
+    }
+  ],
+  "claim": "As a faith leader, I believe our congregation's role in the community during times of crisis is to offer support and be present for those affected. We've seen this in action at Telegraph Presbyterian Fellowship, where we've opened our doors to provide a sense of community and comfort. I think it's essential for faith organizations to be available and welcoming, just as we've observed other faith communities doing in our area.",
+  "src": "citizenVoice PRESS c112",
+  "ranAt": "2026-10-22T18:15:51.687Z"
+}

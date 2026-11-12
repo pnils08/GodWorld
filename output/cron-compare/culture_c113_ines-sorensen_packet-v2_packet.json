@@ -1,0 +1,2128 @@
+{
+  "stage": "report",
+  "desk": "culture",
+  "cycle": "113",
+  "persona": "ines-sorensen",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Ines Sorensen",
+    "popid": "POP-01211"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-voices",
+      "angle": "Voices, C113: you pick whose own words carry the day",
+      "label": "Voices roster, C113: 413 citizens with pages, 2 new since your last piece",
+      "hookLine": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.",
+      "hood": null,
+      "citizens": [
+        "Daphne Stafford (POP-00816)",
+        "Father Miguel (POP-00734)",
+        "Clarissa Dane (POP-00143)",
+        "Omar Lingio (POP-00206)",
+        "Ximena Mehta (POP-01039)",
+        "Deacon Seymour (POP-00528)",
+        "Dax Monroe (POP-00769)",
+        "Claire Ashford (POP-01071)",
+        "Yu Zen (POP-00194)",
+        "Ramon Vega (POP-00042)",
+        "Gregory Mims (POP-00023)",
+        "Rick Walker (POP-00198)",
+        "Lucia Polito (POP-00004)",
+        "Lena Cross (POP-00539)",
+        "Tara Ellison (POP-00546)",
+        "Mimmie Carlisle (POP-00682)",
+        "Camila Osman (POP-01134)",
+        "Elio Perez (POP-00201)",
+        "Matty Lipo (POP-00265)",
+        "Tiro Worso (POP-00646)",
+        "Otis Redd (POP-00121)",
+        "Sergio Aybar (POP-00078)",
+        "Keisha Ramos (POP-00041)",
+        "Elena Soria Dominguez (POP-00791)",
+        "Bobby Chen-Ramirez (POP-00792)",
+        "Dame Reed (POP-00634)",
+        "Priya Narang (POP-00141)",
+        "Fang Crawford (POP-00837)",
+        "Ingmar Jordan (POP-00346)",
+        "Mac Hillie (POP-00279)",
+        "Trenton Nawan (POP-00273)",
+        "Austin Reaves (POP-01027)",
+        "Adash Stanley (POP-01023)",
+        "Kenji Tanaka (POP-00763)",
+        "Marcus Whitfield (POP-00532)",
+        "Ophelia Brenner (POP-00754)",
+        "Geneva Zhou (POP-00892)",
+        "Nakia Pena (POP-00806)",
+        "Jose Johnson (POP-00968)",
+        "Dimas Wong (POP-00446)",
+        "Victor Alize (POP-00216)",
+        "Naomi Sterling (POP-00759)",
+        "Reggie Soto (POP-00590)",
+        "Solis Walmart (POP-00334)",
+        "Brady Lopez (POP-00256)",
+        "Danny Horn (POP-00022)",
+        "Frank Reyna (POP-00079)",
+        "Vladimir Gonzalez (POP-00598)",
+        "Desmond Morton (POP-00051)",
+        "Rafael Brannie (POP-00223)",
+        "Elle Lilo (POP-00177)",
+        "Johhny Necklar (POP-00509)",
+        "Cee Lee (POP-00320)",
+        "Wren Choi (POP-01137)",
+        "Liliana Salazar (POP-01128)",
+        "Mei Chen (POP-00635)",
+        "Timmie Hall (POP-00439)",
+        "Xing Patel (POP-00440)",
+        "Jun Fisher (POP-01005)",
+        "Lo Thoop (POP-00667)",
+        "Travis Coles (POP-00533)",
+        "Jonas Patel (POP-00142)",
+        "Mark Aitken (POP-00003)",
+        "Vanessa Tran-Muñoz (POP-01021)",
+        "Marcus Webb (POP-00790)",
+        "Augusta Davis (POP-00436)",
+        "Tomas Beckett (POP-00987)",
+        "Cristina Booker (POP-00836)",
+        "Omar Amici (POP-00263)",
+        "Christopher Johnson (POP-00211)",
+        "Isla Sike (POP-00187)",
+        "Salma Navarro (POP-00975)",
+        "Patricia Nolan (POP-00729)",
+        "Dolores Nwachukwu (POP-01141)",
+        "Leonard Briggs (POP-00138)",
+        "Ollie Campbell (POP-00642)",
+        "Manfred Owens (POP-00028)",
+        "Alicia Hernandez (POP-00366)",
+        "Evan Lewis (POP-00200)",
+        "Eleanor Rivera (POP-00617)",
+        "Maren Johns (POP-00470)",
+        "Rosario Medina (POP-01053)",
+        "Coen Cartier (POP-00338)",
+        "Omarion Farah (POP-00716)",
+        "Marisio Curazo (POP-00698)",
+        "Dawson Nguyen (POP-00347)",
+        "Jett Walker (POP-00230)",
+        "Estrella Mehta (POP-00855)",
+        "Valentina Campbell (POP-01017)",
+        "Ramon Solano (POP-00756)",
+        "Delvon Pratt (POP-00621)",
+        "Marmol Lemon (POP-00336)",
+        "Dahlia Cruz (POP-01202)",
+        "Eleanor Fong (POP-00981)",
+        "Marco Fabregas (POP-00060)",
+        "Helena Morr (POP-00150)",
+        "Marcus Wright (POP-00288)",
+        "Jade Orion (POP-00540)",
+        "Janae Rivers (POP-00043)",
+        "Avery Santana (POP-00034)",
+        "Rico Valez (POP-00632)",
+        "Marin Tao (POP-00537)",
+        "Rowan Pierce (POP-00545)",
+        "Drew Lemon (POP-00670)",
+        "Andre Turner (POP-00225)",
+        "Devon Willis (POP-00782)",
+        "Mojisola Cook (POP-00950)",
+        "Ross Cabral (POP-00055)",
+        "Aaliyah Brennan (POP-00235)",
+        "Imie Calero (POP-00335)",
+        "Amir Delia (POP-00603)",
+        "Eunice Marston (POP-00753)",
+        "Brooklyn Nguyen (POP-00184)",
+        "Jaden Phillips (POP-00242)",
+        "Rafael Phillips (POP-01077)",
+        "Bianca Crook (POP-00661)",
+        "Jorry Cula (POP-00182)",
+        "Joseph Cramp (POP-00272)",
+        "Lila Patty (POP-00185)",
+        "Benji Dillon (POP-00018)",
+        "Vinnie Keane (POP-00001)",
+        "Jire Hilt (POP-00649)",
+        "Brian Adams (POP-00258)",
+        "Xavier Ramington (POP-00181)",
+        "Iris Pham (POP-01203)",
+        "Makayla Wu (POP-00867)",
+        "Florencia Shah (POP-00934)",
+        "Tatiana Flores (POP-00859)",
+        "Omar Cleo (POP-00290)",
+        "Elijah Roberts (POP-00275)",
+        "Derlik Green (POP-00244)",
+        "Marc Allie (POP-00241)",
+        "Rupert Ochoa (POP-00488)",
+        "Jerald Jensen (POP-00280)",
+        "Maya Torres-Dillon (POP-00742)",
+        "Mei Wong (POP-01036)",
+        "Simone Adesanya (POP-00287)",
+        "Rafael Montez (POP-00136)",
+        "Kendra Lyle-Nnamdi (POP-01143)",
+        "Merkin Jumper (POP-00688)",
+        "Shawn Weller (POP-00251)",
+        "Clearence Leighton (POP-00238)",
+        "Antoine Vermeer (POP-00755)",
+        "Maurice Franklin (POP-00801)",
+        "Daire Green (POP-00442)",
+        "Matra Woven (POP-00785)",
+        "Derek Obi (POP-00543)",
+        "Cedric Nakamura (POP-01033)",
+        "Dillon Trevor (POP-00224)",
+        "Amara Keane (POP-00002)",
+        "Amy Cook (POP-00309)",
+        "Elias Varek (POP-00789)",
+        "Lila Leap (POP-00301)",
+        "Tomas Ochoa (POP-00993)",
+        "Brianna Lee (POP-00134)",
+        "Carlos Presti (POP-00048)",
+        "Gordon Tate (POP-00148)",
+        "Ryan Stark (POP-00351)",
+        "Nina Reyes (POP-01057)",
+        "Alma Vasquez (POP-01063)",
+        "Guadalupe Lupe (POP-00643)",
+        "Hector Leech (POP-00252)",
+        "Melton Neilon (POP-00170)",
+        "Jessie Hess (POP-00212)",
+        "Manny Ellen (POP-00046)",
+        "Mike Paulson (POP-00527)",
+        "Hazel Lanning (POP-00982)",
+        "Tariq Jello (POP-00174)",
+        "Briar Soto (POP-00926)",
+        "Inga Creator (POP-00196)",
+        "Janelle Rourke (POP-00145)",
+        "Daniel Yoon (POP-01107)",
+        "Ben Clark (POP-00285)",
+        "Eric Taveras (POP-00597)",
+        "Lonzo Jailon (POP-00195)",
+        "Joel Wren (POP-00218)",
+        "Calvin Mwangi (POP-00573)",
+        "Ray Neal (POP-00448)",
+        "Mai Tse (POP-00977)",
+        "Niani Oakley (POP-00951)",
+        "Elena Leon (POP-00193)",
+        "Dmitri Soto (POP-00276)",
+        "Blair Patel (POP-00189)",
+        "Ray Samson (POP-00186)",
+        "Melony Foster (POP-00348)",
+        "Chris Foster (POP-00316)",
+        "Henry Rivas (POP-00024)",
+        "Tom Jilner (POP-00691)",
+        "Diego Remo (POP-00332)",
+        "Orlando Phillips (POP-00204)",
+        "Mason Walt (POP-00233)",
+        "Martin Richards (POP-00031)",
+        "Jia Carmichael (POP-00876)",
+        "Patrick When (POP-00208)",
+        "Theo Banks (POP-01056)",
+        "Colin Phillips (POP-00786)",
+        "Victor King (POP-00262)",
+        "Jack Phillips (POP-00292)",
+        "Tyrone Bennington (POP-00219)",
+        "Alma Lewis (POP-00304)",
+        "John Ellis (POP-00033)",
+        "Daniel Cloak (POP-00722)",
+        "Priya Nair (POP-00531)",
+        "Evan Bing (POP-00274)",
+        "Yael Bauer (POP-00760)",
+        "Xiu Cello (POP-00239)",
+        "Aaron Whitfield (POP-00040)",
+        "Jee Lei (POP-00321)",
+        "Lila Bennington (POP-00317)",
+        "Toby Lamont (POP-00183)",
+        "Kato Rivers (POP-00770)",
+        "Millicent Kumar (POP-00812)",
+        "Brianna Scott (POP-00656)",
+        "Iris Baron (POP-00337)",
+        "Ricky Wilton (POP-00215)",
+        "Broderick Mitchell (POP-00221)",
+        "Yammie Perez (POP-00286)",
+        "Hazel Salazar (POP-00873)",
+        "Milan Warmon (POP-00324)",
+        "Marisol Trujillo (POP-00795)",
+        "Tevan Walker (POP-00270)",
+        "Arturo Ramos (POP-00025)",
+        "Miguel Joson (POP-00294)",
+        "Jackson Sift (POP-00190)",
+        "Theo Burkes (POP-00541)",
+        "Tao Lee (POP-00764)",
+        "Dillon Brooks (POP-01079)",
+        "Wilson Shepard (POP-01022)",
+        "Jun Leu (POP-00994)",
+        "Jacquez Tearn (POP-00214)",
+        "Depak Ying (POP-00210)",
+        "Owen Low (POP-00283)",
+        "Jango Lango (POP-00253)",
+        "Ronald Williams (POP-01041)",
+        "Jose Colon (POP-00599)",
+        "Ernesto Quintero (POP-00050)",
+        "Pablo Almanzar (POP-01078)",
+        "Colin Soria (POP-00227)",
+        "Tiu Xiong (POP-00209)",
+        "Dom Will (POP-00368)",
+        "Enzo Walker (POP-00291)",
+        "Sam Fazio (POP-00445)",
+        "Elena Patel (POP-01030)",
+        "Darius Clark (POP-00961)",
+        "Irene Fay (POP-00794)",
+        "Toto Foto (POP-00302)",
+        "Tyrie Groin (POP-00254)",
+        "Steve Conrad (POP-00124)",
+        "Rafael Pilgrim (POP-00644)",
+        "Akua Ortiz (POP-00948)",
+        "Jia Pena (POP-00916)",
+        "Vanessa Ramas (POP-01045)",
+        "Vanessa Treary (POP-00781)",
+        "Ravi O'Connell (POP-00236)",
+        "Darrin Davis (POP-00021)",
+        "Anand Krishnamurthy (POP-00765)",
+        "Christopher Clerk (POP-00295)",
+        "Owen Tower (POP-00207)",
+        "Jacob King (POP-00267)",
+        "Wanjiru Liu (POP-00842)",
+        "Carmen Solis (POP-00953)",
+        "Luca Petrov (POP-00271)",
+        "Wendell Price (POP-01099)",
+        "Belle Lopez (POP-00300)",
+        "Salma Campbell (POP-01018)",
+        "Gloria Liu (POP-00827)",
+        "Delia Vargas-Ruiz (POP-01054)",
+        "Dank Abara (POP-00796)",
+        "Naomi Castellanos (POP-01098)",
+        "Wiu Wiu (POP-00312)",
+        "Soo Loo (POP-00663)",
+        "Javier Robertson (POP-00228)",
+        "Kelvon Ochoa (POP-00481)",
+        "Talmon Lint (POP-00176)",
+        "Bodhi Davis (POP-00264)",
+        "Shawn Neighbor (POP-00746)",
+        "Isabel Lopes (POP-00325)",
+        "Priyanka Raman (POP-01096)",
+        "Helena Voss-Adeyemi (POP-01095)",
+        "Marguerite Salcedo (POP-01093)",
+        "Desmond Achebe (POP-01092)",
+        "Beverly Peterson (POP-00119)",
+        "Jerome Pittman (POP-01055)",
+        "Maria Conteras (POP-01047)",
+        "Kalyani Alvarez (POP-00905)",
+        "Jesus Jorden (POP-00721)",
+        "Clark Saryan (POP-00052)",
+        "Rick Dillon (POP-00743)",
+        "Patrick Hill (POP-01019)",
+        "Jori Clame (POP-00232)",
+        "Rosalind Young (POP-00495)",
+        "Jacob Perez (POP-01089)",
+        "Marcus King (POP-01087)",
+        "Cameron Wallen (POP-00180)",
+        "Daley Hill (POP-00240)",
+        "Howard Yell (POP-00651)",
+        "Leanne Wu (POP-00731)",
+        "Tariq Harris (POP-01112)",
+        "Derwin Train (POP-00520)",
+        "Travis Paiz (POP-00222)",
+        "Caroline Cabrera (POP-00847)",
+        "Teri Mitchell (POP-00449)",
+        "Darius Scoot (POP-00191)",
+        "Sara Copper (POP-00175)",
+        "Charlene Gutierrez (POP-00863)",
+        "Brie Harris (POP-00169)",
+        "Marlon Hingsley (POP-00172)",
+        "Yuki Ji (POP-00783)",
+        "Jalen Hill (POP-00960)",
+        "Quynh Le (POP-00878)",
+        "Ariana Lee (POP-00168)",
+        "Robert Jaston (POP-00758)",
+        "Marcus Walker (POP-00962)",
+        "Tobi Sobi (POP-00178)",
+        "Mina Linas (POP-00135)",
+        "Celeste Moon (POP-01061)",
+        "Emilia Wurford (POP-00341)",
+        "AJ Dybantsa (POP-01024)",
+        "Marcus Osei (POP-00036)",
+        "Leo Ling (POP-00342)",
+        "Simone Cleng (POP-00188)",
+        "Jahill West (POP-00315)",
+        "Layla Scott (POP-01011)",
+        "Art Scott (POP-00665)",
+        "Soria Herrin (POP-00313)",
+        "Grace Yamamoto (POP-00798)",
+        "Mart Johns (POP-00648)",
+        "Ezekiel Campbell (POP-00645)",
+        "Howard Travis (POP-00255)",
+        "Marky Beal (POP-00202)",
+        "Weston Herrin (POP-00494)",
+        "Kimberly Cho (POP-00137)",
+        "Kevin Nelson (POP-00269)",
+        "Melo Arnez (POP-00234)",
+        "Manjit Singh (POP-00766)",
+        "Darren Briggs (POP-00588)",
+        "Coen Carr (POP-01026)",
+        "Dame Sarr (POP-01025)",
+        "Isley Kelley (POP-00019)",
+        "Ripley Court (POP-00659)",
+        "Manju Crenshaw (POP-00937)",
+        "Bambi Wart (POP-00327)",
+        "Chandni Aguilar (POP-00880)",
+        "Kenton Pearl (POP-00217)",
+        "Kaila Raimon (POP-00666)",
+        "Carlo Jist (POP-00167)",
+        "Sofia Jordan (POP-00171)",
+        "Brenda Okoro (POP-00037)",
+        "Minka Slayton (POP-00307)",
+        "Kwame Fitzgerald (POP-00259)",
+        "Latasha Owusu (POP-00871)",
+        "Nour Santos (POP-00989)",
+        "Idris Karim (POP-00761)",
+        "Jemeal Brim (POP-00226)",
+        "Sandra Velazquez (POP-00830)",
+        "Emmet Gorn (POP-00277)",
+        "Jay Adams (POP-00281)",
+        "Calvin Turner (POP-00231)",
+        "Javier Trenton (POP-00328)",
+        "Warren Ashford (POP-00504)",
+        "Den Blue (POP-00296)",
+        "Miguel Allen (POP-01029)",
+        "Clarence Moody (POP-00730)",
+        "Mateo Wally (POP-01012)",
+        "Willy Wally (POP-00654)",
+        "Rico Fister (POP-00305)",
+        "Jenna Comer (POP-00476)",
+        "Andre Lee (POP-00311)",
+        "Theo Park (POP-00038)",
+        "Jerry Nelson (POP-00237)",
+        "Hector Navarro (POP-00741)",
+        "Bea Cartier (POP-00192)",
+        "Ronnie Lar (POP-00261)",
+        "Joesph Allen (POP-00289)",
+        "Maya Santos (POP-00475)",
+        "Priscilla Odom (POP-00593)",
+        "Theodora Donovan (POP-00829)",
+        "Kaila Nguyen (POP-00339)",
+        "Bennet Green (POP-00229)",
+        "Funmi Shah (POP-00802)",
+        "Xanny Allen (POP-00243)",
+        "Mateo Jilner (POP-01001)",
+        "Darius Cike (POP-00658)",
+        "Malot Bielo (POP-00293)",
+        "Inez Mendoza (POP-00811)",
+        "Joaquín Nakamura (POP-00248)",
+        "Shane Phelps (POP-00268)",
+        "Dearie Beacon (POP-00246)",
+        "Rigo Ryno (POP-00197)",
+        "Travis Golin (POP-00205)",
+        "Ty Yule (POP-00250)",
+        "Leonard Tran (POP-00502)",
+        "Kevel Phoul (POP-00260)",
+        "Arnie Carter (POP-00310)",
+        "Davey Martinez (POP-00213)",
+        "Mara Vance (POP-00507)",
+        "Tyrone Lulu (POP-00284)",
+        "Cooper Erazmo (POP-00323)",
+        "Baxter Thompson (POP-00247)",
+        "Lee Coo (POP-00303)",
+        "Jorge Wusther (POP-00297)",
+        "Kevin Clark (POP-00053)",
+        "Rose Delgado (POP-00503)",
+        "Mika Loop (POP-00306)",
+        "Laila Cortez (POP-00035)",
+        "Shawn Gown (POP-00220)",
+        "Jacob Perez (POP-00203)",
+        "Kaila Braun (POP-00173)",
+        "Leo Leonard (POP-00179)",
+        "Joel Henry (POP-00299)",
+        "Farah Lindqvist (POP-00257)",
+        "Jaren Lanning (POP-00245)",
+        "Mateo Allen (POP-00199)"
+      ],
+      "popids": [
+        "POP-00816",
+        "POP-00734",
+        "POP-00143",
+        "POP-00206",
+        "POP-01039",
+        "POP-00528",
+        "POP-00769",
+        "POP-01071",
+        "POP-00194",
+        "POP-00042",
+        "POP-00023",
+        "POP-00198",
+        "POP-00004",
+        "POP-00539",
+        "POP-00546",
+        "POP-00682",
+        "POP-01134",
+        "POP-00201",
+        "POP-00265",
+        "POP-00646",
+        "POP-00121",
+        "POP-00078",
+        "POP-00041",
+        "POP-00791",
+        "POP-00792",
+        "POP-00634",
+        "POP-00141",
+        "POP-00837",
+        "POP-00346",
+        "POP-00279",
+        "POP-00273",
+        "POP-01027",
+        "POP-01023",
+        "POP-00763",
+        "POP-00532",
+        "POP-00754",
+        "POP-00892",
+        "POP-00806",
+        "POP-00968",
+        "POP-00446",
+        "POP-00216",
+        "POP-00759",
+        "POP-00590",
+        "POP-00334",
+        "POP-00256",
+        "POP-00022",
+        "POP-00079",
+        "POP-00598",
+        "POP-00051",
+        "POP-00223",
+        "POP-00177",
+        "POP-00509",
+        "POP-00320",
+        "POP-01137",
+        "POP-01128",
+        "POP-00635",
+        "POP-00439",
+        "POP-00440",
+        "POP-01005",
+        "POP-00667",
+        "POP-00533",
+        "POP-00142",
+        "POP-00003",
+        "POP-01021",
+        "POP-00790",
+        "POP-00436",
+        "POP-00987",
+        "POP-00836",
+        "POP-00263",
+        "POP-00211",
+        "POP-00187",
+        "POP-00975",
+        "POP-00729",
+        "POP-01141",
+        "POP-00138",
+        "POP-00642",
+        "POP-00028",
+        "POP-00366",
+        "POP-00200",
+        "POP-00617",
+        "POP-00470",
+        "POP-01053",
+        "POP-00338",
+        "POP-00716",
+        "POP-00698",
+        "POP-00347",
+        "POP-00230",
+        "POP-00855",
+        "POP-01017",
+        "POP-00756",
+        "POP-00621",
+        "POP-00336",
+        "POP-01202",
+        "POP-00981",
+        "POP-00060",
+        "POP-00150",
+        "POP-00288",
+        "POP-00540",
+        "POP-00043",
+        "POP-00034",
+        "POP-00632",
+        "POP-00537",
+        "POP-00545",
+        "POP-00670",
+        "POP-00225",
+        "POP-00782",
+        "POP-00950",
+        "POP-00055",
+        "POP-00235",
+        "POP-00335",
+        "POP-00603",
+        "POP-00753",
+        "POP-00184",
+        "POP-00242",
+        "POP-01077",
+        "POP-00661",
+        "POP-00182",
+        "POP-00272",
+        "POP-00185",
+        "POP-00018",
+        "POP-00001",
+        "POP-00649",
+        "POP-00258",
+        "POP-00181",
+        "POP-01203",
+        "POP-00867",
+        "POP-00934",
+        "POP-00859",
+        "POP-00290",
+        "POP-00275",
+        "POP-00244",
+        "POP-00241",
+        "POP-00488",
+        "POP-00280",
+        "POP-00742",
+        "POP-01036",
+        "POP-00287",
+        "POP-00136",
+        "POP-01143",
+        "POP-00688",
+        "POP-00251",
+        "POP-00238",
+        "POP-00755",
+        "POP-00801",
+        "POP-00442",
+        "POP-00785",
+        "POP-00543",
+        "POP-01033",
+        "POP-00224",
+        "POP-00002",
+        "POP-00309",
+        "POP-00789",
+        "POP-00301",
+        "POP-00993",
+        "POP-00134",
+        "POP-00048",
+        "POP-00148",
+        "POP-00351",
+        "POP-01057",
+        "POP-01063",
+        "POP-00643",
+        "POP-00252",
+        "POP-00170",
+        "POP-00212",
+        "POP-00046",
+        "POP-00527",
+        "POP-00982",
+        "POP-00174",
+        "POP-00926",
+        "POP-00196",
+        "POP-00145",
+        "POP-01107",
+        "POP-00285",
+        "POP-00597",
+        "POP-00195",
+        "POP-00218",
+        "POP-00573",
+        "POP-00448",
+        "POP-00977",
+        "POP-00951",
+        "POP-00193",
+        "POP-00276",
+        "POP-00189",
+        "POP-00186",
+        "POP-00348",
+        "POP-00316",
+        "POP-00024",
+        "POP-00691",
+        "POP-00332",
+        "POP-00204",
+        "POP-00233",
+        "POP-00031",
+        "POP-00876",
+        "POP-00208",
+        "POP-01056",
+        "POP-00786",
+        "POP-00262",
+        "POP-00292",
+        "POP-00219",
+        "POP-00304",
+        "POP-00033",
+        "POP-00722",
+        "POP-00531",
+        "POP-00274",
+        "POP-00760",
+        "POP-00239",
+        "POP-00040",
+        "POP-00321",
+        "POP-00317",
+        "POP-00183",
+        "POP-00770",
+        "POP-00812",
+        "POP-00656",
+        "POP-00337",
+        "POP-00215",
+        "POP-00221",
+        "POP-00286",
+        "POP-00873",
+        "POP-00324",
+        "POP-00795",
+        "POP-00270",
+        "POP-00025",
+        "POP-00294",
+        "POP-00190",
+        "POP-00541",
+        "POP-00764",
+        "POP-01079",
+        "POP-01022",
+        "POP-00994",
+        "POP-00214",
+        "POP-00210",
+        "POP-00283",
+        "POP-00253",
+        "POP-01041",
+        "POP-00599",
+        "POP-00050",
+        "POP-01078",
+        "POP-00227",
+        "POP-00209",
+        "POP-00368",
+        "POP-00291",
+        "POP-00445",
+        "POP-01030",
+        "POP-00961",
+        "POP-00794",
+        "POP-00302",
+        "POP-00254",
+        "POP-00124",
+        "POP-00644",
+        "POP-00948",
+        "POP-00916",
+        "POP-01045",
+        "POP-00781",
+        "POP-00236",
+        "POP-00021",
+        "POP-00765",
+        "POP-00295",
+        "POP-00207",
+        "POP-00267",
+        "POP-00842",
+        "POP-00953",
+        "POP-00271",
+        "POP-01099",
+        "POP-00300",
+        "POP-01018",
+        "POP-00827",
+        "POP-01054",
+        "POP-00796",
+        "POP-01098",
+        "POP-00312",
+        "POP-00663",
+        "POP-00228",
+        "POP-00481",
+        "POP-00176",
+        "POP-00264",
+        "POP-00746",
+        "POP-00325",
+        "POP-01096",
+        "POP-01095",
+        "POP-01093",
+        "POP-01092",
+        "POP-00119",
+        "POP-01055",
+        "POP-01047",
+        "POP-00905",
+        "POP-00721",
+        "POP-00052",
+        "POP-00743",
+        "POP-01019",
+        "POP-00232",
+        "POP-00495",
+        "POP-01089",
+        "POP-01087",
+        "POP-00180",
+        "POP-00240",
+        "POP-00651",
+        "POP-00731",
+        "POP-01112",
+        "POP-00520",
+        "POP-00222",
+        "POP-00847",
+        "POP-00449",
+        "POP-00191",
+        "POP-00175",
+        "POP-00863",
+        "POP-00169",
+        "POP-00172",
+        "POP-00783",
+        "POP-00960",
+        "POP-00878",
+        "POP-00168",
+        "POP-00758",
+        "POP-00962",
+        "POP-00178",
+        "POP-00135",
+        "POP-01061",
+        "POP-00341",
+        "POP-01024",
+        "POP-00036",
+        "POP-00342",
+        "POP-00188",
+        "POP-00315",
+        "POP-01011",
+        "POP-00665",
+        "POP-00313",
+        "POP-00798",
+        "POP-00648",
+        "POP-00645",
+        "POP-00255",
+        "POP-00202",
+        "POP-00494",
+        "POP-00137",
+        "POP-00269",
+        "POP-00234",
+        "POP-00766",
+        "POP-00588",
+        "POP-01026",
+        "POP-01025",
+        "POP-00019",
+        "POP-00659",
+        "POP-00937",
+        "POP-00327",
+        "POP-00880",
+        "POP-00217",
+        "POP-00666",
+        "POP-00167",
+        "POP-00171",
+        "POP-00037",
+        "POP-00307",
+        "POP-00259",
+        "POP-00871",
+        "POP-00989",
+        "POP-00761",
+        "POP-00226",
+        "POP-00830",
+        "POP-00277",
+        "POP-00281",
+        "POP-00231",
+        "POP-00328",
+        "POP-00504",
+        "POP-00296",
+        "POP-01029",
+        "POP-00730",
+        "POP-01012",
+        "POP-00654",
+        "POP-00305",
+        "POP-00476",
+        "POP-00311",
+        "POP-00038",
+        "POP-00237",
+        "POP-00741",
+        "POP-00192",
+        "POP-00261",
+        "POP-00289",
+        "POP-00475",
+        "POP-00593",
+        "POP-00829",
+        "POP-00339",
+        "POP-00229",
+        "POP-00802",
+        "POP-00243",
+        "POP-01001",
+        "POP-00658",
+        "POP-00293",
+        "POP-00811",
+        "POP-00248",
+        "POP-00268",
+        "POP-00246",
+        "POP-00197",
+        "POP-00205",
+        "POP-00250",
+        "POP-00502",
+        "POP-00260",
+        "POP-00310",
+        "POP-00213",
+        "POP-00507",
+        "POP-00284",
+        "POP-00323",
+        "POP-00247",
+        "POP-00303",
+        "POP-00297",
+        "POP-00053",
+        "POP-00503",
+        "POP-00306",
+        "POP-00035",
+        "POP-00220",
+        "POP-00203",
+        "POP-00173",
+        "POP-00179",
+        "POP-00299",
+        "POP-00257",
+        "POP-00245",
+        "POP-00199"
+      ],
+      "ref": "output/citizen_pages/index.jsonl (pages, whole store) batch 44206f",
+      "cycle": 113
+    }
+  },
+  "angle": "output/cron-compare/culture_c113_ines-sorensen_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 4,
+  "quotes": [
+    {
+      "pop": "POP-01039",
+      "name": "Ximena Mehta",
+      "quote": "The A's success is all anyone can talk about around here. I mean, I'm a huge fan, and my husband Deacon is too. We plan our whole schedule around the games.",
+      "disp": "a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "{\"answer\":\"quote\",\"quote\":\"The A's success is all anyone can talk about around here. I mean, I'm a huge fan, and my husband Deacon is too. We plan our whole schedule around the games.\",\"fact_ids\":[\"F-bde27dfcffef\"],\"basis\":\"lived-context\",\"unverifiedLead\":null,\"abstain_reason\":null}",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-bde27dfcffef"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01039-619a684380",
+        "authoredQuote": true,
+        "publishableQuote": "The A's success is all anyone can talk about around here. I mean, I'm a huge fan, and my husband Deacon is too. We plan our whole schedule around the games."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01039",
+          "name": "Ximena Mehta",
+          "role": "Bart Transit PR",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Ines Sorensen",
+          "question": "The A's success is all anyone can talk about around here. I mean, I'm a huge fan, and my husband Deacon is too. We plan our whole schedule around the... Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-voices",
+          "hood": null,
+          "focus": "The impact of the A's success on Oakland residents",
+          "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 44206f"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Ximena Mehta — Bart Transit PR — Lake Merritt",
+          "evidence": [
+            {
+              "id": "EV-c366852126",
+              "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 44206f",
+              "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Ximena Mehta, Bart Transit PR, Lake Merritt (POP-01039) — 9 pages; latest to a reporter, C113; you ran them C113: “The A's success is all anyone can talk about around here. I mean, I'm a huge fan, and my husband Deacon is too. We plan our whole schedule around the…”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-bde27dfcffef"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "Voices roster, C113: 413 citizens with pages, 2 new since your last piece",
+            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 44206f",
+            "id": "F-fd7b5f6a5604"
+          },
+          {
+            "t": "FACT",
+            "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.",
+            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 44206f",
+            "id": "F-5fc05fff6d3f"
+          },
+          {
+            "t": "FACT",
+            "text": "Daphne Stafford, Home Health Aide, West Oakland (POP-00816) — 2 pages; latest the morning page, C113; new since your last piece: “Miguel and Eshe—those two have been my rocks through everything. We don't talk every day, but we don't have to. When the move happened, they were the…”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-cb7dcf76419c"
+          },
+          {
+            "t": "FACT",
+            "text": "Father Miguel, Parish priest, Fruitvale (POP-00734) — 2 pages; latest the night page, a question they carry, C113; new since your last piece: “Will Mrs. Calderon's son ever call her back, and were my words of prayer worth anything at all?”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-29fff1ceeab2"
+          },
+          {
+            "t": "FACT",
+            "text": "Clarissa Dane, DISTRICT ATTORNEY, West Oakland (POP-00143) — 19 pages; latest in a debate, a question they carry, C113: “Can new investment bring jobs back without pushing out the families who never left West Oakland?”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-f58394b59d0b"
+          },
+          {
+            "t": "FACT",
+            "text": "Omar Lingio, Vintage Clothing Store Owner, Temescal (POP-00206) — 5 pages; latest to a reporter, C113; you ran them C113: “When the A's are good, this whole town walks a little taller, even in Temescal. I mean, Danny Horn is the real deal.”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-d38b81cba5a9"
+          },
+          {
+            "t": "FACT",
+            "text": "Ximena Mehta — Bart Transit PR — Lake Merritt",
+            "src": "Simulation_Ledger profile for POP-01039",
+            "id": "F-96f964ec3ced"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00141",
+      "name": "Priya Narang",
+      "quote": "The A's winning season really brings Uptown together. When they're doing well, the whole neighborhood feels it. The bars and galleries stay packed, and you can feel the energy. It's like we're all connected then.",
+      "disp": "draws people in, deep with them; quick to rattle; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"The A's winning season really brings Uptown together. When they're doing well, the whole neighborhood feels it. The bars and galleries stay packed, and you can feel the energy. It's like we're all connected then.\",\n  \"fact_ids\": [\"F-778b67066be6\", \"F-823de4e3c246\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-778b67066be6",
+          "F-823de4e3c246"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00141-808948826b",
+        "authoredQuote": true,
+        "publishableQuote": "The A's winning season really brings Uptown together. When they're doing well, the whole neighborhood feels it. The bars and galleries stay packed, and you can feel the energy. It's like we're all connected then."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00141",
+          "name": "Priya Narang",
+          "role": "EMS DIRECTOR",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Ines Sorensen",
+          "question": "Using only the supplied facts, what about \"The impact of the A's success on Oakland residents\" creates accountability for you, and what answer do you want? Do not claim any past or future official action that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-voices",
+          "hood": null,
+          "focus": "The impact of the A's success on Oakland residents",
+          "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 44206f"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Priya Narang — EMS DIRECTOR — Uptown",
+          "evidence": [
+            {
+              "id": "EV-83a49ce9e4",
+              "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 44206f",
+              "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Priya Narang, EMS DIRECTOR, Uptown (POP-00141) — 10 pages; latest to a reporter, C113; you ran them C113: “The A's winning season is a big deal for us in Uptown. I started a savings jar on the counter to buy season tickets next year, hoping Danny Horn…”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-778b67066be6"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "Voices roster, C113: 413 citizens with pages, 2 new since your last piece",
+            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 44206f",
+            "id": "F-fd7b5f6a5604"
+          },
+          {
+            "t": "FACT",
+            "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.",
+            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 44206f",
+            "id": "F-5fc05fff6d3f"
+          },
+          {
+            "t": "FACT",
+            "text": "Daphne Stafford, Home Health Aide, West Oakland (POP-00816) — 2 pages; latest the morning page, C113; new since your last piece: “Miguel and Eshe—those two have been my rocks through everything. We don't talk every day, but we don't have to. When the move happened, they were the…”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-cb7dcf76419c"
+          },
+          {
+            "t": "FACT",
+            "text": "Father Miguel, Parish priest, Fruitvale (POP-00734) — 2 pages; latest the night page, a question they carry, C113; new since your last piece: “Will Mrs. Calderon's son ever call her back, and were my words of prayer worth anything at all?”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-29fff1ceeab2"
+          },
+          {
+            "t": "FACT",
+            "text": "Clarissa Dane, DISTRICT ATTORNEY, West Oakland (POP-00143) — 19 pages; latest in a debate, a question they carry, C113: “Can new investment bring jobs back without pushing out the families who never left West Oakland?”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-f58394b59d0b"
+          },
+          {
+            "t": "FACT",
+            "text": "Omar Lingio, Vintage Clothing Store Owner, Temescal (POP-00206) — 5 pages; latest to a reporter, C113; you ran them C113: “When the A's are good, this whole town walks a little taller, even in Temescal. I mean, Danny Horn is the real deal.”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-d38b81cba5a9"
+          },
+          {
+            "t": "FACT",
+            "text": "Priya Narang — EMS DIRECTOR — Uptown",
+            "src": "Simulation_Ledger profile for POP-00141",
+            "id": "F-823de4e3c246"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00263",
+      "name": "Omar Amici",
+      "quote": "To be honest, the changes in Uptown have me feeling a bit uneasy. The streets are busier than ever, and it seems like every other place is a for-rent sign these days. I've lived here long enough to see the neighborhood transform, but this feels different. It's like the neighborhood is shifting away from the people who've been here all along.",
+      "disp": "driven, hard to sit still; draws people in, deep with them; steady, hard to shake; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, the changes in Uptown have me feeling a bit uneasy. The streets are busier than ever, and it seems like every other place is a for-rent sign these days. I've lived here long enough to see the neighborhood transform, but this feels different. It's like the neighborhood is shifting away from the people who've been here all along.\",\n  \"fact_ids\": [\"F-ce8e0a1ea9e6\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-ce8e0a1ea9e6"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00263-974e1b291a",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, the changes in Uptown have me feeling a bit uneasy. The streets are busier than ever, and it seems like every other place is a for-rent sign these days. I've lived here long enough to see the neighborhood transform, but this feels different. It's like the neighborhood is shifting away from the people who've been here all along."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00263",
+          "name": "Omar Amici",
+          "role": "Construction laborer",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Ines Sorensen",
+          "question": "I've seen more for-rent signs popping up around Uptown, it's like the neighborhood's changing fast. People moving in, people moving out. I don't know... Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-voices",
+          "hood": null,
+          "focus": "The impact of the A's success on Oakland residents",
+          "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 44206f"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Omar Amici — Construction laborer — Uptown",
+          "evidence": [
+            {
+              "id": "EV-f68dcdb6d7",
+              "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 44206f",
+              "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Omar Amici, Construction laborer, Uptown (POP-00263) — 8 pages; latest to a reporter, C113; you ran them C113; Lives carried the wager this Cycle: “I've seen more for-rent signs popping up around Uptown, it's like the neighborhood's changing fast. People moving in, people moving out. I don't know…”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-ce8e0a1ea9e6"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "Voices roster, C113: 413 citizens with pages, 2 new since your last piece",
+            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 44206f",
+            "id": "F-fd7b5f6a5604"
+          },
+          {
+            "t": "FACT",
+            "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.",
+            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 44206f",
+            "id": "F-5fc05fff6d3f"
+          },
+          {
+            "t": "FACT",
+            "text": "Daphne Stafford, Home Health Aide, West Oakland (POP-00816) — 2 pages; latest the morning page, C113; new since your last piece: “Miguel and Eshe—those two have been my rocks through everything. We don't talk every day, but we don't have to. When the move happened, they were the…”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-cb7dcf76419c"
+          },
+          {
+            "t": "FACT",
+            "text": "Father Miguel, Parish priest, Fruitvale (POP-00734) — 2 pages; latest the night page, a question they carry, C113; new since your last piece: “Will Mrs. Calderon's son ever call her back, and were my words of prayer worth anything at all?”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-29fff1ceeab2"
+          },
+          {
+            "t": "FACT",
+            "text": "Clarissa Dane, DISTRICT ATTORNEY, West Oakland (POP-00143) — 19 pages; latest in a debate, a question they carry, C113: “Can new investment bring jobs back without pushing out the families who never left West Oakland?”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-f58394b59d0b"
+          },
+          {
+            "t": "FACT",
+            "text": "Omar Lingio, Vintage Clothing Store Owner, Temescal (POP-00206) — 5 pages; latest to a reporter, C113; you ran them C113: “When the A's are good, this whole town walks a little taller, even in Temescal. I mean, Danny Horn is the real deal.”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-d38b81cba5a9"
+          },
+          {
+            "t": "FACT",
+            "text": "Omar Amici — Construction laborer — Uptown",
+            "src": "Simulation_Ledger profile for POP-00263",
+            "id": "F-49cb41ed222b"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00769",
+      "name": "Dax Monroe",
+      "quote": "I've been thinking a lot about the cycles of life in Rockridge lately. The other night, I was at the window, just observing the world go by. It made me reflect on how people's lives are intertwined with the events around them. I've seen it in my own life, with my kids growing up and the community changing.",
+      "disp": "draws people in, deep with them",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've been thinking a lot about the cycles of life in Rockridge lately. The other night, I was at the window, just observing the world go by. It made me reflect on how people's lives are intertwined with the events around them. I've seen it in my own life, with my kids growing up and the community changing.\",\n  \"fact_ids\": [\"F-54d01c10b9ea\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-54d01c10b9ea"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00769-69c5a2f73f",
+        "authoredQuote": true,
+        "publishableQuote": "I've been thinking a lot about the cycles of life in Rockridge lately. The other night, I was at the window, just observing the world go by. It made me reflect on how people's lives are intertwined with the events around them. I've seen it in my own life, with my kids growing up and the community changing."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00769",
+          "name": "Dax Monroe",
+          "role": "Artist",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Ines Sorensen",
+          "question": "I've been thinking a lot about the cycles of life in Rockridge lately. The other night, I was at the window, just observing the world go by. It made... Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-voices",
+          "hood": null,
+          "focus": "The impact of the A's success on Oakland residents",
+          "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 44206f"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Dax Monroe — Artist — Rockridge",
+          "evidence": [
+            {
+              "id": "EV-b2aaa58d47",
+              "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 44206f",
+              "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Dax Monroe, Artist, Rockridge (POP-00769) — 2 pages; latest to a reporter, C113; Lives carried the wager this Cycle: “I've been thinking a lot about the cycles of life in Rockridge lately. The other night, I was at the window, just observing the world go by. It made…”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-54d01c10b9ea"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "Voices roster, C113: 413 citizens with pages, 2 new since your last piece",
+            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 44206f",
+            "id": "F-fd7b5f6a5604"
+          },
+          {
+            "t": "FACT",
+            "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.",
+            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 44206f",
+            "id": "F-5fc05fff6d3f"
+          },
+          {
+            "t": "FACT",
+            "text": "Daphne Stafford, Home Health Aide, West Oakland (POP-00816) — 2 pages; latest the morning page, C113; new since your last piece: “Miguel and Eshe—those two have been my rocks through everything. We don't talk every day, but we don't have to. When the move happened, they were the…”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-cb7dcf76419c"
+          },
+          {
+            "t": "FACT",
+            "text": "Father Miguel, Parish priest, Fruitvale (POP-00734) — 2 pages; latest the night page, a question they carry, C113; new since your last piece: “Will Mrs. Calderon's son ever call her back, and were my words of prayer worth anything at all?”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-29fff1ceeab2"
+          },
+          {
+            "t": "FACT",
+            "text": "Clarissa Dane, DISTRICT ATTORNEY, West Oakland (POP-00143) — 19 pages; latest in a debate, a question they carry, C113: “Can new investment bring jobs back without pushing out the families who never left West Oakland?”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-f58394b59d0b"
+          },
+          {
+            "t": "FACT",
+            "text": "Omar Lingio, Vintage Clothing Store Owner, Temescal (POP-00206) — 5 pages; latest to a reporter, C113; you ran them C113: “When the A's are good, this whole town walks a little taller, even in Temescal. I mean, Danny Horn is the real deal.”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-d38b81cba5a9"
+          },
+          {
+            "t": "FACT",
+            "text": "Dax Monroe — Artist — Rockridge",
+            "src": "Simulation_Ledger profile for POP-00769",
+            "id": "F-9e0d1a641a6e"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-01039",
+      "name": "Ximena Mehta",
+      "quote": "The A's success is all anyone can talk about around here. I mean, I'm a huge fan, and my husband Deacon is too. We plan our whole schedule around the games.",
+      "disp": "a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "{\"answer\":\"quote\",\"quote\":\"The A's success is all anyone can talk about around here. I mean, I'm a huge fan, and my husband Deacon is too. We plan our whole schedule around the games.\",\"fact_ids\":[\"F-bde27dfcffef\"],\"basis\":\"lived-context\",\"unverifiedLead\":null,\"abstain_reason\":null}",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-bde27dfcffef"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01039-619a684380",
+        "authoredQuote": true,
+        "publishableQuote": "The A's success is all anyone can talk about around here. I mean, I'm a huge fan, and my husband Deacon is too. We plan our whole schedule around the games."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01039",
+          "name": "Ximena Mehta",
+          "role": "Bart Transit PR",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Ines Sorensen",
+          "question": "The A's success is all anyone can talk about around here. I mean, I'm a huge fan, and my husband Deacon is too. We plan our whole schedule around the... Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-voices",
+          "hood": null,
+          "focus": "The impact of the A's success on Oakland residents",
+          "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 44206f"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Ximena Mehta — Bart Transit PR — Lake Merritt",
+          "evidence": [
+            {
+              "id": "EV-c366852126",
+              "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 44206f",
+              "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Ximena Mehta, Bart Transit PR, Lake Merritt (POP-01039) — 9 pages; latest to a reporter, C113; you ran them C113: “The A's success is all anyone can talk about around here. I mean, I'm a huge fan, and my husband Deacon is too. We plan our whole schedule around the…”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-bde27dfcffef"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "Voices roster, C113: 413 citizens with pages, 2 new since your last piece",
+            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 44206f",
+            "id": "F-fd7b5f6a5604"
+          },
+          {
+            "t": "FACT",
+            "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.",
+            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 44206f",
+            "id": "F-5fc05fff6d3f"
+          },
+          {
+            "t": "FACT",
+            "text": "Daphne Stafford, Home Health Aide, West Oakland (POP-00816) — 2 pages; latest the morning page, C113; new since your last piece: “Miguel and Eshe—those two have been my rocks through everything. We don't talk every day, but we don't have to. When the move happened, they were the…”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-cb7dcf76419c"
+          },
+          {
+            "t": "FACT",
+            "text": "Father Miguel, Parish priest, Fruitvale (POP-00734) — 2 pages; latest the night page, a question they carry, C113; new since your last piece: “Will Mrs. Calderon's son ever call her back, and were my words of prayer worth anything at all?”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-29fff1ceeab2"
+          },
+          {
+            "t": "FACT",
+            "text": "Clarissa Dane, DISTRICT ATTORNEY, West Oakland (POP-00143) — 19 pages; latest in a debate, a question they carry, C113: “Can new investment bring jobs back without pushing out the families who never left West Oakland?”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-f58394b59d0b"
+          },
+          {
+            "t": "FACT",
+            "text": "Omar Lingio, Vintage Clothing Store Owner, Temescal (POP-00206) — 5 pages; latest to a reporter, C113; you ran them C113: “When the A's are good, this whole town walks a little taller, even in Temescal. I mean, Danny Horn is the real deal.”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-d38b81cba5a9"
+          },
+          {
+            "t": "FACT",
+            "text": "Ximena Mehta — Bart Transit PR — Lake Merritt",
+            "src": "Simulation_Ledger profile for POP-01039",
+            "id": "F-96f964ec3ced"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00141",
+      "name": "Priya Narang",
+      "quote": "The A's winning season really brings Uptown together. When they're doing well, the whole neighborhood feels it. The bars and galleries stay packed, and you can feel the energy. It's like we're all connected then.",
+      "disp": "draws people in, deep with them; quick to rattle; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"The A's winning season really brings Uptown together. When they're doing well, the whole neighborhood feels it. The bars and galleries stay packed, and you can feel the energy. It's like we're all connected then.\",\n  \"fact_ids\": [\"F-778b67066be6\", \"F-823de4e3c246\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-778b67066be6",
+          "F-823de4e3c246"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00141-808948826b",
+        "authoredQuote": true,
+        "publishableQuote": "The A's winning season really brings Uptown together. When they're doing well, the whole neighborhood feels it. The bars and galleries stay packed, and you can feel the energy. It's like we're all connected then."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00141",
+          "name": "Priya Narang",
+          "role": "EMS DIRECTOR",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Ines Sorensen",
+          "question": "Using only the supplied facts, what about \"The impact of the A's success on Oakland residents\" creates accountability for you, and what answer do you want? Do not claim any past or future official action that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-voices",
+          "hood": null,
+          "focus": "The impact of the A's success on Oakland residents",
+          "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 44206f"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Priya Narang — EMS DIRECTOR — Uptown",
+          "evidence": [
+            {
+              "id": "EV-83a49ce9e4",
+              "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 44206f",
+              "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Priya Narang, EMS DIRECTOR, Uptown (POP-00141) — 10 pages; latest to a reporter, C113; you ran them C113: “The A's winning season is a big deal for us in Uptown. I started a savings jar on the counter to buy season tickets next year, hoping Danny Horn…”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-778b67066be6"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "Voices roster, C113: 413 citizens with pages, 2 new since your last piece",
+            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 44206f",
+            "id": "F-fd7b5f6a5604"
+          },
+          {
+            "t": "FACT",
+            "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.",
+            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 44206f",
+            "id": "F-5fc05fff6d3f"
+          },
+          {
+            "t": "FACT",
+            "text": "Daphne Stafford, Home Health Aide, West Oakland (POP-00816) — 2 pages; latest the morning page, C113; new since your last piece: “Miguel and Eshe—those two have been my rocks through everything. We don't talk every day, but we don't have to. When the move happened, they were the…”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-cb7dcf76419c"
+          },
+          {
+            "t": "FACT",
+            "text": "Father Miguel, Parish priest, Fruitvale (POP-00734) — 2 pages; latest the night page, a question they carry, C113; new since your last piece: “Will Mrs. Calderon's son ever call her back, and were my words of prayer worth anything at all?”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-29fff1ceeab2"
+          },
+          {
+            "t": "FACT",
+            "text": "Clarissa Dane, DISTRICT ATTORNEY, West Oakland (POP-00143) — 19 pages; latest in a debate, a question they carry, C113: “Can new investment bring jobs back without pushing out the families who never left West Oakland?”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-f58394b59d0b"
+          },
+          {
+            "t": "FACT",
+            "text": "Omar Lingio, Vintage Clothing Store Owner, Temescal (POP-00206) — 5 pages; latest to a reporter, C113; you ran them C113: “When the A's are good, this whole town walks a little taller, even in Temescal. I mean, Danny Horn is the real deal.”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-d38b81cba5a9"
+          },
+          {
+            "t": "FACT",
+            "text": "Priya Narang — EMS DIRECTOR — Uptown",
+            "src": "Simulation_Ledger profile for POP-00141",
+            "id": "F-823de4e3c246"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00263",
+      "name": "Omar Amici",
+      "quote": "To be honest, the changes in Uptown have me feeling a bit uneasy. The streets are busier than ever, and it seems like every other place is a for-rent sign these days. I've lived here long enough to see the neighborhood transform, but this feels different. It's like the neighborhood is shifting away from the people who've been here all along.",
+      "disp": "driven, hard to sit still; draws people in, deep with them; steady, hard to shake; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, the changes in Uptown have me feeling a bit uneasy. The streets are busier than ever, and it seems like every other place is a for-rent sign these days. I've lived here long enough to see the neighborhood transform, but this feels different. It's like the neighborhood is shifting away from the people who've been here all along.\",\n  \"fact_ids\": [\"F-ce8e0a1ea9e6\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-ce8e0a1ea9e6"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00263-974e1b291a",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, the changes in Uptown have me feeling a bit uneasy. The streets are busier than ever, and it seems like every other place is a for-rent sign these days. I've lived here long enough to see the neighborhood transform, but this feels different. It's like the neighborhood is shifting away from the people who've been here all along."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00263",
+          "name": "Omar Amici",
+          "role": "Construction laborer",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Ines Sorensen",
+          "question": "I've seen more for-rent signs popping up around Uptown, it's like the neighborhood's changing fast. People moving in, people moving out. I don't know... Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-voices",
+          "hood": null,
+          "focus": "The impact of the A's success on Oakland residents",
+          "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 44206f"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Omar Amici — Construction laborer — Uptown",
+          "evidence": [
+            {
+              "id": "EV-f68dcdb6d7",
+              "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 44206f",
+              "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Omar Amici, Construction laborer, Uptown (POP-00263) — 8 pages; latest to a reporter, C113; you ran them C113; Lives carried the wager this Cycle: “I've seen more for-rent signs popping up around Uptown, it's like the neighborhood's changing fast. People moving in, people moving out. I don't know…”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-ce8e0a1ea9e6"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "Voices roster, C113: 413 citizens with pages, 2 new since your last piece",
+            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 44206f",
+            "id": "F-fd7b5f6a5604"
+          },
+          {
+            "t": "FACT",
+            "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.",
+            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 44206f",
+            "id": "F-5fc05fff6d3f"
+          },
+          {
+            "t": "FACT",
+            "text": "Daphne Stafford, Home Health Aide, West Oakland (POP-00816) — 2 pages; latest the morning page, C113; new since your last piece: “Miguel and Eshe—those two have been my rocks through everything. We don't talk every day, but we don't have to. When the move happened, they were the…”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-cb7dcf76419c"
+          },
+          {
+            "t": "FACT",
+            "text": "Father Miguel, Parish priest, Fruitvale (POP-00734) — 2 pages; latest the night page, a question they carry, C113; new since your last piece: “Will Mrs. Calderon's son ever call her back, and were my words of prayer worth anything at all?”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-29fff1ceeab2"
+          },
+          {
+            "t": "FACT",
+            "text": "Clarissa Dane, DISTRICT ATTORNEY, West Oakland (POP-00143) — 19 pages; latest in a debate, a question they carry, C113: “Can new investment bring jobs back without pushing out the families who never left West Oakland?”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-f58394b59d0b"
+          },
+          {
+            "t": "FACT",
+            "text": "Omar Lingio, Vintage Clothing Store Owner, Temescal (POP-00206) — 5 pages; latest to a reporter, C113; you ran them C113: “When the A's are good, this whole town walks a little taller, even in Temescal. I mean, Danny Horn is the real deal.”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-d38b81cba5a9"
+          },
+          {
+            "t": "FACT",
+            "text": "Omar Amici — Construction laborer — Uptown",
+            "src": "Simulation_Ledger profile for POP-00263",
+            "id": "F-49cb41ed222b"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00769",
+      "name": "Dax Monroe",
+      "quote": "I've been thinking a lot about the cycles of life in Rockridge lately. The other night, I was at the window, just observing the world go by. It made me reflect on how people's lives are intertwined with the events around them. I've seen it in my own life, with my kids growing up and the community changing.",
+      "disp": "draws people in, deep with them",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've been thinking a lot about the cycles of life in Rockridge lately. The other night, I was at the window, just observing the world go by. It made me reflect on how people's lives are intertwined with the events around them. I've seen it in my own life, with my kids growing up and the community changing.\",\n  \"fact_ids\": [\"F-54d01c10b9ea\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-54d01c10b9ea"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00769-69c5a2f73f",
+        "authoredQuote": true,
+        "publishableQuote": "I've been thinking a lot about the cycles of life in Rockridge lately. The other night, I was at the window, just observing the world go by. It made me reflect on how people's lives are intertwined with the events around them. I've seen it in my own life, with my kids growing up and the community changing."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00769",
+          "name": "Dax Monroe",
+          "role": "Artist",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Ines Sorensen",
+          "question": "I've been thinking a lot about the cycles of life in Rockridge lately. The other night, I was at the window, just observing the world go by. It made... Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-voices",
+          "hood": null,
+          "focus": "The impact of the A's success on Oakland residents",
+          "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 44206f"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Dax Monroe — Artist — Rockridge",
+          "evidence": [
+            {
+              "id": "EV-b2aaa58d47",
+              "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 44206f",
+              "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Dax Monroe, Artist, Rockridge (POP-00769) — 2 pages; latest to a reporter, C113; Lives carried the wager this Cycle: “I've been thinking a lot about the cycles of life in Rockridge lately. The other night, I was at the window, just observing the world go by. It made…”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-54d01c10b9ea"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "Voices roster, C113: 413 citizens with pages, 2 new since your last piece",
+            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 44206f",
+            "id": "F-fd7b5f6a5604"
+          },
+          {
+            "t": "FACT",
+            "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.",
+            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 44206f",
+            "id": "F-5fc05fff6d3f"
+          },
+          {
+            "t": "FACT",
+            "text": "Daphne Stafford, Home Health Aide, West Oakland (POP-00816) — 2 pages; latest the morning page, C113; new since your last piece: “Miguel and Eshe—those two have been my rocks through everything. We don't talk every day, but we don't have to. When the move happened, they were the…”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-cb7dcf76419c"
+          },
+          {
+            "t": "FACT",
+            "text": "Father Miguel, Parish priest, Fruitvale (POP-00734) — 2 pages; latest the night page, a question they carry, C113; new since your last piece: “Will Mrs. Calderon's son ever call her back, and were my words of prayer worth anything at all?”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-29fff1ceeab2"
+          },
+          {
+            "t": "FACT",
+            "text": "Clarissa Dane, DISTRICT ATTORNEY, West Oakland (POP-00143) — 19 pages; latest in a debate, a question they carry, C113: “Can new investment bring jobs back without pushing out the families who never left West Oakland?”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-f58394b59d0b"
+          },
+          {
+            "t": "FACT",
+            "text": "Omar Lingio, Vintage Clothing Store Owner, Temescal (POP-00206) — 5 pages; latest to a reporter, C113; you ran them C113: “When the A's are good, this whole town walks a little taller, even in Temescal. I mean, Danny Horn is the real deal.”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-d38b81cba5a9"
+          },
+          {
+            "t": "FACT",
+            "text": "Dax Monroe — Artist — Rockridge",
+            "src": "Simulation_Ledger profile for POP-00769",
+            "id": "F-9e0d1a641a6e"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-11-01T15:16:14.257Z"
+}

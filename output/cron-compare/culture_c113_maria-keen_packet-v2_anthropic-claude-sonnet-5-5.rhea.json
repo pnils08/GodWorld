@@ -1,0 +1,70 @@
+{
+  "draft": "output/cron-compare/culture_c113_maria-keen_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "113",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "eef998b1fb65cb2c1a499b83b154b097c9c405e1d2df70536791287567717b66",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes from Lucia Polito, Rick Walker, Gregory Mims, and Ramon Vega match interview records verbatim, canon faith substitution is respected, and no contradictions or fourth-wall leaks exist.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "maria-ground-v1",
+    "packageVersion": "MARIA-LEP2-1",
+    "manifestId": "AM-f906fd0940e1",
+    "lexicalObservations": [],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Gregory Mims",
+      "Lucia Polito",
+      "Ramon Vega",
+      "Rick Walker"
+    ],
+    "unverified": [
+      "Esperanza Parish",
+      "Postpartum Oakland Network",
+      "Speed Series",
+      "Transit Corridor Mutual Aid"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0099,
+  "durationMs": 5706,
+  "parseError": false,
+  "ranAt": "2026-10-31T17:01:40.279Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 848,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "eef998b1fb65cb2c1a499b83b154b097c9c405e1d2df70536791287567717b66",
+    "costUsd": 0.0012
+  }
+}

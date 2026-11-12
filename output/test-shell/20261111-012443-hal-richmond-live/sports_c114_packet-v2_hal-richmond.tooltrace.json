@@ -1,0 +1,54 @@
+{
+  "model": "anthropic/claude-sonnet-5.5",
+  "calls": [
+    {
+      "tool": "canon_search",
+      "input": {
+        "query": "Isley Kelley"
+      },
+      "resultChars": 2979,
+      "resultHead": "98 file(s) matched on disk for 'Isley Kelley':\n— output/simulation_ledger_snapshot.jsonl (ledger row, snapshot C114): {\"Name\":\"Guadalupe Lupe\",\"POPID\":\"POP-00643\",\"First\":\"Guadalupe\",\"MaidenName\":\"\",\"Last\":\"Lupe\",\"UNI (y/n)\":\"no\",\"MED (y/n)\":\"no\",\"CIV (y/n)\":\"no\",\"ClockMode\":\"ENGINE\",\"Tier\":\"3\",\"RoleType\":\"Bartender\",\"Status\":\"Active\",\"BirthYear\":\"2005\",\"OrginCity\":\"\",\"LifeHistory\":\"[Compressed: 11 entries | ? → ? | Dominant:Personal,Daily,Neighborhood | Archetype:Drifter | AsOf:c111]\\nY2C51 — [Money] the ground gave a little — 3 rungs down in one season\\nY2C52 — [Neighborhood] stepped over a "
+    },
+    {
+      "tool": "canon_search",
+      "input": {
+        "query": "Darrin Davis"
+      },
+      "resultChars": 3141,
+      "resultHead": "124 file(s) matched on disk for 'Darrin Davis':\n— output/simulation_ledger_snapshot.jsonl (ledger row, snapshot C114): {\"Name\":\"Darrin Davis\",\"POPID\":\"POP-00021\",\"First\":\"Darrin\",\"MaidenName\":\"\",\"Last\":\"Davis\",\"UNI (y/n)\":\"yes\",\"MED (y/n)\":\"no\",\"CIV (y/n)\":\"no\",\"ClockMode\":\"GAME\",\"Tier\":\"1\",\"RoleType\":\"Left Fielder, Oakland A's Legend\",\"Status\":\"Active\",\"BirthYear\":\"2009\",\"OrginCity\":\"Ohio\",\"LifeHistory\":\"[Compressed: 16 entries | ? → ? | Dominant:Daily,Sports,Neighborhood | Archetype:Striver | Mods:driven,warm,steady,principled,a real fan | AsOf:c114]\\nY3C4 — [Sports] listened to the ninth in"
+    },
+    {
+      "tool": "canon_search",
+      "input": {
+        "query": "Danny Horn"
+      },
+      "resultChars": 3197,
+      "resultHead": "103 file(s) matched on disk for 'Danny Horn':\n— output/simulation_ledger_snapshot.jsonl (ledger row, snapshot C114): {\"Name\":\"Mark Fisher\",\"POPID\":\"POP-00683\",\"First\":\"Mark\",\"MaidenName\":\"\",\"Last\":\"Fisher\",\"UNI (y/n)\":\"no\",\"MED (y/n)\":\"no\",\"CIV (y/n)\":\"no\",\"ClockMode\":\"ENGINE\",\"Tier\":\"4\",\"RoleType\":\"Smart City Infrastructure Planner\",\"Status\":\"Active\",\"BirthYear\":\"1991\",\"OrginCity\":\"\",\"LifeHistory\":\"[Compressed: 1 entries | 2026-06-20 23:35 → 2026-06-20 23:35 | Dominant:PrevEvening | Archetype:Striver | Mods:driven,family-minded | AsOf:c111]\\nY2C48 — [Neighborhood] stopped by a public service "
+    },
+    {
+      "tool": "dossier_read",
+      "input": {
+        "player": "Isley Kelley"
+      },
+      "resultChars": 487,
+      "resultHead": "Isley Kelley — SS, Athletics; 2 seasons on the dossier\nIsley Kelley 2041 ATH: 136 G, 563 AB, 181 H, 31 HR, 103 RBI, 28 BB, 54 SO, 7 SB, AVG .321, OBP .355, SLG .570\nIsley Kelley 2040 ATH: 145 G, 578 AB, 165 H, 21 HR, 74 RBI, 47 BB, 92 SO, 19 SB, AVG .285, OBP .340, SLG .460\nIsley Kelley 2041 rates (563 AB): one HR every 18.2 AB, one SO every 10.4 AB (worked from the season line)\nIsley Kelley 2040 rates (578 AB): one HR every 27.5 AB, one SO every 6.3 AB (worked from the season line)"
+    },
+    {
+      "tool": "dossier_read",
+      "input": {
+        "player": "Darrin Davis"
+      },
+      "resultChars": 486,
+      "resultHead": "Darrin Davis — LF, Athletics; 2 seasons on the dossier\nDarrin Davis 2041 ATH: 95 G, 374 AB, 114 H, 24 HR, 73 RBI, 22 BB, 42 SO, 26 SB, AVG .305, OBP .350, SLG .594\nDarrin Davis 2040 ATH: 137 G, 546 AB, 160 H, 38 HR, 107 RBI, 42 BB, 84 SO, 28 SB, AVG .293, OBP .347, SLG .575\nDarrin Davis 2041 rates (374 AB): one HR every 15.6 AB, one SO every 8.9 AB (worked from the season line)\nDarrin Davis 2040 rates (546 AB): one HR every 14.4 AB, one SO every 6.5 AB (worked from the season line)"
+    },
+    {
+      "tool": "dossier_read",
+      "input": {
+        "player": "Danny Horn"
+      },
+      "resultChars": 1956,
+      "resultHead": "Danny Horn — CF, Athletics; 9 seasons on the dossier\nDanny Horn 2041 ATH: 148 G, 621 AB, 210 H, 56 HR, 113 RBI, 35 BB, 65 SO, 80 SB, AVG .338, OBP .382, SLG .715\nDanny Horn 2040 ATH: 147 G, 607 AB, 170 H, 32 HR, 98 RBI, 67 BB, 121 SO, 35 SB, AVG .280, OBP .355, SLG .524\nDanny Horn 2039 ATH: 154 G, 614 AB, 198 H, 43 HR, 103 RBI, 66 BB, 104 SO, 28 SB, AVG .322, OBP .391, SLG .598\nDanny Horn 2038 ATH: 159 G, 611 AB, 158 H, 29 HR, 92 RBI, 64 BB, 110 SO, 6 SB, AVG .259, OBP .335, SLG .480\nDanny Horn 2037 ATH: 159 G, 561 AB, 138 H, 31 HR, 83 RBI, 81 BB, 103 SO, 28 SB, AVG .246, OBP .333, SLG .415\nDa"
+    }
+  ],
+  "ranAt": "2026-11-06T00:17:45.578Z"
+}

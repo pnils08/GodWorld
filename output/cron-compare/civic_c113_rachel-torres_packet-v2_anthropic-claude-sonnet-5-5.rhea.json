@@ -1,0 +1,78 @@
+{
+  "draft": "output/cron-compare/civic_c113_rachel-torres_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "113",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "18f3b3c46c4d86e84c23dd02d0568933761ca8507f6249c1f84211ef2b5dbb50",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Accurate analysis of civic safety and justice metrics with verified ledger attributions and no fabricated speech.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "rachel-public-safety-v1",
+    "packageVersion": "RACHEL-LEP2-2",
+    "manifestId": "AM-b4f8f732ca6c",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "1",
+          "27"
+        ]
+      },
+      {
+        "code": "UNAPPROVED_QUOTE",
+        "values": [
+          "steady."
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Kimberly Cho",
+      "Leonard Briggs",
+      "Rafael Montez"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0097,
+  "durationMs": 6888,
+  "parseError": false,
+  "ranAt": "2026-10-27T23:16:38.138Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 500",
+    "words": 777,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "18f3b3c46c4d86e84c23dd02d0568933761ca8507f6249c1f84211ef2b5dbb50",
+    "costUsd": 0.0013
+  }
+}

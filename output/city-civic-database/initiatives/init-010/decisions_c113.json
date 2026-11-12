@@ -1,0 +1,16 @@
+{
+  "initiative": "INIT-010",
+  "initiativeId": "INIT-010",
+  "cycle": 113,
+  "primaryVoice": "Mayor gavel (mayor_gavel-005)",
+  "consolidatedFrom": [
+    "STMT-113-mayor_gavel-005 (Mayor gavel — INIT-010 West Oakland Tenant Defense Fund Committee Advancement)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-010",
+    "ImplementationPhase": "vote-ready",
+    "MilestoneNotes": "C113: Advanced to full council with $4.2M appropriation intact per mayoral directive",
+    "NextScheduledAction": "Full council vote",
+    "NextActionCycle": 114
+  }
+}

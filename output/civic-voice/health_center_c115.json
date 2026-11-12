@@ -1,0 +1,24 @@
+{
+  "office": "health_center",
+  "cycle": 115,
+  "speaker": "Bobby Chen-Ramirez",
+  "cascadeSummary": "Ashford wants intake audits on the health center balance and commercial support tied to Rockridge. The clinic is open and operating — the audit posture is one I already built: quarterly clinical verification, frontline walkthroughs with the merchants across the street. This cycle I operationalize Ashford's demand on my side of it: a standing merchant-and-clinic-staff verification walkthrough and a quarterly intake audit filed to HCAI and the council clerk, so the balance sheet has clinical proof behind every line and the shops on Telegraph are in the room when it's read.",
+  "statements": [
+    {
+      "statementId": "STMT-115-health_center-001",
+      "type": "operational_status",
+      "topic": "Standing intake audit and merchant verification walkthrough — institutionalized",
+      "initiative": "INIT-005",
+      "decision": "Formalize the quarterly intake audit as a standing filing to HCAI and the Council Clerk, paired with a recurring merchant-and-clinic-staff verification walkthrough at Telegraph & 47th, so the clinic's intake dollars are tied to named clinical activity and the shopkeepers across the street can see the traffic their block is generating.",
+      "quote": "Clinical dollars require clinical proof — Ashford is right about that. But proof is a walking tour, not a spreadsheet on a shelf. The shopkeepers and my front-desk staff walk the building together, then HCAI gets the filing.",
+      "fullStatement": "The Council Member for D7 asked for intake audits on the health center balance and for commercial proof behind the surrounding corridors. I'm not going to argue with the premise. Two weeks after we opened early and under budget, the next thing this building owes Temescal is documentation — the kind a working clinic can produce on a Tuesday morning, not just at the end of the fiscal year.\n\nSo here's how it runs on the ground, starting this cycle. The intake audit becomes a standing quarterly filing — not an ad-hoc response to a council inquiry. It goes to HCAI and to the Council Clerk on a fixed schedule, intake dollars by service line, tied to actual patient encounters, with the front-desk and eligibility staff who run it named on the cover. If a dollar came in the door, a patient and a staffer saw it. That's the test.\n\nAnd the verification half — the part Ashford's merchant worry actually speaks to — happens at Telegraph and 47th, not in a room at City Hall. Once a quarter, the shopkeepers across the street walk the clinic with me and with the staff who are actually taking appointments. They see the waiting room at 9 AM. They see what a full schedule looks like. They see the pharmacy window and the dental chairs and the eligibility desk where somebody's grandmother is getting her coverage sorted. That's what commercial vitality around a working clinic looks like from the inside — and the merchants deserve to see it before they read about it in a filing.\n\nThe Rockridge piece of this — commercial support for merchant sentiment on that corridor — is a council matter, and I'll leave it there. What I can say is that a clinic in Temescal that's full of patients on a weekday is a clinic whose neighbors are spending money on the block. That's the case I can make, and I can make it with paper.\n\nWe opened early. We opened under budget. Now we prove it, quarter by quarter, with the shopkeepers in the room.",
+      "trackerUpdates": {
+        "initiative": "INIT-005",
+        "ImplementationPhase": "operational",
+        "MilestoneNotes": "C115: Q2 intake audit filed as standing schedule to HCAI + Council Clerk; merchant-clinic verification walkthrough at Telegraph & 47th institutionalized.",
+        "NextScheduledAction": "Q3 intake audit filing + recurring merchant verification walkthrough",
+        "NextActionCycle": 116
+      }
+    }
+  ]
+}

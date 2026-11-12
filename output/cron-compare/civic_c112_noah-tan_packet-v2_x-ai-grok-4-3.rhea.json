@@ -1,0 +1,66 @@
+{
+  "draft": "output/cron-compare/civic_c112_noah-tan_packet-v2_x-ai-grok-4-3.md",
+  "cycle": "112",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "cc8eec92260339f2103019ec86baae11873b0b06e6e12c657ae0a6a6485952cb",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All citizen quotes, biographical details, and environmental context strictly match Cycle 112 ground truth and verified packet provenance.",
+  "review": {
+    "profileId": "noah-weather-ground-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "noah-weather-ground-v1",
+    "packageVersion": "NOAH-LEP2-1",
+    "manifestId": "AM-3a23a35291f8",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Brian Adams",
+      "Derlik Green",
+      "Jonas Patel",
+      "Xavier Ramington"
+    ],
+    "unverified": [
+      "Midnight Bistro"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0104,
+  "durationMs": 6521,
+  "parseError": false,
+  "ranAt": "2026-10-21T23:16:33.204Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 400",
+    "words": 582,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "cc8eec92260339f2103019ec86baae11873b0b06e6e12c657ae0a6a6485952cb",
+    "costUsd": 0.0012
+  }
+}

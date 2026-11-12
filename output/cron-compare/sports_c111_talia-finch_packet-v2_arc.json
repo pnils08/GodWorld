@@ -1,0 +1,22 @@
+{
+  "status": "arc-seed",
+  "cycle": "111",
+  "desk": "sports",
+  "persona": "talia-finch",
+  "hood": "Jack London",
+  "quotes": [
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": "Look, I'm a fan—I plan my whole life around the games—but the analysis side of things? That's a different beast. Between keeping my starter alive and running the bakery, I just don't have the bandwidth to get bogged down in the stats. I'd rather just watch the game and hope for the best than try to decode some column in the Tribune."
+    },
+    {
+      "pop": "POP-00198",
+      "name": "Rick Walker",
+      "quote": "Yeah, that's still where I'm at. Look, I'm a fan, I love the game, but between grading papers and everything else, I don't have the time to be a full-time analyst. I hear the talk around the neighborhood and I follow the news, but honestly, it's just a lot to keep up with. I'm just riding the wave like everyone else."
+    }
+  ],
+  "claim": "Look, I'm a fan—I plan my whole life around the games—but the analysis side of things? That's a different beast. Between keeping my starter alive and running the bakery, I just don't have the bandwidth to get bogged down in the stats. I'd rather just watch the game and hope for the best than try to decode some column in the Tribune.",
+  "src": "citizenVoice PRESS c111",
+  "ranAt": "2026-10-15T18:17:49.264Z"
+}

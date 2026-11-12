@@ -1,0 +1,118 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "114",
+  "persona": "tamsin-pruitt",
+  "byline": "Tamsin Pruitt",
+  "bylinePopid": "POP-01210",
+  "article": "output/cron-compare/staged/culture_c114_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.staged-0021.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Darius Cike",
+        "role": "quoted-source",
+        "popid": "POP-00658"
+      },
+      {
+        "name": "Tanisha Freeman",
+        "role": "quoted-source",
+        "popid": "POP-00848"
+      },
+      {
+        "name": "Henry Rivas",
+        "role": "quoted-source",
+        "popid": "POP-00024"
+      },
+      {
+        "name": "Benji Dillon",
+        "role": "mentioned",
+        "popid": "POP-00018",
+        "floor": true
+      },
+      {
+        "name": "Drago Helio",
+        "role": "mentioned",
+        "popid": "POP-00714",
+        "floor": true
+      },
+      {
+        "name": "Elias Varek",
+        "role": "mentioned",
+        "popid": "POP-00789",
+        "floor": true
+      },
+      {
+        "name": "Father Miguel",
+        "role": "mentioned",
+        "popid": "POP-00734",
+        "floor": true
+      },
+      {
+        "name": "Isley Kelley",
+        "role": "mentioned",
+        "popid": "POP-00019",
+        "floor": true
+      },
+      {
+        "name": "Kai Davis",
+        "role": "mentioned",
+        "popid": "POP-00996",
+        "floor": true
+      },
+      {
+        "name": "Lena Cross",
+        "role": "mentioned",
+        "popid": "POP-00539",
+        "floor": true
+      },
+      {
+        "name": "Marco Fabregas",
+        "role": "mentioned",
+        "popid": "POP-00060",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "INIT-007:implementation-active",
+        "verb": "referenced",
+        "attachedBy": "stepAttach"
+      }
+    ],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "To be honest, my work in Quantum Computing doesn't directly relate to my decision to move to West Oakland. I've been drawn to the area's industrial character and the energy of the community. As a researcher, I'm often consumed by my work, but living here gives me a different kind of stimulation. I've enjoyed checking out local events like First Friday galleries, and it's nice to be around people who aren't all in the tech space. My work is pretty isolating, so it's good to have a change of pace.",
+        "sourceRef": "citizenVoice PRESS Darius Cike"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-0c4f136c8490",
+    "draftSha256": "ff74ed3f885f4b6505747cef73e353bb9c27b5242aff772314d72f552824eb2d",
+    "verdict": "output/cron-compare/culture_c114_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-06T00:20:13.880Z",
+    "contractScore": {
+      "opened": true,
+      "closed": false,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 450",
+      "words": 1328,
+      "short": "The piece ends with a roundup paragraph summarizing all persons rather than concluding directly on the last person's passage.",
+      "score": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "ff74ed3f885f4b6505747cef73e353bb9c27b5242aff772314d72f552824eb2d",
+      "costUsd": 0.002
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-06T00:20:18.699Z"
+}

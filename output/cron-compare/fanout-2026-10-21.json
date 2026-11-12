@@ -1,0 +1,658 @@
+{
+  "date": "2026-10-21",
+  "cycle": 112,
+  "quotas": {
+    "grid": [
+      "freelance-firebrand",
+      "noah-tan",
+      "elliot-marbury",
+      "p-slayer",
+      "tanya-cruz",
+      "tamsin-pruitt",
+      "ines-sorensen"
+    ],
+    "weekday": 3
+  },
+  "assignments": [
+    {
+      "desk": "civic",
+      "name": "Jax Caldera",
+      "popid": "POP-00799",
+      "beatDomain": "ACCOUNTABILITY",
+      "persona": "freelance-firebrand",
+      "approach": "Firebrand approach (sim stink-audit): do NOT open from the official timeline. Find what does not line up — metric vs claim, money vs outcome, boomtown copy vs decay numbers, crisis signal with no owner. Write into the contradiction. Name who must answer. End on the unanswered question. Sparing heat: one stink, not a roundup.",
+      "gridDay": 3,
+      "wakePackage": "JAX-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "civic",
+      "name": "Noah Tan",
+      "popid": "POP-00157",
+      "beatDomain": "ENVIRONMENT",
+      "persona": "noah-tan",
+      "approach": "Civic approach: start from the official action — who in city hall did what, this cycle, on the record. Then find the resident living its consequence; an official's report is not a story until a second, non-official citizen is shown carrying it. Name who must answer, and what question they haven't answered.",
+      "gridDay": 3,
+      "story": {
+        "kind": "beat-weather",
+        "angle": "C112 clear, 48°F — 2 cycles of clear — what this weather does to a day in the city",
+        "label": "C112 clear, 48°F — 2 cycles of clear",
+        "hookLine": "C112 clear, 48°F — 2 cycles of clear; 4 residents on the record lived it.",
+        "hood": null,
+        "citizens": [
+          "Jonas Patel (POP-00142)",
+          "Xavier Ramington (POP-00181)",
+          "Derlik Green (POP-00244)",
+          "Brian Adams (POP-00258)"
+        ],
+        "popids": [
+          "POP-00142",
+          "POP-00181",
+          "POP-00244",
+          "POP-00258"
+        ],
+        "ref": "output/beats/Cycle_Weather.jsonl CycleID 112",
+        "cycle": 112
+      },
+      "beatSlice": true,
+      "beatSeat": "noah-tan",
+      "pulse": {
+        "className": "beat-weather",
+        "score": 100,
+        "label": "C112 clear, 48°F — 2 cycles of clear",
+        "hood": null,
+        "source": "output/beats/Cycle_Weather.jsonl CycleID 112"
+      },
+      "prewrite": {
+        "schema": "BEAT-SLICE-1",
+        "method": "BEAT_TAB_FACTS",
+        "missing": [],
+        "angle": "C112 clear, 48°F — 2 cycles of clear — what this weather does to a day in the city",
+        "hookLine": "C112 clear, 48°F — 2 cycles of clear; 4 residents on the record lived it.",
+        "anchorFacts": [
+          "This cycle: clear, 48°F, impact 1, comfort 0.65, mood content, 2 cycles of clear",
+          "Last 3 cycles: C109 overcast 49°F, C110 fog 52°F, C111 mild 57°F",
+          "Jonas Patel — dealt with a seasonal health concern",
+          "Xavier Ramington — relied on familiar social circles during cold period",
+          "Derlik Green — relied on familiar social circles during cold period",
+          "Brian Adams — limited social activity due to winter mood"
+        ],
+        "evidence": [
+          {
+            "text": "This cycle: clear, 48°F, impact 1, comfort 0.65, mood content, 2 cycles of clear",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 112"
+          },
+          {
+            "text": "Last 3 cycles: C109 overcast 49°F, C110 fog 52°F, C111 mild 57°F",
+            "src": "output/beats/Cycle_Weather.jsonl"
+          },
+          {
+            "text": "Jonas Patel — dealt with a seasonal health concern",
+            "src": "output/world_summary_c112.md ## Who Lived It"
+          },
+          {
+            "text": "Xavier Ramington — relied on familiar social circles during cold period",
+            "src": "output/world_summary_c112.md ## Who Lived It"
+          },
+          {
+            "text": "Derlik Green — relied on familiar social circles during cold period",
+            "src": "output/world_summary_c112.md ## Who Lived It"
+          },
+          {
+            "text": "Brian Adams — limited social activity due to winter mood",
+            "src": "output/world_summary_c112.md ## Who Lived It"
+          }
+        ],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ],
+        "deltas": {
+          "state": "PRIOR_CYCLE_IN_TABLE",
+          "vs": 111
+        },
+        "hooks": [
+          {
+            "text": "Multiple weather signals detected. Could be coincidence or early pattern.",
+            "angle": "general coverage",
+            "domain": "WEATHER",
+            "hood": null,
+            "priority": 2
+          },
+          {
+            "text": "Daphne Stafford moved from Chinatown to West Oakland — moving up from Chinatown",
+            "angle": "desk rotation",
+            "domain": "COMMUNITY",
+            "hood": "West Oakland",
+            "priority": 5
+          },
+          {
+            "text": "Jasmine Torres moved from Downtown to Chinatown — leaving Downtown for a better fit",
+            "angle": "desk rotation",
+            "domain": "COMMUNITY",
+            "hood": "Chinatown",
+            "priority": 5
+          }
+        ],
+        "note": null,
+        "pageVoices": [],
+        "roomIsYours": "the sidewalk, the coats, what this weather does to a plan, who is out in it and who stayed in, what the bay smells like today"
+      },
+      "wakePackage": "NOAH-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "Elliot Marbury",
+      "popid": "POP-00166",
+      "beatDomain": "GENERAL",
+      "persona": "elliot-marbury",
+      "approach": "Sports approach: the game and the fan. What happened on the field is the skeleton — the story is what it felt like in the stands and the neighborhood sports bars. Records, scores, and player facts come straight from the feed; never invent a stat.",
+      "gridDay": 3,
+      "story": {
+        "kind": "beat-data-desk",
+        "angle": "Vinnie Keane — 17 seasons on the dossier, 2041 the latest | hitter density memo, multi-year — what the line proves, on what sample, and what would disprove it",
+        "label": "Vinnie Keane — 17 seasons on the dossier, 2041 the latest | hitter density memo, multi-year",
+        "hookLine": "Vinnie Keane's 2041 line against 16 earlier seasons.",
+        "hood": null,
+        "citizens": [
+          "Vinnie Keane (POP-00001)"
+        ],
+        "popids": [
+          "POP-00001"
+        ],
+        "ref": "output/player_truesource_mirror.json Vinnie Keane @C112",
+        "cycle": 112
+      },
+      "beatSlice": true,
+      "beatSeat": "elliot-marbury",
+      "pulse": {
+        "className": "beat-data-desk",
+        "score": 100,
+        "label": "Vinnie Keane — 17 seasons on the dossier, 2041 the latest | hitter density memo, multi-year",
+        "hood": null,
+        "source": "output/player_truesource_mirror.json Vinnie Keane @C112"
+      },
+      "prewrite": {
+        "schema": "BEAT-SLICE-1",
+        "method": "BEAT_TAB_FACTS",
+        "missing": [],
+        "angle": "Vinnie Keane — 17 seasons on the dossier, 2041 the latest | hitter density memo, multi-year — what the line proves, on what sample, and what would disprove it",
+        "hookLine": "Vinnie Keane's 2041 line against 16 earlier seasons.",
+        "anchorFacts": [
+          "Vinnie Keane — DH / 3B / 2B / SS, Athletics; 17 seasons on the dossier",
+          "Vinnie Keane 2041 ATH: 37 G, 127 AB, 40 H, 13 HR, 29 RBI, 0 BB, 6 SO, 0 SB, AVG .315, OBP .308, SLG .701",
+          "Vinnie Keane 2040 ATH: 58 G, 209 AB, 60 H, 14 HR, 40 RBI, 8 BB, 35 SO, 7 SB, AVG .287, OBP .332, SLG .522",
+          "Vinnie Keane 2039 ATH: 55 G, 164 AB, 64 H, 17 HR, 47 RBI, 35 BB, 82 SO, 5 SB, AVG .315, OBP .341, SLG .680",
+          "Vinnie Keane 2038 ATH: 94 G, 328 AB, 119 H, 49 HR, 119 RBI, 49 BB, 81 SO, 4 SB, AVG .362, OBP .398, SLG .680",
+          "Vinnie Keane 2037 ATH: 150 G, 592 AB, 174 H, 34 HR, 105 RBI, 88 BB, 157 SO, 9 SB, AVG .294, OBP .376, SLG .515",
+          "Vinnie Keane 2036 ATH: 107 G, 409 AB, 111 H, 26 HR, 62 RBI, 38 BB, 69 SO, 17 SB, AVG .271, OBP .338, SLG .504",
+          "Vinnie Keane 2041 rates (127 AB): one HR every 9.8 AB, one SO every 21.2 AB (worked from the season line)",
+          "Vinnie Keane 2040 rates (209 AB): one HR every 14.9 AB, one SO every 6.0 AB (worked from the season line)",
+          "Vinnie Keane 2039 rates (164 AB): one HR every 9.6 AB, one SO every 2.0 AB (worked from the season line)",
+          "Vinnie Keane 2038 rates (328 AB): one HR every 6.7 AB, one SO every 4.0 AB (worked from the season line)",
+          "Vinnie Keane 2037 rates (592 AB): one HR every 17.4 AB, one SO every 3.8 AB (worked from the season line)",
+          "Vinnie Keane 2036 rates (409 AB): one HR every 15.7 AB, one SO every 5.9 AB (worked from the season line)",
+          "This cycle (feed notes, off-season): Taveras posted on Moltbook that if he was to win anything he would be donating it to the Vinnie Keane Firehouse 29 in West Oakland Baseball Academy."
+        ],
+        "evidence": [
+          {
+            "text": "Vinnie Keane — DH / 3B / 2B / SS, Athletics; 17 seasons on the dossier",
+            "src": "output/player_truesource_mirror.json Vinnie Keane"
+          },
+          {
+            "text": "Vinnie Keane 2041 ATH: 37 G, 127 AB, 40 H, 13 HR, 29 RBI, 0 BB, 6 SO, 0 SB, AVG .315, OBP .308, SLG .701",
+            "src": "output/player_truesource_mirror.json Vinnie Keane"
+          },
+          {
+            "text": "Vinnie Keane 2040 ATH: 58 G, 209 AB, 60 H, 14 HR, 40 RBI, 8 BB, 35 SO, 7 SB, AVG .287, OBP .332, SLG .522",
+            "src": "output/player_truesource_mirror.json Vinnie Keane"
+          },
+          {
+            "text": "Vinnie Keane 2039 ATH: 55 G, 164 AB, 64 H, 17 HR, 47 RBI, 35 BB, 82 SO, 5 SB, AVG .315, OBP .341, SLG .680",
+            "src": "output/player_truesource_mirror.json Vinnie Keane"
+          },
+          {
+            "text": "Vinnie Keane 2038 ATH: 94 G, 328 AB, 119 H, 49 HR, 119 RBI, 49 BB, 81 SO, 4 SB, AVG .362, OBP .398, SLG .680",
+            "src": "output/player_truesource_mirror.json Vinnie Keane"
+          },
+          {
+            "text": "Vinnie Keane 2037 ATH: 150 G, 592 AB, 174 H, 34 HR, 105 RBI, 88 BB, 157 SO, 9 SB, AVG .294, OBP .376, SLG .515",
+            "src": "output/player_truesource_mirror.json Vinnie Keane"
+          },
+          {
+            "text": "Vinnie Keane 2036 ATH: 107 G, 409 AB, 111 H, 26 HR, 62 RBI, 38 BB, 69 SO, 17 SB, AVG .271, OBP .338, SLG .504",
+            "src": "output/player_truesource_mirror.json Vinnie Keane"
+          },
+          {
+            "text": "Vinnie Keane 2041 rates (127 AB): one HR every 9.8 AB, one SO every 21.2 AB (worked from the season line)",
+            "src": "output/player_truesource_mirror.json Vinnie Keane"
+          },
+          {
+            "text": "Vinnie Keane 2040 rates (209 AB): one HR every 14.9 AB, one SO every 6.0 AB (worked from the season line)",
+            "src": "output/player_truesource_mirror.json Vinnie Keane"
+          },
+          {
+            "text": "Vinnie Keane 2039 rates (164 AB): one HR every 9.6 AB, one SO every 2.0 AB (worked from the season line)",
+            "src": "output/player_truesource_mirror.json Vinnie Keane"
+          },
+          {
+            "text": "Vinnie Keane 2038 rates (328 AB): one HR every 6.7 AB, one SO every 4.0 AB (worked from the season line)",
+            "src": "output/player_truesource_mirror.json Vinnie Keane"
+          },
+          {
+            "text": "Vinnie Keane 2037 rates (592 AB): one HR every 17.4 AB, one SO every 3.8 AB (worked from the season line)",
+            "src": "output/player_truesource_mirror.json Vinnie Keane"
+          },
+          {
+            "text": "Vinnie Keane 2036 rates (409 AB): one HR every 15.7 AB, one SO every 5.9 AB (worked from the season line)",
+            "src": "output/player_truesource_mirror.json Vinnie Keane"
+          },
+          {
+            "text": "This cycle (feed notes, off-season): Taveras posted on Moltbook that if he was to win anything he would be donating it to the Vinnie Keane Firehouse 29 in West Oakland Baseball Academy.",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C112"
+          }
+        ],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ],
+        "deltas": {
+          "state": "DOSSIER",
+          "vs": null
+        },
+        "hooks": [],
+        "note": "subject is on this cycle's feed",
+        "pageVoices": [],
+        "roomIsYours": "the order the columns are read in, which season is the hinge, what the peer band makes ordinary or strange"
+      },
+      "wakePackage": "MARBURY-LEP2-2",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "P Slayer",
+      "popid": "POP-00008",
+      "beatDomain": "SPORTS",
+      "persona": "p-slayer",
+      "approach": "Sports approach: the game and the fan. What happened on the field is the skeleton — the story is what it felt like in the stands and the neighborhood sports bars. Records, scores, and player facts come straight from the feed; never invent a stat.",
+      "gridDay": 3,
+      "story": {
+        "ref": "Oakland_Sports_Feed cycle 112; world_summary_c112.md \"## Sports\" · The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+        "label": "The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+        "kind": "award-board",
+        "angle": "The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+        "hookLine": "Euphoria with friction: name the doubter, kill soft contentment.",
+        "hood": "Jack London",
+        "team": "A's",
+        "eventKind": "player-feature",
+        "popids": [
+          "POP-00001",
+          "POP-00018"
+        ],
+        "citizens": [
+          "Vinnie Keane (POP-00001)",
+          "Benji Dillon (POP-00018)",
+          "Jack London"
+        ],
+        "pulseClass": "award-board",
+        "pulseScore": 47,
+        "fanCharge": "defiance",
+        "bagModeIds": [
+          3,
+          5,
+          9
+        ]
+      },
+      "pslayerSlice": true,
+      "fanHeat": true,
+      "pulse": {
+        "className": "award-board",
+        "classes": [
+          "award-board"
+        ],
+        "score": 47,
+        "label": "The Blue Lattern Bar is Jack London host the Keane and Dillon farewell",
+        "team": "A's",
+        "eventKind": "player-feature",
+        "seasonType": "off-season",
+        "feedCycle": 112,
+        "record": "-",
+        "streak": "-",
+        "mood": "reflective",
+        "fanSentiment": "euphoric",
+        "neighborhood": "Jack London",
+        "notes": "The Blue Lattern Bar hosted the Vinne Keane and Benji Dillon night this cycle in Jack London to celebrate the two icons careers along with the latest championship. Both Keane and Dillon brought Oakland 7 World Series championships over their collective time on Oakland. Keane who has be forthcoming about his retirement, Dillon on the other hand has not officially announced that he will retire. Dill",
+        "stats": "-"
+      },
+      "charge": {
+        "bagModes": [
+          {
+            "id": 3,
+            "name": "Friction Pivot"
+          },
+          {
+            "id": 5,
+            "name": "Paper Cuts vs the Nerds"
+          },
+          {
+            "id": 9,
+            "name": "Breakout Feeling"
+          }
+        ],
+        "fanCharge": "defiance",
+        "foilNumber": "p. Both Keane and Dillon brought Oakland 7",
+        "centralFeeling": "Oakland should refuse the soft rewrite of what just happened.",
+        "palette": [
+          "fury",
+          "euphoria",
+          "dread",
+          "defiance",
+          "confession",
+          "grief",
+          "dare"
+        ]
+      },
+      "wakePackage": "PSLAYER-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "Tanya Cruz",
+      "popid": "POP-00014",
+      "beatDomain": "SPORTS_SIDELINE",
+      "persona": "tanya-cruz",
+      "approach": "Sports approach: the game and the fan. What happened on the field is the skeleton — the story is what it felt like in the stands and the neighborhood sports bars. Records, scores, and player facts come straight from the feed; never invent a stat.",
+      "gridDay": 3,
+      "story": {
+        "ref": "Oakland_Sports_Feed cycle 112; rendered: world_summary_c112.md \"## Sports\" C112 (StoryAngle at the pointer)",
+        "label": "A's | player-feature | (off-season) | Vinnie Keane, Benji Dillon",
+        "kind": "feed",
+        "popids": [
+          "POP-00001",
+          "POP-00018"
+        ]
+      },
+      "wakePackage": "TANYA-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "culture",
+      "name": "Tamsin Pruitt",
+      "popid": "POP-01210",
+      "beatDomain": "COMMUNITY",
+      "persona": "tamsin-pruitt",
+      "approach": "Culture approach: what is the city vibing on? Find what people are actually doing — the block, the food, the music, the small rituals around this cycle's events. Ground it in the named places and people of the record, then let the street texture breathe.",
+      "gridDay": 3,
+      "story": {
+        "kind": "beat-lives",
+        "angle": "The lives of C112, 2026-10-21: 3 people — Brian Adams — limited social activity due to winter mood",
+        "label": "Brian Adams — limited social activity due to winter mood",
+        "hookLine": "Brian Adams first. The event is the lead; one true detail; what came next only if the record says.",
+        "hood": "Jack London",
+        "citizens": [
+          "Brian Adams (POP-00258)",
+          "Joseph Cramp (POP-00272)",
+          "Jorry Cula (POP-00182)"
+        ],
+        "popids": [
+          "POP-00258",
+          "POP-00272",
+          "POP-00182"
+        ],
+        "ref": "output/beats/Lived_Events.jsonl @C112 2026-10-21",
+        "cycle": 112
+      },
+      "beatSlice": true,
+      "beatSeat": "tamsin-pruitt",
+      "pulse": {
+        "className": "beat-lives",
+        "score": 100,
+        "label": "Brian Adams — limited social activity due to winter mood",
+        "hood": "Jack London",
+        "source": "output/beats/Lived_Events.jsonl @C112 2026-10-21"
+      },
+      "prewrite": {
+        "schema": "BEAT-SLICE-1",
+        "method": "BEAT_TAB_FACTS",
+        "missing": [],
+        "angle": "The lives of C112, 2026-10-21: 3 people — Brian Adams — limited social activity due to winter mood",
+        "hookLine": "Brian Adams first. The event is the lead; one true detail; what came next only if the record says.",
+        "anchorFacts": [
+          "Brian Adams — limited social activity due to winter mood, Jack London (C112, Relationship)",
+          "Joseph Cramp — felt social atmosphere shift due to today's happenings, Downtown (C112, Relationship)",
+          "Jorry Cula — felt positive atmosphere inside the home, Uptown (C112, Household)"
+        ],
+        "evidence": [
+          {
+            "text": "Brian Adams — limited social activity due to winter mood, Jack London (C112, Relationship)",
+            "src": "output/beats/LifeHistory_Log.jsonl @C112",
+            "id": "moment:POP-00258:112:Relationship",
+            "kind": "moment",
+            "popid": "POP-00258"
+          },
+          {
+            "text": "Joseph Cramp — felt social atmosphere shift due to today's happenings, Downtown (C112, Relationship)",
+            "src": "output/beats/LifeHistory_Log.jsonl @C112",
+            "id": "moment:POP-00272:112:Relationship",
+            "kind": "moment",
+            "popid": "POP-00272"
+          },
+          {
+            "text": "Jorry Cula — felt positive atmosphere inside the home, Uptown (C112, Household)",
+            "src": "output/beats/LifeHistory_Log.jsonl @C112",
+            "id": "moment:POP-00182:112:Household",
+            "kind": "moment",
+            "popid": "POP-00182"
+          }
+        ],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ],
+        "deltas": null,
+        "hooks": [],
+        "note": "none of today's people has written their own page this Cycle — no quotes",
+        "pageVoices": [],
+        "roomIsYours": "the plain respect, what the event meant in that house or on that block, the detail the family would have picked — from the lines below, never invented"
+      },
+      "wakePackage": "TAMSIN-LIVES-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "culture",
+      "name": "Ines Sorensen",
+      "popid": "POP-01211",
+      "beatDomain": "COMMUNITY",
+      "persona": "ines-sorensen",
+      "approach": "Culture approach: what is the city vibing on? Find what people are actually doing — the block, the food, the music, the small rituals around this cycle's events. Ground it in the named places and people of the record, then let the street texture breathe.",
+      "gridDay": 3,
+      "story": {
+        "kind": "beat-voices",
+        "angle": "Voices, 2026-10-21: Bianca Crook in their own words",
+        "label": "Bianca Crook in their own words",
+        "hookLine": "Open on Bianca Crook's own line, verbatim. Their words are the piece; yours are the frame.",
+        "hood": "Lake Merritt",
+        "citizens": [
+          "Bianca Crook (POP-00661)"
+        ],
+        "popids": [
+          "POP-00661"
+        ],
+        "ref": "output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-21",
+        "cycle": 112
+      },
+      "beatSlice": true,
+      "beatSeat": "ines-sorensen",
+      "pulse": {
+        "className": "beat-voices",
+        "score": 100,
+        "label": "Bianca Crook in their own words",
+        "hood": "Lake Merritt",
+        "source": "output/citizen_pages/index.jsonl (self-initiated pages, last 36h) 2026-10-21"
+      },
+      "prewrite": {
+        "schema": "BEAT-SLICE-1",
+        "method": "BEAT_TAB_FACTS",
+        "missing": [],
+        "angle": "Voices, 2026-10-21: Bianca Crook in their own words",
+        "hookLine": "Open on Bianca Crook's own line, verbatim. Their words are the piece; yours are the frame.",
+        "anchorFacts": [
+          "“The little thing was the coffee grinder downstairs again, that loud, grinding whir at 6 a.m. I wanted to be annoyed—I was annoyed, honestly, my eyes barely open—but then I heard the person down there pause, maybe pour the grounds, and I thought, *we're all just trying to wake up the same way.* It's stupid, but it made me feel less alone in this building full of strangers. And tonight, with everything quiet, that tiny sound is what I keep coming back to. It wasn't the sound itself; it was the reminder that someone else was starting their day right along with me, and I didn't even know their name.” — Bianca Crook, Autonomous Systems Engineer, Lake Merritt (own page, the night page, C112)"
+        ],
+        "evidence": [
+          {
+            "text": "“The little thing was the coffee grinder downstairs again, that loud, grinding whir at 6 a.m. I wanted to be annoyed—I was annoyed, honestly, my eyes barely open—but then I heard the person down there pause, maybe pour the grounds, and I thought, *we're all just trying to wake up the same way.* It's stupid, but it made me feel less alone in this building full of strangers. And tonight, with everything quiet, that tiny sound is what I keep coming back to. It wasn't the sound itself; it was the reminder that someone else was starting their day right along with me, and I didn't even know their name.” — Bianca Crook, Autonomous Systems Engineer, Lake Merritt (own page, the night page, C112)",
+            "src": "output/citizen_pages/index.jsonl cp-POP-00661-c112-night",
+            "docId": "WwHaqzVXUc7LpGe7T4Haej",
+            "popid": "POP-00661",
+            "slot": "night",
+            "cycle": 112
+          }
+        ],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ],
+        "deltas": null,
+        "hooks": [],
+        "note": null,
+        "pageVoices": [
+          "“The little thing was the coffee grinder downstairs again, that loud, grinding whir at 6 a.m. I wanted to be annoyed—I was annoyed, honestly, my eyes barely open—but then I heard the person down there pause, maybe pour the grounds, and I thought, *we're all just trying to wake up the same way.* It's stupid, but it made me feel less alone in this building full of strangers. And tonight, with everything quiet, that tiny sound is what I keep coming back to. It wasn't the sound itself; it was the reminder that someone else was starting their day right along with me, and I didn't even know their name.” — Bianca Crook, Autonomous Systems Engineer, Lake Merritt (own page, the night page, C112)"
+        ],
+        "roomIsYours": "where they were standing when they wrote it, the one plain clause that says who this is, the silence after their last line — never a word inside the quotation marks that is not on the page"
+      },
+      "wakePackage": "INES-VOICES-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "undocked",
+      "name": "Nia Rook",
+      "popid": "POP-01076",
+      "beatDomain": "CULTURE",
+      "persona": "nia-rook",
+      "approach": "Recap approach (UNDOCKED show beat): open on the CITY watching, not the cockpit. Pick 1-2 bag modes and hold them. The typed episode facts are the spine — credits, systems, combat, mishaps, magnitude — but lead with what it MEANS for who's up and who's down, never with the numbers. The pilot's packet interview is the only place their voice comes from. End on the one sentence the hallway will argue about tomorrow. This is the desk that's allowed to have fun.",
+      "gridDay": 3,
+      "story": {
+        "ref": "undocked:undocked-pop01077-Y3C8",
+        "label": "UNDOCKED: Rafael Phillips — dead even on the night",
+        "kind": "undocked",
+        "angle": "Recap Rafael Phillips's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits 0, systems sirius, sol, alpha_centauri, combat 0, mishaps 0, magnitude 1/5. Standings: Eric Taveras leads the board — rank #1, 2 cycle(s) led, current streak 2. In the chair: Rafael Phillips — Nurse aide. The career is who they are, not the story; the story is the flight.",
+        "facts": [
+          "Rafael Phillips — Nurse aide (ledger)"
+        ],
+        "citizens": [
+          "Rafael Phillips — Nurse aide, UNDOCKED cast pilot"
+        ],
+        "popids": [
+          "POP-01077"
+        ],
+        "hood": "Rockridge"
+      },
+      "wakePackage": "NIAROOK-UNDOCKED-1",
+      "packetContract": "v2"
+    }
+  ],
+  "shortfalls": [],
+  "rotationShortfalls": [],
+  "rosterAbsent": [],
+  "seedless": 1,
+  "signalMissing": false,
+  "packageGate": {
+    "policy": "package-only",
+    "pinned": [],
+    "skipped": [],
+    "activeAssignments": [
+      {
+        "name": "Jax Caldera",
+        "persona": "freelance-firebrand",
+        "wakePackage": "JAX-LEP2-1"
+      },
+      {
+        "name": "Noah Tan",
+        "persona": "noah-tan",
+        "wakePackage": "NOAH-LEP2-1"
+      },
+      {
+        "name": "Elliot Marbury",
+        "persona": "elliot-marbury",
+        "wakePackage": "MARBURY-LEP2-2"
+      },
+      {
+        "name": "P Slayer",
+        "persona": "p-slayer",
+        "wakePackage": "PSLAYER-LEP2-1"
+      },
+      {
+        "name": "Tanya Cruz",
+        "persona": "tanya-cruz",
+        "wakePackage": "TANYA-LEP2-1"
+      },
+      {
+        "name": "Tamsin Pruitt",
+        "persona": "tamsin-pruitt",
+        "wakePackage": "TAMSIN-LIVES-1"
+      },
+      {
+        "name": "Ines Sorensen",
+        "persona": "ines-sorensen",
+        "wakePackage": "INES-VOICES-1"
+      },
+      {
+        "name": "Nia Rook",
+        "persona": "nia-rook",
+        "wakePackage": "NIAROOK-UNDOCKED-1"
+      }
+    ]
+  },
+  "stinkForce": {
+    "attempted": false,
+    "forced": false,
+    "reason": "themed-week grid — Jax seated on his day only",
+    "top": null,
+    "reportPath": null
+  },
+  "pslayerEnrich": {
+    "enriched": true,
+    "reason": "pulse=award-board score=47 charge=defiance"
+  },
+  "anthonyEnrich": {
+    "enriched": false,
+    "reason": "no anthony-raines assignment in rota"
+  },
+  "halEnrich": {
+    "enriched": false,
+    "reason": "no hal-richmond assignment in rota"
+  },
+  "economicEnrich": {
+    "enriched": false,
+    "reason": "no business desk or Mason assignment in rota",
+    "dropped": []
+  },
+  "beatEnrich": {
+    "enriched": true,
+    "reason": "seats=4 ines-sorensen/beat-voices:Lake Merritt, tamsin-pruitt/beat-lives:Jack London, elliot-marbury/beat-data-desk:—, noah-tan/beat-weather:—",
+    "seats": [
+      "ines-sorensen/beat-voices:Lake Merritt",
+      "tamsin-pruitt/beat-lives:Jack London",
+      "elliot-marbury/beat-data-desk:—",
+      "noah-tan/beat-weather:—"
+    ],
+    "dropped": []
+  },
+  "eveningEnrich": {
+    "enriched": false,
+    "reason": "no evening-consumer assignment in rota",
+    "seats": []
+  },
+  "civicDomainEnrich": {
+    "enriched": false,
+    "reason": "no civic-domain persona assignment in rota",
+    "seats": []
+  },
+  "builtAt": "2026-10-21T11:15:05.845Z"
+}

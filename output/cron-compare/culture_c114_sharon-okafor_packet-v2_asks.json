@@ -1,0 +1,596 @@
+[
+  {
+    "pop": "POP-00539",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00539\",\"name\":\"Lena Cross\",\"role\":\"Actor\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Sharon Okafor\",\"question\":\"What is Lena Cross's current level of involvement in local arts? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-lifestyle\",\"hood\":\"Piedmont Ave\",\"focus\":\"Lena Cross's fading fame in Rockridge and Piedmont Ave\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Lena Cross — Actor — Piedmont Ave\",\"evidence\":[{\"id\":\"EV-a5a6c61864\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\",\"text\":\"Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 4, cooling), 17 media mentions.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 4, cooling), 17 media mentions.\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\",\"id\":\"F-fddee223ff86\"},{\"t\":\"FACT\",\"text\":\"Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 4, cooling), 17 media mentions\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\",\"id\":\"F-ab2b44fe8d45\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C114\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4261fa115617\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane leads the fame table; 3 fading, 0 new\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\",\"id\":\"F-32e226f93abf\"},{\"t\":\"FACT\",\"text\":\"Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 2, cooling), 14 media mentions\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\",\"id\":\"F-7957e0f7cb91\"},{\"t\":\"FACT\",\"text\":\"Marisol Rivera (Community Advocate), Civic, Rockridge, Regional-tier — fading — the where-are-they-now file (fame 0, cooling), 7 media mentions\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\",\"id\":\"F-ec2def3b3ca2\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane (A's player), Sports, Grand Lake, National-tier — the city knows them (fame 48, stable), 6 media mentions\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\",\"id\":\"F-2c6dec8a8911\"},{\"t\":\"FACT\",\"text\":\"Benji Dillon (A's player), Sports, Rockridge, Local-tier — the city knows them (fame 48, rising), 1 media mentions\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\",\"id\":\"F-b27581cf1215\"},{\"t\":\"FACT\",\"text\":\"Lena Cross — Actor — Piedmont Ave\",\"src\":\"Simulation_Ledger profile for POP-00539\",\"id\":\"F-f580a535e402\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C10, Spring, holiday=none\",\"src\":\"output/world_summary_c114.md Calendar context (Simulation_Calendar)\",\"id\":\"F-9b9470803821\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00539",
+        "name": "Lena Cross",
+        "role": "Actor",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Sharon Okafor",
+        "question": "What is Lena Cross's current level of involvement in local arts? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-lifestyle",
+        "hood": "Piedmont Ave",
+        "focus": "Lena Cross's fading fame in Rockridge and Piedmont Ave",
+        "src": "output/beats/Cultural_Ledger.jsonl @C114"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Lena Cross — Actor — Piedmont Ave",
+        "evidence": [
+          {
+            "id": "EV-a5a6c61864",
+            "src": "output/beats/Cultural_Ledger.jsonl @C114",
+            "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 4, cooling), 17 media mentions."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 4, cooling), 17 media mentions.",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114",
+          "id": "F-fddee223ff86"
+        },
+        {
+          "t": "FACT",
+          "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 4, cooling), 17 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114",
+          "id": "F-ab2b44fe8d45"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C114",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4261fa115617"
+        },
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane leads the fame table; 3 fading, 0 new",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114",
+          "id": "F-32e226f93abf"
+        },
+        {
+          "t": "FACT",
+          "text": "Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 2, cooling), 14 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114",
+          "id": "F-7957e0f7cb91"
+        },
+        {
+          "t": "FACT",
+          "text": "Marisol Rivera (Community Advocate), Civic, Rockridge, Regional-tier — fading — the where-are-they-now file (fame 0, cooling), 7 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114",
+          "id": "F-ec2def3b3ca2"
+        },
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane (A's player), Sports, Grand Lake, National-tier — the city knows them (fame 48, stable), 6 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114",
+          "id": "F-2c6dec8a8911"
+        },
+        {
+          "t": "FACT",
+          "text": "Benji Dillon (A's player), Sports, Rockridge, Local-tier — the city knows them (fame 48, rising), 1 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114",
+          "id": "F-b27581cf1215"
+        },
+        {
+          "t": "FACT",
+          "text": "Lena Cross — Actor — Piedmont Ave",
+          "src": "Simulation_Ledger profile for POP-00539",
+          "id": "F-f580a535e402"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C10, Spring, holiday=none",
+          "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+          "id": "F-9b9470803821"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00545",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00545\",\"name\":\"Rowan Pierce\",\"role\":\"Freelance Writer\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Sharon Okafor\",\"question\":\"How does Rowan Pierce, a fellow Piedmont Ave resident, perceive Lena Cross's current status? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-lifestyle\",\"hood\":\"Piedmont Ave\",\"focus\":\"Lena Cross's fading fame in Rockridge and Piedmont Ave\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Rowan Pierce — Freelance Writer — Piedmont Ave\",\"evidence\":[{\"id\":\"EV-6ff1ff59ef\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\",\"text\":\"Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 4, cooling), 17 media mentions.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 2, cooling), 14 media mentions\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\",\"id\":\"F-7957e0f7cb91\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C114\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4261fa115617\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane leads the fame table; 3 fading, 0 new\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\",\"id\":\"F-32e226f93abf\"},{\"t\":\"FACT\",\"text\":\"Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 4, cooling), 17 media mentions.\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\",\"id\":\"F-fddee223ff86\"},{\"t\":\"FACT\",\"text\":\"Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 4, cooling), 17 media mentions\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\",\"id\":\"F-ab2b44fe8d45\"},{\"t\":\"FACT\",\"text\":\"Marisol Rivera (Community Advocate), Civic, Rockridge, Regional-tier — fading — the where-are-they-now file (fame 0, cooling), 7 media mentions\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\",\"id\":\"F-ec2def3b3ca2\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane (A's player), Sports, Grand Lake, National-tier — the city knows them (fame 48, stable), 6 media mentions\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\",\"id\":\"F-2c6dec8a8911\"},{\"t\":\"FACT\",\"text\":\"Benji Dillon (A's player), Sports, Rockridge, Local-tier — the city knows them (fame 48, rising), 1 media mentions\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\",\"id\":\"F-b27581cf1215\"},{\"t\":\"FACT\",\"text\":\"Rowan Pierce — Freelance Writer — Piedmont Ave\",\"src\":\"Simulation_Ledger profile for POP-00545\",\"id\":\"F-2d6b32c4c072\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C10, Spring, holiday=none\",\"src\":\"output/world_summary_c114.md Calendar context (Simulation_Calendar)\",\"id\":\"F-9b9470803821\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00545",
+        "name": "Rowan Pierce",
+        "role": "Freelance Writer",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Sharon Okafor",
+        "question": "How does Rowan Pierce, a fellow Piedmont Ave resident, perceive Lena Cross's current status? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-lifestyle",
+        "hood": "Piedmont Ave",
+        "focus": "Lena Cross's fading fame in Rockridge and Piedmont Ave",
+        "src": "output/beats/Cultural_Ledger.jsonl @C114"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Rowan Pierce — Freelance Writer — Piedmont Ave",
+        "evidence": [
+          {
+            "id": "EV-6ff1ff59ef",
+            "src": "output/beats/Cultural_Ledger.jsonl @C114",
+            "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 4, cooling), 17 media mentions."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 2, cooling), 14 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114",
+          "id": "F-7957e0f7cb91"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C114",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4261fa115617"
+        },
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane leads the fame table; 3 fading, 0 new",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114",
+          "id": "F-32e226f93abf"
+        },
+        {
+          "t": "FACT",
+          "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 4, cooling), 17 media mentions.",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114",
+          "id": "F-fddee223ff86"
+        },
+        {
+          "t": "FACT",
+          "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 4, cooling), 17 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114",
+          "id": "F-ab2b44fe8d45"
+        },
+        {
+          "t": "FACT",
+          "text": "Marisol Rivera (Community Advocate), Civic, Rockridge, Regional-tier — fading — the where-are-they-now file (fame 0, cooling), 7 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114",
+          "id": "F-ec2def3b3ca2"
+        },
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane (A's player), Sports, Grand Lake, National-tier — the city knows them (fame 48, stable), 6 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114",
+          "id": "F-2c6dec8a8911"
+        },
+        {
+          "t": "FACT",
+          "text": "Benji Dillon (A's player), Sports, Rockridge, Local-tier — the city knows them (fame 48, rising), 1 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114",
+          "id": "F-b27581cf1215"
+        },
+        {
+          "t": "FACT",
+          "text": "Rowan Pierce — Freelance Writer — Piedmont Ave",
+          "src": "Simulation_Ledger profile for POP-00545",
+          "id": "F-2d6b32c4c072"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C10, Spring, holiday=none",
+          "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+          "id": "F-9b9470803821"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01062",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01062\",\"name\":\"Marisol Rivera\",\"role\":\"Community Advocate\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Sharon Okafor\",\"question\":\"What have you seen, felt, or understood about \\\"Lena Cross's fading fame in Rockridge and Piedmont Ave\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-lifestyle\",\"hood\":\"Piedmont Ave\",\"focus\":\"Lena Cross's fading fame in Rockridge and Piedmont Ave\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Marisol Rivera — Community Advocate — Rockridge\",\"evidence\":[{\"id\":\"EV-e423c1260f\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\",\"text\":\"Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 4, cooling), 17 media mentions.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Marisol Rivera (Community Advocate), Civic, Rockridge, Regional-tier — fading — the where-are-they-now file (fame 0, cooling), 7 media mentions\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\",\"id\":\"F-ec2def3b3ca2\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C114\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4261fa115617\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane leads the fame table; 3 fading, 0 new\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\",\"id\":\"F-32e226f93abf\"},{\"t\":\"FACT\",\"text\":\"Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 4, cooling), 17 media mentions.\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\",\"id\":\"F-fddee223ff86\"},{\"t\":\"FACT\",\"text\":\"Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 4, cooling), 17 media mentions\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\",\"id\":\"F-ab2b44fe8d45\"},{\"t\":\"FACT\",\"text\":\"Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 2, cooling), 14 media mentions\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\",\"id\":\"F-7957e0f7cb91\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane (A's player), Sports, Grand Lake, National-tier — the city knows them (fame 48, stable), 6 media mentions\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\",\"id\":\"F-2c6dec8a8911\"},{\"t\":\"FACT\",\"text\":\"Benji Dillon (A's player), Sports, Rockridge, Local-tier — the city knows them (fame 48, rising), 1 media mentions\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\",\"id\":\"F-b27581cf1215\"},{\"t\":\"FACT\",\"text\":\"Marisol Rivera — Community Advocate — Rockridge\",\"src\":\"Simulation_Ledger profile for POP-01062\",\"id\":\"F-6ef46a712636\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C10, Spring, holiday=none\",\"src\":\"output/world_summary_c114.md Calendar context (Simulation_Calendar)\",\"id\":\"F-9b9470803821\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01062",
+        "name": "Marisol Rivera",
+        "role": "Community Advocate",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Sharon Okafor",
+        "question": "What have you seen, felt, or understood about \"Lena Cross's fading fame in Rockridge and Piedmont Ave\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-lifestyle",
+        "hood": "Piedmont Ave",
+        "focus": "Lena Cross's fading fame in Rockridge and Piedmont Ave",
+        "src": "output/beats/Cultural_Ledger.jsonl @C114"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Marisol Rivera — Community Advocate — Rockridge",
+        "evidence": [
+          {
+            "id": "EV-e423c1260f",
+            "src": "output/beats/Cultural_Ledger.jsonl @C114",
+            "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 4, cooling), 17 media mentions."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Marisol Rivera (Community Advocate), Civic, Rockridge, Regional-tier — fading — the where-are-they-now file (fame 0, cooling), 7 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114",
+          "id": "F-ec2def3b3ca2"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C114",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4261fa115617"
+        },
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane leads the fame table; 3 fading, 0 new",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114",
+          "id": "F-32e226f93abf"
+        },
+        {
+          "t": "FACT",
+          "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 4, cooling), 17 media mentions.",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114",
+          "id": "F-fddee223ff86"
+        },
+        {
+          "t": "FACT",
+          "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 4, cooling), 17 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114",
+          "id": "F-ab2b44fe8d45"
+        },
+        {
+          "t": "FACT",
+          "text": "Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 2, cooling), 14 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114",
+          "id": "F-7957e0f7cb91"
+        },
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane (A's player), Sports, Grand Lake, National-tier — the city knows them (fame 48, stable), 6 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114",
+          "id": "F-2c6dec8a8911"
+        },
+        {
+          "t": "FACT",
+          "text": "Benji Dillon (A's player), Sports, Rockridge, Local-tier — the city knows them (fame 48, rising), 1 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114",
+          "id": "F-b27581cf1215"
+        },
+        {
+          "t": "FACT",
+          "text": "Marisol Rivera — Community Advocate — Rockridge",
+          "src": "Simulation_Ledger profile for POP-01062",
+          "id": "F-6ef46a712636"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C10, Spring, holiday=none",
+          "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+          "id": "F-9b9470803821"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00001",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00001\",\"name\":\"Vinnie Keane\",\"role\":\"Designated Hitter, Oakland A's Legend\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Sharon Okafor\",\"question\":\"What have you seen, felt, or understood about \\\"Lena Cross's fading fame in Rockridge and Piedmont Ave\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-lifestyle\",\"hood\":\"Piedmont Ave\",\"focus\":\"Lena Cross's fading fame in Rockridge and Piedmont Ave\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake\",\"evidence\":[{\"id\":\"EV-a74e3611c4\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\",\"text\":\"Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 4, cooling), 17 media mentions.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Vinnie Keane leads the fame table; 3 fading, 0 new\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\",\"id\":\"F-32e226f93abf\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane (A's player), Sports, Grand Lake, National-tier — the city knows them (fame 48, stable), 6 media mentions\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\",\"id\":\"F-2c6dec8a8911\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C114\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4261fa115617\"},{\"t\":\"FACT\",\"text\":\"Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 4, cooling), 17 media mentions.\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\",\"id\":\"F-fddee223ff86\"},{\"t\":\"FACT\",\"text\":\"Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 4, cooling), 17 media mentions\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\",\"id\":\"F-ab2b44fe8d45\"},{\"t\":\"FACT\",\"text\":\"Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 2, cooling), 14 media mentions\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\",\"id\":\"F-7957e0f7cb91\"},{\"t\":\"FACT\",\"text\":\"Marisol Rivera (Community Advocate), Civic, Rockridge, Regional-tier — fading — the where-are-they-now file (fame 0, cooling), 7 media mentions\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\",\"id\":\"F-ec2def3b3ca2\"},{\"t\":\"FACT\",\"text\":\"Benji Dillon (A's player), Sports, Rockridge, Local-tier — the city knows them (fame 48, rising), 1 media mentions\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C114\",\"id\":\"F-b27581cf1215\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake\",\"src\":\"Simulation_Ledger profile for POP-00001\",\"id\":\"F-2b3e2e3d075f\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C10, Spring, holiday=none\",\"src\":\"output/world_summary_c114.md Calendar context (Simulation_Calendar)\",\"id\":\"F-9b9470803821\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00001",
+        "name": "Vinnie Keane",
+        "role": "Designated Hitter, Oakland A's Legend",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Sharon Okafor",
+        "question": "What have you seen, felt, or understood about \"Lena Cross's fading fame in Rockridge and Piedmont Ave\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-lifestyle",
+        "hood": "Piedmont Ave",
+        "focus": "Lena Cross's fading fame in Rockridge and Piedmont Ave",
+        "src": "output/beats/Cultural_Ledger.jsonl @C114"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+        "evidence": [
+          {
+            "id": "EV-a74e3611c4",
+            "src": "output/beats/Cultural_Ledger.jsonl @C114",
+            "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 4, cooling), 17 media mentions."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane leads the fame table; 3 fading, 0 new",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114",
+          "id": "F-32e226f93abf"
+        },
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane (A's player), Sports, Grand Lake, National-tier — the city knows them (fame 48, stable), 6 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114",
+          "id": "F-2c6dec8a8911"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C114",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4261fa115617"
+        },
+        {
+          "t": "FACT",
+          "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading (fame 4, cooling), 17 media mentions.",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114",
+          "id": "F-fddee223ff86"
+        },
+        {
+          "t": "FACT",
+          "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 4, cooling), 17 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114",
+          "id": "F-ab2b44fe8d45"
+        },
+        {
+          "t": "FACT",
+          "text": "Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 2, cooling), 14 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114",
+          "id": "F-7957e0f7cb91"
+        },
+        {
+          "t": "FACT",
+          "text": "Marisol Rivera (Community Advocate), Civic, Rockridge, Regional-tier — fading — the where-are-they-now file (fame 0, cooling), 7 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114",
+          "id": "F-ec2def3b3ca2"
+        },
+        {
+          "t": "FACT",
+          "text": "Benji Dillon (A's player), Sports, Rockridge, Local-tier — the city knows them (fame 48, rising), 1 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C114",
+          "id": "F-b27581cf1215"
+        },
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+          "src": "Simulation_Ledger profile for POP-00001",
+          "id": "F-2b3e2e3d075f"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C10, Spring, holiday=none",
+          "src": "output/world_summary_c114.md Calendar context (Simulation_Calendar)",
+          "id": "F-9b9470803821"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  }
+]

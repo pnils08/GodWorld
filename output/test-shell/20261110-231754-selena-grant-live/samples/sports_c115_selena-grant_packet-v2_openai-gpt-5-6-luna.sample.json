@@ -1,0 +1,12 @@
+{
+  "status": "ungated-sample",
+  "desk": "sports",
+  "cycle": "115",
+  "persona": "selena-grant",
+  "byline": "Selena Grant",
+  "bylinePopid": "POP-00591",
+  "article": "output/test-shell/20261110-231754-selena-grant-live/samples/sports_c115_selena-grant_packet-v2_openai-gpt-5-6-luna.sample.md",
+  "quotesLanded": 0,
+  "note": "UNGATED sample (--no-gate, S332): writer+quotes ran on raw API; the Rhea gate was skipped (needs subscription). NOT canon, review-only.",
+  "builtAt": "2026-11-11T05:18:25.760Z"
+}

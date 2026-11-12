@@ -1,0 +1,38 @@
+{
+  "office": "okoro",
+  "cycle": 114,
+  "speaker": "Brenda Okoro",
+  "cascadeSummary": "The stabilization of West Oakland is critical; the Fund's charter renew and Month-12 disbursement are essential to maintaining momentum for the long-tenure residents. Regarding commercial stabilization, I maintain that Grand Lake's support must be conditional on clear, auditable milestones. Finally, I will accept responsibility for detailing Brooklyn's needs while ensuring West Oakland receives documented credit for its own operational success.",
+  "statements": [
+    {
+      "statementId": "STMT-114-okoro-001",
+      "type": "initiative_response",
+      "topic": "West Oakland Stabilization Fund Charter Renewal and Month-12 Disbursement",
+      "initiative": "INIT-001",
+      "decision": "The Month-12 $400,000 disbursement is executed, and the charter renewal moves to draft completion, explicitly preserving the Fund's scope to West Oakland businesses and residents.",
+      "quote": "The Fund renew's with its scope intact and its Month-12 records public, because trust requires both delivered support and documentation.",
+      "fullStatement": "We are executing the Month-12 $400,000 disbursement today. This isn't a blank check; it is a recommitment to the exact cohort the West Oakland Stabilization Fund was created to serve. The Month-12 execution record and the charter renewal drafts are now ready for public review, ensuring our processes meet the 23-day standard we've maintained. Our success in this West Oakland Fund is about keeping our oldest residents in place, which is the only measurement that matters in this race against displacement.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-114-okoro-002",
+      "type": "initiative_response",
+      "topic": "Commercial Stabilization for Grand Lake",
+      "initiative": "INIT-009",
+      "decision": "The $2.5M proposal proceeds to full council with the Chen/Vega milestone and audit conditions intact, making public reporting mandatory for the decision.",
+      "quote": "Public money deserves public proof, which is why the Grand Lake support must keep every Chen-Vega milestone and audit condition.",
+      "fullStatement": "Grand Lake's quiet engine needs fuel, but that fuel comes with strings. We are moving the $2.5 million proposal to the full council agenda, but the Chen/Vega milestone and audit conditions remain integral to the process. We will not grant operational resources without a clear, auditable path for that investment. The public needs to know exactly how that funding is being utilized to stabilize the area.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-114-okoro-003",
+      "type": "oversight_briefing",
+      "topic": "Neighborhood Accountability: Brooklyn vs. West Oakland",
+      "initiative": null,
+      "decision": "The Mayor's office will handle the evidence review and options response for Brooklyn to address local concerns while ensuring credit for West Oakland's achievements is tied to documented, block-level efforts.",
+      "quote": "West Oakland owns its success, with city programs sharing credit only where the evidence supports it.",
+      "fullStatement": "We will have the Mayor's office own the evidence review and options response for Brooklyn this cycle, working through the specific street trade realities there while keeping safety and neighborhood decline signals in focus. For West Oakland, we will simply document and state the work: the success is owned by the block associations and tenant leaders who did the daily work, and the Fund's consistent support that allowed us to get there.",
+      "trackerUpdates": {}
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "office": "council_d7",
+  "cycle": 114,
+  "speaker": "Warren Ashford",
+  "cascadeSummary": "District 7 is directing an immediate economic and housing pressure assessment for Rockridge while crediting Temescal's lifted sentiment directly to local shopkeepers and clinic staff. On the council floor, I am enforcing quarterly intake audits on the Temescal Community Health Center's remaining $16,615,384.60 operational balance and conditioning any advancement of the $15M Downtown revitalization package on binding fiscal benchmarks.",
+  "statements": [
+    {
+      "statementId": "STMT-114-council_d7-001",
+      "type": "statement",
+      "topic": "Rockridge Commercial Corridor Assessment and Housing Pressure",
+      "initiative": null,
+      "decision": "Direct the City Auditor and Economic Development staff to execute a formal commercial corridor viability and housing pressure assessment for Rockridge before any municipal intervention is drafted.",
+      "quote": "Rockridge cannot be treated as an unmonitored tax engine while its daily life declines and storefronts face pressure without city support.",
+      "fullStatement": "Rockridge daily life cannot be neglected while its commercial corridors generate tax revenue without municipal backing. Street trade is busy, but constituent sentiment is slipping under unaddressed housing pressure and quiet storefront strains. District 7 is ordering a formal commercial corridor assessment and housing impact review through the City Auditor and Economic Development staff. We will not throw unmonitored appropriations at the problem or treat Rockridge as an afterthought; we require verifiable baseline data on commercial leases, small business retention, and neighborhood service demand before legislative action.",
+      "disposition": "statement",
+      "actionAsked": "Execute a formal commercial corridor and housing pressure assessment for Rockridge with published audit findings.",
+      "tone": "concerned-fiscal",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-114-council_d7-002",
+      "type": "statement",
+      "topic": "Temescal Merchant Resilience and Health Center Audit Oversight",
+      "initiative": "Temescal Community Health Center",
+      "decision": "Attribute Temescal's positive sentiment to frontline shopkeepers and healthcare staff while maintaining strict quarterly clinical verification benchmarks on the facility's remaining operational allocation.",
+      "quote": "Temescal's success belongs to the merchants weathering slow trade, not City Hall rhetoric, and health center dollars must prove clinical intake.",
+      "fullStatement": "Temescal's lifted sentiment belongs squarely to the independent merchants operating through slow foot traffic and the clinic workers delivering essential care on the ground—not to administrative rhetoric. As the second quarterly audit cycle proceeds for the Temescal Community Health Center, District 7 is ensuring every cent of the remaining $16,615,384.60 ties directly to verified patient intakes and measurable outcomes across Temescal, Rockridge, and KONO. Public health investment demands rigorous operational auditing, not unverified claims of success.",
+      "disposition": "statement",
+      "actionAsked": "Enforce verified quarterly intake reporting for the Temescal Community Health Center against its remaining operational budget.",
+      "tone": "data-sharp",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-114-council_d7-003",
+      "type": "statement",
+      "topic": "Downtown Economic Revitalization Fiscal Triggers",
+      "initiative": "Downtown Economic Revitalization",
+      "decision": "Condition District 7 support for docketing the $15 million downtown authorization on binding fiscal triggers, a concrete Uptown timeline, and transit accountability.",
+      "quote": "No check clears for fifteen million dollars without performance triggers, hard milestones, and an immediate audit mechanism.",
+      "fullStatement": "If the administration brings the fifteen million dollar Downtown Economic Revitalization proposal to the floor, it will do so with hard audit triggers and performance benchmarks firmly attached. District 7 will not approve an open-ended authorization without verifiable commercial milestones, a binding Uptown timeline, and transit access accountability. Public capital demands public return. We will support placing this measure on the voting docket only on the condition that funding tranches release strictly upon certified economic performance, protecting Oakland taxpayers from open checkbook governance.",
+      "disposition": "statement",
+      "actionAsked": "Attach binding fiscal triggers, performance audit milestones, and an Uptown implementation timeline to the INIT-008 authorization docket.",
+      "tone": "process-demanding",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    }
+  ]
+}

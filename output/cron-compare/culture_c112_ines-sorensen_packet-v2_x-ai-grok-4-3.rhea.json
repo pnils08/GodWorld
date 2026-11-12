@@ -1,0 +1,71 @@
+{
+  "draft": "output/cron-compare/culture_c112_ines-sorensen_packet-v2_x-ai-grok-4-3.md",
+  "cycle": "112",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "a4034759bce9826c4f2298a4bb33cfcdc492889d550b4768e77d41747193d8ab",
+  "pass": true,
+  "advisory": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All four citizen quotes match exact packet provenance and citizen profile attributions match ledger canon.",
+  "review": {
+    "profileId": "ines-voices-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "ines-voices-v1",
+    "packageVersion": "INES-VOICES-1",
+    "manifestId": "AM-81d57279b81a",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Bobby Chen-Ramirez",
+      "Dmitri Soto",
+      "Elena Soria Dominguez",
+      "Keisha Ramos",
+      "Omar Amici"
+    ],
+    "unverified": [
+      "Baylight Redevelopment",
+      "Baylight Redevelopment Authority",
+      "Health Center Project Director",
+      "Transit Hub Planning Lead"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0113,
+  "durationMs": 8311,
+  "parseError": false,
+  "ranAt": "2026-10-24T16:15:48.986Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 300",
+    "words": 508,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "a4034759bce9826c4f2298a4bb33cfcdc492889d550b4768e77d41747193d8ab",
+    "costUsd": 0.0016
+  }
+}

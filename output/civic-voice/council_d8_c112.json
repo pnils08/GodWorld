@@ -1,0 +1,28 @@
+{
+  "office": "council_d8",
+  "cycle": 112,
+  "speaker": "Nina Chen",
+  "cascadeSummary": "District 8 advances the $2.5 million Commercial Stabilization for Grand Lake ordinance through committee, establishing transparent disbursement schedules and mandatory audit criteria to provide immediate relief. Concurrently, we demand administrative parity and scheduled municipal maintenance reviews for Adams Point to reverse commercial slowdown and depressed neighborhood sentiment.",
+  "statements": [
+    {
+      "statementId": "STMT-112-council_d8-001",
+      "type": "vote_statement",
+      "topic": "Commercial Stabilization for Grand Lake Ordinance",
+      "initiative": "Commercial Stabilization for Grand Lake",
+      "decision": "Vote YES to advance the $2.5 million Commercial Stabilization for Grand Lake ordinance with mandatory disbursement milestones and audit protocols.",
+      "quote": "A stabilization fund only works if the procedural plumbing is sound—we are locking in transparent disbursement milestones to ensure Grand Lake merchants receive real, auditable relief.",
+      "fullStatement": "District 8 votes YES to advance the $2.5 million Commercial Stabilization for Grand Lake ordinance out of committee. While Grand Lake's street trade remains busy thanks to our resilient local merchant community, storefronts require concrete municipal backing to maintain stability. We have incorporated rigorous eligibility benchmarks, mandatory reporting cycles, and strict audit protocols into the legislative text. Delivering this funding on schedule fulfills our commitment to sound fiscal governance and provides our retail corridors the reliable support they need.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-112-council_d8-002",
+      "type": "policy_statement",
+      "topic": "Adams Point Commercial Corridor Relief and Maintenance Parity",
+      "initiative": null,
+      "decision": "Direct the City Administrator and Planning Department to extend commercial stabilization protocols and scheduled municipal maintenance audits to Adams Point.",
+      "quote": "Adams Point cannot be left behind while trade slows—we demand immediate administrative parity and documented municipal maintenance schedules.",
+      "fullStatement": "Adams Point is facing sluggish commercial trade and declining neighborhood sentiment that requires prompt, disciplined administrative follow-through. Following the clear evidence at Lake Merritt—where scheduled municipal maintenance and active community volunteer efforts have sustained trade—I am formally directing city staff to apply those same operational standards to Adams Point. Commercial corridors do not recover on good intentions; they recover through verified municipal services, clean public ways, and structured merchant stabilization.",
+      "trackerUpdates": {}
+    }
+  ]
+}

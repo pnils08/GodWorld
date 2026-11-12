@@ -1,37 +1,39 @@
 {
-  "ranAt": "2026-10-31T17:03:10.897Z",
-  "cycle": 113,
+  "ranAt": "2026-11-07T18:02:45.534Z",
+  "cycle": 114,
   "reportComplete": 26,
   "candidates": [
-    "civic_c113_lila-mezran_packet-v2",
-    "culture_c113_maria-keen_packet-v2",
-    "sports_c113_p-slayer_packet-v2"
+    "civic_c114_luis-navarro_packet-v2",
+    "culture_c114_mason-ortega_packet-v2",
+    "sports_c114_selena-grant_packet-v2"
   ],
   "retried": [
     {
-      "stem": "civic_c113_lila-mezran_packet-v2",
+      "stem": "civic_c114_luis-navarro_packet-v2",
       "desk": "civic",
-      "persona": "lila-mezran",
+      "persona": "luis-navarro",
       "ok": true,
       "errorMessage": null,
       "staged": true
     },
     {
-      "stem": "culture_c113_maria-keen_packet-v2",
+      "stem": "culture_c114_mason-ortega_packet-v2",
       "desk": "culture",
-      "persona": "maria-keen",
+      "persona": "mason-ortega",
       "ok": true,
       "errorMessage": null,
-      "staged": true
+      "staged": false
     },
     {
-      "stem": "sports_c113_p-slayer_packet-v2",
+      "stem": "sports_c114_selena-grant_packet-v2",
       "desk": "sports",
-      "persona": "p-slayer",
+      "persona": "selena-grant",
       "ok": true,
       "errorMessage": null,
       "staged": true
     }
   ],
-  "stillUncovered": []
+  "stillUncovered": [
+    "culture_c114_mason-ortega_packet-v2"
+  ]
 }

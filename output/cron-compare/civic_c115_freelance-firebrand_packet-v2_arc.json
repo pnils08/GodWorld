@@ -1,0 +1,27 @@
+{
+  "status": "arc-seed",
+  "cycle": "115",
+  "desk": "civic",
+  "persona": "freelance-firebrand",
+  "hood": "KONO",
+  "quotes": [
+    {
+      "pop": "POP-01214",
+      "name": "Priya Raghunathan",
+      "quote": "I've noticed that KONO is getting busier. Retail is busy and events are drawing crowds. We're also getting new households moving into the neighborhood."
+    },
+    {
+      "pop": "POP-00276",
+      "name": "Dmitri Soto",
+      "quote": "I haven't really seen any decay around here. KONO's been bustling, to be honest. Retail's busy, events are drawing crowds, and we're getting new households moving in. It's all pretty positive from where I'm standing."
+    },
+    {
+      "pop": "POP-00796",
+      "name": "Dank Abara",
+      "quote": "I've heard people talking about KONO neighborhood decay, and to be honest, it's something that's on my mind. As a waiter, I see a lot of new faces coming into San Antonio, and it feels like the neighborhood is changing. I've heard some folks say that KONO is struggling, but I don't really know the specifics. I just know that around here, people are talking about it."
+    }
+  ],
+  "claim": "I've noticed that KONO is getting busier. Retail is busy and events are drawing crowds. We're also getting new households moving into the neighborhood.",
+  "src": "citizenVoice PRESS c115",
+  "ranAt": "2026-11-11T19:20:50.686Z"
+}

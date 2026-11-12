@@ -1,0 +1,105 @@
+{
+  "draft": "output/cron-compare/civic_c113_luis-navarro_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "113",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "25f8a2295e11937eeb9c9ac9f50f5fb57b56dac79352ed283a644d4f1344b89e",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes match exact interview and civic statements verbatim; vote math, citizen profiles, and initiative tracking align with ground truth.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "luis-investigation-record-v1",
+    "packageVersion": "LUIS-LEP2-2",
+    "manifestId": "AM-71e32f0033bf",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "48",
+          "2.1",
+          "83",
+          "6",
+          "107",
+          "109",
+          "110",
+          "111",
+          "112",
+          "115"
+        ]
+      },
+      {
+        "code": "UNAPPROVED_QUOTE",
+        "values": [
+          "passed.",
+          "three cycles without advancing",
+          "on schedule."
+        ]
+      },
+      {
+        "code": "INVESTIGATION_EPISTEMIC_OVERREACH",
+        "values": [
+          "I looked",
+          "no record"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Denise Carter",
+      "Elliott Crane",
+      "Janae Rivers",
+      "Leonard Tran",
+      "Marcus Webb",
+      "Nina Chen",
+      "Ramon Vega",
+      "Rose Delgado",
+      "Terrence Mobley",
+      "Warren Ashford"
+    ],
+    "unverified": [
+      "Final Council Vote",
+      "Someone Downtown"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 2,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0098,
+  "durationMs": 5611,
+  "parseError": false,
+  "ranAt": "2026-10-27T23:15:33.851Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 400",
+    "words": 655,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "25f8a2295e11937eeb9c9ac9f50f5fb57b56dac79352ed283a644d4f1344b89e",
+    "costUsd": 0.0015
+  }
+}

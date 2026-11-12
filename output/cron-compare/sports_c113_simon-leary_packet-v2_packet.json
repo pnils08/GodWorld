@@ -1,0 +1,675 @@
+{
+  "stage": "report",
+  "desk": "sports",
+  "cycle": "113",
+  "persona": "simon-leary",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Simon Leary",
+    "popid": "POP-00016"
+  },
+  "assignment": {
+    "story": {
+      "angle": "The Oaks record is 2-0.",
+      "label": "The Oaks record is 2-0.",
+      "hookLine": "The Oaks record is 2-0.",
+      "kind": "long-view-signal",
+      "hood": "Uptown",
+      "popids": [
+        "POP-01023",
+        "POP-01027",
+        "POP-01022"
+      ],
+      "citizens": [
+        "Adash Stanley (POP-01023)",
+        "Austin Reaves (POP-01027)",
+        "Wilson Shepard (POP-01022)"
+      ],
+      "ref": "world_summary_c113.md ## Sports",
+      "cycle": 113
+    }
+  },
+  "angle": "output/cron-compare/sports_c113_simon-leary_packet-v2_angle.json",
+  "quotesRequested": 3,
+  "quotesLanded": 2,
+  "quotes": [
+    {
+      "pop": "POP-01023",
+      "name": "Adash Stanley",
+      "quote": "When the role changes, the record doesn't care who's carrying it. It just sits there at 2-0 and asks the next guy to keep it honest. For me, that means showing up the same way I always have — steady, ready, not making it about me. The continuity is in the work, not the title.",
+      "disp": "steady, hard to shake; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"When the role changes, the record doesn't care who's carrying it. It just sits there at 2-0 and asks the next guy to keep it honest. For me, that means showing up the same way I always have — steady, ready, not making it about me. The continuity is in the work, not the title.\",\n  \"fact_ids\": [\"F-1b1ab64b18fd\", \"F-b604c81bd368\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-1b1ab64b18fd",
+          "F-b604c81bd368"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01023-9d9fc62ca4",
+        "authoredQuote": true,
+        "publishableQuote": "When the role changes, the record doesn't care who's carrying it. It just sits there at 2-0 and asks the next guy to keep it honest. For me, that means showing up the same way I always have — steady, ready, not making it about me. The continuity is in the work, not the title."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01023",
+          "name": "Adash Stanley",
+          "role": "PG / The Oaks",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Simon Leary",
+          "question": "When the role changes, what does the continuity of the record ask of you personally? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "long-view-signal",
+          "hood": "Uptown",
+          "focus": "The structural interpretation of a role change inside a sustained 2-0 record—what it means for continuity when the load-bearing pieces shift.",
+          "src": "world_summary_c113.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Adash Stanley — PG / The Oaks",
+          "evidence": [
+            {
+              "id": "EV-d7527e1ca7",
+              "src": "world_summary_c113.md ## Sports",
+              "text": "The Oaks record is 2-0."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks record is 2-0.",
+            "src": "world_summary_c113.md ## Sports",
+            "id": "F-1b1ab64b18fd"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks have won 2 straight.",
+            "src": "world_summary_c113.md ## Sports",
+            "id": "F-b604c81bd368"
+          },
+          {
+            "t": "FACT",
+            "text": "Adash Stanley — PG / The Oaks",
+            "src": "Simulation_Ledger profile for POP-01023",
+            "id": "F-1164a6e4fd0d"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01027",
+      "name": "Austin Reaves",
+      "quote": "Look, 2-0 feels good, don't get me wrong. But I've been around long enough to know a record doesn't hold the building up. It's the guys inside it. We're still figuring out who we are out there — roles, rotations, all that. The structure shifting? That's just part of the game. You don't carry the weight by pretending everything's locked in. You carry it by showing up, doing your job, and trusting the guys next to you. That's what I'm doing. That's all I can do.",
+      "disp": "a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "{\"answer\":\"quote\",\"quote\":\"Look, 2-0 feels good, don't get me wrong. But I've been around long enough to know a record doesn't hold the building up. It's the guys inside it. We're still figuring out who we are out there — roles, rotations, all that. The structure shifting? That's just part of the game. You don't carry the weight by pretending everything's locked in. You carry it by showing up, doing your job, and trusting the guys next to you. That's what I'm doing. That's all I can do.\",\"fact_ids\":[\"F-1b1ab64b18fd\",\"F-b604c81bd368\"],\"basis\":\"lived-context\",\"unverifiedLead\":null,\"abstain_reason\":null}",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-1b1ab64b18fd",
+          "F-b604c81bd368"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01027-f91c74d89e",
+        "authoredQuote": true,
+        "publishableQuote": "Look, 2-0 feels good, don't get me wrong. But I've been around long enough to know a record doesn't hold the building up. It's the guys inside it. We're still figuring out who we are out there — roles, rotations, all that. The structure shifting? That's just part of the game. You don't carry the weight by pretending everything's locked in. You carry it by showing up, doing your job, and trusting the guys next to you. That's what I'm doing. That's all I can do."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01027",
+          "name": "Austin Reaves",
+          "role": "SG / The Oaks",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Simon Leary",
+          "question": "How do you carry the weight of a perfect start when the structure around you is shifting? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "long-view-signal",
+          "hood": "Uptown",
+          "focus": "The structural interpretation of a role change inside a sustained 2-0 record—what it means for continuity when the load-bearing pieces shift.",
+          "src": "world_summary_c113.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Austin Reaves — SG / The Oaks",
+          "evidence": [
+            {
+              "id": "EV-84f1b77489",
+              "src": "world_summary_c113.md ## Sports",
+              "text": "The Oaks record is 2-0."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks record is 2-0.",
+            "src": "world_summary_c113.md ## Sports",
+            "id": "F-1b1ab64b18fd"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks have won 2 straight.",
+            "src": "world_summary_c113.md ## Sports",
+            "id": "F-b604c81bd368"
+          },
+          {
+            "t": "FACT",
+            "text": "Austin Reaves — SG / The Oaks",
+            "src": "Simulation_Ledger profile for POP-01027",
+            "id": "F-d653907c94cf"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-01023",
+      "name": "Adash Stanley",
+      "quote": "When the role changes, the record doesn't care who's carrying it. It just sits there at 2-0 and asks the next guy to keep it honest. For me, that means showing up the same way I always have — steady, ready, not making it about me. The continuity is in the work, not the title.",
+      "disp": "steady, hard to shake; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"When the role changes, the record doesn't care who's carrying it. It just sits there at 2-0 and asks the next guy to keep it honest. For me, that means showing up the same way I always have — steady, ready, not making it about me. The continuity is in the work, not the title.\",\n  \"fact_ids\": [\"F-1b1ab64b18fd\", \"F-b604c81bd368\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-1b1ab64b18fd",
+          "F-b604c81bd368"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01023-9d9fc62ca4",
+        "authoredQuote": true,
+        "publishableQuote": "When the role changes, the record doesn't care who's carrying it. It just sits there at 2-0 and asks the next guy to keep it honest. For me, that means showing up the same way I always have — steady, ready, not making it about me. The continuity is in the work, not the title."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01023",
+          "name": "Adash Stanley",
+          "role": "PG / The Oaks",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Simon Leary",
+          "question": "When the role changes, what does the continuity of the record ask of you personally? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "long-view-signal",
+          "hood": "Uptown",
+          "focus": "The structural interpretation of a role change inside a sustained 2-0 record—what it means for continuity when the load-bearing pieces shift.",
+          "src": "world_summary_c113.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Adash Stanley — PG / The Oaks",
+          "evidence": [
+            {
+              "id": "EV-d7527e1ca7",
+              "src": "world_summary_c113.md ## Sports",
+              "text": "The Oaks record is 2-0."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks record is 2-0.",
+            "src": "world_summary_c113.md ## Sports",
+            "id": "F-1b1ab64b18fd"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks have won 2 straight.",
+            "src": "world_summary_c113.md ## Sports",
+            "id": "F-b604c81bd368"
+          },
+          {
+            "t": "FACT",
+            "text": "Adash Stanley — PG / The Oaks",
+            "src": "Simulation_Ledger profile for POP-01023",
+            "id": "F-1164a6e4fd0d"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01027",
+      "name": "Austin Reaves",
+      "quote": "Look, 2-0 feels good, don't get me wrong. But I've been around long enough to know a record doesn't hold the building up. It's the guys inside it. We're still figuring out who we are out there — roles, rotations, all that. The structure shifting? That's just part of the game. You don't carry the weight by pretending everything's locked in. You carry it by showing up, doing your job, and trusting the guys next to you. That's what I'm doing. That's all I can do.",
+      "disp": "a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "{\"answer\":\"quote\",\"quote\":\"Look, 2-0 feels good, don't get me wrong. But I've been around long enough to know a record doesn't hold the building up. It's the guys inside it. We're still figuring out who we are out there — roles, rotations, all that. The structure shifting? That's just part of the game. You don't carry the weight by pretending everything's locked in. You carry it by showing up, doing your job, and trusting the guys next to you. That's what I'm doing. That's all I can do.\",\"fact_ids\":[\"F-1b1ab64b18fd\",\"F-b604c81bd368\"],\"basis\":\"lived-context\",\"unverifiedLead\":null,\"abstain_reason\":null}",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-1b1ab64b18fd",
+          "F-b604c81bd368"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01027-f91c74d89e",
+        "authoredQuote": true,
+        "publishableQuote": "Look, 2-0 feels good, don't get me wrong. But I've been around long enough to know a record doesn't hold the building up. It's the guys inside it. We're still figuring out who we are out there — roles, rotations, all that. The structure shifting? That's just part of the game. You don't carry the weight by pretending everything's locked in. You carry it by showing up, doing your job, and trusting the guys next to you. That's what I'm doing. That's all I can do."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01027",
+          "name": "Austin Reaves",
+          "role": "SG / The Oaks",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Simon Leary",
+          "question": "How do you carry the weight of a perfect start when the structure around you is shifting? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "long-view-signal",
+          "hood": "Uptown",
+          "focus": "The structural interpretation of a role change inside a sustained 2-0 record—what it means for continuity when the load-bearing pieces shift.",
+          "src": "world_summary_c113.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Austin Reaves — SG / The Oaks",
+          "evidence": [
+            {
+              "id": "EV-84f1b77489",
+              "src": "world_summary_c113.md ## Sports",
+              "text": "The Oaks record is 2-0."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks record is 2-0.",
+            "src": "world_summary_c113.md ## Sports",
+            "id": "F-1b1ab64b18fd"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks have won 2 straight.",
+            "src": "world_summary_c113.md ## Sports",
+            "id": "F-b604c81bd368"
+          },
+          {
+            "t": "FACT",
+            "text": "Austin Reaves — SG / The Oaks",
+            "src": "Simulation_Ledger profile for POP-01027",
+            "id": "F-d653907c94cf"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01022",
+      "name": "Wilson Shepard",
+      "quote": null,
+      "disp": "a real fan, plans around games",
+      "recorded": false,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: answer must be quote|abstain",
+      "raw": "```json\n{\n  \"answer\": \"Look, 2-0 is 2-0, and I'm not going to pretend that doesn't feel good. But I've been around this game long enough to know a record is just a snapshot. The real question is whether the foundation holds when you have to swap out a piece you thought was permanent. That's the part that keeps me up. It's like that closet I reorganized last week — I found something I'd given up on, right in a corner I'd walked past a hundred times. The structure looked the same from the outside, but what was holding it together had shifted. Same with this team. The wins are real, but I'm watching how the guys adjust when the load-bearing roles change. That's where the season actually gets decided.\",\n  \"fact_ids\": [\"F-1b1ab64b18fd\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": [\"Possible roster decision at left field involving Morton, Reyna, and Rosado that Paulson is weighing\"],\n  \"abstain_reason\": null\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01022",
+          "name": "Wilson Shepard",
+          "role": "Head Coach, Oakland Oaks",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Simon Leary",
+          "question": "What does it mean to keep a record intact while the load-bearing pieces underneath change? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "long-view-signal",
+          "hood": "Uptown",
+          "focus": "The structural interpretation of a role change inside a sustained 2-0 record—what it means for continuity when the load-bearing pieces shift.",
+          "src": "world_summary_c113.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Wilson Shepard — Head Coach, Oakland Oaks",
+          "evidence": [
+            {
+              "id": "EV-8f1b9acedb",
+              "src": "world_summary_c113.md ## Sports",
+              "text": "The Oaks record is 2-0."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C113",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-876f95b5eb98"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks record is 2-0.",
+            "src": "world_summary_c113.md ## Sports",
+            "id": "F-1b1ab64b18fd"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks have won 2 straight.",
+            "src": "world_summary_c113.md ## Sports",
+            "id": "F-b604c81bd368"
+          },
+          {
+            "t": "FACT",
+            "text": "Wilson Shepard — Head Coach, Oakland Oaks",
+            "src": "Simulation_Ledger profile for POP-01022",
+            "id": "F-bf4cd0f8b3df"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C9, Winter, holiday=none",
+            "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+            "id": "F-ab9d6786094e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-10-29T18:16:58.691Z"
+}

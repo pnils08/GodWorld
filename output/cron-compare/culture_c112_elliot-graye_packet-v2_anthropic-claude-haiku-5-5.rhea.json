@@ -1,0 +1,69 @@
+{
+  "draft": "output/cron-compare/culture_c112_elliot-graye_packet-v2_anthropic-claude-haiku-5-5.md",
+  "cycle": "112",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "979a2e55773350a1791cc162869038e7ac7baebed81de246f56c2a3d17ddb1e2",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All citizen identities, verbatim quotes, and faith institution mappings strictly match ground truth and packet provenance.",
+  "review": {
+    "profileId": "graye-faith-ground-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "graye-faith-ground-v1",
+    "packageVersion": "GRAYE-LEP2-1",
+    "manifestId": "AM-89803dfafc0a",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Amir Delia",
+      "Eunice Marston",
+      "Imie Calero"
+    ],
+    "unverified": [
+      "Bay Pure Land Buddhist",
+      "Esperanza Parish",
+      "Lake Merritt Mindfulness Sangha",
+      "Living Word",
+      "Telegraph Presbyterian Fellowship"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0104,
+  "durationMs": 7344,
+  "parseError": false,
+  "ranAt": "2026-10-22T23:15:28.140Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 708,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "979a2e55773350a1791cc162869038e7ac7baebed81de246f56c2a3d17ddb1e2",
+    "costUsd": 0.0013
+  }
+}

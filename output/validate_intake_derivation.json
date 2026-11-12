@@ -1,0 +1,3268 @@
+{
+  "fixture": [
+    {
+      "name": "Maria Vega",
+      "popId": "POP-99001",
+      "nbhd": "Fruitvale",
+      "age": 34,
+      "profile": {
+        "RoleType": "Plumber",
+        "EducationLevel": "masters",
+        "Gender": "female",
+        "YearsInCareer": 5.8,
+        "DebtLevel": 0,
+        "NetWorth": 65000,
+        "_careerStage": "mid",
+        "_income": 112000,
+        "_neighborhood": "Fruitvale"
+      }
+    },
+    {
+      "name": "Tobias Wing",
+      "popId": "POP-99002",
+      "nbhd": "Rockridge",
+      "age": 67,
+      "profile": {
+        "RoleType": "Electrician",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 45,
+        "DebtLevel": 0,
+        "NetWorth": 2342000,
+        "_careerStage": "retired",
+        "_income": 118000,
+        "_neighborhood": "Rockridge"
+      }
+    },
+    {
+      "name": "Kevin Park",
+      "popId": "POP-99003",
+      "nbhd": "Jack London",
+      "age": 22,
+      "profile": {
+        "RoleType": "Food Truck Operator",
+        "EducationLevel": "associates",
+        "Gender": "male",
+        "YearsInCareer": 1.3,
+        "DebtLevel": 6,
+        "NetWorth": 16000,
+        "_careerStage": "early",
+        "_income": 75000,
+        "_neighborhood": "Jack London"
+      }
+    }
+  ],
+  "sweep": [
+    {
+      "seed": "Sweep|Citizen|POP-80000",
+      "age": 18,
+      "nbhd": "Temescal",
+      "profile": {
+        "RoleType": "Sourdough Baker",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 0,
+        "DebtLevel": 6,
+        "NetWorth": 10000,
+        "_careerStage": "early",
+        "_income": 56000,
+        "_neighborhood": "Temescal"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80001",
+      "age": 25,
+      "nbhd": "Fruitvale",
+      "profile": {
+        "RoleType": "Driver",
+        "EducationLevel": "associates",
+        "Gender": "male",
+        "YearsInCareer": 5.9,
+        "DebtLevel": 5,
+        "NetWorth": 50000,
+        "_careerStage": "mid",
+        "_income": 50000,
+        "_neighborhood": "Fruitvale"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80002",
+      "age": 32,
+      "nbhd": "West Oakland",
+      "profile": {
+        "RoleType": "Barista",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 7.2,
+        "DebtLevel": 4,
+        "NetWorth": 25000,
+        "_careerStage": "mid",
+        "_income": 46000,
+        "_neighborhood": "West Oakland"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80003",
+      "age": 39,
+      "nbhd": "Rockridge",
+      "profile": {
+        "RoleType": "AI Safety Researcher (Anthropic)",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 6.4,
+        "DebtLevel": 2,
+        "NetWorth": 1261000,
+        "_careerStage": "mid",
+        "_income": 320000,
+        "_neighborhood": "Rockridge"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80004",
+      "age": 46,
+      "nbhd": "Jack London",
+      "profile": {
+        "RoleType": "Trade Union Representative",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 20.3,
+        "DebtLevel": 3,
+        "NetWorth": 506000,
+        "_careerStage": "senior",
+        "_income": 118000,
+        "_neighborhood": "Jack London"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80005",
+      "age": 53,
+      "nbhd": "Lake Merritt",
+      "profile": {
+        "RoleType": "Nonprofit Executive Director",
+        "EducationLevel": "doctorate",
+        "Gender": "female",
+        "YearsInCareer": 22.2,
+        "DebtLevel": 3,
+        "NetWorth": 856000,
+        "_careerStage": "mid",
+        "_income": 118000,
+        "_neighborhood": "Lake Merritt"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80006",
+      "age": 60,
+      "nbhd": "Adams Point",
+      "profile": {
+        "RoleType": "Janitor",
+        "EducationLevel": "masters",
+        "Gender": "male",
+        "YearsInCareer": 37.2,
+        "DebtLevel": 3,
+        "NetWorth": 383000,
+        "_careerStage": "senior",
+        "_income": 50000,
+        "_neighborhood": "Adams Point"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80007",
+      "age": 67,
+      "nbhd": "Chinatown",
+      "profile": {
+        "RoleType": "Janitor",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 38.9,
+        "DebtLevel": 3,
+        "NetWorth": 364000,
+        "_careerStage": "retired",
+        "_income": 50000,
+        "_neighborhood": "Chinatown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80008",
+      "age": 74,
+      "nbhd": "Downtown",
+      "profile": {
+        "RoleType": "Community Organizer",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 42.9,
+        "DebtLevel": 2,
+        "NetWorth": 1778000,
+        "_careerStage": "retired",
+        "_income": 62000,
+        "_neighborhood": "Downtown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80009",
+      "age": 21,
+      "nbhd": "Uptown",
+      "profile": {
+        "RoleType": "Social Worker",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 2.3,
+        "DebtLevel": 3,
+        "NetWorth": 14000,
+        "_careerStage": "early",
+        "_income": 88000,
+        "_neighborhood": "Uptown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80010",
+      "age": 28,
+      "nbhd": "Temescal",
+      "profile": {
+        "RoleType": "Hair Stylist",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 5.5,
+        "DebtLevel": 3,
+        "NetWorth": 39000,
+        "_careerStage": "mid",
+        "_income": 56000,
+        "_neighborhood": "Temescal"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80011",
+      "age": 35,
+      "nbhd": "Fruitvale",
+      "profile": {
+        "RoleType": "Plumber",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 4.7,
+        "DebtLevel": 2,
+        "NetWorth": 318000,
+        "_careerStage": "mid",
+        "_income": 112000,
+        "_neighborhood": "Fruitvale"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80012",
+      "age": 42,
+      "nbhd": "West Oakland",
+      "profile": {
+        "RoleType": "Muralist",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 9.2,
+        "DebtLevel": 5,
+        "NetWorth": 295000,
+        "_careerStage": "mid",
+        "_income": 62000,
+        "_neighborhood": "West Oakland"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80013",
+      "age": 49,
+      "nbhd": "Rockridge",
+      "profile": {
+        "RoleType": "Plumber",
+        "EducationLevel": "doctorate",
+        "Gender": "female",
+        "YearsInCareer": 13.5,
+        "DebtLevel": 2,
+        "NetWorth": 568000,
+        "_careerStage": "mid",
+        "_income": 112000,
+        "_neighborhood": "Rockridge"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80014",
+      "age": 56,
+      "nbhd": "Jack London",
+      "profile": {
+        "RoleType": "Photographer",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 32.6,
+        "DebtLevel": 5,
+        "NetWorth": 1040000,
+        "_careerStage": "senior",
+        "_income": 56000,
+        "_neighborhood": "Jack London"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80015",
+      "age": 63,
+      "nbhd": "Lake Merritt",
+      "profile": {
+        "RoleType": "Senior Pastor / Faith Leader",
+        "EducationLevel": "bachelors",
+        "Gender": "male",
+        "YearsInCareer": 22.5,
+        "DebtLevel": 3,
+        "NetWorth": 283000,
+        "_careerStage": "senior",
+        "_income": 82000,
+        "_neighborhood": "Lake Merritt"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80016",
+      "age": 70,
+      "nbhd": "Adams Point",
+      "profile": {
+        "RoleType": "Actor",
+        "EducationLevel": "trade-cert",
+        "Gender": "male",
+        "YearsInCareer": 36.7,
+        "DebtLevel": 3,
+        "NetWorth": 878000,
+        "_careerStage": "retired",
+        "_income": 56000,
+        "_neighborhood": "Adams Point"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80017",
+      "age": 77,
+      "nbhd": "Chinatown",
+      "profile": {
+        "RoleType": "Tai Chi Instructor",
+        "EducationLevel": "bachelors",
+        "Gender": "male",
+        "YearsInCareer": 42.7,
+        "DebtLevel": 2,
+        "NetWorth": 1228000,
+        "_careerStage": "retired",
+        "_income": 62000,
+        "_neighborhood": "Chinatown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80018",
+      "age": 24,
+      "nbhd": "Downtown",
+      "profile": {
+        "RoleType": "Cybersecurity Analyst",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 3.7,
+        "DebtLevel": 5,
+        "NetWorth": 23000,
+        "_careerStage": "early",
+        "_income": 178000,
+        "_neighborhood": "Downtown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80019",
+      "age": 31,
+      "nbhd": "Uptown",
+      "profile": {
+        "RoleType": "Theater Director",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 2.6,
+        "DebtLevel": 4,
+        "NetWorth": 138000,
+        "_careerStage": "mid",
+        "_income": 72000,
+        "_neighborhood": "Uptown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80020",
+      "age": 38,
+      "nbhd": "Temescal",
+      "profile": {
+        "RoleType": "Electrician",
+        "EducationLevel": "masters",
+        "Gender": "female",
+        "YearsInCareer": 8.3,
+        "DebtLevel": 1,
+        "NetWorth": 328000,
+        "_careerStage": "mid",
+        "_income": 118000,
+        "_neighborhood": "Temescal"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80021",
+      "age": 45,
+      "nbhd": "Fruitvale",
+      "profile": {
+        "RoleType": "Mechanic",
+        "EducationLevel": "bachelors",
+        "Gender": "female",
+        "YearsInCareer": 11,
+        "DebtLevel": 2,
+        "NetWorth": 135000,
+        "_careerStage": "mid",
+        "_income": 80000,
+        "_neighborhood": "Fruitvale"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80022",
+      "age": 52,
+      "nbhd": "West Oakland",
+      "profile": {
+        "RoleType": "Construction laborer",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 8.5,
+        "DebtLevel": 2,
+        "NetWorth": 1061000,
+        "_careerStage": "senior",
+        "_income": 66000,
+        "_neighborhood": "West Oakland"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80023",
+      "age": 59,
+      "nbhd": "Rockridge",
+      "profile": {
+        "RoleType": "School Principal",
+        "EducationLevel": "bachelors",
+        "Gender": "female",
+        "YearsInCareer": 21.7,
+        "DebtLevel": 1,
+        "NetWorth": 1311000,
+        "_careerStage": "senior",
+        "_income": 158000,
+        "_neighborhood": "Rockridge"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80024",
+      "age": 66,
+      "nbhd": "Jack London",
+      "profile": {
+        "RoleType": "Food Truck Operator",
+        "EducationLevel": "bachelors",
+        "Gender": "female",
+        "YearsInCareer": 36.3,
+        "DebtLevel": 3,
+        "NetWorth": 1281000,
+        "_careerStage": "retired",
+        "_income": 75000,
+        "_neighborhood": "Jack London"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80025",
+      "age": 73,
+      "nbhd": "Lake Merritt",
+      "profile": {
+        "RoleType": "Paramedic",
+        "EducationLevel": "doctorate",
+        "Gender": "male",
+        "YearsInCareer": 37.4,
+        "DebtLevel": 1,
+        "NetWorth": 1395000,
+        "_careerStage": "retired",
+        "_income": 105000,
+        "_neighborhood": "Lake Merritt"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80026",
+      "age": 20,
+      "nbhd": "Adams Point",
+      "profile": {
+        "RoleType": "AI Safety Researcher (Anthropic)",
+        "EducationLevel": "associates",
+        "Gender": "male",
+        "YearsInCareer": 0.9,
+        "DebtLevel": 4,
+        "NetWorth": 17000,
+        "_careerStage": "early",
+        "_income": 320000,
+        "_neighborhood": "Adams Point"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80027",
+      "age": 27,
+      "nbhd": "Chinatown",
+      "profile": {
+        "RoleType": "Mechanic",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 7.9,
+        "DebtLevel": 5,
+        "NetWorth": 142000,
+        "_careerStage": "mid",
+        "_income": 80000,
+        "_neighborhood": "Chinatown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80028",
+      "age": 34,
+      "nbhd": "Downtown",
+      "profile": {
+        "RoleType": "911 Dispatcher",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 7.8,
+        "DebtLevel": 5,
+        "NetWorth": 117000,
+        "_careerStage": "mid",
+        "_income": 92000,
+        "_neighborhood": "Downtown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80029",
+      "age": 41,
+      "nbhd": "Uptown",
+      "profile": {
+        "RoleType": "Mechanic",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 7.7,
+        "DebtLevel": 3,
+        "NetWorth": 308000,
+        "_careerStage": "senior",
+        "_income": 80000,
+        "_neighborhood": "Uptown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80030",
+      "age": 48,
+      "nbhd": "Temescal",
+      "profile": {
+        "RoleType": "Independent Bookstore Owner",
+        "EducationLevel": "bachelors",
+        "Gender": "female",
+        "YearsInCareer": 8.4,
+        "DebtLevel": 3,
+        "NetWorth": 161000,
+        "_careerStage": "mid",
+        "_income": 68000,
+        "_neighborhood": "Temescal"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80031",
+      "age": 55,
+      "nbhd": "Fruitvale",
+      "profile": {
+        "RoleType": "Physical Therapist",
+        "EducationLevel": "masters",
+        "Gender": "male",
+        "YearsInCareer": 20,
+        "DebtLevel": 0,
+        "NetWorth": 823000,
+        "_careerStage": "senior",
+        "_income": 135000,
+        "_neighborhood": "Fruitvale"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80032",
+      "age": 62,
+      "nbhd": "West Oakland",
+      "profile": {
+        "RoleType": "Acupuncturist",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 35.9,
+        "DebtLevel": 3,
+        "NetWorth": 737000,
+        "_careerStage": "senior",
+        "_income": 82000,
+        "_neighborhood": "West Oakland"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80033",
+      "age": 69,
+      "nbhd": "Rockridge",
+      "profile": {
+        "RoleType": "Electrician",
+        "EducationLevel": "bachelors",
+        "Gender": "female",
+        "YearsInCareer": 37.8,
+        "DebtLevel": 2,
+        "NetWorth": 2588000,
+        "_careerStage": "retired",
+        "_income": 118000,
+        "_neighborhood": "Rockridge"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80034",
+      "age": 76,
+      "nbhd": "Jack London",
+      "profile": {
+        "RoleType": "Warehouse worker",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 38.2,
+        "DebtLevel": 2,
+        "NetWorth": 2076000,
+        "_careerStage": "retired",
+        "_income": 56000,
+        "_neighborhood": "Jack London"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80035",
+      "age": 23,
+      "nbhd": "Lake Merritt",
+      "profile": {
+        "RoleType": "Barista",
+        "EducationLevel": "associates",
+        "Gender": "male",
+        "YearsInCareer": 1.2,
+        "DebtLevel": 6,
+        "NetWorth": 6000,
+        "_careerStage": "early",
+        "_income": 46000,
+        "_neighborhood": "Lake Merritt"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80036",
+      "age": 30,
+      "nbhd": "Adams Point",
+      "profile": {
+        "RoleType": "BART Station Manager",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 7,
+        "DebtLevel": 2,
+        "NetWorth": 108000,
+        "_careerStage": "mid",
+        "_income": 120000,
+        "_neighborhood": "Adams Point"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80037",
+      "age": 37,
+      "nbhd": "Chinatown",
+      "profile": {
+        "RoleType": "Tai Chi Instructor",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 5.8,
+        "DebtLevel": 4,
+        "NetWorth": 325000,
+        "_careerStage": "mid",
+        "_income": 62000,
+        "_neighborhood": "Chinatown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80038",
+      "age": 44,
+      "nbhd": "Downtown",
+      "profile": {
+        "RoleType": "Cybersecurity Analyst",
+        "EducationLevel": "bachelors",
+        "Gender": "female",
+        "YearsInCareer": 9.1,
+        "DebtLevel": 3,
+        "NetWorth": 612000,
+        "_careerStage": "senior",
+        "_income": 178000,
+        "_neighborhood": "Downtown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80039",
+      "age": 51,
+      "nbhd": "Uptown",
+      "profile": {
+        "RoleType": "Theater Director",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 15.5,
+        "DebtLevel": 4,
+        "NetWorth": 199000,
+        "_careerStage": "mid",
+        "_income": 72000,
+        "_neighborhood": "Uptown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80040",
+      "age": 58,
+      "nbhd": "Temescal",
+      "profile": {
+        "RoleType": "Herbalist",
+        "EducationLevel": "masters",
+        "Gender": "male",
+        "YearsInCareer": 33.9,
+        "DebtLevel": 2,
+        "NetWorth": 420000,
+        "_careerStage": "senior",
+        "_income": 55000,
+        "_neighborhood": "Temescal"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80041",
+      "age": 65,
+      "nbhd": "Fruitvale",
+      "profile": {
+        "RoleType": "School Principal",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 41.8,
+        "DebtLevel": 0,
+        "NetWorth": 649000,
+        "_careerStage": "retired",
+        "_income": 158000,
+        "_neighborhood": "Fruitvale"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80042",
+      "age": 72,
+      "nbhd": "West Oakland",
+      "profile": {
+        "RoleType": "Plumber",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 41.9,
+        "DebtLevel": 0,
+        "NetWorth": 2770000,
+        "_careerStage": "retired",
+        "_income": 112000,
+        "_neighborhood": "West Oakland"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80043",
+      "age": 19,
+      "nbhd": "Rockridge",
+      "profile": {
+        "RoleType": "Pharmacist",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 0.5,
+        "DebtLevel": 2,
+        "NetWorth": 21000,
+        "_careerStage": "early",
+        "_income": 158000,
+        "_neighborhood": "Rockridge"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80044",
+      "age": 26,
+      "nbhd": "Jack London",
+      "profile": {
+        "RoleType": "Trade Union Representative",
+        "EducationLevel": "trade-cert",
+        "Gender": "male",
+        "YearsInCareer": 4.5,
+        "DebtLevel": 3,
+        "NetWorth": 123000,
+        "_careerStage": "mid",
+        "_income": 118000,
+        "_neighborhood": "Jack London"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80045",
+      "age": 33,
+      "nbhd": "Lake Merritt",
+      "profile": {
+        "RoleType": "Actress",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 12,
+        "DebtLevel": 2,
+        "NetWorth": 57000,
+        "_careerStage": "mid",
+        "_income": 56000,
+        "_neighborhood": "Lake Merritt"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80046",
+      "age": 40,
+      "nbhd": "Adams Point",
+      "profile": {
+        "RoleType": "Plumber",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 8.4,
+        "DebtLevel": 1,
+        "NetWorth": 159000,
+        "_careerStage": "mid",
+        "_income": 112000,
+        "_neighborhood": "Adams Point"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80047",
+      "age": 47,
+      "nbhd": "Chinatown",
+      "profile": {
+        "RoleType": "Plumber",
+        "EducationLevel": "bachelors",
+        "Gender": "female",
+        "YearsInCareer": 12.7,
+        "DebtLevel": 0,
+        "NetWorth": 664000,
+        "_careerStage": "mid",
+        "_income": 112000,
+        "_neighborhood": "Chinatown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80048",
+      "age": 54,
+      "nbhd": "Downtown",
+      "profile": {
+        "RoleType": "Environmental Consultant",
+        "EducationLevel": "masters",
+        "Gender": "female",
+        "YearsInCareer": 7.8,
+        "DebtLevel": 2,
+        "NetWorth": 699000,
+        "_careerStage": "senior",
+        "_income": 135000,
+        "_neighborhood": "Downtown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80049",
+      "age": 61,
+      "nbhd": "Uptown",
+      "profile": {
+        "RoleType": "Line Cook",
+        "EducationLevel": "trade-cert",
+        "Gender": "female",
+        "YearsInCareer": 25.9,
+        "DebtLevel": 5,
+        "NetWorth": 654000,
+        "_careerStage": "senior",
+        "_income": 52000,
+        "_neighborhood": "Uptown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80050",
+      "age": 68,
+      "nbhd": "Temescal",
+      "profile": {
+        "RoleType": "Independent Bookstore Owner",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 42.3,
+        "DebtLevel": 0,
+        "NetWorth": 809000,
+        "_careerStage": "retired",
+        "_income": 68000,
+        "_neighborhood": "Temescal"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80051",
+      "age": 75,
+      "nbhd": "Fruitvale",
+      "profile": {
+        "RoleType": "Barbershop Owner",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 43.7,
+        "DebtLevel": 1,
+        "NetWorth": 1160000,
+        "_careerStage": "retired",
+        "_income": 82000,
+        "_neighborhood": "Fruitvale"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80052",
+      "age": 22,
+      "nbhd": "West Oakland",
+      "profile": {
+        "RoleType": "AI Safety Researcher (Anthropic)",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 2.1,
+        "DebtLevel": 1,
+        "NetWorth": 43000,
+        "_careerStage": "early",
+        "_income": 320000,
+        "_neighborhood": "West Oakland"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80053",
+      "age": 29,
+      "nbhd": "Rockridge",
+      "profile": {
+        "RoleType": "STEM Program Coordinator",
+        "EducationLevel": "trade-cert",
+        "Gender": "male",
+        "YearsInCareer": 9.1,
+        "DebtLevel": 4,
+        "NetWorth": 133000,
+        "_careerStage": "mid",
+        "_income": 78000,
+        "_neighborhood": "Rockridge"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80054",
+      "age": 36,
+      "nbhd": "Jack London",
+      "profile": {
+        "RoleType": "Security Guard",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 12.4,
+        "DebtLevel": 5,
+        "NetWorth": 106000,
+        "_careerStage": "mid",
+        "_income": 55000,
+        "_neighborhood": "Jack London"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80055",
+      "age": 43,
+      "nbhd": "Lake Merritt",
+      "profile": {
+        "RoleType": "Medical Social Worker",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 16.7,
+        "DebtLevel": 3,
+        "NetWorth": 190000,
+        "_careerStage": "senior",
+        "_income": 85000,
+        "_neighborhood": "Lake Merritt"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80056",
+      "age": 50,
+      "nbhd": "Adams Point",
+      "profile": {
+        "RoleType": "Mover",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 7.9,
+        "DebtLevel": 5,
+        "NetWorth": 615000,
+        "_careerStage": "senior",
+        "_income": 52000,
+        "_neighborhood": "Adams Point"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80057",
+      "age": 57,
+      "nbhd": "Chinatown",
+      "profile": {
+        "RoleType": "Plumber",
+        "EducationLevel": "bachelors",
+        "Gender": "female",
+        "YearsInCareer": 22.3,
+        "DebtLevel": 2,
+        "NetWorth": 754000,
+        "_careerStage": "senior",
+        "_income": 112000,
+        "_neighborhood": "Chinatown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80058",
+      "age": 64,
+      "nbhd": "Downtown",
+      "profile": {
+        "RoleType": "Civil Rights Attorney",
+        "EducationLevel": "doctorate",
+        "Gender": "female",
+        "YearsInCareer": 36.1,
+        "DebtLevel": 3,
+        "NetWorth": 472000,
+        "_careerStage": "senior",
+        "_income": 135000,
+        "_neighborhood": "Downtown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80059",
+      "age": 71,
+      "nbhd": "Uptown",
+      "profile": {
+        "RoleType": "After-School Program Director",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 42.6,
+        "DebtLevel": 2,
+        "NetWorth": 2001000,
+        "_careerStage": "retired",
+        "_income": 78000,
+        "_neighborhood": "Uptown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80060",
+      "age": 18,
+      "nbhd": "Temescal",
+      "profile": {
+        "RoleType": "HVAC Technician",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 0,
+        "DebtLevel": 3,
+        "NetWorth": 9000,
+        "_careerStage": "early",
+        "_income": 105000,
+        "_neighborhood": "Temescal"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80061",
+      "age": 25,
+      "nbhd": "Fruitvale",
+      "profile": {
+        "RoleType": "Firefighter",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 1.7,
+        "DebtLevel": 2,
+        "NetWorth": 221000,
+        "_careerStage": "mid",
+        "_income": 148000,
+        "_neighborhood": "Fruitvale"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80062",
+      "age": 32,
+      "nbhd": "West Oakland",
+      "profile": {
+        "RoleType": "Community Organizer",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 9.2,
+        "DebtLevel": 2,
+        "NetWorth": 122000,
+        "_careerStage": "mid",
+        "_income": 62000,
+        "_neighborhood": "West Oakland"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80063",
+      "age": 39,
+      "nbhd": "Rockridge",
+      "profile": {
+        "RoleType": "Electrician",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 14.6,
+        "DebtLevel": 1,
+        "NetWorth": 486000,
+        "_careerStage": "mid",
+        "_income": 118000,
+        "_neighborhood": "Rockridge"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80064",
+      "age": 46,
+      "nbhd": "Jack London",
+      "profile": {
+        "RoleType": "BBQ Pitmaster",
+        "EducationLevel": "masters",
+        "Gender": "female",
+        "YearsInCareer": 23,
+        "DebtLevel": 2,
+        "NetWorth": 241000,
+        "_careerStage": "senior",
+        "_income": 82000,
+        "_neighborhood": "Jack London"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80065",
+      "age": 53,
+      "nbhd": "Lake Merritt",
+      "profile": {
+        "RoleType": "Bookkeeper",
+        "EducationLevel": "bachelors",
+        "Gender": "female",
+        "YearsInCareer": 18.7,
+        "DebtLevel": 2,
+        "NetWorth": 920000,
+        "_careerStage": "mid",
+        "_income": 68000,
+        "_neighborhood": "Lake Merritt"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80066",
+      "age": 60,
+      "nbhd": "Adams Point",
+      "profile": {
+        "RoleType": "Graphic Designer",
+        "EducationLevel": "bachelors",
+        "Gender": "female",
+        "YearsInCareer": 34.2,
+        "DebtLevel": 2,
+        "NetWorth": 1108000,
+        "_careerStage": "senior",
+        "_income": 75000,
+        "_neighborhood": "Adams Point"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80067",
+      "age": 67,
+      "nbhd": "Chinatown",
+      "profile": {
+        "RoleType": "Electrician",
+        "EducationLevel": "masters",
+        "Gender": "female",
+        "YearsInCareer": 42.2,
+        "DebtLevel": 0,
+        "NetWorth": 982000,
+        "_careerStage": "retired",
+        "_income": 118000,
+        "_neighborhood": "Chinatown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80068",
+      "age": 74,
+      "nbhd": "Downtown",
+      "profile": {
+        "RoleType": "Community Organizer",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 41.5,
+        "DebtLevel": 0,
+        "NetWorth": 1005000,
+        "_careerStage": "retired",
+        "_income": 62000,
+        "_neighborhood": "Downtown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80069",
+      "age": 21,
+      "nbhd": "Uptown",
+      "profile": {
+        "RoleType": "Mover",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 0.7,
+        "DebtLevel": 4,
+        "NetWorth": 13000,
+        "_careerStage": "early",
+        "_income": 52000,
+        "_neighborhood": "Uptown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80070",
+      "age": 28,
+      "nbhd": "Temescal",
+      "profile": {
+        "RoleType": "Ceramicist",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 4.5,
+        "DebtLevel": 5,
+        "NetWorth": 67000,
+        "_careerStage": "mid",
+        "_income": 56000,
+        "_neighborhood": "Temescal"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80071",
+      "age": 35,
+      "nbhd": "Fruitvale",
+      "profile": {
+        "RoleType": "Physical Therapist",
+        "EducationLevel": "bachelors",
+        "Gender": "male",
+        "YearsInCareer": 6.3,
+        "DebtLevel": 4,
+        "NetWorth": 462000,
+        "_careerStage": "mid",
+        "_income": 135000,
+        "_neighborhood": "Fruitvale"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80072",
+      "age": 42,
+      "nbhd": "West Oakland",
+      "profile": {
+        "RoleType": "Master Electrician",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 19,
+        "DebtLevel": 2,
+        "NetWorth": 587000,
+        "_careerStage": "mid",
+        "_income": 135000,
+        "_neighborhood": "West Oakland"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80073",
+      "age": 49,
+      "nbhd": "Rockridge",
+      "profile": {
+        "RoleType": "Retail worker",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 17.5,
+        "DebtLevel": 5,
+        "NetWorth": 475000,
+        "_careerStage": "senior",
+        "_income": 45000,
+        "_neighborhood": "Rockridge"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80074",
+      "age": 56,
+      "nbhd": "Jack London",
+      "profile": {
+        "RoleType": "Dishwasher",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 9.7,
+        "DebtLevel": 3,
+        "NetWorth": 993000,
+        "_careerStage": "senior",
+        "_income": 44000,
+        "_neighborhood": "Jack London"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80075",
+      "age": 63,
+      "nbhd": "Lake Merritt",
+      "profile": {
+        "RoleType": "Medical Social Worker",
+        "EducationLevel": "associates",
+        "Gender": "female",
+        "YearsInCareer": 30.4,
+        "DebtLevel": 1,
+        "NetWorth": 806000,
+        "_careerStage": "senior",
+        "_income": 85000,
+        "_neighborhood": "Lake Merritt"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80076",
+      "age": 70,
+      "nbhd": "Adams Point",
+      "profile": {
+        "RoleType": "Paramedic",
+        "EducationLevel": "bachelors",
+        "Gender": "female",
+        "YearsInCareer": 41.9,
+        "DebtLevel": 1,
+        "NetWorth": 1731000,
+        "_careerStage": "retired",
+        "_income": 105000,
+        "_neighborhood": "Adams Point"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80077",
+      "age": 77,
+      "nbhd": "Chinatown",
+      "profile": {
+        "RoleType": "Musician",
+        "EducationLevel": "doctorate",
+        "Gender": "female",
+        "YearsInCareer": 44.1,
+        "DebtLevel": 3,
+        "NetWorth": 803000,
+        "_careerStage": "retired",
+        "_income": 56000,
+        "_neighborhood": "Chinatown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80078",
+      "age": 24,
+      "nbhd": "Downtown",
+      "profile": {
+        "RoleType": "Immigration Attorney",
+        "EducationLevel": "bachelors",
+        "Gender": "male",
+        "YearsInCareer": 3.1,
+        "DebtLevel": 4,
+        "NetWorth": 6000,
+        "_careerStage": "early",
+        "_income": 155000,
+        "_neighborhood": "Downtown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80079",
+      "age": 31,
+      "nbhd": "Uptown",
+      "profile": {
+        "RoleType": "Jazz Musician",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 10.4,
+        "DebtLevel": 4,
+        "NetWorth": 133000,
+        "_careerStage": "mid",
+        "_income": 55000,
+        "_neighborhood": "Uptown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80080",
+      "age": 38,
+      "nbhd": "Temescal",
+      "profile": {
+        "RoleType": "Maintenance tech",
+        "EducationLevel": "associates",
+        "Gender": "male",
+        "YearsInCareer": 6.3,
+        "DebtLevel": 1,
+        "NetWorth": 122000,
+        "_careerStage": "mid",
+        "_income": 66000,
+        "_neighborhood": "Temescal"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80081",
+      "age": 45,
+      "nbhd": "Fruitvale",
+      "profile": {
+        "RoleType": "Painter",
+        "EducationLevel": "doctorate",
+        "Gender": "male",
+        "YearsInCareer": 16,
+        "DebtLevel": 2,
+        "NetWorth": 459000,
+        "_careerStage": "mid",
+        "_income": 62000,
+        "_neighborhood": "Fruitvale"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80082",
+      "age": 52,
+      "nbhd": "West Oakland",
+      "profile": {
+        "RoleType": "Counselor",
+        "EducationLevel": "bachelors",
+        "Gender": "female",
+        "YearsInCareer": 7.7,
+        "DebtLevel": 2,
+        "NetWorth": 845000,
+        "_careerStage": "senior",
+        "_income": 66000,
+        "_neighborhood": "West Oakland"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80083",
+      "age": 59,
+      "nbhd": "Rockridge",
+      "profile": {
+        "RoleType": "Electrician",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 17.7,
+        "DebtLevel": 1,
+        "NetWorth": 925000,
+        "_careerStage": "senior",
+        "_income": 118000,
+        "_neighborhood": "Rockridge"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80084",
+      "age": 66,
+      "nbhd": "Jack London",
+      "profile": {
+        "RoleType": "Electrician",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 37.7,
+        "DebtLevel": 0,
+        "NetWorth": 2253000,
+        "_careerStage": "retired",
+        "_income": 118000,
+        "_neighborhood": "Jack London"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80085",
+      "age": 73,
+      "nbhd": "Lake Merritt",
+      "profile": {
+        "RoleType": "Actress",
+        "EducationLevel": "bachelors",
+        "Gender": "female",
+        "YearsInCareer": 43.7,
+        "DebtLevel": 0,
+        "NetWorth": 1852000,
+        "_careerStage": "retired",
+        "_income": 56000,
+        "_neighborhood": "Lake Merritt"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80086",
+      "age": 20,
+      "nbhd": "Adams Point",
+      "profile": {
+        "RoleType": "Carpet Installer",
+        "EducationLevel": "masters",
+        "Gender": "female",
+        "YearsInCareer": 1.1,
+        "DebtLevel": 4,
+        "NetWorth": 4000,
+        "_careerStage": "early",
+        "_income": 64000,
+        "_neighborhood": "Adams Point"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80087",
+      "age": 27,
+      "nbhd": "Chinatown",
+      "profile": {
+        "RoleType": "Musician",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 2.4,
+        "DebtLevel": 3,
+        "NetWorth": 56000,
+        "_careerStage": "mid",
+        "_income": 56000,
+        "_neighborhood": "Chinatown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80088",
+      "age": 34,
+      "nbhd": "Downtown",
+      "profile": {
+        "RoleType": "Senior Pastor / Faith Leader",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 6.2,
+        "DebtLevel": 3,
+        "NetWorth": 81000,
+        "_careerStage": "mid",
+        "_income": 82000,
+        "_neighborhood": "Downtown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80089",
+      "age": 41,
+      "nbhd": "Uptown",
+      "profile": {
+        "RoleType": "Port Worker",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 15.3,
+        "DebtLevel": 1,
+        "NetWorth": 355000,
+        "_careerStage": "senior",
+        "_income": 80000,
+        "_neighborhood": "Uptown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80090",
+      "age": 48,
+      "nbhd": "Temescal",
+      "profile": {
+        "RoleType": "Delivery driver",
+        "EducationLevel": "trade-cert",
+        "Gender": "male",
+        "YearsInCareer": 26.4,
+        "DebtLevel": 4,
+        "NetWorth": 257000,
+        "_careerStage": "mid",
+        "_income": 48000,
+        "_neighborhood": "Temescal"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80091",
+      "age": 55,
+      "nbhd": "Fruitvale",
+      "profile": {
+        "RoleType": "Disability Rights Advocate",
+        "EducationLevel": "bachelors",
+        "Gender": "male",
+        "YearsInCareer": 17,
+        "DebtLevel": 4,
+        "NetWorth": 539000,
+        "_careerStage": "senior",
+        "_income": 72000,
+        "_neighborhood": "Fruitvale"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80092",
+      "age": 62,
+      "nbhd": "West Oakland",
+      "profile": {
+        "RoleType": "Landscaper",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 15.8,
+        "DebtLevel": 5,
+        "NetWorth": 352000,
+        "_careerStage": "senior",
+        "_income": 54000,
+        "_neighborhood": "West Oakland"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80093",
+      "age": 69,
+      "nbhd": "Rockridge",
+      "profile": {
+        "RoleType": "IT Support Specialist",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 36.4,
+        "DebtLevel": 2,
+        "NetWorth": 2070000,
+        "_careerStage": "retired",
+        "_income": 80000,
+        "_neighborhood": "Rockridge"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80094",
+      "age": 76,
+      "nbhd": "Jack London",
+      "profile": {
+        "RoleType": "Creative Writing Teacher",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 39.6,
+        "DebtLevel": 3,
+        "NetWorth": 1720000,
+        "_careerStage": "retired",
+        "_income": 95000,
+        "_neighborhood": "Jack London"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80095",
+      "age": 23,
+      "nbhd": "Lake Merritt",
+      "profile": {
+        "RoleType": "Barista",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 1.2,
+        "DebtLevel": 4,
+        "NetWorth": 13000,
+        "_careerStage": "early",
+        "_income": 46000,
+        "_neighborhood": "Lake Merritt"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80096",
+      "age": 30,
+      "nbhd": "Adams Point",
+      "profile": {
+        "RoleType": "Herbalist",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 5,
+        "DebtLevel": 1,
+        "NetWorth": 73000,
+        "_careerStage": "mid",
+        "_income": 55000,
+        "_neighborhood": "Adams Point"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80097",
+      "age": 37,
+      "nbhd": "Chinatown",
+      "profile": {
+        "RoleType": "Plumber",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 7.7,
+        "DebtLevel": 2,
+        "NetWorth": 239000,
+        "_careerStage": "mid",
+        "_income": 112000,
+        "_neighborhood": "Chinatown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80098",
+      "age": 44,
+      "nbhd": "Downtown",
+      "profile": {
+        "RoleType": "City Building Inspector",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 21.5,
+        "DebtLevel": 1,
+        "NetWorth": 496000,
+        "_careerStage": "senior",
+        "_income": 96000,
+        "_neighborhood": "Downtown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80099",
+      "age": 51,
+      "nbhd": "Uptown",
+      "profile": {
+        "RoleType": "Jazz Musician",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 17.6,
+        "DebtLevel": 2,
+        "NetWorth": 928000,
+        "_careerStage": "mid",
+        "_income": 55000,
+        "_neighborhood": "Uptown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80100",
+      "age": 58,
+      "nbhd": "Temescal",
+      "profile": {
+        "RoleType": "Barista",
+        "EducationLevel": "bachelors",
+        "Gender": "male",
+        "YearsInCareer": 22.8,
+        "DebtLevel": 3,
+        "NetWorth": 806000,
+        "_careerStage": "senior",
+        "_income": 46000,
+        "_neighborhood": "Temescal"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80101",
+      "age": 65,
+      "nbhd": "Fruitvale",
+      "profile": {
+        "RoleType": "Mover",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 43.4,
+        "DebtLevel": 0,
+        "NetWorth": 1225000,
+        "_careerStage": "retired",
+        "_income": 52000,
+        "_neighborhood": "Fruitvale"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80102",
+      "age": 72,
+      "nbhd": "West Oakland",
+      "profile": {
+        "RoleType": "School Principal",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 42.6,
+        "DebtLevel": 0,
+        "NetWorth": 2363000,
+        "_careerStage": "retired",
+        "_income": 158000,
+        "_neighborhood": "West Oakland"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80103",
+      "age": 19,
+      "nbhd": "Rockridge",
+      "profile": {
+        "RoleType": "Quantum Computing Researcher",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 0.6,
+        "DebtLevel": 1,
+        "NetWorth": 55000,
+        "_careerStage": "early",
+        "_income": 285000,
+        "_neighborhood": "Rockridge"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80104",
+      "age": 26,
+      "nbhd": "Jack London",
+      "profile": {
+        "RoleType": "Line Cook",
+        "EducationLevel": "trade-cert",
+        "Gender": "female",
+        "YearsInCareer": 1.6,
+        "DebtLevel": 4,
+        "NetWorth": 37000,
+        "_careerStage": "mid",
+        "_income": 52000,
+        "_neighborhood": "Jack London"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80105",
+      "age": 33,
+      "nbhd": "Lake Merritt",
+      "profile": {
+        "RoleType": "Paramedic",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 9.2,
+        "DebtLevel": 1,
+        "NetWorth": 92000,
+        "_careerStage": "mid",
+        "_income": 105000,
+        "_neighborhood": "Lake Merritt"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80106",
+      "age": 40,
+      "nbhd": "Adams Point",
+      "profile": {
+        "RoleType": "Physical Therapist",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 16.3,
+        "DebtLevel": 1,
+        "NetWorth": 433000,
+        "_careerStage": "mid",
+        "_income": 135000,
+        "_neighborhood": "Adams Point"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80107",
+      "age": 47,
+      "nbhd": "Chinatown",
+      "profile": {
+        "RoleType": "Plumber",
+        "EducationLevel": "bachelors",
+        "Gender": "male",
+        "YearsInCareer": 9.3,
+        "DebtLevel": 3,
+        "NetWorth": 558000,
+        "_careerStage": "senior",
+        "_income": 112000,
+        "_neighborhood": "Chinatown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80108",
+      "age": 54,
+      "nbhd": "Downtown",
+      "profile": {
+        "RoleType": "Janitor",
+        "EducationLevel": "doctorate",
+        "Gender": "female",
+        "YearsInCareer": 18,
+        "DebtLevel": 4,
+        "NetWorth": 1025000,
+        "_careerStage": "mid",
+        "_income": 50000,
+        "_neighborhood": "Downtown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80109",
+      "age": 61,
+      "nbhd": "Uptown",
+      "profile": {
+        "RoleType": "Mover",
+        "EducationLevel": "masters",
+        "Gender": "male",
+        "YearsInCareer": 36.9,
+        "DebtLevel": 3,
+        "NetWorth": 268000,
+        "_careerStage": "senior",
+        "_income": 52000,
+        "_neighborhood": "Uptown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80110",
+      "age": 68,
+      "nbhd": "Temescal",
+      "profile": {
+        "RoleType": "Pastry Chef",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 42.2,
+        "DebtLevel": 1,
+        "NetWorth": 583000,
+        "_careerStage": "retired",
+        "_income": 78000,
+        "_neighborhood": "Temescal"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80111",
+      "age": 75,
+      "nbhd": "Fruitvale",
+      "profile": {
+        "RoleType": "Seamstress",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 41.5,
+        "DebtLevel": 0,
+        "NetWorth": 1997000,
+        "_careerStage": "retired",
+        "_income": 52000,
+        "_neighborhood": "Fruitvale"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80112",
+      "age": 22,
+      "nbhd": "West Oakland",
+      "profile": {
+        "RoleType": "Landscaper",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 3.5,
+        "DebtLevel": 4,
+        "NetWorth": 16000,
+        "_careerStage": "early",
+        "_income": 54000,
+        "_neighborhood": "West Oakland"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80113",
+      "age": 29,
+      "nbhd": "Rockridge",
+      "profile": {
+        "RoleType": "High School Science Teacher",
+        "EducationLevel": "doctorate",
+        "Gender": "female",
+        "YearsInCareer": 6.5,
+        "DebtLevel": 3,
+        "NetWorth": 93000,
+        "_careerStage": "mid",
+        "_income": 95000,
+        "_neighborhood": "Rockridge"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80114",
+      "age": 36,
+      "nbhd": "Jack London",
+      "profile": {
+        "RoleType": "Home Health Aide",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 13.9,
+        "DebtLevel": 3,
+        "NetWorth": 225000,
+        "_careerStage": "mid",
+        "_income": 58000,
+        "_neighborhood": "Jack London"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80115",
+      "age": 43,
+      "nbhd": "Lake Merritt",
+      "profile": {
+        "RoleType": "Mobile Clinic Nurse",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 18.7,
+        "DebtLevel": 0,
+        "NetWorth": 213000,
+        "_careerStage": "mid",
+        "_income": 160000,
+        "_neighborhood": "Lake Merritt"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80116",
+      "age": 50,
+      "nbhd": "Adams Point",
+      "profile": {
+        "RoleType": "singer",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 19.4,
+        "DebtLevel": 3,
+        "NetWorth": 1076000,
+        "_careerStage": "mid",
+        "_income": 56000,
+        "_neighborhood": "Adams Point"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80117",
+      "age": 57,
+      "nbhd": "Chinatown",
+      "profile": {
+        "RoleType": "Electrician",
+        "EducationLevel": "bachelors",
+        "Gender": "female",
+        "YearsInCareer": 34.6,
+        "DebtLevel": 4,
+        "NetWorth": 1333000,
+        "_careerStage": "senior",
+        "_income": 118000,
+        "_neighborhood": "Chinatown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80118",
+      "age": 64,
+      "nbhd": "Downtown",
+      "profile": {
+        "RoleType": "Immigration Attorney",
+        "EducationLevel": "bachelors",
+        "Gender": "female",
+        "YearsInCareer": 29.1,
+        "DebtLevel": 2,
+        "NetWorth": 1051000,
+        "_careerStage": "senior",
+        "_income": 155000,
+        "_neighborhood": "Downtown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80119",
+      "age": 71,
+      "nbhd": "Uptown",
+      "profile": {
+        "RoleType": "After-School Program Director",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 42.5,
+        "DebtLevel": 3,
+        "NetWorth": 958000,
+        "_careerStage": "retired",
+        "_income": 78000,
+        "_neighborhood": "Uptown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80120",
+      "age": 18,
+      "nbhd": "Temescal",
+      "profile": {
+        "RoleType": "Ceramicist",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 0,
+        "DebtLevel": 3,
+        "NetWorth": 10000,
+        "_careerStage": "early",
+        "_income": 56000,
+        "_neighborhood": "Temescal"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80121",
+      "age": 25,
+      "nbhd": "Fruitvale",
+      "profile": {
+        "RoleType": "Senior Pastor / Faith Leader",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 3.6,
+        "DebtLevel": 4,
+        "NetWorth": 97000,
+        "_careerStage": "mid",
+        "_income": 82000,
+        "_neighborhood": "Fruitvale"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80122",
+      "age": 32,
+      "nbhd": "West Oakland",
+      "profile": {
+        "RoleType": "Junior Accountant",
+        "EducationLevel": "masters",
+        "Gender": "female",
+        "YearsInCareer": 4.2,
+        "DebtLevel": 1,
+        "NetWorth": 122000,
+        "_careerStage": "mid",
+        "_income": 75000,
+        "_neighborhood": "West Oakland"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80123",
+      "age": 39,
+      "nbhd": "Rockridge",
+      "profile": {
+        "RoleType": "Plumber",
+        "EducationLevel": "associates",
+        "Gender": "female",
+        "YearsInCareer": 15.1,
+        "DebtLevel": 1,
+        "NetWorth": 736000,
+        "_careerStage": "mid",
+        "_income": 112000,
+        "_neighborhood": "Rockridge"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80124",
+      "age": 46,
+      "nbhd": "Jack London",
+      "profile": {
+        "RoleType": "Server",
+        "EducationLevel": "bachelors",
+        "Gender": "male",
+        "YearsInCareer": 17.8,
+        "DebtLevel": 2,
+        "NetWorth": 154000,
+        "_careerStage": "mid",
+        "_income": 50000,
+        "_neighborhood": "Jack London"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80125",
+      "age": 53,
+      "nbhd": "Lake Merritt",
+      "profile": {
+        "RoleType": "Nonprofit Executive Director",
+        "EducationLevel": "bachelors",
+        "Gender": "male",
+        "YearsInCareer": 30.9,
+        "DebtLevel": 1,
+        "NetWorth": 801000,
+        "_careerStage": "senior",
+        "_income": 118000,
+        "_neighborhood": "Lake Merritt"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80126",
+      "age": 60,
+      "nbhd": "Adams Point",
+      "profile": {
+        "RoleType": "Home Health Aide",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 19.9,
+        "DebtLevel": 2,
+        "NetWorth": 722000,
+        "_careerStage": "senior",
+        "_income": 58000,
+        "_neighborhood": "Adams Point"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80127",
+      "age": 67,
+      "nbhd": "Chinatown",
+      "profile": {
+        "RoleType": "Tai Chi Instructor",
+        "EducationLevel": "bachelors",
+        "Gender": "female",
+        "YearsInCareer": 42.9,
+        "DebtLevel": 0,
+        "NetWorth": 1698000,
+        "_careerStage": "retired",
+        "_income": 62000,
+        "_neighborhood": "Chinatown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80128",
+      "age": 74,
+      "nbhd": "Downtown",
+      "profile": {
+        "RoleType": "Security Guard",
+        "EducationLevel": "trade-cert",
+        "Gender": "female",
+        "YearsInCareer": 43.1,
+        "DebtLevel": 1,
+        "NetWorth": 2048000,
+        "_careerStage": "retired",
+        "_income": 55000,
+        "_neighborhood": "Downtown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80129",
+      "age": 21,
+      "nbhd": "Uptown",
+      "profile": {
+        "RoleType": "Street Photographer",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 1.8,
+        "DebtLevel": 3,
+        "NetWorth": 6000,
+        "_careerStage": "early",
+        "_income": 56000,
+        "_neighborhood": "Uptown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80130",
+      "age": 28,
+      "nbhd": "Temescal",
+      "profile": {
+        "RoleType": "Herbalist",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 2.7,
+        "DebtLevel": 6,
+        "NetWorth": 32000,
+        "_careerStage": "mid",
+        "_income": 55000,
+        "_neighborhood": "Temescal"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80131",
+      "age": 35,
+      "nbhd": "Fruitvale",
+      "profile": {
+        "RoleType": "Disability Rights Advocate",
+        "EducationLevel": "bachelors",
+        "Gender": "female",
+        "YearsInCareer": 6.6,
+        "DebtLevel": 4,
+        "NetWorth": 443000,
+        "_careerStage": "mid",
+        "_income": 72000,
+        "_neighborhood": "Fruitvale"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80132",
+      "age": 42,
+      "nbhd": "West Oakland",
+      "profile": {
+        "RoleType": "Master Electrician",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 10.4,
+        "DebtLevel": 3,
+        "NetWorth": 540000,
+        "_careerStage": "mid",
+        "_income": 135000,
+        "_neighborhood": "West Oakland"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80133",
+      "age": 49,
+      "nbhd": "Rockridge",
+      "profile": {
+        "RoleType": "AI Safety Researcher (Anthropic)",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 26.5,
+        "DebtLevel": 1,
+        "NetWorth": 829000,
+        "_careerStage": "mid",
+        "_income": 320000,
+        "_neighborhood": "Rockridge"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80134",
+      "age": 56,
+      "nbhd": "Jack London",
+      "profile": {
+        "RoleType": "Bakery Worker",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 19.1,
+        "DebtLevel": 1,
+        "NetWorth": 434000,
+        "_careerStage": "senior",
+        "_income": 48000,
+        "_neighborhood": "Jack London"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80135",
+      "age": 63,
+      "nbhd": "Lake Merritt",
+      "profile": {
+        "RoleType": "Senior Pastor / Faith Leader",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 14.2,
+        "DebtLevel": 3,
+        "NetWorth": 247000,
+        "_careerStage": "senior",
+        "_income": 82000,
+        "_neighborhood": "Lake Merritt"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80136",
+      "age": 70,
+      "nbhd": "Adams Point",
+      "profile": {
+        "RoleType": "Construction worker",
+        "EducationLevel": "bachelors",
+        "Gender": "female",
+        "YearsInCareer": 42.7,
+        "DebtLevel": 0,
+        "NetWorth": 1874000,
+        "_careerStage": "retired",
+        "_income": 66000,
+        "_neighborhood": "Adams Point"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80137",
+      "age": 77,
+      "nbhd": "Chinatown",
+      "profile": {
+        "RoleType": "Janitor",
+        "EducationLevel": "doctorate",
+        "Gender": "male",
+        "YearsInCareer": 41,
+        "DebtLevel": 2,
+        "NetWorth": 1524000,
+        "_careerStage": "retired",
+        "_income": 50000,
+        "_neighborhood": "Chinatown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80138",
+      "age": 24,
+      "nbhd": "Downtown",
+      "profile": {
+        "RoleType": "Janitor",
+        "EducationLevel": "bachelors",
+        "Gender": "female",
+        "YearsInCareer": 5.4,
+        "DebtLevel": 6,
+        "NetWorth": 11000,
+        "_careerStage": "early",
+        "_income": 50000,
+        "_neighborhood": "Downtown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80139",
+      "age": 31,
+      "nbhd": "Uptown",
+      "profile": {
+        "RoleType": "Theater Director",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 6,
+        "DebtLevel": 3,
+        "NetWorth": 59000,
+        "_careerStage": "mid",
+        "_income": 72000,
+        "_neighborhood": "Uptown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80140",
+      "age": 38,
+      "nbhd": "Temescal",
+      "profile": {
+        "RoleType": "Independent Bookstore Owner",
+        "EducationLevel": "bachelors",
+        "Gender": "male",
+        "YearsInCareer": 8.1,
+        "DebtLevel": 3,
+        "NetWorth": 272000,
+        "_careerStage": "mid",
+        "_income": 68000,
+        "_neighborhood": "Temescal"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80141",
+      "age": 45,
+      "nbhd": "Fruitvale",
+      "profile": {
+        "RoleType": "Community Health Worker",
+        "EducationLevel": "trade-cert",
+        "Gender": "female",
+        "YearsInCareer": 6.8,
+        "DebtLevel": 1,
+        "NetWorth": 356000,
+        "_careerStage": "mid",
+        "_income": 65000,
+        "_neighborhood": "Fruitvale"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80142",
+      "age": 52,
+      "nbhd": "West Oakland",
+      "profile": {
+        "RoleType": "Community Organizer",
+        "EducationLevel": "bachelors",
+        "Gender": "male",
+        "YearsInCareer": 18.1,
+        "DebtLevel": 3,
+        "NetWorth": 988000,
+        "_careerStage": "mid",
+        "_income": 62000,
+        "_neighborhood": "West Oakland"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80143",
+      "age": 59,
+      "nbhd": "Rockridge",
+      "profile": {
+        "RoleType": "After-school program aide",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 11.8,
+        "DebtLevel": 1,
+        "NetWorth": 231000,
+        "_careerStage": "senior",
+        "_income": 46000,
+        "_neighborhood": "Rockridge"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80144",
+      "age": 66,
+      "nbhd": "Jack London",
+      "profile": {
+        "RoleType": "Port Logistics Coordinator",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 37.4,
+        "DebtLevel": 0,
+        "NetWorth": 1173000,
+        "_careerStage": "retired",
+        "_income": 112000,
+        "_neighborhood": "Jack London"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80145",
+      "age": 73,
+      "nbhd": "Lake Merritt",
+      "profile": {
+        "RoleType": "Paramedic",
+        "EducationLevel": "bachelors",
+        "Gender": "female",
+        "YearsInCareer": 38.6,
+        "DebtLevel": 0,
+        "NetWorth": 1698000,
+        "_careerStage": "retired",
+        "_income": 105000,
+        "_neighborhood": "Lake Merritt"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80146",
+      "age": 20,
+      "nbhd": "Adams Point",
+      "profile": {
+        "RoleType": "After-School Program Director",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 1.7,
+        "DebtLevel": 4,
+        "NetWorth": 14000,
+        "_careerStage": "early",
+        "_income": 78000,
+        "_neighborhood": "Adams Point"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80147",
+      "age": 27,
+      "nbhd": "Chinatown",
+      "profile": {
+        "RoleType": "Plumber",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 4.4,
+        "DebtLevel": 2,
+        "NetWorth": 196000,
+        "_careerStage": "mid",
+        "_income": 112000,
+        "_neighborhood": "Chinatown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80148",
+      "age": 34,
+      "nbhd": "Downtown",
+      "profile": {
+        "RoleType": "Server",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 5.3,
+        "DebtLevel": 2,
+        "NetWorth": 30000,
+        "_careerStage": "mid",
+        "_income": 50000,
+        "_neighborhood": "Downtown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80149",
+      "age": 41,
+      "nbhd": "Uptown",
+      "profile": {
+        "RoleType": "Mechanic",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 17.3,
+        "DebtLevel": 2,
+        "NetWorth": 183000,
+        "_careerStage": "mid",
+        "_income": 80000,
+        "_neighborhood": "Uptown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80150",
+      "age": 48,
+      "nbhd": "Temescal",
+      "profile": {
+        "RoleType": "Herbalist",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 16.1,
+        "DebtLevel": 4,
+        "NetWorth": 495000,
+        "_careerStage": "senior",
+        "_income": 55000,
+        "_neighborhood": "Temescal"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80151",
+      "age": 55,
+      "nbhd": "Fruitvale",
+      "profile": {
+        "RoleType": "Transit Operator (AC Transit)",
+        "EducationLevel": "bachelors",
+        "Gender": "female",
+        "YearsInCareer": 30.3,
+        "DebtLevel": 4,
+        "NetWorth": 925000,
+        "_careerStage": "senior",
+        "_income": 85000,
+        "_neighborhood": "Fruitvale"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80152",
+      "age": 62,
+      "nbhd": "West Oakland",
+      "profile": {
+        "RoleType": "Licensed Plumber",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 17.6,
+        "DebtLevel": 3,
+        "NetWorth": 1106000,
+        "_careerStage": "senior",
+        "_income": 115000,
+        "_neighborhood": "West Oakland"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80153",
+      "age": 69,
+      "nbhd": "Rockridge",
+      "profile": {
+        "RoleType": "AI Safety Researcher (Anthropic)",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 38.1,
+        "DebtLevel": 1,
+        "NetWorth": 3079000,
+        "_careerStage": "retired",
+        "_income": 320000,
+        "_neighborhood": "Rockridge"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80154",
+      "age": 76,
+      "nbhd": "Jack London",
+      "profile": {
+        "RoleType": "Bakery Worker",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 35.5,
+        "DebtLevel": 2,
+        "NetWorth": 676000,
+        "_careerStage": "retired",
+        "_income": 48000,
+        "_neighborhood": "Jack London"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80155",
+      "age": 23,
+      "nbhd": "Lake Merritt",
+      "profile": {
+        "RoleType": "Senior Pastor / Faith Leader",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 2.6,
+        "DebtLevel": 6,
+        "NetWorth": 20000,
+        "_careerStage": "early",
+        "_income": 82000,
+        "_neighborhood": "Lake Merritt"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80156",
+      "age": 30,
+      "nbhd": "Adams Point",
+      "profile": {
+        "RoleType": "Senior Pastor / Faith Leader",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 3.6,
+        "DebtLevel": 3,
+        "NetWorth": 124000,
+        "_careerStage": "mid",
+        "_income": 82000,
+        "_neighborhood": "Adams Point"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80157",
+      "age": 37,
+      "nbhd": "Chinatown",
+      "profile": {
+        "RoleType": "Janitor",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 6.7,
+        "DebtLevel": 5,
+        "NetWorth": 331000,
+        "_careerStage": "mid",
+        "_income": 50000,
+        "_neighborhood": "Chinatown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80158",
+      "age": 44,
+      "nbhd": "Downtown",
+      "profile": {
+        "RoleType": "Janitor",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 12.1,
+        "DebtLevel": 3,
+        "NetWorth": 247000,
+        "_careerStage": "mid",
+        "_income": 50000,
+        "_neighborhood": "Downtown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80159",
+      "age": 51,
+      "nbhd": "Uptown",
+      "profile": {
+        "RoleType": "Theater Director",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 29.2,
+        "DebtLevel": 5,
+        "NetWorth": 369000,
+        "_careerStage": "mid",
+        "_income": 72000,
+        "_neighborhood": "Uptown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80160",
+      "age": 58,
+      "nbhd": "Temescal",
+      "profile": {
+        "RoleType": "Hair Stylist",
+        "EducationLevel": "doctorate",
+        "Gender": "female",
+        "YearsInCareer": 26.8,
+        "DebtLevel": 5,
+        "NetWorth": 685000,
+        "_careerStage": "senior",
+        "_income": 56000,
+        "_neighborhood": "Temescal"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80161",
+      "age": 65,
+      "nbhd": "Fruitvale",
+      "profile": {
+        "RoleType": "Server",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 37.7,
+        "DebtLevel": 1,
+        "NetWorth": 1629000,
+        "_careerStage": "retired",
+        "_income": 50000,
+        "_neighborhood": "Fruitvale"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80162",
+      "age": 72,
+      "nbhd": "West Oakland",
+      "profile": {
+        "RoleType": "Plumber",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 36,
+        "DebtLevel": 0,
+        "NetWorth": 2970000,
+        "_careerStage": "retired",
+        "_income": 112000,
+        "_neighborhood": "West Oakland"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80163",
+      "age": 19,
+      "nbhd": "Rockridge",
+      "profile": {
+        "RoleType": "Nurse aide",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 0.6,
+        "DebtLevel": 4,
+        "NetWorth": 5000,
+        "_careerStage": "early",
+        "_income": 56000,
+        "_neighborhood": "Rockridge"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80164",
+      "age": 26,
+      "nbhd": "Jack London",
+      "profile": {
+        "RoleType": "Dishwasher",
+        "EducationLevel": "associates",
+        "Gender": "female",
+        "YearsInCareer": 6.4,
+        "DebtLevel": 3,
+        "NetWorth": 65000,
+        "_careerStage": "mid",
+        "_income": 44000,
+        "_neighborhood": "Jack London"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80165",
+      "age": 33,
+      "nbhd": "Lake Merritt",
+      "profile": {
+        "RoleType": "Nonprofit Executive Director",
+        "EducationLevel": "doctorate",
+        "Gender": "male",
+        "YearsInCareer": 5.8,
+        "DebtLevel": 1,
+        "NetWorth": 136000,
+        "_careerStage": "mid",
+        "_income": 118000,
+        "_neighborhood": "Lake Merritt"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80166",
+      "age": 40,
+      "nbhd": "Adams Point",
+      "profile": {
+        "RoleType": "Electrician",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 9.6,
+        "DebtLevel": 1,
+        "NetWorth": 578000,
+        "_careerStage": "senior",
+        "_income": 118000,
+        "_neighborhood": "Adams Point"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80167",
+      "age": 47,
+      "nbhd": "Chinatown",
+      "profile": {
+        "RoleType": "Plumber",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 6.4,
+        "DebtLevel": 1,
+        "NetWorth": 703000,
+        "_careerStage": "mid",
+        "_income": 112000,
+        "_neighborhood": "Chinatown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80168",
+      "age": 54,
+      "nbhd": "Downtown",
+      "profile": {
+        "RoleType": "Immigration Attorney",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 21.6,
+        "DebtLevel": 1,
+        "NetWorth": 445000,
+        "_careerStage": "mid",
+        "_income": 155000,
+        "_neighborhood": "Downtown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80169",
+      "age": 61,
+      "nbhd": "Uptown",
+      "profile": {
+        "RoleType": "Social Worker",
+        "EducationLevel": "bachelors",
+        "Gender": "female",
+        "YearsInCareer": 13.7,
+        "DebtLevel": 2,
+        "NetWorth": 484000,
+        "_careerStage": "senior",
+        "_income": 88000,
+        "_neighborhood": "Uptown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80170",
+      "age": 68,
+      "nbhd": "Temescal",
+      "profile": {
+        "RoleType": "Electrician",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 43.6,
+        "DebtLevel": 1,
+        "NetWorth": 2914000,
+        "_careerStage": "retired",
+        "_income": 118000,
+        "_neighborhood": "Temescal"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80171",
+      "age": 75,
+      "nbhd": "Fruitvale",
+      "profile": {
+        "RoleType": "Senior Pastor / Faith Leader",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 39.6,
+        "DebtLevel": 2,
+        "NetWorth": 1592000,
+        "_careerStage": "retired",
+        "_income": 82000,
+        "_neighborhood": "Fruitvale"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80172",
+      "age": 22,
+      "nbhd": "West Oakland",
+      "profile": {
+        "RoleType": "Acupuncturist",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 3.3,
+        "DebtLevel": 6,
+        "NetWorth": 12000,
+        "_careerStage": "early",
+        "_income": 82000,
+        "_neighborhood": "West Oakland"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80173",
+      "age": 29,
+      "nbhd": "Rockridge",
+      "profile": {
+        "RoleType": "AI Safety Researcher (Anthropic)",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 7.5,
+        "DebtLevel": 3,
+        "NetWorth": 191000,
+        "_careerStage": "mid",
+        "_income": 320000,
+        "_neighborhood": "Rockridge"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80174",
+      "age": 36,
+      "nbhd": "Jack London",
+      "profile": {
+        "RoleType": "BBQ Pitmaster",
+        "EducationLevel": "doctorate",
+        "Gender": "male",
+        "YearsInCareer": 12.1,
+        "DebtLevel": 4,
+        "NetWorth": 129000,
+        "_careerStage": "mid",
+        "_income": 82000,
+        "_neighborhood": "Jack London"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80175",
+      "age": 43,
+      "nbhd": "Lake Merritt",
+      "profile": {
+        "RoleType": "Radiologic Technician",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 6.3,
+        "DebtLevel": 2,
+        "NetWorth": 465000,
+        "_careerStage": "mid",
+        "_income": 100000,
+        "_neighborhood": "Lake Merritt"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80176",
+      "age": 50,
+      "nbhd": "Adams Point",
+      "profile": {
+        "RoleType": "Nurse aide",
+        "EducationLevel": "masters",
+        "Gender": "female",
+        "YearsInCareer": 18.2,
+        "DebtLevel": 5,
+        "NetWorth": 860000,
+        "_careerStage": "mid",
+        "_income": 56000,
+        "_neighborhood": "Adams Point"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80177",
+      "age": 57,
+      "nbhd": "Chinatown",
+      "profile": {
+        "RoleType": "Senior Pastor / Faith Leader",
+        "EducationLevel": "bachelors",
+        "Gender": "male",
+        "YearsInCareer": 30.7,
+        "DebtLevel": 3,
+        "NetWorth": 672000,
+        "_careerStage": "senior",
+        "_income": 82000,
+        "_neighborhood": "Chinatown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80178",
+      "age": 64,
+      "nbhd": "Downtown",
+      "profile": {
+        "RoleType": "Parking garage manager",
+        "EducationLevel": "bachelors",
+        "Gender": "male",
+        "YearsInCareer": 16.9,
+        "DebtLevel": 1,
+        "NetWorth": 484000,
+        "_careerStage": "senior",
+        "_income": 65000,
+        "_neighborhood": "Downtown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80179",
+      "age": 71,
+      "nbhd": "Uptown",
+      "profile": {
+        "RoleType": "Coffee Roaster",
+        "EducationLevel": "bachelors",
+        "Gender": "female",
+        "YearsInCareer": 38.6,
+        "DebtLevel": 1,
+        "NetWorth": 553000,
+        "_careerStage": "retired",
+        "_income": 75000,
+        "_neighborhood": "Uptown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80180",
+      "age": 18,
+      "nbhd": "Temescal",
+      "profile": {
+        "RoleType": "Independent Bookstore Owner",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 0,
+        "DebtLevel": 4,
+        "NetWorth": 13000,
+        "_careerStage": "early",
+        "_income": 68000,
+        "_neighborhood": "Temescal"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80181",
+      "age": 25,
+      "nbhd": "Fruitvale",
+      "profile": {
+        "RoleType": "Disability Rights Advocate",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 4.6,
+        "DebtLevel": 3,
+        "NetWorth": 126000,
+        "_careerStage": "mid",
+        "_income": 72000,
+        "_neighborhood": "Fruitvale"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80182",
+      "age": 32,
+      "nbhd": "West Oakland",
+      "profile": {
+        "RoleType": "Construction laborer",
+        "EducationLevel": "bachelors",
+        "Gender": "female",
+        "YearsInCareer": 9.8,
+        "DebtLevel": 3,
+        "NetWorth": 25000,
+        "_careerStage": "mid",
+        "_income": 66000,
+        "_neighborhood": "West Oakland"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80183",
+      "age": 39,
+      "nbhd": "Rockridge",
+      "profile": {
+        "RoleType": "Server",
+        "EducationLevel": "masters",
+        "Gender": "female",
+        "YearsInCareer": 17.2,
+        "DebtLevel": 5,
+        "NetWorth": 167000,
+        "_careerStage": "mid",
+        "_income": 50000,
+        "_neighborhood": "Rockridge"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80184",
+      "age": 46,
+      "nbhd": "Jack London",
+      "profile": {
+        "RoleType": "Security Guard",
+        "EducationLevel": "bachelors",
+        "Gender": "male",
+        "YearsInCareer": 15.1,
+        "DebtLevel": 3,
+        "NetWorth": 250000,
+        "_careerStage": "senior",
+        "_income": 55000,
+        "_neighborhood": "Jack London"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80185",
+      "age": 53,
+      "nbhd": "Lake Merritt",
+      "profile": {
+        "RoleType": "Librarian",
+        "EducationLevel": "associates",
+        "Gender": "female",
+        "YearsInCareer": 28.6,
+        "DebtLevel": 4,
+        "NetWorth": 751000,
+        "_careerStage": "mid",
+        "_income": 82000,
+        "_neighborhood": "Lake Merritt"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80186",
+      "age": 60,
+      "nbhd": "Adams Point",
+      "profile": {
+        "RoleType": "BBQ Pitmaster",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 29.5,
+        "DebtLevel": 2,
+        "NetWorth": 939000,
+        "_careerStage": "senior",
+        "_income": 82000,
+        "_neighborhood": "Adams Point"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80187",
+      "age": 67,
+      "nbhd": "Chinatown",
+      "profile": {
+        "RoleType": "Plumber",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 41.5,
+        "DebtLevel": 0,
+        "NetWorth": 508000,
+        "_careerStage": "retired",
+        "_income": 112000,
+        "_neighborhood": "Chinatown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80188",
+      "age": 74,
+      "nbhd": "Downtown",
+      "profile": {
+        "RoleType": "City Building Inspector",
+        "EducationLevel": "bachelors",
+        "Gender": "female",
+        "YearsInCareer": 35.5,
+        "DebtLevel": 1,
+        "NetWorth": 689000,
+        "_careerStage": "retired",
+        "_income": 96000,
+        "_neighborhood": "Downtown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80189",
+      "age": 21,
+      "nbhd": "Uptown",
+      "profile": {
+        "RoleType": "Nurse aide",
+        "EducationLevel": "associates",
+        "Gender": "female",
+        "YearsInCareer": 1.8,
+        "DebtLevel": 4,
+        "NetWorth": 10000,
+        "_careerStage": "early",
+        "_income": 56000,
+        "_neighborhood": "Uptown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80190",
+      "age": 28,
+      "nbhd": "Temescal",
+      "profile": {
+        "RoleType": "Sourdough Baker",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 7.3,
+        "DebtLevel": 6,
+        "NetWorth": 129000,
+        "_careerStage": "mid",
+        "_income": 56000,
+        "_neighborhood": "Temescal"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80191",
+      "age": 35,
+      "nbhd": "Fruitvale",
+      "profile": {
+        "RoleType": "Mover",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 13.4,
+        "DebtLevel": 4,
+        "NetWorth": 347000,
+        "_careerStage": "mid",
+        "_income": 52000,
+        "_neighborhood": "Fruitvale"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80192",
+      "age": 42,
+      "nbhd": "West Oakland",
+      "profile": {
+        "RoleType": "Muralist",
+        "EducationLevel": "masters",
+        "Gender": "female",
+        "YearsInCareer": 13.6,
+        "DebtLevel": 4,
+        "NetWorth": 264000,
+        "_careerStage": "mid",
+        "_income": 62000,
+        "_neighborhood": "West Oakland"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80193",
+      "age": 49,
+      "nbhd": "Rockridge",
+      "profile": {
+        "RoleType": "Pediatric Nurse Practitioner",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 7.8,
+        "DebtLevel": 3,
+        "NetWorth": 270000,
+        "_careerStage": "mid",
+        "_income": 160000,
+        "_neighborhood": "Rockridge"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80194",
+      "age": 56,
+      "nbhd": "Jack London",
+      "profile": {
+        "RoleType": "Trade Union Representative",
+        "EducationLevel": "bachelors",
+        "Gender": "female",
+        "YearsInCareer": 25.6,
+        "DebtLevel": 3,
+        "NetWorth": 327000,
+        "_careerStage": "senior",
+        "_income": 118000,
+        "_neighborhood": "Jack London"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80195",
+      "age": 63,
+      "nbhd": "Lake Merritt",
+      "profile": {
+        "RoleType": "Paramedic",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 30.8,
+        "DebtLevel": 3,
+        "NetWorth": 1463000,
+        "_careerStage": "senior",
+        "_income": 105000,
+        "_neighborhood": "Lake Merritt"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80196",
+      "age": 70,
+      "nbhd": "Adams Point",
+      "profile": {
+        "RoleType": "Bartender",
+        "EducationLevel": "hs-diploma",
+        "Gender": "male",
+        "YearsInCareer": 44.1,
+        "DebtLevel": 2,
+        "NetWorth": 1470000,
+        "_careerStage": "retired",
+        "_income": 58000,
+        "_neighborhood": "Adams Point"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80197",
+      "age": 77,
+      "nbhd": "Chinatown",
+      "profile": {
+        "RoleType": "Senior Pastor / Faith Leader",
+        "EducationLevel": "hs-diploma",
+        "Gender": "female",
+        "YearsInCareer": 39.6,
+        "DebtLevel": 3,
+        "NetWorth": 1119000,
+        "_careerStage": "retired",
+        "_income": 82000,
+        "_neighborhood": "Chinatown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80198",
+      "age": 24,
+      "nbhd": "Downtown",
+      "profile": {
+        "RoleType": "Housing Authority Inspector",
+        "EducationLevel": "associates",
+        "Gender": "female",
+        "YearsInCareer": 4.8,
+        "DebtLevel": 5,
+        "NetWorth": 7000,
+        "_careerStage": "early",
+        "_income": 88000,
+        "_neighborhood": "Downtown"
+      }
+    },
+    {
+      "seed": "Sweep|Citizen|POP-80199",
+      "age": 31,
+      "nbhd": "Uptown",
+      "profile": {
+        "RoleType": "Nurse aide",
+        "EducationLevel": "bachelors",
+        "Gender": "female",
+        "YearsInCareer": 9.3,
+        "DebtLevel": 1,
+        "NetWorth": 30000,
+        "_careerStage": "mid",
+        "_income": 56000,
+        "_neighborhood": "Uptown"
+      }
+    }
+  ],
+  "distributions": {
+    "gn": {
+      "male": 84,
+      "female": 116
+    },
+    "distinctRoles": 90
+  },
+  "gates": {
+    "failures": [],
+    "passed": true
+  }
+}

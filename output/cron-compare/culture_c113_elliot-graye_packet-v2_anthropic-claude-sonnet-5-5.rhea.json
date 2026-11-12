@@ -1,0 +1,88 @@
+{
+  "draft": "output/cron-compare/culture_c113_elliot-graye_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "113",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "41839f23c7e774fb7f7a95bce5f0ee5874aa56f234c8bc989c82b46baccb75be",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes match interview records verbatim, canon faith mappings adhered to cleanly, and no real-world contamination or state contradictions found.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "graye-faith-ground-v1",
+    "packageVersion": "GRAYE-LEP2-2",
+    "manifestId": "AM-c7b0c7dd639e",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "38",
+          "1919",
+          "97",
+          "659",
+          "179",
+          "700"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Kenji Tanaka",
+      "Marcus Whitfield",
+      "Mark Aitken",
+      "Ophelia Brenner"
+    ],
+    "unverified": [
+      "Bay Pure Land",
+      "Bay Pure Land Buddhist",
+      "East Bay Harm Reduction",
+      "Eastside Hoopers Coalition",
+      "Esperanza Parish",
+      "Foothill Baptist Tabernacle",
+      "Foothill Baptist Tabernacle Food",
+      "Living Word",
+      "Senior Pastor",
+      "Telegraph Presbyterian Fellowship Downtown"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0105,
+  "durationMs": 5399,
+  "parseError": false,
+  "ranAt": "2026-10-29T23:15:36.164Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 928,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "41839f23c7e774fb7f7a95bce5f0ee5874aa56f234c8bc989c82b46baccb75be",
+    "costUsd": 0.0017
+  }
+}

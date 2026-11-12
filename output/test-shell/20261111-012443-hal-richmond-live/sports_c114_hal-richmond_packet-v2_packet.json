@@ -1,0 +1,43 @@
+{
+  "stage": "report",
+  "desk": "sports",
+  "cycle": "114",
+  "persona": "hal-richmond",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Hal Richmond",
+    "popid": "POP-00007"
+  },
+  "assignment": {
+    "story": {
+      "angle": "What the supplied C114 line card establishes, and what history remains unsupplied.",
+      "label": "A's — player-feature — supplied C114 line card",
+      "hookLine": "A's — player-feature — supplied C114 line card",
+      "hood": "Glenview",
+      "pulseClass": "era-door",
+      "team": "A's",
+      "eventKind": "player-feature",
+      "closingNote": "the line that holds",
+      "citizens": [
+        "Isley Kelley (POP-00019)",
+        "Darrin Davis (POP-00021)",
+        "Danny Horn (POP-00022)"
+      ],
+      "popids": [
+        "POP-00019",
+        "POP-00021",
+        "POP-00022"
+      ],
+      "ref": "world_summary_c114.md ## Sports",
+      "cycle": 114
+    }
+  },
+  "angle": "output/test-shell/20261111-012443-hal-richmond-live/sports_c114_hal-richmond_packet-v2_angle.json",
+  "quotesRequested": 0,
+  "quotesLanded": 0,
+  "quotes": [],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [],
+  "ranAt": "2026-11-05T19:16:07.681Z"
+}

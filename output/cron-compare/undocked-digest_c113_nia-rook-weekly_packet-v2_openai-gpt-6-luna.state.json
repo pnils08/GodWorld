@@ -1,0 +1,413 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-01076",
+    "name": "Nia Rook",
+    "role": "desk reporter",
+    "desk": "undocked-digest"
+  },
+  "task": {
+    "goal": "Cover the UNDOCKED week and its show history.",
+    "assignment": "UNDOCKED week: pilots who flew this cycle (Cristina Booker, Father Miguel, Daphne Stafford). Standings: Eric Taveras leads the board — rank #1, 20 achievement points, 1170 credits, 3 cycle(s) led, current streak 3. In the chair: Cristina Booker — Immigration Attorney; Father Miguel — Parish priest; Daphne Stafford — Home Health Aide.",
+    "approach": null,
+    "voice": null,
+    "writingMode": "SOURCE_BRIEF",
+    "reportingQuestion": "What did earlier approved UNDOCKED episodes record for the pilots in this week's assignment?"
+  },
+  "signal": {
+    "kind": "undocked-digest",
+    "hood": null,
+    "src": "undocked-week:weekly-c113",
+    "plan": {
+      "focus": "Cristina Booker's UNDOCKED performance",
+      "closeQuestion": "Can Cristina Booker maintain her current standing in the leaderboard?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00734",
+        "name": "Father Miguel",
+        "profile": "Father Miguel — UNDOCKED pilot",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00816",
+        "name": "Daphne Stafford",
+        "profile": "Daphne Stafford — UNDOCKED pilot",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00734-630b777827",
+        "pop": "POP-00734",
+        "name": "Father Miguel",
+        "quote": "I've flown on UNDOCKED a couple of times this week, and I have to say, my performance has been pretty steady. I've earned 5 points so far, and I'm 22nd out of 24. From what I've seen, Cristina Booker's performance was a bit more up and down - she earned 10 points on Monday, but didn't even get her ship moving on Thursday. I guess you could say I'm more consistent, but she's more explosive when she gets it right.",
+        "factIds": [
+          "F-5720f376a3b3",
+          "F-e1589dfe130d",
+          "F-e5905c8a4bf4",
+          "F-a9af913d0dcb"
+        ],
+        "src": "packet.W2[POP-00734]"
+      },
+      {
+        "id": "Q-POP-00816-27ba126c58",
+        "pop": "POP-00816",
+        "name": "Daphne Stafford",
+        "quote": "I'm 23rd out of 24 on the leaderboard, and I only got 5 points last week, so I guess my struggles didn't change the standings much. I mean, there were people above and below me who didn't do much better or worse.",
+        "factIds": [
+          "F-5037b3e1ecc5",
+          "F-73d67346d148"
+        ],
+        "src": "packet.W2[POP-00816]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Nia Rook",
+        "text": "Cristina Booker may be struggling with a specific aspect of UNDOCKED",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C113",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-876f95b5eb98"
+    },
+    {
+      "t": "FACT",
+      "text": "UNDOCKED week-in-review c113",
+      "src": "undocked-week:weekly-c113",
+      "id": "F-73d67346d148"
+    },
+    {
+      "t": "FACT",
+      "text": "Cristina Booker's Monday night on UNDOCKED: went through Alpha Centauri; took the Copper Requisition and Welcome to Sol Central contracts; earned First Steps (5 points) and Maiden Jump (5 points); came out even on credits; flew until the show's time ran out.",
+      "src": "undocked-week:weekly-c113",
+      "id": "F-e5905c8a4bf4"
+    },
+    {
+      "t": "FACT",
+      "text": "Cristina Booker's Thursday night on UNDOCKED: never got the ship moving.",
+      "src": "undocked-week:weekly-c113",
+      "id": "F-a9af913d0dcb"
+    },
+    {
+      "t": "FACT",
+      "text": "Father Miguel's Tuesday night on UNDOCKED: went through Lacaille 9352, Sirius, Sol and Alpha Centauri; took the Copper Requisition contract; earned Maiden Jump (5 points); came out even on credits; flew until the show's time ran out.",
+      "src": "undocked-week:weekly-c113",
+      "id": "F-5720f376a3b3"
+    },
+    {
+      "t": "FACT",
+      "text": "Father Miguel's Friday night on UNDOCKED: went through Sirius, Lacaille 9352, Grumium and Sol; mined 2 aluminum ore and 1 platinum ore; earned no new points; came out even on credits; flew until the show's time ran out.",
+      "src": "undocked-week:weekly-c113",
+      "id": "F-e1589dfe130d"
+    },
+    {
+      "t": "FACT",
+      "text": "Daphne Stafford's Wednesday night on UNDOCKED: earned First Steps (5 points); never got the ship moving.",
+      "src": "undocked-week:weekly-c113",
+      "id": "F-5037b3e1ecc5"
+    },
+    {
+      "t": "FACT",
+      "text": "Cristina Booker — Immigration Attorney (ledger)",
+      "src": "undocked-week:weekly-c113",
+      "id": "F-a7f8a3920841"
+    },
+    {
+      "t": "FACT",
+      "text": "Father Miguel — Parish priest (ledger)",
+      "src": "undocked-week:weekly-c113",
+      "id": "F-aa9b9e515b1f"
+    },
+    {
+      "t": "FACT",
+      "text": "Daphne Stafford — Home Health Aide (ledger)",
+      "src": "undocked-week:weekly-c113",
+      "id": "F-262fe69148ac"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C9, Winter, holiday=none",
+      "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+      "id": "F-ab9d6786094e"
+    },
+    {
+      "t": "FACT",
+      "text": "C111 UNDOCKED: Eric Taveras — credits 0; systems Sol, sol, sirius; combat 0; mishaps 0.",
+      "src": "tool:undocked_history:feed/c111.json#undocked-pop00597-Y3C7",
+      "id": "F-f7dd0e8fe6bb"
+    },
+    {
+      "t": "FACT",
+      "text": "C111 UNDOCKED: Eric Taveras — credits 1170; systems sirius; combat 0; mishaps 0.",
+      "src": "tool:undocked_history:feed/c111.json#undocked-pop00597-Y3C7-e2",
+      "id": "F-56d3321a3c45"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to a supplied source ref.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "nia-rook-undocked-weekly-digest-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Turn the week's UNDOCKED episodes into one leaderboard/digest naming every pilot who flew — not a single-episode recap. Standings-forward: rank, streaks, who's climbing, who's fading, what the whole cast looked like this week.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "third-person leaderboard recap — entertainment-beat energy, ranking-and-recap format",
+      "targetWords": "350-650",
+      "opening": "the week's cast and its consequence for the board",
+      "closing": "what the week's board leaves open next"
+    },
+    "authorizedTexture": [
+      "an in-world bar, watch-party, break-room, bus, or sidewalk setting where the city watches or argues; a new named business goes on INTAKE BIZ",
+      "the reporter's own recap persona, approved show history, and who's-up-who's-down framing across the week's cast",
+      "unnamed audience argument and aspiration lines as city color, never as measured sentiment",
+      "metaphor and emotional inference grounded in a supplied typed fact from the week's feed or standings"
+    ],
+    "textureConditions": [
+      "a named person must resolve to a ledger citizen; a new in-world place or business is scene color, not a recorded show event",
+      "this week's episode facts come from the supplied typed feed; prior episode facts come from the approved undocked_history result — a blank CreditsDelta is unsettled, never zero and never invented",
+      "pilot speech only from the wake-2 packet interviews — no other quote source exists for this lane",
+      "standings/leaderboard facts (Rank, CyclesLed, CurrentStreak) come only from the supplied Standings block — never invented math",
+      "unnamed audience reaction stays rhetorical — it must not become a count, a poll, or a named person",
+      "every pilot named in the supplied week's roster should appear at least once, even briefly, so the article actually prints their name"
+    ],
+    "canonBlockers": [
+      "video game",
+      "videogame",
+      "simulation",
+      "engine",
+      "MCP",
+      "server",
+      "commander",
+      "tool",
+      "API",
+      "spacemolt-lib",
+      "openrouter",
+      "real-world calendar dates (YYYY-MM-DD)",
+      "captains_log",
+      "leaderboard math beyond the supplied Standings/pilot facts"
+    ]
+  },
+  "manifest": {
+    "id": "AM-39bef0e65331",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-876f95b5eb98",
+        "t": "FACT",
+        "text": "Current cycle: C113",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-73d67346d148",
+        "t": "FACT",
+        "text": "UNDOCKED week-in-review c113",
+        "src": "undocked-week:weekly-c113"
+      },
+      {
+        "id": "F-e5905c8a4bf4",
+        "t": "FACT",
+        "text": "Cristina Booker's Monday night on UNDOCKED: went through Alpha Centauri; took the Copper Requisition and Welcome to Sol Central contracts; earned First Steps (5 points) and Maiden Jump (5 points); came out even on credits; flew until the show's time ran out.",
+        "src": "undocked-week:weekly-c113"
+      },
+      {
+        "id": "F-a9af913d0dcb",
+        "t": "FACT",
+        "text": "Cristina Booker's Thursday night on UNDOCKED: never got the ship moving.",
+        "src": "undocked-week:weekly-c113"
+      },
+      {
+        "id": "F-5720f376a3b3",
+        "t": "FACT",
+        "text": "Father Miguel's Tuesday night on UNDOCKED: went through Lacaille 9352, Sirius, Sol and Alpha Centauri; took the Copper Requisition contract; earned Maiden Jump (5 points); came out even on credits; flew until the show's time ran out.",
+        "src": "undocked-week:weekly-c113"
+      },
+      {
+        "id": "F-e1589dfe130d",
+        "t": "FACT",
+        "text": "Father Miguel's Friday night on UNDOCKED: went through Sirius, Lacaille 9352, Grumium and Sol; mined 2 aluminum ore and 1 platinum ore; earned no new points; came out even on credits; flew until the show's time ran out.",
+        "src": "undocked-week:weekly-c113"
+      },
+      {
+        "id": "F-5037b3e1ecc5",
+        "t": "FACT",
+        "text": "Daphne Stafford's Wednesday night on UNDOCKED: earned First Steps (5 points); never got the ship moving.",
+        "src": "undocked-week:weekly-c113"
+      },
+      {
+        "id": "F-a7f8a3920841",
+        "t": "FACT",
+        "text": "Cristina Booker — Immigration Attorney (ledger)",
+        "src": "undocked-week:weekly-c113"
+      },
+      {
+        "id": "F-aa9b9e515b1f",
+        "t": "FACT",
+        "text": "Father Miguel — Parish priest (ledger)",
+        "src": "undocked-week:weekly-c113"
+      },
+      {
+        "id": "F-262fe69148ac",
+        "t": "FACT",
+        "text": "Daphne Stafford — Home Health Aide (ledger)",
+        "src": "undocked-week:weekly-c113"
+      },
+      {
+        "id": "F-ab9d6786094e",
+        "t": "FACT",
+        "text": "Calendar: Y3C9, Winter, holiday=none",
+        "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)"
+      },
+      {
+        "id": "F-f7dd0e8fe6bb",
+        "t": "FACT",
+        "text": "C111 UNDOCKED: Eric Taveras — credits 0; systems Sol, sol, sirius; combat 0; mishaps 0.",
+        "src": "tool:undocked_history:feed/c111.json#undocked-pop00597-Y3C7"
+      },
+      {
+        "id": "F-56d3321a3c45",
+        "t": "FACT",
+        "text": "C111 UNDOCKED: Eric Taveras — credits 1170; systems sirius; combat 0; mishaps 0.",
+        "src": "tool:undocked_history:feed/c111.json#undocked-pop00597-Y3C7-e2"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00734-630b777827",
+        "speakerId": "POP-00734",
+        "speakerName": "Father Miguel",
+        "text": "I've flown on UNDOCKED a couple of times this week, and I have to say, my performance has been pretty steady. I've earned 5 points so far, and I'm 22nd out of 24. From what I've seen, Cristina Booker's performance was a bit more up and down - she earned 10 points on Monday, but didn't even get her ship moving on Thursday. I guess you could say I'm more consistent, but she's more explosive when she gets it right.",
+        "factIds": [
+          "F-5720f376a3b3",
+          "F-e1589dfe130d",
+          "F-e5905c8a4bf4",
+          "F-a9af913d0dcb"
+        ],
+        "src": "packet.W2[POP-00734]"
+      },
+      {
+        "id": "Q-POP-00816-27ba126c58",
+        "speakerId": "POP-00816",
+        "speakerName": "Daphne Stafford",
+        "text": "I'm 23rd out of 24 on the leaderboard, and I only got 5 points last week, so I guess my struggles didn't change the standings much. I mean, there were people above and below me who didn't do much better or worse.",
+        "factIds": [
+          "F-5037b3e1ecc5",
+          "F-73d67346d148"
+        ],
+        "src": "packet.W2[POP-00816]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00734",
+        "name": "Father Miguel",
+        "profile": "Father Miguel — UNDOCKED pilot",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00816",
+        "name": "Daphne Stafford",
+        "profile": "Daphne Stafford — UNDOCKED pilot",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Nia Rook",
+        "text": "Cristina Booker may be struggling with a specific aspect of UNDOCKED",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "an in-world bar, watch-party, break-room, bus, or sidewalk setting where the city watches or argues; a new named business goes on INTAKE BIZ",
+      "the reporter's own recap persona, approved show history, and who's-up-who's-down framing across the week's cast",
+      "unnamed audience argument and aspiration lines as city color, never as measured sentiment",
+      "metaphor and emotional inference grounded in a supplied typed fact from the week's feed or standings"
+    ],
+    "textureConditions": [
+      "a named person must resolve to a ledger citizen; a new in-world place or business is scene color, not a recorded show event",
+      "this week's episode facts come from the supplied typed feed; prior episode facts come from the approved undocked_history result — a blank CreditsDelta is unsettled, never zero and never invented",
+      "pilot speech only from the wake-2 packet interviews — no other quote source exists for this lane",
+      "standings/leaderboard facts (Rank, CyclesLed, CurrentStreak) come only from the supplied Standings block — never invented math",
+      "unnamed audience reaction stays rhetorical — it must not become a count, a poll, or a named person",
+      "every pilot named in the supplied week's roster should appear at least once, even briefly, so the article actually prints their name"
+    ],
+    "forbiddenClaimClasses": [],
+    "toolFacts": [
+      "F-f7dd0e8fe6bb",
+      "F-56d3321a3c45"
+    ]
+  }
+}

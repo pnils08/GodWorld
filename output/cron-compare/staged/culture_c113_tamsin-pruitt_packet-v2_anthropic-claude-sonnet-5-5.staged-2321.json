@@ -1,0 +1,125 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "113",
+  "persona": "tamsin-pruitt",
+  "byline": "Tamsin Pruitt",
+  "bylinePopid": "POP-01210",
+  "article": "output/cron-compare/staged/culture_c113_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.staged-2321.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Dax Monroe",
+        "role": "quoted-source",
+        "popid": "POP-00769"
+      },
+      {
+        "name": "Drew Lemon",
+        "role": "mentioned",
+        "popid": "POP-00670",
+        "floor": true
+      },
+      {
+        "name": "Genevieve Martinez",
+        "role": "mentioned",
+        "popid": "POP-00864",
+        "floor": true
+      },
+      {
+        "name": "Ily Gonzalez",
+        "role": "mentioned",
+        "popid": "POP-00455",
+        "floor": true
+      },
+      {
+        "name": "Imogen Soto",
+        "role": "mentioned",
+        "popid": "POP-00825",
+        "floor": true
+      },
+      {
+        "name": "Juliet Choi",
+        "role": "mentioned",
+        "popid": "POP-00857",
+        "floor": true
+      },
+      {
+        "name": "Mateo Jilner",
+        "role": "mentioned",
+        "popid": "POP-01001",
+        "floor": true
+      },
+      {
+        "name": "Mei Patel",
+        "role": "mentioned",
+        "popid": "POP-01007",
+        "floor": true
+      },
+      {
+        "name": "Mei-Lin Zhou",
+        "role": "mentioned",
+        "popid": "POP-01177",
+        "floor": true
+      },
+      {
+        "name": "Tomas Aguilar",
+        "role": "mentioned",
+        "popid": "POP-00529",
+        "floor": true
+      },
+      {
+        "name": "Weston Herrin",
+        "role": "mentioned",
+        "popid": "POP-00494",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "INIT-005:operational",
+        "verb": "referenced",
+        "attachedBy": "stepAttach"
+      },
+      {
+        "slug": "INIT-006:construction-active",
+        "verb": "referenced",
+        "attachedBy": "stepAttach"
+      }
+    ],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "I've been thinking a lot about the cycles of life in Rockridge lately. The other night, I was at the window, just observing the world go by. It made me reflect on how people's lives are intertwined with the events around them. I've seen it in my own life, with my kids growing up and the community changing. It's like the lives of those 11 people must have been shaped by the events they experienced, just like mine are shaped by the everyday moments here in Rockridge.",
+        "sourceRef": "citizenVoice PRESS Dax Monroe"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-9381d564ebf3",
+    "draftSha256": "8f5692a6990e89935863d94621f589b23e4f1052f421069fc0b40a74edcc5723",
+    "verdict": "output/cron-compare/culture_c113_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-10-30T23:20:02.827Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 450",
+      "words": 1316,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "8f5692a6990e89935863d94621f589b23e4f1052f421069fc0b40a74edcc5723",
+      "costUsd": 0.0015
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-30T23:20:07.568Z"
+}

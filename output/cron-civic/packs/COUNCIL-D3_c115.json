@@ -1,0 +1,1148 @@
+{
+  "v": "OFFICE/1",
+  "team": "civic-office",
+  "empty": false,
+  "actor": {
+    "id": "POP-00503",
+    "name": "Rose Delgado",
+    "role": "City Council District 3",
+    "officeId": "COUNCIL-D3",
+    "district": "D3",
+    "faction": "OPP",
+    "agentDir": "civic-office-council-d3",
+    "initiative": null,
+    "dials": {
+      "approval": 59
+    }
+  },
+  "task": {
+    "a": "district-week",
+    "goal": "what is happening in San Antonio"
+  },
+  "pulse": {
+    "className": "district-heat",
+    "score": 234.7,
+    "label": "San Antonio — sentiment -0.16 vs city 0.020",
+    "lever": "what is happening in San Antonio",
+    "hood": "San Antonio",
+    "initiative": null,
+    "vsCity": {
+      "sentiment": -0.16,
+      "citySentiment": 0.020454545454545444,
+      "crime": 0.73,
+      "cityCrime": 0.6472727272727273,
+      "heat": 34.7,
+      "outlier": true
+    }
+  },
+  "prewrite": {
+    "claim": "what is happening in San Antonio",
+    "lineFacts": [
+      "approval 59",
+      "San Antonio: sentiment -0.16 vs city 0.020; crime index 0.73 vs city 0.647; decay momentum 0; decay momentum 0",
+      "San Antonio crime: property 43, violent 30, incidents 6 (cycle 115) — city property 39.5, violent 25.9, incidents 5.9",
+      "San Antonio: sentiment -0.16 vs city 0.020; crime index 0.73 vs city 0.647; decay momentum 0; retail 5.22; housing pressure 0; decay; momentum 0"
+    ],
+    "missing": [
+      "no shop names on disk for this turf",
+      "no invented vote, POPID, or complete"
+    ]
+  },
+  "game": {
+    "geographyIssue": null,
+    "lastMove": {
+      "text": "Latest moves:\nC114 - answer CONF-114-civic-office-council-d3: awaiting the Sunday fold\nNo applied or failed outcome in the available ledgers.",
+      "moves": [
+        {
+          "moveId": "MV-114-civic-office-council-d3-2026-11-04:answer:CONF-114-civic-office-council-d3",
+          "cycle": 114,
+          "date": "2026-11-04",
+          "agentDir": "civic-office-council-d3",
+          "popid": "POP-00503",
+          "type": "answer",
+          "payload": {
+            "confrontationId": "CONF-114-civic-office-council-d3",
+            "text": "Director Vance — the D3 briefing on the Oakland Alternative Response Initiative will be executed and documented in Fruitvale, open to all of District 3 including East Oakland residents, with the current Fruitvale safety data and the Baylight review presented in plain daylight before anyone asks this district to accept more expansion. In the same notice I'm publishing the Fruitvale Transit Hub Phase II preliminary schematics review schedule, so residents and merchants can see the designs and say what they think before the vision is called finished. The documentation from both will be filed with the Clerk so there's a record you can point to, not a promise.",
+            "directiveCycle": 114,
+            "confrontationSeat": "civic-office-council-d3"
+          },
+          "status": "pending",
+          "at": "2026-11-04T11:45:53.738Z"
+        }
+      ]
+    },
+    "board": [
+      {
+        "id": "INIT-002",
+        "name": "Oakland Alternative Response Initiative",
+        "domain": "safety",
+        "phase": "dispatch-live",
+        "status": "passed",
+        "nextActionCycle": 116,
+        "voteCycle": 82,
+        "stage": "Standing",
+        "cyclesSinceStageChange": 7,
+        "lastStageChangeCycle": 108,
+        "sponsored": false,
+        "hoods": [
+          "West Oakland",
+          "Fruitvale",
+          "East Oakland"
+        ],
+        "needsNext": "Standing — no delivering gate exists for this domain yet",
+        "budget": "budget $11,057,692.28 left, renewable",
+        "requirement": {
+          "stage": "Standing",
+          "next": null,
+          "clears": false,
+          "moveThatClears": null,
+          "blocked": "no-delivering-gate",
+          "text": "Standing — no delivering gate exists for this domain yet"
+        },
+        "metricEvidence": null
+      },
+      {
+        "id": "INIT-003",
+        "name": "Fruitvale Transit Hub Phase II — Visioning",
+        "domain": "transit",
+        "phase": "complete",
+        "status": "passed",
+        "nextActionCycle": null,
+        "voteCycle": 86,
+        "stage": null,
+        "cyclesSinceStageChange": 0,
+        "lastStageChangeCycle": 115,
+        "sponsored": false,
+        "hoods": [
+          "Fruitvale"
+        ],
+        "needsNext": "advance or hold",
+        "budget": "budget $230,000,000 left",
+        "requirement": null,
+        "metricEvidence": null
+      },
+      {
+        "id": "INIT-007",
+        "name": "Oakland Youth Apprenticeship Pipeline",
+        "domain": "workforce",
+        "phase": "implementation-active",
+        "status": "passed",
+        "nextActionCycle": 116,
+        "voteCycle": null,
+        "stage": null,
+        "cyclesSinceStageChange": null,
+        "lastStageChangeCycle": null,
+        "sponsored": false,
+        "hoods": [
+          "West Oakland",
+          "East Oakland",
+          "Fruitvale"
+        ],
+        "needsNext": "Publish the placement-gap analysis and program adjustment plan",
+        "budget": "budget $12,500,000 left",
+        "requirement": null,
+        "metricEvidence": null
+      }
+    ],
+    "boardAvailable": true,
+    "boardIds": [
+      "INIT-002",
+      "INIT-003",
+      "INIT-007"
+    ],
+    "boardText": "Your board:\n- INIT-002 Oakland Alternative Response Initiative [dispatch-live] — Standing — no delivering gate exists for this domain yet — budget $11,057,692.28 left, renewable — next step due C116\n- INIT-003 Fruitvale Transit Hub Phase II — Visioning [complete] — advance or hold — budget $230,000,000 left\n- INIT-007 Oakland Youth Apprenticeship Pipeline [implementation-active] — Publish the placement-gap analysis and program adjustment plan — budget $12,500,000 left — next step due C116",
+    "categories": {
+      "available": true,
+      "list": [
+        {
+          "key": "health",
+          "label": "clinics, care",
+          "band": "$5M-$100M",
+          "canDeliver": true
+        },
+        {
+          "key": "transit",
+          "label": "stations, lines",
+          "band": "$20M-$500M",
+          "canDeliver": true
+        },
+        {
+          "key": "education",
+          "label": "schools, youth learning",
+          "band": "$1M-$50M",
+          "canDeliver": true
+        },
+        {
+          "key": "economic",
+          "label": "business, local economy",
+          "band": "$2M-$50M",
+          "canDeliver": false
+        },
+        {
+          "key": "workforce",
+          "label": "jobs, training",
+          "band": "$1M-$30M",
+          "canDeliver": false
+        },
+        {
+          "key": "safety",
+          "label": "public safety, response",
+          "band": "$2M-$30M",
+          "canDeliver": false
+        },
+        {
+          "key": "sports",
+          "label": "stadiums, recreation",
+          "band": "$10M-$500M",
+          "canDeliver": false
+        },
+        {
+          "key": "environment",
+          "label": "parks, air, water",
+          "band": "$1M-$30M",
+          "canDeliver": false
+        }
+      ],
+      "text": "Propose in your own words under one category; reach is hood, district, or all (citywide seats only). Budget must sit in the band. * = runs, but cannot reach Delivering yet.\n- health: clinics, care $5M-$100M\n- transit: stations, lines $20M-$500M\n- education: schools, youth learning $1M-$50M\n- economic*: business, local economy $2M-$50M\n- workforce*: jobs, training $1M-$30M\n- safety*: public safety, response $2M-$30M\n- sports*: stadiums, recreation $10M-$500M\n- environment*: parks, air, water $1M-$30M"
+    },
+    "petitionPool": {
+      "available": true,
+      "complaints": [
+        {
+          "cycle": "113",
+          "hood": "Fruitvale",
+          "snippet": "I see it in my own classroom every day. When the district grows, the money and the…",
+          "affect": "Frustrated"
+        },
+        {
+          "cycle": "113",
+          "hood": "Fruitvale",
+          "snippet": "filed: Baylight District: The Vote Is Recorded. So What Is Still Waiting?",
+          "affect": "Anxious"
+        }
+      ],
+      "participation": [
+        {
+          "cycle": "113",
+          "hood": "Fruitvale",
+          "snippet": "I can't speak to the specifics of what's happening at 12th Street versus 19th — that's…",
+          "affect": "Calm"
+        }
+      ],
+      "unlocatedRows": 0,
+      "invalidCycleRows": 0,
+      "sinceCycle": 113,
+      "throughCycle": 115,
+      "window": "Complaint display C113–C115; condition counter C115 only.",
+      "text": "Complaint display C113–C115; condition counter C115 only.\nPeople are talking (2 complaints):\n- I see it in my own classroom every day. When the district grows, the money and the… (Fruitvale, C113)\n- filed: Baylight District: The Vote Is Recorded. So What Is Still Waiting? (Fruitvale, C113)\nConstructive civic participation (not complaints): 1."
+    },
+    "workingCity": {
+      "available": true,
+      "totalStaff": 4,
+      "shownStaff": 4,
+      "text": "The working city:\n- Elena Soria Dominguez: The schematics are done, and they're good. But they're just paper until the community review is documented… (C114)\n- Bobby Chen-Ramirez: The quarterly numbers posted today, and they hold. Sixty-two percent of the visits are from the two zip codes… (C114)\n- Vanessa Tran-Muñoz: Dispatch closed out quiet tonight. East Oakland got the numbers they were owed, and the crews got home before… (C114)\n- Marcus Webb: The queue is clean tonight. One hundred fifteen households paid out, every file flagged for audit compliance… (C114)"
+    },
+    "patrol": {
+      "available": true,
+      "strategy": "balanced",
+      "text": "City patrol strategy: balanced (patrols spread evenly — the default posture). The Police Chief has not set one."
+    },
+    "confrontations": {
+      "available": true,
+      "all": [
+        {
+          "id": "CONF-104-civic-office-council-d3",
+          "cycle": 104,
+          "agentDir": "civic-office-council-d3",
+          "demand": "Rose Delgado — City Council District 3 — Introduce District 3's community benefit stipulations for the Baylight Phase II RFP process to protect surrounding West Oakland and Jack London commercial corridors.",
+          "sourceText": "## Rose Delgado — City Council District 3\n\n- **Agent:** `.claude/agents/civic-office-council-d3/`\n- **Address:** Introduce District 3's community benefit stipulations for the Baylight Phase II RFP process to protect surrounding West Oakland and Jack London commercial corridors.\n- **Why:** District 3 experienced a 7-point approval drop (83, -7) in C104 following the C103 shortlist release, while West Oakland retail vitality remains at 3.52.\n- **Acceptance:** Formal submission of District 3 priority terms regarding local business contracting and infrastructure linkages for the Baylight Phase II RFP.\n- **Silence consequence:** Baylight procurement proceeds without enforceable D3 community protections, deepening commercial disparities in neighboring corridors.\n",
+          "src": "output/mara-directives/mara_directive_c104_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-106-civic-office-council-d3",
+          "cycle": 106,
+          "agentDir": "civic-office-council-d3",
+          "demand": "Rose Delgado — City Council District 3 — Coordinate with the Transit Hub planning team on Fruitvale small business protections and address persistent elevated crime (CrimeIndex 1.00).",
+          "sourceText": "## Rose Delgado — City Council District 3\n\n- **Agent:** `.claude/agents/civic-office-council-d3/`\n- **Address:** Coordinate with the Transit Hub planning team on Fruitvale small business protections and address persistent elevated crime (CrimeIndex 1.00).\n- **Why:** With INIT-003 entering its design phase in C106 and D3 constituent approval dropping 5 points (71 in C106), local merchants require council advocacy on construction mitigations.\n- **Acceptance:** A filed memorandum to the Transit Hub Planning Lead outlining merchant mitigation priorities for E. 12th Street and San Antonio.\n- **Silence consequence:** Fruitvale small businesses risk unmitigated disruption during the Phase II design and pre-construction stages.\n",
+          "src": "output/mara-directives/mara_directive_c106_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-107-civic-office-council-d3",
+          "cycle": 107,
+          "agentDir": "civic-office-council-d3",
+          "demand": "Rose Delgado — City Council District 3 — Review and ratify the executed merchant protection covenants for the Fruitvale Transit Hub Phase II design RFP release.",
+          "sourceText": "## Rose Delgado — City Council District 3\n\n- **Agent:** `.claude/agents/civic-office-council-d3/`\n- **Address:** Review and ratify the executed merchant protection covenants for the Fruitvale Transit Hub Phase II design RFP release.\n- **Why:** District 3 commercial stability depends on binding protections during transit design, with Fruitvale RetailVitality at 8.21 and CrimeIndex at 0.89 in C107.\n- **Acceptance:** Formal legislative concurrence or district sign-off on the INIT-003 merchant covenant framework.\n- **Silence consequence:** Lack of district ratification stalls RFP issuance and creates uncertainty for local business owners.\n",
+          "src": "output/mara-directives/mara_directive_c107_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-108-civic-office-council-d3",
+          "cycle": 108,
+          "agentDir": "civic-office-council-d3",
+          "demand": "Rose Delgado — City Council District 3 — Concur on the INIT-003 design consultant selection and submit District 3 intake verification for the Youth Apprenticeship Pipeline cohort review.",
+          "sourceText": "## Rose Delgado — City Council District 3\n\n- **Agent:** `.claude/agents/civic-office-council-d3/`\n- **Address:** Concur on the INIT-003 design consultant selection and submit District 3 intake verification for the Youth Apprenticeship Pipeline cohort review.\n- **Why:** Following C107 merchant covenant execution, C108 requires consultant selection while Fruitvale shows engine review math-imbalance decay (Sentiment -0.030, RetailVitality -1.32 to 9.67, CrimeIndex 0.63).\n- **Acceptance:** Legislative sign-off on the Phase II design consultant contract and a filed D3 placement ledger confirming apprentice allocations.\n- **Silence consequence:** Corridor merchant protections lose architectural coordination during schematic design, and D3 youth intake targets lapse without council confirmation.\n",
+          "src": "output/mara-directives/mara_directive_c108_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-109-civic-office-council-d3",
+          "cycle": 109,
+          "agentDir": "civic-office-council-d3",
+          "demand": "Rose Delgado — City Council District 3 — Introduce a legislative response addressing San Antonio corridor distress and confirm District 3 apprentice placement allocations under INIT-007.",
+          "sourceText": "## Rose Delgado — City Council District 3\n\n- **Agent:** `.claude/agents/civic-office-council-d3/`\n- **Address:** Introduce a legislative response addressing San Antonio corridor distress and confirm District 3 apprentice placement allocations under INIT-007.\n- **Why:** District 3 carries 3 constituent complaints on the record with no filed proposal, while San Antonio sentiment has dropped to 0.18 against a 0.587 citywide crime average (San Antonio CrimeIndex at 0.64) with stall clocks at C110 for INIT-002, INIT-003, and INIT-007.\n- **Acceptance:** A filed council resolution or appropriation targeted at San Antonio safety and retail recovery, paired with a published D3 placement ledger for the INIT-007 youth training cohort.\n- **Silence consequence:** San Antonio remains Oakland's most depressed corridor for sentiment without targeted municipal intervention, while D3 youth lose intake priority in the first apprenticeship rollout.\n",
+          "src": "output/mara-directives/mara_directive_c109_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-111-civic-office-council-d3",
+          "cycle": 111,
+          "agentDir": "civic-office-council-d3",
+          "demand": "Rose Delgado — City Council District 3 — Deliver preliminary schematics with merchant covenant protections for INIT-003 and submit a targeted recovery package for San Antonio.",
+          "sourceText": "## Rose Delgado — City Council District 3\n\n- **Agent:** `.claude/agents/civic-office-council-d3/`\n- **Address:** Deliver preliminary schematics with merchant covenant protections for INIT-003 and submit a targeted recovery package for San Antonio.\n- **Why:** INIT-003 approaches its C112 schematics completion deadline, while San Antonio is carrying a decay momentum of 3, sentiment of 0.28, and depressed retail vitality of 4.88.\n- **Acceptance:** Published preliminary schematics for the Fruitvale Transit Hub Phase II and a filed commercial/safety recovery plan for San Antonio in C112.\n- **Silence consequence:** Transit Hub design milestones stall before environmental review, and San Antonio's corridor downturn continues unaddressed.\n",
+          "src": "output/mara-directives/mara_directive_c111_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-112-civic-office-council-d3",
+          "cycle": 112,
+          "agentDir": "civic-office-council-d3",
+          "demand": "Rose Delgado — City Council District 3 — Submit the District 3 dispatch breakdown for INIT-002, confirm D3 placements for INIT-007, and file an operational response to the active San Antonio citizen complaint.",
+          "sourceText": "## Rose Delgado — City Council District 3\n\n- **Agent:** `.claude/agents/civic-office-council-d3/`\n- **Address:** Submit the District 3 dispatch breakdown for INIT-002, confirm D3 placements for INIT-007, and file an operational response to the active San Antonio citizen complaint.\n- **Why:** Both INIT-002 and INIT-007 reached their C112 reporting milestones, while San Antonio shows crime at 0.65, retail vitality down at 5.22, sentiment at -0.06, and decay momentum at 2 with an unaddressed citizen complaint on file.\n- **Acceptance:** Filed District 3 outcome metrics for INIT-002 and INIT-007, alongside an official response to the San Antonio petition in C113.\n- **Silence consequence:** Citywide emergency dispatch and youth pipeline reports proceed with District 3 data missing, leaving San Antonio without municipal recovery commitments.\n",
+          "src": "output/mara-directives/mara_directive_c112_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-113-civic-office-council-d3",
+          "cycle": 113,
+          "agentDir": "civic-office-council-d3",
+          "demand": "Rose Delgado — City Council District 3 — Schedule the D3 OARI community briefing under INIT-002 and publish the preliminary design review date for Fruitvale Transit Hub Phase II (INIT-003).",
+          "sourceText": "## Rose Delgado — City Council District 3\n\n- **Agent:** `.claude/agents/civic-office-council-d3/`\n- **Address:** Schedule the D3 OARI community briefing under INIT-002 and publish the preliminary design review date for Fruitvale Transit Hub Phase II (INIT-003).\n- **Why:** INIT-002 mandates a D3 community briefing execution in C114, INIT-003 reaches preliminary schematics review at C114, and San Antonio records negative sentiment of -0.04, crime at 0.61, and 1 unresolved citizen petition.\n- **Acceptance:** A confirmed public hearing date for the D3 OARI briefing and published schematic schedule for INIT-003 in C114.\n- **Silence consequence:** Fruitvale transit capital planning freezes at the design phase and District 3 community oversight on emergency response lapses.\n",
+          "src": "output/mara-directives/mara_directive_c113_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-114-civic-office-council-d3",
+          "cycle": 114,
+          "agentDir": "civic-office-council-d3",
+          "demand": "Rose Delgado — City Council District 3 — Execute the District 3 community briefing for the Oakland Alternative Response Initiative (INIT-002) and publish the preliminary schematics review schedule for Fruitvale Transit Hub Phase II (INIT-003).",
+          "sourceText": "## Rose Delgado — City Council District 3\n\n- **Agent:** `.claude/agents/civic-office-council-d3/`\n- **Address:** Execute the District 3 community briefing for the Oakland Alternative Response Initiative (INIT-002) and publish the preliminary schematics review schedule for Fruitvale Transit Hub Phase II (INIT-003).\n- **Why:** INIT-002 and INIT-003 carry C114 milestones approaching C115 stall thresholds, while San Antonio registers a city-high crime index of 0.73, retail vitality of 6.43, and 2 unresolved citizen complaints on the district board.\n- **Acceptance:** Documented execution of the D3 OARI community briefing and a published schematic review date for INIT-003 in C115.\n- **Silence consequence:** Community oversight on alternative dispatch lapses in San Antonio, and capital planning for Fruitvale Phase II freezes at preliminary design.\n",
+          "src": "output/mara-directives/mara_directive_c114_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-115-civic-office-council-d3",
+          "cycle": 115,
+          "agentDir": "civic-office-council-d3",
+          "demand": "Rose Delgado — City Council District 3 — Provide the district’s briefing and transit-review notice records, clarifying the actual OARI venue and how the promised Fruitvale access was provided.",
+          "sourceText": "## Rose Delgado — City Council District 3\n\n- **Agent:** `.claude/agents/civic-office-council-d3/`\n- **Address:** Provide the district’s briefing and transit-review notice records, clarifying the actual OARI venue and how the promised Fruitvale access was provided.\n- **Why:** Your Cycle 114 weekday statement placed the OARI briefing in Fruitvale and promised the review calendar and public numbers; the OARI director’s Cycle 115 statement reports a documented briefing in East Oakland, while the transit lead reports review sessions opened at the branch library and senior center.\n- **Acceptance:** The actual briefing date and venue, notice and accessibility arrangements, district-data references, the published schematics-review calendar, and any Clerk filing references; distinguish completed documentation from the OARI packet and transit response record scheduled for publication in Cycle 116, without requiring a duplicate briefing.\n- **Promise:** P-71776abe706ff093",
+          "src": "output/mara-directives/mara_directive_c115_AUTO.txt",
+          "expectsMove": "answer"
+        }
+      ],
+      "latestCycle": 115,
+      "open": [
+        {
+          "id": "CONF-115-civic-office-council-d3",
+          "cycle": 115,
+          "agentDir": "civic-office-council-d3",
+          "demand": "Rose Delgado — City Council District 3 — Provide the district’s briefing and transit-review notice records, clarifying the actual OARI venue and how the promised Fruitvale access was provided.",
+          "sourceText": "## Rose Delgado — City Council District 3\n\n- **Agent:** `.claude/agents/civic-office-council-d3/`\n- **Address:** Provide the district’s briefing and transit-review notice records, clarifying the actual OARI venue and how the promised Fruitvale access was provided.\n- **Why:** Your Cycle 114 weekday statement placed the OARI briefing in Fruitvale and promised the review calendar and public numbers; the OARI director’s Cycle 115 statement reports a documented briefing in East Oakland, while the transit lead reports review sessions opened at the branch library and senior center.\n- **Acceptance:** The actual briefing date and venue, notice and accessibility arrangements, district-data references, the published schematics-review calendar, and any Clerk filing references; distinguish completed documentation from the OARI packet and transit response record scheduled for publication in Cycle 116, without requiring a duplicate briefing.\n- **Promise:** P-71776abe706ff093",
+          "src": "output/mara-directives/mara_directive_c115_AUTO.txt",
+          "expectsMove": "answer"
+        }
+      ],
+      "answeredIds": [
+        "CONF-107-civic-office-council-d3",
+        "CONF-108-civic-office-council-d3",
+        "CONF-109-civic-office-council-d3",
+        "CONF-111-civic-office-council-d3",
+        "CONF-112-civic-office-council-d3",
+        "CONF-113-civic-office-council-d3",
+        "CONF-114-civic-office-council-d3"
+      ]
+    },
+    "confrontation": {
+      "id": "CONF-115-civic-office-council-d3",
+      "cycle": 115,
+      "agentDir": "civic-office-council-d3",
+      "demand": "Rose Delgado — City Council District 3 — Provide the district’s briefing and transit-review notice records, clarifying the actual OARI venue and how the promised Fruitvale access was provided.",
+      "sourceText": "## Rose Delgado — City Council District 3\n\n- **Agent:** `.claude/agents/civic-office-council-d3/`\n- **Address:** Provide the district’s briefing and transit-review notice records, clarifying the actual OARI venue and how the promised Fruitvale access was provided.\n- **Why:** Your Cycle 114 weekday statement placed the OARI briefing in Fruitvale and promised the review calendar and public numbers; the OARI director’s Cycle 115 statement reports a documented briefing in East Oakland, while the transit lead reports review sessions opened at the branch library and senior center.\n- **Acceptance:** The actual briefing date and venue, notice and accessibility arrangements, district-data references, the published schematics-review calendar, and any Clerk filing references; distinguish completed documentation from the OARI packet and transit response record scheduled for publication in Cycle 116, without requiring a duplicate briefing.\n- **Promise:** P-71776abe706ff093",
+      "src": "output/mara-directives/mara_directive_c115_AUTO.txt",
+      "expectsMove": "answer"
+    },
+    "conditions": {
+      "available": true,
+      "proposals": [],
+      "text": "No proposals in the available board/move evidence need condition counts."
+    },
+    "problemContinuity": {
+      "available": true,
+      "cycle": 115,
+      "problems": [
+        {
+          "id": "[\"Fruitvale\",\"health.sickResidents\"]",
+          "hood": "Fruitvale",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 109,
+          "cycle": 115
+        },
+        {
+          "id": "[\"Fruitvale\",\"safety.aboveMedianHoods\"]",
+          "hood": "Fruitvale",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 115
+        },
+        {
+          "id": "[\"San Antonio\",\"health.sickResidents\"]",
+          "hood": "San Antonio",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 107,
+          "cycle": 115
+        },
+        {
+          "id": "[\"San Antonio\",\"safety.aboveMedianHoods\"]",
+          "hood": "San Antonio",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 115
+        }
+      ],
+      "visibleProblems": [
+        {
+          "id": "[\"Fruitvale\",\"health.sickResidents\"]",
+          "hood": "Fruitvale",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 109,
+          "cycle": 115
+        },
+        {
+          "id": "[\"Fruitvale\",\"safety.aboveMedianHoods\"]",
+          "hood": "Fruitvale",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 115
+        },
+        {
+          "id": "[\"San Antonio\",\"health.sickResidents\"]",
+          "hood": "San Antonio",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 107,
+          "cycle": 115
+        },
+        {
+          "id": "[\"San Antonio\",\"safety.aboveMedianHoods\"]",
+          "hood": "San Antonio",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 115
+        }
+      ],
+      "passedOver": [],
+      "issues": [],
+      "missingFoldCycles": [],
+      "text": "Health and safety readings this week (C115).\n- Fruitvale: 109 residents sick; violence above the city middle\n- San Antonio: 107 residents sick; violence above the city middle"
+    }
+  },
+  "signal": {
+    "kind": "district-heat",
+    "hoods": [
+      "Fruitvale",
+      "San Antonio"
+    ],
+    "src": "lib/districtMap.js + civic-office-map.json"
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00778",
+        "name": "Jamal Thompson",
+        "neighborhood": "San Antonio",
+        "role": "Fan & Culture Columnist, OakTown Echo",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in San Antonio — San Antonio — sentiment -0.16 vs city 0.020"
+      },
+      {
+        "pop": "POP-00796",
+        "name": "Dank Abara",
+        "neighborhood": "San Antonio",
+        "role": "Waiter",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in San Antonio — San Antonio — sentiment -0.16 vs city 0.020"
+      },
+      {
+        "pop": "POP-01054",
+        "name": "Delia Vargas-Ruiz",
+        "neighborhood": "San Antonio",
+        "role": "Transit Hub D3 Intake Liaison",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in San Antonio — San Antonio — sentiment -0.16 vs city 0.020"
+      },
+      {
+        "pop": "POP-01126",
+        "name": "Sage Yamamoto",
+        "neighborhood": "San Antonio",
+        "role": "Teacher",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in San Antonio — San Antonio — sentiment -0.16 vs city 0.020"
+      }
+    ],
+    "businesses": [],
+    "churches": [],
+    "sources": []
+  },
+  "known": [
+    {
+      "id": "F-office-COUNCIL-D3",
+      "t": "FACT",
+      "text": "Rose Delgado holds COUNCIL-D3 at approval 59",
+      "src": "engine_audit snapshots.Civic_Office_Ledger"
+    },
+    {
+      "id": "F-heat-SanAntonio",
+      "t": "FACT",
+      "text": "San Antonio: sentiment -0.16 vs city 0.020; crime index 0.73 vs city 0.647; decay momentum 0; decay momentum 0",
+      "src": "engine_audit snapshots.Neighborhood_Map ranked vs city"
+    },
+    {
+      "id": "F-crime-SanAntonio",
+      "t": "FACT",
+      "text": "San Antonio crime: property 43, violent 30, incidents 6 (cycle 115) — city property 39.5, violent 25.9, incidents 5.9",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-hood-SanAntonio",
+      "t": "FACT",
+      "text": "San Antonio: sentiment -0.16 vs city 0.020; crime index 0.73 vs city 0.647; decay momentum 0; retail 5.22; housing pressure 0; decay; momentum 0",
+      "src": "engine_audit snapshots.Neighborhood_Map"
+    },
+    {
+      "id": "F-chaos-garbage_truck-neighborhood San Antonio",
+      "t": "FACT",
+      "text": "garbage_truck dumping_cleared → neighborhood San Antonio Sentiment -0.08",
+      "src": "world_summary Chaos_Cars"
+    }
+  ],
+  "role": {
+    "officeRows": [
+      {
+        "OfficeId": "COUNCIL-D3",
+        "PopId": "POP-00503",
+        "Holder": "Rose Delgado",
+        "District": "D3",
+        "Approval": "59"
+      }
+    ],
+    "civicPeers": [
+      {
+        "OfficeId": "COUNCIL-D1",
+        "PopId": "POP-00501",
+        "Holder": "Denise Carter",
+        "District": "D1",
+        "Faction": "OPP",
+        "Approval": 95
+      },
+      {
+        "OfficeId": "COUNCIL-D5",
+        "PopId": "POP-00043",
+        "Holder": "Janae Rivers",
+        "District": "D5",
+        "Faction": "OPP",
+        "Approval": 85
+      },
+      {
+        "OfficeId": "COUNCIL-D9",
+        "PopId": "POP-00506",
+        "Holder": "Terrence Mobley",
+        "District": "D9",
+        "Faction": "OPP",
+        "Approval": 55
+      }
+    ]
+  },
+  "limits": {
+    "assert": [
+      "only named subjects in exposure.subjects",
+      "only named shops in exposure.businesses",
+      "only named churches in exposure.churches",
+      "only project facts in known",
+      "no invented POPID, vote, or complete"
+    ],
+    "invent": [
+      "no new citizens",
+      "no new businesses",
+      "no sheet numbers"
+    ]
+  },
+  "output": {
+    "contract": "statement + moves + numberMoved",
+    "dest": "office wiki (civic.16) then next Sunday city-hall packet"
+  },
+  "brief": {
+    "version": "CIVIC-BRIEF/2",
+    "cycle": 115,
+    "generation": {
+      "cycle": 115,
+      "observedAt": "2026-11-09T07:08:41.803Z",
+      "sources": {
+        "sports": {
+          "available": true,
+          "hash": "fc2b9a841ed2cbef9f0415d9274bc481dc97eaba7a3be6042be30c3a0e914f41"
+        },
+        "summary": {
+          "available": true,
+          "hash": "1677b675ee6dd2b2f592220f3085ec7b2b88500ffc42202c9aabcf0addc058ac"
+        }
+      },
+      "hash": "8bfd87940a666380c5a9b73d2151cff4f6286856fa3673a770c7259a48d6c71b",
+      "completeThrough": "2026-11-09T07:08:41.803Z",
+      "issues": [],
+      "statement": "Events reflect the saved export as of its refresh watermark; later same-Cycle events require a new export."
+    },
+    "sections": {
+      "events": {
+        "available": true,
+        "items": [
+          {
+            "eventId": "EV-summary-bb42ceed65f2dfb0",
+            "status": "occurred",
+            "occurredCycle": 115,
+            "ageCycles": 0,
+            "category": "city-event",
+            "significance": "local",
+            "hoods": [
+              "Fruitvale"
+            ],
+            "citywideRelevance": false,
+            "sourceRef": "output/world_summary_c115.md:133",
+            "fact": "Fruitvale Community Bloom Festival (Fruitvale)",
+            "retrievalKey": "event/EV-summary-bb42ceed65f2dfb0"
+          },
+          {
+            "eventId": "EV-sports-3ea77fc790df9f97",
+            "status": "occurred",
+            "occurredCycle": 111,
+            "ageCycles": 4,
+            "category": "sports-community",
+            "significance": "local",
+            "hoods": [
+              "Fruitvale"
+            ],
+            "citywideRelevance": false,
+            "sourceRef": "output/beats/Oakland_Sports_Feed.jsonl:239",
+            "fact": "The Oakland A's and Vladimir Gonzales support wellness at the Fruitvale Community Clinic.",
+            "retrievalKey": "event/EV-sports-3ea77fc790df9f97"
+          }
+        ],
+        "omittedCount": 0,
+        "retrievalKeys": [
+          "event/EV-summary-bb42ceed65f2dfb0",
+          "event/EV-sports-3ea77fc790df9f97"
+        ]
+      },
+      "measuredState": {
+        "districts": [
+          {
+            "district": "D3",
+            "available": true,
+            "retrievalKey": "district/D3",
+            "neighborhoods": [
+              {
+                "hood": "Fruitvale",
+                "available": true,
+                "measured": {
+                  "Sentiment": {
+                    "value": "0.29",
+                    "previous": "0.32",
+                    "change": -0.030000000000000027
+                  },
+                  "CrimeIndex": {
+                    "value": "0.67",
+                    "previous": "0.69",
+                    "change": -0.019999999999999907
+                  },
+                  "RetailVitality": {
+                    "value": "13.46",
+                    "previous": "13.18",
+                    "change": 0.28000000000000114
+                  },
+                  "HousingPressure": {
+                    "value": "8.5",
+                    "previous": "7.5",
+                    "change": 1
+                  },
+                  "NeighborhoodTrajectory": {
+                    "value": "growth",
+                    "previous": "growth",
+                    "change": null
+                  },
+                  "TrajectoryMomentum": {
+                    "value": "10",
+                    "previous": "10",
+                    "change": 0
+                  }
+                }
+              },
+              {
+                "hood": "San Antonio",
+                "available": true,
+                "measured": {
+                  "Sentiment": {
+                    "value": "-0.16",
+                    "previous": "0.04",
+                    "change": -0.2
+                  },
+                  "CrimeIndex": {
+                    "value": "0.73",
+                    "previous": "0.73",
+                    "change": 0
+                  },
+                  "RetailVitality": {
+                    "value": "5.22",
+                    "previous": "6.43",
+                    "change": -1.21
+                  },
+                  "HousingPressure": {
+                    "value": "0",
+                    "previous": "0",
+                    "change": 0
+                  },
+                  "NeighborhoodTrajectory": {
+                    "value": "decay",
+                    "previous": "decay",
+                    "change": null
+                  },
+                  "TrajectoryMomentum": {
+                    "value": "0",
+                    "previous": "0",
+                    "change": 0
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "previousCycleAvailable": true
+      },
+      "commitments": {
+        "priorMoves": [
+          {
+            "moveId": "MV-114-civic-office-council-d3-2026-11-04:answer:CONF-114-civic-office-council-d3",
+            "type": "answer",
+            "status": "pending",
+            "cycle": 114,
+            "retrievalKey": "prior/MV-114-civic-office-council-d3-2026-11-04:answer:CONF-114-civic-office-council-d3"
+          }
+        ],
+        "evidenceAvailable": true,
+        "outcomeFeedAvailable": false,
+        "actionOutcomes": [],
+        "actionReconciliationAvailable": false,
+        "actionReconciliationReason": "ENOENT: no such file or directory, open '/root/GodWorld/output/beats/Civic_Action_Ledger.jsonl'",
+        "reconciledActions": []
+      },
+      "opportunities": {
+        "board": [
+          {
+            "id": "INIT-002",
+            "name": "Oakland Alternative Response Initiative",
+            "domain": "safety",
+            "phase": "dispatch-live",
+            "status": "passed",
+            "nextActionCycle": 116,
+            "voteCycle": 82,
+            "stage": "Standing",
+            "cyclesSinceStageChange": 7,
+            "lastStageChangeCycle": 108,
+            "sponsored": false,
+            "hoods": [
+              "West Oakland",
+              "Fruitvale",
+              "East Oakland"
+            ],
+            "needsNext": "Standing — no delivering gate exists for this domain yet",
+            "budget": "budget $11,057,692.28 left, renewable",
+            "requirement": {
+              "stage": "Standing",
+              "next": null,
+              "clears": false,
+              "moveThatClears": null,
+              "blocked": "no-delivering-gate",
+              "text": "Standing — no delivering gate exists for this domain yet"
+            },
+            "metricEvidence": null,
+            "retrievalKey": "project/INIT-002"
+          },
+          {
+            "id": "INIT-003",
+            "name": "Fruitvale Transit Hub Phase II — Visioning",
+            "domain": "transit",
+            "phase": "complete",
+            "status": "passed",
+            "nextActionCycle": null,
+            "voteCycle": 86,
+            "stage": null,
+            "cyclesSinceStageChange": 0,
+            "lastStageChangeCycle": 115,
+            "sponsored": false,
+            "hoods": [
+              "Fruitvale"
+            ],
+            "needsNext": "advance or hold",
+            "budget": "budget $230,000,000 left",
+            "requirement": null,
+            "metricEvidence": null,
+            "retrievalKey": "project/INIT-003"
+          },
+          {
+            "id": "INIT-007",
+            "name": "Oakland Youth Apprenticeship Pipeline",
+            "domain": "workforce",
+            "phase": "implementation-active",
+            "status": "passed",
+            "nextActionCycle": 116,
+            "voteCycle": null,
+            "stage": null,
+            "cyclesSinceStageChange": null,
+            "lastStageChangeCycle": null,
+            "sponsored": false,
+            "hoods": [
+              "West Oakland",
+              "East Oakland",
+              "Fruitvale"
+            ],
+            "needsNext": "Publish the placement-gap analysis and program adjustment plan",
+            "budget": "budget $12,500,000 left",
+            "requirement": null,
+            "metricEvidence": null,
+            "retrievalKey": "project/INIT-007"
+          }
+        ],
+        "omittedCount": 0,
+        "boardRetrievalKeys": [
+          "project/INIT-002",
+          "project/INIT-003",
+          "project/INIT-007"
+        ],
+        "selectedInitiative": null,
+        "resourceBalanceAvailable": false,
+        "budgetAuthorityKey": "budget/authority",
+        "openChoice": "No selected initiative; a reasoned no-op or a grounded opportunity is available."
+      },
+      "response": {
+        "petitionWindow": "Complaint display C113–C115; condition counter C115 only.",
+        "complaints": 2,
+        "participation": 1,
+        "mediaOutcomeAvailable": false,
+        "committedResponseAvailable": false,
+        "committedResponse": [],
+        "note": "Response counts require saved experience and reaction receipts, and are not a representative poll. Only published receipts appear as coverage."
+      },
+      "authorizedActions": {
+        "categoriesAvailable": true,
+        "categoryKeys": [
+          "health",
+          "transit",
+          "education",
+          "economic",
+          "workforce",
+          "safety",
+          "sports",
+          "environment"
+        ],
+        "detailKey": "budget/authority",
+        "note": "Move validation and later execution decide authority. An accepted request is not an applied outcome."
+      }
+    }
+  },
+  "_briefEvidence": {
+    "event": {
+      "EV-summary-bb42ceed65f2dfb0": {
+        "eventId": "EV-summary-bb42ceed65f2dfb0",
+        "sourceRef": "output/world_summary_c115.md:133",
+        "sourceRevision": "f6b5d04c7547efc2636c8e369c62d27834a9157e4cec58fd2c170c55919f16fe",
+        "occurredCycle": 115,
+        "status": "occurred",
+        "observedAt": "2026-11-09T07:08:41.803Z",
+        "category": "city-event",
+        "significance": "local",
+        "hoods": [
+          "Fruitvale"
+        ],
+        "citywideRelevance": false,
+        "entityIds": [],
+        "facts": [
+          "Fruitvale Community Bloom Festival (Fruitvale)"
+        ],
+        "aliases": []
+      },
+      "EV-sports-3ea77fc790df9f97": {
+        "eventId": "EV-sports-3ea77fc790df9f97",
+        "sourceRef": "output/beats/Oakland_Sports_Feed.jsonl:239",
+        "sourceRevision": "a28b8d55a8d292ffa88757e707ea7b223d45c01647b529e84c510c70c3a6e85f",
+        "occurredCycle": 111,
+        "status": "occurred",
+        "observedAt": "2026-11-09T07:08:41.803Z",
+        "category": "sports-community",
+        "significance": "local",
+        "hoods": [
+          "Fruitvale"
+        ],
+        "citywideRelevance": false,
+        "entityIds": [],
+        "facts": [
+          "The Oakland A's and Vladimir Gonzales support wellness at the Fruitvale Community Clinic.",
+          "After securing a 7th championship for the A's and playing a pivotal role, Vladimir was in is local community for a event at the Fruitvale Community Clinic. Vladimir was in attendance to bring awareness to seasonal health care to families in need. Also Fruitvale Community Clinic is providing vacanations and basic health care knowledge. The A's being a sponsor and providing a kids zone with inflatables, rides and free games."
+        ],
+        "aliases": []
+      }
+    },
+    "district": {
+      "D3": {
+        "available": true,
+        "district": "D3",
+        "neighborhoods": [
+          {
+            "hood": "Fruitvale",
+            "available": true,
+            "measured": {
+              "Sentiment": {
+                "value": "0.29",
+                "previous": "0.32",
+                "change": -0.030000000000000027
+              },
+              "CrimeIndex": {
+                "value": "0.67",
+                "previous": "0.69",
+                "change": -0.019999999999999907
+              },
+              "RetailVitality": {
+                "value": "13.46",
+                "previous": "13.18",
+                "change": 0.28000000000000114
+              },
+              "HousingPressure": {
+                "value": "8.5",
+                "previous": "7.5",
+                "change": 1
+              },
+              "NeighborhoodTrajectory": {
+                "value": "growth",
+                "previous": "growth",
+                "change": null
+              },
+              "TrajectoryMomentum": {
+                "value": "10",
+                "previous": "10",
+                "change": 0
+              }
+            },
+            "sourceRef": "engine_audit snapshots.Neighborhood_Map"
+          },
+          {
+            "hood": "San Antonio",
+            "available": true,
+            "measured": {
+              "Sentiment": {
+                "value": "-0.16",
+                "previous": "0.04",
+                "change": -0.2
+              },
+              "CrimeIndex": {
+                "value": "0.73",
+                "previous": "0.73",
+                "change": 0
+              },
+              "RetailVitality": {
+                "value": "5.22",
+                "previous": "6.43",
+                "change": -1.21
+              },
+              "HousingPressure": {
+                "value": "0",
+                "previous": "0",
+                "change": 0
+              },
+              "NeighborhoodTrajectory": {
+                "value": "decay",
+                "previous": "decay",
+                "change": null
+              },
+              "TrajectoryMomentum": {
+                "value": "0",
+                "previous": "0",
+                "change": 0
+              }
+            },
+            "sourceRef": "engine_audit snapshots.Neighborhood_Map"
+          }
+        ],
+        "previousCycleAvailable": true
+      }
+    },
+    "project": {
+      "INIT-002": {
+        "id": "INIT-002",
+        "name": "Oakland Alternative Response Initiative",
+        "domain": "safety",
+        "phase": "dispatch-live",
+        "status": "passed",
+        "nextActionCycle": 116,
+        "voteCycle": 82,
+        "stage": "Standing",
+        "cyclesSinceStageChange": 7,
+        "lastStageChangeCycle": 108,
+        "sponsored": false,
+        "hoods": [
+          "West Oakland",
+          "Fruitvale",
+          "East Oakland"
+        ],
+        "needsNext": "Standing — no delivering gate exists for this domain yet",
+        "budget": "budget $11,057,692.28 left, renewable",
+        "requirement": {
+          "stage": "Standing",
+          "next": null,
+          "clears": false,
+          "moveThatClears": null,
+          "blocked": "no-delivering-gate",
+          "text": "Standing — no delivering gate exists for this domain yet"
+        },
+        "metricEvidence": null
+      },
+      "INIT-003": {
+        "id": "INIT-003",
+        "name": "Fruitvale Transit Hub Phase II — Visioning",
+        "domain": "transit",
+        "phase": "complete",
+        "status": "passed",
+        "nextActionCycle": null,
+        "voteCycle": 86,
+        "stage": null,
+        "cyclesSinceStageChange": 0,
+        "lastStageChangeCycle": 115,
+        "sponsored": false,
+        "hoods": [
+          "Fruitvale"
+        ],
+        "needsNext": "advance or hold",
+        "budget": "budget $230,000,000 left",
+        "requirement": null,
+        "metricEvidence": null
+      },
+      "INIT-007": {
+        "id": "INIT-007",
+        "name": "Oakland Youth Apprenticeship Pipeline",
+        "domain": "workforce",
+        "phase": "implementation-active",
+        "status": "passed",
+        "nextActionCycle": 116,
+        "voteCycle": null,
+        "stage": null,
+        "cyclesSinceStageChange": null,
+        "lastStageChangeCycle": null,
+        "sponsored": false,
+        "hoods": [
+          "West Oakland",
+          "East Oakland",
+          "Fruitvale"
+        ],
+        "needsNext": "Publish the placement-gap analysis and program adjustment plan",
+        "budget": "budget $12,500,000 left",
+        "requirement": null,
+        "metricEvidence": null
+      }
+    },
+    "budget": {
+      "authority": {
+        "officeId": "COUNCIL-D3",
+        "district": "D3",
+        "categories": [
+          {
+            "key": "health",
+            "label": "clinics, care",
+            "band": "$5M-$100M",
+            "canDeliver": true
+          },
+          {
+            "key": "transit",
+            "label": "stations, lines",
+            "band": "$20M-$500M",
+            "canDeliver": true
+          },
+          {
+            "key": "education",
+            "label": "schools, youth learning",
+            "band": "$1M-$50M",
+            "canDeliver": true
+          },
+          {
+            "key": "economic",
+            "label": "business, local economy",
+            "band": "$2M-$50M",
+            "canDeliver": false
+          },
+          {
+            "key": "workforce",
+            "label": "jobs, training",
+            "band": "$1M-$30M",
+            "canDeliver": false
+          },
+          {
+            "key": "safety",
+            "label": "public safety, response",
+            "band": "$2M-$30M",
+            "canDeliver": false
+          },
+          {
+            "key": "sports",
+            "label": "stadiums, recreation",
+            "band": "$10M-$500M",
+            "canDeliver": false
+          },
+          {
+            "key": "environment",
+            "label": "parks, air, water",
+            "band": "$1M-$30M",
+            "canDeliver": false
+          }
+        ],
+        "resourceBalance": null,
+        "resourceBalanceAvailable": false,
+        "note": "Category bands are filing constraints. Spendable treasury balance requires typed current allocation evidence."
+      }
+    },
+    "prior": {
+      "MV-114-civic-office-council-d3-2026-11-04:answer:CONF-114-civic-office-council-d3": {
+        "moveId": "MV-114-civic-office-council-d3-2026-11-04:answer:CONF-114-civic-office-council-d3",
+        "cycle": 114,
+        "date": "2026-11-04",
+        "agentDir": "civic-office-council-d3",
+        "popid": "POP-00503",
+        "type": "answer",
+        "payload": {
+          "confrontationId": "CONF-114-civic-office-council-d3",
+          "text": "Director Vance — the D3 briefing on the Oakland Alternative Response Initiative will be executed and documented in Fruitvale, open to all of District 3 including East Oakland residents, with the current Fruitvale safety data and the Baylight review presented in plain daylight before anyone asks this district to accept more expansion. In the same notice I'm publishing the Fruitvale Transit Hub Phase II preliminary schematics review schedule, so residents and merchants can see the designs and say what they think before the vision is called finished. The documentation from both will be filed with the Clerk so there's a record you can point to, not a promise.",
+          "directiveCycle": 114,
+          "confrontationSeat": "civic-office-council-d3"
+        },
+        "status": "pending",
+        "at": "2026-11-04T11:45:53.738Z"
+      }
+    }
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "114",
+  "persona": "ines-sorensen",
+  "byline": "Ines Sorensen",
+  "bylinePopid": "POP-01211",
+  "article": "output/cron-compare/staged/culture_c114_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5.staged-1815.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Alicia Hernandez",
+        "role": "quoted-source",
+        "popid": "POP-00366"
+      },
+      {
+        "name": "Mariana Kapoor",
+        "role": "quoted-source",
+        "popid": "POP-00998"
+      },
+      {
+        "name": "Pilar Ramirez",
+        "role": "quoted-source",
+        "popid": "POP-00943"
+      },
+      {
+        "name": "Desmond Morton",
+        "role": "mentioned",
+        "popid": "POP-00051",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "To be honest, the A's haven't really affected my business or daily life that much. I mean, I'm happy when they're doing well, but I'm not really connected to the team. I've been too busy with my own transition into retirement to pay much attention.",
+        "sourceRef": "citizenVoice PRESS Alicia Hernandez"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "gate": "off",
+    "model": null,
+    "manifestId": null,
+    "draftSha256": "ef2b645cf0fc6be792fec3f49f278d3c7ff2885551893252c2e1948d6095f139",
+    "verdict": null,
+    "ranAt": "2026-11-08T18:15:27.189Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 300",
+      "words": 637,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "scoredWithoutRhea": true,
+      "draftSha256": "ef2b645cf0fc6be792fec3f49f278d3c7ff2885551893252c2e1948d6095f139"
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-08T18:15:27.189Z"
+}

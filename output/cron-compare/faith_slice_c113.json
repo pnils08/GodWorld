@@ -1,0 +1,368 @@
+{
+  "version": "FAITH-SLICE-2",
+  "empty": false,
+  "cycle": 113,
+  "kind": "beat-faith",
+  "seat": {
+    "slug": "elliot-graye",
+    "name": "Elliot Graye",
+    "popid": "POP-00012",
+    "desk": "culture",
+    "domain": "faith",
+    "builder": "buildFaithSlice.js"
+  },
+  "hood": "East Oakland",
+  "pulse": {
+    "className": "beat-faith",
+    "score": 100,
+    "label": "8 faith events on the record since C107 · Foothill Baptist Tabernacle in East Oakland | 7 named on the record",
+    "hood": "East Oakland",
+    "source": "output/beats/Faith_Organizations.jsonl \"Foothill Baptist Tabernacle\""
+  },
+  "story": {
+    "kind": "beat-faith",
+    "angle": "crisis response at Bay Pure Land Buddhist Temple (Chinatown) — the week in faith, and Foothill Baptist Tabernacle in focus",
+    "label": "8 faith events on the record since C107 · Foothill Baptist Tabernacle in East Oakland | 7 named on the record",
+    "hookLine": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+    "hood": "East Oakland",
+    "citizens": [
+      "Ophelia Brenner (POP-00754)",
+      "Kenji Tanaka (POP-00763)",
+      "Eunice Marston (POP-00753)",
+      "Antoine Vermeer (POP-00755)",
+      "Ramon Solano (POP-00756)",
+      "Mark Aitken (POP-00003)",
+      "Marcus Whitfield (POP-00532)"
+    ],
+    "popids": [
+      "POP-00754",
+      "POP-00763",
+      "POP-00753",
+      "POP-00755",
+      "POP-00756",
+      "POP-00003",
+      "POP-00532"
+    ],
+    "ref": "output/beats/Faith_Organizations.jsonl \"Foothill Baptist Tabernacle\"",
+    "cycle": 113
+  },
+  "approach": "Faith and quiet-work approach: this slice is the week's faith events on the record — services, holy days, outreach, crisis response, with the congregations and neighborhoods named — plus one congregation in focus and the community programs around it. Dignity, not doctrine wars. The events, institutions and people are real; the sanctuary on a weeknight, the basement kitchen, the Tuesday meeting are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-00754",
+      "name": "Ophelia Brenner",
+      "role": "Senior Pastor / Faith Leader",
+      "neighborhood": "Fruitvale",
+      "business": null,
+      "profile": "Ophelia Brenner — Senior Pastor / Faith Leader — Fruitvale",
+      "why": "leads Foothill Baptist Tabernacle (Faith_Organizations)"
+    },
+    {
+      "popid": "POP-00763",
+      "name": "Kenji Tanaka",
+      "role": "Senior Pastor / Faith Leader",
+      "neighborhood": "Chinatown",
+      "business": null,
+      "profile": "Kenji Tanaka — Senior Pastor / Faith Leader — Chinatown",
+      "why": "leads Bay Pure Land Buddhist Temple — crisis response this week (Faith_Ledger)"
+    },
+    {
+      "popid": "POP-00753",
+      "name": "Eunice Marston",
+      "role": "Senior Pastor / Faith Leader",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Eunice Marston — Senior Pastor / Faith Leader — Downtown",
+      "why": "leads Telegraph Presbyterian Fellowship — crisis response this week (Faith_Ledger)"
+    },
+    {
+      "popid": "POP-00755",
+      "name": "Antoine Vermeer",
+      "role": "Senior Pastor / Faith Leader",
+      "neighborhood": "Lake Merritt",
+      "business": null,
+      "profile": "Antoine Vermeer — Senior Pastor / Faith Leader — Lake Merritt",
+      "why": "leads Cathedral of the Living Word — holy day this week (Faith_Ledger)"
+    },
+    {
+      "popid": "POP-00756",
+      "name": "Ramon Solano",
+      "role": "Senior Pastor / Faith Leader",
+      "neighborhood": "Fruitvale",
+      "business": null,
+      "profile": "Ramon Solano — Senior Pastor / Faith Leader — Fruitvale",
+      "why": "leads St. Esperanza Parish — holy day this week (Faith_Ledger)"
+    },
+    {
+      "popid": "POP-00003",
+      "name": "Mark Aitken",
+      "role": "First Baseman, Oakland A's Legend — Player Rep, Community Liaison",
+      "neighborhood": "Jack London",
+      "business": null,
+      "profile": "Mark Aitken — First Baseman, Oakland A's Legend — Player Rep, Community Liaison — Jack London",
+      "why": "founded Mark Aitken Youth Baseball League (Community_Programs)"
+    },
+    {
+      "popid": "POP-00532",
+      "name": "Marcus Whitfield",
+      "role": "Youth Basketball Coach",
+      "neighborhood": "Fruitvale",
+      "business": null,
+      "profile": "Marcus Whitfield — Youth Basketball Coach — Fruitvale",
+      "why": "founded Eastside Hoopers Coalition (Community_Programs)"
+    }
+  ],
+  "facts": [
+    {
+      "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+      "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\""
+    },
+    {
+      "text": "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+      "src": "output/beats/Faith_Ledger.jsonl C107 \"Telegraph Presbyterian Fellowship\""
+    },
+    {
+      "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+      "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\""
+    },
+    {
+      "text": "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+      "src": "output/beats/Faith_Ledger.jsonl C109 \"Cathedral of the Living Word\""
+    },
+    {
+      "text": "Cathedral of the Living Word (Lake Merritt), C108 — holy day: traditional Epiphany rituals observed (attendance 1,077)",
+      "src": "output/beats/Faith_Ledger.jsonl C108 \"Cathedral of the Living Word\""
+    },
+    {
+      "text": "St. Esperanza Parish (Fruitvale), C108 — holy day: congregation celebrates Epiphany (attendance 374)",
+      "src": "output/beats/Faith_Ledger.jsonl C108 \"St. Esperanza Parish\""
+    },
+    {
+      "text": "Cathedral of the Living Word (Lake Merritt), C107 — holy day: congregation celebrates Epiphany (attendance 1,185)",
+      "src": "output/beats/Faith_Ledger.jsonl C107 \"Cathedral of the Living Word\""
+    },
+    {
+      "text": "St. Esperanza Parish (Fruitvale), C107 — holy day: traditional Epiphany rituals observed (attendance 427)",
+      "src": "output/beats/Faith_Ledger.jsonl C107 \"St. Esperanza Parish\""
+    },
+    {
+      "text": "In focus: Foothill Baptist Tabernacle — Baptist, East Oakland, congregation 5,000, founded 123 years ago, led today by Dr. Ophelia Brenner — anchor institution, community programs",
+      "src": "output/beats/Faith_Organizations.jsonl \"Foothill Baptist Tabernacle\""
+    },
+    {
+      "text": "Mark Aitken Youth Baseball League (youth-sports), East Oakland, founded by Mark Aitken, since C101",
+      "src": "output/beats/Community_Programs.jsonl PRG-003"
+    },
+    {
+      "text": "Eastside Hoopers Coalition (youth-sports), East Oakland, founded by Marcus Whitfield, since C101",
+      "src": "output/beats/Community_Programs.jsonl PRG-005"
+    },
+    {
+      "text": "Coliseum District Vendor Incubator (economic), East Oakland, since C101",
+      "src": "output/beats/Community_Programs.jsonl PRG-009"
+    },
+    {
+      "text": "East Bay Harm Reduction Alliance (health), East Oakland, since C101",
+      "src": "output/beats/Community_Programs.jsonl PRG-014"
+    },
+    {
+      "text": "Foothill Baptist Tabernacle Food Pantry (mutual-aid), East Oakland, since C78",
+      "src": "output/beats/Community_Programs.jsonl PRG-022"
+    },
+    {
+      "text": "Also in East Oakland: Masjid An-Nur Oakland (Muslim)",
+      "src": "output/beats/Faith_Organizations.jsonl"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "crisis response at Bay Pure Land Buddhist Temple (Chinatown) — the week in faith, and Foothill Baptist Tabernacle in focus",
+    "hookLine": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+    "anchorFacts": [
+      "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+      "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+      "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+      "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+      "Cathedral of the Living Word (Lake Merritt), C108 — holy day: traditional Epiphany rituals observed (attendance 1,077)",
+      "St. Esperanza Parish (Fruitvale), C108 — holy day: congregation celebrates Epiphany (attendance 374)",
+      "Cathedral of the Living Word (Lake Merritt), C107 — holy day: congregation celebrates Epiphany (attendance 1,185)",
+      "St. Esperanza Parish (Fruitvale), C107 — holy day: traditional Epiphany rituals observed (attendance 427)",
+      "In focus: Foothill Baptist Tabernacle — Baptist, East Oakland, congregation 5,000, founded 123 years ago, led today by Dr. Ophelia Brenner — anchor institution, community programs",
+      "Mark Aitken Youth Baseball League (youth-sports), East Oakland, founded by Mark Aitken, since C101",
+      "Eastside Hoopers Coalition (youth-sports), East Oakland, founded by Marcus Whitfield, since C101",
+      "Coliseum District Vendor Incubator (economic), East Oakland, since C101",
+      "East Bay Harm Reduction Alliance (health), East Oakland, since C101",
+      "Foothill Baptist Tabernacle Food Pantry (mutual-aid), East Oakland, since C78",
+      "Also in East Oakland: Masjid An-Nur Oakland (Muslim)"
+    ],
+    "evidence": [
+      {
+        "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+        "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\""
+      },
+      {
+        "text": "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+        "src": "output/beats/Faith_Ledger.jsonl C107 \"Telegraph Presbyterian Fellowship\""
+      },
+      {
+        "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+        "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\""
+      },
+      {
+        "text": "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+        "src": "output/beats/Faith_Ledger.jsonl C109 \"Cathedral of the Living Word\""
+      },
+      {
+        "text": "Cathedral of the Living Word (Lake Merritt), C108 — holy day: traditional Epiphany rituals observed (attendance 1,077)",
+        "src": "output/beats/Faith_Ledger.jsonl C108 \"Cathedral of the Living Word\""
+      },
+      {
+        "text": "St. Esperanza Parish (Fruitvale), C108 — holy day: congregation celebrates Epiphany (attendance 374)",
+        "src": "output/beats/Faith_Ledger.jsonl C108 \"St. Esperanza Parish\""
+      },
+      {
+        "text": "Cathedral of the Living Word (Lake Merritt), C107 — holy day: congregation celebrates Epiphany (attendance 1,185)",
+        "src": "output/beats/Faith_Ledger.jsonl C107 \"Cathedral of the Living Word\""
+      },
+      {
+        "text": "St. Esperanza Parish (Fruitvale), C107 — holy day: traditional Epiphany rituals observed (attendance 427)",
+        "src": "output/beats/Faith_Ledger.jsonl C107 \"St. Esperanza Parish\""
+      },
+      {
+        "text": "In focus: Foothill Baptist Tabernacle — Baptist, East Oakland, congregation 5,000, founded 123 years ago, led today by Dr. Ophelia Brenner — anchor institution, community programs",
+        "src": "output/beats/Faith_Organizations.jsonl \"Foothill Baptist Tabernacle\""
+      },
+      {
+        "text": "Mark Aitken Youth Baseball League (youth-sports), East Oakland, founded by Mark Aitken, since C101",
+        "src": "output/beats/Community_Programs.jsonl PRG-003"
+      },
+      {
+        "text": "Eastside Hoopers Coalition (youth-sports), East Oakland, founded by Marcus Whitfield, since C101",
+        "src": "output/beats/Community_Programs.jsonl PRG-005"
+      },
+      {
+        "text": "Coliseum District Vendor Incubator (economic), East Oakland, since C101",
+        "src": "output/beats/Community_Programs.jsonl PRG-009"
+      },
+      {
+        "text": "East Bay Harm Reduction Alliance (health), East Oakland, since C101",
+        "src": "output/beats/Community_Programs.jsonl PRG-014"
+      },
+      {
+        "text": "Foothill Baptist Tabernacle Food Pantry (mutual-aid), East Oakland, since C78",
+        "src": "output/beats/Community_Programs.jsonl PRG-022"
+      },
+      {
+        "text": "Also in East Oakland: Masjid An-Nur Oakland (Muslim)",
+        "src": "output/beats/Faith_Organizations.jsonl"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": null,
+    "hooks": [
+      {
+        "text": "Heavy faith activity this cycle. Multiple incidents creating a pattern. Deep-dive opportunity.",
+        "angle": "general coverage",
+        "domain": "FAITH",
+        "hood": null,
+        "priority": 3
+      },
+      {
+        "text": "A family bought their home in Jack London",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Jack London",
+        "priority": 3
+      }
+    ],
+    "note": null,
+    "pageVoices": [],
+    "roomIsYours": "the sanctuary on a weeknight, the folding chairs, who sets up and who stays late, what the leader says when the room is half empty"
+  },
+  "organization": {
+    "Organization": "Foothill Baptist Tabernacle",
+    "FaithTradition": "Baptist",
+    "Neighborhood": "East Oakland",
+    "Founded": "1919",
+    "Congregation": "5000",
+    "Leader": "Dr. Ophelia Brenner",
+    "Character": "anchor institution, community programs",
+    "ActiveStatus": "active",
+    "LeaderPOPID": "POP-00754",
+    "MembersList": ""
+  },
+  "programs": [
+    "Mark Aitken Youth Baseball League",
+    "Eastside Hoopers Coalition",
+    "Coliseum District Vendor Incubator",
+    "East Bay Harm Reduction Alliance",
+    "Foothill Baptist Tabernacle Food Pantry",
+    "Foothill Baptist Tabernacle Seniors Lunch Program",
+    "Masjid An-Nur Oakland Emergency Assistance Fund",
+    "Foothill Baptist Tabernacle Academy"
+  ],
+  "rotation": {
+    "index": 1,
+    "of": 16
+  },
+  "weekEvents": [
+    {
+      "cycle": 109,
+      "organization": "Bay Pure Land Buddhist Temple",
+      "type": "crisis_response",
+      "hood": "Chinatown"
+    },
+    {
+      "cycle": 107,
+      "organization": "Telegraph Presbyterian Fellowship",
+      "type": "crisis_response",
+      "hood": "Downtown"
+    },
+    {
+      "cycle": 109,
+      "organization": "Telegraph Presbyterian Fellowship",
+      "type": "holy_day",
+      "hood": "Downtown"
+    },
+    {
+      "cycle": 109,
+      "organization": "Cathedral of the Living Word",
+      "type": "holy_day",
+      "hood": "Lake Merritt"
+    },
+    {
+      "cycle": 108,
+      "organization": "Cathedral of the Living Word",
+      "type": "holy_day",
+      "hood": "Lake Merritt"
+    },
+    {
+      "cycle": 108,
+      "organization": "St. Esperanza Parish",
+      "type": "holy_day",
+      "hood": "Fruitvale"
+    },
+    {
+      "cycle": 107,
+      "organization": "Cathedral of the Living Word",
+      "type": "holy_day",
+      "hood": "Lake Merritt"
+    },
+    {
+      "cycle": 107,
+      "organization": "St. Esperanza Parish",
+      "type": "holy_day",
+      "hood": "Fruitvale"
+    }
+  ],
+  "pointers": [
+    "output/beats/Faith_Organizations.jsonl \"Foothill Baptist Tabernacle\"",
+    "output/beats/Story_Hook_Deck.jsonl (hooks for Elliot Graye this cycle)"
+  ]
+}

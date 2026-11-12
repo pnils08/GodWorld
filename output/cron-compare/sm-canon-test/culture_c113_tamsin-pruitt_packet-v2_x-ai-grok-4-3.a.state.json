@@ -1,0 +1,1221 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-01210",
+    "name": "Tamsin Pruitt",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "The lives of C113, 2026-10-26: 13 people — Alicia Hernandez retired from work as Coffee Roaster, Uptown",
+    "approach": "Lives approach: this slice is the people something happened to this Cycle — a birth, a death in the house, a hospital stay, a retirement, a promotion; a household set up or a place of their own; a win or a loss on the book; the people a turn of the city reached and what it did to their day; and the smaller moments the record kept. Each person gets their own passage: the event, then the thread under it — the stay or strain that led there, the other lines the record kept for them, what the Tribune or this page already said of them, and what they did next if the record says. Read the thread in order and name where two lines of it do not agree; do not restate a ledger value as the story. The fact exactly right; never a trend, never a number first; the person, not the system the event belongs to. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent p",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "lives",
+      "hood": "Uptown",
+      "facts": [
+        "Alicia Hernandez retired from work as Coffee Roaster, Uptown (C113). What came next: the record does not say yet",
+        "Alicia Hernandez — on the log, C113: noticed neighbors being more watchful today",
+        "Maren Johns was promoted; the record lists their work as Psychotherapist, Rockridge (C113). What came next: the record does not say yet",
+        "Maren Johns — on the log, C113: browsed a bookstore along the avenue",
+        "Maren Johns — on the log, C113: Promoted at Oakland Hospital after 49 years as a Psychotherapist.",
+        "Maren Johns — on the log, C113: the Rockridge streets are bustling with shoppers and diners",
+        "Maren Johns — on the log, C113: learned the video-call button by heart because that's where the grandkid lives most days",
+        "Maren Johns — Lives already wrote this person: the retirement (C112)",
+        "Manfred Owens moved into a place of their own in Jack London, renting (C113)",
+        "Manfred Owens — on the log, C113: heard the rent talk on the block turn sharp",
+        "Manfred Owens — on the log, C113: found a quiet minute at a bar patio and the hum of a bassline from a passing car",
+        "Manfred Owens — on the log, C113: walked the Mandela Parkway median under the trees and took the long way home",
+        "Manfred Owens — on the log, C113: noticed neighbors being more watchful today",
+        "Ross Cabral moved into a place of their own in Temescal, renting (C113)",
+        "Ross Cabral — on the log, C113: noticed more neighbors home on a weekday afternoon",
+        "Ross Cabral — on the log, C113: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence",
+        "Ross Cabral — on the log, C113: compared rent notes with a neighbor over the fence in Temescal",
+        "Ross Cabral — on the log, C113: walked the long, lit way home without being asked",
+        "Ross Cabral — the Tribune named them in a piece headlined Slayer Syndicate – Minor League Deep Dive (High-A Level) (Sports)",
+        "Ross Cabral — the Tribune named them in a piece headlined Offseason Efficiency Analysis: When Desperation Meets Asset Management (Sports)",
+        "Ross Cabral — the Tribune named them in a piece headlined Oakland Media Digest – Offseason 2040-41 (desk unknown)",
+        "Dawson Nguyen won on the UNDOCKED book — staked 590, paid 1080, Baylight District (C113)",
+        "Dawson Nguyen — on the log, C112: watched someone repair a fence for an hour and wondered when they last finished anything",
+        "Dawson Nguyen — on the log, C112: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+        "Dawson Nguyen — on the log, C113: A manager at Gridiron Analytics forwarded their write-up upstairs with a note that said look at this.",
+        "Dawson Nguyen — on the log, C113: brought home a new plant and picked its spot carefully",
+        "Dawson Nguyen — the Tribune named them in a piece headlined Temescal's Data-Driven Rhythm (Business, C107)",
+        "Dawson Nguyen — the Tribune named them in a piece headlined Here's the corrected business section for cycle 107: (Business, C107)",
+        "Bailey Allen lost on the UNDOCKED book — staked 417, the book kept it, West Oakland (C113)",
+        "Bailey Allen — on the log, C112: stepped over a puddle reflecting the Tribune Tower neon and thought about taking a picture",
+        "Bailey Allen — on the log, C112: noticed another renovated Victorian on the block and calculated what the property taxes must be",
+        "Bailey Allen — on the log, C113: retold an old family story and caught a detail they'd never noticed",
+        "Adash Stanley — got home still wired from the final out and couldn't sit down, Downtown — one of 6 people the Cycle's sports turn reached (A's W3 [hot-streak]; Oaks W4 [hot-streak]) (C113)",
+        "Adash Stanley — on the log, C112: got the lab slot and started showing up before the professor",
+        "Adash Stanley — on the log, C113: drove home with the radio off, letting the win settle",
+        "Adash Stanley — on the log, C113: tried to keep the streak out of the conversation at dinner and failed",
+        "Adash Stanley — on the log, C113: let the week's wins carry dinner",
+        "Adash Stanley — the Tribune named them in a piece headlined Oaks' First Win Offers a Useful Opening Read (Sports, C112)",
+        "Adash Stanley — the Tribune named them in a piece headlined The First Win Has Made the Room Louder, Not Certain (Sports, C112)",
+        "Adash Stanley — the Tribune named them in a piece headlined The Oaks’ Draymond Question Is Now a Test of the Build (Sports, C111)",
+        "Ronald Williams — finally fixed the thing that had been broken for months, West Oakland — one of 4 people the Cycle's city turn reached (Oakland Alternative Response Initiative is dispatch-live — ongoing safety effects in West Oakland, Fruitvale, East Oakland; the city feels…) (C113)",
+        "Ronald Williams — on the log, C113: read about something unfamiliar and kept pulling the thread",
+        "Ronald Williams — on the log, C113: noticed West Oakland's industrial character",
+        "Marrin Benry — stayed cautious after hearing last night felt tense, Fruitvale — one of 4 people the Cycle's city turn reached (Fruitvale Transit Hub Phase II — Visioning is design-phase — ongoing transit effects in Fruitvale; the city feels it through these…) (C113)",
+        "Marrin Benry — on the log, C112: grabbed coffee from the cart outside the hospital before the morning rush hit",
+        "Marrin Benry — on the log, C113: planned the month's budget together with their partner",
+        "Paul Skenes — recorded a short message for a community campaign, Lake Merritt (C113, PostCareer-Influence)",
+        "Paul Skenes — on the log, C112: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+        "Paul Skenes — on the log, C113: found a forgotten photograph tucked in a book and sat with it a while",
+        "Paul Skenes — on the log, C113: stopped to watch the game replay on the bar tv, leaning against the counter",
+        "Paul Skenes — on the log, C113: stepped over a puddle reflecting the Tribune Tower neon and thought about taking a picture",
+        "Paul Skenes — the Tribune named them in a piece headlined Unsung Architects of a Dynasty (Sports)",
+        "Paul Skenes — the Tribune named them in a piece headlined Offseason Efficiency Analysis: When Desperation Meets Asset Management (Sports)",
+        "Paul Skenes — the Tribune named them in a piece headlined The Dismantling: When Championships Require Sacrifice (Sports)",
+        "Marmol Lemon — took the long morning walk that used to be a commute, Uptown (C113, PostCareer)",
+        "Marmol Lemon — on the log, C112: smelled something on the stove next door that belonged to childhood near a gallery opening",
+        "Marmol Lemon — on the log, C113: someone at the bar called a napkin a ledger and nobody laughed",
+        "Marmol Lemon — on the log, C113: heard Jack London was lively last night",
+        "Jiu Wong — cooked a recipe from memory that no one had written down, Laurel (C113, PostCareer)",
+        "Jiu Wong — on the log, C112: adjusted today's plans after last night's gridlock",
+        "Jiu Wong — on the log, C112: saw a stranger laugh at their phone and invented the joke all the way home",
+        "Jiu Wong — on the log, C112: navigated the stroller traffic on College Avenue and silently judged the parking jobs",
+        "Jiu Wong — on the log, C113: noticed three new pop-up restaurants on Telegraph and wondered how long any of them would last",
+        "Billy Storip — fixed a squeaky hinge that had been squeaking since the kids left home near a bookstore corner, Rockridge (C113, PostCareer)",
+        "Billy Storip — on the log, C112: showed up to set up the chairs in the fellowship hall because if they didn't do it, no one would",
+        "Billy Storip — on the log, C112: the bar went silent for UNDOCKED the way it used to for a late A's lead",
+        "Billy Storip — on the log, C113: overheard coworkers talking about last night's scene"
+      ],
+      "priorCycle": null,
+      "note": "none of today's people has written their own page this Cycle — no quotes",
+      "engineHooks": [
+        "A family bought their home in Jack London (observational analysis)",
+        "A family bought their home in Uptown (observational analysis)",
+        "A family bought their home in Chinatown (observational analysis)",
+        "A family bought their home in Rockridge (observational analysis)"
+      ],
+      "roomIsYours": "the plain respect, what the event meant in that house or on that block, the detail the family would have picked — from the lines below, never invented",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-lives",
+    "hood": "Uptown",
+    "src": "output/beats/Lived_Events.jsonl @C113 2026-10-26",
+    "plan": {
+      "focus": "Maren Johns",
+      "closeQuestion": "What are Maren Johns' plans for the future now that she has been promoted?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00366",
+        "name": "Alicia Hernandez",
+        "profile": "Alicia Hernandez — Coffee Roaster — Uptown",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00470",
+        "name": "Maren Johns",
+        "profile": "Maren Johns — Psychotherapist — Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00028",
+        "name": "Manfred Owens",
+        "profile": "Manfred Owens — Booky — Jack London",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00470-5dc60a097f",
+        "pop": "POP-00470",
+        "name": "Maren Johns",
+        "quote": "I was promoted at Oakland Hospital after 49 years as a Psychotherapist. It was a surprise, but a nice one.",
+        "factIds": [
+          "F-e9573e9302ab"
+        ],
+        "src": "packet.W2[POP-00470]"
+      },
+      {
+        "id": "Q-POP-00366-bea16303a7",
+        "pop": "POP-00366",
+        "name": "Alicia Hernandez",
+        "quote": "I've seen Maren Johns get promoted, and I heard they work as a Psychotherapist in Rockridge. I don't know them personally, but it's nice to see people getting recognized for their work, especially after 49 years. It's a big deal.",
+        "factIds": [
+          "F-9596f894931d",
+          "F-e9573e9302ab"
+        ],
+        "src": "packet.W2[POP-00366]"
+      },
+      {
+        "id": "Q-POP-00028-9f43202f18",
+        "pop": "POP-00028",
+        "name": "Manfred Owens",
+        "quote": "I've noticed that people around here are being more watchful lately, and there's been some sharp talk about rent on the block. It's making me a bit more aware of my surroundings.",
+        "factIds": [
+          "F-a568a6f3e392",
+          "F-6fd121fb7900"
+        ],
+        "src": "packet.W2[POP-00028]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Maren Johns may have plans to continue working in some capacity after her promotion",
+        "usable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Her promotion may have been influenced by her experience and reputation in the field",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C113",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-876f95b5eb98"
+    },
+    {
+      "t": "FACT",
+      "text": "Alicia Hernandez retired from work as Coffee Roaster, Uptown",
+      "src": "output/beats/Lived_Events.jsonl @C113 2026-10-26",
+      "id": "F-f9430b5a9890"
+    },
+    {
+      "t": "FACT",
+      "text": "Alicia Hernandez first. The event is the lead; one true detail; what came next only if the record says.",
+      "src": "output/beats/Lived_Events.jsonl @C113 2026-10-26",
+      "id": "F-60e5154fb22c"
+    },
+    {
+      "t": "FACT",
+      "text": "Alicia Hernandez retired from work as Coffee Roaster, Uptown (C113). What came next: the record does not say yet",
+      "src": "output/beats/Lived_Events.jsonl @C113",
+      "id": "F-ee22549ee2da"
+    },
+    {
+      "t": "FACT",
+      "text": "Alicia Hernandez — on the log, C113: noticed neighbors being more watchful today",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-25c381ce2ab2"
+    },
+    {
+      "t": "FACT",
+      "text": "Maren Johns was promoted; the record lists their work as Psychotherapist, Rockridge (C113). What came next: the record does not say yet",
+      "src": "output/beats/Lived_Events.jsonl @C113",
+      "id": "F-9596f894931d"
+    },
+    {
+      "t": "FACT",
+      "text": "Maren Johns — on the log, C113: browsed a bookstore along the avenue",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-c8865a3ec55f"
+    },
+    {
+      "t": "FACT",
+      "text": "Maren Johns — on the log, C113: Promoted at Oakland Hospital after 49 years as a Psychotherapist.",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-e9573e9302ab"
+    },
+    {
+      "t": "FACT",
+      "text": "Maren Johns — on the log, C113: the Rockridge streets are bustling with shoppers and diners",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-9c1a2e2406c2"
+    },
+    {
+      "t": "FACT",
+      "text": "Maren Johns — on the log, C113: learned the video-call button by heart because that's where the grandkid lives most days",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-58a81d1defd8"
+    },
+    {
+      "t": "FACT",
+      "text": "Maren Johns — Lives already wrote this person: the retirement (C112)",
+      "src": "output/cron-compare/lives_covered.json",
+      "id": "F-85b3675c852d"
+    },
+    {
+      "t": "FACT",
+      "text": "Manfred Owens moved into a place of their own in Jack London, renting (C113)",
+      "src": "output/beats/Household_Ledger.jsonl @C113",
+      "id": "F-a9ddf11023eb"
+    },
+    {
+      "t": "FACT",
+      "text": "Manfred Owens — on the log, C113: heard the rent talk on the block turn sharp",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-6fd121fb7900"
+    },
+    {
+      "t": "FACT",
+      "text": "Manfred Owens — on the log, C113: found a quiet minute at a bar patio and the hum of a bassline from a passing car",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-23d93f9cbc79"
+    },
+    {
+      "t": "FACT",
+      "text": "Manfred Owens — on the log, C113: walked the Mandela Parkway median under the trees and took the long way home",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-39d59285e5f2"
+    },
+    {
+      "t": "FACT",
+      "text": "Manfred Owens — on the log, C113: noticed neighbors being more watchful today",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-a568a6f3e392"
+    },
+    {
+      "t": "FACT",
+      "text": "Ross Cabral moved into a place of their own in Temescal, renting (C113)",
+      "src": "output/beats/Household_Ledger.jsonl @C113",
+      "id": "F-44da9f5fd161"
+    },
+    {
+      "t": "FACT",
+      "text": "Ross Cabral — on the log, C113: noticed more neighbors home on a weekday afternoon",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-981f4ba8d4b7"
+    },
+    {
+      "t": "FACT",
+      "text": "Ross Cabral — on the log, C113: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-2c07c2f0b697"
+    },
+    {
+      "t": "FACT",
+      "text": "Ross Cabral — on the log, C113: compared rent notes with a neighbor over the fence in Temescal",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-c5273e5762ec"
+    },
+    {
+      "t": "FACT",
+      "text": "Ross Cabral — on the log, C113: walked the long, lit way home without being asked",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-36fd5524059f"
+    },
+    {
+      "t": "FACT",
+      "text": "Ross Cabral — the Tribune named them in a piece headlined Slayer Syndicate – Minor League Deep Dive (High-A Level) (Sports)",
+      "src": "archive/ARTICLE_INDEX.jsonl b9f5569cc3806d54",
+      "id": "F-a807278a2180"
+    },
+    {
+      "t": "FACT",
+      "text": "Ross Cabral — the Tribune named them in a piece headlined Offseason Efficiency Analysis: When Desperation Meets Asset Management (Sports)",
+      "src": "archive/ARTICLE_INDEX.jsonl 416d45676c73f82e",
+      "id": "F-5042d3403cc9"
+    },
+    {
+      "t": "FACT",
+      "text": "Ross Cabral — the Tribune named them in a piece headlined Oakland Media Digest – Offseason 2040-41 (desk unknown)",
+      "src": "archive/ARTICLE_INDEX.jsonl 340a14eca859219d",
+      "id": "F-e70853afc95d"
+    },
+    {
+      "t": "FACT",
+      "text": "Dawson Nguyen won on the UNDOCKED book — staked 590, paid 1080, Baylight District (C113)",
+      "src": "output/beats/Casino_Ledger.jsonl @C113",
+      "id": "F-0e5e932708fd"
+    },
+    {
+      "t": "FACT",
+      "text": "Dawson Nguyen — on the log, C112: watched someone repair a fence for an hour and wondered when they last finished anything",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-baa029c103f2"
+    },
+    {
+      "t": "FACT",
+      "text": "Dawson Nguyen — on the log, C112: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-859564374d09"
+    },
+    {
+      "t": "FACT",
+      "text": "Dawson Nguyen — on the log, C113: A manager at Gridiron Analytics forwarded their write-up upstairs with a note that said look at this.",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-8ea6e47c1046"
+    },
+    {
+      "t": "FACT",
+      "text": "Dawson Nguyen — on the log, C113: brought home a new plant and picked its spot carefully",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-2af0572a0d65"
+    },
+    {
+      "t": "FACT",
+      "text": "Dawson Nguyen — the Tribune named them in a piece headlined Temescal's Data-Driven Rhythm (Business, C107)",
+      "src": "archive/ARTICLE_INDEX.jsonl 4ab3b797bebe4ab3",
+      "id": "F-680b72672d12"
+    },
+    {
+      "t": "FACT",
+      "text": "Dawson Nguyen — the Tribune named them in a piece headlined Here's the corrected business section for cycle 107: (Business, C107)",
+      "src": "archive/ARTICLE_INDEX.jsonl ded20a98f94a5a5d",
+      "id": "F-55530fcbbc4a"
+    },
+    {
+      "t": "FACT",
+      "text": "Bailey Allen lost on the UNDOCKED book — staked 417, the book kept it, West Oakland (C113)",
+      "src": "output/beats/Casino_Ledger.jsonl @C113",
+      "id": "F-0e7c5f7d7ee0"
+    },
+    {
+      "t": "FACT",
+      "text": "Bailey Allen — on the log, C112: stepped over a puddle reflecting the Tribune Tower neon and thought about taking a picture",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-a78f92132f72"
+    },
+    {
+      "t": "FACT",
+      "text": "Bailey Allen — on the log, C112: noticed another renovated Victorian on the block and calculated what the property taxes must be",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-524d4b6f1f17"
+    },
+    {
+      "t": "FACT",
+      "text": "Bailey Allen — on the log, C113: retold an old family story and caught a detail they'd never noticed",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-69aaae7df836"
+    },
+    {
+      "t": "FACT",
+      "text": "Adash Stanley — got home still wired from the final out and couldn't sit down, Downtown — one of 6 people the Cycle's sports turn reached (A's W3 [hot-streak]; Oaks W4 [hot-streak]) (C113)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C113",
+      "id": "F-455a8c898bfd"
+    },
+    {
+      "t": "FACT",
+      "text": "Adash Stanley — on the log, C112: got the lab slot and started showing up before the professor",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-0da50fa19f80"
+    },
+    {
+      "t": "FACT",
+      "text": "Adash Stanley — on the log, C113: drove home with the radio off, letting the win settle",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-3bc4e4528a84"
+    },
+    {
+      "t": "FACT",
+      "text": "Adash Stanley — on the log, C113: tried to keep the streak out of the conversation at dinner and failed",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-78a5ff734b65"
+    },
+    {
+      "t": "FACT",
+      "text": "Adash Stanley — on the log, C113: let the week's wins carry dinner",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-41729416ae41"
+    },
+    {
+      "t": "FACT",
+      "text": "Adash Stanley — the Tribune named them in a piece headlined Oaks' First Win Offers a Useful Opening Read (Sports, C112)",
+      "src": "archive/ARTICLE_INDEX.jsonl 5df1d92b058d51c6",
+      "id": "F-ec9d08e5e05e"
+    },
+    {
+      "t": "FACT",
+      "text": "Adash Stanley — the Tribune named them in a piece headlined The First Win Has Made the Room Louder, Not Certain (Sports, C112)",
+      "src": "archive/ARTICLE_INDEX.jsonl 01f402b34413050e",
+      "id": "F-169efed24d90"
+    },
+    {
+      "t": "FACT",
+      "text": "Adash Stanley — the Tribune named them in a piece headlined The Oaks’ Draymond Question Is Now a Test of the Build (Sports, C111)",
+      "src": "archive/ARTICLE_INDEX.jsonl 939717cf0345b7c4",
+      "id": "F-a72a76127ef6"
+    },
+    {
+      "t": "FACT",
+      "text": "Ronald Williams — finally fixed the thing that had been broken for months, West Oakland — one of 4 people the Cycle's city turn reached (Oakland Alternative Response Initiative is dispatch-live — ongoing safety effects in West Oakland, Fruitvale, East Oakland; the city feels…) (C113)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C113",
+      "id": "F-d3c9b0211e89"
+    },
+    {
+      "t": "FACT",
+      "text": "Ronald Williams — on the log, C113: read about something unfamiliar and kept pulling the thread",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-81903593cbeb"
+    },
+    {
+      "t": "FACT",
+      "text": "Ronald Williams — on the log, C113: noticed West Oakland's industrial character",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-9db715adcbfc"
+    },
+    {
+      "t": "FACT",
+      "text": "Marrin Benry — stayed cautious after hearing last night felt tense, Fruitvale — one of 4 people the Cycle's city turn reached (Fruitvale Transit Hub Phase II — Visioning is design-phase — ongoing transit effects in Fruitvale; the city feels it through these…) (C113)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C113",
+      "id": "F-7f6378dd4b9f"
+    },
+    {
+      "t": "FACT",
+      "text": "Marrin Benry — on the log, C112: grabbed coffee from the cart outside the hospital before the morning rush hit",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-ed60a981cf3c"
+    },
+    {
+      "t": "FACT",
+      "text": "Marrin Benry — on the log, C113: planned the month's budget together with their partner",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-6e25b1589a2f"
+    },
+    {
+      "t": "FACT",
+      "text": "Paul Skenes — recorded a short message for a community campaign, Lake Merritt (C113, PostCareer-Influence)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-187daf4ebbe7"
+    },
+    {
+      "t": "FACT",
+      "text": "Paul Skenes — on the log, C112: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-2d87ff9078a6"
+    },
+    {
+      "t": "FACT",
+      "text": "Paul Skenes — on the log, C113: found a forgotten photograph tucked in a book and sat with it a while",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-15d78dc5b978"
+    },
+    {
+      "t": "FACT",
+      "text": "Paul Skenes — on the log, C113: stopped to watch the game replay on the bar tv, leaning against the counter",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-08c7741522f3"
+    },
+    {
+      "t": "FACT",
+      "text": "Paul Skenes — on the log, C113: stepped over a puddle reflecting the Tribune Tower neon and thought about taking a picture",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-cde19d42daa3"
+    },
+    {
+      "t": "FACT",
+      "text": "Paul Skenes — the Tribune named them in a piece headlined Unsung Architects of a Dynasty (Sports)",
+      "src": "archive/ARTICLE_INDEX.jsonl 1ab41325cca00406",
+      "id": "F-bf4f19967edc"
+    },
+    {
+      "t": "FACT",
+      "text": "Paul Skenes — the Tribune named them in a piece headlined Offseason Efficiency Analysis: When Desperation Meets Asset Management (Sports)",
+      "src": "archive/ARTICLE_INDEX.jsonl 416d45676c73f82e",
+      "id": "F-fbb200508957"
+    },
+    {
+      "t": "FACT",
+      "text": "Paul Skenes — the Tribune named them in a piece headlined The Dismantling: When Championships Require Sacrifice (Sports)",
+      "src": "archive/ARTICLE_INDEX.jsonl 7e63265639c2c2a1",
+      "id": "F-6566b970d5d0"
+    },
+    {
+      "t": "FACT",
+      "text": "Marmol Lemon — took the long morning walk that used to be a commute, Uptown (C113, PostCareer)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-7b0beb8c57be"
+    },
+    {
+      "t": "FACT",
+      "text": "Marmol Lemon — on the log, C112: smelled something on the stove next door that belonged to childhood near a gallery opening",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-8098cb879065"
+    },
+    {
+      "t": "FACT",
+      "text": "Marmol Lemon — on the log, C113: someone at the bar called a napkin a ledger and nobody laughed",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-9d70bf538fba"
+    },
+    {
+      "t": "FACT",
+      "text": "Marmol Lemon — on the log, C113: heard Jack London was lively last night",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-f988625fec9c"
+    },
+    {
+      "t": "FACT",
+      "text": "Jiu Wong — cooked a recipe from memory that no one had written down, Laurel (C113, PostCareer)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-9becfb301b5e"
+    },
+    {
+      "t": "FACT",
+      "text": "Jiu Wong — on the log, C112: adjusted today's plans after last night's gridlock",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-344d09510280"
+    },
+    {
+      "t": "FACT",
+      "text": "Jiu Wong — on the log, C112: saw a stranger laugh at their phone and invented the joke all the way home",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-8323b2836370"
+    },
+    {
+      "t": "FACT",
+      "text": "Jiu Wong — on the log, C112: navigated the stroller traffic on College Avenue and silently judged the parking jobs",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-29052d7a31aa"
+    },
+    {
+      "t": "FACT",
+      "text": "Jiu Wong — on the log, C113: noticed three new pop-up restaurants on Telegraph and wondered how long any of them would last",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-ccfb062eb835"
+    },
+    {
+      "t": "FACT",
+      "text": "Billy Storip — fixed a squeaky hinge that had been squeaking since the kids left home near a bookstore corner, Rockridge (C113, PostCareer)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-dbeab58a54dd"
+    },
+    {
+      "t": "FACT",
+      "text": "Billy Storip — on the log, C112: showed up to set up the chairs in the fellowship hall because if they didn't do it, no one would",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-6e598d72aa5f"
+    },
+    {
+      "t": "FACT",
+      "text": "Billy Storip — on the log, C112: the bar went silent for UNDOCKED the way it used to for a late A's lead",
+      "src": "output/beats/LifeHistory_Log.jsonl @C112",
+      "id": "F-39eedfadee9b"
+    },
+    {
+      "t": "FACT",
+      "text": "Billy Storip — on the log, C113: overheard coworkers talking about last night's scene",
+      "src": "output/beats/LifeHistory_Log.jsonl @C113",
+      "id": "F-134e7c0d8f79"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C9, Winter, holiday=none",
+      "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)",
+      "id": "F-ab9d6786094e"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "tamsin-lives-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Put the cycle's person events in the paper as news, one person at a time — a birth, a death, a hospital stay, a retirement, a promotion, a household set up or a place of one's own, a win or a loss on the book, what a turn of the city did to someone's day, and the smaller moments the record kept. The event is the lead, the person is named as the slice names them, and what came next appears only when a later record holds it. A stake or a payout is the person's own fact, not a statistic. The page is the city's real calendar; every person on it is one the record holds.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "plain respect — a neighborhood weekly's births-and-obituaries hand, unhurried, exact",
+      "targetWords": "450-1200",
+      "opening": "the heaviest event on the slice, stated as it happened to the named person",
+      "closing": "the last person's passage ends on what the record holds next for them, or on the fact itself — no moral, no roundup"
+    },
+    "authorizedTexture": [
+      "the plain respect of the form — the ordinary weight of a birth, a retirement, a discharge, stated without ornament",
+      "the frame around a supplied fact — what a promotion to the supplied role means in plain words, without inventing the workplace",
+      "the neighborhood the slice names as where the person lives, without an invented street scene",
+      "the order and pacing of the passages — heaviest first, one person at a time"
+    ],
+    "textureConditions": [
+      "every person, event, role, employer, neighborhood, hospital stay, household and family tie must come from the slice",
+      "a quote appears only verbatim from the person's own supplied page; nothing paraphrased into quotation marks",
+      "what came next appears only when a later Cycle's supplied record holds it",
+      "a thin day (few events) is written as a short page, not padded"
+    ],
+    "canonBlockers": [
+      "any person, event, quote, venue, employer or family member not on the slice",
+      "a paraphrased or invented quote",
+      "a cause, diagnosis or outcome the record does not state",
+      "a statistic, rate or trend claim — the page is people, not numbers",
+      "intake bookkeeping rows (Emerged into Tier, Added to Simulation_Ledger, Updated to Tier) written as life events",
+      "raw engine labels or decimals printed as public-facing evidence"
+    ]
+  },
+  "manifest": {
+    "id": "AM-13464f5cbb3e",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-876f95b5eb98",
+        "t": "FACT",
+        "text": "Current cycle: C113",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-f9430b5a9890",
+        "t": "FACT",
+        "text": "Alicia Hernandez retired from work as Coffee Roaster, Uptown",
+        "src": "output/beats/Lived_Events.jsonl @C113 2026-10-26"
+      },
+      {
+        "id": "F-60e5154fb22c",
+        "t": "FACT",
+        "text": "Alicia Hernandez first. The event is the lead; one true detail; what came next only if the record says.",
+        "src": "output/beats/Lived_Events.jsonl @C113 2026-10-26"
+      },
+      {
+        "id": "F-ee22549ee2da",
+        "t": "FACT",
+        "text": "Alicia Hernandez retired from work as Coffee Roaster, Uptown (C113). What came next: the record does not say yet",
+        "src": "output/beats/Lived_Events.jsonl @C113"
+      },
+      {
+        "id": "F-25c381ce2ab2",
+        "t": "FACT",
+        "text": "Alicia Hernandez — on the log, C113: noticed neighbors being more watchful today",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-9596f894931d",
+        "t": "FACT",
+        "text": "Maren Johns was promoted; the record lists their work as Psychotherapist, Rockridge (C113). What came next: the record does not say yet",
+        "src": "output/beats/Lived_Events.jsonl @C113"
+      },
+      {
+        "id": "F-c8865a3ec55f",
+        "t": "FACT",
+        "text": "Maren Johns — on the log, C113: browsed a bookstore along the avenue",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-e9573e9302ab",
+        "t": "FACT",
+        "text": "Maren Johns — on the log, C113: Promoted at Oakland Hospital after 49 years as a Psychotherapist.",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-9c1a2e2406c2",
+        "t": "FACT",
+        "text": "Maren Johns — on the log, C113: the Rockridge streets are bustling with shoppers and diners",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-58a81d1defd8",
+        "t": "FACT",
+        "text": "Maren Johns — on the log, C113: learned the video-call button by heart because that's where the grandkid lives most days",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-85b3675c852d",
+        "t": "FACT",
+        "text": "Maren Johns — Lives already wrote this person: the retirement (C112)",
+        "src": "output/cron-compare/lives_covered.json"
+      },
+      {
+        "id": "F-a9ddf11023eb",
+        "t": "FACT",
+        "text": "Manfred Owens moved into a place of their own in Jack London, renting (C113)",
+        "src": "output/beats/Household_Ledger.jsonl @C113"
+      },
+      {
+        "id": "F-6fd121fb7900",
+        "t": "FACT",
+        "text": "Manfred Owens — on the log, C113: heard the rent talk on the block turn sharp",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-23d93f9cbc79",
+        "t": "FACT",
+        "text": "Manfred Owens — on the log, C113: found a quiet minute at a bar patio and the hum of a bassline from a passing car",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-39d59285e5f2",
+        "t": "FACT",
+        "text": "Manfred Owens — on the log, C113: walked the Mandela Parkway median under the trees and took the long way home",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-a568a6f3e392",
+        "t": "FACT",
+        "text": "Manfred Owens — on the log, C113: noticed neighbors being more watchful today",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-44da9f5fd161",
+        "t": "FACT",
+        "text": "Ross Cabral moved into a place of their own in Temescal, renting (C113)",
+        "src": "output/beats/Household_Ledger.jsonl @C113"
+      },
+      {
+        "id": "F-981f4ba8d4b7",
+        "t": "FACT",
+        "text": "Ross Cabral — on the log, C113: noticed more neighbors home on a weekday afternoon",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-2c07c2f0b697",
+        "t": "FACT",
+        "text": "Ross Cabral — on the log, C113: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-c5273e5762ec",
+        "t": "FACT",
+        "text": "Ross Cabral — on the log, C113: compared rent notes with a neighbor over the fence in Temescal",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-36fd5524059f",
+        "t": "FACT",
+        "text": "Ross Cabral — on the log, C113: walked the long, lit way home without being asked",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-a807278a2180",
+        "t": "FACT",
+        "text": "Ross Cabral — the Tribune named them in a piece headlined Slayer Syndicate – Minor League Deep Dive (High-A Level) (Sports)",
+        "src": "archive/ARTICLE_INDEX.jsonl b9f5569cc3806d54"
+      },
+      {
+        "id": "F-5042d3403cc9",
+        "t": "FACT",
+        "text": "Ross Cabral — the Tribune named them in a piece headlined Offseason Efficiency Analysis: When Desperation Meets Asset Management (Sports)",
+        "src": "archive/ARTICLE_INDEX.jsonl 416d45676c73f82e"
+      },
+      {
+        "id": "F-e70853afc95d",
+        "t": "FACT",
+        "text": "Ross Cabral — the Tribune named them in a piece headlined Oakland Media Digest – Offseason 2040-41 (desk unknown)",
+        "src": "archive/ARTICLE_INDEX.jsonl 340a14eca859219d"
+      },
+      {
+        "id": "F-0e5e932708fd",
+        "t": "FACT",
+        "text": "Dawson Nguyen won on the UNDOCKED book — staked 590, paid 1080, Baylight District (C113)",
+        "src": "output/beats/Casino_Ledger.jsonl @C113"
+      },
+      {
+        "id": "F-baa029c103f2",
+        "t": "FACT",
+        "text": "Dawson Nguyen — on the log, C112: watched someone repair a fence for an hour and wondered when they last finished anything",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-859564374d09",
+        "t": "FACT",
+        "text": "Dawson Nguyen — on the log, C112: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-8ea6e47c1046",
+        "t": "FACT",
+        "text": "Dawson Nguyen — on the log, C113: A manager at Gridiron Analytics forwarded their write-up upstairs with a note that said look at this.",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-2af0572a0d65",
+        "t": "FACT",
+        "text": "Dawson Nguyen — on the log, C113: brought home a new plant and picked its spot carefully",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-680b72672d12",
+        "t": "FACT",
+        "text": "Dawson Nguyen — the Tribune named them in a piece headlined Temescal's Data-Driven Rhythm (Business, C107)",
+        "src": "archive/ARTICLE_INDEX.jsonl 4ab3b797bebe4ab3"
+      },
+      {
+        "id": "F-55530fcbbc4a",
+        "t": "FACT",
+        "text": "Dawson Nguyen — the Tribune named them in a piece headlined Here's the corrected business section for cycle 107: (Business, C107)",
+        "src": "archive/ARTICLE_INDEX.jsonl ded20a98f94a5a5d"
+      },
+      {
+        "id": "F-0e7c5f7d7ee0",
+        "t": "FACT",
+        "text": "Bailey Allen lost on the UNDOCKED book — staked 417, the book kept it, West Oakland (C113)",
+        "src": "output/beats/Casino_Ledger.jsonl @C113"
+      },
+      {
+        "id": "F-a78f92132f72",
+        "t": "FACT",
+        "text": "Bailey Allen — on the log, C112: stepped over a puddle reflecting the Tribune Tower neon and thought about taking a picture",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-524d4b6f1f17",
+        "t": "FACT",
+        "text": "Bailey Allen — on the log, C112: noticed another renovated Victorian on the block and calculated what the property taxes must be",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-69aaae7df836",
+        "t": "FACT",
+        "text": "Bailey Allen — on the log, C113: retold an old family story and caught a detail they'd never noticed",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-455a8c898bfd",
+        "t": "FACT",
+        "text": "Adash Stanley — got home still wired from the final out and couldn't sit down, Downtown — one of 6 people the Cycle's sports turn reached (A's W3 [hot-streak]; Oaks W4 [hot-streak]) (C113)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C113"
+      },
+      {
+        "id": "F-0da50fa19f80",
+        "t": "FACT",
+        "text": "Adash Stanley — on the log, C112: got the lab slot and started showing up before the professor",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-3bc4e4528a84",
+        "t": "FACT",
+        "text": "Adash Stanley — on the log, C113: drove home with the radio off, letting the win settle",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-78a5ff734b65",
+        "t": "FACT",
+        "text": "Adash Stanley — on the log, C113: tried to keep the streak out of the conversation at dinner and failed",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-41729416ae41",
+        "t": "FACT",
+        "text": "Adash Stanley — on the log, C113: let the week's wins carry dinner",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-ec9d08e5e05e",
+        "t": "FACT",
+        "text": "Adash Stanley — the Tribune named them in a piece headlined Oaks' First Win Offers a Useful Opening Read (Sports, C112)",
+        "src": "archive/ARTICLE_INDEX.jsonl 5df1d92b058d51c6"
+      },
+      {
+        "id": "F-169efed24d90",
+        "t": "FACT",
+        "text": "Adash Stanley — the Tribune named them in a piece headlined The First Win Has Made the Room Louder, Not Certain (Sports, C112)",
+        "src": "archive/ARTICLE_INDEX.jsonl 01f402b34413050e"
+      },
+      {
+        "id": "F-a72a76127ef6",
+        "t": "FACT",
+        "text": "Adash Stanley — the Tribune named them in a piece headlined The Oaks’ Draymond Question Is Now a Test of the Build (Sports, C111)",
+        "src": "archive/ARTICLE_INDEX.jsonl 939717cf0345b7c4"
+      },
+      {
+        "id": "F-d3c9b0211e89",
+        "t": "FACT",
+        "text": "Ronald Williams — finally fixed the thing that had been broken for months, West Oakland — one of 4 people the Cycle's city turn reached (Oakland Alternative Response Initiative is dispatch-live — ongoing safety effects in West Oakland, Fruitvale, East Oakland; the city feels…) (C113)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C113"
+      },
+      {
+        "id": "F-81903593cbeb",
+        "t": "FACT",
+        "text": "Ronald Williams — on the log, C113: read about something unfamiliar and kept pulling the thread",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-9db715adcbfc",
+        "t": "FACT",
+        "text": "Ronald Williams — on the log, C113: noticed West Oakland's industrial character",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-7f6378dd4b9f",
+        "t": "FACT",
+        "text": "Marrin Benry — stayed cautious after hearing last night felt tense, Fruitvale — one of 4 people the Cycle's city turn reached (Fruitvale Transit Hub Phase II — Visioning is design-phase — ongoing transit effects in Fruitvale; the city feels it through these…) (C113)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C113"
+      },
+      {
+        "id": "F-ed60a981cf3c",
+        "t": "FACT",
+        "text": "Marrin Benry — on the log, C112: grabbed coffee from the cart outside the hospital before the morning rush hit",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-6e25b1589a2f",
+        "t": "FACT",
+        "text": "Marrin Benry — on the log, C113: planned the month's budget together with their partner",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-187daf4ebbe7",
+        "t": "FACT",
+        "text": "Paul Skenes — recorded a short message for a community campaign, Lake Merritt (C113, PostCareer-Influence)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-2d87ff9078a6",
+        "t": "FACT",
+        "text": "Paul Skenes — on the log, C112: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-15d78dc5b978",
+        "t": "FACT",
+        "text": "Paul Skenes — on the log, C113: found a forgotten photograph tucked in a book and sat with it a while",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-08c7741522f3",
+        "t": "FACT",
+        "text": "Paul Skenes — on the log, C113: stopped to watch the game replay on the bar tv, leaning against the counter",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-cde19d42daa3",
+        "t": "FACT",
+        "text": "Paul Skenes — on the log, C113: stepped over a puddle reflecting the Tribune Tower neon and thought about taking a picture",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-bf4f19967edc",
+        "t": "FACT",
+        "text": "Paul Skenes — the Tribune named them in a piece headlined Unsung Architects of a Dynasty (Sports)",
+        "src": "archive/ARTICLE_INDEX.jsonl 1ab41325cca00406"
+      },
+      {
+        "id": "F-fbb200508957",
+        "t": "FACT",
+        "text": "Paul Skenes — the Tribune named them in a piece headlined Offseason Efficiency Analysis: When Desperation Meets Asset Management (Sports)",
+        "src": "archive/ARTICLE_INDEX.jsonl 416d45676c73f82e"
+      },
+      {
+        "id": "F-6566b970d5d0",
+        "t": "FACT",
+        "text": "Paul Skenes — the Tribune named them in a piece headlined The Dismantling: When Championships Require Sacrifice (Sports)",
+        "src": "archive/ARTICLE_INDEX.jsonl 7e63265639c2c2a1"
+      },
+      {
+        "id": "F-7b0beb8c57be",
+        "t": "FACT",
+        "text": "Marmol Lemon — took the long morning walk that used to be a commute, Uptown (C113, PostCareer)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-8098cb879065",
+        "t": "FACT",
+        "text": "Marmol Lemon — on the log, C112: smelled something on the stove next door that belonged to childhood near a gallery opening",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-9d70bf538fba",
+        "t": "FACT",
+        "text": "Marmol Lemon — on the log, C113: someone at the bar called a napkin a ledger and nobody laughed",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-f988625fec9c",
+        "t": "FACT",
+        "text": "Marmol Lemon — on the log, C113: heard Jack London was lively last night",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-9becfb301b5e",
+        "t": "FACT",
+        "text": "Jiu Wong — cooked a recipe from memory that no one had written down, Laurel (C113, PostCareer)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-344d09510280",
+        "t": "FACT",
+        "text": "Jiu Wong — on the log, C112: adjusted today's plans after last night's gridlock",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-8323b2836370",
+        "t": "FACT",
+        "text": "Jiu Wong — on the log, C112: saw a stranger laugh at their phone and invented the joke all the way home",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-29052d7a31aa",
+        "t": "FACT",
+        "text": "Jiu Wong — on the log, C112: navigated the stroller traffic on College Avenue and silently judged the parking jobs",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-ccfb062eb835",
+        "t": "FACT",
+        "text": "Jiu Wong — on the log, C113: noticed three new pop-up restaurants on Telegraph and wondered how long any of them would last",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-dbeab58a54dd",
+        "t": "FACT",
+        "text": "Billy Storip — fixed a squeaky hinge that had been squeaking since the kids left home near a bookstore corner, Rockridge (C113, PostCareer)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-6e598d72aa5f",
+        "t": "FACT",
+        "text": "Billy Storip — on the log, C112: showed up to set up the chairs in the fellowship hall because if they didn't do it, no one would",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-39eedfadee9b",
+        "t": "FACT",
+        "text": "Billy Storip — on the log, C112: the bar went silent for UNDOCKED the way it used to for a late A's lead",
+        "src": "output/beats/LifeHistory_Log.jsonl @C112"
+      },
+      {
+        "id": "F-134e7c0d8f79",
+        "t": "FACT",
+        "text": "Billy Storip — on the log, C113: overheard coworkers talking about last night's scene",
+        "src": "output/beats/LifeHistory_Log.jsonl @C113"
+      },
+      {
+        "id": "F-ab9d6786094e",
+        "t": "FACT",
+        "text": "Calendar: Y3C9, Winter, holiday=none",
+        "src": "output/world_summary_c113.md Calendar context (Simulation_Calendar)"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00470-5dc60a097f",
+        "speakerId": "POP-00470",
+        "speakerName": "Maren Johns",
+        "text": "I was promoted at Oakland Hospital after 49 years as a Psychotherapist. It was a surprise, but a nice one.",
+        "factIds": [
+          "F-e9573e9302ab"
+        ],
+        "src": "packet.W2[POP-00470]"
+      },
+      {
+        "id": "Q-POP-00366-bea16303a7",
+        "speakerId": "POP-00366",
+        "speakerName": "Alicia Hernandez",
+        "text": "I've seen Maren Johns get promoted, and I heard they work as a Psychotherapist in Rockridge. I don't know them personally, but it's nice to see people getting recognized for their work, especially after 49 years. It's a big deal.",
+        "factIds": [
+          "F-9596f894931d",
+          "F-e9573e9302ab"
+        ],
+        "src": "packet.W2[POP-00366]"
+      },
+      {
+        "id": "Q-POP-00028-9f43202f18",
+        "speakerId": "POP-00028",
+        "speakerName": "Manfred Owens",
+        "text": "I've noticed that people around here are being more watchful lately, and there's been some sharp talk about rent on the block. It's making me a bit more aware of my surroundings.",
+        "factIds": [
+          "F-a568a6f3e392",
+          "F-6fd121fb7900"
+        ],
+        "src": "packet.W2[POP-00028]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00366",
+        "name": "Alicia Hernandez",
+        "profile": "Alicia Hernandez — Coffee Roaster — Uptown",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00470",
+        "name": "Maren Johns",
+        "profile": "Maren Johns — Psychotherapist — Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00028",
+        "name": "Manfred Owens",
+        "profile": "Manfred Owens — Booky — Jack London",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Maren Johns may have plans to continue working in some capacity after her promotion",
+        "publishable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Her promotion may have been influenced by her experience and reputation in the field",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "the plain respect of the form — the ordinary weight of a birth, a retirement, a discharge, stated without ornament",
+      "the frame around a supplied fact — what a promotion to the supplied role means in plain words, without inventing the workplace",
+      "the neighborhood the slice names as where the person lives, without an invented street scene",
+      "the order and pacing of the passages — heaviest first, one person at a time"
+    ],
+    "textureConditions": [
+      "every person, event, role, employer, neighborhood, hospital stay, household and family tie must come from the slice",
+      "a quote appears only verbatim from the person's own supplied page; nothing paraphrased into quotation marks",
+      "what came next appears only when a later Cycle's supplied record holds it",
+      "a thin day (few events) is written as a short page, not padded"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "draft": "output/cron-compare/sports_c112_talia-finch_packet-v2_openai-gpt-5-6-luna.md",
+  "cycle": "112",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "06e8b9a85b78cbe96528d551b2dd25ad28d4e1274378ce393aa1304e166cb02a",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Clean verification: Oaks inaugural win, 0-9 preseason record, citizen roles, and exact quote provenance match cycle 112 ground truth.",
+  "review": {
+    "profileId": "talia-finch-oaks-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "talia-finch-oaks-v1",
+    "packageVersion": "TALIA-OAKS-1",
+    "manifestId": "AM-124c1e13e7a1",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Adash Stanley",
+      "Austin Reaves",
+      "Talia Finch",
+      "Trenton Nawan"
+    ],
+    "unverified": [
+      "Bay Tribune Sports",
+      "San Antonio Spurs"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0104,
+  "durationMs": 6802,
+  "parseError": false,
+  "ranAt": "2026-10-22T23:17:12.663Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 400",
+    "words": 600,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "06e8b9a85b78cbe96528d551b2dd25ad28d4e1274378ce393aa1304e166cb02a",
+    "costUsd": 0.003
+  }
+}

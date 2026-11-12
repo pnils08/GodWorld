@@ -1,0 +1,476 @@
+{
+  "v": "UNDOCKED-ADAPTER/1",
+  "show": "UNDOCKED",
+  "episode_id": "undocked-pop00647-2026-11-07T02-30-24",
+  "popid": "POP-00647",
+  "holder": "Ronald Silk",
+  "session": "undocked-pop00647",
+  "window": {
+    "startedAt": "2026-11-07T02:30:24.669Z",
+    "endedAt": "2026-11-07T02:50:38.123Z"
+  },
+  "runner": {
+    "turns": 43,
+    "exitCode": 0,
+    "capped": true,
+    "toolErrors": 0,
+    "estCostUsd": 0.0356,
+    "tokensIn": 324952,
+    "tokensOut": 6118,
+    "log": "output/spacemolt-show/episodes/undocked-pop00647-2026-11-07T02-30-24.log",
+    "stopReason": "window",
+    "toolCalls": 42
+  },
+  "stall": null,
+  "source": {
+    "kind": "get_action_log",
+    "categories": [
+      "mining",
+      "trading",
+      "mission",
+      "combat",
+      "navigation",
+      "session",
+      "achievement"
+    ],
+    "fetchedAt": "2026-11-07T02:55:38.712Z"
+  },
+  "facts": {
+    "credits_delta": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "hits": 0,
+      "note": "gameplay in window carries no credit event — measured zero",
+      "value": 0
+    },
+    "points_delta": {
+      "type": "FACT",
+      "source": "get_achievements",
+      "basis": "progress",
+      "items": [
+        {
+          "id": "cartographer",
+          "name": "Cartographer",
+          "gained": 4.8
+        },
+        {
+          "id": "voyager_i",
+          "name": "Voyager I",
+          "gained": 3.2
+        },
+        {
+          "id": "voyager_ii",
+          "name": "Voyager II",
+          "gained": 1.6
+        },
+        {
+          "id": "chronicler",
+          "name": "Chronicler",
+          "gained": 0.6
+        },
+        {
+          "id": "far_traveler",
+          "name": "Far Traveler",
+          "gained": 0.01
+        },
+        {
+          "id": "jump_master",
+          "name": "Jump Master",
+          "gained": 0.01
+        }
+      ],
+      "beforeTakenAt": "2026-11-07T02:30:24.405Z",
+      "value": 10.22
+    },
+    "systems_visited": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": [
+        "last_light",
+        "fang",
+        "errai",
+        "wezen",
+        "brightfall",
+        "birchwood",
+        "pinecross",
+        "aludra",
+        "torcular",
+        "gsc_0002",
+        "tejat",
+        "rimegate",
+        "veritate",
+        "betelgeuse",
+        "gsc_0037",
+        "dabih",
+        "gsc_0045"
+      ]
+    },
+    "combat_results": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "events": 0,
+        "kills": 0,
+        "deaths": 0,
+        "other": 0
+      }
+    },
+    "cargo": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mined": {},
+        "sold": {}
+      }
+    },
+    "mishaps": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "event_counts": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": 0,
+        "trading": 0,
+        "mission": 0,
+        "combat": 0,
+        "navigation": 17,
+        "session": 1,
+        "achievement": 1
+      }
+    },
+    "entries": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": [],
+        "trading": [],
+        "mission": [],
+        "combat": [],
+        "navigation": [
+          {
+            "id": 254361644,
+            "created_at": "2026-11-07T02:50:34Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Dabih to GSC-0045",
+            "data": {
+              "arrival_poi": "gsc_0045_star",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "dabih",
+              "is_pathfinder": false,
+              "to_system": "gsc_0045",
+              "to_system_name": "GSC-0045"
+            }
+          },
+          {
+            "id": 254359690,
+            "created_at": "2026-11-07T02:49:24Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Rimegate to Dabih",
+            "data": {
+              "arrival_poi": "dabih_frost_ring",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "rimegate",
+              "is_pathfinder": false,
+              "to_system": "dabih",
+              "to_system_name": "Dabih"
+            }
+          },
+          {
+            "id": 254357754,
+            "created_at": "2026-11-07T02:48:14Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from GSC-0037 to Rimegate",
+            "data": {
+              "arrival_poi": "hollow_light",
+              "cloaked": false,
+              "first_visit": false,
+              "from_system": "gsc_0037",
+              "is_pathfinder": false,
+              "to_system": "rimegate",
+              "to_system_name": "Rimegate"
+            }
+          },
+          {
+            "id": 254354495,
+            "created_at": "2026-11-07T02:46:54Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Betelgeuse to GSC-0037",
+            "data": {
+              "arrival_poi": "gsc_0037_star",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "betelgeuse",
+              "is_pathfinder": false,
+              "to_system": "gsc_0037",
+              "to_system_name": "GSC-0037"
+            }
+          },
+          {
+            "id": 254352612,
+            "created_at": "2026-11-07T02:45:44Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Veritate to Betelgeuse",
+            "data": {
+              "arrival_poi": "betelgeuse_belt",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "veritate",
+              "is_pathfinder": false,
+              "to_system": "betelgeuse",
+              "to_system_name": "Betelgeuse"
+            }
+          },
+          {
+            "id": 254350754,
+            "created_at": "2026-11-07T02:44:34Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Rimegate to Veritate",
+            "data": {
+              "arrival_poi": "veritate_emission_nebula",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "rimegate",
+              "is_pathfinder": false,
+              "to_system": "veritate",
+              "to_system_name": "Veritate"
+            }
+          },
+          {
+            "id": 254348943,
+            "created_at": "2026-11-07T02:43:24Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Tejat to Rimegate",
+            "data": {
+              "arrival_poi": "hollow_light",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "tejat",
+              "is_pathfinder": false,
+              "to_system": "rimegate",
+              "to_system_name": "Rimegate"
+            }
+          },
+          {
+            "id": 254343901,
+            "created_at": "2026-11-07T02:42:14Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from GSC-0002 to Tejat",
+            "data": {
+              "arrival_poi": "tejat_star",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "gsc_0002",
+              "is_pathfinder": false,
+              "to_system": "tejat",
+              "to_system_name": "Tejat"
+            }
+          },
+          {
+            "id": 254341890,
+            "created_at": "2026-11-07T02:41:04Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Torcular to GSC-0002",
+            "data": {
+              "arrival_poi": "gsc_0002_ii",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "torcular",
+              "is_pathfinder": false,
+              "to_system": "gsc_0002",
+              "to_system_name": "GSC-0002"
+            }
+          },
+          {
+            "id": 254340117,
+            "created_at": "2026-11-07T02:39:55Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Aludra to Torcular",
+            "data": {
+              "arrival_poi": "torcular_frost_ring",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "aludra",
+              "is_pathfinder": false,
+              "to_system": "torcular",
+              "to_system_name": "Torcular"
+            }
+          },
+          {
+            "id": 254338094,
+            "created_at": "2026-11-07T02:38:44Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Pinecross to Aludra",
+            "data": {
+              "arrival_poi": "aludra_gas_plume",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "pinecross",
+              "is_pathfinder": false,
+              "to_system": "aludra",
+              "to_system_name": "Aludra"
+            }
+          },
+          {
+            "id": 254335276,
+            "created_at": "2026-11-07T02:37:34Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Birchwood to Pinecross",
+            "data": {
+              "arrival_poi": "sunbeam_dust",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "birchwood",
+              "is_pathfinder": false,
+              "to_system": "pinecross",
+              "to_system_name": "Pinecross"
+            }
+          },
+          {
+            "id": 254333523,
+            "created_at": "2026-11-07T02:36:24Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Brightfall to Birchwood",
+            "data": {
+              "arrival_poi": "birchwood_vapor_fields",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "brightfall",
+              "is_pathfinder": false,
+              "to_system": "birchwood",
+              "to_system_name": "Birchwood"
+            }
+          },
+          {
+            "id": 254331562,
+            "created_at": "2026-11-07T02:35:14Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Wezen to Brightfall",
+            "data": {
+              "arrival_poi": "brightfall_frost_ring",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "wezen",
+              "is_pathfinder": false,
+              "to_system": "brightfall",
+              "to_system_name": "Brightfall"
+            }
+          },
+          {
+            "id": 254329816,
+            "created_at": "2026-11-07T02:34:04Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Errai to Wezen",
+            "data": {
+              "arrival_poi": "wezen_faint_entanglement",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "errai",
+              "is_pathfinder": false,
+              "to_system": "wezen",
+              "to_system_name": "Wezen"
+            }
+          },
+          {
+            "id": 254326752,
+            "created_at": "2026-11-07T02:32:54Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Fang to Errai",
+            "data": {
+              "arrival_poi": "errai_faint_entanglement",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "fang",
+              "is_pathfinder": false,
+              "to_system": "errai",
+              "to_system_name": "Errai"
+            }
+          },
+          {
+            "id": 254325120,
+            "created_at": "2026-11-07T02:31:45Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Last Light to Fang",
+            "data": {
+              "arrival_poi": "fang_ii",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "last_light",
+              "is_pathfinder": false,
+              "to_system": "fang",
+              "to_system_name": "Fang"
+            }
+          }
+        ],
+        "session": [
+          {
+            "id": 254323243,
+            "created_at": "2026-11-07T02:30:26Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "RonaldSilk logged in",
+            "data": {
+              "last_login_at": "2026-11-07T02:30:24Z",
+              "source": "password"
+            }
+          }
+        ],
+        "achievement": [
+          {
+            "id": 254340408,
+            "created_at": "2026-11-07T02:40:06Z",
+            "category": "achievement",
+            "event_type": "achievement.unlocked",
+            "summary": "Unlocked achievement: Voyager I",
+            "data": {
+              "achievement_id": "voyager_i",
+              "points": 10
+            }
+          }
+        ]
+      }
+    }
+  },
+  "captains_log": {
+    "kind": "QUOTED_SUBJECTIVE_COLOR",
+    "type": "INTERPRETATION",
+    "provenance": "captains_log_list",
+    "windowed": 1,
+    "listed": 2,
+    "entries": [
+      {
+        "index": 0,
+        "created_at": "2026-11-07 02:50:38",
+        "text": "[Session Handoff] **Handoff: RonaldSilk (solarian), exploration run**\n\n- **Right now:** Just jumped to GSC-0045 and arrived at `gsc_0045_star`. Its `get_system` has not been called yet.\n- **Next step:** Call `get_system` on GSC-0045 to log its POIs and connections, then pick the next unvisited neighbor. The prior plan was to keep charting unvisited systems in the far west.\n- **Location and ship:** GSC-0045, Lawless space with no police. Ship is Theoria: hull 100/100, shields 55/55, armor 5, speed 1, cargo 2/70, fuel roughly 66/100 (estimated from ~1 fuel per jump, so verify with `get_status`).\n- **Credits:** 500 cr. No trades or sales recorded.\n- **Recent route:** Veritate → Betelgeuse → GSC-0037 (dead"
+      }
+    ],
+    "unwindowed": [
+      {
+        "index": 1,
+        "created_at": "2026-11-04 02:50:37",
+        "text": "[Session Handoff] - **Current state:** Just jumped from Izar to Tidewater (`tidewater_emission_nebula`). The arrival system data has not been fetched yet, so the next step is `get_system` and `get_status` to confirm location, fuel, and surroundings.\n- **Next step:** Survey Tidewater's POIs and connections, then decide whether to continue exploring or head somewhere specific. No destination was stated in the transcript.\n- **Character and ship:** RonaldSilk (Solarian), Theoria. Last confirmed at Izar: 500"
+      }
+    ]
+  }
+}

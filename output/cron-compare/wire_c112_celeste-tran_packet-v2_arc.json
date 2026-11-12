@@ -1,0 +1,32 @@
+{
+  "status": "arc-seed",
+  "cycle": "112",
+  "desk": "wire",
+  "persona": "celeste-tran",
+  "hood": "Lake Merritt",
+  "quotes": [
+    {
+      "pop": "POP-00540",
+      "name": "Jade Orion",
+      "quote": "I'm not sure what you mean by 'rising fame.' I've been doing my music here in Lake Merritt for a while now, and it's nice to see people appreciating it. I haven't really noticed anything out of the ordinary happening around here because of it, though. The neighborhood feels the same to me - people are still out for their evening jogs and walks around the lake, and the volunteers from the Cathedral of the Living Word are still cleaning up the streets. I've just been focusing on my craft and enjoying the community."
+    },
+    {
+      "pop": "POP-00546",
+      "name": "Tara Ellison",
+      "quote": "To be honest, I'm not sure my work is reflecting or influencing any trends in Oakland. I've just been doing my job as a journalist, covering local news and events. I did notice that a manager at Bay Tribune asked me to redo some work recently, which was a bit frustrating. I've also seen a lot of activity in Rockridge, like the film crew near the waterfront and people moving around the neighborhood. I'm not sure if that's related to any larger trends, though."
+    },
+    {
+      "pop": "POP-00001",
+      "name": "Vinnie Keane",
+      "quote": "I've seen a lot of love for the A's around here, and it's great to see the community rallying around the team. I was at a community health fair at Or Hashalom Renewal Community recently, and it felt like the whole neighborhood was coming together. People were talking about the A's, and it was clear that the team is still a big part of our identity. I'm proud to be a part of that, even if it's just as a legend now. The energy around the team is still electric, and it's something that brings us all together."
+    },
+    {
+      "pop": "POP-00194",
+      "name": "Yu Zen",
+      "quote": "I've seen more people moving into West Oakland and other neighborhoods around here. It's changing the vibe. With folks like Jade Orion making waves, it's like the whole city's buzzing. I mean, I've been out for morning walks and seen new faces, heard different music drifting from apartments. It's all pretty exciting, to be honest. My family loves it; the kids are always talking about the latest artists and what's trending."
+    }
+  ],
+  "claim": "I'm not sure what you mean by 'rising fame.' I've been doing my music here in Lake Merritt for a while now, and it's nice to see people appreciating it. I haven't really noticed anything out of the ordinary happening around here because of it, though. The neighborhood feels the same to me - people are still out for their evening jogs and walks around the lake, and the volunteers from the Cathedral of the Living Word are still cleaning up the streets. I've just been focusing on my craft and enjoying the community.",
+  "src": "citizenVoice PRESS c112",
+  "ranAt": "2026-10-23T18:20:35.664Z"
+}

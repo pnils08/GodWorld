@@ -1,0 +1,15 @@
+PRE-FLIGHT: Cycle 114
+========================================
+Target derivation: --cycle=114 (explicit)
+
+[x] Sports Feed: 11 entries, all required + recommended columns populated
+[x] Sports Feed records: every Team Record cell is stored as text
+[x] Sports Feed weeks: every WeekRecord cell passes the engine validator
+[x] Sports Feed names: every NamesUsed entry resolves to a ledger citizen
+[x] Citizen Intake: 0 pending — 0 household(s) (0 members), 0 single row(s), 0 the engine will send to review; 0 already in review
+[ ] Business Intake: NOT WIRED
+[ ] Storyline Intake: NOT WIRED
+[x] Initiative Tracker: 13 real / 0 placeholder / 0 bloat
+[x] Coverage Ratings: C113 — 6 rows (0 unprocessed, ready for engine intake)
+========================================
+READY

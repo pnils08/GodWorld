@@ -1,0 +1,50 @@
+{
+  "v": "UNDOCKED-INTAKE/1",
+  "Timestamp": "2026-11-06T02:55:50.984Z",
+  "POPID": "POP-00530",
+  "Cycle": 114,
+  "Seq": 2,
+  "Daypart": "SHOW",
+  "Tag": "undocked-episode",
+  "EpisodeId": "undocked-pop00530-2026-11-06T02-30-29",
+  "Applied": "yes",
+  "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop00530-2026-11-06T02-30-29.json",
+  "Holder": "Lena Okafor",
+  "CreditsDelta": 18,
+  "Magnitude": 3,
+  "Flags": [
+    "credits_delta_windowed"
+  ],
+  "Excerpt": "Lena Okafor credits=18 systems=alpha_centauri,sol,sirius,nova_terra,epsilon_eridani,procyon,proxima_centauri,barnards_star",
+  "DecidedAt": "2026-11-06T02:55:50.986Z",
+  "DecidedBy": "auto-gate",
+  "Note": "auto-approved on contract validation (§2.5)",
+  "FeedEvent": {
+    "v": "UNDOCKED-FEED/1",
+    "Cycle": 114,
+    "EventType": "undocked-episode",
+    "POPID": "POP-00530",
+    "Holder": "Lena Okafor",
+    "EpisodeId": "undocked-pop00530-Y3C10-e2",
+    "CreditsDelta": 18,
+    "PointsDelta": 5.99,
+    "Systems": [
+      "alpha_centauri",
+      "sol",
+      "sirius",
+      "nova_terra",
+      "epsilon_eridani",
+      "procyon",
+      "proxima_centauri",
+      "barnards_star"
+    ],
+    "CombatEvents": 1,
+    "MishapCount": 0,
+    "Magnitude": 3,
+    "Flags": [
+      "credits_delta_windowed"
+    ],
+    "StagedPath": "output/spacemolt-show/staged/undocked-pop00530-2026-11-06T02-30-29.json"
+  },
+  "PointsDelta": 5.99
+}

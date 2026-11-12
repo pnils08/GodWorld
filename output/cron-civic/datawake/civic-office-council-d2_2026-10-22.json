@@ -1,0 +1,31 @@
+{
+  "office": "council_d2",
+  "agentDir": "civic-office-council-d2",
+  "holder": "Leonard Tran",
+  "popid": "POP-00502",
+  "title": "City Council District 2",
+  "date": "2026-10-22",
+  "cycle": 112,
+  "model": "meta-llama/llama-4-maverick",
+  "statement": "I support the progress made on the Baylight District remediation, particularly the completion of soil test verification and the commencement of Phase II remediation with independent oversight. However, I remain concerned about the commercial decay in Jack London and Downtown. We need to ensure that the growth in one area doesn't overshadow the struggles in another. I will continue to push for targeted support for Downtown Economic Revitalization, ensuring that our efforts are balanced across the district.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-109-civic-office-council-d2",
+        "text": "I will co-sponsor and docket the INIT-008 Downtown Economic Revitalization legislation and certify the Phase II site remediation schedule for the Baylight District (INIT-006) as requested.",
+        "directiveCycle": 109,
+        "confrontationSeat": "civic-office-council-d2"
+      }
+    }
+  ],
+  "movesRejected": [
+    {
+      "type": "work",
+      "reason": "second-consequential-move(one per wake — the first valid one stands)"
+    }
+  ],
+  "numberMoved": "2",
+  "ranAt": "2026-10-22T10:45:37.828Z",
+  "fellBackFrom": null
+}

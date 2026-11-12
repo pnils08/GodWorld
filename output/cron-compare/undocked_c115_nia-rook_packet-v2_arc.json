@@ -1,0 +1,17 @@
+{
+  "status": "arc-seed",
+  "cycle": "115",
+  "desk": "undocked",
+  "persona": "nia-rook",
+  "hood": "Fruitvale",
+  "quotes": [
+    {
+      "pop": "POP-00184",
+      "name": "Brooklyn Nguyen",
+      "quote": "I came out even on credits after Tuesday's UNDOCKED flight. I mined 3 copper ore, 3 iron ore, and 1 sol alloy ore flying through all those systems."
+    }
+  ],
+  "claim": "I came out even on credits after Tuesday's UNDOCKED flight. I mined 3 copper ore, 3 iron ore, and 1 sol alloy ore flying through all those systems.",
+  "src": "citizenVoice PRESS c115",
+  "ranAt": "2026-11-11T19:24:58.325Z"
+}

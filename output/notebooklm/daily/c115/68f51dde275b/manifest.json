@@ -1,0 +1,612 @@
+{
+  "artifactClass": "NLM_DAILY_RUN",
+  "sourceVersion": "2.0",
+  "canonStatus": "NOT_CANON",
+  "cycle": 115,
+  "generatedAt": "2026-11-10T14:00:06.555Z",
+  "lastAttemptAt": "2026-11-10T14:00:06.555Z",
+  "hours": 36,
+  "packHash": "68f51dde275bdbb256111a5db66002e4368af6ba7199430df0992e879cdacfcc",
+  "worldSummary": "output/world_summary_c115.md",
+  "citizenDigest": "output/citizen-day-digest.md",
+  "reports": [
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/business_c115_business-desk_packet-v2_anthropic-claude-opus-5-5.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/civic_c115_carmen-delaine_packet-v2_anthropic-claude-sonnet-5-5.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/civic_c115_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/civic_c115_trevor-shimizu_packet-v2_anthropic-claude-sonnet-5-5.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/culture_c114_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5.staged-1815.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/lore_c114_lore-c114-john-ellis-deep-dive.staged.md"
+    }
+  ],
+  "flaggedReports": [],
+  "editionDay": false,
+  "firstMorning": false,
+  "routingShadow": {
+    "version": "NLM-DAILY-ROUTER/1",
+    "mode": "shadow",
+    "profile": "REPORTED_DAY",
+    "format": "deep_dive",
+    "length": "default",
+    "activationEligible": true,
+    "reportedDayThreshold": 1,
+    "sourceClasses": [
+      "WORLD_STATE",
+      "CITIZEN_DIGEST",
+      "W1_CHASE",
+      "W2_QUOTES",
+      "W3_PASSED"
+    ],
+    "reasonCodes": [
+      "RHEA_PASSED_5",
+      "REPORTED_THRESHOLD_MET_1"
+    ],
+    "dispositionCounts": {
+      "passed": 5,
+      "rheaFlagged": 0,
+      "neverGated": 0
+    },
+    "fingerprint": "7e0123ce3ab2faa1cd40d0ce96a8ed2f29153c09fd267193603f408aa222d4a9"
+  },
+  "newsroomPulse": {
+    "fingerprint": "9f5d95d53d815b42da1b266bbf0441bdc193d5665384a6bc816a5f0e0bc6dba9",
+    "counts": {
+      "angles": 11,
+      "asks": 4,
+      "fanoutAssignments": 6,
+      "w2Ready": 3,
+      "quotes": 9,
+      "passed": 5,
+      "rheaFlagged": 0,
+      "neverGated": 0,
+      "flagged": 0,
+      "pending": 6
+    },
+    "priorCompletedCycle": null
+  },
+  "archiveNotebookId": "417e2d29-4167-420f-a9cc-76fb6b2b7de2",
+  "newsroomNotebookId": "73cd50b5-4b8f-4329-bb42-0783c8d93763",
+  "dryRun": false,
+  "sources": [
+    {
+      "kind": "article",
+      "title": "The Bay Tribune Daily C115 — Jordan Velez: The Sea-Level Desk Is Down to Three",
+      "hash": "3473cdc0e471e068f14ebec18d879d91e0231dbae5f85c9da2fdfd3e1563935f",
+      "words": 864,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/01-article.md",
+      "path": "output/cron-compare/staged/business_c115_business-desk_packet-v2_anthropic-claude-opus-5-5.staged.md",
+      "id": "a84b8a18-a821-4bab-a1e1-ee7c5bc15d7f",
+      "reused": false
+    },
+    {
+      "kind": "background",
+      "title": "The Bay Tribune Daily C115 — From the archive — The Sea-Level Desk Is Down to Three",
+      "hash": "e27b028f1fe64728e077145b690ea7122bf7aa746181a9996e06a7ba4b11ff39",
+      "words": 281,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/02-background.md",
+      "path": "output/cron-compare/staged/business_c115_business-desk_packet-v2_anthropic-claude-opus-5-5.staged.md",
+      "id": "259371dc-6441-4a3f-84bd-e0b4400ee901",
+      "reused": false
+    },
+    {
+      "kind": "article",
+      "title": "The Bay Tribune Daily C115 — Carmen Delaine: The Fund Has Moved $7 Million Out of $28 Million. The Record Names Two Households.",
+      "hash": "dc869ff1b635f24e64abf93d4a778dc7c81a05d4b49b1a5f21a5fdce54838ae9",
+      "words": 897,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/03-article.md",
+      "path": "output/cron-compare/staged/civic_c115_carmen-delaine_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+      "id": "f84fe3c8-4001-436a-aeaa-fcc7652faad8",
+      "reused": false
+    },
+    {
+      "kind": "background",
+      "title": "The Bay Tribune Daily C115 — From the archive — The Fund Has Moved $7 Million Out of $28 Million. The Record Names Two Households.",
+      "hash": "82016b5822bb8cb528d4f7f030486d86d46d952f895cfdc3868abcdaef5f13bf",
+      "words": 328,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/04-background.md",
+      "path": "output/cron-compare/staged/civic_c115_carmen-delaine_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+      "id": "13512513-4a7d-4f52-bd73-5d44c6829d35",
+      "reused": false
+    },
+    {
+      "kind": "article",
+      "title": "The Bay Tribune Daily C115 — Dr. Lila Mezran: Chinatown's Sick Are Counted by the Hundred and Named by No One",
+      "hash": "735511229a155bb3f0604d939f639b1a2449018619865af1993986da385df678",
+      "words": 945,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/05-article.md",
+      "path": "output/cron-compare/staged/civic_c115_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+      "id": "d449e448-3e1b-4b48-bc08-5acddc45c3db",
+      "reused": false
+    },
+    {
+      "kind": "background",
+      "title": "The Bay Tribune Daily C115 — From the archive — Chinatown's Sick Are Counted by the Hundred and Named by No One",
+      "hash": "124368b1a5e00ecf43573fe3e38f794bdc3e995444092a14e003884f11777caa",
+      "words": 358,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/06-background.md",
+      "path": "output/cron-compare/staged/civic_c115_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+      "id": "a3ff4078-753b-4399-9dd1-e8f293038141",
+      "reused": false
+    },
+    {
+      "kind": "article",
+      "title": "The Bay Tribune Daily C115 — Trevor Shimizu: Nineteenth Street Filled Up, and the Rows Do Not Say Why",
+      "hash": "ed1cb1a8837ffb431a79b134c0a818b98eaa2de25a1eb93fb4dc59408faeceb2",
+      "words": 933,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/07-article.md",
+      "path": "output/cron-compare/staged/civic_c115_trevor-shimizu_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+      "id": "726aff48-6df1-492f-bb27-eea9a2d6b7cc",
+      "reused": false
+    },
+    {
+      "kind": "background",
+      "title": "The Bay Tribune Daily C115 — From the archive — Nineteenth Street Filled Up, and the Rows Do Not Say Why",
+      "hash": "15203257b2f1adbe62fd751c1ed3d035b4d26acd3d4869344c02aea703b3987c",
+      "words": 311,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/08-background.md",
+      "path": "output/cron-compare/staged/civic_c115_trevor-shimizu_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+      "id": "91cf66d8-e79f-4de5-9dcb-e6eaaa69d46c",
+      "reused": false
+    },
+    {
+      "kind": "article",
+      "title": "The Bay Tribune Daily C115 — Ines Sorensen: Voices: What the A's Left Them",
+      "hash": "90f7cd68f239793de66e57068cb41451705167abad577917f4ccb5d70f0b1007",
+      "words": 644,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/09-article.md",
+      "path": "output/cron-compare/staged/culture_c114_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5.staged-1815.md",
+      "id": "7e007d7a-634e-4d2d-96c4-b88515e54f0e",
+      "reused": false
+    },
+    {
+      "kind": "background",
+      "title": "The Bay Tribune Daily C115 — From the archive — Voices: What the A's Left Them",
+      "hash": "c4d1e2a2251bb6cf72608e9b5e2be9b02368be6250d07a00502b57a21951e3b9",
+      "words": 277,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/10-background.md",
+      "path": "output/cron-compare/staged/culture_c114_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5.staged-1815.md",
+      "id": "76848087-7826-4f0b-bc20-12f866fe850e",
+      "reused": false
+    },
+    {
+      "kind": "article",
+      "title": "The Bay Tribune Daily C115 — Tamsin Pruitt: The Lives of C115",
+      "hash": "4e39de806ffb87f3ca65d3b019ffe85f5c28c14003a769286e459d5d47bc18e0",
+      "words": 1105,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/11-article.md",
+      "path": "output/cron-compare/staged/culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+      "id": "2dbae139-d89c-4da8-bd13-058037742b5a",
+      "reused": false
+    },
+    {
+      "kind": "background",
+      "title": "The Bay Tribune Daily C115 — From the archive — The Lives of C115",
+      "hash": "b95f4a67bfed43b9dc881aec67cd67d5da8005ca4f81243b1feda7bc1b064cf7",
+      "words": 303,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/12-background.md",
+      "path": "output/cron-compare/staged/culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+      "id": "d10cc97b-6918-46f1-b750-d3f6ad7799ff",
+      "reused": false
+    },
+    {
+      "kind": "article",
+      "title": "The Bay Tribune Daily C115 — The Mechanics of Release: John Ellis and the Arithmetic of Laurel",
+      "hash": "ab9c4a0eb009636698d3c78717b2d7d59c414afb9da61c4ad47763354e8a0d07",
+      "words": 1823,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/13-article.md",
+      "path": "output/cron-compare/staged/lore_c114_lore-c114-john-ellis-deep-dive.staged.md",
+      "id": "8701cdac-908b-4343-a1c2-26b3c1893f34",
+      "reused": false
+    },
+    {
+      "kind": "exchange",
+      "title": "The Bay Tribune Daily C115 — Overheard — Vinnie Keane and Amara Keane",
+      "hash": "88481f9180362e68af605f16a5f68620db979d8e880faed8c467efe72f2d2525",
+      "words": 259,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/14-exchange.md",
+      "path": "output/exchanges/exchange_c115_2026-11-09_conversation.md",
+      "id": "8d6b5f9d-236d-4040-bdd9-e6eaa71f010f",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C115 — Citizens in their own words — Chinatown",
+      "hash": "32d1309c50a511561178d9f5f4201fcc39c3c2507719ea809f0e26b9e94d67ab",
+      "words": 158,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/15-reflections.md",
+      "path": null,
+      "id": "16b57fcf-56fc-42ab-9963-fc007ca0fd7c",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C115 — Citizens in their own words — Downtown",
+      "hash": "7a7107b3d9efded9b9fd10a127ec5071615c85f9926b1770af85873855b76a64",
+      "words": 157,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/16-reflections.md",
+      "path": null,
+      "id": "16da0e04-8652-46d2-bb37-ae556db275de",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C115 — Citizens in their own words — Fruitvale",
+      "hash": "ccccfbff5d9f1801c536e0a064dcce7ed7040dce2e317a8170ec3da6853fbe74",
+      "words": 62,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/17-reflections.md",
+      "path": null,
+      "id": "4db90ea7-c618-4970-9606-5bcb5ea4a6c2",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C115 — Citizens in their own words — Grand Lake",
+      "hash": "85728242d0f2ba402c72a36a08992d19ba00af94a53a39458e4ed9e88bef31f2",
+      "words": 281,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/18-reflections.md",
+      "path": null,
+      "id": "b8a51969-7364-4944-92cc-c024d8a0a079",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C115 — Citizens in their own words — Jack London",
+      "hash": "370a1c1576585fc5f94f9791812512e0bfacce3d1fc771429224f71b9ddd4c78",
+      "words": 67,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/19-reflections.md",
+      "path": null,
+      "id": "52dfad58-0a24-463c-9db5-742c99205bea",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C115 — Citizens in their own words — Lake Merritt",
+      "hash": "47248e431d37b4bac780bd268cecf55b6c5235c6a51b1218280990960c173f7a",
+      "words": 372,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/20-reflections.md",
+      "path": null,
+      "id": "6fd3b323-7266-48ec-9d78-d3743202759b",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C115 — Citizens in their own words — Laurel",
+      "hash": "07bebfbc36ce351efbfd787f59f06e36ac1e450d4bd47d05b23c15227e2ba4f9",
+      "words": 60,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/21-reflections.md",
+      "path": null,
+      "id": "96f89533-2ce3-42e9-b8bf-21e3a2965ab4",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C115 — Citizens in their own words — Piedmont Ave",
+      "hash": "99e8cb9ef1ee7a9f452509205cb5b2f79072deb39657b91514f79748ccdb6e16",
+      "words": 62,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/22-reflections.md",
+      "path": null,
+      "id": "5e491e7e-74e2-4722-b20e-db045b8479b7",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C115 — Citizens in their own words — Rockridge",
+      "hash": "2da0b991e5c46abfce61f0364bf57c77512af95b48c625863fec1a1e53fff87b",
+      "words": 125,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/23-reflections.md",
+      "path": null,
+      "id": "bd414454-bb24-4207-a689-d612da4efedc",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C115 — Citizens in their own words — Uptown",
+      "hash": "05cbadaf61fc8a540e491eb90f9ec7e57ae419a47427734e0e861d4a186c9b0b",
+      "words": 65,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/24-reflections.md",
+      "path": null,
+      "id": "c9b049a1-e930-414d-99f2-4e00fba4a3d1",
+      "reused": false
+    }
+  ],
+  "sourceIds": [
+    "a84b8a18-a821-4bab-a1e1-ee7c5bc15d7f",
+    "259371dc-6441-4a3f-84bd-e0b4400ee901",
+    "f84fe3c8-4001-436a-aeaa-fcc7652faad8",
+    "13512513-4a7d-4f52-bd73-5d44c6829d35",
+    "d449e448-3e1b-4b48-bc08-5acddc45c3db",
+    "a3ff4078-753b-4399-9dd1-e8f293038141",
+    "726aff48-6df1-492f-bb27-eea9a2d6b7cc",
+    "91cf66d8-e79f-4de5-9dcb-e6eaaa69d46c",
+    "7e007d7a-634e-4d2d-96c4-b88515e54f0e",
+    "76848087-7826-4f0b-bc20-12f866fe850e",
+    "2dbae139-d89c-4da8-bd13-058037742b5a",
+    "d10cc97b-6918-46f1-b750-d3f6ad7799ff",
+    "8701cdac-908b-4343-a1c2-26b3c1893f34",
+    "8d6b5f9d-236d-4040-bdd9-e6eaa71f010f",
+    "16b57fcf-56fc-42ab-9963-fc007ca0fd7c",
+    "16da0e04-8652-46d2-bb37-ae556db275de",
+    "4db90ea7-c618-4970-9606-5bcb5ea4a6c2",
+    "b8a51969-7364-4944-92cc-c024d8a0a079",
+    "52dfad58-0a24-463c-9db5-742c99205bea",
+    "6fd3b323-7266-48ec-9d78-d3743202759b",
+    "96f89533-2ce3-42e9-b8bf-21e3a2965ab4",
+    "5e491e7e-74e2-4722-b20e-db045b8479b7",
+    "bd414454-bb24-4207-a689-d612da4efedc",
+    "c9b049a1-e930-414d-99f2-4e00fba4a3d1"
+  ],
+  "audioPresentation": {
+    "format": "deep_dive",
+    "length": "default",
+    "source": "router",
+    "profile": "REPORTED_DAY"
+  },
+  "audioArtifactId": "d3cdc288-e9ea-410b-940e-6fb2ab8513f6",
+  "audioSources": [
+    {
+      "kind": "article",
+      "title": "The Bay Tribune Daily C115 — Jordan Velez: The Sea-Level Desk Is Down to Three",
+      "hash": "3473cdc0e471e068f14ebec18d879d91e0231dbae5f85c9da2fdfd3e1563935f",
+      "words": 864,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/01-article.md",
+      "path": "output/cron-compare/staged/business_c115_business-desk_packet-v2_anthropic-claude-opus-5-5.staged.md",
+      "id": "a84b8a18-a821-4bab-a1e1-ee7c5bc15d7f",
+      "reused": false
+    },
+    {
+      "kind": "background",
+      "title": "The Bay Tribune Daily C115 — From the archive — The Sea-Level Desk Is Down to Three",
+      "hash": "e27b028f1fe64728e077145b690ea7122bf7aa746181a9996e06a7ba4b11ff39",
+      "words": 281,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/02-background.md",
+      "path": "output/cron-compare/staged/business_c115_business-desk_packet-v2_anthropic-claude-opus-5-5.staged.md",
+      "id": "259371dc-6441-4a3f-84bd-e0b4400ee901",
+      "reused": false
+    },
+    {
+      "kind": "article",
+      "title": "The Bay Tribune Daily C115 — Carmen Delaine: The Fund Has Moved $7 Million Out of $28 Million. The Record Names Two Households.",
+      "hash": "dc869ff1b635f24e64abf93d4a778dc7c81a05d4b49b1a5f21a5fdce54838ae9",
+      "words": 897,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/03-article.md",
+      "path": "output/cron-compare/staged/civic_c115_carmen-delaine_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+      "id": "f84fe3c8-4001-436a-aeaa-fcc7652faad8",
+      "reused": false
+    },
+    {
+      "kind": "background",
+      "title": "The Bay Tribune Daily C115 — From the archive — The Fund Has Moved $7 Million Out of $28 Million. The Record Names Two Households.",
+      "hash": "82016b5822bb8cb528d4f7f030486d86d46d952f895cfdc3868abcdaef5f13bf",
+      "words": 328,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/04-background.md",
+      "path": "output/cron-compare/staged/civic_c115_carmen-delaine_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+      "id": "13512513-4a7d-4f52-bd73-5d44c6829d35",
+      "reused": false
+    },
+    {
+      "kind": "article",
+      "title": "The Bay Tribune Daily C115 — Dr. Lila Mezran: Chinatown's Sick Are Counted by the Hundred and Named by No One",
+      "hash": "735511229a155bb3f0604d939f639b1a2449018619865af1993986da385df678",
+      "words": 945,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/05-article.md",
+      "path": "output/cron-compare/staged/civic_c115_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+      "id": "d449e448-3e1b-4b48-bc08-5acddc45c3db",
+      "reused": false
+    },
+    {
+      "kind": "background",
+      "title": "The Bay Tribune Daily C115 — From the archive — Chinatown's Sick Are Counted by the Hundred and Named by No One",
+      "hash": "124368b1a5e00ecf43573fe3e38f794bdc3e995444092a14e003884f11777caa",
+      "words": 358,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/06-background.md",
+      "path": "output/cron-compare/staged/civic_c115_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+      "id": "a3ff4078-753b-4399-9dd1-e8f293038141",
+      "reused": false
+    },
+    {
+      "kind": "article",
+      "title": "The Bay Tribune Daily C115 — Trevor Shimizu: Nineteenth Street Filled Up, and the Rows Do Not Say Why",
+      "hash": "ed1cb1a8837ffb431a79b134c0a818b98eaa2de25a1eb93fb4dc59408faeceb2",
+      "words": 933,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/07-article.md",
+      "path": "output/cron-compare/staged/civic_c115_trevor-shimizu_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+      "id": "726aff48-6df1-492f-bb27-eea9a2d6b7cc",
+      "reused": false
+    },
+    {
+      "kind": "background",
+      "title": "The Bay Tribune Daily C115 — From the archive — Nineteenth Street Filled Up, and the Rows Do Not Say Why",
+      "hash": "15203257b2f1adbe62fd751c1ed3d035b4d26acd3d4869344c02aea703b3987c",
+      "words": 311,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/08-background.md",
+      "path": "output/cron-compare/staged/civic_c115_trevor-shimizu_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+      "id": "91cf66d8-e79f-4de5-9dcb-e6eaaa69d46c",
+      "reused": false
+    },
+    {
+      "kind": "article",
+      "title": "The Bay Tribune Daily C115 — Ines Sorensen: Voices: What the A's Left Them",
+      "hash": "90f7cd68f239793de66e57068cb41451705167abad577917f4ccb5d70f0b1007",
+      "words": 644,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/09-article.md",
+      "path": "output/cron-compare/staged/culture_c114_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5.staged-1815.md",
+      "id": "7e007d7a-634e-4d2d-96c4-b88515e54f0e",
+      "reused": false
+    },
+    {
+      "kind": "background",
+      "title": "The Bay Tribune Daily C115 — From the archive — Voices: What the A's Left Them",
+      "hash": "c4d1e2a2251bb6cf72608e9b5e2be9b02368be6250d07a00502b57a21951e3b9",
+      "words": 277,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/10-background.md",
+      "path": "output/cron-compare/staged/culture_c114_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5.staged-1815.md",
+      "id": "76848087-7826-4f0b-bc20-12f866fe850e",
+      "reused": false
+    },
+    {
+      "kind": "article",
+      "title": "The Bay Tribune Daily C115 — Tamsin Pruitt: The Lives of C115",
+      "hash": "4e39de806ffb87f3ca65d3b019ffe85f5c28c14003a769286e459d5d47bc18e0",
+      "words": 1105,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/11-article.md",
+      "path": "output/cron-compare/staged/culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+      "id": "2dbae139-d89c-4da8-bd13-058037742b5a",
+      "reused": false
+    },
+    {
+      "kind": "background",
+      "title": "The Bay Tribune Daily C115 — From the archive — The Lives of C115",
+      "hash": "b95f4a67bfed43b9dc881aec67cd67d5da8005ca4f81243b1feda7bc1b064cf7",
+      "words": 303,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/12-background.md",
+      "path": "output/cron-compare/staged/culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+      "id": "d10cc97b-6918-46f1-b750-d3f6ad7799ff",
+      "reused": false
+    },
+    {
+      "kind": "article",
+      "title": "The Bay Tribune Daily C115 — The Mechanics of Release: John Ellis and the Arithmetic of Laurel",
+      "hash": "ab9c4a0eb009636698d3c78717b2d7d59c414afb9da61c4ad47763354e8a0d07",
+      "words": 1823,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/13-article.md",
+      "path": "output/cron-compare/staged/lore_c114_lore-c114-john-ellis-deep-dive.staged.md",
+      "id": "8701cdac-908b-4343-a1c2-26b3c1893f34",
+      "reused": false
+    },
+    {
+      "kind": "exchange",
+      "title": "The Bay Tribune Daily C115 — Overheard — Vinnie Keane and Amara Keane",
+      "hash": "88481f9180362e68af605f16a5f68620db979d8e880faed8c467efe72f2d2525",
+      "words": 259,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/14-exchange.md",
+      "path": "output/exchanges/exchange_c115_2026-11-09_conversation.md",
+      "id": "8d6b5f9d-236d-4040-bdd9-e6eaa71f010f",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C115 — Citizens in their own words — Chinatown",
+      "hash": "32d1309c50a511561178d9f5f4201fcc39c3c2507719ea809f0e26b9e94d67ab",
+      "words": 158,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/15-reflections.md",
+      "path": null,
+      "id": "16b57fcf-56fc-42ab-9963-fc007ca0fd7c",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C115 — Citizens in their own words — Downtown",
+      "hash": "7a7107b3d9efded9b9fd10a127ec5071615c85f9926b1770af85873855b76a64",
+      "words": 157,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/16-reflections.md",
+      "path": null,
+      "id": "16da0e04-8652-46d2-bb37-ae556db275de",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C115 — Citizens in their own words — Fruitvale",
+      "hash": "ccccfbff5d9f1801c536e0a064dcce7ed7040dce2e317a8170ec3da6853fbe74",
+      "words": 62,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/17-reflections.md",
+      "path": null,
+      "id": "4db90ea7-c618-4970-9606-5bcb5ea4a6c2",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C115 — Citizens in their own words — Grand Lake",
+      "hash": "85728242d0f2ba402c72a36a08992d19ba00af94a53a39458e4ed9e88bef31f2",
+      "words": 281,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/18-reflections.md",
+      "path": null,
+      "id": "b8a51969-7364-4944-92cc-c024d8a0a079",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C115 — Citizens in their own words — Jack London",
+      "hash": "370a1c1576585fc5f94f9791812512e0bfacce3d1fc771429224f71b9ddd4c78",
+      "words": 67,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/19-reflections.md",
+      "path": null,
+      "id": "52dfad58-0a24-463c-9db5-742c99205bea",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C115 — Citizens in their own words — Lake Merritt",
+      "hash": "47248e431d37b4bac780bd268cecf55b6c5235c6a51b1218280990960c173f7a",
+      "words": 372,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/20-reflections.md",
+      "path": null,
+      "id": "6fd3b323-7266-48ec-9d78-d3743202759b",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C115 — Citizens in their own words — Laurel",
+      "hash": "07bebfbc36ce351efbfd787f59f06e36ac1e450d4bd47d05b23c15227e2ba4f9",
+      "words": 60,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/21-reflections.md",
+      "path": null,
+      "id": "96f89533-2ce3-42e9-b8bf-21e3a2965ab4",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C115 — Citizens in their own words — Piedmont Ave",
+      "hash": "99e8cb9ef1ee7a9f452509205cb5b2f79072deb39657b91514f79748ccdb6e16",
+      "words": 62,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/22-reflections.md",
+      "path": null,
+      "id": "5e491e7e-74e2-4722-b20e-db045b8479b7",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C115 — Citizens in their own words — Rockridge",
+      "hash": "2da0b991e5c46abfce61f0364bf57c77512af95b48c625863fec1a1e53fff87b",
+      "words": 125,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/23-reflections.md",
+      "path": null,
+      "id": "bd414454-bb24-4207-a689-d612da4efedc",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C115 — Citizens in their own words — Uptown",
+      "hash": "05cbadaf61fc8a540e491eb90f9ec7e57ae419a47427734e0e861d4a186c9b0b",
+      "words": 65,
+      "file": "output/notebooklm/daily/c115/68f51dde275b/sources/24-reflections.md",
+      "path": null,
+      "id": "c9b049a1-e930-414d-99f2-4e00fba4a3d1",
+      "reused": false
+    }
+  ],
+  "audioPath": "output/notebooklm/daily/c115/68f51dde275b/godworld_daily_c115.m4a",
+  "driveLink": "https://drive.google.com/file/d/1Jg740KP_s1SkI9d5wLLGWU7yW2P6TlpP/view?usp=drivesdk",
+  "opsReportArtifactId": "403050d9-1f27-4e77-9946-182a063a2332",
+  "opsReportPath": "output/notebooklm/daily/c115/68f51dde275b/ops-report-c115.md",
+  "opsReportDelivered": true
+}

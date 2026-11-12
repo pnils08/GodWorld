@@ -1,0 +1,270 @@
+From 77513fa24fe8fae09a85ec9016b2a3f1f9c53905 Mon Sep 17 00:00:00 2001
+From: GodWorld <godworld@local>
+Date: Sat, 17 Oct 2026 12:49:56 -0500
+Subject: [PATCH] =?UTF-8?q?pipeline.82:=20Employment=5FRoster=20derived=20?=
+ =?UTF-8?q?from=20Simulation=5FLedger=20=E2=80=94=20the=20beat=20dump=20st?=
+ =?UTF-8?q?ops=20reading=20the=20March=20tab=20[research-build]?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Builder 2026-10-17: "I only know about the simulation_ledger, never heard of a roster tab" / "Nothing is working and nothing gets fixed." The Employment_Roster TAB was a one-shot who-works-where copy from 2026-03-01 (linkCitizensToEmployers.js), never regenerated; the safety/transit slices, newsroomSourcing workplace()/offices and the interview packet read it since 2026-08/09. Measured vs the C111 snapshot: 225 disagreements (31 wrong employer, 33 not Active, 51 not on the ledger, 110 employed citizens missing). Story check C107–C111: 12 of the 31 mis-filed citizens appear, 0 with the wrong employer stated.
+
+Fix: dumpBeatTabs.js drops the tab from BEAT_TABS; rosterFromLedger() writes output/beats/Employment_Roster.jsonl from the Simulation_Ledger read the dump already does — Active rows with a non-blank EmployerBizId (blank = the engine's hiring pool, never guessed SELF_EMPLOYED/UNTRACKED), same six keys every reader consumes, MappingLayer 'ledger'. EmployerBizId joins the required ledger columns. Dry derive on the snapshot: 894 rows — 754 same, 30 corrected (Mims → Oakland Casino Town, Whitfield → City of Oakland), 110 added, 85 stale gone. dumpBeatTabs.test.js +7 (25/25); full suite green. SHEETS_MANIFEST trued; plan Status log + ROLLOUT pipeline.82 (live-observing: C112 dump Sun 10-18 → Mon 10-19 wakes). Codex review TASK filed. The sheet tab stays until the builder deletes it; nothing reads it.
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_018r1t9NDWLd3bmE7SJeZTEr
+---
+ docs/engine/ROLLOUT_PLAN.md                   |  1 +
+ docs/engine/SHEETS_MANIFEST.md                |  2 +-
+ ...peline82-roster-from-ledger-review-TASK.md | 16 ++++++++
+ ...2026-09-07-beat-slices-from-sheets-plan.md |  4 +-
+ scripts/dumpBeatTabs.js                       | 40 +++++++++++++++----
+ scripts/dumpBeatTabs.test.js                  | 19 ++++++++-
+ 6 files changed, 71 insertions(+), 11 deletions(-)
+ create mode 100644 docs/for-claude-review/2026-10-17-pipeline82-roster-from-ledger-review-TASK.md
+
+diff --git a/docs/engine/ROLLOUT_PLAN.md b/docs/engine/ROLLOUT_PLAN.md
+index 58856be6..ec975b0b 100644
+--- a/docs/engine/ROLLOUT_PLAN.md
++++ b/docs/engine/ROLLOUT_PLAN.md
+@@ -96,6 +96,7 @@
+ | # | Item | State | Terminal | Pointer |
+ |---|------|-------|----------|---------|
+ | pipeline.81 | Celeste's dead slice: trends slice ranks by this-cycle movement (same "Marin Tao leads" angle C109–C111), no-citizen Cultural_Ledger rows leave every slice, "engine" out of slice text, every seat's interview pool starts from the slice's names — proximity + rest guards dropped (builder 2026-10-16: "I drop any guard on a citizen being interviewed"). Built on main 2026-10-16 (es); acceptance C112 Fri 2026-10-23 | live-observing | engine-sheet / research-build | [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]] |
++| pipeline.82 | Employment_Roster derived from Simulation_Ledger (builder 2026-10-17: the ledger is the only truth; the March one-shot tab drifted 225 rows and the reporters read it). `dumpBeatTabs.js` writes the roster file from the ledger read; the sheet tab is unread (deletion = builder's hand). Dry derive C111: 894 rows, 30 corrected, 110 added, 85 stale gone; tests 25/25; 0 wrong employers found in C107–C111 stories. Codex review TASK filed. Acceptance: C112 dump Sun 10-18 → Mon 10-19 slices name ledger employers | live-observing | research-build | [[../plans/2026-09-07-beat-slices-from-sheets-plan]] §Status log 2026-10-17 |
+ | engine.296 | SPORTS_LEGENDS → retired MLB-origin ledger rows, no literal fallback (builder 2026-10-16). LIVE PROD @143 (stage 4l); Davis predicate (retired OR RoleType legend, 01ea836f, codex SHIP) LIVE PROD @144 (stage 4m) 2026-10-17; three template Cultural_Ledger rows Inactive on live; read C112 + Celeste Fri 10-23 | live-observing | engine-sheet | [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]] |
+ | research.29 | UNDOCKED crossover: Moves 1–5 live (Move 4: 20 token rows live on PROD ECL, PROD @138 stage 4g carries both composer fixes + engine.294; bench B ≈ 23 named lines at C112). Next: Sat 10-17 digest + crossover block; Sun C112 live readback → plan changelog | live-observing | research-build | [[../plans/2026-10-16-undocked-crossover-the-city-knows-its-pilots]] |
+ | engine.214 | Mood per hood + Tasks 17/18/19 + engine.288: paired on 1004 (C111 step −0.10; stack vs PROD on BASELINE-1004-C111, C112 CitySentiment 0.07 → 0.13, DEPLOY_HISTORY). PROD after the live C112 readback Sun 2026-10-18, first fire C113 Sun 2026-10-25; then Tasks 12–13 | live-observing | engine-sheet / research-build | [[../plans/2026-10-10-engine-214-mood-per-hood]] |
+diff --git a/docs/engine/SHEETS_MANIFEST.md b/docs/engine/SHEETS_MANIFEST.md
+index 63edb9b4..ae7b59ac 100644
+--- a/docs/engine/SHEETS_MANIFEST.md
++++ b/docs/engine/SHEETS_MANIFEST.md
+@@ -21,7 +21,7 @@ This manifest is the registry of all active Google Sheets tabs hooked into the P
+ 
+ ## 2. Infrastructure & Operations
+ - **`Business_Ledger`**: Tracking businesses, employee counts, and revenue. Writers, all by intent: `applyBusinessDynamics_` (engine.96, Phase5-BusinessDynamics — one range intent over Annual_Revenue..Growth_Rate every Cycle), `flushBusinessFold_` (chaos cars — Employee_Count only; engine.193 S496 retired its and `applyChaosDecay_`'s Annual_Revenue cells, which overwrote the dynamics range), `runCareerEngine_` (Employee_Count write-back), `updateHeritage_` (heritage business row append). `Key_Personnel` is the ownership link, read by `applyOwnerDraw_` (engine.96 Task 10, LIVE @36). Births: the heritage roll (`updateHeritage_`, engine.96 Task 11 — the family's field, class sizes) and three Node minters outside the engine — `scripts/ingestPublishedEntities.js` (media, born alive since S336), `scripts/processBusinessIntake.js` (born alive since S413), `scripts/linkCitizensToEmployers.js` (static employer map, blank E–I, hand-assigned ids — retired path). Row removal only by `archiveClosedBusinesses_` (§9). Evening readers (engine.134, S423): `buildEveningFood_` (v2.5 — restaurants/nightlife/fast by `Sector`, the only source of dining names) and `buildEveningFamous_` (venue per sighting, T5).
+-- **`Employment_Roster`**: Citizen-to-Business mapping.
++- **`Employment_Roster`**: Citizen-to-Business mapping — **stale one-shot copy (2026-03-01, `linkCitizensToEmployers.js`), unread since 2026-10-17.** `dumpBeatTabs.js` derives `output/beats/Employment_Roster.jsonl` from `Simulation_Ledger` (Active rows with `EmployerBizId`); no script reads the tab. Deleting the tab is the builder's hand.
+ - **`Economic_Parameters`**: The job catalog (role → category, income band, median, tax, housing burden) — the engine's ONE runtime source (engine.199). Reader: `economicParameters_` (`utilities/citizenDerivation.js`), one read per execution, cached in `ECONOMIC_PARAMETERS`; consumed by `buildIntakeSalaryPools_`, `jobPayTable_`, `roleFieldOf_`, `lookupIncome_`, `canonicalRolesSet_`. No engine writer. Edit point `data/economic_parameters.json`, pushed by `node scripts/syncEconomicParameters.js` (`--check` = parity, a /deploy pre-flight step).
+ - **`Crime_Metrics`**: Safety, property/violent crime indexes per neighborhood. **engine.212 (S451):** cols H–J `PropertyLevel` / `ViolentLevel` / `QolLevel` are the hood's PERSISTENT level, carried forward cycle to cycle (signed causes + pull toward the city median); B/C are this cycle's observed index (level × transient overlay). The authored profile table seeds only a hood with no row — nothing on the per-cycle path reads a literal. **engine.235 (S470):** cols K–M `Trend` (rising/falling/steady — this cycle's property/violent shifts) / `Hotspot` (score when over the city's hotspot bar = 1.25× the median score, else blank) / `PressureRatio` (mean index ÷ city median) persist the engine's own read of the hood, self-arming. Readers of the in-memory read use `S.crimeMetrics.context` (engine.237).
+ - **`Transit_Metrics`**: System congestion and delay data. 18 rows/cycle (8 BART stations + 10 corridors); engine.183 added col I `Factors` (self-arms via `ensureTransitMetricsSchema_`, append-safe) — the row's causes in words.
+diff --git a/docs/for-claude-review/2026-10-17-pipeline82-roster-from-ledger-review-TASK.md b/docs/for-claude-review/2026-10-17-pipeline82-roster-from-ledger-review-TASK.md
+new file mode 100644
+index 00000000..fe0c580b
+--- /dev/null
++++ b/docs/for-claude-review/2026-10-17-pipeline82-roster-from-ledger-review-TASK.md
+@@ -0,0 +1,16 @@
++# TASK — codex review: pipeline.82 Employment_Roster derived from Simulation_Ledger
++
++**From:** research-build. **Mode:** read-only adversarial review. No edits, no sheet, no run, no commit.
++**Output:** `docs/for-claude-review/2026-10-17-codex-pipeline82-roster-from-ledger-review.md` — one verdict line per hunt (SHIP / FIX / HOLD) with file:line evidence.
++
++## What changed (commit on main, `scripts/dumpBeatTabs.js` + `scripts/dumpBeatTabs.test.js` + `docs/engine/SHEETS_MANIFEST.md`)
++The sheet tab `Employment_Roster` was a one-shot copy of who-works-where generated 2026-03-01 (`scripts/linkCitizensToEmployers.js`) and never regenerated; by C111 it disagreed with `Simulation_Ledger` on 225 rows (31 different employer, 33 not Active, 51 not on the ledger, 110 employed citizens missing). Readers: `scripts/beatSliceKit.js rosterAtSectors`, `scripts/buildSafetySlice.js:58`, `scripts/buildTransitSlice.js:176`, `scripts/newsroomSourcing.js workplace()/offices` (`:124`, `:193`), `scripts/livedExperiencePacket.js:683` (evidence source string). Builder 2026-10-17: the Simulation_Ledger is the only truth he knows; a second copy should not exist.
++Fix: `dumpBeatTabs.js` no longer reads the tab; `rosterFromLedger(ledgerRaw)` writes `output/beats/Employment_Roster.jsonl` from the Simulation_Ledger read the dump already does (Active rows with a non-blank `EmployerBizId`; `MappingLayer: 'ledger'`; same six keys the readers consume). Dry derivation on the C111 snapshot: 894 rows — 754 same employer as the old tab, 30 corrected, 110 newly present, 85 old rows dropped. Tab deletion is the builder's hand; no script reads it now.
++
++## Hunts
++- **H1 shape contract.** Every reader predicate above still holds on the derived rows (`Status` 'Active' upper-cased compare; `BIZ_ID` join to `Business_Ledger`; `POP_ID`/`CitizenName` truthy). Any reader that keyed on the old `MappingLayer` values (`existing`/`keyword`) or `Status` values `SELF_EMPLOYED`/`UNTRACKED`? grep and say.
++- **H2 the hiring pool.** Blank `EmployerBizId` = the engine's hiring pool (`runCareerEngine.js` engine.135 E3). The derive drops those citizens from the roster instead of inventing SELF_EMPLOYED. Does any slice or sourcing path NEED the old SELF_EMPLOYED rows (Amara Keane, Lucia Polito were `SELF_EMPLOYED` on the tab)? Name the path or confirm none.
++- **H3 prev/ and movement.** The dump's `prev/` carries the old tab-shaped file for one generation; any builder diffs `Employment_Roster` prev vs live (the Transit/Crime delta pattern)? If so, the first derived generation shows a false 225-row "movement".
++- **H4 requireCols.** `EmployerBizId` added to the Simulation_Ledger required columns — the dump now ABORTS if that header is missing. Confirm the live header carries it (snapshot does) and that abort is the right failure (vs. an empty roster).
++- **H5 test integrity.** The seven new assertions in `dumpBeatTabs.test.js` run before `process.exit` and test the derive, not the source text. 25/25 claimed.
++- **H6 who runs the dump.** `dumpBeatTabs.js` is invoked from the run-cycle skill after the Sunday fire (`.claude/skills/run-cycle/SKILL.md:123`), not cron. Confirm there is no other invoker, so the first derived file lands at the C112 dump Sun 2026-10-18 and Monday's 06:15 wakes read it.
+diff --git a/docs/plans/2026-09-07-beat-slices-from-sheets-plan.md b/docs/plans/2026-09-07-beat-slices-from-sheets-plan.md
+index 02e3c4ea..95878c6d 100644
+--- a/docs/plans/2026-09-07-beat-slices-from-sheets-plan.md
++++ b/docs/plans/2026-09-07-beat-slices-from-sheets-plan.md
+@@ -159,7 +159,7 @@
+ 
+ ## Status log
+ 
+-- **2026-10-17 (rb) — Employment_Roster vs Simulation_Ledger, measured (the "217 wrong links" the S565 NEXT line carried without a record).** The `Employment_Roster` tab was generated once on 2026-03-01 (`linkCitizensToEmployers.js`, Phase 14.4) and never regenerated; `dumpBeatTabs` copies it to `output/beats/Employment_Roster.jsonl` (869 rows) each dump. Against `output/simulation_ledger_snapshot.jsonl` (1,032 rows): 786 rows agree on the employer; **31 name a different employer than the ledger** (e.g. POP-00023 Gregory Mims roster BIZ-00005 / ledger BIZ-00100; POP-00040 Aaron Whitfield BIZ-00016 / BIZ-00017; POP-00048 Carlos Presti SELF_EMPLOYED / BIZ-00102); **33 roster citizens are no longer Active on the ledger; 51 roster POPIDs are not on the ledger at all; 110 Active, employed ledger citizens are missing from the roster** — 225 disagreements. Readers: `beatSliceKit.js:104` (`workersAt`), `buildSafetySlice.js:59` and `buildTransitSlice.js:177` ("works at X (Employment_Roster)" source people), `livedExperiencePacket.js`. Not checked: whether a wrong employer has reached print. Builder 2026-10-17 on the derive fix: "why if nothing is broken" — dropped; this entry is the record so the number has a home if it bites.
++- **2026-10-17 (rb) — Employment_Roster vs Simulation_Ledger, measured (the "217 wrong links" the S565 NEXT line carried without a record).** The `Employment_Roster` tab was generated once on 2026-03-01 (`linkCitizensToEmployers.js`, Phase 14.4) and never regenerated; `dumpBeatTabs` copies it to `output/beats/Employment_Roster.jsonl` (869 rows) each dump. Against `output/simulation_ledger_snapshot.jsonl` (1,032 rows): 786 rows agree on the employer; **31 name a different employer than the ledger** (e.g. POP-00023 Gregory Mims roster BIZ-00005 / ledger BIZ-00100; POP-00040 Aaron Whitfield BIZ-00016 / BIZ-00017; POP-00048 Carlos Presti SELF_EMPLOYED / BIZ-00102); **33 roster citizens are no longer Active on the ledger; 51 roster POPIDs are not on the ledger at all; 110 Active, employed ledger citizens are missing from the roster** — 225 disagreements. Readers: `beatSliceKit.js:104` (`workersAt`), `buildSafetySlice.js:59` and `buildTransitSlice.js:177` ("works at X (Employment_Roster)" source people), `livedExperiencePacket.js`. Not checked: whether a wrong employer has reached print. Builder 2026-10-17, first: "why if nothing is broken" — dropped. Then, told the tab exists: "I only know about the simulation_ledger, never heard of a roster tab" / "Nothing is working and nothing gets fixed" — **built the same day (pipeline.82):** `dumpBeatTabs.js` stops reading the tab and derives `Employment_Roster.jsonl` from the Simulation_Ledger read it already does (`rosterFromLedger`: Active + non-blank `EmployerBizId`, `MappingLayer: ledger`, same six keys). Dry derivation on the C111 snapshot: 894 rows — 754 same employer, 30 corrected (Mims → Oakland Casino Town, Whitfield → City of Oakland), 110 newly present, 85 stale rows gone. Tests 25/25. Print check C107–C111 story files: 12 of the 31 mis-filed citizens appear, 0 with the wrong employer stated. Codex review TASK `docs/for-claude-review/2026-10-17-pipeline82-roster-from-ledger-review-TASK.md`. First live effect: the C112 dump Sun 2026-10-18 → Mon 10-19 wakes. The sheet tab stays until the builder deletes it; nothing reads it.
+ 
+ ### pipeline.68 — status (drained from ROLLOUT, 2026-09-07 / S436)
+ 
+@@ -451,7 +451,7 @@ The live ledger had 0 physicians at Oakland Hospital (BIZ-00015, 70 tracked work
+ 
+ ## Changelog
+ 
+-- 2026-10-17 (rb) — Employment_Roster staleness measured and recorded in the Status log (225 disagreements vs the ledger); derive fix dropped on the builder's word.
++- 2026-10-17 (rb) — Employment_Roster staleness measured (225 disagreements vs the ledger) and the derive built as pipeline.82: the dump writes the roster from Simulation_Ledger, the tab is unread. Codex review filed. Live at the C112 dump.
+ 
+ - 2026-10-03 (research-build) — follow-on plan [[2026-10-03-citizen-pages-drive-canon]] (pipeline.70): the `street` pool gains the citizen pages as a second evidence source; Celeste, letters and Rhea seams.
+ 
+diff --git a/scripts/dumpBeatTabs.js b/scripts/dumpBeatTabs.js
+index 8bb18c28..e5055917 100755
+--- a/scripts/dumpBeatTabs.js
++++ b/scripts/dumpBeatTabs.js
+@@ -21,6 +21,10 @@
+  *
+  * Outputs:
+  *   output/beats/<Tab>.jsonl   — one row object per line, header keys verbatim
++ *   output/beats/Employment_Roster.jsonl — DERIVED from Simulation_Ledger (Active rows with an
++ *                                EmployerBizId), not a tab read. The sheet tab of that name is a
++ *                                2026-03-01 one-shot copy (linkCitizensToEmployers.js) that drifted
++ *                                225 rows from the ledger by C111 and is unread since 2026-10-17.
+  *   output/beats/meta.json     — cycle, generatedAt, rows per tab
+  *   output/beats/prev/         — the prior cycle's dump, kept so a builder can
+  *                                compute "what moved" (Transit_Metrics,
+@@ -44,8 +48,7 @@ const META = path.join(OUT_DIR, 'meta.json');
+ 
+ // The beat tabs and who they feed (plan Task 4 names the columns per seat).
+ const BEAT_TABS = [
+-  'Business_Ledger',          // business / food — with Employment_Roster for the faces
+-  'Employment_Roster',
++  'Business_Ledger',          // business / food — the faces come from Employment_Roster.jsonl, derived from Simulation_Ledger below
+   'Casino_Ledger',            // business — casino activity (builder, S433)
+   'Transit_Metrics',          // Trevor
+   'Crime_Metrics',            // Rachel
+@@ -87,11 +90,30 @@ const quiet = args.includes('--quiet');
+ const cycleArg = args.find(a => !a.startsWith('--')) || null;
+ function log(...m) { if (!quiet) console.error(...m); }
+ 
+-// pipeline.73 step 2 — two derived files beside the tabs (not tabs: never listed in ALL_TABS).
++// pipeline.73 step 2 — derived files beside the tabs (not tabs: never listed in ALL_TABS).
+ // LifeHistory_Log.jsonl = the raw tab's rows for the stamped Cycle and the one before, header keys verbatim.
+ // Lived_Events.jsonl     = the lived wake's news-grade events for that window, names joined from the
+ //                          same Simulation_Ledger read (the archive for the deceased).
+ const hdrOf = (rows) => (rows && rows[0]) || [];
++// Employment_Roster.jsonl = who works where, read off Simulation_Ledger itself (builder 2026-10-17: the
++// ledger is the only truth; the Employment_Roster TAB is a stale March copy nobody maintained). Same
++// row shape the slice builders and newsroomSourcing already consume: BIZ_ID, POP_ID, CitizenName,
++// RoleType, Status, MappingLayer. Only Active citizens with an EmployerBizId — a blank employer is
++// the engine's hiring pool (engine.135 E3), never SELF_EMPLOYED/UNTRACKED guessed from a keyword.
++function rosterFromLedger(ledgerRaw) {
++  const h = hdrOf(ledgerRaw), ix = (k) => h.indexOf(k);
++  const iPop = ix('POPID'), iFirst = ix('First'), iLast = ix('Last'), iStat = ix('Status'), iRole = ix('RoleType'), iEmp = ix('EmployerBizId');
++  const out = [];
++  for (const r of (ledgerRaw || []).slice(1)) {
++    const pop = String(r[iPop] || '').trim(), emp = String(r[iEmp] || '').trim();
++    if (!pop || !emp) continue;
++    if (String(r[iStat] || '').trim().toLowerCase() !== 'active') continue;
++    const name = (String(r[iFirst] || '').trim() + ' ' + String(r[iLast] || '').trim()).trim();
++    if (!name) continue;
++    out.push({ BIZ_ID: emp, POP_ID: pop, CitizenName: name, RoleType: String(r[iRole] || '').trim(), Status: 'Active', MappingLayer: 'ledger' });
++  }
++  return out;
++}
+ function toObjects(rows) { const h = hdrOf(rows); return (rows || []).slice(1).map(r => Object.fromEntries(h.map((k, i) => [k, r[i] === undefined ? '' : r[i]]))); }
+ function lifeWindowRows(logRaw, stamp) {
+   const h = hdrOf(logRaw), iC = h.indexOf('Cycle');
+@@ -119,7 +141,7 @@ function livedEventRows(src, stamp) {
+     return out;
+   });
+ }
+-module.exports = { lifeWindowRows, livedEventRows, toObjects, resolveStamp, requireCols, publishGeneration };
++module.exports = { lifeWindowRows, livedEventRows, rosterFromLedger, toObjects, resolveStamp, requireCols, publishGeneration };
+ 
+ function readMeta(p) { try { return JSON.parse(fs.readFileSync(p, 'utf8')); } catch (_) { return null; } }
+ 
+@@ -207,7 +229,7 @@ async function main() {
+   log('dumpBeatTabs: reading LifeHistory_Log, Hospital_Ledger, Simulation_Ledger for the lived window…');
+   const logRaw = requireCols('LifeHistory_Log', await sheets.getRawSheetData('LifeHistory_Log'), ['POPID', 'EventTag', 'EventText', 'Cycle'], true);
+   const hospRaw = requireCols('Hospital_Ledger', await sheets.getRawSheetData('Hospital_Ledger'), ['AdmissionId', 'POPID', 'AdmitCycle', 'DischargeCycle', 'Cause'], false);
+-  const ledgerRaw = requireCols('Simulation_Ledger', await sheets.getRawSheetData('Simulation_Ledger'), ['POPID', 'First', 'Last', 'Neighborhood', 'RoleType', 'HouseholdId', 'Status', 'BirthYear'], true);
++  const ledgerRaw = requireCols('Simulation_Ledger', await sheets.getRawSheetData('Simulation_Ledger'), ['POPID', 'First', 'Last', 'Neighborhood', 'RoleType', 'HouseholdId', 'Status', 'BirthYear', 'EmployerBizId'], true);
+   const lifeRows = lifeWindowRows(logRaw, stamp);
+   const anyDeath = lifeRows.some(r => /^Death$/i.test(String(r.EventTag || '').trim()));
+   const archiveRaw = anyDeath ? requireCols('Citizen_Archive', await sheets.getRawSheetData('Citizen_Archive'), ['POPID', 'First', 'Last', 'HouseholdId', 'SpouseId'], true) : [];
+@@ -218,10 +240,14 @@ async function main() {
+   for (const tab of ALL_TABS) files[tab] = data[tab].map(r => JSON.stringify(r));
+   files.LifeHistory_Log = lifeRows.map(r => JSON.stringify(r));
+   files.Lived_Events = livedRows.map(r => JSON.stringify(r));
++  const rosterRows = rosterFromLedger(ledgerRaw);
++  files.Employment_Roster = rosterRows.map(r => JSON.stringify(r));
++  log('dumpBeatTabs: Employment_Roster derived from Simulation_Ledger — ' + rosterRows.length + ' Active employed citizens'
++    + (titles.has('Employment_Roster') ? ' (the sheet tab Employment_Roster is a stale copy, unread; deleting it is the builder\'s hand)' : ''));
+   const counts = Object.fromEntries(Object.keys(files).map(k => [k, files[k].length])); // LifeHistory_Log = the window rows written
+   const advancing = priorCycle != null && stamp > priorCycle;
+   const meta = {
+-    source: 'beat tabs (' + ALL_TABS.length + ') + LifeHistory_Log window (Cycle ' + (stamp - LIVED_WINDOW) + '–' + stamp + ') + Lived_Events (derived)',
++    source: 'beat tabs (' + ALL_TABS.length + ') + LifeHistory_Log window (Cycle ' + (stamp - LIVED_WINDOW) + '–' + stamp + ') + Lived_Events (derived) + Employment_Roster (derived from Simulation_Ledger)',
+     cycle: stamp,
+     prevCycle: advancing ? priorCycle : (readMeta(path.join(PREV_DIR, 'meta.json')) || {}).cycle ?? null,
+     rows: counts,
+@@ -231,7 +257,7 @@ async function main() {
+   };
+   publishGeneration(OUT_DIR, files, meta, advancing);
+ 
+-  log(`dumpBeatTabs: wrote ${ALL_TABS.length} tabs + 2 derived → ${path.relative(ROOT, OUT_DIR)}/` + (advancing ? ` (prior cycle ${priorCycle} kept in prev/)` : ''));
++  log(`dumpBeatTabs: wrote ${ALL_TABS.length} tabs + 3 derived → ${path.relative(ROOT, OUT_DIR)}/` + (advancing ? ` (prior cycle ${priorCycle} kept in prev/)` : ''));
+   if (!quiet) console.log(JSON.stringify({ ok: true, cycle: meta.cycle, prevCycle: meta.prevCycle, rows: counts }));
+ }
+ 
+diff --git a/scripts/dumpBeatTabs.test.js b/scripts/dumpBeatTabs.test.js
+index 53e53dc4..e523c4b8 100644
+--- a/scripts/dumpBeatTabs.test.js
++++ b/scripts/dumpBeatTabs.test.js
+@@ -2,7 +2,7 @@
+ // pipeline.73 step 2 — the beat dump's derived files: the LifeHistory_Log window and Lived_Events.
+ // Pure helpers only (the sheet reads and the staged publish run in main()).
+ // Run: node scripts/dumpBeatTabs.test.js
+-const { lifeWindowRows, livedEventRows, resolveStamp, requireCols, publishGeneration } = require('./dumpBeatTabs');
++const { lifeWindowRows, livedEventRows, rosterFromLedger, resolveStamp, requireCols, publishGeneration } = require('./dumpBeatTabs');
+ const fs = require('fs'), os = require('os'), path = require('path');
+ let pass = 0, fail = 0;
+ const ok = (n, c, d) => { if (c) { pass++; console.log('  ok   ' + n); } else { fail++; console.log('  FAIL ' + n + (d ? ' — ' + d : '')); } };
+@@ -64,5 +64,22 @@ publishGeneration(out, { A: ['{"c":113}'] }, { cycle: 113 }, true);
+ ok('the retry after a failure publishes cleanly (no leftover .next)', read('A.jsonl') === '{"c":113}\n' && !fs.existsSync(out + '.next') && !fs.existsSync(out + '.old') && fs.readFileSync(path.join(out, 'prev', 'A.jsonl'), 'utf8') === '{"c":112,"again":1}\n');
+ fs.rmSync(tmp, { recursive: true, force: true });
+ 
++// Employment_Roster derived from Simulation_Ledger (builder 2026-10-17) — the only truth for who works where.
++const LH = ['POPID', 'First', 'Last', 'Status', 'RoleType', 'EmployerBizId', 'Neighborhood'];
++const roster = rosterFromLedger([LH,
++  ['POP-00023', 'Gregory', 'Mims', 'Active', 'Organized Crime', 'BIZ-00100', 'Downtown'],
++  ['POP-00040', 'Aaron', 'Whitfield', 'active ', 'City Manager', ' BIZ-00017 ', 'Rockridge'],
++  ['POP-00500', 'Idle', 'Pool', 'Active', 'Barista', '', 'Temescal'],
++  ['POP-00594', 'Robert', 'Corliss', 'Retired', 'Retired PG&E Engineer', 'BIZ-00030', 'Lake Merritt'],
++  ['', 'No', 'Popid', 'Active', 'Clerk', 'BIZ-00017', 'Downtown'],
++  ['POP-00700', '', '', 'Active', 'Clerk', 'BIZ-00017', 'Downtown']]);
++ok('roster: Active + EmployerBizId rows only, ledger order kept', roster.map(r => r.POP_ID).join(',') === 'POP-00023,POP-00040');
++ok('roster: exact row shape the slices and sourcing read', JSON.stringify(roster[0]) === JSON.stringify({ BIZ_ID: 'BIZ-00100', POP_ID: 'POP-00023', CitizenName: 'Gregory Mims', RoleType: 'Organized Crime', Status: 'Active', MappingLayer: 'ledger' }));
++ok('roster: status and employer are trimmed/case-folded, Status written as Active', roster[1].BIZ_ID === 'BIZ-00017' && roster[1].Status === 'Active' && roster[1].CitizenName === 'Aaron Whitfield');
++ok('roster: blank employer (the hiring pool) is not SELF_EMPLOYED or UNTRACKED — it is absent', !roster.some(r => r.POP_ID === 'POP-00500'));
++ok('roster: a retired citizen is off the roster even with an employer id', !roster.some(r => r.POP_ID === 'POP-00594'));
++ok('roster: no POPID or no name → no row', roster.length === 2);
++ok('roster: empty ledger → empty roster, no throw', rosterFromLedger([]).length === 0 && rosterFromLedger(null).length === 0);
++
+ console.log('\n' + pass + ' passed, ' + fail + ' failed');
+ process.exit(fail ? 1 : 0);
+-- 
+2.43.0
+
+diff --git a/scripts/civicPetitions.test.js b/scripts/civicPetitions.test.js
+index cc0ad393..7c0b2745 100644
+--- a/scripts/civicPetitions.test.js
++++ b/scripts/civicPetitions.test.js
+@@ -203,7 +203,8 @@ test('disk loader and CLI are local-only, read-only, cycle checked and fail loud
+ });
+ test('beats dump treats Reflection_Intake as optional, including empty and present cases', async () => {
+   const source = fs.readFileSync(path.join(__dirname, 'dumpBeatTabs.js'), 'utf8');
+-  const required = ['Business_Ledger', 'Employment_Roster', 'Casino_Ledger', 'Transit_Metrics', 'Crime_Metrics',
++  // pipeline.82: Employment_Roster is DERIVED from Simulation_Ledger, not a required tab — the sheet stub omits it.
++  const required = ['Business_Ledger', 'Casino_Ledger', 'Transit_Metrics', 'Crime_Metrics',
+     'Neighborhood_Demographics', 'Hospital_Ledger', 'Health_Cause_Queue', 'Community_Programs',
+     'Faith_Organizations', 'Faith_Ledger', 'Cycle_Weather', 'Household_Ledger', 'Story_Seed_Deck', 'Story_Hook_Deck'];
+   for (const present of [false, true]) {
+@@ -216,7 +217,9 @@ test('beats dump treats Reflection_Intake as optional, including empty and prese
+     const RAW = {
+       LifeHistory_Log: [['Timestamp', 'POPID', 'Name', 'EventTag', 'EventText', 'Neighborhood', 'Cycle'], ['Y3C8', 'POP-99902', '', 'Daily', 'walked', '', '999']],
+       Hospital_Ledger: [['AdmissionId', 'POPID', 'Name', 'Neighborhood', 'Cause', 'AdmitCycle', 'StatusNow', 'LastTransitionCycle', 'DischargeCycle']],
+-      Simulation_Ledger: [['POPID', 'First', 'Last', 'Neighborhood', 'RoleType', 'HouseholdId', 'Status', 'BirthYear'], ['POP-99902', 'Syn', 'Thetic', 'Downtown', 'Clerk', '', 'Active', '1990']],
++      Simulation_Ledger: [['POPID', 'First', 'Last', 'Neighborhood', 'RoleType', 'HouseholdId', 'Status', 'BirthYear', 'EmployerBizId'],
++        ['POP-99902', 'Syn', 'Thetic', 'Downtown', 'Clerk', '', 'Active', '1990', 'BIZ-00017'],
++        ['POP-99903', 'Idle', 'Pool', 'Downtown', 'Barista', '', 'Active', '1991', '']],
+     };
+     const mod = { exports: {} };
+     const req = (name) => {
+@@ -243,6 +246,10 @@ test('beats dump treats Reflection_Intake as optional, including empty and prese
+     assert.equal(writes.get('Reflection_Intake.jsonl'), present ? JSON.stringify(synthetic[0]) + '\n' : '');
+     assert.equal(JSON.parse(writes.get('meta.json')).rows.Reflection_Intake, present ? 1 : 0);
+     assert.equal(reads.includes('Reflection_Intake'), present);
++    // pipeline.82: the roster is written from the ledger read, never read as a tab; the blank-employer citizen is absent.
++    assert.equal(reads.includes('Employment_Roster'), false);
++    assert.equal(writes.get('Employment_Roster.jsonl'), JSON.stringify({ BIZ_ID: 'BIZ-00017', POP_ID: 'POP-99902', CitizenName: 'Syn Thetic', RoleType: 'Clerk', Status: 'Active', MappingLayer: 'ledger' }) + '\n');
++    assert.equal(JSON.parse(writes.get('meta.json')).rows.Employment_Roster, 1);
+   }
+ });
+ (async () => {

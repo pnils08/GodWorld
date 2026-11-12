@@ -1,0 +1,153 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "115",
+  "persona": "luis-navarro",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Luis Navarro",
+    "popid": "POP-00636"
+  },
+  "assignment": {
+    "story": {
+      "ref": "output/engine_audit_c115.json patterns[0]; evidence: Initiative_Tracker row(s) 7; storyline INIT-007:implementation-active",
+      "label": "stuck-initiative (low) | Initiative \"Oakland Youth Apprenticeship Pipeline\" in phase \"implementation-active\" for 3 cycles",
+      "kind": "anomaly",
+      "angle": "Oakland Youth Apprenticeship Pipeline stalled in implementation-active — remedy path + responsible office",
+      "hookLine": "The economic initiative carrying West Oakland has not advanced in 3 cycles.",
+      "hood": "West Oakland, East Oakland, Fruitvale",
+      "popids": [
+        "POP-01055"
+      ],
+      "citizens": [
+        "Jerome Pittman (POP-01055)"
+      ]
+    }
+  },
+  "angle": "output/test-shell/20261110-231754-luis-navarro-light/civic_c115_luis-navarro_packet-v2_angle.json",
+  "quotesRequested": 1,
+  "quotesLanded": 0,
+  "quotes": [],
+  "officeRecords": [],
+  "officeSilence": "no matching current-cycle office statement; tier-2 adapter unavailable",
+  "interviews": [
+    {
+      "pop": "POP-01055",
+      "name": "Jerome Pittman",
+      "quote": null,
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: fact_ids contains an unknown id; fact_ids contains an unknown id",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I can tell you what I see from my side of it. At the hub, I process intake forms all day, and I've noticed more apprenticeship referrals coming through from East Oakland schools lately—seems like they're trying to steer kids toward hands-on paths. But as far as the pipeline itself stalling, I don't have any inside knowledge on why it hasn't moved. I just know the referrals are still coming in, so somebody out there is still pushing for it. If it's stuck, that's above my pay grade.\",\n  \"fact_ids\": [\"F-9a03f74b0a30\", \"F-3636de4563b5\", \"F-2e699469253e\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01055",
+          "name": "Jerome Pittman",
+          "role": "Transit Hub D5 Intake Liaison",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Luis Navarro",
+          "question": "What has Jerome Pittman seen regarding the Youth Apprenticeship Pipeline's stalled status, and does he have any knowledge of why it has not advanced in three cycles? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "West Oakland, East Oakland, Fruitvale",
+          "focus": "The Oakland Youth Apprenticeship Pipeline has not advanced in three cycles, and no documented response or non-response exists to explain the stall.",
+          "src": "output/engine_audit_c115.json patterns[0]; evidence: Initiative_Tracker row(s) 7; storyline INIT-007:implementation-active"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Jerome Pittman — Transit Hub D5 Intake Liaison — East Oakland resident",
+          "evidence": [
+            {
+              "id": "EV-f96fc48879",
+              "src": "output/engine_audit_c115.json patterns[0]; evidence: Initiative_Tracker row(s) 7; storyline INIT-007:implementation-active",
+              "text": "The economic initiative carrying West Oakland has not advanced in 3 cycles."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C115",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-bc84fc0b7718"
+          },
+          {
+            "t": "FACT",
+            "text": "Oakland Youth Apprenticeship Pipeline stalled in implementation-active",
+            "src": "output/engine_audit_c115.json patterns[0]; evidence: Initiative_Tracker row(s) 7; storyline INIT-007:implementation-active",
+            "id": "F-2e699469253e"
+          },
+          {
+            "t": "FACT",
+            "text": "The economic initiative carrying West Oakland has not advanced in 3 cycles.",
+            "src": "output/engine_audit_c115.json patterns[0]; evidence: Initiative_Tracker row(s) 7; storyline INIT-007:implementation-active",
+            "id": "F-6d3d5d153479"
+          },
+          {
+            "t": "FACT",
+            "text": "Jerome Pittman — Transit Hub D5 Intake Liaison — East Oakland resident",
+            "src": "Simulation_Ledger profile for POP-01055",
+            "id": "F-5695e417a8ad"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C11, Spring, holiday=none",
+            "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+            "id": "F-82d77e9a4a71"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-11-10T19:15:28.090Z"
+}

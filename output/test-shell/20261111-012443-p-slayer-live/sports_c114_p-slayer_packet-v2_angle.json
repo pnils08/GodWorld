@@ -1,0 +1,954 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "114",
+  "persona": "p-slayer",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00008",
+      "name": "P Slayer",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+      "approach": "Fan-heat approach (P Slayer pulse): do NOT open from the FO press release or the award board. Open from gut or Oakland sensory (bar, lot, bleacher row, BART after). First-person I/we only. Pick 1–2 charge-bag modes from this slice. Friction pivot required — name the counter-argument, kill it. ONE real foil number max (from FoilNumber / AnchorFacts); never invent x-stats or roster moves. Hook PriorTake when present — eat it or double down (\"I was wrong\" is craft). End on charge that sticks: dare, confession, or update. Not Anthony. Not Hal. Not multi-voice sports-desk average.",
+      "creativeBrief": {
+        "kind": "fan-heat",
+        "fanCharge": "dread",
+        "bagModes": [
+          "3 Friction Pivot",
+          "4 Loss Hangover / Empty Win",
+          "7 We Still Believe / We're Done"
+        ],
+        "friction": "Something the stands feel that the release will not say.",
+        "centralFeeling": "Oakland should name the fear before the next drop.",
+        "priorTake": "NONE — write cold or invent no prior; wall may still inject at wake",
+        "sceneRule": "You may invent unnamed bar / lot / BART / bleacher texture that contradicts nothing on this slice. Do not invent star players, contracts, stats, or quotes. Named people stay on PLAYERS list or Tribune colleagues (Anthony, Hal, Mags) as foils."
+      }
+    },
+    "signal": {
+      "kind": "loss",
+      "hood": "San Antonio",
+      "score": null,
+      "src": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+      "team": "Oaks",
+      "nearby": [
+        {
+          "text": "A's | rumor | (off-season) | Ian Devine, Louis Cross, Hitoki Ka, Mariano Rosales, Clark Saryan, Julio Valencia",
+          "src": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | rumor | (off-season) | Carmen Mesa, Pablo Almanzar, Henry Rivas, Arturo Ramos",
+          "src": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | front-office | (off-season) | Travis Coles, John Ellis, Ernesto Quintero, Vladimir Gonzalez, Mike Paulson",
+          "src": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (off-season) | Benji Dillon, Vinnie Keane",
+          "src": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (off-season) | Isley Kelley, Darrin Davis, Danny Horn",
+          "src": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-01023",
+          "name": "Adash Stanley",
+          "profile": "Adash Stanley — PG / The Oaks",
+          "role": "PG / The Oaks",
+          "hood": "Downtown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+            "pop": "POP-01023",
+            "rowName": "Adash Stanley",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01027",
+          "name": "Austin Reaves",
+          "profile": "Austin Reaves — SG / The Oaks",
+          "role": "SG / The Oaks",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+            "pop": "POP-01027",
+            "rowName": "Austin Reaves",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00170",
+          "name": "Melton Neilon",
+          "profile": "Melton Neilon — Sourdough Baker",
+          "role": "Sourdough Baker",
+          "hood": "Temescal",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "SRj1Wn1q3aRxZTY3ALNRf6",
+            "customId": "cp-POP-00170-c110-PRESS",
+            "cycle": 110,
+            "excerpt": "Honestly, I still don't really know what to make of the Oaks analysis.",
+            "highlightKind": "team",
+            "entity": "Oaks",
+            "predicate": "fan"
+          }
+        },
+        {
+          "pop": "POP-00198",
+          "name": "Rick Walker",
+          "profile": "Rick Walker — K-8 Teacher,Former Line cook",
+          "role": "K-8 Teacher,Former Line cook",
+          "hood": "Fruitvale",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "mgXsax3i7irgmarYJpd9bp",
+            "customId": "cp-POP-00198-c106-PRESS",
+            "cycle": 106,
+            "excerpt": "I've heard some folks talking about Oaks analysis around the neighborhood, seems like people are trying to make sense of what's going on with the team, I'm just trying to keep up with the news like everyone else",
+            "highlightKind": "team",
+            "entity": "Oaks",
+            "predicate": "fan"
+          }
+        },
+        {
+          "pop": "POP-00201",
+          "name": "Elio Perez",
+          "profile": "Elio Perez — Server",
+          "role": "Server",
+          "hood": "Rockridge",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "jQ1x55AXJqEnBWBaUX2JyW",
+            "customId": "cp-POP-00201-c106-PRESS",
+            "cycle": 106,
+            "excerpt": "I've heard people talking about Oaks analysis around my neighborhood, it seems like everyone's got an opinion on it, I'm just trying to stay focused on my work and taking care of my family",
+            "highlightKind": "team",
+            "entity": "Oaks",
+            "predicate": "fan"
+          }
+        },
+        {
+          "pop": "POP-00212",
+          "name": "Jessie Hess",
+          "profile": "Jessie Hess — Barista",
+          "role": "Barista",
+          "hood": "Downtown",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "HyhQejEenARxJYxp93ae85",
+            "customId": "cp-POP-00212-c110-PRESS",
+            "cycle": 110,
+            "excerpt": "I was really hyped about the Oaks' starting five and their chances this season, but losing to the Miami Heat doesn't exactly fill me with confidence.",
+            "highlightKind": "team",
+            "entity": "Oaks",
+            "predicate": "fan"
+          }
+        },
+        {
+          "pop": "POP-00224",
+          "name": "Dillon Trevor",
+          "profile": "Dillon Trevor — Server",
+          "role": "Server",
+          "hood": "Downtown",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "4N7gJRG2ySYS7rsQyKK6ay",
+            "customId": "cp-POP-00224-c107-PRESS",
+            "cycle": 107,
+            "excerpt": "I've heard The Oaks are looking strong for the upcoming season, and I'm excited to see how they do.",
+            "highlightKind": "team",
+            "entity": "Oaks",
+            "predicate": "fan"
+          }
+        },
+        {
+          "pop": "POP-00273",
+          "name": "Trenton Nawan",
+          "profile": "Trenton Nawan — Server",
+          "role": "Server",
+          "hood": "Jack London",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "DxgQWWo7xsn1jhWWGHqTHD",
+            "customId": "cp-POP-00273-c113-PRESS",
+            "cycle": 113,
+            "excerpt": "I'm still a bit worried about the Oaks, but their 4-0 start is really giving me hope.",
+            "highlightKind": "team",
+            "entity": "Oaks",
+            "predicate": "fan"
+          }
+        },
+        {
+          "pop": "POP-00540",
+          "name": "Jade Orion",
+          "profile": "Jade Orion — Musician",
+          "role": "Musician",
+          "hood": "Lake Merritt",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "vAkesst5wo8wCX9mn7Rujt",
+            "customId": "cp-POP-00540-c102-PRESS",
+            "cycle": 102,
+            "excerpt": "Look, I don’t know what kind of \"fame-rise\" you’re talking about—I’m just a person who plays guitar at The Oaks sometimes and fixes my own appliances because rent isn’t cheap.",
+            "highlightKind": "team",
+            "entity": "Oaks",
+            "predicate": "fan"
+          }
+        },
+        {
+          "pop": "POP-00642",
+          "name": "Ollie Campbell",
+          "profile": "Ollie Campbell — Bakery Worker",
+          "role": "Bakery Worker",
+          "hood": "Jack London",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "z6pDb5oTFZ317jUrVDT6oD",
+            "customId": "cp-POP-00642-c113-PRESS",
+            "cycle": 113,
+            "excerpt": "To be honest, I still feel the same way about the Oaks.",
+            "highlightKind": "team",
+            "entity": "Oaks",
+            "predicate": "fan"
+          }
+        },
+        {
+          "pop": "POP-00722",
+          "name": "Daniel Cloak",
+          "profile": "Daniel Cloak — Bakery Worker",
+          "role": "Bakery Worker",
+          "hood": "West Oakland",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "uBnTZrbAsy2cgjJY5UAbsb",
+            "customId": "cp-POP-00722-c110-PRESS",
+            "cycle": 110,
+            "excerpt": "I still feel that way about the Oaks, they're trying to reach out and be part of the community, and that's something positive.",
+            "highlightKind": "team",
+            "entity": "Oaks",
+            "predicate": "fan"
+          }
+        },
+        {
+          "pop": "POP-00794",
+          "name": "Irene Fay",
+          "profile": "Irene Fay — Barista",
+          "role": "Barista",
+          "hood": "West Oakland",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "toFvMTo3wqpDxkBBseRDVW",
+            "customId": "cp-POP-00794-c106-PRESS",
+            "cycle": 106,
+            "excerpt": "I feel like community engagement with the Oaks team is something I've heard about, but I don't really know much about it.",
+            "highlightKind": "team",
+            "entity": "Oaks",
+            "predicate": "fan"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C114",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-4261fa115617"
+      },
+      {
+        "t": "FACT",
+        "text": "The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+        "src": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+        "id": "F-40f28e28bf10"
+      },
+      {
+        "t": "FACT",
+        "text": "Something the stands feel that the release will not say.",
+        "src": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+        "id": "F-705223201a30"
+      },
+      {
+        "t": "FACT",
+        "text": "StoryAngle (feed): The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+        "src": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+        "id": "F-c486b12d2137"
+      },
+      {
+        "t": "FACT",
+        "text": "Team record (feed): 4-1 · streak L1",
+        "src": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+        "id": "F-136db956bbb3"
+      },
+      {
+        "t": "FACT",
+        "text": "Stats (feed): Adash Stanley/19PTS/5REB/4ASST/5-11 3PT, Austin Reaves/19PTS/6REB/7ASST/0TO, AJ Dybantsa/15PTS/5REB, Wendell Carter Jr/10PTS/7REB/5-6FG, T. Jerome/10PTS/5ASST",
+        "src": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+        "id": "F-43e1316526a0"
+      },
+      {
+        "t": "FACT",
+        "text": "Event: Oaks — game-result (early-season)",
+        "src": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+        "id": "F-6ac4417e7b49"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "street",
+    "candidates": [
+      {
+        "pop": "POP-01023",
+        "name": "Adash Stanley",
+        "role": "PG / The Oaks",
+        "hood": "Downtown",
+        "profile": "Adash Stanley — PG / The Oaks ",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+          "pop": "POP-01023",
+          "rowName": "Adash Stanley",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01027",
+        "name": "Austin Reaves",
+        "role": "SG / The Oaks",
+        "hood": "West Oakland",
+        "profile": "Austin Reaves — SG / The Oaks",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+          "pop": "POP-01027",
+          "rowName": "Austin Reaves",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00170",
+        "name": "Melton Neilon",
+        "role": "Sourdough Baker",
+        "hood": "Temescal",
+        "profile": "Melton Neilon — Sourdough Baker",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "SRj1Wn1q3aRxZTY3ALNRf6",
+          "customId": "cp-POP-00170-c110-PRESS",
+          "cycle": 110,
+          "excerpt": "Honestly, I still don't really know what to make of the Oaks analysis.",
+          "highlightKind": "team",
+          "entity": "Oaks",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "Honestly, I still don't really know what to make of the Oaks analysis."
+      },
+      {
+        "pop": "POP-00198",
+        "name": "Rick Walker",
+        "role": "K-8 Teacher,Former Line cook",
+        "hood": "Fruitvale",
+        "profile": "Rick Walker — K-8 Teacher,Former Line cook",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "mgXsax3i7irgmarYJpd9bp",
+          "customId": "cp-POP-00198-c106-PRESS",
+          "cycle": 106,
+          "excerpt": "I've heard some folks talking about Oaks analysis around the neighborhood, seems like people are trying to make sense of what's going on with the team, I'm just trying to keep up with the news like everyone else",
+          "highlightKind": "team",
+          "entity": "Oaks",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I've heard some folks talking about Oaks analysis around the neighborhood, seems like people are trying to make sense of what's going on with the team, I'm just trying to keep up with the news like everyone else"
+      },
+      {
+        "pop": "POP-00201",
+        "name": "Elio Perez",
+        "role": "Server",
+        "hood": "Rockridge",
+        "profile": "Elio Perez — Server",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "jQ1x55AXJqEnBWBaUX2JyW",
+          "customId": "cp-POP-00201-c106-PRESS",
+          "cycle": 106,
+          "excerpt": "I've heard people talking about Oaks analysis around my neighborhood, it seems like everyone's got an opinion on it, I'm just trying to stay focused on my work and taking care of my family",
+          "highlightKind": "team",
+          "entity": "Oaks",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I've heard people talking about Oaks analysis around my neighborhood, it seems like everyone's got an opinion on it, I'm just trying to stay focused on my work and taking care of my family"
+      },
+      {
+        "pop": "POP-00212",
+        "name": "Jessie Hess",
+        "role": "Barista",
+        "hood": "Downtown",
+        "profile": "Jessie Hess — Barista",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "HyhQejEenARxJYxp93ae85",
+          "customId": "cp-POP-00212-c110-PRESS",
+          "cycle": 110,
+          "excerpt": "I was really hyped about the Oaks' starting five and their chances this season, but losing to the Miami Heat doesn't exactly fill me with confidence.",
+          "highlightKind": "team",
+          "entity": "Oaks",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I was really hyped about the Oaks' starting five and their chances this season, but losing to the Miami Heat doesn't exactly fill me with confidence."
+      },
+      {
+        "pop": "POP-00224",
+        "name": "Dillon Trevor",
+        "role": "Server",
+        "hood": "Downtown",
+        "profile": "Dillon Trevor — Server",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "4N7gJRG2ySYS7rsQyKK6ay",
+          "customId": "cp-POP-00224-c107-PRESS",
+          "cycle": 107,
+          "excerpt": "I've heard The Oaks are looking strong for the upcoming season, and I'm excited to see how they do.",
+          "highlightKind": "team",
+          "entity": "Oaks",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I've heard The Oaks are looking strong for the upcoming season, and I'm excited to see how they do."
+      },
+      {
+        "pop": "POP-00273",
+        "name": "Trenton Nawan",
+        "role": "Server",
+        "hood": "Jack London",
+        "profile": "Trenton Nawan — Server",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "DxgQWWo7xsn1jhWWGHqTHD",
+          "customId": "cp-POP-00273-c113-PRESS",
+          "cycle": 113,
+          "excerpt": "I'm still a bit worried about the Oaks, but their 4-0 start is really giving me hope.",
+          "highlightKind": "team",
+          "entity": "Oaks",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I'm still a bit worried about the Oaks, but their 4-0 start is really giving me hope."
+      },
+      {
+        "pop": "POP-00540",
+        "name": "Jade Orion",
+        "role": "Musician",
+        "hood": "Lake Merritt",
+        "profile": "Jade Orion — Musician",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "vAkesst5wo8wCX9mn7Rujt",
+          "customId": "cp-POP-00540-c102-PRESS",
+          "cycle": 102,
+          "excerpt": "Look, I don’t know what kind of \"fame-rise\" you’re talking about—I’m just a person who plays guitar at The Oaks sometimes and fixes my own appliances because rent isn’t cheap.",
+          "highlightKind": "team",
+          "entity": "Oaks",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "Look, I don’t know what kind of \"fame-rise\" you’re talking about—I’m just a person who plays guitar at The Oaks sometimes and fixes my own appliances because rent isn’t cheap."
+      },
+      {
+        "pop": "POP-00642",
+        "name": "Ollie Campbell",
+        "role": "Bakery Worker",
+        "hood": "Jack London",
+        "profile": "Ollie Campbell — Bakery Worker",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "z6pDb5oTFZ317jUrVDT6oD",
+          "customId": "cp-POP-00642-c113-PRESS",
+          "cycle": 113,
+          "excerpt": "To be honest, I still feel the same way about the Oaks.",
+          "highlightKind": "team",
+          "entity": "Oaks",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "To be honest, I still feel the same way about the Oaks."
+      },
+      {
+        "pop": "POP-00722",
+        "name": "Daniel Cloak",
+        "role": "Bakery Worker",
+        "hood": "West Oakland",
+        "profile": "Daniel Cloak — Bakery Worker",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "uBnTZrbAsy2cgjJY5UAbsb",
+          "customId": "cp-POP-00722-c110-PRESS",
+          "cycle": 110,
+          "excerpt": "I still feel that way about the Oaks, they're trying to reach out and be part of the community, and that's something positive.",
+          "highlightKind": "team",
+          "entity": "Oaks",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I still feel that way about the Oaks, they're trying to reach out and be part of the community, and that's something positive."
+      },
+      {
+        "pop": "POP-00794",
+        "name": "Irene Fay",
+        "role": "Barista",
+        "hood": "West Oakland",
+        "profile": "Irene Fay — Barista",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "toFvMTo3wqpDxkBBseRDVW",
+          "customId": "cp-POP-00794-c106-PRESS",
+          "cycle": 106,
+          "excerpt": "I feel like community engagement with the Oaks team is something I've heard about, but I don't really know much about it.",
+          "highlightKind": "team",
+          "entity": "Oaks",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I feel like community engagement with the Oaks team is something I've heard about, but I don't really know much about it."
+      },
+      {
+        "pop": "POP-00961",
+        "name": "Darius Clark",
+        "role": "Bakery Worker",
+        "hood": "West Oakland",
+        "profile": "Darius Clark — Bakery Worker",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "eMYpZ1azxUV7vjTZvhkMiT",
+          "customId": "cp-POP-00961-c106-PRESS",
+          "cycle": 106,
+          "excerpt": "I feel like the community is pretty supportive of the Oaks team, I see people around here talking about them and it seems like they're trying to engage with us more.",
+          "highlightKind": "team",
+          "entity": "Oaks",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I feel like the community is pretty supportive of the Oaks team, I see people around here talking about them and it seems like they're trying to engage with us more."
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "P Slayer",
+    "popid": "POP-00008"
+  },
+  "assignment": {
+    "story": {
+      "ref": "Oakland_Sports_Feed cycle 114; world_summary_c114.md \"## Sports\" · The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+      "label": "The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+      "kind": "loss",
+      "angle": "The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+      "hookLine": "Something the stands feel that the release will not say.",
+      "hood": "San Antonio",
+      "team": "Oaks",
+      "eventKind": "game-result",
+      "popids": [
+        "POP-01023",
+        "POP-01027"
+      ],
+      "citizens": [
+        "Adash Stanley (POP-01023)",
+        "Austin Reaves (POP-01027)",
+        "Wendell Carter Jr",
+        "In Indiana"
+      ],
+      "pulseClass": "loss",
+      "pulseScore": 58,
+      "fanCharge": "dread",
+      "bagModeIds": [
+        3,
+        4,
+        7
+      ]
+    },
+    "approach": "Fan-heat approach (P Slayer pulse): do NOT open from the FO press release or the award board. Open from gut or Oakland sensory (bar, lot, bleacher row, BART after). First-person I/we only. Pick 1–2 charge-bag modes from this slice. Friction pivot required — name the counter-argument, kill it. ONE real foil number max (from FoilNumber / AnchorFacts); never invent x-stats or roster moves. Hook PriorTake when present — eat it or double down (\"I was wrong\" is craft). End on charge that sticks: dare, confession, or update. Not Anthony. Not Hal. Not multi-voice sports-desk average."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": {
+    "pulse": {
+      "className": "loss",
+      "classes": [
+        "result-pulse",
+        "loss"
+      ],
+      "score": 58,
+      "label": "The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+      "team": "Oaks",
+      "eventKind": "game-result",
+      "seasonType": "early-season",
+      "feedCycle": 114,
+      "record": "4-1",
+      "streak": "L1",
+      "mood": "frustrated",
+      "fanSentiment": "excited",
+      "neighborhood": "San Antonio",
+      "notes": "The Oaks' perfect start ends at four. In Indiana, in front of a building at 90% capacity, the Pacers built a 61-42 halftime lead behind a 34-point second quarter and led 82-62 after three. The Oaks answered with 38 points in the fourth and won the quarter 38-22, but the comeback came up four short, Pacers 104 - Oaks 100. Adash Stanley and Austin Reaves led the way with 19 apiece. Stanley hit 5 of 11 from three, and Reaves had 7 assists and 6 rebounds without a turnover. AJ Dybantsa added 15, Wendell Carter Jr. went 5 for 6 for 10 points and 7 rebounds, and T. Jerome chipped in 10 points and 5 assists. The Oaks fall to 4-1.",
+      "stats": "Adash Stanley/19PTS/5REB/4ASST/5-11 3PT, Austin Reaves/19PTS/6REB/7ASST/0TO, AJ Dybantsa/15PTS/5REB, Wendell Carter Jr/10PTS/7REB/5-6FG, T. Jerome/10PTS/5ASST"
+    },
+    "charge": {
+      "bagModes": [
+        {
+          "id": 3,
+          "name": "Friction Pivot"
+        },
+        {
+          "id": 4,
+          "name": "Loss Hangover / Empty Win"
+        },
+        {
+          "id": 7,
+          "name": "We Still Believe / We're Done"
+        }
+      ],
+      "fanCharge": "dread",
+      "foilNumber": "5-11",
+      "centralFeeling": "Oakland should name the fear before the next drop.",
+      "palette": [
+        "fury",
+        "euphoria",
+        "dread",
+        "defiance",
+        "confession",
+        "grief",
+        "dare"
+      ]
+    },
+    "prewrite": {
+      "reporter": "P.Slayer",
+      "bagModes": [
+        {
+          "id": 3,
+          "name": "Friction Pivot"
+        },
+        {
+          "id": 4,
+          "name": "Loss Hangover / Empty Win"
+        },
+        {
+          "id": 7,
+          "name": "We Still Believe / We're Done"
+        }
+      ],
+      "fanCharge": "dread",
+      "priorTake": "NONE — write cold or invent no prior; wall may still inject at wake",
+      "anchorFacts": [
+        "StoryAngle (feed): The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+        "Team record (feed): 4-1 · streak L1",
+        "Stats (feed): Adash Stanley/19PTS/5REB/4ASST/5-11 3PT, Austin Reaves/19PTS/6REB/7ASST/0TO, AJ Dybantsa/15PTS/5REB, Wendell Carter Jr/10PTS/7REB/5-6FG, T. Jerome/10PTS/5ASST",
+        "Event: Oaks — game-result (early-season)"
+      ],
+      "foilNumber": "5-11",
+      "centralFeeling": "Oakland should name the fear before the next drop.",
+      "hooks": [
+        {
+          "text": "A's on a W3. Fan energy rising. Momentum story.",
+          "angle": "conflict/tension coverage",
+          "hood": null
+        },
+        {
+          "text": "Oaks on a W2. Fan energy rising in Jack London. Momentum story.",
+          "angle": "conflict/tension coverage",
+          "hood": "Jack London"
+        }
+      ]
+    },
+    "friction": {
+      "a": "The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+      "b": "Soft both-sides / FO calm",
+      "frame": "Something the stands feel that the release will not say."
+    },
+    "priorTakes": [],
+    "players": [
+      {
+        "name": "Adash Stanley",
+        "popid": "POP-01023",
+        "role": "PG / The Oaks ",
+        "neighborhood": "Downtown",
+        "why": "feed-names"
+      },
+      {
+        "name": "Austin Reaves",
+        "popid": "POP-01027",
+        "role": "SG / The Oaks",
+        "neighborhood": "West Oakland",
+        "why": "feed-names"
+      },
+      {
+        "name": "Wendell Carter Jr",
+        "popid": null,
+        "role": null,
+        "neighborhood": null,
+        "why": "feed-names"
+      },
+      {
+        "name": "In Indiana",
+        "popid": null,
+        "role": null,
+        "neighborhood": null,
+        "why": "feed-names"
+      }
+    ],
+    "scene": {
+      "neighborhood": "San Antonio",
+      "record": "4-1",
+      "streak": "L1",
+      "mood": "frustrated",
+      "fanSentiment": "excited",
+      "colorRoom": "You may invent unnamed bar / lot / BART / bleacher texture that contradicts nothing on this slice. Do not invent star players, contracts, stats, or quotes. Named people stay on PLAYERS list or Tribune colleagues (Anthony, Hal, Mags) as foils."
+    },
+    "candidates": [
+      {
+        "score": 58,
+        "cycle": 114,
+        "team": "Oaks",
+        "primary": "loss",
+        "angle": "The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+        "priorHits": 0
+      },
+      {
+        "score": 45,
+        "cycle": 113,
+        "team": "A's",
+        "primary": "injury-load",
+        "angle": "The Outfield squeeze for next season. 5 Outfielders for 3 positions",
+        "priorHits": 0
+      },
+      {
+        "score": 44,
+        "cycle": 114,
+        "team": "A's",
+        "primary": "award-board",
+        "angle": "The bargain core: is it time to extend Coles, Ellis, Quintero and Gonzalez?",
+        "priorHits": 0
+      },
+      {
+        "score": 44,
+        "cycle": 114,
+        "team": "Oaks",
+        "primary": "win-streak",
+        "angle": "The Oaks bounce back with a 60-point rout in Toronto. Oaks 135 - Raptors 75",
+        "priorHits": 0
+      },
+      {
+        "score": 44,
+        "cycle": 114,
+        "team": "Oaks",
+        "primary": "win-streak",
+        "angle": "Dillon Brooks' six threes carry the Oaks past OKC in the Cup opener. Oaks 101 - Thunder 95",
+        "priorHits": 0
+      },
+      {
+        "score": 42,
+        "cycle": 114,
+        "team": "A's",
+        "primary": "award-board",
+        "angle": "The last of the dynasty core: how long do Kelley and Davis have?",
+        "priorHits": 0
+      }
+    ]
+  },
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "P Slayer",
+    "popid": "POP-00008",
+    "text": "I'm still reeling from the Oaks' loss to the Pacers. They were down 20 and came back, only to lose by 4. I want to explore what this says about their character and resilience. I'll be talking to fans around West Oakland to get their take on the team's performance and what they're feeling after this game.",
+    "plan": {
+      "chase": "I'm still reeling from the Oaks' loss to the Pacers. They were down 20 and came back, only to lose by 4. I want to explore what this says about their character and resilience. I'll be talking to fans around West Oakland to get their take on the team's performance and what they're feeling after this game.",
+      "focus": "The Oaks' loss to the Pacers and fan reaction",
+      "why": "To understand the emotional impact of the loss on the team and its fans",
+      "checks": [
+        "Fan sentiment around West Oakland",
+        "The Oaks' performance in high-pressure situations"
+      ],
+      "targets": [
+        {
+          "pop": "POP-01027",
+          "question": "What was your reaction to the Oaks' loss to the Pacers?",
+          "basis": "Austin Reaves is a local player and a fan favorite"
+        },
+        {
+          "pop": "POP-00722",
+          "question": "How do you think the Oaks can bounce back from this loss?",
+          "basis": "Daniel Cloak is a West Oakland resident and Oaks fan"
+        }
+      ],
+      "interpretation": "The Oaks' loss to the Pacers despite a strong comeback effort may indicate underlying issues with their resilience and performance under pressure.",
+      "unverifiedLead": [
+        "The Oaks' coaching staff may be re-evaluating their strategy for handling high-pressure situations"
+      ],
+      "closeQuestion": "Can the Oaks turn their season around after this tough loss?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "A's | rumor | (off-season) | Ian Devine, Louis Cross, Hitoki Ka, Mariano Rosales, Clark Saryan, Julio Valencia",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01082",
+        "POP-01080",
+        "POP-01081",
+        "POP-00555",
+        "POP-00052",
+        "POP-00077"
+      ]
+    },
+    {
+      "label": "A's | rumor | (off-season) | Carmen Mesa, Pablo Almanzar, Henry Rivas, Arturo Ramos",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00081",
+        "POP-01078",
+        "POP-00024",
+        "POP-00025"
+      ]
+    },
+    {
+      "label": "A's | front-office | (off-season) | Travis Coles, John Ellis, Ernesto Quintero, Vladimir Gonzalez, Mike Paulson",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00533",
+        "POP-00033",
+        "POP-00050",
+        "POP-00598",
+        "POP-00527"
+      ]
+    },
+    {
+      "label": "A's | player-feature | (off-season) | Benji Dillon, Vinnie Keane",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00018",
+        "POP-00001"
+      ]
+    },
+    {
+      "label": "A's | player-feature | (off-season) | Isley Kelley, Darrin Davis, Danny Horn",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 114; rendered: world_summary_c114.md \"## Sports\" C114 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00019",
+        "POP-00021",
+        "POP-00022"
+      ]
+    }
+  ],
+  "laneEntries": 15,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-04T12:16:20.886Z"
+}

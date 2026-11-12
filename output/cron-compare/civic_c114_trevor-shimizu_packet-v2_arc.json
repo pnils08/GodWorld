@@ -1,0 +1,32 @@
+{
+  "status": "arc-seed",
+  "cycle": "114",
+  "desk": "civic",
+  "persona": "trevor-shimizu",
+  "hood": null,
+  "quotes": [
+    {
+      "pop": "POP-00791",
+      "name": "Elena Soria Dominguez",
+      "quote": "The documents show sightlines and path widths. They don't show the woman who sets up her cart at the panadería corner every morning, or the way riders slow down to talk to her even when the platform's crowded. Phase II's about geometry, but what I see is that people are already making this place theirs — the question is whether the design lets them keep doing that or just moves them through faster."
+    },
+    {
+      "pop": "POP-00617",
+      "name": "Eleanor Rivera",
+      "quote": "At 7:40 on a weekend morning at 12th Street, the shift is quiet in a different way than a weekday. The crowds aren't there, so you hear the announcements bounce off the tile more. And you notice the regulars — the ones who are always there, not the game-day rush. If riders didn't come, most of the time it's the weather or a holiday or something happening downtown. But I can't speak for Coliseum specifically — I wasn't there, and I don't have that platform's view. What I can tell you is that when a station drops more than the usual weekend pattern, it's rarely one thing. It's usually a rhythm stacking up — something at the station, something on the line, something in that neighborhood. But I'd be guessing if I told you where those riders went."
+    },
+    {
+      "pop": "POP-00280",
+      "name": "Jerald Jensen",
+      "quote": "The schedule tells you how many people came through. It doesn't tell you why they left. When the Coliseum empties out like that on a weekend, I see it in the trash cans — fewer cups, fewer wrappers, fewer folks lingering after the last train. The platform records don't catch the quiet. They don't catch the feeling that people aren't just missing a train, they're missing a reason to be there. That's what I see."
+    },
+    {
+      "pop": "POP-00200",
+      "name": "Evan Lewis",
+      "quote": "Look, I drive that line past the Coliseum plenty, and you can feel it when something's off before you ever see it in a report. On a weekend, yeah, the whole city thins out a bit — that's just how it goes. But when you pull up to that station and it's quieter than it ought to be, even for a Saturday, you start wondering. It's not about the numbers on a page. It's about the folks who used to be standing there who aren't anymore — the ones who found another way, or who just stopped going where they used to go. The platform records don't tell you about them. They don't tell you about the family that used to catch that train to a game and decided it wasn't worth the hassle this month. That's what I see. That's what stays with me after I clock out. I've been doing this long enough to know that when a stop drops like that, it's never just one reason. But nobody's asking the folks who aren't there anymore why they stopped. That's the part the numbers can't say."
+    }
+  ],
+  "claim": "The documents show sightlines and path widths. They don't show the woman who sets up her cart at the panadería corner every morning, or the way riders slow down to talk to her even when the platform's crowded. Phase II's about geometry, but what I see is that people are already making this place theirs — the question is whether the design lets them keep doing that or just moves them through faster.",
+  "src": "citizenVoice PRESS c114",
+  "ranAt": "2026-11-02T19:17:30.979Z"
+}

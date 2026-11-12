@@ -1,0 +1,17 @@
+{
+  "desk": "civic",
+  "cycle": "115",
+  "model": "anthropic/claude-sonnet-5.5",
+  "turns": 3,
+  "maxTurns": 15,
+  "usageInputTokens": 36528,
+  "usageOutputTokens": 2715,
+  "savedFiles": [
+    "output/test-shell/20261110-231422-lila-mezran-live/civic_c115_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5.md"
+  ],
+  "compareAgainst": "output/desk-output/civic_c115.md",
+  "durationMs": 139339,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-11-11T05:16:46.453Z"
+}

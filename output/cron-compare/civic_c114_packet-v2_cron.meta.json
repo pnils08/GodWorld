@@ -1,0 +1,17 @@
+{
+  "desk": "civic",
+  "cycle": "114",
+  "model": "anthropic/claude-sonnet-5.5",
+  "turns": 4,
+  "maxTurns": 15,
+  "usageInputTokens": 28435,
+  "usageOutputTokens": 2275,
+  "savedFiles": [
+    "output/cron-compare/civic_c114_luis-navarro_packet-v2_anthropic-claude-sonnet-5-5.md"
+  ],
+  "compareAgainst": "output/desk-output/civic_c114.md",
+  "durationMs": 24603,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-11-07T18:00:27.953Z"
+}

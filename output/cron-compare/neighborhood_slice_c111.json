@@ -1,0 +1,219 @@
+{
+  "version": "HOOD-SLICE-3",
+  "empty": false,
+  "cycle": 111,
+  "kind": "beat-neighborhood",
+  "seat": {
+    "slug": "maria-keen",
+    "name": "Maria Keen",
+    "popid": "POP-00013",
+    "desk": "culture",
+    "domain": "neighborhood",
+    "builder": "buildNeighborhoodSlice.js"
+  },
+  "hood": "Downtown",
+  "pulse": {
+    "className": "beat-neighborhood",
+    "score": 100,
+    "label": "Downtown: 1 active program on the record",
+    "hood": "Downtown",
+    "source": "output/beats/Community_Programs.jsonl @C111"
+  },
+  "story": {
+    "kind": "beat-neighborhood",
+    "angle": "Downtown — the programs that hold the block and the people who founded them",
+    "label": "Downtown: 1 active program on the record",
+    "hookLine": "1 active programs in Downtown; Priya Nair founded one.",
+    "hood": "Downtown",
+    "citizens": [
+      "Priya Nair (POP-00531)"
+    ],
+    "popids": [
+      "POP-00531"
+    ],
+    "ref": "output/beats/Community_Programs.jsonl @C111",
+    "cycle": 111
+  },
+  "approach": "Neighborhood approach: this slice is one block's record — its community programs and their founders, who is moving in or out, who the block has in a hospital bed or in custody, what it paid on tax day, whose debts crossed the line, and the engine's neighborhood hooks this cycle. First-person witness, one block one truth. The programs, founders, movement numbers, patients, defendants and money lines are real; the stoop conversations, the mailboxes, the dog everyone knows are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-00531",
+      "name": "Priya Nair",
+      "role": "Climate Adaptation Engineer",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Priya Nair — Climate Adaptation Engineer — Downtown",
+      "why": "founded NeuroCity Youth Lab (Community_Programs)"
+    }
+  ],
+  "facts": [
+    {
+      "text": "NeuroCity Youth Lab (tech-education), Downtown — founded by Priya Nair, since C101",
+      "src": "output/beats/Community_Programs.jsonl @C111 PRG-017"
+    },
+    {
+      "text": "Downtown this cycle: 240 students, 2,286 adults, 232 seniors — moved vs C110: +1 students, +5 adults, +1 seniors",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C111 vs prev/"
+    },
+    {
+      "text": "Downtown: 4 charges → 1 arrest → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl @C111 judicial Downtown"
+    },
+    {
+      "text": "Downtown: 83 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl @C111 hospital Downtown"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "Downtown — the programs that hold the block and the people who founded them",
+    "hookLine": "1 active programs in Downtown; Priya Nair founded one.",
+    "anchorFacts": [
+      "NeuroCity Youth Lab (tech-education), Downtown — founded by Priya Nair, since C101",
+      "Downtown this cycle: 240 students, 2,286 adults, 232 seniors — moved vs C110: +1 students, +5 adults, +1 seniors",
+      "Downtown: 4 charges → 1 arrest → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+      "Downtown: 83 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked"
+    ],
+    "evidence": [
+      {
+        "text": "NeuroCity Youth Lab (tech-education), Downtown — founded by Priya Nair, since C101",
+        "src": "output/beats/Community_Programs.jsonl @C111 PRG-017"
+      },
+      {
+        "text": "Downtown this cycle: 240 students, 2,286 adults, 232 seniors — moved vs C110: +1 students, +5 adults, +1 seniors",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C111 vs prev/"
+      },
+      {
+        "text": "Downtown: 4 charges → 1 arrest → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl @C111 judicial Downtown"
+      },
+      {
+        "text": "Downtown: 83 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl @C111 hospital Downtown"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": {
+      "state": "PRIOR_CYCLE_ON_DISK",
+      "vs": 110
+    },
+    "hooks": [
+      {
+        "text": "Positive energy in the city. What's driving the mood? Feature opportunity.",
+        "angle": "street-level mood piece",
+        "domain": "COMMUNITY",
+        "hood": "Lake Merritt",
+        "priority": 2
+      },
+      {
+        "text": "the landlord's notice on the door put the whole household around the table with the numbers",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Fruitvale",
+        "priority": 4
+      },
+      {
+        "text": "savings crossed six figures — years of steady weeks did that",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Lake Merritt",
+        "priority": 3
+      },
+      {
+        "text": "defaulted on the debts — the savings are gone and the record carries it",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Uptown",
+        "priority": 3
+      },
+      {
+        "text": "Downtown boom sustained — momentum 10/10, the block everyone wants onto",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Downtown",
+        "priority": 7
+      },
+      {
+        "text": "Jack London boom sustained — momentum 10/10, the block everyone wants onto",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Jack London",
+        "priority": 7
+      },
+      {
+        "text": "Uptown housing pressure at 8/10: rents climbing, households stretching to stay",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Uptown",
+        "priority": 7
+      },
+      {
+        "text": "Simone Limone moved from Chinatown to West Oakland — moving up from Chinatown",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "West Oakland",
+        "priority": 5
+      }
+    ],
+    "note": null,
+    "pageVoices": [],
+    "roomIsYours": "the stoop, the corner store counter, who moved in last month and who is thinking about leaving, what the block argues about"
+  },
+  "programs": [
+    "NeuroCity Youth Lab"
+  ],
+  "rotation": {
+    "index": 3,
+    "of": 9
+  },
+  "careJustice": {
+    "custody": {
+      "scope": "neighborhood",
+      "hood": "Downtown",
+      "complete": true,
+      "completeness": "complete",
+      "demand": 4,
+      "intakes": 1,
+      "tracked": 0,
+      "other": 1,
+      "closing": 3,
+      "trackedOcc": 0,
+      "otherOcc": 3,
+      "beds": null,
+      "exits": 2,
+      "names": []
+    },
+    "care": {
+      "scope": "neighborhood",
+      "hood": "Downtown",
+      "complete": true,
+      "completeness": "complete",
+      "demand": 83,
+      "intakes": 2,
+      "tracked": 0,
+      "other": 2,
+      "closing": 4,
+      "trackedOcc": 0,
+      "otherOcc": 4,
+      "beds": 4,
+      "exits": 2,
+      "names": []
+    },
+    "debt": {
+      "defaults": [],
+      "overLine": 8,
+      "crisisByHood": {}
+    }
+  },
+  "pointers": [
+    "output/beats/Community_Programs.jsonl @C111",
+    "output/beats/Story_Hook_Deck.jsonl (hooks for Maria Keen this cycle)",
+    "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+  ]
+}

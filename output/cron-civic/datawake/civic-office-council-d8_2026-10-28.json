@@ -1,0 +1,26 @@
+{
+  "office": "council_d8",
+  "agentDir": "civic-office-council-d8",
+  "holder": "Nina Chen",
+  "popid": "POP-00505",
+  "title": "City Council District 8",
+  "date": "2026-10-28",
+  "cycle": 113,
+  "model": "google/gemini-3.7-flash",
+  "statement": "District 8 stands firmly with Eastlake rather than leaving it to slide under a decay momentum of 3 and sentiment of -0.06 against the city baseline of 0.045. We are maintaining rigorous oversight across our commercial corridors, voting to advance the $2.5M Commercial Stabilization for Grand Lake ordinance on the floor while locking in documented administrative reviews and service parity for Eastlake.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-113-civic-office-council-d8",
+        "text": "I vote to pass the $2.5M Commercial Stabilization for Grand Lake ordinance (INIT-009) with auditable disbursement milestones and formally submit the Eastlake commercial stabilization review for administrative implementation.",
+        "directiveCycle": 113,
+        "confrontationSeat": "civic-office-council-d8"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": "Eastlake sentiment at -0.06 vs city 0.045 with decay momentum 3",
+  "ranAt": "2026-10-28T10:45:29.253Z",
+  "fellBackFrom": null
+}

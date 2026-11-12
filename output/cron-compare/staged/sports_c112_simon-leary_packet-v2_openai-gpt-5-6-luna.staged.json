@@ -1,0 +1,53 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "112",
+  "persona": "simon-leary",
+  "byline": "Simon Leary",
+  "bylinePopid": "POP-00016",
+  "article": "output/cron-compare/staged/sports_c112_simon-leary_packet-v2_openai-gpt-5-6-luna.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Austin Reaves",
+        "role": "quoted-source",
+        "popid": "POP-01027"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "One win is one win. I'm not going to pretend it settles anything — we're still figuring out who we are out there. But it does feel good to have something to build on, you know? The role stuff, that's a conversation that's still happening, and I'm okay with that. I'd rather earn it than have it handed to me. We've got a long season ahead, and I trust the process.",
+        "sourceRef": "citizenVoice PRESS Austin Reaves"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-56b53f77e530",
+    "draftSha256": "9e5f003f1d92d7b05907ed980b9f7be5220e4bfebf0056cd8993a08e7eac60df",
+    "verdict": "output/cron-compare/sports_c112_simon-leary_packet-v2_openai-gpt-5-6-luna.rhea.json",
+    "ranAt": "2026-10-22T23:16:13.452Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 439,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "9e5f003f1d92d7b05907ed980b9f7be5220e4bfebf0056cd8993a08e7eac60df",
+      "costUsd": 0.0008
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-22T23:16:16.484Z"
+}

@@ -1,0 +1,74 @@
+{
+  "draft": "output/cron-compare/undocked-digest_c111_nia-rook-weekly_packet-v2_x-ai-grok-4-3.md",
+  "cycle": "111",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "007ae9b6443b31ce5edf1b18c903a98544f56250f321d9b8001a20fe1e6b88aa",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes match exact packet provenance, citizen profiles align with canon ledger, and atmospheric texture adheres to profile constraints.",
+  "review": {
+    "profileId": "nia-rook-undocked-weekly-digest-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "nia-rook-undocked-weekly-digest-v1",
+    "packageVersion": "NIAROOK-UNDOCKED-WEEKLY-1",
+    "manifestId": "AM-7befd0ae55a6",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "1",
+          "170"
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [
+      "Briar Soto",
+      "Eric Taveras",
+      "Rosario Medina"
+    ],
+    "unverified": [
+      "Compliance Monitor",
+      "Second Baseman"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0092,
+  "durationMs": 4325,
+  "parseError": false,
+  "ranAt": "2026-10-17T15:15:26.003Z",
+  "contractScore": {
+    "opened": true,
+    "closed": false,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 350",
+    "words": 353,
+    "short": "The closing fails to set up who the city watches next.",
+    "score": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "007ae9b6443b31ce5edf1b18c903a98544f56250f321d9b8001a20fe1e6b88aa",
+    "costUsd": 0.0012
+  }
+}

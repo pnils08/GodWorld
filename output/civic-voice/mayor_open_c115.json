@@ -1,0 +1,108 @@
+{
+  "office": "mayor_open",
+  "cycle": 115,
+  "speaker": "Avery Santana",
+  "cascadeSummary": "I am putting the full C115 calendar on the public agenda: the INIT-001 closeout and renewal transmittal, the required INIT-002 briefing, INIT-003 schematics and community review, the INIT-006 evidence review, and INIT-007's placement-gap analysis and adjustment plan. INIT-009 and INIT-010 receive calls for recorded decisions, INIT-014 moves onto the legislation-filing agenda, and all seven unresolved petitions receive traceable response filings with a responsible office, remedy, and next date. These are hearing and docket commitments, not claims that votes or completed actions have occurred; my neighborhood remarks distinguish Oakland's stability from uneven local experience.",
+  "statements": [
+    {
+      "statementId": "STMT-115-mayor_open-001",
+      "type": "initiative_response",
+      "topic": "INIT-001 charter renewal and C114 closeout",
+      "initiative": "West Oakland Stabilization Fund",
+      "decision": "Place publication of the C114 closeout and transmittal of the charter renewal ordinance on the C115 agenda, preserving West Oakland's business-and-resident scope and the 23-day processing standard without claiming renewal before council action.",
+      "quote": "West Oakland earned a renewal decision backed by published results, not expiration by silence or a rewrite of the fund's purpose.",
+      "fullStatement": "Oakland should not let West Oakland's primary stabilization vehicle expire by silence. INIT-001 has a $28 million authorization; C114 executed $400,000 under the 23-day processing standard, and the C112 audit is already published. I am placing publication of the C114 closeout and transmittal of the charter renewal ordinance on this cycle's agenda, with the West Oakland business-and-resident scope intact. Renewal must rest on that public record, not on a broader rewrite or a Downtown expansion the fund does not authorize. I hear the demand for accountability: the closeout, audit history, and processing standard belong in the renewal file. This is a decision to legislate in public, not a claim that renewal has already passed.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-115-mayor_open-002",
+      "type": "press_release",
+      "topic": "Seven unresolved citizen petitions and the legislative docket",
+      "initiative": null,
+      "decision": "Transmit responsive legislative proposals for all seven executive-ledger complaints in C115, each identifying a responsible office, proposed remedy, and next public date; use the actual ledger for petition details and do not claim filing before docketing.",
+      "quote": "Seven unanswered petitions will receive seven traceable responses, each with a responsible office, a proposed remedy, and a public next date.",
+      "fullStatement": "Oaklanders who petition City Hall deserve an answer they can track. My C114 pledge covered four visible petitions; Planning Director Mara Vance's current directive counts seven unresolved complaints and no responsive proposals filed. I am therefore placing all seven responses on the C115 legislative-filing agenda. Each filing must name a responsible office, a proposed remedy, and a next public date, using the actual executive ledger rather than details invented for a press release. The INIT-001 charter renewal is a separate transmittal on the same docket. I will not describe any of these proposals as filed until the docket record says so. Seven unresolved complaints require seven visible responses, not another cycle of executive default.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-115-mayor_open-003",
+      "type": "initiative_response",
+      "topic": "D3 East Oakland briefing before any OARI expansion",
+      "initiative": "Oakland Alternative Response Initiative",
+      "decision": "Conduct and document the D3 East Oakland community briefing this cycle, including district-level and Fruitvale data; keep expansion held until afterward and do not represent the D5 audit or Baylight feasibility review as completed.",
+      "quote": "Alternative response earns expansion through district data, a real community briefing, and decisions Oaklanders can inspect.",
+      "fullStatement": "Oaklanders deserve an alternative-response program that expands only when the evidence and the community record support it. The D3 East Oakland briefing is due this cycle. I am putting its execution and documentation on the agenda, with district-level data, the docketed Fruitvale figures, and a public account of what residents said. Expansion remains held until after that briefing. The directed D5 audit and Baylight feasibility review must also stay visible as pending items; I will not imply that their findings are already in. I hear the process concerns, and the answer is not another quiet enlargement of a $12.5 million program. It is a public briefing, a usable record, and a subsequent decision grounded in both.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-115-mayor_open-004",
+      "type": "initiative_response",
+      "topic": "Fruitvale schematics and public comment-and-response record",
+      "initiative": "Fruitvale Transit Hub Phase II — Visioning",
+      "decision": "Require delivery of the preliminary schematics and a documented Fruitvale community review this cycle, followed by a public comment-and-response record before any further design advancement.",
+      "quote": "Fruitvale will see the schematics, shape the response record, and know exactly what comes next before this $230 million project advances.",
+      "fullStatement": "Fruitvale has waited long enough for a process that is both ambitious and legible. The C111 correction restored the C86 council authorization for this $230 million phase; I will not recycle the erroneous claim that Phase II was never authorized. But authorization is not a shortcut around residents. This cycle's agenda is delivery of the preliminary schematics and a documented Fruitvale community review, followed by a public comment-and-response record. Further design advancement waits until that record exists. I want residents and merchants able to see what is proposed, how comments were answered, and what remains unresolved. Transit should connect Fruitvale to opportunity, and the design process should demonstrate that City Hall can listen with the same seriousness it brings to building.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-115-mayor_open-005",
+      "type": "initiative_response",
+      "topic": "C115 Baylight construction milestone evidence review",
+      "initiative": "Baylight District — Final Council Vote",
+      "decision": "Conduct the C115 construction milestone review solely against the assembled evidence file and publish its findings; do not declare the milestone passed before the review.",
+      "quote": "Baylight's next construction milestone will be earned in the evidence file, with remediation, dust control, and workforce results open to inspection.",
+      "fullStatement": "Oakland does not build trust at Baylight by announcing a milestone before the evidence is heard. The C114 file assembles independent remediation verification, hotline and dust-control records, and Jack London workforce results; it does not declare the milestone passed. I am putting the C115 construction milestone review on that file, with the findings made public and independent oversight maintained. On a $2.1 billion project, scrutiny is not an obstacle to delivery—it is part of delivery. I hear residents and council skeptics who want more than assurances. The review should say what the evidence establishes, what remains unresolved, and what must happen next. Until then, there is no mayoral victory lap and no invented pass.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-115-mayor_open-006",
+      "type": "initiative_response",
+      "topic": "Youth apprenticeship placement gaps and program adjustment",
+      "initiative": "Oakland Youth Apprenticeship Pipeline",
+      "decision": "Publish the placement-gap analysis and adjustment plan this cycle, with explicit West Oakland and Fruitvale findings; require a clear recommendation on whether the implementation record supports advancement or a failed-phase finding.",
+      "quote": "I will publish the placement-gap analysis, name the adjustments, and judge this pipeline by where young Oaklanders actually land.",
+      "fullStatement": "Oakland's young people need a pipeline measured by placements, not by the number of times City Hall announces another review. The first cohort placement report was published at C113. What is due now is the placement-gap analysis and adjustment plan, with explicit findings for West Oakland and Fruitvale. I am putting that publication on this cycle's agenda and requiring an explicit recommendation on whether the record supports advancement or a failed-phase finding; the program cannot simply sit unchanged again. The $12.5 million question is whether young residents are actually reaching opportunities and what changes wherever the record falls short. A stable citywide economy does not answer that neighborhood-specific question. I will judge the evidence at the gavel, not prewrite its conclusion today.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-115-mayor_open-007",
+      "type": "policy_position",
+      "topic": "Recorded Grand Lake full-council decision",
+      "initiative": "Commercial Stabilization for Grand Lake",
+      "decision": "Bring INIT-009 to the recorded full-council decision due this cycle, with mayoral support for YES and every Chen-Vega milestone and audit condition intact.",
+      "quote": "Grand Lake gets a recorded vote on $2.5 million, with every milestone and audit condition intact and every councilmember on the record.",
+      "fullStatement": "Grand Lake's street trade is busy, crime is low, and the mood is still soured. That combination calls for a decision, not a slogan about decline or success. I remain a YES on INIT-009's $2.5 million proposal, and I am keeping the recorded full-council decision on this cycle's floor. Every Chen-Vega milestone and audit condition stays intact. I hear Councilmembers Chen and Vega's insistence on accountability; those terms are part of the proposal Oakland should vote on, not bargaining chips to remove quietly. I will not predict votes I do not have. Councilmembers can support or oppose the measure, but Oaklanders should see where each member stands and what safeguards accompany either outcome.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-115-mayor_open-008",
+      "type": "policy_position",
+      "topic": "Recorded West Oakland tenant-defense committee decision",
+      "initiative": "West Oakland Tenant Defense Fund",
+      "decision": "Require publication of the legal-support analysis and a recorded committee decision on the $4.2 million proposal this cycle, without predetermining approval or treating referral as authorization.",
+      "quote": "West Oakland's $4.2 million tenant-defense proposal deserves a published legal analysis and a recorded committee decision, not another cycle in limbo.",
+      "fullStatement": "West Oakland's current reading is upbeat, with busy trade and low crime. That good news does not decide a separate policy question: whether the proposed $4.2 million tenant-defense fund is justified by its legal-support analysis. The committee owes the public both publication of that analysis and a recorded decision this cycle. I am not instructing members to reach a predetermined yes, and I will not treat referral as approval. A reasoned no on the public record is more accountable than silence; a yes must identify the support the analysis actually justifies. I hear concerns about process and spending. The way to answer them is to show the analysis, take the vote, and let residents inspect the result.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-115-mayor_open-009",
+      "type": "policy_position",
+      "topic": "Ivy Hill legislation filing on current evidence",
+      "initiative": "Ivy Hill Community Support Initiative",
+      "decision": "Place the $2.5 million INIT-014 legislation on this cycle's filing agenda and present it on current evidence—low crime, slow trade, and a soured mood—without claiming passage, funding delivery, or a crime emergency.",
+      "quote": "Ivy Hill deserves legislation argued from today's evidence: low crime, slow trade, a soured mood, and no inflated emergency.",
+      "fullStatement": "Last cycle, I cited a higher crime index when I called for action on Ivy Hill. This cycle's district report says crime is low, while street trade is slow and the mood is soured. I will not turn an old number into today's emergency. I am placing the $2.5 million INIT-014 legislation on this cycle's filing agenda so Oaklanders can examine an actual proposal and the council can ultimately make a recorded decision on current evidence. Filing is not passage, and passage would not be delivery. Ivy Hill deserves the same discipline as every other neighborhood: state the problem accurately, identify the remedy, and do not claim funding has arrived before an executed action says so.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-115-mayor_open-010",
+      "type": "public_remark",
+      "topic": "Neighborhood conditions, Glenview follow-through, and civic life",
+      "initiative": null,
+      "decision": "Center the public agenda on neighborhood-specific follow-through: document Glenview's low-severity public-works spike at the Civic Response Meeting, recognize uneven district mood and trade, and support the Blossom Walk and Fruitvale Community Bloom Festival as positive civic life.",
+      "quote": "Oakland does not need a manufactured emergency; it needs block-by-block follow-through, room for civic disagreement, and space to celebrate together.",
+      "fullStatement": "Oakland's streets are quiet this cycle, crime is low in every district reading, and nearly everyone who wants work has it. That stability matters. So does the uneven mood: Jack London, West Oakland, and Fruitvale are clearly upbeat, while Grand Lake, Rockridge, Chinatown, Eastlake, Laurel, Brooklyn, San Antonio, and Ivy Hill are soured. I will not flatten either truth into a citywide slogan. I am asking that Glenview's low-severity public-works spike be documented at the Civic Response Meeting, with a clear next update rather than an inflated emergency. And Oakland should make room for the Lake Merritt Blossom Walk and the Fruitvale Community Bloom Festival. Public joy is not a distraction from governing; it is part of the city we are governing for.",
+      "trackerUpdates": {}
+    }
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "status": "staged",
+  "desk": "business",
+  "cycle": "113",
+  "persona": "business-desk",
+  "byline": "Jordan Velez",
+  "bylinePopid": "POP-00153",
+  "article": "output/cron-compare/staged/business_c113_business-desk_packet-v2_anthropic-claude-opus-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Bobby Chen-Ramirez",
+        "role": "quoted-source",
+        "popid": "POP-00792"
+      },
+      {
+        "name": "Ariana Reyes",
+        "role": "mentioned",
+        "popid": "POP-00133",
+        "floor": true
+      },
+      {
+        "name": "Christine Nakamura",
+        "role": "mentioned",
+        "popid": "POP-01108",
+        "floor": true
+      },
+      {
+        "name": "Clearence Leighton",
+        "role": "mentioned",
+        "popid": "POP-00238",
+        "floor": true
+      },
+      {
+        "name": "Cristina Norwood",
+        "role": "mentioned",
+        "popid": "POP-00908",
+        "floor": true
+      },
+      {
+        "name": "Daniel Yoon",
+        "role": "mentioned",
+        "popid": "POP-01107",
+        "floor": true
+      },
+      {
+        "name": "Dawson Nguyen",
+        "role": "mentioned",
+        "popid": "POP-00347",
+        "floor": true
+      },
+      {
+        "name": "Jade Soy",
+        "role": "mentioned",
+        "popid": "POP-00434",
+        "floor": true
+      },
+      {
+        "name": "Jett Walker",
+        "role": "mentioned",
+        "popid": "POP-00230",
+        "floor": true
+      },
+      {
+        "name": "Melton Neilon",
+        "role": "mentioned",
+        "popid": "POP-00170",
+        "floor": true
+      },
+      {
+        "name": "Ronald Silk",
+        "role": "mentioned",
+        "popid": "POP-00647",
+        "floor": true
+      },
+      {
+        "name": "Vanessa Ramas",
+        "role": "mentioned",
+        "popid": "POP-01045",
+        "floor": true
+      },
+      {
+        "name": "Vanessa Treary",
+        "role": "mentioned",
+        "popid": "POP-00781",
+        "floor": true
+      },
+      {
+        "name": "Wesley Clark",
+        "role": "mentioned",
+        "popid": "POP-00461",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "INIT-005:operational",
+        "verb": "referenced",
+        "attachedBy": "stepAttach"
+      }
+    ],
+    "hoods": [
+      "Temescal"
+    ],
+    "claims": [
+      {
+        "claim": "Look, I run a health center project, not a spreadsheet. But I walk that block every day, and I see the same thing you're describing — the numbers on the wall don't mean a damn thing if Mrs. Okafor still can't get her blood pressure checked without taking two buses. What creates accountability for me is simple: I've got 14 employees on my roster, and every one of them lives in this neighborhood. When I see hiring signs in every storefront on the Jack London corridor, I want to know who's actually getting those jobs — is it the kid who grew up here, or is it somebody who commutes in from the hills? That's the story. That's what I want answered. Because if growth just means the ledger gets fatter while the sidewalk stays the same, then we're building a ghost town with good accounting.",
+        "sourceRef": "citizenVoice PRESS Bobby Chen-Ramirez"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-83dcffcf71e7",
+    "draftSha256": "022300dddcbddf3890cfdf672f353c7d959f0b0538b09605655b3c3b69379cca",
+    "verdict": "output/cron-compare/business_c113_business-desk_packet-v2_anthropic-claude-opus-5-5.rhea.json",
+    "ranAt": "2026-10-26T23:16:55.669Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 500",
+      "words": 896,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "022300dddcbddf3890cfdf672f353c7d959f0b0538b09605655b3c3b69379cca",
+      "costUsd": 0.0015
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-26T23:17:00.952Z"
+}

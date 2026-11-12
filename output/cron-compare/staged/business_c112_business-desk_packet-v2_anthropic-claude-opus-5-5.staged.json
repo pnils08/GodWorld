@@ -1,0 +1,89 @@
+{
+  "status": "staged",
+  "desk": "business",
+  "cycle": "112",
+  "persona": "business-desk",
+  "byline": "Jordan Velez",
+  "bylinePopid": "POP-00153",
+  "article": "output/cron-compare/staged/business_c112_business-desk_packet-v2_anthropic-claude-opus-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Derek Obi",
+        "role": "quoted-source",
+        "popid": "POP-00543"
+      },
+      {
+        "name": "Brady Lopez",
+        "role": "mentioned",
+        "popid": "POP-00256"
+      },
+      {
+        "name": "Cedric Nakamura",
+        "role": "quoted-source",
+        "popid": "POP-01033"
+      },
+      {
+        "name": "Dexter Patel",
+        "role": "mentioned",
+        "popid": "POP-00365",
+        "floor": true
+      },
+      {
+        "name": "Naomi Castellanos",
+        "role": "mentioned",
+        "popid": "POP-01098",
+        "floor": true
+      },
+      {
+        "name": "Priyanka Raman",
+        "role": "mentioned",
+        "popid": "POP-01096",
+        "floor": true
+      },
+      {
+        "name": "Sarah Corliss",
+        "role": "mentioned",
+        "popid": "POP-00595",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Uptown"
+    ],
+    "claims": [
+      {
+        "claim": "From behind the counter, you see two different crowds. The folks walking past on Telegraph are mostly new — younger, on their phones, heading to the tech offices or the pop-ups. The ones who actually come in are the regulars, the ones who've been here since before the rent signs went up. We get a few curious walk-ins, sure, but the people who buy records are the same faces I've seen for years. The block's moving faster than the store is, if that makes sense.",
+        "sourceRef": "citizenVoice PRESS Cedric Nakamura"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-730a6453931a",
+    "draftSha256": "9774a104dde6965bcbd3b6773a48935daa4decdae0b9c64faf7ea4af69e9e1ca",
+    "verdict": "output/cron-compare/business_c112_business-desk_packet-v2_anthropic-claude-opus-5-5.rhea.json",
+    "ranAt": "2026-10-19T23:16:43.859Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 500",
+      "words": 923,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "9774a104dde6965bcbd3b6773a48935daa4decdae0b9c64faf7ea4af69e9e1ca",
+      "costUsd": 0.0012
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-19T23:16:47.601Z"
+}

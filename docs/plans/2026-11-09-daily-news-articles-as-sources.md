@@ -87,6 +87,8 @@ Codex re-review of the fold and the later commits: [[../for-claude-review/2026-1
 
 **2026-11-12 02:30, point 9 rebuilt on the builder's "Go":** the ask to the canon notebook is one name, nothing else, for every person and place in an article's own notes; the instructed question is deleted. Detail, the Tuesday check and its numbers: `docs/reference/NotebookLM.md` Change log, same date. The first-morning world summary stays as built (builder: "One day of the week is the world summary … that's not supposed to run Everyday"; it runs only when the summary file is under 24 h old, and the Tue and Wed manifests carry no `world` source). Open for his ear: canon is now about twice the words of the day's articles; 19 names took 11 of the 15 minutes; four of Tuesday's citizens have nothing in the canon notebook.
 
+**2026-11-12 03:10, one search an article (builder: "Why would you search 19 names?", "Who are the articles about"):** the ask is the article's subject, read from the article as the first sim person or place it names. Tuesday's six: five canon sources, 3,842 words. Detail: `docs/reference/NotebookLM.md` Change log.
+
 ## Tasks
 
 | # | Task | Status |

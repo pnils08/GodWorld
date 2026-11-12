@@ -89,6 +89,8 @@ Codex re-review of the fold and the later commits: [[../for-claude-review/2026-1
 
 **2026-11-12 03:10, one search an article (builder: "Why would you search 19 names?", "Who are the articles about"):** the ask is the article's subject, read from the article as the first sim person or place it names. Tuesday's six: five canon sources, 3,842 words. Detail: `docs/reference/NotebookLM.md` Change log.
 
+**2026-11-12 01:09, first-name match deleted on the builder's word ("Delete you trick code"):** the lookup is back to every name in the article's `## INTAKE` block, one bare name each (Tuesday: 19 names, 11 min 15 s, 15 with canon). Clock times typed in the entries above were guessed; commit times are real. Not recorded anywhere: what an article is about.
+
 ## Tasks
 
 | # | Task | Status |

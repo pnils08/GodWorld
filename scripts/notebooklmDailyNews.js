@@ -655,18 +655,16 @@ function articleSource(report) {
 
 // ── Canon behind each story ─────────────────────────────────────────────────
 // A show is made inside one notebook, and the working notebook holds only
-// today, so the hosts cannot reach the canon notebook. Each article sends the
-// canon notebook one name and no other word: who or what the article is about
-// (builder 2026-11-12: "the canon search would be this, Vinnie Keane" / "that
-// 1 name or phrase is the ask" / "Who are the articles about"). That is read
-// from the article: the first of the sim's own people and places it names —
-// a citizen, a business, an initiative, a neighborhood, a station — in the
-// headline, else in the story, never the reporter. The reporter's notes
-// (## INTAKE) list who was quoted, not who the piece is about (Tue 11-10: one
-// of six marked a subject), so they are only the fallback. What the notebook
-// says rides as a small source beside the article; a name is asked once a
-// day. A lore piece is already canon and asks nothing. Non-blocking: a failed
-// search, or a name the notebook says it holds nothing on, airs without one.
+// today, so the hosts cannot reach the canon notebook. Every article ends with
+// the reporter's own notes (## INTAKE): who is in it (NAMES, BIZ) and where
+// (HOOD). Each of those names is sent to the canon notebook by itself, with no
+// other word (builder 2026-11-12: "the canon search would be this, Vinnie
+// Keane" / "that 1 name or phrase is the ask" / "Every article listed who's in
+// it"), through the read-only wrapper, and what the notebook says rides as a
+// small source beside the article. A name is asked once a day however many
+// articles list it. A lore piece is already canon and asks nothing.
+// Non-blocking: a failed search, or a name the notebook says it holds nothing
+// on, airs without one.
 const BACKGROUND_BUDGET_MS = 15 * 60 * 1000;
 const BACKGROUND_TRIES = 3;
 const CANON_SEARCH = path.join(__dirname, 'notebooklmCanonSearch.js');
@@ -676,35 +674,8 @@ function wantsBackground(report) {
     !/^lore_/.test(path.basename(report.file || report.relativePath || ''));
 }
 
-// The sim's own people and places, by name, from the local copies of the sheets.
-const ROSTER_FILES = [
-  ['output/simulation_ledger_snapshot.jsonl', 'Name'],
-  ['output/beats/Business_Ledger.jsonl', 'Name'],
-  ['output/beats/Initiative_Tracker.jsonl', 'Name'],
-  ['output/beats/Neighborhood_Demographics.jsonl', 'Neighborhood'],
-  ['output/beats/Transit_Metrics.jsonl', 'Station'],
-];
-let rosterCache = null;
-function simRoster(root) {
-  if (rosterCache && rosterCache.root === root) return rosterCache.names;
-  const names = new Set();
-  for (const [file, field] of ROSTER_FILES) {
-    let text = '';
-    try { text = fs.readFileSync(path.join(root, file), 'utf8'); } catch (_) { continue; }
-    for (const line of text.split('\n')) {
-      if (!line.trim()) continue;
-      try {
-        const name = String(JSON.parse(line)[field] || '').trim();
-        if (name.length >= 4) names.add(name);
-      } catch (_) { /* a torn line is skipped */ }
-    }
-  }
-  rosterCache = { root, names: Array.from(names) };
-  return rosterCache.names;
-}
-
 // The people and places an article's own notes list, in the order written.
-function notesNames(report) {
+function backgroundNames(report) {
   const body = String(report.body || '');
   const at = body.search(/^## INTAKE\s*$/m);
   if (at < 0) return [];
@@ -716,41 +687,6 @@ function notesNames(report) {
     if (name && !/^none$/i.test(name) && !names.includes(name)) names.push(name);
   }
   return names;
-}
-
-// Earliest roster name in a text, as a whole name; the longer name wins at the same place
-// ("West Oakland Stabilization Fund" over "West Oakland").
-function firstRosterName(text, roster, skip) {
-  let best = null;
-  for (const name of roster) {
-    if (skip.has(name.toLowerCase())) continue;
-    let from = 0;
-    for (;;) {
-      const at = text.indexOf(name, from);
-      if (at < 0) break;
-      const before = at === 0 ? '' : text[at - 1];
-      const after = text[at + name.length] || '';
-      if (!/[A-Za-z0-9]/.test(before) && !/[A-Za-z0-9]/.test(after)) {
-        if (!best || at < best.at || (at === best.at && name.length > best.name.length)) best = { at, name };
-        break;
-      }
-      from = at + 1;
-    }
-  }
-  return best ? best.name : null;
-}
-
-// Who or what the article is about: one name, or none.
-function backgroundNames(report, roster = simRoster(ROOT)) {
-  const body = String(report.body || '');
-  const notesAt = body.search(/^## INTAKE\s*$/m);
-  const story = (notesAt < 0 ? body : body.slice(0, notesAt)).split('\n')
-    .filter((line) => !/^\**By\s/.test(line.trim()));
-  const headline = (story.find((line) => /^#\s/.test(line)) || '').replace(/^#\s+/, '');
-  const prose = story.filter((line) => !/^#\s/.test(line)).join('\n');
-  const skip = new Set([String(report.byline || '').toLowerCase()].filter(Boolean));
-  const subject = firstRosterName(headline, roster, skip) || firstRosterName(prose, roster, skip) || notesNames(report)[0];
-  return subject ? [subject] : [];
 }
 
 function backgroundSource(name, background) {
@@ -789,18 +725,18 @@ function saysNotInCanon(answer) {
   return /\bdoes not appear\b/i.test(opening);
 }
 
-// Map of article path → [{ name, answer, sources }]: the article's one name,
-// when the canon notebook has something on it. Answers are
+// Map of article path → [{ name, answer, sources }], one entry per name the
+// article's notes list that the canon notebook has something on. Answers are
 // kept in the run dir by name, so a re-run and a second article listing the
 // same name ask nothing twice.
-function fetchArticleBackgrounds(reports, cacheDir, ask = askCanon, nowFn = Date.now, roster = simRoster(ROOT)) {
+function fetchArticleBackgrounds(reports, cacheDir, ask = askCanon, nowFn = Date.now) {
   const backgrounds = new Map();
   const startedAt = nowFn();
   const asked = new Map();
   fs.mkdirSync(cacheDir, { recursive: true });
   for (const report of (reports || []).filter(wantsBackground)) {
     const found = [];
-    for (const name of backgroundNames(report, roster)) {
+    for (const name of backgroundNames(report)) {
       const key = name.toLowerCase();
       if (!asked.has(key)) {
         const cacheFile = path.join(cacheDir, sha256Text('name:' + key).slice(0, 16) + '.json');
@@ -1572,8 +1508,8 @@ async function run(argv) {
   }
   console.log('Daily background from the canon notebook: ' +
     new Set(Array.from(backgrounds.values()).flat().map((b) => String(b.name).toLowerCase())).size + ' name(s) answered of ' +
-    new Set(newsroom.reports.filter(wantsBackground).flatMap((r) => backgroundNames(r)).map((n) => n.toLowerCase())).size +
-    ' asked, one for each of ' + newsroom.reports.filter(wantsBackground).length + ' article(s)');
+    new Set(newsroom.reports.filter(wantsBackground).flatMap(backgroundNames).map((n) => n.toLowerCase())).size +
+    ' listed in the notes of ' + newsroom.reports.filter(wantsBackground).length + ' article(s)');
   const list = nlm(['source', 'list', config.newsroomNotebookId, '--json']);
   if (!list.ok) throw new Error('working-notebook source list failed: ' + list.out.slice(0, 400));
   const existingSources = parseJsonOutput(list.out, 'working-notebook source list');
@@ -1790,7 +1726,6 @@ module.exports = {
   ensureDailySources,
   wantsBackground,
   backgroundNames,
-  notesNames,
   saysNotInCanon,
   backgroundSource,
   fetchArticleBackgrounds,

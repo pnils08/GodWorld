@@ -29,7 +29,8 @@ const {
   reusableSourceId,
   ensureDailySources,
   wantsBackground,
-  backgroundQuestion,
+  backgroundNames,
+  saysNotInCanon,
   backgroundSource,
   fetchArticleBackgrounds,
   parseJsonOutput,
@@ -400,53 +401,58 @@ const syntheticDigest = {
   assert.deepStrictEqual(monday.map((x) => x.kind), ['reflections', 'reflections', 'world', 'world']);
 }
 
-// Deep canon per story: each article asks the canon notebook once; the answer
-// rides beside its article; lore, held drafts and the edition ask nothing; a
-// failed answer is retried once then skipped; a re-run asks nothing twice.
+// Canon behind each story: every person and place an article's own notes list is sent to the canon
+// notebook as that name and nothing else; a name is asked once however many articles list it; lore,
+// held drafts and the edition ask nothing; a failed search is retried then skipped; a name the notebook
+// says it holds nothing on is not carried; a re-run asks nothing twice.
 {
   const article = {
     classification: 'STAGED', byline: 'Synthetic Reporter',
     file: 'civic_c999_synthetic-reporter_packet-v2_x.staged.md',
     relativePath: 'output/cron-compare/staged/civic_c999_synthetic-reporter_packet-v2_x.staged.md',
-    body: '# Synthetic headline\n\n' + Array(2000).fill('prose').join(' ') + '\n\n## INTAKE\nNAMES: Synthetic One | subject\nNAMES: Synthetic One | quoted-source\nNAMES: Synthetic Two | mentioned\nHOOD: Synthville\nCLAIM: a synthetic claim | cite',
+    body: '# Synthetic headline\n\nNAMES: Not A Note | prose above the notes is not read\n\n' + Array(200).fill('prose').join(' ') +
+      '\n\n## INTAKE\nNAMES: Synthetic One | subject\nNAMES: Synthetic One | quoted-source\nNAMES: Synthetic Two | mentioned\nBIZ: Synthetic Works | subject\nBIZ: None\nHOOD: Synthville\nCLAIM: a synthetic claim | src\n',
   };
-  const second = Object.assign({}, article, { relativePath: 'second.staged.md', file: 'civic_c999_second_packet-v2_x.staged.md', body: '# Second headline\n\nSecond body.' });
+  const second = Object.assign({}, article, { relativePath: 'second.staged.md', file: 'civic_c999_second_packet-v2_x.staged.md',
+    body: '# Second headline\n\nprose\n\n## INTAKE\nNAMES: Synthetic One | mentioned\nNAMES: Synthetic Failing | subject\nNAMES: Synthetic Unknown | subject\n' });
   const lore = Object.assign({}, article, { file: 'lore_c999_someone-deep-dive.staged.md', relativePath: 'lore.staged.md' });
   const held = Object.assign({}, article, { classification: 'FLAGGED', relativePath: 'held.md' });
   const edition = { classification: 'PUBLISHED_EDITION', file: 'cycle_pulse_c999.txt', relativePath: 'edition.txt', body: 'x' };
   assert.deepStrictEqual([article, lore, held, edition].map(wantsBackground), [true, false, false, false]);
-  const question = backgroundQuestion(article);
-  assert(question.length <= 3900, 'the canon search refuses a question over 4000 characters');
-  assert(question.includes('Headline: Synthetic headline'));
-  assert(question.includes('People named: Synthetic One, Synthetic Two'));
-  assert(question.includes('in Cycle 999') && question.includes('counted in Cycles back from Cycle 999'), 'history is dated against the article so old news is not heard as new');
-  assert(question.includes('Leave out citywide events'));
-  assert(question.includes('Neighborhoods: Synthville'));
-  assert(!question.includes('a synthetic claim'), 'the register itself is not sent');
+  assert.deepStrictEqual(backgroundNames(article), ['Synthetic One', 'Synthetic Two', 'Synthetic Works', 'Synthville']);
+  assert.deepStrictEqual(backgroundNames({ body: '# No notes\n\nprose' }), []);
+  assert(saysNotInCanon('**X Y** does not appear in the published articles. More.') && !saysNotInCanon('**X Y** is a plumber. She does not appear often.'));
   const cacheDir = fs.mkdtempSync(path.join(os.tmpdir(), 'nlm-daily-background-'));
   const asked = [];
   const ask = (q) => {
     asked.push(q);
-    if (q.includes('Second headline')) throw new Error('synthetic citation failure');
-    return { answer: 'Earlier, a synthetic thing happened [1]. Then another (*Synthetic Edition (Y3C1)* [2, 3–5]; *Other*).\n\n***\n\nWould you like a synthetic follow-up?', titles: ['Synthetic Edition'] };
+    if (q === 'Synthetic Failing') throw new Error('synthetic search failure');
+    if (q === 'Synthetic Unknown') return { answer: '**Synthetic Unknown** does not appear anywhere in the published articles in your sources [1]. A near match follows.', sources: 10 };
+    // sources 0: a full answer the notebook returned with no source list is carried all the same
+    return { answer: 'Earlier, ' + q + ' did a synthetic thing [1]. Then another (*Synthetic Edition (Y3C1)* [2, 3–5]; *Other*).\n\n***\n\nWe could examine a synthetic follow-up next.', sources: q === 'Synthville' ? 0 : 3 };
   };
   const got = fetchArticleBackgrounds([article, second, lore, held, edition], cacheDir, ask);
-  assert.deepStrictEqual(Array.from(got.keys()), [article.relativePath]);
-  assert.strictEqual(asked.length, 4, 'one ask for the first article, three for the failing one, none for lore/held/edition');
-  fetchArticleBackgrounds([article], cacheDir, () => { throw new Error('must come from the run dir'); });
+  assert.deepStrictEqual(asked, ['Synthetic One', 'Synthetic Two', 'Synthetic Works', 'Synthville',
+    'Synthetic Failing', 'Synthetic Failing', 'Synthetic Failing', 'Synthetic Unknown'], 'the bare name is the whole ask; one ask a name; three tries on a failure');
+  assert.deepStrictEqual(got.get(article.relativePath).map((b) => b.name), ['Synthetic One', 'Synthetic Two', 'Synthetic Works', 'Synthville']);
+  assert.deepStrictEqual(got.get(second.relativePath).map((b) => b.name), ['Synthetic One'], 'a failed search and a name the notebook says it holds nothing on are not carried');
+  assert.deepStrictEqual(Array.from(got.keys()), [article.relativePath, second.relativePath]);
+  const again = fetchArticleBackgrounds([article], cacheDir, () => { throw new Error('must come from the run dir'); });
+  assert.strictEqual(again.get(article.relativePath).length, 4);
   let clock = 0;
-  assert.strictEqual(fetchArticleBackgrounds([second], cacheDir, ask, () => (clock += 16 * 60 * 1000)).size, 0, 'the budget stops the asking');
-  assert.strictEqual(asked.length, 4);
+  const third = Object.assign({}, second, { relativePath: 'third.staged.md', body: '# Third\n\nprose\n\n## INTAKE\nNAMES: Synthetic Late | subject\n' });
+  assert.strictEqual(fetchArticleBackgrounds([third], cacheDir, ask, () => (clock += 16 * 60 * 1000)).size, 0, 'the budget stops the asking');
+  assert(!asked.includes('Synthetic Late'));
   fs.rmSync(cacheDir, { recursive: true, force: true });
-  const source = backgroundSource(article, got.get(article.relativePath));
+  const source = backgroundSource('Synthetic One', got.get(article.relativePath)[0]);
   assert.strictEqual(source.kind, 'background');
-  assert(source.text.startsWith('# Earlier in the Tribune: Synthetic headline\n\nEarlier, a synthetic thing happened.'), 'history only: no framing line for the hosts to read out');
-  assert(source.text.includes('Earlier, a synthetic thing happened. Then another.'));
-  assert(!source.text.includes('Would you like') && !source.text.includes('[1]') && !source.text.includes('***'));
-  assert(!source.text.includes('Drawn from') && !source.text.includes('Synthetic Edition'), 'source file titles stay out');
+  assert.strictEqual(source.text, '# From the Tribune archive: Synthetic One\n\nEarlier, Synthetic One did a synthetic thing. Then another.',
+    'the notebook\'s words only: no citation marks, no source titles, no closing offer');
   const built = buildDailySources({ cycle: 999, reports: [article, second], backgrounds: got });
-  assert.deepStrictEqual(built.map((x) => x.kind), ['article', 'background', 'article']);
-  assert.strictEqual(built[1].title, 'The Bay Tribune Daily C999 — From the archive — Synthetic headline');
+  assert.deepStrictEqual(built.map((x) => x.kind), ['article', 'background', 'background', 'background', 'background', 'article'],
+    'a name the second article shares with the first is carried once');
+  assert.strictEqual(built[1].title, 'The Bay Tribune Daily C999 — From the archive — Synthetic One');
+  assert.strictEqual(built[1].path, article.relativePath);
 }
 
 // One failed upload is retried once, then skipped; the manifest records only

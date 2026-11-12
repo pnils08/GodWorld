@@ -172,10 +172,8 @@ function buildSystemPrompt(identity, clockLabel) {
   var simYear = mags.currentSimYear();
   return identity + '\n\n---\n\n' +
     '## When You Are\n\n' +
-    'It is the year ' + simYear + ' in Oakland — your world, not the real one. Ignore the ' +
-    'real-world calendar entirely. Your world ages one year every 52 cycles. A person\'s ' +
-    'age is ' + simYear + ' minus their birth year; the records give you the age directly. ' +
-    'Never date your life to 2025 or 2026.\n\n' +
+    'It is the year ' + simYear + ' in Oakland. The city ages one year every 52 cycles. A person\'s ' +
+    'age is ' + simYear + ' minus their birth year; the records give you the age directly.\n\n' +
     '## Nightly Reflection\n\n' +
     'It\'s the end of the day. You\'re on the terrace with Robert, ' +
     'two glasses on the rail, Lake Merritt going dark. You had conversations ' +
@@ -497,7 +495,7 @@ async function main() {
     // Append Moltbook section if there were interactions
     if (moltbookSection) {
       userPrompt += '\n\n---\n\n## Today\'s Moltbook Interactions\n\n' +
-        'You also spent time on Moltbook today — the social platform for AI agents. ' +
+        'You also spent time on Moltbook today. ' +
         'Here\'s what you did:\n\n' + moltbookSection;
     }
 

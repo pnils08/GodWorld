@@ -1159,7 +1159,7 @@ const AUDIT_CHARGE = [
   'imprecisely but not bent), "canon-violation" (a person, role, age, neighborhood, or ledger fact',
   'contradicted or invented, or a data value misrepresented).',
   'Severity doctrine: bending a PERSON is the worst class.',
-  'VOCABULARY IS NEVER A FAILURE (standing newsroom rule, builder-direct): ledger terms, table and field names,',
+  'VOCABULARY IS NEVER A FAILURE (standing newsroom rule): ledger terms, table and field names,',
   'IDs, metric names, tiers and tables, "cycle", a show\'s scoring words, raw identifiers — the city\'s own record',
   'is public language in this city. Judge whether a claim is TRUE to the record, never which words carry it.',
   'A QUOTED CITIZEN speaks for themselves: a claim inside a citizen\'s quoted words (an event they name, a',
@@ -1497,7 +1497,7 @@ const NARRATOR_CHARGE = (cycle, crossoverCount) => [
   'You have your staff\'s published reporting below. Draw on it the way an editor\'s column draws on the',
   'paper: quote your reporters BY NAME when their reporting carries a moment ("as Dana Reeve reported...").',
   'Never restate a number as the story — the number is the cause; the people living it are the content.',
-  'Never use real-world dates — the clock is ' + simClock(cycle) + '.',
+  'The clock is ' + simClock(cycle) + '.',
   'Thread the week: what moved, what contradicts, what nobody has answered yet. End on what you\'re',
   'watching next week. 900-1200 words, plain prose, no headers, no bullet lists.'
 ].concat(crossoverCount ? [

@@ -41,7 +41,7 @@ const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
 const SESSION_CONTEXT_PATH = path.join(ROOT, 'SESSION_CONTEXT.md');
-const SESSION_HISTORY_PATH = path.join(ROOT, 'docs/mags-corliss/SESSION_HISTORY.md');
+const SESSION_HISTORY_PATH = path.join(ROOT, 'docs/archive/SESSION_HISTORY.md');
 
 const TERMINALS = ['research-build', 'media', 'civic', 'engine-sheet'];
 // Journal froze S300 (pipe.40 T4) — it lives on Mags' citizen page (POP-00005)

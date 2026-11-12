@@ -361,3 +361,12 @@ Reporters brief changes: not "cover this policy" but "show us what 2041 Oakland 
 
 ### 2026-10-19 (2026-10-19T22:30:52.621Z)
 - Taveras popularity query returned no results. Mags' stance: hold judgment until the driver of the attention is identified. Possible drivers to check: UNDOCKED leaderboard, recent game performance, Derby legacy. Need the actual coverage or metrics.
+
+### 2026-11-04 (2026-11-04T06:04:35.394Z)
+- Mike asked about a KONO illness spike; search returned only scattered individual health entries and an older c108 item. No current KONO clinic or illness-count data found. Need a source before any reporting. Also Deacon Seymour recovery note (POP-00528) should be verified against his manager status before we reference it.
+
+### 2026-11-05 (2026-11-05T07:38:14.115Z)
+- Pull the full C114 KONO mental-health-crisis intake row from Care_Justice_Census and read the details before anyone reports on KONO health. Also check for any clinic-level data behind the sickness rumor.
+
+### 2026-11-05 (2026-11-05T07:39:52.140Z)
+- Run a ledger filter for KONO residents with medical roles (Nurse, Physician, Nurse Aide, Paramedic). Keyword search can't do neighborhood-plus-role. Also confirm Mart Johns' neighborhood field.

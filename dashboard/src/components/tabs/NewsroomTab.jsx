@@ -44,10 +44,10 @@ export default function NewsroomTab({ newsroom }) {
           <div className="mt-3 p-3 bg-panel rounded-xl border border-edge">
             <div className="flex justify-between items-center mb-1">
               <span className="text-[11px] font-black text-accent uppercase tracking-widest">
-                Entry {newsroom.editor.journal.entryNumber}: {newsroom.editor.journal.entryTitle}
+                {newsroom.editor.journal.title}
               </span>
               <span className="text-[11px] font-mono text-faint">
-                S{newsroom.editor.journal.session}
+                C{newsroom.editor.journal.cycle}
               </span>
             </div>
             <p className="text-xs text-dim leading-relaxed italic">

@@ -245,7 +245,7 @@ async function consistency_(items, getText) {
   if (run('c')) {
     let jp = [];
     try {
-      const jr = fs.readFileSync('/root/GodWorld/docs/mags-corliss/JOURNAL_RECENT.md', 'utf8');
+      const jr = fs.readFileSync('/root/GodWorld/docs/mags-corliss/legacy-memories/JOURNAL_RECENT.md', 'utf8');
       jp = jr.split(/\n\s*\n/).map(s => s.trim())
         .filter(s => s.length > 120 && s.length < 700 && !s.startsWith('#') && !s.startsWith('---') && !s.startsWith('—'))
         .slice(0, 8);

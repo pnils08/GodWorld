@@ -2396,33 +2396,28 @@ app.get('/api/edition/:cycle', (req, res) => {
 
 // --- Newsroom Operations ---
 // Aggregated operational view: editor state, desk status, agent health, pipeline metrics
-app.get('/api/newsroom', (req, res) => {
+app.get('/api/newsroom', async (req, res) => {
   const packetDir = join(ROOT, 'output/desk-packets');
   const outputDir = join(ROOT, 'output');
 
-  // 1. Editor state — latest journal entry
+  // 1. Editor state — latest nightly reflection
   let journalLatest = null;
-  const journalPath = join(ROOT, 'docs/mags-corliss/JOURNAL_RECENT.md');
-  const journalText = readText(journalPath);
-  if (journalText) {
-    // Extract latest entry header + first paragraph
-    const entries = journalText.split(/^## Session/m).filter(s => s.trim());
-    if (entries.length > 0) {
-      const latest = entries[entries.length - 1];
-      const lines = latest.split('\n').filter(l => l.trim());
-      const sessionMatch = latest.match(/(\d+)\s*[—-]\s*([\d-]+)/);
-      const entryMatch = latest.match(/### Entry (\d+):\s*(.+)/);
-      // Get first meaningful paragraph (skip headers)
-      const bodyLines = lines.filter(l => !l.startsWith('#') && !l.startsWith('---') && l.trim().length > 20);
+  try {
+    const recent = await Promise.race([
+      require(join(ROOT, 'lib/citizenPage.js')).recentPage_('POP-00005', 6, { raw: true }),
+      new Promise(resolve => setTimeout(() => resolve(null), 8000)),
+    ]);
+    const nightly = ((recent && recent.results) || []).find(d => d.metadata && d.metadata.daypart === 'NIGHTLY');
+    if (nightly) {
+      const heading = nightly.content.match(/^#+\s*(.+)$/m);
+      const body = nightly.content.split('\n').filter(l => l.trim() && !l.startsWith('#')).join(' ');
       journalLatest = {
-        session: sessionMatch ? parseInt(sessionMatch[1]) : null,
-        date: sessionMatch ? sessionMatch[2] : null,
-        entryNumber: entryMatch ? parseInt(entryMatch[1]) : null,
-        entryTitle: entryMatch ? entryMatch[2].trim() : null,
-        preview: bodyLines.slice(0, 3).join(' ').slice(0, 300),
+        title: heading ? heading[1].trim() : 'Nightly Reflection',
+        cycle: nightly.metadata.cycle || null,
+        preview: body.slice(0, 300),
       };
     }
-  }
+  } catch (e) {}
 
   // 2. Desk status — article counts from latest edition.
   // S502: this used to report latestCycle/packetCount/hookCount/arcCount per
@@ -2549,7 +2544,7 @@ app.get('/api/newsroom', (req, res) => {
 
   // 8. Article index stats (if index is built)
   const articleIndex = getArticleIndex();
-  const indexStats = articleIndex ? {
+  const indexStats = articleIndex && articleIndex.stats ? {
     generated: articleIndex.generated,
     totalFiles: articleIndex.stats.totalFiles,
     unique: articleIndex.stats.unique,

@@ -85,12 +85,8 @@ const CANON_PATTERNS = [
   /^GodWorld\/docs\/archive\//,
   /^GodWorld\/docs\/drive-files\//,
   /^GodWorld\/docs\/research\/papers\//,
-  /^GodWorld\/docs\/mags-corliss\/JOURNAL/,           // append-only log
-  /^GodWorld\/docs\/mags-corliss\/SESSION_HISTORY/,   // append-only log
-  /^GodWorld\/docs\/mags-corliss\/DAILY_REFLECTIONS/, // append-only log
-  /^GodWorld\/docs\/mags-corliss\/TECH_READING_ARCHIVE/, // append-only log
+  /^GodWorld\/docs\/mags-corliss\/legacy-memories\//,
   /^GodWorld\/docs\/mags-corliss\/NEWSROOM_MEMORY/,   // institutional memory
-  /^GodWorld\/docs\/mags-corliss\/NOTES_TO_SELF/,     // editorial notes
   /^GodWorld\/schemas\/SCHEMA_HEADERS/,    // auto-generated canonical reference
   /^schemas\/SCHEMA_HEADERS/,
   // Top-level archive (separate tree from docs/archive/) — contains historical

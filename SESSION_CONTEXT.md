@@ -1,6 +1,6 @@
 # SESSION_CONTEXT — one PIN (world state outside the repo) + one NEXT line per Claude terminal: the job, its next step, any standing hold from Mike. Never what was done — that is git and the plan's changelog.
 
-**PIN:** S644 | Day 225 | Canon C115 | PROD @180 (stage 45; history: DEPLOY_HISTORY §PROD) | next live fire C116 Sun 2026-11-15
+**PIN:** S645 | Day 225 | Canon C115 | PROD @180 (stage 45; history: DEPLOY_HISTORY §PROD) | next live fire C116 Sun 2026-11-15
 
 **NEXT[engine-sheet]:** pipeline.110 → read the Thu 11-12 20:18 office wakes. pipeline.100 → Task 3 narrator. Then engine.340, 341. No row yet: page-write receipt, gatherer/writer split.
 

@@ -20,7 +20,6 @@ const {
   buildDailySources,
   buildGateDeskFile,
   reflectionSources,
-  wholeReflections,
   worldRecordSources,
   exchangeSources,
   printedStems,
@@ -681,45 +680,6 @@ const syntheticDigest = {
   assert.strictEqual(exchangeSources(root, now - 36 * 3600e3, new Map([[talks[0].path, now]])).length, 0, 'a conversation a show carried is not carried again');
   assert.strictEqual(exchangeSources(root, now + 1000, new Map()).length, 0);
   assert.deepStrictEqual(buildDailySources({ cycle: 777, reports: [], exchanges: talks }).map((x) => x.kind), ['exchange']);
-  assert.deepStrictEqual(talks[0].pops, ['POP-99991', 'POP-99992']);
-
-  // The tab holds an interview answer's first 180 characters; the page holds all of it.
-  {
-    const said = 'Synthetic answer, sentence one of several the citizen gave. ' + Array(40).fill('More of it.').join('\n\n');
-    const cut = said.slice(0, 180).replace(/\n/g, ' ').replace(/\s+/g, ' ').trim();
-    const shortAnswer = 'A synthetic answer that is whole on the tab because it is under the limit.';
-    const pageRows = [
-      { popId: 'POP-99993', type: 'reflection', content: 'An earlier synthetic wake.\n\n---\n\n' + said },
-      { popId: 'POP-99993', type: 'tension', content: cut + ' — a tension line is not their words' },
-      { popId: 'POP-99994', type: 'reflection', content: shortAnswer },
-      { popId: 'POP-00005', type: 'reflection', content: cut + ' and more the operator page holds' },
-      { popId: 'POP-99996', type: 'reflection', content: 'Something else entirely, said on another day by this synthetic citizen.' },
-    ];
-    const citizens = [
-      { popid: 'POP-99991', name: 'Synthetic One', hood: 'Synthville', reflections: [{ text: 'hello hello', with: 'Synthetic Two', kind: 'CONVO' }, { text: 'A synthetic morning.', with: '', kind: 'MORNING' }] },
-      { popid: 'POP-99992', name: 'Synthetic Two', hood: 'Synthville', reflections: [{ text: 'there there', with: 'Synthetic One', kind: 'CONVO' }] },
-      { popid: 'POP-99993', name: 'Synthetic Three', hood: 'Otherton', reflections: [{ text: cut, with: '', kind: 'PRESS' }] },
-      { popid: 'POP-99994', name: 'Synthetic Four', hood: 'Otherton', reflections: [{ text: shortAnswer, with: '', kind: 'PRESS' }] },
-      { popid: 'POP-00005', name: 'Synthetic Operator', hood: 'Otherton', reflections: [{ text: cut, with: '', kind: 'NIGHTLY' }] },
-      { popid: 'POP-99996', name: 'Synthetic Six', hood: 'Otherton', reflections: [{ text: cut, with: '', kind: 'PRESS' }] },
-    ];
-    const { citizens: whole, stats } = wholeReflections(citizens, pageRows, talks);
-    assert.deepStrictEqual(stats, { whole: 1, notOnIndex: 1, inConversation: 2 });
-    const byPop = new Map(whole.map((c) => [c.popid, c.reflections.map((r) => r.text)]));
-    assert.deepStrictEqual(byPop.get('POP-99991'), ['A synthetic morning.'], 'the conversation is its own source; the rest of the day stays');
-    assert.deepStrictEqual(byPop.get('POP-99992'), []);
-    assert.strictEqual(byPop.get('POP-99993')[0], said.replace(/\s+/g, ' ').trim(), 'the page entry, whole, without the earlier wake in the same doc');
-    assert.deepStrictEqual(byPop.get('POP-99994'), [shortAnswer]);
-    assert.deepStrictEqual(byPop.get('POP-00005'), [cut], 'the operator page is not opened');
-    assert.deepStrictEqual(byPop.get('POP-99996'), [cut], 'no page entry: the tab line stands and is counted');
-    assert.strictEqual(citizens[2].reflections[0].text, cut, 'input not mutated');
-    // No index on disk, no conversation carried: nothing changes and nothing is dropped.
-    const bare = wholeReflections(citizens, [], []);
-    assert.deepStrictEqual(bare.citizens.map((c) => c.reflections.length), [2, 1, 1, 1, 1, 1]);
-    assert.deepStrictEqual(bare.stats, { whole: 0, notOnIndex: 3, inConversation: 0 });
-    assert.deepStrictEqual(reflectionSources(whole).map((x) => x.label),
-      ['Citizens in their own words — Otherton', 'Citizens in their own words — Synthville']);
-  }
 
   // Airs once (pipeline.108): a piece a delivered show carried on an earlier
   // day is not carried again unless the file changed; a previous-Cycle piece

@@ -95,6 +95,8 @@ Codex re-review of the fold and the later commits: [[../for-claude-review/2026-1
 
 **2026-11-12 01:18, the daily show's code is as it was before 2026-11-11 (builder: "Delete the code for daily, that's rejected").** Every 2026-11-11 and 2026-11-12 entry above that describes a change to `notebooklmDailyNews.js` or `buildCitizenWeekDigest.js` describes code that is not in the tree. His words on the shows stand as recorded; nothing is built from them.
 
+**2026-11-12 01:20, point 9 deleted (builder: "No what it was before tonite is rejected and delete it"):** the per-article archive question and all its code are out of `notebooklmDailyNews.js`; the daily show carries no canon write-up. Put to him, not approved, not built: send the canon notebook each article's own headline and nothing else; first step a read-only run of the Tue 11-10 six headlines so he can judge the answers.
+
 ## Tasks
 
 | # | Task | Status |

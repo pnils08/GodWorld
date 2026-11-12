@@ -21,7 +21,6 @@
 const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
-const { execFileSync } = require('child_process');
 const {
   ROOT,
   NLM,
@@ -654,116 +653,6 @@ function articleSource(report) {
   };
 }
 
-// ── Deep canon, per story (builder 2026-11-09: "Yes") ───────────────────────
-// A show is made inside one notebook, and the working notebook holds only
-// today, so the hosts cannot reach the canon notebook. Each article gets one
-// question to it — what was published before about these people and places —
-// through the read-only wrapper (whole live notebook, 30–65 s a question in its
-// log), and the answer rides as a small source beside the article. A lore
-// piece is already canon and gets none. Non-blocking: a failed or empty answer
-// means that article airs without background.
-const BACKGROUND_QUESTION_MAX = 3900; // the wrapper refuses a question over 4000
-const BACKGROUND_BUDGET_MS = 15 * 60 * 1000;
-const BACKGROUND_TRIES = 3;
-const CANON_SEARCH = path.join(__dirname, 'notebooklmCanonSearch.js');
-
-function wantsBackground(report) {
-  return (report.classification === 'STAGED' || report.classification === 'UNGATED_SAMPLE') &&
-    !/^lore_/.test(path.basename(report.file || report.relativePath || ''));
-}
-
-function backgroundQuestion(report) {
-  const body = String(report.body || '');
-  const register = (key) => Array.from(new Set(
-    (body.match(new RegExp('^' + key + ':\\s*(.+)$', 'gm')) || [])
-      .map((line) => line.replace(/^[A-Z]+:\s*/, '').split('|')[0].trim()).filter(Boolean)));
-  const names = register('NAMES');
-  const hoods = register('HOOD');
-  const now = Number(report.cycle) || cycleFromName(report.file || report.relativePath || '') || null;
-  const head = [
-    'A Bay Tribune reporter has filed the article below' + (now ? ' in Cycle ' + now : '') + '. From what was published before it, give the history a listener needs to follow it:' +
-      ' what earlier coverage said about the people and places this article names, what was promised or left unresolved, and how it led here.',
-    // 2026-11-10: the first show presented the Cycle-110 title as news and
-    // hung it on stories it had nothing to do with. The history is dated
-    // against the article's own Cycle and kept to the article's own subjects.
-    'Only history that bears directly on the people and places named in this article. Leave out citywide events (a championship, an election, a season) unless this article is about them.' +
-      (now ? ' Write in the past tense and say how long ago each thing was, counted in Cycles back from Cycle ' + now + ' ("five Cycles ago, in Cycle ' + (now - 5) + '"), so nothing old can be heard as new.' : ''),
-    'Published fact only, earliest first, in plain paragraphs under 400 words: no headings, no lists. Do not restate the new article.' +
-      ' Do not invent history, quotes or figures. Cite the source for every statement. Stop when the history ends: no closing offer, no question.',
-    'Headline: ' + reportHeading(report),
-    names.length ? 'People named: ' + names.join(', ') : '',
-    hoods.length ? 'Neighborhoods: ' + hoods.join(', ') : '',
-    'Article:',
-  ].filter(Boolean).join('\n');
-  const room = BACKGROUND_QUESTION_MAX - head.length - 1;
-  return head + '\n' + readerCopy(body).replace(/\s+/g, ' ').trim().slice(0, Math.max(0, room));
-}
-
-function backgroundSource(report, background) {
-  const headline = reportHeading(report);
-  const lines = [
-    '# Earlier in the Tribune: ' + headline,
-    '',
-    // citation markers and the notebook's closing "Would you like…" offer are not for listening
-    String(background.answer).replace(/\s*\[\d+(?:\s*[-,–]\s*\d+)*\]/g, '')
-      .replace(/\s*\((?:\*[^*]+\*[\s;,]*)+\)/g, '')
-      .replace(/\n+(?:[*_-]{3,}\s*\n+)?(?:Would you like|Let me know|If you(?:'d| would) like)[^\n]*\s*$/i, '').trim(),
-  ];
-  return {
-    kind: 'background',
-    label: 'From the archive — ' + headline,
-    text: lines.join('\n'),
-    path: report.relativePath,
-  };
-}
-
-function askCanon(question) {
-  const out = execFileSync('node', [CANON_SEARCH, '--question', question, '--timeout', '180', '--allow-uncited'],
-    { cwd: ROOT, encoding: 'utf-8', timeout: 240 * 1000, maxBuffer: 10 * 1024 * 1024, stdio: ['ignore', 'pipe', 'pipe'] });
-  const result = JSON.parse(out.slice(out.indexOf('{')));
-  const answer = String(result.answer || '').trim();
-  if (!answer) throw new Error('empty answer');
-  const titles = Array.from(new Set((result.sourceExcerpts || []).map((e) => e && e.sourceTitle).filter(Boolean))).slice(0, 8);
-  return { answer, titles };
-}
-
-// Map of article path → { answer, titles }. NotebookLM returned most answers
-// with no citation list (2026-11-09: 2 of 6 cited on each of two live runs),
-// so the daily show takes the uncited answer too (builder 2026-11-09: "citing
-// sources is not necessary for this, these don't write back into canon"); answers are kept in the run dir so a re-run asks nothing twice.
-function fetchArticleBackgrounds(reports, cacheDir, ask = askCanon, nowFn = Date.now) {
-  const backgrounds = new Map();
-  const startedAt = nowFn();
-  fs.mkdirSync(cacheDir, { recursive: true });
-  for (const report of (reports || []).filter(wantsBackground)) {
-    const question = backgroundQuestion(report);
-    const cacheFile = path.join(cacheDir, sha256Text(question).slice(0, 16) + '.json');
-    if (fs.existsSync(cacheFile)) {
-      try {
-        backgrounds.set(report.relativePath, readJson(cacheFile));
-        continue;
-      } catch (_) { /* unreadable cache: ask again */ }
-    }
-    for (let attempt = 1; attempt <= BACKGROUND_TRIES; attempt++) {
-      if (nowFn() - startedAt > BACKGROUND_BUDGET_MS) {
-        console.log('DAILY BACKGROUND STOPPED (non-blocking): 15-minute budget spent; remaining articles air without it');
-        return backgrounds;
-      }
-      try {
-        const background = ask(question);
-        fs.writeFileSync(cacheFile, JSON.stringify(background, null, 2) + '\n');
-        backgrounds.set(report.relativePath, background);
-        break;
-      } catch (e) {
-        const why = String((e.stderr && String(e.stderr).trim()) || e.message).split('\n').pop().slice(0, 200);
-        console.log('DAILY BACKGROUND ' + (attempt < BACKGROUND_TRIES ? 'RETRY' : 'SKIPPED (non-blocking)') + ': ' +
-          reportHeading(report).slice(0, 80) + ' — ' + why);
-      }
-    }
-  }
-  return backgrounds;
-}
-
 // The daily citizen exchange (citizen-exchange.js, 17:00): two citizens talking,
 // in full, written to output/exchanges/. Only each speaker's excerpt reached the
 // sheet and so the show; the conversation itself is carried once, as its own
@@ -865,8 +754,6 @@ function buildDailySources(input) {
       continue;
     }
     drafts.push(articleSource(report));
-    const background = input.backgrounds && input.backgrounds.get(report.relativePath);
-    if (background) drafts.push(backgroundSource(report, background));
   }
   drafts.push(...(input.exchanges || []));
   drafts.push(...reflectionSources(input.citizenDigest && input.citizenDigest.citizens));
@@ -1434,13 +1321,6 @@ async function run(argv) {
     throw new Error('nothing to air for Cycle ' + cycle +
       ': no article, no reflection and no first-morning record in the window');
   }
-  const backgrounds = fetchArticleBackgrounds(newsroom.reports, path.join(runDir, 'background'));
-  if (backgrounds.size) {
-    dailySources = buildDailySources(Object.assign({}, dailyInput, { backgrounds }));
-    writeDailySources(sourceDir, dailySources);
-  }
-  console.log('Daily background from the canon notebook: ' + backgrounds.size + ' of ' +
-    newsroom.reports.filter(wantsBackground).length + ' article(s)');
   const list = nlm(['source', 'list', config.newsroomNotebookId, '--json']);
   if (!list.ok) throw new Error('working-notebook source list failed: ' + list.out.slice(0, 400));
   const existingSources = parseJsonOutput(list.out, 'working-notebook source list');
@@ -1655,10 +1535,6 @@ module.exports = {
   latestUndeliveredRender,
   reusableSourceId,
   ensureDailySources,
-  wantsBackground,
-  backgroundQuestion,
-  backgroundSource,
-  fetchArticleBackgrounds,
   parseJsonOutput,
   queryAnswer,
   findSourceId,

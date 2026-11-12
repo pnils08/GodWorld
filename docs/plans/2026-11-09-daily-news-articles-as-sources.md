@@ -35,7 +35,23 @@ Measured before the change (`scripts/notebooklmDailyNews.js` v1.9):
 
 11. **First show read (Tue 11-10 08:00, builder):** "same crap, 'data is detached from the sim', instructions read back to me, living hell the city". The run did what was built (24 sources in, 6 of 6 backgrounds, ops report delivered). Two causes. (a) Mine: the focus sentences and the framing lines inside the archive / reflection / conversation sources are text for the hosts, and hosts repeat it — all removed; focus is the show's name. (b) Upstream: the show now relays the articles, and the civic and business pieces are written about the record itself ("The Record Names Two Households", "the Rows Do Not Say Why", "What no row can name", "I don't know who decided"), each closing on what is unknown. That is the reporters' brief (`cron-desk-run.js`: "End on ONE unanswered question"), not this script. Needs the builder's call and its own row.
 
+12. **Task 7 read of the same show against its 24 sources (research-build, 2026-11-11).** Transcript `output/notebooklm/daily/c115/68f51dde275b/transcript.txt`, 20:15, 3,927 words; sources in the run's `sources/`.
+
+    | Asked | Found |
+    |---|---|
+    | Five C115 articles of 11-09, each by reporter | All five reporters named. Told at length: Delaine (fund, 01:29–05:22), Mezran (Chinatown, 05:22–08:25), Velez (Marine Systems, 08:25–10:46), Shimizu (transit, 14:45–17:22). Pruitt's "The Lives of C115" got about 45 seconds: Keane and Lilo of its 15 people; Salcedo's promotion, Ramiro's and Lewis's moves, the two households into West Oakland, the UNDOCKED stakes and the rest unheard |
+    | The two carried pieces | Sorensen's Voices (C114): all three citizens heard. The Ellis lore piece: about two minutes, its writer (Raines) named at the open and credited with Sorensen for the 127 wins and seventh title, which are in the archive backgrounds and the lore piece, not in Voices |
+    | Reflections by name | 17 citizens in ten neighborhood sources; 15 named on air (not Salcedo, not Ramiro). Heard from their own source lines: Corliss, Nwosu, Brown, Vinnie Keane (whole entries), Caldera, Ramos, Lee (the 180). Adeyemi, Cartier, Mehta, Soria Dominguez and Lilo were heard through the articles that quote them (Lilo's 4:30 alarm is in Pruitt's piece, past where her line was cut); Amara Keane through the conversation source; Linas named without her words; Seymour named as a patient, his quote in Mezran's piece unheard |
+    | Were the reflections whole (F6 "Unclipped") | **No.** 15 of the 19 lines were 180 characters, cut mid-word ("The bakery knows whos"). Not this script's clip: `citizenVoice.js:279` and `citizen-exchange.js:198` write `slice(0, 180)` to the tab; the whole text is on the citizen's page. Fixed, Task 8 |
+    | Said on air, not in any source | "$6.9 million … vanished into thin air" (the article: one $400,000 tranche, $81,188 of it named, "may therefore have gone to businesses"; the archive background carries Webb's 79 households); "the ambulances aren't coming", "a completely unrecorded shadow economy of care", Nwosu "knows her official data is a fiction" (her page says none of it; Mezran's piece says the plumber's account "is not a finding about the 129"); "fired two people" (Velez: no reason on the record; Linas: "I don't know the full story of why the other two left"); Soria Dominguez and Cartier "completely dismiss the stacking theory" (neither does; Cartier names the vote and the game himself); the smoke-detector and rebar comparisons; the close, "does the publication of a clean official ledger actually hurt the city" |
+    | Read back from a framing line | 01:11 "We're using the archive strictly for background, not as today's news" (the archive source's "Earlier coverage, not today's news."); 00:52 "diary style pages" (the reflection source's intro). Both lines were removed 11-10 (point 11a); the Wed 11-11 run's sources carry neither |
+    | Where the one theme came from | Record-words (ledger, record, tracker, row, sheet, census, metrics) per piece: Shimizu 27, Delaine 22, Velez 14, Mezran 13, Pruitt 13, Raines 2, Sorensen 0. Five of the six archive backgrounds end on a shortfall sentence (not the Lives one). The reporters' side is pipeline.111's (its plan opens on this transcript). Point 11b's `cron-desk-run.js` quote left that file in `1a294729d`; the write packet's `output.rule` still reads "… one Packet quote, unanswered question" (C115 gap log G-EC47) |
+
+    Not checked: how names were pronounced (the transcript is speech-to-text); why Mags Corliss's entry ends mid-sentence in the source (her tab row, 902 characters).
+
 ## Review
+
+Task 8 (the whole-words fix): agy review requested 2026-11-11, brief `output/antigravity/2026-11-11-brief-pipeline108-whole-words.md`. Result folded here when it lands.
 
 Codex diff review of `ae8d72065`: [[../for-claude-review/2026-11-09-codex-pipeline108-diff-review]] — HOLD, six findings, each checked against the code and folded:
 
@@ -71,7 +87,8 @@ Codex re-review of the fold and the later commits: [[../for-claude-review/2026-1
 | 6 | `docs/reference/NotebookLM.md`: two-notebooks row, daily steps, Change log | done |
 | 6b | Canon background per article + codex fold; tests green; live `--no-audio --no-deliver` | done |
 | 6c | Weekend: weekly rulebook out + focus; edition out of the daily; citizen conversation in | done — read the Sat 11-14 weekly and Sun 11-15 daily |
-| 7 | Read the Tue 2026-11-10 08:00 show: the five C115 articles of 11-09 evening each heard by reporter; reflections by name | open |
+| 7 | Read the Tue 2026-11-10 08:00 show: the five C115 articles of 11-09 evening each heard by reporter; reflections by name | done 2026-11-11 — point 12: five of five named, four told, Lives 2 of 15 people; reflections by name but 15 of 19 lines cut at 180 |
+| 8 | Citizens' words whole: `wholeReflections` in `notebooklmDailyNews.js` (page index entry replaces the tab's 180; a speaker in the carried conversation not repeated; POP-00005's page not opened), `kind` from `buildCitizenWeekDigest.js`, test, `NotebookLM.md` | built 2026-11-11 — tests green; replay on the live tab: Tue window 13 of 13 answers whole, Wed 7 of 7 cut ones; `--dry-run` through `run()` printed the count line. Read the count line in the Thu 11-12 08:00 log and that show's reflection sources. Limit: a morning the 06:15 page refresh fails leaves that day's answers at 180, counted in the log |
 
 ## Not in this job
 

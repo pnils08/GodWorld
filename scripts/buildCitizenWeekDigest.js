@@ -309,7 +309,7 @@ async function buildDigest(options) {
         reflections: rfs.filter((rf) => !/^(filed|graded):/i.test(rf.full))
           .sort((a, b) => a.ts - b.ts).map((rf) => {
             const convoWith = rf.kind === 'CONVO' ? convoPartner.get(rf) : null;
-            return { text: rf.full, with: convoWith ? person(convoWith).name : '' };
+            return { text: rf.full, with: convoWith ? person(convoWith).name : '', kind: rf.kind };
           }),
       };
     }).filter((citizen) => citizen.reflections.length),

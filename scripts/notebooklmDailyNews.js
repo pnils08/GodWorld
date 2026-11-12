@@ -653,18 +653,15 @@ function articleSource(report) {
   };
 }
 
-// ── Canon behind each story ─────────────────────────────────────────────────
+// ── Deep canon, per story (builder 2026-11-09: "Yes") ───────────────────────
 // A show is made inside one notebook, and the working notebook holds only
-// today, so the hosts cannot reach the canon notebook. Every article ends with
-// the reporter's own notes (## INTAKE): who is in it (NAMES, BIZ) and where
-// (HOOD). Each of those names is sent to the canon notebook by itself, with no
-// other word (builder 2026-11-12: "the canon search would be this, Vinnie
-// Keane" / "that 1 name or phrase is the ask" / "Every article listed who's in
-// it"), through the read-only wrapper, and what the notebook says rides as a
-// small source beside the article. A name is asked once a day however many
-// articles list it. A lore piece is already canon and asks nothing.
-// Non-blocking: a failed search, or a name the notebook says it holds nothing
-// on, airs without one.
+// today, so the hosts cannot reach the canon notebook. Each article gets one
+// question to it — what was published before about these people and places —
+// through the read-only wrapper (whole live notebook, 30–65 s a question in its
+// log), and the answer rides as a small source beside the article. A lore
+// piece is already canon and gets none. Non-blocking: a failed or empty answer
+// means that article airs without background.
+const BACKGROUND_QUESTION_MAX = 3900; // the wrapper refuses a question over 4000
 const BACKGROUND_BUDGET_MS = 15 * 60 * 1000;
 const BACKGROUND_TRIES = 3;
 const CANON_SEARCH = path.join(__dirname, 'notebooklmCanonSearch.js');
@@ -674,97 +671,94 @@ function wantsBackground(report) {
     !/^lore_/.test(path.basename(report.file || report.relativePath || ''));
 }
 
-// The people and places an article's own notes list, in the order written.
-function backgroundNames(report) {
+function backgroundQuestion(report) {
   const body = String(report.body || '');
-  const at = body.search(/^## INTAKE\s*$/m);
-  if (at < 0) return [];
-  const names = [];
-  for (const line of body.slice(at).split('\n')) {
-    const match = line.match(/^(?:NAMES|BIZ|HOOD):\s*(.+)$/);
-    if (!match) continue;
-    const name = match[1].split('|')[0].trim();
-    if (name && !/^none$/i.test(name) && !names.includes(name)) names.push(name);
-  }
-  return names;
+  const register = (key) => Array.from(new Set(
+    (body.match(new RegExp('^' + key + ':\\s*(.+)$', 'gm')) || [])
+      .map((line) => line.replace(/^[A-Z]+:\s*/, '').split('|')[0].trim()).filter(Boolean)));
+  const names = register('NAMES');
+  const hoods = register('HOOD');
+  const now = Number(report.cycle) || cycleFromName(report.file || report.relativePath || '') || null;
+  const head = [
+    'A Bay Tribune reporter has filed the article below' + (now ? ' in Cycle ' + now : '') + '. From what was published before it, give the history a listener needs to follow it:' +
+      ' what earlier coverage said about the people and places this article names, what was promised or left unresolved, and how it led here.',
+    // 2026-11-10: the first show presented the Cycle-110 title as news and
+    // hung it on stories it had nothing to do with. The history is dated
+    // against the article's own Cycle and kept to the article's own subjects.
+    'Only history that bears directly on the people and places named in this article. Leave out citywide events (a championship, an election, a season) unless this article is about them.' +
+      (now ? ' Write in the past tense and say how long ago each thing was, counted in Cycles back from Cycle ' + now + ' ("five Cycles ago, in Cycle ' + (now - 5) + '"), so nothing old can be heard as new.' : ''),
+    'Published fact only, earliest first, in plain paragraphs under 400 words: no headings, no lists. Do not restate the new article.' +
+      ' Do not invent history, quotes or figures. Cite the source for every statement. Stop when the history ends: no closing offer, no question.',
+    'Headline: ' + reportHeading(report),
+    names.length ? 'People named: ' + names.join(', ') : '',
+    hoods.length ? 'Neighborhoods: ' + hoods.join(', ') : '',
+    'Article:',
+  ].filter(Boolean).join('\n');
+  const room = BACKGROUND_QUESTION_MAX - head.length - 1;
+  return head + '\n' + readerCopy(body).replace(/\s+/g, ' ').trim().slice(0, Math.max(0, room));
 }
 
-function backgroundSource(name, background) {
+function backgroundSource(report, background) {
+  const headline = reportHeading(report);
   const lines = [
-    '# From the Tribune archive: ' + name,
+    '# Earlier in the Tribune: ' + headline,
     '',
-    // citation markers and the notebook's closing offer of what to look at next are not for listening
+    // citation markers and the notebook's closing "Would you like…" offer are not for listening
     String(background.answer).replace(/\s*\[\d+(?:\s*[-,–]\s*\d+)*\]/g, '')
       .replace(/\s*\((?:\*[^*]+\*[\s;,]*)+\)/g, '')
-      .replace(/\n+[*_-]{3,}[ \t]*\n+[^\n]{0,600}\s*$/, '')
-      .replace(/\n+(?:Would you like|Let me know|If you(?:'d| would) like)[^\n]*\s*$/i, '').trim(),
+      .replace(/\n+(?:[*_-]{3,}\s*\n+)?(?:Would you like|Let me know|If you(?:'d| would) like)[^\n]*\s*$/i, '').trim(),
   ];
   return {
     kind: 'background',
-    label: 'From the archive — ' + name,
+    label: 'From the archive — ' + headline,
     text: lines.join('\n'),
-    path: null,
+    path: report.relativePath,
   };
 }
 
-function askCanon(name) {
-  const out = execFileSync('node', [CANON_SEARCH, '--question', name, '--timeout', '180', '--allow-uncited'],
+function askCanon(question) {
+  const out = execFileSync('node', [CANON_SEARCH, '--question', question, '--timeout', '180', '--allow-uncited'],
     { cwd: ROOT, encoding: 'utf-8', timeout: 240 * 1000, maxBuffer: 10 * 1024 * 1024, stdio: ['ignore', 'pipe', 'pipe'] });
   const result = JSON.parse(out.slice(out.indexOf('{')));
   const answer = String(result.answer || '').trim();
   if (!answer) throw new Error('empty answer');
-  return { answer, sources: (result.sourcesUsed || []).length };
+  const titles = Array.from(new Set((result.sourceExcerpts || []).map((e) => e && e.sourceTitle).filter(Boolean))).slice(0, 8);
+  return { answer, titles };
 }
 
-// The notebook's own verdict that it holds nothing on a name. Read 2026-11-12, 19 names from the Tue
-// 11-10 show: the four it had nothing on all opened "**<Name>** does not appear [anywhere] in the
-// published articles … in your sources" (one of them citing 10 sources); six full answers came back
-// with no source list at all. So the count of sources says nothing either way; the opening sentence does.
-function saysNotInCanon(answer) {
-  const opening = String(answer || '').replace(/\s+/g, ' ').trim().split(/(?<=[.!?])\s/)[0] || '';
-  return /\bdoes not appear\b/i.test(opening);
-}
-
-// Map of article path → [{ name, answer, sources }], one entry per name the
-// article's notes list that the canon notebook has something on. Answers are
-// kept in the run dir by name, so a re-run and a second article listing the
-// same name ask nothing twice.
+// Map of article path → { answer, titles }. NotebookLM returned most answers
+// with no citation list (2026-11-09: 2 of 6 cited on each of two live runs),
+// so the daily show takes the uncited answer too (builder 2026-11-09: "citing
+// sources is not necessary for this, these don't write back into canon"); answers are kept in the run dir so a re-run asks nothing twice.
 function fetchArticleBackgrounds(reports, cacheDir, ask = askCanon, nowFn = Date.now) {
   const backgrounds = new Map();
   const startedAt = nowFn();
-  const asked = new Map();
   fs.mkdirSync(cacheDir, { recursive: true });
   for (const report of (reports || []).filter(wantsBackground)) {
-    const found = [];
-    for (const name of backgroundNames(report)) {
-      const key = name.toLowerCase();
-      if (!asked.has(key)) {
-        const cacheFile = path.join(cacheDir, sha256Text('name:' + key).slice(0, 16) + '.json');
-        let background = null;
-        if (fs.existsSync(cacheFile)) {
-          try { background = readJson(cacheFile); } catch (_) { /* unreadable cache: ask again */ }
-        }
-        for (let attempt = 1; !background && attempt <= BACKGROUND_TRIES; attempt++) {
-          if (nowFn() - startedAt > BACKGROUND_BUDGET_MS) {
-            console.log('DAILY BACKGROUND STOPPED (non-blocking): 15-minute budget spent; remaining names air without it');
-            if (found.length) backgrounds.set(report.relativePath, found);
-            return backgrounds;
-          }
-          try {
-            background = Object.assign({ name }, ask(name));
-            fs.writeFileSync(cacheFile, JSON.stringify(background, null, 2) + '\n');
-          } catch (e) {
-            const why = String((e.stderr && String(e.stderr).trim()) || e.message).split('\n').pop().slice(0, 200);
-            console.log('DAILY BACKGROUND ' + (attempt < BACKGROUND_TRIES ? 'RETRY' : 'SKIPPED (non-blocking)') + ': ' +
-              name.slice(0, 80) + ' — ' + why);
-          }
-        }
-        asked.set(key, background);
-      }
-      const background = asked.get(key);
-      if (background && background.answer && !saysNotInCanon(background.answer)) found.push(background);
+    const question = backgroundQuestion(report);
+    const cacheFile = path.join(cacheDir, sha256Text(question).slice(0, 16) + '.json');
+    if (fs.existsSync(cacheFile)) {
+      try {
+        backgrounds.set(report.relativePath, readJson(cacheFile));
+        continue;
+      } catch (_) { /* unreadable cache: ask again */ }
     }
-    if (found.length) backgrounds.set(report.relativePath, found);
+    for (let attempt = 1; attempt <= BACKGROUND_TRIES; attempt++) {
+      if (nowFn() - startedAt > BACKGROUND_BUDGET_MS) {
+        console.log('DAILY BACKGROUND STOPPED (non-blocking): 15-minute budget spent; remaining articles air without it');
+        return backgrounds;
+      }
+      try {
+        const background = ask(question);
+        fs.writeFileSync(cacheFile, JSON.stringify(background, null, 2) + '\n');
+        backgrounds.set(report.relativePath, background);
+        break;
+      } catch (e) {
+        const why = String((e.stderr && String(e.stderr).trim()) || e.message).split('\n').pop().slice(0, 200);
+        console.log('DAILY BACKGROUND ' + (attempt < BACKGROUND_TRIES ? 'RETRY' : 'SKIPPED (non-blocking)') + ': ' +
+          reportHeading(report).slice(0, 80) + ' — ' + why);
+      }
+    }
   }
   return backgrounds;
 }
@@ -905,7 +899,6 @@ function worldRecordSources(worldSummary, cycle) {
 
 function buildDailySources(input) {
   const drafts = [];
-  const carried = new Set();
   for (const report of input.reports || []) {
     // Drafts the gate held back are not news (builder 2026-10-17); they ride
     // the ops report's gate desk file, added after the audio is created.
@@ -920,14 +913,8 @@ function buildDailySources(input) {
       continue;
     }
     drafts.push(articleSource(report));
-    for (const background of (input.backgrounds && input.backgrounds.get(report.relativePath)) || []) {
-      const key = String(background.name).toLowerCase();
-      if (carried.has(key)) continue;   // a name two articles list is carried once
-      carried.add(key);
-      const source = backgroundSource(background.name, background);
-      source.path = report.relativePath;
-      drafts.push(source);
-    }
+    const background = input.backgrounds && input.backgrounds.get(report.relativePath);
+    if (background) drafts.push(backgroundSource(report, background));
   }
   drafts.push(...(input.exchanges || []));
   drafts.push(...reflectionSources(input.citizenDigest && input.citizenDigest.citizens));
@@ -1501,15 +1488,16 @@ async function run(argv) {
     throw new Error('nothing to air for Cycle ' + cycle +
       ': no article, no reflection and no first-morning record in the window');
   }
+  // Canon behind each story (builder 2026-11-09 "Yes"; 2026-11-12 "So no canon ???"): the archive answer
+  // rides beside its article. It is still written to a question, not a source in its own right; the
+  // past pieces themselves as sources is the build that replaces it.
   const backgrounds = fetchArticleBackgrounds(newsroom.reports, path.join(runDir, 'background'));
   if (backgrounds.size) {
     dailySources = buildDailySources(Object.assign({}, dailyInput, { backgrounds }));
     writeDailySources(sourceDir, dailySources);
   }
-  console.log('Daily background from the canon notebook: ' +
-    new Set(Array.from(backgrounds.values()).flat().map((b) => String(b.name).toLowerCase())).size + ' name(s) answered of ' +
-    new Set(newsroom.reports.filter(wantsBackground).flatMap(backgroundNames).map((n) => n.toLowerCase())).size +
-    ' listed in the notes of ' + newsroom.reports.filter(wantsBackground).length + ' article(s)');
+  console.log('Daily background from the canon notebook: ' + backgrounds.size + ' of ' +
+    newsroom.reports.filter(wantsBackground).length + ' article(s)');
   const list = nlm(['source', 'list', config.newsroomNotebookId, '--json']);
   if (!list.ok) throw new Error('working-notebook source list failed: ' + list.out.slice(0, 400));
   const existingSources = parseJsonOutput(list.out, 'working-notebook source list');
@@ -1725,8 +1713,7 @@ module.exports = {
   reusableSourceId,
   ensureDailySources,
   wantsBackground,
-  backgroundNames,
-  saysNotInCanon,
+  backgroundQuestion,
   backgroundSource,
   fetchArticleBackgrounds,
   parseJsonOutput,

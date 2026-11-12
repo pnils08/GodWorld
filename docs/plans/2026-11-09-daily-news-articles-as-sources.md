@@ -91,6 +91,8 @@ Codex re-review of the fold and the later commits: [[../for-claude-review/2026-1
 
 **2026-11-12 01:09, first-name match deleted on the builder's word ("Delete you trick code"):** the lookup is back to every name in the article's `## INTAKE` block, one bare name each (Tuesday: 19 names, 11 min 15 s, 15 with canon). Clock times typed in the entries above were guessed; commit times are real. Not recorded anywhere: what an article is about.
 
+**2026-11-12 01:17, all of tonight's canon-lookup code deleted on the builder's word ("Didn't approve that either, delete it"):** point 9 is as written above again, its code line-for-line what it was before 2026-11-11. The bare-name lookup (every INTAKE name, then first sheet name) is not in the tree. His words on what the search should be stand recorded above ("the canon search would be this, Vinnie Keane", "that 1 name or phrase is the ask", "Who are the articles about"); no build of them is approved.
+
 ## Tasks
 
 | # | Task | Status |

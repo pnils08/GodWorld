@@ -19,6 +19,7 @@
  */
 
 const crypto = require('crypto');
+const { execFileSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 const {
@@ -653,6 +654,48 @@ function articleSource(report) {
   };
 }
 
+// pipeline.108: the canon notebook is asked each article's own reporter focus
+// line (the subject the reporter wrote down in the article's run) and nothing
+// else; its answer rides as the source beside that article. An article with no
+// focus line from its own run, or a search that fails, is logged and goes
+// without canon, never with a stand-in.
+const FOCUS_RUN_WINDOW_MS = 30 * 60 * 1000;
+
+function reporterFocus(report, root = ROOT) {
+  const stateFile = path.join(root, 'output', 'cron-compare', artifactStem(report.relativePath) + '.state.json');
+  if (!fs.existsSync(stateFile)) return '';
+  const state = readJson(stateFile);
+  const focus = state && state.signal && state.signal.plan && state.signal.plan.focus;
+  const articleFile = path.isAbsolute(report.file || '') ? report.file : path.join(root, report.relativePath);
+  const sameRun = Math.abs(fs.statSync(stateFile).mtimeMs - fs.statSync(articleFile).mtimeMs) <= FOCUS_RUN_WINDOW_MS;
+  return sameRun && typeof focus === 'string' ? focus.trim() : '';
+}
+
+function canonSearch(question) {
+  const out = execFileSync('node', [path.join(__dirname, 'notebooklmCanonSearch.js'), '--question', question, '--timeout', '180'],
+    { cwd: ROOT, encoding: 'utf8', timeout: 240000, maxBuffer: 10 * 1024 * 1024, stdio: ['ignore', 'pipe', 'pipe'] });
+  return String(JSON.parse(out.slice(out.indexOf('{'))).answer || '').trim();
+}
+
+function canonSources(reports, search = canonSearch, focusOf = reporterFocus) {
+  const drafts = [];
+  for (const report of reports || []) {
+    if (report.classification === 'FLAGGED' || report.classification === 'CIVIS_JOURNAL') continue;
+    const headline = reportHeading(report);
+    try {
+      const focus = focusOf(report);
+      if (!focus) throw new Error('no reporter focus line from the article\'s own run');
+      const answer = search(focus);
+      if (!answer) throw new Error('empty answer');
+      drafts.push({ kind: 'canon', label: 'Canon: ' + headline, text: '# Canon on: ' + headline + '\n\n' + answer, path: report.relativePath });
+    } catch (error) {
+      const why = String((error.stderr && String(error.stderr).trim()) || error.message).split('\n').pop().slice(0, 200);
+      console.log('Canon search skipped for "' + headline + '": ' + why);
+    }
+  }
+  return drafts;
+}
+
 // The daily citizen exchange (citizen-exchange.js, 17:00): two citizens talking,
 // in full, written to output/exchanges/. Only each speaker's excerpt reached the
 // sheet and so the show; the conversation itself is carried once, as its own
@@ -755,6 +798,7 @@ function buildDailySources(input) {
     }
     drafts.push(articleSource(report));
   }
+  drafts.push(...(input.canon || []));
   drafts.push(...(input.exchanges || []));
   drafts.push(...reflectionSources(input.citizenDigest && input.citizenDigest.citizens));
   if (input.firstMorning) drafts.push(...worldRecordSources(input.worldSummary, input.cycle));
@@ -1236,6 +1280,7 @@ async function run(argv) {
     cycle,
     exchanges: exchangeSources(ROOT, Date.now() - hours * 3600e3, airedReportTimes(OUTPUT_DIR, Date.now())),
     reports: newsroom.reports,
+    canon: args.dryRun ? [] : canonSources(newsroom.reports),
     citizenDigest,
     worldSummary,
     firstMorning: newsroom.firstMorning === true,
@@ -1526,6 +1571,8 @@ module.exports = {
   staleDailySourceIds,
   heldDraftSourceIds,
   buildDailySources,
+  canonSources,
+  reporterFocus,
   buildGateDeskFile,
   reflectionSources,
   worldRecordSources,

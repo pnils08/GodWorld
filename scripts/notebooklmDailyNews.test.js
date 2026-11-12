@@ -18,6 +18,7 @@ const {
   isCompletedManifest,
   buildSourcePack,
   buildDailySources,
+  canonSources,
   buildGateDeskFile,
   reflectionSources,
   worldRecordSources,
@@ -717,6 +718,27 @@ const syntheticDigest = {
   assert.strictEqual(both.editionDay, true);
   assert.strictEqual(both.firstMorning, false, 'edition day wins');
   fs.rmSync(root, { recursive: true, force: true });
+}
+
+{
+  const reports = [
+    { classification: 'STAGED', body: '# One\n\ntext', relativePath: 'a.staged.md' },
+    { classification: 'STAGED', body: '# Two\n\ntext', relativePath: 'b.staged.md' },
+    { classification: 'STAGED', body: '# Three\n\ntext', relativePath: 'c.staged.md' },
+    { classification: 'FLAGGED', body: '# Held\n\ntext', relativePath: 'd.md' },
+  ];
+  const asked = [];
+  const out = canonSources(
+    reports,
+    (q) => { asked.push(q); if (q === 'boom') throw new Error('down'); return 'answer for ' + q; },
+    (r) => ({ 'a.staged.md': 'focus A', 'b.staged.md': '', 'c.staged.md': 'boom' }[r.relativePath])
+  );
+  assert.deepStrictEqual(asked, ['focus A', 'boom'], 'only the reporter focus line is asked; no focus, no search; flagged skipped');
+  assert.strictEqual(out.length, 1);
+  assert.strictEqual(out[0].kind, 'canon');
+  assert.ok(out[0].text.includes('answer for focus A'));
+  const built = buildDailySources({ cycle: 999, reports: [reports[0]], canon: out });
+  assert.deepStrictEqual(built.map((s) => s.kind), ['article', 'canon']);
 }
 
 console.log('notebooklmDailyNews tests: PASS');

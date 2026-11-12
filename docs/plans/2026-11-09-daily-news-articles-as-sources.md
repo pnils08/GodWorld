@@ -97,6 +97,8 @@ Codex re-review of the fold and the later commits: [[../for-claude-review/2026-1
 
 **2026-11-12 01:20, point 9 deleted (builder: "No what it was before tonite is rejected and delete it"):** the per-article archive question and all its code are out of `notebooklmDailyNews.js`; the daily show carries no canon write-up. Put to him, not approved, not built: send the canon notebook each article's own headline and nothing else; first step a read-only run of the Tue 11-10 six headlines so he can judge the answers.
 
+**2026-11-12, canon search added (builder: "Add the canon search"; "Whatever the last run was"):** point 9 returns as built in `docs/reference/NotebookLM.md` Change log 2026-11-12: each article's own reporter focus line is the one question to the canon notebook; the answer is a source beside the article. The headline was built first and replaced before commit when he asked why (his words on the subject: "Who are the articles about"). Open: 2 of 14 articles in the window have no focus line and go without canon; first live read is the next daily show.
+
 ## Tasks
 
 | # | Task | Status |

@@ -1488,9 +1488,16 @@ async function run(argv) {
     throw new Error('nothing to air for Cycle ' + cycle +
       ': no article, no reflection and no first-morning record in the window');
   }
-  // No archive answer rides beside an article: it was written to a three-paragraph question, which is
-  // direction, not a source (builder 2026-11-11). fetchArticleBackgrounds is kept, uncalled, so the step
-  // is one line to bring back.
+  // Canon behind each story (builder 2026-11-09 "Yes"; 2026-11-12 "So no canon ???"): the archive answer
+  // rides beside its article. It is still written to a question, not a source in its own right; the
+  // past pieces themselves as sources is the build that replaces it.
+  const backgrounds = fetchArticleBackgrounds(newsroom.reports, path.join(runDir, 'background'));
+  if (backgrounds.size) {
+    dailySources = buildDailySources(Object.assign({}, dailyInput, { backgrounds }));
+    writeDailySources(sourceDir, dailySources);
+  }
+  console.log('Daily background from the canon notebook: ' + backgrounds.size + ' of ' +
+    newsroom.reports.filter(wantsBackground).length + ' article(s)');
   const list = nlm(['source', 'list', config.newsroomNotebookId, '--json']);
   if (!list.ok) throw new Error('working-notebook source list failed: ' + list.out.slice(0, 400));
   const existingSources = parseJsonOutput(list.out, 'working-notebook source list');

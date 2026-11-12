@@ -57,6 +57,8 @@ Task 8: an agy review of the diff was requested 2026-11-11 (brief `output/antigr
 
 **2026-11-12 00:40, built on "Rule 1, no caps" and "do whatever you think I want":** no `--focus` on the daily or the weekly audio; the per-article archive question is not asked (point 9 off; the function is kept, uncalled); `citizenVoice.js` and `citizen-exchange.js` write the citizen's whole words to the tab (the 180 cut removed at its source). Left as is: the written brief's question, the ops report question, the router. Tests green, dry run through `run()`. Read: Thu 11-12 08:00 daily, Sat 11-14 weekly.
 
+**2026-11-12 01:00, archive question back on (builder: "So no canon ???"):** point 9 is in effect again, unchanged. Cutting it removed the only canon the daily show has. Open: canon as sources (the past published pieces about a story's people, uploaded as they were printed) in place of an answer written to a question; not built, no row.
+
 Codex diff review of `ae8d72065`: [[../for-claude-review/2026-11-09-codex-pipeline108-diff-review]] — HOLD, six findings, each checked against the code and folded:
 
 | # | Finding | Fold |

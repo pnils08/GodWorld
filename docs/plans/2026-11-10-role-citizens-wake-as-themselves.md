@@ -65,6 +65,8 @@ pointers:
 
 **Read 2026-11-13 (C115):** 1 met (Tue read). 3 met (Tue doc; Thu doc `XzeKdkteNxxuYG6pZ1uyQC`, revenue $60.2M → $60.3M off his own ledger rows). 2 **not met**: all ten docs are on their own pages (`cp-POP-*-c115-work-thu`, cycle 115, daypart work, status done, no double append) and every seat writes on its own district's hoods as `lib/districtMap.js` holds them; D8 Chen and D5 Rivers write the Grand Lake vote as passed — their record holds a Yes position, INIT-009 is vote-scheduled for C116 (MilestoneNotes "no vote outcome claimed"), and D8's own datawake names the funding's status failed.
 
+**Thu run, 2026-11-12 20:18 (log 02:18–02:21 UTC):** 21 due (9 registered, 12 auto) → 18 woke and wrote. Aitken and Coles skipped (the feed names neither at C115). The DA woke; her model reply was empty, the store refused the empty write, no doc, no retry (gap log G-EC49). 18 Reflection_Intake rows, all `applied=no`. Method: the 12 office packs rebuilt read-only from the store, each page doc fetched by id. Upstream of this row: G-EC48 ("D3 East Oakland"), G-EC50 (D6 Crane's leg, the ME's Yu Zen thread).
+
 ## Open
 
 - **A feed line the engine routed by kind, not by what happened.** C115: the feed's `roster-move` row is Vinnie Keane's retirement ("Keane is not leaving Oakland"); the engine's Sports-Moved line on him reads "spent the night on the phone working out where the family would land" — the trade pool. Engine output stands; recorded for the builder.
@@ -82,6 +84,7 @@ pointers:
 
 ## Changelog
 
+- 2026-11-13 (engine-sheet) — Thu office wakes read: 18 of 21 wrote, 9 of 12 office notes on their own record; Acceptance 1, 3 met, 2 not met; Task 8 added, after the tracker repair.
 - 2026-11-10 (engine-sheet) — Builder approved the wakes on the measured price; auto packs on, Varek's pack active. His model of the generic events recorded verbatim; feed-named life lines made salient in the wake's life tail (test added).
 - 2026-11-10 (engine-sheet) — Builder corrected three things: Paulson is not excluded (carve-out removed); the engine does gate by flag and clock (cause section rewritten from the code — the Horn example was pre-gate history); the added calls are not approved without pricing (new wakes off, price measured and recorded under Open).
 - 2026-11-10 (engine-sheet) — Opened on the builder's word. Tasks 1–6 built and dry-run through the real entry points; Task 7 waits on the Tue/Thu crons.

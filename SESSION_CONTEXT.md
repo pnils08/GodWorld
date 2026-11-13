@@ -1,7 +1,7 @@
 # SESSION_CONTEXT — one PIN (world state outside the repo) + one NEXT line per Claude terminal: the job, its next step, any standing hold from Mike. Never what was done — that is git and the plan's changelog.
 
-**PIN:** S646 | Day 225 | Canon C115 | PROD @180 (stage 45; history: DEPLOY_HISTORY §PROD) | next live fire C116 Sun 2026-11-15
+**PIN:** S647 | Day 226 | Canon C115 | PROD @180 (stage 45; history: DEPLOY_HISTORY §PROD) | next live fire C116 Sun 2026-11-15
 
-**NEXT[engine-sheet]:** pipeline.110 → read the Thu 11-12 20:18 office wakes. pipeline.100 → Task 3 narrator. Then engine.340, 341. No row yet: page-write receipt, gatherer/writer split.
+**NEXT[engine-sheet]:** pipeline.110 → Task 8 (positions written as outcomes, closed projects woken open). Then office boot-file check (tools, no 4th wall, no builder notes). pipeline.100 → Task 3 narrator. Then engine.340, 341.
 
 **NEXT[research-build]:** pipeline.108 → no daily-show code without a plan the builder has seen and approved (plan §Review, 2026-11-12 entries: his words, and what was built and deleted that night). pipeline.109 → read the boot digest. Then engine.339: calls 1–4 OPEN. Then trace codex's five data findings.

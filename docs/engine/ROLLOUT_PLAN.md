@@ -24,6 +24,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
+| civic.48 | Offices told which hoods sit in which district (builder 11-13). Read C116 Sun 2026-11-15: no office files a hood under the wrong district | live-observing | engine-sheet | [[../../output/production_log_run_cycle_c115_gaps]] §G-EC48 |
 | governance.59 | Run-cycle step gate (builder 11-09): a step refuses until the one before passed; codex hook needs his trust. Read C116 Sun 2026-11-15 | live-observing | engine-sheet | [[../plans/2026-11-09-run-cycle-step-gate]] |
 | pipeline.106 | Lore writer: Gemini 3.8 thinking high, calendar, subject dossier (card, household, page), every canon source; Ellis passed. Read Fri 2026-11-13: Osei run | live-observing | engine-sheet | [[../plans/2026-08-15-lore-writer]] |
 | pipeline.104 | Saturday Drive drops (builder 11-08): edition to Y-003, audio to Weekly_News; built, C114 uploaded. Read Sat 2026-11-14: C115 edition + audio in their folders | live-observing | engine-sheet | [[../reference/NotebookLM]] §Change log |

@@ -1,6 +1,16 @@
 --- a/recall-directive.js
 +++ b/recall-directive.js
-@@ -119,10 +119,11 @@
+@@ -29,7 +29,8 @@
+ // to spend a tool call. A configured recallDirective restores advisory mode.
+ const MIN_PROMPT_LENGTH = 12;
+ const MAX_QUERY_LENGTH = 500;
+-const MAX_RESULTS = 15;
++const MAX_RESULTS = 6;
++const RECENT_FLOOR = 0.66;
+ const MAX_RESULT_CHARS = 300;
+ const MIN_SIMILARITY = 0.55;
+ const SEARCH_TIMEOUT_MS = 4000;
+@@ -119,10 +120,11 @@
      const title =
        typeof r.title === 'string' && r.title.trim() ? r.title.trim() : null;
      const prefix = title && !text.startsWith(title) ? `${title} — ` : '';
@@ -14,7 +24,7 @@
  ${lines.join('\n')}
  
  When one of these shapes your answer, credit it naturally with the ◪ prefix (e.g. "◪ earlier you decided X"); if you name the source, say "from supermemory" — never "from memory". For deeper history, call the supermemory search_memory tool — it defaults to this project's container (${namespace}). Pass containerTag only to search a different space. Or launch the context-gatherer agent.
-@@ -164,19 +165,59 @@
+@@ -164,22 +166,77 @@
      }
  
      const namespace = getNamespace(cwd);
@@ -79,9 +89,28 @@
  
      const batchHashes = new Set();
 -    const results = (response || [])
++    // GodWorld patch 2026-11-13: recent relevant saves first. A hand-written save is
++    // ranked by similarity plus its age (newer up, older down) and must clear a
++    // higher floor than before; [rule] hits are current law and keep the plain floor.
++    const recallScore = (r) => {
++      const sim = r.similarity || 0;
++      if (String(r.memory || '').startsWith('[rule] ')) return sim;
++      const at = Date.parse(r.createdAt || r.updatedAt || r.system?.createdAt || r.metadata?.createdAt || '');
++      if (!Number.isFinite(at)) return sim;
++      const days = (Date.now() - at) / 86400000;
++      return sim + (days <= 3 ? 0.08 : days <= 14 ? 0.04 : days > 45 ? -0.06 : 0);
++    };
 +    const results = responses
 +      .flat()
-+      .sort((a, b) => (b.similarity || 0) - (a.similarity || 0))
++      .sort((a, b) => recallScore(b) - recallScore(a))
        .filter((r) => resultText(r))
        .filter(
-         (r) => !Number.isFinite(r.similarity) || r.similarity >= MIN_SIMILARITY,
+-        (r) => !Number.isFinite(r.similarity) || r.similarity >= MIN_SIMILARITY,
++        (r) =>
++          !Number.isFinite(r.similarity) ||
++          (String(r.memory || '').startsWith('[rule] ')
++            ? r.similarity >= MIN_SIMILARITY
++            : recallScore(r) >= RECENT_FLOOR),
+       )
+       .filter((r) => {
+         const hash = hashText(resultText(r));

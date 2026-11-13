@@ -700,9 +700,13 @@ async function runPrep() {
       L.push('');
       L.push('## Live roster status (whip-read off THIS, not memory)');
       for (const m of truesource.council) {
-        L.push('- ' + m.district + ' ' + m.name + ' (' + m.faction + ') — ' + m.status.toUpperCase() + (m.status !== 'active' ? ' (named absentee, not voting)' : '') + (approvals[m.name] ? '. Approval ' + approvals[m.name].approval + (approvals[m.name].delta ? ' (' + (approvals[m.name].delta > 0 ? 'up' : 'down') + ' ' + Math.abs(approvals[m.name].delta) + ' since last cycle)' : ' (holding)') : ''));
+        // civic.48 — each seat with its neighborhoods, so a "D3" in a note reads as Fruitvale, San Antonio
+        const turf = civicSeat.districtHoods(m.district).join(', ');
+        L.push('- ' + m.district + (turf ? ' (' + turf + ')' : '') + ' ' + m.name + ' (' + m.faction + ') — ' + m.status.toUpperCase() + (m.status !== 'active' ? ' (named absentee, not voting)' : '') + (approvals[m.name] ? '. Approval ' + approvals[m.name].approval + (approvals[m.name].delta ? ' (' + (approvals[m.name].delta > 0 ? 'up' : 'down') + ' ' + Math.abs(approvals[m.name].delta) + ' since last cycle)' : ' (holding)') : ''));
       }
       L.push('- Full council: ' + activeSeats + ' active of 9 → a majority is ' + (Math.floor(activeSeats / 2) + 1) + '.');
+      const own = civicSeat.ownDistrictLine(o.district);
+      if (own) L.push(own);
       const appr = approvals[o.holder];
       if (appr) L.push('Your approval stands at ' + appr.approval + (appr.delta ? ' — ' + (appr.delta > 0 ? 'up' : 'down') + ' ' + Math.abs(appr.delta) + ' since last cycle.' : ' — holding.'));
     } else {
@@ -711,6 +715,8 @@ async function runPrep() {
       L.push('# Pending Decisions — ' + o.title + ' ' + o.holder + ' — Cycle ' + cycle);
       L.push('');
       if (appr) L.push('Your approval stands at ' + appr.approval + (appr.delta ? ' — ' + (appr.delta > 0 ? 'up' : 'down') + ' ' + Math.abs(appr.delta) + ' since last cycle.' : ' — holding.'));
+      // civic.48 — the Mayor and every citywide office get the city's nine districts (the "D3 East Oakland" gavel, C113)
+      L.push('', civicSeat.districtBlock(o.district, officeMap));
     }
 
     // civic.29: an owner only had a legal way to cite their own initiative's
@@ -2781,6 +2787,8 @@ function datawakeUserPrompt(pack, wallInj, office, options = {}) {
   const conf = game.confrontation || null;
   return [
     wallInj || '',
+    // civic.48 — the weekday wake carried only the seat's own hoods; a citywide office had no map at all
+    civicSeat.districtBlock(office.district, options.officeMap),
     'Prior wall is continuity only. Do not reuse its wording as this week\'s statement.',
     !options.civic47Pilot && lever ? 'This week\'s pulse from your pack (yours to take up or leave): ' + lever : '',
     hay,
@@ -3717,7 +3725,7 @@ async function runDatawake() {
       const packFile = writePack(pack, ROOT, cycle);
       log('pack ' + path.relative(ROOT, packFile));
       const wallInj = await positionWallInject(officeMap, office.agentDir);
-      const user = datawakeUserPrompt(pack, wallInj, office, { civic47Pilot: CIVIC47_PILOT });
+      const user = datawakeUserPrompt(pack, wallInj, office, { civic47Pilot: CIVIC47_PILOT, officeMap });
       let hay = user;
       const persona = readPersonaDir(civicSeat.personaDirFor(office, ROOT) || office.agentDir);
       let j = null;

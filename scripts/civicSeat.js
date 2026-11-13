@@ -73,6 +73,35 @@ function personaDirFor(row, root) {
   return row.agentDir || null;
 }
 
+// civic.48 — the council districts in words, off lib/districtMap.js (the Node mirror of Neighborhood_Map.District).
+// A seat told only "D5", and a mayor told nothing, read a note's "D3 briefing" beside East Oakland as one place:
+// INIT-002 has carried "D3 East Oakland" since C113. Every office is told its own district and the city's nine.
+const { DISTRICT_NEIGHBORHOODS } = require('../lib/districtMap');
+const OFFICE_MAP_PATH = path.join(__dirname, 'civic-office-map.json');
+
+function districtHoods(district) {
+  return DISTRICT_NEIGHBORHOODS[String(district || '').trim().toUpperCase()] || [];
+}
+// "Your district, D5: East Oakland." — '' for a citywide office or an unknown district
+function ownDistrictLine(district) {
+  const d = String(district || '').trim().toUpperCase();
+  const hoods = districtHoods(d);
+  return hoods.length ? 'Your district, ' + d + ': ' + hoods.join(', ') + '.' : '';
+}
+// One line per district, its holder off the office map (seats turn over; the lib's holder table is a static copy).
+function districtMapLines(officeMap) {
+  let map = officeMap;
+  if (!map) { try { map = JSON.parse(fs.readFileSync(OFFICE_MAP_PATH, 'utf8')); } catch (e) { map = { offices: [] }; } }
+  const holders = {};
+  councilSeats(map).forEach(r => { if (r.district && r.holder) holders[String(r.district).toUpperCase()] = r.holder; });
+  return Object.keys(DISTRICT_NEIGHBORHOODS).map(d =>
+    '- ' + d + ': ' + DISTRICT_NEIGHBORHOODS[d].join(', ') + (holders[d] ? ' — ' + holders[d] : ''));
+}
+// The block an office is handed: its own district first (a seat), then the city's nine.
+function districtBlock(district, officeMap) {
+  return [ownDistrictLine(district), 'Oakland\'s council districts:', ...districtMapLines(officeMap)].filter(Boolean).join('\n');
+}
+
 function seatStatus(row, roster) {
   const list = roster || [];
   const hit = list.find(r => r.district === row.district || r.officeId === row.officeId || r.name === row.holder);
@@ -90,4 +119,8 @@ module.exports = {
   hasPersona,
   personaDirFor,
   seatStatus,
+  districtHoods,
+  ownDistrictLine,
+  districtMapLines,
+  districtBlock,
 };

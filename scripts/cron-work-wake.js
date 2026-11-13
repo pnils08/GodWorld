@@ -30,6 +30,7 @@ const getCurrentCycle = require('/root/GodWorld/lib/getCurrentCycle');
 const { loadOwnPageReadback, loadOwnFeedLines, feedNamedKeys, feedNameKey, loadVoiceTexture } = require('/root/GodWorld/lib/wakePerception');
 const dials = require('/root/GodWorld/lib/citizenDials');
 const registry = require('./workWakePackages');
+const { DISTRICT_NEIGHBORHOODS } = require('/root/GodWorld/lib/districtMap');
 const { centralDate } = require('./centralDate');   // the Central day the crontab runs on; the UTC date is the next day at the 20:18 run
 
 const ARGV = process.argv.slice(2);
@@ -314,7 +315,9 @@ function autoPackages(cycle, packages, opts) {
     officePops.add(popid);
     if (taken.has(popid)) return;
     const row = byPop[popid] || null;
-    const where = of.district && !/citywide/i.test(of.district) ? ', ' + of.district : '';
+    // civic.48 — the seat's neighborhoods with its district, not "D5" alone
+    const hoods = (DISTRICT_NEIGHBORHOODS[String(of.district || '').toUpperCase()] || []).join(', ');
+    const where = of.district && !/citywide/i.test(of.district) ? ', ' + of.district + (hoods ? ' (' + hoods + ')' : '') : '';
     add('auto-office-' + of.agentDir, {
       persona: 'auto-office-' + of.agentDir, active: true, auto: 'office', popid, name: of.holder,
       office: of.officeId || of.projectId || of.title, agentDir: of.agentDir,

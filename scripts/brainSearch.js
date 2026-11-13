@@ -2,7 +2,7 @@
 /**
  * brainSearch.js — one query, both memories (governance.51 T7).
  *
- *   node scripts/brainSearch.js "<query>" [--limit 8] [--days 0] [--json] [--no-brain] [--no-mem] [--no-rules]
+ *   node scripts/brainSearch.js "<query>" [--limit 8] [--days 0] [--json] [--no-brain] [--no-mem] [--no-rules] [--no-world] [--no-open]
  *   node scripts/brainSearch.js --sync      # mirror rule files into sl-rules
  *
  * Sources, each labelled on every hit:
@@ -15,7 +15,12 @@
  *           `brainSearch.js --sync` (nightly cron): changed files upsert in place, deleted files
  *           are removed. sl-godworld is the append-only log; sl-rules is always the live text.
  *
- * Output is one merged list, newest first, with source, date, and a pointer per hit.
+ *   world — the live sheet, for a query that names someone or something (a capitalised word):
+ *           Oakland_Sports_Feed rows (newest Cycle first), As_Roster and Simulation_Ledger
+ *           identity cells. Current world truth, printed above the memory hits. `--no-world` skips.
+ *   open  — docs/engine/ROLLOUT_PLAN.md rows carrying most of the query's words.
+ *
+ * Output: world rows first, then one merged list, newest first, with source, date, and a pointer per hit.
  * Rule this serves: search the brain before asserting what a prior session decided.
  */
 const { execSync } = require('child_process');
@@ -107,19 +112,25 @@ function ftsQuery(q) {
 
 function searchMem() {
   const since = DAYS > 0 ? `AND o.created_at_epoch >= ${Math.floor(Date.now() / 1000) - DAYS * 86400}` : '';
-  const match = "'" + ftsQuery(query).replace(/'/g, "''") + "'";
+  const run = (fts) => {
+  const match = "'" + fts.replace(/'/g, "''") + "'";
   const sql = `SELECT o.id, o.type, o.title, o.subtitle, o.created_at, o.agent_type
                FROM observations_fts f JOIN observations o ON o.id = f.rowid
                WHERE observations_fts MATCH ${match}
                  AND o.project = '${PROJECT}' ${since}
                ORDER BY rank LIMIT ${LIMIT};`;
-  try {
     const out = execSync(`sqlite3 -json ${JSON.stringify(DB)}`, { input: sql, stdio: ['pipe', 'pipe', 'pipe'] }).toString().trim();
     return out ? JSON.parse(out).map(r => ({
       source: 'mem', date: (r.created_at || '').slice(0, 10), id: r.id, kind: r.type,
       text: r.title + (r.subtitle ? ' — ' + r.subtitle : ''),
       pointer: `get_observations([${r.id}])`,
     })) : [];
+  };
+  try {
+    // Every word first; a whole question rarely matches that way, so fall back to its key words, any of them.
+    const all = run(ftsQuery(query));
+    if (all.length || keyTerms(query).length < 2) return all;
+    return run(keyTerms(query).map(w => '"' + w + '"').join(' OR '));
   } catch (e) {
     return [{ source: 'mem', date: '', text: `claude-mem query failed: ${e.message.split('\n')[0]}`, pointer: '' }];
   }
@@ -152,15 +163,83 @@ function searchBrain(tag = BRAIN_TAG, source = 'brain') {
   }
 }
 
-const hits = []
-  .concat(flag('--no-mem') ? [] : searchMem())
-  .concat(flag('--no-brain') ? [] : searchBrain())
-  .concat(flag('--no-rules') ? [] : searchBrain(RULES_TAG, 'rule'))
-  .sort((a, b) => (b.date || '').localeCompare(a.date || ''));
-
-if (asJson) { console.log(JSON.stringify(hits, null, 2)); process.exit(0); }
-console.log(`brainSearch "${query}" — ${hits.filter(h => h.source === 'mem').length} mem, ${hits.filter(h => h.source === 'brain').length} brain, ${hits.filter(h => h.source === 'rule').length} rule${DAYS ? `, last ${DAYS}d` : ''}`);
-for (const h of hits) {
-  console.log(`[${h.source.padEnd(5)} ${h.date || '----------'} ${h.kind || ''}] ${h.text}`);
-  if (h.pointer) console.log(`        ↳ ${h.pointer}`);
+const STOP = new Set(('the a an and or of to in on for with was were is are did does do has have had what who when where why how ' +
+  'that this it its be been by from at as about into not no any all get got was his her their our your my').split(' '));
+function keyTerms(q) {
+  return [...new Set(q.toLowerCase().replace(/[^a-z0-9'. -]/g, ' ').split(/\s+/).filter(w => w.length >= 3 && !STOP.has(w)))];
 }
+// Names in the query: capitalised words that are not question words ("Was Mesa traded" → Mesa).
+function nameTerms(q) {
+  return [...new Set(q.split(/\s+/).map(w => w.replace(/[^A-Za-z0-9'-]/g, ''))
+    .filter(w => /^[A-Z]/.test(w) && w.length >= 3 && !STOP.has(w.toLowerCase())))];
+}
+
+async function searchWorld() {
+  const names = nameTerms(query);
+  if (!names.length) return [];
+  try {
+    require(path.join(__dirname, '..', 'lib', 'env'));
+    const sheets = require(path.join(__dirname, '..', 'lib', 'sheets'));
+    const res = names.map(n => new RegExp('\\b' + n.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'i'));
+    const has = (s) => res.every(re => re.test(s));
+    const cells = (row, n) => row.map(c => String(c == null ? '' : c).replace(/\s+/g, ' ').trim()).filter(Boolean).slice(0, n).join(' | ');
+    const [feed, roster, ledger] = await Promise.all(['Oakland_Sports_Feed', 'As_Roster', 'Simulation_Ledger'].map(tab => sheets.getSheetData(tab)));
+    const out = [];
+    const fh = feed[0] || [];
+    const ci = (h) => fh.indexOf(h);
+    feed.slice(1).map((r, i) => ({ r, row: i + 2 }))
+      .filter(x => has([x.r[ci('NamesUsed')], x.r[ci('Notes')], x.r[ci('StoryAngle')]].join(' ')))
+      // A row that names them in NamesUsed is about them; a row that only mentions them comes after.
+      .sort((a, b) => (has(String(b.r[ci('NamesUsed')])) - has(String(a.r[ci('NamesUsed')]))) ||
+        (Number(b.r[ci('Cycle')]) || 0) - (Number(a.r[ci('Cycle')]) || 0) || b.row - a.row)
+      .slice(0, LIMIT)
+      .forEach(x => out.push({ source: 'world', date: 'C' + x.r[ci('Cycle')], kind: x.r[ci('EventType')] || '',
+        text: String(x.r[ci('Notes')] || x.r[ci('StoryAngle')] || '').replace(/\s+/g, ' ').slice(0, 420),
+        pointer: `Oakland_Sports_Feed row ${x.row}` }));
+    roster.slice(1).forEach((r, i) => { if (has(r.slice(0, 4).join(' '))) out.push({ source: 'world', date: 'now', kind: 'roster', text: cells(r, 9), pointer: `As_Roster row ${i + 2}` }); });
+    const lh = ledger[0] || [];
+    const li = (h) => lh.indexOf(h);
+    ledger.slice(1).forEach((r, i) => {
+      if (!has([r[li('First')], r[li('Last')]].join(' '))) return;
+      out.push({ source: 'world', date: 'now', kind: 'ledger',
+        text: [r[li('POPID')], [r[li('First')], r[li('Last')]].join(' '), r[li('RoleType')], r[li('Status')], 'Tier ' + r[li('Tier')]].join(' | '),
+        pointer: `Simulation_Ledger row ${i + 2}` });
+    });
+    return out;
+  } catch (e) {
+    return [{ source: 'world', date: '', text: `live sheet read failed: ${e.message.split('\n')[0]}`, pointer: '' }];
+  }
+}
+
+function searchOpen() {
+  const fs = require('fs');
+  const terms = keyTerms(query);
+  if (!terms.length) return [];
+  try {
+    const lines = fs.readFileSync(path.join(__dirname, '..', 'docs', 'engine', 'ROLLOUT_PLAN.md'), 'utf8').split('\n');
+    const need = Math.max(1, Math.ceil(terms.length / 2));
+    return lines.map((l, i) => ({ l, n: i + 1, score: terms.filter(w => l.toLowerCase().includes(w)).length }))
+      .filter(x => x.score >= need && /^\s*\|/.test(x.l))
+      .sort((a, b) => b.score - a.score).slice(0, Math.min(LIMIT, 5))
+      .map(x => ({ source: 'open', date: '', kind: '', text: x.l.replace(/\s+/g, ' ').slice(0, 260), pointer: `docs/engine/ROLLOUT_PLAN.md:${x.n}` }));
+  } catch (e) { return []; }
+}
+
+(async () => {
+  const world = flag('--no-world') ? [] : await searchWorld();
+  const open = flag('--no-open') ? [] : searchOpen();
+  const hits = []
+    .concat(flag('--no-mem') ? [] : searchMem())
+    .concat(flag('--no-brain') ? [] : searchBrain())
+    .concat(flag('--no-rules') ? [] : searchBrain(RULES_TAG, 'rule'))
+    .sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+  const all = world.concat(hits, open);
+
+  if (asJson) { console.log(JSON.stringify(all, null, 2)); return; }
+  const n = (s) => all.filter(h => h.source === s).length;
+  console.log(`brainSearch "${query}" — ${n('world')} world, ${n('mem')} mem, ${n('brain')} brain, ${n('rule')} rule, ${n('open')} open${DAYS ? `, last ${DAYS}d` : ''}`);
+  for (const h of all) {
+    console.log(`[${h.source.padEnd(5)} ${h.date || '----------'} ${h.kind || ''}] ${h.text}`);
+    if (h.pointer) console.log(`        ↳ ${h.pointer}`);
+  }
+})().catch(e => { console.error(e.message); process.exit(1); });

@@ -206,6 +206,18 @@ console.log('=== workMoveLine — a director shift is a work move (civic.38 ruli
   ok(wake.workMoveLine(DIR_PKG, { identity: 'x', blocks: ['y'], nodes: ['civic-office'] }, 108, '2026-09-22') === null, 'initiative-project node produced nothing (row not on the beats dump) -> no move');
   ok(wake.workMoveLine(DIR_PKG, pack, 'abc', '2026-09-22') === null, 'unresolved cycle -> no move');
 
+  // pipeline.110 Task 8 — a complete project is handed as finished and files no work move (C115 INIT-003/006)
+  var dirDone = fixtureBeats({
+    Initiative_Tracker: [{ InitiativeID: 'INIT-901', Name: 'Synthetic Clinic', ImplementationPhase: 'complete', Status: 'passed', Outcome: 'COMPLETED',
+      MilestoneNotes: 'C110: fences up\nC115: closed.', NextScheduledAction: 'Pour foundation', NextActionCycle: '116' }],
+  });
+  var donePack = wake.buildWorkPack(DIR_PKG, 115, dirDone, path.join(dirDone, 'no-names.tsv'));
+  var doneText = donePack ? donePack.blocks.join('\n') : '';
+  ok(donePack && donePack.nodes.indexOf('initiative-closed') >= 0 && donePack.nodes.indexOf('initiative-project') === -1, 'complete project -> initiative-closed node');
+  ok(/It is complete \(completed\)/.test(doneText) && /Latest milestone: C115: closed\./.test(doneText), 'block says complete, newest milestone');
+  ok(!/Next on the books|Where it stands|Pour foundation/.test(doneText), 'no stage line, no next action on a finished project');
+  ok(wake.workMoveLine(DIR_PKG, donePack, 115, '2026-11-12') === null, 'finished project -> no work move');
+
   // The line folds exactly like a datawake seat's work move: the Sunday fold stamps LastWorkCycle/LastWorkSeat.
   var ws = fs.mkdtempSync(path.join(os.tmpdir(), 'work-wake-fold-'));
   civicRun.appendMoveLedger(ws, 108, [mv]);

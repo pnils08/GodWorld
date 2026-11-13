@@ -55,7 +55,7 @@ pointers:
 | 5 | Daily wake and interviews: `stationLine` replaces "ordinary person" for citizens of station; own feed rows reach both; an interviewed officeholder gets the office's last six positions; office statements no longer returned as "private reflections" | es | done |
 | 6 | Tests (`cron-work-wake.test.js` 50, `wakePerception.test.js` 201); dry runs through the real scripts for Varek, the Mayor, Vinnie Keane, and the daily wake on the Mayor | es | done |
 | 7 | Read the first live runs: Tue 2026-11-10 20:18 (club citizens, Varek), Thu 2026-11-12 20:18 (offices) — log `logs/cron-work-wake.log`, pages, Reflection_Intake rows | es | done — Tue read 11-10, Thu read 11-13 (changelog); fixes owed, Task 8 |
-| 8 | Fix what the Thu read found inside this row's acceptance: a position written as an outcome (D8, D5, Okoro); a closed project woken as open (INIT-003, INIT-006) | es | not started — on the builder's word |
+| 8 | Fix what the Thu read found inside this row's acceptance: a position written as an outcome (D8, D5, Okoro); a closed project woken as open (INIT-003, INIT-006) | es | half built 11-13 — a finished project is handed as finished and files no work move; position-as-outcome waits on the tracker repair (INIT-009 contradicts itself, as do INIT-008/010); directors still write their old weeks off their own page (G-EC51) |
 
 ## Acceptance
 
@@ -84,6 +84,7 @@ pointers:
 
 ## Changelog
 
+- 2026-11-13 (engine-sheet) — Task 8 part 1 on the builder's word ("I'm here to let you build"): `initiative-project` on a `complete` row hands it as complete, no stage line or next action, node renamed `initiative-closed` so no work move files; Soria Dominguez / Ramos role lines lose their stale project state. Tests 57 green; dry runs: Ramos clean of the open-project frame, Soria Dominguez 2 of 2 still write the vote ahead off her own page (G-EC51). Part 2 held on the tracker repair.
 - 2026-11-13 (engine-sheet) — Thu office wakes read: 18 of 21 wrote, 9 of 12 office notes on their own record; Acceptance 1, 3 met, 2 not met; Task 8 added, after the tracker repair.
 - 2026-11-10 (engine-sheet) — Builder approved the wakes on the measured price; auto packs on, Varek's pack active. His model of the generic events recorded verbatim; feed-named life lines made salient in the wake's life tail (test added).
 - 2026-11-10 (engine-sheet) — Builder corrected three things: Paulson is not excluded (carve-out removed); the engine does gate by flag and clock (cause section rewritten from the code — the Horn example was pre-gate history); the added calls are not approved without pricing (new wakes off, price measured and recorded under Open).

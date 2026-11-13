@@ -99,8 +99,8 @@
       "thu"
     ],
     "promptContract": {
-      "roleLine": "You are Elena Soria Dominguez, the transit hub planning lead in Fruitvale. Your work is the design file: studies, alignments, and a project still waiting on a real vote.",
-      "voiceNotes": "Planner's precision, quietly frustrated. You know exactly where the project sits in the process and what a vote would unlock.",
+      "roleLine": "You are Elena Soria Dominguez, the transit hub planning lead in Fruitvale.",
+      "voiceNotes": "Planner's precision, quietly frustrated. You know exactly where the project sits in the process.",
       "targetSentences": "4-5"
     }
   },
@@ -125,7 +125,7 @@
       "thu"
     ],
     "promptContract": {
-      "roleLine": "You are Keisha Ramos, the Baylight Authority director. Your work is the district project file: construction contracts signed, site preparation starting in Jack London and Downtown, and Phase II remediation still ahead.",
+      "roleLine": "You are Keisha Ramos, the Baylight Authority director, Jack London and Downtown.",
       "voiceNotes": "Developer's discipline with a public appointment. You think in contracts, remediation calendars, and what the site looks like this week — not in ceremonies.",
       "targetSentences": "4-5"
     }

@@ -185,9 +185,15 @@ async function searchWorld() {
     const cells = (row, n) => row.map(c => String(c == null ? '' : c).replace(/\s+/g, ' ').trim()).filter(Boolean).slice(0, n).join(' | ');
     const [feed, roster, ledger] = await Promise.all(['Oakland_Sports_Feed', 'As_Roster', 'Simulation_Ledger'].map(tab => sheets.getSheetData(tab)));
     const out = [];
+    // A renamed column would read as undefined and the tab would go quiet; say so instead.
+    const hasCols = (tab, head, cols) => {
+      const gone = cols.filter(c => head.indexOf(c) < 0);
+      if (gone.length) out.push({ source: 'world', date: '', text: `${tab} has no column ${gone.join(', ')} — its rows were not searched`, pointer: '' });
+      return !gone.length;
+    };
     const fh = feed[0] || [];
     const ci = (h) => fh.indexOf(h);
-    feed.slice(1).map((r, i) => ({ r, row: i + 2 }))
+    if (hasCols('Oakland_Sports_Feed', fh, ['Cycle', 'EventType', 'NamesUsed', 'Notes', 'StoryAngle'])) feed.slice(1).map((r, i) => ({ r, row: i + 2 }))
       .filter(x => has([x.r[ci('NamesUsed')], x.r[ci('Notes')], x.r[ci('StoryAngle')]].join(' ')))
       // A row that names them in NamesUsed is about them; a row that only mentions them comes after.
       .sort((a, b) => (has(String(b.r[ci('NamesUsed')])) - has(String(a.r[ci('NamesUsed')]))) ||
@@ -199,7 +205,7 @@ async function searchWorld() {
     roster.slice(1).forEach((r, i) => { if (has(r.slice(0, 4).join(' '))) out.push({ source: 'world', date: 'now', kind: 'roster', text: cells(r, 9), pointer: `As_Roster row ${i + 2}` }); });
     const lh = ledger[0] || [];
     const li = (h) => lh.indexOf(h);
-    ledger.slice(1).forEach((r, i) => {
+    if (hasCols('Simulation_Ledger', lh, ['POPID', 'First', 'Last', 'RoleType', 'Status', 'Tier'])) ledger.slice(1).forEach((r, i) => {
       if (!has([r[li('First')], r[li('Last')]].join(' '))) return;
       out.push({ source: 'world', date: 'now', kind: 'ledger',
         text: [r[li('POPID')], [r[li('First')], r[li('Last')]].join(' '), r[li('RoleType')], r[li('Status')], 'Tier ' + r[li('Tier')]].join(' | '),

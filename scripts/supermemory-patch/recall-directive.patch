@@ -24,7 +24,7 @@
  ${lines.join('\n')}
  
  When one of these shapes your answer, credit it naturally with the ◪ prefix (e.g. "◪ earlier you decided X"); if you name the source, say "from supermemory" — never "from memory". For deeper history, call the supermemory search_memory tool — it defaults to this project's container (${namespace}). Pass containerTag only to search a different space. Or launch the context-gatherer agent.
-@@ -164,22 +166,77 @@
+@@ -164,22 +166,78 @@
      }
  
      const namespace = getNamespace(cwd);
@@ -106,11 +106,12 @@
        .filter((r) => resultText(r))
        .filter(
 -        (r) => !Number.isFinite(r.similarity) || r.similarity >= MIN_SIMILARITY,
-+        (r) =>
-+          !Number.isFinite(r.similarity) ||
-+          (String(r.memory || '').startsWith('[rule] ')
-+            ? r.similarity >= MIN_SIMILARITY
-+            : recallScore(r) >= RECENT_FLOOR),
++        (r) => {
++          const isRule = String(r.memory || '').startsWith('[rule] ');
++          return isRule
++            ? !Number.isFinite(r.similarity) || r.similarity >= MIN_SIMILARITY
++            : Number.isFinite(r.similarity) && recallScore(r) >= RECENT_FLOOR;
++        },
        )
        .filter((r) => {
          const hash = hashText(resultText(r));

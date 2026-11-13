@@ -1,7 +1,7 @@
 ---
 title: Role Citizens Wake As Themselves Plan
 created: 2026-11-10
-updated: 2026-11-10
+updated: 2026-11-13
 type: plan
 tags: [pipeline, citizens, wakes, active]
 sources:
@@ -54,7 +54,8 @@ pointers:
 | 4 | Registry entry `founder-elias-varek` (`own-company`, Tue/Thu) | es | done — active |
 | 5 | Daily wake and interviews: `stationLine` replaces "ordinary person" for citizens of station; own feed rows reach both; an interviewed officeholder gets the office's last six positions; office statements no longer returned as "private reflections" | es | done |
 | 6 | Tests (`cron-work-wake.test.js` 50, `wakePerception.test.js` 201); dry runs through the real scripts for Varek, the Mayor, Vinnie Keane, and the daily wake on the Mayor | es | done |
-| 7 | Read the first live runs: Tue 2026-11-10 20:18 (club citizens, Varek), Thu 2026-11-12 20:18 (offices) — log `logs/cron-work-wake.log`, pages, Reflection_Intake rows | es | not started |
+| 7 | Read the first live runs: Tue 2026-11-10 20:18 (club citizens, Varek), Thu 2026-11-12 20:18 (offices) — log `logs/cron-work-wake.log`, pages, Reflection_Intake rows | es | done — Tue read 11-10, Thu read 11-13 (changelog); fixes owed, Task 8 |
+| 8 | Fix what the Thu read found inside this row's acceptance: a position written as an outcome (D8, D5, Okoro); a closed project woken as open (INIT-003, INIT-006) | es | not started — on the builder's word |
 
 ## Acceptance
 
@@ -62,10 +63,14 @@ pointers:
 2. After Thu 2026-11-12 20:18, the Mayor and the nine council seats each have a `work` doc for C115 built from their own record — proven by page read.
 3. Varek's page carries a `work` doc on his companies — proven by page read.
 
+**Read 2026-11-13 (C115):** 1 met (Tue read). 3 met (Tue doc; Thu doc `XzeKdkteNxxuYG6pZ1uyQC`, revenue $60.2M → $60.3M off his own ledger rows). 2 **not met**: all ten docs are on their own pages (`cp-POP-*-c115-work-thu`, cycle 115, daypart work, status done, no double append) and every seat writes on its own district's hoods as `lib/districtMap.js` holds them; D8 Chen and D5 Rivers write the Grand Lake vote as passed — their record holds a Yes position, INIT-009 is vote-scheduled for C116 (MilestoneNotes "no vote outcome claimed"), and D8's own datawake names the funding's status failed.
+
 ## Open
 
 - **A feed line the engine routed by kind, not by what happened.** C115: the feed's `roster-move` row is Vinnie Keane's retirement ("Keane is not leaving Oakland"); the engine's Sports-Moved line on him reads "spent the night on the phone working out where the family would land" — the trade pool. Engine output stands; recorded for the builder.
 - **Ledger value.** Civis Systems' `Growth_Rate` reads `516%` beside a revenue move of $60.2M → $60.3M; a third company `Varek Systems` (Tech, West Oakland, 45 people) names him as well — the Heritage generator's storefront. Both are engine output and are shown to him as they stand.
+- **A position written as an outcome (Thu read 2026-11-13).** D8 Chen "The vote on Grand Lake stabilization passed", "Eastlake baseline services came through too"; D5 Rivers "Grand Lake passed"; Deputy Mayor Okoro "Grand Lake got its $2.5 million". Their records: "votes YES", "Eastlake must receive", "Yes on Grand Lake", "Grand Lake gets $2.5 million with every milestone…". None of the three pages held an earlier reflection with the claim (every C114+ doc before the run is an office-position doc). The frame line added after the 11-10 dry run ("A vote, a result or a number that is not written there has not happened yet") did not hold on the auto model for 3 of 12. Task 8. **The INIT-009 row contradicts itself** (live beats C115): Status `failed`, Outcome `FAILED`, Stage `FAILED`, Notes "Cycle 113: Rejected." beside ImplementationPhase `vote-scheduled`, VoteCycle 116, MilestoneNotes C113 "Advanced to full council" → C115 "Recorded full-council decision scheduled". No commit or gap-log entry since 10-25 records a Grand Lake pass. Builder 2026-11-13: "It could be it did pass and I revert those when I was upset possibly" / "We will fix the damage o caused to the initiative tracker after this" — the tracker repair is the next job; Task 8 builds after it, on the repaired row.
+- **A closed project woken as open (Thu read).** INIT-003 and INIT-006 are `complete`, latest milestone "C115: closed" (closed by hand on the builder's word, gap log G-EC46). Soria Dominguez writes "one comment period away from a real vote"; Ramos "before the first foundation is poured". The pack hands them two words ("complete", "closed"); their own older page lines (schematics, soil, fences) carry the rest. Both shifts still filed a `work` move on the closed initiative (`moves_c115.jsonl`). Task 8.
 - **Unagented offices (21).** No agent, no office record, no pack. The EMS director and medical examiner have registry packs; the rest wake by lottery only.
 - **Cost — priced, then approved (builder 2026-11-10: "Adding 25-30 calls is not approved without pricing"; after the price: "Ok add your wakes").** Auto packs on by default (`--no-auto` / `WORK_WAKE_AUTO=0` holds them), Varek's pack active. At C115: 14 club citizens Tuesday, 12 offices Thursday, Varek twice — 28 wakes. Measured: a wake is ~700–1,500 prompt tokens and ~130–200 reply tokens on `deepseek/deepseek-v4-flash-0731` ($0.043 / $0.30 per million, OpenRouter list 2026-11-10) plus one classifier call on `anthropic/claude-haiku-5.5` (~1,000 in, ~150 out; $0.10 / $0.50 per million) — about $0.0003 a wake, under one cent a Cycle for ~30.
 

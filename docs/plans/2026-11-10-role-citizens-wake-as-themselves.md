@@ -55,7 +55,7 @@ pointers:
 | 5 | Daily wake and interviews: `stationLine` replaces "ordinary person" for citizens of station; own feed rows reach both; an interviewed officeholder gets the office's last six positions; office statements no longer returned as "private reflections" | es | done |
 | 6 | Tests (`cron-work-wake.test.js` 50, `wakePerception.test.js` 201); dry runs through the real scripts for Varek, the Mayor, Vinnie Keane, and the daily wake on the Mayor | es | done |
 | 7 | Read the first live runs: Tue 2026-11-10 20:18 (club citizens, Varek), Thu 2026-11-12 20:18 (offices) — log `logs/cron-work-wake.log`, pages, Reflection_Intake rows | es | done — Tue read 11-10, Thu read 11-13 (changelog); fixes owed, Task 8 |
-| 8 | Fix what the Thu read found inside this row's acceptance: a position written as an outcome (D8, D5, Okoro); a closed project woken as open (INIT-003, INIT-006) | es | half built 11-13 — a finished project is handed as finished and files no work move; position-as-outcome waits on the tracker repair (INIT-009 contradicts itself, as do INIT-008/010); directors still write their old weeks off their own page (G-EC51) |
+| 8 | Fix what the Thu read found inside this row's acceptance: a position written as an outcome (D8, D5, Okoro); a closed project woken as open (INIT-003, INIT-006) | es | reverted 11-13 — the tracker rows it read were hand-edited; waits on the tracker repair |
 
 ## Acceptance
 
@@ -84,6 +84,7 @@ pointers:
 
 ## Changelog
 
+- 2026-11-13 (engine-sheet) — Task 8 part 1 reverted, same day. Builder: "Tracker was hand edited and wrong" / "Nothing finished" / "stop telling Cron what to say" / "Their memory is memory not a task, their job is the task". The node read INIT-003/006 `complete`, a hand close (G-EC46; its "builder's word" is a session note, unverified). The tracker dumps show the hand edits: 11-01 INIT-008–013 set rejected (before-values `output/engine-sheet/2026-11-01-init-008-013-before.json`); INIT-010 had passed 6-3 at C112 in the 10-18 dump. The office-pack frame clause ("A vote, a result or a number … has not happened yet") removed. Registry role-line trims kept. Tests 53 green.
 - 2026-11-13 (engine-sheet) — Task 8 part 1 on the builder's word ("I'm here to let you build"): `initiative-project` on a `complete` row hands it as complete, no stage line or next action, node renamed `initiative-closed` so no work move files; Soria Dominguez / Ramos role lines lose their stale project state. Tests 57 green; dry runs: Ramos clean of the open-project frame, Soria Dominguez 2 of 2 still write the vote ahead off her own page (G-EC51). Part 2 held on the tracker repair.
 - 2026-11-13 (engine-sheet) — Thu office wakes read: 18 of 21 wrote, 9 of 12 office notes on their own record; Acceptance 1, 3 met, 2 not met; Task 8 added, after the tracker repair.
 - 2026-11-10 (engine-sheet) — Builder approved the wakes on the measured price; auto packs on, Varek's pack active. His model of the generic events recorded verbatim; feed-named life lines made salient in the wake's life tail (test added).

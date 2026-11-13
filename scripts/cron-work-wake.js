@@ -178,18 +178,6 @@ const NODE_BUILDERS = {
     if (!rows) return null;
     const row = rows.find((r) => String(r.InitiativeID || '') === String(pkg.initiative || ''));
     if (!row) return null;
-    // pipeline.110 Task 8 — a finished project is handed as finished (C115: INIT-003/006 "complete", latest
-    // milestone "C115: closed"; both directors wrote of fences and a vote ahead). No stage line, no next action,
-    // and the node is named 'initiative-closed' so workMoveLine files no work move on it.
-    if (String(row.ImplementationPhase || '').toLowerCase() === 'complete') {
-      const done = [
-        `Your project: ${row.Name} (${row.InitiativeID}).`,
-        `It is complete${row.Outcome ? ' (' + String(row.Outcome).toLowerCase() + ')' : ''}; the city's record has nothing left on the books for it.`,
-      ];
-      const last = String(row.MilestoneNotes || '').split('\n').map(l => l.trim()).filter(Boolean).pop();
-      if (last) done.push('Latest milestone: ' + cap(last, 180));
-      return { node: 'initiative-closed', text: cap(done.join('\n'), 600) };
-    }
     const lines = [
       `Your project: ${row.Name} (${row.InitiativeID}).`,
       `It is in ${row.ImplementationPhase || '—'}${row.Stage ? ', stage ' + row.Stage : ''} (status ${row.Status || '—'}).`,
@@ -215,9 +203,7 @@ function buildWorkPack(pkg, cycle, beatsDir, namesPath) {
     if (!builder) continue;
     let block = null;
     try { block = builder(pkg, cycle, beatsDir); } catch (e) { block = null; }
-    // a builder may rename the node it produced ({ node, text }) — initiative-project on a finished project
-    if (block && typeof block === 'object') { blocks.push(block.text); nodes.push(block.node); }
-    else if (block) { blocks.push(block); nodes.push(node); }
+    if (block) { blocks.push(block); nodes.push(node); }
   }
   // pipeline.110 — whoever the feed names this Cycle knows it at work, player or not (a chief at a club's
   // community event, an owner in a franchise story). The player node above already carries it.
@@ -339,8 +325,7 @@ function autoPackages(cycle, packages, opts) {
       promptContract: {
         roleLine: `You are ${of.holder}, ${of.title}${where}.`,
         voiceNotes: voiceNotesFor(popid, of.agentDir, row, o.agentsDir),
-        // dry run 2026-11-10: a seat's "Yes on Grand Lake" came back as "the vote got through" — a position is not an outcome
-        frame: PRIVATE_FRAME + ' What is listed below is what you said and filed. A vote, a result or a number that is not written there has not happened yet.',
+        frame: PRIVATE_FRAME,
         userFrame: 'The week\'s work is on the record now and the building has gone quiet',
         targetSentences: '4-6',
       },

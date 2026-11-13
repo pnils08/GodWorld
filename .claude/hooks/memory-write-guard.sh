@@ -15,7 +15,9 @@
 ROOT="/root/GodWorld"
 UNLOCK="$ROOT/.claude/.memory-write-unlock"
 UNLOCK_MIN=60
-MEM_RE='(^|[^A-Za-z0-9_])(/root/\.claude/projects/-root-GodWorld/memory/|/root/GodWorld/\.remember/|\.remember/|/memory/MEMORY\.md|memory/[A-Za-z0-9_.-]+\.md)'
+# 2026-11-13: `cd …/memory && cat >> file.md` passed — the folder named with no trailing slash, the file by bare
+# name. The folder name now matches with or without the slash, and a shell already in that folder is checked too.
+MEM_RE='(^|[^A-Za-z0-9_])(/root/\.claude/projects/-root-GodWorld/memory([^A-Za-z0-9_-]|$)|-root-GodWorld/memory([^A-Za-z0-9_-]|$)|/root/GodWorld/\.remember([^A-Za-z0-9_-]|$)|\.remember/|/memory/MEMORY\.md|memory/[A-Za-z0-9_.-]+\.md|MEMORY\.md)'
 MCP_RE='^mcp__(plugin_supermemory_supermemory|claude_ai_Mara|supermemory|claude_ai_supermemory)__(add_memory|guided-save|upload-file|forget_memory)$'
 
 payload="$(cat)"
@@ -64,7 +66,8 @@ case "$tool" in
     # supermemory saves are allowed (builder: the block is on memory .md files only)
     # a write-shaped command naming a memory path (redirect, tee, cp/mv/rm/sed -i/touch/truncate, or an
     # interpreter heredoc that can open the file). Reads (cat, grep, ls, head, sed -n) stay free.
-    if printf '%s' "$cmd" | grep -Eq "$MEM_RE"; then
+    incwd=0; case "$cwd" in /root/.claude/projects/-root-GodWorld/memory*|"$ROOT"/.remember*) incwd=1 ;; esac
+    if [ "$incwd" = 1 ] || printf '%s' "$cmd" | grep -Eq "$MEM_RE"; then
       if printf '%s' "$cmd" | grep -Eq '(>|>>|\btee\b|\bcp\b|\bmv\b|\brm\b|\bsed[[:space:]]+-[a-zA-Z]*i|\btouch\b|\btruncate\b|\binstall\b|\bdd\b|python3?[[:space:]]+-|python3?[[:space:]]*<<|node[[:space:]]+-e|node[[:space:]]*<<|perl[[:space:]]+-|ruby[[:space:]]+-|\bopen\(|writeFileSync|appendFileSync)'; then
         unlocked && exit 0
         block "this command writes to a memory path."

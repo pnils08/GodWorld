@@ -261,8 +261,6 @@ const AUTO_MODEL = { provider: 'openrouter', model: 'deepseek/deepseek-v4-flash-
 // Auto packs: priced (~$0.0003 a wake, plan §Open) and approved (builder 2026-11-10: "Ok add your wakes") after
 // "Adding 25-30 calls is not approved without pricing". --no-auto or WORK_WAKE_AUTO=0 holds them back for a run.
 const AUTO_ON = !ARGV.includes('--no-auto') && process.env.WORK_WAKE_AUTO !== '0';
-const PRIVATE_FRAME = 'This is private — nobody reads it, and you are not performing the job here. You are not a writer.';
-
 function ledgerRows(file) {
   try {
     return fs.readFileSync(file || LEDGER_SNAPSHOT, 'utf8').split('\n').filter(Boolean).map((l) => { try { return JSON.parse(l); } catch (e) { return null; } }).filter(Boolean);
@@ -325,9 +323,6 @@ function autoPackages(cycle, packages, opts) {
       promptContract: {
         roleLine: `You are ${of.holder}, ${of.title}${where}.`,
         voiceNotes: voiceNotesFor(popid, of.agentDir, row, o.agentsDir),
-        frame: PRIVATE_FRAME,
-        userFrame: 'The week\'s work is on the record now and the building has gone quiet',
-        targetSentences: '4-6',
       },
     });
   });
@@ -345,9 +340,6 @@ function autoPackages(cycle, packages, opts) {
       promptContract: {
         roleLine: `You are ${r.Name} — ${String(r.RoleType || 'a ballplayer').trim()}.`,
         voiceNotes: voiceNotesFor(popid, null, r, o.agentsDir),
-        frame: PRIVATE_FRAME,
-        userFrame: 'The week is in the books and you are alone with it',
-        targetSentences: '4-6',
       },
     });
   });
@@ -427,14 +419,13 @@ function selectDue(packages, cycle, state, opts) {
 
 // ---- voice -----------------------------------------------------------------------------------
 function buildWorkPrompts(pkg, pack, pageMemory) {
+  // builder 2026-11-13: "If you're directing a agent what to say it's broken" / "Their memory is memory not a task,
+  // their job is the task". Who they are and their memory go in the system turn; their work is the user turn. No frame,
+  // no sentence count, no instruction on how to think or what to leave out.
   const pc = pkg.promptContract;
-  const memory = pageMemory ? `\n\n---\n\nWhat's been on your mind lately, from your own private reflections:\n${pageMemory}` : '';
-  // pipeline.110 — "an ordinary person at work" is right for a clerk and wrong for a mayor: a pack may carry its own frame
-  const frame = pc.frame || 'You are an ordinary person at work, not a writer.';
-  const system = `${pc.roleLine} ${pack.identity} ${frame} ${pc.voiceNotes}${memory}\n\nReal things from your work recently:\n${pack.blocks.join('\n\n')}`;
-  // pipeline.110 — the thought stays on what is in front of him: a wake that invents a game, a number or a name is
-  // the faked life the builder ruled out (2026-11-10: "If they are written to fake through it then it won't be interesting").
-  const user = `${pc.userFrame || 'The workday is done; you\'re sitting with it'} before the evening takes over. In ${pc.targetSentences || '4-5'} sentences, think on the page the way you actually would — private, honest, first person. Stay with what actually happened above: no game, number, name or event that is not in front of you. Don't narrate events like a story; just sit with it.`;
+  const memory = pageMemory ? `\n\nYour memory:\n${pageMemory}` : '';
+  const system = `${pc.roleLine} ${pack.identity} ${pc.voiceNotes}${memory}`;
+  const user = pack.blocks.join('\n\n');
   return { system, user };
 }
 

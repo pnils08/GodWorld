@@ -127,7 +127,9 @@ console.log('=== auto packs (pipeline.110) ===');
   var m = auto['auto-office-civic-office-test'];
   ok(m.dataNodes.indexOf('office-week') === 0 && m.dutyDays.join() === 'thu' && /careful builder/.test(m.promptContract.voiceNotes) && /Moves fast/.test(m.promptContract.voiceNotes) && !/public line|POP-99910/.test(m.promptContract.voiceNotes),
     'office pack: its own record, Thursday, who she is and how she decides from her own file');
-  ok(/not performing the job/.test(m.promptContract.frame) && !/ordinary person/.test(wake.buildWorkPrompts(m, { identity: 'x.', blocks: ['b'] }, '').system), 'office pack: private frame, never "an ordinary person at work"');
+  var pr = wake.buildWorkPrompts(m, { identity: 'x.', blocks: ['the work'] }, 'an old line');
+  ok(!m.promptContract.frame && !m.promptContract.userFrame && !m.promptContract.targetSentences, 'office pack: no frame, no sentence count');
+  ok(pr.user === 'the work' && /Your memory:\nan old line$/.test(pr.system) && !/the work/.test(pr.system), 'prompt: who they are + memory as memory; the work is the user turn, nothing added');
   ok(wake.NODE_BUILDERS['office-week'](Object.assign({}, m, { _officeWeek: ['stated: one', 'datawake: two'] })).indexOf('- datawake: two') > 0 && wake.NODE_BUILDERS['office-week'](m) === null, 'office-week: the prefetched record, or nothing');
   var due = wake.selectAutoDue(auto, 107, { wokenCycle: {} }, 'tue').map(function (p) { return p.key; }).sort().join();
   ok(due === 'auto-player-POP-00527,auto-player-POP-99911,auto-player-POP-99912', 'auto due Tuesday: the players; the office waits for Thursday', due);

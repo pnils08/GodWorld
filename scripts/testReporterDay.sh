@@ -1,6 +1,21 @@
 #!/usr/bin/env bash
-# Run one saved fanout assignment through the real angle, report, and write stages.
-# Outputs, including the proposed cron patch's guarded side effects, stay in one shell.
+# testReporterDay.sh — run ONE reporter's whole day (angle -> report -> write) in a scratch folder.
+#
+# Builder 2026-11-14: "Go" (pipeline.111, the build that is owed, step 1). codex-rb wrote the runner;
+# research-build added the variants. The seat's saved fanout assignment is handed to each real
+# cron-desk-run.js stage with --no-gate; everything lands in output/test-shell/<stamp>/. No sheet row,
+# no page line, no interview recorded on a citizen. Run it under the write guard (NODE_OPTIONS is
+# passed through untouched).
+#
+# Usage:
+#   scripts/testReporterDay.sh <desk> <persona> [cycle] [today|free-rows|free-week]
+#   today      what the scheduled day does: the assignment, the approach, today's writer prompt
+#   free-rows  nothing assigned: the seat sees its own beat record and who it can call, picks or passes;
+#              the light writer prompt
+#   free-week  nothing assigned: the seat sees the city's week and who it can call, picks or passes;
+#              the light writer prompt
+# The free variants exist only here: cron-desk-run.js reads GODWORLD_TEST_ANGLE only with the test
+# folder set. A boot-file swap, when wanted, comes from the caller's own preload (BOOT_SWAP).
 set -euo pipefail
 
 ROOT=/root/GodWorld
@@ -8,6 +23,8 @@ LIVE="$ROOT/output/cron-compare"
 DESK="${1:?desk (civic, culture, sports, business, …)}"
 PERSONA="${2:?persona slug (for example lila-mezran)}"
 REQUESTED_CYCLE="${3:-}"
+VARIANT="${4:-today}"
+case "$VARIANT" in today|free-rows|free-week) ;; *) echo "variant must be today, free-rows or free-week"; exit 2 ;; esac
 [[ "$DESK" =~ ^[a-z0-9][a-z0-9-]*$ ]] || { echo "invalid desk slug: $DESK"; exit 2; }
 [[ "$PERSONA" =~ ^[a-z0-9][a-z0-9-]{0,23}$ ]] || { echo "invalid persona slug: $PERSONA"; exit 2; }
 
@@ -36,7 +53,7 @@ FANOUT_FILE="$(/usr/bin/node -e 'process.stdout.write(JSON.parse(process.argv[1]
 DATE="$(/usr/bin/node -e 'process.stdout.write(JSON.parse(process.argv[1]).date)' "$ASSIGNMENT_SOURCE")"
 CYCLE="$(/usr/bin/node -e 'process.stdout.write(String(JSON.parse(process.argv[1]).cycle))' "$ASSIGNMENT_SOURCE")"
 CONTRACT="$(/usr/bin/node -e 'process.stdout.write(String(JSON.parse(process.argv[1]).assignment.packetContract || ""))' "$ASSIGNMENT_SOURCE")"
-STAMP="$(date +%Y%m%d-%H%M%S)-${PERSONA}-day-$$"
+STAMP="$(date +%Y%m%d-%H%M%S)-${PERSONA}-day-${VARIANT}-$$"
 SHELL_DIR="$ROOT/output/test-shell/$STAMP"
 TAG="day-$(date +%Y%m%d%H%M%S)-$$"
 mkdir -p "$SHELL_DIR/samples" "$SHELL_DIR/staged" "$SHELL_DIR/flagged"
@@ -51,15 +68,18 @@ const data = JSON.parse(process.argv[2]);
 fs.writeFileSync(process.argv[3], JSON.stringify(data.assignment, null, 2) + '\n');
 NODE
 
-echo "test shell: $SHELL_DIR (fanout $DATE, cycle $CYCLE, $DESK/$PERSONA)"
+echo "test shell: $SHELL_DIR (fanout $DATE, cycle $CYCLE, $DESK/$PERSONA, $VARIANT)"
 cd "$ROOT"
 PACKET_STEM=""
 [ -z "$CONTRACT" ] || PACKET_STEM="packet-${CONTRACT}_"
 STEM="${DESK}_c${CYCLE}_${PERSONA}_${PACKET_STEM}benchmark-${TAG}_"
 run_stage() {
   local stage="$1" artifact="$2" log="$SHELL_DIR/$1.log" status artifact_missing=0
+  local angle_mode="" prompt_mode=""
+  if [ "$VARIANT" != today ]; then angle_mode="$VARIANT"; prompt_mode=light; fi
   set +e
-  GODWORLD_TEST_COMPARE_DIR="$SHELL_DIR" /usr/bin/node scripts/cron-desk-run.js \
+  GODWORLD_TEST_COMPARE_DIR="$SHELL_DIR" GODWORLD_TEST_ANGLE="$angle_mode" GODWORLD_TEST_PROMPT="$prompt_mode" \
+    /usr/bin/node scripts/cron-desk-run.js \
     --stage="$stage" --desk "$DESK" --persona "$PERSONA" --cycle "$CYCLE" \
     --evaluate-package "$PERSONA" --evaluation-tag "$TAG" \
     --test-assignment "$SHELL_DIR/assignment.json" --no-gate >"$log" 2>&1
@@ -80,7 +100,12 @@ run_stage() {
     tail -20 "$log"
     exit 1
   fi
-  echo "$stage stage: PASS ($log)"
+  echo "$stage stage: ran ($log)"
+  if grep -Fq "$PERSONA passes the day" "$log"; then
+    echo "----- $PERSONA passes the day -----"
+    grep -F "$PERSONA passes the day" "$log" | tail -1
+    exit 0
+  fi
 }
 
 run_stage angle "${STEM}angle.json"

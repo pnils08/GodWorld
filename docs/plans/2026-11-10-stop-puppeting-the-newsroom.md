@@ -201,3 +201,24 @@ codex-rb delivered `scripts/testReporterDay.sh`, an unapplied patch and a contai
 | The writer's `memory_note` | `BYLINE_POPID` is null under the shell (`cron-desk-writer.js:274`) | no change; the guard log is the proof |
 
 Tests: the eleven test files that load `cron-desk-run.js` pass; the script loads; `--test-assignment` outside the shell exits on its refusal. Not run end to end: no model call from this terminal until the guard is in the repo. A re-run at the week's end is not Monday: the wire and the seat's own page already hold its C115 filing.
+
+## 2026-11-14 — the nothing-assigned morning mode, test shell only (built, not run)
+
+**Two corrections to the morning-stage table above.**
+- The "chase replaces the assignment" rejection is loose (one shared word of five letters passes) and fired 0 times in the 208 morning wakes of the kept fan-out logs (`logs/newsroom-fanout.log*`). Seats stay on the assignment because they are told to and because rows are what they are shown; the checker is not what holds them.
+- The evening stage sends direction of its own (`livedExperiencePacketV2.js` `buildWritePacket`): goal "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede." (`:279`); the slot `P_ACCOUNTABILITY` "Ask who should answer" (`:366`); "Do not brief the record. Open on a person or place living the condition." (`:397`). The morning asks for the mismatch; the evening says not to brief the record.
+
+**Variants** — `scripts/testReporterDay.sh <desk> <persona> [cycle] [today|free-rows|free-week]`:
+
+| Variant | Morning packet | Who is interviewed | Evening prompt |
+|---|---|---|---|
+| `today` | as scheduled | the seat's targets, then the rest of its pool, up to 4 | live |
+| `free-rows` | goal "Decide what, if anything, you want to write this cycle"; no assignment, approach, hook, creative brief or grade line; the plan form carries no "what does not line up" and takes `pass`; facts = the seat's own beat record | only whom the seat named | light |
+| `free-week` | the same; facts = the city's week as the daily show carries it (`worldRecordSources` over the stripped world summary) | only whom the seat named | light |
+
+- The seat's pick becomes the story the midday and evening stages carry ("W1 owns the assignment", `runReport`); a pass ends its day.
+- Code, all behind the test folder: `buildFreeAnglePacket` and the free branch of `validateAngleOutput` (`livedExperiencePacket.js`); `TEST_ANGLE`, `cityWeekLines` and the pick-to-story step (`cron-desk-run.js`). A scheduled run cannot reach any of it.
+- Tests: `livedPacketFreeAngle.test.js` (synthetic data); the fifteen related test files pass.
+- Trevor, C115, built offline from the saved morning inputs: `today` rebuilds the saved packet fact for fact (28); `free-rows` is those facts minus the two lines that made one row the story (26); `free-week` is 198 lines of the city's week (4,756 words) plus the cycle line. The same 12 people in all three.
+- Boot for the free variants: `IDENTITY.md` swapped in memory for the sheet line and a background cut from his voice file's §Essence; `LENS.md` and `RULES.md` absent (engine-sheet's Run 2 method, its swap preload).
+- Limits to read the result with: a week-end re-run is not Monday (above); with 199 facts the planner may answer in fact ids instead of the plan form (seen at pipeline.86; two draws); the free variants change the boot, the morning packet and the evening prompt together, so `today` against `free-rows` shows the whole setup's effect on the same rows, and `free-rows` against `free-week` shows what the rows themselves do.

@@ -354,7 +354,81 @@ const PLANNING_SKIP_FACT = /^(?:CASINO|CITY MONEY|DEBT):/;
 // prose, never a source of approved numbers (Y3C8 would approve a stray "3" and "8").
 const AMBIENT_FACT = /^(?:Calendar|Current cycle):/i;
 
-function buildAnglePacket({ cycle, desk, reporter, story, approach, slice, lane, candidates: modeCandidates }) {
+// Test shell only (pipeline.111; builder 2026-11-10: "they can write about whatever they want, they can see
+// what's active", "let them decide if what is given is what they want to cover", "a cron may pass"). The
+// seat is handed no assignment, approach or hook: what is on the record this cycle and who it can call. It
+// answers with its own pick or a pass. cron-desk-run.js asks for this packet only with the test-shell folder
+// set (GODWORLD_TEST_ANGLE), so no scheduled wake can receive it.
+//   free.rows — the seat's own beat record, the same lines an assigned wake carries, with no line made the story
+//   free.week — [{ text, src }] lines of the city's week
+function buildFreeAnglePacket({ cycle, desk, reporter, story, slice, candidates: modeCandidates, free }) {
+  const known = [];
+  const push = (text, src, max) => {
+    const t = clean(text, max);
+    const s = clean(src, 300);
+    if (t && s && !known.some(claim => claim.text === t && claim.src === s)) known.push({ t: 'FACT', text: t, src: s });
+  };
+  if (free.rows) {
+    const src = (story && story.ref) || 'beat record';
+    const prewrite = (slice && (slice.prewrite || (slice.packetSeat && slice.packetSeat.prewrite))) || {};
+    const prewriteEvidence = prewrite.evidence || [];
+    for (const fact of (prewrite.anchorFacts || []).concat(prewrite.presentFacts || [])) {
+      const text = clean(fact, 500);
+      if (!text || PLANNING_SKIP_FACT.test(text)) continue;
+      if (/\b(?:do not|never)\s+(?:invent|lead|print|publish|assert|name|use)\b/i.test(text)) continue;
+      const evidence = prewriteEvidence.find(row => row && clean(row.text, 500) === text);
+      push(text, (evidence && evidence.src) || src, 500);
+    }
+  }
+  for (const line of free.week || []) push(line && line.text, line && line.src, 2000);
+  if (!known.length) throw new Error('free W1 Packet has nothing on the record to show the seat');
+  const candidates = (modeCandidates === undefined ? (story ? candidateRows(story, slice) : []) : modeCandidates)
+    .filter(candidate => isLedgerPop(candidate.pop) && !isLedgerFillCandidate(candidate))
+    .slice(0, (slice && slice.prewrite && slice.prewrite.peopleCap) || 12);
+  const hasTargetCandidates = candidates.length > 0;
+  return assertBase({
+    v: VERSION,
+    wake: 'W1',
+    actor: { id: reporter && reporter.popid || null, name: reporter && reporter.name || null,
+      role: 'desk reporter', desk },
+    task: { goal: 'Decide what, if anything, you want to write this cycle' },
+    signal: { kind: 'own-pick', hood: null, score: null, src: 'the record of C' + clean(cycle) },
+    exposure: { basis: ['own-pick'],
+      candidates: candidates.map(c => ({ pop: c.pop, name: c.name, profile: clean(c.profile, 300),
+        why: c.why, role: c.role, hood: c.hood,
+        mode: c.mode, sourceKind: c.sourceKind, evidence: c.evidence })) },
+    known,
+    limits: {
+      assert: ['FACT'],
+      reason: ['INTERPRETATION', 'INTENTION', 'LEAD'],
+      never: ['new named person', 'new institution', 'new event', 'new date', 'new number'],
+      rule: 'A reporter plan may form a hunch, but a hunch is not a fact.',
+    },
+    output: {
+      format: 'json-only',
+      schema: {
+        pass: 'true when nothing here is a piece you want to write this cycle; then give only why',
+        chase: 'string — what you want to write this cycle and how you will go after it, in your own voice. Not JSON.',
+        focus: 'string', why: 'string', checks: ['string'],
+        targets: hasTargetCandidates
+          ? [{ pop: 'supplied non-empty candidate pop', question: 'string', basis: 'string' }]
+          : [],
+        interpretation: 'string', unverifiedLead: ['string'] },
+      rule: (hasTargetCandidates
+        ? 'A target is someone you want to hear from; each must use a supplied non-empty candidate pop. Do not invent people or identifiers. '
+        : 'No one to call was supplied. Return targets as an empty array; do not invent a person or identifier. ') +
+        'chase is the human story-doc slot. Do not serialize this plan object into chase.',
+    },
+  }, 'W1');
+}
+
+function isFreeAngleInput(input) {
+  const basis = input && input.exposure && input.exposure.basis;
+  return Array.isArray(basis) && basis.includes('own-pick');
+}
+
+function buildAnglePacket({ cycle, desk, reporter, story, approach, slice, lane, candidates: modeCandidates, free }) {
+  if (free) return buildFreeAnglePacket({ cycle, desk, reporter, story, slice, candidates: modeCandidates, free });
   if (!story) throw new Error('W1 Packet requires an assigned story');
   const src = story.ref || 'assignment';
   const known = [
@@ -566,6 +640,14 @@ function validateAngleOutput(value, input) {
   }
   const out = raw && typeof raw === 'object' && !Array.isArray(raw) ? Object.assign({}, raw) : raw;
   const errs = [];
+  // Test shell only (buildFreeAnglePacket): the seat chose for itself, so there is no assignment a plan can
+  // replace, and a pass with its reason is a whole answer.
+  const free = isFreeAngleInput(input);
+  if (free && out && typeof out === 'object' && (out.pass === true || out.pass === 'true')) {
+    if (!clean(out.why)) throw new Error('invalid W1 output: a pass needs its reason in why');
+    return { pass: true, why: clean(out.why, 500), chase: '', focus: '', checks: [], targets: [],
+      interpretation: '', unverifiedLead: [] };
+  }
   // A lead filed as one string, or left null when there is none, is the same
   // plan in a different shape (Nia Rook C109, Sharon Okafor C108 each lost the
   // day to it) — the W2 contract already accepts "array or one string".
@@ -579,7 +661,7 @@ function validateAngleOutput(value, input) {
   if (!clean(out && out.chase)) errs.push('missing chase');
   else if (chaseIsJsonShaped(out.chase)) errs.push('chase is JSON-shaped');
   else if (String(out.chase).trim().length < 40) errs.push('chase too short');
-  else if (chaseReplacesAssignment(out.chase, input)) errs.push('chase replaces the assignment');
+  else if (!free && chaseReplacesAssignment(out.chase, input)) errs.push('chase replaces the assignment');
   if (!Array.isArray(out && out.checks)) errs.push('checks must be an array');
   if (!Array.isArray(out && out.targets)) errs.push('targets must be an array');
   const allowed = new Set(((input && input.exposure && input.exposure.candidates) || []).map(c => c.pop).filter(Boolean));

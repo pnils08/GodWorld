@@ -43,6 +43,13 @@ const ROOT = path.join(__dirname, '..');
 // the sheet or the reporter's page.
 const TEST_SHELL = process.env.GODWORLD_TEST_COMPARE_DIR || null;
 const COMPARE = TEST_SHELL || path.join(ROOT, 'output', 'cron-compare');
+// Test shell only (pipeline.111): GODWORLD_TEST_ANGLE=free-rows|free-week runs the morning stage with nothing
+// assigned (livedExperiencePacket buildFreeAnglePacket). Read only with the test folder set, so a scheduled
+// run can never take it.
+const TEST_ANGLE = TEST_SHELL ? (process.env.GODWORLD_TEST_ANGLE || null) : null;
+if (TEST_ANGLE && !['free-rows', 'free-week'].includes(TEST_ANGLE)) {
+  throw new Error('GODWORLD_TEST_ANGLE must be free-rows or free-week');
+}
 const PUBLISHED = path.join(COMPARE, 'published');
 const FLAGGED = path.join(COMPARE, 'flagged');
 const STAGED = path.join(COMPARE, 'staged');   // Phase 2 probation wall (S332): M–F articles stage here, NOT canon-ingested
@@ -534,7 +541,7 @@ function collectQuoteAsks(lane, persona, story, angleArt) {
         })
       : [];
     // pipeline.89: Ines's pool is the whole roster; only the citizens her angle names are asked.
-    const plannedPops = isVoicesSeat()
+    const plannedPops = (isVoicesSeat() || (angleArt && angleArt.freeAngle))   // a free pick asks only whom it named
       ? [...new Set(targetPops)]
       : [...new Set(targetPops.concat([...packetCandidates.keys()]))];
     for (const pop of plannedPops) {
@@ -1566,6 +1573,39 @@ async function refreshCitizenPages(cycle) {
   } catch (e) { log('[pages] pulse skipped: ' + e.message); }
 }
 
+// Test shell only (free-week): the city's week as the daily show carries it — the world summary's sections with
+// the audit, approval and initiative blocks already stripped (notebooklmDailyNews.js) — one line a claim, a
+// table row spelled out against its header.
+function cityWeekLines(cycle) {
+  const news = require('./notebooklmDailyNews');
+  const file = path.join(ROOT, 'output', 'world_summary_c' + cycle + '.md');
+  const sections = news.worldRecordSources(news.stripDailyNoise(fs.readFileSync(file, 'utf8')), cycle);
+  const cells = row => row.replace(/^\|/, '').replace(/\|$/, '').split('|').map(c => c.trim());
+  const lines = [];
+  for (const section of sections) {
+    const name = String(section.label || '').replace(/^Cycle \d+ opens — /, '');
+    const body = String(section.text || '').split('\n').map(l => l.trim());
+    let sub = '';
+    let header = null;
+    for (let i = 0; i < body.length; i++) {
+      const line = body[i];
+      if (!line || /^# /.test(line)) { header = null; continue; }
+      if (/^#{2,4} /.test(line)) { sub = line.replace(/^#+\s*/, ''); header = null; continue; }
+      const src = 'world summary C' + cycle + ' — ' + name + (sub ? ' / ' + sub : '');
+      if (line.startsWith('|')) {
+        if (/^\|[\s:|-]+\|$/.test(line)) continue;                       // the rule under a table header
+        if (!header && /^\|[\s:|-]+\|$/.test(body[i + 1] || '')) { header = cells(line); continue; }
+        const row = cells(line);
+        lines.push({ text: header ? row.map((c, k) => (header[k] || '') + ': ' + c).join('; ') : row.join(' | '), src });
+        continue;
+      }
+      header = null;
+      lines.push({ text: line.replace(/^[-*]\s+/, ''), src });
+    }
+  }
+  return lines;
+}
+
 // pipeline.73 daily record seats (Lives, Voices): nothing new on the record today → the seat sits the day
 // out, never the generic desk packet (C112 Friday: Tamsin wrote 45 words on "one world event" and it reached
 // canon). Each stage checks for itself, so a --persona weekend run needs no angle artifact to skip cleanly.
@@ -2116,10 +2156,12 @@ async function runAngle(assign) {
         cycle, desk, reporter: asker, story, approach,
         slice: typedSlice, lane,
         candidates: sourcingPool ? sourcingPool.candidates : [],
+        ...(TEST_ANGLE ? { free: TEST_ANGLE === 'free-week' ? { week: cityWeekLines(cycle) } : { rows: true } } : {}),
       });
       ask = livedPacket.prompt(inputPacket);
-      // pipeline.77 — the reward-loop group reads its own last grade before planning.
-      if (ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.rewardLoop && asker && asker.popid) {
+      // pipeline.77 — the reward-loop group reads its own last grade before planning. A test-shell seat with
+      // nothing assigned is told nothing about how to plan.
+      if (!TEST_ANGLE && ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.rewardLoop && asker && asker.popid) {
         try {
           const { recentPage_ } = require(path.join(ROOT, 'lib', 'citizenPage'));
           const page = await recentPage_(asker.popid, 12);
@@ -2185,10 +2227,11 @@ async function runAngle(assign) {
         if (plan && /\bgraded:?\s*\d\s*\/\s*[34]\b/i.test(JSON.stringify(plan))) {   // out of 3 from 2026-11-11 (codex F5)
           throw new Error('W1 plan echoes the desk grade — resampling');
         }
+        const passed = !!(plan && plan.pass);   // test shell, nothing assigned: the seat's reason is its whole answer
         angleRead = { name: r.name, popid: r.popId,
-          text: PACKET_ACTIVE ? livedPacket.reporterChaseText(plan) : r.text,
+          text: passed ? plan.why : (PACKET_ACTIVE ? livedPacket.reporterChaseText(plan) : r.text),
           ...(plan ? { plan } : {}) };
-        if (PACKET_ACTIVE && livedPacket.chaseIsJsonShaped(angleRead.text)) {
+        if (PACKET_ACTIVE && !passed && livedPacket.chaseIsJsonShaped(angleRead.text)) {
           throw new Error('W1 chase is JSON-shaped — refusing to write story §2');
         }
         log('angle read: "' + String(r.text).replace(/\s+/g, ' ').slice(0, 140) + '..."' +
@@ -2216,6 +2259,20 @@ async function runAngle(assign) {
   // Packet is the evidence boundary (ADR-0017, zero live research tools at W3). It runs on the
   // non-persona desk wake — benchmarks and evaluations (business C110, 2026-10-06/07). Putting it
   // on persona seats rides the builder's tools decision (pipeline.75 A/B), not a code call.
+  // Test shell, nothing assigned: the seat's own pick is the story the report and write stages carry
+  // ("W1 owns the assignment"); a pass leaves no story and ends the seat's day.
+  const ownPlan = TEST_ANGLE && angleRead && angleRead.plan;
+  if (ownPlan && ownPlan.pass) {
+    story = null;
+    approach = null;
+    console.log('[angle] ' + personaSlug + ' passes the day — ' + ownPlan.why);
+  } else if (ownPlan) {
+    const byPop = new Map((sourcingPool && sourcingPool.candidates || []).map(c => [c.pop, c]));
+    const pops = ownPlan.targets.map(t => t.pop);
+    story = { kind: 'own-pick', ref: 'own pick, C' + cycle, label: ownPlan.focus, angle: ownPlan.focus, hood: null,
+      citizens: pops.map(pop => ((byPop.get(pop) && byPop.get(pop).name) || pop) + ' (' + pop + ')'), popids: pops };
+    approach = null;
+  }
   let canonResearch = null;
   if (!persona && story) {
     try { canonResearch = await runCanonResearch(cycle, desk, story, asker, stem); }
@@ -2225,6 +2282,7 @@ async function runAngle(assign) {
   fs.mkdirSync(COMPARE, { recursive: true });
   fs.writeFileSync(anglePath, JSON.stringify({
     stage: 'angle', desk, cycle, persona: personaSlug,
+    ...(TEST_ANGLE ? { freeAngle: TEST_ANGLE, pass: !!(ownPlan && ownPlan.pass) } : {}),
     ...(PACKET_ACTIVE ? { packetContract: livedPacket.VERSION, inputPacket, sourcingPool } : {}),
     reporter: assign ? { name: assign.name, popid: assign.popid } : (persona ? { name: persona.name, popid: persona.popid } : null),
     assignment: story ? { story, approach } : null,   // Task 2.5.2: the EIC assignment rides the handoff
@@ -2795,6 +2853,7 @@ async function runReport(assign) {
   // rides the angle artifact (wake-1 handoff), so a report wake fired without
   // today's fanout entry still sees it.
   const angleArt = readJson(anglePath);
+  if (angleArt && angleArt.pass) { console.log('[report] ' + personaSlug + ' passed the day at the angle stage — nothing to report.'); return; }
   // W1 owns the assignment. Fanout assign.story is only a W1 seed; using it
   // at W2 swapped Almanzar/Nightline for leftover desk-signal rows.
   const story = (angleArt && angleArt.assignment && angleArt.assignment.story)
@@ -2968,6 +3027,7 @@ async function runWrite(assign) {
   // R2 — ledger snapshot freshness (S252/S329 pattern; degrade-not-drop)
   if (!TEST_SHELL) require('./canon-name-check').ensureLedgerSnapshot(cycle);
   const angle = readJson(anglePath);
+  if (angle && angle.pass) { console.log('[write] ' + personaSlug + ' passed the day at the angle stage — nothing to write.'); return; }
   const packet = readJson(packetPath);
   for (const record of packet && packet.officeRecords || []) {
     if (!(angle && angle.sourcingPool && angle.sourcingPool.officeRecords || [])
@@ -3852,6 +3912,7 @@ if (require.main === module) {
 }
 
 module.exports = {
+  cityWeekLines, // pipeline.111 test shell
   requireUnspentArtifact, // pipeline.87
   stageStem,
   nameSlug,

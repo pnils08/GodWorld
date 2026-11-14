@@ -5,7 +5,8 @@
 // Nothing here is sim data: which windows switch and when is seeded by the neighborhood name; how busy the
 // windows are, whether there is neon, steam or chimney smoke, is read off the place's hoods.js entry.
 (function () {
-  // the page's own seeded random and wall layout, copied so a window here lands on a window in the wall texture
+  // the page's own seeded random and wall grid (n, win, tile), copied so a window here lands on a window in the wall
+  // texture; how many bays and floors a building has comes from the page on each lot (p.B, p.F)
   function hash(s) { var h = 2166136261; for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
   function rng(seed) { var a = seed >>> 0; return function () { a |= 0; a = a + 0x6D2B79F5 | 0; var t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
   var WALLS = { brick: { n: 2, win: [30, 38], tile: [6, 7] }, stucco: { n: 3, win: [20, 24], tile: [7, 8] }, concrete: { n: 4, win: [18, 18], tile: [8, 9] }, glass: { n: 4, win: [27, 27], tile: [8, 9] } };
@@ -44,8 +45,8 @@
 
   // ---------- windows ----------
   var WIN_VS = HASH +
-    'attribute vec4 wa; attribute vec4 wg; attribute vec3 wc; uniform float t;\n' +
-    'varying vec2 vU; varying vec3 vC; varying float vOn, vSx, vI, vOff, vAsp, vBl, vMode, vD;\n' +
+    'attribute vec4 wa; attribute vec4 wg; attribute vec3 wc; attribute float wk; uniform float t;\n' +
+    'varying vec2 vU; varying vec3 vC; varying float vOn, vSx, vI, vOff, vAsp, vBl, vMode, vD, vK;\n' +
     'void main(){\n' +
     ' float seed = wa.x, mode = wa.y, baked = wa.z, P = wg.x;\n' +
     ' float ph = t / P + seed * 5.0, e = floor(ph), loc = fract(ph) * P;\n' +
@@ -61,11 +62,11 @@
     '  float lit = h1(e * 1.37 + seed * 91.0) < wg.y ? 1.0 : 0.0, d = wg.z * 0.2;\n' +
     '  on = lit * step(d, loc) * step(loc, P * 0.72 + d);\n' +
     ' }\n' +
-    ' vU = uv; vC = wc; vOn = on; vSx = sx; vI = I; vOff = wa.w; vAsp = wg.w; vMode = mode; vBl = step(0.8, fract(seed * 7.31));\n' +
+    ' vK = wk; vU = uv; vC = wc; vOn = on; vSx = sx; vI = I; vOff = wa.w; vAsp = wg.w; vMode = mode; vBl = step(0.8, fract(seed * 7.31));\n' +
     ' vec4 mv = modelViewMatrix * vec4(position, 1.0); vD = -mv.z; gl_Position = projectionMatrix * mv;\n' +
     '}';
   var WIN_FS = FOG_F +
-    'varying vec2 vU; varying vec3 vC; varying float vOn, vSx, vI, vOff, vAsp, vBl, vMode;\n' +
+    'varying vec2 vU; varying vec3 vC; varying float vOn, vSx, vI, vOff, vAsp, vBl, vMode, vK;\n' +
     'void main(){\n' +
     ' vec3 col;\n' +
     ' if (vOff > 2.5) {\n' +           // a house door
@@ -87,6 +88,12 @@
     ' if (vOff > 1.5 && vOff < 2.5) {\n' + // a house window: frame and cross bars
     '  float ex = min(vU.x, 1.0 - vU.x) * vAsp, ey = min(vU.y, 1.0 - vU.y);\n' +
     '  if (min(ex, ey) < 0.07 || abs(vU.x - 0.5) * vAsp < 0.03 || abs(vU.y - 0.6) < 0.03) col = vec3(0.16, 0.15, 0.14);\n' +
+    ' }\n' +
+    ' if (vK > 0.5) {\n' + // a window in a wall: the frame round it and the bars across it, dark against the room
+    '  float ex = min(vU.x, 1.0 - vU.x) * vAsp, ey = min(vU.y, 1.0 - vU.y);\n' +
+    '  bool post = vK < 1.5 || vK > 2.5, rail = vK < 2.5;\n' +
+    '  if (min(ex, ey) < 0.075 || (post && abs(vU.x - 0.5) * vAsp < 0.018) || (rail && abs(vU.y - 0.55) < 0.017)) col = vec3(0.05, 0.047, 0.045);\n' +
+    '  else if (vOn > 0.5) col *= 0.74 + 0.26 * smoothstep(0.0, 0.9, vU.y);\n' +
     ' }\n' +
     ' gl_FragColor = vec4(fogMix(col), 1.0);\n' +
     '}';
@@ -242,7 +249,8 @@
     };
 
     // ===== 1. windows: rooms going on and off, televisions, people crossing, office floors =====
-    var WB = batch({ wa: 4, wg: 4, wc: 3 }), WARM = [[1, 0.835, 0.54], [1, 0.75, 0.42], [1, 0.906, 0.72]], GLASS = [[1, 0.886, 0.68], [0.81, 0.89, 1], [1, 0.945, 0.84]];
+    var KIND = { brick: 1, stucco: 2, concrete: 3 }; // which bars the page paints across that wall's windows
+    var WB = batch({ wa: 4, wg: 4, wc: 3, wk: 1 }), WARM = [[1, 0.835, 0.54], [1, 0.75, 0.42], [1, 0.906, 0.72]], GLASS = [[1, 0.886, 0.68], [0.81, 0.89, 1], [1, 0.945, 0.84]];
     function litCol(glass) { var c = (glass ? GLASS : WARM)[Math.floor(rr() * 3)], m = 0.55 + rr() * 0.4; return [c[0] * m, c[1] * m, c[2] * m]; }
     function period() { return P.per[0] + rr() * (P.per[1] - P.per[0]); }
     var houseList = [], shopList = [];
@@ -251,35 +259,36 @@
       if (p.k === 'h') {
         var hw = p.w - 2.5, X = s * (WALK + 2.5 - 0.04), pz = p.z + hw * 0.25;
         houseList.push({ p: p, s: s, z: pz, y0: y0, hw: hw });
-        quad(WB, facade(X, pz, 1.0 + y0, 0.95, 2.0), { wa: [rr(), 0, 0, 3], wg: [99, 0, 0, 0.48], wc: [0, 0, 0] });
+        quad(WB, facade(X, pz, 1.0 + y0, 0.95, 2.0), { wa: [rr(), 0, 0, 3], wg: [99, 0, 0, 0.48], wc: [0, 0, 0], wk: [0] });
         var spots = [[p.z - hw * 0.07, 1.55], [p.z - hw * 0.31, 1.55]];
         if (p.h >= 4.6) spots.push([p.z - hw * 0.2, 3.55], [p.z + hw * 0.22, 3.55]);
         spots.forEach(function (q) {
           var seed = rr(), mode = rr() < P.tv ? 1 : 0, baked = rr() < p.lit ? 1 : 0;
-          quad(WB, facade(X, q[0], q[1] + y0, 0.95, 1.15), { wa: [seed, mode, baked, 2], wg: [period(), baked ? P.off : P.off * p.lit / Math.max(0.2, 1 - p.lit), P.sil, 0.95 / 1.15], wc: mode ? [0.5, 0.66, 1.0] : litCol(false) });
+          quad(WB, facade(X, q[0], q[1] + y0, 0.95, 1.15), { wa: [seed, mode, baked, 2], wg: [period(), baked ? P.off : P.off * p.lit / Math.max(0.2, 1 - p.lit), P.sil, 0.95 / 1.15], wc: mode ? [0.5, 0.66, 1.0] : litCol(false), wk: [0] });
         });
         return;
       }
       var W = WALLS[p.wall]; if (!W) return;
       if (p.b != null) shopList.push(p);
-      var cells = cellsOf(p.wall, p.lit), n = W.n, ux = Math.max(1, Math.round(p.w / W.tile[0])), uy = Math.max(1, Math.round(p.h / W.tile[1]));
-      var Tw = p.w / ux, Th = (p.h + 3) / uy, ww = W.win[0] / 128 * Tw * 1.06, wh = W.win[1] / 128 * Th * 1.06;
-      var Xf = s * (WALK - 0.05), glass = p.wall === 'glass', office = glass && p.h >= 15, low = p.b != null ? 2.75 : 0.4;
+      // the page's own grid: whole bays across, whole floors up from the pavement; the ground floor is the page's to draw
+      var cells = cellsOf(p.wall, p.lit), n = W.n, B = p.B || Math.max(1, Math.round(p.w / (W.tile[0] / n))), F = p.F || Math.max(1, Math.round(p.h / (W.tile[1] / n)));
+      var cw = p.w / B, ch = p.h / F, ww = W.win[0] / 128 * n * cw * 1.06, wh = W.win[1] / 128 * n * ch * 1.06, wk = [KIND[p.wall] || 0];
+      var Xf = s * (WALK - 0.05), glass = p.wall === 'glass', office = glass && p.h >= 15;
       var fOn = P.off * p.lit / Math.max(0.2, 1 - p.lit), darkTower = office && lit <= 0.2;
-      for (var tj = 0; tj < uy; tj++) for (var yi = 0; yi < n; yi++) {
-        var yc = -3 + tj * Th + (1 - (yi + 0.5) / n) * Th;
-        if (yc - wh / 2 < low || yc + wh / 2 > p.h - 0.15) continue;
+      for (var fl = 1; fl < F; fl++) {
+        var yi = n - 1 - (fl % n), yc = (fl + 0.5) * ch;
+        if (yc + wh / 2 > p.h - 0.1) continue;
         var isOffice = office && rr() < P.office, fseed = rr(), fper = 45 + rr() * 60, fcol = litCol(true), dir = rr() < 0.5;
-        for (var tc = 0; tc < ux; tc++) for (var xi = 0; xi < n; xi++) {
-          var a = (tc + (xi + 0.5) / n) / ux, zc = s > 0 ? p.z - p.w / 2 + a * p.w : p.z + p.w / 2 - a * p.w;
-          var baked = cells[yi * n + xi] > 0 ? 1 : 0, ci = tc * n + xi;
+        for (var ci = 0; ci < B; ci++) {
+          var a = (ci + 0.5) / B, zc = s > 0 ? p.z - p.w / 2 + a * p.w : p.z + p.w / 2 - a * p.w;
+          var baked = cells[yi * n + ci % n] > 0 ? 1 : 0;
           if (isOffice) {
-            quad(WB, facade(Xf, zc, yc + y0, ww, wh), { wa: [fseed, 2, baked, baked], wg: [fper, 0.5, dir ? ci : ux * n - 1 - ci, ww / wh], wc: [fcol[0] * 0.95, fcol[1] * 0.98, fcol[2]] });
+            quad(WB, facade(Xf, zc, yc + y0, ww, wh), { wa: [fseed, 2, baked, baked], wg: [fper, 0.5, dir ? ci : B - 1 - ci, ww / wh], wc: [fcol[0] * 0.95, fcol[1] * 0.98, fcol[2]], wk: wk });
           } else if (darkTower) { // thinner after dark: most of the tower's lit rooms are out, a few come and go
-            if (baked) quad(WB, facade(Xf, zc, yc + y0, ww, wh), { wa: [rr(), 0, 0, 1], wg: [period(), 0.2, 0, ww / wh], wc: litCol(true) });
+            if (baked) quad(WB, facade(Xf, zc, yc + y0, ww, wh), { wa: [rr(), 0, 0, 1], wg: [period(), 0.2, 0, ww / wh], wc: litCol(true), wk: wk });
           } else if (rr() < P.live) {
             var mode = !glass && rr() < P.tv ? 1 : 0;
-            quad(WB, facade(Xf, zc, yc + y0, ww, wh), { wa: [rr(), mode, baked, baked], wg: [period(), baked ? P.off : fOn, glass ? 0 : P.sil, ww / wh], wc: mode ? [0.5, 0.66, 1.0] : litCol(glass) });
+            quad(WB, facade(Xf, zc, yc + y0, ww, wh), { wa: [rr(), mode, baked, baked], wg: [period(), baked ? P.off : fOn, glass ? 0 : P.sil, ww / wh], wc: mode ? [0.5, 0.66, 1.0] : litCol(glass), wk: wk });
           }
         }
       }
@@ -385,6 +394,7 @@
     shopList.forEach(function (p) {
       if (rr() > 0.6) return;
       var zd = p.z + (rr() - 0.5) * Math.max(0, p.w - 3.2), x = p.s * (WALK - 1.2), seed = rr();
+      if (p.doorZ != null) zd = p.doorZ; // the page says where the shop's door is
       quad(LB, [[x - 1.1, 0.18, zd - 10 - 0.9], [x + 1.1, 0.18, zd - 10 - 0.9], [x + 1.1, 0.18, zd - 10 + 0.9], [x - 1.1, 0.18, zd - 10 + 0.9]], { lw: [1, seed, 0, 0], lc: [0.55, 0.42, 0.26] });
       point(GB, [p.s * (WALK - 0.12), 1.2 + yAt(p.z), zd], { lw: [1, seed, 0, 0], lc: [0.9, 0.72, 0.45], ls: [1.3] });
     });

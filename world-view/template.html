@@ -225,34 +225,219 @@ window.addEventListener('resize', resize); resize();
 
 // ---------- shared textures ----------
 function canvasTex(w, h, draw) { var c = document.createElement('canvas'); c.width = w; c.height = h; draw(c.getContext('2d'), w, h); var t = new THREE.CanvasTexture(c); t.anisotropy = 4; return t; }
-// A wall is two pictures: what it is made of, and which of its windows are lit.
+// A wall is two pictures: what it is made of, and which of its windows are lit. Each picture is one tile of
+// n by n windows; a building repeats it by bays and floors (walled()). The grid (n, win, tile) is also copied in
+// life-street.js, which lays its living windows over these: change one and the other must follow. What is
+// painted inside the grid (courses, frames, sills, curtains) is free.
 var WALLS = {
-  brick: { n: 2, win: [30, 38], base: '#cfc6be', tile: [6, 7] },
-  stucco: { n: 3, win: [20, 24], base: '#d6d0c8', tile: [7, 8] },
-  concrete: { n: 4, win: [18, 18], base: '#c2c2c8', tile: [8, 9] },
-  glass: { n: 4, win: [27, 27], base: '#7d8794', tile: [8, 9] },
-  house: { n: 2, win: [22, 26], base: '#d6d0c8', tile: [40, 40] }
+  brick: { n: 2, win: [30, 38], base: '#cbbfb4', tile: [6, 7], frame: '#4b453f', bars: 'cross' },
+  stucco: { n: 3, win: [20, 24], base: '#d6d0c8', tile: [7, 8], frame: '#57524c', bars: 'rail' },
+  concrete: { n: 4, win: [18, 18], base: '#c2c2c8', tile: [8, 9], frame: '#3d4148', bars: 'post' },
+  glass: { n: 4, win: [27, 27], base: '#6f7986', tile: [8, 9] },
+  house: { n: 2, win: [22, 26], base: '#d8d2ca', tile: [40, 40] }
 };
 var PAIRS = {};
 function wallPair(kind, lit) {
   var key = kind + lit; if (PAIRS[key]) return PAIRS[key];
-  var W = WALLS[kind], cell = 128 / W.n, cells = [], r = rng(hash(key));
-  for (var i = 0; i < W.n * W.n; i++) cells.push(r() < lit ? 0.5 + r() * 0.5 : 0);
-  function each(fn) { for (var y = 0; y < W.n; y++) for (var x = 0; x < W.n; x++) { if (kind === 'house' && y === 0) continue; fn(x * cell + (cell - W.win[0]) / 2, y * cell + (cell - W.win[1]) / 2, cells[y * W.n + x]); } }
-  var map = canvasTex(128, 128, function (g) {
-    g.fillStyle = W.base; g.fillRect(0, 0, 128, 128);
-    if (kind === 'brick') { g.fillStyle = 'rgba(60,40,30,.22)'; for (var y = 0; y < 128; y += 8) g.fillRect(0, y, 128, 1.5); for (y = 0; y < 128; y += 8) for (var x = (y / 8 % 2) * 8; x < 128; x += 16) g.fillRect(x, y, 1.5, 8); }
-    if (kind === 'concrete') { g.fillStyle = 'rgba(0,0,0,.16)'; for (var b = 0; b < W.n; b++) g.fillRect(0, b * cell, 128, 3); }
-    if (kind === 'glass') { g.fillStyle = 'rgba(0,0,0,.35)'; for (var m = 0; m < W.n; m++) { g.fillRect(0, m * cell, 128, 2); g.fillRect(m * cell, 0, 2, 128); } }
-    each(function (x, y, on) { g.fillStyle = on ? '#3a3528' : (kind === 'glass' ? '#27303d' : '#22232b'); g.fillRect(x, y, W.win[0], W.win[1]); if (kind !== 'glass') { g.fillStyle = 'rgba(255,255,255,.35)'; g.fillRect(x - 2, y + W.win[1], W.win[0] + 4, 2.5); } });
+  var W = WALLS[kind], S = 512, K = S / 128, cell = S / W.n, cells = [], r = rng(hash(key)), d = rng(hash(key + '|paint')), i;
+  for (i = 0; i < W.n * W.n; i++) cells.push(r() < lit ? 0.5 + r() * 0.5 : 0);
+  var ww = W.win[0] * K, wh = W.win[1] * K, glassWall = kind === 'glass';
+  function each(fn) { if (kind === 'house') return; for (var y = 0; y < W.n; y++) for (var x = 0; x < W.n; x++) fn(Math.round(x * cell + (cell - ww) / 2), Math.round(y * cell + (cell - wh) / 2), cells[y * W.n + x]); }
+  function speckle(g, count, size, a) { for (var q = 0; q < count; q++) { g.fillStyle = d() < 0.5 ? 'rgba(0,0,0,' + (a * (0.4 + d())).toFixed(3) + ')' : 'rgba(255,255,255,' + (a * (0.3 + d() * 0.7)).toFixed(3) + ')'; g.fillRect(d() * S, d() * S, size * (0.5 + d()), size * (0.5 + d())); } }
+  var map = canvasTex(S, S, function (g) {
+    var x, y, q;
+    g.fillStyle = W.base; g.fillRect(0, 0, S, S);
+    if (kind === 'brick') {
+      // courses of brick, each a shade of its own, in a bed of mortar
+      for (y = 0; y < S; y += 8) for (x = -8 + (y / 8 % 2) * 8; x < S; x += 16) { q = d(); g.fillStyle = q < 0.55 ? 'rgba(74,38,24,' + (0.03 + d() * 0.13).toFixed(3) + ')' : 'rgba(255,236,216,' + (0.02 + d() * 0.1).toFixed(3) + ')'; g.fillRect(x, y, 15, 7); }
+      g.fillStyle = 'rgba(36,26,20,.3)'; for (y = 7; y < S; y += 8) g.fillRect(0, y, S, 1);
+      for (y = 0; y < S; y += 8) for (x = (y / 8 % 2) * 8 + 7; x < S; x += 16) g.fillRect(x, y, 1, 7);
+      speckle(g, 500, 3, 0.05);
+    } else if (kind === 'stucco') {
+      // rendered wall: a fine grain, a string course at each floor, faint weather under it
+      speckle(g, 2600, 2.5, 0.045);
+      for (q = 0; q < W.n; q++) { y = Math.round(q * cell); g.fillStyle = 'rgba(255,255,255,.2)'; g.fillRect(0, y, S, 4); g.fillStyle = 'rgba(0,0,0,.22)'; g.fillRect(0, y + 4, S, 3); var wg = g.createLinearGradient(0, y + 7, 0, y + 40); wg.addColorStop(0, 'rgba(0,0,0,.1)'); wg.addColorStop(1, 'rgba(0,0,0,0)'); g.fillStyle = wg; g.fillRect(0, y + 7, S, 33); }
+    } else if (kind === 'concrete') {
+      // cast panels: joints between them, the holes the formwork left, streaks where the rain runs
+      speckle(g, 1500, 3, 0.035);
+      g.fillStyle = 'rgba(0,0,0,.26)'; for (q = 0; q < W.n; q++) { g.fillRect(0, Math.round(q * cell), S, 3); g.fillRect(Math.round(q * cell), 0, 3, S); }
+      g.fillStyle = 'rgba(0,0,0,.2)'; for (y = 0; y < W.n; y++) for (x = 0; x < W.n; x++) [[14, 14], [cell - 14, 14], [14, cell - 14], [cell - 14, cell - 14]].forEach(function (h) { g.beginPath(); g.arc(x * cell + h[0], y * cell + h[1], 2.2, 0, 7); g.fill(); });
+    } else if (glassWall) {
+      // a curtain wall: the frame is the wall, with a band across at each floor
+      g.fillStyle = 'rgba(0,0,0,.3)'; for (q = 0; q < W.n; q++) { g.fillRect(0, Math.round(q * cell), S, 5); g.fillRect(Math.round(q * cell), 0, 4, S); }
+      g.fillStyle = 'rgba(255,255,255,.12)'; for (q = 0; q < W.n; q++) g.fillRect(0, Math.round(q * cell) + 5, S, 2);
+    } else {
+      // a house: boards laid one over the next, a corner board at each end
+      for (y = 0; y < S; y += 13) { g.fillStyle = 'rgba(0,0,0,.24)'; g.fillRect(0, y + 11, S, 2); g.fillStyle = 'rgba(255,255,255,.14)'; g.fillRect(0, y, S, 2); }
+      speckle(g, 700, 3, 0.03);
+      g.fillStyle = 'rgba(255,255,255,.3)'; g.fillRect(0, 0, 9, S); g.fillRect(S - 9, 0, 9, S);
+    }
+    each(function (x0, y0) {
+      var gr;
+      if (glassWall) {
+        // a pane: sky in the top of it, the dark of the room below, one long reflection
+        gr = g.createLinearGradient(0, y0, 0, y0 + wh); gr.addColorStop(0, '#465570'); gr.addColorStop(0.5, '#273142'); gr.addColorStop(1, '#161c28'); g.fillStyle = gr; g.fillRect(x0, y0, ww, wh);
+        g.fillStyle = 'rgba(255,255,255,.07)'; g.beginPath(); g.moveTo(x0 + ww * 0.15, y0 + wh); g.lineTo(x0 + ww * 0.55, y0); g.lineTo(x0 + ww * 0.8, y0); g.lineTo(x0 + ww * 0.4, y0 + wh); g.fill();
+        return;
+      }
+      // the head and the sill, the shadow the sill throws, and the rain mark under it
+      if (kind === 'brick') { g.fillStyle = 'rgba(255,246,232,.42)'; g.fillRect(x0 - 8, y0 - 15, ww + 16, 15); g.fillStyle = 'rgba(0,0,0,.2)'; for (var s = x0 - 8; s < x0 + ww + 8; s += 8) g.fillRect(s, y0 - 15, 1, 15); }
+      else { g.fillStyle = 'rgba(0,0,0,.2)'; g.fillRect(x0 - 4, y0 - 5, ww + 8, 5); }
+      g.fillStyle = 'rgba(255,250,240,.55)'; g.fillRect(x0 - 9, y0 + wh, ww + 18, 8);
+      g.fillStyle = 'rgba(0,0,0,.34)'; g.fillRect(x0 - 9, y0 + wh + 8, ww + 18, 4);
+      gr = g.createLinearGradient(0, y0 + wh + 12, 0, y0 + wh + 46); gr.addColorStop(0, 'rgba(0,0,0,.13)'); gr.addColorStop(1, 'rgba(0,0,0,0)'); g.fillStyle = gr; g.fillRect(x0 - 4, y0 + wh + 12, ww + 8, 34);
+      // the opening, set back into the wall: frame, glass with a little sky in it, shadow under the head and down one side
+      g.fillStyle = '#121318'; g.fillRect(x0, y0, ww, wh);
+      g.fillStyle = W.frame; g.fillRect(x0 + 2, y0 + 2, ww - 4, wh - 4);
+      gr = g.createLinearGradient(0, y0, 0, y0 + wh); gr.addColorStop(0, '#303a4b'); gr.addColorStop(0.45, '#1c212b'); gr.addColorStop(1, '#13151b'); g.fillStyle = gr; g.fillRect(x0 + 8, y0 + 8, ww - 16, wh - 16);
+      g.fillStyle = 'rgba(0,0,0,.5)'; g.fillRect(x0 + 8, y0 + 8, ww - 16, 9); g.fillStyle = 'rgba(0,0,0,.28)'; g.fillRect(x0 + 8, y0 + 8, 6, wh - 16);
+      g.fillStyle = W.frame;
+      if (W.bars === 'cross' || W.bars === 'post') g.fillRect(x0 + ww / 2 - 2.5, y0 + 8, 5, wh - 16);
+      if (W.bars === 'cross' || W.bars === 'rail') g.fillRect(x0 + 8, y0 + wh * 0.45 - 2.5, ww - 16, 5);
+    });
   });
-  var em = canvasTex(128, 128, function (g) {
-    g.fillStyle = '#000'; g.fillRect(0, 0, 128, 128);
-    each(function (x, y, on) { if (!on) return; g.globalAlpha = on; g.fillStyle = kind === 'glass' ? ['#ffe2ae', '#cfe4ff', '#fff1d6'][Math.floor(r() * 3)] : ['#ffd58a', '#ffbf6b', '#ffe7b8'][Math.floor(r() * 3)]; g.fillRect(x, y, W.win[0], W.win[1]); });
-    g.globalAlpha = 1;
+  var em = canvasTex(S, S, function (g) {
+    g.fillStyle = '#000'; g.fillRect(0, 0, S, S);
+    each(function (x0, y0, on) {
+      if (!on) return;
+      var x = glassWall ? x0 : x0 + 8, y = glassWall ? y0 : y0 + 8, w = glassWall ? ww : ww - 16, h = glassWall ? wh : wh - 16, q = d(), gr, yy;
+      g.save(); g.beginPath(); g.rect(x, y, w, h); g.clip(); g.globalAlpha = on;
+      g.fillStyle = glassWall ? ['#ffe2ae', '#cfe4ff', '#fff1d6'][Math.floor(r() * 3)] : ['#ffd58a', '#ffbf6b', '#ffe7b8'][Math.floor(r() * 3)]; g.fillRect(x, y, w, h);
+      g.globalAlpha = 1;
+      if (glassWall) {
+        // an office floor: the ceiling lights in a bright band, desks and screens dark along the bottom
+        g.fillStyle = 'rgba(255,255,255,.25)'; g.fillRect(x, y + h * 0.1, w, h * 0.09);
+        gr = g.createLinearGradient(0, y + h * 0.5, 0, y + h); gr.addColorStop(0, 'rgba(0,0,0,0)'); gr.addColorStop(1, 'rgba(0,0,0,.6)'); g.fillStyle = gr; g.fillRect(x, y + h * 0.5, w, h * 0.5);
+        g.fillStyle = 'rgba(0,0,0,.55)'; for (yy = 0; yy < 3; yy++) if (d() < 0.6) g.fillRect(x + w * (0.08 + yy * 0.31), y + h * (0.72 + d() * 0.08), w * 0.2, h * 0.3);
+      } else {
+        // a room: the light falls off toward the floor; curtains part drawn, or a blind, or a lamp by the window
+        gr = g.createLinearGradient(0, y, 0, y + h); gr.addColorStop(0, 'rgba(0,0,0,0)'); gr.addColorStop(1, 'rgba(0,0,0,.38)'); g.fillStyle = gr; g.fillRect(x, y, w, h);
+        if (q < 0.34) { var cw = w * (0.16 + d() * 0.2); g.fillStyle = 'rgba(46,22,12,.55)'; g.fillRect(x, y, cw, h); g.fillRect(x + w - cw * (0.6 + d() * 0.6), y, cw * 1.3, h); g.fillStyle = 'rgba(0,0,0,.18)'; for (yy = x + 3; yy < x + cw; yy += 6) g.fillRect(yy, y, 2, h); }
+        else if (q < 0.56) { var bh = h * (0.35 + d() * 0.65); g.fillStyle = 'rgba(40,24,12,.4)'; for (yy = y; yy < y + bh; yy += 7) g.fillRect(x, yy, w, 3); g.fillStyle = 'rgba(255,240,210,.12)'; g.fillRect(x, y, w, bh); }
+        else if (q < 0.74) { gr = g.createRadialGradient(x + w * (0.25 + d() * 0.5), y + h * 0.62, 2, x + w * 0.5, y + h * 0.62, w * 0.6); gr.addColorStop(0, 'rgba(255,244,214,.55)'); gr.addColorStop(1, 'rgba(255,244,214,0)'); g.fillStyle = gr; g.fillRect(x, y, w, h); }
+        // the bars of the window stand dark against the room
+        g.fillStyle = '#000';
+        if (W.bars === 'cross' || W.bars === 'post') g.fillRect(x0 + ww / 2 - 2.5, y, 5, h);
+        if (W.bars === 'cross' || W.bars === 'rail') g.fillRect(x, y0 + wh * 0.45 - 2.5, w, 5);
+      }
+      g.restore();
+    });
   });
   map.wrapS = map.wrapT = em.wrapS = em.wrapT = THREE.RepeatWrapping;
-  return (PAIRS[key] = { map: map, em: em, tile: W.tile });
+  return (PAIRS[key] = { map: map, em: em, tile: W.tile, n: W.n });
+}
+// The ground floor. One sheet of painted parts (a shop window and door as frames with the glass cut out, two
+// shop interiors to stand behind them, a street door, a ground-floor window lit and unlit, a lobby pane, plain
+// wall), and every street's ground floors are assembled from it into two meshes: plain buildings (lit like their
+// walls) and shop fronts (their own light). Parts keep their real size; a wider lot gets more panes, not wider ones.
+var FRONT = null;
+function frontSheet() {
+  if (FRONT) return FRONT;
+  var S = 1024, d = rng(hash('fronts'));
+  var R = { pane: [0, 0, 352, 512], sdoor: [352, 0, 192, 512], edoor: [544, 0, 224, 512], gwin: [768, 0, 256, 512],
+    int1: [0, 512, 256, 256], int2: [256, 512, 256, 256], int3: [0, 768, 256, 256], gwinOff: [512, 512, 256, 512], wall: [768, 512, 256, 188], white: [768, 708, 128, 56], lobby: [768, 768, 128, 256], lobbyOff: [896, 768, 128, 256] };
+  function wallFill(g, x, y, w, h, base) {
+    g.fillStyle = '#cfc8be'; g.fillRect(x, y, w, h);
+    for (var q = 0; q < w * h / 90; q++) { g.fillStyle = d() < 0.5 ? 'rgba(0,0,0,' + (0.02 + d() * 0.05).toFixed(3) + ')' : 'rgba(255,255,255,' + (0.02 + d() * 0.04).toFixed(3) + ')'; g.fillRect(x + d() * w, y + d() * h, 2 + d() * 2, 2 + d() * 2); }
+    if (base) { g.fillStyle = 'rgba(0,0,0,.26)'; g.fillRect(x, y + h - base, w, base); g.fillStyle = 'rgba(255,255,255,.2)'; g.fillRect(x, y + h - base, w, 3); }
+  }
+  function window1(g, x, y, w, h, lit) { // a ground-floor window in its wall: head, sill, frame, a rail across
+    g.fillStyle = 'rgba(0,0,0,.2)'; g.fillRect(x - 4, y - 6, w + 8, 6);
+    g.fillStyle = 'rgba(255,250,240,.6)'; g.fillRect(x - 10, y + h, w + 20, 9); g.fillStyle = 'rgba(0,0,0,.34)'; g.fillRect(x - 10, y + h + 9, w + 20, 5);
+    g.fillStyle = '#121318'; g.fillRect(x, y, w, h); g.fillStyle = '#57524c'; g.fillRect(x + 2, y + 2, w - 4, h - 4);
+    var gr = g.createLinearGradient(0, y, 0, y + h); gr.addColorStop(0, '#303a4b'); gr.addColorStop(0.45, '#1c212b'); gr.addColorStop(1, '#13151b'); g.fillStyle = gr; g.fillRect(x + 9, y + 9, w - 18, h - 18);
+    g.fillStyle = 'rgba(0,0,0,.5)'; g.fillRect(x + 9, y + 9, w - 18, 10);
+    g.fillStyle = '#57524c'; g.fillRect(x + 9, y + h * 0.45 - 3, w - 18, 6); g.fillRect(x + w / 2 - 3, y + 9, 6, h - 18);
+  }
+  var map = canvasTex(S, S, function (g) {
+    var r, x, y, i, gr;
+    g.clearRect(0, 0, S, S);
+    // --- shop window: a frame round a transom light and a big pane, a panelled riser under it; the glass is cut out
+    r = R.pane; g.fillStyle = '#e6e0d6'; g.fillRect(r[0], r[1], r[2], r[3]);
+    g.fillStyle = 'rgba(0,0,0,.28)'; g.fillRect(r[0], r[1] + 432, r[2], 80); g.fillStyle = 'rgba(255,255,255,.22)'; g.fillRect(r[0] + 18, r[1] + 446, r[2] - 36, 52); g.fillStyle = 'rgba(0,0,0,.3)'; g.fillRect(r[0] + 24, r[1] + 452, r[2] - 48, 40);
+    g.fillStyle = 'rgba(0,0,0,.35)'; g.fillRect(r[0] + 10, r[1] + 24, r[2] - 20, 406); g.fillStyle = 'rgba(0,0,0,.4)'; g.fillRect(r[0], r[1], 3, r[3]); g.fillRect(r[0] + r[2] - 3, r[1], 3, r[3]);
+    g.clearRect(r[0] + 16, r[1] + 30, r[2] - 32, 76); g.clearRect(r[0] + 16, r[1] + 118, r[2] - 32, 306);
+    // --- shop door: a glazed leaf with a kick plate and a pull, a light over it
+    r = R.sdoor; g.fillStyle = '#e6e0d6'; g.fillRect(r[0], r[1], r[2], r[3]);
+    g.fillStyle = 'rgba(0,0,0,.4)'; g.fillRect(r[0] + 8, r[1] + 24, r[2] - 16, 488); g.fillStyle = '#d9d2c7'; g.fillRect(r[0] + 14, r[1] + 112, r[2] - 28, 400);
+    g.fillStyle = 'rgba(0,0,0,.3)'; g.fillRect(r[0] + 14, r[1] + 446, r[2] - 28, 60); g.fillStyle = 'rgba(0,0,0,.55)'; g.fillRect(r[0] + 14, r[1] + 506, r[2] - 28, 6);
+    g.clearRect(r[0] + 14, r[1] + 30, r[2] - 28, 72); g.clearRect(r[0] + 30, r[1] + 128, r[2] - 60, 304);
+    g.fillStyle = '#2a2622'; g.fillRect(r[0] + r[2] - 40, r[1] + 250, 7, 86);
+    // --- street door of a block of flats or offices, in its wall: a light over it, panels, a step
+    r = R.edoor; wallFill(g, r[0], r[1], r[2], r[3], 80);
+    g.fillStyle = 'rgba(0,0,0,.22)'; g.fillRect(r[0] + 18, r[1] + 84, 188, 10); g.fillStyle = '#17181c'; g.fillRect(r[0] + 24, r[1] + 94, 176, 418);
+    g.fillStyle = '#6a6259'; g.fillRect(r[0] + 30, r[1] + 100, 164, 412);
+    gr = g.createLinearGradient(0, r[1] + 106, 0, r[1] + 160); gr.addColorStop(0, '#2c3646'); gr.addColorStop(1, '#171b23'); g.fillStyle = gr; g.fillRect(r[0] + 38, r[1] + 108, 148, 50);
+    g.fillStyle = '#4d463f'; g.fillRect(r[0] + 38, r[1] + 170, 148, 334); g.fillStyle = 'rgba(0,0,0,.3)'; g.fillRect(r[0] + 52, r[1] + 186, 120, 130); g.fillRect(r[0] + 52, r[1] + 334, 120, 150);
+    g.fillStyle = 'rgba(255,255,255,.1)'; g.fillRect(r[0] + 56, r[1] + 190, 112, 4); g.fillRect(r[0] + 56, r[1] + 338, 112, 4);
+    g.fillStyle = '#b8a67a'; g.beginPath(); g.arc(r[0] + 172, r[1] + 326, 5, 0, 7); g.fill();
+    g.fillStyle = 'rgba(255,255,255,.4)'; g.fillRect(r[0] + 14, r[1] + 502, 196, 10);
+    // --- ground-floor window, twice: one to be lit, one to stay dark
+    [R.gwin, R.gwinOff].forEach(function (q) { wallFill(g, q[0], q[1], q[2], q[3], 80); window1(g, q[0] + 40, q[1] + 150, 176, 220); });
+    // --- plain wall with its base course
+    r = R.wall; wallFill(g, r[0], r[1], r[2], r[3], 29);
+    r = R.white; g.fillStyle = '#fff'; g.fillRect(r[0], r[1], r[2], r[3]);
+    // --- lobby pane of a glass building
+    [R.lobby, R.lobbyOff].forEach(function (q) {
+      g.fillStyle = '#5b6470'; g.fillRect(q[0], q[1], q[2], q[3]);
+      gr = g.createLinearGradient(0, q[1], 0, q[1] + q[3]); gr.addColorStop(0, '#3a475c'); gr.addColorStop(0.5, '#1f2733'); gr.addColorStop(1, '#141922'); g.fillStyle = gr; g.fillRect(q[0] + 5, q[1] + 10, q[2] - 10, q[3] - 22);
+      g.fillStyle = '#5b6470'; g.fillRect(q[0], q[1] + 70, q[2], 7);
+    });
+    function room(reg, fn) { var q = R[reg]; g.save(); g.translate(q[0], q[1]); g.scale(q[2] / 256, q[3] / 512); g.beginPath(); g.rect(0, 0, 256, 512); g.clip(); r = [0, 0, 256, 512]; fn(); g.restore(); }
+    // --- inside a shop, seen through the glass: back wall, lights, shelves of goods, a counter
+    room('int1', function () { gr = g.createLinearGradient(0, r[1], 0, r[1] + r[3]); gr.addColorStop(0, '#8a6a3c'); gr.addColorStop(0.18, '#f1cf8c'); gr.addColorStop(0.75, '#e4bb74'); gr.addColorStop(1, '#6b4f2c'); g.fillStyle = gr; g.fillRect(r[0], r[1], r[2], r[3]);
+    for (i = 0; i < 3; i++) { gr = g.createRadialGradient(r[0] + 44 + i * 84, r[1] + 70, 2, r[0] + 44 + i * 84, r[1] + 70, 60); gr.addColorStop(0, 'rgba(255,250,225,.95)'); gr.addColorStop(1, 'rgba(255,250,225,0)'); g.fillStyle = gr; g.fillRect(r[0], r[1], r[2], 160); }
+    for (y = 0; y < 3; y++) { var sy = r[1] + 190 + y * 78; g.fillStyle = 'rgba(70,44,20,.75)'; g.fillRect(r[0] + 10, sy, r[2] - 20, 7); for (x = r[0] + 16; x < r[0] + r[2] - 30; ) { var bw = 12 + d() * 20, bhh = 22 + d() * 34; g.fillStyle = 'hsla(' + Math.floor(d() * 360) + ',' + Math.floor(12 + d() * 28) + '%,' + Math.floor(26 + d() * 30) + '%,.9)'; g.fillRect(x, sy - bhh, bw, bhh); x += bw + 3 + d() * 8; } }
+    g.fillStyle = 'rgba(48,30,16,.9)'; g.fillRect(r[0], r[1] + 420, r[2], 92); g.fillStyle = 'rgba(255,230,180,.25)'; g.fillRect(r[0], r[1] + 420, r[2], 5); });
+    // --- where people eat and drink: tables, hanging lamps, pictures on the wall
+    room('int2', function () { gr = g.createLinearGradient(0, r[1], 0, r[1] + r[3]); gr.addColorStop(0, '#5d4630'); gr.addColorStop(0.3, '#d9b98a'); gr.addColorStop(0.8, '#c59f6c'); gr.addColorStop(1, '#4e3a26'); g.fillStyle = gr; g.fillRect(r[0], r[1], r[2], r[3]);
+    [[30, 150, 52, 66], [104, 140, 44, 58], [176, 156, 56, 50]].forEach(function (q) { g.fillStyle = 'rgba(60,40,24,.8)'; g.fillRect(r[0] + q[0] - 4, r[1] + q[1] - 4, q[2] + 8, q[3] + 8); g.fillStyle = 'hsla(' + Math.floor(d() * 360) + ',35%,55%,.9)'; g.fillRect(r[0] + q[0], r[1] + q[1], q[2], q[3]); });
+    [70, 190].forEach(function (lx) { g.fillStyle = 'rgba(30,20,12,.8)'; g.fillRect(r[0] + lx - 1, r[1], 3, 96); gr = g.createRadialGradient(r[0] + lx, r[1] + 112, 2, r[0] + lx, r[1] + 130, 95); gr.addColorStop(0, 'rgba(255,246,214,1)'); gr.addColorStop(1, 'rgba(255,246,214,0)'); g.fillStyle = gr; g.fillRect(r[0], r[1] + 40, r[2], 220); g.fillStyle = '#2a1c10'; g.beginPath(); g.moveTo(r[0] + lx - 20, r[1] + 110); g.lineTo(r[0] + lx + 20, r[1] + 110); g.lineTo(r[0] + lx + 9, r[1] + 92); g.lineTo(r[0] + lx - 9, r[1] + 92); g.fill(); });
+    g.fillStyle = 'rgba(36,24,14,.92)'; [[20, 372, 92], [144, 388, 96]].forEach(function (q) { g.fillRect(r[0] + q[0], r[1] + q[1], q[2], 9); g.fillRect(r[0] + q[0] + q[2] / 2 - 4, r[1] + q[1], 8, 120); g.fillRect(r[0] + q[0] - 16, r[1] + q[1] - 46, 9, 170); g.fillRect(r[0] + q[0] + q[2] + 7, r[1] + q[1] - 46, 9, 170); });
+    g.fillStyle = 'rgba(40,28,16,.85)'; g.fillRect(r[0], r[1] + 470, r[2], 42); });
+    // --- any other business: a front room with its lights on, a desk, a door through to the back, a plant
+    room('int3', function () {
+      gr = g.createLinearGradient(0, 0, 0, 512); gr.addColorStop(0, '#6a5a44'); gr.addColorStop(0.25, '#dccdb0'); gr.addColorStop(0.82, '#cbb994'); gr.addColorStop(1, '#5b4b36'); g.fillStyle = gr; g.fillRect(0, 0, 256, 512);
+      g.fillStyle = 'rgba(255,252,238,.95)'; g.fillRect(40, 44, 70, 16); g.fillRect(150, 44, 70, 16);
+      gr = g.createLinearGradient(0, 60, 0, 230); gr.addColorStop(0, 'rgba(255,250,230,.5)'); gr.addColorStop(1, 'rgba(255,250,230,0)'); g.fillStyle = gr; g.fillRect(0, 60, 256, 170);
+      g.fillStyle = 'rgba(70,56,40,.55)'; g.fillRect(168, 190, 62, 240); g.fillStyle = 'rgba(40,30,20,.5)'; g.fillRect(174, 198, 50, 226);
+      g.fillStyle = 'rgba(44,32,22,.92)'; g.fillRect(14, 352, 132, 82); g.fillStyle = 'rgba(255,240,205,.2)'; g.fillRect(14, 352, 132, 5);
+      g.fillStyle = 'rgba(30,44,26,.9)'; g.fillRect(232, 372, 10, 62); g.beginPath(); g.ellipse(237, 340, 17, 46, 0, 0, 7); g.fill();
+      g.fillStyle = 'rgba(48,36,24,.9)'; g.fillRect(0, 434, 256, 78);
+    });
+  });
+  var em = canvasTex(S, S, function (g) {
+    var r, gr;
+    g.fillStyle = '#000'; g.fillRect(0, 0, S, S);
+    // the lit ground-floor window: a room behind a blind
+    r = R.gwin; var x = r[0] + 49, y = r[1] + 159, w = 158, h = 202; g.fillStyle = '#e9b866'; g.fillRect(x, y, w, h);
+    gr = g.createLinearGradient(0, y, 0, y + h); gr.addColorStop(0, 'rgba(0,0,0,0)'); gr.addColorStop(1, 'rgba(0,0,0,.4)'); g.fillStyle = gr; g.fillRect(x, y, w, h);
+    g.fillStyle = 'rgba(40,24,12,.4)'; for (var yy = y; yy < y + h * 0.6; yy += 8) g.fillRect(x, yy, w, 3);
+    g.fillStyle = '#000'; g.fillRect(x, r[1] + 150 + 220 * 0.45 - 3, w, 6); g.fillRect(r[0] + 40 + 88 - 3, y, 6, h);
+    // the light over a street door, and what it throws on the wall round it
+    r = R.edoor; gr = g.createRadialGradient(r[0] + 112, r[1] + 70, 3, r[0] + 112, r[1] + 80, 120); gr.addColorStop(0, 'rgba(255,214,150,.9)'); gr.addColorStop(0.12, 'rgba(255,200,130,.4)'); gr.addColorStop(1, 'rgba(255,200,130,0)'); g.fillStyle = gr; g.fillRect(r[0], r[1], r[2], 240);
+    g.fillStyle = '#d9a95c'; g.fillRect(r[0] + 38, r[1] + 108, 148, 50); g.fillStyle = '#000'; g.fillRect(r[0] + 110, r[1] + 108, 5, 50);
+    // a lobby with its lights on
+    r = R.lobby; gr = g.createLinearGradient(0, r[1], 0, r[1] + r[3]); gr.addColorStop(0, '#5a4c33'); gr.addColorStop(0.35, '#cdbb90'); gr.addColorStop(1, '#75623f'); g.fillStyle = gr; g.fillRect(r[0] + 5, r[1] + 10, r[2] - 10, r[3] - 22);
+    g.fillStyle = 'rgba(0,0,0,.6)'; g.fillRect(r[0] + 14, r[1] + 176, 60, 68); g.fillRect(r[0] + 96, r[1] + 126, 8, 118); g.beginPath(); g.arc(r[0] + 100, r[1] + 120, 17, 0, 7); g.fill();
+    g.fillStyle = '#000'; g.fillRect(r[0], r[1] + 70, r[2], 7);
+  });
+  var uv = {}; for (var k in R) { var q = R[k]; uv[k] = [(q[0] + 1) / S, 1 - (q[1] + q[3] - 1) / S, (q[0] + q[2] - 1) / S, 1 - (q[1] + 1) / S]; }
+  return (FRONT = { map: map, em: em, uv: uv });
+}
+// a batch of flat pieces cut from the sheet: each a quad with its own tint
+function frontBatch() { return { pos: [], uv: [], col: [], nor: [], idx: [], n: 0 }; }
+function frontQuad(b, c, reg, tint, nx, u0, u1, v0, v1) { // c: four corners, bottom-left, bottom-right, top-right, top-left as seen
+  var q = frontSheet().uv[reg], ua = q[0] + (q[2] - q[0]) * (u0 || 0), ub = q[0] + (q[2] - q[0]) * (u1 == null ? 1 : u1), va = q[1] + (q[3] - q[1]) * (v0 || 0), vb = q[1] + (q[3] - q[1]) * (v1 == null ? 1 : v1);
+  for (var i = 0; i < 4; i++) { b.pos.push(c[i][0], c[i][1], c[i][2]); b.col.push(tint.r, tint.g, tint.b); b.nor.push(nx, nx ? 0 : 1, 0); }
+  b.uv.push(ua, va, ub, va, ub, vb, ua, vb); b.idx.push(b.n, b.n + 1, b.n + 2, b.n, b.n + 2, b.n + 3); b.n += 4;
+}
+function frontMesh(b, lit) {
+  var g = new THREE.BufferGeometry(), F = frontSheet();
+  g.setAttribute('position', new THREE.Float32BufferAttribute(b.pos, 3)); g.setAttribute('uv', new THREE.Float32BufferAttribute(b.uv, 2)); g.setAttribute('color', new THREE.Float32BufferAttribute(b.col, 3)); g.setAttribute('normal', new THREE.Float32BufferAttribute(b.nor, 3)); g.setIndex(b.idx);
+  var m = lit ? new THREE.MeshLambertMaterial({ map: F.map, emissive: 0xffffff, emissiveMap: F.em, vertexColors: true, side: THREE.DoubleSide })
+    : new THREE.MeshBasicMaterial({ map: F.map, vertexColors: true, alphaTest: 0.5, side: THREE.DoubleSide });
+  var mesh = new THREE.Mesh(g, m); mesh.receiveShadow = lit; return mesh;
 }
 var TEX_GLOW = canvasTex(64, 64, function (g) {
   var gr = g.createRadialGradient(32, 32, 0, 32, 32, 32);
@@ -405,11 +590,13 @@ function build(idx) {
   function box(w, h, d, x, y, z, hsl, basic) { var m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), flat(hsl, basic)); m.position.set(x, y, z); m.castShadow = !basic; root.add(m); return m; }
   // a building with windows: w along the street, d back from it
   function walled(w, h, d, x, z, kind, lit, tone, sink) {
-    var P = wallPair(kind, lit), geo = new THREE.BoxGeometry(d, h + sink, w), uv = geo.attributes.uv, ux = Math.max(1, Math.round(w / P.tile[0])), uy = Math.max(1, Math.round(h / P.tile[1]));
-    for (var k = 0; k < uv.count; k++) uv.setXY(k, uv.getX(k) * ux, uv.getY(k) * uy);
+    var P = wallPair(kind, lit), geo = new THREE.BoxGeometry(d, h + sink, w), uv = geo.attributes.uv, house = kind === 'house';
+    // whole bays across and whole floors up, the floors counted from the pavement (the part sunk below it is not a floor)
+    var B = house ? P.n : Math.max(1, Math.round(w / (P.tile[0] / P.n))), F = house ? P.n : Math.max(1, Math.round(h / (P.tile[1] / P.n))), ux = B / P.n, uy = F / P.n;
+    for (var k = 0; k < uv.count; k++) uv.setXY(k, uv.getX(k) * ux, (uv.getY(k) * (h + sink) - sink) / h * uy);
     col.setHSL(tone[0] / 360, tone[1], Math.min(0.9, tone[2] * (0.88 + r() * 0.24)));
     var m = new THREE.Mesh(geo, new THREE.MeshLambertMaterial({ color: col.clone(), map: P.map, emissive: 0xffffff, emissiveMap: P.em }));
-    m.position.set(x, (h + sink) / 2 - sink + yAt(z), z); m.castShadow = true; m.receiveShadow = true; root.add(m); return m;
+    m.position.set(x, (h + sink) / 2 - sink + yAt(z), z); m.castShadow = true; m.receiveShadow = true; m.userData.B = B; m.userData.F = F; root.add(m); return m;
   }
   // a sign hung out over the pavement, facing the way you come
   function blade(text, hue, s, y, z, wd) {
@@ -461,32 +648,109 @@ function build(idx) {
 
   // parcels: each lot along the street, and whatever business the layout put on it
   var roofGeo = new THREE.CylinderGeometry(0, 0.75, 1, 4, 1); roofGeo.rotateY(Math.PI / 4);
+  // ground floors are assembled from the sheet of parts into two meshes for the whole street (see frontSheet)
+  var FA = frontBatch(), FB = frontBatch(), rf = rng(hash(H.name + '|fronts')), homes = [];
+  // a piece on the street face of lot p: t0..t1 along the street, left to right as you face it; ya..yb up from its
+  // pavement; `out` metres proud of the wall
+  function face(bt, p, out, t0, t1, ya, yb, reg, c, u0, u1, v0, v1) {
+    var X = p.s * (WALK - out), y = yAt(p.z), za = p.z + p.s * t0, zb = p.z + p.s * t1;
+    frontQuad(bt, [[X, y + ya, za], [X, y + ya, zb], [X, y + yb, zb], [X, y + yb, za]], reg, c, -p.s, u0, u1, v0, v1);
+  }
+  // a building with no business at street level: a street door in one bay, a window in each of the others
+  function plainFront(p, wall) {
+    var gh = p.h / p.F, Hm = Math.min(gh, 2.9), cw = p.w / p.B, doorBay = Math.floor(rf() * p.B), bay;
+    for (bay = 0; bay < p.B; bay++) {
+      var t0 = -p.w / 2 + bay * cw, t1 = t0 + cw, mid = (t0 + t1) / 2, door = bay === doorBay;
+      if (p.wall === 'glass') {
+        // a glass building: lobby glazing from pavement to the first floor, doors where the lobby is lit
+        var on = door || (Math.abs(bay - doorBay) === 1 && rf() < 0.7) || rf() < p.lit * 0.4;
+        face(FA, p, 0.02, t0, mid, 0, gh, on ? 'lobby' : 'lobbyOff', wall); face(FA, p, 0.02, mid, t1, 0, gh, on ? 'lobby' : 'lobbyOff', wall, 1, 0);
+        continue;
+      }
+      var mw = Math.min(cw, door ? 1.27 : 1.45), a0 = mid - mw / 2, a1 = mid + mw / 2, lit = rf() < p.lit * 0.75;
+      if (a0 > t0 + 0.01) face(FA, p, 0.02, t0, a0, 0, Hm, 'wall', wall, 0, Math.min(1, (a0 - t0) / 1.45));
+      face(FA, p, 0.02, a0, a1, 0, Hm, door ? 'edoor' : lit ? 'gwin' : 'gwinOff', wall);
+      if (a1 < t1 - 0.01) face(FA, p, 0.02, a1, t1, 0, Hm, 'wall', wall, 0, Math.min(1, (t1 - a1) / 1.45));
+    }
+    if (p.wall !== 'glass' && gh > Hm + 0.01) face(FA, p, 0.02, -p.w / 2, p.w / 2, Hm, gh, 'wall', wall, 0, 1, 0.32, 1);
+  }
+  // a shop: a front that stands a little proud of the building, glass you can see through to the shop behind it,
+  // a board over the window (no words: the name is on the hanging sign), an awning. Panes are about two metres;
+  // a wider lot gets more of them. The door's place is kept on the lot (doorZ) for the light that spills from it.
+  var cA = new THREE.Color(), cB = new THREE.Color(), cC = new THREE.Color(), cD = new THREE.Color();
+  function shopFront(p, bh, wall, sector) {
+    var y = yAt(p.z), gh = p.h / p.F, sw = p.w - 1.6, OUT = 0.3, Hs = Math.min(2.75, p.h - 0.35), top = Math.min(p.h - 0.05, Hs + 0.42);
+    face(FA, p, 0.02, -p.w / 2, p.w / 2, 0, Math.max(gh, top), 'wall', wall, 0, 1, 0, 1);
+    var frame = cA.setHSL(bh / 360, 0.4, 0.2), board = cB.setHSL(bh / 360, 0.45, 0.115), W4 = [[1, 0.86, 0.62], [1, 0.93, 0.78], [0.86, 0.93, 1], [1, 0.8, 0.55]][Math.floor(rf() * 4)], lum = 0.5 + rf() * 0.28;
+    var inside = cC.setRGB(W4[0] * lum, W4[1] * lum, W4[2] * lum);
+    // what stands behind the glass is read off the ledger row's own sector: goods on shelves, tables, or a plain front room
+    var room = /retail|shop|store|boutique|grocer|market|pharmacy|hardware|supply|florist|jewel|pawn|butcher|antique|bakery|garden|outfit|toy/i.test(sector) ? 'int1' : /restaurant|dining|cafe|bar\b|food|brew|kitchen|taquer|pizz|ramen|coffee|lounge|club|nightlife|karaoke|pool hall|venue|hospitality|brunch|ice cream|dessert/i.test(sector) ? 'int2' : 'int3';
+    var nP = Math.max(1, Math.round((sw - 1.09) / 2)), pw = (sw - 1.09) / nP, di = Math.floor(rf() * (nP + 1)), t = -sw / 2, k;
+    for (k = 0; k <= nP; k++) {
+      if (k === di) {
+        face(FB, p, OUT, t, t + 1.09, 0, Hs, 'sdoor', frame); face(FB, p, 0.03, t, t + 1.09, 0, Hs + 0.3, room, inside, 0.3, 0.7);
+        p.doorZ = p.z + p.s * (t + 0.545); t += 1.09;
+      }
+      if (k < nP) { face(FB, p, OUT, t, t + pw, 0, Hs, 'pane', frame); face(FB, p, 0.03, t, t + pw, 0, Hs + 0.3, room, inside, k % 2 ? 1 : 0, k % 2 ? 0 : 1); t += pw; }
+    }
+    // the board over the window, and the ends and top that close the front in
+    face(FB, p, OUT, -sw / 2, sw / 2, Hs, top, 'white', board);
+    var Xo = p.s * (WALK - OUT), Xi = p.s * WALK, zl = p.z - p.s * sw / 2, zr = p.z + p.s * sw / 2;
+    frontQuad(FB, [[Xi, y, zl], [Xo, y, zl], [Xo, y + top, zl], [Xi, y + top, zl]], 'white', board, 0);
+    frontQuad(FB, [[Xo, y, zr], [Xi, y, zr], [Xi, y + top, zr], [Xo, y + top, zr]], 'white', board, 0);
+    frontQuad(FB, [[Xo, y + top, zl], [Xo, y + top, zr], [Xi, y + top, zr], [Xi, y + top, zl]], 'white', board, 0);
+    // the awning: out over the pavement from the board, plain or in stripes, a valance along its edge
+    var striped = rf() < 0.5, a0 = -sw / 2 - 0.15, a1 = sw / 2 + 0.15, n = striped ? Math.max(2, Math.round((a1 - a0) / 0.55)) : 1, xa = p.s * (WALK - OUT - 0.02), xb = p.s * (WALK - 1.32), ya = y + Hs + 0.2, yb = y + Hs - 0.22;
+    for (k = 0; k < n; k++) {
+      var c = striped && k % 2 ? cD.setRGB(0.5, 0.47, 0.41) : cD.setHSL(bh / 360, 0.55, 0.3), z0 = p.z + p.s * (a0 + (a1 - a0) * k / n), z1 = p.z + p.s * (a0 + (a1 - a0) * (k + 1) / n);
+      frontQuad(FB, [[xb, yb, z0], [xb, yb, z1], [xa, ya, z1], [xa, ya, z0]], 'white', c, 0);
+      c.multiplyScalar(0.8); frontQuad(FB, [[xb, yb - 0.2, z0], [xb, yb - 0.2, z1], [xb, yb, z1], [xb, yb, z0]], 'white', c, 0);
+    }
+  }
   LAY.parcels.forEach(function (p) {
     var s = p.s, b = p.b != null ? H.biz[p.b] : null;
     if (p.k === 'h') {
       var hw = p.w - 2.5, hx = s * (WALK + 2.5 + p.d / 2);
-      walled(hw, p.h, p.d, hx, p.z, 'house', p.lit, p.tone, 3);
-      var roof = new THREE.Mesh(roofGeo, flat([15, 0.2, 0.13 + r() * 0.05])); roof.scale.set(p.d * 1.08, 1.6 + r() * 0.8, hw * 1.08); roof.position.set(hx, p.h + roof.scale.y / 2 + yAt(p.z), p.z); roof.castShadow = true; root.add(roof);
-      box(0.9, 0.08, 1.2, s * (WALK + 2.0), 0.03 + yAt(p.z), p.z + hw * 0.25, [30, 0.1, 0.35]);
+      var hm = walled(hw, p.h, p.d, hx, p.z, 'house', p.lit, p.tone, 3); r(); // (one draw kept, so the street beyond this house falls as it did)
+      homes.push({ x: hx, y0: yAt(p.z), z: p.z, s: s, d: p.d, w: hw, h: p.h, rise: 1.6 + r() * 0.8, c: hm.material.color, end: rf() < 0.6, chim: rf() < 0.45, cz: (rf() - 0.5) * 0.5, step: p.z + hw * 0.25 });
       if (r() < p.tr) trees.push([s * (WALK + 1.2), p.z + p.w / 2 - 0.6, 2.6 + r() * 1.6]);
       if (r() < p.lit) glow(s * (WALK + 2.3), 2.3 + yAt(p.z), p.z + hw * 0.25, 0xffcf8a, 1.6);
       return;
     }
-    walled(p.w, p.h, p.d, s * (WALK + p.d / 2), p.z, p.wall, p.lit, p.tone, 3);
+    var wm = walled(p.w, p.h, p.d, s * (WALK + p.d / 2), p.z, p.wall, p.lit, p.tone, 3); p.B = wm.userData.B; p.F = wm.userData.F;
     if (p.wall !== 'glass') box(p.d + 0.5, 0.35, p.w + 0.3, s * (WALK + p.d / 2), p.h + 0.17 + yAt(p.z), p.z, [p.tone[0], p.tone[1] * 0.6, p.tone[2] * 0.5]);
     if (p.h > 6 && r() < 0.5) box(1.6 + r() * 2, 1.2 + r(), 1.6 + r() * 2, s * (WALK + p.d / 2 + (r() - 0.5) * 3), p.h + 0.9 + yAt(p.z), p.z + (r() - 0.5) * p.w * 0.4, [240, 0.04, 0.2]);
     if (b) {
       var bh = sectorHue(b.s), y0 = yAt(p.z);
       blade(b.n, bh, s, 4.5, p.z + p.w / 2 - 0.4, 3.4);
-      var shop = new THREE.Mesh(new THREE.PlaneGeometry(p.w - 1.6, 2.2), flat([bh, 0.35, 0.16], true)); shop.position.set(s * (WALK - 0.02), 1.3 + y0, p.z); shop.rotation.y = -s * Math.PI / 2; root.add(shop);
-      var inside = new THREE.Mesh(new THREE.PlaneGeometry(p.w - 2.6, 1.3), flat([40, 0.7, 0.42], true)); inside.position.set(s * (WALK - 0.04), 1.45 + y0, p.z); inside.rotation.y = -s * Math.PI / 2; root.add(inside);
-      var aw = box(1.3, 0.1, p.w - 1.2, s * (WALK - 0.62), 2.75 + y0, p.z, [bh, 0.6, 0.38]); aw.rotation.z = s * 0.28;
+      shopFront(p, bh, wm.material.color, b.s || '');
       glow(s * (WALK - 0.6), 1.7 + y0, p.z, 0xffd9a0, 2.4);
-    } else if (p.neon && r() < p.neon * 0.6) {
-      var strip = new THREE.Mesh(new THREE.PlaneGeometry(0.3, p.h * 0.7), flat([[320, 190, 50, 280, 0][Math.floor(r() * 5)], 0.95, 0.62], true)); strip.position.set(s * (WALK - 0.04), p.h * 0.5 + yAt(p.z), p.z + (r() - 0.5) * p.w * 0.6); strip.rotation.y = -s * Math.PI / 2; root.add(strip);
+    } else {
+      plainFront(p, wm.material.color);
+      if (p.neon && r() < p.neon * 0.6) {
+        var strip = new THREE.Mesh(new THREE.PlaneGeometry(0.3, p.h * 0.7), flat([[320, 190, 50, 280, 0][Math.floor(r() * 5)], 0.95, 0.62], true)); strip.position.set(s * (WALK - 0.04), p.h * 0.5 + yAt(p.z), p.z + (r() - 0.5) * p.w * 0.6); strip.rotation.y = -s * Math.PI / 2; root.add(strip);
+      }
     }
     if (p.tr && r() < p.tr * 0.5) trees.push([s * (WALK - 0.7), p.z + p.w / 2, 4.4 + r()]);
   });
+  if (FA.n) root.add(frontMesh(FA, true));
+  if (FB.n) root.add(frontMesh(FB, false));
+  if (homes.length) {
+    // a pitched roof on every house: gable to the street on most, eaves to it on the rest; a chimney on some; a step at each door
+    var pv = [], pc = [], tri = function (a, b2, c, l) { pv.push(a[0], a[1], a[2], b2[0], b2[1], b2[2], c[0], c[1], c[2]); for (var e = 0; e < 3; e++) pc.push(l, l, l); };
+    var qd = function (a, b2, c, d, l) { tri(a, b2, c, l); tri(a, c, d, l); }, e0 = [-0.5, 0, -0.5], e1 = [0.5, 0, -0.5], e2 = [0.5, 0, 0.5], e3 = [-0.5, 0, 0.5], r0 = [-0.5, 1, 0], r1 = [0.5, 1, 0];
+    qd(e0, e1, r1, r0, 0.2); qd(e2, e3, r0, r1, 0.2); tri(e3, e0, r0, 1); tri(e1, e2, r1, 1); qd(e0, e3, e2, e1, 0.3);
+    var pg = new THREE.BufferGeometry(); pg.setAttribute('position', new THREE.Float32BufferAttribute(pv, 3)); pg.setAttribute('color', new THREE.Float32BufferAttribute(pc, 3)); pg.computeVertexNormals();
+    var roofs = new THREE.InstancedMesh(pg, new THREE.MeshLambertMaterial({ color: 0xffffff, vertexColors: true, side: THREE.DoubleSide }), homes.length);
+    var bits = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshLambertMaterial({ color: 0xffffff }), homes.length * 2);
+    var QR = new THREE.Quaternion(), UP = new THREE.Vector3(0, 1, 0), PR = new THREE.Vector3(), SR = new THREE.Vector3();
+    homes.forEach(function (hm, k) {
+      M.compose(PR.set(hm.x, hm.h + hm.y0, hm.z), QR.setFromAxisAngle(UP, hm.end ? 0 : Math.PI / 2), SR.set((hm.end ? hm.d : hm.w) * 1.1, hm.rise, (hm.end ? hm.w : hm.d) * 1.12)); roofs.setMatrixAt(k, M); roofs.setColorAt(k, hm.c);
+      M.compose(PR.set(hm.s * (WALK + 2.0), 0.03 + hm.y0, hm.step), QR.identity(), SR.set(0.9, 0.08, 1.2)); bits.setMatrixAt(k * 2, M); bits.setColorAt(k * 2, col.setHSL(30 / 360, 0.1, 0.35));
+      M.compose(PR.set(hm.x + (hm.end ? hm.cz * hm.d : 0.22 * hm.d), hm.h + hm.y0 + hm.rise * 0.62, hm.z + (hm.end ? 0.22 * hm.w : hm.cz * hm.w)), QR, SR.set(hm.chim ? 0.55 : 0, hm.rise * 0.95, hm.chim ? 0.55 : 0)); bits.setMatrixAt(k * 2 + 1, M); bits.setColorAt(k * 2 + 1, col.setHSL(12 / 360, 0.3, 0.2));
+    });
+    roofs.castShadow = bits.castShadow = true; root.add(roofs); root.add(bits);
+  }
   if (ST.trees >= 0.5) for (var tz = 6; tz > -L - 20; tz -= 9 + r() * 3) sides.forEach(function (s) { if (!held(s, tz - 1, tz + 1)) trees.push([s * (WALK - 0.5), tz + r() * 2, 5 + r() * 1.2]); });
   trees = trees.filter(function (t) { return Math.abs(t[0]) > WALK || !bySign(t[0] < 0 ? -1 : 1, t[1], 3); });
   if (trees.length && !(LIFE.nature && LIFE.nature.trees && LIFE.nature.trees(kit, trees))) {

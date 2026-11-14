@@ -69,7 +69,7 @@ pointers:
 - **Written file:** none needed on the evidence. Mayor: 20,959 characters of files, a 175-character sheet line and a 701-character sheet line + written part all filed the same move. Tran weekday ×9 and Rivers Sunday ×9 (the Mayor once per version): the same act and the same voice on all three; Rivers's own lines return word for word from her page.
 - **State:** tested: 21 runs (Mayor 3, Tran 9, Rivers 9), three people, both wakes, each a single call without the live retry and evidence-read loop. No project director's Sunday step has been run.
 - **Differs today:** IDENTITY + LENS + RULES load whole as the system turn (`readPersonaDir`); the shared council-seat LENS and RULES ride with every seat.
-- **Sheet line caveat:** the six role mismatches were corrected 2026-11-14 (§3.1). The wake's line prints the office title bare: "You are Ramon Vega, 64, a City Council District 4 living in Lake Merritt".
+- **Sheet line for an office holder (live 2026-11-14):** the daily wake reads the office sheet: "You are Ramon Vega, 64, living in Lake Merritt, Oakland. You hold the office of City Council District 4 (Glenview, Dimond, Ivy Hill)." and every office holder gets the known-person sentence. Interviews still print the ledger role.
 - **Open, and not a boot matter:** what they are handed. "D3 East Oakland" (G-EC48) and the hand-closed tracker rows come back in every statement because they are in the pack.
 - **Legacy on switch:** `civic-office-mayor/`, `civic-office-council-d1…d9/`, `civic-office-council-seat/`, and the faction folders the seats fall back to (`civicSeat.personaDirFor`).
 
@@ -254,6 +254,7 @@ Mara Vance (asker; her own memory and tools; civic.47 M1), Elias Varek's journal
 
 ## Changelog
 
+- 2026-11-14 (engine-sheet) — The daily wake reads an office holder's title from the office sheet (live).
 - 2026-11-14 (engine-sheet) — The test guard is in the repo (`scripts/guard/`), on the builder's "Put in the repo".
 - 2026-11-14 (engine-sheet) — Six office holders' ledger roles corrected to their office Title on the builder's word; §2 caveat and §3.1 updated.
 - 2026-11-14 (engine-sheet) — agy review HOLD folded: 13 findings, all verified. City-hall runs are 21, not 27; reporter evidence was not clean (stance line and bag in every version; word counts and style claims corrected); the worker memory loader named was wrong; the chief also wakes Thursdays; chaos table rebuilt on the config; gate and retirement sections corrected.

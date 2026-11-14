@@ -35,7 +35,7 @@ const getCurrentCycle = require('/root/GodWorld/lib/getCurrentCycle');
 // shared with scripts/citizenVoice.js (edition voicing) + the Task-6 conversation engine.
 const { buildPool, coResidents, loadLifeArc, loadSportsSlice, loadNeighborhoodTexture,
   loadBonds, loadFamily, loadHealthState, loadOwnPageReadback, dialTrajectory,
-  loadCardAnchor, loadVoiceTexture, renderStanding, renderOwnRecord, loadOwnFeedLines, stationLine,
+  loadCardAnchor, loadVoiceTexture, renderStanding, renderOwnRecord, loadOwnFeedLines, stationLine, loadOfficeHolders, identityLine,
   loadLivedEvents, renderLivedLine, livedFor, recordLivedSpend, selectWakeCitizen, wakeSeedKey,
   lifeTailOf, OWED_RESERVE, chaosOutcomeIndex, owedFrom, owedCandidates, owedFor, owedLivedPrefer, owedShownSet, owedWakesUsed, owedStateFrom, owedJournalLine, owedPageKey, wakeAdmission, owedPageStep, loadOwedRecords, acquireFileLock,
   SHOW_RESERVE, owedFromShow, showCandidates, showWakesUsed, showMarkSpent } = require('/root/GodWorld/lib/wakePerception');
@@ -210,7 +210,7 @@ function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bonds
   let ownFeed = '';
   try { ownFeed = loadOwnFeedLines(c.name, cycle).block; } catch (e) { ownFeed = ''; }
   const feedLine = ownFeed ? `\n\n${ownFeed}` : '';
-  const system = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. ${stationLine(c, !!ownFeed)} Your temperament: ${disp}.${trajLine}${arcLine}${health}${anchor}${talk}${record}${show}${feedLine}\n\nReal things from your life recently:\n${c.life}${family}${standing}${who}${bonds}${ripple}${opinions}${sports}${paper}${texture}${memory}${tensions}`;
+  const system = `${identityLine(c)} ${stationLine(c, !!ownFeed)} Your temperament: ${disp}.${trajLine}${arcLine}${health}${anchor}${talk}${record}${show}${feedLine}\n\nReal things from your life recently:\n${c.life}${family}${standing}${who}${bonds}${ripple}${opinions}${sports}${paper}${texture}${memory}${tensions}`;
   // T5 — varied-provocation question bank. The fixed "small things on your mind"
   // prompt becomes a deterministically-seeded pick latching a real signal this
   // citizen perceives, so two citizens woken the same cycle are prompted
@@ -405,6 +405,11 @@ async function fileNextChapter(c, cycle, question, parsed, dry) {
     showReady: sc.ready, showReserve: showRes, showUsed });
   if (FORCE_POP && picked.slot !== 'forced') logLine(`--pop ${FORCE_POP} not in the pool; falling back to the draw`);
   const c = picked.c;
+  // pipeline.110 (builder 2026-11-14: "Yes this approved"): an office holder's title comes from the office sheet, not
+  // RoleType. One Civic_Office_Ledger read a wake; unreadable = the identity and station lines as before, said once.
+  const offices = await loadOfficeHolders();
+  if (offices.error) logLine('office sheet read failed (non-fatal, no office title this wake): ' + offices.error);
+  if (offices.byPop[c.popId]) c.office = offices.byPop[c.popId];
   // pipeline.93 — the woken citizen's own owed events stay in the life block they read; nothing else is added.
   const mineOwed = owedFor(c.popId, owed, owedView);
   const pins = mineOwed.map((e) => e.pin).filter(Boolean);

@@ -1,7 +1,7 @@
 ---
 title: Cross-lane messaging — reaching another lane mid-session
 created: 2026-08-15
-updated: 2026-10-29
+updated: 2026-11-13
 type: reference
 tags: [infrastructure, architecture, active]
 sources:
@@ -23,7 +23,7 @@ pointers:
 A bare-bash pane can mean the CLI crashed, or it can mean this. Check here before treating one as broken.
 
 - **kimi** — account locked out until **2026-08-21**. Pane sits at bare `bash` until then; that is the lockout, not a crash. Nothing to fix, nothing to dispatch — wait it out. Mike-direct 2026-08-17.
-- **codex** — account-restricted until **2026-08-20**. Its pane stays live (`node`), and rb can still send it messages, but codex cannot reply back during the restriction — treat any dispatch to it as fire-and-forget until the date passes, not a wait-for-ack exchange. Mike-direct 2026-08-17.
+- **codex** — on the free model; its reviews are advisory (Mike-direct 2026-11-13: "codex is now on free model and offers advisory reviews"). A finding is a claim to check against the code, not a gate.
 - **antigravity** — runs on Mike's own Gemini Pro account. No expiry, different kind of gap: it currently has **no defined role** — a capability without an assigned scope of work. Not broken, just unassigned; don't route work to it assuming a lane responsibility that hasn't been decided yet. Mike-direct 2026-08-17.
 
 Past these dates, re-verify with `tmux capture-pane` rather than trusting this table — it's a snapshot, not a live status feed. Strike an entry once its restriction has actually lifted and been confirmed live, don't just let the date silently pass.

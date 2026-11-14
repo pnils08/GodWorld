@@ -4,4 +4,4 @@
 
 **NEXT[engine-sheet]:** pipeline.110 → Task 8 (positions written as outcomes, closed projects woken open). Then office boot-file check (tools, no 4th wall, no builder notes). pipeline.100 → Task 3 narrator. Then engine.340, 341.
 
-**NEXT[research-build]:** codex review of f8feaf9d2 + 8bd4b1f01 (recall patch, brainSearch) before any push (builder: "until codex approves you can't commit work"); the memory work has no row yet. pipeline.108 → no daily-show code without an approved plan. pipeline.109 → boot digest read. engine.339 calls 1–4. Codex's five data findings.
+**NEXT[research-build]:** codex reviews are advisory now (builder 11-13: free model). The memory work (recall patch, brainSearch) has no row yet. pipeline.108 → no daily-show code without an approved plan. pipeline.109 → boot digest read. engine.339 calls 1–4. Codex's five data findings.

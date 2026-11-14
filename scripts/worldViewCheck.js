@@ -38,6 +38,8 @@ function readSources(root) {
     ledger: readRows(path.join(root, 'output/simulation_ledger_snapshot.jsonl')),
     canon: fs.readFileSync(path.join(root, 'docs/canon/INSTITUTIONS.md'), 'utf8'),
     style: require(path.join(root, 'world-view/hoods.js')),
+    // the cycle's world summary, where the Chaos_Cars rows are printed (absent before the summary is built)
+    worldSummary: (() => { try { return fs.readFileSync(path.join(root, 'output', `world_summary_c${readJson(path.join(beats, 'meta.json')).cycle}.md`), 'utf8'); } catch (e) { return null; } })(),
   };
 }
 function loadEngine(root) {
@@ -258,6 +260,27 @@ function checkWorldView(build, sources, engine, secondBuild, reports = []) {
   for (const b of businesses.values()) {
     if (!assigned.has(b.BIZ_ID) && !knownUnplaced.has(b.BIZ_ID)) fail('unplaced', b.BIZ_ID, `${b.Name} (${b.Neighborhood}) has no parcel or place and is not listed as known-unplaced`);
   }
+  // chaos cars: every one on a street is a row of the world summary's Chaos Events table, on the street that row
+  // points to, with the summary's own seed line; every row of the table is on a street or listed as elsewhere
+  if (sources.worldSummary !== undefined) {
+    const section = /^## Chaos Events[^\n]*\n([\s\S]*?)(?=^## |(?![\s\S]))/m.exec(sources.worldSummary || '');
+    const tableRows = section ? section[1].split('\n').filter(l => /^\| [a-z_]+ \|/.test(l)).map(l => l.split('|').map(x => x.trim())) : [];
+    const pool = tableRows.map(c => `${c[1]}|${c[2]}|${c[3].replace(/\s+\(T\d\)$/, '')}`);
+    const drawn = [];
+    for (const h of hoods) for (const ev of arr(h.chaos || [], `${h.name}.chaos`)) {
+      const key = `${ev?.v}|${ev?.o}|${ev?.scope} ${ev?.id}`, at = pool.indexOf(key);
+      if (ev?.test) { fail('chaos', h.name, 'look-test chaos car in a build'); continue; }
+      if (at < 0) { fail('chaos', h.name, `no Chaos Events row for ${key}`); continue; }
+      pool.splice(at, 1); drawn.push(key);
+      if (ev.seed && !sources.worldSummary.includes(ev.seed)) fail('chaos', h.name, `seed line is not the summary's: ${JSON.stringify(ev.seed)}`);
+      if (ev.scope === 'neighborhood' && ev.id !== h.name) fail('chaos', h.name, `neighborhood row for ${ev.id} drawn here`);
+      if (ev.scope === 'business' && businesses.get(ev.id)?.Neighborhood !== h.name) fail('chaos', h.name, `business ${ev.id} is not on this street`);
+      if (ev.scope === 'citizen' && !arr(h.people, `${h.name}.people`).some(p => p.id === ev.id) && String(ledger.get(ev.id)?.Neighborhood || '').trim() !== h.name) fail('chaos', h.name, `citizen ${ev.id} is neither shown nor living on this street`);
+    }
+    for (const ev of arr(build.data?.chaos?.elsewhere || [], 'data.chaos.elsewhere')) { const key = `${ev?.v}|${ev?.o}|${ev?.scope} ${ev?.id}`, at = pool.indexOf(key); if (at < 0) fail('chaos', 'elsewhere', `no Chaos Events row for ${key}`); else pool.splice(at, 1); }
+    for (const key of pool) fail('chaos', 'missing', `Chaos Events row neither on a street nor listed elsewhere: ${key}`);
+    if (drawn.length) reports.push(`CHAOS ${drawn.length} on streets: ${drawn.join('; ')}`);
+  }
   if (!secondBuild?.data?.hoods || !equal(
     hoods.map(h => ({ name: h.name, lay: h.lay })),
     secondBuild.data.hoods.map(h => ({ name: h.name, lay: h.lay })))) {
@@ -283,7 +306,7 @@ function run(root = path.resolve(__dirname, '..'), io = console) {
     for (const report of reports) io.log(report);
     for (const failure of failures) io.error(`FAIL ${failure}`);
     if (failures.length) return 1;
-    io.log(`PASS world-view C${first.CYCLE}: ${first.hoods.length} neighborhoods; ${reports.length} known-unplaced businesses; provenance and repeated layouts checked`);
+    io.log(`PASS world-view C${first.CYCLE}: ${first.hoods.length} neighborhoods; ${reports.filter(r => r.startsWith('KNOWN-UNPLACED')).length} known-unplaced businesses; ${reports.filter(r => r.startsWith('CHAOS')).length ? 'chaos cars matched to the world summary; ' : ''}provenance and repeated layouts checked`);
     return 0;
   } catch (e) {
     io.error(`FAIL input: ${String(e.message).replace(/[\r\n]+/g, ' ')}`);

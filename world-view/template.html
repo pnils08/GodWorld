@@ -66,6 +66,10 @@ button[aria-pressed="true"] { background: var(--ink); color: var(--night); }
 .tag .more, .tag .cap { font-size: 11px; color: var(--dim); margin-top: 3px; }
 .tag .said { margin-top: 7px; padding-top: 6px; border-top: 1px solid var(--edge); font: italic 400 14px/1.32 var(--story); display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
 body.walk .tag .said, body.words .tag .said { -webkit-line-clamp: 9; }
+.ctag { position: fixed; left: 0; top: 0; max-width: min(260px, 60vw); pointer-events: none; opacity: 0; transition: opacity .45s ease; will-change: transform; background: var(--veil); border: 1px solid rgba(255,160,60,.55); border-radius: 10px; padding: 5px 10px 6px; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
+.ctag b { display: flex; align-items: center; gap: 6px; font-weight: 800; font-size: 13px; }
+.ctag b i { width: 8px; height: 8px; border-radius: 2px; background: #ff9a2e; transform: rotate(45deg); flex-shrink: 0; }
+.ctag span { display: block; font: italic 400 14px/1.25 var(--story); margin-top: 1px; }
 body.words .tag { max-width: min(340px, 62vw); }
 body.words .tag .said { font-size: 16px; border-top: 0; padding-top: 0; margin-top: 4px; }
 body.words .tag .line { font: 500 12px/1.3 var(--display); color: var(--dim); margin-top: 6px; }
@@ -185,7 +189,7 @@ var KIND = { m: '#ffc94d', v: '#6fd3ff', t: '#ff9ecb', h: '#ff6b5e', s: '#7be08a
 var ROAD = 6.4, WALK = 10.2, SPEED = 3.2, LANE = 2.4;
 var DBG = window.WV_DEBUG || null; // look-test hook: { cam: [x,y,z], look: [x,y,z], t0: seconds, hide: true, manual: true (the clock only moves on __wv.step(dt)), follow: { who: name or index, off: [x,y,z], aim: height } }
 if (DBG && DBG.hide) document.body.classList.add('bare');
-if (DBG) window.__wv = { get world() { return world; }, get camera() { return camera; }, WALK: WALK, step: function (dt) { if (!world || busy) return false; step(dt); if (frame++ % 6 === 0) pickNames(); placeNames(); draw(); return true; } };
+if (DBG) window.__wv = { get world() { return world; }, get camera() { return camera; }, WALK: WALK, step: function (dt) { if (!world || busy) return false; step(dt); if (frame++ % 6 === 0) pickNames(); placeNames(); placeChaos(); draw(); return true; } };
 var DEF = { wall: 'stucco', tone: [30, 0.15, 0.5], h: [4, 9], w: [6, 11], gap: [0.6, 2.1], lit: 0.45, fill: 'box', trees: 0, slope: 0, neon: 0, set: [] };
 
 // ---------- seeded random ----------
@@ -831,6 +835,7 @@ function build(idx) {
     if (d.hh) { var lead = byHome[d.hh]; if (!lead) byHome[d.hh] = o; else { lead.kin = (lead.kin || 0) + 1; o.lead = lead; o.rank = lead.kin; o.post = false; } }
     o.z = o.z0;
   });
+  kit.people = people; // (the traffic file finds a citizen here when a chaos car has come for them)
   if (typeof LIFE.people === 'function') LIFE.people(kit, people);
 
   // the way out: a gate onto the next place
@@ -937,6 +942,7 @@ function facts() {
   bits.push([H.total, ' tracked ' + (H.total === 1 ? 'person' : 'people') + ' and ', H.lines, ' things that happened to them']);
   if (H.biz.length) bits.push([H.biz.length, ' businesses']);
   if (w.temp) bits.push(['', String(w.temp) + '\u00B0, ' + String(w.streakType || w.type)]);
+  if ((H.chaos || []).length) bits.push([H.chaos.length, H.chaos.length === 1 ? ' chaos car' : ' chaos cars']);
   $('hood').textContent = H.name;
   $('canon').textContent = world.ST.q ? '“' + world.ST.q + '”' : '';
   var fx = $('facts'); fx.textContent = 'Week ' + DATA.cycle + '. ';
@@ -958,6 +964,7 @@ function go(idx, startAt, who) {
     try { history.replaceState(null, '', '#' + (who ? 'who-' + slug(who.n) + '-' + String(who.id || '').replace(/\D/g, '') : slug(world.H.name))); } catch (e) {}
     $('fade').classList.remove('on'); busy = false;
     if (who) startVisit(who);
+    if (DBG && DBG.ride != null && world.H.chaos && world.H.chaos[DBG.ride]) startChaos(world.H.chaos[DBG.ride]);
     if (queued) { var q = queued; queued = null; go(q[0], q[1], q[2]); }
   }, world ? 400 : 0);
 }
@@ -979,8 +986,15 @@ function step(dt) {
     camera.lookAt(vp.x + (wide ? 1.15 : 0), (wide ? 1.3 : 0.5) * vp.sc + vy, vp.z);
   } else if (bizView) {
     var bv = bizView, by = W.yAt(bv.z);
+    if (bv.ride) {
+      // beside a chaos car, a little ahead of it, looking back at it as it comes
+      var rc = bv.ride, rs = rc.side || 1, rwide = window.innerWidth > 720;
+      if (rc.on) { bv.z = rc.z; bv.rx = rc.x; bv.ry = rc.y; }
+      if (bv.rx != null) { W.x = bv.rx - rs * 3.6; W.z = bv.z - rs * (5.5 + bv.ry * 1.3); camera.position.set(W.x + Math.sin(t * 0.3) * 0.15, 1.9 + bv.ry * 0.25, W.z); camera.lookAt(bv.rx - (rwide ? rs * 2.2 : 0), bv.ry * 0.45, bv.z); }
+    } else {
     W.x = bv.cx + Math.sin(t * 0.2) * 0.4; W.z = bv.cz + Math.cos(t * 0.17) * 0.5;
     camera.position.set(W.x, bv.cy + by, W.z); camera.lookAt(bv.lx, bv.ly + by, bv.lz);
+    }
   } else if (walking) {
     var turn = (held.left ? 1 : 0) - (held.right ? 1 : 0), mv = (held.fwd ? 1 : 0) - (held.back ? 1 : 0), sp = (held.fast ? 13 : 6.5) * Math.max(0.6, Math.sqrt(pace)) * dt;
     yaw += turn * 1.9 * dt;
@@ -1019,7 +1033,7 @@ function loop(now) {
   if (!world || busy || (DBG && DBG.manual)) return;
   step(dt);
   if (frame++ % 6 === 0) pickNames();
-  placeNames();
+  placeNames(); placeChaos();
   draw();
   // step quality down after two seconds of struggling
   if (now - clock0 > 4000 && quality > 0 && !document.hidden && raw < 3) { slow = raw > 0.045 ? slow + Math.min(raw, 0.3) : Math.max(0, slow - raw); if (slow > 2) { quality--; slow = 0; sun.castShadow = quality > 1; if (!quality) resize(); } }
@@ -1119,6 +1133,7 @@ function pick(px, py) {
     if (sc < bestScore) { bestScore = sc; best = obj; }
   }
   W.people.forEach(function (p) { test(p.x, 1.0 * p.sc + W.yAt(p.z), p.z, 1.0, 60, 26, 0.8, { p: p }); });
+  (W.H.chaos || []).forEach(function (ev) { if (ev.on) test(ev.x, ev.y * 0.5, ev.z, 2.6, 90, 34, 0.85, { c: ev }); });
   W.H.lay.parcels.forEach(function (q) { if (q.b == null) return; var y = W.yAt(q.z); test(q.s * WALK, 1.6 + y, q.z, q.w * 0.45, 80, 30, 1, { b: q.b }); test(q.s * (WALK - 1.7), 4.5 + y, q.z + q.w / 2 - 0.4, 1.9, 80, 26, 1, { b: q.b }); });
   W.H.lay.places.forEach(function (q) {
     if (q.b == null) return;
@@ -1127,7 +1142,7 @@ function pick(px, py) {
     else if (q.type === 'market') test(WALK - 2.3, 5.6, -W.L * 0.3 + 3, 2.4, 80, 28, 1, { b: q.b });
   });
   if (!best) return;
-  if (best.p) startVisit(best.p.d); else startBiz(best.b);
+  if (best.p) startVisit(best.p.d); else if (best.c) startChaos(best.c); else startBiz(best.b);
 }
 function money(v) { return '$' + Math.round(v).toLocaleString('en-US'); }
 function startBiz(bi) {
@@ -1161,6 +1176,44 @@ function startBiz(bi) {
     body.appendChild(ul);
     if (staff.some(function (m) { return !BYID[m.id]; })) body.appendChild(mk('p', 'Greyed names had nothing on record this week, so they are not on a street.', 'pmeta'));
   }
+  $('person').hidden = false; $('person').scrollTop = 0;
+}
+// ---------- chaos cars: a label rides with each one on the street; tap it (or the car) to ride beside it ----------
+// What is written is the engine's own: the vehicle's name from its config, the outcome it rolled, the seed line
+// it wrote if it wrote one, what it hit, and the number it moved.
+var CTAGS = [], CV = new THREE.Vector3();
+function chaosWords(ev) { return String(ev.o || '').replace(/_/g, ' '); }
+function placeChaos() {
+  var list = (world && world.H.chaos) || [], w = window.innerWidth, h = window.innerHeight, floor = $('top').getBoundingClientRect().bottom - 20, i;
+  for (i = 0; i < Math.max(list.length, CTAGS.length); i++) {
+    var ev = list[i], el = CTAGS[i];
+    if (!ev) { if (el) el.style.opacity = 0; continue; }
+    if (!el) { el = CTAGS[i] = document.createElement('div'); el.className = 'ctag'; el.innerHTML = '<b><i></i><em style="font-style:normal"></em></b><span></span>'; tagsEl.appendChild(el); }
+    if (el._ev !== ev) { el._ev = ev; el.querySelector('em').textContent = ev.n; el.querySelector('span').textContent = ev.seed || (chaosWords(ev) + (ev.to && ev.scope !== 'neighborhood' ? ' — ' + ev.to : '')); }
+    var show = ev.on && labels > 0 && !visiting && !bizView && !busy, o = 0;
+    if (show) {
+      CV.set(ev.x, ev.y + 0.7, ev.z).project(camera);
+      var dx = ev.x - camera.position.x, dz = ev.z - camera.position.z, dist = Math.sqrt(dx * dx + dz * dz), x = (CV.x * 0.5 + 0.5) * w, y = (-CV.y * 0.5 + 0.5) * h, bw = el.offsetWidth, bh = el.offsetHeight;
+      if (CV.z < 1 && dist < 80 && x > -40 && x < w + 40) { o = Math.min(1, (80 - dist) / 14); el.style.transform = 'translate(' + Math.max(8, Math.min(w - bw - 8, x - bw / 2)).toFixed(1) + 'px,' + Math.max(floor, y - bh - 6).toFixed(1) + 'px)'; }
+    }
+    el.style.opacity = o.toFixed(2);
+  }
+}
+function startChaos(ev) {
+  if (!world) return;
+  endVisit(true); if (walking) setWalk(false);
+  bizView = { ride: ev, z: ev.z != null ? ev.z : world.z - 20, rx: ev.x, ry: ev.y || 2 }; document.body.classList.add('visit'); CARDS.forEach(function (s) { setCard(s, null); });
+  var body = $('pBody'), lines = ['Chaos car · week ' + DATA.cycle + ' · ' + world.H.name];
+  lines.push(ev.scope === 'neighborhood' ? 'It came for the neighborhood.' : ev.scope === 'business' ? 'It came for ' + (ev.to || ev.id) + '.' : ev.scope === 'citizen' ? 'It came for ' + (ev.to || ev.id) + '.' : 'It came for ' + (ev.to || ev.id) + '.');
+  $('pName').textContent = ev.n; $('pMeta').textContent = ''; lines.forEach(function (l, i) { if (i) $('pMeta').appendChild(document.createElement('br')); $('pMeta').appendChild(document.createTextNode(l)); });
+  $('pBio').textContent = ev.seed || ''; $('pBio').hidden = !ev.seed; body.textContent = '';
+  section(body, 'What it did'); var ul = mk('ul'), li = mk('li'), dot = mk('i'); dot.style.background = '#ff9a2e'; li.appendChild(dot); li.appendChild(mk('span', chaosWords(ev))); ul.appendChild(li);
+  if (ev.metric) { li = mk('li'); dot = mk('i'); dot.style.background = '#ff9a2e'; li.appendChild(dot); li.appendChild(mk('span', ev.metric + (ev.mag !== undefined && ev.mag !== '' ? ' ' + (Number(ev.mag) > 0 ? '+' : '') + ev.mag : ''))); ul.appendChild(li); }
+  body.appendChild(ul);
+  if (ev.scope === 'citizen' && BYID[ev.id]) { section(body, 'Who it came for'); var ent = BYID[ev.id], bt = mk('button', ev.to, 'link'); bt.type = 'button'; bt.addEventListener('click', function () { go(ent.h, 0, ent.d); }); body.appendChild(bt); }
+  if (ev.scope === 'business' && ev.b != null) { section(body, 'Where'); var bb = mk('button', ev.to, 'link'); bb.type = 'button'; bb.addEventListener('click', function () { startBiz(ev.b); }); body.appendChild(bb); }
+  if (ev.test) body.appendChild(mk('p', 'Look-test build: this car is not from the engine.', 'pmeta'));
+  $('bBack').textContent = 'Back to the street';
   $('person').hidden = false; $('person').scrollTop = 0;
 }
 function closePeople() { $('people').hidden = true; $('bPeople').textContent = 'People'; }

@@ -233,6 +233,46 @@ function layout(H) {
 hoods.forEach(h => { h.lay = layout(h); });
 hoods.forEach(h => h.people.forEach(p => { if (p.runs) { const i = h.biz.findIndex(x => p.runs.some(rn => rn.id === x.id)); if (i >= 0) p.at = i; p.runs = p.runs.map(rn => ({ n: rn.n, hood: rn.hood })); } }));
 
+// ---------- chaos cars: the week's Chaos_Cars rows, as the world summary printed them ----------
+// Chaos_Cars is not a beats tab. buildWorldSummary.js prints the cycle's rows as a table under "## Chaos Events",
+// with the narrative seeds below it; that file is read here, never the sheet. Each row goes on the street it
+// hit: a neighborhood's own street, the street its business stands on, the street its citizen is shown on (or
+// lives on, by the ledger). A row that lands on none of the 22 streets is listed in data.chaos.elsewhere, not drawn.
+// Vehicle names are the engine's own (utilities/chaosCarsConfig.js displayName).
+const CHAOS_NAMES = {};
+try { require('../utilities/chaosCarsConfig.js').VEHICLE_CONFIGS.forEach(v => { CHAOS_NAMES[v.name] = v.displayName; }); } catch (e) { console.warn('world-view: chaos car names not loaded (' + e.message + '); the row\'s own key is shown'); }
+function chaosRows(cycle) {
+  const f = path.join(__dirname, '..', 'output', 'world_summary_c' + cycle + '.md');
+  if (!fs.existsSync(f)) return null;
+  const m = /^## Chaos Events[^\n]*\n([\s\S]*?)(?=^## |(?![\s\S]))/m.exec(fs.readFileSync(f, 'utf8'));
+  if (!m) return null;
+  const rows = [], seeds = {};
+  m[1].split('\n').forEach(l => {
+    const c = l.split('|').map(x => x.trim());
+    if (l.startsWith('|') && c.length >= 7 && /^[a-z_]+$/.test(c[1])) rows.push({ v: c[1], o: c[2], target: c[3], metric: c[4] === '—' ? '' : c[4], mag: c[5] === '—' ? '' : c[5] });
+    const sd = /^- ([a-z_]+) → (.+?): (.+)$/.exec(l); if (sd) seeds[sd[1] + '|' + sd[2]] = sd[3].trim();
+  });
+  rows.forEach(r => { const tm = /^(\w+)\s+(.+?)(?:\s+\(T(\d)\))?$/.exec(r.target) || []; r.scope = tm[1] || ''; r.id = tm[2] || ''; r.seed = seeds[r.v + '|' + r.id] || ''; });
+  return rows;
+}
+const chaosRead = chaosRows(CYCLE), chaosElsewhere = [];
+hoods.forEach(h => { h.chaos = []; });
+(chaosRead || []).forEach(r => {
+  const ev = { v: r.v, n: CHAOS_NAMES[r.v] || r.v.replace(/_/g, ' '), o: r.o, scope: r.scope, id: r.id };
+  if (r.metric) ev.metric = r.metric; if (r.mag) ev.mag = r.mag; if (r.seed) ev.seed = r.seed;
+  let h = null;
+  if (r.scope === 'neighborhood') { ev.to = r.id; h = hoods.find(x => x.name === r.id); }
+  else if (r.scope === 'business') { const row = bizById.get(r.id); if (row) { ev.to = row.Name; h = hoods.find(x => x.name === row.Neighborhood); const bi = h ? h.biz.findIndex(x => x.id === r.id) : -1; if (bi >= 0) ev.b = bi; } }
+  else if (r.scope === 'citizen') { ev.to = nameOf(r.id) || r.id; h = hoods.find(x => x.people.some(p => p.id === r.id)); if (h) ev.p = r.id; else { const L = ledger.get(r.id); h = L && hoods.find(x => x.name === String(L.Neighborhood || '').trim()); } }
+  else ev.to = r.id;
+  if (h) h.chaos.push(ev); else chaosElsewhere.push(ev);
+});
+// CHAOS_TEST=<street> puts one of every road vehicle on that street to look at the shapes. Never for a published build.
+if (process.env.CHAOS_TEST) {
+  const th = hoods.find(x => x.name.toLowerCase().replace(/[^a-z0-9]+/g, '-') === process.env.CHAOS_TEST);
+  if (th) { th.chaos = Object.keys(CHAOS_NAMES).map(v => ({ v, n: CHAOS_NAMES[v], o: 'look_test', scope: 'neighborhood', id: th.name, to: th.name, test: 1 })); console.warn('world-view: CHAOS_TEST — ' + th.name + ' carries made-up chaos cars. Do not publish this build.'); }
+}
+
 const onStreets = new Set(hoods.map(h => h.name));
 const unplacedBiz = biz.filter(x => !onStreets.has(x.Neighborhood)).map(x => ({ n: x.Name, hood: x.Neighborhood }));
 const wx = process.env.WX || '';
@@ -243,7 +283,8 @@ const data = {
   style: {},
   landmarks: STYLE.LANDMARKS,
   notShown,
-  unplacedBiz
+  unplacedBiz,
+  chaos: { read: chaosRead != null, total: (chaosRead || []).length, elsewhere: chaosElsewhere }
 };
 hoods.forEach(h => { data.style[h.name] = STYLE[h.name]; });
 
@@ -269,4 +310,5 @@ const everyone = hoods.reduce((a, h) => a.concat(h.people), []);
 console.log('sex known', everyone.filter(p => p.g).length, 'bands', JSON.stringify(everyone.reduce((a, p) => { a[p.ab] = (a[p.ab] || 0) + 1; return a; }, {})), 'with something said', everyone.filter(p => p.said).length, 'sim year', SIM_YEAR);
 console.log('recorded but not shown:', notShown.length, '| businesses with no street:', unplacedBiz.length, unplacedBiz.map(x => x.n + ' (' + x.hood + ')').join('; '));
 console.log(hoods.map(h => h.name + ': ' + h.lay.places.map(p => p.type).join(',')).filter(s => !/: $/.test(s)).join('\n'));
+console.log('chaos cars:', chaosRead == null ? 'no world summary for C' + CYCLE + ' (none drawn)' : chaosRead.length + ' this week — ' + hoods.filter(h => h.chaos.length).map(h => h.name + ': ' + h.chaos.map(c => c.n + ' (' + c.o + (c.to && c.to !== h.name ? ' → ' + c.to : '') + ')').join(', ')).join('; ') + (chaosElsewhere.length ? '; not on a street: ' + chaosElsewhere.map(c => c.n + ' → ' + c.to).join(', ') : ''));
 }

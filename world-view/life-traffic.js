@@ -17,7 +17,10 @@
 // its glass painted into it; wheels have hubs and turn with the distance covered; the body dips on its springs
 // under braking. The cars parked at the kerb (the page's k.carSpots) are the same shapes, drawn here.
 //
-// Draw calls: one per kind of vehicle (5), wheels, lamps, light glows, light on the road; with buses, bus bodies,
+// The week's chaos cars (the engine's Chaos_Cars rows for this street, k.H.chaos) drive in the same loop, each
+// with its own shape and lights; see the README, §Chaos cars.
+//
+// Draw calls: one per kind of vehicle (5, and one for each kind of chaos car on the street), wheels, lamps, light glows, light on the road; with buses, bus bodies,
 // bus windows, bus boards, stop poles and stop flags. Everything sits under k.ground, so it tilts with a hill.
 LIFE.traffic = function (k) {
   var T = k.THREE, G = k.ground, LANE = k.LANE, ROAD = k.ROAD, ST = k.ST || {}, LAY = k.LAY || {};
@@ -61,7 +64,20 @@ LIFE.traffic = function (k) {
     suv: { l: 4.7, w: 1.9, v: 0.97, ax: [1.48, 1.42], wr: 1.14, ny: 0.61, ty: 0.7, lx: 0.54 },
     van: { l: 5.2, w: 1.95, v: 0.92, ax: [1.8, 1.6], wr: 1.1, ny: 0.67, ty: 0.75, lx: 0.6 },
     truck: { l: 6.6, w: 2.0, v: 0.82, ax: [2.5, 1.95], wr: 1.3, ny: 0.74, ty: 0.63, lx: 0.66 },
-    bus: { l: 11.4, w: 2.5, v: 0.86, ax: [3.7, 3.7], wr: 1.5, ny: 0.75, ty: 0.79, lx: 0.97 }
+    bus: { l: 11.4, w: 2.5, v: 0.86, ax: [3.7, 3.7], wr: 1.5, ny: 0.75, ty: 0.79, lx: 0.97 },
+    // The chaos cars (keys are the engine's: utilities/chaosCarsConfig.js). top: height, for the label; flash: the
+    // lights it shows (rb red and blue, amber, hazard while stopped, serve a lit hatch); bar: where on the roof;
+    // dwell: seconds at its stop; every: metres between stops for one that works its way down the street.
+    cop_car: { l: 4.5, w: 1.8, v: 1.12, ax: [1.42, 1.35], wr: 1, ny: 0.5, ty: 0.56, lx: 0.48, top: 1.55, flash: 'rb', bar: [1.41, 0.45], dwell: 8 },
+    fire_engine: { l: 7.6, w: 2.3, v: 0.95, ax: [2.7, 2.2], wr: 1.4, ny: 0.85, ty: 0.9, lx: 0.8, top: 2.8, flash: 'rb', bar: [2.46, -2.9], dwell: 12 },
+    ambulance: { l: 5.6, w: 2.0, v: 1.05, ax: [1.9, 1.7], wr: 1.15, ny: 0.68, ty: 0.8, lx: 0.62, top: 2.6, flash: 'rb', bar: [2.5, -1.0], dwell: 10 },
+    oari_van: { l: 5.2, w: 1.95, v: 0.9, ax: [1.8, 1.6], wr: 1.1, ny: 0.67, ty: 0.75, lx: 0.6, top: 2.0, flash: 'hazard', dwell: 12 },
+    building_inspector: { l: 3.9, w: 1.74, v: 0.9, ax: [1.22, 1.2], wr: 0.97, ny: 0.5, ty: 0.62, lx: 0.46, top: 1.55, flash: 'hazard', dwell: 10 },
+    garbage_truck: { l: 8.0, w: 2.4, v: 0.55, ax: [2.9, 2.3], wr: 1.45, ny: 0.9, ty: 0.9, lx: 0.85, top: 3.2, flash: 'amber', bar: [2.56, -3.0], dwell: 3.5, every: 24 },
+    mail_truck: { l: 4.6, w: 1.9, v: 0.8, ax: [1.5, 1.4], wr: 1.05, ny: 0.62, ty: 0.7, lx: 0.6, top: 2.2, flash: 'hazard', dwell: 7 },
+    ice_cream_truck: { l: 5.4, w: 2.0, v: 0.45, ax: [1.8, 1.7], wr: 1.1, ny: 0.66, ty: 0.75, lx: 0.62, top: 3.3, flash: 'serve', dwell: 12 },
+    street_sweeper: { l: 4.2, w: 1.8, v: 0.32, ax: [1.3, 1.25], wr: 1.0, ny: 0.6, ty: 0.7, lx: 0.55, top: 2.2, flash: 'amber', bar: [2.15, -0.9], dwell: 0 },
+    pge_truck: { l: 6.2, w: 2.1, v: 0.85, ax: [2.2, 1.8], wr: 1.25, ny: 0.74, ty: 0.7, lx: 0.68, top: 3.6, flash: 'amber', bar: [2.05, -2.3], dwell: 14 }
   };
   var COLORS = [[0, 0, 0.82], [0, 0, 0.6], [220, 0.05, 0.42], [0, 0, 0.1], [215, 0.5, 0.25], [0, 0.65, 0.33], [150, 0.35, 0.22], [35, 0.3, 0.55], [205, 0.15, 0.62], [12, 0.55, 0.42], [265, 0.25, 0.3], [48, 0.6, 0.5]];
   function pickType() { var x = R(); if (x < heavy) return 'truck'; x -= heavy; if (x < vans) return 'van'; x = R(); return x < 0.45 ? 'sedan' : x < 0.72 ? 'hatch' : 'suv'; }
@@ -71,7 +87,8 @@ LIFE.traffic = function (k) {
   var perLane = Math.ceil(laneLen / (vBase * every) * 1.3) + 2;
   var carN = Math.max(2, Math.min(40 - busN, perLane * 2));
   var V = [], i;
-  for (i = 0; i < carN + busN; i++) V.push({ i: i, bus: i >= carN, bi: i - carN, on: false, lane: null, u: 0, v: 0, a: 0, lat: 0, latPrev: 0, yaw: 0, type: i >= carN ? 'bus' : 'sedan', v0: 7, fade: 0, dirty: true, stopI: 0, st: 'run', wait: 0 });
+  var CHAOS = ((k.H && k.H.chaos) || []).filter(function (ev) { return TYPES[ev.v] && TYPES[ev.v].top; }); // a train or a ship is not on the road
+  for (i = 0; i < carN + busN + CHAOS.length; i++) V.push({ i: i, bus: i >= carN && i < carN + busN, chaos: i >= carN + busN ? CHAOS[i - carN - busN] : null, bi: i - carN, on: false, lane: null, u: 0, v: 0, a: 0, lat: 0, latPrev: 0, yaw: 0, type: i >= carN + busN ? CHAOS[i - carN - busN].v : i >= carN ? 'bus' : 'sedan', v0: 7, fade: 0, dirty: true, stopI: 0, st: 'run', wait: 0 });
 
   // ---------- materials: anything solid dissolves into the fog by aFade (1 = fully there) ----------
   function fadeable(m) {
@@ -97,12 +114,12 @@ LIFE.traffic = function (k) {
   // top, corner], joined and closed at both ends, shaded smooth so the corners read as rounded. Paint takes the
   // car's own colour; glass and the underside are painted dark into the shape, so one mesh draws the whole car.
   var PAINT = [1, 1, 1], SILL = [0.5, 0.5, 0.52], GLASS = [0.05, 0.06, 0.085], SKY = [0.17, 0.2, 0.28], DARK = [0.16, 0.16, 0.18]; // glass runs from dark at the sill to a little sky at the roof
-  function hull(st, top, low) {
+  function hull(st, top, low, xo) {
     var pos = [], col = [], idx = [], n = st.length, RN = 8, i2, j2;
     st.forEach(function (q) {
       var z = q[0], b = q[1], t = q[2], y0 = q[3], y1 = q[4], c = q[5] == null ? 0.09 : q[5];
       [[-t + c, y1], [t - c, y1], [t, y1 - c], [b, y0 + c], [b - c, y0], [-b + c, y0], [-b, y0 + c], [-t, y1 - c]].forEach(function (pt, j) {
-        pos.push(pt[0], pt[1], z); var cc = j >= 3 && j <= 6 ? low : top; col.push(cc[0], cc[1], cc[2]);
+        pos.push(pt[0] + (xo || 0), pt[1], z); var cc = j >= 3 && j <= 6 ? low : top; col.push(cc[0], cc[1], cc[2]);
       });
     });
     for (i2 = 0; i2 < n - 1; i2++) for (j2 = 0; j2 < RN; j2++) { var a = i2 * RN + j2, b2 = i2 * RN + (j2 + 1) % RN, c2 = (i2 + 1) * RN + (j2 + 1) % RN, d = (i2 + 1) * RN + j2; idx.push(a, d, c2, a, c2, b2); }
@@ -110,7 +127,7 @@ LIFE.traffic = function (k) {
     [0, n - 1].forEach(function (e) {
       var q = st[e], c0 = pos.length / 3;
       for (j2 = 0; j2 < RN; j2++) { var src = (e * RN + j2) * 3; pos.push(pos[src], pos[src + 1], pos[src + 2]); col.push(col[src], col[src + 1], col[src + 2]); }
-      var ci = pos.length / 3; pos.push(0, (q[3] + q[4]) / 2, q[0]); col.push((top[0] + low[0]) / 2, (top[1] + low[1]) / 2, (top[2] + low[2]) / 2);
+      var ci = pos.length / 3; pos.push(xo || 0, (q[3] + q[4]) / 2, q[0]); col.push((top[0] + low[0]) / 2, (top[1] + low[1]) / 2, (top[2] + low[2]) / 2);
       for (j2 = 0; j2 < RN; j2++) { var r0 = c0 + j2, r1 = c0 + (j2 + 1) % RN; if (e) idx.push(ci, r1, r0); else idx.push(ci, r0, r1); }
     });
     var g = new T.BufferGeometry(); g.setAttribute('position', new T.Float32BufferAttribute(pos, 3)); g.setAttribute('color', new T.Float32BufferAttribute(col, 3)); g.setIndex(idx); g.computeVertexNormals();
@@ -122,34 +139,89 @@ LIFE.traffic = function (k) {
     var out = new T.BufferGeometry(); out.setAttribute('position', new T.Float32BufferAttribute(pos, 3)); out.setAttribute('normal', new T.Float32BufferAttribute(nor, 3)); out.setAttribute('color', new T.Float32BufferAttribute(col, 3));
     return out;
   }
+  function sedanHulls(paint) { return [ // three boxes: bonnet, cabin, boot
+    hull([[-2.25, 0.68, 0.6, 0.38, 0.6, 0.06], [-2.1, 0.86, 0.8, 0.24, 0.7], [-1.25, 0.9, 0.86, 0.2, 0.83], [-0.65, 0.9, 0.87, 0.2, 0.9], [1.25, 0.9, 0.87, 0.2, 0.92], [2.05, 0.87, 0.82, 0.24, 0.88], [2.25, 0.72, 0.64, 0.4, 0.7, 0.06]], paint, SILL),
+    hull([[-0.8, 0.82, 0.8, 0.84, 0.9, 0.02], [-0.08, 0.8, 0.66, 0.86, 1.36, 0.05], [0.98, 0.8, 0.66, 0.86, 1.36, 0.05], [1.62, 0.82, 0.8, 0.86, 0.93, 0.02]], SKY, GLASS),
+    hull([[-0.2, 0.55, 0.55, 1.33, 1.37, 0.02], [-0.02, 0.675, 0.66, 1.33, 1.405, 0.04], [0.92, 0.675, 0.66, 1.33, 1.405, 0.04], [1.1, 0.55, 0.55, 1.33, 1.37, 0.02]], paint, paint)]; }
+  function hatchHulls(paint) { return [ // two boxes: the roof runs to the back
+    hull([[-1.95, 0.66, 0.58, 0.38, 0.62, 0.06], [-1.8, 0.83, 0.78, 0.24, 0.72], [-1.1, 0.87, 0.83, 0.2, 0.86], [-0.5, 0.87, 0.84, 0.2, 0.93], [1.5, 0.87, 0.84, 0.2, 0.96], [1.85, 0.85, 0.8, 0.26, 0.94], [1.95, 0.76, 0.7, 0.4, 0.8, 0.06]], paint, SILL),
+    hull([[-0.68, 0.8, 0.78, 0.86, 0.93, 0.02], [0, 0.78, 0.65, 0.88, 1.42, 0.05], [1.4, 0.78, 0.65, 0.9, 1.4, 0.05], [1.86, 0.8, 0.76, 0.9, 0.98, 0.02]], SKY, GLASS),
+    hull([[-0.12, 0.54, 0.54, 1.39, 1.43, 0.02], [0.06, 0.665, 0.65, 1.39, 1.465, 0.04], [1.34, 0.665, 0.65, 1.37, 1.445, 0.04], [1.5, 0.56, 0.56, 1.37, 1.41, 0.02]], paint, paint)]; }
+  function vanHulls(paint) { return [ // one box: glass round the cab, a closed side behind it
+    hull([[-2.6, 0.8, 0.74, 0.42, 0.9, 0.06], [-2.45, 0.94, 0.9, 0.3, 1.05], [-2.0, 0.975, 0.95, 0.27, 1.15], [2.45, 0.975, 0.95, 0.27, 1.15], [2.6, 0.9, 0.86, 0.34, 1.1, 0.06]], paint, SILL),
+    hull([[-2.18, 0.92, 0.9, 1.08, 1.15, 0.02], [-1.6, 0.92, 0.8, 1.1, 1.9, 0.05], [-0.75, 0.93, 0.82, 1.1, 1.9, 0.05], [-0.7, 0.9, 0.8, 1.1, 1.85, 0.03]], SKY, GLASS),
+    hull([[-0.78, 0.95, 0.84, 1.1, 1.93, 0.05], [2.42, 0.95, 0.84, 1.1, 1.93, 0.05], [2.58, 0.86, 0.8, 1.1, 1.85, 0.05]], paint, paint),
+    hull([[-1.75, 0.7, 0.7, 1.87, 1.91, 0.02], [-1.55, 0.815, 0.8, 1.87, 1.95, 0.04], [-0.7, 0.845, 0.83, 1.87, 1.95, 0.04]], paint, paint)]; }
+  // a cab with its glass and roof, front at z0, back at z1, floor f, belt b, roof r, half-width w
+  function cabHulls(z0, z1, f, b, r, w, paint) { return [
+    hull([[z0, w - 0.14, w - 0.18, f + 0.05, b - 0.3, 0.06], [z0 + 0.16, w, w - 0.02, f, b - 0.1], [z1 - 0.06, w, w - 0.02, f, b - 0.05], [z1, w - 0.07, w - 0.09, f + 0.05, b - 0.1, 0.04]], paint, SILL),
+    hull([[z0 + 0.08, w - 0.04, w - 0.05, b - 0.18, b - 0.1, 0.02], [z0 + 0.42, w - 0.04, w - 0.14, b - 0.14, r - 0.06, 0.05], [z1 - 0.1, w - 0.04, w - 0.12, b - 0.14, r - 0.06, 0.05], [z1 - 0.04, w - 0.08, w - 0.14, b - 0.14, r - 0.11, 0.03]], SKY, GLASS),
+    hull([[z0 + 0.3, w - 0.32, w - 0.32, r - 0.09, r - 0.04, 0.02], [z0 + 0.5, w - 0.12, w - 0.14, r - 0.09, r, 0.04], [z1 - 0.05, w - 0.11, w - 0.12, r - 0.09, r, 0.04]], paint, paint)]; }
+  function rgb(h, sat, l) { var c = new T.Color().setHSL(h / 360, sat, l); return [c.r, c.g, c.b]; }
+  function solid(g, c) { var q = g.index ? g.toNonIndexed() : g, a = new Float32Array(q.attributes.position.count * 3); for (var v = 0; v < a.length; v += 3) { a[v] = c[0]; a[v + 1] = c[1]; a[v + 2] = c[2]; } q.setAttribute('color', new T.BufferAttribute(a, 3)); q.deleteAttribute('uv'); if (q !== g) g.dispose(); return q; }
+  var WHT = [0.86, 0.86, 0.84], GRY = [0.62, 0.62, 0.64], NAVY = rgb(225, 0.45, 0.1), ENG = rgb(3, 0.82, 0.36), ENGD = rgb(3, 0.8, 0.24), ORG = rgb(22, 0.9, 0.5), TEAL = rgb(176, 0.5, 0.3), GRN = rgb(140, 0.45, 0.22), GRND = rgb(140, 0.4, 0.14), BLU = rgb(215, 0.7, 0.36), CRM = rgb(42, 0.6, 0.86), PNK = rgb(338, 0.7, 0.72), YEL = rgb(46, 0.9, 0.52), WARMP = [1, 0.86, 0.55];
+  // lights on a roof: a bar with a red end and a blue end, or one amber lamp
+  function barHulls(y, z) { return [hull([[z - 0.13, 0.56, 0.56, y, y + 0.09, 0.02], [z + 0.13, 0.56, 0.56, y, y + 0.09, 0.02]], DARK, DARK), hull([[z - 0.11, 0.2, 0.2, y + 0.03, y + 0.17, 0.04], [z + 0.11, 0.2, 0.2, y + 0.03, y + 0.17, 0.04]], rgb(2, 0.9, 0.45), rgb(2, 0.9, 0.3), -0.34), hull([[z - 0.11, 0.2, 0.2, y + 0.03, y + 0.17, 0.04], [z + 0.11, 0.2, 0.2, y + 0.03, y + 0.17, 0.04]], rgb(222, 0.9, 0.5), rgb(222, 0.9, 0.32), 0.34)]; }
+  function lampHulls(y, z) { return [hull([[z - 0.1, 0.1, 0.1, y, y + 0.17, 0.04], [z + 0.1, 0.1, 0.1, y, y + 0.17, 0.04]], rgb(38, 1, 0.55), rgb(38, 1, 0.4))]; }
   var SHAPES = {
-    // three boxes: bonnet, cabin, boot
-    sedan: function () { return mergeGeo([
-      hull([[-2.25, 0.68, 0.6, 0.38, 0.6, 0.06], [-2.1, 0.86, 0.8, 0.24, 0.7], [-1.25, 0.9, 0.86, 0.2, 0.83], [-0.65, 0.9, 0.87, 0.2, 0.9], [1.25, 0.9, 0.87, 0.2, 0.92], [2.05, 0.87, 0.82, 0.24, 0.88], [2.25, 0.72, 0.64, 0.4, 0.7, 0.06]], PAINT, SILL),
-      hull([[-0.8, 0.82, 0.8, 0.84, 0.9, 0.02], [-0.08, 0.8, 0.66, 0.86, 1.36, 0.05], [0.98, 0.8, 0.66, 0.86, 1.36, 0.05], [1.62, 0.82, 0.8, 0.86, 0.93, 0.02]], SKY, GLASS),
-      hull([[-0.2, 0.55, 0.55, 1.33, 1.37, 0.02], [-0.02, 0.675, 0.66, 1.33, 1.405, 0.04], [0.92, 0.675, 0.66, 1.33, 1.405, 0.04], [1.1, 0.55, 0.55, 1.33, 1.37, 0.02]], PAINT, PAINT)]); },
-    // two boxes: the roof runs to the back
-    hatch: function () { return mergeGeo([
-      hull([[-1.95, 0.66, 0.58, 0.38, 0.62, 0.06], [-1.8, 0.83, 0.78, 0.24, 0.72], [-1.1, 0.87, 0.83, 0.2, 0.86], [-0.5, 0.87, 0.84, 0.2, 0.93], [1.5, 0.87, 0.84, 0.2, 0.96], [1.85, 0.85, 0.8, 0.26, 0.94], [1.95, 0.76, 0.7, 0.4, 0.8, 0.06]], PAINT, SILL),
-      hull([[-0.68, 0.8, 0.78, 0.86, 0.93, 0.02], [0, 0.78, 0.65, 0.88, 1.42, 0.05], [1.4, 0.78, 0.65, 0.9, 1.4, 0.05], [1.86, 0.8, 0.76, 0.9, 0.98, 0.02]], SKY, GLASS),
-      hull([[-0.12, 0.54, 0.54, 1.39, 1.43, 0.02], [0.06, 0.665, 0.65, 1.39, 1.465, 0.04], [1.34, 0.665, 0.65, 1.37, 1.445, 0.04], [1.5, 0.56, 0.56, 1.37, 1.41, 0.02]], PAINT, PAINT)]); },
+    sedan: function () { return mergeGeo(sedanHulls(PAINT)); },
+    hatch: function () { return mergeGeo(hatchHulls(PAINT)); },
     suv: function () { return mergeGeo([
       hull([[-2.35, 0.74, 0.68, 0.44, 0.76, 0.06], [-2.2, 0.91, 0.86, 0.3, 0.9], [-1.4, 0.95, 0.91, 0.27, 1.0], [-0.75, 0.95, 0.92, 0.27, 1.04], [1.9, 0.95, 0.92, 0.27, 1.06], [2.25, 0.93, 0.88, 0.32, 1.04], [2.35, 0.82, 0.76, 0.46, 0.9, 0.06]], PAINT, SILL),
       hull([[-0.9, 0.88, 0.86, 0.98, 1.04, 0.02], [-0.2, 0.86, 0.74, 1.0, 1.64, 0.05], [1.8, 0.86, 0.74, 1.0, 1.63, 0.05], [2.24, 0.88, 0.84, 1.0, 1.08, 0.02]], SKY, GLASS),
       hull([[-0.32, 0.6, 0.6, 1.61, 1.65, 0.02], [-0.12, 0.755, 0.74, 1.61, 1.69, 0.04], [1.74, 0.755, 0.74, 1.6, 1.68, 0.04], [1.9, 0.62, 0.62, 1.6, 1.64, 0.02]], PAINT, PAINT)]); },
-    // one box: glass round the cab, a closed side behind it
-    van: function () { return mergeGeo([
-      hull([[-2.6, 0.8, 0.74, 0.42, 0.9, 0.06], [-2.45, 0.94, 0.9, 0.3, 1.05], [-2.0, 0.975, 0.95, 0.27, 1.15], [2.45, 0.975, 0.95, 0.27, 1.15], [2.6, 0.9, 0.86, 0.34, 1.1, 0.06]], PAINT, SILL),
-      hull([[-2.18, 0.92, 0.9, 1.08, 1.15, 0.02], [-1.6, 0.92, 0.8, 1.1, 1.9, 0.05], [-0.75, 0.93, 0.82, 1.1, 1.9, 0.05], [-0.7, 0.9, 0.8, 1.1, 1.85, 0.03]], SKY, GLASS),
-      hull([[-0.78, 0.95, 0.84, 1.1, 1.93, 0.05], [2.42, 0.95, 0.84, 1.1, 1.93, 0.05], [2.58, 0.86, 0.8, 1.1, 1.85, 0.05]], PAINT, PAINT),
-      hull([[-1.75, 0.7, 0.7, 1.87, 1.91, 0.02], [-1.55, 0.815, 0.8, 1.87, 1.95, 0.04], [-0.7, 0.845, 0.83, 1.87, 1.95, 0.04]], PAINT, PAINT)]); },
+    van: function () { return mergeGeo(vanHulls(PAINT)); },
     // a cab, and a box on a frame
     truck: function () { return mergeGeo([
       hull([[-3.3, 0.9, 0.9, 0.4, 0.8, 0.04], [3.25, 0.9, 0.9, 0.45, 0.8, 0.04]], DARK, DARK),
       hull([[-3.3, 0.86, 0.82, 0.45, 1.0, 0.06], [-3.15, 0.97, 0.95, 0.4, 1.25], [-1.6, 0.97, 0.95, 0.4, 1.3], [-1.52, 0.9, 0.88, 0.45, 1.25, 0.04]], PAINT, SILL),
       hull([[-3.2, 0.93, 0.92, 1.2, 1.28, 0.02], [-2.85, 0.93, 0.84, 1.24, 2.05, 0.05], [-1.7, 0.93, 0.86, 1.24, 2.05, 0.05], [-1.62, 0.9, 0.84, 1.24, 2.0, 0.03]], SKY, GLASS),
       hull([[-2.95, 0.72, 0.72, 2.02, 2.06, 0.02], [-2.78, 0.855, 0.84, 2.02, 2.1, 0.04], [-1.62, 0.875, 0.86, 2.02, 2.1, 0.04]], PAINT, PAINT),
-      hull([[-1.4, 1.0, 1.0, 0.82, 3.0, 0.04], [3.3, 1.0, 1.0, 0.82, 3.0, 0.04]], PAINT, [0.8, 0.8, 0.82])]); }
+      hull([[-1.4, 1.0, 1.0, 0.82, 3.0, 0.04], [3.3, 1.0, 1.0, 0.82, 3.0, 0.04]], PAINT, [0.8, 0.8, 0.82])]); },
+    // ---- the chaos cars: liveries painted into the shape, nothing lettered ----
+    cop_car: function () { return mergeGeo(sedanHulls(NAVY).concat([hull([[-0.55, 0.915, 0.885, 0.32, 0.9, 0.03], [1.15, 0.915, 0.885, 0.32, 0.92, 0.03]], WHT, WHT)], barHulls(1.405, 0.45))); },
+    fire_engine: function () { return mergeGeo([
+      hull([[-3.8, 1.0, 1.0, 0.45, 0.9, 0.04], [3.75, 1.0, 1.0, 0.5, 0.9, 0.04]], DARK, DARK),
+      hull([[-1.85, 1.14, 1.12, 0.9, 2.5, 0.05], [3.78, 1.14, 1.12, 0.9, 2.5, 0.05]], ENG, ENGD),
+      hull([[-1.8, 1.155, 1.15, 1.25, 1.5, 0.02], [3.74, 1.155, 1.15, 1.25, 1.5, 0.02]], GRY, GRY),
+      hull([[-3.2, 0.05, 0.05, 2.62, 2.72, 0.01], [3.7, 0.05, 0.05, 2.62, 2.72, 0.01]], GRY, GRY, -0.42), hull([[-3.2, 0.05, 0.05, 2.62, 2.72, 0.01], [3.7, 0.05, 0.05, 2.62, 2.72, 0.01]], GRY, GRY, 0.42)
+    ].concat(cabHulls(-3.8, -1.9, 0.45, 1.6, 2.46, 1.12, ENG), barHulls(2.46, -2.9))); },
+    ambulance: function () { return mergeGeo([
+      hull([[-1.4, 1.02, 1.0, 0.36, 2.5, 0.06], [2.78, 1.02, 1.0, 0.36, 2.5, 0.06]], WHT, [0.7, 0.7, 0.7]),
+      hull([[-1.36, 1.035, 1.03, 1.0, 1.28, 0.02], [2.74, 1.035, 1.03, 1.0, 1.28, 0.02]], ORG, ORG)
+    ].concat(cabHulls(-2.8, -1.42, 0.3, 1.3, 2.0, 0.99, WHT), barHulls(2.5, -1.0))); },
+    oari_van: function () { return mergeGeo(vanHulls(TEAL).concat([hull([[-0.7, 0.99, 0.975, 1.2, 1.5, 0.02], [2.4, 0.99, 0.975, 1.2, 1.5, 0.02]], WHT, WHT)])); },
+    building_inspector: function () { return mergeGeo(hatchHulls(WHT).concat(lampHulls(1.465, 0.7))); },
+    garbage_truck: function () { return mergeGeo([
+      hull([[-4.0, 1.05, 1.05, 0.5, 0.95, 0.04], [3.9, 1.05, 1.05, 0.55, 0.95, 0.04]], DARK, DARK),
+      hull([[-2.2, 1.18, 1.1, 0.95, 3.0, 0.18], [2.9, 1.18, 1.1, 0.95, 3.15, 0.18]], GRN, GRND),
+      hull([[2.9, 1.16, 1.05, 0.8, 3.1, 0.12], [3.6, 1.14, 1.0, 0.7, 2.4, 0.12], [4.0, 1.1, 0.95, 0.7, 1.5, 0.1]], GRND, GRND)
+    ].concat(cabHulls(-4.0, -2.3, 0.5, 1.7, 2.56, 1.16, WHT), lampHulls(2.56, -3.0))); },
+    mail_truck: function () { return mergeGeo([
+      hull([[-2.3, 0.9, 0.86, 0.4, 1.2, 0.05], [-2.2, 0.95, 0.93, 0.34, 1.3], [-1.5, 0.95, 0.94, 0.34, 2.15, 0.06], [2.25, 0.95, 0.94, 0.34, 2.15, 0.06], [2.3, 0.9, 0.88, 0.4, 2.1, 0.05]], WHT, [0.72, 0.72, 0.72]),
+      hull([[-2.16, 0.9, 0.89, 1.25, 1.33, 0.02], [-1.52, 0.9, 0.88, 1.3, 2.08, 0.04], [-0.9, 0.955, 0.945, 1.3, 1.95, 0.03], [-0.86, 0.9, 0.9, 1.3, 1.9, 0.02]], SKY, GLASS),
+      hull([[-1.45, 0.96, 0.958, 0.78, 1.0, 0.02], [2.26, 0.96, 0.958, 0.78, 1.0, 0.02]], BLU, BLU),
+      hull([[-1.45, 0.96, 0.958, 1.03, 1.1, 0.02], [2.26, 0.96, 0.958, 1.03, 1.1, 0.02]], ENG, ENG)]); },
+    ice_cream_truck: function () { return mergeGeo([
+      hull([[-1.3, 1.0, 0.94, 0.3, 2.45, 0.08], [2.62, 1.0, 0.94, 0.3, 2.45, 0.08]], CRM, SILL),
+      hull([[-1.26, 1.015, 1.01, 1.15, 1.4, 0.02], [2.6, 1.015, 1.01, 1.15, 1.4, 0.02]], PNK, PNK),
+      hull([[0, 0.03, 0.03, 1.5, 2.2, 0.01], [1.6, 0.03, 0.03, 1.5, 2.2, 0.01]], WARMP, WARMP, 0.985),
+      hull([[-0.05, 0.22, 0.22, 2.2, 2.26, 0.01], [1.65, 0.22, 0.22, 2.2, 2.26, 0.01]], PNK, PNK, 1.17),
+      solid(new T.ConeGeometry(0.27, 0.72, 8).rotateX(Math.PI).translate(0, 2.81, 0.6), rgb(32, 0.6, 0.55)),
+      solid(new T.SphereGeometry(0.31, 8, 6).translate(0, 3.2, 0.6), PNK)
+    ].concat(cabHulls(-2.7, -1.26, 0.3, 1.3, 2.0, 0.99, CRM))); },
+    street_sweeper: function () { return mergeGeo([
+      hull([[-2.1, 0.82, 0.8, 0.4, 1.1, 0.05], [-1.95, 0.88, 0.86, 0.36, 1.2], [-0.9, 0.88, 0.86, 0.36, 1.25], [2.05, 0.88, 0.84, 0.4, 1.9, 0.1], [2.1, 0.84, 0.8, 0.5, 1.8, 0.08]], YEL, SILL),
+      solid(new T.CylinderGeometry(0.42, 0.42, 0.12, 10).translate(-0.75, 0.1, -1.75), [0.07, 0.07, 0.08]), solid(new T.CylinderGeometry(0.42, 0.42, 0.12, 10).translate(0.75, 0.1, -1.75), [0.07, 0.07, 0.08])
+    ].concat(cabHulls(-2.0, -0.66, 0.36, 1.36, 2.15, 0.88, YEL), lampHulls(2.15, -0.9))); },
+    // the utility's truck: a boom folded over the bed, a bucket at the end of it
+    pge_truck: function () { return mergeGeo([
+      hull([[-3.1, 0.95, 0.95, 0.42, 0.85, 0.04], [3.05, 0.95, 0.95, 0.46, 0.85, 0.04]], DARK, DARK),
+      hull([[-1.1, 1.05, 1.05, 0.85, 1.6, 0.04], [3.0, 1.05, 1.05, 0.85, 1.6, 0.04]], WHT, [0.7, 0.7, 0.7]),
+      hull([[-1.06, 1.062, 1.06, 1.1, 1.25, 0.02], [2.96, 1.062, 1.06, 1.1, 1.25, 0.02]], YEL, YEL),
+      hull([[-0.9, 0.12, 0.12, 1.6, 1.85, 0.03], [2.5, 0.12, 0.12, 3.0, 3.25, 0.03]], YEL, YEL),
+      hull([[2.45, 0.38, 0.38, 2.9, 3.55, 0.05], [3.15, 0.38, 0.38, 2.9, 3.55, 0.05]], YEL, WHT)
+    ].concat(cabHulls(-3.1, -1.2, 0.42, 1.4, 2.05, 1.03, WHT), lampHulls(2.05, -2.3))); }
   };
   // a wheel: tyre, a hub whose spokes show it turning, and the dark of the arch behind it
   function wheelGeo() {
@@ -165,7 +237,7 @@ LIFE.traffic = function (k) {
   var parkedOf = {}; PARK.forEach(function (c) { c.slot = parkedOf[c.type] = (parkedOf[c.type] || 0) + 1; });
   var paintMat = function () { return fadeable(new T.MeshPhongMaterial({ color: 0xffffff, vertexColors: true, shininess: 55, specular: 0x2a2a33 })); };
   var bodyOf = {};
-  Object.keys(SHAPES).forEach(function (ty) { bodyOf[ty] = im(SHAPES[ty](), paintMat(), N + (parkedOf[ty] || 0), true); });
+  ['sedan', 'hatch', 'suv', 'van', 'truck'].concat(CHAOS.map(function (ev) { return ev.v; })).forEach(function (ty) { if (!bodyOf[ty]) bodyOf[ty] = im(SHAPES[ty](), paintMat(), N + (parkedOf[ty] || 0), true); });
   var wheelM = im(wheelGeo(), fadeable(new T.MeshLambertMaterial({ color: 0xffffff, vertexColors: true })), (N + PARK.length) * 4);
   var lampM = im(new T.BoxGeometry(1, 1, 1), fadeable(new T.MeshBasicMaterial({ color: 0xffffff })), N * 4, true);
   var HEAD = new T.Color(0xfff1cf), TAIL = new T.Color(0xc4180e), BRAKE = new T.Color(0xff5a40), C = new T.Color();
@@ -287,18 +359,59 @@ LIFE.traffic = function (k) {
     o.on = true; o.lane = lane; o.u = 0; o.lat = 0; o.latPrev = 0; o.st = 'run'; o.stopI = 0; o.wait = 0; o.dirty = true; o.pitch = 0; o.ph = R() * 6.28;
     o.v0 = vBase * TYPES[o.type].v * (0.88 + R() * 0.24);
     o.v = last ? Math.min(o.v0, last.v) : o.v0 * 0.9;
-    if (!o.bus) {
+    if (o.chaos) { o.v0 = vBase * TYPES[o.type].v; o.v = Math.min(o.v, o.v0); bodyOf[o.type].setColorAt(o.i, C.set(0xffffff)); bodyOf[o.type].instanceColor.needsUpdate = true; }
+    else if (!o.bus) {
       var c = COLORS[Math.floor(R() * COLORS.length)];
       bodyOf[o.type].setColorAt(o.i, C.setHSL(c[0] / 360, c[1], c[2] * (0.85 + R() * 0.3))); bodyOf[o.type].instanceColor.needsUpdate = true;
     }
     lane.list.push(o);
+    if (o.chaos) chaosPlan(o);
     return true;
   }
-  function free(bus) { for (var j = 0; j < V.length; j++) if (!V[j].on && V[j].bus === bus) return V[j]; return null; }
+  // ---------- the week's chaos cars ----------
+  // Each is one row of the engine's Chaos_Cars for this street (k.H.chaos, from build.js). It drives the street
+  // like anything else, up one side and back down the other, and stops where its row points: outside the business
+  // it hit, beside the citizen it hit (wherever they are standing when it gets there), or part way down the
+  // street when the row names the neighborhood. A garbage truck works its way down in short stops; a sweeper
+  // crawls and does not stop. Traffic behind waits, as it would.
+  var CH = V.filter(function (o) { return o.chaos; }), whoCache = {};
+  function uOf(lane, zWorld) { var zl = loc(zWorld); return lane.side > 0 ? zTop - zl : zl - zBot; }
+  function standing(id) { // the page's record for a citizen shown on this street (k.people is set once they are placed)
+    if (whoCache[id] === undefined) { whoCache[id] = null; (k.people || []).forEach(function (q) { if (q.d && q.d.id === id) whoCache[id] = q; }); if (!k.people) whoCache[id] = undefined; }
+    return whoCache[id] || null;
+  }
+  function chaosPlan(o) {
+    var ev = o.chaos, ty = TYPES[o.type], stops = [], u, lot;
+    o.follow = null; o.served = false; o.stopI = 0; o.wait = 0;
+    if (ty.every) for (u = 34; u < laneLen - 30; u += ty.every) stops.push(u);
+    else if (ty.dwell) {
+      if (ev.b != null) lot = (LAY.parcels || []).filter(function (q) { return q.b === ev.b; })[0] || (LAY.places || []).filter(function (q) { return q.b === ev.b && q.z != null; })[0];
+      if (lot) stops.push(uOf(o.lane, lot.z));
+      else if (ev.p) o.follow = ev.p;
+      else if (o.type === 'ice_cream_truck') stops.push(laneLen * 0.33, laneLen * 0.68);
+      else stops.push(laneLen * (0.4 + R() * 0.2));
+    }
+    o.stops = stops.filter(function (q) { return q > o.u + 10 && q < laneLen - 22; }).sort(function (a, b) { return a - b; });
+  }
+  function placeChaos(o, lane, u0) { // set one down on the street as it is, clearing what stood there
+    lane.list.slice().forEach(function (q) { if (q !== o && Math.abs(q.u - u0) < (TYPES[q.type].l + TYPES[o.type].l) / 2 + 7) retire(q); });
+    if (o.on) retire(o);
+    o.on = true; o.lane = lane; o.u = u0; o.lat = 0; o.latPrev = 0; o.st = 'run'; o.dirty = true; o.pitch = 0; o.ph = R() * 6.28;
+    o.v0 = vBase * TYPES[o.type].v; o.v = o.v0 * 0.8; o.fade = smooth(0, FADE, u0) * smooth(0, FADE, laneLen - u0);
+    bodyOf[o.type].setColorAt(o.i, C.set(0xffffff)); bodyOf[o.type].instanceColor.needsUpdate = true;
+    lane.list.push(o); lane.list.sort(byU); chaosPlan(o); o.laneI = (lane === lanes[0] ? 1 : 0);
+  }
+  function free(bus) { for (var j = 0; j < V.length; j++) if (!V[j].on && V[j].bus === bus && !V[j].chaos) return V[j]; return null; }
   function retire(o) { o.on = false; o.dirty = true; var l = o.lane.list, j = l.indexOf(o); if (j >= 0) l.splice(j, 1); }
 
   function sim(dt, quiet) {
     var thin = k.quality() === 0 ? 1.5 : 1;
+    CH.forEach(function (o) {
+      if (o.on) return;
+      o.next = (o.next || 0) - dt; if (o.next > 0) return;
+      var ln = lanes[(o.laneI || 0) % 2]; o.type = o.chaos.v;
+      if (spawn(ln, o, quiet)) o.laneI = (o.laneI || 0) + 1; else o.next = 1;
+    });
     lanes.forEach(function (lane) {
       // arrivals
       lane.timer -= dt;
@@ -343,10 +456,20 @@ LIFE.traffic = function (k) {
             if (o.lat < 0.01) { o.lat = 0; o.st = 'run'; o.stopI++; }
           }
         }
+        if (o.chaos) {
+          var cst = o.stops[o.stopI], who = o.follow && !o.served ? standing(o.follow) : null;
+          if (who) { cst = uOf(lane, who.z); if (cst < o.u - 1.5 || cst > laneLen - 20) { cst = null; o.served = true; } }
+          if (cst != null) {
+            if (cst > o.u - 0.6) {
+              acc = Math.min(acc, idm(o.v, o.v0, cst - o.u + S0 + 0.05, o.v));
+              if (o.v < 0.08 && cst - o.u < 1.6) { o.st = 'dwell'; o.wait += dt; acc = -9; if (o.wait >= TYPES[o.type].dwell) { o.wait = 0; o.st = 'run'; if (who) o.served = true; else o.stopI++; } }
+            } else if (who) o.served = true; else o.stopI++;
+          }
+        }
         o.a = acc;
         o.v = Math.max(0, o.v + acc * dt); o.u += o.v * dt;
         o.fade = smooth(0, FADE, o.u) * smooth(0, FADE, laneLen - o.u);
-        if (o.u >= laneLen) { retire(o); j--; }
+        if (o.u >= laneLen) { retire(o); if (o.chaos) o.next = 5 + R() * 7; j--; }
       }
     });
   }
@@ -375,10 +498,11 @@ LIFE.traffic = function (k) {
     M.compose(P.set(x, 0.035, z), Q.identity(), S.set(sx, 1, sz)); M.premultiply(MW); poolM.setMatrixAt(idx, M);
     poolM.setColorAt(idx, C.copy(c).multiplyScalar(f));
   }
-  var AMBER = new T.Color(1, 0.55, 0.06), NONE = new T.Color(0, 0, 0), WARM = new T.Color(0xffe2b0), RED = new T.Color(0xff2a18);
+  var AMBER = new T.Color(1, 0.55, 0.06), BLUE = new T.Color(0.2, 0.42, 1), NONE = new T.Color(0, 0, 0), WARM = new T.Color(0xffe2b0), RED = new T.Color(0xff2a18);
   function hide(o) {
     var j, n = o.i;
     for (var ty in bodyOf) bodyOf[ty].setMatrixAt(n, ZERO);
+    if (o.chaos) o.chaos.on = false;
     for (j = 0; j < 4; j++) { wheelM.setMatrixAt(n * 4 + j, ZERO); lampM.setMatrixAt(n * 4 + j, ZERO); }
     poolM.setMatrixAt(n * 2, ZERO); poolM.setMatrixAt(n * 2 + 1, ZERO);
     if (o.bus) { busM.setMatrixAt(o.bi, ZERO); for (j = 0; j < 4; j++) winM.setMatrixAt(o.bi * 4 + j, ZERO); for (j = 0; j < 3; j++) boardM.setMatrixAt(o.bi * 3 + j, ZERO); }
@@ -436,9 +560,19 @@ LIFE.traffic = function (k) {
       glowAt(lx, ly, -hl - 0.1, HEAD, fh); glowAt(-lx, ly, -hl - 0.1, HEAD, fh);
       glowAt(lx, lt, hl + 0.1, RED, ft); glowAt(-lx, lt, hl + 0.1, RED, ft);
       // indicator: kerb side while a bus pulls in or waits, road side while it pulls out
+      if (o.chaos) {
+        // its own lights: red and blue turn about, an amber lamp turning, hazards while it is stopped, a lit hatch
+        var fl = ty.flash, ph2 = (t * 2.4 + (o.ph || 0)) % 1, stopd = o.st === 'dwell';
+        if (fl === 'rb') { glowAt(-0.34, ty.bar[0] + 0.14, ty.bar[1], RED, (ph2 < 0.5 ? 1.5 : 0.1) * f); glowAt(0.34, ty.bar[0] + 0.14, ty.bar[1], BLUE, (ph2 < 0.5 ? 0.1 : 1.5) * f); }
+        else if (fl === 'amber') { glowAt(0, ty.bar[0] + 0.14, ty.bar[1], AMBER, (0.35 + 0.9 * Math.pow(0.5 + 0.5 * Math.sin(t * 7 + (o.ph || 0)), 3)) * f); glowAt(0, 0, 0, NONE, 0); }
+        else if (fl === 'serve') { glowAt(hw + 0.12, 1.85, 0.8, WARM, (stopd ? 1.3 : 0.7) * f); glowAt(0, 3.25, 0.6, WARM, 0.35 * f); }
+        else { var hz = stopd && (t % 0.9) < 0.45 ? 1 : 0; glowAt(hw + 0.02, ly + 0.1, -hl + 0.2, hz ? AMBER : NONE, hz * f); glowAt(hw + 0.02, ly + 0.1, hl - 0.2, hz ? AMBER : NONE, hz * f); }
+        tmp.set(x, ty.top, z); G.localToWorld(tmp); o.chaos.x = tmp.x; o.chaos.y = tmp.y; o.chaos.z = tmp.z; o.chaos.on = f > 0.3; o.chaos.stopped = stopd; o.chaos.side = s;
+      } else {
       var ind = o.bus && (o.st === 'in' || o.st === 'dwell' || o.st === 'out') && (t % 0.8) < 0.42 ? 1 : 0, isd = o.st === 'out' || (o.st === 'dwell' && o.wait <= 1.5) ? -1 : 1;
       glowAt(isd * (hw + 0.02), ly + 0.1, -hl + 0.2, ind ? AMBER : NONE, ind * f);
       glowAt(isd * (hw + 0.02), ly + 0.1, hl - 0.2, ind ? AMBER : NONE, ind * f);
+      }
       // light on the road: a pool ahead of the headlights; on a wet road a long streak each way
       if (showPools) {
         if (rain) { pool(o.i * 2, 0, -hl - 8, ty.w * 0.6, 16, WARM, 0.75 * f); pool(o.i * 2 + 1, 0, hl + 4.5, ty.w * 0.5, 9, RED, 0.6 * f * (braking ? 1.4 : 1)); }
@@ -447,7 +581,7 @@ LIFE.traffic = function (k) {
     }
     for (; pI < PN; pI++) { pCol[pI * 3] = pCol[pI * 3 + 1] = pCol[pI * 3 + 2] = 0; }
     pg.attributes.position.needsUpdate = true; pg.attributes.color.needsUpdate = true;
-    [bodyOf.sedan, bodyOf.hatch, bodyOf.suv, bodyOf.van, bodyOf.truck, wheelM, lampM, busM, winM, boardM].forEach(function (m) { if (!m) return; m.instanceMatrix.needsUpdate = true; m.userData.fade.needsUpdate = true; if (m.instanceColor) m.instanceColor.needsUpdate = true; });
+    Object.keys(bodyOf).map(function (ty) { return bodyOf[ty]; }).concat([wheelM, lampM, busM, winM, boardM]).forEach(function (m) { if (!m) return; m.instanceMatrix.needsUpdate = true; m.userData.fade.needsUpdate = true; if (m.instanceColor) m.instanceColor.needsUpdate = true; });
     poolM.instanceMatrix.needsUpdate = true; if (poolM.instanceColor) poolM.instanceColor.needsUpdate = true;
   }
 
@@ -479,6 +613,8 @@ LIFE.traffic = function (k) {
       // the first bus starts just behind the camera, so it overtakes the flight and is caught again at its stop;
       // the other comes up from the far end toward its stop
       if (op) { insertBus(lanes[0], 6); insertBus(lanes[1], 0); }
+      // the week's chaos cars: the first a little ahead of where the flight starts, the next coming the other way
+      CH.forEach(function (o, j) { var ln = lanes[j % 2]; placeChaos(o, ln, Math.min(laneLen - 40, j % 2 ? laneLen - 110 - j * 16 : 50 + j * 16)); });
       // and on, if the clock starts late (look-tests with --t0)
       for (w = 0; w < late; w += 0.1) sim(0.1, true);
       simT = late;

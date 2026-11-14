@@ -11,9 +11,9 @@
 #   scripts/testReporterDay.sh <desk> <persona> [cycle] [today|free-rows|free-week]
 #   today      what the scheduled day does: the assignment, the approach, today's writer prompt
 #   free-rows  nothing assigned: the seat sees its own beat record and who it can call, picks or passes;
-#              the light writer prompt
+#              the bare writer prompt (light, and no hard-coded stance line or bag file)
 #   free-week  nothing assigned: the seat sees the city's week and who it can call, picks or passes;
-#              the light writer prompt
+#              the bare writer prompt (light, and no hard-coded stance line or bag file)
 # The free variants exist only here: cron-desk-run.js reads GODWORLD_TEST_ANGLE only with the test
 # folder set. A boot-file swap, when wanted, comes from the caller's own preload (BOOT_SWAP); the seat's
 # short written background for a free morning comes from the text file named in GODWORLD_TEST_BACKGROUND.
@@ -29,6 +29,7 @@ case "$VARIANT" in today|free-rows|free-week) ;; *) echo "variant must be today,
 [[ "$DESK" =~ ^[a-z0-9][a-z0-9-]*$ ]] || { echo "invalid desk slug: $DESK"; exit 2; }
 [[ "$PERSONA" =~ ^[a-z0-9][a-z0-9-]{0,23}$ ]] || { echo "invalid persona slug: $PERSONA"; exit 2; }
 
+cd "$ROOT"   # the inline scripts below require ./scripts/... from the repo root
 ASSIGNMENT_SOURCE="$(/usr/bin/node - "$LIVE" "$DESK" "$PERSONA" "$REQUESTED_CYCLE" <<'NODE'
 const fs = require('fs');
 const path = require('path');
@@ -77,7 +78,7 @@ STEM="${DESK}_c${CYCLE}_${PERSONA}_${PACKET_STEM}benchmark-${TAG}_"
 run_stage() {
   local stage="$1" artifact="$2" log="$SHELL_DIR/$1.log" status artifact_missing=0
   local angle_mode="" prompt_mode=""
-  if [ "$VARIANT" != today ]; then angle_mode="$VARIANT"; prompt_mode=light; fi
+  if [ "$VARIANT" != today ]; then angle_mode="$VARIANT"; prompt_mode=bare; fi
   set +e
   GODWORLD_TEST_COMPARE_DIR="$SHELL_DIR" GODWORLD_TEST_ANGLE="$angle_mode" GODWORLD_TEST_PROMPT="$prompt_mode" \
     /usr/bin/node scripts/cron-desk-run.js \

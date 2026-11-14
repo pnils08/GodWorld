@@ -240,7 +240,11 @@ const WRITER_TOOLS = Math.max(0, Math.min(8, parseInt(arg('--writer-tools', '0')
 // Test shell only (builder 2026-11-10: "a couple tests safe off from saving into the sim"): the lightest
 // prompt — persona, packet, the no-invention line and the INTAKE footer, no rubric, no job description,
 // no opening or closing form. Needs GODWORLD_TEST_COMPARE_DIR, so a scheduled run can never take it.
-const TEST_LIGHT = !!process.env.GODWORLD_TEST_COMPARE_DIR && process.env.GODWORLD_TEST_PROMPT === 'light';
+// `bare` (pipeline.111, 2026-11-14) is `light` without the seat's hard-coded STANCE line and its bag file, so a
+// swapped identity is the only thing describing the voice (agy's finding on the 2026-11-13 boot runs: the stance
+// and bag rode every mode, light included).
+const TEST_BARE = !!process.env.GODWORLD_TEST_COMPARE_DIR && process.env.GODWORLD_TEST_PROMPT === 'bare';
+const TEST_LIGHT = TEST_BARE || (!!process.env.GODWORLD_TEST_COMPARE_DIR && process.env.GODWORLD_TEST_PROMPT === 'light');
 
 // Approx USD per 1M tokens [input, output] — for the scorecard's apiCostUsd (estimate).
 // Live OpenRouter check 2026-08-10 (prompt/completion per 1M).
@@ -1341,7 +1345,7 @@ async function main() {
       ? ' Your final message is the section itself. Do not stop until you have written it.\n'
       : ' When your section is finished, call write_file with the full markdown. Do not ' +
         'stop until you have written the section.\n') +
-    firebrandHeat +
+    (TEST_BARE ? '' : firebrandHeat) +
     priorArcSystem +
     cascadeRateRule +
     '=== YOUR SKILL (.claude/agents/' + (VOICE_DIR || PERSONA || (DESK + '-desk')) + ') ===\n\n' + skill +

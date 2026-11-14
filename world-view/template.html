@@ -508,7 +508,7 @@ function build(idx) {
 
   // parked cars
   for (var cz = 4; cz > -L; cz -= 6.2 + r() * 2.5) [-1, 1].forEach(function (s) { if (r() < 0.34 && !LAY.places.some(function (p) { return p.type === 'station' && Math.abs(p.z - cz) < 5; })) carSpots.push([s, cz]); });
-  if (carSpots.length) {
+  if (carSpots.length && !(typeof LIFE.traffic === 'function' && LIFE.traffic.parks)) {
     var carB = new THREE.InstancedMesh(new THREE.BoxGeometry(1.75, 0.62, 4.1).translate(0, 0.6, 0), new THREE.MeshLambertMaterial({ color: 0xffffff }), carSpots.length);
     var carT = new THREE.InstancedMesh(new THREE.BoxGeometry(1.5, 0.52, 2.1).translate(0, 1.15, -0.1), flat([220, 0.2, 0.1]), carSpots.length);
     var carW = new THREE.InstancedMesh(new THREE.CylinderGeometry(0.33, 0.33, 1.85, 10).rotateZ(Math.PI / 2), flat([0, 0, 0.05]), carSpots.length * 2);

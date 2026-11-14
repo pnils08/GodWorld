@@ -13,8 +13,12 @@
 // Buses run only where the place's ledger holds a bus operator: a Public Transit row that is not rail. The
 // only words painted are that row's name, on the destination board and the stop flag.
 //
-// Draw calls: car bodies, cabins, wheels, lamps, light glows, light on the road; with buses, bus bodies, bus
-// windows, bus boards, stop poles and stop flags. Everything sits under k.ground, so it tilts with a hill.
+// Each kind of vehicle (saloon, hatchback, tall car, van, box truck) is one shape lofted from nose to tail, with
+// its glass painted into it; wheels have hubs and turn with the distance covered; the body dips on its springs
+// under braking. The cars parked at the kerb (the page's k.carSpots) are the same shapes, drawn here.
+//
+// Draw calls: one per kind of vehicle (5), wheels, lamps, light glows, light on the road; with buses, bus bodies,
+// bus windows, bus boards, stop poles and stop flags. Everything sits under k.ground, so it tilts with a hill.
 LIFE.traffic = function (k) {
   var T = k.THREE, G = k.ground, LANE = k.LANE, ROAD = k.ROAD, ST = k.ST || {}, LAY = k.LAY || {};
   var R = (typeof rng === 'function' && typeof hash === 'function') ? rng(hash(k.H.name + '|traffic')) : Math.random;
@@ -48,14 +52,16 @@ LIFE.traffic = function (k) {
   var lanes = [{ side: 1, list: [], timer: 0, busTimer: 0, stops: [] }, { side: -1, list: [], timer: R() * every, busTimer: 0, stops: [] }];
   function zOf(lane, u) { return lane.side > 0 ? zTop - u : zBot + u; }
 
-  // body types: body box {l,w,h,y,z} and upper box {l,w,h,y,z}; z + is toward the back (front is -z)
+  // Vehicle types. l, w: length and width; v: speed factor; ax: front and rear axle, ahead of and behind the
+  // middle; wr: wheel size against a 0.33 m wheel; ny, ty: height of the head and tail lamps; lx: how far out they sit.
+  // (front is -z)
   var TYPES = {
-    sedan: { l: 4.3, w: 1.8, body: [4.3, 1.8, 0.62, 0.3, 0], top: [2.1, 1.56, 0.5, 0.92, 0.15], v: 1 },
-    hatch: { l: 3.8, w: 1.72, body: [3.8, 1.72, 0.66, 0.3, 0], top: [2.0, 1.52, 0.55, 0.96, 0.55], v: 1 },
-    suv: { l: 4.6, w: 1.88, body: [4.6, 1.88, 0.85, 0.32, 0], top: [2.7, 1.74, 0.62, 1.17, 0.35], v: 0.97 },
-    van: { l: 5.0, w: 1.9, body: [5.0, 1.9, 0.75, 0.32, 0], top: [3.9, 1.86, 0.95, 1.07, 0.45], v: 0.92 },
-    truck: { l: 6.6, w: 1.96, body: [4.6, 1.96, 2.3, 0.45, 0.95], top: [1.8, 1.92, 1.5, 0.35, -2.35], v: 0.82 },
-    bus: { l: 11.4, w: 2.5, v: 0.86 }
+    sedan: { l: 4.5, w: 1.8, v: 1, ax: [1.42, 1.35], wr: 1, ny: 0.5, ty: 0.56, lx: 0.48 },
+    hatch: { l: 3.9, w: 1.74, v: 1, ax: [1.22, 1.2], wr: 0.97, ny: 0.5, ty: 0.62, lx: 0.46 },
+    suv: { l: 4.7, w: 1.9, v: 0.97, ax: [1.48, 1.42], wr: 1.14, ny: 0.61, ty: 0.7, lx: 0.54 },
+    van: { l: 5.2, w: 1.95, v: 0.92, ax: [1.8, 1.6], wr: 1.1, ny: 0.67, ty: 0.75, lx: 0.6 },
+    truck: { l: 6.6, w: 2.0, v: 0.82, ax: [2.5, 1.95], wr: 1.3, ny: 0.74, ty: 0.63, lx: 0.66 },
+    bus: { l: 11.4, w: 2.5, v: 0.86, ax: [3.7, 3.7], wr: 1.5, ny: 0.75, ty: 0.79, lx: 0.97 }
   };
   var COLORS = [[0, 0, 0.82], [0, 0, 0.6], [220, 0.05, 0.42], [0, 0, 0.1], [215, 0.5, 0.25], [0, 0.65, 0.33], [150, 0.35, 0.22], [35, 0.3, 0.55], [205, 0.15, 0.62], [12, 0.55, 0.42], [265, 0.25, 0.3], [48, 0.6, 0.5]];
   function pickType() { var x = R(); if (x < heavy) return 'truck'; x -= heavy; if (x < vans) return 'van'; x = R(); return x < 0.45 ? 'sedan' : x < 0.72 ? 'hatch' : 'suv'; }
@@ -85,9 +91,82 @@ LIFE.traffic = function (k) {
   }
   var ZERO = new T.Matrix4().makeScale(0, 0, 0);
   var N = V.length;
-  var bodyM = im(new T.BoxGeometry(1, 1, 1).translate(0, 0.5, 0), fadeable(new T.MeshLambertMaterial({ color: 0xffffff })), N, true);
-  var topM = im(new T.BoxGeometry(1, 1, 1).translate(0, 0.5, 0), fadeable(new T.MeshLambertMaterial({ color: new T.Color().setHSL(220 / 360, 0.2, 0.09) })), N);
-  var wheelM = im(new T.CylinderGeometry(0.33, 0.33, 0.26, 10).rotateZ(Math.PI / 2), fadeable(new T.MeshLambertMaterial({ color: 0x0c0c10 })), N * 4);
+
+  // ---------- shapes ----------
+  // A body is lofted through cross-sections from nose to tail, each [z, half-width low, half-width high, bottom,
+  // top, corner], joined and closed at both ends, shaded smooth so the corners read as rounded. Paint takes the
+  // car's own colour; glass and the underside are painted dark into the shape, so one mesh draws the whole car.
+  var PAINT = [1, 1, 1], SILL = [0.5, 0.5, 0.52], GLASS = [0.05, 0.06, 0.085], SKY = [0.17, 0.2, 0.28], DARK = [0.16, 0.16, 0.18]; // glass runs from dark at the sill to a little sky at the roof
+  function hull(st, top, low) {
+    var pos = [], col = [], idx = [], n = st.length, RN = 8, i2, j2;
+    st.forEach(function (q) {
+      var z = q[0], b = q[1], t = q[2], y0 = q[3], y1 = q[4], c = q[5] == null ? 0.09 : q[5];
+      [[-t + c, y1], [t - c, y1], [t, y1 - c], [b, y0 + c], [b - c, y0], [-b + c, y0], [-b, y0 + c], [-t, y1 - c]].forEach(function (pt, j) {
+        pos.push(pt[0], pt[1], z); var cc = j >= 3 && j <= 6 ? low : top; col.push(cc[0], cc[1], cc[2]);
+      });
+    });
+    for (i2 = 0; i2 < n - 1; i2++) for (j2 = 0; j2 < RN; j2++) { var a = i2 * RN + j2, b2 = i2 * RN + (j2 + 1) % RN, c2 = (i2 + 1) * RN + (j2 + 1) % RN, d = (i2 + 1) * RN + j2; idx.push(a, d, c2, a, c2, b2); }
+    // the two ends are faces of their own (their corners are not shared with the sides), so a flat end shades flat
+    [0, n - 1].forEach(function (e) {
+      var q = st[e], c0 = pos.length / 3;
+      for (j2 = 0; j2 < RN; j2++) { var src = (e * RN + j2) * 3; pos.push(pos[src], pos[src + 1], pos[src + 2]); col.push(col[src], col[src + 1], col[src + 2]); }
+      var ci = pos.length / 3; pos.push(0, (q[3] + q[4]) / 2, q[0]); col.push((top[0] + low[0]) / 2, (top[1] + low[1]) / 2, (top[2] + low[2]) / 2);
+      for (j2 = 0; j2 < RN; j2++) { var r0 = c0 + j2, r1 = c0 + (j2 + 1) % RN; if (e) idx.push(ci, r1, r0); else idx.push(ci, r0, r1); }
+    });
+    var g = new T.BufferGeometry(); g.setAttribute('position', new T.Float32BufferAttribute(pos, 3)); g.setAttribute('color', new T.Float32BufferAttribute(col, 3)); g.setIndex(idx); g.computeVertexNormals();
+    return g;
+  }
+  function mergeGeo(list) {
+    var pos = [], nor = [], col = [];
+    list.forEach(function (g) { var q = g.index ? g.toNonIndexed() : g; Array.prototype.push.apply(pos, q.attributes.position.array); Array.prototype.push.apply(nor, q.attributes.normal.array); Array.prototype.push.apply(col, q.attributes.color.array); if (q !== g) q.dispose(); g.dispose(); });
+    var out = new T.BufferGeometry(); out.setAttribute('position', new T.Float32BufferAttribute(pos, 3)); out.setAttribute('normal', new T.Float32BufferAttribute(nor, 3)); out.setAttribute('color', new T.Float32BufferAttribute(col, 3));
+    return out;
+  }
+  var SHAPES = {
+    // three boxes: bonnet, cabin, boot
+    sedan: function () { return mergeGeo([
+      hull([[-2.25, 0.68, 0.6, 0.38, 0.6, 0.06], [-2.1, 0.86, 0.8, 0.24, 0.7], [-1.25, 0.9, 0.86, 0.2, 0.83], [-0.65, 0.9, 0.87, 0.2, 0.9], [1.25, 0.9, 0.87, 0.2, 0.92], [2.05, 0.87, 0.82, 0.24, 0.88], [2.25, 0.72, 0.64, 0.4, 0.7, 0.06]], PAINT, SILL),
+      hull([[-0.8, 0.82, 0.8, 0.84, 0.9, 0.02], [-0.08, 0.8, 0.66, 0.86, 1.36, 0.05], [0.98, 0.8, 0.66, 0.86, 1.36, 0.05], [1.62, 0.82, 0.8, 0.86, 0.93, 0.02]], SKY, GLASS),
+      hull([[-0.2, 0.55, 0.55, 1.33, 1.37, 0.02], [-0.02, 0.675, 0.66, 1.33, 1.405, 0.04], [0.92, 0.675, 0.66, 1.33, 1.405, 0.04], [1.1, 0.55, 0.55, 1.33, 1.37, 0.02]], PAINT, PAINT)]); },
+    // two boxes: the roof runs to the back
+    hatch: function () { return mergeGeo([
+      hull([[-1.95, 0.66, 0.58, 0.38, 0.62, 0.06], [-1.8, 0.83, 0.78, 0.24, 0.72], [-1.1, 0.87, 0.83, 0.2, 0.86], [-0.5, 0.87, 0.84, 0.2, 0.93], [1.5, 0.87, 0.84, 0.2, 0.96], [1.85, 0.85, 0.8, 0.26, 0.94], [1.95, 0.76, 0.7, 0.4, 0.8, 0.06]], PAINT, SILL),
+      hull([[-0.68, 0.8, 0.78, 0.86, 0.93, 0.02], [0, 0.78, 0.65, 0.88, 1.42, 0.05], [1.4, 0.78, 0.65, 0.9, 1.4, 0.05], [1.86, 0.8, 0.76, 0.9, 0.98, 0.02]], SKY, GLASS),
+      hull([[-0.12, 0.54, 0.54, 1.39, 1.43, 0.02], [0.06, 0.665, 0.65, 1.39, 1.465, 0.04], [1.34, 0.665, 0.65, 1.37, 1.445, 0.04], [1.5, 0.56, 0.56, 1.37, 1.41, 0.02]], PAINT, PAINT)]); },
+    suv: function () { return mergeGeo([
+      hull([[-2.35, 0.74, 0.68, 0.44, 0.76, 0.06], [-2.2, 0.91, 0.86, 0.3, 0.9], [-1.4, 0.95, 0.91, 0.27, 1.0], [-0.75, 0.95, 0.92, 0.27, 1.04], [1.9, 0.95, 0.92, 0.27, 1.06], [2.25, 0.93, 0.88, 0.32, 1.04], [2.35, 0.82, 0.76, 0.46, 0.9, 0.06]], PAINT, SILL),
+      hull([[-0.9, 0.88, 0.86, 0.98, 1.04, 0.02], [-0.2, 0.86, 0.74, 1.0, 1.64, 0.05], [1.8, 0.86, 0.74, 1.0, 1.63, 0.05], [2.24, 0.88, 0.84, 1.0, 1.08, 0.02]], SKY, GLASS),
+      hull([[-0.32, 0.6, 0.6, 1.61, 1.65, 0.02], [-0.12, 0.755, 0.74, 1.61, 1.69, 0.04], [1.74, 0.755, 0.74, 1.6, 1.68, 0.04], [1.9, 0.62, 0.62, 1.6, 1.64, 0.02]], PAINT, PAINT)]); },
+    // one box: glass round the cab, a closed side behind it
+    van: function () { return mergeGeo([
+      hull([[-2.6, 0.8, 0.74, 0.42, 0.9, 0.06], [-2.45, 0.94, 0.9, 0.3, 1.05], [-2.0, 0.975, 0.95, 0.27, 1.15], [2.45, 0.975, 0.95, 0.27, 1.15], [2.6, 0.9, 0.86, 0.34, 1.1, 0.06]], PAINT, SILL),
+      hull([[-2.18, 0.92, 0.9, 1.08, 1.15, 0.02], [-1.6, 0.92, 0.8, 1.1, 1.9, 0.05], [-0.75, 0.93, 0.82, 1.1, 1.9, 0.05], [-0.7, 0.9, 0.8, 1.1, 1.85, 0.03]], SKY, GLASS),
+      hull([[-0.78, 0.95, 0.84, 1.1, 1.93, 0.05], [2.42, 0.95, 0.84, 1.1, 1.93, 0.05], [2.58, 0.86, 0.8, 1.1, 1.85, 0.05]], PAINT, PAINT),
+      hull([[-1.75, 0.7, 0.7, 1.87, 1.91, 0.02], [-1.55, 0.815, 0.8, 1.87, 1.95, 0.04], [-0.7, 0.845, 0.83, 1.87, 1.95, 0.04]], PAINT, PAINT)]); },
+    // a cab, and a box on a frame
+    truck: function () { return mergeGeo([
+      hull([[-3.3, 0.9, 0.9, 0.4, 0.8, 0.04], [3.25, 0.9, 0.9, 0.45, 0.8, 0.04]], DARK, DARK),
+      hull([[-3.3, 0.86, 0.82, 0.45, 1.0, 0.06], [-3.15, 0.97, 0.95, 0.4, 1.25], [-1.6, 0.97, 0.95, 0.4, 1.3], [-1.52, 0.9, 0.88, 0.45, 1.25, 0.04]], PAINT, SILL),
+      hull([[-3.2, 0.93, 0.92, 1.2, 1.28, 0.02], [-2.85, 0.93, 0.84, 1.24, 2.05, 0.05], [-1.7, 0.93, 0.86, 1.24, 2.05, 0.05], [-1.62, 0.9, 0.84, 1.24, 2.0, 0.03]], SKY, GLASS),
+      hull([[-2.95, 0.72, 0.72, 2.02, 2.06, 0.02], [-2.78, 0.855, 0.84, 2.02, 2.1, 0.04], [-1.62, 0.875, 0.86, 2.02, 2.1, 0.04]], PAINT, PAINT),
+      hull([[-1.4, 1.0, 1.0, 0.82, 3.0, 0.04], [3.3, 1.0, 1.0, 0.82, 3.0, 0.04]], PAINT, [0.8, 0.8, 0.82])]); }
+  };
+  // a wheel: tyre, a hub whose spokes show it turning, and the dark of the arch behind it
+  function wheelGeo() {
+    function tint(g, fn) { var q = g.toNonIndexed(), a = q.attributes.position, c = new Float32Array(a.count * 3); for (var v = 0; v < a.count; v += 3) { var l = fn((a.getX(v) + a.getX(v + 1) + a.getX(v + 2)) / 3, (a.getY(v) + a.getY(v + 1) + a.getY(v + 2)) / 3, (a.getZ(v) + a.getZ(v + 1) + a.getZ(v + 2)) / 3, a, v); for (var e = 0; e < 9; e++) c[v * 3 + e] = l; } q.setAttribute('color', new T.BufferAttribute(c, 3)); g.dispose(); return q; }
+    var tyre = tint(new T.CylinderGeometry(0.33, 0.33, 0.24, 14).rotateZ(Math.PI / 2), function () { return 0.05; });
+    var hub = tint(new T.CylinderGeometry(0.21, 0.21, 0.252, 10).rotateZ(Math.PI / 2), function (x, y, z, a, v) { var cap = Math.abs(a.getX(v)) > 0.12 && Math.abs(a.getX(v + 1)) > 0.12 && Math.abs(a.getX(v + 2)) > 0.12; return !cap ? 0.3 : Math.floor((Math.atan2(y, z) + Math.PI) / (Math.PI / 5) + 0.5) % 2 ? 0.5 : 0.24; });
+    var arch = tint(new T.CylinderGeometry(0.41, 0.41, 0.22, 14).rotateZ(Math.PI / 2), function () { return 0.02; });
+    return mergeGeo([tyre, hub, arch]);
+  }
+
+  // where the page left room for parked cars: [side, world z]. Each gets a type and a colour of its own.
+  var PARK = (k.carSpots || []).map(function (c) { var x = R(); return { s: c[0], z: c[1], type: x < 0.42 ? 'sedan' : x < 0.68 ? 'hatch' : x < 0.92 ? 'suv' : 'van' }; });
+  var parkedOf = {}; PARK.forEach(function (c) { c.slot = parkedOf[c.type] = (parkedOf[c.type] || 0) + 1; });
+  var paintMat = function () { return fadeable(new T.MeshPhongMaterial({ color: 0xffffff, vertexColors: true, shininess: 55, specular: 0x2a2a33 })); };
+  var bodyOf = {};
+  Object.keys(SHAPES).forEach(function (ty) { bodyOf[ty] = im(SHAPES[ty](), paintMat(), N + (parkedOf[ty] || 0), true); });
+  var wheelM = im(wheelGeo(), fadeable(new T.MeshLambertMaterial({ color: 0xffffff, vertexColors: true })), (N + PARK.length) * 4);
   var lampM = im(new T.BoxGeometry(1, 1, 1), fadeable(new T.MeshBasicMaterial({ color: 0xffffff })), N * 4, true);
   var HEAD = new T.Color(0xfff1cf), TAIL = new T.Color(0xc4180e), BRAKE = new T.Color(0xff5a40), C = new T.Color();
 
@@ -205,12 +284,12 @@ LIFE.traffic = function (k) {
     var len = TYPES[o.type].l;
     if (last && last.u - TYPES[last.type].l / 2 - len / 2 < 5) return false;
     if (!quiet && seen(lane, FADE * 0.5)) return false;
-    o.on = true; o.lane = lane; o.u = 0; o.lat = 0; o.latPrev = 0; o.st = 'run'; o.stopI = 0; o.wait = 0; o.dirty = true;
+    o.on = true; o.lane = lane; o.u = 0; o.lat = 0; o.latPrev = 0; o.st = 'run'; o.stopI = 0; o.wait = 0; o.dirty = true; o.pitch = 0; o.ph = R() * 6.28;
     o.v0 = vBase * TYPES[o.type].v * (0.88 + R() * 0.24);
     o.v = last ? Math.min(o.v0, last.v) : o.v0 * 0.9;
     if (!o.bus) {
       var c = COLORS[Math.floor(R() * COLORS.length)];
-      bodyM.setColorAt(o.i, C.setHSL(c[0] / 360, c[1], c[2] * (0.85 + R() * 0.3))); bodyM.instanceColor.needsUpdate = true;
+      bodyOf[o.type].setColorAt(o.i, C.setHSL(c[0] / 360, c[1], c[2] * (0.85 + R() * 0.3))); bodyOf[o.type].instanceColor.needsUpdate = true;
     }
     lane.list.push(o);
     return true;
@@ -273,11 +352,15 @@ LIFE.traffic = function (k) {
   }
 
   // ---------- drawing ----------
-  var M = new T.Matrix4(), MB = new T.Matrix4(), P = new T.Vector3(), Q = new T.Quaternion(), S = new T.Vector3(), Y = new T.Vector3(0, 1, 0);
+  var M = new T.Matrix4(), MB = new T.Matrix4(), MW = new T.Matrix4(), XA = new T.Vector3(1, 0, 0), P = new T.Vector3(), Q = new T.Quaternion(), S = new T.Vector3(), Y = new T.Vector3(0, 1, 0);
   var pI = 0;
   function part(mesh, idx, x, y, z, sx, sy, sz, fade) {
     M.compose(P.set(x, y, z), Q.identity(), S.set(sx, sy, sz)); M.premultiply(MB); mesh.setMatrixAt(idx, M);
     mesh.userData.fade.array[idx] = fade;
+  }
+  function wheel(idx, x, y, z, spin, wr, fade) {
+    M.compose(P.set(x, y, z), Q.setFromAxisAngle(XA, spin), S.set(1, wr, wr)); M.premultiply(MW); wheelM.setMatrixAt(idx, M);
+    wheelM.userData.fade.array[idx] = fade;
   }
   function plane(mesh, idx, x, y, z, ry, sx, sy, fade) {
     M.compose(P.set(x, y, z), Q.setFromAxisAngle(Y, ry), S.set(sx, sy, 1)); M.premultiply(MB); mesh.setMatrixAt(idx, M);
@@ -289,13 +372,13 @@ LIFE.traffic = function (k) {
   }
   function pool(idx, x, z, sx, sz, c, f) {
     if (f <= 0.001) { poolM.setMatrixAt(idx, ZERO); return; }
-    M.compose(P.set(x, 0.035, z), Q.identity(), S.set(sx, 1, sz)); M.premultiply(MB); poolM.setMatrixAt(idx, M);
+    M.compose(P.set(x, 0.035, z), Q.identity(), S.set(sx, 1, sz)); M.premultiply(MW); poolM.setMatrixAt(idx, M);
     poolM.setColorAt(idx, C.copy(c).multiplyScalar(f));
   }
   var AMBER = new T.Color(1, 0.55, 0.06), NONE = new T.Color(0, 0, 0), WARM = new T.Color(0xffe2b0), RED = new T.Color(0xff2a18);
   function hide(o) {
     var j, n = o.i;
-    bodyM.setMatrixAt(n, ZERO); topM.setMatrixAt(n, ZERO);
+    for (var ty in bodyOf) bodyOf[ty].setMatrixAt(n, ZERO);
     for (j = 0; j < 4; j++) { wheelM.setMatrixAt(n * 4 + j, ZERO); lampM.setMatrixAt(n * 4 + j, ZERO); }
     poolM.setMatrixAt(n * 2, ZERO); poolM.setMatrixAt(n * 2 + 1, ZERO);
     if (o.bus) { busM.setMatrixAt(o.bi, ZERO); for (j = 0; j < 4; j++) winM.setMatrixAt(o.bi * 4 + j, ZERO); for (j = 0; j < 3; j++) boardM.setMatrixAt(o.bi * 3 + j, ZERO); }
@@ -303,7 +386,7 @@ LIFE.traffic = function (k) {
   function draw(t) {
     var showPools = k.quality() > 0;
     poolM.visible = showPools;
-    bodyM.castShadow = k.quality() > 1;
+    for (var bt in bodyOf) bodyOf[bt].castShadow = k.quality() > 1;
     pI = 0;
     k.camera.getWorldPosition(camL); G.worldToLocal(camL);
     for (var n = 0; n < V.length; n++) {
@@ -315,14 +398,16 @@ LIFE.traffic = function (k) {
       var dl = o.lat - o.latPrev; o.latPrev = o.lat;
       var steer = o.v > 0.05 ? -Math.atan2(dl, o.v * 0.016 + 1e-4) * 0.6 : 0;
       o.yaw += (Math.max(-0.12, Math.min(0.12, steer)) - o.yaw) * 0.15;
-      MB.makeRotationY((s > 0 ? 0 : Math.PI) + o.yaw); MB.setPosition(x, 0, z);
-      var hl = ty.l / 2, hw = ty.w / 2, ly, wy, wz, wr;
+      MW.makeRotationY((s > 0 ? 0 : Math.PI) + o.yaw); MW.setPosition(x, 0, z);
+      var hl = ty.l / 2, hw = ty.w / 2, ly = ty.ny, lt = ty.ty, wr = ty.wr, wy = 0.33 * wr;
       var braking = o.a < -0.6 || o.v < 0.3;
+      // the body rides on its springs: the nose dips under braking and lifts pulling away, and it stirs on the road
+      var soft = o.bus || o.type === 'truck' ? 0.5 : 1;
+      o.pitch = (o.pitch || 0) + (Math.max(-0.03, Math.min(0.022, o.a * 0.011)) * soft - (o.pitch || 0)) * 0.12;
+      var heave = Math.sin(o.u * 0.9 + (o.ph || 0)) * 0.012 * Math.min(1, o.v / 5) * soft;
+      MB.makeRotationX(o.pitch + heave * 0.25); MB.setPosition(0, heave, 0); MB.premultiply(MW);
       if (!o.bus) {
-        var b = ty.body, u = ty.top;
-        part(bodyM, o.i, 0, b[3], b[4], b[1], b[2], b[0], f);
-        part(topM, o.i, 0, u[3], u[4], u[1], u[2], u[0], f);
-        ly = b[3] + Math.min(b[2], 0.62) * 0.6; wz = hl - (o.type === 'truck' ? 1.0 : 0.85); wr = o.type === 'truck' ? 1.25 : 1;
+        part(bodyOf[o.type], o.i, 0, 0, 0, 1, 1, 1, f);
       } else {
         part(busM, o.bi, 0, 0.32, 0, ty.w, 2.95, ty.l, f);
         var wl = ty.l - 2.4;
@@ -333,24 +418,23 @@ LIFE.traffic = function (k) {
         plane(boardM, o.bi * 3, 0, 2.95, -hl - 0.014, Math.PI, ty.w - 0.4, 0.34, f);
         plane(boardM, o.bi * 3 + 1, 0, 2.85, hl + 0.014, 0, ty.w - 0.7, 0.28, f);
         plane(boardM, o.bi * 3 + 2, hw + 0.014, 2.85, -hl + 1.9, Math.PI / 2, 2.2, 0.32, f);
-        ly = 0.75; wz = hl - 2.0; wr = 1.5;
       }
-      // wheels
-      wy = 0.33 * wr;
-      part(wheelM, o.i * 4, hw - 0.1, wy, -wz, 1, wr, wr, f); part(wheelM, o.i * 4 + 1, -hw + 0.1, wy, -wz, 1, wr, wr, f);
-      part(wheelM, o.i * 4 + 2, hw - 0.1, wy, wz, 1, wr, wr, f); part(wheelM, o.i * 4 + 3, -hw + 0.1, wy, wz, 1, wr, wr, f);
+      // wheels stay on the road and turn with the distance covered
+      var spin = -o.u / wy, wx = hw - (o.bus ? 0.12 : 0.1); // a bus's wheels sit in its side; a car's stand a finger proud, in the dark of their arches
+      wheel(o.i * 4, wx, wy, -ty.ax[0], spin, wr, f); wheel(o.i * 4 + 1, -wx, wy, -ty.ax[0], spin, wr, f);
+      wheel(o.i * 4 + 2, wx, wy, ty.ax[1], spin, wr, f); wheel(o.i * 4 + 3, -wx, wy, ty.ax[1], spin, wr, f);
       // lamps
-      var lx = hw - 0.28, tc = braking ? BRAKE : TAIL;
+      var lx = ty.lx, tc = braking ? BRAKE : TAIL;
       part(lampM, o.i * 4, lx, ly, -hl - 0.02, 0.36, 0.17, 0.05, f); lampM.setColorAt(o.i * 4, HEAD);
       part(lampM, o.i * 4 + 1, -lx, ly, -hl - 0.02, 0.36, 0.17, 0.05, f); lampM.setColorAt(o.i * 4 + 1, HEAD);
-      part(lampM, o.i * 4 + 2, lx, ly + 0.04, hl + 0.02, 0.3, 0.16, 0.05, f); lampM.setColorAt(o.i * 4 + 2, tc);
-      part(lampM, o.i * 4 + 3, -lx, ly + 0.04, hl + 0.02, 0.3, 0.16, 0.05, f); lampM.setColorAt(o.i * 4 + 3, tc);
+      part(lampM, o.i * 4 + 2, lx, lt, hl + 0.02, 0.3, 0.16, 0.05, f); lampM.setColorAt(o.i * 4 + 2, tc);
+      part(lampM, o.i * 4 + 3, -lx, lt, hl + 0.02, 0.3, 0.16, 0.05, f); lampM.setColorAt(o.i * 4 + 3, tc);
       // glows, brighter the more squarely a lamp faces the camera
-      var fwdX = -MB.elements[8], fwdZ = -MB.elements[10];
+      var fwdX = -MW.elements[8], fwdZ = -MW.elements[10];
       var cx = camL.x - x, cz = camL.z - z, cd = Math.sqrt(cx * cx + cz * cz) || 1, face = (cx * fwdX + cz * fwdZ) / cd;
       var fh = smooth(-0.25, 0.55, face) * f, ft = smooth(-0.25, 0.55, -face) * f * (braking ? 1 : 0.6);
       glowAt(lx, ly, -hl - 0.1, HEAD, fh); glowAt(-lx, ly, -hl - 0.1, HEAD, fh);
-      glowAt(lx, ly + 0.04, hl + 0.1, RED, ft); glowAt(-lx, ly + 0.04, hl + 0.1, RED, ft);
+      glowAt(lx, lt, hl + 0.1, RED, ft); glowAt(-lx, lt, hl + 0.1, RED, ft);
       // indicator: kerb side while a bus pulls in or waits, road side while it pulls out
       var ind = o.bus && (o.st === 'in' || o.st === 'dwell' || o.st === 'out') && (t % 0.8) < 0.42 ? 1 : 0, isd = o.st === 'out' || (o.st === 'dwell' && o.wait <= 1.5) ? -1 : 1;
       glowAt(isd * (hw + 0.02), ly + 0.1, -hl + 0.2, ind ? AMBER : NONE, ind * f);
@@ -363,9 +447,18 @@ LIFE.traffic = function (k) {
     }
     for (; pI < PN; pI++) { pCol[pI * 3] = pCol[pI * 3 + 1] = pCol[pI * 3 + 2] = 0; }
     pg.attributes.position.needsUpdate = true; pg.attributes.color.needsUpdate = true;
-    [bodyM, topM, wheelM, lampM, busM, winM, boardM].forEach(function (m) { if (!m) return; m.instanceMatrix.needsUpdate = true; m.userData.fade.needsUpdate = true; if (m.instanceColor) m.instanceColor.needsUpdate = true; });
+    [bodyOf.sedan, bodyOf.hatch, bodyOf.suv, bodyOf.van, bodyOf.truck, wheelM, lampM, busM, winM, boardM].forEach(function (m) { if (!m) return; m.instanceMatrix.needsUpdate = true; m.userData.fade.needsUpdate = true; if (m.instanceColor) m.instanceColor.needsUpdate = true; });
     poolM.instanceMatrix.needsUpdate = true; if (poolM.instanceColor) poolM.instanceColor.needsUpdate = true;
   }
+
+  // ---------- parked cars: the same shapes at the kerb, nose the way their side of the road runs ----------
+  PARK.forEach(function (c, j) {
+    var ty = TYPES[c.type], mesh = bodyOf[c.type], bi = N + c.slot - 1, wi = (N + j) * 4, hw = ty.w / 2, wy = 0.33 * ty.wr, cc = COLORS[Math.floor(R() * COLORS.length)];
+    MW.makeRotationY(c.s > 0 ? 0 : Math.PI); MW.setPosition(c.s * (ROAD - 1.05 + (R() - 0.5) * 0.16), 0, loc(c.z)); MB.copy(MW);
+    part(mesh, bi, 0, 0, 0, 1, 1, 1, 1); mesh.setColorAt(bi, C.setHSL(cc[0] / 360, cc[1], cc[2] * (0.85 + R() * 0.3)));
+    wheel(wi, hw - 0.1, wy, -ty.ax[0], R() * 6, ty.wr, 1); wheel(wi + 1, -hw + 0.1, wy, -ty.ax[0], R() * 6, ty.wr, 1);
+    wheel(wi + 2, hw - 0.1, wy, ty.ax[1], R() * 6, ty.wr, 1); wheel(wi + 3, -hw + 0.1, wy, ty.ax[1], R() * 6, ty.wr, 1);
+  });
 
   // ---------- running it ----------
   var simT = null;
@@ -401,3 +494,4 @@ LIFE.traffic = function (k) {
     draw(simT);
   });
 };
+LIFE.traffic.parks = true; // this file draws the parked cars too (the page keeps plain ones for a build without it)

@@ -96,7 +96,7 @@ Looking at it: `tools/view.sh <place> <out.png> [--cam "x,y,z" --look "x,y,z"] [
 
 ### What each module draws (2026-11-11)
 
-- `life-traffic.js` — (cars reshaped 2026-11-14: each kind of vehicle — saloon, hatchback, tall car, van, box truck — is one shape lofted from nose to tail with raked glass painted into it; wheels have hubs and turn with the distance covered; the body dips on its springs under braking; the parked cars at `k.carSpots` are the same shapes and are drawn by this file, `LIFE.traffic.parks`, the page keeping plain boxes only for a build without it. The bus is still a lettered box.) Two lanes of car-following traffic, amount read off the place's `hoods.js` numbers and canon line; Downtown buses lettered from the ledger row `AC Transit` that pull in to two kerb stops (`k.busStops`). A bus needs a non-rail Public Transit row in `k.H.biz`; no other place has one.
+- `life-traffic.js` — (cars reshaped 2026-11-14: each kind of vehicle — saloon, hatchback, tall car, van, box truck — is one shape lofted from nose to tail with raked glass painted into it; wheels have hubs and turn with the distance covered; the body dips on its springs under braking; the parked cars at `k.carSpots` are the same shapes and are drawn by this file, `LIFE.traffic.parks`, the page keeping plain boxes only for a build without it. The bus is one shape too: a long rounded body with a domed roof, the operator's colour in a band over a dark skirt, two doors on the kerb side, a pod on the roof, mirrors, riders in the lit windows; it leans to the kerb while it stands at its stop. Its boards still carry the ledger row's name and nothing else.) Two lanes of car-following traffic, amount read off the place's `hoods.js` numbers and canon line; Downtown buses lettered from the ledger row `AC Transit` that pull in to two kerb stops (`k.busStops`). A bus needs a non-rail Public Transit row in `k.H.biz`; no other place has one.
 - `life-nature.js` — takes over tree drawing (six shapes, vertex-shader sway), adds back-garden trees on house lots and a shore row at Lake Merritt; one instanced bird mesh for pigeons, sparrows, gulls, ducks, geese; perched birds lift off when the viewer nears; a dusk flock; leaves. Its moths are off while `life-street.js` is loaded (that module circles its own).
 - `life-water.js` — the water surface (own shader, sky colours, light streaks, rain pocks) and its edge; Baylight marina, ferry terminal and a ferry on a 150 s loop; Jack London tug, barge, pilot boat; Brooklyn float and kayaks (ledger: Shoreline Kayak & Paddle); Lake Merritt sculls (ledger: Lakeside Rowing Club). Reads the page's sky material directly and leaves `k._water` for others — both outside the contract above.
 - `life-street.js` — live window quads registered over the baked wall textures (it carries a copy of the page's `hash`/`rng` and the grid in `WALLS`, and reads each lot's `p.B`, `p.F`, `p.doorZ`: see §Building fronts), house windows and doors, wordless neon, steam and smoke, aircraft and meteors, moths, rain ripples and gutters, porch lights and shop doors that react, a cat.
@@ -108,6 +108,13 @@ Drawn but not named in canon (generic fittings — cut on the builder's word): B
 People (2026-11-14): filmed frame by frame from the side, front, above and in the stand-with-someone view; two minutes of the four busiest streets stepped with no two strangers closer than 0.54 m; about 1 ms a frame for 124 people on the server.
 
 Not verified for any module: motion at a real frame rate, a real phone, the quality-0 path (headless never drops quality), the walk-up reactions with real key input.
+
+## The camera (2026-11-14)
+
+- The flight (`step()` in `template.html`) is filmed rather than slid. It eases away from a standstill at the top of each street and after Pause. It turns to look at whoever the cards are about, at a chaos car close by, and at a landmark on one side as it passes (`W.gaze`), and slows by up to a quarter for the car and the landmark, never for the cards. It leans a little into its own drift (`W.bank`) and carries a small hand-held unevenness.
+- Walk-it-yourself gathers pace and comes to rest instead of starting and stopping dead, turns the same way, and lifts a little with each step.
+- A viewer whose device asks for reduced motion (`STILL`) gets none of the sway, lean or step; the flight also starts paused for them, as before.
+- Pace, Pause, the gate crossing, the stand-with-someone view and the business view are unchanged.
 
 ## Art
 

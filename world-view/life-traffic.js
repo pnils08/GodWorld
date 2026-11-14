@@ -245,18 +245,24 @@ LIFE.traffic = function (k) {
   var busM = null, winM = null, boardM = null;
   if (op) {
     var hue = typeof k.sectorHue === 'function' ? k.sectorHue(op.s) : 190;
-    var busTex = k.canvasTex(256, 128, function (g, w, h) {
-      g.fillStyle = 'hsl(' + hue + ',6%,74%)'; g.fillRect(0, 0, w, h);
-      g.fillStyle = 'hsl(' + hue + ',70%,40%)'; g.fillRect(0, h * 0.74, w, h * 0.12);
-      g.fillStyle = 'hsl(' + hue + ',10%,30%)'; g.fillRect(0, h * 0.92, w, h * 0.08);
-    });
-    var bm = new T.MeshLambertMaterial({ map: busTex }); bm.userData.own = true;
-    busM = im(new T.BoxGeometry(1, 1, 1).translate(0, 0.5, 0), fadeable(bm), busN);
+    // the bus: one shape like the cars. A long body with rounded corners and a domed roof, the operator's colour
+    // in a band along it over a dark skirt, two doors on the kerb side, a pod on the roof, mirrors out front.
+    var BODY = rgb(hue, 0.06, 0.74), BAND = rgb(hue, 0.7, 0.4), SKIRT = rgb(hue, 0.1, 0.2), ROOF = rgb(hue, 0.05, 0.6), DOORT = [0.7, 0.58, 0.38];
+    busM = im(mergeGeo([
+      hull([[-5.7, 1.19, 1.19, 0.5, 3.1, 0.16], [-5.52, 1.25, 1.25, 0.34, 3.14, 0.12], [5.54, 1.25, 1.25, 0.34, 3.14, 0.12], [5.7, 1.2, 1.2, 0.46, 3.08, 0.14]], BODY, BODY),
+      hull([[-5.5, 1.22, 1.02, 3.1, 3.34, 0.1], [5.5, 1.22, 1.02, 3.1, 3.34, 0.1]], ROOF, BODY),
+      hull([[-5.54, 1.258, 1.258, 0.95, 1.32, 0.02], [5.56, 1.258, 1.258, 0.95, 1.32, 0.02]], BAND, BAND),
+      hull([[-5.56, 1.262, 1.262, 0.3, 0.64, 0.03], [5.58, 1.262, 1.262, 0.3, 0.64, 0.03]], SKIRT, SKIRT),
+      hull([[1.4, 0.82, 0.78, 3.32, 3.56, 0.06], [4.3, 0.82, 0.78, 3.32, 3.56, 0.06]], [0.5, 0.5, 0.52], [0.36, 0.36, 0.38]),
+      hull([[-4.95, 0.014, 0.014, 0.48, 2.62, 0.004], [-3.85, 0.014, 0.014, 0.48, 2.62, 0.004]], DOORT, GLASS, 1.262), hull([[-0.35, 0.014, 0.014, 0.48, 2.62, 0.004], [0.95, 0.014, 0.014, 0.48, 2.62, 0.004]], DOORT, GLASS, 1.262),
+      hull([[-5.62, 0.05, 0.05, 2.25, 2.62, 0.02], [-5.5, 0.05, 0.05, 2.25, 2.62, 0.02]], DARK, DARK, 1.42), hull([[-5.62, 0.05, 0.05, 2.25, 2.62, 0.02], [-5.5, 0.05, 0.05, 2.25, 2.62, 0.02]], DARK, DARK, -1.42)
+    ]), paintMat(), busN, true);
     // lit windows: warm interior, pillars between panes, the tops of seat backs along the bottom
     var winTex = k.canvasTex(512, 64, function (g, w, h) {
       var gr = g.createLinearGradient(0, 0, 0, h); gr.addColorStop(0, '#fff3d6'); gr.addColorStop(0.5, '#f4cf8e'); gr.addColorStop(1, '#c99a5c');
       g.fillStyle = gr; g.fillRect(0, 0, w, h);
       g.fillStyle = 'rgba(60,40,30,0.55)'; for (var x = 8; x < w; x += 22) g.fillRect(x, h * 0.72, 14, h * 0.28);
+      g.fillStyle = 'rgba(44,28,18,0.8)'; for (x = 8; x < w; x += 22) if ((x * 7) % 5 < 2) { g.beginPath(); g.arc(x + 7, h * 0.52, 6.5, 0, 7); g.fill(); g.fillRect(x, h * 0.6, 14, h * 0.14); } // riders
       g.fillStyle = '#1b1c24'; for (x = 0; x < w; x += 64) g.fillRect(x, 0, 7, h);
       g.fillRect(0, 0, w, 4); g.fillRect(0, h - 4, w, 4);
     });
@@ -475,7 +481,7 @@ LIFE.traffic = function (k) {
   }
 
   // ---------- drawing ----------
-  var M = new T.Matrix4(), MB = new T.Matrix4(), MW = new T.Matrix4(), XA = new T.Vector3(1, 0, 0), P = new T.Vector3(), Q = new T.Quaternion(), S = new T.Vector3(), Y = new T.Vector3(0, 1, 0);
+  var EU = new T.Euler(), M = new T.Matrix4(), MB = new T.Matrix4(), MW = new T.Matrix4(), XA = new T.Vector3(1, 0, 0), P = new T.Vector3(), Q = new T.Quaternion(), S = new T.Vector3(), Y = new T.Vector3(0, 1, 0);
   var pI = 0;
   function part(mesh, idx, x, y, z, sx, sy, sz, fade) {
     M.compose(P.set(x, y, z), Q.identity(), S.set(sx, sy, sz)); M.premultiply(MB); mesh.setMatrixAt(idx, M);
@@ -529,11 +535,12 @@ LIFE.traffic = function (k) {
       var soft = o.bus || o.type === 'truck' ? 0.5 : 1;
       o.pitch = (o.pitch || 0) + (Math.max(-0.03, Math.min(0.022, o.a * 0.011)) * soft - (o.pitch || 0)) * 0.12;
       var heave = Math.sin(o.u * 0.9 + (o.ph || 0)) * 0.012 * Math.min(1, o.v / 5) * soft;
-      MB.makeRotationX(o.pitch + heave * 0.25); MB.setPosition(0, heave, 0); MB.premultiply(MW);
+      o.kneel = (o.kneel || 0) + ((o.bus && o.st === 'dwell' ? 1 : 0) - (o.kneel || 0)) * 0.05; // a bus leans to the kerb while it stands at its stop
+      MB.makeRotationFromEuler(EU.set(o.pitch + heave * 0.25, 0, -0.024 * o.kneel)); MB.setPosition(0, heave - 0.03 * o.kneel, 0); MB.premultiply(MW);
       if (!o.bus) {
         part(bodyOf[o.type], o.i, 0, 0, 0, 1, 1, 1, f);
       } else {
-        part(busM, o.bi, 0, 0.32, 0, ty.w, 2.95, ty.l, f);
+        part(busM, o.bi, 0, 0, 0, 1, 1, 1, f);
         var wl = ty.l - 2.4;
         plane(winM, o.bi * 4, hw + 0.012, 2.05, 0.35, Math.PI / 2, wl, 1.05, f);
         plane(winM, o.bi * 4 + 1, -hw - 0.012, 2.05, 0.35, -Math.PI / 2, wl, 1.05, f);

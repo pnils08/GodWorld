@@ -108,4 +108,23 @@ assert.throws(() => v1.validateAngleOutput({ pass: true, why: 'nothing' }, assig
 assert.throws(() => v1.validateAngleOutput(Object.assign({}, ownPick, {
   targets: [{ pop: 'TEST-07777', question: 'q', basis: 'b' }] }), rows), /target must use a supplied pop/);
 
+// the evening packet for a seat that picked for itself: what it knows and the grammar, no shape, no slot, no footer
+const reviewProfile = { id: 'test-profile', canonPolicy: 'load-bearing', canonBlockers: ['an invented TEST station'] };
+const writeArgs = { cycle: 999, desk: 'civic', reporter, story: { kind: 'own-pick', ref: 'own pick, C999', label: plan.focus, angle: plan.focus },
+  approach: null, angleInput: v2.buildAnglePacket(Object.assign({}, base, { free: { rows: true } })), anglePlan: plan,
+  interviews: [], officeRecords: [], lane: [], runningStories: [], reviewProfile };
+const usual = v2.buildWritePacket(writeArgs);
+assert.ok(/unanswered question/.test(usual.output.rule));
+assert.ok(usual.manifest.permittedInterpretationSlots.some(s => s.id === 'P_ACCOUNTABILITY'));
+assert.ok(/SELF-SCORE/.test(usual.output.footer));
+const bare = v2.buildWritePacket(Object.assign({}, writeArgs, { bare: true }));
+assert.ok(!/lede|unanswered|scene/i.test(bare.output.rule));
+assert.ok(/Every CLAIM must point/.test(bare.output.rule));
+assert.strictEqual(bare.output.footer, '');
+assert.deepStrictEqual(bare.manifest.permittedInterpretationSlots.map(s => s.id), ['P_EMPHASIS']);
+assert.ok(!/Do not brief the record|Lead with/.test(JSON.stringify([bare.task, bare.limits])));
+assert.strictEqual(bare.task.assignment, 'the quiet bakery counter');   // the seat's own pick is the piece
+assert.deepStrictEqual(bare.output.intake, usual.output.intake);          // the grammar the pipeline parses is untouched
+assert.deepStrictEqual(bare.known.map(c => c.text), usual.known.map(c => c.text));
+
 console.log('livedPacketFreeAngle.test.js: ok');

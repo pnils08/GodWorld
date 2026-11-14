@@ -57,7 +57,6 @@ CYCLE="$(/usr/bin/node -e 'process.stdout.write(String(JSON.parse(process.argv[1
 CONTRACT="$(/usr/bin/node -e 'process.stdout.write(String(JSON.parse(process.argv[1]).assignment.packetContract || ""))' "$ASSIGNMENT_SOURCE")"
 STAMP="$(date +%Y%m%d-%H%M%S)-${PERSONA}-day-${VARIANT}-$$"
 SHELL_DIR="$ROOT/output/test-shell/$STAMP"
-TAG="day-$(date +%Y%m%d%H%M%S)-$$"
 mkdir -p "$SHELL_DIR/samples" "$SHELL_DIR/staged" "$SHELL_DIR/flagged"
 
 # Keep the source rota and all cycle slices the angle stage can read. The reporter's
@@ -74,7 +73,7 @@ echo "test shell: $SHELL_DIR (fanout $DATE, cycle $CYCLE, $DESK/$PERSONA, $VARIA
 cd "$ROOT"
 PACKET_STEM=""
 [ -z "$CONTRACT" ] || PACKET_STEM="packet-${CONTRACT}_"
-STEM="${DESK}_c${CYCLE}_${PERSONA}_${PACKET_STEM}benchmark-${TAG}_"
+STEM="${DESK}_c${CYCLE}_${PERSONA}_${PACKET_STEM}"
 run_stage() {
   local stage="$1" artifact="$2" log="$SHELL_DIR/$1.log" status artifact_missing=0
   local angle_mode="" prompt_mode=""
@@ -83,7 +82,6 @@ run_stage() {
   GODWORLD_TEST_COMPARE_DIR="$SHELL_DIR" GODWORLD_TEST_ANGLE="$angle_mode" GODWORLD_TEST_PROMPT="$prompt_mode" \
     /usr/bin/node scripts/cron-desk-run.js \
     --stage="$stage" --desk "$DESK" --persona "$PERSONA" --cycle "$CYCLE" \
-    --evaluate-package "$PERSONA" --evaluation-tag "$TAG" \
     --test-assignment "$SHELL_DIR/assignment.json" --no-gate >"$log" 2>&1
   status=$?
   set -e

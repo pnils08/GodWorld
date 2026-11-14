@@ -401,6 +401,17 @@ function buildWritePacket(args) {
     quotes: 'select manifest.approvedQuotes ids',
     subjects: 'select manifest.approvedSubjects ids',
   };
+  // Test shell only (pipeline.111; builder 2026-11-14: "be careful with hardcoded instruction in disguise", "the
+  // conflict shouldn't be pulling the agent in separate directions and/or forcing an outcome"). A seat that
+  // picked for itself is sent what it knows, who spoke, the canon limits and the INTAKE grammar the pipeline
+  // parses: no article shape, no "who should answer" slot, no self-score footer. cron-desk-run.js passes `bare`
+  // only for a test-shell angle that carried no assignment.
+  if (args.bare) {
+    packet.manifest.permittedInterpretationSlots = packet.manifest.permittedInterpretationSlots
+      .filter(slot => slot.id !== 'P_ACCOUNTABILITY');
+    packet.output.rule = 'Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.';
+    packet.output.footer = '';
+  }
   return assertBase(packet, 'W3');
 }
 

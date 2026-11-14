@@ -3130,6 +3130,7 @@ async function runWrite(assign) {
   // pipeline.89: the Packet follows her pick — the roster drops out, every self-initiated page of each
   // citizen her angle named goes in whole. No pick that resolves to a page is a failed day, not a substitute.
   let voicesPicked = null;
+  const bareWrite = !!(TEST_SHELL && angle && angle.freeAngle);
   if (PACKET_ACTIVE && isVoicesSeat()) {
     const voices = require('./buildVoicesSlice');
     const picks = ((angle && angle.angleRead && angle.angleRead.plan && angle.angleRead.plan.targets) || [])
@@ -3155,7 +3156,11 @@ async function runWrite(assign) {
       lane,
       // engine.270: running stories ride the Packet as plain lines.
       runningStories: storylineLines(loadStorylines(cycle, desk)),
-      reviewProfile: ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.reviewProfile,
+      // Test shell, a seat that picked for itself: the seat file's purpose, voice, opening, length and texture
+      // lists stay in the file; only its id, canon policy and canon blockers ride.
+      reviewProfile: bareWrite ? bareReviewProfile(ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.reviewProfile)
+        : (ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.reviewProfile),
+      ...(bareWrite ? { bare: true } : {}),
     });
     if (REGATE && fs.existsSync(stateFile)) writePacket = readJson(stateFile) || writePacket; // the state the writer saw
     else fs.writeFileSync(stateFile, JSON.stringify(writePacket, null, 2));
@@ -3889,12 +3894,18 @@ try {
   process.exit(1);
 }
 // Test shell only: the saved fanout assignment scripts/testReporterDay.sh hands to one stage. Refused
-// outside the shell, with the gate on, under --fanout, or without an evaluation package and tag, so a
-// scheduled run can never take it.
+// outside the shell, with the gate on or under --fanout, so a scheduled run can never take it.
+function bareReviewProfile(profile) {
+  if (!profile) return null;
+  return { id: profile.id, canonPolicy: profile.canonPolicy, canonBlockers: profile.canonBlockers || [] };
+}
+
 function loadTestAssignment() {
   if (!TEST_ASSIGNMENT_FILE) return undefined;
-  if (!TEST_SHELL || !NO_GATE || !STAGE || FANOUT || !EVALUATE_PACKAGE || !EVALUATION_TAG) {
-    throw new Error('--test-assignment requires the test-shell env, --no-gate, one --stage, --evaluate-package and --evaluation-tag; --fanout is forbidden');
+  // No evaluation tag: the writer names its draft without one, so a tagged stem never met the draft
+  // (2026-11-14, first whole-day run). The shell folder is the isolation; the stems are the live ones.
+  if (!TEST_SHELL || !NO_GATE || !STAGE || FANOUT || EVALUATION_TAG) {
+    throw new Error('--test-assignment requires the test-shell env, --no-gate and one --stage; --fanout and --evaluation-tag are forbidden');
   }
   const file = path.resolve(TEST_ASSIGNMENT_FILE);
   if (!file.startsWith(path.resolve(TEST_SHELL) + path.sep)) throw new Error('--test-assignment must sit inside GODWORLD_TEST_COMPARE_DIR');

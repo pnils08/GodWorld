@@ -84,6 +84,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | pipeline.108 | Daily news on the day's sources alone (builder 11-13). Fri 11-13 show read, plan Task 10. Next: his call on the read; Sat 11-14 weekly | in-progress | research-build | [[../plans/2026-11-09-daily-news-articles-as-sources]] |
 | pipeline.101 | Daily news: evening write wake date fixed (builder 11-04), NotebookLM page written. Next: confirm the 11-04 18:15 wake writes and gates | in-progress | research-build | [[../reference/NotebookLM]] §Change log |
 | pipeline.89 | Every journalist picks (builder 10-25: "All journalists should pick, they are AI"): every wake package gets the live tools the 3 tool seats have, the slice is a tip sheet not the assignment, Rhea is off every path; Ines first, same cut on all 28. First run 2026-10-28 | in-progress | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.89 |
+| infrastructure.19 | Oakland week flight: people and motion made lifelike (builder 11-14). People jointed and walking; next the cars | in-progress | research-build | [[../../world-view/README]] |
 
 ## 4. Queue — ruled, not started (ready)
 
@@ -120,5 +121,4 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | engine.248 | Faith orgs get a sim role. Membership LIVE since S325 (processFaithJoins_, MembersList). Open: membership-gated dial nudge (today any faith line nudges), member faith-life events, faith chaos car; the 16 leaders not in MembersList. Pointer says design first | ready | engine-sheet | [[../research/2026-09-10-kimi-faith-lane-routing]] |
 | engine.261 | Firm agents: three business owners get a wake slice to run their business | ready | engine-sheet | [[../plans/2026-09-26-future-build-ideas]] §Builder rulings |
 | governance.60 | Cohesion loop: an agent audits and drafts fixes to the inbox, both terminals wake 3x a day to pick up and unstick each other (builder 11-10) | ready | research-build | [[../plans/2026-11-10-cohesion-loop]] |
-| governance.61 | Memory recall ranks recent saves first; brainSearch covers memory, sheet and open work. Built, both codex findings folded (11-13) | done-pending-archive | research-build | [[../plans/2026-11-13-memory-recall-and-brainsearch]] |
 | pipeline.105 | Lore gate runs on its own (builder 11-08: "no world exists where a gate runs by hand"); gate rule = G-ES12 (only the fourth wall blocks). Plan at pickup | ready | engine-sheet | [[../../.claude/skills/lore-ingest/SKILL]] |

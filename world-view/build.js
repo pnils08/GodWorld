@@ -253,7 +253,7 @@ if (require.main === module) {
 const tpl = fs.readFileSync(path.join(__dirname, 'template.html'), 'utf8');
 const places = fs.readFileSync(path.join(__dirname, 'places.js'), 'utf8');
 if (!tpl.includes('/*__PLACES__*/')) { console.error('template has no places marker'); process.exit(1); }
-const LIFE_FILES = ['life-traffic.js', 'life-nature.js', 'life-water.js', 'life-street.js', 'sound.js'];
+const LIFE_FILES = ['life-traffic.js', 'life-nature.js', 'life-water.js', 'life-street.js', 'life-people.js', 'sound.js'];
 // NOLIFE=1 builds without the ambient modules; LIFE=life-water.js,sound.js builds with only those (to publish while another is mid-edit)
 // COMMITTED=life-water.js takes those files as last committed, not as they sit on disk (one may be mid-edit by a helper).
 const committed = (process.env.COMMITTED || '').split(',').filter(Boolean);

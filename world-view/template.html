@@ -183,9 +183,9 @@ if (!window.THREE || !DATA) { $('note').hidden = false; return; }
 
 var KIND = { m: '#ffc94d', v: '#6fd3ff', t: '#ff9ecb', h: '#ff6b5e', s: '#7be08a', p: '#f3e6cf' };
 var ROAD = 6.4, WALK = 10.2, SPEED = 3.2, LANE = 2.4;
-var DBG = window.WV_DEBUG || null; // look-test hook: { cam: [x,y,z], look: [x,y,z], t0: seconds, hide: true }
+var DBG = window.WV_DEBUG || null; // look-test hook: { cam: [x,y,z], look: [x,y,z], t0: seconds, hide: true, manual: true (the clock only moves on __wv.step(dt)), follow: { who: name or index, off: [x,y,z], aim: height } }
 if (DBG && DBG.hide) document.body.classList.add('bare');
-if (DBG) window.__wv = { get world() { return world; }, get camera() { return camera; }, WALK: WALK };
+if (DBG) window.__wv = { get world() { return world; }, get camera() { return camera; }, WALK: WALK, step: function (dt) { if (!world || busy) return false; step(dt); if (frame++ % 6 === 0) pickNames(); placeNames(); draw(); return true; } };
 var DEF = { wall: 'stucco', tone: [30, 0.15, 0.5], h: [4, 9], w: [6, 11], gap: [0.6, 2.1], lit: 0.45, fill: 'box', trees: 0, slope: 0, neon: 0, set: [] };
 
 // ---------- seeded random ----------
@@ -258,11 +258,6 @@ var TEX_GLOW = canvasTex(64, 64, function (g) {
   var gr = g.createRadialGradient(32, 32, 0, 32, 32, 32);
   gr.addColorStop(0, 'rgba(255,255,255,1)'); gr.addColorStop(0.25, 'rgba(255,255,255,.55)'); gr.addColorStop(1, 'rgba(255,255,255,0)');
   g.fillStyle = gr; g.fillRect(0, 0, 64, 64);
-});
-var TEX_FACE = canvasTex(64, 64, function (g) {
-  g.clearRect(0, 0, 64, 64); g.fillStyle = 'rgba(20,14,10,.9)';
-  g.beginPath(); g.arc(21, 27, 3.6, 0, 7); g.arc(43, 27, 3.6, 0, 7); g.fill();
-  g.strokeStyle = 'rgba(20,14,10,.55)'; g.lineWidth = 2.2; g.lineCap = 'round'; g.beginPath(); g.arc(32, 38, 9, 0.25 * Math.PI, 0.75 * Math.PI); g.stroke();
 });
 var FONT = '"Bricolage Grotesque", "Trebuchet MS", sans-serif';
 function signTex(text, hue) {
@@ -447,7 +442,7 @@ function build(idx) {
   for (i = 0; i < dashN; i++) { M.makeTranslation(0, 0.02, 14 - i * 6); dash.setMatrixAt(i, M); } ground.add(dash);
 
   var carSpots = [], lampSpots = [];
-  var kit = { THREE: THREE, root: root, ground: ground, H: H, ST: ST, LAY: LAY, L: L, gz: gz, water: water, slope: slope, WALK: WALK, ROAD: ROAD, LANE: LANE, WX: WX, warm: warm, r: r, yAt: yAt, held: held, box: box, walled: walled, blade: blade, glow: glow, crane: crane, flat: flat, beacons: beacons, ticks: ticks, signs: signs, trees: trees, carSpots: carSpots, lampSpots: lampSpots, nameTex: nameTex, signTex: signTex, canvasTex: canvasTex, glowTex: TEX_GLOW, sectorHue: sectorHue, roofGeo: roofGeo, camera: camera, quality: function () { return quality; } };
+  var kit = { THREE: THREE, root: root, ground: ground, H: H, ST: ST, LAY: LAY, L: L, gz: gz, water: water, slope: slope, WALK: WALK, ROAD: ROAD, LANE: LANE, WX: WX, temp: parseFloat(DATA.weather.temp), warm: warm, r: r, yAt: yAt, held: held, box: box, walled: walled, blade: blade, glow: glow, crane: crane, flat: flat, beacons: beacons, ticks: ticks, signs: signs, trees: trees, carSpots: carSpots, lampSpots: lampSpots, nameTex: nameTex, signTex: signTex, canvasTex: canvasTex, glowTex: TEX_GLOW, sectorHue: sectorHue, roofGeo: roofGeo, camera: camera, quality: function () { return quality; } };
 
   // water side (the water module may draw the surface itself)
   var glints = null;
@@ -551,49 +546,28 @@ function build(idx) {
   var beaconPts = null;
   if (beacons.length) { var bb = new THREE.BufferGeometry(); bb.setAttribute('position', new THREE.BufferAttribute(new Float32Array(beacons), 3)); beaconPts = new THREE.Points(bb, new THREE.PointsMaterial({ map: TEX_GLOW, color: 0xff3b30, size: 4, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, fog: false })); root.add(beaconPts); }
 
-  // people: one figure for each tracked citizen with a week on record here
-  var N1 = Math.max(1, n), white = function () { return new THREE.MeshLambertMaterial({ color: 0xffffff }); };
-  var parts = {
-    legL: new THREE.InstancedMesh(new THREE.BoxGeometry(0.14, 0.86, 0.16).translate(0, -0.43, 0), white(), N1),
-    legR: new THREE.InstancedMesh(new THREE.BoxGeometry(0.14, 0.86, 0.16).translate(0, -0.43, 0), white(), N1),
-    torso: new THREE.InstancedMesh(new THREE.CylinderGeometry(0.21, 0.17, 0.66, 8).translate(0, 1.17, 0), white(), N1),
-    armL: new THREE.InstancedMesh(new THREE.BoxGeometry(0.09, 0.62, 0.11).translate(0, -0.31, 0), white(), N1),
-    armR: new THREE.InstancedMesh(new THREE.BoxGeometry(0.09, 0.62, 0.11).translate(0, -0.31, 0), white(), N1),
-    head: new THREE.InstancedMesh(new THREE.SphereGeometry(0.14, 10, 8).translate(0, 1.66, 0), white(), N1),
-    hair: new THREE.InstancedMesh(new THREE.SphereGeometry(0.15, 10, 6, 0, Math.PI * 2, 0, Math.PI * 0.5).translate(0, 1.68, 0.015), white(), N1),
-    hairLong: new THREE.InstancedMesh(new THREE.BoxGeometry(0.27, 0.36, 0.1).translate(0, 1.52, 0.115), white(), N1)
-  };
-  parts.face = new THREE.InstancedMesh(new THREE.PlaneGeometry(0.2, 0.2).rotateY(Math.PI).translate(0, 1.655, -0.142), new THREE.MeshBasicMaterial({ map: TEX_FACE, transparent: true, depthWrite: false }), N1);
-  var SIZE = { child: 0.6, teen: 0.84, youth: 0.95, senior: 0.94 };
-  var hp = new Float32Array(n * 3), hc = new Float32Array(n * 3), people = [];
+  // people: one record for each tracked citizen with a week on record here. The page decides where each stands;
+  // life-people.js draws them and moves them, and keeps x and z on the record current.
+  var SIZE = { child: 0.6, teen: 0.84, youth: 0.95, senior: 0.94 }, people = [];
   var seq = H.people.map(function (_, k) { return k; }); for (i = seq.length - 1; i > 0; i--) { var j = Math.floor(r() * (i + 1)), tmp = seq[i]; seq[i] = seq[j]; seq[j] = tmp; }
   var span = L - 26;
   seq.forEach(function (pi, slot) {
-    var p = H.people[pi], s = slot % 2 ? 1 : -1, still = r() < 0.22, amp = still ? 0 : 2 + r() * 5;
-    people.push({ d: p, s: s, x: s * (ROAD + 1.0 + r() * 2.4), z0: -6 - (slot + r() * 0.6) / Math.max(1, n) * span, ph: r() * 6.28, amp: amp, om: still ? 0 : (0.8 + r() * 0.6) / amp, sc: (SIZE[p.ab] || 1) * (0.95 + r() * 0.12) * (p.g === 'f' ? 0.96 : 1), z: 0, face: still ? -s * Math.PI / 2 + (r() - 0.5) : 0, long: p.g === 'f' && r() < 0.75 });
-    if (p.ab === 'senior') people[people.length - 1].om *= 0.65;
-    var shirt = r(), dark = r() < 0.5;
-    col.setHSL(shirt, 0.35, dark ? 0.2 + r() * 0.12 : 0.45 + r() * 0.2); parts.torso.setColorAt(slot, col); parts.armL.setColorAt(slot, col); parts.armR.setColorAt(slot, col);
-    col.setHSL(0.6 + r() * 0.1, 0.2, 0.1 + r() * 0.14); parts.legL.setColorAt(slot, col); parts.legR.setColorAt(slot, col);
-    col.setHSL(0.06 + r() * 0.04, 0.42, 0.26 + r() * 0.42); parts.head.setColorAt(slot, col);
-    var grey = p.ab === 'senior' ? r() < 0.85 : r() < 0.06; col.setHSL(0.07, grey ? 0.04 : 0.4, grey ? 0.62 + r() * 0.2 : 0.05 + r() * 0.12); parts.hair.setColorAt(slot, col); parts.hairLong.setColorAt(slot, col);
-    col.set(KIND[p.k] || KIND.p); hc[slot * 3] = col.r; hc[slot * 3 + 1] = col.g; hc[slot * 3 + 2] = col.b;
+    var p = H.people[pi], s = slot % 2 ? 1 : -1, still = r() < 0.22;
+    people.push({ d: p, s: s, x: s * (ROAD + 1.0 + r() * 2.4), z0: -6 - (slot + r() * 0.6) / Math.max(1, n) * span, amp: still ? 0 : 7 + r() * 16, sc: (SIZE[p.ab] || 1) * (0.95 + r() * 0.12) * (p.g === 'f' ? 0.96 : 1), z: 0, long: p.g === 'f' && r() < 0.75, kc: KIND[p.k] || KIND.p });
   });
-  // someone who runs a business on this street stands outside it; a household on the same street walks together
+  // someone who runs a business on this street stands outside it; a household on the same street keeps together
   var byHome = {};
   people.forEach(function (o) {
     var d = o.d;
     if (d.at != null) {
       var lot = LAY.parcels.filter(function (q) { return q.b === d.at; })[0], plc = LAY.places.filter(function (q) { return q.b === d.at && q.half > 0; })[0];
-      if (lot) { o.s = lot.s; o.x = lot.s * (WALK - 1.3); o.z0 = lot.z + 1.2; o.amp = 0; o.om = 0; o.face = -lot.s * Math.PI / 2; }
-      else if (plc) { o.s = plc.s || 1; o.x = o.s * (WALK - 1.3); o.z0 = plc.z + plc.half - 2; o.amp = 0; o.om = 0; o.face = -o.s * Math.PI / 2; }
+      if (lot) { o.s = lot.s; o.x = lot.s * (WALK - 1.3); o.z0 = lot.z + 1.2; o.amp = 0; o.post = true; }
+      else if (plc) { o.s = plc.s || 1; o.x = o.s * (WALK - 1.3); o.z0 = plc.z + plc.half - 2; o.amp = 0; o.post = true; }
     }
-    if (d.hh) { var lead = byHome[d.hh]; if (!lead) byHome[d.hh] = o; else { o.s = lead.s; o.x = lead.x - lead.s * 0.75; o.z0 = lead.z0 + (lead.amp ? 0.5 : 0.9); o.ph = lead.ph; o.amp = lead.amp; o.om = lead.om; o.face = lead.face; } }
+    if (d.hh) { var lead = byHome[d.hh]; if (!lead) byHome[d.hh] = o; else { lead.kin = (lead.kin || 0) + 1; o.lead = lead; o.rank = lead.kin; o.post = false; } }
+    o.z = o.z0;
   });
-  Object.keys(parts).forEach(function (k) { parts[k].castShadow = k !== 'face'; parts[k].frustumCulled = false; root.add(parts[k]); });
-  var hg = new THREE.BufferGeometry(); hg.setAttribute('position', new THREE.BufferAttribute(hp, 3)); hg.setAttribute('color', new THREE.BufferAttribute(hc, 3));
-  var halos = new THREE.Points(hg, new THREE.PointsMaterial({ map: TEX_GLOW, vertexColors: true, size: 1.0, transparent: true, opacity: 0.9, blending: THREE.AdditiveBlending, depthWrite: false }));
-  halos.frustumCulled = false; root.add(halos);
+  if (typeof LIFE.people === 'function') LIFE.people(kit, people);
 
   // the way out: a gate onto the next place
   var gy = yAt(gz), nst = (DATA.style || {})[next.name] || {};
@@ -608,7 +582,7 @@ function build(idx) {
   var label = new THREE.Sprite(nm); label.scale.set(12, 1.875, 1); label.position.set(0, 14.5 + gy, gz); root.add(label);
 
   scene.add(root);
-  return { H: H, ST: ST, root: root, L: L, gz: gz, yAt: yAt, people: people, parts: parts, halos: halos, diskMat: diskMat, glints: glints, ticks: ticks, beaconPts: beaconPts, gateName: label, places: LAY.places, water: water, z: 10, x: 0, t: 0 };
+  return { H: H, ST: ST, root: root, L: L, gz: gz, yAt: yAt, people: people, diskMat: diskMat, glints: glints, ticks: ticks, beaconPts: beaconPts, gateName: label, places: LAY.places, water: water, z: 10, x: 0, t: 0 };
 }
 
 // ---------- names and cards ----------
@@ -694,7 +668,6 @@ var playing = !(window.matchMedia && window.matchMedia('(prefers-reduced-motion:
 var PACES = [['slow', 0.5], ['normal', 1], ['quick', 2], ['fast', 4]], paceI = 1, pace = 1, labels = 2; // labels: 2 cards + names, 1 names, 0 nothing
 var bizView = null, visiting = null, words = false, walking = false, yaw = 0, pitch = 0, held = {}, clock0 = 0;
 var CAM = { x: 0, y: 0, z: 0, walking: false };
-var ZERO = new THREE.Matrix4().makeScale(0, 0, 0), MB = new THREE.Matrix4(), MP = new THREE.Matrix4(), MO = new THREE.Matrix4(), SV = new THREE.Vector3();
 function facts() {
   var H = world.H, w = DATA.weather, bits = [];
   bits.push([H.total, ' tracked ' + (H.total === 1 ? 'person' : 'people') + ' and ', H.lines, ' things that happened to them']);
@@ -724,22 +697,9 @@ function go(idx, startAt, who) {
     if (queued) { var q = queued; queued = null; go(q[0], q[1], q[2]); }
   }, world ? 400 : 0);
 }
-function part(mesh, i, x, y, z, rx) { MP.makeRotationX(rx); MP.setPosition(x, y, z); MO.multiplyMatrices(MB, MP); mesh.setMatrixAt(i, MO); }
 function step(dt) {
   var W = world; W.t += dt;
-  var t = W.t, a = W.halos.geometry.attributes.position.array, P = W.parts;
-  for (var i = 0; i < W.people.length; i++) {
-    var p = W.people[i], ang = t * p.om + p.ph, v = p.hold ? 0 : p.amp * p.om * Math.cos(ang);
-    if (!p.hold) p.z = p.z0 + p.amp * Math.sin(ang);
-    var y = W.yAt(p.z), sw = p.amp && !p.hold ? Math.sin(p.z * 3.1 + p.ph) * 0.6 * Math.min(1, Math.abs(v) / 0.5) : 0, bob = Math.abs(sw) * 0.035;
-    MB.makeRotationY(p.hold ? Math.atan2(camera.position.x - p.x, camera.position.z - p.z) + Math.PI : p.amp ? (v < 0 ? 0 : Math.PI) : p.face); MB.scale(SV.set(p.sc, p.sc, p.sc)); MB.setPosition(p.x, 0.16 + y + bob, p.z);
-    P.torso.setMatrixAt(i, MB); P.head.setMatrixAt(i, MB); P.face.setMatrixAt(i, MB); P.hair.setMatrixAt(i, MB); P.hairLong.setMatrixAt(i, p.long ? MB : ZERO);
-    part(P.legL, i, -0.09, 0.86, 0, sw); part(P.legR, i, 0.09, 0.86, 0, -sw);
-    part(P.armL, i, -0.27, 1.46, 0, -sw * 0.8); part(P.armR, i, 0.27, 1.46, 0, sw * 0.8);
-    a[i * 3] = p.x; a[i * 3 + 1] = 2.42 * p.sc + y; a[i * 3 + 2] = p.z;
-  }
-  for (var k in P) P[k].instanceMatrix.needsUpdate = true;
-  W.halos.geometry.attributes.position.needsUpdate = true;
+  var t = W.t, i;
   W.diskMat.uniforms.t.value = t;
   W.gateName.material.opacity = Math.max(0, Math.min(1, (W.z - W.gz - 16) / 14));
   if (W.glints) W.glints.material.opacity = 0.45 + Math.sin(t * 1.7) * 0.15;
@@ -777,6 +737,7 @@ function step(dt) {
     camera.lookAt(Math.sin(t * 0.13 + 1) * 2.2 * near + W.look, 2.1 + (1 - near) * 3.8 + Math.abs(W.look) * 0.25 + W.yAt(z - 20), z - 20);
   }
   if (DBG && DBG.cam) { camera.position.set(DBG.cam[0], DBG.cam[1], DBG.cam[2]); camera.lookAt(DBG.look[0], DBG.look[1], DBG.look[2]); }
+  if (DBG && DBG.follow) { var fo = DBG.follow, fw = typeof fo.who === 'number' ? W.people[fo.who] : W.people.filter(function (o) { return o.d.n === fo.who; })[0]; if (fw) { var fy = W.yAt(fw.z); camera.position.set(fw.x + fo.off[0], fy + fo.off[1], fw.z + fo.off[2]); camera.lookAt(fw.x, fy + (fo.aim != null ? fo.aim : 1.0), fw.z); } }
   sky.position.copy(camera.position);
   sun.target.position.set(camera.position.x, W.yAt(camera.position.z - 25), camera.position.z - 25);
   sun.position.copy(sun.target.position).addScaledVector(SUN_DIR, 150);
@@ -791,7 +752,7 @@ function draw() { if (quality && composer) composer.render(); else renderer.rend
 function loop(now) {
   requestAnimationFrame(loop);
   var raw = (now - last) / 1000, dt = Math.max(0, Math.min(0.05, raw)); last = now;
-  if (!world || busy) return;
+  if (!world || busy || (DBG && DBG.manual)) return;
   step(dt);
   if (frame++ % 6 === 0) pickNames();
   placeNames();
@@ -976,7 +937,7 @@ function startVisit(d) {
 }
 function endVisit(quiet) {
   if (!visiting && !bizView) return; var p = visiting || bizView; visiting = null; bizView = null;
-  if (world) { world.people.forEach(function (o) { if (o.hold) { o.hold = false; o.z0 = o.z - o.amp * Math.sin(world.t * o.om + o.ph); } }); if (!quiet) { world.z = Math.min(10, p.z + 5); world.x = 0; } }
+  if (world) { world.people.forEach(function (o) { o.hold = false; }); if (!quiet) { world.z = Math.min(10, p.z + 5); world.x = 0; } }
   document.body.classList.remove('visit'); $('person').hidden = true;
   if (!quiet && world) { try { history.replaceState(null, '', '#' + slug(world.H.name)); } catch (e) {} }
 }

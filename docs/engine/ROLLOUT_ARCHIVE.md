@@ -973,6 +973,14 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 This pass: 4 closed (pipeline.3, engine.3, infrastructure.1, infrastructure.2) — not `done-pending-archive` sweep rows, moved by hand per rollout-rules §6 wontfix/unresolvable-stale convention.
 
+## S650 Archive Pass (2026-11-14, engine-sheet) — post-S649 closures sweep
+
+1 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 governance.*.
+
+- **governance.61** [research-build] — Memory recall ranks recent saves first; brainSearch covers memory, sheet and open work. Built, both codex findings folded (11-13) **State at archive:** done-pending-archive. Pointer: [[../plans/2026-11-13-memory-recall-and-brainsearch]]
+
+This pass: 1 rows — governance.61. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S642 Archive Pass (2026-11-10, engine-sheet) — post-S641 closures sweep
 
 1 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 research.*.

@@ -72,7 +72,9 @@ pointers:
 - The parts an ask-and-answer path would stand on exist: the `answer` move and its contract (Mara), the mid-wake request round in the datawake loop, the worker packs and their project nodes.
 - Run 1 fits the design: with no asker, 5 of 9 worker runs answered one anyway ("Understood — status noted. Here's where the queue actually stands").
 - The police chief holds a deciding seat on the weekday rota (patrol strategy) and is not on the work-wake registry (builder ruling 2026-09-16, registry `_comment`).
-- Not checked: whether a figure in a worker's diary line (Webb's "one hundred fifteen households") is on the tracker or the worker's own; the line reaches every seat's pack as handed text.
+- **What the seats are fed (`loadWorkingCity`):** the newest `work` row a worker has in `Reflection_Intake`, its excerpt cut to 110 characters, one line a worker. Only project ids and `CHIEF-*` offices pass the filter: the C115 packs carry the four project directors (Soria Dominguez, Chen-Ramirez, Tran-Muñoz, Webb). Ramos (STAFF-BAYLIGHT), the DA, the medical examiner and the EMS director write work wakes that no seat is handed.
+- **A fed figure that is not on the record:** Webb's C114 line handed to every seat reads "One hundred fifteen households paid out". The INIT-001 tracker row holds no household count of 115, 79 or 36; its only household count is "2 household grants, $81,188" (C109), beside $400K a Cycle and the 23-day standard. His page readback carries the 115 / 79 + 36 lines back to him each wake. Where the figure first appeared is not traced.
+- **The police chief today (weekday datawake, C112–C115):** C112 an `answer` to Mara's ask (a co-response memo "filed"); C113 and C114 a holding statement, no move; C115 a holding statement and `patrol: balanced`. The `patrol` move is a lever, not color: the week's close carries it to `World_Config.patrolStrategy`, read by the crime update at the next fire (three settings: balanced, suppress_hotspots, community_presence). His statements print raw readings ("Fruitvale at 0.67", "CrimeIndex"). No seat can put a crime question to him.
 
 ## Runs
 

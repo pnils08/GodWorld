@@ -100,7 +100,7 @@ pointers:
 
 **A thin worker is a finding about the system, not about the template** (builder: "if ultimately a worker is thin it tells us the system needs teeth"). Where a position's records are few or absent, the tables below say so; the template is not bent to cover it.
 
-**Role on the citizen ledger against the office sheet: six corrected 2026-11-14** (builder: "Repair to its state from January, use the wording the engine uses"). Osei, Vega, Carter, Rivers, Crane and Delgado now carry their office Title word for word, the string the engine writes at a seat turnover; history, readers, writers and the before-and-after are in the evidence log §Office holders' role. Still two wordings on the council: Tran, Ashford, Chen and Mobley read "City Council Member - D<n>". The sheet line a wake builds prints `RoleType` as it stands: "a City Council District 4 living in Lake Merritt".
+**Role on the citizen ledger against the office sheet: six corrected 2026-11-14** (builder: "Repair to its state from January, use the wording the engine uses"). Osei, Vega, Carter, Rivers, Crane and Delgado now carry their office Title word for word, the string the engine writes at a seat turnover; history, readers, writers and the before-and-after are in the evidence log §Office holders' role. The other four seats followed the same night; all nine read "City Council District <n>". The sheet line a wake builds prints `RoleType` as it stands: "a City Council District 4 living in Lake Merritt".
 
 **Fits now** (an agent or pack exists and a tab holds their records):
 

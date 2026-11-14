@@ -87,6 +87,7 @@ pointers:
 
 ## Changelog
 
+- 2026-11-14 (engine-sheet) — The other four council seats' `RoleType` brought to the office Title (builder: "Make the 4 all engine safe and accurate"): 8 cells, read back; all nine seats now read "City Council District <n>". One dormant engine fallback does not match that wording (G-EC61).
 - 2026-11-14 (engine-sheet) — Six office holders' `RoleType` repaired on the live sheet (builder: "Repair to its state from January, use the wording the engine uses"): office Title word for word for Osei, Vega, Carter, Rivers, Crane, Delgado; 12 cells (ledger + employment roster), each read back; snapshot refreshed; G-EC57 closed. Trace and before-and-after: [[../research/2026-11-13-boot-templates-test-runs]] §Office holders' role.
 - 2026-11-14 (engine-sheet) — agy review of the template page: HOLD, 13 findings, all verified and folded ([[../reference/AGENT_BOOT_TEMPLATES]] §Review; `output/antigravity/2026-11-13-review-agent-boot-templates.md`). Corrections that reach earlier lines here: city-hall runs 21 not 27; the reporter result is not established (stance line and bag rode in every version); Tanya's word counts and "3 of 3" withdrawn.
 - 2026-11-14 (engine-sheet) — The ask step is engine-sheet's own row, civic.49, plan [[2026-11-14-city-workers-answer-the-seats]] (builder on who builds it: "whatever suits the project best"; rb had recommended the same). Stack of 30 commits pushed on his "go" after one idle message to rb.

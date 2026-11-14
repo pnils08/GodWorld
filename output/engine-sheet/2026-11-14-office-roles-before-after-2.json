@@ -1,0 +1,94 @@
+{
+ "at": "2026-11-14T07:48:49.452Z",
+ "builder": "Make the 4 all engine safe and accurate",
+ "cells": [
+  {
+   "tab": "Simulation_Ledger",
+   "row": 392,
+   "pop": "POP-00502",
+   "before": "City Council Member - D2",
+   "after": "City Council District 2",
+   "expectOk": true,
+   "range": "Simulation_Ledger!K392",
+   "readBack": "City Council District 2",
+   "readBackPop": "POP-00502"
+  },
+  {
+   "tab": "Simulation_Ledger",
+   "row": 394,
+   "pop": "POP-00504",
+   "before": "City Council Member - D7",
+   "after": "City Council District 7",
+   "expectOk": true,
+   "range": "Simulation_Ledger!K394",
+   "readBack": "City Council District 7",
+   "readBackPop": "POP-00504"
+  },
+  {
+   "tab": "Simulation_Ledger",
+   "row": 395,
+   "pop": "POP-00505",
+   "before": "City Council Member - D8",
+   "after": "City Council District 8",
+   "expectOk": true,
+   "range": "Simulation_Ledger!K395",
+   "readBack": "City Council District 8",
+   "readBackPop": "POP-00505"
+  },
+  {
+   "tab": "Simulation_Ledger",
+   "row": 396,
+   "pop": "POP-00506",
+   "before": "City Council Member - D9",
+   "after": "City Council District 9",
+   "expectOk": true,
+   "range": "Simulation_Ledger!K396",
+   "readBack": "City Council District 9",
+   "readBackPop": "POP-00506"
+  },
+  {
+   "tab": "Employment_Roster",
+   "row": 386,
+   "pop": "POP-00502",
+   "before": "City Council Member - D2",
+   "after": "City Council District 2",
+   "expectOk": true,
+   "range": "Employment_Roster!D386",
+   "readBack": "City Council District 2",
+   "readBackPop": "POP-00502"
+  },
+  {
+   "tab": "Employment_Roster",
+   "row": 388,
+   "pop": "POP-00504",
+   "before": "City Council Member - D7",
+   "after": "City Council District 7",
+   "expectOk": true,
+   "range": "Employment_Roster!D388",
+   "readBack": "City Council District 7",
+   "readBackPop": "POP-00504"
+  },
+  {
+   "tab": "Employment_Roster",
+   "row": 389,
+   "pop": "POP-00505",
+   "before": "City Council Member - D8",
+   "after": "City Council District 8",
+   "expectOk": true,
+   "range": "Employment_Roster!D389",
+   "readBack": "City Council District 8",
+   "readBackPop": "POP-00505"
+  },
+  {
+   "tab": "Employment_Roster",
+   "row": 390,
+   "pop": "POP-00506",
+   "before": "City Council Member - D9",
+   "after": "City Council District 9",
+   "expectOk": true,
+   "range": "Employment_Roster!D390",
+   "readBack": "City Council District 9",
+   "readBackPop": "POP-00506"
+  }
+ ]
+}

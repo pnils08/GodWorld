@@ -12,6 +12,7 @@ sources:
   - .claude/agents/*/IDENTITY.md, LENS.md, RULES.md; docs/media/voices/* (read 2026-11-13, C115)
 pointers:
   - "[[../plans/2026-11-10-role-citizens-wake-as-themselves]] — pipeline.110 Task 9, the job this serves"
+  - "[[../reference/AGENT_BOOT_TEMPLATES]] — the templates drawn from these runs (draft); this file stays the evidence log"
   - "[[../plans/2026-11-10-stop-puppeting-the-newsroom]] — pipeline.111 (research-build), owns the reporter harness"
   - "`output/engine-sheet/2026-11-13-boot-three-way.md` — Run 1 raw outputs, every version in full"
   - "`output/engine-sheet/2026-11-13-boot-three-way-run2.md` — Run 2 raw outputs (council seats, second reporter), every version in full"

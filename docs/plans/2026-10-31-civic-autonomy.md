@@ -290,7 +290,7 @@ Use the existing Groundhog sandbox procedure and preserve production locks/admis
 
 **Builder's words.** 2026-11-01: "the civic also has workers who are supposed to be tracking the city data like the police chief , and these should be also communicating with the district offices to solve Their issues , so it’s like a real city in that these agents run the administration of the city , albeit I don’t have the solution to this yet". 2026-11-13: "the workers are meant to be the agents that are called upon for the data on its job … a worker cron is meant to be a tool call in a sense, if the mayor has to speak on the baylight district this agent can annswer the ask so the mayor isnt chasing tool calls, police chief same with crime data, crime events so if a council member needs that its a tool call to the police chief … the mayor and council memebers use these workers to do their jobs" · "Yes these should work together rather than in a silo imo".
 
-**Research basis:** [[../research/2026-11-13-boot-templates-test-runs]] §Workers, §Run 3, §Run 4 (engine-sheet, pipeline.110 Task 9). Nothing below is built.
+**Research basis:** [[../research/2026-11-13-boot-templates-test-runs]] §Workers, §Run 3, §Run 4 (engine-sheet, pipeline.110 Task 9). Nothing below is built. The worker's wake in item 4 is built against [[../reference/AGENT_BOOT_TEMPLATES]] §3 Worker (draft), which also holds the roster and who holds which records.
 
 **What runs today (code read 2026-11-13).** A worker wakes alone on a clock (`scripts/cron-work-wake.js`, Tue / Thu 20:18), is handed its project's status lines and writes a reflection; each seat's pack then carries the first 110 characters of four directors' newest reflections, a Cycle old (`buildCivicOfficeSlice.js` `loadWorkingCity`). The one ask-and-answer is Mara's weekly question (`maraProjectAsk`, the `answer` move). A seat can request stored records mid-wake (`readRequests` → `civicBrief.js` `readBriefEvidence`), which returns its own snapshot. The police chief's weekday pack holds no response time or clearance rate though `Crime_Metrics` carries both (gap log C115 G-EC56).
 
@@ -393,6 +393,7 @@ No single unit test, applied=true file, stage transition, quoted reaction or agg
 
 ## Changelog
 
+- 2026-11-13 (engine-sheet) — W1 pointed at the worker template and roster: [[../reference/AGENT_BOOT_TEMPLATES]] §3 (draft, builder's approval pending).
 - 2026-11-13 (engine-sheet) — W1 owner set on the builder's word: "rb is now aligned onto this assignment and we will make this the priority build for now". He asks whether agent templates are set before the workflow; worker inventory filed in the research note.
 - 2026-11-13 (engine-sheet) — W1 drafted: seats ask the police chief or a project director inside the weekday wake; basis [[../research/2026-11-13-boot-templates-test-runs]] Runs 3–4; builder "Yes these should work together rather than in a silo". Not started; builder names the builder.
 - 2026-11-05 (research-build) — Reviews reconciled: 12 house-guest reviews (packet pressure, forced answer, readings, sign-off, Mara directive/M1 design/code, B2 F7 re-review) listed with dispositions; the civic.47 build review stays open (activation HOLD in force).

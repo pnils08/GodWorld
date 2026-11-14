@@ -13,6 +13,7 @@ pointers:
   - "[[../engine/ROLLOUT_PLAN]] — pipeline.110"
   - "[[2026-09-16-work-wake-packs]] — civic.34, the work wake this extends"
   - "[[2026-11-03-mags-memory-one-home]] — pipeline.100, the review that led here"
+  - "[[../reference/AGENT_BOOT_TEMPLATES]] — Task 9 output: the boot templates, draft"
   - "[[../research/2026-11-13-boot-templates-test-runs]] — Task 9 research basis: what each wake loads, the boot test runs and findings (running log)"
 ---
 
@@ -57,7 +58,7 @@ pointers:
 | 6 | Tests (`cron-work-wake.test.js` 50, `wakePerception.test.js` 201); dry runs through the real scripts for Varek, the Mayor, Vinnie Keane, and the daily wake on the Mayor | es | done |
 | 7 | Read the first live runs: Tue 2026-11-10 20:18 (club citizens, Varek), Thu 2026-11-12 20:18 (offices) — log `logs/cron-work-wake.log`, pages, Reflection_Intake rows | es | done — Tue read 11-10, Thu read 11-13 (changelog); fixes owed, Task 8 |
 | 8 | Fix what the Thu read found inside this row's acceptance: a position written as an outcome (D8, D5, Okoro); a closed project woken as open (INIT-003, INIT-006) | es | reverted 11-13 — the tracker rows it read were hand-edited; waits on the tracker repair |
-| 9 | Boot review (builder 2026-11-13: "review the written agents, voices … ensure they boot the agent into its character … having a template we know works is probably better than 40 different write ups. is less more?" / "there can be different templates depending on the cron type"): what each wake loads, a three-way dry run per wake type (today / sheet line only / sheet line + short written who-decide-talk), then the template or templates | es | test run 1 done 11-13; findings and every later run logged in [[../research/2026-11-13-boot-templates-test-runs]] (raw outputs `output/engine-sheet/2026-11-13-boot-three-way.md`); template pick is the builder's |
+| 9 | Boot review (builder 2026-11-13: "review the written agents, voices … ensure they boot the agent into its character … having a template we know works is probably better than 40 different write ups. is less more?" / "there can be different templates depending on the cron type"): what each wake loads, a three-way dry run per wake type (today / sheet line only / sheet line + short written who-decide-talk), then the template or templates | es | test run 1 done 11-13; findings and every later run logged in [[../research/2026-11-13-boot-templates-test-runs]] (raw outputs `output/engine-sheet/2026-11-13-boot-three-way.md`); templates written down as a draft in [[../reference/AGENT_BOOT_TEMPLATES]] (builder "yes go on 1"); approval per type is the builder's; gate test not started |
 
 ## Acceptance
 
@@ -86,6 +87,7 @@ pointers:
 
 ## Changelog
 
+- 2026-11-13 (engine-sheet) — Task 9: the template set written as a draft reference page, [[../reference/AGENT_BOOT_TEMPLATES]] (builder: "yes go on 1"; "make sure proper documentation is occurring"): five types, the worker roster with who holds which records, how current write-ups retire (his word: "retire current write up as legacy for the rewrites"), where what was said is kept, the workbook option noted. No wake changed.
 - 2026-11-13 (engine-sheet) — Worker inventory pulled read-only (nine workers: sheet role, wakes, own records, what is handed, page, decisions, promises) and the state of each agent template type recorded: [[../research/2026-11-13-boot-templates-test-runs]] §Worker inventory, §Templates. civic.47 W1 build is research-build's on the builder's word.
 - 2026-11-13 (engine-sheet) — The ask-path design from Runs 3–4 is filed where the builder's 2026-11-01 ruling puts civic work: [[2026-10-31-civic-autonomy]] W1 (civic.47, one plan one row, research-build's). Its open question on city workers pointed at exactly this. Not built; who builds is the builder's call.
 - 2026-11-13 (engine-sheet) — Task 9 Run 4, the ask inside a seat's weekday wake, under the write guard (builder: "lets see how a council wake call the worker agent and gets an answer"): Delgado asks the chief in 2 of 3 runs; handed his whole crime sheet he answers with the response times and clearance rates, one comparison wrong in one run; asked, she files a safety proposal, not asked an economic one. In both asking runs she spends an `answer` move replying to him under a directive id she does not hold — the exchange needs its own end. Logged in [[../research/2026-11-13-boot-templates-test-runs]] §Run 4; raw `output/engine-sheet/2026-11-13-seat-asks-worker-dry-run.md`.

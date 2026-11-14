@@ -4,4 +4,4 @@
 
 **NEXT[engine-sheet]:** pipeline.110 → Task 8 (positions written as outcomes, closed projects woken open). Then office boot-file check (tools, no 4th wall, no builder notes). pipeline.100 → Task 3 narrator. Then engine.340, 341.
 
-**NEXT[research-build]:** No push from here: the stack is engine-sheet's to push (builder 11-13). pipeline.108 → his call on the Fri 11-13 read (plan Task 10); Sat 11-14 weekly. pipeline.109 → boot digest read. engine.339 calls 1–4. Codex's five data findings.
+**NEXT[research-build]:** No push from here (es pushes). pipeline.111 → one reporter's whole day in the test shell, on his go, after es lands the guard. civic.47 → W1 to a pointer once es's ask-step row exists. pipeline.108 → Sat 11-14 weekly read. pipeline.109 → boot digest read. engine.339 calls 1–4. Codex's five data findings.

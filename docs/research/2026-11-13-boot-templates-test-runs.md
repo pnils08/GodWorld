@@ -58,6 +58,22 @@ pointers:
 
 **Standing notes for any template:** the sheet owns age, home, role, temperament and current state (G-EC52: a written file gives Webb as 52, Laurel; the ledger says 42, Downtown). A written part, where one is kept, holds who the person is and how they decide; nothing the sheet or the engine moves, and nothing about the form of what they produce.
 
+## Workers: the builder's design, and what is built (code read 2026-11-13)
+
+**Builder (2026-11-13):** "the workers are meant to be the agents that are called upon for the data on its job, so a baylight distric worker is the agent that harness is that project … a worker cron is meant to be a tool call in a sense, if the mayor has to speak on the baylight district this agent can annswer the ask so the mayor isnt chasing tool calls, police chief same with crime data, crime events so if a council member needs that its a tool call to the police chief … the mayor and council memebers use these workers to do their jobs".
+
+| The design | What is built |
+|---|---|
+| A worker is called with an ask from the Mayor or a council seat and answers from its project or data | A worker wakes alone on a clock (Tue / Thu 20:18, `cron-work-wake.js`), is handed its project's status lines, and writes a reflection to its own page, one `Reflection_Intake` row and a `work` move. No one asked it anything |
+| The Mayor and council get the worker's answer while they are doing their own work | They are handed one clipped line a worker from its last diary entry, a Cycle old (`buildCivicOfficeSlice.js` `loadWorkingCity` → the pack's "working city" block; C115 packs carried C114 lines) |
+| Any seat can ask any worker | One asker, once a week: Mara Vance's directive question to a project office on Sunday, answered in `maraAnswer` and filed as an `answer` move (`maraProjectAsk`, `maraAnswerContract`) |
+| The ask replaces the seat chasing data itself | A seat can request stored data mid-wake (`readRequests`: event, district, project, budget, prior → `civicBrief.js` `readBriefEvidence`); it returns the seat's own snapshot, not a worker's answer |
+
+- The parts an ask-and-answer path would stand on exist: the `answer` move and its contract (Mara), the mid-wake request round in the datawake loop, the worker packs and their project nodes.
+- Run 1 fits the design: with no asker, 5 of 9 worker runs answered one anyway ("Understood — status noted. Here's where the queue actually stands").
+- The police chief holds a deciding seat on the weekday rota (patrol strategy) and is not on the work-wake registry (builder ruling 2026-09-16, registry `_comment`).
+- Not checked: whether a figure in a worker's diary line (Webb's "one hundred fifteen households") is on the tracker or the worker's own; the line reaches every seat's pack as handed text.
+
 ## Runs
 
 ### Run 1 — 2026-11-13, C115, engine-sheet

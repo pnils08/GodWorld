@@ -99,6 +99,8 @@ Codex re-review of the fold and the later commits: [[../for-claude-review/2026-1
 
 **2026-11-12, canon search added (builder: "Add the canon search"; "Whatever the last run was"):** point 9 returns as built in `docs/reference/NotebookLM.md` Change log 2026-11-12: each article's own reporter focus line is the one question to the canon notebook; the answer is a source beside the article. The headline was built first and replaced before commit when he asked why (his words on the subject: "Who are the articles about"). Open: 2 of 14 articles in the window have no focus line and go without canon; first live read is the next daily show.
 
+**2026-11-13, the day's sources alone (builder: "just getting the daily sources added and the run generated off that, no instructions no canon search. We can keep those off for now but don't delete anything"; same message: "add world summary to the sources we currently provide"):** three switches under `dailyNews` in `config/notebooklm.json`, on unless `false`, all set `false`: `canonSearch`, `writtenBrief`, `audioFocus`; `worldSummary: true` sends the world summary's sections every day (this replaces the first-morning-only reading of 2026-11-12 02:30). No function removed. Detail: `docs/reference/NotebookLM.md` Change log, same date. Built 03:27 and left uncommitted until 2026-11-13 night; the Fri 11-13 08:00 run already used it (`3344f14c700d`: 27 sources — 7 article, 12 reflections, 8 world; 14,191 words; audio delivered, ops report delivered). Codex was briefed on this diff and reviewed only the memory half of the brief; no review of it exists.
+
 ## Tasks
 
 | # | Task | Status |
@@ -113,6 +115,8 @@ Codex re-review of the fold and the later commits: [[../for-claude-review/2026-1
 | 6c | Weekend: weekly rulebook out + focus; edition out of the daily; citizen conversation in | done — read the Sat 11-14 weekly and Sun 11-15 daily |
 | 7 | Read the Tue 2026-11-10 08:00 show: the five C115 articles of 11-09 evening each heard by reporter; reflections by name | done 2026-11-11 — point 12: five of five named, four told, Lives 2 of 15 people; reflections by name but 15 of 19 lines cut at 180 |
 | 8 | Citizens' words whole in the daily show | **rejected, not in the tree** (builder 2026-11-12 01:18: "Delete the code for daily, that's rejected"). The daily script is byte-for-byte what it was before 2026-11-11. The finding stands in point 12: the tab cell held 180 characters for interview answers and conversation lines; from 2026-11-12 the two writers store the whole text, so new rows reach the show whole without it |
+| 9 | Sources alone: canon search, written brief and audio focus switched off; world summary every day | done 2026-11-13 — live from the Fri 11-13 08:00 run |
+| 10 | Read the Fri 2026-11-13 08:00 show against its 27 sources | in progress |
 
 ## Not in this job
 

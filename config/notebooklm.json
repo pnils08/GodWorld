@@ -12,6 +12,10 @@
     "reportedDayThreshold": 1,
     "audioFormat": "deep_dive",
     "audioLength": "default",
+    "canonSearch": false,
+    "writtenBrief": false,
+    "audioFocus": false,
+    "worldSummary": true,
     "driveDest": "daily-news",
     "pingTime": "08:00 America/Chicago"
   },

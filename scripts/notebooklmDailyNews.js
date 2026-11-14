@@ -801,7 +801,7 @@ function buildDailySources(input) {
   drafts.push(...(input.canon || []));
   drafts.push(...(input.exchanges || []));
   drafts.push(...reflectionSources(input.citizenDigest && input.citizenDigest.citizens));
-  if (input.firstMorning) drafts.push(...worldRecordSources(input.worldSummary, input.cycle));
+  if (input.firstMorning || input.worldEveryDay) drafts.push(...worldRecordSources(input.worldSummary, input.cycle));
 
   const seen = new Map();
   return drafts.filter((draft) => draft.text.trim()).map((draft, index) => {
@@ -1274,16 +1274,24 @@ async function run(argv) {
   fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
   console.log('Daily source pack: ' + path.relative(ROOT, packPath));
 
+  // Builder 2026-11-13: a run on the day's sources alone. Three config
+  // switches under `dailyNews`, each on unless set false: `canonSearch` (the
+  // canon source beside an article), `writtenBrief` (the question asked in the
+  // notebook before the audio), `audioFocus` (the line sent with the audio).
+  // `worldSummary: true` adds the world summary's sections on every day, not
+  // only the first morning of a Cycle.
+  if (dailyConfig.canonSearch === false) console.log('Canon search: off (config dailyNews.canonSearch)');
   // pipeline.108: what the hosts get — one small source per article, per
   // neighborhood of reflections, and (first morning) per world-record section.
   const dailyInput = {
     cycle,
     exchanges: exchangeSources(ROOT, Date.now() - hours * 3600e3, airedReportTimes(OUTPUT_DIR, Date.now())),
     reports: newsroom.reports,
-    canon: args.dryRun ? [] : canonSources(newsroom.reports),
+    canon: args.dryRun || dailyConfig.canonSearch === false ? [] : canonSources(newsroom.reports),
     citizenDigest,
     worldSummary,
     firstMorning: newsroom.firstMorning === true,
+    worldEveryDay: dailyConfig.worldSummary === true,
   };
   let dailySources = buildDailySources(dailyInput);
   const sourceDir = path.join(runDir, 'sources');
@@ -1405,26 +1413,31 @@ async function run(argv) {
   }
 
   const hasFlagged = newsroom.reports.some((r) => r.classification === 'FLAGGED');
-  const prompt = dailyPrompt(cycle, hasFlagged, newsroom.editionDay === true, newsroom.firstMorning === true);
-  const briefQuery = nlm([
-    'notebook', 'query', config.newsroomNotebookId, prompt,
-    '--json', '--source-ids', sourceIds.join(','), '--timeout', '280',
-  ], { timeoutMs: 300 * 1000 });
-  if (!briefQuery.ok) throw new Error('daily brief query failed: ' + briefQuery.out.slice(0, 400));
-  const briefJson = parseJsonOutput(briefQuery.out, 'daily brief query');
-  fs.writeFileSync(path.join(runDir, 'daily-brief.json'), JSON.stringify(briefJson, null, 2) + '\n');
-  const briefPath = path.join(runDir, 'daily-brief.md');
-  fs.writeFileSync(briefPath, [
-    '# GodWorld Daily News v' + SOURCE_VERSION + ' — Cycle ' + cycle,
-    '',
-    'Artifact class: NLM_DAILY_BRIEF',
-    'Canon status: NOT CANON. This is a source-grounded newsroom/listening artifact.',
-    'Notebook source IDs: ' + sourceIds.join(', '),
-    '',
-    queryAnswer(briefJson) || '_NotebookLM returned no answer text._',
-    '',
-  ].join('\n'));
-  console.log('Daily written brief: ' + path.relative(ROOT, briefPath));
+  let briefPath = null;
+  if (dailyConfig.writtenBrief === false) {
+    console.log('Daily written brief: off (config dailyNews.writtenBrief)');
+  } else {
+    const prompt = dailyPrompt(cycle, hasFlagged, newsroom.editionDay === true, newsroom.firstMorning === true);
+    const briefQuery = nlm([
+      'notebook', 'query', config.newsroomNotebookId, prompt,
+      '--json', '--source-ids', sourceIds.join(','), '--timeout', '280',
+    ], { timeoutMs: 300 * 1000 });
+    if (!briefQuery.ok) throw new Error('daily brief query failed: ' + briefQuery.out.slice(0, 400));
+    const briefJson = parseJsonOutput(briefQuery.out, 'daily brief query');
+    fs.writeFileSync(path.join(runDir, 'daily-brief.json'), JSON.stringify(briefJson, null, 2) + '\n');
+    briefPath = path.join(runDir, 'daily-brief.md');
+    fs.writeFileSync(briefPath, [
+      '# GodWorld Daily News v' + SOURCE_VERSION + ' — Cycle ' + cycle,
+      '',
+      'Artifact class: NLM_DAILY_BRIEF',
+      'Canon status: NOT CANON. This is a source-grounded newsroom/listening artifact.',
+      'Notebook source IDs: ' + sourceIds.join(', '),
+      '',
+      queryAnswer(briefJson) || '_NotebookLM returned no answer text._',
+      '',
+    ].join('\n'));
+    console.log('Daily written brief: ' + path.relative(ROOT, briefPath));
+  }
 
   let audioPath = null;
   if (args.audio) {
@@ -1445,9 +1458,7 @@ async function run(argv) {
         '--format', presentation.format,
         '--length', presentation.length,
         '--source-ids', sourceIds.join(','),
-        '--focus', dailyAudioFocus(),
-        '--confirm',
-      ]);
+      ].concat(dailyConfig.audioFocus === false ? [] : ['--focus', dailyAudioFocus()], ['--confirm']));
       if (!create.ok) throw new Error('daily audio create failed: ' + create.out.slice(0, 400));
       const artifactId = parseCreatedArtifactId(create.out);
       // The render's own receipt: what this audio was made from. A later
@@ -1492,8 +1503,9 @@ async function run(argv) {
       await sendDiscordText(
         '🗞️ **GodWorld Daily News v' + SOURCE_VERSION + ' — Cycle ' + cycle + '**\n' +
         routingDiscordLine(routing, manifest.audioPresentation) +
-        '\nWritten brief generated; audio disabled.\n`' +
-        path.relative(ROOT, briefPath) + '`'
+        (briefPath
+          ? '\nWritten brief generated; audio disabled.\n`' + path.relative(ROOT, briefPath) + '`'
+          : '\nWritten brief and audio both disabled.')
       );
     }
   }

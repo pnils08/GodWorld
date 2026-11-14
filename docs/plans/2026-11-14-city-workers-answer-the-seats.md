@@ -62,7 +62,7 @@ pointers:
 | # | Task | Owner | Status |
 |---|------|-------|--------|
 | 1 | The worker template ([[../reference/AGENT_BOOT_TEMPLATES]] §3) approved by the builder; agy's review of the template page folded | es | in progress — review dispatched 2026-11-13, not yet landed |
-| 2 | The two test preloads (write guard, in-memory file swap) into the repo once, with a usage note; both terminals test through them | es | not started — on the builder's yes |
+| 2 | The two test preloads (write guard, in-memory file swap) into the repo once, with a usage note; both terminals test through them | es | done 2026-11-14 — `scripts/guard/nowrite.js`, `bootswap.js`, `nowrite.selftest.js` (13 checks pass); builder "Put in the repo"; outside review not yet run |
 | 3 | Review of this plan: advisor, then one outside review; findings folded here | es | not started |
 | 4 | Records builders for the first six workers: every `Crime_Metrics` column and the patrol setting for the chief; the full tracker row and office row for a director; each worker's own rows of `output/cron-civic/moves/` | es | not started |
 | 5 | The ask round in `runDatawake` and the offer in `datawakeUserPrompt` (both contracts); roster resolution by holder name; the failure path | es | not started |
@@ -127,5 +127,6 @@ pointers:
 
 ## Changelog
 
+- 2026-11-14 (engine-sheet) — Task 2 done: the test guard is in `scripts/guard/`.
 - 2026-11-14 (engine-sheet) — agy's review of the template page reconciled: HOLD; P2, P3 and N1–N5 added.
 - 2026-11-14 (engine-sheet) — Created. The design written 2026-11-13 as civic.47 §W1 moved here on the builder's "whatever suits the project best"; row civic.49 claimed. Not approved to build.

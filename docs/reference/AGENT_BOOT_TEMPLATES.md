@@ -225,6 +225,7 @@ Mara Vance (asker; her own memory and tools; civic.47 M1), Elias Varek's journal
 | Raw outputs of the runs | `output/engine-sheet/2026-11-13-boot-three-way.md`, `…-run2.md`, `…-ask-dry-run.md`, `…-seat-asks-worker-dry-run.md` |
 | The job | [[../plans/2026-11-10-role-citizens-wake-as-themselves]] Task 9 (pipeline.110) |
 | The ask step | [[../plans/2026-11-14-city-workers-answer-the-seats]] (civic.49) |
+| The test guard (no-write preload, in-memory file swap, self-test) | `scripts/guard/nowrite.js`, `scripts/guard/bootswap.js`, `scripts/guard/nowrite.selftest.js`; usage in each file's header |
 | Observations made on the way | `output/production_log_run_cycle_c115_gaps.md` G-EC52–G-EC56 |
 | On approval of a template | an ADR beside ADR-0014 (boot from the sheet, not a written persona) before the first wake switches |
 
@@ -253,6 +254,7 @@ Mara Vance (asker; her own memory and tools; civic.47 M1), Elias Varek's journal
 
 ## Changelog
 
+- 2026-11-14 (engine-sheet) — The test guard is in the repo (`scripts/guard/`), on the builder's "Put in the repo".
 - 2026-11-14 (engine-sheet) — Six office holders' ledger roles corrected to their office Title on the builder's word; §2 caveat and §3.1 updated.
 - 2026-11-14 (engine-sheet) — agy review HOLD folded: 13 findings, all verified. City-hall runs are 21, not 27; reporter evidence was not clean (stance line and bag in every version; word counts and style claims corrected); the worker memory loader named was wrong; the chief also wakes Thursdays; chaos table rebuilt on the config; gate and retirement sections corrected.
 - 2026-11-14 (engine-sheet) — The ask step has its own row and plan: civic.49, [[../plans/2026-11-14-city-workers-answer-the-seats]]; pointers moved off civic.47 W1.

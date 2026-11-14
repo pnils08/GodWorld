@@ -15,6 +15,7 @@ pointers:
   - "[[../plans/2026-11-10-stop-puppeting-the-newsroom]] — pipeline.111 (research-build), owns the reporter harness"
   - "`output/engine-sheet/2026-11-13-boot-three-way.md` — Run 1 raw outputs, every version in full"
   - "`output/engine-sheet/2026-11-13-boot-three-way-run2.md` — Run 2 raw outputs (council seats, second reporter), every version in full"
+  - "`output/engine-sheet/2026-11-13-ask-dry-run.md` — Run 3 raw outputs: a council member's question to the police chief and his answers"
 ---
 
 # Boot templates: test runs and findings
@@ -108,10 +109,20 @@ pointers:
 | Sunday hearing | Janae Rivers, D5, deepseek-v4.1-flash | 3 each | Four statements: the East Oakland briefing, the apprenticeship gap analysis, yes on Grand Lake with the conditions, the D5 complaint; one run says "the engine flags" (the word is in her packet) | The same four, the same positions | The same four, the same positions |
 | Reporter write | Tanya Cruz, grok-4.3 | 3 each (+3 A-light) | 515–607 words, scene prose; prints record strings ("8229AB and 71.4WAR") and cycle labels | 367–447 words, scene prose | 265–327 words, dispatch: one-line paragraphs, last names |
 
+### Run 3 — 2026-11-13, C115, engine-sheet: one ask
+
+- **Builder:** "sure try it" (a council member asks the police chief what crime is doing in their district; he answers from his data).
+- **How:** two calls under the write guard. Rose Delgado (D3) wakes on her sheet line + page memory + her own weekday pack and is told only that she can put one question to the chief. Rafael Montez wakes on his sheet line + page memory + his own weekday pack, then her name, seat, hoods and question. No output form, no instruction on content. Each on their own model (deepseek-v4.1-flash). His answer three times. A first pass ran without page memory (harness fault) and gave the same shape; both are in the raw file.
+- **Guard result:** 0 refused in the ask runs; the two guarded citizen dry runs that read the sheet lines had 14 log appends refused.
+- **Her question:** San Antonio against Fruitvale, from her own readings (0.73 against the city's 0.647, property 43 against 39.5, six incidents): how many calls came from the commercial blocks of one corridor, the response time there against Fruitvale, and whether his data would support weighting patrols toward it.
+- **His answers, 3 of 3:** every figure he states is in what he was handed (`ungroundedNumbers` empty). He says he does not hold beat-level counts or response times and will not make them up; he confirms her reading of the two neighborhoods; he says "balanced" is a default nobody tested; he commits to a records pull.
+- **What the sim holds against that:** `Crime_Metrics` carries `ResponseTimeAvg` and `ClearanceRate` for every neighborhood (C115: San Antonio 11.7 and 0.25, Fruitvale 10.7 and 0.18). The chief's pack holds neither field (0 mentions), so half of her question had an answer on the sheet that he was never handed. The beat-level half has no record anywhere (`Judicial_Ledger` 0 rows). His promised records pull has nothing to be filled from.
+- **Read:** asked a question, both wake as themselves and neither invents. The ask shows exactly which columns the worker is missing. Her question names "the East 14th corridor", a street that is in no city record (color, and a real-world name).
+
 ### Dry-run safety — what Run 1 left, checked 2026-11-13
 
 - **Canon, pages, sheets:** nothing. No ingest path reads `output/test-shell/`, `output/engine-sheet/` or `docs/research/` (daily ingest and delivery read `output/cron-compare/`; the daily show reads `cron-compare` and `exchanges`; the reporters' search walks a fixed shelf list in `lib/mags.js` that holds none of them — a search for a dry-run phrase returns none of these files). The Mayor's memory read in Run 1 went through the pointer-ensuring call; her pointer already exists, so it wrote nothing.
-- **Two logs took lines:** `citizen-wake.js --dry-run` appends to `logs/citizen-wake-offered.jsonl` before its dry-run exit (7 lines from Run 1, lines 274–280, daypart `evening`; 8 older `evening` lines from earlier sessions' dry runs sit beside them) and to its own log; `cron-work-wake.js --dry-run` appends to its own log (marked `dry=true`). The offered log's one reader is `extractBondsFromWakes.js`, run by hand, joined on citizen, Cycle and daypart; the scheduled wakes write morning, midday, night, so an `evening` line matches no page. Left as they are; G-EC55.
+- **Two logs took lines:** `citizen-wake.js --dry-run` appends to `logs/citizen-wake-offered.jsonl` before its dry-run exit (7 lines from Run 1, lines 274–280, daypart `evening`; 8 older `evening` lines from earlier sessions' dry runs sit beside them) and to its own log; `cron-work-wake.js --dry-run` appends to its own log (marked `dry=true`). The offered log's one reader is `extractBondsFromWakes.js`, run by hand, joined on citizen, Cycle and daypart; the scheduled wakes write morning, midday, night, so an `evening` line matches no page. Left as they are; G-EC55. **Builder ruling 2026-11-13:** "if dry runs leak but are in the current cycle and is relevant to the sim it can stay".
 
 ### Next runs (not started; each needs the builder's go)
 

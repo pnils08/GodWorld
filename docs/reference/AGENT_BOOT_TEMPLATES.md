@@ -21,7 +21,7 @@ pointers:
 
 **Status: draft, proposed for the builder's approval.** Nothing in the crons has changed. Each template says what the runs support; the builder approves a template before any wake is switched to it.
 
-**Builder's words (2026-11-13):** "we want them to wake in their persona/identity, with access to their memory store … without being told what to say, having a template we know works is probably better than 40 different write ups" · "there can be different templates depending on the cron type" · "before we move too fast we have a set template for workers based on the police chief?" · "before we move to fine tune the workflows should we make sure our agent templates are set? … 'worker' , 'council/mayor', 'citizens' 'gates/rhea'" · "make sure proper documentation is occurring, if we need to retire current write up as legacy for the rewrites we can do that also".
+**Builder's words (2026-11-13):** "we want them to wake in their persona/identity, with access to their memory store … without being told what to say, having a template we know works is probably better than 40 different write ups" · "there can be different templates depending on the cron type" · "before we move too fast we have a set template for workers based on the police chief?" · "before we move to fine tune the workflows should we make sure our agent templates are set? … 'worker' , 'council/mayor', 'citizens' 'gates/rhea'" · "make sure proper documentation is occurring, if we need to retire current write up as legacy for the rewrites we can do that also". · "use the civic office ledger for the citizens who fit all these positions, we may need to check to make sure any new civic offices made it to the simualtion_ledger … make sure chaos cars are routed to the right desk when helpful, if ultimately a worker is thin it tells us the system needs teeth".
 
 ## 0. What holds for every template
 
@@ -69,6 +69,7 @@ pointers:
 - **Written file:** none needed on the evidence. Mayor: 20,959 characters of files, a 175-character sheet line and a 701-character sheet line + written part all filed the same move. Tran weekday ×9 and Rivers Sunday ×9: the same act and the same voice on all three; Rivers's own lines return word for word from her page.
 - **State:** tested (27 runs, three people, both wakes).
 - **Differs today:** IDENTITY + LENS + RULES load whole as the system turn (`readPersonaDir`); the shared council-seat LENS and RULES ride with every seat.
+- **Sheet line caveat:** two holders' `RoleType` disagrees with their office (§3.1): on the sheet line alone Vega wakes as "City Council President - D1" and Osei as "City Council Member".
 - **Open, and not a boot matter:** what they are handed. "D3 East Oakland" (G-EC48) and the hand-closed tracker rows come back in every statement because they are in the pack.
 - **Legacy on switch:** `civic-office-mayor/`, `civic-office-council-d1…d9/`, `civic-office-council-seat/`, and the faction folders the seats fall back to (`civicSeat.personaDirFor`).
 
@@ -92,6 +93,19 @@ pointers:
 - **Legacy on switch:** the registry's inline `roleLine` / `voiceNotes` (`scripts/work-wake-packages.json`); the five `civic-project-*` / `civic-office-baylight-authority` folders once the Sunday project step stops loading them (37–46k each).
 
 ### 3.1 Roster: who holds which records
+
+**Who holds a position comes from `Civic_Office_Ledger`** (builder 2026-11-13). Read live 2026-11-13, C115: 39 positions, none vacant. Every holder is on `Simulation_Ledger` under the same POPID and name, Status Active, CIV flag yes, clock CIVIC; the four project-director rows added in October (STAFF-OARI, STAFF-HEALTHCTR, STAFF-STABFUND, STAFF-TRANSITHUB) are among them. `scripts/civic-office-map.json` holds the same 39.
+
+**A thin worker is a finding about the system, not about the template** (builder: "if ultimately a worker is thin it tells us the system needs teeth"). Where a position's records are few or absent, the tables below say so; the template is not bent to cover it.
+
+**Role on the citizen ledger against the office sheet** (the sheet line a wake builds reads `RoleType`; not edited, the builder's call):
+
+| Position | Office sheet | Citizen ledger `RoleType` |
+|---|---|---|
+| Marcus Osei (POP-00036) | Deputy Mayor (Econ Dev) | City Council Member |
+| Ramon Vega (POP-00042) | City Council District 4 | City Council President - D1 |
+| Denise Carter, Janae Rivers, Elliott Crane | Districts 1, 5, 6 | City Council Member (no district) |
+| Rose Delgado (POP-00503) | City Council District 3 | City Council District - D3 |
 
 **Fits now** (an agent or pack exists and a tab holds their records):
 
@@ -120,11 +134,40 @@ pointers:
 | City Manager (Aaron Whitfield) | city-operations-budget | `City_Treasury` (19) |
 | Deputy Mayor, Econ Dev (Marcus Osei) | economy-business | `Business_Ledger` (283), `Employment_Roster` (971) |
 | Fire Chief (Marcus Hollowell) | fire-incidents | none |
-| Public Defender, Court Liaison, Reentry Director, two ADAs | justice | `Judicial_Ledger` (0), `Care_Justice_Census` (1,296) |
+| Public Defender, Deputy Public Defender, Court Liaison, Reentry Director, two ADAs | justice | `Judicial_Ledger` (0), `Care_Justice_Census` (1,296) |
 | Emergency Management Director (Shawna Delgado) | emergency-crisis | none |
 | Chief of Staff, Communications, Legal Counsel, Ombudsman, Police Review Chair, Internal Affairs, two Deputy Chiefs | staff and oversight | none of their own |
 
 **Tabs with no office declared for them:** `Transit_Metrics` (684), `Community_Programs` (33), `Household_Ledger` (930), `Neighborhood_Demographics` (22), `Cycle_Weather` (40), `Faith_Organizations`, `Cultural_Ledger`. The City Planning Director (Mara Vance) is declared for planning, housing and development and runs as her own Sunday cron (civic.47 M1).
+
+### 3.2 Chaos cars: which desk an event reaches
+
+**What the engine fires** (`utilities/chaosCarsConfig.js`): twelve kinds — cop car, fire engine, ambulance, OARI van, building inspector, garbage truck, mail truck, ice cream truck, street sweeper, Estuary Power & Gas truck, BART train, container ship — each landing on a neighborhood, a business or a citizen.
+
+**Where an event goes today:**
+
+| Reader | Rule | Code |
+|---|---|---|
+| A council seat or the Mayor | by place only: the row's text has to name a hood on the seat's turf | `buildCivicOfficeSlice.js` `loadCycleEvents` / `eventHitsTurf` |
+| Reporters | the civic-domain, transit and accountability slices read the week's events | `buildCivicDomainSlice.js`, `buildTransitSlice.js`, `buildJaxSlice.js` |
+| Workers | none: the work wake has no event node | `cron-work-wake.js` `NODE_BUILDERS` |
+
+**C113–C115, off the world summaries:** 30 events fired. A chaos fact reached six council packs, all by place. The two cop cars reached the police chief as nothing of his; the two OARI vans did not reach the OARI director, nor the two ambulances the EMS director. The 13 events on a business and the 4 on a citizen name no hood and reached no office.
+
+**Proposed: route by kind to the worker whose job it is, beside the seat whose turf it is** (which worker answers for which kind is the builder's call):
+
+| Kind | Worker | Exists as an agent |
+|---|---|---|
+| Cop car | Police chief | yes |
+| OARI van | OARI director | yes |
+| Ambulance | EMS director | pack only |
+| Fire engine | Fire chief | no |
+| Building inspector | City Planning Director or City Manager | Mara runs as her own cron; the Manager has no agent |
+| Garbage truck, street sweeper, Power & Gas truck | City Manager | no |
+| Mail truck: a lawsuit or a contract landing on a business | Deputy Mayor (Econ Dev) | no |
+| BART train | no office holds transit; `Transit_Metrics` has no owner | — |
+| Container ship | Baylight director (the harbor) | yes |
+| Ice cream truck | the district seat, by place, as today | yes |
 
 ## 4. Reporter
 
@@ -189,4 +232,5 @@ Mara Vance (asker; her own memory and tools; civic.47 M1), Elias Varek's journal
 
 ## Changelog
 
+- 2026-11-13 (engine-sheet) — Roster re-based on `Civic_Office_Ledger` (39 positions, all on the citizen ledger; four role mismatches listed); §3.2 chaos-car routing added (today by place only; by kind proposed); thin worker = system finding (builder's words). Sent to agy for review.
 - 2026-11-13 (engine-sheet) — Created as a draft from Runs 1–4 on the builder's go ("yes go on 1"). Citizen and Council / Mayor tested; Worker tested on the police chief; Reporter on two; Gate untested.

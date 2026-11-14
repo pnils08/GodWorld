@@ -107,7 +107,7 @@ Sources: `scripts/civic-office-map.json`, `scripts/work-wake-packages.json`, `ou
 
 ## Office holders' role on the citizen ledger (two read-only traces, 2026-11-14)
 
-**Builder (2026-11-14):** "send opus sub-agents out to answer this so we can correct it". Three read-only sub-agents under the write guard; the record trace and the reader/writer trace are in, the history trace is still running. Key citations spot-checked by engine-sheet (edition lines, the turnover writer, the intake door, two snapshot commits). Nothing has been written to a sheet.
+**Builder (2026-11-14):** "send opus sub-agents out to answer this so we can correct it". Three read-only sub-agents under the write guard: the record, the readers and writers, and the history. All three are in. Key citations spot-checked by engine-sheet (edition lines, the turnover writer, the intake door, two snapshot commits). Nothing has been written to a sheet.
 
 **What the record supports**
 
@@ -122,6 +122,22 @@ Sources: `scripts/civic-office-map.json`, `scripts/work-wake-packages.json`, `ou
 
 - **How the strings got this way:** in the ledger snapshot of 2026-08-16 (04b11e223) every seat read plain "City Council Member", Vega "City Council President", Delgado "City Council District 3". By 2026-08-19 (2f4947251) four seats had gained "- D<n>", Delgado had become "City Council District - D3" and Vega "City Council President - D1". No script in the repo writes these suffixes. Osei reads "City Council Member" in every snapshot back to 2026-08-12.
 - **Two wordings are in play.** The hand pattern on four seats: "City Council Member - D<n>". The engine's own: at a seat turnover `turnoverLedger_` writes the office Title word for word as the new holder's role and "Former <Title>" on a demotion (`phase05-citizens/updateCivicApprovalRatings.js:1371, 1376`; pinned by `scripts/civicApprovalCeiling.test.js:704-706`). 29 of the 39 holders' strings differ from their office Title; the six above are the ones that disagree in meaning.
+
+**History of the six values** (third trace; the January copy spot-checked by engine-sheet)
+
+| When | Source | Osei | Vega | Carter | Rivers | Crane | Delgado |
+|---|---|---|---|---|---|---|---|
+| 2026-01-21, C75 | `40f266776:Simulation_Ledger_Cycle_75.txt` | Deputy Mayor (Econ Dev) | Council President | Councilmember D1 | Progressive Caucus Leader | Business Caucus Leader | Councilmember D3 |
+| 2026-02-25, C84 backup sheet | live read of the February backup | Citizen | Citizen | Citizen | Citizen | Citizen | City Council District 6 |
+| mid-March through 2026-08-16 | practice copy; `LifeHistory_Archive` occupation tags; snapshot 04b11e223 | City Council Member | City Council President | City Council Member | City Council Member | City Council Member | City Council District 3 |
+| from 2026-08-19 | snapshot 2f4947251; live | City Council Member | City Council President - D1 | City Council Member | City Council Member | City Council Member | City Council District - D3 |
+
+1. **January–February: the real titles were overwritten with "Citizen".** The advancement intake of that time defaulted a blank role to "Citizen" and wrote it onto the existing row (`processAdvancementIntake.js` at d3b9cbdf1, lines 320 and 337); the media-usage router queued these citizens with the role blank. Logged as a bug and fixed later (`docs/engine/archive/ENGINE_REPAIR.md:89`).
+2. **Late February (S68): a repair pass wrote generic titles back.** Verified for Delgado ("District 6 → District 3", `docs/engine/LEDGER_AUDIT.md:68` at 6a2b05e). For the other five the window is verified and the writer inferred: the same pass, made by direct API calls with no script saved (`docs/engine/LEDGER_REPAIR.md:12, 155`). It wrote "City Council Member" for all of them, which dropped Osei's Deputy Mayor title and Carter's district.
+3. **2026-08-16 to 08-19: the district suffixes.** Four seats gained "- D<n>"; Vega was given D1, Carter's seat; Delgado was reformatted. No code at HEAD or at the 08-17 deploy builds such a string, and no commit records the edit. Inferred: hand edits in the browser during the ledger true-up of those days. Who and when would need the Drive revision list for those dates, which the API no longer returns.
+
+- **A fourth writer that could undo a correction** (corrects the reader/writer trace): the civic-slots branch of the career engine skips only GAME rows; a council member with a climbing posture and an initiative slot at a business in another field would get a new employer and a generic field role (`runCareerEngine.js:1645-1665, 1843-1857`). It has never fired on these six.
+- No row naming any of the six is queued in the live `Intake` or `Advancement_Intake1` tabs today.
 
 **What a correction would change**
 

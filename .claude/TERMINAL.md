@@ -81,7 +81,7 @@ Scope and authority per lane: `AGENTS.md`.
 | Lane | Use it for | Where its work lands |
 |---|---|---|
 | `engine-wiring` agent | wiring card for one function / `S.` field / tab: callers at both entry points, position vs the Phase-10 executor, writers + readers, write path, open rows. Open every pointer on it before the cut | the returned card. Agent tool `subagent_type: engine-wiring`; guests run `node scripts/runEngineAgent.js --agent engine-wiring --task "<target>"` |
-| codex | adversarial plan / diff review against the code; bounded coding inside its `AGENTS.md` scope | `docs/for-claude-review/YYYY-MM-DD-codex-<topic>.md`; accepted reviews filed to `docs/research/` |
+| codex | free model; advisory plan / diff review against the code; bounded coding inside its `AGENTS.md` scope | `docs/for-claude-review/YYYY-MM-DD-codex-<topic>.md`; accepted reviews filed to `docs/research/` |
 | agy (antigravity) | adversarial review; deep-lore drafts, quarantined until graded | `output/antigravity/YYYY-MM-DD-review-*.md`; read-only on code; check its success claims |
 | kimi | adversarial review of engine repair waves (trick code, weakened asserts, silent fallbacks) | its review file; weekly usage cap |
 | aider (window 6) | small single-file jobs: lint, dead code, refactor | `AIDER_PLAN.md` queue; `auto-commits: false` — review the diff, check for partial apply |

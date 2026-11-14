@@ -1,7 +1,7 @@
 ---
 title: Agent Boot Templates — what each kind of cron agent wakes with
 created: 2026-11-13
-updated: 2026-11-13
+updated: 2026-11-14
 type: reference
 tags: [persona, citizens, civic, draft]
 sources:
@@ -87,6 +87,9 @@ pointers:
 | 5 | Anything they are on record as promising | `output/mara-directives/promises.jsonl` (none held for any worker today) |
 | 6 | The task: a question from a named seat, with the asker's seat and hoods | the ask step, civic.49 |
 
+- **Part 2, handed or searched: open with the builder (2026-11-14: "should the last 3 memories load for a worker or should it be given a search tool of its memory ? Does forcing its last 3 memories flatten them?").** The chief's page shows the handed lines coming back: one 191-character statement is his whole statement in four Cycles and opens a fifth; three of the six statements handed to him today open on nothing-to-state; two of his reflections share four sentences. A search of one's own page exists (`citizenPage.searchPage_`, used only by Discord) and returned on-topic entries from C102–C107 for three questions, nothing newer. Not compared in a run. Evidence log §Worker memory.
+- **Part 4 for the chief:** three `answer` moves (C110–C112) replying to Mara Vance's C105–C107 questions, and one `patrol` move (C115). She is the City Planning Director and is named to the offices she asks; her roster today is the Mayor, the nine seats and the five project seats, so she can no longer ask him. Her question files are on disk, so an answer can be handed with its question. Evidence log §Mara's directives.
+- **Part 5 is an open gap (builder 2026-11-14: "how to track what they are saying so they have a chance to make good on it . I proposed maybe a claude sheet ledger for these it the memory hits don't work clean").** Mara's promise record is the one mechanism that holds an office to its words; it takes public statements of offices on her roster only, so no worker and no answer can enter it, and no office is shown its own open promises outside a block she addresses to it. Who holds a worker to his word, whether an answer counts, and file or sheet: the builder's, not designed. Evidence log §Tracking what is said.
 - **Written file:** none. The review's point stands: every "how they decide" line tried was a behaviour instruction in the second person ("when you are blocked you escalate rather than wait"; "You write memos"), so a written part is not proposed for workers.
 - **Evidence:** Run 3 — the chief on his weekday data, 3 of 3 answers with no figure outside what he was handed, and "I'm not going to invent a corridor split". Run 4 — handed the whole crime sheet he answers with the response times and clearance rates; 5 of 5 answers grounded; one wrong comparison. Run 1 — the fund director with no question answers one anyway in 5 of 9 runs. Run 5 — the Stabilization Fund director on his whole tracker row, asked by the District 1 seat: 3 of 3 answers with no figure off the row, no vote called, no memo; where memory and row disagree (C115 against C116) he follows the row; the row's build notes ("not playable, no Delivering gate yet") come back as the world (G-EC62), and "who decides" gets three answers because the row names no decider. Two workers, two askers, one model: none of the thin workers has been run.
 - **State:** shape seen on two workers (the chief 5 answers, one director 3); not ready to approve until parts 2 and 4 have a loader. Part 4 for a director is empty of content today: his six moves are `work` rows holding an initiative id and nothing he decided.
@@ -99,7 +102,7 @@ pointers:
 
 **Every worker gets an agent on this template** (builder 2026-11-14: "all the workers will get an agent template"). The roster is the 39 positions below less the Mayor and the nine council seats (§2); the 21 positions with no agent today are in scope.
 
-**A thin worker is a finding about the system, not about the template** (builder: "if ultimately a worker is thin it tells us the system needs teeth"). Where a position's records are few or absent, the tables below say so; the template is not bent to cover it.
+**A thin worker is a finding about the system, not about the template** (builder: "if ultimately a worker is thin it tells us the system needs teeth"). Where a position's records are few or absent, the tables below say so; the template is not bent to cover it. Builder 2026-11-14: "The thin ones the gap is the sim isn't generating enough data for them yet, if chaos cars and city level numbers aren't enough that's a separate issue". Mapped the same day (evidence log §Worker data map): thin is two things — records the sim keeps and routes to no worker (the care-and-justice census of arrests, custody and hospital intakes; court and ticket revenue; the chaos-car sheet; transit), and trades the engine generates nothing for (fire, emergency management, public defender, reentry, cause of death, permits, the staff offices). Gap log G-EC65.
 
 **Role on the citizen ledger against the office sheet: six corrected 2026-11-14** (builder: "Repair to its state from January, use the wording the engine uses"). Osei, Vega, Carter, Rivers, Crane and Delgado now carry their office Title word for word, the string the engine writes at a seat turnover; history, readers, writers and the before-and-after are in the evidence log §Office holders' role. The other four seats followed the same night; all nine read "City Council District <n>". The sheet line a wake builds prints `RoleType` as it stands: "a City Council District 4 living in Lake Merritt".
 
@@ -255,6 +258,7 @@ Mara Vance (asker; her own memory and tools; civic.47 M1), Elias Varek's journal
 
 ## Changelog
 
+- 2026-11-14 (engine-sheet) — §3 Worker: the builder's question on memory (handed or searched) recorded with the read of the chief's page; part 4 corrected from Mara's code (his answers are to her C105–C107 questions; she cannot ask him now); part 5 recorded as an open gap in his words; §3.1 thin split into recorded-not-routed and not-generated from two agent maps. No wake changed; no template approved.
 - 2026-11-14 (engine-sheet) — Run 5: one project director run as the chief ran (builder: "Go on 1"). §3 evidence and state updated; review finding 2's "a director" is met by one. Evidence log §Run 5.
 - 2026-11-14 (engine-sheet) — The daily wake reads an office holder's title from the office sheet (live).
 - 2026-11-14 (engine-sheet) — The test guard is in the repo (`scripts/guard/`), on the builder's "Put in the repo".

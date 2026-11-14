@@ -173,6 +173,72 @@ Sources: `scripts/civic-office-map.json`, `scripts/work-wake-packages.json`, `ou
 
 **Side findings (gap log G-EC59, G-EC60):** eight Tier 3–4 office holders match no word in the wake's station line and are told "You are an ordinary person" (Public Defender, Deputy Public Defender, Internal Affairs Lead, Court Liaison, Police Review Chair, Ombudsman, Medical Examiner, Transit Hub Planning Lead; `lib/wakePerception.js:162`). The career mover can move an office holder's employer (`runCareerEngine.js:1647-1663, 1851` excludes only the GAME clock).
 
+## Worker memory: handed or searched (read 2026-11-14)
+
+**Builder (2026-11-14):** "should the last 3 memories load for a worker or should it be given a search tool of its memory ? Does forcing its last 3 memories flatten them?"
+
+- **What is handed today.** Diary wakes: `loadOwnPageReadback` takes the newest 15 docs that are not `show`, drops `tension` / `show` / `office-position`, picks 3 by resonance score, 320 characters each (`lib/wakePerception.js:446-474`). City-hall wakes and Runs 3–5: `officeWall.loadPositionWall`, the newest 6 CIVIC docs, under a block that reads "HOOK them for continuity — do not amnesia a stance you already put on the record" (`scripts/officeWall.js:74-98`, `formatPositionWall`).
+- **The chief's page, whole** (POP-00136, `recentPage_` raw, 2026-11-14): 33 docs — 19 `office-position` (CIVIC), 5 `tension` (PRESS daypart), 4 `reflection` PRESS, 1 `reflection` work, 4 `reflection` daily. The inventory's "9 press" above is the 5 tension lines plus the 4 press replies.
+- **Repetition on the page.** The statement "No public safety events requiring an official statement from this office occurred this cycle. OPD operations continue uninterrupted with standard deployments and response protocols." is his whole statement at C104, C106, C107 and C109 (191 characters, identical) and the opening of C113; C114 and C115 open "No public safety event in this cycle's export requires an institutional statement from this office." Seven of 19 statements open on nothing-to-state; three of the six handed to him today are among them. His work reflection at C112 and his reflection at C114 share their first four sentences word for word but for the hood and the rate ("Look, I don't hide from the numbers. <hood> had the most incidents this cycle, and a <N>% clearance rate means we're not closing enough of them. That gap is on me and my department. I answer for it."); C115 returns to it ("that 26% clearance rate in Uptown still sticks with me").
+- **Not a controlled result.** No run has compared the same question with memory handed, searched and absent. The repetition is on the page; its cause is not isolated. Earlier lines of the same kind: Webb's "115 households" (§Workers), Rivers's lines returning word for word (Run 2), Soria Dominguez writing the vote ahead off her own page (G-EC51).
+- **A search of one's own page exists.** `lib/citizenPage.js` `searchPage_` (`/v3/search` scoped to the page tag); its one caller is `lib/personaProvider.js:513` (Discord). No wake calls it. Three questions put to the chief's page (2026-11-14, read-only): "response time and clearance in San Antonio against Fruitvale" 4 hits, "patrol strategy decision and why" 3, "OARI co-response hand-off" 4 — all from C102–C107, none from C112–C115, though the C114 and C115 reflections are about the clearance rate. The function's own header says search lags fresh docs and is to be paired with `recentPage_`.
+- **His decisions are not on his page.** The patrol setting and the answers sit in `output/cron-civic/moves/`; a page search does not reach them.
+- **The reporters' memory tool** (`cron-desk-writer.js` `toolMemoryRecall`, research-build's file): the newest 5 docs every call, plus `readPage_` (the v4 search that returns 0–1 hits, `lib/citizenPage.js:253-256`) when a query is given. G-EC64.
+- **Offered, not run:** the chief on one seat question three ways under the write guard — six statements handed as today, a memory tool with two reads of his choosing (search by topic; newest entries), no memory — three answers each. Whether his model calls a tool at all is unknown until run.
+
+## Mara's directives: what generates the questions (code read 2026-11-14)
+
+**Builder (2026-11-14):** "Mara directives are what generate these questions and responses, you'd have to understand her agent".
+
+- **Who she is.** Mara Vance, City Planning Director, POP-00507. One run a week after the Sunday close (`cron-civic-run.js` `runDirective`), `openai/gpt-6.1-sol` with a tool loop. Design and reviews: [[../plans/2026-10-31-civic-autonomy]] §M1.
+- **What she reads.** Every office's Sunday statements and the week's weekday statements in full, the tracker, the world summary, engine HIGH patterns, her last three directives, the answers to her earlier questions, her open promise record.
+- **Her tools.** `memory_recall` / `memory_note` on her own page, `canon_recall`, `citizen_lookup`, `sheet_read`, `promise_record`.
+- **What she writes.** Blocks addressed to one office each (Address, Why, Acceptance, optional Promise ids) and a `## Not directing` section. C115: 10 blocks (the Mayor, D1–D5, D7–D9, the Baylight director), 5 not directed (D6 and four directors, each with her reason).
+- **Who she can address.** `directiveRoster` (`cron-civic-run.js:950-962`): the Mayor, the nine council seats, the five project seats. The police chief and every other worker are not on it; `maraPromises.resolveSource` rejects an office off the roster.
+- **How an office answers.** A seat: a weekday `answer` move bound to her block's id. A director: `maraAnswer` in its Sunday project output (`maraProjectAsk`, `maraAnswerContract`, `maraOnlyContract`, `cron-civic-run.js:2332-2385`); the prompt names her: "Mara Vance, the City Planning Director, asked your office this".
+- **The chief's three `answer` moves** (C110, C111, C112) carry ids `CONF-105-…`, `CONF-106-…`, `CONF-107-…-civic-office-police-chief`: replies to her C105–C107 directives, from the version in which code picked the addressees. Since the M1 rebuild she cannot address him. His decisions on record are those three and one `patrol` move (C115). Her C105–C107 files are on disk (`output/mara-directives/mara_directive_c10{5,6,7}_AUTO.txt`), so each answer can be handed with the question it answered.
+
+## Tracking what is said (read 2026-11-14)
+
+**Builder (2026-11-14):** "This is an open gap, how to track what they are saying so they have a chance to make good on it . I proposed maybe a claude sheet ledger for these it the memory hits don't work clean". Earlier (2026-11-13): "if we run into issues on how to track things said we can consider a workbook for the crons if useful".
+
+- **What exists.** Mara's promise record, `output/mara-directives/promises.jsonl` (`scripts/maraPromises.js`), append-only: a promise is an office's own words, checked as a substring of its public statement file; it stays open and in front of her each run until a status row closes it on evidence tied to that promise (a tracker move on its initiative, or the office's answer to the block that carried it). On file 2026-11-14: 8 promises, all C115 (Mayor 2, D1, D2, D3, D5, D8, D9), 0 status rows.
+- **What it does not hold.** (1) Any worker off her roster. (2) An answer: only Sunday `quote` / `fullStatement` / `decision` and the weekday `statement` are sources; an answer to a seat (civic.49) is none of them. (3) The office's own view: no pack builder reads the record (`promises` appears only in the directive code), so an office meets its promise only inside a block she addresses to it. (4) A promise the sim cannot fill: the chief's "records pull" (Run 3) has no record to be made from.
+- **Memory search against this need.** The page search returned nothing newer than C107 for the chief (§Worker memory); a promise made this week is in the window it misses.
+- **Not designed.** Who holds a worker to his word, whether an answer counts, and whether the record is a sheet tab are the builder's; put to him 2026-11-14.
+
+## Worker data map (two read-only agent maps, 2026-11-14, C115)
+
+**Builder (2026-11-14):** "The thin ones the gap is the sim isn't generating enough data for them yet, if chaos cars and city level numbers aren't enough that's a separate issue that you can release a coupe sonnet sub agents to map what data exists for the worker types we have".
+
+Two Sonnet agents, read-only: one over the tab dumps (`output/beats/*.jsonl`), `schemas/SCHEMA_HEADERS.md`, `docs/engine/SHEETS_MANIFEST.md`, `scripts/civic-office-map.json`; one over the engine (`phase*/`, `utilities/`, the stub maps, `output/world_summary_c115.md`). Their read, not re-derived here; checked by engine-sheet: the C115 `City_Treasury` rows, the `Chaos_Cars` count (5), the census columns, the transit packet block (G-EC63), `Chaos_Cars` absent from `dumpBeatTabs.js`.
+
+**Tabs by trade (C115 dumps):**
+
+| Trade | Tab · what it holds | Rows | Handed to that worker today |
+|---|---|---|---|
+| Police | `Crime_Metrics`: violent / property index, response time, clearance, incidents, levels, trend, pressure; one row a hood, overwritten each Cycle, no history; `Hotspot` blank 22/22 | 22 | part (G-EC56) |
+| Police · Justice | `Care_Justice_Census` System=judicial: intakes (arrests), custody occupancy, exits, by hood and city | 288 (48 a Cycle, C110–C115) | no |
+| Police · Justice | `Judicial_Ledger`: 21 columns, a tracked citizen's case | 0 | — |
+| Justice · City Manager | `City_Treasury` Counterparty COURT ("24 cleared charges, fined at the hood rate", C115 $107,362), TICKETS | 6 COURT, 2 TICKETS of 19 | no |
+| EMS · Medical Examiner | `Care_Justice_Census` System=hospital: intakes by type (injury, illness, heat, mental-health crisis, substance treatment), beds, exits | 1,008 (168 a Cycle) | no |
+| EMS · Medical Examiner | `Hospital_Ledger` (3 rows, admits C105–C106, five source columns blank); `Health_Cause_Queue` (3, operator-triggered); `Neighborhood_Demographics.Sick` (22 hoods) | 3 · 3 · 22 | the first two |
+| Medical Examiner | deaths: 1 `LifeHistory_Log` row (C114); cause is a description string; the engine's death count goes to the run log only | 1 | no |
+| City Manager | `City_Treasury`: allocation, appropriations, prefunds, court and ticket revenue, balance | 19 | no agent |
+| Econ Dev | `Business_Ledger` (283), `Employment_Roster` (971), `Business_Archive` (2), `Neighborhood_Demographics.Unemployed` | — | no agent |
+| Community Dev | `Initiative_Tracker` INIT-001; `Community_Programs` (33, newest founded C109, no engine writer) | — | her Sunday packet |
+| Planning | `Transit_Metrics` (684; 18 at C115: 8 stations, 10 corridors); `Neighborhood_Map` housing pressure, rent (not dumped); INIT-003, INIT-006 | — | her own cron |
+| Project directors | their `Initiative_Tracker` row (25–39 filled fields); `City_Treasury` prefund rows for INIT-001 / 002 / 005 | 5 rows | 4 status lines |
+| All trades | `Chaos_Cars`: every chaos event with vehicle, target scope, target id, outcome (5 at C115); not in the beat dump | 5 at C115 | no (G-EC58) |
+
+**Two kinds of thin:**
+
+- **Recorded, not routed.** The care-and-justice census (arrests, custody, hospital intakes by type and hood, six Cycles), court and ticket revenue, `Chaos_Cars`, transit, and the chief's own missing columns exist on tabs and reach no worker. No office on the map is declared for `Care_Justice_Census`, `Hospital_Ledger`, `Health_Cause_Queue`, `Transit_Metrics`, `Community_Programs`, `Household_Ledger` or `City_Treasury`; the map's `dataSources` cite world-summary sections (§crime, §health, §events, §economy) that the C115 summary does not have.
+- **Not generated.** Fire (only the chaos fire engine's three outcomes and a "kitchen fire" texture line; no incident tab); emergency management (crisis arcs go to a tab the code calls a fossil; storms and floods are ripples; shock reasons are not saved); public defender, court liaison and reentry (job titles only; the census has no charge, plea or probation column); medical-examiner cause of death; planning permits, units, zoning; city-manager operations past the treasury; chief of staff, communications, legal counsel, ombudsman, internal affairs, police review chair (a roster row each).
+- **`Judicial_Ledger` at 0 rows beside 24 arrests a Cycle:** every census intake is `OtherResident` (`TrackedIntakes` 0 in all 1,296 rows); the case ledger holds tracked citizens only and no tracked citizen has been arrested. The ledger is the tracked part of the city; recorded, not a defect.
+
+**Computed and not kept (engine agent's list):** `S.crimeLag`; enforcement load, policing capacity and patrol name except as packet prose; transit alerts (`S.transitMetrics.alerts`), and the packet's TRANSIT block never prints (G-EC63); `S.chaosFriction`; the death count; `S.shockReasons`; per-hood sick / OARI-eligible / OARI-diversion counts (not census columns); a chaos row's second metric; the cargo ship after its first week (carried in state, one tab row).
+
 ## Templates — where each type stands (2026-11-13)
 
 **Builder (2026-11-13):** "before we move to fine tune the workflows should we make sure our agent templates are set? … we may 'worker' , 'council/mayor', 'citizens' 'gates/rhea'?"
@@ -279,5 +345,5 @@ Outside the four: Mara (asker, own memory and tools, built under civic.47 M1), V
 
 - Work wake: the three versions with the moment named, if the builder wants the moment named; and a written part holding only who they are and how they decide.
 - City hall: a project director's Sunday step, the one place the 37–46k files load.
-- Worker: a second director on a second model; a thin worker (the DA, the medical examiner); the director handed his work docs as well as his statements (the "115 households" line is there).
+- Worker: a second director on a second model; a thin worker (the DA, the medical examiner) — builder 2026-11-14: thin is the sim's data, a separate issue (§Worker data map); the director handed his work docs as well as his statements (the "115 households" line is there); the chief's memory three ways (§Worker memory).
 - Reporter: the written part under the full harness; owned by pipeline.111.

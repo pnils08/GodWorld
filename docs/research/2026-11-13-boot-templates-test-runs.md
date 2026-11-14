@@ -14,6 +14,7 @@ pointers:
   - "[[../plans/2026-11-10-role-citizens-wake-as-themselves]] — pipeline.110 Task 9, the job this serves"
   - "[[../plans/2026-11-10-stop-puppeting-the-newsroom]] — pipeline.111 (research-build), owns the reporter harness"
   - "`output/engine-sheet/2026-11-13-boot-three-way.md` — Run 1 raw outputs, every version in full"
+  - "`output/engine-sheet/2026-11-13-boot-three-way-run2.md` — Run 2 raw outputs (council seats, second reporter), every version in full"
 ---
 
 # Boot templates: test runs and findings
@@ -39,17 +40,21 @@ pointers:
 - About 20 solo reporter folders (1–3k for the three files) hold a name, a beat and pointers to the voice file and a bag file. The cron writer's tools are canon_search, citizen_lookup, sheet_read, dossier_read, memory_recall, memory_note, canon_recall: none opens a path.
 - CLI-era content in the files the city-hall wakes load whole (count of file paths / tool words / build notes in IDENTITY+LENS+RULES): the four project directors 23–27 / 12–15 / 16–33; Baylight 26 / 15 / 27; Mayor 6 / 13 / 0; council seat IDENTITY files 0 / 0 / 0–1.
 
-## Findings (current read)
+## Findings (current read, after Run 2)
 
 | Wake type | Read | Evidence | Not tested |
 |---|---|---|---|
 | Citizen daily | Works from the sheet as is; the written file adds nothing visible | Run 1: Vinnie Keane with and without his 300 characters, 2 runs each, the same man; Kai Marston's own daily wake reads as a person with no written file | More citizens; a low-record citizen |
 | Work wake | The work is not defined: the wake hands project status and no moment, so the model picks its own genre | Run 1: 5 of 9 runs answer someone who is not there; sheet line alone gives three different things in three runs | Whether naming the moment (end of the workday, their own page) fixes it; the builder's call, the frame was removed 2026-11-13 |
 | Work wake | A written line about what a person produces is acted out as an order | Run 1: "You write memos" → a formal memorandum to an invented committee 3 of 3, with invented dates | A written part holding only who they are and how they decide |
-| City hall | The role is understood from one sheet line; the written files change nothing visible in the act | Run 1: Mayor, 20,959 characters / 175 / 701, the same `work` move on the same initiative, same statement shape; every figure she stated is in what she was handed | A council seat; the Sunday chain; more than one run; the live retry and evidence loop |
-| City hall / offices | Stating a thing as done that the record holds only as a position | Not from this run: the Thursday 2026-11-12 work-wake read, 3 of 12 offices (plan §Acceptance) | Whether it follows the boot text or the data handed; no run here isolates it |
-| Reporter write | The assignment and its quotes decide the piece; the written voice shows only at the edge | Run 1: Kai Marston, four versions, the same story and the same three quotes; sheet + written opens on a room | More than one run a version; a second reporter; the full harness with the written voice |
+| City hall (weekday + Sunday) | The role is understood from one sheet line; the written files change nothing visible in the act or the voice. The voice rides the seat's own page memory and the packet | Run 1: Mayor, same move from 20,959 / 175 / 701 characters. Run 2: Tran weekday, 9 of 9 the same hold, no move; Rivers Sunday, 9 of 9 the same four positions, her own earlier lines returning word for word from her page ("the first rung", "done telling East Oakland to wait") in all three versions | A project director's Sunday step (37–46k files); the live retry and evidence loop |
+| City hall (weekday + Sunday) | No invented figure and no position stated as a result, in any version. What is wrong in a statement was wrong in what the seat was handed | Run 2: 18 of 18 runs, 0 figures outside the handed text (the script's own `ungroundedNumbers`), 0 votes stated as passed. "D3 East Oakland" (G-EC48) sits 7 times in Rivers's packet and comes back in every run; Tran's "Baylight is complete" is the hand-closed tracker row | — |
+| Work wake / offices | A position stated as a result | The Thursday 2026-11-12 work-wake read, 3 of 12 offices (plan §Acceptance). It did not reproduce in 27 city-hall runs on any boot, so it sits with the work wake, the one wake that hands no task | A work-wake run built to isolate it |
+| Reporter write | The assignment and its quotes decide the story; the written background decides how it is told | Run 1: Kai Marston, four versions, the same story and quotes; the written part shows at the edge (opens on a room). Run 2: Tanya Cruz ×3 each: today's files and the sheet line alone both give long atmospheric prose (305–607 words: "landed like a quiet glove drop"); the written part gives her dispatch 3 of 3 (265–327 words, one-line paragraphs, last names) | The written part under the full harness; a civic reporter |
+| Reporter write | The thin folder a reporter wakes with today adds nothing over the sheet line | Run 2: Tanya A-light ×3 against B ×3, the same register | — |
 | Reporter write | The background written for a reporter never reaches them today | Code read above | — |
+
+**The one mechanism under all of it:** a written line about how a person does a thing is acted out. For a reporter that is the voice (Tanya's short lines). For a worker it becomes the task (Webb's memos). Where the wake hands a full task (city hall), the written file is drowned by it.
 
 **Standing notes for any template:** the sheet owns age, home, role, temperament and current state (G-EC52: a written file gives Webb as 52, Laurel; the ledger says 42, Downtown). A written part, where one is kept, holds who the person is and how they decide; nothing the sheet or the engine moves, and nothing about the form of what they produce.
 
@@ -71,8 +76,27 @@ pointers:
 
 - **Gap log:** G-EC52 (written file contradicts the ledger), G-EC53 (a journalist told "not a writer"), G-EC54 (a wake question carrying the whole temperament list).
 
+### Run 2 — 2026-11-13, C115, engine-sheet
+
+- **Builder:** "go but make sure the council is [not] writing to anything live, its imperative dry runs dont enter canon".
+- **Write guard:** a `--require` preload ahead of every script. It refuses and logs any file write outside the scratch folder (reporter runs: the test-shell folder too), any network call that is not a read or the model call (Supermemory: search, list, fetch; Sheets: GET; OpenRouter: chat), and any child process other than a guarded node or grep. Self-test before use: a page add, a sheet append and update, a live-log append, a repo file write, a shell command, a webhook post, all refused.
+- **Council harness:** the script's own `buildPack` + `datawakeUserPrompt` (weekday) or the seat's C115 pending-decisions packet + `outputContract` (Sunday hearing, the same assembly as `hearingSeatPrompt`); page memory by `officeWall.loadPositionWall` (read only; the pointer-ensuring step is left out); the seat's own model; one call, no retry or evidence loop. Figures checked with the script's `ungroundedNumbers` over the whole statement text.
+- **Guard result:** council 18 runs — 0 refused, 18 model calls, 234 memory reads, no sheet call, no file write outside scratch. Reporter 12 runs — 0 refused, 22 model calls, 30 memory searches, file writes only inside `output/test-shell/`. Guarded citizen dry runs (to read the sheet line of Tran, Rivers, Cruz) — 21 log appends refused (below). No live file changed in the window except crons and daemons (mtime sweep).
+- **Raw outputs:** `output/engine-sheet/2026-11-13-boot-three-way-run2.md`.
+
+| Wake | Agent | Runs | A — today | B — sheet line | C — sheet + written |
+|---|---|---|---|---|---|
+| City hall datawake | Leonard Tran, D2, gpt-6-luna | 3 each | Holds on Baylight (reads the row as complete), no move, 3 of 3 | The same, 3 of 3; one run prints a raw reading and the initiative id | The same, 3 of 3 |
+| Sunday hearing | Janae Rivers, D5, deepseek-v4.1-flash | 3 each | Four statements: the East Oakland briefing, the apprenticeship gap analysis, yes on Grand Lake with the conditions, the D5 complaint; one run says "the engine flags" (the word is in her packet) | The same four, the same positions | The same four, the same positions |
+| Reporter write | Tanya Cruz, grok-4.3 | 3 each (+3 A-light) | 515–607 words, scene prose; prints record strings ("8229AB and 71.4WAR") and cycle labels | 367–447 words, scene prose | 265–327 words, dispatch: one-line paragraphs, last names |
+
+### Dry-run safety — what Run 1 left, checked 2026-11-13
+
+- **Canon, pages, sheets:** nothing. No ingest path reads `output/test-shell/`, `output/engine-sheet/` or `docs/research/` (daily ingest and delivery read `output/cron-compare/`; the daily show reads `cron-compare` and `exchanges`; the reporters' search walks a fixed shelf list in `lib/mags.js` that holds none of them — a search for a dry-run phrase returns none of these files). The Mayor's memory read in Run 1 went through the pointer-ensuring call; her pointer already exists, so it wrote nothing.
+- **Two logs took lines:** `citizen-wake.js --dry-run` appends to `logs/citizen-wake-offered.jsonl` before its dry-run exit (7 lines from Run 1, lines 274–280, daypart `evening`; 8 older `evening` lines from earlier sessions' dry runs sit beside them) and to its own log; `cron-work-wake.js --dry-run` appends to its own log (marked `dry=true`). The offered log's one reader is `extractBondsFromWakes.js`, run by hand, joined on citizen, Cycle and daypart; the scheduled wakes write morning, midday, night, so an `evening` line matches no page. Left as they are; G-EC55.
+
 ### Next runs (not started; each needs the builder's go)
 
-- City hall: a council seat on the datawake and one Sunday-chain wake, A / B / C, three runs each.
-- Work wake: the same three versions with the moment named, if the builder wants the moment named.
-- Reporter: a second reporter and three runs a version; owned by pipeline.111.
+- Work wake: the three versions with the moment named, if the builder wants the moment named; and a written part holding only who they are and how they decide.
+- City hall: a project director's Sunday step, the one place the 37–46k files load.
+- Reporter: the written part under the full harness; owned by pipeline.111.

@@ -80,6 +80,44 @@ pointers:
 - **A fed figure that is not on the record:** Webb's C114 line handed to every seat reads "One hundred fifteen households paid out". The INIT-001 tracker row holds no household count of 115, 79 or 36; its only household count is "2 household grants, $81,188" (C109), beside $400K a Cycle and the 23-day standard. His page readback carries the 115 / 79 + 36 lines back to him each wake. Where the figure first appeared is not traced.
 - **The police chief today (weekday datawake, C112–C115):** C112 an `answer` to Mara's ask (a co-response memo "filed"); C113 and C114 a holding statement, no move; C115 a holding statement and `patrol: balanced`. The `patrol` move is a lever, not color: the week's close carries it to `World_Config.patrolStrategy`, read by the crime update at the next fire (three settings: balanced, suppress_hotspots, community_presence). His statements print raw readings ("Fruitvale at 0.67", "CrimeIndex"). No seat can put a crime question to him.
 
+## Worker inventory (read-only pull 2026-11-13, C115)
+
+**Builder (2026-11-13):** "before we move too fast we have a set template for workers based on the police chief? … the police chief isnt getting all his data and/or tools to access the data, its memory store, past decisions promises? so we need to identify who are the workers and that fit to this template?"
+
+Sources: `scripts/civic-office-map.json`, `scripts/work-wake-packages.json`, `output/simulation_ledger_snapshot.jsonl`, `output/beats/{Initiative_Tracker,Crime_Metrics,Hospital_Ledger,Judicial_Ledger,Reflection_Intake}.jsonl`, `output/cron-civic/moves/moves_c112–c115.jsonl` (151 moves), `output/mara-directives/promises.jsonl` (8 rows), each page's newest 60 docs (`lib/citizenPage.js` `recentPage_`).
+
+| Worker | Sheet role | Wakes today | Records that are theirs | Handed of them today | Page (newest 60) | Decisions on record | Promises on record |
+|---|---|---|---|---|---|---|---|
+| Rafael Montez, police chief (POP-00136) | Police Chief, Tier 2 | weekday seat rota | `Crime_Metrics`: 22 neighborhoods × 13 columns | his pack; no `ResponseTimeAvg`, `ClearanceRate` (G-EC56) | 33: 19 statements, 9 press, 1 work, 4 daily | 3 `answer`, 1 `patrol` | 0 |
+| Marcus Webb, Stabilization Fund (POP-00790) | OEWD Program Director, Tier 3 | Tue diary; Sunday step when addressed | INIT-001 row: 36 filled fields, $21.0M of $28M left, 1,904 characters of milestone notes | 4 status lines | 44: 29 statements, 8 work, 4 press, 3 daily | 6 `work` | 0 |
+| Vanessa Tran-Muñoz, OARI (POP-01021) | OARI Program Director, Tier 2 | Tue diary; Sunday step | INIT-002 row: 36 fields, $11.06M of $12.5M left | 4 status lines | 50: 26 statements, 8 work, 8 press, 8 daily | 6 `work` | 0 |
+| Bobby Chen-Ramirez, Health Center (POP-00792) | Health Center Project Director, Tier 3 | Thu diary; Sunday step | INIT-005 row: 39 fields, $15.9M of $45M left | 4 status lines | 41: 22 statements, 8 work, 6 press, 5 daily | 6 `work` | 0 |
+| Elena Soria Dominguez, Transit Hub (POP-00791) | Transit Hub Planning Lead, Tier 3 | Thu diary; Sunday step | INIT-003 row: 25 fields, $230M untouched; phase reads `complete` (hand close, plan §Task 8) | 4 status lines | 42: 20 statements, 8 work, 10 press, 4 daily | 6 `work` | 0 |
+| Keisha Ramos, Baylight (POP-00041) | Director, Baylight Redevelopment Authority, Tier 2 | Thu diary; Sunday step | INIT-006 row: 30 fields, $2.1B untouched; phase reads `complete` (hand close) | 4 status lines | 46: 22 statements, 8 work, 6 press, 4 conversation, 6 daily | 6 `work` | 0 |
+| Clarissa Dane, district attorney (POP-00143) | District Attorney, Tier 2 | Tue + Thu diary | none of her own: `Judicial_Ledger` holds 0 rows; she is handed the chief's sheet | top five violent lines + her office line | 44: 13 press, 9 work, 9 show, 4 debate, 4 statements, 5 daily | none | 0 |
+| Priya Narang, EMS director (POP-00141) | EMS Director, Tier 4 | Tue + Thu diary | `Hospital_Ledger` admissions: the tab holds 3 rows | admissions + cause queue | 23: 11 press, 10 work, 2 show | none | 0 |
+| Jonas Patel, medical examiner (POP-00142) | Medical Examiner, Tier 4 | Tue + Thu diary | `Hospital_Ledger` deaths: the same 3 rows | deaths + cause queue | 17: 11 work, 4 press, 2 daily | none | 0 |
+
+- **Memory handed today:** the chief gets his last six statements (`officeWall.loadPositionWall`, CIVIC docs only), not his press, work or daily docs; the diary workers get their own page readback (`loadOwnPageReadback`).
+- **Past decisions handed today:** a seat's pack carries its last move (`game.lastMove`); the full move ledger is not handed to anyone.
+- **Promises:** Mara's record holds 8, all the Mayor's and council seats'. No worker has one. Mara addresses the five directors but the chief is not on her list.
+- **Tools:** no worker has one. A weekday seat can request stored records from its own snapshot (`readRequests`).
+- **Not workers yet:** 21 offices in the map have no agent (fire chief, city manager, chief of staff, public defender and 17 more); the EMS director and medical examiner among them run on inline registry packs.
+
+## Templates — where each type stands (2026-11-13)
+
+**Builder (2026-11-13):** "before we move to fine tune the workflows should we make sure our agent templates are set? … we may 'worker' , 'council/mayor', 'citizens' 'gates/rhea'?"
+
+| Type | Who | What the runs support | State |
+|---|---|---|---|
+| Citizen | every ledger citizen on the daily wake | nothing written; the sheet and the page | tested (Run 1); two wake-line defects logged (G-EC53, G-EC54) |
+| Council / Mayor | ten elected seats | one sheet line + page memory + their pack; the written files change nothing visible | tested (Runs 1–2, 27 runs); what remains is the data they are handed, not the boot |
+| Worker | the nine above | sheet line + page memory + the whole of their own records + past decisions; the task is a question from a named seat; nothing written about how they talk or what they produce | shape tested on one worker (Runs 3–4); not written down as a template; fit per worker in the table above |
+| Reporter | the newsroom | sheet line + a short written background + the assignment | tested on two reporters (Runs 1–2); source text is the 30 voice files no wake loads; harness owned by pipeline.111 |
+| Gate | Rhea, the city clerk, the final arbiter | — | not tested. A gate is handed rules to check against (Rhea: her identity and rules files, about 30k, `cron-rhea-gate.js`; the clerk: `readPersonaDir('city-clerk')`); whether the rules or the persona carry the check is unmeasured |
+
+Outside the four: Mara (asker, own memory and tools, built under civic.47 M1), Varek's journal, Mags's reflections, the show's pilots.
+
 ## Runs
 
 ### Run 1 — 2026-11-13, C115, engine-sheet

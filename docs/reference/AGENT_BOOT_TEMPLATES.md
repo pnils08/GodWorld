@@ -76,24 +76,52 @@ pointers:
 
 ## 3. Worker
 
-**Who:** a citizen who holds city records and answers for them. Template drawn from the police chief (Runs 3–4).
+**Builder (2026-11-14):** "This is the workers template and we are building it to the police chief spec, all workers are the same agent type but may have different data and tools but how they operate should be built from a template, we aren't trying to make 1 agent work , we are trying to build a rebuildable process so once we know the police chief works and his template does what we want every worker will love to this template and be built out just like we are doing with the police chief".
 
-| Order | Part | Source |
+**What a worker is (builder 2026-11-14):** "The workers are data agents not decision makers , along with some ability to answer for the data but the workers aren't able to fix "the engine" as much as they can control the data . So when a council, media need to know about crime they call on this agent for the answer. So the more they have access to the better the answer the mayor , media districts get . They wake with this data to "make sense" of it and speak on the record about the issues . So it a lot of ways the workers aren't being held accountable, they are telling us they can't make sense of the data, which is what we need to fix , this is what Elias Varek agent is doing , pulling it high level about what isn't happening or makes little sense to a cron that wakes ."
+
+**Who:** every position in §3.1. One agent type. The template is how each of them operates; one worker differs from another only in its fill (data, tools). The police chief is the spec: the template is built and proven on him, then every other worker is built out the same way. Only the police chief is worked until then, and nothing is run until the template is decided (builder 2026-11-14: "we are literally only working on the police chief"; "no runs … until templates are set").
+
+**The template — the same for every worker:**
+
+| # | Part | What the worker wakes with | Per worker | Built |
+|---|---|---|---|---|
+| 1 | Who they are | The sheet line: name, age, home, office, temperament. No written file | values only (ledger, office sheet, dials) | the functions exist (`wakePerception.identityLine`, `citizenDials.disposition`, live in the daily wake); no worker wake uses them |
+| 2 | Their data | The whole of the records of their trade, every column | **the fill:** which tabs | no |
+| 3 | Their tools | What they can look up beyond what is handed | **the fill** | none exists; not decided |
+| 4 | Their memory | Entries from their whole page, gathered for them by what is in front of them (the question, or the Cycle's data); not the newest few handed in | same for all | no — `citizenPage.searchPage_` exists, no wake calls it, and it lags the newest Cycles |
+| 5 | Their past decisions | Their own moves, each with the question it answered, looked up by POPID (moves are keyed `proj-*`, `civic-project-*` / `civic-office-*`, `STAFF-*` for one person) | same for all | no |
+| 6 | The task | Asked: a question from a named seat or a reporter. On their own wake: make sense of their data and speak on the record, including what does not make sense | same for all | asked = civic.49, not approved to build; own wake = today a council seat's pack (below) |
+
+- **Not parts of the template.** A written persona file (below). Promises — builder 2026-11-14: "Promises aren't the template as these will change and wouldn't be hardcoded . There can be a part of the template that makes them aware of promises but the entire point of this is to not puppet them so beearw of veering into having your hand on everything." On who keeps a worker's word in front of them: "Mara may be good as the accountability agent , but may require a workflow of both to record it properly". Not designed; evidence log §Tracking what is said.
+- **What a worker cannot make sense of is output.** His words above: a worker saying the data does not add up is the finding to fix. Where those lines are collected is not designed; Varek's journal is the pattern he named.
+- **Part 4, why gathered and not handed.** Builder 2026-11-11: "writer should never wait on a search: a gatherer agent gathers, the writer writes" (supermemory `sl-godworld`, 2026-11-11). His question 2026-11-14 and the read of the chief's page are the next bullet.
+- **Handed or searched: the builder's question (2026-11-14: "should the last 3 memories load for a worker or should it be given a search tool of its memory ? Does forcing its last 3 memories flatten them?").** The chief's page shows the handed lines coming back: one 191-character statement is his whole statement in four Cycles and opens a fifth; three of the six statements handed to him today open on nothing-to-state; two of his reflections share four sentences. A search of one's own page exists (`citizenPage.searchPage_`, used only by Discord) and returned on-topic entries from C102–C107 for three questions, nothing newer. Not compared in a run. Evidence log §Worker memory.
+
+**The police chief — the spec, first fill:**
+
+| Slot | Fill | State |
 |---|---|---|
-| 1 | The sheet line + temperament | ledger + dials |
-| 2 | Their page memory: statements, past answers, work docs | no one loader supplies this today: `loadOwnPageReadback` returns at most 3 private reflections of 320 characters and drops office statements (`lib/wakePerception.js:399-410`); statements come from `officeWall.loadPositionWall` (6, CIVIC docs) or the work wake's `loadOfficeWeek` |
-| 3 | The whole of the records that are theirs, every column | the worker's tab or row, §3.1 |
-| 4 | Their past decisions | their rows in `output/cron-civic/moves/`, looked up by POPID: the same person's moves are keyed three ways (`proj-*` registry key on weekdays, `civic-project-*` / `civic-office-*` on Sunday, `STAFF-*` on the office sheet) |
-| 5 | Anything they are on record as promising | `output/mara-directives/promises.jsonl` (none held for any worker today) |
-| 6 | The task: a question from a named seat, with the asker's seat and hoods | the ask step, civic.49 |
+| Data | `Crime_Metrics`, every column (response time and clearance included, G-EC56); the judicial rows of `Care_Justice_Census` (arrests, custody, by hood, C110–C115); the Cycle's cop-car rows on `Chaos_Cars`; the patrol setting (`World_Config.patrolStrategy`); the TICKETS and COURT lines of `City_Treasury` | proposed from the data map (evidence log §Worker data map); which tabs are his is the builder's call |
+| Tools | — | not decided |
+| Past decisions | three `answer` moves (C110–C112) and one `patrol` move (C115) | on disk |
+| Model | the office map's (`deepseek/deepseek-v4.1-flash` today) | — |
 
-- **Part 2, handed or searched: open with the builder (2026-11-14: "should the last 3 memories load for a worker or should it be given a search tool of its memory ? Does forcing its last 3 memories flatten them?").** The chief's page shows the handed lines coming back: one 191-character statement is his whole statement in four Cycles and opens a fifth; three of the six statements handed to him today open on nothing-to-state; two of his reflections share four sentences. A search of one's own page exists (`citizenPage.searchPage_`, used only by Discord) and returned on-topic entries from C102–C107 for three questions, nothing newer. Not compared in a run. Evidence log §Worker memory.
-- **Part 4 for the chief:** three `answer` moves (C110–C112) replying to Mara Vance's C105–C107 questions, and one `patrol` move (C115). She is the City Planning Director and is named to the offices she asks; her roster today is the Mayor, the nine seats and the five project seats, so she can no longer ask him. Her question files are on disk, so an answer can be handed with its question. Evidence log §Mara's directives.
-- **Part 5 is an open gap (builder 2026-11-14: "how to track what they are saying so they have a chance to make good on it . I proposed maybe a claude sheet ledger for these it the memory hits don't work clean").** Mara's promise record is the one mechanism that holds an office to its words; it takes public statements of offices on her roster only, so no worker and no answer can enter it, and no office is shown its own open promises outside a block she addresses to it. Who holds a worker to his word, whether an answer counts, and file or sheet: the builder's, not designed. Evidence log §Tracking what is said.
+- **What he wakes on today** (`output/cron-civic/packs/CHIEF-POLICE_c115.json` and his 2026-11-12 weekday record, read 2026-11-14): a council seat's pack. `empty: true`; task `role-week`, goal "no move this cycle"; prewrite "no due action on this seat this cycle"; an empty initiative board, the petition pool, proposal categories with budget bands, 18k characters of sick-resident counts by hood, Mara's old question ids; crime only as the per-hood `CrimeIndex` in the district readings, not his sheet. His statement that day opens "No public safety event in this cycle's export requires an institutional statement from this office." He also has three boots: weekday files, Sunday files, and the Thursday auto office pack on a 700-character cut of his IDENTITY file (`cron-work-wake.js` `autoPackages`).
+- **His past decisions:** three `answer` moves (C110–C112) replying to Mara Vance's C105–C107 questions, and one `patrol` move (C115). She is the City Planning Director and is named to the offices she asks; her roster today is the Mayor, the nine seats and the five project seats, so she can no longer ask him. Her question files are on disk, so an answer can be handed with its question. Evidence log §Mara's directives.
+
+**Building a worker out — the process, as it is being done on the chief** (a proposal until he has been through it):
+
+1. Name the worker's fill: data and tools. Which tabs are whose is the builder's call.
+2. Build the fill. Parts 1, 4, 5 and 6 are shared code, built once.
+3. Print what the worker would wake with, no model call; the builder reads it.
+4. The builder decides the template. Then one run.
+5. On his approval the worker's wakes switch to the template and its old write-up retires (§7).
+
 - **Written file:** none. The review's point stands: every "how they decide" line tried was a behaviour instruction in the second person ("when you are blocked you escalate rather than wait"; "You write memos"), so a written part is not proposed for workers.
 - **Evidence:** Run 3 — the chief on his weekday data, 3 of 3 answers with no figure outside what he was handed, and "I'm not going to invent a corridor split". Run 4 — handed the whole crime sheet he answers with the response times and clearance rates; 5 of 5 answers grounded; one wrong comparison. Run 1 — the fund director with no question answers one anyway in 5 of 9 runs. Run 5 — the Stabilization Fund director on his whole tracker row, asked by the District 1 seat: 3 of 3 answers with no figure off the row, no vote called, no memo; where memory and row disagree (C115 against C116) he follows the row; the row's build notes ("not playable, no Delivering gate yet") come back as the world (G-EC62), and "who decides" gets three answers because the row names no decider. Two workers, two askers, one model: none of the thin workers has been run.
-- **State:** shape seen on two workers (the chief 5 answers, one director 3); not ready to approve until parts 2 and 4 have a loader. Part 4 for a director is empty of content today: his six moves are `work` rows holding an initiative id and nothing he decided.
-- **Differs today:** a registry worker wakes on a clock (Tue / Thu) with four status lines and no question; every agented office outside the registry — the police chief, the Mayor, the council seats, Okoro — also wakes on Thursday as an auto office pack on a 700-character cut of its IDENTITY file (`cron-work-wake.js` `autoPackages`), so the chief has three boots today (weekday files, Sunday files, Thursday cut); the chief's weekday pack lacks `ResponseTimeAvg` and `ClearanceRate` (G-EC56) while the DA's crime node carries clearance and no response time; no worker is handed its move history; no worker has a tool; the EMS director's registry entry carries no first name.
+- **State:** written 2026-11-14 from the builder's words; parts 2–5 not built; not decided, not approved. Nothing in the crons has changed.
+- **Differs today, the other workers:** a registry worker wakes on a clock (Tue / Thu) with four status lines and no question; every agented office outside the registry also wakes on Thursday as an auto office pack; the DA's crime node carries clearance and no response time; no worker is handed its move history; no worker has a tool; the EMS director's registry entry carries no first name.
 - **Legacy on switch:** the registry's inline `roleLine` / `voiceNotes` (`scripts/work-wake-packages.json`); the five `civic-project-*` / `civic-office-baylight-authority` folders once the Sunday project step stops loading them (37–46k each).
 
 ### 3.1 Roster: who holds which records
@@ -258,6 +286,7 @@ Mara Vance (asker; her own memory and tools; civic.47 M1), Elias Varek's journal
 
 ## Changelog
 
+- 2026-11-14 (engine-sheet) — §3 Worker rewritten as one template for every worker with the police chief as its spec (builder: "This is the workers template and we are building it to the police chief spec … we are trying to build a rebuildable process"): the six parts every worker shares, the fill that differs (data, tools), the chief's fill, the build-out steps; promises taken out of the template on his word; what the chief wakes on today (a council seat's pack marked empty) recorded. No wake changed; not approved.
 - 2026-11-14 (engine-sheet) — §3 Worker: the builder's question on memory (handed or searched) recorded with the read of the chief's page; part 4 corrected from Mara's code (his answers are to her C105–C107 questions; she cannot ask him now); part 5 recorded as an open gap in his words; §3.1 thin split into recorded-not-routed and not-generated from two agent maps. No wake changed; no template approved.
 - 2026-11-14 (engine-sheet) — Run 5: one project director run as the chief ran (builder: "Go on 1"). §3 evidence and state updated; review finding 2's "a director" is met by one. Evidence log §Run 5.
 - 2026-11-14 (engine-sheet) — The daily wake reads an office holder's title from the office sheet (live).

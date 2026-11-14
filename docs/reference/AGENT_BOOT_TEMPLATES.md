@@ -87,8 +87,8 @@ pointers:
 | 6 | The task: a question from a named seat, with the asker's seat and hoods | the ask step, civic.49 |
 
 - **Written file:** none. The review's point stands: every "how they decide" line tried was a behaviour instruction in the second person ("when you are blocked you escalate rather than wait"; "You write memos"), so a written part is not proposed for workers.
-- **Evidence:** Run 3 — the chief on his weekday data, 3 of 3 answers with no figure outside what he was handed, and "I'm not going to invent a corridor split". Run 4 — handed the whole crime sheet he answers with the response times and clearance rates; 5 of 5 answers grounded; one wrong comparison. Run 1 — the fund director with no question answers one anyway in 5 of 9 runs. One worker, one sheet, one asker: no director, and none of the thin workers, has been run.
-- **State:** shape seen on one worker (5 answers); not ready to approve until a director is run and parts 2 and 4 have a loader.
+- **Evidence:** Run 3 — the chief on his weekday data, 3 of 3 answers with no figure outside what he was handed, and "I'm not going to invent a corridor split". Run 4 — handed the whole crime sheet he answers with the response times and clearance rates; 5 of 5 answers grounded; one wrong comparison. Run 1 — the fund director with no question answers one anyway in 5 of 9 runs. Run 5 — the Stabilization Fund director on his whole tracker row, asked by the District 1 seat: 3 of 3 answers with no figure off the row, no vote called, no memo; where memory and row disagree (C115 against C116) he follows the row; the row's build notes ("not playable, no Delivering gate yet") come back as the world (G-EC62), and "who decides" gets three answers because the row names no decider. Two workers, two askers, one model: none of the thin workers has been run.
+- **State:** shape seen on two workers (the chief 5 answers, one director 3); not ready to approve until parts 2 and 4 have a loader. Part 4 for a director is empty of content today: his six moves are `work` rows holding an initiative id and nothing he decided.
 - **Differs today:** a registry worker wakes on a clock (Tue / Thu) with four status lines and no question; every agented office outside the registry — the police chief, the Mayor, the council seats, Okoro — also wakes on Thursday as an auto office pack on a 700-character cut of its IDENTITY file (`cron-work-wake.js` `autoPackages`), so the chief has three boots today (weekday files, Sunday files, Thursday cut); the chief's weekday pack lacks `ResponseTimeAvg` and `ClearanceRate` (G-EC56) while the DA's crime node carries clearance and no response time; no worker is handed its move history; no worker has a tool; the EMS director's registry entry carries no first name.
 - **Legacy on switch:** the registry's inline `roleLine` / `voiceNotes` (`scripts/work-wake-packages.json`); the five `civic-project-*` / `civic-office-baylight-authority` folders once the Sunday project step stops loading them (37–46k each).
 
@@ -254,6 +254,7 @@ Mara Vance (asker; her own memory and tools; civic.47 M1), Elias Varek's journal
 
 ## Changelog
 
+- 2026-11-14 (engine-sheet) — Run 5: one project director run as the chief ran (builder: "Go on 1"). §3 evidence and state updated; review finding 2's "a director" is met by one. Evidence log §Run 5.
 - 2026-11-14 (engine-sheet) — The daily wake reads an office holder's title from the office sheet (live).
 - 2026-11-14 (engine-sheet) — The test guard is in the repo (`scripts/guard/`), on the builder's "Put in the repo".
 - 2026-11-14 (engine-sheet) — Six office holders' ledger roles corrected to their office Title on the builder's word; §2 caveat and §3.1 updated.

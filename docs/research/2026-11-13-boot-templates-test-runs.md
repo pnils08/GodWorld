@@ -1,7 +1,7 @@
 ---
 title: Boot templates — test runs and findings
 created: 2026-11-13
-updated: 2026-11-13
+updated: 2026-11-14
 type: research
 verdict: adopt
 tags: [pipeline, wakes, citizens, boot, active]
@@ -18,6 +18,7 @@ pointers:
   - "`output/engine-sheet/2026-11-13-boot-three-way-run2.md` — Run 2 raw outputs (council seats, second reporter), every version in full"
   - "`output/engine-sheet/2026-11-13-ask-dry-run.md` — Run 3 raw outputs: a council member's question to the police chief and his answers"
   - "`output/engine-sheet/2026-11-13-seat-asks-worker-dry-run.md` — Run 4 raw outputs: a council seat's weekday wake with the ask step inside it"
+  - "`output/engine-sheet/2026-11-14-director-ask-dry-run.md` — Run 5 raw outputs: a council member's question to the Stabilization Fund director and his answers; harness `2026-11-14-director-ask-dry-run.js` beside it"
 ---
 
 # Boot templates: test runs and findings
@@ -57,7 +58,7 @@ pointers:
 | Reporter write | The thin folder a reporter wakes with today adds nothing over the sheet line | Run 2: Tanya A-light ×3 against B ×3, the same register | — |
 | Reporter write | The background written for a reporter never reaches them today | Code read above | — |
 
-**The worker shape that held (Runs 3–4):** a citizen off the sheet, with its page memory, handed the whole of its own records, woken by a question from a named seat. The police chief run this way answers from his sheet and says what it does not show. The directors today have none of the last two: four status lines, and no question.
+**The worker shape that held (Runs 3–5):** a citizen off the sheet, with its page memory, handed the whole of its own records, woken by a question from a named seat. The police chief run this way answers from his sheet and says what it does not show. The directors today have none of the last two: four status lines, and no question. Run 5 put one director (Webb) on the same shape: 3 of 3 answers from his row, no figure off it, no memo; his row's build notes come back as the world (G-EC62).
 
 **The one mechanism under all of it:** a written line about how a person does a thing is acted out. For a reporter that is the voice (Tanya's short lines). For a worker it becomes the task (Webb's memos). Where the wake hands a full task (city hall), the written file is drowned by it.
 
@@ -245,6 +246,20 @@ Outside the four: Mara (asker, own memory and tools, built under civic.47 M1), V
 - **A defect in the test's shape:** in both asking runs she spent an `answer` move replying to the chief, under a directive id her pack does not hold (`CONF-115-civic-office-council-d3`; no Mara question is in her C115 pack). The live wake discards such a move. The exchange needs its own end, or the seat spends its turn on a reply nobody receives.
 - **Read:** a seat's wake with an ask in it is a short chain: the seat wakes, may ask, the worker wakes and answers, the seat decides. The weekday wake already runs one side-step of this shape (the evidence-read round), and the Sunday chain is a chain already (Mayor opens, seats speak, Mayor rules, clerk closes).
 
+### Run 5 — 2026-11-14, C115, engine-sheet: one project director, run as the chief ran
+
+- **Builder:** "Go on 1" (run one project director as the chief ran).
+- **Who:** Marcus Webb, West Oakland Stabilization Fund (INIT-001), asked by Denise Carter, District 1 (West Oakland, Brooklyn). Both on deepseek-v4.1-flash. Webb was Run 1's work-wake subject (a memorandum to an invented committee, 3 of 3), so the same man is read with and without a question. The two hand-closed projects (INIT-003, INIT-006) were left out.
+- **How:** the Run 3 and Run 4 harness, rebuilt from the saved copy (`output/engine-sheet/2026-11-14-director-ask-dry-run.js`), write guard on: 40 network calls, 0 refused, no file outside scratch. Two changes from Runs 3–4: every sheet line comes from the live daily wake's own functions (`wakePerception.buildPool` + `loadOfficeHolders` + `identityLine`, the dials for temperament), so age and the office title are in every line (review finding 4); the director's record is the live `Initiative_Tracker` row, not the beat dump. Memory is `officeWall.loadPositionWall` (six statements), as in Runs 3–4. Cost $0.006.
+- **Sheet lines:** "You are Marcus Webb, 42, living in Downtown, Oakland. You hold the office of OEWD Program Director (Stabilization Fund). Your temperament: driven, hard to sit still; draws people in, deep with them; curious, open to new things; principled, plays it straight." · "You are Denise Carter, 51, living in West Oakland, Oakland. You hold the office of City Council District 1 (West Oakland, Brooklyn). Your temperament: draws people in, deep with them." The office-title code (live since 2026-11-14) had not yet run on a live wake; this is its first read on a director.
+- **Part A, one ask (Run 3's shape).** She is told only that she can put one question to him and what record he holds. Her question, every figure from her own pack (West Oakland sentiment 0.41 → 0.31, retail 12.6 → 13.65, housing pressure 3.5 → 4.5, 85 sick residents, $21M left, seven Cycles at Standing): what is the path from Standing to money moving, which gate, cleared by whom; and who decides what gets bought.
+- **His answers, 3 of 3:** no figure outside his record and her question (`ungroundedNumbers` empty against record + question, and against record + question + memory). By hand against the row: $21M of $28M, $400K a Cycle, the 23-day standard, $5M+ cumulative, C78, 47 checks C84–C90 under Okoro's authority, 2 household grants $81,188 at C109, INIT-008 proposed and not voted, the renewal ordinance before the council at C116: all on the row. No vote stated as passed; each answer declines to call the council's vote. He answers her, as a letter back (her question was a letter); no memorandum, no invented body.
+- **Record against memory:** his newest statements say the renewal went "to C115 agenda"; the row says the council takes it at C116. He says C116, 3 of 3. The "115 households paid out" line that sits in his work docs (inventory above) does not come back: the statements loader carries no work docs, and no household count is on the row.
+- **Build wording handed as the world, and repeated.** The row's milestone notes carry build notes: "economic — not playable, no Delivering gate yet; the untended clock still runs", "engine.255 wires it as the first budgeted disbursement", "the C108 retag was engine-sheet error". Her pack carries the stage reader's own strings: "Standing — no delivering gate exists for this domain yet", "FAILED — not a stage this model knows" (`lib/initiativePhaseContract.js:359,455,506`; the engine twin `phase05-citizens/civicInitiativeEngine.js:3644,3695`). She asks about "nothing in this model that lets a dollar of it actually deliver". He answers "the delivery step in this model has never been wired to it" (1), "not a 'delivering' asset in this model" (2), "an automated 'Delivering' gate in the engine" (3). Neither invents it; both were handed it. Gap log G-EC62.
+- **Where the row runs out:** "who decides what gets bought" gets three answers: the charter (1), "Me" (2), his office's authorization with the council holding renewal (3). The row names no decider past "under Deputy Mayor Okoro's authority C84–C90" and `LastWorkSeat`. Three lines are his own inference, not on the row: the council "reaffirmed three cycles running" (2), "manual disbursements" (3), "that renewal is where the delivery mechanism gets named and voted" (3). The number check does not see a claim with no number in it.
+- **Part B, the ask inside her weekday wake (Run 4's shape, the same six people offered):** she asks nobody, 3 of 3 (Delgado asked 2 of 3). Her week goes to Brooklyn (sentiment −0.11 against the city's 0.020): a `work` move on the apprenticeship pipeline twice, a `renew` on her Tenant Defense Fund once. Chain 2 says West Oakland's sentiment is "up" (her pack: 0.41 → 0.31, trajectory growth). The number check flags "4.2" in chain 1; her pack holds "$4,200,000" (a format miss in the check, not an invented figure).
+- **Read:** the director holds on the chief's shape: sheet line, memory, the whole of his record, a question from a named seat. He answers from the row, says what it does not show and writes no memo. His record is a different kind of thing from the chief's: one row of dated notes, not a table of columns. So the ask reaches the edge of it quickly (who authorizes a tranche, who has been paid since C109, what moves the fund off Standing), and the notes it does hold include the builders' own. One director, one asker, one model, three answers.
+
 ### Dry-run safety — what Run 1 left, checked 2026-11-13
 
 - **Canon, pages, sheets:** nothing. No ingest path reads `output/test-shell/`, `output/engine-sheet/` or `docs/research/` (daily ingest and delivery read `output/cron-compare/`; the daily show reads `cron-compare` and `exchanges`; the reporters' search walks a fixed shelf list in `lib/mags.js` that holds none of them — a search for a dry-run phrase returns none of these files). The Mayor's memory read in Run 1 went through the pointer-ensuring call; her pointer already exists, so it wrote nothing.
@@ -264,4 +279,5 @@ Outside the four: Mara (asker, own memory and tools, built under civic.47 M1), V
 
 - Work wake: the three versions with the moment named, if the builder wants the moment named; and a written part holding only who they are and how they decide.
 - City hall: a project director's Sunday step, the one place the 37–46k files load.
+- Worker: a second director on a second model; a thin worker (the DA, the medical examiner); the director handed his work docs as well as his statements (the "115 households" line is there).
 - Reporter: the written part under the full harness; owned by pipeline.111.

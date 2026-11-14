@@ -222,3 +222,75 @@ Tests: the eleven test files that load `cron-desk-run.js` pass; the script loads
 - Trevor, C115, built offline from the saved morning inputs: `today` rebuilds the saved packet fact for fact (28); `free-rows` is those facts minus the two lines that made one row the story (26); `free-week` is 198 lines of the city's week (4,756 words) plus the cycle line. The same 12 people in all three.
 - Boot for the free variants: `IDENTITY.md` swapped in memory for the sheet line and a background cut from his voice file's §Essence; `LENS.md` and `RULES.md` absent (engine-sheet's Run 2 method, its swap preload).
 - Limits to read the result with: a week-end re-run is not Monday (above); with 199 facts the planner may answer in fact ids instead of the plan form (seen at pipeline.86; two draws); the free variants change the boot, the morning packet and the evening prompt together, so `today` against `free-rows` shows the whole setup's effect on the same rows, and `free-rows` against `free-week` shows what the rows themselves do.
+
+## 2026-11-14 — back on engine-sheet's order: the working template first
+
+**Builder, verbatim:** "stay aligned with how es is developing the agents and working on the template for the rest of the groups of crons. The media was doing good with its tool models and covering its beat so there step 1 is who is the working template , which media cron sounds the most like itself without being told what to say , which uses its tools Effectively and routinely passes." · "Running a test without a template seem backwards , what is the goal your trying to achieve?" · "Are you not following Es plan for this work ? You seem to not be doing what it's doing" · "There is no need to guess anything and if you don't know I'm the only one capable of answering".
+
+**What went wrong here.** The nothing-assigned and bare variants were built and Trevor was run three ways before any template was named; a 25-seat bare batch was started and stopped on his word after two seats. engine-sheet's order ([[../reference/AGENT_BOOT_TEMPLATES]], [[../research/2026-11-13-boot-templates-test-runs]]): read what the wake loads → name the type's working example → inventory every member against it → write the template → dry-run the template under the guard → review → the builder approves before any wake switches. This row follows that order from here. The variants stay in the test shell as instruments; no further run until there is a template to test.
+
+**Step 1 — the newsroom inventory (read-only; C112–C115, 151 filings in `output/cron-compare/reward-loop-c11[2-5].jsonl`; C113–C115 evening packets; `scripts/newsroom-wake-packages.json`; `cron-desk-writer.js`; ledger snapshot).** Sorted by tool calls a filing × share passed.
+
+| Seat | Ledger role | Write model | Own identity file (chars, long prose lines) | Hard stance + bag (chars) | Tool cap | Filings C112–115 | Passed | Tool calls a filing (none in) | Looked-up facts printed C113/114/115 | Facts handed |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Hal Richmond | Journalist, Senior Historian | claude-sonnet-5.5 | 4319, 11 | 5411 | 6 | 4 | 4 | 6 (0) | 4/14/6 | 6 |
+| Anthony Raines | Journalist, Lead Beat Reporter - Oakland A's | claude-sonnet-5.5 | 3307, 9 | 7496 | 6 | 3 | 3 | 5.3 (0) | 0/10/0 | 8 |
+| Elliot Marbury | Journalist, Data Desk | claude-sonnet-5.5 | 351, 0 | 3159 | 6 | 4 | 4 | 3.3 (0) | 0/0/2 | 20 |
+| Nia Rook | Journalist, UNDOCKED Recap | gpt-6-luna | 465, 0 | none | 6 | 16 | 15 | 3.3 (4) | 2/0/0 | 6 |
+| Tamsin Pruitt | Journalist, Lives | claude-sonnet-5.5 | 820, 2 | none | 6 | 19 | 14 | 4.1 (6) | 0/0/0 | 66 |
+| Elliot Graye | Journalist, Ethics & Faith Journalist | claude-sonnet-5.5 | 323, 0 | 662 | 6 | 4 | 4 | 3 (1) | 4/0/4 | 20 |
+| Nia Rook | Journalist, UNDOCKED Recap | gpt-6-luna | 0, 0 | none | 6 | 3 | 3 | 2.7 (1) | 2/0/- | 12 |
+| Sgt. Rachel Torres | Public Safety | claude-sonnet-5.5 | 720, 1 | 1653 | 6 | 4 | 4 | 2.3 (1) | 0/0/0 | 14 |
+| Jax Caldera | Journalist, freelance accountability writer | claude-sonnet-5.5 | 7629, 15 | none | 6 | 4 | 4 | 1.8 (1) | 0/0/0 | 6 |
+| Sharon Okafor | Journalist, Lifestyle | gpt-5.6-luna | 199, 0 | 881 | recall only | 4 | 4 | 1.8 (3) | 0/0/0 | 12 |
+| Angela Reyes | Journalist, Education | claude-sonnet-5.5 | 323, 0 | 735 | 6 | 4 | 4 | 1.8 (1) | 0/0/0 | 9 |
+| Luis Navarro | Journalist, Investigations | claude-sonnet-5.5 | 722, 1 | 2599 | 6 | 5 | 4 | 2.2 (1) | 0/0/0 | 4 |
+| Carmen Delaine | Journalist, Civic Affairs Reporter | claude-sonnet-5.5 | 747, 1 | 1968 | 6 | 4 | 4 | 1.5 (2) | 0/3/0 | 24 |
+| Talia Finch | Journalist - The Oakland Oaks Ground Reporter | gpt-5.6-luna | 1719, 4 | none | recall only | 4 | 4 | 1.5 (3) | 0/0/0 | 19 |
+| Dr. Lila Mezran | Journalist, Health Desk | claude-sonnet-5.5 | 708, 1 | 1617 | 6 | 5 | 4 | 1.8 (2) | 0/0/0 | 17 |
+| Jordan Velez | Journalist, Economics & Labor | claude-opus-5.5 | 2761, 8 | none | 6 | 4 | 4 | 1.3 (2) | 0/0/0 | 15 |
+| Celeste Tran | Journalist, Social Trends | grok-4.3 | 590, 1 | none | recall only | 4 | 4 | 1.3 (3) | 0/0/0 | 13 |
+| P Slayer | Journalist, Fan Columnist - Sports | grok-4.3 | 3425, 5 | 4747 | recall only | 4 | 4 | 1 (3) | 0/0/0 | 8 |
+| Kai Marston | Journalist, Arts & Entertainment | claude-haiku-5.5 | 321, 0 | 671 | recall only | 4 | 4 | 1 (3) | 0/0/0 | 15 |
+| Trevor Shimizu | Journalist, Transit & Infastructure | claude-sonnet-5.5 | 723, 1 | 1659 | 6 | 4 | 4 | 0.8 (2) | 0/0/0 | 29 |
+| Maria Keen | Journalist, Cultural Liason | claude-sonnet-5.5 | 328, 0 | 725 | recall only | 5 | 4 | 0.8 (4) | 0/0/0 | 14 |
+| Tanya Cruz | Sideline Reporter | grok-4.3 | 338, 0 | 1056 | recall only | 4 | 3 | 0.8 (3) | 0/0/0 | 8 |
+| Ines Sorensen | Journalist, Voices | claude-sonnet-5.5 | 851, 2 | none | recall only | 17 | 16 | 0.6 (14) | 0/0/0 | 490 |
+| Simon Leary | Journalist, The Long View Columnist | gpt-5.6-luna | 327, 0 | 747 | recall only | 4 | 4 | 0.5 (3) | 0/0/0 | 4 |
+| Mason Ortega | Journalist, Food & Hospitality | grok-4.3 | 328, 0 | 649 | recall only | 5 | 3 | 0.8 (4) | 0/0/0 | 8 |
+| Noah Tan | Journalist, Weather & Environment | grok-4.3 | 349, 0 | 716 | recall only | 4 | 4 | 0.3 (3) | 0/0/0 | 7 |
+| Selena Grant | Journalist - The Oakland Oaks Beat Reporter | gpt-5.6-luna | 1890, 4 | none | recall only | 5 | 4 | 0 (5) | 0/0/0 | 14 |
+
+- Passing does not separate the seats: 137 of 151 filings passed the gate; 18 seats passed every time.
+- "Looked-up facts printed" = facts in the piece's approved record whose source is the seat's own tool call (`manifest.approvedFacts` with `src` `tool:…`).
+- "Sounds like itself" is not in the table: the record holds no measure of it. Which seat sounds like itself is the builder's to say.
+
+**What the record shows for the seat at the top of the table, Hal Richmond.** Not a pick; the pick is the builder's.
+
+| Test | Hal Richmond | Evidence |
+|---|---|---|
+| Routinely passes | 4 of 4 | reward-loop rows |
+| Uses his tools | 6 calls on every filing, none without | the same rows |
+| Uses them to effect | facts he looked up are printed in every cycle's piece (4, 14, 6); he is handed 6 facts, the fewest of any tool seat, and files about 950 words | C113–C115 evening packets |
+| With nothing on how to write | one bare rewrite of his C115 day (no stance line, bag, contract or article shape): the same sections in the same order — the water, the seasons, the names, Grand Lake — and the same six lookups (archive search, dossier, ledger, three recalls) | `output/test-shell/20261114-015*-hal-richmond-bare/`; live `sports_c115_hal-richmond_…md` |
+| What he wakes with | a ledger row; an identity file that says who he is in prose (4,319 characters, 11 long lines) where most seats hold a name, a beat and pointers; his page; a one-line feed row; tools that reach his subject's record and his own archive; Sonnet 5.5 | `.claude/agents/hal-richmond/`, package `hal-richmond` |
+
+- One bare run each exists for two other seats. Tanya Cruz: long scene prose where her own file says short dispatch (her identity file is 338 characters; her voice lives in the stance line and bag). Trevor Shimizu: below.
+- Nia Rook has no stance line, no bag and no article-shape rule; her packet's goal is "Cover this UNDOCKED episode and its show history."; since her tools came on (2026-10-28) 13 of 13 gated filings passed and every one used tools. Her identity files are 2026-08 drafts that still say "pending mint".
+- Anthony Raines: 5.3 tool calls a filing, never none; 3 of 3 passed; looked-up facts printed in one cycle of three.
+
+**Next, in engine-sheet's order (not started):** (1) the builder names the working example; (2) the reporter template written from it and requested into the template page §4 (engine-sheet's file); (3) each seat's fit against it, from the table above; (4) one second seat woken on the template under the guard; (5) agy review.
+
+**Results already in hand (run before the order was corrected).**
+
+| Trevor Shimizu, C115, whole day under the guard (0 refused in 398 calls) | Pick | Piece |
+|---|---|---|
+| `today` | the assigned row | "At 19th Street, the Platform Took 5,324 More People and Kept Its Clock" — rows; a section headed "The unanswered part" |
+| `free-rows` | "the convergence of transit pressure … on a single crowded evening" | "One Night, Eight Stations, and a Question the Metrics Can't Answer" — the rows read as a system; two workers he chose; four lookups; ends on a warning |
+| `free-week` | a low-severity public-works line in Glenview and a civic meeting: "That gap between what the system does and what the city says is where the story lives." | "Glenview's Spike Is on the Log. The Buses Haven't Felt It." — a thin log line; three workers who had seen nothing; five lookups |
+
+Folders: `output/test-shell/20261114-004613-…-today-…`, `…-015327-…-free-rows-…`, `…-015423-…-free-week-…`.
+
+**The evening packet, 26 of 26 C115 packets read (live; nothing changed):** article shape "assigned-fact lede, one scene, one Packet quote, unanswered question" 25; goal "Lead with a named interviewed person or a Packet-named place … the tracker line is the weather, never the lede" 25; "Do not brief the record. Open on a person or place living the condition." 24; slot "Ask who should answer" 26; a per-seat opening line 26; a self-score footer counting "sim-state-cited" 26. The writer also adds a hard-coded stance line and bag for 19 of the 27 seats (`cron-desk-writer.js` `firebrandHeat` chain), and the transit slice hands "the platform at 7:40" as a scene. Builder 2026-11-14: "need to be careful with hardcoded instruction in disguise to achieve something" · "The conflict shouldn't be pulling the agent in separate directions and/or forcing an outcome".
+
+**agy's audit of the voice files and reporter folders** (`output/antigravity/2026-11-14-review-reporter-voice-files.md`): 239 of 243 quoted citations found on the cited line; the nine ledger contradictions checked against the snapshot are real (13 listed in 10 reporters: written ages, homes and roles the ledger denies — Jax Caldera written 38, ledger 24; Maria Keen "forty years" in Oakland, ledger 35). No fold yet: it feeds step 3.

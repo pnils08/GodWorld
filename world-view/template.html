@@ -66,7 +66,7 @@ button[aria-pressed="true"] { background: var(--ink); color: var(--night); }
 .tag .more, .tag .cap { font-size: 11px; color: var(--dim); margin-top: 3px; }
 .tag .said { margin-top: 7px; padding-top: 6px; border-top: 1px solid var(--edge); font: italic 400 14px/1.32 var(--story); display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
 body.walk .tag .said, body.words .tag .said { -webkit-line-clamp: 9; }
-.ctag { position: fixed; left: 0; top: 0; max-width: min(260px, 60vw); pointer-events: none; opacity: 0; transition: opacity .45s ease; will-change: transform; background: var(--veil); border: 1px solid rgba(255,160,60,.55); border-radius: 10px; padding: 5px 10px 6px; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
+.ctag { position: fixed; left: 0; top: 0; max-width: min(260px, 60vw); pointer-events: auto; cursor: pointer; opacity: 0; transition: opacity .45s ease; will-change: transform; background: var(--veil); border: 1px solid rgba(255,160,60,.55); border-radius: 10px; padding: 5px 10px 6px; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
 .ctag b { display: flex; align-items: center; gap: 6px; font-weight: 800; font-size: 13px; }
 .ctag b i { width: 8px; height: 8px; border-radius: 2px; background: #ff9a2e; transform: rotate(45deg); flex-shrink: 0; }
 .ctag span { display: block; font: italic 400 14px/1.25 var(--story); margin-top: 1px; }
@@ -1209,7 +1209,9 @@ function placeChaos() {
   for (i = 0; i < Math.max(list.length, CTAGS.length); i++) {
     var ev = list[i], el = CTAGS[i];
     if (!ev) { if (el) el.style.opacity = 0; continue; }
-    if (!el) { el = CTAGS[i] = document.createElement('div'); el.className = 'ctag'; el.innerHTML = '<b><i></i><em style="font-style:normal"></em></b><span></span>'; tagsEl.appendChild(el); }
+    if (!el) { el = CTAGS[i] = document.createElement('div'); el.className = 'ctag'; el.innerHTML = '<b><i></i><em style="font-style:normal"></em></b><span></span>'; tagsEl.appendChild(el);
+      // the label is a button too: tapping it rides with its car, the same as tapping the car
+      (function (tag) { tag.addEventListener('click', function () { if (tag._ev && +tag.style.opacity > 0.3) startChaos(tag._ev); }); })(el); }
     if (el._ev !== ev) { el._ev = ev; el.querySelector('em').textContent = ev.n; el.querySelector('span').textContent = ev.seed || (chaosWords(ev) + (ev.to && ev.scope !== 'neighborhood' ? ' — ' + ev.to : '')); }
     var show = ev.on && labels > 0 && !visiting && !bizView && !busy, o = 0;
     if (show) {
@@ -1218,7 +1220,7 @@ function placeChaos() {
       var far = ev.far || 80;
       if (CV.z < 1 && dist < far && x > -40 && x < w + 40) { o = Math.min(1, (far - dist) / 14); var lx = Math.max(8, Math.min(w - bw - 8, x - bw / 2)), ly = Math.max(floor, y - bh - 6); put.forEach(function (q) { if (lx < q[0] + q[2] + 4 && lx + bw + 4 > q[0] && ly < q[1] + q[3] + 4 && ly + bh + 4 > q[1]) ly = q[1] - bh - 5; }); put.push([lx, ly, bw, bh]); el.style.transform = 'translate(' + lx.toFixed(1) + 'px,' + ly.toFixed(1) + 'px)'; }
     }
-    el.style.opacity = o.toFixed(2);
+    el.style.opacity = o.toFixed(2); el.style.pointerEvents = o > 0.3 ? 'auto' : 'none';
   }
 }
 function startChaos(ev) {

@@ -570,7 +570,7 @@ LIFE.traffic = function (k) {
       if (o.chaos) {
         // its own lights: red and blue turn about, an amber lamp turning, hazards while it is stopped, a lit hatch
         var fl = ty.flash, ph2 = (t * 2.4 + (o.ph || 0)) % 1, stopd = o.st === 'dwell';
-        if (fl === 'rb') { glowAt(-0.34, ty.bar[0] + 0.14, ty.bar[1], RED, (ph2 < 0.5 ? 1.5 : 0.1) * f); glowAt(0.34, ty.bar[0] + 0.14, ty.bar[1], BLUE, (ph2 < 0.5 ? 0.1 : 1.5) * f); }
+        if (fl === 'rb') { glowAt(-0.34, ty.bar[0] + 0.14, ty.bar[1], RED, (ph2 < 0.5 ? 2.2 : 0.1) * f); glowAt(0.34, ty.bar[0] + 0.14, ty.bar[1], BLUE, (ph2 < 0.5 ? 0.1 : 2.6) * f); }
         else if (fl === 'amber') { glowAt(0, ty.bar[0] + 0.14, ty.bar[1], AMBER, (0.35 + 0.9 * Math.pow(0.5 + 0.5 * Math.sin(t * 7 + (o.ph || 0)), 3)) * f); glowAt(0, 0, 0, NONE, 0); }
         else if (fl === 'serve') { glowAt(hw + 0.12, 1.85, 0.8, WARM, (stopd ? 1.3 : 0.7) * f); glowAt(0, 3.25, 0.6, WARM, 0.35 * f); }
         else { var hz = stopd && (t % 0.9) < 0.45 ? 1 : 0; glowAt(hw + 0.02, ly + 0.1, -hl + 0.2, hz ? AMBER : NONE, hz * f); glowAt(hw + 0.02, ly + 0.1, hl - 0.2, hz ? AMBER : NONE, hz * f); }
@@ -584,6 +584,9 @@ LIFE.traffic = function (k) {
       if (showPools) {
         if (rain) { pool(o.i * 2, 0, -hl - 8, ty.w * 0.6, 16, WARM, 0.75 * f); pool(o.i * 2 + 1, 0, hl + 4.5, ty.w * 0.5, 9, RED, 0.6 * f * (braking ? 1.4 : 1)); }
         else { pool(o.i * 2, 0, -hl - 4.2, ty.w * 1.45, 8, WARM, 0.2 * f); poolM.setMatrixAt(o.i * 2 + 1, ZERO); }
+        // an emergency vehicle throws its lights on the road round it, red then blue; a working lamp throws amber
+        if (o.chaos && ty.flash === 'rb') pool(o.i * 2 + 1, 0, ty.bar[1], 13, 13, (t * 2.4 + (o.ph || 0)) % 1 < 0.5 ? RED : BLUE, 0.6 * f);
+        else if (o.chaos && ty.flash === 'amber') pool(o.i * 2 + 1, 0, ty.bar[1], 9, 9, AMBER, 0.3 * Math.pow(0.5 + 0.5 * Math.sin(t * 7 + (o.ph || 0)), 3) * f);
       }
     }
     for (; pI < PN; pI++) { pCol[pI * 3] = pCol[pI * 3 + 1] = pCol[pI * 3 + 2] = 0; }

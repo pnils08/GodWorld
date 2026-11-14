@@ -4,4 +4,4 @@
 
 **NEXT[engine-sheet]:** pipeline.110 → Task 8 (positions written as outcomes, closed projects woken open). Then office boot-file check (tools, no 4th wall, no builder notes). pipeline.100 → Task 3 narrator. Then engine.340, 341.
 
-**NEXT[research-build]:** No push from here (es pushes). pipeline.111 → Trevor whole-day test: today run started 11-14 00:50 under the guard (scratch runs/today.out, guard/guard.today.log); read it, then free-rows and free-week; verify agy's voice-file audit. civic.47 → W1 to a pointer once es's row exists. pipeline.108 → Sat weekly read.
+**NEXT[research-build]:** No push from here (es pushes). pipeline.111 → on es's order: newsroom inventory done (plan 2026-11-14); builder names the working reporter example; then the template into es's page §4 by request, each seat's fit, one test of the template. No test run before that. civic.47 → W1 to a pointer (es's civic.49 exists).

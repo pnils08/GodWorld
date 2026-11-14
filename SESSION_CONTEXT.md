@@ -1,7 +1,7 @@
 # SESSION_CONTEXT — one PIN (world state outside the repo) + one NEXT line per Claude terminal: the job, its next step, any standing hold from Mike. Never what was done — that is git and the plan's changelog.
 
-**PIN:** S649 | Day 226 | Canon C115 | PROD @180 (stage 45; history: DEPLOY_HISTORY §PROD) | next live fire C116 Sun 2026-11-15
+**PIN:** S650 | Day 227 | Canon C115 | PROD @180 (stage 45; history: DEPLOY_HISTORY §PROD) | next live fire C116 Sun 2026-11-15
 
-**NEXT[engine-sheet]:** pipeline.110 → Task 8 (positions written as outcomes, closed projects woken open). Then office boot-file check (tools, no 4th wall, no builder notes). pipeline.100 → Task 3 narrator. Then engine.340, 341.
+**NEXT[engine-sheet]:** pipeline.110 → Task 9: run one project director as the chief ran; reporter template (builder names the working reporter); read the 07:30 office-holder wake. Task 8 waits on the tracker repair. civic.49 → not approved to build. Push held: stacked with rb, builder's window.
 
 **NEXT[research-build]:** No push from here (es pushes). pipeline.111 → on es's order: newsroom inventory done (plan 2026-11-14); builder names the working reporter example; then the template into es's page §4 by request, each seat's fit, one test of the template. No test run before that. civic.47 → W1 to a pointer (es's civic.49 exists).

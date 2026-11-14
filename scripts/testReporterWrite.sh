@@ -13,11 +13,15 @@
 # cron-rhea-gate.js). It spends one writer model call.
 #
 # Usage:
-#   scripts/testReporterWrite.sh <desk> <persona> [cycle] [live|light]
+#   scripts/testReporterWrite.sh <desk> <persona> [cycle] [live|light|bare]
 #   scripts/testReporterWrite.sh civic trevor-shimizu
 #   scripts/testReporterWrite.sh culture noah-tan 115 light
 # "light" is the lightest prompt (persona, packet, no-invention line, INTAKE footer; no rubric, no job
 # description, no opening/closing form) — only the shell can ask for it; a scheduled run cannot.
+# "bare" (pipeline.111, 2026-11-14) is light without the seat's hard-coded stance line and bag file, and with an
+# evening packet that carries no article shape, no "who should answer" slot, no self-score footer, no seat
+# contract (purpose, voice, opening, length, texture), no slice approach and no handed scene: the same story,
+# facts, quotes and people as the live piece, and nothing on how to write it.
 set -euo pipefail
 
 ROOT=/root/GodWorld
@@ -28,7 +32,7 @@ CYCLE="${3:-$(ls "$LIVE" | sed -n "s/^${DESK}_c\([0-9]\+\)_${PERSONA}_.*/\1/p" |
 [ -n "$CYCLE" ] || { echo "no stage files for ${DESK}/${PERSONA} in output/cron-compare"; exit 1; }
 
 VARIANT="${4:-live}"
-[ "$VARIANT" = live ] || [ "$VARIANT" = light ] || { echo "variant must be live or light"; exit 1; }
+[ "$VARIANT" = live ] || [ "$VARIANT" = light ] || [ "$VARIANT" = bare ] || { echo "variant must be live, light or bare"; exit 1; }
 STAMP="$(date +%Y%m%d-%H%M%S)-${PERSONA}-${VARIANT}"
 SHELL_DIR="$ROOT/output/test-shell/$STAMP"
 mkdir -p "$SHELL_DIR/samples" "$SHELL_DIR/staged" "$SHELL_DIR/flagged"

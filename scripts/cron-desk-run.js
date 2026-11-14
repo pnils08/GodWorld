@@ -3130,7 +3130,8 @@ async function runWrite(assign) {
   // pipeline.89: the Packet follows her pick — the roster drops out, every self-initiated page of each
   // citizen her angle named goes in whole. No pick that resolves to a page is a failed day, not a substitute.
   let voicesPicked = null;
-  const bareWrite = !!(TEST_SHELL && angle && angle.freeAngle);
+  // Test shell only: a free pick, or the bare writer prompt on a seat's own saved day (testReporterWrite.sh bare).
+  const bareWrite = !!(TEST_SHELL && ((angle && angle.freeAngle) || process.env.GODWORLD_TEST_PROMPT === 'bare'));
   if (PACKET_ACTIVE && isVoicesSeat()) {
     const voices = require('./buildVoicesSlice');
     const picks = ((angle && angle.angleRead && angle.angleRead.plan && angle.angleRead.plan.targets) || [])
@@ -3148,7 +3149,7 @@ async function runWrite(assign) {
     writePacket = livedPacket.buildWritePacket({
       cycle, desk, reporter: byline,
       story: assignment && assignment.story,
-      approach: assignment && assignment.approach,
+      approach: bareWrite ? null : (assignment && assignment.approach),
       angleInput: voicesPicked ? voicesPicked.angleInput : angle && angle.inputPacket,
       anglePlan: angle && angle.angleRead && angle.angleRead.plan,
       interviews: packet && packet.interviews || [],

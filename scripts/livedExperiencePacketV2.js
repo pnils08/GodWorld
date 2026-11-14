@@ -411,6 +411,8 @@ function buildWritePacket(args) {
       .filter(slot => slot.id !== 'P_ACCOUNTABILITY');
     packet.output.rule = 'Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.';
     packet.output.footer = '';
+    packet.task.approach = null;                                            // how to read the slice
+    if (packet.task.creativeBrief) delete packet.task.creativeBrief.roomIsYours;   // a handed scene
   }
   return assertBase(packet, 'W3');
 }

@@ -121,6 +121,12 @@ const bare = v2.buildWritePacket(Object.assign({}, writeArgs, { bare: true }));
 assert.ok(!/lede|unanswered|scene/i.test(bare.output.rule));
 assert.ok(/Every CLAIM must point/.test(bare.output.rule));
 assert.strictEqual(bare.output.footer, '');
+const briefed = JSON.parse(JSON.stringify(writeArgs.angleInput));
+briefed.task.creativeBrief = { kind: 'beat-slice', domain: 'test', facts: ['TEST fact'], roomIsYours: 'the TEST platform at 7:40' };
+const bareBriefed = v2.buildWritePacket(Object.assign({}, writeArgs, { angleInput: briefed, approach: 'TEST approach', bare: true }));
+assert.strictEqual(bareBriefed.task.approach, null);
+assert.strictEqual(bareBriefed.task.creativeBrief.roomIsYours, undefined);   // the handed scene is gone
+assert.deepStrictEqual(bareBriefed.task.creativeBrief.facts, ['TEST fact']);  // the facts are not
 assert.deepStrictEqual(bare.manifest.permittedInterpretationSlots.map(s => s.id), ['P_EMPHASIS']);
 assert.ok(!/Do not brief the record|Lead with/.test(JSON.stringify([bare.task, bare.limits])));
 assert.strictEqual(bare.task.assignment, 'the quiet bakery counter');   // the seat's own pick is the piece
